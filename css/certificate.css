@@ -1,0 +1,19 @@
+#questionnaire .control-label { width: 300px; }
+#questionnaire .controls { margin-left: 340px; }
+
+#questionnaire .requirement .alert { 
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.label-bronze { background-color: peru; }
+.label-silver { background-color: gainsboro; }
+.label-gold { background-color: gold; }
+
+.footer {
+    background-color: #F5F5F5;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 70px;
+    padding: 30px 0;
+    text-align: center;
+}
