@@ -11,7 +11,7 @@
 	<html>
 	  <head>
 	    <title>ODI Open Data Certificate</title>
-	    <link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+	    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 	    <link href="css/certificate.css" rel="stylesheet" media="screen" />
 	  </head>
 	  <body>
@@ -126,7 +126,7 @@
 	    <script src="http://code.jquery.com/jquery-latest.js"></script>
 	    -->
 	    <script src="js/jquery-latest.js"></script>
-	    <script src="js/bootstrap.min.js"></script>
+	    <script src="bootstrap/js/bootstrap.min.js"></script>
 	  	<script src="js/knockout-2.2.1.js"></script>
 	  	<script type="text/javascript">
 	  		var certificateViewModel = function () {
