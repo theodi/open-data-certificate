@@ -147,7 +147,7 @@
 	  	</footer>
 	  	
 	    <script src="js/jquery-1.9.1.min.js"></script>
-	    <script src="bootstrap/js/bootstrap.min.js"></script>
+	    <script src="bootstrap/docs/assets/js/bootstrap.min.js"></script>
 	  	<script src="js/knockout-2.2.1.js"></script>
 	  	<script type="text/javascript">
 	  		var certificateViewModel = function () {
