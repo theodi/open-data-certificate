@@ -109,8 +109,8 @@
 	  				</ul>
 	  			</nav>
 	  			<p>
-	  				<a rel="license" href="http://creativecommons.org/licenses/by/2.0/uk/deed.en_GB">
-	  					<img style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/uk/80x15.png" alt="Creative Commons Licence" />
+	  				<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB">
+	  					<img style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/80x15.png" alt="Creative Commons Licence" />
 	  				</a>
 	  				<xsl:text> </xsl:text>
 	  				<a href="http://www.theodi.org">Open Data Institute</a> · 
