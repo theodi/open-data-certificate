@@ -122,10 +122,7 @@
 	  		</div>
 	  	</footer>
 	  	
-	    <!--
-	    <script src="http://code.jquery.com/jquery-latest.js"></script>
-	    -->
-	    <script src="js/jquery-latest.js"></script>
+	    <script src="js/jquery-1.9.1.min.js"></script>
 	    <script src="bootstrap/js/bootstrap.min.js"></script>
 	  	<script src="js/knockout-2.2.1.js"></script>
 	  	<script type="text/javascript">
