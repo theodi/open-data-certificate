@@ -1,6 +1,6 @@
 # ODI Open Data Certificate
 
-The ODI's Open Data Certificate specifies what good open data looks like in four main categories:
+The [ODI's Open Data Certificate](http://theodi.github.com/open-data-certificate/certificate.html) specifies what good open data looks like in four main categories:
 
   * **Legal Information** about the licence, ownership and privacy implications of the data
   * **Practical Information** about the timeliness, quality and sustainability of the data
@@ -25,13 +25,15 @@ Best practices in open data will change as time goes on. Certificates will only 
 
 ## Alpha Version
   
-The current version is an **alpha version**. We are seeking feedback on:
+The [current version](http://theodi.github.com/open-data-certificate/certificate.html) is an **alpha version**. We are seeking feedback on:
 
   * whether it asks the right questions
   * whether the bronze/silver/gold classification is correct
   * the usability of the form
 
 We are particularly looking for feedback from data publishers who attempt to use the tool to create a certificate for their own data.
+
+Let us know what you think by emailing [certificate@theodi.org](mailto:certificate@theodi.org) or adding issues to this project.
 
 Our longer-term aims are to provide back-end support for the certificate which would include:
 
