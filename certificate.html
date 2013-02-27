@@ -4,612 +4,1047 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>ODI Open Data Certificate</title>
-      <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link href="css/bootstrap.css" rel="stylesheet" media="screen">
       <link href="css/certificate.css" rel="stylesheet" media="screen">
    </head>
    <body>
-      <div class="container">
-         <div class="page-header">
-            <h1>Open Data Certificate <small>from the Open Data Institute</small></h1>
-         </div>
-         <p class="lead">All open data is good, but some is better than others. This tool gives you a certificate
-            that will help people understand the open data you are publishing.
+      <div id="alpha-banner" class="alert alert-danger">
+         <p>
+            	  			This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability
+            of the questionnaire are very welcome. Please contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
+            	  		
          </p>
-         <form id="questionnaire" class="form-horizontal">
-            <div class="accordian">
-               <div class="accordion-group">
-                  <div class="accordion-heading">
-                     <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#core">Core Information</a></h2>
-                  </div>
-                  <div id="core" class="accordion-body collapse in">
-                     <div class="accordion-inner">
-                        <div class="control-group"><label class="control-label" for="documentation-url">Where is the dataset described?</label><div class="controls"><input type="url" class="span5" id="documentation-url" name="documentation-url" placeholder="Documentation URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#documentation-url-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#documentation-url-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="documentation-url-help" class="help-block collapse">Enter the URL of a page that describes the dataset and what it contains.</span><div id="documentation-url-requirement" class="requirement collapse" data-level="basic" data-field="documentation-url" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#documentation-url-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a page that provides documentation about your dataset.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="dataset-title">What's the name of the dataset?</label><div class="controls"><input type="text" class="span5" id="dataset-title" name="dataset-title" placeholder="Dataset Title" required="required"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dataset-title-help"><i class="icon-question-sign"></i></button><span id="dataset-title-help" class="help-block collapse">Enter the title for the dataset. If this is part of a regular series of releases,
-                                 use give a title for the series.</span></div>
-                        </div>
-                        <fieldset id="licensing">
-                           <legend>Licensing</legend>
-                           <div class="control-group"><label class="control-label" for="publisher-european">Are you based in Europe?</label><div class="controls"><label class="radio inline"><input type="radio" name="publisher-european" value="true"> Yes</label><label class="radio inline"><input type="radio" name="publisher-european" value="false"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisher-european-help"><i class="icon-question-sign"></i></button><span id="publisher-european-help" class="help-block collapse">Different laws apply to rights over content and data in different countries. Most
-                                    particularly, if you are based in Europe you will have database rights over the way
-                                    in which data you gather and maintain is structured as well as copyright over creative
-                                    content that you create.</span></div>
-                           </div>
-                           <div class="conditional" data-field="publisher-european" data-if-equals="true">
-                              				
-                              <div class="control-group"><label class="control-label" for="publisher-uk-government">Are you UK central government?</label><div class="controls"><label class="radio inline"><input type="radio" name="publisher-uk-government" value="true"> Yes</label><label class="radio inline"><input type="radio" name="publisher-uk-government" value="false"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisher-uk-government-help"><i class="icon-question-sign"></i></button><span id="publisher-uk-government-help" class="help-block collapse">Central government includes all government departments and arms-length bodies. It
-                                       does not include local government. Data that is collected and maintained by central
-                                       government is owned by the Crown, which means it must be published as open data under
-                                       the Open Government Licence unless the publisher has an exemption from the Office
-                                       of Public Sector Information.</span></div>
-                              </div>
-                              				
-                              <div class="conditional" data-field="publisher-uk-government" data-if-equals="true">
-                                 					
-                                 <div class="control-group"><label class="control-label" for="publisher-opsi-exemption">Do you have a licensing exemption from OPSI?</label><div class="controls"><label class="radio inline"><input type="radio" name="publisher-opsi-exemption" value="true"> Yes</label><label class="radio inline"><input type="radio" name="publisher-opsi-exemption" value="false"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisher-opsi-exemption-help"><i class="icon-question-sign"></i></button><span id="publisher-opsi-exemption-help" class="help-block collapse">Data that is collected and maintained by UK central government is owned by the Crown,
-                                          which means it must be published as open data under the Open Government Licence unless
-                                          the publisher has an exemption from the Office of Public Sector Information.</span></div>
-                                 </div>
-                                 				
-                              </div>
-                              			
-                           </div>
-                           <div class="control-group"><label class="control-label" for="content-licence">Content Licence</label><div class="controls"><select class="span5" id="content-licence" name="content-licence" required="required">
-                                    					
-                                    <option></option>
-                                    					
-                                    <option value="cc-by">Creative Commons Attribution</option>
-                                    					
-                                    <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-                                    					
-                                    <option value="cc0">Creative Commons CCZero</option>
-                                    					
-                                    <option value="ogl">UK Open Government Licence</option>
-                                    				</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#content-licence-help"><i class="icon-question-sign"></i></button><span id="content-licence-help" class="help-block collapse">Choose the open licence that you are using to make available your creative content
-                                    for other people to use. Note that creative content does not include facts.</span></div>
-                           </div>
-                           <div class="conditional" data-field="publisher-european" data-if-equals="true">
-                              				
-                              <div class="control-group"><label class="control-label" for="data-licence">Data Licence</label><div class="controls"><select class="span5" id="data-licence" name="data-licence" required="required">
-                                       						
-                                       <option></option>
-                                       						
-                                       <option value="odc-by">Open Data Commons Attribution License</option>
-                                       						
-                                       <option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
-                                       						
-                                       <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-                                       						
-                                       <option value="cc0">Creative Commons CCZero</option>
-                                       						
-                                       <option value="ogl">UK Open Government Licence</option>
-                                       					</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#data-licence-help"><i class="icon-question-sign"></i></button><span id="data-licence-help" class="help-block collapse">In Europe, you need to have a licence that covers your database rights as well as
-                                       any copyright for creative content in the data. Your database rights cover the way
-                                       in which you structure the data you make available.</span></div>
-                              </div>
-                              			
-                           </div>
-                        </fieldset>
-                     </div>
-                  </div>
-               </div>
-               <div class="accordion-group">
-                  <div class="accordion-heading">
-                     <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#legal">Legal Information</a></h2>
-                  </div>
-                  <div id="legal" class="accordion-body collapse">
-                     <div class="accordion-inner">
-                        <fieldset id="ownership">
-                           <legend>Ownership</legend>
-                           <div class="control-group"><label class="control-label" for="publisher">Who's publishing the data?</label><div class="controls"><input type="text" class="span5" id="publisher" name="publisher" placeholder="Publisher" required="required"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisher-help"><i class="icon-question-sign"></i></button><span id="publisher-help" class="help-block collapse">Give your organisation's name.</span></div>
-                           </div>
-                           <div class="control-group"><label class="control-label" for="publisher-url">What's the publisher's website?</label><div class="controls"><input type="url" class="span5" id="publisher-url" name="publisher-url" placeholder="Publisher URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisher-url-help"><i class="icon-question-sign"></i></button><span id="publisher-url-help" class="help-block collapse">Give your organisation's website address.</span></div>
-                           </div>
-                           <div class="control-group"><label class="control-label" for="ownership">Who owns the data?</label><div class="controls"><label class="radio"><input type="radio" name="ownership" value="publisher"><span class="placeholder" data-field="publisher" data-placeholder="the publisher">the publisher</span> owns all the data in this dataset</label><label class="radio"><input type="radio" name="ownership" value="mixed">some of the data in this dataset is owned by someone else<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#ownership-mixed-help"><i class="icon-question-sign"></i></button><span id="ownership-mixed-help" class="help-block collapse">Data that is derived from other closed datasets is usually owned by the owner of that
-                                       dataset.</span></label><label class="radio"><input type="radio" name="ownership" value="unknown">the ownership of the data in this dataset is not known</label><div class="conditional" data-field="ownership" data-if-equals="unknown">
-                                    <div class="requirement">
-                                       <p class="alert alert-error">You only have the right to publish open data if you own the data, or if you have been
-                                          granted permission to republish data owned by someone else.
-                                       </p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="conditional" data-field="ownership" data-if-equals="mixed">
-                              				
-                              <div class="repeated">
-                                 <div class="control-group"><label class="control-label" for="derived-from-dataset-0">Is the data derived from another dataset?</label><div class="controls"><label class="radio inline"><input type="radio" name="derived-from-dataset-0" value="true"> Yes</label><label class="radio inline"><input type="radio" name="derived-from-dataset-0" value="false"> No</label></div>
-                                 </div>
-                                 <div class="conditional" data-field="derived-from-dataset" data-if-equals="true">
-                                    						
-                                    <div class="control-group"><label class="control-label" for="derived-from-dataset-certificate-url-0">Where is the open data certificate for the source dataset?</label><div class="controls"><input type="url" class="span5" id="derived-from-dataset-certificate-url-0" name="derived-from-dataset-certificate-url-0" placeholder="Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#derived-from-dataset-certificate-url-0-help"><i class="icon-question-sign"></i></button><span id="derived-from-dataset-certificate-url-0-help" class="help-block collapse">The open data certificate demonstrates that the source dataset is available as open
-                                             data.</span></div>
-                                    </div>
-                                    					
-                                 </div>
-                                 <div class="control-group"><label class="control-label" for="additional-owner-0">Who else owns data in this dataset?</label><div class="controls"><input type="text" class="span5" id="additional-owner-0" name="additional-owner-0" placeholder="Owner" required="required"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#additional-owner-0-help"><i class="icon-question-sign"></i></button><span id="additional-owner-0-help" class="help-block collapse">Give the name of the other organisation that owns the data.</span></div>
-                                 </div>
-                                 <div class="control-group"><label class="control-label" for="additional-owner-url-0">What's their website?</label><div class="controls"><input type="url" class="span5" id="additional-owner-url-0" name="additional-owner-url-0" placeholder="Owner URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#additional-owner-url-0-help"><i class="icon-question-sign"></i></button><span id="additional-owner-url-0-help" class="help-block collapse">Give the website of the other organisation that owns the data.</span></div>
-                                 </div>
-                                 <div class="control-group"><label class="control-label" for="additional-owner-data-0">Which of the data do they own?</label><div class="controls"><textarea class="span5" id="additional-owner-data-0" name="additional-owner-data-0" rows="3">
-</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#additional-owner-data-0-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#additional-owner-data-0-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="additional-owner-data-0-help" class="help-block collapse">Describe which parts of the data are owned by this organisation. For example, name
-                                          the columns that contain the data owned by this organisation and the data that it
-                                          comes from.</span><div id="additional-owner-data-0-requirement" class="requirement collapse" data-level="basic" data-field="additional-owner-data-0" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#additional-owner-data-0-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should supply information about which parts of the dataset are owned by <span class="placeholder" data-field="additional-owner" data-placeholder="the other organisation">the other organisation</span>.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="control-group"><label class="control-label" for="additional-owner-permission-0">Do you have permission to republish this data?</label><div class="controls"><label class="radio"><input type="radio" name="additional-owner-permission-0" value="open">Yes, the data has been published under an open licence</label><label class="radio"><input type="radio" name="additional-owner-permission-0" value="permitted">Yes, we have permission to reuse and republish the data</label><label class="radio"><input type="radio" name="additional-owner-permission-0" value="closed">No, we do not have permission to reuse and/or republish the data</label><div class="conditional" data-field="additional-owner-permission-0" data-if-equals="closed">
-                                          <div class="requirement">
-                                             <p class="alert alert-error">You cannot republish data as open data if you do not have permission to do so from
-                                                the owner(s) of the data.
-                                             </p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="control-group repeat-controls">
-                                    <div class="controls"><button type="button" class="btn btn-primary repeat-add"><i class="icon-plus-sign icon-white"></i> Another Owner</button></div>
-                                 </div>
-                              </div>
-                              			
-                           </div>
-                        </fieldset>
-                        <fieldset id="privacy">
-                           <legend>Privacy</legend>
-                           <div class="control-group"><label class="control-label" for="data-personal">Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="data-personal" value="not-personal">the data doesn't contain anything about people or organisations at all</label><label class="radio"><input type="radio" name="data-personal" value="aggregate">the data summarises information about people or organisations</label><label class="radio"><input type="radio" name="data-personal" value="individual">the data is about individual people or organisations<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#data-personal-individual-help"><i class="icon-question-sign"></i></button><span id="data-personal-individual-help" class="help-block collapse">Personal data is covered by data protection laws which means that when you collect
-                                       it you have to tell people how it is going to be used. The same applies to data about
-                                       organisations because some are run by just one person.</span></label></div>
-                           </div>
-                           <div class="conditional" data-field="data-personal" data-not-equals="">
-                              				
-                              <div class="conditional" data-field="data-personal" data-if-equals="individual">
-                                 					
-                                 <div class="control-group"><label class="control-label" for="personal-data-consent">What usages did they consent to?</label><div class="controls"><textarea class="span5" id="personal-data-consent" name="personal-data-consent" rows="3">
-</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#personal-data-consent-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#personal-data-consent-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="personal-data-consent-help" class="help-block collapse">Describe what the people whose data is contained in this dataset were told about how
-                                          the data will be used, when the data was collected.</span><div id="personal-data-consent-requirement" class="requirement collapse" data-level="basic" data-field="personal-data-consent" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#personal-data-consent-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> To comply with data protection laws, data has to be used consistently with how individuals
-                                             were told the data would be used. You should inform potential reusers about what that
-                                             entails.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 				
-                              </div>
-                              				
-                              <div class="conditional" data-field="data-personal" data-not-equals="not-personal">
-                                 					
-                                 <div class="control-group"><label class="control-label" for="personal-data-anonymisation">How has the data been anonymised?</label><div class="controls"><textarea class="span5" id="personal-data-anonymisation" name="personal-data-anonymisation" rows="3">
-</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#personal-data-anonymisation-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#personal-data-anonymisation-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="personal-data-anonymisation-help" class="help-block collapse">Describe the processing by which the data has been anonymised to increase the difficulty
-                                          of identifying individuals from the data.</span><div id="personal-data-anonymisation-requirement" class="requirement collapse" data-level="basic" data-field="personal-data-anonymisation" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#personal-data-anonymisation-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Both personal data and aggregate data should be anonymised to ensure that the likelihood
-                                             of discovering information about an individual is minimised.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 					
-                                 <div class="control-group"><label class="control-label" for="privacy-impact-assessment-url">Where is your privacy impact assessment published?</label><div class="controls"><input type="url" class="span5" id="privacy-impact-assessment-url" name="privacy-impact-assessment-url" placeholder="Privacy Impact Assessment URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#privacy-impact-assessment-url-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#privacy-impact-assessment-url-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="privacy-impact-assessment-url-help" class="help-block collapse">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
-                                          and disclosure of information.</span><div id="privacy-impact-assessment-url-requirement" class="requirement collapse" data-level="basic" data-field="privacy-impact-assessment-url" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#privacy-impact-assessment-url-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> When datasets contain personal data, a privacy impact assessment should be carried
-                                             out to identify risks of releasing the data, mitigations against those risks, and
-                                             to put in place processes that ensure that any breaches are handled effectively.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 				
-                              </div>
-                              			
-                           </div>
-                        </fieldset>
-                     </div>
-                  </div>
-               </div>
-               <div class="accordion-group">
-                  <div class="accordion-heading">
-                     <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#practical">Practical Information</a></h2>
-                  </div>
-                  <div id="practical" class="accordion-body collapse">
-                     <div class="accordion-inner">
-                        <div class="control-group"><label class="control-label" for="one-off-release">Is this a one-off release of data?</label><div class="controls"><label class="radio inline"><input type="radio" name="one-off-release" value="true"> Yes</label><label class="radio inline"><input type="radio" name="one-off-release" value="false"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#one-off-release-help"><i class="icon-question-sign"></i></button><span id="one-off-release-help" class="help-block collapse">Indicate if you are gaining a certificate for a release of data that is not part of
-                                 a series, and there are no plans to keep the data up to date on an ongoing basis.</span></div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="frequency-change">Roughly how frequently does the data you capture change?</label><div class="controls"><select class="span5" id="frequency-change" name="frequency-change" required="required">
-                                 				
-                                 <option value=""></option>
-                                 				
-                                 <option value="never">never</option>
-                                 				
-                                 <option value="P1S">constantly</option>
-                                 				
-                                 <option value="P1H">every hour</option>
-                                 				
-                                 <option value="P1D">every day</option>
-                                 				
-                                 <option value="P7D">every week</option>
-                                 				
-                                 <option value="P14D">every fortnight</option>
-                                 				
-                                 <option value="P1M">every month</option>
-                                 				
-                                 <option value="P3M">every 3 months</option>
-                                 				
-                                 <option value="P6M">every 6 months</option>
-                                 				
-                                 <option value="P1Y">yearly</option>
-                                 				
-                                 <option value="P2Y">every two years</option>
-                                 				
-                                 <option value="P5Y">every five years</option>
-                                 				
-                                 <option value="P10Y">every ten years</option>
-                                 			</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#frequency-change-help"><i class="icon-question-sign"></i></button><span class="conditional" data-field="one-off-release" data-if-equals="true">
-                                 				 <span class="label label-bronze" data-toggle="collapse" data-target="#frequency-change-requirement"><i class="icon-star icon-white"></i> Bronze</span>
-                                 			</span><span id="frequency-change-help" class="help-block collapse">Select the approximate frequency with which the data changes. If the frequency of
-                                 changes varies, choose the most frequent level.</span><div class="conditional" data-field="one-off-release" data-if-equals="true">
-                                 				
-                                 <div id="frequency-change-requirement" class="requirement collapse" data-level="basic" data-field="frequency-change" data-not-equals="never">
-                                    <p class="alert alert-info"><a href="#frequency-change-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> If there is no on-going release of updated datasets as the data you capture changes,
-                                       the data will become innaccurate and might not be worth reusing.
-                                    </p>
-                                 </div>
-                                 			
-                              </div>
-                           </div>
-                        </div>
-                        <div class="conditional" data-field="one-off-release" data-if-equals="false">
-                           			
-                           <div class="control-group"><label class="control-label" for="frequency">How frequently are datasets released?</label><div class="controls"><select class="span5" id="frequency" name="frequency">
-                                    					
-                                    <option value=""></option>
-                                    					
-                                    <option value="api">immediately (API access)</option>
-                                    					
-                                    <option value="P1H">every hour</option>
-                                    					
-                                    <option value="P1D">every day</option>
-                                    					
-                                    <option value="P7D">every week</option>
-                                    					
-                                    <option value="P14D">every fortnight</option>
-                                    					
-                                    <option value="P1M">every month</option>
-                                    					
-                                    <option value="P3M">every 3 months</option>
-                                    					
-                                    <option value="P6M">every 6 months</option>
-                                    					
-                                    <option value="P1Y">yearly</option>
-                                    					
-                                    <option value="P2Y">every two years</option>
-                                    					
-                                    <option value="P5Y">every five years</option>
-                                    					
-                                    <option value="P10Y">every ten years</option>
-                                    					
-                                    <option value="">as and when</option>
-                                    				</select> <span class="label label-bronze" data-toggle="collapse" data-target="#frequency-requirement"><i class="icon-star icon-white"></i> Bronze</span><div id="frequency-requirement" class="requirement collapse" data-level="basic" data-field="frequency" data-not-equals="">
-                                    <p class="alert alert-info"><a href="#frequency-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dataset should be released on a regular, predictable schedule.
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           		
-                        </div>
-                        <div class="control-group"><label class="control-label" for="quality-control-url">Where is your quality control process described?</label><div class="controls"><input type="url" class="span5" id="quality-control-url" name="quality-control-url" placeholder="Quality Control Process Description URL"> <span class="label label-silver" data-toggle="collapse" data-target="#quality-control-url-requirement"><i class="icon-star icon-white"></i> Silver</span><div id="quality-control-url-requirement" class="requirement collapse" data-level="bronze" data-field="quality-control-url" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#quality-control-url-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Having a documented quality control process helps developers to understand how much
-                                    to rely on the data that you make available.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="quality-control-audited">Where is the latest report auditing your quality control process?</label><div class="controls"><input type="url" class="span5" id="quality-control-audited" name="quality-control-audited" placeholder="Quality Control Process Audit Report URL"> <span class="label label-gold" data-toggle="collapse" data-target="#quality-control-audited-requirement"><i class="icon-star icon-white"></i> Gold</span><div id="quality-control-audited-requirement" class="requirement collapse" data-level="silver" data-field="quality-control-audited" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#quality-control-audited-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> An audited quality control process gives developers reassurance that the quality control
-                                    process that you have described is being adhered to.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="current-availability">What is the guaranteed availability of this dataset?</label><div class="controls"><textarea class="span5" id="current-availability" name="current-availability" rows="3">
-</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#current-availability-help"><i class="icon-question-sign"></i></button><span id="current-availability-help" class="help-block collapse">Describe the guarantees that you can give about the up-time of the servers supplying
-                                 the dataset.</span></div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="on-going-availability">For how long will the dataset be available in this way?</label><div class="controls"><label class="radio"><input type="radio" name="on-going-availability" value="experimental">this dataset may disappear at any time</label><label class="radio"><input type="radio" name="on-going-availability" value="P1Y">this dataset will be available in this form for at least one year <span class="label label-bronze" data-toggle="collapse" data-target="#on-going-availability-P1Y-requirement"><i class="icon-star icon-white"></i> Bronze</span><div id="on-going-availability-P1Y-requirement" class="requirement collapse" data-level="basic" data-field="on-going-availability-P1Y" data-if-equals="P1Y">
-                                    <p class="alert alert-info"><a href="#on-going-availability-P1Y-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                                       available in this form for at least a year.
-                                    </p>
-                                 </div></label><label class="radio"><input type="radio" name="on-going-availability" value="P2Y">this dataset will be available in this form for at least two years <span class="label label-silver" data-toggle="collapse" data-target="#on-going-availability-P2Y-requirement"><i class="icon-star icon-white"></i> Silver</span><div id="on-going-availability-P2Y-requirement" class="requirement collapse" data-level="bronze" data-field="on-going-availability-P2Y" data-if-equals="P2Y">
-                                    <p class="alert alert-info"><a href="#on-going-availability-P2Y-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                                       available in this form for at least two years.
-                                    </p>
-                                 </div></label><label class="radio"><input type="radio" name="on-going-availability" value="P3Y">this dataset will be available in this form for at least three years <span class="label label-gold" data-toggle="collapse" data-target="#on-going-availability-P3Y-requirement"><i class="icon-star icon-white"></i> Gold</span><div id="on-going-availability-P3Y-requirement" class="requirement collapse" data-level="silver" data-field="on-going-availability-P3Y" data-if-equals="P3Y">
-                                    <p class="alert alert-info"><a href="#on-going-availability-P3Y-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                                       available in this form for at least three years.
-                                    </p>
-                                 </div></label></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="accordion-group">
-                  <div class="accordion-heading">
-                     <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#technical">Technical Information</a></h2>
-                  </div>
-                  <div id="technical" class="accordion-body collapse">
-                     <div class="accordion-inner">
-                        <div class="conditional" data-field="one-off-release" data-if-equals="true">
-                           			
-                           <div class="control-group"><label class="control-label" for="dataset-url">What's the URL of the dataset?</label><div class="controls"><input type="url" class="span5" id="dataset-url" name="dataset-url" placeholder="Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dataset-url-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#dataset-url-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="conditional" data-field="dataset-url" data-if-equals="">
-                                    					<span class="conditional" data-field="documentation-url" data-if-equals="">
-                                       						
-                                       					</span>
-                                    				</span><span id="dataset-url-help" class="help-block collapse">Enter the URL of the dataset itself (for example a CSV file), not a page describing
-                                    the dataset.</span><div id="dataset-url-requirement" class="requirement collapse" data-level="basic" data-field="dataset-url" data-if-equals="">
-                                    <p class="alert alert-info"><a href="#dataset-url-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a URL that is a direct link to the data itself.
-                                    </p>
-                                 </div>
-                                 <div class="conditional" data-field="dataset-url" data-if-equals="">
-                                    					
-                                    <div class="conditional" data-field="documentation-url" data-if-equals="">
-                                       						
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You must provide either a URL for the dataset or a URL for documentation about it.</p>
-                                       </div>
-                                       					
-                                    </div>
-                                    				
-                                 </div>
-                              </div>
-                           </div>
-                           		
-                        </div>
-                        <div class="conditional" data-field="one-off-release" data-if-equals="false">
-                           			
-                           <div class="conditional" data-field="frequency" data-if-equals="api">
-                              				
-                              <div class="control-group"><label class="control-label" for="endpoint-url">What's the endpoint for the API?</label><div class="controls"><input type="url" class="span5" id="endpoint-url" name="endpoint-url" placeholder="Endpoint URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#endpoint-url-help"><i class="icon-question-sign"></i></button><span id="endpoint-url-help" class="help-block collapse">Enter the endpoint of the API. If the API supports it, this should be a service description
-                                       document.</span></div>
-                              </div>
-                              				
-                              <div class="control-group"><label class="control-label" for="provide-dumps">Do you also provide dumps of the dataset?</label><div class="controls"><label class="radio inline"><input type="radio" name="provide-dumps" value="true"> Yes</label><label class="radio inline"><input type="radio" name="provide-dumps" value="false"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#provide-dumps-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#provide-dumps-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="provide-dumps-help" class="help-block collapse">A dump is an extract of the data into a static file that developers can download to
-                                       get hold of the whole dataset.</span><div id="provide-dumps-requirement" class="requirement collapse" data-level="basic" data-field="provide-dumps" data-if-equals="">
-                                       <p class="alert alert-info"><a href="#provide-dumps-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Dumps of the dataset should be made available to enable developers to download the
-                                          entire dataset.
-                                       </p>
-                                    </div>
-                                 </div>
-                              </div>
-                              				
-                              <div class="conditional" data-field="provide-dumps" data-if-equals="true">
-                                 					
-                                 <div class="control-group"><label class="control-label" for="dump-frequency">How frequently are dumps created?</label><div class="controls"><select class="span5" id="dump-frequency" name="dump-frequency">
-                                          							
-                                          <option value=""></option>
-                                          							
-                                          <option value="api">immediately (API access)</option>
-                                          							
-                                          <option value="P1H">every hour</option>
-                                          							
-                                          <option value="P1D">every day</option>
-                                          							
-                                          <option value="P7D">every week</option>
-                                          							
-                                          <option value="P14D">every fortnight</option>
-                                          							
-                                          <option value="P1M">every month</option>
-                                          							
-                                          <option value="P3M">every 3 months</option>
-                                          							
-                                          <option value="P6M">every 6 months</option>
-                                          							
-                                          <option value="P1Y">yearly</option>
-                                          							
-                                          <option value="">as and when</option>
-                                          						</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dump-frequency-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#dump-frequency-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="dump-frequency-help" class="help-block collapse">Indicate how frequently dumps are created from the database.</span><div id="dump-frequency-requirement" class="requirement collapse" data-level="basic" data-field="dump-frequency" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#dump-frequency-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dumps should be created on a regular, predictable schedule.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 					
-                                 <div class="control-group"><label class="control-label" for="dump-versions-template-url">What's the URL template for the dumps?</label><div class="controls"><input type="url" class="span5" id="dump-versions-template-url" name="dump-versions-template-url" placeholder="Dump Template URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dump-versions-template-url-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#dump-versions-template-url-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="dump-versions-template-url-help" class="help-block collapse">Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></span><div id="dump-versions-template-url-requirement" class="requirement collapse" data-level="basic" data-field="dump-versions-template-url" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#dump-versions-template-url-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different dumps of the dataset should follow a regular structure.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 					
-                                 <div class="control-group"><label class="control-label" for="current-dump-url">What's the URL of the current dump?</label><div class="controls"><input type="url" class="span5" id="current-dump-url" name="current-dump-url" placeholder="Current Dump URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#current-dump-url-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#current-dump-url-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="current-dump-url-help" class="help-block collapse">Enter the URL of the current dump of the dataset itself (for example a CSV file).
-                                          The content at this URL should change each time a new dump is created.</span><div id="current-dump-url-requirement" class="requirement collapse" data-level="bronze" data-field="current-dump-url" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#current-dump-url-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current dump
-                                             of the dataset.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 					
-                                 <div class="control-group"><label class="control-label" for="dump-list-url">What's the URL that gives a list of dumps?</label><div class="controls"><input type="url" class="span5" id="dump-list-url" name="dump-list-url" placeholder="Dump List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dump-list-url-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#dump-list-url-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="dump-list-url-help" class="help-block collapse">Enter the URL of a page or feed that provides a machine-readable list of the available
-                                          dumps of the dataset.</span><div id="dump-list-url-requirement" class="requirement collapse" data-level="bronze" data-field="dump-list-url" data-if-equals="">
-                                          <p class="alert alert-info"><a href="#dump-list-url-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available dumps
-                                             of the dataset.
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 				
-                              </div>
-                              			
-                           </div>
-                           			
-                           <div class="conditional" data-field="frequency" data-not-equals="api">
-                              				
-                              <div class="control-group"><label class="control-label" for="versions-template-url">What's the URL template for the versions?</label><div class="controls"><input type="url" class="span5" id="versions-template-url" name="versions-template-url" placeholder="Version Template URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#versions-template-url-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#versions-template-url-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="versions-template-url-help" class="help-block collapse">Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></span><div id="versions-template-url-requirement" class="requirement collapse" data-level="basic" data-field="versions-template-url" data-if-equals="">
-                                       <p class="alert alert-info"><a href="#versions-template-url-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different versions of the dataset should follow a regular structure.
-                                       </p>
-                                    </div>
-                                 </div>
-                              </div>
-                              				
-                              <div class="control-group"><label class="control-label" for="current-dataset-url">What's the URL of the current version?</label><div class="controls"><input type="url" class="span5" id="current-dataset-url" name="current-dataset-url" placeholder="Current Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#current-dataset-url-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#current-dataset-url-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="current-dataset-url-help" class="help-block collapse">Enter the URL of the current version of the dataset itself (for example a CSV file).
-                                       The content at this URL should change each time a new version is released. This should
-                                       not be a page describing the dataset.</span><div id="current-dataset-url-requirement" class="requirement collapse" data-level="bronze" data-field="current-dataset-url" data-if-equals="">
-                                       <p class="alert alert-info"><a href="#current-dataset-url-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current version
-                                          of the dataset.
-                                       </p>
-                                    </div>
-                                 </div>
-                              </div>
-                              				
-                              <div class="control-group"><label class="control-label" for="versions-url">What's the URL that gives a list of versions?</label><div class="controls"><input type="url" class="span5" id="versions-url" name="versions-url" placeholder="Version List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#versions-url-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#versions-url-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="versions-url-help" class="help-block collapse">Enter the URL of a page or feed that provides a machine-readable list of the previous
-                                       versions of the dataset.</span><div id="versions-url-requirement" class="requirement collapse" data-level="bronze" data-field="versions-url" data-if-equals="">
-                                       <p class="alert alert-info"><a href="#versions-url-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available versions
-                                          of the dataset.
-                                       </p>
-                                    </div>
-                                 </div>
-                              </div>
-                              			
-                           </div>
-                           			
-                           <div class="control-group"><label class="control-label" for="change-feed">What's the URL that provides a feed of changes?</label><div class="controls"><input type="url" class="span5" id="change-feed" name="change-feed" placeholder="Change Feed URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#change-feed-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#change-feed-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="change-feed-help" class="help-block collapse">Enter the URL of a page or feed that provides a machine-readable list of the individual
-                                    changes as they occur within the dataset, between dumps or versions of the dataset
-                                    being created.</span><div id="change-feed-requirement" class="requirement collapse" data-level="bronze" data-field="change-feed" data-if-equals="">
-                                    <p class="alert alert-info"><a href="#change-feed-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a mechanism for developers to keep their downloaded datasets up to
-                                       date without downloading each new dump or version of the dataset each time.
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           		
-                        </div>
-                        <div class="control-group"><label class="control-label" for="data-type">What kind of data are you publishing?</label><div class="controls"><label class="radio"><input type="radio" name="data-type" value="documents">human-readable documents</label><label class="radio"><input type="radio" name="data-type" value="statistical">statistical data, such as counts, averages and percentages</label><label class="radio"><input type="radio" name="data-type" value="geographic">geographic information, such as points and boundaries</label><label class="radio"><input type="radio" name="data-type" value="structured">other kinds of structured data</label></div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="format">What formats are you using to publish the data?</label><div class="controls"><label class="radio"><input type="radio" name="format" value="standard">machine-readable formats specified in a suitable open standard (eg
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="documents">XML, plain text, Markdown, OOXML, PDF</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="statistical">SDMX, CSV</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="geographic">KML</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="structured">JSON, XML, Turtle, CSV</div>
-                                    					)</label><label class="radio"><input type="radio" name="format" value="proprietary">non-machine-readable, unsuitable, or proprietary formats (eg
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="documents">Word, Powerpoint, Pages</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="statistical">Excel, PDF</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="geographic">..., PDF</div>
-                                    						
-                                    <div class="conditional" data-field="data-type" data-if-equals="structured">Word, Excel, PDF</div>
-                                    					)</label></div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="identifiers">Are you using URIs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" name="identifiers" value="true"> Yes</label><label class="radio inline"><input type="radio" name="identifiers" value="false"> No</label> <span class="label label-silver" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Silver</span><div id="identifiers-requirement" class="requirement collapse" data-level="bronze" data-field="identifiers" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Use URIs to identify things in the data, so that they can be easily reference.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="conditional" data-field="identifiers" data-if-equals="true">
-                           			
-                           <div class="control-group"><label class="control-label" for="resolving-uris">Do the URIs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" name="resolving-uris" value="true"> Yes</label><label class="radio inline"><input type="radio" name="resolving-uris" value="false"> No</label> <span class="label label-gold" data-toggle="collapse" data-target="#resolving-uris-requirement"><i class="icon-star icon-white"></i> Gold</span><div id="resolving-uris-requirement" class="requirement collapse" data-level="silver" data-field="resolving-uris" data-if-equals="">
-                                    <p class="alert alert-info"><a href="#resolving-uris-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Identifiers that you use within your dataset should resolve to provide information
-                                       about the things being identified.
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           			
-                           <div class="control-group"><label class="control-label" for="external-uris">Does the dataset include URIs outside your control?</label><div class="controls"><label class="radio"><input type="radio" name="external-uris" value="yes">yes</label><label class="radio"><input type="radio" name="external-uris" value="na">no, because it's not appropriate for this dataset</label><label class="radio"><input type="radio" name="external-uris" value="dont-exist">no, because the URIs you would point to don't exist</label><label class="radio"><input type="radio" name="external-uris" value="dont-trust">no, because the information at suitable URIs isn't reliable</label><label class="radio"><input type="radio" name="external-uris" value="no">no</label></div>
-                           </div>
-                           		
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="accordion-group">
-                  <div class="accordion-heading">
-                     <h2><a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#social">Social Information</a></h2>
-                  </div>
-                  <div id="social" class="accordion-body collapse">
-                     <div class="accordion-inner">
-                        <div class="control-group"><label class="control-label" for="contact-email">What's the contact email address about this dataset?</label><div class="controls"><input type="email" class="span5" id="contact-email" name="contact-email" placeholder="Contact Email Address"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#contact-email-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#contact-email-requirement"><i class="icon-star icon-white"></i> Bronze</span><span id="contact-email-help" class="help-block collapse">Provide an email address that people can contact with queries about the dataset.</span><div id="contact-email-requirement" class="requirement collapse" data-level="basic" data-field="contact-email" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#contact-email-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a contact email address so that people can get back in touch with
-                                    you about any problems with the dataset.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="forum">Where do you recommend people discuss this dataset?</label><div class="controls"><input type="url" class="span5" id="forum" name="forum" placeholder="Forum or Mailing List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#forum-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#forum-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="forum-help" class="help-block collapse">Provide a URL for the forum or mailing list where developers using this dataset should
-                                 discuss it.</span><div id="forum-requirement" class="requirement collapse" data-level="bronze" data-field="forum" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#forum-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should indicate where people using this dataset should discuss the data and how
-                                    they are using it.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="control-group"><label class="control-label" for="contributions">Where do you describe how people should contribute?</label><div class="controls"><input type="url" class="span5" id="contributions" name="contributions" placeholder="Contributor Instructions URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#contributions-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#contributions-requirement"><i class="icon-star icon-white"></i> Silver</span><span id="contributions-help" class="help-block collapse">Provide a link to a page that describes how people can contribute to the dataset,
-                                 for example by correcting errors that they find or providing additional information.</span><div id="contributions-requirement" class="requirement collapse" data-level="bronze" data-field="contributions" data-if-equals="">
-                                 <p class="alert alert-info"><a href="#contributions-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should provide instructions for people who want to contribute towards correcting
-                                    or extending the dataset.
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+      </div>
+      <header id="header">
+         <div class="container">
+            <div class="branding"><a id="logo" rel="home" title="Home" href="http://theodi.org/"><img width="131" height="54" class="b_png" alt="Home" src="http://theodi.org/sites/default/files/logo.png"></a><hgroup id="name-and-slogan">
+                  <h1 id="site-name"><a rel="home" title="Open Data Institute" href="http://theodi.org/"><img width="326" height="30" class="b_png" alt="Open Data Institute" src="http://theodi.org/sites/default/files/logo_a.png"></a></h1>
+                  <h2 id="site-slogan">Knowledge for everyone</h2>
+               </hgroup>
             </div>
+            <nav>
+               <div id="mainnav" class="navbar navbar-inverse">
+                  <div class="navbar-inner">
+                     <ul class="nav"><a class="brand" href="#">Certificate</a><li class="active"><a href="#core">Core</a></li>
+                        <li><a href="#legal">Legal</a></li>
+                        <li><a href="#practical">Practical</a></li>
+                        <li><a href="#technical">Technical</a></li>
+                        <li><a href="#social">Social</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="#certificate">Certificate</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="#improvements">Improvements</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+         </div>
+      </header>
+      <div class="container">
+         <section>
+            <p class="lead">All open data is good, but some is better than others. This tool gives you a certificate
+               that will help people understand the open data you are publishing.
+            </p>
+         </section>
+         <form id="questionnaire" class="form-horizontal">
+            <section id="core">
+               <div class="page-header">
+                  <p class="bookmark"><a href="#core"><i class="icon icon-bookmark icon-white"></i></a><br><a href="#"><i class="icon icon-chevron-up icon-white"></i></a><br><a href="#legal"><i class="icon icon-chevron-down icon-white"></i></a></p>
+                  <h1>Core Information</h1>
+               </div>
+               <div class="control-group" data-bind="css: { success: documentationUrl() !== ''}"><label class="control-label" for="documentationUrl">Where is the dataset described?</label><div class="controls"><input type="url" class="span5" id="documentationUrl" name="documentationUrl" data-bind="value: documentationUrl, valueUpdate: 'afterkeydown'" placeholder="Documentation URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#documentationUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#documentationUrl-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="documentationUrl-help">Enter the URL of a page that describes the dataset and what it contains.</span><div class="requirement collapse" id="documentationUrl-requirement">
+                        <p class="alert alert-info"><a href="#documentationUrl-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a page that provides documentation about your dataset.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: datasetTitle() !== '', error: datasetTitle() === ''}"><label class="control-label" for="datasetTitle">What's the name of the dataset?</label><div class="controls"><input type="text" class="span5" id="datasetTitle" name="datasetTitle" data-bind="value: datasetTitle, valueUpdate: 'afterkeydown'" placeholder="Dataset Title" required="required"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#datasetTitle-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="datasetTitle-help">Enter the title for the dataset. If this is part of a regular series of releases,
+                        use give a title for the series.</span></div>
+               </div>
+               <fieldset id="licensing">
+                  <legend>Licensing</legend>
+                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other jurisdictions.
+                  </p>
+                  <div class="control-group" data-bind="css: { success: publisher() !== '', error: publisher() === ''}"><label class="control-label" for="publisher">What's the name of your organisation?</label><div class="controls"><input type="text" class="span5" id="publisher" name="publisher" data-bind="value: publisher, valueUpdate: 'afterkeydown'" placeholder="Publisher" required="required"></div>
+                  </div>
+                  <div class="control-group" data-bind="css: { success: publisherUrl() !== ''}"><label class="control-label" for="publisherUrl">What's the website for your organisation?</label><div class="controls"><input type="url" class="span5" id="publisherUrl" name="publisherUrl" data-bind="value: publisherUrl, valueUpdate: 'afterkeydown'" placeholder="Publisher URL"></div>
+                  </div>
+                  <div class="control-group" data-bind="css: { success: publisherUkGovernment() !== '', error: publisherUkGovernment() === ''}"><label class="control-label">Are you UK central government?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="publisherUkGovernment" data-bind="checked: publisherUkGovernment"> Yes</label><label class="radio inline"><input type="radio" value="false" name="publisherUkGovernment" data-bind="checked: publisherUkGovernment"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisherUkGovernment-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="publisherUkGovernment-help">Central government includes all government departments and arms-length bodies. It
+                           does not include local government. Data that is collected and maintained by central
+                           government is owned by the Crown, which means it must be published as open data under
+                           the Open Government Licence unless the publisher has an exemption from the Office
+                           of Public Sector Information.</span></div>
+                  </div>
+                  <div class="conditional" data-bind="visible: publisherUkGovernment() === 'true'">
+                     				
+                     <div class="control-group" data-bind="css: { success: publisherOpsiExemption() !== '', error: publisherOpsiExemption() === ''}"><label class="control-label">Do you have a licensing exemption from OPSI?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="publisherOpsiExemption" data-bind="checked: publisherOpsiExemption"> Yes</label><label class="radio inline"><input type="radio" value="false" name="publisherOpsiExemption" data-bind="checked: publisherOpsiExemption"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#publisherOpsiExemption-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="publisherOpsiExemption-help">Data that is collected and maintained by UK central government is owned by the Crown,
+                              which means it must be published as open data under the Open Government Licence unless
+                              the publisher has an exemption from the Office of Public Sector Information.</span></div>
+                     </div>
+                     			
+                  </div>
+                  <div class="control-group" data-bind="css: { success: contentLicence() !== '', error: contentLicence() === ''}"><label class="control-label" for="contentLicence">Content Licence</label><div class="controls"><select class="span5" id="contentLicence" name="contentLicence" data-bind="value: contentLicence, valueUpdate: 'afterkeydown'" required="required">
+                           					
+                           <option></option>
+                           					
+                           <option value="cc-by">Creative Commons Attribution</option>
+                           					
+                           <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+                           					
+                           <option value="cc0">Creative Commons CCZero</option>
+                           					
+                           <option value="ogl">UK Open Government Licence</option>
+                           				</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#contentLicence-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="contentLicence-help">Choose the open licence that you are using to make available your creative content
+                           for other people to use. Note that creative content does not include facts.</span></div>
+                  </div>
+                  <div class="control-group" data-bind="css: { success: dataLicence() !== '', error: dataLicence() === ''}"><label class="control-label" for="dataLicence">Data Licence</label><div class="controls"><select class="span5" id="dataLicence" name="dataLicence" data-bind="value: dataLicence, valueUpdate: 'afterkeydown'" required="required">
+                           					
+                           <option></option>
+                           					
+                           <option value="odc-by">Open Data Commons Attribution License</option>
+                           					
+                           <option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
+                           					
+                           <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+                           					
+                           <option value="cc0">Creative Commons CCZero</option>
+                           					
+                           <option value="ogl">UK Open Government Licence</option>
+                           				</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dataLicence-help"><i class="icon-question-sign"></i></button><span class="conditional" data-bind="visible: publisherOpsiExemption() === 'false'">
+                           					
+                           					<span class="conditional" data-bind="visible: contentLicence() === 'ogl'">
+                              						
+                              					</span>
+                           				</span><span class="help-block collapse" id="dataLicence-help">In Europe, you need to have a licence that covers your database rights as well as
+                           any copyright for creative content in the data. Your database rights cover the way
+                           in which you structure the data you make available.</span><div class="conditional" data-bind="visible: publisherOpsiExemption() === 'false'">
+                           					
+                           <div class="conditional" data-bind="visible: !(contentLicence() === 'ogl')">
+                              <div class="requirement">
+                                 <p class="alert alert-error">Unless you have been granted an exemption from OPSI, if you are UK central government
+                                    then you must publish your content and data using the Open Government Licence.
+                                 </p>
+                              </div>
+                           </div>
+                           					
+                           <div class="conditional" data-bind="visible: contentLicence() === 'ogl'">
+                              						
+                              <div class="conditional" data-bind="visible: !(dataLicence() === 'ogl')">
+                                 <div class="requirement">
+                                    <p class="alert alert-error">Unless you have been granted an exemption from OPSI, if you are UK central government
+                                       then you must publish your content and data using the Open Government Licence.
+                                    </p>
+                                 </div>
+                              </div>
+                              					
+                           </div>
+                           				
+                        </div>
+                     </div>
+                  </div>
+               </fieldset>
+            </section>
+            <section id="legal">
+               <div class="page-header">
+                  <p class="bookmark"><a href="#legal"><i class="icon icon-bookmark icon-white"></i></a><br><a href="#core"><i class="icon icon-chevron-up icon-white"></i></a><br><a href="#practical"><i class="icon icon-chevron-down icon-white"></i></a></p>
+                  <h1>Legal Information</h1>
+               </div>
+               <fieldset id="ownership">
+                  <legend>Ownership</legend>
+                  <div class="control-group" data-bind="css: { success: ownership() !== '', error: ownership() === ''}"><label class="control-label">Who owns the data?</label><div class="controls"><label class="radio"><input type="radio" name="ownership" data-bind="checked: ownership" value="publisher">your organisation owns all the data in this dataset</label><label class="radio"><input type="radio" name="ownership" data-bind="checked: ownership" value="mixed">some of the data in this dataset is owned by someone else<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#ownershipmixed-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="ownershipmixed-help">Data that is derived from other closed datasets is usually owned by the owner of that
+                              dataset.</span></label><label class="radio"><input type="radio" name="ownership" data-bind="checked: ownership" value="unknown">the ownership of the data in this dataset is not known</label><div class="conditional" data-bind="visible: !(ownership() !== 'unknown')">
+                           <div class="requirement">
+                              <p class="alert alert-error">You only have the right to publish open data if you own the data, or if you have been
+                                 granted permission to republish data owned by someone else.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="conditional" data-bind="visible: ownership() === 'mixed'">
+                     				
+                     <div class="repeated" data-bind="foreach: owners">
+                        <div class="well">
+                           <div class="control-group">
+                              <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.ownersRemove, disable: $parent.owners().length === 1"><i class="icon-remove icon-white"></i> Delete Owner</button></div>
+                           </div>
+                           <div class="control-group" data-bind="css: { success: derivedFromDataset() !== '', error: derivedFromDataset() === ''}"><label class="control-label">Is the data derived from another dataset?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" data-bind="checked: derivedFromDataset, attr: { name: 'derivedFromDataset-' + $index() }"> Yes</label><label class="radio inline"><input type="radio" value="false" data-bind="checked: derivedFromDataset, attr: { name: 'derivedFromDataset-' + $index() }"> No</label></div>
+                           </div>
+                           <div class="conditional" data-bind="visible: derivedFromDataset() === 'true'">
+                              						
+                              <div class="control-group" data-bind="css: { success: derivedFromDatasetCertificateUrl() !== ''}"><label class="control-label" data-bind="attr: { for: 'derivedFromDatasetCertificateUrl-' + $index() }">Where is the open data certificate for the source dataset?</label><div class="controls"><input type="url" class="span5" data-bind="value: derivedFromDatasetCertificateUrl, valueUpdate: 'afterkeydown', attr: { id: 'derivedFromDatasetCertificateUrl-' + $index(), name: 'derivedFromDatasetCertificateUrl-' + $index() }" placeholder="Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-bind="attr: { 'data-target': '#derivedFromDatasetCertificateUrl-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><span class="help-block collapse" data-bind="attr: { id: 'derivedFromDatasetCertificateUrl-' + $index() + '-help' }">The open data certificate demonstrates that the source dataset is available as open
+                                       data.</span></div>
+                              </div>
+                              					
+                           </div>
+                           <div class="control-group" data-bind="css: { success: additionalOwner() !== '', error: additionalOwner() === ''}"><label class="control-label" data-bind="attr: { for: 'additionalOwner-' + $index() }">Who else owns data in this dataset?</label><div class="controls"><input type="text" class="span5" data-bind="value: additionalOwner, valueUpdate: 'afterkeydown', attr: { id: 'additionalOwner-' + $index(), name: 'additionalOwner-' + $index() }" placeholder="Owner" required="required"><button type="button" class="btn btn-link" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwner-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><span class="help-block collapse" data-bind="attr: { id: 'additionalOwner-' + $index() + '-help' }">Give the name of the other organisation that owns the data.</span></div>
+                           </div>
+                           <div class="control-group" data-bind="css: { success: additionalOwnerUrl() !== ''}"><label class="control-label" data-bind="attr: { for: 'additionalOwnerUrl-' + $index() }">What's their website?</label><div class="controls"><input type="url" class="span5" data-bind="value: additionalOwnerUrl, valueUpdate: 'afterkeydown', attr: { id: 'additionalOwnerUrl-' + $index(), name: 'additionalOwnerUrl-' + $index() }" placeholder="Owner URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwnerUrl-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><span class="help-block collapse" data-bind="attr: { id: 'additionalOwnerUrl-' + $index() + '-help' }">Give the website of the other organisation that owns the data.</span></div>
+                           </div>
+                           <div class="control-group" data-bind="css: { success: additionalOwnerData() !== ''}"><label class="control-label" data-bind="attr: { for: 'additionalOwnerData-' + $index() }">Which of the data do they own?</label><div class="controls"><textarea class="span5" rows="3" data-bind="text: additionalOwnerData, attr: { id: 'additionalOwnerData-' + $index(), name: 'additionalOwnerData-' + $index() }">
+</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwnerData-' + $index() + '-help' }"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwnerData-' + $index() + '-requirement' }"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" data-bind="attr: { id: 'additionalOwnerData-' + $index() + '-help' }">Describe which parts of the data are owned by this organisation. For example, name
+                                    the columns that contain the data owned by this organisation and the data that it
+                                    comes from.</span><div class="requirement collapse" data-bind="attr: { id: 'additionalOwnerData-' + $index() + '-requirement' }">
+                                    <p class="alert alert-info"><a data-bind="attr: { href: '#additionalOwnerData-' + $index() + '-requirement' }"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should supply information about which parts of the dataset are owned by the other
+                                       organisation.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="control-group" data-bind="css: { success: additionalOwnerPermission() !== '', error: additionalOwnerPermission() === ''}"><label class="control-label">Do you have permission to republish this data?</label><div class="controls"><label class="radio"><input type="radio" data-bind="checked: additionalOwnerPermission, attr: { name: 'additionalOwnerPermission-' + $index() }" value="open">Yes, the data has been published under an open licence</label><label class="radio"><input type="radio" data-bind="checked: additionalOwnerPermission, attr: { name: 'additionalOwnerPermission-' + $index() }" value="permitted">Yes, we have permission to reuse and republish the data</label><label class="radio"><input type="radio" data-bind="checked: additionalOwnerPermission, attr: { name: 'additionalOwnerPermission-' + $index() }" value="closed">No, we do not have permission to reuse and/or republish the data</label><div class="conditional" data-bind="visible: !(additionalOwnerPermission() !== 'closed')">
+                                    <div class="requirement">
+                                       <p class="alert alert-error">You cannot republish data as open data if you do not have permission to do so from
+                                          the owner(s) of the data.
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group repeat-controls">
+                        <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: ownersAdd"><i class="icon-plus icon-white"></i> Add Owner</button></div>
+                     </div>
+                     			
+                  </div>
+               </fieldset>
+               <fieldset id="privacy">
+                  <legend>Privacy</legend>
+                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other jurisdictions.
+                  </p>
+                  <div class="control-group" data-bind="css: { success: dataPersonal() !== '', error: dataPersonal() === ''}"><label class="control-label">Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">the data doesn't contain anything about people or organisations at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="aggregate">the data summarises information about people or organisations</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="individual">the data is about individual people or organisations<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dataPersonalindividual-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="dataPersonalindividual-help">Personal data is covered by data protection laws which means that when you collect
+                              it you have to tell people how it is going to be used. The same applies to data about
+                              organisations because some are run by just one person.</span></label></div>
+                  </div>
+                  <div class="conditional" data-bind="visible: dataPersonal() !== ''">
+                     				
+                     <div class="conditional" data-bind="visible: dataPersonal() === 'individual'">
+                        					
+                        <div class="control-group" data-bind="css: { success: personalDataConsent() !== ''}"><label class="control-label" for="personalDataConsent">What usages did they consent to?</label><div class="controls"><textarea class="span5" rows="3" id="personalDataConsent" name="personalDataConsent" data-bind="text: personalDataConsent">
+</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#personalDataConsent-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#personalDataConsent-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="personalDataConsent-help">Describe what the people whose data is contained in this dataset were told about how
+                                 the data will be used, when the data was collected.</span><div class="requirement collapse" id="personalDataConsent-requirement">
+                                 <p class="alert alert-info"><a href="#personalDataConsent-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> To comply with data protection laws, data has to be used consistently with how individuals
+                                    were told the data would be used. You should inform potential reusers about what that
+                                    entails.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        				
+                     </div>
+                     				
+                     <div class="conditional" data-bind="visible: dataPersonal() !== 'not-personal'">
+                        					
+                        <div class="control-group" data-bind="css: { success: personalDataAnonymisation() !== ''}"><label class="control-label" for="personalDataAnonymisation">How has the data been anonymised?</label><div class="controls"><textarea class="span5" rows="3" id="personalDataAnonymisation" name="personalDataAnonymisation" data-bind="text: personalDataAnonymisation">
+</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#personalDataAnonymisation-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="personalDataAnonymisation-help">Describe the processing by which the data has been anonymised to increase the difficulty
+                                 of identifying individuals from the data.</span><div class="requirement collapse" id="personalDataAnonymisation-requirement">
+                                 <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Both personal data and aggregate data should be anonymised to ensure that the likelihood
+                                    of discovering information about an individual is minimised.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        					
+                        <div class="control-group" data-bind="css: { success: privacyImpactAssessmentUrl() !== ''}"><label class="control-label" for="privacyImpactAssessmentUrl">Where is your privacy impact assessment published?</label><div class="controls"><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="privacyImpactAssessmentUrl-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
+                                 and disclosure of information.</span><div class="requirement collapse" id="privacyImpactAssessmentUrl-requirement">
+                                 <p class="alert alert-info"><a href="#privacyImpactAssessmentUrl-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> When datasets contain personal data, a privacy impact assessment should be carried
+                                    out to identify risks of releasing the data, mitigations against those risks, and
+                                    to put in place processes that ensure that any breaches are handled effectively.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        				
+                     </div>
+                     			
+                  </div>
+               </fieldset>
+            </section>
+            <section id="practical">
+               <div class="page-header">
+                  <p class="bookmark"><a href="#practical"><i class="icon icon-bookmark icon-white"></i></a><br><a href="#legal"><i class="icon icon-chevron-up icon-white"></i></a><br><a href="#technical"><i class="icon icon-chevron-down icon-white"></i></a></p>
+                  <h1>Practical Information</h1>
+               </div>
+               <div class="control-group" data-bind="css: { success: oneOffRelease() !== '', error: oneOffRelease() === ''}"><label class="control-label">Is this a one-off release of data?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="oneOffRelease" data-bind="checked: oneOffRelease"> Yes</label><label class="radio inline"><input type="radio" value="false" name="oneOffRelease" data-bind="checked: oneOffRelease"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#oneOffRelease-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="oneOffRelease-help">Indicate if you are gaining a certificate for a release of data that is not part of
+                        a series, and there are no plans to keep the data up to date on an ongoing basis.</span></div>
+               </div>
+               <div class="control-group" data-bind="css: { success: frequencyChange() !== '', error: frequencyChange() === ''}"><label class="control-label" for="frequencyChange">Roughly how frequently does the data you capture change?</label><div class="controls"><select class="span5" id="frequencyChange" name="frequencyChange" data-bind="value: frequencyChange, valueUpdate: 'afterkeydown'" required="required">
+                        				
+                        <option value=""></option>
+                        				
+                        <option value="never">never</option>
+                        				
+                        <option value="P1S">constantly</option>
+                        				
+                        <option value="P1H">every hour</option>
+                        				
+                        <option value="P1D">every day</option>
+                        				
+                        <option value="P7D">every week</option>
+                        				
+                        <option value="P14D">every fortnight</option>
+                        				
+                        <option value="P1M">every month</option>
+                        				
+                        <option value="P3M">every 3 months</option>
+                        				
+                        <option value="P6M">every 6 months</option>
+                        				
+                        <option value="P1Y">yearly</option>
+                        				
+                        <option value="P2Y">every two years</option>
+                        				
+                        <option value="P5Y">every five years</option>
+                        				
+                        <option value="P10Y">every ten years</option>
+                        			</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#frequencyChange-help"><i class="icon-question-sign"></i></button><span class="conditional" data-bind="visible: oneOffRelease() === 'true'">
+                        				 <span class="label label-bronze" data-toggle="collapse" data-target="#frequencyChange-requirement"><i class="icon-star icon-white"></i> Bronze</span>
+                        			</span><span class="help-block collapse" id="frequencyChange-help">Select the approximate frequency with which the data changes. If the frequency of
+                        changes varies, choose the most frequent level.</span><div class="conditional" data-bind="visible: oneOffRelease() === 'true'">
+                        				
+                        <div class="requirement collapse" id="frequencyChange-requirement">
+                           <p class="alert alert-info"><a href="#frequencyChange-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> If there is no on-going release of updated datasets as the data you capture changes,
+                              the data will become innaccurate and might not be worth reusing.
+                           </p>
+                        </div>
+                        			
+                     </div>
+                  </div>
+               </div>
+               <div class="conditional" data-bind="visible: oneOffRelease() === 'false'">
+                  			
+                  <div class="control-group" data-bind="css: { success: frequency() !== ''}"><label class="control-label" for="frequency">How frequently are datasets released?</label><div class="controls"><select class="span5" id="frequency" name="frequency" data-bind="value: frequency, valueUpdate: 'afterkeydown'">
+                           					
+                           <option value=""></option>
+                           					
+                           <option value="api">immediately (API access)</option>
+                           					
+                           <option value="P1H">every hour</option>
+                           					
+                           <option value="P1D">every day</option>
+                           					
+                           <option value="P7D">every week</option>
+                           					
+                           <option value="P14D">every fortnight</option>
+                           					
+                           <option value="P1M">every month</option>
+                           					
+                           <option value="P3M">every 3 months</option>
+                           					
+                           <option value="P6M">every 6 months</option>
+                           					
+                           <option value="P1Y">yearly</option>
+                           					
+                           <option value="P2Y">every two years</option>
+                           					
+                           <option value="P5Y">every five years</option>
+                           					
+                           <option value="P10Y">every ten years</option>
+                           					
+                           <option value="">as and when</option>
+                           				</select> <span class="label label-bronze" data-toggle="collapse" data-target="#frequency-requirement"><i class="icon-star icon-white"></i> Bronze</span><div class="requirement collapse" id="frequency-requirement">
+                           <p class="alert alert-info"><a href="#frequency-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dataset should be released on a regular, predictable schedule.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  		
+               </div>
+               <div class="control-group" data-bind="css: { success: qualityControlUrl() !== ''}"><label class="control-label" for="qualityControlUrl">Where is your quality control process described?</label><div class="controls"><input type="url" class="span5" id="qualityControlUrl" name="qualityControlUrl" data-bind="value: qualityControlUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Description URL"> <span class="label label-silver" data-toggle="collapse" data-target="#qualityControlUrl-requirement"><i class="icon-star icon-white"></i> Silver</span><div class="requirement collapse" id="qualityControlUrl-requirement">
+                        <p class="alert alert-info"><a href="#qualityControlUrl-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Having a documented quality control process helps developers to understand how much
+                           to rely on the data that you make available.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: qualityControlAudited() !== ''}"><label class="control-label" for="qualityControlAudited">Where is the latest report auditing your quality control process?</label><div class="controls"><input type="url" class="span5" id="qualityControlAudited" name="qualityControlAudited" data-bind="value: qualityControlAudited, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Audit Report URL"> <span class="label label-gold" data-toggle="collapse" data-target="#qualityControlAudited-requirement"><i class="icon-star icon-white"></i> Gold</span><div class="requirement collapse" id="qualityControlAudited-requirement">
+                        <p class="alert alert-info"><a href="#qualityControlAudited-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> An audited quality control process gives developers reassurance that the quality control
+                           process that you have described is being adhered to.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: currentAvailability() !== ''}"><label class="control-label" for="currentAvailability">What is the guaranteed availability of this dataset?</label><div class="controls"><textarea class="span5" rows="3" id="currentAvailability" name="currentAvailability" data-bind="text: currentAvailability">
+</textarea><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#currentAvailability-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="currentAvailability-help">Describe the guarantees that you can give about the up-time of the servers supplying
+                        the dataset.</span></div>
+               </div>
+               <div class="control-group" data-bind="css: { success: onGoingAvailability() !== '', error: onGoingAvailability() === ''}"><label class="control-label">For how long will the dataset be available in this way?</label><div class="controls"><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="experimental">this dataset may disappear at any time</label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P1Y">this dataset will be available in this form for at least one year <span class="label label-bronze" data-toggle="collapse" data-target="#onGoingAvailabilityP1Y-requirement"><i class="icon-star icon-white"></i> Bronze</span><div class="requirement collapse" id="onGoingAvailabilityP1Y-requirement">
+                           <p class="alert alert-info"><a href="#onGoingAvailabilityP1Y-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                              available in this form for at least a year.
+                           </p>
+                        </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P2Y">this dataset will be available in this form for at least two years <span class="label label-silver" data-toggle="collapse" data-target="#onGoingAvailabilityP2Y-requirement"><i class="icon-star icon-white"></i> Silver</span><div class="requirement collapse" id="onGoingAvailabilityP2Y-requirement">
+                           <p class="alert alert-info"><a href="#onGoingAvailabilityP2Y-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                              available in this form for at least two years.
+                           </p>
+                        </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P3Y">this dataset will be available in this form for at least three years <span class="label label-gold" data-toggle="collapse" data-target="#onGoingAvailabilityP3Y-requirement"><i class="icon-star icon-white"></i> Gold</span><div class="requirement collapse" id="onGoingAvailabilityP3Y-requirement">
+                           <p class="alert alert-info"><a href="#onGoingAvailabilityP3Y-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                              available in this form for at least three years.
+                           </p>
+                        </div></label></div>
+               </div>
+            </section>
+            <section id="technical">
+               <div class="page-header">
+                  <p class="bookmark"><a href="#technical"><i class="icon icon-bookmark icon-white"></i></a><br><a href="#practical"><i class="icon icon-chevron-up icon-white"></i></a><br><a href="#social"><i class="icon icon-chevron-down icon-white"></i></a></p>
+                  <h1>Technical Information</h1>
+               </div>
+               <div class="conditional" data-bind="visible: oneOffRelease() === 'true'">
+                  			
+                  <div class="control-group" data-bind="css: { success: datasetUrl() !== ''}"><label class="control-label" for="datasetUrl">What's the URL of the dataset?</label><div class="controls"><input type="url" class="span5" id="datasetUrl" name="datasetUrl" data-bind="value: datasetUrl, valueUpdate: 'afterkeydown'" placeholder="Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#datasetUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#datasetUrl-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="conditional" data-bind="visible: documentationUrl() === ''">
+                           					
+                           				</span><span class="help-block collapse" id="datasetUrl-help">Enter the URL of the dataset itself (for example a CSV file), not a page describing
+                           the dataset.</span><div class="requirement collapse" id="datasetUrl-requirement">
+                           <p class="alert alert-info"><a href="#datasetUrl-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a URL that is a direct link to the data itself.
+                           </p>
+                        </div>
+                        <div class="conditional" data-bind="visible: documentationUrl() === ''">
+                           					
+                           <div class="conditional" data-bind="visible: !(datasetUrl() === '')">
+                              <div class="requirement">
+                                 <p class="alert alert-error">You must provide either a URL for the dataset or a URL for documentation about it.</p>
+                              </div>
+                           </div>
+                           				
+                        </div>
+                     </div>
+                  </div>
+                  		
+               </div>
+               <div class="conditional" data-bind="visible: oneOffRelease() === 'false'">
+                  			
+                  <div class="conditional" data-bind="visible: frequency() === 'api'">
+                     				
+                     <div class="control-group" data-bind="css: { success: endpointUrl() !== ''}"><label class="control-label" for="endpointUrl">What's the endpoint for the API?</label><div class="controls"><input type="url" class="span5" id="endpointUrl" name="endpointUrl" data-bind="value: endpointUrl, valueUpdate: 'afterkeydown'" placeholder="Endpoint URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#endpointUrl-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="endpointUrl-help">Enter the endpoint of the API. If the API supports it, this should be a service description
+                              document.</span></div>
+                     </div>
+                     				
+                     <div class="control-group" data-bind="css: { success: provideDumps() !== '', error: provideDumps() === ''}"><label class="control-label">Do you also provide dumps of the dataset?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="provideDumps" data-bind="checked: provideDumps"> Yes</label><label class="radio inline"><input type="radio" value="false" name="provideDumps" data-bind="checked: provideDumps"> No</label><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#provideDumps-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#provideDumps-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="provideDumps-help">A dump is an extract of the data into a static file that developers can download to
+                              get hold of the whole dataset.</span><div class="requirement collapse" id="provideDumps-requirement">
+                              <p class="alert alert-info"><a href="#provideDumps-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Dumps of the dataset should be made available to enable developers to download the
+                                 entire dataset.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     				
+                     <div class="conditional" data-bind="visible: provideDumps() === 'true'">
+                        					
+                        <div class="control-group" data-bind="css: { success: dumpFrequency() !== ''}"><label class="control-label" for="dumpFrequency">How frequently are dumps created?</label><div class="controls"><select class="span5" id="dumpFrequency" name="dumpFrequency" data-bind="value: dumpFrequency, valueUpdate: 'afterkeydown'">
+                                 							
+                                 <option value=""></option>
+                                 							
+                                 <option value="api">immediately (API access)</option>
+                                 							
+                                 <option value="P1H">every hour</option>
+                                 							
+                                 <option value="P1D">every day</option>
+                                 							
+                                 <option value="P7D">every week</option>
+                                 							
+                                 <option value="P14D">every fortnight</option>
+                                 							
+                                 <option value="P1M">every month</option>
+                                 							
+                                 <option value="P3M">every 3 months</option>
+                                 							
+                                 <option value="P6M">every 6 months</option>
+                                 							
+                                 <option value="P1Y">yearly</option>
+                                 							
+                                 <option value="">as and when</option>
+                                 						</select><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dumpFrequency-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#dumpFrequency-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="dumpFrequency-help">Indicate how frequently dumps are created from the database.</span><div class="requirement collapse" id="dumpFrequency-requirement">
+                                 <p class="alert alert-info"><a href="#dumpFrequency-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dumps should be created on a regular, predictable schedule.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        					
+                        <div class="control-group" data-bind="css: { success: dumpVersionsTemplateUrl() !== ''}"><label class="control-label" for="dumpVersionsTemplateUrl">What's the URL template for the dumps?</label><div class="controls"><input type="url" class="span5" id="dumpVersionsTemplateUrl" name="dumpVersionsTemplateUrl" data-bind="value: dumpVersionsTemplateUrl, valueUpdate: 'afterkeydown'" placeholder="Dump Template URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dumpVersionsTemplateUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#dumpVersionsTemplateUrl-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="dumpVersionsTemplateUrl-help">Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></span><div class="requirement collapse" id="dumpVersionsTemplateUrl-requirement">
+                                 <p class="alert alert-info"><a href="#dumpVersionsTemplateUrl-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different dumps of the dataset should follow a regular structure.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        					
+                        <div class="control-group" data-bind="css: { success: currentDumpUrl() !== ''}"><label class="control-label" for="currentDumpUrl">What's the URL of the current dump?</label><div class="controls"><input type="url" class="span5" id="currentDumpUrl" name="currentDumpUrl" data-bind="value: currentDumpUrl, valueUpdate: 'afterkeydown'" placeholder="Current Dump URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#currentDumpUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#currentDumpUrl-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="currentDumpUrl-help">Enter the URL of the current dump of the dataset itself (for example a CSV file).
+                                 The content at this URL should change each time a new dump is created.</span><div class="requirement collapse" id="currentDumpUrl-requirement">
+                                 <p class="alert alert-info"><a href="#currentDumpUrl-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current dump
+                                    of the dataset.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        					
+                        <div class="control-group" data-bind="css: { success: dumpListUrl() !== ''}"><label class="control-label" for="dumpListUrl">What's the URL that gives a list of dumps?</label><div class="controls"><input type="url" class="span5" id="dumpListUrl" name="dumpListUrl" data-bind="value: dumpListUrl, valueUpdate: 'afterkeydown'" placeholder="Dump List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dumpListUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#dumpListUrl-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="dumpListUrl-help">Enter the URL of a page or feed that provides a machine-readable list of the available
+                                 dumps of the dataset.</span><div class="requirement collapse" id="dumpListUrl-requirement">
+                                 <p class="alert alert-info"><a href="#dumpListUrl-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available dumps
+                                    of the dataset.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        				
+                     </div>
+                     			
+                  </div>
+                  			
+                  <div class="conditional" data-bind="visible: frequency() !== 'api'">
+                     				
+                     <div class="control-group" data-bind="css: { success: versionsTemplateUrl() !== ''}"><label class="control-label" for="versionsTemplateUrl">What's the URL template for the versions?</label><div class="controls"><input type="url" class="span5" id="versionsTemplateUrl" name="versionsTemplateUrl" data-bind="value: versionsTemplateUrl, valueUpdate: 'afterkeydown'" placeholder="Version Template URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#versionsTemplateUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#versionsTemplateUrl-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="versionsTemplateUrl-help">Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></span><div class="requirement collapse" id="versionsTemplateUrl-requirement">
+                              <p class="alert alert-info"><a href="#versionsTemplateUrl-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different versions of the dataset should follow a regular structure.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     				
+                     <div class="control-group" data-bind="css: { success: currentDatasetUrl() !== ''}"><label class="control-label" for="currentDatasetUrl">What's the URL of the current version?</label><div class="controls"><input type="url" class="span5" id="currentDatasetUrl" name="currentDatasetUrl" data-bind="value: currentDatasetUrl, valueUpdate: 'afterkeydown'" placeholder="Current Dataset URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#currentDatasetUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#currentDatasetUrl-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="currentDatasetUrl-help">Enter the URL of the current version of the dataset itself (for example a CSV file).
+                              The content at this URL should change each time a new version is released. This should
+                              not be a page describing the dataset.</span><div class="requirement collapse" id="currentDatasetUrl-requirement">
+                              <p class="alert alert-info"><a href="#currentDatasetUrl-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current version
+                                 of the dataset.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     				
+                     <div class="control-group" data-bind="css: { success: versionsUrl() !== ''}"><label class="control-label" for="versionsUrl">What's the URL that gives a list of versions?</label><div class="controls"><input type="url" class="span5" id="versionsUrl" name="versionsUrl" data-bind="value: versionsUrl, valueUpdate: 'afterkeydown'" placeholder="Version List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#versionsUrl-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#versionsUrl-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="versionsUrl-help">Enter the URL of a page or feed that provides a machine-readable list of the previous
+                              versions of the dataset.</span><div class="requirement collapse" id="versionsUrl-requirement">
+                              <p class="alert alert-info"><a href="#versionsUrl-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available versions
+                                 of the dataset.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     			
+                  </div>
+                  			
+                  <div class="control-group" data-bind="css: { success: changeFeed() !== ''}"><label class="control-label" for="changeFeed">What's the URL that provides a feed of changes?</label><div class="controls"><input type="url" class="span5" id="changeFeed" name="changeFeed" data-bind="value: changeFeed, valueUpdate: 'afterkeydown'" placeholder="Change Feed URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#changeFeed-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#changeFeed-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="changeFeed-help">Enter the URL of a page or feed that provides a machine-readable list of the individual
+                           changes as they occur within the dataset, between dumps or versions of the dataset
+                           being created.</span><div class="requirement collapse" id="changeFeed-requirement">
+                           <p class="alert alert-info"><a href="#changeFeed-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a mechanism for developers to keep their downloaded datasets up to
+                              date without downloading each new dump or version of the dataset each time.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  		
+               </div>
+               <div class="control-group" data-bind="css: { success: dataType() !== '', error: dataType() === ''}"><label class="control-label">What kind of data are you publishing?</label><div class="controls"><label class="radio"><input type="radio" name="dataType" data-bind="checked: dataType" value="documents">human-readable documents</label><label class="radio"><input type="radio" name="dataType" data-bind="checked: dataType" value="statistical">statistical data, such as counts, averages and percentages</label><label class="radio"><input type="radio" name="dataType" data-bind="checked: dataType" value="geographic">geographic information, such as points and boundaries</label><label class="radio"><input type="radio" name="dataType" data-bind="checked: dataType" value="structured">other kinds of structured data</label></div>
+               </div>
+               <div class="control-group" data-bind="css: { success: format() !== '', error: format() === ''}"><label class="control-label">What formats are you using to publish the data?</label><div class="controls"><label class="radio"><input type="radio" name="format" data-bind="checked: format" value="standard">machine-readable formats specified in a suitable open standard<span class="conditional" data-bind="visible: dataType() !== ''"> (eg
+                              						<span class="conditional" data-bind="visible: dataType() === 'documents'">XML, plain text, Markdown, OOXML, PDF</span><span class="conditional" data-bind="visible: dataType() === 'statistical'">SDMX, CSV</span><span class="conditional" data-bind="visible: dataType() === 'geographic'">KML</span><span class="conditional" data-bind="visible: dataType() === 'structured'">JSON, XML, Turtle, CSV</span>)</span></label><label class="radio"><input type="radio" name="format" data-bind="checked: format" value="proprietary">non-machine-readable, unsuitable, or proprietary formats<span class="conditional" data-bind="visible: dataType() !== ''"> (eg
+                              						<span class="conditional" data-bind="visible: dataType() === 'documents'">Word, Powerpoint, Pages</span><span class="conditional" data-bind="visible: dataType() === 'statistical'">Excel, PDF</span><span class="conditional" data-bind="visible: dataType() === 'geographic'">..., PDF</span><span class="conditional" data-bind="visible: dataType() === 'structured'">Word, Excel, PDF</span>)</span></label></div>
+               </div>
+               <div class="control-group" data-bind="css: { success: identifiers() !== '', error: identifiers() === ''}"><label class="control-label">Are you using URIs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers"> Yes</label><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers"> No</label> <span class="label label-silver" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Silver</span><div class="requirement collapse" id="identifiers-requirement">
+                        <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Use URIs to identify things in the data, so that they can be easily reference.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="conditional" data-bind="visible: identifiers() === 'true'">
+                  			
+                  <div class="control-group" data-bind="css: { success: resolvingUris() !== '', error: resolvingUris() === ''}"><label class="control-label">Do the URIs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="resolvingUris" data-bind="checked: resolvingUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="resolvingUris" data-bind="checked: resolvingUris"> No</label> <span class="label label-gold" data-toggle="collapse" data-target="#resolvingUris-requirement"><i class="icon-star icon-white"></i> Gold</span><div class="requirement collapse" id="resolvingUris-requirement">
+                           <p class="alert alert-info"><a href="#resolvingUris-requirement"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Identifiers that you use within your dataset should resolve to provide information
+                              about the things being identified.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  			
+                  <div class="control-group" data-bind="css: { success: externalUris() !== '', error: externalUris() === ''}"><label class="control-label">Does the dataset include URIs outside your control?</label><div class="controls"><label class="radio"><input type="radio" name="externalUris" data-bind="checked: externalUris" value="yes">yes</label><label class="radio"><input type="radio" name="externalUris" data-bind="checked: externalUris" value="na">no, because it's not appropriate for this dataset</label><label class="radio"><input type="radio" name="externalUris" data-bind="checked: externalUris" value="dont-exist">no, because the URIs you would point to don't exist</label><label class="radio"><input type="radio" name="externalUris" data-bind="checked: externalUris" value="dont-trust">no, because the information at suitable URIs isn't reliable</label><label class="radio"><input type="radio" name="externalUris" data-bind="checked: externalUris" value="no">no</label></div>
+                  </div>
+                  		
+               </div>
+            </section>
+            <section id="social">
+               <div class="page-header">
+                  <p class="bookmark"><a href="#social"><i class="icon icon-bookmark icon-white"></i></a><br><a href="#technical"><i class="icon icon-chevron-up icon-white"></i></a><br><a href="#"><i class="icon icon-chevron-down icon-white"></i></a></p>
+                  <h1>Social Information</h1>
+               </div>
+               <div class="control-group" data-bind="css: { success: contactEmail() !== ''}"><label class="control-label" for="contactEmail">What's the contact email address about this dataset?</label><div class="controls"><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" placeholder="Contact Email Address"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button> <span class="label label-bronze" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Bronze</span><span class="help-block collapse" id="contactEmail-help">Provide an email address that people can contact with queries about the dataset.</span><div class="requirement collapse" id="contactEmail-requirement">
+                        <p class="alert alert-info"><a href="#contactEmail-requirement"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a contact email address so that people can get back in touch with
+                           you about any problems with the dataset.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: forum() !== ''}"><label class="control-label" for="forum">Where do you recommend people discuss this dataset?</label><div class="controls"><input type="url" class="span5" id="forum" name="forum" data-bind="value: forum, valueUpdate: 'afterkeydown'" placeholder="Forum or Mailing List URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#forum-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#forum-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="forum-help">Provide a URL for the forum or mailing list where developers using this dataset should
+                        discuss it.</span><div class="requirement collapse" id="forum-requirement">
+                        <p class="alert alert-info"><a href="#forum-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should indicate where people using this dataset should discuss the data and how
+                           they are using it.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: contributions() !== ''}"><label class="control-label" for="contributions">Where do you describe how people should contribute?</label><div class="controls"><input type="url" class="span5" id="contributions" name="contributions" data-bind="value: contributions, valueUpdate: 'afterkeydown'" placeholder="Contributor Instructions URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#contributions-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#contributions-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="contributions-help">Provide a link to a page that describes how people can contribute to the dataset,
+                        for example by correcting errors that they find or providing additional information.</span><div class="requirement collapse" id="contributions-requirement">
+                        <p class="alert alert-info"><a href="#contributions-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should provide instructions for people who want to contribute towards correcting
+                           or extending the dataset.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="control-group" data-bind="css: { success: libraries() !== ''}"><label class="control-label" for="libraries">Where do you list tools for working with the data?</label><div class="controls"><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button> <span class="label label-silver" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Silver</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
+                        working with the data.</span><div class="requirement collapse" id="libraries-requirement">
+                        <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should provide a list of software libraries and other tools that help developers
+                           who want to work with the data. These can be created by you or by other members of
+                           the community.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </section>
          </form>
-         <div id="certificate-container" class="well">
+         <section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
             <div id="certificate">
-               <h1><span class="placeholder" data-field="certificate-level"></span> Open Data Certificate
+               <h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate
                </h1>
                		
                <p>
-                  			<span class="placeholder" data-field="dataset-title" data-placeholder="This dataset">This dataset</span> has been certified as <span class="placeholder" data-field="certificate-level" data-placeholder=""></span> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
+                  			<span class="placeholder" data-bind="text: datasetTitle" data-placeholder="This dataset">This dataset</span> has been certified as <span class="placeholder" data-bind="text: certificateLevelLabel" data-placeholder=""></span> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
                   		
                </p>
-               		
-               <div class="conditional" data-field="dataset-release-type" data-if-equals="single">
-                  			
-                  <div class="conditional" data-field="dataset-url" data-not-equals="">
-                     				
-                     <p>
-                        					<span class="placeholder" data-field="dataset-title" data-placeholder="This dataset">This dataset</span> can be downloaded from <span class="placeholder placeholder-url" data-field="dataset-url" data-placeholder=""></span>.
-                        					
-                        <div class="conditional" data-field="documentation-url" data-not-equals="">
-                           						Documentation about its contents can be found at <span class="placeholder placeholder-url" data-field="documentation-url" data-placeholder=""></span>.
-                           					
-                        </div>
-                        				
-                     </p>
-                     			
-                  </div>
-                  		
-               </div>
                	
             </div>
-            <p><a id="download-certificate" href="#" target="_new" class="btn btn-primary">Download Certificate</a></p>
-         </div>
-         <div id="improvements">
+         </section>
+         <section id="improvements" data-bind="visible: certificateLevel() !== 'none' &amp;&amp; certificateLevel() !== 'gold'">
             <div class="page-header">
                <h1>Improving Your Open Data</h1>
             </div>
             <p class="lead">
-               	          You can improve the way you are publishing open data to make it more useful.
-               	        
+               					You can improve the way you are publishing open data to make it more useful.
+               				
             </p>
-            <ul id="improvements-bronze" class="unstyled"></ul>
-            <ul id="improvements-silver" class="unstyled"></ul>
-            <ul id="improvements-gold" class="unstyled"></ul>
+            <div id="improvements-bronze" class="unstyled">
+               <div data-bind="visible: documentationUrl() === ''">
+                  <p><a href="#documentationUrl"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a page that provides documentation about your dataset.
+                  </p>
+               </div>
+               <div data-bind="visible: ownership() === 'mixed'">
+                  <div data-bind="foreach: owners">
+                     <div data-bind="visible: additionalOwnerData() === ''">
+                        <p><a href="#additionalOwnerData"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should supply information about which parts of the dataset are owned by the other
+                           organisation.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div data-bind="visible: dataPersonal() !== ''">
+                  <div data-bind="visible: dataPersonal() === 'individual'">
+                     <div data-bind="visible: personalDataConsent() === ''">
+                        <p><a href="#personalDataConsent"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> To comply with data protection laws, data has to be used consistently with how individuals
+                           were told the data would be used. You should inform potential reusers about what that
+                           entails.
+                        </p>
+                     </div>
+                  </div>
+                  <div data-bind="visible: dataPersonal() !== 'not-personal'">
+                     <div data-bind="visible: personalDataAnonymisation() === ''">
+                        <p><a href="#personalDataAnonymisation"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Both personal data and aggregate data should be anonymised to ensure that the likelihood
+                           of discovering information about an individual is minimised.
+                        </p>
+                     </div>
+                     <div data-bind="visible: privacyImpactAssessmentUrl() === ''">
+                        <p><a href="#privacyImpactAssessmentUrl"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> When datasets contain personal data, a privacy impact assessment should be carried
+                           out to identify risks of releasing the data, mitigations against those risks, and
+                           to put in place processes that ensure that any breaches are handled effectively.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div data-bind="visible: oneOffRelease() === 'true'">
+                  <div data-bind="visible: !(frequencyChange() === 'never')">
+                     <p><a href="#frequencyChange"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> If there is no on-going release of updated datasets as the data you capture changes,
+                        the data will become innaccurate and might not be worth reusing.
+                     </p>
+                  </div>
+               </div>
+               <div data-bind="visible: oneOffRelease() === 'false'">
+                  <div data-bind="visible: frequency() === ''">
+                     <p><a href="#frequency"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dataset should be released on a regular, predictable schedule.
+                     </p>
+                  </div>
+               </div>
+               <div data-bind="visible: onGoingAvailability() !== 'P1Y' &amp;&amp; onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
+                  <p><a href="#onGoingAvailability"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                     available in this form for at least a year.
+                  </p>
+               </div>
+               <div data-bind="visible: oneOffRelease() === 'true'">
+                  <div data-bind="visible: datasetUrl() === ''">
+                     <p><a href="#datasetUrl"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a URL that is a direct link to the data itself.
+                     </p>
+                  </div>
+               </div>
+               <div data-bind="visible: oneOffRelease() === 'false'">
+                  <div data-bind="visible: frequency() === 'api'">
+                     <div data-bind="visible: provideDumps() === ''">
+                        <p><a href="#provideDumps"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> Dumps of the dataset should be made available to enable developers to download the
+                           entire dataset.
+                        </p>
+                     </div>
+                     <div data-bind="visible: provideDumps() === 'true'">
+                        <div data-bind="visible: dumpFrequency() === ''">
+                           <p><a href="#dumpFrequency"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The dumps should be created on a regular, predictable schedule.
+                           </p>
+                        </div>
+                        <div data-bind="visible: dumpVersionsTemplateUrl() === ''">
+                           <p><a href="#dumpVersionsTemplateUrl"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different dumps of the dataset should follow a regular structure.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div data-bind="visible: frequency() !== 'api'">
+                     <div data-bind="visible: versionsTemplateUrl() === ''">
+                        <p><a href="#versionsTemplateUrl"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> The URLs for different versions of the dataset should follow a regular structure.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div data-bind="visible: contactEmail() === ''">
+                  <p><a href="#contactEmail"><span class="label label-bronze"><i class="icon-star icon-white"></i>Bronze</span></a> You should have a contact email address so that people can get back in touch with
+                     you about any problems with the dataset.
+                  </p>
+               </div>
+            </div>
+            <div id="improvements-silver" class="unstyled">
+               <div data-bind="visible: qualityControlUrl() === ''">
+                  <p><a href="#qualityControlUrl"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Having a documented quality control process helps developers to understand how much
+                     to rely on the data that you make available.
+                  </p>
+               </div>
+               <div data-bind="visible: onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
+                  <p><a href="#onGoingAvailability"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                     available in this form for at least two years.
+                  </p>
+               </div>
+               <div data-bind="visible: oneOffRelease() === 'false'">
+                  <div data-bind="visible: frequency() === 'api'">
+                     <div data-bind="visible: provideDumps() === 'true'">
+                        <div data-bind="visible: currentDumpUrl() === ''">
+                           <p><a href="#currentDumpUrl"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current dump
+                              of the dataset.
+                           </p>
+                        </div>
+                        <div data-bind="visible: dumpListUrl() === ''">
+                           <p><a href="#dumpListUrl"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available dumps
+                              of the dataset.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div data-bind="visible: frequency() !== 'api'">
+                     <div data-bind="visible: currentDatasetUrl() === ''">
+                        <p><a href="#currentDatasetUrl"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a single URL that can always be used to download the current version
+                           of the dataset.
+                        </p>
+                     </div>
+                     <div data-bind="visible: versionsUrl() === ''">
+                        <p><a href="#versionsUrl"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a document or feed that provides a list of all the available versions
+                           of the dataset.
+                        </p>
+                     </div>
+                  </div>
+                  <div data-bind="visible: changeFeed() === ''">
+                     <p><a href="#changeFeed"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> There should be a mechanism for developers to keep their downloaded datasets up to
+                        date without downloading each new dump or version of the dataset each time.
+                     </p>
+                  </div>
+               </div>
+               <div data-bind="visible: identifiers() === ''">
+                  <p><a href="#identifiers"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> Use URIs to identify things in the data, so that they can be easily reference.
+                  </p>
+               </div>
+               <div data-bind="visible: forum() === ''">
+                  <p><a href="#forum"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should indicate where people using this dataset should discuss the data and how
+                     they are using it.
+                  </p>
+               </div>
+               <div data-bind="visible: contributions() === ''">
+                  <p><a href="#contributions"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should provide instructions for people who want to contribute towards correcting
+                     or extending the dataset.
+                  </p>
+               </div>
+               <div data-bind="visible: libraries() === ''">
+                  <p><a href="#libraries"><span class="label label-silver"><i class="icon-star icon-white"></i>Silver</span></a> You should provide a list of software libraries and other tools that help developers
+                     who want to work with the data. These can be created by you or by other members of
+                     the community.
+                  </p>
+               </div>
+            </div>
+            <div id="improvements-gold" class="unstyled">
+               <div data-bind="visible: qualityControlAudited() === ''">
+                  <p><a href="#qualityControlAudited"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> An audited quality control process gives developers reassurance that the quality control
+                     process that you have described is being adhered to.
+                  </p>
+               </div>
+               <div data-bind="visible: onGoingAvailability() !== 'P3Y'">
+                  <p><a href="#onGoingAvailability"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                     available in this form for at least three years.
+                  </p>
+               </div>
+               <div data-bind="visible: identifiers() === 'true'">
+                  <div data-bind="visible: resolvingUris() === ''">
+                     <p><a href="#resolvingUris"><span class="label label-gold"><i class="icon-star icon-white"></i>Gold</span></a> Identifiers that you use within your dataset should resolve to provide information
+                        about the things being identified.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </div>
+      <footer id="footer">
+         <div class="container">
+            <nav>
+               <ul>
+                  <li><a href="/privacy-policy">Privacy Policy</a></li>
+                  <li><a href="/terms-of-use">Terms of Use</a></li>
+                  <li><a href="/cookie-policy">Cookie Policy</a></li>
+                  <li><a href="/feedback">Feedback</a></li>
+               </ul>
+            </nav>
+            <p><a rel="license" href="http://creativecommons.org/licenses/by/2.0/uk/deed.en_GB"><img style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/uk/80x15.png" alt="Creative Commons Licence"></a> <a href="http://www.theodi.org">Open Data Institute</a> · 
+               	  				<a href="http://www.openstreetmap.org/?lat=51.522205&amp;lon=-0.08176500000001852&amp;zoom=16&amp;layers=T&amp;mlat=51.52210&amp;mlon=-0.08343">65 Clifton Street, London EC2A 4JE</a> · 
+               	  				<a href="mailto:info@theodi.org">info@theodi.org</a> · 
+               	  				Company <a href="http://opencorporates.com/companies/gb/08030289">08030289</a> · 
+               	  				VAT 143 7796 80
+               	  			
+            </p>
          </div>
-      </div><script src="js/jquery-latest.js"></script><script src="js/bootstrap.min.js"></script><script src="js/certificate.js"></script></body>
+      </footer><script src="js/jquery-latest.js"></script><script src="js/bootstrap.min.js"></script><script src="js/knockout-2.2.1.js"></script><script type="text/javascript">
+	  		var certificateViewModel = function () {
+		  			var certificate = this;
+			  		certificate.documentationUrl = ko.observable('');
+certificate.datasetTitle = ko.observable('');
+certificate.publisher = ko.observable('');
+certificate.publisherUrl = ko.observable('');
+certificate.publisherUkGovernment = ko.observable('');
+certificate.publisherOpsiExemption = ko.observable('');
+certificate.contentLicence = ko.observable('');
+certificate.dataLicence = ko.observable('');
+certificate.ownership = ko.observable('');
+var ownersViewModel = function () {
+var owners = this;
+owners.derivedFromDataset = ko.observable('');
+owners.derivedFromDatasetCertificateUrl = ko.observable('');
+owners.additionalOwner = ko.observable('');
+owners.additionalOwnerUrl = ko.observable('');
+owners.additionalOwnerData = ko.observable('');
+owners.additionalOwnerPermission = ko.observable('');
+};
+certificate.owners = ko.observableArray([new ownersViewModel()]);
+certificate.ownersAdd = function () {
+var owners = new ownersViewModel();
+certificate.owners.push(owners);
+};
+certificate.ownersRemove = function (owners) {
+certificate.owners.remove(owners);
+};
+certificate.dataPersonal = ko.observable('');
+certificate.personalDataConsent = ko.observable('');
+certificate.personalDataAnonymisation = ko.observable('');
+certificate.privacyImpactAssessmentUrl = ko.observable('');
+certificate.oneOffRelease = ko.observable('');
+certificate.frequencyChange = ko.observable('');
+certificate.frequency = ko.observable('');
+certificate.qualityControlUrl = ko.observable('');
+certificate.qualityControlAudited = ko.observable('');
+certificate.currentAvailability = ko.observable('');
+certificate.onGoingAvailability = ko.observable('');
+certificate.datasetUrl = ko.observable('');
+certificate.endpointUrl = ko.observable('');
+certificate.provideDumps = ko.observable('');
+certificate.dumpFrequency = ko.observable('');
+certificate.dumpVersionsTemplateUrl = ko.observable('');
+certificate.currentDumpUrl = ko.observable('');
+certificate.dumpListUrl = ko.observable('');
+certificate.versionsTemplateUrl = ko.observable('');
+certificate.currentDatasetUrl = ko.observable('');
+certificate.versionsUrl = ko.observable('');
+certificate.changeFeed = ko.observable('');
+certificate.dataType = ko.observable('');
+certificate.format = ko.observable('');
+certificate.identifiers = ko.observable('');
+certificate.resolvingUris = ko.observable('');
+certificate.externalUris = ko.observable('');
+certificate.contactEmail = ko.observable('');
+certificate.forum = ko.observable('');
+certificate.contributions = ko.observable('');
+certificate.libraries = ko.observable('');
+
+		  			certificate.certificateLevel = ko.computed(function () {
+		  				var unmetRequirements = {
+		  						basic: 0,
+		  						bronze: 0,
+		  						silver: 0,
+		  						gold: 0
+		  					}
+		  				;
+		  				if (certificate.documentationUrl() === '') unmetRequirements['bronze']++; 
+
+	if (certificate.datasetTitle() === '') unmetRequirements['basic']++;
+
+	if (certificate.publisher() === '') unmetRequirements['basic']++;
+
+	if (certificate.publisherUkGovernment() === 'true') {
+
+}
+
+	if (certificate.contentLicence() === '') unmetRequirements['basic']++;
+
+	if (certificate.dataLicence() === '') unmetRequirements['basic']++;
+if (!(certificate.ownership() !== 'unknown')) unmetRequirements['basic']++; 
+
+	if (certificate.ownership() === 'mixed') {
+$(certificate.owners()).each(function () {var owners = this;
+	if (owners.derivedFromDataset() === 'true') {
+
+}
+
+	if (owners.additionalOwner() === '') unmetRequirements['basic']++;
+if (owners.additionalOwnerData() === '') unmetRequirements['bronze']++; 
+if (!(owners.additionalOwnerPermission() !== 'closed')) unmetRequirements['basic']++; 
+});
+}
+
+	if (certificate.dataPersonal() !== '') {
+
+	if (certificate.dataPersonal() === 'individual') {
+if (certificate.personalDataConsent() === '') unmetRequirements['bronze']++; 
+
+}
+
+	if (certificate.dataPersonal() !== 'not-personal') {
+if (certificate.personalDataAnonymisation() === '') unmetRequirements['bronze']++; 
+if (certificate.privacyImpactAssessmentUrl() === '') unmetRequirements['bronze']++; 
+
+}
+
+}
+
+	if (certificate.frequencyChange() === '') unmetRequirements['basic']++;
+
+	if (certificate.oneOffRelease() === 'false') {
+if (certificate.frequency() === '') unmetRequirements['bronze']++; 
+
+}
+if (certificate.qualityControlUrl() === '') unmetRequirements['silver']++; 
+if (certificate.qualityControlAudited() === '') unmetRequirements['gold']++; 
+if (certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['basic']++;
+	if (certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['bronze']++;
+	if (certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['silver']++;
+	if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['gold']++;
+	
+	if (certificate.oneOffRelease() === 'true') {
+if (certificate.datasetUrl() === '') unmetRequirements['bronze']++; 
+
+	if (certificate.documentationUrl() === '') {
+if (!(certificate.datasetUrl() === '')) unmetRequirements['basic']++; 
+
+}
+
+}
+
+	if (certificate.oneOffRelease() === 'false') {
+
+	if (certificate.frequency() === 'api') {
+if (certificate.provideDumps() === '') unmetRequirements['bronze']++; 
+
+	if (certificate.provideDumps() === 'true') {
+if (certificate.dumpFrequency() === '') unmetRequirements['bronze']++; 
+if (certificate.dumpVersionsTemplateUrl() === '') unmetRequirements['bronze']++; 
+if (certificate.currentDumpUrl() === '') unmetRequirements['silver']++; 
+if (certificate.dumpListUrl() === '') unmetRequirements['silver']++; 
+
+}
+
+}
+
+	if (certificate.frequency() !== 'api') {
+if (certificate.versionsTemplateUrl() === '') unmetRequirements['bronze']++; 
+if (certificate.currentDatasetUrl() === '') unmetRequirements['silver']++; 
+if (certificate.versionsUrl() === '') unmetRequirements['silver']++; 
+
+}
+if (certificate.changeFeed() === '') unmetRequirements['silver']++; 
+
+}
+
+	if (certificate.dataType() !== '') {
+
+	if (certificate.dataType() === 'documents') {
+
+}
+
+	if (certificate.dataType() === 'statistical') {
+
+}
+
+	if (certificate.dataType() === 'geographic') {
+
+}
+
+	if (certificate.dataType() === 'structured') {
+
+}
+
+}
+
+	if (certificate.dataType() !== '') {
+
+	if (certificate.dataType() === 'documents') {
+
+}
+
+	if (certificate.dataType() === 'statistical') {
+
+}
+
+	if (certificate.dataType() === 'geographic') {
+
+}
+
+	if (certificate.dataType() === 'structured') {
+
+}
+
+}
+if (certificate.identifiers() === '') unmetRequirements['silver']++; 
+
+	if (certificate.identifiers() === 'true') {
+if (certificate.resolvingUris() === '') unmetRequirements['gold']++; 
+
+}
+if (certificate.contactEmail() === '') unmetRequirements['bronze']++; 
+if (certificate.forum() === '') unmetRequirements['silver']++; 
+if (certificate.contributions() === '') unmetRequirements['silver']++; 
+if (certificate.libraries() === '') unmetRequirements['silver']++; 
+
+		  				if (unmetRequirements.basic > 0) {
+		  					return 'none';
+		  				} else if (unmetRequirements.bronze > 0) {
+		  					return 'basic';
+		  				} else if (unmetRequirements.silver > 0) {
+		  					return 'bronze';
+		  				} else if (unmetRequirements.gold > 0) {
+		  					return 'silver';
+		  				} else {
+		  					return 'gold';
+		  				}
+		  			}, certificate);
+		  			certificate.certificateLevelLabel = ko.computed(function () {
+		  				var level = this.certificateLevel()
+		  				;
+		  				if (level === 'none' || level === 'basic') {
+		  					return '';
+		  				} else {
+		  					return level.substring(0, 1).toUpperCase() + level.substring(1);
+		  				}
+		  			}, certificate);
+		  		}
+		  	,   certificate = new certificateViewModel()
+	  		;
+	  		
+	  		ko.applyBindings(certificate);
+	  	</script></body>
 </html>
