@@ -315,7 +315,7 @@
 
 <xsl:template match="*" mode="dataBind" priority="10">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<xsl:variable name="valueType" as="xs:string" select="if (self::textarea) then 'text' else if (self::yesno or self::radioset) then 'checked' else 'value'" />
+	<xsl:variable name="valueType" as="xs:string" select="if (self::yesno or self::radioset) then 'checked' else 'value'" />
 	<xsl:variable name="bind">
 		<xsl:value-of select="$valueType" />: <xsl:value-of select="$id" />
 		<xsl:if test="$valueType = 'value'">
