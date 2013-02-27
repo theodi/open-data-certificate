@@ -53,18 +53,15 @@
 	  			<nav>
 	  				<div id="mainnav" class="navbar navbar-inverse">
 	  					<div class="navbar-inner">
+	  						<a class="brand" href="#">Open Data Certificate</a>
 	  						<ul class="nav">
-	  							<a class="brand" href="#">Certificate</a>
-	  							<xsl:for-each select="group">
-	  								<li>
-	  									<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
-	  									<a href="#{@id}"><xsl:value-of select="replace(label, ' Information$', '')" /></a>
-	  								</li>
-	  							</xsl:for-each>
+	  							<li class="active"><a href="#questionnaire">Questionnaire</a></li>
 	  							<li class="divider-vertical"></li>
 	  							<li><a href="#certificate">Certificate</a></li>
 	  							<li class="divider-vertical"></li>
 	  							<li><a href="#improvements">Improvements</a></li>
+	  							<li class="divider-vertical"></li>
+	  							<li><a href="index.html">About</a></li>
 	  						</ul>
 	  					</div>
 	  				</div>
@@ -72,6 +69,18 @@
 	  		</div>
 	  	</header>
 	  	<div class="container">
+	  		<div id="secondarynav" class="navbar">
+	  			<div class="navbar-inner">
+	  				<ul class="nav nav-pills">
+	  					<xsl:for-each select="group">
+	  						<li>
+	  							<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
+	  							<a href="#{@id}"><xsl:value-of select="replace(label, ' Information$', '')" /></a>
+	  						</li>
+	  					</xsl:for-each>
+	  				</ul>
+	  			</div>
+	  		</div>
 	  		<section>
 	  			<p class="lead">All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.</p>
 	  		</section>
@@ -648,5 +657,6 @@
 </xsl:template>
 
 <xsl:template match="processing-instruction('xml-stylesheet')" />
-
+<xsl:template match="comment()" priority="1" />
+	
 </xsl:stylesheet>

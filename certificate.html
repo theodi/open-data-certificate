@@ -24,16 +24,14 @@
             </div>
             <nav>
                <div id="mainnav" class="navbar navbar-inverse">
-                  <div class="navbar-inner">
-                     <ul class="nav"><a class="brand" href="#">Certificate</a><li class="active"><a href="#core">Core</a></li>
-                        <li><a href="#legal">Legal</a></li>
-                        <li><a href="#practical">Practical</a></li>
-                        <li><a href="#technical">Technical</a></li>
-                        <li><a href="#social">Social</a></li>
+                  <div class="navbar-inner"><a class="brand" href="#">Open Data Certificate</a><ul class="nav">
+                        <li class="active"><a href="#questionnaire">Questionnaire</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="#certificate">Certificate</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="#improvements">Improvements</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="index.html">About</a></li>
                      </ul>
                   </div>
                </div>
@@ -41,6 +39,17 @@
          </div>
       </header>
       <div class="container">
+         <div id="secondarynav" class="navbar">
+            <div class="navbar-inner">
+               <ul class="nav nav-pills">
+                  <li class="active"><a href="#core">Core</a></li>
+                  <li><a href="#legal">Legal</a></li>
+                  <li><a href="#practical">Practical</a></li>
+                  <li><a href="#technical">Technical</a></li>
+                  <li><a href="#social">Social</a></li>
+               </ul>
+            </div>
+         </div>
          <section>
             <p class="lead">All open data is good, but some is better than others. This tool gives you a certificate
                that will help people understand the open data you are publishing.
@@ -811,7 +820,7 @@
                	  			
             </p>
          </div>
-      </footer><script src="js/jquery-latest.js"></script><script src="bootstrap/js/bootstrap.min.js"></script><script src="js/knockout-2.2.1.js"></script><script type="text/javascript">
+      </footer><script src="js/jquery-1.9.1.min.js"></script><script src="bootstrap/js/bootstrap.min.js"></script><script src="js/knockout-2.2.1.js"></script><script type="text/javascript">
 	  		var certificateViewModel = function () {
 		  			var certificate = this;
 			  		certificate.documentationUrl = ko.observable('');
