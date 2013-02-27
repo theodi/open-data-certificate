@@ -32,7 +32,7 @@
 	  <body>
 	  	<div id="alpha-banner" class="alert alert-danger">
 	  		<p>
-	  			This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
+	  			This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add <a href="https://github.com/theodi/open-data-certificate/issues">issues on github</a> or contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
 	  		</p>
 	  	</div>
 	  	<header id="header">
