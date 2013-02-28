@@ -52,3 +52,5 @@ The certificate uses [knockout.js](http://knockoutjs.com/) to support its dynami
 ## Known Issues
 
   * The certificate itself does not get populated with all the information that you enter within the form.
+  * There is no support for saving the certificate or anything else that would require a back-end server
+  * [Issues recorded in github](https://github.com/theodi/open-data-certificate)
