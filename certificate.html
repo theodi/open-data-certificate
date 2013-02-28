@@ -115,7 +115,7 @@
                </div>
                <fieldset id="licensing">
                   <legend>Licensing</legend>
-                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other jurisdictions.
+                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other countries.
                   </p>
                   <div class="control-group" data-bind="css: { success: publisher() !== '', error: publisher() === ''}"><label class="control-label" for="publisher">What's the name of your organisation?</label><div class="controls"><input type="text" class="span5" id="publisher" name="publisher" data-bind="value: publisher, valueUpdate: 'afterkeydown'" placeholder="Publisher" required="required"></div>
                   </div>
@@ -262,7 +262,7 @@
                </fieldset>
                <fieldset id="privacy">
                   <legend>Privacy</legend>
-                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other jurisdictions.
+                  <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other countries.
                   </p>
                   <div class="control-group" data-bind="css: { success: dataPersonal() !== '', error: dataPersonal() === ''}"><label class="control-label">Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">the data doesn't contain anything about people or organisations at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="aggregate">the data summarises information about people or organisations</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="individual">the data is about individual people or organisations<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#dataPersonalindividual-help"><i class="icon-question-sign"></i></button><span class="help-block collapse" id="dataPersonalindividual-help">Personal data is covered by data protection laws which means that when you collect
                               it you have to tell people how it is going to be used. The same applies to data about

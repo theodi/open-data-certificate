@@ -277,7 +277,7 @@
 		</xsl:choose>
 		<xsl:text>. Please </xsl:text>
 		<a href="mailto:certificate@theodi.org">contact us</a>
-		<xsl:text> if you want to use the certificate in other jurisdictions.</xsl:text>
+		<xsl:text> if you want to use the certificate in other countries.</xsl:text>
 	</p>
 </xsl:template>
 
