@@ -142,11 +142,9 @@
   					<h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate</h1>
   					<xsl:apply-templates select="certificate" />
   				</div>
-	  			<!--
   				<p>
-  					<a id="download-certificate" href="#" target="_new" class="btn btn-primary">Download Certificate</a>
+  					<a id="download-certificate" data-bind="attr: {{ href: certificateHTML }}" target="_new" class="btn btn-primary">Download Certificate</a>
   				</p>
-  				-->
 	  		</section>
 	  		<section id="improvements" data-bind="visible: certificateLevel() !== 'none' &amp;&amp; certificateLevel() !== 'gold'">
   				<div class="page-header">
@@ -232,6 +230,25 @@
 		  				} else {
 		  					return level.substring(0, 1).toUpperCase() + level.substring(1);
 		  				}
+		  			}, certificate);
+		  			certificate.certificateHTML = ko.computed(function () {
+		  				var location = document.location.toString().replace(/#.+$/, '') 
+			  			, certificateHTML =
+				  				'&lt;!DOCTYPE html>' +
+					  			'&lt;html>' +
+					  				'&lt;head>' +
+					  					'&lt;title>ODI Open Data Certificate&lt;/title>' +
+					  					'&lt;link href="' + location + '/../bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />' +
+					  					'&lt;link href="' + location + '/../css/certificate.css" rel="stylesheet" media="screen" />' +
+					  				'&lt;/head>' + 
+					  				'&lt;body>' +
+					  					'&lt;div class="container">' +
+					  						$('#certificate').html() +
+					  					'&lt;/div>' +
+					  				'&lt;/body>' +
+					  			'&lt;/html>'
+	  					;
+	  					return 'data:text/html;charset=UTF-8,' + encodeURIComponent(certificateHTML);
 		  			}, certificate);
 		  		}
 		  	,   certificate = new certificateViewModel()

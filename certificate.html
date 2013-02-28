@@ -658,6 +658,7 @@
                </p>
                	
             </div>
+            <p><a id="download-certificate" data-bind="attr: { href: certificateHTML }" target="_new" class="btn btn-primary">Download Certificate</a></p>
          </section>
          <section id="improvements" data-bind="visible: certificateLevel() !== 'none' &amp;&amp; certificateLevel() !== 'gold'">
             <div class="page-header">
@@ -1092,6 +1093,25 @@ if (certificate.libraries() === '') unmetRequirements['silver']++;
 		  				} else {
 		  					return level.substring(0, 1).toUpperCase() + level.substring(1);
 		  				}
+		  			}, certificate);
+		  			certificate.certificateHTML = ko.computed(function () {
+		  				var location = document.location.toString().replace(/#.+$/, '') 
+			  			, certificateHTML =
+				  				'<!DOCTYPE html>' +
+					  			'<html>' +
+					  				'<head>' +
+					  					'<title>ODI Open Data Certificate</title>' +
+					  					'<link href="' + location + '/../bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />' +
+					  					'<link href="' + location + '/../css/certificate.css" rel="stylesheet" media="screen" />' +
+					  				'</head>' + 
+					  				'<body>' +
+					  					'<div class="container">' +
+					  						$('#certificate').html() +
+					  					'</div>' +
+					  				'</body>' +
+					  			'</html>'
+	  					;
+	  					return 'data:text/html;charset=UTF-8,' + encodeURIComponent(certificateHTML);
 		  			}, certificate);
 		  		}
 		  	,   certificate = new certificateViewModel()
