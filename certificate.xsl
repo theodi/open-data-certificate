@@ -69,18 +69,6 @@
 	  		</div>
 	  	</header>
 	  	<div class="container">
-	  		<div id="secondarynav" class="navbar">
-	  			<div class="navbar-inner">
-	  				<ul class="nav nav-pills">
-	  					<xsl:for-each select="group">
-	  						<li>
-	  							<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
-	  							<a href="#{@id}"><xsl:value-of select="replace(label, ' Information$', '')" /></a>
-	  						</li>
-	  					</xsl:for-each>
-	  				</ul>
-	  			</div>
-	  		</div>
 	  		<section>
 	  			<p class="lead">All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.</p>
 	  			<div class="accordion" id="main-help-accordion">
@@ -135,7 +123,19 @@
 	  			</div>
 	  		</section>
 	      <form id="questionnaire" class="form-horizontal">
-        	<xsl:apply-templates select="group" />
+	      	<section>
+	      		<ul class="nav nav-tabs">
+	      			<xsl:for-each select="group">
+	      				<li>
+	      					<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
+	      					<a href="#{@id}" data-toggle="tab"><xsl:value-of select="replace(label, ' Information$', '')" /></a>
+	      				</li>
+	      			</xsl:for-each>
+	      		</ul>
+	      		<div class="tab-content">
+	      			<xsl:apply-templates select="group" />
+	      		</div>
+	      	</section>
 	      </form>
 	  		<section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
   				<div id="certificate">
@@ -264,18 +264,10 @@
 </xsl:template>
 
 <xsl:template match="questionnaire/group">
-	<section id="{@id}">
-		<div class="page-header">
-			<p class="bookmark">
-				<a href="#{@id}"><i class="icon icon-bookmark icon-white"></i></a><br />
-				<a href="#{preceding-sibling::group[1]/@id}"><i class="icon icon-chevron-up icon-white"></i></a><br />
-				<a href="#{following-sibling::group[1]/@id}"><i class="icon icon-chevron-down icon-white"></i></a>
-			</p>
-			<h1><xsl:apply-templates select="label" /></h1>
-		</div>
+	<div class="tab-pane{if (preceding-sibling::group) then '' else ' active'}" id="{@id}">
 		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
-	</section>
+	</div>
 </xsl:template>
 
 <xsl:template match="group/group">
