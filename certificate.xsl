@@ -96,27 +96,6 @@
 	  									</p>
 	  								</div>
 	  							</div>
-	  							<hr />
-	  							<div class="row-fluid">
-	  								<div class="span4 text-center">
-	  									<div class="control-group error">
-	  										<div class="control-label"><label for="exampleError">Red fields are required</label></div>
-	  										<div class="controls"><input id="exampleError" type="text" placeholder="Required Field" required="required" /></div>
-	  									</div>
-	  								</div>
-	  								<div class="span4 text-center">
-	  									<div class="control-group">
-	  										<div class="control-label"><label for="exampleField">Black fields are optional</label></div>
-	  										<div class="controls"><input id="exampleField" type="text" placeholder="Optional Field" /></div>
-	  									</div>
-	  								</div>
-	  								<div class="span4 text-center">
-	  									<div class="control-group success">
-	  										<div class="control-label"><label for="exampleSuccess">Green fields are complete</label></div>
-	  										<div class="controls"><input id="exampleSuccess" type="text" value="Complete Field" /></div>
-	  									</div>
-	  								</div>
-	  							</div>
 	  						</div>
 	  					</div>
 	  				</div>
@@ -292,14 +271,6 @@
 
 <xsl:template match="question">
 	<div class="control-group">
-		<xsl:attribute name="data-bind">
-			<xsl:text>css: {</xsl:text>
-			<xsl:text> success: </xsl:text><xsl:value-of select="concat(@id, '() !== ''''')" />
-			<xsl:if test="*[@required = 'required'] or radioset or yesno">
-				<xsl:text>, error: </xsl:text><xsl:value-of select="concat(@id, '() === ''''')" />
-			</xsl:if>			
-			<xsl:text>}</xsl:text>
-		</xsl:attribute>
 		<label class="control-label">
 			<xsl:if test="not(yesno or radioset)">
 				<xsl:choose>
@@ -311,6 +282,15 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
+			<xsl:if test="*[@required = 'required'] or radioset or yesno">
+				<span class="badge badge-important pull-left" data-bind="visible: {@id}() === ''">
+					<i class="icon icon-white icon-remove" title="Required"></i>
+				</span>
+			</xsl:if>
+			<span class="badge badge-success pull-left" data-bind="visible: {@id}() !== ''">
+				<i class="icon icon-white icon-ok" title="Complete"></i>
+			</span>
+			<xsl:text> </xsl:text>
 			<xsl:apply-templates select="label" />
 		</label>
 		<div class="controls">
