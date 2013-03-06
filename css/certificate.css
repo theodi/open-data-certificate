@@ -55,17 +55,20 @@ body {
 	margin-right: 5px;
 }
 
-.label-bronze { 
+.label-bronze,
+.badge-bronze { 
 	background-color: peru; 
 	box-shadow: 0 0 2px peru;
 }
 
-.label-silver { 
+.label-silver,
+.badge-silver { 
 	background-color: silver; 
 	box-shadow: 0 0 2px silver;
 }
 
-.label-gold { 
+.label-gold,
+.badge-gold { 
 	background-color: gold; 
 	box-shadow: 0 0 2px gold;
 }

@@ -32,7 +32,7 @@
 			</question>
 			<question id="publisherUkGovernment">
 				<label>Are you UK central government?</label>
-				<yesno/>
+				<yesno />
 				<help>Central government includes all government departments and arms-length bodies. It does not include local government. Data that is collected and maintained by central government is owned by the Crown, which means it must be published as open data under the Open Government Licence unless the publisher has an exemption from the Office of Public Sector Information.</help>
 			</question>
 			<if test="publisherUkGovernment() === 'true'">
@@ -79,7 +79,7 @@
 			<label>Ownership</label>
 			<question id="ownership">
 				<label>Who owns the data?</label>
-				<radioset>
+				<radioset required="required">
 					<option value="publisher"><label>your organisation owns all the data in this dataset</label></option>
 					<option value="mixed">
 						<label>some of the data in this dataset is owned by someone else</label>
@@ -137,7 +137,7 @@
 			<label>Privacy</label>
 			<question id="dataPersonal">
 				<label>Does the data contain personal information?</label>
-				<radioset>
+				<radioset required="required">
 					<option value="not-personal"><label>the data doesn't contain anything about people or organisations at all</label></option>
 					<option value="aggregate"><label>the data summarises information about people or organisations</label></option>
 					<option value="individual">
@@ -176,7 +176,7 @@
 		<label>Practical Information</label>
 		<question id="oneOffRelease">
 			<label>Is this a one-off release of data?</label>
-			<yesno/>
+			<yesno />
 			<help>Indicate if you are gaining a certificate for a release of data that is not part of a series, and there are no plans to keep the data up to date on an ongoing basis.</help>
 		</question>
 		<question id="frequencyChange">
@@ -283,7 +283,7 @@
 				</question>
 				<question id="provideDumps">
 					<label>Do you also provide dumps of the dataset?</label>
-					<yesno/>
+					<yesno />
 					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset.</help>
 					<requirement level="bronze">Dumps of the dataset should be made available to enable developers to download the entire dataset.</requirement>
 				</question>
@@ -385,13 +385,13 @@
 		</question>
 		<question id="identifiers">
 			<label>Are you using URIs to identify things in the data?</label>
-			<yesno/>
+			<yesno />
 			<requirement level="silver">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
 		</question>
 		<if test="identifiers() === 'true'">
 			<question id="resolvingUris">
 				<label>Do the URIs resolve to information about those things?</label>
-				<yesno/>
+				<yesno />
 				<requirement level="gold">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
 			</question>
 			<question id="externalUris">

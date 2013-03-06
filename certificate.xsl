@@ -107,7 +107,23 @@
 	      			<xsl:for-each select="group">
 	      				<li>
 	      					<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
-	      					<a href="#{@id}" data-toggle="tab"><xsl:value-of select="replace(label, ' Information$', '')" /></a>
+	      					<a href="#{@id}" data-toggle="tab">
+	      						<xsl:value-of select="replace(label, ' Information$', '')" />
+	      						<xsl:text> </xsl:text>
+	      						<span class="badge badge-circular badge-important" data-bind="visible: {@id}Status().basic > 0, text: {@id}Status().basic"></span>
+	      						<span data-bind="visible: {@id}Status().basic === 0">
+	      							<span class="badge badge-circular badge-info" data-bind="visible: {@id}Status().bronze > 0, text: {@id}Status().bronze"></span>
+	      							<span data-bind="visible: {@id}Status().bronze === 0">
+	      								<span class="badge badge-circular badge-bronze" data-bind="visible: {@id}Status().silver > 0, text: {@id}Status().silver"></span>
+	      								<span data-bind="visible: {@id}Status().silver === 0">
+	      									<span class="badge badge-circular badge-silver" data-bind="visible: {@id}Status().gold > 0, text: {@id}Status().gold"></span>
+	      									<span class="badge badge-circular badge-gold" data-bind="visible: {@id}Status().gold === 0">
+	      										<i class="icon icon-white icon-star"></i>
+	      									</span>
+	      								</span>	
+	      							</span>
+	      						</span>
+	      					</a>
 	      				</li>
 	      			</xsl:for-each>
 	      		</ul>
@@ -180,6 +196,7 @@
 	  		var certificateViewModel = function () {
 		  			var certificate = this;
 			  		<xsl:apply-templates mode="viewModel" />
+	  		
 		  			certificate.certificateLevel = ko.computed(function () {
 		  				var unmetRequirements = {
 		  						basic: 0,
@@ -283,11 +300,11 @@
 				</xsl:choose>
 			</xsl:if>
 			<xsl:if test="*[@required = 'required'] or radioset or yesno">
-				<span class="badge badge-important pull-left" data-bind="visible: {@id}() === ''">
+				<span class="badge badge-circular badge-important pull-left" data-bind="visible: {@id}Status() === 'required'">
 					<i class="icon icon-white icon-remove" title="Required"></i>
 				</span>
 			</xsl:if>
-			<span class="badge badge-success pull-left" data-bind="visible: {@id}() !== ''">
+			<span class="badge badge-circular badge-success pull-left" data-bind="visible: {@id}Status() === 'complete'">
 				<i class="icon icon-white icon-ok" title="Complete"></i>
 			</span>
 			<xsl:text> </xsl:text>
@@ -548,14 +565,39 @@
 	</span>
 </xsl:template>
 
-<xsl:template match="node()" mode="viewModel unmetRequirements requirementList" priority="-0.1">
+<xsl:template match="node()" mode="viewModel unmetRequirements statusCalculation requirementList" priority="-0.1">
 	<xsl:apply-templates mode="#current" />
 </xsl:template>
-<xsl:template match="text()" mode="viewModel unmetRequirements requirementList" />
+<xsl:template match="text()" mode="viewModel unmetRequirements statusCalculation requirementList" />
+
+<xsl:template match="questionnaire/group" mode="viewModel">
+	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
+	<xsl:apply-templates mode="viewModel" />
+	<xsl:value-of select="concat($model, '.', @id, 'Status = ko.computed(function () {&#xA;')" />
+	<xsl:text>  var unmetRequirements = { answered: 0, basic: 0, bronze: 0, silver: 0, gold: 0 }&#xA;</xsl:text>
+	<xsl:text>  ;&#xA;</xsl:text>
+	<xsl:apply-templates mode="unmetRequirements" />
+	<xsl:text>  return unmetRequirements;&#xA;</xsl:text>
+	<xsl:text>});&#xA;</xsl:text>
+</xsl:template>
 
 <xsl:template match="question" mode="viewModel">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
-	<xsl:value-of select="concat($model, '.', @id, ' = ko.observable('''');&#xA;')" />
+	<xsl:variable name="function" as="xs:string" select="concat($model, '.', @id)" />
+	<xsl:value-of select="concat($function, ' = ko.observable('''');&#xA;')" />
+	<xsl:value-of select="concat($function, 'Status = ko.computed(function () {&#xA;')" />
+	<xsl:text>  var status;&#xA;</xsl:text>
+	<xsl:choose>
+		<xsl:when test="*[@required = 'required']">
+			<xsl:value-of select="concat('  if (', $function, '() === '''') status = ''required'';&#xA;')" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="concat('  if (', $function, '() === '''') status = ''optional'';&#xA;')" />
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:text>  else status = 'complete';&#xA;</xsl:text>
+	<xsl:text>  return status;&#xA;</xsl:text>
+	<xsl:text>});&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="repeat" mode="viewModel">
@@ -576,14 +618,16 @@
 	<xsl:text>};&#xA;</xsl:text>
 </xsl:template>
 
-<xsl:template match="question[*/@required = 'required']" mode="unmetRequirements">
+<xsl:template match="question" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
-	if (<xsl:value-of select="concat($model, '.', @id, '() === ''''')" />) unmetRequirements['basic']++;
+	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) unmetRequirements['answered']++;
+	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) unmetRequirements['basic']++;
+	<xsl:apply-templates mode="unmetRequirements" />
 </xsl:template>
 
 <xsl:template match="if" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
-	if (<xsl:value-of select="concat($model, '.', @test)" />) {&#xA;<xsl:apply-templates mode="unmetRequirements" />&#xA;}
+	if (<xsl:value-of select="concat($model, '.', @test)" />) {&#xA;<xsl:apply-templates mode="#current" />&#xA;}
 </xsl:template>
 
 <xsl:template match="radioset[option/requirement]" mode="unmetRequirements">
@@ -596,6 +640,9 @@
 		<xsl:variable name="sameOrHigher" as="xs:string+" select="$levels[position() >= index-of($levels, $level)]" />
 		<xsl:variable name="options" as="element(option)*" select="$options[$level = 'basic' or requirement/@level = $sameOrHigher]" />
 		<xsl:text>if (</xsl:text>
+		<xsl:if test="$level = 'basic'">
+			<xsl:value-of select="concat($model, '.', $id, '() !== '''' &amp;&amp; ')" />
+		</xsl:if>
 		<xsl:for-each select="$options">
 			<xsl:value-of select="concat($model, '.', $id, '() !== ''', @value, '''')" />
 			<xsl:if test="position() != last()"> &amp;&amp; </xsl:if>
@@ -608,7 +655,7 @@
 	<xsl:variable name="level" as="xs:string" select="if (@level) then @level else 'basic'" />
 	<xsl:choose>
 		<xsl:when test="@test">if (!(<xsl:value-of select="concat($model, '.', @test)" />))</xsl:when>
-		<xsl:otherwise>if (<xsl:value-of select="concat($model, '.', ancestor::question/@id, '() === ''''')" />)</xsl:otherwise>
+		<xsl:otherwise>if (<xsl:value-of select="concat($model, '.', ancestor::question/@id, 'Status() !== ''complete''')" />)</xsl:otherwise>
 	</xsl:choose> unmetRequirements['<xsl:value-of select="$level" />']++; 
 </xsl:template>
 
@@ -616,7 +663,7 @@
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
 	<xsl:value-of select="concat('$(', $model, '.', @id, '()).each(function () {')" />
 	<xsl:value-of select="concat('var ', @id, ' = this;')" />
-	<xsl:apply-templates mode="unmetRequirements">
+	<xsl:apply-templates mode="#current">
 		<xsl:with-param name="model" select="@id" tunnel="yes" />
 	</xsl:apply-templates>
 	<xsl:text>});</xsl:text>
