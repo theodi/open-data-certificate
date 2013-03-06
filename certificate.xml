@@ -5,7 +5,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire>
+<questionnaire version="0.1">
 	<group id="core">
 		<label>Core Information</label>
 		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->

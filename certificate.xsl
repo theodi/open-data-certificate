@@ -63,6 +63,7 @@
 	  							<li class="divider-vertical"></li>
 	  							<li><a href="index.html">About</a></li>
 	  						</ul>
+	  						<span class="label pull-right" style="margin-top: 10px;"><xsl:value-of select="@version" /></span>
 	  					</div>
 	  				</div>
 	  			</nav>

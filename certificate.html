@@ -27,13 +27,12 @@
                   <div class="navbar-inner"><a class="brand" href="#">Open Data Certificate</a><ul class="nav">
                         <li class="active"><a href="#questionnaire">Questionnaire</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a href="#certificate">Certificate</a></li>
+                        <li data-bind="css: { disabled: certificateLevel() === 'none' }"><a data-bind="attr: { href: certificateLevel() === 'none' ? '' : '#certificate' }" href="#certificate">Certificate</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a href="#improvements">Improvements</a></li>
+                        <li data-bind="css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'gold' }"><a data-bind="attr: { href: certificateLevel() === 'none' ? '' : '#improvements' }" href="#improvements">Improvements</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="index.html">About</a></li>
-                     </ul>
-                  </div>
+                     </ul><span class="label pull-right" style="margin-top: 10px;">0.1</span></div>
                </div>
             </nav>
          </div>
