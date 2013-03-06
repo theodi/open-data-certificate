@@ -57,9 +57,13 @@
 	  						<ul class="nav">
 	  							<li class="active"><a href="#questionnaire">Questionnaire</a></li>
 	  							<li class="divider-vertical"></li>
-	  							<li><a href="#certificate">Certificate</a></li>
+	  							<li data-bind="css: {{ disabled: certificateLevel() === 'none' }}">
+	  								<a href="#certificate">Certificate</a>
+	  							</li>
 	  							<li class="divider-vertical"></li>
-	  							<li><a href="#improvements">Improvements</a></li>
+	  							<li data-bind="css: {{ disabled: certificateLevel() === 'none' || certificateLevel() === 'gold' }}">
+	  								<a href="#improvements">Improvements</a>
+	  							</li>
 	  							<li class="divider-vertical"></li>
 	  							<li><a href="index.html">About</a></li>
 	  						</ul>
