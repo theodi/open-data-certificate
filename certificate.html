@@ -430,7 +430,7 @@
                      </fieldset>
                      <fieldset id="privacy">
                         <legend>Privacy</legend>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataPersonalStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">the data doesn't contain anything about people or organisations at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="aggregate">the data summarises information about people or organisations</label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#dataPersonalindividual-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="individual">the data is about individual people or organisations<span class="help-block collapse" id="dataPersonalindividual-help">Personal data is covered by data protection laws which means that when you collect
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataPersonalStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">the data doesn't contain anything about people at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="aggregate">the data summarises information about people</label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#dataPersonalindividual-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="individual">the data is about individual people<span class="help-block collapse" id="dataPersonalindividual-help">Personal data is covered by data protection laws which means that when you collect
                                     it you have to tell people how it is going to be used. The same applies to data about
                                     organisations because some are run by just one person.</span></label></div>
                         </div>
@@ -463,9 +463,9 @@
                                  </div>
                               </div>
                               					
-                              <div class="control-group"><label class="control-label" for="privacyImpactAssessmentUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your privacy impact assessment published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="privacyImpactAssessmentUrl-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
+                              <div class="control-group"><label class="control-label" for="privacyImpactAssessmentUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your privacy impact assessment published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"> <span class="label label-standard" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="privacyImpactAssessmentUrl-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
                                        and disclosure of information.</span><div class="requirement collapse" id="privacyImpactAssessmentUrl-requirement">
-                                       <p class="alert alert-info"><a href="#privacyImpactAssessmentUrl-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> When datasets contain personal data, a privacy impact assessment should be carried
+                                       <p class="alert alert-info"><a href="#privacyImpactAssessmentUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> When datasets contain personal data, a privacy impact assessment should be carried
                                           out to identify risks of releasing the data, mitigations against those risks, and
                                           to put in place processes that ensure that any breaches are handled effectively.
                                        </p>
@@ -856,12 +856,6 @@
                            of discovering information about an individual is minimised.
                         </p>
                      </div>
-                     <div data-bind="visible: privacyImpactAssessmentUrl() === ''">
-                        <p><a href="#privacyImpactAssessmentUrl"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> When datasets contain personal data, a privacy impact assessment should be carried
-                           out to identify risks of releasing the data, mitigations against those risks, and
-                           to put in place processes that ensure that any breaches are handled effectively.
-                        </p>
-                     </div>
                   </div>
                </div>
                <div data-bind="visible: oneOffRelease() === 'true'">
@@ -940,6 +934,16 @@
                               datasets.
                            </p>
                         </div>
+                     </div>
+                  </div>
+               </div>
+               <div data-bind="visible: dataPersonal() !== ''">
+                  <div data-bind="visible: dataPersonal() !== 'not-personal'">
+                     <div data-bind="visible: privacyImpactAssessmentUrl() === ''">
+                        <p><a href="#privacyImpactAssessmentUrl"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> When datasets contain personal data, a privacy impact assessment should be carried
+                           out to identify risks of releasing the data, mitigations against those risks, and
+                           to put in place processes that ensure that any breaches are handled effectively.
+                        </p>
                      </div>
                   </div>
                </div>
@@ -1569,7 +1573,7 @@ $(certificate.sources()).each(function () {var sources = this;
 
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
-	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
@@ -2181,7 +2185,7 @@ $(certificate.sources()).each(function () {var sources = this;
 
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
-	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
