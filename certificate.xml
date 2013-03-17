@@ -5,56 +5,72 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire version="0.1">
-	<group id="core">
-		<label>Core Information</label>
-		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
-		<question id="documentationUrl">
-			<label>Where is the dataset described?</label>
-			<input type="url" placeholder="Documentation URL"/>
-			<help>Enter the URL of a page that describes the dataset and what it contains.</help>
-			<requirement level="bronze">You should have a page that provides documentation about your dataset.</requirement>
-		</question>
-		<question id="datasetTitle">
-			<label>What's the name of the dataset?</label>
-			<input placeholder="Dataset Title" required="required"/>
-			<help>Enter the title for the dataset. If this is part of a regular series of releases, use give a title for the series.</help>
-		</question>
-		<group id="licensing" jurisdiction="UK">
+<questionnaire version="0.2">
+	<levels>
+		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
+		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
+		<level id="standard">This data satisfies the requirements for routinely published open data that encourages reuse.</level>
+		<level id="established">This data satisfies the requirements for key information infrastructure.</level>
+	</levels>
+	<question id="dataTitle">
+		<label>What should we call this data?</label>
+		<input placeholder="Data Title" required="required"/>
+		<help>Enter a name for the open data that you are publishing.</help>
+	</question>
+	<question id="publisher">
+		<label>What's the name of your organisation?</label>
+		<input placeholder="Publisher" required="required"/>
+	</question>
+	<question id="publisherUrl">
+		<label>What's the website for your organisation?</label>
+		<input type="url" placeholder="Publisher URL"/>
+	</question>
+	<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
+	<question id="documentationUrl">
+		<label>Where is the data described?</label>
+		<input type="url" placeholder="Documentation URL"/>
+		<help>Enter the URL of a page that describes the open data and what it contains.</help>
+		<requirement level="pilot">You should have a page that provides documentation about the open data you are publishing.</requirement>
+	</question>
+	<group id="legal" jurisdiction="UK">
+		<label>Legal Information</label>
+		<group id="licensing">
 			<label>Licensing</label>
-			<question id="publisher">
-				<label>What's the name of your organisation?</label>
-				<input placeholder="Publisher" required="required"/>
+			<question id="copyrightURL">
+				<label>Where is your copyright statement?</label>
+				<input type="url" />
+				<help>The copyright and database right statement can indicate that you are waiving your rights over the data, or the licences under which you are publishing it.</help>
+				<requirement level="pilot">You should have a page that states your copyright over the data and provides details of any attribution that people should use.</requirement>
 			</question>
-			<question id="publisherUrl">
-				<label>What's the website for your organisation?</label>
-				<input type="url" placeholder="Publisher URL"/>
-			</question>
-			<question id="publisherUkGovernment">
-				<label>Are you UK central government?</label>
-				<yesno />
-				<help>Central government includes all government departments and arms-length bodies. It does not include local government. Data that is collected and maintained by central government is owned by the Crown, which means it must be published as open data under the Open Government Licence unless the publisher has an exemption from the Office of Public Sector Information.</help>
-			</question>
-			<if test="publisherUkGovernment() === 'true'">
-				<question id="publisherOpsiExemption">
-					<label>Do you have a licensing exemption from OPSI?</label>
-					<yesno />
-					<help>Data that is collected and maintained by UK central government is owned by the Crown, which means it must be published as open data under the Open Government Licence unless the publisher has an exemption from the Office of Public Sector Information.</help>
+			<if test="this.copyrightURL() !== ''">
+				<question id="copyrightStatementMetadata">
+					<label>Does your copyright statement include machine-readable data for:</label>
+					<!-- these are properties from the CC licensing vocabulary at http://creativecommons.org/ns -->
+					<checkboxset>
+						<option value="license">
+							<label>licences</label>
+							<requirement level="pilot">Provide machine-readable data in your copyright statement about the licences that should be used when the data is reused.</requirement>
+						</option>
+						<option value="attribution">
+							<label>attribution</label>
+							<requirement level="standard">Provide machine-readable data in your copyright statement about the attribution that should be used when the data is reused.</requirement>
+						</option>
+						<option value="attributionURL">
+							<label>attribution URL</label>
+							<requirement level="standard">Provide machine-readable data in your copyright statement about the URL that should be linked to when the data is reused.</requirement>
+						</option>
+						<option value="morePermissions">
+							<label>additional permissions or alternative licences</label>
+						</option>
+						<option value="useGuidelines">
+							<label>non-binding use guidelines</label>
+						</option>
+					</checkboxset>
+					<help more="http://labs.creativecommons.org/2011/ccrel-guide/">If you have a copyright statement, it is good to embed within it machine-readable information about the licence under which you are making your data available under.</help>
 				</question>
 			</if>
-			<question id="contentLicence">
-				<label>Content Licence</label>
-				<select required="required">
-					<option/>
-					<option value="cc-by">Creative Commons Attribution</option>
-					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
-				</select>
-				<help>Choose the open licence that you are using to make available your creative content for other people to use. Note that creative content does not include facts.</help>
-			</question>
 			<question id="dataLicence">
-				<label>Data Licence</label>
+				<label>Under which licence can others reuse the data?</label>
 				<select required="required">
 					<option/>
 					<option value="odc-by">Open Data Commons Attribution License</option>
@@ -62,111 +78,253 @@
 					<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 					<option value="cc0">Creative Commons CCZero</option>
 					<option value="ogl">UK Open Government Licence</option>
+					<option value="other">Other...</option>
 				</select>
-				<help>In Europe, you need to have a licence that covers your database rights as well as any copyright for creative content in the data. Your database rights cover the way in which you structure the data you make available.</help>
-				<if test="publisherOpsiExemption() === 'false'">
-					<requirement test="contentLicence() === 'ogl'">Unless you have been granted an exemption from OPSI, if you are UK central government then you must publish your content and data using the Open Government Licence.</requirement>
-					<if test="contentLicence() === 'ogl'">
-						<requirement test="dataLicence() === 'ogl'">Unless you have been granted an exemption from OPSI, if you are UK central government then you must publish your content and data using the Open Government Licence.</requirement>
-					</if>
+				<help>The creator of a database automatically gets database rights where they spend substantial effort gathering, verifying and presenting data. You need to have a waiver or licence that covers the database rights in the data so reusers know that they can reuse it.</help>
+			</question>
+			<if test="this.dataLicence() === 'other'">
+				<question id="otherDataLicenceName">
+					<label>What's the name of the licence?</label>
+					<input required="required" />
+				</question>
+				<question id="otherDataLicenceURL">
+					<label>What's the location the licence?</label>
+					<input type="url" required="required" />
+				</question>
+				<question id="otherDataLicenceOpen">
+					<label>Is the licence an open licence?</label>
+					<yesno required="required" />
+					<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
+					<requirement test="this.otherDataLicenceOpen() === 'true'">You must publish open data under a licence that is open to enable others to reuse it.</requirement>
+				</question>
+			</if>
+			<question id="contentLicence">
+				<label>Under which licence can others reuse the content?</label>
+				<select required="required">
+					<option/>
+					<option value="cc-by">Creative Commons Attribution</option>
+					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+					<option value="cc0">Creative Commons CCZero</option>
+					<option value="ogl">UK Open Government Licence</option>
+					<option value="other">Other...</option>
+				</select>
+				<help>The creator of content automatically gets copyright over that content when they spend intellectual effort creating it. Note that creative content does not include facts. You need to have a waiver or licence that covers the copyright in the data so reusers know that they can reuse it.</help>
+			</question>
+			<if test="this.contentLicence() === 'other'">
+				<question id="otherContentLicenceName">
+					<label>What's the name of the licence?</label>
+					<input required="required" placeholder="Licence Name" />
+				</question>
+				<question id="otherContentLicenceURL">
+					<label>What's the location the licence?</label>
+					<input type="url" required="required" placeholder="Licence URL" />
+				</question>
+				<question id="otherContentLicenceOpen">
+					<label>Is the licence an open licence?</label>
+					<yesno required="required" />
+					<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
+					<requirement test="this.otherDataLicenceOpen() === 'true'">You must publish open data under a licence that is open to enable others to reuse it.</requirement>
+				</question>
+			</if>
+			<if test="(this.contentLicence() !== '' &amp;&amp; this.contentLicence() !== 'ogl') || (this.dataLicence() !== '' &amp;&amp; this.dataLicence() !== 'ogl')">
+				<question id="publisherUkGovernment">
+					<label>Are you UK central government?</label>
+					<yesno required="required" />
+					<help>Central government includes all government departments and arms-length bodies. It does not include local government. Data that is collected and maintained by central government is owned by the Crown, which means it must be published as open data under the Open Government Licence unless the publisher has an exemption from the Office of Public Sector Information.</help>
+				</question>
+				<if test="this.publisherUkGovernment() === 'true'">
+					<question id="publisherOpsiExemption">
+						<label>Do you have a licensing exemption from OPSI?</label>
+						<yesno required="required" />
+						<help>Data that is collected and maintained by UK central government is owned by the Crown, which means it must be published as open data under the Open Government Licence unless the publisher has an exemption from the Office of Public Sector Information.</help>
+						<if test="this.publisherOpsiExemption() === 'false'">
+							<requirement>Unless you have been granted an exemption from OPSI, if you are UK central government then you must publish your content and data using the Open Government Licence.</requirement>
+						</if>
+					</question>
 				</if>
-			</question>
-		</group>
-	</group>
-	<group id="legal">
-		<label>Legal Information</label>
-		<group id="ownership">
-			<label>Ownership</label>
-			<question id="ownership">
-				<label>Who owns the data?</label>
-				<radioset required="required">
-					<option value="publisher"><label>your organisation owns all the data in this dataset</label></option>
-					<option value="mixed">
-						<label>some of the data in this dataset is owned by someone else</label>
-						<help>Data that is derived from other closed datasets is usually owned by the owner of that dataset.</help>
-					</option>
-					<option value="unknown">
-						<label>the ownership of the data in this dataset is not known</label>
-					</option>
-				</radioset>
-				<requirement test="ownership() !== 'unknown'">You only have the right to publish open data if you own the data, or if you have been granted permission to republish data owned by someone else.</requirement>
-			</question>
-			<if test="ownership() === 'mixed'">
-				<repeat id="owners">
-					<label>Owner</label>
-					<question id="derivedFromDataset">
-						<label>Is the data derived from another dataset?</label>
-						<yesno/>
-					</question>
-					<if test="derivedFromDataset() === 'true'">
-						<question id="derivedFromDatasetCertificateUrl">
-							<label>Where is the open data certificate for the source dataset?</label>
-							<input type="url" placeholder="Dataset URL"/>
-							<help>The open data certificate demonstrates that the source dataset is available as open data.</help>
-						</question>
-					</if>
-					<question id="additionalOwner">
-						<label>Who else owns data in this dataset?</label>
-						<input placeholder="Owner" required="required"/>
-						<help>Give the name of the other organisation that owns the data.</help>
-					</question>
-					<question id="additionalOwnerUrl">
-						<label>What's their website?</label>
-						<input type="url" placeholder="Owner URL"/>
-						<help>Give the website of the other organisation that owns the data.</help>
-					</question>
-					<question id="additionalOwnerData">
-						<label>Which of the data do they own?</label>
-						<textarea/>
-						<help>Describe which parts of the data are owned by this organisation. For example, name the columns that contain the data owned by this organisation and the data that it comes from.</help>
-						<requirement level="bronze">You should supply information about which parts of the dataset are owned by the other organisation.</requirement>
-					</question>
-					<question id="additionalOwnerPermission">
-						<label>Do you have permission to republish this data?</label>
-						<radioset>
-							<option value="open"><label>Yes, the data has been published under an open licence</label></option>
-							<option value="permitted"><label>Yes, we have permission to reuse and republish the data</label></option>
-							<option value="closed"><label>No, we do not have permission to reuse and/or republish the data</label></option>
-						</radioset>
-						<requirement test="additionalOwnerPermission() !== 'closed'">You cannot republish data as open data if you do not have permission to do so from the owner(s) of the data.</requirement>
-					</question>
-				</repeat>
 			</if>
 		</group>
-		<group id="privacy" jurisdiction="UK">
+		<group id="ownership">
+			<label>Ownership</label>
+			<question id="publisherOrigin">
+				<label>Was all this data originally created or gathered by you?</label>
+				<yesno required="required" />
+				<help>If the data was not originally created or gathered by you then you might not have the right to republish it. Answer 'no' to this question if this data is based on data from outside your organisation or includes data that you have crowd-sourced.</help>
+			</question>
+			<if test="this.publisherOrigin() === 'false'">
+				<question id="thirdPartyOrigin">
+					<label>Was some of this data extracted or calculated from other data?</label>
+					<yesno required="required" />
+					<help>Indicate whether you have created this data based on data from elsewhere, for example from another data source or service. If you have, you need to make sure that you can republish the result as open data.</help>
+				</question>
+				<if test="this.thirdPartyOrigin() === 'true'">
+					<repeat id="sources">
+						<label>Source</label>
+						<question id="sourceCertificate">
+							<label>Does the source data have an open data certificate?</label>
+							<yesno />
+							<help>If the source data has an open data certificate, we know that it is open data and we can gather information from that certificate to help fill in the rest of the information that's needed here.</help>
+						</question>
+						<if test="this.sourceCertificate() === 'true'">
+							<question id="sourceCertificateUrl">
+								<label>Where is its open data certificate?</label>
+								<input type="url" required="required" placeholder="Open Data Certificate URL"/>
+								<help>The open data certificate demonstrates that the source dataset is available as open data.</help>
+							</question>
+						</if>
+						<question id="sourceTitle">
+							<label>What is the name of this data source?</label>
+							<input required="required" />
+						</question>
+						<question id="additionalOwner">
+							<label>Who publishes this data source?</label>
+							<input placeholder="Publisher" required="required"/>
+							<help>Give the name of the publisher of this source of data.</help>
+						</question>
+						<question id="additionalOwnerUrl">
+							<label>What's their website?</label>
+							<input type="url" placeholder="Publisher URL"/>
+							<help>Give the website of the other organisation who publishes this source of data.</help>
+						</question>
+						<question id="thirdPartyData">
+							<label>How was this data used?</label>
+							<textarea/>
+							<help>Describe how this source of data was used and which parts of the data you are making available come from this source. For example, name the columns that have been populated using this data.</help>
+							<requirement level="standard">You should supply information about which parts of the dataset are sourced from other datasets.</requirement>
+						</question>
+						<question id="thirdPartyDataLicence">
+							<label>Under which licence is this data published?</label>
+							<select required="required">
+								<option/>
+								<option value="odc-by">Open Data Commons Attribution License</option>
+								<option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
+								<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+								<option value="cc0">Creative Commons CCZero</option>
+								<option value="ogl">UK Open Government Licence</option>
+								<option value="other">Other...</option>
+							</select>
+							<help>The creator of a database automatically gets database rights where they spend substantial effort gathering, verifying and presenting data. They need to have specified a waiver or licence that covers the database rights in the data in order for you to republish it.</help>
+						</question>
+						<if test="this.thirdPartyDataLicence() === 'other'">
+							<question id="otherDataLicenceName">
+								<label>What's the name of the licence?</label>
+								<input required="required" placeholder="Licence Name" />
+							</question>
+							<question id="otherDataLicenceURL">
+								<label>What's the location the licence?</label>
+								<input type="url" placeholder="Licence URL" />
+							</question>
+							<question id="otherDataLicenceOpen">
+								<label>Is the licence an open licence?</label>
+								<yesno required="required" />
+								<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
+							</question>
+							<if test="this.otherDataLicenceOpen() === 'false'">
+								<question id="otherDataLicenceCanRepublish">
+									<label>Does the licence allow you to republish?</label>
+									<yesno required="required" />
+									<help>Indicate whether the licence says that you can reuse and republish this data under an open licence in the way that you are. Because the licence is not an open licence, you might need to seek legal advice to work out whether this is allowed.</help>
+									<requirement test="this.otherDataLicenceCanRepublish() === 'true'">You cannot publish open data that includes data that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
+								</question>
+							</if>
+						</if>
+						<question id="contentLicence">
+							<label>Under which licence can others reuse the content?</label>
+							<select required="required">
+								<option/>
+								<option value="cc-by">Creative Commons Attribution</option>
+								<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+								<option value="cc0">Creative Commons CCZero</option>
+								<option value="ogl">UK Open Government Licence</option>
+								<option value="other">Other...</option>
+							</select>
+							<help>The creator of content automatically gets copyright over that content when they spend intellectual effort creating it. Note that creative content does not include facts. You need to have a waiver or licence that covers the copyright in the data so reusers know that they can reuse it.</help>
+						</question>
+						<if test="this.contentLicence() === 'other'">
+							<question id="otherContentLicenceName">
+								<label>What's the name of the licence?</label>
+								<input required="required" placeholder="Licence Name" />
+							</question>
+							<question id="otherContentLicenceURL">
+								<label>What's the location the licence?</label>
+								<input type="url" placeholder="Licence URL" />
+							</question>
+							<question id="otherContentLicenceOpen">
+								<label>Is the licence an open licence?</label>
+								<yesno required="required" />
+								<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
+							</question>
+							<if test="this.otherContentLicenceOpen() === 'false'">
+								<question id="otherContentLicenceCanRepublish">
+									<label>Does the licence allow you to republish?</label>
+									<yesno required="required" />
+									<help>Indicate whether the licence says that you can reuse and republish this content under an open licence in the way that you are. Because the licence is not an open licence, you might need to seek legal advice to work out whether this is allowed.</help>
+									<requirement test="this.otherContentLicenceCanRepublish() === 'true'">You cannot publish open data that includes content that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
+								</question>
+							</if>
+						</if>
+					</repeat>
+				</if>
+				<question id="crowdsourced">
+					<label>Was some of this data crowd-sourced?</label>
+					<yesno required="required" />
+					<help>Indicate whether this data includes information that was contributed by others. If it was, you need to ensure that they granted their permission to publish their contributions as open data.</help>
+				</question>
+				<if test="this.crowdsourced() === 'true'">
+					<question id="crowdsourcedContent">
+						<label>Did contributions require judgement?</label>
+						<yesno required="required" />
+						<help>Indicate whether the contributors to your data needed to employ their creativity or judgement to make their contributions. For example, writing a description or choosing whether or not to include some data in a dataset would require judgement. If judgement is involved, the contributors will have copyright over their contributions.</help>
+					</question>
+					<if test="this.crowdsourcedContent() === 'true'">
+						<question id="claUrl">
+							<label>Where is the Contributor Licence Agreement (CLA)?</label>
+							<input type="url" placeholder="Contributor Licence Agreement URL" required="required" />
+							<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">A Contributor Licence Agreement either assigns the rights in the contributions to you, or licences them to you such that you can republish them.</help>
+						</question>
+						<question id="cldsRecorded">
+							<label>Have all contributors agreed to the CLA?</label>
+							<yesno required="required" />
+							<requirement test="this.cldsRecorded() === 'true'">The contributors to your data must all have agreed to a Contributor Licence Agreement to give you the right to republish their contributions as open data.</requirement>
+						</question>
+					</if>
+				</if>
+			</if>
+		</group>
+		<group id="privacy">
 			<label>Privacy</label>
 			<question id="dataPersonal">
 				<label>Does the data contain personal information?</label>
 				<radioset required="required">
-					<option value="not-personal"><label>the data doesn't contain anything about people or organisations at all</label></option>
-					<option value="aggregate"><label>the data summarises information about people or organisations</label></option>
+					<option value="not-personal"><label>the data doesn't contain anything about people at all</label></option>
+					<option value="aggregate"><label>the data summarises information about people</label></option>
 					<option value="individual">
-						<label>the data is about individual people or organisations</label>
+						<label>the data is about individual people</label>
 						<help>Personal data is covered by data protection laws which means that when you collect it you have to tell people how it is going to be used. The same applies to data about organisations because some are run by just one person.</help>
 					</option>                      
 				</radioset>
 			</question>
-			<if test="dataPersonal() !== ''">
-				<if test="dataPersonal() === 'individual'">
+			<if test="this.dataPersonal() !== ''">
+				<if test="this.dataPersonal() === 'individual'">
 					<question id="personalDataConsent">
 						<label>What usages did they consent to?</label>
 						<textarea/>
 						<help>Describe what the people whose data is contained in this dataset were told about how the data will be used, when the data was collected.</help>
-						<requirement level="bronze">To comply with data protection laws, data has to be used consistently with how individuals were told the data would be used. You should inform potential reusers about what that entails.</requirement>
+						<requirement level="pilot">To comply with data protection laws, data has to be used consistently with how individuals were told the data would be used. You should inform potential reusers about what that entails.</requirement>
 					</question>
 				</if>
-				<if test="dataPersonal() !== 'not-personal'">
+				<if test="this.dataPersonal() !== 'not-personal'">
 					<question id="personalDataAnonymisation">
 						<label>How has the data been anonymised?</label>
 						<textarea/>
 						<help>Describe the processing by which the data has been anonymised to increase the difficulty of identifying individuals from the data.</help>
-						<requirement level="bronze">Both personal data and aggregate data should be anonymised to ensure that the likelihood of discovering information about an individual is minimised.</requirement>
+						<requirement level="pilot">Both personal data and aggregate data should be anonymised to ensure that the likelihood of discovering information about an individual is minimised.</requirement>
 					</question>
 					<question id="privacyImpactAssessmentUrl">
 						<label>Where is your privacy impact assessment published?</label>
 						<input type="url" placeholder="Privacy Impact Assessment URL"/>
 						<help>A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.</help>
-						<requirement level="bronze">When datasets contain personal data, a privacy impact assessment should be carried out to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
+						<requirement level="standard">When datasets contain personal data, a privacy impact assessment should be carried out to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
 					</question>
 				</if>
 			</if>
@@ -198,11 +356,11 @@
 				<option value="P10Y">every ten years</option>
 			</select>
 			<help>Select the approximate frequency with which the data changes. If the frequency of changes varies, choose the most frequent level.</help>
-			<if test="oneOffRelease() === 'true'">
-				<requirement test="frequencyChange() === 'never'" level="bronze">If there is no on-going release of updated datasets as the data you capture changes, the data will become innaccurate and might not be worth reusing.</requirement>
+			<if test="this.oneOffRelease() === 'true'">
+				<requirement test="this.frequencyChange() === 'never'" level="pilot">If there is no on-going release of updated datasets as the data you capture changes, the data will become innaccurate and might not be worth reusing.</requirement>
 			</if>
 		</question>
-		<if test="oneOffRelease() === 'false'">
+		<if test="this.oneOffRelease() === 'false'">
 			<question id="frequency">
 				<label>How frequently are datasets released?</label>
 				<select>
@@ -221,19 +379,19 @@
 					<option value="P10Y">every ten years</option>
 					<option value="">as and when</option>
 				</select>
-				<requirement level="bronze">The dataset should be released on a regular, predictable schedule.</requirement>
+				<requirement level="pilot">The dataset should be released on a regular, predictable schedule.</requirement>
 			</question>
 		</if>
 		<!-- not sure how to put these in a less process-heavy way? -->
 		<question id="qualityControlUrl">
 			<label>Where is your quality control process described?</label>
 			<input type="url" placeholder="Quality Control Process Description URL"/>
-			<requirement level="silver">Having a documented quality control process helps developers to understand how much to rely on the data that you make available.</requirement>
+			<requirement level="standard">Having a documented quality control process helps developers to understand how much to rely on the data that you make available.</requirement>
 		</question>
 		<question id="qualityControlAudited">
 			<label>Where is the latest report auditing your quality control process?</label>
 			<input type="url" placeholder="Quality Control Process Audit Report URL"/>
-			<requirement level="gold">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
+			<requirement level="established">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
 		</question>
 		<question id="currentAvailability">
 			<label>What is the guaranteed availability of this dataset?</label>
@@ -248,34 +406,34 @@
 				</option>
 				<option value="P1Y">
 					<label>this dataset will be available in this form for at least one year</label>
-					<requirement level="bronze">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least a year.</requirement>
+					<requirement level="pilot">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least a year.</requirement>
 				</option>
 				<option value="P2Y">
 					<label>this dataset will be available in this form for at least two years</label>
-					<requirement level="silver">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least two years.</requirement>
+					<requirement level="standard">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least two years.</requirement>
 				</option>
 				<option value="P3Y">
 					<label>this dataset will be available in this form for at least three years</label>
-					<requirement level="gold">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
+					<requirement level="established">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
 				</option>
 			</radioset>
 		</question>
 	</group>
 	<group id="technical">
 		<label>Technical Information</label>
-		<if test="oneOffRelease() === 'true'">
+		<if test="this.oneOffRelease() === 'true'">
 			<question id="datasetUrl">
 				<label>What's the URL of the dataset?</label>
 				<input type="url" placeholder="Dataset URL"/>
 				<help>Enter the URL of the dataset itself (for example a CSV file), not a page describing the dataset.</help>
-				<requirement level="bronze">You should have a URL that is a direct link to the data itself.</requirement>
-				<if test="documentationUrl() === ''">
-					<requirement test="datasetUrl() === ''">You must provide either a URL for the dataset or a URL for documentation about it.</requirement>
+				<requirement level="pilot">You should have a URL that is a direct link to the data itself.</requirement>
+				<if test="this.documentationUrl() === ''">
+					<requirement test="this.datasetUrl() === ''">You must provide either a URL for the dataset or a URL for documentation about it.</requirement>
 				</if>
 			</question>
 		</if>
-		<if test="oneOffRelease() === 'false'">
-			<if test="frequency() === 'api'">
+		<if test="this.oneOffRelease() === 'false'">
+			<if test="this.frequency() === 'api'">
 				<question id="endpointUrl">
 					<label>What's the endpoint for the API?</label>
 					<input type="url" placeholder="Endpoint URL"/>
@@ -285,9 +443,9 @@
 					<label>Do you also provide dumps of the dataset?</label>
 					<yesno />
 					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset.</help>
-					<requirement level="bronze">Dumps of the dataset should be made available to enable developers to download the entire dataset.</requirement>
+					<requirement level="pilot">Dumps of the dataset should be made available to enable developers to download the entire dataset.</requirement>
 				</question>
-				<if test="provideDumps() === 'true'">
+				<if test="this.provideDumps() === 'true'">
 					<question id="dumpFrequency">
 						<label>How frequently are dumps created?</label>
 						<select>
@@ -304,53 +462,53 @@
 							<option value="">as and when</option>
 						</select>
 						<help>Indicate how frequently dumps are created from the database.</help>
-						<requirement level="bronze">The dumps should be created on a regular, predictable schedule.</requirement>
+						<requirement level="pilot">The dumps should be created on a regular, predictable schedule.</requirement>
 					</question>
 					<question id="dumpVersionsTemplateUrl">
 						<label>What's the URL template for the dumps?</label>
 						<input type="url" placeholder="Dump Template URL"/>
 						<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
-						<requirement level="bronze">The URLs for different dumps of the dataset should follow a regular structure.</requirement>
+						<requirement level="pilot">The URLs for different dumps of the dataset should follow a regular structure.</requirement>
 					</question>
 					<question id="currentDumpUrl">
 						<label>What's the URL of the current dump?</label>
 						<input type="url" placeholder="Current Dump URL"/>
 						<help>Enter the URL of the current dump of the dataset itself (for example a CSV file). The content at this URL should change each time a new dump is created.</help>
-						<requirement level="silver">There should be a single URL that can always be used to download the current dump of the dataset.</requirement>
+						<requirement level="standard">There should be a single URL that can always be used to download the current dump of the dataset.</requirement>
 					</question>
 					<question id="dumpListUrl">
 						<label>What's the URL that gives a list of dumps?</label>
 						<input type="url" placeholder="Dump List URL"/>
 						<help>Enter the URL of a page or feed that provides a machine-readable list of the available dumps of the dataset.</help>
-						<requirement level="silver">There should be a document or feed that provides a list of all the available dumps of the dataset.</requirement>
+						<requirement level="standard">There should be a document or feed that provides a list of all the available dumps of the dataset.</requirement>
 					</question>
 				</if>
 			</if>
-			<if test="frequency() !== 'api'">
+			<if test="this.frequency() !== 'api'">
 				<question id="versionsTemplateUrl">
 					<label>What's the URL template for the versions?</label>
 					<input type="url" placeholder="Version Template URL"/>
 					<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
-					<requirement level="bronze">The URLs for different versions of the dataset should follow a regular structure.</requirement>
+					<requirement level="pilot">The URLs for different versions of the dataset should follow a regular structure.</requirement>
 				</question>
 				<question id="currentDatasetUrl">
 					<label>What's the URL of the current version?</label>
 					<input type="url" placeholder="Current Dataset URL"/>
 					<help>Enter the URL of the current version of the dataset itself (for example a CSV file). The content at this URL should change each time a new version is released. This should not be a page describing the dataset.</help>
-					<requirement level="silver">There should be a single URL that can always be used to download the current version of the dataset.</requirement>
+					<requirement level="standard">There should be a single URL that can always be used to download the current version of the dataset.</requirement>
 				</question>
 				<question id="versionsUrl">
 					<label>What's the URL that gives a list of versions?</label>
 					<input type="url" placeholder="Version List URL"/>
 					<help>Enter the URL of a page or feed that provides a machine-readable list of the previous versions of the dataset.</help>
-					<requirement level="silver">There should be a document or feed that provides a list of all the available versions of the dataset.</requirement>
+					<requirement level="standard">There should be a document or feed that provides a list of all the available versions of the dataset.</requirement>
 				</question>
 			</if>
 			<question id="changeFeed">
 				<label>What's the URL that provides a feed of changes?</label>
 				<input type="url" placeholder="Change Feed URL"/>
 				<help>Enter the URL of a page or feed that provides a machine-readable list of the individual changes as they occur within the dataset, between dumps or versions of the dataset being created.</help>
-				<requirement level="silver">There should be a mechanism for developers to keep their downloaded datasets up to date without downloading each new dump or version of the dataset each time.</requirement>
+				<requirement level="standard">There should be a mechanism for developers to keep their downloaded datasets up to date without downloading each new dump or version of the dataset each time.</requirement>
 			</question>
 		</if>
 		<question id="dataType">
@@ -374,25 +532,25 @@
 			<label>What formats are you using to publish the data?</label>
 			<radioset>
 				<option value="standard">
-					<label>machine-readable formats specified in a suitable open standard<if test="dataType() !== ''"> (eg
-						<if test="dataType() === 'documents'">XML, plain text, Markdown, OOXML, PDF</if><if test="dataType() === 'statistical'">SDMX, CSV</if><if test="dataType() === 'geographic'">KML</if><if test="dataType() === 'structured'">JSON, XML, Turtle, CSV</if>)</if></label>
+					<label>machine-readable formats specified in a suitable open standard<if test="this.dataType() !== ''"> (eg
+						<if test="this.dataType() === 'documents'">XML, plain text, Markdown, OOXML, PDF</if><if test="this.dataType() === 'statistical'">SDMX, CSV</if><if test="this.dataType() === 'geographic'">KML</if><if test="this.dataType() === 'structured'">JSON, XML, Turtle, CSV</if>)</if></label>
 				</option>
 				<option value="proprietary">
-					<label>non-machine-readable, unsuitable, or proprietary formats<if test="dataType() !== ''"> (eg
-						<if test="dataType() === 'documents'">Word, Powerpoint, Pages</if><if test="dataType() === 'statistical'">Excel, PDF</if><if test="dataType() === 'geographic'">..., PDF</if><if test="dataType() === 'structured'">Word, Excel, PDF</if>)</if></label>
+					<label>non-machine-readable, unsuitable, or proprietary formats<if test="this.dataType() !== ''"> (eg
+						<if test="this.dataType() === 'documents'">Word, Powerpoint, Pages</if><if test="this.dataType() === 'statistical'">Excel, PDF</if><if test="this.dataType() === 'geographic'">..., PDF</if><if test="this.dataType() === 'structured'">Word, Excel, PDF</if>)</if></label>
 				</option>
 			</radioset>
 		</question>
 		<question id="identifiers">
 			<label>Are you using URIs to identify things in the data?</label>
 			<yesno />
-			<requirement level="silver">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
+			<requirement level="standard">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
 		</question>
-		<if test="identifiers() === 'true'">
+		<if test="this.identifiers() === 'true'">
 			<question id="resolvingUris">
 				<label>Do the URIs resolve to information about those things?</label>
 				<yesno />
-				<requirement level="gold">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
+				<requirement level="established">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
 			</question>
 			<question id="externalUris">
 				<label>Does the dataset include URIs outside your control?</label>
@@ -422,30 +580,30 @@
 			<label>What's the contact email address about this dataset?</label>
 			<input type="email" placeholder="Contact Email Address"/>
 			<help>Provide an email address that people can contact with queries about the dataset.</help>
-			<requirement level="bronze">You should have a contact email address so that people can get back in touch with you about any problems with the dataset.</requirement>
+			<requirement level="pilot">You should have a contact email address so that people can get back in touch with you about any problems with the dataset.</requirement>
 		</question>
 		<question id="forum">
 			<label>Where do you recommend people discuss this dataset?</label>
 			<input type="url" placeholder="Forum or Mailing List URL"/>
 			<help>Provide a URL for the forum or mailing list where developers using this dataset should discuss it.</help>
-			<requirement level="silver">You should indicate where people using this dataset should discuss the data and how they are using it.</requirement>
+			<requirement level="standard">You should indicate where people using this dataset should discuss the data and how they are using it.</requirement>
 		</question>
 		<question id="contributions">
 			<label>Where do you describe how people should contribute?</label>
 			<input type="url" placeholder="Contributor Instructions URL"/>
 			<help>Provide a link to a page that describes how people can contribute to the dataset, for example by correcting errors that they find or providing additional information.</help>
-			<requirement level="silver">You should provide instructions for people who want to contribute towards correcting or extending the dataset.</requirement>
+			<requirement level="standard">You should provide instructions for people who want to contribute towards correcting or extending the dataset.</requirement>
 		</question>
 		<question id="libraries">
 			<label>Where do you list tools for working with the data?</label>
 			<input type="url" placeholder="Tool URL"/>
 			<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
-			<requirement level="silver">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
+			<requirement level="standard">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
 		</question>
 	</group>
 	<certificate>
 		<p>
-			<placeholder ref="datasetTitle">This dataset</placeholder> has been certified as <placeholder ref="certificateLevelLabel"/> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
+			<placeholder ref="dataTitle">This dataset</placeholder> has been certified as <placeholder ref="certificateLevelLabel"/> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
 		</p>
 	</certificate>
 </questionnaire>

@@ -47,28 +47,47 @@ body {
 	margin-bottom: 0;
 }
 
-.label-bronze,
-.label-silver,
-.label-gold {
+#questionnaire .btn-help {
+	margin-left: -33px;
+	position: absolute;
+}
+
+#questionnaire .btn-option-help {
+	margin-left: -20px;
+	padding: 0;
+	position: absolute;
+}
+
+#questionnaire label .help-block {
+	margin-top: 0;
+}
+
+#questionnaire .control-label .badge-circular {
+	margin-right: 10px;
+}
+
+.label-pilot,
+.label-standard,
+.label-established {
 	text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
 	margin-left: 5px;
 	margin-right: 5px;
 }
 
-.label-bronze,
-.badge-bronze { 
+.label-pilot,
+.badge-pilot { 
 	background-color: peru; 
 	box-shadow: 0 0 2px peru;
 }
 
-.label-silver,
-.badge-silver { 
+.label-standard,
+.badge-standard { 
 	background-color: silver; 
 	box-shadow: 0 0 2px silver;
 }
 
-.label-gold,
-.badge-gold { 
+.label-established,
+.badge-established { 
 	background-color: gold; 
 	box-shadow: 0 0 2px gold;
 }

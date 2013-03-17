@@ -9,17 +9,23 @@ The [ODI's Open Data Certificate](http://theodi.github.com/open-data-certificate
   
 A certificate can be awarded at one of four levels:
 
-  * **Basic Certificate** for data that meets the bare minimum to classify as open data
-  * **Bronze Certificate** for open data that provides the minimum of what reusers need
-  * **Silver Certificate** for open data that provides a good base for reuse
-  * **Gold Certificate** for outstanding open data
+  * a **basic certificate** is for data that meets the fundamental requirements for open data
+  * a **pilot certificate** is for initial forays into publishing open data, which provides enough to prompt experimentation with data
+  * a **standard certificate** is for routinely published open data that encourages reuse
+  * a **established certificate** is for open data that provides reliable key information infrastructure
 
-The aims of the ODI's Open Data Certificate are:
+These levels are chosen to illustrate both that opening data is a journey, and that you don't have to do everything straight away, and to show that not all open data needs to be published with the same degree of investment.
 
-  * to provide data owners with something they can point to that shows how well they are doing open data
-  * to provide data owners with ideas about how they could improve the way in which they are publishing or supporting open data
-  * to provide data consumers with useful information about the data, helping them to engage with it
-  * to provide the open data community with on-going metrics about open data publication
+There are two primary goals for the Open Data Certificate:
+
+  * to provide data holders with something they can point to and have as a badge of honour that shows how well they are doing open data
+  * to provide data holders with concrete ideas about how they could improve the way in which they are publishing or supporting open data
+
+There are a few side effects that are also beneficial for the community:
+
+  * individual certificates can provide access to the information that data reusers need to help them understand how they can reuse the data
+  * the set of certificates that's granted can give us as a community access to metrics about not just how much data is being opened but how they are being released
+  * the process of working out what questions the certificates should ask helps to explore some of the subtle issues and trade-offs around opening up data
 
 Best practices in open data will change as time goes on. Certificates will only be valid for a year, to prompt data publishers to continue to improve their provision.
 
@@ -28,18 +34,18 @@ Best practices in open data will change as time goes on. Certificates will only 
 The [current version](http://theodi.github.com/open-data-certificate/certificate.html) is an **alpha version**. We are seeking feedback on:
 
   * whether it asks the right questions
-  * whether the bronze/silver/gold classification is correct
+  * whether the pilot/standard/established classification is correct
   * the usability of the form
 
 We are particularly looking for feedback from data publishers who attempt to use the tool to create a certificate for their own data.
 
-Let us know what you think by emailing [certificate@theodi.org](mailto:certificate@theodi.org) or adding issues to this project.
+Let us know what you think by emailing [certificate@theodi.org](mailto:certificate@theodi.org) or by adding issues to this project.
 
 Our longer-term aims are to provide back-end support for the certificate which would include:
 
-  * automatically populating answers based on information available about the dataset at the documentation URL
+  * automatically populating answers based on information available about the data at the documentation URL
   * automatically validating the answers that are provided
-  * storing a copy of the completed certificates, and providing search and social interfaces over them
+  * storing a copy of the completed certificates, and providing search, social and analytical interfaces over them
 
 These requirements, and the avoidance of double-entry for data publishers, are behind the decision to request links for much of the information that is requested by the form.
 
