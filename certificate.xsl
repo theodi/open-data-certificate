@@ -24,6 +24,12 @@
 <xsl:key name="fields" match="question" use="@id" />
 
 <xsl:template match="questionnaire">
+	<!-- bit of validation-->
+	<xsl:for-each-group select="//question" group-by="@id">
+		<xsl:if test="count(current-group()) > 1">
+			<xsl:message terminate="yes">More than one question with the id "<xsl:value-of select="@id" />"</xsl:message>
+		</xsl:if>
+	</xsl:for-each-group>
 	<html>
 	  <head>
 	    <title>ODI Open Data Certificate</title>
@@ -712,14 +718,16 @@
 		<xsl:variable name="level" as="xs:string" select="." />
 		<xsl:variable name="sameOrHigher" as="xs:string+" select="$levels[position() >= index-of($levels, $level)]" />
 		<xsl:variable name="options" as="element(option)*" select="$options[$level = 'basic' or requirement/@level = $sameOrHigher]" />
-		<xsl:text>if (</xsl:text>
-		<xsl:if test="$level = 'basic'">
-			<xsl:value-of select="concat($model, '.', $id, '() !== '''' &amp;&amp; ')" />
+		<xsl:if test="$level = 'basic' or exists($options)">
+			<xsl:text>if (</xsl:text>
+			<xsl:if test="$level = 'basic'">
+				<xsl:value-of select="concat($model, '.', $id, '() !== '''' &amp;&amp; ')" />
+			</xsl:if>
+			<xsl:for-each select="$options">
+				<xsl:value-of select="concat($model, '.', $id, '() !== ''', @value, '''')" />
+				<xsl:if test="position() != last()"> &amp;&amp; </xsl:if>
+			</xsl:for-each>) unmetRequirements['<xsl:value-of select="$level" />']++;
 		</xsl:if>
-		<xsl:for-each select="$options">
-			<xsl:value-of select="concat($model, '.', $id, '() !== ''', @value, '''')" />
-			<xsl:if test="position() != last()"> &amp;&amp; </xsl:if>
-		</xsl:for-each>) unmetRequirements['<xsl:value-of select="$level" />']++;
 	</xsl:for-each>
 </xsl:template>
 
@@ -732,7 +740,7 @@
 	</xsl:choose> unmetRequirements['<xsl:value-of select="$level" />']++; 
 </xsl:template>
 
-<xsl:template match="option/requirement" mode="unmetRequirements">
+<xsl:template match="checkboxset/option/requirement" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
 	<xsl:variable name="id" as="xs:string" select="ancestor::question/@id" />
 	<xsl:variable name="level" as="xs:string" select="if (@level) then @level else 'basic'" />
@@ -817,7 +825,7 @@
 	</xsl:if>
 </xsl:template>
 
-<xsl:template match="option/requirement" mode="requirementList">
+<xsl:template match="checkboxset/option/requirement" mode="requirementList">
 	<xsl:param name="level" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:if test="@level = $level">
 		<div>

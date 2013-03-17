@@ -27,7 +27,8 @@ body {
 }
 
 #questionnaire .control-label { 
-	width: 300px; 
+	width: 270px; 
+	padding-left: 30px;
 }
 
 #questionnaire .controls { 
@@ -63,7 +64,12 @@ body {
 }
 
 #questionnaire .control-label .badge-circular {
-	margin-right: 10px;
+	margin-left: -30px;
+}
+
+#questionnaire .radio.inline + .label {
+	position: relative;
+	top: 4px;
 }
 
 .label-pilot,
