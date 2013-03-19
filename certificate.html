@@ -1016,7 +1016,7 @@
             </div>
             <p><a id="download-certificate" data-bind="attr: { href: certificateHTML }" target="_new" class="btn btn-primary">Download Certificate</a></p>
          </section>
-         <section id="improvements" data-bind="visible: certificateLevel() !== 'none' &amp;&amp; certificateLevel() !== 'established'">
+         <section id="improvements" data-bind="visible: certificateLevel() !== 'established'">
             <div class="page-header">
                <h1>Improving Your Open Data</h1>
             </div>
@@ -1024,18 +1024,12 @@
                					You can improve the way you are publishing open data to make it more useful.
                				
             </p>
-            <div id="improvements-pilot" class="unstyled">
+            <div id="improvements-pilot" class="improvements">
                <div data-bind="visible: releaseType() !== 'collection'">
-                  <div data-bind="visible: documentationUrl() === ''">
-                     <p><a href="#documentationUrl"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a page that provides documentation about the open data you are publishing.
-                     </p>
-                  </div>
+                  <div class="improvement" data-bind="visible: documentationUrl() === ''"><a href="#documentationUrl" data-toggle="tab" data-target="#"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should have a page that provides documentation about the open data you are publishing.</span></div>
                </div>
-               <div data-bind="visible: copyrightURL() === ''">
-                  <p><a href="#copyrightURL"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a page that states your copyright over the data and provides details
-                     of any attribution that people should use.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: copyrightURL() === ''"><a href="#copyrightURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should have a page that states your copyright over the data and provides details
+                     of any attribution that people should use.</span></div>
                <div data-bind="visible: copyrightURL() !== ''">
                   <div data-bind="visible: !copyrightStatementMetadataLicense()">
                      <p><a href="#copyrightStatementMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> Provide machine-readable data in your copyright statement about the licences that
@@ -1045,69 +1039,54 @@
                </div>
                <div data-bind="visible: dataPersonal() !== ''">
                   <div data-bind="visible: dataPersonal() === 'individual'">
-                     <div data-bind="visible: personalDataConsent() === ''">
-                        <p><a href="#personalDataConsent"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> To comply with data protection laws, data has to be used consistently with how individuals
+                     <div class="improvement" data-bind="visible: personalDataConsent() === ''"><a href="#personalDataConsent" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">To comply with data protection laws, data has to be used consistently with how individuals
                            were told the data would be used. You should inform potential reusers about what that
-                           entails.
-                        </p>
-                     </div>
+                           entails.</span></div>
                   </div>
                   <div data-bind="visible: dataPersonal() !== 'not-personal'">
-                     <div data-bind="visible: personalDataAnonymisation() === ''">
-                        <p><a href="#personalDataAnonymisation"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> Both personal data and aggregate data should be anonymised to ensure that the likelihood
-                           of discovering information about an individual is minimised.
-                        </p>
-                     </div>
+                     <div class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">Both personal data and aggregate data should be anonymised to ensure that the likelihood
+                           of discovering information about an individual is minimised.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                   <div data-bind="visible: timeSensitive() !== 'timestamped' &amp;&amp; timeSensitive() !== 'false'">
-                     <p><a href="#timeSensitive"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> When releasing data that will go out of date over time, include timestamps that indicate
-                        when the data relates to within the data.
-                     </p>
+                     <div class="improvement"><a href="#timeSensitive" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">When releasing data that will go out of date over time, include timestamps that indicate
+                           when the data relates to within the data.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'series'">
                   <div data-bind="visible: frequentChanges() === 'true'">
                      <div data-bind="visible: frequentSeriesPublication() !== 'monthly' &amp;&amp; frequentSeriesPublication() !== 'weekly' &amp;&amp; frequentSeriesPublication() !== 'daily'">
-                        <p><a href="#frequentSeriesPublication"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> As the data you capture changes frequently, you should create a new dataset release
-                           every month.
-                        </p>
+                        <div class="improvement"><a href="#frequentSeriesPublication" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">As the data you capture changes frequently, you should create a new dataset release
+                              every month.</span></div>
                      </div>
                   </div>
                   <div data-bind="visible: seriesPublicationDelay() !== 'reasonable' &amp;&amp; seriesPublicationDelay() !== 'good' &amp;&amp; seriesPublicationDelay() !== 'minimal'">
-                     <p><a href="#seriesPublicationDelay"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> The delay between creating and publishing a dataset should be about the same as the
-                        gap between releases.
-                     </p>
+                     <div class="improvement"><a href="#seriesPublicationDelay" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">The delay between creating and publishing a dataset should be about the same as the
+                           gap between releases.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
                   <div data-bind="visible: provideDumps() === 'true'">
                      <div data-bind="visible: dumpFrequency() !== 'monthly' &amp;&amp; dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
-                        <p><a href="#dumpFrequency"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should create a new database dump every month.
-                        </p>
+                        <div class="improvement"><a href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should create a new database dump every month.</span></div>
                      </div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service'">
                   <div data-bind="visible: serviceAvailability() !== '99%' &amp;&amp; serviceAvailability() !== '99.9%' &amp;&amp; serviceAvailability() !== '99.999%'">
-                     <p><a href="#serviceAvailability"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should guarantee at least 99% availability (less than 3.65 days downtime/year)
-                        of the service.
-                     </p>
+                     <div class="improvement"><a href="#serviceAvailability" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should guarantee at least 99% availability (less than 3.65 days downtime/year)
+                           of the service.</span></div>
                   </div>
                </div>
                <div data-bind="visible: onGoingAvailability() !== 'P1Y' &amp;&amp; onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
-                  <p><a href="#onGoingAvailability"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                     available in this form for at least a year.
-                  </p>
+                  <div class="improvement"><a href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">Provide a guarantee to developers who might want to reuse your data that it will be
+                        available in this form for at least a year.</span></div>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'oneoff'">
                      <div data-bind="visible: documentationUrl() !== ''">
-                        <div data-bind="visible: !(datasetUrl() !== '')">
-                           <p><a href="#datasetUrl"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a URL that is a direct link to the data itself.
-                           </p>
-                        </div>
+                        <div class="improvement" data-bind="visible: !(datasetUrl() !== '')"><a href="#datasetUrl" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should have a URL that is a direct link to the data itself.</span></div>
                      </div>
                   </div>
                   <div data-bind="visible: releaseType() === 'series'">
@@ -1117,41 +1096,32 @@
                      </div>
                   </div>
                </div>
-               <div data-bind="visible: !(machineReadable() !== 'false')">
-                  <p><a href="#machineReadable"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide the data in a machine-readable format.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: !(machineReadable() !== 'false')"><a href="#machineReadable" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should provide the data in a machine-readable format.</span></div>
                <div data-bind="visible: dataType().documents">
                   <div data-bind="visible: documentFormat() !== 'semantic' &amp;&amp; documentFormat() !== 'format'">
-                     <p><a href="#documentFormat"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should publish documents in a format that is designed for documents.
-                     </p>
+                     <div class="improvement"><a href="#documentFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should publish documents in a format that is designed for documents.</span></div>
                   </div>
                </div>
                <div data-bind="visible: dataType().statistical">
                   <div data-bind="visible: statisticalFormat() !== 'statistical' &amp;&amp; statisticalFormat() !== 'tabular' &amp;&amp; statisticalFormat() !== 'format'">
-                     <p><a href="#statisticalFormat"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should publish tabular data in a format that is designed for tabular data.
-                     </p>
+                     <div class="improvement"><a href="#statisticalFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should publish tabular data in a format that is designed for tabular data.</span></div>
                   </div>
                </div>
                <div data-bind="visible: dataType().geographic">
                   <div data-bind="visible: geographicFormat() !== 'specific' &amp;&amp; geographicFormat() !== 'generic'">
-                     <p><a href="#geographicFormat"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should publish geographic data as structured data.
-                     </p>
+                     <div class="improvement"><a href="#geographicFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should publish geographic data as structured data.</span></div>
                   </div>
                </div>
                <div data-bind="visible: dataType().structured">
                   <div data-bind="visible: structuredFormat() !== 'suitable'">
-                     <p><a href="#structuredFormat"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should publish structured data in a format designed for structured data.
-                     </p>
+                     <div class="improvement"><a href="#structuredFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should publish structured data in a format designed for structured data.</span></div>
                   </div>
                </div>
-               <div data-bind="visible: contactEmail() === ''">
-                  <p><a href="#contactEmail"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a contact email address so that people can get back in touch with
-                     you about any problems with the dataset.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: contactEmail() === ''"><a href="#contactEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should have a contact email address so that people can get back in touch with
+                     you about any problems with the dataset.</span></div>
             </div>
-            <div id="improvements-standard" class="unstyled">
+            <hr>
+            <div id="improvements-standard" class="improvements">
                <div data-bind="visible: copyrightURL() !== ''">
                   <div data-bind="visible: !copyrightStatementMetadataAttribution()">
                      <p><a href="#copyrightStatementMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Provide machine-readable data in your copyright statement about the attribution that
@@ -1167,80 +1137,59 @@
                <div data-bind="visible: publisherOrigin() === 'false'">
                   <div data-bind="visible: thirdPartyOrigin() === 'true'">
                      <div data-bind="foreach: sources">
-                        <div data-bind="visible: thirdPartyData() === ''">
-                           <p><a href="#thirdPartyData"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should supply information about which parts of the dataset are sourced from other
-                              datasets.
-                           </p>
-                        </div>
+                        <div class="improvement" data-bind="visible: thirdPartyData() === ''"><a href="#thirdPartyData" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should supply information about which parts of the dataset are sourced from other
+                              datasets.</span></div>
                      </div>
                   </div>
                </div>
                <div data-bind="visible: dataPersonal() !== ''">
                   <div data-bind="visible: dataPersonal() !== 'not-personal'">
-                     <div data-bind="visible: privacyImpactAssessmentUrl() === ''">
-                        <p><a href="#privacyImpactAssessmentUrl"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> When datasets contain personal data, a privacy impact assessment should be carried
+                     <div class="improvement" data-bind="visible: privacyImpactAssessmentUrl() === ''"><a href="#privacyImpactAssessmentUrl" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">When datasets contain personal data, a privacy impact assessment should be carried
                            out to identify risks of releasing the data, mitigations against those risks, and
-                           to put in place processes that ensure that any breaches are handled effectively.
-                        </p>
-                     </div>
+                           to put in place processes that ensure that any breaches are handled effectively.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                   <div data-bind="visible: timeSensitive() !== 'false'">
-                     <p><a href="#timeSensitive"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> While a one-off release of time-sensitive data is appropriate for a pilot, you need
-                        a regular series releases for standard open data publication.
-                     </p>
+                     <div class="improvement"><a href="#timeSensitive" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">While a one-off release of time-sensitive data is appropriate for a pilot, you need
+                           a regular series releases for standard open data publication.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'series'">
                   <div data-bind="visible: frequentChanges() === 'true'">
                      <div data-bind="visible: frequentSeriesPublication() !== 'weekly' &amp;&amp; frequentSeriesPublication() !== 'daily'">
-                        <p><a href="#frequentSeriesPublication"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> As the data you capture changes frequently, you should create a new dataset release
-                           every week.
-                        </p>
+                        <div class="improvement"><a href="#frequentSeriesPublication" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">As the data you capture changes frequently, you should create a new dataset release
+                              every week.</span></div>
                      </div>
                   </div>
                   <div data-bind="visible: seriesPublicationDelay() !== 'good' &amp;&amp; seriesPublicationDelay() !== 'minimal'">
-                     <p><a href="#seriesPublicationDelay"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The delay between creating and publishing a dataset should be less than half the gap
-                        between releases.
-                     </p>
+                     <div class="improvement"><a href="#seriesPublicationDelay" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">The delay between creating and publishing a dataset should be less than half the gap
+                           between releases.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
-                  <div data-bind="visible: provideDumps() === ''">
-                     <p><a href="#provideDumps"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Dumps of the dataset should be made available to enable developers to download the
-                        entire dataset.
-                     </p>
-                  </div>
+                  <div class="improvement" data-bind="visible: provideDumps() === ''"><a href="#provideDumps" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Dumps of the dataset should be made available to enable developers to download the
+                        entire dataset.</span></div>
                   <div data-bind="visible: provideDumps() === 'true'">
                      <div data-bind="visible: dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
-                        <p><a href="#dumpFrequency"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should create a new database dump every week.
-                        </p>
+                        <div class="improvement"><a href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should create a new database dump every week.</span></div>
                      </div>
                   </div>
                </div>
                <div data-bind="visible: timeSensitive() !== 'true'">
-                  <div data-bind="visible: !(corrected() === 'true')">
-                     <p><a href="#corrected"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Open data should be corrected if it is found to contain errors.
-                     </p>
-                  </div>
+                  <div class="improvement" data-bind="visible: !(corrected() === 'true')"><a href="#corrected" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Open data should be corrected if it is found to contain errors.</span></div>
                </div>
-               <div data-bind="visible: qualityControlUrl() === ''">
-                  <p><a href="#qualityControlUrl"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Having a documented quality control process helps developers to understand how much
-                     to rely on the data that you make available.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: qualityControlUrl() === ''"><a href="#qualityControlUrl" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Having a documented quality control process helps developers to understand how much
+                     to rely on the data that you make available.</span></div>
                <div data-bind="visible: releaseType() === 'service'">
                   <div data-bind="visible: serviceAvailability() !== '99.9%' &amp;&amp; serviceAvailability() !== '99.999%'">
-                     <p><a href="#serviceAvailability"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year)
-                        of the service.
-                     </p>
+                     <div class="improvement"><a href="#serviceAvailability" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year)
+                           of the service.</span></div>
                   </div>
                </div>
                <div data-bind="visible: onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
-                  <p><a href="#onGoingAvailability"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                     available in this form for at least two years.
-                  </p>
+                  <div class="improvement"><a href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Provide a guarantee to developers who might want to reuse your data that it will be
+                        available in this form for at least two years.</span></div>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'series'">
@@ -1257,11 +1206,8 @@
                   </div>
                   <div data-bind="visible: releaseType() === 'service'">
                      <div data-bind="visible: documentationUrl() !== ''">
-                        <div data-bind="visible: !(endpointUrl() !== '')">
-                           <p><a href="#endpointUrl"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should have a service description document or similar single entry point for your
-                              API.
-                           </p>
-                        </div>
+                        <div class="improvement" data-bind="visible: !(endpointUrl() !== '')"><a href="#endpointUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should have a service description document or similar single entry point for your
+                              API.</span></div>
                      </div>
                      <div data-bind="visible: provideDumps() === 'true'">
                         <div data-bind="visible: !dumpManagementCurrent()">
@@ -1272,94 +1218,66 @@
                      </div>
                   </div>
                </div>
-               <div data-bind="visible: !(openStandard() !== 'false')">
-                  <p><a href="#openStandard"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide the data in an open standard format.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: !(openStandard() !== 'false')"><a href="#openStandard" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should provide the data in an open standard format.</span></div>
                <div data-bind="visible: dataType().documents">
                   <div data-bind="visible: documentFormat() !== 'semantic'">
-                     <p><a href="#documentFormat"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish documents in a format that exposes their semantic structure.
-                     </p>
+                     <div class="improvement"><a href="#documentFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should publish documents in a format that exposes their semantic structure.</span></div>
                   </div>
                </div>
                <div data-bind="visible: dataType().statistical">
                   <div data-bind="visible: statisticalFormat() !== 'statistical' &amp;&amp; statisticalFormat() !== 'tabular'">
-                     <p><a href="#statisticalFormat"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish tabular data in a format that exposes the tables of data.
-                     </p>
+                     <div class="improvement"><a href="#statisticalFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should publish tabular data in a format that exposes the tables of data.</span></div>
                   </div>
                </div>
                <div data-bind="visible: dataType().geographic">
                   <div data-bind="visible: geographicFormat() !== 'specific'">
-                     <p><a href="#geographicFormat"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish geographic data in a format designed for geographic data.
-                     </p>
+                     <div class="improvement"><a href="#geographicFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should publish geographic data in a format designed for geographic data.</span></div>
                   </div>
                </div>
-               <div data-bind="visible: identifiers() === ''">
-                  <p><a href="#identifiers"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Use URIs to identify things in the data, so that they can be easily reference.
-                  </p>
-               </div>
-               <div data-bind="visible: forum() === ''">
-                  <p><a href="#forum"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should indicate where people using this dataset should discuss the data and how
-                     they are using it.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: identifiers() === ''"><a href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Use URIs to identify things in the data, so that they can be easily reference.</span></div>
+               <div class="improvement" data-bind="visible: forum() === ''"><a href="#forum" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should indicate where people using this dataset should discuss the data and how
+                     they are using it.</span></div>
                <div data-bind="visible: corrected() === 'true'">
-                  <div data-bind="visible: correctionReporting() === ''">
-                     <p><a href="#correctionReporting"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide instructions for people who discover errors in the data.
-                     </p>
-                  </div>
-                  <div data-bind="visible: correctionDiscovery() === ''">
-                     <p><a href="#correctionDiscovery"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide an announcement mailing list or a feed to which reusers can subscribe
-                        to learn of corrections to the data.
-                     </p>
-                  </div>
+                  <div class="improvement" data-bind="visible: correctionReporting() === ''"><a href="#correctionReporting" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should provide instructions for people who discover errors in the data.</span></div>
+                  <div class="improvement" data-bind="visible: correctionDiscovery() === ''"><a href="#correctionDiscovery" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should provide an announcement mailing list or a feed to which reusers can subscribe
+                        to learn of corrections to the data.</span></div>
                </div>
             </div>
-            <div id="improvements-established" class="unstyled">
+            <hr>
+            <div id="improvements-established" class="improvements">
                <div data-bind="visible: releaseType() === 'series'">
                   <div data-bind="visible: frequentChanges() === 'true'">
                      <div data-bind="visible: seriesType() === 'dumps'">
-                        <div data-bind="visible: !(changeFeed() === 'true')">
-                           <p><a href="#changeFeed"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> As the data that you capture changes very frequently, you should provide a feed of
-                              the changes that occur so that it's easy for reusers to keep their copies up to date.
-                           </p>
-                        </div>
+                        <div class="improvement" data-bind="visible: !(changeFeed() === 'true')"><a href="#changeFeed" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">As the data that you capture changes very frequently, you should provide a feed of
+                              the changes that occur so that it's easy for reusers to keep their copies up to date.</span></div>
                      </div>
                      <div data-bind="visible: frequentSeriesPublication() !== 'daily'">
-                        <p><a href="#frequentSeriesPublication"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> As the data you capture changes frequently, you should create a new dataset release
-                           every day.
-                        </p>
+                        <div class="improvement"><a href="#frequentSeriesPublication" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">As the data you capture changes frequently, you should create a new dataset release
+                              every day.</span></div>
                      </div>
                   </div>
                   <div data-bind="visible: seriesPublicationDelay() !== 'minimal'">
-                     <p><a href="#seriesPublicationDelay"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> There should be minimal or no delay between creating and publishing datasets.
-                     </p>
+                     <div class="improvement"><a href="#seriesPublicationDelay" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">There should be minimal or no delay between creating and publishing datasets.</span></div>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
                   <div data-bind="visible: provideDumps() === 'true'">
                      <div data-bind="visible: dumpFrequency() !== 'daily'">
-                        <p><a href="#dumpFrequency"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should create a new database dump every day.
-                        </p>
+                        <div class="improvement"><a href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">You should create a new database dump every day.</span></div>
                      </div>
                   </div>
                </div>
-               <div data-bind="visible: qualityControlAudited() === ''">
-                  <p><a href="#qualityControlAudited"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> An audited quality control process gives developers reassurance that the quality control
-                     process that you have described is being adhered to.
-                  </p>
-               </div>
+               <div class="improvement" data-bind="visible: qualityControlAudited() === ''"><a href="#qualityControlAudited" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">An audited quality control process gives developers reassurance that the quality control
+                     process that you have described is being adhered to.</span></div>
                <div data-bind="visible: releaseType() === 'service'">
                   <div data-bind="visible: serviceAvailability() !== '99.999%'">
-                     <p><a href="#serviceAvailability"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
-                        of the service.
-                     </p>
+                     <div class="improvement"><a href="#serviceAvailability" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
+                           of the service.</span></div>
                   </div>
                </div>
                <div data-bind="visible: onGoingAvailability() !== 'P3Y'">
-                  <p><a href="#onGoingAvailability"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
-                     available in this form for at least three years.
-                  </p>
+                  <div class="improvement"><a href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">Provide a guarantee to developers who might want to reuse your data that it will be
+                        available in this form for at least three years.</span></div>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'service'">
@@ -1378,23 +1296,16 @@
                </div>
                <div data-bind="visible: dataType().statistical">
                   <div data-bind="visible: statisticalFormat() !== 'statistical'">
-                     <p><a href="#statisticalFormat"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should publish statistical data in a format that exposes its dimensions and measures.
-                     </p>
+                     <div class="improvement"><a href="#statisticalFormat" data-toggle="tab" data-target="#technical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">You should publish statistical data in a format that exposes its dimensions and measures.</span></div>
                   </div>
                </div>
                <div data-bind="visible: identifiers() === 'true'">
-                  <div data-bind="visible: resolvingUris() === ''">
-                     <p><a href="#resolvingUris"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> Identifiers that you use within your dataset should resolve to provide information
-                        about the things being identified.
-                     </p>
-                  </div>
+                  <div class="improvement" data-bind="visible: resolvingUris() === ''"><a href="#resolvingUris" data-toggle="tab" data-target="#technical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">Identifiers that you use within your dataset should resolve to provide information
+                        about the things being identified.</span></div>
                </div>
-               <div data-bind="visible: libraries() === ''">
-                  <p><a href="#libraries"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should provide a list of software libraries and other tools that help developers
+               <div class="improvement" data-bind="visible: libraries() === ''"><a href="#libraries" data-toggle="tab" data-target="#social"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">You should provide a list of software libraries and other tools that help developers
                      who want to work with the data. These can be created by you or by other members of
-                     the community.
-                  </p>
-               </div>
+                     the community.</span></div>
             </div>
          </section>
       </div>

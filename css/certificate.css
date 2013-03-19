@@ -73,6 +73,28 @@ body {
 	top: 4px;
 }
 
+#improvements .improvements {
+	margin-top: 14px;
+	margin-bottom: 20px;
+}
+
+#improvements .improvement {
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+
+#improvements .improvement a {
+	display: block;
+	float: left;
+	width: 160px;
+	text-align: right;
+}
+
+#improvements .improvement-label {
+	display: block;
+	margin-left: 180px;
+}
+
 .label-pilot,
 .label-standard,
 .label-established {

@@ -150,7 +150,7 @@
   					<a id="download-certificate" data-bind="attr: {{ href: certificateHTML }}" target="_new" class="btn btn-primary">Download Certificate</a>
   				</p>
 	  		</section>
-	  		<section id="improvements" data-bind="visible: certificateLevel() !== 'none' &amp;&amp; certificateLevel() !== '{levels/level[last()]/@id}'">
+	  		<section id="improvements" data-bind="visible: certificateLevel() !== '{levels/level[last()]/@id}'">
   				<div class="page-header">
   					<h1>Improving Your Open Data</h1>
   				</div>
@@ -158,11 +158,12 @@
   					You can improve the way you are publishing open data to make it more useful.
   				</p>
 	  			<xsl:for-each select="levels/level[position() > 1]">
-	  				<div id="improvements-{@id}" class="unstyled">
+	  				<div id="improvements-{@id}" class="improvements">
 	  					<xsl:apply-templates select="/questionnaire" mode="requirementList">
 	  						<xsl:with-param name="level" select="@id" tunnel="yes" />
 	  					</xsl:apply-templates>
 	  				</div>
+	  				<xsl:if test="position() != last()"><hr /></xsl:if>
 	  			</xsl:for-each>
 	  		</section>
 	    </div>
@@ -804,13 +805,14 @@
 				</xsl:for-each>
 			</xsl:attribute>
 			<xsl:for-each select="$options/requirement[@level = $level]">
-				<p>
-					<a href="#{ancestor::question/@id}">
+				<div class="improvement">
+					<a href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
 						<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
 					</a>
-					<xsl:text> </xsl:text>
-					<xsl:apply-templates />
-				</p>
+					<span class="improvement-label">
+						<xsl:apply-templates />
+					</span>
+				</div>
 			</xsl:for-each>
 		</div>
 	</xsl:if>
@@ -819,7 +821,7 @@
 <xsl:template match="requirement" mode="requirementList">
 	<xsl:param name="level" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:if test="@level = $level">
-		<div>
+		<div class="improvement">
 			<xsl:attribute name="data-bind">
 				<xsl:text>visible: </xsl:text>
 				<xsl:choose>
@@ -827,13 +829,12 @@
 					<xsl:otherwise><xsl:value-of select="ancestor::question/@id" />() === ''</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
-			<p>
-				<a href="#{ancestor::question/@id}">
-					<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
-				</a>
-				<xsl:text> </xsl:text>
+			<a href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+			</a>
+			<span class="improvement-label">
 				<xsl:apply-templates />
-			</p>
+			</span>
 		</div>
 	</xsl:if>
 </xsl:template>
