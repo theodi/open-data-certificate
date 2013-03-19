@@ -120,8 +120,7 @@
 	      			<h2>Questionnaire</h2>
 	      		</div>
 	      		<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
-	      	</section>
-	      	<section>
+	      		<hr />
 	      		<ul class="nav nav-tabs">
 	      			<xsl:for-each select="group">
 	      				<li>
