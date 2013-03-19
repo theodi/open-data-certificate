@@ -73,24 +73,24 @@ body {
 	top: 4px;
 }
 
-#improvements .improvements {
+.improvements {
 	margin-top: 14px;
 	margin-bottom: 20px;
 }
 
-#improvements .improvement {
+.improvement {
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
 
-#improvements .improvement a {
+.improvement-label {
 	display: block;
 	float: left;
 	width: 160px;
 	text-align: right;
 }
 
-#improvements .improvement-label {
+.improvement-desc {
 	display: block;
 	margin-left: 180px;
 }

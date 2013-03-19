@@ -100,13 +100,19 @@
 	  								</div>
 	  							</div>
 	  							<div class="row-fluid">
-	  								<div class="span12">
-	  									<dl class="dl-horizontal">
-	  										<xsl:for-each select="levels/level">
-	  											<dt><xsl:value-of select="local:capitalise(@id)" /></dt>
-	  											<dd><xsl:value-of select="." /></dd>
-	  										</xsl:for-each>
-	  									</dl>
+	  								<div class="span12 improvements">
+  										<xsl:for-each select="levels/level">
+  											<div class="improvement">
+  												<span class="improvement-label">
+  													<span class="label label-{if (position() = 1) then 'info' else @id}">
+  														<i class="icon-star icon-white"></i>
+  														<xsl:text> </xsl:text>
+  														<xsl:value-of select="local:capitalise(@id)" />
+  													</span>
+  												</span>
+  												<span class="improvement-desc"><xsl:value-of select="." /></span>
+  											</div>
+  										</xsl:for-each>
 	  								</div>
 	  							</div>
 	  						</div>
@@ -812,14 +818,14 @@
 				</xsl:for-each>
 			</xsl:attribute>
 			<xsl:for-each select="$options/requirement[@level = $level]">
-				<div class="improvement">
-					<a href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
+				<p class="improvement">
+					<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
 						<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
 					</a>
-					<span class="improvement-label">
+					<span class="improvement-desc">
 						<xsl:apply-templates />
 					</span>
-				</div>
+				</p>
 			</xsl:for-each>
 		</div>
 	</xsl:if>
@@ -828,7 +834,7 @@
 <xsl:template match="requirement" mode="requirementList">
 	<xsl:param name="level" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:if test="@level = $level">
-		<div class="improvement">
+		<p class="improvement">
 			<xsl:attribute name="data-bind">
 				<xsl:text>visible: </xsl:text>
 				<xsl:choose>
@@ -836,32 +842,31 @@
 					<xsl:otherwise><xsl:value-of select="ancestor::question/@id" />() === ''</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
-			<a href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
+			<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
 				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
 			</a>
-			<span class="improvement-label">
+			<span class="improvement-desc">
 				<xsl:apply-templates />
 			</span>
-		</div>
+		</p>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="checkboxset/option/requirement" mode="requirementList">
 	<xsl:param name="level" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:if test="@level = $level">
-		<div>
+		<p class="improvement">
 			<xsl:attribute name="data-bind">
 				<xsl:text>visible: </xsl:text>
 				<xsl:value-of select="concat('!', ancestor::question/@id, local:capitalise(../@value), '()')" />
 			</xsl:attribute>
-			<p>
-				<a href="#{ancestor::question/@id}">
-					<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
-				</a>
-				<xsl:text> </xsl:text>
+			<a class="improvement-label" href="#{ancestor::question/@id}">
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+			</a>
+			<span class="improvement-desc">
 				<xsl:apply-templates />
-			</p>
-		</div>
+			</span>
+		</p>
 	</xsl:if>
 </xsl:template>
 
