@@ -278,6 +278,18 @@
 	<div class="tab-pane{if (preceding-sibling::group) then '' else ' active'}" id="{@id}">
 		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
+		<ul class="pager">
+			<li class="previous{if (not(preceding-sibling::group)) then ' disabled' else ''}">
+				<a data-toggle="tab" href="#{preceding-sibling::group[1]/@id}">
+					<xsl:text>&#x2190; Previous</xsl:text>
+				</a>
+			</li>
+			<li class="next{if (not(following-sibling::group)) then ' disabled' else ''}">
+				<a data-toggle="tab" href="#{following-sibling::group[1]/@id}">
+					<xsl:text>Next &#x2192;</xsl:text>
+				</a>
+			</li>
+		</ul>
 	</div>
 </xsl:template>
 

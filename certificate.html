@@ -496,6 +496,10 @@
                            			
                         </div>
                      </fieldset>
+                     <ul class="pager">
+                        <li class="previous disabled"><a data-toggle="tab" href="#">← Previous</a></li>
+                        <li class="next"><a data-toggle="tab" href="#practical">Next →</a></li>
+                     </ul>
                   </div>
                   <div class="tab-pane" id="practical">
                      <fieldset id="accuracy">
@@ -678,6 +682,10 @@
                                  </div></label></div>
                         </div>
                      </fieldset>
+                     <ul class="pager">
+                        <li class="previous"><a data-toggle="tab" href="#legal">← Previous</a></li>
+                        <li class="next"><a data-toggle="tab" href="#technical">Next →</a></li>
+                     </ul>
                   </div>
                   <div class="tab-pane" id="technical">
                      <div class="conditional" data-bind="visible: releaseType() !== ''">
@@ -937,6 +945,10 @@
                            			
                         </div>
                      </fieldset>
+                     <ul class="pager">
+                        <li class="previous"><a data-toggle="tab" href="#practical">← Previous</a></li>
+                        <li class="next"><a data-toggle="tab" href="#social">Next →</a></li>
+                     </ul>
                   </div>
                   <div class="tab-pane" id="social">
                      <div class="control-group"><label class="control-label" for="contactEmail"><span class="badge badge-circular badge-success pull-left" data-bind="visible: contactEmailStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the contact email address about this dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" placeholder="Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="contactEmail-help">Provide an email address that people can contact with queries about the dataset.</span><div class="requirement collapse" id="contactEmail-requirement">
@@ -983,6 +995,10 @@
                            </div>
                         </div>
                      </div>
+                     <ul class="pager">
+                        <li class="previous"><a data-toggle="tab" href="#technical">← Previous</a></li>
+                        <li class="next disabled"><a data-toggle="tab" href="#">Next →</a></li>
+                     </ul>
                   </div>
                </div>
             </section>

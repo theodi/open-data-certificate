@@ -779,7 +779,7 @@
 						</option>
 					</radioset>
 				</question>
-			</if>			
+			</if>
 			<question id="identifiers">
 				<label>Are you using URIs to identify things in the data?</label>
 				<yesno />
