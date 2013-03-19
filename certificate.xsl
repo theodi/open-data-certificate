@@ -260,7 +260,8 @@
 
 <xsl:template match="level" mode="statusIndicator">
 	<xsl:param name="group" as="xs:string" required="yes" tunnel="yes" />
-	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id}" data-bind="visible: {$group}Status().{@id} > 0, text: {$group}Status().{@id}"></span>
+	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id}" 
+		data-bind="visible: {$group}Status().{@id} > 0, text: {$group}Status().{@id}, attr: {{ title: 'You have ' + {$group}Status().{@id} + ' question' + ({$group}Status().{@id} > 1 ? 's' : '') + ' left to answer before you get to {@id} level' }}"></span>
 	<xsl:choose>
 		<xsl:when test="following-sibling::level">
 			<span data-bind="visible: {$group}Status().{@id} === 0">
@@ -268,7 +269,8 @@
 			</span>
 		</xsl:when>
 		<xsl:otherwise>
-			<span class="badge badge-circular badge-{@id}" data-bind="visible: {$group}Status().{@id} === 0">
+			<span class="badge badge-circular badge-{@id}" data-bind="visible: {$group}Status().{@id} === 0"
+				title="You have reached {@id} level">
 				<i class="icon icon-white icon-star"></i>
 			</span>
 		</xsl:otherwise>
@@ -557,7 +559,7 @@
 
 <xsl:template match="requirement[not(@level)]">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<div class="conditional" data-bind="visible: !({local:knockoutTest(@test)})">
+	<div class="conditional" data-bind="visible: !({if (@test) then local:knockoutTest(@test) else if (ancestor::question/yesno) then concat($id, '() === ''true''') else concat($id, 'Status() === ''complete''')})">
 		<div class="requirement">
 			<p class="alert alert-error"><xsl:apply-templates /></p>
 		</div>
@@ -687,7 +689,12 @@
 		<xsl:value-of select="concat($function, local:capitalise(@value), '()')" />
 		<xsl:text>) status = 'complete';&#xA;</xsl:text>
 	</xsl:for-each>
-	<xsl:text>  else status = 'optional';&#xA;</xsl:text>
+	<xsl:text>  else status = '</xsl:text>
+	<xsl:choose>
+		<xsl:when test="checkboxset/@required"><xsl:value-of select="checkboxset/@required" /></xsl:when>
+		<xsl:otherwise>optional</xsl:otherwise>
+	</xsl:choose>
+	<xsl:text>';&#xA;</xsl:text>
 	<xsl:text>  return status;&#xA;</xsl:text>
 	<xsl:text>});&#xA;</xsl:text>
 </xsl:template>
@@ -750,6 +757,7 @@
 	<xsl:variable name="level" as="xs:string" select="if (@level) then @level else 'basic'" />
 	<xsl:choose>
 		<xsl:when test="@test">if (!(<xsl:value-of select="local:jsTest(@test, $model)" />))</xsl:when>
+		<xsl:when test="ancestor::question/yesno">if (<xsl:value-of select="concat($model, '.', ancestor::question/@id, '() !== ''true''')" />)</xsl:when>
 		<xsl:otherwise>if (<xsl:value-of select="concat($model, '.', ancestor::question/@id, 'Status() !== ''complete''')" />)</xsl:otherwise>
 	</xsl:choose> unmetRequirements['<xsl:value-of select="$level" />']++; 
 </xsl:template>

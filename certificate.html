@@ -119,10 +119,10 @@
             </section>
             <section>
                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#legal" data-toggle="tab">Legal <span class="badge badge-circular badge-important" data-bind="visible: legalStatus().basic &gt; 0, text: legalStatus().basic"></span><span data-bind="visible: legalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: legalStatus().pilot &gt; 0, text: legalStatus().pilot"></span><span data-bind="visible: legalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: legalStatus().standard &gt; 0, text: legalStatus().standard"></span><span data-bind="visible: legalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: legalStatus().established &gt; 0, text: legalStatus().established"></span><span class="badge badge-circular badge-established" data-bind="visible: legalStatus().established === 0"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#practical" data-toggle="tab">Practical <span class="badge badge-circular badge-important" data-bind="visible: practicalStatus().basic &gt; 0, text: practicalStatus().basic"></span><span data-bind="visible: practicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: practicalStatus().pilot &gt; 0, text: practicalStatus().pilot"></span><span data-bind="visible: practicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: practicalStatus().standard &gt; 0, text: practicalStatus().standard"></span><span data-bind="visible: practicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: practicalStatus().established &gt; 0, text: practicalStatus().established"></span><span class="badge badge-circular badge-established" data-bind="visible: practicalStatus().established === 0"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#technical" data-toggle="tab">Technical <span class="badge badge-circular badge-important" data-bind="visible: technicalStatus().basic &gt; 0, text: technicalStatus().basic"></span><span data-bind="visible: technicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: technicalStatus().pilot &gt; 0, text: technicalStatus().pilot"></span><span data-bind="visible: technicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: technicalStatus().standard &gt; 0, text: technicalStatus().standard"></span><span data-bind="visible: technicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: technicalStatus().established &gt; 0, text: technicalStatus().established"></span><span class="badge badge-circular badge-established" data-bind="visible: technicalStatus().established === 0"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#social" data-toggle="tab">Social <span class="badge badge-circular badge-important" data-bind="visible: socialStatus().basic &gt; 0, text: socialStatus().basic"></span><span data-bind="visible: socialStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: socialStatus().pilot &gt; 0, text: socialStatus().pilot"></span><span data-bind="visible: socialStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: socialStatus().standard &gt; 0, text: socialStatus().standard"></span><span data-bind="visible: socialStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: socialStatus().established &gt; 0, text: socialStatus().established"></span><span class="badge badge-circular badge-established" data-bind="visible: socialStatus().established === 0"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li class="active"><a href="#legal" data-toggle="tab">Legal <span class="badge badge-circular badge-important" data-bind="visible: legalStatus().basic &gt; 0, text: legalStatus().basic, attr: { title: 'You have ' + legalStatus().basic + ' question' + (legalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: legalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: legalStatus().pilot &gt; 0, text: legalStatus().pilot, attr: { title: 'You have ' + legalStatus().pilot + ' question' + (legalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: legalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: legalStatus().standard &gt; 0, text: legalStatus().standard, attr: { title: 'You have ' + legalStatus().standard + ' question' + (legalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: legalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: legalStatus().established &gt; 0, text: legalStatus().established, attr: { title: 'You have ' + legalStatus().established + ' question' + (legalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: legalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#practical" data-toggle="tab">Practical <span class="badge badge-circular badge-important" data-bind="visible: practicalStatus().basic &gt; 0, text: practicalStatus().basic, attr: { title: 'You have ' + practicalStatus().basic + ' question' + (practicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: practicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: practicalStatus().pilot &gt; 0, text: practicalStatus().pilot, attr: { title: 'You have ' + practicalStatus().pilot + ' question' + (practicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: practicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: practicalStatus().standard &gt; 0, text: practicalStatus().standard, attr: { title: 'You have ' + practicalStatus().standard + ' question' + (practicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: practicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: practicalStatus().established &gt; 0, text: practicalStatus().established, attr: { title: 'You have ' + practicalStatus().established + ' question' + (practicalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: practicalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#technical" data-toggle="tab">Technical <span class="badge badge-circular badge-important" data-bind="visible: technicalStatus().basic &gt; 0, text: technicalStatus().basic, attr: { title: 'You have ' + technicalStatus().basic + ' question' + (technicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: technicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: technicalStatus().pilot &gt; 0, text: technicalStatus().pilot, attr: { title: 'You have ' + technicalStatus().pilot + ' question' + (technicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: technicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: technicalStatus().standard &gt; 0, text: technicalStatus().standard, attr: { title: 'You have ' + technicalStatus().standard + ' question' + (technicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: technicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: technicalStatus().established &gt; 0, text: technicalStatus().established, attr: { title: 'You have ' + technicalStatus().established + ' question' + (technicalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: technicalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#social" data-toggle="tab">Social <span class="badge badge-circular badge-important" data-bind="visible: socialStatus().basic &gt; 0, text: socialStatus().basic, attr: { title: 'You have ' + socialStatus().basic + ' question' + (socialStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: socialStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: socialStatus().pilot &gt; 0, text: socialStatus().pilot, attr: { title: 'You have ' + socialStatus().pilot + ' question' + (socialStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: socialStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: socialStatus().standard &gt; 0, text: socialStatus().standard, attr: { title: 'You have ' + socialStatus().standard + ' question' + (socialStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: socialStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: socialStatus().established &gt; 0, text: socialStatus().established, attr: { title: 'You have ' + socialStatus().established + ' question' + (socialStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: socialStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
                </ul>
                <div class="tab-content">
                   <div class="tab-pane active" id="legal">
@@ -221,7 +221,7 @@
                            <div class="control-group"><label class="control-label" for="otherContentLicenceURL"><span class="badge badge-circular badge-important pull-left" data-bind="visible: otherContentLicenceURLStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: otherContentLicenceURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the location the licence?</label><div class="controls"><input type="url" class="span5" id="otherContentLicenceURL" name="otherContentLicenceURL" data-bind="value: otherContentLicenceURL, valueUpdate: 'afterkeydown'" placeholder="Licence URL" required="required"></div>
                            </div>
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: otherContentLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: otherContentLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#otherContentLicenceOpen-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="otherContentLicenceOpen" data-bind="checked: otherContentLicenceOpen"> Yes</label><label class="radio inline"><input type="radio" value="false" name="otherContentLicenceOpen" data-bind="checked: otherContentLicenceOpen"> No</label><span class="help-block collapse" id="otherContentLicenceOpen-help">Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</span><div class="conditional" data-bind="visible: !(otherDataLicenceOpen() === 'true')">
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: otherContentLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: otherContentLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#otherContentLicenceOpen-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="otherContentLicenceOpen" data-bind="checked: otherContentLicenceOpen"> Yes</label><label class="radio inline"><input type="radio" value="false" name="otherContentLicenceOpen" data-bind="checked: otherContentLicenceOpen"> No</label><span class="help-block collapse" id="otherContentLicenceOpen-help">Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</span><div class="conditional" data-bind="visible: !(otherContentLicenceOpen() === 'true')">
                                     <div class="requirement">
                                        <p class="alert alert-error">You must publish open data under a licence that is open to enable others to reuse
                                           it.
@@ -876,7 +876,7 @@
                         </div>
                         <div class="conditional" data-bind="visible: dataType().documents">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: documentFormatStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the formats used for documents include:</label><div class="controls"><label class="radio"><input type="radio" name="documentFormat" data-bind="checked: documentFormat" value="semantic">one that exposes the semantic structure of documents, such as Docbook, HTML or Markdown <span class="label label-standard" data-toggle="collapse" data-target="#documentFormatsemantic-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentFormatsemantic-requirement">
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: documentFormatStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the formats used for documents include:</label><div class="controls"><label class="radio"><input type="radio" name="documentFormat" data-bind="checked: documentFormat" value="semantic">one that exposes the semantic structure of documents, such as HTML, Docbook or Markdown <span class="label label-standard" data-toggle="collapse" data-target="#documentFormatsemantic-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentFormatsemantic-requirement">
                                        <p class="alert alert-info"><a href="#documentFormatsemantic-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish documents in a format that exposes their semantic structure.
                                        </p>
                                     </div></label><label class="radio"><input type="radio" name="documentFormat" data-bind="checked: documentFormat" value="format">one that focuses on the format of documents, such as OOXML or PDF <span class="label label-pilot" data-toggle="collapse" data-target="#documentFormatformat-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="documentFormatformat-requirement">
@@ -1096,7 +1096,7 @@
                      </div>
                   </div>
                </div>
-               <div class="improvement" data-bind="visible: !(machineReadable() !== 'false')"><a href="#machineReadable" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should provide the data in a machine-readable format.</span></div>
+               <div class="improvement" data-bind="visible: machineReadable() === ''"><a href="#machineReadable" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should provide the data in a machine-readable format.</span></div>
                <div data-bind="visible: dataType().documents">
                   <div data-bind="visible: documentFormat() !== 'semantic' &amp;&amp; documentFormat() !== 'format'">
                      <div class="improvement"><a href="#documentFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-label">You should publish documents in a format that is designed for documents.</span></div>
@@ -1177,7 +1177,7 @@
                   </div>
                </div>
                <div data-bind="visible: timeSensitive() !== 'true'">
-                  <div class="improvement" data-bind="visible: !(corrected() === 'true')"><a href="#corrected" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Open data should be corrected if it is found to contain errors.</span></div>
+                  <div class="improvement" data-bind="visible: corrected() === ''"><a href="#corrected" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Open data should be corrected if it is found to contain errors.</span></div>
                </div>
                <div class="improvement" data-bind="visible: qualityControlUrl() === ''"><a href="#qualityControlUrl" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">Having a documented quality control process helps developers to understand how much
                      to rely on the data that you make available.</span></div>
@@ -1218,7 +1218,7 @@
                      </div>
                   </div>
                </div>
-               <div class="improvement" data-bind="visible: !(openStandard() !== 'false')"><a href="#openStandard" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should provide the data in an open standard format.</span></div>
+               <div class="improvement" data-bind="visible: openStandard() === ''"><a href="#openStandard" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should provide the data in an open standard format.</span></div>
                <div data-bind="visible: dataType().documents">
                   <div data-bind="visible: documentFormat() !== 'semantic'">
                      <div class="improvement"><a href="#documentFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-label">You should publish documents in a format that exposes their semantic structure.</span></div>
@@ -1248,7 +1248,7 @@
                <div data-bind="visible: releaseType() === 'series'">
                   <div data-bind="visible: frequentChanges() === 'true'">
                      <div data-bind="visible: seriesType() === 'dumps'">
-                        <div class="improvement" data-bind="visible: !(changeFeed() === 'true')"><a href="#changeFeed" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">As the data that you capture changes very frequently, you should provide a feed of
+                        <div class="improvement" data-bind="visible: changeFeed() === ''"><a href="#changeFeed" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-label">As the data that you capture changes very frequently, you should provide a feed of
                               the changes that occur so that it's easy for reusers to keep their copies up to date.</span></div>
                      </div>
                      <div data-bind="visible: frequentSeriesPublication() !== 'daily'">
@@ -1689,7 +1689,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	if (certificate.otherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.otherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherDataLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
-	if (!(certificate.otherDataLicenceOpen() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.otherDataLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -1710,7 +1710,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	if (certificate.otherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
-	if (!(certificate.otherDataLicenceOpen() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -1727,7 +1727,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.publisherOpsiExemptionStatus() !== 'optional') unmetRequirements[certificate.publisherOpsiExemptionStatus()]++;
 	
 	if (certificate.publisherOpsiExemption() === 'false') {
-if (certificate.publisherOpsiExemptionStatus() !== 'complete') unmetRequirements['basic']++; 
+if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -1799,7 +1799,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
 	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceCanRepublishStatus()]++;
-	if (!(sources.thirdPartyOtherDataLicenceCanRepublish() === 'true')) unmetRequirements['basic']++; 
+	if (sources.thirdPartyOtherDataLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -1828,7 +1828,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
 	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceCanRepublishStatus()]++;
-	if (!(sources.thirdPartyOtherContentLicenceCanRepublish() === 'true')) unmetRequirements['basic']++; 
+	if (sources.thirdPartyOtherContentLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -1855,7 +1855,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
-	if (!(certificate.cldsRecorded() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2044,7 +2044,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
-	if (!(certificate.changeFeed() === 'true')) unmetRequirements['established']++; 
+	if (certificate.changeFeed() !== 'true') unmetRequirements['established']++; 
 
 }
 
@@ -2073,7 +2073,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
-	if (certificate.provideDumpsStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.provideDumps() === 'true') {
 
@@ -2094,7 +2094,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.correctedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
-	if (!(certificate.corrected() === 'true')) unmetRequirements['standard']++; 
+	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
 
 }
 
@@ -2260,7 +2260,7 @@ if (certificate.dataTypeDocuments()) status = 'complete';
 else if (certificate.dataTypeStatistical()) status = 'complete';
 else if (certificate.dataTypeGeographic()) status = 'complete';
 else if (certificate.dataTypeStructured()) status = 'complete';
-  else status = 'optional';
+  else status = 'pilot';
   return status;
 });
 certificate.documentFormat = ko.observable('');
@@ -2442,12 +2442,12 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.machineReadableStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.machineReadableStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.machineReadableStatus() !== 'optional') unmetRequirements[certificate.machineReadableStatus()]++;
-	if (!(certificate.machineReadable() !== 'false')) unmetRequirements['pilot']++; 
+	if (certificate.machineReadable() !== 'true') unmetRequirements['pilot']++; 
 
 	if (certificate.openStandardStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.openStandardStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.openStandardStatus() !== 'optional') unmetRequirements[certificate.openStandardStatus()]++;
-	if (!(certificate.openStandard() !== 'false')) unmetRequirements['standard']++; 
+	if (certificate.openStandard() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.dataTypeStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.dataTypeStatus() === 'required') unmetRequirements['basic']++;
@@ -2500,14 +2500,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
-	if (certificate.identifiersStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.identifiers() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.identifiers() === 'true') {
 
 	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUrisStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.resolvingUris() !== 'true') unmetRequirements['established']++; 
 
 	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;
@@ -2656,7 +2656,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	if (certificate.otherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.otherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherDataLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
-	if (!(certificate.otherDataLicenceOpen() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.otherDataLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2677,7 +2677,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	if (certificate.otherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
-	if (!(certificate.otherDataLicenceOpen() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2694,7 +2694,7 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.publisherOpsiExemptionStatus() !== 'optional') unmetRequirements[certificate.publisherOpsiExemptionStatus()]++;
 	
 	if (certificate.publisherOpsiExemption() === 'false') {
-if (certificate.publisherOpsiExemptionStatus() !== 'complete') unmetRequirements['basic']++; 
+if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2766,7 +2766,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
 	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceCanRepublishStatus()]++;
-	if (!(sources.thirdPartyOtherDataLicenceCanRepublish() === 'true')) unmetRequirements['basic']++; 
+	if (sources.thirdPartyOtherDataLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2795,7 +2795,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
 	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceCanRepublishStatus()]++;
-	if (!(sources.thirdPartyOtherContentLicenceCanRepublish() === 'true')) unmetRequirements['basic']++; 
+	if (sources.thirdPartyOtherContentLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2822,7 +2822,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
-	if (!(certificate.cldsRecorded() === 'true')) unmetRequirements['basic']++; 
+	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
 
 }
 
@@ -2901,7 +2901,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
-	if (!(certificate.changeFeed() === 'true')) unmetRequirements['established']++; 
+	if (certificate.changeFeed() !== 'true') unmetRequirements['established']++; 
 
 }
 
@@ -2930,7 +2930,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
-	if (certificate.provideDumpsStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.provideDumps() === 'true') {
 
@@ -2951,7 +2951,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.correctedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
-	if (!(certificate.corrected() === 'true')) unmetRequirements['standard']++; 
+	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
 
 }
 
@@ -3111,12 +3111,12 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.machineReadableStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.machineReadableStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.machineReadableStatus() !== 'optional') unmetRequirements[certificate.machineReadableStatus()]++;
-	if (!(certificate.machineReadable() !== 'false')) unmetRequirements['pilot']++; 
+	if (certificate.machineReadable() !== 'true') unmetRequirements['pilot']++; 
 
 	if (certificate.openStandardStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.openStandardStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.openStandardStatus() !== 'optional') unmetRequirements[certificate.openStandardStatus()]++;
-	if (!(certificate.openStandard() !== 'false')) unmetRequirements['standard']++; 
+	if (certificate.openStandard() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.dataTypeStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.dataTypeStatus() === 'required') unmetRequirements['basic']++;
@@ -3169,14 +3169,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
-	if (certificate.identifiersStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.identifiers() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.identifiers() === 'true') {
 
 	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUrisStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.resolvingUris() !== 'true') unmetRequirements['established']++; 
 
 	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;

@@ -100,7 +100,7 @@
 					<label>Is the licence an open licence?</label>
 					<yesno required="required" />
 					<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
-					<requirement test="this.otherDataLicenceOpen() === 'true'">You must publish open data under a licence that is open to enable others to reuse it.</requirement>
+					<requirement>You must publish open data under a licence that is open to enable others to reuse it.</requirement>
 				</question>
 			</if>
 			<question id="contentLicence">
@@ -128,7 +128,7 @@
 					<label>Is the licence an open licence?</label>
 					<yesno required="required" />
 					<help>Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.</help>
-					<requirement test="this.otherDataLicenceOpen() === 'true'">You must publish open data under a licence that is open to enable others to reuse it.</requirement>
+					<requirement>You must publish open data under a licence that is open to enable others to reuse it.</requirement>
 				</question>
 			</if>
 			<if test="(this.contentLicence() !== '' &amp;&amp; this.contentLicence() !== 'ogl') || (this.dataLicence() !== '' &amp;&amp; this.dataLicence() !== 'ogl')">
@@ -229,7 +229,7 @@
 									<label>Does the licence allow you to republish?</label>
 									<yesno required="required" />
 									<help>Indicate whether the licence says that you can reuse and republish this data under an open licence in the way that you are. Because the licence is not an open licence, you might need to seek legal advice to work out whether this is allowed.</help>
-									<requirement test="this.thirdPartyOtherDataLicenceCanRepublish() === 'true'">You cannot publish open data that includes data that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
+									<requirement>You cannot publish open data that includes data that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
 								</question>
 							</if>
 						</if>
@@ -264,7 +264,7 @@
 									<label>Does the licence allow you to republish?</label>
 									<yesno required="required" />
 									<help>Indicate whether the licence says that you can reuse and republish this content under an open licence in the way that you are. Because the licence is not an open licence, you might need to seek legal advice to work out whether this is allowed.</help>
-									<requirement test="this.thirdPartyOtherContentLicenceCanRepublish() === 'true'">You cannot publish open data that includes content that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
+									<requirement>You cannot publish open data that includes content that is sourced from a third party unless that third party has given you a licence to do so.</requirement>
 								</question>
 							</if>
 						</if>
@@ -290,7 +290,7 @@
 						<question id="cldsRecorded">
 							<label>Have all contributors agreed to the CLA?</label>
 							<yesno required="required" />
-							<requirement test="this.cldsRecorded() === 'true'">The contributors to your data must all have agreed to a Contributor Licence Agreement to give you the right to republish their contributions as open data.</requirement>
+							<requirement>The contributors to your data must all have agreed to a Contributor Licence Agreement to give you the right to republish their contributions as open data.</requirement>
 						</question>
 					</if>
 				</if>
@@ -406,7 +406,7 @@
 							<label>Is a feed of changes made available?</label>
 							<yesno />
 							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries.</help>
-							<requirement test="this.changeFeed() === 'true'" level="established">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
+							<requirement level="established">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
 						</question>
 					</if>
 					<question id="frequentSeriesPublication">
@@ -490,7 +490,7 @@
 					<label>Will this data be corrected if it contains errors?</label>
 					<yesno />
 					<help>Indicate whether the data will be corrected in cases where errors are discovered within the data.</help>
-					<requirement test="this.corrected() === 'true'" level="standard">Open data should be corrected if it is found to contain errors.</requirement>
+					<requirement level="standard">Open data should be corrected if it is found to contain errors.</requirement>
 				</question>
 			</if>
 		</group>
@@ -683,13 +683,13 @@
 				<label>Is the data machine-readable?</label>
 				<yesno />
 				<help>A machine-readable format is one in which the information can be easily extracted from the data by a computer. For example, scanned photocopies of spreadsheets would not be machine-readable.</help>
-				<requirement test="this.machineReadable() !== 'false'" level="pilot">You should provide the data in a machine-readable format.</requirement>
+				<requirement level="pilot">You should provide the data in a machine-readable format.</requirement>
 			</question>
 			<question id="openStandard">
 				<label>Is the data in an open standard format?</label>
 				<yesno />
 				<help>An open standard is one that is written through a defined fair, transparent and collaborative process and that anyone can implement. For example, XML, CSV and JSON are open standards.</help>
-				<requirement test="this.openStandard() !== 'false'" level="standard">You should provide the data in an open standard format.</requirement>
+				<requirement level="standard">You should provide the data in an open standard format.</requirement>
 			</question>
 			<question id="dataType">
 				<label>What kind of data are you publishing?</label>
@@ -713,7 +713,7 @@
 					<label>Do the formats used for documents include:</label>
 					<radioset>
 						<option value="semantic">
-							<label>one that exposes the semantic structure of documents, such as Docbook, HTML or Markdown</label>
+							<label>one that exposes the semantic structure of documents, such as HTML, Docbook or Markdown</label>
 							<requirement level="standard">You should publish documents in a format that exposes their semantic structure.</requirement>
 						</option>
 						<option value="format">
