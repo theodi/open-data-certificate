@@ -36,7 +36,8 @@ body {
 }
 
 #questionnaire .well .control-label {
-	width: 281px;
+	width: 251px;
+	padding-left: 30px;
 }
 
 #questionnaire .well .controls {

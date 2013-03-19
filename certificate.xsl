@@ -281,7 +281,7 @@
 	</div>
 </xsl:template>
 
-<xsl:template match="group/group">
+<xsl:template match="group//group">
 	<fieldset id="{@id}">
 		<legend><xsl:apply-templates select="label/node()" /></legend>
 		<xsl:apply-templates select="@jurisdiction" />
@@ -314,9 +314,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
-			<xsl:if test="*[@required = 'required']">
-				<span class="badge badge-circular badge-important pull-left" data-bind="visible: {@id}Status() === 'required'">
-					<i class="icon icon-white icon-remove" title="Required"></i>
+			<xsl:if test="*/@required">
+				<span class="badge badge-circular badge-{if (*/@required = 'required') then 'important' else */@required} pull-left" data-bind="visible: {@id}Status() === '{*/@required}'">
+					<i class="icon icon-white icon-remove" title="Required{if (*/@required != 'required') then concat(' for ', */@required, ' certificate') else ''}"></i>
 				</span>
 			</xsl:if>
 			<span class="badge badge-circular badge-success pull-left" data-bind="visible: {@id}Status() === 'complete'">
@@ -346,7 +346,7 @@
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
 	<input type="text" class="span5">
 		<xsl:apply-templates select="." mode="dataBind" />
-		<xsl:sequence select="@type, @placeholder, @required" />
+		<xsl:sequence select="@type, @placeholder, @required[. = 'required']" />
 	</input>
 </xsl:template>
 
@@ -428,7 +428,7 @@
 <xsl:template match="select">
 	<select class="span5">
 		<xsl:apply-templates select="." mode="dataBind" />
-		<xsl:apply-templates select="@required, @multiple" />
+		<xsl:apply-templates select="@required[. = 'required'], @multiple" />
 		<xsl:apply-templates />
 	</select>
 </xsl:template>
@@ -638,8 +638,8 @@
 	<xsl:value-of select="concat($function, 'Status = ko.computed(function () {&#xA;')" />
 	<xsl:text>  var status;&#xA;</xsl:text>
 	<xsl:choose>
-		<xsl:when test="*[@required = 'required']">
-			<xsl:value-of select="concat('  if (', $function, '() === '''') status = ''required'';&#xA;')" />
+		<xsl:when test="*/@required">
+			<xsl:value-of select="concat('  if (', $function, '() === '''') status = ''', */@required, ''';&#xA;')" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="concat('  if (', $function, '() === '''') status = ''optional'';&#xA;')" />
@@ -700,7 +700,8 @@
 <xsl:template match="question" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
 	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) unmetRequirements['answered']++;
-	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) unmetRequirements['basic']++;
+	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) unmetRequirements['basic']++;
+	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() !== ''optional''')" />) unmetRequirements[<xsl:value-of select="concat($model, '.', @id, 'Status()')" />]++;
 	<xsl:apply-templates mode="unmetRequirements" />
 </xsl:template>
 

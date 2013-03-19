@@ -34,7 +34,7 @@
 			<requirement level="pilot">You should have a page that provides documentation about the open data you are publishing.</requirement>
 		</if>
 		<if test="this.releaseType() === 'collection'">
-			<requirement>You must have a page that provides documentation and access to the open data you are publishing.</requirement>
+			<requirement test="this.documentationUrl() !== ''">You must have a page that provides documentation and access to the open data you are publishing.</requirement>
 		</if>
 	</question>
 	<group id="legal" jurisdiction="UK">
@@ -337,394 +337,483 @@
 	</group>
 	<group id="practical">
 		<label>Practical Information</label>
-		<question id="releaseType">
-			<label>What kind of data release is this?</label>
-			<radioset required="required">
-				<option value="oneoff"><label>a one-off release of a single dataset</label></option>
-				<option value="collection"><label>a one-off release of a set of related datasets</label></option>
-				<option value="series"><label>ongoing release of a series of related datasets</label></option>
-				<option value="service"><label>a service or API for accessing open data</label></option>
-			</radioset>
-		</question>
-		<if test="this.releaseType() === 'service'">
-			<question id="serviceType">
-				<label>Does the data underlying the API change over time?</label>
+		<group id="accuracy">
+			<label>Accuracy</label>
+			<question id="releaseType">
+				<label>What kind of data release is this?</label>
 				<radioset required="required">
-					<option value="static">
-						<label>no, the API simply provides easy access to unchanging data</label>
-					</option>
-					<option value="changing">
-						<label>yes, the API provides instant access to changing data</label>
-					</option>
+					<option value="oneoff"><label>a one-off release of a single dataset</label></option>
+					<option value="collection"><label>a one-off release of a set of related datasets</label></option>
+					<option value="series"><label>ongoing release of a series of related datasets</label></option>
+					<option value="service"><label>a service or API for accessing open data</label></option>
 				</radioset>
 			</question>
-		</if>
-		<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'collection' || (this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'static')">
-			<question id="timeSensitive">
-				<label>Will this data go out of date?</label>
-				<radioset>
-					<option value="true">
-						<label>yes, this data will go out of date over time</label>
-						<help>For example, a dataaset that contains the current location of bus stops will go out of date over time.</help>
-					</option>
-					<option value="timestamped">
-						<label>yes, this data will go out of date over time but the data is timestamped</label>
-						<help>For example, demography statistics usually include a timestamp to indicate the time at which the statistics were relevant.</help>
-						<requirement level="pilot">When releasing data that will go out of date over time, include timestamps that indicate when the data relates to within the data.</requirement>
-					</option>
-					<option value="false">
-						<label>no, this data does not contain any time-sensitive information</label>
-						<help>For example, a dataset that contains the results of an experiment will not go out of date.</help>
-						<requirement level="standard">While a one-off release of time-sensitive data is appropriate for a pilot, you need a regular series releases for standard open data publication.</requirement>
-					</option>
-				</radioset>
-			</question>
-		</if>
-		<if test="this.releaseType() === 'series'">
-			<question id="frequentChanges">
-				<label>Does the data you capture change on at least a daily basis?</label>
-				<yesno required="required" />
-			</question>			
-			<if test="this.frequentChanges() === 'true'">
-				<question id="seriesType">
-					<label>What type of dataset series is this?</label>
-					<radioset required="required">
-						<option value="dumps">
-							<label>regular copies of the complete database</label>
-							<help>Select this option if you are publishing copies of the contents of your database at regular intervals.</help>
+			<if test="this.releaseType() === 'service'">
+				<question id="serviceType">
+					<label>Does the data underlying the API change over time?</label>
+					<radioset required="pilot">
+						<option value="static">
+							<label>no, the API simply provides easy access to unchanging data</label>
 						</option>
-						<option value="aggregate">
-							<label>regular aggregates of changing data</label>
-							<help>Select this option if you are creating aggregate information at regular intervals, perhaps because the underlying data cannot be released as open data.</help>
+						<option value="changing">
+							<label>yes, the API provides instant access to changing data</label>
 						</option>
 					</radioset>
 				</question>
-				<if test="this.seriesType() === 'dumps'">
-					<question id="changeFeed">
-						<label>Is a feed of changes made available?</label>
-						<yesno required="required" />
-						<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries.</help>
-						<requirement test="this.changeFeed() === 'true'" level="established">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
+			</if>
+			<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'collection' || (this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'static')">
+				<question id="timeSensitive">
+					<label>Will this data go out of date?</label>
+					<radioset>
+						<option value="true">
+							<label>yes, this data will go out of date over time</label>
+							<help>For example, a dataaset that contains the current location of bus stops will go out of date over time.</help>
+						</option>
+						<option value="timestamped">
+							<label>yes, this data will go out of date over time but the data is timestamped</label>
+							<help>For example, demography statistics usually include a timestamp to indicate the time at which the statistics were relevant.</help>
+							<requirement level="pilot">When releasing data that will go out of date over time, include timestamps that indicate when the data relates to within the data.</requirement>
+						</option>
+						<option value="false">
+							<label>no, this data does not contain any time-sensitive information</label>
+							<help>For example, a dataset that contains the results of an experiment will not go out of date.</help>
+							<requirement level="standard">While a one-off release of time-sensitive data is appropriate for a pilot, you need a regular series releases for standard open data publication.</requirement>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'series'">
+				<question id="frequentChanges">
+					<label>Does the data you capture change on at least a daily basis?</label>
+					<yesno required="pilot" />
+				</question>			
+				<if test="this.frequentChanges() === 'true'">
+					<question id="seriesType">
+						<label>What type of dataset series is this?</label>
+						<radioset required="established">
+							<option value="dumps">
+								<label>regular copies of the complete database</label>
+								<help>Select this option if you are publishing copies of the contents of your database at regular intervals.</help>
+							</option>
+							<option value="aggregate">
+								<label>regular aggregates of changing data</label>
+								<help>Select this option if you are creating aggregate information at regular intervals, perhaps because the underlying data cannot be released as open data.</help>
+							</option>
+						</radioset>
+					</question>
+					<if test="this.seriesType() === 'dumps'">
+						<question id="changeFeed">
+							<label>Is a feed of changes made available?</label>
+							<yesno />
+							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries.</help>
+							<requirement test="this.changeFeed() === 'true'" level="established">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
+						</question>
+					</if>
+					<question id="frequentSeriesPublication">
+						<label>How frequently do you create a new release?</label>
+						<radioset>
+							<option value="rarely">
+								<label>less frequently than once a month</label>
+							</option>
+							<option value="monthly">
+								<label>at least every month</label>
+								<requirement level="pilot">As the data you capture changes frequently, you should create a new dataset release every month.</requirement>
+							</option>
+							<option value="weekly">
+								<label>at least every week</label>
+								<requirement level="standard">As the data you capture changes frequently, you should create a new dataset release every week.</requirement>
+							</option>
+							<option value="daily">
+								<label>at least every day</label>
+								<requirement level="established">As the data you capture changes frequently, you should create a new dataset release every day.</requirement>
+							</option>
+						</radioset>
 					</question>
 				</if>
-				<question id="frequentSeriesPublication">
-					<label>How frequently do you create a new release?</label>
+				<question id="seriesPublicationDelay">
+					<label>What is the delay between creating a dataset and publishing it?</label>
 					<radioset>
-						<option value="rarely">
-							<label>less frequently than once a month</label>
+						<option value="extreme">
+							<label>longer than the gap between releases</label>
+							<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes more than a day for the dataset to then be published.</help>
 						</option>
-						<option value="monthly">
-							<label>at least every month</label>
-							<requirement level="pilot">As the data you capture changes frequently, you should create a new dataset release every month.</requirement>
+						<option value="reasonable">
+							<label>about the same as the gap between releases</label>
+							<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes about a day for the dataset to then be published.</help>
+							<requirement level="pilot">The delay between creating and publishing a dataset should be about the same as the gap between releases.</requirement>
 						</option>
-						<option value="weekly">
-							<label>at least every week</label>
-							<requirement level="standard">As the data you capture changes frequently, you should create a new dataset release every week.</requirement>
+						<option value="good">
+							<label>less than half the gap between releases</label>
+							<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes less than twelve hours for the data to then be published.</help>
+							<requirement level="standard">The delay between creating and publishing a dataset should be less than half the gap between releases.</requirement>
 						</option>
-						<option value="daily">
-							<label>at least every day</label>
-							<requirement level="established">As the data you capture changes frequently, you should create a new dataset release every day.</requirement>
+						<option value="minimal">
+							<label>there is minimal or no delay</label>
+							<help>Choose this option if the delay is in the order of a few seconds if the datasets are created frequently, or a few minutes if they are made less frequently.</help>
+							<requirement level="established">There should be minimal or no delay between creating and publishing datasets.</requirement>
 						</option>
 					</radioset>
 				</question>
 			</if>
-			<question id="seriesPublicationDelay">
-				<label>What is the delay between creating a dataset and publishing it?</label>
-				<radioset>
-					<option value="extreme">
-						<label>longer than the gap between releases</label>
-						<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes more than a day for the dataset to then be published.</help>
-					</option>
-					<option value="reasonable">
-						<label>about the same as the gap between releases</label>
-						<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes about a day for the dataset to then be published.</help>
-						<requirement level="pilot">The delay between creating and publishing a dataset should be about the same as the gap between releases.</requirement>
-					</option>
-					<option value="good">
-						<label>less than half the gap between releases</label>
-						<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes less than twelve hours for the data to then be published.</help>
-						<requirement level="standard">The delay between creating and publishing a dataset should be less than half the gap between releases.</requirement>
-					</option>
-					<option value="minimal">
-						<label>there is minimal or no delay</label>
-						<help>Choose this option if the delay is in the order of a few seconds if the datasets are created frequently, or a few minutes if they are made less frequently.</help>
-						<requirement level="established">There should be minimal or no delay between creating and publishing datasets.</requirement>
-					</option>
-				</radioset>
+			<if test="this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'changing'">
+				<question id="provideDumps">
+					<label>Do you also provide dumps of the dataset?</label>
+					<yesno />
+					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset.</help>
+					<requirement level="standard">Dumps of the dataset should be made available to enable developers to download the entire dataset.</requirement>
+				</question>
+				<if test="this.provideDumps() === 'true'">
+					<question id="dumpFrequency">
+						<label>How frequently do you create a new dump?</label>
+						<radioset>
+							<option value="rarely">
+								<label>less frequently than once a month</label>
+							</option>
+							<option value="monthly">
+								<label>at least every month</label>
+								<requirement level="pilot">You should create a new database dump every month.</requirement>
+							</option>
+							<option value="weekly">
+								<label>at least every week</label>
+								<requirement level="standard">You should create a new database dump every week.</requirement>
+							</option>
+							<option value="daily">
+								<label>at least every day</label>
+								<requirement level="established">You should create a new database dump every day.</requirement>
+							</option>
+						</radioset>
+					</question>
+				</if>
+			</if>
+			<if test="this.timeSensitive() !== 'true'">
+				<question id="corrected">
+					<label>Will this data be corrected if it contains errors?</label>
+					<yesno />
+					<help>Indicate whether the data will be corrected in cases where errors are discovered within the data.</help>
+					<requirement test="this.corrected() === 'true'" level="standard">Open data should be corrected if it is found to contain errors.</requirement>
+				</question>
+			</if>
+		</group>
+		<group id="quality">
+			<label>Quality</label>
+			<!-- not sure how to put these in a less process-heavy way? -->
+			<question id="qualityControlUrl">
+				<label>Where is your quality control process described?</label>
+				<input type="url" placeholder="Quality Control Process Description URL"/>
+				<requirement level="standard">Having a documented quality control process helps developers to understand how much to rely on the data that you make available.</requirement>
 			</question>
-		</if>
-		<if test="this.serviceType() === 'changing'">
-			<question id="provideDumps">
-				<label>Do you also provide dumps of the dataset?</label>
-				<yesno />
-				<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset.</help>
-				<requirement level="standard">Dumps of the dataset should be made available to enable developers to download the entire dataset.</requirement>
+			<question id="qualityControlAudited">
+				<label>Where is the latest report auditing your quality control process?</label>
+				<input type="url" placeholder="Quality Control Process Audit Report URL"/>
+				<requirement level="established">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
 			</question>
-			<if test="this.provideDumps() === 'true'">
-				<question id="dumpFrequency">
-					<label>How frequently do you create a new dump?</label>
+		</group>
+		<group id="guarantees">
+			<label>Guarantees</label>
+			<if test="this.releaseType() === 'service'">
+				<question id="serviceAvailability">
+					<label>What is the guaranteed availability of the service?</label>
 					<radioset>
-						<option value="rarely">
-							<label>less frequently than once a month</label>
+						<option value="minimal">
+							<label>there are minimal guarantees about the availability of the service</label>
 						</option>
-						<option value="monthly">
-							<label>at least every month</label>
-							<requirement level="pilot">You should create a new database dump every month.</requirement>
+						<option value="99%">
+							<label>at least 99% availability</label>
+							<requirement level="pilot">You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service.</requirement>
 						</option>
-						<option value="weekly">
-							<label>at least every week</label>
-							<requirement level="standard">You should create a new database dump every week.</requirement>
+						<option value="99.9%">
+							<label>at least 99.9% availability</label>
+							<requirement level="standard">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service.</requirement>
 						</option>
-						<option value="daily">
-							<label>at least every day</label>
-							<requirement level="established">You should create a new database dump every day.</requirement>
+						<option value="99.999%">
+							<label>at least 99.999% availability</label>
+							<requirement level="established">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service.</requirement>
 						</option>
 					</radioset>
 				</question>
 			</if>
-		</if>
-		<if test="this.timeSensitive() !== 'true'">
-			<question id="corrected">
-				<label>Will this data be corrected if it contains errors?</label>
-				<yesno />
-				<help>Indicate whether the data will be corrected in cases where errors are discovered within the data.</help>
-				<requirement test="this.corrected() === 'true'" level="standard">Open data should be corrected if it is found to contain errors.</requirement>
-			</question>
-		</if>
-		<!-- not sure how to put these in a less process-heavy way? -->
-		<question id="qualityControlUrl">
-			<label>Where is your quality control process described?</label>
-			<input type="url" placeholder="Quality Control Process Description URL"/>
-			<requirement level="standard">Having a documented quality control process helps developers to understand how much to rely on the data that you make available.</requirement>
-		</question>
-		<question id="qualityControlAudited">
-			<label>Where is the latest report auditing your quality control process?</label>
-			<input type="url" placeholder="Quality Control Process Audit Report URL"/>
-			<requirement level="established">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
-		</question>
-		<if test="this.releaseType() === 'service'">
-			<question id="serviceAvailability">
-				<label>What is the guaranteed availability of the service?</label>
+			<question id="onGoingAvailability">
+				<label>For how long will the dataset be available in this way?</label>
 				<radioset>
-					<option value="minimal">
-						<label>there are minimal guarantees about the availability of the service</label>
+					<option value="experimental">
+						<label>this dataset may disappear at any time</label>
 					</option>
-					<option value="99%">
-						<label>at least 99% availability</label>
-						<requirement level="pilot">You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service.</requirement>
+					<option value="P1Y">
+						<label>this dataset will be available in this form for at least one year</label>
+						<requirement level="pilot">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least a year.</requirement>
 					</option>
-					<option value="99.9%">
-						<label>at least 99.9% availability</label>
-						<requirement level="standard">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service.</requirement>
+					<option value="P2Y">
+						<label>this dataset will be available in this form for at least two years</label>
+						<requirement level="standard">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least two years.</requirement>
 					</option>
-					<option value="99.999%">
-						<label>at least 99.999% availability</label>
-						<requirement level="established">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service.</requirement>
+					<option value="P3Y">
+						<label>this dataset will be available in this form for at least three years</label>
+						<requirement level="established">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
 					</option>
 				</radioset>
 			</question>
-		</if>
-		<question id="onGoingAvailability">
-			<label>For how long will the dataset be available in this way?</label>
-			<radioset>
-				<option value="experimental">
-					<label>this dataset may disappear at any time</label>
-				</option>
-				<option value="P1Y">
-					<label>this dataset will be available in this form for at least one year</label>
-					<requirement level="pilot">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least a year.</requirement>
-				</option>
-				<option value="P2Y">
-					<label>this dataset will be available in this form for at least two years</label>
-					<requirement level="standard">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least two years.</requirement>
-				</option>
-				<option value="P3Y">
-					<label>this dataset will be available in this form for at least three years</label>
-					<requirement level="established">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
-				</option>
-			</radioset>
-		</question>
+		</group>
 	</group>
 	<group id="technical">
 		<label>Technical Information</label>
-		<if test="this.releaseType() === 'oneoff'">
-			<question id="datasetUrl">
-				<label>What's the URL of the dataset?</label>
-				<input type="url" placeholder="Dataset URL" />
-				<help>Enter the URL of the dataset itself (for example a CSV file), not a page describing the dataset.</help>
-				<if test="this.documentationUrl() === ''">
-					<requirement>You must provide either a URL for the dataset or a URL for documentation about it.</requirement>
+		<if test="this.releaseType() !== ''">
+			<group id="locations">
+				<label>Locations</label>
+				<if test="this.releaseType() === 'oneoff'">
+					<question id="datasetUrl">
+						<label>What's the URL of the dataset?</label>
+						<input type="url" placeholder="Dataset URL" />
+						<help>Enter the URL of the dataset itself (for example a CSV file), not a page describing the dataset.</help>
+						<if test="this.documentationUrl() === ''">
+							<requirement test="this.datasetUrl() !== ''">You must provide either a URL for the dataset or a URL for documentation about it.</requirement>
+						</if>
+						<if test="this.documentationUrl() !== ''">
+							<requirement test="this.datasetUrl() !== ''" level="pilot">You should have a URL that is a direct link to the data itself.</requirement>
+						</if>
+					</question>
 				</if>
-				<if test="this.documentationUrl() !== ''">
-					<requirement level="pilot">You should have a URL that is a direct link to the data itself.</requirement>
+				<if test="this.releaseType() === 'series'">
+					<question id="versionManagement">
+						<label>How do you publish the datasets in the series?</label>
+						<checkboxset>
+							<option value="current">
+								<label>the data at a single "current" dataset URL is regularly updated</label>
+								<requirement level="standard">There should be a single URL that can always be used to download the current version of the dataset.</requirement>
+							</option>
+							<option value="template">
+								<label>the URLs for each release follow a regular pattern</label>
+								<requirement level="pilot">The URLs for different versions of the dataset should follow a regular structure.</requirement>
+							</option>
+							<option value="list">
+								<label>you publish a list of the releases</label>
+								<requirement level="standard">There should be a document or feed that provides a list of all the available versions of the dataset.</requirement>
+							</option>
+						</checkboxset>
+						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagementStatus() !== 'complete'">
+							<requirement>You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page.</requirement>
+						</if>
+					</question>
+					<if test="this.versionManagement().current">
+						<question id="currentDatasetUrl">
+							<label>What's the URL of the current dataset?</label>
+							<input type="url" placeholder="Current Dataset URL" required="required" />
+							<help>Enter the URL of the current version of the dataset itself (for example a CSV file). The content at this URL should change each time a new version is released. This should not be a page describing the dataset.</help>
+						</question>
+					</if>
+					<if test="this.versionManagement().template">
+						<question id="versionsTemplateUrl">
+							<label>What's the URL template for the versions?</label>
+							<input type="url" placeholder="Version Template URL" required="required" />
+							<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
+						</question>
+					</if>
+					<if test="this.versionManagement().list">
+						<question id="versionsUrl">
+							<label>What's the URL that gives a list of versions?</label>
+							<input type="url" placeholder="Version List URL" required="required" />
+							<help>Enter the URL of a page or feed that provides a machine-readable list of the previous versions of the dataset.</help>
+						</question>
+					</if>
 				</if>
-			</question>
+				<if test="this.releaseType() === 'service'">
+					<question id="endpointUrl">
+						<label>What's the endpoint for the API?</label>
+						<input type="url" placeholder="Endpoint URL" />
+						<help>Enter the endpoint of the API. If the API supports it, this should be a service description document.</help>
+						<if test="this.documentationUrl() === ''">
+							<requirement test="this.endpointUrl() !== ''">You must provide either a URL for the API endpoint or a URL for the documentation about it.</requirement>
+						</if>
+						<if test="this.documentationUrl() !== ''">
+							<requirement test="this.endpointUrl() !== ''" level="standard">You should have a service description document or similar single entry point for your API.</requirement>
+						</if>
+					</question>
+					<if test="this.provideDumps() === 'true'">
+						<question id="dumpManagement">
+							<label>How do you publish the database dumps?</label>
+							<checkboxset>
+								<option value="current">
+									<label>the data at a single "current" dump URL is regularly updated</label>
+									<requirement level="standard">There should be a single URL that can always be used to download the current dump of the database.</requirement>
+								</option>
+								<option value="template">
+									<label>the URLs for each release follow a regular pattern</label>
+									<requirement level="established">The URLs for different dumps database should follow a regular structure.</requirement>
+								</option>
+								<option value="list">
+									<label>you publish a list of the releases</label>
+									<requirement level="established">There should be a document or feed that provides a list of all the available dumps of the database.</requirement>
+								</option>
+							</checkboxset>
+						</question>
+						<if test="this.dumpManagement().current">
+							<question id="currentDumpUrl">
+								<label>What's the URL of the current dump?</label>
+								<input type="url" placeholder="Current Dump URL" required="required" />
+								<help>Enter the URL of the current dump of the database itself (for example a CSV file). The content at this URL should change each time a new dump is created.</help>
+							</question>
+						</if>
+						<if test="this.dumpManagement().template">
+							<question id="dumpsTemplateUrl">
+								<label>What's the URL template for the dumps?</label>
+								<input type="url" placeholder="Dump Template URL" required="required" />
+								<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
+							</question>
+						</if>
+						<if test="this.dumpManagement().list">
+							<question id="dumpsUrl">
+								<label>What's the URL that gives a list of available dumps?</label>
+								<input type="url" placeholder="Dump List URL" required="required" />
+								<help>Enter the URL of a page or feed that provides a machine-readable list of the available dumps of the database.</help>
+							</question>
+						</if>
+					</if>
+				</if>
+				<if test="this.changeFeed() === 'true'">
+					<question id="changeFeedUrl">
+						<label>What's the URL that provides a feed of changes?</label>
+						<input type="url" placeholder="Change Feed URL" required="required" />
+						<help>Enter the URL of the machine-readable feed that provides a list of the individual changes as they occur within the dataset, between dumps or versions of the dataset being created.</help>
+					</question>
+				</if>
+			</group>
 		</if>
-		<if test="this.releaseType() === 'series'">
-			<question id="versionManagement">
-				<label>How do you publish the datasets in the series?</label>
-				<checkboxset>
-					<option value="current">
-						<label>the data at a single "current" dataset URL is regularly updated</label>
-						<requirement level="standard">There should be a single URL that can always be used to download the current version of the dataset.</requirement>
+		<group id="format">
+			<label>Formats</label>
+			<question id="machineReadable">
+				<label>Is the data machine-readable?</label>
+				<yesno />
+				<help>A machine-readable format is one in which the information can be easily extracted from the data by a computer. For example, scanned photocopies of spreadsheets would not be machine-readable.</help>
+				<requirement test="this.machineReadable() !== 'false'" level="pilot">You should provide the data in a machine-readable format.</requirement>
+			</question>
+			<question id="openStandard">
+				<label>Is the data in an open standard format?</label>
+				<yesno />
+				<help>An open standard is one that is written through a defined fair, transparent and collaborative process and that anyone can implement. For example, XML, CSV and JSON are open standards.</help>
+				<requirement test="this.openStandard() !== 'false'" level="standard">You should provide the data in an open standard format.</requirement>
+			</question>
+			<question id="dataType">
+				<label>What kind of data are you publishing?</label>
+				<checkboxset required="pilot">
+					<option value="documents">
+						<label>human-readable documents</label>
 					</option>
-					<option value="template">
-						<label>the URLs for each release follow a regular pattern</label>
-						<requirement level="pilot">The URLs for different versions of the dataset should follow a regular structure.</requirement>
+					<option value="statistical">
+						<label>statistical data, such as counts, averages and percentages</label>
 					</option>
-					<option value="list">
-						<label>you publish a list of the releases</label>
-						<requirement level="standard">There should be a document or feed that provides a list of all the available versions of the dataset.</requirement>
+					<option value="geographic">
+						<label>geographic information, such as points and boundaries</label>
+					</option>
+					<option value="structured">
+						<label>other kinds of structured data</label>
 					</option>
 				</checkboxset>
-				<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagementStatus() !== 'complete'">
-					<requirement>You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page.</requirement>
-				</if>
 			</question>
-			<if test="this.versionManagement().current">
-				<question id="currentDatasetUrl">
-					<label>What's the URL of the current dataset?</label>
-					<input type="url" placeholder="Current Dataset URL" required="required" />
-					<help>Enter the URL of the current version of the dataset itself (for example a CSV file). The content at this URL should change each time a new version is released. This should not be a page describing the dataset.</help>
-				</question>
-			</if>
-			<if test="this.versionManagement().template">
-				<question id="versionsTemplateUrl">
-					<label>What's the URL template for the versions?</label>
-					<input type="url" placeholder="Version Template URL" required="required" />
-					<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
-				</question>
-			</if>
-			<if test="this.versionManagement().list">
-				<question id="versionsUrl">
-					<label>What's the URL that gives a list of versions?</label>
-					<input type="url" placeholder="Version List URL" required="required" />
-					<help>Enter the URL of a page or feed that provides a machine-readable list of the previous versions of the dataset.</help>
-				</question>
-			</if>
-		</if>
-		<if test="this.releaseType() === 'service'">
-			<question id="endpointUrl">
-				<label>What's the endpoint for the API?</label>
-				<input type="url" placeholder="Endpoint URL" />
-				<help>Enter the endpoint of the API. If the API supports it, this should be a service description document.</help>
-				<if test="this.documentationUrl() === ''">
-					<requirement>You must provide either a URL for the API endpoint or a URL for the documentation about it.</requirement>
-				</if>
-				<if test="this.documentationUrl() !== ''">
-					<requirement level="standard">You should have a service description document or similar single entry point for your API.</requirement>
-				</if>
-			</question>
-			<if test="this.provideDumps() === 'true'">
-				<question id="dumpManagement">
-					<label>How do you publish the database dumps?</label>
-					<checkboxset>
-						<option value="current">
-							<label>the data at a single "current" dump URL is regularly updated</label>
-							<requirement level="standard">There should be a single URL that can always be used to download the current dump of the database.</requirement>
+			<if test="this.dataType().documents">
+				<question id="documentFormat">
+					<label>Do the formats used for documents include:</label>
+					<radioset>
+						<option value="semantic">
+							<label>one that exposes the semantic structure of documents, such as Docbook, HTML or Markdown</label>
+							<requirement level="standard">You should publish documents in a format that exposes their semantic structure.</requirement>
 						</option>
-						<option value="template">
-							<label>the URLs for each release follow a regular pattern</label>
-							<requirement level="established">The URLs for different dumps database should follow a regular structure.</requirement>
+						<option value="format">
+							<label>one that focuses on the format of documents, such as OOXML or PDF</label>
+							<requirement level="pilot">You should publish documents in a format that is designed for documents.</requirement>
 						</option>
-						<option value="list">
-							<label>you publish a list of the releases</label>
-							<requirement level="established">There should be a document or feed that provides a list of all the available dumps of the database.</requirement>
+						<option value="unsuitable">
+							<label>only those not designed for documents, such as Excel, JSON or CSV</label>
 						</option>
-					</checkboxset>
+					</radioset>
 				</question>
-				<if test="this.dumpManagement().current">
-					<question id="currentDumpUrl">
-						<label>What's the URL of the current dump?</label>
-						<input type="url" placeholder="Current Dump URL" required="required" />
-						<help>Enter the URL of the current dump of the database itself (for example a CSV file). The content at this URL should change each time a new dump is created.</help>
-					</question>
-				</if>
-				<if test="this.dumpManagement().template">
-					<question id="dumpsTemplateUrl">
-						<label>What's the URL template for the dumps?</label>
-						<input type="url" placeholder="Dump Template URL" required="required" />
-						<help>Use <code>{<var>variable</var>}</code> within the URL template to indicate changeable parts of the URL. For example <code>http://example.com/data/monthly/mydata-{YY}{MM}.csv</code></help>
-					</question>
-				</if>
-				<if test="this.dumpManagement().list">
-					<question id="dumpsUrl">
-						<label>What's the URL that gives a list of available dumps?</label>
-						<input type="url" placeholder="Dump List URL" required="required" />
-						<help>Enter the URL of a page or feed that provides a machine-readable list of the available dumps of the database.</help>
-					</question>
-				</if>
 			</if>
-		</if>
-		<if test="this.changeFeed() === 'true'">
-			<question id="changeFeedUrl">
-				<label>What's the URL that provides a feed of changes?</label>
-				<input type="url" placeholder="Change Feed URL" required="required" />
-				<help>Enter the URL of the machine-readable feed that provides a list of the individual changes as they occur within the dataset, between dumps or versions of the dataset being created.</help>
-			</question>
-		</if>
-		<question id="dataType">
-			<label>What kind of data are you publishing?</label>
-			<radioset>
-				<option value="documents">
-					<label>human-readable documents</label>
-				</option>
-				<option value="statistical">
-					<label>statistical data, such as counts, averages and percentages</label>
-				</option>
-				<option value="geographic">
-					<label>geographic information, such as points and boundaries</label>
-				</option>
-				<option value="structured">
-					<label>other kinds of structured data</label>
-				</option>
-			</radioset>
-		</question>
-		<question id="format">
-			<label>What formats are you using to publish the data?</label>
-			<radioset>
-				<option value="standard">
-					<label>machine-readable formats specified in a suitable open standard<if test="this.dataType() !== ''"> (eg
-						<if test="this.dataType() === 'documents'">XML, plain text, Markdown, OOXML, PDF</if><if test="this.dataType() === 'statistical'">SDMX, CSV</if><if test="this.dataType() === 'geographic'">KML</if><if test="this.dataType() === 'structured'">JSON, XML, Turtle, CSV</if>)</if></label>
-				</option>
-				<option value="proprietary">
-					<label>non-machine-readable, unsuitable, or proprietary formats<if test="this.dataType() !== ''"> (eg
-						<if test="this.dataType() === 'documents'">Word, Powerpoint, Pages</if><if test="this.dataType() === 'statistical'">Excel, PDF</if><if test="this.dataType() === 'geographic'">..., PDF</if><if test="this.dataType() === 'structured'">Word, Excel, PDF</if>)</if></label>
-				</option>
-			</radioset>
-		</question>
-		<question id="identifiers">
-			<label>Are you using URIs to identify things in the data?</label>
-			<yesno />
-			<requirement level="standard">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
-		</question>
-		<if test="this.identifiers() === 'true'">
-			<question id="resolvingUris">
-				<label>Do the URIs resolve to information about those things?</label>
+			<if test="this.dataType().statistical">
+				<question id="statisticalFormat">
+					<label>Do the formats used for statistical data include:</label>
+					<radioset>
+						<option value="statistical">
+							<label>one that exposes the structure of the statistical hypercube data, such as SDMX or Data Cube</label>
+							<requirement level="established">You should publish statistical data in a format that exposes its dimensions and measures.</requirement>
+						</option>
+						<option value="tabular">
+							<label>one that treats the statistical data as a table, such as CSV</label>
+							<requirement level="standard">You should publish tabular data in a format that exposes the tables of data.</requirement>
+						</option>
+						<option value="format">
+							<label>one that focuses on the format of tabular data, such as Excel</label>
+							<requirement level="pilot">You should publish tabular data in a format that is designed for tabular data.</requirement>
+						</option>
+						<option value="unsuitable">
+							<label>only those not designed for statistical or tabular data, such as Word or PDF</label>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.dataType().geographic">
+				<question id="geographicFormat">
+					<label>Do the formats used for geographic data include:</label>
+					<radioset>
+						<option value="specific">
+							<label>one designed for geographic data, such as KML or GeoJSON</label>
+							<requirement level="standard">You should publish geographic data in a format designed for geographic data.</requirement>
+						</option>
+						<option value="generic">
+							<label>a generic structured data format, such as JSON, XML or CSV</label>
+							<requirement level="pilot">You should publish geographic data as structured data.</requirement>
+						</option>
+						<option value="unsuitable">
+							<label>only those not designed for geographic data, such as Word or PDF</label>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.dataType().structured">
+				<question id="structuredFormat">
+					<label>Do the formats used for structured data include:</label>
+					<radioset>
+						<option value="suitable">
+							<label>one designed for structured data, such as JSON, XML, Turtle or CSV</label>
+							<requirement level="pilot">You should publish structured data in a format designed for structured data.</requirement>
+						</option>
+						<option value="unsuitable">
+							<label>only those not designed for structured data, such as Word or PDF</label>
+						</option>
+					</radioset>
+				</question>
+			</if>			
+			<question id="identifiers">
+				<label>Are you using URIs to identify things in the data?</label>
 				<yesno />
-				<requirement level="established">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
+				<requirement level="standard">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
 			</question>
-			<question id="externalUris">
-				<label>Does the dataset include URIs outside your control?</label>
-				<radioset>
-					<option value="yes">
-						<label>yes</label>
-					</option>
-					<option value="na">
-						<label>no, because it's not appropriate for this dataset</label>
-					</option>
-					<option value="dont-exist">
-						<label>no, because the URIs you would point to don't exist</label>
-					</option>
-					<option value="dont-trust">
-						<label>no, because the information at suitable URIs isn't reliable</label>
-					</option>
-					<option value="no">
-						<label>no</label>
-					</option>
-				</radioset>
-			</question>
-		</if>
+			<if test="this.identifiers() === 'true'">
+				<question id="resolvingUris">
+					<label>Do the URIs resolve to information about those things?</label>
+					<yesno />
+					<requirement level="established">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
+				</question>
+				<question id="externalUris">
+					<label>Does the dataset include URIs outside your control?</label>
+					<radioset>
+						<option value="yes">
+							<label>yes</label>
+						</option>
+						<option value="na">
+							<label>no, because it's not appropriate for this dataset</label>
+						</option>
+						<option value="dont-exist">
+							<label>no, because the URIs you would point to don't exist</label>
+						</option>
+						<option value="dont-trust">
+							<label>no, because the information at suitable URIs isn't reliable</label>
+						</option>
+						<option value="no">
+							<label>no</label>
+						</option>
+					</radioset>
+					<help>We are asking this question to gather statistics about URI reuse and the reasons why people do not reference other peoples' URIs.</help>
+				</question>
+			</if>
+		</group>
 	</group>
 	<group id="social">
 		<label>Social Information</label>
@@ -740,18 +829,6 @@
 			<help>Provide a URL for the forum or mailing list where developers using this dataset should discuss it.</help>
 			<requirement level="standard">You should indicate where people using this dataset should discuss the data and how they are using it.</requirement>
 		</question>
-		<question id="contributions">
-			<label>Where do you describe how people should contribute?</label>
-			<input type="url" placeholder="Contributor Instructions URL"/>
-			<help>Provide a link to a page that describes how people can contribute to the dataset, for example by correcting errors that they find or providing additional information.</help>
-			<requirement level="standard">You should provide instructions for people who want to contribute towards correcting or extending the dataset.</requirement>
-		</question>
-		<question id="libraries">
-			<label>Where do you list tools for working with the data?</label>
-			<input type="url" placeholder="Tool URL"/>
-			<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
-			<requirement level="standard">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
-		</question>
 		<if test="this.corrected() === 'true'">
 			<question id="correctionReporting">
 				<label>Where do you describe how to provide corrections?</label>
@@ -766,6 +843,12 @@
 				<requirement level="standard">You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data.</requirement>
 			</question>
 		</if>
+		<question id="libraries">
+			<label>Where do you list tools for working with the data?</label>
+			<input type="url" placeholder="Tool URL"/>
+			<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
+			<requirement level="established">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
+		</question>
 	</group>
 	<certificate>
 		<p>
