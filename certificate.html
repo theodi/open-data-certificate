@@ -914,6 +914,32 @@
                            </div>
                            			
                         </div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: vocabularyStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: vocabularyStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the formats need vocabularies?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#vocabulary-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="vocabulary" data-bind="checked: vocabulary"> Yes</label><label class="radio inline"><input type="radio" value="false" name="vocabulary" data-bind="checked: vocabulary"> No</label><span class="help-block collapse" id="vocabulary-help">Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented
+                                 with a schema for developers to understand it.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: vocabulary() === 'true'">
+                           				
+                           <div class="control-group"><label class="control-label" for="schemaDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: schemaDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the documentation for the vocabulary?</label><div class="controls"><input type="url" class="span5" id="schemaDocumentationUrl" name="schemaDocumentationUrl" data-bind="value: schemaDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#schemaDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="schemaDocumentationUrl-requirement">
+                                    <p class="alert alert-info"><a href="#schemaDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for any vocabulary you use within the data you publish.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: codelistsStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are there any codes used within the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#codelists-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="codelists" data-bind="checked: codelists"> Yes</label><label class="radio inline"><input type="radio" value="false" name="codelists" data-bind="checked: codelists"> No</label><span class="help-block collapse" id="codelists-help">Data often includes codes for things like geographical areas, spending categories
+                                 or diseases; these codes need to be explained for reusers.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: codelists() === 'true'">
+                           				
+                           <div class="control-group"><label class="control-label" for="codelistDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are the codes documented?</label><div class="controls"><input type="url" class="span5" id="codelistDocumentationUrl" name="codelistDocumentationUrl" data-bind="value: codelistDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#codelistDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="codelistDocumentationUrl-requirement">
+                                    <p class="alert alert-info"><a href="#codelistDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for the codes used within your data.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: identifiersStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are you using URIs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers"> Yes</label><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers"> No</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="identifiers-requirement">
                                  <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Use URIs to identify things in the data, so that they can be easily reference.
                                  </p>
@@ -1203,6 +1229,12 @@
                   <div data-bind="visible: geographicFormat() !== 'specific'">
                      <p class="improvement"><a class="improvement-label" href="#geographicFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should publish geographic data in a format designed for geographic data.</span></p>
                   </div>
+               </div>
+               <div data-bind="visible: vocabulary() === 'true'">
+                  <p class="improvement" data-bind="visible: schemaDocumentationUrl() === ''"><a class="improvement-label" href="#schemaDocumentationUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for any vocabulary you use within the data you publish.</span></p>
+               </div>
+               <div data-bind="visible: codelists() === 'true'">
+                  <p class="improvement" data-bind="visible: codelistDocumentationUrl() === ''"><a class="improvement-label" href="#codelistDocumentationUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for the codes used within your data.</span></p>
                </div>
                <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">Use URIs to identify things in the data, so that they can be easily reference.</span></p>
                <p class="improvement" data-bind="visible: forum() === ''"><a class="improvement-label" href="#forum" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should indicate where people using this dataset should discuss the data and how
@@ -2255,6 +2287,34 @@ certificate.structuredFormatStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.vocabulary = ko.observable('');
+certificate.vocabularyStatus = ko.computed(function () {
+  var status;
+  if (certificate.vocabulary() === '') status = 'standard';
+  else status = 'complete';
+  return status;
+});
+certificate.schemaDocumentationUrl = ko.observable('');
+certificate.schemaDocumentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.schemaDocumentationUrl() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.codelists = ko.observable('');
+certificate.codelistsStatus = ko.computed(function () {
+  var status;
+  if (certificate.codelists() === '') status = 'standard';
+  else status = 'complete';
+  return status;
+});
+certificate.codelistDocumentationUrl = ko.observable('');
+certificate.codelistDocumentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.codelistDocumentationUrl() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
 certificate.identifiers = ko.observable('');
 certificate.identifiersStatus = ko.computed(function () {
   var status;
@@ -2459,6 +2519,32 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.structuredFormat() !== '' && certificate.structuredFormat() !== 'suitable' && certificate.structuredFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.structuredFormat() !== 'suitable') unmetRequirements['pilot']++;
 		
+}
+
+	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	
+	if (certificate.vocabulary() === 'true') {
+
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
+
+	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	
+	if (certificate.codelists() === 'true') {
+
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
 }
 
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
@@ -3128,6 +3214,32 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.structuredFormat() !== '' && certificate.structuredFormat() !== 'suitable' && certificate.structuredFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.structuredFormat() !== 'suitable') unmetRequirements['pilot']++;
 		
+}
+
+	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	
+	if (certificate.vocabulary() === 'true') {
+
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
+
+	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	
+	if (certificate.codelists() === 'true') {
+
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
 }
 
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;

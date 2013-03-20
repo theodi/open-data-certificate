@@ -780,6 +780,30 @@
 					</radioset>
 				</question>
 			</if>
+			<question id="vocabulary">
+				<label>Do the formats need vocabularies?</label>
+				<yesno required="standard" />
+				<help>Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented with a schema for developers to understand it.</help>
+			</question>
+			<if test="this.vocabulary() === 'true'">
+				<question id="schemaDocumentationUrl">
+					<label>Where is the documentation for the vocabulary?</label>
+					<input type="url" />
+					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish.</requirement>
+				</question>
+			</if>
+			<question id="codelists">
+				<label>Are there any codes used within the data?</label>
+				<yesno required="standard" />
+				<help>Data often includes codes for things like geographical areas, spending categories or diseases; these codes need to be explained for reusers.</help>
+			</question>
+			<if test="this.codelists() === 'true'">
+				<question id="codelistDocumentationUrl">
+					<label>Where are the codes documented?</label>
+					<input type="url" />
+					<requirement level="standard">You should provide documentation for the codes used within your data.</requirement>
+				</question>
+			</if>
 			<question id="identifiers">
 				<label>Are you using URIs to identify things in the data?</label>
 				<yesno />
