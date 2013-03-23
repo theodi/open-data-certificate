@@ -29,7 +29,7 @@
                         <li class="divider-vertical"></li>
                         <li data-bind="css: { disabled: certificateLevel() === 'none' }"><a href="#certificate">Certificate</a></li>
                         <li class="divider-vertical"></li>
-                        <li data-bind="css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'established' }"><a href="#improvements">Improvements</a></li>
+                        <li data-bind="css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'exemplar' }"><a href="#improvements">Improvements</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="index.html">About</a></li>
                      </ul><span class="label pull-right" style="margin-top: 10px;">0.2</span></div>
@@ -64,7 +64,7 @@
                                     It provides sufficient support to prompt some reuser experimentation with a data.</span></div>
                               <div class="improvement"><span class="improvement-label"><span class="label label-standard"><i class="icon-star icon-white"></i> Standard</span></span><span class="improvement-desc">This data satisfies the requirements for routinely published open data that encourages
                                     reuse.</span></div>
-                              <div class="improvement"><span class="improvement-label"><span class="label label-established"><i class="icon-star icon-white"></i> Established</span></span><span class="improvement-desc">This data satisfies the requirements for key information infrastructure.</span></div>
+                              <div class="improvement"><span class="improvement-label"><span class="label label-exemplar"><i class="icon-star icon-white"></i> Exemplar</span></span><span class="improvement-desc">This data satisfies the requirements for key information infrastructure.</span></div>
                            </div>
                         </div>
                      </div>
@@ -110,10 +110,10 @@
                </div>
                <hr>
                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#legal" data-toggle="tab">Legal <span class="badge badge-circular badge-important" data-bind="visible: legalStatus().basic &gt; 0, text: legalStatus().basic, attr: { title: 'You have ' + legalStatus().basic + ' question' + (legalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: legalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: legalStatus().pilot &gt; 0, text: legalStatus().pilot, attr: { title: 'You have ' + legalStatus().pilot + ' question' + (legalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: legalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: legalStatus().standard &gt; 0, text: legalStatus().standard, attr: { title: 'You have ' + legalStatus().standard + ' question' + (legalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: legalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: legalStatus().established &gt; 0, text: legalStatus().established, attr: { title: 'You have ' + legalStatus().established + ' question' + (legalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: legalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#practical" data-toggle="tab">Practical <span class="badge badge-circular badge-important" data-bind="visible: practicalStatus().basic &gt; 0, text: practicalStatus().basic, attr: { title: 'You have ' + practicalStatus().basic + ' question' + (practicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: practicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: practicalStatus().pilot &gt; 0, text: practicalStatus().pilot, attr: { title: 'You have ' + practicalStatus().pilot + ' question' + (practicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: practicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: practicalStatus().standard &gt; 0, text: practicalStatus().standard, attr: { title: 'You have ' + practicalStatus().standard + ' question' + (practicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: practicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: practicalStatus().established &gt; 0, text: practicalStatus().established, attr: { title: 'You have ' + practicalStatus().established + ' question' + (practicalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: practicalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#technical" data-toggle="tab">Technical <span class="badge badge-circular badge-important" data-bind="visible: technicalStatus().basic &gt; 0, text: technicalStatus().basic, attr: { title: 'You have ' + technicalStatus().basic + ' question' + (technicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: technicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: technicalStatus().pilot &gt; 0, text: technicalStatus().pilot, attr: { title: 'You have ' + technicalStatus().pilot + ' question' + (technicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: technicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: technicalStatus().standard &gt; 0, text: technicalStatus().standard, attr: { title: 'You have ' + technicalStatus().standard + ' question' + (technicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: technicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: technicalStatus().established &gt; 0, text: technicalStatus().established, attr: { title: 'You have ' + technicalStatus().established + ' question' + (technicalStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: technicalStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
-                  <li><a href="#social" data-toggle="tab">Social <span class="badge badge-circular badge-important" data-bind="visible: socialStatus().basic &gt; 0, text: socialStatus().basic, attr: { title: 'You have ' + socialStatus().basic + ' question' + (socialStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: socialStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: socialStatus().pilot &gt; 0, text: socialStatus().pilot, attr: { title: 'You have ' + socialStatus().pilot + ' question' + (socialStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: socialStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: socialStatus().standard &gt; 0, text: socialStatus().standard, attr: { title: 'You have ' + socialStatus().standard + ' question' + (socialStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: socialStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: socialStatus().established &gt; 0, text: socialStatus().established, attr: { title: 'You have ' + socialStatus().established + ' question' + (socialStatus().established &gt; 1 ? 's' : '') + ' left to answer before you get to established level' }"></span><span class="badge badge-circular badge-established" data-bind="visible: socialStatus().established === 0" title="You have reached established level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li class="active"><a href="#legal" data-toggle="tab">Legal <span class="badge badge-circular badge-important" data-bind="visible: legalStatus().basic &gt; 0, text: legalStatus().basic, attr: { title: 'You have ' + legalStatus().basic + ' question' + (legalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: legalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: legalStatus().pilot &gt; 0, text: legalStatus().pilot, attr: { title: 'You have ' + legalStatus().pilot + ' question' + (legalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: legalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: legalStatus().standard &gt; 0, text: legalStatus().standard, attr: { title: 'You have ' + legalStatus().standard + ' question' + (legalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: legalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: legalStatus().exemplar &gt; 0, text: legalStatus().exemplar, attr: { title: 'You have ' + legalStatus().exemplar + ' question' + (legalStatus().exemplar &gt; 1 ? 's' : '') + ' left to answer before you get to exemplar level' }"></span><span class="badge badge-circular badge-exemplar" data-bind="visible: legalStatus().exemplar === 0" title="You have reached exemplar level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#practical" data-toggle="tab">Practical <span class="badge badge-circular badge-important" data-bind="visible: practicalStatus().basic &gt; 0, text: practicalStatus().basic, attr: { title: 'You have ' + practicalStatus().basic + ' question' + (practicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: practicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: practicalStatus().pilot &gt; 0, text: practicalStatus().pilot, attr: { title: 'You have ' + practicalStatus().pilot + ' question' + (practicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: practicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: practicalStatus().standard &gt; 0, text: practicalStatus().standard, attr: { title: 'You have ' + practicalStatus().standard + ' question' + (practicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: practicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: practicalStatus().exemplar &gt; 0, text: practicalStatus().exemplar, attr: { title: 'You have ' + practicalStatus().exemplar + ' question' + (practicalStatus().exemplar &gt; 1 ? 's' : '') + ' left to answer before you get to exemplar level' }"></span><span class="badge badge-circular badge-exemplar" data-bind="visible: practicalStatus().exemplar === 0" title="You have reached exemplar level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#technical" data-toggle="tab">Technical <span class="badge badge-circular badge-important" data-bind="visible: technicalStatus().basic &gt; 0, text: technicalStatus().basic, attr: { title: 'You have ' + technicalStatus().basic + ' question' + (technicalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: technicalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: technicalStatus().pilot &gt; 0, text: technicalStatus().pilot, attr: { title: 'You have ' + technicalStatus().pilot + ' question' + (technicalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: technicalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: technicalStatus().standard &gt; 0, text: technicalStatus().standard, attr: { title: 'You have ' + technicalStatus().standard + ' question' + (technicalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: technicalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: technicalStatus().exemplar &gt; 0, text: technicalStatus().exemplar, attr: { title: 'You have ' + technicalStatus().exemplar + ' question' + (technicalStatus().exemplar &gt; 1 ? 's' : '') + ' left to answer before you get to exemplar level' }"></span><span class="badge badge-circular badge-exemplar" data-bind="visible: technicalStatus().exemplar === 0" title="You have reached exemplar level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
+                  <li><a href="#social" data-toggle="tab">Social <span class="badge badge-circular badge-important" data-bind="visible: socialStatus().basic &gt; 0, text: socialStatus().basic, attr: { title: 'You have ' + socialStatus().basic + ' question' + (socialStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: socialStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: socialStatus().pilot &gt; 0, text: socialStatus().pilot, attr: { title: 'You have ' + socialStatus().pilot + ' question' + (socialStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: socialStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: socialStatus().standard &gt; 0, text: socialStatus().standard, attr: { title: 'You have ' + socialStatus().standard + ' question' + (socialStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: socialStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: socialStatus().exemplar &gt; 0, text: socialStatus().exemplar, attr: { title: 'You have ' + socialStatus().exemplar + ' question' + (socialStatus().exemplar &gt; 1 ? 's' : '') + ' left to answer before you get to exemplar level' }"></span><span class="badge badge-circular badge-exemplar" data-bind="visible: socialStatus().exemplar === 0" title="You have reached exemplar level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
                </ul>
                <div class="tab-content">
                   <div class="tab-pane active" id="legal">
@@ -527,16 +527,16 @@
                            				
                            <div class="conditional" data-bind="visible: frequentChanges() === 'true'">
                               					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-established pull-left" data-bind="visible: seriesTypeStatus() === 'established'"><i class="icon icon-white icon-remove" title="Required for established certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: seriesTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What type of dataset series is this?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypedumps-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="dumps">regular copies of the complete database<span class="help-block collapse" id="seriesTypedumps-help">Select this option if you are publishing copies of the contents of your database at
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: seriesTypeStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: seriesTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What type of dataset series is this?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypedumps-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="dumps">regular copies of the complete database<span class="help-block collapse" id="seriesTypedumps-help">Select this option if you are publishing copies of the contents of your database at
                                           regular intervals.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypeaggregate-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="aggregate">regular aggregates of changing data<span class="help-block collapse" id="seriesTypeaggregate-help">Select this option if you are creating aggregate information at regular intervals,
                                           perhaps because the underlying data cannot be released as open data.</span></label></div>
                               </div>
                               					
                               <div class="conditional" data-bind="visible: seriesType() === 'dumps'">
                                  						
-                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: changeFeedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is a feed of changes made available?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#changeFeed-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="changeFeed" data-bind="checked: changeFeed"> Yes</label><label class="radio inline"><input type="radio" value="false" name="changeFeed" data-bind="checked: changeFeed"> No</label> <span class="label label-established" data-toggle="collapse" data-target="#changeFeed-requirement"><i class="icon-star icon-white"></i> Established</span><span class="help-block collapse" id="changeFeed-help">Indicate whether you make available a feed of the changes that occur to the data that
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: changeFeedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is a feed of changes made available?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#changeFeed-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="changeFeed" data-bind="checked: changeFeed"> Yes</label><label class="radio inline"><input type="radio" value="false" name="changeFeed" data-bind="checked: changeFeed"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#changeFeed-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="changeFeed-help">Indicate whether you make available a feed of the changes that occur to the data that
                                           you capture, such as new entries or amendments to existing entries.</span><div class="requirement collapse" id="changeFeed-requirement">
-                                          <p class="alert alert-info"><a href="#changeFeed-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> As the data that you capture changes very frequently, you should provide a feed of
+                                          <p class="alert alert-info"><a href="#changeFeed-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> As the data that you capture changes very frequently, you should provide a feed of
                                              the changes that occur so that it's easy for reusers to keep their copies up to date.
                                           </p>
                                        </div>
@@ -553,8 +553,8 @@
                                           <p class="alert alert-info"><a href="#frequentSeriesPublicationweekly-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> As the data you capture changes frequently, you should create a new dataset release
                                              every week.
                                           </p>
-                                       </div></label><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="daily">at least every day <span class="label label-established" data-toggle="collapse" data-target="#frequentSeriesPublicationdaily-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="frequentSeriesPublicationdaily-requirement">
-                                          <p class="alert alert-info"><a href="#frequentSeriesPublicationdaily-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> As the data you capture changes frequently, you should create a new dataset release
+                                       </div></label><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="daily">at least every day <span class="label label-exemplar" data-toggle="collapse" data-target="#frequentSeriesPublicationdaily-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="frequentSeriesPublicationdaily-requirement">
+                                          <p class="alert alert-info"><a href="#frequentSeriesPublicationdaily-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> As the data you capture changes frequently, you should create a new dataset release
                                              every day.
                                           </p>
                                        </div></label></div>
@@ -573,9 +573,9 @@
                                        <p class="alert alert-info"><a href="#seriesPublicationDelaygood-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The delay between creating and publishing a dataset should be less than half the gap
                                           between releases.
                                        </p>
-                                    </div></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesPublicationDelayminimal-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesPublicationDelay" data-bind="checked: seriesPublicationDelay" value="minimal">there is minimal or no delay <span class="label label-established" data-toggle="collapse" data-target="#seriesPublicationDelayminimal-requirement"><i class="icon-star icon-white"></i> Established</span><span class="help-block collapse" id="seriesPublicationDelayminimal-help">Choose this option if the delay is in the order of a few seconds if the datasets are
+                                    </div></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesPublicationDelayminimal-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesPublicationDelay" data-bind="checked: seriesPublicationDelay" value="minimal">there is minimal or no delay <span class="label label-exemplar" data-toggle="collapse" data-target="#seriesPublicationDelayminimal-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="seriesPublicationDelayminimal-help">Choose this option if the delay is in the order of a few seconds if the datasets are
                                        created frequently, or a few minutes if they are made less frequently.</span><div class="requirement collapse" id="seriesPublicationDelayminimal-requirement">
-                                       <p class="alert alert-info"><a href="#seriesPublicationDelayminimal-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> There should be minimal or no delay between creating and publishing datasets.
+                                       <p class="alert alert-info"><a href="#seriesPublicationDelayminimal-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> There should be minimal or no delay between creating and publishing datasets.
                                        </p>
                                     </div></label></div>
                            </div>
@@ -600,8 +600,8 @@
                                        </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="weekly">at least every week <span class="label label-standard" data-toggle="collapse" data-target="#dumpFrequencyweekly-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="dumpFrequencyweekly-requirement">
                                           <p class="alert alert-info"><a href="#dumpFrequencyweekly-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should create a new database dump every week.
                                           </p>
-                                       </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="daily">at least every day <span class="label label-established" data-toggle="collapse" data-target="#dumpFrequencydaily-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="dumpFrequencydaily-requirement">
-                                          <p class="alert alert-info"><a href="#dumpFrequencydaily-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should create a new database dump every day.
+                                       </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="daily">at least every day <span class="label label-exemplar" data-toggle="collapse" data-target="#dumpFrequencydaily-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="dumpFrequencydaily-requirement">
+                                          <p class="alert alert-info"><a href="#dumpFrequencydaily-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should create a new database dump every day.
                                           </p>
                                        </div></label></div>
                               </div>
@@ -630,8 +630,8 @@
                               </div>
                            </div>
                         </div>
-                        <div class="control-group"><label class="control-label" for="qualityControlAudited"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityControlAuditedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the latest report auditing your quality control process?</label><div class="controls"><input type="url" class="span5" id="qualityControlAudited" name="qualityControlAudited" data-bind="value: qualityControlAudited, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Audit Report URL"> <span class="label label-established" data-toggle="collapse" data-target="#qualityControlAudited-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="qualityControlAudited-requirement">
-                                 <p class="alert alert-info"><a href="#qualityControlAudited-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> An audited quality control process gives developers reassurance that the quality control
+                        <div class="control-group"><label class="control-label" for="qualityControlAudited"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityControlAuditedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the latest report auditing your quality control process?</label><div class="controls"><input type="url" class="span5" id="qualityControlAudited" name="qualityControlAudited" data-bind="value: qualityControlAudited, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Audit Report URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#qualityControlAudited-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="qualityControlAudited-requirement">
+                                 <p class="alert alert-info"><a href="#qualityControlAudited-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> An audited quality control process gives developers reassurance that the quality control
                                     process that you have described is being adhered to.
                                  </p>
                               </div>
@@ -650,8 +650,8 @@
                                        <p class="alert alert-info"><a href="#serviceAvailability99.9%-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year)
                                           of the service.
                                        </p>
-                                    </div></label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="99.999%">at least 99.999% availability <span class="label label-established" data-toggle="collapse" data-target="#serviceAvailability99.999%-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="serviceAvailability99.999%-requirement">
-                                       <p class="alert alert-info"><a href="#serviceAvailability99.999%-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
+                                    </div></label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="99.999%">at least 99.999% availability <span class="label label-exemplar" data-toggle="collapse" data-target="#serviceAvailability99.999%-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="serviceAvailability99.999%-requirement">
+                                       <p class="alert alert-info"><a href="#serviceAvailability99.999%-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
                                           of the service.
                                        </p>
                                     </div></label></div>
@@ -666,8 +666,8 @@
                                     <p class="alert alert-info"><a href="#onGoingAvailabilityP2Y-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
                                        available in this form for at least two years.
                                     </p>
-                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P3Y">this dataset will be available in this form for at least three years <span class="label label-established" data-toggle="collapse" data-target="#onGoingAvailabilityP3Y-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="onGoingAvailabilityP3Y-requirement">
-                                    <p class="alert alert-info"><a href="#onGoingAvailabilityP3Y-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
+                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P3Y">this dataset will be available in this form for at least three years <span class="label label-exemplar" data-toggle="collapse" data-target="#onGoingAvailabilityP3Y-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="onGoingAvailabilityP3Y-requirement">
+                                    <p class="alert alert-info"><a href="#onGoingAvailabilityP3Y-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> Provide a guarantee to developers who might want to reuse your data that it will be
                                        available in this form for at least three years.
                                     </p>
                                  </div></label></div>
@@ -799,11 +799,11 @@
                                              <p class="alert alert-info"><a href="#dumpManagementcurrent-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> There should be a single URL that can always be used to download the current dump
                                                 of the database.
                                              </p>
-                                          </div></label><label class="checkbox"><input type="checkbox" name="dumpManagementTemplate" data-bind="checked: dumpManagementTemplate" value="template">the URLs for each release follow a regular pattern <span class="label label-established" data-toggle="collapse" data-target="#dumpManagementtemplate-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="dumpManagementtemplate-requirement">
-                                             <p class="alert alert-info"><a href="#dumpManagementtemplate-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> The URLs for different dumps database should follow a regular structure.
+                                          </div></label><label class="checkbox"><input type="checkbox" name="dumpManagementTemplate" data-bind="checked: dumpManagementTemplate" value="template">the URLs for each release follow a regular pattern <span class="label label-exemplar" data-toggle="collapse" data-target="#dumpManagementtemplate-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="dumpManagementtemplate-requirement">
+                                             <p class="alert alert-info"><a href="#dumpManagementtemplate-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> The URLs for different dumps database should follow a regular structure.
                                              </p>
-                                          </div></label><label class="checkbox"><input type="checkbox" name="dumpManagementList" data-bind="checked: dumpManagementList" value="list">you publish a list of the releases <span class="label label-established" data-toggle="collapse" data-target="#dumpManagementlist-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="dumpManagementlist-requirement">
-                                             <p class="alert alert-info"><a href="#dumpManagementlist-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> There should be a document or feed that provides a list of all the available dumps
+                                          </div></label><label class="checkbox"><input type="checkbox" name="dumpManagementList" data-bind="checked: dumpManagementList" value="list">you publish a list of the releases <span class="label label-exemplar" data-toggle="collapse" data-target="#dumpManagementlist-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="dumpManagementlist-requirement">
+                                             <p class="alert alert-info"><a href="#dumpManagementlist-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> There should be a document or feed that provides a list of all the available dumps
                                                 of the database.
                                              </p>
                                           </div></label></div>
@@ -880,8 +880,8 @@
                         <div class="conditional" data-bind="visible: dataType().statistical">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: statisticalFormatStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the formats used for statistical data include:</label><div class="controls"><label class="radio"><input type="radio" name="statisticalFormat" data-bind="checked: statisticalFormat" value="statistical">one that exposes the structure of the statistical hypercube data, such as SDMX or
-                                       Data Cube <span class="label label-established" data-toggle="collapse" data-target="#statisticalFormatstatistical-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="statisticalFormatstatistical-requirement">
-                                       <p class="alert alert-info"><a href="#statisticalFormatstatistical-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should publish statistical data in a format that exposes its dimensions and measures.
+                                       Data Cube <span class="label label-exemplar" data-toggle="collapse" data-target="#statisticalFormatstatistical-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="statisticalFormatstatistical-requirement">
+                                       <p class="alert alert-info"><a href="#statisticalFormatstatistical-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should publish statistical data in a format that exposes its dimensions and measures.
                                        </p>
                                     </div></label><label class="radio"><input type="radio" name="statisticalFormat" data-bind="checked: statisticalFormat" value="tabular">one that treats the statistical data as a table, such as CSV <span class="label label-standard" data-toggle="collapse" data-target="#statisticalFormattabular-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="statisticalFormattabular-requirement">
                                        <p class="alert alert-info"><a href="#statisticalFormattabular-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish tabular data in a format that exposes the tables of data.
@@ -948,8 +948,8 @@
                         </div>
                         <div class="conditional" data-bind="visible: identifiers() === 'true'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: resolvingUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the URIs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="resolvingUris" data-bind="checked: resolvingUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="resolvingUris" data-bind="checked: resolvingUris"> No</label> <span class="label label-established" data-toggle="collapse" data-target="#resolvingUris-requirement"><i class="icon-star icon-white"></i> Established</span><div class="requirement collapse" id="resolvingUris-requirement">
-                                    <p class="alert alert-info"><a href="#resolvingUris-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> Identifiers that you use within your dataset should resolve to provide information
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: resolvingUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the URIs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="resolvingUris" data-bind="checked: resolvingUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="resolvingUris" data-bind="checked: resolvingUris"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#resolvingUris-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="resolvingUris-requirement">
+                                    <p class="alert alert-info"><a href="#resolvingUris-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> Identifiers that you use within your dataset should resolve to provide information
                                        about the things being identified.
                                     </p>
                                  </div>
@@ -1003,9 +1003,9 @@
                         </div>
                         		
                      </div>
-                     <div class="control-group"><label class="control-label" for="libraries"><span class="badge badge-circular badge-success pull-left" data-bind="visible: librariesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you list tools for working with the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"> <span class="label label-established" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Established</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
+                     <div class="control-group"><label class="control-label" for="libraries"><span class="badge badge-circular badge-success pull-left" data-bind="visible: librariesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you list tools for working with the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
                               working with the data.</span><div class="requirement collapse" id="libraries-requirement">
-                              <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a> You should provide a list of software libraries and other tools that help developers
+                              <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a list of software libraries and other tools that help developers
                                  who want to work with the data. These can be created by you or by other members of
                                  the community.
                               </p>
@@ -1033,7 +1033,7 @@
             </div>
             <p><a id="download-certificate" data-bind="attr: { href: certificateHTML }" target="_new" class="btn btn-primary">Download Certificate</a></p>
          </section>
-         <section id="improvements" data-bind="visible: certificateLevel() !== 'established'">
+         <section id="improvements" data-bind="visible: certificateLevel() !== 'exemplar'">
             <div class="page-header">
                <h1>Improving Your Open Data</h1>
             </div>
@@ -1246,60 +1246,60 @@
                </div>
             </div>
             <hr>
-            <div id="improvements-established" class="improvements">
+            <div id="improvements-exemplar" class="improvements">
                <div data-bind="visible: releaseType() === 'series'">
                   <div data-bind="visible: frequentChanges() === 'true'">
                      <div data-bind="visible: seriesType() === 'dumps'">
-                        <p class="improvement" data-bind="visible: changeFeed() === ''"><a class="improvement-label" href="#changeFeed" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">As the data that you capture changes very frequently, you should provide a feed of
+                        <p class="improvement" data-bind="visible: changeFeed() === ''"><a class="improvement-label" href="#changeFeed" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">As the data that you capture changes very frequently, you should provide a feed of
                               the changes that occur so that it's easy for reusers to keep their copies up to date.</span></p>
                      </div>
                      <div data-bind="visible: frequentSeriesPublication() !== 'daily'">
-                        <p class="improvement"><a class="improvement-label" href="#frequentSeriesPublication" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">As the data you capture changes frequently, you should create a new dataset release
+                        <p class="improvement"><a class="improvement-label" href="#frequentSeriesPublication" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">As the data you capture changes frequently, you should create a new dataset release
                               every day.</span></p>
                      </div>
                   </div>
                   <div data-bind="visible: seriesPublicationDelay() !== 'minimal'">
-                     <p class="improvement"><a class="improvement-label" href="#seriesPublicationDelay" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">There should be minimal or no delay between creating and publishing datasets.</span></p>
+                     <p class="improvement"><a class="improvement-label" href="#seriesPublicationDelay" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">There should be minimal or no delay between creating and publishing datasets.</span></p>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
                   <div data-bind="visible: provideDumps() === 'true'">
                      <div data-bind="visible: dumpFrequency() !== 'daily'">
-                        <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">You should create a new database dump every day.</span></p>
+                        <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should create a new database dump every day.</span></p>
                      </div>
                   </div>
                </div>
-               <p class="improvement" data-bind="visible: qualityControlAudited() === ''"><a class="improvement-label" href="#qualityControlAudited" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">An audited quality control process gives developers reassurance that the quality control
+               <p class="improvement" data-bind="visible: qualityControlAudited() === ''"><a class="improvement-label" href="#qualityControlAudited" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">An audited quality control process gives developers reassurance that the quality control
                      process that you have described is being adhered to.</span></p>
                <div data-bind="visible: releaseType() === 'service'">
                   <div data-bind="visible: serviceAvailability() !== '99.999%'">
-                     <p class="improvement"><a class="improvement-label" href="#serviceAvailability" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
+                     <p class="improvement"><a class="improvement-label" href="#serviceAvailability" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
                            of the service.</span></p>
                   </div>
                </div>
                <div data-bind="visible: onGoingAvailability() !== 'P3Y'">
-                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">Provide a guarantee to developers who might want to reuse your data that it will be
+                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">Provide a guarantee to developers who might want to reuse your data that it will be
                         available in this form for at least three years.</span></p>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'service'">
                      <div data-bind="visible: provideDumps() === 'true'">
-                        <p class="improvement" data-bind="visible: !dumpManagementTemplate()"><a class="improvement-label" href="#dumpManagement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">The URLs for different dumps database should follow a regular structure.</span></p>
-                        <p class="improvement" data-bind="visible: !dumpManagementList()"><a class="improvement-label" href="#dumpManagement"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">There should be a document or feed that provides a list of all the available dumps
+                        <p class="improvement" data-bind="visible: !dumpManagementTemplate()"><a class="improvement-label" href="#dumpManagement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">The URLs for different dumps database should follow a regular structure.</span></p>
+                        <p class="improvement" data-bind="visible: !dumpManagementList()"><a class="improvement-label" href="#dumpManagement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">There should be a document or feed that provides a list of all the available dumps
                               of the database.</span></p>
                      </div>
                   </div>
                </div>
                <div data-bind="visible: dataType().statistical">
                   <div data-bind="visible: statisticalFormat() !== 'statistical'">
-                     <p class="improvement"><a class="improvement-label" href="#statisticalFormat" data-toggle="tab" data-target="#technical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">You should publish statistical data in a format that exposes its dimensions and measures.</span></p>
+                     <p class="improvement"><a class="improvement-label" href="#statisticalFormat" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should publish statistical data in a format that exposes its dimensions and measures.</span></p>
                   </div>
                </div>
                <div data-bind="visible: identifiers() === 'true'">
-                  <p class="improvement" data-bind="visible: resolvingUris() === ''"><a class="improvement-label" href="#resolvingUris" data-toggle="tab" data-target="#technical"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">Identifiers that you use within your dataset should resolve to provide information
+                  <p class="improvement" data-bind="visible: resolvingUris() === ''"><a class="improvement-label" href="#resolvingUris" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">Identifiers that you use within your dataset should resolve to provide information
                         about the things being identified.</span></p>
                </div>
-               <p class="improvement" data-bind="visible: libraries() === ''"><a class="improvement-label" href="#libraries" data-toggle="tab" data-target="#social"><span class="label label-established"><i class="icon-star icon-white"></i>Established</span></a><span class="improvement-desc">You should provide a list of software libraries and other tools that help developers
+               <p class="improvement" data-bind="visible: libraries() === ''"><a class="improvement-label" href="#libraries" data-toggle="tab" data-target="#social"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should provide a list of software libraries and other tools that help developers
                      who want to work with the data. These can be created by you or by other members of
                      the community.</span></p>
             </div>
@@ -1649,7 +1649,7 @@ certificate.privacyImpactAssessmentUrlStatus = ko.computed(function () {
   return status;
 });
 certificate.legalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, established: 0 }
+  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
 
 	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
@@ -1922,7 +1922,7 @@ certificate.frequentChangesStatus = ko.computed(function () {
 certificate.seriesType = ko.observable('');
 certificate.seriesTypeStatus = ko.computed(function () {
   var status;
-  if (certificate.seriesType() === '') status = 'established';
+  if (certificate.seriesType() === '') status = 'exemplar';
   else status = 'complete';
   return status;
 });
@@ -1997,7 +1997,7 @@ certificate.onGoingAvailabilityStatus = ko.computed(function () {
   return status;
 });
 certificate.practicalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, established: 0 }
+  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
 
 	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
@@ -2040,7 +2040,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
-	if (certificate.changeFeed() !== 'true') unmetRequirements['established']++; 
+	if (certificate.changeFeed() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 
@@ -2050,7 +2050,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.frequentSeriesPublication() !== '' && certificate.frequentSeriesPublication() !== 'rarely' && certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['standard']++;
-		if (certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['established']++;
+		if (certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2060,7 +2060,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.seriesPublicationDelay() !== '' && certificate.seriesPublicationDelay() !== 'extreme' && certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['basic']++;
 		if (certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['pilot']++;
 		if (certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['standard']++;
-		if (certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['established']++;
+		if (certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2079,7 +2079,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.dumpFrequency() !== '' && certificate.dumpFrequency() !== 'rarely' && certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['standard']++;
-		if (certificate.dumpFrequency() !== 'daily') unmetRequirements['established']++;
+		if (certificate.dumpFrequency() !== 'daily') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2102,7 +2102,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.qualityControlAuditedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.qualityControlAuditedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.qualityControlAuditedStatus() !== 'optional') unmetRequirements[certificate.qualityControlAuditedStatus()]++;
-	if (certificate.qualityControlAuditedStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.qualityControlAuditedStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.releaseType() === 'service') {
 
@@ -2112,7 +2112,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.serviceAvailability() !== '' && certificate.serviceAvailability() !== 'minimal' && certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['basic']++;
 		if (certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['pilot']++;
 		if (certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['standard']++;
-		if (certificate.serviceAvailability() !== '99.999%') unmetRequirements['established']++;
+		if (certificate.serviceAvailability() !== '99.999%') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2122,7 +2122,7 @@ certificate.practicalStatus = ko.computed(function () {
 	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['basic']++;
 		if (certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['pilot']++;
 		if (certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['standard']++;
-		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['established']++;
+		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['exemplar']++;
 		  return unmetRequirements;
 });
 certificate.datasetUrl = ko.observable('');
@@ -2337,7 +2337,7 @@ certificate.externalUrisStatus = ko.computed(function () {
   return status;
 });
 certificate.technicalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, established: 0 }
+  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
 
 	if (certificate.releaseType() !== '') {
@@ -2422,8 +2422,8 @@ if (!(certificate.endpointUrl() !== '')) unmetRequirements['standard']++;
 	else if (certificate.dumpManagementStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dumpManagementStatus() !== 'optional') unmetRequirements[certificate.dumpManagementStatus()]++;
 	if (!certificate.dumpManagementCurrent()) unmetRequirements['standard']++; 
-if (!certificate.dumpManagementTemplate()) unmetRequirements['established']++; 
-if (!certificate.dumpManagementList()) unmetRequirements['established']++; 
+if (!certificate.dumpManagementTemplate()) unmetRequirements['exemplar']++; 
+if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++; 
 
 	if (certificate.dumpManagement().current) {
 
@@ -2496,7 +2496,7 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.statisticalFormat() !== '' && certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format' && certificate.statisticalFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular') unmetRequirements['standard']++;
-		if (certificate.statisticalFormat() !== 'statistical') unmetRequirements['established']++;
+		if (certificate.statisticalFormat() !== 'statistical') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2557,7 +2557,7 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUris() !== 'true') unmetRequirements['established']++; 
+	if (certificate.resolvingUris() !== 'true') unmetRequirements['exemplar']++; 
 
 	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;
@@ -2602,7 +2602,7 @@ certificate.librariesStatus = ko.computed(function () {
   return status;
 });
 certificate.socialStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, established: 0 }
+  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
 
 	if (certificate.contactEmailStatus() === 'complete') unmetRequirements['answered']++;
@@ -2632,7 +2632,7 @@ certificate.socialStatus = ko.computed(function () {
 	if (certificate.librariesStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.librariesStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.librariesStatus() !== 'optional') unmetRequirements[certificate.librariesStatus()]++;
-	if (certificate.librariesStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.librariesStatus() !== 'complete') unmetRequirements['exemplar']++; 
   return unmetRequirements;
 });
 
@@ -2642,7 +2642,7 @@ certificate.socialStatus = ko.computed(function () {
 		  					basic: 0,
 		  					pilot: 0,
 		  					standard: 0,
-		  					established: 0,
+		  					exemplar: 0,
 		  					
 		  					}
 		  				;
@@ -2951,7 +2951,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
-	if (certificate.changeFeed() !== 'true') unmetRequirements['established']++; 
+	if (certificate.changeFeed() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 
@@ -2961,7 +2961,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.frequentSeriesPublication() !== '' && certificate.frequentSeriesPublication() !== 'rarely' && certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['standard']++;
-		if (certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['established']++;
+		if (certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2971,7 +2971,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.seriesPublicationDelay() !== '' && certificate.seriesPublicationDelay() !== 'extreme' && certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['basic']++;
 		if (certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['pilot']++;
 		if (certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['standard']++;
-		if (certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['established']++;
+		if (certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['exemplar']++;
 		
 }
 
@@ -2990,7 +2990,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.dumpFrequency() !== '' && certificate.dumpFrequency() !== 'rarely' && certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['standard']++;
-		if (certificate.dumpFrequency() !== 'daily') unmetRequirements['established']++;
+		if (certificate.dumpFrequency() !== 'daily') unmetRequirements['exemplar']++;
 		
 }
 
@@ -3013,7 +3013,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.qualityControlAuditedStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.qualityControlAuditedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.qualityControlAuditedStatus() !== 'optional') unmetRequirements[certificate.qualityControlAuditedStatus()]++;
-	if (certificate.qualityControlAuditedStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.qualityControlAuditedStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.releaseType() === 'service') {
 
@@ -3023,7 +3023,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.serviceAvailability() !== '' && certificate.serviceAvailability() !== 'minimal' && certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['basic']++;
 		if (certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['pilot']++;
 		if (certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['standard']++;
-		if (certificate.serviceAvailability() !== '99.999%') unmetRequirements['established']++;
+		if (certificate.serviceAvailability() !== '99.999%') unmetRequirements['exemplar']++;
 		
 }
 
@@ -3033,7 +3033,7 @@ $(certificate.sources()).each(function () {var sources = this;
 	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['basic']++;
 		if (certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['pilot']++;
 		if (certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['standard']++;
-		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['established']++;
+		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['exemplar']++;
 		
 	if (certificate.releaseType() !== '') {
 
@@ -3117,8 +3117,8 @@ if (!(certificate.endpointUrl() !== '')) unmetRequirements['standard']++;
 	else if (certificate.dumpManagementStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dumpManagementStatus() !== 'optional') unmetRequirements[certificate.dumpManagementStatus()]++;
 	if (!certificate.dumpManagementCurrent()) unmetRequirements['standard']++; 
-if (!certificate.dumpManagementTemplate()) unmetRequirements['established']++; 
-if (!certificate.dumpManagementList()) unmetRequirements['established']++; 
+if (!certificate.dumpManagementTemplate()) unmetRequirements['exemplar']++; 
+if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++; 
 
 	if (certificate.dumpManagement().current) {
 
@@ -3191,7 +3191,7 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.statisticalFormat() !== '' && certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format' && certificate.statisticalFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular') unmetRequirements['standard']++;
-		if (certificate.statisticalFormat() !== 'statistical') unmetRequirements['established']++;
+		if (certificate.statisticalFormat() !== 'statistical') unmetRequirements['exemplar']++;
 		
 }
 
@@ -3252,7 +3252,7 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUris() !== 'true') unmetRequirements['established']++; 
+	if (certificate.resolvingUris() !== 'true') unmetRequirements['exemplar']++; 
 
 	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;
@@ -3287,7 +3287,7 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 	if (certificate.librariesStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.librariesStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.librariesStatus() !== 'optional') unmetRequirements[certificate.librariesStatus()]++;
-	if (certificate.librariesStatus() !== 'complete') unmetRequirements['established']++; 
+	if (certificate.librariesStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 		  				if (unmetRequirements.basic > 0) {
 		  					return 'none';
@@ -3298,11 +3298,11 @@ if (!certificate.dumpManagementList()) unmetRequirements['established']++;
 		  				} else if (unmetRequirements.standard > 0) {
 		  					return 'pilot';
 		  				
-		  				} else if (unmetRequirements.established > 0) {
+		  				} else if (unmetRequirements.exemplar > 0) {
 		  					return 'standard';
 		  				
 		  				} else {
-		  					return 'established';
+		  					return 'exemplar';
 		  				}
 		  			}, certificate);
 		  			certificate.certificateLevelLabel = ko.computed(function () {

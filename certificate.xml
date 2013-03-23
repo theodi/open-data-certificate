@@ -10,7 +10,7 @@
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
 		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
 		<level id="standard">This data satisfies the requirements for routinely published open data that encourages reuse.</level>
-		<level id="established">This data satisfies the requirements for key information infrastructure.</level>
+		<level id="exemplar">This data satisfies the requirements for key information infrastructure.</level>
 	</levels>
 	<question id="dataTitle">
 		<label>What should we call this data?</label>
@@ -390,7 +390,7 @@
 				<if test="this.frequentChanges() === 'true'">
 					<question id="seriesType">
 						<label>What type of dataset series is this?</label>
-						<radioset required="established">
+						<radioset required="exemplar">
 							<option value="dumps">
 								<label>regular copies of the complete database</label>
 								<help>Select this option if you are publishing copies of the contents of your database at regular intervals.</help>
@@ -406,7 +406,7 @@
 							<label>Is a feed of changes made available?</label>
 							<yesno />
 							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries.</help>
-							<requirement level="established">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
+							<requirement level="exemplar">As the data that you capture changes very frequently, you should provide a feed of the changes that occur so that it's easy for reusers to keep their copies up to date.</requirement>
 						</question>
 					</if>
 					<question id="frequentSeriesPublication">
@@ -425,7 +425,7 @@
 							</option>
 							<option value="daily">
 								<label>at least every day</label>
-								<requirement level="established">As the data you capture changes frequently, you should create a new dataset release every day.</requirement>
+								<requirement level="exemplar">As the data you capture changes frequently, you should create a new dataset release every day.</requirement>
 							</option>
 						</radioset>
 					</question>
@@ -450,7 +450,7 @@
 						<option value="minimal">
 							<label>there is minimal or no delay</label>
 							<help>Choose this option if the delay is in the order of a few seconds if the datasets are created frequently, or a few minutes if they are made less frequently.</help>
-							<requirement level="established">There should be minimal or no delay between creating and publishing datasets.</requirement>
+							<requirement level="exemplar">There should be minimal or no delay between creating and publishing datasets.</requirement>
 						</option>
 					</radioset>
 				</question>
@@ -479,7 +479,7 @@
 							</option>
 							<option value="daily">
 								<label>at least every day</label>
-								<requirement level="established">You should create a new database dump every day.</requirement>
+								<requirement level="exemplar">You should create a new database dump every day.</requirement>
 							</option>
 						</radioset>
 					</question>
@@ -505,7 +505,7 @@
 			<question id="qualityControlAudited">
 				<label>Where is the latest report auditing your quality control process?</label>
 				<input type="url" placeholder="Quality Control Process Audit Report URL"/>
-				<requirement level="established">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
+				<requirement level="exemplar">An audited quality control process gives developers reassurance that the quality control process that you have described is being adhered to.</requirement>
 			</question>
 		</group>
 		<group id="guarantees">
@@ -527,7 +527,7 @@
 						</option>
 						<option value="99.999%">
 							<label>at least 99.999% availability</label>
-							<requirement level="established">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service.</requirement>
+							<requirement level="exemplar">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service.</requirement>
 						</option>
 					</radioset>
 				</question>
@@ -548,7 +548,7 @@
 					</option>
 					<option value="P3Y">
 						<label>this dataset will be available in this form for at least three years</label>
-						<requirement level="established">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
+						<requirement level="exemplar">Provide a guarantee to developers who might want to reuse your data that it will be available in this form for at least three years.</requirement>
 					</option>
 				</radioset>
 			</question>
@@ -637,11 +637,11 @@
 								</option>
 								<option value="template">
 									<label>the URLs for each release follow a regular pattern</label>
-									<requirement level="established">The URLs for different dumps database should follow a regular structure.</requirement>
+									<requirement level="exemplar">The URLs for different dumps database should follow a regular structure.</requirement>
 								</option>
 								<option value="list">
 									<label>you publish a list of the releases</label>
-									<requirement level="established">There should be a document or feed that provides a list of all the available dumps of the database.</requirement>
+									<requirement level="exemplar">There should be a document or feed that provides a list of all the available dumps of the database.</requirement>
 								</option>
 							</checkboxset>
 						</question>
@@ -732,7 +732,7 @@
 					<radioset>
 						<option value="statistical">
 							<label>one that exposes the structure of the statistical hypercube data, such as SDMX or Data Cube</label>
-							<requirement level="established">You should publish statistical data in a format that exposes its dimensions and measures.</requirement>
+							<requirement level="exemplar">You should publish statistical data in a format that exposes its dimensions and measures.</requirement>
 						</option>
 						<option value="tabular">
 							<label>one that treats the statistical data as a table, such as CSV</label>
@@ -813,7 +813,7 @@
 				<question id="resolvingUris">
 					<label>Do the URIs resolve to information about those things?</label>
 					<yesno />
-					<requirement level="established">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
+					<requirement level="exemplar">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
 				</question>
 				<question id="externalUris">
 					<label>Does the dataset include URIs outside your control?</label>
@@ -871,7 +871,7 @@
 			<label>Where do you list tools for working with the data?</label>
 			<input type="url" placeholder="Tool URL"/>
 			<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
-			<requirement level="established">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
+			<requirement level="exemplar">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
 		</question>
 	</group>
 	<certificate>
