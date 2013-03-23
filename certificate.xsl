@@ -434,8 +434,8 @@
 
 <xsl:template match="yesno">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<label class="radio inline"><input type="radio" value="true"><xsl:apply-templates select="." mode="dataBind" /></input> Yes</label>
 	<label class="radio inline"><input type="radio" value="false"><xsl:apply-templates select="." mode="dataBind" /></input> No</label>
+	<label class="radio inline"><input type="radio" value="true"><xsl:apply-templates select="." mode="dataBind" /></input> Yes</label>
 </xsl:template>
 
 <xsl:template match="textarea">
