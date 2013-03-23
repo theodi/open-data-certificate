@@ -815,27 +815,25 @@
 					<yesno />
 					<requirement level="exemplar">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
 				</question>
-				<question id="externalUris">
-					<label>Does the dataset include URIs outside your control?</label>
-					<radioset>
-						<option value="yes">
-							<label>yes</label>
-						</option>
-						<option value="na">
-							<label>no, because it's not appropriate for this dataset</label>
-						</option>
-						<option value="dont-exist">
-							<label>no, because the URIs you would point to don't exist</label>
-						</option>
-						<option value="dont-trust">
-							<label>no, because the information at suitable URIs isn't reliable</label>
-						</option>
-						<option value="no">
-							<label>no</label>
-						</option>
-					</radioset>
-					<help>We are asking this question to gather statistics about URI reuse and the reasons why people do not reference other peoples' URIs.</help>
+				<question id="existingExternalUris">
+					<label>Do external URIs exist for any of those things?</label>
+					<yesno required="exemplar" />
+					<help>Are there other websites, outside your control, that provide URIs for the things that you are naming through URIs within your data?</help>
 				</question>
+				<if test="this.existingExternalUris() === 'true'">
+					<question id="reliableExternalUris">
+						<label>Do those external URIs serve reliable data?</label>
+						<yesno required="exemplar" />
+						<help>Where there are external URIs, do they resolve to data that you can rely on (for example, has that data got an open data certificate)?</help>
+					</question>
+					<if test="this.reliableExternalUris">
+						<question id="externalUris">
+							<label>Does the data use those external URIs?</label>
+							<yesno />
+							<requirement level="exemplar">If there are suitable existing URIs that provide reliable data, you should use those URIs in your data.</requirement>
+						</question>
+					</if>
+				</if>
 			</if>
 		</group>
 	</group>
