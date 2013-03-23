@@ -940,37 +940,37 @@
                            </div>
                            			
                         </div>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: identifiersStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are you using URIs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers"> Yes</label><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers"> No</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="identifiers-requirement">
-                                 <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Use URIs to identify things in the data, so that they can be easily reference.
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: identifiersStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are you using URLs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers"> Yes</label><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers"> No</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="identifiers-requirement">
+                                 <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Use URLs to identify things in the data, so that they can be easily reference.
                                  </p>
                               </div>
                            </div>
                         </div>
                         <div class="conditional" data-bind="visible: identifiers() === 'true'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: resolvingUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the URIs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="resolvingUris" data-bind="checked: resolvingUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="resolvingUris" data-bind="checked: resolvingUris"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#resolvingUris-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="resolvingUris-requirement">
-                                    <p class="alert alert-info"><a href="#resolvingUris-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> Identifiers that you use within your dataset should resolve to provide information
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: resolvingUrlsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the URLs resolve to information about those things?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="resolvingUrls" data-bind="checked: resolvingUrls"> Yes</label><label class="radio inline"><input type="radio" value="false" name="resolvingUrls" data-bind="checked: resolvingUrls"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#resolvingUrls-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="resolvingUrls-requirement">
+                                    <p class="alert alert-info"><a href="#resolvingUrls-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> Identifiers that you use within your dataset should resolve to provide information
                                        about the things being identified.
                                     </p>
                                  </div>
                               </div>
                            </div>
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: existingExternalUrisStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: existingExternalUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do external URIs exist for any of those things?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#existingExternalUris-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="existingExternalUris" data-bind="checked: existingExternalUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="existingExternalUris" data-bind="checked: existingExternalUris"> No</label><span class="help-block collapse" id="existingExternalUris-help">Are there other websites, outside your control, that provide URIs for the things that
-                                    you are naming through URIs within your data?</span></div>
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: existingExternalUrlsStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: existingExternalUrlsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do external URLs exist for any of those things?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#existingExternalUrls-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="existingExternalUrls" data-bind="checked: existingExternalUrls"> Yes</label><label class="radio inline"><input type="radio" value="false" name="existingExternalUrls" data-bind="checked: existingExternalUrls"> No</label><span class="help-block collapse" id="existingExternalUrls-help">Are there other websites, outside your control, that provide URLs for the things that
+                                    you are naming through URLs within your data?</span></div>
                            </div>
                            				
-                           <div class="conditional" data-bind="visible: existingExternalUris() === 'true'">
+                           <div class="conditional" data-bind="visible: existingExternalUrls() === 'true'">
                               					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: reliableExternalUrisStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: reliableExternalUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do those external URIs serve reliable data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#reliableExternalUris-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="reliableExternalUris" data-bind="checked: reliableExternalUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="reliableExternalUris" data-bind="checked: reliableExternalUris"> No</label><span class="help-block collapse" id="reliableExternalUris-help">Where there are external URIs, do they resolve to data that you can rely on (for example,
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: reliableExternalUrlsStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: reliableExternalUrlsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do those external URLs serve reliable data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#reliableExternalUrls-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="true" name="reliableExternalUrls" data-bind="checked: reliableExternalUrls"> Yes</label><label class="radio inline"><input type="radio" value="false" name="reliableExternalUrls" data-bind="checked: reliableExternalUrls"> No</label><span class="help-block collapse" id="reliableExternalUrls-help">Where there are external URLs, do they resolve to data that you can rely on (for example,
                                        has that data got an open data certificate)?</span></div>
                               </div>
                               					
-                              <div class="conditional" data-bind="visible: reliableExternalUris">
+                              <div class="conditional" data-bind="visible: reliableExternalUrls">
                                  						
-                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: externalUrisStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data use those external URIs?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="externalUris" data-bind="checked: externalUris"> Yes</label><label class="radio inline"><input type="radio" value="false" name="externalUris" data-bind="checked: externalUris"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#externalUris-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="externalUris-requirement">
-                                          <p class="alert alert-info"><a href="#externalUris-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> If there are suitable existing URIs that provide reliable data, you should use those
-                                             URIs in your data.
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: externalUrlsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data use those external URLs?</label><div class="controls"><label class="radio inline"><input type="radio" value="true" name="externalUrls" data-bind="checked: externalUrls"> Yes</label><label class="radio inline"><input type="radio" value="false" name="externalUrls" data-bind="checked: externalUrls"> No</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#externalUrls-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="externalUrls-requirement">
+                                          <p class="alert alert-info"><a href="#externalUrls-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> If there are suitable existing URLs that provide reliable data, you should use those
+                                             URLs in your data.
                                           </p>
                                        </div>
                                     </div>
@@ -1256,7 +1256,7 @@
                <div data-bind="visible: codelists() === 'true'">
                   <p class="improvement" data-bind="visible: codelistDocumentationUrl() === ''"><a class="improvement-label" href="#codelistDocumentationUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for the codes used within your data.</span></p>
                </div>
-               <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">Use URIs to identify things in the data, so that they can be easily reference.</span></p>
+               <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">Use URLs to identify things in the data, so that they can be easily reference.</span></p>
                <p class="improvement" data-bind="visible: forum() === ''"><a class="improvement-label" href="#forum" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should indicate where people using this dataset should discuss the data and how
                      they are using it.</span></p>
                <div data-bind="visible: corrected() === 'true'">
@@ -1316,12 +1316,12 @@
                   </div>
                </div>
                <div data-bind="visible: identifiers() === 'true'">
-                  <p class="improvement" data-bind="visible: resolvingUris() === ''"><a class="improvement-label" href="#resolvingUris" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">Identifiers that you use within your dataset should resolve to provide information
+                  <p class="improvement" data-bind="visible: resolvingUrls() === ''"><a class="improvement-label" href="#resolvingUrls" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">Identifiers that you use within your dataset should resolve to provide information
                         about the things being identified.</span></p>
-                  <div data-bind="visible: existingExternalUris() === 'true'">
-                     <div data-bind="visible: reliableExternalUris">
-                        <p class="improvement" data-bind="visible: externalUris() === ''"><a class="improvement-label" href="#externalUris" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">If there are suitable existing URIs that provide reliable data, you should use those
-                              URIs in your data.</span></p>
+                  <div data-bind="visible: existingExternalUrls() === 'true'">
+                     <div data-bind="visible: reliableExternalUrls">
+                        <p class="improvement" data-bind="visible: externalUrls() === ''"><a class="improvement-label" href="#externalUrls" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">If there are suitable existing URLs that provide reliable data, you should use those
+                              URLs in your data.</span></p>
                      </div>
                   </div>
                </div>
@@ -2348,31 +2348,31 @@ certificate.identifiersStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.resolvingUris = ko.observable('');
-certificate.resolvingUrisStatus = ko.computed(function () {
+certificate.resolvingUrls = ko.observable('');
+certificate.resolvingUrlsStatus = ko.computed(function () {
   var status;
-  if (certificate.resolvingUris() === '') status = 'optional';
+  if (certificate.resolvingUrls() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
-certificate.existingExternalUris = ko.observable('');
-certificate.existingExternalUrisStatus = ko.computed(function () {
+certificate.existingExternalUrls = ko.observable('');
+certificate.existingExternalUrlsStatus = ko.computed(function () {
   var status;
-  if (certificate.existingExternalUris() === '') status = 'exemplar';
+  if (certificate.existingExternalUrls() === '') status = 'exemplar';
   else status = 'complete';
   return status;
 });
-certificate.reliableExternalUris = ko.observable('');
-certificate.reliableExternalUrisStatus = ko.computed(function () {
+certificate.reliableExternalUrls = ko.observable('');
+certificate.reliableExternalUrlsStatus = ko.computed(function () {
   var status;
-  if (certificate.reliableExternalUris() === '') status = 'exemplar';
+  if (certificate.reliableExternalUrls() === '') status = 'exemplar';
   else status = 'complete';
   return status;
 });
-certificate.externalUris = ko.observable('');
-certificate.externalUrisStatus = ko.computed(function () {
+certificate.externalUrls = ko.observable('');
+certificate.externalUrlsStatus = ko.computed(function () {
   var status;
-  if (certificate.externalUris() === '') status = 'optional';
+  if (certificate.externalUrls() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
@@ -2594,27 +2594,27 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUris() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.resolvingUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.resolvingUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.resolvingUrlsStatus() !== 'optional') unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.existingExternalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.existingExternalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.existingExternalUrisStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrisStatus()]++;
+	if (certificate.existingExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.existingExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.existingExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrlsStatus()]++;
 	
-	if (certificate.existingExternalUris() === 'true') {
+	if (certificate.existingExternalUrls() === 'true') {
 
-	if (certificate.reliableExternalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.reliableExternalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.reliableExternalUrisStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrisStatus()]++;
+	if (certificate.reliableExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.reliableExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.reliableExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
 	
-	if (certificate.reliableExternalUris) {
+	if (certificate.reliableExternalUrls) {
 
-	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.externalUrisStatus() !== 'optional') unmetRequirements[certificate.externalUrisStatus()]++;
-	if (certificate.externalUris() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.externalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.externalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.externalUrlsStatus() !== 'optional') unmetRequirements[certificate.externalUrlsStatus()]++;
+	if (certificate.externalUrls() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 
@@ -3306,27 +3306,27 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.resolvingUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.resolvingUrisStatus() !== 'optional') unmetRequirements[certificate.resolvingUrisStatus()]++;
-	if (certificate.resolvingUris() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.resolvingUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.resolvingUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.resolvingUrlsStatus() !== 'optional') unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.existingExternalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.existingExternalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.existingExternalUrisStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrisStatus()]++;
+	if (certificate.existingExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.existingExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.existingExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrlsStatus()]++;
 	
-	if (certificate.existingExternalUris() === 'true') {
+	if (certificate.existingExternalUrls() === 'true') {
 
-	if (certificate.reliableExternalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.reliableExternalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.reliableExternalUrisStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrisStatus()]++;
+	if (certificate.reliableExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.reliableExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.reliableExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
 	
-	if (certificate.reliableExternalUris) {
+	if (certificate.reliableExternalUrls) {
 
-	if (certificate.externalUrisStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.externalUrisStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.externalUrisStatus() !== 'optional') unmetRequirements[certificate.externalUrisStatus()]++;
-	if (certificate.externalUris() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.externalUrlsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.externalUrlsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.externalUrlsStatus() !== 'optional') unmetRequirements[certificate.externalUrlsStatus()]++;
+	if (certificate.externalUrls() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 

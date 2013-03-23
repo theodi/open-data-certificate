@@ -805,32 +805,32 @@
 				</question>
 			</if>
 			<question id="identifiers">
-				<label>Are you using URIs to identify things in the data?</label>
+				<label>Are you using URLs to identify things in the data?</label>
 				<yesno />
-				<requirement level="standard">Use URIs to identify things in the data, so that they can be easily reference.</requirement>
+				<requirement level="standard">Use URLs to identify things in the data, so that they can be easily reference.</requirement>
 			</question>
 			<if test="this.identifiers() === 'true'">
-				<question id="resolvingUris">
-					<label>Do the URIs resolve to information about those things?</label>
+				<question id="resolvingUrls">
+					<label>Do the URLs resolve to information about those things?</label>
 					<yesno />
 					<requirement level="exemplar">Identifiers that you use within your dataset should resolve to provide information about the things being identified.</requirement>
 				</question>
-				<question id="existingExternalUris">
-					<label>Do external URIs exist for any of those things?</label>
+				<question id="existingExternalUrls">
+					<label>Do external URLs exist for any of those things?</label>
 					<yesno required="exemplar" />
-					<help>Are there other websites, outside your control, that provide URIs for the things that you are naming through URIs within your data?</help>
+					<help>Are there other websites, outside your control, that provide URLs for the things that you are naming through URLs within your data?</help>
 				</question>
-				<if test="this.existingExternalUris() === 'true'">
-					<question id="reliableExternalUris">
-						<label>Do those external URIs serve reliable data?</label>
+				<if test="this.existingExternalUrls() === 'true'">
+					<question id="reliableExternalUrls">
+						<label>Do those external URLs serve reliable data?</label>
 						<yesno required="exemplar" />
-						<help>Where there are external URIs, do they resolve to data that you can rely on (for example, has that data got an open data certificate)?</help>
+						<help>Where there are external URLs, do they resolve to data that you can rely on (for example, has that data got an open data certificate)?</help>
 					</question>
-					<if test="this.reliableExternalUris">
-						<question id="externalUris">
-							<label>Does the data use those external URIs?</label>
+					<if test="this.reliableExternalUrls">
+						<question id="externalUrls">
+							<label>Does the data use those external URLs?</label>
 							<yesno />
-							<requirement level="exemplar">If there are suitable existing URIs that provide reliable data, you should use those URIs in your data.</requirement>
+							<requirement level="exemplar">If there are suitable existing URLs that provide reliable data, you should use those URLs in your data.</requirement>
 						</question>
 					</if>
 				</if>
