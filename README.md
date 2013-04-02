@@ -12,7 +12,7 @@ A certificate can be awarded at one of four levels:
   * a **basic certificate** is for data that meets the fundamental requirements for open data
   * a **pilot certificate** is for initial forays into publishing open data, which provides enough to prompt experimentation with data
   * a **standard certificate** is for routinely published open data that encourages reuse
-  * a **established certificate** is for open data that provides reliable key information infrastructure
+  * an **exemplar certificate** is for open data that provides reliable key information infrastructure
 
 These levels are chosen to illustrate both that opening data is a journey, and that you don't have to do everything straight away, and to show that not all open data needs to be published with the same degree of investment.
 
