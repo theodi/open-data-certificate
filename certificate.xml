@@ -5,7 +5,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire version="0.2">
+<questionnaire version="0.3">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
 		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
@@ -780,30 +780,6 @@
 					</radioset>
 				</question>
 			</if>
-			<question id="vocabulary">
-				<label>Do the formats need vocabularies?</label>
-				<yesno required="standard" />
-				<help>Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented with a schema for developers to understand it.</help>
-			</question>
-			<if test="this.vocabulary() === 'true'">
-				<question id="schemaDocumentationUrl">
-					<label>Where is the documentation for the vocabulary?</label>
-					<input type="url" />
-					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish.</requirement>
-				</question>
-			</if>
-			<question id="codelists">
-				<label>Are there any codes used within the data?</label>
-				<yesno required="standard" />
-				<help>Data often includes codes for things like geographical areas, spending categories or diseases; these codes need to be explained for reusers.</help>
-			</question>
-			<if test="this.codelists() === 'true'">
-				<question id="codelistDocumentationUrl">
-					<label>Where are the codes documented?</label>
-					<input type="url" />
-					<requirement level="standard">You should provide documentation for the codes used within your data.</requirement>
-				</question>
-			</if>
 			<question id="identifiers">
 				<label>Are you using URLs to identify things in the data?</label>
 				<yesno />
@@ -839,38 +815,173 @@
 	</group>
 	<group id="social">
 		<label>Social Information</label>
-		<question id="contactEmail">
-			<label>What's the contact email address about this dataset?</label>
-			<input type="email" placeholder="Contact Email Address"/>
-			<help>Provide an email address that people can contact with queries about the dataset.</help>
-			<requirement level="pilot">You should have a contact email address so that people can get back in touch with you about any problems with the dataset.</requirement>
-		</question>
-		<question id="forum">
-			<label>Where do you recommend people discuss this dataset?</label>
-			<input type="url" placeholder="Forum or Mailing List URL"/>
-			<help>Provide a URL for the forum or mailing list where developers using this dataset should discuss it.</help>
-			<requirement level="standard">You should indicate where people using this dataset should discuss the data and how they are using it.</requirement>
-		</question>
-		<if test="this.corrected() === 'true'">
-			<question id="correctionReporting">
-				<label>Where do you describe how to provide corrections?</label>
-				<input type="url" placeholder="Correction Instructions URL" />
-				<help>Provide a link to a page that describes how people should provide corrections if they discover errors in  the data.</help>
-				<requirement level="standard">You should provide instructions for people who discover errors in the data.</requirement>
+		<group id="documentation">
+			<label>Documentation</label>
+			<if test="this.documentationUrl() !== ''">
+				<question id="documentationMetadata">
+					<label>Does your data documentation include machine-readable data for:</label>
+					<!-- these are properties from DCAT -->
+					<checkboxset>
+						<option value="title">
+							<label>title</label>
+							<requirement level="pilot">The data documentation should include a title for the data.</requirement>
+						</option>
+						<option value="description">
+							<label>description</label>
+							<requirement level="pilot">The data documentation should include a description of the data.</requirement>
+						</option>
+						<option value="issued">
+							<label>release date</label>
+							<requirement level="standard">The data documentation should include a machine-readable release date.</requirement>
+						</option>
+						<option value="modified">
+							<label>modification date</label>
+							<requirement level="standard">The data documentation should include a machine-readable date of last modification.</requirement>
+						</option>
+						<option value="language">
+							<label>language</label>
+						</option>
+						<option value="publisher">
+							<label>publisher</label>
+						</option>
+						<option value="accrualPeriodicity">
+							<label>frequency of releases</label>
+						</option>
+						<option value="identifier">
+							<label>identifier</label>
+						</option>
+						<option value="spatial">
+							<label>spatial/geographical coverage</label>
+							<requirement level="standard">The data documentation should include a machine-readable indication of which geographic area the data covers.</requirement>
+						</option>
+						<option value="temporal">
+							<label>temporal coverage</label>
+							<requirement level="standard">The data documentation should include a machine-readable indication of which time period the data covers.</requirement>
+						</option>
+						<option value="theme">
+							<label>theme(s)</label>
+						</option>
+						<option value="keyword">
+							<label>keyword(s) or tag(s)</label>
+						</option>
+						<option value="landingPage">
+							<label>landing page</label>
+						</option>
+						<option value="distribution">
+							<label>distribution(s)</label>
+						</option>
+					</checkboxset>
+				</question>
+				<if test="this.documentationMetadata().distribution">
+					<question id="distributionMetadata">
+						<label>Does your documentation include machine-readable metadata for each distribution on:</label>
+						<checkboxset>
+							<option value="title">
+								<label>title</label>
+								<requirement level="pilot">The data documentation should include a title for each distribution.</requirement>
+							</option>
+							<option value="description">
+								<label>description</label>
+								<requirement level="pilot">The data documentation should include a description of each distribution.</requirement>
+							</option>
+							<option value="issued">
+								<label>release date</label>
+								<requirement level="standard">The data documentation should include a machine-readable release date for each distribution.</requirement>
+							</option>
+							<option value="modified">
+								<label>modification date</label>
+								<requirement level="standard">The data documentation should include a machine-readable date of last modification for each distribution.</requirement>
+							</option>
+							<option value="license">
+								<label>licence</label>
+							</option>
+							<option value="accessURL">
+								<label>URL for accessing the data</label>
+								<help>This metadata should be used when the distribution is not a download (eg if it's a pointer to an API)</help>
+							</option>
+							<option value="downloadURL">
+								<label>URL for downloading the dataset</label>
+							</option>
+							<option value="byteSize">
+								<label>size in bytes</label>
+							</option>
+							<option value="mediaType">
+								<label>media type of the download</label>
+							</option>
+						</checkboxset>
+					</question>
+				</if>
+			</if>
+			<if test="this.releaseType() === 'service'">
+				<question id="serviceDocumentation">
+					<label>Where is the documentation for the API?</label>
+					<input type="url" />
+					<requirement level="pilot">You should provide documentation about how the API works.</requirement>
+				</question>
+			</if>
+			<question id="vocabulary">
+				<label>Do the data formats use vocabularies?</label>
+				<yesno required="standard" />
+				<help>Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented with a schema for developers to understand it.</help>
 			</question>
-			<question id="correctionDiscovery">
-				<label>Where do you describe how to learn about corrections?</label>
-				<input type="url" placeholder="Correction Notification URL" />
-				<help>Provide a link to a page that describes how corrections will be communicated to reusers of the data.</help>
-				<requirement level="standard">You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data.</requirement>
+			<if test="this.vocabulary() === 'true'">
+				<question id="schemaDocumentationUrl">
+					<label>Where is the documentation for the vocabularies?</label>
+					<input type="url" />
+					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish.</requirement>
+				</question>
+			</if>
+			<question id="codelists">
+				<label>Are there any codes used within the data?</label>
+				<yesno required="standard" />
+				<help>Data often includes codes for things like geographical areas, spending categories or diseases; these codes need to be explained for reusers.</help>
 			</question>
-		</if>
-		<question id="libraries">
-			<label>Where do you list tools for working with the data?</label>
-			<input type="url" placeholder="Tool URL"/>
-			<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
-			<requirement level="exemplar">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
-		</question>
+			<if test="this.codelists() === 'true'">
+				<question id="codelistDocumentationUrl">
+					<label>Where are the codes documented?</label>
+					<input type="url" />
+					<requirement level="standard">You should provide documentation for the codes used within your data.</requirement>
+				</question>
+			</if>
+		</group>
+		<group id="support">
+			<label>Support</label>
+			<question id="contactEmail">
+				<label>What's the contact email address for questions about this data?</label>
+				<input type="email" placeholder="Contact Email Address"/>
+				<help>Provide an email address that people can contact with queries about the data.</help>
+				<requirement level="pilot">You should have a contact email address so that people can get in touch with you about any questions about the data.</requirement>
+			</question>
+			<question id="forum">
+				<label>Where do you recommend people discuss this dataset?</label>
+				<input type="url" placeholder="Forum or Mailing List URL"/>
+				<help>Provide a URL for the forum or mailing list where developers using this dataset should discuss it.</help>
+				<requirement level="standard">You should indicate where people using this dataset should discuss the data and how they are using it.</requirement>
+			</question>
+			<if test="this.corrected() === 'true'">
+				<question id="correctionReporting">
+					<label>Where do you describe how to provide corrections?</label>
+					<input type="url" placeholder="Correction Instructions URL" />
+					<help>Provide a link to a page that describes how people should provide corrections if they discover errors in  the data.</help>
+					<requirement level="standard">You should provide instructions for people who discover errors in the data.</requirement>
+				</question>
+				<question id="correctionDiscovery">
+					<label>Where do you describe how to learn about corrections?</label>
+					<input type="url" placeholder="Correction Notification URL" />
+					<help>Provide a link to a page that describes how corrections will be communicated to reusers of the data.</help>
+					<requirement level="standard">You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data.</requirement>
+				</question>
+			</if>
+		</group>
+		<group id="services">
+			<label>Services</label>
+			<question id="libraries">
+				<label>Where do you list tools for working with the data?</label>
+				<input type="url" placeholder="Tool URL"/>
+				<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
+				<requirement level="exemplar">You should provide a list of software libraries and other tools that help developers who want to work with the data. These can be created by you or by other members of the community.</requirement>
+			</question>
+		</group>
 	</group>
 	<certificate>
 		<p>

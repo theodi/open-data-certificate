@@ -32,7 +32,7 @@
                         <li data-bind="css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'exemplar' }"><a href="#improvements">Improvements</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="index.html">About</a></li>
-                     </ul><span class="label pull-right" style="margin-top: 10px;">0.2</span></div>
+                     </ul><span class="label pull-right" style="margin-top: 10px;">0.3</span></div>
                </div>
             </nav>
          </div>
@@ -914,32 +914,6 @@
                            </div>
                            			
                         </div>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: vocabularyStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: vocabularyStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the formats need vocabularies?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#vocabulary-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="vocabulary" data-bind="checked: vocabulary"> No</label><label class="radio inline"><input type="radio" value="true" name="vocabulary" data-bind="checked: vocabulary"> Yes</label><span class="help-block collapse" id="vocabulary-help">Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented
-                                 with a schema for developers to understand it.</span></div>
-                        </div>
-                        <div class="conditional" data-bind="visible: vocabulary() === 'true'">
-                           				
-                           <div class="control-group"><label class="control-label" for="schemaDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: schemaDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the documentation for the vocabulary?</label><div class="controls"><input type="url" class="span5" id="schemaDocumentationUrl" name="schemaDocumentationUrl" data-bind="value: schemaDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#schemaDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="schemaDocumentationUrl-requirement">
-                                    <p class="alert alert-info"><a href="#schemaDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for any vocabulary you use within the data you publish.
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           			
-                        </div>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: codelistsStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are there any codes used within the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#codelists-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="codelists" data-bind="checked: codelists"> No</label><label class="radio inline"><input type="radio" value="true" name="codelists" data-bind="checked: codelists"> Yes</label><span class="help-block collapse" id="codelists-help">Data often includes codes for things like geographical areas, spending categories
-                                 or diseases; these codes need to be explained for reusers.</span></div>
-                        </div>
-                        <div class="conditional" data-bind="visible: codelists() === 'true'">
-                           				
-                           <div class="control-group"><label class="control-label" for="codelistDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are the codes documented?</label><div class="controls"><input type="url" class="span5" id="codelistDocumentationUrl" name="codelistDocumentationUrl" data-bind="value: codelistDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#codelistDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="codelistDocumentationUrl-requirement">
-                                    <p class="alert alert-info"><a href="#codelistDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for the codes used within your data.
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           			
-                        </div>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: identifiersStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are you using URLs to identify things in the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers"> No</label><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="identifiers-requirement">
                                  <p class="alert alert-info"><a href="#identifiers-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> Use URLs to identify things in the data, so that they can be easily reference.
                                  </p>
@@ -988,50 +962,142 @@
                      </ul>
                   </div>
                   <div class="tab-pane" id="social">
-                     <div class="control-group"><label class="control-label" for="contactEmail"><span class="badge badge-circular badge-success pull-left" data-bind="visible: contactEmailStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the contact email address about this dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" placeholder="Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="contactEmail-help">Provide an email address that people can contact with queries about the dataset.</span><div class="requirement collapse" id="contactEmail-requirement">
-                              <p class="alert alert-info"><a href="#contactEmail-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a contact email address so that people can get back in touch with
-                                 you about any problems with the dataset.
-                              </p>
+                     <fieldset id="documentation">
+                        <legend>Documentation</legend>
+                        <div class="conditional" data-bind="visible: documentationUrl() !== ''">
+                           				
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: documentationMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does your data documentation include machine-readable data for:</label><div class="controls"><label class="checkbox"><input type="checkbox" name="documentationMetadataTitle" data-bind="checked: documentationMetadataTitle" value="title">title <span class="label label-pilot" data-toggle="collapse" data-target="#documentationMetadatatitle-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="documentationMetadatatitle-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatatitle-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> The data documentation should include a title for the data.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataDescription" data-bind="checked: documentationMetadataDescription" value="description">description <span class="label label-pilot" data-toggle="collapse" data-target="#documentationMetadatadescription-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="documentationMetadatadescription-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatadescription-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> The data documentation should include a description of the data.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataIssued" data-bind="checked: documentationMetadataIssued" value="issued">release date <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataissued-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataissued-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadataissued-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable release date.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataModified" data-bind="checked: documentationMetadataModified" value="modified">modification date <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatamodified-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatamodified-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatamodified-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable date of last modification.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataLanguage" data-bind="checked: documentationMetadataLanguage" value="language">language</label><label class="checkbox"><input type="checkbox" name="documentationMetadataPublisher" data-bind="checked: documentationMetadataPublisher" value="publisher">publisher</label><label class="checkbox"><input type="checkbox" name="documentationMetadataAccrualPeriodicity" data-bind="checked: documentationMetadataAccrualPeriodicity" value="accrualPeriodicity">frequency of releases</label><label class="checkbox"><input type="checkbox" name="documentationMetadataIdentifier" data-bind="checked: documentationMetadataIdentifier" value="identifier">identifier</label><label class="checkbox"><input type="checkbox" name="documentationMetadataSpatial" data-bind="checked: documentationMetadataSpatial" value="spatial">spatial/geographical coverage <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataspatial-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataspatial-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadataspatial-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable indication of which geographic
+                                          area the data covers.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataTemporal" data-bind="checked: documentationMetadataTemporal" value="temporal">temporal coverage <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatatemporal-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatatemporal-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatatemporal-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable indication of which time
+                                          period the data covers.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataTheme" data-bind="checked: documentationMetadataTheme" value="theme">theme(s)</label><label class="checkbox"><input type="checkbox" name="documentationMetadataKeyword" data-bind="checked: documentationMetadataKeyword" value="keyword">keyword(s) or tag(s)</label><label class="checkbox"><input type="checkbox" name="documentationMetadataLandingPage" data-bind="checked: documentationMetadataLandingPage" value="landingPage">landing page</label><label class="checkbox"><input type="checkbox" name="documentationMetadataDistribution" data-bind="checked: documentationMetadataDistribution" value="distribution">distribution(s)</label></div>
                            </div>
-                        </div>
-                     </div>
-                     <div class="control-group"><label class="control-label" for="forum"><span class="badge badge-circular badge-success pull-left" data-bind="visible: forumStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you recommend people discuss this dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#forum-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="forum" name="forum" data-bind="value: forum, valueUpdate: 'afterkeydown'" placeholder="Forum or Mailing List URL"> <span class="label label-standard" data-toggle="collapse" data-target="#forum-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="forum-help">Provide a URL for the forum or mailing list where developers using this dataset should
-                              discuss it.</span><div class="requirement collapse" id="forum-requirement">
-                              <p class="alert alert-info"><a href="#forum-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should indicate where people using this dataset should discuss the data and how
-                                 they are using it.
-                              </p>
+                           				
+                           <div class="conditional" data-bind="visible: documentationMetadata().distribution">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: distributionMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does your documentation include machine-readable metadata for each distribution on:</label><div class="controls"><label class="checkbox"><input type="checkbox" name="distributionMetadataTitle" data-bind="checked: distributionMetadataTitle" value="title">title <span class="label label-pilot" data-toggle="collapse" data-target="#distributionMetadatatitle-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="distributionMetadatatitle-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadatatitle-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> The data documentation should include a title for each distribution.
+                                          </p>
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataDescription" data-bind="checked: distributionMetadataDescription" value="description">description <span class="label label-pilot" data-toggle="collapse" data-target="#distributionMetadatadescription-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="distributionMetadatadescription-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadatadescription-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> The data documentation should include a description of each distribution.
+                                          </p>
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataIssued" data-bind="checked: distributionMetadataIssued" value="issued">release date <span class="label label-standard" data-toggle="collapse" data-target="#distributionMetadataissued-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="distributionMetadataissued-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadataissued-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable release date for each distribution.
+                                          </p>
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataModified" data-bind="checked: distributionMetadataModified" value="modified">modification date <span class="label label-standard" data-toggle="collapse" data-target="#distributionMetadatamodified-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="distributionMetadatamodified-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadatamodified-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> The data documentation should include a machine-readable date of last modification
+                                             for each distribution.
+                                          </p>
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataLicense" data-bind="checked: distributionMetadataLicense" value="license">licence</label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#distributionMetadataaccessURL-help"><i class="icon-question-sign"></i></button><label class="checkbox"><input type="checkbox" name="distributionMetadataAccessURL" data-bind="checked: distributionMetadataAccessURL" value="accessURL">URL for accessing the data<span class="help-block collapse" id="distributionMetadataaccessURL-help">This metadata should be used when the distribution is not a download (eg if it's a
+                                          pointer to an API)</span></label><label class="checkbox"><input type="checkbox" name="distributionMetadataDownloadURL" data-bind="checked: distributionMetadataDownloadURL" value="downloadURL">URL for downloading the dataset</label><label class="checkbox"><input type="checkbox" name="distributionMetadataByteSize" data-bind="checked: distributionMetadataByteSize" value="byteSize">size in bytes</label><label class="checkbox"><input type="checkbox" name="distributionMetadataMediaType" data-bind="checked: distributionMetadataMediaType" value="mediaType">media type of the download</label></div>
+                              </div>
+                              				
                            </div>
+                           			
                         </div>
-                     </div>
-                     <div class="conditional" data-bind="visible: corrected() === 'true'">
-                        			
-                        <div class="control-group"><label class="control-label" for="correctionReporting"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctionReportingStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe how to provide corrections?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#correctionReporting-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="correctionReporting" name="correctionReporting" data-bind="value: correctionReporting, valueUpdate: 'afterkeydown'" placeholder="Correction Instructions URL"> <span class="label label-standard" data-toggle="collapse" data-target="#correctionReporting-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="correctionReporting-help">Provide a link to a page that describes how people should provide corrections if they
-                                 discover errors in  the data.</span><div class="requirement collapse" id="correctionReporting-requirement">
-                                 <p class="alert alert-info"><a href="#correctionReporting-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide instructions for people who discover errors in the data.
+                        <div class="conditional" data-bind="visible: releaseType() === 'service'">
+                           				
+                           <div class="control-group"><label class="control-label" for="serviceDocumentation"><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceDocumentationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the documentation for the API?</label><div class="controls"><input type="url" class="span5" id="serviceDocumentation" name="serviceDocumentation" data-bind="value: serviceDocumentation, valueUpdate: 'afterkeydown'"> <span class="label label-pilot" data-toggle="collapse" data-target="#serviceDocumentation-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="serviceDocumentation-requirement">
+                                    <p class="alert alert-info"><a href="#serviceDocumentation-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide documentation about how the API works.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: vocabularyStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: vocabularyStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do the data formats use vocabularies?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#vocabulary-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="vocabulary" data-bind="checked: vocabulary"> No</label><label class="radio inline"><input type="radio" value="true" name="vocabulary" data-bind="checked: vocabulary"> Yes</label><span class="help-block collapse" id="vocabulary-help">Formats such as JSON, XML or Turtle provide a generic syntax and need to be supplemented
+                                 with a schema for developers to understand it.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: vocabulary() === 'true'">
+                           				
+                           <div class="control-group"><label class="control-label" for="schemaDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: schemaDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the documentation for the vocabularies?</label><div class="controls"><input type="url" class="span5" id="schemaDocumentationUrl" name="schemaDocumentationUrl" data-bind="value: schemaDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#schemaDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="schemaDocumentationUrl-requirement">
+                                    <p class="alert alert-info"><a href="#schemaDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for any vocabulary you use within the data you publish.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-standard pull-left" data-bind="visible: codelistsStatus() === 'standard'"><i class="icon icon-white icon-remove" title="Required for standard certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are there any codes used within the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#codelists-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="codelists" data-bind="checked: codelists"> No</label><label class="radio inline"><input type="radio" value="true" name="codelists" data-bind="checked: codelists"> Yes</label><span class="help-block collapse" id="codelists-help">Data often includes codes for things like geographical areas, spending categories
+                                 or diseases; these codes need to be explained for reusers.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: codelists() === 'true'">
+                           				
+                           <div class="control-group"><label class="control-label" for="codelistDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: codelistDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are the codes documented?</label><div class="controls"><input type="url" class="span5" id="codelistDocumentationUrl" name="codelistDocumentationUrl" data-bind="value: codelistDocumentationUrl, valueUpdate: 'afterkeydown'"> <span class="label label-standard" data-toggle="collapse" data-target="#codelistDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="codelistDocumentationUrl-requirement">
+                                    <p class="alert alert-info"><a href="#codelistDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide documentation for the codes used within your data.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                     </fieldset>
+                     <fieldset id="support">
+                        <legend>Support</legend>
+                        <div class="control-group"><label class="control-label" for="contactEmail"><span class="badge badge-circular badge-success pull-left" data-bind="visible: contactEmailStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the contact email address for questions about this data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" placeholder="Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="contactEmail-help">Provide an email address that people can contact with queries about the data.</span><div class="requirement collapse" id="contactEmail-requirement">
+                                 <p class="alert alert-info"><a href="#contactEmail-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a contact email address so that people can get in touch with you about
+                                    any questions about the data.
                                  </p>
                               </div>
                            </div>
                         </div>
-                        			
-                        <div class="control-group"><label class="control-label" for="correctionDiscovery"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctionDiscoveryStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe how to learn about corrections?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#correctionDiscovery-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="correctionDiscovery" name="correctionDiscovery" data-bind="value: correctionDiscovery, valueUpdate: 'afterkeydown'" placeholder="Correction Notification URL"> <span class="label label-standard" data-toggle="collapse" data-target="#correctionDiscovery-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="correctionDiscovery-help">Provide a link to a page that describes how corrections will be communicated to reusers
-                                 of the data.</span><div class="requirement collapse" id="correctionDiscovery-requirement">
-                                 <p class="alert alert-info"><a href="#correctionDiscovery-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide an announcement mailing list or a feed to which reusers can subscribe
-                                    to learn of corrections to the data.
+                        <div class="control-group"><label class="control-label" for="forum"><span class="badge badge-circular badge-success pull-left" data-bind="visible: forumStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you recommend people discuss this dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#forum-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="forum" name="forum" data-bind="value: forum, valueUpdate: 'afterkeydown'" placeholder="Forum or Mailing List URL"> <span class="label label-standard" data-toggle="collapse" data-target="#forum-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="forum-help">Provide a URL for the forum or mailing list where developers using this dataset should
+                                 discuss it.</span><div class="requirement collapse" id="forum-requirement">
+                                 <p class="alert alert-info"><a href="#forum-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should indicate where people using this dataset should discuss the data and how
+                                    they are using it.
                                  </p>
                               </div>
                            </div>
                         </div>
-                        		
-                     </div>
-                     <div class="control-group"><label class="control-label" for="libraries"><span class="badge badge-circular badge-success pull-left" data-bind="visible: librariesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you list tools for working with the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
-                              working with the data.</span><div class="requirement collapse" id="libraries-requirement">
-                              <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a list of software libraries and other tools that help developers
-                                 who want to work with the data. These can be created by you or by other members of
-                                 the community.
-                              </p>
+                        <div class="conditional" data-bind="visible: corrected() === 'true'">
+                           				
+                           <div class="control-group"><label class="control-label" for="correctionReporting"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctionReportingStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe how to provide corrections?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#correctionReporting-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="correctionReporting" name="correctionReporting" data-bind="value: correctionReporting, valueUpdate: 'afterkeydown'" placeholder="Correction Instructions URL"> <span class="label label-standard" data-toggle="collapse" data-target="#correctionReporting-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="correctionReporting-help">Provide a link to a page that describes how people should provide corrections if they
+                                    discover errors in  the data.</span><div class="requirement collapse" id="correctionReporting-requirement">
+                                    <p class="alert alert-info"><a href="#correctionReporting-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide instructions for people who discover errors in the data.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           				
+                           <div class="control-group"><label class="control-label" for="correctionDiscovery"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctionDiscoveryStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe how to learn about corrections?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#correctionDiscovery-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="correctionDiscovery" name="correctionDiscovery" data-bind="value: correctionDiscovery, valueUpdate: 'afterkeydown'" placeholder="Correction Notification URL"> <span class="label label-standard" data-toggle="collapse" data-target="#correctionDiscovery-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="correctionDiscovery-help">Provide a link to a page that describes how corrections will be communicated to reusers
+                                    of the data.</span><div class="requirement collapse" id="correctionDiscovery-requirement">
+                                    <p class="alert alert-info"><a href="#correctionDiscovery-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide an announcement mailing list or a feed to which reusers can subscribe
+                                       to learn of corrections to the data.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                     </fieldset>
+                     <fieldset id="services">
+                        <legend>Services</legend>
+                        <div class="control-group"><label class="control-label" for="libraries"><span class="badge badge-circular badge-success pull-left" data-bind="visible: librariesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you list tools for working with the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
+                                 working with the data.</span><div class="requirement collapse" id="libraries-requirement">
+                                 <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a list of software libraries and other tools that help developers
+                                    who want to work with the data. These can be created by you or by other members of
+                                    the community.
+                                 </p>
+                              </div>
                            </div>
                         </div>
-                     </div>
+                     </fieldset>
                      <ul class="pager">
                         <li class="previous"><a data-toggle="tab" href="#technical">← Previous</a></li>
                         <li class="next disabled"><a data-toggle="tab" href="#">Next →</a></li>
@@ -1148,8 +1214,19 @@
                      <p class="improvement"><a class="improvement-label" href="#structuredFormat" data-toggle="tab" data-target="#technical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should publish structured data in a format designed for structured data.</span></p>
                   </div>
                </div>
-               <p class="improvement" data-bind="visible: contactEmail() === ''"><a class="improvement-label" href="#contactEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a contact email address so that people can get back in touch with
-                     you about any problems with the dataset.</span></p>
+               <div data-bind="visible: documentationUrl() !== ''">
+                  <p class="improvement" data-bind="visible: !documentationMetadataTitle()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">The data documentation should include a title for the data.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataDescription()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">The data documentation should include a description of the data.</span></p>
+                  <div data-bind="visible: documentationMetadata().distribution">
+                     <p class="improvement" data-bind="visible: !distributionMetadataTitle()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">The data documentation should include a title for each distribution.</span></p>
+                     <p class="improvement" data-bind="visible: !distributionMetadataDescription()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">The data documentation should include a description of each distribution.</span></p>
+                  </div>
+               </div>
+               <div data-bind="visible: releaseType() === 'service'">
+                  <p class="improvement" data-bind="visible: serviceDocumentation() === ''"><a class="improvement-label" href="#serviceDocumentation" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should provide documentation about how the API works.</span></p>
+               </div>
+               <p class="improvement" data-bind="visible: contactEmail() === ''"><a class="improvement-label" href="#contactEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a contact email address so that people can get in touch with you about
+                     any questions about the data.</span></p>
             </div>
             <hr>
             <div id="improvements-standard" class="improvements">
@@ -1250,13 +1327,26 @@
                      <p class="improvement"><a class="improvement-label" href="#geographicFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should publish geographic data in a format designed for geographic data.</span></p>
                   </div>
                </div>
+               <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">Use URLs to identify things in the data, so that they can be easily reference.</span></p>
+               <div data-bind="visible: documentationUrl() !== ''">
+                  <p class="improvement" data-bind="visible: !documentationMetadataIssued()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable release date.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataModified()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable date of last modification.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataSpatial()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable indication of which geographic
+                        area the data covers.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataTemporal()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable indication of which time
+                        period the data covers.</span></p>
+                  <div data-bind="visible: documentationMetadata().distribution">
+                     <p class="improvement" data-bind="visible: !distributionMetadataIssued()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable release date for each distribution.</span></p>
+                     <p class="improvement" data-bind="visible: !distributionMetadataModified()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">The data documentation should include a machine-readable date of last modification
+                           for each distribution.</span></p>
+                  </div>
+               </div>
                <div data-bind="visible: vocabulary() === 'true'">
-                  <p class="improvement" data-bind="visible: schemaDocumentationUrl() === ''"><a class="improvement-label" href="#schemaDocumentationUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for any vocabulary you use within the data you publish.</span></p>
+                  <p class="improvement" data-bind="visible: schemaDocumentationUrl() === ''"><a class="improvement-label" href="#schemaDocumentationUrl" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for any vocabulary you use within the data you publish.</span></p>
                </div>
                <div data-bind="visible: codelists() === 'true'">
-                  <p class="improvement" data-bind="visible: codelistDocumentationUrl() === ''"><a class="improvement-label" href="#codelistDocumentationUrl" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for the codes used within your data.</span></p>
+                  <p class="improvement" data-bind="visible: codelistDocumentationUrl() === ''"><a class="improvement-label" href="#codelistDocumentationUrl" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide documentation for the codes used within your data.</span></p>
                </div>
-               <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">Use URLs to identify things in the data, so that they can be easily reference.</span></p>
                <p class="improvement" data-bind="visible: forum() === ''"><a class="improvement-label" href="#forum" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should indicate where people using this dataset should discuss the data and how
                      they are using it.</span></p>
                <div data-bind="visible: corrected() === 'true'">
@@ -2313,34 +2403,6 @@ certificate.structuredFormatStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.vocabulary = ko.observable('');
-certificate.vocabularyStatus = ko.computed(function () {
-  var status;
-  if (certificate.vocabulary() === '') status = 'standard';
-  else status = 'complete';
-  return status;
-});
-certificate.schemaDocumentationUrl = ko.observable('');
-certificate.schemaDocumentationUrlStatus = ko.computed(function () {
-  var status;
-  if (certificate.schemaDocumentationUrl() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-certificate.codelists = ko.observable('');
-certificate.codelistsStatus = ko.computed(function () {
-  var status;
-  if (certificate.codelists() === '') status = 'standard';
-  else status = 'complete';
-  return status;
-});
-certificate.codelistDocumentationUrl = ko.observable('');
-certificate.codelistDocumentationUrlStatus = ko.computed(function () {
-  var status;
-  if (certificate.codelistDocumentationUrl() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
 certificate.identifiers = ko.observable('');
 certificate.identifiersStatus = ko.computed(function () {
   var status;
@@ -2561,32 +2623,6 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 		
 }
 
-	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
-	
-	if (certificate.vocabulary() === 'true') {
-
-	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
-	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
-	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
-	
-	if (certificate.codelists() === 'true') {
-
-	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
-	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
@@ -2622,6 +2658,128 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 }
   return unmetRequirements;
+});
+certificate.documentationMetadataTitle = ko.observable(false);
+certificate.documentationMetadataDescription = ko.observable(false);
+certificate.documentationMetadataIssued = ko.observable(false);
+certificate.documentationMetadataModified = ko.observable(false);
+certificate.documentationMetadataLanguage = ko.observable(false);
+certificate.documentationMetadataPublisher = ko.observable(false);
+certificate.documentationMetadataAccrualPeriodicity = ko.observable(false);
+certificate.documentationMetadataIdentifier = ko.observable(false);
+certificate.documentationMetadataSpatial = ko.observable(false);
+certificate.documentationMetadataTemporal = ko.observable(false);
+certificate.documentationMetadataTheme = ko.observable(false);
+certificate.documentationMetadataKeyword = ko.observable(false);
+certificate.documentationMetadataLandingPage = ko.observable(false);
+certificate.documentationMetadataDistribution = ko.observable(false);
+certificate.documentationMetadata = ko.computed(function () {
+  return {    title: certificate.documentationMetadataTitle(),
+    description: certificate.documentationMetadataDescription(),
+    issued: certificate.documentationMetadataIssued(),
+    modified: certificate.documentationMetadataModified(),
+    language: certificate.documentationMetadataLanguage(),
+    publisher: certificate.documentationMetadataPublisher(),
+    accrualPeriodicity: certificate.documentationMetadataAccrualPeriodicity(),
+    identifier: certificate.documentationMetadataIdentifier(),
+    spatial: certificate.documentationMetadataSpatial(),
+    temporal: certificate.documentationMetadataTemporal(),
+    theme: certificate.documentationMetadataTheme(),
+    keyword: certificate.documentationMetadataKeyword(),
+    landingPage: certificate.documentationMetadataLandingPage(),
+    distribution: certificate.documentationMetadataDistribution()
+  };
+  return value;
+});
+certificate.documentationMetadataStatus = ko.computed(function () {
+  var status;
+if (certificate.documentationMetadataTitle()) status = 'complete';
+else if (certificate.documentationMetadataDescription()) status = 'complete';
+else if (certificate.documentationMetadataIssued()) status = 'complete';
+else if (certificate.documentationMetadataModified()) status = 'complete';
+else if (certificate.documentationMetadataLanguage()) status = 'complete';
+else if (certificate.documentationMetadataPublisher()) status = 'complete';
+else if (certificate.documentationMetadataAccrualPeriodicity()) status = 'complete';
+else if (certificate.documentationMetadataIdentifier()) status = 'complete';
+else if (certificate.documentationMetadataSpatial()) status = 'complete';
+else if (certificate.documentationMetadataTemporal()) status = 'complete';
+else if (certificate.documentationMetadataTheme()) status = 'complete';
+else if (certificate.documentationMetadataKeyword()) status = 'complete';
+else if (certificate.documentationMetadataLandingPage()) status = 'complete';
+else if (certificate.documentationMetadataDistribution()) status = 'complete';
+  else status = 'optional';
+  return status;
+});
+certificate.distributionMetadataTitle = ko.observable(false);
+certificate.distributionMetadataDescription = ko.observable(false);
+certificate.distributionMetadataIssued = ko.observable(false);
+certificate.distributionMetadataModified = ko.observable(false);
+certificate.distributionMetadataLicense = ko.observable(false);
+certificate.distributionMetadataAccessURL = ko.observable(false);
+certificate.distributionMetadataDownloadURL = ko.observable(false);
+certificate.distributionMetadataByteSize = ko.observable(false);
+certificate.distributionMetadataMediaType = ko.observable(false);
+certificate.distributionMetadata = ko.computed(function () {
+  return {    title: certificate.distributionMetadataTitle(),
+    description: certificate.distributionMetadataDescription(),
+    issued: certificate.distributionMetadataIssued(),
+    modified: certificate.distributionMetadataModified(),
+    license: certificate.distributionMetadataLicense(),
+    accessURL: certificate.distributionMetadataAccessURL(),
+    downloadURL: certificate.distributionMetadataDownloadURL(),
+    byteSize: certificate.distributionMetadataByteSize(),
+    mediaType: certificate.distributionMetadataMediaType()
+  };
+  return value;
+});
+certificate.distributionMetadataStatus = ko.computed(function () {
+  var status;
+if (certificate.distributionMetadataTitle()) status = 'complete';
+else if (certificate.distributionMetadataDescription()) status = 'complete';
+else if (certificate.distributionMetadataIssued()) status = 'complete';
+else if (certificate.distributionMetadataModified()) status = 'complete';
+else if (certificate.distributionMetadataLicense()) status = 'complete';
+else if (certificate.distributionMetadataAccessURL()) status = 'complete';
+else if (certificate.distributionMetadataDownloadURL()) status = 'complete';
+else if (certificate.distributionMetadataByteSize()) status = 'complete';
+else if (certificate.distributionMetadataMediaType()) status = 'complete';
+  else status = 'optional';
+  return status;
+});
+certificate.serviceDocumentation = ko.observable('');
+certificate.serviceDocumentationStatus = ko.computed(function () {
+  var status;
+  if (certificate.serviceDocumentation() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.vocabulary = ko.observable('');
+certificate.vocabularyStatus = ko.computed(function () {
+  var status;
+  if (certificate.vocabulary() === '') status = 'standard';
+  else status = 'complete';
+  return status;
+});
+certificate.schemaDocumentationUrl = ko.observable('');
+certificate.schemaDocumentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.schemaDocumentationUrl() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.codelists = ko.observable('');
+certificate.codelistsStatus = ko.computed(function () {
+  var status;
+  if (certificate.codelists() === '') status = 'standard';
+  else status = 'complete';
+  return status;
+});
+certificate.codelistDocumentationUrl = ko.observable('');
+certificate.codelistDocumentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.codelistDocumentationUrl() === '') status = 'optional';
+  else status = 'complete';
+  return status;
 });
 certificate.contactEmail = ko.observable('');
 certificate.contactEmailStatus = ko.computed(function () {
@@ -2661,6 +2819,67 @@ certificate.librariesStatus = ko.computed(function () {
 certificate.socialStatus = ko.computed(function () {
   var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
+
+	if (certificate.documentationUrl() !== '') {
+
+	if (certificate.documentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.documentationMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
+	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
+if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
+if (!certificate.documentationMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataSpatial()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']++; 
+
+	if (certificate.documentationMetadata().distribution) {
+
+	if (certificate.distributionMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.distributionMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
+	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
+if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
+if (!certificate.distributionMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataModified()) unmetRequirements['standard']++; 
+
+}
+
+}
+
+	if (certificate.releaseType() === 'service') {
+
+	if (certificate.serviceDocumentationStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.serviceDocumentationStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.serviceDocumentationStatus() !== 'optional') unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	if (certificate.serviceDocumentationStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+}
+
+	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	
+	if (certificate.vocabulary() === 'true') {
+
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
+
+	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	
+	if (certificate.codelists() === 'true') {
+
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.contactEmailStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.contactEmailStatus() === 'required') unmetRequirements['basic']++;
@@ -3273,32 +3492,6 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 		
 }
 
-	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
-	
-	if (certificate.vocabulary() === 'true') {
-
-	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
-	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
-	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
-	
-	if (certificate.codelists() === 'true') {
-
-	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
-	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
 	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
@@ -3331,6 +3524,67 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 }
 
 }
+
+}
+
+	if (certificate.documentationUrl() !== '') {
+
+	if (certificate.documentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.documentationMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
+	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
+if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
+if (!certificate.documentationMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataSpatial()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']++; 
+
+	if (certificate.documentationMetadata().distribution) {
+
+	if (certificate.distributionMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.distributionMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
+	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
+if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
+if (!certificate.distributionMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataModified()) unmetRequirements['standard']++; 
+
+}
+
+}
+
+	if (certificate.releaseType() === 'service') {
+
+	if (certificate.serviceDocumentationStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.serviceDocumentationStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.serviceDocumentationStatus() !== 'optional') unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	if (certificate.serviceDocumentationStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+}
+
+	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	
+	if (certificate.vocabulary() === 'true') {
+
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
+
+	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	
+	if (certificate.codelists() === 'true') {
+
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
