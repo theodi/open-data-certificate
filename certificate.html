@@ -553,6 +553,40 @@
                      </ul>
                   </div>
                   <div class="tab-pane" id="practical">
+                     <fieldset id="findability">
+                        <legend>Findability</legend>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: linkedToStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is documentation about the data findable within three clicks of your organisation's
+                              home page?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="linkedTo" data-bind="checked: linkedTo"> No</label><label class="radio inline"><input type="radio" value="true" name="linkedTo" data-bind="checked: linkedTo"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#linkedTo-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="linkedTo-requirement">
+                                 <p class="alert alert-info"><a href="#linkedTo-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should ensure that reusers can easily find your data from your organisation's
+                                    home page.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: listedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the data listed somewhere, alongside similar data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#listed-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="listed" data-bind="checked: listed"> No</label><label class="radio inline"><input type="radio" value="true" name="listed" data-bind="checked: listed"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#listed-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="listed-help">One way of meeting this requirement would be to register the data within a data catalog.</span><div class="requirement collapse" id="listed-requirement">
+                                 <p class="alert alert-info"><a href="#listed-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should ensure that reusers can locate your data through searching for it in locations
+                                    that list available data.
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="conditional" data-bind="visible: listed() === 'true'">
+                           				
+                           <div class="repeated" data-bind="foreach: listings">
+                              <div class="well">
+                                 <div class="control-group">
+                                    <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.listingsRemove, disable: $parent.listings().length === 1"><i class="icon-remove icon-white"></i> Delete Listing</button></div>
+                                 </div>
+                                 <div class="control-group"><label class="control-label" data-bind="attr: { for: 'listing-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: listingStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: listingStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the data listed?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#listing-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: listing, valueUpdate: 'afterkeydown', attr: { id: 'listing-' + $index(), name: 'listing-' + $index() }" placeholder="Listing URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'listing-' + $index() + '-help' }">Give a URL that leads to a listing of this data alongside similar data.</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="control-group repeat-controls">
+                              <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: listingsAdd"><i class="icon-plus icon-white"></i> Add Listing</button></div>
+                           </div>
+                           			
+                        </div>
+                     </fieldset>
                      <fieldset id="accuracy">
                         <legend>Accuracy</legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: releaseTypeStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: releaseTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What kind of data release is this?</label><div class="controls"><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="oneoff">a one-off release of a single dataset</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="collection">a one-off release of a set of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="series">ongoing release of a series of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="service">a service or API for accessing open data</label></div>
@@ -1392,6 +1426,10 @@
                            is appropriate for your data.</span></p>
                   </div>
                </div>
+               <p class="improvement" data-bind="visible: linkedTo() === ''"><a class="improvement-label" href="#linkedTo" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should ensure that reusers can easily find your data from your organisation's
+                     home page.</span></p>
+               <p class="improvement" data-bind="visible: listed() === ''"><a class="improvement-label" href="#listed" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should ensure that reusers can locate your data through searching for it in locations
+                     that list available data.</span></p>
                <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                   <div data-bind="visible: timeSensitive() !== 'false'">
                      <p class="improvement"><a class="improvement-label" href="#timeSensitive" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should publish updates to data that goes out of date so that the information you
@@ -2212,6 +2250,38 @@ if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['stand
 }
   return unmetRequirements;
 });
+certificate.linkedTo = ko.observable('');
+certificate.linkedToStatus = ko.computed(function () {
+  var status;
+  if (certificate.linkedTo() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.listed = ko.observable('');
+certificate.listedStatus = ko.computed(function () {
+  var status;
+  if (certificate.listed() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+var listingsViewModel = function () {
+var listings = this;
+listings.listing = ko.observable('');
+listings.listingStatus = ko.computed(function () {
+  var status;
+  if (listings.listing() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+};
+certificate.listings = ko.observableArray([new listingsViewModel()]);
+certificate.listingsAdd = function () {
+var listings = new listingsViewModel();
+certificate.listings.push(listings);
+};
+certificate.listingsRemove = function (listings) {
+certificate.listings.remove(listings);
+};
 certificate.releaseType = ko.observable('');
 certificate.releaseTypeStatus = ko.computed(function () {
   var status;
@@ -2320,6 +2390,24 @@ certificate.onGoingAvailabilityStatus = ko.computed(function () {
 certificate.practicalStatus = ko.computed(function () {
   var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
+
+	if (certificate.linkedToStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.linkedToStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.linkedToStatus() !== 'optional') unmetRequirements[certificate.linkedToStatus()]++;
+	if (certificate.linkedTo() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.listedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.listedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.listedStatus() !== 'optional') unmetRequirements[certificate.listedStatus()]++;
+	if (certificate.listed() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.listed() === 'true') {
+$(certificate.listings()).each(function () {var listings = this;
+	if (listings.listingStatus() === 'complete') unmetRequirements['answered']++;
+	else if (listings.listingStatus() === 'required') unmetRequirements['basic']++;
+	else if (listings.listingStatus() !== 'optional') unmetRequirements[listings.listingStatus()]++;
+	});
+}
 
 	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
@@ -3458,6 +3546,24 @@ if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['stand
 
 }
 
+}
+
+	if (certificate.linkedToStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.linkedToStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.linkedToStatus() !== 'optional') unmetRequirements[certificate.linkedToStatus()]++;
+	if (certificate.linkedTo() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.listedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.listedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.listedStatus() !== 'optional') unmetRequirements[certificate.listedStatus()]++;
+	if (certificate.listed() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.listed() === 'true') {
+$(certificate.listings()).each(function () {var listings = this;
+	if (listings.listingStatus() === 'complete') unmetRequirements['answered']++;
+	else if (listings.listingStatus() === 'required') unmetRequirements['basic']++;
+	else if (listings.listingStatus() !== 'optional') unmetRequirements[listings.listingStatus()]++;
+	});
 }
 
 	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;

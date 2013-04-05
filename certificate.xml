@@ -351,6 +351,30 @@
 	</group>
 	<group id="practical">
 		<label>Practical Information</label>
+		<group id="findability">
+			<label>Findability</label>
+			<question id="linkedTo">
+				<label>Is documentation about the data findable within three clicks of your organisation's home page?</label>
+				<yesno />
+				<requirement level="standard">You should ensure that reusers can easily find your data from your organisation's home page.</requirement>
+			</question>
+			<question id="listed">
+				<label>Is the data listed somewhere, alongside similar data?</label>
+				<yesno />
+				<help>One way of meeting this requirement would be to register the data within a data catalog.</help>
+				<requirement level="standard">You should ensure that reusers can locate your data through searching for it in locations that list available data.</requirement>
+			</question>
+			<if test="this.listed() === 'true'">
+				<repeat id="listings">
+					<label>Listing</label>
+					<question id="listing">
+						<label>Where is the data listed?</label>
+						<input type="url" required="required" placeholder="Listing URL" />
+						<help>Give a URL that leads to a listing of this data alongside similar data.</help>
+					</question>
+				</repeat>
+			</if>
+		</group>
 		<group id="accuracy">
 			<label>Accuracy</label>
 			<question id="releaseType">
