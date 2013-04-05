@@ -41,6 +41,7 @@
 		<label>Legal Information</label>
 		<group id="licensing">
 			<label>Licensing</label>
+			<help>giving other people permission to reuse the data</help>
 			<question id="copyrightURL">
 				<label>Where is your copyright statement?</label>
 				<input type="url" />
@@ -189,6 +190,7 @@
 		</group>
 		<group id="ownership">
 			<label>Ownership</label>
+			<help>ensuring that you have permission to publish the data</help>
 			<question id="publisherOrigin">
 				<label>Was all this data originally created or gathered by you?</label>
 				<yesno required="required" />
@@ -397,6 +399,7 @@
 		</group>
 		<group id="privacy">
 			<label>Privacy</label>
+			<help>ensuring that you protect people's privacy</help>
 			<question id="dataPersonal">
 				<label>Does the data contain personal information?</label>
 				<radioset required="pilot">
@@ -444,6 +447,7 @@
 		<label>Practical Information</label>
 		<group id="findability">
 			<label>Findability</label>
+			<help>helping reusers to locate the data</help>
 			<question id="linkedTo">
 				<label>Is documentation about the data findable within three clicks of your organisation's home page?</label>
 				<yesno />
@@ -468,6 +472,7 @@
 		</group>
 		<group id="accuracy">
 			<label>Accuracy</label>
+			<help>providing assurance that the data is up to date</help>
 			<question id="releaseType">
 				<label>What kind of data release is this?</label>
 				<radioset required="required">
@@ -625,6 +630,7 @@
 		</group>
 		<group id="quality">
 			<label>Quality</label>
+			<help>helping reusers to understand where there might be problems in the data</help>
 			<question id="qualityUrl">
 				<label>Where are known issues with the quality of the data documented?</label>
 				<input type="url" placeholder="Quality Issues URL" />
@@ -638,6 +644,7 @@
 		</group>
 		<group id="guarantees">
 			<label>Guarantees</label>
+			<help>helping reusers to understand how much to rely on the data</help>
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceAvailability">
 					<label>What is the guaranteed availability of the service?</label>
@@ -687,6 +694,7 @@
 		<if test="this.releaseType() !== ''">
 			<group id="locations">
 				<label>Locations</label>
+				<help>helping reusers to access the data</help>
 				<if test="this.releaseType() === 'oneoff'">
 					<question id="datasetUrl">
 						<label>What's the URL of the dataset?</label>
@@ -807,6 +815,7 @@
 		</if>
 		<group id="format">
 			<label>Formats</label>
+			<help>helping reusers to work with the data</help>
 			<question id="machineReadable">
 				<label>Is the data machine-readable?</label>
 				<yesno />
@@ -942,6 +951,7 @@
 		</group>
 		<group id="trust">
 			<label>Trust</label>
+			<help>helping reusers to understand how much to trust the data</help>
 			<question id="provenance">
 				<label>Do you provide machine-readable provenance for the data?</label>
 				<yesno />
@@ -958,6 +968,7 @@
 		<label>Social Information</label>
 		<group id="documentation">
 			<label>Documentation</label>
+			<help>helping reusers to understand the context and content of the data</help>
 			<if test="this.documentationUrl() !== ''">
 				<question id="documentationMetadata">
 					<label>Does your data documentation include machine-readable data for:</label>
@@ -1087,6 +1098,7 @@
 		</group>
 		<group id="support">
 			<label>Support</label>
+			<help>giving reusers contact with people who can help them</help>
 			<question id="contactEmail">
 				<label>What's the contact email address for questions about this data?</label>
 				<input type="email" placeholder="Contact Email Address"/>
@@ -1123,6 +1135,7 @@
 		</group>
 		<group id="services">
 			<label>Services</label>
+			<help>providing reusers with tools to help work with the data</help>
 			<question id="libraries">
 				<label>Where do you list tools for working with the data?</label>
 				<input type="url" placeholder="Tool URL"/>

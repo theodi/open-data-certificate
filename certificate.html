@@ -122,7 +122,7 @@
                      <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other countries.
                      </p>
                      <fieldset id="licensing">
-                        <legend>Licensing</legend>
+                        <legend>Licensing <small>giving other people permission to reuse the data</small></legend>
                         <div class="control-group"><label class="control-label" for="copyrightURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: copyrightURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your copyright statement?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#copyrightURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="copyrightURL" name="copyrightURL" data-bind="value: copyrightURL, valueUpdate: 'afterkeydown'"> <span class="label label-pilot" data-toggle="collapse" data-target="#copyrightURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="copyrightURL-help">The copyright and database right statement can indicate that you are waiving your
                                  rights over the data, or the licences under which you are publishing it.</span><div class="requirement collapse" id="copyrightURL-requirement">
                                  <p class="alert alert-info"><a href="#copyrightURL-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a page that states your copyright over the data and provides details
@@ -286,7 +286,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="ownership">
-                        <legend>Ownership</legend>
+                        <legend>Ownership <small>ensuring that you have permission to publish the data</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was all this data originally created or gathered by you?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="publisherOrigin" data-bind="checked: publisherOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="publisherOrigin" data-bind="checked: publisherOrigin"> Yes</label><span class="help-block collapse" id="publisherOrigin-help">If the data was not originally created or gathered by you then you might not have
                                  the right to republish it. Answer 'no' to this question if this data is based on data
                                  from outside your organisation or includes data that you have crowd-sourced.</span></div>
@@ -556,7 +556,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="privacy">
-                        <legend>Privacy</legend>
+                        <legend>Privacy <small>ensuring that you protect people's privacy</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: dataPersonalStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">no, the data doesn't contain anything about people at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="personal">yes, the data summarises or contains information about people or their activity</label></div>
                         </div>
                         <div class="conditional" data-bind="visible: dataPersonal() === 'personal'">
@@ -622,7 +622,7 @@
                   </div>
                   <div class="tab-pane" id="practical">
                      <fieldset id="findability">
-                        <legend>Findability</legend>
+                        <legend>Findability <small>helping reusers to locate the data</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: linkedToStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is documentation about the data findable within three clicks of your organisation's
                               home page?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="linkedTo" data-bind="checked: linkedTo"> No</label><label class="radio inline"><input type="radio" value="true" name="linkedTo" data-bind="checked: linkedTo"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#linkedTo-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="linkedTo-requirement">
                                  <p class="alert alert-info"><a href="#linkedTo-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should ensure that reusers can easily find your data from your organisation's
@@ -656,7 +656,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="accuracy">
-                        <legend>Accuracy</legend>
+                        <legend>Accuracy <small>providing assurance that the data is up to date</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: releaseTypeStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: releaseTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What kind of data release is this?</label><div class="controls"><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="oneoff">a one-off release of a single dataset</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="collection">a one-off release of a set of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="series">ongoing release of a series of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="service">a service or API for accessing open data</label></div>
                         </div>
                         <div class="conditional" data-bind="visible: releaseType() === 'service'">
@@ -789,7 +789,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="quality">
-                        <legend>Quality</legend>
+                        <legend>Quality <small>helping reusers to understand where there might be problems in the data</small></legend>
                         <div class="control-group"><label class="control-label" for="qualityUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are known issues with the quality of the data documented?</label><div class="controls"><input type="url" class="span5" id="qualityUrl" name="qualityUrl" data-bind="value: qualityUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Issues URL"> <span class="label label-standard" data-toggle="collapse" data-target="#qualityUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="qualityUrl-requirement">
                                  <p class="alert alert-info"><a href="#qualityUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should document any known issues with the quality of the data so that reusers
                                     can understand how much they can rely on the data.
@@ -806,7 +806,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="guarantees">
-                        <legend>Guarantees</legend>
+                        <legend>Guarantees <small>helping reusers to understand how much to rely on the data</small></legend>
                         <div class="conditional" data-bind="visible: releaseType() === 'service'">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceAvailabilityStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What is the guaranteed availability of the service?</label><div class="controls"><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="minimal">there are minimal guarantees about the availability of the service</label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="99%">at least 99% availability <span class="label label-pilot" data-toggle="collapse" data-target="#serviceAvailability99%-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="serviceAvailability99%-requirement">
@@ -851,7 +851,7 @@
                      <div class="conditional" data-bind="visible: releaseType() !== ''">
                         			
                         <fieldset id="locations">
-                           <legend>Locations</legend>
+                           <legend>Locations <small>helping reusers to access the data</small></legend>
                            <div class="conditional" data-bind="visible: releaseType() === 'oneoff'">
                               					
                               <div class="control-group"><label class="control-label" for="datasetUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: datasetUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the URL of the dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#datasetUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="datasetUrl" name="datasetUrl" data-bind="value: datasetUrl, valueUpdate: 'afterkeydown'" placeholder="Dataset URL"><span class="conditional" data-bind="visible: documentationUrl() === ''">
@@ -1021,7 +1021,7 @@
                         		
                      </div>
                      <fieldset id="format">
-                        <legend>Formats</legend>
+                        <legend>Formats <small>helping reusers to work with the data</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: machineReadableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the data machine-readable?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#machineReadable-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="machineReadable" data-bind="checked: machineReadable"> No</label><label class="radio inline"><input type="radio" value="true" name="machineReadable" data-bind="checked: machineReadable"> Yes</label> <span class="label label-pilot" data-toggle="collapse" data-target="#machineReadable-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="machineReadable-help">A machine-readable format is one in which the information can be easily extracted
                                  from the data by a computer. For example, scanned photocopies of spreadsheets would
                                  not be machine-readable.</span><div class="requirement collapse" id="machineReadable-requirement">
@@ -1140,7 +1140,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="trust">
-                        <legend>Trust</legend>
+                        <legend>Trust <small>helping reusers to understand how much to trust the data</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: provenanceStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do you provide machine-readable provenance for the data?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="provenance" data-bind="checked: provenance"> No</label><label class="radio inline"><input type="radio" value="true" name="provenance" data-bind="checked: provenance"> Yes</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#provenance-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="provenance-requirement">
                                  <p class="alert alert-info"><a href="#provenance-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a machine-readable provenance trail for the data so that reusers
                                     can trace how it has been processed.
@@ -1163,7 +1163,7 @@
                   </div>
                   <div class="tab-pane" id="social">
                      <fieldset id="documentation">
-                        <legend>Documentation</legend>
+                        <legend>Documentation <small>helping reusers to understand the context and content of the data</small></legend>
                         <div class="conditional" data-bind="visible: documentationUrl() !== ''">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: documentationMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does your data documentation include machine-readable data for:</label><div class="controls"><label class="checkbox"><input type="checkbox" name="documentationMetadataTitle" data-bind="checked: documentationMetadataTitle" value="title">title <span class="label label-pilot" data-toggle="collapse" data-target="#documentationMetadatatitle-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="documentationMetadatatitle-requirement">
@@ -1259,7 +1259,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="support">
-                        <legend>Support</legend>
+                        <legend>Support <small>giving reusers contact with people who can help them</small></legend>
                         <div class="control-group"><label class="control-label" for="contactEmail"><span class="badge badge-circular badge-success pull-left" data-bind="visible: contactEmailStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the contact email address for questions about this data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" placeholder="Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="contactEmail-help">Provide an email address that people can contact with queries about the data.</span><div class="requirement collapse" id="contactEmail-requirement">
                                  <p class="alert alert-info"><a href="#contactEmail-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should have a contact email address so that people can get in touch with you about
                                     any questions about the data.
@@ -1310,7 +1310,7 @@
                         </div>
                      </fieldset>
                      <fieldset id="services">
-                        <legend>Services</legend>
+                        <legend>Services <small>providing reusers with tools to help work with the data</small></legend>
                         <div class="control-group"><label class="control-label" for="libraries"><span class="badge badge-circular badge-success pull-left" data-bind="visible: librariesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you list tools for working with the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" placeholder="Tool URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="libraries-help">Provide a link to a page that lists the tools that people and developers can use when
                                  working with the data.</span><div class="requirement collapse" id="libraries-requirement">
                                  <p class="alert alert-info"><a href="#libraries-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a list of software libraries and other tools that help developers

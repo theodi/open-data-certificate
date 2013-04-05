@@ -303,7 +303,15 @@
 
 <xsl:template match="group//group">
 	<fieldset id="{@id}">
-		<legend><xsl:apply-templates select="label/node()" /></legend>
+		<legend>
+			<xsl:apply-templates select="label/node()" />
+			<xsl:if test="help">
+				<xsl:text> </xsl:text>
+				<small>
+					<xsl:value-of select="help" />
+				</small>
+			</xsl:if>
+		</legend>
 		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
 	</fieldset>
@@ -320,6 +328,8 @@
 		<xsl:text> if you want to use the certificate in other countries.</xsl:text>
 	</p>
 </xsl:template>
+
+<xsl:template match="group//group/help" />
 
 <xsl:template match="question">
 	<div class="control-group">
