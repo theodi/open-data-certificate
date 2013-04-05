@@ -446,36 +446,17 @@
                                     provisions.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/exemptions" target="_new">Read more...</a></span></div>
                            </div>
                            				
-                           <div class="control-group"><label class="control-label" for="privacyImpactAssessmentUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your privacy impact assessment published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"><span class="conditional" data-bind="visible: consentExempt() !== 'true'">
-                                    						 <span class="label label-pilot" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Pilot</span>
-                                    					</span><span class="conditional" data-bind="visible: consentExempt() === 'true'">
-                                    						 <span class="label label-standard" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Standard</span>
-                                    					</span><span class="help-block collapse" id="privacyImpactAssessmentUrl-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
-                                    and disclosure of information.<a class="pull-right" href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx" target="_new">Read more...</a></span><div class="conditional" data-bind="visible: consentExempt() !== 'true'">
-                                    						
-                                    <div class="requirement collapse" id="privacyImpactAssessmentUrl-requirement">
+                           <div class="conditional" data-bind="visible: consentExempt() === 'false'">
+                              					
+                              <div class="control-group"><label class="control-label" for="privacyImpactAssessmentUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your privacy impact assessment published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="privacyImpactAssessmentUrl-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
+                                       and disclosure of information.<a class="pull-right" href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx" target="_new">Read more...</a></span><div class="requirement collapse" id="privacyImpactAssessmentUrl-requirement">
                                        <p class="alert alert-info"><a href="#privacyImpactAssessmentUrl-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should carry out a a privacy impact assessment to identify risks of releasing
                                           the data, mitigations against those risks, and to put in place processes that ensure
                                           that any breaches are handled effectively.
                                        </p>
                                     </div>
-                                    					
-                                 </div>
-                                 <div class="conditional" data-bind="visible: consentExempt() === 'true'">
-                                    						
-                                    <div class="requirement collapse" id="privacyImpactAssessmentUrl-requirement">
-                                       <p class="alert alert-info"><a href="#privacyImpactAssessmentUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should conduct a privacy impact assessment even if the data is exempt from data
-                                          protection legislation, to identify risks of releasing the data, mitigations against
-                                          those risks, and to put in place processes that ensure that any breaches are handled
-                                          effectively.
-                                       </p>
-                                    </div>
-                                    					
                                  </div>
                               </div>
-                           </div>
-                           				
-                           <div class="conditional" data-bind="visible: consentExempt() === 'false'">
                               					
                               <div class="control-group"><label class="control-label" for="individualConsentURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: individualConsentURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the privacy notice for individuals published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#individualConsentURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="individualConsentURL" name="individualConsentURL" data-bind="value: individualConsentURL, valueUpdate: 'afterkeydown'" placeholder="Privacy Notice URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#individualConsentURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="individualConsentURL-help">Unless you are exempt from the non-disclosure provisions of the Data Protection Act,
                                        you are required to give individuals privacy notices when collecting the data, which
@@ -487,32 +468,29 @@
                                     </div>
                                  </div>
                               </div>
-                              				
-                           </div>
-                           				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: personalDataAnonymisationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Has your anonymisation approach been audited?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> No</label><label class="radio inline"><input type="radio" value="true" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> Yes</label><span class="conditional" data-bind="visible: consentExempt() === 'false'">
-                                    						 <span class="label label-pilot" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Pilot</span>
-                                    					</span><span class="conditional" data-bind="visible: consentExempt() === 'true'">
-                                    						 <span class="label label-standard" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Standard</span>
-                                    					</span><div class="conditional" data-bind="visible: consentExempt() === 'false'">
-                                    						
-                                    <div class="requirement collapse" id="personalDataAnonymisation-requirement">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: personalDataAnonymisationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Has your anonymisation approach been audited?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> No</label><label class="radio inline"><input type="radio" value="true" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> Yes</label> <span class="label label-pilot" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="personalDataAnonymisation-requirement">
                                        <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should engage an expert to audit your anonymisation approach to ensure that it
                                           is appropriate for your data.
                                        </p>
                                     </div>
-                                    					
-                                 </div>
-                                 <div class="conditional" data-bind="visible: consentExempt() === 'true'">
-                                    						
-                                    <div class="requirement collapse" id="personalDataAnonymisation-requirement">
-                                       <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should engage an expert to audit your anonymisation approach to ensure that it
-                                          is appropriate for your data.
-                                       </p>
-                                    </div>
-                                    					
                                  </div>
                               </div>
+                              				
+                           </div>
+                           				
+                           <div class="conditional" data-bind="visible: consentExempt() === 'true'">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Have you carried out a privacy impact assessment?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessment-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="privacyImpactAssessment" data-bind="checked: privacyImpactAssessment"> No</label><label class="radio inline"><input type="radio" value="true" name="privacyImpactAssessment" data-bind="checked: privacyImpactAssessment"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#privacyImpactAssessment-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="privacyImpactAssessment-help">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use
+                                       and disclosure of information.<a class="pull-right" href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx" target="_new">Read more...</a></span><div class="requirement collapse" id="privacyImpactAssessment-requirement">
+                                       <p class="alert alert-info"><a href="#privacyImpactAssessment-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should carry out a a privacy impact assessment to identify risks of releasing
+                                          the data, mitigations against those risks, and to put in place processes that ensure
+                                          that any breaches are handled effectively.
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                              				
                            </div>
                            			
                         </div>
@@ -1199,7 +1177,7 @@
                         </div>
                         <div class="conditional" data-bind="visible: dataPersonal() === 'personal'">
                            				
-                           <div class="control-group"><label class="control-label" for="dataProtectionContact"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataProtectionContactStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Who should be contacted about confidentiality concerns?</label><div class="controls"><input type="email" class="span5" id="dataProtectionContact" name="dataProtectionContact" data-bind="value: dataProtectionContact, valueUpdate: 'afterkeydown'" placeholder="Data Protection Officer Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionContact-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dataProtectionContact-requirement">
+                           <div class="control-group"><label class="control-label" for="dataProtectionContact"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataProtectionContactStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you provide contact details for confidentiality concerns?</label><div class="controls"><input type="url" class="span5" id="dataProtectionContact" name="dataProtectionContact" data-bind="value: dataProtectionContact, valueUpdate: 'afterkeydown'" placeholder="Confidentiality Contact Details"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionContact-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dataProtectionContact-requirement">
                                     <p class="alert alert-info"><a href="#dataProtectionContact-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide a contact email address so that reusers with concerns about disclosure
                                        of personal details within the data can get in touch.
                                     </p>
@@ -1259,17 +1237,13 @@
                      of any attribution that people should use so that reusers understand how they can
                      reuse it.</span></p>
                <div data-bind="visible: dataPersonal() === 'personal'">
-                  <div data-bind="visible: consentExempt() !== 'true'">
+                  <div data-bind="visible: consentExempt() === 'false'">
                      <p class="improvement" data-bind="visible: privacyImpactAssessmentUrl() === ''"><a class="improvement-label" href="#privacyImpactAssessmentUrl" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should carry out a a privacy impact assessment to identify risks of releasing
                            the data, mitigations against those risks, and to put in place processes that ensure
                            that any breaches are handled effectively.</span></p>
-                  </div>
-                  <div data-bind="visible: consentExempt() === 'false'">
                      <p class="improvement" data-bind="visible: individualConsentURL() === ''"><a class="improvement-label" href="#individualConsentURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should inform potential reusers about the purposes of processing personal data
                            which individuals were informed of, so that reusers can comply with the Data Protection
                            Act and use the data consistently with that consent.</span></p>
-                  </div>
-                  <div data-bind="visible: consentExempt() === 'false'">
                      <p class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a class="improvement-label" href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should engage an expert to audit your anonymisation approach to ensure that it
                            is appropriate for your data.</span></p>
                   </div>
@@ -1386,14 +1360,9 @@
                </div>
                <div data-bind="visible: dataPersonal() === 'personal'">
                   <div data-bind="visible: consentExempt() === 'true'">
-                     <p class="improvement" data-bind="visible: privacyImpactAssessmentUrl() === ''"><a class="improvement-label" href="#privacyImpactAssessmentUrl" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should conduct a privacy impact assessment even if the data is exempt from data
-                           protection legislation, to identify risks of releasing the data, mitigations against
-                           those risks, and to put in place processes that ensure that any breaches are handled
-                           effectively.</span></p>
-                  </div>
-                  <div data-bind="visible: consentExempt() === 'true'">
-                     <p class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a class="improvement-label" href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should engage an expert to audit your anonymisation approach to ensure that it
-                           is appropriate for your data.</span></p>
+                     <p class="improvement" data-bind="visible: privacyImpactAssessment() === ''"><a class="improvement-label" href="#privacyImpactAssessment" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should carry out a a privacy impact assessment to identify risks of releasing
+                           the data, mitigations against those risks, and to put in place processes that ensure
+                           that any breaches are handled effectively.</span></p>
                   </div>
                </div>
                <p class="improvement" data-bind="visible: linkedTo() === ''"><a class="improvement-label" href="#linkedTo" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should ensure that reusers can easily find your data from your organisation's
@@ -1935,6 +1904,13 @@ certificate.personalDataAnonymisationStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.privacyImpactAssessment = ko.observable('');
+certificate.privacyImpactAssessmentStatus = ko.computed(function () {
+  var status;
+  if (certificate.privacyImpactAssessment() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
 certificate.legalStatus = ko.computed(function () {
   var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
@@ -2145,40 +2121,31 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.consentExemptStatus() !== 'optional') unmetRequirements[certificate.consentExemptStatus()]++;
 	
+	if (certificate.consentExempt() === 'false') {
+
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
-	
-	if (certificate.consentExempt() !== 'true') {
-if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
-
-}
-
-	if (certificate.consentExempt() === 'true') {
-if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
-	if (certificate.consentExempt() === 'false') {
+	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.individualConsentURLStatus() !== 'optional') unmetRequirements[certificate.individualConsentURLStatus()]++;
 	if (certificate.individualConsentURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-}
-
 	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
-	
-	if (certificate.consentExempt() === 'false') {
-if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
 
 }
 
 	if (certificate.consentExempt() === 'true') {
-if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.privacyImpactAssessmentStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.privacyImpactAssessmentStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.privacyImpactAssessmentStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	if (certificate.privacyImpactAssessment() !== 'true') unmetRequirements['standard']++; 
 
 }
 
@@ -3423,40 +3390,31 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.consentExemptStatus() !== 'optional') unmetRequirements[certificate.consentExemptStatus()]++;
 	
+	if (certificate.consentExempt() === 'false') {
+
 	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
-	
-	if (certificate.consentExempt() !== 'true') {
-if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
-
-}
-
-	if (certificate.consentExempt() === 'true') {
-if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['standard']++; 
-
-}
-
-	if (certificate.consentExempt() === 'false') {
+	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.individualConsentURLStatus() !== 'optional') unmetRequirements[certificate.individualConsentURLStatus()]++;
 	if (certificate.individualConsentURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-}
-
 	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
-	
-	if (certificate.consentExempt() === 'false') {
-if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
 
 }
 
 	if (certificate.consentExempt() === 'true') {
-if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.privacyImpactAssessmentStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.privacyImpactAssessmentStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.privacyImpactAssessmentStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	if (certificate.privacyImpactAssessment() !== 'true') unmetRequirements['standard']++; 
 
 }
 
