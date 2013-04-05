@@ -83,10 +83,38 @@
 					<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 					<option value="cc0">Creative Commons CCZero</option>
 					<option value="ogl">UK Open Government Licence</option>
+					<option value="na">Not applicable</option>
 					<option value="other">Other...</option>
 				</select>
 				<help>The creator of a database automatically gets database rights where they spend substantial effort gathering, verifying and presenting data. You need to have a waiver or licence that covers the database rights in the data so reusers know that they can reuse it.</help>
 			</question>
+			<if test="this.dataLicence() === 'na'">
+				<question id="dataNotApplicable">
+					<label>Why is a licence not applicable for this data?</label>
+					<radioset required="required">
+						<option value="norights"><label>there is no database right in this data</label></option>
+						<option value="expired"><label>the applicable database rights have expired</label></option>
+						<option value="waived"><label>the applicable database rights have been waived</label></option>
+					</radioset>
+				</question>
+				<if test="this.dataNotApplicable() === 'waived'">
+					<question id="dataWaiver">
+						<label>Which waiver are you using to waive database rights?</label>
+						<select required="required">
+							<option/>
+							<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+							<option value="cc0">Creative Commons CCZero</option>
+							<option value="other">Other...</option>
+						</select>
+					</question>
+					<if test="this.dataWaiver() === 'other'">
+						<question id="dataOtherWaiver">
+							<label>Where is the waiver for the database rights?</label>
+							<input type="url" required="required" placeholder="Waiver URL" />
+						</question>
+					</if>
+				</if>
+			</if>
 			<if test="this.dataLicence() === 'other'">
 				<question id="otherDataLicenceName">
 					<label>What's the name of the licence?</label>
@@ -111,10 +139,37 @@
 					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 					<option value="cc0">Creative Commons CCZero</option>
 					<option value="ogl">UK Open Government Licence</option>
+					<option value="na">Not applicable</option>
 					<option value="other">Other...</option>
 				</select>
 				<help>The creator of content automatically gets copyright over that content when they spend intellectual effort creating it. Note that creative content does not include facts. You need to have a waiver or licence that covers the copyright in the data so reusers know that they can reuse it.</help>
 			</question>
+			<if test="this.contentLicence() === 'na'">
+				<question id="contentNotApplicable">
+					<label>Why is a licence not applicable for this data?</label>
+					<radioset required="required">
+						<option value="norights"><label>there is no copyright in this data</label></option>
+						<option value="expired"><label>the applicable copyright has expired</label></option>
+						<option value="waived"><label>the applicable copyright has been waived</label></option>
+					</radioset>
+				</question>
+				<if test="this.contentNotApplicable() === 'waived'">
+					<question id="contentWaiver">
+						<label>Which waiver are you using to waive copyright?</label>
+						<select required="required">
+							<option/>
+							<option value="cc0">Creative Commons CCZero</option>
+							<option value="other">Other...</option>
+						</select>
+					</question>
+					<if test="this.contentWaiver() === 'other'">
+						<question id="contentOtherWaiver">
+							<label>Where is the waiver for the copyright?</label>
+							<input type="url" required="required" placeholder="Waiver URL" />
+						</question>
+					</if>
+				</if>
+			</if>
 			<if test="this.contentLicence() === 'other'">
 				<question id="otherContentLicenceName">
 					<label>What's the name of the licence?</label>

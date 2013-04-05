@@ -167,10 +167,41 @@
                                  					
                                  <option value="ogl">UK Open Government Licence</option>
                                  					
+                                 <option value="na">Not applicable</option>
+                                 					
                                  <option value="other">Other...</option>
                                  				</select><span class="help-block collapse" id="dataLicence-help">The creator of a database automatically gets database rights where they spend substantial
                                  effort gathering, verifying and presenting data. You need to have a waiver or licence
                                  that covers the database rights in the data so reusers know that they can reuse it.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: dataLicence() === 'na'">
+                           				
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this data?</label><div class="controls"><label class="radio"><input type="radio" name="dataNotApplicable" data-bind="checked: dataNotApplicable" value="norights">there is no database right in this data</label><label class="radio"><input type="radio" name="dataNotApplicable" data-bind="checked: dataNotApplicable" value="expired">the applicable database rights have expired</label><label class="radio"><input type="radio" name="dataNotApplicable" data-bind="checked: dataNotApplicable" value="waived">the applicable database rights have been waived</label></div>
+                           </div>
+                           				
+                           <div class="conditional" data-bind="visible: dataNotApplicable() === 'waived'">
+                              					
+                              <div class="control-group"><label class="control-label" for="dataWaiver"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver are you using to waive database rights?</label><div class="controls"><select class="span5" id="dataWaiver" name="dataWaiver" data-bind="value: dataWaiver, valueUpdate: 'afterkeydown'" required="required">
+                                       							
+                                       <option></option>
+                                       							
+                                       <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+                                       							
+                                       <option value="cc0">Creative Commons CCZero</option>
+                                       							
+                                       <option value="other">Other...</option>
+                                       						</select></div>
+                              </div>
+                              					
+                              <div class="conditional" data-bind="visible: dataWaiver() === 'other'">
+                                 						
+                                 <div class="control-group"><label class="control-label" for="dataOtherWaiver"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the database rights?</label><div class="controls"><input type="url" class="span5" id="dataOtherWaiver" name="dataOtherWaiver" data-bind="value: dataOtherWaiver, valueUpdate: 'afterkeydown'" placeholder="Waiver URL" required="required"></div>
+                                 </div>
+                                 					
+                              </div>
+                              				
+                           </div>
+                           			
                         </div>
                         <div class="conditional" data-bind="visible: dataLicence() === 'other'">
                            				
@@ -201,11 +232,40 @@
                                  					
                                  <option value="ogl">UK Open Government Licence</option>
                                  					
+                                 <option value="na">Not applicable</option>
+                                 					
                                  <option value="other">Other...</option>
                                  				</select><span class="help-block collapse" id="contentLicence-help">The creator of content automatically gets copyright over that content when they spend
                                  intellectual effort creating it. Note that creative content does not include facts.
                                  You need to have a waiver or licence that covers the copyright in the data so reusers
                                  know that they can reuse it.</span></div>
+                        </div>
+                        <div class="conditional" data-bind="visible: contentLicence() === 'na'">
+                           				
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: contentNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: contentNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this data?</label><div class="controls"><label class="radio"><input type="radio" name="contentNotApplicable" data-bind="checked: contentNotApplicable" value="norights">there is no copyright in this data</label><label class="radio"><input type="radio" name="contentNotApplicable" data-bind="checked: contentNotApplicable" value="expired">the applicable copyright has expired</label><label class="radio"><input type="radio" name="contentNotApplicable" data-bind="checked: contentNotApplicable" value="waived">the applicable copyright has been waived</label></div>
+                           </div>
+                           				
+                           <div class="conditional" data-bind="visible: contentNotApplicable() === 'waived'">
+                              					
+                              <div class="control-group"><label class="control-label" for="contentWaiver"><span class="badge badge-circular badge-important pull-left" data-bind="visible: contentWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: contentWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver are you using to waive copyright?</label><div class="controls"><select class="span5" id="contentWaiver" name="contentWaiver" data-bind="value: contentWaiver, valueUpdate: 'afterkeydown'" required="required">
+                                       							
+                                       <option></option>
+                                       							
+                                       <option value="cc0">Creative Commons CCZero</option>
+                                       							
+                                       <option value="other">Other...</option>
+                                       						</select></div>
+                              </div>
+                              					
+                              <div class="conditional" data-bind="visible: contentWaiver() === 'other'">
+                                 						
+                                 <div class="control-group"><label class="control-label" for="contentOtherWaiver"><span class="badge badge-circular badge-important pull-left" data-bind="visible: contentOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: contentOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the copyright?</label><div class="controls"><input type="url" class="span5" id="contentOtherWaiver" name="contentOtherWaiver" data-bind="value: contentOtherWaiver, valueUpdate: 'afterkeydown'" placeholder="Waiver URL" required="required"></div>
+                                 </div>
+                                 					
+                              </div>
+                              				
+                           </div>
+                           			
                         </div>
                         <div class="conditional" data-bind="visible: contentLicence() === 'other'">
                            				
@@ -1657,6 +1717,27 @@ certificate.dataLicenceStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.dataNotApplicable = ko.observable('');
+certificate.dataNotApplicableStatus = ko.computed(function () {
+  var status;
+  if (certificate.dataNotApplicable() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.dataWaiver = ko.observable('');
+certificate.dataWaiverStatus = ko.computed(function () {
+  var status;
+  if (certificate.dataWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.dataOtherWaiver = ko.observable('');
+certificate.dataOtherWaiverStatus = ko.computed(function () {
+  var status;
+  if (certificate.dataOtherWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
 certificate.otherDataLicenceName = ko.observable('');
 certificate.otherDataLicenceNameStatus = ko.computed(function () {
   var status;
@@ -1682,6 +1763,27 @@ certificate.contentLicence = ko.observable('');
 certificate.contentLicenceStatus = ko.computed(function () {
   var status;
   if (certificate.contentLicence() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.contentNotApplicable = ko.observable('');
+certificate.contentNotApplicableStatus = ko.computed(function () {
+  var status;
+  if (certificate.contentNotApplicable() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.contentWaiver = ko.observable('');
+certificate.contentWaiverStatus = ko.computed(function () {
+  var status;
+  if (certificate.contentWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.contentOtherWaiver = ko.observable('');
+certificate.contentOtherWaiverStatus = ko.computed(function () {
+  var status;
+  if (certificate.contentOtherWaiver() === '') status = 'required';
   else status = 'complete';
   return status;
 });
@@ -1937,6 +2039,30 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.dataLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dataLicenceStatus() !== 'optional') unmetRequirements[certificate.dataLicenceStatus()]++;
 	
+	if (certificate.dataLicence() === 'na') {
+
+	if (certificate.dataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataNotApplicableStatus() !== 'optional') unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	
+	if (certificate.dataNotApplicable() === 'waived') {
+
+	if (certificate.dataWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataWaiverStatus() !== 'optional') unmetRequirements[certificate.dataWaiverStatus()]++;
+	
+	if (certificate.dataWaiver() === 'other') {
+
+	if (certificate.dataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (certificate.dataLicence() === 'other') {
 
 	if (certificate.otherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -1958,6 +2084,30 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.contentLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.contentLicenceStatus() !== 'optional') unmetRequirements[certificate.contentLicenceStatus()]++;
 	
+	if (certificate.contentLicence() === 'na') {
+
+	if (certificate.contentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentNotApplicableStatus() !== 'optional') unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	
+	if (certificate.contentNotApplicable() === 'waived') {
+
+	if (certificate.contentWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentWaiverStatus() !== 'optional') unmetRequirements[certificate.contentWaiverStatus()]++;
+	
+	if (certificate.contentWaiver() === 'other') {
+
+	if (certificate.contentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (certificate.contentLicence() === 'other') {
 
 	if (certificate.otherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -3206,6 +3356,30 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.dataLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dataLicenceStatus() !== 'optional') unmetRequirements[certificate.dataLicenceStatus()]++;
 	
+	if (certificate.dataLicence() === 'na') {
+
+	if (certificate.dataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataNotApplicableStatus() !== 'optional') unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	
+	if (certificate.dataNotApplicable() === 'waived') {
+
+	if (certificate.dataWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataWaiverStatus() !== 'optional') unmetRequirements[certificate.dataWaiverStatus()]++;
+	
+	if (certificate.dataWaiver() === 'other') {
+
+	if (certificate.dataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (certificate.dataLicence() === 'other') {
 
 	if (certificate.otherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -3227,6 +3401,30 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.contentLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.contentLicenceStatus() !== 'optional') unmetRequirements[certificate.contentLicenceStatus()]++;
 	
+	if (certificate.contentLicence() === 'na') {
+
+	if (certificate.contentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentNotApplicableStatus() !== 'optional') unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	
+	if (certificate.contentNotApplicable() === 'waived') {
+
+	if (certificate.contentWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentWaiverStatus() !== 'optional') unmetRequirements[certificate.contentWaiverStatus()]++;
+	
+	if (certificate.contentWaiver() === 'other') {
+
+	if (certificate.contentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.contentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.contentOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (certificate.contentLicence() === 'other') {
 
 	if (certificate.otherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
