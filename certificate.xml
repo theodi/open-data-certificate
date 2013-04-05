@@ -320,12 +320,12 @@
 				<question id="privacyImpactAssessmentUrl">
 					<label>Where is your privacy impact assessment published?</label>
 					<input type="url" placeholder="Privacy Impact Assessment URL"/>
-					<help>A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.</help>
+					<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.</help>
 					<if test="this.consentExempt() !== 'true'">
-						<requirement level="pilot" more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
+						<requirement level="pilot">You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
 					</if>
 					<if test="this.consentExempt() === 'true'">
-						<requirement level="standard" more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">You should conduct a privacy impact assessment even if the data is exempt from data protection legislation, to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
+						<requirement level="standard">You should conduct a privacy impact assessment even if the data is exempt from data protection legislation, to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
 					</if>
 				</question>
 				<if test="this.consentExempt() === 'false'">
@@ -333,7 +333,7 @@
 						<label>Where is the privacy notice for individuals published?</label>
 						<input type="url" placeholder="Privacy Notice URL" />
 						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">Unless you are exempt from the non-disclosure provisions of the Data Protection Act, you are required to give individuals privacy notices when collecting the data, which should specify the purposes for which that data will be used.</help>
-						<requirement level="pilot" more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">You should inform potential reusers about the purposes of processing personal data which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.</requirement>
+						<requirement level="pilot">You should inform potential reusers about the purposes of processing personal data which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.</requirement>
 					</question>
 				</if>
 				<question id="personalDataAnonymisation">
