@@ -359,11 +359,42 @@
                                              								
                                              <option value="ogl">UK Open Government Licence</option>
                                              								
+                                             <option value="na">Not applicable</option>
+                                             								
                                              <option value="other">Other...</option>
                                              							</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataLicence-' + $index() + '-help' }">The creator of a database automatically gets database rights where they spend substantial
                                              effort gathering, verifying and presenting data. They need to have specified a waiver
                                              or licence that covers the database rights in the data in order for you to republish
                                              it.</span></div>
+                                    </div>
+                                    <div class="conditional" data-bind="visible: thirdPartyDataLicence() === 'na'">
+                                       							
+                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this data?</label><div class="controls"><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="norights">there is no database right in this data</label><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="expired">the applicable database rights have expired</label><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="waived">the applicable database rights have been waived</label></div>
+                                       </div>
+                                       							
+                                       <div class="conditional" data-bind="visible: thirdPartyDataNotApplicable() === 'waived'">
+                                          								
+                                          <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyDataWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver waives the database rights in this data?</label><div class="controls"><select class="span5" data-bind="value: thirdPartyDataWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyDataWaiver-' + $index(), name: 'thirdPartyDataWaiver-' + $index() }" required="required">
+                                                   										
+                                                   <option></option>
+                                                   										
+                                                   <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+                                                   										
+                                                   <option value="cc0">Creative Commons CCZero</option>
+                                                   										
+                                                   <option value="other">Other...</option>
+                                                   									</select></div>
+                                          </div>
+                                          								
+                                          <div class="conditional" data-bind="visible: thirdPartyDataWaiver() === 'other'">
+                                             									
+                                             <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyDataOtherWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the database rights?</label><div class="controls"><input type="url" class="span5" data-bind="value: thirdPartyDataOtherWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyDataOtherWaiver-' + $index(), name: 'thirdPartyDataOtherWaiver-' + $index() }" placeholder="Waiver URL" required="required"></div>
+                                             </div>
+                                             								
+                                          </div>
+                                          							
+                                       </div>
+                                       						
                                     </div>
                                     <div class="conditional" data-bind="visible: thirdPartyDataLicence() === 'other'">
                                        							
@@ -405,11 +436,40 @@
                                              								
                                              <option value="ogl">UK Open Government Licence</option>
                                              								
+                                             <option value="na">Not applicable</option>
+                                             								
                                              <option value="other">Other...</option>
                                              							</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentLicence-' + $index() + '-help' }">The creator of content automatically gets copyright over that content when they spend
                                              intellectual effort creating it. Note that creative content does not include facts.
                                              You need to have a waiver or licence that covers the copyright in the data so reusers
                                              know that they can reuse it.</span></div>
+                                    </div>
+                                    <div class="conditional" data-bind="visible: thirdPartyContentLicence() === 'na'">
+                                       							
+                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this content?</label><div class="controls"><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="norights">there is no copyright in this data</label><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="expired">the applicable copyright has expired</label><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="waived">the applicable copyright has been waived</label></div>
+                                       </div>
+                                       							
+                                       <div class="conditional" data-bind="visible: thirdPartyContentNotApplicable() === 'waived'">
+                                          								
+                                          <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyContentWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver waives the copyright in this content?</label><div class="controls"><select class="span5" data-bind="value: thirdPartyContentWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyContentWaiver-' + $index(), name: 'thirdPartyContentWaiver-' + $index() }" required="required">
+                                                   										
+                                                   <option></option>
+                                                   										
+                                                   <option value="cc0">Creative Commons CCZero</option>
+                                                   										
+                                                   <option value="other">Other...</option>
+                                                   									</select></div>
+                                          </div>
+                                          								
+                                          <div class="conditional" data-bind="visible: thirdPartyContentWaiver() === 'other'">
+                                             									
+                                             <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyContentOtherWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the copyright?</label><div class="controls"><input type="url" class="span5" data-bind="value: thirdPartyContentOtherWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyContentOtherWaiver-' + $index(), name: 'thirdPartyContentOtherWaiver-' + $index() }" placeholder="Waiver URL" required="required"></div>
+                                             </div>
+                                             								
+                                          </div>
+                                          							
+                                       </div>
+                                       						
                                     </div>
                                     <div class="conditional" data-bind="visible: thirdPartyContentLicence() === 'other'">
                                        							
@@ -1873,6 +1933,27 @@ sources.thirdPartyDataLicenceStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+sources.thirdPartyDataNotApplicable = ko.observable('');
+sources.thirdPartyDataNotApplicableStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyDataNotApplicable() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+sources.thirdPartyDataWaiver = ko.observable('');
+sources.thirdPartyDataWaiverStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyDataWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+sources.thirdPartyDataOtherWaiver = ko.observable('');
+sources.thirdPartyDataOtherWaiverStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyDataOtherWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
 sources.thirdPartyOtherDataLicenceName = ko.observable('');
 sources.thirdPartyOtherDataLicenceNameStatus = ko.computed(function () {
   var status;
@@ -1905,6 +1986,27 @@ sources.thirdPartyContentLicence = ko.observable('');
 sources.thirdPartyContentLicenceStatus = ko.computed(function () {
   var status;
   if (sources.thirdPartyContentLicence() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+sources.thirdPartyContentNotApplicable = ko.observable('');
+sources.thirdPartyContentNotApplicableStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyContentNotApplicable() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+sources.thirdPartyContentWaiver = ko.observable('');
+sources.thirdPartyContentWaiverStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyContentWaiver() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+sources.thirdPartyContentOtherWaiver = ko.observable('');
+sources.thirdPartyContentOtherWaiverStatus = ko.computed(function () {
+  var status;
+  if (sources.thirdPartyContentOtherWaiver() === '') status = 'required';
   else status = 'complete';
   return status;
 });
@@ -2175,6 +2277,30 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (sources.thirdPartyDataLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyDataLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataLicenceStatus()]++;
 	
+	if (sources.thirdPartyDataLicence() === 'na') {
+
+	if (sources.thirdPartyDataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataNotApplicableStatus()]++;
+	
+	if (sources.thirdPartyDataNotApplicable() === 'waived') {
+
+	if (sources.thirdPartyDataWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataWaiverStatus()]++;
+	
+	if (sources.thirdPartyDataWaiver() === 'other') {
+
+	if (sources.thirdPartyDataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (sources.thirdPartyDataLicence() === 'other') {
 
 	if (sources.thirdPartyOtherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -2204,6 +2330,30 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (sources.thirdPartyContentLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyContentLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentLicenceStatus()]++;
 	
+	if (sources.thirdPartyContentLicence() === 'na') {
+
+	if (sources.thirdPartyContentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentNotApplicableStatus()]++;
+	
+	if (sources.thirdPartyContentNotApplicable() === 'waived') {
+
+	if (sources.thirdPartyContentWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentWaiverStatus()]++;
+	
+	if (sources.thirdPartyContentWaiver() === 'other') {
+
+	if (sources.thirdPartyContentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (sources.thirdPartyContentLicence() === 'other') {
 
 	if (sources.thirdPartyOtherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -3492,6 +3642,30 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (sources.thirdPartyDataLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyDataLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataLicenceStatus()]++;
 	
+	if (sources.thirdPartyDataLicence() === 'na') {
+
+	if (sources.thirdPartyDataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataNotApplicableStatus()]++;
+	
+	if (sources.thirdPartyDataNotApplicable() === 'waived') {
+
+	if (sources.thirdPartyDataWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataWaiverStatus()]++;
+	
+	if (sources.thirdPartyDataWaiver() === 'other') {
+
+	if (sources.thirdPartyDataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyDataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyDataOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (sources.thirdPartyDataLicence() === 'other') {
 
 	if (sources.thirdPartyOtherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
@@ -3521,6 +3695,30 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (sources.thirdPartyContentLicenceStatus() === 'required') unmetRequirements['basic']++;
 	else if (sources.thirdPartyContentLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentLicenceStatus()]++;
 	
+	if (sources.thirdPartyContentLicence() === 'na') {
+
+	if (sources.thirdPartyContentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentNotApplicableStatus()]++;
+	
+	if (sources.thirdPartyContentNotApplicable() === 'waived') {
+
+	if (sources.thirdPartyContentWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentWaiverStatus()]++;
+	
+	if (sources.thirdPartyContentWaiver() === 'other') {
+
+	if (sources.thirdPartyContentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
+	else if (sources.thirdPartyContentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
+	else if (sources.thirdPartyContentOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentOtherWaiverStatus()]++;
+	
+}
+
+}
+
+}
+
 	if (sources.thirdPartyContentLicence() === 'other') {
 
 	if (sources.thirdPartyOtherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
