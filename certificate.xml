@@ -551,22 +551,22 @@
 				</question>
 			</if>
 			<question id="onGoingAvailability">
-				<label>For how long will the dataset be available in this way?</label>
+				<label>For how long will the data be available in this way?</label>
 				<radioset>
 					<option value="experimental">
-						<label>this dataset may disappear at any time</label>
+						<label>this data may disappear at any time</label>
 					</option>
-					<option value="P1Y">
-						<label>this dataset will be available in this form for at least one year</label>
-						<requirement level="pilot">You should provide a guarantee to reusers that it will be available in this form for at least a year so that they know they can rely on it.</requirement>
+					<option value="short">
+						<label>this data is available experimentally but should be around for another year or so</label>
+						<requirement level="pilot">You should provide a guarantee to reusers that the data will be available in this form for about a year so that they know they can rely on it.</requirement>
 					</option>
-					<option value="P2Y">
-						<label>this dataset will be available in this form for at least two years</label>
-						<requirement level="standard">You should provide a guarantee to reusers that it will be available in this form for at least two years so that they know they can rely on it.</requirement>
+					<option value="medium">
+						<label>this data is included in your medium-term plans and should therefore be around for a couple of years</label>
+						<requirement level="standard">You should provide a guarantee to reusers that the data will be available in this form in the medium term so that they know they can rely on it.</requirement>
 					</option>
-					<option value="P3Y">
-						<label>this dataset will be available in this form for at least three years</label>
-						<requirement level="exemplar">You should provide a guarantee to reusers that it will be available in this form for at least three years so that they know they can rely on it.</requirement>
+					<option value="long">
+						<label>this data is part of your business-as-usual operation and will continue to be published long term</label>
+						<requirement level="exemplar">You should provide a guarantee to reusers that the data will be available in this form long term so that they know they can rely on it.</requirement>
 					</option>
 				</radioset>
 			</question>

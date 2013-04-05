@@ -705,17 +705,19 @@
                            </div>
                            			
                         </div>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: onGoingAvailabilityStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> For how long will the dataset be available in this way?</label><div class="controls"><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="experimental">this dataset may disappear at any time</label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P1Y">this dataset will be available in this form for at least one year <span class="label label-pilot" data-toggle="collapse" data-target="#onGoingAvailabilityP1Y-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="onGoingAvailabilityP1Y-requirement">
-                                    <p class="alert alert-info"><a href="#onGoingAvailabilityP1Y-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide a guarantee to reusers that it will be available in this form for
-                                       at least a year so that they know they can rely on it.
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: onGoingAvailabilityStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> For how long will the data be available in this way?</label><div class="controls"><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="experimental">this data may disappear at any time</label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="short">this data is available experimentally but should be around for another year or so <span class="label label-pilot" data-toggle="collapse" data-target="#onGoingAvailabilityshort-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="onGoingAvailabilityshort-requirement">
+                                    <p class="alert alert-info"><a href="#onGoingAvailabilityshort-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide a guarantee to reusers that the data will be available in this
+                                       form for about a year so that they know they can rely on it.
                                     </p>
-                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P2Y">this dataset will be available in this form for at least two years <span class="label label-standard" data-toggle="collapse" data-target="#onGoingAvailabilityP2Y-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="onGoingAvailabilityP2Y-requirement">
-                                    <p class="alert alert-info"><a href="#onGoingAvailabilityP2Y-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide a guarantee to reusers that it will be available in this form for
-                                       at least two years so that they know they can rely on it.
+                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="medium">this data is included in your medium-term plans and should therefore be around for
+                                    a couple of years <span class="label label-standard" data-toggle="collapse" data-target="#onGoingAvailabilitymedium-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="onGoingAvailabilitymedium-requirement">
+                                    <p class="alert alert-info"><a href="#onGoingAvailabilitymedium-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide a guarantee to reusers that the data will be available in this
+                                       form in the medium term so that they know they can rely on it.
                                     </p>
-                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="P3Y">this dataset will be available in this form for at least three years <span class="label label-exemplar" data-toggle="collapse" data-target="#onGoingAvailabilityP3Y-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="onGoingAvailabilityP3Y-requirement">
-                                    <p class="alert alert-info"><a href="#onGoingAvailabilityP3Y-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a guarantee to reusers that it will be available in this form for
-                                       at least three years so that they know they can rely on it.
+                                 </div></label><label class="radio"><input type="radio" name="onGoingAvailability" data-bind="checked: onGoingAvailability" value="long">this data is part of your business-as-usual operation and will continue to be published
+                                    long term <span class="label label-exemplar" data-toggle="collapse" data-target="#onGoingAvailabilitylong-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="onGoingAvailabilitylong-requirement">
+                                    <p class="alert alert-info"><a href="#onGoingAvailabilitylong-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a guarantee to reusers that the data will be available in this
+                                       form long term so that they know they can rely on it.
                                     </p>
                                  </div></label></div>
                         </div>
@@ -1280,9 +1282,9 @@
                            of the service so that reusers know they can rely on it.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: onGoingAvailability() !== 'P1Y' &amp;&amp; onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
-                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should provide a guarantee to reusers that it will be available in this form for
-                        at least a year so that they know they can rely on it.</span></p>
+               <div data-bind="visible: onGoingAvailability() !== 'short' &amp;&amp; onGoingAvailability() !== 'medium' &amp;&amp; onGoingAvailability() !== 'long'">
+                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should provide a guarantee to reusers that the data will be available in this
+                        form for about a year so that they know they can rely on it.</span></p>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'oneoff'">
@@ -1409,9 +1411,9 @@
                            of the service so that reusers know they can rely on it.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: onGoingAvailability() !== 'P2Y' &amp;&amp; onGoingAvailability() !== 'P3Y'">
-                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide a guarantee to reusers that it will be available in this form for
-                        at least two years so that they know they can rely on it.</span></p>
+               <div data-bind="visible: onGoingAvailability() !== 'medium' &amp;&amp; onGoingAvailability() !== 'long'">
+                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide a guarantee to reusers that the data will be available in this
+                        form in the medium term so that they know they can rely on it.</span></p>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'series'">
@@ -1528,9 +1530,9 @@
                            of the service so that reusers know they can rely on it.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: onGoingAvailability() !== 'P3Y'">
-                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should provide a guarantee to reusers that it will be available in this form for
-                        at least three years so that they know they can rely on it.</span></p>
+               <div data-bind="visible: onGoingAvailability() !== 'long'">
+                  <p class="improvement"><a class="improvement-label" href="#onGoingAvailability" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should provide a guarantee to reusers that the data will be available in this
+                        form long term so that they know they can rely on it.</span></p>
                </div>
                <div data-bind="visible: releaseType() !== ''">
                   <div data-bind="visible: releaseType() === 'service'">
@@ -2430,10 +2432,10 @@ $(certificate.listings()).each(function () {var listings = this;
 	if (certificate.onGoingAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.onGoingAvailabilityStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.onGoingAvailabilityStatus() !== 'optional') unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
-	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['basic']++;
-		if (certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['pilot']++;
-		if (certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['standard']++;
-		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['exemplar']++;
+	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['basic']++;
+		if (certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['pilot']++;
+		if (certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['standard']++;
+		if (certificate.onGoingAvailability() !== 'long') unmetRequirements['exemplar']++;
 		  return unmetRequirements;
 });
 certificate.datasetUrl = ko.observable('');
@@ -3557,10 +3559,10 @@ $(certificate.listings()).each(function () {var listings = this;
 	if (certificate.onGoingAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.onGoingAvailabilityStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.onGoingAvailabilityStatus() !== 'optional') unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
-	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['basic']++;
-		if (certificate.onGoingAvailability() !== 'P1Y' && certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['pilot']++;
-		if (certificate.onGoingAvailability() !== 'P2Y' && certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['standard']++;
-		if (certificate.onGoingAvailability() !== 'P3Y') unmetRequirements['exemplar']++;
+	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['basic']++;
+		if (certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['pilot']++;
+		if (certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['standard']++;
+		if (certificate.onGoingAvailability() !== 'long') unmetRequirements['exemplar']++;
 		
 	if (certificate.releaseType() !== '') {
 
