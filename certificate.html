@@ -467,12 +467,13 @@
                      </fieldset>
                      <fieldset id="privacy">
                         <legend>Privacy</legend>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: dataPersonalStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">the data doesn't contain anything about people at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="personal">the data summarises or contains information about people or their activity</label></div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: dataPersonalStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">no, the data doesn't contain anything about people at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="personal">yes, the data summarises or contains information about people or their activity</label></div>
                         </div>
                         <div class="conditional" data-bind="visible: dataPersonal() === 'personal'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: consentExemptStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: consentExemptStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is this data exempt from data protection legislation?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#consentExempt-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="consentExempt" data-bind="checked: consentExempt"> No</label><label class="radio inline"><input type="radio" value="true" name="consentExempt" data-bind="checked: consentExempt"> Yes</label><span class="help-block collapse" id="consentExempt-help">Some personal data, such as details of individuals within company registers, is required
-                                    to be published by law, and as such is exempt from data protection legislation.</span></div>
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: consentExemptStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: consentExemptStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is this data exempt from the non-disclosure provisions of the Data Protection Act?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#consentExempt-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="consentExempt" data-bind="checked: consentExempt"> No</label><label class="radio inline"><input type="radio" value="true" name="consentExempt" data-bind="checked: consentExempt"> Yes</label><span class="help-block collapse" id="consentExempt-help">There are exemptions from the non-disclosure provisions of the Data Protection Act,
+                                    which mean that organisations do not have to comply with the normal non-disclosure
+                                    provisions.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/exemptions" target="_new">Read more...</a></span></div>
                            </div>
                            				
                            <div class="control-group"><label class="control-label" for="privacyImpactAssessmentUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: privacyImpactAssessmentUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your privacy impact assessment published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#privacyImpactAssessmentUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="privacyImpactAssessmentUrl" name="privacyImpactAssessmentUrl" data-bind="value: privacyImpactAssessmentUrl, valueUpdate: 'afterkeydown'" placeholder="Privacy Impact Assessment URL"><span class="conditional" data-bind="visible: consentExempt() !== 'true'">
@@ -504,13 +505,14 @@
                               </div>
                            </div>
                            				
-                           <div class="conditional" data-bind="visible: consentExempt() !== 'true'">
+                           <div class="conditional" data-bind="visible: consentExempt() === 'false'">
                               					
-                              <div class="control-group"><label class="control-label" for="individualConsentURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: individualConsentURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the consent statement published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#individualConsentURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="individualConsentURL" name="individualConsentURL" data-bind="value: individualConsentURL, valueUpdate: 'afterkeydown'" placeholder="Consent Statement URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#individualConsentURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="individualConsentURL-help">Unless you are exempt from the Data Protection Act, you are required to gain consent
-                                       to use the data that you collect from the individuals that you collect it from.</span><div class="requirement collapse" id="individualConsentURL-requirement">
-                                       <p class="alert alert-info"><a href="#individualConsentURL-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should inform potential reusers about the usage individuals consented to so that
-                                          reusers can comply with data protection laws and use the data consistently with that
-                                          consent.
+                              <div class="control-group"><label class="control-label" for="individualConsentURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: individualConsentURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the privacy notice for individuals published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#individualConsentURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="individualConsentURL" name="individualConsentURL" data-bind="value: individualConsentURL, valueUpdate: 'afterkeydown'" placeholder="Privacy Notice URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#individualConsentURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="individualConsentURL-help">Unless you are exempt from the non-disclosure provisions of the Data Protection Act,
+                                       you are required to give individuals privacy notices when collecting the data, which
+                                       should specify the purposes for which that data will be used.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2" target="_new">Read more...</a></span><div class="requirement collapse" id="individualConsentURL-requirement">
+                                       <p class="alert alert-info"><a href="#individualConsentURL-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should inform potential reusers about the purposes of processing personal data
+                                          which individuals were informed of, so that reusers can comply with the Data Protection
+                                          Act and use the data consistently with that consent.
                                        </p>
                                     </div>
                                  </div>
@@ -518,10 +520,27 @@
                               				
                            </div>
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: personalDataAnonymisationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Has your anonymisation approach been audited?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> No</label><label class="radio inline"><input type="radio" value="true" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> Yes</label> <span class="label label-pilot" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="personalDataAnonymisation-requirement">
-                                    <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should engage an expert to audit your anonymisation approach to ensure that it
-                                       is appropriate for your data.
-                                    </p>
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: personalDataAnonymisationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Has your anonymisation approach been audited?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> No</label><label class="radio inline"><input type="radio" value="true" name="personalDataAnonymisation" data-bind="checked: personalDataAnonymisation"> Yes</label><span class="conditional" data-bind="visible: consentExempt() === 'false'">
+                                    						 <span class="label label-pilot" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Pilot</span>
+                                    					</span><span class="conditional" data-bind="visible: consentExempt() === 'true'">
+                                    						 <span class="label label-standard" data-toggle="collapse" data-target="#personalDataAnonymisation-requirement"><i class="icon-star icon-white"></i> Standard</span>
+                                    					</span><div class="conditional" data-bind="visible: consentExempt() === 'false'">
+                                    						
+                                    <div class="requirement collapse" id="personalDataAnonymisation-requirement">
+                                       <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should engage an expert to audit your anonymisation approach to ensure that it
+                                          is appropriate for your data.
+                                       </p>
+                                    </div>
+                                    					
+                                 </div>
+                                 <div class="conditional" data-bind="visible: consentExempt() === 'true'">
+                                    						
+                                    <div class="requirement collapse" id="personalDataAnonymisation-requirement">
+                                       <p class="alert alert-info"><a href="#personalDataAnonymisation-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should engage an expert to audit your anonymisation approach to ensure that it
+                                          is appropriate for your data.
+                                       </p>
+                                    </div>
+                                    					
                                  </div>
                               </div>
                            </div>
@@ -1241,13 +1260,15 @@
                            the data, mitigations against those risks, and to put in place processes that ensure
                            that any breaches are handled effectively.</span></p>
                   </div>
-                  <div data-bind="visible: consentExempt() !== 'true'">
-                     <p class="improvement" data-bind="visible: individualConsentURL() === ''"><a class="improvement-label" href="#individualConsentURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should inform potential reusers about the usage individuals consented to so that
-                           reusers can comply with data protection laws and use the data consistently with that
-                           consent.</span></p>
+                  <div data-bind="visible: consentExempt() === 'false'">
+                     <p class="improvement" data-bind="visible: individualConsentURL() === ''"><a class="improvement-label" href="#individualConsentURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should inform potential reusers about the purposes of processing personal data
+                           which individuals were informed of, so that reusers can comply with the Data Protection
+                           Act and use the data consistently with that consent.</span></p>
                   </div>
-                  <p class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a class="improvement-label" href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should engage an expert to audit your anonymisation approach to ensure that it
-                        is appropriate for your data.</span></p>
+                  <div data-bind="visible: consentExempt() === 'false'">
+                     <p class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a class="improvement-label" href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should engage an expert to audit your anonymisation approach to ensure that it
+                           is appropriate for your data.</span></p>
+                  </div>
                </div>
                <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                   <div data-bind="visible: timeSensitive() !== 'timestamped' &amp;&amp; timeSensitive() !== 'false'">
@@ -1365,6 +1386,10 @@
                            protection legislation, to identify risks of releasing the data, mitigations against
                            those risks, and to put in place processes that ensure that any breaches are handled
                            effectively.</span></p>
+                  </div>
+                  <div data-bind="visible: consentExempt() === 'true'">
+                     <p class="improvement" data-bind="visible: personalDataAnonymisation() === ''"><a class="improvement-label" href="#personalDataAnonymisation" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should engage an expert to audit your anonymisation approach to ensure that it
+                           is appropriate for your data.</span></p>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
@@ -2161,7 +2186,7 @@ if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirem
 
 }
 
-	if (certificate.consentExempt() !== 'true') {
+	if (certificate.consentExempt() === 'false') {
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
@@ -2173,7 +2198,16 @@ if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirem
 	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
-	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+	
+	if (certificate.consentExempt() === 'false') {
+if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+
+}
+
+	if (certificate.consentExempt() === 'true') {
+if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
   return unmetRequirements;
@@ -3401,7 +3435,7 @@ if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirem
 
 }
 
-	if (certificate.consentExempt() !== 'true') {
+	if (certificate.consentExempt() === 'false') {
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
@@ -3413,7 +3447,16 @@ if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirem
 	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
-	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+	
+	if (certificate.consentExempt() === 'false') {
+if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
+
+}
+
+	if (certificate.consentExempt() === 'true') {
+if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
 
