@@ -224,36 +224,6 @@
                            </div>
                            			
                         </div>
-                        <div class="conditional" data-bind="visible: (contentLicence() !== '' &amp;&amp; contentLicence() !== 'ogl') || (dataLicence() !== '' &amp;&amp; dataLicence() !== 'ogl')">
-                           				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherUkGovernmentStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherUkGovernmentStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are you UK central government?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherUkGovernment-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="publisherUkGovernment" data-bind="checked: publisherUkGovernment"> No</label><label class="radio inline"><input type="radio" value="true" name="publisherUkGovernment" data-bind="checked: publisherUkGovernment"> Yes</label><span class="help-block collapse" id="publisherUkGovernment-help">Central government includes all government departments and arms-length bodies. It
-                                    does not include local government. Data that is collected and maintained by central
-                                    government is owned by the Crown, which means it must be published as open data under
-                                    the Open Government Licence unless the publisher has an exemption from the Office
-                                    of Public Sector Information.</span></div>
-                           </div>
-                           				
-                           <div class="conditional" data-bind="visible: publisherUkGovernment() === 'true'">
-                              					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherOpsiExemptionStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherOpsiExemptionStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do you have a licensing exemption from OPSI?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherOpsiExemption-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="publisherOpsiExemption" data-bind="checked: publisherOpsiExemption"> No</label><label class="radio inline"><input type="radio" value="true" name="publisherOpsiExemption" data-bind="checked: publisherOpsiExemption"> Yes</label><span class="conditional" data-bind="visible: publisherOpsiExemption() === 'false'">
-                                       							
-                                       						</span><span class="help-block collapse" id="publisherOpsiExemption-help">Data that is collected and maintained by UK central government is owned by the Crown,
-                                       which means it must be published as open data under the Open Government Licence unless
-                                       the publisher has an exemption from the Office of Public Sector Information.</span><div class="conditional" data-bind="visible: publisherOpsiExemption() === 'false'">
-                                       							
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You must publish your content and data using the Open Government Licence if you are
-                                             UK central government, unless you have been granted an exemption from OPSI.
-                                          </p>
-                                       </div>
-                                       						
-                                    </div>
-                                 </div>
-                              </div>
-                              				
-                           </div>
-                           			
-                        </div>
                      </fieldset>
                      <fieldset id="ownership">
                         <legend>Ownership</legend>
@@ -1765,20 +1735,6 @@ certificate.otherContentLicenceOpenStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.publisherUkGovernment = ko.observable('');
-certificate.publisherUkGovernmentStatus = ko.computed(function () {
-  var status;
-  if (certificate.publisherUkGovernment() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-certificate.publisherOpsiExemption = ko.observable('');
-certificate.publisherOpsiExemptionStatus = ko.computed(function () {
-  var status;
-  if (certificate.publisherOpsiExemption() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
 certificate.publisherOrigin = ko.observable('');
 certificate.publisherOriginStatus = ko.computed(function () {
   var status;
@@ -2038,27 +1994,6 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-	if ((certificate.contentLicence() !== '' && certificate.contentLicence() !== 'ogl') || (certificate.dataLicence() !== '' && certificate.dataLicence() !== 'ogl')) {
-
-	if (certificate.publisherUkGovernmentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherUkGovernmentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherUkGovernmentStatus() !== 'optional') unmetRequirements[certificate.publisherUkGovernmentStatus()]++;
-	
-	if (certificate.publisherUkGovernment() === 'true') {
-
-	if (certificate.publisherOpsiExemptionStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOpsiExemptionStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOpsiExemptionStatus() !== 'optional') unmetRequirements[certificate.publisherOpsiExemptionStatus()]++;
-	
-	if (certificate.publisherOpsiExemption() === 'false') {
-if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
 
 }
 
@@ -3337,27 +3272,6 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-	if ((certificate.contentLicence() !== '' && certificate.contentLicence() !== 'ogl') || (certificate.dataLicence() !== '' && certificate.dataLicence() !== 'ogl')) {
-
-	if (certificate.publisherUkGovernmentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherUkGovernmentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherUkGovernmentStatus() !== 'optional') unmetRequirements[certificate.publisherUkGovernmentStatus()]++;
-	
-	if (certificate.publisherUkGovernment() === 'true') {
-
-	if (certificate.publisherOpsiExemptionStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOpsiExemptionStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOpsiExemptionStatus() !== 'optional') unmetRequirements[certificate.publisherOpsiExemptionStatus()]++;
-	
-	if (certificate.publisherOpsiExemption() === 'false') {
-if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
 
 }
 
