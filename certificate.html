@@ -263,9 +263,22 @@
                         </div>
                         <div class="conditional" data-bind="visible: publisherOrigin() === 'false'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data extracted or calculated from other data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#thirdPartyOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> Yes</label><span class="help-block collapse" id="thirdPartyOrigin-help">Indicate whether you have created this data based on data from elsewhere, for example
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data extracted or calculated from other data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#thirdPartyOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> Yes</label><span class="conditional" data-bind="visible: crowdsourced() === 'false'">
+                                    						
+                                    					</span><span class="help-block collapse" id="thirdPartyOrigin-help">Indicate whether you have created this data based on data from elsewhere, for example
                                     from another data source or service. If you have, you need to make sure that you can
-                                    republish the result as open data.</span></div>
+                                    republish the result as open data.</span><div class="conditional" data-bind="visible: crowdsourced() === 'false'">
+                                    						
+                                    <div class="conditional" data-bind="visible: !(thirdPartyOrigin() === 'true')">
+                                       <div class="requirement">
+                                          <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
+                                             crowd-sourced, so it must have been extracted or calculated from other data sources.
+                                          </p>
+                                       </div>
+                                    </div>
+                                    					
+                                 </div>
+                              </div>
                            </div>
                            				
                            <div class="conditional" data-bind="visible: thirdPartyOrigin() === 'true'">
@@ -404,9 +417,22 @@
                               				
                            </div>
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data crowd-sourced?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourced-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourced" data-bind="checked: crowdsourced"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourced" data-bind="checked: crowdsourced"> Yes</label><span class="help-block collapse" id="crowdsourced-help">Indicate whether this data includes information that was contributed by others. If
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data crowd-sourced?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourced-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourced" data-bind="checked: crowdsourced"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourced" data-bind="checked: crowdsourced"> Yes</label><span class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
+                                    						
+                                    					</span><span class="help-block collapse" id="crowdsourced-help">Indicate whether this data includes information that was contributed by others. If
                                     it was, you need to ensure that they granted their permission to publish their contributions
-                                    as open data.</span></div>
+                                    as open data.</span><div class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
+                                    						
+                                    <div class="conditional" data-bind="visible: !(crowdsourced() === 'true')">
+                                       <div class="requirement">
+                                          <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
+                                             extracted or calculated from other data, so it must have been crowd-sourced.
+                                          </p>
+                                       </div>
+                                    </div>
+                                    					
+                                 </div>
+                              </div>
                            </div>
                            				
                            <div class="conditional" data-bind="visible: crowdsourced() === 'true'">
@@ -1983,6 +2009,11 @@ if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']+
 	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
 	
+	if (certificate.crowdsourced() === 'false') {
+if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
+
+}
+
 	if (certificate.thirdPartyOrigin() === 'true') {
 $(certificate.sources()).each(function () {var sources = this;
 	if (sources.sourceCertificateStatus() === 'complete') unmetRequirements['answered']++;
@@ -2078,6 +2109,11 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
 	
+	if (certificate.thirdPartyOrigin() === 'false') {
+if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
+
+}
+
 	if (certificate.crowdsourced() === 'true') {
 
 	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
@@ -3213,6 +3249,11 @@ if (certificate.publisherOpsiExemption() !== 'true') unmetRequirements['basic']+
 	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
 	
+	if (certificate.crowdsourced() === 'false') {
+if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
+
+}
+
 	if (certificate.thirdPartyOrigin() === 'true') {
 $(certificate.sources()).each(function () {var sources = this;
 	if (sources.sourceCertificateStatus() === 'complete') unmetRequirements['answered']++;
@@ -3308,6 +3349,11 @@ $(certificate.sources()).each(function () {var sources = this;
 	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
 	
+	if (certificate.thirdPartyOrigin() === 'false') {
+if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
+
+}
+
 	if (certificate.crowdsourced() === 'true') {
 
 	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;

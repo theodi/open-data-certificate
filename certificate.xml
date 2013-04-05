@@ -161,6 +161,9 @@
 					<label>Was some of this data extracted or calculated from other data?</label>
 					<yesno required="required" />
 					<help>Indicate whether you have created this data based on data from elsewhere, for example from another data source or service. If you have, you need to make sure that you can republish the result as open data.</help>
+					<if test="this.crowdsourced() === 'false'">
+						<requirement test="this.thirdPartyOrigin() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.</requirement>
+					</if>
 				</question>
 				<if test="this.thirdPartyOrigin() === 'true'">
 					<repeat id="sources">
@@ -274,6 +277,9 @@
 					<label>Was some of this data crowd-sourced?</label>
 					<yesno required="required" />
 					<help>Indicate whether this data includes information that was contributed by others. If it was, you need to ensure that they granted their permission to publish their contributions as open data.</help>
+					<if test="this.thirdPartyOrigin() === 'false'">
+						<requirement test="this.crowdsourced() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced.</requirement>
+					</if>
 				</question>
 				<if test="this.crowdsourced() === 'true'">
 					<question id="crowdsourcedContent">
