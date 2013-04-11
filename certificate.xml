@@ -39,6 +39,15 @@
 			<requirement test="this.documentationUrl() !== ''">You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.</requirement>
 		</if>
 	</question>
+	<question id="releaseType">
+		<label>What kind of data release is this?</label>
+		<radioset required="required">
+			<option value="oneoff"><label>a one-off release of a single dataset</label></option>
+			<option value="collection"><label>a one-off release of a set of related datasets</label></option>
+			<option value="series"><label>ongoing release of a series of related datasets</label></option>
+			<option value="service"><label>a service or API for accessing open data</label></option>
+		</radioset>
+	</question>
 	<group id="legal" jurisdiction="UK">
 		<label>Legal Information</label>
 		<group id="licensing">
@@ -488,15 +497,6 @@
 		<group id="accuracy">
 			<label>Accuracy</label>
 			<help>providing assurance that the data is up to date</help>
-			<question id="releaseType">
-				<label>What kind of data release is this?</label>
-				<radioset required="required">
-					<option value="oneoff"><label>a one-off release of a single dataset</label></option>
-					<option value="collection"><label>a one-off release of a set of related datasets</label></option>
-					<option value="series"><label>ongoing release of a series of related datasets</label></option>
-					<option value="service"><label>a service or API for accessing open data</label></option>
-				</radioset>
-			</question>
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceType">
 					<label>Does the data underlying the API change over time?</label>

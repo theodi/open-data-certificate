@@ -122,6 +122,8 @@
                      </div>
                   </div>
                </div>
+               <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: releaseTypeStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: releaseTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What kind of data release is this?</label><div class="controls"><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="oneoff">a one-off release of a single dataset</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="collection">a one-off release of a set of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="series">ongoing release of a series of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="service">a service or API for accessing open data</label></div>
+               </div>
                <hr>
                <ul class="nav nav-tabs">
                   <li class="active"><a href="#legal" data-toggle="tab">Legal <span class="badge badge-circular badge-important" data-bind="visible: legalStatus().basic &gt; 0, text: legalStatus().basic, attr: { title: 'You have ' + legalStatus().basic + ' question' + (legalStatus().basic &gt; 1 ? 's' : '') + ' left to answer before you get to basic level' }"></span><span data-bind="visible: legalStatus().basic === 0"><span class="badge badge-circular badge-info" data-bind="visible: legalStatus().pilot &gt; 0, text: legalStatus().pilot, attr: { title: 'You have ' + legalStatus().pilot + ' question' + (legalStatus().pilot &gt; 1 ? 's' : '') + ' left to answer before you get to pilot level' }"></span><span data-bind="visible: legalStatus().pilot === 0"><span class="badge badge-circular badge-pilot" data-bind="visible: legalStatus().standard &gt; 0, text: legalStatus().standard, attr: { title: 'You have ' + legalStatus().standard + ' question' + (legalStatus().standard &gt; 1 ? 's' : '') + ' left to answer before you get to standard level' }"></span><span data-bind="visible: legalStatus().standard === 0"><span class="badge badge-circular badge-standard" data-bind="visible: legalStatus().exemplar &gt; 0, text: legalStatus().exemplar, attr: { title: 'You have ' + legalStatus().exemplar + ' question' + (legalStatus().exemplar &gt; 1 ? 's' : '') + ' left to answer before you get to exemplar level' }"></span><span class="badge badge-circular badge-exemplar" data-bind="visible: legalStatus().exemplar === 0" title="You have reached exemplar level"><i class="icon icon-white icon-star"></i></span></span></span></span></a></li>
@@ -692,8 +694,6 @@
                      </fieldset>
                      <fieldset id="accuracy">
                         <legend>Accuracy <small>providing assurance that the data is up to date</small></legend>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: releaseTypeStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: releaseTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What kind of data release is this?</label><div class="controls"><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="oneoff">a one-off release of a single dataset</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="collection">a one-off release of a set of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="series">ongoing release of a series of related datasets</label><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="service">a service or API for accessing open data</label></div>
-                        </div>
                         <div class="conditional" data-bind="visible: releaseType() === 'service'">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: serviceTypeStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data underlying the API change over time?</label><div class="controls"><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="static">no, the API simply provides easy access to unchanging data</label><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="changing">yes, the API provides instant access to changing data</label></div>
@@ -1824,6 +1824,13 @@ certificate.documentationUrlStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.releaseType = ko.observable('');
+certificate.releaseTypeStatus = ko.computed(function () {
+  var status;
+  if (certificate.releaseType() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
 certificate.copyrightURL = ko.observable('');
 certificate.copyrightURLStatus = ko.computed(function () {
   var status;
@@ -2571,13 +2578,6 @@ certificate.listings.push(listings);
 certificate.listingsRemove = function (listings) {
 certificate.listings.remove(listings);
 };
-certificate.releaseType = ko.observable('');
-certificate.releaseTypeStatus = ko.computed(function () {
-  var status;
-  if (certificate.releaseType() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
 certificate.serviceType = ko.observable('');
 certificate.serviceTypeStatus = ko.computed(function () {
   var status;
@@ -2698,10 +2698,6 @@ $(certificate.listings()).each(function () {var listings = this;
 	});
 }
 
-	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.releaseTypeStatus() !== 'optional') unmetRequirements[certificate.releaseTypeStatus()]++;
-	
 	if (certificate.releaseType() === 'service') {
 
 	if (certificate.serviceTypeStatus() === 'complete') unmetRequirements['answered']++;
@@ -3579,6 +3575,10 @@ if (!(certificate.documentationUrl() !== '')) unmetRequirements['basic']++;
 
 }
 
+	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.releaseTypeStatus() !== 'optional') unmetRequirements[certificate.releaseTypeStatus()]++;
+	
 	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.copyrightURLStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.copyrightURLStatus() !== 'optional') unmetRequirements[certificate.copyrightURLStatus()]++;
@@ -3929,10 +3929,6 @@ $(certificate.listings()).each(function () {var listings = this;
 	});
 }
 
-	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.releaseTypeStatus() !== 'optional') unmetRequirements[certificate.releaseTypeStatus()]++;
-	
 	if (certificate.releaseType() === 'service') {
 
 	if (certificate.serviceTypeStatus() === 'complete') unmetRequirements['answered']++;
