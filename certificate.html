@@ -149,10 +149,7 @@
                         </div>
                         <div class="conditional" data-bind="visible: copyrightURL() !== ''">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: copyrightStatementMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does your copyright statement include machine-readable data for:</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#copyrightStatementMetadata-help"><i class="icon-question-sign"></i></button><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#copyrightStatementMetadatalicense-help"><i class="icon-question-sign"></i></button><label class="checkbox"><input type="checkbox" name="copyrightStatementMetadataLicense" data-bind="checked: copyrightStatementMetadataLicense" value="license">licences <span class="label label-standard" data-toggle="collapse" data-target="#copyrightStatementMetadatalicense-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="copyrightStatementMetadatalicense-help">The HTML of your copyright statement should contain a link to the relevant licence,
-                                       with a <code>license</code> link relation. This enables tools to automatically work out which licence your data
-                                       is using, which can be helpful when searching for relevant data, and for our purposes
-                                       in checking whether it's open.</span><div class="requirement collapse" id="copyrightStatementMetadatalicense-requirement">
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: copyrightStatementMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does your copyright statement include machine-readable data for:</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#copyrightStatementMetadata-help"><i class="icon-question-sign"></i></button><label class="checkbox"><input type="checkbox" name="copyrightStatementMetadataLicense" data-bind="checked: copyrightStatementMetadataLicense" value="license">licences <span class="label label-standard" data-toggle="collapse" data-target="#copyrightStatementMetadatalicense-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="copyrightStatementMetadatalicense-requirement">
                                        <p class="alert alert-info"><a href="#copyrightStatementMetadatalicense-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should provide machine-readable data in your copyright statement about the licences
                                           that should be used when the data is reused so that automated tools can flag the data
                                           as open data.
@@ -248,7 +245,8 @@
                                     accessible.</span></div>
                            </div>
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: otherDataLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: otherDataLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#otherDataLicenceOpen-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="otherDataLicenceOpen" data-bind="checked: otherDataLicenceOpen"> No</label><label class="radio inline"><input type="radio" value="true" name="otherDataLicenceOpen" data-bind="checked: otherDataLicenceOpen"> Yes</label><span class="help-block collapse" id="otherDataLicenceOpen-help">Indicate whether the licence is a recognised open licence under the <a href="http://opendefinition.org/">Open Knowledge Definition</a>.<a class="pull-right" href="http://opendefinition.org" target="_new">Read more...</a></span><div class="conditional" data-bind="visible: !(otherDataLicenceOpen() === 'true')">
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: otherDataLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: otherDataLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#otherDataLicenceOpen-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="otherDataLicenceOpen" data-bind="checked: otherDataLicenceOpen"> No</label><label class="radio inline"><input type="radio" value="true" name="otherDataLicenceOpen" data-bind="checked: otherDataLicenceOpen"> Yes</label><span class="help-block collapse" id="otherDataLicenceOpen-help">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet
+                                    been assessed.<a class="pull-right" href="http://opendefinition.org/" target="_new">Read more...</a></span><div class="conditional" data-bind="visible: !(otherDataLicenceOpen() === 'true')">
                                     <div class="requirement">
                                        <p class="alert alert-error">You must publish open data under an open licence so that others can reuse it.</p>
                                     </div>
@@ -1211,15 +1209,36 @@
                                        <p class="alert alert-info"><a href="#documentationMetadatadescription-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should include a description of the data in your documentation so that reusers
                                           know what it contains.
                                        </p>
-                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataIssued" data-bind="checked: documentationMetadataIssued" value="issued">release date <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataissued-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataissued-requirement">
-                                       <p class="alert alert-info"><a href="#documentationMetadataissued-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a release date in your documentation so that reusers know how current
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataIssued" data-bind="checked: documentationMetadataIssued" value="issued">release date <span class="label label-pilot" data-toggle="collapse" data-target="#documentationMetadataissued-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="documentationMetadataissued-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadataissued-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should include a release date in your documentation so that reusers know how current
                                           it is.
                                        </p>
                                     </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataModified" data-bind="checked: documentationMetadataModified" value="modified">modification date <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatamodified-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatamodified-requirement">
                                        <p class="alert alert-info"><a href="#documentationMetadatamodified-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include the last modification date in your documentation so that reusers
                                           know whether the copy they have is up to date.
                                        </p>
-                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataLanguage" data-bind="checked: documentationMetadataLanguage" value="language">language</label><label class="checkbox"><input type="checkbox" name="documentationMetadataPublisher" data-bind="checked: documentationMetadataPublisher" value="publisher">publisher</label><label class="checkbox"><input type="checkbox" name="documentationMetadataAccrualPeriodicity" data-bind="checked: documentationMetadataAccrualPeriodicity" value="accrualPeriodicity">frequency of releases</label><label class="checkbox"><input type="checkbox" name="documentationMetadataIdentifier" data-bind="checked: documentationMetadataIdentifier" value="identifier">identifier</label><label class="checkbox"><input type="checkbox" name="documentationMetadataSpatial" data-bind="checked: documentationMetadataSpatial" value="spatial">spatial/geographical coverage <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataspatial-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataspatial-requirement">
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataAccrualPeriodicity" data-bind="checked: documentationMetadataAccrualPeriodicity" value="accrualPeriodicity">frequency of releases <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataaccrualPeriodicity-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataaccrualPeriodicity-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadataaccrualPeriodicity-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should indicate in your documentation how frequently new versions of the data
+                                          will be released so reusers can tell if it will be updated at all, and if so how frequently
+                                          they will need to check it.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataIdentifier" data-bind="checked: documentationMetadataIdentifier" value="identifier">identifier <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataidentifier-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataidentifier-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadataidentifier-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a canonical URL for the data in your documentation so that different
+                                          reusers know how to point to it consistently.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataLandingPage" data-bind="checked: documentationMetadataLandingPage" value="landingPage">landing page <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatalandingPage-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatalandingPage-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatalandingPage-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a canonical URL for the documentation itself in your documentation
+                                          so that different reusers know how to point to it consistently.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataLanguage" data-bind="checked: documentationMetadataLanguage" value="language">language <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatalanguage-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatalanguage-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatalanguage-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include the language of the data in your documentation so that reusers
+                                          know whether they will be able to understand it.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataPublisher" data-bind="checked: documentationMetadataPublisher" value="publisher">publisher <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatapublisher-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatapublisher-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatapublisher-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should indicate the publisher of the data in your documentation as reusers may
+                                          use this information to determine how much to trust the data.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataSpatial" data-bind="checked: documentationMetadataSpatial" value="spatial">spatial/geographical coverage <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadataspatial-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadataspatial-requirement">
                                        <p class="alert alert-info"><a href="#documentationMetadataspatial-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include an indication of the geographic area the data covers in your documentation
                                           so that reusers understand what is included within it.
                                        </p>
@@ -1227,7 +1246,15 @@
                                        <p class="alert alert-info"><a href="#documentationMetadatatemporal-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include the time period the data covers in your documentation so that reusers
                                           understand what is included within it.
                                        </p>
-                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataTheme" data-bind="checked: documentationMetadataTheme" value="theme">theme(s)</label><label class="checkbox"><input type="checkbox" name="documentationMetadataKeyword" data-bind="checked: documentationMetadataKeyword" value="keyword">keyword(s) or tag(s)</label><label class="checkbox"><input type="checkbox" name="documentationMetadataLandingPage" data-bind="checked: documentationMetadataLandingPage" value="landingPage">landing page</label><label class="checkbox"><input type="checkbox" name="documentationMetadataDistribution" data-bind="checked: documentationMetadataDistribution" value="distribution">distribution(s)</label></div>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataTheme" data-bind="checked: documentationMetadataTheme" value="theme">theme(s) <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatatheme-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatatheme-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatatheme-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a general theme for the data in your documentation so that reusers
+                                          know roughly what it's about.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataKeyword" data-bind="checked: documentationMetadataKeyword" value="keyword">keyword(s) or tag(s) <span class="label label-standard" data-toggle="collapse" data-target="#documentationMetadatakeyword-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="documentationMetadatakeyword-requirement">
+                                       <p class="alert alert-info"><a href="#documentationMetadatakeyword-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include keywords or tags for the data in your documentation to help reusers
+                                          to search for the data effectively.
+                                       </p>
+                                    </div></label><label class="checkbox"><input type="checkbox" name="documentationMetadataDistribution" data-bind="checked: documentationMetadataDistribution" value="distribution">distribution(s)</label></div>
                            </div>
                            				
                            <div class="conditional" data-bind="visible: documentationMetadata().distribution">
@@ -1240,15 +1267,19 @@
                                           <p class="alert alert-info"><a href="#distributionMetadatadescription-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should include a description of each distribution within the documentation so
                                              reusers know what it contains.
                                           </p>
-                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataIssued" data-bind="checked: distributionMetadataIssued" value="issued">release date <span class="label label-standard" data-toggle="collapse" data-target="#distributionMetadataissued-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="distributionMetadataissued-requirement">
-                                          <p class="alert alert-info"><a href="#distributionMetadataissued-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a release date for each distribution within the documentation so
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataIssued" data-bind="checked: distributionMetadataIssued" value="issued">release date <span class="label label-pilot" data-toggle="collapse" data-target="#distributionMetadataissued-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="distributionMetadataissued-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadataissued-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should include a release date for each distribution within the documentation so
                                              that reusers know how current it is.
                                           </p>
                                        </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataModified" data-bind="checked: distributionMetadataModified" value="modified">modification date <span class="label label-standard" data-toggle="collapse" data-target="#distributionMetadatamodified-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="distributionMetadatamodified-requirement">
                                           <p class="alert alert-info"><a href="#distributionMetadatamodified-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include the last modification date for each distribution within the documentation
                                              so reusers know whether their copy of it is up to date.
                                           </p>
-                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataLicense" data-bind="checked: distributionMetadataLicense" value="license">licence</label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#distributionMetadataaccessURL-help"><i class="icon-question-sign"></i></button><label class="checkbox"><input type="checkbox" name="distributionMetadataAccessURL" data-bind="checked: distributionMetadataAccessURL" value="accessURL">URL for accessing the data<span class="help-block collapse" id="distributionMetadataaccessURL-help">This metadata should be used when the distribution is not a download (eg if it's a
+                                       </div></label><label class="checkbox"><input type="checkbox" name="distributionMetadataLicense" data-bind="checked: distributionMetadataLicense" value="license">licence <span class="label label-standard" data-toggle="collapse" data-target="#distributionMetadatalicense-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="distributionMetadatalicense-requirement">
+                                          <p class="alert alert-info"><a href="#distributionMetadatalicense-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include a reference to the licence or waiver that applies to each distribution
+                                             within the documentation so reusers know what they can do with the data.
+                                          </p>
+                                       </div></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#distributionMetadataaccessURL-help"><i class="icon-question-sign"></i></button><label class="checkbox"><input type="checkbox" name="distributionMetadataAccessURL" data-bind="checked: distributionMetadataAccessURL" value="accessURL">URL for accessing the data<span class="help-block collapse" id="distributionMetadataaccessURL-help">This metadata should be used when the distribution is not a download (eg if it's a
                                           pointer to an API)</span></label><label class="checkbox"><input type="checkbox" name="distributionMetadataDownloadURL" data-bind="checked: distributionMetadataDownloadURL" value="downloadURL">URL for downloading the dataset</label><label class="checkbox"><input type="checkbox" name="distributionMetadataByteSize" data-bind="checked: distributionMetadataByteSize" value="byteSize">size in bytes</label><label class="checkbox"><input type="checkbox" name="distributionMetadataMediaType" data-bind="checked: distributionMetadataMediaType" value="mediaType">media type of the download</label></div>
                               </div>
                               				
@@ -1484,11 +1515,15 @@
                         how to refer to it.</span></p>
                   <p class="improvement" data-bind="visible: !documentationMetadataDescription()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should include a description of the data in your documentation so that reusers
                         know what it contains.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataIssued()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should include a release date in your documentation so that reusers know how current
+                        it is.</span></p>
                   <div data-bind="visible: documentationMetadata().distribution">
                      <p class="improvement" data-bind="visible: !distributionMetadataTitle()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should include a title for each distribution within the documentation so reusers
                            know how to refer to it.</span></p>
                      <p class="improvement" data-bind="visible: !distributionMetadataDescription()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should include a description of each distribution within the documentation so
                            reusers know what it contains.</span></p>
+                     <p class="improvement" data-bind="visible: !distributionMetadataIssued()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should include a release date for each distribution within the documentation so
+                           that reusers know how current it is.</span></p>
                   </div>
                </div>
                <div data-bind="visible: releaseType() === 'service'">
@@ -1613,19 +1648,32 @@
                <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should use URLs to identify things in the data, so that they can be easily referenced
                      and combined with other data about those things.</span></p>
                <div data-bind="visible: documentationUrl() !== ''">
-                  <p class="improvement" data-bind="visible: !documentationMetadataIssued()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a release date in your documentation so that reusers know how current
-                        it is.</span></p>
                   <p class="improvement" data-bind="visible: !documentationMetadataModified()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include the last modification date in your documentation so that reusers
                         know whether the copy they have is up to date.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataAccrualPeriodicity()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should indicate in your documentation how frequently new versions of the data
+                        will be released so reusers can tell if it will be updated at all, and if so how frequently
+                        they will need to check it.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataIdentifier()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a canonical URL for the data in your documentation so that different
+                        reusers know how to point to it consistently.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataLandingPage()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a canonical URL for the documentation itself in your documentation
+                        so that different reusers know how to point to it consistently.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataLanguage()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include the language of the data in your documentation so that reusers
+                        know whether they will be able to understand it.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataPublisher()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should indicate the publisher of the data in your documentation as reusers may
+                        use this information to determine how much to trust the data.</span></p>
                   <p class="improvement" data-bind="visible: !documentationMetadataSpatial()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include an indication of the geographic area the data covers in your documentation
                         so that reusers understand what is included within it.</span></p>
                   <p class="improvement" data-bind="visible: !documentationMetadataTemporal()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include the time period the data covers in your documentation so that reusers
                         understand what is included within it.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataTheme()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a general theme for the data in your documentation so that reusers
+                        know roughly what it's about.</span></p>
+                  <p class="improvement" data-bind="visible: !documentationMetadataKeyword()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include keywords or tags for the data in your documentation to help reusers
+                        to search for the data effectively.</span></p>
                   <div data-bind="visible: documentationMetadata().distribution">
-                     <p class="improvement" data-bind="visible: !distributionMetadataIssued()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a release date for each distribution within the documentation so
-                           that reusers know how current it is.</span></p>
                      <p class="improvement" data-bind="visible: !distributionMetadataModified()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include the last modification date for each distribution within the documentation
                            so reusers know whether their copy of it is up to date.</span></p>
+                     <p class="improvement" data-bind="visible: !distributionMetadataLicense()"><a class="improvement-label" href="#distributionMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include a reference to the licence or waiver that applies to each distribution
+                           within the documentation so reusers know what they can do with the data.</span></p>
                   </div>
                </div>
                <div data-bind="visible: vocabulary() === 'true'">
@@ -3221,30 +3269,30 @@ certificate.documentationMetadataTitle = ko.observable(false);
 certificate.documentationMetadataDescription = ko.observable(false);
 certificate.documentationMetadataIssued = ko.observable(false);
 certificate.documentationMetadataModified = ko.observable(false);
-certificate.documentationMetadataLanguage = ko.observable(false);
-certificate.documentationMetadataPublisher = ko.observable(false);
 certificate.documentationMetadataAccrualPeriodicity = ko.observable(false);
 certificate.documentationMetadataIdentifier = ko.observable(false);
+certificate.documentationMetadataLandingPage = ko.observable(false);
+certificate.documentationMetadataLanguage = ko.observable(false);
+certificate.documentationMetadataPublisher = ko.observable(false);
 certificate.documentationMetadataSpatial = ko.observable(false);
 certificate.documentationMetadataTemporal = ko.observable(false);
 certificate.documentationMetadataTheme = ko.observable(false);
 certificate.documentationMetadataKeyword = ko.observable(false);
-certificate.documentationMetadataLandingPage = ko.observable(false);
 certificate.documentationMetadataDistribution = ko.observable(false);
 certificate.documentationMetadata = ko.computed(function () {
   return {    title: certificate.documentationMetadataTitle(),
     description: certificate.documentationMetadataDescription(),
     issued: certificate.documentationMetadataIssued(),
     modified: certificate.documentationMetadataModified(),
-    language: certificate.documentationMetadataLanguage(),
-    publisher: certificate.documentationMetadataPublisher(),
     accrualPeriodicity: certificate.documentationMetadataAccrualPeriodicity(),
     identifier: certificate.documentationMetadataIdentifier(),
+    landingPage: certificate.documentationMetadataLandingPage(),
+    language: certificate.documentationMetadataLanguage(),
+    publisher: certificate.documentationMetadataPublisher(),
     spatial: certificate.documentationMetadataSpatial(),
     temporal: certificate.documentationMetadataTemporal(),
     theme: certificate.documentationMetadataTheme(),
     keyword: certificate.documentationMetadataKeyword(),
-    landingPage: certificate.documentationMetadataLandingPage(),
     distribution: certificate.documentationMetadataDistribution()
   };
   return value;
@@ -3255,15 +3303,15 @@ if (certificate.documentationMetadataTitle()) status = 'complete';
 else if (certificate.documentationMetadataDescription()) status = 'complete';
 else if (certificate.documentationMetadataIssued()) status = 'complete';
 else if (certificate.documentationMetadataModified()) status = 'complete';
-else if (certificate.documentationMetadataLanguage()) status = 'complete';
-else if (certificate.documentationMetadataPublisher()) status = 'complete';
 else if (certificate.documentationMetadataAccrualPeriodicity()) status = 'complete';
 else if (certificate.documentationMetadataIdentifier()) status = 'complete';
+else if (certificate.documentationMetadataLandingPage()) status = 'complete';
+else if (certificate.documentationMetadataLanguage()) status = 'complete';
+else if (certificate.documentationMetadataPublisher()) status = 'complete';
 else if (certificate.documentationMetadataSpatial()) status = 'complete';
 else if (certificate.documentationMetadataTemporal()) status = 'complete';
 else if (certificate.documentationMetadataTheme()) status = 'complete';
 else if (certificate.documentationMetadataKeyword()) status = 'complete';
-else if (certificate.documentationMetadataLandingPage()) status = 'complete';
 else if (certificate.documentationMetadataDistribution()) status = 'complete';
   else status = 'optional';
   return status;
@@ -3392,10 +3440,17 @@ certificate.socialStatus = ko.computed(function () {
 	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
 	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
-if (!certificate.documentationMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataIssued()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataAccrualPeriodicity()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataIdentifier()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataLandingPage()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataLanguage()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataPublisher()) unmetRequirements['standard']++; 
 if (!certificate.documentationMetadataSpatial()) unmetRequirements['standard']++; 
 if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataTheme()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataKeyword()) unmetRequirements['standard']++; 
 
 	if (certificate.documentationMetadata().distribution) {
 
@@ -3404,8 +3459,9 @@ if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']+
 	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
 	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
-if (!certificate.distributionMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataIssued()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++; 
 
 }
 
@@ -4230,10 +4286,17 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
 	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
-if (!certificate.documentationMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataIssued()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataAccrualPeriodicity()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataIdentifier()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataLandingPage()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataLanguage()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataPublisher()) unmetRequirements['standard']++; 
 if (!certificate.documentationMetadataSpatial()) unmetRequirements['standard']++; 
 if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataTheme()) unmetRequirements['standard']++; 
+if (!certificate.documentationMetadataKeyword()) unmetRequirements['standard']++; 
 
 	if (certificate.documentationMetadata().distribution) {
 
@@ -4242,8 +4305,9 @@ if (!certificate.documentationMetadataTemporal()) unmetRequirements['standard']+
 	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
 	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
-if (!certificate.distributionMetadataIssued()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataIssued()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataModified()) unmetRequirements['standard']++; 
+if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++; 
 
 }
 

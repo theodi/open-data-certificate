@@ -999,23 +999,31 @@
 						</option>
 						<option value="issued">
 							<label>release date</label>
-							<requirement level="standard">You should include a release date in your documentation so that reusers know how current it is.</requirement>
+							<requirement level="pilot">You should include a release date in your documentation so that reusers know how current it is.</requirement>
 						</option>
 						<option value="modified">
 							<label>modification date</label>
 							<requirement level="standard">You should include the last modification date in your documentation so that reusers know whether the copy they have is up to date.</requirement>
 						</option>
-						<option value="language">
-							<label>language</label>
-						</option>
-						<option value="publisher">
-							<label>publisher</label>
-						</option>
 						<option value="accrualPeriodicity">
 							<label>frequency of releases</label>
+							<requirement level="standard">You should indicate in your documentation how frequently new versions of the data will be released so reusers can tell if it will be updated at all, and if so how frequently they will need to check it.</requirement>
 						</option>
 						<option value="identifier">
 							<label>identifier</label>
+							<requirement level="standard">You should include a canonical URL for the data in your documentation so that different reusers know how to point to it consistently.</requirement>
+						</option>
+						<option value="landingPage">
+							<label>landing page</label>
+							<requirement level="standard">You should include a canonical URL for the documentation itself in your documentation so that different reusers know how to point to it consistently.</requirement>
+						</option>
+						<option value="language">
+							<label>language</label>
+							<requirement level="standard">You should include the language of the data in your documentation so that reusers know whether they will be able to understand it.</requirement>
+						</option>
+						<option value="publisher">
+							<label>publisher</label>
+							<requirement level="standard">You should indicate the publisher of the data in your documentation as reusers may use this information to determine how much to trust the data.</requirement>
 						</option>
 						<option value="spatial">
 							<label>spatial/geographical coverage</label>
@@ -1027,12 +1035,11 @@
 						</option>
 						<option value="theme">
 							<label>theme(s)</label>
+							<requirement level="standard">You should include a general theme for the data in your documentation so that reusers know roughly what it's about.</requirement>
 						</option>
 						<option value="keyword">
 							<label>keyword(s) or tag(s)</label>
-						</option>
-						<option value="landingPage">
-							<label>landing page</label>
+							<requirement level="standard">You should include keywords or tags for the data in your documentation to help reusers to search for the data effectively.</requirement>
 						</option>
 						<option value="distribution">
 							<label>distribution(s)</label>
@@ -1053,7 +1060,7 @@
 							</option>
 							<option value="issued">
 								<label>release date</label>
-								<requirement level="standard">You should include a release date for each distribution within the documentation so that reusers know how current it is.</requirement>
+								<requirement level="pilot">You should include a release date for each distribution within the documentation so that reusers know how current it is.</requirement>
 							</option>
 							<option value="modified">
 								<label>modification date</label>
@@ -1061,6 +1068,7 @@
 							</option>
 							<option value="license">
 								<label>licence</label>
+								<requirement level="standard">You should include a reference to the licence or waiver that applies to each distribution within the documentation so reusers know what they can do with the data.</requirement>
 							</option>
 							<option value="accessURL">
 								<label>URL for accessing the data</label>
