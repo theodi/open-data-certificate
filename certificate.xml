@@ -494,9 +494,9 @@
 				<requirement level="standard">You should ensure that reusers can easily find your data from your organisation's home page.</requirement>
 			</question>
 			<question id="listed">
-				<label>Is the data listed somewhere, alongside similar data?</label>
+				<label>Is the data listed somewhere, alongside data from the wider sector?</label>
 				<yesno />
-				<help>One way of meeting this requirement would be to register the data within a data catalog.</help>
+				<help>You can make your data easier to find by making sure that it is listed within relevant data catalogs and by ensuring it turns up in relevant search results.</help>
 				<requirement level="standard">You should ensure that reusers can locate your data through searching for it in locations that list available data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
@@ -505,7 +505,7 @@
 					<question id="listing">
 						<label>Where is the data listed?</label>
 						<input type="url" required="required" placeholder="Listing URL" />
-						<help>Give a URL that leads to a listing of this data alongside similar data.</help>
+						<help>Give a URL that leads to a listing of this data alongside similar data.  For example, give a URL for a search that includes this data's listing on data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN (if it's marine data), or the URL of a search on Google or Bing.</help>
 					</question>
 				</repeat>
 			</if>
