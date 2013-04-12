@@ -83,6 +83,7 @@
 	  	<div class="container">
 	  		<section>
 	  			<p class="lead">All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.</p>
+	  			<p class="alert">The questions here cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data. They cannot be used to assess your compliance with either legislation or with other policies that may apply in your sector.</p>
 	  			<div class="accordion" id="main-help-accordion">
 	  				<div class="accordion-group">
 	  					<div class="accordion-heading">
@@ -636,9 +637,24 @@
 
 <xsl:template match="placeholder">
 	<xsl:variable name="field" as="element(question)?" select="key('fields', @ref)" />
-	<span class="placeholder" data-bind="text: {@ref}{if ($field/input/@type = 'url') then concat('attr: { href: ', @ref, ' }') else ''}" data-placeholder="{.}">
-		<xsl:apply-templates />
-	</span>
+	<xsl:variable name="urlField" as="element(question)?" select="key('fields', concat(@ref, 'Url'))" />
+	<xsl:choose>
+		<xsl:when test="$field/input/@type = 'url'">
+			<a class="placeholder" data-bind="text: {@ref}, attr: {{ href: {@ref} }}" data-placeholder="{.}">
+				<xsl:apply-templates />
+			</a>
+		</xsl:when>
+		<xsl:when test="exists($urlField)">
+			<a class="placeholder" data-bind="text: {@ref}, attr: {{ href: {@ref}Url }}" data-placeholder="{.}">
+				<xsl:apply-templates />
+			</a>
+		</xsl:when>
+		<xsl:otherwise>
+			<span class="placeholder" data-bind="text: {@ref}" data-placeholder="{.}">
+				<xsl:apply-templates />
+			</span>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <xsl:template match="node()" mode="viewModel unmetRequirements statusCalculation requirementList" priority="-0.1">

@@ -425,13 +425,22 @@
 			<label>Privacy</label>
 			<help>ensuring that you protect people's privacy</help>
 			<question id="dataPersonal">
-				<label>Does the data contain personal information?</label>
+				<label>Could the source of this data be personal data under the Data Protection Act?</label>
 				<radioset required="pilot">
-					<option value="not-personal"><label>no, the data doesn't contain anything about people at all</label></option>
-					<option value="personal"><label>yes, the data summarises or contains information about people or their activity</label></option>
+					<option value="not-personal">
+						<label>no, the data could never be personal data as it is not about people or their activity</label>
+					</option>
+					<option value="personal">
+						<label>yes, the source of this data is classified as personal data within your organisation</label>
+						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.</help>
+					</option>
+					<option value="possibly">
+						<label>yes, the source of this data could be classified as personal data if held by other people who have access to additional information</label>
+						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. Even if your organisation doesn't have other information that could be used to identify the individuals in the source of this data, it may be that other people do have access to such information.</help>
+					</option>
 				</radioset>
 			</question>
-			<if test="this.dataPersonal() === 'personal'">
+			<if test="this.dataPersonal() === 'personal' || this.dataPersonal() === 'possibly'">
 				<question id="consentExempt">
 					<label>Is this data exempt from the non-disclosure provisions of the Data Protection Act?</label>
 					<yesno required="pilot" />
@@ -444,10 +453,17 @@
 						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.</help>
 						<requirement level="pilot">You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
 					</question>
+					<if test="this.privacyImpactAssessmentUrl() !== ''">
+						<question id="piaAudited">
+							<label>Has your privacy impact assessment been independently audited?</label>
+							<yesno />
+							<requirement level="standard">You should have your privacy impact assessment independently audited to ensure that it has been carried out correctly.</requirement>
+						</question>
+					</if>
 					<question id="individualConsentURL">
-						<label>Where is the privacy notice for individuals published?</label>
+						<label>Where is the privacy notice you provide to affected individuals published?</label>
 						<input type="url" placeholder="Privacy Notice URL" />
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">Unless you are exempt from the non-disclosure provisions of the Data Protection Act, you are required to give individuals privacy notices when collecting the data, which should specify the purposes for which that data will be used.</help>
+						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">Unless you are exempt from the non-disclosure provisions of the Data Protection Act, you are required to give individuals privacy notices when collecting data about them, which should specify the purposes for which that data will be used.</help>
 						<requirement level="pilot">You should inform potential reusers about the purposes of processing personal data which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.</requirement>
 					</question>
 					<question id="personalDataAnonymisation">
@@ -1148,10 +1164,10 @@
 					<requirement level="standard">You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.</requirement>
 				</question>
 			</if>
-			<if test="this.dataPersonal() === 'personal'">
-				<question id="dataProtectionContact">
-					<label>Where do you provide contact details for confidentiality concerns?</label>
-					<input type="url" placeholder="Confidentiality Contact Details" />
+			<if test="this.dataPersonal() === 'personal' || this.dataPersonal() === 'possibly'">
+				<question id="dataProtectionEmail">
+					<label>What's the contact email address for confidentiality concerns?</label>
+					<input type="email" placeholder="Confidentiality Contact Email Address" />
 					<requirement level="pilot">You should provide a contact email address so that reusers with concerns about disclosure of personal details within the data can get in touch.</requirement>
 				</question>
 			</if>
@@ -1169,7 +1185,8 @@
 	</group>
 	<certificate>
 		<p>
-			<placeholder ref="dataTitle">This dataset</placeholder> has been certified as <placeholder ref="certificateLevelLabel"/> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
+			<placeholder ref="dataTitle">This dataset</placeholder> has been certified as <placeholder ref="certificateLevelLabel"/> Open Data.
 		</p>
+		<p class="alert">This certificate has been awarded based on the answers provided by <placeholder ref="publisher">its publisher</placeholder>. The awarded level is based on the assumption that these answers are accurate. The answers have not been audited by the Open Data Institute.</p>
 	</certificate>
 </questionnaire>

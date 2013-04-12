@@ -42,6 +42,10 @@
             <p class="lead">All open data is good, but some is better than others. This tool gives you a certificate
                that will help people understand the open data you are publishing.
             </p>
+            <p class="alert">The questions here cover the areas that the Open Data Institute examines when we look
+               at how organisations are publishing open data. They cannot be used to assess your
+               compliance with either legislation or with other policies that may apply in your sector.
+            </p>
             <div class="accordion" id="main-help-accordion">
                <div class="accordion-group">
                   <div class="accordion-heading"><a href="#main-help" class="accordion-toggle" data-parent="#main-help-accordion" data-toggle="collapse">Help</a></div>
@@ -594,9 +598,16 @@
                      </fieldset>
                      <fieldset id="privacy">
                         <legend>Privacy <small>ensuring that you protect people's privacy</small></legend>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: dataPersonalStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data contain personal information?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">no, the data doesn't contain anything about people at all</label><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="personal">yes, the data summarises or contains information about people or their activity</label></div>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: dataPersonalStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataPersonalStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Could the source of this data be personal data under the Data Protection Act?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">no, the data could never be personal data as it is not about people or their activity</label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#dataPersonalpersonal-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="personal">yes, the source of this data is classified as personal data within your organisation<span class="help-block collapse" id="dataPersonalpersonal-help">Personal data is data that relates to a living individual who can be identified from
+                                    the data or from the data in combination with other information. If your organisation
+                                    has other information that can be used to identify the individuals in the source of
+                                    this data, then it must be classified as personal data within your organisation.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions" target="_new">Read more...</a></span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#dataPersonalpossibly-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="possibly">yes, the source of this data could be classified as personal data if held by other
+                                    people who have access to additional information<span class="help-block collapse" id="dataPersonalpossibly-help">Personal data is data that relates to a living individual who can be identified from
+                                    the data or from the data in combination with other information. Even if your organisation
+                                    doesn't have other information that could be used to identify the individuals in the
+                                    source of this data, it may be that other people do have access to such information.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions" target="_new">Read more...</a></span></label></div>
                         </div>
-                        <div class="conditional" data-bind="visible: dataPersonal() === 'personal'">
+                        <div class="conditional" data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: consentExemptStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: consentExemptStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is this data exempt from the non-disclosure provisions of the Data Protection Act?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#consentExempt-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="consentExempt" data-bind="checked: consentExempt"> No</label><label class="radio inline"><input type="radio" value="true" name="consentExempt" data-bind="checked: consentExempt"> Yes</label><span class="help-block collapse" id="consentExempt-help">There are exemptions from the non-disclosure provisions of the Data Protection Act,
                                     which mean that organisations do not have to comply with the normal non-disclosure
@@ -615,9 +626,21 @@
                                  </div>
                               </div>
                               					
-                              <div class="control-group"><label class="control-label" for="individualConsentURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: individualConsentURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the privacy notice for individuals published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#individualConsentURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="individualConsentURL" name="individualConsentURL" data-bind="value: individualConsentURL, valueUpdate: 'afterkeydown'" placeholder="Privacy Notice URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#individualConsentURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="individualConsentURL-help">Unless you are exempt from the non-disclosure provisions of the Data Protection Act,
-                                       you are required to give individuals privacy notices when collecting the data, which
-                                       should specify the purposes for which that data will be used.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2" target="_new">Read more...</a></span><div class="requirement collapse" id="individualConsentURL-requirement">
+                              <div class="conditional" data-bind="visible: privacyImpactAssessmentUrl() !== ''">
+                                 						
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: piaAuditedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Has your privacy impact assessment been independently audited?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="piaAudited" data-bind="checked: piaAudited"> No</label><label class="radio inline"><input type="radio" value="true" name="piaAudited" data-bind="checked: piaAudited"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#piaAudited-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="piaAudited-requirement">
+                                          <p class="alert alert-info"><a href="#piaAudited-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should have your privacy impact assessment independently audited to ensure that
+                                             it has been carried out correctly.
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 					
+                              </div>
+                              					
+                              <div class="control-group"><label class="control-label" for="individualConsentURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: individualConsentURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the privacy notice you provide to affected individuals published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#individualConsentURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="individualConsentURL" name="individualConsentURL" data-bind="value: individualConsentURL, valueUpdate: 'afterkeydown'" placeholder="Privacy Notice URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#individualConsentURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="individualConsentURL-help">Unless you are exempt from the non-disclosure provisions of the Data Protection Act,
+                                       you are required to give individuals privacy notices when collecting data about them,
+                                       which should specify the purposes for which that data will be used.<a class="pull-right" href="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2" target="_new">Read more...</a></span><div class="requirement collapse" id="individualConsentURL-requirement">
                                        <p class="alert alert-info"><a href="#individualConsentURL-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should inform potential reusers about the purposes of processing personal data
                                           which individuals were informed of, so that reusers can comply with the Data Protection
                                           Act and use the data consistently with that consent.
@@ -1365,10 +1388,10 @@
                            </div>
                            			
                         </div>
-                        <div class="conditional" data-bind="visible: dataPersonal() === 'personal'">
+                        <div class="conditional" data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
                            				
-                           <div class="control-group"><label class="control-label" for="dataProtectionContact"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataProtectionContactStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you provide contact details for confidentiality concerns?</label><div class="controls"><input type="url" class="span5" id="dataProtectionContact" name="dataProtectionContact" data-bind="value: dataProtectionContact, valueUpdate: 'afterkeydown'" placeholder="Confidentiality Contact Details"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionContact-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dataProtectionContact-requirement">
-                                    <p class="alert alert-info"><a href="#dataProtectionContact-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide a contact email address so that reusers with concerns about disclosure
+                           <div class="control-group"><label class="control-label" for="dataProtectionEmail"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataProtectionEmailStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the contact email address for confidentiality concerns?</label><div class="controls"><input type="email" class="span5" id="dataProtectionEmail" name="dataProtectionEmail" data-bind="value: dataProtectionEmail, valueUpdate: 'afterkeydown'" placeholder="Confidentiality Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dataProtectionEmail-requirement">
+                                    <p class="alert alert-info"><a href="#dataProtectionEmail-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should provide a contact email address so that reusers with concerns about disclosure
                                        of personal details within the data can get in touch.
                                     </p>
                                  </div>
@@ -1403,8 +1426,12 @@
                </h1>
                		
                <p>
-                  			<span class="placeholder" data-bind="text: dataTitle" data-placeholder="This dataset">This dataset</span> has been certified as <span class="placeholder" data-bind="text: certificateLevelLabel" data-placeholder=""></span> Open Data by the <a href="http://www.theodi.org/">Open Data Institute</a>.
+                  			<span class="placeholder" data-bind="text: dataTitle" data-placeholder="This dataset">This dataset</span> has been certified as <span class="placeholder" data-bind="text: certificateLevelLabel" data-placeholder=""></span> Open Data.
                   		
+               </p>
+               		
+               <p class="alert">This certificate has been awarded based on the answers provided by <a class="placeholder" data-bind="text: publisher, attr: { href: publisherUrl }" data-placeholder="its publisher">its publisher</a>. The awarded level is based on the assumption that these answers are accurate. The
+                  answers have not been audited by the Open Data Institute.
                </p>
                	
             </div>
@@ -1426,7 +1453,7 @@
                <p class="improvement" data-bind="visible: copyrightURL() === ''"><a class="improvement-label" href="#copyrightURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a page that states your copyright over the data and provides details
                      of any attribution that people should use so that reusers understand how they can
                      reuse it.</span></p>
-               <div data-bind="visible: dataPersonal() === 'personal'">
+               <div data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
                   <div data-bind="visible: consentExempt() === 'false'">
                      <p class="improvement" data-bind="visible: privacyImpactAssessmentUrl() === ''"><a class="improvement-label" href="#privacyImpactAssessmentUrl" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should carry out a a privacy impact assessment to identify risks of releasing
                            the data, mitigations against those risks, and to put in place processes that ensure
@@ -1532,8 +1559,8 @@
                </div>
                <p class="improvement" data-bind="visible: contactEmail() === ''"><a class="improvement-label" href="#contactEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a contact email address so that people can get in touch with you about
                      any questions about the data.</span></p>
-               <div data-bind="visible: dataPersonal() === 'personal'">
-                  <p class="improvement" data-bind="visible: dataProtectionContact() === ''"><a class="improvement-label" href="#dataProtectionContact" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should provide a contact email address so that reusers with concerns about disclosure
+               <div data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
+                  <p class="improvement" data-bind="visible: dataProtectionEmail() === ''"><a class="improvement-label" href="#dataProtectionEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should provide a contact email address so that reusers with concerns about disclosure
                         of personal details within the data can get in touch.</span></p>
                </div>
             </div>
@@ -1552,7 +1579,13 @@
                      </div>
                   </div>
                </div>
-               <div data-bind="visible: dataPersonal() === 'personal'">
+               <div data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
+                  <div data-bind="visible: consentExempt() === 'false'">
+                     <div data-bind="visible: privacyImpactAssessmentUrl() !== ''">
+                        <p class="improvement" data-bind="visible: piaAudited() === ''"><a class="improvement-label" href="#piaAudited" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should have your privacy impact assessment independently audited to ensure that
+                              it has been carried out correctly.</span></p>
+                     </div>
+                  </div>
                   <div data-bind="visible: consentExempt() === 'true'">
                      <p class="improvement" data-bind="visible: privacyImpactAssessment() === ''"><a class="improvement-label" href="#privacyImpactAssessment" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should carry out a a privacy impact assessment to identify risks of releasing
                            the data, mitigations against those risks, and to put in place processes that ensure
@@ -2188,6 +2221,13 @@ certificate.privacyImpactAssessmentUrlStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.piaAudited = ko.observable('');
+certificate.piaAuditedStatus = ko.computed(function () {
+  var status;
+  if (certificate.piaAudited() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
 certificate.individualConsentURL = ko.observable('');
 certificate.individualConsentURLStatus = ko.computed(function () {
   var status;
@@ -2509,7 +2549,7 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.dataPersonalStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dataPersonalStatus() !== 'optional') unmetRequirements[certificate.dataPersonalStatus()]++;
 	
-	if (certificate.dataPersonal() === 'personal') {
+	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
 	if (certificate.consentExemptStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
@@ -2521,6 +2561,15 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
 	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.privacyImpactAssessmentUrl() !== '') {
+
+	if (certificate.piaAuditedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.piaAuditedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.piaAuditedStatus() !== 'optional') unmetRequirements[certificate.piaAuditedStatus()]++;
+	if (certificate.piaAudited() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
@@ -3411,10 +3460,10 @@ certificate.correctionDiscoveryStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.dataProtectionContact = ko.observable('');
-certificate.dataProtectionContactStatus = ko.computed(function () {
+certificate.dataProtectionEmail = ko.observable('');
+certificate.dataProtectionEmailStatus = ko.computed(function () {
   var status;
-  if (certificate.dataProtectionContact() === '') status = 'optional';
+  if (certificate.dataProtectionEmail() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
@@ -3522,12 +3571,12 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 }
 
-	if (certificate.dataPersonal() === 'personal') {
+	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.dataProtectionContactStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataProtectionContactStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataProtectionContactStatus() !== 'optional') unmetRequirements[certificate.dataProtectionContactStatus()]++;
-	if (certificate.dataProtectionContactStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.dataProtectionEmailStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataProtectionEmailStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataProtectionEmailStatus() !== 'optional') unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
@@ -3875,7 +3924,7 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.dataPersonalStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dataPersonalStatus() !== 'optional') unmetRequirements[certificate.dataPersonalStatus()]++;
 	
-	if (certificate.dataPersonal() === 'personal') {
+	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
 	if (certificate.consentExemptStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
@@ -3887,6 +3936,15 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
 	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.privacyImpactAssessmentUrl() !== '') {
+
+	if (certificate.piaAuditedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.piaAuditedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.piaAuditedStatus() !== 'optional') unmetRequirements[certificate.piaAuditedStatus()]++;
+	if (certificate.piaAudited() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
@@ -4368,12 +4426,12 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 }
 
-	if (certificate.dataPersonal() === 'personal') {
+	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.dataProtectionContactStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataProtectionContactStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataProtectionContactStatus() !== 'optional') unmetRequirements[certificate.dataProtectionContactStatus()]++;
-	if (certificate.dataProtectionContactStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.dataProtectionEmailStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.dataProtectionEmailStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.dataProtectionEmailStatus() !== 'optional') unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
