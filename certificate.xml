@@ -547,6 +547,7 @@
 			<question id="linkedTo">
 				<label>Is documentation about the data findable within three clicks of your organisation's home page?</label>
 				<yesno />
+				<help>The documentation about the data that should be findable is the page that you have given as the Documentation URL. This should be findable by clicking on links from the home page of your organisation (not through searching).</help>
 				<requirement level="standard">You should ensure that reusers can easily find your data from your organisation's home page.</requirement>
 			</question>
 			<question id="listed">
@@ -561,7 +562,7 @@
 					<question id="listing">
 						<label>Where is the data listed?</label>
 						<input type="url" required="required" placeholder="Listing URL" />
-						<help>Give a URL that leads to a listing of this data alongside similar data.  For example, give a URL for a search that includes this data's listing on data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN (if it's marine data), or the URL of a search on Google or Bing.</help>
+						<help>Give a URL that leads to a listing of this data alongside data from the wider sector.  For example, give a URL for a search that includes this data's listing on data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN (if it's marine data), or the URL of a search on Google or Bing.</help>
 					</question>
 				</repeat>
 			</if>
@@ -575,9 +576,11 @@
 					<radioset required="pilot">
 						<option value="static">
 							<label>no, the API simply provides easy access to unchanging data</label>
+							<help>Some APIs are created by processing a single unchanging dataset: the purpose of the API is to make accessing this data easier, particularly when there is lots of that data.</help>
 						</option>
 						<option value="changing">
 							<label>yes, the API provides instant access to changing data</label>
+							<help>Some APIs are created over changeable data, and the primary purpose of the API is to provide up-to-date access to this data.</help>
 						</option>
 					</radioset>
 				</question>
@@ -588,7 +591,7 @@
 					<radioset>
 						<option value="true">
 							<label>yes, this data will go out of date over time</label>
-							<help>For example, a dataaset that contains the current location of bus stops will go out of date over time.</help>
+							<help>For example, a dataaset that contains the current location of bus stops will go out of date over time, as some bus stops are moved or new bus stops created.</help>
 						</option>
 						<option value="timestamped">
 							<label>yes, this data will go out of date over time but the data is timestamped</label>
@@ -597,7 +600,7 @@
 						</option>
 						<option value="false">
 							<label>no, this data does not contain any time-sensitive information</label>
-							<help>For example, a dataset that contains the results of an experiment will not go out of date.</help>
+							<help>For example, a dataset that contains the results of an experiment will not go out of date because the data accurately reports the results of the experiment.</help>
 							<requirement level="standard">You should publish updates to data that goes out of date so that the information you provide does not go stale.</requirement>
 						</option>
 					</radioset>
@@ -607,6 +610,7 @@
 				<question id="frequentChanges">
 					<label>Does the data you capture change on at least a daily basis?</label>
 					<yesno required="pilot" />
+					<help>Indicate whether you create or gather new data continuously, such that the underlying data changes most days. We ask about this because when data changes frequently it also goes out of date quickly, so we need to check that the releases that you are making are also made quickly and frequently.</help>
 				</question>			
 				<if test="this.frequentChanges() === 'true'">
 					<question id="seriesType">
@@ -614,11 +618,11 @@
 						<radioset required="exemplar">
 							<option value="dumps">
 								<label>regular copies of the complete database</label>
-								<help>Select this option if you are publishing copies of the contents of your database at regular intervals.</help>
+								<help>Select this option if you are publishing copies of the contents of your database at regular intervals. For example, you would choose this option if you had a database of bus stops and created a new, updated, version of that dataset every day. We ask this because when you are creating database dumps, it is often useful for reusers to be able to access a feed of the changes to the database so that they can keep their copies up to date.</help>
 							</option>
 							<option value="aggregate">
 								<label>regular aggregates of changing data</label>
-								<help>Select this option if you are creating aggregate information at regular intervals, perhaps because the underlying data cannot be released as open data.</help>
+								<help>Select this option if you are creating new datasets at regular intervals. This might be because you are creating aggregates because the underlying data cannot be released as open data. Or it might be that you only publish the data that is new since the last publication.</help>
 							</option>
 						</radioset>
 					</question>
@@ -626,7 +630,7 @@
 						<question id="changeFeed">
 							<label>Is a feed of changes made available?</label>
 							<yesno />
-							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries.</help>
+							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries. A feed might be in a format such as RSS or Atom, or a custom data format.</help>
 							<requirement level="exemplar">You should provide a feed of changes in your data so that it's easy for reusers to keep their copies up to date.</requirement>
 						</question>
 					</if>
@@ -649,6 +653,7 @@
 								<requirement level="exemplar">You should create a new dataset release every day so that reusers can access up-to-date information.</requirement>
 							</option>
 						</radioset>
+						<help>We ask about the frequency with which you publish new datasets in the series because this determines how out of date the data that you are making available will get before reusers can get an update to their data.</help>
 					</question>
 				</if>
 				<question id="seriesPublicationDelay">
@@ -676,43 +681,46 @@
 					</radioset>
 				</question>
 			</if>
-			<if test="this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'changing'">
+			<if test="this.releaseType() === 'service'">
 				<question id="provideDumps">
 					<label>Do you also provide dumps of the dataset?</label>
 					<yesno />
-					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset.</help>
+					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset. Being able to access a dump of the whole dataset enables different kinds of analyses than API access.</help>
 					<requirement level="standard">You should enable reusers to download the entire dataset so that they can analyse it in its entirety.</requirement>
 				</question>
-				<if test="this.provideDumps() === 'true'">
-					<question id="dumpFrequency">
-						<label>How frequently do you create a new dump?</label>
-						<radioset>
-							<option value="rarely">
-								<label>less frequently than once a month</label>
-							</option>
-							<option value="monthly">
-								<label>at least every month</label>
-								<requirement level="pilot">You should create a new database dump every month, so that new reusers can get hold of an up-to-date dump.</requirement>
-							</option>
-							<option value="weekly">
-								<label>within a week of any change</label>
-								<requirement level="standard">You should create a new database dump within a week of any change, so that new reusers do not have long to wait for an up-to-date dump.</requirement>
-							</option>
-							<option value="daily">
-								<label>within a day of any change</label>
-								<requirement level="exemplar">You should create a new database dump within a day of any change, so that new reusers can easily get hold of an up-to-date dump.</requirement>
-							</option>
-						</radioset>
+				<if test="this.serviceType() === 'changing'">
+					<if test="this.provideDumps() === 'true'">
+						<question id="dumpFrequency">
+							<label>How frequently do you create a new dump?</label>
+							<radioset>
+								<option value="rarely">
+									<label>less frequently than once a month</label>
+								</option>
+								<option value="monthly">
+									<label>at least every month</label>
+									<requirement level="pilot">You should create a new database dump every month, so that new reusers can get hold of an up-to-date dump.</requirement>
+								</option>
+								<option value="weekly">
+									<label>within a week of any change</label>
+									<requirement level="standard">You should create a new database dump within a week of any change, so that new reusers do not have long to wait for an up-to-date dump.</requirement>
+								</option>
+								<option value="daily">
+									<label>within a day of any change</label>
+									<requirement level="exemplar">You should create a new database dump within a day of any change, so that new reusers can easily get hold of an up-to-date dump.</requirement>
+								</option>
+							</radioset>
+							<help>Providing new database dumps within a short period ensures that new developers can get started with up-to-date data whenever they start looking at the data.</help>
+						</question>
+					</if>
+				</if>
+				<if test="this.timeSensitive() !== 'true'">
+					<question id="corrected">
+						<label>Will this data be corrected if it contains errors?</label>
+						<yesno />
+						<help>Indicate whether the data will be corrected in cases where errors are discovered within the data. We ask this because it is good practice to correct data that is revealed to contain errors (especially as you should be using this data yourself), and because if you do correct the data you need to provide additional support for reusers who will need to be informed of these corrections.</help>
+						<requirement level="standard">You should correct data that is found to contain errors so that all users benefit from improvements in accuracy.</requirement>
 					</question>
 				</if>
-			</if>
-			<if test="this.timeSensitive() !== 'true'">
-				<question id="corrected">
-					<label>Will this data be corrected if it contains errors?</label>
-					<yesno />
-					<help>Indicate whether the data will be corrected in cases where errors are discovered within the data.</help>
-					<requirement level="standard">You should correct data that is found to contain errors so that all users benefit from improvements in accuracy.</requirement>
-				</question>
 			</if>
 		</group>
 		<group id="quality">
@@ -721,11 +729,13 @@
 			<question id="qualityUrl">
 				<label>Where are known issues with the quality of the data documented?</label>
 				<input type="url" placeholder="Quality Issues URL" />
+				<help>There are usually areas within any non-trivial data where there are known quality problems. For example, maybe the equipment that collected the data malfunctioned for a day, or the data was migrated between two systems and errors crept in during that migration. Documenting these helps reusers to have a better understanding of the data that they are using.</help>
 				<requirement level="standard">You should document any known issues with the quality of the data so that reusers can understand how much they can rely on the data.</requirement>
 			</question>
 			<question id="qualityControlUrl">
 				<label>Where is your quality control process described?</label>
 				<input type="url" placeholder="Quality Control Process Description URL" />
+				<help>A quality control process checks the quality of the data on an ongoing basis, either by hand or automatically, or through a combination of techniques. Having a publicly available description of your quality control process reassures reusers that you are checking the quality of the data that you are making available, and helps them to identify places that could be improved.</help>
 				<requirement level="exemplar">You should document your quality control process so that reusers can understand how much they can rely on the data.</requirement>
 			</question>
 		</group>
@@ -752,6 +762,7 @@
 							<requirement level="exemplar">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
 					</radioset>
+					<help>You will probably have in place a service-level agreement (SLA) with the service provider for the servers that you are using to host the data. These SLAs should indicate guaranteed up-time for the servers, and hence the availability of your data.</help>
 				</question>
 			</if>
 			<question id="onGoingAvailability">

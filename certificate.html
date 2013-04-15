@@ -776,7 +776,9 @@
                      <fieldset id="findability">
                         <legend>Findability <small>helping reusers to locate the data</small></legend>
                         <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: linkedToStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is documentation about the data findable within three clicks of your organisation's
-                              home page?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="linkedTo" data-bind="checked: linkedTo"> No</label><label class="radio inline"><input type="radio" value="true" name="linkedTo" data-bind="checked: linkedTo"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#linkedTo-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="linkedTo-requirement">
+                              home page?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#linkedTo-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="linkedTo" data-bind="checked: linkedTo"> No</label><label class="radio inline"><input type="radio" value="true" name="linkedTo" data-bind="checked: linkedTo"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#linkedTo-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="linkedTo-help">The documentation about the data that should be findable is the page that you have
+                                 given as the Documentation URL. This should be findable by clicking on links from
+                                 the home page of your organisation (not through searching).</span><div class="requirement collapse" id="linkedTo-requirement">
                                  <p class="alert alert-info"><a href="#linkedTo-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should ensure that reusers can easily find your data from your organisation's
                                     home page.
                                  </p>
@@ -798,10 +800,10 @@
                                  <div class="control-group">
                                     <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.listingsRemove, disable: $parent.listings().length === 1"><i class="icon-remove icon-white"></i> Delete Listing</button></div>
                                  </div>
-                                 <div class="control-group"><label class="control-label" data-bind="attr: { for: 'listing-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: listingStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: listingStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the data listed?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#listing-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: listing, valueUpdate: 'afterkeydown', attr: { id: 'listing-' + $index(), name: 'listing-' + $index() }" placeholder="Listing URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'listing-' + $index() + '-help' }">Give a URL that leads to a listing of this data alongside similar data.  For example,
-                                          give a URL for a search that includes this data's listing on data.gov.uk (if it's
-                                          UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN (if it's
-                                          marine data), or the URL of a search on Google or Bing.</span></div>
+                                 <div class="control-group"><label class="control-label" data-bind="attr: { for: 'listing-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: listingStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: listingStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the data listed?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#listing-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: listing, valueUpdate: 'afterkeydown', attr: { id: 'listing-' + $index(), name: 'listing-' + $index() }" placeholder="Listing URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'listing-' + $index() + '-help' }">Give a URL that leads to a listing of this data alongside data from the wider sector.
+                                          For example, give a URL for a search that includes this data's listing on data.gov.uk
+                                          (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN
+                                          (if it's marine data), or the URL of a search on Google or Bing.</span></div>
                                  </div>
                               </div>
                            </div>
@@ -815,20 +817,23 @@
                         <legend>Accuracy <small>providing assurance that the data is up to date</small></legend>
                         <div class="conditional" data-bind="visible: releaseType() === 'service'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: serviceTypeStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data underlying the API change over time?</label><div class="controls"><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="static">no, the API simply provides easy access to unchanging data</label><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="changing">yes, the API provides instant access to changing data</label></div>
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: serviceTypeStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data underlying the API change over time?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#serviceTypestatic-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="static">no, the API simply provides easy access to unchanging data<span class="help-block collapse" id="serviceTypestatic-help">Some APIs are created by processing a single unchanging dataset: the purpose of the
+                                       API is to make accessing this data easier, particularly when there is lots of that
+                                       data.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#serviceTypechanging-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="changing">yes, the API provides instant access to changing data<span class="help-block collapse" id="serviceTypechanging-help">Some APIs are created over changeable data, and the primary purpose of the API is
+                                       to provide up-to-date access to this data.</span></label></div>
                            </div>
                            			
                         </div>
                         <div class="conditional" data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: timeSensitiveStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Will this data go out of date?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#timeSensitivetrue-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="timeSensitive" data-bind="checked: timeSensitive" value="true">yes, this data will go out of date over time<span class="help-block collapse" id="timeSensitivetrue-help">For example, a dataaset that contains the current location of bus stops will go out
-                                       of date over time.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#timeSensitivetimestamped-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="timeSensitive" data-bind="checked: timeSensitive" value="timestamped">yes, this data will go out of date over time but the data is timestamped <span class="label label-pilot" data-toggle="collapse" data-target="#timeSensitivetimestamped-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="timeSensitivetimestamped-help">For example, demography statistics usually include a timestamp to indicate the time
+                                       of date over time, as some bus stops are moved or new bus stops created.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#timeSensitivetimestamped-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="timeSensitive" data-bind="checked: timeSensitive" value="timestamped">yes, this data will go out of date over time but the data is timestamped <span class="label label-pilot" data-toggle="collapse" data-target="#timeSensitivetimestamped-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="timeSensitivetimestamped-help">For example, demography statistics usually include a timestamp to indicate the time
                                        at which the statistics were relevant.</span><div class="requirement collapse" id="timeSensitivetimestamped-requirement">
                                        <p class="alert alert-info"><a href="#timeSensitivetimestamped-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should include timestamps in your data when releasing data that will go out of
                                           date over time, so that reusers know the time period it relates to.
                                        </p>
                                     </div></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#timeSensitivefalse-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="timeSensitive" data-bind="checked: timeSensitive" value="false">no, this data does not contain any time-sensitive information <span class="label label-standard" data-toggle="collapse" data-target="#timeSensitivefalse-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="timeSensitivefalse-help">For example, a dataset that contains the results of an experiment will not go out
-                                       of date.</span><div class="requirement collapse" id="timeSensitivefalse-requirement">
+                                       of date because the data accurately reports the results of the experiment.</span><div class="requirement collapse" id="timeSensitivefalse-requirement">
                                        <p class="alert alert-info"><a href="#timeSensitivefalse-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should publish updates to data that goes out of date so that the information you
                                           provide does not go stale.
                                        </p>
@@ -838,20 +843,30 @@
                         </div>
                         <div class="conditional" data-bind="visible: releaseType() === 'series'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: frequentChangesStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: frequentChangesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data you capture change on at least a daily basis?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="frequentChanges" data-bind="checked: frequentChanges"> No</label><label class="radio inline"><input type="radio" value="true" name="frequentChanges" data-bind="checked: frequentChanges"> Yes</label></div>
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-pilot pull-left" data-bind="visible: frequentChangesStatus() === 'pilot'"><i class="icon icon-white icon-remove" title="Required for pilot certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: frequentChangesStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the data you capture change on at least a daily basis?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#frequentChanges-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="frequentChanges" data-bind="checked: frequentChanges"> No</label><label class="radio inline"><input type="radio" value="true" name="frequentChanges" data-bind="checked: frequentChanges"> Yes</label><span class="help-block collapse" id="frequentChanges-help">Indicate whether you create or gather new data continuously, such that the underlying
+                                    data changes most days. We ask about this because when data changes frequently it
+                                    also goes out of date quickly, so we need to check that the releases that you are
+                                    making are also made quickly and frequently.</span></div>
                            </div>			
                            				
                            <div class="conditional" data-bind="visible: frequentChanges() === 'true'">
                               					
                               <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-exemplar pull-left" data-bind="visible: seriesTypeStatus() === 'exemplar'"><i class="icon icon-white icon-remove" title="Required for exemplar certificate"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: seriesTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What type of dataset series is this?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypedumps-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="dumps">regular copies of the complete database<span class="help-block collapse" id="seriesTypedumps-help">Select this option if you are publishing copies of the contents of your database at
-                                          regular intervals.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypeaggregate-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="aggregate">regular aggregates of changing data<span class="help-block collapse" id="seriesTypeaggregate-help">Select this option if you are creating aggregate information at regular intervals,
-                                          perhaps because the underlying data cannot be released as open data.</span></label></div>
+                                          regular intervals. For example, you would choose this option if you had a database
+                                          of bus stops and created a new, updated, version of that dataset every day. We ask
+                                          this because when you are creating database dumps, it is often useful for reusers
+                                          to be able to access a feed of the changes to the database so that they can keep their
+                                          copies up to date.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#seriesTypeaggregate-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="seriesType" data-bind="checked: seriesType" value="aggregate">regular aggregates of changing data<span class="help-block collapse" id="seriesTypeaggregate-help">Select this option if you are creating new datasets at regular intervals. This might
+                                          be because you are creating aggregates because the underlying data cannot be released
+                                          as open data. Or it might be that you only publish the data that is new since the
+                                          last publication.</span></label></div>
                               </div>
                               					
                               <div class="conditional" data-bind="visible: seriesType() === 'dumps'">
                                  						
                                  <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: changeFeedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is a feed of changes made available?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#changeFeed-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="changeFeed" data-bind="checked: changeFeed"> No</label><label class="radio inline"><input type="radio" value="true" name="changeFeed" data-bind="checked: changeFeed"> Yes</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#changeFeed-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="changeFeed-help">Indicate whether you make available a feed of the changes that occur to the data that
-                                          you capture, such as new entries or amendments to existing entries.</span><div class="requirement collapse" id="changeFeed-requirement">
+                                          you capture, such as new entries or amendments to existing entries. A feed might be
+                                          in a format such as RSS or Atom, or a custom data format.</span><div class="requirement collapse" id="changeFeed-requirement">
                                           <p class="alert alert-info"><a href="#changeFeed-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should provide a feed of changes in your data so that it's easy for reusers to
                                              keep their copies up to date.
                                           </p>
@@ -861,7 +876,7 @@
                                  					
                               </div>
                               					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: frequentSeriesPublicationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> How frequently do you create a new release?</label><div class="controls"><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="rarely">less frequently than once a month</label><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="monthly">at least every month <span class="label label-pilot" data-toggle="collapse" data-target="#frequentSeriesPublicationmonthly-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="frequentSeriesPublicationmonthly-requirement">
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: frequentSeriesPublicationStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> How frequently do you create a new release?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#frequentSeriesPublication-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="rarely">less frequently than once a month</label><label class="radio"><input type="radio" name="frequentSeriesPublication" data-bind="checked: frequentSeriesPublication" value="monthly">at least every month <span class="label label-pilot" data-toggle="collapse" data-target="#frequentSeriesPublicationmonthly-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="frequentSeriesPublicationmonthly-requirement">
                                           <p class="alert alert-info"><a href="#frequentSeriesPublicationmonthly-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should create a new dataset release every month so that reusers can access up-to-date
                                              information.
                                           </p>
@@ -873,7 +888,9 @@
                                           <p class="alert alert-info"><a href="#frequentSeriesPublicationdaily-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should create a new dataset release every day so that reusers can access up-to-date
                                              information.
                                           </p>
-                                       </div></label></div>
+                                       </div></label><span class="help-block collapse" id="frequentSeriesPublication-help">We ask about the frequency with which you publish new datasets in the series because
+                                       this determines how out of date the data that you are making available will get before
+                                       reusers can get an update to their data.</span></div>
                               </div>
                               				
                            </div>
@@ -898,10 +915,11 @@
                            </div>
                            			
                         </div>
-                        <div class="conditional" data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
+                        <div class="conditional" data-bind="visible: releaseType() === 'service'">
                            				
                            <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: provideDumpsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do you also provide dumps of the dataset?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#provideDumps-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="provideDumps" data-bind="checked: provideDumps"> No</label><label class="radio inline"><input type="radio" value="true" name="provideDumps" data-bind="checked: provideDumps"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#provideDumps-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="provideDumps-help">A dump is an extract of the data into a static file that developers can download to
-                                    get hold of the whole dataset.</span><div class="requirement collapse" id="provideDumps-requirement">
+                                    get hold of the whole dataset. Being able to access a dump of the whole dataset enables
+                                    different kinds of analyses than API access.</span><div class="requirement collapse" id="provideDumps-requirement">
                                     <p class="alert alert-info"><a href="#provideDumps-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should enable reusers to download the entire dataset so that they can analyse
                                        it in its entirety.
                                     </p>
@@ -909,49 +927,66 @@
                               </div>
                            </div>
                            				
-                           <div class="conditional" data-bind="visible: provideDumps() === 'true'">
+                           <div class="conditional" data-bind="visible: serviceType() === 'changing'">
                               					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dumpFrequencyStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> How frequently do you create a new dump?</label><div class="controls"><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="rarely">less frequently than once a month</label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="monthly">at least every month <span class="label label-pilot" data-toggle="collapse" data-target="#dumpFrequencymonthly-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dumpFrequencymonthly-requirement">
-                                          <p class="alert alert-info"><a href="#dumpFrequencymonthly-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should create a new database dump every month, so that new reusers can get hold
-                                             of an up-to-date dump.
-                                          </p>
-                                       </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="weekly">within a week of any change <span class="label label-standard" data-toggle="collapse" data-target="#dumpFrequencyweekly-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="dumpFrequencyweekly-requirement">
-                                          <p class="alert alert-info"><a href="#dumpFrequencyweekly-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should create a new database dump within a week of any change, so that new reusers
-                                             do not have long to wait for an up-to-date dump.
-                                          </p>
-                                       </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="daily">within a day of any change <span class="label label-exemplar" data-toggle="collapse" data-target="#dumpFrequencydaily-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="dumpFrequencydaily-requirement">
-                                          <p class="alert alert-info"><a href="#dumpFrequencydaily-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should create a new database dump within a day of any change, so that new reusers
-                                             can easily get hold of an up-to-date dump.
-                                          </p>
-                                       </div></label></div>
+                              <div class="conditional" data-bind="visible: provideDumps() === 'true'">
+                                 						
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: dumpFrequencyStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> How frequently do you create a new dump?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#dumpFrequency-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="rarely">less frequently than once a month</label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="monthly">at least every month <span class="label label-pilot" data-toggle="collapse" data-target="#dumpFrequencymonthly-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="dumpFrequencymonthly-requirement">
+                                             <p class="alert alert-info"><a href="#dumpFrequencymonthly-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should create a new database dump every month, so that new reusers can get hold
+                                                of an up-to-date dump.
+                                             </p>
+                                          </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="weekly">within a week of any change <span class="label label-standard" data-toggle="collapse" data-target="#dumpFrequencyweekly-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="dumpFrequencyweekly-requirement">
+                                             <p class="alert alert-info"><a href="#dumpFrequencyweekly-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should create a new database dump within a week of any change, so that new reusers
+                                                do not have long to wait for an up-to-date dump.
+                                             </p>
+                                          </div></label><label class="radio"><input type="radio" name="dumpFrequency" data-bind="checked: dumpFrequency" value="daily">within a day of any change <span class="label label-exemplar" data-toggle="collapse" data-target="#dumpFrequencydaily-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="dumpFrequencydaily-requirement">
+                                             <p class="alert alert-info"><a href="#dumpFrequencydaily-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should create a new database dump within a day of any change, so that new reusers
+                                                can easily get hold of an up-to-date dump.
+                                             </p>
+                                          </div></label><span class="help-block collapse" id="dumpFrequency-help">Providing new database dumps within a short period ensures that new developers can
+                                          get started with up-to-date data whenever they start looking at the data.</span></div>
+                                 </div>
+                                 					
                               </div>
                               				
                            </div>
-                           			
-                        </div>
-                        <div class="conditional" data-bind="visible: timeSensitive() !== 'true'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Will this data be corrected if it contains errors?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#corrected-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="corrected" data-bind="checked: corrected"> No</label><label class="radio inline"><input type="radio" value="true" name="corrected" data-bind="checked: corrected"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#corrected-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="corrected-help">Indicate whether the data will be corrected in cases where errors are discovered within
-                                    the data.</span><div class="requirement collapse" id="corrected-requirement">
-                                    <p class="alert alert-info"><a href="#corrected-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should correct data that is found to contain errors so that all users benefit
-                                       from improvements in accuracy.
-                                    </p>
+                           <div class="conditional" data-bind="visible: timeSensitive() !== 'true'">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: correctedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Will this data be corrected if it contains errors?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#corrected-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="corrected" data-bind="checked: corrected"> No</label><label class="radio inline"><input type="radio" value="true" name="corrected" data-bind="checked: corrected"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#corrected-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="corrected-help">Indicate whether the data will be corrected in cases where errors are discovered within
+                                       the data. We ask this because it is good practice to correct data that is revealed
+                                       to contain errors (especially as you should be using this data yourself), and because
+                                       if you do correct the data you need to provide additional support for reusers who
+                                       will need to be informed of these corrections.</span><div class="requirement collapse" id="corrected-requirement">
+                                       <p class="alert alert-info"><a href="#corrected-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should correct data that is found to contain errors so that all users benefit
+                                          from improvements in accuracy.
+                                       </p>
+                                    </div>
                                  </div>
                               </div>
+                              				
                            </div>
                            			
                         </div>
                      </fieldset>
                      <fieldset id="quality">
                         <legend>Quality <small>helping reusers to understand where there might be problems in the data</small></legend>
-                        <div class="control-group"><label class="control-label" for="qualityUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are known issues with the quality of the data documented?</label><div class="controls"><input type="url" class="span5" id="qualityUrl" name="qualityUrl" data-bind="value: qualityUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Issues URL"> <span class="label label-standard" data-toggle="collapse" data-target="#qualityUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="requirement collapse" id="qualityUrl-requirement">
+                        <div class="control-group"><label class="control-label" for="qualityUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where are known issues with the quality of the data documented?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#qualityUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="qualityUrl" name="qualityUrl" data-bind="value: qualityUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Issues URL"> <span class="label label-standard" data-toggle="collapse" data-target="#qualityUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="qualityUrl-help">There are usually areas within any non-trivial data where there are known quality
+                                 problems. For example, maybe the equipment that collected the data malfunctioned for
+                                 a day, or the data was migrated between two systems and errors crept in during that
+                                 migration. Documenting these helps reusers to have a better understanding of the data
+                                 that they are using.</span><div class="requirement collapse" id="qualityUrl-requirement">
                                  <p class="alert alert-info"><a href="#qualityUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should document any known issues with the quality of the data so that reusers
                                     can understand how much they can rely on the data.
                                  </p>
                               </div>
                            </div>
                         </div>
-                        <div class="control-group"><label class="control-label" for="qualityControlUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityControlUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your quality control process described?</label><div class="controls"><input type="url" class="span5" id="qualityControlUrl" name="qualityControlUrl" data-bind="value: qualityControlUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Description URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#qualityControlUrl-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="requirement collapse" id="qualityControlUrl-requirement">
+                        <div class="control-group"><label class="control-label" for="qualityControlUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: qualityControlUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your quality control process described?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#qualityControlUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="qualityControlUrl" name="qualityControlUrl" data-bind="value: qualityControlUrl, valueUpdate: 'afterkeydown'" placeholder="Quality Control Process Description URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#qualityControlUrl-requirement"><i class="icon-star icon-white"></i> Exemplar</span><span class="help-block collapse" id="qualityControlUrl-help">A quality control process checks the quality of the data on an ongoing basis, either
+                                 by hand or automatically, or through a combination of techniques. Having a publicly
+                                 available description of your quality control process reassures reusers that you are
+                                 checking the quality of the data that you are making available, and helps them to
+                                 identify places that could be improved.</span><div class="requirement collapse" id="qualityControlUrl-requirement">
                                  <p class="alert alert-info"><a href="#qualityControlUrl-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should document your quality control process so that reusers can understand how
                                     much they can rely on the data.
                                  </p>
@@ -963,7 +998,7 @@
                         <legend>Guarantees <small>helping reusers to understand how much to rely on the data</small></legend>
                         <div class="conditional" data-bind="visible: releaseType() === 'service'">
                            				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceAvailabilityStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What is the guaranteed availability of the service?</label><div class="controls"><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="minimal">there are minimal guarantees about the availability of the service</label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="99%">at least 99% availability <span class="label label-pilot" data-toggle="collapse" data-target="#serviceAvailability99%-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="serviceAvailability99%-requirement">
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: serviceAvailabilityStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What is the guaranteed availability of the service?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#serviceAvailability-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="minimal">there are minimal guarantees about the availability of the service</label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" value="99%">at least 99% availability <span class="label label-pilot" data-toggle="collapse" data-target="#serviceAvailability99%-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="requirement collapse" id="serviceAvailability99%-requirement">
                                        <p class="alert alert-info"><a href="#serviceAvailability99%-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should guarantee at least 99% availability (less than 3.65 days downtime/year)
                                           of the service so that reusers know they can rely on it.
                                        </p>
@@ -975,7 +1010,9 @@
                                        <p class="alert alert-info"><a href="#serviceAvailability99.999%-requirement"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a> You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year)
                                           of the service so that reusers know they can rely on it.
                                        </p>
-                                    </div></label></div>
+                                    </div></label><span class="help-block collapse" id="serviceAvailability-help">You will probably have in place a service-level agreement (SLA) with the service provider
+                                    for the servers that you are using to host the data. These SLAs should indicate guaranteed
+                                    up-time for the servers, and hence the availability of your data.</span></div>
                            </div>
                            			
                         </div>
@@ -1579,11 +1616,13 @@
                            the gap between releases so that reusers can access up-to-date information.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
-                  <div data-bind="visible: provideDumps() === 'true'">
-                     <div data-bind="visible: dumpFrequency() !== 'monthly' &amp;&amp; dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
-                        <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should create a new database dump every month, so that new reusers can get hold
-                              of an up-to-date dump.</span></p>
+               <div data-bind="visible: releaseType() === 'service'">
+                  <div data-bind="visible: serviceType() === 'changing'">
+                     <div data-bind="visible: provideDumps() === 'true'">
+                        <div data-bind="visible: dumpFrequency() !== 'monthly' &amp;&amp; dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
+                           <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should create a new database dump every month, so that new reusers can get hold
+                                 of an up-to-date dump.</span></p>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -1710,19 +1749,21 @@
                            half the gap between releases so that reusers can access up-to-date information.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
+               <div data-bind="visible: releaseType() === 'service'">
                   <p class="improvement" data-bind="visible: provideDumps() === ''"><a class="improvement-label" href="#provideDumps" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should enable reusers to download the entire dataset so that they can analyse
                         it in its entirety.</span></p>
-                  <div data-bind="visible: provideDumps() === 'true'">
-                     <div data-bind="visible: dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
-                        <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should create a new database dump within a week of any change, so that new reusers
-                              do not have long to wait for an up-to-date dump.</span></p>
+                  <div data-bind="visible: serviceType() === 'changing'">
+                     <div data-bind="visible: provideDumps() === 'true'">
+                        <div data-bind="visible: dumpFrequency() !== 'weekly' &amp;&amp; dumpFrequency() !== 'daily'">
+                           <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should create a new database dump within a week of any change, so that new reusers
+                                 do not have long to wait for an up-to-date dump.</span></p>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div data-bind="visible: timeSensitive() !== 'true'">
-                  <p class="improvement" data-bind="visible: corrected() === ''"><a class="improvement-label" href="#corrected" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should correct data that is found to contain errors so that all users benefit
-                        from improvements in accuracy.</span></p>
+                  <div data-bind="visible: timeSensitive() !== 'true'">
+                     <p class="improvement" data-bind="visible: corrected() === ''"><a class="improvement-label" href="#corrected" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should correct data that is found to contain errors so that all users benefit
+                           from improvements in accuracy.</span></p>
+                  </div>
                </div>
                <p class="improvement" data-bind="visible: qualityUrl() === ''"><a class="improvement-label" href="#qualityUrl" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should document any known issues with the quality of the data so that reusers
                      can understand how much they can rely on the data.</span></p>
@@ -1848,11 +1889,13 @@
                            reusers can access up-to-date information.</span></p>
                   </div>
                </div>
-               <div data-bind="visible: releaseType() === 'service' &amp;&amp; serviceType() === 'changing'">
-                  <div data-bind="visible: provideDumps() === 'true'">
-                     <div data-bind="visible: dumpFrequency() !== 'daily'">
-                        <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should create a new database dump within a day of any change, so that new reusers
-                              can easily get hold of an up-to-date dump.</span></p>
+               <div data-bind="visible: releaseType() === 'service'">
+                  <div data-bind="visible: serviceType() === 'changing'">
+                     <div data-bind="visible: provideDumps() === 'true'">
+                        <div data-bind="visible: dumpFrequency() !== 'daily'">
+                           <p class="improvement"><a class="improvement-label" href="#dumpFrequency" data-toggle="tab" data-target="#practical"><span class="label label-exemplar"><i class="icon-star icon-white"></i>Exemplar</span></a><span class="improvement-desc">You should create a new database dump within a day of any change, so that new reusers
+                                 can easily get hold of an up-to-date dump.</span></p>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -2903,12 +2946,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.releaseType() === 'service' && certificate.serviceType() === 'changing') {
+	if (certificate.releaseType() === 'service') {
 
 	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
 	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.serviceType() === 'changing') {
 
 	if (certificate.provideDumps() === 'true') {
 
@@ -2930,6 +2975,8 @@ $(certificate.listings()).each(function () {var listings = this;
 	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
 	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
 
@@ -4143,12 +4190,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.releaseType() === 'service' && certificate.serviceType() === 'changing') {
+	if (certificate.releaseType() === 'service') {
 
 	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
 	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.serviceType() === 'changing') {
 
 	if (certificate.provideDumps() === 'true') {
 
@@ -4170,6 +4219,8 @@ $(certificate.listings()).each(function () {var listings = this;
 	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
 	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
 
