@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>OpenDataCertificate</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ODI Open Data Certificate</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="alpha-banner" class="alert alert-danger">
+      <p>
+        This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add <a href="https://github.com/theodi/open-data-certificate/issues">issues on github</a> or contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
+      </p>
+    </div>
+    <header id="header">
+       <div class="container">
+          <div class="branding"><a id="logo" rel="home" title="Home" href="http://theodi.org/"><img width="131" height="54" class="b_png" alt="Home" src="http://theodi.org/sites/default/files/logo.png"></a><hgroup id="name-and-slogan">
+                <h1 id="site-name"><a rel="home" title="Open Data Institute" href="http://theodi.org/"><img width="326" height="30" class="b_png" alt="Open Data Institute" src="http://theodi.org/sites/default/files/logo_a.png"></a></h1>
+                <h2 id="site-slogan">Knowledge for everyone</h2>
+             </hgroup>
+          </div>
+          <nav>
+             <div id="mainnav" class="navbar navbar-inverse">
+                <div class="navbar-inner"><a class="brand" href="#">Open Data Certificate</a><ul class="nav">
+                      <li class="active"><a href="#questionnaire">Questionnaire</a></li>
+                      <li class="divider-vertical"></li>
+                      <li data-bind="css: { disabled: certificateLevel() === 'none' }"><a href="#certificate">Certificate</a></li>
+                      <li class="divider-vertical"></li>
+                      <li data-bind="css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'exemplar' }"><a href="#improvements">Improvements</a></li>
+                      <li class="divider-vertical"></li>
+                      <li><a href="index.html">About</a></li>
+                   </ul><span class="label pull-right" style="margin-top: 10px;">0.4</span></div>
+             </div>
+          </nav>
+       </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
 </html>
+
