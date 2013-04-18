@@ -1,4 +1,4 @@
-== ODI Data Certificate
+## ODI Data Certificate
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
 
