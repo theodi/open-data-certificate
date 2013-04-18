@@ -81,20 +81,10 @@
                <div class="page-header">
                   <h2>Questionnaire</h2>
                </div>
-               <div class="control-group"><label class="control-label" for="dataTitle"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataTitleStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataTitleStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What should we call this data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#dataTitle-help"><i class="icon-question-sign"></i></button><input type="text" class="span5" id="dataTitle" name="dataTitle" data-bind="value: dataTitle, valueUpdate: 'afterkeydown'" placeholder="Data Title" required="required"><span class="help-block collapse" id="dataTitle-help">This is the title that we will give to the open data within the Open Data Certificate.
+               <div class="control-group"><label class="control-label" for="dataTitle"><span class="badge badge-circular badge-important pull-left" data-bind="visible: dataTitleStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: dataTitleStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's a good title for this data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#dataTitle-help"><i class="icon-question-sign"></i></button><input type="text" class="span5" id="dataTitle" name="dataTitle" data-bind="value: dataTitle, valueUpdate: 'afterkeydown'" placeholder="Data Title" required="required"><span class="help-block collapse" id="dataTitle-help">This is the title that we will give to the open data within the Open Data Certificate.
                         It will probably be the same as what you call the data elsewhere, but you should aim
                         to be unambiguous, and consider the fact that there might be certificates for lots
                         of similar open data.</span></div>
-               </div>
-               <div class="control-group"><label class="control-label" for="publisher"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the name of your organisation?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisher-help"><i class="icon-question-sign"></i></button><input type="text" class="span5" id="publisher" name="publisher" data-bind="value: publisher, valueUpdate: 'afterkeydown'" placeholder="Data Curator" required="required"><span class="help-block collapse" id="publisher-help">This is the organisation that the open data will be associated with within the Open
-                        Data Certificate. It should be the organisation that manages the creation of and curates
-                        the open data. The data might actually be published by someone else, such as central
-                        government or a third-party contractor.</span></div>
-               </div>
-               <div class="control-group"><label class="control-label" for="publisherUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the website for your organisation?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="publisherUrl" name="publisherUrl" data-bind="value: publisherUrl, valueUpdate: 'afterkeydown'" placeholder="Curator URL"><span class="help-block collapse" id="publisherUrl-help">This should be the main website for your organisation or group. We use this to provide
-                        a link through to your organisation and to help us gather together all the open data
-                        curated by your organisation even if different people spell your organisation's name
-                        differently.</span></div>
                </div>
                <div class="control-group"><label class="control-label" for="documentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: documentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the data described?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#documentationUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="documentationUrl" name="documentationUrl" data-bind="value: documentationUrl, valueUpdate: 'afterkeydown'" placeholder="Documentation URL"><span class="conditional" data-bind="visible: releaseType() !== 'collection'">
                         			 <span class="label label-pilot" data-toggle="collapse" data-target="#documentationUrl-requirement"><i class="icon-star icon-white"></i> Pilot</span>
@@ -126,6 +116,16 @@
                      </div>
                   </div>
                </div>
+               <div class="control-group"><label class="control-label" for="publisher"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the name of the curating organisation?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisher-help"><i class="icon-question-sign"></i></button><input type="text" class="span5" id="publisher" name="publisher" data-bind="value: publisher, valueUpdate: 'afterkeydown'" placeholder="Data Curator" required="required"><span class="help-block collapse" id="publisher-help">This is the organisation that the open data will be associated with the Open Data
+                        Certificate. It should be the organisation that manages the creation of and curates
+                        the open data. The data might actually be published by someone else, such as central
+                        government or a third-party contractor.</span></div>
+               </div>
+               <div class="control-group"><label class="control-label" for="publisherUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the website for the curating organisation?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="publisherUrl" name="publisherUrl" data-bind="value: publisherUrl, valueUpdate: 'afterkeydown'" placeholder="Curator URL"><span class="help-block collapse" id="publisherUrl-help">This should be the main website for your organisation or group. We use this to provide
+                        a link through to your organisation and to help us gather together all the open data
+                        curated by your organisation even if different people spell your organisation's name
+                        differently.</span></div>
+               </div>
                <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: releaseTypeStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: releaseTypeStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What kind of data release is this?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#releaseTypeoneoff-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="oneoff">a one-off release of a single dataset<span class="help-block collapse" id="releaseTypeoneoff-help">Choose this option if the open data release is the publication of a single file, such
                            as a spreadsheet, with no intention to publish similar files in the future.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#releaseTypecollection-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="releaseType" data-bind="checked: releaseType" value="collection">a one-off release of a set of related datasets<span class="help-block collapse" id="releaseTypecollection-help">Choose this option if the open data release is the publication of a collection of
                            related files, such as several spreadsheets created from the same underlying data,
@@ -144,6 +144,146 @@
                   <div class="tab-pane active" id="legal">
                      <p class="alert alert-warning">This version of the certificate is designed to be used within the UK. Please <a href="mailto:certificate@theodi.org">contact us</a> if you want to use the certificate in other countries.
                      </p>
+                     <fieldset id="ownership">
+                        <legend>Rights <small>ensuring that you have the right to publish the data</small></legend>
+                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherRightsStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherRightsStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Do you have the rights to publish the data as open data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherRights-help"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" value="yes">yes, you have the right to publish the data as open data</label><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" value="no">no, you don't have the right to publish the data as open data</label><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" value="unsure">you don't know whether you have the right to publish the data as open data</label><span class="conditional" data-bind="visible: publisherRights() === 'no'">
+                                 					
+                                 				</span><span class="help-block collapse" id="publisherRights-help">Unless all the data was originally created or gathered by your organisation, you might
+                                 not have the right to republish it. We ask this question to check that you have considered
+                                 the ownership of the data. If you aren't sure, we will ask further questions about
+                                 the source of the data you're publishing to find out.</span><div class="conditional" data-bind="visible: publisherRights() === 'no'">
+                                 					
+                                 <div class="requirement">
+                                    <p class="alert alert-error">You must have the right to publish data that you publish.</p>
+                                 </div>
+                                 				
+                              </div>
+                           </div>
+                        </div>
+                        <div class="conditional" data-bind="visible: publisherRights() === 'yes' || publisherRights() === 'unsure'">
+                           				
+                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was <em>all</em> this data originally created or gathered by you?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="publisherOrigin" data-bind="checked: publisherOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="publisherOrigin" data-bind="checked: publisherOrigin"> Yes</label><span class="help-block collapse" id="publisherOrigin-help">If not all the data was originally created or gathered by you then you might not have
+                                    the right to republish it. Answer 'no' to this question if the data includes information
+                                    that was sourced from outside your organisation, or if it includes data that other
+                                    individuals or organisations have contributed. We ask this question to work out whether
+                                    we have to ask about other organisations or people who might own some of the data.</span></div>
+                           </div>
+                           			
+                        </div>
+                        <div class="conditional" data-bind="visible: publisherRights() === 'unsure'">
+                           				
+                           <div class="conditional" data-bind="visible: publisherOrigin() === 'false'">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data extracted or calculated from other data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#thirdPartyOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> Yes</label><span class="conditional" data-bind="visible: crowdsourced() === 'false'">
+                                       							
+                                       						</span><span class="help-block collapse" id="thirdPartyOrigin-help">You might have extracted data from another dataset, for example through an online
+                                       service. Or you might have downloaded someone else's dataset and analysed it to create
+                                       the data. In both these cases, we need to check that there are no legal barriers to
+                                       you republishing the results of this data.</span><div class="conditional" data-bind="visible: crowdsourced() === 'false'">
+                                       							
+                                       <div class="conditional" data-bind="visible: !(thirdPartyOrigin() === 'true')">
+                                          <div class="requirement">
+                                             <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
+                                                crowd-sourced, so it must have been extracted or calculated from other data sources.
+                                             </p>
+                                          </div>
+                                       </div>
+                                       						
+                                    </div>
+                                 </div>
+                              </div>
+                              					
+                              <div class="conditional" data-bind="visible: thirdPartyOrigin() === 'true'">
+                                 						
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Are <em>all</em> the other data sources published as open data by their owners?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#thirdPartyOpen-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="thirdPartyOpen" data-bind="checked: thirdPartyOpen"> No</label><label class="radio inline"><input type="radio" value="true" name="thirdPartyOpen" data-bind="checked: thirdPartyOpen"> Yes</label><span class="conditional" data-bind="visible: thirdPartyOpen() === 'false'">
+                                          								
+                                          							</span><span class="help-block collapse" id="thirdPartyOpen-help">Open data is data that has been published under an open data licence or where the
+                                          rights over that data have expired or been waived. If your data is created based on
+                                          other data that is published as open data, then you can republish it. If your data
+                                          incorporates data that is not published as open data, you will need to get legal advice
+                                          to ensure that you can reuse that data and republish the results.</span><div class="conditional" data-bind="visible: thirdPartyOpen() === 'false'">
+                                          								
+                                          <div class="requirement">
+                                             <p class="alert alert-error">You should get legal advice to ensure that you have the right to republish this data.</p>
+                                          </div>
+                                          							
+                                       </div>
+                                    </div>
+                                 </div>
+                                 					
+                              </div>
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data crowd-sourced?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourced-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourced" data-bind="checked: crowdsourced"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourced" data-bind="checked: crowdsourced"> Yes</label><span class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
+                                       							
+                                       						</span><span class="help-block collapse" id="crowdsourced-help">Crowd-sourcing involves collating data that is contributed by people operating outside
+                                       your organisation. We ask about crowd-sourcing because if the data includes information
+                                       that was contributed by others, you need to ensure that they granted their permission
+                                       to publish their contributions as open data.</span><div class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
+                                       							
+                                       <div class="conditional" data-bind="visible: !(crowdsourced() === 'true')">
+                                          <div class="requirement">
+                                             <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
+                                                extracted or calculated from other data, so it must have been crowd-sourced.
+                                             </p>
+                                          </div>
+                                       </div>
+                                       						
+                                    </div>
+                                 </div>
+                              </div>
+                              					
+                              <div class="conditional" data-bind="visible: crowdsourced() === 'true'">
+                                 						
+                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedContentStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedContentStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Did contributions require judgement?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourcedContent-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourcedContent" data-bind="checked: crowdsourcedContent"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourcedContent" data-bind="checked: crowdsourcedContent"> Yes</label><span class="help-block collapse" id="crowdsourcedContent-help">The individuals who contributed to your data may have needed to employ their creativity
+                                          or judgement to make their contributions. For example, writing a description or choosing
+                                          whether or not to include some data in a dataset would require judgement. If judgement
+                                          is involved, the contributors will have copyright over their contributions, so we
+                                          will then need to check that they have transferred or waived their rights, or licensed
+                                          the data, to you.</span></div>
+                                 </div>
+                                 						
+                                 <div class="conditional" data-bind="visible: crowdsourcedContent() === 'true'">
+                                    							
+                                    <div class="control-group"><label class="control-label" for="claUrl"><span class="badge badge-circular badge-important pull-left" data-bind="visible: claUrlStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: claUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the Contributor Licence Agreement (CLA)?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#claUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="claUrl" name="claUrl" data-bind="value: claUrl, valueUpdate: 'afterkeydown'" placeholder="Contributor Licence Agreement URL" required="required"><span class="help-block collapse" id="claUrl-help">A Contributor Licence Agreement is an agreement with contributors that ensures that
+                                             you can reuse the data that they contribute. It will either transfer the rights in
+                                             the contributions to you, waive their rights, or license the data to you such that
+                                             you can republish it.<a class="pull-right" href="http://en.wikipedia.org/wiki/Contributor_License_Agreement" target="_new">Read more...</a></span></div>
+                                    </div>
+                                    							
+                                    <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: cldsRecordedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: cldsRecordedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Have all contributors agreed to the CLA?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#cldsRecorded-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="cldsRecorded" data-bind="checked: cldsRecorded"> No</label><label class="radio inline"><input type="radio" value="true" name="cldsRecorded" data-bind="checked: cldsRecorded"> Yes</label><span class="help-block collapse" id="cldsRecorded-help">All contributors need to agree to a Contributor Licence Agreement (CLA) so that you
+                                             can reuse or republish their contributions. You should keep a record of who has provided
+                                             contributions and whether or not they have agreed to the CLA.</span><div class="conditional" data-bind="visible: !(cldsRecorded() === 'true')">
+                                             <div class="requirement">
+                                                <p class="alert alert-error">You must obtain agreement to a Contributor Licence Agreement from the contributors
+                                                   to your data to give you the right to republish their contributions as open data.
+                                                </p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    						
+                                 </div>
+                                 					
+                              </div>
+                              				
+                           </div>
+                           			
+                        </div>
+                        <div class="conditional" data-bind="visible: publisherOrigin() === 'false'">
+                           				
+                           <div class="control-group"><label class="control-label" for="sourceDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe the sources of the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#sourceDocumentationUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="sourceDocumentationUrl" name="sourceDocumentationUrl" data-bind="value: sourceDocumentationUrl, valueUpdate: 'afterkeydown'" placeholder="Data Sources Documentation URL"> <span class="label label-standard" data-toggle="collapse" data-target="#sourceDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="sourceDocumentationUrl-help">If not all the data was originally created or gathered by you then even if you have
+                                    the rights to publish it, it is good practice to document where the data was sourced
+                                    from (its provenance) and the rights under which you are publishing the data.</span><div class="requirement collapse" id="sourceDocumentationUrl-requirement">
+                                    <p class="alert alert-info"><a href="#sourceDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should document where the data was sourced from and the rights under which you
+                                       are publishing the data so reusers are assured that they can reuse the parts sourced
+                                       from third parties.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           			
+                        </div>
+                     </fieldset>
                      <fieldset id="licensing">
                         <legend>Licensing <small>giving other people permission to reuse the data</small></legend>
                         <div class="control-group"><label class="control-label" for="copyrightURL"><span class="badge badge-circular badge-success pull-left" data-bind="visible: copyrightURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is your copyright statement?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#copyrightURL-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="copyrightURL" name="copyrightURL" data-bind="value: copyrightURL, valueUpdate: 'afterkeydown'"> <span class="label label-pilot" data-toggle="collapse" data-target="#copyrightURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="copyrightURL-help">A copyright statement states who owns the copyright and database rights in the data,
@@ -346,329 +486,6 @@
                                     </div>
                                  </div>
                               </div>
-                           </div>
-                           			
-                        </div>
-                     </fieldset>
-                     <fieldset id="ownership">
-                        <legend>Ownership <small>ensuring that you have permission to publish the data</small></legend>
-                        <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: publisherOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: publisherOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was all this data originally created or gathered by you?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="publisherOrigin" data-bind="checked: publisherOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="publisherOrigin" data-bind="checked: publisherOrigin"> Yes</label><span class="help-block collapse" id="publisherOrigin-help">If not all the data was originally created or gathered by you then you might not have
-                                 the right to republish it. Answer 'no' to this question if this data was put together
-                                 based on data from outside your organisation, or includes data that you have crowd-sourced.
-                                 We ask this question to work out whether we have to ask about other organisations
-                                 or people who might own some of the data.</span></div>
-                        </div>
-                        <div class="conditional" data-bind="visible: publisherOrigin() === 'false'">
-                           				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOriginStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOriginStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data extracted or calculated from other data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#thirdPartyOrigin-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> No</label><label class="radio inline"><input type="radio" value="true" name="thirdPartyOrigin" data-bind="checked: thirdPartyOrigin"> Yes</label><span class="conditional" data-bind="visible: crowdsourced() === 'false'">
-                                    						
-                                    					</span><span class="help-block collapse" id="thirdPartyOrigin-help">You might have extracted data from another dataset, for example through an online
-                                    service. Or you might have downloaded someone else's dataset and analysed it to create
-                                    the data. In both these cases, we need to check that there are no legal barriers to
-                                    you republishing the results of this data.</span><div class="conditional" data-bind="visible: crowdsourced() === 'false'">
-                                    						
-                                    <div class="conditional" data-bind="visible: !(thirdPartyOrigin() === 'true')">
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
-                                             crowd-sourced, so it must have been extracted or calculated from other data sources.
-                                          </p>
-                                       </div>
-                                    </div>
-                                    					
-                                 </div>
-                              </div>
-                           </div>
-                           				
-                           <div class="conditional" data-bind="visible: thirdPartyOrigin() === 'true'">
-                              					
-                              <div class="repeated" data-bind="foreach: sources">
-                                 <div class="well">
-                                    <div class="control-group">
-                                       <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.sourcesRemove, disable: $parent.sources().length === 1"><i class="icon-remove icon-white"></i> Delete Source</button></div>
-                                    </div>
-                                    <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceCertificateStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the source data have an open data certificate?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#sourceCertificate-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" data-bind="checked: sourceCertificate, attr: { name: 'sourceCertificate-' + $index() }"> No</label><label class="radio inline"><input type="radio" value="true" data-bind="checked: sourceCertificate, attr: { name: 'sourceCertificate-' + $index() }"> Yes</label><span class="help-block collapse" data-bind="attr: { id: 'sourceCertificate-' + $index() + '-help' }">If the source data has an Open Data Certificate, we know that it is open data and
-                                             we can gather information from that certificate to help fill in the rest of the information
-                                             that's needed here.</span></div>
-                                    </div>
-                                    <div class="conditional" data-bind="visible: sourceCertificate() === 'true'">
-                                       							
-                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'sourceCertificateUrl-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: sourceCertificateUrlStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceCertificateUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is its open data certificate?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#sourceCertificateUrl-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: sourceCertificateUrl, valueUpdate: 'afterkeydown', attr: { id: 'sourceCertificateUrl-' + $index(), name: 'sourceCertificateUrl-' + $index() }" placeholder="Open Data Certificate URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'sourceCertificateUrl-' + $index() + '-help' }">The open data certificate demonstrates that the source dataset is available as open
-                                                data. We ask where it is so that we can extract the additional information we need
-                                                from that certificate.</span></div>
-                                       </div>
-                                       						
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'sourceTitle-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: sourceTitleStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceTitleStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What is the name of this data source?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#sourceTitle-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="text" class="span5" data-bind="value: sourceTitle, valueUpdate: 'afterkeydown', attr: { id: 'sourceTitle-' + $index(), name: 'sourceTitle-' + $index() }" required="required"><span class="help-block collapse" data-bind="attr: { id: 'sourceTitle-' + $index() + '-help' }">This is the title that we will give to the data source within the Open Data Certificate
-                                             for this data.</span></div>
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'additionalOwner-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: additionalOwnerStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: additionalOwnerStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Who owns this data source?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwner-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="text" class="span5" data-bind="value: additionalOwner, valueUpdate: 'afterkeydown', attr: { id: 'additionalOwner-' + $index(), name: 'additionalOwner-' + $index() }" placeholder="Data Curator" required="required"><span class="help-block collapse" data-bind="attr: { id: 'additionalOwner-' + $index() + '-help' }">This is the organisation that curates the data source. We ask who owns it so that
-                                             we can provide them with attribution within the Open Data Certificate.</span></div>
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'additionalOwnerUrl-' + $index() }"><span class="badge badge-circular badge-success pull-left" data-bind="visible: additionalOwnerUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's their website?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#additionalOwnerUrl-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: additionalOwnerUrl, valueUpdate: 'afterkeydown', attr: { id: 'additionalOwnerUrl-' + $index(), name: 'additionalOwnerUrl-' + $index() }" placeholder="Data Curator URL"><span class="help-block collapse" data-bind="attr: { id: 'additionalOwnerUrl-' + $index() + '-help' }">This should be the main website of that curates the data source. We use this to provide
-                                             a link to the organisation and to help us gather together all the open data curated
-                                             by that organisation even if different people spell that organisation's name differently.</span></div>
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyData-' + $index() }"><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe how this data was used?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyData-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: thirdPartyData, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyData-' + $index(), name: 'thirdPartyData-' + $index() }"> <span class="label label-standard" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyData-' + $index() + '-requirement' }"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyData-' + $index() + '-help' }">This should be a link to some documentation in which you describe, either through
-                                             a formal provenance trail or through text, how the source data was used in the creation
-                                             of your data.</span><div class="requirement collapse" data-bind="attr: { id: 'thirdPartyData-' + $index() + '-requirement' }">
-                                             <p class="alert alert-info"><a data-bind="attr: { href: '#thirdPartyData-' + $index() + '-requirement' }"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should supply information about which parts of the dataset are sourced from other
-                                                datasets so that reusers can give attribution to those sources.
-                                             </p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyDataLicence-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataLicenceStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataLicenceStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Under which licence is this data published?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataLicence-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><select class="span5" data-bind="value: thirdPartyDataLicence, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyDataLicence-' + $index(), name: 'thirdPartyDataLicence-' + $index() }" required="required">
-                                             								
-                                             <option></option>
-                                             								
-                                             <option value="odc-by">Open Data Commons Attribution License</option>
-                                             								
-                                             <option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
-                                             								
-                                             <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-                                             								
-                                             <option value="cc0">Creative Commons CCZero</option>
-                                             								
-                                             <option value="ogl">UK Open Government Licence</option>
-                                             								
-                                             <option value="na">Not applicable</option>
-                                             								
-                                             <option value="other">Other...</option>
-                                             							</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataLicence-' + $index() + '-help' }">The creator of a database automatically gets database rights where they spend substantial
-                                             effort gathering, verifying and presenting data. They need to have specified a waiver
-                                             or a licence that covers the database rights in the data in order for you to reuse
-                                             it. The licences that are listed here are the ones that are most commonly used; if
-                                             there are no database rights, they've expired, or they've waived them, choose 'Not
-                                             applicable'. We ask about the licence because we want to make sure that you have been
-                                             given permission to republish the data.</span></div>
-                                    </div>
-                                    <div class="conditional" data-bind="visible: thirdPartyDataLicence() === 'na'">
-                                       							
-                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this data?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataNotApplicablenorights-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="norights">there is no database right in this data<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataNotApplicablenorights-' + $index() + '-help' }">The data curator only has a database right in this data if they have spent substantial
-                                                   effort gathering, verifying or presenting the data. It's possible that there's no
-                                                   database right in the data, for example if the data was created from scratch, presented
-                                                   in an obvious way, and not checked against anything.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataNotApplicableexpired-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="expired">the applicable database rights have expired<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataNotApplicableexpired-' + $index() + '-help' }">Database rights last for ten years. If the data was last changed more than ten years
-                                                   ago, then the database rights within it will have expired.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataNotApplicablewaived-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyDataNotApplicable, attr: { name: 'thirdPartyDataNotApplicable-' + $index() }" value="waived">the applicable database rights have been waived<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataNotApplicablewaived-' + $index() + '-help' }">The rights owner can waive your database rights, which means that no one now owns
-                                                   them and you can do whatever you want with the data.</span></label></div>
-                                       </div>
-                                       							
-                                       <div class="conditional" data-bind="visible: thirdPartyDataNotApplicable() === 'waived'">
-                                          								
-                                          <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyDataWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver waives the database rights in this data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataWaiver-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><select class="span5" data-bind="value: thirdPartyDataWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyDataWaiver-' + $index(), name: 'thirdPartyDataWaiver-' + $index() }" required="required">
-                                                   										
-                                                   <option></option>
-                                                   										
-                                                   <option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-                                                   										
-                                                   <option value="cc0">Creative Commons CCZero</option>
-                                                   										
-                                                   <option value="other">Other...</option>
-                                                   									</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataWaiver-' + $index() + '-help' }">If the data owner waives their database right, they should have a statement that says
-                                                   that they've done so, so that you know that you can do whatever they like with the
-                                                   data. There are existing waivers that they might use (PDDL and CCZero), or they might
-                                                   have authored their own.</span></div>
-                                          </div>
-                                          								
-                                          <div class="conditional" data-bind="visible: thirdPartyDataWaiver() === 'other'">
-                                             									
-                                             <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyDataOtherWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyDataOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyDataOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the database rights?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyDataOtherWaiver-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: thirdPartyDataOtherWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyDataOtherWaiver-' + $index(), name: 'thirdPartyDataOtherWaiver-' + $index() }" placeholder="Waiver URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyDataOtherWaiver-' + $index() + '-help' }">If the data owner has created their own waiver, we ask where it is so that we can
-                                                      check that it's publicly available and so that we can point reusers to it so they
-                                                      can check that it does in fact waive the database rights.</span></div>
-                                             </div>
-                                             								
-                                          </div>
-                                          							
-                                       </div>
-                                       						
-                                    </div>
-                                    <div class="conditional" data-bind="visible: thirdPartyDataLicence() === 'other'">
-                                       							
-                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyOtherDataLicenceName-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherDataLicenceNameStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherDataLicenceNameStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the name of the licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherDataLicenceName-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="text" class="span5" data-bind="value: thirdPartyOtherDataLicenceName, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyOtherDataLicenceName-' + $index(), name: 'thirdPartyOtherDataLicenceName-' + $index() }" placeholder="Licence Name" required="required"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherDataLicenceName-' + $index() + '-help' }">If the data owner is using another licence, we ask for its name so that we can refer
-                                                to it within the Open Data Certificate.</span></div>
-                                       </div>
-                                       							
-                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyOtherDataLicenceURL-' + $index() }"><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherDataLicenceURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the location the licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherDataLicenceURL-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: thirdPartyOtherDataLicenceURL, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyOtherDataLicenceURL-' + $index(), name: 'thirdPartyOtherDataLicenceURL-' + $index() }" placeholder="Licence URL"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherDataLicenceURL-' + $index() + '-help' }">If the data owner are using another licence, we ask for a pointer to it so that we
-                                                can link to it from within your Open Data Certificate.</span></div>
-                                       </div>
-                                       							
-                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherDataLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherDataLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherDataLicenceOpen-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" data-bind="checked: thirdPartyOtherDataLicenceOpen, attr: { name: 'thirdPartyOtherDataLicenceOpen-' + $index() }"> No</label><label class="radio inline"><input type="radio" value="true" data-bind="checked: thirdPartyOtherDataLicenceOpen, attr: { name: 'thirdPartyOtherDataLicenceOpen-' + $index() }"> Yes</label><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherDataLicenceOpen-' + $index() + '-help' }">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet
-                                                been assessed.<a class="pull-right" href="http://opendefinition.org/" target="_new">Read more...</a></span></div>
-                                       </div>
-                                       							
-                                       <div class="conditional" data-bind="visible: thirdPartyOtherDataLicenceOpen() === 'false'">
-                                          								
-                                          <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherDataLicenceCanRepublishStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherDataLicenceCanRepublishStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the licence allow you to reuse and republish?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherDataLicenceCanRepublish-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" data-bind="checked: thirdPartyOtherDataLicenceCanRepublish, attr: { name: 'thirdPartyOtherDataLicenceCanRepublish-' + $index() }"> No</label><label class="radio inline"><input type="radio" value="true" data-bind="checked: thirdPartyOtherDataLicenceCanRepublish, attr: { name: 'thirdPartyOtherDataLicenceCanRepublish-' + $index() }"> Yes</label><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherDataLicenceCanRepublish-' + $index() + '-help' }">Even if the source data isn't published under an open licence, your licence to use
-                                                   the data might say that you can reuse and republish this data under an open licence
-                                                   in the way that you are. Because the licence for the source data is not an open licence,
-                                                   you will probably need to seek legal advice to work out whether your particular reuse
-                                                   and republication is allowed.</span><div class="conditional" data-bind="visible: !(thirdPartyOtherDataLicenceCanRepublish() === 'true')">
-                                                   <div class="requirement">
-                                                      <p class="alert alert-error">You must not publish as open data anything that includes data sourced from a third
-                                                         party unless that third party has given you a licence to do so.
-                                                      </p>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          							
-                                       </div>
-                                       						
-                                    </div>
-                                    <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyContentLicence-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentLicenceStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentLicenceStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Under which licence can others reuse the content?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentLicence-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><select class="span5" data-bind="value: thirdPartyContentLicence, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyContentLicence-' + $index(), name: 'thirdPartyContentLicence-' + $index() }" required="required">
-                                             								
-                                             <option></option>
-                                             								
-                                             <option value="cc-by">Creative Commons Attribution</option>
-                                             								
-                                             <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-                                             								
-                                             <option value="cc0">Creative Commons CCZero</option>
-                                             								
-                                             <option value="ogl">UK Open Government Licence</option>
-                                             								
-                                             <option value="na">Not applicable</option>
-                                             								
-                                             <option value="other">Other...</option>
-                                             							</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentLicence-' + $index() + '-help' }">The creator of content automatically gets copyright over that content when they spend
-                                             intellectual effort creating it. Note that creative content does not include facts.
-                                             They need to have provided a waiver or licence that covers the copyright in the data
-                                             so you know that you can reuse it. The licences that are listed here are the ones
-                                             that are most commonly used; if there is no copyright in the data, it's expired, or
-                                             you've waived copyright, choose 'Not applicable'. We ask about the licence because
-                                             we want to make sure that the source data is actually open for you to reuse from a
-                                             legal perspective.</span></div>
-                                    </div>
-                                    <div class="conditional" data-bind="visible: thirdPartyContentLicence() === 'na'">
-                                       							
-                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentNotApplicableStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentNotApplicableStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Why is a licence not applicable for this content?</label><div class="controls"><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentNotApplicablenorights-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="norights">there is no copyright in this data<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentNotApplicablenorights-' + $index() + '-help' }">The data owner only has a copyright in this data if they have spent creative intellectual
-                                                   effort creating it, for example by creating text that is included within the data,
-                                                   or exercising judgement in choosing whether particular data is included. It's possible
-                                                   that there's no copyright in the data, for example if it only contains facts with
-                                                   no judgement involved in selecting what to include.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentNotApplicableexpired-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="expired">the applicable copyright has expired<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentNotApplicableexpired-' + $index() + '-help' }">Copyright lasts for a fixed length of time, based on either a number of years after
-                                                   the death of its creator or the publication of the content. If the content was created
-                                                   or published a long time ago, the copyright may have expired.</span></label><button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentNotApplicablewaived-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio"><input type="radio" data-bind="checked: thirdPartyContentNotApplicable, attr: { name: 'thirdPartyContentNotApplicable-' + $index() }" value="waived">the applicable copyright has been waived<span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentNotApplicablewaived-' + $index() + '-help' }">The data owner can waive your copyright, which means that no one owns it and you can
-                                                   do whatever you want with the data.</span></label></div>
-                                       </div>
-                                       							
-                                       <div class="conditional" data-bind="visible: thirdPartyContentNotApplicable() === 'waived'">
-                                          								
-                                          <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyContentWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Which waiver waives the copyright in this content?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentWaiver-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><select class="span5" data-bind="value: thirdPartyContentWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyContentWaiver-' + $index(), name: 'thirdPartyContentWaiver-' + $index() }" required="required">
-                                                   										
-                                                   <option></option>
-                                                   										
-                                                   <option value="cc0">Creative Commons CCZero</option>
-                                                   										
-                                                   <option value="other">Other...</option>
-                                                   									</select><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentWaiver-' + $index() + '-help' }">If the data owner waives their copyright, they should have provided a statement that
-                                                   says that they've done so, so that you know that you can do whatever you like with
-                                                   the data. They may have used an existing waiver (CCZero) or they could have authored
-                                                   their own.</span></div>
-                                          </div>
-                                          								
-                                          <div class="conditional" data-bind="visible: thirdPartyContentWaiver() === 'other'">
-                                             									
-                                             <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyContentOtherWaiver-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyContentOtherWaiverStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyContentOtherWaiverStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the waiver for the copyright?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyContentOtherWaiver-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: thirdPartyContentOtherWaiver, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyContentOtherWaiver-' + $index(), name: 'thirdPartyContentOtherWaiver-' + $index() }" placeholder="Waiver URL" required="required"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyContentOtherWaiver-' + $index() + '-help' }">If the data owner has created their own waiver, we ask where it is so that we can
-                                                      check that it's publicly available and so that we can check that it does in fact waive
-                                                      their copyright.</span></div>
-                                             </div>
-                                             								
-                                          </div>
-                                          							
-                                       </div>
-                                       						
-                                    </div>
-                                    <div class="conditional" data-bind="visible: thirdPartyContentLicence() === 'other'">
-                                       							
-                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyOtherContentLicenceName-' + $index() }"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherContentLicenceNameStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherContentLicenceNameStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the name of the licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherContentLicenceName-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="text" class="span5" data-bind="value: thirdPartyOtherContentLicenceName, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyOtherContentLicenceName-' + $index(), name: 'thirdPartyOtherContentLicenceName-' + $index() }" placeholder="Licence Name" required="required"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherContentLicenceName-' + $index() + '-help' }">If the data owner is using another licence, we ask for its name so that we can refer
-                                                to it within the Open Data Certificate.</span></div>
-                                       </div>
-                                       							
-                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'thirdPartyOtherContentLicenceURL-' + $index() }"><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherContentLicenceURLStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> What's the location the licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherContentLicenceURL-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><input type="url" class="span5" data-bind="value: thirdPartyOtherContentLicenceURL, valueUpdate: 'afterkeydown', attr: { id: 'thirdPartyOtherContentLicenceURL-' + $index(), name: 'thirdPartyOtherContentLicenceURL-' + $index() }" placeholder="Licence URL"><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherContentLicenceURL-' + $index() + '-help' }">If the data owner is using another licence, we ask for a pointer to it so that we
-                                                can link to it from within your Open Data Certificate.</span></div>
-                                       </div>
-                                       							
-                                       <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherContentLicenceOpenStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherContentLicenceOpenStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Is the licence an open licence?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherContentLicenceOpen-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" data-bind="checked: thirdPartyOtherContentLicenceOpen, attr: { name: 'thirdPartyOtherContentLicenceOpen-' + $index() }"> No</label><label class="radio inline"><input type="radio" value="true" data-bind="checked: thirdPartyOtherContentLicenceOpen, attr: { name: 'thirdPartyOtherContentLicenceOpen-' + $index() }"> Yes</label><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherContentLicenceOpen-' + $index() + '-help' }">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet
-                                                been assessed.<a class="pull-right" href="http://opendefinition.org/" target="_new">Read more...</a></span></div>
-                                       </div>
-                                       							
-                                       <div class="conditional" data-bind="visible: thirdPartyOtherContentLicenceOpen() === 'false'">
-                                          								
-                                          <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: thirdPartyOtherContentLicenceCanRepublishStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: thirdPartyOtherContentLicenceCanRepublishStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the licence allow you to republish?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#thirdPartyOtherContentLicenceCanRepublish-' + $index() + '-help' }"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" data-bind="checked: thirdPartyOtherContentLicenceCanRepublish, attr: { name: 'thirdPartyOtherContentLicenceCanRepublish-' + $index() }"> No</label><label class="radio inline"><input type="radio" value="true" data-bind="checked: thirdPartyOtherContentLicenceCanRepublish, attr: { name: 'thirdPartyOtherContentLicenceCanRepublish-' + $index() }"> Yes</label><span class="help-block collapse" data-bind="attr: { id: 'thirdPartyOtherContentLicenceCanRepublish-' + $index() + '-help' }">Even if the source data isn't published under an open licence, your licence to use
-                                                   the data might say that you can reuse and republish this data under an open licence
-                                                   in the way that you are. Because the licence for the source data is not an open licence,
-                                                   you will probably need to seek legal advice to work out whether your particular reuse
-                                                   and republication is allowed.</span><div class="conditional" data-bind="visible: !(thirdPartyOtherContentLicenceCanRepublish() === 'true')">
-                                                   <div class="requirement">
-                                                      <p class="alert alert-error">You must not publish as open data anything that includes data sourced from a third
-                                                         party unless that third party has given you a licence to do so.
-                                                      </p>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          							
-                                       </div>
-                                       						
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="control-group repeat-controls">
-                                 <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: sourcesAdd"><i class="icon-plus icon-white"></i> Add Source</button></div>
-                              </div>
-                              				
-                           </div>
-                           				
-                           <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Was some of this data crowd-sourced?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourced-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourced" data-bind="checked: crowdsourced"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourced" data-bind="checked: crowdsourced"> Yes</label><span class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
-                                    						
-                                    					</span><span class="help-block collapse" id="crowdsourced-help">Crowd-sourcing involves collating data that is gathered by individuals operating outside
-                                    your organisation. We ask about crowd-sourcing because if the data includes information
-                                    that was contributed by others, you need to ensure that they granted their permission
-                                    to publish their contributions as open data.</span><div class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
-                                    						
-                                    <div class="conditional" data-bind="visible: !(crowdsourced() === 'true')">
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You have said that the data wasn't originally created or gathered by you, and wasn't
-                                             extracted or calculated from other data, so it must have been crowd-sourced.
-                                          </p>
-                                       </div>
-                                    </div>
-                                    					
-                                 </div>
-                              </div>
-                           </div>
-                           				
-                           <div class="conditional" data-bind="visible: crowdsourced() === 'true'">
-                              					
-                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: crowdsourcedContentStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: crowdsourcedContentStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Did contributions require judgement?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#crowdsourcedContent-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="crowdsourcedContent" data-bind="checked: crowdsourcedContent"> No</label><label class="radio inline"><input type="radio" value="true" name="crowdsourcedContent" data-bind="checked: crowdsourcedContent"> Yes</label><span class="help-block collapse" id="crowdsourcedContent-help">The individuals who contributed to your data may have needed to employ their creativity
-                                       or judgement to make their contributions. For example, writing a description or choosing
-                                       whether or not to include some data in a dataset would require judgement. If judgement
-                                       is involved, the contributors will have copyright over their contributions, so we
-                                       will then need to check that they have transferred or waived their rights, or licensed
-                                       the data, to you.</span></div>
-                              </div>
-                              					
-                              <div class="conditional" data-bind="visible: crowdsourcedContent() === 'true'">
-                                 						
-                                 <div class="control-group"><label class="control-label" for="claUrl"><span class="badge badge-circular badge-important pull-left" data-bind="visible: claUrlStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: claUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where is the Contributor Licence Agreement (CLA)?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#claUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="claUrl" name="claUrl" data-bind="value: claUrl, valueUpdate: 'afterkeydown'" placeholder="Contributor Licence Agreement URL" required="required"><span class="help-block collapse" id="claUrl-help">A Contributor Licence Agreement is an agreement with contributors that ensures that
-                                          you can reuse the data that they contribute. It will either transfer the rights in
-                                          the contributions to you, waive their rights, or license the data to you such that
-                                          you can republish it.<a class="pull-right" href="http://en.wikipedia.org/wiki/Contributor_License_Agreement" target="_new">Read more...</a></span></div>
-                                 </div>
-                                 						
-                                 <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-important pull-left" data-bind="visible: cldsRecordedStatus() === 'required'"><i class="icon icon-white icon-remove" title="Required"></i></span><span class="badge badge-circular badge-success pull-left" data-bind="visible: cldsRecordedStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Have all contributors agreed to the CLA?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#cldsRecorded-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="cldsRecorded" data-bind="checked: cldsRecorded"> No</label><label class="radio inline"><input type="radio" value="true" name="cldsRecorded" data-bind="checked: cldsRecorded"> Yes</label><span class="help-block collapse" id="cldsRecorded-help">All contributors need to agree to a Contributor Licence Agreement (CLA) so that you
-                                          can reuse or republish their contributions. You should keep a record of who has provided
-                                          contributions and whether or not they have agreed to the CLA.</span><div class="conditional" data-bind="visible: !(cldsRecorded() === 'true')">
-                                          <div class="requirement">
-                                             <p class="alert alert-error">You must obtain agreement to a Contributor Licence Agreement from the contributors
-                                                to your data to give you the right to republish their contributions as open data.
-                                             </p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 					
-                              </div>
-                              				
                            </div>
                            			
                         </div>
@@ -1781,18 +1598,15 @@
             </div>
             <hr>
             <div id="improvements-standard" class="improvements">
+               <div data-bind="visible: publisherOrigin() === 'false'">
+                  <p class="improvement" data-bind="visible: sourceDocumentationUrl() === ''"><a class="improvement-label" href="#sourceDocumentationUrl" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should document where the data was sourced from and the rights under which you
+                        are publishing the data so reusers are assured that they can reuse the parts sourced
+                        from third parties.</span></p>
+               </div>
                <div data-bind="visible: copyrightURL() !== ''">
                   <p class="improvement" data-bind="visible: !copyrightStatementMetadataLicense()"><a class="improvement-label" href="#copyrightStatementMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide machine-readable data in your copyright statement about the licences
                         that should be used when the data is reused so that automated tools can flag the data
                         as open data.</span></p>
-               </div>
-               <div data-bind="visible: publisherOrigin() === 'false'">
-                  <div data-bind="visible: thirdPartyOrigin() === 'true'">
-                     <div data-bind="foreach: sources">
-                        <p class="improvement" data-bind="visible: thirdPartyData() === ''"><a class="improvement-label" href="#thirdPartyData" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should supply information about which parts of the dataset are sourced from other
-                              datasets so that reusers can give attribution to those sources.</span></p>
-                     </div>
-                  </div>
                </div>
                <div data-bind="visible: dataPersonal() === 'personal' || dataPersonal() === 'possibly'">
                   <div data-bind="visible: consentExempt() === 'false'">
@@ -2055,6 +1869,13 @@ certificate.dataTitleStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.documentationUrl = ko.observable('');
+certificate.documentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.documentationUrl() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
 certificate.publisher = ko.observable('');
 certificate.publisherStatus = ko.computed(function () {
   var status;
@@ -2069,17 +1890,73 @@ certificate.publisherUrlStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.documentationUrl = ko.observable('');
-certificate.documentationUrlStatus = ko.computed(function () {
-  var status;
-  if (certificate.documentationUrl() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
 certificate.releaseType = ko.observable('');
 certificate.releaseTypeStatus = ko.computed(function () {
   var status;
   if (certificate.releaseType() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.publisherRights = ko.observable('');
+certificate.publisherRightsStatus = ko.computed(function () {
+  var status;
+  if (certificate.publisherRights() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.publisherOrigin = ko.observable('');
+certificate.publisherOriginStatus = ko.computed(function () {
+  var status;
+  if (certificate.publisherOrigin() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.thirdPartyOrigin = ko.observable('');
+certificate.thirdPartyOriginStatus = ko.computed(function () {
+  var status;
+  if (certificate.thirdPartyOrigin() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.thirdPartyOpen = ko.observable('');
+certificate.thirdPartyOpenStatus = ko.computed(function () {
+  var status;
+  if (certificate.thirdPartyOpen() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.crowdsourced = ko.observable('');
+certificate.crowdsourcedStatus = ko.computed(function () {
+  var status;
+  if (certificate.crowdsourced() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.crowdsourcedContent = ko.observable('');
+certificate.crowdsourcedContentStatus = ko.computed(function () {
+  var status;
+  if (certificate.crowdsourcedContent() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.claUrl = ko.observable('');
+certificate.claUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.claUrl() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.cldsRecorded = ko.observable('');
+certificate.cldsRecordedStatus = ko.computed(function () {
+  var status;
+  if (certificate.cldsRecorded() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+certificate.sourceDocumentationUrl = ko.observable('');
+certificate.sourceDocumentationUrlStatus = ko.computed(function () {
+  var status;
+  if (certificate.sourceDocumentationUrl() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
@@ -2212,213 +2089,6 @@ certificate.otherContentLicenceOpenStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.publisherOrigin = ko.observable('');
-certificate.publisherOriginStatus = ko.computed(function () {
-  var status;
-  if (certificate.publisherOrigin() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-certificate.thirdPartyOrigin = ko.observable('');
-certificate.thirdPartyOriginStatus = ko.computed(function () {
-  var status;
-  if (certificate.thirdPartyOrigin() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-var sourcesViewModel = function () {
-var sources = this;
-sources.sourceCertificate = ko.observable('');
-sources.sourceCertificateStatus = ko.computed(function () {
-  var status;
-  if (sources.sourceCertificate() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-sources.sourceCertificateUrl = ko.observable('');
-sources.sourceCertificateUrlStatus = ko.computed(function () {
-  var status;
-  if (sources.sourceCertificateUrl() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.sourceTitle = ko.observable('');
-sources.sourceTitleStatus = ko.computed(function () {
-  var status;
-  if (sources.sourceTitle() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.additionalOwner = ko.observable('');
-sources.additionalOwnerStatus = ko.computed(function () {
-  var status;
-  if (sources.additionalOwner() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.additionalOwnerUrl = ko.observable('');
-sources.additionalOwnerUrlStatus = ko.computed(function () {
-  var status;
-  if (sources.additionalOwnerUrl() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyData = ko.observable('');
-sources.thirdPartyDataStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyData() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyDataLicence = ko.observable('');
-sources.thirdPartyDataLicenceStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyDataLicence() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyDataNotApplicable = ko.observable('');
-sources.thirdPartyDataNotApplicableStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyDataNotApplicable() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyDataWaiver = ko.observable('');
-sources.thirdPartyDataWaiverStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyDataWaiver() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyDataOtherWaiver = ko.observable('');
-sources.thirdPartyDataOtherWaiverStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyDataOtherWaiver() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherDataLicenceName = ko.observable('');
-sources.thirdPartyOtherDataLicenceNameStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherDataLicenceName() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherDataLicenceURL = ko.observable('');
-sources.thirdPartyOtherDataLicenceURLStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherDataLicenceURL() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherDataLicenceOpen = ko.observable('');
-sources.thirdPartyOtherDataLicenceOpenStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherDataLicenceOpen() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherDataLicenceCanRepublish = ko.observable('');
-sources.thirdPartyOtherDataLicenceCanRepublishStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherDataLicenceCanRepublish() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyContentLicence = ko.observable('');
-sources.thirdPartyContentLicenceStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyContentLicence() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyContentNotApplicable = ko.observable('');
-sources.thirdPartyContentNotApplicableStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyContentNotApplicable() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyContentWaiver = ko.observable('');
-sources.thirdPartyContentWaiverStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyContentWaiver() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyContentOtherWaiver = ko.observable('');
-sources.thirdPartyContentOtherWaiverStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyContentOtherWaiver() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherContentLicenceName = ko.observable('');
-sources.thirdPartyOtherContentLicenceNameStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherContentLicenceName() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherContentLicenceURL = ko.observable('');
-sources.thirdPartyOtherContentLicenceURLStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherContentLicenceURL() === '') status = 'optional';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherContentLicenceOpen = ko.observable('');
-sources.thirdPartyOtherContentLicenceOpenStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherContentLicenceOpen() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-sources.thirdPartyOtherContentLicenceCanRepublish = ko.observable('');
-sources.thirdPartyOtherContentLicenceCanRepublishStatus = ko.computed(function () {
-  var status;
-  if (sources.thirdPartyOtherContentLicenceCanRepublish() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-};
-certificate.sources = ko.observableArray([new sourcesViewModel()]);
-certificate.sourcesAdd = function () {
-var sources = new sourcesViewModel();
-certificate.sources.push(sources);
-};
-certificate.sourcesRemove = function (sources) {
-certificate.sources.remove(sources);
-};
-certificate.crowdsourced = ko.observable('');
-certificate.crowdsourcedStatus = ko.computed(function () {
-  var status;
-  if (certificate.crowdsourced() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-certificate.crowdsourcedContent = ko.observable('');
-certificate.crowdsourcedContentStatus = ko.computed(function () {
-  var status;
-  if (certificate.crowdsourcedContent() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-certificate.claUrl = ko.observable('');
-certificate.claUrlStatus = ko.computed(function () {
-  var status;
-  if (certificate.claUrl() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
-certificate.cldsRecorded = ko.observable('');
-certificate.cldsRecordedStatus = ko.computed(function () {
-  var status;
-  if (certificate.cldsRecorded() === '') status = 'required';
-  else status = 'complete';
-  return status;
-});
 certificate.dataPersonal = ko.observable('');
 certificate.dataPersonalStatus = ko.computed(function () {
   var status;
@@ -2471,6 +2141,92 @@ certificate.privacyImpactAssessmentStatus = ko.computed(function () {
 certificate.legalStatus = ko.computed(function () {
   var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
   ;
+
+	if (certificate.publisherRightsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherRightsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherRightsStatus() !== 'optional') unmetRequirements[certificate.publisherRightsStatus()]++;
+	
+	if (certificate.publisherRights() === 'no') {
+if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.publisherRights() === 'yes' || certificate.publisherRights() === 'unsure') {
+
+	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
+	
+}
+
+	if (certificate.publisherRights() === 'unsure') {
+
+	if (certificate.publisherOrigin() === 'false') {
+
+	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	
+	if (certificate.crowdsourced() === 'false') {
+if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.thirdPartyOrigin() === 'true') {
+
+	if (certificate.thirdPartyOpenStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.thirdPartyOpenStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.thirdPartyOpenStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	
+	if (certificate.thirdPartyOpen() === 'false') {
+if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++; 
+
+}
+
+}
+
+	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
+	
+	if (certificate.thirdPartyOrigin() === 'false') {
+if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.crowdsourced() === 'true') {
+
+	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	
+	if (certificate.crowdsourcedContent() === 'true') {
+
+	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
+	
+	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
+	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
+
+}
+
+}
+
+}
+
+}
+
+	if (certificate.publisherOrigin() === 'false') {
+
+	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.copyrightURLStatus() === 'required') unmetRequirements['basic']++;
@@ -2575,192 +2331,6 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
-	
-	if (certificate.publisherOrigin() === 'false') {
-
-	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
-	
-	if (certificate.crowdsourced() === 'false') {
-if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.thirdPartyOrigin() === 'true') {
-$(certificate.sources()).each(function () {var sources = this;
-	if (sources.sourceCertificateStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceCertificateStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceCertificateStatus() !== 'optional') unmetRequirements[sources.sourceCertificateStatus()]++;
-	
-	if (sources.sourceCertificate() === 'true') {
-
-	if (sources.sourceCertificateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceCertificateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceCertificateUrlStatus() !== 'optional') unmetRequirements[sources.sourceCertificateUrlStatus()]++;
-	
-}
-
-	if (sources.sourceTitleStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceTitleStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceTitleStatus() !== 'optional') unmetRequirements[sources.sourceTitleStatus()]++;
-	
-	if (sources.additionalOwnerStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.additionalOwnerStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.additionalOwnerStatus() !== 'optional') unmetRequirements[sources.additionalOwnerStatus()]++;
-	
-	if (sources.additionalOwnerUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.additionalOwnerUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.additionalOwnerUrlStatus() !== 'optional') unmetRequirements[sources.additionalOwnerUrlStatus()]++;
-	
-	if (sources.thirdPartyDataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataStatus()]++;
-	if (sources.thirdPartyDataStatus() !== 'complete') unmetRequirements['standard']++; 
-
-	if (sources.thirdPartyDataLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataLicenceStatus()]++;
-	
-	if (sources.thirdPartyDataLicence() === 'na') {
-
-	if (sources.thirdPartyDataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataNotApplicableStatus()]++;
-	
-	if (sources.thirdPartyDataNotApplicable() === 'waived') {
-
-	if (sources.thirdPartyDataWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataWaiverStatus()]++;
-	
-	if (sources.thirdPartyDataWaiver() === 'other') {
-
-	if (sources.thirdPartyDataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataOtherWaiverStatus()]++;
-	
-}
-
-}
-
-}
-
-	if (sources.thirdPartyDataLicence() === 'other') {
-
-	if (sources.thirdPartyOtherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceNameStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceNameStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceURLStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceURLStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceOpenStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceOpenStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceOpen() === 'false') {
-
-	if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceCanRepublishStatus()]++;
-	if (sources.thirdPartyOtherDataLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
-
-	if (sources.thirdPartyContentLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentLicenceStatus()]++;
-	
-	if (sources.thirdPartyContentLicence() === 'na') {
-
-	if (sources.thirdPartyContentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentNotApplicableStatus()]++;
-	
-	if (sources.thirdPartyContentNotApplicable() === 'waived') {
-
-	if (sources.thirdPartyContentWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentWaiverStatus()]++;
-	
-	if (sources.thirdPartyContentWaiver() === 'other') {
-
-	if (sources.thirdPartyContentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentOtherWaiverStatus()]++;
-	
-}
-
-}
-
-}
-
-	if (sources.thirdPartyContentLicence() === 'other') {
-
-	if (sources.thirdPartyOtherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceNameStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceNameStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceURLStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceURLStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceOpenStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceOpenStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceOpen() === 'false') {
-
-	if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceCanRepublishStatus()]++;
-	if (sources.thirdPartyOtherContentLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
-});
-}
-
-	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
-	
-	if (certificate.thirdPartyOrigin() === 'false') {
-if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.crowdsourced() === 'true') {
-
-	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
-	
-	if (certificate.crowdsourcedContent() === 'true') {
-
-	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
-	
-	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
-	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
 
 }
 
@@ -3825,14 +3395,6 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 	else if (certificate.dataTitleStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.dataTitleStatus() !== 'optional') unmetRequirements[certificate.dataTitleStatus()]++;
 	
-	if (certificate.publisherStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherStatus() !== 'optional') unmetRequirements[certificate.publisherStatus()]++;
-	
-	if (certificate.publisherUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherUrlStatus() !== 'optional') unmetRequirements[certificate.publisherUrlStatus()]++;
-	
 	if (certificate.documentationUrlStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.documentationUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.documentationUrlStatus() !== 'optional') unmetRequirements[certificate.documentationUrlStatus()]++;
@@ -3847,10 +3409,104 @@ if (!(certificate.documentationUrl() !== '')) unmetRequirements['basic']++;
 
 }
 
+	if (certificate.publisherStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherStatus() !== 'optional') unmetRequirements[certificate.publisherStatus()]++;
+	
+	if (certificate.publisherUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherUrlStatus() !== 'optional') unmetRequirements[certificate.publisherUrlStatus()]++;
+	
 	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.releaseTypeStatus() !== 'optional') unmetRequirements[certificate.releaseTypeStatus()]++;
 	
+	if (certificate.publisherRightsStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherRightsStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherRightsStatus() !== 'optional') unmetRequirements[certificate.publisherRightsStatus()]++;
+	
+	if (certificate.publisherRights() === 'no') {
+if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.publisherRights() === 'yes' || certificate.publisherRights() === 'unsure') {
+
+	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
+	
+}
+
+	if (certificate.publisherRights() === 'unsure') {
+
+	if (certificate.publisherOrigin() === 'false') {
+
+	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	
+	if (certificate.crowdsourced() === 'false') {
+if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.thirdPartyOrigin() === 'true') {
+
+	if (certificate.thirdPartyOpenStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.thirdPartyOpenStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.thirdPartyOpenStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	
+	if (certificate.thirdPartyOpen() === 'false') {
+if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++; 
+
+}
+
+}
+
+	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
+	
+	if (certificate.thirdPartyOrigin() === 'false') {
+if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
+
+}
+
+	if (certificate.crowdsourced() === 'true') {
+
+	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	
+	if (certificate.crowdsourcedContent() === 'true') {
+
+	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
+	
+	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
+	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
+
+}
+
+}
+
+}
+
+}
+
+	if (certificate.publisherOrigin() === 'false') {
+
+	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
+
 	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.copyrightURLStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.copyrightURLStatus() !== 'optional') unmetRequirements[certificate.copyrightURLStatus()]++;
@@ -3954,192 +3610,6 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
-	
-	if (certificate.publisherOrigin() === 'false') {
-
-	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
-	
-	if (certificate.crowdsourced() === 'false') {
-if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.thirdPartyOrigin() === 'true') {
-$(certificate.sources()).each(function () {var sources = this;
-	if (sources.sourceCertificateStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceCertificateStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceCertificateStatus() !== 'optional') unmetRequirements[sources.sourceCertificateStatus()]++;
-	
-	if (sources.sourceCertificate() === 'true') {
-
-	if (sources.sourceCertificateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceCertificateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceCertificateUrlStatus() !== 'optional') unmetRequirements[sources.sourceCertificateUrlStatus()]++;
-	
-}
-
-	if (sources.sourceTitleStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.sourceTitleStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.sourceTitleStatus() !== 'optional') unmetRequirements[sources.sourceTitleStatus()]++;
-	
-	if (sources.additionalOwnerStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.additionalOwnerStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.additionalOwnerStatus() !== 'optional') unmetRequirements[sources.additionalOwnerStatus()]++;
-	
-	if (sources.additionalOwnerUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.additionalOwnerUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.additionalOwnerUrlStatus() !== 'optional') unmetRequirements[sources.additionalOwnerUrlStatus()]++;
-	
-	if (sources.thirdPartyDataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataStatus()]++;
-	if (sources.thirdPartyDataStatus() !== 'complete') unmetRequirements['standard']++; 
-
-	if (sources.thirdPartyDataLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataLicenceStatus()]++;
-	
-	if (sources.thirdPartyDataLicence() === 'na') {
-
-	if (sources.thirdPartyDataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataNotApplicableStatus()]++;
-	
-	if (sources.thirdPartyDataNotApplicable() === 'waived') {
-
-	if (sources.thirdPartyDataWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataWaiverStatus()]++;
-	
-	if (sources.thirdPartyDataWaiver() === 'other') {
-
-	if (sources.thirdPartyDataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyDataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyDataOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyDataOtherWaiverStatus()]++;
-	
-}
-
-}
-
-}
-
-	if (sources.thirdPartyDataLicence() === 'other') {
-
-	if (sources.thirdPartyOtherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceNameStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceNameStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceURLStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceURLStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceOpenStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceOpenStatus()]++;
-	
-	if (sources.thirdPartyOtherDataLicenceOpen() === 'false') {
-
-	if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherDataLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherDataLicenceCanRepublishStatus()]++;
-	if (sources.thirdPartyOtherDataLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
-
-	if (sources.thirdPartyContentLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentLicenceStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentLicenceStatus()]++;
-	
-	if (sources.thirdPartyContentLicence() === 'na') {
-
-	if (sources.thirdPartyContentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentNotApplicableStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentNotApplicableStatus()]++;
-	
-	if (sources.thirdPartyContentNotApplicable() === 'waived') {
-
-	if (sources.thirdPartyContentWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentWaiverStatus()]++;
-	
-	if (sources.thirdPartyContentWaiver() === 'other') {
-
-	if (sources.thirdPartyContentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyContentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyContentOtherWaiverStatus() !== 'optional') unmetRequirements[sources.thirdPartyContentOtherWaiverStatus()]++;
-	
-}
-
-}
-
-}
-
-	if (sources.thirdPartyContentLicence() === 'other') {
-
-	if (sources.thirdPartyOtherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceNameStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceNameStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceURLStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceURLStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceOpenStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceOpenStatus()]++;
-	
-	if (sources.thirdPartyOtherContentLicenceOpen() === 'false') {
-
-	if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'complete') unmetRequirements['answered']++;
-	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() === 'required') unmetRequirements['basic']++;
-	else if (sources.thirdPartyOtherContentLicenceCanRepublishStatus() !== 'optional') unmetRequirements[sources.thirdPartyOtherContentLicenceCanRepublishStatus()]++;
-	if (sources.thirdPartyOtherContentLicenceCanRepublish() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
-});
-}
-
-	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
-	
-	if (certificate.thirdPartyOrigin() === 'false') {
-if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
-
-}
-
-	if (certificate.crowdsourced() === 'true') {
-
-	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
-	
-	if (certificate.crowdsourcedContent() === 'true') {
-
-	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
-	
-	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
-	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
-
-}
-
-}
 
 }
 

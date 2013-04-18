@@ -13,19 +13,9 @@
 		<level id="exemplar">This data satisfies the requirements for key information infrastructure.</level>
 	</levels>
 	<question id="dataTitle">
-		<label>What should we call this data?</label>
+		<label>What's a good title for this data?</label>
 		<input placeholder="Data Title" required="required"/>
 		<help>This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.</help>
-	</question>
-	<question id="publisher">
-		<label>What's the name of your organisation?</label>
-		<input placeholder="Data Curator" required="required"/>
-		<help>This is the organisation that the open data will be associated with within the Open Data Certificate. It should be the organisation that manages the creation of and curates the open data. The data might actually be published by someone else, such as central government or a third-party contractor.</help>
-	</question>
-	<question id="publisherUrl">
-		<label>What's the website for your organisation?</label>
-		<input type="url" placeholder="Curator URL"/>
-		<help>This should be the main website for your organisation or group. We use this to provide a link through to your organisation and to help us gather together all the open data curated by your organisation even if different people spell your organisation's name differently.</help>
 	</question>
 	<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
 	<question id="documentationUrl">
@@ -38,6 +28,16 @@
 		<if test="this.releaseType() === 'collection'">
 			<requirement test="this.documentationUrl() !== ''">You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.</requirement>
 		</if>
+	</question>
+	<question id="publisher">
+		<label>What's the name of the curating organisation?</label>
+		<input placeholder="Data Curator" required="required"/>
+		<help>This is the organisation that the open data will be associated with the Open Data Certificate. It should be the organisation that manages the creation of and curates the open data. The data might actually be published by someone else, such as central government or a third-party contractor.</help>
+	</question>
+	<question id="publisherUrl">
+		<label>What's the website for the curating organisation?</label>
+		<input type="url" placeholder="Curator URL"/>
+		<help>This should be the main website for your organisation or group. We use this to provide a link through to your organisation and to help us gather together all the open data curated by your organisation even if different people spell your organisation's name differently.</help>
 	</question>
 	<question id="releaseType">
 		<label>What kind of data release is this?</label>
@@ -62,6 +62,101 @@
 	</question>
 	<group id="legal" jurisdiction="UK">
 		<label>Legal Information</label>
+		<group id="ownership">
+			<label>Rights</label>
+			<help>ensuring that you have the right to publish the data</help>
+			<question id="publisherRights">
+				<label>Do you have the rights to publish the data as open data?</label>
+				<radioset required="required">
+					<option value="yes">
+						<label>yes, you have the right to publish the data as open data</label>
+					</option>
+					<option value="no">
+						<label>no, you don't have the right to publish the data as open data</label>
+					</option>
+					<option value="unsure">
+						<label>you don't know whether you have the right to publish the data as open data</label>
+					</option>
+				</radioset>
+				<help>Unless all the data was originally created or gathered by your organisation, you might not have the right to republish it. We ask this question to check that you have considered the ownership of the data. If you aren't sure, we will ask further questions about the source of the data you're publishing to find out.</help>
+				<if test="this.publisherRights() === 'no'">
+					<requirement>You must have the right to publish data that you publish.</requirement>
+				</if>
+			</question>
+			<if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
+				<question id="publisherOrigin">
+					<label>Was <em>all</em> this data originally created or gathered by you?</label>
+					<yesno required="required" />
+					<help>If not all the data was originally created or gathered by you then you might not have the right to republish it. Answer 'no' to this question if the data includes information that was sourced from outside your organisation, or if it includes data that other individuals or organisations have contributed. We ask this question to work out whether we have to ask about other organisations or people who might own some of the data.</help>
+				</question>
+			</if>
+			<if test="this.publisherRights() === 'unsure'">
+				<if test="this.publisherOrigin() === 'false'">
+					<question id="thirdPartyOrigin">
+						<label>Was some of this data extracted or calculated from other data?</label>
+						<yesno required="required" />
+						<help>You might have extracted data from another dataset, for example through an online service. Or you might have downloaded someone else's dataset and analysed it to create the data. In both these cases, we need to check that there are no legal barriers to you republishing the results of this data.</help>
+						<if test="this.crowdsourced() === 'false'">
+							<requirement test="this.thirdPartyOrigin() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.</requirement>
+						</if>
+					</question>
+					<if test="this.thirdPartyOrigin() === 'true'">
+						<question id="thirdPartyOpen">
+							<label>Are <em>all</em> the other data sources published as open data by their owners?</label>
+							<yesno required="required" />
+							<help>Open data is data that has been published under an open data licence or where the rights over that data have expired or been waived. If your data is created based on other data that is published as open data, then you can republish it. If your data incorporates data that is not published as open data, you will need to get legal advice to ensure that you can reuse that data and republish the results.</help>
+							<if test="this.thirdPartyOpen() === 'false'">
+								<requirement>You should get legal advice to ensure that you have the right to republish this data.</requirement>
+							</if>
+						</question>
+					</if>
+					<question id="crowdsourced">
+						<label>Was some of this data crowd-sourced?</label>
+						<yesno required="required" />
+						<help>Crowd-sourcing involves collating data that is contributed by people operating outside your organisation. We ask about crowd-sourcing because if the data includes information that was contributed by others, you need to ensure that they granted their permission to publish their contributions as open data.</help>
+						<if test="this.thirdPartyOrigin() === 'false'">
+							<requirement test="this.crowdsourced() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced.</requirement>
+						</if>
+					</question>
+					<if test="this.crowdsourced() === 'true'">
+						<question id="crowdsourcedContent">
+							<label>Did contributions require judgement?</label>
+							<yesno required="required" />
+							<help>The individuals who contributed to your data may have needed to employ their creativity or judgement to make their contributions. For example, writing a description or choosing whether or not to include some data in a dataset would require judgement. If judgement is involved, the contributors will have copyright over their contributions, so we will then need to check that they have transferred or waived their rights, or licensed the data, to you.</help>
+						</question>
+						<if test="this.crowdsourcedContent() === 'true'">
+							<question id="claUrl">
+								<label>Where is the Contributor Licence Agreement (CLA)?</label>
+								<input type="url" placeholder="Contributor Licence Agreement URL" required="required" />
+								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it.</help>
+							</question>
+							<question id="cldsRecorded">
+								<label>Have all contributors agreed to the CLA?</label>
+								<yesno required="required" />
+								<help>All contributors need to agree to a Contributor Licence Agreement (CLA) so that you can reuse or republish their contributions. You should keep a record of who has provided contributions and whether or not they have agreed to the CLA.</help>
+								<requirement>You must obtain agreement to a Contributor Licence Agreement from the contributors to your data to give you the right to republish their contributions as open data.</requirement>
+							</question>
+						</if>
+					</if>
+				</if>
+			</if>
+			<if test="this.publisherOrigin() === 'false'">
+				<question id="sourceDocumentationUrl">
+					<label>Where do you describe the sources of the data?</label>
+					<input type="url" placeholder="Data Sources Documentation URL" />
+					<help>If not all the data was originally created or gathered by you then even if you have the rights to publish it, it is good practice to document where the data was sourced from (its provenance) and the rights under which you are publishing the data.</help>
+					<requirement level="pilot">You should document where the data was sourced from and the rights under which you are publishing the data so reusers are assured that they can reuse the parts sourced from third parties.</requirement>
+				</question>
+				<if test="this.sourceDocumentationUrl() !== ''">
+					<question id="sourceDocumentationMetadata">
+						<label>Does the documentation about the sources of the data include machine-readable data?</label>
+						<yesno />
+						<help>The documentation about the sources of the data needs to be human-readable, so that reusers can work out what it says, but it also helps if it contains machine-readable metadata. This helps those people who publish open data to find out how their data is being used, which helps them to justify its ongoing publication.</help>
+						<requirement level="standard">You should include machine-readable data about the sources of data that you're using.</requirement>
+					</question>
+				</if>
+			</if>
+		</group>
 		<group id="licensing">
 			<label>Licensing</label>
 			<help>giving other people permission to reuse the data</help>
@@ -235,243 +330,6 @@
 					<help more="http://opendefinition.org/">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet been assessed.</help>
 					<requirement>You must publish open data under an open licence so that others can reuse it.</requirement>
 				</question>
-			</if>
-		</group>
-		<group id="ownership">
-			<label>Ownership</label>
-			<help>ensuring that you have permission to publish the data</help>
-			<question id="publisherOrigin">
-				<label>Was all this data originally created or gathered by you?</label>
-				<yesno required="required" />
-				<help>If not all the data was originally created or gathered by you then you might not have the right to republish it. Answer 'no' to this question if this data was put together based on data from outside your organisation, or includes data that you have crowd-sourced. We ask this question to work out whether we have to ask about other organisations or people who might own some of the data.</help>
-			</question>
-			<if test="this.publisherOrigin() === 'false'">
-				<question id="thirdPartyOrigin">
-					<label>Was some of this data extracted or calculated from other data?</label>
-					<yesno required="required" />
-					<help>You might have extracted data from another dataset, for example through an online service. Or you might have downloaded someone else's dataset and analysed it to create the data. In both these cases, we need to check that there are no legal barriers to you republishing the results of this data.</help>
-					<if test="this.crowdsourced() === 'false'">
-						<requirement test="this.thirdPartyOrigin() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.</requirement>
-					</if>
-				</question>
-				<if test="this.thirdPartyOrigin() === 'true'">
-					<repeat id="sources">
-						<label>Source</label>
-						<question id="sourceCertificate">
-							<label>Does the source data have an open data certificate?</label>
-							<yesno />
-							<help>If the source data has an Open Data Certificate, we know that it is open data and we can gather information from that certificate to help fill in the rest of the information that's needed here.</help>
-						</question>
-						<if test="this.sourceCertificate() === 'true'">
-							<question id="sourceCertificateUrl">
-								<label>Where is its open data certificate?</label>
-								<input type="url" required="required" placeholder="Open Data Certificate URL"/>
-								<help>The open data certificate demonstrates that the source dataset is available as open data. We ask where it is so that we can extract the additional information we need from that certificate.</help>
-							</question>
-						</if>
-						<question id="sourceTitle">
-							<label>What is the name of this data source?</label>
-							<input required="required" />
-							<help>This is the title that we will give to the data source within the Open Data Certificate for this data.</help>
-						</question>
-						<question id="additionalOwner">
-							<label>Who owns this data source?</label>
-							<input placeholder="Data Curator" required="required" />
-							<help>This is the organisation that curates the data source. We ask who owns it so that we can provide them with attribution within the Open Data Certificate.</help>
-						</question>
-						<question id="additionalOwnerUrl">
-							<label>What's their website?</label>
-							<input type="url" placeholder="Data Curator URL"/>
-							<help>This should be the main website of that curates the data source. We use this to provide a link to the organisation and to help us gather together all the open data curated by that organisation even if different people spell that organisation's name differently.</help>
-						</question>
-						<question id="thirdPartyData">
-							<label>Where do you describe how this data was used?</label>
-							<input type="url" />
-							<help>This should be a link to some documentation in which you describe, either through a formal provenance trail or through text, how the source data was used in the creation of your data.</help>
-							<requirement level="standard">You should supply information about which parts of the dataset are sourced from other datasets so that reusers can give attribution to those sources.</requirement>
-						</question>
-						<question id="thirdPartyDataLicence">
-							<label>Under which licence is this data published?</label>
-							<select required="required">
-								<option/>
-								<option value="odc-by">Open Data Commons Attribution License</option>
-								<option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
-								<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-								<option value="cc0">Creative Commons CCZero</option>
-								<option value="ogl">UK Open Government Licence</option>
-								<option value="na">Not applicable</option>
-								<option value="other">Other...</option>
-							</select>
-							<help>The creator of a database automatically gets database rights where they spend substantial effort gathering, verifying and presenting data. They need to have specified a waiver or a licence that covers the database rights in the data in order for you to reuse it. The licences that are listed here are the ones that are most commonly used; if there are no database rights, they've expired, or they've waived them, choose 'Not applicable'. We ask about the licence because we want to make sure that you have been given permission to republish the data.</help>
-						</question>
-						<if test="this.thirdPartyDataLicence() === 'na'">
-							<question id="thirdPartyDataNotApplicable">
-								<label>Why is a licence not applicable for this data?</label>
-								<radioset required="required">
-									<option value="norights">
-										<label>there is no database right in this data</label>
-										<help>The data curator only has a database right in this data if they have spent substantial effort gathering, verifying or presenting the data. It's possible that there's no database right in the data, for example if the data was created from scratch, presented in an obvious way, and not checked against anything.</help>
-									</option>
-									<option value="expired">
-										<label>the applicable database rights have expired</label>
-										<help>Database rights last for ten years. If the data was last changed more than ten years ago, then the database rights within it will have expired.</help>
-									</option>
-									<option value="waived">
-										<label>the applicable database rights have been waived</label>
-										<help>The rights owner can waive your database rights, which means that no one now owns them and you can do whatever you want with the data.</help>
-									</option>
-								</radioset>
-							</question>
-							<if test="this.thirdPartyDataNotApplicable() === 'waived'">
-								<question id="thirdPartyDataWaiver">
-									<label>Which waiver waives the database rights in this data?</label>
-									<select required="required">
-										<option/>
-										<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-										<option value="cc0">Creative Commons CCZero</option>
-										<option value="other">Other...</option>
-									</select>
-									<help>If the data owner waives their database right, they should have a statement that says that they've done so, so that you know that you can do whatever they like with the data. There are existing waivers that they might use (PDDL and CCZero), or they might have authored their own.</help>
-								</question>
-								<if test="this.thirdPartyDataWaiver() === 'other'">
-									<question id="thirdPartyDataOtherWaiver">
-										<label>Where is the waiver for the database rights?</label>
-										<input type="url" required="required" placeholder="Waiver URL" />
-										<help>If the data owner has created their own waiver, we ask where it is so that we can check that it's publicly available and so that we can point reusers to it so they can check that it does in fact waive the database rights.</help>
-									</question>
-								</if>
-							</if>
-						</if>
-						<if test="this.thirdPartyDataLicence() === 'other'">
-							<question id="thirdPartyOtherDataLicenceName">
-								<label>What's the name of the licence?</label>
-								<input required="required" placeholder="Licence Name" />
-								<help>If the data owner is using another licence, we ask for its name so that we can refer to it within the Open Data Certificate.</help>
-							</question>
-							<question id="thirdPartyOtherDataLicenceURL">
-								<label>What's the location the licence?</label>
-								<input type="url" placeholder="Licence URL" />
-								<help>If the data owner are using another licence, we ask for a pointer to it so that we can link to it from within your Open Data Certificate.</help>
-							</question>
-							<question id="thirdPartyOtherDataLicenceOpen">
-								<label>Is the licence an open licence?</label>
-								<yesno required="required" />
-								<help more="http://opendefinition.org/">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet been assessed.</help>
-							</question>
-							<if test="this.thirdPartyOtherDataLicenceOpen() === 'false'">
-								<question id="thirdPartyOtherDataLicenceCanRepublish">
-									<label>Does the licence allow you to reuse and republish?</label>
-									<yesno required="required" />
-									<help>Even if the source data isn't published under an open licence, your licence to use the data might say that you can reuse and republish this data under an open licence in the way that you are. Because the licence for the source data is not an open licence, you will probably need to seek legal advice to work out whether your particular reuse and republication is allowed.</help>
-									<requirement>You must not publish as open data anything that includes data sourced from a third party unless that third party has given you a licence to do so.</requirement>
-								</question>
-							</if>
-						</if>
-						<question id="thirdPartyContentLicence">
-							<label>Under which licence can others reuse the content?</label>
-							<select required="required">
-								<option/>
-								<option value="cc-by">Creative Commons Attribution</option>
-								<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-								<option value="cc0">Creative Commons CCZero</option>
-								<option value="ogl">UK Open Government Licence</option>
-								<option value="na">Not applicable</option>
-								<option value="other">Other...</option>
-							</select>
-							<help>The creator of content automatically gets copyright over that content when they spend intellectual effort creating it. Note that creative content does not include facts. They need to have provided a waiver or licence that covers the copyright in the data so you know that you can reuse it. The licences that are listed here are the ones that are most commonly used; if there is no copyright in the data, it's expired, or you've waived copyright, choose 'Not applicable'. We ask about the licence because we want to make sure that the source data is actually open for you to reuse from a legal perspective.</help>
-						</question>
-						<if test="this.thirdPartyContentLicence() === 'na'">
-							<question id="thirdPartyContentNotApplicable">
-								<label>Why is a licence not applicable for this content?</label>
-								<radioset required="required">
-									<option value="norights">
-										<label>there is no copyright in this data</label>
-										<help>The data owner only has a copyright in this data if they have spent creative intellectual effort creating it, for example by creating text that is included within the data, or exercising judgement in choosing whether particular data is included. It's possible that there's no copyright in the data, for example if it only contains facts with no judgement involved in selecting what to include.</help>
-									</option>
-									<option value="expired">
-										<label>the applicable copyright has expired</label>
-										<help>Copyright lasts for a fixed length of time, based on either a number of years after the death of its creator or the publication of the content. If the content was created or published a long time ago, the copyright may have expired.</help>
-									</option>
-									<option value="waived">
-										<label>the applicable copyright has been waived</label>
-										<help>The data owner can waive your copyright, which means that no one owns it and you can do whatever you want with the data.</help>
-									</option>
-								</radioset>
-							</question>
-							<if test="this.thirdPartyContentNotApplicable() === 'waived'">
-								<question id="thirdPartyContentWaiver">
-									<label>Which waiver waives the copyright in this content?</label>
-									<select required="required">
-										<option/>
-										<option value="cc0">Creative Commons CCZero</option>
-										<option value="other">Other...</option>
-									</select>
-									<help>If the data owner waives their copyright, they should have provided a statement that says that they've done so, so that you know that you can do whatever you like with the data. They may have used an existing waiver (CCZero) or they could have authored their own.</help>
-								</question>
-								<if test="this.thirdPartyContentWaiver() === 'other'">
-									<question id="thirdPartyContentOtherWaiver">
-										<label>Where is the waiver for the copyright?</label>
-										<input type="url" required="required" placeholder="Waiver URL" />
-										<help>If the data owner has created their own waiver, we ask where it is so that we can check that it's publicly available and so that we can check that it does in fact waive their copyright.</help>
-									</question>
-								</if>
-							</if>
-						</if>
-						<if test="this.thirdPartyContentLicence() === 'other'">
-							<question id="thirdPartyOtherContentLicenceName">
-								<label>What's the name of the licence?</label>
-								<input required="required" placeholder="Licence Name" />
-								<help>If the data owner is using another licence, we ask for its name so that we can refer to it within the Open Data Certificate.</help>
-							</question>
-							<question id="thirdPartyOtherContentLicenceURL">
-								<label>What's the location the licence?</label>
-								<input type="url" placeholder="Licence URL" />
-								<help>If the data owner is using another licence, we ask for a pointer to it so that we can link to it from within your Open Data Certificate.</help>
-							</question>
-							<question id="thirdPartyOtherContentLicenceOpen">
-								<label>Is the licence an open licence?</label>
-								<yesno required="required" />
-								<help more="http://opendefinition.org/">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet been assessed.</help>
-							</question>
-							<if test="this.thirdPartyOtherContentLicenceOpen() === 'false'">
-								<question id="thirdPartyOtherContentLicenceCanRepublish">
-									<label>Does the licence allow you to republish?</label>
-									<yesno required="required" />
-									<help>Even if the source data isn't published under an open licence, your licence to use the data might say that you can reuse and republish this data under an open licence in the way that you are. Because the licence for the source data is not an open licence, you will probably need to seek legal advice to work out whether your particular reuse and republication is allowed.</help>
-									<requirement>You must not publish as open data anything that includes data sourced from a third party unless that third party has given you a licence to do so.</requirement>
-								</question>
-							</if>
-						</if>
-					</repeat>
-				</if>
-				<question id="crowdsourced">
-					<label>Was some of this data crowd-sourced?</label>
-					<yesno required="required" />
-					<help>Crowd-sourcing involves collating data that is gathered by individuals operating outside your organisation. We ask about crowd-sourcing because if the data includes information that was contributed by others, you need to ensure that they granted their permission to publish their contributions as open data.</help>
-					<if test="this.thirdPartyOrigin() === 'false'">
-						<requirement test="this.crowdsourced() === 'true'">You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced.</requirement>
-					</if>
-				</question>
-				<if test="this.crowdsourced() === 'true'">
-					<question id="crowdsourcedContent">
-						<label>Did contributions require judgement?</label>
-						<yesno required="required" />
-						<help>The individuals who contributed to your data may have needed to employ their creativity or judgement to make their contributions. For example, writing a description or choosing whether or not to include some data in a dataset would require judgement. If judgement is involved, the contributors will have copyright over their contributions, so we will then need to check that they have transferred or waived their rights, or licensed the data, to you.</help>
-					</question>
-					<if test="this.crowdsourcedContent() === 'true'">
-						<question id="claUrl">
-							<label>Where is the Contributor Licence Agreement (CLA)?</label>
-							<input type="url" placeholder="Contributor Licence Agreement URL" required="required" />
-							<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it.</help>
-						</question>
-						<question id="cldsRecorded">
-							<label>Have all contributors agreed to the CLA?</label>
-							<yesno required="required" />
-							<help>All contributors need to agree to a Contributor Licence Agreement (CLA) so that you can reuse or republish their contributions. You should keep a record of who has provided contributions and whether or not they have agreed to the CLA.</help>
-							<requirement>You must obtain agreement to a Contributor Licence Agreement from the contributors to your data to give you the right to republish their contributions as open data.</requirement>
-						</question>
-					</if>
-				</if>
 			</if>
 		</group>
 		<group id="privacy">
