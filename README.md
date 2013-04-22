@@ -1,6 +1,6 @@
 # ODI Open Data Certificate
 
-The [ODI's Open Data Certificate](http://theodi.github.com/open-data-certificate/certificate.html) specifies what good open data looks like in four main categories:
+The [ODI's Open Data Certificate](http://theodi.github.io/open-data-certificate/certificate.html) specifies what good open data looks like in four main categories:
 
   * **Legal Information** about the licence, ownership and privacy implications of the data
   * **Practical Information** about the timeliness, quality and sustainability of the data
