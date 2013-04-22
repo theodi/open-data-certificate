@@ -48,6 +48,13 @@
                 %span{:clas => "improvement-desc"} This data satisfies the requirements for key information infrastructure.
 
 
+%section
+  <h1>Dataset#new</h1>
+  <p>Find me in app/views/dataset/new.html.erb</p>
 
-<h1>Dataset#new</h1>
-<p>Find me in app/views/dataset/new.html.erb</p>
+
+%section#improvements{"data-bind" => "visible: certificateLevel() !== 'exemplar'"}
+  .page-header
+    %h1 Improving Your Open Data
+  %p.lead
+    You can improve the way you are publishing open data to make it more useful.

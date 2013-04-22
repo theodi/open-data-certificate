@@ -45,3 +45,29 @@
               %span.label.pull-right{:style => "margin-top: 10px;"} 0.4
     .container
       = yield
+
+    %footer#footer
+      .container
+        %nav
+          %ul
+            %li
+              %a{:href => "/privacy-policy"} Privacy Policy
+            %li
+              %a{:href => "/terms-of-use"} Terms of Use
+            %li
+              %a{:href => "/cookie-policy"} Cookie Policy
+            %li
+              %a{:href => "/feedback"} Feedback
+        %p
+          %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
+            %img{:alt => "Creative Commons Licence", :src => "http://i.creativecommons.org/l/by-sa/2.0/uk/80x15.png", :style => "border-width:0"}/
+          %a{:href => "http://www.theodi.org"} Open Data Institute
+          ·
+          %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} 65 Clifton Street, London EC2A 4JE
+          ·
+          %a{:href => "mailto:info@theodi.org"} info@theodi.org
+          ·
+          Company
+          %a{:href => "http://opencorporates.com/companies/gb/08030289"} 08030289
+          ·
+          VAT 143 7796 80
