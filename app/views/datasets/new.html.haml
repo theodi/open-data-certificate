@@ -49,8 +49,26 @@
 
 
 %section
-  <h1>Dataset#new</h1>
-  <p>Find me in app/views/dataset/new.html.erb</p>
+  %h1 Dataset#new
+  = form_for @dataset do |f|
+    %p
+      = f.label :title
+      = f.text_field :title
+    %p
+      = f.label :documentation_url
+      = f.text_field :documentation_url
+    %p
+      = f.label :curating_org
+      = f.text_field :curating_org
+    %p
+      = f.label :curator_url
+      = f.text_field :curator_url
+    %p
+      = f.label :data_kind
+      = f.text_field :data_kind
+    %p
+      = f.submit
+
 
 
 %section#improvements{"data-bind" => "visible: certificateLevel() !== 'exemplar'"}
