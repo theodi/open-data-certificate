@@ -1,0 +1,141 @@
+/*
+  © 2013 Open Data Institute
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+*= require_self
+*/
+
+
+/* import bootstrap this way so that we can alter variables just for this app */
+@import "twitter/bootstrap";
+@iconSpritePath:          "glyphicons-halflings.png";
+@iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+
+
+
+#alpha-banner {
+    border-radius: 0 0 0 0;
+    top: 0;
+    margin-bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+body {
+    margin-top: 40px; /* give room for the alpha banner */
+}
+
+#questionnaire .control-label { 
+    width: 270px; 
+    padding-left: 30px;
+}
+
+#questionnaire .controls { 
+    margin-left: 340px; 
+}
+
+#questionnaire .well .control-label {
+    width: 251px;
+    padding-left: 30px;
+}
+
+#questionnaire .well .controls {
+    margin-left: 321px;
+}
+
+#questionnaire .requirement .alert { 
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+#questionnaire .btn-help {
+    margin-left: -33px;
+    position: absolute;
+}
+
+#questionnaire .btn-option-help {
+    margin-left: -20px;
+    padding: 0;
+    position: absolute;
+}
+
+#questionnaire label .help-block {
+    margin-top: 0;
+}
+
+#questionnaire .control-label .badge-circular {
+    margin-left: -30px;
+}
+
+#questionnaire .radio.inline + .label {
+    position: relative;
+    top: 4px;
+}
+
+.improvements {
+    margin-top: 14px;
+    margin-bottom: 20px;
+}
+
+.improvement {
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+.improvement-label {
+    display: block;
+    float: left;
+    width: 160px;
+    text-align: right;
+}
+
+.improvement-desc {
+    display: block;
+    margin-left: 180px;
+}
+
+.label-pilot,
+.label-standard,
+.label-exemplar {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.label-pilot,
+.badge-pilot { 
+    background-color: peru; 
+    box-shadow: 0 0 2px peru;
+}
+
+.label-standard,
+.badge-standard { 
+    background-color: silver; 
+    box-shadow: 0 0 2px silver;
+}
+
+.label-exemplar,
+.badge-exemplar { 
+    background-color: gold; 
+    box-shadow: 0 0 2px gold;
+}
+
+.footer {
+    background-color: #F5F5F5;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 70px;
+    padding: 30px 0;
+    text-align: center;
+}
