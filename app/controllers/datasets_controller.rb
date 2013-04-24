@@ -5,6 +5,18 @@ class DatasetsController < ApplicationController
 
   def create
     @dataset = Dataset.new(params[:dataset])
-    render 'new'
+
+    puts @dataset
+
+    if @dataset.save
+      redirect_to @dataset
+    else
+      render 'new'
+    end
+
+  end
+
+  def show
+    @dataset = Dataset.find params[:id]
   end
 end
