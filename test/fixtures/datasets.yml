@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  documentation_url: MyString
+  curating_org: MyString
+  curator_url: MyString
+  data_kind: MyString
+
+two:
+  title: MyString
+  documentation_url: MyString
+  curating_org: MyString
+  curator_url: MyString
+  data_kind: MyString

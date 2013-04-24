@@ -1,5 +1,7 @@
 OpenDataCertificate::Application.routes.draw do
-  root :to => "dataset#new"
+  root :to => "datasets#new"
+
+  resources :datasets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
