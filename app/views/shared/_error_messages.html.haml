@@ -1,0 +1,9 @@
+- if target.errors.any?
+  %div#error_explanation
+    %h3
+      = pluralize(target.errors.count, "error")
+      prohibited this record from being saved:
+
+    - target.errors.full_messages.each do |msg|
+      %p
+        = msg

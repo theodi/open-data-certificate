@@ -50,23 +50,25 @@
 
 %section
   %h1 Dataset#new
+
   = form_for @dataset do |f|
-    %p
+    = render "shared/error_messages", :target => @dataset
+    %div.field
       = f.label :title
       = f.text_field :title
-    %p
+    %div.field
       = f.label :documentation_url
       = f.text_field :documentation_url
-    %p
+    %div.field
       = f.label :curating_org
       = f.text_field :curating_org
-    %p
+    %div.field
       = f.label :curator_url
       = f.text_field :curator_url
-    %p
+    %div.field
       = f.label :data_kind
       = f.text_field :data_kind
-    %p
+    %div.field
       = f.submit
 
 
