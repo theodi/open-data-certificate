@@ -34,16 +34,21 @@
                 %li.active
                   %a{:href => "#questionnaire"} Questionnaire
                 %li.divider-vertical
-                %li{"data-bind" => "css: { disabled: certificateLevel() === 'none' }"}
+                %li
                   %a{:href => "#certificate"} Certificate
                 %li.divider-vertical
-                %li{"data-bind" => "css: { disabled: certificateLevel() === 'none' || certificateLevel() === 'exemplar' }"}
+                %li
                   %a{:href => "#improvements"} Improvements
                 %li.divider-vertical
                 %li
                   %a{:href => "index.html"} About
               %span.label.pull-right{:style => "margin-top: 10px;"} 0.4
     .container
+
+      - flash.each do |type, value|
+        .flash.alert{ :class => "alert-#{type}" }
+          = value 
+
       = yield
 
     %footer#footer

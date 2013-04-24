@@ -1,7 +1,11 @@
 OpenDataCertificate::Application.routes.draw do
+  
   root :to => "datasets#new"
 
   resources :datasets
+
+  devise_for :users
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

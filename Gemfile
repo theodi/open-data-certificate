@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 # gem 'sqlite3'
 gem "mongoid", "~> 3.0.0"
 # gem 'mongo_mapper'
-# gem 'bson_ext'
+gem 'bson_ext'
 
 
 # Gems used only for assets and not required
@@ -43,3 +43,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem "devise", ">= 2.2.3"
