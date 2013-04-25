@@ -52,7 +52,12 @@
         .flash.alert{ :class => "alert-#{type}" }
           = value 
 
-      = yield
+      = yield :above_content
+
+      %section
+        = yield
+
+      = yield :below_content
 
     %footer#footer
       .container
