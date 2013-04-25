@@ -1,8 +1,11 @@
-=render 'wrap_top'
+- content_for :above_content do
+	=render 'wrap_top'
 
-%section
-  %h1 Dataset#new
 
-  =render 'form'
+%h1 Dataset#new
 
-=render 'wrap_bottom'
+=render 'form'
+
+
+- content_for :below_content do
+	=render 'wrap_bottom'

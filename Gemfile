@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 # gem 'sqlite3'
 gem "mongoid", "~> 3.0.0"
 # gem 'mongo_mapper'
-# gem 'bson_ext'
+gem 'bson_ext'
 
 
 # Gems used only for assets and not required
@@ -27,6 +27,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem "factory_girl_rails", "~> 4.0"
+end
+
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -43,3 +48,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem "devise", ">= 2.2.3"
