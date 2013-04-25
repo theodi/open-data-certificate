@@ -20,11 +20,11 @@
       .container
         .branding
           %a#logo{:href => "http://theodi.org/", :rel => "home", :title => "Home"}
-            %img.b_png{:alt => "Home", :height => "54", :src => "http://theodi.org/sites/default/files/logo.png", :width => "131"}/
+            = image_tag "logo.png", :size => "131x54"
           %hgroup#name-and-slogan
             %h1#site-name
               %a{:href => "http://theodi.org/", :rel => "home", :title => "Open Data Institute"}
-                %img.b_png{:alt => "Open Data Institute", :height => "30", :src => "http://theodi.org/sites/default/files/logo_a.png", :width => "326"}/
+                = image_tag "logo_text.png", :size => "326x30", :alt => "Open Data Institute"
             %h2#site-slogan Knowledge for everyone
         %nav
           #mainnav.navbar.navbar-inverse
@@ -68,7 +68,7 @@
               %a{:href => "/feedback"} Feedback
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
-            %img{:alt => "Creative Commons Licence", :src => "http://i.creativecommons.org/l/by-sa/2.0/uk/80x15.png", :style => "border-width:0"}/
+            = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
           %a{:href => "http://www.theodi.org"} Open Data Institute
           ·
           %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} 65 Clifton Street, London EC2A 4JE
