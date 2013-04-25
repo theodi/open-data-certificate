@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DatasetsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
 
   test "should get new" do
     get :new
