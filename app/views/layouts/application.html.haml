@@ -29,19 +29,24 @@
         %nav
           #mainnav.navbar.navbar-inverse
             .navbar-inner
-              %a.brand{:href => "#"} Open Data Certificate
+              %a.brand{:href => "/"}
+                = t 'menu.title'
               %ul.nav
                 %li.active
-                  %a{:href => "#questionnaire"} Questionnaire
+                  %a{:href => "#questionnaire"}
+                    = t 'menu.questionnaire'
                 %li.divider-vertical
                 %li
-                  %a{:href => "#certificate"} Certificate
+                  %a{:href => "#certificate"}
+                    = t 'menu.certificate'
                 %li.divider-vertical
                 %li
-                  %a{:href => "#improvements"} Improvements
+                  %a{:href => "#improvements"}
+                    = t 'menu.improvements'
                 %li.divider-vertical
                 %li
-                  %a{:href => "index.html"} About
+                  %a{:href => "index.html"}
+                    = t 'menu.about'
                 %li.divider-vertical
                 %li
                   = render 'shared/auth_bar'
@@ -64,13 +69,17 @@
         %nav
           %ul
             %li
-              %a{:href => "/privacy-policy"} Privacy Policy
+              %a{:href => "#privacy-policy"}
+                = t 'footmenu.privacy'
             %li
-              %a{:href => "/terms-of-use"} Terms of Use
+              %a{:href => "#terms-of-use"} 
+                = t 'footmenu.terms'
             %li
-              %a{:href => "/cookie-policy"} Cookie Policy
+              %a{:href => "#cookie-policy"} 
+                = t 'footmenu.cookies'
             %li
-              %a{:href => "/feedback"} Feedback
+              %a{:href => "#feedback"} 
+                = t 'footmenu.feedback'
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
             = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'

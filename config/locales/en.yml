@@ -2,7 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+
+  menu:
+    title:         Open Data Certificate
+    questionnaire: Questionnaire
+    certificate:   Certificate
+    improvements:  Improvements
+    about:         About
+
+  footmenu:
+    privacy:  Privacy Policy
+    terms:    Terms of Use
+    cookies:  Cookie Policy
+    feedback: Feedback
 
   improvements:
     pilot_1: You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.
