@@ -2,6 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:
     title:         Open Data Certificate
@@ -16,6 +17,29 @@ en:
     cookies:  Cookie Policy
     feedback: Feedback
 
+  bands:
+    basic:
+      title: Basic
+      description: This data satisfies the fundamental requirements for open data
+    pilot:
+      title: Pilot
+      description: This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
+    standard:
+      title: Standard
+      description: This data satisfies the requirements for routinely published open data that encourages reuse.
+    exemplar:
+      title: Exemplar
+      description: This data satisfies the requirements for key information infrastructure.
+
+  questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
+
+  questionnaire_footer: Improving Your Open Data
+  questionnaire_footer_extra: You can improve the way you are publishing open data to make it more useful.
+
+  # more basic/general translations
+  help: Help
+
+  # translations relating to the questionnaires
   improvements:
     pilot_1: You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.
     pilot_2: You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.

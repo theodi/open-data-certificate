@@ -9,13 +9,7 @@
   %body
     #alpha-banner.alert.alert-danger
       %p
-        This is an
-        %strong alpha version
-        of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add
-        %a{:href => "https://github.com/theodi/open-data-certificate/issues"} issues on github
-        or contact
-        = succeed "." do
-          %a{:href => "mailto:certificate@theodi.org"} certificate@theodi.org
+        = t :alpha_note
     %header#header
       .container
         .branding

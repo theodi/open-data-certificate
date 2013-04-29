@@ -1,11 +1,11 @@
 %section
   %p.lead
-    All open data is good, but some is better than others. This tool gives you a certificate
-    that will help people understand the open data you are publishing.
+    =t :questionnaire_header
   #main-help-accordion.accordion
     .accordion-group
       .accordion-heading
-        %a.accordion-toggle{"data-parent" => "#main-help-accordion", "data-toggle" => "collapse", :href => "#main-help"} Help
+        %a.accordion-toggle{"data-parent" => "#main-help-accordion", "data-toggle" => "collapse", :href => "#main-help"}
+          = t :help
       #main-help.accordion-body.collapse.in
         .accordion-inner
           .row-fluid
@@ -22,27 +22,27 @@
                 %span.improvement-label
                   %span.label.label-info
                     %i.icon-star.icon-white
-                    Basic
-                %span.improvement-desc This data satisfies the fundamental requirements for open data.
+                    = t 'bands.basic.title'
+                %span.improvement-desc
+                  = t 'bands.basic.description'
               .improvement
                 %span.improvement-label
                   %span.label.label-pilot
                     %i.icon-star.icon-white
-                    Pilot
+                    = t 'bands.pilot.title'
                 %span.improvement-desc
-                  This data satisfies the requirements for initial forays into publishing open data.
-                  It provides sufficient support to prompt some reuser experimentation with a data.
+                  = t 'bands.pilot.description'
               .improvement
                 %span.improvement-label
                   %span.label.label-standard
                     %i.icon-star.icon-white
-                    Standard
-                %span{:clas => "improvement-desc"}
-                  This data satisfies the requirements for routinely published open data that encourages
-                  reuse.
+                    = t 'bands.standard.title'
+                %span.improvement-desc
+                  = t 'bands.standard.description'
               .improvement
                 %span.improvement-label
                   %span.label.label-exemplar
                     %i.icon-star.icon-white
-                    Exemplar
-                %span{:clas => "improvement-desc"} This data satisfies the requirements for key information infrastructure.
+                    = t 'bands.exemplar.title'
+                %span.improvement-desc
+                  = t 'bands.exemplar.description'
