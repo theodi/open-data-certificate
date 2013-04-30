@@ -6,7 +6,7 @@ class CreateDatasets < ActiveRecord::Migration
       t.string :curating_org
       t.string :curator_url
       t.string :data_kind
-      t.references :user_id
+      t.references :user
 
       t.timestamps
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430110368) do
+ActiveRecord::Schema.define(:version => 20130430152200) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20130430110368) do
     t.string   "curating_org"
     t.string   "curator_url"
     t.string   "data_kind"
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
