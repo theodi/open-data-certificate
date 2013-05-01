@@ -1,0 +1,48 @@
+%section
+  %p.lead
+    All open data is good, but some is better than others. This tool gives you a certificate
+    that will help people understand the open data you are publishing.
+  #main-help-accordion.accordion
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{"data-parent" => "#main-help-accordion", "data-toggle" => "collapse", :href => "#main-help"} Help
+      #main-help.accordion-body.collapse.in
+        .accordion-inner
+          .row-fluid
+            .span6
+              %p Questions marked with a label must be answered to gain that level of the certificate.
+            .span6
+              %p
+                Click on question marks
+                %i.icon-question-sign
+                or labels to findout more about what to enter.
+          .row-fluid
+            .span12.improvements
+              .improvement
+                %span.improvement-label
+                  %span.label.label-info
+                    %i.icon-star.icon-white
+                    Basic
+                %span.improvement-desc This data satisfies the fundamental requirements for open data.
+              .improvement
+                %span.improvement-label
+                  %span.label.label-pilot
+                    %i.icon-star.icon-white
+                    Pilot
+                %span.improvement-desc
+                  This data satisfies the requirements for initial forays into publishing open data.
+                  It provides sufficient support to prompt some reuser experimentation with a data.
+              .improvement
+                %span.improvement-label
+                  %span.label.label-standard
+                    %i.icon-star.icon-white
+                    Standard
+                %span{:clas => "improvement-desc"}
+                  This data satisfies the requirements for routinely published open data that encourages
+                  reuse.
+              .improvement
+                %span.improvement-label
+                  %span.label.label-exemplar
+                    %i.icon-star.icon-white
+                    Exemplar
+                %span{:clas => "improvement-desc"} This data satisfies the requirements for key information infrastructure.

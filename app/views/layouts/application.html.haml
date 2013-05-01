@@ -1,0 +1,86 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title ODI Open Data Certificate
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #alpha-banner.alert.alert-danger
+      %p
+        This is an
+        %strong alpha version
+        of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add
+        %a{:href => "https://github.com/theodi/open-data-certificate/issues"} issues on github
+        or contact
+        = succeed "." do
+          %a{:href => "mailto:certificate@theodi.org"} certificate@theodi.org
+    %header#header
+      .container
+        .branding
+          %a#logo{:href => "http://theodi.org/", :rel => "home", :title => "Home"}
+            = image_tag "logo.png", :size => "131x54"
+          %hgroup#name-and-slogan
+            %h1#site-name
+              %a{:href => "http://theodi.org/", :rel => "home", :title => "Open Data Institute"}
+                = image_tag "logo_text.png", :size => "326x30", :alt => "Open Data Institute"
+            %h2#site-slogan Knowledge for everyone
+        %nav
+          #mainnav.navbar.navbar-inverse
+            .navbar-inner
+              %a.brand{:href => "#"} Open Data Certificate
+              %ul.nav
+                %li.active
+                  %a{:href => "#questionnaire"} Questionnaire
+                %li.divider-vertical
+                %li
+                  %a{:href => "#certificate"} Certificate
+                %li.divider-vertical
+                %li
+                  %a{:href => "#improvements"} Improvements
+                %li.divider-vertical
+                %li
+                  %a{:href => "index.html"} About
+                %li.divider-vertical
+                %li
+                  = render 'shared/auth_bar'
+              %span.label.pull-right{:style => "margin-top: 10px;"} 0.4
+    .container
+
+      - flash.each do |type, value|
+        .flash.alert{ :class => "alert-#{type}" }
+          = value 
+
+      = yield :above_content
+
+      %section
+        = yield
+
+      = yield :below_content
+
+    %footer#footer
+      .container
+        %nav
+          %ul
+            %li
+              %a{:href => "/privacy-policy"} Privacy Policy
+            %li
+              %a{:href => "/terms-of-use"} Terms of Use
+            %li
+              %a{:href => "/cookie-policy"} Cookie Policy
+            %li
+              %a{:href => "/feedback"} Feedback
+        %p
+          %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
+            = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
+          %a{:href => "http://www.theodi.org"} Open Data Institute
+          ·
+          %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} 65 Clifton Street, London EC2A 4JE
+          ·
+          %a{:href => "mailto:info@theodi.org"} info@theodi.org
+          ·
+          Company
+          %a{:href => "http://opencorporates.com/companies/gb/08030289"} 08030289
+          ·
+          VAT 143 7796 80

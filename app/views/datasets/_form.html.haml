@@ -1,0 +1,38 @@
+= form_for @dataset, :html => {:class => 'form-horizontal', :id => 'questionnaire'},  :builder => HorizontalFormBuilder do |f|
+  = render "shared/error_messages", :target => @dataset
+  %div.control-group
+    = f.label :title
+    .controls
+      = f.text_field :title, :placeholder => "Data Title"
+  %div.control-group
+    = f.label :documentation_url
+    .controls
+      = f.text_field :documentation_url, :placeholder => "Publisher"
+  %div.control-group
+    = f.label :curating_org
+    .controls
+      = f.text_field :curating_org, :placeholder => "Publisher URL"
+  %div.control-group
+    = f.label :curator_url
+    .controls
+      = f.text_field :curator_url, :placeholder => "Documentation URL"
+  %div.control-group
+    = f.label :data_kind
+    .controls
+      %label.radio
+        = f.radio_button :data_kind, :one_off_single
+        a one-off release of a single dataset
+      %label.radio
+        = f.radio_button :data_kind, :one_off_set
+        a one-off release of a set of related datasets
+      %label.radio
+        = f.radio_button :data_kind, :ongoing_release
+        ongoing release of a series of related datasets
+      %label.radio
+        = f.radio_button :data_kind, :service_or_api
+        a service or API for accessing open data
+
+  - if @dataset.new_record?
+    %div.control-group
+      .controls
+        = f.submit
