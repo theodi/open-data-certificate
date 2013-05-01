@@ -149,7 +149,7 @@
 	      </form>
 	  		<section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
   				<div id="certificate">
-  					<h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate</h1>
+  					<h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate <small class="placeholder" data-bind="text: dataTitle"></small></h1>
   					<xsl:apply-templates select="certificate" />
   				</div>
   				<p>
@@ -633,6 +633,12 @@
 	<div class="conditional" data-bind="visible: {local:knockoutTest(@test)}">
 		<xsl:apply-templates />
 	</div>
+</xsl:template>
+
+<xsl:template match="p//if">
+	<span class="conditional" data-bind="visible: {local:knockoutTest(@test)}">
+		<xsl:apply-templates />
+	</span>
 </xsl:template>
 
 <xsl:template match="placeholder">

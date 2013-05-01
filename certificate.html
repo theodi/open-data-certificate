@@ -271,15 +271,29 @@
                         </div>
                         <div class="conditional" data-bind="visible: publisherOrigin() === 'false'">
                            				
-                           <div class="control-group"><label class="control-label" for="sourceDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe the sources of the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#sourceDocumentationUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="sourceDocumentationUrl" name="sourceDocumentationUrl" data-bind="value: sourceDocumentationUrl, valueUpdate: 'afterkeydown'" placeholder="Data Sources Documentation URL"> <span class="label label-standard" data-toggle="collapse" data-target="#sourceDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="sourceDocumentationUrl-help">If not all the data was originally created or gathered by you then even if you have
+                           <div class="control-group"><label class="control-label" for="sourceDocumentationUrl"><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceDocumentationUrlStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Where do you describe the sources of the data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#sourceDocumentationUrl-help"><i class="icon-question-sign"></i></button><input type="url" class="span5" id="sourceDocumentationUrl" name="sourceDocumentationUrl" data-bind="value: sourceDocumentationUrl, valueUpdate: 'afterkeydown'" placeholder="Data Sources Documentation URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#sourceDocumentationUrl-requirement"><i class="icon-star icon-white"></i> Pilot</span><span class="help-block collapse" id="sourceDocumentationUrl-help">If not all the data was originally created or gathered by you then even if you have
                                     the rights to publish it, it is good practice to document where the data was sourced
                                     from (its provenance) and the rights under which you are publishing the data.</span><div class="requirement collapse" id="sourceDocumentationUrl-requirement">
-                                    <p class="alert alert-info"><a href="#sourceDocumentationUrl-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should document where the data was sourced from and the rights under which you
+                                    <p class="alert alert-info"><a href="#sourceDocumentationUrl-requirement"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a> You should document where the data was sourced from and the rights under which you
                                        are publishing the data so reusers are assured that they can reuse the parts sourced
                                        from third parties.
                                     </p>
                                  </div>
                               </div>
+                           </div>
+                           				
+                           <div class="conditional" data-bind="visible: sourceDocumentationUrl() !== ''">
+                              					
+                              <div class="control-group"><label class="control-label"><span class="badge badge-circular badge-success pull-left" data-bind="visible: sourceDocumentationMetadataStatus() === 'complete'"><i class="icon icon-white icon-ok" title="Complete"></i></span> Does the documentation about the sources of the data include machine-readable data?</label><div class="controls"><button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#sourceDocumentationMetadata-help"><i class="icon-question-sign"></i></button><label class="radio inline"><input type="radio" value="false" name="sourceDocumentationMetadata" data-bind="checked: sourceDocumentationMetadata"> No</label><label class="radio inline"><input type="radio" value="true" name="sourceDocumentationMetadata" data-bind="checked: sourceDocumentationMetadata"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#sourceDocumentationMetadata-requirement"><i class="icon-star icon-white"></i> Standard</span><span class="help-block collapse" id="sourceDocumentationMetadata-help">The documentation about the sources of the data needs to be human-readable, so that
+                                       reusers can work out what it says, but it also helps if it contains machine-readable
+                                       metadata. This helps those people who publish open data to find out how their data
+                                       is being used, which helps them to justify its ongoing publication.</span><div class="requirement collapse" id="sourceDocumentationMetadata-requirement">
+                                       <p class="alert alert-info"><a href="#sourceDocumentationMetadata-requirement"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a> You should include machine-readable data about the sources of data that you're using.
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                              				
                            </div>
                            			
                         </div>
@@ -1452,8 +1466,7 @@
          </form>
          <section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
             <div id="certificate">
-               <h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate
-               </h1>
+               <h1><span class="placeholder" data-bind="text: certificateLevelLabel"></span> Open Data Certificate <small class="placeholder" data-bind="text: dataTitle"></small></h1>		
                		
                <p>
                   			<span class="placeholder" data-bind="text: dataTitle" data-placeholder="This dataset">This dataset</span> has been certified as <span class="placeholder" data-bind="text: certificateLevelLabel" data-placeholder=""></span> Open Data.
@@ -1463,6 +1476,53 @@
                <p class="alert">This certificate has been awarded based on the answers provided by <a class="placeholder" data-bind="text: publisher, attr: { href: publisherUrl }" data-placeholder="its curator">its curator</a>. The awarded level is based on the assumption that these answers are accurate. The
                   answers have not been audited by the Open Data Institute.
                </p>
+               		
+               <p>This data is published by <a class="placeholder" data-bind="text: publisher, attr: { href: publisherUrl }" data-placeholder=""></a>.
+               </p>
+               		
+               <section>
+                  			
+                  <h2>Legal Information</h2>
+                  			
+                  <div class="conditional" data-bind="visible: publisherRights() === 'yes'">
+                     				
+                     <p>
+                        					<a class="placeholder" data-bind="text: publisher, attr: { href: publisherUrl }" data-placeholder=""></a> has asserted they have the right to publish the data as open data
+                        					<span class="conditional" data-bind="visible: publisherOrigin() === 'true'">and that they originally created or gathered all the data.</span>
+                        					<span class="conditional" data-bind="visible: publisherOrigin() === 'false'">
+                           						but that they did not originally create or gather all of it.
+                           					</span>
+                        				
+                     </p>
+                     			
+                  </div>
+                  			
+                  <div class="conditional" data-bind="visible: publisherRights() === 'unsure'">
+                     				
+                     <p>
+                        					<a class="placeholder" data-bind="text: publisher, attr: { href: publisherUrl }" data-placeholder=""></a> has the right to publish the data as open data
+                        					<span class="conditional" data-bind="visible: publisherOrigin() === 'true'">because they originally created or gathered it.</span>
+                        					<span class="conditional" data-bind="visible: publisherOrigin() === 'false'"></span>
+                        				
+                     </p>
+                     			
+                  </div>
+                  			
+                  <div class="conditional" data-bind="visible: sourceDocumentationUrl() !== ''">
+                     				
+                     <p>
+                        					<strong>Further Documentation:</strong>
+                        					<a data-bind="attr: { href: sourceDocumentationUrl }">description of the sources of this data</a>
+                        					<span class="conditional" data-bind="visible: sourceDocumentationMetadata() === 'true'">
+                           						<small>includes machine-readable metadata</small>
+                           					</span>
+                        				
+                     </p>
+                     			
+                  </div>
+                  		
+               </section>
+               		
                	
             </div>
             <p><a id="download-certificate" data-bind="attr: { href: certificateHTML }" target="_new" class="btn btn-primary">Download Certificate</a></p>
@@ -1479,6 +1539,11 @@
                <div data-bind="visible: releaseType() !== 'collection'">
                   <p class="improvement" data-bind="visible: documentationUrl() === ''"><a class="improvement-label" href="#documentationUrl" data-toggle="tab" data-target="#"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a page that provides documentation about the open data you are publishing
                         so that reusers can understand its context, content and utility.</span></p>
+               </div>
+               <div data-bind="visible: publisherOrigin() === 'false'">
+                  <p class="improvement" data-bind="visible: sourceDocumentationUrl() === ''"><a class="improvement-label" href="#sourceDocumentationUrl" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should document where the data was sourced from and the rights under which you
+                        are publishing the data so reusers are assured that they can reuse the parts sourced
+                        from third parties.</span></p>
                </div>
                <p class="improvement" data-bind="visible: copyrightURL() === ''"><a class="improvement-label" href="#copyrightURL" data-toggle="tab" data-target="#legal"><span class="label label-pilot"><i class="icon-star icon-white"></i>Pilot</span></a><span class="improvement-desc">You should have a page that states your copyright over the data and provides details
                      of any attribution that people should use so that reusers understand how they can
@@ -1599,9 +1664,9 @@
             <hr>
             <div id="improvements-standard" class="improvements">
                <div data-bind="visible: publisherOrigin() === 'false'">
-                  <p class="improvement" data-bind="visible: sourceDocumentationUrl() === ''"><a class="improvement-label" href="#sourceDocumentationUrl" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should document where the data was sourced from and the rights under which you
-                        are publishing the data so reusers are assured that they can reuse the parts sourced
-                        from third parties.</span></p>
+                  <div data-bind="visible: sourceDocumentationUrl() !== ''">
+                     <p class="improvement" data-bind="visible: sourceDocumentationMetadata() === ''"><a class="improvement-label" href="#sourceDocumentationMetadata" data-toggle="tab" data-target="#legal"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should include machine-readable data about the sources of data that you're using.</span></p>
+                  </div>
                </div>
                <div data-bind="visible: copyrightURL() !== ''">
                   <p class="improvement" data-bind="visible: !copyrightStatementMetadataLicense()"><a class="improvement-label" href="#copyrightStatementMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i>Standard</span></a><span class="improvement-desc">You should provide machine-readable data in your copyright statement about the licences
@@ -1960,6 +2025,13 @@ certificate.sourceDocumentationUrlStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.sourceDocumentationMetadata = ko.observable('');
+certificate.sourceDocumentationMetadataStatus = ko.computed(function () {
+  var status;
+  if (certificate.sourceDocumentationMetadata() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
 certificate.copyrightURL = ko.observable('');
 certificate.copyrightURLStatus = ko.computed(function () {
   var status;
@@ -2224,7 +2296,16 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
-	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.sourceDocumentationUrl() !== '') {
+
+	if (certificate.sourceDocumentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.sourceDocumentationMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	if (certificate.sourceDocumentationMetadata() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
 
@@ -3503,7 +3584,16 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
 	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
-	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
+	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.sourceDocumentationUrl() !== '') {
+
+	if (certificate.sourceDocumentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
+	else if (certificate.sourceDocumentationMetadataStatus() === 'required') unmetRequirements['basic']++;
+	else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	if (certificate.sourceDocumentationMetadata() !== 'true') unmetRequirements['standard']++; 
+
+}
 
 }
 
@@ -4136,6 +4226,38 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 	else if (certificate.librariesStatus() === 'required') unmetRequirements['basic']++;
 	else if (certificate.librariesStatus() !== 'optional') unmetRequirements[certificate.librariesStatus()]++;
 	if (certificate.librariesStatus() !== 'complete') unmetRequirements['exemplar']++; 
+
+	if (certificate.publisherRights() === 'yes') {
+
+	if (certificate.publisherOrigin() === 'true') {
+
+}
+
+	if (certificate.publisherOrigin() === 'false') {
+
+}
+
+}
+
+	if (certificate.publisherRights() === 'unsure') {
+
+	if (certificate.publisherOrigin() === 'true') {
+
+}
+
+	if (certificate.publisherOrigin() === 'false') {
+
+}
+
+}
+
+	if (certificate.sourceDocumentationUrl() !== '') {
+
+	if (certificate.sourceDocumentationMetadata() === 'true') {
+
+}
+
+}
 
 		  				if (unmetRequirements.basic > 0) {
 		  					return 'none';
