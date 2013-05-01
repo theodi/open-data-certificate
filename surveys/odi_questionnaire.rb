@@ -12,7 +12,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     a_no "no, you don't have the right to publish the data as open data"
     a_dont_know "you don't know whether you have the right to publish the data as open data"
 
-    label 'You must have the right to publish data that you publish.', :class => 'requirement'
+    label 'You must have the right to publish data that you publish.', :custom_renderer => '/surveyor_partials/requirement_alert' # TODO: or is it simpler to pass a "custom_class" attribute (or pass that too, rather than hard-coding in the partial)?
     dependency :rule => 'A'
     condition_A :q_do_you_have_rights, '==', :a_no
 
@@ -32,7 +32,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     condition_A :q_do_you_have_rights, '==', :a_dont_know
     condition_B :q_gathered_by_you, '==', :a_no
 
-    label "You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.", :class => 'requirement'
+    label "You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.", :custom_renderer => '/surveyor_partials/requirement_alert'
     dependency :rule => 'A and B and C'
     condition_A :q_gathered_by_you, '==', :a_no
     condition_B :q_extracted_and_calculated, '==', :a_no
@@ -45,7 +45,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     dependency :rule => 'A'
     condition_A :q_extracted_and_calculated, '==', :a_yes
 
-    label 'You should get legal advice to ensure that you have the right to republish this data.', :class => 'requirement'
+    label 'You should get legal advice to ensure that you have the right to republish this data.', :custom_renderer => '/surveyor_partials/requirement_alert'
     dependency :rule => 'A'
     condition_A :q_other_data_sources_open, '==', :a_no
 
@@ -57,7 +57,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     condition_A :q_do_you_have_rights, '==', :a_dont_know
     condition_B :q_gathered_by_you, '==', :a_no
 
-    label "You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced."
+    label "You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced.", :custom_renderer => '/surveyor_partials/requirement_alert'
     dependency :rule => 'A and B and C'
     condition_A :q_gathered_by_you, '==', :a_no
     condition_B :q_crowd_sourced, '==', :a_no
@@ -83,7 +83,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     dependency :rule => 'A'
     condition_A :q_require_judgement, '==', :a_yes
 
-    label 'You should get legal advice to ensure that you have the right to republish this data.'
+    label 'You should get legal advice to ensure that you have the right to republish this data.', :custom_renderer => '/surveyor_partials/requirement_alert'
     dependency :rule => 'A'
     condition_A :q_cla_agreed_by_all, '==', :a_no
 
@@ -154,10 +154,9 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     dependency :rule => 'A'
     condition_A :q_which_database_license, '==', :a_other
 
-    label 'You must publish open data under an open licence so that others can reuse it'
+    label 'You must publish open data under an open licence so that others can reuse it', :custom_renderer => '/surveyor_partials/requirement_alert'
     dependency :rule => 'A'
     condition_A :q_is_database_license_open, '==', :a_no
-
 
     q_which_content_license 'Under which licence can others reuse the content?', :pick => :one, :display_type => :dropdown
     a_0 'choose one...'
