@@ -17,3 +17,5 @@
 # Ignore local VM properties. 
 /.vagrant
 
+
+/.DS_Store
