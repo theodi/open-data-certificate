@@ -37,9 +37,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bson (1.8.5)
-    bson_ext (1.8.5)
-      bson (~> 1.8.5)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -62,6 +59,9 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    fastercsv (1.5.5)
+    formtastic (2.1.1)
+      actionpack (~> 3.0)
     haml (4.0.2)
       tilt
     hike (1.2.2)
@@ -81,17 +81,14 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.22)
-    mongoid (3.0.23)
-      activemodel (~> 3.1)
-      moped (~> 1.2)
-      origin (~> 1.0)
-      tzinfo (~> 0.3.22)
-    moped (1.4.5)
+    mime-types (1.23)
     multi_json (1.7.2)
-    origin (1.0.11)
+    mustache (0.99.4)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    rabl (0.6.14)
+      activesupport (>= 2.3.14)
+      multi_json (~> 1.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -118,7 +115,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.4)
-    sass (3.2.7)
+    sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -128,6 +125,16 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.7)
+    surveyor (1.4.0)
+      fastercsv (~> 1.5.4)
+      formtastic (~> 2.1.0)
+      haml (>= 3.1.3, < 5.0)
+      mustache (= 0.99.4)
+      rabl (~> 0.6.13)
+      rails (~> 3.0)
+      sass
+      uuidtools (~> 2.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -140,6 +147,7 @@ GEM
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uuidtools (2.1.4)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -147,7 +155,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext
   coffee-rails (~> 3.2.1)
   devise (>= 2.2.3)
   factory_girl_rails (~> 4.0)
@@ -155,8 +162,9 @@ DEPENDENCIES
   jquery-rails
   less-rails
   less-rails-bootstrap!
-  mongoid (~> 3.0.0)
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  sqlite3
+  surveyor
   therubyracer
   uglifier (>= 1.0.3)
