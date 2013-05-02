@@ -17,7 +17,7 @@ en:
     cookies:  Cookie Policy
     feedback: Feedback
 
-  bands:
+  levels:
     basic:
       title: Basic
       description: This data satisfies the fundamental requirements for open data
