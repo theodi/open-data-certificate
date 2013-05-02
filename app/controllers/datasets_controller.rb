@@ -19,6 +19,10 @@ class DatasetsController < ApplicationController
 
   end
 
+  def index
+    @datasets = current_user ? current_user.datasets : []
+  end
+
   def show
     @dataset = Dataset.find params[:id]
 

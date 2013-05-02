@@ -3,3 +3,11 @@
 
 en:
   hello: "Hello world"
+
+  improvements:
+    pilot_1: You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.
+    pilot_2: You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.
+    pilot_3: You should provide a guarantee to reusers that the data will be available in this form for about a year so that they know they can rely on it.
+    pilot_4: You should provide the data in a machine-readable format so that it's easy to reuse.
+    pilot_5: You should have a contact email address so that people can get in touch with you about any questions about the data.
+    pilot_6: You should provide a contact email address so that reusers with concerns about disclosure of personal details within the data can get in touch.

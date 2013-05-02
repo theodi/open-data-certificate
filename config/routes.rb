@@ -1,5 +1,7 @@
 OpenDataCertificate::Application.routes.draw do
   
+  mount Surveyor::Engine => "/surveys", :as => "surveyor"
+
   root :to => "datasets#new"
 
   resources :datasets
