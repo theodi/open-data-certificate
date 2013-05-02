@@ -1,0 +1,9 @@
+# encoding: utf-8
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook "apt"
+cookbook "postgresql", {}
+cookbook "git", {}
+cookbook "ruby_build", {:github=>"fnichol/chef-ruby_build", :ref=>"v0.7.2"}
+cookbook "rbenv", {:github=>"fnichol/chef-rbenv"}
