@@ -19,10 +19,7 @@ Once the vm has started, access it and start the app:
     cd /vagrant/
 
     # get the dependencies
-    gem install bundler
-    rbenv rehash    
     bundle install
-    rbenv rehash 
 
     # start the app
     rails s

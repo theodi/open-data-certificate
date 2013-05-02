@@ -9,6 +9,9 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.ssh.forward_agent = true
 
+  # forward 3000 to be availible on the host machine
+  config.vm.forward_port 3000, 3000
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
     chef.add_recipe :apt
@@ -59,6 +62,12 @@ Vagrant::Config.run do |config|
             :rubies => [
               "2.0.0-p0"
             ],
+            :gems => {
+              "2.0.0-p0"    => [
+                { "name"    => "bundler" },
+                { "name"    => "rake" }
+              ]
+            },
             :global => "2.0.0-p0"
           }
         ]
