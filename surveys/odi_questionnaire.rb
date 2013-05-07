@@ -3,6 +3,40 @@
 #   is_mandatory for all questions in a survey.
 survey 'ODI Questionnaire', :default_mandatory => false do
 
+  section 'About' do
+
+    # TODO : Helptext
+
+    q_data_title "What's a good title for this data?"
+    a_1 'Data Tile', :string
+
+    q_documentationUrl 'Where is the data described?', :is_mandatory => true, :requirement => 'pilot_1',
+                       :help_text => "This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it's useful for reusers to know about it, and because if it's written well then we can fill in a lot of things in this questionnaire based on the information within that page."
+    a_1 'Documentation URL', :string
+
+    label 'You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.', :custom_renderer => '/partials/requirement', :requirement => 'pilot_1'
+    dependency :rule => 'A'
+    condition_A :q_releaseType, '!=', :a_collection
+
+    label 'You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.', :custom_renderer => '/partials/requirement_alert' # TODO: or is it simpler to pass a "custom_class" attribute (or pass that too, rather than hard-coding in the partial)?
+    dependency :rule => 'A'
+    condition_A :q_releaseType, '==', :a_collection
+
+
+    q_curator "What's the name of the curating organisation?"
+    a_1 'Data Curator', :string
+
+    q_curator_url "What's the website for the curating organisation?"
+    a_1 'Curator URL', :string
+
+    q_releaseType "What kind of data release is this?", :pick => :one
+    a_oneoff 'a one-off release of a single dataset'
+    a_collection 'a one-off release of a set of related datasets'
+    a_series 'ongoing release of a series of related datasets'
+    a_service 'a service or API for accessing open data'
+
+  end
+
   section 'Rights' do
     label 'ensuring that you have the right to publish the data'
 
@@ -98,7 +132,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
   section 'Licensing' do
     label 'giving other people permission to reuse the data'
 
-    q_copyright_url 'Where is your copyright statement?', :is_mandatory => true, :improvement => 'pilot_1'
+    q_copyright_url 'Where is your copyright statement?', :is_mandatory => true, :requirement => 'pilot_2'
     a_1 :string
 
     q_copyright_statement_meta_data 'Does your copyright statement include machine-readable data for:', :pick => :any
