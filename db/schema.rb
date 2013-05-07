@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507105215) do
+ActiveRecord::Schema.define(:version => 20130507140300) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20130507105215) do
     t.integer  "correct_answer_id"
     t.string   "api_id"
     t.string   "requirement"
+    t.string   "required"
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
