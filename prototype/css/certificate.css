@@ -22,8 +22,31 @@
 	z-index: 1;
 }
 
+#status-banner {
+	border-radius: 0 0 0 0;
+	top: 40px;
+	margin-bottom: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+	background-color: #333;
+	color: #eee;
+	border-bottom: 1px solid rgb(71, 71, 71)
+}
+
+a:hover #status-banner {
+	background-color: #000;
+}
+
+#status-banner p.lead {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	text-align: center;
+}
+
 body {
-	margin-top: 40px; /* give room for the alpha banner */
+	margin-top: 160px; /* give room for the alpha banner and status banner */
 }
 
 #questionnaire .control-label { 
@@ -73,24 +96,64 @@ body {
 	top: 4px;
 }
 
+#improvements.collapse {
+	background-color: rgb(63, 63, 63);
+	color: rgb(185, 184, 184);
+}
+
+#improvements h1 {
+	font-size: 20px;
+	line-height: 28px;
+	margin: 10px 0;
+}
+
+#improvements p.lead {
+	font-size: 16px;
+	line-height: 22px;
+}
+
 .improvements {
 	margin-top: 14px;
 	margin-bottom: 20px;
 }
 
 .improvement {
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.improvement-label {
+	display: block;
+	float: left;
+	text-align: right;
+	font-size: 0.9em;
+	line-height: 1.3em;
+}
+
+.improvement-desc {
+	display: block;
+	font-size: 0.9em;
+	line-height: 1.2em;
+}
+
+.levels {
+	margin-top: 14px;
+	margin-bottom: 20px;
+}
+
+.level {
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
 
-.improvement-label {
+.level-label {
 	display: block;
 	float: left;
 	width: 160px;
 	text-align: right;
 }
 
-.improvement-desc {
+.level-desc {
 	display: block;
 	margin-left: 180px;
 }

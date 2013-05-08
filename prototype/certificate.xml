@@ -5,7 +5,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire version="0.5">
+<questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
 		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
@@ -60,7 +60,7 @@
 			</option>
 		</radioset>
 	</question>
-	<group id="legal" jurisdiction="UK">
+	<group id="legal">
 		<label>Legal Information</label>
 		<group id="ownership">
 			<label>Rights</label>
@@ -1171,7 +1171,7 @@
 			</if>
 		</section>
 		<!--
-	<group id="legal" jurisdiction="UK">
+	<group id="legal">
 		<label>Legal Information</label>
 		<group id="ownership">
 			<label>Rights</label>

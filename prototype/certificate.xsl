@@ -20,7 +20,9 @@
 	exclude-result-prefixes="xs local">
 
 <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
-	
+
+<xsl:param name="accordion" as="xs:boolean" select="true()" />
+
 <xsl:key name="fields" match="question" use="@id" />
 
 <xsl:template match="questionnaire">
@@ -41,6 +43,38 @@
 	  		<p>
 	  			This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add <a href="https://github.com/theodi/open-data-certificate/issues">issues on github</a> or contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
 	  		</p>
+	  	</div>
+	  	<a data-toggle="collapse" data-target="#improvements">
+	  		<div id="status-banner">
+	  			<div class="container">
+	  				<div class="row overlay banner">
+	  					<div class="row">
+	  						<div class="span12">
+	  							<p class="lead">So far this certificate has acheived:</p>
+	  						</div>
+	  					</div>
+	  					<div class="span4"><h3>85% </h3><p>of PILOT level</p></div>
+	  					<div class="span4"><h3>39% </h3><p>of STANDARD level</p></div>
+	  					<div class="span4"><h3>12% </h3><p>of EXEMPLAR level</p></div>
+	  				</div>	  				
+	  			</div>
+	  		</div>
+	  	</a>
+	  	<div id="improvements" class="collapse">
+	  		<div class="container">
+	  			<div class="row">
+	  				<xsl:for-each select="levels/level[position() > 1]">
+	  					<div class="span4">
+	  						<h4>How could you improve?</h4>
+	  						<div id="improvements-{@id}" class="improvements">
+	  							<xsl:apply-templates select="/questionnaire" mode="requirementList">
+	  								<xsl:with-param name="level" select="@id" tunnel="yes" />
+	  							</xsl:apply-templates>
+	  						</div>
+	  					</div>
+	  				</xsl:for-each>
+	  			</div>
+	  		</div>
 	  	</div>
 	  	<header id="header">
 	  		<div class="container">
@@ -101,17 +135,17 @@
 	  								</div>
 	  							</div>
 	  							<div class="row-fluid">
-	  								<div class="span12 improvements">
+	  								<div class="span12 levels">
   										<xsl:for-each select="levels/level">
-  											<div class="improvement">
-  												<span class="improvement-label">
+  											<div class="level">
+  												<span class="level-label">
   													<span class="label label-{if (position() = 1) then 'info' else @id}">
   														<i class="icon-star icon-white"></i>
   														<xsl:text> </xsl:text>
   														<xsl:value-of select="local:capitalise(@id)" />
   													</span>
   												</span>
-  												<span class="improvement-desc"><xsl:value-of select="." /></span>
+  												<span class="level-desc"><xsl:value-of select="." /></span>
   											</div>
   										</xsl:for-each>
 	  								</div>
@@ -126,25 +160,45 @@
 	      		<div class="page-header">
 	      			<h2>Questionnaire</h2>
 	      		</div>
-	      		<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
-	      		<hr />
-	      		<ul class="nav nav-tabs">
-	      			<xsl:for-each select="group">
-	      				<li>
-	      					<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
-	      					<a href="#{@id}" data-toggle="tab">
-	      						<xsl:value-of select="replace(label, ' Information$', '')" />
-	      						<xsl:text> </xsl:text>
-	      						<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
-	      							<xsl:with-param name="group" select="@id" tunnel="yes" />
-	      						</xsl:apply-templates>
-	      					</a>
-	      				</li>
-	      			</xsl:for-each>
-	      		</ul>
-	      		<div class="tab-content">
-	      			<xsl:apply-templates select="group" />
-	      		</div>
+	      		<xsl:apply-templates select="@jurisdiction" />
+	      		<xsl:choose>
+	      			<xsl:when test="$accordion">
+	      				<div class="accordion" id="questionnaire">
+	      					<div class="accordion-group">
+	      						<div class="accordion-heading">
+	      							<a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#generalInfo">General</a>
+	      						</div>
+	      						<div id="generalInfo" class="accordion-body collapse in">
+	      							<div class="accordion-inner">
+	      								<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
+	      							</div>
+	      						</div>
+	      					</div>
+	      					<xsl:apply-templates select="group" mode="accordion" />
+	      				</div>
+	      			</xsl:when>
+	      			<xsl:otherwise>
+	      				<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
+	      				<hr />
+	      				<ul class="nav nav-tabs">
+	      					<xsl:for-each select="group">
+	      						<li>
+	      							<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
+	      							<a href="#{@id}" data-toggle="tab">
+	      								<xsl:value-of select="replace(label, ' Information$', '')" />
+	      								<xsl:text> </xsl:text>
+	      								<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
+	      									<xsl:with-param name="group" select="@id" tunnel="yes" />
+	      								</xsl:apply-templates>
+	      							</a>
+	      						</li>
+	      					</xsl:for-each>
+	      				</ul>
+	      				<div class="tab-content">
+	      					<xsl:apply-templates select="group" />
+	      				</div>
+	      			</xsl:otherwise>
+	      		</xsl:choose>	      		
 	      	</section>
 	      </form>
 	  		<section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
@@ -155,22 +209,6 @@
   				<p>
   					<a id="download-certificate" data-bind="attr: {{ href: certificateHTML }}" target="_new" class="btn btn-primary">Download Certificate</a>
   				</p>
-	  		</section>
-	  		<section id="improvements" data-bind="visible: certificateLevel() !== '{levels/level[last()]/@id}'">
-  				<div class="page-header">
-  					<h1>Improving Your Open Data</h1>
-  				</div>
-  				<p class="lead">
-  					You can improve the way you are publishing open data to make it more useful.
-  				</p>
-	  			<xsl:for-each select="levels/level[position() > 1]">
-	  				<div id="improvements-{@id}" class="improvements">
-	  					<xsl:apply-templates select="/questionnaire" mode="requirementList">
-	  						<xsl:with-param name="level" select="@id" tunnel="yes" />
-	  					</xsl:apply-templates>
-	  				</div>
-	  				<xsl:if test="position() != last()"><hr /></xsl:if>
-	  			</xsl:for-each>
 	  		</section>
 	    </div>
 	  	<footer id="footer">
@@ -285,7 +323,6 @@
 
 <xsl:template match="questionnaire/group">
 	<div class="tab-pane{if (preceding-sibling::group) then '' else ' active'}" id="{@id}">
-		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
 		<ul class="pager">
 			<li class="previous{if (not(preceding-sibling::group)) then ' disabled' else ''}">
@@ -302,6 +339,25 @@
 	</div>
 </xsl:template>
 
+<xsl:template match="questionnaire/group" mode="accordion">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#{@id}">
+				<xsl:value-of select="replace(label, ' Information$', '')" />
+				<xsl:text> </xsl:text>
+				<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
+					<xsl:with-param name="group" select="@id" tunnel="yes" />
+				</xsl:apply-templates>
+			</a>
+		</div>
+		<div id="{@id}" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<xsl:apply-templates select="label/following-sibling::*" />
+			</div>
+		</div>
+	</div>
+</xsl:template>
+	
 <xsl:template match="group//group">
 	<fieldset id="{@id}">
 		<legend>
@@ -313,13 +369,12 @@
 				</small>
 			</xsl:if>
 		</legend>
-		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
 	</fieldset>
 </xsl:template>
 
 <xsl:template match="@jurisdiction">
-	<p class="alert alert-warning">
+	<p class="lead">
 		<xsl:text>This version of the certificate is designed to be used within </xsl:text>
 		<xsl:choose>
 			<xsl:when test=". = 'UK'">the UK</xsl:when>
@@ -852,7 +907,7 @@
 			<xsl:for-each select="$options/requirement[@level = $level]">
 				<p class="improvement">
 					<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
-						<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+						<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 					</a>
 					<span class="improvement-desc">
 						<xsl:apply-templates />
@@ -875,7 +930,7 @@
 				</xsl:choose>
 			</xsl:attribute>
 			<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 			</a>
 			<span class="improvement-desc">
 				<xsl:apply-templates />
@@ -893,7 +948,7 @@
 				<xsl:value-of select="concat('!', ancestor::question/@id, local:capitalise(../@value), '()')" />
 			</xsl:attribute>
 			<a class="improvement-label" href="#{ancestor::question/@id}">
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 			</a>
 			<span class="improvement-desc">
 				<xsl:apply-templates />
