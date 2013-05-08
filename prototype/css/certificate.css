@@ -49,22 +49,17 @@ body {
 	margin-top: 160px; /* give room for the alpha banner and status banner */
 }
 
-#questionnaire .control-label { 
-	width: 270px; 
-	padding-left: 30px;
+#questionnaire .control-group.focus {
+	background-color: #fcf8e3;
 }
 
-#questionnaire .controls { 
-	margin-left: 340px; 
+#questionnaire .control-label, #questionnaire label.radio, #questionnaire label.checkbox { 
+	width: 366px; 
+	margin-left: 25px;
 }
 
-#questionnaire .well .control-label {
-	width: 251px;
-	padding-left: 30px;
-}
-
-#questionnaire .well .controls {
-    margin-left: 321px;
+#questionnaire label.radio.inline {
+	width: auto;
 }
 
 #questionnaire .requirement .alert { 
@@ -72,23 +67,38 @@ body {
 	margin-bottom: 0;
 }
 
-#questionnaire .btn-help {
-	margin-left: -33px;
-	position: absolute;
-}
-
-#questionnaire .btn-option-help {
-	margin-left: -20px;
-	padding: 0;
-	position: absolute;
+#questionnaire .btn-help, #questionnaire .btn-option-help {
+	padding: 0 5px;
 }
 
 #questionnaire label .help-block {
 	margin-top: 0;
+	padding-top: 0;
 }
 
-#questionnaire .control-label .badge-circular {
-	margin-left: -30px;
+.help-block {
+	display: inline-block;
+	margin-bottom: 10px;
+	float: right;
+	width: 35%;
+}
+
+.alert-help {
+	background-color: #fcf8e3;
+	border: none;
+	color: #c09853;
+	font-size: 12px;
+	line-height: 18px
+}
+
+#questionnaire .controls .badge-circular {
+	margin-right: -15px;
+	padding: 1px;
+	font-size: 12px;
+}
+
+#questionnaire .controls {
+	margin-left: 25px;
 }
 
 #questionnaire .radio.inline + .label {
@@ -158,6 +168,10 @@ body {
 	margin-left: 180px;
 }
 
+#questionnaire .requirement {
+	display: none;
+}
+
 .label-pilot,
 .label-standard,
 .label-exemplar {
@@ -190,4 +204,9 @@ body {
     margin-top: 70px;
     padding: 30px 0;
     text-align: center;
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	height: 30px;
+	font-size: 16px;
 }

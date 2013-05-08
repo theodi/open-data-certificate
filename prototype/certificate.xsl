@@ -155,7 +155,7 @@
 	  				</div>
 	  			</div>
 	  		</section>
-	      <form id="questionnaire" class="form-horizontal">
+	      <form id="questionnaire">
 	      	<section>
 	      		<div class="page-header">
 	      			<h2>Questionnaire</h2>
@@ -295,9 +295,32 @@
 	  		
 	  		ko.applyBindings(certificate);
 	  	</script>
-	  	<!--
-	    <script src="js/certificate.js"></script>
-	    -->
+	  	<script>
+	  		// display help on focus and blur (hack)
+	  		$(function(){
+		  		$(document).on('focus','[data-focus-target]', function() {
+		  			$($(this).data('focus-target')).collapse('show');
+	  			});
+	  			$(document).on('blur','[data-focus-target]', function() {
+	  				$($(this).data('focus-target')).collapse('hide');
+	  			});	  		
+	  		});
+	  		
+	  		$('.label[data-target]').popover({
+	  			content: function() {
+	  				return $($(this).data('target')).html();
+	  			},
+	  			trigger: 'hover'
+	  		});
+	  		
+	  		$(document).on('focus', 'input', function() {
+	  			$(this).parents('.control-group').addClass('focus');
+	  		});
+	  		
+	  		$(document).on('blur', 'input', function() {
+	  			$(this).parents('.control-group').removeClass('focus');
+	  		});	  		
+	  	</script>
 	  </body>
 	</html>
 </xsl:template>
@@ -400,6 +423,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
+			<!--
 			<xsl:if test="*/@required">
 				<span class="badge badge-circular badge-{if (*/@required = 'required') then 'important' else */@required} pull-left" data-bind="visible: {@id}Status() === '{*/@required}'">
 					<i class="icon icon-white icon-remove" title="Required{if (*/@required != 'required') then concat(' for ', */@required, ' certificate') else ''}"></i>
@@ -408,13 +432,14 @@
 			<span class="badge badge-circular badge-success pull-left" data-bind="visible: {@id}Status() === 'complete'">
 				<i class="icon icon-white icon-ok" title="Complete"></i>
 			</span>
+			-->
 			<xsl:text> </xsl:text>
 			<xsl:apply-templates select="label" />
-		</label>
-		<div class="controls">
 			<xsl:apply-templates select="help" mode="label">
 				<xsl:with-param name="id" select="@id" tunnel="yes" />
 			</xsl:apply-templates>
+		</label>
+		<div class="controls">
 			<xsl:apply-templates select="label/following-sibling::*[1]">
 				<xsl:with-param name="id" select="@id" tunnel="yes" />
 			</xsl:apply-templates>
@@ -432,8 +457,23 @@
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
 	<input type="text" class="span5">
 		<xsl:apply-templates select="." mode="dataBind" />
-		<xsl:sequence select="@type, @placeholder, @required[. = 'required']" />
+		<xsl:apply-templates select="@type, @placeholder, @required[. = 'required']" />
 	</input>
+</xsl:template>
+
+<xsl:template match="@placeholder">
+	<xsl:attribute name="placeholder">
+		<xsl:value-of select="." />
+		<xsl:if test="../@required">
+			<xsl:text> (required</xsl:text>
+			<xsl:if test="../@required != 'required'">
+				<xsl:text> for </xsl:text>
+				<xsl:value-of select="../@required" />
+				<xsl:text> level</xsl:text>
+			</xsl:if>
+			<xsl:text>)</xsl:text>
+		</xsl:if>
+	</xsl:attribute>
 </xsl:template>
 
 <!--
@@ -458,29 +498,26 @@
 
 <xsl:template match="radioset/option">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<xsl:apply-templates select="help" mode="label">
-		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-	</xsl:apply-templates>
 	<label class="radio">
 		<input type="radio">
 			<xsl:apply-templates select=".." mode="dataBind" />
 			<xsl:sequence select="@value" />
 			<xsl:apply-templates select="label/node()" />
 		</input>
+		<xsl:apply-templates select="help" mode="label">
+			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+		</xsl:apply-templates>
 		<xsl:apply-templates select="requirement" mode="label">
 			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
 		</xsl:apply-templates>
-		<xsl:apply-templates select="* except label">
-			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-		</xsl:apply-templates>
 	</label>
+	<xsl:apply-templates select="* except label">
+		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="checkboxset/option">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<xsl:apply-templates select="help" mode="label">
-		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-	</xsl:apply-templates>
 	<label class="checkbox">
 		<input type="checkbox">
 			<xsl:apply-templates select=".." mode="dataBind">
@@ -489,13 +526,16 @@
 			<xsl:sequence select="@value" />
 			<xsl:apply-templates select="label/node()" />
 		</input>
+		<xsl:apply-templates select="help" mode="label">
+			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+		</xsl:apply-templates>
 		<xsl:apply-templates select="requirement" mode="label">
 			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
 		</xsl:apply-templates>
-		<xsl:apply-templates select="* except label">
-			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-		</xsl:apply-templates>
 	</label>
+	<xsl:apply-templates select="* except label">
+		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="yesno">
@@ -540,6 +580,9 @@
 			<xsl:attribute name="data-bind"><xsl:value-of select="$bind" /></xsl:attribute>
 		</xsl:otherwise>
 	</xsl:choose>
+	<xsl:if test="../help">
+		<xsl:attribute name="data-focus-target" select="concat('#', $id, '-help')" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template match="label">
@@ -583,7 +626,7 @@
 	
 <xsl:template match="help">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<span class="help-block collapse">
+	<div class="help-block collapse">
 		<xsl:choose>
 			<xsl:when test="ancestor::repeat">
 				<xsl:attribute name="data-bind">attr: { id: '<xsl:value-of select="$id" />-' + $index() + '-help' }</xsl:attribute>
@@ -592,16 +635,18 @@
 				<xsl:attribute name="id"><xsl:value-of select="$id" />-help</xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:apply-templates />
-		<xsl:if test="@more">
-			<a class="pull-right" href="{@more}" target="_new">Read more...</a>
-		</xsl:if>
-	</span>
+		<p class="alert alert-help">
+			<xsl:apply-templates />
+			<xsl:if test="@more">
+				<a class="pull-right" href="{@more}" target="_new">Read more...</a>
+			</xsl:if>
+		</p>
+	</div>
 </xsl:template>
 	
 <xsl:template match="requirement">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<div class="requirement collapse">
+	<p class="requirement">
 		<xsl:choose>
 			<xsl:when test="ancestor::repeat">
 				<xsl:attribute name="data-bind">attr: { id: '<xsl:value-of select="$id" />-' + $index() + '-requirement' }</xsl:attribute>
@@ -610,22 +655,8 @@
 				<xsl:attribute name="id"><xsl:value-of select="$id" />-requirement</xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
-		<p class="alert alert-info">
-			<a>
-				<xsl:choose>
-					<xsl:when test="ancestor::repeat">
-						<xsl:attribute name="data-bind">attr: { href: '#<xsl:value-of select="$id" />-' + $index() + '-requirement' }</xsl:attribute>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:attribute name="href">#<xsl:value-of select="$id" />-requirement</xsl:attribute>
-					</xsl:otherwise>
-				</xsl:choose>
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
-			</a>
-			<xsl:text> </xsl:text>
-			<xsl:apply-templates />
-		</p>
-	</div>
+		<xsl:apply-templates />
+	</p>
 </xsl:template>
 
 <xsl:template match="requirement[not(@level)]">
