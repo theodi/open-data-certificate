@@ -327,7 +327,7 @@
 
 <xsl:template match="level" mode="statusIndicator">
 	<xsl:param name="group" as="xs:string" required="yes" tunnel="yes" />
-	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id}" 
+	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id} pull-right" 
 		data-bind="visible: {$group}Status().{@id} > 0, text: {$group}Status().{@id}, attr: {{ title: 'You have ' + {$group}Status().{@id} + ' question' + ({$group}Status().{@id} > 1 ? 's' : '') + ' left to answer before you get to {@id} level' }}"></span>
 	<xsl:choose>
 		<xsl:when test="following-sibling::level">
