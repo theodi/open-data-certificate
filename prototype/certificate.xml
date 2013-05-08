@@ -4,7 +4,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
 <questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
@@ -607,15 +607,15 @@
 						<option value="minimal">
 							<label>there are minimal guarantees about the availability of the service</label>
 						</option>
-						<option value="99%">
+						<option value="99">
 							<label>at least 99% availability</label>
 							<requirement level="pilot">You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
-						<option value="99.9%">
+						<option value="99.9">
 							<label>at least 99.9% availability</label>
 							<requirement level="standard">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
-						<option value="99.999%">
+						<option value="99.999">
 							<label>at least 99.999% availability</label>
 							<requirement level="exemplar">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
