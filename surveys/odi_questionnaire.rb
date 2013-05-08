@@ -12,7 +12,7 @@ survey 'ODI Questionnaire', :default_mandatory => false do
 
     q_documentationUrl 'Where is the data described?',
                        :help_text => "This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it's useful for reusers to know about it, and because if it's written well then we can fill in a lot of things in this questionnaire based on the information within that page."
-    a_1 'Documentation URL', :string, :requirement => 'pilot_1'
+    a_1 'Documentation URL', :string, :requirement => 'pilot_1', :placeholder => "Documentation URL", :input_type=>:url
 
     label 'You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.', :custom_renderer => '/partials/requirement', :requirement => 'pilot_1'
     dependency :rule => 'A'
@@ -105,7 +105,8 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     condition_A :q_crowd_sourced, '==', :a_yes
 
     q_cla_location 'Where is the Contributor Licence Agreement (CLA)?', :required => :required,
-                   :help_text => "A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it."
+                   :help_text => "A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it.",
+                   :help_text_more_url => "http://en.wikipedia.org/wiki/Contributor_License_Agreement"
     a_1 :string
     dependency :rule => 'A'
     condition_A :q_require_judgement, '==', :a_yes

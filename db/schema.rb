@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508110500) do
+ActiveRecord::Schema.define(:version => 20130508144200) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(:version => 20130508110500) do
     t.string   "input_mask"
     t.string   "input_mask_placeholder"
     t.string   "requirement"
+    t.string   "help_text_more_url"
+    t.string   "input_type"
+    t.string   "placeholder"
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
@@ -117,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20130508110500) do
     t.string   "api_id"
     t.string   "requirement"
     t.string   "required"
+    t.string   "help_text_more_url"
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
