@@ -53,9 +53,12 @@
 	  							<p class="lead">So far this certificate has acheived:</p>
 	  						</div>
 	  					</div>
-	  					<div class="span4"><h3>85% </h3><p>of PILOT level</p></div>
-	  					<div class="span4"><h3>39% </h3><p>of STANDARD level</p></div>
-	  					<div class="span4"><h3>12% </h3><p>of EXEMPLAR level</p></div>
+	  					<xsl:for-each select="levels/level[position() > 1]">
+	  						<div class="span4">
+	  							<h3><span data-bind="text: Math.floor((certificate.status().answered{@id} / certificate.status().{@id}) * 100)">0</span>% </h3>
+	  							<p>of <xsl:value-of select="upper-case(@id)" /> level</p>
+	  						</div>
+	  					</xsl:for-each>
 	  				</div>	  				
 	  			</div>
 	  		</div>
@@ -242,15 +245,21 @@
 	  		var certificateViewModel = function () {
 		  			var certificate = this;
 			  		<xsl:apply-templates mode="viewModel" />
-	  		
+	  				certificate.status = ko.computed(function () {
+	  					var unmetRequirements = {
+	  						answered: 0,
+					  		<xsl:for-each select="levels/level">
+					  			<xsl:value-of select="@id" />: 0,
+					  			answered<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">,</xsl:if>
+					  		</xsl:for-each>
+				  		}
+				  		;
+				  		<xsl:apply-templates mode="unmetRequirements" />
+	  					return unmetRequirements;
+				  	}, certificate);
 		  			certificate.certificateLevel = ko.computed(function () {
-		  				var unmetRequirements = {
-		  					<xsl:for-each select="levels/level">
-		  						<xsl:value-of select="@id" />: 0,
-		  					</xsl:for-each>
-		  					}
-		  				;
-		  				<xsl:apply-templates mode="unmetRequirements" />
+		  				var unmetRequirements = certificate.status()
+		  					;
 		  				if (unmetRequirements.<xsl:value-of select="levels/level[1]/@id" /> > 0) {
 		  					return 'none';
 		  				<xsl:for-each select="levels/level[position() > 1]">
@@ -760,7 +769,8 @@
 	<xsl:value-of select="concat($model, '.', @id, 'Status = ko.computed(function () {&#xA;')" />
 	<xsl:text>  var unmetRequirements = { answered: 0, </xsl:text>
 	<xsl:for-each select="../levels/level">
-		<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">, </xsl:if>
+		<xsl:value-of select="@id" />: 0,
+		answered<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">, </xsl:if>
 	</xsl:for-each>
 	<xsl:text> }&#xA;</xsl:text>
 	<xsl:text>  ;&#xA;</xsl:text>
@@ -842,9 +852,23 @@
 
 <xsl:template match="question" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
-	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) unmetRequirements['answered']++;
-	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) unmetRequirements['basic']++;
-	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() !== ''optional''')" />) unmetRequirements[<xsl:value-of select="concat($model, '.', @id, 'Status()')" />]++;
+	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) {
+		unmetRequirements['answered']++;
+		<xsl:choose>
+			<xsl:when test="*/@required">
+				unmetRequirements['answered<xsl:value-of select="if (*/@required = 'required') then 'basic' else */@required" />']++;
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="requirement[@level] | if//requirement[@level]">
+					unmetRequirements['answered<xsl:value-of select="@level" />']++;
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+	} else if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) {
+		unmetRequirements['basic']++;
+	} else if (<xsl:value-of select="concat($model, '.', @id, 'Status() !== ''optional''')" />) {
+		unmetRequirements[<xsl:value-of select="concat($model, '.', @id, 'Status()')" />]++;
+	}
 	<xsl:apply-templates mode="unmetRequirements" />
 </xsl:template>
 

@@ -24,15 +24,18 @@
                      </div>
                   </div>
                   <div class="span4">
-                     <h3>85% </h3>
+                     <h3><span data-bind="text: Math.floor((certificate.status().answeredpilot / certificate.status().pilot) * 100)">0</span>% 
+                     </h3>
                      <p>of PILOT level</p>
                   </div>
                   <div class="span4">
-                     <h3>39% </h3>
+                     <h3><span data-bind="text: Math.floor((certificate.status().answeredstandard / certificate.status().standard) * 100)">0</span>% 
+                     </h3>
                      <p>of STANDARD level</p>
                   </div>
                   <div class="span4">
-                     <h3>12% </h3>
+                     <h3><span data-bind="text: Math.floor((certificate.status().answeredexemplar / certificate.status().exemplar) * 100)">0</span>% 
+                     </h3>
                      <p>of EXEMPLAR level</p>
                   </div>
                </div>
@@ -2510,12 +2513,23 @@ certificate.privacyImpactAssessmentStatus = ko.computed(function () {
   return status;
 });
 certificate.legalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
+  var unmetRequirements = { answered: 0, basic: 0,
+		answeredbasic: 0, pilot: 0,
+		answeredpilot: 0, standard: 0,
+		answeredstandard: 0, exemplar: 0,
+		answeredexemplar: 0 }
   ;
 
-	if (certificate.publisherRightsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherRightsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherRightsStatus() !== 'optional') unmetRequirements[certificate.publisherRightsStatus()]++;
+	if (certificate.publisherRightsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.publisherRightsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherRightsStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherRightsStatus()]++;
+	}
 	
 	if (certificate.publisherRights() === 'no') {
 if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic']++; 
@@ -2524,9 +2538,16 @@ if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic
 
 	if (certificate.publisherRights() === 'yes' || certificate.publisherRights() === 'unsure') {
 
-	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
+	if (certificate.publisherOriginStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.publisherOriginStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherOriginStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherOriginStatus()]++;
+	}
 	
 }
 
@@ -2534,9 +2555,16 @@ if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic
 
 	if (certificate.publisherOrigin() === 'false') {
 
-	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	if (certificate.thirdPartyOriginStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.thirdPartyOriginStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.thirdPartyOriginStatus() !== 'optional') {
+		unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	}
 	
 	if (certificate.crowdsourced() === 'false') {
 if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
@@ -2545,9 +2573,16 @@ if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.thirdPartyOrigin() === 'true') {
 
-	if (certificate.thirdPartyOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOpenStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	if (certificate.thirdPartyOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.thirdPartyOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.thirdPartyOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	}
 	
 	if (certificate.thirdPartyOpen() === 'false') {
 if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++; 
@@ -2556,9 +2591,16 @@ if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++;
 
 }
 
-	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
+	if (certificate.crowdsourcedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.crowdsourcedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.crowdsourcedStatus() !== 'optional') {
+		unmetRequirements[certificate.crowdsourcedStatus()]++;
+	}
 	
 	if (certificate.thirdPartyOrigin() === 'false') {
 if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
@@ -2567,19 +2609,40 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.crowdsourced() === 'true') {
 
-	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	if (certificate.crowdsourcedContentStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.crowdsourcedContentStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.crowdsourcedContentStatus() !== 'optional') {
+		unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	}
 	
 	if (certificate.crowdsourcedContent() === 'true') {
 
-	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
+	if (certificate.claUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.claUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.claUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.claUrlStatus()]++;
+	}
 	
-	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
+	if (certificate.cldsRecordedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.cldsRecordedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.cldsRecordedStatus() !== 'optional') {
+		unmetRequirements[certificate.cldsRecordedStatus()]++;
+	}
 	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
 
 }
@@ -2592,59 +2655,113 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.publisherOrigin() === 'false') {
 
-	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	if (certificate.sourceDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.sourceDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.sourceDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	}
 	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.sourceDocumentationUrl() !== '') {
 
-	if (certificate.sourceDocumentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.sourceDocumentationMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	if (certificate.sourceDocumentationMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.sourceDocumentationMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	}
 	if (certificate.sourceDocumentationMetadata() !== 'true') unmetRequirements['standard']++; 
 
 }
 
 }
 
-	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.copyrightURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.copyrightURLStatus() !== 'optional') unmetRequirements[certificate.copyrightURLStatus()]++;
+	if (certificate.copyrightURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.copyrightURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.copyrightURLStatus() !== 'optional') {
+		unmetRequirements[certificate.copyrightURLStatus()]++;
+	}
 	if (certificate.copyrightURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.copyrightURL() !== '') {
 
-	if (certificate.copyrightStatementMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.copyrightStatementMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.copyrightStatementMetadataStatus() !== 'optional') unmetRequirements[certificate.copyrightStatementMetadataStatus()]++;
+	if (certificate.copyrightStatementMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.copyrightStatementMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.copyrightStatementMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.copyrightStatementMetadataStatus()]++;
+	}
 	if (!certificate.copyrightStatementMetadataLicense()) unmetRequirements['standard']++; 
 if (!certificate.copyrightStatementMetadataAttribution()) unmetRequirements['exemplar']++; 
 if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['exemplar']++; 
 
 }
 
-	if (certificate.dataLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataLicenceStatus() !== 'optional') unmetRequirements[certificate.dataLicenceStatus()]++;
+	if (certificate.dataLicenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataLicenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataLicenceStatus() !== 'optional') {
+		unmetRequirements[certificate.dataLicenceStatus()]++;
+	}
 	
 	if (certificate.dataLicence() === 'na') {
 
-	if (certificate.dataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataNotApplicableStatus() !== 'optional') unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	if (certificate.dataNotApplicableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataNotApplicableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataNotApplicableStatus() !== 'optional') {
+		unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	}
 	
 	if (certificate.dataNotApplicable() === 'waived') {
 
-	if (certificate.dataWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataWaiverStatus() !== 'optional') unmetRequirements[certificate.dataWaiverStatus()]++;
+	if (certificate.dataWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.dataWaiverStatus()]++;
+	}
 	
 	if (certificate.dataWaiver() === 'other') {
 
-	if (certificate.dataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	if (certificate.dataOtherWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataOtherWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataOtherWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	}
 	
 }
 
@@ -2654,42 +2771,91 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 
 	if (certificate.dataLicence() === 'other') {
 
-	if (certificate.otherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceNameStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceNameStatus()]++;
+	if (certificate.otherDataLicenceNameStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceNameStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceNameStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceNameStatus()]++;
+	}
 	
-	if (certificate.otherDataLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceURLStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceURLStatus()]++;
+	if (certificate.otherDataLicenceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceURLStatus()]++;
+	}
 	
-	if (certificate.otherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
+	if (certificate.otherDataLicenceOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
+	}
 	if (certificate.otherDataLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
-	if (certificate.contentLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentLicenceStatus() !== 'optional') unmetRequirements[certificate.contentLicenceStatus()]++;
+	if (certificate.contentLicenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentLicenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentLicenceStatus() !== 'optional') {
+		unmetRequirements[certificate.contentLicenceStatus()]++;
+	}
 	
 	if (certificate.contentLicence() === 'na') {
 
-	if (certificate.contentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentNotApplicableStatus() !== 'optional') unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	if (certificate.contentNotApplicableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentNotApplicableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentNotApplicableStatus() !== 'optional') {
+		unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	}
 	
 	if (certificate.contentNotApplicable() === 'waived') {
 
-	if (certificate.contentWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentWaiverStatus() !== 'optional') unmetRequirements[certificate.contentWaiverStatus()]++;
+	if (certificate.contentWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.contentWaiverStatus()]++;
+	}
 	
 	if (certificate.contentWaiver() === 'other') {
 
-	if (certificate.contentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	if (certificate.contentOtherWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentOtherWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentOtherWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	}
 	
 }
 
@@ -2699,64 +2865,134 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 
 	if (certificate.contentLicence() === 'other') {
 
-	if (certificate.otherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceNameStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceNameStatus()]++;
+	if (certificate.otherContentLicenceNameStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceNameStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceNameStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceNameStatus()]++;
+	}
 	
-	if (certificate.otherContentLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceURLStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceURLStatus()]++;
+	if (certificate.otherContentLicenceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceURLStatus()]++;
+	}
 	
-	if (certificate.otherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
+	if (certificate.otherContentLicenceOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
+	}
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
-	if (certificate.dataPersonalStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataPersonalStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataPersonalStatus() !== 'optional') unmetRequirements[certificate.dataPersonalStatus()]++;
+	if (certificate.dataPersonalStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.dataPersonalStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataPersonalStatus() !== 'optional') {
+		unmetRequirements[certificate.dataPersonalStatus()]++;
+	}
 	
 	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.consentExemptStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.consentExemptStatus() !== 'optional') unmetRequirements[certificate.consentExemptStatus()]++;
+	if (certificate.consentExemptStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.consentExemptStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.consentExemptStatus() !== 'optional') {
+		unmetRequirements[certificate.consentExemptStatus()]++;
+	}
 	
 	if (certificate.consentExempt() === 'false') {
 
-	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
+	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
+	}
 	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.privacyImpactAssessmentUrl() !== '') {
 
-	if (certificate.piaAuditedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.piaAuditedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.piaAuditedStatus() !== 'optional') unmetRequirements[certificate.piaAuditedStatus()]++;
+	if (certificate.piaAuditedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.piaAuditedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.piaAuditedStatus() !== 'optional') {
+		unmetRequirements[certificate.piaAuditedStatus()]++;
+	}
 	if (certificate.piaAudited() !== 'true') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.individualConsentURLStatus() !== 'optional') unmetRequirements[certificate.individualConsentURLStatus()]++;
+	if (certificate.individualConsentURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.individualConsentURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.individualConsentURLStatus() !== 'optional') {
+		unmetRequirements[certificate.individualConsentURLStatus()]++;
+	}
 	if (certificate.individualConsentURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
+	if (certificate.personalDataAnonymisationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.personalDataAnonymisationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.personalDataAnonymisationStatus() !== 'optional') {
+		unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
+	}
 	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
 
 }
 
 	if (certificate.consentExempt() === 'true') {
 
-	if (certificate.privacyImpactAssessmentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.privacyImpactAssessmentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.privacyImpactAssessmentStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	if (certificate.privacyImpactAssessmentStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.privacyImpactAssessmentStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.privacyImpactAssessmentStatus() !== 'optional') {
+		unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	}
 	if (certificate.privacyImpactAssessment() !== 'true') unmetRequirements['standard']++; 
 
 }
@@ -2895,40 +3131,77 @@ certificate.onGoingAvailabilityStatus = ko.computed(function () {
   return status;
 });
 certificate.practicalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
+  var unmetRequirements = { answered: 0, basic: 0,
+		answeredbasic: 0, pilot: 0,
+		answeredpilot: 0, standard: 0,
+		answeredstandard: 0, exemplar: 0,
+		answeredexemplar: 0 }
   ;
 
-	if (certificate.linkedToStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.linkedToStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.linkedToStatus() !== 'optional') unmetRequirements[certificate.linkedToStatus()]++;
+	if (certificate.linkedToStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.linkedToStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.linkedToStatus() !== 'optional') {
+		unmetRequirements[certificate.linkedToStatus()]++;
+	}
 	if (certificate.linkedTo() !== 'true') unmetRequirements['standard']++; 
 
-	if (certificate.listedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.listedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.listedStatus() !== 'optional') unmetRequirements[certificate.listedStatus()]++;
+	if (certificate.listedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.listedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.listedStatus() !== 'optional') {
+		unmetRequirements[certificate.listedStatus()]++;
+	}
 	if (certificate.listed() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.listed() === 'true') {
 $(certificate.listings()).each(function () {var listings = this;
-	if (listings.listingStatus() === 'complete') unmetRequirements['answered']++;
-	else if (listings.listingStatus() === 'required') unmetRequirements['basic']++;
-	else if (listings.listingStatus() !== 'optional') unmetRequirements[listings.listingStatus()]++;
+	if (listings.listingStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (listings.listingStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (listings.listingStatus() !== 'optional') {
+		unmetRequirements[listings.listingStatus()]++;
+	}
 	});
 }
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceTypeStatus() !== 'optional') unmetRequirements[certificate.serviceTypeStatus()]++;
+	if (certificate.serviceTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.serviceTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceTypeStatus()]++;
+	}
 	
 }
 
 	if (certificate.releaseType() === 'oneoff' || certificate.releaseType() === 'collection' || (certificate.releaseType() === 'service' && certificate.serviceType() === 'static')) {
 
-	if (certificate.timeSensitiveStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.timeSensitiveStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.timeSensitiveStatus() !== 'optional') unmetRequirements[certificate.timeSensitiveStatus()]++;
+	if (certificate.timeSensitiveStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.timeSensitiveStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.timeSensitiveStatus() !== 'optional') {
+		unmetRequirements[certificate.timeSensitiveStatus()]++;
+	}
 	if (certificate.timeSensitive() !== '' && certificate.timeSensitive() !== 'true' && certificate.timeSensitive() !== 'timestamped' && certificate.timeSensitive() !== 'false') unmetRequirements['basic']++;
 		if (certificate.timeSensitive() !== 'timestamped' && certificate.timeSensitive() !== 'false') unmetRequirements['pilot']++;
 		if (certificate.timeSensitive() !== 'false') unmetRequirements['standard']++;
@@ -2937,28 +3210,54 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.releaseType() === 'series') {
 
-	if (certificate.frequentChangesStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.frequentChangesStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.frequentChangesStatus() !== 'optional') unmetRequirements[certificate.frequentChangesStatus()]++;
+	if (certificate.frequentChangesStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.frequentChangesStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.frequentChangesStatus() !== 'optional') {
+		unmetRequirements[certificate.frequentChangesStatus()]++;
+	}
 	
 	if (certificate.frequentChanges() === 'true') {
 
-	if (certificate.seriesTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.seriesTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.seriesTypeStatus() !== 'optional') unmetRequirements[certificate.seriesTypeStatus()]++;
+	if (certificate.seriesTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.seriesTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.seriesTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.seriesTypeStatus()]++;
+	}
 	
 	if (certificate.seriesType() === 'dumps') {
 
-	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
+	if (certificate.changeFeedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.changeFeedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.changeFeedStatus() !== 'optional') {
+		unmetRequirements[certificate.changeFeedStatus()]++;
+	}
 	if (certificate.changeFeed() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 
-	if (certificate.frequentSeriesPublicationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.frequentSeriesPublicationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.frequentSeriesPublicationStatus() !== 'optional') unmetRequirements[certificate.frequentSeriesPublicationStatus()]++;
+	if (certificate.frequentSeriesPublicationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.frequentSeriesPublicationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.frequentSeriesPublicationStatus() !== 'optional') {
+		unmetRequirements[certificate.frequentSeriesPublicationStatus()]++;
+	}
 	if (certificate.frequentSeriesPublication() !== '' && certificate.frequentSeriesPublication() !== 'rarely' && certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['standard']++;
@@ -2966,9 +3265,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.seriesPublicationDelayStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.seriesPublicationDelayStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.seriesPublicationDelayStatus() !== 'optional') unmetRequirements[certificate.seriesPublicationDelayStatus()]++;
+	if (certificate.seriesPublicationDelayStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.seriesPublicationDelayStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.seriesPublicationDelayStatus() !== 'optional') {
+		unmetRequirements[certificate.seriesPublicationDelayStatus()]++;
+	}
 	if (certificate.seriesPublicationDelay() !== '' && certificate.seriesPublicationDelay() !== 'extreme' && certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['basic']++;
 		if (certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['pilot']++;
 		if (certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['standard']++;
@@ -2978,18 +3282,30 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
+	if (certificate.provideDumpsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.provideDumpsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.provideDumpsStatus() !== 'optional') {
+		unmetRequirements[certificate.provideDumpsStatus()]++;
+	}
 	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.serviceType() === 'changing') {
 
 	if (certificate.provideDumps() === 'true') {
 
-	if (certificate.dumpFrequencyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpFrequencyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpFrequencyStatus() !== 'optional') unmetRequirements[certificate.dumpFrequencyStatus()]++;
+	if (certificate.dumpFrequencyStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.dumpFrequencyStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpFrequencyStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpFrequencyStatus()]++;
+	}
 	if (certificate.dumpFrequency() !== '' && certificate.dumpFrequency() !== 'rarely' && certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['standard']++;
@@ -3001,30 +3317,56 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.timeSensitive() !== 'true') {
 
-	if (certificate.correctedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
+	if (certificate.correctedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctedStatus() !== 'optional') {
+		unmetRequirements[certificate.correctedStatus()]++;
+	}
 	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
 
 }
 
 }
 
-	if (certificate.qualityUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.qualityUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.qualityUrlStatus() !== 'optional') unmetRequirements[certificate.qualityUrlStatus()]++;
+	if (certificate.qualityUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.qualityUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.qualityUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.qualityUrlStatus()]++;
+	}
 	if (certificate.qualityUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
-	if (certificate.qualityControlUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.qualityControlUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.qualityControlUrlStatus() !== 'optional') unmetRequirements[certificate.qualityControlUrlStatus()]++;
+	if (certificate.qualityControlUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.qualityControlUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.qualityControlUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.qualityControlUrlStatus()]++;
+	}
 	if (certificate.qualityControlUrlStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceAvailabilityStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceAvailabilityStatus() !== 'optional') unmetRequirements[certificate.serviceAvailabilityStatus()]++;
+	if (certificate.serviceAvailabilityStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.serviceAvailabilityStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceAvailabilityStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceAvailabilityStatus()]++;
+	}
 	if (certificate.serviceAvailability() !== '' && certificate.serviceAvailability() !== 'minimal' && certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['basic']++;
 		if (certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['pilot']++;
 		if (certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['standard']++;
@@ -3032,9 +3374,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.onGoingAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.onGoingAvailabilityStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.onGoingAvailabilityStatus() !== 'optional') unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
+	if (certificate.onGoingAvailabilityStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.onGoingAvailabilityStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.onGoingAvailabilityStatus() !== 'optional') {
+		unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
+	}
 	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['basic']++;
 		if (certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['pilot']++;
 		if (certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['standard']++;
@@ -3253,16 +3600,27 @@ certificate.digitalCertificateStatus = ko.computed(function () {
   return status;
 });
 certificate.technicalStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
+  var unmetRequirements = { answered: 0, basic: 0,
+		answeredbasic: 0, pilot: 0,
+		answeredpilot: 0, standard: 0,
+		answeredstandard: 0, exemplar: 0,
+		answeredexemplar: 0 }
   ;
 
 	if (certificate.releaseType() !== '') {
 
 	if (certificate.releaseType() === 'oneoff') {
 
-	if (certificate.datasetUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.datasetUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.datasetUrlStatus() !== 'optional') unmetRequirements[certificate.datasetUrlStatus()]++;
+	if (certificate.datasetUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.datasetUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.datasetUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.datasetUrlStatus()]++;
+	}
 	
 	if (certificate.documentationUrl() === '') {
 if (!(certificate.datasetUrl() !== '')) unmetRequirements['basic']++; 
@@ -3278,9 +3636,14 @@ if (!(certificate.datasetUrl() !== '')) unmetRequirements['pilot']++;
 
 	if (certificate.releaseType() === 'series') {
 
-	if (certificate.versionManagementStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionManagementStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionManagementStatus() !== 'optional') unmetRequirements[certificate.versionManagementStatus()]++;
+	if (certificate.versionManagementStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.versionManagementStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionManagementStatus() !== 'optional') {
+		unmetRequirements[certificate.versionManagementStatus()]++;
+	}
 	if (!certificate.versionManagementCurrent()) unmetRequirements['standard']++; 
 if (!certificate.versionManagementTemplate()) unmetRequirements['pilot']++; 
 if (!certificate.versionManagementList()) unmetRequirements['standard']++; 
@@ -3292,25 +3655,46 @@ if (certificate.versionManagementStatus() !== 'complete') unmetRequirements['bas
 
 	if (certificate.versionManagement().current) {
 
-	if (certificate.currentDatasetUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.currentDatasetUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.currentDatasetUrlStatus() !== 'optional') unmetRequirements[certificate.currentDatasetUrlStatus()]++;
+	if (certificate.currentDatasetUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.currentDatasetUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.currentDatasetUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.currentDatasetUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.versionManagement().template) {
 
-	if (certificate.versionsTemplateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionsTemplateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionsTemplateUrlStatus() !== 'optional') unmetRequirements[certificate.versionsTemplateUrlStatus()]++;
+	if (certificate.versionsTemplateUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.versionsTemplateUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionsTemplateUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.versionsTemplateUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.versionManagement().list) {
 
-	if (certificate.versionsUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionsUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionsUrlStatus() !== 'optional') unmetRequirements[certificate.versionsUrlStatus()]++;
+	if (certificate.versionsUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.versionsUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionsUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.versionsUrlStatus()]++;
+	}
 	
 }
 
@@ -3318,9 +3702,16 @@ if (certificate.versionManagementStatus() !== 'complete') unmetRequirements['bas
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.endpointUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.endpointUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.endpointUrlStatus() !== 'optional') unmetRequirements[certificate.endpointUrlStatus()]++;
+	if (certificate.endpointUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.endpointUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.endpointUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.endpointUrlStatus()]++;
+	}
 	
 	if (certificate.documentationUrl() === '') {
 if (!(certificate.endpointUrl() !== '')) unmetRequirements['basic']++; 
@@ -3334,34 +3725,60 @@ if (!(certificate.endpointUrl() !== '')) unmetRequirements['standard']++;
 
 	if (certificate.provideDumps() === 'true') {
 
-	if (certificate.dumpManagementStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpManagementStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpManagementStatus() !== 'optional') unmetRequirements[certificate.dumpManagementStatus()]++;
+	if (certificate.dumpManagementStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.dumpManagementStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpManagementStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpManagementStatus()]++;
+	}
 	if (!certificate.dumpManagementCurrent()) unmetRequirements['standard']++; 
 if (!certificate.dumpManagementTemplate()) unmetRequirements['exemplar']++; 
 if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++; 
 
 	if (certificate.dumpManagement().current) {
 
-	if (certificate.currentDumpUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.currentDumpUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.currentDumpUrlStatus() !== 'optional') unmetRequirements[certificate.currentDumpUrlStatus()]++;
+	if (certificate.currentDumpUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.currentDumpUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.currentDumpUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.currentDumpUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.dumpManagement().template) {
 
-	if (certificate.dumpsTemplateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpsTemplateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpsTemplateUrlStatus() !== 'optional') unmetRequirements[certificate.dumpsTemplateUrlStatus()]++;
+	if (certificate.dumpsTemplateUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dumpsTemplateUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpsTemplateUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpsTemplateUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.dumpManagement().list) {
 
-	if (certificate.dumpsUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpsUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpsUrlStatus() !== 'optional') unmetRequirements[certificate.dumpsUrlStatus()]++;
+	if (certificate.dumpsUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dumpsUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpsUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpsUrlStatus()]++;
+	}
 	
 }
 
@@ -3371,33 +3788,66 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.changeFeed() === 'true') {
 
-	if (certificate.changeFeedUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.changeFeedUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.changeFeedUrlStatus() !== 'optional') unmetRequirements[certificate.changeFeedUrlStatus()]++;
+	if (certificate.changeFeedUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.changeFeedUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.changeFeedUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.changeFeedUrlStatus()]++;
+	}
 	
 }
 
 }
 
-	if (certificate.machineReadableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.machineReadableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.machineReadableStatus() !== 'optional') unmetRequirements[certificate.machineReadableStatus()]++;
+	if (certificate.machineReadableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.machineReadableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.machineReadableStatus() !== 'optional') {
+		unmetRequirements[certificate.machineReadableStatus()]++;
+	}
 	if (certificate.machineReadable() !== 'true') unmetRequirements['pilot']++; 
 
-	if (certificate.openStandardStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.openStandardStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.openStandardStatus() !== 'optional') unmetRequirements[certificate.openStandardStatus()]++;
+	if (certificate.openStandardStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.openStandardStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.openStandardStatus() !== 'optional') {
+		unmetRequirements[certificate.openStandardStatus()]++;
+	}
 	if (certificate.openStandard() !== 'true') unmetRequirements['standard']++; 
 
-	if (certificate.dataTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataTypeStatus() !== 'optional') unmetRequirements[certificate.dataTypeStatus()]++;
+	if (certificate.dataTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.dataTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.dataTypeStatus()]++;
+	}
 	
 	if (certificate.dataType().documents) {
 
-	if (certificate.documentFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.documentFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.documentFormatStatus() !== 'optional') unmetRequirements[certificate.documentFormatStatus()]++;
+	if (certificate.documentFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.documentFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.documentFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.documentFormatStatus()]++;
+	}
 	if (certificate.documentFormat() !== '' && certificate.documentFormat() !== 'semantic' && certificate.documentFormat() !== 'format' && certificate.documentFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.documentFormat() !== 'semantic' && certificate.documentFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.documentFormat() !== 'semantic') unmetRequirements['standard']++;
@@ -3406,9 +3856,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().statistical) {
 
-	if (certificate.statisticalFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.statisticalFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.statisticalFormatStatus() !== 'optional') unmetRequirements[certificate.statisticalFormatStatus()]++;
+	if (certificate.statisticalFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.statisticalFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.statisticalFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.statisticalFormatStatus()]++;
+	}
 	if (certificate.statisticalFormat() !== '' && certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format' && certificate.statisticalFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular') unmetRequirements['standard']++;
@@ -3418,9 +3873,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().geographic) {
 
-	if (certificate.geographicFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.geographicFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.geographicFormatStatus() !== 'optional') unmetRequirements[certificate.geographicFormatStatus()]++;
+	if (certificate.geographicFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.geographicFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.geographicFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.geographicFormatStatus()]++;
+	}
 	if (certificate.geographicFormat() !== '' && certificate.geographicFormat() !== 'specific' && certificate.geographicFormat() !== 'generic' && certificate.geographicFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.geographicFormat() !== 'specific' && certificate.geographicFormat() !== 'generic') unmetRequirements['pilot']++;
 		if (certificate.geographicFormat() !== 'specific') unmetRequirements['standard']++;
@@ -3429,41 +3889,81 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().structured) {
 
-	if (certificate.structuredFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.structuredFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.structuredFormatStatus() !== 'optional') unmetRequirements[certificate.structuredFormatStatus()]++;
+	if (certificate.structuredFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.structuredFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.structuredFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.structuredFormatStatus()]++;
+	}
 	if (certificate.structuredFormat() !== '' && certificate.structuredFormat() !== 'suitable' && certificate.structuredFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.structuredFormat() !== 'suitable') unmetRequirements['pilot']++;
 		
 }
 
-	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
+	if (certificate.identifiersStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.identifiersStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.identifiersStatus() !== 'optional') {
+		unmetRequirements[certificate.identifiersStatus()]++;
+	}
 	if (certificate.identifiers() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.resolvingUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.resolvingUrlsStatus() !== 'optional') unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	if (certificate.resolvingUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.resolvingUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.resolvingUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	}
 	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.existingExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.existingExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.existingExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrlsStatus()]++;
+	if (certificate.existingExternalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.existingExternalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.existingExternalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.existingExternalUrlsStatus()]++;
+	}
 	
 	if (certificate.existingExternalUrls() === 'true') {
 
-	if (certificate.reliableExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.reliableExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.reliableExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
+	if (certificate.reliableExternalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.reliableExternalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.reliableExternalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
+	}
 	
 	if (certificate.reliableExternalUrls) {
 
-	if (certificate.externalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.externalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.externalUrlsStatus() !== 'optional') unmetRequirements[certificate.externalUrlsStatus()]++;
+	if (certificate.externalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.externalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.externalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.externalUrlsStatus()]++;
+	}
 	if (certificate.externalUrls() !== 'true') unmetRequirements['exemplar']++; 
 
 }
@@ -3472,14 +3972,28 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 }
 
-	if (certificate.provenanceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.provenanceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.provenanceStatus() !== 'optional') unmetRequirements[certificate.provenanceStatus()]++;
+	if (certificate.provenanceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.provenanceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.provenanceStatus() !== 'optional') {
+		unmetRequirements[certificate.provenanceStatus()]++;
+	}
 	if (certificate.provenance() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.digitalCertificateStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.digitalCertificateStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.digitalCertificateStatus() !== 'optional') unmetRequirements[certificate.digitalCertificateStatus()]++;
+	if (certificate.digitalCertificateStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.digitalCertificateStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.digitalCertificateStatus() !== 'optional') {
+		unmetRequirements[certificate.digitalCertificateStatus()]++;
+	}
 	if (certificate.digitalCertificateStatus() !== 'complete') unmetRequirements['exemplar']++; 
   return unmetRequirements;
 });
@@ -3648,14 +4162,23 @@ certificate.librariesStatus = ko.computed(function () {
   return status;
 });
 certificate.socialStatus = ko.computed(function () {
-  var unmetRequirements = { answered: 0, basic: 0, pilot: 0, standard: 0, exemplar: 0 }
+  var unmetRequirements = { answered: 0, basic: 0,
+		answeredbasic: 0, pilot: 0,
+		answeredpilot: 0, standard: 0,
+		answeredstandard: 0, exemplar: 0,
+		answeredexemplar: 0 }
   ;
 
 	if (certificate.documentationUrl() !== '') {
 
-	if (certificate.documentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.documentationMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
+	if (certificate.documentationMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.documentationMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.documentationMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.documentationMetadataStatus()]++;
+	}
 	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataIssued()) unmetRequirements['pilot']++; 
@@ -3672,9 +4195,14 @@ if (!certificate.documentationMetadataKeyword()) unmetRequirements['standard']++
 
 	if (certificate.documentationMetadata().distribution) {
 
-	if (certificate.distributionMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.distributionMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
+	if (certificate.distributionMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.distributionMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.distributionMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.distributionMetadataStatus()]++;
+	}
 	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataIssued()) unmetRequirements['pilot']++; 
@@ -3687,97 +4215,188 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceDocumentationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceDocumentationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceDocumentationStatus() !== 'optional') unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	if (certificate.serviceDocumentationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.serviceDocumentationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceDocumentationStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	}
 	if (certificate.serviceDocumentationStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
-	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	if (certificate.vocabularyStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredstandard']++;
+			
+	} else if (certificate.vocabularyStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.vocabularyStatus() !== 'optional') {
+		unmetRequirements[certificate.vocabularyStatus()]++;
+	}
 	
 	if (certificate.vocabulary() === 'true') {
 
-	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.schemaDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.schemaDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	}
 	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	if (certificate.codelistsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredstandard']++;
+			
+	} else if (certificate.codelistsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.codelistsStatus() !== 'optional') {
+		unmetRequirements[certificate.codelistsStatus()]++;
+	}
 	
 	if (certificate.codelists() === 'true') {
 
-	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.codelistDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.codelistDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	}
 	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.contactEmailStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contactEmailStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contactEmailStatus() !== 'optional') unmetRequirements[certificate.contactEmailStatus()]++;
+	if (certificate.contactEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.contactEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contactEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.contactEmailStatus()]++;
+	}
 	if (certificate.contactEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-	if (certificate.forumStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.forumStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.forumStatus() !== 'optional') unmetRequirements[certificate.forumStatus()]++;
+	if (certificate.forumStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.forumStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.forumStatus() !== 'optional') {
+		unmetRequirements[certificate.forumStatus()]++;
+	}
 	if (certificate.forumStatus() !== 'complete') unmetRequirements['standard']++; 
 
 	if (certificate.corrected() === 'true') {
 
-	if (certificate.correctionReportingStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctionReportingStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctionReportingStatus() !== 'optional') unmetRequirements[certificate.correctionReportingStatus()]++;
+	if (certificate.correctionReportingStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctionReportingStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctionReportingStatus() !== 'optional') {
+		unmetRequirements[certificate.correctionReportingStatus()]++;
+	}
 	if (certificate.correctionReportingStatus() !== 'complete') unmetRequirements['standard']++; 
 
-	if (certificate.correctionDiscoveryStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctionDiscoveryStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctionDiscoveryStatus() !== 'optional') unmetRequirements[certificate.correctionDiscoveryStatus()]++;
+	if (certificate.correctionDiscoveryStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctionDiscoveryStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctionDiscoveryStatus() !== 'optional') {
+		unmetRequirements[certificate.correctionDiscoveryStatus()]++;
+	}
 	if (certificate.correctionDiscoveryStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
 	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.dataProtectionEmailStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataProtectionEmailStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataProtectionEmailStatus() !== 'optional') unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	if (certificate.dataProtectionEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	}
 	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
-	if (certificate.librariesStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.librariesStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.librariesStatus() !== 'optional') unmetRequirements[certificate.librariesStatus()]++;
+	if (certificate.librariesStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.librariesStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.librariesStatus() !== 'optional') {
+		unmetRequirements[certificate.librariesStatus()]++;
+	}
 	if (certificate.librariesStatus() !== 'complete') unmetRequirements['exemplar']++; 
   return unmetRequirements;
 });
 
-	  		
-		  			certificate.certificateLevel = ko.computed(function () {
-		  				var unmetRequirements = {
-		  					basic: 0,
-		  					pilot: 0,
-		  					standard: 0,
-		  					exemplar: 0,
-		  					
-		  					}
-		  				;
-		  				
-	if (certificate.dataTitleStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataTitleStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataTitleStatus() !== 'optional') unmetRequirements[certificate.dataTitleStatus()]++;
+	  				certificate.status = ko.computed(function () {
+	  					var unmetRequirements = {
+	  						answered: 0,
+					  		basic: 0,
+					  			answeredbasic: 0,pilot: 0,
+					  			answeredpilot: 0,standard: 0,
+					  			answeredstandard: 0,exemplar: 0,
+					  			answeredexemplar: 0
+				  		}
+				  		;
+				  		
+	if (certificate.dataTitleStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataTitleStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataTitleStatus() !== 'optional') {
+		unmetRequirements[certificate.dataTitleStatus()]++;
+	}
 	
-	if (certificate.documentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.documentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.documentationUrlStatus() !== 'optional') unmetRequirements[certificate.documentationUrlStatus()]++;
+	if (certificate.documentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.documentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.documentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.documentationUrlStatus()]++;
+	}
 	
 	if (certificate.releaseType() !== 'collection') {
 if (certificate.documentationUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
@@ -3789,21 +4408,47 @@ if (!(certificate.documentationUrl() !== '')) unmetRequirements['basic']++;
 
 }
 
-	if (certificate.publisherStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherStatus() !== 'optional') unmetRequirements[certificate.publisherStatus()]++;
+	if (certificate.publisherStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.publisherStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherStatus()]++;
+	}
 	
-	if (certificate.publisherUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherUrlStatus() !== 'optional') unmetRequirements[certificate.publisherUrlStatus()]++;
+	if (certificate.publisherUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.publisherUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherUrlStatus()]++;
+	}
 	
-	if (certificate.releaseTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.releaseTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.releaseTypeStatus() !== 'optional') unmetRequirements[certificate.releaseTypeStatus()]++;
+	if (certificate.releaseTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.releaseTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.releaseTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.releaseTypeStatus()]++;
+	}
 	
-	if (certificate.publisherRightsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherRightsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherRightsStatus() !== 'optional') unmetRequirements[certificate.publisherRightsStatus()]++;
+	if (certificate.publisherRightsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.publisherRightsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherRightsStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherRightsStatus()]++;
+	}
 	
 	if (certificate.publisherRights() === 'no') {
 if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic']++; 
@@ -3812,9 +4457,16 @@ if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic
 
 	if (certificate.publisherRights() === 'yes' || certificate.publisherRights() === 'unsure') {
 
-	if (certificate.publisherOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.publisherOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.publisherOriginStatus() !== 'optional') unmetRequirements[certificate.publisherOriginStatus()]++;
+	if (certificate.publisherOriginStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.publisherOriginStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.publisherOriginStatus() !== 'optional') {
+		unmetRequirements[certificate.publisherOriginStatus()]++;
+	}
 	
 }
 
@@ -3822,9 +4474,16 @@ if (certificate.publisherRightsStatus() !== 'complete') unmetRequirements['basic
 
 	if (certificate.publisherOrigin() === 'false') {
 
-	if (certificate.thirdPartyOriginStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOriginStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOriginStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	if (certificate.thirdPartyOriginStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.thirdPartyOriginStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.thirdPartyOriginStatus() !== 'optional') {
+		unmetRequirements[certificate.thirdPartyOriginStatus()]++;
+	}
 	
 	if (certificate.crowdsourced() === 'false') {
 if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++; 
@@ -3833,9 +4492,16 @@ if (!(certificate.thirdPartyOrigin() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.thirdPartyOrigin() === 'true') {
 
-	if (certificate.thirdPartyOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.thirdPartyOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.thirdPartyOpenStatus() !== 'optional') unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	if (certificate.thirdPartyOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.thirdPartyOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.thirdPartyOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.thirdPartyOpenStatus()]++;
+	}
 	
 	if (certificate.thirdPartyOpen() === 'false') {
 if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++; 
@@ -3844,9 +4510,16 @@ if (certificate.thirdPartyOpen() !== 'true') unmetRequirements['basic']++;
 
 }
 
-	if (certificate.crowdsourcedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedStatus()]++;
+	if (certificate.crowdsourcedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.crowdsourcedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.crowdsourcedStatus() !== 'optional') {
+		unmetRequirements[certificate.crowdsourcedStatus()]++;
+	}
 	
 	if (certificate.thirdPartyOrigin() === 'false') {
 if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++; 
@@ -3855,19 +4528,40 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.crowdsourced() === 'true') {
 
-	if (certificate.crowdsourcedContentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.crowdsourcedContentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.crowdsourcedContentStatus() !== 'optional') unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	if (certificate.crowdsourcedContentStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.crowdsourcedContentStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.crowdsourcedContentStatus() !== 'optional') {
+		unmetRequirements[certificate.crowdsourcedContentStatus()]++;
+	}
 	
 	if (certificate.crowdsourcedContent() === 'true') {
 
-	if (certificate.claUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.claUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.claUrlStatus() !== 'optional') unmetRequirements[certificate.claUrlStatus()]++;
+	if (certificate.claUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.claUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.claUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.claUrlStatus()]++;
+	}
 	
-	if (certificate.cldsRecordedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.cldsRecordedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.cldsRecordedStatus() !== 'optional') unmetRequirements[certificate.cldsRecordedStatus()]++;
+	if (certificate.cldsRecordedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.cldsRecordedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.cldsRecordedStatus() !== 'optional') {
+		unmetRequirements[certificate.cldsRecordedStatus()]++;
+	}
 	if (certificate.cldsRecorded() !== 'true') unmetRequirements['basic']++; 
 
 }
@@ -3880,59 +4574,113 @@ if (!(certificate.crowdsourced() === 'true')) unmetRequirements['basic']++;
 
 	if (certificate.publisherOrigin() === 'false') {
 
-	if (certificate.sourceDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.sourceDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.sourceDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	if (certificate.sourceDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.sourceDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.sourceDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.sourceDocumentationUrlStatus()]++;
+	}
 	if (certificate.sourceDocumentationUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.sourceDocumentationUrl() !== '') {
 
-	if (certificate.sourceDocumentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.sourceDocumentationMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	if (certificate.sourceDocumentationMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.sourceDocumentationMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.sourceDocumentationMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.sourceDocumentationMetadataStatus()]++;
+	}
 	if (certificate.sourceDocumentationMetadata() !== 'true') unmetRequirements['standard']++; 
 
 }
 
 }
 
-	if (certificate.copyrightURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.copyrightURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.copyrightURLStatus() !== 'optional') unmetRequirements[certificate.copyrightURLStatus()]++;
+	if (certificate.copyrightURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.copyrightURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.copyrightURLStatus() !== 'optional') {
+		unmetRequirements[certificate.copyrightURLStatus()]++;
+	}
 	if (certificate.copyrightURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.copyrightURL() !== '') {
 
-	if (certificate.copyrightStatementMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.copyrightStatementMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.copyrightStatementMetadataStatus() !== 'optional') unmetRequirements[certificate.copyrightStatementMetadataStatus()]++;
+	if (certificate.copyrightStatementMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.copyrightStatementMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.copyrightStatementMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.copyrightStatementMetadataStatus()]++;
+	}
 	if (!certificate.copyrightStatementMetadataLicense()) unmetRequirements['standard']++; 
 if (!certificate.copyrightStatementMetadataAttribution()) unmetRequirements['exemplar']++; 
 if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['exemplar']++; 
 
 }
 
-	if (certificate.dataLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataLicenceStatus() !== 'optional') unmetRequirements[certificate.dataLicenceStatus()]++;
+	if (certificate.dataLicenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataLicenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataLicenceStatus() !== 'optional') {
+		unmetRequirements[certificate.dataLicenceStatus()]++;
+	}
 	
 	if (certificate.dataLicence() === 'na') {
 
-	if (certificate.dataNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataNotApplicableStatus() !== 'optional') unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	if (certificate.dataNotApplicableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataNotApplicableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataNotApplicableStatus() !== 'optional') {
+		unmetRequirements[certificate.dataNotApplicableStatus()]++;
+	}
 	
 	if (certificate.dataNotApplicable() === 'waived') {
 
-	if (certificate.dataWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataWaiverStatus() !== 'optional') unmetRequirements[certificate.dataWaiverStatus()]++;
+	if (certificate.dataWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.dataWaiverStatus()]++;
+	}
 	
 	if (certificate.dataWaiver() === 'other') {
 
-	if (certificate.dataOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	if (certificate.dataOtherWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dataOtherWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataOtherWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.dataOtherWaiverStatus()]++;
+	}
 	
 }
 
@@ -3942,42 +4690,91 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 
 	if (certificate.dataLicence() === 'other') {
 
-	if (certificate.otherDataLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceNameStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceNameStatus()]++;
+	if (certificate.otherDataLicenceNameStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceNameStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceNameStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceNameStatus()]++;
+	}
 	
-	if (certificate.otherDataLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceURLStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceURLStatus()]++;
+	if (certificate.otherDataLicenceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceURLStatus()]++;
+	}
 	
-	if (certificate.otherDataLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherDataLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherDataLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
+	if (certificate.otherDataLicenceOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherDataLicenceOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherDataLicenceOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.otherDataLicenceOpenStatus()]++;
+	}
 	if (certificate.otherDataLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
-	if (certificate.contentLicenceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentLicenceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentLicenceStatus() !== 'optional') unmetRequirements[certificate.contentLicenceStatus()]++;
+	if (certificate.contentLicenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentLicenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentLicenceStatus() !== 'optional') {
+		unmetRequirements[certificate.contentLicenceStatus()]++;
+	}
 	
 	if (certificate.contentLicence() === 'na') {
 
-	if (certificate.contentNotApplicableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentNotApplicableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentNotApplicableStatus() !== 'optional') unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	if (certificate.contentNotApplicableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentNotApplicableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentNotApplicableStatus() !== 'optional') {
+		unmetRequirements[certificate.contentNotApplicableStatus()]++;
+	}
 	
 	if (certificate.contentNotApplicable() === 'waived') {
 
-	if (certificate.contentWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentWaiverStatus() !== 'optional') unmetRequirements[certificate.contentWaiverStatus()]++;
+	if (certificate.contentWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.contentWaiverStatus()]++;
+	}
 	
 	if (certificate.contentWaiver() === 'other') {
 
-	if (certificate.contentOtherWaiverStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contentOtherWaiverStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contentOtherWaiverStatus() !== 'optional') unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	if (certificate.contentOtherWaiverStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.contentOtherWaiverStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contentOtherWaiverStatus() !== 'optional') {
+		unmetRequirements[certificate.contentOtherWaiverStatus()]++;
+	}
 	
 }
 
@@ -3987,101 +4784,204 @@ if (!certificate.copyrightStatementMetadataAttributionURL()) unmetRequirements['
 
 	if (certificate.contentLicence() === 'other') {
 
-	if (certificate.otherContentLicenceNameStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceNameStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceNameStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceNameStatus()]++;
+	if (certificate.otherContentLicenceNameStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceNameStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceNameStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceNameStatus()]++;
+	}
 	
-	if (certificate.otherContentLicenceURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceURLStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceURLStatus()]++;
+	if (certificate.otherContentLicenceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceURLStatus()]++;
+	}
 	
-	if (certificate.otherContentLicenceOpenStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.otherContentLicenceOpenStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.otherContentLicenceOpenStatus() !== 'optional') unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
+	if (certificate.otherContentLicenceOpenStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.otherContentLicenceOpenStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.otherContentLicenceOpenStatus() !== 'optional') {
+		unmetRequirements[certificate.otherContentLicenceOpenStatus()]++;
+	}
 	if (certificate.otherContentLicenceOpen() !== 'true') unmetRequirements['basic']++; 
 
 }
 
-	if (certificate.dataPersonalStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataPersonalStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataPersonalStatus() !== 'optional') unmetRequirements[certificate.dataPersonalStatus()]++;
+	if (certificate.dataPersonalStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.dataPersonalStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataPersonalStatus() !== 'optional') {
+		unmetRequirements[certificate.dataPersonalStatus()]++;
+	}
 	
 	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.consentExemptStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.consentExemptStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.consentExemptStatus() !== 'optional') unmetRequirements[certificate.consentExemptStatus()]++;
+	if (certificate.consentExemptStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.consentExemptStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.consentExemptStatus() !== 'optional') {
+		unmetRequirements[certificate.consentExemptStatus()]++;
+	}
 	
 	if (certificate.consentExempt() === 'false') {
 
-	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
+	if (certificate.privacyImpactAssessmentUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.privacyImpactAssessmentUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.privacyImpactAssessmentUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.privacyImpactAssessmentUrlStatus()]++;
+	}
 	if (certificate.privacyImpactAssessmentUrlStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 	if (certificate.privacyImpactAssessmentUrl() !== '') {
 
-	if (certificate.piaAuditedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.piaAuditedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.piaAuditedStatus() !== 'optional') unmetRequirements[certificate.piaAuditedStatus()]++;
+	if (certificate.piaAuditedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.piaAuditedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.piaAuditedStatus() !== 'optional') {
+		unmetRequirements[certificate.piaAuditedStatus()]++;
+	}
 	if (certificate.piaAudited() !== 'true') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.individualConsentURLStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.individualConsentURLStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.individualConsentURLStatus() !== 'optional') unmetRequirements[certificate.individualConsentURLStatus()]++;
+	if (certificate.individualConsentURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.individualConsentURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.individualConsentURLStatus() !== 'optional') {
+		unmetRequirements[certificate.individualConsentURLStatus()]++;
+	}
 	if (certificate.individualConsentURLStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-	if (certificate.personalDataAnonymisationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.personalDataAnonymisationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.personalDataAnonymisationStatus() !== 'optional') unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
+	if (certificate.personalDataAnonymisationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.personalDataAnonymisationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.personalDataAnonymisationStatus() !== 'optional') {
+		unmetRequirements[certificate.personalDataAnonymisationStatus()]++;
+	}
 	if (certificate.personalDataAnonymisation() !== 'true') unmetRequirements['pilot']++; 
 
 }
 
 	if (certificate.consentExempt() === 'true') {
 
-	if (certificate.privacyImpactAssessmentStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.privacyImpactAssessmentStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.privacyImpactAssessmentStatus() !== 'optional') unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	if (certificate.privacyImpactAssessmentStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.privacyImpactAssessmentStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.privacyImpactAssessmentStatus() !== 'optional') {
+		unmetRequirements[certificate.privacyImpactAssessmentStatus()]++;
+	}
 	if (certificate.privacyImpactAssessment() !== 'true') unmetRequirements['standard']++; 
 
 }
 
 }
 
-	if (certificate.linkedToStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.linkedToStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.linkedToStatus() !== 'optional') unmetRequirements[certificate.linkedToStatus()]++;
+	if (certificate.linkedToStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.linkedToStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.linkedToStatus() !== 'optional') {
+		unmetRequirements[certificate.linkedToStatus()]++;
+	}
 	if (certificate.linkedTo() !== 'true') unmetRequirements['standard']++; 
 
-	if (certificate.listedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.listedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.listedStatus() !== 'optional') unmetRequirements[certificate.listedStatus()]++;
+	if (certificate.listedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.listedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.listedStatus() !== 'optional') {
+		unmetRequirements[certificate.listedStatus()]++;
+	}
 	if (certificate.listed() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.listed() === 'true') {
 $(certificate.listings()).each(function () {var listings = this;
-	if (listings.listingStatus() === 'complete') unmetRequirements['answered']++;
-	else if (listings.listingStatus() === 'required') unmetRequirements['basic']++;
-	else if (listings.listingStatus() !== 'optional') unmetRequirements[listings.listingStatus()]++;
+	if (listings.listingStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (listings.listingStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (listings.listingStatus() !== 'optional') {
+		unmetRequirements[listings.listingStatus()]++;
+	}
 	});
 }
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceTypeStatus() !== 'optional') unmetRequirements[certificate.serviceTypeStatus()]++;
+	if (certificate.serviceTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.serviceTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceTypeStatus()]++;
+	}
 	
 }
 
 	if (certificate.releaseType() === 'oneoff' || certificate.releaseType() === 'collection' || (certificate.releaseType() === 'service' && certificate.serviceType() === 'static')) {
 
-	if (certificate.timeSensitiveStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.timeSensitiveStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.timeSensitiveStatus() !== 'optional') unmetRequirements[certificate.timeSensitiveStatus()]++;
+	if (certificate.timeSensitiveStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.timeSensitiveStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.timeSensitiveStatus() !== 'optional') {
+		unmetRequirements[certificate.timeSensitiveStatus()]++;
+	}
 	if (certificate.timeSensitive() !== '' && certificate.timeSensitive() !== 'true' && certificate.timeSensitive() !== 'timestamped' && certificate.timeSensitive() !== 'false') unmetRequirements['basic']++;
 		if (certificate.timeSensitive() !== 'timestamped' && certificate.timeSensitive() !== 'false') unmetRequirements['pilot']++;
 		if (certificate.timeSensitive() !== 'false') unmetRequirements['standard']++;
@@ -4090,28 +4990,54 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.releaseType() === 'series') {
 
-	if (certificate.frequentChangesStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.frequentChangesStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.frequentChangesStatus() !== 'optional') unmetRequirements[certificate.frequentChangesStatus()]++;
+	if (certificate.frequentChangesStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.frequentChangesStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.frequentChangesStatus() !== 'optional') {
+		unmetRequirements[certificate.frequentChangesStatus()]++;
+	}
 	
 	if (certificate.frequentChanges() === 'true') {
 
-	if (certificate.seriesTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.seriesTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.seriesTypeStatus() !== 'optional') unmetRequirements[certificate.seriesTypeStatus()]++;
+	if (certificate.seriesTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.seriesTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.seriesTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.seriesTypeStatus()]++;
+	}
 	
 	if (certificate.seriesType() === 'dumps') {
 
-	if (certificate.changeFeedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.changeFeedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.changeFeedStatus() !== 'optional') unmetRequirements[certificate.changeFeedStatus()]++;
+	if (certificate.changeFeedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.changeFeedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.changeFeedStatus() !== 'optional') {
+		unmetRequirements[certificate.changeFeedStatus()]++;
+	}
 	if (certificate.changeFeed() !== 'true') unmetRequirements['exemplar']++; 
 
 }
 
-	if (certificate.frequentSeriesPublicationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.frequentSeriesPublicationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.frequentSeriesPublicationStatus() !== 'optional') unmetRequirements[certificate.frequentSeriesPublicationStatus()]++;
+	if (certificate.frequentSeriesPublicationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.frequentSeriesPublicationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.frequentSeriesPublicationStatus() !== 'optional') {
+		unmetRequirements[certificate.frequentSeriesPublicationStatus()]++;
+	}
 	if (certificate.frequentSeriesPublication() !== '' && certificate.frequentSeriesPublication() !== 'rarely' && certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.frequentSeriesPublication() !== 'monthly' && certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.frequentSeriesPublication() !== 'weekly' && certificate.frequentSeriesPublication() !== 'daily') unmetRequirements['standard']++;
@@ -4119,9 +5045,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.seriesPublicationDelayStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.seriesPublicationDelayStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.seriesPublicationDelayStatus() !== 'optional') unmetRequirements[certificate.seriesPublicationDelayStatus()]++;
+	if (certificate.seriesPublicationDelayStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.seriesPublicationDelayStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.seriesPublicationDelayStatus() !== 'optional') {
+		unmetRequirements[certificate.seriesPublicationDelayStatus()]++;
+	}
 	if (certificate.seriesPublicationDelay() !== '' && certificate.seriesPublicationDelay() !== 'extreme' && certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['basic']++;
 		if (certificate.seriesPublicationDelay() !== 'reasonable' && certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['pilot']++;
 		if (certificate.seriesPublicationDelay() !== 'good' && certificate.seriesPublicationDelay() !== 'minimal') unmetRequirements['standard']++;
@@ -4131,18 +5062,30 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.provideDumpsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.provideDumpsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.provideDumpsStatus() !== 'optional') unmetRequirements[certificate.provideDumpsStatus()]++;
+	if (certificate.provideDumpsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.provideDumpsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.provideDumpsStatus() !== 'optional') {
+		unmetRequirements[certificate.provideDumpsStatus()]++;
+	}
 	if (certificate.provideDumps() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.serviceType() === 'changing') {
 
 	if (certificate.provideDumps() === 'true') {
 
-	if (certificate.dumpFrequencyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpFrequencyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpFrequencyStatus() !== 'optional') unmetRequirements[certificate.dumpFrequencyStatus()]++;
+	if (certificate.dumpFrequencyStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.dumpFrequencyStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpFrequencyStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpFrequencyStatus()]++;
+	}
 	if (certificate.dumpFrequency() !== '' && certificate.dumpFrequency() !== 'rarely' && certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['basic']++;
 		if (certificate.dumpFrequency() !== 'monthly' && certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['pilot']++;
 		if (certificate.dumpFrequency() !== 'weekly' && certificate.dumpFrequency() !== 'daily') unmetRequirements['standard']++;
@@ -4154,30 +5097,56 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.timeSensitive() !== 'true') {
 
-	if (certificate.correctedStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctedStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctedStatus() !== 'optional') unmetRequirements[certificate.correctedStatus()]++;
+	if (certificate.correctedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctedStatus() !== 'optional') {
+		unmetRequirements[certificate.correctedStatus()]++;
+	}
 	if (certificate.corrected() !== 'true') unmetRequirements['standard']++; 
 
 }
 
 }
 
-	if (certificate.qualityUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.qualityUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.qualityUrlStatus() !== 'optional') unmetRequirements[certificate.qualityUrlStatus()]++;
+	if (certificate.qualityUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.qualityUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.qualityUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.qualityUrlStatus()]++;
+	}
 	if (certificate.qualityUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
-	if (certificate.qualityControlUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.qualityControlUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.qualityControlUrlStatus() !== 'optional') unmetRequirements[certificate.qualityControlUrlStatus()]++;
+	if (certificate.qualityControlUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.qualityControlUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.qualityControlUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.qualityControlUrlStatus()]++;
+	}
 	if (certificate.qualityControlUrlStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceAvailabilityStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceAvailabilityStatus() !== 'optional') unmetRequirements[certificate.serviceAvailabilityStatus()]++;
+	if (certificate.serviceAvailabilityStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.serviceAvailabilityStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceAvailabilityStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceAvailabilityStatus()]++;
+	}
 	if (certificate.serviceAvailability() !== '' && certificate.serviceAvailability() !== 'minimal' && certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['basic']++;
 		if (certificate.serviceAvailability() !== '99%' && certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['pilot']++;
 		if (certificate.serviceAvailability() !== '99.9%' && certificate.serviceAvailability() !== '99.999%') unmetRequirements['standard']++;
@@ -4185,9 +5154,14 @@ $(certificate.listings()).each(function () {var listings = this;
 		
 }
 
-	if (certificate.onGoingAvailabilityStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.onGoingAvailabilityStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.onGoingAvailabilityStatus() !== 'optional') unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
+	if (certificate.onGoingAvailabilityStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.onGoingAvailabilityStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.onGoingAvailabilityStatus() !== 'optional') {
+		unmetRequirements[certificate.onGoingAvailabilityStatus()]++;
+	}
 	if (certificate.onGoingAvailability() !== '' && certificate.onGoingAvailability() !== 'experimental' && certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['basic']++;
 		if (certificate.onGoingAvailability() !== 'short' && certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['pilot']++;
 		if (certificate.onGoingAvailability() !== 'medium' && certificate.onGoingAvailability() !== 'long') unmetRequirements['standard']++;
@@ -4197,9 +5171,16 @@ $(certificate.listings()).each(function () {var listings = this;
 
 	if (certificate.releaseType() === 'oneoff') {
 
-	if (certificate.datasetUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.datasetUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.datasetUrlStatus() !== 'optional') unmetRequirements[certificate.datasetUrlStatus()]++;
+	if (certificate.datasetUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.datasetUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.datasetUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.datasetUrlStatus()]++;
+	}
 	
 	if (certificate.documentationUrl() === '') {
 if (!(certificate.datasetUrl() !== '')) unmetRequirements['basic']++; 
@@ -4215,9 +5196,14 @@ if (!(certificate.datasetUrl() !== '')) unmetRequirements['pilot']++;
 
 	if (certificate.releaseType() === 'series') {
 
-	if (certificate.versionManagementStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionManagementStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionManagementStatus() !== 'optional') unmetRequirements[certificate.versionManagementStatus()]++;
+	if (certificate.versionManagementStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.versionManagementStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionManagementStatus() !== 'optional') {
+		unmetRequirements[certificate.versionManagementStatus()]++;
+	}
 	if (!certificate.versionManagementCurrent()) unmetRequirements['standard']++; 
 if (!certificate.versionManagementTemplate()) unmetRequirements['pilot']++; 
 if (!certificate.versionManagementList()) unmetRequirements['standard']++; 
@@ -4229,25 +5215,46 @@ if (certificate.versionManagementStatus() !== 'complete') unmetRequirements['bas
 
 	if (certificate.versionManagement().current) {
 
-	if (certificate.currentDatasetUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.currentDatasetUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.currentDatasetUrlStatus() !== 'optional') unmetRequirements[certificate.currentDatasetUrlStatus()]++;
+	if (certificate.currentDatasetUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.currentDatasetUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.currentDatasetUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.currentDatasetUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.versionManagement().template) {
 
-	if (certificate.versionsTemplateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionsTemplateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionsTemplateUrlStatus() !== 'optional') unmetRequirements[certificate.versionsTemplateUrlStatus()]++;
+	if (certificate.versionsTemplateUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.versionsTemplateUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionsTemplateUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.versionsTemplateUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.versionManagement().list) {
 
-	if (certificate.versionsUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.versionsUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.versionsUrlStatus() !== 'optional') unmetRequirements[certificate.versionsUrlStatus()]++;
+	if (certificate.versionsUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.versionsUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.versionsUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.versionsUrlStatus()]++;
+	}
 	
 }
 
@@ -4255,9 +5262,16 @@ if (certificate.versionManagementStatus() !== 'complete') unmetRequirements['bas
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.endpointUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.endpointUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.endpointUrlStatus() !== 'optional') unmetRequirements[certificate.endpointUrlStatus()]++;
+	if (certificate.endpointUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.endpointUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.endpointUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.endpointUrlStatus()]++;
+	}
 	
 	if (certificate.documentationUrl() === '') {
 if (!(certificate.endpointUrl() !== '')) unmetRequirements['basic']++; 
@@ -4271,34 +5285,60 @@ if (!(certificate.endpointUrl() !== '')) unmetRequirements['standard']++;
 
 	if (certificate.provideDumps() === 'true') {
 
-	if (certificate.dumpManagementStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpManagementStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpManagementStatus() !== 'optional') unmetRequirements[certificate.dumpManagementStatus()]++;
+	if (certificate.dumpManagementStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.dumpManagementStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpManagementStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpManagementStatus()]++;
+	}
 	if (!certificate.dumpManagementCurrent()) unmetRequirements['standard']++; 
 if (!certificate.dumpManagementTemplate()) unmetRequirements['exemplar']++; 
 if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++; 
 
 	if (certificate.dumpManagement().current) {
 
-	if (certificate.currentDumpUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.currentDumpUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.currentDumpUrlStatus() !== 'optional') unmetRequirements[certificate.currentDumpUrlStatus()]++;
+	if (certificate.currentDumpUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.currentDumpUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.currentDumpUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.currentDumpUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.dumpManagement().template) {
 
-	if (certificate.dumpsTemplateUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpsTemplateUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpsTemplateUrlStatus() !== 'optional') unmetRequirements[certificate.dumpsTemplateUrlStatus()]++;
+	if (certificate.dumpsTemplateUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dumpsTemplateUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpsTemplateUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpsTemplateUrlStatus()]++;
+	}
 	
 }
 
 	if (certificate.dumpManagement().list) {
 
-	if (certificate.dumpsUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dumpsUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dumpsUrlStatus() !== 'optional') unmetRequirements[certificate.dumpsUrlStatus()]++;
+	if (certificate.dumpsUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.dumpsUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dumpsUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.dumpsUrlStatus()]++;
+	}
 	
 }
 
@@ -4308,33 +5348,66 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.changeFeed() === 'true') {
 
-	if (certificate.changeFeedUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.changeFeedUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.changeFeedUrlStatus() !== 'optional') unmetRequirements[certificate.changeFeedUrlStatus()]++;
+	if (certificate.changeFeedUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (certificate.changeFeedUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.changeFeedUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.changeFeedUrlStatus()]++;
+	}
 	
 }
 
 }
 
-	if (certificate.machineReadableStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.machineReadableStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.machineReadableStatus() !== 'optional') unmetRequirements[certificate.machineReadableStatus()]++;
+	if (certificate.machineReadableStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.machineReadableStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.machineReadableStatus() !== 'optional') {
+		unmetRequirements[certificate.machineReadableStatus()]++;
+	}
 	if (certificate.machineReadable() !== 'true') unmetRequirements['pilot']++; 
 
-	if (certificate.openStandardStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.openStandardStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.openStandardStatus() !== 'optional') unmetRequirements[certificate.openStandardStatus()]++;
+	if (certificate.openStandardStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.openStandardStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.openStandardStatus() !== 'optional') {
+		unmetRequirements[certificate.openStandardStatus()]++;
+	}
 	if (certificate.openStandard() !== 'true') unmetRequirements['standard']++; 
 
-	if (certificate.dataTypeStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataTypeStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataTypeStatus() !== 'optional') unmetRequirements[certificate.dataTypeStatus()]++;
+	if (certificate.dataTypeStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredpilot']++;
+			
+	} else if (certificate.dataTypeStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataTypeStatus() !== 'optional') {
+		unmetRequirements[certificate.dataTypeStatus()]++;
+	}
 	
 	if (certificate.dataType().documents) {
 
-	if (certificate.documentFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.documentFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.documentFormatStatus() !== 'optional') unmetRequirements[certificate.documentFormatStatus()]++;
+	if (certificate.documentFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.documentFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.documentFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.documentFormatStatus()]++;
+	}
 	if (certificate.documentFormat() !== '' && certificate.documentFormat() !== 'semantic' && certificate.documentFormat() !== 'format' && certificate.documentFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.documentFormat() !== 'semantic' && certificate.documentFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.documentFormat() !== 'semantic') unmetRequirements['standard']++;
@@ -4343,9 +5416,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().statistical) {
 
-	if (certificate.statisticalFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.statisticalFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.statisticalFormatStatus() !== 'optional') unmetRequirements[certificate.statisticalFormatStatus()]++;
+	if (certificate.statisticalFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.statisticalFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.statisticalFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.statisticalFormatStatus()]++;
+	}
 	if (certificate.statisticalFormat() !== '' && certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format' && certificate.statisticalFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular' && certificate.statisticalFormat() !== 'format') unmetRequirements['pilot']++;
 		if (certificate.statisticalFormat() !== 'statistical' && certificate.statisticalFormat() !== 'tabular') unmetRequirements['standard']++;
@@ -4355,9 +5433,14 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().geographic) {
 
-	if (certificate.geographicFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.geographicFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.geographicFormatStatus() !== 'optional') unmetRequirements[certificate.geographicFormatStatus()]++;
+	if (certificate.geographicFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.geographicFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.geographicFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.geographicFormatStatus()]++;
+	}
 	if (certificate.geographicFormat() !== '' && certificate.geographicFormat() !== 'specific' && certificate.geographicFormat() !== 'generic' && certificate.geographicFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.geographicFormat() !== 'specific' && certificate.geographicFormat() !== 'generic') unmetRequirements['pilot']++;
 		if (certificate.geographicFormat() !== 'specific') unmetRequirements['standard']++;
@@ -4366,41 +5449,81 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.dataType().structured) {
 
-	if (certificate.structuredFormatStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.structuredFormatStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.structuredFormatStatus() !== 'optional') unmetRequirements[certificate.structuredFormatStatus()]++;
+	if (certificate.structuredFormatStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.structuredFormatStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.structuredFormatStatus() !== 'optional') {
+		unmetRequirements[certificate.structuredFormatStatus()]++;
+	}
 	if (certificate.structuredFormat() !== '' && certificate.structuredFormat() !== 'suitable' && certificate.structuredFormat() !== 'unsuitable') unmetRequirements['basic']++;
 		if (certificate.structuredFormat() !== 'suitable') unmetRequirements['pilot']++;
 		
 }
 
-	if (certificate.identifiersStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.identifiersStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.identifiersStatus() !== 'optional') unmetRequirements[certificate.identifiersStatus()]++;
+	if (certificate.identifiersStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.identifiersStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.identifiersStatus() !== 'optional') {
+		unmetRequirements[certificate.identifiersStatus()]++;
+	}
 	if (certificate.identifiers() !== 'true') unmetRequirements['standard']++; 
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.resolvingUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.resolvingUrlsStatus() !== 'optional') unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	if (certificate.resolvingUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.resolvingUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.resolvingUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	}
 	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.existingExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.existingExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.existingExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.existingExternalUrlsStatus()]++;
+	if (certificate.existingExternalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.existingExternalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.existingExternalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.existingExternalUrlsStatus()]++;
+	}
 	
 	if (certificate.existingExternalUrls() === 'true') {
 
-	if (certificate.reliableExternalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.reliableExternalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.reliableExternalUrlsStatus() !== 'optional') unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
+	if (certificate.reliableExternalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredexemplar']++;
+			
+	} else if (certificate.reliableExternalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.reliableExternalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.reliableExternalUrlsStatus()]++;
+	}
 	
 	if (certificate.reliableExternalUrls) {
 
-	if (certificate.externalUrlsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.externalUrlsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.externalUrlsStatus() !== 'optional') unmetRequirements[certificate.externalUrlsStatus()]++;
+	if (certificate.externalUrlsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.externalUrlsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.externalUrlsStatus() !== 'optional') {
+		unmetRequirements[certificate.externalUrlsStatus()]++;
+	}
 	if (certificate.externalUrls() !== 'true') unmetRequirements['exemplar']++; 
 
 }
@@ -4409,21 +5532,40 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 }
 
-	if (certificate.provenanceStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.provenanceStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.provenanceStatus() !== 'optional') unmetRequirements[certificate.provenanceStatus()]++;
+	if (certificate.provenanceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.provenanceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.provenanceStatus() !== 'optional') {
+		unmetRequirements[certificate.provenanceStatus()]++;
+	}
 	if (certificate.provenance() !== 'true') unmetRequirements['exemplar']++; 
 
-	if (certificate.digitalCertificateStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.digitalCertificateStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.digitalCertificateStatus() !== 'optional') unmetRequirements[certificate.digitalCertificateStatus()]++;
+	if (certificate.digitalCertificateStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.digitalCertificateStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.digitalCertificateStatus() !== 'optional') {
+		unmetRequirements[certificate.digitalCertificateStatus()]++;
+	}
 	if (certificate.digitalCertificateStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.documentationUrl() !== '') {
 
-	if (certificate.documentationMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.documentationMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.documentationMetadataStatus() !== 'optional') unmetRequirements[certificate.documentationMetadataStatus()]++;
+	if (certificate.documentationMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.documentationMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.documentationMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.documentationMetadataStatus()]++;
+	}
 	if (!certificate.documentationMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataDescription()) unmetRequirements['pilot']++; 
 if (!certificate.documentationMetadataIssued()) unmetRequirements['pilot']++; 
@@ -4440,9 +5582,14 @@ if (!certificate.documentationMetadataKeyword()) unmetRequirements['standard']++
 
 	if (certificate.documentationMetadata().distribution) {
 
-	if (certificate.distributionMetadataStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.distributionMetadataStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.distributionMetadataStatus() !== 'optional') unmetRequirements[certificate.distributionMetadataStatus()]++;
+	if (certificate.distributionMetadataStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+	} else if (certificate.distributionMetadataStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.distributionMetadataStatus() !== 'optional') {
+		unmetRequirements[certificate.distributionMetadataStatus()]++;
+	}
 	if (!certificate.distributionMetadataTitle()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataDescription()) unmetRequirements['pilot']++; 
 if (!certificate.distributionMetadataIssued()) unmetRequirements['pilot']++; 
@@ -4455,75 +5602,152 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 	if (certificate.releaseType() === 'service') {
 
-	if (certificate.serviceDocumentationStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.serviceDocumentationStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.serviceDocumentationStatus() !== 'optional') unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	if (certificate.serviceDocumentationStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.serviceDocumentationStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.serviceDocumentationStatus() !== 'optional') {
+		unmetRequirements[certificate.serviceDocumentationStatus()]++;
+	}
 	if (certificate.serviceDocumentationStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
-	if (certificate.vocabularyStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.vocabularyStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.vocabularyStatus() !== 'optional') unmetRequirements[certificate.vocabularyStatus()]++;
+	if (certificate.vocabularyStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredstandard']++;
+			
+	} else if (certificate.vocabularyStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.vocabularyStatus() !== 'optional') {
+		unmetRequirements[certificate.vocabularyStatus()]++;
+	}
 	
 	if (certificate.vocabulary() === 'true') {
 
-	if (certificate.schemaDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.schemaDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.schemaDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	if (certificate.schemaDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.schemaDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.schemaDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.schemaDocumentationUrlStatus()]++;
+	}
 	if (certificate.schemaDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.codelistsStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistsStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistsStatus() !== 'optional') unmetRequirements[certificate.codelistsStatus()]++;
+	if (certificate.codelistsStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredstandard']++;
+			
+	} else if (certificate.codelistsStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.codelistsStatus() !== 'optional') {
+		unmetRequirements[certificate.codelistsStatus()]++;
+	}
 	
 	if (certificate.codelists() === 'true') {
 
-	if (certificate.codelistDocumentationUrlStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.codelistDocumentationUrlStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.codelistDocumentationUrlStatus() !== 'optional') unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	if (certificate.codelistDocumentationUrlStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.codelistDocumentationUrlStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.codelistDocumentationUrlStatus() !== 'optional') {
+		unmetRequirements[certificate.codelistDocumentationUrlStatus()]++;
+	}
 	if (certificate.codelistDocumentationUrlStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
-	if (certificate.contactEmailStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.contactEmailStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.contactEmailStatus() !== 'optional') unmetRequirements[certificate.contactEmailStatus()]++;
+	if (certificate.contactEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.contactEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.contactEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.contactEmailStatus()]++;
+	}
 	if (certificate.contactEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
-	if (certificate.forumStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.forumStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.forumStatus() !== 'optional') unmetRequirements[certificate.forumStatus()]++;
+	if (certificate.forumStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.forumStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.forumStatus() !== 'optional') {
+		unmetRequirements[certificate.forumStatus()]++;
+	}
 	if (certificate.forumStatus() !== 'complete') unmetRequirements['standard']++; 
 
 	if (certificate.corrected() === 'true') {
 
-	if (certificate.correctionReportingStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctionReportingStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctionReportingStatus() !== 'optional') unmetRequirements[certificate.correctionReportingStatus()]++;
+	if (certificate.correctionReportingStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctionReportingStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctionReportingStatus() !== 'optional') {
+		unmetRequirements[certificate.correctionReportingStatus()]++;
+	}
 	if (certificate.correctionReportingStatus() !== 'complete') unmetRequirements['standard']++; 
 
-	if (certificate.correctionDiscoveryStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.correctionDiscoveryStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.correctionDiscoveryStatus() !== 'optional') unmetRequirements[certificate.correctionDiscoveryStatus()]++;
+	if (certificate.correctionDiscoveryStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.correctionDiscoveryStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.correctionDiscoveryStatus() !== 'optional') {
+		unmetRequirements[certificate.correctionDiscoveryStatus()]++;
+	}
 	if (certificate.correctionDiscoveryStatus() !== 'complete') unmetRequirements['standard']++; 
 
 }
 
 	if (certificate.dataPersonal() === 'personal' || certificate.dataPersonal() === 'possibly') {
 
-	if (certificate.dataProtectionEmailStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.dataProtectionEmailStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.dataProtectionEmailStatus() !== 'optional') unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	if (certificate.dataProtectionEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	}
 	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
 }
 
-	if (certificate.librariesStatus() === 'complete') unmetRequirements['answered']++;
-	else if (certificate.librariesStatus() === 'required') unmetRequirements['basic']++;
-	else if (certificate.librariesStatus() !== 'optional') unmetRequirements[certificate.librariesStatus()]++;
+	if (certificate.librariesStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredexemplar']++;
+				
+	} else if (certificate.librariesStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.librariesStatus() !== 'optional') {
+		unmetRequirements[certificate.librariesStatus()]++;
+	}
 	if (certificate.librariesStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.publisherRights() === 'yes') {
@@ -4562,6 +5786,11 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 }
 
+	  					return unmetRequirements;
+				  	}, certificate);
+		  			certificate.certificateLevel = ko.computed(function () {
+		  				var unmetRequirements = certificate.status()
+		  					;
 		  				if (unmetRequirements.basic > 0) {
 		  					return 'none';
 		  				
