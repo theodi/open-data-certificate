@@ -15,7 +15,11 @@ class Question < ActiveRecord::Base
   end
 
   def question_corresponding_to_requirement
-    survey_section.survey.sections.map { |s| s.questions.excluding(self).where(["questions.requirement = ?", requirement])}.flatten.first
+    @question_corresponding_to_requirement ||= answer_corresponding_to_requirement.question
+  end
+
+  def answer_corresponding_to_requirement
+    @answer_corresponding_to_requirement ||= survey_section.survey.sections.map(&:questions).flatten.map(&:answers).flatten.detect{|a|a.requirement == requirement}
   end
 
   def requirement_met_by_responses?(responses)
@@ -24,7 +28,8 @@ class Question < ActiveRecord::Base
     # or if we want to determine the triggered on the associated question rather than the label...
     #   `response_set.survey.sections.map(&:questions).flatten.select{|e|e.is_a_requirement? && e.question_corresponding_to_requirement.triggered?}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
 
-  responses.map(&:question_id).include?(question_corresponding_to_requirement.id) #TODO: I would fairly comfortable anticipate that the iteration of responses will need to move (for efficiency) to the place where we're calling the 'requirement_met_by_responses?' method
+    responses_requirements = responses.select{|r| r.question_id == question_corresponding_to_requirement.id}.map{|r|Survey::REQUIREMENT_LEVELS.index(r.answer.improvement_level)} # TODO: Refactor this... it's too long and too stinky
+    responses_requirements.max && (responses_requirements.max >= Survey::REQUIREMENT_LEVELS.index(self.improvement_level))
   end
 
   def default_args

@@ -10,9 +10,9 @@ survey 'ODI Questionnaire', :default_mandatory => false do
     q_data_title "What's a good title for this data?"
     a_1 'Data Tile', :string
 
-    q_documentationUrl 'Where is the data described?', :requirement => 'pilot_1',
+    q_documentationUrl 'Where is the data described?',
                        :help_text => "This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it's useful for reusers to know about it, and because if it's written well then we can fill in a lot of things in this questionnaire based on the information within that page."
-    a_1 'Documentation URL', :string
+    a_1 'Documentation URL', :string, :requirement => 'pilot_1'
 
     label 'You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.', :custom_renderer => '/partials/requirement', :requirement => 'pilot_1'
     dependency :rule => 'A'
@@ -132,8 +132,8 @@ survey 'ODI Questionnaire', :default_mandatory => false do
   section 'Licensing' do
     label 'giving other people permission to reuse the data'
 
-    q_copyright_url 'Where is your copyright statement?', :requirement => 'pilot_2'
-    a_1 :string
+    q_copyright_url 'Where is your copyright statement?'
+    a_1 :string, :requirement => 'pilot_2'
 
     q_copyright_statement_meta_data 'Does your copyright statement include machine-readable data for:', :pick => :any
     a_1 'licenses'
