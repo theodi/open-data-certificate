@@ -278,7 +278,6 @@ survey 'Open Data Certificate Questionnaire',
         :pick => :one,
         :required => :required,
         :display_type => 'dropdown'
-      a ''
       a_odc-by 'Open Data Commons Attribution License'
       a_odc-by-sa 'Open Data Commons Open Database License (ODbL)'
       a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
@@ -307,7 +306,6 @@ survey 'Open Data Certificate Questionnaire',
       dependency :rule => 'A and B'
       condition_A :q_dataLicence, '==', :a_na
       condition_B :q_dataNotApplicable, '==', :a_waived
-      a ''
       a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
       a_cc0 'Creative Commons CCZero'
       a_other 'Other...'
@@ -361,7 +359,6 @@ survey 'Open Data Certificate Questionnaire',
         :pick => :one,
         :required => :required,
         :display_type => 'dropdown'
-      a ''
       a_cc-by 'Creative Commons Attribution'
       a_cc-by-sa 'Creative Commons Attribution Share-Alike'
       a_cc0 'Creative Commons CCZero'
@@ -389,7 +386,6 @@ survey 'Open Data Certificate Questionnaire',
       dependency :rule => 'A and B'
       condition_A :q_contentLicence, '==', :a_na
       condition_B :q_contentNotApplicable, '==', :a_waived
-      a ''
       a_cc0 'Creative Commons CCZero'
       a_other 'Other...'
 
