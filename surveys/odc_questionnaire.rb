@@ -989,12 +989,13 @@ survey 'Open Data Certificate Questionnaire' do
       condition_C :q_versionManagement, '!=', :a_list
       label 'You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.',
             :custom_renderer => '/partials/requirement_basic'
-      #dependency :rule => 'A and B and (C and D)'
-      dependency :rule => 'A and B and (C)'
+      dependency :rule => 'A and B and (C and D and E and F)'
       condition_A :q_releaseType, 'count>0'
       condition_B :q_releaseType, '==', :a_series
       condition_C :q_documentationUrl, '==', { :string_value => '', :answer_reference => '1' }
-#      condition_D :q_versionManagementStatus, '!=', :a_complete
+      condition_D :q_versionManagement, '!=', :a_current
+      condition_E :q_versionManagement, '!=', :a_template
+      condition_F :q_versionManagement, '!=', :a_list
 
       q_currentDatasetUrl 'What\'s the URL of the current dataset?',
                           :help_text => 'This should be the single URL that always gives the current version of the dataset itself (for example a CSV file). The content at this URL should change each time a new version is released. This should not be a page describing the dataset.'
