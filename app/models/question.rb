@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
+  after_save :update_mandatory
+
   def improvement_level
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
     requirement.to_s.match(/^[a-zA-Z]*/).to_s
@@ -32,9 +34,11 @@ class Question < ActiveRecord::Base
     responses_requirements.max && (responses_requirements.max >= Survey::REQUIREMENT_LEVELS.index(self.improvement_level))
   end
 
-  def default_args
+  private
+  def update_mandatory
+    #TODO: swap to using an observer instead?
     self.is_mandatory ||= !!required
-    super
+    Question.update(id, :is_mandatory=>is_mandatory) if is_mandatory_changed?
   end
 
 end
