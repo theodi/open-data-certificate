@@ -647,7 +647,7 @@
 	</group>
 	<group id="technical">
 		<label>Technical Information</label>
-		<if test="this.releaseType() !== ''">
+		<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'series' || this.releaseType() === 'service' || this.changeFeed() === 'true'">
 			<group id="locations">
 				<label>Locations</label>
 				<help>helping reusers to access the data</help>
@@ -684,7 +684,7 @@
 								<requirement level="standard">You should have a document or feed that provides a list of all the available releases so that reusers can create scripts to download all of them.</requirement>
 							</option>
 						</checkboxset>
-						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagementStatus() !== 'complete'">
+						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
 							<requirement>You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.</requirement>
 						</if>
 					</question>

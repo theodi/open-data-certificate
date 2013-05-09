@@ -2,7 +2,7 @@
 <xsl:stylesheet version="2.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:local="#"
+	xmlns:local="http://theodi.org/ns/func"
 	exclude-result-prefixes="#all">
 
 <xsl:template match="/">
@@ -69,44 +69,47 @@
 
 <xsl:template match="question" mode="structure">
 	<_group>
-		<xsl:element name="q_{@id}">
-			<xsl:attribute name="label">
-				<xsl:apply-templates select="label" mode="markdown" />
-			</xsl:attribute>
-			<xsl:if test="help">
-				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
-			</xsl:if>
-			<xsl:choose>
-				<xsl:when test="radioset | yesno | select">
-					<xsl:attribute name="pick">one</xsl:attribute>
-					<xsl:sequence select="*/@required" />
-					<xsl:if test="select">
-						<xsl:attribute name="display_type">dropdown</xsl:attribute>
-					</xsl:if>
-				</xsl:when>
-				<xsl:when test="checkboxset">
-					<xsl:attribute name="pick">any</xsl:attribute>
-				</xsl:when>
-			</xsl:choose>
-		</xsl:element>
-		<xsl:if test="ancestor::if">
-			<xsl:variable name="conditions" as="element()">
-				<and>
-					<xsl:apply-templates select="ancestor::if" mode="conditions" />
-				</and>
-			</xsl:variable>
-			<dependency>
-				<xsl:attribute name="rule">
-					<xsl:apply-templates select="$conditions" mode="rule" />
+		<_group>
+			<xsl:element name="q_{@id}">
+				<xsl:attribute name="label">
+					<xsl:apply-templates select="label" mode="markdown" />
 				</xsl:attribute>
-			</dependency>
-			<xsl:for-each select="$conditions//condition">
-				<xsl:element name="condition_{local:conditionId(.)}">
-					<xsl:sequence select="@value" />
-				</xsl:element>
-			</xsl:for-each>
-		</xsl:if>
-		<xsl:apply-templates select="label/following-sibling::*" mode="structure" />
+				<xsl:if test="help">
+					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+				</xsl:if>
+				<xsl:choose>
+					<xsl:when test="radioset | yesno | select">
+						<xsl:attribute name="pick">one</xsl:attribute>
+						<xsl:sequence select="*/@required" />
+						<xsl:if test="select">
+							<xsl:attribute name="display_type">dropdown</xsl:attribute>
+						</xsl:if>
+					</xsl:when>
+					<xsl:when test="checkboxset">
+						<xsl:attribute name="pick">any</xsl:attribute>
+					</xsl:when>
+				</xsl:choose>
+			</xsl:element>
+			<xsl:if test="ancestor::if">
+				<xsl:variable name="conditions" as="element()">
+					<and>
+						<xsl:apply-templates select="ancestor::if" mode="conditions" />
+					</and>
+				</xsl:variable>
+				<dependency>
+					<xsl:attribute name="rule">
+						<xsl:apply-templates select="$conditions" mode="rule" />
+					</xsl:attribute>
+				</dependency>
+				<xsl:for-each select="$conditions//condition">
+					<xsl:element name="condition_{local:conditionId(.)}">
+						<xsl:sequence select="@value" />
+					</xsl:element>
+				</xsl:for-each>
+			</xsl:if>
+			<xsl:apply-templates select="label/following-sibling::*[1]" mode="structure" />
+		</_group>
+		<xsl:apply-templates select=".//requirement" mode="structure" />
 	</_group>
 </xsl:template>
 
@@ -125,7 +128,6 @@
 
 <xsl:template match="radioset | checkboxset | select" mode="structure">
 	<xsl:apply-templates mode="structure" />
-	<xsl:apply-templates select=".//requirement" mode="structure" />
 </xsl:template>
 
 <xsl:template match="radioset/option | checkboxset/option" mode="structure">
@@ -164,27 +166,29 @@
 </xsl:template>
 
 <xsl:template match="requirement" mode="structure">
-	<label custom_renderer="/partials/requirement_{if (@level) then @level else 'basic'}">
-		<xsl:attribute name="label">
-			<xsl:apply-templates select="." mode="markdown" />
-		</xsl:attribute>
-		<xsl:if test="@level">
-			<xsl:attribute name="requirement" select="local:requirementId(.)" />
-		</xsl:if>
-	</label>
-	<xsl:variable name="conditions" as="element()">
-		<xsl:apply-templates select="." mode="conditions" />
-	</xsl:variable>
-	<dependency>
-		<xsl:attribute name="rule">
-			<xsl:apply-templates select="$conditions" mode="rule" />
-		</xsl:attribute>
-	</dependency>
-	<xsl:for-each select="$conditions//condition">
-		<xsl:element name="condition_{local:conditionId(.)}">
-			<xsl:sequence select="@value" />
-		</xsl:element>
-	</xsl:for-each>
+	<_group>
+		<label custom_renderer="/partials/requirement_{if (@level) then @level else 'basic'}">
+			<xsl:attribute name="label">
+				<xsl:apply-templates select="." mode="markdown" />
+			</xsl:attribute>
+			<xsl:if test="@level">
+				<xsl:attribute name="requirement" select="local:requirementId(.)" />
+			</xsl:if>
+		</label>
+		<xsl:variable name="conditions" as="element()">
+			<xsl:apply-templates select="." mode="conditions" />
+		</xsl:variable>
+		<dependency>
+			<xsl:attribute name="rule">
+				<xsl:apply-templates select="$conditions" mode="rule" />
+			</xsl:attribute>
+		</dependency>
+		<xsl:for-each select="$conditions//condition">
+			<xsl:element name="condition_{local:conditionId(.)}">
+				<xsl:sequence select="@value" />
+			</xsl:element>
+		</xsl:for-each>
+	</_group>
 </xsl:template>
 
 <xsl:template match="*" mode="structure">
@@ -205,14 +209,28 @@
 			<condition value=":q_{ancestor::question/@id}, '==', {{:string_value => '', :answer_reference => '1'}}" />
 		</xsl:when>
 		<xsl:when test="ancestor::question/yesno">
-			<and>
-				<condition value=":q_{ancestor::question/@id}, '!=', :a_true" />
-				<condition value=":q_{ancestor::question/@id}, 'count>0'" />
-			</and>
+			<condition value=":q_{ancestor::question/@id}, '==', :a_false" />
 		</xsl:when>
 		<xsl:when test="parent::option">
-			<condition value=":q_{ancestor::question/@id}, '!=', :a_{parent::option/@value}" />
+			<xsl:choose>
+				<xsl:when test="ancestor::radioset">
+					<xsl:variable name="options" as="element(option)+" select="ancestor::radioset/option" />
+					<xsl:variable name="levels" as="xs:string+" select="/questionnaire/levels/level/@id" />
+					<xsl:variable name="level" as="xs:string" select="if (@level) then @level else 'basic'" />
+					<xsl:variable name="sameOrHigher" as="xs:string+" select="$levels[position() >= index-of($levels, $level)]" />
+					<xsl:variable name="options" as="element(option)*" select="$options[$level = 'basic' or requirement/@level = $sameOrHigher]" />
+					<and>
+						<xsl:for-each select="$options">
+							<condition value=":q_{ancestor::question/@id}, '!=', :a_{@value}" />
+						</xsl:for-each>
+					</and>
+				</xsl:when>
+				<xsl:otherwise>
+					<condition value=":q_{ancestor::question/@id}, '!=', :a_{parent::option/@value}" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:when>
+		<xsl:when test="ancestor::question/checkboxset or ancestor::question/radioset" />
 		<xsl:otherwise>
 			<xsl:message>Not that easy: <xsl:value-of select="ancestor::question/@id" /></xsl:message>
 		</xsl:otherwise>
@@ -317,13 +335,13 @@
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:if>
 	</xsl:for-each>
-	<xsl:text>&#xA;&#xA;</xsl:text>
+	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="section" mode="syntax">
 	<xsl:param name="indent" as="xs:string" select="''" tunnel="yes" />
 	<xsl:next-match />	
-	<xsl:text>&#xA;&#xA;</xsl:text>
+	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="syntax">
@@ -347,6 +365,7 @@
 		</xsl:apply-templates>
 		<xsl:value-of select="$indent" />
 		<xsl:text>end</xsl:text>
+		<xsl:text>&#xA;</xsl:text>
 	</xsl:if>
 </xsl:template>
 
