@@ -131,7 +131,7 @@
 </xsl:template>
 
 <xsl:template match="radioset/option | checkboxset/option" mode="structure">
-	<xsl:element name="a_{@value}">
+	<xsl:element name="a_{local:token(@value)}">
 		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
 		<xsl:if test="help">
 			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
@@ -223,12 +223,12 @@
 					<xsl:variable name="options" as="element(option)*" select="$options[$level = 'basic' or requirement/@level = $sameOrHigher]" />
 					<and>
 						<xsl:for-each select="$options">
-							<condition value=":q_{ancestor::question/@id}, '!=', :a_{@value}" />
+							<condition value=":q_{ancestor::question/@id}, '!=', :a_{local:token(@value)}" />
 						</xsl:for-each>
 					</and>
 				</xsl:when>
 				<xsl:otherwise>
-					<condition value=":q_{ancestor::question/@id}, '!=', :a_{parent::option/@value}" />
+					<condition value=":q_{ancestor::question/@id}, '!=', :a_{local:token(parent::option/@value)}" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:when>
@@ -406,6 +406,11 @@
 
 <!-- FUNCTIONS -->
 
+<xsl:function name="local:token" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:sequence select="translate($string, '.-', '__')" />
+</xsl:function>
+
 <xsl:function name="local:requirementId" as="xs:string">
 	<xsl:param name="requirement" as="element(requirement)" />
 	<xsl:value-of select="concat($requirement/@level, '_', count($requirement/preceding::requirement[@level = $requirement/@level]) + 1)" />
@@ -461,7 +466,7 @@
 								<xsl:when test="regex-group(3) = ''">{:string_value => '', :answer_reference => '1'}</xsl:when>
 								<xsl:otherwise>
 									<xsl:text>:a_</xsl:text>
-									<xsl:value-of select="regex-group(3)" />
+									<xsl:value-of select="local:token(regex-group(3))" />
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
@@ -482,7 +487,7 @@
 									<xsl:text>, :a_</xsl:text>
 									<xsl:choose>
 										<xsl:when test="regex-group(3) = ''">true</xsl:when>
-										<xsl:otherwise><xsl:value-of select="regex-group(3)" /></xsl:otherwise>
+										<xsl:otherwise><xsl:value-of select="local:token(regex-group(3))" /></xsl:otherwise>
 									</xsl:choose>
 								</xsl:attribute>
 							</condition>

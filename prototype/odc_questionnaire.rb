@@ -442,7 +442,7 @@ survey 'Open Data Certificate Questionnaire',
       q_dataPersonal 'Could the source of this data be personal data under the Data Protection Act?',
         :pick => :one,
         :required => :pilot
-      a_not-personal 'no, the data could never be personal data as it is not about people or their activity',
+      a_not_personal 'no, the data could never be personal data as it is not about people or their activity',
         :help_text => 'Data that is about the activity of people can be personal data if there\'s the potential for it to be combined with other data to identify individuals. For example, data about road traffic flows is about people\'s activity and could be combined with other information (about an individual\'s commuting patterns) to reveal information about that individual.'
       a_personal 'yes, the source of this data is classified as personal data within your organisation',
         :help_text => 'Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions)'
@@ -896,9 +896,9 @@ survey 'Open Data Certificate Questionnaire',
       a_minimal 'there are minimal guarantees about the availability of the service'
       a_99 'at least 99% availability',
         :requirement => 'pilot_11'
-      a_99.9 'at least 99.9% availability',
+      a_99_9 'at least 99.9% availability',
         :requirement => 'standard_14'
-      a_99.999 'at least 99.999% availability',
+      a_99_999 'at least 99.999% availability',
         :requirement => 'exemplar_8'
 
       label 'You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.',
@@ -907,23 +907,23 @@ survey 'Open Data Certificate Questionnaire',
       dependency :rule => 'A and (B and C and D)'
       condition_A :q_releaseType, '==', :a_service
       condition_B :q_serviceAvailability, '!=', :a_99
-      condition_C :q_serviceAvailability, '!=', :a_99.9
-      condition_D :q_serviceAvailability, '!=', :a_99.999
+      condition_C :q_serviceAvailability, '!=', :a_99_9
+      condition_D :q_serviceAvailability, '!=', :a_99_999
 
       label 'You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.',
         :custom_renderer => '/partials/requirement_standard',
         :requirement => 'standard_14'
       dependency :rule => 'A and (B and C)'
       condition_A :q_releaseType, '==', :a_service
-      condition_B :q_serviceAvailability, '!=', :a_99.9
-      condition_C :q_serviceAvailability, '!=', :a_99.999
+      condition_B :q_serviceAvailability, '!=', :a_99_9
+      condition_C :q_serviceAvailability, '!=', :a_99_999
 
       label 'You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.',
         :custom_renderer => '/partials/requirement_exemplar',
         :requirement => 'exemplar_8'
       dependency :rule => 'A and (B)'
       condition_A :q_releaseType, '==', :a_service
-      condition_B :q_serviceAvailability, '!=', :a_99.999
+      condition_B :q_serviceAvailability, '!=', :a_99_999
 
       q_onGoingAvailability 'For how long will the data be available in this way?',
         :pick => :one
