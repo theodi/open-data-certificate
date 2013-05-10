@@ -7,31 +7,40 @@ class Question < ActiveRecord::Base
 
   after_save :update_mandatory
 
-  def improvement_level
+  def requirement_level
+    # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
+    #             and outstanding requirements, and for the display customisation of questions.
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
     requirement.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
+  def requirement_level_index
+    Survey::REQUIREMENT_LEVELS.index(requirement_level)
+  end
+
   def is_a_requirement?
+    # Definition: A 'Requirement' is an bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
+    #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
+    #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
     display_type == 'label' && !requirement.blank?
   end
 
   def question_corresponding_to_requirement
-    @question_corresponding_to_requirement ||= answer_corresponding_to_requirement.question
+    @question_corresponding_to_requirement ||= survey_section.survey.questions.detect{|q|q.requirement == requirement}
   end
 
   def answer_corresponding_to_requirement
-    @answer_corresponding_to_requirement ||= survey_section.survey.sections.map(&:questions).flatten.map(&:answers).flatten.detect{|a|a.requirement == requirement}
+    @answer_corresponding_to_requirement ||= survey_section.survey.questions.map(&:answers).flatten.detect{|a|a.requirement == requirement}
   end
 
   def requirement_met_by_responses?(responses)
     # could use thusly to get all the displayed requirements for a survey and whether they have been met by their corresponding answers:
-    #   `response_set.survey.sections.map(&:questions).flatten.select{|e|e.is_a_requirement? && e.triggered?}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
-    # or if we want to determine the triggered on the associated question rather than the label...
-    #   `response_set.survey.sections.map(&:questions).flatten.select{|e|e.is_a_requirement? && e.question_corresponding_to_requirement.triggered?}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
+    #   `response_set.survey.questions.flatten.select{|e|e.is_a_requirement? && e.triggered?(response_set)}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
 
-    responses_requirements = responses.select{|r| r.question_id == question_corresponding_to_requirement.id}.map{|r|Survey::REQUIREMENT_LEVELS.index(r.answer.improvement_level)} # TODO: Refactor this... it's too long and too stinky
-    responses_requirements.max && (responses_requirements.max >= Survey::REQUIREMENT_LEVELS.index(self.improvement_level))
+    question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
+
+    responses_requirements = responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index) # TODO: Refactor this... it's too long and too stinky
+    !!(responses_requirements.max && (responses_requirements.max >= Survey::REQUIREMENT_LEVELS.index(self.requirement_level)))
   end
 
   private

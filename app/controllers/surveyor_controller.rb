@@ -54,7 +54,7 @@ class SurveyorController < ApplicationController
   private
   def all_mandatory_questions_complete?
     #@response_set.reload
-    mandatory_question_ids = @response_set.survey.sections.map{|s| s.questions.where(:is_mandatory => true).select{|q|q.triggered?(@response_set)}}.flatten.map(&:id)
+    mandatory_question_ids = @response_set.triggered_mandatory_questions.map(&:id)
     responded_to_question_ids = @response_set.responses.map(&:question_id)
     (mandatory_question_ids - responded_to_question_ids).blank?
   end
