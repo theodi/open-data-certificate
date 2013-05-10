@@ -162,7 +162,7 @@
 			<help>giving other people permission to reuse the data</help>
 			<question id="copyrightURL">
 				<label>Where is your copyright statement?</label>
-				<input type="url" />
+				<input type="url" placeholder="Copyright Statement URL" />
 				<help>A copyright statement states who owns the copyright and database rights in the data, and it says what you are allowing reusers can do with that data, usually by indicating its licence. We are asking where it is to check that you have one, to point reusers to it, and so we can automatically find out more about the terms under which you're making the data available.</help>
 				<requirement level="pilot">You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.</requirement>
 			</question>
@@ -248,12 +248,12 @@
 			<if test="this.dataLicence() === 'other'">
 				<question id="otherDataLicenceName">
 					<label>What's the name of the licence?</label>
-					<input required="required" />
+					<input required="required" placeholder="Other Licence Name" />
 					<help>If you are using another licence, we ask for its name so that we can refer to it within the Open Data Certificate.</help>
 				</question>
 				<question id="otherDataLicenceURL">
 					<label>What's the location the licence?</label>
-					<input type="url" required="required" />
+					<input type="url" required="required" placeholder="Other Licence URL" />
 					<help>If you are using another licence, we ask for a pointer to it so that we can link to it from within your Open Data Certificate and so that we can check that it is publicly accessible.</help>
 				</question>
 				<question id="otherDataLicenceOpen">
@@ -1058,7 +1058,7 @@
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceDocumentation">
 					<label>Where is the documentation for the API?</label>
-					<input type="url" />
+					<input type="url" placeholder="Service Documentation URL" />
 					<requirement level="pilot">You should provide documentation about how the API works so that reusers can find out how to use it.</requirement>
 				</question>
 			</if>
@@ -1070,7 +1070,7 @@
 			<if test="this.vocabulary() === 'true'">
 				<question id="schemaDocumentationUrl">
 					<label>Where is the documentation for the vocabularies?</label>
-					<input type="url" />
+					<input type="url" placeholder="Schema Documentation URL" />
 					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>
@@ -1082,7 +1082,7 @@
 			<if test="this.codelists() === 'true'">
 				<question id="codelistDocumentationUrl">
 					<label>Where are the codes documented?</label>
-					<input type="url" />
+					<input type="url" placeholder="Codelist Documentation URL" />
 					<requirement level="standard">You should provide documentation for the codes used within your data so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>

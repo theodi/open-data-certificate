@@ -116,7 +116,7 @@
 
 <xsl:template match="select/option" mode="structure">
 	<xsl:if test=". != ''">
-		<xsl:element name="a{if (@value) then concat('_', @value) else ''}">
+		<xsl:element name="a{if (@value) then concat('_', local:token(@value)) else ''}">
 			<xsl:attribute name="label"><xsl:apply-templates select="node()" mode="markdown" /></xsl:attribute>
 		</xsl:element>
 	</xsl:if>
