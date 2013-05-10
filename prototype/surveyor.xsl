@@ -12,34 +12,40 @@
 	<xsl:result-document href="odc_questionnaire.xml" method="xml" indent="yes">
 		<xsl:sequence select="$structure" />
 	</xsl:result-document>
-	<xsl:result-document href="odc_questionnaire.rb" method="text">
+	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
+	</xsl:result-document>
+	<xsl:result-document href="translations/odc.{questionnaire/@jurisdiction}.en.yml" method="text">
+		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
 
+<!-- STRUCTURE -->
+
 <xsl:template match="questionnaire" mode="structure">
 	<survey label="Open Data Certificate Questionnaire" default_mandatory="false">
-		<section label="General Information">
+		<section_general label="General Information">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
-		</section>
+		</section_general>
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
 </xsl:template>
 
 <xsl:template match="questionnaire/group" mode="structure">
-	<section label="{label}">
+	<xsl:element name="section_{@id}">
+		<xsl:attribute name="label" select="label" />
 		<xsl:apply-templates select="* except label" mode="structure" />
-	</section>
+	</xsl:element>
 </xsl:template>
 
 <xsl:template match="group//group" mode="structure">
 	<_group>
 		<_group>
-			<label>
+			<xsl:element name="label_group_{count(preceding::group) + 1}">
 				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
 				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
 				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
-			</label>
+			</xsl:element>
 			<xsl:apply-templates select="." mode="conditions" />
 		</_group>
 	</_group>
@@ -141,14 +147,15 @@
 
 <xsl:template match="requirement" mode="structure">
 	<_group>
-		<label custom_renderer="/partials/requirement_{if (@level) then @level else 'basic'}">
+		<xsl:element name="label_{local:requirementId(.)}">
 			<xsl:attribute name="label">
 				<xsl:apply-templates select="." mode="markdown" />
 			</xsl:attribute>
+			<xsl:attribute name="custom_renderer" select="concat('/partials/requirement_', if (@level) then @level else 'basic')" />
 			<xsl:if test="@level">
 				<xsl:attribute name="requirement" select="local:requirementId(.)" />
 			</xsl:if>
-		</label>
+		</xsl:element>
 		<xsl:variable name="conditions" as="element()">
 			<xsl:apply-templates select="." mode="conditions" />
 		</xsl:variable>
@@ -318,7 +325,6 @@
 	<xsl:apply-templates mode="markdown" />
 </xsl:template>
 
-
 <!-- SYNTAX -->
 
 <xsl:template match="_group" mode="syntax">
@@ -332,7 +338,7 @@
 	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
-<xsl:template match="section" mode="syntax">
+<xsl:template match="*[starts-with(name(), 'section_')]" mode="syntax">
 	<xsl:param name="indent" as="xs:string" select="''" tunnel="yes" />
 	<xsl:next-match />	
 	<xsl:text>&#xA;</xsl:text>
@@ -396,6 +402,95 @@
 
 <xsl:template match="text()" mode="syntax" />
 
+<!-- TRANSLATION -->
+
+<xsl:template match="questionnaire" mode="translation">
+	<xsl:text>title: "Open Data Certificate Questionnaire"&#xA;</xsl:text>
+	<xsl:text>survey_sections:&#xA;</xsl:text>
+	<xsl:text>  general:&#xA;</xsl:text>
+	<xsl:text>    title: General Information&#xA;</xsl:text>
+	<xsl:apply-templates select="group" mode="translation" />
+	<xsl:text>questions:&#xA;</xsl:text>
+	<xsl:apply-templates select=".//question" mode="translation" />
+	<xsl:text>labels:&#xA;</xsl:text>
+	<xsl:apply-templates select="group//group" mode="translation" />
+	<xsl:apply-templates select=".//requirement" mode="translation" />
+</xsl:template>
+
+<xsl:template match="group" mode="translation">
+	<xsl:text>  </xsl:text>
+	<xsl:value-of select="@id" />
+	<xsl:text>:&#xA;</xsl:text>
+	<xsl:text>    title: </xsl:text>
+	<xsl:apply-templates select="label" mode="markdown" />
+	<xsl:text>&#xA;</xsl:text>
+	<xsl:apply-templates select="help" mode="translation" />
+</xsl:template>
+
+<xsl:template match="question" mode="translation">
+	<xsl:text>  </xsl:text>
+	<xsl:value-of select="@id" />
+	<xsl:text>:&#xA;</xsl:text>
+	<xsl:text>    text: </xsl:text>
+	<xsl:apply-templates select="label" mode="markdown" />
+	<xsl:text>&#xA;</xsl:text>
+	<xsl:apply-templates select="help" mode="translation" />
+	<xsl:text>    answers:&#xA;</xsl:text>
+	<xsl:choose>
+		<xsl:when test="input">
+			<xsl:text>      a_1:&#xA;</xsl:text>
+			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="input/@placeholder" />
+			<xsl:text>&#xA;</xsl:text>
+		</xsl:when>
+		<xsl:when test="yesno">
+			<xsl:text>      a_false:&#xA;</xsl:text>
+			<xsl:text>        text: no&#xA;</xsl:text>
+			<xsl:text>      a_true:&#xA;</xsl:text>
+			<xsl:text>        text: yes&#xA;</xsl:text>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:for-each select=".//option[@value]">
+				<xsl:text>      </xsl:text>
+				<xsl:value-of select="local:token(@value)" />
+				<xsl:text>:&#xA;</xsl:text>
+				<xsl:text>        text: </xsl:text>
+				<xsl:choose>
+					<xsl:when test="label">
+						<xsl:apply-templates select="label" mode="markdown" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="." />
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text>&#xA;</xsl:text>
+				<xsl:apply-templates select="help" mode="translation">
+					<xsl:with-param name="indent" select="'        '" />
+				</xsl:apply-templates>
+			</xsl:for-each>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="requirement" mode="translation">
+	<xsl:text>  </xsl:text>
+	<xsl:value-of select="local:requirementId(.)" />
+	<xsl:text>:&#xA;</xsl:text>
+	<xsl:text>    text: </xsl:text>
+	<xsl:apply-templates select="." mode="markdown" />
+	<xsl:text>&#xA;</xsl:text>
+</xsl:template>
+
+<xsl:template match="help" mode="translation">
+	<xsl:param name="indent" as="xs:string" select="'    '" />
+	<xsl:value-of select="$indent" />
+	<xsl:text>help_text: </xsl:text>
+	<xsl:apply-templates select="." mode="markdown" />
+	<xsl:text>&#xA;</xsl:text>
+</xsl:template>
+
+<xsl:template match="*" mode="translation" />
+
 <!-- FUNCTIONS -->
 
 <xsl:function name="local:token" as="xs:string">
@@ -405,7 +500,14 @@
 
 <xsl:function name="local:requirementId" as="xs:string">
 	<xsl:param name="requirement" as="element(requirement)" />
-	<xsl:value-of select="concat($requirement/@level, '_', count($requirement/preceding::requirement[@level = $requirement/@level]) + 1)" />
+	<xsl:choose>
+		<xsl:when test="$requirement/@level">
+			<xsl:value-of select="concat($requirement/@level, '_', count($requirement/preceding::requirement[@level = $requirement/@level]) + 1)" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="concat('basic_', count($requirement/preceding::requirement[empty(@level)]) + 1)" />
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:function>
 
 <xsl:function name="local:conditionId" as="xs:string">
