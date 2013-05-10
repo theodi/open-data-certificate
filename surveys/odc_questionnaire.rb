@@ -229,8 +229,10 @@ survey 'Open Data Certificate Questionnaire',
 
     q_copyrightURL 'Where is your copyright statement?',
                    :help_text => 'A copyright statement states who owns the copyright and database rights in the data, and it says what you are allowing reusers can do with that data, usually by indicating its licence. We are asking where it is to check that you have one, to point reusers to it, and so we can automatically find out more about the terms under which you\'re making the data available.'
-    a_1 :string,
+    a_1 'Copyright Statement URL',
+        :string,
         :input_type => :url,
+        :placeholder => 'Copyright Statement URL',
         :requirement => 'pilot_3'
 
     label 'You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.',
@@ -326,16 +328,20 @@ survey 'Open Data Certificate Questionnaire',
                            :help_text => 'If you are using another licence, we ask for its name so that we can refer to it within the Open Data Certificate.'
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 :string,
-        :required => :required
+    a_1 'Other Licence Name',
+        :string,
+        :required => :required,
+        :placeholder => 'Other Licence Name'
 
     q_otherDataLicenceURL 'What\'s the location the licence?',
                           :help_text => 'If you are using another licence, we ask for a pointer to it so that we can link to it from within your Open Data Certificate and so that we can check that it is publicly accessible.'
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 :string,
+    a_1 'Other Licence URL',
+        :string,
         :input_type => :url,
-        :required => :required
+        :required => :required,
+        :placeholder => 'Other Licence URL'
 
     q_otherDataLicenceOpen 'Is the licence an open licence?',
                            :help_text => 'The [Open Knowledge Definition](http://opendefinition.org/) defines what an open data licence is and the [Open Definition Advisory Board]() maintain a list of [open licences](http://licenses.opendefinition.org/). If the licence is not given in that list, it it is either not open or hasn\'t yet been assessed.[Read more...](http://opendefinition.org/)',
@@ -1704,8 +1710,10 @@ survey 'Open Data Certificate Questionnaire',
     q_serviceDocumentation 'Where is the documentation for the API?'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_1 :string,
+    a_1 'Service Documentation URL',
+        :string,
         :input_type => :url,
+        :placeholder => 'Service Documentation URL',
         :requirement => 'pilot_26'
 
     label 'You should provide documentation about how the API works so that reusers can find out how to use it.',
@@ -1725,8 +1733,10 @@ survey 'Open Data Certificate Questionnaire',
     q_schemaDocumentationUrl 'Where is the documentation for the vocabularies?'
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
-    a_1 :string,
+    a_1 'Schema Documentation URL',
+        :string,
         :input_type => :url,
+        :placeholder => 'Schema Documentation URL',
         :requirement => 'standard_37'
 
     label 'You should provide documentation for any vocabulary you use within the data you publish so that reusers know how to interpret the data.',
@@ -1746,8 +1756,10 @@ survey 'Open Data Certificate Questionnaire',
     q_codelistDocumentationUrl 'Where are the codes documented?'
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
-    a_1 :string,
+    a_1 'Codelist Documentation URL',
+        :string,
         :input_type => :url,
+        :placeholder => 'Codelist Documentation URL',
         :requirement => 'standard_38'
 
     label 'You should provide documentation for the codes used within your data so that reusers know how to interpret the data.',
