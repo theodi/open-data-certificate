@@ -10,36 +10,28 @@ here to give us more control
 *= require surveyor/results*/
 
 $background_color:#EEEEEE
-$surveyor_flash_background_color:#FFF1A8
-$surveyor_color:#FFFFF1
+$surveyor_color:#FFF
 $surveyor_text_color:#333333
-$surveyor_dependent_color:#FFFFDF
+$surveyor_dependent_color:#F5F5F5
 $surveyor_menus_active_color:#EBEBCC
 $surveyor_menus_border_color:#ccc
 
 body
   :background-color $background_color
 #surveyor
-  :font-family "Century Gothic"
-  :width 960px
+  // :font-family "Century Gothic"
+  :width auto
   :padding 20px
   :margin 0 auto
   :text-align left
-  :font-family Helvetica
+  // :font-family Helvetica
   :font-size 100%
   :background-color $surveyor_color
   :color $surveyor_text_color
-  .surveyor_flash
-    :background-color $surveyor_flash_background_color
-    :margin 0 auto
-    :padding 5px
-    :width 300px
-    :font-weight bold
-    :text-align center
-  .survey_title
-    :font-size 2em
-    :font-weight bold
-    :padding 5px 0
+  // .survey_title
+  //   :font-size 2em
+  //   :font-weight bold
+  //   :padding 5px 0
   .surveyor_menu
     :float right
     ul
@@ -114,8 +106,8 @@ body
   fieldset.q_dependent, fieldset.g_dependent
     :background-color $surveyor_dependent_color
     legend
-      :background-color $surveyor_dependent_color
-      :padding 3px 3px 3px 0
+      // :background-color $surveyor_dependent_color
+      // :padding 3px 3px 3px 0
   fieldset.q_dropdown, fieldset.q_inline_dropdown, fieldset.q_default_dropdown, fieldset.q_slider, fieldset.q_repeater_dropdown
     label
       :display none
