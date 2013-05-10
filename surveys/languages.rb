@@ -10,5 +10,13 @@ survey "One language is never enough" do
   section_two "Two" do
     q_color "What is your favorite color?"
     a_name :string
+
+    label_translate_me "does this translate"
+
+    q_pavlingMgp 'am I mandatory', :required => :exemplar
+    a_nameMgp :string, :help_text => "required..."
+    dependency :rule => 'A'
+    condition_A :q_color, "==", {:string_value => "red", :answer_reference => "name"}
+
   end
 end

@@ -16,3 +16,5 @@ questions:
         help_text: "Mi nombre es..."
   color:
     text: "¿Cuál es tu color favorito?"
+  translate_me:
+    text: "¡si!"
