@@ -1,25 +1,23 @@
-/*
-Rather than use the suggested custom.css to override the 
-surveyor styles, I have copied the main surveyor styles in
-here to give us more control
+// This is just the surveyor.css file.
+// the rest of the style deps are either 
+// not used or supplied by bootstrap
 
-*= require surveyor/reset
-*= require surveyor/jquery-ui-1.10.0.custom
-*= require surveyor/jquery-ui-timepicker-addon
-*= require surveyor/ui.slider.extras
-*= require surveyor/results*/
 
 $background_color:#EEEEEE
 $surveyor_color:#FFF
 $surveyor_text_color:#333333
-$surveyor_dependent_color:#F5F5F5
+$surveyor_dependent_color:#FFFFFF
 $surveyor_menus_active_color:#EBEBCC
 $surveyor_menus_border_color:#ccc
 
 body
   :background-color $background_color
 #surveyor
-  // :font-family "Century Gothic"
+
+  // reset 
+  ol, ul
+    :list-style none
+
   :width auto
   :padding 20px
   :margin 0 auto
