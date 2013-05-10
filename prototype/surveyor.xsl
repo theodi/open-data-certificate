@@ -33,35 +33,23 @@
 </xsl:template>
 
 <xsl:template match="group//group" mode="structure">
-	<group>
-		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
-		<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
-		<xsl:apply-templates select="* except (label, help)" mode="structure" />
-	</group>
+	<_group>
+		<_group>
+			<label>
+				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
+				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
+			</label>
+			<xsl:apply-templates select="." mode="conditions" />
+		</_group>
+	</_group>
+	<xsl:apply-templates select="* except (label, help)" mode="structure" />
 </xsl:template>
 
 <xsl:template match="repeat" mode="structure">
 	<_group>
 		<repeater label="{label}">
-			<xsl:if test="ancestor::if">
-				<xsl:variable name="conditions" as="element()">
-					<and>
-						<xsl:apply-templates select="ancestor::if" mode="conditions" />
-					</and>
-				</xsl:variable>
-				<_group>
-					<dependency>
-						<xsl:attribute name="rule">
-							<xsl:apply-templates select="$conditions" mode="rule" />
-						</xsl:attribute>
-					</dependency>
-					<xsl:for-each select="$conditions//condition">
-						<xsl:element name="condition_{local:conditionId(.)}">
-							<xsl:sequence select="@value" />
-						</xsl:element>
-					</xsl:for-each>
-				</_group>
-			</xsl:if>
+			<xsl:apply-templates select="." mode="conditions" />
 			<xsl:apply-templates select="* except label" mode="structure" />
 		</repeater>
 	</_group>
@@ -90,23 +78,7 @@
 					</xsl:when>
 				</xsl:choose>
 			</xsl:element>
-			<xsl:if test="ancestor::if">
-				<xsl:variable name="conditions" as="element()">
-					<and>
-						<xsl:apply-templates select="ancestor::if" mode="conditions" />
-					</and>
-				</xsl:variable>
-				<dependency>
-					<xsl:attribute name="rule">
-						<xsl:apply-templates select="$conditions" mode="rule" />
-					</xsl:attribute>
-				</dependency>
-				<xsl:for-each select="$conditions//condition">
-					<xsl:element name="condition_{local:conditionId(.)}">
-						<xsl:sequence select="@value" />
-					</xsl:element>
-				</xsl:for-each>
-			</xsl:if>
+			<xsl:apply-templates select="." mode="conditions" />
 			<xsl:apply-templates select="label/following-sibling::*[1]" mode="structure" />
 		</_group>
 		<xsl:apply-templates select=".//requirement" mode="structure" />
@@ -201,6 +173,26 @@
 </xsl:template>
 
 <!-- CONDITIONS -->
+
+<xsl:template match="*" mode="conditions">
+	<xsl:if test="ancestor::if">
+		<xsl:variable name="conditions" as="element()">
+			<and>
+				<xsl:apply-templates select="ancestor::if" mode="conditions" />
+			</and>
+		</xsl:variable>
+		<dependency>
+			<xsl:attribute name="rule">
+				<xsl:apply-templates select="$conditions" mode="rule" />
+			</xsl:attribute>
+		</dependency>
+		<xsl:for-each select="$conditions//condition">
+			<xsl:element name="condition_{local:conditionId(.)}">
+				<xsl:sequence select="@value" />
+			</xsl:element>
+		</xsl:for-each>
+	</xsl:if>
+</xsl:template>
 
 <xsl:template match="requirement" mode="conditions">
 	<xsl:choose>
