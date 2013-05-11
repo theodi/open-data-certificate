@@ -336,23 +336,24 @@
 			<label>Privacy</label>
 			<help>ensuring that you protect people's privacy</help>
 			<question id="dataPersonal">
-				<label>Could the source of this data be personal data under the Data Protection Act?</label>
+				<label>Could individuals be identified from this data?</label>
 				<radioset required="pilot">
-					<option value="not-personal">
-						<label>no, the data could never be personal data as it is not about people or their activity</label>
+					<option value="true">
+						<label>no, the data does not contain personal data</label>
 						<help>Data that is about the activity of people can be personal data if there's the potential for it to be combined with other data to identify individuals. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.</help>
 					</option>
-					<option value="personal">
-						<label>yes, the source of this data is classified as personal data within your organisation</label>
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.</help>
+					<option value="false">
+						<label>yes, individuals <em>could</em> be identified, including by third parties with access to additional information</label>
+						<help>Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.</help>
 					</option>
-					<option value="possibly">
-						<label>yes, the source of this data could be classified as personal data if held by other people who have access to additional information</label>
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. Even if your organisation doesn't have other information that could be used to identify the individuals in the source of this data, it may be that other people do have access to such information.</help>
+					<option value="unknown">
+						<label>you don't know if individuals could be identified from this data</label>
 					</option>
 				</radioset>
+				<requirement level="pilot" test="this.dataPersonal() !== 'unknown'">You should work out whether individuals could be identified from this data before you publish it. Consult with your member of staff responsible for data protection, if you have one. If in doubt, assume that individuals can be identified from the data and proceed accordingly.</requirement>
 			</question>
-			<if test="this.dataPersonal() === 'personal' || this.dataPersonal() === 'possibly'">
+			<if test="this.dataPersonal() === 'true'">
+				
 				<question id="consentExempt">
 					<label>Is this data exempt from the non-disclosure provisions of the Data Protection Act?</label>
 					<yesno required="pilot" />
