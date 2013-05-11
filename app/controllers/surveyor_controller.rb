@@ -1,5 +1,8 @@
 class SurveyorController < ApplicationController
+  unloadable
   include Surveyor::SurveyorControllerMethods
+
+  layout 'application'
 
   def edit
     if @response_set && @response_set.complete?
