@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20130508144200) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "api_id"
+    t.integer  "dataset_id"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
