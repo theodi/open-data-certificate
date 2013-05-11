@@ -4,11 +4,14 @@
 %section
   %h1 Dataset#show
 
+  = form_for @dataset, :url => dataset_start_questionnaire_path(@dataset) do |f|
+    = f.submit "Start new Questionnaire"
+
   %ul
     - @dataset.response_sets.each do |rs|
       %li
-        = link_to "Response Set #{rs.id}", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code)
+        = link_to "Questionnaire ##{rs.id}", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code)
 
-  =render 'form'
+  / =render 'form'
 
 / =render 'wrap_bottom'

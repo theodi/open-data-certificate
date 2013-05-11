@@ -8,7 +8,9 @@ OpenDataCertificate::Application.routes.draw do
 
   root :to => "datasets#index"
 
-  resources :datasets
+  resources :datasets do
+    put 'start_questionnaire'
+  end
 
   devise_for :users
 

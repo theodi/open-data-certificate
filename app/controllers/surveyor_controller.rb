@@ -88,4 +88,13 @@ class SurveyorController < ApplicationController
     (mandatory_question_ids - responded_to_question_ids).blank?
   end
 
+  # where to send the user once the survey has been completed
+  # if there was a dataset, go back to it
+  def surveyor_finish
+    if @response_set.dataset
+      dataset_path @response_set.dataset
+    else
+      surveyor.available_surveys_path
+    end
+  end
 end
