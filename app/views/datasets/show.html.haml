@@ -1,8 +1,14 @@
-=render 'wrap_top'
+/ todo - move wraps to survey
+/ =render 'wrap_top'
 
 %section
   %h1 Dataset#show
 
+  %ul
+    - @dataset.response_sets.each do |rs|
+      %li
+        = link_to "Response Set #{rs.id}", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code)
+
   =render 'form'
 
-=render 'wrap_bottom'
+/ =render 'wrap_bottom'
