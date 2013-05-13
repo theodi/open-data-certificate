@@ -4,7 +4,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
 <questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
@@ -459,6 +459,22 @@
 						<label>Where is the data listed?</label>
 						<input type="url" required="required" placeholder="Listing URL" />
 						<help>Give a URL that leads to a listing of this data alongside data from the wider sector.  For example, give a URL for a search that includes this data's listing on data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data), MEDIN (if it's marine data), or the URL of a search on Google or Bing.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="referenced">
+				<label>Is the data referenced from your own publications?</label>
+				<yesno />
+				<help>You can provide context for understanding your data, and provide routes to help it be located, by referencing it within your own publications.</help>
+				<requirement level="standard">You should <strong>reference the data from your own publications</strong> so that potential reusers are made aware of its availability and context.</requirement>
+			</question>
+			<if test="this.referenced() === 'true'">
+				<repeat id="references">
+					<label>Reference</label>
+					<question id="reference">
+						<label>Where is the data referenced?</label>
+						<input type="url" required="required" placeholder="Reference URL" />
+						<help>Give a URL for a document that cites or references this data.</help>
 					</question>
 				</repeat>
 			</if>
@@ -1134,6 +1150,31 @@
 				<help>Provide an email address that people can contact with queries about the data.</help>
 				<requirement level="pilot">You should <strong>have a contact email address</strong> so that people can get in touch with you about any questions about the data.</requirement>
 			</question>
+			<question id="improvementsContact">
+				<label>Where do you describe how to make suggestions for improving the way the data is published?</label>
+				<input type="url" placeholder="Improvement Suggestions URL" />
+				<requirement level="pilot">You should <strong>provide instructions for how to suggest improvements</strong> to the way the data is published so that you can learn about what reusers need.</requirement>
+			</question>
+			<question id="dataProtectionEmail">
+				<label>What's the contact email address for confidentiality concerns?</label>
+				<input type="email" placeholder="Confidentiality Contact Email Address" />
+				<requirement level="pilot">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal details</strong> within the data can get in touch.</requirement>
+			</question>
+			<question id="socialMedia">
+				<label>Do you use social media to engage with reusers?</label>
+				<yesno />
+				<requirement level="standard">You should <strong>use social media</strong> to engage with reusers of the data to help increase your understanding of how the data is being reused</requirement>
+			</question>
+			<if test="this.socialMedia() === 'true'">
+				<repeat id="accounts">
+					<label>Account</label>
+					<question id="account">
+						<label>What is the URL of your social media account?</label>
+						<input type="url" required="required" placeholder="Social Media URL" />
+						<help>Give a URL for the social media account, such as a Twitter or Facebook home page.</help>
+					</question>
+				</repeat>
+			</if>
 			<question id="forum">
 				<label>Where do you recommend people discuss this dataset?</label>
 				<input type="url" placeholder="Forum or Mailing List URL"/>
@@ -1154,10 +1195,10 @@
 					<requirement level="standard">You should <strong>provide an announcement mailing list or a feed</strong> to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.</requirement>
 				</question>
 			</if>
-			<question id="dataProtectionEmail">
-				<label>What's the contact email address for confidentiality concerns?</label>
-				<input type="email" placeholder="Confidentiality Contact Email Address" />
-				<requirement level="pilot">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal details</strong> within the data can get in touch.</requirement>
+			<question id="engagementTeam">
+				<label>What's the home page for your community engagement team?</label>
+				<input type="url" placeholder="Community Engagement Team Home Page URL" />
+				<requirement level="exemplar">You should <strong>engage proactively to build a community</strong> around your data so that it is reused widely.</requirement>
 			</question>
 		</group>
 		<group id="services">

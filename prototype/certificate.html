@@ -150,6 +150,7 @@
                         <p class="improvement" data-bind="visible: serviceDocumentation() === ''"><a class="improvement-label" href="#serviceDocumentation" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide documentation about how the API works</strong> so that reusers can find out how to use it.</span></p>
                      </div>
                      <p class="improvement" data-bind="visible: contactEmail() === ''"><a class="improvement-label" href="#contactEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>have a contact email address</strong> so that people can get in touch with you about any questions about the data.</span></p>
+                     <p class="improvement" data-bind="visible: improvementsContact() === ''"><a class="improvement-label" href="#improvementsContact" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide instructions for how to suggest improvements</strong> to the way the data is published so that you can learn about what reusers need.</span></p>
                      <p class="improvement" data-bind="visible: dataProtectionEmail() === ''"><a class="improvement-label" href="#dataProtectionEmail" data-toggle="tab" data-target="#social"><span class="label label-pilot"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal
                               details</strong> within the data can get in touch.</span></p>
                   </div>
@@ -190,6 +191,7 @@
                      </div>
                      <p class="improvement" data-bind="visible: linkedTo() === ''"><a class="improvement-label" href="#linkedTo" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>ensure that reusers can easily find your data</strong> from your organisation's home page.</span></p>
                      <p class="improvement" data-bind="visible: listed() === ''"><a class="improvement-label" href="#listed" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>ensure that reusers can locate your data through searching for it</strong> in locations that list available data.</span></p>
+                     <p class="improvement" data-bind="visible: referenced() === ''"><a class="improvement-label" href="#referenced" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>reference the data from your own publications</strong> so that potential reusers are made aware of its availability and context.</span></p>
                      <div data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'collection' || (releaseType() === 'service' &amp;&amp; serviceType() === 'static')">
                         <div data-bind="visible: timeSensitive() !== 'false'">
                            <p class="improvement"><a class="improvement-label" href="#timeSensitive" data-toggle="tab" data-target="#practical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>publish updates</strong> to data that goes out of date so that the information you provide does not go stale.</span></p>
@@ -285,6 +287,8 @@
                      <div data-bind="visible: codelists() === 'true'">
                         <p class="improvement" data-bind="visible: codelistDocumentationUrl() === ''"><a class="improvement-label" href="#codelistDocumentationUrl" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide documentation for the codes used within your data</strong> so that reusers know how to interpret the data.</span></p>
                      </div>
+                     <p class="improvement" data-bind="visible: socialMedia() === ''"><a class="improvement-label" href="#socialMedia" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>use social media</strong> to engage with reusers of the data to help increase your understanding of how the
+                           data is being reused</span></p>
                      <p class="improvement" data-bind="visible: forum() === ''"><a class="improvement-label" href="#forum" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>indicate a place where people using this dataset should discuss the data</strong> so that they can support each other.</span></p>
                      <div data-bind="visible: corrected() === 'true'">
                         <p class="improvement" data-bind="visible: correctionReporting() === ''"><a class="improvement-label" href="#correctionReporting" data-toggle="tab" data-target="#social"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide instructions for people who discover errors in the data</strong> so that they know how to report them.</span></p>
@@ -356,6 +360,7 @@
                      <p class="improvement" data-bind="visible: provenance() === ''"><a class="improvement-label" href="#provenance" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide a machine-readable provenance trail</strong> for the data so that reusers can trace how it has been processed.</span></p>
                      <p class="improvement" data-bind="visible: digitalCertificate() === ''"><a class="improvement-label" href="#digitalCertificate" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>describe how reusers can verify whether the data they receive is the same as that
                               originally published by you</strong>, so that they know whether to trust it.</span></p>
+                     <p class="improvement" data-bind="visible: engagementTeam() === ''"><a class="improvement-label" href="#engagementTeam" data-toggle="tab" data-target="#social"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>engage proactively to build a community</strong> around your data so that it is reused widely.</span></p>
                      <p class="improvement" data-bind="visible: libraries() === ''"><a class="improvement-label" href="#libraries" data-toggle="tab" data-target="#social"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide a list of software libraries and other tools</strong> that help developers who want to work with the data so that reusers can find and
                            reuse them rather than building them from scratch.</span></p>
                   </div>
@@ -1174,6 +1179,34 @@
                                  </div>
                                  <div class="control-group repeat-controls">
                                     <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: listingsAdd"><i class="icon-plus icon-white"></i> Add Listing</button></div>
+                                 </div>
+                                 			
+                              </div>
+                              <div class="control-group"><label class="control-label"> Is the data referenced from your own publications?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#referenced-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="referenced" data-bind="checked: referenced" data-focus-target="#referenced-help"> No</label><label class="radio inline"><input type="radio" value="true" name="referenced" data-bind="checked: referenced" data-focus-target="#referenced-help"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#referenced-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="referenced-help">
+                                       <p class="alert alert-help">You can provide context for understanding your data, and provide routes to help it
+                                          be located, by referencing it within your own publications.
+                                       </p>
+                                    </div>
+                                    <p class="requirement" id="referenced-requirement">You should <strong>reference the data from your own publications</strong> so that potential reusers are made aware of its availability and context.
+                                    </p>
+                                 </div>
+                              </div>
+                              <div class="conditional" data-bind="visible: referenced() === 'true'">
+                                 				
+                                 <div class="repeated" data-bind="foreach: references">
+                                    <div class="well">
+                                       <div class="control-group">
+                                          <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.referencesRemove, disable: $parent.references().length === 1"><i class="icon-remove icon-white"></i> Delete Reference</button></div>
+                                       </div>
+                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'reference-' + $index() }"> Where is the data referenced?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#reference-' + $index() + '-help' }"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" data-bind="value: reference, valueUpdate: 'afterkeydown', attr: { id: 'reference-' + $index(), name: 'reference-' + $index() }" data-focus-target="#reference-help" placeholder="Reference URL (required)" required="required"><div class="help-block collapse" data-bind="attr: { id: 'reference-' + $index() + '-help' }">
+                                                <p class="alert alert-help">Give a URL for a document that cites or references this data.</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="control-group repeat-controls">
+                                    <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: referencesAdd"><i class="icon-plus icon-white"></i> Add Reference</button></div>
                                  </div>
                                  			
                               </div>
@@ -1996,6 +2029,39 @@
                                     </p>
                                  </div>
                               </div>
+                              <div class="control-group"><label class="control-label" for="improvementsContact"> Where do you describe how to make suggestions for improving the way the data is published?</label><div class="controls"><input type="url" class="span5" id="improvementsContact" name="improvementsContact" data-bind="value: improvementsContact, valueUpdate: 'afterkeydown'" placeholder="Improvement Suggestions URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#improvementsContact-requirement"><i class="icon-star icon-white"></i> Pilot</span><p class="requirement" id="improvementsContact-requirement">You should <strong>provide instructions for how to suggest improvements</strong> to the way the data is published so that you can learn about what reusers need.
+                                    </p>
+                                 </div>
+                              </div>
+                              <div class="control-group"><label class="control-label" for="dataProtectionEmail"> What's the contact email address for confidentiality concerns?</label><div class="controls"><input type="email" class="span5" id="dataProtectionEmail" name="dataProtectionEmail" data-bind="value: dataProtectionEmail, valueUpdate: 'afterkeydown'" placeholder="Confidentiality Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><p class="requirement" id="dataProtectionEmail-requirement">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal
+                                          details</strong> within the data can get in touch.
+                                    </p>
+                                 </div>
+                              </div>
+                              <div class="control-group"><label class="control-label"> Do you use social media to engage with reusers?</label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="socialMedia" data-bind="checked: socialMedia"> No</label><label class="radio inline"><input type="radio" value="true" name="socialMedia" data-bind="checked: socialMedia"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#socialMedia-requirement"><i class="icon-star icon-white"></i> Standard</span><p class="requirement" id="socialMedia-requirement">You should <strong>use social media</strong> to engage with reusers of the data to help increase your understanding of how the
+                                       data is being reused
+                                    </p>
+                                 </div>
+                              </div>
+                              <div class="conditional" data-bind="visible: socialMedia() === 'true'">
+                                 				
+                                 <div class="repeated" data-bind="foreach: accounts">
+                                    <div class="well">
+                                       <div class="control-group">
+                                          <div class="controls"><button type="button" class="btn btn-info pull-right" data-bind="click: $parent.accountsRemove, disable: $parent.accounts().length === 1"><i class="icon-remove icon-white"></i> Delete Account</button></div>
+                                       </div>
+                                       <div class="control-group"><label class="control-label" data-bind="attr: { for: 'account-' + $index() }"> What is the URL of your social media account?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-bind="attr: { 'data-target': '#account-' + $index() + '-help' }"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" data-bind="value: account, valueUpdate: 'afterkeydown', attr: { id: 'account-' + $index(), name: 'account-' + $index() }" data-focus-target="#account-help" placeholder="Social Media URL (required)" required="required"><div class="help-block collapse" data-bind="attr: { id: 'account-' + $index() + '-help' }">
+                                                <p class="alert alert-help">Give a URL for the social media account, such as a Twitter or Facebook home page.</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="control-group repeat-controls">
+                                    <div class="controls"><button type="button" class="btn btn-primary" data-bind="click: accountsAdd"><i class="icon-plus icon-white"></i> Add Account</button></div>
+                                 </div>
+                                 			
+                              </div>
                               <div class="control-group"><label class="control-label" for="forum"> Where do you recommend people discuss this dataset?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#forum-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="forum" name="forum" data-bind="value: forum, valueUpdate: 'afterkeydown'" data-focus-target="#forum-help" placeholder="Forum or Mailing List URL"> <span class="label label-standard" data-toggle="collapse" data-target="#forum-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="forum-help">
                                        <p class="alert alert-help">Provide a URL for the forum or mailing list where developers using this dataset should
                                           discuss it.
@@ -2029,8 +2095,7 @@
                                  </div>
                                  			
                               </div>
-                              <div class="control-group"><label class="control-label" for="dataProtectionEmail"> What's the contact email address for confidentiality concerns?</label><div class="controls"><input type="email" class="span5" id="dataProtectionEmail" name="dataProtectionEmail" data-bind="value: dataProtectionEmail, valueUpdate: 'afterkeydown'" placeholder="Confidentiality Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#dataProtectionEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><p class="requirement" id="dataProtectionEmail-requirement">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal
-                                          details</strong> within the data can get in touch.
+                              <div class="control-group"><label class="control-label" for="engagementTeam"> What's the home page for your community engagement team?</label><div class="controls"><input type="url" class="span5" id="engagementTeam" name="engagementTeam" data-bind="value: engagementTeam, valueUpdate: 'afterkeydown'" placeholder="Community Engagement Team Home Page URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#engagementTeam-requirement"><i class="icon-star icon-white"></i> Exemplar</span><p class="requirement" id="engagementTeam-requirement">You should <strong>engage proactively to build a community</strong> around your data so that it is reused widely.
                                     </p>
                                  </div>
                               </div>
@@ -3072,6 +3137,31 @@ certificate.listings.push(listings);
 certificate.listingsRemove = function (listings) {
 certificate.listings.remove(listings);
 };
+certificate.referenced = ko.observable('');
+certificate.referencedStatus = ko.computed(function () {
+  var status;
+  if (certificate.referenced() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+var referencesViewModel = function () {
+var references = this;
+references.reference = ko.observable('');
+references.referenceStatus = ko.computed(function () {
+  var status;
+  if (references.reference() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+};
+certificate.references = ko.observableArray([new referencesViewModel()]);
+certificate.referencesAdd = function () {
+var references = new referencesViewModel();
+certificate.references.push(references);
+};
+certificate.referencesRemove = function (references) {
+certificate.references.remove(references);
+};
 certificate.serviceType = ko.observable('');
 certificate.serviceTypeStatus = ko.computed(function () {
   var status;
@@ -3213,6 +3303,33 @@ $(certificate.listings()).each(function () {var listings = this;
 		unmetRequirements['basic']++;
 	} else if (listings.listingStatus() !== 'optional') {
 		unmetRequirements[listings.listingStatus()]++;
+	}
+	});
+}
+
+	if (certificate.referencedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.referencedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.referencedStatus() !== 'optional') {
+		unmetRequirements[certificate.referencedStatus()]++;
+	}
+	if (certificate.referenced() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.referenced() === 'true') {
+$(certificate.references()).each(function () {var references = this;
+	if (references.referenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (references.referenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (references.referenceStatus() !== 'optional') {
+		unmetRequirements[references.referenceStatus()]++;
 	}
 	});
 }
@@ -4166,6 +4283,45 @@ certificate.contactEmailStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
+certificate.improvementsContact = ko.observable('');
+certificate.improvementsContactStatus = ko.computed(function () {
+  var status;
+  if (certificate.improvementsContact() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.dataProtectionEmail = ko.observable('');
+certificate.dataProtectionEmailStatus = ko.computed(function () {
+  var status;
+  if (certificate.dataProtectionEmail() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.socialMedia = ko.observable('');
+certificate.socialMediaStatus = ko.computed(function () {
+  var status;
+  if (certificate.socialMedia() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+var accountsViewModel = function () {
+var accounts = this;
+accounts.account = ko.observable('');
+accounts.accountStatus = ko.computed(function () {
+  var status;
+  if (accounts.account() === '') status = 'required';
+  else status = 'complete';
+  return status;
+});
+};
+certificate.accounts = ko.observableArray([new accountsViewModel()]);
+certificate.accountsAdd = function () {
+var accounts = new accountsViewModel();
+certificate.accounts.push(accounts);
+};
+certificate.accountsRemove = function (accounts) {
+certificate.accounts.remove(accounts);
+};
 certificate.forum = ko.observable('');
 certificate.forumStatus = ko.computed(function () {
   var status;
@@ -4187,10 +4343,10 @@ certificate.correctionDiscoveryStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.dataProtectionEmail = ko.observable('');
-certificate.dataProtectionEmailStatus = ko.computed(function () {
+certificate.engagementTeam = ko.observable('');
+certificate.engagementTeamStatus = ko.computed(function () {
   var status;
-  if (certificate.dataProtectionEmail() === '') status = 'optional';
+  if (certificate.engagementTeam() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
@@ -4335,6 +4491,57 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 	}
 	if (certificate.contactEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
+	if (certificate.improvementsContactStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.improvementsContactStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.improvementsContactStatus() !== 'optional') {
+		unmetRequirements[certificate.improvementsContactStatus()]++;
+	}
+	if (certificate.improvementsContactStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.dataProtectionEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	}
+	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.socialMediaStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.socialMediaStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.socialMediaStatus() !== 'optional') {
+		unmetRequirements[certificate.socialMediaStatus()]++;
+	}
+	if (certificate.socialMedia() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.socialMedia() === 'true') {
+$(certificate.accounts()).each(function () {var accounts = this;
+	if (accounts.accountStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (accounts.accountStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (accounts.accountStatus() !== 'optional') {
+		unmetRequirements[accounts.accountStatus()]++;
+	}
+	});
+}
+
 	if (certificate.forumStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
@@ -4375,17 +4582,17 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 }
 
-	if (certificate.dataProtectionEmailStatus() === 'complete') {
+	if (certificate.engagementTeamStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
-					unmetRequirements['answeredpilot']++;
+					unmetRequirements['answeredexemplar']++;
 				
-	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+	} else if (certificate.engagementTeamStatus() === 'required') {
 		unmetRequirements['basic']++;
-	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
-		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	} else if (certificate.engagementTeamStatus() !== 'optional') {
+		unmetRequirements[certificate.engagementTeamStatus()]++;
 	}
-	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.engagementTeamStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.librariesStatus() === 'complete') {
 		unmetRequirements['answered']++;
@@ -5080,6 +5287,33 @@ $(certificate.listings()).each(function () {var listings = this;
 		unmetRequirements['basic']++;
 	} else if (listings.listingStatus() !== 'optional') {
 		unmetRequirements[listings.listingStatus()]++;
+	}
+	});
+}
+
+	if (certificate.referencedStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.referencedStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.referencedStatus() !== 'optional') {
+		unmetRequirements[certificate.referencedStatus()]++;
+	}
+	if (certificate.referenced() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.referenced() === 'true') {
+$(certificate.references()).each(function () {var references = this;
+	if (references.referenceStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (references.referenceStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (references.referenceStatus() !== 'optional') {
+		unmetRequirements[references.referenceStatus()]++;
 	}
 	});
 }
@@ -5809,6 +6043,57 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 	}
 	if (certificate.contactEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
 
+	if (certificate.improvementsContactStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.improvementsContactStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.improvementsContactStatus() !== 'optional') {
+		unmetRequirements[certificate.improvementsContactStatus()]++;
+	}
+	if (certificate.improvementsContactStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.dataProtectionEmailStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredpilot']++;
+				
+	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
+		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	}
+	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
+
+	if (certificate.socialMediaStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.socialMediaStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.socialMediaStatus() !== 'optional') {
+		unmetRequirements[certificate.socialMediaStatus()]++;
+	}
+	if (certificate.socialMedia() !== 'true') unmetRequirements['standard']++; 
+
+	if (certificate.socialMedia() === 'true') {
+$(certificate.accounts()).each(function () {var accounts = this;
+	if (accounts.accountStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+				unmetRequirements['answeredbasic']++;
+			
+	} else if (accounts.accountStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (accounts.accountStatus() !== 'optional') {
+		unmetRequirements[accounts.accountStatus()]++;
+	}
+	});
+}
+
 	if (certificate.forumStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
@@ -5849,17 +6134,17 @@ if (!certificate.distributionMetadataLicense()) unmetRequirements['standard']++;
 
 }
 
-	if (certificate.dataProtectionEmailStatus() === 'complete') {
+	if (certificate.engagementTeamStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
-					unmetRequirements['answeredpilot']++;
+					unmetRequirements['answeredexemplar']++;
 				
-	} else if (certificate.dataProtectionEmailStatus() === 'required') {
+	} else if (certificate.engagementTeamStatus() === 'required') {
 		unmetRequirements['basic']++;
-	} else if (certificate.dataProtectionEmailStatus() !== 'optional') {
-		unmetRequirements[certificate.dataProtectionEmailStatus()]++;
+	} else if (certificate.engagementTeamStatus() !== 'optional') {
+		unmetRequirements[certificate.engagementTeamStatus()]++;
 	}
-	if (certificate.dataProtectionEmailStatus() !== 'complete') unmetRequirements['pilot']++; 
+	if (certificate.engagementTeamStatus() !== 'complete') unmetRequirements['exemplar']++; 
 
 	if (certificate.librariesStatus() === 'complete') {
 		unmetRequirements['answered']++;
