@@ -56,6 +56,10 @@ module OpenDataCertificate
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # Get around heroku deployment issues
+    # https://devcenter.heroku.com/articles/rails-asset-pipeline#troubleshooting
+    config.assets.initialize_on_precompile = false
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
