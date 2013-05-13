@@ -7,10 +7,6 @@ class Survey < ActiveRecord::Base
     @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)])
   end
 
-  def questions_old
-    @questions ||= sections.map(&:questions).flatten # TODO: Change this to "Question.where(['section_id in (?)', (sections.map(&:id)<<0)])" - would it be quicker... test it!
-  end
-
   def requirements
     @requirements ||= questions.select(&:is_a_requirement?)
   end
