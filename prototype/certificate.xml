@@ -338,13 +338,17 @@
 			<question id="dataPersonal">
 				<label>Could individuals be identified from this data?</label>
 				<radioset required="pilot">
-					<option value="true">
-						<label>no, the data does not contain personal data</label>
-						<help>Data that is about the activity of people can be personal data if there's the potential for it to be combined with other data to identify individuals. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.</help>
+					<option value="not-personal">
+						<label>no, the data is not about people or their activities</label>
+						<help>Data does not have to be directly about individuals to enable people to be identified: anything about people's activities can be used to identify them if it's combined with other data. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.</help>
 					</option>
-					<option value="false">
-						<label>yes, individuals <em>could</em> be identified, including by third parties with access to additional information</label>
-						<help>Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.</help>
+					<option value="summarised">
+						<label>no, the data has been summarised so individuals can't be identified</label>
+						<help>Data that is about individual people can be summarised using statistical analyses, so that individuals can no longer be identified.</help>
+					</option>
+					<option value="individual">
+						<label>yes, individuals <em>could</em> potentially be identified, for example by third parties with access to additional information</label>
+						<help>You might be publishing data that is intended to provide information about individuals, such as civil service pay. Even if you are not, it is seldom possible to completely guarantee that individuals cannot be identified from data about them.</help>
 					</option>
 					<option value="unknown">
 						<label>you don't know if individuals could be identified from this data</label>
