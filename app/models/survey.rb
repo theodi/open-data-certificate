@@ -4,7 +4,7 @@ class Survey < ActiveRecord::Base
   REQUIREMENT_LEVELS = %w(basic pilot standard exemplar)
 
   def questions
-    @requirements ||= sections.map(&:questions).flatten
+    @questions ||= sections.map(&:questions).flatten # TODO: Change this to "Question.where(['section_id in (?)', (sections.map(&:id)<<0)])" - would it be quicker... test it!
   end
 
   def requirements
