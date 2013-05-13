@@ -25,6 +25,7 @@ class DatasetsController < ApplicationController
 
   def show
     @dataset = Dataset.find params[:id]
+    @surveys = Survey.available_to_complete
 
     if @dataset.user.nil? && user_signed_in?
       # give the unclaimed dataset to the user
@@ -37,7 +38,12 @@ class DatasetsController < ApplicationController
   def start_questionnaire
     @dataset = Dataset.find params[:dataset_id]
 
-    surveys = Survey.order("survey_version DESC")
+    if params[:survey_access_code].blank?
+      flash[:notice] = t('surveyor.please_choose_a_legislation')
+      redirect_to @dataset and return
+    end
+
+    surveys = Survey.where(:access_code => params[:survey_access_code]).order("survey_version DESC")
     
     # use the most recent survey for now
     @survey = surveys.first
@@ -49,7 +55,7 @@ class DatasetsController < ApplicationController
       redirect_to(surveyor.edit_my_survey_path(
         :survey_code => @survey.access_code, :response_set_code  => @response_set.access_code))
     else
-      flash[:notice] = t('surveyor.Unable_to_find_that_survey')
+      flash[:notice] = t('surveyor.unable_to_find_that_legislation')
       redirect_to @dataset
     end
   end

@@ -14,4 +14,11 @@ class ApplicationController < ActionController::Base
     { :locale => I18n.locale }
   end
 
+  def home
+    unless current_user
+      @surveys = Survey.available_to_complete
+    end
+    render '/home/index'
+  end
+
 end

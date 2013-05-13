@@ -3,8 +3,15 @@ class Survey < ActiveRecord::Base
 
   REQUIREMENT_LEVELS = %w(basic pilot standard exemplar)
 
+  class << self
+    def available_to_complete
+      #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
+      order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
+    end
+  end
+
   def questions
-    @questions ||= sections.map(&:questions).flatten # TODO: Change this to "Question.where(['section_id in (?)', (sections.map(&:id)<<0)])" - would it be quicker... test it!
+    @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)])
   end
 
   def requirements
