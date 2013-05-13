@@ -5,7 +5,7 @@
   %h1 Dataset#show
 
   = form_for @dataset, :url => dataset_start_questionnaire_path(@dataset) do |f|
-    = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map(&:access_code)))
+    = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
     = f.submit t(:start_new_certification)
 
   %ul
