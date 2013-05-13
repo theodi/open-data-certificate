@@ -2,6 +2,8 @@ class ResponseSet < ActiveRecord::Base
   unloadable
   include Surveyor::Models::ResponseSetMethods
 
+  attr_accessible :dataset_id
+
   belongs_to :dataset
 
   def incomplete!
