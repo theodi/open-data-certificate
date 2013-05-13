@@ -300,6 +300,12 @@
 	<xsl:text>*</xsl:text>
 </xsl:template>
 
+<xsl:template match="strong" mode="markdown">
+	<xsl:text>**</xsl:text>
+	<xsl:apply-templates mode="markdown" />
+	<xsl:text>**</xsl:text>
+</xsl:template>
+
 <xsl:template match="a" mode="markdown">
 	<xsl:text>[</xsl:text>
 	<xsl:apply-templates mode="markdown" />

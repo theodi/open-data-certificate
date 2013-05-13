@@ -279,20 +279,46 @@ questions:
       a_true:
         text: yes
   dataPersonal:
-    text: Could the source of this data be personal data under the Data Protection Act?
+    text: Could individuals be identified from this data?
     answers:
       not_personal:
-        text: no, the data could never be personal data as it is not about people or their activity
-        help_text: Data that is about the activity of people can be personal data if there's the potential for it to be combined with other data to identify individuals. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.
-      personal:
-        text: yes, the source of this data is classified as personal data within your organisation
-        help_text: Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions)
-      possibly:
-        text: yes, the source of this data could be classified as personal data if held by other people who have access to additional information
-        help_text: Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. Even if your organisation doesn't have other information that could be used to identify the individuals in the source of this data, it may be that other people do have access to such information.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions)
-  consentExempt:
-    text: Is this data exempt from the non-disclosure provisions of the Data Protection Act?
-    help_text: There are exemptions from the non-disclosure provisions of the Data Protection Act, which mean that organisations do not have to comply with the normal non-disclosure provisions.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/exemptions)
+        text: no, the data is not about people or their activities
+        help_text: Data does not have to be directly about individuals to enable people to be identified: anything about people's activities can be used to identify them if it's combined with other data. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.
+      summarised:
+        text: no, the data has been summarised so individuals can't be identified
+        help_text: Data that is about individual people can be summarised using statistical analyses, so that individuals can no longer be identified.
+      individual:
+        text: yes, individuals *could* potentially be identified, for example by third parties with access to additional information
+        help_text: You might be publishing data that is intended to provide information about individuals, such as civil service pay. Even if you are not, it is seldom possible to completely guarantee that individuals cannot be identified from data about them.
+  statisticalAnonAudited:
+    text: Has your anonymisation approach been independently audited?
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  appliedAnon:
+    text: Have you attempted to reduce or remove the possibility of re-identification?
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  lawfulDisclosure:
+    text: Are you required by law to publish this personal data?
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  lawfulDisclosureURL:
+    text: Where is your right to publish data about individuals documented?
+    answers:
+      a_1:
+        text: Disclosure Rationale URL
+  privacyImpactAssessmentExists:
+    text: Have you carried out a Privacy Impact Assessment?
+    help_text: A [Privacy Impact Assessment](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx) is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)
     answers:
       a_false:
         text: no
@@ -300,7 +326,7 @@ questions:
         text: yes
   privacyImpactAssessmentUrl:
     text: Where is your privacy impact assessment published?
-    help_text: A [Privacy Impact Assessment](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx) is a process for identifying privacy risks to individuals in the collection, use and disclosure of information. We ask where it is published because this enables us to check that it exists.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)
+    help_text: ICO recommend publishing your Privacy Impact Assessment (summarised or with suitable redactions to prevent disclosure of sensitive information). We ask where it is published because this enables us to check that it exists.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)
     answers:
       a_1:
         text: Privacy Impact Assessment URL
@@ -314,21 +340,34 @@ questions:
         text: yes
   individualConsentURL:
     text: Where is the privacy notice you provide to affected individuals published?
-    help_text: Unless you are exempt from the non-disclosure provisions of the Data Protection Act, you are required to give individuals privacy notices when collecting data about them, which should specify the purposes for which that data will be used. We ask where these are because reusers need to be able to look at them so that they can stick within the confines of the Data Protection Act when they are handling the data.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2)
+    help_text: When you collect data about individuals, you must tell them how that data will be used, in a privacy notice. We ask where this is published because reusers need to be able to look at them so that they can comply with the Data Protection Act when they are handling the data.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2)
     answers:
       a_1:
         text: Privacy Notice URL
-  personalDataAnonymisation:
-    text: Has your anonymisation approach been audited?
+  riskAssessment:
+    text: Have you fully assessed the risks of re-identification?
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  anonymisationAudited:
+    text: Has your anonymisation approach been independently audited?
     help_text: An audit of your anonymisation approach will ensure that you have carried out the appropriate anonymisation technique for your data, and carried it out effectively. This can be done by a specialist within your organisation or an independent third party.
     answers:
       a_false:
         text: no
       a_true:
         text: yes
-  privacyImpactAssessment:
-    text: Have you carried out a privacy impact assessment?
-    help_text: A [Privacy Impact Assessment](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx) is a process for identifying privacy risks to individuals in the collection, use and disclosure of information. Even if you are exempt from the non-disclosure provisions of the Data Protection Act, you should carry out a privacy impact assessment so that you are aware of the possible risks of making the data open. We do not expect you to publish this privacy impact assessment because it might contain sensitive information about the risks that you are prepared to take.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)
+  dpStaff:
+    text: Is there a member of staff in your organisation responsible for data protection?
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  dbStaffConsulted:
+    text: Have you involved them in assessing this publication?
     answers:
       a_false:
         text: no
@@ -867,200 +906,210 @@ labels:
     help_text: providing reusers with tools to help work with the data
 # General Information Requirements
   pilot_1:
-    text: You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.
+    text: You should **have a page that provides documentation** about the open data you are publishing so that reusers can understand its context, content and utility.
   basic_1:
-    text: You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.
+    text: You must **have a page that provides documentation** and access to the open data you are publishing so that reusers can get hold of it.
 # Legal Information Requirements
   basic_2:
-    text: You must have the right to publish data that you publish.
+    text: You must **have the right to publish data** that you publish.
   basic_3:
     text: You have said that the data wasn't originally created or gathered by you, and wasn't crowd-sourced, so it must have been extracted or calculated from other data sources.
   basic_4:
-    text: You should get legal advice to ensure that you have the right to republish this data.
+    text: You must **get legal advice to ensure that you have the right to republish this data**.
   basic_5:
     text: You have said that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowd-sourced.
   basic_6:
-    text: You must obtain agreement to a Contributor Licence Agreement from the contributors to your data to give you the right to republish their contributions as open data.
+    text: You must **obtain agreement to a Contributor Licence Agreement from the contributors to your data** to give you the right to republish their contributions as open data.
   pilot_2:
-    text: You should document where the data was sourced from and the rights under which you are publishing the data so reusers are assured that they can reuse the parts sourced from third parties.
+    text: You should **document where the data was sourced from** and the rights under which you are publishing the data so reusers are assured that they can reuse the parts sourced from third parties.
   standard_1:
-    text: You should include machine-readable data about the sources of data that you're using.
+    text: You should **include machine-readable data about the sources** of data that you're using.
   pilot_3:
-    text: You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.
+    text: You should **have a page that states your copyright** over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.
   standard_2:
-    text: You should provide machine-readable data in your copyright statement about the licences that should be used when the data is reused so that automated tools can flag the data as open data.
+    text: You should **provide machine-readable data in your copyright statement about the licences** that should be used when the data is reused so that automated tools can flag the data as open data.
   exemplar_1:
-    text: You should provide machine-readable data in your copyright statement about the attribution that should be used when the data is reused so that automated tools can use the information.
+    text: You should **provide machine-readable data in your copyright statement about the attribution** that should be used when the data is reused so that automated tools can use the information.
   exemplar_2:
-    text: You should provide machine-readable data in your copyright statement about the URL that should be linked to when the data is reused so that automated tools can use the information.
+    text: You should **provide machine-readable data in your copyright statement about the URL that should be linked to** when the data is reused so that automated tools can use the information.
   basic_7:
-    text: You must publish open data under an open licence so that others can reuse it.
+    text: You must **publish open data under an open licence** so that others can reuse it.
   basic_8:
-    text: You must publish open data under an open licence so that others can reuse it.
-  pilot_4:
-    text: You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.
+    text: You must **publish open data under an open licence** so that others can reuse it.
   standard_3:
-    text: You should have your privacy impact assessment independently audited to ensure that it has been carried out correctly.
-  pilot_5:
-    text: You should inform potential reusers about the purposes of processing personal data which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.
-  pilot_6:
-    text: You should engage an expert to audit your anonymisation approach to ensure that it is appropriate for your data.
+    text: You should **arrange an independent audit of your anonymisation approach** to ensure that you have used an appropriate statistical method to reduce the risk of re-identification.
+  pilot_4:
+    text: You should **only publish personal data without anonymisation if you are required to do so by law**.
   standard_4:
-    text: You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.
-# Practical Information Requirements
+    text: You should **document your right to publish data about individuals**, both for those affected by the disclosure and for reusers.
+  pilot_5:
+    text: You should **carry out a Privacy Impact Assessment** if you are publishing data about individuals.
   standard_5:
-    text: You should ensure that reusers can easily find your data from your organisation's home page.
+    text: You should **publish your privacy impact assessment** so that reusers and other interested parties can understand how you have assessed the risks of disclosure.
   standard_6:
-    text: You should ensure that reusers can locate your data through searching for it in locations that list available data.
+    text: You should **have your privacy impact assessment independently audited** to ensure that it has been carried out correctly.
+  pilot_6:
+    text: You should **inform potential reusers about the purposes of processing personal data** which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.
   pilot_7:
-    text: You should include timestamps in your data when releasing data that will go out of date over time, so that reusers know the time period it relates to.
+    text: You should **fully assess the risks of re-identification** from the data that you are publishing, to avoid breaching individuals' privacy.
   standard_7:
-    text: You should publish updates to data that goes out of date so that the information you provide does not go stale.
-  exemplar_3:
-    text: You should provide a feed of changes in your data so that it's easy for reusers to keep their copies up to date.
+    text: You should **engage an expert to audit your anonymisation approach** to ensure that it is appropriate for your data.
   pilot_8:
-    text: You should create a new dataset release every month so that reusers can access up-to-date information.
+    text: You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data.
+# Practical Information Requirements
   standard_8:
-    text: You should create a new dataset release every week so that reusers can access up-to-date information.
-  exemplar_4:
-    text: You should create a new dataset release every day so that reusers can access up-to-date information.
-  pilot_9:
-    text: You should have a delay between creating and publishing a dataset that is less than the gap between releases so that reusers can access up-to-date information.
+    text: You should **ensure that reusers can easily find your data** from your organisation's home page.
   standard_9:
-    text: You should have a delay between creating and publishing a dataset that is less than half the gap between releases so that reusers can access up-to-date information.
-  exemplar_5:
-    text: You should have minimal or no delay between creating and publishing datasets so that reusers can access up-to-date information.
+    text: You should **ensure that reusers can locate your data through searching for it** in locations that list available data.
+  pilot_9:
+    text: You should **include timestamps in your data when releasing data that will go out of date** over time, so that reusers know the time period it relates to.
   standard_10:
-    text: You should enable reusers to download the entire dataset so that they can analyse it in its entirety.
+    text: You should **publish updates** to data that goes out of date so that the information you provide does not go stale.
+  exemplar_3:
+    text: You should **provide a feed of changes** in your data so that it's easy for reusers to keep their copies up to date.
   pilot_10:
-    text: You should create a new database dump every month, so that new reusers can get hold of an up-to-date dump.
+    text: You should **create a new dataset release every month** so that reusers can access up-to-date information.
   standard_11:
-    text: You should create a new database dump within a week of any change, so that new reusers do not have long to wait for an up-to-date dump.
-  exemplar_6:
-    text: You should create a new database dump within a day of any change, so that new reusers can easily get hold of an up-to-date dump.
-  standard_12:
-    text: You should correct data that is found to contain errors so that all users benefit from improvements in accuracy.
-  standard_13:
-    text: You should document any known issues with the quality of the data so that reusers can understand how much they can rely on the data.
-  exemplar_7:
-    text: You should document your quality control process so that reusers can understand how much they can rely on the data.
+    text: You should **create a new dataset release every week** so that reusers can access up-to-date information.
+  exemplar_4:
+    text: You should **create a new dataset release every day** so that reusers can access up-to-date information.
   pilot_11:
-    text: You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.
-  standard_14:
-    text: You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.
-  exemplar_8:
-    text: You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.
+    text: You should **have a reasonable delay between creating and publishing** a dataset that is less than the gap between releases so that reusers can access up-to-date information.
+  standard_12:
+    text: You should **have a short delay between creating and publishing** a dataset that is less than half the gap between releases so that reusers can access up-to-date information.
+  exemplar_5:
+    text: You should **have minimal or no delay between creating and publishing** datasets so that reusers can access up-to-date information.
+  standard_13:
+    text: You should **enable reusers to download the entire dataset** so that they can analyse it in its entirety.
   pilot_12:
-    text: You should provide a guarantee to reusers that the data will be available in this form for about a year so that they know they can rely on it.
+    text: You should **create a new database dump every month**, so that new reusers can get hold of an up-to-date dump.
+  standard_14:
+    text: You should **create a new database dump within a week of any change**, so that new reusers do not have long to wait for an up-to-date dump.
+  exemplar_6:
+    text: You should **create a new database dump within a day of any change**, so that new reusers can easily get hold of an up-to-date dump.
   standard_15:
-    text: You should provide a guarantee to reusers that the data will be available in this form in the medium term so that they know they can rely on it.
+    text: You should **correct data that is found to contain errors** so that all users benefit from improvements in accuracy.
+  standard_16:
+    text: You should **document any known issues with the quality of the data** so that reusers can understand how much they can rely on the data.
+  exemplar_7:
+    text: You should **document your quality control process** so that reusers can understand how much they can rely on the data.
+  pilot_13:
+    text: You should **guarantee at least 99% availability** (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.
+  standard_17:
+    text: You should **guarantee at least 99.9% availability** (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.
+  exemplar_8:
+    text: You should **guarantee at least 99.999% availability** (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.
+  pilot_14:
+    text: You should **provide a guarantee to reusers that the data will be available in this form for about a year** so that they know they can rely on it.
+  standard_18:
+    text: You should **provide a guarantee to reusers that the data will be available in this form in the medium term** so that they know they can rely on it.
   exemplar_9:
-    text: You should provide a guarantee to reusers that the data will be available in this form long term so that they know they can rely on it.
+    text: You should **provide a guarantee to reusers that the data will be available in this form long term** so that they know they can rely on it.
 # Technical Information Requirements
   basic_9:
-    text: You must provide either a URL for the dataset or a URL for documentation about it so that reusers can find it.
-  pilot_13:
-    text: You should have a URL that is a direct link to the data itself so that reusers can access it easily.
-  standard_16:
-    text: You should have a single URL that can always be used to download the current version of the dataset so that reusers can access it easily.
-  pilot_14:
-    text: You should use a regular pattern in the URLs for different releases so that reusers can easily get hold of each of those releases.
-  standard_17:
-    text: You should have a document or feed that provides a list of all the available releases so that reusers can create scripts to download all of them.
-  basic_10:
-    text: You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.
-  basic_11:
-    text: You must provide either a URL for the API endpoint or a URL for the documentation about it so that reusers can find it.
-  standard_18:
-    text: You should have a service description document or similar single entry point for your API so that reusers can access it.
-  standard_19:
-    text: You should have a single URL that can always be used to download the current dump of the database so that reusers can find it.
-  exemplar_10:
-    text: You should use a regular pattern in the URLs for different dumps so that reusers can easily get hold of the dump for a particular time period.
-  exemplar_11:
-    text: You should have a document or feed that provides a list of all the available dumps so that reusers can create scripts to download all of them.
+    text: You must **provide either a URL for the dataset or a URL for documentation about it** so that reusers can find it.
   pilot_15:
-    text: You should provide the data in a machine-readable format so that it's easy to reuse.
-  standard_20:
-    text: You should provide the data in an open standard format so that reusers can use common tools to process it.
-  standard_21:
-    text: You should publish documents in a format that exposes their semantic structure so that it's easy to display in different styles.
+    text: You should **have a URL that is a direct link to the data itself** so that reusers can access it easily.
+  standard_19:
+    text: You should **have a single URL that can always be used to download the current version** of the dataset so that reusers can access it easily.
   pilot_16:
-    text: You should publish documents in a format that is designed for documents so that it's easy to process.
-  exemplar_12:
-    text: You should publish statistical data in a format that exposes its dimensions and measures so that it's easy to analyse.
+    text: You should **use a regular pattern in the URLs for different releases** so that reusers can easily get hold of each of those releases.
+  standard_20:
+    text: You should **have a document or feed that provides a list of all the available releases** so that reusers can create scripts to download all of them.
+  basic_10:
+    text: You must **provide access to releases of your data** through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.
+  basic_11:
+    text: You must **provide either a URL for the API endpoint or a URL for the documentation about it** so that reusers can find it.
+  standard_21:
+    text: You should **have a service description document** or similar single entry point for your API so that reusers can access it.
   standard_22:
-    text: You should publish tabular data in a format that exposes the tables of data so that it's easy to analyse.
+    text: You should **have a single URL that can always be used to download the current dump** of the database so that reusers can find it.
+  exemplar_10:
+    text: You should **use a regular pattern in the URLs for different dumps** so that reusers can easily get hold of the dump for a particular time period.
+  exemplar_11:
+    text: You should **have a document or feed that provides a list of all the available dumps** so that reusers can create scripts to download all of them.
   pilot_17:
-    text: You should publish tabular data in a format that is designed for tabular data so that it's easy to process.
+    text: You should **provide the data in a machine-readable format** so that it's easy to reuse.
   standard_23:
-    text: You should publish geographic data in a format designed for geographic data so that it's easy to use with existing tools.
-  pilot_18:
-    text: You should publish geographic data as structured data so that it's easy to process.
-  pilot_19:
-    text: You should publish structured data in a format designed for structured data so that it's easy to process.
+    text: You should **provide the data in an open standard format** so that reusers can use common tools to process it.
   standard_24:
-    text: You should use URLs to identify things in the data, so that they can be easily referenced and combined with other data about those things.
-  exemplar_13:
-    text: You should provide a page of information about each of the things in your data so that reusers can easily find and share that information.
-  exemplar_14:
-    text: You should use existing external URLs in your data so that it's easy to combine with other data that uses those URLs.
-  exemplar_15:
-    text: You should provide a machine-readable provenance trail for the data so that reusers can trace how it has been processed.
-  exemplar_16:
-    text: You should describe how reusers can verify whether the data they receive is the same as that originally published by you, so that they know whether to trust it.
-# Social Information Requirements
-  pilot_20:
-    text: You should include a title for the data in your documentation so that reusers know how to refer to it.
-  pilot_21:
-    text: You should include a description of the data in your documentation so that reusers know what it contains.
-  pilot_22:
-    text: You should include a release date in your documentation so that reusers know how current it is.
+    text: You should **publish documents in a format that exposes their semantic structure** so that it's easy to display in different styles.
+  pilot_18:
+    text: You should **publish documents in a format that is designed for documents** so that it's easy to process.
+  exemplar_12:
+    text: You should **publish statistical data in a format that exposes its dimensions and measures** so that it's easy to analyse.
   standard_25:
-    text: You should include the last modification date in your documentation so that reusers know whether the copy they have is up to date.
+    text: You should **publish tabular data in a format that exposes the tables of data** so that it's easy to analyse.
+  pilot_19:
+    text: You should **publish tabular data in a format that is designed for tabular data** so that it's easy to process.
   standard_26:
-    text: You should indicate in your documentation how frequently new versions of the data will be released so reusers can tell if it will be updated at all, and if so how frequently they will need to check it.
+    text: You should **publish geographic data in a format designed for geographic data** so that it's easy to use with existing tools.
+  pilot_20:
+    text: You should **publish geographic data as structured data** so that it's easy to process.
+  pilot_21:
+    text: You should **publish structured data in a format designed for structured data** so that it's easy to process.
   standard_27:
-    text: You should include a canonical URL for the data in your documentation so that different reusers know how to point to it consistently.
-  standard_28:
-    text: You should include a canonical URL for the documentation itself in your documentation so that different reusers know how to point to it consistently.
-  standard_29:
-    text: You should include the language of the data in your documentation so that reusers know whether they will be able to understand it.
-  standard_30:
-    text: You should indicate the publisher of the data in your documentation as reusers may use this information to determine how much to trust the data.
-  standard_31:
-    text: You should include an indication of the geographic area the data covers in your documentation so that reusers understand what is included within it.
-  standard_32:
-    text: You should include the time period the data covers in your documentation so that reusers understand what is included within it.
-  standard_33:
-    text: You should include a general theme for the data in your documentation so that reusers know roughly what it's about.
-  standard_34:
-    text: You should include keywords or tags for the data in your documentation to help reusers to search for the data effectively.
+    text: You should **use URLs to identify things in the data**, so that they can be easily referenced and combined with other data about those things.
+  exemplar_13:
+    text: You should **provide a page of information about each of the things in your data** so that reusers can easily find and share that information.
+  exemplar_14:
+    text: You should **use existing external URLs in your data** so that it's easy to combine with other data that uses those URLs.
+  exemplar_15:
+    text: You should **provide a machine-readable provenance trail** for the data so that reusers can trace how it has been processed.
+  exemplar_16:
+    text: You should **describe how reusers can verify whether the data they receive is the same as that originally published by you**, so that they know whether to trust it.
+# Social Information Requirements
+  pilot_22:
+    text: You should **include a title for the data in your documentation** so that reusers know how to refer to it.
   pilot_23:
-    text: You should include a title for each distribution within the documentation so reusers know how to refer to it.
+    text: You should **include a description of the data in your documentation** so that reusers know what it contains.
   pilot_24:
-    text: You should include a description of each distribution within the documentation so reusers know what it contains.
-  pilot_25:
-    text: You should include a release date for each distribution within the documentation so that reusers know how current it is.
+    text: You should **include a release date in your documentation** so that reusers know how current it is.
+  standard_28:
+    text: You should **include the last modification date in your documentation** so that reusers know whether the copy they have is up to date.
+  standard_29:
+    text: You should **indicate in your documentation how frequently new versions of the data will be released** so reusers can tell if it will be updated at all, and if so how frequently they will need to check it.
+  standard_30:
+    text: You should **include a canonical URL for the data in your documentation** so that different reusers know how to point to it consistently.
+  standard_31:
+    text: You should **include a canonical URL for the documentation itself in your documentation** so that different reusers know how to point to it consistently.
+  standard_32:
+    text: You should **include the language of the data in your documentation** so that reusers know whether they will be able to understand it.
+  standard_33:
+    text: You should **indicate the publisher of the data in your documentation** as reusers may use this information to determine how much to trust the data.
+  standard_34:
+    text: You should **include an indication of the geographic area the data covers in your documentation** so that reusers understand what is included within it.
   standard_35:
-    text: You should include the last modification date for each distribution within the documentation so reusers know whether their copy of it is up to date.
+    text: You should **include the time period the data covers in your documentation** so that reusers understand what is included within it.
   standard_36:
-    text: You should include a reference to the licence or waiver that applies to each distribution within the documentation so reusers know what they can do with the data.
-  pilot_26:
-    text: You should provide documentation about how the API works so that reusers can find out how to use it.
+    text: You should **include a general theme for the data in your documentation** so that reusers know roughly what it's about.
   standard_37:
-    text: You should provide documentation for any vocabulary you use within the data you publish so that reusers know how to interpret the data.
-  standard_38:
-    text: You should provide documentation for the codes used within your data so that reusers know how to interpret the data.
+    text: You should **include keywords or tags for the data in your documentation** to help reusers to search for the data effectively.
+  pilot_25:
+    text: You should **include a title for each distribution within the documentation** so reusers know how to refer to it.
+  pilot_26:
+    text: You should **include a description of each distribution within the documentation** so reusers know what it contains.
   pilot_27:
-    text: You should have a contact email address so that people can get in touch with you about any questions about the data.
+    text: You should **include a release date for each distribution within the documentation** so that reusers know how current it is.
+  standard_38:
+    text: You should **include the last modification date for each distribution within the documentation** so reusers know whether their copy of it is up to date.
   standard_39:
-    text: You should indicate a place where people using this dataset should discuss the data so that they can support each other.
-  standard_40:
-    text: You should provide instructions for people who discover errors in the data so that they know how to report them.
-  standard_41:
-    text: You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.
+    text: You should **include a reference to the licence or waiver that applies to each distribution within the documentation** so reusers know what they can do with the data.
   pilot_28:
-    text: You should provide a contact email address so that reusers with concerns about disclosure of personal details within the data can get in touch.
+    text: You should **provide documentation about how the API works** so that reusers can find out how to use it.
+  standard_40:
+    text: You should **provide documentation for any vocabulary you use within the data** you publish so that reusers know how to interpret the data.
+  standard_41:
+    text: You should **provide documentation for the codes used within your data** so that reusers know how to interpret the data.
+  pilot_29:
+    text: You should **have a contact email address** so that people can get in touch with you about any questions about the data.
+  standard_42:
+    text: You should **indicate a place where people using this dataset should discuss the data** so that they can support each other.
+  standard_43:
+    text: You should **provide instructions for people who discover errors in the data** so that they know how to report them.
+  standard_44:
+    text: You should **provide an announcement mailing list or a feed** to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.
+  pilot_30:
+    text: You should **provide a contact email address for reusers with concerns about disclosure of personal details** within the data can get in touch.
   exemplar_17:
-    text: You should provide a list of software libraries and other tools that help developers who want to work with the data so that reusers can find and reuse them rather than building them from scratch.
+    text: You should **provide a list of software libraries and other tools** that help developers who want to work with the data so that reusers can find and reuse them rather than building them from scratch.

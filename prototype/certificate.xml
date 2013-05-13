@@ -4,7 +4,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
 <questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
