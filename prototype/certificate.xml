@@ -5,7 +5,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire version="0.5" jurisdiction="UK">
+<questionnaire version="0.6" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
 		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
@@ -1213,7 +1213,7 @@
 		</group>
 	</group>
 	<certificate>		
-		<p class="alert">This certificate has been awarded based on the answers provided by <placeholder ref="publisher">its curator</placeholder>. The awarded level is based on the assumption that these answers are accurate. The answers have not been audited by the Open Data Institute.</p>
+		<p class="alert">This self-certified certificate has been awarded based on the answers provided by <placeholder ref="publisher">its curator</placeholder>. The awarded level is based on the assumption that these answers are accurate. The answers have not been audited by the Open Data Institute.</p>
 		<section>
 			<h2>Legal Information</h2>
 			<if test="this.publisherRights() === 'yes'">

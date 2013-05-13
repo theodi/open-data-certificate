@@ -117,7 +117,7 @@
 	  	<div class="container">
 	  		<section>
 	  			<p class="lead">All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.</p>
-	  			<p class="alert">The questions here cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data. They cannot be used to assess your compliance with either legislation or with other policies that may apply in your sector.</p>
+	  			<p class="alert">These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements. You should always check the legislation and other policies that may apply in your sector.</p>
 	  			<div class="accordion" id="main-help-accordion">
 	  				<div class="accordion-group">
 	  					<div class="accordion-heading">
