@@ -90,6 +90,7 @@ class SurveyorController < ApplicationController
 
   # where to send the user once the survey has been completed
   # if there was a dataset, go back to it
+  private
   def surveyor_finish
     if @response_set.dataset
       dataset_path @response_set.dataset
