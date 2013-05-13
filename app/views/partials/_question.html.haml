@@ -1,5 +1,3 @@
-= q.improvement_level
-
 -# TODO: js for slider
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
@@ -7,6 +5,7 @@
 - unless q.display_type == "hidden"
   = f.inputs q_text(q, @render_context, I18n.locale), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)}" do
     %span.help= q.help_text_for(@render_context, I18n.locale)
+    %span.help_text_more_link= q.help_text_more_url
     - case renderer
     - when  :image, :label, :default_label, :inline_label, :repeater_label
     - when :dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown

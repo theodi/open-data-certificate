@@ -17,3 +17,5 @@ en:
     select_one: "Select one ..."
     sections: "Sections"
     language: "Language"
+    that_response_set_is_complete: "That response set is complete"
+    all_mandatory_questions_need_to_be_completed: "All mandatory questions need to be completed."
