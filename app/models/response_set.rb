@@ -1,5 +1,8 @@
 class ResponseSet < ActiveRecord::Base
+  unloadable
   include Surveyor::Models::ResponseSetMethods
+
+  belongs_to :dataset
 
   def incomplete!
     update_attribute :completed_at, nil

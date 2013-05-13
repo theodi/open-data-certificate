@@ -20,7 +20,9 @@
 	exclude-result-prefixes="xs local">
 
 <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
-	
+
+<xsl:param name="accordion" as="xs:boolean" select="true()" />
+
 <xsl:key name="fields" match="question" use="@id" />
 
 <xsl:template match="questionnaire">
@@ -41,6 +43,41 @@
 	  		<p>
 	  			This is an <strong>alpha version</strong> of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add <a href="https://github.com/theodi/open-data-certificate/issues">issues on github</a> or contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a>.
 	  		</p>
+	  	</div>
+	  	<a data-toggle="collapse" data-target="#improvements">
+	  		<div id="status-banner">
+	  			<div class="container">
+	  				<div class="row overlay banner">
+	  					<div class="row">
+	  						<div class="span12">
+	  							<p class="lead">So far this certificate has acheived:</p>
+	  						</div>
+	  					</div>
+	  					<xsl:for-each select="levels/level[position() > 1]">
+	  						<div class="span4">
+	  							<h3><span data-bind="text: Math.floor((certificate.status().answered{@id} / certificate.status().{@id}) * 100)">0</span>% </h3>
+	  							<p>of <xsl:value-of select="upper-case(@id)" /> level</p>
+	  						</div>
+	  					</xsl:for-each>
+	  				</div>	  				
+	  			</div>
+	  		</div>
+	  	</a>
+	  	<div id="improvements" class="collapse">
+	  		<div class="container">
+	  			<div class="row">
+	  				<xsl:for-each select="levels/level[position() > 1]">
+	  					<div class="span4">
+	  						<h4>How could you improve?</h4>
+	  						<div id="improvements-{@id}" class="improvements">
+	  							<xsl:apply-templates select="/questionnaire" mode="requirementList">
+	  								<xsl:with-param name="level" select="@id" tunnel="yes" />
+	  							</xsl:apply-templates>
+	  						</div>
+	  					</div>
+	  				</xsl:for-each>
+	  			</div>
+	  		</div>
 	  	</div>
 	  	<header id="header">
 	  		<div class="container">
@@ -101,17 +138,17 @@
 	  								</div>
 	  							</div>
 	  							<div class="row-fluid">
-	  								<div class="span12 improvements">
+	  								<div class="span12 levels">
   										<xsl:for-each select="levels/level">
-  											<div class="improvement">
-  												<span class="improvement-label">
+  											<div class="level">
+  												<span class="level-label">
   													<span class="label label-{if (position() = 1) then 'info' else @id}">
   														<i class="icon-star icon-white"></i>
   														<xsl:text> </xsl:text>
   														<xsl:value-of select="local:capitalise(@id)" />
   													</span>
   												</span>
-  												<span class="improvement-desc"><xsl:value-of select="." /></span>
+  												<span class="level-desc"><xsl:value-of select="." /></span>
   											</div>
   										</xsl:for-each>
 	  								</div>
@@ -121,30 +158,50 @@
 	  				</div>
 	  			</div>
 	  		</section>
-	      <form id="questionnaire" class="form-horizontal">
+	      <form id="questionnaire">
 	      	<section>
 	      		<div class="page-header">
 	      			<h2>Questionnaire</h2>
 	      		</div>
-	      		<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
-	      		<hr />
-	      		<ul class="nav nav-tabs">
-	      			<xsl:for-each select="group">
-	      				<li>
-	      					<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
-	      					<a href="#{@id}" data-toggle="tab">
-	      						<xsl:value-of select="replace(label, ' Information$', '')" />
-	      						<xsl:text> </xsl:text>
-	      						<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
-	      							<xsl:with-param name="group" select="@id" tunnel="yes" />
-	      						</xsl:apply-templates>
-	      					</a>
-	      				</li>
-	      			</xsl:for-each>
-	      		</ul>
-	      		<div class="tab-content">
-	      			<xsl:apply-templates select="group" />
-	      		</div>
+	      		<xsl:apply-templates select="@jurisdiction" />
+	      		<xsl:choose>
+	      			<xsl:when test="$accordion">
+	      				<div class="accordion" id="questionnaire">
+	      					<div class="accordion-group">
+	      						<div class="accordion-heading">
+	      							<a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#generalInfo">General</a>
+	      						</div>
+	      						<div id="generalInfo" class="accordion-body collapse in">
+	      							<div class="accordion-inner">
+	      								<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
+	      							</div>
+	      						</div>
+	      					</div>
+	      					<xsl:apply-templates select="group" mode="accordion" />
+	      				</div>
+	      			</xsl:when>
+	      			<xsl:otherwise>
+	      				<xsl:apply-templates select="group[1]/preceding-sibling::* except levels" />
+	      				<hr />
+	      				<ul class="nav nav-tabs">
+	      					<xsl:for-each select="group">
+	      						<li>
+	      							<xsl:if test="position() = 1"><xsl:attribute name="class">active</xsl:attribute></xsl:if>
+	      							<a href="#{@id}" data-toggle="tab">
+	      								<xsl:value-of select="replace(label, ' Information$', '')" />
+	      								<xsl:text> </xsl:text>
+	      								<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
+	      									<xsl:with-param name="group" select="@id" tunnel="yes" />
+	      								</xsl:apply-templates>
+	      							</a>
+	      						</li>
+	      					</xsl:for-each>
+	      				</ul>
+	      				<div class="tab-content">
+	      					<xsl:apply-templates select="group" />
+	      				</div>
+	      			</xsl:otherwise>
+	      		</xsl:choose>	      		
 	      	</section>
 	      </form>
 	  		<section id="certificate-container" class="well" data-bind="visible: certificateLevel() !== 'none'">
@@ -155,22 +212,6 @@
   				<p>
   					<a id="download-certificate" data-bind="attr: {{ href: certificateHTML }}" target="_new" class="btn btn-primary">Download Certificate</a>
   				</p>
-	  		</section>
-	  		<section id="improvements" data-bind="visible: certificateLevel() !== '{levels/level[last()]/@id}'">
-  				<div class="page-header">
-  					<h1>Improving Your Open Data</h1>
-  				</div>
-  				<p class="lead">
-  					You can improve the way you are publishing open data to make it more useful.
-  				</p>
-	  			<xsl:for-each select="levels/level[position() > 1]">
-	  				<div id="improvements-{@id}" class="improvements">
-	  					<xsl:apply-templates select="/questionnaire" mode="requirementList">
-	  						<xsl:with-param name="level" select="@id" tunnel="yes" />
-	  					</xsl:apply-templates>
-	  				</div>
-	  				<xsl:if test="position() != last()"><hr /></xsl:if>
-	  			</xsl:for-each>
 	  		</section>
 	    </div>
 	  	<footer id="footer">
@@ -204,15 +245,21 @@
 	  		var certificateViewModel = function () {
 		  			var certificate = this;
 			  		<xsl:apply-templates mode="viewModel" />
-	  		
+	  				certificate.status = ko.computed(function () {
+	  					var unmetRequirements = {
+	  						answered: 0,
+					  		<xsl:for-each select="levels/level">
+					  			<xsl:value-of select="@id" />: 0,
+					  			answered<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">,</xsl:if>
+					  		</xsl:for-each>
+				  		}
+				  		;
+				  		<xsl:apply-templates mode="unmetRequirements" />
+	  					return unmetRequirements;
+				  	}, certificate);
 		  			certificate.certificateLevel = ko.computed(function () {
-		  				var unmetRequirements = {
-		  					<xsl:for-each select="levels/level">
-		  						<xsl:value-of select="@id" />: 0,
-		  					</xsl:for-each>
-		  					}
-		  				;
-		  				<xsl:apply-templates mode="unmetRequirements" />
+		  				var unmetRequirements = certificate.status()
+		  					;
 		  				if (unmetRequirements.<xsl:value-of select="levels/level[1]/@id" /> > 0) {
 		  					return 'none';
 		  				<xsl:for-each select="levels/level[position() > 1]">
@@ -257,16 +304,39 @@
 	  		
 	  		ko.applyBindings(certificate);
 	  	</script>
-	  	<!--
-	    <script src="js/certificate.js"></script>
-	    -->
+	  	<script>
+	  		// display help on focus and blur (hack)
+	  		$(function(){
+		  		$(document).on('focus','[data-focus-target]', function() {
+		  			$($(this).data('focus-target')).collapse('show');
+	  			});
+	  			$(document).on('blur','[data-focus-target]', function() {
+	  				$($(this).data('focus-target')).collapse('hide');
+	  			});	  		
+	  		});
+	  		
+	  		$('.label[data-target]').popover({
+	  			content: function() {
+	  				return $($(this).data('target')).html();
+	  			},
+	  			trigger: 'hover'
+	  		});
+	  		
+	  		$(document).on('focus', 'input', function() {
+	  			$(this).parents('.control-group').addClass('focus');
+	  		});
+	  		
+	  		$(document).on('blur', 'input', function() {
+	  			$(this).parents('.control-group').removeClass('focus');
+	  		});	  		
+	  	</script>
 	  </body>
 	</html>
 </xsl:template>
 
 <xsl:template match="level" mode="statusIndicator">
 	<xsl:param name="group" as="xs:string" required="yes" tunnel="yes" />
-	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id}" 
+	<span class="badge badge-circular badge-{if (empty(preceding-sibling::level)) then 'important' else if (empty(preceding-sibling::level[2])) then 'info' else preceding-sibling::level[1]/@id} pull-right" 
 		data-bind="visible: {$group}Status().{@id} > 0, text: {$group}Status().{@id}, attr: {{ title: 'You have ' + {$group}Status().{@id} + ' question' + ({$group}Status().{@id} > 1 ? 's' : '') + ' left to answer before you get to {@id} level' }}"></span>
 	<xsl:choose>
 		<xsl:when test="following-sibling::level">
@@ -285,7 +355,6 @@
 
 <xsl:template match="questionnaire/group">
 	<div class="tab-pane{if (preceding-sibling::group) then '' else ' active'}" id="{@id}">
-		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
 		<ul class="pager">
 			<li class="previous{if (not(preceding-sibling::group)) then ' disabled' else ''}">
@@ -302,6 +371,25 @@
 	</div>
 </xsl:template>
 
+<xsl:template match="questionnaire/group" mode="accordion">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#questionnaire" href="#{@id}">
+				<xsl:value-of select="replace(label, ' Information$', '')" />
+				<xsl:text> </xsl:text>
+				<xsl:apply-templates select="/questionnaire/levels/level[1]" mode="statusIndicator">
+					<xsl:with-param name="group" select="@id" tunnel="yes" />
+				</xsl:apply-templates>
+			</a>
+		</div>
+		<div id="{@id}" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<xsl:apply-templates select="label/following-sibling::*" />
+			</div>
+		</div>
+	</div>
+</xsl:template>
+	
 <xsl:template match="group//group">
 	<fieldset id="{@id}">
 		<legend>
@@ -313,13 +401,12 @@
 				</small>
 			</xsl:if>
 		</legend>
-		<xsl:apply-templates select="@jurisdiction" />
 		<xsl:apply-templates select="label/following-sibling::*" />
 	</fieldset>
 </xsl:template>
 
 <xsl:template match="@jurisdiction">
-	<p class="alert alert-warning">
+	<p class="lead">
 		<xsl:text>This version of the certificate is designed to be used within </xsl:text>
 		<xsl:choose>
 			<xsl:when test=". = 'UK'">the UK</xsl:when>
@@ -345,6 +432,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
+			<!--
 			<xsl:if test="*/@required">
 				<span class="badge badge-circular badge-{if (*/@required = 'required') then 'important' else */@required} pull-left" data-bind="visible: {@id}Status() === '{*/@required}'">
 					<i class="icon icon-white icon-remove" title="Required{if (*/@required != 'required') then concat(' for ', */@required, ' certificate') else ''}"></i>
@@ -353,13 +441,14 @@
 			<span class="badge badge-circular badge-success pull-left" data-bind="visible: {@id}Status() === 'complete'">
 				<i class="icon icon-white icon-ok" title="Complete"></i>
 			</span>
+			-->
 			<xsl:text> </xsl:text>
 			<xsl:apply-templates select="label" />
-		</label>
-		<div class="controls">
 			<xsl:apply-templates select="help" mode="label">
 				<xsl:with-param name="id" select="@id" tunnel="yes" />
 			</xsl:apply-templates>
+		</label>
+		<div class="controls">
 			<xsl:apply-templates select="label/following-sibling::*[1]">
 				<xsl:with-param name="id" select="@id" tunnel="yes" />
 			</xsl:apply-templates>
@@ -377,8 +466,23 @@
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
 	<input type="text" class="span5">
 		<xsl:apply-templates select="." mode="dataBind" />
-		<xsl:sequence select="@type, @placeholder, @required[. = 'required']" />
+		<xsl:apply-templates select="@type, @placeholder, @required[. = 'required']" />
 	</input>
+</xsl:template>
+
+<xsl:template match="@placeholder">
+	<xsl:attribute name="placeholder">
+		<xsl:value-of select="." />
+		<xsl:if test="../@required">
+			<xsl:text> (required</xsl:text>
+			<xsl:if test="../@required != 'required'">
+				<xsl:text> for </xsl:text>
+				<xsl:value-of select="../@required" />
+				<xsl:text> level</xsl:text>
+			</xsl:if>
+			<xsl:text>)</xsl:text>
+		</xsl:if>
+	</xsl:attribute>
 </xsl:template>
 
 <!--
@@ -403,29 +507,26 @@
 
 <xsl:template match="radioset/option">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<xsl:apply-templates select="help" mode="label">
-		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-	</xsl:apply-templates>
 	<label class="radio">
 		<input type="radio">
 			<xsl:apply-templates select=".." mode="dataBind" />
 			<xsl:sequence select="@value" />
 			<xsl:apply-templates select="label/node()" />
 		</input>
+		<xsl:apply-templates select="help" mode="label">
+			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+		</xsl:apply-templates>
 		<xsl:apply-templates select="requirement" mode="label">
 			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
 		</xsl:apply-templates>
-		<xsl:apply-templates select="* except label">
-			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-		</xsl:apply-templates>
 	</label>
+	<xsl:apply-templates select="* except label">
+		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="checkboxset/option">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<xsl:apply-templates select="help" mode="label">
-		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-	</xsl:apply-templates>
 	<label class="checkbox">
 		<input type="checkbox">
 			<xsl:apply-templates select=".." mode="dataBind">
@@ -434,13 +535,16 @@
 			<xsl:sequence select="@value" />
 			<xsl:apply-templates select="label/node()" />
 		</input>
+		<xsl:apply-templates select="help" mode="label">
+			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+		</xsl:apply-templates>
 		<xsl:apply-templates select="requirement" mode="label">
 			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
 		</xsl:apply-templates>
-		<xsl:apply-templates select="* except label">
-			<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
-		</xsl:apply-templates>
 	</label>
+	<xsl:apply-templates select="* except label">
+		<xsl:with-param name="id" select="concat($id, @value)" tunnel="yes" />
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="yesno">
@@ -485,6 +589,9 @@
 			<xsl:attribute name="data-bind"><xsl:value-of select="$bind" /></xsl:attribute>
 		</xsl:otherwise>
 	</xsl:choose>
+	<xsl:if test="../help">
+		<xsl:attribute name="data-focus-target" select="concat('#', $id, '-help')" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template match="label">
@@ -528,7 +635,7 @@
 	
 <xsl:template match="help">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<span class="help-block collapse">
+	<div class="help-block collapse">
 		<xsl:choose>
 			<xsl:when test="ancestor::repeat">
 				<xsl:attribute name="data-bind">attr: { id: '<xsl:value-of select="$id" />-' + $index() + '-help' }</xsl:attribute>
@@ -537,16 +644,18 @@
 				<xsl:attribute name="id"><xsl:value-of select="$id" />-help</xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:apply-templates />
-		<xsl:if test="@more">
-			<a class="pull-right" href="{@more}" target="_new">Read more...</a>
-		</xsl:if>
-	</span>
+		<p class="alert alert-help">
+			<xsl:apply-templates />
+			<xsl:if test="@more">
+				<a class="pull-right" href="{@more}" target="_new">Read more...</a>
+			</xsl:if>
+		</p>
+	</div>
 </xsl:template>
 	
 <xsl:template match="requirement">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
-	<div class="requirement collapse">
+	<p class="requirement">
 		<xsl:choose>
 			<xsl:when test="ancestor::repeat">
 				<xsl:attribute name="data-bind">attr: { id: '<xsl:value-of select="$id" />-' + $index() + '-requirement' }</xsl:attribute>
@@ -555,22 +664,8 @@
 				<xsl:attribute name="id"><xsl:value-of select="$id" />-requirement</xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
-		<p class="alert alert-info">
-			<a>
-				<xsl:choose>
-					<xsl:when test="ancestor::repeat">
-						<xsl:attribute name="data-bind">attr: { href: '#<xsl:value-of select="$id" />-' + $index() + '-requirement' }</xsl:attribute>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:attribute name="href">#<xsl:value-of select="$id" />-requirement</xsl:attribute>
-					</xsl:otherwise>
-				</xsl:choose>
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
-			</a>
-			<xsl:text> </xsl:text>
-			<xsl:apply-templates />
-		</p>
-	</div>
+		<xsl:apply-templates />
+	</p>
 </xsl:template>
 
 <xsl:template match="requirement[not(@level)]">
@@ -674,7 +769,8 @@
 	<xsl:value-of select="concat($model, '.', @id, 'Status = ko.computed(function () {&#xA;')" />
 	<xsl:text>  var unmetRequirements = { answered: 0, </xsl:text>
 	<xsl:for-each select="../levels/level">
-		<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">, </xsl:if>
+		<xsl:value-of select="@id" />: 0,
+		answered<xsl:value-of select="@id" />: 0<xsl:if test="position() != last()">, </xsl:if>
 	</xsl:for-each>
 	<xsl:text> }&#xA;</xsl:text>
 	<xsl:text>  ;&#xA;</xsl:text>
@@ -756,9 +852,23 @@
 
 <xsl:template match="question" mode="unmetRequirements">
 	<xsl:param name="model" as="xs:string" select="'certificate'" tunnel="yes" />
-	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) unmetRequirements['answered']++;
-	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) unmetRequirements['basic']++;
-	else if (<xsl:value-of select="concat($model, '.', @id, 'Status() !== ''optional''')" />) unmetRequirements[<xsl:value-of select="concat($model, '.', @id, 'Status()')" />]++;
+	if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''complete''')" />) {
+		unmetRequirements['answered']++;
+		<xsl:choose>
+			<xsl:when test="*/@required">
+				unmetRequirements['answered<xsl:value-of select="if (*/@required = 'required') then 'basic' else */@required" />']++;
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="requirement[@level] | if//requirement[@level]">
+					unmetRequirements['answered<xsl:value-of select="@level" />']++;
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+	} else if (<xsl:value-of select="concat($model, '.', @id, 'Status() === ''required''')" />) {
+		unmetRequirements['basic']++;
+	} else if (<xsl:value-of select="concat($model, '.', @id, 'Status() !== ''optional''')" />) {
+		unmetRequirements[<xsl:value-of select="concat($model, '.', @id, 'Status()')" />]++;
+	}
 	<xsl:apply-templates mode="unmetRequirements" />
 </xsl:template>
 
@@ -852,7 +962,7 @@
 			<xsl:for-each select="$options/requirement[@level = $level]">
 				<p class="improvement">
 					<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
-						<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+						<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 					</a>
 					<span class="improvement-desc">
 						<xsl:apply-templates />
@@ -875,7 +985,7 @@
 				</xsl:choose>
 			</xsl:attribute>
 			<a class="improvement-label" href="#{ancestor::question/@id}" data-toggle="tab" data-target="#{ancestor::group[last()]/@id}">
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 			</a>
 			<span class="improvement-desc">
 				<xsl:apply-templates />
@@ -893,7 +1003,7 @@
 				<xsl:value-of select="concat('!', ancestor::question/@id, local:capitalise(../@value), '()')" />
 			</xsl:attribute>
 			<a class="improvement-label" href="#{ancestor::question/@id}">
-				<span class="label label-{@level}"><i class="icon-star icon-white"></i> <xsl:value-of select="local:capitalise(@level)" /></span>
+				<span class="label label-{@level}"><i class="icon-star icon-white"></i></span>
 			</a>
 			<span class="improvement-desc">
 				<xsl:apply-templates />

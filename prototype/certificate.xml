@@ -4,8 +4,8 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
-<questionnaire version="0.5">
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
 		<level id="pilot">This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.</level>
@@ -60,7 +60,7 @@
 			</option>
 		</radioset>
 	</question>
-	<group id="legal" jurisdiction="UK">
+	<group id="legal">
 		<label>Legal Information</label>
 		<group id="ownership">
 			<label>Rights</label>
@@ -162,7 +162,7 @@
 			<help>giving other people permission to reuse the data</help>
 			<question id="copyrightURL">
 				<label>Where is your copyright statement?</label>
-				<input type="url" />
+				<input type="url" placeholder="Copyright Statement URL" />
 				<help>A copyright statement states who owns the copyright and database rights in the data, and it says what you are allowing reusers can do with that data, usually by indicating its licence. We are asking where it is to check that you have one, to point reusers to it, and so we can automatically find out more about the terms under which you're making the data available.</help>
 				<requirement level="pilot">You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.</requirement>
 			</question>
@@ -248,12 +248,12 @@
 			<if test="this.dataLicence() === 'other'">
 				<question id="otherDataLicenceName">
 					<label>What's the name of the licence?</label>
-					<input required="required" />
+					<input required="required" placeholder="Other Licence Name" />
 					<help>If you are using another licence, we ask for its name so that we can refer to it within the Open Data Certificate.</help>
 				</question>
 				<question id="otherDataLicenceURL">
 					<label>What's the location the licence?</label>
-					<input type="url" required="required" />
+					<input type="url" required="required" placeholder="Other Licence URL" />
 					<help>If you are using another licence, we ask for a pointer to it so that we can link to it from within your Open Data Certificate and so that we can check that it is publicly accessible.</help>
 				</question>
 				<question id="otherDataLicenceOpen">
@@ -607,15 +607,15 @@
 						<option value="minimal">
 							<label>there are minimal guarantees about the availability of the service</label>
 						</option>
-						<option value="99%">
+						<option value="99">
 							<label>at least 99% availability</label>
 							<requirement level="pilot">You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
-						<option value="99.9%">
+						<option value="99.9">
 							<label>at least 99.9% availability</label>
 							<requirement level="standard">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
-						<option value="99.999%">
+						<option value="99.999">
 							<label>at least 99.999% availability</label>
 							<requirement level="exemplar">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
@@ -647,7 +647,7 @@
 	</group>
 	<group id="technical">
 		<label>Technical Information</label>
-		<if test="this.releaseType() !== ''">
+		<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'series' || this.releaseType() === 'service' || this.changeFeed() === 'true'">
 			<group id="locations">
 				<label>Locations</label>
 				<help>helping reusers to access the data</help>
@@ -684,7 +684,7 @@
 								<requirement level="standard">You should have a document or feed that provides a list of all the available releases so that reusers can create scripts to download all of them.</requirement>
 							</option>
 						</checkboxset>
-						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagementStatus() !== 'complete'">
+						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
 							<requirement>You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.</requirement>
 						</if>
 					</question>
@@ -1058,7 +1058,7 @@
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceDocumentation">
 					<label>Where is the documentation for the API?</label>
-					<input type="url" />
+					<input type="url" placeholder="Service Documentation URL" />
 					<requirement level="pilot">You should provide documentation about how the API works so that reusers can find out how to use it.</requirement>
 				</question>
 			</if>
@@ -1070,7 +1070,7 @@
 			<if test="this.vocabulary() === 'true'">
 				<question id="schemaDocumentationUrl">
 					<label>Where is the documentation for the vocabularies?</label>
-					<input type="url" />
+					<input type="url" placeholder="Schema Documentation URL" />
 					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>
@@ -1082,7 +1082,7 @@
 			<if test="this.codelists() === 'true'">
 				<question id="codelistDocumentationUrl">
 					<label>Where are the codes documented?</label>
-					<input type="url" />
+					<input type="url" placeholder="Codelist Documentation URL" />
 					<requirement level="standard">You should provide documentation for the codes used within your data so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>
@@ -1171,7 +1171,7 @@
 			</if>
 		</section>
 		<!--
-	<group id="legal" jurisdiction="UK">
+	<group id="legal">
 		<label>Legal Information</label>
 		<group id="ownership">
 			<label>Rights</label>

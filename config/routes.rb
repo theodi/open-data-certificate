@@ -6,9 +6,11 @@ OpenDataCertificate::Application.routes.draw do
     match '/:response_set_code/requirements', :to      => 'surveyor#requirements', :as   => 'view_my_survey_requirements', :via    => :get
   end
 
-  root :to => "datasets#new"
+  root :to => "datasets#index"
 
-  resources :datasets
+  resources :datasets do
+    put 'start_questionnaire'
+  end
 
   devise_for :users
 
