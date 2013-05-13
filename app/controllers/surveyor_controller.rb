@@ -51,6 +51,32 @@ class SurveyorController < ApplicationController
     end
   end
 
+  def attained_level
+    set_response_set_and_render_context
+    if @response_set
+      respond_to do |format|
+        format.html
+        format.json { @response_set.attained_level.to_json }
+      end
+    else
+      flash[:notice] = t('surveyor.unable_to_find_your_responses')
+      redirect_to surveyor_index
+    end
+  end
+
+  def requirements
+    set_response_set_and_render_context
+    if @response_set
+      respond_to do |format|
+        format.html
+        format.json { @response_set.outstanding_requirements.to_json }
+      end
+    else
+      flash[:notice] = t('surveyor.unable_to_find_your_responses')
+      redirect_to surveyor_index
+    end
+  end
+
   private
   def all_mandatory_questions_complete?
     #@response_set.reload

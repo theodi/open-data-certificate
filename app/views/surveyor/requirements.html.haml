@@ -1,0 +1,6 @@
+%div
+  %ul
+    - @response_set.outstanding_requirements.each do |requirement|
+      %li
+        = requirement.requirement_level
+        = requirement.text
