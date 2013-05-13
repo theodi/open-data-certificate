@@ -2,6 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  start_new_certification: Start new Certification
+  choose_legislation: choose legislation
+
   alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:

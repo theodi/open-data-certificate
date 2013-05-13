@@ -5,12 +5,17 @@
   %h1 Dataset#show
 
   = form_for @dataset, :url => dataset_start_questionnaire_path(@dataset) do |f|
-    = f.submit "Start new Questionnaire"
+    = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map(&:access_code)))
+    = f.submit t(:start_new_certification)
 
   %ul
     - @dataset.response_sets.each do |rs|
       %li
-        = link_to "Questionnaire ##{rs.id}", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code)
+        = "#{rs.id}: #{rs.survey.access_code}"
+        - if rs.complete?
+          = link_to("show", surveyor.view_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
+        - else
+          = link_to("edit", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
 
   / =render 'form'
 
