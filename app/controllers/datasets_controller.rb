@@ -25,7 +25,7 @@ class DatasetsController < ApplicationController
 
   def show
     @dataset = Dataset.find params[:id]
-    @surveys = Survey.order("title DESC, survey_version DESC").all.group_by(&:access_code).map{|k,v| v.first}
+    @surveys = Survey.available_to_complete
 
     if @dataset.user.nil? && user_signed_in?
       # give the unclaimed dataset to the user
