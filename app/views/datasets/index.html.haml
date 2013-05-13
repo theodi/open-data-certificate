@@ -4,3 +4,7 @@
 
   %ul
     = render partial: 'datasets/dataset', collection: @datasets
+
+  %hr
+  = form_for Dataset.new do |f|
+    = f.submit "Add Dataset", class: 'btn btn-primary btn-large'
