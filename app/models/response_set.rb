@@ -6,11 +6,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def triggered_mandatory_questions
-    self.survey.mandatory_questions.select{|q|q.triggered?(self)}
+    @triggered_mandatory_questions ||= self.survey.mandatory_questions.select{|q|q.triggered?(self)}
   end
 
   def triggered_requirements
-    survey.requirements.select{|r|r.triggered?(self)}
+    @triggered_requirements ||= survey.requirements.select{|r|r.triggered?(self)}
   end
 
   def attained_level
@@ -18,11 +18,15 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def minimum_attained_requirement_level
-    ((triggered_requirements - completed_requirements).map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size-1).min
+    (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size-1).min
   end
 
   def completed_requirements
-    triggered_requirements.select{|r|r.requirement_met_by_responses?(self.responses)}
+    @completed_requirements ||= triggered_requirements.select{|r|r.requirement_met_by_responses?(self.responses)}
+  end
+
+  def outstanding_requirements
+    triggered_requirements - completed_requirements
   end
 
 end

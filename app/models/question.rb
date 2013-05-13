@@ -11,18 +11,18 @@ class Question < ActiveRecord::Base
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
     #             and outstanding requirements, and for the display customisation of questions.
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
-    requirement.to_s.match(/^[a-zA-Z]*/).to_s
+    @requirement_level ||= requirement.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
   def requirement_level_index
-    Survey::REQUIREMENT_LEVELS.index(requirement_level)
+    @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end
 
   def is_a_requirement?
     # Definition: A 'Requirement' is an bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
     #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
     #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
-    display_type == 'label' && !requirement.blank?
+    @is_a_requirement ||= display_type == 'label' && !requirement.blank?
   end
 
   def question_corresponding_to_requirement
@@ -36,11 +36,15 @@ class Question < ActiveRecord::Base
   def requirement_met_by_responses?(responses)
     # could use thusly to get all the displayed requirements for a survey and whether they have been met by their corresponding answers:
     #   `response_set.survey.questions.flatten.select{|e|e.is_a_requirement? && e.triggered?(response_set)}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
+    @requirement_met_by_responses ||= calculate_if_requirement_met_by_responses(responses)
+  end
 
+  private
+  def calculate_if_requirement_met_by_responses(responses)
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
 
     responses_requirements = responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index) # TODO: Refactor this... it's too long and too stinky
-    !!(responses_requirements.max && (responses_requirements.max >= Survey::REQUIREMENT_LEVELS.index(self.requirement_level)))
+    !!(responses_requirements.max && (responses_requirements.max >= requirement_level_index))
   end
 
   private

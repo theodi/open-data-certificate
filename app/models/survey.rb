@@ -4,15 +4,15 @@ class Survey < ActiveRecord::Base
   REQUIREMENT_LEVELS = %w(basic pilot standard exemplar)
 
   def questions
-    sections.map(&:questions).flatten
+    @requirements ||= sections.map(&:questions).flatten
   end
 
   def requirements
-    questions.select(&:is_a_requirement?)
+    @requirements ||= questions.select(&:is_a_requirement?)
   end
 
   def mandatory_questions
-    sections.map{|s| s.questions.where(:is_mandatory => true)}.flatten
+    @mandatory_questions ||= sections.map{|s| s.questions.where(:is_mandatory => true)}.flatten
   end
 
   def valid?(context = nil)
