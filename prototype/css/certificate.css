@@ -45,8 +45,24 @@ a:hover #status-banner {
 	text-align: center;
 }
 
+#status-banner .pilot {
+	color: peru;
+}
+
+#status-banner .standard {
+	color: silver;
+}
+
+#status-banner .exemplar {
+	color: gold;
+}
+
+#status-banner p small {
+	color: white;
+}
+
 body {
-	margin-top: 160px; /* give room for the alpha banner and status banner */
+	margin-top: 152px; /* give room for the alpha banner and status banner */
 }
 
 #questionnaire .control-group.focus {
@@ -144,6 +160,10 @@ body {
 	display: block;
 	font-size: 0.9em;
 	line-height: 1.2em;
+}
+
+.improvement-desc strong {
+	color: white;
 }
 
 .levels {

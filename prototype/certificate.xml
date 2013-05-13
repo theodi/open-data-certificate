@@ -4,7 +4,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
 <questionnaire version="0.5" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
@@ -23,10 +23,10 @@
 		<input type="url" placeholder="Documentation URL"/>
 		<help>This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it's useful for reusers to know about it, and because if it's written well then we can fill in a lot of things in this questionnaire based on the information within that page.</help>
 		<if test="this.releaseType() !== 'collection'">
-			<requirement level="pilot">You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.</requirement>
+			<requirement level="pilot">You should <strong>have a page that provides documentation</strong> about the open data you are publishing so that reusers can understand its context, content and utility.</requirement>
 		</if>
 		<if test="this.releaseType() === 'collection'">
-			<requirement test="this.documentationUrl() !== ''">You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.</requirement>
+			<requirement test="this.documentationUrl() !== ''">You must <strong>have a page that provides documentation</strong> and access to the open data you are publishing so that reusers can get hold of it.</requirement>
 		</if>
 	</question>
 	<question id="publisher">
@@ -80,7 +80,7 @@
 				</radioset>
 				<help>Unless all the data was originally created or gathered by your organisation, you might not have the right to republish it. We ask this question to check that you have considered the ownership of the data. If you aren't sure, we will ask further questions about the source of the data you're publishing to find out.</help>
 				<if test="this.publisherRights() === 'no'">
-					<requirement>You must have the right to publish data that you publish.</requirement>
+					<requirement>You must <strong>have the right to publish data</strong> that you publish.</requirement>
 				</if>
 			</question>
 			<if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
@@ -106,7 +106,7 @@
 							<yesno required="required" />
 							<help>Open data is data that has been published under an open data licence or where the rights over that data have expired or been waived. If your data is created based on other data that is published as open data, then you can republish it. If your data incorporates data that is not published as open data, you will need to get legal advice to ensure that you can reuse that data and republish the results.</help>
 							<if test="this.thirdPartyOpen() === 'false'">
-								<requirement>You should get legal advice to ensure that you have the right to republish this data.</requirement>
+								<requirement>You must <strong>get legal advice to ensure that you have the right to republish this data</strong>.</requirement>
 							</if>
 						</question>
 					</if>
@@ -134,7 +134,7 @@
 								<label>Have all contributors agreed to the CLA?</label>
 								<yesno required="required" />
 								<help>All contributors need to agree to a Contributor Licence Agreement (CLA) so that you can reuse or republish their contributions. You should keep a record of who has provided contributions and whether or not they have agreed to the CLA.</help>
-								<requirement>You must obtain agreement to a Contributor Licence Agreement from the contributors to your data to give you the right to republish their contributions as open data.</requirement>
+								<requirement>You must <strong>obtain agreement to a Contributor Licence Agreement from the contributors to your data</strong> to give you the right to republish their contributions as open data.</requirement>
 							</question>
 						</if>
 					</if>
@@ -145,14 +145,14 @@
 					<label>Where do you describe the sources of the data?</label>
 					<input type="url" placeholder="Data Sources Documentation URL" />
 					<help>If not all the data was originally created or gathered by you then even if you have the rights to publish it, it is good practice to document where the data was sourced from (its provenance) and the rights under which you are publishing the data.</help>
-					<requirement level="pilot">You should document where the data was sourced from and the rights under which you are publishing the data so reusers are assured that they can reuse the parts sourced from third parties.</requirement>
+					<requirement level="pilot">You should <strong>document where the data was sourced from</strong> and the rights under which you are publishing the data so reusers are assured that they can reuse the parts sourced from third parties.</requirement>
 				</question>
 				<if test="this.sourceDocumentationUrl() !== ''">
 					<question id="sourceDocumentationMetadata">
 						<label>Does the documentation about the sources of the data include machine-readable data?</label>
 						<yesno />
 						<help>The documentation about the sources of the data needs to be human-readable, so that reusers can work out what it says, but it also helps if it contains machine-readable metadata. This helps those people who publish open data to find out how their data is being used, which helps them to justify its ongoing publication.</help>
-						<requirement level="standard">You should include machine-readable data about the sources of data that you're using.</requirement>
+						<requirement level="standard">You should <strong>include machine-readable data about the sources</strong> of data that you're using.</requirement>
 					</question>
 				</if>
 			</if>
@@ -164,7 +164,7 @@
 				<label>Where is your copyright statement?</label>
 				<input type="url" placeholder="Copyright Statement URL" />
 				<help>A copyright statement states who owns the copyright and database rights in the data, and it says what you are allowing reusers can do with that data, usually by indicating its licence. We are asking where it is to check that you have one, to point reusers to it, and so we can automatically find out more about the terms under which you're making the data available.</help>
-				<requirement level="pilot">You should have a page that states your copyright over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.</requirement>
+				<requirement level="pilot">You should <strong>have a page that states your copyright</strong> over the data and provides details of any attribution that people should use so that reusers understand how they can reuse it.</requirement>
 			</question>
 			<if test="this.copyrightURL() !== ''">
 				<question id="copyrightStatementMetadata">
@@ -173,15 +173,15 @@
 					<checkboxset>
 						<option value="license">
 							<label>licences</label>
-							<requirement level="standard">You should provide machine-readable data in your copyright statement about the licences that should be used when the data is reused so that automated tools can flag the data as open data.</requirement>
+							<requirement level="standard">You should <strong>provide machine-readable data in your copyright statement about the licences</strong> that should be used when the data is reused so that automated tools can flag the data as open data.</requirement>
 						</option>
 						<option value="attribution">
 							<label>attribution</label>
-							<requirement level="exemplar">You should provide machine-readable data in your copyright statement about the attribution that should be used when the data is reused so that automated tools can use the information.</requirement>
+							<requirement level="exemplar">You should <strong>provide machine-readable data in your copyright statement about the attribution</strong> that should be used when the data is reused so that automated tools can use the information.</requirement>
 						</option>
 						<option value="attributionURL">
 							<label>attribution URL</label>
-							<requirement level="exemplar">You should provide machine-readable data in your copyright statement about the URL that should be linked to when the data is reused so that automated tools can use the information.</requirement>
+							<requirement level="exemplar">You should <strong>provide machine-readable data in your copyright statement about the URL that should be linked to</strong> when the data is reused so that automated tools can use the information.</requirement>
 						</option>
 						<option value="morePermissions">
 							<label>additional permissions or alternative licences</label>
@@ -260,7 +260,7 @@
 					<label>Is the licence an open licence?</label>
 					<yesno required="required" />
 					<help more="http://opendefinition.org/">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet been assessed.</help>
-					<requirement>You must publish open data under an open licence so that others can reuse it.</requirement>
+					<requirement>You must <strong>publish open data under an open licence</strong> so that others can reuse it.</requirement>
 				</question>
 			</if>
 			<question id="contentLicence">
@@ -328,7 +328,7 @@
 					<label>Is the licence an open licence?</label>
 					<yesno required="required" />
 					<help more="http://opendefinition.org/">The <a href="http://opendefinition.org/">Open Knowledge Definition</a> defines what an open data licence is and the <a href="">Open Definition Advisory Board</a> maintain a list of <a href="http://licenses.opendefinition.org/">open licences</a>. If the licence is not given in that list, it it is either not open or hasn't yet been assessed.</help>
-					<requirement>You must publish open data under an open licence so that others can reuse it.</requirement>
+					<requirement>You must <strong>publish open data under an open licence</strong> so that others can reuse it.</requirement>
 				</question>
 			</if>
 		</group>
@@ -336,63 +336,101 @@
 			<label>Privacy</label>
 			<help>ensuring that you protect people's privacy</help>
 			<question id="dataPersonal">
-				<label>Could the source of this data be personal data under the Data Protection Act?</label>
+				<label>Could individuals be identified from this data?</label>
 				<radioset required="pilot">
 					<option value="not-personal">
-						<label>no, the data could never be personal data as it is not about people or their activity</label>
-						<help>Data that is about the activity of people can be personal data if there's the potential for it to be combined with other data to identify individuals. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.</help>
+						<label>no, the data is not about people or their activities</label>
+						<help>Data does not have to be directly about individuals to enable people to be identified: anything about people's activities can be used to identify them if it's combined with other data. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.</help>
 					</option>
-					<option value="personal">
-						<label>yes, the source of this data is classified as personal data within your organisation</label>
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. If your organisation has other information that can be used to identify the individuals in the source of this data, then it must be classified as personal data within your organisation.</help>
+					<option value="summarised">
+						<label>no, the data has been summarised so individuals can't be identified</label>
+						<help>Data that is about individual people can be summarised using statistical analyses, so that individuals can no longer be identified.</help>
 					</option>
-					<option value="possibly">
-						<label>yes, the source of this data could be classified as personal data if held by other people who have access to additional information</label>
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/key_definitions">Personal data is data that relates to a living individual who can be identified from the data or from the data in combination with other information. Even if your organisation doesn't have other information that could be used to identify the individuals in the source of this data, it may be that other people do have access to such information.</help>
+					<option value="individual">
+						<label>yes, individuals <em>could</em> potentially be identified, for example by third parties with access to additional information</label>
+						<help>You might be publishing data that is intended to provide information about individuals, such as civil service pay. Even if you are not, it is seldom possible to completely guarantee that individuals cannot be identified from data about them.</help>
 					</option>
 				</radioset>
 			</question>
-			<if test="this.dataPersonal() === 'personal' || this.dataPersonal() === 'possibly'">
-				<question id="consentExempt">
-					<label>Is this data exempt from the non-disclosure provisions of the Data Protection Act?</label>
-					<yesno required="pilot" />
-					<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/exemptions">There are exemptions from the non-disclosure provisions of the Data Protection Act, which mean that organisations do not have to comply with the normal non-disclosure provisions.</help>
+			<if test="this.dataPersonal() === 'summarised'">
+				<question id="statisticalAnonAudited">
+					<label>Has your anonymisation approach been independently audited?</label>
+					<yesno />
+					<requirement level="standard">You should <strong>arrange an independent audit of your anonymisation approach</strong> to ensure that you have used an appropriate statistical method to reduce the risk of re-identification.</requirement>
 				</question>
-				<if test="this.consentExempt() === 'false'">
-					<question id="privacyImpactAssessmentUrl">
-						<label>Where is your privacy impact assessment published?</label>
-						<input type="url" placeholder="Privacy Impact Assessment URL"/>
-						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information. We ask where it is published because this enables us to check that it exists.</help>
-						<requirement level="pilot">You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
+			</if>
+			<if test="this.dataPersonal() === 'individual'">
+				<question id="appliedAnon">
+					<label>Have you attempted to reduce or remove the possibility of re-identification?</label>
+					<yesno required="pilot" />
+				</question>
+				<if test="this.appliedAnon() === 'false'">
+					<question id="lawfulDisclosure">
+						<label>Are you required by law to publish this personal data?</label>
+						<yesno />
+						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>.</requirement>
 					</question>
-					<if test="this.privacyImpactAssessmentUrl() !== ''">
-						<question id="piaAudited">
-							<label>Has your Privacy Impact Assessment been independently audited?</label>
-							<yesno />
-							<help>An independent audit of a privacy impact assessment will check that the assessment has been carried out correctly. We ask if it has been independently audited to assess the rigour of the privacy impact assessment.</help>
-							<requirement level="standard">You should have your privacy impact assessment independently audited to ensure that it has been carried out correctly.</requirement>
+					<if test="this.lawfulDisclosure() === 'true'">
+						<question id="lawfulDisclosureURL">
+							<label>Where is your right to publish data about individuals documented?</label>
+							<input type="url" placeholder="Disclosure Rationale URL" />
+							<requirement level="standard">You should <strong>document your right to publish data about individuals</strong>, both for those affected by the disclosure and for reusers.</requirement>
 						</question>
 					</if>
-					<question id="individualConsentURL">
-						<label>Where is the privacy notice you provide to affected individuals published?</label>
-						<input type="url" placeholder="Privacy Notice URL" />
-						<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">Unless you are exempt from the non-disclosure provisions of the Data Protection Act, you are required to give individuals privacy notices when collecting data about them, which should specify the purposes for which that data will be used. We ask where these are because reusers need to be able to look at them so that they can stick within the confines of the Data Protection Act when they are handling the data.</help>
-						<requirement level="pilot">You should inform potential reusers about the purposes of processing personal data which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.</requirement>
-					</question>
-					<question id="personalDataAnonymisation">
-						<label>Has your anonymisation approach been audited?</label>
-						<yesno />
-						<help>An audit of your anonymisation approach will ensure that you have carried out the appropriate anonymisation technique for your data, and carried it out effectively. This can be done by a specialist within your organisation or an independent third party.</help>
-						<requirement level="pilot">You should engage an expert to audit your anonymisation approach to ensure that it is appropriate for your data.</requirement>
-					</question>
 				</if>
-				<if test="this.consentExempt() === 'true'">
-					<question id="privacyImpactAssessment">
-						<label>Have you carried out a privacy impact assessment?</label>
+				<if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
+					<question id="privacyImpactAssessmentExists">
+						<label>Have you carried out a Privacy Impact Assessment?</label>
 						<yesno />
-						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information. Even if you are exempt from the non-disclosure provisions of the Data Protection Act, you should carry out a privacy impact assessment so that you are aware of the possible risks of making the data open. We do not expect you to publish this privacy impact assessment because it might contain sensitive information about the risks that you are prepared to take.</help>
-						<requirement level="standard">You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.</requirement>
+						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.</help>
+						<requirement level="pilot">You should <strong>carry out a Privacy Impact Assessment</strong> if you are publishing data about individuals.</requirement>
 					</question>
+					<if test="this.privacyImpactAssessmentExists() === 'true'">
+						<question id="privacyImpactAssessmentUrl">
+							<label>Where is your privacy impact assessment published?</label>
+							<input type="url" placeholder="Privacy Impact Assessment URL"/>
+							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">ICO recommend publishing your Privacy Impact Assessment (summarised or with suitable redactions to prevent disclosure of sensitive information). We ask where it is published because this enables us to check that it exists.</help>
+							<requirement level="standard">You should <strong>publish your privacy impact assessment</strong> so that reusers and other interested parties can understand how you have assessed the risks of disclosure.</requirement>
+						</question>
+						<if test="this.privacyImpactAssessmentUrl() !== ''">
+							<question id="piaAudited">
+								<label>Has your Privacy Impact Assessment been independently audited?</label>
+								<yesno />
+								<help>An independent audit of a privacy impact assessment will check that the assessment has been carried out correctly. We ask if it has been independently audited to assess the rigour of the privacy impact assessment.</help>
+								<requirement level="standard">You should <strong>have your privacy impact assessment independently audited</strong> to ensure that it has been carried out correctly.</requirement>
+							</question>
+						</if>
+						<question id="individualConsentURL">
+							<label>Where is the privacy notice you provide to affected individuals published?</label>
+							<input type="url" placeholder="Privacy Notice URL" />
+							<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals, you must tell them how that data will be used, in a privacy notice. We ask where this is published because reusers need to be able to look at them so that they can comply with the Data Protection Act when they are handling the data.</help>
+							<requirement level="pilot">You should <strong>inform potential reusers about the purposes of processing personal data</strong> which individuals were informed of, so that reusers can comply with the Data Protection Act and use the data consistently with that consent.</requirement>
+						</question>
+						<question id="riskAssessment">
+							<label>Have you fully assessed the risks of re-identification?</label>
+							<yesno />
+							<requirement level="pilot">You should <strong>fully assess the risks of re-identification</strong> from the data that you are publishing, to avoid breaching individuals' privacy.</requirement>
+						</question>
+						<if test="this.riskAssessment() === 'true'">
+							<question id="anonymisationAudited">
+								<label>Has your anonymisation approach been independently audited?</label>
+								<yesno />
+								<help>An audit of your anonymisation approach will ensure that you have carried out the appropriate anonymisation technique for your data, and carried it out effectively. This can be done by a specialist within your organisation or an independent third party.</help>
+								<requirement level="standard">You should <strong>engage an expert to audit your anonymisation approach</strong> to ensure that it is appropriate for your data.</requirement>
+							</question>
+						</if>
+						<question id="dpStaff">
+							<label>Is there a member of staff in your organisation responsible for data protection?</label>
+							<yesno required="pilot" />
+						</question>
+						<if test="this.dpStaff() === 'true'">
+							<question id="dbStaffConsulted">
+								<label>Have you involved them in assessing this publication?</label>
+								<yesno />
+								<requirement level="pilot">You should <strong>consult with the member of staff in your organisation who is responsible for data protection</strong> before publishing this data.</requirement>
+							</question>
+						</if>
+					</if>
 				</if>
 			</if>
 		</group>
@@ -406,13 +444,13 @@
 				<label>Is documentation about the data findable within three clicks of your organisation's home page?</label>
 				<yesno />
 				<help>The documentation about the data that should be findable is the page that you have given as the Documentation URL. This should be findable by clicking on links from the home page of your organisation (not through searching).</help>
-				<requirement level="standard">You should ensure that reusers can easily find your data from your organisation's home page.</requirement>
+				<requirement level="standard">You should <strong>ensure that reusers can easily find your data</strong> from your organisation's home page.</requirement>
 			</question>
 			<question id="listed">
 				<label>Is the data listed somewhere, alongside data from the wider sector?</label>
 				<yesno />
 				<help>You can make your data easier to find by making sure that it is listed within relevant data catalogs and by ensuring it turns up in relevant search results.</help>
-				<requirement level="standard">You should ensure that reusers can locate your data through searching for it in locations that list available data.</requirement>
+				<requirement level="standard">You should <strong>ensure that reusers can locate your data through searching for it</strong> in locations that list available data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
 				<repeat id="listings">
@@ -454,12 +492,12 @@
 						<option value="timestamped">
 							<label>yes, this data will go out of date over time but the data is timestamped</label>
 							<help>For example, demography statistics usually include a timestamp to indicate the time at which the statistics were relevant.</help>
-							<requirement level="pilot">You should include timestamps in your data when releasing data that will go out of date over time, so that reusers know the time period it relates to.</requirement>
+							<requirement level="pilot">You should <strong>include timestamps in your data when releasing data that will go out of date</strong> over time, so that reusers know the time period it relates to.</requirement>
 						</option>
 						<option value="false">
 							<label>no, this data does not contain any time-sensitive information</label>
 							<help>For example, a dataset that contains the results of an experiment will not go out of date because the data accurately reports the results of the experiment.</help>
-							<requirement level="standard">You should publish updates to data that goes out of date so that the information you provide does not go stale.</requirement>
+							<requirement level="standard">You should <strong>publish updates</strong> to data that goes out of date so that the information you provide does not go stale.</requirement>
 						</option>
 					</radioset>
 				</question>
@@ -489,7 +527,7 @@
 							<label>Is a feed of changes made available?</label>
 							<yesno />
 							<help>Indicate whether you make available a feed of the changes that occur to the data that you capture, such as new entries or amendments to existing entries. A feed might be in a format such as RSS or Atom, or a custom data format.</help>
-							<requirement level="exemplar">You should provide a feed of changes in your data so that it's easy for reusers to keep their copies up to date.</requirement>
+							<requirement level="exemplar">You should <strong>provide a feed of changes</strong> in your data so that it's easy for reusers to keep their copies up to date.</requirement>
 						</question>
 					</if>
 					<question id="frequentSeriesPublication">
@@ -500,15 +538,15 @@
 							</option>
 							<option value="monthly">
 								<label>at least every month</label>
-								<requirement level="pilot">You should create a new dataset release every month so that reusers can access up-to-date information.</requirement>
+								<requirement level="pilot">You should <strong>create a new dataset release every month</strong> so that reusers can access up-to-date information.</requirement>
 							</option>
 							<option value="weekly">
 								<label>at least every week</label>
-								<requirement level="standard">You should create a new dataset release every week so that reusers can access up-to-date information.</requirement>
+								<requirement level="standard">You should <strong>create a new dataset release every week</strong> so that reusers can access up-to-date information.</requirement>
 							</option>
 							<option value="daily">
 								<label>at least every day</label>
-								<requirement level="exemplar">You should create a new dataset release every day so that reusers can access up-to-date information.</requirement>
+								<requirement level="exemplar">You should <strong>create a new dataset release every day</strong> so that reusers can access up-to-date information.</requirement>
 							</option>
 						</radioset>
 						<help>We ask about the frequency with which you publish new datasets in the series because this determines how out of date the data that you are making available will get before reusers can get an update to their data.</help>
@@ -524,17 +562,17 @@
 						<option value="reasonable">
 							<label>about the same as the gap between releases</label>
 							<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes about a day for the dataset to then be published.</help>
-							<requirement level="pilot">You should have a delay between creating and publishing a dataset that is less than the gap between releases so that reusers can access up-to-date information.</requirement>
+							<requirement level="pilot">You should <strong>have a reasonable delay between creating and publishing</strong> a dataset that is less than the gap between releases so that reusers can access up-to-date information.</requirement>
 						</option>
 						<option value="good">
 							<label>less than half the gap between releases</label>
 							<help>For example, if you are creating a new version of the dataset every day, then choose this option if it takes less than twelve hours for the data to then be published.</help>
-							<requirement level="standard">You should have a delay between creating and publishing a dataset that is less than half the gap between releases so that reusers can access up-to-date information.</requirement>
+							<requirement level="standard">You should <strong>have a short delay between creating and publishing</strong> a dataset that is less than half the gap between releases so that reusers can access up-to-date information.</requirement>
 						</option>
 						<option value="minimal">
 							<label>there is minimal or no delay</label>
 							<help>Choose this option if the delay is in the order of a few seconds if the datasets are created frequently, or a few minutes if they are made less frequently.</help>
-							<requirement level="exemplar">You should have minimal or no delay between creating and publishing datasets so that reusers can access up-to-date information.</requirement>
+							<requirement level="exemplar">You should <strong>have minimal or no delay between creating and publishing</strong> datasets so that reusers can access up-to-date information.</requirement>
 						</option>
 					</radioset>
 				</question>
@@ -544,7 +582,7 @@
 					<label>Do you also provide dumps of the dataset?</label>
 					<yesno />
 					<help>A dump is an extract of the data into a static file that developers can download to get hold of the whole dataset. Being able to access a dump of the whole dataset enables different kinds of analyses than API access.</help>
-					<requirement level="standard">You should enable reusers to download the entire dataset so that they can analyse it in its entirety.</requirement>
+					<requirement level="standard">You should <strong>enable reusers to download the entire dataset</strong> so that they can analyse it in its entirety.</requirement>
 				</question>
 				<if test="this.serviceType() === 'changing'">
 					<if test="this.provideDumps() === 'true'">
@@ -556,15 +594,15 @@
 								</option>
 								<option value="monthly">
 									<label>at least every month</label>
-									<requirement level="pilot">You should create a new database dump every month, so that new reusers can get hold of an up-to-date dump.</requirement>
+									<requirement level="pilot">You should <strong>create a new database dump every month</strong>, so that new reusers can get hold of an up-to-date dump.</requirement>
 								</option>
 								<option value="weekly">
 									<label>within a week of any change</label>
-									<requirement level="standard">You should create a new database dump within a week of any change, so that new reusers do not have long to wait for an up-to-date dump.</requirement>
+									<requirement level="standard">You should <strong>create a new database dump within a week of any change</strong>, so that new reusers do not have long to wait for an up-to-date dump.</requirement>
 								</option>
 								<option value="daily">
 									<label>within a day of any change</label>
-									<requirement level="exemplar">You should create a new database dump within a day of any change, so that new reusers can easily get hold of an up-to-date dump.</requirement>
+									<requirement level="exemplar">You should <strong>create a new database dump within a day of any change</strong>, so that new reusers can easily get hold of an up-to-date dump.</requirement>
 								</option>
 							</radioset>
 							<help>Providing new database dumps within a short period ensures that new developers can get started with up-to-date data whenever they start looking at the data.</help>
@@ -576,7 +614,7 @@
 						<label>Will this data be corrected if it contains errors?</label>
 						<yesno />
 						<help>Indicate whether the data will be corrected in cases where errors are discovered within the data. We ask this because it is good practice to correct data that is revealed to contain errors (especially as you should be using this data yourself), and because if you do correct the data you need to provide additional support for reusers who will need to be informed of these corrections.</help>
-						<requirement level="standard">You should correct data that is found to contain errors so that all users benefit from improvements in accuracy.</requirement>
+						<requirement level="standard">You should <strong>correct data that is found to contain errors</strong> so that all users benefit from improvements in accuracy.</requirement>
 					</question>
 				</if>
 			</if>
@@ -588,13 +626,13 @@
 				<label>Where are known issues with the quality of the data documented?</label>
 				<input type="url" placeholder="Quality Issues URL" />
 				<help>There are usually areas within any non-trivial data where there are known quality problems. For example, maybe the equipment that collected the data malfunctioned for a day, or the data was migrated between two systems and errors crept in during that migration. Documenting these helps reusers to have a better understanding of the data that they are using.</help>
-				<requirement level="standard">You should document any known issues with the quality of the data so that reusers can understand how much they can rely on the data.</requirement>
+				<requirement level="standard">You should <strong>document any known issues with the quality of the data</strong> so that reusers can understand how much they can rely on the data.</requirement>
 			</question>
 			<question id="qualityControlUrl">
 				<label>Where is your quality control process described?</label>
 				<input type="url" placeholder="Quality Control Process Description URL" />
 				<help>A quality control process checks the quality of the data on an ongoing basis, either by hand or automatically, or through a combination of techniques. Having a publicly available description of your quality control process reassures reusers that you are checking the quality of the data that you are making available, and helps them to identify places that could be improved.</help>
-				<requirement level="exemplar">You should document your quality control process so that reusers can understand how much they can rely on the data.</requirement>
+				<requirement level="exemplar">You should <strong>document your quality control process</strong> so that reusers can understand how much they can rely on the data.</requirement>
 			</question>
 		</group>
 		<group id="guarantees">
@@ -609,15 +647,15 @@
 						</option>
 						<option value="99">
 							<label>at least 99% availability</label>
-							<requirement level="pilot">You should guarantee at least 99% availability (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.</requirement>
+							<requirement level="pilot">You should <strong>guarantee at least 99% availability</strong> (less than 3.65 days downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
 						<option value="99.9">
 							<label>at least 99.9% availability</label>
-							<requirement level="standard">You should guarantee at least 99.9% availability (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.</requirement>
+							<requirement level="standard">You should <strong>guarantee at least 99.9% availability</strong> (less than 8.76 hours downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
 						<option value="99.999">
 							<label>at least 99.999% availability</label>
-							<requirement level="exemplar">You should guarantee at least 99.999% availability (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.</requirement>
+							<requirement level="exemplar">You should <strong>guarantee at least 99.999% availability</strong> (less than 5.26 minutes downtime/year) of the service so that reusers know they can rely on it.</requirement>
 						</option>
 					</radioset>
 					<help>You will probably have in place a service-level agreement (SLA) with the service provider for the servers that you are using to host the data. These SLAs should indicate guaranteed up-time for the servers, and hence the availability of your data.</help>
@@ -631,15 +669,15 @@
 					</option>
 					<option value="short">
 						<label>this data is available experimentally but should be around for another year or so</label>
-						<requirement level="pilot">You should provide a guarantee to reusers that the data will be available in this form for about a year so that they know they can rely on it.</requirement>
+						<requirement level="pilot">You should <strong>provide a guarantee to reusers that the data will be available in this form for about a year</strong> so that they know they can rely on it.</requirement>
 					</option>
 					<option value="medium">
 						<label>this data is included in your medium-term plans and should therefore be around for a couple of years</label>
-						<requirement level="standard">You should provide a guarantee to reusers that the data will be available in this form in the medium term so that they know they can rely on it.</requirement>
+						<requirement level="standard">You should <strong>provide a guarantee to reusers that the data will be available in this form in the medium term</strong> so that they know they can rely on it.</requirement>
 					</option>
 					<option value="long">
 						<label>this data is part of your business-as-usual operation and will continue to be published long term</label>
-						<requirement level="exemplar">You should provide a guarantee to reusers that the data will be available in this form long term so that they know they can rely on it.</requirement>
+						<requirement level="exemplar">You should <strong>provide a guarantee to reusers that the data will be available in this form long term</strong> so that they know they can rely on it.</requirement>
 					</option>
 				</radioset>
 			</question>
@@ -657,10 +695,10 @@
 						<input type="url" placeholder="Dataset URL" />
 						<help>This should be the URL of the dataset itself (for example a CSV file). This is a different URL from the page that describes the dataset. We ask this to ensure that the dataset is available on the web, and that it can be linked to directly, as this helps reusers to access the data.</help>
 						<if test="this.documentationUrl() === ''">
-							<requirement test="this.datasetUrl() !== ''">You must provide either a URL for the dataset or a URL for documentation about it so that reusers can find it.</requirement>
+							<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL for the dataset or a URL for documentation about it</strong> so that reusers can find it.</requirement>
 						</if>
 						<if test="this.documentationUrl() !== ''">
-							<requirement test="this.datasetUrl() !== ''" level="pilot">You should have a URL that is a direct link to the data itself so that reusers can access it easily.</requirement>
+							<requirement test="this.datasetUrl() !== ''" level="pilot">You should <strong>have a URL that is a direct link to the data itself</strong> so that reusers can access it easily.</requirement>
 						</if>
 					</question>
 				</if>
@@ -671,21 +709,21 @@
 							<option value="current">
 								<label>the data at a single "current" dataset URL is regularly updated</label>
 								<help>Having a single "current" dataset URL means that there is one URL from which reusers can always download the most recent version of the dataset.</help>
-								<requirement level="standard">You should have a single URL that can always be used to download the current version of the dataset so that reusers can access it easily.</requirement>
+								<requirement level="standard">You should <strong>have a single URL that can always be used to download the current version</strong> of the dataset so that reusers can access it easily.</requirement>
 							</option>
 							<option value="template">
 								<label>the URLs for each release follow a regular pattern</label>
 								<help>Having URLs that follow a regular pattern means publishing datsets at URLs where the date of publication is part of the URL itself. For example, if you published a dataset each month then you would include the month (eg <code>2013-04</code>) as part of the URL. This helps reusers to understand when the dataset dates from, and helps them write scripts that collect together all the published datasets or fetch new ones each time they're released.</help>
-								<requirement level="pilot">You should use a regular pattern in the URLs for different releases so that reusers can easily get hold of each of those releases.</requirement>
+								<requirement level="pilot">You should <strong>use a regular pattern in the URLs for different releases</strong> so that reusers can easily get hold of each of those releases.</requirement>
 							</option>
 							<option value="list">
 								<label>you publish a list of the releases</label>
 								<help>Having a list of the releases means having a web page or a feed (such as Atom or RSS) that contains details of each release, including a link through to each individual release and a description of when it dates from. Reusers can use these lists to understand the frequency and regularity of your publication, and to help them write scripts that collect together all the published datasets or fetch new ones each time they're released.</help>
-								<requirement level="standard">You should have a document or feed that provides a list of all the available releases so that reusers can create scripts to download all of them.</requirement>
+								<requirement level="standard">You should <strong>have a document or feed that provides a list of all the available releases</strong> so that reusers can create scripts to download all of them.</requirement>
 							</option>
 						</checkboxset>
 						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
-							<requirement>You must provide access to releases of your data through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.</requirement>
+							<requirement>You must <strong>provide access to releases of your data</strong> through a current URL, a discoverable series of URLs or through a documentation page so that reusers can locate it.</requirement>
 						</if>
 					</question>
 					<if test="this.versionManagement().current">
@@ -716,10 +754,10 @@
 						<input type="url" placeholder="Endpoint URL" />
 						<help>This should be a URL that provides a starting point for scripts that access the API. If the API supports it, this should be a service description document, which enables the script to work out the kinds of services that are offered by the API.</help>
 						<if test="this.documentationUrl() === ''">
-							<requirement test="this.endpointUrl() !== ''">You must provide either a URL for the API endpoint or a URL for the documentation about it so that reusers can find it.</requirement>
+							<requirement test="this.endpointUrl() !== ''">You must <strong>provide either a URL for the API endpoint or a URL for the documentation about it</strong> so that reusers can find it.</requirement>
 						</if>
 						<if test="this.documentationUrl() !== ''">
-							<requirement test="this.endpointUrl() !== ''" level="standard">You should have a service description document or similar single entry point for your API so that reusers can access it.</requirement>
+							<requirement test="this.endpointUrl() !== ''" level="standard">You should <strong>have a service description document</strong> or similar single entry point for your API so that reusers can access it.</requirement>
 						</if>
 					</question>
 					<if test="this.provideDumps() === 'true'">
@@ -729,17 +767,17 @@
 								<option value="current">
 									<label>the data at a single "current" dump URL is regularly updated</label>
 									<help>Having a single "current" dump URL means that there is one URL from which reusers can always download the most recently created dump.</help>
-									<requirement level="standard">You should have a single URL that can always be used to download the current dump of the database so that reusers can find it.</requirement>
+									<requirement level="standard">You should <strong>have a single URL that can always be used to download the current dump</strong> of the database so that reusers can find it.</requirement>
 								</option>
 								<option value="template">
 									<label>the URLs for each release follow a regular pattern</label>
 									<help>Having URLs that follow a regular pattern means publishing dumps at URLs where the date of publication is part of the URL itself. For example, if you published a dump each month then you would include the month (eg <code>2013-04</code>) as part of the URL. This helps reusers to understand when the dump dates from, and helps them write scripts that collect together all the published dumps (to carry out comparisons, for example) or fetch new ones each time they're released.</help>
-									<requirement level="exemplar">You should use a regular pattern in the URLs for different dumps so that reusers can easily get hold of the dump for a particular time period.</requirement>
+									<requirement level="exemplar">You should <strong>use a regular pattern in the URLs for different dumps</strong> so that reusers can easily get hold of the dump for a particular time period.</requirement>
 								</option>
 								<option value="list">
 									<label>you publish a list of the releases</label>
 									<help>Having a list of the dumps means having a web page or a feed (such as Atom or RSS) that contains details of each dump, including a link through to each individual release and a description of when it dates from. Reusers can use these lists to understand the frequency and regularity of your publication, and to help them write scripts that collect together all the published datasets or fetch new ones each time they're released.</help>
-									<requirement level="exemplar">You should have a document or feed that provides a list of all the available dumps so that reusers can create scripts to download all of them.</requirement>
+									<requirement level="exemplar">You should <strong>have a document or feed that provides a list of all the available dumps</strong> so that reusers can create scripts to download all of them.</requirement>
 								</option>
 							</checkboxset>
 						</question>
@@ -782,13 +820,13 @@
 				<label>Is the data machine-readable?</label>
 				<yesno />
 				<help>A machine-readable format is one in which the information can be easily extracted from the data by a computer. For example, scanned photocopies of spreadsheets would not be machine-readable, but a CSV file would be.</help>
-				<requirement level="pilot">You should provide the data in a machine-readable format so that it's easy to reuse.</requirement>
+				<requirement level="pilot">You should <strong>provide the data in a machine-readable format</strong> so that it's easy to reuse.</requirement>
 			</question>
 			<question id="openStandard">
 				<label>Is the data in an open standard format?</label>
 				<yesno />
 				<help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">An open standard is one that is written through a defined fair, transparent and collaborative process and that anyone can implement. For example, XML, CSV and JSON are open standards.</help>
-				<requirement level="standard">You should provide the data in an open standard format so that reusers can use common tools to process it.</requirement>
+				<requirement level="standard">You should <strong>provide the data in an open standard format</strong> so that reusers can use common tools to process it.</requirement>
 			</question>
 			<question id="dataType">
 				<label>What kind of data are you publishing?</label>
@@ -818,12 +856,12 @@
 						<option value="semantic">
 							<label>one that exposes the semantic structure of documents, such as HTML, Docbook or Markdown</label>
 							<help>Documents are typically structured into chapters or sections, with headings and tables, lists and figures, terms and their definitions. Formats such as HTML, Docbook and Markdown that label these structures make it easy to automatically create summaries such as tables of contents and glossaries, and make it easy to apply different styling to the document to make it appear differently.</help>
-							<requirement level="standard">You should publish documents in a format that exposes their semantic structure so that it's easy to display in different styles.</requirement>
+							<requirement level="standard">You should <strong>publish documents in a format that exposes their semantic structure</strong> so that it's easy to display in different styles.</requirement>
 						</option>
 						<option value="format">
 							<label>one that focuses on the format of documents, such as OOXML or PDF</label>
 							<help>Because documents are made for human consumption, they are typically created with great emphasis on how the document looks. Formats such as OOXML and PDF emphasise appearance: the use of particular fonts and colours and the positioning of different elements within the page. These are good for human consumption, but (despite being machine-readable) aren't as easy for machines to process or re-style.</help>
-							<requirement level="pilot">You should publish documents in a format that is designed for documents so that it's easy to process.</requirement>
+							<requirement level="pilot">You should <strong>publish documents in a format that is designed for documents</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable">
 							<label>only those not designed for documents, such as Excel, JSON or CSV</label>
@@ -839,17 +877,17 @@
 						<option value="statistical">
 							<label>one that exposes the structure of the statistical hypercube data, such as SDMX or Data Cube</label>
 							<help>Statistical data typically fits into a hypercube in which individual observations are related to a particular measure and a set of dimensions. Each observation may also be related to a number of annotations that provide additional context. Formats such as <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure of statistical data.</help>
-							<requirement level="exemplar">You should publish statistical data in a format that exposes its dimensions and measures so that it's easy to analyse.</requirement>
+							<requirement level="exemplar">You should <strong>publish statistical data in a format that exposes its dimensions and measures</strong> so that it's easy to analyse.</requirement>
 						</option>
 						<option value="tabular">
 							<label>one that treats the statistical data as a table, such as CSV</label>
 							<help>Statistical data can be arranged within a table of rows and columns. This lacks the expressiveness about the underlying hypercube, but is easy to process.</help>
-							<requirement level="standard">You should publish tabular data in a format that exposes the tables of data so that it's easy to analyse.</requirement>
+							<requirement level="standard">You should <strong>publish tabular data in a format that exposes the tables of data</strong> so that it's easy to analyse.</requirement>
 						</option>
 						<option value="format">
 							<label>one that focuses on the format of tabular data, such as Excel</label>
 							<help>Excel and other spreadsheet formats typically emphasise the appearance of data, using italic or bold text, or indentation within fields, or the width of lines between rows, to indicate its underlying structure. This styling helps humans to understand the meaning of the data, but is hard for computers to interpret, and thus makes the data less reusable than it might otherwise be.</help>
-							<requirement level="pilot">You should publish tabular data in a format that is designed for tabular data so that it's easy to process.</requirement>
+							<requirement level="pilot">You should <strong>publish tabular data in a format that is designed for tabular data</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable">
 							<label>only those not designed for statistical or tabular data, such as Word or PDF</label>
@@ -865,12 +903,12 @@
 						<option value="specific">
 							<label>one designed for geographic data, such as KML or GeoJSON</label>
 							<help>Geographic data describes points, lines and boundaries. Formats that are designed for geographic data expose these kinds of structures in the data, which makes it easier to process automatically.</help>
-							<requirement level="standard">You should publish geographic data in a format designed for geographic data so that it's easy to use with existing tools.</requirement>
+							<requirement level="standard">You should <strong>publish geographic data in a format designed for geographic data</strong> so that it's easy to use with existing tools.</requirement>
 						</option>
 						<option value="generic">
 							<label>a generic structured data format, such as JSON, XML or CSV</label>
 							<help>Geographic data can be expressed using any format that can be used for normal structured data, particularly if it only holds data about points.</help>
-							<requirement level="pilot">You should publish geographic data as structured data so that it's easy to process.</requirement>
+							<requirement level="pilot">You should <strong>publish geographic data as structured data</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable">
 							<label>only those not designed for geographic data, such as Word or PDF</label>
@@ -886,7 +924,7 @@
 						<option value="suitable">
 							<label>one designed for structured data, such as JSON, XML, Turtle or CSV</label>
 							<help>Structured data formats break down data into a basic structure of things which have values for a known set of properties. These predictable formats are easy for machines to process.</help>
-							<requirement level="pilot">You should publish structured data in a format designed for structured data so that it's easy to process.</requirement>
+							<requirement level="pilot">You should <strong>publish structured data in a format designed for structured data</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable">
 							<label>only those not designed for structured data, such as Word or PDF</label>
@@ -899,14 +937,14 @@
 				<label>Are you using URLs to identify things in the data?</label>
 				<yesno />
 				<help>Data is usually about things, often things in the real world such as schools and roads. Identifying these things using URLs provides a mechanism for people to find out more about the thing that is being described by the data. If data from different sources consistently uses the same URL to refer to the same thing, those different data sources can be combined easily, to create more useful data. URLs can usefully be used in place of identifying numbers or codes.</help>
-				<requirement level="standard">You should use URLs to identify things in the data, so that they can be easily referenced and combined with other data about those things.</requirement>
+				<requirement level="standard">You should <strong>use URLs to identify things in the data</strong>, so that they can be easily referenced and combined with other data about those things.</requirement>
 			</question>
 			<if test="this.identifiers() === 'true'">
 				<question id="resolvingUrls">
 					<label>Do the URLs resolve to information about those things?</label>
 					<yesno />
 					<help>A URL that resolves to information about something is one that, when put in a browser, provides you with additional data. For example there are resolvable URLs for <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. These provide human-readable pages but are also linked to underlying data which scripts can process.</help>
-					<requirement level="exemplar">You should provide a page of information about each of the things in your data so that reusers can easily find and share that information.</requirement>
+					<requirement level="exemplar">You should <strong>provide a page of information about each of the things in your data</strong> so that reusers can easily find and share that information.</requirement>
 				</question>
 				<question id="existingExternalUrls">
 					<label>Do external URLs exist for any of those things?</label>
@@ -924,7 +962,7 @@
 							<label>Does the data use those external URLs?</label>
 							<yesno />
 							<help>If there are URLs that resolve to reliable data for the things that you are describing in your data, you should reuse those URLs in your data. This reduces the duplication and enhances the ability for data from different sources to be brought together.</help>
-							<requirement level="exemplar">You should use existing external URLs in your data so that it's easy to combine with other data that uses those URLs.</requirement>
+							<requirement level="exemplar">You should <strong>use existing external URLs in your data</strong> so that it's easy to combine with other data that uses those URLs.</requirement>
 						</question>
 					</if>
 				</if>
@@ -937,13 +975,13 @@
 				<label>Do you provide machine-readable provenance for the data?</label>
 				<yesno />
 				<help more="http://www.w3.org/TR/prov-primer/">The provenance of data is a trace of how it was created and processed prior to publication. This can help establish trust in the data that you are publishing by enabling reusers to trace back how the data has been handled.</help>
-				<requirement level="exemplar">You should provide a machine-readable provenance trail for the data so that reusers can trace how it has been processed.</requirement>
+				<requirement level="exemplar">You should <strong>provide a machine-readable provenance trail</strong> for the data so that reusers can trace how it has been processed.</requirement>
 			</question>
 			<question id="digitalCertificate">
 				<label>Where do you describe how reusers can verify the data they receive?</label>
 				<input type="url" placeholder="Verification Process URL" />
 				<help>If you are delivering important data, reusers should be able to verify that the data that they receive is the same as the data that you are publishing. For example, you might digitally sign the data that you publish, so that reusers can tell if it has been tampered with.</help>
-				<requirement level="exemplar">You should describe how reusers can verify whether the data they receive is the same as that originally published by you, so that they know whether to trust it.</requirement>
+				<requirement level="exemplar">You should <strong>describe how reusers can verify whether the data they receive is the same as that originally published by you</strong>, so that they know whether to trust it.</requirement>
 			</question>
 		</group>
 	</group>
@@ -959,55 +997,55 @@
 					<checkboxset>
 						<option value="title">
 							<label>title</label>
-							<requirement level="pilot">You should include a title for the data in your documentation so that reusers know how to refer to it.</requirement>
+							<requirement level="pilot">You should <strong>include a title for the data in your documentation</strong> so that reusers know how to refer to it.</requirement>
 						</option>
 						<option value="description">
 							<label>description</label>
-							<requirement level="pilot">You should include a description of the data in your documentation so that reusers know what it contains.</requirement>
+							<requirement level="pilot">You should <strong>include a description of the data in your documentation</strong> so that reusers know what it contains.</requirement>
 						</option>
 						<option value="issued">
 							<label>release date</label>
-							<requirement level="pilot">You should include a release date in your documentation so that reusers know how current it is.</requirement>
+							<requirement level="pilot">You should <strong>include a release date in your documentation</strong> so that reusers know how current it is.</requirement>
 						</option>
 						<option value="modified">
 							<label>modification date</label>
-							<requirement level="standard">You should include the last modification date in your documentation so that reusers know whether the copy they have is up to date.</requirement>
+							<requirement level="standard">You should <strong>include the last modification date in your documentation</strong> so that reusers know whether the copy they have is up to date.</requirement>
 						</option>
 						<option value="accrualPeriodicity">
 							<label>frequency of releases</label>
-							<requirement level="standard">You should indicate in your documentation how frequently new versions of the data will be released so reusers can tell if it will be updated at all, and if so how frequently they will need to check it.</requirement>
+							<requirement level="standard">You should <strong>indicate in your documentation how frequently new versions of the data will be released</strong> so reusers can tell if it will be updated at all, and if so how frequently they will need to check it.</requirement>
 						</option>
 						<option value="identifier">
 							<label>identifier</label>
-							<requirement level="standard">You should include a canonical URL for the data in your documentation so that different reusers know how to point to it consistently.</requirement>
+							<requirement level="standard">You should <strong>include a canonical URL for the data in your documentation</strong> so that different reusers know how to point to it consistently.</requirement>
 						</option>
 						<option value="landingPage">
 							<label>landing page</label>
-							<requirement level="standard">You should include a canonical URL for the documentation itself in your documentation so that different reusers know how to point to it consistently.</requirement>
+							<requirement level="standard">You should <strong>include a canonical URL for the documentation itself in your documentation</strong> so that different reusers know how to point to it consistently.</requirement>
 						</option>
 						<option value="language">
 							<label>language</label>
-							<requirement level="standard">You should include the language of the data in your documentation so that reusers know whether they will be able to understand it.</requirement>
+							<requirement level="standard">You should <strong>include the language of the data in your documentation</strong> so that reusers know whether they will be able to understand it.</requirement>
 						</option>
 						<option value="publisher">
 							<label>publisher</label>
-							<requirement level="standard">You should indicate the publisher of the data in your documentation as reusers may use this information to determine how much to trust the data.</requirement>
+							<requirement level="standard">You should <strong>indicate the publisher of the data in your documentation</strong> as reusers may use this information to determine how much to trust the data.</requirement>
 						</option>
 						<option value="spatial">
 							<label>spatial/geographical coverage</label>
-							<requirement level="standard">You should include an indication of the geographic area the data covers in your documentation so that reusers understand what is included within it.</requirement>
+							<requirement level="standard">You should <strong>include an indication of the geographic area the data covers in your documentation</strong> so that reusers understand what is included within it.</requirement>
 						</option>
 						<option value="temporal">
 							<label>temporal coverage</label>
-							<requirement level="standard">You should include the time period the data covers in your documentation so that reusers understand what is included within it.</requirement>
+							<requirement level="standard">You should <strong>include the time period the data covers in your documentation</strong> so that reusers understand what is included within it.</requirement>
 						</option>
 						<option value="theme">
 							<label>theme(s)</label>
-							<requirement level="standard">You should include a general theme for the data in your documentation so that reusers know roughly what it's about.</requirement>
+							<requirement level="standard">You should <strong>include a general theme for the data in your documentation</strong> so that reusers know roughly what it's about.</requirement>
 						</option>
 						<option value="keyword">
 							<label>keyword(s) or tag(s)</label>
-							<requirement level="standard">You should include keywords or tags for the data in your documentation to help reusers to search for the data effectively.</requirement>
+							<requirement level="standard">You should <strong>include keywords or tags for the data in your documentation</strong> to help reusers to search for the data effectively.</requirement>
 						</option>
 						<option value="distribution">
 							<label>distribution(s)</label>
@@ -1020,23 +1058,23 @@
 						<checkboxset>
 							<option value="title">
 								<label>title</label>
-								<requirement level="pilot">You should include a title for each distribution within the documentation so reusers know how to refer to it.</requirement>
+								<requirement level="pilot">You should <strong>include a title for each distribution within the documentation</strong> so reusers know how to refer to it.</requirement>
 							</option>
 							<option value="description">
 								<label>description</label>
-								<requirement level="pilot">You should include a description of each distribution within the documentation so reusers know what it contains.</requirement>
+								<requirement level="pilot">You should <strong>include a description of each distribution within the documentation</strong> so reusers know what it contains.</requirement>
 							</option>
 							<option value="issued">
 								<label>release date</label>
-								<requirement level="pilot">You should include a release date for each distribution within the documentation so that reusers know how current it is.</requirement>
+								<requirement level="pilot">You should <strong>include a release date for each distribution within the documentation</strong> so that reusers know how current it is.</requirement>
 							</option>
 							<option value="modified">
 								<label>modification date</label>
-								<requirement level="standard">You should include the last modification date for each distribution within the documentation so reusers know whether their copy of it is up to date.</requirement>
+								<requirement level="standard">You should <strong>include the last modification date for each distribution within the documentation</strong> so reusers know whether their copy of it is up to date.</requirement>
 							</option>
 							<option value="license">
 								<label>licence</label>
-								<requirement level="standard">You should include a reference to the licence or waiver that applies to each distribution within the documentation so reusers know what they can do with the data.</requirement>
+								<requirement level="standard">You should <strong>include a reference to the licence or waiver that applies to each distribution within the documentation</strong> so reusers know what they can do with the data.</requirement>
 							</option>
 							<option value="accessURL">
 								<label>URL for accessing the data</label>
@@ -1059,7 +1097,7 @@
 				<question id="serviceDocumentation">
 					<label>Where is the documentation for the API?</label>
 					<input type="url" placeholder="Service Documentation URL" />
-					<requirement level="pilot">You should provide documentation about how the API works so that reusers can find out how to use it.</requirement>
+					<requirement level="pilot">You should <strong>provide documentation about how the API works</strong> so that reusers can find out how to use it.</requirement>
 				</question>
 			</if>
 			<question id="vocabulary">
@@ -1071,7 +1109,7 @@
 				<question id="schemaDocumentationUrl">
 					<label>Where is the documentation for the vocabularies?</label>
 					<input type="url" placeholder="Schema Documentation URL" />
-					<requirement level="standard">You should provide documentation for any vocabulary you use within the data you publish so that reusers know how to interpret the data.</requirement>
+					<requirement level="standard">You should <strong>provide documentation for any vocabulary you use within the data</strong> you publish so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>
 			<question id="codelists">
@@ -1083,7 +1121,7 @@
 				<question id="codelistDocumentationUrl">
 					<label>Where are the codes documented?</label>
 					<input type="url" placeholder="Codelist Documentation URL" />
-					<requirement level="standard">You should provide documentation for the codes used within your data so that reusers know how to interpret the data.</requirement>
+					<requirement level="standard">You should <strong>provide documentation for the codes used within your data</strong> so that reusers know how to interpret the data.</requirement>
 				</question>
 			</if>
 		</group>
@@ -1094,35 +1132,33 @@
 				<label>What's the contact email address for questions about this data?</label>
 				<input type="email" placeholder="Contact Email Address"/>
 				<help>Provide an email address that people can contact with queries about the data.</help>
-				<requirement level="pilot">You should have a contact email address so that people can get in touch with you about any questions about the data.</requirement>
+				<requirement level="pilot">You should <strong>have a contact email address</strong> so that people can get in touch with you about any questions about the data.</requirement>
 			</question>
 			<question id="forum">
 				<label>Where do you recommend people discuss this dataset?</label>
 				<input type="url" placeholder="Forum or Mailing List URL"/>
 				<help>Provide a URL for the forum or mailing list where developers using this dataset should discuss it.</help>
-				<requirement level="standard">You should indicate a place where people using this dataset should discuss the data so that they can support each other.</requirement>
+				<requirement level="standard">You should <strong>indicate a place where people using this dataset should discuss the data</strong> so that they can support each other.</requirement>
 			</question>
 			<if test="this.corrected() === 'true'">
 				<question id="correctionReporting">
 					<label>Where do you describe how to provide corrections?</label>
 					<input type="url" placeholder="Correction Instructions URL" />
 					<help>Provide a link to a page that describes how people should provide corrections if they discover errors in  the data.</help>
-					<requirement level="standard">You should provide instructions for people who discover errors in the data so that they know how to report them.</requirement>
+					<requirement level="standard">You should <strong>provide instructions for people who discover errors in the data</strong> so that they know how to report them.</requirement>
 				</question>
 				<question id="correctionDiscovery">
 					<label>Where do you describe how to learn about corrections?</label>
 					<input type="url" placeholder="Correction Notification URL" />
 					<help>Provide a link to a page that describes how corrections will be communicated to reusers of the data.</help>
-					<requirement level="standard">You should provide an announcement mailing list or a feed to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.</requirement>
+					<requirement level="standard">You should <strong>provide an announcement mailing list or a feed</strong> to which reusers can subscribe to learn of corrections to the data so that they can keep their local copies up to date.</requirement>
 				</question>
 			</if>
-			<if test="this.dataPersonal() === 'personal' || this.dataPersonal() === 'possibly'">
-				<question id="dataProtectionEmail">
-					<label>What's the contact email address for confidentiality concerns?</label>
-					<input type="email" placeholder="Confidentiality Contact Email Address" />
-					<requirement level="pilot">You should provide a contact email address so that reusers with concerns about disclosure of personal details within the data can get in touch.</requirement>
-				</question>
-			</if>
+			<question id="dataProtectionEmail">
+				<label>What's the contact email address for confidentiality concerns?</label>
+				<input type="email" placeholder="Confidentiality Contact Email Address" />
+				<requirement level="pilot">You should <strong>provide a contact email address for reusers with concerns about disclosure of personal details</strong> within the data can get in touch.</requirement>
+			</question>
 		</group>
 		<group id="services">
 			<label>Services</label>
@@ -1131,7 +1167,7 @@
 				<label>Where do you list tools for working with the data?</label>
 				<input type="url" placeholder="Tool URL"/>
 				<help>Provide a link to a page that lists the tools that people and developers can use when working with the data.</help>
-				<requirement level="exemplar">You should provide a list of software libraries and other tools that help developers who want to work with the data so that reusers can find and reuse them rather than building them from scratch.</requirement>
+				<requirement level="exemplar">You should <strong>provide a list of software libraries and other tools</strong> that help developers who want to work with the data so that reusers can find and reuse them rather than building them from scratch.</requirement>
 			</question>
 		</group>
 	</group>
