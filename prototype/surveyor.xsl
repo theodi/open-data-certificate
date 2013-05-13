@@ -70,6 +70,9 @@
 				</xsl:attribute>
 				<xsl:if test="help">
 					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+					<xsl:if test="help/@more">
+						<xsl:attribute name="help_text_more_url" select="help/@more" />
+					</xsl:if>
 				</xsl:if>
 				<xsl:choose>
 					<xsl:when test="radioset | yesno | select">
@@ -113,6 +116,9 @@
 		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
 		<xsl:if test="help">
 			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+			<xsl:if test="help/@more">
+				<xsl:attribute name="help_text_more_url" select="help/@more" />
+			</xsl:if>
 		</xsl:if>
 		<xsl:if test="requirement[@level]">
 			<xsl:attribute name="requirement" select="local:requirementId(requirement)" />

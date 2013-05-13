@@ -156,7 +156,8 @@ survey 'Open Data Certificate Questionnaire',
     a_true 'yes'
 
     q_claUrl 'Where is the Contributor Licence Agreement (CLA)?',
-      :help_text => 'A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it.[Read more...](http://en.wikipedia.org/wiki/Contributor_License_Agreement)'
+      :help_text => 'A Contributor Licence Agreement is an agreement with contributors that ensures that you can reuse the data that they contribute. It will either transfer the rights in the contributions to you, waive their rights, or license the data to you such that you can republish it.[Read more...](http://en.wikipedia.org/wiki/Contributor_License_Agreement)',
+      :help_text_more_url => 'http://en.wikipedia.org/wiki/Contributor_License_Agreement'
     dependency :rule => 'A and B and C and D'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
@@ -242,6 +243,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_copyrightStatementMetadata 'Does your copyright statement include machine-readable data for:',
       :help_text => 'If you have a copyright statement, it is good to embed within it machine-readable information about the licence under which you are making your data available. We can use this to automatically fill in parts of this questionnaire. Others can use it to automatically create attribution statements when they reuse your data.[Read more...](http://labs.creativecommons.org/2011/ccrel-guide/)',
+      :help_text_more_url => 'http://labs.creativecommons.org/2011/ccrel-guide/',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
@@ -345,6 +347,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_otherDataLicenceOpen 'Is the licence an open licence?',
       :help_text => 'The [Open Knowledge Definition](http://opendefinition.org/) defines what an open data licence is and the [Open Definition Advisory Board]() maintain a list of [open licences](http://licenses.opendefinition.org/). If the licence is not given in that list, it it is either not open or hasn\'t yet been assessed.[Read more...](http://opendefinition.org/)',
+      :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
@@ -426,6 +429,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_otherContentLicenceOpen 'Is the licence an open licence?',
       :help_text => 'The [Open Knowledge Definition](http://opendefinition.org/) defines what an open data licence is and the [Open Definition Advisory Board]() maintain a list of [open licences](http://licenses.opendefinition.org/). If the licence is not given in that list, it it is either not open or hasn\'t yet been assessed.[Read more...](http://opendefinition.org/)',
+      :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
@@ -513,6 +517,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_privacyImpactAssessmentExists 'Have you carried out a Privacy Impact Assessment?',
       :help_text => 'A [Privacy Impact Assessment](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx) is a process for identifying privacy risks to individuals in the collection, use and disclosure of information.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)',
+      :help_text_more_url => 'http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx',
       :pick => :one
     dependency :rule => 'A and (B or C)'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -531,7 +536,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_false
 
     q_privacyImpactAssessmentUrl 'Where is your privacy impact assessment published?',
-      :help_text => 'ICO recommend publishing your Privacy Impact Assessment (summarised or with suitable redactions to prevent disclosure of sensitive information). We ask where it is published because this enables us to check that it exists.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)'
+      :help_text => 'ICO recommend publishing your Privacy Impact Assessment (summarised or with suitable redactions to prevent disclosure of sensitive information). We ask where it is published because this enables us to check that it exists.[Read more...](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx)',
+      :help_text_more_url => 'http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -577,7 +583,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_piaAudited, '==', :a_false
 
     q_individualConsentURL 'Where is the privacy notice you provide to affected individuals published?',
-      :help_text => 'When you collect data about individuals, you must tell them how that data will be used, in a privacy notice. We ask where this is published because reusers need to be able to look at them so that they can comply with the Data Protection Act when they are handling the data.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2)'
+      :help_text => 'When you collect data about individuals, you must tell them how that data will be used, in a privacy notice. We ask where this is published because reusers need to be able to look at them so that they can comply with the Data Protection Act when they are handling the data.[Read more...](http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2)',
+      :help_text_more_url => 'http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -1399,6 +1406,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_openStandard 'Is the data in an open standard format?',
       :help_text => 'An open standard is one that is written through a defined fair, transparent and collaborative process and that anyone can implement. For example, XML, CSV and JSON are open standards.[Read more...](https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf)',
+      :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'no'
     a_true 'yes'
@@ -1602,6 +1610,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_provenance 'Do you provide machine-readable provenance for the data?',
       :help_text => 'The provenance of data is a trace of how it was created and processed prior to publication. This can help establish trust in the data that you are publishing by enabling reusers to trace back how the data has been handled.[Read more...](http://www.w3.org/TR/prov-primer/)',
+      :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no'
     a_true 'yes'
