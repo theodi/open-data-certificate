@@ -411,10 +411,24 @@
 	<xsl:text>    title: General Information&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
-	<xsl:apply-templates select=".//question" mode="translation" />
+	<xsl:text># General Information&#xA;</xsl:text>
+	<xsl:apply-templates select="question" mode="translation" />
+	<xsl:for-each select="group">
+		<xsl:text># </xsl:text>
+		<xsl:value-of select="label" />
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:apply-templates select=".//question" mode="translation" />
+	</xsl:for-each>
 	<xsl:text>labels:&#xA;</xsl:text>
 	<xsl:apply-templates select="group//group" mode="translation" />
-	<xsl:apply-templates select=".//requirement" mode="translation" />
+	<xsl:text># General Information Requirements&#xA;</xsl:text>
+	<xsl:apply-templates select="question//requirement" mode="translation" />
+	<xsl:for-each select="group">
+		<xsl:text># </xsl:text>
+		<xsl:value-of select="label" />
+		<xsl:text> Requirements&#xA;</xsl:text>
+		<xsl:apply-templates select=".//requirement" mode="translation" />
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="group" mode="translation">

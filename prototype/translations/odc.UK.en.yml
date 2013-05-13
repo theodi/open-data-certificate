@@ -11,6 +11,7 @@ survey_sections:
   social:
     title: Social Information
 questions:
+# General Information
   dataTitle:
     text: What's a good title for this data?
     help_text: This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.
@@ -50,6 +51,7 @@ questions:
       service:
         text: a service or API for accessing open data
         help_text: Choose this option if you are providing an API or a web service. This option includes linked data publications where underlying data is exposed through a website.
+# Legal Information
   publisherRights:
     text: Do you have the rights to publish the data as open data?
     help_text: Unless all the data was originally created or gathered by your organisation, you might not have the right to republish it. We ask this question to check that you have considered the ownership of the data. If you aren't sure, we will ask further questions about the source of the data you're publishing to find out.
@@ -332,6 +334,7 @@ questions:
         text: no
       a_true:
         text: yes
+# Practical Information
   linkedTo:
     text: Is documentation about the data findable within three clicks of your organisation's home page?
     help_text: The documentation about the data that should be findable is the page that you have given as the Documentation URL. This should be findable by clicking on links from the home page of your organisation (not through searching).
@@ -490,6 +493,7 @@ questions:
         text: this data is included in your medium-term plans and should therefore be around for a couple of years
       long:
         text: this data is part of your business-as-usual operation and will continue to be published long term
+# Technical Information
   datasetUrl:
     text: What's the URL of the dataset?
     help_text: This should be the URL of the dataset itself (for example a CSV file). This is a different URL from the page that describes the dataset. We ask this to ensure that the dataset is available on the web, and that it can be linked to directly, as this helps reusers to access the data.
@@ -701,6 +705,7 @@ questions:
     answers:
       a_1:
         text: Verification Process URL
+# Social Information
   documentationMetadata:
     text: Does your data documentation include machine-readable data for:
     answers:
@@ -860,10 +865,12 @@ labels:
   services:
     title: Services
     help_text: providing reusers with tools to help work with the data
+# General Information Requirements
   pilot_1:
     text: You should have a page that provides documentation about the open data you are publishing so that reusers can understand its context, content and utility.
   basic_1:
     text: You must have a page that provides documentation and access to the open data you are publishing so that reusers can get hold of it.
+# Legal Information Requirements
   basic_2:
     text: You must have the right to publish data that you publish.
   basic_3:
@@ -900,6 +907,7 @@ labels:
     text: You should engage an expert to audit your anonymisation approach to ensure that it is appropriate for your data.
   standard_4:
     text: You should carry out a a privacy impact assessment to identify risks of releasing the data, mitigations against those risks, and to put in place processes that ensure that any breaches are handled effectively.
+# Practical Information Requirements
   standard_5:
     text: You should ensure that reusers can easily find your data from your organisation's home page.
   standard_6:
@@ -948,6 +956,7 @@ labels:
     text: You should provide a guarantee to reusers that the data will be available in this form in the medium term so that they know they can rely on it.
   exemplar_9:
     text: You should provide a guarantee to reusers that the data will be available in this form long term so that they know they can rely on it.
+# Technical Information Requirements
   basic_9:
     text: You must provide either a URL for the dataset or a URL for documentation about it so that reusers can find it.
   pilot_13:
@@ -1000,6 +1009,7 @@ labels:
     text: You should provide a machine-readable provenance trail for the data so that reusers can trace how it has been processed.
   exemplar_16:
     text: You should describe how reusers can verify whether the data they receive is the same as that originally published by you, so that they know whether to trust it.
+# Social Information Requirements
   pilot_20:
     text: You should include a title for the data in your documentation so that reusers know how to refer to it.
   pilot_21:
