@@ -11,9 +11,7 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
   end
 
-  resources :certificates do
-  end
-
+  resources :certificates
   post '/certificates/search', :to => 'certificates#search', :as => 'search_certificates'
 
   devise_for :users
