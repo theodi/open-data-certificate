@@ -422,7 +422,7 @@
 	<xsl:text>title: "Open Data Certificate Questionnaire"&#xA;</xsl:text>
 	<xsl:text>survey_sections:&#xA;</xsl:text>
 	<xsl:text>  general:&#xA;</xsl:text>
-	<xsl:text>    title: General Information&#xA;</xsl:text>
+	<xsl:text>    title: "General Information"&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
 	<xsl:text># General Information&#xA;</xsl:text>
@@ -449,9 +449,9 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    title: </xsl:text>
+	<xsl:text>    title: "</xsl:text>
 	<xsl:apply-templates select="label" mode="markdown" />
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>"&#xA;</xsl:text>
 	<xsl:apply-templates select="help" mode="translation" />
 </xsl:template>
 
@@ -459,17 +459,17 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: </xsl:text>
+	<xsl:text>    text: "</xsl:text>
 	<xsl:apply-templates select="label" mode="markdown" />
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>"&#xA;</xsl:text>
 	<xsl:apply-templates select="help" mode="translation" />
 	<xsl:text>    answers:&#xA;</xsl:text>
 	<xsl:choose>
 		<xsl:when test="input">
 			<xsl:text>      a_1:&#xA;</xsl:text>
-			<xsl:text>        text: </xsl:text>
+			<xsl:text>        text: "</xsl:text>
 			<xsl:value-of select="input/@placeholder" />
-			<xsl:text>&#xA;</xsl:text>
+			<xsl:text>"&#xA;</xsl:text>
 		</xsl:when>
 		<xsl:when test="yesno">
 			<xsl:text>      a_false:&#xA;</xsl:text>
@@ -482,7 +482,7 @@
 				<xsl:text>      </xsl:text>
 				<xsl:value-of select="local:token(@value)" />
 				<xsl:text>:&#xA;</xsl:text>
-				<xsl:text>        text: </xsl:text>
+				<xsl:text>        text: "</xsl:text>
 				<xsl:choose>
 					<xsl:when test="label">
 						<xsl:apply-templates select="label" mode="markdown" />
@@ -491,7 +491,7 @@
 						<xsl:value-of select="." />
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:text>&#xA;</xsl:text>
+				<xsl:text>"&#xA;</xsl:text>
 				<xsl:apply-templates select="help" mode="translation">
 					<xsl:with-param name="indent" select="'        '" />
 				</xsl:apply-templates>
@@ -504,17 +504,17 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="local:requirementId(.)" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: </xsl:text>
+	<xsl:text>    text: "</xsl:text>
 	<xsl:apply-templates select="." mode="markdown" />
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>"&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="help" mode="translation">
 	<xsl:param name="indent" as="xs:string" select="'    '" />
 	<xsl:value-of select="$indent" />
-	<xsl:text>help_text: </xsl:text>
+	<xsl:text>help_text: "</xsl:text>
 	<xsl:apply-templates select="." mode="markdown" />
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>"&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="translation" />
