@@ -19,6 +19,7 @@
 	margin-bottom: 0;
 	position: fixed;
 	width: 100%;
+	height: 22px;
 	z-index: 1;
 }
 
@@ -28,6 +29,7 @@
 	margin-bottom: 0;
 	position: fixed;
 	width: 100%;
+	height: 91px;
 	z-index: 1;
 	background-color: #333;
 	color: #eee;
@@ -45,8 +47,28 @@ a:hover #status-banner {
 	text-align: center;
 }
 
+#status-banner h3 {
+	margin: 0;
+}
+
+#status-banner .pilot {
+	color: peru;
+}
+
+#status-banner .standard {
+	color: silver;
+}
+
+#status-banner .exemplar {
+	color: gold;
+}
+
+#status-banner p small {
+	color: white;
+}
+
 body {
-	margin-top: 160px; /* give room for the alpha banner and status banner */
+	margin-top: 130px; /* give room for the alpha banner and status banner */
 }
 
 #questionnaire .control-group.focus {
@@ -144,6 +166,10 @@ body {
 	display: block;
 	font-size: 0.9em;
 	line-height: 1.2em;
+}
+
+.improvement-desc strong {
+	color: white;
 }
 
 .levels {

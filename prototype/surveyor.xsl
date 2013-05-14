@@ -70,6 +70,9 @@
 				</xsl:attribute>
 				<xsl:if test="help">
 					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+					<xsl:if test="help/@more">
+						<xsl:attribute name="help_text_more_url" select="help/@more" />
+					</xsl:if>
 				</xsl:if>
 				<xsl:choose>
 					<xsl:when test="radioset | yesno | select">
@@ -113,6 +116,9 @@
 		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
 		<xsl:if test="help">
 			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+			<xsl:if test="help/@more">
+				<xsl:attribute name="help_text_more_url" select="help/@more" />
+			</xsl:if>
 		</xsl:if>
 		<xsl:if test="requirement[@level]">
 			<xsl:attribute name="requirement" select="local:requirementId(requirement)" />
@@ -300,6 +306,12 @@
 	<xsl:text>*</xsl:text>
 </xsl:template>
 
+<xsl:template match="strong" mode="markdown">
+	<xsl:text>**</xsl:text>
+	<xsl:apply-templates mode="markdown" />
+	<xsl:text>**</xsl:text>
+</xsl:template>
+
 <xsl:template match="a" mode="markdown">
 	<xsl:text>[</xsl:text>
 	<xsl:apply-templates mode="markdown" />
@@ -411,10 +423,24 @@
 	<xsl:text>    title: General Information&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
-	<xsl:apply-templates select=".//question" mode="translation" />
+	<xsl:text># General Information&#xA;</xsl:text>
+	<xsl:apply-templates select="question" mode="translation" />
+	<xsl:for-each select="group">
+		<xsl:text># </xsl:text>
+		<xsl:value-of select="label" />
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:apply-templates select=".//question" mode="translation" />
+	</xsl:for-each>
 	<xsl:text>labels:&#xA;</xsl:text>
 	<xsl:apply-templates select="group//group" mode="translation" />
-	<xsl:apply-templates select=".//requirement" mode="translation" />
+	<xsl:text># General Information Requirements&#xA;</xsl:text>
+	<xsl:apply-templates select="question//requirement" mode="translation" />
+	<xsl:for-each select="group">
+		<xsl:text># </xsl:text>
+		<xsl:value-of select="label" />
+		<xsl:text> Requirements&#xA;</xsl:text>
+		<xsl:apply-templates select=".//requirement" mode="translation" />
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="group" mode="translation">
