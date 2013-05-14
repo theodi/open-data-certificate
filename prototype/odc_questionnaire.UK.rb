@@ -714,7 +714,9 @@ survey 'Open Data Certificate Questionnaire',
 
     repeater 'Listing' do
 
-      dependency :rule => 'A'      condition_A :q_listed, '==', :a_true      q_listing 'Where is the data listed?',
+      dependency :rule => 'A'
+      condition_A :q_listed, '==', :a_true
+      q_listing 'Where is the data listed?',
         :help_text => 'Give a URL that leads to a listing of this data alongside data from the wider sector.  For example, give a URL for a search that includes this data\'s listing on data.gov.uk (if it\'s UK public sector data), hub.data.ac.uk (if it\'s UK academia data), MEDIN (if it\'s marine data), or the URL of a search on Google or Bing.'
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
@@ -739,7 +741,9 @@ survey 'Open Data Certificate Questionnaire',
 
     repeater 'Reference' do
 
-      dependency :rule => 'A'      condition_A :q_referenced, '==', :a_true      q_reference 'Where is the data referenced?',
+      dependency :rule => 'A'
+      condition_A :q_referenced, '==', :a_true
+      q_reference 'Where is the data referenced?',
         :help_text => 'Give a URL for a document that cites or references this data.'
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
@@ -1965,7 +1969,9 @@ survey 'Open Data Certificate Questionnaire',
 
     repeater 'Account' do
 
-      dependency :rule => 'A'      condition_A :q_socialMedia, '==', :a_true      q_account 'What is the URL of your social media account?',
+      dependency :rule => 'A'
+      condition_A :q_socialMedia, '==', :a_true
+      q_account 'What is the URL of your social media account?',
         :help_text => 'Give a URL for the social media account, such as a Twitter or Facebook home page.'
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true

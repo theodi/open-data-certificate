@@ -55,7 +55,9 @@
 <xsl:template match="repeat" mode="structure">
 	<_group>
 		<repeater label="{label}">
-			<xsl:apply-templates select="." mode="conditions" />
+			<_group>
+				<xsl:apply-templates select="." mode="conditions" />
+			</_group>
 			<xsl:apply-templates select="* except label" mode="structure" />
 		</repeater>
 	</_group>
