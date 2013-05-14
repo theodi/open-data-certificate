@@ -1,5 +1,5 @@
 OpenDataCertificate::Application.routes.draw do
-  
+
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
     match '/:response_set_code/attained_level', :to      => 'surveyor#attained_level', :as   => 'view_my_survey_attained_level', :via    => :get
@@ -10,6 +10,9 @@ OpenDataCertificate::Application.routes.draw do
   resources :datasets do
     put 'start_questionnaire'
   end
+
+  resources :certificates
+  post '/certificates/search', :to => 'certificates#search', :as => 'search_certificates'
 
   devise_for :users
 

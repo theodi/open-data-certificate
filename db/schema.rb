@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508144200) do
+ActiveRecord::Schema.define(:version => 20130513155536) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20130508144200) do
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
+
+  create_table "certificates", :force => true do |t|
+    t.integer  "response_set_id"
+    t.text     "name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "datasets", :force => true do |t|
     t.string   "title"

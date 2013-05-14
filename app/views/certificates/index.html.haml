@@ -1,0 +1,23 @@
+%section
+  %h1 Certificates
+  = form_tag(search_certificates_path, :method => :post) do
+    %div.form-search
+      = label_tag :search, "Search for:"
+      = text_field_tag :search, @search
+      = submit_tag 'Go', :class => 'btn'
+
+  - if @certificates.length > 0
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Certificate
+          %th Dataset
+          %th Survey
+      %tbody
+        - @certificates.each do |certificate|
+          %tr
+            %td= certificate.name
+            %td= certificate.response_set.dataset.title
+            %td= certificate.response_set.survey.title
+  - else
+    %p No certificates found
