@@ -5,15 +5,6 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :test do
-  gem 'sqlite3'
-end
-# gem "mongoid", "~> 3.0.0"
-# gem 'bson_ext'
-gem 'pg'
-
-gem 'surveyor'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,10 +21,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :test do
   gem "factory_girl_rails", "~> 4.0"
+  gem 'sqlite3'
 end
 
+group :production do
+  gem 'pg'
+end
 
 gem 'jquery-rails'
 
@@ -51,5 +46,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'surveyor'
 
 gem "devise", ">= 2.2.3"
