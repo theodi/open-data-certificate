@@ -2,7 +2,7 @@
   - if current_user
     = link_to "my datasets", datasets_path
   - else
-    = form_tag non_authenticated_create_survey_path do
-      = select_tag(:survey_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
+    = form_tag non_authenticated_start_questionnaire_path do
+      = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
       = submit_tag t(:start_new_certification)
 

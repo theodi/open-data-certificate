@@ -1,7 +1,7 @@
 class Survey < ActiveRecord::Base
   include Surveyor::Models::SurveyMethods
 
-  REQUIREMENT_LEVELS = %w(basic pilot standard exemplar)
+  REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
   class << self
     def available_to_complete

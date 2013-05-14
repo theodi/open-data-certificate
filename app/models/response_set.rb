@@ -2,6 +2,8 @@ class ResponseSet < ActiveRecord::Base
   unloadable
   include Surveyor::Models::ResponseSetMethods
 
+  attr_accessible :dataset_id
+
   belongs_to :dataset
 
   def incomplete!
@@ -17,11 +19,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def attained_level
-    Survey::REQUIREMENT_LEVELS[minimum_attained_requirement_level]
+    Survey::REQUIREMENT_LEVELS[minimum_attained_requirement_level-1]
   end
 
   def minimum_attained_requirement_level
-    (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size-1).min
+    (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
   end
 
   def completed_requirements
