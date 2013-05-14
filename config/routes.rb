@@ -2,11 +2,10 @@ OpenDataCertificate::Application.routes.draw do
 
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
-    match '/:survey_code/:response_set_code/attained_level', :to      => 'surveyor#attained_level', :as   => 'view_my_survey_attained_level', :via    => :get
-    match '/:survey_code/:response_set_code/requirements', :to      => 'surveyor#requirements', :as   => 'view_my_survey_requirements', :via    => :get
+    match '/:response_set_code/attained_level', :to      => 'surveyor#attained_level', :as   => 'view_my_survey_attained_level', :via    => :get
+    match '/:response_set_code/requirements', :to      => 'surveyor#requirements', :as   => 'view_my_survey_requirements', :via    => :get
   end
-
-  root :to => "datasets#index"
+  post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
 
   resources :datasets do
     put 'start_questionnaire'
@@ -19,6 +18,7 @@ OpenDataCertificate::Application.routes.draw do
 
   devise_for :users
 
+  root :to => 'application#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -48,15 +48,13 @@
 	  		<div id="status-banner">
 	  			<div class="container">
 	  				<div class="row overlay banner">
-	  					<div class="row">
-	  						<div class="span12">
-	  							<p class="lead">So far this certificate has acheived:</p>
-	  						</div>
+	  					<div class="span3">
+	  						<p class="lead">So far this certificate has acheived:</p>
 	  					</div>
 	  					<xsl:for-each select="levels/level[position() > 1]">
-	  						<div class="span4">
+	  						<div class="span3 {@id}">
 	  							<h3><span data-bind="text: Math.floor((certificate.status().answered{@id} / certificate.status().{@id}) * 100)">0</span>% </h3>
-	  							<p>of <xsl:value-of select="upper-case(@id)" /> level</p>
+	  							<p>of <xsl:value-of select="upper-case(@id)" /> level<br /><small>How could you improve? </small><i class="icon-chevron-down icon-white"></i></p>
 	  						</div>
 	  					</xsl:for-each>
 	  				</div>	  				
@@ -67,8 +65,7 @@
 	  		<div class="container">
 	  			<div class="row">
 	  				<xsl:for-each select="levels/level[position() > 1]">
-	  					<div class="span4">
-	  						<h4>How could you improve?</h4>
+	  					<div class="span3{if (position() = 1) then ' offset3' else ''}">
 	  						<div id="improvements-{@id}" class="improvements">
 	  							<xsl:apply-templates select="/questionnaire" mode="requirementList">
 	  								<xsl:with-param name="level" select="@id" tunnel="yes" />
@@ -120,7 +117,7 @@
 	  	<div class="container">
 	  		<section>
 	  			<p class="lead">All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.</p>
-	  			<p class="alert">The questions here cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data. They cannot be used to assess your compliance with either legislation or with other policies that may apply in your sector.</p>
+	  			<p class="alert">These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements. You should always check the legislation and other policies that may apply in your sector.</p>
 	  			<div class="accordion" id="main-help-accordion">
 	  				<div class="accordion-group">
 	  					<div class="accordion-heading">

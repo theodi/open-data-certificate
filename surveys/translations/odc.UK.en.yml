@@ -137,7 +137,7 @@ questions:
       a_1:
         text: Copyright Statement URL
   copyrightStatementMetadata:
-    text: Does your copyright statement include machine-readable data for:
+    text: "Does your copyright statement include machine-readable data for:"
     help_text: If you have a copyright statement, it is good to embed within it machine-readable information about the licence under which you are making your data available. We can use this to automatically fill in parts of this questionnaire. Others can use it to automatically create attribution statements when they reuse your data.[Read more...](http://labs.creativecommons.org/2011/ccrel-guide/)
     answers:
       license:
@@ -283,7 +283,7 @@ questions:
     answers:
       not_personal:
         text: no, the data is not about people or their activities
-        help_text: Data does not have to be directly about individuals to enable people to be identified: anything about people's activities can be used to identify them if it's combined with other data. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual.
+        help_text: "Data does not have to be directly about individuals to enable people to be identified: anything about people's activities can be used to identify them if it's combined with other data. For example, data about road traffic flows is about people's activity and could be combined with other information (about an individual's commuting patterns) to reveal information about that individual."
       summarised:
         text: no, the data has been summarised so individuals can't be identified
         help_text: Data that is about individual people can be summarised using statistical analyses, so that individuals can no longer be identified.
@@ -415,7 +415,7 @@ questions:
     answers:
       static:
         text: no, the API simply provides easy access to unchanging data
-        help_text: Some APIs are created by processing a single unchanging dataset: the purpose of the API is to make accessing this data easier, particularly when there is lots of that data.
+        help_text: "Some APIs are created by processing a single unchanging dataset: the purpose of the API is to make accessing this data easier, particularly when there is lots of that data."
       changing:
         text: yes, the API provides instant access to changing data
         help_text: Some APIs are created over changeable data, and the primary purpose of the API is to provide up-to-date access to this data.
@@ -655,21 +655,21 @@ questions:
         help_text: Geographic information is any data that can be plotted on a map. These may be points or boundaries or lines.
       structured:
         text: other kinds of structured data
-        help_text: Other kinds of structured data would include things like event details, railway timetables, contact information: anything that can be interpreted as data, analysed and presented in multiple ways.
+        help_text: "Other kinds of structured data would include things like event details, railway timetables, contact information: anything that can be interpreted as data, analysed and presented in multiple ways."
   documentFormat:
-    text: Do the formats used for documents include:
+    text: "Do the formats used for documents include:"
     answers:
       semantic:
         text: one that exposes the semantic structure of documents, such as HTML, Docbook or Markdown
         help_text: Documents are typically structured into chapters or sections, with headings and tables, lists and figures, terms and their definitions. Formats such as HTML, Docbook and Markdown that label these structures make it easy to automatically create summaries such as tables of contents and glossaries, and make it easy to apply different styling to the document to make it appear differently.
       format:
         text: one that focuses on the format of documents, such as OOXML or PDF
-        help_text: Because documents are made for human consumption, they are typically created with great emphasis on how the document looks. Formats such as OOXML and PDF emphasise appearance: the use of particular fonts and colours and the positioning of different elements within the page. These are good for human consumption, but (despite being machine-readable) aren't as easy for machines to process or re-style.
+        help_text: "Because documents are made for human consumption, they are typically created with great emphasis on how the document looks. Formats such as OOXML and PDF emphasise appearance: the use of particular fonts and colours and the positioning of different elements within the page. These are good for human consumption, but (despite being machine-readable) aren't as easy for machines to process or re-style."
       unsuitable:
         text: only those not designed for documents, such as Excel, JSON or CSV
         help_text: Formats such as Excel or CSV are suited to tabular data. Formats such as JSON are suited for structured data. Because of the way they are structured, documents aren't suited to these formats.
   statisticalFormat:
-    text: Do the formats used for statistical data include:
+    text: "Do the formats used for statistical data include:"
     answers:
       statistical:
         text: one that exposes the structure of the statistical hypercube data, such as SDMX or Data Cube
@@ -684,7 +684,7 @@ questions:
         text: only those not designed for statistical or tabular data, such as Word or PDF
         help_text: Formats that are oriented towards human-readable documents, such as Word or PDF, are not suitable for statistical data, as they completely obscure the underlying structure of the data.
   geographicFormat:
-    text: Do the formats used for geographic data include:
+    text: "Do the formats used for geographic data include:"
     answers:
       specific:
         text: one designed for geographic data, such as KML or GeoJSON
@@ -696,7 +696,7 @@ questions:
         text: only those not designed for geographic data, such as Word or PDF
         help_text: Formats that are oriented towards human-readable documents, such as Word or PDF, are not suitable for geographic data, as they completely obscure the underlying structure of the data.
   structuredFormat:
-    text: Do the formats used for structured data include:
+    text: "Do the formats used for structured data include:"
     answers:
       suitable:
         text: one designed for structured data, such as JSON, XML, Turtle or CSV
@@ -760,7 +760,7 @@ questions:
         text: Verification Process URL
 # Social Information
   documentationMetadata:
-    text: Does your data documentation include machine-readable data for:
+    text: "Does your data documentation include machine-readable data for:"
     answers:
       title:
         text: title
@@ -791,7 +791,7 @@ questions:
       distribution:
         text: distribution(s)
   distributionMetadata:
-    text: Does your documentation include machine-readable metadata for each distribution on:
+    text: "Does your documentation include machine-readable metadata for each distribution on:"
     answers:
       title:
         text: title
