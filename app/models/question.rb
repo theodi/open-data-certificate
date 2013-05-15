@@ -41,10 +41,21 @@ class Question < ActiveRecord::Base
 
   private
   def calculate_if_requirement_met_by_responses(responses)
+    # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
+    #       a survey
+    #       If a requirement is tied to more that one question or answer, then the calculation of whether it's met needs
+    #       to be more comprehensive - it would have to ensure that *every* occurrence of the requirement has been met to
+    #       definitively say the requirement has been met.
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
 
-    responses_requirements = responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index) # TODO: Refactor this... it's too long and too stinky
-    !!(responses_requirements.max && (responses_requirements.max >= requirement_level_index))
+    response_level_index = case question.pick
+                               when 'one'
+                                 responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
+                               else
+                                 responses.detect{|r| r.question_id == question.id && r.requirement == requirement}.try(:requirement_level_index).to_i # for everything else, get the requirement level for the response for the requirement in the
+                             end
+
+    !!(response_level_index >= requirement_level_index)
   end
 
   private

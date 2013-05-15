@@ -6,6 +6,10 @@ class Response < ActiveRecord::Base
     @requirement_level ||= answer.requirement_level
   end
 
+  def requirement
+    @requirement ||= answer.requirement
+  end
+
   def requirement_level_index
     @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end
