@@ -53,10 +53,10 @@ class Question < ActiveRecord::Base
                              when 'one'
                                responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
                              else
-                               responses.detect{|r| r.question_id == question.id && r.requirement == requirement}.try(:requirement_level_index).to_i # for everything else, get the requirement level for the response for the requirement in the
+                               responses.detect{|r| r.question_id == question.id && r.requirement == requirement}.try(:requirement_level_index) # for everything else, get the requirement level for the response for the requirement in the
                            end
 
-    !!(response_level_index >= requirement_level_index)
+    !!(response_level_index.to_i >= requirement_level_index)
   end
 
   private
