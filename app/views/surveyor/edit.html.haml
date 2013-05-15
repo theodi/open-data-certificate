@@ -7,7 +7,9 @@
 
     = hidden_field_tag :surveyor_javascript_enabled, false
 
-    .survey_title= @survey.translation(I18n.locale)[:title]
+    %h2= @survey.translation(I18n.locale)[:title]
+    %p.lead= @survey.translation(I18n.locale)[:description]
+
     .previous_section= previous_section
     = render 'partials/dependents' unless @dependents.empty?
     - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
