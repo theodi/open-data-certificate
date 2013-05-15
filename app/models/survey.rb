@@ -18,6 +18,10 @@ class Survey < ActiveRecord::Base
     @requirements ||= questions.select(&:is_a_requirement?)
   end
 
+  def only_questions
+    @only_questions ||= (questions - requirements)
+  end
+
   def mandatory_questions
     @mandatory_questions ||= sections.map{|s| s.questions.where(:is_mandatory => true)}.flatten
   end
