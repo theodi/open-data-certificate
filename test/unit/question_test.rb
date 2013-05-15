@@ -44,6 +44,8 @@ class QuestionTest < ActiveSupport::TestCase
     the_right_question = FactoryGirl.create(:question, requirement: requirement.requirement, survey_section: requirement.survey_section)
     rand(1..5).times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
 
+    requirement.survey_section.survey.reload
+
     assert requirement.question_corresponding_to_requirement == the_right_question
   end
 
