@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder
 
   def requirement
-    [read_attribute(:requirement), question.requirement].delete_if(&:blank?).first
+    [read_attribute(:requirement), question.try(:requirement)].delete_if(&:blank?).first
   end
 
   def requirement_level
