@@ -1,10 +1,10 @@
-= div_for @section, :class => @section.custom_class do
+= div_for section, :class => section.custom_class do
   .accordion-group
     .accordion-heading
-      .accordion-toggle= @section.translation(I18n.locale)[:title]
+      %h4.accordion-toggle= section.translation(I18n.locale)[:title]
     .accordion-inner
       - qs ||= []
-      - (questions = @section.questions).each_with_index do |q, i|
+      - (questions = section.questions).each_with_index do |q, i|
         - if q.part_of_group?
           - qs << q # gather up the group questions
           - if (i+1 >= questions.size) or (q.question_group_id != questions[i+1].question_group_id)
