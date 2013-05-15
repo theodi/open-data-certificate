@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513155536) do
+ActiveRecord::Schema.define(:version => 20130515132624) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -167,6 +167,15 @@ ActiveRecord::Schema.define(:version => 20130513155536) do
 
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
+
+  create_table "survey_parsings", :force => true do |t|
+    t.string   "file_name"
+    t.string   "md5"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "survey_parsings", ["file_name"], :name => "index_survey_parsings_on_file_name"
 
   create_table "survey_sections", :force => true do |t|
     t.integer  "survey_id"
