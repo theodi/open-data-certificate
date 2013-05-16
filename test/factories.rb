@@ -123,7 +123,10 @@ questions:
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
-    r.completed_at {}
+
+    factory :completed_response_set do
+      completed_at { Time.now }
+    end
   end
 
   factory :response do |r|
