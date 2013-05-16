@@ -30,26 +30,29 @@
                   %a{:href => "#questionnaire"}
                     = t 'menu.questionnaire'
                 %li.divider-vertical
+
                 %li
                   %a{:href => "#certificate"}
                     = t 'menu.certificate'
                 %li.divider-vertical
+
                 %li
                   %a{:href => "#improvements"}
                     = t 'menu.improvements'
                 %li.divider-vertical
+
                 %li
                   %a{:href => "index.html"}
                     = t 'menu.about'
                 %li.divider-vertical
-                %li
-                  = render 'shared/auth_bar'
+
+                =render 'shared/auth_bar'
               %span.label.pull-right{:style => "margin-top: 10px;"} 0.4
     .container
 
       - flash.each do |type, value|
         .flash.alert{ :class => "alert-#{type}" }
-          = value 
+          = value
 
       = yield :above_content
 
@@ -66,13 +69,13 @@
               %a{:href => "#privacy-policy"}
                 = t 'footmenu.privacy'
             %li
-              %a{:href => "#terms-of-use"} 
+              %a{:href => "#terms-of-use"}
                 = t 'footmenu.terms'
             %li
-              %a{:href => "#cookie-policy"} 
+              %a{:href => "#cookie-policy"}
                 = t 'footmenu.cookies'
             %li
-              %a{:href => "#feedback"} 
+              %a{:href => "#feedback"}
                 = t 'footmenu.feedback'
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
