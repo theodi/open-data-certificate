@@ -26,6 +26,10 @@ OpenDataCertificate::Application.routes.draw do
       end
   end
 
+  # 'Static' pages managed by HighVoltage here...
+  get 'about' => 'high_voltage/pages#show', :id => 'about'
+  get 'contact' => 'high_voltage/pages#show', :id => 'contact'
+
   root :to => 'application#home'
 
   # The priority is based upon order of creation:
