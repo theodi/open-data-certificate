@@ -10,6 +10,10 @@ FactoryGirl.define do
     title "test-dataset"
   end
 
+  factory :certificate do
+    response_set
+  end
+
   sequence :unique_survey_access_code do |n|
     "simple survey #{UUIDTools::UUID.random_create.to_s}"
   end
