@@ -41,6 +41,7 @@ class ApplicationController < ActionController::Base
              :dataset_id => @dataset.id
     )
     if @survey && @response_set
+      session[:response_set_id] = current_user ? nil : @response_set.id
       flash[:notice] = t('surveyor.survey_started_success')
       redirect_to(surveyor.edit_my_survey_path(
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
