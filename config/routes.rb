@@ -14,7 +14,17 @@ OpenDataCertificate::Application.routes.draw do
   resources :certificates
   post '/certificates/search', :to => 'certificates#search', :as => 'search_certificates'
 
-  devise_for :users
+  devise_for :users, skip: :registration
+  devise_scope :user do
+    resource :registration,
+      only: [:new, :create, :edit, :update],
+      path: 'users',
+      path_names: { new: 'sign_up' },
+      controller: 'devise/registrations',
+      as: :user_registration do
+        get :cancel
+      end
+  end
 
   root :to => 'application#home'
 

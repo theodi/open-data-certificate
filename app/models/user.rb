@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
 
   has_many :datasets
 
-
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 end
