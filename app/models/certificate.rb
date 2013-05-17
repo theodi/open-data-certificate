@@ -16,4 +16,5 @@ class Certificate < ActiveRecord::Base
   def self.group_similar
     joins(:response_set => [:survey]).group('surveys.title, response_sets.dataset_id')
   end
+
 end
