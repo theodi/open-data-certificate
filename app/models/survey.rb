@@ -4,6 +4,8 @@ class Survey < ActiveRecord::Base
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
+  validates :dataset_title, :presence => true
+  attr_accessible :dataset_title
 
   class << self
     def available_to_complete

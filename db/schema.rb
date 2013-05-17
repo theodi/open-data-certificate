@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20130516084640) do
     t.integer  "display_order"
     t.string   "api_id"
     t.integer  "survey_version",         :default => 0
+    t.string   "dataset_title"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true

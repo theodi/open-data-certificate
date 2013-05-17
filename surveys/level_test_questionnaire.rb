@@ -1,7 +1,15 @@
 survey 'Level Test Questionnaire',
-       :default_mandatory => 'false' do
+       :default_mandatory => 'false',
+       :dataset_title => 'q_dataTitle' do
 
   section_general 'General Information' do
+
+    q_dataTitle 'What\'s a good title for this data?',
+      :help_text => 'This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.'
+    a_1 'Data Title',
+        :string,
+        :placeholder => 'Data Title',
+        :required => :required
 
     q_basic_1 'Complete me to achieve basic'
     a_1 'basic 1',
