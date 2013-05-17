@@ -19,9 +19,6 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal rs.certificate.attained_level, rs.attained_level
   end
 
-end  def setup
-  end
-
   test "Should be able to populate response_set answers from another response_set" do
     response_value = rand.to_s
     q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
