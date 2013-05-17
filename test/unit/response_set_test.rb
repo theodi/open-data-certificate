@@ -20,7 +20,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set = FactoryGirl.create :response_set, survey: source_response_set.survey
     response_set.reload
 
-    response_set.copy_answers_from_response_set_id!(source_response_set.id)
+    response_set.copy_answers_from_response_set!(source_response_set)
 
     assert response_set.responses.first.try(:string_value) == response_value
   end
@@ -46,7 +46,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set.reload
 
     exception = assert_raise(RuntimeError) do
-      response_set.copy_answers_from_response_set_id!(source_response_set.id)
+      response_set.copy_answers_from_response_set!(source_response_set)
     end
 
     assert_equal('Attempt to over-write existing responses.', exception.message)
@@ -70,7 +70,7 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     response_set = FactoryGirl.create :response_set, survey: a2.question.survey_section.survey
     response_set.reload
-    response_set.copy_answers_from_response_set_id!(source_response_set.id)
+    response_set.copy_answers_from_response_set!(source_response_set)
 
     assert response_set.responses.first.try(:string_value) == response_value
   end

@@ -34,9 +34,8 @@ class ResponseSet < ActiveRecord::Base
     triggered_requirements - completed_requirements
   end
 
-  def copy_answers_from_response_set_id!(response_set_id)
+  def copy_answers_from_response_set!(source_response_set)
     ui_hash = HashWithIndifferentAccess.new
-    source_response_set = ResponseSet.find(response_set_id)
 
     raise "Attempt to over-write existing responses." if responses.any? # TODO: replace with specific exception
 
