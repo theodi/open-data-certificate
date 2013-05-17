@@ -4,6 +4,25 @@ class SurveyorController < ApplicationController
 
   layout 'application'
 
+  def continue
+    set_response_set_and_render_context
+    if @response_set.survey.superceded?
+      # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
+      # and delete the old responses.
+      # TODO: determine if this is actually what is wanted, or if a more interactive user experience is preferred
+      new_response_set = ResponseSet.
+        create(:survey => @response_set.survey,
+               :user_id => (current_user.nil? ? current_user : current_user.id),
+               :dataset_id => @response_set.dataset_id
+      )
+      new_response_set.copy_answers_from_response_set!(@response_set)
+      @response_set.destroy
+
+      @response_set = new_response_set
+    end
+    redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
+  end
+
   def edit
     if @response_set && @response_set.complete?
       flash[:notice] = t('surveyor.that_response_set_is_complete')
