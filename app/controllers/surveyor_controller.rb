@@ -8,7 +8,7 @@ class SurveyorController < ApplicationController
 
   def continue
     set_response_set_and_render_context
-    if @response_set.survey.superceded?
+    if @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
       # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
       # and delete the old responses.
       # TODO: determine if this is actually what is wanted, or if a more interactive user experience is preferred
