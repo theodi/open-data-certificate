@@ -11,13 +11,13 @@ class Survey < ActiveRecord::Base
       order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
     end
 
-    def newest_version_for_access_code(access_code)
-      where(:access_code => access_code).order("surveys.survey_version DESC").select(:survey_version).first.try(:survey_version)
+    def newest_survey_for_access_code(access_code)
+      where(:access_code => access_code).order("surveys.survey_version DESC").first
     end
   end
 
   def superceded?
-    !(self.survey_version == Survey.newest_version_for_access_code(access_code))
+    !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
   def questions
