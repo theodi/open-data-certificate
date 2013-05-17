@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516084640) do
+ActiveRecord::Schema.define(:version => 20130516184058) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20130516084640) do
     t.text     "name"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "attained_level"
   end
 
   create_table "datasets", :force => true do |t|

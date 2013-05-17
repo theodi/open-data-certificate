@@ -14,6 +14,8 @@
         = "#{rs.id}: #{rs.survey.access_code}"
         - if rs.complete?
           = link_to("show", surveyor.view_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
+          | 
+          = link_to("certificate", rs.certificate)
         - else
           = link_to("edit", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
 
