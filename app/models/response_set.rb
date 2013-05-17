@@ -38,7 +38,7 @@ class ResponseSet < ActiveRecord::Base
     ui_hash = HashWithIndifferentAccess.new
     source_response_set = ResponseSet.find(response_set_id)
 
-    raise "Attempt to over-write existing responses." if responses.any?
+    raise "Attempt to over-write existing responses." if responses.any? # TODO: replace with specific exception
 
     source_response_set.responses.each do |previous_response|
       if question = survey.questions.where(reference_identifier: previous_response.question.reference_identifier).first
@@ -49,7 +49,6 @@ class ResponseSet < ActiveRecord::Base
                                     answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
-      puts ui_hash.inspect
       update_from_ui_hash(ui_hash)
     end
   end
