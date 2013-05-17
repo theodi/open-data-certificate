@@ -24,6 +24,7 @@ end
 group :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'sqlite3'
+  gem 'simplecov'
 end
 
 group :development do
