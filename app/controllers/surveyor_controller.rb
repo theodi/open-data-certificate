@@ -15,21 +15,51 @@ class SurveyorController < ApplicationController
 
   def update
     set_response_set_and_render_context
+
     if @response_set && @response_set.complete?
       flash[:notice] = t('surveyor.that_response_set_is_complete')
       redirect_to surveyor_index
     else
 
       question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
+
+      finish = params[:finish]
+      params[:finish] = nil
+
+      if user_signed_in? && @response_set.id == session[:response_set_id]
+        @response_set.user = current_user
+        @response_set.dataset = Dataset.create(:user => current_user)
+        @response_set.save
+        session[:response_set_id] = nil
+      end
+
       saved = load_and_update_response_set_with_retries
 
-      if saved && params[:finish]
-        if all_mandatory_questions_complete?
-          return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+      if saved && @response_set.dataset
+        @response_set.dataset.title = @response_set.title
+        @response_set.dataset.save
+      end
+
+      if saved && finish
+        if user_signed_in?
+          if all_mandatory_questions_complete?
+            @response_set.complete!
+            @response_set.save
+            return redirect_with_message(dataset_path(@response_set.dataset), :notice, t('surveyor.completed_survey'))
+          else
+            message = t('surveyor.all_mandatory_questions_need_to_be_completed')
+          end
         else
-          @response_set.incomplete!
-          return redirect_with_message(surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params)), :warning, t('surveyor.all_mandatory_questions_need_to_be_completed'))
+          message = t('surveyor.must_be_logged_in_to_complete')
         end
+
+        return redirect_with_message(
+          surveyor.edit_my_survey_path(
+            :anchor => anchor_from(params[:section]),
+            :section => section_id_from(params)
+          ),
+          :warning, message
+        )
       end
 
       respond_to do |format|
@@ -86,16 +116,5 @@ class SurveyorController < ApplicationController
     mandatory_question_ids = @response_set.triggered_mandatory_questions.map(&:id)
     responded_to_question_ids = @response_set.responses.map(&:question_id)
     (mandatory_question_ids - responded_to_question_ids).blank?
-  end
-
-  # where to send the user once the survey has been completed
-  # if there was a dataset, go back to it
-  private
-  def surveyor_finish
-    if @response_set.dataset
-      dataset_path @response_set.dataset
-    else
-      surveyor.available_surveys_path
-    end
   end
 end

@@ -5,6 +5,11 @@ class ResponseSet < ActiveRecord::Base
   attr_accessible :dataset_id
 
   belongs_to :dataset
+  belongs_to :survey
+
+  def title
+    responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value) || 'Untitled'
+  end
 
   def incomplete!
     update_attribute :completed_at, nil
