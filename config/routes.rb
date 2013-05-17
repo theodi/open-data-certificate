@@ -2,8 +2,9 @@ OpenDataCertificate::Application.routes.draw do
 
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
-    match '/:response_set_code/attained_level', :to      => 'surveyor#attained_level', :as   => 'view_my_survey_attained_level', :via    => :get
-    match '/:response_set_code/requirements', :to      => 'surveyor#requirements', :as   => 'view_my_survey_requirements', :via    => :get
+    match '/:response_set_code/attained_level', :to => 'surveyor#attained_level', :as => 'view_my_survey_attained_level', :via => :get
+    match '/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements', :via => :get
+    match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
   end
   post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
 
@@ -17,13 +18,13 @@ OpenDataCertificate::Application.routes.draw do
   devise_for :users, skip: :registration
   devise_scope :user do
     resource :registration,
-      only: [:new, :create, :edit, :update],
-      path: 'users',
-      path_names: { new: 'sign_up' },
-      controller: 'devise/registrations',
-      as: :user_registration do
-        get :cancel
-      end
+             only: [:new, :create, :edit, :update],
+             path: 'users',
+             path_names: { new: 'sign_up' },
+             controller: 'devise/registrations',
+             as: :user_registration do
+      get :cancel
+    end
   end
 
   # 'Static' pages managed by HighVoltage here...
