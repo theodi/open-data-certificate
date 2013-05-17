@@ -2,9 +2,12 @@ class ResponseSet < ActiveRecord::Base
   unloadable
   include Surveyor::Models::ResponseSetMethods
 
+  before_save :generate_certificate
+
   attr_accessible :dataset_id
 
   belongs_to :dataset
+  has_one :certificate
 
   def incomplete!
     update_attribute :completed_at, nil
@@ -32,6 +35,12 @@ class ResponseSet < ActiveRecord::Base
 
   def outstanding_requirements
     triggered_requirements - completed_requirements
+  end
+
+  def generate_certificate
+    if self.complete? && self.certificate.nil?
+      create_certificate :attained_level => self.attained_level
+    end
   end
 
   def copy_answers_from_response_set!(source_response_set)
