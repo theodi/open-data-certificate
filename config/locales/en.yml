@@ -3,6 +3,7 @@
 
 en:
   start_new_certification: Start new Certification
+  start_new_certification_based_on_this_response_set: Start new Certification based on this response set
   choose_legislation: choose legislation
 
   alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
