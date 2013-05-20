@@ -1,12 +1,20 @@
 require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
-  def setup
-    @question = FactoryGirl.build(:question)
+  test "Question should have :requirement attribute" do
+    question = FactoryGirl.build(:question)
+    assert_attribute_exists question, :requirement
+  end
+
+  test "Question should have :required attribute" do
+    question = FactoryGirl.build(:question)
+    assert_attribute_exists question, :required
+  end
+
+  test "Question should have :help_text_more_url attribute" do
+    question = FactoryGirl.build(:question)
+    assert_attribute_exists question, :help_text_more_url
   end
 
   test "#requirement_level should be the string from 'requirement' attribute" do
@@ -16,8 +24,16 @@ class QuestionTest < ActiveSupport::TestCase
     end
   end
 
+  test "#excluding scope should not include given records" do
+    question1 = FactoryGirl.create(:question)
+    question2 = FactoryGirl.create(:question)
+    question3 = FactoryGirl.create(:question)
+
+    assert_equal [question1, question3], (Question.all - Question.excluding(question1, question3))
+  end
+
   test "#requirement_level_index should be the index at which the requirement level appears in the REQUIREMENT_LEVELS constant" do
-    {basic: 1, pilot: 2, standard: 3, exemplar: 4}.each do |level, index|
+    { basic: 1, pilot: 2, standard: 3, exemplar: 4 }.each do |level, index|
       question = FactoryGirl.build(:question, requirement: "#{level}_#{rand(10)}")
       assert question.requirement_level_index == index, "Broke with level: #{level}"
     end

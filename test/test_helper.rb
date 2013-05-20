@@ -15,4 +15,9 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def assert_attribute_exists(model, attribute)
+    assert_respond_to model, attribute
+  end
+
 end
