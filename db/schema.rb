@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516184058) do
+ActiveRecord::Schema.define(:version => 20130520111150) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -122,13 +122,15 @@ ActiveRecord::Schema.define(:version => 20130516184058) do
     t.integer  "display_width"
     t.string   "custom_class"
     t.string   "custom_renderer"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
     t.string   "requirement"
     t.string   "required"
     t.string   "help_text_more_url"
+    t.string   "text_as_statement"
+    t.boolean  "display_on_certificate", :default => false
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
