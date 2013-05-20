@@ -7,6 +7,11 @@ class Question < ActiveRecord::Base
 
   after_save :update_mandatory
 
+  # The response to a question given a response set
+  def response(response_set)
+    response_set.responses.where(question_id: id).first
+  end
+
   def requirement_level
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
     #             and outstanding requirements, and for the display customisation of questions.
