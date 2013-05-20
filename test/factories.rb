@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   sequence :unique_survey_access_code do |n|
-    "simple survey #{UUIDTools::UUID.random_create.to_s}"
+    "simple_survey_#{UUIDTools::UUID.random_create.to_s}"
   end
 
   factory :survey do |s|
@@ -19,6 +19,11 @@ FactoryGirl.define do
     s.description "A simple survey for testing"
     s.access_code { FactoryGirl.generate :unique_survey_access_code }
     s.survey_version 0
+    s.dataset_title 'q_testDataTitle'
+
+    after(:create) do |survey, evaluator|
+      FactoryGirl.create_list(:survey_section, 3, survey: survey)
+    end
   end
 
   factory :survey_translation do |t|

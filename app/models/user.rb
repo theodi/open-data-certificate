@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :datasets
+  has_many :response_sets
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
 end

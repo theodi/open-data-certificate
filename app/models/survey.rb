@@ -7,6 +7,8 @@ class Survey < ActiveRecord::Base
   validates :dataset_title, :presence => true
   attr_accessible :dataset_title
 
+  has_many :response_sets
+
   class << self
     def available_to_complete
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
