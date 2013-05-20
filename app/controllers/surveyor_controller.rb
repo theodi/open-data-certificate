@@ -23,9 +23,11 @@ class SurveyorController < ApplicationController
 
       question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
 
+      # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
       finish = params[:finish]
       params[:finish] = nil
 
+      # If the user has a survey stored in their session, assign it to them
       if user_signed_in? && @response_set.id == session[:response_set_id]
         @response_set.user = current_user
         @response_set.dataset = Dataset.create(:user => current_user)
@@ -35,6 +37,7 @@ class SurveyorController < ApplicationController
 
       saved = load_and_update_response_set_with_retries
 
+      # If the response has saved correctly, set the dataset's title to the data's title
       if saved && @response_set.dataset
         @response_set.dataset.title = @response_set.title
         @response_set.dataset.save
