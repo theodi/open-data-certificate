@@ -52,4 +52,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    if session[:response_set_id]
+      response_set = ResponseSet.find(session[:response_set_id])
+      return surveyor.edit_my_survey_path(
+        :survey_code => response_set.survey.access_code,
+        :response_set_code => response_set.access_code
+      )
+    end
+
+    root_path
+  end
+
 end
