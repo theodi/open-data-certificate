@@ -64,6 +64,12 @@ questions:
     q.is_mandatory false
                                   # q.display_width           {}
     q.correct_answer_id nil
+
+    q.text_as_statement "Favourite Color"
+
+    factory :question_on_certificate do |qc|
+      qc.display_on_certificate true
+    end
   end
 
   factory :question_group do |g|
