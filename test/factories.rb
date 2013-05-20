@@ -10,6 +10,10 @@ FactoryGirl.define do
     title "test-dataset"
   end
 
+  factory :certificate do
+    response_set
+  end
+
   sequence :unique_survey_access_code do |n|
     "simple_survey_#{UUIDTools::UUID.random_create.to_s}"
   end
@@ -128,7 +132,10 @@ questions:
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
-    r.completed_at {}
+
+    factory :completed_response_set do
+      completed_at { Time.now }
+    end
   end
 
   factory :response do |r|

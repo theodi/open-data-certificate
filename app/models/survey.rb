@@ -14,6 +14,14 @@ class Survey < ActiveRecord::Base
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
       order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
     end
+
+    def newest_survey_for_access_code(access_code)
+      where(:access_code => access_code).order("surveys.survey_version DESC").first
+    end
+  end
+
+  def superceded?
+    !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
   def questions

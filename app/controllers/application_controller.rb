@@ -43,6 +43,12 @@ class ApplicationController < ActionController::Base
 
     if @survey && @response_set
       session[:response_set_id] = current_user ? nil : @response_set.id
+
+      if params[:source_response_set_id]
+        source_response_set = ResponseSet.find(params[:source_response_set_id]) # TODO: ensure user has rights to copy the response set answers?
+        @response_set.copy_answers_from_response_set!(source_response_set)
+      end
+
       flash[:notice] = t('surveyor.survey_started_success')
       redirect_to(surveyor.edit_my_survey_path(
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))

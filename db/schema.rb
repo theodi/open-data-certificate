@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20130517144237) do
     t.text     "name"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "attained_level"
   end
 
   create_table "datasets", :force => true do |t|

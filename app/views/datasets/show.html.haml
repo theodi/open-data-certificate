@@ -14,8 +14,15 @@
         = "#{rs.id}: #{rs.survey.access_code}"
         - if rs.complete?
           = link_to("show", surveyor.view_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
+          | 
+          = link_to("certificate", rs.certificate)
         - else
-          = link_to("edit", surveyor.edit_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
+          = link_to("edit", surveyor.continue_my_survey_path(:survey_code => rs.survey.access_code, :response_set_code => rs.access_code))
+
+        = form_for @dataset, :url => dataset_start_questionnaire_path(@dataset) do |f|
+          = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
+          = hidden_field_tag :source_response_set_id, rs.id
+          = f.submit t(:start_new_certification_based_on_this_response_set)
 
   / =render 'form'
 
