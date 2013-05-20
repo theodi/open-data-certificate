@@ -37,14 +37,6 @@ class SurveyorController < ApplicationController
       # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
       finish = params.delete(:finish)
 
-      # If the user has a survey stored in their session, assign it to them
-      if user_signed_in? && @response_set.id == session[:response_set_id]
-        @response_set.user = current_user
-        @response_set.dataset = Dataset.create(:user => current_user)
-        @response_set.save
-        session[:response_set_id] = nil
-      end
-
       saved = load_and_update_response_set_with_retries
 
       # If the response has saved correctly, set the dataset's title to the data's title

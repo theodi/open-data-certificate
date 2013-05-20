@@ -29,13 +29,13 @@ class UserDatasetsTest < ActionDispatch::IntegrationTest
 
     assert_not_nil(response_set)
 
-    post '/users/sign_in', :user => {:email => @user.email, :password => @user.password, :remember_me => 0}
-
     assert_difference lambda { @user.response_sets.count } do
-      put "/surveys/#{@survey.access_code}/#{response_set.access_code}"
+      post '/users/sign_in', :user => {:email => @user.email, :password => @user.password, :remember_me => 0}
     end
 
     assert_nil(session[:response_set_id])
+
+    assert_redirected_to(surveyor.edit_my_survey_path(:survey_code => @survey.access_code, :response_set_code => response_set.access_code))
   end
 
   def teardown
