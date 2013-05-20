@@ -2,6 +2,9 @@ require 'test_helper'
 
 class ResponseSetTest < ActiveSupport::TestCase
 
+  should belong_to(:dataset)
+  should have_one(:certificate)
+
   test "creating a response set does not a certificate" do
     assert_no_difference "Certificate.count" do
       FactoryGirl.create :response_set
@@ -89,4 +92,37 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
+
+  test "#incomplete! should mark completed response_sets as incomplete" do
+    response_set = FactoryGirl.create :completed_response_set
+
+    assert response_set.complete?
+
+    response_set.incomplete!
+    response_set.reload
+
+    assert_false response_set.complete?
+    assert_nil response_set.completed_at
+  end
+
+  test "#triggered_mandatory_questions should return an array of all the mandatory questions for the response_set" do
+    # non-mandatory question
+    question = FactoryGirl.create(:question, is_mandatory: false)
+
+    survey_section = question.survey_section
+    survey = survey_section.survey
+
+    # mandatory question, but not triggered
+    mandatory_question = FactoryGirl.create(:question, is_mandatory: true, survey_section: survey_section)
+    dependency = FactoryGirl.create(:dependency, question: mandatory_question)
+    FactoryGirl.create :dependency_condition, dependency: dependency, operator: 'count>2'
+
+    # triggered mandatory question
+    triggered_mandatory_question = FactoryGirl.create(:question, is_mandatory: true, survey_section: survey_section)
+    survey.reload
+
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+
+    assert_equal response_set.triggered_mandatory_questions, [triggered_mandatory_question]
+  end
 end

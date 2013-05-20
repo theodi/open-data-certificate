@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
-
   test "Question should have :requirement attribute" do
     question = FactoryGirl.build(:question)
     assert_attribute_exists question, :requirement
@@ -175,4 +174,64 @@ class QuestionTest < ActiveSupport::TestCase
     response_set.reload
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
+
+  test "after save #update_mandatory sets is_mandatory to true for required questions" do
+    required_values = ['pilot', 'basic', 'standard', 'exemplar', 1, 2, 'fred', :symbol]
+
+    required_values.each do |value|
+    question = FactoryGirl.build :question, required: value
+    assert_false question.is_mandatory?
+    question.save
+    assert question.is_mandatory?, "Question should be mandatory for required value of '#{value}'"
+      end
+  end
+
+  test "after save #update_mandatory leaves the is_mandatory field as false for non-required" do
+    non_required_values = ['', nil]
+
+    non_required_values.each do |value|
+      question = FactoryGirl.build :question, required: value
+      assert_false question.is_mandatory?
+      question.save
+      assert_false question.is_mandatory?, "Question should not be mandatory for required value of '#{value}'"
+    end
+  end
+
+  test "after save #update_mandatory leaves the is_mandatory field as true if it was already" do
+    non_required_values = ['', nil]
+
+    non_required_values.each do |value|
+      question = FactoryGirl.build :question, is_mandatory: true, required: value
+      assert question.is_mandatory?
+      question.save
+      assert question.is_mandatory?, "Question was set as mandatory directly, required value of '#{value}' should not make it false"
+    end
+  end
+
+  test "#required gets set to string before validation if it's nil" do
+    question = FactoryGirl.build :question
+    question.required = nil
+    assert question.required.nil?
+    question.valid?
+    assert_false question.required.nil?
+  end
+
+  test "#required should default to being an empty string" do
+    question = FactoryGirl.build :question
+    assert_equal question.required, ''
+  end
+
+  test "#required should not be nil" do
+    question = FactoryGirl.build :question, required: nil
+    assert question.required.nil?
+
+    # overloading the 'value=' method for this instance of Question
+    block=proc{def required=(value);end}
+    question.instance_eval &block
+
+    question.valid?
+    assert_match /should not be nil/, question.errors[:required].join
+  end
+
+
 end
