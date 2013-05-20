@@ -1,5 +1,4 @@
 class ResponseSet < ActiveRecord::Base
-  unloadable
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
@@ -22,11 +21,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def attained_level
-    Survey::REQUIREMENT_LEVELS[minimum_attained_requirement_level-1]
+    @attained_level ||= Survey::REQUIREMENT_LEVELS[minimum_attained_requirement_level-1]
   end
 
   def minimum_attained_requirement_level
-    (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
+    @minimum_attained_requirement_level ||= (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
   end
 
   def completed_requirements
@@ -34,7 +33,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def outstanding_requirements
-    triggered_requirements - completed_requirements
+    @outstanding_requirements ||= (triggered_requirements - completed_requirements)
   end
 
   def generate_certificate

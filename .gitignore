@@ -17,8 +17,9 @@
 # Ignore local VM properties. 
 /.vagrant
 
-# Ignore test coverage files
+# Ignore code-coverage results.
 /coverage
+
 
 /.DS_Store
 prototype/odc_questionnaire.xml
