@@ -13,6 +13,10 @@ class ResponseSet < ActiveRecord::Base
     update_attribute :completed_at, nil
   end
 
+  def incomplete?
+    !complete?
+  end
+
   def triggered_mandatory_questions
     @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
