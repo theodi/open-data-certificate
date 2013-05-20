@@ -60,16 +60,22 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # If the user has a survey stored in their session, assign it to them and redirect to the survey
-    if session[:response_set_id] && response_set = ResponseSet.find(session[:response_set_id])
-      session[:response_set_id] = nil
-      response_set.user = current_user
-      response_set.dataset = Dataset.create(:user => current_user)
-      response_set.save
+    if session[:response_set_id]
 
-      return surveyor.edit_my_survey_path(
-        :survey_code => response_set.survey.access_code,
-        :response_set_code => response_set.access_code
-      )
+      # Find the response set, deleting the session id, even if it isn't found
+      response_set = ResponseSet.find(session.delete(:response_set_id))
+      if response_set
+
+        # Assign the response set to the user, creating a dataset for it
+        response_set.user = current_user
+        response_set.dataset = Dataset.create(:user => current_user)
+        response_set.save
+
+        return surveyor.edit_my_survey_path(
+          :survey_code => response_set.survey.access_code,
+          :response_set_code => response_set.access_code
+        )
+      end
     end
 
     root_path
