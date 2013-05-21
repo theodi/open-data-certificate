@@ -154,4 +154,12 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal response_set.triggered_requirements, [requirement]
   end
 
+  test "#attained_level returns the correct string for the level achieved" do
+    %w(none basic pilot standard exemplar).each_with_index do |level, i|
+      response_set = FactoryGirl.create(:response_set)
+      response_set.stubs(:minimum_attained_requirement_level).returns(i+1)
+      assert_equal response_set.attained_level, level
+    end
+  end
+
 end
