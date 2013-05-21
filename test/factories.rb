@@ -7,7 +7,11 @@ FactoryGirl.define do
   end
 
   factory :dataset do
-    title "test-dataset"
+    title "Test dataset"
+
+    factory :untitled_dataset do
+      title nil
+    end
   end
 
   factory :certificate do
