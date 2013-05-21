@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     if session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
 
       # Assign the response set to the user, creating a dataset for it
-      response_set.assign_to_user(current_user)
+      response_set.assign_to_user!(current_user)
 
       return surveyor.edit_my_survey_path(
         :survey_code => response_set.survey.access_code,

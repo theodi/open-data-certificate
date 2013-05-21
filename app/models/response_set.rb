@@ -70,17 +70,14 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def assign_to_user(user)
+  def assign_to_user!(user)
     self.user = user
     self.dataset = Dataset.create(:user => user)
     save
   end
 
+  private
   def set_default_dataset_title
-      if dataset && dataset.title.nil?
-        dataset.title = title
-        dataset.save
-      end
+    dataset.set_default_title!(title) if dataset
   end
-
 end
