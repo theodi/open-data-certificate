@@ -26,6 +26,7 @@ group :test do
   gem 'sqlite3'
   gem 'simplecov'
   gem 'shoulda'
+  gem 'mocha', require: false
 end
 
 group :development do

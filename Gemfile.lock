@@ -99,8 +99,11 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.23)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.7.2)
     mustache (0.99.4)
     orm_adapter (0.4.0)
@@ -207,6 +210,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   less-rails-bootstrap!
+  mocha
   pg
   rails (= 3.2.13)
   ruby-prof

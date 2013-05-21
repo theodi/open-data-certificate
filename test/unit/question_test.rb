@@ -223,12 +223,9 @@ class QuestionTest < ActiveSupport::TestCase
 
   test "#required should not be nil" do
     question = FactoryGirl.build :question, required: nil
+    question.stubs(:required=)
+
     assert question.required.nil?
-
-    # overloading the 'value=' method for this instance of Question
-    block=proc{def required=(value);end}
-    question.instance_eval &block
-
     question.valid?
     assert_match /should not be nil/, question.errors[:required].join
   end
