@@ -53,9 +53,9 @@ class QuestionTest < ActiveSupport::TestCase
   end
 
   test "#question_corresponding_to_requirement should return the right question" do
-    requirement = FactoryGirl.create(:question, requirement: "the_right_level_#{rand(10)}", display_type: 'label')
+    requirement = FactoryGirl.create(:requirement, requirement: "the_right_level_#{rand(10)}")
 
-    rand(1..5).times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
+    rand(1..5).times { FactoryGirl.create(:requirement, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
     the_right_question = FactoryGirl.create(:question, requirement: requirement.requirement, survey_section: requirement.survey_section)
     rand(1..5).times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
 

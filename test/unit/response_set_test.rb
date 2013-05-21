@@ -105,7 +105,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_nil response_set.completed_at
   end
 
-  test "#triggered_mandatory_questions should return an array of all the mandatory questions for the response_set" do
+  test "#triggered_mandatory_questions should return an array of all the mandatory questions that are triggered by their dependencies for the response_set" do
     # non-mandatory question
     question = FactoryGirl.create(:question, is_mandatory: false)
 
@@ -125,4 +125,33 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     assert_equal response_set.triggered_mandatory_questions, [triggered_mandatory_question]
   end
+
+  test "#triggered_requirements should return an array of all the requirements that are triggered by their dependencies for the response_set" do
+    survey_section = FactoryGirl.create(:survey_section)
+    survey = survey_section.survey
+
+    # non-triggered requirement
+    question = FactoryGirl.create(:question, requirement: 'level_1', survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, requirement: 'level_1', survey_section: survey_section)
+    dependency = FactoryGirl.create(:dependency, question: requirement)
+    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
+
+    # non-triggered requirement
+    question = FactoryGirl.create(:question, requirement: 'level_2', survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, requirement: 'level_2', survey_section: survey_section)
+    dependency = FactoryGirl.create(:dependency, question: requirement)
+    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
+
+    # triggered requirement
+    question = FactoryGirl.create(:question, requirement: 'level_3', survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, requirement: 'level_3', survey_section: survey_section)
+    dependency = FactoryGirl.create(:dependency, question: requirement)
+    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count<2'
+    survey.reload
+
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+
+    assert_equal response_set.triggered_requirements, [requirement]
+  end
+
 end
