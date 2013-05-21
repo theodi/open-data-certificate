@@ -4,6 +4,7 @@ class SurveyorController < ApplicationController
 
   before_filter :ensure_response_set_is_incomplete, only: [:continue, :edit, :update]
 
+
   layout 'application'
 
   def continue
@@ -39,31 +40,26 @@ class SurveyorController < ApplicationController
 
       saved = load_and_update_response_set_with_retries
 
-      # If the response has saved correctly, set the dataset's title to the data's title
-      if saved && @response_set.dataset
-        @response_set.dataset.title = @response_set.title
-        @response_set.dataset.save
-      end
-
       if saved && finish
+        if user_signed_in? && all_mandatory_questions_complete?
+          @response_set.complete!
+          @response_set.save
+          return redirect_with_message(dataset_path(@response_set.dataset), :notice, t('surveyor.completed_survey'))
+        end
+
         if user_signed_in?
-          if all_mandatory_questions_complete?
-            @response_set.complete!
-            @response_set.save
-            return redirect_with_message(dataset_path(@response_set.dataset), :notice, t('surveyor.completed_survey'))
-          else
-            message = t('surveyor.all_mandatory_questions_need_to_be_completed')
-          end
+          message = t('surveyor.all_mandatory_questions_need_to_be_completed')
         else
           message = t('surveyor.must_be_logged_in_to_complete')
         end
-          return redirect_with_message(
-            surveyor.edit_my_survey_path(
-              :anchor => anchor_from(params[:section]),
-              :section => section_id_from(params)
-            ),
-            :warning, message
-          )
+
+        return redirect_with_message(
+          surveyor.edit_my_survey_path(
+            :anchor => anchor_from(params[:section]),
+            :section => section_id_from(params)
+          ),
+          :warning, message
+        )
       end
     end
 

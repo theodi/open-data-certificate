@@ -3,6 +3,7 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
+  after_save :set_default_dataset_title
 
   attr_accessible :dataset_id
 
@@ -68,6 +69,19 @@ class ResponseSet < ActiveRecord::Base
       end
       update_from_ui_hash(ui_hash)
     end
+  end
+
+  def assign_to_user(user)
+    self.user = user
+    self.dataset = Dataset.create(:user => user)
+    save
+  end
+
+  def set_default_dataset_title
+      if dataset && dataset.title.nil?
+        dataset.title = title
+        dataset.save
+      end
   end
 
 end
