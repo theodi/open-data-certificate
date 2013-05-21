@@ -137,8 +137,6 @@ class SurveyorController < ApplicationController
     end
   end
 
-end
-
   private
   def set_response_set_and_render_context
     super
