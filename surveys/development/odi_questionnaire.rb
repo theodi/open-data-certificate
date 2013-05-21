@@ -1,14 +1,14 @@
 # encoding: UTF-8
 # Question#is_mandatory is now false by default. The default_mandatory option allows you to set
 #   is_mandatory for all questions in a survey.
-survey 'ODI Questionnaire', :default_mandatory => false do
+survey 'ODI Questionnaire', :default_mandatory => false, :dataset_title => 'q_dataTitle' do
 
   section 'About' do
 
     # TODO : Helptext
 
-    q_data_title "What's a good title for this data?"
-    a_1 'Data Tile', :string
+    q_dataTitle "What's a good title for this data?"
+    a_1 'Data Title', :string
 
     q_documentationUrl 'Where is the data described?',
                        :help_text => "This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it's useful for reusers to know about it, and because if it's written well then we can fill in a lot of things in this questionnaire based on the information within that page."
