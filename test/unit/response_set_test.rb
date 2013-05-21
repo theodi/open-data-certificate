@@ -157,9 +157,24 @@ class ResponseSetTest < ActiveSupport::TestCase
   test "#attained_level returns the correct string for the level achieved" do
     %w(none basic pilot standard exemplar).each_with_index do |level, i|
       response_set = FactoryGirl.create(:response_set)
-      response_set.stubs(:minimum_attained_requirement_level).returns(i+1)
+      response_set.stubs(:minimum_outstanding_requirement_level).returns(i+1)
       assert_equal response_set.attained_level, level
     end
+  end
+
+  test "#minimum_outstanding_requirement_level returns correct value" do
+    requirements = []
+    Hash[*%w(5 exemplar 4 standard 3 pilot 2 basic 1 none)].each do |k, v|
+      response_set = FactoryGirl.create(:response_set)
+      requirements << stub(requirement_level_index: k.to_i)
+      response_set.stubs(:outstanding_requirements).returns(requirements)
+      assert_equal response_set.minimum_outstanding_requirement_level, k.to_i
+    end
+  end
+
+  test "#minimum_outstanding_requirement_level  returns exemplar index if there's no outstanding requirements" do
+    response_set = FactoryGirl.create(:response_set)
+    assert_equal response_set.minimum_outstanding_requirement_level, 5
   end
 
 end
