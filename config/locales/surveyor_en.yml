@@ -20,4 +20,5 @@ en:
     sections: "Sections"
     language: "Language"
     that_response_set_is_complete: "That response set is complete"
-    all_mandatory_questions_need_to_be_completed: "All mandatory questions need to be completed."
+    all_mandatory_questions_need_to_be_completed: "All mandatory questions need to be completed"
+    must_be_logged_in_to_complete: "Please login or register to complete this survey"

@@ -2,11 +2,17 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
+  after_save :set_default_dataset_title
 
   attr_accessible :dataset_id
 
   belongs_to :dataset
+  belongs_to :survey
   has_one :certificate
+
+  def title
+    responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value) || 'Untitled'
+  end
 
   def incomplete!
     update_attribute :completed_at, nil
@@ -64,4 +70,14 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+  def assign_to_user!(user)
+    self.user = user
+    self.dataset = Dataset.create(:user => user)
+    save
+  end
+
+  private
+  def set_default_dataset_title
+    dataset.set_default_title!(title) if dataset
+  end
 end
