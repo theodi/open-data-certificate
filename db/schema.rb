@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517144237) do
+ActiveRecord::Schema.define(:version => 20130520095400) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20130517144237) do
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
+  add_index "answers", ["question_id", "display_order"], :name => "i_answers_on_question_id_and_display_order"
+  add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
 
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(:version => 20130517144237) do
     t.datetime "updated_at",        :null => false
   end
 
+  add_index "dependencies", ["question_id"], :name => "i_dependencies_on_question_id"
+
   create_table "dependency_conditions", :force => true do |t|
     t.integer  "dependency_id"
     t.string   "rule_key"
@@ -87,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20130517144237) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "dependency_conditions", ["dependency_id"], :name => "i_dependency_conditions_on_dependencies_question_id"
 
   create_table "question_groups", :force => true do |t|
     t.text     "text"
@@ -122,16 +128,19 @@ ActiveRecord::Schema.define(:version => 20130517144237) do
     t.integer  "display_width"
     t.string   "custom_class"
     t.string   "custom_renderer"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
     t.string   "requirement"
-    t.string   "required"
+    t.string   "required",               :default => "", :null => false
     t.string   "help_text_more_url"
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
+  add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
+  add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
+  add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"

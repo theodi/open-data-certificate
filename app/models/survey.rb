@@ -25,19 +25,20 @@ class Survey < ActiveRecord::Base
   end
 
   def questions
-    @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)])
+    @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)]).includes(:dependency => :dependency_conditions)
   end
 
   def requirements
-    @requirements ||= questions.select(&:is_a_requirement?)
+    # questions.select(&:is_a_requirement?)
+    @requirements ||= questions.where(["questions.display_type = ? AND questions.requirement > ''",  'label'])
   end
 
   def only_questions
-    @only_questions ||= (questions - requirements)
+    @only_questions ||= questions.excluding(requirements)
   end
 
   def mandatory_questions
-    @mandatory_questions ||= sections.map{|s| s.questions.where(:is_mandatory => true)}.flatten
+    @mandatory_questions ||= questions.where(:is_mandatory => true)
   end
 
   def valid?(context = nil)
