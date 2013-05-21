@@ -5,10 +5,8 @@ class Question < ActiveRecord::Base
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
-  before_validation :set_default_value_for_required
+  before_save :set_default_value_for_required
   after_save :update_mandatory
-
-  validate :required_is_not_nil # don't let requirement be null, as we're querying the DB for it in the Survey
 
   def requirement_level
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
@@ -79,11 +77,7 @@ class Question < ActiveRecord::Base
 
   private
   def set_default_value_for_required
-    self.required ||= ''
+    self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
-  private
-  def required_is_not_nil
-    errors.add(:required, 'should not be nil') if required.nil?
-  end
 end

@@ -202,11 +202,11 @@ class QuestionTest < ActiveSupport::TestCase
     end
   end
 
-  test "#required gets set to string before validation if it's nil" do
+  test "#required gets set to string before save if it's nil" do
     question = FactoryGirl.build :question
     question.required = nil
     assert question.required.nil?
-    question.valid?
+    question.save!
     assert_false question.required.nil?
   end
 
@@ -214,15 +214,5 @@ class QuestionTest < ActiveSupport::TestCase
     question = FactoryGirl.build :question
     assert_equal question.required, ''
   end
-
-  test "#required should not be nil" do
-    question = FactoryGirl.build :question, required: nil
-    question.stubs(:required=)
-
-    assert question.required.nil?
-    question.valid?
-    assert_match /should not be nil/, question.errors[:required].join
-  end
-
 
 end
