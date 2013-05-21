@@ -1,19 +1,13 @@
 require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
-  test "Question should have :requirement attribute" do
+  test "Question should have attributes we've added" do
+    attributes_that_we_have_added = [:requirement, :required, :help_text_more_url]
     question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :requirement
-  end
 
-  test "Question should have :required attribute" do
-    question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :required
-  end
-
-  test "Question should have :help_text_more_url attribute" do
-    question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :help_text_more_url
+    attributes_that_we_have_added.each do |attribute|
+      assert_attribute_exists question, attribute
+    end
   end
 
   test "#requirement_level should be the string from 'requirement' attribute" do
