@@ -23,12 +23,6 @@ class DatasetsController < ApplicationController
 
   def show
     @surveys = Survey.available_to_complete
-
-    if @dataset.user.nil? && user_signed_in?
-      # give the unclaimed dataset to the user
-      @dataset.user = current_user
-      @dataset.save
-    end
   end
 
 end

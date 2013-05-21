@@ -1,9 +1,13 @@
 # encoding: UTF-8
 # Question#is_mandatory is now false by default. The default_mandatory option allows you to set
 #   is_mandatory for all questions in a survey.
-survey "Kitchen Sink survey", :default_mandatory => false do
+survey "Kitchen Sink survey", :default_mandatory => false, :dataset_title => 'q_dataTitle' do
 
   section "Basic questions" do
+
+    q_dataTitle "What's a good title for this data?"
+    a_1 'Data Title', :string
+
     # A label is a question that accepts no answers
     label "These questions are examples of the basic supported input types"
 
@@ -179,7 +183,7 @@ survey "Kitchen Sink survey", :default_mandatory => false do
     # Questions may also have input masks with fancy placeholders
     q "What is your phone number?"
     a :string, :input_mask => '(999)999-9999', :input_mask_placeholder => '#'
-    
+
   end
 
   section "Complicated questions" do

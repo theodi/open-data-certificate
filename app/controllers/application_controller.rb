@@ -41,11 +41,15 @@ class ApplicationController < ActionController::Base
              :user_id => (current_user.nil? ? current_user : current_user.id),
              :dataset_id => @dataset.id
     )
+
     if @survey && @response_set
+      session[:response_set_id] = current_user ? nil : @response_set.id
+
       if params[:source_response_set_id]
         source_response_set = ResponseSet.find(params[:source_response_set_id]) # TODO: ensure user has rights to copy the response set answers?
         @response_set.copy_answers_from_response_set!(source_response_set)
       end
+
       flash[:notice] = t('surveyor.survey_started_success')
       redirect_to(surveyor.edit_my_survey_path(
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
@@ -53,6 +57,23 @@ class ApplicationController < ActionController::Base
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
       redirect_to @dataset.persisted? ? @dataset : root_url
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    # If the user has a survey stored in their session, assign it to them and redirect to the survey,
+    # deleting the session id even if the response set isn't found
+    if session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
+
+      # Assign the response set to the user, creating a dataset for it
+      response_set.assign_to_user!(current_user)
+
+      return surveyor.edit_my_survey_path(
+        :survey_code => response_set.survey.access_code,
+        :response_set_code => response_set.access_code
+      )
+    end
+
+    root_path
   end
 
 end
