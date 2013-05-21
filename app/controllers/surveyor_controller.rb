@@ -4,6 +4,7 @@ class SurveyorController < ApplicationController
 
   before_filter :ensure_response_set_is_incomplete, only: [:continue, :edit, :update]
 
+
   layout 'application'
 
   def continue
@@ -26,33 +27,57 @@ class SurveyorController < ApplicationController
   end
 
   def update
-    question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
-    saved = load_and_update_response_set_with_retries
+    set_response_set_and_render_context
 
-    if saved && params[:finish]
-      if all_mandatory_questions_complete?
-        return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
-      else
-        @response_set.incomplete!
-        return redirect_with_message(surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params)), :warning, t('surveyor.all_mandatory_questions_need_to_be_completed'))
+    if @response_set
+
+      if @response_set.complete?
+        return redirect_with_message(surveyor_index, :notice, t('surveyor.that_response_set_is_complete'))
+      end
+
+      # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
+      finish = params.delete(:finish)
+
+      saved = load_and_update_response_set_with_retries
+
+      if saved && finish
+        if user_signed_in? && all_mandatory_questions_complete?
+          @response_set.complete!
+          @response_set.save
+          return redirect_with_message(dataset_path(@response_set.dataset), :notice, t('surveyor.completed_survey'))
+        end
+
+        if user_signed_in?
+          message = t('surveyor.all_mandatory_questions_need_to_be_completed')
+        else
+          message = t('surveyor.must_be_logged_in_to_complete')
+        end
+
+        return redirect_with_message(
+          surveyor.edit_my_survey_path(
+            :anchor => anchor_from(params[:section]),
+            :section => section_id_from(params)
+          ),
+          :warning, message
+        )
       end
     end
 
     respond_to do |format|
       format.html do
-        if @response_set.nil?
-          return redirect_with_message(surveyor.available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
-        else
+        if @response_set
           flash[:notice] = t('surveyor.unable_to_update_survey') unless saved
           redirect_to surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
+        else
+          redirect_with_message(surveyor.available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
         end
       end
       format.js do
         if @response_set
+          question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
           render :json => @response_set.reload.all_dependencies(question_ids_for_dependencies)
         else
-          render :text => "No response set #{params[:response_set_code]}",
-                 :status => 404
+          render :text => "No response set #{params[:response_set_code]}", :status => 404
         end
       end
     end
