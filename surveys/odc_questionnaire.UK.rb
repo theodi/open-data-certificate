@@ -6,14 +6,18 @@ survey 'Open Data Certificate Questionnaire',
   section_general 'General Information' do
 
     q_dataTitle 'What\'s a good title for this data?',
-                :help_text => 'This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.'
+                :help_text => 'This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.',
+                :text_as_statement => 'Data Title',
+                :display_on_certificate => true
     a_1 'Data Title',
         :string,
         :placeholder => 'Data Title',
         :required => :required
 
     q_documentationUrl 'Where is the data described?',
-                       :help_text => 'This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it\'s useful for reusers to know about it, and because if it\'s written well then we can fill in a lot of things in this questionnaire based on the information within that page.'
+                       :help_text => 'This should be the URL of a page that describes the open data and what it contains. This might be a page that describes the dataset within a catalog such as data.gov.uk. We ask for this page because it\'s useful for reusers to know about it, and because if it\'s written well then we can fill in a lot of things in this questionnaire based on the information within that page.',
+                       :display_on_certificate => true,
+                       :text_as_statement => 'Documentation URL'
     a_1 'Documentation URL',
         :string,
         :input_type => :url,
@@ -34,7 +38,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_documentationUrl, '==', { :string_value => '', :answer_reference => '1' }
 
     q_publisher 'What\'s the name of the curating organisation?',
-                :help_text => 'This is the organisation that the open data will be associated with the Open Data Certificate. It should be the organisation that manages the creation of and curates the open data. The data might actually be published by someone else, such as central government or a third-party contractor.'
+                :help_text => 'This is the organisation that the open data will be associated with the Open Data Certificate. It should be the organisation that manages the creation of and curates the open data. The data might actually be published by someone else, such as central government or a third-party contractor.',
+                :text_as_statement => 'Data Curator',
+                :display_on_certificate => true
     a_1 'Data Curator',
         :string,
         :placeholder => 'Data Curator',
@@ -45,11 +51,14 @@ survey 'Open Data Certificate Questionnaire',
     a_1 'Curator URL',
         :string,
         :input_type => :url,
-        :placeholder => 'Curator URL'
+        :placeholder => 'Curator URL',
+        :display_on_certificate => true
 
     q_releaseType 'What kind of data release is this?',
                   :pick => :one,
-                  :required => :required
+                  :required => :required,
+                  :text_as_statement => 'This is',
+                  :display_on_certificate => true
     a_oneoff 'a one-off release of a single dataset',
              :help_text => 'Choose this option if the open data release is the publication of a single file, such as a spreadsheet, with no intention to publish similar files in the future.'
     a_collection 'a one-off release of a set of related datasets',
@@ -70,10 +79,16 @@ survey 'Open Data Certificate Questionnaire',
     q_publisherRights 'Do you have the rights to publish the data as open data?',
                       :help_text => 'Unless all the data was originally created or gathered by your organisation, you might not have the right to republish it. We ask this question to check that you have considered the ownership of the data. If you aren\'t sure, we will ask further questions about the source of the data you\'re publishing to find out.',
                       :pick => :one,
-                      :required => :required
-    a_yes 'yes, you have the right to publish the data as open data'
-    a_no 'no, you don\'t have the right to publish the data as open data'
-    a_unsure 'you don\'t know whether you have the right to publish the data as open data'
+                      :required => :required,
+                      :text_as_statement => 'The Curator',
+                      :display_on_certificate => true
+    a_yes 'yes, you have the right to publish the data as open data',
+          :text_as_statement => 'has the right to publish the data as open data'
+    a_no 'no, you don\'t have the right to publish the data as open data',
+          :text_as_statement => 'does not have the right to publish the data as open data'
+    a_unsure 'you don\'t know whether you have the right to publish the data as open data',
+          :text_as_statement => 'doesn\'t know whether they have"'
+            ' right to publish the data as open data'
 
     label_basic_2 'You must **have the right to publish data** that you publish.',
                   :custom_renderer => '/partials/requirement_basic'
