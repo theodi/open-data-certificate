@@ -30,10 +30,12 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'ruby-prof'
+  gem 'pg'
 end
 
 group :production do
-  gem 'pg'
+  gem 'foreman'
+  gem 'mysql2'
 end
 
 gem 'jquery-rails'
@@ -49,6 +51,7 @@ gem 'high_voltage'
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano'
