@@ -2,6 +2,8 @@ class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
 
+  after_save :set_default_dataset_title
+
   def requirement_level
     @requirement_level ||= answer.requirement_level
   end
@@ -20,6 +22,15 @@ class Response < ActiveRecord::Base
       memo[key] = value unless value.blank?
       memo
     end
+  end
+
+  def dataset
+    response_set.try(:dataset)
+  end
+
+  private
+  def set_default_dataset_title
+    dataset.try(:set_default_title!, response_set.title_determined_from_responses)
   end
 
 end

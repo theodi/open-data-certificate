@@ -2,7 +2,6 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
-  after_save :set_default_dataset_title
 
   attr_accessible :dataset_id
 
@@ -10,8 +9,14 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :survey
   has_one :certificate
 
+  DEFAULT_TITLE = 'Untitled'
+
   def title
-    responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value) || 'Untitled'
+    title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+  end
+
+  def title_determined_from_responses
+    @title_determined_from_responses ||= responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value)
   end
 
   def incomplete?
@@ -74,8 +79,4 @@ class ResponseSet < ActiveRecord::Base
     save
   end
 
-  private
-  def set_default_dataset_title
-    dataset.set_default_title!(title) if dataset
-  end
 end

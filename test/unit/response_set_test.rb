@@ -190,12 +190,29 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal [triggered_requirements.last], response_set.outstanding_requirements
   end
 
-  test "#title returns the answer of the response to the question referenced as 'dataTitle'" do
+  test "#title_determined_from_responses returns the answer of the response to the question referenced as 'dataTitle'" do
     question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'my response set title'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.title_determined_from_responses
+  end
+
+  test "#title returns the title determined from the responses if there is one" do
+    question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
+    answer = FactoryGirl.create(:answer, question: question)
+    expected_value = 'my response set title'
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.title
+  end
+
+  test "#title returns the default title if it cannot be determined from the responses" do
+    expected_value = ResponseSet::DEFAULT_TITLE
+    response_set = FactoryGirl.create(:response_set)
 
     assert_equal expected_value, response_set.title
   end
