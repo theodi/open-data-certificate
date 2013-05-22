@@ -172,9 +172,35 @@ class ResponseSetTest < ActiveSupport::TestCase
     end
   end
 
-  test "#minimum_outstanding_requirement_level  returns exemplar index if there's no outstanding requirements" do
+  test "#minimum_outstanding_requirement_level returns exemplar index if there's no outstanding requirements" do
     response_set = FactoryGirl.create(:response_set)
     assert_equal response_set.minimum_outstanding_requirement_level, 5
+  end
+
+  test "#completed_requirements returns only triggered_requirements that are met by responses" do
+    triggered_requirements = [ stub(requirement: 'level_1', requirement_met_by_responses?: true),
+                               stub(requirement: 'level_2', requirement_met_by_responses?: false),
+                               stub(requirement: 'level_3', requirement_met_by_responses?: false),
+                               stub(requirement: 'level_4', requirement_met_by_responses?: false),
+                               ]
+
+    response_set = FactoryGirl.create(:response_set)
+    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
+
+    assert_equal [triggered_requirements.first], response_set.completed_requirements
+  end
+
+  test "#outstanding_requirements returns only triggered_requirements that are not met by responses" do
+    triggered_requirements = [ stub(requirement: 'level_1', requirement_met_by_responses?: true),
+                               stub(requirement: 'level_2', requirement_met_by_responses?: true),
+                               stub(requirement: 'level_3', requirement_met_by_responses?: true),
+                               stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    ]
+
+    response_set = FactoryGirl.create(:response_set)
+    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
+
+    assert_equal [triggered_requirements.last], response_set.outstanding_requirements
   end
 
 end
