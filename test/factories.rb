@@ -73,6 +73,11 @@ questions:
     q.is_mandatory false
                                   # q.display_width           {}
     q.correct_answer_id nil
+
+    factory :requirement do
+      requirement 'level_1'
+      display_type 'label'
+    end
   end
 
   factory :question_group do |g|
@@ -106,6 +111,7 @@ questions:
     # a.display_length            {}
     # a.custom_class              {}
     # a.custom_renderer           {}
+
   end
 
   factory :dependency do |d|
