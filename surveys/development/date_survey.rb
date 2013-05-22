@@ -1,7 +1,10 @@
 # encoding: UTF-8
-survey "Date Survey" do
+survey "Date Survey", :dataset_title => 'q_dataTitle' do
 
   section "Simple date questions" do
+
+    q_dataTitle "What's a good title for this data?"
+    a_1 'Data Title', :string
 
     q "What is your birth date?"
     a :date

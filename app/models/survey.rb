@@ -4,12 +4,24 @@ class Survey < ActiveRecord::Base
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
+  validates :dataset_title, :presence => true
+  attr_accessible :dataset_title
+
+  has_many :response_sets
 
   class << self
     def available_to_complete
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
       order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
     end
+
+    def newest_survey_for_access_code(access_code)
+      where(:access_code => access_code).order("surveys.survey_version DESC").first
+    end
+  end
+
+  def superceded?
+    !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
   def questions

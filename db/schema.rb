@@ -55,14 +55,14 @@ ActiveRecord::Schema.define(:version => 20130520095400) do
   end
 
   create_table "datasets", :force => true do |t|
-    t.string   "title"
+    t.string   "title",             :default => "Untitiled"
     t.string   "documentation_url"
     t.string   "curating_org"
     t.string   "curator_url"
     t.string   "data_kind"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "dependencies", :force => true do |t|
@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(:version => 20130520095400) do
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
   add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
-  add_index "questions", ["survey_section_id"], :name => "index_questions_on_survey_section_id"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"
@@ -227,6 +226,7 @@ ActiveRecord::Schema.define(:version => 20130520095400) do
     t.integer  "display_order"
     t.string   "api_id"
     t.integer  "survey_version",         :default => 0
+    t.string   "dataset_title"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true
