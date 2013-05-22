@@ -906,31 +906,44 @@ questions:
         text: "Tool URL"
 labels:
   ownership:
-    title: "Rightsyour right to share this data with people"
+    title: "Rights"
+    help_text: "your right to share this data with people"
   licensing:
-    title: "Licensinghow you give people permission to use your data"
+    title: "Licensing"
+    help_text: "how you give people permission to use your data"
   privacy:
-    title: "Privacyhow you protect people's privacy"
+    title: "Privacy"
+    help_text: "how you protect people's privacy"
   findability:
-    title: "Findabilityhow you help people find your data"
+    title: "Findability"
+    help_text: "how you help people find your data"
   accuracy:
-    title: "Accuracyhow you keep your data up-to-date"
+    title: "Accuracy"
+    help_text: "how you keep your data up-to-date"
   quality:
-    title: "Qualityhow people can report problems and improve your data"
+    title: "Quality"
+    help_text: "how people can report problems and improve your data"
   guarantees:
-    title: "Guaranteeshow much people can depend on your data’s availability"
+    title: "Guarantees"
+    help_text: "how much people can depend on your data’s availability"
   locations:
-    title: "Locationshow people can access your data"
+    title: "Locations"
+    help_text: "how people can access your data"
   format:
-    title: "Formatshow people can work with your data"
+    title: "Formats"
+    help_text: "how people can work with your data"
   trust:
-    title: "Trusthow much trust people can put in your data"
+    title: "Trust"
+    help_text: "how much trust people can put in your data"
   documentation:
-    title: "Documentationhow you help people understand the context and content of your data"
+    title: "Documentation"
+    help_text: "how you help people understand the context and content of your data"
   support:
-    title: "Supporthow you communicate with people who use your data"
+    title: "Support"
+    help_text: "how you communicate with people who use your data"
   services:
-    title: "Serviceshow you give people access to tools they need to work with your data"
+    title: "Services"
+    help_text: "how you give people access to tools they need to work with your data"
 # General Information Requirements
   pilot_1:
     text: "You should have a **web page that offers documentation** about the open data you publish so that people can understand its context, content and utility."

@@ -3,7 +3,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
 <questionnaire version="0.6" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
@@ -63,7 +63,7 @@
 		<label>Legal Information</label>
 		<group id="ownership">
 			<label>Rights</label>
-			<label>your right to share this data with people</label>
+			<help>your right to share this data with people</help>
 			<question id="publisherRights">
 				<label>Do you have the rights to publish this data as open data?</label>
 				<radioset required="required">
@@ -158,7 +158,7 @@
 		</group>
 		<group id="licensing">
 			<label>Licensing</label>
-			<label>how you give people permission to use your data</label>
+			<help>how you give people permission to use your data</help>
 			<question id="copyrightURL">
 				<label>Where is your rights statement?</label>
 				<input type="url" placeholder="Rights statement URL"/>
@@ -333,7 +333,7 @@
 		</group>
 		<group id="privacy">
 			<label>Privacy</label>
-			<label>how you protect people's privacy</label>
+			<help>how you protect people's privacy</help>
 			<question id="dataPersonal">
 				<label>Can individuals be identified from this data?</label>
 				<radioset required="pilot">
@@ -432,7 +432,7 @@
 		<label>Practical Information</label>
 		<group id="findability">
 			<label>Findability</label>
-			<label>how you help people find your data</label>
+			<help>how you help people find your data</help>
 			<question id="linkedTo">
 				<label>Can people find more information about your data within three clicks of your home page?</label>
 				<yesno/>
@@ -474,7 +474,7 @@
 		</group>
 		<group id="accuracy">
 			<label>Accuracy</label>
-			<label>how you keep your data up-to-date</label>
+			<help>how you keep your data up-to-date</help>
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceType">
 					<label>Does the data behind your API change?</label>
@@ -630,7 +630,7 @@
 		</group>
 		<group id="quality">
 			<label>Quality</label>
-			<label>how people can report problems and improve your data</label>
+			<help>how people can report problems and improve your data</help>
 			<question id="qualityUrl">
 				<label>Where do you document data quality issues?</label>
 				<input type="url" placeholder="Quality Issues URL"/>
@@ -646,7 +646,7 @@
 		</group>
 		<group id="guarantees">
 			<label>Guarantees</label>
-			<label>how much people can depend on your data’s availability</label>
+			<help>how much people can depend on your data’s availability</help>
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceAvailability">
 					<label>What is the guaranteed availability of your data?</label>
@@ -697,7 +697,7 @@
 		<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'series' || this.releaseType() === 'service' || this.changeFeed() === 'true'">
 			<group id="locations">
 				<label>Locations</label>
-				<label>how people can access your data</label>
+				<help>how people can access your data</help>
 				<if test="this.releaseType() === 'oneoff'">
 					<question id="datasetUrl">
 						<label>Where is your dataset?</label>
@@ -824,7 +824,7 @@
 		</if>
 		<group id="format">
 			<label>Formats</label>
-			<label>how people can work with your data</label>
+			<help>how people can work with your data</help>
 			<question id="machineReadable">
 				<label>Is this data machine-readable?</label>
 				<yesno/>
@@ -999,7 +999,7 @@
 		</group>
 		<group id="trust">
 			<label>Trust</label>
-			<label>how much trust people can put in your data</label>
+			<help>how much trust people can put in your data</help>
 			<question id="provenance">
 				<label>Do you provide machine-readable provenance for your data?</label>
 				<yesno/>
@@ -1018,7 +1018,7 @@
 		<label>Social Information</label>
 		<group id="documentation">
 			<label>Documentation</label>
-			<label>how you help people understand the context and content of your data</label>
+			<help>how you help people understand the context and content of your data</help>
 			<if test="this.documentationUrl() !== ''">
 				<question id="documentationMetadata">
 					<label>Does your data documentation include machine-readable data for:</label>
@@ -1156,7 +1156,7 @@
 		</group>
 		<group id="support">
 			<label>Support</label>
-			<label>how you communicate with people who use your data</label>
+			<help>how you communicate with people who use your data</help>
 			<question id="contactEmail">
 				<label>Who should people email with questions about this data?</label>
 				<input type="email" placeholder="Contact Email Address"/>
@@ -1216,7 +1216,7 @@
 		</group>
 		<group id="services">
 			<label>Services</label>
-			<label>how you give people access to tools they need to work with your data</label>
+			<help>how you give people access to tools they need to work with your data</help>
 			<question id="libraries">
 				<label>Where do you list tools to work with your data?</label>
 				<input type="url" placeholder="Tool URL"/>

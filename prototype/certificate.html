@@ -252,7 +252,15 @@
                            <p class="improvement"><a class="improvement-label" href="#geographicFormat" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.</span></p>
                         </div>
                      </div>
-                     <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>use URLs to identify things in your data</strong> so that they can be easily related with other data about those things.</span></p>
+                     <p class="improvement" data-bind="visible: identifiers() === ''"><a class="improvement-label" href="#identifiers" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.</span></p>
+                     <div data-bind="visible: identifiers() === 'true'">
+                        <div data-bind="visible: resolvingIds() !== 'service' &amp;&amp; resolvingIds() !== 'resolvable'">
+                           <p class="improvement"><a class="improvement-label" href="#resolvingIds" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.</span></p>
+                        </div>
+                        <div data-bind="visible: resolvingIds() === 'service'">
+                           <p class="improvement" data-bind="visible: resolutionServiceURL() === ''"><a class="improvement-label" href="#resolutionServiceURL" data-toggle="tab" data-target="#technical"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.</span></p>
+                        </div>
+                     </div>
                      <div data-bind="visible: documentationUrl() !== ''">
                         <p class="improvement" data-bind="visible: !documentationMetadataModified()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data.</span></p>
                         <p class="improvement" data-bind="visible: !documentationMetadataAccrualPeriodicity()"><a class="improvement-label" href="#documentationMetadata"><span class="label label-standard"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it.</span></p>
@@ -335,7 +343,9 @@
                         </div>
                      </div>
                      <div data-bind="visible: identifiers() === 'true'">
-                        <p class="improvement" data-bind="visible: resolvingUrls() === ''"><a class="improvement-label" href="#resolvingUrls" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>have a web page of information about each of the things in your data</strong> so that people can easily find and share that information.</span></p>
+                        <div data-bind="visible: resolvingIds() !== 'resolvable'">
+                           <p class="improvement"><a class="improvement-label" href="#resolvingIds" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.</span></p>
+                        </div>
                         <div data-bind="visible: existingExternalUrls() === 'true'">
                            <div data-bind="visible: reliableExternalUrls">
                               <p class="improvement" data-bind="visible: externalUrls() === ''"><a class="improvement-label" href="#externalUrls" data-toggle="tab" data-target="#technical"><span class="label label-exemplar"><i class="icon-star icon-white"></i></span></a><span class="improvement-desc">You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs.</span></p>
@@ -499,7 +509,7 @@
                      <div id="legal" class="accordion-body collapse">
                         <div class="accordion-inner">
                            <fieldset id="ownership">
-                              <legend>Rightsyour right to share this data with people</legend>your right to share this data with people
+                              <legend>Rights <small>your right to share this data with people</small></legend>
                               <div class="control-group"><label class="control-label"> Do you have the rights to publish this data as open data?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#publisherRights-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" data-focus-target="#publisherRights-help" value="yes">yes, you have the rights to publish this data as open data</label><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" data-focus-target="#publisherRights-help" value="no">no, you don't have the rights to publish this data as open data</label><label class="radio"><input type="radio" name="publisherRights" data-bind="checked: publisherRights" data-focus-target="#publisherRights-help" value="unsure">you're not sure if you have the rights to publish this data as open data</label><span class="conditional" data-bind="visible: publisherRights() === 'no'">
                                        					
                                        				</span><div class="help-block collapse" id="publisherRights-help">
@@ -676,7 +686,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="licensing">
-                              <legend>Licensinghow you give people permission to use your data</legend>how you give people permission to use your data
+                              <legend>Licensing <small>how you give people permission to use your data</small></legend>
                               <div class="control-group"><label class="control-label" for="copyrightURL"> Where is your rights statement?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#copyrightURL-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="copyrightURL" name="copyrightURL" data-bind="value: copyrightURL, valueUpdate: 'afterkeydown'" data-focus-target="#copyrightURL-help" placeholder="Rights statement URL"> <span class="label label-pilot" data-toggle="collapse" data-target="#copyrightURL-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="help-block collapse" id="copyrightURL-help">
                                        <p class="alert alert-help">Give a URL to a rights statement which shows who owns copyright and database rights
                                           to the data. This statement also says what you allow people to do with this data under
@@ -921,7 +931,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="privacy">
-                              <legend>Privacyhow you protect people's privacy</legend>how you protect people's privacy
+                              <legend>Privacy <small>how you protect people's privacy</small></legend>
                               <div class="control-group"><label class="control-label"> Can individuals be identified from this data?</label><div class="controls"><label class="radio"><input type="radio" name="dataPersonal" data-bind="checked: dataPersonal" value="not-personal">no, the data is not about people or their activities<button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#dataPersonalnot-personal-help"><i class="icon-question-sign"></i></button></label><div class="help-block collapse" id="dataPersonalnot-personal-help">
                                        <p class="alert alert-help">Remember that individuals can still be identified even if data isn't directly about
                                           them. For example, road traffic flow data combined with an individual's commuting
@@ -1059,7 +1069,7 @@
                      <div id="practical" class="accordion-body collapse">
                         <div class="accordion-inner">
                            <fieldset id="findability">
-                              <legend>Findabilityhow you help people find your data</legend>how you help people find your data
+                              <legend>Findability <small>how you help people find your data</small></legend>
                               <div class="control-group"><label class="control-label"> Can people find more information about your data within three clicks of your home
                                     page?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#linkedTo-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="linkedTo" data-bind="checked: linkedTo" data-focus-target="#linkedTo-help"> No</label><label class="radio inline"><input type="radio" value="true" name="linkedTo" data-bind="checked: linkedTo" data-focus-target="#linkedTo-help"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#linkedTo-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="linkedTo-help">
                                        <p class="alert alert-help">If documentation is reachable via links from your home page people can find it quickly
@@ -1131,7 +1141,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="accuracy">
-                              <legend>Accuracyhow you keep your data up-to-date</legend>how you keep your data up-to-date
+                              <legend>Accuracy <small>how you keep your data up-to-date</small></legend>
                               <div class="conditional" data-bind="visible: releaseType() === 'service'">
                                  				
                                  <div class="control-group"><label class="control-label"> Does the data behind your API change?</label><div class="controls"><label class="radio"><input type="radio" name="serviceType" data-bind="checked: serviceType" value="static">no, the API gives access to unchanging data<button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#serviceTypestatic-help"><i class="icon-question-sign"></i></button></label><div class="help-block collapse" id="serviceTypestatic-help">
@@ -1297,7 +1307,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="quality">
-                              <legend>Qualityhow people can report problems and improve your data</legend>how people can report problems and improve your data
+                              <legend>Quality <small>how people can report problems and improve your data</small></legend>
                               <div class="control-group"><label class="control-label" for="qualityUrl"> Where do you document data quality issues?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#qualityUrl-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="qualityUrl" name="qualityUrl" data-bind="value: qualityUrl, valueUpdate: 'afterkeydown'" data-focus-target="#qualityUrl-help" placeholder="Quality Issues URL"> <span class="label label-standard" data-toggle="collapse" data-target="#qualityUrl-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="qualityUrl-help">
                                        <p class="alert alert-help">Give a URL where people can report problems. People accept that errors are inevitable,
                                           from equipment malfunctions or mistakes that happen in system migrations. You should
@@ -1320,7 +1330,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="guarantees">
-                              <legend>Guaranteeshow much people can depend on your data’s availability</legend>how much people can depend on your data’s availability
+                              <legend>Guarantees <small>how much people can depend on your data’s availability</small></legend>
                               <div class="conditional" data-bind="visible: releaseType() === 'service'">
                                  				
                                  <div class="control-group"><label class="control-label"> What is the guaranteed availability of your data?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#serviceAvailability-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" data-focus-target="#serviceAvailability-help" value="minimal">minimal or no formal guarantees about availability</label><label class="radio"><input type="radio" name="serviceAvailability" data-bind="checked: serviceAvailability" data-focus-target="#serviceAvailability-help" value="atleast99">at least 99% availability <span class="label label-pilot" data-toggle="collapse" data-target="#serviceAvailabilityatleast99-requirement"><i class="icon-star icon-white"></i> Pilot</span></label><p class="requirement" id="serviceAvailabilityatleast99-requirement">You should <strong>guarantee at least 99% service availability</strong> (less than 4 days downtime/year) so that people can decide how much to rely on your
@@ -1357,7 +1367,7 @@
                            <div class="conditional" data-bind="visible: releaseType() === 'oneoff' || releaseType() === 'series' || releaseType() === 'service' || changeFeed() === 'true'">
                               			
                               <fieldset id="locations">
-                                 <legend>Locationshow people can access your data</legend>how people can access your data
+                                 <legend>Locations <small>how people can access your data</small></legend>
                                  <div class="conditional" data-bind="visible: releaseType() === 'oneoff'">
                                     					
                                     <div class="control-group"><label class="control-label" for="datasetUrl"> Where is your dataset?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#datasetUrl-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="datasetUrl" name="datasetUrl" data-bind="value: datasetUrl, valueUpdate: 'afterkeydown'" data-focus-target="#datasetUrl-help" placeholder="Dataset URL"><span class="conditional" data-bind="visible: documentationUrl() === ''">
@@ -1578,7 +1588,7 @@
                               		
                            </div>
                            <fieldset id="format">
-                              <legend>Formatshow people can work with your data</legend>how people can work with your data
+                              <legend>Formats <small>how people can work with your data</small></legend>
                               <div class="control-group"><label class="control-label"> Is this data machine-readable?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#machineReadable-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="machineReadable" data-bind="checked: machineReadable" data-focus-target="#machineReadable-help"> No</label><label class="radio inline"><input type="radio" value="true" name="machineReadable" data-bind="checked: machineReadable" data-focus-target="#machineReadable-help"> Yes</label> <span class="label label-pilot" data-toggle="collapse" data-target="#machineReadable-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="help-block collapse" id="machineReadable-help">
                                        <p class="alert alert-help">People prefer data formats which are easily processed by a computer, for speed and
                                           accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable
@@ -1709,28 +1719,48 @@
                                  </div>
                                  			
                               </div>
-                              <div class="control-group"><label class="control-label"> Does your data use URLs to identify things?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#identifiers-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers" data-focus-target="#identifiers-help"> No</label><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers" data-focus-target="#identifiers-help"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="identifiers-help">
-                                       <p class="alert alert-help">Data is usually about real things like schools or roads. And URLs give people a way
-                                          to find out more about those things. If data from different sources use the same consistent
-                                          URL to refer to the same things, people can combine sources easily to create more
-                                          useful data. You can also use URLs to replace identifying numbers or codes.
+                              <div class="control-group"><label class="control-label"> Does your data use persistent identifiers for things?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#identifiers-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="identifiers" data-bind="checked: identifiers" data-focus-target="#identifiers-help"> No</label><label class="radio inline"><input type="radio" value="true" name="identifiers" data-bind="checked: identifiers" data-focus-target="#identifiers-help"> Yes</label> <span class="label label-standard" data-toggle="collapse" data-target="#identifiers-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="identifiers-help">
+                                       <p class="alert alert-help">Data is usually about real things like schools or roads. If data from different sources
+                                          use the same persistent and unique identifier to refer to the same things, people
+                                          can combine sources easily to create more useful data. Identifiers might be GUIDs,
+                                          DOIs or URLs.
                                        </p>
                                     </div>
-                                    <p class="requirement" id="identifiers-requirement">You should <strong>use URLs to identify things in your data</strong> so that they can be easily related with other data about those things.
+                                    <p class="requirement" id="identifiers-requirement">You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.
                                     </p>
                                  </div>
                               </div>
                               <div class="conditional" data-bind="visible: identifiers() === 'true'">
                                  				
-                                 <div class="control-group"><label class="control-label"> Do URLs about things in your data point to extra information?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#resolvingUrls-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="resolvingUrls" data-bind="checked: resolvingUrls" data-focus-target="#resolvingUrls-help"> No</label><label class="radio inline"><input type="radio" value="true" name="resolvingUrls" data-bind="checked: resolvingUrls" data-focus-target="#resolvingUrls-help"> Yes</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#resolvingUrls-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="help-block collapse" id="resolvingUrls-help">
+                                 <div class="control-group"><label class="control-label"> Can the identifiers in your data be used to find extra information?</label><div class="controls"><label class="radio"><input type="radio" name="resolvingIds" data-bind="checked: resolvingIds" value="false">no, the identifiers can't be used to find extra information</label><label class="radio"><input type="radio" name="resolvingIds" data-bind="checked: resolvingIds" value="service">yes, there is a service that people can use to resolve the identifiers<button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#resolvingIdsservice-help"><i class="icon-question-sign"></i></button> <span class="label label-standard" data-toggle="collapse" data-target="#resolvingIdsservice-requirement"><i class="icon-star icon-white"></i> Standard</span></label><div class="help-block collapse" id="resolvingIdsservice-help">
+                                          <p class="alert alert-help">Online services can be used to give people information about identifiers such as GUIDs
+                                             or DOIs which can't be directly accessed in the way that URLs are.
+                                          </p>
+                                       </div>
+                                       <p class="requirement" id="resolvingIdsservice-requirement">You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.
+                                       </p><label class="radio"><input type="radio" name="resolvingIds" data-bind="checked: resolvingIds" value="resolvable">yes, the identifiers are URLs that resolve to give information<button type="button" class="btn btn-link btn-option-help" data-toggle="collapse" data-target="#resolvingIdsresolvable-help"><i class="icon-question-sign"></i></button> <span class="label label-exemplar" data-toggle="collapse" data-target="#resolvingIdsresolvable-requirement"><i class="icon-star icon-white"></i> Exemplar</span></label><div class="help-block collapse" id="resolvingIdsresolvable-help">
                                           <p class="alert alert-help">URLs are useful for both people and computers. People can put a URL into their browser
                                              and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying
                                              data.
                                           </p>
                                        </div>
-                                       <p class="requirement" id="resolvingUrls-requirement">You should <strong>have a web page of information about each of the things in your data</strong> so that people can easily find and share that information.
+                                       <p class="requirement" id="resolvingIdsresolvable-requirement">You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.
                                        </p>
                                     </div>
+                                 </div>
+                                 				
+                                 <div class="conditional" data-bind="visible: resolvingIds() === 'service'">
+                                    					
+                                    <div class="control-group"><label class="control-label" for="resolutionServiceURL"> Where is the service that is used to resolve the identifiers?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#resolutionServiceURL-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="resolutionServiceURL" name="resolutionServiceURL" data-bind="value: resolutionServiceURL, valueUpdate: 'afterkeydown'" data-focus-target="#resolutionServiceURL-help" placeholder="Identifier Resolution Service URL"> <span class="label label-standard" data-toggle="collapse" data-target="#resolutionServiceURL-requirement"><i class="icon-star icon-white"></i> Standard</span><div class="help-block collapse" id="resolutionServiceURL-help">
+                                             <p class="alert alert-help">The resolution service should take an identifier as a query parameter and give back
+                                                some information about the thing it identifies.
+                                             </p>
+                                          </div>
+                                          <p class="requirement" id="resolutionServiceURL-requirement">You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.
+                                          </p>
+                                       </div>
+                                    </div>
+                                    				
                                  </div>
                                  				
                                  <div class="control-group"><label class="control-label"> Does your data contain URLs to third-party information?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#existingExternalUrls-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="existingExternalUrls" data-bind="checked: existingExternalUrls" data-focus-target="#existingExternalUrls-help"> No</label><label class="radio inline"><input type="radio" value="true" name="existingExternalUrls" data-bind="checked: existingExternalUrls" data-focus-target="#existingExternalUrls-help"> Yes</label><div class="help-block collapse" id="existingExternalUrls-help">
@@ -1774,7 +1804,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="trust">
-                              <legend>Trusthow much trust people can put in your data</legend>how much trust people can put in your data
+                              <legend>Trust <small>how much trust people can put in your data</small></legend>
                               <div class="control-group"><label class="control-label"> Do you provide machine-readable provenance for your data?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#provenance-help"><i class="icon-question-sign"></i></button></label><div class="controls"><label class="radio inline"><input type="radio" value="false" name="provenance" data-bind="checked: provenance" data-focus-target="#provenance-help"> No</label><label class="radio inline"><input type="radio" value="true" name="provenance" data-bind="checked: provenance" data-focus-target="#provenance-help"> Yes</label> <span class="label label-exemplar" data-toggle="collapse" data-target="#provenance-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="help-block collapse" id="provenance-help">
                                        <p class="alert alert-help">This about the origins of how your data was created and processed before it was published.
                                           It builds trust in the data you publish because people can trace back how it has been
@@ -1803,7 +1833,7 @@
                      <div id="social" class="accordion-body collapse">
                         <div class="accordion-inner">
                            <fieldset id="documentation">
-                              <legend>Documentationhow you help people understand the context and content of your data</legend>how you help people understand the context and content of your data
+                              <legend>Documentation <small>how you help people understand the context and content of your data</small></legend>
                               <div class="conditional" data-bind="visible: documentationUrl() !== ''">
                                  				
                                  <div class="control-group"><label class="control-label"> Does your data documentation include machine-readable data for:</label><div class="controls"><label class="checkbox"><input type="checkbox" name="documentationMetadataTitle" data-bind="checked: documentationMetadataTitle" value="title">title <span class="label label-pilot" data-toggle="collapse" data-target="#documentationMetadatatitle-requirement"><i class="icon-star icon-white"></i> Pilot</span></label><p class="requirement" id="documentationMetadatatitle-requirement">You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.
@@ -1879,7 +1909,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="support">
-                              <legend>Supporthow you communicate with people who use your data</legend>how you communicate with people who use your data
+                              <legend>Support <small>how you communicate with people who use your data</small></legend>
                               <div class="control-group"><label class="control-label" for="contactEmail"> Who should people email with questions about this data?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#contactEmail-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="email" class="span5" id="contactEmail" name="contactEmail" data-bind="value: contactEmail, valueUpdate: 'afterkeydown'" data-focus-target="#contactEmail-help" placeholder="Contact Email Address"> <span class="label label-pilot" data-toggle="collapse" data-target="#contactEmail-requirement"><i class="icon-star icon-white"></i> Pilot</span><div class="help-block collapse" id="contactEmail-help">
                                        <p class="alert alert-help">Give an email address that people can send questions about the data to.</p>
                                     </div>
@@ -1952,7 +1982,7 @@
                               </div>
                            </fieldset>
                            <fieldset id="services">
-                              <legend>Serviceshow you give people access to tools they need to work with your data</legend>how you give people access to tools they need to work with your data
+                              <legend>Services <small>how you give people access to tools they need to work with your data</small></legend>
                               <div class="control-group"><label class="control-label" for="libraries"> Where do you list tools to work with your data?<button type="button" class="btn btn-link btn-help" data-toggle="collapse" data-target="#libraries-help"><i class="icon-question-sign"></i></button></label><div class="controls"><input type="url" class="span5" id="libraries" name="libraries" data-bind="value: libraries, valueUpdate: 'afterkeydown'" data-focus-target="#libraries-help" placeholder="Tool URL"> <span class="label label-exemplar" data-toggle="collapse" data-target="#libraries-requirement"><i class="icon-star icon-white"></i> Exemplar</span><div class="help-block collapse" id="libraries-help">
                                        <p class="alert alert-help">Give a URL that lists the tools you know or recommend people can use when they work
                                           with your data.
@@ -3542,10 +3572,17 @@ certificate.identifiersStatus = ko.computed(function () {
   else status = 'complete';
   return status;
 });
-certificate.resolvingUrls = ko.observable('');
-certificate.resolvingUrlsStatus = ko.computed(function () {
+certificate.resolvingIds = ko.observable('');
+certificate.resolvingIdsStatus = ko.computed(function () {
   var status;
-  if (certificate.resolvingUrls() === '') status = 'optional';
+  if (certificate.resolvingIds() === '') status = 'optional';
+  else status = 'complete';
+  return status;
+});
+certificate.resolutionServiceURL = ko.observable('');
+certificate.resolutionServiceURLStatus = ko.computed(function () {
+  var status;
+  if (certificate.resolutionServiceURL() === '') status = 'optional';
   else status = 'complete';
   return status;
 });
@@ -3901,17 +3938,34 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrlsStatus() === 'complete') {
+	if (certificate.resolvingIdsStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
-					unmetRequirements['answeredexemplar']++;
-				
-	} else if (certificate.resolvingUrlsStatus() === 'required') {
+	} else if (certificate.resolvingIdsStatus() === 'required') {
 		unmetRequirements['basic']++;
-	} else if (certificate.resolvingUrlsStatus() !== 'optional') {
-		unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	} else if (certificate.resolvingIdsStatus() !== 'optional') {
+		unmetRequirements[certificate.resolvingIdsStatus()]++;
 	}
-	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.resolvingIds() !== '' && certificate.resolvingIds() !== 'false' && certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['basic']++;
+		if (certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['pilot']++;
+		if (certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['standard']++;
+		if (certificate.resolvingIds() !== 'resolvable') unmetRequirements['exemplar']++;
+		
+	if (certificate.resolvingIds() === 'service') {
+
+	if (certificate.resolutionServiceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.resolutionServiceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.resolutionServiceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.resolutionServiceURLStatus()]++;
+	}
+	if (certificate.resolutionServiceURLStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.existingExternalUrlsStatus() === 'complete') {
 		unmetRequirements['answered']++;
@@ -5649,17 +5703,34 @@ if (!certificate.dumpManagementList()) unmetRequirements['exemplar']++;
 
 	if (certificate.identifiers() === 'true') {
 
-	if (certificate.resolvingUrlsStatus() === 'complete') {
+	if (certificate.resolvingIdsStatus() === 'complete') {
 		unmetRequirements['answered']++;
 		
-					unmetRequirements['answeredexemplar']++;
-				
-	} else if (certificate.resolvingUrlsStatus() === 'required') {
+	} else if (certificate.resolvingIdsStatus() === 'required') {
 		unmetRequirements['basic']++;
-	} else if (certificate.resolvingUrlsStatus() !== 'optional') {
-		unmetRequirements[certificate.resolvingUrlsStatus()]++;
+	} else if (certificate.resolvingIdsStatus() !== 'optional') {
+		unmetRequirements[certificate.resolvingIdsStatus()]++;
 	}
-	if (certificate.resolvingUrls() !== 'true') unmetRequirements['exemplar']++; 
+	if (certificate.resolvingIds() !== '' && certificate.resolvingIds() !== 'false' && certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['basic']++;
+		if (certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['pilot']++;
+		if (certificate.resolvingIds() !== 'service' && certificate.resolvingIds() !== 'resolvable') unmetRequirements['standard']++;
+		if (certificate.resolvingIds() !== 'resolvable') unmetRequirements['exemplar']++;
+		
+	if (certificate.resolvingIds() === 'service') {
+
+	if (certificate.resolutionServiceURLStatus() === 'complete') {
+		unmetRequirements['answered']++;
+		
+					unmetRequirements['answeredstandard']++;
+				
+	} else if (certificate.resolutionServiceURLStatus() === 'required') {
+		unmetRequirements['basic']++;
+	} else if (certificate.resolutionServiceURLStatus() !== 'optional') {
+		unmetRequirements[certificate.resolutionServiceURLStatus()]++;
+	}
+	if (certificate.resolutionServiceURLStatus() !== 'complete') unmetRequirements['standard']++; 
+
+}
 
 	if (certificate.existingExternalUrlsStatus() === 'complete') {
 		unmetRequirements['answered']++;

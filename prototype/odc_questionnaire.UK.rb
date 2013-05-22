@@ -61,8 +61,8 @@ survey 'Open Data Certificate Questionnaire',
 
   section_legal 'Legal Information' do
 
-    label_group_1 'Rightsyour right to share this data with people',
-      :help_text => '',
+    label_group_1 'Rights',
+      :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
     q_publisherRights 'Do you have the rights to publish this data as open data?',
@@ -224,8 +224,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_2 'Licensinghow you give people permission to use your data',
-      :help_text => '',
+    label_group_2 'Licensing',
+      :help_text => 'how you give people permission to use your data',
       :customer_renderer => '/partials/fieldset'
 
     q_copyrightURL 'Where is your rights statement?',
@@ -443,8 +443,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_contentLicence, '==', :a_other
     condition_B :q_otherContentLicenceOpen, '==', :a_false
 
-    label_group_3 'Privacyhow you protect people\'s privacy',
-      :help_text => '',
+    label_group_3 'Privacy',
+      :help_text => 'how you protect people\'s privacy',
       :customer_renderer => '/partials/fieldset'
 
     q_dataPersonal 'Can individuals be identified from this data?',
@@ -666,8 +666,8 @@ survey 'Open Data Certificate Questionnaire',
 
   section_practical 'Practical Information' do
 
-    label_group_5 'Findabilityhow you help people find your data',
-      :help_text => '',
+    label_group_5 'Findability',
+      :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
     q_linkedTo 'Can people find more information about your data within three clicks of your home page?',
@@ -735,8 +735,8 @@ survey 'Open Data Certificate Questionnaire',
 
     end
 
-    label_group_6 'Accuracyhow you keep your data up-to-date',
-      :help_text => '',
+    label_group_6 'Accuracy',
+      :help_text => 'how you keep your data up-to-date',
       :customer_renderer => '/partials/fieldset'
 
     q_serviceType 'Does the data behind your API change?',
@@ -983,8 +983,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_7 'Qualityhow people can report problems and improve your data',
-      :help_text => '',
+    label_group_7 'Quality',
+      :help_text => 'how people can report problems and improve your data',
       :customer_renderer => '/partials/fieldset'
 
     q_qualityUrl 'Where do you document data quality issues?',
@@ -1013,8 +1013,8 @@ survey 'Open Data Certificate Questionnaire',
       :requirement => 'exemplar_7'
     dependency :rule => 'A'
 
-    label_group_8 'Guaranteeshow much people can depend on your data’s availability',
-      :help_text => '',
+    label_group_8 'Guarantees',
+      :help_text => 'how much people can depend on your data’s availability',
       :customer_renderer => '/partials/fieldset'
 
     q_serviceAvailability 'What is the guaranteed availability of your data?',
@@ -1089,8 +1089,8 @@ survey 'Open Data Certificate Questionnaire',
 
   section_technical 'Technical Information' do
 
-    label_group_10 'Locationshow people can access your data',
-      :help_text => '',
+    label_group_10 'Locations',
+      :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
     dependency :rule => '(A or B or C or D)'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1398,8 +1398,8 @@ survey 'Open Data Certificate Questionnaire',
       :placeholder => 'Change Feed URL',
       :required => :required
 
-    label_group_11 'Formatshow people can work with your data',
-      :help_text => '',
+    label_group_11 'Formats',
+      :help_text => 'how people can work with your data',
       :customer_renderer => '/partials/fieldset'
 
     q_machineReadable 'Is this data machine-readable?',
@@ -1644,8 +1644,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_12 'Trusthow much trust people can put in your data',
-      :help_text => '',
+    label_group_12 'Trust',
+      :help_text => 'how much trust people can put in your data',
       :customer_renderer => '/partials/fieldset'
 
     q_provenance 'Do you provide machine-readable provenance for your data?',
@@ -1677,8 +1677,8 @@ survey 'Open Data Certificate Questionnaire',
 
   section_social 'Social Information' do
 
-    label_group_14 'Documentationhow you help people understand the context and content of your data',
-      :help_text => '',
+    label_group_14 'Documentation',
+      :help_text => 'how you help people understand the context and content of your data',
       :customer_renderer => '/partials/fieldset'
 
     q_documentationMetadata 'Does your data documentation include machine-readable data for:',
@@ -1927,8 +1927,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_15 'Supporthow you communicate with people who use your data',
-      :help_text => '',
+    label_group_15 'Support',
+      :help_text => 'how you communicate with people who use your data',
       :customer_renderer => '/partials/fieldset'
 
     q_contactEmail 'Who should people email with questions about this data?',
@@ -2053,8 +2053,8 @@ survey 'Open Data Certificate Questionnaire',
       :requirement => 'exemplar_17'
     dependency :rule => 'A'
 
-    label_group_16 'Serviceshow you give people access to tools they need to work with your data',
-      :help_text => '',
+    label_group_16 'Services',
+      :help_text => 'how you give people access to tools they need to work with your data',
       :customer_renderer => '/partials/fieldset'
 
     q_libraries 'Where do you list tools to work with your data?',
