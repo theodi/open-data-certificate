@@ -92,19 +92,6 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
-
-  test "#incomplete! should mark completed response_sets as incomplete" do
-    response_set = FactoryGirl.create :completed_response_set
-
-    assert response_set.complete?
-
-    response_set.incomplete!
-    response_set.reload
-
-    assert_false response_set.complete?
-    assert_nil response_set.completed_at
-  end
-
   test "#triggered_mandatory_questions should return an array of all the mandatory questions that are triggered by their dependencies for the response_set" do
     # non-mandatory question
     question = FactoryGirl.create(:question, is_mandatory: false)

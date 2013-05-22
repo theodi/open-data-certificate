@@ -14,10 +14,6 @@ class ResponseSet < ActiveRecord::Base
     responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value) || 'Untitled'
   end
 
-  def incomplete!
-    update_attribute :completed_at, nil
-  end
-
   def incomplete?
     !complete?
   end
