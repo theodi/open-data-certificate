@@ -1,0 +1,11 @@
+=div_for response_set do
+  - response_set.survey.sections.each do |section|
+    - questions = section.questions_for_certificate response_set
+    - responses = response_set.responses_for_questions questions
+    - if responses.any?
+      %hr
+      %h2= section.title
+      %dl.dl-horizontal
+        - responses.each do |response|
+          %dt= response.question.text_as_statement || response.question.text
+          %dd= response.to_formatted_s
