@@ -10,13 +10,14 @@ override_task :surveyor => :environment do
 end
 
 namespace :surveyor do
-  desc 'Iterate all surveys and parse those that have changed since last build'
+  desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys`)'
   task :build_changed_surveys => :environment do
+    dir = ENV['DIR'] || 'surveys'
     # Compares the MD5 of each file in the 'surveys' folder with the stored hash in the file's SurveyParsing record
-    files = Dir.entries(File.join(Rails.root, 'surveys')).select { |file| file =~ /.*\.rb/ }
+    files = Dir.entries(File.join(Rails.root, dir)).select { |file| file =~ /.*\.rb/ }
 
     files.each do |file|
-      ENV['FILE'] = File.join('surveys', file)
+      ENV['FILE'] = File.join(dir, file)
 
       md5 = Digest::MD5.hexdigest(File.read(File.join(Dir.pwd, ENV['FILE'])))
       survey_parsing = SurveyParsing.find_or_create_by_file_name(ENV['FILE'])

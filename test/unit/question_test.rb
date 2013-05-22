@@ -1,19 +1,13 @@
 require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
-  test "Question should have :requirement attribute" do
+  test "Question should have attributes we've added" do
+    attributes_that_we_have_added = [:requirement, :required, :help_text_more_url]
     question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :requirement
-  end
 
-  test "Question should have :required attribute" do
-    question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :required
-  end
-
-  test "Question should have :help_text_more_url attribute" do
-    question = FactoryGirl.build(:question)
-    assert_attribute_exists question, :help_text_more_url
+    attributes_that_we_have_added.each do |attribute|
+      assert_attribute_exists question, attribute
+    end
   end
 
   test "#requirement_level should be the string from 'requirement' attribute" do
@@ -208,11 +202,11 @@ class QuestionTest < ActiveSupport::TestCase
     end
   end
 
-  test "#required gets set to string before validation if it's nil" do
+  test "#required gets set to string before save if it's nil" do
     question = FactoryGirl.build :question
     question.required = nil
     assert question.required.nil?
-    question.valid?
+    question.save!
     assert_false question.required.nil?
   end
 
@@ -220,15 +214,5 @@ class QuestionTest < ActiveSupport::TestCase
     question = FactoryGirl.build :question
     assert_equal question.required, ''
   end
-
-  test "#required should not be nil" do
-    question = FactoryGirl.build :question, required: nil
-    question.stubs(:required=)
-
-    assert question.required.nil?
-    question.valid?
-    assert_match /should not be nil/, question.errors[:required].join
-  end
-
 
 end
