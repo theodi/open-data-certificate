@@ -342,7 +342,7 @@
 						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
 					</option>
 					<option value="summarised">
-						<label>no, the data has been summarised so individuals can't be identified</label>
+						<label>no, the data has been aggregated so individuals can't be identified</label>
 						<help>Statistical analysis can aggregate data so that individuals are no longer be identifiable.</help>
 					</option>
 					<option value="individual">
@@ -361,7 +361,7 @@
 			<if test="this.dataPersonal() === 'individual'">
 				<question id="appliedAnon">
 					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
-					<yesno required="pilot"/>
+					<yesno required="pilot" />
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure">
@@ -405,19 +405,6 @@
 							<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.</help>
 							<requirement level="pilot">You should **tell people what purposes the individuals in your data consented to you using their data for**. So that they use your data for the same purposes and comply with the Data Protection Act.</requirement>
 						</question>
-						<question id="riskAssessment">
-							<label>Have you fully assessed the risks of individuals being identified from your data?</label>
-							<yesno/>
-							<requirement level="pilot">You should <strong>fully assess the risks of re-identification</strong> from the data that you are publishing, to avoid breaching individuals' privacy.</requirement>
-						</question>
-						<if test="this.riskAssessment() === 'true'">
-							<question id="anonymisationAudited">
-								<label>Has your anonymisation approach been independently audited?</label>
-								<yesno/>
-								<help>It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-								<requirement level="standard">You should <strong>engage an expert to audit your anonymisation approach</strong> to ensure that it is appropriate for your data.</requirement>
-							</question>
-						</if>
 						<question id="dpStaff">
 							<label>Is there someone in your organisation who is responsible for data protection?</label>
 							<yesno required="pilot"/>
@@ -429,6 +416,12 @@
 								<requirement level="pilot">You should <strong>consult with the member of staff in your organisation who is responsible for data protection</strong> before publishing this data.</requirement>
 							</question>
 						</if>
+						<question id="anonymisationAudited">
+							<label>Has your anonymisation approach been independently audited?</label>
+							<yesno/>
+							<help>It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+							<requirement level="standard">You should <strong>engage an expert to audit your anonymisation approach</strong> to ensure that it is appropriate for your data.</requirement>
+						</question>
 					</if>
 				</if>
 			</if>

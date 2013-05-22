@@ -285,7 +285,7 @@ questions:
         text: "no, the data is not about people or their activities"
         help_text: "Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person."
       summarised:
-        text: "no, the data has been summarised so individuals can't be identified"
+        text: "no, the data has been aggregated so individuals can't be identified"
         help_text: "Statistical analysis can aggregate data so that individuals are no longer be identifiable."
       individual:
         text: "yes, there is a risk that individuals be identified, for example by third parties with access to extra information"
@@ -344,21 +344,6 @@ questions:
     answers:
       a_1:
         text: "Privacy Notice URL"
-  riskAssessment:
-    text: "Have you fully assessed the risks of individuals being identified from your data?"
-    answers:
-      a_false:
-        text: no
-      a_true:
-        text: yes
-  anonymisationAudited:
-    text: "Has your anonymisation approach been independently audited?"
-    help_text: "It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial."
-    answers:
-      a_false:
-        text: no
-      a_true:
-        text: yes
   dpStaff:
     text: "Is there someone in your organisation who is responsible for data protection?"
     answers:
@@ -368,6 +353,14 @@ questions:
         text: yes
   dbStaffConsulted:
     text: "Have you involved them in the Privacy Impact Assessment process?"
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  anonymisationAudited:
+    text: "Has your anonymisation approach been independently audited?"
+    help_text: "It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial."
     answers:
       a_false:
         text: no
@@ -975,11 +968,9 @@ labels:
   pilot_6:
     text: "You should **tell people what purposes the individuals in your data consented to you using their data for**. So that they use your data for the same purposes and comply with the Data Protection Act."
   pilot_7:
-    text: "You should **fully assess the risks of re-identification** from the data that you are publishing, to avoid breaching individuals' privacy."
+    text: "You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data."
   standard_7:
     text: "You should **engage an expert to audit your anonymisation approach** to ensure that it is appropriate for your data."
-  pilot_8:
-    text: "You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data."
 # Practical Information Requirements
   standard_8:
     text: "You should **ensure that people can easily find your data** from your organisation's home page."
@@ -987,19 +978,19 @@ labels:
     text: "You should **ensure that people can find your data when they search for it** in locations that list data."
   standard_10:
     text: "You should **reference data from your own publications** so that people are aware of its availability and context."
-  pilot_9:
+  pilot_8:
     text: "You should **put timestamps in your data when you release it** so people know the period it relates to and when it will expire."
   standard_11:
     text: "You should **publish updates to time-sensitive data** so that it does not go stale."
   exemplar_3:
     text: "You should **provide a feed of changes to your data** so people keep their copies up-to-date and accurate."
-  pilot_10:
+  pilot_9:
     text: "You should **create a new dataset release every month** so people keep their copies up-to-date and accurate."
   standard_12:
     text: "You should **create a new dataset release every week** so people keep their copies up-to-date and accurate."
   exemplar_4:
     text: "You should **create a new dataset release every day** so people keep their copies up-to-date and accurate."
-  pilot_11:
+  pilot_10:
     text: "You should **have a reasonable delay between when you create and publish a dataset** that is less than the gap between releases so people keep their copies up-to-date and accurate."
   standard_13:
     text: "You should **have a short delay between when you create and publish a dataset** that is less than half the gap between releases so people keep their copies up-to-date and accurate."
@@ -1007,7 +998,7 @@ labels:
     text: "You should **have minimal or no delay between when you create and publish a dataset** so people keep their copies up-to-date and accurate."
   standard_14:
     text: "You should **let people download your entire dataset** so that they can do more complete and accurate analysis with all the data."
-  pilot_12:
+  pilot_11:
     text: "You should **create a new database dump every month** so that people have the latest data."
   standard_15:
     text: "You should **create a new database dump within a week of any change** so that people have less time to wait for the latest data."
@@ -1019,13 +1010,13 @@ labels:
     text: "You should **document any known issues with your data quality** so that people can decide how much to trust your data."
   exemplar_7:
     text: "You should **document your quality control process** so that people can decide how much to trust your data."
-  pilot_13:
+  pilot_12:
     text: "You should **guarantee at least 99% service availability** (less than 4 days downtime/year) so that people can decide how much to rely on your data."
   standard_18:
     text: "You should **guarantee at least 99.9% service availability** (less than 9 hours downtime/year) so that people can decide how much to rely on your data."
   exemplar_8:
     text: "You should **guarantee at least 99.999% availability** (less than 5 minutes downtime/year) so that people can decide how much to rely on your data."
-  pilot_14:
+  pilot_13:
     text: "You should **guarantee that your data will be available in this form for at least a year** so that people can decide how much to rely on your data."
   standard_19:
     text: "You should **guarantee that your data will be available in this form in the medium-term** so that people can decide how much to trust your data."
@@ -1034,11 +1025,11 @@ labels:
 # Technical Information Requirements
   basic_9:
     text: "You must **provide either a URL to your data or a URL to documentation** about it so that people can find it."
-  pilot_15:
+  pilot_14:
     text: "You should **have a URL that is a direct link to the data itself** so that people can access it easily."
   standard_20:
     text: "You should **have a single persistent URL to download the current version of your data** so that people can access it easily."
-  pilot_16:
+  pilot_15:
     text: "You should **use a consistent pattern for different release URLs** so that people can download each one automatically."
   standard_21:
     text: "You should **have a document or feed with a list of available releases** so people can create scripts to download them all."
@@ -1054,25 +1045,25 @@ labels:
     text: "You should **use a consistent pattern for database dump URLs** so that people can can download each one automatically."
   exemplar_11:
     text: "You should **have a document or feed with a list of available database dumps** so people can create scripts to download them all"
-  pilot_17:
+  pilot_16:
     text: "You should **provide your data in a machine-readable format** so that it's easy to process."
   standard_24:
     text: "You should **provide your data in an open standard format** so that people can use widely available tools to process it more easily."
   standard_25:
     text: "You should **publish documents in a format that exposes semantic structure** so that people can display them in different styles."
-  pilot_18:
+  pilot_17:
     text: "You should **publish documents in a format designed specifically for them** so that they're easy to process."
   exemplar_12:
     text: "You should **publish statistical data in a format that exposes dimensions and measures** so that it's easy to analyse."
   standard_26:
     text: "You should **publish tabular data in a format that exposes tables of data** so that it's easy to analyse."
-  pilot_19:
+  pilot_18:
     text: "You should **publish tabular data in a format designed for that purpose** so that it's easy to process."
   standard_27:
     text: "You should **publish geographic data in a format designed that purpose** so that people can use widely available tools to process it."
-  pilot_20:
+  pilot_19:
     text: "You should **publish geographic data as structured data** so that it's easy to process."
-  pilot_21:
+  pilot_20:
     text: "You should **publish structured data in a format designed that purpose** so that it's easy to process."
   standard_28:
     text: "You should **use URLs to identify things in your data** so that they can be easily related with other data about those things."
@@ -1085,11 +1076,11 @@ labels:
   exemplar_16:
     text: "You should **describe how people can check that the data they receive is the same as what you published** so that they can trust it."
 # Social Information Requirements
-  pilot_22:
+  pilot_21:
     text: "You should **include a data title in your documentation** so that people know how to refer to it."
-  pilot_23:
+  pilot_22:
     text: "You should **include a data description in your documentation** so that people know what it contains."
-  pilot_24:
+  pilot_23:
     text: "You should **include a data release date in your documentation so that people know how timely it is."
   standard_29:
     text: "You should **include a last modification date in your documentation** so that people know they have the latest data."
@@ -1111,27 +1102,27 @@ labels:
     text: "You should **include the subject in your documentation** so that people know roughly what your data is about."
   standard_38:
     text: "You should **include keywords or tags in your documentation** to help people search within the data effectively."
-  pilot_25:
+  pilot_24:
     text: "You should **include titles within your documentation** so people know how to refer to each data distribution."
-  pilot_26:
+  pilot_25:
     text: "You should **include descriptions within your documentation** so people know what each data distribution contains."
-  pilot_27:
+  pilot_26:
     text: "You should **include release dates within your documentation** so people know how current each distribution is."
   standard_39:
     text: "You should **include last modification dates within your documentation** so people know whether their copy of a data distribution is up-to-date."
   standard_40:
     text: "You should **document applicable licences or waivers** so people know what they can do with a data distribution."
-  pilot_28:
+  pilot_27:
     text: "You should **document how your API works** so that people understand how to use it."
   standard_41:
     text: "You should **document any vocabulary you use within your data** so that people know how to interpret it."
   standard_42:
     text: "You should **document the codes used within your data** so that people know how to interpret them."
-  pilot_29:
+  pilot_28:
     text: "You should **provide an email address for people to send questions** about your data to."
-  pilot_30:
+  pilot_29:
     text: "You should **provide instructions about how suggest improvements** to the way you publish data so you can discover what people need."
-  pilot_31:
+  pilot_30:
     text: "You should **provide an email address for people to send questions about privacy to** and disclosure of personal details."
   standard_43:
     text: "You should **use social media to reach people who use your data** and discover how your data is being used"
