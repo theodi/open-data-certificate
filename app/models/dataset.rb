@@ -8,7 +8,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def set_default_title!(title)
-    if title && persisted? && read_attribute(:title).blank?
+    if title && persisted?
       self.title = title
       save
     end
