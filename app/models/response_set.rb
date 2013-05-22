@@ -37,13 +37,10 @@ class ResponseSet < ActiveRecord::Base
     triggered_requirements - completed_requirements
   end
 
-  def responses_for_questions questions
-    # would be fewer queries to get the list of matching responses 
-    #   responses.where :question_id => questions
-    # and map the questions to them, though just keep is basic for now
-    questions.map do |q|
-      responses.where(question_id: q).first
-    end
+  def responses_for_questions(questions)
+    responses.includes(:question)
+             .where(:question_id => questions)
+             .order('questions.display_order ASC')
   end
 
   def generate_certificate
