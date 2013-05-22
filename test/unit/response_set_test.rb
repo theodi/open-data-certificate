@@ -18,8 +18,27 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "created certificate is given the attained_level" do
-    rs = FactoryGirl.create :completed_response_set
-    assert_equal rs.certificate.attained_level, rs.attained_level
+    @rs = FactoryGirl.create :completed_response_set
+    assert_equal @rs.certificate.attained_level, @rs.attained_level
+  end
+
+  test "can map questions to responses" do
+
+    # add two questions, one to be the certificate
+    @q1 = FactoryGirl.create :question
+    @a1 = FactoryGirl.create :answer, question: @q1
+
+    @response_set = FactoryGirl.create :response_set
+
+    # answer the questions
+    @response_1 = FactoryGirl.create :response, response_set: @response_set, 
+                                     :question => @q1, :answer => @a1 
+
+
+    @responses = @response_set.responses_for_questions [@q1]
+
+    assert_equal [@response_1], @responses
+
   end
 
   test "Should be able to populate response_set answers from another response_set" do

@@ -1,3 +1,5 @@
 %h1 Open Data Certificate
 
 %p This data has achieved <strong>#{@certificate.attained_level} level</strong> on #{@certificate.created_at.strftime "%d %B %Y"}
+
+=render @certificate.response_set
