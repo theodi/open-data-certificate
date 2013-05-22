@@ -7,5 +7,5 @@
       %h2= section.title
       %dl.dl-horizontal
         - responses.each do |response|
-          %dt= response.question.text_as_statement || response.question.text
-          %dd= response.to_formatted_s
+          %dt= response.question.statement_text
+          %dd= response.statement_text

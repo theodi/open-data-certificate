@@ -137,4 +137,10 @@ class SurveyorController < ApplicationController
     end
   end
 
+  private
+  def set_response_set_and_render_context
+    super
+    authorize!(:edit, @response_set) if @response_set
+  end
+
 end

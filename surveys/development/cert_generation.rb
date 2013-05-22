@@ -1,5 +1,5 @@
-survey 'Certificate Generator' do
-
+survey 'Certificate Generator',  :dataset_title => 'q_dataTitle' do
+  
   section 'General' do
 
     q_dataTitle 'What\'s a good title for this data?',
@@ -25,11 +25,14 @@ survey 'Certificate Generator' do
     q_publisherRights 'Do you have the rights to publish the data as open data?',
                       :pick => :one,
                       :required => :required,
-                      :text_as_statement => 'Publisher Rights',
+                      :text_as_statement => 'Curators publishing rights',
                       :display_on_certificate => true
-    a_yes 'yes, you have the right to publish the data as open data'
-    a_no 'no, you don\'t have the right to publish the data as open data'
-    a_unsure 'you don\'t know whether you have the right to publish the data as open data'
+    a_yes 'yes, you have the right to publish the data as open data',
+          :text_as_statement => 'curator has the right to publish the data as open data'   
+    a_no 'no, you don\'t have the right to publish the data as open data',
+          :text_as_statement => 'curator doesn\'t have the right to publish the data as open data'
+    a_unsure 'you don\'t know whether you have the right to publish the data as open data',
+          :text_as_statement => 'curator doesn\'t know if they have the right to publish the data as open data'
 
 
     # include if dependency met

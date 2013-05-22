@@ -1,13 +1,12 @@
 class DatasetsController < ApplicationController
+  load_and_authorize_resource
+
   before_filter :authenticate_user!
 
   def new
-    @dataset = Dataset.new
   end
 
   def create
-    @dataset = Dataset.new(params[:dataset])
-
     # update with the logged in user
     if user_signed_in?
       @dataset.user = current_user
@@ -26,7 +25,6 @@ class DatasetsController < ApplicationController
   end
 
   def show
-    @dataset = Dataset.find params[:id]
     @surveys = Survey.available_to_complete
   end
 

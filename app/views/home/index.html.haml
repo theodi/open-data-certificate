@@ -1,8 +1,12 @@
 %section
-  - if current_user
-    = link_to "my datasets", datasets_path
-  - else
-    = form_tag non_authenticated_start_questionnaire_path do
-      = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
-      = submit_tag t(:start_new_certification)
+  %h3 Temporary links to ensure access to all functionality
+  %ul
+    %li= link_to 'Certificates (and search)', certificates_path
+    %li= link_to 'about', '/about'
+    %li= link_to 'contact', '/contact'
+    %li= link_to 'terms', '/terms'
 
+  - if current_user
+    = render partial: 'home/dashboard'
+  - else
+    = render partial: 'home/unauthenticated_user_home'

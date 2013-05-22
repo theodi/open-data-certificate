@@ -28,9 +28,26 @@ We've extended surveyor with some attributes for the open data certificate
 
 ##### question
 
+`:required` - What level this question attains (eg - `:required`, `:pilot`)
+
+`:help_text_more_url` - The url to link to at the end of the help text
+
 `:text_as_statement` - How the text should appear when it's displayed on the certificate (eg. "What is your name?" should read as "Name")
 
 `:display_on_certificate` - If the question should appear on the certificate
+
+##### answer
+
+`:requirement` - as above
+
+`:help_text_more_url` - as above 
+
+`:text_as_statement` - as above
+
+`:input_type` - alternative input types (eg. url, number, phone)
+
+`:placeholder` - placeholder text displayed in a field before anything is entered
+
 
 ---
 

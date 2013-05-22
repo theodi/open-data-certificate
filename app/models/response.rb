@@ -4,6 +4,10 @@ class Response < ActiveRecord::Base
 
   after_save :set_default_dataset_title
 
+  def statement_text
+    answer.try(:text_as_statement) || to_formatted_s
+  end
+
   def requirement_level
     @requirement_level ||= answer.requirement_level
   end

@@ -215,4 +215,16 @@ class QuestionTest < ActiveSupport::TestCase
     assert_equal question.required, ''
   end
 
+  test "statement text from :text_as_statement" do
+    @question = FactoryGirl.create(:question, :text_as_statement => "text value")
+
+    assert_equal "text value", @question.statement_text
+  end
+
+  test "statement text to text value fallback" do
+    @question = FactoryGirl.create(:question)
+
+    assert_equal "Favourite Color", @question.statement_text
+  end
+
 end

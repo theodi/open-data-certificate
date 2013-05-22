@@ -8,6 +8,11 @@ class Question < ActiveRecord::Base
   before_save :set_default_value_for_required
   after_save :update_mandatory
 
+  # either provided text_as_statement, or fall back to text
+  def statement_text
+    text_as_statement || text
+  end
+
   def requirement_level
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
     #             and outstanding requirements, and for the display customisation of questions.

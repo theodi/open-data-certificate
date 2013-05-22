@@ -44,6 +44,9 @@ gem 'jquery-rails'
 #To serve static content / styleguide
 gem 'high_voltage'
 
+# authorization
+gem 'cancan'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,7 +1,7 @@
 class Answer < ActiveRecord::Base
   include Surveyor::Models::AnswerMethods
 
-  attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder
+  attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement, :display_on_certificate
 
   def requirement
     [read_attribute(:requirement), question.try(:requirement)].delete_if(&:blank?).first
