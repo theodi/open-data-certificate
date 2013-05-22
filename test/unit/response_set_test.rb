@@ -111,19 +111,6 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
-
-  test "#incomplete! should mark completed response_sets as incomplete" do
-    response_set = FactoryGirl.create :completed_response_set
-
-    assert response_set.complete?
-
-    response_set.incomplete!
-    response_set.reload
-
-    assert_false response_set.complete?
-    assert_nil response_set.completed_at
-  end
-
   test "#triggered_mandatory_questions should return an array of all the mandatory questions that are triggered by their dependencies for the response_set" do
     # non-mandatory question
     question = FactoryGirl.create(:question, is_mandatory: false)
@@ -191,9 +178,96 @@ class ResponseSetTest < ActiveSupport::TestCase
     end
   end
 
-  test "#minimum_outstanding_requirement_level  returns exemplar index if there's no outstanding requirements" do
+  test "#minimum_outstanding_requirement_level returns exemplar index if there's no outstanding requirements" do
     response_set = FactoryGirl.create(:response_set)
     assert_equal response_set.minimum_outstanding_requirement_level, 5
+  end
+
+  test "#completed_requirements returns only triggered_requirements that are met by responses" do
+    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
+                              stub(requirement: 'level_2', requirement_met_by_responses?: false),
+                              stub(requirement: 'level_3', requirement_met_by_responses?: false),
+                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    ]
+
+    response_set = FactoryGirl.create(:response_set)
+    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
+
+    assert_equal [triggered_requirements.first], response_set.completed_requirements
+  end
+
+  test "#outstanding_requirements returns only triggered_requirements that are not met by responses" do
+    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
+                              stub(requirement: 'level_2', requirement_met_by_responses?: true),
+                              stub(requirement: 'level_3', requirement_met_by_responses?: true),
+                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    ]
+
+    response_set = FactoryGirl.create(:response_set)
+    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
+
+    assert_equal [triggered_requirements.last], response_set.outstanding_requirements
+  end
+
+  test "#title_determined_from_responses returns the answer of the response to the question referenced as 'dataTitle'" do
+    question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
+    answer = FactoryGirl.create(:answer, question: question)
+    expected_value = 'my response set title'
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.title_determined_from_responses
+  end
+
+  test "#title returns the title determined from the responses if there is one" do
+    question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
+    answer = FactoryGirl.create(:answer, question: question)
+    expected_value = 'my response set title'
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.title
+  end
+
+  test "#title returns the default title if it cannot be determined from the responses" do
+    expected_value = ResponseSet::DEFAULT_TITLE
+    response_set = FactoryGirl.create(:response_set)
+
+    assert_equal expected_value, response_set.title
+  end
+
+  test "#incomplete? returns true for an incomplete response_set" do
+    assert_equal true, FactoryGirl.build(:response_set).incomplete?
+  end
+
+  test "#incomplete? returns false for an complete response_set" do
+    assert_equal false, FactoryGirl.build(:completed_response_set).incomplete?
+  end
+
+  test "#generate_certificate creates a new certificate on save of completed response_sets" do
+    attained_level = 'test_level'
+    response_set = FactoryGirl.build(:completed_response_set)
+    response_set.stubs(:attained_level).returns(attained_level)
+    assert_nil response_set.certificate
+    response_set.save!
+    assert_equal attained_level, response_set.certificate.try(:attained_level)
+  end
+
+  test "#generate_certificate does not overwrite existing certificate" do
+    response_set = FactoryGirl.create(:completed_response_set)
+    assert_not_nil certificate = response_set.certificate
+    response_set.generate_certificate
+    assert_equal certificate, response_set.certificate
+  end
+
+  test "Should be able to assign_to_user - which creates dataset" do
+    response_set = FactoryGirl.create(:response_set)
+    user = FactoryGirl.create(:user)
+    assert [response_set.user, response_set.dataset].none?
+    response_set.assign_to_user!(user)
+
+    assert_equal user, response_set.user
+    assert_not_nil response_set.dataset
   end
 
 end

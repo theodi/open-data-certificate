@@ -2,7 +2,6 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
-  after_save :set_default_dataset_title
 
   attr_accessible :dataset_id
 
@@ -10,12 +9,14 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :survey
   has_one :certificate
 
+  DEFAULT_TITLE = 'Untitled'
+
   def title
-    responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value) || 'Untitled'
+    title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
-  def incomplete!
-    update_attribute :completed_at, nil
+  def title_determined_from_responses
+    @title_determined_from_responses ||= responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value)
   end
 
   def incomplete?
@@ -68,8 +69,8 @@ class ResponseSet < ActiveRecord::Base
         if answer = question.answers.where(reference_identifier: previous_response.answer.reference_identifier).first
           api_id = Surveyor::Common.generate_api_id
           ui_hash[api_id] = { question_id: question.id.to_s,
-                                    api_id: api_id,
-                                    answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
+                              api_id: api_id,
+                              answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
       update_from_ui_hash(ui_hash)
@@ -77,13 +78,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def assign_to_user!(user)
+    # This is a bit fragile, as it assumes that there is both no current user and no current dataset, and raises no notification of any issues
+    # TODO: revisit and improve its handling of unexpected cases
     self.user = user
     self.dataset = Dataset.create(:user => user)
     save
   end
 
-  private
-  def set_default_dataset_title
-    dataset.set_default_title!(title) if dataset
-  end
 end

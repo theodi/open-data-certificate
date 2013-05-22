@@ -2,6 +2,8 @@ class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
 
+  after_save :set_default_dataset_title
+
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
   end
@@ -24,6 +26,15 @@ class Response < ActiveRecord::Base
       memo[key] = value unless value.blank?
       memo
     end
+  end
+
+  def dataset
+    response_set.try(:dataset)
+  end
+
+  private
+  def set_default_dataset_title
+    dataset.try(:set_default_title!, response_set.title_determined_from_responses)
   end
 
 end
