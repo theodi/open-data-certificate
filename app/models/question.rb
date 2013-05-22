@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
+  before_save :set_default_value_for_required
   after_save :update_mandatory
 
   def requirement_level
@@ -70,8 +71,13 @@ class Question < ActiveRecord::Base
   private
   def update_mandatory
     #TODO: swap to using an observer instead?
-    self.is_mandatory ||= !!required
+    self.is_mandatory ||= required.present?
     Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
+  end
+
+  private
+  def set_default_value_for_required
+    self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
 end
