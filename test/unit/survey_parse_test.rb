@@ -28,7 +28,7 @@ class SurveyParseTest < ActiveSupport::TestCase
 
     # ensure the hash of exceptions caught from parsing the survey files has no values. If it does, join all the execptions
     # together with their filename to aid bugfixing
-    assert !@result.values.any?, @result.delete_if{|k,v|v.blank?}.map {|k,v| ["survey: #{k}", "#{v}\n"] }.unshift("\n").join("\n")
+    assert @result.values.none?, @result.delete_if{|k,v|v.blank?}.map {|k,v| ["survey: #{k}", "#{v}\n"] }.unshift("\n").join("\n")
   end
 end
 
