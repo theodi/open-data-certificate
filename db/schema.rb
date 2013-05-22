@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
+  add_index "answers", ["question_id", "display_order"], :name => "i_answers_on_question_id_and_display_order"
+  add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
 
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
@@ -53,14 +55,14 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
   end
 
   create_table "datasets", :force => true do |t|
-    t.string   "title"
+    t.string   "title",             :default => "Untitiled"
     t.string   "documentation_url"
     t.string   "curating_org"
     t.string   "curator_url"
     t.string   "data_kind"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "dependencies", :force => true do |t|
@@ -70,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
+
+  add_index "dependencies", ["question_id"], :name => "i_dependencies_on_question_id"
 
   create_table "dependency_conditions", :force => true do |t|
     t.integer  "dependency_id"
@@ -87,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "dependency_conditions", ["dependency_id"], :name => "i_dependency_conditions_on_dependencies_question_id"
 
   create_table "question_groups", :force => true do |t|
     t.text     "text"
@@ -127,13 +133,16 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
     t.integer  "correct_answer_id"
     t.string   "api_id"
     t.string   "requirement"
-    t.string   "required"
+    t.string   "required",               :default => "",    :null => false
     t.string   "help_text_more_url"
     t.string   "text_as_statement"
     t.boolean  "display_on_certificate", :default => false
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
+  add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
+  add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
+  add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"
@@ -219,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
     t.integer  "display_order"
     t.string   "api_id"
     t.integer  "survey_version",         :default => 0
+    t.string   "dataset_title"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true

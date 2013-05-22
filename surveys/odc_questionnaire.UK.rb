@@ -1,6 +1,7 @@
 survey 'Open Data Certificate Questionnaire',
        :description => "This version of the certificate is designed to be used within the UK. Please contact us if you want to use the certificate in other countries.",
-       :default_mandatory => 'false' do
+       :default_mandatory => 'false',
+       :dataset_title => 'q_dataTitle' do
   translations :en => :default
 
   section_general 'General Information' do

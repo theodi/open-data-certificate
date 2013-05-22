@@ -1,7 +1,11 @@
 # encoding: UTF-8
-survey "One language is never enough" do
+survey "One language is never enough", :dataset_title => 'q_dataTitle' do
   translations :en =>:default, :es => "../translations/languages.es.yml", :he => "../translations/languages.he.yml", :ko => "../translations/languages.ko.yml"
   section_one "One" do
+
+    q_dataTitle "What's a good title for this data?"
+    a_1 'Data Title', :string
+
     g_hello "Hello" do
       q_name "What is your name?"
       a_name :string, :help_text => "My name is..."

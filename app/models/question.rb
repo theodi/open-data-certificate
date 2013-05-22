@@ -39,6 +39,14 @@ class Question < ActiveRecord::Base
     @requirement_met_by_responses ||= calculate_if_requirement_met_by_responses(responses)
   end
 
+  def dependent?
+    @dependent_q ||= self.dependency(includes: :dependency_conditions) != nil
+  end
+
+  def triggered?(response_set)
+    @triggered_q ||= (dependent? ? self.dependency(includes: :dependency_conditions).is_met?(response_set) : true)
+  end
+
   private
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
@@ -51,9 +59,9 @@ class Question < ActiveRecord::Base
 
     response_level_index = case question.pick
                              when 'one'
-                               responses.select{|r| r.question_id == question.id}.map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
+                               responses.where(:question_id => question.id).map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
                              else
-                               responses.detect{|r| r.question_id == question.id && r.requirement == requirement}.try(:requirement_level_index) # for everything else, get the requirement level for the response for the requirement in the
+                               responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement]).first.try(:requirement_level_index) # for everything else, get the requirement level for the response for the requirement in the
                            end
 
     !!(response_level_index.to_i >= requirement_level_index)
@@ -63,7 +71,7 @@ class Question < ActiveRecord::Base
   def update_mandatory
     #TODO: swap to using an observer instead?
     self.is_mandatory ||= !!required
-    Question.update(id, :is_mandatory=>is_mandatory) if is_mandatory_changed?
+    Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
   end
 
 end
