@@ -25,7 +25,7 @@ class Question < ActiveRecord::Base
   end
 
   def is_a_requirement?
-    # Definition: A 'Requirement' is an bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
+    # Definition: A 'Requirement' is a bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
     #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
     #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
     @is_a_requirement ||= display_type == 'label' && !requirement.blank?
