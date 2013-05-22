@@ -42,12 +42,12 @@ survey 'Open Data Certificate Questionnaire',
         :required => :required
 
     q_publisherUrl 'Where is the curator\'s website?',
-                   :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
+                   :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.',
+                   :display_on_certificate => true
     a_1 'Curator URL',
         :string,
         :input_type => :url,
-        :placeholder => 'Curator URL',
-        :display_on_certificate => true
+        :placeholder => 'Curator URL'
 
     q_releaseType 'What kind of release is this?',
                   :pick => :one,
