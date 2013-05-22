@@ -19,26 +19,22 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal @rs.certificate.attained_level, @rs.attained_level
   end
 
-  test "responses for questions" do
-    @rs = FactoryGirl.create :completed_response_set
+  test "can map questions to responses" do
 
     # add two questions, one to be the certificate
-    @q1 = FactoryGirl.create :question,                survey_section: @section
-    @q2 = FactoryGirl.create :question_on_certificate, survey_section: @section
-
+    @q1 = FactoryGirl.create :question
     @a1 = FactoryGirl.create :answer, question: @q1
-    @a2 = FactoryGirl.create :answer, question: @q2
 
     @response_set = FactoryGirl.create :response_set
 
     # answer the questions
-    @response_1 = FactoryGirl.create :response, response_set: @response_set, :question => @q1, :answer => @a1 
-    @response_2 = FactoryGirl.create :response, response_set: @response_set, :question => @q2, :answer => @a2 
+    @response_1 = FactoryGirl.create :response, response_set: @response_set, 
+                                     :question => @q1, :answer => @a1 
 
 
-    @responses = @response_set.responses_for_questions [@q1,@q2]
+    @responses = @response_set.responses_for_questions [@q1]
 
-    assert_equal [@response_1,@response_2], @responses
+    assert_equal [@response_1], @responses
 
   end
 
