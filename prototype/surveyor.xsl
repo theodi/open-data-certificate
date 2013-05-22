@@ -291,11 +291,6 @@
 
 <xsl:template match="help" mode="markdown">
 	<xsl:apply-templates mode="markdown" />
-	<xsl:if test="@more">
-		<xsl:text>[Read more...](</xsl:text>
-		<xsl:value-of select="@more" />
-		<xsl:text>)</xsl:text>
-	</xsl:if>
 </xsl:template>
 
 <xsl:template match="label | requirement" mode="markdown">
