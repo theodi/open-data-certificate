@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   include Surveyor::Models::QuestionMethods
 
-  attr_accessible :requirement, :required, :help_text_more_url
+  attr_accessible :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 

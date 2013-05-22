@@ -46,6 +46,12 @@ class ResponseSet < ActiveRecord::Base
     @outstanding_requirements ||= (triggered_requirements - completed_requirements)
   end
 
+  def responses_for_questions(questions)
+    responses.includes(:question)
+             .where(:question_id => questions)
+             .order('questions.display_order ASC')
+  end
+
   def generate_certificate
     if self.complete? && self.certificate.nil?
       create_certificate :attained_level => self.attained_level
