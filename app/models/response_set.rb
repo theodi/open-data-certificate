@@ -37,6 +37,15 @@ class ResponseSet < ActiveRecord::Base
     triggered_requirements - completed_requirements
   end
 
+  def responses_for_questions questions
+    # would be fewer queries to get the list of matching responses 
+    #   responses.where :question_id => questions
+    # and map the questions to them, though just keep is basic for now
+    questions.map do |q|
+      responses.where(question_id: q).first
+    end
+  end
+
   def generate_certificate
     if self.complete? && self.certificate.nil?
       create_certificate :attained_level => self.attained_level

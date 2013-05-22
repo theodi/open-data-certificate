@@ -1,10 +1,12 @@
 =div_for response_set do
   - response_set.survey.sections.each do |section|
-    - responses = section.responses_for_certificate(response_set)
+    - questions = section.questions
+    - questions.select! {|q| q.display_on_certificate? && q.triggered?(response_set)}
+    - responses = response_set.responses_for_questions questions
     - if responses.any?
       %hr
       %h2= section.title
       %dl.dl-horizontal
-        - section.responses_for_certificate(response_set).each do |response|
+        - responses.each do |response|
           %dt= response.question.text_as_statement || response.question.text
           %dd= response.to_formatted_s
