@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520111150) do
+ActiveRecord::Schema.define(:version => 20130522124534) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130520111150) do
     t.string   "help_text_more_url"
     t.string   "input_type"
     t.string   "placeholder"
+    t.string   "text_as_statement"
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
