@@ -58,8 +58,8 @@ class ResponseSet < ActiveRecord::Base
         if answer = question.answers.where(reference_identifier: previous_response.answer.reference_identifier).first
           api_id = Surveyor::Common.generate_api_id
           ui_hash[api_id] = { question_id: question.id.to_s,
-                                    api_id: api_id,
-                                    answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
+                              api_id: api_id,
+                              answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
       update_from_ui_hash(ui_hash)
@@ -67,6 +67,8 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def assign_to_user!(user)
+    # This is a bit fragile, as it assumes that there is both no current user and no current dataset, and raises no notification of any issues
+    # TODO: revisit and improve its handling of unexpected cases
     self.user = user
     self.dataset = Dataset.create(:user => user)
     save
