@@ -299,6 +299,7 @@ questions:
         text: yes
   appliedAnon:
     text: "Have you attempted to reduce or remove the possibility of individuals being identified?"
+    help_text: "You can use anonymisation techniques to reduce or remove the possibility of individuals being identified from the data you publish. The technique you use depends on the kind of data that you have."
     answers:
       a_false:
         text: no
@@ -698,21 +699,30 @@ questions:
         text: "aren't designed for structured data like Word or PDF"
         help_text: "These formats don't suit this kind of data because they obscure its underlying structure."
   identifiers:
-    text: "Does your data use URLs to identify things?"
-    help_text: "Data is usually about real things like schools or roads. And URLs give people a way to find out more about those things. If data from different sources use the same consistent URL to refer to the same things, people can combine sources easily to create more useful data. You can also use URLs to replace identifying numbers or codes."
+    text: "Does your data use persistent identifiers for things?"
+    help_text: "Data is usually about real things like schools or roads. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
-  resolvingUrls:
-    text: "Do URLs about things in your data point to extra information?"
-    help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like [companies](http://opencorporates.com/companies/gb/08030289) and [postcodes](http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE). Computers can also process this extra information using scripts to access the underlying data."
+  resolvingIds:
+    text: "Can the identifiers in your data be used to find extra information?"
     answers:
-      a_false:
-        text: no
-      a_true:
-        text: yes
+      false:
+        text: "no, the identifiers can't be used to find extra information"
+      service:
+        text: "yes, there is a service that people can use to resolve the identifiers"
+        help_text: "Online services can be used to give people information about identifiers such as GUIDs or DOIs which can't be directly accessed in the way that URLs are."
+      resolvable:
+        text: "yes, the identifiers are URLs that resolve to give information"
+        help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like [companies](http://opencorporates.com/companies/gb/08030289) and [postcodes](http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE). Computers can also process this extra information using scripts to access the underlying data."
+  resolutionServiceURL:
+    text: "Where is the service that is used to resolve the identifiers?"
+    help_text: "The resolution service should take an identifier as a query parameter and give back some information about the thing it identifies."
+    answers:
+      a_1:
+        text: "Identifier Resolution Service URL"
   existingExternalUrls:
     text: "Does your data contain URLs to third-party information?"
     help_text: "Sometimes other people outside your control provide URLs to the things your data is about. For example, your data might have postcodes in it that link to the Ordnance Survey website."
@@ -1066,9 +1076,13 @@ labels:
   pilot_20:
     text: "You should **publish structured data in a format designed that purpose** so that it's easy to process."
   standard_28:
-    text: "You should **use URLs to identify things in your data** so that they can be easily related with other data about those things."
+    text: "You should **use identifiers for things in your data** so that they can be easily related with other data about those things."
+  standard_29:
+    text: "You should **provide a service to resolve the identifiers you use** so that people can find extra information about them."
   exemplar_13:
-    text: "You should **have a web page of information about each of the things in your data** so that people can easily find and share that information."
+    text: "You should **link to a web page of information about each of the things in your data** so that people can easily find and share that information."
+  standard_30:
+    text: "You should **have a URL through which identifiers can be resolved** so that more information about them can be found by a computer."
   exemplar_14:
     text: "You should **use URLs to third-party information in your data** so that it's easy to combine with other data that uses those URLs."
   exemplar_15:
@@ -1081,26 +1095,26 @@ labels:
   pilot_22:
     text: "You should **include a data description in your documentation** so that people know what it contains."
   pilot_23:
-    text: "You should **include a data release date in your documentation so that people know how timely it is."
-  standard_29:
-    text: "You should **include a last modification date in your documentation** so that people know they have the latest data."
-  standard_30:
-    text: "You should **document how frequently you release new versions of your data** so people know how often you update it."
+    text: "You should **include a data release date in your documentation** so that people know how timely it is."
   standard_31:
-    text: "You should **include a canonical URL for the data in your documentation** so that people know how to access it consistently."
+    text: "You should **include a last modification date in your documentation** so that people know they have the latest data."
   standard_32:
-    text: "You should **include a canonical URL to the documentation itself** so that people know how to access to it consistently."
+    text: "You should **document how frequently you release new versions of your data** so people know how often you update it."
   standard_33:
-    text: "You should **include the data language in your documentation** so that people who search for it will know whether they can understand it."
+    text: "You should **include a canonical URL for the data in your documentation** so that people know how to access it consistently."
   standard_34:
-    text: "You should **indicate the data publisher in your documentation** so people can decide how much to trust your data."
+    text: "You should **include a canonical URL to the documentation itself** so that people know how to access to it consistently."
   standard_35:
-    text: "You should **include the geographic area in your documentation** so that people understand where your data applies to."
+    text: "You should **include the data language in your documentation** so that people who search for it will know whether they can understand it."
   standard_36:
-    text: "You should **include the time period in your documentation** so that people understand when your data applies to."
+    text: "You should **indicate the data publisher in your documentation** so people can decide how much to trust your data."
   standard_37:
-    text: "You should **include the subject in your documentation** so that people know roughly what your data is about."
+    text: "You should **include the geographic area in your documentation** so that people understand where your data applies to."
   standard_38:
+    text: "You should **include the time period in your documentation** so that people understand when your data applies to."
+  standard_39:
+    text: "You should **include the subject in your documentation** so that people know roughly what your data is about."
+  standard_40:
     text: "You should **include keywords or tags in your documentation** to help people search within the data effectively."
   pilot_24:
     text: "You should **include titles within your documentation** so people know how to refer to each data distribution."
@@ -1108,15 +1122,15 @@ labels:
     text: "You should **include descriptions within your documentation** so people know what each data distribution contains."
   pilot_26:
     text: "You should **include release dates within your documentation** so people know how current each distribution is."
-  standard_39:
+  standard_41:
     text: "You should **include last modification dates within your documentation** so people know whether their copy of a data distribution is up-to-date."
-  standard_40:
+  standard_42:
     text: "You should **document applicable licences or waivers** so people know what they can do with a data distribution."
   pilot_27:
     text: "You should **document how your API works** so that people understand how to use it."
-  standard_41:
+  standard_43:
     text: "You should **document any vocabulary you use within your data** so that people know how to interpret it."
-  standard_42:
+  standard_44:
     text: "You should **document the codes used within your data** so that people know how to interpret them."
   pilot_28:
     text: "You should **provide an email address for people to send questions** about your data to."
@@ -1124,13 +1138,13 @@ labels:
     text: "You should **provide instructions about how suggest improvements** to the way you publish data so you can discover what people need."
   pilot_30:
     text: "You should **provide an email address for people to send questions about privacy to** and disclosure of personal details."
-  standard_43:
-    text: "You should **use social media to reach people who use your data** and discover how your data is being used"
-  standard_44:
-    text: "You should **tell people where they can discuss your data** and support one another."
   standard_45:
-    text: "You should **provide instructions about how people can report errors** in your data."
+    text: "You should **use social media to reach people who use your data** and discover how your data is being used"
   standard_46:
+    text: "You should **tell people where they can discuss your data** and support one another."
+  standard_47:
+    text: "You should **provide instructions about how people can report errors** in your data."
+  standard_48:
     text: "You should **provide a mailing list or feed with updates** that people can use to keep their copies of your data up-to-date."
   exemplar_17:
     text: "You should **build a community of people around your data** to encourage wider use of your data."
