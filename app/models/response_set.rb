@@ -16,7 +16,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def title_determined_from_responses
-    @title_determined_from_responses ||= responses.joins(:question).where('questions.reference_identifier == ?', 'dataTitle').first.try(:string_value)
+    @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: 'dataTitle'}).first.try(:string_value)
   end
 
   def incomplete?
