@@ -61,6 +61,21 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 * `:placeholder` - placeholder text displayed in a field before anything is entered
 
 
+### Running
+
+    bundle install
+    rake db:migrate
+    rake surveyor:build_changed_surveys
+    rails s
+
+#### Development things
+
+    # generate development surveys
+    rake surveyor:build_changed_surveys DIR=surveys/development
+
+    # run tests on file change
+    bundle exec guard
+
 ---
 
 The approach to the new app is outlined in a [google doc](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#), which will be moved into this readme file.
