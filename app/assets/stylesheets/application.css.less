@@ -26,7 +26,11 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 @odiBlue:  #00b7ff;
+@odiBlueDark: darken(@odiBlue, 20%);
 @odiRed:  #ff6700;
+@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackgroundHighlight: @odiRed;;
+@btnInfoBackground:  @odiBlue;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
@@ -74,6 +78,76 @@ h1 {
   font-weight: normal;
 }
 
+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.btn {
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+
+#padd {
+
+  .container {
+    margin-top: 50px;
+  }
+
+  .btn {
+display: block;
+margin-bottom: 20px;
+  }
+}
+
+
+.home {
+  text-align: center;
+
+  h1 {
+        color: @odiBlueDark;
+        font-size: 36px;
+        margin-bottom: 30px;
+        text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
+      }
+
+  .span4 {
+    width: 339px;
+    border-right: 1px solid #fff;
+    padding-right: 30px;
+    
+
+      
+
+      h2 {
+        font-size: 70px;
+        color: @odiBlueDark;
+        font-weight: bold;
+         text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
+
+
+        small {
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        padding: 30px 0 10px; 
+        text-shadow: none;
+        }
+      }
+
+      .btn {
+        position: relative;
+        top: 40px;
+      }
+    }
+
+  .last {
+      border-right: none;
+    }
+  
+}
+
 
 // Layout //
 
@@ -117,9 +191,10 @@ margin: 0;
   #mainnav {
     margin-bottom: 0;
     position: relative;
+   
 
     .navbar-inner {
-      background-color: #fff;
+        background-color:rgba(255,255,255,0.85);
       border-radius: 0;
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
@@ -200,11 +275,14 @@ padding: 20px 0;
 }
 
 section {
-  background-color: white;
+  //background-color: white;
   margin: 15px 0;
   padding: 10px;
 }
 
+.whiteout{
+  background-color:rgba(255,255,255,0.85);
+}
 
 
 
