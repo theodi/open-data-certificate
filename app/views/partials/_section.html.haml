@@ -1,7 +1,7 @@
 - if section.display_header
-  .header
+  %header
     .container
-      %h4= section.translation(I18n.locale)[:title]
+      %h3= section.translation(I18n.locale)[:title]
 / .accordion-inner
 .container
   - qs ||= []
