@@ -20,8 +20,14 @@
 
 /* import bootstrap this way so that we can alter variables just for this app */
 @import "twitter/bootstrap";
+
+// override bootstrap variables here, see options at:
+//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+
+@headingsFontFamily:    'Open Sans',sans-serif;
+@headingsFontWeight:    400;
 
 
 /************************************************
@@ -41,6 +47,105 @@
 
 
 /************************************************
+    ODI Styling
+************************************************/
+// source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
+
+#header, #footer {
+  background-color: white;
+}
+
+#header {
+  padding-top: 24px;
+
+  img {
+    vertical-align: top;
+  }
+
+  .branding {
+    padding-bottom: 15px;
+  }
+
+  #name-and-slogan {
+    display: inline-block;
+    padding-left: 30px;
+
+    #site-name {
+      margin: 0;
+      line-height: 0.9em;
+    }
+
+    #site-slogan {
+      bottom: 0;
+      color: #3EB4E4;
+      font-size: 18px;
+      font-weight: normal;
+      left: -2px;
+      letter-spacing: 2px;
+      line-height: 1em;
+      margin: 0 0 0 2px;
+    }
+  }
+
+  #mainnav {
+    margin-bottom: 0;
+
+    .navbar-inner {
+      border-radius: 0;
+    }
+  }
+}
+
+#footer {
+  font-size: 0.88em;
+
+  a {
+    color: #666666;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none outside none;
+    margin: 10px 0;
+
+    li {
+      display: inline;
+      margin: 0 10px;
+    }
+  }
+
+  p {
+    margin: 10px;
+  }
+}
+
+section {
+  background-color: white;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.page-header {
+
+  .bookmark {
+    position: absolute;
+    margin: -3px 0 0 -30px;
+    padding: 3px;
+    min-height: 53px;
+    background-color: @blue;
+
+    .icon {
+      opacity: 0.5;
+    }
+
+    &:hover .icon {
+      opacity: 1;
+    }
+  }
+}
+
+
+/************************************************
     Original prototype styling
 ************************************************/
 #alpha-banner {
@@ -53,102 +158,7 @@
 }
 
 body {
-    margin-top: 40px; /* give room for the alpha banner */
-}
-
-#questionnaire .control-label { 
-    width: 270px; 
-    padding-left: 30px;
-}
-
-#questionnaire .controls { 
-    margin-left: 340px; 
-}
-
-#questionnaire .well .control-label {
-    width: 251px;
-    padding-left: 30px;
-}
-
-#questionnaire .well .controls {
-    margin-left: 321px;
-}
-
-#questionnaire .requirement .alert { 
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-
-#questionnaire .btn-help {
-    margin-left: -33px;
-    position: absolute;
-}
-
-#questionnaire .btn-option-help {
-    margin-left: -20px;
-    padding: 0;
-    position: absolute;
-}
-
-#questionnaire label .help-block {
-    margin-top: 0;
-}
-
-#questionnaire .control-label .badge-circular {
-    margin-left: -30px;
-}
-
-#questionnaire .radio.inline + .label {
-    position: relative;
-    top: 4px;
-}
-
-.improvements {
-    margin-top: 14px;
-    margin-bottom: 20px;
-}
-
-.improvement {
-    margin-top: 7px;
-    margin-bottom: 10px;
-}
-
-.improvement-label {
-    display: block;
-    float: left;
-    width: 160px;
-    text-align: right;
-}
-
-.improvement-desc {
-    display: block;
-    margin-left: 180px;
-}
-
-.label-pilot,
-.label-standard,
-.label-exemplar {
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.label-pilot,
-.badge-pilot { 
-    background-color: peru; 
-    box-shadow: 0 0 2px peru;
-}
-
-.label-standard,
-.badge-standard { 
-    background-color: silver; 
-    box-shadow: 0 0 2px silver;
-}
-
-.label-exemplar,
-.badge-exemplar { 
-    background-color: gold; 
-    box-shadow: 0 0 2px gold;
+    margin-top: 80px; /* give room for the alpha banner */
 }
 
 .footer {
