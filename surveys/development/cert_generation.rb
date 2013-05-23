@@ -1,6 +1,7 @@
 survey 'Certificate Generator',  :dataset_title => 'q_dataTitle' do
   
-  section 'General' do
+  section 'General', :display_header => false do
+    
 
     q_dataTitle 'What\'s a good title for this data?',
                 :text_as_statement => 'Data Title',

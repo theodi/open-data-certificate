@@ -201,8 +201,9 @@ ActiveRecord::Schema.define(:version => 20130528163600) do
     t.string   "common_identifier"
     t.integer  "display_order"
     t.string   "custom_class"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "display_header",         :default => true
   end
 
   create_table "survey_translations", :force => true do |t|
