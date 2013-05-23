@@ -12,7 +12,7 @@
         .navbar-inner
           .container
             %a.brand{:href => "/"}
-              = image_tag "logo.png", :size => "131x54"
+              = image_tag "logo.png"
             %ul.nav.pull-right
               =render 'shared/auth_bar'
             %span.label{:style => "margin-top: 10px;"} BETA
@@ -21,9 +21,10 @@
         .navbar-inner
           .container
             %ul.nav.pull-right
-              %li.active.arrow-down
+              %li.active
                 %a{:href => "#questionnaire"}
                   = t 'menu.questionnaire'
+                .arrow-down
 
               %li
                 %a{:href => "#certificate"}
@@ -38,7 +39,7 @@
               %li
                 = link_to t('menu.contact'), '/contact'
 
-    #header
+    %header
       .container
         %h1 Title here
   
