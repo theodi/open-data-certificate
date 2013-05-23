@@ -24,16 +24,16 @@ en:
   levels:
     basic:
       title: Basic
-      description: This data satisfies the fundamental requirements for open data
+      description: this data satisfies the fundamental requirements for open data
     pilot:
       title: Pilot
-      description: This data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
+      description: this data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
     standard:
       title: Standard
-      description: This data satisfies the requirements for routinely published open data that encourages reuse.
+      description: this data satisfies the requirements for routinely published open data that encourages reuse.
     exemplar:
       title: Exemplar
-      description: This data satisfies the requirements for key information infrastructure.
+      description: this data satisfies the requirements for key information infrastructure.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
 
