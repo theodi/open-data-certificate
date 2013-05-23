@@ -21,7 +21,7 @@
         .navbar-inner
           .container
             %ul.nav.pull-right
-              %li.active
+              %li.active.arrow-down
                 %a{:href => "#questionnaire"}
                   = t 'menu.questionnaire'
 
@@ -48,12 +48,8 @@
         .flash.alert{ :class => "alert-#{type}" }
           = value
 
-      = yield :above_content
-
       %section
         = yield
-
-      = yield :below_content
 
     %footer#footer
       .container
