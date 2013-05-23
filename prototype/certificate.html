@@ -463,10 +463,8 @@
                                  <div class="conditional" data-bind="visible: releaseType() === 'collection'">
                                     			
                                     <div class="conditional" data-bind="visible: !(documentationUrl() !== '')">
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.
-                                          </p>
-                                       </div>
+                                       <p class="requirement alert alert-error">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.
+                                       </p>
                                     </div>
                                     		
                                  </div>
@@ -520,10 +518,8 @@
                                     </div>
                                     <div class="conditional" data-bind="visible: publisherRights() === 'no'">
                                        					
-                                       <div class="requirement">
-                                          <p class="alert alert-error">You must have the <strong>right to publish your data</strong>.
-                                          </p>
-                                       </div>
+                                       <p class="requirement alert alert-error">You must have the <strong>right to publish your data</strong>.
+                                       </p>
                                        				
                                     </div>
                                  </div>
@@ -555,11 +551,9 @@
                                           <div class="conditional" data-bind="visible: crowdsourced() === 'false'">
                                              							
                                              <div class="conditional" data-bind="visible: !(thirdPartyOrigin() === 'true')">
-                                                <div class="requirement">
-                                                   <p class="alert alert-error">You indicated that this data wasn't originally created or gathered by you, and wasn't
-                                                      crowdsourced, so it must have been extracted or calculated from other data sources.
-                                                   </p>
-                                                </div>
+                                                <p class="requirement alert alert-error">You indicated that this data wasn't originally created or gathered by you, and wasn't
+                                                   crowdsourced, so it must have been extracted or calculated from other data sources.
+                                                </p>
                                              </div>
                                              						
                                           </div>
@@ -578,10 +572,8 @@
                                              </div>
                                              <div class="conditional" data-bind="visible: thirdPartyOpen() === 'false'">
                                                 								
-                                                <div class="requirement">
-                                                   <p class="alert alert-error">You should get <strong>legal advice to make sure you have the right to publish this data</strong>.
-                                                   </p>
-                                                </div>
+                                                <p class="requirement alert alert-error">You should get <strong>legal advice to make sure you have the right to publish this data</strong>.
+                                                </p>
                                                 							
                                              </div>
                                           </div>
@@ -599,11 +591,9 @@
                                           <div class="conditional" data-bind="visible: thirdPartyOrigin() === 'false'">
                                              							
                                              <div class="conditional" data-bind="visible: !(crowdsourced() === 'true')">
-                                                <div class="requirement">
-                                                   <p class="alert alert-error">You indicated that the data wasn't originally created or gathered by you, and wasn't
-                                                      extracted or calculated from other data, so it must have been crowdsourced.
-                                                   </p>
-                                                </div>
+                                                <p class="requirement alert alert-error">You indicated that the data wasn't originally created or gathered by you, and wasn't
+                                                   extracted or calculated from other data, so it must have been crowdsourced.
+                                                </p>
                                              </div>
                                              						
                                           </div>
@@ -639,10 +629,8 @@
                                                    </p>
                                                 </div>
                                                 <div class="conditional" data-bind="visible: !(cldsRecorded() === 'true')">
-                                                   <div class="requirement">
-                                                      <p class="alert alert-error">You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.
-                                                      </p>
-                                                   </div>
+                                                   <p class="requirement alert alert-error">You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.
+                                                   </p>
                                                 </div>
                                              </div>
                                           </div>
@@ -812,10 +800,8 @@
                                           <p class="alert alert-help">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.<a class="pull-right" href="http://opendefinition.org/" target="_new">Read more...</a></p>
                                        </div>
                                        <div class="conditional" data-bind="visible: !(otherDataLicenceOpen() === 'true')">
-                                          <div class="requirement">
-                                             <p class="alert alert-error">You must <strong>publish open data under an open licence</strong> so that people can use it.
-                                             </p>
-                                          </div>
+                                          <p class="requirement alert alert-error">You must <strong>publish open data under an open licence</strong> so that people can use it.
+                                          </p>
                                        </div>
                                     </div>
                                  </div>
@@ -920,10 +906,8 @@
                                           <p class="alert alert-help">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.<a class="pull-right" href="http://opendefinition.org/" target="_new">Read more...</a></p>
                                        </div>
                                        <div class="conditional" data-bind="visible: !(otherContentLicenceOpen() === 'true')">
-                                          <div class="requirement">
-                                             <p class="alert alert-error">You must <strong>publish open data under an open licence</strong> so that people can use it.
-                                             </p>
-                                          </div>
+                                          <p class="requirement alert alert-error">You must <strong>publish open data under an open licence</strong> so that people can use it.
+                                          </p>
                                        </div>
                                     </div>
                                  </div>
@@ -1382,10 +1366,8 @@
                                           <div class="conditional" data-bind="visible: documentationUrl() === ''">
                                              							
                                              <div class="conditional" data-bind="visible: !(datasetUrl() !== '')">
-                                                <div class="requirement">
-                                                   <p class="alert alert-error">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.
-                                                   </p>
-                                                </div>
+                                                <p class="requirement alert alert-error">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.
+                                                </p>
                                              </div>
                                              						
                                           </div>
@@ -1427,11 +1409,9 @@
                                              							
                                              						</span><div class="conditional" data-bind="visible: documentationUrl() === '' &amp;&amp; versionManagement() !== 'current' &amp;&amp; versionManagement() !== 'template' &amp;&amp; versionManagement() !== 'list'">
                                              							
-                                             <div class="requirement">
-                                                <p class="alert alert-error">You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation
-                                                   page so that people can find it.
-                                                </p>
-                                             </div>
+                                             <p class="requirement alert alert-error">You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation
+                                                page so that people can find it.
+                                             </p>
                                              						
                                           </div>
                                        </div>
@@ -1489,10 +1469,8 @@
                                           <div class="conditional" data-bind="visible: documentationUrl() === ''">
                                              							
                                              <div class="conditional" data-bind="visible: !(endpointUrl() !== '')">
-                                                <div class="requirement">
-                                                   <p class="alert alert-error">You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.
-                                                   </p>
-                                                </div>
+                                                <p class="requirement alert alert-error">You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.
+                                                </p>
                                              </div>
                                              						
                                           </div>
