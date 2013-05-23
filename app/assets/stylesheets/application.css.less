@@ -25,9 +25,18 @@
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+@odiBlue:  #00b7ff;
+@odiRed:  #ff6700;
 
-@headingsFontFamily:    'Open Sans',sans-serif;
-@headingsFontWeight:    400;
+// @headingsFontFamily:    'Open Sans',sans-serif;
+// @headingsFontWeight:    400;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
 
 
 /************************************************
@@ -51,52 +60,53 @@
 ************************************************/
 // source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
 
-#header, #footer {
-  background-color: white;
+
+// Global styles //
+
+body {
+   background-color: #fff;
 }
 
-#header {
-  padding-top: 24px;
+// Typography //
 
-  img {
-    vertical-align: top;
-  }
+h1 {
+  font-weight: normal;
+}
 
-  .branding {
-    padding-bottom: 15px;
-  }
 
-  #name-and-slogan {
-    display: inline-block;
-    padding-left: 30px;
-
-    #site-name {
-      margin: 0;
-      line-height: 0.9em;
-    }
-
-    #site-slogan {
-      bottom: 0;
-      color: #3EB4E4;
-      font-size: 18px;
-      font-weight: normal;
-      left: -2px;
-      letter-spacing: 2px;
-      line-height: 1em;
-      margin: 0 0 0 2px;
-    }
-  }
+// Layout //
 
   #mainnav {
     margin-bottom: 0;
 
     .navbar-inner {
+      background-color: #fff;
       border-radius: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border-bottom: none;
+      background-image: none;
+    }
+
+    .arrow-down {
+      width: 0; 
+      height: 0; 
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid red;
     }
   }
+
+#header {
+background-color: @odiBlue;
+color: #fff;
+padding: 20px 0
 }
 
+
 #footer {
+  background-color: #000;
   font-size: 0.88em;
 
   a {
@@ -125,24 +135,6 @@ section {
   padding: 10px;
 }
 
-.page-header {
-
-  .bookmark {
-    position: absolute;
-    margin: -3px 0 0 -30px;
-    padding: 3px;
-    min-height: 53px;
-    background-color: @blue;
-
-    .icon {
-      opacity: 0.5;
-    }
-
-    &:hover .icon {
-      opacity: 1;
-    }
-  }
-}
 
 
 /************************************************
@@ -157,12 +149,8 @@ section {
     z-index: 1;
 }
 
-body {
-    margin-top: 80px; /* give room for the alpha banner */
-}
 
 .footer {
-    background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
     margin-top: 70px;
     padding: 30px 0;

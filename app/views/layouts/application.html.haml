@@ -7,32 +7,47 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    #alpha-banner.alert.alert-danger
-      %p
-        = t :alpha_note
-    %header#header
+    %nav
+      #topbar.navbar.navbar-inverse.navbar-static-top
+        .navbar-inner
+          .container
+            %a.brand{:href => "/"}
+              = image_tag "logo.png", :size => "131x54"
+            %ul.nav.pull-right
+              =render 'shared/auth_bar'
+            %span.label{:style => "margin-top: 10px;"} BETA
+      %nav
+      #mainnav.navbar.navbar-static-top
+        .navbar-inner
+          .container
+            %ul.nav.pull-right
+              %li.active.arrow-down
+                %a{:href => "#questionnaire"}
+                  = t 'menu.questionnaire'
+
+              %li
+                %a{:href => "#certificate"}
+                  = t 'menu.certificate'
+
+              %li
+                = link_to t('menu.search'), '/search'
+
+              %li
+                = link_to t('menu.about'), '/about'
+
+              %li
+                = link_to t('menu.contact'), '/contact'
+
+    #header
       .container
-        .branding
-          %a#logo{:href => "/", :rel => "home", :title => "Home"}
-            = image_tag "logo.png", :size => "131x54"
-          %hgroup#name-and-slogan
-            %h1#site-name
-              %a{:href => "/", :rel => "home", :title => "Open Data Institute"}
-                = image_tag "logo_text.png", :size => "326x30", :alt => "Open Data Institute"
-            %h2#site-slogan Knowledge for everyone
-        %nav
-          #mainnav.navbar.navbar-inverse
-            .navbar-inner
-              %a.brand{:href => "/"}
-                = t 'menu.title'
-              %ul.nav
-                =render 'shared/auth_bar'
+        %h1 Title here
+  
     .container
 
       - flash.each do |type, value|
         .flash.alert{ :class => "alert-#{type}" }
           = value
-      
+
       %section
         = yield
 
