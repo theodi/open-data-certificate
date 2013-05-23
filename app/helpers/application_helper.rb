@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def main_menu_navigation
     links = [
       new_certificate_link_hash,
@@ -24,6 +25,13 @@ module ApplicationHelper
     render partial: 'layouts/main_menu_navigation_link', locals: { link: new_certificate_link_hash(options) }
   end
 
+  # the class for the main div (allows you to override .container when you
+  # want more control)
+  def main_container_class
+    className = content_for(:main_container_class)
+    className.blank? ? 'container' : className
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
@@ -32,4 +40,5 @@ module ApplicationHelper
       { :link_text => t('menu.create_certificate'), :path => '#start-cert-modal', 'data-toggle' => :modal }
     end.merge(options)
   end
+
 end

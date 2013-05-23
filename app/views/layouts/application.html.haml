@@ -38,14 +38,14 @@
           %h1= yield(:header_title)
 
     .whiteout
-      .container.main-content
-
-        - flash.each do |type, value|
+    
+      - flash.each do |type, value|
+        .container
           .flash.alert{ :class => "alert-#{type}" }
             = value
 
-        %section
-          = yield
+      #main{:class => main_container_class}
+        = yield
 
     %footer#footer
       .container
