@@ -1,8 +1,6 @@
 - content_for(:body_class) {'odi-bleed'}
 
 - content_for(:super_head) do
-  =image_tag 'splat.png', 'data-0'=>"margin-top:-450px;", 'data-2500'=>"margin-top:1000px;", :style => 'position:fixed;z-index:-10;max-width:none'
- 
   #padd{style: 'height:500px;'}
     .container
       .row
@@ -53,6 +51,6 @@
   - else
     = render partial: 'home/unauthenticated_user_home'
 
-  - 50.times do
-    %br
+  /- 50.times do
+  /  %br
 
