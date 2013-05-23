@@ -148,10 +148,39 @@ hr.heavy {
     border-bottom: none;
     background-image: none;
 
+  #mainnav {
+    margin-bottom: 0;
+    position: relative;
+
+    .navbar-inner {
+      background-color: #fff;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border-bottom: none;
+      background-image: none;
+
+        li {
+          position: relative;
+          padding: 10px 20px 20px;
+
+            a {
+               color: #000;
+              margin: 0 0 10px;
+            }
+            a:hover {
+              color: @odiBlue;
+            }
+      }
+
+      li.active a {
+        color: @odiBlue;
+      }
+
     li {
       position: relative;
       padding: 10px 20px 20px;
-
       a {
          color: #000;
         margin: 0 0 10px;
@@ -191,9 +220,10 @@ header {
 #footer {
   background-color: #000;
   font-size: 0.88em;
+     color: #fff;
 
   a {
-    color: #666666;
+    color: #fff;
     text-decoration: none;
   }
 
@@ -331,19 +361,6 @@ strong.certificate-level {
     color: @exemplar;
   }
 }
-
-/************************************************
-    Original prototype styling
-************************************************/
-#alpha-banner {
-    border-radius: 0 0 0 0;
-    top: 0;
-    margin-bottom: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-}
-
 
 .footer {
     border-top: 1px solid #E5E5E5;

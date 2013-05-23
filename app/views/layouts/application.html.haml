@@ -33,11 +33,7 @@
               %li
                 = link_to t('menu.search'), '/search'
 
-              %li
-                = link_to t('menu.about'), '/about'
-
-              %li
-                = link_to t('menu.contact'), '/contact'
+              
 
     %header
       .container
@@ -55,24 +51,20 @@
     %footer#footer
       .container
         %nav
-          %ul
-            %li
-              %a{:href => "#privacy-policy"}
-                = t 'footmenu.privacy'
+          %ul.pull-right             
             %li
               %a{:href => "#terms-of-use"}
                 = t 'footmenu.terms'
             %li
-              %a{:href => "#cookie-policy"}
-                = t 'footmenu.cookies'
+              = link_to t('menu.about'), '/about'
             %li
-              %a{:href => "#feedback"}
-                = t 'footmenu.feedback'
+              = link_to t('menu.contact'), '/contact'
+        
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
             = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
           %a{:href => "http://www.theodi.org"} Open Data Institute
-          ·
+        %p
           %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} 65 Clifton Street, London EC2A 4JE
           ·
           %a{:href => "mailto:info@theodi.org"} info@theodi.org

@@ -63,7 +63,9 @@ class Question < ActiveRecord::Base
     #       Validation in the Survey model is used to prevent a requirement getting linked to more than one question or answer
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
 
-    response_level_index = case question.pick
+    return false unless question # if for some reason a matching question is not found
+
+    response_level_index = case question.pick # radio buttons will return 'one' as their .pick attribute value
                              when 'one'
                                responses.where(:question_id => question.id).map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
                              else
