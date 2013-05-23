@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(:version => 20130522124534) do
   end
 
   create_table "datasets", :force => true do |t|
-    t.string   "title",             :default => "Untitiled"
+    t.string   "title"
     t.string   "documentation_url"
     t.string   "curating_org"
     t.string   "curator_url"
     t.string   "data_kind"
     t.integer  "user_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "dependencies", :force => true do |t|

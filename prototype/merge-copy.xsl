@@ -40,7 +40,7 @@
 
 <xsl:template match="group//group/help">
 	<xsl:variable name="help" as="xs:string?" select="key('groups', ../@id, $copy)/help_text" />
-	<label>
+	<help>
 		<xsl:apply-templates select="@*" />
 		<xsl:choose>
 			<xsl:when test="$help">
@@ -51,7 +51,7 @@
 				<xsl:apply-templates />
 			</xsl:otherwise>
 		</xsl:choose>
-	</label>
+	</help>
 </xsl:template>
 
 <xsl:template match="question/label">
