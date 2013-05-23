@@ -148,36 +148,21 @@ hr.heavy {
     border-bottom: none;
     background-image: none;
 
-  #mainnav {
-    margin-bottom: 0;
-    position: relative;
+    li {
+      position: relative;
+      padding: 10px 20px 20px;
 
-    .navbar-inner {
-      background-color: #fff;
-      border-radius: 0;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      border-bottom: none;
-      background-image: none;
-
-        li {
-          position: relative;
-          padding: 10px 20px 20px;
-
-          a {
-             color: #000;
-            margin: 0 0 10px;
-          }
-          a:hover {
-            color: @odiBlue;
-          }
-        }
+      a {
+        color: #000;
+        margin: 0 0 10px;
       }
-
-      li.active a {
+      a:hover {
         color: @odiBlue;
       }
+    }
+
+    li.active a {
+      color: @odiBlue;
     }
 
     .arrow-down {
