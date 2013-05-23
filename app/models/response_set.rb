@@ -18,6 +18,7 @@ class ResponseSet < ActiveRecord::Base
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
+
   def title_determined_from_responses
     @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_title}).first.try(:string_value)
   end
