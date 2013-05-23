@@ -52,8 +52,7 @@ OpenDataCertificate::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # **IMPORTANT** Define the default url (for devise)
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
+  # config.action_mailer.default_url_options = { :host => 'odc' }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill
