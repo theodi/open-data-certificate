@@ -636,7 +636,7 @@ survey 'Open Data Certificate Questionnaire',
     a_true 'yes',
       :requirement => 'pilot_7'
 
-    label_pilot_7 'You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data.',
+    label_pilot_7 'You should **involve the person responsible for data protection** in your organisation before you publish this data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -659,7 +659,7 @@ survey 'Open Data Certificate Questionnaire',
     a_true 'yes',
       :requirement => 'standard_7'
 
-    label_standard_7 'You should **engage an expert to audit your anonymisation approach** to ensure that it is appropriate for your data.',
+    label_standard_7 'You should **have your anonymisation process audited independently** by an expert to ensure it is appropriate for your data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_7'
     dependency :rule => 'A and (B or C) and D and E'
@@ -717,8 +717,8 @@ survey 'Open Data Certificate Questionnaire',
 
     end
 
-    q_referenced 'Is the data referenced from your own publications?',
-      :help_text => 'You can provide context for understanding your data, and provide routes to help it be located, by referencing it within your own publications.',
+    q_referenced 'Is this data referenced from your own publications?',
+      :help_text => 'When you reference your data within your own publications you give it more context, and help people find and understand it better.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -733,8 +733,8 @@ survey 'Open Data Certificate Questionnaire',
 
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
-      q_reference 'Where is the data referenced?',
-        :help_text => 'Give a URL for a document that cites or references this data.'
+      q_reference 'Where is your data referenced?',
+        :help_text => 'Give a URL to a document that cites or references this data.'
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       a_1 'Reference URL',

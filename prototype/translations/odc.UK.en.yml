@@ -391,16 +391,16 @@ questions:
       a_1:
         text: "Listing URL"
   referenced:
-    text: "Is the data referenced from your own publications?"
-    help_text: "You can provide context for understanding your data, and provide routes to help it be located, by referencing it within your own publications."
+    text: "Is this data referenced from your own publications?"
+    help_text: "When you reference your data within your own publications you give it more context, and help people find and understand it better."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   reference:
-    text: "Where is the data referenced?"
-    help_text: "Give a URL for a document that cites or references this data."
+    text: "Where is your data referenced?"
+    help_text: "Give a URL to a document that cites or references this data."
     answers:
       a_1:
         text: "Reference URL"
@@ -991,9 +991,9 @@ labels:
   pilot_6:
     text: "You should **tell people what purposes the individuals in your data consented to you using their data for**. So that they use your data for the same purposes and comply with the Data Protection Act."
   pilot_7:
-    text: "You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data."
+    text: "You should **involve the person responsible for data protection** in your organisation before you publish this data."
   standard_7:
-    text: "You should **engage an expert to audit your anonymisation approach** to ensure that it is appropriate for your data."
+    text: "You should **have your anonymisation process audited independently** by an expert to ensure it is appropriate for your data."
 # Practical Information Requirements
   standard_8:
     text: "You should **ensure that people can easily find your data** from your organisation's home page."
