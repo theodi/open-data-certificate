@@ -44,7 +44,7 @@ class SurveyorController < ApplicationController
         if user_signed_in? && all_mandatory_questions_complete?
           @response_set.complete!
           @response_set.save
-          return redirect_with_message(dataset_path(@response_set.dataset), :notice, t('surveyor.completed_survey'))
+          return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
         end
 
         if user_signed_in?
@@ -121,11 +121,7 @@ class SurveyorController < ApplicationController
   # if there was a dataset, go back to it
   private
   def surveyor_finish
-    if @response_set.dataset
-      dataset_path @response_set.dataset
-    else
-      surveyor.available_surveys_path
-    end
+    root_path
   end
 
   private

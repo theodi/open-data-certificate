@@ -2,8 +2,6 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  start_new_certification: Start new Certification
-  start_new_certification_based_on_this_response_set: Start new Certification based on this response set
   choose_legislation: choose legislation
 
   alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
@@ -22,6 +20,9 @@ en:
     feedback: Feedback
 
   levels:
+    none:
+      title: None
+      description: This data does not satisfy the fundamental requirements for open data
     basic:
       title: Basic
       description: This data satisfies the fundamental requirements for open data
@@ -51,3 +52,21 @@ en:
     pilot_4: You should provide the data in a machine-readable format so that it's easy to reuse.
     pilot_5: You should have a contact email address so that people can get in touch with you about any questions about the data.
     pilot_6: You should provide a contact email address so that reusers with concerns about disclosure of personal details within the data can get in touch.
+
+  dashboard:
+    archived: Archived
+    edit_and_publish: Edit and publish
+    embed_code: Embed code
+    heading__intro_text: 'some intro text here...'
+    heading__my_certificates: My certificates
+    latest_published_certificate: Latest published certificate
+    make_a_copy_and_edit: Make a copy and edit
+    previous_versions: Previous versions
+    start_new_certification: Start new Certification
+    you_are_currently_editing_this_certificate: You are currently editing this certificate
+    view_certificate: View certificate
+
+
+  homepage:
+    start_new_certification: Start new Certification
+
