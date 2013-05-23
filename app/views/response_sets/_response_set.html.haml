@@ -1,11 +1,13 @@
-=div_for response_set do
+%div.certificate-data
   - response_set.survey.sections.each do |section|
     - questions = section.questions_for_certificate response_set
     - responses = response_set.responses_for_questions questions
     - if responses.any?
-      %hr
-      %h2= section.title
-      %dl.dl-horizontal
+      %hr.heavy
+      - if section.title != 'General'
+        %h3= section.title
+      %ul
         - responses.each do |response|
-          %dt= response.question.statement_text
-          %dd= response.statement_text
+          %li
+            %h4= response.question.statement_text
+            %p= response.statement_text.capitalize
