@@ -20,6 +20,9 @@
 
 /* import bootstrap this way so that we can alter variables just for this app */
 @import "twitter/bootstrap";
+
+// override bootstrap variables here, see options at:
+//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
@@ -54,101 +57,6 @@
 
 body {
     margin-top: 40px; /* give room for the alpha banner */
-}
-
-#questionnaire .control-label { 
-    width: 270px; 
-    padding-left: 30px;
-}
-
-#questionnaire .controls { 
-    margin-left: 340px; 
-}
-
-#questionnaire .well .control-label {
-    width: 251px;
-    padding-left: 30px;
-}
-
-#questionnaire .well .controls {
-    margin-left: 321px;
-}
-
-#questionnaire .requirement .alert { 
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-
-#questionnaire .btn-help {
-    margin-left: -33px;
-    position: absolute;
-}
-
-#questionnaire .btn-option-help {
-    margin-left: -20px;
-    padding: 0;
-    position: absolute;
-}
-
-#questionnaire label .help-block {
-    margin-top: 0;
-}
-
-#questionnaire .control-label .badge-circular {
-    margin-left: -30px;
-}
-
-#questionnaire .radio.inline + .label {
-    position: relative;
-    top: 4px;
-}
-
-.improvements {
-    margin-top: 14px;
-    margin-bottom: 20px;
-}
-
-.improvement {
-    margin-top: 7px;
-    margin-bottom: 10px;
-}
-
-.improvement-label {
-    display: block;
-    float: left;
-    width: 160px;
-    text-align: right;
-}
-
-.improvement-desc {
-    display: block;
-    margin-left: 180px;
-}
-
-.label-pilot,
-.label-standard,
-.label-exemplar {
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.label-pilot,
-.badge-pilot { 
-    background-color: peru; 
-    box-shadow: 0 0 2px peru;
-}
-
-.label-standard,
-.badge-standard { 
-    background-color: silver; 
-    box-shadow: 0 0 2px silver;
-}
-
-.label-exemplar,
-.badge-exemplar { 
-    background-color: gold; 
-    box-shadow: 0 0 2px gold;
 }
 
 .footer {
