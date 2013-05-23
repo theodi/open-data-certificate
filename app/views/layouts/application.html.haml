@@ -8,7 +8,7 @@
     = csrf_meta_tags
   %body
     %nav
-      #mainnav.navbar.navbar-inverse.navbar-static-top
+      #topbar.navbar.navbar-inverse.navbar-static-top
         .navbar-inner
           .container
             %a.brand{:href => "/"}
@@ -38,6 +38,10 @@
               %li
                 = link_to t('menu.contact'), '/contact'
 
+    #header
+      .container
+        %h1 Title here
+  
     .container
 
       - flash.each do |type, value|
