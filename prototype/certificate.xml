@@ -362,7 +362,7 @@
 				<question id="appliedAnon">
 					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
 					<yesno required="pilot" />
-					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">You can use anonymisation techniques to reduce or remove the possibility of individuals being identified from the data you publish. The technique you use depends on the kind of data that you have.</help>
+					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the <a href="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">ICO Anonymisation Code of Practice</a>.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure">

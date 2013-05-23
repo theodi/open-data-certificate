@@ -474,7 +474,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_statisticalAnonAudited, '==', :a_false
 
     q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
-      :help_text => 'You can use anonymisation techniques to reduce or remove the possibility of individuals being identified from the data you publish. The technique you use depends on the kind of data that you have.',
+      :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the [ICO Anonymisation Code of Practice](http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx).',
       :help_text_more_url => 'http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx',
       :pick => :one,
       :required => :pilot
