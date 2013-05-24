@@ -70,3 +70,7 @@ en:
   homepage:
     start_new_certificate: Start new certificate
 
+  certificate_search:
+    heading__search_certificates: Search certificates
+    search_label: Search for
+    submit_search: Go
