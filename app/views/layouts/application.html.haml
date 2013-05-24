@@ -21,23 +21,11 @@
         .navbar-inner
           .container
             %ul.nav.pull-right
-              %li.active
-                %a{:href => "#questionnaire"}
-                  = t 'menu.questionnaire'
-                .arrow-down
-
-              %li
-                %a{:href => "#certificate"}
-                  = t 'menu.certificate'
-
-              %li
-                = link_to t('menu.search'), '/search'
-
-              
+              = main_menu_navigation
 
     %header
       .container
-        %h1= @title
+        %h1= yield :header
 
     .container
 
@@ -53,13 +41,8 @@
         %nav
           %ul.pull-right             
             %li
-              %a{:href => "#terms-of-use"}
-                = t 'footmenu.terms'
-            %li
-              = link_to t('menu.about'), '/about'
-            %li
-              = link_to t('menu.contact'), '/contact'
-        
+              = link_to t('footmenu.terms'), '/terms'
+
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
             = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
