@@ -25,9 +25,9 @@
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-@odiBlue:  #00b7ff;
+@odiBlue: #00b7ff;
 @odiBlueDark: darken(@odiBlue, 20%);
-@odiRed:  #ff6700;
+@odiRed: #ff6700;
 @odiRedDark: darken(@odiRed, 20%);
 @btnPrimaryBackground:  @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;;
@@ -94,13 +94,10 @@ p {
   padding: 10px 20px;
 }
 
-
-
 #padd {
-
   .container {
     margin-top: 50px;
-  
+
     h1 {
       font-size: 75px;
       line-height: 80px
@@ -109,18 +106,17 @@ p {
     h2 {
       font-size: 30px;
       line-height: 40px;
-      margin-bottom: 40px
+      margin-bottom: 40px;
     }
-
   }
 
   .btn {
-display: block;
-margin-bottom: 20px;
+    display: block;
+    margin-bottom: 20px;
   }
 }
 
-.odi-bleed{
+.odi-bleed {
   background:#fff url("/assets/splat.png") no-repeat top left fixed;
   background-position: 0 -450px;
 }
@@ -129,48 +125,43 @@ margin-bottom: 20px;
   text-align: center;
 
   h1 {
-        color: @odiBlueDark;
-        font-size: 36px;
-        margin-bottom: 30px;
-        text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
-      }
+    color: @odiBlueDark;
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
+  }
 
   .span4 {
     width: 339px;
     border-right: 1px solid #fff;
     padding-right: 30px;
-    
 
-      
-
-      h2 {
-        font-size: 70px;
-        color: @odiBlueDark;
-        font-weight: bold;
-         text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
+    h2 {
+      font-size: 70px;
+      color: @odiBlueDark;
+      font-weight: bold;
+       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
 
-        small {
-        display: block;
-        color: #fff;
-        font-size: 30px;
-        padding: 30px 0 10px; 
-        text-shadow: none;
-        }
-      }
-
-      .btn {
-        position: relative;
-        top: 40px;
+      small {
+      display: block;
+      color: #fff;
+      font-size: 30px;
+      padding: 30px 0 10px;
+      text-shadow: none;
       }
     }
+
+    .btn {
+      position: relative;
+      top: 40px;
+    }
+  }
 
   .last {
-      border-right: none;
-    }
-  
+    border-right: none;
+  }
 }
-
 
 h3 {
   font-size: 19px;
@@ -202,7 +193,7 @@ hr.heavy {
 #topbar ul {
   li {
     padding:0;
-     height: 60px;
+    height: 60px;
 
     a {
       color: #fff;
@@ -233,7 +224,7 @@ hr.heavy {
   position: relative;
 
   .navbar-inner {
-    background-color: #fff;
+    background-color:rgba(255,255,255,0.65);
     border-radius: 0;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -241,37 +232,21 @@ hr.heavy {
     border-bottom: none;
     background-image: none;
 
-  #mainnav {
-    margin-bottom: 0;
-    position: relative;
-   
+    li {
+      position: relative;
+      padding: 10px 20px 20px;
 
-    .navbar-inner {
-        background-color:rgba(255,255,255,0.65);
-      border-radius: 0;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      border-bottom: none;
-      background-image: none;
-
-        li {
-          position: relative;
-          padding: 10px 20px 20px;
-
-          a {
-             color: #000;
-            margin: 0 0 10px;
-          }
-          a:hover {
-            color: @odiBlue;
-          }
-        }
+      a {
+        color: #000;
+        margin: 0 0 10px;
       }
-
-      li.active a {
+      a:hover {
         color: @odiBlue;
       }
+    }
+
+    li.active a {
+      color: @odiBlue;
     }
 
     .arrow-down {
@@ -287,7 +262,7 @@ hr.heavy {
   }
 }
 
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus  {
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
   background-color: #fff;
   -webkit-box-shadow: none;
   -moz-box-shadow:none;
@@ -340,7 +315,7 @@ section {
   padding: 10px;
 }
 
-.whiteout{
+.whiteout {
   background-color:rgba(255,255,255,0.65);
 }
 

@@ -27,27 +27,26 @@
 
     - if content_for?(:header)
       = yield(:header)
-    - else 
+    - else
       %header
         .container
-          %h1 Title here    
+          %h1 Title here
 
     .whiteout
       .container
         %h1= @title
 
-    .container
-      - flash.each do |type, value|
-        .flash.alert{ :class => "alert-#{type}" }
-          = value
+        - flash.each do |type, value|
+          .flash.alert{ :class => "alert-#{type}" }
+            = value
 
-      %section
-        = yield
+        %section
+          = yield
 
     %footer#footer
       .container
         %nav
-          %ul.pull-right             
+          %ul.pull-right
             %li
               = link_to t('footmenu.terms'), '/terms'
 
