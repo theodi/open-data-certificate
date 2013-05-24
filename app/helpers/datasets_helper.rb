@@ -10,7 +10,17 @@ module DatasetsHelper
         t('dashboard.archived')
       end
     end
-
   end
 
+  def status_class_for_response_set_row(response_set)
+    if response_set.incomplete?
+      'editing'
+    else
+      if response_set.newest_completed_in_dataset?
+        'published'
+      else
+        'archived'
+      end
+    end
+  end
 end

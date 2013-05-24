@@ -8,16 +8,16 @@ en:
 
   menu:
     about: About
-    browse_all_certificate: Browse all certificates
+    browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
     get_in_touch: Get in touch
-    my_certificate: My certificates
+    my_certificates: My certificates
 
   footmenu:
-    cookies:  Cookie Policy
+    cookies:  Cookie policy
     feedback: Feedback
-    privacy:  Privacy Policy
-    terms:    Terms of Use
+    privacy:  Privacy policy
+    terms:    Terms of use
 
   levels:
     none:
@@ -57,16 +57,16 @@ en:
     archived: Archived
     edit_and_publish: Edit and publish
     embed_code: Embed code
-    heading__intro_text: 'some intro text here...'
+    heading__intro_text: Some intro text here?
     heading__my_certificates: My certificates
     latest_published_certificate: Latest published certificate
     make_a_copy_and_edit: Make a copy and edit
     previous_versions: Previous versions
-    start_new_certification: Start new Certification
+    start_new_certificate: Start new certificate
     you_are_currently_editing_this_certificate: You are currently editing this certificate
     view_certificate: View certificate
 
 
   homepage:
-    start_new_certification: Start new Certification
+    start_new_certificate: Start new certificate
 

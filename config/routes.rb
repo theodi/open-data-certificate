@@ -12,6 +12,8 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
   end
 
+  get 'dashboard' => 'datasets#index'
+
   resources :certificates
   post '/certificates/search', :to => 'certificates#search', :as => 'search_certificates'
 

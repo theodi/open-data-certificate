@@ -22,6 +22,7 @@ class DatasetsController < ApplicationController
 
   def index
     @datasets = current_user ? current_user.datasets : []
+    @surveys = Survey.available_to_complete
   end
 
   def show

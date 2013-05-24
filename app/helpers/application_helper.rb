@@ -1,10 +1,9 @@
 module ApplicationHelper
   def main_menu_navigation
     links = [
-      { link_text: t('menu.create_certificate'), path: root_path },
-      { link_text: t('menu.my_certificates'), path: root_path, requires_signed_in_user: true},
+      { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true },
+      { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true},
       { link_text: t('menu.browse_all_certificates'), path: certificates_path},
-      { link_text: t('menu.search'), path: certificates_path},
       { link_text: t('menu.about'), path: '/about'},
       { link_text: t('menu.get_in_touch'), path: '/contact'},
     ]
@@ -18,6 +17,7 @@ module ApplicationHelper
     @is_active_menu_link = true
     return_value
   end
+
 	def body_class
 		content_for :body_class
 	end
