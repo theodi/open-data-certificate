@@ -5,7 +5,7 @@ class CertificatesController < ApplicationController
 
   def search
     @search = params[:search]
-    @certificates = Certificate.search(@search).by_newest.group_similar
+    @certificates = @search ? Certificate.search(@search).by_newest.group_similar : Certificate.all
     render :index
   end
 

@@ -41,14 +41,7 @@
       %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
 
 %section
-  %h3 Temporary links to ensure access to all functionality
-  %ul
-    %li= link_to 'Certificates (and search)', certificates_path
-    %li= link_to 'about', '/about'
-    %li= link_to 'contact', '/contact'
-    %li= link_to 'terms', '/terms'
-
-  - if current_user
+  - if user_signed_in?
     = render partial: 'home/dashboard'
   - else
     = render partial: 'home/unauthenticated_user_home'
