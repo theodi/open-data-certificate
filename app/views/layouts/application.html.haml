@@ -6,7 +6,9 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body{:class => body_class}
+    = yield(:super_head)
+
     %nav
       #topbar.navbar.navbar-inverse.navbar-static-top
         .navbar-inner
@@ -23,12 +25,18 @@
             %ul.nav.pull-right
               = main_menu_navigation
 
-    %header
+    - if content_for?(:header)
+      = yield(:header)
+    - else 
+      %header
+        .container
+          %h1 Title here    
+
+    .whiteout
       .container
-        %h1= yield :header
+        %h1= @title
 
     .container
-
       - flash.each do |type, value|
         .flash.alert{ :class => "alert-#{type}" }
           = value

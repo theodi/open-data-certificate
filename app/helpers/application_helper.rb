@@ -18,4 +18,7 @@ module ApplicationHelper
     @is_active_menu_link = true
     return_value
   end
+	def body_class
+		content_for :body_class
+	end
 end

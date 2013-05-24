@@ -13,3 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+ 
+// requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+ 
+// MIT license
+
+$(function(){
+	// hack
+	var bleed = $('body.odi-bleed').attr({
+		'data-0':'background-position:0 -450px',
+		'data-2500':'background-position:0 1000px',
+	});;
+
+	if(bleed.size()) skrollr.init();
+})
+ 
