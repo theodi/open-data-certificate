@@ -25,13 +25,25 @@
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-@odiBlue: #00b7ff;
-@odiBlueDark: darken(@odiBlue, 20%);
+@odiBlue: #33c5ff;
+
+@odiBlueDark: darken(@odiBlue, 25%);
+@odiBlueLight: lighten(@odiBlue, 46%);
+
 @odiRed: #ff6700;
 @odiRedDark: darken(@odiRed, 20%);
+
+@odiCrimson: #d30102;
+
+@odiGrey: #aaa;
+@odiGreyDark: darken(@odiGrey, 20%);
+@odiGreyDarker: darken(@odiGrey, 40%);
+
 @btnPrimaryBackground:  @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;;
+@btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
+
+@odiGrey: #8e8c8c;
 
 @basic: #0DBD37;
 @pilot: #EF3AAB;
@@ -89,6 +101,12 @@ p {
   line-height: 24px;
 }
 
+p.lead {
+  font-size: 17px;
+  color: @odiGrey;
+  margin-bottom: 30px;
+}
+
 .btn {
   font-size: 18px;
   padding: 10px 20px;
@@ -113,6 +131,10 @@ p {
   .btn {
     display: block;
     margin-bottom: 20px;
+  }
+
+  button.btn {
+    width: 100%;
   }
 }
 
@@ -152,9 +174,13 @@ p {
       }
     }
 
-    .btn {
-      position: relative;
-      top: 40px;
+    form {
+      margin: 0;
+
+      .btn {
+        position: relative;
+        top: 40px;
+      }
     }
   }
 
@@ -170,7 +196,7 @@ h3 {
 h4 {
   font-size: 16px;
   font-weight: normal;
-  color: #aaa;
+  color: @odiGrey;
   margin-bottom: 15px;
 }
 
@@ -192,8 +218,10 @@ hr.heavy {
 
 #topbar ul {
   li {
+    margin: 0;
     padding:0;
     height: 60px;
+    border-left: 1px solid #707070;
 
     a {
       color: #fff;
@@ -204,12 +232,7 @@ hr.heavy {
       background-color: @odiRed;
     }
   }
-
-  li.divider-vertical {
-    border-left-color: #707070;
-    border-right-color: #000;
-    margin: 0;
-  }
+  border-right: 1px solid #707070;
 }
 
 #topbar .label {
@@ -234,18 +257,25 @@ hr.heavy {
 
     li {
       position: relative;
-      padding: 10px 20px 20px;
 
-      a {
+      a, button {
+        background-color: transparent;
+        border: none;
         color: #000;
-        margin: 0 0 10px;
+        padding: 20px;
+        font-size: 18px;
+        text-shadow: 0 1px 0 #ffffff;
       }
-      a:hover {
+      a:hover, button:hover {
         color: @odiBlue;
+      }
+
+      form {
+        margin: 0;
       }
     }
 
-    li.active a {
+    li.active a, li.active button {
       color: @odiBlue;
     }
 
@@ -262,8 +292,9 @@ hr.heavy {
   }
 }
 
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
-  background-color: #fff;
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
   -webkit-box-shadow: none;
   -moz-box-shadow:none;
   box-shadow: none;
@@ -312,7 +343,7 @@ header {
 section {
   //background-color: white;
   margin: 15px 0;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .whiteout {
@@ -344,6 +375,80 @@ section {
     font-size: 23px;
   }
 }
+
+
+
+// Forms //
+
+.main-content {
+
+  input {
+  height: 60px;
+    font-size: 20px;
+    padding: 0 10px;
+  margin: 15px 0 50px;
+  } 
+
+  label {
+    font-size: 22px;
+  }
+   i {
+    font-size: 15px;
+    font-style: normal;
+    color: @odiGrey;
+    display: block;
+   }
+
+}
+
+
+
+// My certificates view //
+
+tr.first-response_set {
+  background: @odiBlueLight;
+}
+
+td.last-updated {
+  width: 200px;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 17px;
+  color: @odiGreyDark;
+
+  time {
+    color: @odiGreyDarker;
+    font-size: 15px;
+    display: block;
+  }
+}
+
+td.level {
+  .certificate-badge {
+    margin: 0 auto;
+    width: 50px;
+    height: 40px;
+  }
+
+  padding: 13px 15px 5px;
+  font-size: 12px;
+  text-align: center;
+
+  color: @odiGreyDark;
+}
+
+td.status {
+  font-size: 15px;
+
+  &.published {
+    color: @odiCrimson;
+  }
+
+  &.archived {
+    color: @odiGrey;
+  }
+}
+
 
 
 // Certificate view //

@@ -1,14 +1,7 @@
 %h2 Sign up
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
-  %div
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name
-  %div
-    = f.label :last_name
-    %br/
-    = f.text_field :last_name
+  
   %div
     = f.label :email
     %br/

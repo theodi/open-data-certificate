@@ -1,18 +1,20 @@
-%td<
+%td.level<
   - if response_set.complete?
-    - attained_level = response_set.certificate.try(:attained_level) || 'none'
-    = t("levels.#{attained_level}.title")
-%td<
+    - if defined? first
+      .certificate-badge
+    = response_set.attained_level.titleize || 'none'
+
+%td.last-updated<
   last updated
   = time_tag(response_set.updated_at, response_set.updated_at.to_date.to_formatted_s(:rfc822))
-%td= status_description_for_response_set_row(response_set)
-%td<
+%td.status{class: status_class_for_response_set_row(response_set)}= status_description_for_response_set_row(response_set)
+%td.action<
   - if response_set.complete?
     = link_to(t('dashboard.view_certificate'), response_set.certificate) if response_set.complete?
   - else
     = link_to(t('dashboard.edit_and_publish'), surveyor.continue_my_survey_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code))
-%td= link_to(t('dashboard.embed_code'), response_set.certificate) if response_set.newest_completed_in_dataset?
-%td<
+%td.action= link_to(t('dashboard.embed_code'), response_set.certificate) if response_set.newest_completed_in_dataset?
+%td.action<
   - if response_set.newest_completed_in_dataset?
     = form_for response_set.dataset, :url => dataset_start_questionnaire_path(response_set.dataset) do |f|
       - if @surveys.count > 1
