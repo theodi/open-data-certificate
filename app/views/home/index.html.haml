@@ -8,8 +8,8 @@
           %h1 Open data certificate
           %h2 Specifying what good open data looks like
           = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-primary Start a new certificate
-          %a.btn.btn-info{href: certificates_path} Browse all new certificates
+            %button.btn.btn-large.btn-primary Start a new certificate
+          %a.btn.btn-large.btn-info{href: certificates_path} Browse all new certificates
 
 - content_for(:header) do
   #empty
@@ -24,7 +24,7 @@
           %h2 1 <small> Fill out the questionnaire </small>
           %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
           = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-primary Start a new certificate
+            %button.btn.btn-large.btn-primary Start a new certificate
 
         .span4
           %h2 2 <small> Generate a certificate</small>

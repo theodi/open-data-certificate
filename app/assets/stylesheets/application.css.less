@@ -25,18 +25,21 @@
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-@odiBlue: #00b7ff;
 
+@odiBlue: #33c5ff;
+@odiBlueLight: lighten(@odiBlue, 36%);
 @odiBlueDark: darken(@odiBlue, 20%);
-@odiBlueLight: lighten(@odiBlue, 46%);
+@odiBlueDarker: darken(@odiBlue, 30%);
 
 @odiRed: #ff6700;
 @odiRedDark: darken(@odiRed, 20%);
 
 @odiCrimson: #d30102;
 
+@odiCerulean: #0697d0;
+
 @odiGrey: #aaa;
-@odiGreyDark: darken(@odiGrey, 20%);
+@odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
 
 @btnPrimaryBackground:  @odiRed;
@@ -105,9 +108,25 @@ p.lead {
   margin-bottom: 30px;
 }
 
-.btn {
+.btn-info {
+  background: @odiBlueDark;
+}
+
+.btn-info:active, .btn-info:hover, .btn-info:focus {
+  background: @odiBlueDarker;
+}
+
+.btn-large {
   font-size: 18px;
   padding: 10px 20px;
+}
+
+.btn-small, .btn-small:active, .btn-small:hover {
+  padding: 3px 25px;
+  font-size: 13px;
+  color: white;
+  border: none;
+  text-shadow: none;
 }
 
 #padd {
@@ -375,24 +394,39 @@ section {
 }
 
 
+
+// Tables //
+
+table {
+  width: 100%;
+  font-size: 15px;
+}
+
+th {
+  font-weight: normal;
+}
+
+
+
 // My certificates view //
 
 tr.first-response_set {
   background: @odiBlueLight;
+
+  td.level {
+    text-align: center;
+  }
+
+  td.last-updated time {
+      color: @odiGreyDarker;
+  }
 }
 
-td.last-updated {
-  width: 200px;
-  padding: 15px;
-  font-size: 12px;
-  line-height: 17px;
+th.previous-title {
+  font-size: 16px;
+  text-align: left;
   color: @odiGreyDark;
-
-  time {
-    color: @odiGreyDarker;
-    font-size: 15px;
-    display: block;
-  }
+  padding: 15px 0;
 }
 
 td.level {
@@ -402,14 +436,28 @@ td.level {
     height: 40px;
   }
 
+  width: 48px;
   padding: 13px 15px 5px;
   font-size: 12px;
-  text-align: center;
-
+  font-weight: bold;
   color: @odiGreyDark;
 }
 
+td.last-updated {
+  width: 180px;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 17px;
+  color: @odiGreyDark;
+
+  time {
+    font-size: 15px;
+    display: block;
+  }
+}
+
 td.status {
+  width: 300px;
   font-size: 15px;
 
   &.published {
@@ -417,7 +465,18 @@ td.status {
   }
 
   &.archived {
-    color: @odiGrey;
+    color: @odiGreyDark;
+  }
+
+  &.editing {
+    color: @odiGreyDarker;
+    font-style: italic;
+  }
+}
+
+td.action {
+  form {
+    margin: 0;
   }
 }
 
