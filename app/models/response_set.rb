@@ -11,6 +11,9 @@ class ResponseSet < ActiveRecord::Base
 
   DEFAULT_TITLE = 'Untitled'
 
+  scope :by_newest, order("response_sets.created_at DESC")
+  scope :completed, where("response_sets.completed_at <> ''")
+
   def title
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
@@ -83,6 +86,16 @@ class ResponseSet < ActiveRecord::Base
     self.user = user
     self.dataset = Dataset.create(:user => user)
     save
+  end
+
+  def newest_in_dataset?
+    # TODO: this method would need to be extended to handle "newest for survey" - for phase 2...
+    @newest_in_dataset_q ||= (dataset.try(:newest_response_set) == self)
+  end
+
+  def newest_completed_in_dataset?
+    # TODO: this method would need to be extended to handle "newest for survey" - for phase 2...
+    @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
 
 end

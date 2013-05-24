@@ -6,7 +6,9 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body{:class => body_class}
+    = yield(:super_head)
+
     %nav
       #topbar.navbar.navbar-inverse.navbar-static-top
         .navbar-inner
@@ -33,25 +35,30 @@
               %li
                 = link_to t('menu.search'), '/search'
 
-              
 
-    %header
+    - if content_for?(:header)
+      = yield(:header)
+    - else
+      %header
+        .container
+          %h1 Title here
+
+    .whiteout
       .container
+
         %h1= @title
 
-    .container
+        - flash.each do |type, value|
+          .flash.alert{ :class => "alert-#{type}" }
+            = value
 
-      - flash.each do |type, value|
-        .flash.alert{ :class => "alert-#{type}" }
-          = value
-
-      %section
-        = yield
+        %section
+          = yield
 
     %footer#footer
       .container
         %nav
-          %ul.pull-right             
+          %ul.pull-right
             %li
               %a{:href => "#terms-of-use"}
                 = t 'footmenu.terms'
@@ -59,7 +66,7 @@
               = link_to t('menu.about'), '/about'
             %li
               = link_to t('menu.contact'), '/contact'
-        
+
         %p
           %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
             = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
