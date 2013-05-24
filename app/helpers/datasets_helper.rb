@@ -13,13 +13,14 @@ module DatasetsHelper
   end
 
   def status_class_for_response_set_row(response_set)
-    if response_set.incomplete?
-      'editing'
+    case
+    when response_set.incomplete?
+      :editing
     else
       if response_set.newest_completed_in_dataset?
-        'published'
+        :published
       else
-        'archived'
+        :archived
       end
     end
   end

@@ -1,10 +1,8 @@
 %table
   - if response_set = response_sets.shift
-    %tr.first-response_set{class:response_set.attained_level+'-level'}
-      =render partial: 'datasets/response_set_row', locals: {response_set: response_set, first: true}
+    =render partial: 'datasets/response_set_row', locals: {response_set: response_set, first_response_set: true}
   -if response_sets.any?
     %tr
       %th{colspan: 6}= t('dashboard.previous_versions')
     - response_sets.each do |response_set|
-      %tr
-        =render partial: 'datasets/response_set_row', locals: {response_set: response_set}
+      =render partial: 'datasets/response_set_row', locals: {response_set: response_set}
