@@ -13,4 +13,13 @@ class Dataset < ActiveRecord::Base
       save
     end
   end
+
+  def newest_response_set
+    response_sets.by_newest.limit(1).first
+  end
+
+  def newest_completed_response_set
+    response_sets.completed.by_newest.limit(1).first
+  end
+
 end
