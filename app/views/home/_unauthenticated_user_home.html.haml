@@ -1,5 +1,0 @@
-%h3 Start New Certification
-= form_tag non_authenticated_start_questionnaire_path do
-  - if @surveys.count > 1
-    = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
-  = submit_tag t('homepage.start_new_certification')
