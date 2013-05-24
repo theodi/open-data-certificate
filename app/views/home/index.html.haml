@@ -7,9 +7,8 @@
         .span4.offset8
           %h1 Open data certificate
           %h2 Specifying what good open data looks like
-          = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-primary Start a new certificate
-          %a.btn.btn-info{href: certificates_path} Browse all new certificates
+          %p.btn.btn-primary Start a new certificate
+          %p.btn.btn-info Browse all new certificates
 
 - content_for(:header) do
   #empty
@@ -23,8 +22,7 @@
         .span4
           %h2 1 <small> Fill out the questionnaire </small>
           %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
-          = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-primary Start a new certificate
+          %p.btn.btn-primary Start a new certificate
 
         .span4
           %h2 2 <small> Generate a certificate</small>
@@ -41,3 +39,18 @@
       %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
       %h2 About the ODI
       %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+
+%section
+  %h3 Temporary links to ensure access to all functionality
+  %ul
+    %li= link_to 'Certificates (and search)', certificates_path
+    %li= link_to 'about', '/about'
+    %li= link_to 'contact', '/contact'
+    %li= link_to 'terms', '/terms'
+
+  - if current_user
+    = render partial: 'home/dashboard'
+  - else
+    = render partial: 'home/unauthenticated_user_home'
+
+
