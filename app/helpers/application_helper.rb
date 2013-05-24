@@ -4,6 +4,7 @@ module ApplicationHelper
       { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true },
       { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true},
       { link_text: t('menu.browse_all_certificates'), path: certificates_path},
+      { link_text: t('menu.search'), path: new_certificates_search_path},
       { link_text: t('menu.about'), path: '/about'},
       { link_text: t('menu.get_in_touch'), path: '/contact'},
     ]
