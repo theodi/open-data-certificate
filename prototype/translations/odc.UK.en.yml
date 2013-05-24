@@ -943,8 +943,8 @@ questions:
         text: yes
         text_as_statement: "machine-readable provenance"
   digitalCertificate:
-    text: "Where do you describe how people can verify data they receive from you?"
-    text_as_statement: "The data can be verified as described at"
+    text: "Where do you describe how people can verify that data they receive comes from you?"
+    text_as_statement: "To verify the data, see"
     help_text: "If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with."
     answers:
       a_1:

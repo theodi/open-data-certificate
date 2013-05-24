@@ -1938,9 +1938,9 @@ survey 'Open Data Certificate Questionnaire',
       :requirement => 'exemplar_15'
     dependency :rule => 'A'
 
-    q_digitalCertificate 'Where do you describe how people can verify data they receive from you?',
+    q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data can be verified as described at',
+      :text_as_statement => 'To verify the data, see',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
     a_1 'Verification Process URL',
       :string,

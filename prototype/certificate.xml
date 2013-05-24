@@ -1006,8 +1006,8 @@
 				<help more="http://www.w3.org/TR/prov-primer/">This about the origins of how your data was created and processed before it was published. It builds trust in the data you publish because people can trace back how it has been handled.</help>
 				<requirement level="exemplar">You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.</requirement>
 			</question>
-			<question id="digitalCertificate" display="The data can be verified as described at">
-				<label>Where do you describe how people can verify data they receive from you?</label>
+			<question id="digitalCertificate" display="To verify the data, see">
+				<label>Where do you describe how people can verify that data they receive comes from you?</label>
 				<input type="url" placeholder="Verification Process URL"/>
 				<help>If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.</help>
 				<requirement level="exemplar">You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.</requirement>
