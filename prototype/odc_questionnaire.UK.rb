@@ -214,7 +214,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_1'
 
     label_standard_1 'You should **include machine-readable data about the sources of your data**.',
       :custom_renderer => '/partials/requirement_standard',
@@ -462,7 +463,8 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_3'
 
     label_standard_3 'You should **have your anonymisation process audited independently** to ensure it reduces the risk of individuals being reidentified.',
       :custom_renderer => '/partials/requirement_standard',
@@ -472,7 +474,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_statisticalAnonAudited, '==', :a_false
 
     q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
-      :help_text => 'You can use anonymisation techniques to reduce or remove the possibility of individuals being identified from the data you publish. The technique you use depends on the kind of data that you have.',
+      :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the [ICO Anonymisation Code of Practice](http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx).',
       :help_text_more_url => 'http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx',
       :pick => :one,
       :required => :pilot
@@ -487,7 +489,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'pilot_4'
 
     label_pilot_4 'You should **only publish personal data without anonymisation if you are required to do so by law**.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -526,7 +529,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'pilot_5'
 
     label_pilot_5 'You should **do a Privacy Impact Assessment** if you publish data about individuals.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -571,7 +575,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     condition_E :q_privacyImpactAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_6'
 
     label_standard_6 'You should **have your Privacy Impact Assessment audited independently** to ensure it has been carried out correctly.',
       :custom_renderer => '/partials/requirement_standard',
@@ -628,9 +633,10 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     condition_E :q_dpStaff, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'pilot_7'
 
-    label_pilot_7 'You should **consult with the member of staff in your organisation who is responsible for data protection** before publishing this data.',
+    label_pilot_7 'You should **involve the person responsible for data protection** in your organisation before you publish this data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -650,9 +656,10 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_7'
 
-    label_standard_7 'You should **engage an expert to audit your anonymisation approach** to ensure that it is appropriate for your data.',
+    label_standard_7 'You should **have your anonymisation process audited independently** by an expert to ensure it is appropriate for your data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_7'
     dependency :rule => 'A and (B or C) and D and E'
@@ -674,7 +681,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'If documentation is reachable via links from your home page people can find it quickly without searching. You should make it more accessible on your website if they can\'t.',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_8'
 
     label_standard_8 'You should **ensure that people can easily find your data** from your organisation\'s home page.',
       :custom_renderer => '/partials/requirement_standard',
@@ -685,7 +693,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public or health for example, or when it turns up in relevant search results.',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_9'
 
     label_standard_9 'You should **ensure that people can find your data when they search for it** in locations that list data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -708,11 +717,12 @@ survey 'Open Data Certificate Questionnaire',
 
     end
 
-    q_referenced 'Is the data referenced from your own publications?',
-      :help_text => 'You can provide context for understanding your data, and provide routes to help it be located, by referencing it within your own publications.',
+    q_referenced 'Is this data referenced from your own publications?',
+      :help_text => 'When you reference your data within your own publications you give it more context, and help people find and understand it better.',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_10'
 
     label_standard_10 'You should **reference data from your own publications** so that people are aware of its availability and context.',
       :custom_renderer => '/partials/requirement_standard',
@@ -723,8 +733,8 @@ survey 'Open Data Certificate Questionnaire',
 
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
-      q_reference 'Where is the data referenced?',
-        :help_text => 'Give a URL for a document that cites or references this data.'
+      q_reference 'Where is your data referenced?',
+        :help_text => 'Give a URL to a document that cites or references this data.'
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       a_1 'Reference URL',
@@ -814,7 +824,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_seriesType, '==', :a_dumps
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'exemplar_3'
 
     label_exemplar_3 'You should **provide a feed of changes to your data** so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -912,7 +923,8 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_14'
 
     label_standard_14 'You should **let people download your entire dataset** so that they can do more complete and accurate analysis with all the data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -973,7 +985,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_timeSensitive, '!=', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_16'
 
     label_standard_16 'You should **correct data when people report errors** so everyone benefits from improvements in accuracy.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1406,7 +1419,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'pilot_16'
 
     label_pilot_16 'You should **provide your data in a machine-readable format** so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1418,7 +1432,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_24'
 
     label_standard_24 'You should **provide your data in an open standard format** so that people can use widely available tools to process it more easily.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1553,7 +1568,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Data is usually about real things like schools or roads. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_28'
 
     label_standard_28 'You should **use identifiers for things in your data** so that they can be easily related with other data about those things.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1633,7 +1649,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_existingExternalUrls, '==', :a_true
     condition_C :q_reliableExternalUrls, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'exemplar_14'
 
     label_exemplar_14 'You should **use URLs to third-party information in your data** so that it\'s easy to combine with other data that uses those URLs.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1653,7 +1670,8 @@ survey 'Open Data Certificate Questionnaire',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'exemplar_15'
 
     label_exemplar_15 'You should **provide a machine-readable provenance trail** about your data so that people can trace how it was processed.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1971,7 +1989,8 @@ survey 'Open Data Certificate Questionnaire',
     q_socialMedia 'Do you use social media to connect with people who use your data?',
       :pick => :one
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => 'standard_45'
 
     label_standard_45 'You should **use social media to reach people who use your data** and discover how your data is being used',
       :custom_renderer => '/partials/requirement_standard',

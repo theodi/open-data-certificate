@@ -3,7 +3,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="certificate.xsl"?>
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
 <questionnaire version="0.6" jurisdiction="UK">
 	<levels>
 		<level id="basic">This data satisfies the fundamental requirements for open data.</level>
@@ -362,7 +362,7 @@
 				<question id="appliedAnon">
 					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
 					<yesno required="pilot" />
-					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">You can use anonymisation techniques to reduce or remove the possibility of individuals being identified from the data you publish. The technique you use depends on the kind of data that you have.</help>
+					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the <a href="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">ICO Anonymisation Code of Practice</a>.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure">
@@ -414,14 +414,14 @@
 							<question id="dbStaffConsulted">
 								<label>Have you involved them in the Privacy Impact Assessment process?</label>
 								<yesno/>
-								<requirement level="pilot">You should <strong>consult with the member of staff in your organisation who is responsible for data protection</strong> before publishing this data.</requirement>
+								<requirement level="pilot">You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.</requirement>
 							</question>
 						</if>
 						<question id="anonymisationAudited">
 							<label>Has your anonymisation approach been independently audited?</label>
 							<yesno/>
 							<help>It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-							<requirement level="standard">You should <strong>engage an expert to audit your anonymisation approach</strong> to ensure that it is appropriate for your data.</requirement>
+							<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.</requirement>
 						</question>
 					</if>
 				</if>
@@ -456,18 +456,18 @@
 				</repeat>
 			</if>
 			<question id="referenced">
-				<label>Is the data referenced from your own publications?</label>
+				<label>Is this data referenced from your own publications?</label>
 				<yesno/>
-				<help>You can provide context for understanding your data, and provide routes to help it be located, by referencing it within your own publications.</help>
+				<help>When you reference your data within your own publications you give it more context, and help people find and understand it better.</help>
 				<requirement level="standard">You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.</requirement>
 			</question>
 			<if test="this.referenced() === 'true'">
 				<repeat id="references">
 					<label>Reference</label>
 					<question id="reference">
-						<label>Where is the data referenced?</label>
+						<label>Where is your data referenced?</label>
 						<input type="url" required="required" placeholder="Reference URL"/>
-						<help>Give a URL for a document that cites or references this data.</help>
+						<help>Give a URL to a document that cites or references this data.</help>
 					</question>
 				</repeat>
 			</if>

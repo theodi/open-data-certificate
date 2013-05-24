@@ -17,15 +17,18 @@ class ApplicationController < ActionController::Base
   end
 
   def home
-    unless current_user
-      @surveys = Survey.available_to_complete
-    end
+    @surveys = Survey.available_to_complete
     render '/home/index'
   end
 
   # mostly lifted from surveyor#create
   def start_questionnaire
-    @dataset = Dataset.find_by_id(params[:dataset_id]) || Dataset.new
+    # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
+    # When multiple legislations are available, this value will need to be provided by the form
+    params[:survey_access_code] ||= Survey.available_to_complete.first.try(:access_code)
+
+    # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
+    @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? Dataset.create(user: current_user) : Dataset.new)
     authorize! :update, @dataset
 
     if params[:survey_access_code].blank?

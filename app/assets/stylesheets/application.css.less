@@ -33,6 +33,11 @@
 @btnPrimaryBackgroundHighlight: @odiRed;;
 @btnInfoBackground:  @odiBlue;
 
+@basic: #0DBD37;
+@pilot: #EF3AAB;
+@standard: #2254F3;
+@exemplar: #F9BC26;
+
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
 
@@ -41,7 +46,6 @@
 @gridColumnWidth:         70px;
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
 
 
 /************************************************
@@ -69,9 +73,10 @@
 // Global styles //
 
 body {
-   background-color: #fff;
-   font-size: 18px;
+  background-color: #fff;
+  font-size: 18px;
 }
+
 
 // Typography //
 
@@ -167,6 +172,27 @@ margin-bottom: 20px;
 }
 
 
+h3 {
+  font-size: 19px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+hr {
+  margin: 12px 0;
+}
+
+hr.heavy {
+  border: 0;
+  height: 5px;
+  background: url(divider.png);
+}
+
 // Layout //
 
 .navbar-inner {
@@ -174,8 +200,6 @@ margin-bottom: 20px;
 }
 
 #topbar ul {
- 
-
   li {
     padding:0;
      height: 60px;
@@ -191,10 +215,10 @@ margin-bottom: 20px;
   }
 
   li.divider-vertical {
-border-left-color: #707070;
-border-right-color: #000;
-margin: 0;
-}
+    border-left-color: #707070;
+    border-right-color: #000;
+    margin: 0;
+  }
 }
 
 #topbar .label {
@@ -204,7 +228,18 @@ margin: 0;
   background-color: @odiBlue;
 }
 
+#mainnav {
+  margin-bottom: 0;
+  position: relative;
 
+  .navbar-inner {
+    background-color: #fff;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-bottom: none;
+    background-image: none;
 
   #mainnav {
     margin-bottom: 0;
@@ -219,51 +254,54 @@ margin: 0;
       box-shadow: none;
       border-bottom: none;
       background-image: none;
-    
+
         li {
           position: relative;
-          padding: 10px 20px 20px; 
+          padding: 10px 20px 20px;
 
-            a {
-               color: #000;
-              margin: 0 0 10px; 
-            }
-            a:hover {
-              color: @odiBlue;
-            }
+          a {
+             color: #000;
+            margin: 0 0 10px;
+          }
+          a:hover {
+            color: @odiBlue;
+          }
+        }
       }
 
       li.active a {
         color: @odiBlue;
       }
+    }
 
-
-        .arrow-down {
-          width: 0; 
-          height: 0; 
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent;
-          border-top: 8px solid #fff;
-          margin: 0 0 0 -8px;
-          position: absolute;
-          left: 50%;
-      }
+    .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #fff;
+      margin: 0 0 0 -8px;
+      position: absolute;
+      left: 50%;
     }
   }
+}
 
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus  {
-          background-color: #fff;
-          -webkit-box-shadow: none;
--moz-box-shadow:none;
-box-shadow: none;
-
-      }
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  -moz-box-shadow:none;
+  box-shadow: none;
+}
 
 header {
-background-color: @odiBlue;
-color: #fff;
-padding: 20px 0;
+  background-color: @odiBlue;
+  color: #fff;
+  padding: 20px 0;
 
+  .container {
+    min-height: 60px;
+  }
 }
 
 .container.main {
@@ -304,7 +342,124 @@ section {
 
 .whiteout{
   background-color:rgba(255,255,255,0.65);
+
+.hero-unit {
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  .centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1, h2, p, small, span {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 23px;
+  }
 }
 
 
+// Certificate view //
 
+.certificate-data {
+  ul {
+    .clearfix;
+    margin-left: 0;
+  }
+
+  li {
+    list-style-type: none;
+    margin: 5px 0;
+    width: 50%;
+    float: left;
+
+    p {
+      font-size: 19px;
+      margin-right: 20px;
+    }
+  }
+}
+
+.certificate.hero-unit {
+  margin: -70px auto 30px;
+  width: 920px;
+}
+
+.certificate-badge {
+  width: 160px;
+  height: 140px;
+  background: #bbb;
+  margin-bottom: 10px;
+}
+
+.certificate-level {
+  font-weight: bold;
+  font-size: 24px;
+  color: #888;
+  margin-bottom: 30px;
+
+  small {
+    display: block;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 16px;
+  }
+}
+
+strong.certificate-level {
+  font-weight: normal;
+}
+
+.basic-level {
+  .certificate-badge {
+    background: @basic;
+  }
+  .certificate-level {
+    color: @basic;
+  }
+}
+
+.pilot-level {
+  .certificate-badge {
+    background: @pilot;
+  }
+  .certificate-level {
+    color: @pilot;
+  }
+}
+
+.standard-level {
+  .certificate-badge {
+    background: @standard;
+  }
+  .certificate-level {
+    color: @standard;
+  }
+}
+
+.exemplar-level {
+  .certificate-badge {
+    background: @exemplar;
+  }
+  .certificate-level {
+    color: @exemplar;
+  }
+}
+
+.footer {
+    border-top: 1px solid #E5E5E5;
+    margin-top: 70px;
+    padding: 30px 0;
+    text-align: center;
+}

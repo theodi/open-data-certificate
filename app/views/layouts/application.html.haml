@@ -46,6 +46,11 @@
     .whiteout
       .container
 
+        %h1= @title
+
+    .container
+
+
         - flash.each do |type, value|
           .flash.alert{ :class => "alert-#{type}" }
             = value

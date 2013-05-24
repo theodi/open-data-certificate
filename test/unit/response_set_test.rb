@@ -270,4 +270,56 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_not_nil response_set.dataset
   end
 
+  test "#newest_in_dataset? returns true for the most recent response_set" do
+    dataset = FactoryGirl.build(:dataset)
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.hour))
+    response_set = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now)
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(3.hour))
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(2.hour))
+    dataset.reload
+
+    assert response_set.newest_in_dataset?
+  end
+
+  test "#newest_in_dataset? returns false when not the most recent response_set" do
+    dataset = FactoryGirl.build(:dataset)
+    response_set1 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.hour))
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now)
+    response_set2 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(3.hour))
+    response_set3 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(2.hour))
+    dataset.reload
+
+    [response_set1, response_set2, response_set3].each do |response_set|
+      assert_false response_set.newest_in_dataset?
+    end
+  end
+
+  test "#newest_completed_in_dataset? returns true for the most recent completed response_set" do
+    dataset = FactoryGirl.build(:dataset)
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.hour))
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(3.hour))
+    FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(4.hour))
+    FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(2.hour))
+    response_set = FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(5.minutes))
+    FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.minute))
+    dataset.reload
+
+    assert response_set.newest_completed_in_dataset?
+  end
+
+  test "#newest_completed_in_dataset? returns false when not the most recent completed response_set" do
+    dataset = FactoryGirl.build(:dataset)
+    response_set1 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.hour))
+    response_set2 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(3.hour))
+    response_set3 = FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(4.hour))
+    response_set4 = FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(2.hour))
+    FactoryGirl.create(:completed_response_set, dataset: dataset, created_at: Time.now.ago(5.minutes))
+    response_set5 = FactoryGirl.create(:response_set, dataset: dataset, created_at: Time.now.ago(1.minute))
+    dataset.reload
+
+    [response_set1, response_set2, response_set3, response_set4, response_set5].each_with_index do |response_set, i|
+      assert_false response_set.newest_completed_in_dataset?, "response_set#{i+1} failed assertion - created_at: #{response_set.created_at}"
+    end
+  end
+
 end
