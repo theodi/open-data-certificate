@@ -1026,15 +1026,15 @@
 					<checkboxset>
 						<option value="title">
 							<label>title</label>
-							<requirement level="pilot">You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.</requirement>
+							<requirement level="standard">You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.</requirement>
 						</option>
 						<option value="description">
 							<label>description</label>
-							<requirement level="pilot">You should <strong>include a data description in your documentation</strong> so that people know what it contains.</requirement>
+							<requirement level="standard">You should <strong>include a data description in your documentation</strong> so that people know what it contains.</requirement>
 						</option>
 						<option value="issued">
 							<label>release date</label>
-							<requirement level="pilot">You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.</requirement>
+							<requirement level="standard">You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.</requirement>
 						</option>
 						<option value="modified">
 							<label>modification date</label>
@@ -1087,15 +1087,15 @@
 						<checkboxset>
 							<option value="title">
 								<label>title</label>
-								<requirement level="pilot">You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.</requirement>
+								<requirement level="standard">You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.</requirement>
 							</option>
 							<option value="description">
 								<label>description</label>
-								<requirement level="pilot">You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.</requirement>
+								<requirement level="standard">You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.</requirement>
 							</option>
 							<option value="issued">
 								<label>release date</label>
-								<requirement level="pilot">You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.</requirement>
+								<requirement level="standard">You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.</requirement>
 							</option>
 							<option value="modified">
 								<label>modification date</label>
