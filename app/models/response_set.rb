@@ -12,7 +12,7 @@ class ResponseSet < ActiveRecord::Base
   DEFAULT_TITLE = 'Untitled'
 
   scope :by_newest, order("response_sets.created_at DESC")
-  scope :completed, where("response_sets.completed_at <> ''")
+  scope :completed, where("response_sets.completed_at IS NOT NULL")
 
   def title
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
