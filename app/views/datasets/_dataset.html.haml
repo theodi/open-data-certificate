@@ -5,6 +5,6 @@
       = render partial: 'datasets/response_sets', locals: {response_sets: dataset.response_sets }
     - else
       = form_for dataset, :url => dataset_start_questionnaire_path(dataset) do |f|
-        / - if @surveys.count > 1
-        /   = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
+        - if @surveys.count > 1
+          = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
         = f.submit t('dashboard.start_new_certificate')
