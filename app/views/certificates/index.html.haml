@@ -1,12 +1,13 @@
 %section
   %h1 Certificates
-  = form_tag(search_certificates_path, :method => :post) do
-    %div.form-search
-      = label_tag :search, "Search for:"
-      = text_field_tag :search, @search
-      = submit_tag 'Go', :class => 'btn'
+
+  = render partial: 'certificates_search/search_form', locals: { search: @search } if @search
 
   - if @certificates.any?
+
+    - certificates = @certificates.group_by{|c|"#{c.response_set.survey.title}:#{c.response_set.dataset_id}"}
+    - most_recent_certificates = certificates.map{|k,v|v.first}.compact
+
     %table.table.table-striped
       %thead
         %tr
@@ -14,7 +15,7 @@
           %th Dataset
           %th Survey
         %tbody
-        - @certificates.each do |certificate|
+        - most_recent_certificates.each do |certificate|
           %tr
             %td= link_to certificate.name, certificate
             %td= certificate.response_set.dataset.title
