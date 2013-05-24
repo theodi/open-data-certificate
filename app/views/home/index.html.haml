@@ -47,10 +47,3 @@
     %li= link_to 'about', '/about'
     %li= link_to 'contact', '/contact'
     %li= link_to 'terms', '/terms'
-
-  - if current_user
-    = render partial: 'home/dashboard'
-  - else
-    = render partial: 'home/unauthenticated_user_home'
-
-
