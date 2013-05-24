@@ -79,8 +79,7 @@ class Survey < ActiveRecord::Base
     requirements.each do |requirement|
       amount = only_questions.select { |q| q != requirement && q.requirement == requirement.requirement }.count + answers.select { |a| a.requirement == requirement.requirement}.count
       if amount == 0
-        # TODO: Re-enable this when the survey is fixed
-        #errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
+        errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
       elsif amount > 1
         errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
       end
