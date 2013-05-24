@@ -1,0 +1,6 @@
+- unless link[:requires_signed_in_user] && !user_signed_in?
+  - active = is_active_menu_link?(link)
+  %li{class: "#{'active' if active}"}
+    = link_to link[:link_text], link[:path]
+  - if active
+    .arrow-down
