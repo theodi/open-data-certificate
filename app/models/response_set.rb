@@ -58,7 +58,7 @@ class ResponseSet < ActiveRecord::Base
 
   def generate_certificate
     if self.complete? && self.certificate.nil?
-      create_certificate :attained_level => self.attained_level
+      create_certificate attained_level: self.attained_level, name: title
     end
   end
 
