@@ -649,22 +649,22 @@
 			<help>how much people can depend on your data’s availability</help>
 			<if test="this.releaseType() === 'service'">
 				<question id="serviceAvailability">
-					<label>What is the guaranteed availability of your data?</label>
+					<label>What is the availability of your data?</label>
 					<radioset>
 						<option value="minimal">
-							<label>minimal or no formal guarantees about availability</label>
+							<label>you don't monitor its availability</label>
 						</option>
 						<option value="atleast99">
-							<label>at least 99% availability</label>
-							<requirement level="pilot">You should <strong>guarantee at least 99% service availability</strong> (less than 4 days downtime/year) so that people can decide how much to rely on your data.</requirement>
+							<label>there has been less than 4 days downtime in the past year (or equivalent)</label>
+							<requirement level="pilot">You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.</requirement>
+						</option>
+						<option value="atleast99.5">
+							<label>there has been less than 2 days downtime in the past year (or equivalent)</label>
+							<requirement level="standard">You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data.</requirement>
 						</option>
 						<option value="atleast99.9">
-							<label>at least 99.9% availability</label>
-							<requirement level="standard">You should <strong>guarantee at least 99.9% service availability</strong> (less than 9 hours downtime/year) so that people can decide how much to rely on your data.</requirement>
-						</option>
-						<option value="atleast99.999">
-							<label>at least 99.999% availability</label>
-							<requirement level="exemplar">You should <strong>guarantee at least 99.999% availability</strong> (less than 5 minutes downtime/year) so that people can decide how much to rely on your data.</requirement>
+							<label>there has been less than 9 hours downtime in the past year (or equivalent)</label>
+							<requirement level="exemplar">You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data.</requirement>
 						</option>
 					</radioset>
 					<help>Most server hosting providers have a service-level agreement (SLA) between you and them. This should guarantee uptime for the servers and determine the availability of your data.</help>
