@@ -23,7 +23,10 @@
 <!-- STRUCTURE -->
 
 <xsl:template match="questionnaire" mode="structure">
-	<survey label="Open Data Certificate Questionnaire" default_mandatory="false">
+	<survey label="Open Data Certificate Questionnaire" 
+		default_mandatory="false" 
+		dataset_title="q_dataTitle"
+		description="These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data in the UK. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements within the UK. You should always check the legislation and other policies that may apply in your sector.">
 		<section_general label="General Information">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
 		</section_general>
@@ -406,7 +409,7 @@
 </xsl:template>
 
 <!-- properties whose values are tokens rather than strings -->
-<xsl:template match="@required | @input_type | @pick" mode="syntax">
+<xsl:template match="@required | @input_type | @pick | @dataset_title" mode="syntax">
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>
