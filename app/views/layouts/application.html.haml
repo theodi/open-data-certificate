@@ -38,11 +38,12 @@
           %h1= yield(:header_title)
 
     .whiteout
-    
-      - flash.each do |type, value|
+      - if flash.any?
         .container
-          .flash.alert{ :class => "alert-#{type}" }
-            = value
+          - flash.each do |type, value|
+            .flash.alert{ :class => "alert-#{type}" }
+              = value
+      
 
       #main{:class => main_container_class}
         = yield
