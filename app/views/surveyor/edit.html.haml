@@ -1,8 +1,17 @@
 - content_for(:main_container_class) {'non-container'}
 
-/ - content_for(:title) do
-/   %h1 Certificate Generator
-/   %h2 What this data is called
+%header
+  .container
+    %h1 Certificate Generator
+    %h3 What this data is called
+
+- content_for(:header) do
+  / %header
+  /   .container
+  /     %h1 Certificate Generator
+  /     %h3 What this data is called
+
+
 
 
 #surveyor
@@ -11,7 +20,6 @@
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container
-      %h2= @survey.translation(I18n.locale)[:title]
       %p.lead= @survey.translation(I18n.locale)[:description]
 
     = render 'partials/dependents' unless @dependents.empty?
