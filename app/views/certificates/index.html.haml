@@ -1,24 +1,13 @@
 %section
-  %h1 Certificates
+  %h1= t('certificates.certificates')
 
   = render partial: 'certificates/search_form', locals: { search: @search }
 
-  - if @certificates.any?
+  %h2= t('certificates.latest_certificates')
 
+  - if @certificates.any?
     - certificates = @certificates.group_by{|c|"#{c.response_set.survey.title}:#{c.response_set.dataset_id}"}
     - most_recent_certificates = certificates.map{|k,v|v.first}.compact
-
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Certificate
-          %th Dataset
-          %th Survey
-        %tbody
-        - most_recent_certificates.each do |certificate|
-          %tr
-            %td= link_to certificate.name, certificate
-            %td= certificate.response_set.dataset.title
-            %td= certificate.response_set.survey.title
+    = render partial: 'certificates/certificates', locals: {certificates: most_recent_certificates }
   - else
-    %p No certificates found
+    %p= t('certificates.no_certificates_found')

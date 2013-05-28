@@ -71,11 +71,16 @@ en:
     you_are_currently_editing_this_certificate: You are currently editing this certificate
     view_certificate: View certificate
 
-
   homepage:
     start_new_certificate: Start new certificate
 
   certificates:
+    certificates: Certificates
+    curated_by: Curated by
+    last_updated: Last updated
+    latest_certificates: Latest certificates
+    no_certificates_found: No certificates found
+    view_certificate: View
     search:
       search_label: Search for
       submit_search: Go

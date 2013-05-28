@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522124534) do
+ActiveRecord::Schema.define(:version => 20130528163600) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130522124534) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "attained_level"
+    t.string   "curator"
   end
 
   create_table "datasets", :force => true do |t|
@@ -230,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20130522124534) do
     t.string   "api_id"
     t.integer  "survey_version",         :default => 0
     t.string   "dataset_title"
+    t.string   "dataset_curator"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true

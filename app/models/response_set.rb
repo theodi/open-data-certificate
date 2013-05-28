@@ -19,7 +19,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def title_determined_from_responses
-    @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: 'dataTitle'}).first.try(:string_value)
+    @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_title}).first.try(:string_value)
+  end
+
+  def curator_determined_from_responses
+    @curator_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_curator}).first.try(:string_value)
   end
 
   def incomplete?
@@ -58,7 +62,7 @@ class ResponseSet < ActiveRecord::Base
 
   def generate_certificate
     if self.complete? && self.certificate.nil?
-      create_certificate attained_level: self.attained_level, name: title
+      create_certificate attained_level: self.attained_level, curator: curator_determined_from_responses, name: title
     end
   end
 
