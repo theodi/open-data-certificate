@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
+  helper_method :resource, :resource_name, :devise_mapping
 
   # pick the locale from ?locale=X in the url,  a prettier
   # solution might be used down the line, maybe depending
@@ -79,6 +80,18 @@ class ApplicationController < ActionController::Base
     end
 
     root_path
+  end
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
 
 end
