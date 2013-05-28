@@ -229,6 +229,7 @@ DEPENDENCIES
   simplecov
   sqlite3
   surveyor
+  test-unit
   therubyracer
   thin
   uglifier (>= 1.0.3)

@@ -33,6 +33,7 @@ group :test do
   gem 'simplecov'
   gem 'shoulda'
   gem 'mocha', require: false
+  gem 'test-unit'
 end
 
 group :development do
