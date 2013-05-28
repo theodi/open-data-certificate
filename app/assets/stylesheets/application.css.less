@@ -25,10 +25,11 @@
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-@odiBlue: #33c5ff;
 
-@odiBlueDark: darken(@odiBlue, 25%);
-@odiBlueLight: lighten(@odiBlue, 46%);
+@odiBlue: #33c5ff;
+@odiBlueLight: lighten(@odiBlue, 36%);
+@odiBlueDark: darken(@odiBlue, 20%);
+@odiBlueDarker: darken(@odiBlue, 30%);
 
 @odiRed: #ff6700;
 @odiRedDark: darken(@odiRed, 20%);
@@ -36,7 +37,7 @@
 @odiCrimson: #d30102;
 
 @odiGrey: #aaa;
-@odiGreyDark: darken(@odiGrey, 20%);
+@odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
 
 @btnPrimaryBackground:  @odiRed;
@@ -107,9 +108,37 @@ p.lead {
   margin-bottom: 30px;
 }
 
-.btn {
+dl {
+  margin: 30px 0;
+}
+
+dt, dd {
+  margin: 15px 0;
+}
+
+dd {
+  margin-bottom: 30px;
+}
+
+.btn-info {
+  background: @odiBlueDark;
+}
+
+.btn-info:active, .btn-info:hover, .btn-info:focus {
+  background: @odiBlueDarker;
+}
+
+.btn-large {
   font-size: 18px;
   padding: 10px 20px;
+}
+
+.btn-small, .btn-small:active, .btn-small:hover {
+  padding: 3px 25px;
+  font-size: 13px;
+  color: white;
+  border: none;
+  text-shadow: none;
 }
 
 #padd {
@@ -385,6 +414,19 @@ section {
 }
 
 
+// Tables //
+
+table {
+  width: 100%;
+  font-size: 15px;
+}
+
+th {
+  font-weight: normal;
+}
+
+
+
 // Forms //
 
 .main-content {
@@ -427,6 +469,8 @@ section {
   }
 }
 
+
+
 // User auth //
 
 .user-links {
@@ -439,24 +483,84 @@ section {
   }
 }
 
+
+
 // My certificates view //
 
-tr.first-response_set {
+.first-response-set {
   background: @odiBlueLight;
+
+  td.level {
+    text-align: center;
+    padding: 13px 30px 5px 15px;
+    width: 48px;
+  }
+
+  td.last-updated {
+    time {
+      color: @odiGreyDarker;
+    }
+  }
+
+  button.copy-certificate {
+    padding: 8px 12px;
+  }
+
+  .btn-info.unstyled {
+    font-size: 15px;
+    color: @odiBlue;
+    padding: 0;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
-td.last-updated {
-  width: 200px;
-  padding: 15px;
-  font-size: 12px;
-  line-height: 17px;
-  color: @odiGreyDark;
-
-  time {
-    color: @odiGreyDarker;
+.previous-response-set {
+  .btn-info {
     font-size: 15px;
-    display: block;
+    color: @odiBlue;
+    padding: 0;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
+
+  td {
+    height: 30px;
+  }
+
+  button.copy-certificate {
+    text-align: left;
+    position: relative;
+    top: 7px;
+  }
+}
+
+button.copy-certificate {
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: bold;
+
+  span {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
+
+button.copy-certificate:hover {
+  font-size: 15px;
+}
+
+
+th.previous-title {
+  font-size: 16px;
+  text-align: left;
+  color: @odiGreyDark;
+  padding: 15px 0;
 }
 
 td.level {
@@ -466,14 +570,25 @@ td.level {
     height: 40px;
   }
 
-  padding: 13px 15px 5px;
   font-size: 12px;
-  text-align: center;
-
+  font-weight: bold;
   color: @odiGreyDark;
 }
 
+td.last-updated {
+  width: 180px;;
+  font-size: 12px;
+  line-height: 17px;
+  color: @odiGreyDark;
+
+  time {
+    font-size: 15px;
+    display: block;
+  }
+}
+
 td.status {
+  width: 300px;
   font-size: 15px;
 
   &.published {
@@ -481,7 +596,20 @@ td.status {
   }
 
   &.archived {
-    color: @odiGrey;
+    color: @odiGreyDark;
+  }
+
+  &.editing {
+    color: @odiGreyDarker;
+    font-style: italic;
+  }
+}
+
+td.action {
+  width: 150px;
+
+  form {
+    margin: 0;
   }
 }
 

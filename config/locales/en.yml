@@ -60,14 +60,35 @@ en:
     heading__intro_text: Some intro text here?
     heading__my_certificates: My certificates
     latest_published_certificate: Latest published certificate
-    make_a_copy_and_edit: Make a copy and edit
+    copy_certificate:
+      make_a_copy: Make a copy
+      and_edit: and edit
     previous_versions: Previous versions
     start_new_certificate: Start new certificate
     you_are_currently_editing_this_certificate: You are currently editing this certificate
     view_certificate: View certificate
 
   homepage:
-    start_new_certificate: Start new certificate
+    title: Open data certificate
+    tagline: Specifying what good open data looks like
+    start_new_certificate: Start a new certificate
+    browse_all_new_certificates: Browse all new certificates
+    how_it_works: Here's how it works
+    fill_out_questionnaire:
+      title: Fill out the questionnaire
+      description: We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+    generate_certificate:
+      title: Generate a certificate
+      description: We will assess your level of open data and generate a certificate which will be added to our archives certificate which will be added to our archives.
+    share_open_data:
+      title: Share your open data
+      description: You can embed your certificate on your website or link to the archive using one of our custom badges  the archive using one of our custom badges.
+    about_certificate:
+      title: About the certificate
+      description: About certificate copy goes here.
+    about_odi:
+      title: About the ODI
+      description: About the ODI copy goes here.
 
   certificate_search:
     heading__search_certificates: Search certificates

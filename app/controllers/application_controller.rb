@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
       )
     end
 
-    root_path
+    dashboard_path
   end
 
   def resource_name

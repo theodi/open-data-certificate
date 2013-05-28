@@ -121,7 +121,7 @@ class SurveyorController < ApplicationController
   # if there was a dataset, go back to it
   private
   def surveyor_finish
-    root_path
+    dashboard_path
   end
 
   private
@@ -129,7 +129,7 @@ class SurveyorController < ApplicationController
     set_response_set_and_render_context
     if @response_set && @response_set.complete?
       flash[:notice] = t('surveyor.that_response_set_is_complete')
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
 
