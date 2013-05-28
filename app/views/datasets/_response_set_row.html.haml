@@ -15,7 +15,7 @@
     = link_to(t('dashboard.edit_and_publish'), surveyor.continue_my_survey_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code), :class => 'btn btn-small btn-info')
 %td.action= link_to(t('dashboard.embed_code'), response_set.certificate, :class => 'btn btn-small btn-info unstyled') if response_set.newest_completed_in_dataset?
 %td.action<
-  - if response_set.newest_completed_in_dataset?
+  - if response_set.newest_completed_in_dataset? && defined? first
     = form_for response_set.dataset, :url => dataset_start_questionnaire_path(response_set.dataset) do |f|
       - if @surveys.count > 1
         = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
