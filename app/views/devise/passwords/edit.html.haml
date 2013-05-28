@@ -1,0 +1,16 @@
+- content_for :header_title, t('authentication.change_your_password')
+
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+  = devise_error_messages!
+  = f.hidden_field :reset_password_token
+
+  .form-field
+    = f.label :password, t("authentication.new_password")
+    = f.password_field :password, :autofocus => true, :class => 'span8'
+  .form-field
+    = f.label :password_confirmation, t("authentication.confirm_new_password")
+    = f.password_field :password_confirmation, :class => 'span8'
+
+  = f.submit t('authentication.change_my_password'), :class => 'btn btn-primary'
+
+= render "devise/shared/links"
