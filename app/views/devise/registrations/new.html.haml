@@ -1,18 +1,19 @@
-%h2 Sign up
+- @title = "Sign up"
+
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
-  
-  %div
+
+  .form-field
     = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
+    = f.email_field :email, :autofocus => true, :class => 'span8'
+  .form-field
     = f.label :password
-    %br/
-    = f.password_field :password
-  %div
+    %i (leave blank if you don't want to change it)
+    = f.password_field :password, :autocomplete => "off", :class => 'span8'
+  .form-field
     = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Sign up"
+    = f.password_field :password_confirmation, :class => 'span8'
+
+  = f.submit "Sign up", :class => 'btn btn-primary'
+
 = render "devise/shared/links"

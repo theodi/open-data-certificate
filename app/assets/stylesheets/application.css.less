@@ -382,26 +382,55 @@ section {
 
 .main-content {
 
+  .form-field {
+    .clearfix;
+    margin-bottom: 35px;
+
+    &.form-field-inline {
+      input {
+        margin: 0 10px;
+        height: 30px;
+      }
+      label {
+        display: inline;
+      }
+    }
+  }
+
   input {
-  height: 60px;
+    height: 60px;
     font-size: 20px;
     padding: 0 10px;
-  margin: 15px 0 50px;
-  } 
+    margin: 15px 0;
+  }
+
+  input[type='submit'] {
+    margin: 15px 0 30px;
+  }
 
   label {
     font-size: 22px;
   }
-   i {
+
+  i {
     font-size: 15px;
     font-style: normal;
     color: @odiGrey;
     display: block;
-   }
-
+  }
 }
 
+// User auth //
 
+.user-links {
+  .clearfix;
+  margin-bottom: 15px;
+
+  .btn {
+    float: left;
+    margin-right: 4px;
+  }
+}
 
 // My certificates view //
 
