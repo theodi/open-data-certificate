@@ -60,7 +60,9 @@ en:
     heading__intro_text: Some intro text here?
     heading__my_certificates: My certificates
     latest_published_certificate: Latest published certificate
-    make_a_copy_and_edit: Make a copy and edit
+    copy_certificate:
+      make_a_copy: Make a copy
+      and_edit: and edit
     previous_versions: Previous versions
     start_new_certificate: Start new certificate
     you_are_currently_editing_this_certificate: You are currently editing this certificate

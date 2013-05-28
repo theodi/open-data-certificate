@@ -410,17 +410,74 @@ th {
 
 // My certificates view //
 
-tr.first-response_set {
+.first-response-set {
   background: @odiBlueLight;
 
   td.level {
     text-align: center;
+    padding: 13px 30px 5px 15px;
+    width: 48px;
   }
 
-  td.last-updated time {
+  td.last-updated {
+    time {
       color: @odiGreyDarker;
+    }
+  }
+
+  button.copy-certificate {
+    padding: 8px 12px;
+  }
+
+  .btn-info.unstyled {
+    font-size: 15px;
+    color: #62C5FE;
+    padding: 0;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
 }
+
+.previous-response-set {
+  .btn-info {
+    font-size: 15px;
+    color: #62C5FE;
+    padding: 0;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  td {
+    height: 30px;
+  }
+
+  button.copy-certificate {
+    text-align: left;
+    position: relative;
+    top: 7px;
+  }
+}
+
+button.copy-certificate {
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: bold;
+
+  span {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
+
+button.copy-certificate:hover {
+  font-size: 15px;
+}
+
 
 th.previous-title {
   font-size: 16px;
@@ -436,16 +493,13 @@ td.level {
     height: 40px;
   }
 
-  width: 48px;
-  padding: 13px 15px 5px;
   font-size: 12px;
   font-weight: bold;
   color: @odiGreyDark;
 }
 
 td.last-updated {
-  width: 180px;
-  padding: 15px;
+  width: 180px;;
   font-size: 12px;
   line-height: 17px;
   color: @odiGreyDark;
@@ -475,6 +529,8 @@ td.status {
 }
 
 td.action {
+  width: 150px;
+
   form {
     margin: 0;
   }
