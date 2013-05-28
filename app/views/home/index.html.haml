@@ -5,11 +5,11 @@
     .container
       .row
         .span4.offset8
-          %h1 Open data certificate
-          %h2 Specifying what good open data looks like
+          %h1= t('homepage.title')
+          %h2= t('homepage.tagline')
           = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-large.btn-primary Start a new certificate
-          %a.btn.btn-large.btn-info{href: certificates_path} Browse all new certificates
+            %button.btn.btn-large.btn-primary= t('homepage.start_new_certificate')
+          %a.btn.btn-large.btn-info{href: certificates_path}= t('homepage.browse_all_new_certificates')
 
 - content_for(:header) do
   #empty
@@ -18,26 +18,32 @@
     .container
       .row
         .span12
-          %h1 Here's how it works
+          %h1= t('homepage.how_it_works')
       .row
         .span4
-          %h2 1 <small> Fill out the questionnaire </small>
-          %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+          %h2
+            1
+            %small= t('homepage.fill_out_questionnaire.title')
+          %p= t('homepage.fill_out_questionnaire.description')
           = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-large.btn-primary Start a new certificate
+            %button.btn.btn-large.btn-primary= t('homepage.start_new_certificate')
 
         .span4
-          %h2 2 <small> Generate a certificate</small>
-          %p We will assess your level of open data and generate a certificate which will be added to our archives certificate which will be added to our archives.
+          %h2
+            2
+            %small= t('homepage.generate_certificate.title')
+          %p= t('homepage.generate_certificate.description')
         .span4.last
-          %h2 3 <small> Share your open data</small>
-          %p You can embed your certificate on your website or link to the archive using one of our custom badges  the archive using one of our custom badges.
+          %h2
+            3
+            %small= t('homepage.share_open_data.title')
+          %p= t('homepage.share_open_data.description')
 .container.main
   .row
     .span6
       %iframe{width: 560, height: 315, src: 'http://www.youtube.com/embed/MRZE6X-ZG6Q', frameborder: 0, allowfullscreen: 'allowfullscreen'}
     .span6
-      %h2 About the certificate
-      %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
-      %h2 About the ODI
-      %p We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+      %h2= t('homepage.about_certificate.title')
+      %p= t('homepage.about_certificate.description')
+      %h2= t('homepage.about_odi.title')
+      %p= t('homepage.about_odi.description')
