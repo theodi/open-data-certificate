@@ -23,3 +23,16 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+
+# Example mysql config
+#
+# development:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: odc_dev
+#   pool: 5
+#   username: root
+#   password:
+#   socket: /tmp/mysql.sock
+
