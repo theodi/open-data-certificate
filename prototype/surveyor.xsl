@@ -138,7 +138,11 @@
 
 <xsl:template match="yesno" mode="structure">
 	<a_false label="no" />
-	<a_true label="yes" />
+	<a_true label="yes">
+		<xsl:if test="..//requirement[@level]">
+			<xsl:attribute name="requirement" select="..//requirement[@level]/local:requirementId(.)" separator=", " />
+		</xsl:if>
+	</a_true>
 </xsl:template>
 
 <xsl:template match="@placeholder | @required" mode="structure">
@@ -291,11 +295,6 @@
 
 <xsl:template match="help" mode="markdown">
 	<xsl:apply-templates mode="markdown" />
-	<xsl:if test="@more">
-		<xsl:text>[Read more...](</xsl:text>
-		<xsl:value-of select="@more" />
-		<xsl:text>)</xsl:text>
-	</xsl:if>
 </xsl:template>
 
 <xsl:template match="label | requirement" mode="markdown">

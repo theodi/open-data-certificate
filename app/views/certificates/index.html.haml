@@ -6,17 +6,17 @@
       = text_field_tag :search, @search
       = submit_tag 'Go', :class => 'btn'
 
-  - if @certificates.length > 0
+  - if @certificates.any?
     %table.table.table-striped
       %thead
         %tr
           %th Certificate
           %th Dataset
           %th Survey
-      %tbody
+        %tbody
         - @certificates.each do |certificate|
           %tr
-            %td= certificate.name
+            %td= link_to certificate.name, certificate
             %td= certificate.response_set.dataset.title
             %td= certificate.response_set.survey.title
   - else

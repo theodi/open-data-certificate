@@ -198,6 +198,10 @@ body {
 	display: none;
 }
 
+#questionnaire .requirement.alert {
+	display: block;
+}
+
 .label-pilot,
 .label-standard,
 .label-exemplar {

@@ -1,3 +1,11 @@
-%h1 Open Data Certificate
+.certificate.hero-unit{class:@certificate.attained_level+'-level'}
+    .certificate-badge.centered
+    %p.certificate-level
+        #{@certificate.attained_level.titleize} level
+        %small self certified
 
-%p This data has achieved <strong>#{@certificate.attained_level} level</strong> on #{@certificate.created_at.strftime "%d %B %Y"}
+    %h1= @certificate.response_set.title
+    %p
+        This data has achieved <strong class='certificate-level'>#{@certificate.attained_level.titleize} level</strong> on #{@certificate.created_at.strftime "%d %B %Y"} which means #{ t("levels.#{@certificate.attained_level}.description") }
+
+=render @certificate.response_set

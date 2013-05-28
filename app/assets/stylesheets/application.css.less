@@ -20,8 +20,27 @@
 
 /* import bootstrap this way so that we can alter variables just for this app */
 @import "twitter/bootstrap";
+
+// override bootstrap variables here, see options at:
+//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+@odiBlue:  #00b7ff;
+@odiRed:  #ff6700;
+
+@basic: #0DBD37;
+@pilot: #EF3AAB;
+@standard: #2254F3;
+@exemplar: #F9BC26;
+
+// @headingsFontFamily:    'Open Sans',sans-serif;
+// @headingsFontWeight:    400;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
 
 /************************************************
@@ -41,118 +60,302 @@
 
 
 /************************************************
-    Original prototype styling
+    ODI Styling
 ************************************************/
-#alpha-banner {
-    border-radius: 0 0 0 0;
-    top: 0;
-    margin-bottom: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-}
+// source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
+
+
+// Global styles //
 
 body {
-    margin-top: 40px; /* give room for the alpha banner */
+  background-color: #fff;
+  font-size: 18px;
 }
 
-#questionnaire .control-label { 
-    width: 270px; 
-    padding-left: 30px;
+
+// Typography //
+
+h1 {
+  font-weight: normal;
 }
 
-#questionnaire .controls { 
-    margin-left: 340px; 
+h3 {
+  font-size: 19px;
 }
 
-#questionnaire .well .control-label {
-    width: 251px;
-    padding-left: 30px;
+h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: #aaa;
+  margin-bottom: 15px;
 }
 
-#questionnaire .well .controls {
-    margin-left: 321px;
+hr {
+  margin: 12px 0;
 }
 
-#questionnaire .requirement .alert { 
-    margin-top: 10px;
+hr.heavy {
+  border: 0;
+  height: 5px;
+  background: url(divider.png);
+}
+
+// Layout //
+
+.navbar-inner {
+  height: 60px;
+}
+
+#topbar ul {
+  li {
+    padding:0;
+     height: 60px;
+
+    a {
+      color: #fff;
+      padding: 20px;
+    }
+
+    a:hover {
+      background-color: @odiRed;
+    }
+  }
+
+  li.divider-vertical {
+    border-left-color: #707070;
+    border-right-color: #000;
+    margin: 0;
+  }
+}
+
+#topbar .label {
+  top: -15px;
+  position: relative;
+  padding-top: 10px;
+  background-color: @odiBlue;
+}
+
+#mainnav {
+  margin-bottom: 0;
+  position: relative;
+
+  .navbar-inner {
+    background-color: #fff;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-bottom: none;
+    background-image: none;
+
+  #mainnav {
     margin-bottom: 0;
-}
-
-#questionnaire .btn-help {
-    margin-left: -33px;
-    position: absolute;
-}
-
-#questionnaire .btn-option-help {
-    margin-left: -20px;
-    padding: 0;
-    position: absolute;
-}
-
-#questionnaire label .help-block {
-    margin-top: 0;
-}
-
-#questionnaire .control-label .badge-circular {
-    margin-left: -30px;
-}
-
-#questionnaire .radio.inline + .label {
     position: relative;
-    top: 4px;
+
+    .navbar-inner {
+      background-color: #fff;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border-bottom: none;
+      background-image: none;
+
+        li {
+          position: relative;
+          padding: 10px 20px 20px;
+
+          a {
+             color: #000;
+            margin: 0 0 10px;
+          }
+          a:hover {
+            color: @odiBlue;
+          }
+        }
+      }
+
+      li.active a {
+        color: @odiBlue;
+      }
+    }
+
+    .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #fff;
+      margin: 0 0 0 -8px;
+      position: absolute;
+      left: 50%;
+    }
+  }
 }
 
-.improvements {
-    margin-top: 14px;
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus  {
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  -moz-box-shadow:none;
+  box-shadow: none;
+}
+
+header {
+  background-color: @odiBlue;
+  color: #fff;
+  padding: 20px 0;
+
+  .container {
+    min-height: 60px;
+  }
+}
+
+#footer {
+  background-color: #000;
+  font-size: 0.88em;
+     color: #fff;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none outside none;
+    margin: 10px 0;
+
+    li {
+      display: inline;
+      margin: 0 10px;
+    }
+  }
+
+  p {
+    margin: 10px;
+  }
+}
+
+section {
+  background-color: white;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.hero-unit {
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  .centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1, h2, p, small, span {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 23px;
+  }
 }
 
-.improvement {
-    margin-top: 7px;
-    margin-bottom: 10px;
-}
 
-.improvement-label {
-    display: block;
+// Certificate view //
+
+.certificate-data {
+  ul {
+    .clearfix;
+    margin-left: 0;
+  }
+
+  li {
+    list-style-type: none;
+    margin: 5px 0;
+    width: 50%;
     float: left;
-    width: 160px;
-    text-align: right;
+
+    p {
+      font-size: 19px;
+      margin-right: 20px;
+    }
+  }
 }
 
-.improvement-desc {
+.certificate.hero-unit {
+  margin: -70px auto 30px;
+  width: 920px;
+}
+
+.certificate-badge {
+  width: 160px;
+  height: 140px;
+  background: #bbb;
+  margin-bottom: 10px;
+}
+
+.certificate-level {
+  font-weight: bold;
+  font-size: 24px;
+  color: #888;
+  margin-bottom: 30px;
+
+  small {
     display: block;
-    margin-left: 180px;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 16px;
+  }
 }
 
-.label-pilot,
-.label-standard,
-.label-exemplar {
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
-    margin-left: 5px;
-    margin-right: 5px;
+strong.certificate-level {
+  font-weight: normal;
 }
 
-.label-pilot,
-.badge-pilot { 
-    background-color: peru; 
-    box-shadow: 0 0 2px peru;
+.basic-level {
+  .certificate-badge {
+    background: @basic;
+  }
+  .certificate-level {
+    color: @basic;
+  }
 }
 
-.label-standard,
-.badge-standard { 
-    background-color: silver; 
-    box-shadow: 0 0 2px silver;
+.pilot-level {
+  .certificate-badge {
+    background: @pilot;
+  }
+  .certificate-level {
+    color: @pilot;
+  }
 }
 
-.label-exemplar,
-.badge-exemplar { 
-    background-color: gold; 
-    box-shadow: 0 0 2px gold;
+.standard-level {
+  .certificate-badge {
+    background: @standard;
+  }
+  .certificate-level {
+    color: @standard;
+  }
+}
+
+.exemplar-level {
+  .certificate-badge {
+    background: @exemplar;
+  }
+  .certificate-level {
+    color: @exemplar;
+  }
 }
 
 .footer {
-    background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
     margin-top: 70px;
     padding: 30px 0;

@@ -5,6 +5,12 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# gem "mongoid", "~> 3.0.0"
+# gem 'bson_ext'
+# gem 'pg'
+
+gem 'surveyor'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -16,7 +22,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'less-rails'
-  gem 'less-rails-bootstrap', :git => 'git://github.com/theodi/less-rails-bootstrap.git'
+  gem 'less-rails-bootstrap'#, :git => 'git://github.com/theodi/less-rails-bootstrap.git'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -24,6 +30,9 @@ end
 group :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'sqlite3'
+  gem 'simplecov'
+  gem 'shoulda'
+  gem 'mocha', require: false
 end
 
 group :development do
@@ -42,6 +51,9 @@ gem 'jquery-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
+
+# authorization
+gem 'cancan'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

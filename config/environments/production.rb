@@ -54,6 +54,26 @@ OpenDataCertificate::Application.configure do
   # **IMPORTANT** Define the default url (for devise)
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+
+  # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
+  #   - https://addons.heroku.com/mandrill
+  if ENV["MANDRILL_USERNAME"]
+
+    # **IMPORTANT** Define the default url (for devise)
+    config.action_mailer.default_url_options = { :host => 'odc-stage.herokuapp.com' }
+
+    config.action_mailer.smtp_settings = {
+      :address   => "smtp.mandrillapp.com",
+      :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
+      :enable_starttls_auto => true, # detects and uses STARTTLS
+      :user_name => ENV["MANDRILL_USERNAME"],
+      :password  => ENV["MANDRILL_APIKEY"], # SMTP password is any valid API key
+      :authentication => 'login', # Mandrill supports 'plain' or 'login'
+      # :domain => 'heroku.com', # your domain to identify your server when connecting
+    }
+
+  end
+
   # Enable threaded mode
   # config.threadsafe!
 
@@ -67,4 +87,7 @@ OpenDataCertificate::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
 end
+
+

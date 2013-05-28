@@ -30,6 +30,7 @@ OpenDataCertificate::Application.routes.draw do
   # 'Static' pages managed by HighVoltage here...
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'contact' => 'high_voltage/pages#show', :id => 'contact'
+  get 'terms' => 'high_voltage/pages#show', :id => 'terms'
 
   root :to => 'application#home'
 

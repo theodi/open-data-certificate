@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Extracts::Application::ExceptionHandling
+
   protect_from_forgery
   before_filter :set_locale
 
@@ -24,6 +26,7 @@ class ApplicationController < ActionController::Base
   # mostly lifted from surveyor#create
   def start_questionnaire
     @dataset = Dataset.find_by_id(params[:dataset_id]) || Dataset.new
+    authorize! :update, @dataset
 
     if params[:survey_access_code].blank?
       flash[:notice] = t('surveyor.please_choose_a_legislation')

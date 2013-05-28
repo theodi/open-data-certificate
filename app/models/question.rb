@@ -1,11 +1,17 @@
 class Question < ActiveRecord::Base
   include Surveyor::Models::QuestionMethods
 
-  attr_accessible :requirement, :required, :help_text_more_url
+  attr_accessible :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
+  before_save :set_default_value_for_required
   after_save :update_mandatory
+
+  # either provided text_as_statement, or fall back to text
+  def statement_text
+    text_as_statement || text
+  end
 
   def requirement_level
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
@@ -19,7 +25,7 @@ class Question < ActiveRecord::Base
   end
 
   def is_a_requirement?
-    # Definition: A 'Requirement' is an bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
+    # Definition: A 'Requirement' is a bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
     #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
     #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
     @is_a_requirement ||= display_type == 'label' && !requirement.blank?
@@ -57,7 +63,9 @@ class Question < ActiveRecord::Base
     #       Validation in the Survey model is used to prevent a requirement getting linked to more than one question or answer
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
 
-    response_level_index = case question.pick
+    return false unless question # if for some reason a matching question is not found
+
+    response_level_index = case question.pick # radio buttons will return 'one' as their .pick attribute value
                              when 'one'
                                responses.where(:question_id => question.id).map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
                              else
@@ -70,8 +78,13 @@ class Question < ActiveRecord::Base
   private
   def update_mandatory
     #TODO: swap to using an observer instead?
-    self.is_mandatory ||= !!required
+    self.is_mandatory ||= required.present?
     Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
+  end
+
+  private
+  def set_default_value_for_required
+    self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
 end

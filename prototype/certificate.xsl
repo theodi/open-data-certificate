@@ -668,9 +668,9 @@
 <xsl:template match="requirement[not(@level)]">
 	<xsl:param name="id" as="xs:string" tunnel="yes" />
 	<div class="conditional" data-bind="visible: !({if (@test) then local:knockoutTest(@test) else if (ancestor::question/yesno) then concat($id, '() === ''true''') else concat($id, 'Status() === ''complete''')})">
-		<div class="requirement">
-			<p class="alert alert-error"><xsl:apply-templates /></p>
-		</div>
+		<p class="requirement alert alert-error">
+			<xsl:apply-templates />
+		</p>
 	</div>
 </xsl:template>
 
@@ -680,9 +680,9 @@
 			<xsl:next-match />
 		</xsl:when>
 		<xsl:otherwise>
-			<div class="requirement">
-				<p class="alert alert-error"><xsl:apply-templates /></p>
-			</div>
+			<p class="requirement alert alert-error">
+				<xsl:apply-templates />
+			</p>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
