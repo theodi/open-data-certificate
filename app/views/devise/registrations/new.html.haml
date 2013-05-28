@@ -1,4 +1,4 @@
-- content_for :header_title, "Sign up"
+- content_for :header_title, t("authentication.sign_up")
 
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -8,12 +8,11 @@
     = f.email_field :email, :autofocus => true, :class => 'span8'
   .form-field
     = f.label :password
-    %i (leave blank if you don't want to change it)
     = f.password_field :password, :autocomplete => "off", :class => 'span8'
   .form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => 'span8'
 
-  = f.submit "Sign up", :class => 'btn btn-primary'
+  = f.submit t("authentication.sign_up"), :class => 'btn btn-primary'
 
 = render "devise/shared/links"

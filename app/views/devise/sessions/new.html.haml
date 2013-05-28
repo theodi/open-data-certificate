@@ -1,4 +1,4 @@
-- content_for :header_title, 'Sign in'
+- content_for :header_title, t("authentication.sign_in")
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 
@@ -7,13 +7,12 @@
     = f.email_field :email, :autofocus => true, :class => 'span8'
   .form-field
     = f.label :password
-    %i (leave blank if you don't want to change it)
     = f.password_field :password, :autocomplete => "off", :class => 'span8'
   - if devise_mapping.rememberable?
     .form-field.form-field-inline
       = f.check_box :remember_me
-      = f.label :remember_me, "Remember me?"
+      = f.label :remember_me, t("authentication.remember_me")
 
-  = f.submit "Sign in", :class => 'btn btn-primary'
+  = f.submit t("authentication.sign_in"), :class => 'btn btn-primary'
 
 = render "devise/shared/links"
