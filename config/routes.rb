@@ -14,7 +14,11 @@ OpenDataCertificate::Application.routes.draw do
 
   get 'dashboard' => 'datasets#index'
 
-  resources :certificates
+  resources :certificates do
+    member do
+      get 'embed', to: 'certificates#embed', as: 'embed'
+    end
+  end
   resources :certificates_search, only: [:new, :create]
 
   devise_for :users, skip: :registration

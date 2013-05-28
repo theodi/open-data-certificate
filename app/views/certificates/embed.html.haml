@@ -1,0 +1,13 @@
+.certificate.hero-unit{class:@certificate.attained_level+'-level'}
+  .certificate-badge.centered
+  %p.certificate-level
+    = t("levels.#{@certificate.attained_level}.title_with_level")
+    %small= t("certificate.self_certified")
+
+  %h1= @certificate.response_set.title
+  %p
+    = t("certificate.this_data_has_achieved")
+    <strong class='certificate-level'>#{t("levels.#{@certificate.attained_level}.title_with_level")}</strong>
+    = t("certificate.on_date", date: @certificate.created_at.strftime("%d %B %Y"))
+    = t("certificate.which_means")
+    = t("levels.#{@certificate.attained_level}.description")

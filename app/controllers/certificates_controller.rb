@@ -6,4 +6,9 @@ class CertificatesController < ApplicationController
   def show
     @certificate = Certificate.find params[:id]
   end
+
+  def embed
+    @certificate = Certificate.find params[:id]
+    render layout: 'embedded_certificate'
+  end
 end
