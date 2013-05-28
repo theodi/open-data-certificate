@@ -11,4 +11,10 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.find params[:id]
     render layout: 'embedded_certificate'
   end
+
+  def badge
+    @certificate = Certificate.find params[:id]
+    send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline')
+  end
+
 end

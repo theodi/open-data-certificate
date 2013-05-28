@@ -17,6 +17,7 @@ OpenDataCertificate::Application.routes.draw do
   resources :certificates do
     member do
       get 'embed', to: 'certificates#embed', as: 'embed'
+      get 'badge', to: 'certificates#badge', as: 'badge'
     end
   end
   resources :certificates_search, only: [:new, :create]
