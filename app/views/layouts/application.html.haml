@@ -30,7 +30,7 @@
     - else
       %header
         .container
-          %h1= @title
+          %h1= yield(:header_title)
 
     .whiteout
       .container.main-content
