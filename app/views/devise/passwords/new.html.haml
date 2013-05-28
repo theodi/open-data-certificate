@@ -1,0 +1,12 @@
+- content_for :header_title, t('authenticate.forgot_password')
+
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  = devise_error_messages!
+
+  .form-field
+    = f.label :email
+    = f.email_field :email, :autofocus => true, :class => 'span8'
+
+  = f.submit t("authentication.send_reset_instructions"), :class => 'btn btn-primary'
+
+= render "devise/shared/links"

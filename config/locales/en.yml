@@ -66,7 +66,6 @@ en:
     you_are_currently_editing_this_certificate: You are currently editing this certificate
     view_certificate: View certificate
 
-
   homepage:
     start_new_certificate: Start new certificate
 
@@ -79,6 +78,11 @@ en:
     sign_in: Sign in
     sign_up: Sign up
     forgot_password: Forgot your password?
+    change_your_password: Change your password
+    change_my_password: Change my password
+    new_password: New password
+    confirm_new_password: Confirm new password
+    send_reset_instructions: Send me reset password instructions
     remember_me: Remember me?
     edit_profile: Edit your profile
     update_profile: Update my profile
