@@ -74,3 +74,13 @@ en:
     heading__search_certificates: Search certificates
     search_label: Search for
     submit_search: Go
+
+  authentication:
+    sign_in: Sign in
+    sign_up: Sign up
+    forgot_password: Forgot your password?
+    remember_me: Remember me?
+    edit_profile: Edit your profile
+    update_profile: Update my profile
+    current_password_info: (we need your current password to confirm your changes)
+    new_password_info: (leave blank if you don't want to change it)

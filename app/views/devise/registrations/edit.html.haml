@@ -1,30 +1,30 @@
-- @title = "Edit your profile"
+- content_for :header_title, t("authentication.edit_profile")
 
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
-  %div
+
+  .form-field
     = f.label :first_name
- 
     = f.text_field :first_name, :class => 'span8'
-  %div
+  .form-field
     = f.label :last_name
     = f.text_field :last_name, :class => 'span8'
-  %div
+  .form-field
     = f.label :email
     = f.email_field :email, :autofocus => true, :class => 'span8'
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
-  %div
+  .form-field
     = f.label :current_password
-    %i (we need your current password to confirm your changes)
+    %i= t("authentication.current_password_info")
     = f.password_field :current_password, :class => 'span8'
-  %div
+  .form-field
     = f.label :password
-    %i (leave blank if you don't want to change it)
+    %i= t("authentication.new_password_info")
     = f.password_field :password, :autocomplete => "off", :class => 'span8'
-  %div
+  .form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => 'span8'
-  
-  %div= f.submit "Update my profile" , :class => 'btn btn-primary'
+
+  = f.submit t("authentication.update_profile"), :class => 'btn btn-primary'
