@@ -15,7 +15,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'dashboard' => 'datasets#index'
 
   resources :certificates
-  post '/certificates/search', :to => 'certificates#search', :as => 'search_certificates'
+  resources :certificates_search, only: [:new, :create]
 
   devise_for :users, skip: :registration
   devise_scope :user do

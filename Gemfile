@@ -33,16 +33,19 @@ group :test do
   gem 'simplecov'
   gem 'shoulda'
   gem 'mocha', require: false
+  gem 'test-unit'
 end
 
 group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'ruby-prof'
+  gem 'pg'
 end
 
 group :production do
-  gem 'pg'
+  gem 'foreman'
+  gem 'mysql2'
 end
 
 gem 'jquery-rails'
@@ -61,6 +64,7 @@ gem 'cancan'
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano'

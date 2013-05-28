@@ -36,15 +36,15 @@
 
 @odiCrimson: #d30102;
 
-@odiCerulean: #0697d0;
-
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
 
 @btnPrimaryBackground:  @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;;
+@btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
+
+@odiGrey: #8e8c8c;
 
 @basic: #0DBD37;
 @pilot: #EF3AAB;
@@ -408,6 +408,64 @@ th {
 
 
 
+// Forms //
+
+.main-content {
+
+  .form-field {
+    .clearfix;
+    margin-bottom: 35px;
+
+    &.form-field-inline {
+      input {
+        margin: 0 10px;
+        height: 30px;
+      }
+      label {
+        display: inline;
+      }
+    }
+  }
+
+  input {
+    height: 60px;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 15px 0;
+  }
+
+  input[type='submit'] {
+    margin: 15px 0 30px;
+  }
+
+  label {
+    font-size: 22px;
+  }
+
+  i {
+    font-size: 15px;
+    font-style: normal;
+    color: @odiGrey;
+    display: block;
+  }
+}
+
+
+
+// User auth //
+
+.user-links {
+  .clearfix;
+  margin-bottom: 15px;
+
+  .btn {
+    float: left;
+    margin-right: 4px;
+  }
+}
+
+
+
 // My certificates view //
 
 .first-response-set {
@@ -431,7 +489,7 @@ th {
 
   .btn-info.unstyled {
     font-size: 15px;
-    color: #62C5FE;
+    color: @odiBlue;
     padding: 0;
     background: none;
     -webkit-box-shadow: none;
@@ -443,7 +501,7 @@ th {
 .previous-response-set {
   .btn-info {
     font-size: 15px;
-    color: #62C5FE;
+    color: @odiBlue;
     padding: 0;
     background: none;
     -webkit-box-shadow: none;
@@ -535,6 +593,8 @@ td.action {
     margin: 0;
   }
 }
+
+
 
 // Certificate view //
 

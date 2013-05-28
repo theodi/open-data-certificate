@@ -30,10 +30,10 @@
     - else
       %header
         .container
-          %h1= @title
+          %h1= yield(:header_title)
 
     .whiteout
-      .container
+      .container.main-content
 
         - flash.each do |type, value|
           .flash.alert{ :class => "alert-#{type}" }

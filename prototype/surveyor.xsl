@@ -23,7 +23,10 @@
 <!-- STRUCTURE -->
 
 <xsl:template match="questionnaire" mode="structure">
-	<survey label="Open Data Certificate Questionnaire" default_mandatory="false">
+	<survey label="Open Data Certificate Questionnaire" 
+		default_mandatory="false" 
+		dataset_title="q_dataTitle"
+		description="These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data in the UK. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements within the UK. You should always check the legislation and other policies that may apply in your sector.">
 		<section_general label="General Information">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
 		</section_general>
@@ -70,6 +73,10 @@
 				<xsl:attribute name="label">
 					<xsl:apply-templates select="label" mode="markdown" />
 				</xsl:attribute>
+				<xsl:if test="@display">
+					<xsl:attribute name="display_on_certificate" select="true()" />
+					<xsl:attribute name="text_as_statement" select="@display" />
+				</xsl:if>
 				<xsl:if test="help">
 					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
 					<xsl:if test="help/@more">
@@ -116,6 +123,18 @@
 <xsl:template match="radioset/option | checkboxset/option" mode="structure">
 	<xsl:element name="a_{local:token(@value)}">
 		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
+		<xsl:if test="ancestor::question/@display">
+			<xsl:attribute name="text_as_statement">
+				<xsl:choose>
+					<xsl:when test="@display">
+						<xsl:value-of select="@display" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:apply-templates select="label" mode="markdown" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+		</xsl:if>
 		<xsl:if test="help">
 			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
 			<xsl:if test="help/@more">
@@ -132,13 +151,32 @@
 	<xsl:if test=". != ''">
 		<xsl:element name="a{if (@value) then concat('_', local:token(@value)) else ''}">
 			<xsl:attribute name="label"><xsl:apply-templates select="node()" mode="markdown" /></xsl:attribute>
+			<xsl:if test="ancestor::question/@display">
+				<xsl:attribute name="text_as_statement">
+					<xsl:choose>
+						<xsl:when test="@display">
+							<xsl:value-of select="@display" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="." />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+			</xsl:if>
 		</xsl:element>
 	</xsl:if>
 </xsl:template>
 
 <xsl:template match="yesno" mode="structure">
-	<a_false label="no" />
+	<a_false label="no">
+		<xsl:if test="@yes or @no">
+			<xsl:attribute name="text_as_statement" select="@no" />
+		</xsl:if>
+	</a_false>
 	<a_true label="yes">
+		<xsl:if test="@yes or @no">
+			<xsl:attribute name="text_as_statement" select="@yes" />
+		</xsl:if>
 		<xsl:if test="..//requirement[@level]">
 			<xsl:attribute name="requirement" select="..//requirement[@level]/local:requirementId(.)" separator=", " />
 		</xsl:if>
@@ -406,7 +444,7 @@
 </xsl:template>
 
 <!-- properties whose values are tokens rather than strings -->
-<xsl:template match="@required | @input_type | @pick" mode="syntax">
+<xsl:template match="@required | @input_type | @pick | @dataset_title" mode="syntax">
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>
@@ -461,6 +499,11 @@
 	<xsl:text>    text: "</xsl:text>
 	<xsl:apply-templates select="label" mode="markdown" />
 	<xsl:text>"&#xA;</xsl:text>
+	<xsl:if test="@display">
+		<xsl:text>    text_as_statement: "</xsl:text>
+		<xsl:value-of select="@display" />
+		<xsl:text>"&#xA;</xsl:text>
+	</xsl:if>
 	<xsl:apply-templates select="help" mode="translation" />
 	<xsl:text>    answers:&#xA;</xsl:text>
 	<xsl:choose>
@@ -473,8 +516,18 @@
 		<xsl:when test="yesno">
 			<xsl:text>      a_false:&#xA;</xsl:text>
 			<xsl:text>        text: no&#xA;</xsl:text>
+			<xsl:if test="yesno/@yes or yesno/@no">
+				<xsl:text>        text_as_statement: "</xsl:text>
+				<xsl:value-of select="yesno/@no" />
+				<xsl:text>"&#xA;</xsl:text>
+			</xsl:if>
 			<xsl:text>      a_true:&#xA;</xsl:text>
 			<xsl:text>        text: yes&#xA;</xsl:text>
+			<xsl:if test="yesno/@yes or yesno/@no">
+				<xsl:text>        text_as_statement: "</xsl:text>
+				<xsl:value-of select="yesno/@yes" />
+				<xsl:text>"&#xA;</xsl:text>
+			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select=".//option[@value]">
@@ -494,6 +547,21 @@
 				<xsl:apply-templates select="help" mode="translation">
 					<xsl:with-param name="indent" select="'        '" />
 				</xsl:apply-templates>
+				<xsl:if test="ancestor::question/@display">
+					<xsl:text>        text_as_statement: "</xsl:text>
+					<xsl:choose>
+						<xsl:when test="@display">
+							<xsl:value-of select="@display" />
+						</xsl:when>
+						<xsl:when test="label">
+							<xsl:apply-templates select="label" mode="markdown" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="." />
+						</xsl:otherwise>
+					</xsl:choose>
+					<xsl:text>"&#xA;</xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:otherwise>
 	</xsl:choose>
