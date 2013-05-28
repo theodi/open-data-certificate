@@ -1,7 +1,7 @@
 %section
   %h1 Certificates
 
-  = render partial: 'certificates_search/search_form', locals: { search: @search } if @search
+  = render partial: 'certificates/search_form', locals: { search: @search }
 
   - if @certificates.any?
 

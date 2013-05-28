@@ -20,7 +20,6 @@ OpenDataCertificate::Application.routes.draw do
       get 'badge', to: 'certificates#badge', as: 'badge'
     end
   end
-  resources :certificates_search, only: [:new, :create]
 
   devise_for :users, skip: :registration
   devise_scope :user do
