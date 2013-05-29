@@ -1,10 +1,8 @@
-- unless link[:requires_signed_in_user] && !user_signed_in?
-  - active = is_active_menu_link?(link)
-  %li{class: "#{'active' if active}"}
-    - if link[:post]
-      = form_tag link[:path] do
-        %button= link[:link_text]
-    - else
-      = link_to link[:link_text], link[:path]
-    - if active
-      .arrow-down
+- link_text = link.delete(:link_text)
+- link_path = link.delete(:path)
+
+- if link.delete(:post)
+  = form_tag link_path do
+    %button{ link }= link_text
+- else
+  = link_to link_text, link_path, link
