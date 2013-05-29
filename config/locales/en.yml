@@ -96,9 +96,11 @@ en:
     about_certificate:
       title: What does a certificate look like?
       description: It's an impressive badge that links to a page describing the characteristics of some data. Like how often it's updated, what format it's in and where it lives.
+      link: Read more
     about_odi:
       title: Who are the ODI?
       description: We're the Open Data Institute. We unlock supply and demand for open data and communicate its value to people so they can change the world with it. This is one of the ways we do that.
+      link: Get in touch
 
   certificates:
     certificates: Certificates
