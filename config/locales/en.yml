@@ -7,17 +7,17 @@ en:
   alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:
-    about: About
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
-    get_in_touch: Get in touch
     my_certificates: My certificates
 
   footmenu:
-    cookies:  Cookie policy
-    feedback: Feedback
-    privacy:  Privacy policy
-    terms:    Terms of use
+    cookies:      Cookie policy
+    feedback:     Feedback
+    privacy:      Privacy policy
+    about:        About
+    get_in_touch: Get in touch
+    terms:        Terms of use
 
   levels:
     none:
@@ -74,9 +74,14 @@ en:
     view_certificate: View certificate
 
   homepage:
+    dont_have_an_account: Don't have an account?
+    register_later_message: Don't worry, you can register later to save your work.
+    continue_without_registering: Continue without registering
+    create_an_account: Create an account
     title: Open data certificate
     tagline: Specifying what good open data looks like
     start_new_certificate: Start a new certificate
+    browse_certificates: Browse certificates
     browse_all_new_certificates: Browse all new certificates
     how_it_works: Here's how it works
     fill_out_questionnaire:
@@ -126,3 +131,9 @@ en:
     update_profile: Update my profile
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
+
+  about:
+    heading_about: About
+
+  contact:
+    heading_contact: Contact the ODI

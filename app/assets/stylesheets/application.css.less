@@ -26,7 +26,7 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
-@odiBlue: #33c5ff;
+@odiBlue: #00b7ff;
 @odiBlueLight: lighten(@odiBlue, 36%);
 @odiBlueDark: darken(@odiBlue, 20%);
 @odiBlueDarker: darken(@odiBlue, 30%);
@@ -43,6 +43,18 @@
 @btnPrimaryBackground:  @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
+@btnInfoBackgroundHighlight: @odiBlue;
+
+/*
+@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackgroundHighlight: @odiRed;
+@btnInfoBackground:  @odiBlue;
+@btnInfoBackgroundHighlight:  @odiBlue;
+
+.btn-mine {
+  .buttonBackground(@odiBlueDark, @odiRedDark);
+}
+*/
 
 @odiGrey: #8e8c8c;
 
@@ -121,11 +133,19 @@ dd {
 }
 
 .btn-info {
-  background: @odiBlueDark;
+  background: @odiBlue;
 }
 
 .btn-info:active, .btn-info:hover, .btn-info:focus {
-  background: @odiBlueDarker;
+  background: @odiBlueDark;
+}
+
+.btn-primary {
+  background: @odiRed;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+  background: @odiRedDark;
 }
 
 .btn-large {
@@ -216,6 +236,23 @@ dd {
   .last {
     border-right: none;
   }
+}
+
+.home-header-buttons {
+
+  .span4 {
+
+    text-align: center;
+
+    .btn-primary {
+
+      margin-left: -30px;
+      margin-top: -74px;
+
+    }
+
+  }
+
 }
 
 h3 {
