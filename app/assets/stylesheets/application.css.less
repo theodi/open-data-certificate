@@ -39,6 +39,8 @@
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
+@odiGreyLight: lighten(@odiGrey, 20%);
+@odiGreyLighter: lighten(@odiGrey, 40%);
 
 @btnPrimaryBackground:  @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
@@ -650,7 +652,62 @@ td.action {
   }
 }
 
+// Questionnaire (survey) view // 
 
+#surveyor{
+
+  padding-top:20px;
+
+  header {
+    margin:20px 0;
+  }
+
+  .subsection-label{
+    border-top:1px solid @odiGreyLighter;
+    color:@odiBlue;
+    font-weight: normal;
+    padding:20px 0;
+  }
+
+  ol,ul{
+    margin:auto;
+  }
+
+  .question-meta{
+    background-color:@odiBlueLight;
+  }
+
+  // brought in from main styles
+  label {
+    font-size: 22px;
+  }
+
+  input.string{
+    height: 60px;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 15px 0;
+  }
+
+  // custom
+  input.string{
+    width:100%;
+  }
+
+
+  // this is our label replcement (for the question of multiple answers)
+  .group_label{
+    font-size: 22px
+  }
+
+  label small
+  .group_label small{
+    color:@odiGrey;
+    font-size: 65%;
+  }
+
+
+}
 
 // Certificate view //
 
