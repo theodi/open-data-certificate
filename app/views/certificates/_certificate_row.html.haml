@@ -1,0 +1,24 @@
+- attained_level = certificate.attained_level || :none
+
+%li
+  = link_to certificate.name, certificate
+
+  %table.table
+    %tbody
+      %tr{class: "#{attained_level}-level"}
+        %td.level<
+          .certificate-badge
+          = t("levels.#{attained_level}.title")
+
+        %td.last-updated<
+          = t('certificates.last_updated')
+          = time_tag(certificate.created_at, certificate.created_at.to_date.to_formatted_s(:rfc822))
+
+        -# TODO: I anticipate someone with awesome CSS-fu will get rid of the stinky br tag from the next block... I've only put it in for quick layout... 0ne-thousand apologies :-)
+        %td.curator
+          - unless certificate.curator.blank?
+            #{t('certificates.curated_by')}:
+            %br/
+            #{certificate.curator}
+
+  = link_to t('certificates.view_certificate'), certificate
