@@ -24,10 +24,13 @@
           %h2
             1
             %small= t('homepage.fill_out_questionnaire.title')
+
           %p= t('homepage.fill_out_questionnaire.description')
+          %a.btn{href: "#start-cert-modal", role: "button", 'data-toggle' => "modal"} Launch demo modal
           = form_tag non_authenticated_start_questionnaire_path do
             %button.btn.btn-large.btn-primary= t('homepage.start_new_certificate')
 
+          
         .span4
           %h2
             2
@@ -47,3 +50,14 @@
       %p= t('homepage.about_certificate.description')
       %h2= t('homepage.about_odi.title')
       %p= t('homepage.about_odi.description')
+
+.modal.hide.fade#start-cert-modal
+  .modal-header
+    %h3 Modal header
+  .modal-body
+    .row-fluid
+      .span6
+        %h1 left
+      .span6
+        %h1 right
+  
