@@ -1,0 +1,5 @@
+- if flash.any?
+  .container
+    - flash.each do |type, value|
+      .flash.alert{ :class => "alert-#{type}" }
+        = value
