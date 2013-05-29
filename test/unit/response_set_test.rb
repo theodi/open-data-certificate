@@ -210,7 +210,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#title_determined_from_responses returns the answer of the response to the question referenced as 'dataTitle'" do
-    question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
+    question = FactoryGirl.create(:question, reference_identifier: 'testDataTitle')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'my response set title'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
@@ -220,7 +220,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#title returns the title determined from the responses if there is one" do
-    question = FactoryGirl.create(:question, reference_identifier: 'dataTitle')
+    question = FactoryGirl.create(:question, reference_identifier: 'testDataTitle')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'my response set title'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
@@ -234,6 +234,16 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set = FactoryGirl.create(:response_set)
 
     assert_equal expected_value, response_set.title
+  end
+
+  test "#curator_determined_from_responses returns the answer of the response to the question referenced as 'publisher'" do
+    question = FactoryGirl.create(:question, reference_identifier: 'testPublisher')
+    answer = FactoryGirl.create(:answer, question: question)
+    expected_value = 'my curator'
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.curator_determined_from_responses
   end
 
   test "#incomplete? returns true for an incomplete response_set" do
