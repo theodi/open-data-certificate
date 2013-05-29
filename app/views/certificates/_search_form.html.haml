@@ -1,0 +1,6 @@
+%section
+  = form_tag(certificates_path, :method => :post) do
+    %div.form-search
+      = label_tag :search, "#{t('certificates.search.search_label')}:"
+      = text_field_tag :search, search
+      = submit_tag t('certificates.search.submit_search'), :class => 'btn'

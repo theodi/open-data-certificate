@@ -29,7 +29,9 @@ Questions and Answers are associated to requirements by having their 'requiremen
 
 ##### survey
 
-* `:dataset_title` - Identifies which form element should be used to populate the dataset title
+* `:dataset_curator` - Identifies (by its 'reference_identifier' value) which form element should be used to populate the dataset curator field (currently `publisher`).
+
+* `:dataset_title` - Identifies (by its 'reference_identifier' value) which form element should be used to populate the dataset title field (currently `dataTitle`)
 
 * `:description` - Copy to be displayed above the questionnaire
 

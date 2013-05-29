@@ -22,18 +22,23 @@ en:
   levels:
     none:
       title: None
+      title_with_level: No level
       description: This data does not satisfy the fundamental requirements for open data
     basic:
       title: Basic
+      title_with_level: Basic level
       description: this data satisfies the fundamental requirements for open data
     pilot:
       title: Pilot
+      title_with_level: Pilot level
       description: this data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
     standard:
       title: Standard
+      title_with_level: Standard level
       description: this data satisfies the requirements for routinely published open data that encourages reuse.
     exemplar:
       title: Exemplar
+      title_with_level: Exemplar level
       description: this data satisfies the requirements for key information infrastructure.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
@@ -90,10 +95,22 @@ en:
       title: About the ODI
       description: About the ODI copy goes here.
 
-  certificate_search:
-    heading__search_certificates: Search certificates
-    search_label: Search for
-    submit_search: Go
+  certificates:
+    certificates: Certificates
+    curated_by: Curated by
+    last_updated: Last updated
+    latest_certificates: Latest certificates
+    no_certificates_found: No certificates found
+    view_certificate: View
+    search:
+      search_label: Search for
+      submit_search: Go
+
+  certificate:
+    on_date: "on %{date}"
+    self_certified: self certified
+    this_data_has_achieved: This data has achieved
+    which_means: which means
 
   authentication:
     sign_in: Sign in
