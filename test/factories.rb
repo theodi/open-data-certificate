@@ -27,7 +27,8 @@ FactoryGirl.define do
     s.description "A simple survey for testing"
     s.access_code { FactoryGirl.generate :unique_survey_access_code }
     s.survey_version 0
-    s.dataset_title 'q_testDataTitle'
+    s.dataset_title 'testDataTitle'
+    s.dataset_curator 'testPublisher'
 
     after(:create) do |survey, evaluator|
       FactoryGirl.create_list(:survey_section, 3, survey: survey)
