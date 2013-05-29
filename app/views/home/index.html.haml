@@ -25,18 +25,27 @@
             %small= t('homepage.fill_out_questionnaire.title')
 
           %p= t('homepage.fill_out_questionnaire.description')
-          = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
 
         .span4
           %h2
             2
             %small= t('homepage.generate_certificate.title')
           %p= t('homepage.generate_certificate.description')
+
         .span4.last
           %h2
             3
             %small= t('homepage.share_open_data.title')
           %p= t('homepage.share_open_data.description')
+
+.container.home-header-buttons
+  .row
+    .span4
+      = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+    .span4
+    .span4
+      %p.btn.btn-primary Browse certificates
+
 .container.main
   .row
     .span6
