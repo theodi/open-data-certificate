@@ -81,6 +81,7 @@ en:
     title: Open data certificate
     tagline: Specifying what good open data looks like
     start_new_certificate: Start a new certificate
+    browse_certificates: Browse certificates
     browse_all_new_certificates: Browse all new certificates
     how_it_works: Here's how it works
     fill_out_questionnaire:

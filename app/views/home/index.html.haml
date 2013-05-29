@@ -44,7 +44,7 @@
       = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
     .span4
-      %p.btn.btn-primary Browse certificates
+      = link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
 
 .container.main
   .row
