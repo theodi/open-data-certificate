@@ -32,24 +32,25 @@
 @odiBlueDarker: darken(@odiBlue, 30%);
 
 @odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 20%);
+@odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
 
-@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackground: @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
-@btnInfoBackground:  @odiBlue;
+@btnInfoBackground: @odiBlue;
 
 @odiGrey: #8e8c8c;
 
-@basic: #0DBD37;
-@pilot: #EF3AAB;
-@standard: #2254F3;
-@exemplar: #F9BC26;
+@basic: #0dbd37;
+@pilot: #ef3aab;
+@standard: #2254f3;
+@exemplar: #f9bc26;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
@@ -257,7 +258,7 @@ hr.heavy {
       padding: 20px;
     }
 
-    a:hover {
+    a:hover, a.active {
       background-color: @odiRed;
     }
   }
@@ -327,6 +328,64 @@ hr.heavy {
   -webkit-box-shadow: none;
   -moz-box-shadow:none;
   box-shadow: none;
+}
+
+nav .dropdown-menu-button {
+  z-index: 10;
+  position: relative;
+}
+
+#login, #register {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 450px;
+  padding: 30px 25px;
+  background: @odiRed;
+  color: white;
+
+  label {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 1px solid white;
+    background: @odiRedLight;
+    height: 45px;
+    width: 425px;
+    margin-bottom: 20px;
+  }
+
+  .form-field-inline {
+    float: left;
+
+    label {
+      font-size: 15px;
+      display: inline;
+    }
+  }
+
+  .btn-primary {
+    float: right;
+    background: @odiPomegranate;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow:none;
+    box-shadow: none;
+    padding: 4px 15px;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+#login {
+  display: none;
 }
 
 header {
@@ -405,13 +464,7 @@ section {
   }
 }
 
-#login {
-  display: none;
-}
 
-#register {
-  display: none;
-}
 
 
 // Tables //
