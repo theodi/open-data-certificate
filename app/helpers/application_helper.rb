@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  # the class for the main div (allows you to override .container when you
+  # want more control)
+  def main_container_class
+    className = content_for(:main_container_class)
+    className.blank? ? 'container main-default' : className
+  end
+
   def main_menu_navigation
     links = [
       new_certificate_link_hash,

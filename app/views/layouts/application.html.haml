@@ -30,20 +30,16 @@
             %ul.nav.pull-right
               = main_menu_navigation
 
-    - if content_for?(:header)
-      = yield(:header)
-    - else
-      %header
-        .container
-          %h1= yield(:header_title)
-
     .whiteout
-      - if flash.any?
-        .container
-          - flash.each do |type, value|
-            .flash.alert{ :class => "alert-#{type}" }
-              = value
-      
+      - if content_for?(:header)
+        -# be sure to include flashes somewhere when overriding this
+        = yield(:header)
+
+      - else
+        %header
+          .container
+            %h1= yield(:header_title)
+        = render :partial => 'shared/flashes'
 
       #main{:class => main_container_class}
         = yield
