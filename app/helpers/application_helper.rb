@@ -1,13 +1,13 @@
 module ApplicationHelper
   def main_menu_navigation
     links = [
-      { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true },
-      { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true},
-      { link_text: t('menu.browse_all_certificates'), path: certificates_path},
-      { link_text: t('menu.about'), path: '/about'},
-      { link_text: t('menu.get_in_touch'), path: '/contact'},
+      new_certificate_link_hash,
+      { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
+      { link_text: t('menu.browse_all_certificates'), path: certificates_path },
+      { link_text: t('menu.about'), path: '/about' },
+      { link_text: t('menu.get_in_touch'), path: '/contact' },
     ]
-    render partial: 'layouts/main_menu_navigation_link', collection: links, as: :link
+    render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
   end
 
   def is_active_menu_link?(link)
@@ -18,7 +18,20 @@ module ApplicationHelper
     return_value
   end
 
-	def body_class
-		content_for :body_class
-	end
+  def body_class
+    content_for :body_class
+  end
+
+  def new_certificate_link(options={})
+    render partial: 'layouts/main_menu_navigation_link', locals: { link: new_certificate_link_hash(options) }
+  end
+
+  private
+  def new_certificate_link_hash(options={})
+    if user_signed_in?
+      { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true }
+    else
+      { :link_text => t('menu.create_certificate'), :path => '#start-cert-modal', 'data-toggle' => :modal }
+    end.merge(options)
+  end
 end
