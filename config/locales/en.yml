@@ -88,3 +88,9 @@ en:
     update_profile: Update my profile
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
+
+  about:
+    heading_about: About
+
+  contact:
+    heading_contact: Contact the ODI
