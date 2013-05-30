@@ -28,11 +28,11 @@
 
 @odiBlue: #00b7ff;
 @odiBlueLight: lighten(@odiBlue, 36%);
-@odiBlueDark: darken(@odiBlue, 20%);
-@odiBlueDarker: darken(@odiBlue, 30%);
+@odiBlueDark: darken(@odiBlue, 5%);
+@odiBlueDarker: darken(@odiBlue, 20%);
 
 @odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 20%);
+@odiRedDark: darken(@odiRed, 3%);
 
 @odiCrimson: #d30102;
 
@@ -46,17 +46,6 @@
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
 @btnInfoBackgroundHighlight: @odiBlue;
-
-/*
-@btnPrimaryBackground:  @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;
-@btnInfoBackground:  @odiBlue;
-@btnInfoBackgroundHighlight:  @odiBlue;
-
-.btn-mine {
-  .buttonBackground(@odiBlueDark, @odiRedDark);
-}
-*/
 
 @odiGrey: #8e8c8c;
 
@@ -201,7 +190,7 @@ dd {
   padding-bottom: 0;
 
   h1 {
-    color: @odiBlueDark;
+    color: @odiBlueDarker;
     font-size: 36px;
     margin-bottom: 30px;
     text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
@@ -211,6 +200,7 @@ dd {
     
     /* Background stripes (image has 30px of space on left to align) */
     background: url(/assets/background-home-header.gif) repeat-y center;
+    margin-bottom: 20px;
 
     .span4 {
 
@@ -233,7 +223,7 @@ dd {
 
     h2 {
       font-size: 70px;
-      color: @odiBlueDark;
+      color: @odiBlueDarker;
       font-weight: bold;
       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
@@ -889,3 +879,57 @@ strong.certificate-level {
     text-align: center;
 }
 
+/*
+//
+// ***** About Page *****
+//
+*/
+.container.about {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h1 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+
+    }
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 22px;
+      font-weight: normal;
+      line-height: 26px;
+      margin: 15px 0 20px 0;
+
+    }
+
+    ul { margin-top: 10px; }
+
+    ul.kitemarks {
+
+      margin: 20px 0 10px 0;
+
+      li {
+
+        list-style: none;
+        padding-left: 141px;
+        padding-top: 16px;
+        min-height: 117px;
+        margin-bottom: 10px;
+
+      }
+
+      li.kitemark1 { background: url(/assets/ODI-kitemark-level1.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/ODI-kitemark-level2.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/ODI-kitemark-level3.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/ODI-kitemark-level4.png) no-repeat top left; }
+
+    }
+
+  }
+
+}
