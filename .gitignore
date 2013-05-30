@@ -29,3 +29,9 @@ prototype/surveyor-result.html
 prototype/translations/odc.UK.en.xml
 
 prototype/merged.xml
+
+# RubyMine cruft
+.idea/
+
+# Chef secrets and that
+.chef/
