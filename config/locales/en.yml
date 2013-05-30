@@ -79,26 +79,28 @@ en:
     continue_without_registering: Continue without registering
     create_an_account: Create an account
     title: Open data certificate
-    tagline: Specifying what good open data looks like
-    start_new_certificate: Start a new certificate
+    tagline: Find out what shareable data really looks like
+    start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
-    browse_all_new_certificates: Browse all new certificates
+    browse_all_new_certificates: Browse all certificates
     how_it_works: Here's how it works
     fill_out_questionnaire:
-      title: Fill out the questionnaire
-      description: We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+      title: Publish your data
+      description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
     generate_certificate:
-      title: Generate a certificate
-      description: We will assess your level of open data and generate a certificate which will be added to our archives certificate which will be added to our archives.
+      title: Check it with our questionnaire
+      description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
     share_open_data:
-      title: Share your open data
-      description: You can embed your certificate on your website or link to the archive using one of our custom badges  the archive using one of our custom badges.
+      title: Share it with a certificate
+      description: Your answers determine which of our four prestigious certificates you generate. Each one means success in a unique way and proves you're a leader in open data.
     about_certificate:
-      title: About the certificate
-      description: About certificate copy goes here.
+      title: What does a certificate look like?
+      description: It's an impressive badge that links to a page describing the characteristics of some data. Like how often it's updated, what format it's in and where it lives.
+      link: Read more
     about_odi:
-      title: About the ODI
-      description: About the ODI copy goes here.
+      title: Who are the ODI?
+      description: We're the Open Data Institute. We unlock supply and demand for open data and communicate its value to people so they can change the world with it. This is one of the ways we do that.
+      link: Get in touch
 
   certificates:
     certificates: Certificates
