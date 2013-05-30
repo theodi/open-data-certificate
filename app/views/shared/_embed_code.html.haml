@@ -1,8 +1,8 @@
 .modal.hide.fade.embed-code{:id => "embed-code-#{certificate.id}"}
   .modal-header
-    %h3 Embeddable certificate
+    %h3= t("certificate.embeddable_certificate")
   .modal-body
     %h1= certificate.name
-    %p Use the code below to embed this certificate on your site:
+    %p= t("certificate.embed_instructions")
     %textarea= render(:partial => 'shared/embed_iframe', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
-    = link_to 'View embeddable page', embed_certificate_path(certificate), :class => 'btn btn-info'
+    = link_to t("certificate.view_embed_page"), embed_certificate_path(certificate), :class => 'btn btn-info'

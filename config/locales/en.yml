@@ -119,6 +119,9 @@ en:
     self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
+    embeddable_certificate: Embeddable certificate
+    embed_instructions: Use the code below to embed this certificate on your site
+    view_embed_page: View embeddable page
 
   authentication:
     sign_in: Sign in
