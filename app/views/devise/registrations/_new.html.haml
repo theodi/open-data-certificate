@@ -1,5 +1,7 @@
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
+- remote ||= false
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => remote) do |f|
+  - unless remote
+    = devise_error_messages!
 
   .form-field
     = f.label :email

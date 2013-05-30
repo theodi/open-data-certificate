@@ -17,7 +17,7 @@ OpenDataCertificate::Application.routes.draw do
   resources :certificates
   resources :certificates_search, only: [:new, :create]
 
-  devise_for :users, skip: :registration
+  devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
     resource :registration,
              only: [:new, :create, :edit, :update],

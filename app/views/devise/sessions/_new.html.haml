@@ -1,4 +1,5 @@
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+- remote ||= false
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :html => { :id => "login_user" }) do |f|
   = devise_error_messages!
 
   .form-field

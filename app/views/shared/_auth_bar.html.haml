@@ -5,9 +5,7 @@
 - else
   %li.dropdown-menu-button
     = link_to('Register', new_user_registration_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#register")
-    #register
-      %div= render 'devise/registrations/new', :resource => User.new, :resource_name => 'user'
+    #register= render 'devise/registrations/new', :resource => User.new, :resource_name => 'user', :remote => 'true'
   %li.dropdown-menu-button
     = link_to('Login', new_user_session_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#login")
-    #login
-      %div= render 'devise/sessions/new', :resource => User.new, :resource_name => 'user'
+    #login= render 'devise/sessions/new', :resource => User.new, :resource_name => 'user', :remote => 'true'
