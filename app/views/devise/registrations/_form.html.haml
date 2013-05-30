@@ -1,6 +1,6 @@
 - remote ||= false
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => remote) do |f|
-  - unless remote
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => remote, :format => :json, :html => { :id => "register_user" }) do |f|
+  .registration_notices
     = devise_error_messages!
 
   .form-field
