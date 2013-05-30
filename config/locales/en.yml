@@ -109,6 +109,7 @@ en:
     latest_certificates: Latest certificates
     no_certificates_found: No certificates found
     view_certificate: View
+    embed_this_on_your_site: Embed this on your site
     search:
       search_label: Search for
       submit_search: Go
