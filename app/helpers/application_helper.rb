@@ -19,9 +19,7 @@ module ApplicationHelper
   def is_active_menu_link?(link)
     # fudged method to return 'true' the first time it's called, and then 'false' every time after that, to fake an 'active' menu item
     # TODO: write the code to calculate whether a menu item is active
-    return_value = !@is_active_menu_link
-    @is_active_menu_link = true
-    return_value
+    Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
   end
 
   def body_class
@@ -37,7 +35,7 @@ module ApplicationHelper
     if user_signed_in?
       { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true }
     else
-      { :link_text => t('menu.create_certificate'), :path => '#start-cert-modal', 'data-toggle' => :modal }
+      { :link_text => t('menu.create_certificate'), :path => non_authenticated_start_questionnaire_path(anchor: 'start-cert-modal'), 'data-toggle' => :modal }
     end.merge(options)
   end
 
