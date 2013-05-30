@@ -1,4 +1,4 @@
 - content_for :header_title, t("authentication.sign_in")
 
-= render "new"
+= render "form", locals: {remote: !!request.xhr?}
 = render "devise/shared/links"

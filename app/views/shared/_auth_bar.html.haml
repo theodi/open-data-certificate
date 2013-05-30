@@ -8,4 +8,4 @@
     #register= render 'devise/registrations/new', :resource => User.new, :resource_name => 'user', :remote => 'true'
   %li.dropdown-menu-button
     = link_to('Login', new_user_session_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#login")
-    #login= render 'devise/sessions/new', :resource => User.new, :resource_name => 'user', :remote => 'true'
+    #login= render 'devise/sessions/form', :resource => User.new, :resource_name => 'user', :remote => 'true'

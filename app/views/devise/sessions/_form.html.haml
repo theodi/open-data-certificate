@@ -1,6 +1,6 @@
 - remote ||= false
-= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :html => { :id => "login_user" }) do |f|
-  = devise_error_messages!
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :format => :json, :html => { :id => "sign_in_user" }) do |f|
+  .sign_in_notices
 
   .form-field
     = f.label :email

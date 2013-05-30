@@ -21,5 +21,21 @@ module ApplicationHelper
 
 	def body_class
 		content_for :body_class
-	end
+  end
+
+  # devise mapping
+  def resource_name
+    :user
+  end
+
+  # devise mapping
+  def resource
+    @resource ||= User.new
+  end
+
+  # devise mapping
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
 end
