@@ -65,8 +65,37 @@
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
+/*
+//
+// ***** Modal - Create certificate *****
+//
+*/
+.modal {
 
+  background: @odiBlue;
+  width: 788px;
+  margin-left: -394px;
+  .border-radius(0);
 
+}
+
+.modal-header {
+
+  border-bottom: 0;
+  margin: 30px 30px 40px 30px;
+  padding: 0; 
+
+  .close { display: none; }
+
+  h3 {
+
+    color: #fff;
+    font-size: 36px;
+    font-weight: normal;
+
+  }
+
+}
 
 /************************************************
     Bootstrap --> Rails
