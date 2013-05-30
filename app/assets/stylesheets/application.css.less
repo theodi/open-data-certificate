@@ -259,6 +259,26 @@ dd {
 
 }
 
+.homepage-about-content {
+
+  h2 {
+
+    font-weight: normal;
+
+  }
+
+  h2.about-certificate { margin-top: -7px; }
+
+  h2.about-odi {
+
+      border-top: 1px solid #e1e1e1;
+      padding-top: 20px;
+      margin-top: 25px;
+
+  }
+
+}
+
 h3 {
   font-size: 19px;
 }
@@ -395,26 +415,55 @@ header {
 #footer {
   background-color: #000;
   font-size: 0.88em;
-     color: #fff;
+  color: #adaeaf;
+  padding-top: 40px;
+  padding-bottom: 52px;
+
+  .footer-content {
+
+    margin-left: 0;
+
+    h1 {
+
+      /* ODI logo, hide text */
+      background: url(/assets/logo-footer.png) no-repeat top left;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 0 0 30px 0;
+      width: 204px; height: 49px;
+
+      a { display: block; }
+
+    }
+
+  }
+  .footer-nav { margin-left: 30px; }
 
   a {
-    color: #fff;
+    color: #adaeaf;
     text-decoration: none;
   }
 
+  a:hover { color: #fff; }
+
   ul {
     list-style: none outside none;
-    margin: 10px 0;
+    margin: -4px 0 0 0;
 
     li {
       display: inline;
-      margin: 0 10px;
+      margin: 0 0 0 20px;
     }
   }
 
   p {
-    margin: 10px;
+    margin: 0px;
+    font-size: 16px;
   }
+
+  p.license { margin-top: 30px; }
+
 }
 
 section {

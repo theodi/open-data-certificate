@@ -50,11 +50,15 @@
   .row
     .span6
       %iframe{width: 560, height: 315, src: 'http://www.youtube.com/embed/MRZE6X-ZG6Q', frameborder: 0, allowfullscreen: 'allowfullscreen'}
-    .span6
-      %h2= t('homepage.about_certificate.title')
-      %p= t('homepage.about_certificate.description')
-      %h2= t('homepage.about_odi.title')
-      %p= t('homepage.about_odi.description')
+    .span6.homepage-about-content
+      %h2.about-certificate
+        = link_to t('homepage.about_certificate.title'), certificates_path
+      %p.about-certificate= t('homepage.about_certificate.description')
+      = link_to t('homepage.about_certificate.link'), certificates_path, class: ['about-certificate']
+      %h2.about-odi
+        = link_to t('homepage.about_odi.title'), '/contact'
+      %p.about-odi= t('homepage.about_odi.description')
+      = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
 
 .modal.hide.fade#start-cert-modal
   .modal-header
