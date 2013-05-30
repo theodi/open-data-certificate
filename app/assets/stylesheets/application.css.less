@@ -198,6 +198,9 @@ dd {
 .home {
   text-align: center;
 
+  /* Remove bottom padding so background image can hit bottom */
+  padding-bottom: 0;
+
   h1 {
     color: @odiBlueDark;
     font-size: 36px;
@@ -206,7 +209,17 @@ dd {
   }
 
   .steps {
-    // PLACEHOLD - background image with double lines
+    
+    /* Background stripes (image has 30px of space on left to align) */
+    background: url(/assets/background-home-header.gif) repeat-y center;
+
+    .span4 {
+
+      /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
+      padding-bottom: 20px;
+
+    }
+
   }
 
   .span4 {
@@ -223,7 +236,7 @@ dd {
       font-size: 70px;
       color: @odiBlueDark;
       font-weight: bold;
-       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
+      text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
 
       small {
@@ -248,9 +261,27 @@ dd {
 
 .home-header-buttons {
 
+  .row {
+
+    height: 88px;
+
+  }
+
   .span4 {
 
     text-align: center;
+
+    .logo {
+
+      /* Small ODI logo, hide text */
+      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: -34px auto 0 auto;
+      width: 76px; height: 68px;
+
+    }
 
     .btn-primary {
       margin-top: -20px;
@@ -533,6 +564,10 @@ section {
 
 .whiteout {
   background-color:rgba(255,255,255,0.65);
+
+  /* Make sure there's a gap between bottom of content and top of footer */
+  padding-bottom: 55px;
+
 }
 
 .hero-unit {
