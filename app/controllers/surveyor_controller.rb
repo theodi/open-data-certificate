@@ -56,7 +56,8 @@ class SurveyorController < ApplicationController
         return redirect_with_message(
           surveyor.edit_my_survey_path(
             :anchor => anchor_from(params[:section]),
-            :section => section_id_from(params)
+            :section => section_id_from(params),
+            :highlight_mandatory => true
           ),
           :warning, message
         )

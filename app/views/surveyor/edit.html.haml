@@ -5,7 +5,6 @@
   / header overridden
 - content_for(:main_container_class) {'non-container'}
 
-
 = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
   .affixed
@@ -20,7 +19,7 @@
         
   = render :partial => 'shared/flashes'
 
-  #surveyor
+  #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container

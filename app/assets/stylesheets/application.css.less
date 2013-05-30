@@ -48,6 +48,7 @@
 @odiRedDark: darken(@odiRed, 20%);
 
 @odiCrimson: #d30102;
+@odiCrimsonLight: lighten(@odiCrimson, 53%);
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
@@ -736,7 +737,6 @@ td.action {
       margin:0;
     }
 
-    // not used yet
     &.inactive{
       background-color:@odiGrey;
     }
@@ -801,6 +801,15 @@ td.action {
     
     // outline: 1px solid @odiBlueLight;
     background-color: @odiBlueLighter;
+  }
+
+  &.highlight-mandatory{
+    .mandatory{
+      background-color:@odiCrimsonLight;
+      .completed{
+        background-color:none;
+      }
+    }
   }
 
 
