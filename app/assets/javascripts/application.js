@@ -70,4 +70,8 @@ $(function(){
     return false;
   });
 
+  $('.embed-code textarea').click(function() {
+    this.select();
+  });
+
 });
