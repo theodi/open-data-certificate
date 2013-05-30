@@ -21,13 +21,13 @@ OpenDataCertificate::Application.routes.draw do
     end
   end
 
-  devise_for :users, skip: :registration
+  devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
     resource :registration,
              only: [:new, :create, :edit, :update],
              path: 'users',
              path_names: { new: 'sign_up' },
-             controller: 'devise/registrations',
+             controller: 'registrations',
              as: :user_registration do
       get :cancel
     end

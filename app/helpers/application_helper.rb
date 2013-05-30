@@ -30,6 +30,25 @@ module ApplicationHelper
     render partial: 'layouts/main_menu_navigation_link', locals: { link: new_certificate_link_hash(options) }
   end
 
+	def body_class
+		content_for :body_class
+  end
+
+  # devise mapping
+  def resource_name
+    :user
+  end
+
+  # devise mapping
+  def resource
+    @resource ||= User.new
+  end
+
+  # devise mapping
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
