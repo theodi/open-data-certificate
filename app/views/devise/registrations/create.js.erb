@@ -1,1 +1,5 @@
-$('.registration_form_container').html('<%= escape_javascript(render partial: 'devise/registrations/form', locals: {remote: true})%>');
+<% if resource.errors.empty? %>
+  top.location.href='<%= escape_javascript(after_sign_in_path_for(resource)) %>';
+<% else %>
+  $('.registration_form_errors').html('<%= escape_javascript(render partial: 'devise/registrations/form_errors')%>');
+<% end %>

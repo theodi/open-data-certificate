@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  respond_to :js, :html
+
   def create
     if request.xhr?
       resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
@@ -12,10 +14,10 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
-    return render :json => {:success => true}
+    render :create, locals: {success: true}
   end
 
   def failure
-    return render :json => {:success => false, :errors => flash.map{|k,v|v}}
+    render :create, locals: {success: false, errors: flash.map{|k,v|v}}
   end
 end
