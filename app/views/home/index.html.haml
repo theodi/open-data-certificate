@@ -62,18 +62,3 @@
         = link_to t('homepage.about_odi.title'), '/contact'
       %p.about-odi= t('homepage.about_odi.description')
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
-
-.modal.hide.fade#start-cert-modal
-  .modal-header
-    %h3= t('homepage.start_new_certificate')
-  .modal-body
-    .row-fluid
-      .span6
-        -# TODO: render partial for login form here when it's done...
-        render partial for login form here when it's done...
-      .span6
-        %h1= t('homepage.dont_have_an_account')
-        %p= t('homepage.register_later_message')
-        = form_tag non_authenticated_start_questionnaire_path do
-          %button= t('homepage.continue_without_registering')
-        = link_to t('homepage.create_an_account'), new_user_registration_path, :class => 'btn'

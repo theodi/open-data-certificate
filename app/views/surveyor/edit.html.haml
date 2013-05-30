@@ -27,8 +27,9 @@
         %p.lead.span8= @survey.translation(I18n.locale)[:description]
 
     = render 'partials/dependents' unless @dependents.empty?
-    - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
-      = cache("section_#{@section.id}"){ render "/partials/section", :f => f }
+    - if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+      = cache("section_#{@section.id}") do
+        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
 

@@ -42,6 +42,8 @@
       #main{:class => main_container_class}
         = yield
 
+        = render :partial => 'layouts/start_certificate_modal'
+
     %footer#footer
       .container
         .span8.footer-content
