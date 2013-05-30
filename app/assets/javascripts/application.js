@@ -25,20 +25,65 @@ $(function(){
 	if(bleed.size()) skrollr.init({forceHeight: false});
 
 
-  // binding the text of this to the value of a
-  // particular input (keyed by data-reference-identifier)
-  $('[data-bind-to-input]').each(function(){
-    var $bound = $(this),
-        original = $bound.text();
 
-    // not very efficient, as a new listener for every bound item though
-    // we're only using this once, on one page, so it's not so bad
-    $(document).on('keyup', '[data-reference-identifier]', function(){
-      $bound.text($(this).val() || original);
+  //////
+  // Questionnaire 
+
+
+  /*
+    The fieldset surrounding an input is the base of a question being 'active', it will
+      - have an 'active' class added
+      - emit 'odc.focus' & 'odc.blur' events (?)
+  */
+
+
+  // trigger the highlighting of fieldsets
+  $('#surveyor')
+    .on('focus', 'input', function(){
+      $(this).parents('fieldset').addClass('active').trigger('_focus');
+    })
+    .on('blur', 'input', function(){
+      $(this).parents('fieldset').removeClass('active').trigger('_blur');
     });
 
+
+  // a map from reference_id to the relevant fieldset (DOM, not $wrapped)
+  var reference_id_els = {};
+  var $baseFieldsets = $('[data-reference-identifier]fieldset');
+  $baseFieldsets.each(function(){
+    reference_id_els[$(this).data('reference-identifier')] = this;
   });
 
+  // binding the text of this to the value of a
+  // particular input, keyed by data-reference-identifier
+  // (this is for the the title to show the questionnaire title)
+  $('[data-bind-to-input]').each(function(){
+    var $bound = $(this),
+        original = $bound.text(),
+        el = reference_id_els[$bound.data('bind-to-input')];
+
+    $(el).find('input').on('keyup', function(){
+      $bound.text($(this).val() || original);
+    });
+  });
+
+
+  // elements that have to be shown along with the fieldsets
+  $('[data-meta-for]').each(function(){
+    var ref_id = $(this).data('meta-for'),
+        $el = $(reference_id_els[ref_id]),
+        metas = $el.data('metas') || [];
+    metas.push(this);
+    $el.data('metas', metas);
+  });
+  $baseFieldsets.on('_focus', function(){
+    $($(this).data('metas')).show();
+  }).on('_blur', function(){
+    $($(this).data('metas')).hide();
+  });
+
+
+  // deal with accordion section changes
   $('.survey-section .collapse').on('show', function(){
     $(this).prev().removeClass('inactive');
   }).on('hidden', function(){
