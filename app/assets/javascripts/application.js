@@ -24,4 +24,8 @@ $(function(){
 
 	if(bleed.size()) skrollr.init({forceHeight: false});
 
+  $('.embed-code textarea').click(function() {
+    this.select();
+  });
+
 });

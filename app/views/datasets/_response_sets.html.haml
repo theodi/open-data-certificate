@@ -6,3 +6,10 @@
       %th.previous-title{colspan: 6}= t('dashboard.previous_versions')
     - response_sets.each do |response_set|
       =render partial: 'datasets/response_set_row', locals: {response_set: response_set}
+
+- if response_set.newest_completed_in_dataset? && response_set.certificate
+  =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
+
+- response_sets.each do |response_set|
+  - if response_set.newest_completed_in_dataset? && response_set.certificate
+    =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}

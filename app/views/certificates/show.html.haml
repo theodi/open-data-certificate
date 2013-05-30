@@ -1,6 +1,6 @@
 .certificate.hero-unit{class:@certificate.attained_level+'-level'}
 
-  = link_to(t("certificates.embed_this_on_your_site"), embed_certificate_path(@certificate), :class => 'btn btn-small btn-info pull-right')
+  = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
 
   .certificate-badge.centered
 
@@ -18,3 +18,5 @@
       = t("levels.#{@certificate.attained_level}.description")
 
 =render @certificate.response_set
+
+=render :partial => 'shared/embed_code', :locals => {:certificate => @certificate}

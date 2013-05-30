@@ -135,25 +135,29 @@ dd {
 }
 
 .btn-small {
-  text-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+  &, &:active, &:hover, &:focus {
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 .btn-info {
   background: @odiBlue;
-}
 
-.btn-info:active, .btn-info:hover, .btn-info:focus {
-  background: @odiBlueDark;
-}
+  &.btn-unstyled {
+    &, &:active, &:hover, &:focus {
+      font-size: 15px;
+      color: @odiBlue;
+      padding: 0;
+      background: none;
+    }
+  }
 
-.btn-info.btn-unstyled {
-  font-size: 15px;
-  color: @odiBlue;
-  padding: 0;
-  background: none;
+  &:active, &:hover, &:focus {
+    background: @odiBlueDark;
+  }
 }
 
 .btn-primary {
@@ -400,10 +404,17 @@ header {
   }
 }
 
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
 .container.main {
   margin-top: 50px;
 }
-
 
 #footer {
   background-color: #000;
@@ -513,6 +524,7 @@ th {
 // Forms //
 
 .main-default {
+  margin-top: 30px;
 
   .form-field {
     .clearfix;
@@ -847,5 +859,12 @@ strong.certificate-level {
   .certificate.hero-unit {
     width: auto;
     margin-top: 30px;
+  }
+}
+
+.embed-code {
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
   }
 }
