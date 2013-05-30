@@ -45,4 +45,13 @@ $(function(){
     $(this).prev().addClass('inactive');
   });
 
+  $('.affixed').each(function(){
+    var $this = $(this),
+        h = $this.height();
+
+    // lock the height and affix the child node
+    $this.height(h).children().affix({ offset: $this.position() });
+
+  });
+
 });

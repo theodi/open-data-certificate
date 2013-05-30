@@ -8,15 +8,16 @@
 
 = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
-  %header
-    .container
-      .row
-        .span9
-          %h1 New Certificate
-          %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
-        .span3
-          = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
-      
+  .affixed
+    %header
+      .container
+        .row
+          .span9
+            %h1 New Certificate
+            %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
+          .span3
+            = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+        
   = render :partial => 'shared/flashes'
 
   #surveyor
