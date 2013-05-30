@@ -16,6 +16,12 @@
   %li.container
     -# if we are using the default renderer, we will display the question text within that
     = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} row", 'data-reference-identifier' => q.reference_identifier do
+
+      -# for multiple answers, we want to give the question once
+      -# at the start of the questions
+      - if q.pick == 'one' or q.pick == 'any'
+        %label= question_text
+
       .span8
         - case renderer
         - when  :image, :label, :default_label, :inline_label, :repeater_label
@@ -29,9 +35,6 @@
             = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }
         - else # :default, :inline, :inline_default
           - if q.pick == "one"
-            -# for multiple answers, we want to give the question once
-            -# at the start of the questions
-            %label= question_text
             - r = response_for(@response_set, q, nil, rg)
             - i = response_idx  # increment the response index since the answer partial skips for q.pick == one
             = f.semantic_fields_for i, r do |ff|
