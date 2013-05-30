@@ -19,9 +19,9 @@ $(function(){
 	// hack
 	var bleed = $('body.odi-bleed').attr({
 		'data-0':'background-position:0 -450px',
-		'data-2500':'background-position:0 1000px',
+		'data-2500':'background-position:0 1000px'
 	});
 
 	if(bleed.size()) skrollr.init({forceHeight: false});
-})
 
+});

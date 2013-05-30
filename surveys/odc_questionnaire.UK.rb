@@ -5,7 +5,7 @@ survey 'Open Data Certificate Questionnaire',
        :dataset_title => 'dataTitle' do
   translations :en => :default
 
-  section_general 'General Information' do
+  section_general 'General Information', :display_header => false do
 
     q_dataTitle 'What\'s this data called?',
                 :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.'

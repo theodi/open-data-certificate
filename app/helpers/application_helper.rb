@@ -1,4 +1,12 @@
 module ApplicationHelper
+
+  # the class for the main div (allows you to override .container when you
+  # want more control)
+  def main_container_class
+    className = content_for(:main_container_class)
+    className.blank? ? 'container main-default' : className
+  end
+
   def main_menu_navigation
     links = [
       new_certificate_link_hash,
@@ -32,4 +40,5 @@ module ApplicationHelper
       { :link_text => t('menu.create_certificate'), :path => '#start-cert-modal', 'data-toggle' => :modal }
     end.merge(options)
   end
+
 end
