@@ -49,30 +49,6 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def after_sign_in_path_for(resource)
-    # If the user has a survey stored in their session, assign it to them and redirect to the survey,
-    # deleting the session id even if the response set isn't found
-    case
-      when session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
-
-        # Assign the response set to the user, creating a dataset for it
-        response_set.assign_to_user!(current_user)
-
-        return surveyor.edit_my_survey_path(
-          :survey_code => response_set.survey.access_code,
-          :response_set_code => response_set.access_code
-        )
-
-
-      when params[:form_id] == 'start_cert_modal_form'
-        # if the user has authenticated from the start_cert_modal_form then redirect to the start_questionnaire path
-        authenticated_start_questionnaire_path
-
-      else
-        dashboard_path
-    end
-  end
-
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
