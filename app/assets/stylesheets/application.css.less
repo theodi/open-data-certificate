@@ -39,6 +39,8 @@
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
+@odiGreyLight: lighten(@odiGrey, 20%);
+@odiGreyLighter: lighten(@odiGrey, 40%);
 
 @btnPrimaryBackground:  @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
@@ -202,10 +204,19 @@ dd {
     text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
+  .steps {
+    // PLACEHOLD - background image with double lines
+  }
+
   .span4 {
-    width: 339px;
-    border-right: 1px solid #fff;
-    padding-right: 30px;
+
+    // padd in the content
+    h2,p{
+      padding: 0 20px;
+    }
+    p{
+      padding-bottom:20px;
+    }
 
     h2 {
       font-size: 70px;
@@ -232,10 +243,6 @@ dd {
       }
     }
   }
-
-  .last {
-    border-right: none;
-  }
 }
 
 .home-header-buttons {
@@ -245,10 +252,7 @@ dd {
     text-align: center;
 
     .btn-primary {
-
-      margin-left: -30px;
-      margin-top: -74px;
-
+      margin-top: -20px;
     }
 
   }
@@ -389,10 +393,17 @@ hr.heavy {
 header {
   background-color: @odiBlue;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
+
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 
   .container {
     min-height: 60px;
+  }
+
+  h1,h2,h3,h4,h5,h6{
+    font-weight:normal;
   }
 }
 
@@ -457,8 +468,8 @@ header {
 
 section {
   //background-color: white;
-  margin: 15px 0;
-  padding: 10px 0;
+  // margin: 15px 0;
+  // padding: 10px 0;
 }
 
 .whiteout {
@@ -508,7 +519,7 @@ th {
 
 // Forms //
 
-.main-content {
+.main-default {
 
   .form-field {
     .clearfix;
@@ -692,7 +703,62 @@ td.action {
   }
 }
 
+// Questionnaire (survey) view // 
 
+#surveyor{
+
+  padding-top:20px;
+
+  header {
+    margin:20px 0;
+  }
+
+  .subsection-label{
+    border-top:1px solid @odiGreyLighter;
+    color:@odiBlue;
+    font-weight: normal;
+    padding:20px 0;
+  }
+
+  ol,ul{
+    margin:auto;
+  }
+
+  .question-meta{
+    background-color:@odiBlueLight;
+  }
+
+  // brought in from main styles
+  label {
+    font-size: 22px;
+  }
+
+  input.string{
+    height: 60px;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 15px 0;
+  }
+
+  // custom
+  input.string{
+    width:100%;
+  }
+
+
+  // this is our label replcement (for the question of multiple answers)
+  .group_label{
+    font-size: 22px
+  }
+
+  label small
+  .group_label small{
+    color:@odiGrey;
+    font-size: 65%;
+  }
+
+
+}
 
 // Certificate view //
 
@@ -787,3 +853,4 @@ strong.certificate-level {
     padding: 30px 0;
     text-align: center;
 }
+

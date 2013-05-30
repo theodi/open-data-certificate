@@ -37,6 +37,10 @@ Questions and Answers are associated to requirements by having their 'requiremen
 
 * `:description` - Copy to be displayed above the questionnaire
 
+##### section
+
+* `:display_header` - Whether the header should be displayed on the header (defaults to true)
+
 ##### question
 
 * `:requirment` - If the question is a Label-type, requirement is the identifier of an improvement that is recommended to meet a certain level.
