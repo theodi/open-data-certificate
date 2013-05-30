@@ -70,12 +70,4 @@ $(function(){
     return false;
   });
 
-  $("form#sign_in_user").bind("ajax:success", function(e, data, status, xhr) {
-    if (data.success) {
-      return top.location.href="/";
-    } else {
-      $('.sign_in_notices').html(data.errors);
-    }
-  });
-
 });

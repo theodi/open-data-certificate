@@ -7,6 +7,7 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
   end
   post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
+  get 'start_certificate', :to => 'application#start_questionnaire', :as => 'authenticated_start_questionnaire'
 
   resources :datasets do
     put 'start_questionnaire'

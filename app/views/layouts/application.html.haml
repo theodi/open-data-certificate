@@ -42,7 +42,7 @@
       #main{:class => main_container_class}
         = yield
 
-        = render :partial => 'layouts/start_certificate_modal'
+        = render :partial => 'layouts/start_certificate_modal' unless user_signed_in?
 
     %footer#footer
       .container
