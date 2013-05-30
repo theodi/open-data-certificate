@@ -99,4 +99,21 @@ $(function(){
 
   });
 
+  // major massive massive hack
+  //
+  // This collects all the sections that are requirements, and
+  // bundles them into the aside of the previous question (that
+  // they hopefully pertain to)
+  var $current;
+  $('.survey-section > ul > li > fieldset').each(function(){
+    var $this = $(this),
+        ref_id = $this.data('reference-identifier');
+    if(ref_id){
+      $current = $this;
+    } else if($current){
+      $this.remove().appendTo($current.find('aside')).css('border', '2px solid red');
+    }
+  });
+
+
 });
