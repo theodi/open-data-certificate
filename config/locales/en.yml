@@ -12,12 +12,16 @@ en:
     my_certificates: My certificates
 
   footmenu:
-    cookies:      Cookie policy
-    feedback:     Feedback
-    privacy:      Privacy policy
-    about:        About
-    get_in_touch: Get in touch
-    terms:        Terms of use
+    cookies:        Cookie policy
+    feedback:       Feedback
+    privacy:        Privacy policy
+    about:          About
+    get_in_touch:   Get in touch
+    terms:          Terms of use
+    odi_name:       Open Data Institute
+    company_title:  Company
+    vat_title:      VAT
+    cc_title:       Creative Commons Licence
 
   levels:
     none:

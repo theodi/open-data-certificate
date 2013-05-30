@@ -7,6 +7,7 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
   end
   post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
+  get 'start_certificate', :to => 'application#start_questionnaire', :as => 'authenticated_start_questionnaire'
 
   resources :datasets do
     put 'start_questionnaire'
@@ -21,13 +22,13 @@ OpenDataCertificate::Application.routes.draw do
     end
   end
 
-  devise_for :users, skip: :registration
+  devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
     resource :registration,
              only: [:new, :create, :edit, :update],
              path: 'users',
              path_names: { new: 'sign_up' },
-             controller: 'devise/registrations',
+             controller: 'registrations',
              as: :user_registration do
       get :cancel
     end

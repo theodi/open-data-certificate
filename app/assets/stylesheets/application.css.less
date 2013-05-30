@@ -28,13 +28,15 @@
 
 @odiBlue: #00b7ff;
 @odiBlueLight: lighten(@odiBlue, 36%);
-@odiBlueDark: darken(@odiBlue, 20%);
-@odiBlueDarker: darken(@odiBlue, 30%);
+@odiBlueDark: darken(@odiBlue, 5%);
+@odiBlueDarker: darken(@odiBlue, 20%);
 
 @odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 20%);
+@odiRedDark: darken(@odiRed, 3%);
+@odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
@@ -42,28 +44,17 @@
 @odiGreyLight: lighten(@odiGrey, 20%);
 @odiGreyLighter: lighten(@odiGrey, 40%);
 
-@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackground: @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
 @btnInfoBackgroundHighlight: @odiBlue;
 
-/*
-@btnPrimaryBackground:  @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;
-@btnInfoBackground:  @odiBlue;
-@btnInfoBackgroundHighlight:  @odiBlue;
-
-.btn-mine {
-  .buttonBackground(@odiBlueDark, @odiRedDark);
-}
-*/
-
 @odiGrey: #8e8c8c;
 
-@basic: #0DBD37;
-@pilot: #EF3AAB;
-@standard: #2254F3;
-@exemplar: #F9BC26;
+@basic: #0dbd37;
+@pilot: #ef3aab;
+@standard: #2254f3;
+@exemplar: #f9bc26;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
@@ -73,6 +64,8 @@
 @gridColumnWidth:         70px;
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
 
 
 /************************************************
@@ -215,15 +208,29 @@ dd {
 .home {
   text-align: center;
 
+  /* Remove bottom padding so background image can hit bottom */
+  padding-bottom: 0;
+
   h1 {
-    color: @odiBlueDark;
+    color: @odiBlueDarker;
     font-size: 36px;
     margin-bottom: 30px;
     text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
   .steps {
-    // PLACEHOLD - background image with double lines
+
+    /* Background stripes (image has 30px of space on left to align) */
+    background: url(/assets/background-home-header.gif) repeat-y center;
+    margin-bottom: 20px;
+
+    .span4 {
+
+      /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
+      padding-bottom: 20px;
+
+    }
+
   }
 
   .span4 {
@@ -238,7 +245,7 @@ dd {
 
     h2 {
       font-size: 70px;
-      color: @odiBlueDark;
+      color: @odiBlueDarker;
       font-weight: bold;
       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
@@ -264,8 +271,26 @@ dd {
 
 .home-header-buttons {
 
+  .row {
+
+    height: 88px;
+
+  }
+
   .span4 {
     text-align: center;
+
+    .logo {
+
+      /* Small ODI logo, hide text */
+      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: -34px auto 0 auto;
+      width: 76px; height: 68px;
+
+    }
 
     .btn-primary {
       margin-top: -20px;
@@ -327,7 +352,7 @@ hr.heavy {
       padding: 20px;
     }
 
-    a:hover {
+    a:hover, a.active {
       background-color: @odiRed;
     }
   }
@@ -387,6 +412,72 @@ hr.heavy {
   }
 }
 
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+nav .dropdown-menu-button {
+  z-index: 10;
+  position: relative;
+}
+
+#login, #register {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 450px;
+  padding: 30px 25px;
+  background: @odiRed;
+  color: white;
+
+  label {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 1px solid white;
+    background: @odiRedLight;
+    height: 45px;
+    width: 425px;
+    margin-bottom: 20px;
+  }
+
+  .form-field-inline {
+    float: left;
+
+    label {
+      font-size: 15px;
+      display: inline;
+    }
+  }
+
+  .btn-primary {
+    float: right;
+    background: @odiPomegranate;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow:none;
+    box-shadow: none;
+    padding: 4px 15px;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+#login {
+  display: none;
+}
+
 header {
   background-color: @odiBlue;
   color: #fff;
@@ -401,14 +492,6 @@ header {
 
   h1,h2,h3,h4,h5,h6{
     font-weight:normal;
-  }
-}
-
-.navbar .nav > .active > a {
-  &, &:hover, &:focus {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
   }
 }
 
@@ -478,6 +561,10 @@ section {
 
 .whiteout {
   background-color:rgba(255,255,255,0.65);
+
+  /* Make sure there's a gap between bottom of content and top of footer */
+  padding-bottom: 55px;
+
 }
 
 .hero-unit {
@@ -505,6 +592,7 @@ section {
     font-size: 23px;
   }
 }
+
 
 
 
@@ -867,4 +955,93 @@ strong.certificate-level {
     box-sizing: border-box;
     width: 100%;
   }
+}
+
+/*
+//
+// ***** About Page *****
+//
+*/
+.container.about {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h1 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+
+    }
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 22px;
+      font-weight: normal;
+      line-height: 26px;
+      margin: 15px 0 20px 0;
+
+    }
+
+    ul { margin-top: 10px; }
+
+    ul.kitemarks {
+
+      margin: 20px 0 10px 0;
+
+      li {
+
+        list-style: none;
+        padding-left: 141px;
+        padding-top: 16px;
+        min-height: 117px;
+        margin-bottom: 10px;
+
+      }
+
+      li.kitemark1 { background: url(/assets/ODI-kitemark-level1.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/ODI-kitemark-level2.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/ODI-kitemark-level3.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/ODI-kitemark-level4.png) no-repeat top left; }
+
+    }
+
+  }
+
+}
+
+/*
+//
+// ***** Terms Page *****
+//
+*/
+.container.terms {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+      font-weight: normal;
+
+    }
+
+    h4 {
+
+      color: #000;
+      font-size: 18px;
+
+    }
+
+    li { margin-bottom: 3px; }
+
+  }
+
 }

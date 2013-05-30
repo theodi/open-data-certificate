@@ -42,23 +42,28 @@
       #main{:class => main_container_class}
         = yield
 
+        = render :partial => 'layouts/start_certificate_modal' unless user_signed_in?
+
     %footer#footer
       .container
         .span8.footer-content
           %h1
-            %a{:href => "http://www.theodi.org"} Open Data Institute            
+            %a{:href => "http://www.theodi.org"}= t('footmenu.odi_name')           
           %p
-            %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} Open Data Institute, 65 Clifton Street, London EC2A 4JE
+            %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"}= t('footmenu.odi_name')
+            %span>, 65 Clifton Street, London EC2A 4JE
           %p
             %a{:href => "mailto:info@theodi.org"} info@theodi.org
             ·
-            Company
+            = t('footmenu.company_title')
             %a{:href => "http://opencorporates.com/companies/gb/08030289"} 08030289
             ·
-            VAT 143 7796 80
+            %span= t('footmenu.vat_title')
+            %span>
+              143 7796 80
           %p.license
             %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
-              = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
+              = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => t('footmenu.cc_title')
 
         .span4.footer-nav
           %nav

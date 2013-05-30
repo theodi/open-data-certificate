@@ -1,0 +1,5 @@
+<% if success %>
+  top.location.href='<%= escape_javascript(after_sign_in_path_for(resource)) %>';
+<% else %>
+  $('.sign_in_user_form_errors').html('<%= escape_javascript(render partial: 'devise/sessions/form_errors', locals: {errors: errors})%>');
+<% end %>
