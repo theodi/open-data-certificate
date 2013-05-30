@@ -24,4 +24,19 @@ $(function(){
 
 	if(bleed.size()) skrollr.init({forceHeight: false});
 
+
+  // binding the text of this to the value of a
+  // particular input (keyed by data-reference-identifier)
+  $('[data-bind-to-input]').each(function(){
+    var $bound = $(this),
+        original = $bound.text();
+
+    // not very efficient, as a new listener for every bound item though
+    // we're only using this once, on one page, so it's not so bad
+    $(document).on('keyup', '[data-reference-identifier]', function(){
+      $bound.text($(this).val() || original);
+    });
+
+  });
+
 });

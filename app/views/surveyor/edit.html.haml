@@ -13,7 +13,7 @@
       .row
         .span9
           %h1 New Certificate
-          %h3= @response_set.title
+          %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
         .span3
           = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
       
