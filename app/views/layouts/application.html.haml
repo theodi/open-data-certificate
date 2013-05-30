@@ -6,9 +6,12 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   %body{:class => body_class}
     = yield(:super_head)
-
     %nav
       #topbar.navbar.navbar-inverse.navbar-static-top
         .navbar-inner
@@ -25,40 +28,46 @@
             %ul.nav.pull-right
               = main_menu_navigation
 
-    - if content_for?(:header)
-      = yield(:header)
-    - else
-      %header
-        .container
-          %h1= yield(:header_title)
-
     .whiteout
-      .container.main-content
+      - if content_for?(:header)
+        -# be sure to include flashes somewhere when overriding this
+        = yield(:header)
 
-        - flash.each do |type, value|
-          .flash.alert{ :class => "alert-#{type}" }
-            = value
+      - else
+        %header
+          .container
+            %h1= yield(:header_title)
+        = render :partial => 'shared/flashes'
 
-        %section
-          = yield
+      #main{:class => main_container_class}
+        = yield
+
+        = render :partial => 'layouts/start_certificate_modal'
 
     %footer#footer
       .container
-        %nav
-          %ul.pull-right
-            %li
-              = link_to t('footmenu.terms'), '/terms'
+        .span8.footer-content
+          %h1
+            %a{:href => "http://www.theodi.org"} Open Data Institute            
+          %p
+            %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} Open Data Institute, 65 Clifton Street, London EC2A 4JE
+          %p
+            %a{:href => "mailto:info@theodi.org"} info@theodi.org
+            ·
+            Company
+            %a{:href => "http://opencorporates.com/companies/gb/08030289"} 08030289
+            ·
+            VAT 143 7796 80
+          %p.license
+            %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
+              = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
 
-        %p
-          %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
-            = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => 'Creative Commons Licence'
-          %a{:href => "http://www.theodi.org"} Open Data Institute
-        %p
-          %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} 65 Clifton Street, London EC2A 4JE
-          ·
-          %a{:href => "mailto:info@theodi.org"} info@theodi.org
-          ·
-          Company
-          %a{:href => "http://opencorporates.com/companies/gb/08030289"} 08030289
-          ·
-          VAT 143 7796 80
+        .span4.footer-nav
+          %nav
+            %ul.pull-right
+              %li
+                = link_to t('footmenu.terms'), '/terms'
+              %li
+                = link_to t('footmenu.about'), '/about'
+              %li
+                = link_to t('footmenu.get_in_touch'), '/contact'

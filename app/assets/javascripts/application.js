@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require twitter/bootstrap
 
 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -22,12 +23,11 @@
 
 // MIT license
 
-$(function() {
-
+$(function(){
 	// Skrollr data settings
 	var bleed = $('body.odi-bleed').attr({
 		'data-0':'background-position:0 -450px',
-		'data-2500':'background-position:0 1000px',
+		'data-2500':'background-position:0 1000px'
 	});
 
 	if (bleed.size()) skrollr.init({forceHeight: false});

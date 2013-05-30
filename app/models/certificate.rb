@@ -17,6 +17,22 @@ class Certificate < ActiveRecord::Base
     def group_similar
       joins(:response_set => [:survey]).group('surveys.title, response_sets.dataset_id')
     end
+
+    def badge_file_for_level(level)
+      filename = case level
+                   when 'basic', 'pilot', 'standard', 'exemplar'
+                     "#{level}_level_badge.png"
+                   else
+                     'no_level_badge.png'
+                 end
+
+      File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
+    end
   end
+
+  def badge_file
+    Certificate.badge_file_for_level(attained_level)
+  end
+
 
 end

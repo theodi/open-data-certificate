@@ -1,27 +1,46 @@
-#surveyor
-  = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form", :class => @survey.custom_class}) do |f|
+-# we need to break from the .container and
+-# also surround everything in a form
 
+- content_for(:header) do
+  / header overridden
+- content_for(:main_container_class) {'non-container'}
+
+
+= semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
+
+  %header
+    .container
+      .row
+        .span9
+          %h1 New Certificate
+          %h3= @response_set.title
+        .span3
+          = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+      
+  = render :partial => 'shared/flashes'
+
+  #surveyor
     = hidden_field_tag :surveyor_javascript_enabled, false
 
-    %h2= @survey.translation(I18n.locale)[:title]
-    %p.lead= @survey.translation(I18n.locale)[:description]
+    .container
+      .row
+        %p.lead.span8= @survey.translation(I18n.locale)[:description]
 
-    .previous_section= previous_section
     = render 'partials/dependents' unless @dependents.empty?
-    - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
-      = cache("section_#{@section.id}"){ render "/partials/section", :f => f }
+    - if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+      = cache("section_#{@section.id}") do
+        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
-    .next_section= f.submit t('surveyor.click_here_to_finish'), :name => :finish
-  %br
 
-%temporary_links
-  %p
-    = link_to 'attained level', surveyor.view_my_survey_attained_level_path(response_set_code: @response_set.access_code)
-    |
-    = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
-    %br/
-    (right-click and open in a new tab)
+  .container
+    .temporary_links
+      %p
+        = link_to 'attained level', surveyor.view_my_survey_attained_level_path(response_set_code: @response_set.access_code)
+        |
+        = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
+        %br/
+        (right-click and open in a new tab)
 
 :javascript
   $(document).ready(function() {

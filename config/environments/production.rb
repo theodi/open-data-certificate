@@ -7,6 +7,7 @@ OpenDataCertificate::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :memory_store # TODO: Default is memory store, but production will probably need to change to something else... but that decision is not yet made
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -52,8 +53,8 @@ OpenDataCertificate::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # **IMPORTANT** Define the default url (for devise)
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill

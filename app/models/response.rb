@@ -3,6 +3,7 @@ class Response < ActiveRecord::Base
   include Surveyor::Models::ResponseMethods
 
   after_save :set_default_dataset_title
+  after_save :update_survey_section_id
 
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
@@ -35,6 +36,14 @@ class Response < ActiveRecord::Base
   private
   def set_default_dataset_title
     dataset.try(:set_default_title!, response_set.title_determined_from_responses)
+  end
+
+  private
+  def update_survey_section_id
+    if survey_section_id.blank?
+      survey_section_id = question.try(:survey_section_id)
+      Response.update(id, :survey_section_id => survey_section_id) if survey_section_id
+    end
   end
 
 end

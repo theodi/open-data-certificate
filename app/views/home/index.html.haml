@@ -7,9 +7,8 @@
         .span4.offset8
           %h1= t('homepage.title')
           %h2= t('homepage.tagline')
-          = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-large.btn-primary= t('homepage.start_new_certificate')
-          %a.btn.btn-large.btn-info{href: certificates_path}= t('homepage.browse_all_new_certificates')
+          = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+          = link_to t('homepage.browse_all_new_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-info']
 
 - content_for(:header) do
   #empty
@@ -19,31 +18,44 @@
       .row
         .span12
           %h1= t('homepage.how_it_works')
-      .row
+      .row.steps
         .span4
           %h2
             1
             %small= t('homepage.fill_out_questionnaire.title')
+
           %p= t('homepage.fill_out_questionnaire.description')
-          = form_tag non_authenticated_start_questionnaire_path do
-            %button.btn.btn-large.btn-primary= t('homepage.start_new_certificate')
 
         .span4
           %h2
             2
             %small= t('homepage.generate_certificate.title')
           %p= t('homepage.generate_certificate.description')
+
         .span4.last
           %h2
             3
             %small= t('homepage.share_open_data.title')
           %p= t('homepage.share_open_data.description')
+
+.container.home-header-buttons
+  .row
+    .span4
+      = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+    .span4
+    .span4
+      = link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
+
 .container.main
   .row
     .span6
       %iframe{width: 560, height: 315, src: 'http://www.youtube.com/embed/MRZE6X-ZG6Q', frameborder: 0, allowfullscreen: 'allowfullscreen'}
-    .span6
-      %h2= t('homepage.about_certificate.title')
-      %p= t('homepage.about_certificate.description')
-      %h2= t('homepage.about_odi.title')
-      %p= t('homepage.about_odi.description')
+    .span6.homepage-about-content
+      %h2.about-certificate
+        = link_to t('homepage.about_certificate.title'), certificates_path
+      %p.about-certificate= t('homepage.about_certificate.description')
+      = link_to t('homepage.about_certificate.link'), certificates_path, class: ['about-certificate']
+      %h2.about-odi
+        = link_to t('homepage.about_odi.title'), '/contact'
+      %p.about-odi= t('homepage.about_odi.description')
+      = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']

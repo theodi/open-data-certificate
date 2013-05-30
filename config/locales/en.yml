@@ -7,33 +7,38 @@ en:
   alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:
-    about: About
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
-    get_in_touch: Get in touch
     my_certificates: My certificates
 
   footmenu:
-    cookies:  Cookie policy
-    feedback: Feedback
-    privacy:  Privacy policy
-    terms:    Terms of use
+    cookies:      Cookie policy
+    feedback:     Feedback
+    privacy:      Privacy policy
+    about:        About
+    get_in_touch: Get in touch
+    terms:        Terms of use
 
   levels:
     none:
       title: None
+      title_with_level: No level
       description: This data does not satisfy the fundamental requirements for open data
     basic:
       title: Basic
+      title_with_level: Basic level
       description: this data satisfies the fundamental requirements for open data
     pilot:
       title: Pilot
+      title_with_level: Pilot level
       description: this data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
     standard:
       title: Standard
+      title_with_level: Standard level
       description: this data satisfies the requirements for routinely published open data that encourages reuse.
     exemplar:
       title: Exemplar
+      title_with_level: Exemplar level
       description: this data satisfies the requirements for key information infrastructure.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
@@ -69,31 +74,50 @@ en:
     view_certificate: View certificate
 
   homepage:
+    dont_have_an_account: Don't have an account?
+    register_later_message: Don't worry, you can register later to save your work.
+    continue_without_registering: Continue without registering
+    create_an_account: Create an account
     title: Open data certificate
-    tagline: Specifying what good open data looks like
-    start_new_certificate: Start a new certificate
-    browse_all_new_certificates: Browse all new certificates
+    tagline: Find out what shareable data really looks like
+    start_new_certificate: Create a certificate
+    browse_certificates: Browse certificates
+    browse_all_new_certificates: Browse all certificates
     how_it_works: Here's how it works
     fill_out_questionnaire:
-      title: Fill out the questionnaire
-      description: We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+      title: Publish your data
+      description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
     generate_certificate:
-      title: Generate a certificate
-      description: We will assess your level of open data and generate a certificate which will be added to our archives certificate which will be added to our archives.
+      title: Check it with our questionnaire
+      description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
     share_open_data:
-      title: Share your open data
-      description: You can embed your certificate on your website or link to the archive using one of our custom badges  the archive using one of our custom badges.
+      title: Share it with a certificate
+      description: Your answers determine which of our four prestigious certificates you generate. Each one means success in a unique way and proves you're a leader in open data.
     about_certificate:
-      title: About the certificate
-      description: About certificate copy goes here.
+      title: What does a certificate look like?
+      description: It's an impressive badge that links to a page describing the characteristics of some data. Like how often it's updated, what format it's in and where it lives.
+      link: Read more
     about_odi:
-      title: About the ODI
-      description: About the ODI copy goes here.
+      title: Who are the ODI?
+      description: We're the Open Data Institute. We unlock supply and demand for open data and communicate its value to people so they can change the world with it. This is one of the ways we do that.
+      link: Get in touch
 
-  certificate_search:
-    heading__search_certificates: Search certificates
-    search_label: Search for
-    submit_search: Go
+  certificates:
+    certificates: Certificates
+    curated_by: Curated by
+    last_updated: Last updated
+    latest_certificates: Latest certificates
+    no_certificates_found: No certificates found
+    view_certificate: View
+    search:
+      search_label: Search for
+      submit_search: Go
+
+  certificate:
+    on_date: "on %{date}"
+    self_certified: self certified
+    this_data_has_achieved: This data has achieved
+    which_means: which means
 
   authentication:
     sign_in: Sign in
@@ -109,3 +133,9 @@ en:
     update_profile: Update my profile
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
+
+  about:
+    heading_about: About
+
+  contact:
+    heading_contact: Contact the ODI
