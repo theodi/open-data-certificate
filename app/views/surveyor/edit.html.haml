@@ -8,8 +8,9 @@
 
     .previous_section= previous_section
     = render 'partials/dependents' unless @dependents.empty?
-    - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
-      = cache("section_#{@section.id}"){ render "/partials/section", :f => f }
+    - if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+      = cache("section_#{@section.id}") do
+        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     .next_section= f.submit t('surveyor.click_here_to_finish'), :name => :finish
