@@ -41,11 +41,13 @@
 .container.home-header-buttons
   .row
     .span4
+      //= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+    .span4
+      //%p.logo ODI
       = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
+      //= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
       %p.logo ODI
-    .span4
-      = link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
 
 .container.main
   .row
