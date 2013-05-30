@@ -710,7 +710,27 @@ td.action {
   padding-top:20px;
 
   header {
-    margin:20px 0;
+    margin:5px 0;
+    h3{
+      font-size: 27px;
+    }
+    h3, h4{
+      color:@white;
+      margin:0;
+    }
+
+    // not used yet
+    &.inactive{
+      background-color:@odiGrey;
+    }
+    cursor: pointer;
+
+    .transition(background-color 0.25s);
+
+    // override
+    .container{
+      min-height: auto;
+    }
   }
 
   .subsection-label{

@@ -39,4 +39,10 @@ $(function(){
 
   });
 
+  $('.survey-section .collapse').on('show', function(){
+    $(this).prev().removeClass('inactive');
+  }).on('hidden', function(){
+    $(this).prev().addClass('inactive');
+  });
+
 });
