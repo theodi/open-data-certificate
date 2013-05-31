@@ -1,4 +1,5 @@
 - content_for(:body_class) {'odi-bleed'}
+- content_for(:main_container_class) {'container'}
 
 - content_for(:super_head) do
   #padd{style: 'height:500px;'}
@@ -41,10 +42,13 @@
 .container.home-header-buttons
   .row
     .span4
+      //= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+    .span4
+      //%p.logo ODI
       = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
-    .span4
-      = link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
+      //= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
+      %p.logo ODI
 
 .container.main
   .row

@@ -41,14 +41,17 @@
 @odiBlue: #00b7ff;
 @odiBlueLight: lighten(@odiBlue, 36%);
 @odiBlueLighter: lighten(@odiBlue, 44%);
-@odiBlueDark: darken(@odiBlue, 20%);
-@odiBlueDarker: darken(@odiBlue, 30%);
+@odiBlueDark: darken(@odiBlue, 5%);
+@odiBlueDarker: darken(@odiBlue, 20%);
 
 @odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 20%);
+@odiRedDark: darken(@odiRed, 3%);
+@odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
 @odiCrimsonLight: lighten(@odiCrimson, 53%);
+
+@odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
@@ -56,28 +59,19 @@
 @odiGreyLight: lighten(@odiGrey, 25%);
 @odiGreyLighter: lighten(@odiGrey, 40%);
 
-@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackground: @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
 @btnInfoBackgroundHighlight: @odiBlue;
 
-/*
-@btnPrimaryBackground:  @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;
-@btnInfoBackground:  @odiBlue;
-@btnInfoBackgroundHighlight:  @odiBlue;
-
-.btn-mine {
-  .buttonBackground(@odiBlueDark, @odiRedDark);
-}
-*/
-
 @odiGrey: #8e8c8c;
 
-@basic: #0DBD37;
-@pilot: #EF3AAB;
-@standard: #2254F3;
-@exemplar: #F9BC26;
+@basic: #0dbd37;
+@pilot: #ef3aab;
+@standard: #2254f3;
+@exemplar: #f9bc26;
+
+
 
 
 /************************************************
@@ -139,18 +133,37 @@ dd {
   margin-bottom: 30px;
 }
 
+<<<<<<< HEAD
 // make grey input text read easier
 input, textarea{
   -webkit-font-smoothing: antialiased;
   .box-shadow(none);
+=======
+.btn-small {
+  &, &:active, &:hover, &:focus {
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+>>>>>>> origin
 }
 
 .btn-info {
   background: @odiBlue;
-}
 
-.btn-info:active, .btn-info:hover, .btn-info:focus {
-  background: @odiBlueDark;
+  &.btn-unstyled {
+    &, &:active, &:hover, &:focus {
+      font-size: 15px;
+      color: @odiBlue;
+      padding: 0;
+      background: none;
+    }
+  }
+
+  &:active, &:hover, &:focus {
+    background: @odiBlueDark;
+  }
 }
 
 .btn-primary {
@@ -215,21 +228,35 @@ header.affix {
 .home {
   text-align: center;
 
+  /* Remove bottom padding so background image can hit bottom */
+  padding-bottom: 0;
+
   h1 {
-    color: @odiBlueDark;
+    color: @odiBlueDarker;
     font-size: 36px;
     margin-bottom: 30px;
     text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
   .steps {
-    // PLACEHOLD - background image with double lines
+
+    /* Background stripes (image has 30px of space on left to align) */
+    background: url(/assets/background-home-header.gif) repeat-y center;
+    margin-bottom: 20px;
+
+    .span4 {
+
+      /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
+      padding-bottom: 20px;
+
+    }
+
   }
 
   .span4 {
 
     // padd in the content
-    h2,p{
+    h2, p{
       padding: 0 20px;
     }
     p{
@@ -238,17 +265,16 @@ header.affix {
 
     h2 {
       font-size: 70px;
-      color: @odiBlueDark;
+      color: @odiBlueDarker;
       font-weight: bold;
-       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
-
+      text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
       small {
-      display: block;
-      color: #fff;
-      font-size: 30px;
-      padding: 30px 0 10px;
-      text-shadow: none;
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        padding: 30px 0 10px;
+        text-shadow: none;
       }
     }
 
@@ -265,36 +291,46 @@ header.affix {
 
 .home-header-buttons {
 
-  .span4 {
+  .row {
 
+    height: 88px;
+
+  }
+
+  .span4 {
     text-align: center;
+
+    .logo {
+
+      /* Small ODI logo, hide text */
+      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: -34px auto 0 auto;
+      width: 76px; height: 68px;
+
+    }
 
     .btn-primary {
       margin-top: -20px;
     }
-
   }
-
 }
 
 .homepage-about-content {
 
   h2 {
-
     font-weight: normal;
-
   }
 
   h2.about-certificate { margin-top: -7px; }
 
   h2.about-odi {
-
-      border-top: 1px solid #e1e1e1;
-      padding-top: 20px;
-      margin-top: 25px;
-
+    border-top: 1px solid #e1e1e1;
+    padding-top: 20px;
+    margin-top: 25px;
   }
-
 }
 
 h3 {
@@ -336,7 +372,7 @@ hr.heavy {
       padding: 20px;
     }
 
-    a:hover {
+    a:hover, a.active {
       background-color: @odiRed;
     }
   }
@@ -356,10 +392,6 @@ hr.heavy {
 
   .navbar-inner {
     background-color:rgba(255,255,255,0.65);
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
     border-bottom: none;
     background-image: none;
 
@@ -400,12 +432,70 @@ hr.heavy {
   }
 }
 
-.navbar .nav > .active > a,
-.navbar .nav > .active > a:hover,
-.navbar .nav > .active > a:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow:none;
-  box-shadow: none;
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+nav .dropdown-menu-button {
+  z-index: 10;
+  position: relative;
+}
+
+#login, #register {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 450px;
+  padding: 30px 25px;
+  background: @odiRed;
+  color: white;
+
+  label {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 1px solid white;
+    background: @odiRedLight;
+    height: 45px;
+    width: 425px;
+    margin-bottom: 20px;
+  }
+
+  .form-field-inline {
+    float: left;
+
+    label {
+      font-size: 15px;
+      display: inline;
+    }
+  }
+
+  .btn-primary {
+    float: right;
+    background: @odiPomegranate;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow:none;
+    box-shadow: none;
+    padding: 4px 15px;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+#login {
+  display: none;
 }
 
 header {
@@ -428,7 +518,6 @@ header {
 .container.main {
   margin-top: 50px;
 }
-
 
 #footer {
   background-color: #000;
@@ -492,6 +581,10 @@ section {
 
 .whiteout {
   background-color:rgba(255,255,255,0.65);
+
+  /* Make sure there's a gap between bottom of content and top of footer */
+  padding-bottom: 55px;
+
 }
 
 .hero-unit {
@@ -522,6 +615,7 @@ section {
 
 
 
+
 // Tables //
 
 table {
@@ -538,6 +632,7 @@ th {
 // Forms //
 
 .main-default {
+  margin-top: 30px;
 
   .form-field {
     .clearfix;
@@ -613,28 +708,9 @@ th {
   button.copy-certificate {
     padding: 8px 12px;
   }
-
-  .btn-info.unstyled {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 }
 
 .previous-response-set {
-  .btn-info {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 
   td {
     height: 30px;
@@ -721,7 +797,7 @@ td.action {
   }
 }
 
-// Questionnaire (survey) view // 
+// Questionnaire (survey) view //
 
 #surveyor{
 
@@ -868,8 +944,20 @@ td.action {
 }
 
 .certificate.hero-unit {
-  margin: -70px auto 30px;
-  width: 920px;
+  margin: -50px auto 30px;
+  padding: 0 15px;
+
+  .btn-info {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 12px;
+    width: 80px;
+    margin-top: 80px;
+  }
+}
+
+.certificate-summary {
+  padding: 0 90px;
 }
 
 .certificate-badge {
@@ -940,3 +1028,108 @@ strong.certificate-level {
     text-align: center;
 }
 
+// Embedded certificate //
+
+#embedded-certificate {
+  margin: 30px;
+  .certificate.hero-unit {
+    width: auto;
+    margin-top: 30px;
+  }
+}
+
+.embed-code {
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+/*
+//
+// ***** About Page *****
+//
+*/
+.container.about {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h1 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+
+    }
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 22px;
+      font-weight: normal;
+      line-height: 26px;
+      margin: 15px 0 20px 0;
+
+    }
+
+    ul { margin-top: 10px; }
+
+    ul.kitemarks {
+
+      margin: 20px 0 10px 0;
+
+      li {
+
+        list-style: none;
+        padding-left: 141px;
+        padding-top: 16px;
+        min-height: 117px;
+        margin-bottom: 10px;
+
+      }
+
+      li.kitemark1 { background: url(/assets/ODI-kitemark-level1.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/ODI-kitemark-level2.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/ODI-kitemark-level3.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/ODI-kitemark-level4.png) no-repeat top left; }
+
+    }
+
+  }
+
+}
+
+/*
+//
+// ***** Terms Page *****
+//
+*/
+.container.terms {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+      font-weight: normal;
+
+    }
+
+    h4 {
+
+      color: #000;
+      font-size: 18px;
+
+    }
+
+    li { margin-bottom: 3px; }
+
+  }
+
+}

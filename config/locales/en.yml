@@ -12,12 +12,16 @@ en:
     my_certificates: My certificates
 
   footmenu:
-    cookies:      Cookie policy
-    feedback:     Feedback
-    privacy:      Privacy policy
-    about:        About
-    get_in_touch: Get in touch
-    terms:        Terms of use
+    cookies:        Cookie policy
+    feedback:       Feedback
+    privacy:        Privacy policy
+    about:          About
+    get_in_touch:   Get in touch
+    terms:          Terms of use
+    odi_name:       Open Data Institute
+    company_title:  Company
+    vat_title:      VAT
+    cc_title:       Creative Commons Licence
 
   levels:
     none:
@@ -109,6 +113,7 @@ en:
     latest_certificates: Latest certificates
     no_certificates_found: No certificates found
     view_certificate: View
+    embed_this_on_your_site: Embed this on your site
     search:
       search_label: Search for
       submit_search: Go
@@ -118,6 +123,9 @@ en:
     self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
+    embeddable_certificate: Embeddable certificate
+    embed_instructions: Use the code below to embed this certificate on your site
+    view_embed_page: View embeddable page
 
   authentication:
     sign_in: Sign in
