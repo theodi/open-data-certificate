@@ -1,0 +1,17 @@
+- remote ||= false
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => remote, :format => :json, :html => { :id => "register_user" }) do |f|
+  .registration_form_errors
+    - if resource.errors.any?
+      = render 'devise/sessions/form_errors', locals: {errors: errors}
+
+  .form-field
+    = f.label :email
+    = f.email_field :email, :autofocus => true, :class => 'span8'
+  .form-field
+    = f.label :password
+    = f.password_field :password, :autocomplete => "off", :class => 'span8'
+  .form-field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, :class => 'span8'
+
+  = f.submit t("authentication.sign_up"), :class => 'btn btn-primary'
