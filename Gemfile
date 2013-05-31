@@ -44,6 +44,7 @@ end
 group :production do
   gem 'foreman'
   gem 'mysql2'
+  gem 'airbrake'
 end
 
 gem 'jquery-rails'

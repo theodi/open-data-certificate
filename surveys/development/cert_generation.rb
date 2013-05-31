@@ -6,7 +6,8 @@ survey 'Certificate Generator',  :dataset_title => 'q_dataTitle',
 
     q_dataTitle 'What\'s a good title for this data?',
                 :text_as_statement => 'Data Title',
-                :display_on_certificate => true
+                :display_on_certificate => true,
+                :help_text => 'We need to know this to populate your dataset'
 
     a_1 'what you call the data', :string
 

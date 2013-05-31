@@ -17,7 +17,7 @@
       = ff.input :answer_id, :as => :quiet, :input_html => {:class => a.css_class, :value => a.id}
       - answer_attrs = { :as         => rc_to_as(a.response_class), |
                          :hint       => a.text_for(:post, @render_context, I18n.locale), |
-                         :label      => "#{h question_text} <small>requirement text</small>".html_safe, |
+                         :label      => "#{h question_text} <small>#{t q.requirement, :scope => :requirement_label, :default => ''}</small>".html_safe, |
                          :input_html => generate_pick_none_input_html(r.to_formatted_s, a.default_value_for(@render_context, I18n.locale), a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder) |
                        } |
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?

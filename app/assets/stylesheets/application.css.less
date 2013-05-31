@@ -26,8 +26,21 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
+// use our own grey for the input field
+@gray: @odiGrey;
+@placeholderText: @odiGreyLight;
+@inputBorderRadius: 2px;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
 @odiBlue: #00b7ff;
 @odiBlueLight: lighten(@odiBlue, 36%);
+@odiBlueLighter: lighten(@odiBlue, 44%);
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
 
@@ -36,12 +49,14 @@
 @odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiCrimsonLight: lighten(@odiCrimson, 53%);
+
 @odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
-@odiGreyLight: lighten(@odiGrey, 20%);
+@odiGreyLight: lighten(@odiGrey, 25%);
 @odiGreyLighter: lighten(@odiGrey, 40%);
 
 @btnPrimaryBackground: @odiRed;
@@ -55,15 +70,6 @@
 @pilot: #ef3aab;
 @standard: #2254f3;
 @exemplar: #f9bc26;
-
-// @headingsFontFamily:    'Open Sans',sans-serif;
-// @headingsFontWeight:    400;
-
-// todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
 
 
@@ -127,6 +133,13 @@ dd {
   margin-bottom: 30px;
 }
 
+
+// make grey input text read easier
+input, textarea{
+  -webkit-font-smoothing: antialiased;
+  .box-shadow(none);
+}
+
 .btn-small {
   &, &:active, &:hover, &:focus {
     text-shadow: none;
@@ -172,6 +185,13 @@ dd {
   color: white;
   border: none;
   text-shadow: none;
+}
+
+// snap the header to the top when it's affixed
+header.affix {
+    top: 0px; 
+    width:100%;
+    z-index:10;
 }
 
 #padd {
@@ -784,7 +804,26 @@ td.action {
   padding-top:20px;
 
   header {
-    margin:20px 0;
+    margin:5px 0;
+    h3{
+      font-size: 27px;
+    }
+    h3, h4{
+      color:@white;
+      margin:0;
+    }
+
+    &.inactive{
+      background-color:@odiGrey;
+    }
+    cursor: pointer;
+
+    .transition(background-color 0.25s);
+
+    // override
+    .container{
+      min-height: auto;
+    }
   }
 
   .subsection-label{
@@ -799,7 +838,7 @@ td.action {
   }
 
   .question-meta{
-    background-color:@odiBlueLight;
+    background-color:@odiBlueLighter;
   }
 
   // brought in from main styles
@@ -809,7 +848,7 @@ td.action {
 
   input.string{
     height: 60px;
-    font-size: 20px;
+    font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
   }
@@ -832,6 +871,55 @@ td.action {
   }
 
 
+  // focussed elements
+  fieldset.active{
+    // hard to do the odd outline
+    
+    // outline: 1px solid @odiBlueLight;
+    background-color: @odiBlueLighter;
+  }
+
+  &.highlight-mandatory{
+    .mandatory{
+      background-color:@odiCrimsonLight;
+      &.has-response{
+        background-color:@white;
+      }
+    }
+  }
+
+
+}
+
+#status_panel{
+  .transition(right 0.5s);
+  background-color:@odiGreyLighter;
+  position: absolute;
+  right:0;
+  width:280px;
+  padding:20px;
+  height:100%;
+  z-index:5;
+
+  right:-320px;
+
+  // also .hover for oldie fallback
+  &:hover, &.hover{
+    right:0px;
+  };
+  
+  &.affix, &.affix-bottom{
+    position: fixed;
+    top:130px;
+  }
+
+  #panel_handle{
+    background-image:url(/assets/panel-handle.png);
+    width:79px;
+    height:72px;
+    position: absolute;
+    left:-79px;
+  }
 }
 
 // Certificate view //
