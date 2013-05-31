@@ -47,7 +47,7 @@ class SurveyorController < ApplicationController
       saved = load_and_update_response_set_with_retries
 
       if saved && finish
-        if user_signed_in? && all_mandatory_questions_complete?
+        if user_signed_in? && @response_set.all_mandatory_questions_complete?
           @response_set.complete!
           @response_set.save
           return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
@@ -116,13 +116,6 @@ class SurveyorController < ApplicationController
     end
   end
 
-  private
-  def all_mandatory_questions_complete?
-    #@response_set.reload
-    mandatory_question_ids = @response_set.triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = @response_set.responses.map(&:question_id)
-    (mandatory_question_ids - responded_to_question_ids).blank?
-  end
 
   # where to send the user once the survey has been completed
   # if there was a dataset, go back to it
