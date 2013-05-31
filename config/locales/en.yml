@@ -66,8 +66,7 @@ en:
     archived: Archived
     edit_and_publish: Edit and publish
     embed_code: Embed code
-    heading__intro_text: Some intro text here?
-    heading__my_certificates: My certificates
+    page_title: My certificates
     latest_published_certificate: Latest published certificate
     copy_certificate:
       make_a_copy: Make a copy
