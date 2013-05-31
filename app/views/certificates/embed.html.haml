@@ -12,3 +12,5 @@
     = t("certificate.on_date", date: @certificate.created_at.strftime("%d %B %Y"))
     = t("certificate.which_means")
     = t("levels.#{@certificate.attained_level}.description")
+
+=render @certificate.response_set
