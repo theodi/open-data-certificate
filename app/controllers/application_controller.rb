@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   helper_method :after_sign_in_path_for
-  
+
   # pick the locale from ?locale=X in the url,  a prettier
   # solution might be used down the line, maybe depending
   # on the ui or user preferences maybe.
@@ -71,15 +71,18 @@ class ApplicationController < ActionController::Base
     # deleting the session id even if the response set isn't found
     case
       when session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
-
         # Assign the response set to the user, creating a dataset for it
         response_set.assign_to_user!(current_user)
 
-        return surveyor.edit_my_survey_path(
-          :survey_code => response_set.survey.access_code,
-          :response_set_code => response_set.access_code
-        )
-
+        if params[:form_id] == 'save_and_finish_modal_form'
+          # if the user has authenticated from the save_and_finish_modal_form then redirect to the force_save_questionnaire path
+          surveyor.force_save_questionnaire_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code)
+        else
+          surveyor.edit_my_survey_path(
+            :survey_code => response_set.survey.access_code,
+            :response_set_code => response_set.access_code
+          )
+        end
 
       when params[:form_id] == 'start_cert_modal_form'
         # if the user has authenticated from the start_cert_modal_form then redirect to the start_questionnaire path

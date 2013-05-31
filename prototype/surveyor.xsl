@@ -214,7 +214,7 @@
 				<xsl:apply-templates select="$conditions" mode="rule" />
 			</xsl:attribute>
 		</dependency>
-		<xsl:for-each select="$conditions//condition">
+		<xsl:for-each select="$conditions/descendant-or-self::condition">
 			<xsl:element name="condition_{local:conditionId(.)}">
 				<xsl:sequence select="@value" />
 			</xsl:element>

@@ -26,6 +26,18 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
+// use our own grey for the input field
+@gray: @odiGrey;
+@placeholderText: @odiGreyLight;
+@inputBorderRadius: 2px;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
 @odiBlueLight: lighten(@odiBlue, 15%);
@@ -38,12 +50,14 @@
 @odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiCrimsonLight: lighten(@odiCrimson, 53%);
+
 @odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
-@odiGreyLight: lighten(@odiGrey, 20%);
+@odiGreyLight: lighten(@odiGrey, 25%);
 @odiGreyLighter: lighten(@odiGrey, 40%);
 
 @btnPrimaryBackground: @odiRed;
@@ -58,6 +72,7 @@
 @standard: #2254f3;
 @exemplar: #f9bc26;
 
+<<<<<<< HEAD
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
 
@@ -175,6 +190,8 @@
   }
 
 }
+=======
+>>>>>>> origin
 
 
 
@@ -237,12 +254,37 @@ dd {
   margin-bottom: 30px;
 }
 
-.btn-info {
-  background: @odiBlue;
+
+// make grey input text read easier
+input, textarea{
+  -webkit-font-smoothing: antialiased;
+  .box-shadow(none);
 }
 
-.btn-info:active, .btn-info:hover, .btn-info:focus {
-  background: @odiBlueDark;
+.btn-small {
+  &, &:active, &:hover, &:focus {
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.btn-info {
+  background: @odiBlue;
+
+  &.btn-unstyled {
+    &, &:active, &:hover, &:focus {
+      font-size: 15px;
+      color: @odiBlue;
+      padding: 0;
+      background: none;
+    }
+  }
+
+  &:active, &:hover, &:focus {
+    background: @odiBlueDark;
+  }
 }
 
 .btn-info-modal {
@@ -272,6 +314,13 @@ dd {
   color: white;
   border: none;
   text-shadow: none;
+}
+
+// snap the header to the top when it's affixed
+header.affix {
+    top: 0px; 
+    width:100%;
+    z-index:10;
 }
 
 #padd {
@@ -319,7 +368,7 @@ dd {
   }
 
   .steps {
-    
+
     /* Background stripes (image has 30px of space on left to align) */
     background: url(/assets/background-home-header.gif) repeat-y center;
     margin-bottom: 20px;
@@ -336,7 +385,7 @@ dd {
   .span4 {
 
     // padd in the content
-    h2,p{
+    h2, p{
       padding: 0 20px;
     }
     p{
@@ -349,13 +398,12 @@ dd {
       font-weight: bold;
       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
-
       small {
-      display: block;
-      color: #fff;
-      font-size: 30px;
-      padding: 30px 0 10px;
-      text-shadow: none;
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        padding: 30px 0 10px;
+        text-shadow: none;
       }
     }
 
@@ -379,7 +427,6 @@ dd {
   }
 
   .span4 {
-
     text-align: center;
 
     .logo {
@@ -397,29 +444,22 @@ dd {
     .btn-primary {
       margin-top: -20px;
     }
-
   }
-
 }
 
 .homepage-about-content {
 
   h2 {
-
     font-weight: normal;
-
   }
 
   h2.about-certificate { margin-top: -7px; }
 
   h2.about-odi {
-
-      border-top: 1px solid #e1e1e1;
-      padding-top: 20px;
-      margin-top: 25px;
-
+    border-top: 1px solid #e1e1e1;
+    padding-top: 20px;
+    margin-top: 25px;
   }
-
 }
 
 h3 {
@@ -481,10 +521,6 @@ hr.heavy {
 
   .navbar-inner {
     background-color:rgba(255,255,255,0.65);
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
     border-bottom: none;
     background-image: none;
 
@@ -525,12 +561,12 @@ hr.heavy {
   }
 }
 
-.navbar .nav > .active > a,
-.navbar .nav > .active > a:hover,
-.navbar .nav > .active > a:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow:none;
-  box-shadow: none;
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 nav .dropdown-menu-button {
@@ -611,7 +647,6 @@ header {
 .container.main {
   margin-top: 50px;
 }
-
 
 #footer {
   background-color: #000;
@@ -726,6 +761,7 @@ th {
 // Forms //
 
 .main-default {
+  margin-top: 30px;
 
   .form-field {
     .clearfix;
@@ -801,28 +837,9 @@ th {
   button.copy-certificate {
     padding: 8px 12px;
   }
-
-  .btn-info.unstyled {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 }
 
 .previous-response-set {
-  .btn-info {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 
   td {
     height: 30px;
@@ -909,14 +926,33 @@ td.action {
   }
 }
 
-// Questionnaire (survey) view // 
+// Questionnaire (survey) view //
 
 #surveyor{
 
   padding-top:20px;
 
   header {
-    margin:20px 0;
+    margin:5px 0;
+    h3{
+      font-size: 27px;
+    }
+    h3, h4{
+      color:@white;
+      margin:0;
+    }
+
+    &.inactive{
+      background-color:@odiGrey;
+    }
+    cursor: pointer;
+
+    .transition(background-color 0.25s);
+
+    // override
+    .container{
+      min-height: auto;
+    }
   }
 
   .subsection-label{
@@ -941,7 +977,7 @@ td.action {
 
   input.string{
     height: 60px;
-    font-size: 20px;
+    font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
   }
@@ -964,6 +1000,55 @@ td.action {
   }
 
 
+  // focussed elements
+  fieldset.active{
+    // hard to do the odd outline
+    
+    // outline: 1px solid @odiBlueLight;
+    background-color: @odiBlueLighter;
+  }
+
+  &.highlight-mandatory{
+    .mandatory{
+      background-color:@odiCrimsonLight;
+      &.has-response{
+        background-color:@white;
+      }
+    }
+  }
+
+
+}
+
+#status_panel{
+  .transition(right 0.5s);
+  background-color:@odiGreyLighter;
+  position: absolute;
+  right:0;
+  width:280px;
+  padding:20px;
+  height:100%;
+  z-index:5;
+
+  right:-320px;
+
+  // also .hover for oldie fallback
+  &:hover, &.hover{
+    right:0px;
+  };
+  
+  &.affix, &.affix-bottom{
+    position: fixed;
+    top:130px;
+  }
+
+  #panel_handle{
+    background-image:url(/assets/panel-handle.png);
+    width:79px;
+    height:72px;
+    position: absolute;
+    left:-79px;
+  }
 }
 
 // Certificate view //
@@ -988,8 +1073,20 @@ td.action {
 }
 
 .certificate.hero-unit {
-  margin: -70px auto 30px;
-  width: 920px;
+  margin: -50px auto 30px;
+  padding: 0 15px;
+
+  .btn-info {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 12px;
+    width: 80px;
+    margin-top: 80px;
+  }
+}
+
+.certificate-summary {
+  padding: 0 90px;
 }
 
 .certificate-badge {
@@ -1060,6 +1157,23 @@ strong.certificate-level {
     text-align: center;
 }
 
+// Embedded certificate //
+
+#embedded-certificate {
+  margin: 30px;
+  .certificate.hero-unit {
+    width: auto;
+    margin-top: 30px;
+  }
+}
+
+.embed-code {
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
 /*
 //
 // ***** About Page *****
@@ -1120,7 +1234,11 @@ strong.certificate-level {
 
 /*
 //
+<<<<<<< HEAD
 // ***** Terms Page, Contact (Get in touch) Page *****
+=======
+// ***** Terms Page *****
+>>>>>>> origin
 //
 */
 .container.terms, .container.contact {

@@ -1,4 +1,5 @@
 - content_for(:body_class) {'odi-bleed'}
+- content_for(:main_container_class) {'container'}
 
 - content_for(:super_head) do
   #padd{style: 'height:500px;'}
@@ -8,7 +9,7 @@
           %h1= t('homepage.title')
           %h2= t('homepage.tagline')
           = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
-          = link_to t('homepage.browse_all_new_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-info']
+          -#= link_to t('homepage.browse_all_new_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-info'] #TODO: Commented browse certificate functionality
 
 - content_for(:header) do
   #empty
@@ -43,10 +44,9 @@
     .span4
       //= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
-      //%p.logo ODI
       = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
-      //= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
+      -#= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary'] #TODO: Commented browse certificate functionality
       %p.logo ODI
 
 .container.main
@@ -55,10 +55,12 @@
       %iframe{width: 560, height: 315, src: 'http://www.youtube.com/embed/MRZE6X-ZG6Q', frameborder: 0, allowfullscreen: 'allowfullscreen'}
     .span6.homepage-about-content
       %h2.about-certificate
-        = link_to t('homepage.about_certificate.title'), certificates_path
+        -#= link_to t('homepage.about_certificate.title'), certificates_path #TODO: Commented browse certificate functionality
+        = link_to t('homepage.about_certificate.title'), '/about' #TODO: Commented browse certificate functionality
       %p.about-certificate= t('homepage.about_certificate.description')
-      = link_to t('homepage.about_certificate.link'), certificates_path, class: ['about-certificate']
+      -#= link_to t('homepage.about_certificate.link'), certificates_path, class: ['about-certificate'] #TODO: Commented browse certificate functionality
+      = link_to t('homepage.about_certificate.link'), '/about', class: ['about-certificate'] #TODO: Commented browse certificate functionality
       %h2.about-odi
         = link_to t('homepage.about_odi.title'), '/contact'
-      %p.about-odi= t('homepage.about_odi.description')
+      %p.about-odi= t('homepage.about_odi.description', odi_name_link: link_to(t('homepage.about_odi.odi_name'), 'http://theodi.org')).html_safe
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
