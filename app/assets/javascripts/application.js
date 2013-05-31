@@ -97,7 +97,10 @@ $(function(){
     // lock the height and affix the child node
     $this.height(h).children().affix({ offset: $this.position() });
 
+    $('#status_panel').affix({offset:$this.position(), top:10});
+
   });
+
 
   // major massive massive hack
   //
@@ -115,5 +118,12 @@ $(function(){
     }
   });
 
+
+  // Old ie only supports :hover on anchors
+  $('#status_panel').hover(function(){
+    $(this).addClass('hover');
+  }, function(){
+    $(this).removeClass('hover');
+  });
 
 });

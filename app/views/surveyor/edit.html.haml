@@ -19,6 +19,44 @@
         
   = render :partial => 'shared/flashes'
 
+  :javascript
+    $(function(){
+      $('#status_panel a').on('click', function(){
+        $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
+          var $requirements = $('.requirement_' + level);
+          // hidden ones are good
+          var total = $requirements.size();
+          var hidden = $requirements.filter('.q_hidden').size();
+          var untriggered = 0;
+
+          var shown = total - hidden;
+          $('#bar-' + level).width(100*(hidden/total)  + '%')
+
+        })
+      })
+    })
+  #status_panel
+    #panel_handle
+    %a.btn load
+    %p You've achieved…
+    %hr
+    %h2 Basic Level
+    .progress.progress-striped
+      .bar#bar-basic
+    %hr
+    %h2 Pilot Level
+    .progress.progress-striped
+      .bar#bar-pilot
+    %hr
+    %h2 Standard Level
+    .progress.progress-striped
+      .bar#bar-standard
+    %hr
+    %h2 Exemplar Level
+    .progress.progress-striped
+      .bar#bar-exemplar
+
+
   #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
     = hidden_field_tag :surveyor_javascript_enabled, false
 

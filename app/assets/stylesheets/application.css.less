@@ -178,7 +178,7 @@ input, textarea{
 header.affix {
     top: 0px; 
     width:100%;
-    z-index: 1;
+    z-index:10;
 }
 
 #padd {
@@ -813,6 +813,37 @@ td.action {
   }
 
 
+}
+
+#status_panel{
+  .transition(right 0.5s);
+  background-color:@odiGreyLighter;
+  position: absolute;
+  right:0;
+  width:280px;
+  padding:20px;
+  height:100%;
+  z-index:5;
+
+  right:-320px;
+
+  // also .hover for oldie fallback
+  &:hover, &.hover{
+    right:0px;
+  };
+  
+  &.affix, &.affix-bottom{
+    position: fixed;
+    top:130px;
+  }
+
+  #panel_handle{
+    background-image:url(/assets/panel-handle.png);
+    width:79px;
+    height:72px;
+    position: absolute;
+    left:-79px;
+  }
 }
 
 // Certificate view //
