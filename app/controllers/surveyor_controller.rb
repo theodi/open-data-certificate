@@ -26,6 +26,12 @@ class SurveyorController < ApplicationController
     redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
   end
 
+  def force_save_questionnaire
+    # This action is used when the user has signed-in after clicking the "save and finish" link. It mocks up the request as if it were an already-logged-in user that clicked "save and finish"
+    params[:finish] = true
+    update
+  end
+
   def update
     set_response_set_and_render_context
 
