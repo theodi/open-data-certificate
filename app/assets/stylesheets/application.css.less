@@ -158,32 +158,59 @@
         border: 1px solid #fff;
         .border-radius(0);
         width: 93%;
+        height: 60px;
+        padding: 0 10px;
+        font-size: 20px;
+        color: white;
 
       }
+
+      /* Making input text white loses the 'invalid' colour */
+      /* Add it back */
+      input[type=email]:invalid { color: #cc0000; }
+      input[type=email]:valid { color: #fff; }
 
     }
 
     .form-field-inline {
 
       float: left;
-      margin: -3px 0 0 0;
+      margin: -4px 0 0 0;
+
       input[type=checkbox] { margin: -3px 0 0 0; }
-      label { font-size: 14px; color: #2f2f2f; }
+
+      label { font-size: 14px; color: #2f2f2f; display: inline; }
+      label:hover { text-decoration: underline; }
+
+      .forgot-password {
+
+        display: block;
+        font-size: 14px;
+        color: #2f2f2f;
+        margin-left: 17px;
+
+      }
 
     }
 
     /* Sign in button used on many pages as orange primary button */
     /* Needs to be overridden to be blue info button in modals */
     .btn-primary {
+
       background: @odiBlueDark;
       height: auto;
       padding: 10px 20px;
       float: right;
-      margin: -10px 22px 0 0;
+      margin: -5px 22px 5px 0;
+      font-size: 18px;
+      font-weight: bold;
+
     }
 
     .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+
       background: @odiBlueDarker;
+
     }
 
   }
