@@ -24,7 +24,7 @@
 
   :javascript
     $(function(){
-      $('#status_panel a').on('click', function(){
+      $('#status_panel').on('update', function(){
         $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
           var $requirements = $('.requirement_' + level);
           // hidden ones are good
@@ -40,7 +40,6 @@
     })
   #status_panel
     #panel_handle
-    %a.btn load
     %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
     %hr
     %h3 Raw 

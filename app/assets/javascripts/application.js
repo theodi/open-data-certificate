@@ -178,6 +178,9 @@ $(function(){
   // Old ie only supports :hover on anchors
   $('#status_panel').hover(function(){
     $(this).addClass('hover');
+
+    // also make the bars update
+    $(this).trigger('update');
   }, function(){
     $(this).removeClass('hover');
   });
