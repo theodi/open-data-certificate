@@ -148,3 +148,6 @@ en:
 
   contact:
     heading_contact: Contact the ODI
+
+  errors:
+    errors_occurred: Errors occurred
