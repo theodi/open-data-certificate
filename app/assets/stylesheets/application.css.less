@@ -27,7 +27,9 @@
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
 @odiBlue: #00b7ff;
-@odiBlueLight: lighten(@odiBlue, 36%);
+/* odiBlueLight - primarily for background of inputs in modals */
+@odiBlueLight: lighten(@odiBlue, 15%);
+@odiBlueLighter: lighten(@odiBlue, 36%);
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
 
@@ -77,15 +79,28 @@
   margin-left: -394px;
   .border-radius(0);
 
+  h1 {
+
+    margin-top: -7px;
+    margin-bottom: 40px;
+    font-size: 30px;
+    color: #2f2f2f;
+
+  }
+
+  p { color: #fff; font-size: 20px; }
+
+  .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
+
+  form { margin-bottom: 0; }
+
 }
 
 .modal-header {
 
   border-bottom: 0;
-  margin: 30px 30px 40px 30px;
-  padding: 0; 
-
-  .close { display: none; }
+  margin: 30px;
+  padding: 0;
 
   h3 {
 
@@ -96,6 +111,72 @@
   }
 
 }
+
+.modal-body {
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 40px;
+
+}
+
+.modal-body {
+
+  .log-in {
+
+    background: url(/assets/modal-divider.gif) repeat-y top right;
+
+    label {
+
+      color: #fff;
+      font-size: 20px;
+
+    }
+
+    .form-field {
+
+      margin-bottom: 10px;
+
+      input[type=email], input[type=password] { 
+
+        margin-top: 5px;
+        background: @odiBlueLight;
+        border: 1px solid #fff;
+        .border-radius(0);
+        width: 93%;
+
+      }
+
+    }
+
+    .form-field-inline {
+
+      float: left;
+      margin: -3px 0 0 0;
+      input[type=checkbox] { margin: -3px 0 0 0; }
+      label { font-size: 14px; color: #2f2f2f; }
+
+    }
+
+    /* Sign in button used on many pages as orange primary button */
+    /* Needs to be overridden to be blue info button in modals */
+    .btn-primary {
+      background: @odiBlueDark;
+      height: auto;
+      padding: 10px 20px;
+      float: right;
+      margin: -10px 22px 0 0;
+    }
+
+    .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+      background: @odiBlueDarker;
+    }
+
+  }
+
+}
+
+
 
 /************************************************
     Bootstrap --> Rails
@@ -162,6 +243,14 @@ dd {
 
 .btn-info:active, .btn-info:hover, .btn-info:focus {
   background: @odiBlueDark;
+}
+
+.btn-info-modal {
+  background: @odiBlueDark;
+}
+
+.btn-info-modal:active, .btn-info-modal:hover, .btn-info-modal:focus {
+  background: @odiBlueDarker;
 }
 
 .btn-primary {
@@ -695,7 +784,7 @@ th {
 // My certificates view //
 
 .first-response-set {
-  background: @odiBlueLight;
+  background: @odiBlueLighter;
 
   td.level {
     text-align: center;
@@ -842,7 +931,7 @@ td.action {
   }
 
   .question-meta{
-    background-color:@odiBlueLight;
+    background-color:@odiBlueLighter;
   }
 
   // brought in from main styles
@@ -1018,10 +1107,10 @@ strong.certificate-level {
 
       }
 
-      li.kitemark1 { background: url(/assets/ODI-kitemark-level1.png) no-repeat top left; }
-      li.kitemark2 { background: url(/assets/ODI-kitemark-level2.png) no-repeat top left; }
-      li.kitemark3 { background: url(/assets/ODI-kitemark-level3.png) no-repeat top left; }
-      li.kitemark4 { background: url(/assets/ODI-kitemark-level4.png) no-repeat top left; }
+      li.kitemark1 { background: url(/assets/badges/no_level_badge.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; }
 
     }
 
