@@ -4,11 +4,12 @@
     %h3= t('homepage.start_new_certificate')
   .modal-body
     .row-fluid
-      .span6
+      .span6.log-in
+        %h1= t('homepage.log_in')
         = render 'devise/sessions/form', resource: User.new, resource_name: 'user', remote: true, form_id: 'start_cert_modal_form'
       .span6
         %h1= t('homepage.dont_have_an_account')
         %p= t('homepage.register_later_message')
         = form_tag non_authenticated_start_questionnaire_path do
-          %button= t('homepage.continue_without_registering')
-        = link_to t('homepage.create_an_account'), new_user_registration_path, :class => 'btn'
+          %button.btn.btn-large.btn-primary= t('homepage.continue_without_registering')
+        = link_to t('homepage.create_an_account'), new_user_registration_path, :class => ['btn', 'btn-large', 'btn-info', 'btn-info-modal']
