@@ -908,7 +908,6 @@ td.action {
     right:0px;
   };
   
-  right:0;
 
   &.affix, &.affix-bottom{
     position: fixed;
@@ -917,18 +916,26 @@ td.action {
 
   #panel_handle{
     background-image:url(/assets/panel-handle.png);
-    width:79px;
+    width:78px;
     height:72px;
     position: absolute;
-    left:-79px;
+    left:-78px;
   }
 
   h3 {
     margin-bottom: 0;
+    display: inline;
+    width: 50%;
+  }
+
+  img {
+    display: inline;
+    float: right;
   }
 
   .progress {
     margin-bottom: 10px;
+    clear: both;
   }
 }
 
