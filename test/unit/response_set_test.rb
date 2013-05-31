@@ -132,6 +132,8 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal response_set.triggered_mandatory_questions, [triggered_mandatory_question]
   end
 
+  #TODO: need to test "all_mandatory_questions_complete?"
+
   test "#triggered_requirements should return an array of all the requirements that are triggered by their dependencies for the response_set" do
     survey_section = FactoryGirl.create(:survey_section)
     survey = survey_section.survey
