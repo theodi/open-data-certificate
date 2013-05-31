@@ -62,5 +62,5 @@
       = link_to t('homepage.about_certificate.link'), '/about', class: ['about-certificate'] #TODO: Commented browse certificate functionality
       %h2.about-odi
         = link_to t('homepage.about_odi.title'), '/contact'
-      %p.about-odi= t('homepage.about_odi.description')
+      %p.about-odi= t('homepage.about_odi.description', odi_name_link: link_to(t('homepage.about_odi.odi_name'), 'http://theodi.org')).html_safe
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
