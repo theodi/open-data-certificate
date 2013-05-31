@@ -271,6 +271,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_3'
     dependency :rule => 'A'
+    condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
       :display_on_certificate => 'true',
@@ -816,6 +817,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_8'
     dependency :rule => 'A'
+    condition_A :q_linkedTo, '==', :a_false
 
     q_listed 'Is your data listed within a collection?',
       :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public or health for example, or when it turns up in relevant search results.',
@@ -828,6 +830,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_9'
     dependency :rule => 'A'
+    condition_A :q_listed, '==', :a_false
 
     repeater 'Listing' do
 
@@ -858,6 +861,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_10'
     dependency :rule => 'A'
+    condition_A :q_referenced, '==', :a_false
 
     repeater 'Reference' do
 
@@ -1193,6 +1197,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_17'
     dependency :rule => 'A'
+    condition_A :q_qualityUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_qualityControlUrl 'Where is your quality control process described?',
       :display_on_certificate => 'true',
@@ -1208,6 +1213,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_7'
     dependency :rule => 'A'
+    condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_group_8 'Guarantees',
       :help_text => 'how much people can depend on your data’s availability',
@@ -1643,6 +1649,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_16'
     dependency :rule => 'A'
+    condition_A :q_machineReadable, '==', :a_false
 
     q_openStandard 'Is this data in a standard open format?',
       :display_on_certificate => 'true',
@@ -1660,6 +1667,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_24'
     dependency :rule => 'A'
+    condition_A :q_openStandard, '==', :a_false
 
     q_dataType 'What kind of data will you publish?',
       :pick => :any
@@ -1820,6 +1828,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_28'
     dependency :rule => 'A'
+    condition_A :q_identifiers, '==', :a_false
 
     q_resolvingIds 'Can the identifiers in your data be used to find extra information?',
       :display_on_certificate => 'true',
@@ -1937,6 +1946,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_15'
     dependency :rule => 'A'
+    condition_A :q_provenance, '==', :a_false
 
     q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
       :display_on_certificate => 'true',
@@ -1952,6 +1962,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_16'
     dependency :rule => 'A'
+    condition_A :q_digitalCertificate, '==', {:string_value => '', :answer_reference => '1'}
 
   end
 
@@ -2258,6 +2269,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_22'
     dependency :rule => 'A'
+    condition_A :q_contactEmail, '==', {:string_value => '', :answer_reference => '1'}
 
     q_improvementsContact 'Where can people find out how to improve the way your data is published?',
       :display_on_certificate => 'true',
@@ -2272,6 +2284,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_23'
     dependency :rule => 'A'
+    condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dataProtectionEmail 'Who should people email with questions about privacy?',
       :display_on_certificate => 'true',
@@ -2286,6 +2299,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_24'
     dependency :rule => 'A'
+    condition_A :q_dataProtectionEmail, '==', {:string_value => '', :answer_reference => '1'}
 
     q_socialMedia 'Do you use social media to connect with people who use your data?',
       :pick => :one
@@ -2297,6 +2311,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_51'
     dependency :rule => 'A'
+    condition_A :q_socialMedia, '==', :a_false
 
     repeater 'Account' do
 
@@ -2330,6 +2345,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_52'
     dependency :rule => 'A'
+    condition_A :q_forum, '==', {:string_value => '', :answer_reference => '1'}
 
     q_correctionReporting 'Where can people find out how to request corrections to your data?',
       :display_on_certificate => 'true',
@@ -2382,6 +2398,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_17'
     dependency :rule => 'A'
+    condition_A :q_engagementTeam, '==', {:string_value => '', :answer_reference => '1'}
 
     label_group_16 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',
@@ -2401,6 +2418,7 @@ survey 'Open Data Certificate Questionnaire',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_18'
     dependency :rule => 'A'
+    condition_A :q_libraries, '==', {:string_value => '', :answer_reference => '1'}
 
   end
 

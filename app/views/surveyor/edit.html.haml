@@ -5,21 +5,62 @@
   / header overridden
 - content_for(:main_container_class) {'non-container'}
 
-
 = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
-  %header
-    .container
-      .row
-        .span9
-          %h1 New Certificate
-          %h3= @response_set.title
-        .span3
-          = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
-      
+  .affixed
+    %header
+      .container
+        .row
+          .span9
+            %h1 New Certificate
+            %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
+          .span3
+            - if user_signed_in?
+              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+            - else
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary', :role=>"button", 'data-toggle' => "modal"
+        
   = render :partial => 'shared/flashes'
 
-  #surveyor
+  :javascript
+    $(function(){
+      $('#status_panel a').on('click', function(){
+        $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
+          var $requirements = $('.requirement_' + level);
+          // hidden ones are good
+          var total = $requirements.size();
+          var hidden = $requirements.filter('.q_hidden').size();
+          var untriggered = 0;
+
+          var shown = total - hidden;
+          $('#bar-' + level).width(100*(hidden/total)  + '%')
+
+        })
+      })
+    })
+  #status_panel
+    #panel_handle
+    %a.btn load
+    %p You've achieved…
+    %hr
+    %h2 Basic Level
+    .progress.progress-striped
+      .bar#bar-basic
+    %hr
+    %h2 Pilot Level
+    .progress.progress-striped
+      .bar#bar-pilot
+    %hr
+    %h2 Standard Level
+    .progress.progress-striped
+      .bar#bar-standard
+    %hr
+    %h2 Exemplar Level
+    .progress.progress-striped
+      .bar#bar-exemplar
+
+
+  #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container
@@ -41,6 +82,9 @@
         = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
         %br/
         (right-click and open in a new tab)
+
+= render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
+
 
 :javascript
   $(document).ready(function() {

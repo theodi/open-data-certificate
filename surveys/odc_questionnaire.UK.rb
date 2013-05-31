@@ -66,7 +66,8 @@ survey 'Open Data Certificate Questionnaire',
 
   end
 
-  section_legal 'Legal Information' do
+  section_legal 'Legal Information',
+       :description => 'Rights, licensing and copyright statements' do
 
     label_group_1 'Rights',
                   :help_text => 'your right to share this data with people',
@@ -680,7 +681,8 @@ survey 'Open Data Certificate Questionnaire',
 
   end
 
-  section_practical 'Practical Information' do
+  section_practical 'Practical Information',
+    :description => 'Findability, accuracy, quality, relability' do
 
     label_group_5 'Findability',
                   :help_text => 'how you help people find your data',
@@ -1109,7 +1111,8 @@ survey 'Open Data Certificate Questionnaire',
 
   end
 
-  section_technical 'Technical Information' do
+  section_technical 'Technical Information',
+    :description => 'Formats' do
 
     label_group_10 'Locations',
                    :help_text => 'how people can access your data',
@@ -1702,7 +1705,8 @@ survey 'Open Data Certificate Questionnaire',
 
   end
 
-  section_social 'Social Information' do
+  section_social 'Social Information',
+    :description => 'Contact details for support, help, discussion boards' do
 
     label_group_14 'Documentation',
                    :help_text => 'how you help people understand the context and content of your data',

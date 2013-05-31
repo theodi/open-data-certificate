@@ -26,8 +26,22 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
+// use our own grey for the input field
+@gray: @odiGrey;
+@placeholderText: @odiGreyLight;
+@inputBorderRadius: 2px;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
 @odiBlue: #00b7ff;
-@odiBlueLight: lighten(@odiBlue, 36%);
+/* odiBlueLight - primarily for background of inputs in modals */
+@odiBlueLight: lighten(@odiBlue, 15%);
+@odiBlueLighter: lighten(@odiBlue, 36%);
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
 
@@ -37,6 +51,7 @@
 
 @odiCrimson: #d30102;
 @odiCrimsonDark: darken(@odiCrimson, 6%);
+@odiCrimsonLight: lighten(@odiCrimson, 53%);
 
 @odiOrange: #f99C06;
 @odiOrangeDark: darken(@odiOrange, 6%);
@@ -49,7 +64,7 @@
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
-@odiGreyLight: lighten(@odiGrey, 20%);
+@odiGreyLight: lighten(@odiGrey, 25%);
 @odiGreyLighter: lighten(@odiGrey, 40%);
 
 @btnPrimaryBackground: @odiRed;
@@ -73,6 +88,114 @@
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
+/*
+//
+// ***** Modal - Create certificate *****
+//
+*/
+.modal {
+
+  background: @odiBlue;
+  width: 788px;
+  margin-left: -394px;
+  .border-radius(0);
+
+  h1 {
+
+    margin-top: -7px;
+    margin-bottom: 40px;
+    font-size: 30px;
+    color: #2f2f2f;
+
+  }
+
+  p { color: #fff; font-size: 20px; }
+
+  .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
+
+  form { margin-bottom: 0; }
+
+}
+
+.modal-header {
+
+  border-bottom: 0;
+  margin: 30px;
+  padding: 0;
+
+  h3 {
+
+    color: #fff;
+    font-size: 36px;
+    font-weight: normal;
+
+  }
+
+}
+
+.modal-body {
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 40px;
+
+}
+
+.modal-body {
+
+  .log-in {
+
+    background: url(/assets/modal-divider.gif) repeat-y top right;
+
+    label {
+
+      color: #fff;
+      font-size: 20px;
+
+    }
+
+    .form-field {
+
+      margin-bottom: 10px;
+
+      input[type=email], input[type=password] {
+
+        margin-top: 5px;
+        background: @odiBlueLight;
+        border: 1px solid #fff;
+        .border-radius(0);
+        width: 93%;
+
+      }
+
+    }
+
+    .form-field-inline {
+
+      float: left;
+      margin: -3px 0 0 0;
+      input[type=checkbox] { margin: -3px 0 0 0; }
+      label { font-size: 14px; color: #2f2f2f; }
+
+    }
+
+    /* Sign in button used on many pages as orange primary button */
+    /* Needs to be overridden to be blue info button in modals */
+    .btn-primary {
+      background: @odiBlueDark;
+      height: auto;
+      padding: 10px 20px;
+      float: right;
+      margin: -10px 22px 0 0;
+    }
+
+    .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+      background: @odiBlueDarker;
+    }
+
+  }
+
+}
 
 
 /************************************************
@@ -134,6 +257,13 @@ dd {
   margin-bottom: 30px;
 }
 
+
+// make grey input text read easier
+input, textarea{
+  -webkit-font-smoothing: antialiased;
+  .box-shadow(none);
+}
+
 .btn-small {
   &, &:active, &:hover, &:focus {
     text-shadow: none;
@@ -160,6 +290,14 @@ dd {
   }
 }
 
+.btn-info-modal {
+  background: @odiBlueDark;
+}
+
+.btn-info-modal:active, .btn-info-modal:hover, .btn-info-modal:focus {
+  background: @odiBlueDarker;
+}
+
 .btn-primary {
   background: @odiRed;
 }
@@ -179,6 +317,13 @@ dd {
   color: white;
   border: none;
   text-shadow: none;
+}
+
+// snap the header to the top when it's affixed
+header.affix {
+    top: 0px;
+    width:100%;
+    z-index:10;
 }
 
 #padd {
@@ -765,7 +910,7 @@ th {
 // My certificates view //
 
 .first-response-set {
-  background: @odiBlueLight;
+  background: @odiBlueLighter;
 
   td.level {
     text-align: center;
@@ -878,7 +1023,26 @@ td.action {
   padding-top:20px;
 
   header {
-    margin:20px 0;
+    margin:5px 0;
+    h3{
+      font-size: 27px;
+    }
+    h3, h4{
+      color:@white;
+      margin:0;
+    }
+
+    &.inactive{
+      background-color:@odiGrey;
+    }
+    cursor: pointer;
+
+    .transition(background-color 0.25s);
+
+    // override
+    .container{
+      min-height: auto;
+    }
   }
 
   .subsection-label{
@@ -893,7 +1057,7 @@ td.action {
   }
 
   .question-meta{
-    background-color:@odiBlueLight;
+    background-color:@odiBlueLighter;
   }
 
   // brought in from main styles
@@ -903,7 +1067,7 @@ td.action {
 
   input.string{
     height: 60px;
-    font-size: 20px;
+    font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
   }
@@ -926,6 +1090,55 @@ td.action {
   }
 
 
+  // focussed elements
+  fieldset.active{
+    // hard to do the odd outline
+
+    // outline: 1px solid @odiBlueLight;
+    background-color: @odiBlueLighter;
+  }
+
+  &.highlight-mandatory{
+    .mandatory{
+      background-color:@odiCrimsonLight;
+      &.has-response{
+        background-color:@white;
+      }
+    }
+  }
+
+
+}
+
+#status_panel{
+  .transition(right 0.5s);
+  background-color:@odiGreyLighter;
+  position: absolute;
+  right:0;
+  width:280px;
+  padding:20px;
+  height:100%;
+  z-index:5;
+
+  right:-320px;
+
+  // also .hover for oldie fallback
+  &:hover, &.hover{
+    right:0px;
+  };
+
+  &.affix, &.affix-bottom{
+    position: fixed;
+    top:130px;
+  }
+
+  #panel_handle{
+    background-image:url(/assets/panel-handle.png);
+    width:79px;
+    height:72px;
+    position: absolute;
+    left:-79px;
+  }
 }
 
 // Certificate view //
@@ -1082,6 +1295,8 @@ strong.certificate-level {
 
     ul { margin-top: 10px; }
 
+    li { margin-bottom: 5px; line-height: 24px; }
+
     ul.kitemarks {
 
       margin: 20px 0 10px 0;
@@ -1096,10 +1311,10 @@ strong.certificate-level {
 
       }
 
-      li.kitemark1 { background: url(/assets/ODI-kitemark-level1.png) no-repeat top left; }
-      li.kitemark2 { background: url(/assets/ODI-kitemark-level2.png) no-repeat top left; }
-      li.kitemark3 { background: url(/assets/ODI-kitemark-level3.png) no-repeat top left; }
-      li.kitemark4 { background: url(/assets/ODI-kitemark-level4.png) no-repeat top left; }
+      li.kitemark1 { background: url(/assets/badges/no_level_badge.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; }
 
     }
 
@@ -1109,10 +1324,10 @@ strong.certificate-level {
 
 /*
 //
-// ***** Terms Page *****
+// ***** Terms Page, Contact (Get in touch) Page *****
 //
 */
-.container.terms {
+.container.terms, .container.contact {
 
   .span8 {
 
@@ -1134,7 +1349,7 @@ strong.certificate-level {
 
     }
 
-    li { margin-bottom: 3px; }
+    li { margin-bottom: 5px; line-height: 24px; }
 
   }
 
