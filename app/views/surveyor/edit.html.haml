@@ -15,7 +15,10 @@
             %h1 New Certificate
             %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3
-            = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+            - if user_signed_in?
+              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+            - else
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary', :role=>"button", 'data-toggle' => "modal"
         
   = render :partial => 'shared/flashes'
 
@@ -79,6 +82,9 @@
         = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
         %br/
         (right-click and open in a new tab)
+
+= render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
+
 
 :javascript
   $(document).ready(function() {
