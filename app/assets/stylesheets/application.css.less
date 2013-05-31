@@ -127,12 +127,30 @@ dd {
   margin-bottom: 30px;
 }
 
-.btn-info {
-  background: @odiBlue;
+.btn-small {
+  &, &:active, &:hover, &:focus {
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
-.btn-info:active, .btn-info:hover, .btn-info:focus {
-  background: @odiBlueDark;
+.btn-info {
+  background: @odiBlue;
+
+  &.btn-unstyled {
+    &, &:active, &:hover, &:focus {
+      font-size: 15px;
+      color: @odiBlue;
+      padding: 0;
+      background: none;
+    }
+  }
+
+  &:active, &:hover, &:focus {
+    background: @odiBlueDark;
+  }
 }
 
 .btn-primary {
@@ -218,7 +236,7 @@ dd {
   .span4 {
 
     // padd in the content
-    h2,p{
+    h2, p{
       padding: 0 20px;
     }
     p{
@@ -231,13 +249,12 @@ dd {
       font-weight: bold;
       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
-
       small {
-      display: block;
-      color: #fff;
-      font-size: 30px;
-      padding: 30px 0 10px;
-      text-shadow: none;
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        padding: 30px 0 10px;
+        text-shadow: none;
       }
     }
 
@@ -261,7 +278,6 @@ dd {
   }
 
   .span4 {
-
     text-align: center;
 
     .logo {
@@ -279,29 +295,22 @@ dd {
     .btn-primary {
       margin-top: -20px;
     }
-
   }
-
 }
 
 .homepage-about-content {
 
   h2 {
-
     font-weight: normal;
-
   }
 
   h2.about-certificate { margin-top: -7px; }
 
   h2.about-odi {
-
-      border-top: 1px solid #e1e1e1;
-      padding-top: 20px;
-      margin-top: 25px;
-
+    border-top: 1px solid #e1e1e1;
+    padding-top: 20px;
+    margin-top: 25px;
   }
-
 }
 
 h3 {
@@ -417,12 +426,12 @@ body {
   }
 }
 
-.navbar .nav > .active > a,
-.navbar .nav > .active > a:hover,
-.navbar .nav > .active > a:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow:none;
-  box-shadow: none;
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 nav .dropdown-menu-button {
@@ -503,7 +512,6 @@ header {
 .container.main {
   margin-top: 50px;
 }
-
 
 #footer {
   background-color: #000;
@@ -618,6 +626,7 @@ th {
 // Forms //
 
 .main-default {
+  margin-top: 30px;
 
   .form-field {
     .clearfix;
@@ -693,28 +702,9 @@ th {
   button.copy-certificate {
     padding: 8px 12px;
   }
-
-  .btn-info.unstyled {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 }
 
 .previous-response-set {
-  .btn-info {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 
   td {
     height: 30px;
@@ -880,8 +870,20 @@ td.action {
 }
 
 .certificate.hero-unit {
-  margin: -70px auto 30px;
-  width: 920px;
+  margin: -50px auto 30px;
+  padding: 0 15px;
+
+  .btn-info {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 12px;
+    width: 80px;
+    margin-top: 80px;
+  }
+}
+
+.certificate-summary {
+  padding: 0 90px;
 }
 
 .certificate-badge {
@@ -952,6 +954,23 @@ strong.certificate-level {
     text-align: center;
 }
 
+// Embedded certificate //
+
+#embedded-certificate {
+  margin: 30px;
+  .certificate.hero-unit {
+    width: auto;
+    margin-top: 30px;
+  }
+}
+
+.embed-code {
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
 /*
 //
 // ***** About Page *****
@@ -1010,7 +1029,7 @@ strong.certificate-level {
 
 /*
 //
-// ***** About Page *****
+// ***** Terms Page *****
 //
 */
 .container.terms {
