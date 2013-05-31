@@ -36,6 +36,14 @@
 @odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiCrimsonDark: darken(@odiCrimson, 6%);
+
+@odiOrange: #f99C06;
+@odiOrangeDark: darken(@odiOrange, 6%);
+
+@odiGreen: #0DBC37;
+@odiGreenDark: darken(@odiGreen, 6%);
+
 @odiPomegranate: #dc4810;
 
 @odiGrey: #aaa;
@@ -64,7 +72,6 @@
 @gridColumnWidth:         70px;
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
 
 
 
@@ -614,6 +621,74 @@ section {
 
 
 
+// Alert messages //
+
+.flash {
+  margin-top: 20px;
+}
+
+.alert {
+  color: white;
+  padding: 14px 12px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  vertical-align: middle;
+
+  .icon-large {
+    margin-bottom: 1px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .close, .close:hover, .close:active {
+    opacity: 1;
+    width: 14px;
+    height: 14px;
+    position: static;
+    background-image: url(/assets/glyphicons-halflings-white.png);
+    background-position: -312px 0;
+  }
+}
+
+.alert-alert {
+  background: @odiCrimson;
+  border: 1px solid @odiCrimsonDark;
+}
+
+.alert-warning {
+  background: @odiOrange;
+  border: 1px solid @odiOrangeDark;
+}
+
+.alert-notice {
+  background: @odiGreen;
+  border: 1px solid @odiGreenDark;
+}
+
+// Icons //
+
+.icon-large {
+
+  width: 28px;
+  height: 28px;
+  background-image: url(/assets/glyphicons.png);
+
+  &.icon-white {
+    background-image: url(/assets/glyphicons_white.png);
+  }
+
+  // Spacing between icons in file
+  @spacing: -48px;
+
+  // Mixin to help select correct icon
+  .icon-position(@top, @left) {
+    background-position: @spacing * @left (@spacing * @top) + 1;
+  }
+
+  &.icon-ok-sign { .icon-position(19, 3); }
+  &.icon-info-sign { .icon-position(19, 5); }
+  &.icon-exclamation-sign { .icon-position(19, 6); }
+  &.icon-ban-circle { .icon-position(19, 9); }
+}
 
 // Tables //
 
