@@ -302,42 +302,51 @@ hr.heavy {
 
 // Layout //
 
+body {
+  min-width: 1170px;
+}
+
 .navbar-inner {
   height: 60px;
 }
 
-#topbar ul {
-  li {
-    margin: 0;
-    padding:0;
-    height: 60px;
-    border-left: 1px solid #707070;
+#topbar {
+  background: #1b1b1b;
 
-    a {
-      color: #fff;
-      padding: 20px;
-    }
+  ul {
+    li {
+      margin: 0;
+      padding:0;
+      height: 60px;
+      border-left: 1px solid #707070;
 
-    a:hover {
-      background-color: @odiRed;
+      a {
+        color: #fff;
+        padding: 20px;
+      }
+
+      a:hover {
+        background-color: @odiRed;
+      }
     }
+    border-right: 1px solid #707070;
   }
-  border-right: 1px solid #707070;
-}
 
-#topbar .label {
-  top: -15px;
-  position: relative;
-  padding-top: 10px;
-  background-color: @odiBlue;
+  .label {
+    top: -15px;
+    position: relative;
+    padding-top: 10px;
+    background-color: @odiBlue;
+  }
 }
 
 #mainnav {
   margin-bottom: 0;
   position: relative;
+  background-color: rgba(255,255,255,0.65);
 
   .navbar-inner {
-    background-color:rgba(255,255,255,0.65);
+    background: none;
     border-radius: 0;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -703,7 +712,7 @@ td.action {
   }
 }
 
-// Questionnaire (survey) view // 
+// Questionnaire (survey) view //
 
 #surveyor{
 

@@ -14,8 +14,8 @@
     = yield(:super_head)
     %nav
       #topbar.navbar.navbar-inverse.navbar-static-top
-        .navbar-inner
-          .container
+        .container
+          .navbar-inner
             %a.brand{:href => "/"}
               = image_tag "logo.png"
             %ul.nav.pull-right
@@ -23,8 +23,8 @@
             %span.label{:style => "margin-top: 10px;"} BETA
       %nav
       #mainnav.navbar.navbar-static-top
-        .navbar-inner
-          .container
+        .container
+          .navbar-inner
             %ul.nav.pull-right
               = main_menu_navigation
 
@@ -46,7 +46,7 @@
       .container
         .span8.footer-content
           %h1
-            %a{:href => "http://www.theodi.org"} Open Data Institute            
+            %a{:href => "http://www.theodi.org"} Open Data Institute
           %p
             %a{:href => "http://www.openstreetmap.org/?lat=51.522205&lon=-0.08176500000001852&zoom=16&layers=T&mlat=51.52210&mlon=-0.08343"} Open Data Institute, 65 Clifton Street, London EC2A 4JE
           %p
