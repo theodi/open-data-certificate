@@ -116,7 +116,7 @@ p.lead {
 }
 
 dl {
-  margin: 30px 0;
+  margin: 0 0 45px;
 }
 
 dt, dd {
@@ -337,10 +337,15 @@ hr.heavy {
 // Layout //
 
 body {
-  min-width: 1170px;
+  min-width: 1210px;
+}
+
+.container {
+  padding: 0 20px;
 }
 
 .navbar-inner {
+  padding: 0;
   height: 60px;
 }
 
@@ -348,6 +353,8 @@ body {
   background: #1b1b1b;
 
   ul {
+    border-right: 1px solid #707070;
+
     li {
       margin: 0;
       padding:0;
@@ -362,8 +369,6 @@ body {
       a:hover, a.active {
         background-color: @odiRed;
       }
-
-      border-right: 1px solid #707070;
     }
   }
 
@@ -554,7 +559,7 @@ header {
 
     li {
       display: inline;
-      margin: 0 0 0 20px;
+      margin-left: 20px;
     }
   }
 

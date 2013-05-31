@@ -39,7 +39,7 @@
             %small= t('homepage.share_open_data.title')
           %p= t('homepage.share_open_data.description')
 
-.container.home-header-buttons
+.home-header-buttons
   .row
     .span4
       //= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
@@ -50,7 +50,7 @@
       //= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary']
       %p.logo ODI
 
-.container.main
+.main
   .row
     .span6
       %iframe{width: 560, height: 315, src: 'http://www.youtube.com/embed/MRZE6X-ZG6Q', frameborder: 0, allowfullscreen: 'allowfullscreen'}
