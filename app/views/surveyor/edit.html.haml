@@ -16,15 +16,15 @@
             %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3
             - if user_signed_in?
-              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
             - else
-              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary', :role=>"button", 'data-toggle' => "modal"
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
         
   = render :partial => 'shared/flashes'
 
   :javascript
     $(function(){
-      $('#status_panel a').on('click', function(){
+      $('#status_panel').on('update', function(){
         $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
           var $requirements = $('.requirement_' + level);
           // hidden ones are good
@@ -40,7 +40,6 @@
     })
   #status_panel
     #panel_handle
-    %a.btn load
     %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
     %hr
     %h3 Raw 
@@ -76,7 +75,12 @@
         %p.lead.span8= @survey.translation(I18n.locale)[:description]
 
     = render 'partials/dependents' unless @dependents.empty?
-    - if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+
+    -# if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+    -#
+    -# We're going extra careful here because there have been some
+    -# caching based issues that we've not been able to get the 
+    - if @response_set.responses.empty?
       = cache("section_#{@section.id}") do
         = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
