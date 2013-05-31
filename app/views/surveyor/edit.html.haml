@@ -41,24 +41,32 @@
   #status_panel
     #panel_handle
     %a.btn load
-    %p You've achieved…
+    %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
     %hr
-    %h2 Basic Level
-    .progress.progress-striped
+    %h3 Raw 
+    .progress.progress-striped.progress-info
       .bar#bar-basic
-    %hr
-    %h2 Pilot Level
-    .progress.progress-striped
-      .bar#bar-pilot
-    %hr
-    %h2 Standard Level
-    .progress.progress-striped
-      .bar#bar-standard
-    %hr
-    %h2 Exemplar Level
-    .progress.progress-striped
-      .bar#bar-exemplar
 
+    %hr
+    %h3 Pilot
+    = image_tag "badges/status-indicators/pilot.png"
+    .progress.progress-striped.progress-warning
+      .bar#bar-pilot
+   
+    %hr
+    %h3 Standard
+    = image_tag "badges/status-indicators/standard.png"
+    .progress.progress-striped.progress-success
+      .bar#bar-standard
+
+    %hr
+    %h3 Expert
+    = image_tag "badges/status-indicators/expert.png"
+    .progress.progress-striped.progress-danger
+      .bar#bar-exemplar
+    %hr
+    %p 
+    %a{:href => "http://certificate.theodi.org/surveys/-PJCBXiSMw/requirements?locale=en"} How can I improve my open data? 
 
   #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
     = hidden_field_tag :surveyor_javascript_enabled, false
