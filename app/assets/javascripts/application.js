@@ -89,10 +89,10 @@ $(function(){
 
   // trigger the highlighting of fieldsets
   $('#surveyor')
-    .on('focus', 'input', function(){
+    .on('focus', 'input, select, textarea', function(){
       $(this).parents('fieldset').addClass('active').trigger('_focus');
     })
-    .on('blur', 'input', function(){
+    .on('blur', 'input, select, textarea', function(){
       $(this).parents('fieldset').removeClass('active').trigger('_blur');
     });
 
@@ -102,6 +102,12 @@ $(function(){
   var $baseFieldsets = $('[data-reference-identifier]fieldset');
   $baseFieldsets.each(function(){
     reference_id_els[$(this).data('reference-identifier')] = this;
+  });
+
+  $baseFieldsets.on('mouseover', function(){
+    $(this).addClass('active').trigger('_focus');
+  }).on('mouseout', function(){
+    $(this).removeClass('active').trigger('_blur');
   });
 
   // binding the text of this to the value of a
@@ -164,7 +170,7 @@ $(function(){
     if(ref_id){
       $current = $this;
     } else if($current){
-      $this.remove().appendTo($current.find('aside')).css('border', '2px solid red');
+      $this.remove().appendTo($current.find('aside'));
     }
   });
 

@@ -16,9 +16,9 @@
             %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3
             - if user_signed_in?
-              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary'
+              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
             - else
-              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary', :role=>"button", 'data-toggle' => "modal"
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
         
   = render :partial => 'shared/flashes'
 

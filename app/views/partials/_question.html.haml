@@ -16,12 +16,12 @@
   %li.container
     - r = response_for(@response_set, q, nil, rg)
     -# if we are using the default renderer, we will display the question text within that
-    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} #{q.is_mandatory ? 'mandatory' : ''} #{r.new_record? ? '' : 'has-response'} row", 'data-reference-identifier' => q.reference_identifier do
+    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} #{q.is_mandatory ? 'mandatory' : ''} #{r.new_record? ? '' : 'has-response'} row question-row", 'data-reference-identifier' => q.reference_identifier do
 
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
       - if q.pick == 'one' or q.pick == 'any'
-        %label= question_text
+        %label.span12= question_text
 
       .span8
         - case renderer

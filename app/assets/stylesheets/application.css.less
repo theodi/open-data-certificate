@@ -963,14 +963,20 @@ td.action {
     margin:auto;
   }
 
-  .question-meta{
-    background-color:@odiBlueLighter;
-  }
-
   // brought in from main styles
   label {
     font-size: 22px;
   }
+
+  .choice input{
+    margin-right:10px;
+  }
+  .choice label{
+    font-size:16px;
+    color:@gray;
+    -webkit-font-smoothing: antialiased;
+  }
+
 
   input.string{
     height: 60px;
@@ -994,6 +1000,24 @@ td.action {
   .group_label small{
     color:@odiGrey;
     font-size: 65%;
+  }
+
+
+
+  .question-row{
+    position: relative;
+    aside{
+      display:none;
+      position:absolute;
+      right:0;
+      background-color:@odiBlueLighter;
+      padding:20px;
+      width:330px;
+    }
+  }
+
+  .question-meta{
+
   }
 
 
