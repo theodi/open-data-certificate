@@ -1,9 +1,8 @@
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
 %li.container
-  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} requirement_{requirement} row" do
+  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} requirement_#{requirement}" do
     %li
-      .question-meta.span4.offset8
-        %h4= requirement
-        %p= q_text(q, @render_context, I18n.locale)
-        %p= q.help_text_for(@render_context, I18n.locale)
+      %h4= requirement
+      %p= q_text(q, @render_context, I18n.locale)
+      %p= q.help_text_for(@render_context, I18n.locale)
