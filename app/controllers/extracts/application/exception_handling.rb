@@ -10,6 +10,7 @@ module Extracts
           rescue_from ActionController::RoutingError, :with => :render_not_found
           rescue_from ActionController::UnknownController, :with => :render_not_found
           rescue_from ActionController::UnknownAction, :with => :render_not_found
+          rescue_from CanCan::AccessDenied, :with => :permission_denied_error
         end
       end
 
@@ -22,6 +23,12 @@ module Extracts
       def render_not_found(exception)
         log_error(exception)
         render :template => "/errors/404", :status => 404
+      end
+
+      private
+      def permission_denied_error(exception)
+        log_error(exception)
+        render :template => "/errors/401", :status => 401
       end
 
       private
