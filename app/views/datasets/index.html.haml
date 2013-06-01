@@ -1,6 +1,4 @@
-- content_for :header_title, t('dashboard.heading__my_certificates')
-
-// %p.lead= t('dashboard.heading__intro_text')
+- content_for :header_title, t('dashboard.page_title')
 
 - if current_user.datasets.any?
   = render partial: 'datasets/dataset', collection: current_user.datasets
