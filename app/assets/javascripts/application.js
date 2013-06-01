@@ -79,7 +79,7 @@ $(function(){
 
   // a map from reference_id to the relevant fieldset (DOM, not $wrapped)
   var reference_id_els = {};
-  var $baseFieldsets = $('[data-reference-identifier]fieldset');
+  var $baseFieldsets = $('[data-reference-identifier]');
   $baseFieldsets.each(function(){
     reference_id_els[$(this).data('reference-identifier')] = this;
   });
