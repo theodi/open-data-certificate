@@ -38,7 +38,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_publisher 'Who curates this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is curated by',
+      :text_as_statement => 'This data is curated by',
       :help_text => 'Give the name of the organisation who looks after this data. It’s probably who you work for unless you’re doing this on behalf of someone else.'
     a_1 'Data Curator',
       :string,
@@ -89,7 +89,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_publisherOrigin 'Was *all* this data originally created or gathered by you?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data was',
+      :text_as_statement => 'This data was',
       :help_text => 'If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.',
       :pick => :one,
       :required => :required
@@ -145,7 +145,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_crowdsourced 'Was some of this data crowdsourced?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'This data is',
+      :text_as_statement => 'Some of this data is',
       :help_text => 'If your data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
       :pick => :one,
       :required => :required
@@ -215,7 +215,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_sourceDocumentationUrl 'Where do you describe sources of this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data was created from various sources as described at',
+      :text_as_statement => 'The sources of this data are described at',
       :help_text => 'Give a URL that documents where your data was sourced from (its provenance) and the rights under which you publish the data. Do this even if the data wasn\'t originally created or gathered by you and even though you have the rights to publish it.'
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
@@ -243,7 +243,7 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable data about this data\'s sources',
+      :text_as_statement => 'machine-readable data about the sources of this data',
       :requirement => 'standard_1'
 
     label_standard_1 'You should **include machine-readable data about the sources of your data**.',
@@ -260,8 +260,8 @@ survey 'Open Data Certificate Questionnaire',
 
     q_copyrightURL 'Where is your rights statement?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The rights statement is at',
-      :help_text => 'Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence. We share it with people who use your data and it helps them understand the terms under which you make it available.'
+      :text_as_statement => 'Copyright and database rights are described at',
+      :help_text => 'Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.'
     a_1 'Rights statement URL',
       :string,
       :input_type => :url,
@@ -291,7 +291,7 @@ survey 'Open Data Certificate Questionnaire',
     a_attributionURL 'attribution URL',
       :text_as_statement => 'what attribution link to give',
       :requirement => 'exemplar_2'
-    a_morePermissions 'additional permissions or alternative licences',
+    a_morePermissions 'other permissions or alternative licences',
       :text_as_statement => 'other permissions for use'
     a_useGuidelines 'non-binding use guidelines',
       :text_as_statement => 'guidelines for use'
@@ -317,9 +317,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_attributionURL
 
-    q_dataLicence 'Under which licence can others reuse this data?',
+    q_dataLicence 'Under which licence can people reuse this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is available under',
+      :text_as_statement => 'This data is available under',
       :help_text => 'Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights, they\'ve expired, or you\'ve waived them, choose \'Not applicable\'.',
       :pick => :one,
       :required => :required,
@@ -341,7 +341,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dataNotApplicable 'Why does a licence not apply to this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is not licensed because',
+      :text_as_statement => 'This data is not licensed because',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
@@ -375,7 +375,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dataOtherWaiver 'Where is the waiver for the database rights?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'Database rights have been waived with the waiver at',
+      :text_as_statement => 'Database rights have been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your database rights.'
     dependency :rule => 'A and B and C'
     condition_A :q_dataLicence, '==', :a_na
@@ -389,7 +389,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_otherDataLicenceName 'What is the name of your licence?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is available under',
+      :text_as_statement => 'This data is available under',
       :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.'
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
@@ -400,7 +400,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_otherDataLicenceURL 'Where is your licence?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The licence is available at',
+      :text_as_statement => 'This licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.'
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
@@ -448,16 +448,16 @@ survey 'Open Data Certificate Questionnaire',
 
     q_contentNotApplicable 'Why doesn\'t a licence apply to this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The content is not licensed because',
+      :text_as_statement => 'The content in this data is not licensed because',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
     condition_A :q_contentLicence, '==', :a_na
     a_norights 'there is no copyright in this data',
-      :text_as_statement => 'there is no copyright in the data',
+      :text_as_statement => 'there is no copyright',
       :help_text => 'Copyright only applies to data if you spent intellectual effort creating what\'s in it, for example, by writing text that\'s within the data, or deciding whether particular data is included. There\'s no copyright if the data only contains facts where no judgements were made about whether to include them or not.'
     a_expired 'copyright has expired',
-      :text_as_statement => 'the copyright has expired',
+      :text_as_statement => 'copyright has expired',
       :help_text => 'Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.'
     a_waived 'copyright has been waived',
       :text_as_statement => '',
@@ -480,7 +480,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_contentOtherWaiver 'Where is the waiver for the copyright?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'Copyright has been waived with the waiver at',
+      :text_as_statement => 'Copyright has been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.'
     dependency :rule => 'A and B and C'
     condition_A :q_contentLicence, '==', :a_na
@@ -505,7 +505,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_otherContentLicenceURL 'Where is the licence?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The content licence is available at',
+      :text_as_statement => 'The content licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.'
     dependency :rule => 'A'
     condition_A :q_contentLicence, '==', :a_other
@@ -537,11 +537,11 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dataPersonal 'Can individuals be identified from this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data contains',
+      :text_as_statement => 'This data contains',
       :pick => :one,
       :required => :pilot
     a_not_personal 'no, the data is not about people or their activities',
-      :text_as_statement => 'no personal data',
+      :text_as_statement => 'no data about individuals',
       :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
     a_summarised 'no, the data has been aggregated so individuals can\'t be identified',
       :text_as_statement => 'aggregated data',
@@ -571,7 +571,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data has been',
+      :text_as_statement => 'This data about individuals has been',
       :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the [ICO Anonymisation Code of Practice](http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx).',
       :help_text_more_url => 'http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx',
       :pick => :one,
@@ -583,9 +583,9 @@ survey 'Open Data Certificate Questionnaire',
     a_true 'yes',
       :text_as_statement => 'anonymised'
 
-    q_lawfulDisclosure 'Are you required by law to publish this personal data?',
+    q_lawfulDisclosure 'Are you required by law to publish this data about individuals?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'This information must be published',
+      :text_as_statement => 'By law, this data about individuals',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -593,7 +593,7 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'by law',
+      :text_as_statement => 'must be published',
       :requirement => 'pilot_4'
 
     label_pilot_4 'You should **only publish personal data without anonymisation if you are required to do so by law**.',
@@ -606,7 +606,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_lawfulDisclosureURL 'Where do you document your right to publish data about individuals?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The right to publish is documented at'
+      :text_as_statement => 'The right to publish this data about individuals is documented at'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
@@ -707,7 +707,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The privacy notice is at',
+      :text_as_statement => 'Individuals affected by this data have this privacy notice',
       :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.',
       :help_text_more_url => 'http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2'
     dependency :rule => 'A and (B or C) and D'
@@ -805,7 +805,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_linkedTo 'Can people find more information about your data within three clicks of your home page?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data can be found',
+      :text_as_statement => 'The data is reachable',
       :help_text => 'If documentation is reachable via links from your home page people can find it quickly without searching. You should make it more accessible on your website if they can\'t.',
       :pick => :one
     a_false 'no',
@@ -839,7 +839,7 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_listed, '==', :a_true
       q_listing 'Where is it listed?',
         :display_on_certificate => 'true',
-        :text_as_statement => 'The data is listed at',
+        :text_as_statement => 'The data appears in this collection',
         :help_text => 'Give a URL where this data is listed within a relevant collection. For example, data.gov.uk (if it\'s UK public sector data), hub.data.ac.uk (if it\'s UK academia data) or a URL for search engine results.'
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
@@ -870,7 +870,7 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_referenced, '==', :a_true
       q_reference 'Where is your data referenced?',
         :display_on_certificate => 'true',
-        :text_as_statement => 'The data is referenced from',
+        :text_as_statement => 'This data is referenced from',
         :help_text => 'Give a URL to a document that cites or references this data.'
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
@@ -902,7 +902,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_timeSensitive 'Will your data go out of date?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data will',
+      :text_as_statement => 'The accuracy or relevance of this data will',
       :pick => :one
     dependency :rule => '(A or B or (C and D))'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -913,7 +913,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'go out of date',
       :help_text => 'For example, a dataset of bus stop locations will go out of date over time as some are moved or new ones created.'
     a_timestamped 'yes, this data will go out of date over time but it’s time stamped',
-      :text_as_statement => 'go out of date, but is timestamped',
+      :text_as_statement => 'go out of date but it is timestamped',
       :help_text => 'For example, population statistics usually include a fixed timestamp to indicate when the statistics were relevant.',
       :requirement => 'pilot_8'
     a_false 'no, this data does not contain any time-sensitive information',
@@ -944,7 +944,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_frequentChanges 'Does this data change at least daily?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data changes',
+      :text_as_statement => 'This data changes',
       :help_text => 'Tell people if the underlying data changes on most days. When data changes frequently it also goes out of date quickly, so people need to know if you also update it frequently and quickly too.',
       :pick => :one,
       :required => :pilot
@@ -953,11 +953,11 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'frequently'
+      :text_as_statement => 'at least daily'
 
     q_seriesType 'What type of dataset series is this?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is a series of',
+      :text_as_statement => 'This data is a series of',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A and B'
@@ -972,7 +972,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_changeFeed 'Is a feed of changes available?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'A feed of changes',
+      :text_as_statement => 'A feed of changes to this data',
       :help_text => 'Tell people if you provide a stream of changes that affect this data, like new entries or amendments to existing entries. Feeds might be in RSS, Atom or custom formats.',
       :pick => :one
     dependency :rule => 'A and B and C'
@@ -996,7 +996,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_frequentSeriesPublication 'How often do you create a new release?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'New releases are made',
+      :text_as_statement => 'New releases of this data are made',
       :help_text => 'This determines how out of date this data becomes before people can get an update.',
       :pick => :one
     dependency :rule => 'A and B'
@@ -1043,7 +1043,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_seriesPublicationDelay 'How long is the delay between when you create a dataset and when you publish it it?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The lag in publication is',
+      :text_as_statement => 'The lag between creation and publication of this data is',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
@@ -1089,7 +1089,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_provideDumps 'Do you also publish dumps of this dataset?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The curator provides',
+      :text_as_statement => 'The curator publishes',
       :help_text => 'A dump is an extract of the whole dataset into a file that people can download. This lets people do analysis that\'s different to analysis with API access.',
       :pick => :one
     dependency :rule => 'A'
@@ -1109,7 +1109,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dumpFrequency 'How frequently do you create a new database dump?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The dumps are created',
+      :text_as_statement => 'Database dumps are created',
       :help_text => 'Faster access to more frequent extracts of the whole dataset means people can get started quicker with the most up-to-date data.',
       :pick => :one
     dependency :rule => 'A and B and C'
@@ -1160,7 +1160,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_corrected 'Will your data be corrected if it has errors?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data will be',
+      :text_as_statement => 'Any errors in this data are',
       :help_text => 'It\'s good practice to fix errors in your data especially if you use it yourself. When you make corrections, people need to be told about them.',
       :pick => :one
     dependency :rule => 'A and B'
@@ -1169,7 +1169,7 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'corrected if it contains errors',
+      :text_as_statement => 'corrected',
       :requirement => 'standard_16'
 
     label_standard_16 'You should **correct data when people report errors** so everyone benefits from improvements in accuracy.',
@@ -1222,7 +1222,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_serviceAvailability 'What is the availability of your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The service is available',
+      :text_as_statement => 'The service that hosts this data is',
       :help_text => 'Most server hosting providers have a service-level agreement (SLA) between you and them. This should guarantee uptime for the servers and determine the availability of your data.',
       :pick => :one
     dependency :rule => 'A'
@@ -1230,13 +1230,13 @@ survey 'Open Data Certificate Questionnaire',
     a_minimal 'you don\'t monitor its availability',
       :text_as_statement => ''
     a_atleast99 'there has been less than 4 days downtime in the past year (or equivalent)',
-      :text_as_statement => '99% of the time',
+      :text_as_statement => 'available 99% of the time',
       :requirement => 'pilot_12'
     a_atleast99_5 'there has been less than 2 days downtime in the past year (or equivalent)',
-      :text_as_statement => '99.5% of the time',
+      :text_as_statement => 'available 99.5% of the time',
       :requirement => 'standard_18'
     a_atleast99_9 'there has been less than 9 hours downtime in the past year (or equivalent)',
-      :text_as_statement => '99.9% of the time',
+      :text_as_statement => 'available 99.9% of the time',
       :requirement => 'exemplar_8'
 
     label_pilot_12 'You should **ensure your data does not have more than 4 days downtime/year** so that people can rely on access to your data.',
@@ -1265,18 +1265,18 @@ survey 'Open Data Certificate Questionnaire',
 
     q_onGoingAvailability 'How long will this data be available for?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is provided',
+      :text_as_statement => 'The data is available',
       :pick => :one
     a_experimental 'it might disappear at any time',
-      :text_as_statement => 'on an experimental basis'
+      :text_as_statement => 'experimentally and might disappear at any time'
     a_short 'it\'s available experimentally but should be around for another year or so',
-      :text_as_statement => 'for the short term',
+      :text_as_statement => 'experimentally for another year or so',
       :requirement => 'pilot_13'
     a_medium 'it\'s in your medium-term plans so should be around for a couple of years',
-      :text_as_statement => 'for the medium term',
+      :text_as_statement => 'for at least a couple of years',
       :requirement => 'standard_19'
     a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
-      :text_as_statement => 'for the long term',
+      :text_as_statement => 'for a long time',
       :requirement => 'exemplar_9'
 
     label_pilot_13 'You should **guarantee that your data will be available in this form for at least a year** so that people can decide how much to rely on your data.',
@@ -1315,7 +1315,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_datasetUrl 'Where is your dataset?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is published at',
+      :text_as_statement => 'This data is published at',
       :help_text => 'Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.'
     dependency :rule => '(A or B or C or D) and E'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1435,7 +1435,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_versionsTemplateUrl 'What format do dataset release URLs follow?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'Releases follow the URL pattern',
+      :text_as_statement => 'Releases follow this consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`'
     dependency :rule => '(A or B or C or D) and E and F'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1452,7 +1452,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_versionsUrl 'Where is your list of dataset releases?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'Releases are listed at',
+      :text_as_statement => 'Releases of this data are listed at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.'
     dependency :rule => '(A or B or C or D) and E and F'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1469,7 +1469,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_endpointUrl 'Where is the endpoint for your API?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The API endpoint is at',
+      :text_as_statement => 'The API service endpoint is',
       :help_text => 'Give a URL that\'s a starting point for people\'s scripts to access your API. This should be a service description document that helps the script to work out which services exist.'
     dependency :rule => '(A or B or C or D) and E'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1563,7 +1563,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_currentDumpUrl 'Where is the current database dump?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The current database dump is available at',
+      :text_as_statement => 'The most recent database dump is always available at',
       :help_text => 'Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.'
     dependency :rule => '(A or B or C or D) and E and F and G'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1581,7 +1581,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dumpsTemplateUrl 'What format do database dump URLs follow?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The dump URLs follow the pattern',
+      :text_as_statement => 'Database dumps follow the consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`'
     dependency :rule => '(A or B or C or D) and E and F and G'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1599,7 +1599,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dumpsUrl 'Where is your list of available database dumps?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'A list of dumps is available at',
+      :text_as_statement => 'A list of database dumps is at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.'
     dependency :rule => '(A or B or C or D) and E and F and G'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1617,7 +1617,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_changeFeedUrl 'Where is your feed of changes?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'A feed of changes is available at',
+      :text_as_statement => 'A feed of changes to this data is at',
       :help_text => 'Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.'
     dependency :rule => '(A or B or C or D) and E'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1637,7 +1637,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_machineReadable 'Is this data machine-readable?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is',
+      :text_as_statement => 'This data is',
       :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
       :pick => :one
     a_false 'no',
@@ -1654,14 +1654,14 @@ survey 'Open Data Certificate Questionnaire',
 
     q_openStandard 'Is this data in a standard open format?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data is published in a',
+      :text_as_statement => 'The format of this data is',
       :help_text => 'Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there’s lots of support so it’s easier for you to share data with more people. For example, XML, CSV and JSON are open standards.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'standard open format',
+      :text_as_statement => 'a standard open format',
       :requirement => 'standard_24'
 
     label_standard_24 'You should **provide your data in an open standard format** so that people can use widely available tools to process it more easily.',
@@ -1670,7 +1670,7 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_openStandard, '==', :a_false
 
-    q_dataType 'What kind of data will you publish?',
+    q_dataType 'What kind of data do you publish?',
       :pick => :any
     a_documents 'human-readable documents',
       :help_text => 'Choose this if your data is meant for human consumption. For example; policy documents, white papers, reports and meeting minutes. These usually have some structure to them but are mostly text.'
@@ -1696,7 +1696,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren\'t as easy for people to process automatically and change style.',
       :requirement => 'pilot_17'
     a_unsuitable 'aren\'t meant for documents like Excel, JSON or CSV',
-      :text_as_statement => 'in an unsuitable format',
+      :text_as_statement => 'in a format unsuitable for documents',
       :help_text => 'These formats better suit tabular or structured data.'
 
     label_standard_25 'You should **publish documents in a format that exposes semantic structure** so that people can display them in different styles.',
@@ -1733,7 +1733,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.',
       :requirement => 'pilot_18'
     a_unsuitable 'aren\'t meant for statistical or tabular data like Word or PDF',
-      :text_as_statement => 'in an unsuitable format',
+      :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
 
     label_exemplar_12 'You should **publish statistical data in a format that exposes dimensions and measures** so that it\'s easy to analyse.',
@@ -1775,7 +1775,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
       :requirement => 'pilot_19'
     a_unsuitable 'aren\'t designed for geographic data like Word or PDF',
-      :text_as_statement => 'in an unsuitable data format',
+      :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
 
     label_standard_27 'You should **publish geographic data in a format designed that purpose** so that people can use widely available tools to process it.',
@@ -1800,11 +1800,11 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_structured
     a_suitable 'are designed for structured data like JSON, XML, Turtle or CSV',
-      :text_as_statement => 'in a structured data forma',
+      :text_as_statement => 'in a structured data format',
       :help_text => 'These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.',
       :requirement => 'pilot_20'
     a_unsuitable 'aren\'t designed for structured data like Word or PDF',
-      :text_as_statement => 'in an unsuitable format',
+      :text_as_statement => 'in a format unsuitable for structured data',
       :help_text => 'These formats don\'t suit this kind of data because they obscure its underlying structure.'
 
     label_pilot_20 'You should **publish structured data in a format designed that purpose** so that it\'s easy to process.',
@@ -1814,10 +1814,10 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_dataType, '==', :a_structured
     condition_B :q_structuredFormat, '!=', :a_suitable
 
-    q_identifiers 'Does your data use persistent identifiers for things?',
+    q_identifiers 'Does your data use persistent identifiers?',
       :display_on_certificate => 'true',
       :text_as_statement => 'The data includes',
-      :help_text => 'Data is usually about real things like schools or roads. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
+      :help_text => 'Data is usually about real things like schools or roads or uses a coding scheme. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1833,18 +1833,18 @@ survey 'Open Data Certificate Questionnaire',
 
     q_resolvingIds 'Can the identifiers in your data be used to find extra information?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The identifiers resolve',
+      :text_as_statement => 'The persistent identifiers',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
     a_false 'no, the identifiers can\'t be used to find extra information',
       :text_as_statement => ''
     a_service 'yes, there is a service that people can use to resolve the identifiers',
-      :text_as_statement => 'using a service',
+      :text_as_statement => 'resolve using a service',
       :help_text => 'Online services can be used to give people information about identifiers such as GUIDs or DOIs which can\'t be directly accessed in the way that URLs are.',
       :requirement => 'standard_29'
     a_resolvable 'yes, the identifiers are URLs that resolve to give information',
-      :text_as_statement => 'because they are URLs',
+      :text_as_statement => 'resolve because they are URLs',
       :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like [companies](http://opencorporates.com/companies/gb/08030289) and [postcodes](http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE). Computers can also process this extra information using scripts to access the underlying data.',
       :requirement => 'exemplar_13'
 
@@ -1905,7 +1905,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_externalUrls 'Does your data use those third-party URLs?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The data references',
+      :text_as_statement => 'Third-party URLs are',
       :help_text => 'You should use third-party URLs that resolve to information about the things your data describes. This reduces duplication and helps people combine data from different sources to make it more useful.',
       :pick => :one
     dependency :rule => 'A and B and C'
@@ -1915,7 +1915,7 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'Third-party URLs',
+      :text_as_statement => 'referenced in this data',
       :requirement => 'exemplar_14'
 
     label_exemplar_14 'You should **use URLs to third-party information in your data** so that it\'s easy to combine with other data that uses those URLs.',
@@ -1933,14 +1933,14 @@ survey 'Open Data Certificate Questionnaire',
 
     q_provenance 'Do you provide machine-readable provenance for your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The curator provides',
+      :text_as_statement => 'The provenance of this data is',
       :help_text => 'This about the origins of how your data was created and processed before it was published. It builds trust in the data you publish because people can trace back how it has been handled.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable provenance',
+      :text_as_statement => 'machine-readable',
       :requirement => 'exemplar_15'
 
     label_exemplar_15 'You should **provide a machine-readable provenance trail** about your data so that people can trace how it was processed.',
@@ -1951,7 +1951,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'To verify the data, see',
+      :text_as_statement => 'This data can be verified using',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
     a_1 'Verification Process URL',
       :string,
@@ -1975,7 +1975,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_documentationMetadata 'Does your data documentation include machine-readable data for:',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The documentation includes a machine-readable',
+      :text_as_statement => 'The documentation includes machine-readable data for',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -1992,7 +1992,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'modification date',
       :requirement => 'standard_34'
     a_accrualPeriodicity 'frequency of releases',
-      :text_as_statement => 'frequency of releases',
+      :text_as_statement => 'release frequency',
       :requirement => 'standard_35'
     a_identifier 'identifier',
       :text_as_statement => 'identifier',
@@ -2114,7 +2114,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_distributionMetadata 'Does your documentation include machine-readable metadata for each distribution on:',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The documentation about each distribution includes a machine-readble',
+      :text_as_statement => 'The documentation about each distribution includes machine-readable data for',
       :pick => :any
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -2135,10 +2135,10 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'licence',
       :requirement => 'standard_48'
     a_accessURL 'URL to access the data',
-      :text_as_statement => 'URL to access the data',
+      :text_as_statement => 'a URL to access the data',
       :help_text => 'This metadata should be used when your data isn\'t available as a download, like an API for example.'
     a_downloadURL 'URL to download the dataset',
-      :text_as_statement => 'URL to download the dataset'
+      :text_as_statement => 'a URL to download the dataset'
     a_byteSize 'size in bytes',
       :text_as_statement => 'size in bytes'
     a_mediaType 'type of download media',
@@ -2186,7 +2186,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_serviceDocumentation 'Where is the documentation for the API?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The API documentation is at'
+      :text_as_statement => 'The data API service is documented at'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Documentation URL',
@@ -2211,7 +2211,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_schemaDocumentationUrl 'Where is documentation about your data vocabularies?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The vocabularies are documented at'
+      :text_as_statement => 'The vocabularies in this data are documented at'
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
     a_1 'Schema Documentation URL',
@@ -2236,7 +2236,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_codelistDocumentationUrl 'Where are any codes in your data documented?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'The codes are documented at'
+      :text_as_statement => 'The codes in this data are documented at'
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
     a_1 'Codelist Documentation URL',
@@ -2258,7 +2258,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_contactEmail 'Who should people email with questions about this data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'If you have questions, email',
+      :text_as_statement => 'Send questions about this data to',
       :help_text => 'Give an email address that people can send questions about the data to.'
     a_1 'Contact Email Address',
       :string,
@@ -2274,7 +2274,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_improvementsContact 'Where can people find out how to improve the way your data is published?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'To find out how to suggest improvements, look at'
+      :text_as_statement => 'Find out how to suggest improvements to publication at'
     a_1 'Improvement Suggestions URL',
       :string,
       :input_type => :url,
@@ -2289,7 +2289,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_dataProtectionEmail 'Who should people email with questions about privacy?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'If you have privacy questions, email'
+      :text_as_statement => 'Send questions about privacy to'
     a_1 'Confidentiality Contact Email Address',
       :string,
       :input_type => :email,
@@ -2320,7 +2320,7 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_socialMedia, '==', :a_true
       q_account 'Which social media accounts can people reach you on?',
         :display_on_certificate => 'true',
-        :text_as_statement => 'The curator is on social media at',
+        :text_as_statement => 'Contact the curator through these social media accounts',
         :help_text => 'Give URLs to your social media accounts, like your Twitter or Facebook profile page.'
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
@@ -2334,7 +2334,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_forum 'Where should people discuss this dataset?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'To discuss this data, visit',
+      :text_as_statement => 'Discuss this data at',
       :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
     a_1 'Forum or Mailing List URL',
       :string,
@@ -2350,7 +2350,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_correctionReporting 'Where can people find out how to request corrections to your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'To correct this data, see',
+      :text_as_statement => 'Find out how to request data corrections at',
       :help_text => 'Give a URL where people can report errors they spot in your data.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
@@ -2369,7 +2369,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_correctionDiscovery 'Where can people find out how to get notifications of corrections to your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'To be notified of corrections, read',
+      :text_as_statement => 'Find out how to get notifications about data corrections at',
       :help_text => 'Give a URL where you describe how notifications about corrections are shared with people.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
@@ -2407,7 +2407,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_libraries 'Where do you list tools to work with your data?',
       :display_on_certificate => 'true',
-      :text_as_statement => 'For tools, see',
+      :text_as_statement => 'Tools to help use this data are listed at',
       :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
     a_1 'Tool URL',
       :string,
