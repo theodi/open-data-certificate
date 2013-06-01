@@ -1,8 +1,9 @@
 survey 'Open Data Certificate Questionnaire',
   :default_mandatory => 'false',
-  :dataset_title => :q_dataTitle,
+  :dataset_title => 'dataTitle',
   :description => 'These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data in the UK. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements within the UK. You should always check the legislation and other policies that may apply in your sector.' do
 
+  translations :en => :default
   section_general 'General Information' do
 
     q_dataTitle 'What\'s this data called?',

@@ -28,7 +28,7 @@ questions:
   publisher:
     text: "Who curates this data?"
     text_as_statement: "This data is curated by"
-    help_text: "Give the name of the organisation who looks after this data. It’s probably who you work for unless you’re doing this on behalf of someone else."
+    help_text: "Give the name of the organisation who looks after this data. It's probably who you work for unless you're doing this on behalf of someone else."
     answers:
       a_1:
         text: "Data Curator"
@@ -44,10 +44,10 @@ questions:
     answers:
       oneoff:
         text: "a one-off release of a single dataset"
-        help_text: "This is a single file and you don’t plan to publish similar files in the future."
+        help_text: "This is a single file and you don't plan to publish similar files in the future."
       collection:
         text: "a one-off release of a set of related datasets"
-        help_text: "This is a collection of related files about the same data and you don’t plan to publish similar collections in the future."
+        help_text: "This is a collection of related files about the same data and you don't plan to publish similar collections in the future."
       series:
         text: "ongoing release of a series of related datasets"
         help_text: "This is a sequence of datasets with planned periodic updates in the future."
@@ -57,7 +57,7 @@ questions:
 # Legal Information
   publisherRights:
     text: "Do you have the rights to publish this data as open data?"
-    help_text: "If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it."
+    help_text: "If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you're not sure, check with the data owner because you will need their permission to publish it."
     answers:
       yes:
         text: "yes, you have the rights to publish this data as open data"
@@ -518,7 +518,7 @@ questions:
         help_text: "For example, a dataset of bus stop locations will go out of date over time as some are moved or new ones created."
         text_as_statement: "go out of date"
       timestamped:
-        text: "yes, this data will go out of date over time but it’s time stamped"
+        text: "yes, this data will go out of date over time but it's time stamped"
         help_text: "For example, population statistics usually include a fixed timestamp to indicate when the statistics were relevant."
         text_as_statement: "go out of date but it is timestamped"
       false:
@@ -784,7 +784,7 @@ questions:
   openStandard:
     text: "Is this data in a standard open format?"
     text_as_statement: "The published format of this data is"
-    help_text: "Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there’s lots of support so it’s easier for you to share data with more people. For example, XML, CSV and JSON are open standards."
+    help_text: "Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there's lots of support so it's easier for you to share data with more people. For example, XML, CSV and JSON are open standards."
     answers:
       a_false:
         text: no
@@ -1150,7 +1150,7 @@ labels:
     help_text: "how people can report problems and improve your data"
   guarantees:
     title: "Guarantees"
-    help_text: "how much people can depend on your data’s availability"
+    help_text: "how much people can depend on your data's availability"
   locations:
     title: "Locations"
     help_text: "how people can access your data"
