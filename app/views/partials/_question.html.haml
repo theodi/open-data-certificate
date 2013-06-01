@@ -9,7 +9,7 @@
 - when 'label'
   .subsection-label
     %h2.container
-      = question_text
+      != question_text
       %small= q.help_text
 
 - else
@@ -21,7 +21,7 @@
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
       - if q.pick == 'one' or q.pick == 'any'
-        %label.span12= question_text
+        %label.span12!= question_text
 
       .span8
         - case renderer
@@ -47,6 +47,6 @@
       - if (q.help_text)
         %aside.span4.question-meta{"data-meta-for"=> q.reference_identifier}
           %p
-            = q.help_text_for(@render_context, I18n.locale)
+            != q.help_text_for(@render_context, I18n.locale)
             - if (q.help_text_more_url)
               %a{:href => q.help_text_more_url} Read more...
