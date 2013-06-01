@@ -29,21 +29,21 @@ en:
       title_with_level: No level
       description: This data does not satisfy the fundamental requirements for open data
     basic:
-      title: Basic
-      title_with_level: Basic level
-      description: this data satisfies the fundamental requirements for open data
+      title: Raw
+      title_with_level: Raw level
+      description: A fantastic start at the basics of publishing open data. It takes a lot to even get here.
     pilot:
       title: Pilot
       title_with_level: Pilot level
-      description: this data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
+      description: Extra effort went in to support and encourage feedback from people who use this open data.
     standard:
       title: Standard
       title_with_level: Standard level
-      description: this data satisfies the requirements for routinely published open data that encourages reuse.
+      description: Regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.
     exemplar:
-      title: Exemplar
-      title_with_level: Exemplar level
-      description: this data satisfies the requirements for key information infrastructure.
+      title: Expert
+      title_with_level: Expert level
+      description: This is above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
 
@@ -83,12 +83,12 @@ en:
     register_later_message: Don't worry, you can register later to save your work.
     continue_without_registering: Continue without registering
     create_an_account: Create an account
-    title: Open data certificate
-    tagline: Find out what shareable data really looks like
+    title: Certify your open data
+    tagline: Show that it’s easy to find, use and share
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
     browse_all_new_certificates: Browse all certificates
-    how_it_works: Here's how it works
+    how_it_works: How it works
     fill_out_questionnaire:
       title: Publish your data
       description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
@@ -100,11 +100,11 @@ en:
       description: Your answers determine which of our four prestigious certificates you generate. Each one means success in a unique way and proves you're a leader in open data.
     about_certificate:
       title: What does a certificate look like?
-      description: It's an impressive badge that links to a page describing the characteristics of some data. Like how often it's updated, what format it's in and where it lives.
-      link: Read more
+      description: It's an impressive badge that links to a description of your open data. There it explores things like how often it's updated, what format it's in and who answers your questions.
+      link: Find out more
     about_odi:
       title: Who are the ODI?
-      description: We're the %{odi_name_link}. We unlock supply and demand for open data and communicate its value to people so they can change the world with it. This is one of the ways we do that.
+      description: We're the %{odi_name_link}. We unlock supply and demand for open data and share its value with people who can change the world. This is one of the ways we do that.
       odi_name: Open Data Institute
       link: Get in touch
 
