@@ -86,15 +86,6 @@
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
 
-  .container
-    .temporary_links
-      %p
-        = link_to 'attained level', surveyor.view_my_survey_attained_level_path(response_set_code: @response_set.access_code)
-        |
-        = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
-        %br/
-        (right-click and open in a new tab)
-
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
 
 
