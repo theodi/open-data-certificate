@@ -48,6 +48,11 @@
         // hide any others
         .siblings().removeClass('active');
 
+      // update the handle image
+      var $handle = $('#panel_handle');
+      $.each(levels, function(i, l){
+        $handle.toggleClass('attained-' + l, l == completed);
+      });
 
     })
   })
