@@ -86,6 +86,7 @@
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
 
+= render :partial => 'surveyor/required_level'
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
 
 
