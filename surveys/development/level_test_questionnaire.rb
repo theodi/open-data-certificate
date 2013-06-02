@@ -121,20 +121,20 @@ survey 'Level Test Questionnaire',
                               :custom_renderer => '/partials/requirement_basic',
                               :requirement => 'basic_3'
     dependency :rule => 'A'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
 
     label_pilot_requirement_3 'You should complete the pilot3 question',
                               :custom_renderer => '/partials/requirement_pilot',
                               :requirement => 'pilot_3'
     dependency :rule => 'A or B'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
 
     label_standard_requirement_3 'You should complete the standard3 question',
                                  :custom_renderer => '/partials/requirement_standard',
                                  :requirement => 'standard_3'
     dependency :rule => 'A or B or C'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
     condition_C :q_radio_requirement, '==', :a_pilot3
 
@@ -142,7 +142,7 @@ survey 'Level Test Questionnaire',
                                  :custom_renderer => '/partials/requirement_exemplar',
                                  :requirement => 'exemplar_3'
     dependency :rule => 'A or B or C or D'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
     condition_C :q_radio_requirement, '==', :a_pilot3
     condition_D :q_radio_requirement, '==', :a_standard3
