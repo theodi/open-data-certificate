@@ -157,25 +157,6 @@ $(function(){
         .appendTo($current.closest('li.container'));
     }
   });
-  $('fieldset.question-row').each(function(){
-    var $question = $(this),
-        $label = $question.find('label.question_label'),
-        $requirements = $question.closest('li.container').find('fieldset.q_label'),
-        text = '';
-    if ($question.is('.mandatory') || $requirements.is('.requirement_basic')) {
-      text = $('#required-basic').html();
-    } else if ($requirements.is('.requirement_pilot')) {
-      text = $('#required-pilot').html();
-    } else if ($requirements.is('.requirement_standard')) {
-      text = $('#required-standard').html();
-    } else if ($requirements.is('.requirement_exemplar')) {
-      text = $('#required-exemplar').html();
-    }
-    if (text !== '') {
-      $label.append(' <small>' + text + '</small>');
-    }
-  });
-
 
   // Old ie only supports :hover on anchors
   $('#status_panel').hover(function(){
