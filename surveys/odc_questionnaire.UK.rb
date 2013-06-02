@@ -11,7 +11,8 @@ survey 'Open Data Certificate Questionnaire',
       :required => :required
     a_1 'Data Title',
       :string,
-      :placeholder => 'Data Title'
+      :placeholder => 'Data Title',
+      :required => :required
 
     q_documentationUrl 'Where is it described?',
       :display_on_certificate => 'true',
@@ -19,6 +20,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
     a_1 'Documentation URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Documentation URL',
       :requirement => 'pilot_1'
 
@@ -42,7 +44,8 @@ survey 'Open Data Certificate Questionnaire',
       :required => :required
     a_1 'Data Curator',
       :string,
-      :placeholder => 'Data Curator'
+      :placeholder => 'Data Curator',
+      :required => :required
 
     q_publisherUrl 'Where is the curator\'s website?',
       :display_on_certificate => 'true',
@@ -50,6 +53,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
     a_1 'Curator URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Curator URL'
 
     q_releaseType 'What kind of release is this?',
@@ -187,7 +191,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_1 'Contributor Licence Agreement URL',
       :string,
-      :placeholder => 'Contributor Licence Agreement URL'
+      :input_type => :url,
+      :placeholder => 'Contributor Licence Agreement URL',
+      :required => :required
 
     q_cldsRecorded 'Have all contributors agreed to the Contributor Licence Agreement (CLA)?',
       :help_text => 'Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.',
@@ -218,6 +224,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_publisherOrigin, '==', :a_false
     a_1 'Data Sources Documentation URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Data Sources Documentation URL',
       :requirement => 'pilot_2'
 
@@ -260,6 +267,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.'
     a_1 'Rights statement URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Rights statement URL',
       :requirement => 'pilot_3'
 
@@ -379,6 +387,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_dataWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
+      :input_type => :url,
+      :required => :required,
       :placeholder => 'Waiver URL'
 
     q_otherDataLicenceName 'What is the name of your licence?',
@@ -390,6 +400,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_dataLicence, '==', :a_other
     a_1 'Other Licence Name',
       :string,
+      :required => :required,
       :placeholder => 'Other Licence Name'
 
     q_otherDataLicenceURL 'Where is your licence?',
@@ -401,6 +412,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_dataLicence, '==', :a_other
     a_1 'Other Licence URL',
       :string,
+      :input_type => :url,
+      :required => :required,
       :placeholder => 'Other Licence URL'
 
     q_otherDataLicenceOpen 'Is the licence an open licence?',
@@ -482,6 +495,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
+      :input_type => :url,
+      :required => :required,
       :placeholder => 'Waiver URL'
 
     q_otherContentLicenceName 'What\'s the name of the licence?',
@@ -493,6 +508,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
+      :required => :required,
       :placeholder => 'Licence Name'
 
     q_otherContentLicenceURL 'Where is the licence?',
@@ -504,6 +520,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
       :string,
+      :input_type => :url,
+      :required => :required,
       :placeholder => 'Licence URL'
 
     q_otherContentLicenceOpen 'Is the licence an open licence?',
@@ -604,6 +622,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_1 'Disclosure Rationale URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Disclosure Rationale URL',
       :requirement => 'standard_4'
 
@@ -653,6 +672,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     a_1 'Privacy Impact Assessment URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Privacy Impact Assessment URL',
       :requirement => 'standard_5'
 
@@ -706,6 +726,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     a_1 'Privacy Notice URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Privacy Notice URL',
       :requirement => 'pilot_6'
 
@@ -834,6 +855,8 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_listed, '==', :a_true
       a_1 'Listing URL',
         :string,
+        :input_type => :url,
+        :required => :required,
         :placeholder => 'Listing URL'
 
     end
@@ -864,6 +887,8 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_referenced, '==', :a_true
       a_1 'Reference URL',
         :string,
+        :input_type => :url,
+        :required => :required,
         :placeholder => 'Reference URL'
 
     end
@@ -1176,6 +1201,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL where people can report problems. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
     a_1 'Quality Issues URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Quality Issues URL',
       :requirement => 'standard_17'
 
@@ -1191,6 +1217,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
     a_1 'Quality Control Process Description URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Quality Control Process Description URL',
       :requirement => 'exemplar_7'
 
@@ -1309,6 +1336,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_E :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Dataset URL',
       :requirement => 'pilot_14'
 
@@ -1413,7 +1441,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_versionManagement, '==', :a_current
     a_1 'Current Dataset URL',
       :string,
-      :placeholder => 'Current Dataset URL'
+      :input_type => :url,
+      :placeholder => 'Current Dataset URL',
+      :required => :required
 
     q_versionsTemplateUrl 'What format do dataset release URLs follow?',
       :display_on_certificate => 'true',
@@ -1429,7 +1459,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_versionManagement, '==', :a_template
     a_1 'Version Template URL',
       :string,
-      :placeholder => 'Version Template URL'
+      :input_type => :url,
+      :placeholder => 'Version Template URL',
+      :required => :required
 
     q_versionsUrl 'Where is your list of dataset releases?',
       :display_on_certificate => 'true',
@@ -1445,7 +1477,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_versionManagement, '==', :a_list
     a_1 'Version List URL',
       :string,
-      :placeholder => 'Version List URL'
+      :input_type => :url,
+      :placeholder => 'Version List URL',
+      :required => :required
 
     q_endpointUrl 'Where is the endpoint for your API?',
       :display_on_certificate => 'true',
@@ -1459,6 +1493,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_E :q_releaseType, '==', :a_service
     a_1 'Endpoint URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Endpoint URL',
       :requirement => 'standard_22'
 
@@ -1555,7 +1590,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_G :q_dumpManagement, '==', :a_current
     a_1 'Current Dump URL',
       :string,
-      :placeholder => 'Current Dump URL'
+      :input_type => :url,
+      :placeholder => 'Current Dump URL',
+      :required => :required
 
     q_dumpsTemplateUrl 'What format do database dump URLs follow?',
       :display_on_certificate => 'true',
@@ -1572,7 +1609,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_G :q_dumpManagement, '==', :a_template
     a_1 'Dump Template URL',
       :string,
-      :placeholder => 'Dump Template URL'
+      :input_type => :url,
+      :placeholder => 'Dump Template URL',
+      :required => :required
 
     q_dumpsUrl 'Where is your list of available database dumps?',
       :display_on_certificate => 'true',
@@ -1589,7 +1628,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_G :q_dumpManagement, '==', :a_list
     a_1 'Dump List URL',
       :string,
-      :placeholder => 'Dump List URL'
+      :input_type => :url,
+      :placeholder => 'Dump List URL',
+      :required => :required
 
     q_changeFeedUrl 'Where is your feed of changes?',
       :display_on_certificate => 'true',
@@ -1604,7 +1645,9 @@ survey 'Open Data Certificate Questionnaire',
     condition_E :q_changeFeed, '==', :a_true
     a_1 'Change Feed URL',
       :string,
-      :placeholder => 'Change Feed URL'
+      :input_type => :url,
+      :placeholder => 'Change Feed URL',
+      :required => :required
 
     label_group_11 'Formats',
       :help_text => 'how people can work with your data',
@@ -1847,6 +1890,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_resolvingIds, '==', :a_service
     a_1 'Identifier Resolution Service URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Identifier Resolution Service URL',
       :requirement => 'standard_30'
 
@@ -1929,6 +1973,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
     a_1 'Verification Process URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Verification Process URL',
       :requirement => 'exemplar_16'
 
@@ -2164,6 +2209,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Documentation URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Service Documentation URL',
       :requirement => 'pilot_21'
 
@@ -2188,6 +2234,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_vocabulary, '==', :a_true
     a_1 'Schema Documentation URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Schema Documentation URL',
       :requirement => 'standard_49'
 
@@ -2212,6 +2259,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_codelists, '==', :a_true
     a_1 'Codelist Documentation URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Codelist Documentation URL',
       :requirement => 'standard_50'
 
@@ -2232,6 +2280,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give an email address that people can send questions about the data to.'
     a_1 'Contact Email Address',
       :string,
+      :input_type => :email,
       :placeholder => 'Contact Email Address',
       :requirement => 'pilot_22'
 
@@ -2246,6 +2295,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'Find out how to suggest improvements to publication at'
     a_1 'Improvement Suggestions URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Improvement Suggestions URL',
       :requirement => 'pilot_23'
 
@@ -2260,6 +2310,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'Send questions about privacy to'
     a_1 'Confidentiality Contact Email Address',
       :string,
+      :input_type => :email,
       :placeholder => 'Confidentiality Contact Email Address',
       :requirement => 'pilot_24'
 
@@ -2294,6 +2345,8 @@ survey 'Open Data Certificate Questionnaire',
       condition_A :q_socialMedia, '==', :a_true
       a_1 'Social Media URL',
         :string,
+        :input_type => :url,
+        :required => :required,
         :placeholder => 'Social Media URL'
 
     end
@@ -2304,6 +2357,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
     a_1 'Forum or Mailing List URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Forum or Mailing List URL',
       :requirement => 'standard_52'
 
@@ -2321,6 +2375,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Instructions URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Correction Instructions URL',
       :requirement => 'standard_53'
 
@@ -2339,6 +2394,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Notification URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Correction Notification URL',
       :requirement => 'standard_54'
 
@@ -2354,6 +2410,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'The community engagement team is at'
     a_1 'Community Engagement Team Home Page URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Community Engagement Team Home Page URL',
       :requirement => 'exemplar_17'
 
@@ -2373,6 +2430,7 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
     a_1 'Tool URL',
       :string,
+      :input_type => :url,
       :placeholder => 'Tool URL',
       :requirement => 'exemplar_18'
 
