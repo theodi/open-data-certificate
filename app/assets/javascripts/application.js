@@ -143,18 +143,20 @@ $(function(){
   // This collects all the sections that are requirements, and
   // bundles them into the aside of the previous question (that
   // they hopefully pertain to)
-  /*
   var $current;
   $('.survey-section > ul > li > fieldset').each(function(){
     var $this = $(this),
         ref_id = $this.data('reference-identifier');
     if(ref_id){
       $current = $this;
-    } else if($current){
-      $this.remove().appendTo($current.find('aside'));
+    } else if($current && !($this.hasClass('g_repeater'))){
+      $this
+        .closest('li.container')
+        .remove()
+        .end()
+        .appendTo($current.closest('li.container'));
     }
   });
-  */
 
 
   // Old ie only supports :hover on anchors
