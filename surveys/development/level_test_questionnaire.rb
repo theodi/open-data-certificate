@@ -5,7 +5,8 @@ survey 'Level Test Questionnaire',
   section_general 'General Information' do
 
     q_dataTitle 'What\'s a good title for this data?',
-      :help_text => 'This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.'
+      :help_text => 'This is a mandatory question,  it will be included in the basic count',
+      :required => :required
     a_1 'Data Title',
         :string,
         :placeholder => 'Data Title',

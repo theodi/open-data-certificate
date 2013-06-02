@@ -1,50 +1,71 @@
 :javascript
   $(function(){
     $('#status_panel').on('update', function(){
+      var levels = ['basic', 'pilot', 'standard', 'exemplar'];
       var requirements = {};
-      $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i, level){
+      $.each(levels, function(i, level){
         requirements[level] = { required: 0, complete: 0 };
       });
-      $('fieldset.question-row:not(.q_hidden)')
-        .each(function() {
-          var $question = $(this),
-              $inputs = $question.find('li:not(.quiet) input, li:not(.quiet) select'),
-              $requirements = $question.closest('li.container').find('fieldset.q_label');
-          if ($question.is('.mandatory')) {
-            requirements.basic.required++;
-            if (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked')) {
-              requirements.basic.complete++;
-            }
-          }
-          if ($requirements.is('.requirement_basic')) {
-            requirements.pilot.required++;
-            if (!$requirements.is(':not(.q_hidden)')) requirements.basic.complete++;
-          }
-          if ($requirements.is('.requirement_pilot')) {
-            requirements.pilot.required++;
-            if (!$requirements.is(':not(.q_hidden)')) requirements.pilot.complete++;
-          }
-          if ($requirements.is('.requirement_standard')) {
-            requirements.standard.required++;
-            if (!$requirements.is(':not(.q_hidden)')) requirements.standard.complete++;
-          }
-          if ($requirements.is('.requirement_exemplar')) {
-            requirements.exemplar.required++;
-            if (!$requirements.is(':not(.q_hidden)')) requirements.exemplar.complete++;
-          }
+
+      // mandatory fields count as a basic requirement
+      var $mandatory = $('fieldset.question-row.mandatory:not(.q_hidden)'),
+          $mandatoryComplete = $mandatory.filter(function(){
+            var $inputs = $('li:not(.quiet)', this).find('input, select');
+            return (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked'))
+          });
+
+      requirements.basic.required += $mandatory.size();
+      requirements.basic.complete += $mandatoryComplete.size();
+
+      $.each(levels,function(i, level){
+        $('.requirement_' + level).each(function(){
+          requirements[level].required += $(this).size();
+          requirements[level].complete += $(this).filter('.q_hidden').size();
         });
+      });
+
+      // update the bars
       $.each(requirements, function(level, totals) {
-        console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
+        window.console && console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
         $('#bar-' + level).width((totals.required === 0 ? '0' : 100*(totals.complete/totals.required)) + '%');
       });
+
+      // first incomplete is our target
+      var completed = 'none';
+      for (var i = 0; i < levels.length; i++) {
+        var level = levels[i], r = requirements[level];
+        if(r.required === r.complete){
+          completed = level;
+        } else {
+          break;
+        }
+      };
+
+      $('.status_texts dt').filter(function(){return $(this).text() == completed})
+        // display the dd
+        .next().addClass('active')
+
+        // hide any others
+        .siblings().removeClass('active');
+
 
     })
   })
 
 #status_panel
   #panel_handle
-  %h1= @response_set.access_code
-  %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
+  %dl.status_texts
+    %dt none
+    %dd.active You are working towards <strong>Raw</strong> level of open data.
+    %dt basic
+    %dd You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Pilot</strong> level.
+    %dt pilot
+    %dd You've achieved a <strong>Pilot</strong> level of open data, and are now working towards <strong>Standard</strong> level.
+    %dt standard
+    %dd You've achieved a <strong>Standard</strong> level of open data, and are now working towards <strong>Expert</strong> level.
+    %dt exemplar
+    %dd You've achieved a <strong>Expert</strong> level of open data.
+
   %hr
   %h3 Raw 
   .progress.progress-striped.progress-info
