@@ -1,0 +1,44 @@
+:javascript
+  $(function(){
+    $('#status_panel').on('update', function(){
+      $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
+        var $requirements = $('.requirement_' + level);
+        // hidden ones are good
+        var total = $requirements.size();
+        var hidden = $requirements.filter('.q_hidden').size();
+        var untriggered = 0;
+
+        var shown = total - hidden;
+        $('#bar-' + level).width(100*(hidden/total)  + '%')
+
+      })
+    })
+  })
+#status_panel
+  #panel_handle
+  %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
+  %hr
+  %h3 Raw 
+  .progress.progress-striped.progress-info
+    .bar#bar-basic
+
+  %hr
+  %h3 Pilot
+  = image_tag "badges/status-indicators/pilot.png"
+  .progress.progress-striped.progress-warning
+    .bar#bar-pilot
+ 
+  %hr
+  %h3 Standard
+  = image_tag "badges/status-indicators/standard.png"
+  .progress.progress-striped.progress-success
+    .bar#bar-standard
+
+  %hr
+  %h3 Expert
+  = image_tag "badges/status-indicators/expert.png"
+  .progress.progress-striped.progress-danger
+    .bar#bar-exemplar
+  %hr
+  %p 
+  %a{:href => "http://certificate.theodi.org/surveys/-PJCBXiSMw/requirements?locale=en"} How can I improve my open data? 
