@@ -2,7 +2,7 @@
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => remote, :format => :json, :html => { :id => "register_user" }) do |f|
   .registration_form_errors
     - if resource.errors.any?
-      = render 'devise/sessions/form_errors', locals: {errors: resource.errors}
+      = render 'devise/sessions/form_errors'
 
   .form-field
     = f.label :email
