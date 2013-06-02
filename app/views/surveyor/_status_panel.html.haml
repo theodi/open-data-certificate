@@ -1,19 +1,46 @@
 :javascript
   $(function(){
     $('#status_panel').on('update', function(){
-      $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i,level){
-        var $requirements = $('.requirement_' + level);
-        // hidden ones are good
-        var total = $requirements.size();
-        var hidden = $requirements.filter('.q_hidden').size();
-        var untriggered = 0;
+      var requirements = {};
+      $.each(['basic', 'pilot', 'standard', 'exemplar'], function(i, level){
+        requirements[level] = { required: 0, complete: 0 };
+      });
+      $('fieldset.question-row:not(.q_hidden)')
+        .each(function() {
+          var $question = $(this),
+              $inputs = $question.find('li:not(.quiet) input, li:not(.quiet) select'),
+              $requirements = $question.closest('li.container').find('fieldset.q_label');
+          if ($question.is('.mandatory')) {
+            requirements.basic.required++;
+            if (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked')) {
+              requirements.basic.complete++;
+            }
+          }
+          if ($requirements.is('.requirement_basic')) {
+            requirements.pilot.required++;
+            if (!$requirements.is(':not(.q_hidden)')) requirements.basic.complete++;
+          }
+          if ($requirements.is('.requirement_pilot')) {
+            requirements.pilot.required++;
+            if (!$requirements.is(':not(.q_hidden)')) requirements.pilot.complete++;
+          }
+          if ($requirements.is('.requirement_standard')) {
+            requirements.standard.required++;
+            if (!$requirements.is(':not(.q_hidden)')) requirements.standard.complete++;
+          }
+          if ($requirements.is('.requirement_exemplar')) {
+            requirements.exemplar.required++;
+            if (!$requirements.is(':not(.q_hidden)')) requirements.exemplar.complete++;
+          }
+        });
+      $.each(requirements, function(level, totals) {
+        console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
+        $('#bar-' + level).width((totals.required === 0 ? '0' : 100*(totals.complete/totals.required)) + '%');
+      });
 
-        var shown = total - hidden;
-        $('#bar-' + level).width(100*(hidden/total)  + '%')
-
-      })
     })
   })
+
 #status_panel
   #panel_handle
   %h1= @response_set.access_code
