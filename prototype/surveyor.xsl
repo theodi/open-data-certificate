@@ -95,6 +95,9 @@
 					<xsl:when test="checkboxset">
 						<xsl:attribute name="pick">any</xsl:attribute>
 					</xsl:when>
+					<xsl:otherwise>
+						<xsl:sequence select="*/@required" />
+					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>
 			<xsl:apply-templates select="." mode="conditions" />
@@ -110,7 +113,7 @@
 	<xsl:element name="a_1">
 		<xsl:attribute name="label" select="@placeholder" />
 		<xsl:attribute name="type" select="'string'" />
-		<xsl:apply-templates select="@*" mode="structure" />
+		<xsl:apply-templates select="@placeholder" mode="structure" />
 		<xsl:if test="..//requirement[@level]">
 			<xsl:attribute name="requirement" select="..//requirement[@level]/local:requirementId(.)" separator=", " />
 		</xsl:if>
