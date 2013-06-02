@@ -1136,7 +1136,7 @@ td.action {
     font-size: 22px
   }
 
-  label small
+  label small,
   .group_label small{
     color:@odiGrey;
     font-size: 65%;
@@ -1184,6 +1184,15 @@ td.action {
   fieldset.question-row{
     position: relative;
     padding-top: 10px;
+
+    // focussed elements
+    &.active{
+      // hard to do the odd outline
+
+      // outline: 1px solid @odiBlueLight;
+      background-color: @odiBlueLighter;
+    }
+
     aside{
       display:none;
       position:absolute;
@@ -1198,24 +1207,15 @@ td.action {
     }
   }
 
-  .question-meta{
-
-  }
-
-
-  // focussed elements
-  fieldset.question-row.active{
-    // hard to do the odd outline
-
-    // outline: 1px solid @odiBlueLight;
-    background-color: @odiBlueLighter;
-  }
 
   &.highlight-mandatory{
     .mandatory{
       background-color:@odiCrimsonLight;
       &.has-response{
         background-color:@white;
+        &.active{
+          background-color:@odiBlueLighter;
+        }
       }
     }
   }

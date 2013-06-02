@@ -4,7 +4,7 @@ class StringInput < Formtastic::Inputs::StringInput
   def label_html_options
     {
       :for => input_html_options[:id],
-      :class => [],
+      :class => ['question_label'],
     }
   end
 
