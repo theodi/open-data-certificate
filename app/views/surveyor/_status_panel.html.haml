@@ -16,6 +16,7 @@
   })
 #status_panel
   #panel_handle
+  %h1= @response_set.access_code
   %p You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Standard</strong> level.
   %hr
   %h3 Raw 
@@ -41,4 +42,4 @@
     .bar#bar-exemplar
   %hr
   %p 
-  %a{:href => "http://certificate.theodi.org/surveys/-PJCBXiSMw/requirements?locale=en"} How can I improve my open data? 
+  =link_to 'How can I improve my open data?', surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
