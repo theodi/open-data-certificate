@@ -1152,10 +1152,23 @@ td.action {
     }
   }
 
+  fieldset.requirement_basic li {
+    background: @odiRed;
+    color: white;
+    padding: 20px 20px 10px;
+  }
+
   fieldset.requirement_pilot,
   fieldset.requirement_standard,
   fieldset.requirement_exemplar {
     display: none;
+    position: relative;
+
+    img{
+      position: absolute;
+      left: -70px;
+      top: 10px;
+    }
   }
 
   fieldset.question-row{
