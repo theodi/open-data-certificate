@@ -1131,7 +1131,7 @@ td.action {
   }
 
 
-  // this is our label replcement (for the question of multiple answers)
+  // this is our label replacement (for the question of multiple answers)
   .group_label{
     font-size: 22px
   }
@@ -1142,7 +1142,15 @@ td.action {
     font-size: 65%;
   }
 
-
+  // repeated sections
+  fieldset.g_repeater{
+    legend {
+      display: none;
+    }
+    ol fieldset.row {
+      display: block;
+    }
+  }
 
   .question-row{
     position: relative;
@@ -1166,7 +1174,7 @@ td.action {
 
 
   // focussed elements
-  fieldset.active{
+  fieldset.question-row.active{
     // hard to do the odd outline
 
     // outline: 1px solid @odiBlueLight;

@@ -143,6 +143,7 @@ $(function(){
   // This collects all the sections that are requirements, and
   // bundles them into the aside of the previous question (that
   // they hopefully pertain to)
+  /*
   var $current;
   $('.survey-section > ul > li > fieldset').each(function(){
     var $this = $(this),
@@ -153,6 +154,7 @@ $(function(){
       $this.remove().appendTo($current.find('aside'));
     }
   });
+  */
 
 
   // Old ie only supports :hover on anchors

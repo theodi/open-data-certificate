@@ -26,7 +26,7 @@
       = ff.input rc_to_attr(a.response_class), answer_attrs
     - else
       = a.text_for(nil, @render_context, I18n.locale)
-  - unless g && g.display_type == "grid"
+  - unless (g && g.display_type == "grid") || a.help_text.blank?
     %aside.span4.answer-meta{"data-meta-for"=> reference_identifier}
       %p
         != a.help_text_for(@render_context, I18n.locale)
