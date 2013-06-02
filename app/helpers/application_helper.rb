@@ -59,5 +59,4 @@ module ApplicationHelper
       { :link_text => t('menu.create_certificate'), :path => non_authenticated_start_questionnaire_path(anchor: 'start-cert-modal'), 'data-toggle' => :modal }
     end.merge(options)
   end
-
 end

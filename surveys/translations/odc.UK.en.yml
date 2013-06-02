@@ -66,7 +66,7 @@ questions:
       unsure:
         text: "you're not sure if you have the rights to publish this data as open data"
   publisherOrigin:
-    text: "Was *all* this data originally created or gathered by you?"
+    text: "Was <em>all</em> this data originally created or gathered by you?"
     text_as_statement: "This data was"
     help_text: "If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it."
     answers:
@@ -85,7 +85,7 @@ questions:
       a_true:
         text: yes
   thirdPartyOpen:
-    text: "Are *all* sources of this data already published as open data?"
+    text: "Are <em>all</em> sources of this data already published as open data?"
     text_as_statement: "This data is created from"
     help_text: "You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of your data is not like this then you'll need legal advice before you can publish it."
     answers:
@@ -253,7 +253,7 @@ questions:
         text: "Other Licence URL"
   otherDataLicenceOpen:
     text: "Is the licence an open licence?"
-    help_text: "If you aren't sure what an open licence is then read the [Open Knowledge Definition](http://opendefinition.org/) definition. Next, choose your licence from the [Open Definition Advisory Board open licence list](http://licenses.opendefinition.org/). If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    help_text: "If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
     answers:
       a_false:
         text: no
@@ -332,7 +332,7 @@ questions:
         text: "Licence URL"
   otherContentLicenceOpen:
     text: "Is the licence an open licence?"
-    help_text: "If you aren't sure what an open licence is then read the [Open Knowledge Definition](http://opendefinition.org/) definition. Next, choose your licence from the [Open Definition Advisory Board open licence list](http://licenses.opendefinition.org/). If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    help_text: "If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
     answers:
       a_false:
         text: no
@@ -367,7 +367,7 @@ questions:
   appliedAnon:
     text: "Have you attempted to reduce or remove the possibility of individuals being identified?"
     text_as_statement: "This data about individuals has been"
-    help_text: "Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the [ICO Anonymisation Code of Practice](http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx)."
+    help_text: "Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the <a href="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">ICO Anonymisation Code of Practice</a>."
     answers:
       a_false:
         text: no
@@ -394,7 +394,7 @@ questions:
   privacyImpactAssessmentExists:
     text: "Have you carried out a Privacy Impact Assessment?"
     text_as_statement: "The curator has"
-    help_text: "A [Privacy Impact Assessment](http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx) is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information."
+    help_text: "A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information."
     answers:
       a_false:
         text: no
@@ -829,7 +829,7 @@ questions:
     answers:
       statistical:
         text: "expose the structure of statistical hypercube data like SDMX or Data Cube"
-        help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like [SDMX](http://sdmx.org/) and [Data Cube](http://www.w3.org/TR/vocab-data-cube/) are designed to express this underlying structure."
+        help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure."
         text_as_statement: "in a statistical data format"
       tabular:
         text: "treat statistical data as a table like CSV"
@@ -895,7 +895,7 @@ questions:
         text_as_statement: "resolve using a service"
       resolvable:
         text: "yes, the identifiers are URLs that resolve to give information"
-        help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like [companies](http://opencorporates.com/companies/gb/08030289) and [postcodes](http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE). Computers can also process this extra information using scripts to access the underlying data."
+        help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data."
         text_as_statement: "resolve because they are URLs"
   resolutionServiceURL:
     text: "Where is the service that is used to resolve the identifiers?"
@@ -1171,220 +1171,220 @@ labels:
     help_text: "how you give people access to tools they need to work with your data"
 # General Information Requirements
   pilot_1:
-    text: "You should have a **web page that offers documentation** about the open data you publish so that people can understand its context, content and utility."
+    text: "You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility."
   basic_1:
-    text: "You must have a **web page that gives documentation** and access to the open data you publish so that people can use it."
+    text: "You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it."
 # Legal Information Requirements
   basic_2:
-    text: "You must have the **right to publish your data**."
+    text: "You must have the <strong>right to publish your data</strong>."
   basic_3:
     text: "You indicated that this data wasn't originally created or gathered by you, and wasn't crowdsourced, so it must have been extracted or calculated from other data sources."
   basic_4:
-    text: "You should get **legal advice to make sure you have the right to publish this data**."
+    text: "You should get <strong>legal advice to make sure you have the right to publish this data</strong>."
   basic_5:
     text: "You indicated that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowdsourced."
   basic_6:
-    text: "You must get **contributors to agree to a Contributor Licence Agreement** (CLA) that gives you the right to publish their work as open data."
+    text: "You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data."
   pilot_2:
-    text: "You should document **where your data came from and the rights under which you publish it**, so people are assured they can use parts which came from third parties."
+    text: "You should document <strong>where your data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties."
   standard_1:
-    text: "You should **include machine-readable data about the sources of your data**."
+    text: "You should <strong>include machine-readable data about the sources of your data</strong>."
   pilot_3:
-    text: "You should have a **web page that states your copyright** and details of how people should give attribution to your data."
+    text: "You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data."
   standard_2:
-    text: "You should provide **machine-readable data in your copyright statement about licences** which affect your data so automatic tools can use it."
+    text: "You should provide <strong>machine-readable data in your copyright statement about licences</strong> which affect your data so automatic tools can use it."
   exemplar_1:
-    text: "You should provide **machine-readable data in your copyright statement about attribution** of your data so automatic tools can use it."
+    text: "You should provide <strong>machine-readable data in your copyright statement about attribution</strong> of your data so automatic tools can use it."
   exemplar_2:
-    text: "You should provide **machine-readable data in your copyright statement about the URL of your data** that must be linked to, so automatic tools can use it."
+    text: "You should provide <strong>machine-readable data in your copyright statement about the URL of your data</strong> that must be linked to, so automatic tools can use it."
   basic_7:
-    text: "You must **publish open data under an open licence** so that people can use it."
+    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
   basic_8:
-    text: "You must **publish open data under an open licence** so that people can use it."
+    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
   standard_3:
-    text: "You should **have your anonymisation process audited independently** to ensure it reduces the risk of individuals being reidentified."
+    text: "You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
   pilot_4:
-    text: "You should **only publish personal data without anonymisation if you are required to do so by law**."
+    text: "You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>."
   standard_4:
-    text: "You should **document your right to publish data about individuals** for people who use your data and for those affected by disclosure."
+    text: "You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure."
   pilot_5:
-    text: "You should **do a Privacy Impact Assessment** if you publish data about individuals."
+    text: "You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals."
   standard_5:
-    text: "You should **publish your Privacy Impact Assessment** so people can understand how you have assessed the risks of disclosing data."
+    text: "You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data."
   standard_6:
-    text: "You should **have your Privacy Impact Assessment audited independently** to ensure it has been carried out correctly."
+    text: "You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly."
   pilot_6:
-    text: "You should **tell people what purposes the individuals in your data consented to you using their data for**. So that they use your data for the same purposes and comply with the Data Protection Act."
+    text: "You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act."
   pilot_7:
-    text: "You should **involve the person responsible for data protection** in your organisation before you publish this data."
+    text: "You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data."
   standard_7:
-    text: "You should **have your anonymisation process audited independently** by an expert to ensure it is appropriate for your data."
+    text: "You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data."
 # Practical Information Requirements
   standard_8:
-    text: "You should **ensure that people can easily find your data** from your organisation's home page."
+    text: "You should <strong>ensure that people can easily find your data</strong> from your organisation's home page."
   standard_9:
-    text: "You should **ensure that people can find your data when they search for it** in locations that list data."
+    text: "You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data."
   standard_10:
-    text: "You should **reference data from your own publications** so that people are aware of its availability and context."
+    text: "You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context."
   pilot_8:
-    text: "You should **put timestamps in your data when you release it** so people know the period it relates to and when it will expire."
+    text: "You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire."
   standard_11:
-    text: "You should **publish updates to time-sensitive data** so that it does not go stale."
+    text: "You should <strong>publish updates to time-sensitive data</strong> so that it does not go stale."
   exemplar_3:
-    text: "You should **provide a feed of changes to your data** so people keep their copies up-to-date and accurate."
+    text: "You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate."
   pilot_9:
-    text: "You should **create a new dataset release every month** so people keep their copies up-to-date and accurate."
+    text: "You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate."
   standard_12:
-    text: "You should **create a new dataset release every week** so people keep their copies up-to-date and accurate."
+    text: "You should <strong>create a new dataset release every week</strong> so people keep their copies up-to-date and accurate."
   exemplar_4:
-    text: "You should **create a new dataset release every day** so people keep their copies up-to-date and accurate."
+    text: "You should <strong>create a new dataset release every day</strong> so people keep their copies up-to-date and accurate."
   pilot_10:
-    text: "You should **have a reasonable delay between when you create and publish a dataset** that is less than the gap between releases so people keep their copies up-to-date and accurate."
+    text: "You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate."
   standard_13:
-    text: "You should **have a short delay between when you create and publish a dataset** that is less than half the gap between releases so people keep their copies up-to-date and accurate."
+    text: "You should <strong>have a short delay between when you create and publish a dataset</strong> that is less than half the gap between releases so people keep their copies up-to-date and accurate."
   exemplar_5:
-    text: "You should **have minimal or no delay between when you create and publish a dataset** so people keep their copies up-to-date and accurate."
+    text: "You should <strong>have minimal or no delay between when you create and publish a dataset</strong> so people keep their copies up-to-date and accurate."
   standard_14:
-    text: "You should **let people download your entire dataset** so that they can do more complete and accurate analysis with all the data."
+    text: "You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data."
   pilot_11:
-    text: "You should **create a new database dump every month** so that people have the latest data."
+    text: "You should <strong>create a new database dump every month</strong> so that people have the latest data."
   standard_15:
-    text: "You should **create a new database dump within a week of any change** so that people have less time to wait for the latest data."
+    text: "You should <strong>create a new database dump within a week of any change</strong> so that people have less time to wait for the latest data."
   exemplar_6:
-    text: "You should **create a new database dump within a day of any change** so that people find it easier to get the latest data."
+    text: "You should <strong>create a new database dump within a day of any change</strong> so that people find it easier to get the latest data."
   standard_16:
-    text: "You should **correct data when people report errors** so everyone benefits from improvements in accuracy."
+    text: "You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy."
   standard_17:
-    text: "You should **document any known issues with your data quality** so that people can decide how much to trust your data."
+    text: "You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data."
   exemplar_7:
-    text: "You should **document your quality control process** so that people can decide how much to trust your data."
+    text: "You should <strong>document your quality control process</strong> so that people can decide how much to trust your data."
   pilot_12:
-    text: "You should **ensure your data does not have more than 4 days downtime/year** so that people can rely on access to your data."
+    text: "You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data."
   standard_18:
-    text: "You should **ensure your data does not have more than 2 days downtime/year** so that people can rely on access to your data."
+    text: "You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data."
   exemplar_8:
-    text: "You should **ensure your data does not have more than 9 hours downtime/year** so that people can rely on access to your data."
+    text: "You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data."
   pilot_13:
-    text: "You should **guarantee that your data will be available in this form for at least a year** so that people can decide how much to rely on your data."
+    text: "You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data."
   standard_19:
-    text: "You should **guarantee that your data will be available in this form in the medium-term** so that people can decide how much to trust your data."
+    text: "You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data."
   exemplar_9:
-    text: "You should **guarantee that your data will be available in this form in the long-term** so that people can decide how much to trust your data."
+    text: "You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data."
 # Technical Information Requirements
   basic_9:
-    text: "You must **provide either a URL to your data or a URL to documentation** about it so that people can find it."
+    text: "You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it."
   pilot_14:
-    text: "You should **have a URL that is a direct link to the data itself** so that people can access it easily."
+    text: "You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily."
   standard_20:
-    text: "You should **have a single persistent URL to download the current version of your data** so that people can access it easily."
+    text: "You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily."
   pilot_15:
-    text: "You should **use a consistent pattern for different release URLs** so that people can download each one automatically."
+    text: "You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically."
   standard_21:
-    text: "You should **have a document or feed with a list of available releases** so people can create scripts to download them all."
+    text: "You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all."
   basic_10:
-    text: "You must **provide access to releases of your data through a URL** that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
+    text: "You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
   basic_11:
-    text: "You must **provide either an API endpoint URL or a URL to its documentation** so that people can find it."
+    text: "You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it."
   standard_22:
-    text: "You should **have a service description document or single entry point for your API** so that people can access it."
+    text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
   standard_23:
-    text: "You should **have a single persistent URL to download the current dump of your database** so that people can find it."
+    text: "You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it."
   exemplar_10:
-    text: "You should **use a consistent pattern for database dump URLs** so that people can can download each one automatically."
+    text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
   exemplar_11:
-    text: "You should **have a document or feed with a list of available database dumps** so people can create scripts to download them all"
+    text: "You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all"
   pilot_16:
-    text: "You should **provide your data in a machine-readable format** so that it's easy to process."
+    text: "You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process."
   standard_24:
-    text: "You should **provide your data in an open standard format** so that people can use widely available tools to process it more easily."
+    text: "You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily."
   standard_25:
-    text: "You should **publish documents in a format that exposes semantic structure** so that people can display them in different styles."
+    text: "You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles."
   pilot_17:
-    text: "You should **publish documents in a format designed specifically for them** so that they're easy to process."
+    text: "You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process."
   exemplar_12:
-    text: "You should **publish statistical data in a format that exposes dimensions and measures** so that it's easy to analyse."
+    text: "You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse."
   standard_26:
-    text: "You should **publish tabular data in a format that exposes tables of data** so that it's easy to analyse."
+    text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
   pilot_18:
-    text: "You should **publish tabular data in a format designed for that purpose** so that it's easy to process."
+    text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
   standard_27:
-    text: "You should **publish geographic data in a format designed that purpose** so that people can use widely available tools to process it."
+    text: "You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it."
   pilot_19:
-    text: "You should **publish geographic data as structured data** so that it's easy to process."
+    text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
   pilot_20:
-    text: "You should **publish structured data in a format designed that purpose** so that it's easy to process."
+    text: "You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process."
   standard_28:
-    text: "You should **use identifiers for things in your data** so that they can be easily related with other data about those things."
+    text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
   standard_29:
-    text: "You should **provide a service to resolve the identifiers you use** so that people can find extra information about them."
+    text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
   exemplar_13:
-    text: "You should **link to a web page of information about each of the things in your data** so that people can easily find and share that information."
+    text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
   standard_30:
-    text: "You should **have a URL through which identifiers can be resolved** so that more information about them can be found by a computer."
+    text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
   exemplar_14:
-    text: "You should **use URLs to third-party information in your data** so that it's easy to combine with other data that uses those URLs."
+    text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
   exemplar_15:
-    text: "You should **provide a machine-readable provenance trail** about your data so that people can trace how it was processed."
+    text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
   exemplar_16:
-    text: "You should **describe how people can check that the data they receive is the same as what you published** so that they can trust it."
+    text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
   standard_31:
-    text: "You should **include a data title in your documentation** so that people know how to refer to it."
+    text: "You should <strong>include a data title in your documentation</strong> so that people know how to refer to it."
   standard_32:
-    text: "You should **include a data description in your documentation** so that people know what it contains."
+    text: "You should <strong>include a data description in your documentation</strong> so that people know what it contains."
   standard_33:
-    text: "You should **include a data release date in your documentation** so that people know how timely it is."
+    text: "You should <strong>include a data release date in your documentation</strong> so that people know how timely it is."
   standard_34:
-    text: "You should **include a last modification date in your documentation** so that people know they have the latest data."
+    text: "You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data."
   standard_35:
-    text: "You should **document how frequently you release new versions of your data** so people know how often you update it."
+    text: "You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it."
   standard_36:
-    text: "You should **include a canonical URL for the data in your documentation** so that people know how to access it consistently."
+    text: "You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently."
   standard_37:
-    text: "You should **include a canonical URL to the documentation itself** so that people know how to access to it consistently."
+    text: "You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently."
   standard_38:
-    text: "You should **include the data language in your documentation** so that people who search for it will know whether they can understand it."
+    text: "You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it."
   standard_39:
-    text: "You should **indicate the data publisher in your documentation** so people can decide how much to trust your data."
+    text: "You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data."
   standard_40:
-    text: "You should **include the geographic area in your documentation** so that people understand where your data applies to."
+    text: "You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to."
   standard_41:
-    text: "You should **include the time period in your documentation** so that people understand when your data applies to."
+    text: "You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to."
   standard_42:
-    text: "You should **include the subject in your documentation** so that people know roughly what your data is about."
+    text: "You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about."
   standard_43:
-    text: "You should **include keywords or tags in your documentation** to help people search within the data effectively."
+    text: "You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively."
   standard_44:
-    text: "You should **include titles within your documentation** so people know how to refer to each data distribution."
+    text: "You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution."
   standard_45:
-    text: "You should **include descriptions within your documentation** so people know what each data distribution contains."
+    text: "You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains."
   standard_46:
-    text: "You should **include release dates within your documentation** so people know how current each distribution is."
+    text: "You should <strong>include release dates within your documentation</strong> so people know how current each distribution is."
   standard_47:
-    text: "You should **include last modification dates within your documentation** so people know whether their copy of a data distribution is up-to-date."
+    text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
   standard_48:
-    text: "You should **document applicable licences or waivers** so people know what they can do with a data distribution."
+    text: "You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution."
   pilot_21:
-    text: "You should **document how your API works** so that people understand how to use it."
+    text: "You should <strong>document how your API works</strong> so that people understand how to use it."
   standard_49:
-    text: "You should **document any vocabulary you use within your data** so that people know how to interpret it."
+    text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
   standard_50:
-    text: "You should **document the codes used within your data** so that people know how to interpret them."
+    text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
   pilot_22:
-    text: "You should **provide an email address for people to send questions** about your data to."
+    text: "You should <strong>provide an email address for people to send questions</strong> about your data to."
   pilot_23:
-    text: "You should **provide instructions about how suggest improvements** to the way you publish data so you can discover what people need."
+    text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
   pilot_24:
-    text: "You should **provide an email address for people to send questions about privacy to** and disclosure of personal details."
+    text: "You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details."
   standard_51:
-    text: "You should **use social media to reach people who use your data** and discover how your data is being used"
+    text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
   standard_52:
-    text: "You should **tell people where they can discuss your data** and support one another."
+    text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
   standard_53:
-    text: "You should **provide instructions about how people can report errors** in your data."
+    text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
   standard_54:
-    text: "You should **provide a mailing list or feed with updates** that people can use to keep their copies of your data up-to-date."
+    text: "You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date."
   exemplar_17:
-    text: "You should **build a community of people around your data** to encourage wider use of your data."
+    text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
   exemplar_18:
-    text: "You should **provide a list of software libraries and other readily-available tools** so that people can quickly get to work with your data."
+    text: "You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data."

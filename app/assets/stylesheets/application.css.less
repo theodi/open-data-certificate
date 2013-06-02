@@ -50,7 +50,14 @@
 @odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiCrimsonDark: darken(@odiCrimson, 6%);
 @odiCrimsonLight: lighten(@odiCrimson, 53%);
+
+@odiOrange: #f99C06;
+@odiOrangeDark: darken(@odiOrange, 6%);
+
+@odiGreen: #0DBC37;
+@odiGreenDark: darken(@odiGreen, 6%);
 
 @odiPomegranate: #dc4810;
 
@@ -151,7 +158,7 @@
 
       margin-bottom: 10px;
 
-      input[type=email], input[type=password] { 
+      input[type=email], input[type=password] {
 
         margin-top: 5px;
         background: @odiBlueLight;
@@ -213,10 +220,13 @@
 
     }
 
+    .sign_in_user_form_errors {
+      width: 93%;
+    }
+
   }
 
 }
-
 
 
 /************************************************
@@ -267,7 +277,7 @@ p.lead {
 }
 
 dl {
-  margin: 30px 0;
+  margin: 0 0 45px;
 }
 
 dt, dd {
@@ -342,7 +352,7 @@ input, textarea{
 
 // snap the header to the top when it's affixed
 header.affix {
-    top: 0px; 
+    top: 0px;
     width:100%;
     z-index:10;
 }
@@ -352,7 +362,7 @@ header.affix {
     margin-top: 50px;
 
     h1 {
-      font-size: 75px;
+      font-size: 70px;
       line-height: 80px
     }
 
@@ -509,42 +519,61 @@ hr.heavy {
 
 // Layout //
 
+body {
+  min-width: 1210px;
+}
+
+.container {
+  padding: 0 20px;
+}
+
 .navbar-inner {
+  padding: 0;
   height: 60px;
 }
 
-#topbar ul {
-  li {
-    margin: 0;
-    padding:0;
-    height: 60px;
-    border-left: 1px solid #707070;
+#topbar {
+  background: #1b1b1b;
 
-    a {
-      color: #fff;
-      padding: 20px;
-    }
+  ul {
+    border-right: 1px solid #707070;
 
-    a:hover, a.active {
-      background-color: @odiRed;
+    li {
+      margin: 0;
+      padding:0;
+      height: 60px;
+      border-left: 1px solid #707070;
+
+      a {
+        color: #fff;
+        padding: 20px;
+      }
+
+      a:hover, a.active {
+        background-color: @odiRed;
+      }
     }
   }
-  border-right: 1px solid #707070;
-}
 
-#topbar .label {
-  top: -15px;
-  position: relative;
-  padding-top: 10px;
-  background-color: @odiBlue;
+  .label {
+    top: -15px;
+    position: relative;
+    padding-top: 10px;
+    background-color: @odiBlue;
+  }
 }
 
 #mainnav {
   margin-bottom: 0;
   position: relative;
+  background-color: rgba(255,255,255,0.65);
 
   .navbar-inner {
-    background-color:rgba(255,255,255,0.65);
+    background: none;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
     border-bottom: none;
     background-image: none;
 
@@ -647,9 +676,7 @@ nav .dropdown-menu-button {
   }
 }
 
-#login {
-  display: none;
-}
+
 
 header {
   background-color: @odiBlue;
@@ -713,7 +740,7 @@ header {
 
     li {
       display: inline;
-      margin: 0 0 0 20px;
+      margin-left: 20px;
     }
   }
 
@@ -768,6 +795,92 @@ section {
 
 
 
+// Alert messages //
+
+.flash {
+  margin-top: 20px;
+}
+
+.alert {
+  color: white;
+  padding: 14px 12px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  vertical-align: middle;
+
+  .icon-large {
+    margin-bottom: 1px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .close, .close:hover, .close:active {
+    opacity: 1;
+    width: 14px;
+    height: 14px;
+    position: static;
+    background-image: url(/assets/glyphicons-halflings-white.png);
+    background-position: -312px 0;
+  }
+}
+
+.alert-alert {
+  background: @odiCrimson;
+  border: 1px solid @odiCrimsonDark;
+}
+
+.alert-warning {
+  background: @odiOrange;
+  border: 1px solid @odiOrangeDark;
+}
+
+.alert-notice {
+  background: @odiGreen;
+  border: 1px solid @odiGreenDark;
+}
+
+#topbar .alert-box {
+  h3 {
+    display: inline;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+
+  ul {
+    border: none;
+
+    li {
+      height: auto;
+      font-size: 16px;
+      border: none;
+    }
+  }
+}
+
+// Icons //
+
+.icon-large {
+
+  width: 28px;
+  height: 28px;
+  background-image: url(/assets/glyphicons.png);
+
+  &.icon-white {
+    background-image: url(/assets/glyphicons_white.png);
+  }
+
+  // Spacing between icons in file
+  @spacing: -48px;
+
+  // Mixin to help select correct icon
+  .icon-position(@top, @left) {
+    background-position: @spacing * @left (@spacing * @top) + 1;
+  }
+
+  &.icon-ok-sign { .icon-position(19, 3); }
+  &.icon-info-sign { .icon-position(19, 5); }
+  &.icon-exclamation-sign { .icon-position(19, 6); }
+  &.icon-ban-circle { .icon-position(19, 9); }
+}
 
 // Tables //
 
@@ -1018,7 +1131,7 @@ td.action {
   }
 
 
-  // this is our label replcement (for the question of multiple answers)
+  // this is our label replacement (for the question of multiple answers)
   .group_label{
     font-size: 22px
   }
@@ -1029,10 +1142,48 @@ td.action {
     font-size: 65%;
   }
 
+  // dropdowns
+  fieldset.q_dropdown{
+    legend{
+      display: none;
+    }
+    > ol > label {
+      display: block;
+    }
+  }
 
+  // repeated sections
+  fieldset.g_repeater{
+    legend {
+      display: none;
+    }
+    ol fieldset.row {
+      display: block;
+    }
+  }
 
-  .question-row{
+  fieldset.requirement_basic li {
+    background: @odiRed;
+    color: white;
+    padding: 20px 20px 10px;
+  }
+
+  fieldset.requirement_pilot,
+  fieldset.requirement_standard,
+  fieldset.requirement_exemplar {
+    display: none;
     position: relative;
+
+    img{
+      position: absolute;
+      left: -70px;
+      top: 10px;
+    }
+  }
+
+  fieldset.question-row{
+    position: relative;
+    padding-top: 10px;
     aside{
       display:none;
       position:absolute;
@@ -1040,6 +1191,10 @@ td.action {
       background-color:@odiBlueLighter;
       padding:20px;
       width:330px;
+
+      &.answer-meta {
+        top: 10px;
+      }
     }
   }
 
@@ -1049,9 +1204,9 @@ td.action {
 
 
   // focussed elements
-  fieldset.active{
+  fieldset.question-row.active{
     // hard to do the odd outline
-    
+
     // outline: 1px solid @odiBlueLight;
     background-color: @odiBlueLighter;
   }
@@ -1084,7 +1239,6 @@ td.action {
   &:hover, &.hover{
     right:0px;
   };
-  
 
   &.affix, &.affix-bottom{
     position: fixed;
@@ -1299,11 +1453,7 @@ strong.certificate-level {
 
 /*
 //
-<<<<<<< HEAD
 // ***** Terms Page, Contact (Get in touch) Page *****
-=======
-// ***** Terms Page *****
->>>>>>> origin
 //
 */
 .container.terms, .container.contact {

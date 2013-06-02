@@ -46,8 +46,8 @@
 	<_group>
 		<_group>
 			<xsl:element name="label_group_{count(preceding::group) + 1}">
-				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
-				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="html" /></xsl:attribute>
+				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
 				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
 			</xsl:element>
 			<xsl:apply-templates select="." mode="conditions" />
@@ -72,14 +72,14 @@
 		<_group>
 			<xsl:element name="q_{@id}">
 				<xsl:attribute name="label">
-					<xsl:apply-templates select="label" mode="markdown" />
+					<xsl:apply-templates select="label" mode="html" />
 				</xsl:attribute>
 				<xsl:if test="@display">
 					<xsl:attribute name="display_on_certificate" select="true()" />
 					<xsl:attribute name="text_as_statement" select="@display" />
 				</xsl:if>
 				<xsl:if test="help">
-					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+					<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
 					<xsl:if test="help/@more">
 						<xsl:attribute name="help_text_more_url" select="help/@more" />
 					</xsl:if>
@@ -95,6 +95,9 @@
 					<xsl:when test="checkboxset">
 						<xsl:attribute name="pick">any</xsl:attribute>
 					</xsl:when>
+					<xsl:otherwise>
+						<xsl:sequence select="*/@required" />
+					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>
 			<xsl:apply-templates select="." mode="conditions" />
@@ -123,7 +126,7 @@
 
 <xsl:template match="radioset/option | checkboxset/option" mode="structure">
 	<xsl:element name="a_{local:token(@value)}">
-		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="markdown" /></xsl:attribute>
+		<xsl:attribute name="label"><xsl:apply-templates select="label" mode="html" /></xsl:attribute>
 		<xsl:if test="ancestor::question/@display">
 			<xsl:attribute name="text_as_statement">
 				<xsl:choose>
@@ -131,13 +134,13 @@
 						<xsl:value-of select="@display" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:apply-templates select="label" mode="markdown" />
+						<xsl:apply-templates select="label" mode="html" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
 		</xsl:if>
 		<xsl:if test="help">
-			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="markdown" /></xsl:attribute>
+			<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
 			<xsl:if test="help/@more">
 				<xsl:attribute name="help_text_more_url" select="help/@more" />
 			</xsl:if>
@@ -151,7 +154,7 @@
 <xsl:template match="select/option" mode="structure">
 	<xsl:if test=". != ''">
 		<xsl:element name="a{if (@value) then concat('_', local:token(@value)) else ''}">
-			<xsl:attribute name="label"><xsl:apply-templates select="node()" mode="markdown" /></xsl:attribute>
+			<xsl:attribute name="label"><xsl:apply-templates select="node()" mode="html" /></xsl:attribute>
 			<xsl:if test="ancestor::question/@display">
 				<xsl:attribute name="text_as_statement">
 					<xsl:choose>
@@ -200,7 +203,7 @@
 	<_group>
 		<xsl:element name="label_{local:requirementId(.)}">
 			<xsl:attribute name="label">
-				<xsl:apply-templates select="." mode="markdown" />
+				<xsl:apply-templates select="." mode="html" />
 			</xsl:attribute>
 			<xsl:attribute name="custom_renderer" select="concat('/partials/requirement_', if (@level) then @level else 'basic')" />
 			<xsl:if test="@level">
@@ -328,6 +331,53 @@
 
 <xsl:template match="node()" mode="rule">
 	<xsl:message terminate="yes">Unexpected condition for rule: <xsl:sequence select="." /></xsl:message>
+</xsl:template>
+
+<!-- HTML -->
+	
+<xsl:template match="help" mode="html">
+	<xsl:apply-templates mode="html" />
+</xsl:template>
+
+<xsl:template match="label | requirement" mode="html">
+	<xsl:apply-templates mode="html" />
+</xsl:template>
+
+<xsl:template match="em" mode="html">
+	<xsl:text>&lt;em&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/em&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="strong" mode="html">
+	<xsl:text>&lt;strong&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/strong&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="a" mode="html">
+	<xsl:text>&lt;a href="</xsl:text>
+	<xsl:value-of select="@href" />
+	<xsl:text>"&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/a&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="code" mode="html">
+	<xsl:text>&lt;code&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/code&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="var" mode="html">
+	<xsl:text>&lt;var&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/var&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="*" mode="html">
+	<xsl:message>No template for html version of element <xsl:value-of select="name()" /></xsl:message>
+	<xsl:apply-templates mode="html" />
 </xsl:template>
 
 <!-- MARKDOWN -->
@@ -488,7 +538,7 @@
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
 	<xsl:text>    title: "</xsl:text>
-	<xsl:apply-templates select="label" mode="markdown" />
+	<xsl:apply-templates select="label" mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
 	<xsl:apply-templates select="help" mode="translation" />
 </xsl:template>
@@ -498,7 +548,7 @@
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
 	<xsl:text>    text: "</xsl:text>
-	<xsl:apply-templates select="label" mode="markdown" />
+	<xsl:apply-templates select="label" mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
 	<xsl:if test="@display">
 		<xsl:text>    text_as_statement: "</xsl:text>
@@ -538,7 +588,7 @@
 				<xsl:text>        text: "</xsl:text>
 				<xsl:choose>
 					<xsl:when test="label">
-						<xsl:apply-templates select="label" mode="markdown" />
+						<xsl:apply-templates select="label" mode="html" />
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="." />
@@ -555,7 +605,7 @@
 							<xsl:value-of select="@display" />
 						</xsl:when>
 						<xsl:when test="label">
-							<xsl:apply-templates select="label" mode="markdown" />
+							<xsl:apply-templates select="label" mode="html" />
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="." />
@@ -573,7 +623,7 @@
 	<xsl:value-of select="local:requirementId(.)" />
 	<xsl:text>:&#xA;</xsl:text>
 	<xsl:text>    text: "</xsl:text>
-	<xsl:apply-templates select="." mode="markdown" />
+	<xsl:apply-templates select="." mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
 </xsl:template>
 
@@ -581,7 +631,7 @@
 	<xsl:param name="indent" as="xs:string" select="'    '" />
 	<xsl:value-of select="$indent" />
 	<xsl:text>help_text: "</xsl:text>
-	<xsl:apply-templates select="." mode="markdown" />
+	<xsl:apply-templates select="." mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
 </xsl:template>
 
