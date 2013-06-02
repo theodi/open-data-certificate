@@ -167,4 +167,18 @@ $(function(){
     $(this).removeClass('hover');
   });
 
+  // scroll to question / repeated section
+  var $question = $(document.location.hash);
+  if ($question.length !== 0) {
+    // open up survey section
+    $question
+      .parents('.survey-section')
+      .find('ul')
+      .on('shown', function () {
+        // scroll to the question (taking into account header)
+        $('html').scrollTop($question.offset().top - 130);
+      })
+      .collapse('show');
+  }
+
 });
