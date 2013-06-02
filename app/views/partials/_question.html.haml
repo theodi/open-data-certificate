@@ -21,7 +21,7 @@
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
       - if q.pick == 'one' or q.pick == 'any'
-        %label.span12!= question_text
+        %label.span8.question_label!= question_text
 
       .span8
         - case renderer

@@ -25,4 +25,7 @@ en:
     you_need_to_register_or_sign_in_to_save: "To generate a certificate and retain your answers for future reference, you need to login or register."
 
   requirement_label:
-    requirement: This is required for all levels
+    requirement: This is required for <strong>all levels</strong>
+    requirement_pilot: This is required for <strong>pilot level</strong> and above
+    requirement_standard: This is required for <strong>standard level</strong> and above
+    requirement_exemplar: This is required for <strong>expert level</strong>
