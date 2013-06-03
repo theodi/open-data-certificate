@@ -168,6 +168,15 @@ $(function(){
     $(this).removeClass('hover');
   });
 
+
+  // when surveyor has displayed/hidden elements
+  $(document).on('surveyor-update', function(){
+    $('#status_panel').trigger('update');
+  });
+
+  // also on load
+  $('#status_panel').trigger('update');
+
   // scroll to question / repeated section
   var $question = $(document.location.hash);
   if ($question.length !== 0) {
