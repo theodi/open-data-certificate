@@ -1742,7 +1742,7 @@ survey 'Open Data Certificate Questionnaire',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_statistical
-    a_statistical 'expose the structure of statistical hypercube data like SDMX or Data Cube',
+    a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
       :requirement => 'exemplar_12'
@@ -1788,7 +1788,7 @@ survey 'Open Data Certificate Questionnaire',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_geographic
-    a_specific 'are designed for geographic data like KML or GeoJSON',
+    a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
       :requirement => 'exemplar_13'
