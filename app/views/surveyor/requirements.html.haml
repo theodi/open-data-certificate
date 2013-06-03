@@ -14,6 +14,12 @@
       %p= t("improvements.levels.#{level}.instruction")
 
       %ul
-        -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
-          %li
-            = requirement.text.html_safe
+        -if level == 'basic'
+          -# the requirements for basic are actually mandatory fields
+          -@mandatory_fields.each do |field|
+            %li= field.text
+
+        - else
+          -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
+            %li
+              = requirement.text.html_safe
