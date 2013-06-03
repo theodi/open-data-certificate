@@ -1247,6 +1247,20 @@ td.action {
 
   #panel_handle{
     background-image:url(/assets/panel-handle.png);
+
+    &.attained-basic{
+      background-image:url(/assets/panel-handle-basic.png);
+    }
+    &.attained-pilot{
+      background-image:url(/assets/panel-handle-pilot.png);
+    }
+    &.attained-standard{
+      background-image:url(/assets/panel-handle-standard.png);
+    }
+    &.attained-exemplar{
+      background-image:url(/assets/panel-handle-exemplar.png);
+    }
+
     width:78px;
     height:72px;
     position: absolute;
@@ -1267,6 +1281,15 @@ td.action {
   .progress {
     margin-bottom: 10px;
     clear: both;
+  }
+
+  .status_texts {
+    dd,dt{
+      display:none;
+      &.active{
+        display:block;
+      }
+    }
   }
 }
 

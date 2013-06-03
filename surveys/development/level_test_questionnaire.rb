@@ -5,7 +5,8 @@ survey 'Level Test Questionnaire',
   section_general 'General Information' do
 
     q_dataTitle 'What\'s a good title for this data?',
-      :help_text => 'This is the title that we will give to the open data within the Open Data Certificate. It will probably be the same as what you call the data elsewhere, but you should aim to be unambiguous, and consider the fact that there might be certificates for lots of similar open data.'
+      :help_text => 'This is a mandatory question,  it will be included in the basic count',
+      :required => :required
     a_1 'Data Title',
         :string,
         :placeholder => 'Data Title',
@@ -121,20 +122,20 @@ survey 'Level Test Questionnaire',
                               :custom_renderer => '/partials/requirement_basic',
                               :requirement => 'basic_3'
     dependency :rule => 'A'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
 
     label_pilot_requirement_3 'You should complete the pilot3 question',
                               :custom_renderer => '/partials/requirement_pilot',
                               :requirement => 'pilot_3'
     dependency :rule => 'A or B'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
 
     label_standard_requirement_3 'You should complete the standard3 question',
                                  :custom_renderer => '/partials/requirement_standard',
                                  :requirement => 'standard_3'
     dependency :rule => 'A or B or C'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
     condition_C :q_radio_requirement, '==', :a_pilot3
 
@@ -142,7 +143,7 @@ survey 'Level Test Questionnaire',
                                  :custom_renderer => '/partials/requirement_exemplar',
                                  :requirement => 'exemplar_3'
     dependency :rule => 'A or B or C or D'
-    condition_A :q_radio_requirement, 'count=0'
+    condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
     condition_C :q_radio_requirement, '==', :a_pilot3
     condition_D :q_radio_requirement, '==', :a_standard3
