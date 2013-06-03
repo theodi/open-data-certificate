@@ -200,6 +200,12 @@ $(function(){
 
   // Questionnaire status panel
 
+  // test if a fieldset has been filled out of not
+  $.fn.is_completed = function(){
+    var $inputs = $('li:not(.quiet)', this).find('input, select');
+    return (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked'));
+  };
+
   $('#status_panel').on('update', function(){
     var levels = ['basic', 'pilot', 'standard', 'exemplar'];
     var requirements = {};
@@ -211,21 +217,19 @@ $(function(){
 
     // mandatory fields count as a basic requirement
     var $mandatory = $questions.filter('.mandatory'),
-        $mandatoryComplete = $mandatory.filter(function(){
-          var $inputs = $('li:not(.quiet)', this).find('input, select');
-          return (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked'))
-        });
+        $mandatoryComplete = $mandatory.filter($.fn.is_completed);
 
     requirements.basic.required += $mandatory.size();
     requirements.basic.complete += $mandatoryComplete.size();
 
     $questions.each(function(){
-      var $requirement = $(this).closest('li.container').find('fieldset.q_label');
+      var $this = $(this);
+      var $requirement = $this.closest('li.container').find('fieldset.q_label');
 
       $.each(levels,function(i, level){
         if($requirement.is('.requirement_' + level)){
           requirements[level].required ++;
-          if($requirement.is('.q_hidden'))
+          if($this.is_completed())
           requirements[level].complete ++;
         }
       });
