@@ -60,6 +60,7 @@
 @odiGreenDark: darken(@odiGreen, 6%);
 
 @odiPomegranate: #dc4810;
+@odiPomegranateDark: darken(@odiPomegranate, 3%);
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
@@ -94,6 +95,20 @@
 //
 */
 .modal {
+
+  &.embed-code {
+
+    .btn-info {
+
+      padding: 10px 20px;
+      font-size: 18px;
+      float: right;
+
+    }
+
+    textarea { margin-bottom: 15px; }
+
+  }
 
   background: @odiBlue;
   width: 788px;
@@ -143,6 +158,9 @@
 
 .modal-body {
 
+  .btn-info { background: @odiBlueDark; }
+  .btn-info:active, .btn-info:hover, .btn-info:focus { background: @odiBlueDarker; }
+
   .log-in {
 
     background: url(/assets/modal-divider.gif) repeat-y top right;
@@ -151,6 +169,7 @@
 
       color: #fff;
       font-size: 20px;
+      height: auto;
 
     }
 
@@ -168,7 +187,7 @@
         height: 60px;
         padding: 0 10px;
         font-size: 20px;
-        color: white;
+        color: #fff;
 
       }
 
@@ -184,7 +203,7 @@
       float: left;
       margin: -4px 0 0 0;
 
-      input[type=checkbox] { margin: -3px 0 0 0; }
+      input[type=checkbox] { margin: -2px 0 0 0; height: auto; }
 
       label { font-size: 14px; color: #2f2f2f; display: inline; }
       label:hover { text-decoration: underline; }
@@ -658,28 +677,53 @@ nav .dropdown-menu-button {
     border-radius: 0;
     border: 1px solid white;
     background: @odiRedLight;
-    height: 45px;
+    height: 60px;
+    padding: 0 10px;
     width: 425px;
     margin-bottom: 20px;
+    color: #fff;
+    font-size: 20px;
   }
+
+  /* Making input text white loses the 'invalid' colour */
+  /* Add it back */
+  input[type=email]:invalid { color: #cc0000; }
+  input[type=email]:valid { color: #fff; }
 
   .form-field-inline {
     float: left;
+    margin: 3px 0 0 0;
 
-    label {
-      font-size: 15px;
-      display: inline;
+    input[type=checkbox] { margin: -2px 0 0 0; }
+
+    label { font-size: 14px; color: #fff; display: inline; }
+    label:hover { text-decoration: underline; }
+
+    .forgot-password {
+
+      display: block;
+      font-size: 14px;
+      color: #fff;
+      margin: 0 0 0 17px;
+      padding: 0;
+
     }
+
   }
 
   .btn-primary {
     float: right;
     background: @odiPomegranate;
-    border: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow:none;
-    box-shadow: none;
-    padding: 4px 15px;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-right: 3px;
+
+  }
+
+  .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+
+    background: @odiPomegranateDark;
+
   }
 
   &.active {
