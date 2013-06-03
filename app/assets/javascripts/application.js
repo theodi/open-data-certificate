@@ -54,6 +54,17 @@ $(function(){
     this.select();
   });
 
+  // display confirmation of clicking certain buttons
+  $(document).on('click', '[data-btn-confirmable]', function(e){
+    var $this = $(this),
+        message = $this.data('btn-confirmable');
+
+    if(message) $this.text(message);
+
+    $this.addClass('btn-confirmed disabled');
+
+  });
+
 
 
   //////
