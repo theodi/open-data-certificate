@@ -832,7 +832,7 @@ questions:
     text_as_statement: "Statistical data is published"
     answers:
       statistical:
-        text: "expose the structure of statistical hypercube data like SDMX or Data Cube"
+        text: "expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>"
         help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure."
         text_as_statement: "in a statistical data format"
       tabular:
@@ -852,7 +852,7 @@ questions:
     text_as_statement: "Geographic data is published"
     answers:
       specific:
-        text: "are designed for geographic data like KML or GeoJSON"
+        text: "are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>"
         help_text: "These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically."
         text_as_statement: "in a geographic data format"
       generic:

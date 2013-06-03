@@ -888,7 +888,7 @@
 					<label>Does your statistical data include formats that</label>
 					<radioset>
 						<option value="statistical" display="in a statistical data format">
-							<label>expose the structure of statistical hypercube data like SDMX or Data Cube</label>
+							<label>expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a></label>
 							<help>Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.</help>
 							<requirement level="exemplar">You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse.</requirement>
 						</option>
@@ -914,7 +914,7 @@
 					<label>Does your geographic data include formats that</label>
 					<radioset>
 						<option value="specific" display="in a geographic data format">
-							<label>are designed for geographic data like KML or GeoJSON</label>
+							<label>are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a></label>
 							<help>These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.</help>
 							<requirement level="exemplar">You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.</requirement>
 						</option>
