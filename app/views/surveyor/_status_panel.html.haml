@@ -2,15 +2,15 @@
   #panel_handle
   %dl.status_texts
     %dt none
-    %dd.active You are working towards <strong>Raw</strong> level of open data.
+    %dd.active= t('level_status.none').html_safe
     %dt basic
-    %dd You've achieved a <strong>Raw</strong> level of open data, and are now working towards <strong>Pilot</strong> level.
+    %dd= t('level_status.basic').html_safe
     %dt pilot
-    %dd You've achieved a <strong>Pilot</strong> level of open data, and are now working towards <strong>Standard</strong> level.
+    %dd= t('level_status.pilot').html_safe
     %dt standard
-    %dd You've achieved a <strong>Standard</strong> level of open data, and are now working towards <strong>Expert</strong> level.
+    %dd= t('level_status.standard').html_safe
     %dt exemplar
-    %dd You've achieved a <strong>Expert</strong> level of open data.
+    %dd= t('level_status.exemplar').html_safe
 
   %hr
   %h3 Raw 
@@ -36,4 +36,4 @@
     .bar#bar-exemplar
   %hr
   %p 
-  =link_to 'How can I improve my open data?', surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
+  =link_to t('level_status.improve'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
