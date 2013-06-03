@@ -28,7 +28,7 @@
 		dataset_title="dataTitle"
 		description="These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data in the UK. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements within the UK. You should always check the legislation and other policies that may apply in your sector.">
 		<translations en="default" />
-		<section_general label="General Information">
+		<section_general label="General Information" display_header="false">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
 		</section_general>
 		<xsl:apply-templates select="group" mode="structure" />
@@ -38,6 +38,7 @@
 <xsl:template match="questionnaire/group" mode="structure">
 	<xsl:element name="section_{@id}">
 		<xsl:attribute name="label" select="label" />
+		<xsl:attribute name="description" select="help" />
 		<xsl:apply-templates select="* except label" mode="structure" />
 	</xsl:element>
 </xsl:template>
@@ -499,6 +500,14 @@
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>
+	<xsl:value-of select="." />	
+</xsl:template>
+
+<!-- properties whose values are boolean values rather than strings -->
+<xsl:template match="@display_header | @display_on_certificate" mode="syntax">
+	<xsl:text>:</xsl:text>
+	<xsl:value-of select="name()" />
+	<xsl:text> => </xsl:text>
 	<xsl:value-of select="." />	
 </xsl:template>
 
