@@ -17,7 +17,7 @@
         -if level == 'basic'
           -# the requirements for basic are actually mandatory fields
           -@mandatory_fields.each do |field|
-            %li= field.text
+            %li= field.text.html_safe
 
         - else
           -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
