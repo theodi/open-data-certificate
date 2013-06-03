@@ -168,6 +168,10 @@ $(function(){
     $(this).removeClass('hover');
   });
 
+  $('#status_panel').click(function(){
+    $(this).toggleClass('stick');
+  });
+
 
   // when surveyor has displayed/hidden elements
   $(document).on('surveyor-update', function(){
