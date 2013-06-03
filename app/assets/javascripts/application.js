@@ -246,8 +246,22 @@ $(function(){
 
     // update the bars
     $.each(requirements, function(level, totals) {
-      if(window.console) console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
-      $('#bar-' + level).width((totals.required === 0 ? '0' : 100*(totals.complete/totals.required)) + '%');
+      var required = totals.required,
+          complete = totals.complete;
+      if (level !== 'basic') {
+        required += requirements.basic.required;
+        complete += requirements.basic.complete;
+      }
+      if (level === 'standard' || level === 'exemplar') {
+        required += requirements.pilot.required;
+        complete += requirements.pilot.complete;
+      }
+      if (level === 'exemplar') {
+        required += requirements.standard.required;
+        complete += requirements.standard.complete;
+      }
+      if(window.console) console.log('setting ' + level + ': ' + complete + ' / ' + required);
+      $('#bar-' + level).width((required === 0 ? '0' : 100*(complete/required)) + '%');
     });
 
     // first incomplete is our target
