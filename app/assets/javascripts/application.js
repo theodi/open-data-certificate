@@ -207,8 +207,10 @@ $(function(){
       requirements[level] = { required: 0, complete: 0 };
     });
 
+    var $questions = $('fieldset.question-row:not(.q_hidden)');
+
     // mandatory fields count as a basic requirement
-    var $mandatory = $('fieldset.question-row.mandatory:not(.q_hidden)'),
+    var $mandatory = $questions.filter('.mandatory'),
         $mandatoryComplete = $mandatory.filter(function(){
           var $inputs = $('li:not(.quiet)', this).find('input, select');
           return (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked'))
@@ -217,16 +219,30 @@ $(function(){
     requirements.basic.required += $mandatory.size();
     requirements.basic.complete += $mandatoryComplete.size();
 
-    $.each(levels,function(i, level){
-      $('.requirement_' + level).each(function(){
-        requirements[level].required += $(this).size();
-        requirements[level].complete += $(this).filter('.q_hidden').size();
+    $questions.each(function(){
+      var $requirement = $(this).closest('li.container').find('fieldset.q_label');
+
+      $.each(levels,function(i, level){
+        if($requirement.is('.requirement_' + level)){
+          requirements[level].required ++;
+          if($requirement.is('.q_hidden'))
+          requirements[level].complete ++;
+        }
       });
     });
 
+    // previously based on requirements (keeping this because it
+    // might be useful for collecting items for the ui)
+    // $.each(levels,function(i, level){
+    //   $('.requirement_' + level).each(function(){
+    //     requirements[level].required += $(this).size();
+    //     requirements[level].complete += $(this).filter('.q_hidden').size();
+    //   });
+    // });
+
     // update the bars
     $.each(requirements, function(level, totals) {
-      window.console && console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
+      if(window.console) console.log('setting ' + level + ': ' + totals.complete + ' / ' + totals.required);
       $('#bar-' + level).width((totals.required === 0 ? '0' : 100*(totals.complete/totals.required)) + '%');
     });
 
@@ -239,9 +255,9 @@ $(function(){
       } else {
         break;
       }
-    };
+    }
 
-    $('.status_texts dt').filter(function(){return $(this).text() == completed})
+    $('.status_texts dt').filter(function(){return $(this).text() == completed;})
       // display the dd
       .next().addClass('active')
 
@@ -254,7 +270,7 @@ $(function(){
       $handle.toggleClass('attained-' + l, l == completed);
     });
 
-  })
+  });
 
 
 });
