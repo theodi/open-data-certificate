@@ -1566,3 +1566,98 @@ strong.certificate-level {
   }
 
 }
+
+/*
+//
+// ***** Improvements page *****
+//
+*/
+.non-container.improvements {
+
+  header {
+
+    &.basic {
+
+      background: #333;
+      h2, h3 { padding-left: 0; }
+
+    }
+
+    .container {
+
+        &.pilot {
+
+          background: url(/assets/badges/pilot_level_badge.png) no-repeat 20px 5px;
+          background-size: 71px 63px;
+
+        }
+
+        &.standard {
+
+          background: url(/assets/badges/standard_level_badge.png) no-repeat 20px 5px;
+          background-size: 71px 63px;
+
+        }
+
+        &.exemplar {
+
+          background: url(/assets/badges/exemplar_level_badge.png) no-repeat 20px 5px;
+          background-size: 71px 63px;
+
+        }
+
+    }
+
+  }
+
+  h2 {
+
+    font-size: 27px;
+    margin: 0;
+    padding-left: 90px;
+
+  }
+
+  h3 {
+
+    line-height: 20px;
+    margin: 0 0 15px 0;
+    padding-left: 90px;
+    max-width: 90%;
+
+  }
+
+  .non-container {
+
+      .container { padding: 25px 0 35px 0; }
+
+      li { margin-bottom: 20px; }
+
+      p { margin-bottom: 20px; }
+
+      &.basic {
+
+        background: #474747;
+
+        li, p { color: #fff; -webkit-font-smoothing: antialiased; }
+
+      }
+
+      &.pilot, &.standard, &.exemplar {
+
+          li {
+
+            font-size: 16px;
+            color: #4d4d4d;
+            margin-right: 10%;
+            width: 66%;
+
+            strong { color: #000; }
+
+          }
+
+        }
+
+    }
+
+}
