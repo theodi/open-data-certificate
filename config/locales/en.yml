@@ -158,7 +158,7 @@ en:
       basic:
         title: The basics
         subtitle: The bare minimum required to publish a certificate
-        instruction: "You will need to answer these questions:"
+        instruction: "To get a certificate:"
       pilot:
         title: Pilot requirements
         subtitle: You put extra effort in to supporting and encouraging feedback from people who use this open data.
