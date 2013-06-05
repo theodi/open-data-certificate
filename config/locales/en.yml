@@ -158,16 +158,16 @@ en:
       basic:
         title: The basics
         subtitle: The bare minimum required to publish a certificate
-        instruction: "To get a certificate:"
+        instruction: "To get a certificate you must:"
       pilot:
         title: Pilot requirements
         subtitle: You put extra effort in to supporting and encouraging feedback from people who use this open data.
-        instruction: "To reach Pilot level:"
+        instruction: "To reach Pilot level you should:"
       standard:
         title: Standard requirements
         subtitle: You regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.
-        instruction: "To reach Standard level:"
+        instruction: "To reach Standard level you should:"
       exemplar:
         title: Expert requirements
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
-        instruction: "To reach Expert level:"
+        instruction: "To reach Expert level you should:"
