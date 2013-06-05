@@ -9,15 +9,14 @@
 
   - unless (requirements + fields).empty?
 
+    %section{:class => "improvement improvement-#{level}"}
 
+      %header
+        .container
+          %h2= t("improvements.levels.#{level}.title")
+          %h3= t("improvements.levels.#{level}.subtitle")
 
-    %header{:class => level}
-      %div.container{:class => level}
-        %h2= t("improvements.levels.#{level}.title")
-        %h3= t("improvements.levels.#{level}.subtitle")
-
-    %div.non-container{:class => level}
-      %div.container{:class => level}
+      .requirements.container
         %p= t("improvements.levels.#{level}.instruction")
 
         %ul
