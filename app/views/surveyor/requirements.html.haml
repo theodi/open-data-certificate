@@ -4,25 +4,27 @@
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
-  %header{:class => level}
-    %div.container{:class => level}
-      %h2= t("improvements.levels.#{level}.title")
-      %h3= t("improvements.levels.#{level}.subtitle")
+  - requirements = @requirements.select {|r| r.requirement_level == level}
+  - fields = level == 'basic' ? @mandatory_fields : []
 
-  %div.non-container{:class => level}
-    %div.container{:class => level}
-      %p= t("improvements.levels.#{level}.instruction")
+  - unless (requirements + fields).empty?
 
-      %ul
-        -if level == 'basic'
-          -# the requirements for basic are actually mandatory fields
-          -@mandatory_fields.each do |field|
-            %li Answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
-          -# also any basic requirements
-          -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
+
+
+    %header{:class => level}
+      %div.container{:class => level}
+        %h2= t("improvements.levels.#{level}.title")
+        %h3= t("improvements.levels.#{level}.subtitle")
+
+    %div.non-container{:class => level}
+      %div.container{:class => level}
+        %p= t("improvements.levels.#{level}.instruction")
+
+        %ul
+          -fields.each do |field|
             %li
-              = without_instruction(requirement.text).html_safe
-        - else
-          -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
+              Answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
+
+          -requirements.each do |requirement|
             %li
               = without_instruction(requirement.text).html_safe
