@@ -4,6 +4,28 @@
 //= require twitter/bootstrap
 
 $(function(){
+
+  //////
+  // Rails support
+  //
+
+  // Display when an remote form failed
+  $(document).on('ajax:error', 'form[data-remote-error-message]', function(){
+    var message = $(this).data('remote-error-message'),
+        $target = $('.form-errors', this);
+
+    if($target.size()){
+      // create a div to show the message in
+      $('<div class="alert alert-box alert-alert"><h3></h3></div>')
+      .find('h3').text(message)
+      .end().appendTo($target);
+    } else {
+      alert(message);
+    }
+
+  });
+
+
 	// Skrollr data settings
 	var bleed = $('body.odi-bleed').attr({
 		'data-0':'background-position:0 -450px',
