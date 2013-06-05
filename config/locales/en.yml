@@ -153,3 +153,4 @@ en:
 
   errors:
     errors_occurred: Errors occurred
+    server_error: A server error occurred
