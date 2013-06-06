@@ -9,6 +9,8 @@ class Survey < ActiveRecord::Base
 
   has_many :response_sets
 
+  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
+
   class << self
     def available_to_complete
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
@@ -24,13 +26,9 @@ class Survey < ActiveRecord::Base
     !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
-  def questions
-    @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)]).includes(:dependency => :dependency_conditions)
-  end
-
   def requirements
     # questions.select(&:is_a_requirement?)
-    @requirements ||= questions.where(["questions.display_type = ? AND questions.requirement > ''",  'label'])
+    questions.where(display_type: 'label').where('requirement > ""')
   end
 
   def only_questions
@@ -38,7 +36,7 @@ class Survey < ActiveRecord::Base
   end
 
   def mandatory_questions
-    @mandatory_questions ||= questions.where(:is_mandatory => true)
+    questions.where(:is_mandatory => true)
   end
 
   def valid?(context = nil)
