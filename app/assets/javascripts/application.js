@@ -6,8 +6,8 @@
 $(function(){
 	// Skrollr data settings
 	var bleed = $('body.odi-bleed').attr({
-		'data-0':'background-position:-300px -550px',
-		'data-2500':'background-position:1000px 1000px'
+		'data-0':'background-position:-221px -556px',
+		'data-2500':'background-position:-221px 1000px'
 	});
 
 	if (bleed.size()) skrollr.init({forceHeight: false});
