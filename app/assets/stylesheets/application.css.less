@@ -394,13 +394,20 @@ header.affix {
 
     h1 {
       font-size: 70px;
-      line-height: 80px
+      line-height: 80px;
+      color: @odiGrey;
     }
 
     h2 {
       font-size: 30px;
       line-height: 40px;
       margin-bottom: 40px;
+      color: @odiGrey;
+      
+      strong {
+         color: @odiGreyDark;
+      }
+
     }
   }
 
@@ -644,6 +651,10 @@ body {
     }
   }
 }
+
+.odi-bleed .navbar .brand {
+      padding-top: 15px;
+    }
 
 .navbar .nav > .active > a {
   &, &:hover, &:focus {

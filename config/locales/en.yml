@@ -84,7 +84,7 @@ en:
     creating_questionnaire: Creating new questionnaire...
     create_an_account: Create an account
     title: Certify your open data
-    tagline: Show that it’s easy to find, use and share
+    tagline: Show that it’s easy to <strong>find, use</strong> and <strong>share</strong>
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
     browse_all_new_certificates: Browse all certificates
