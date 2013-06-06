@@ -4,12 +4,16 @@ survey_sections:
     title: "General Information"
   legal:
     title: "Legal Information"
+    help_text: "Rights, licensing and privacy"
   practical:
     title: "Practical Information"
+    help_text: "Findability, accuracy, quality and guarantees"
   technical:
     title: "Technical Information"
+    help_text: "Locations, formats and trust"
   social:
     title: "Social Information"
+    help_text: "Documentation, support and services"
 questions:
 # General Information
   dataTitle:
@@ -828,7 +832,7 @@ questions:
     text_as_statement: "Statistical data is published"
     answers:
       statistical:
-        text: "expose the structure of statistical hypercube data like SDMX or Data Cube"
+        text: "expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>"
         help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure."
         text_as_statement: "in a statistical data format"
       tabular:
@@ -848,7 +852,7 @@ questions:
     text_as_statement: "Geographic data is published"
     answers:
       specific:
-        text: "are designed for geographic data like KML or GeoJSON"
+        text: "are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>"
         help_text: "These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically."
         text_as_statement: "in a geographic data format"
       generic:
@@ -1307,68 +1311,68 @@ labels:
     text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
   pilot_18:
     text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
-  standard_27:
+  exemplar_13:
     text: "You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it."
   pilot_19:
     text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
   pilot_20:
     text: "You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process."
-  standard_28:
+  standard_27:
     text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
-  standard_29:
+  standard_28:
     text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
-  exemplar_13:
-    text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
-  standard_30:
-    text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
   exemplar_14:
-    text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
+    text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
+  standard_29:
+    text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
   exemplar_15:
-    text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
+    text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
   exemplar_16:
+    text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
+  exemplar_17:
     text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
-  standard_31:
+  standard_30:
     text: "You should <strong>include a data title in your documentation</strong> so that people know how to refer to it."
-  standard_32:
+  standard_31:
     text: "You should <strong>include a data description in your documentation</strong> so that people know what it contains."
-  standard_33:
+  standard_32:
     text: "You should <strong>include a data release date in your documentation</strong> so that people know how timely it is."
-  standard_34:
+  standard_33:
     text: "You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data."
-  standard_35:
+  standard_34:
     text: "You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it."
-  standard_36:
+  standard_35:
     text: "You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently."
-  standard_37:
+  standard_36:
     text: "You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently."
-  standard_38:
+  standard_37:
     text: "You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it."
-  standard_39:
+  standard_38:
     text: "You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data."
-  standard_40:
+  standard_39:
     text: "You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to."
-  standard_41:
+  standard_40:
     text: "You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to."
-  standard_42:
+  standard_41:
     text: "You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about."
-  standard_43:
+  standard_42:
     text: "You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively."
-  standard_44:
+  standard_43:
     text: "You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution."
-  standard_45:
+  standard_44:
     text: "You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains."
-  standard_46:
+  standard_45:
     text: "You should <strong>include release dates within your documentation</strong> so people know how current each distribution is."
-  standard_47:
+  standard_46:
     text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
-  standard_48:
+  standard_47:
     text: "You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution."
   pilot_21:
     text: "You should <strong>document how your API works</strong> so that people understand how to use it."
-  standard_49:
+  standard_48:
     text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
-  standard_50:
+  standard_49:
     text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
   pilot_22:
     text: "You should <strong>provide an email address for people to send questions</strong> about your data to."
@@ -1376,15 +1380,15 @@ labels:
     text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
   pilot_24:
     text: "You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details."
-  standard_51:
+  standard_50:
     text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
-  standard_52:
+  standard_51:
     text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
-  standard_53:
+  standard_52:
     text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
-  standard_54:
+  standard_53:
     text: "You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date."
-  exemplar_17:
-    text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
   exemplar_18:
+    text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
+  exemplar_19:
     text: "You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data."

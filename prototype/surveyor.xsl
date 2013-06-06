@@ -26,9 +26,9 @@
 	<survey label="Open Data Certificate Questionnaire" 
 		default_mandatory="false" 
 		dataset_title="dataTitle"
-		description="These self-assessment questions cover the areas that the Open Data Institute examines when we look at how organisations are publishing open data in the UK. Showing how you have fully and rigorously answered these questions will assist you in demonstrating compliance with relevant legal requirements within the UK. You should always check the legislation and other policies that may apply in your sector.">
+		description="&lt;p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.&lt;/p>&lt;p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).&lt;/p>&lt;p>If you need to save or finish an incomplete questionnaire you should register for a free account.&lt;/p>">
 		<translations en="default" />
-		<section_general label="General Information">
+		<section_general label="General Information" display_header="false">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
 		</section_general>
 		<xsl:apply-templates select="group" mode="structure" />
@@ -38,6 +38,7 @@
 <xsl:template match="questionnaire/group" mode="structure">
 	<xsl:element name="section_{@id}">
 		<xsl:attribute name="label" select="label" />
+		<xsl:attribute name="description" select="help" />
 		<xsl:apply-templates select="* except label" mode="structure" />
 	</xsl:element>
 </xsl:template>
@@ -512,6 +513,14 @@
 		<xsl:if test="position() != last()">, </xsl:if>
 	</xsl:for-each>
 	<xsl:text>]</xsl:text>
+</xsl:template>
+
+<!-- properties whose values are boolean values rather than strings -->
+<xsl:template match="@display_header | @display_on_certificate" mode="syntax">
+	<xsl:text>:</xsl:text>
+	<xsl:value-of select="name()" />
+	<xsl:text> => </xsl:text>
+	<xsl:value-of select="." />	
 </xsl:template>
 
 <xsl:template match="text()" mode="syntax" />

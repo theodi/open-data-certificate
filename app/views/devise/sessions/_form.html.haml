@@ -2,9 +2,9 @@
 - remote ||= false
 - form_id ||= 'sign_in_user_form'
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :format => :json, :html => { :id => form_id, :class => 'sign_in_user '}) do |f|
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :format => :json, :html => { :id => form_id, :class => 'sign_in_user', 'data-remote-error-message' => t('errors.server_error')}) do |f|
   = hidden_field_tag :form_id, form_id
-  .sign_in_user_form_errors
+  .form-errors.sign_in_user_form_errors
     - if errors
       = render 'devise/sessions/form_errors', locals: {errors: errors}
 

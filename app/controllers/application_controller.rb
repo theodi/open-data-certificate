@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include Extracts::Application::ExceptionHandling
 
   protect_from_forgery
   before_filter :set_locale

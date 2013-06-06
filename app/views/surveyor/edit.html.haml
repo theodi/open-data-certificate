@@ -29,7 +29,7 @@
 
     .container
       .row
-        %p.lead.span8= @survey.translation(I18n.locale)[:description]
+        .lead.span8= @survey.translation(I18n.locale)[:description].html_safe
 
     = render 'partials/dependents' unless @dependents.empty?
 
