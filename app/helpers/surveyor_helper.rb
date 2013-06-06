@@ -11,6 +11,6 @@ module SurveyorHelper
   # not locale friendly
   # 
   def without_instruction(text)
-    text.gsub(/^you (should|must)/i, '')
+    text.gsub(/^you (should|must)/i, '').gsub(/.$/, '')
   end
 end
