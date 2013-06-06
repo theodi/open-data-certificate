@@ -1,6 +1,16 @@
-- content_for :header_title, t("improvements.heading")
-
+- content_for(:header) do
+  / header overridden
 - content_for(:main_container_class) {'non-container improvements'}
+
+.affixed
+  %header
+    .container
+      .row
+        .span9
+          %h1= t('improvements.heading')
+          %h3= @response_set.title
+        .span3
+          =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
