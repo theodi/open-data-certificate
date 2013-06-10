@@ -31,19 +31,19 @@ en:
     basic:
       title: Raw
       title_with_level: Raw level
-      description: this data makes a great start at the basics of publishing open data. It takes a lot to even get here.
+      description: this data makes a great start at the basics of publishing open data.
     pilot:
       title: Pilot
       title_with_level: Pilot level
-      description: extra effort went in to support and encourage  feedback from people who use this open data.
+      description: extra effort went in to support and encourage feedback from people who use this open data.
     standard:
       title: Standard
       title_with_level: Standard level
-      description: this is regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.
+      description: this is regularly published open data with robust support that people can rely on.
     exemplar:
       title: Expert
       title_with_level: Expert level
-      description: this open data is above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
+      description: this open data is an exceptional example of information infrastructure.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
 
