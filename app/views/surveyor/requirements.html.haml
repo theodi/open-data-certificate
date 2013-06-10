@@ -1,25 +1,43 @@
-- content_for :header_title, t("improvements.heading")
-
+- content_for(:header) do
+  / header overridden
 - content_for(:main_container_class) {'non-container improvements'}
+
+.affixed
+  %header
+    .container
+      .row
+        .span9
+          %h1= t('improvements.heading')
+          %h3= @response_set.title
+        .span3
+          =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
-  %header{:class => level}
-    %div.container{:class => level}
-      %h2= t("improvements.levels.#{level}.title")
-      %h3= t("improvements.levels.#{level}.subtitle")
+  - requirements = @requirements.select {|r| r.requirement_level == level}
+  - fields = level == 'basic' ? @mandatory_fields : []
 
-  %div.non-container{:class => level}
-    %div.container{:class => level}
-      %p= t("improvements.levels.#{level}.instruction")
+  - requirements.sort_by! {|requirement| requirement[:display_order]}
+  - fields.sort_by!       {|field| field[:display_order]}
 
-      %ul
-        -if level == 'basic'
-          -# the requirements for basic are actually mandatory fields
-          -@mandatory_fields.each do |field|
-            %li= field.text.html_safe
+  - unless (requirements + fields).empty?
 
-        - else
-          -@requirements.select {|r| r.requirement_level == level}.each do |requirement|
+    %section{:class => "improvement improvement-#{level}"}
+
+      %header
+        .container
+          %h2= t("improvements.levels.#{level}.title")
+          %h3= t("improvements.levels.#{level}.subtitle")
+
+      .requirements.container
+        %p= t("improvements.levels.#{level}.instruction")
+
+        %ul
+          -fields.each do |field|
             %li
-              = requirement.text.html_safe
+              =link_to surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code, :anchor => "q_#{field.id}") do
+                answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
+
+          -requirements.each do |requirement|
+            %li
+              = link_to without_instruction(requirement.text).html_safe, surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code, :anchor => "q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.question.id}")

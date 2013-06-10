@@ -10,6 +10,7 @@ class DependencyCondition < ActiveRecord::Base
   # in the original implementation this doesn't work because a
   # blank response is nil, rather than ""
   def to_hash(response_set)
+
     if ['==', '!='].include?(operator) && string_value == ""
       is_blank = true
 

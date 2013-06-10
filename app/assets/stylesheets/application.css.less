@@ -1590,42 +1590,12 @@ strong.certificate-level {
 // ***** Improvements page *****
 //
 */
-.non-container.improvements {
+section.improvement{
 
-  header {
-
-    &.basic {
-
-      background: #333;
-      h2, h3 { padding-left: 0; }
-
-    }
-
-    .container {
-
-        &.pilot {
-
-          background: url(/assets/badges/pilot_level_badge.png) no-repeat 20px 5px;
-          background-size: 71px 63px;
-
-        }
-
-        &.standard {
-
-          background: url(/assets/badges/standard_level_badge.png) no-repeat 20px 5px;
-          background-size: 71px 63px;
-
-        }
-
-        &.exemplar {
-
-          background: url(/assets/badges/exemplar_level_badge.png) no-repeat 20px 5px;
-          background-size: 71px 63px;
-
-        }
-
-    }
-
+  header .container {
+    background-size: 71px 63px;
+    background-repeat: no-repeat;
+    background-position: 20px 5px;
   }
 
   h2 {
@@ -1645,37 +1615,50 @@ strong.certificate-level {
 
   }
 
-  .non-container {
+ 
+  .requirements { 
+    padding: 25px 0 35px 0; 
+  }
 
-      .container { padding: 25px 0 35px 0; }
+  li {
+    margin-bottom: 20px;
 
-      li { margin-bottom: 20px; }
+    font-size: 16px;
+    color: #4d4d4d;
+    width: 66%;
+  }
 
-      p { margin-bottom: 20px; }
+  strong { color: #000; }
+  a { color: #000; }
 
-      &.basic {
+  p { margin-bottom: 20px; }
 
-        background: #474747;
 
-        li, p { color: #fff; -webkit-font-smoothing: antialiased; }
-
-      }
-
-      &.pilot, &.standard, &.exemplar {
-
-          li {
-
-            font-size: 16px;
-            color: #4d4d4d;
-            margin-right: 10%;
-            width: 66%;
-
-            strong { color: #000; }
-
-          }
-
-        }
-
+  // level specific styles
+  &.improvement-pilot header .container{
+    background-image: url(/assets/badges/pilot_level_badge.png);
+  }
+  &.improvement-standard header .container{
+    background-image: url(/assets/badges/standard_level_badge.png);
+  }
+  &.improvement-exemplar header .container{
+    background-image: url(/assets/badges/exemplar_level_badge.png);
+  }
+  
+  &.improvement-basic {
+    header{
+      background: #333;
+      h2, h3 { padding-left: 0; }
     }
+
+    background: #474747;
+
+    li, p { color: #fff; -webkit-font-smoothing: antialiased; }
+
+    strong, a { 
+      color: #fff; 
+    }
+
+  }
 
 }

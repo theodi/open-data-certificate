@@ -23,7 +23,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Documentation URL',
-      :requirement => 'pilot_1'
+      :requirement => ['pilot_1', 'basic_1']
 
     label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -33,7 +33,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_basic_1 'You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_1'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -80,6 +81,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_publisherRights 'Do you have the rights to publish this data as open data?',
       :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
+      :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
     a_yes 'yes, you have the rights to publish this data as open data'
@@ -87,7 +89,8 @@ survey 'Open Data Certificate Questionnaire',
     a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
 
     label_basic_2 'You must have the <strong>right to publish your data</strong>.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_2'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_no
 
@@ -113,10 +116,12 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => ['basic_3']
 
     label_basic_3 'You indicated that this data wasn\'t originally created or gathered by you, and wasn\'t crowdsourced, so it must have been extracted or calculated from other data sources.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_3'
     dependency :rule => 'A and B and C and D'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
@@ -136,10 +141,12 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'open data sources'
+      :text_as_statement => 'open data sources',
+      :requirement => ['basic_4']
 
     label_basic_4 'You should get <strong>legal advice to make sure you have the right to publish this data</strong>.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_4'
     dependency :rule => 'A and B and C and D and E'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
@@ -159,10 +166,12 @@ survey 'Open Data Certificate Questionnaire',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'crowdsourced'
+      :text_as_statement => 'crowdsourced',
+      :requirement => ['basic_5']
 
     label_basic_5 'You indicated that the data wasn\'t originally created or gathered by you, and wasn\'t extracted or calculated from other data, so it must have been crowdsourced.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_5'
     dependency :rule => 'A and B and C and D'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
@@ -207,10 +216,12 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => ['basic_6']
 
     label_basic_6 'You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_6'
     dependency :rule => 'A and B and C and D and E'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
@@ -228,7 +239,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Data Sources Documentation URL',
-      :requirement => 'pilot_2'
+      :requirement => ['pilot_2']
 
     label_pilot_2 'You should document <strong>where your data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -249,7 +260,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable data about the sources of this data',
-      :requirement => 'standard_1'
+      :requirement => ['standard_1']
 
     label_standard_1 'You should <strong>include machine-readable data about the sources of your data</strong>.',
       :custom_renderer => '/partials/requirement_standard',
@@ -271,7 +282,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Rights statement URL',
-      :requirement => 'pilot_3'
+      :requirement => ['pilot_3']
 
     label_pilot_3 'You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -289,13 +300,13 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     a_license 'licences',
       :text_as_statement => 'the data licence',
-      :requirement => 'standard_2'
+      :requirement => ['standard_2']
     a_attribution 'attribution',
       :text_as_statement => 'what attribution to use',
-      :requirement => 'exemplar_1'
+      :requirement => ['exemplar_1']
     a_attributionURL 'attribution URL',
       :text_as_statement => 'what attribution link to give',
-      :requirement => 'exemplar_2'
+      :requirement => ['exemplar_2']
     a_morePermissions 'other permissions or alternative licences',
       :text_as_statement => 'other permissions for use'
     a_useGuidelines 'non-binding use guidelines',
@@ -426,10 +437,12 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => ['basic_7']
 
     label_basic_7 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_7'
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_other
     condition_B :q_otherDataLicenceOpen, '==', :a_false
@@ -534,10 +547,12 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_contentLicence, '==', :a_other
     a_false 'no'
-    a_true 'yes'
+    a_true 'yes',
+      :requirement => ['basic_8']
 
     label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_8'
     dependency :rule => 'A and B'
     condition_A :q_contentLicence, '==', :a_other
     condition_B :q_otherContentLicenceOpen, '==', :a_false
@@ -571,7 +586,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => 'standard_3'
+      :requirement => ['standard_3']
 
     label_standard_3 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
       :custom_renderer => '/partials/requirement_standard',
@@ -605,7 +620,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'must be published',
-      :requirement => 'pilot_4'
+      :requirement => ['pilot_4']
 
     label_pilot_4 'You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -626,7 +641,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Disclosure Rationale URL',
-      :requirement => 'standard_4'
+      :requirement => ['standard_4']
 
     label_standard_4 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
       :custom_renderer => '/partials/requirement_standard',
@@ -651,7 +666,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'not carried out a Privacy Impact Assessment'
     a_true 'yes',
       :text_as_statement => 'carried out a Privacy Impact Assessment',
-      :requirement => 'pilot_5'
+      :requirement => ['pilot_5']
 
     label_pilot_5 'You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -676,7 +691,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Privacy Impact Assessment URL',
-      :requirement => 'standard_5'
+      :requirement => ['standard_5']
 
     label_standard_5 'You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -703,7 +718,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => 'standard_6'
+      :requirement => ['standard_6']
 
     label_standard_6 'You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly.',
       :custom_renderer => '/partials/requirement_standard',
@@ -730,7 +745,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Privacy Notice URL',
-      :requirement => 'pilot_6'
+      :requirement => ['pilot_6']
 
     label_pilot_6 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -767,7 +782,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'has been consulted',
-      :requirement => 'pilot_7'
+      :requirement => ['pilot_7']
 
     label_pilot_7 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -794,7 +809,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => 'standard_7'
+      :requirement => ['standard_7']
 
     label_standard_7 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -824,7 +839,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'within three clicks of the home page',
-      :requirement => 'standard_8'
+      :requirement => ['standard_8']
 
     label_standard_8 'You should <strong>ensure that people can easily find your data</strong> from your organisation\'s home page.',
       :custom_renderer => '/partials/requirement_standard',
@@ -837,7 +852,7 @@ survey 'Open Data Certificate Questionnaire',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => 'standard_9'
+      :requirement => ['standard_9']
 
     label_standard_9 'You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -869,7 +884,7 @@ survey 'Open Data Certificate Questionnaire',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => 'standard_10'
+      :requirement => ['standard_10']
 
     label_standard_10 'You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.',
       :custom_renderer => '/partials/requirement_standard',
@@ -929,11 +944,11 @@ survey 'Open Data Certificate Questionnaire',
     a_timestamped 'yes, this data will go out of date over time but it’s time stamped',
       :text_as_statement => 'go out of date but it is timestamped',
       :help_text => 'For example, population statistics usually include a fixed timestamp to indicate when the statistics were relevant.',
-      :requirement => 'pilot_8'
+      :requirement => ['pilot_8']
     a_false 'no, this data does not contain any time-sensitive information',
       :text_as_statement => 'not go out of date',
       :help_text => 'For example, the results of an experiment will not go out of date because the data accurately reports observed outcomes.',
-      :requirement => 'standard_11'
+      :requirement => ['standard_11']
 
     label_pilot_8 'You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -997,7 +1012,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'is available',
-      :requirement => 'exemplar_3'
+      :requirement => ['exemplar_3']
 
     label_exemplar_3 'You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1020,13 +1035,13 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'less than once a month'
     a_monthly 'at least every month',
       :text_as_statement => 'at least every month',
-      :requirement => 'pilot_9'
+      :requirement => ['pilot_9']
     a_weekly 'at least every week',
       :text_as_statement => 'at least every week',
-      :requirement => 'standard_12'
+      :requirement => ['standard_12']
     a_daily 'at least every day',
       :text_as_statement => 'at least every day',
-      :requirement => 'exemplar_4'
+      :requirement => ['exemplar_4']
 
     label_pilot_9 'You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1067,15 +1082,15 @@ survey 'Open Data Certificate Questionnaire',
     a_reasonable 'about the same as the gap between releases',
       :text_as_statement => 'about the same as the gap between releases',
       :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes about a day for it to be published.',
-      :requirement => 'pilot_10'
+      :requirement => ['pilot_10']
     a_good 'less than half the gap between releases',
       :text_as_statement => 'less than half the gap between releases',
       :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes less than twelve hours for it to be published.',
-      :requirement => 'standard_13'
+      :requirement => ['standard_13']
     a_minimal 'there is minimal or no delay',
       :text_as_statement => 'minimal',
       :help_text => 'Choose this if you publish within a few seconds or a few minutes.',
-      :requirement => 'exemplar_5'
+      :requirement => ['exemplar_5']
 
     label_pilot_10 'You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1112,7 +1127,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'dumps of the data',
-      :requirement => 'standard_14'
+      :requirement => ['standard_14']
 
     label_standard_14 'You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1134,13 +1149,13 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'less frequently than once a month'
     a_monthly 'at least every month',
       :text_as_statement => 'at least every month',
-      :requirement => 'pilot_11'
+      :requirement => ['pilot_11']
     a_weekly 'within a week of any change',
       :text_as_statement => 'within a week of any change',
-      :requirement => 'standard_15'
+      :requirement => ['standard_15']
     a_daily 'within a day of any change',
       :text_as_statement => 'within a day of any change',
-      :requirement => 'exemplar_6'
+      :requirement => ['exemplar_6']
 
     label_pilot_11 'You should <strong>create a new database dump every month</strong> so that people have the latest data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1184,7 +1199,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'corrected',
-      :requirement => 'standard_16'
+      :requirement => ['standard_16']
 
     label_standard_16 'You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1206,7 +1221,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Quality Issues URL',
-      :requirement => 'standard_17'
+      :requirement => ['standard_17']
 
     label_standard_17 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1222,7 +1237,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Quality Control Process Description URL',
-      :requirement => 'exemplar_7'
+      :requirement => ['exemplar_7']
 
     label_exemplar_7 'You should <strong>document your quality control process</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1245,13 +1260,13 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_atleast99 'there has been less than 4 days downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99% of the time',
-      :requirement => 'pilot_12'
+      :requirement => ['pilot_12']
     a_atleast99_5 'there has been less than 2 days downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99.5% of the time',
-      :requirement => 'standard_18'
+      :requirement => ['standard_18']
     a_atleast99_9 'there has been less than 9 hours downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99.9% of the time',
-      :requirement => 'exemplar_8'
+      :requirement => ['exemplar_8']
 
     label_pilot_12 'You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1285,13 +1300,13 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'experimentally and might disappear at any time'
     a_short 'it\'s available experimentally but should be around for another year or so',
       :text_as_statement => 'experimentally for another year or so',
-      :requirement => 'pilot_13'
+      :requirement => ['pilot_13']
     a_medium 'it\'s in your medium-term plans so should be around for a couple of years',
       :text_as_statement => 'for at least a couple of years',
-      :requirement => 'standard_19'
+      :requirement => ['standard_19']
     a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
       :text_as_statement => 'for a long time',
-      :requirement => 'exemplar_9'
+      :requirement => ['exemplar_9']
 
     label_pilot_13 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1342,10 +1357,11 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Dataset URL',
-      :requirement => 'pilot_14'
+      :requirement => ['basic_9', 'pilot_14']
 
     label_basic_9 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_9'
     dependency :rule => '(A or B or C or D) and E and F and G'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_series
@@ -1368,6 +1384,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_G :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_versionManagement 'How do you publish a series of the same dataset?',
+      :requirement => ['basic_10'],
       :pick => :any
     dependency :rule => '(A or B or C or D) and E'
     condition_A :q_releaseType, '==', :a_oneoff
@@ -1377,13 +1394,13 @@ survey 'Open Data Certificate Questionnaire',
     condition_E :q_releaseType, '==', :a_series
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current dataset.',
-      :requirement => 'standard_20'
+      :requirement => ['standard_20']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your dataset URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => 'pilot_15'
+      :requirement => ['pilot_15']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of datasets on a web page or a feed (like Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => 'standard_21'
+      :requirement => ['standard_21']
 
     label_standard_20 'You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1419,7 +1436,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_versionManagement, '!=', :a_list
 
     label_basic_10 'You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_10'
     dependency :rule => '(A or B or C or D) and E and (F and G and H and I)'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_series
@@ -1499,10 +1517,11 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Endpoint URL',
-      :requirement => 'standard_22'
+      :requirement => ['basic_11', 'standard_22']
 
     label_basic_11 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
-      :custom_renderer => '/partials/requirement_basic'
+      :custom_renderer => '/partials/requirement_basic',
+      :requirement => 'basic_11'
     dependency :rule => '(A or B or C or D) and E and F and G'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_series
@@ -1535,13 +1554,13 @@ survey 'Open Data Certificate Questionnaire',
     condition_F :q_provideDumps, '==', :a_true
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current database dump.',
-      :requirement => 'standard_23'
+      :requirement => ['standard_23']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => 'exemplar_10'
+      :requirement => ['exemplar_10']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => 'exemplar_11'
+      :requirement => ['exemplar_11']
 
     label_standard_23 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1666,7 +1685,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => 'pilot_16'
+      :requirement => ['pilot_16']
 
     label_pilot_16 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1684,7 +1703,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'a standard open format',
-      :requirement => 'standard_24'
+      :requirement => ['standard_24']
 
     label_standard_24 'You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1712,11 +1731,11 @@ survey 'Open Data Certificate Questionnaire',
     a_semantic 'describe semantic structure like HTML, Docbook or Markdown',
       :text_as_statement => 'in a semantic format',
       :help_text => 'These formats label structures like chapters, headings and tables that make it easy to automatically create summaries like tables of contents and glossaries. They also make it easy to apply different styles to the document so its appearance changes.',
-      :requirement => 'standard_25'
+      :requirement => ['standard_25']
     a_format 'describe information on formatting like OOXML or PDF',
       :text_as_statement => 'in a display format',
       :help_text => 'These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren\'t as easy for people to process automatically and change style.',
-      :requirement => 'pilot_17'
+      :requirement => ['pilot_17']
     a_unsuitable 'aren\'t meant for documents like Excel, JSON or CSV',
       :text_as_statement => 'in a format unsuitable for documents',
       :help_text => 'These formats better suit tabular or structured data.'
@@ -1745,15 +1764,15 @@ survey 'Open Data Certificate Questionnaire',
     a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
-      :requirement => 'exemplar_12'
+      :requirement => ['exemplar_12']
     a_tabular 'treat statistical data as a table like CSV',
       :text_as_statement => 'in a tabular data format',
       :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
-      :requirement => 'standard_26'
+      :requirement => ['standard_26']
     a_format 'focus on the format of tabular data like Excel',
       :text_as_statement => 'in a presentation format',
       :help_text => 'Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.',
-      :requirement => 'pilot_18'
+      :requirement => ['pilot_18']
     a_unsuitable 'aren\'t meant for statistical or tabular data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
@@ -1791,11 +1810,11 @@ survey 'Open Data Certificate Questionnaire',
     a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
-      :requirement => 'exemplar_13'
+      :requirement => ['exemplar_13']
     a_generic 'keeps data structured like JSON, XML or CSV',
       :text_as_statement => 'in a generic data format',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
-      :requirement => 'pilot_19'
+      :requirement => ['pilot_19']
     a_unsuitable 'aren\'t designed for geographic data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
@@ -1824,7 +1843,7 @@ survey 'Open Data Certificate Questionnaire',
     a_suitable 'are designed for structured data like JSON, XML, Turtle or CSV',
       :text_as_statement => 'in a structured data format',
       :help_text => 'These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.',
-      :requirement => 'pilot_20'
+      :requirement => ['pilot_20']
     a_unsuitable 'aren\'t designed for structured data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for structured data',
       :help_text => 'These formats don\'t suit this kind of data because they obscure its underlying structure.'
@@ -1845,7 +1864,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'persistent identifiers',
-      :requirement => 'standard_27'
+      :requirement => ['standard_27']
 
     label_standard_27 'You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1864,11 +1883,11 @@ survey 'Open Data Certificate Questionnaire',
     a_service 'yes, there is a service that people can use to resolve the identifiers',
       :text_as_statement => 'resolve using a service',
       :help_text => 'Online services can be used to give people information about identifiers such as GUIDs or DOIs which can\'t be directly accessed in the way that URLs are.',
-      :requirement => 'standard_28'
+      :requirement => ['standard_28']
     a_resolvable 'yes, the identifiers are URLs that resolve to give information',
       :text_as_statement => 'resolve because they are URLs',
       :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.',
-      :requirement => 'exemplar_14'
+      :requirement => ['exemplar_14']
 
     label_standard_28 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1896,7 +1915,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Identifier Resolution Service URL',
-      :requirement => 'standard_29'
+      :requirement => ['standard_29']
 
     label_standard_29 'You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1938,7 +1957,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'referenced in this data',
-      :requirement => 'exemplar_15'
+      :requirement => ['exemplar_15']
 
     label_exemplar_15 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1963,7 +1982,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => 'exemplar_16'
+      :requirement => ['exemplar_16']
 
     label_exemplar_16 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -1979,7 +1998,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
-      :requirement => 'exemplar_17'
+      :requirement => ['exemplar_17']
 
     label_exemplar_17 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -2004,43 +2023,43 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_title 'title',
       :text_as_statement => 'title',
-      :requirement => 'standard_30'
+      :requirement => ['standard_30']
     a_description 'description',
       :text_as_statement => 'description',
-      :requirement => 'standard_31'
+      :requirement => ['standard_31']
     a_issued 'release date',
       :text_as_statement => 'release date',
-      :requirement => 'standard_32'
+      :requirement => ['standard_32']
     a_modified 'modification date',
       :text_as_statement => 'modification date',
-      :requirement => 'standard_33'
+      :requirement => ['standard_33']
     a_accrualPeriodicity 'frequency of releases',
       :text_as_statement => 'release frequency',
-      :requirement => 'standard_34'
+      :requirement => ['standard_34']
     a_identifier 'identifier',
       :text_as_statement => 'identifier',
-      :requirement => 'standard_35'
+      :requirement => ['standard_35']
     a_landingPage 'landing page',
       :text_as_statement => 'landing page',
-      :requirement => 'standard_36'
+      :requirement => ['standard_36']
     a_language 'language',
       :text_as_statement => 'language',
-      :requirement => 'standard_37'
+      :requirement => ['standard_37']
     a_publisher 'publisher',
       :text_as_statement => 'publisher',
-      :requirement => 'standard_38'
+      :requirement => ['standard_38']
     a_spatial 'spatial/geographical coverage',
       :text_as_statement => 'spatial/geographical coverage',
-      :requirement => 'standard_39'
+      :requirement => ['standard_39']
     a_temporal 'temporal coverage',
       :text_as_statement => 'temporal coverage',
-      :requirement => 'standard_40'
+      :requirement => ['standard_40']
     a_theme 'theme(s)',
       :text_as_statement => 'theme(s)',
-      :requirement => 'standard_41'
+      :requirement => ['standard_41']
     a_keyword 'keyword(s) or tag(s)',
       :text_as_statement => 'keyword(s) or tag(s)',
-      :requirement => 'standard_42'
+      :requirement => ['standard_42']
     a_distribution 'distribution(s)',
       :text_as_statement => 'distribution(s)'
 
@@ -2144,19 +2163,19 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_documentationMetadata, '==', :a_distribution
     a_title 'title',
       :text_as_statement => 'title',
-      :requirement => 'standard_43'
+      :requirement => ['standard_43']
     a_description 'description',
       :text_as_statement => 'description',
-      :requirement => 'standard_44'
+      :requirement => ['standard_44']
     a_issued 'release date',
       :text_as_statement => 'release date',
-      :requirement => 'standard_45'
+      :requirement => ['standard_45']
     a_modified 'modification date',
       :text_as_statement => 'modification date',
-      :requirement => 'standard_46'
+      :requirement => ['standard_46']
     a_license 'licence',
       :text_as_statement => 'licence',
-      :requirement => 'standard_47'
+      :requirement => ['standard_47']
     a_accessURL 'URL to access the data',
       :text_as_statement => 'a URL to access the data',
       :help_text => 'This metadata should be used when your data isn\'t available as a download, like an API for example.'
@@ -2216,7 +2235,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Service Documentation URL',
-      :requirement => 'pilot_21'
+      :requirement => ['pilot_21']
 
     label_pilot_21 'You should <strong>document how your API works</strong> so that people understand how to use it.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -2241,7 +2260,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Schema Documentation URL',
-      :requirement => 'standard_48'
+      :requirement => ['standard_48']
 
     label_standard_48 'You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2266,7 +2285,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Codelist Documentation URL',
-      :requirement => 'standard_49'
+      :requirement => ['standard_49']
 
     label_standard_49 'You should <strong>document the codes used within your data</strong> so that people know how to interpret them.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2287,7 +2306,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :email,
       :placeholder => 'Contact Email Address',
-      :requirement => 'pilot_22'
+      :requirement => ['pilot_22']
 
     label_pilot_22 'You should <strong>provide an email address for people to send questions</strong> about your data to.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -2302,7 +2321,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Improvement Suggestions URL',
-      :requirement => 'pilot_23'
+      :requirement => ['pilot_23']
 
     label_pilot_23 'You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -2317,7 +2336,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :email,
       :placeholder => 'Confidentiality Contact Email Address',
-      :requirement => 'pilot_24'
+      :requirement => ['pilot_24']
 
     label_pilot_24 'You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -2329,7 +2348,7 @@ survey 'Open Data Certificate Questionnaire',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => 'standard_50'
+      :requirement => ['standard_50']
 
     label_standard_50 'You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used',
       :custom_renderer => '/partials/requirement_standard',
@@ -2364,7 +2383,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Forum or Mailing List URL',
-      :requirement => 'standard_51'
+      :requirement => ['standard_51']
 
     label_standard_51 'You should <strong>tell people where they can discuss your data</strong> and support one another.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2382,7 +2401,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Correction Instructions URL',
-      :requirement => 'standard_52'
+      :requirement => ['standard_52']
 
     label_standard_52 'You should <strong>provide instructions about how people can report errors</strong> in your data.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2401,7 +2420,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Correction Notification URL',
-      :requirement => 'standard_53'
+      :requirement => ['standard_53']
 
     label_standard_53 'You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2417,7 +2436,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Community Engagement Team Home Page URL',
-      :requirement => 'exemplar_18'
+      :requirement => ['exemplar_18']
 
     label_exemplar_18 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
       :custom_renderer => '/partials/requirement_exemplar',
@@ -2437,7 +2456,7 @@ survey 'Open Data Certificate Questionnaire',
       :string,
       :input_type => :url,
       :placeholder => 'Tool URL',
-      :requirement => 'exemplar_19'
+      :requirement => ['exemplar_19']
 
     label_exemplar_19 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
       :custom_renderer => '/partials/requirement_exemplar',
