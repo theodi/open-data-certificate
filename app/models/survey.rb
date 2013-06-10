@@ -10,6 +10,7 @@ class Survey < ActiveRecord::Base
   has_many :response_sets
 
   has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
+  has_many :dependencies, :through => :questions
 
   class << self
     def available_to_complete
