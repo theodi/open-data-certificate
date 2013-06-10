@@ -1435,40 +1435,26 @@ strong.certificate-level {
   font-weight: normal;
 }
 
+.level-styles(@color){
+  .certificate-badge {
+    background: @color;
+  }
+  .certificate-level {
+    color: @color;
+  }
+}
+
 .basic-level {
-  .certificate-badge {
-    background: @basic;
-  }
-  .certificate-level {
-    color: @basic;
-  }
+  .level-styles(@basic);
 }
-
 .pilot-level {
-  .certificate-badge {
-    background: @pilot;
-  }
-  .certificate-level {
-    color: @pilot;
-  }
+  .level-styles(@pilot);
 }
-
 .standard-level {
-  .certificate-badge {
-    background: @standard;
-  }
-  .certificate-level {
-    color: @standard;
-  }
+  .level-styles(@standard);
 }
-
 .exemplar-level {
-  .certificate-badge {
-    background: @exemplar;
-  }
-  .certificate-level {
-    color: @exemplar;
-  }
+  .level-styles(@exemplar);
 }
 
 .footer {
