@@ -74,3 +74,5 @@ gem 'thin'
 gem 'surveyor'
 
 gem "devise", ">= 2.2.3"
+
+gem 'dotenv-rails'

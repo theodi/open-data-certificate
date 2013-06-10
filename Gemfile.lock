@@ -52,6 +52,8 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     dotenv (0.7.0)
+    dotenv-rails (0.7.0)
+      dotenv (= 0.7.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -213,6 +215,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise (>= 2.2.3)
+  dotenv-rails
   factory_girl_rails (~> 4.0)
   foreman
   guard
