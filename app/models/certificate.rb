@@ -20,7 +20,9 @@ class Certificate < ActiveRecord::Base
 
     def badge_file_for_level(level)
       filename = case level
-                   when 'basic', 'pilot', 'standard', 'exemplar'
+                   when 'basic'
+                     'raw_level_badge.png'
+                   when 'raw', 'pilot', 'standard', 'exemplar'
                      "#{level}_level_badge.png"
                    else
                      'no_level_badge.png'
