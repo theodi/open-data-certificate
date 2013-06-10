@@ -1413,8 +1413,10 @@ td.action {
 .certificate-badge {
   width: 160px;
   height: 140px;
-  background: #bbb;
+  // background: #bbb;
   margin-bottom: 10px;
+  background: transparent center center no-repeat;
+  background-size:contain;
 }
 
 .certificate-level {
@@ -1435,9 +1437,9 @@ strong.certificate-level {
   font-weight: normal;
 }
 
-.level-styles(@color){
+.level-styles(@color, @url){
   .certificate-badge {
-    background: @color;
+    background-image:@url;
   }
   .certificate-level {
     color: @color;
@@ -1445,16 +1447,16 @@ strong.certificate-level {
 }
 
 .basic-level {
-  .level-styles(@basic);
+  .level-styles(@basic, url(/assets/badges/standard_level_badge.png));
 }
 .pilot-level {
-  .level-styles(@pilot);
+  .level-styles(@pilot, url(/assets/badges/standard_level_badge.png));
 }
 .standard-level {
-  .level-styles(@standard);
+  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
 }
 .exemplar-level {
-  .level-styles(@exemplar);
+  .level-styles(@exemplar, url(/assets/badges/standard_level_badge.png));
 }
 
 .footer {
