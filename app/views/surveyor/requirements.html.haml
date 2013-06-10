@@ -37,4 +37,4 @@
 
           -requirements.each do |requirement|
             %li
-              = link_to without_instruction(requirement.text).html_safe, surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code, :anchor => "q_#{requirement.question_corresponding_to_requirement ? requirement.question_corresponding_to_requirement.id : requirement.answer_corresponding_to_requirement.question.id}")
+              = link_to without_instruction(requirement.text).html_safe, surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code, :anchor => "q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.question.id}")
