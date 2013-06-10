@@ -61,7 +61,7 @@ OpenDataCertificate::Application.configure do
   if ENV["MANDRILL_USERNAME"]
 
     # **IMPORTANT** Define the default url (for devise)
-    config.action_mailer.default_url_options = { :host => 'odc-stage.herokuapp.com' }
+    config.action_mailer.default_url_options = { :host => 'certificate.theodi.org' }
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
