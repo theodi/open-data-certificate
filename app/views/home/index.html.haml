@@ -1,5 +1,7 @@
 - content_for(:body_class) {'odi-bleed'}
 - content_for(:main_container_class) {'container'}
+- content_for(:nav_brand) do
+  = image_tag "logo-home.png"
 
 - content_for(:super_head) do
   #padd{style: 'height:500px;'}
@@ -7,7 +9,7 @@
       .row
         .span4.offset8
           %h1= t('homepage.title')
-          %h2= t('homepage.tagline')
+          %h2= t('homepage.tagline').html_safe
           = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
           -#= link_to t('homepage.browse_all_new_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-info'] #TODO: Commented browse certificate functionality
 

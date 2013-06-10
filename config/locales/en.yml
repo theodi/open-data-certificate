@@ -4,7 +4,7 @@
 en:
   choose_legislation: choose legislation
 
-  alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
+  alpha_note: This is the alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:
     browse_all_certificates: Browse all certificates
@@ -31,7 +31,7 @@ en:
     basic:
       title: Raw
       title_with_level: Raw level
-      description: this data makes a fantastic start at the basics of publishing open data. It takes a lot to even get here.
+      description: this data makes a great start at the basics of publishing open data. It takes a lot to even get here.
     pilot:
       title: Pilot
       title_with_level: Pilot level
@@ -84,7 +84,7 @@ en:
     creating_questionnaire: Creating new questionnaire...
     create_an_account: Create an account
     title: Certify your open data
-    tagline: Show that it’s easy to find, use and share
+    tagline: Show that it’s easy to <strong>find,</strong> <strong>use</strong> and <strong>share</strong>
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
     browse_all_new_certificates: Browse all certificates
@@ -97,14 +97,14 @@ en:
       description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
     share_open_data:
       title: Share it with a certificate
-      description: Your answers determine which of our four prestigious certificates you generate. Each one means success in a unique way and proves you're a leader in open data.
+      description: Your answers determine which of our four certificates you generate. Each one means success in a unique way and demonstrates you are a leader in open data.
     about_certificate:
       title: What does a certificate look like?
-      description: It's an impressive badge that links to a description of your open data. There it explores things like how often it's updated, what format it's in and who answers your questions.
+      description: It's a badge that links to a description of your open data. The description explores things like how often it's updated, what format it's in, who and where it came from.
       link: Find out more
     about_odi:
       title: Who are the ODI?
-      description: We're the %{odi_name_link}. We unlock supply and demand for open data and share its value with people who can change the world. This is one of the ways we do that.
+      description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
       odi_name: Open Data Institute
       link: Get in touch
 
@@ -143,6 +143,7 @@ en:
     update_profile: Update my profile
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
+    already_have_account: Already have an account?
 
   about:
     heading_about: About
@@ -152,6 +153,7 @@ en:
 
   errors:
     errors_occurred: Errors occurred
+    server_error: A server error occurred
 
   improvements:
     heading: How can I improve my open data?

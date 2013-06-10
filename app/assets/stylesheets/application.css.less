@@ -300,6 +300,7 @@ p {
   line-height: 24px;
 }
 
+.lead p,
 p.lead {
   font-size: 17px;
   color: @odiGrey;
@@ -393,13 +394,24 @@ header.affix {
 
     h1 {
       font-size: 70px;
-      line-height: 80px
+      line-height: 76px;
+      color: @odiGrey;
+      margin-bottom: 22px;
+      margin-top: 35px;
+
     }
 
     h2 {
       font-size: 30px;
       line-height: 40px;
       margin-bottom: 40px;
+      color: @odiGrey;
+      padding-left: 3px;
+      
+      strong {
+         color: @odiGreyDark;
+      }
+
     }
   }
 
@@ -643,6 +655,10 @@ body {
     }
   }
 }
+
+.odi-bleed .navbar .brand {
+      padding-top: 15px;
+    }
 
 .navbar .nav > .active > a {
   &, &:hover, &:focus {
@@ -1298,7 +1314,7 @@ td.action {
   right:-320px;
 
   // also .hover for oldie fallback
-  &:hover, &.hover{
+  &:hover, &.hover, &.stick{
     right:0px;
   };
 
@@ -1338,6 +1354,7 @@ td.action {
   img {
     display: inline;
     float: right;
+    margin-top: 10px;
   }
 
   .progress {
