@@ -85,6 +85,9 @@
 						<xsl:attribute name="help_text_more_url" select="help/@more" />
 					</xsl:if>
 				</xsl:if>
+				<xsl:if test="(radioset or select or checkboxset) and .//requirement[not(ancestor::option)]">
+					<xsl:attribute name="requirement" select=".//requirement[not(ancestor::option)]/local:requirementId(.)" separator=", " />
+				</xsl:if>
 				<xsl:choose>
 					<xsl:when test="radioset | yesno | select">
 						<xsl:attribute name="pick">one</xsl:attribute>
@@ -115,8 +118,8 @@
 		<xsl:attribute name="label" select="@placeholder" />
 		<xsl:attribute name="type" select="'string'" />
 		<xsl:apply-templates select="@*" mode="structure" />
-		<xsl:if test="..//requirement[@level]">
-			<xsl:attribute name="requirement" select="..//requirement[@level]/local:requirementId(.)" separator=", " />
+		<xsl:if test="..//requirement">
+			<xsl:attribute name="requirement" select="..//requirement/local:requirementId(.)" separator=", " />
 		</xsl:if>
 	</xsl:element>
 </xsl:template>
@@ -146,7 +149,7 @@
 				<xsl:attribute name="help_text_more_url" select="help/@more" />
 			</xsl:if>
 		</xsl:if>
-		<xsl:if test="requirement[@level]">
+		<xsl:if test="requirement">
 			<xsl:attribute name="requirement" select="local:requirementId(requirement)" />
 		</xsl:if>
 	</xsl:element>
@@ -182,8 +185,8 @@
 		<xsl:if test="@yes or @no">
 			<xsl:attribute name="text_as_statement" select="@yes" />
 		</xsl:if>
-		<xsl:if test="..//requirement[@level]">
-			<xsl:attribute name="requirement" select="..//requirement[@level]/local:requirementId(.)" separator=", " />
+		<xsl:if test="..//requirement">
+			<xsl:attribute name="requirement" select="..//requirement/local:requirementId(.)" separator=", " />
 		</xsl:if>
 	</a_true>
 </xsl:template>
@@ -207,9 +210,7 @@
 				<xsl:apply-templates select="." mode="html" />
 			</xsl:attribute>
 			<xsl:attribute name="custom_renderer" select="concat('/partials/requirement_', if (@level) then @level else 'basic')" />
-			<xsl:if test="@level">
-				<xsl:attribute name="requirement" select="local:requirementId(.)" />
-			</xsl:if>
+			<xsl:attribute name="requirement" select="local:requirementId(.)" />
 		</xsl:element>
 		<xsl:variable name="conditions" as="element()">
 			<xsl:apply-templates select="." mode="conditions" />
@@ -501,6 +502,17 @@
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>
 	<xsl:value-of select="." />	
+</xsl:template>
+
+<xsl:template match="*[not(@custom_renderer)]/@requirement" mode="syntax">
+	<xsl:text>:requirement => [</xsl:text>
+	<xsl:for-each select="tokenize(., ', ')">
+		<xsl:text>'</xsl:text>
+		<xsl:value-of select="." />
+		<xsl:text>'</xsl:text>
+		<xsl:if test="position() != last()">, </xsl:if>
+	</xsl:for-each>
+	<xsl:text>]</xsl:text>
 </xsl:template>
 
 <!-- properties whose values are boolean values rather than strings -->
