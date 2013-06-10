@@ -32,11 +32,11 @@ class Question < ActiveRecord::Base
   end
 
   def question_corresponding_to_requirement
-    @question_corresponding_to_requirement ||= survey_section.survey.only_questions.detect{|q|q.requirement == requirement}
+    @question_corresponding_to_requirement ||= survey_section.survey.only_questions.detect{|q|q.requirement && q.requirement.include?(requirement)}
   end
 
   def answer_corresponding_to_requirement
-    @answer_corresponding_to_requirement ||= survey_section.survey.only_questions.map(&:answers).flatten.detect{|a|a.requirement == requirement}
+    @answer_corresponding_to_requirement ||= survey_section.survey.only_questions.map(&:answers).flatten.detect{|a|a.requirement && a.requirement.include?(requirement)}
   end
 
   def requirement_met_by_responses?(responses)

@@ -9,6 +9,9 @@ class Survey < ActiveRecord::Base
 
   has_many :response_sets
 
+  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
+  has_many :dependencies, :through => :questions
+
   class << self
     def available_to_complete
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
@@ -24,13 +27,9 @@ class Survey < ActiveRecord::Base
     !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
-  def questions
-    @questions ||= Question.where(['questions.survey_section_id in (?)', (sections.map(&:id)<<0)]).includes(:dependency => :dependency_conditions)
-  end
-
   def requirements
     # questions.select(&:is_a_requirement?)
-    @requirements ||= questions.where(["questions.display_type = ? AND questions.requirement > ''",  'label'])
+    questions.where(display_type: 'label').where('requirement > ""')
   end
 
   def only_questions
@@ -38,7 +37,7 @@ class Survey < ActiveRecord::Base
   end
 
   def mandatory_questions
-    @mandatory_questions ||= questions.where(:is_mandatory => true)
+    questions.where(:is_mandatory => true)
   end
 
   def valid?(context = nil)
@@ -77,7 +76,7 @@ class Survey < ActiveRecord::Base
     answers = only_questions.map(&:answers).flatten.compact
 
     requirements.each do |requirement|
-      amount = only_questions.select { |q| q != requirement && q.requirement == requirement.requirement }.count + answers.select { |a| a.requirement == requirement.requirement}.count
+      amount = only_questions.select { |q| q != requirement && q.requirement && q.requirement.include?(requirement.requirement) }.count + answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
       if amount == 0
         errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
       elsif amount > 1

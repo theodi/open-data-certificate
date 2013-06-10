@@ -31,6 +31,11 @@ class ResponseSet < ActiveRecord::Base
     !complete?
   end
 
+  def incomplete_triggered_mandatory_questions
+    responded_to_question_ids = responses.map(&:question_id)
+    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }    
+  end
+
   def triggered_mandatory_questions
     @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
