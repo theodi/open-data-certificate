@@ -43,6 +43,13 @@ class ResponseSet < ActiveRecord::Base
   def triggered_requirements
     @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
+  
+  def all_urls_resolve?
+    responses.select{ |r|  r.is_url?  }.each do |response|
+      response_code = HTTParty.get(response.string_value).code rescue nil
+      return false if response_code != 200
+    end
+  end
 
   def all_mandatory_questions_complete?
     mandatory_question_ids = triggered_mandatory_questions.map(&:id)
