@@ -194,9 +194,6 @@ $(function(){
   // Old ie only supports :hover on anchors
   $('#status_panel').hover(function(){
     $(this).addClass('hover');
-
-    // also make the bars update
-    $(this).trigger('update');
   }, function(){
     $(this).removeClass('hover');
   });
@@ -205,14 +202,6 @@ $(function(){
     $(this).toggleClass('stick');
   });
 
-
-  // when surveyor has displayed/hidden elements
-  $(document).on('surveyor-update', function(){
-    $('#status_panel').trigger('update');
-  });
-
-  // also on load
-  $('#status_panel').trigger('update');
 
   // scroll to question / repeated section
   var $question = $(document.location.hash);
@@ -325,6 +314,19 @@ $(function(){
     });
 
   });
+
+
+
+
+
+  // when surveyor has displayed/hidden elements
+  $(document).on('surveyor-update', function(){
+    $('#status_panel').trigger('update');
+  });
+
+  // also on load
+  $('#status_panel').trigger('update');
+
 
 
 });
