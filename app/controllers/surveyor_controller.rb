@@ -7,6 +7,12 @@ class SurveyorController < ApplicationController
 
   layout 'application'
 
+  # this is now in the application_controller
+  def create
+    params[:survey_access_code] = params[:survey_code]
+    start_questionnaire
+  end
+
   def continue
     set_response_set_and_render_context
     if @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
