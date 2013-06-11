@@ -21,8 +21,8 @@ Vagrant.configure("2") do |config|
       rs.flavor          = /1GB/
       rs.image           = /Precise/
       rs.public_key_path = "./.chef/id_rsa.pub"
-      rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
-      rs.auth_url        = "lon.identity.api.rackspacecloud.com"
+#      rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
+      rs.auth_url        = "https://lon.identity.api.rackspacecloud.com/v2.0"
     end
 
     mysql_certificate_config.vm.provision :shell, :inline => "curl -L https://www.opscode.com/chef/install.sh | bash"
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  2.times do |num|
+  6.times do |num|
 
     index = "%02d" % [ num + 1 ]
 
@@ -57,8 +57,8 @@ Vagrant.configure("2") do |config|
         rs.flavor          = /512MB/
         rs.image           = /Precise/
         rs.public_key_path = "./.chef/id_rsa.pub"
-        rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
-        rs.auth_url        = "lon.identity.api.rackspacecloud.com"
+#        rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
+        rs.auth_url        = "https://lon.identity.api.rackspacecloud.com/v2.0"
       end
 
       config.vm.provision :shell, :inline => "curl -L https://www.opscode.com/chef/install.sh | bash"
