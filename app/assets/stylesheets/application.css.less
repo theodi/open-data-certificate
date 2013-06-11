@@ -727,6 +727,10 @@ nav .dropdown-menu-button {
 
   }
 
+  h2 {
+    line-height: 30px;
+  }
+
   .btn-primary {
     float: right;
     background: @odiPomegranate;
@@ -868,6 +872,7 @@ section {
 
   p {
     font-size: 23px;
+    line-height: 32px;
   }
 }
 
@@ -1184,6 +1189,7 @@ td.action {
   // brought in from main styles
   label {
     font-size: 22px;
+    line-height: 30px;
   }
 
   .choice input{
@@ -1193,6 +1199,7 @@ td.action {
     font-size:16px;
     color:@gray;
     -webkit-font-smoothing: antialiased;
+    line-height: 20px;
   }
 
 
@@ -1389,9 +1396,18 @@ td.action {
     p {
       font-size: 19px;
       margin-right: 20px;
+      max-height: 24px;
 
       a {
         color: inherit;
+      }
+    
+      .cropped {
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -1523,7 +1539,7 @@ strong.certificate-level {
       color: #8e8c8c;
       font-size: 22px;
       font-weight: normal;
-      line-height: 26px;
+      line-height: 30px;
       margin: 15px 0 20px 0;
 
     }

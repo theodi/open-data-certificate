@@ -12,5 +12,9 @@
           - if (response_text != '')
             %li
               %h4= response.question.statement_text
-              %p= response.answer.input_type == 'url' ? link_to(response.statement_text, response.statement_text) : response.statement_text
+              %p
+                - if (response.answer.input_type == 'url')
+                  = link_to(response_text, response_text, :title => response_text, :class => 'cropped')
+                - else
+                  = response_text
   %hr.heavy
