@@ -228,7 +228,10 @@ $(function(){
       .collapse('show');
   }
 
-
+  // Open sections that contain incomplete mandatory questions
+  $('.survey-section:has(.mandatory:not(.has-response):not(.q_hidden))')
+    .find('ul')
+    .collapse('show');
 
 
   // Questionnaire status panel
