@@ -31,3 +31,27 @@ prototype/translations/odc.UK.en.xml
 prototype/merged.xml
 
 prototype/open-data-certificate.xpr
+
+prototype/badge/dgu.html
+
+prototype/badge/dgu_files/bin_closed.png
+
+prototype/badge/dgu_files/buttons.20a85a6a67053717023e8d12a9dba430.css
+
+prototype/badge/dgu_files/buttons.js
+
+prototype/badge/dgu_files/chartbeat.js
+
+prototype/badge/dgu_files/check-big.png
+
+prototype/badge/dgu_files/checkOAuth.esi
+
+prototype/badge/dgu_files/ckan-logo.png
+
+prototype/badge/dgu_files/crown-and-text.png
+
+prototype/badge/dgu_files/conversion.js
+
+prototype/badge/dgu_files/vendor.compiled.js
+
+/prototype/badge/
