@@ -56,7 +56,7 @@ class SurveyorController < ApplicationController
           end
           
           if @response_set.all_urls_resolve? === false
-            messages << "Please check all your URLs exist"
+            messages << t('surveyor.please_check_all_your_urls_exist')
           end
           
           if @response_set.all_mandatory_questions_complete? && @response_set.all_urls_resolve?
@@ -74,7 +74,7 @@ class SurveyorController < ApplicationController
             :section => section_id_from(params),
             :highlight_mandatory => true
           ),
-          :warning, messages.join("<br />")
+          :warning, messages.join("<br />").html_safe
         )
       end
     end

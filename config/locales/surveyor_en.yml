@@ -21,6 +21,7 @@ en:
     language: "Language"
     that_response_set_is_complete: "That response set is complete"
     all_mandatory_questions_need_to_be_completed: "All mandatory questions need to be completed"
+    please_check_all_your_urls_exist: "Please check all your URLs exist"
     must_be_logged_in_to_complete: "Please login or register to complete this questionnaire"
     you_need_to_register_or_sign_in_to_save: "To generate a certificate and retain your answers for future reference, you need to login or register."
 
