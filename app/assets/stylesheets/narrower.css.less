@@ -31,12 +31,7 @@
 @placeholderText: @odiGreyLight;
 @inputBorderRadius: 2px;
 
-// todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
+// default widths
 
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
@@ -384,11 +379,11 @@ header.affix {
 
 #padd {
   .container {
-    margin-top: 50px;
+    margin-top: 86px;
 
     h1 {
-      font-size: 70px;
-      line-height: 76px;
+      font-size: 58px;
+      line-height: 68px;
       color: @odiGrey;
       margin-bottom: 22px;
       margin-top: 35px;
@@ -396,8 +391,8 @@ header.affix {
     }
 
     h2 {
-      font-size: 30px;
-      line-height: 40px;
+      font-size: 28px;
+      line-height: 36px;
       margin-bottom: 40px;
       color: @odiGrey;
       padding-left: 3px;
@@ -440,7 +435,7 @@ header.affix {
   .steps {
 
     /* Background stripes (image has 30px of space on left to align) */
-    background: url(/assets/background-home-header.gif) repeat-y center;
+    background: url(/assets/background-home-header-narrower.gif) repeat-y center;
     margin-bottom: 20px;
 
     .span4 {
@@ -519,16 +514,28 @@ header.affix {
 
 .homepage-about-content {
 
-  h2 {
-    font-weight: normal;
+  &.span6 {
+    width: 330px;
+    margin-left: 120px;
   }
 
-  h2.about-certificate { margin-top: -7px; }
+  h2 {
+    font-weight: normal;
+    font-size: 22px;
+  }
+
+  h2.about-certificate { 
+    margin-top: -7px; 
+  }
 
   h2.about-odi {
     border-top: 1px solid #e1e1e1;
     padding-top: 20px;
     margin-top: 25px;
+  }
+
+  p {
+    font-size: 16px;
   }
 }
 
@@ -797,7 +804,9 @@ header {
     }
 
   }
-  .footer-nav { margin-left: 30px; }
+  .footer-nav { 
+    margin-left: 15px; 
+  }
 
   a {
     color: #adaeaf;
@@ -1274,10 +1283,15 @@ td.action {
       right:0;
       background-color:@odiBlueLighter;
       padding:20px;
-      width:330px;
+      width:250px;
 
       &.answer-meta {
         top: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 20px;
       }
     }
   }
