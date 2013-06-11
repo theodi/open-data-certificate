@@ -7,6 +7,7 @@ OpenDataCertificate::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :memory_store # TODO: Default is memory store, but production will probably need to change to something else... but that decision is not yet made
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -52,22 +53,22 @@ OpenDataCertificate::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # **IMPORTANT** Define the default url (for devise)
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill
   if ENV["MANDRILL_USERNAME"]
 
     # **IMPORTANT** Define the default url (for devise)
-    config.action_mailer.default_url_options = { :host => 'odc-stage.herokuapp.com' }
+    config.action_mailer.default_url_options = { :host => 'certificate.theodi.org' }
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
       :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
       :enable_starttls_auto => true, # detects and uses STARTTLS
       :user_name => ENV["MANDRILL_USERNAME"],
-      :password  => ENV["MANDRILL_APIKEY"], # SMTP password is any valid API key
+      :password  => ENV["MANDRILL_PASSWORD"], # SMTP password is any valid API key
       :authentication => 'login', # Mandrill supports 'plain' or 'login'
       # :domain => 'heroku.com', # your domain to identify your server when connecting
     }

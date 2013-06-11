@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
-  include Extracts::Application::ExceptionHandling
 
   protect_from_forgery
   before_filter :set_locale
+
+  helper_method :after_sign_in_path_for
 
   # pick the locale from ?locale=X in the url,  a prettier
   # solution might be used down the line, maybe depending
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
     # When multiple legislations are available, this value will need to be provided by the form
-    params[:survey_access_code] ||= Survey.available_to_complete.first.try(:access_code)
+    params[:survey_access_code] = Survey.available_to_complete.first.try(:access_code) if params[:survey_access_code].blank?
 
     # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
     @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? Dataset.create(user: current_user) : Dataset.new)
@@ -67,18 +68,28 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     # If the user has a survey stored in their session, assign it to them and redirect to the survey,
     # deleting the session id even if the response set isn't found
-    if session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
+    case
+      when session[:response_set_id] && response_set = ResponseSet.find(session.delete(:response_set_id))
+        # Assign the response set to the user, creating a dataset for it
+        response_set.assign_to_user!(current_user)
 
-      # Assign the response set to the user, creating a dataset for it
-      response_set.assign_to_user!(current_user)
+        if params[:form_id] == 'save_and_finish_modal_form'
+          # if the user has authenticated from the save_and_finish_modal_form then redirect to the force_save_questionnaire path
+          surveyor.force_save_questionnaire_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code)
+        else
+          surveyor.edit_my_survey_path(
+            :survey_code => response_set.survey.access_code,
+            :response_set_code => response_set.access_code
+          )
+        end
 
-      return surveyor.edit_my_survey_path(
-        :survey_code => response_set.survey.access_code,
-        :response_set_code => response_set.access_code
-      )
+      when params[:form_id] == 'start_cert_modal_form'
+        # if the user has authenticated from the start_cert_modal_form then redirect to the start_questionnaire path
+        authenticated_start_questionnaire_path
+
+      else
+        dashboard_path
     end
-
-    dashboard_path
   end
 
 end

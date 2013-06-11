@@ -49,9 +49,9 @@ class QuestionTest < ActiveSupport::TestCase
   test "#question_corresponding_to_requirement should return the right question" do
     requirement = FactoryGirl.create(:requirement, requirement: "the_right_level_#{rand(10)}")
 
-    rand(1..5).times { FactoryGirl.create(:requirement, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
+    (1..5).to_a.sample.times { FactoryGirl.create(:requirement, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
     the_right_question = FactoryGirl.create(:question, requirement: requirement.requirement, survey_section: requirement.survey_section)
-    rand(1..5).times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
+    (1..5).to_a.sample.times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
 
     requirement.survey_section.survey.reload
 
@@ -61,9 +61,9 @@ class QuestionTest < ActiveSupport::TestCase
   test "#answer_corresponding_to_requirement should return the right answer" do
     requirement = FactoryGirl.create(:question, requirement: "the_right_level_#{rand(10)}", display_type: 'label')
 
-    rand(1..5).times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
+    (1..5).to_a.sample.times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
     the_right_answer = FactoryGirl.create(:answer, requirement: requirement.requirement, question: FactoryGirl.create(:question, survey_section: requirement.survey_section))
-    rand(1..5).times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
+    (1..5).to_a.sample.times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
 
     requirement.survey_section.survey.reload
 

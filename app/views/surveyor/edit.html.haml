@@ -1,27 +1,72 @@
-#surveyor
-  = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form", :class => @survey.custom_class}) do |f|
+-# we need to break from the .container and
+-# also surround everything in a form
 
+- content_for(:header) do
+  / header overridden
+- content_for(:main_container_class) {'non-container'}
+
+= semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
+
+  .affixed
+    %header
+      .container
+        .row
+          .span9
+            %h1 New Certificate
+            %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
+          .span3
+            - if user_signed_in?
+              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
+            - else
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
+
+
+  = render :partial => 'status_panel'
+  = render :partial => 'shared/flashes'
+
+  #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
-    %h2= @survey.translation(I18n.locale)[:title]
-    %p.lead= @survey.translation(I18n.locale)[:description]
+    .container
+      .row
+        .lead.span8= @survey.translation(I18n.locale)[:description].try(:html_safe)
 
-    .previous_section= previous_section
     = render 'partials/dependents' unless @dependents.empty?
-    - if false #@response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
-      = cache("section_#{@section.id}"){ render "/partials/section", :f => f }
+
+    -# if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
+    -#
+    -# We're going extra careful here because there have been some
+    -# caching based issues that we've not been able to get the 
+    - if @response_set.responses.empty?
+      = cache("section_#{@section.id}") do
+        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
-    .next_section= f.submit t('surveyor.click_here_to_finish'), :name => :finish
-  %br
 
-%temporary_links
-  %p
-    = link_to 'attained level', surveyor.view_my_survey_attained_level_path(response_set_code: @response_set.access_code)
-    |
-    = link_to 'outstanding requirements', surveyor.view_my_survey_requirements_path(response_set_code: @response_set.access_code)
-    %br/
-    (right-click and open in a new tab)
+:javascript
+  $(document).ready(function() {
+    $('fieldset.question-row').each(function(){
+      var $question = $(this),
+          $label = $question.find('label.question_label'),
+          $requirements = $question.closest('li.container').find('fieldset.q_label'),
+          text = '';
+      if ($question.is('.mandatory') || $requirements.is('.requirement_basic')) {
+        text = '#{t('requirement_label.requirement')}';
+      } else if ($requirements.is('.requirement_pilot')) {
+        text = '#{t('requirement_label.requirement_pilot')}';
+      } else if ($requirements.is('.requirement_standard')) {
+        text = '#{t('requirement_label.requirement_standard')}';
+      } else if ($requirements.is('.requirement_exemplar')) {
+        text = '#{t('requirement_label.requirement_exemplar')}';
+      }
+      if (text !== '') {
+        $label.append(' <small>' + text + '</small>');
+      }
+    });
+  });
+
+= render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
+
 
 :javascript
   $(document).ready(function() {

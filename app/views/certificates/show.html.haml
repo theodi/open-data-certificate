@@ -1,11 +1,22 @@
 .certificate.hero-unit{class:@certificate.attained_level+'-level'}
-    .certificate-badge.centered
-    %p.certificate-level
-        #{@certificate.attained_level.titleize} level
-        %small self certified
 
+  = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+
+  .certificate-badge.centered
+
+  .certificate-summary
+    %p.certificate-level
+      = t("levels.#{@certificate.attained_level}.title_with_level")
+      %small= t("certificate.self_certified")
     %h1= @certificate.response_set.title
     %p
-        This data has achieved <strong class='certificate-level'>#{@certificate.attained_level.titleize} level</strong> on #{@certificate.created_at.strftime "%d %B %Y"} which means #{ t("levels.#{@certificate.attained_level}.description") }
+      = t("certificate.this_data_has_achieved")
+      %strong.certificate-level
+        #{t("levels.#{@certificate.attained_level}.title_with_level")}
+      = t("certificate.on_date", date: @certificate.created_at.strftime("%d %B %Y"))
+      = t("certificate.which_means")
+      = t("levels.#{@certificate.attained_level}.description")
 
 =render @certificate.response_set
+
+=render :partial => 'shared/embed_code', :locals => {:certificate => @certificate}

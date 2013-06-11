@@ -1,4 +1,8 @@
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
-= f.inputs "#{q.requirement_level} #{q_text(q, @render_context, I18n.locale)}", :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} requirement_alert" do
-  %span.help= q.help_text_for(@render_context, I18n.locale)
+%li.container
+  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "row q_#{renderer} #{q.css_class(@response_set)} requirement_#{requirement}" do
+    %li.span7
+      %p
+        = image_tag "badges/status-indicators/#{requirement == :exemplar ? 'expert' : requirement}.png" unless requirement == :basic
+        != q_text(q, @render_context, I18n.locale)

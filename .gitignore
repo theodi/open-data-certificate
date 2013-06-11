@@ -30,8 +30,11 @@ prototype/translations/odc.UK.en.xml
 
 prototype/merged.xml
 
+prototype/open-data-certificate.xpr
+
 # RubyMine cruft
 .idea/
 
 # Chef secrets and that
 .chef/
+

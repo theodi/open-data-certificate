@@ -1,0 +1,14 @@
+- if flash.any?
+  .container
+    - flash.each do |type, value|
+      .flash.alert{ :class => "alert-#{type}" }
+        - if type.to_s == 'alert'
+          %i.icon-exclamation-sign.icon-large.icon-white
+        - if type.to_s == 'notice'
+          %i.icon-ok-sign.icon-large.icon-white
+        - if type.to_s == 'warning'
+          %i.icon-info-sign.icon-large.icon-white
+
+        %button.close{:type => "button", 'data-dismiss' => "alert"}
+
+        = value

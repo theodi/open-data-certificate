@@ -4,42 +4,46 @@
 en:
   choose_legislation: choose legislation
 
-  alpha_note: This is an alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
+  alpha_note: This is the alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
   menu:
-    about: About
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
-    get_in_touch: Get in touch
     my_certificates: My certificates
 
   footmenu:
-    cookies:  Cookie policy
-    feedback: Feedback
-    privacy:  Privacy policy
-    terms:    Terms of use
+    cookies:        Cookie policy
+    feedback:       Feedback
+    privacy:        Privacy policy
+    about:          About
+    get_in_touch:   Get in touch
+    terms:          Terms of use
+    odi_name:       Open Data Institute
+    company_title:  Company
+    vat_title:      VAT
+    cc_title:       Creative Commons Licence
 
   levels:
     none:
       title: None
       title_with_level: No level
-      description: This data does not satisfy the fundamental requirements for open data
+      description: this data does not satisfy the fundamental requirements for open data.
     basic:
-      title: Basic
-      title_with_level: Basic level
-      description: this data satisfies the fundamental requirements for open data
+      title: Raw
+      title_with_level: Raw level
+      description: this data makes a great start at the basics of publishing open data.
     pilot:
       title: Pilot
       title_with_level: Pilot level
-      description: this data satisfies the requirements for initial forays into publishing open data. It provides sufficient support to prompt some reuser experimentation with a data.
+      description: extra effort went in to support and encourage feedback from people who use this open data.
     standard:
       title: Standard
       title_with_level: Standard level
-      description: this data satisfies the requirements for routinely published open data that encourages reuse.
+      description: this is regularly published open data with robust support that people can rely on.
     exemplar:
-      title: Exemplar
-      title_with_level: Exemplar level
-      description: this data satisfies the requirements for key information infrastructure.
+      title: Expert
+      title_with_level: Expert level
+      description: this open data is an exceptional example of information infrastructure.
 
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
 
@@ -62,8 +66,7 @@ en:
     archived: Archived
     edit_and_publish: Edit and publish
     embed_code: Embed code
-    heading__intro_text: Some intro text here?
-    heading__my_certificates: My certificates
+    page_title: My certificates
     latest_published_certificate: Latest published certificate
     copy_certificate:
       make_a_copy: Make a copy
@@ -74,26 +77,36 @@ en:
     view_certificate: View certificate
 
   homepage:
-    title: Open data certificate
-    tagline: Specifying what good open data looks like
-    start_new_certificate: Start a new certificate
-    browse_all_new_certificates: Browse all new certificates
-    how_it_works: Here's how it works
+    log_in: Log in
+    dont_have_an_account: Don't have an account?
+    register_later_message: Don't worry, you can register later to save your work.
+    continue_without_registering: Continue without registering
+    creating_questionnaire: Creating new questionnaire...
+    create_an_account: Create an account
+    title: Certify your open data
+    tagline: Show that it’s easy to <strong>find,</strong> <strong>use</strong> and <strong>share</strong>
+    start_new_certificate: Create a certificate
+    browse_certificates: Browse certificates
+    browse_all_new_certificates: Browse all certificates
+    how_it_works: How it works
     fill_out_questionnaire:
-      title: Fill out the questionnaire
-      description: We will ask you a series of questions about your data to find out whether it is open. We will ask you a series of questions about your data to find out whether it is open.
+      title: Publish your data
+      description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
     generate_certificate:
-      title: Generate a certificate
-      description: We will assess your level of open data and generate a certificate which will be added to our archives certificate which will be added to our archives.
+      title: Check it with our questionnaire
+      description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
     share_open_data:
-      title: Share your open data
-      description: You can embed your certificate on your website or link to the archive using one of our custom badges  the archive using one of our custom badges.
+      title: Share it with a certificate
+      description: Your answers determine which of our four certificates you generate. Each one means success in a unique way and demonstrates you are a leader in open data.
     about_certificate:
-      title: About the certificate
-      description: About certificate copy goes here.
+      title: What does a certificate look like?
+      description: It's a badge that links to a description of your open data. The description explores things like how often it's updated, what format it's in, who and where it came from.
+      link: Find out more
     about_odi:
-      title: About the ODI
-      description: About the ODI copy goes here.
+      title: Who are the ODI?
+      description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
+      odi_name: Open Data Institute
+      link: Get in touch
 
   certificates:
     certificates: Certificates
@@ -102,6 +115,7 @@ en:
     latest_certificates: Latest certificates
     no_certificates_found: No certificates found
     view_certificate: View
+    embed_this_on_your_site: Embed this on your site
     search:
       search_label: Search for
       submit_search: Go
@@ -111,6 +125,9 @@ en:
     self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
+    embeddable_certificate: Embeddable certificate
+    embed_instructions: Use the code below to embed this certificate on your site
+    view_embed_page: View embeddable page
 
   authentication:
     sign_in: Sign in
@@ -126,3 +143,35 @@ en:
     update_profile: Update my profile
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
+    already_have_account: Already have an account?
+
+  about:
+    heading_about: About
+
+  contact:
+    heading_contact: Contact the ODI
+
+  errors:
+    errors_occurred: Errors occurred
+    server_error: A server error occurred
+
+  improvements:
+    heading: How can I improve my open data?
+    return_to_questionnaire: Return to questionnaire
+    levels:
+      basic:
+        title: The basics
+        subtitle: The bare minimum required to publish a certificate
+        instruction: "To get a certificate you must:"
+      pilot:
+        title: Pilot requirements
+        subtitle: You put extra effort in to supporting and encouraging feedback from people who use this open data.
+        instruction: "To reach Pilot level you should:"
+      standard:
+        title: Standard requirements
+        subtitle: You regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.
+        instruction: "To reach Standard level you should:"
+      exemplar:
+        title: Expert requirements
+        subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
+        instruction: "To reach Expert level you should:"

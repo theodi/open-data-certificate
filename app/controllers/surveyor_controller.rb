@@ -26,6 +26,12 @@ class SurveyorController < ApplicationController
     redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
   end
 
+  def force_save_questionnaire
+    # This action is used when the user has signed-in after clicking the "save and finish" link. It mocks up the request as if it were an already-logged-in user that clicked "save and finish"
+    params[:finish] = true
+    update
+  end
+
   def update
     set_response_set_and_render_context
 
@@ -41,7 +47,7 @@ class SurveyorController < ApplicationController
       saved = load_and_update_response_set_with_retries
 
       if saved && finish
-        if user_signed_in? && all_mandatory_questions_complete?
+        if user_signed_in? && @response_set.all_mandatory_questions_complete?
           @response_set.complete!
           @response_set.save
           return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
@@ -56,7 +62,8 @@ class SurveyorController < ApplicationController
         return redirect_with_message(
           surveyor.edit_my_survey_path(
             :anchor => anchor_from(params[:section]),
-            :section => section_id_from(params)
+            :section => section_id_from(params),
+            :highlight_mandatory => true
           ),
           :warning, message
         )
@@ -99,6 +106,10 @@ class SurveyorController < ApplicationController
   def requirements
     set_response_set_and_render_context
     if @response_set
+
+      @requirements = @response_set.outstanding_requirements
+      @mandatory_fields = @response_set.incomplete_triggered_mandatory_questions
+
       respond_to do |format|
         format.html
         format.json { @response_set.outstanding_requirements.to_json }
@@ -109,13 +120,6 @@ class SurveyorController < ApplicationController
     end
   end
 
-  private
-  def all_mandatory_questions_complete?
-    #@response_set.reload
-    mandatory_question_ids = @response_set.triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = @response_set.responses.map(&:question_id)
-    (mandatory_question_ids - responded_to_question_ids).blank?
-  end
 
   # where to send the user once the survey has been completed
   # if there was a dataset, go back to it

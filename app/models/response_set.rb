@@ -18,6 +18,7 @@ class ResponseSet < ActiveRecord::Base
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
+
   def title_determined_from_responses
     @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_title}).first.try(:string_value)
   end
@@ -30,6 +31,11 @@ class ResponseSet < ActiveRecord::Base
     !complete?
   end
 
+  def incomplete_triggered_mandatory_questions
+    responded_to_question_ids = responses.map(&:question_id)
+    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }    
+  end
+
   def triggered_mandatory_questions
     @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
@@ -38,11 +44,18 @@ class ResponseSet < ActiveRecord::Base
     @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
 
+  def all_mandatory_questions_complete?
+    mandatory_question_ids = triggered_mandatory_questions.map(&:id)
+    responded_to_question_ids = responses.map(&:question_id)
+    (mandatory_question_ids - responded_to_question_ids).blank?
+  end
+
   def attained_level
     @attained_level ||= Survey::REQUIREMENT_LEVELS[minimum_outstanding_requirement_level-1]
   end
 
   def minimum_outstanding_requirement_level
+    return 1 unless all_mandatory_questions_complete? # if there are any mandatory questions outstanding, they achieve no level
     @minimum_outstanding_requirement_level ||= (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
   end
 

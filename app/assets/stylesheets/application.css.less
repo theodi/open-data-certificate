@@ -26,30 +26,59 @@
 @iconSpritePath:          "glyphicons-halflings.png";
 @iconWhiteSpritePath:     "glyphicons-halflings-white.png";
 
-@odiBlue: #33c5ff;
-@odiBlueLight: lighten(@odiBlue, 36%);
-@odiBlueDark: darken(@odiBlue, 20%);
-@odiBlueDarker: darken(@odiBlue, 30%);
+// use our own grey for the input field
+@gray: @odiGrey;
+@placeholderText: @odiGreyLight;
+@inputBorderRadius: 2px;
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
+@odiBlue: #00b7ff;
+/* odiBlueLight - primarily for background of inputs in modals */
+@odiBlueLight: lighten(@odiBlue, 15%);
+@odiBlueLighter: lighten(@odiBlue, 36%);
+@odiBlueDark: darken(@odiBlue, 5%);
+@odiBlueDarker: darken(@odiBlue, 20%);
 
 @odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 20%);
+@odiRedDark: darken(@odiRed, 3%);
+@odiRedLight: lighten(@odiRed, 15%);
 
 @odiCrimson: #d30102;
+@odiCrimsonDark: darken(@odiCrimson, 6%);
+@odiCrimsonLight: lighten(@odiCrimson, 53%);
+
+@odiOrange: #f99C06;
+@odiOrangeDark: darken(@odiOrange, 6%);
+
+@odiGreen: #0DBC37;
+@odiGreenDark: darken(@odiGreen, 6%);
+
+@odiPomegranate: #dc4810;
+@odiPomegranateDark: darken(@odiPomegranate, 3%);
 
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
+@odiGreyLight: lighten(@odiGrey, 25%);
+@odiGreyLighter: lighten(@odiGrey, 40%);
 
-@btnPrimaryBackground:  @odiRed;
+@btnPrimaryBackground: @odiRed;
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
+@btnInfoBackgroundHighlight: @odiBlue;
 
 @odiGrey: #8e8c8c;
 
-@basic: #0DBD37;
-@pilot: #EF3AAB;
-@standard: #2254F3;
-@exemplar: #F9BC26;
+@basic: #0dbd37;
+@pilot: #ef3aab;
+@standard: #2254f3;
+@exemplar: #f9bc26;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
@@ -59,6 +88,174 @@
 @gridColumnWidth:         70px;
 @gridGutterWidth:         30px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+/*
+//
+// ***** Modal - Create certificate *****
+//
+*/
+.modal {
+
+  &.embed-code {
+
+    .btn-info {
+
+      padding: 10px 20px;
+      font-size: 18px;
+      float: right;
+
+    }
+
+    textarea { margin-bottom: 15px; }
+
+  }
+
+  background: @odiBlue;
+  width: 788px;
+  margin-left: -394px;
+  .border-radius(0);
+
+  h1 {
+
+    margin-top: -7px;
+    margin-bottom: 40px;
+    font-size: 30px;
+    color: #2f2f2f;
+
+  }
+
+  p { color: #fff; font-size: 20px; }
+
+  .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
+
+  form { margin-bottom: 0; }
+
+}
+
+.modal-header {
+
+  border-bottom: 0;
+  margin: 30px;
+  padding: 0;
+
+  h3 {
+
+    color: #fff;
+    font-size: 36px;
+    font-weight: normal;
+
+  }
+
+}
+
+.modal-body {
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 40px;
+
+}
+
+.modal-body {
+
+  .btn-info { background: @odiBlueDark; }
+  .btn-info:active, .btn-info:hover, .btn-info:focus { background: @odiBlueDarker; }
+
+  .log-in {
+
+    background: url(/assets/modal-divider.gif) repeat-y top right;
+
+    label {
+
+      color: #fff;
+      font-size: 20px;
+      height: auto;
+
+    }
+
+    .form-field {
+
+      margin-bottom: 10px;
+
+      input[type=email], input[type=password] {
+
+        margin-top: 5px;
+        background: @odiBlueLight;
+        border: 1px solid #fff;
+        .border-radius(0);
+        width: 93%;
+        height: 60px;
+        padding: 0 10px;
+        font-size: 20px;
+        color: #fff;
+
+      }
+
+      /* Making input text white loses the 'invalid' colour */
+      /* Add it back */
+      input[type=email]:invalid { color: #cc0000; }
+      input[type=email]:valid { color: #fff; }
+
+    }
+
+    .form-field-inline {
+
+      float: left;
+      margin: -4px 0 0 0;
+
+      input[type=checkbox] { margin: -2px 0 0 0; height: auto; }
+
+      label { font-size: 14px; color: #2f2f2f; display: inline; }
+      label:hover { text-decoration: underline; }
+
+      .forgot-password {
+
+        display: block;
+        font-size: 14px;
+        color: #2f2f2f;
+        margin-left: 17px;
+
+      }
+
+    }
+
+    /* Sign in button used on many pages as orange primary button */
+    /* Needs to be overridden to be blue info button in modals */
+    .btn-primary {
+
+      background: @odiBlueDark;
+      height: auto;
+      padding: 10px 20px;
+      float: right;
+      margin: -5px 22px 5px 0;
+      font-size: 18px;
+      font-weight: bold;
+
+    }
+
+    .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+
+      background: @odiBlueDarker;
+
+    }
+
+    .sign_in_user_form_errors {
+      width: 93%;
+    }
+
+  }
+
+}
+
+
+
+
+// a button has been clicked and loading the next
+.btn.btn-confirmed{
+  &,&:hover{
+    #gradient > .striped(@btnPrimaryBackground);
+  }
+}
 
 
 /************************************************
@@ -83,6 +280,7 @@
 // source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
 
 
+
 // Global styles //
 
 body {
@@ -102,6 +300,7 @@ p {
   line-height: 24px;
 }
 
+.lead p,
 p.lead {
   font-size: 17px;
   color: @odiGrey;
@@ -109,7 +308,7 @@ p.lead {
 }
 
 dl {
-  margin: 30px 0;
+  margin: 0 0 45px;
 }
 
 dt, dd {
@@ -120,12 +319,53 @@ dd {
   margin-bottom: 30px;
 }
 
+
+// make grey input text read easier
+input, textarea{
+  -webkit-font-smoothing: antialiased;
+  .box-shadow(none);
+}
+
+.btn-small {
+  &, &:active, &:hover, &:focus {
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
 .btn-info {
+  background: @odiBlue;
+
+  &.btn-unstyled {
+    &, &:active, &:hover, &:focus {
+      font-size: 15px;
+      color: @odiBlue;
+      padding: 0;
+      background: none;
+    }
+  }
+
+  &:active, &:hover, &:focus {
+    background: @odiBlueDark;
+  }
+}
+
+.btn-info-modal {
   background: @odiBlueDark;
 }
 
-.btn-info:active, .btn-info:hover, .btn-info:focus {
+.btn-info-modal:active, .btn-info-modal:hover, .btn-info-modal:focus {
   background: @odiBlueDarker;
+}
+
+.btn-primary {
+  background: @odiRed;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+  background: @odiRedDark;
 }
 
 .btn-large {
@@ -141,19 +381,37 @@ dd {
   text-shadow: none;
 }
 
+// snap the header to the top when it's affixed
+header.affix {
+    top: 0px;
+    width:100%;
+    z-index:10;
+}
+
 #padd {
   .container {
     margin-top: 50px;
 
     h1 {
-      font-size: 75px;
-      line-height: 80px
+      font-size: 70px;
+      line-height: 76px;
+      color: @odiGrey;
+      margin-bottom: 22px;
+      margin-top: 35px;
+
     }
 
     h2 {
       font-size: 30px;
       line-height: 40px;
       margin-bottom: 40px;
+      color: @odiGrey;
+      padding-left: 3px;
+      
+      strong {
+         color: @odiGreyDark;
+      }
+
     }
   }
 
@@ -175,31 +433,53 @@ dd {
 .home {
   text-align: center;
 
+  /* Remove bottom padding so background image can hit bottom */
+  padding-bottom: 0;
+
   h1 {
-    color: @odiBlueDark;
+    color: @odiBlueDarker;
     font-size: 36px;
     margin-bottom: 30px;
     text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
+  .steps {
+
+    /* Background stripes (image has 30px of space on left to align) */
+    background: url(/assets/background-home-header.gif) repeat-y center;
+    margin-bottom: 20px;
+
+    .span4 {
+
+      /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
+      padding-bottom: 20px;
+
+    }
+
+  }
+
   .span4 {
-    width: 339px;
-    border-right: 1px solid #fff;
-    padding-right: 30px;
+
+    // padd in the content
+    h2, p{
+      padding: 0 20px;
+    }
+    p{
+      padding-bottom:20px;
+    }
 
     h2 {
       font-size: 70px;
-      color: @odiBlueDark;
+      color: @odiBlueDarker;
       font-weight: bold;
-       text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
-
+      text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
 
       small {
-      display: block;
-      color: #fff;
-      font-size: 30px;
-      padding: 30px 0 10px;
-      text-shadow: none;
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        padding: 30px 0 10px;
+        text-shadow: none;
       }
     }
 
@@ -212,9 +492,49 @@ dd {
       }
     }
   }
+}
 
-  .last {
-    border-right: none;
+.home-header-buttons {
+
+  .row {
+
+    height: 88px;
+
+  }
+
+  .span4 {
+    text-align: center;
+
+    .logo {
+
+      /* Small ODI logo, hide text */
+      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: -34px auto 0 auto;
+      width: 76px; height: 68px;
+
+    }
+
+    .btn-primary {
+      margin-top: -20px;
+    }
+  }
+}
+
+.homepage-about-content {
+
+  h2 {
+    font-weight: normal;
+  }
+
+  h2.about-certificate { margin-top: -7px; }
+
+  h2.about-odi {
+    border-top: 1px solid #e1e1e1;
+    padding-top: 20px;
+    margin-top: 25px;
   }
 }
 
@@ -241,42 +561,57 @@ hr.heavy {
 
 // Layout //
 
+body {
+  min-width: 1210px;
+}
+
+.container {
+  padding: 0 20px;
+}
+
 .navbar-inner {
+  padding: 0;
   height: 60px;
 }
 
-#topbar ul {
-  li {
-    margin: 0;
-    padding:0;
-    height: 60px;
-    border-left: 1px solid #707070;
+#topbar {
+  background: #1b1b1b;
 
-    a {
-      color: #fff;
-      padding: 20px;
-    }
+  ul {
+    border-right: 1px solid #707070;
 
-    a:hover {
-      background-color: @odiRed;
+    li {
+      margin: 0;
+      padding:0;
+      height: 60px;
+      border-left: 1px solid #707070;
+
+      a {
+        color: #fff;
+        padding: 20px;
+      }
+
+      a:hover, a.active {
+        background-color: @odiRed;
+      }
     }
   }
-  border-right: 1px solid #707070;
-}
 
-#topbar .label {
-  top: -15px;
-  position: relative;
-  padding-top: 10px;
-  background-color: @odiBlue;
+  .label {
+    top: -15px;
+    position: relative;
+    padding-top: 10px;
+    background-color: @odiBlue;
+  }
 }
 
 #mainnav {
   margin-bottom: 0;
   position: relative;
+  background-color: rgba(255,255,255,0.65);
 
   .navbar-inner {
-    background-color:rgba(255,255,255,0.65);
+    background: none;
     border-radius: 0;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -321,21 +656,124 @@ hr.heavy {
   }
 }
 
-.navbar .nav > .active > a,
-.navbar .nav > .active > a:hover,
-.navbar .nav > .active > a:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow:none;
-  box-shadow: none;
+.odi-bleed .navbar .brand {
+      padding-top: 15px;
+    }
+
+.navbar .nav > .active > a {
+  &, &:hover, &:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
+
+nav .dropdown-menu-button {
+  z-index: 10;
+  position: relative;
+}
+
+#login, #register {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 450px;
+  padding: 30px 25px;
+  background: @odiRed;
+  color: white;
+
+  label {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 1px solid white;
+    background: @odiRedLight;
+    height: 60px;
+    padding: 0 10px;
+    width: 425px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  /* Making input text white loses the 'invalid' colour */
+  /* Add it back */
+  input[type=email]:invalid { color: #cc0000; }
+  input[type=email]:valid { color: #fff; }
+
+  .form-field-inline {
+    float: left;
+    margin: 3px 0 0 0;
+
+    input[type=checkbox] { margin: -2px 0 0 0; }
+
+    label { font-size: 14px; color: #fff; display: inline; }
+    label:hover { text-decoration: underline; }
+
+    .forgot-password {
+
+      display: block;
+      font-size: 14px;
+      color: #fff;
+      margin: 0 0 0 17px;
+      padding: 0;
+
+    }
+
+  }
+
+  h2 {
+    line-height: 30px;
+  }
+
+  .btn-primary {
+    float: right;
+    background: @odiPomegranate;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-right: 3px;
+
+  }
+
+  .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+
+    background: @odiPomegranateDark;
+
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+.registration_form_errors .alert-box {
+  i {
+    display: inline-block;
+  }
+  h3 {
+    display: inline;
+  }
+} 
 
 header {
   background-color: @odiBlue;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
+
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 
   .container {
     min-height: 60px;
+  }
+
+  h1,h2,h3,h4,h5,h6{
+    font-weight:normal;
   }
 }
 
@@ -343,40 +781,72 @@ header {
   margin-top: 50px;
 }
 
-
 #footer {
   background-color: #000;
   font-size: 0.88em;
-     color: #fff;
+  color: #adaeaf;
+  padding-top: 40px;
+  padding-bottom: 52px;
+
+  .footer-content {
+
+    margin-left: 0;
+
+    h1 {
+
+      /* ODI logo, hide text */
+      background: url(/assets/logo-footer.png) no-repeat top left;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 0 0 30px 0;
+      width: 204px; height: 49px;
+
+      a { display: block; }
+
+    }
+
+  }
+  .footer-nav { margin-left: 30px; }
 
   a {
-    color: #fff;
+    color: #adaeaf;
     text-decoration: none;
   }
 
+  a:hover { color: #fff; }
+
   ul {
     list-style: none outside none;
-    margin: 10px 0;
+    margin: -4px 0 0 0;
 
     li {
       display: inline;
-      margin: 0 10px;
+      margin-left: 20px;
     }
   }
 
   p {
-    margin: 10px;
+    margin: 0px;
+    font-size: 16px;
   }
+
+  p.license { margin-top: 30px; }
+
 }
 
 section {
   //background-color: white;
-  margin: 15px 0;
-  padding: 10px 0;
+  // margin: 15px 0;
+  // padding: 10px 0;
 }
 
 .whiteout {
   background-color:rgba(255,255,255,0.65);
+
+  /* Make sure there's a gap between bottom of content and top of footer */
+  padding-bottom: 55px;
+
 }
 
 .hero-unit {
@@ -402,10 +872,98 @@ section {
 
   p {
     font-size: 23px;
+    line-height: 32px;
   }
 }
 
 
+
+// Alert messages //
+
+.flash {
+  margin-top: 20px;
+}
+
+.alert {
+  color: white;
+  padding: 14px 12px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  vertical-align: middle;
+
+  .icon-large {
+    margin-bottom: 1px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .close, .close:hover, .close:active {
+    opacity: 1;
+    width: 14px;
+    height: 14px;
+    position: static;
+    background-image: url(/assets/glyphicons-halflings-white.png);
+    background-position: -312px 0;
+  }
+}
+
+.alert-alert {
+  background: @odiCrimson;
+  border: 1px solid @odiCrimsonDark;
+}
+
+.alert-warning {
+  background: @odiOrange;
+  border: 1px solid @odiOrangeDark;
+}
+
+.alert-notice {
+  background: @odiGreen;
+  border: 1px solid @odiGreenDark;
+}
+
+#topbar .alert-box {
+  h3 {
+    display: inline;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+
+  ul {
+    border: none;
+
+    li {
+      height: auto;
+      font-size: 16px;
+      border: none;
+    }
+  }
+}
+
+// Icons //
+
+.icon-large {
+
+  width: 28px;
+  height: 28px;
+  background-image: url(/assets/glyphicons.png);
+
+  &.icon-white {
+    background-image: url(/assets/glyphicons_white.png);
+  }
+
+  // Spacing between icons in file
+  @spacing: -48px;
+
+  // Mixin to help select correct icon
+  .icon-position(@top, @left) {
+    background-position: @spacing * @left (@spacing * @top) + 1;
+  }
+
+  &.icon-ok-sign { .icon-position(19, 3); }
+  &.icon-info-sign { .icon-position(19, 5); }
+  &.icon-exclamation-sign { .icon-position(19, 6); }
+  &.icon-ban-circle { .icon-position(19, 9); }
+}
 
 // Tables //
 
@@ -422,7 +980,8 @@ th {
 
 // Forms //
 
-.main-content {
+.main-default {
+  margin-top: 30px;
 
   .form-field {
     .clearfix;
@@ -481,7 +1040,7 @@ th {
 // My certificates view //
 
 .first-response-set {
-  background: @odiBlueLight;
+  background: @odiBlueLighter;
 
   td.level {
     text-align: center;
@@ -498,28 +1057,9 @@ th {
   button.copy-certificate {
     padding: 8px 12px;
   }
-
-  .btn-info.unstyled {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 }
 
 .previous-response-set {
-  .btn-info {
-    font-size: 15px;
-    color: @odiBlue;
-    padding: 0;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
 
   td {
     height: 30px;
@@ -606,7 +1146,238 @@ td.action {
   }
 }
 
+// Questionnaire (survey) view //
 
+#surveyor{
+
+  padding-top:20px;
+
+  header {
+    margin:5px 0;
+    h3{
+      font-size: 27px;
+    }
+    h3, h4{
+      color:@white;
+      margin:0;
+    }
+
+    &.inactive{
+      background-color:@odiGrey;
+    }
+    cursor: pointer;
+
+    .transition(background-color 0.25s);
+
+    // override
+    .container{
+      min-height: auto;
+    }
+  }
+
+  .subsection-label{
+    border-top:1px solid @odiGreyLighter;
+    color:@odiBlue;
+    font-weight: normal;
+    padding:20px 0;
+  }
+
+  ol,ul{
+    margin:auto;
+  }
+
+  // brought in from main styles
+  label {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .choice input{
+    margin-right:10px;
+  }
+  .choice label{
+    font-size:16px;
+    color:@gray;
+    -webkit-font-smoothing: antialiased;
+    line-height: 20px;
+  }
+
+
+  input.string{
+    height: 60px;
+    font-size: 23px;
+    padding: 0 10px;
+    margin: 15px 0;
+  }
+
+  // custom
+  input.string{
+    width:100%;
+  }
+
+
+  // this is our label replacement (for the question of multiple answers)
+  .group_label{
+    font-size: 22px
+  }
+
+  label small,
+  .group_label small{
+    color:@odiGrey;
+    font-size: 65%;
+  }
+
+  // dropdowns
+  fieldset.q_dropdown{
+    legend{
+      display: none;
+    }
+    > ol > label {
+      display: block;
+    }
+  }
+
+  // repeated sections
+  fieldset.g_repeater{
+    legend {
+      display: none;
+    }
+    ol fieldset.row {
+      display: block;
+    }
+  }
+
+  fieldset.requirement_basic li {
+    background: @odiRed;
+    color: white;
+    padding: 20px 20px 10px;
+  }
+
+  fieldset.requirement_pilot,
+  fieldset.requirement_standard,
+  fieldset.requirement_exemplar {
+    display: none;
+    position: relative;
+
+    img{
+      position: absolute;
+      left: -70px;
+      top: 10px;
+    }
+  }
+
+  fieldset.question-row{
+    position: relative;
+    padding-top: 10px;
+
+    // focussed elements
+    &.active{
+      // hard to do the odd outline
+
+      // outline: 1px solid @odiBlueLight;
+      background-color: @odiBlueLighter;
+    }
+
+    aside{
+      display:none;
+      position:absolute;
+      right:0;
+      background-color:@odiBlueLighter;
+      padding:20px;
+      width:330px;
+
+      &.answer-meta {
+        top: 10px;
+      }
+    }
+  }
+
+
+  &.highlight-mandatory{
+    .mandatory{
+      background-color:@odiCrimsonLight;
+      &.has-response{
+        background-color:@white;
+        &.active{
+          background-color:@odiBlueLighter;
+        }
+      }
+    }
+  }
+
+
+}
+
+#status_panel{
+  .transition(right 0.5s);
+  background-color:@odiGreyLighter;
+  position: absolute;
+  right:0;
+  width:280px;
+  padding:20px;
+  height:100%;
+  z-index:5;
+
+  right:-320px;
+
+  // also .hover for oldie fallback
+  &:hover, &.hover, &.stick{
+    right:0px;
+  };
+
+  &.affix, &.affix-bottom{
+    position: fixed;
+    top:130px;
+  }
+
+  #panel_handle{
+    background-image:url(/assets/panel-handle.png);
+
+    &.attained-basic{
+      background-image:url(/assets/panel-handle-basic.png);
+    }
+    &.attained-pilot{
+      background-image:url(/assets/panel-handle-pilot.png);
+    }
+    &.attained-standard{
+      background-image:url(/assets/panel-handle-standard.png);
+    }
+    &.attained-exemplar{
+      background-image:url(/assets/panel-handle-exemplar.png);
+    }
+
+    width:78px;
+    height:72px;
+    position: absolute;
+    left:-78px;
+  }
+
+  h3 {
+    margin-bottom: 0;
+    display: inline;
+    width: 50%;
+  }
+
+  img {
+    display: inline;
+    float: right;
+    margin-top: 10px;
+  }
+
+  .progress {
+    margin-bottom: 10px;
+    clear: both;
+  }
+
+  .status_texts {
+    dd,dt{
+      display:none;
+      &.active{
+        display:block;
+      }
+    }
+  }
+}
 
 // Certificate view //
 
@@ -625,13 +1396,38 @@ td.action {
     p {
       font-size: 19px;
       margin-right: 20px;
+      max-height: 24px;
+
+      a {
+        color: inherit;
+      }
+    
+      .cropped {
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
 
 .certificate.hero-unit {
-  margin: -70px auto 30px;
-  width: 920px;
+  margin: -50px auto 30px;
+  padding: 0 15px;
+
+  .btn-info {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 12px;
+    width: 80px;
+    margin-top: 80px;
+  }
+}
+
+.certificate-summary {
+  padding: 0 90px;
 }
 
 .certificate-badge {
@@ -700,4 +1496,190 @@ strong.certificate-level {
     margin-top: 70px;
     padding: 30px 0;
     text-align: center;
+}
+
+// Embedded certificate //
+
+#embedded-certificate {
+  margin: 30px;
+  .certificate.hero-unit {
+    width: auto;
+    margin-top: 30px;
+  }
+}
+
+.embed-code {
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+/*
+//
+// ***** About Page *****
+//
+*/
+.container.about {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h1 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+
+    }
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 22px;
+      font-weight: normal;
+      line-height: 30px;
+      margin: 15px 0 20px 0;
+
+    }
+
+    ul { margin-top: 10px; }
+
+    li { margin-bottom: 5px; line-height: 24px; }
+
+    ul.kitemarks {
+
+      margin: 20px 0 10px 0;
+
+      li {
+
+        list-style: none;
+        padding-left: 141px;
+        padding-top: 16px;
+        min-height: 117px;
+        margin-bottom: 10px;
+
+      }
+
+      li.kitemark1 { background: url(/assets/badges/no_level_badge.png) no-repeat top left; }
+      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; }
+      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; }
+      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; }
+
+    }
+
+  }
+
+}
+
+/*
+//
+// ***** Terms Page, Contact (Get in touch) Page *****
+//
+*/
+.container.terms, .container.contact {
+
+  .span8 {
+
+    margin-left: 0;
+
+    h2 {
+
+      color: #8e8c8c;
+      font-size: 30px;
+      margin-top: 15px;
+      font-weight: normal;
+
+    }
+
+    h4 {
+
+      color: #000;
+      font-size: 18px;
+
+    }
+
+    li { margin-bottom: 5px; line-height: 24px; }
+
+  }
+
+}
+
+/*
+//
+// ***** Improvements page *****
+//
+*/
+section.improvement{
+
+  header .container {
+    background-size: 71px 63px;
+    background-repeat: no-repeat;
+    background-position: 20px 5px;
+  }
+
+  h2 {
+
+    font-size: 27px;
+    margin: 0;
+    padding-left: 90px;
+
+  }
+
+  h3 {
+
+    line-height: 20px;
+    margin: 0 0 15px 0;
+    padding-left: 90px;
+    max-width: 90%;
+
+  }
+
+ 
+  .requirements { 
+    padding: 25px 0 35px 0; 
+  }
+
+  li {
+    margin-bottom: 20px;
+
+    font-size: 16px;
+    color: #4d4d4d;
+    width: 66%;
+  }
+
+  strong { color: #000; }
+  a { color: #000; }
+
+  p { margin-bottom: 20px; }
+
+
+  // level specific styles
+  &.improvement-pilot header .container{
+    background-image: url(/assets/badges/pilot_level_badge.png);
+  }
+  &.improvement-standard header .container{
+    background-image: url(/assets/badges/standard_level_badge.png);
+  }
+  &.improvement-exemplar header .container{
+    background-image: url(/assets/badges/exemplar_level_badge.png);
+  }
+  
+  &.improvement-basic {
+    header{
+      background: #333;
+      h2, h3 { padding-left: 0; }
+    }
+
+    background: #474747;
+
+    li, p { color: #fff; -webkit-font-smoothing: antialiased; }
+
+    strong, a { 
+      color: #fff; 
+    }
+
+  }
+
 }

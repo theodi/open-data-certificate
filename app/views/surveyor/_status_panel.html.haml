@@ -1,0 +1,39 @@
+#status_panel
+  #panel_handle
+  %dl.status_texts
+    %dt none
+    %dd.active= t('level_status.none').html_safe
+    %dt basic
+    %dd= t('level_status.basic').html_safe
+    %dt pilot
+    %dd= t('level_status.pilot').html_safe
+    %dt standard
+    %dd= t('level_status.standard').html_safe
+    %dt exemplar
+    %dd= t('level_status.exemplar').html_safe
+
+  %hr
+  %h3 Raw 
+  .progress.progress-striped.progress-info
+    .bar#bar-basic
+
+  %hr
+  %h3 Pilot
+  = image_tag "badges/status-indicators/pilot.png"
+  .progress.progress-striped.progress-warning
+    .bar#bar-pilot
+ 
+  %hr
+  %h3 Standard
+  = image_tag "badges/status-indicators/standard.png"
+  .progress.progress-striped.progress-success
+    .bar#bar-standard
+
+  %hr
+  %h3 Expert
+  = image_tag "badges/status-indicators/expert.png"
+  .progress.progress-striped.progress-danger
+    .bar#bar-exemplar
+  %hr
+  %p 
+  =link_to t('level_status.improve'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)

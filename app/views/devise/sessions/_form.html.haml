@@ -1,0 +1,24 @@
+- errors ||= nil
+- remote ||= false
+- form_id ||= 'sign_in_user_form'
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => remote, :format => :json, :html => { :id => form_id, :class => 'sign_in_user', 'data-remote-error-message' => t('errors.server_error')}) do |f|
+  = hidden_field_tag :form_id, form_id
+  .form-errors.sign_in_user_form_errors
+    - if errors
+      = render 'devise/sessions/form_errors', locals: {errors: errors}
+
+  .form-field
+    = f.label :email
+    = f.email_field :email, :autofocus => true, :class => 'span8'
+  .form-field
+    = f.label :password
+    = f.password_field :password, :autocomplete => "off", :class => 'span8'
+  - if devise_mapping.rememberable?
+    .form-field.form-field-inline
+      = f.check_box :remember_me
+      = f.label :remember_me, t("authentication.remember_me")
+      - if devise_mapping.recoverable? && controller_name != 'passwords'
+        = link_to t('authentication.forgot_password'), new_password_path(resource_name), :class => 'forgot-password'
+
+  = f.submit t("authentication.sign_in"), :class => 'btn btn-primary'

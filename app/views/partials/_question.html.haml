@@ -2,28 +2,51 @@
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
 - disabled = defined?(disableFlag) ? disableFlag : false
-- unless q.display_type == "hidden"
-  = f.inputs q_text(q, @render_context, I18n.locale), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)}" do
-    %span.help= q.help_text_for(@render_context, I18n.locale)
-    %span.help_text_more_link= q.help_text_more_url
-    - case renderer
-    - when  :image, :label, :default_label, :inline_label, :repeater_label
-    - when :dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown
-      - r = response_for(@response_set, q, nil, rg)
-      - i = response_idx
-      = f.semantic_fields_for i, r do |ff|
-        = ff.input :question_id, :as => :quiet
-        = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
-        = ff.input :api_id, :as => :quiet
-        = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }
-    - else # :default, :inline, :inline_default
-      - if q.pick == "one"
-        - r = response_for(@response_set, q, nil, rg)
-        - i = response_idx  # increment the response index since the answer partial skips for q.pick == one
-        = f.semantic_fields_for i, r do |ff|
-          = ff.input :question_id, :as => :quiet
-          = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
-          = ff.input :api_id, :as => :quiet
-      - q.answers.each do |a|
-        - next if (q.pick == "one" or q.pick == "any") and disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
-        = render a.custom_renderer || '/partials/answer', :q => q, :a => a, :f => f, :rg => rg, :g => g, :disableFlag => disabled
+- question_text = q_text(q, @render_context, I18n.locale)
+
+- case q.display_type
+- when 'hidden' #don't do anything
+- when 'label'
+  .subsection-label
+    %h2.container
+      != question_text
+      %small= q.help_text
+
+- else
+  %li.container
+    - r = response_for(@response_set, q, nil, rg)
+    -# if we are using the default renderer, we will display the question text within that
+    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} #{q.is_mandatory ? 'mandatory' : ''} #{r.new_record? ? '' : 'has-response'} row question-row", 'data-reference-identifier' => rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier do
+
+      -# for multiple answers, we want to give the question once
+      -# at the start of the questions
+      - if q.pick == 'one' or q.pick == 'any'
+        %label.span8.question_label!= question_text
+
+      .span8
+        - case renderer
+        - when  :image, :label, :default_label, :inline_label, :repeater_label
+        - when :dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown
+          - i = response_idx
+          = f.semantic_fields_for i, r do |ff|
+            = ff.input :question_id, :as => :quiet
+            = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
+            = ff.input :api_id, :as => :quiet
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }
+        - else # :default, :inline, :inline_default
+          - if q.pick == "one"
+            - i = response_idx  # increment the response index since the answer partial skips for q.pick == one
+            = f.semantic_fields_for i, r do |ff|
+              = ff.input :question_id, :as => :quiet
+              = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
+              = ff.input :api_id, :as => :quiet
+          - q.answers.each do |a|
+            - next if (q.pick == "one" or q.pick == "any") and disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
+            = render a.custom_renderer || '/partials/answer', :q => q, :a => a, :f => f, :rg => rg, :g => g, :disableFlag => disabled, :question_text => question_text
+
+      - unless (q.help_text.blank?)
+        %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}
+          %p
+            != q.help_text_for(@render_context, I18n.locale)
+            - if (q.help_text_more_url)
+              %a{:href => q.help_text_more_url} Read more...

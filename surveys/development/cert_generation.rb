@@ -1,10 +1,13 @@
-survey 'Certificate Generator',  :dataset_title => 'q_dataTitle' do
+survey 'Certificate Generator',  :dataset_title => 'q_dataTitle', 
+  :description => 'This is a development survey to test out the generation of the certificates' do
   
-  section 'General' do
+  section 'General', :display_header => false do
+    
 
     q_dataTitle 'What\'s a good title for this data?',
                 :text_as_statement => 'Data Title',
-                :display_on_certificate => true
+                :display_on_certificate => true,
+                :help_text => 'We need to know this to populate your dataset'
 
     a_1 'what you call the data', :string
 

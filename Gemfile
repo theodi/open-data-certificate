@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
-# gem 'pg'
 
 gem 'surveyor'
 
@@ -40,12 +39,12 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'ruby-prof'
-  gem 'pg'
 end
 
 group :production do
   gem 'foreman'
   gem 'mysql2'
+  gem 'airbrake'
 end
 
 gem 'jquery-rails'
@@ -75,3 +74,5 @@ gem 'thin'
 gem 'surveyor'
 
 gem "devise", ">= 2.2.3"
+
+gem 'dotenv-rails'

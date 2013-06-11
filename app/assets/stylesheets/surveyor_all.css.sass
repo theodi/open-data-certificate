@@ -12,45 +12,8 @@ $surveyor_menus_border_color:#ccc
 
 #surveyor
 
-  // reset 
   ol, ul
     :list-style none
-
-  :width auto
-  :padding 20px
-  :margin 0 auto
-  :text-align left
-  // :font-family Helvetica
-  :font-size 100%
-  :background-color $surveyor_color
-  :color $surveyor_text_color
-  // .survey_title
-  //   :font-size 2em
-  //   :font-weight bold
-  //   :padding 5px 0
-  .surveyor_menu
-    :float right
-    ul
-      :background-color $background_color
-      :border 1px solid $surveyor_menus_border_color
-      :border-bottom-width 0
-      :list-style none
-      li
-        :border 0 solid $surveyor_menus_border_color
-        :border-bottom-width 1px
-      li.active, li.active input[type="submit"]
-        :background-color $surveyor_menus_active_color
-  .surveyor_language_selection
-    :display none
-  //.previous_section
-  .next_section
-    :float right
-  .survey_section
-    span.title
-      :display block
-      :padding 5px 0
-      :font-weight bold
-      :font-size 1.5em
 
   // question groups
   fieldset.g_inline fieldset, fieldset.g_inline ol li
@@ -92,18 +55,9 @@ $surveyor_menus_border_color:#ccc
           :display inline
     &.q_inline ol li, &.q_inline_inline ol li
       :display inline
-    input, textarea, select
-      :margin 0 3px
-    input[type="text"], textarea
-      :font-size 0.8em
 
   fieldset.q_hidden, fieldset.g_hidden, fieldset.g_grid tr.q_hidden
     :display none !important
-  fieldset.q_dependent, fieldset.g_dependent
-    :background-color $surveyor_dependent_color
-    legend
-      // :background-color $surveyor_dependent_color
-      // :padding 3px 3px 3px 0
   fieldset.q_dropdown, fieldset.q_inline_dropdown, fieldset.q_default_dropdown, fieldset.q_slider, fieldset.q_repeater_dropdown
     label
       :display none
@@ -115,11 +69,3 @@ $surveyor_menus_border_color:#ccc
     .ui-slider span.ui-slider-label-show
       :position relative
       :display inline
-
-  // buttons
-  input[type="submit"]
-    :font-size 1em
-    :border 1px
-    :padding 5px
-    :cursor pointer
-    :background-color $background_color
