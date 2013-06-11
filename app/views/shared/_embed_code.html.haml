@@ -3,6 +3,13 @@
     %h3= t("certificate.embeddable_certificate")
   .modal-body
     %h1= certificate.name
+    %p= t("certificate.embed_badge_instructions")
+    .row-fluid
+      .span2
+        = render(:partial => 'shared/embed_badge', :locals => {:certificate => certificate})
+      .span10
+        %textarea= render(:partial => 'shared/embed_badge', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
     %p= t("certificate.embed_instructions")
-    %textarea= render(:partial => 'shared/embed_iframe', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
+    %textarea{:rows => 1}
+      = render(:partial => 'shared/embed_iframe', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
     = link_to t("certificate.view_embed_page"), embed_certificate_path(certificate), :class => 'btn btn-info'
