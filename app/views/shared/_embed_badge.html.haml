@@ -1,15 +1,15 @@
 
-- level = @certificate.attained_level
+- level = certificate.attained_level || 'none'
 - image_level = level == 'basic' ? 'raw' : level == 'expert' ? 'exemplar' : level
 %div.open-data-certificate
   %style="@import url(http://#{request.host_with_port}/assets/badge.css);"
-  = link_to certificate_url(@certificate) do image_tag("http://#{request.host_with_port}/assets/badges/#{image_level}_level_badge.png") end
+  = link_to certificate_url(certificate) do image_tag("http://#{request.host_with_port}/assets/badges/#{image_level}_level_badge.png") end
   %ul.open-data-certificate-details
     %li
       %span="#{t("levels.#{level}.title")} Open Data Certificate (beta)"
     %li
       %span self-certified
     %li
-      %span=@certificate.response_set.title
+      %span=certificate.response_set.title
     %li
-      %span="awarded #{@certificate.created_at.strftime("%-d %b %Y")}"
+      %span="awarded #{certificate.created_at.strftime("%-d %b %Y")}"
