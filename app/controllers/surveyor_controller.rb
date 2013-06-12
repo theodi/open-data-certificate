@@ -74,7 +74,7 @@ class SurveyorController < ApplicationController
             :section => section_id_from(params),
             :highlight_mandatory => true
           ),
-          :warning, messages.join("<br />").html_safe
+          :warning, messages
         )
       end
     end
