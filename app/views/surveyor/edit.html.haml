@@ -59,10 +59,33 @@
       } else if ($requirements.is('.requirement_exemplar')) {
         text = '#{t('requirement_label.requirement_exemplar')}';
       }
+      
       if (text !== '') {
         $label.append(' <small>' + text + '</small>');
       }
     });
+    
+    // Resolve URLs
+
+    $('input[type=url]').change(function () {
+      var el = this
+      var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+      if(regex.test(el.value)) {
+        $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px'});
+        $.getJSON('/resolve', { url: el.value } )
+          .done(function(json) {
+            $(el).parent().spin(false);
+            if (json.status == 200) {
+              $(el).attr('class', 'string')
+              $(el).parent().next('.url_error').attr('class', 'span7 url_error hidden');
+            } else {
+              $(el).attr('class', 'string fail')
+              $(el).parent().next('.url_error').attr('class', 'span7 url_error');
+            }
+          });
+      }
+    })
+    
   });
 
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?

@@ -325,29 +325,6 @@ $(function(){
     });
 
   });
-  
-  // Resolve URLs
-  
-  $('input[type=url]').bind('textchange', function () {
-    var el = this
-    $('#'+ el.id +'_error').remove();
-    var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
-    if(regex.test(el.value)) {
-      $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px'});
-      $.getJSON('/resolve', { url: el.value } )
-        .done(function(json) {
-          $(el).parent().spin(false);
-          if (json.status == 200) {
-            $(el).attr('class', 'string')
-          } else {
-            $(el).attr('class', 'string fail')
-            if ($('#'+ el.id +'_error').length == 0) {
-              $(el).after('<p id="'+ el.id +'_error"><i class="icon-warning-sign"></i> Please check that the URL exists</p>')
-            }
-          }
-        });
-    }
-  })
 
 
 });
