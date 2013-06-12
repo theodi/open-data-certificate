@@ -7,7 +7,9 @@ OpenDataCertificate::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :memory_store # TODO: Default is memory store, but production will probably need to change to something else... but that decision is not yet made
+#  config.cache_store = :memory_store # TODO: Default is memory store, but production will probably need to change to something else... but that decision is not yet made
+  config.cache_store = :mem_cache_store, ENV["MEMCACHED_HOSTS"]
+
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
