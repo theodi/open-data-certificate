@@ -33,8 +33,15 @@ prototype/merged.xml
 prototype/open-data-certificate.xpr
 
 /prototype/badge/
-=======
+
+app/.DS_Store
+
+app/assets/.DS_Store
+
+app/assets/images/.DS_Store
+
 # RubyMine cruft
+
 .idea/
 
 # Chef secrets and that

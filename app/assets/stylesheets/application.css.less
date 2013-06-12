@@ -154,6 +154,18 @@
 
   form { margin-bottom: 0; }
 
+  .form-field-inline {
+    label {
+      display: inline-block;
+    }
+    .forgot-password {
+      display: block;
+      color: black;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+
 }
 
 .modal-header {
@@ -776,7 +788,7 @@ nav .dropdown-menu-button {
   }
 }
 
-.registration_form_errors .alert-box {
+.registration_form_errors .alert-box, .sign_in_user_form_errors .alert-box {
   i {
     display: inline-block;
   }
@@ -1458,14 +1470,16 @@ td.action {
 .certificate-badge {
   width: 160px;
   height: 140px;
-  background: #bbb;
+  // background: #bbb;
   margin-bottom: 10px;
+  background: transparent center center no-repeat;
+  background-size:contain;
 }
 
 .certificate-level {
   font-weight: bold;
   font-size: 24px;
-  color: #888;
+  color: black;
   margin-bottom: 30px;
 
   small {
@@ -1480,40 +1494,26 @@ strong.certificate-level {
   font-weight: normal;
 }
 
+.level-styles(@color, @url){
+  .certificate-badge {
+    background-image:@url;
+  }
+  strong.certificate-level {
+    color: @color;
+  }
+}
+
 .basic-level {
-  .certificate-badge {
-    background: @basic;
-  }
-  .certificate-level {
-    color: @basic;
-  }
+  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
 }
-
 .pilot-level {
-  .certificate-badge {
-    background: @pilot;
-  }
-  .certificate-level {
-    color: @pilot;
-  }
+  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
 }
-
 .standard-level {
-  .certificate-badge {
-    background: @standard;
-  }
-  .certificate-level {
-    color: @standard;
-  }
+  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
 }
-
 .exemplar-level {
-  .certificate-badge {
-    background: @exemplar;
-  }
-  .certificate-level {
-    color: @exemplar;
-  }
+  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
 }
 
 .footer {
