@@ -1,7 +1,7 @@
 survey 'Open Data Certificate Questionnaire',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
-  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p>If you need to save or finish an incomplete questionnaire you should register for a free account.</p>' do
+  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -39,32 +39,32 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_releaseType, '==', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisher 'Who curates this data?',
+    q_publisher 'Who publishes this data?',
       :display_on_certificate => true,
-      :text_as_statement => 'This data is curated by',
-      :help_text => 'Give the name of the organisation who looks after this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
+      :text_as_statement => 'This data is published by',
+      :help_text => 'Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
       :required => :required
-    a_1 'Data Curator',
+    a_1 'Data Publisher',
       :string,
-      :placeholder => 'Data Curator',
+      :placeholder => 'Data Publisher',
       :required => :required
 
-    q_publisherUrl 'Where is the curator\'s website?',
+    q_publisherUrl 'What website is the data published on?',
       :display_on_certificate => true,
-      :text_as_statement => 'The data curator\'s website is',
+      :text_as_statement => 'The data is published on',
       :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
-    a_1 'Curator URL',
+    a_1 'Publisher URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Curator URL'
+      :placeholder => 'Publisher URL'
 
     q_releaseType 'What kind of release is this?',
       :pick => :one,
       :required => :required
     a_oneoff 'a one-off release of a single dataset',
-      :help_text => 'This is a single file and you don’t plan to publish similar files in the future.'
+      :help_text => 'This is a single file and you don’t currently plan to publish similar files in the future.'
     a_collection 'a one-off release of a set of related datasets',
-      :help_text => 'This is a collection of related files about the same data and you don’t plan to publish similar collections in the future.'
+      :help_text => 'This is a collection of related files about the same data and you don’t currently plan to publish similar collections in the future.'
     a_series 'ongoing release of a series of related datasets',
       :help_text => 'This is a sequence of datasets with planned periodic updates in the future.'
     a_service 'a service or API for accessing open data',
@@ -274,14 +274,14 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'how you give people permission to use your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_copyrightURL 'Where is your rights statement?',
+    q_copyrightURL 'Where do you describe copyright and database rights?',
       :display_on_certificate => true,
       :text_as_statement => 'Copyright and database rights are described at',
       :help_text => 'Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.'
-    a_1 'Rights statement URL',
+    a_1 'Rights Statement URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Rights statement URL',
+      :placeholder => 'Rights Statement URL',
       :requirement => ['pilot_3']
 
     label_pilot_3 'You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data.',
@@ -830,10 +830,10 @@ survey 'Open Data Certificate Questionnaire',
       :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_linkedTo 'Can people find more information about your data within three clicks of your home page?',
+    q_linkedTo 'Can people find your data within three clicks of the home page?',
       :display_on_certificate => true,
       :text_as_statement => 'The data is reachable',
-      :help_text => 'If documentation is reachable via links from your home page people can find it quickly without searching. You should make it more accessible on your website if they can\'t.',
+      :help_text => 'If documentation is reachable via links from the home page of the site it\'s published on, people can find it quickly without searching. You should make it more accessible on your website if they can\'t.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -841,7 +841,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'within three clicks of the home page',
       :requirement => ['standard_8']
 
-    label_standard_8 'You should <strong>ensure that people can easily find your data</strong> from your organisation\'s home page.',
+    label_standard_8 'You should <strong>ensure that people can easily find your data</strong> from the home page of the site it\'s published on.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_8'
     dependency :rule => 'A'
@@ -880,7 +880,7 @@ survey 'Open Data Certificate Questionnaire',
     end
 
     q_referenced 'Is this data referenced from your own publications?',
-      :help_text => 'When you reference your data within your own publications you give it more context, and help people find and understand it better.',
+      :help_text => 'When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1210,17 +1210,17 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_corrected, '==', :a_false
 
     label_group_7 'Quality',
-      :help_text => 'how people can report problems and improve your data',
+      :help_text => 'how much people can rely on your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_qualityUrl 'Where do you document data quality issues?',
+    q_qualityUrl 'Where do you document issues with the quality of this data?',
       :display_on_certificate => true,
-      :text_as_statement => 'Data quality issues are documented at',
-      :help_text => 'Give a URL where people can report problems. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
-    a_1 'Quality Issues URL',
+      :text_as_statement => 'Data quality is documented at',
+      :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
+    a_1 'Data Quality Documentation URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Quality Issues URL',
+      :placeholder => 'Data Quality Documentation URL',
       :requirement => ['standard_17']
 
     label_standard_17 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
@@ -2244,8 +2244,8 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_vocabulary 'Do the data formats use vocabularies?',
-      :help_text => 'Formats like JSON, XML or Turtle need to come with a schema for people to understand it.',
+    q_vocabulary 'Do the data formats use vocabularies or schemas?',
+      :help_text => 'Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains.',
       :pick => :one,
       :required => :standard
     a_false 'no'
@@ -2253,7 +2253,7 @@ survey 'Open Data Certificate Questionnaire',
 
     q_schemaDocumentationUrl 'Where is documentation about your data vocabularies?',
       :display_on_certificate => true,
-      :text_as_statement => 'The vocabularies in this data are documented at'
+      :text_as_statement => 'The vocabularies used by this data are documented at'
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
     a_1 'Schema Documentation URL',
@@ -2429,20 +2429,29 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_engagementTeam 'Where is your community engagement team\'s home page?',
-      :display_on_certificate => true,
-      :text_as_statement => 'The community engagement team is at'
-    a_1 'Community Engagement Team Home Page URL',
-      :string,
-      :input_type => :url,
-      :placeholder => 'Community Engagement Team Home Page URL',
+    q_engagementTeam 'Do you have anyone who actively builds a community around this data?',
+      :pick => :one
+    a_false 'no'
+    a_true 'yes',
       :requirement => ['exemplar_18']
 
     label_exemplar_18 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_18'
     dependency :rule => 'A'
-    condition_A :q_engagementTeam, '==', {:string_value => '', :answer_reference => '1'}
+    condition_A :q_engagementTeam, '==', :a_false
+
+    q_engagementTeamUrl 'Where is their home page?',
+      :display_on_certificate => true,
+      :text_as_statement => 'Community engagement is done by',
+      :required => :required
+    dependency :rule => 'A'
+    condition_A :q_engagementTeam, '==', :a_true
+    a_1 'Community Engagement Team Home Page URL',
+      :string,
+      :input_type => :url,
+      :placeholder => 'Community Engagement Team Home Page URL',
+      :required => :required
 
     label_group_16 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',
