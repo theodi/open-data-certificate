@@ -10,9 +10,9 @@
   = ff.input :response_group, :value => rg, :as => :quiet if q.pick != "one" && g && g.display_type == "repeater"
   - case q.pick
   - when "one"
-    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale), a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
+    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
   - when "any"
-    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale), a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
+    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
   - when "none"
     - if %w(date datetime time float integer string text).include? a.response_class
       = ff.input :answer_id, :as => :quiet, :input_html => {:class => a.css_class, :value => a.id}
