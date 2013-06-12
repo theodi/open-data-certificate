@@ -218,9 +218,11 @@ $(function(){
   }
 
   // Open sections that contain incomplete mandatory questions
-  $('.survey-section:has(.mandatory:not(.has-response):not(.q_hidden))')
-    .find('ul')
-    .collapse('show');
+  if ($('#surveyor').hasClass('highlight-mandatory')) {
+    $('.survey-section:has(.mandatory:not(.has-response):not(.q_hidden))')
+      .find('ul')
+      .collapse('show');
+  }
 
 
   // Questionnaire status panel
@@ -250,12 +252,14 @@ $(function(){
     $questions.each(function(){
       var $this = $(this);
       var $requirement = $this.closest('li.container').find('fieldset.q_label');
+      var completed = $this.is_completed();
 
       $.each(levels,function(i, level){
         if($requirement.is('.requirement_' + level)){
           requirements[level].required ++;
-          if($this.is_completed())
-          requirements[level].complete ++;
+          if(completed && $requirement.is('.q_hidden.requirement_' + level)) {
+            requirements[level].complete ++;
+          }
         }
       });
     });
