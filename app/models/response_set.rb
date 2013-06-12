@@ -45,10 +45,19 @@ class ResponseSet < ActiveRecord::Base
   end
   
   def all_urls_resolve?
+    errors = []
     responses.select{ |r|  r.is_url?  }.each do |response|
       response_code = HTTParty.get(response.string_value).code rescue nil
-      return false if response_code != 200
+      if response_code != 200
+        response.error = true
+        response.save
+        errors << response 
+      else
+        response.error = false
+        response.save
+      end
     end
+    return false if errors.length > 0
   end
 
   def all_mandatory_questions_complete?
