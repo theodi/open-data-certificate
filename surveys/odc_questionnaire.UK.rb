@@ -1337,22 +1337,13 @@ survey 'Open Data Certificate Questionnaire',
     label_group_10 'Locations',
       :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
-    dependency :rule => '(A or B or C or D)'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
 
     q_datasetUrl 'Where is your dataset?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is published at',
       :help_text => 'Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.'
-    dependency :rule => '(A or B or C or D) and E'
+    dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
       :string,
       :input_type => :url,
@@ -1362,36 +1353,24 @@ survey 'Open Data Certificate Questionnaire',
     label_basic_9 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_9'
-    dependency :rule => '(A or B or C or D) and E and F and G'
+    dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_oneoff
-    condition_F :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
-    condition_G :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
+    condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_pilot_14 'You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_14'
-    dependency :rule => '(A or B or C or D) and E and F and G'
+    dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_oneoff
-    condition_F :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_G :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_versionManagement 'How do you publish a series of the same dataset?',
       :requirement => ['basic_10'],
       :pick => :any
-    dependency :rule => '(A or B or C or D) and E'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
+    dependency :rule => 'A'
+    condition_A :q_releaseType, '==', :a_series
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current dataset.',
       :requirement => ['standard_20']
@@ -1405,62 +1384,42 @@ survey 'Open Data Certificate Questionnaire',
     label_standard_20 'You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_20'
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '!=', :a_current
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '!=', :a_current
 
     label_pilot_15 'You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_15'
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '!=', :a_template
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '!=', :a_template
 
     label_standard_21 'You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_21'
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '!=', :a_list
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '!=', :a_list
 
     label_basic_10 'You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_10'
-    dependency :rule => '(A or B or C or D) and E and (F and G and H and I)'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
-    condition_G :q_versionManagement, '!=', :a_current
-    condition_H :q_versionManagement, '!=', :a_template
-    condition_I :q_versionManagement, '!=', :a_list
+    dependency :rule => 'A and (B and C and D and E)'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
+    condition_C :q_versionManagement, '!=', :a_current
+    condition_D :q_versionManagement, '!=', :a_template
+    condition_E :q_versionManagement, '!=', :a_list
 
     q_currentDatasetUrl 'Where is your current dataset?',
       :display_on_certificate => true,
       :text_as_statement => 'The current dataset is available at',
       :help_text => 'Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released.',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '==', :a_current
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '==', :a_current
     a_1 'Current Dataset URL',
       :string,
       :input_type => :url,
@@ -1472,13 +1431,9 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'Releases follow this consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '==', :a_template
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '==', :a_template
     a_1 'Version Template URL',
       :string,
       :input_type => :url,
@@ -1490,13 +1445,9 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'Releases of this data are listed at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_series
-    condition_F :q_versionManagement, '==', :a_list
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_series
+    condition_B :q_versionManagement, '==', :a_list
     a_1 'Version List URL',
       :string,
       :input_type => :url,
@@ -1507,12 +1458,8 @@ survey 'Open Data Certificate Questionnaire',
       :display_on_certificate => true,
       :text_as_statement => 'The API service endpoint is',
       :help_text => 'Give a URL that\'s a starting point for people\'s scripts to access your API. This should be a service description document that helps the script to work out which services exist.'
-    dependency :rule => '(A or B or C or D) and E'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
+    dependency :rule => 'A'
+    condition_A :q_releaseType, '==', :a_service
     a_1 'Endpoint URL',
       :string,
       :input_type => :url,
@@ -1522,36 +1469,24 @@ survey 'Open Data Certificate Questionnaire',
     label_basic_11 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_11'
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
-    condition_G :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
+    condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_standard_22 'You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_22'
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_G :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dumpManagement 'How do you publish database dumps?',
       :pick => :any
-    dependency :rule => '(A or B or C or D) and E and F'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
+    dependency :rule => 'A and B'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current database dump.',
       :requirement => ['standard_23']
@@ -1565,52 +1500,36 @@ survey 'Open Data Certificate Questionnaire',
     label_standard_23 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_23'
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '!=', :a_current
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '!=', :a_current
 
     label_exemplar_10 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_10'
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '!=', :a_template
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '!=', :a_template
 
     label_exemplar_11 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_11'
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '!=', :a_list
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '!=', :a_list
 
     q_currentDumpUrl 'Where is the current database dump?',
       :display_on_certificate => true,
       :text_as_statement => 'The most recent database dump is always available at',
       :help_text => 'Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '==', :a_current
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '==', :a_current
     a_1 'Current Dump URL',
       :string,
       :input_type => :url,
@@ -1622,14 +1541,10 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'Database dumps follow the consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '==', :a_template
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '==', :a_template
     a_1 'Dump Template URL',
       :string,
       :input_type => :url,
@@ -1641,14 +1556,10 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'A list of database dumps is at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E and F and G'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_releaseType, '==', :a_service
-    condition_F :q_provideDumps, '==', :a_true
-    condition_G :q_dumpManagement, '==', :a_list
+    dependency :rule => 'A and B and C'
+    condition_A :q_releaseType, '==', :a_service
+    condition_B :q_provideDumps, '==', :a_true
+    condition_C :q_dumpManagement, '==', :a_list
     a_1 'Dump List URL',
       :string,
       :input_type => :url,
@@ -1660,12 +1571,8 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'A feed of changes to this data is at',
       :help_text => 'Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.',
       :required => :required
-    dependency :rule => '(A or B or C or D) and E'
-    condition_A :q_releaseType, '==', :a_oneoff
-    condition_B :q_releaseType, '==', :a_series
-    condition_C :q_releaseType, '==', :a_service
-    condition_D :q_changeFeed, '==', :a_true
-    condition_E :q_changeFeed, '==', :a_true
+    dependency :rule => 'A'
+    condition_A :q_changeFeed, '==', :a_true
     a_1 'Change Feed URL',
       :string,
       :input_type => :url,

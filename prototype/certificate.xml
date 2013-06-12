@@ -698,134 +698,132 @@
 	<group id="technical">
 		<label>Technical Information</label>
 		<help>Locations, formats and trust</help>
-		<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'series' || this.releaseType() === 'service' || this.changeFeed() === 'true'">
-			<group id="locations">
-				<label>Locations</label>
-				<help>how people can access your data</help>
-				<if test="this.releaseType() === 'oneoff'">
-					<question id="datasetUrl" display="This data is published at">
-						<label>Where is your dataset?</label>
-						<input type="url" placeholder="Dataset URL"/>
-						<help>Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
-						<if test="this.documentationUrl() === ''">
-							<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.</requirement>
-						</if>
-						<if test="this.documentationUrl() !== ''">
-							<requirement test="this.datasetUrl() !== ''" level="pilot">You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.</requirement>
-						</if>
+		<group id="locations">
+			<label>Locations</label>
+			<help>how people can access your data</help>
+			<if test="this.releaseType() === 'oneoff'">
+				<question id="datasetUrl" display="This data is published at">
+					<label>Where is your dataset?</label>
+					<input type="url" placeholder="Dataset URL"/>
+					<help>Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
+					<if test="this.documentationUrl() === ''">
+						<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.</requirement>
+					</if>
+					<if test="this.documentationUrl() !== ''">
+						<requirement test="this.datasetUrl() !== ''" level="pilot">You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.</requirement>
+					</if>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'series'">
+				<question id="versionManagement">
+					<label>How do you publish a series of the same dataset?</label>
+					<checkboxset>
+						<option value="current">
+							<label>as a single URL that's regularly updated</label>
+							<help>Choose this if there's one URL for people to download the most recent version of the current dataset.</help>
+							<requirement level="standard">You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.</requirement>
+						</option>
+						<option value="template">
+							<label>as consistent URLs for each release</label>
+							<help>Choose this if your dataset URLs follow a regular pattern that includes the date of publication, for example, a URL that starts '2013-04'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
+							<requirement level="pilot">You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.</requirement>
+						</option>
+						<option value="list">
+							<label>as a list of releases</label>
+							<help>Choose this if you have a list of datasets on a web page or a feed (like Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
+							<requirement level="standard">You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.</requirement>
+						</option>
+					</checkboxset>
+					<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
+						<requirement>You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.</requirement>
+					</if>
+				</question>
+				<if test="this.versionManagement().current">
+					<question id="currentDatasetUrl" display="The current dataset is available at">
+						<label>Where is your current dataset?</label>
+						<input type="url" placeholder="Current Dataset URL" required="required"/>
+						<help>Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released.</help>
 					</question>
 				</if>
-				<if test="this.releaseType() === 'series'">
-					<question id="versionManagement">
-						<label>How do you publish a series of the same dataset?</label>
+				<if test="this.versionManagement().template">
+					<question id="versionsTemplateUrl" display="Releases follow this consistent URL pattern">
+						<label>What format do dataset release URLs follow?</label>
+						<input type="url" placeholder="Version Template URL" required="required"/>
+						<help>This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`</help>
+					</question>
+				</if>
+				<if test="this.versionManagement().list">
+					<question id="versionsUrl" display="Releases of this data are listed at">
+						<label>Where is your list of dataset releases?</label>
+						<input type="url" placeholder="Version List URL" required="required"/>
+						<help>Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.</help>
+					</question>
+				</if>
+			</if>
+			<if test="this.releaseType() === 'service'">
+				<question id="endpointUrl" display="The API service endpoint is">
+					<label>Where is the endpoint for your API?</label>
+					<input type="url" placeholder="Endpoint URL"/>
+					<help>Give a URL that's a starting point for people's scripts to access your API. This should be a service description document that helps the script to work out which services exist.</help>
+					<if test="this.documentationUrl() === ''">
+						<requirement test="this.endpointUrl() !== ''">You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.</requirement>
+					</if>
+					<if test="this.documentationUrl() !== ''">
+						<requirement test="this.endpointUrl() !== ''" level="standard">You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.</requirement>
+					</if>
+				</question>
+				<if test="this.provideDumps() === 'true'">
+					<question id="dumpManagement">
+						<label>How do you publish database dumps?</label>
 						<checkboxset>
 							<option value="current">
 								<label>as a single URL that's regularly updated</label>
-								<help>Choose this if there's one URL for people to download the most recent version of the current dataset.</help>
-								<requirement level="standard">You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.</requirement>
+								<help>Choose this if there's one URL for people to download the most recent version of the current database dump.</help>
+								<requirement level="standard">You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.</requirement>
 							</option>
 							<option value="template">
 								<label>as consistent URLs for each release</label>
-								<help>Choose this if your dataset URLs follow a regular pattern that includes the date of publication, for example, a URL that starts '2013-04'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
-								<requirement level="pilot">You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.</requirement>
+								<help>Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts '2013-04'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
+								<requirement level="exemplar">You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.</requirement>
 							</option>
 							<option value="list">
 								<label>as a list of releases</label>
-								<help>Choose this if you have a list of datasets on a web page or a feed (like Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
-								<requirement level="standard">You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.</requirement>
+								<help>Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
+								<requirement level="exemplar">You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all</requirement>
 							</option>
 						</checkboxset>
-						<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
-							<requirement>You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.</requirement>
-						</if>
 					</question>
-					<if test="this.versionManagement().current">
-						<question id="currentDatasetUrl" display="The current dataset is available at">
-							<label>Where is your current dataset?</label>
-							<input type="url" placeholder="Current Dataset URL" required="required"/>
-							<help>Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released.</help>
+					<if test="this.dumpManagement().current">
+						<question id="currentDumpUrl" display="The most recent database dump is always available at">
+							<label>Where is the current database dump?</label>
+							<input type="url" placeholder="Current Dump URL" required="required"/>
+							<help>Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.</help>
 						</question>
 					</if>
-					<if test="this.versionManagement().template">
-						<question id="versionsTemplateUrl" display="Releases follow this consistent URL pattern">
-							<label>What format do dataset release URLs follow?</label>
-							<input type="url" placeholder="Version Template URL" required="required"/>
+					<if test="this.dumpManagement().template">
+						<question id="dumpsTemplateUrl" display="Database dumps follow the consistent URL pattern">
+							<label>What format do database dump URLs follow?</label>
+							<input type="url" placeholder="Dump Template URL" required="required"/>
 							<help>This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`</help>
 						</question>
 					</if>
-					<if test="this.versionManagement().list">
-						<question id="versionsUrl" display="Releases of this data are listed at">
-							<label>Where is your list of dataset releases?</label>
-							<input type="url" placeholder="Version List URL" required="required"/>
-							<help>Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.</help>
+					<if test="this.dumpManagement().list">
+						<question id="dumpsUrl" display="A list of database dumps is at">
+							<label>Where is your list of available database dumps?</label>
+							<input type="url" placeholder="Dump List URL" required="required"/>
+							<help>Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.</help>
 						</question>
 					</if>
 				</if>
-				<if test="this.releaseType() === 'service'">
-					<question id="endpointUrl" display="The API service endpoint is">
-						<label>Where is the endpoint for your API?</label>
-						<input type="url" placeholder="Endpoint URL"/>
-						<help>Give a URL that's a starting point for people's scripts to access your API. This should be a service description document that helps the script to work out which services exist.</help>
-						<if test="this.documentationUrl() === ''">
-							<requirement test="this.endpointUrl() !== ''">You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.</requirement>
-						</if>
-						<if test="this.documentationUrl() !== ''">
-							<requirement test="this.endpointUrl() !== ''" level="standard">You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.</requirement>
-						</if>
-					</question>
-					<if test="this.provideDumps() === 'true'">
-						<question id="dumpManagement">
-							<label>How do you publish database dumps?</label>
-							<checkboxset>
-								<option value="current">
-									<label>as a single URL that's regularly updated</label>
-									<help>Choose this if there's one URL for people to download the most recent version of the current database dump.</help>
-									<requirement level="standard">You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.</requirement>
-								</option>
-								<option value="template">
-									<label>as consistent URLs for each release</label>
-									<help>Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts '2013-04'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
-									<requirement level="exemplar">You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.</requirement>
-								</option>
-								<option value="list">
-									<label>as a list of releases</label>
-									<help>Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they're released.</help>
-									<requirement level="exemplar">You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all</requirement>
-								</option>
-							</checkboxset>
-						</question>
-						<if test="this.dumpManagement().current">
-							<question id="currentDumpUrl" display="The most recent database dump is always available at">
-								<label>Where is the current database dump?</label>
-								<input type="url" placeholder="Current Dump URL" required="required"/>
-								<help>Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.</help>
-							</question>
-						</if>
-						<if test="this.dumpManagement().template">
-							<question id="dumpsTemplateUrl" display="Database dumps follow the consistent URL pattern">
-								<label>What format do database dump URLs follow?</label>
-								<input type="url" placeholder="Dump Template URL" required="required"/>
-								<help>This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`</help>
-							</question>
-						</if>
-						<if test="this.dumpManagement().list">
-							<question id="dumpsUrl" display="A list of database dumps is at">
-								<label>Where is your list of available database dumps?</label>
-								<input type="url" placeholder="Dump List URL" required="required"/>
-								<help>Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.</help>
-							</question>
-						</if>
-					</if>
-				</if>
-				<if test="this.changeFeed() === 'true'">
-					<question id="changeFeedUrl" display="A feed of changes to this data is at">
-						<label>Where is your feed of changes?</label>
-						<input type="url" placeholder="Change Feed URL" required="required"/>
-						<help>Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.</help>
-					</question>
-				</if>
-			</group>
-		</if>
+			</if>
+			<if test="this.changeFeed() === 'true'">
+				<question id="changeFeedUrl" display="A feed of changes to this data is at">
+					<label>Where is your feed of changes?</label>
+					<input type="url" placeholder="Change Feed URL" required="required"/>
+					<help>Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.</help>
+				</question>
+			</if>
+		</group>
 		<group id="format">
 			<label>Formats</label>
 			<help>how people can work with your data</help>
