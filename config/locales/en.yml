@@ -125,9 +125,11 @@ en:
     self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
-    embeddable_certificate: Embeddable certificate
+    embeddable_certificate: Embed on your site
+    embed_badge_instructions: Use the code below to add this badge to your site
     embed_instructions: Use the code below to embed this certificate on your site
-    view_embed_page: View embeddable page
+    embed_badge: Badge
+    view_embed_page: Certificate
 
   authentication:
     sign_in: Sign in
