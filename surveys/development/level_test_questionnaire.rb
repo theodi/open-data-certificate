@@ -1,8 +1,8 @@
 survey 'Level Test Questionnaire',
        :default_mandatory => 'false',
-       :dataset_title => 'q_dataTitle' do
+       :dataset_title => 'dataTitle' do
 
-  section_general 'General Information' do
+  section_general 'General Information', :display_header => false do
 
     q_dataTitle 'What\'s a good title for this data?',
       :help_text => 'This is a mandatory question,  it will be included in the basic count',

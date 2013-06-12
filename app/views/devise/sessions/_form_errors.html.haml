@@ -1,1 +1,5 @@
-= devise_error_messages!
+%div.alert.alert-box.alert-alert
+  %i.icon-exclamation-sign.icon-large.icon-white
+  %h3=I18n.t("errors.errors_occurred")
+  %ul
+    = errors.map { |msg| content_tag(:li, msg) }.join.html_safe
