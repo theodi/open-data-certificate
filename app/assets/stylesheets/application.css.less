@@ -727,6 +727,10 @@ nav .dropdown-menu-button {
 
   }
 
+  h2 {
+    line-height: 30px;
+  }
+
   .btn-primary {
     float: right;
     background: @odiPomegranate;
@@ -868,6 +872,7 @@ section {
 
   p {
     font-size: 23px;
+    line-height: 32px;
   }
 }
 
@@ -1184,6 +1189,7 @@ td.action {
   // brought in from main styles
   label {
     font-size: 22px;
+    line-height: 30px;
   }
 
   .choice input{
@@ -1193,6 +1199,7 @@ td.action {
     font-size:16px;
     color:@gray;
     -webkit-font-smoothing: antialiased;
+    line-height: 20px;
   }
 
 
@@ -1389,6 +1396,19 @@ td.action {
     p {
       font-size: 19px;
       margin-right: 20px;
+      max-height: 24px;
+
+      a {
+        color: inherit;
+      }
+    
+      .cropped {
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
@@ -1413,14 +1433,16 @@ td.action {
 .certificate-badge {
   width: 160px;
   height: 140px;
-  background: #bbb;
+  // background: #bbb;
   margin-bottom: 10px;
+  background: transparent center center no-repeat;
+  background-size:contain;
 }
 
 .certificate-level {
   font-weight: bold;
   font-size: 24px;
-  color: #888;
+  color: black;
   margin-bottom: 30px;
 
   small {
@@ -1435,40 +1457,26 @@ strong.certificate-level {
   font-weight: normal;
 }
 
+.level-styles(@color, @url){
+  .certificate-badge {
+    background-image:@url;
+  }
+  strong.certificate-level {
+    color: @color;
+  }
+}
+
 .basic-level {
-  .certificate-badge {
-    background: @basic;
-  }
-  .certificate-level {
-    color: @basic;
-  }
+  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
 }
-
 .pilot-level {
-  .certificate-badge {
-    background: @pilot;
-  }
-  .certificate-level {
-    color: @pilot;
-  }
+  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
 }
-
 .standard-level {
-  .certificate-badge {
-    background: @standard;
-  }
-  .certificate-level {
-    color: @standard;
-  }
+  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
 }
-
 .exemplar-level {
-  .certificate-badge {
-    background: @exemplar;
-  }
-  .certificate-level {
-    color: @exemplar;
-  }
+  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
 }
 
 .footer {
@@ -1519,7 +1527,7 @@ strong.certificate-level {
       color: #8e8c8c;
       font-size: 22px;
       font-weight: normal;
-      line-height: 26px;
+      line-height: 30px;
       margin: 15px 0 20px 0;
 
     }
@@ -1533,19 +1541,18 @@ strong.certificate-level {
       margin: 20px 0 10px 0;
 
       li {
-
         list-style: none;
-        padding-left: 141px;
-        padding-top: 16px;
-        min-height: 117px;
-        margin-bottom: 10px;
-
+        margin-bottom: 15px;
+        min-height: 60px;
+        padding-left: 75px;
+        padding-top: 5px;
+        
       }
 
-      li.kitemark1 { background: url(/assets/badges/no_level_badge.png) no-repeat top left; }
-      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; }
-      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; }
-      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; }
+      li.kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; background-size: 65px;}
 
     }
 
