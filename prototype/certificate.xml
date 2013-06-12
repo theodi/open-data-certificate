@@ -1213,11 +1213,17 @@
 					<requirement level="standard">You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date.</requirement>
 				</question>
 			</if>
-			<question id="engagementTeam" display="The community engagement team is at">
-				<label>Where is your community engagement team's home page?</label>
-				<input type="url" placeholder="Community Engagement Team Home Page URL"/>
+			<question id="engagementTeam">
+				<label>Do you have anyone who actively builds a community around this data?</label>
+				<yesno />
 				<requirement level="exemplar">You should <strong>build a community of people around your data</strong> to encourage wider use of your data.</requirement>
 			</question>
+			<if test="this.engagementTeam() === 'true'">
+				<question id="engagementTeamUrl" display="Community engagement is done by">
+					<label>Where is their home page?</label>
+					<input type="url" placeholder="Community Engagement Team Home Page URL" required="required" />
+				</question>
+			</if>
 		</group>
 		<group id="services">
 			<label>Services</label>
