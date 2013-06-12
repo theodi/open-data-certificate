@@ -8,7 +8,7 @@
     = csrf_meta_tags
     - unless session[:surveyor_javascript]
       :javascript
-        $.get('/has_js');
+        $.get('#{has_js_path}');
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
