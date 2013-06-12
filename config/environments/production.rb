@@ -8,11 +8,11 @@ OpenDataCertificate::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 #  config.cache_store = :memory_store # TODO: Default is memory store, but production will probably need to change to something else... but that decision is not yet made
-  config.cache_store = if ENV["MEMCACHED_HOSTS"]
-                         :mem_cache_store, ENV["MEMCACHED_HOSTS"]
-                       else
-                         :memory_store
-                       end
+  if ENV["MEMCACHED_HOSTS"]
+    config.cache_store = :mem_cache_store, ENV["MEMCACHED_HOSTS"]
+  else
+    config.cache_store = :memory_store
+  end
 
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
