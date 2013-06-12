@@ -1222,6 +1222,17 @@ td.action {
     -moz-box-shadow: 0 0 6px #f8b9b7;
     box-shadow: 0 0 6px #f8b9b7;
   }
+  
+  p.url_error {
+    background: #ff6700;
+    color: white;
+    padding: 20px;
+    margin-left: 0;
+    
+    &.hidden {
+      display: none;
+    }
+  }
 
   // this is our label replacement (for the question of multiple answers)
   .group_label{
@@ -1309,6 +1320,9 @@ td.action {
           background-color:@odiBlueLighter;
         }
       }
+    }
+    .url-error{
+      background-color:@odiCrimsonLight;
     }
   }
 
