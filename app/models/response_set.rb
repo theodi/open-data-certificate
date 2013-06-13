@@ -50,8 +50,11 @@ class ResponseSet < ActiveRecord::Base
   
   def all_urls_resolve?
     errors = []
-      response_code = HTTParty.get(response.string_value).code rescue nil
     responses_with_url_type.each do |response|
+      response_code = Rails.cache.fetch(response.string_value) 
+      if response_code.nil?
+        HTTParty.get(response.string_value).code rescue nil
+      end
       if response_code != 200
         response.error = true
         response.save
