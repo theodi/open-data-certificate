@@ -71,6 +71,7 @@ GEM
     formatador (0.2.4)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    google-analytics-rails (0.0.4)
     guard (1.8.0)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -218,6 +219,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.0)
   foreman
+  google-analytics-rails
   guard
   guard-test
   haml
