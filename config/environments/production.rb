@@ -79,6 +79,11 @@ OpenDataCertificate::Application.configure do
     }
 
   end
+  
+  # Load Google Analytics tracking ID
+  if ENV['GOOGLE_ANALYTICS_TRACKER']
+    GA.tracker = ENV['GOOGLE_ANALYTICS_TRACKER']
+  end
 
   # Enable threaded mode
   # config.threadsafe!
