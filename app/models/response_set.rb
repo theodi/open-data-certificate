@@ -44,10 +44,14 @@ class ResponseSet < ActiveRecord::Base
     @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
   
+  def responses_with_url_type
+    responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
+  end
+  
   def all_urls_resolve?
     errors = []
-    responses.select{ |r|  r.is_url?  }.each do |response|
       response_code = HTTParty.get(response.string_value).code rescue nil
+    responses_with_url_type.each do |response|
       if response_code != 200
         response.error = true
         response.save

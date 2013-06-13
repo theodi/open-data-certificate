@@ -16,10 +16,6 @@ class Response < ActiveRecord::Base
   def requirement
     @requirement ||= answer.requirement
   end
-  
-  def is_url?
-    answer.input_type == "url"
-  end
 
   def requirement_level_index
     @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
