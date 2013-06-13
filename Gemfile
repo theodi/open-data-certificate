@@ -45,6 +45,7 @@ group :production do
   gem 'foreman'
   gem 'mysql2'
   gem 'airbrake'
+  gem 'memcache-client'
 end
 
 gem 'jquery-rails'
@@ -77,3 +78,4 @@ gem "devise", ">= 2.2.3"
 
 gem 'dotenv-rails'
 gem 'httparty'
+gem 'google-analytics-rails'

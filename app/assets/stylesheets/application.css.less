@@ -106,7 +106,31 @@
 
     }
 
-    textarea { margin-bottom: 15px; }
+    h4 {
+      color: white;
+      font-size: 30px;
+      text-align: center;
+      margin-top: 20px;
+      a {
+        color: white;
+      }
+    }
+
+    textarea { 
+      margin-bottom: 15px; 
+    }
+
+    .span6:first-child {
+      border-right: thin white solid;
+    }
+
+    .span6 div:first-child {
+      margin-left: 138px;
+    }
+
+    .span6:last-child p:first-child {
+      text-align: center;
+    }
 
   }
 
@@ -130,12 +154,24 @@
 
   form { margin-bottom: 0; }
 
+  .form-field-inline {
+    label {
+      display: inline-block;
+    }
+    .forgot-password {
+      display: block;
+      color: black;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+
 }
 
 .modal-header {
 
   border-bottom: 0;
-  margin: 30px;
+  margin: 30px 30px 10px;
   padding: 0;
 
   h3 {
@@ -153,6 +189,7 @@
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 40px;
+  padding-top: 30px;
 
 }
 
@@ -751,7 +788,7 @@ nav .dropdown-menu-button {
   }
 }
 
-.registration_form_errors .alert-box {
+.registration_form_errors .alert-box, .sign_in_user_form_errors .alert-box {
   i {
     display: inline-block;
   }
@@ -1200,6 +1237,14 @@ td.action {
     color:@gray;
     -webkit-font-smoothing: antialiased;
     line-height: 20px;
+    a {
+      color: @gray;
+      text-decoration: none;
+      border-bottom: thin dotted #8E8C8C;
+      &:hover, &:focus {
+        border-bottom-style: solid;
+      }
+    }
   }
 
 
@@ -1454,14 +1499,16 @@ td.action {
 .certificate-badge {
   width: 160px;
   height: 140px;
-  background: #bbb;
+  // background: #bbb;
   margin-bottom: 10px;
+  background: transparent center center no-repeat;
+  background-size:contain;
 }
 
 .certificate-level {
   font-weight: bold;
   font-size: 24px;
-  color: #888;
+  color: black;
   margin-bottom: 30px;
 
   small {
@@ -1476,40 +1523,26 @@ strong.certificate-level {
   font-weight: normal;
 }
 
+.level-styles(@color, @url){
+  .certificate-badge {
+    background-image:@url;
+  }
+  strong.certificate-level {
+    color: @color;
+  }
+}
+
 .basic-level {
-  .certificate-badge {
-    background: @basic;
-  }
-  .certificate-level {
-    color: @basic;
-  }
+  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
 }
-
 .pilot-level {
-  .certificate-badge {
-    background: @pilot;
-  }
-  .certificate-level {
-    color: @pilot;
-  }
+  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
 }
-
 .standard-level {
-  .certificate-badge {
-    background: @standard;
-  }
-  .certificate-level {
-    color: @standard;
-  }
+  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
 }
-
 .exemplar-level {
-  .certificate-badge {
-    background: @exemplar;
-  }
-  .certificate-level {
-    color: @exemplar;
-  }
+  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
 }
 
 .footer {
@@ -1532,7 +1565,7 @@ strong.certificate-level {
 .embed-code {
   textarea {
     box-sizing: border-box;
-    width: 100%;
+    width: 300px;
   }
 }
 
@@ -1574,19 +1607,18 @@ strong.certificate-level {
       margin: 20px 0 10px 0;
 
       li {
-
         list-style: none;
-        padding-left: 141px;
-        padding-top: 16px;
-        min-height: 117px;
-        margin-bottom: 10px;
-
+        margin-bottom: 15px;
+        min-height: 60px;
+        padding-left: 75px;
+        padding-top: 5px;
+        
       }
 
-      li.kitemark1 { background: url(/assets/badges/no_level_badge.png) no-repeat top left; }
-      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; }
-      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; }
-      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; }
+      li.kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; background-size: 65px;}
+      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; background-size: 65px;}
 
     }
 

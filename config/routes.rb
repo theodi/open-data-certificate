@@ -43,6 +43,8 @@ OpenDataCertificate::Application.routes.draw do
   # Validators
   get 'resolve' => 'validators#resolve'
 
+  get 'has_js' => 'application#has_js'
+
   root :to => 'application#home'
 
   # The priority is based upon order of creation:

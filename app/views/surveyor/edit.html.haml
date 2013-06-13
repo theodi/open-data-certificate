@@ -33,12 +33,10 @@
 
     = render 'partials/dependents' unless @dependents.empty?
 
-    -# if @response_set.no_responses_for_section?(@section) # cache if response_set has no responses for current section
-    -#
-    -# We're going extra careful here because there have been some
-    -# caching based issues that we've not been able to get the 
+    -# If there were no responses by the user, the cache the blank survey for
+    -# other new users
     - if @response_set.responses.empty?
-      = cache("section_#{@section.id}") do
+      = cache("blank_survey_#{@response_set.survey_id}") do
         = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
     - else # no cache
       = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
