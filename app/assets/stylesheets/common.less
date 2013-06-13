@@ -1,0 +1,111 @@
+/*
+  © 2013 Open Data Institute
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
+/* This stylesheet contains common styles that are affected by width (determined
+   by LESS variables) and therefore will be different for different width
+   settings (as imported by wide.css.less and narrow.css.less) */
+
+/* import bootstrap this way so that we can alter variables just for this app */
+@import "twitter/bootstrap";
+
+@import "variables";
+
+.modal {
+  .border-radius(0);
+
+  .btn-large { 
+    width: 100%; 
+    .box-sizing(border-box); 
+    margin: 12px 0; 
+  }
+}
+
+.modal-body {
+  .log-in {
+    .form-field {
+      input[type=email], input[type=password] {
+        .border-radius(0);
+      }
+    }
+  }
+}
+
+
+// a button has been clicked and loading the next
+.btn.btn-confirmed{
+  &,&:hover{
+    #gradient > .striped(@btnPrimaryBackground);
+  }
+}
+
+/************************************************
+    Bootstrap --> Rails
+************************************************/
+
+// display error messages in alert block
+#error_explanation {
+  .alert();
+  .alert-error();
+  .alert-block();
+}
+
+.field_with_errors {
+  .control-group.error();
+}
+
+
+// make grey input text read easier
+input, textarea{
+  -webkit-font-smoothing: antialiased;
+  .box-shadow(none);
+}
+
+
+.main-default {
+  .form-field {
+    .clearfix;
+  }
+}
+
+
+// User auth //
+
+.user-links {
+  .clearfix;
+  margin-bottom: 15px;
+
+  .btn {
+    float: left;
+    margin-right: 4px;
+  }
+}
+
+
+#surveyor{
+  header {
+    .transition(background-color 0.25s);
+  }
+}
+
+#status_panel{
+  .transition(right 0.5s);
+}
+
+.certificate-data {
+  ul {
+    .clearfix;
+  }
+}

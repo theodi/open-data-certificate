@@ -4,8 +4,9 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title ODI Open Data Certificate
     = favicon_link_tag       "favicon.ico"
-    = stylesheet_link_tag    "application", :media => "screen and (min-width: 1210px)"
-    = stylesheet_link_tag    "narrower", :media => "screen and (max-width: 1210px)"
+    = stylesheet_link_tag    "wide", :media => "screen and (min-width: 1210px)"
+    = stylesheet_link_tag    "normal", :media => "screen and (max-width: 1210px)"
+    = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
 
