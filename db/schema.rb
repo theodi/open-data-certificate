@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613212741) do
+ActiveRecord::Schema.define(:version => 20130613221052) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20130613212741) do
     t.integer  "response_set_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "api_id"
   end
 
   create_table "response_sets", :force => true do |t|
