@@ -22,6 +22,13 @@ class ApplicationController < ActionController::Base
     render '/home/index'
   end
 
+  # A user pings this url if they have js enabled, so we can tell surveyor
+  # not to find unnecessary requirements.
+  def has_js
+    session[:surveyor_javascript] = "enabled"
+    render :text => 'ok'
+  end
+
   # mostly lifted from surveyor#create
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
