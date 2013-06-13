@@ -7,7 +7,7 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    - unless session[:surveyor_javascript]
+    - unless session[:surveyor_javascript] == 'enabled'
       :javascript
         $.get('#{has_js_path}');
 
@@ -34,12 +34,10 @@
           .navbar-inner
             %ul.nav.pull-right
               = main_menu_navigation
-
     .whiteout
       - if content_for?(:header)
         -# be sure to include flashes somewhere when overriding this
         = yield(:header)
-
       - else
         %header
           .container
