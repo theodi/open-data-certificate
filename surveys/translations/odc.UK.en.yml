@@ -380,7 +380,7 @@ questions:
         text: yes
         text_as_statement: "anonymised"
   lawfulDisclosure:
-    text: "Are you required by law to publish this data about individuals?"
+    text: "Are you required or permitted by law to publish this data about individuals?"
     text_as_statement: "By law, this data about individuals"
     answers:
       a_false:
@@ -409,7 +409,7 @@ questions:
   privacyImpactAssessmentUrl:
     text: "Where is your Privacy Impact Assessment published?"
     text_as_statement: "The Privacy Impact Assessment is published at"
-    help_text: "Give a URL to where people can check how you measure privacy risks to individuals. The ICO has recommendations about how to publish your Privacy Impact Assessment."
+    help_text: "Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information."
     answers:
       a_1:
         text: "Privacy Impact Assessment URL"
@@ -1215,7 +1215,7 @@ labels:
   standard_3:
     text: "You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
   pilot_4:
-    text: "You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>."
+    text: "You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>."
   standard_4:
     text: "You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure."
   pilot_5:

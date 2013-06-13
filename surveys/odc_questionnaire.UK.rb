@@ -609,7 +609,7 @@ survey 'Open Data Certificate Questionnaire',
     a_true 'yes',
       :text_as_statement => 'anonymised'
 
-    q_lawfulDisclosure 'Are you required by law to publish this data about individuals?',
+    q_lawfulDisclosure 'Are you required or permitted by law to publish this data about individuals?',
       :display_on_certificate => true,
       :text_as_statement => 'By law, this data about individuals',
       :pick => :one
@@ -622,7 +622,7 @@ survey 'Open Data Certificate Questionnaire',
       :text_as_statement => 'must be published',
       :requirement => ['pilot_4']
 
-    label_pilot_4 'You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>.',
+    label_pilot_4 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_4'
     dependency :rule => 'A and B and C'
@@ -680,7 +680,7 @@ survey 'Open Data Certificate Questionnaire',
     q_privacyImpactAssessmentUrl 'Where is your Privacy Impact Assessment published?',
       :display_on_certificate => true,
       :text_as_statement => 'The Privacy Impact Assessment is published at',
-      :help_text => 'Give a URL to where people can check how you measure privacy risks to individuals. The ICO has recommendations about how to publish your Privacy Impact Assessment.',
+      :help_text => 'Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.',
       :help_text_more_url => 'http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual

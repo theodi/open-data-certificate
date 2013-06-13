@@ -368,9 +368,9 @@
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
-						<label>Are you required by law to publish this data about individuals?</label>
+						<label>Are you required or permitted by law to publish this data about individuals?</label>
 						<yesno yes="must be published" />
-						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required to do so by law</strong>.</requirement>
+						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'true'">
 						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
@@ -391,7 +391,7 @@
 						<question id="privacyImpactAssessmentUrl" display="The Privacy Impact Assessment is published at">
 							<label>Where is your Privacy Impact Assessment published?</label>
 							<input type="url" placeholder="Privacy Impact Assessment URL"/>
-							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you measure privacy risks to individuals. The ICO has recommendations about how to publish your Privacy Impact Assessment.</help>
+							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
 							<requirement level="standard">You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
 						<if test="this.privacyImpactAssessmentUrl() !== ''">
