@@ -40,6 +40,8 @@ OpenDataCertificate::Application.routes.draw do
   get 'contact' => 'high_voltage/pages#show', :id => 'contact'
   get 'terms' => 'high_voltage/pages#show', :id => 'terms'
 
+  get 'has_js' => 'application#has_js'
+
   root :to => 'application#home'
 
   # The priority is based upon order of creation:
