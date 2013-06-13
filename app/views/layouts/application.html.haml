@@ -78,4 +78,4 @@
               %li
                 = link_to t('footmenu.get_in_touch'), '/contact'
 
-    = render :partial => 'layouts/google_analytics' if ga_code
+    = analytics_init if Rails.env.production?
