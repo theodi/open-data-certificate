@@ -51,6 +51,10 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def ga_code
+    ENV['GOOGLE_ANALYTICS_TRACKER']
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
