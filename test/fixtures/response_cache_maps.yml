@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  origin_id: 1
+  target_id: 1
+  response_set_id: 1
+
+two:
+  origin_id: 1
+  target_id: 1
+  response_set_id: 1
