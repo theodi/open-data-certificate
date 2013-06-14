@@ -23,17 +23,18 @@ class ResponseSet < ActiveRecord::Base
 
   # find which dependencies are active for this response set as a whole
   def depends
+    return @depends if @depends 
+
     deps = survey.dependencies.includes({:dependency_conditions => {:question => :answers}})
 
     resps = self.responses.all
 
     # gather if the dependencies are met in a hash
-    deps.all.reduce({}) do |mem, v|
+    @depends = deps.all.reduce({}) do |mem, v|
       mem[v.id] = v.is_met? self, resps
       mem
     end
   end
-
 
   def title_determined_from_responses
     @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_title}).first.try(:string_value)
@@ -53,11 +54,22 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def triggered_mandatory_questions
-    @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
+
+    @triggered_mandatory_questions ||= survey.mandatory_questions.select do |r|
+      r.dependency.nil? ? 
+        true : depends[r.dependency.id]
+    end
+
+    # @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
 
   def triggered_requirements
-    @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
+    @triggered_requirements ||= survey.requirements.select do |r|
+      r.dependency.id ? 
+        depends[r.dependency.id] : true
+    end
+
+    # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
 
   def all_mandatory_questions_complete?
