@@ -100,10 +100,10 @@
 
 @odiGrey: #8e8c8c;
 
-@basic: #0dbd37;
-@pilot: #ef3aab;
-@standard: #2254f3;
-@exemplar: #f9bc26;
+@basic: @odiBlue;
+@pilot: @odiBlue;
+@standard: @odiBlue;
+@exemplar: @odiBlue;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
@@ -1464,6 +1464,10 @@ td.action {
     width: 50%;
     float: left;
 
+    h4 {
+      margin-bottom: 5px;
+    }
+
     p {
       font-size: 19px;
       margin-right: 20px;
@@ -1790,6 +1794,15 @@ padding-bottom: 18px;
   float: left;
 }
 
+
+.certificate.hero-unit .btn-info {
+  margin: -102px auto 8px;
+  background-color: #fff;
+  float: none;
+display: block;
+color: @odiBlue;
+}
+
 }
 
 
@@ -1826,6 +1839,14 @@ margin-top: 30px;
       margin-left: 0;
     }
   }
+}
+
+.certificate-summary {
+padding: 0;
+}
+
+.certificate-data li {
+  width: 100%;
 }
 
 }
