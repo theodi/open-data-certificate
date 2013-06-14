@@ -33,7 +33,7 @@ class Survey < ActiveRecord::Base
   end
 
   def only_questions
-    @only_questions ||= questions.excluding(requirements)
+    questions.where('display_type != "label" OR requirement = ""')
   end
 
   def mandatory_questions
