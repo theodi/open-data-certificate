@@ -9,6 +9,9 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :survey
   has_one :certificate
 
+  # there is already a protected method with this
+  # has_many :dependencies, :through => :survey
+
   DEFAULT_TITLE = 'Untitled'
 
   scope :by_newest, order("response_sets.created_at DESC")
@@ -16,6 +19,19 @@ class ResponseSet < ActiveRecord::Base
 
   def title
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+  end
+
+  # find which dependencies are active for this response set as a whole
+  def depends
+    deps = survey.dependencies.includes({:dependency_conditions => {:question => :answers}})
+
+    resps = self.responses.all
+
+    # gather if the dependencies are met in a hash
+    deps.all.reduce({}) do |mem, v|
+      mem[v.id] = v.is_met? self, resps
+      mem
+    end
   end
 
 
