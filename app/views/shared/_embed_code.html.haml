@@ -1,5 +1,6 @@
 .modal.hide.fade.embed-code{:id => "embed-code-#{certificate.id}"}
   .modal-header
+    %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
     %h3= t("certificate.embeddable_certificate")
   .modal-body
     .row-fluid
