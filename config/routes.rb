@@ -3,7 +3,7 @@ OpenDataCertificate::Application.routes.draw do
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
     match '/:response_set_code/attained_level', :to => 'surveyor#attained_level', :as => 'view_my_survey_attained_level', :via => :get
-    match '/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements', :via => :get
+    match '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements', :via => :get
     match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
   end
