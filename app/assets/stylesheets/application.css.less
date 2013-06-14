@@ -515,7 +515,6 @@ header.affix {
 
     /* Background stripes (image has 30px of space on left to align) */
     background: url(/assets/background-home-header.gif) repeat-y center;
-    margin-bottom: 20px;
 
     .span4 {
 
@@ -1746,12 +1745,6 @@ section.improvement{
 
 // Media queries
 
-//
-// Responsive: phone
-// --------------------------------------------------
-
-
-
 
 
 
@@ -1764,13 +1757,37 @@ section.improvement{
 
 @media (max-width: 767px) {
 
+p.logo {
+  display: none;
+}
+
+
+
  }
 
 
 
+//
+// Responsive: phone
+// --------------------------------------------------
+
+
 @media (max-width: 479px) {
+
  header.home .container  h1 {
   color: green;
+}
+
+.odi-bleed .navbar .brand {
+padding-bottom: 18px;
+}
+
+.navbar-inverse .navbar-inner {
+  border-bottom: 1px solid #707070;
+}
+
+.navbar .nav.pull-right {
+  float: left;
 }
 
 }
@@ -1787,10 +1804,31 @@ section.improvement{
   color: red;
 }
 
-  
+
 
 }
 
+
+@media (max-width: 979px) {
+
+
+  #footer .footer-nav {
+clear: both;
+width: auto;
+margin-left: 0;
+margin-top: 30px;
+
+  ul.pull-right {
+    float: left;
+
+    li {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+  }
+}
+
+}
 
 
 
@@ -1826,6 +1864,9 @@ width: 328px;
 
 @media  (max-width: 1200px) {
 
+  .home .steps {
+  background: none;
+}
 
 #padd {
   .container {
@@ -1844,6 +1885,12 @@ line-height: 37px;
     }
     }
   }
+
+.span6.homepage-about-content {
+  clear: both;
+  margin-top: 30px;
+  width: auto;
+}
 }
 
 
