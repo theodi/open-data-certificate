@@ -26,7 +26,7 @@
 	<survey label="Open Data Certificate Questionnaire" 
 		default_mandatory="false" 
 		dataset_title="dataTitle"
-		description="&lt;p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.&lt;/p>&lt;p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).&lt;/p>&lt;p>If you need to save or finish an incomplete questionnaire you should register for a free account.&lt;/p>">
+		description="&lt;p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.&lt;/p>&lt;p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).&lt;/p>&lt;p>&lt;strong>You do not need to answer all the questions to get a certificate.&lt;/strong> Just answer those you can.&lt;/p>">
 		<translations en="default" />
 		<section_general label="General Information" display_header="false">
 			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />

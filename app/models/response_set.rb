@@ -120,6 +120,41 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+
+  # run updates through the response_cache_map, so that we can deal 
+  # with fields that have been claimed by a different response_set
+  #
+  # (allows us to cache the question html)
+  #
+  alias :original_update_from_ui_hash :update_from_ui_hash
+  def update_from_ui_hash(ui_hash)
+
+    # the api_ids in the ui_hash
+    api_ids = ui_hash.map do |_ord, response_hash|
+      response_hash["api_id"]
+    end
+
+
+    # find responses that have been claimed by another response_sets
+    Response.where(api_id: api_ids).where('response_set_id != ?', id).each do |response|
+      
+      # use a mapping to this response_sets api_id instead
+      rcm = ResponseCacheMap.find_or_create_by_origin_id_and_response_set_id(response.id, self.id)
+
+      logger.info "cache map replacing api_id - #{response.api_id} with #{rcm.api_id}"
+
+      # replace the one in the ui hash
+      ui_hash.each do |_ord, response_hash|
+        if response_hash["api_id"] == response.api_id
+          response_hash["api_id"] = rcm.api_id
+        end
+      end
+    end
+    
+    # pass through to the original method
+    original_update_from_ui_hash(ui_hash)
+  end
+
   def assign_to_user!(user)
     # This is a bit fragile, as it assumes that there is both no current user and no current dataset, and raises no notification of any issues
     # TODO: revisit and improve its handling of unexpected cases

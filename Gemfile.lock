@@ -106,6 +106,9 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
+    lograge (0.2.0)
+      actionpack
+      activesupport
     lumberjack (1.0.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -233,6 +236,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   less-rails-bootstrap
+  lograge
   memcache-client
   mocha
   mysql2
