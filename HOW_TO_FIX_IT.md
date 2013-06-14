@@ -2,10 +2,12 @@
 
 Now shit is on fire, _and_ broken glass is everywhere. Well done you.
 
-OK, so this is all Vagrant-powered now, which is awesome. You'll need a recent version of Vagrant, plus [my fork of the _vagrant-rackspace_ plugin](https://github.com/mitchellh/vagrant-rackspace/pull/4#issuecomment-19056323). You may need to [install the dummy box](https://github.com/mitchellh/vagrant-rackspace#quick-start), too. You'll also need the `.chef/rackspace_secrets.yaml` file, which looks like
+OK, so this is all Vagrant-powered now, which is awesome. You'll need a recent version of Vagrant, plus [my fork of the _vagrant-rackspace_ plugin](https://github.com/mitchellh/vagrant-rackspace/pull/4#issuecomment-19056323). You may need to [install the dummy box](https://github.com/mitchellh/vagrant-rackspace#quick-start), too. And you need to `vagrant plugin install vagrant-butcher`. You'll also need the `.chef/rackspace_secrets.yaml` file, which looks like
 
     username: <our_login>
     api_key: <our_key>
+    
+Jeni has a couple of tar archives containing the `.chef` and `.vagrant` configurations. Just grab these and untar into here.
     
 Now you should be able to do `vagrant status` and see what's what. If a node is acting up, then you can do like
 
