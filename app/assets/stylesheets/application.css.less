@@ -1765,7 +1765,13 @@ p.logo {
   display: none;
 }
 
+#login, #register  {
+  width: 335px;
+}
 
+#login input[type="text"], #register input[type="text"], #login input[type="email"], #register input[type="email"], #login input[type="password"], #register input[type="password"] {
+  width: 330px;
+}
 
  }
 
@@ -1792,6 +1798,8 @@ padding-bottom: 18px;
 
 .navbar .nav.pull-right {
   float: left;
+  display: block;
+  clear: both;
 }
 
 
@@ -1801,6 +1809,14 @@ padding-bottom: 18px;
   float: none;
 display: block;
 color: @odiBlue;
+}
+
+#register {
+  left: -2px;
+}
+
+#login {
+  left: -109px;
 }
 
 }
