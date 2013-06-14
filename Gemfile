@@ -46,6 +46,7 @@ group :production do
   gem 'mysql2'
   gem 'airbrake'
   gem 'memcache-client'
+  gem 'lograge'
 end
 
 gem 'jquery-rails'
