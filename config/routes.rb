@@ -42,6 +42,7 @@ OpenDataCertificate::Application.routes.draw do
   
   # Validators
   get 'resolve' => 'validators#resolve'
+  get 'data_kitten' => 'validators#data_kitten'
 
   get 'has_js' => 'application#has_js'
 
