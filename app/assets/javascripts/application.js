@@ -4,7 +4,6 @@
 //= require twitter/bootstrap
 
 $(function(){
-
   //////
   // Rails support
   //
@@ -25,14 +24,18 @@ $(function(){
 
   });
 
+  // Skrollr data settings
+  var bleed = $('body.odi-bleed').attr({
+    'data-0':'background-position:center -480px',
+    'data-2500':'background-position:center 1000px'
+  });
 
-	// Skrollr data settings
-	var bleed = $('body.odi-bleed').attr({
-		'data-0':'background-position:center -480px',
-		'data-2500':'background-position:center 1000px'
-	});
 
-	if (bleed.size()) skrollr.init({forceHeight: false});
+  // don't enable on touch devices, fix at:
+  // https://github.com/Prinzhorn/skrollr#what-you-need-in-order-to-support-mobile-browsers
+  // though primary concern is for it not to break for now
+  var touch = 'ontouchstart' in window;
+  if (bleed.size() && !touch) skrollr.init({forceHeight: false});
 
   // Event to close menus when clicking away off them
   var openMenu = false;
