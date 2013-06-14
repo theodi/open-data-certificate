@@ -40,4 +40,4 @@
 
           -requirements.each do |requirement|
             %li
-              = link_to without_instruction(requirement.text).html_safe, "take#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.question.id}"
+              = link_to without_instruction(requirement.text).html_safe, "take#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
