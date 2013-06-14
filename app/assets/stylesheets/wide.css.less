@@ -1,0 +1,53 @@
+/*
+  © 2013 Open Data Institute
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
+@import "common";
+
+// todo - use bigger size instead
+@gridColumns:             12;
+@gridColumnWidth:         70px;
+@gridGutterWidth:         30px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
+#padd {
+  .container {
+    margin-top: 50px;
+
+    h1 {
+      font-size: 70px;
+      line-height: 76px;
+    }
+
+    h2 {
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+}
+
+.home .steps {
+  /* Background stripes (image has 30px of space on left to align) */
+  background: url(/assets/background-home-header.gif) repeat-y center;
+}
+
+#footer  .footer-nav { 
+  margin-left: 30px; 
+}
+
+#surveyor fieldset.question-row aside {
+  width: 330px;
+}

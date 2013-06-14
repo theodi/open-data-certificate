@@ -17,77 +17,7 @@
 *= require surveyor_all
 */
 
-
-/* import bootstrap this way so that we can alter variables just for this app */
-@import "twitter/bootstrap";
-
-// override bootstrap variables here, see options at:
-//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
-@iconSpritePath:          "glyphicons-halflings.png";
-@iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-
-// use our own grey for the input field
-@gray: @odiGrey;
-@placeholderText: @odiGreyLight;
-@inputBorderRadius: 2px;
-
-// todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
-
-@odiBlue: #00b7ff;
-/* odiBlueLight - primarily for background of inputs in modals */
-@odiBlueLight: lighten(@odiBlue, 15%);
-@odiBlueLighter: lighten(@odiBlue, 36%);
-@odiBlueDark: darken(@odiBlue, 5%);
-@odiBlueDarker: darken(@odiBlue, 20%);
-
-@odiRed: #ff6700;
-@odiRedDark: darken(@odiRed, 3%);
-@odiRedLight: lighten(@odiRed, 15%);
-
-@odiCrimson: #d30102;
-@odiCrimsonDark: darken(@odiCrimson, 6%);
-@odiCrimsonLight: lighten(@odiCrimson, 53%);
-
-@odiOrange: #f99C06;
-@odiOrangeDark: darken(@odiOrange, 6%);
-
-@odiGreen: #0DBC37;
-@odiGreenDark: darken(@odiGreen, 6%);
-
-@odiPomegranate: #dc4810;
-@odiPomegranateDark: darken(@odiPomegranate, 3%);
-
-@odiGrey: #aaa;
-@odiGreyDark: darken(@odiGrey, 18%);
-@odiGreyDarker: darken(@odiGrey, 40%);
-@odiGreyLight: lighten(@odiGrey, 25%);
-@odiGreyLighter: lighten(@odiGrey, 40%);
-
-@btnPrimaryBackground: @odiRed;
-@btnPrimaryBackgroundHighlight: @odiRed;
-@btnInfoBackground:  @odiBlue;
-@btnInfoBackgroundHighlight: @odiBlue;
-
-@odiGrey: #8e8c8c;
-
-@basic: #0dbd37;
-@pilot: #ef3aab;
-@standard: #2254f3;
-@exemplar: #f9bc26;
-
-// @headingsFontFamily:    'Open Sans',sans-serif;
-// @headingsFontWeight:    400;
-
-// todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+@import "variables";
 
 /*
 //
@@ -137,7 +67,6 @@
   background: @odiBlue;
   width: 788px;
   margin-left: -394px;
-  .border-radius(0);
 
   h1 {
 
@@ -149,8 +78,6 @@
   }
 
   p { color: #fff; font-size: 20px; }
-
-  .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
 
   form { margin-bottom: 0; }
 
@@ -219,7 +146,6 @@
         margin-top: 5px;
         background: @odiBlueLight;
         border: 1px solid #fff;
-        .border-radius(0);
         width: 93%;
         height: 60px;
         padding: 0 10px;
@@ -287,29 +213,6 @@
 
 
 
-// a button has been clicked and loading the next
-.btn.btn-confirmed{
-  &,&:hover{
-    #gradient > .striped(@btnPrimaryBackground);
-  }
-}
-
-
-/************************************************
-    Bootstrap --> Rails
-************************************************/
-
-// display error messages in alert block
-#error_explanation {
-  .alert();
-  .alert-error();
-  .alert-block();
-}
-
-.field_with_errors {
-  .control-group.error();
-}
-
 
 /************************************************
     ODI Styling
@@ -356,12 +259,6 @@ dd {
   margin-bottom: 30px;
 }
 
-
-// make grey input text read easier
-input, textarea{
-  -webkit-font-smoothing: antialiased;
-  .box-shadow(none);
-}
 
 .btn-small {
   &, &:active, &:hover, &:focus {
@@ -427,11 +324,7 @@ header.affix {
 
 #padd {
   .container {
-    margin-top: 50px;
-
     h1 {
-      font-size: 70px;
-      line-height: 76px;
       color: @odiGrey;
       margin-bottom: 22px;
       margin-top: 35px;
@@ -439,12 +332,9 @@ header.affix {
     }
 
     h2 {
-      font-size: 30px;
-      line-height: 40px;
-      margin-bottom: 40px;
-      color: @odiGrey;
-      padding-left: 3px;
       
+
+
       strong {
          color: @odiGreyDark;
       }
@@ -482,8 +372,6 @@ header.affix {
 
   .steps {
 
-    /* Background stripes (image has 30px of space on left to align) */
-    background: url(/assets/background-home-header.gif) repeat-y center;
     margin-bottom: 20px;
 
     .span4 {
@@ -566,7 +454,9 @@ header.affix {
     font-weight: normal;
   }
 
-  h2.about-certificate { margin-top: -7px; }
+  h2.about-certificate { 
+    margin-top: -7px; 
+  }
 
   h2.about-odi {
     border-top: 1px solid #e1e1e1;
@@ -597,10 +487,6 @@ hr.heavy {
 }
 
 // Layout //
-
-body {
-  min-width: 1210px;
-}
 
 .container {
   padding: 0 20px;
@@ -844,7 +730,6 @@ header {
     }
 
   }
-  .footer-nav { margin-left: 30px; }
 
   a {
     color: #adaeaf;
@@ -1021,7 +906,6 @@ th {
   margin-top: 30px;
 
   .form-field {
-    .clearfix;
     margin-bottom: 35px;
 
     &.form-field-inline {
@@ -1055,20 +939,6 @@ th {
     font-style: normal;
     color: @odiGrey;
     display: block;
-  }
-}
-
-
-
-// User auth //
-
-.user-links {
-  .clearfix;
-  margin-bottom: 15px;
-
-  .btn {
-    float: left;
-    margin-right: 4px;
   }
 }
 
@@ -1203,8 +1073,6 @@ td.action {
       background-color:@odiGrey;
     }
     cursor: pointer;
-
-    .transition(background-color 0.25s);
 
     // override
     .container{
@@ -1354,7 +1222,6 @@ td.action {
 }
 
 #status_panel{
-  .transition(right 0.5s);
   background-color:@odiGreyLighter;
   position: absolute;
   right:0;
@@ -1428,7 +1295,6 @@ td.action {
 
 .certificate-data {
   ul {
-    .clearfix;
     margin-left: 0;
   }
 
