@@ -14,7 +14,7 @@ Now you should be able to do `vagrant status` and see what's what. If a node is 
 
 That `--provider` is very important, it defaults to VirtualBox otherwise.
 
-If you need more nodes, edit the line 80 in the _Vagrantfile_:
+If you need more nodes, edit line 80 in the _Vagrantfile_:
 
       10.times do |num|
 
