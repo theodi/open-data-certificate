@@ -94,10 +94,13 @@
           .done(function(json) {
             // Title
             $('#r_1_string_value').val(json.title)
-            // Publisher name
-            $('#r_3_string_value').val(json.publishers[0].name)
-            // Publisher URL
-            $('#r_4_string_value').val(json.publishers[0].homepage)
+            
+            if (json.publishers.length > 0) {
+              // Publisher name
+              $('#r_3_string_value').val(json.publishers[0].name)
+              // Publisher URL
+              $('#r_4_string_value').val(json.publishers[0].homepage)
+            }
             
             // Rights information
             if (json.rights.uri) {
@@ -159,7 +162,7 @@
               }
               
               // Frequency of releases
-              if (json.update_frequency.length > 0) {
+              if (json.update_frequency) {
                 $('#r_104_answer_id_189').prop('checked', true)
               }
               
