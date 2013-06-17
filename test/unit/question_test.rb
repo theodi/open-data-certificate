@@ -54,6 +54,7 @@ class QuestionTest < ActiveSupport::TestCase
     (1..5).to_a.sample.times { FactoryGirl.create(:question, requirement: "wrong_level_#{rand(10)}", survey_section: requirement.survey_section) } #wrong questions
 
     requirement.survey_section.survey.reload
+    requirement.save
 
     assert requirement.question_corresponding_to_requirement == the_right_question
   end
@@ -66,6 +67,7 @@ class QuestionTest < ActiveSupport::TestCase
     (1..5).to_a.sample.times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
 
     requirement.survey_section.survey.reload
+    requirement.save
 
     assert requirement.answer_corresponding_to_requirement == the_right_answer
   end
@@ -77,6 +79,8 @@ class QuestionTest < ActiveSupport::TestCase
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert_false requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -89,6 +93,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer.id, string_value: 'my answer')
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -105,6 +111,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer2.id)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert_false requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -120,6 +128,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer3.id)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -135,6 +145,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer2.id)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert_false requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -150,6 +162,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer3.id)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
@@ -165,6 +179,8 @@ class QuestionTest < ActiveSupport::TestCase
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer4.id)
 
     requirement.survey_section.survey.reload
+    requirement.save
+
     response_set.reload
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
