@@ -189,8 +189,8 @@
             }
             
             for (var i = 0; i < json.distributions.length; i++) {
-              machineReadable = ["CSV", "XLS", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "API", "GEORSS", "SHP"]
-              openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "API", "HTML", "GEORSS", "SHP"]
+              machineReadable = ["CSV", "XLS", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "GEORSS", "SHP"]
+              openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "GEORSS"]
               
               // Is this data machine-readable?
               if ($.inArray(json.distributions[i].format.toUpperCase(), machineReadable)) {
@@ -223,7 +223,7 @@
             
             // Modification Date
             if (json.modified_date.length > 0) {
-              $('#r_102_answer_id_188').prop('checked', true)
+              $('#r_103_answer_id_188').prop('checked', true)
             }
             
             // Publisher
@@ -232,7 +232,7 @@
             }
             
             // Temporal coverage
-            if (json.temporal_coverage.start.length > 0 && (json.temporal_coverage.end.length > 0) {
+            if (json.temporal_coverage.start != null && json.temporal_coverage.end != null) {
               $('#r_110_answer_id_195').prop('checked', true)
             }
             
