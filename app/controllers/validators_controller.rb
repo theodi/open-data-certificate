@@ -23,7 +23,10 @@ class ValidatorsController < ApplicationController
         :licenses => dataset.licenses,
         :update_frequency => dataset.update_frequency,
         :keywords => dataset.keywords,
-        :distributions => dataset.distributions
+        :distributions => dataset.distributions,
+        :release_date => dataset.issued,
+        :modified_date => dataset.modified,
+        :temporal_coverage => dataset.temporal
       }
     else
       render :nothing => true

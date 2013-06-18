@@ -215,10 +215,25 @@
             if (json.description.length > 0) {
               $('#r_101_answer_id_186').prop('checked', true)
             }
+
+            // Release Date
+            if (json.release_date.length > 0) {
+              $('#r_102_answer_id_187').prop('checked', true)
+            }
+            
+            // Modification Date
+            if (json.modified_date.length > 0) {
+              $('#r_102_answer_id_188').prop('checked', true)
+            }
             
             // Publisher
             if (json.publishers.length > 0) {
               $('#r_108_answer_id_193').prop('checked', true)
+            }
+            
+            // Temporal coverage
+            if (json.temporal_coverage.start.length > 0 && (json.temporal_coverage.end.length > 0) {
+              $('#r_110_answer_id_195').prop('checked', true)
             }
             
             // Frequency of releases
