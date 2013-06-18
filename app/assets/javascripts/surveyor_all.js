@@ -325,7 +325,7 @@ jQuery(document).ready(function(){
           if (el.value.indexOf("data.gov.uk") != -1) {
             checkMe("frequentChanges", 103)
           }
-            
+                      
           // Does your data documentation contain machine readable documentation for:
           
           // Title
@@ -377,11 +377,14 @@ jQuery(document).ready(function(){
           // Are there any codes used in this data? 
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("vocabulary", 212)
+            checkMe("codelists", 212)
           }
           
           // Contact email address
           fillMe("contactEmail", json.publishers[0].mbox)
+          
+          // Trigger status panel update
+          $('#status_panel').trigger('update');
           
         });
     }
