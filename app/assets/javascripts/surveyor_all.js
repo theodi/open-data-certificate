@@ -157,5 +157,205 @@ jQuery(document).ready(function(){
   // translations selection
   $(".surveyor_language_selection").show();
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
+  
+  // Resolve URLs
+  $('input[type=url]').change(function () {
+    var el = this
+    var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+    if(regex.test(el.value)) {
+      $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
+      $.getJSON('/resolve', { url: el.value } )
+        .done(function(json) {
+          $(el).parent().spin(false);
+          if (json.status == 200) {
+            $(el).attr('class', 'string')
+            $(el).parent().next('.url_error').attr('class', 'span7 url_error hidden');
+          } else {
+            $(el).attr('class', 'string fail')
+            $(el).parent().next('.url_error').attr('class', 'span7 url_error');
+          }
+        });
+    }
+  })
+  
+  // Data Kitten Stuff
+  
+  // Utility function to populate input fields by identifier
+  function fillMe(identifier, val) {
+    $('[data-reference-identifier="'+ identifier +'"] input.string, [data-reference-identifier="'+ identifier +'"] select').val(val)
+  }
+  
+  // Utility function to check input fields by identifier
+  function checkMe(identifier, value) {
+    $('[data-reference-identifier="'+ identifier +'"] [value="'+ value +'"]').prop('checked', true)
+  }
+  
+  $('[data-reference-identifier="documentationUrl"] input.string').change(function () {
+    var el = this
+    var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+    if(regex.test(el.value)) {
+      $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
+      $.getJSON('/data_kitten', { url: el.value } )
+        .done(function(json) {
+          // Title
+          fillMe("dataTitle", json.title)
+          
+          if (json.publishers.length > 0) {
+            // Publisher name
+            fillMe("publisher", json.publishers[0].name)
+            // Publisher URL
+            fillMe("publisherUrl", json.publishers[0].homepage)
+          }
+          
+          // Data type
+                
+          if (json.update_frequency.length == 0 && json.distributions.length == 1) {
+            // One-off release of a single dataset
+            checkMe("releaseType", 4)
+          } else if (json.update_frequency.length == 0 && json.distributions.length > 1) {
+            checkMe("releaseType", 3)
+            // One-off release of a set of related datasets
+          } else if (json.update_frequency.length > 0 && json.distributions.length > 1) {
+            // Ongoing release
+            checkMe("releaseType", 5)
+          }
+          
+          // A service or API for accessing open data
+          if (json.title.indexOf("API") >= 0 || json.description.indexOf("API") >= 0 ) {
+            checkMe("releaseType", 6)
+          }
+                      
+          // Rights information
+          if (json.rights) {
+            // Yes, you have the rights to publish this data as open data
+            checkMe("publisherRights", 9)
+            // Rights statement
+            fillMe("copyrightURL", json.rights.uri)
+            
+            // Data License
+            switch(json.rights.dataLicense) {
+              case "http://opendatacommons.org/licenses/by/":
+                fillMe("dataLicence", 34)
+                break;
+              case "http://opendatacommons.org/licenses/odbl/":
+                fillMe("dataLicence", 35)
+                break;
+              case "http://opendatacommons.org/licenses/pddl/":
+                fillMe("dataLicence", 36)
+                break;
+              case "http://creativecommons.org/publicdomain/zero/1.0/":
+                fillMe("dataLicence", 37)
+                break;
+              case "http://reference.data.gov.uk/id/open-government-licence":
+                fillMe("dataLicence", 38)
+                break;
+            }
+            
+            // Content License
+            switch(json.rights.contentLicense) {
+              case "http://creativecommons.org/licenses/by/2.0/uk/":
+                fillMe("contentLicence", 52)
+                break;
+              case "http://creativecommons.org/licenses/by-sa/2.0/uk/":
+                fillMe("contentLicence", 53)
+                break;
+              case "http://creativecommons.org/publicdomain/zero/1.0/":
+                fillMe("contentLicence", 54)
+                break;
+              case "http://reference.data.gov.uk/id/open-government-licence":
+                fillMe("contentLicence", 55)
+                break;
+            }
+          } else if (json.licenses) {
+            // Yes, you have the rights to publish this data as open data
+            checkMe("publisherRights", 9)
+          
+            // Data License
+            switch(json.licenses[0].uri) {
+              case "http://opendatacommons.org/licenses/by/":
+                fillMe("dataLicence", 34)
+                break;
+              case "http://opendatacommons.org/licenses/odbl/":
+                fillMe("dataLicence", 35)
+                break;
+              case "http://opendatacommons.org/licenses/pddl/":
+                fillMe("dataLicence", 36)
+                break;
+              case "http://creativecommons.org/publicdomain/zero/1.0/":
+                fillMe("dataLicence", 37)
+                break;
+              case "http://reference.data.gov.uk/id/open-government-licence":
+                // Open Government Licence covers data and content
+                fillMe("dataLicence", 38)
+                fillMe("contentLicence", 55)
+                break;
+            }
+        
+          }
+          
+          for (var i = 0; i < json.distributions.length; i++) {
+            machineReadable = ["CSV", "XLS", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "GEORSS", "SHP"]
+            openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "GEORSS"]
+            
+            // Is this data machine-readable?
+            if ($.inArray(json.distributions[i].format.toUpperCase(), machineReadable)) {
+              checkMe("machineReadable", 151)
+            }
+            
+            // Is this data in a standard open format?
+            if ($.inArray(json.distributions[i].format.toUpperCase(), openFormat)) {
+              checkMe("openStandard", 153)
+            }
+          }
+          
+            
+          // Does your data documentation contain machine readable documentation for:
+          
+          // Title
+          if (json.title.length > 0) {
+            checkMe("documentationMetadata", 185)
+          }
+
+          // Description
+          if (json.description.length > 0) {
+            checkMe("documentationMetadata", 186)
+          }
+
+          // Release Date
+          if (json.release_date.length > 0) {
+            checkMe("documentationMetadata", 187)
+          }
+          
+          // Modification Date
+          if (json.modified_date.length > 0) {
+            checkMe("documentationMetadata", 188)
+          }
+          
+          // Publisher
+          if (json.publishers.length > 0) {
+            checkMe("documentationMetadata", 193)
+          }
+          
+          // Temporal coverage
+          if (json.temporal_coverage.start != null && json.temporal_coverage.end != null) {
+            checkMe("documentationMetadata", 195)
+          }
+          
+          // Frequency of releases
+          if (json.update_frequency) {
+            checkMe("documentationMetadata", 189)
+          }
+          
+          // Keywords
+          if (json.keywords.length > 0) {
+            checkMe("documentationMetadata", 197)
+          }
+          
+          // Contact email address
+          fillMe("contactEmail", json.publishers[0].mbox)
+          
+        });
+    }
+  });
 
 });
