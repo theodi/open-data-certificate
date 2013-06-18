@@ -161,35 +161,79 @@
                   $('#r_29_answer_id').val(55)
                   break;
               }
-              
-              // Does your data documentation contain machine readable documentation for:
-              
-              // Title
-              if (json.title.length > 0) {
-                $('#r_100_answer_id_185').prop('checked', true)
+            } else if (json.licenses) {
+              // Yes, you have the rights to publish this data as open data
+              $('#r_6_answer_id_9').prop('checked', true)
+            
+              // Data License
+              switch(json.licenses[0].uri) {
+                case "http://opendatacommons.org/licenses/by/":
+                  $('#r_22_answer_id').val(34)
+                  break;
+                case "http://opendatacommons.org/licenses/odbl/":
+                  $('#r_22_answer_id').val(35)
+                  break;
+                case "http://opendatacommons.org/licenses/pddl/":
+                  $('#r_22_answer_id').val(36)
+                  break;
+                case "http://creativecommons.org/publicdomain/zero/1.0/":
+                  $('#r_22_answer_id').val(37)
+                  break;
+                case "http://reference.data.gov.uk/id/open-government-licence":
+                  // Open Government Licence covers data and content
+                  $('#r_22_answer_id').val(38)
+                  $('#r_29_answer_id').val(55)
+                  break;
               }
-
-              // Description
-              if (json.description.length > 0) {
-                $('#r_101_answer_id_186').prop('checked', true)
-              }
-              
-              // Publisher
-              if (json.publishers.length > 0) {
-                $('#r_108_answer_id_193').prop('checked', true)
-              }
-              
-              // Frequency of releases
-              if (json.update_frequency) {
-                $('#r_104_answer_id_189').prop('checked', true)
-              }
-              
-              // Keywords
-              if (json.keywords.length > 0) {
-                $('#r_112_answer_id_197').prop('checked', true)
-              }
-              
+          
             }
+            
+            for (var i = 0; i < json.distributions.length; i++) {
+              machineReadable = ["CSV", "XLS", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "API", "GEORSS", "SHP"]
+              openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "API", "HTML", "GEORSS", "SHP"]
+              
+              // Is this data machine-readable?
+              if ($.inArray(json.distributions[i].format.toUpperCase(), machineReadable)) {
+                $('#r_82_answer_id_151').prop('checked', true)
+              }
+              
+              // Is this data in a standard open format?
+              if ($.inArray(json.distributions[i].format.toUpperCase(), openFormat)) {
+                $('#r_83_answer_id_153').prop('checked', true)
+              }
+            }
+            
+              
+            // Does your data documentation contain machine readable documentation for:
+            
+            // Title
+            if (json.title.length > 0) {
+              $('#r_100_answer_id_185').prop('checked', true)
+            }
+
+            // Description
+            if (json.description.length > 0) {
+              $('#r_101_answer_id_186').prop('checked', true)
+            }
+            
+            // Publisher
+            if (json.publishers.length > 0) {
+              $('#r_108_answer_id_193').prop('checked', true)
+            }
+            
+            // Frequency of releases
+            if (json.update_frequency) {
+              $('#r_104_answer_id_189').prop('checked', true)
+            }
+            
+            // Keywords
+            if (json.keywords.length > 0) {
+              $('#r_112_answer_id_197').prop('checked', true)
+            }
+            
+            // Contact email address
+            $('#r_128_string_value').val(json.publishers[0].mbox)
+            
           });
       }
     });
