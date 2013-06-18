@@ -92,7 +92,7 @@ class ResponseSet < ActiveRecord::Base
         response.save
       end
     end
-    return false if errors.length > 0
+    errors.length > 0 or true
   end
 
   def all_mandatory_questions_complete?
