@@ -80,6 +80,7 @@
 
 @odiOrange: #f99C06;
 @odiOrangeDark: darken(@odiOrange, 6%);
+@odiOrangeLight: lighten(@odiOrange, 39%);
 
 @odiGreen: #0DBC37;
 @odiGreenDark: darken(@odiGreen, 6%);
@@ -1375,7 +1376,7 @@ td.action {
 
   &.highlight-mandatory{
     .mandatory{
-      background-color:@odiCrimsonLight;
+      background-color:@odiOrangeLight;
       &.has-response{
         background-color:@white;
         &.active{
