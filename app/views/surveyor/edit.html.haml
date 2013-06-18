@@ -102,6 +102,24 @@
               $('#r_4_string_value').val(json.publishers[0].homepage)
             }
             
+            // Data type
+            
+            if (json.update_frequency.length == 0 && json.distributions.length == 1) {
+              // One-off release of a single dataset
+              $('#r_5_answer_id_4').prop('checked', true)
+            } else if (json.update_frequency.length == 0 && json.distributions.length > 1) {
+              // One-off release of a set of related datasets
+              $('#r_5_answer_id_3').prop('checked', true)
+            } else if (json.update_frequency.length > 0 && json.distributions.length > 1) {
+              // Ongoing release
+              $('#r_5_answer_id_5').prop('checked', true)
+            }
+            
+            // A service or API for accessing open data
+            if (json.title.indexOf("API") >= 0 || json.description.indexOf("API") >= 0 ) {
+              $('#r_5_answer_id_6').prop('checked', true)
+            }
+                        
             // Rights information
             if (json.rights.uri) {
               // Yes, you have the rights to publish this data as open data
