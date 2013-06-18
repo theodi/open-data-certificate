@@ -293,6 +293,18 @@ jQuery(document).ready(function(){
         
           }
           
+          // Was all this data originally created or gathered by you? 
+          // Assumption for data.gov.uk
+          if (el.value.indexOf("data.gov.uk") != -1) {
+            checkMe("publisherOrigin", 13)
+          }
+          
+          // Can individuals be identified from this data?
+          // Assumption for data.gov.uk
+          if (el.value.indexOf("data.gov.uk") != -1) {
+            checkMe("dataPersonal", 68)
+          }
+          
           for (var i = 0; i < json.distributions.length; i++) {
             machineReadable = ["CSV", "XLS", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "GEORSS", "SHP"]
             openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "GEORSS"]
@@ -308,6 +320,11 @@ jQuery(document).ready(function(){
             }
           }
           
+          // Does this data change at least daily?
+          // Assumption for data.gov.uk
+          if (el.value.indexOf("data.gov.uk") != -1) {
+            checkMe("frequentChanges", 103)
+          }
             
           // Does your data documentation contain machine readable documentation for:
           
@@ -349,6 +366,18 @@ jQuery(document).ready(function(){
           // Keywords
           if (json.keywords.length > 0) {
             checkMe("documentationMetadata", 197)
+          }
+          
+          // Do the data formats use vocabularies?
+          // Assumption for data.gov.uk
+          if (el.value.indexOf("data.gov.uk") != -1) {
+            checkMe("vocabulary", 209)
+          }
+          
+          // Are there any codes used in this data? 
+          // Assumption for data.gov.uk
+          if (el.value.indexOf("data.gov.uk") != -1) {
+            checkMe("vocabulary", 212)
           }
           
           // Contact email address
