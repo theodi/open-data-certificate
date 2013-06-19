@@ -1,4 +1,4 @@
-.certificate.hero-unit{class:@certificate.attained_level+'-level'}
+.certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
 
   = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
 

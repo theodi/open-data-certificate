@@ -10,6 +10,11 @@ class CertificatesController < ApplicationController
 
   def show
     @certificate = Certificate.find params[:id]
+
+    # pretend unpublished certificates don't exist
+    unless @certificate.published?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def create

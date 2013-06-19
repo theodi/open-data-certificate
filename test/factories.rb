@@ -16,6 +16,10 @@ FactoryGirl.define do
 
   factory :certificate do
     response_set
+
+    factory :published_certificate do
+      published true
+    end
   end
 
   sequence :unique_survey_access_code do |n|
