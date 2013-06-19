@@ -1,6 +1,8 @@
 class Certificate < ActiveRecord::Base
   belongs_to :response_set
 
+  has_one :user, :through => :response_set
+
   attr_accessible :published, :name, :attained_level, :curator
 
   class << self
