@@ -161,6 +161,7 @@ en:
   improvements:
     heading: How can I improve my open data?
     return_to_questionnaire: Return to questionnaire
+    return_to_dashboard: Return to dashboard
     levels:
       basic:
         title: The basics
