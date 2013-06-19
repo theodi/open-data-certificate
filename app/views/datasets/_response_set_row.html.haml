@@ -9,7 +9,7 @@
     - if first_response_set
       %p 
         %small
-          %a How can I improve my open data?
+          =link_to(t('dashboard.how_do_i_improve_my_open_data'), surveyor.view_my_survey_requirements_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code))
 
   %td.last-updated
     - if first_response_set
