@@ -10,6 +10,15 @@ class CertificatesController < ApplicationController
 
   def show
     @certificate = Certificate.find params[:id]
+
+    # pretend unpublished certificates don't exist
+    unless @certificate.published?
+
+      # but not if the current user owns them
+      unless current_user && current_user == @certificate.user
+        raise ActiveRecord::RecordNotFound
+      end
+    end
   end
 
   def create

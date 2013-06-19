@@ -5,8 +5,12 @@ class Question < ActiveRecord::Base
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
+  before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
   after_save :update_mandatory
+
+  belongs_to :question_corresponding_to_requirement, :class_name => "Question"
+  belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
 
   # either provided text_as_statement, or fall back to text
   def statement_text
@@ -29,14 +33,6 @@ class Question < ActiveRecord::Base
     #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
     #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
     @is_a_requirement ||= display_type == 'label' && !requirement.blank?
-  end
-
-  def question_corresponding_to_requirement
-    @question_corresponding_to_requirement ||= survey_section.survey.only_questions.detect{|q|q.requirement && q.requirement.include?(requirement)}
-  end
-
-  def answer_corresponding_to_requirement
-    @answer_corresponding_to_requirement ||= survey_section.survey.only_questions.map(&:answers).flatten.detect{|a|a.requirement && a.requirement.include?(requirement)}
   end
 
   def requirement_met_by_responses?(responses)
@@ -85,6 +81,21 @@ class Question < ActiveRecord::Base
   private
   def set_default_value_for_required
     self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
+  end
+
+  private
+  def cache_question_or_answer_corresponding_to_requirement
+    if survey_section && is_a_requirement?
+      self.question_corresponding_to_requirement ||= survey_section.survey.only_questions.detect do |q|
+        q.requirement && requirement && q.requirement.include?(requirement)
+      end
+
+      unless self.question_corresponding_to_requirement
+        self.answer_corresponding_to_requirement ||= survey_section.survey.only_questions.map(&:answers).flatten.detect do |a|
+          a.requirement && requirement && a.requirement.include?(requirement)
+        end
+      end
+    end
   end
 
 end

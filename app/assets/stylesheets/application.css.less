@@ -21,6 +21,31 @@
 /* import bootstrap this way so that we can alter variables just for this app */
 @import "twitter/bootstrap";
 
+// RESPONSIVE CLASSES
+// ------------------
+
+@import "twitter/bootstrap/responsive-utilities.less";
+
+
+// MEDIA QUERIES
+// ------------------
+
+// Large desktops
+@import "twitter/bootstrap/responsive-1200px-min.less";
+
+// Tablets to regular desktops
+@import "twitter/bootstrap/responsive-768px-979px.less";
+
+// Phones to portrait tablets and narrow desktops
+@import "twitter/bootstrap/responsive-767px-max.less";
+
+
+// RESPONSIVE NAVBAR
+// ------------------
+
+// From 979px and below, show a button to toggle navbar contents
+@import "twitter/bootstrap/responsive-navbar.less";
+
 // override bootstrap variables here, see options at:
 //   https://github.com/twitter/bootstrap/blob/master/less/variables.less
 @iconSpritePath:          "glyphicons-halflings.png";
@@ -32,16 +57,17 @@
 @inputBorderRadius: 2px;
 
 // todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+// @gridColumns:             12;
+// @gridColumnWidth:         70px;
+// @gridGutterWidth:         30px;
+// @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
 
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
 @odiBlueLight: lighten(@odiBlue, 15%);
 @odiBlueLighter: lighten(@odiBlue, 36%);
+@odiBlueTint: #e7f7fc;
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
 
@@ -75,19 +101,19 @@
 
 @odiGrey: #8e8c8c;
 
-@basic: #0dbd37;
-@pilot: #ef3aab;
-@standard: #2254f3;
-@exemplar: #f9bc26;
+@basic: @odiBlue;
+@pilot: @odiBlue;
+@standard: @odiBlue;
+@exemplar: @odiBlue;
 
 // @headingsFontFamily:    'Open Sans',sans-serif;
 // @headingsFontWeight:    400;
 
 // todo - use bigger size instead
-@gridColumns:             12;
-@gridColumnWidth:         70px;
-@gridGutterWidth:         30px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+// @gridColumns:             12;
+// @gridColumnWidth:         70px;
+// @gridGutterWidth:         30px;
+// @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
 /*
 //
@@ -316,6 +342,13 @@
 ************************************************/
 // source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
 
+// mobile - make some elements snap to the sides
+@media (max-width: 767px) {
+  .whiteout, header, footer{
+    margin:0 -20px;
+    padding:0 20px;
+  }
+}
 
 
 // Global styles //
@@ -435,7 +468,6 @@ header.affix {
       color: @odiGrey;
       margin-bottom: 22px;
       margin-top: 35px;
-
     }
 
     h2 {
@@ -484,7 +516,6 @@ header.affix {
 
     /* Background stripes (image has 30px of space on left to align) */
     background: url(/assets/background-home-header.gif) repeat-y center;
-    margin-bottom: 20px;
 
     .span4 {
 
@@ -598,17 +629,22 @@ hr.heavy {
 
 // Layout //
 
-body {
-  min-width: 1210px;
-}
-
 .container {
-  padding: 0 20px;
+  padding: 0 inherit;
 }
 
 .navbar-inner {
   padding: 0;
   height: 60px;
+
+  .label a {
+    color: #fff;
+  }
+
+  .label a:hover {
+    color: @odiBlueDarker;
+    text-decoration: none;
+  }
 }
 
 #topbar {
@@ -1076,13 +1112,30 @@ th {
 
 // My certificates view //
 
+.main-default .first-response-set i, .main-default  .previous-response-set i {
+display: inline-block;
+color: @odiRed;
+}
+
 .first-response-set {
-  background: @odiBlueLighter;
+  background: @odiBlueTint;
 
   td.level {
     text-align: center;
     padding: 13px 30px 5px 15px;
     width: 48px;
+    border-right: 1px solid #fff;
+  
+    p {
+    line-height: 15px;
+
+      small a {
+      font-size: 12px;
+      color: @odiBlue;
+      font-weight: normal;
+      
+     }
+    }
   }
 
   td.last-updated {
@@ -1096,7 +1149,16 @@ th {
   }
 }
 
+td.delete {
+    .btn-small {
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+  }
+
 .previous-response-set {
+
+  border-top: 1px solid @odiGreyLighter;
 
   td {
     height: 30px;
@@ -1136,8 +1198,8 @@ th.previous-title {
 td.level {
   .certificate-badge {
     margin: 0 auto;
-    width: 50px;
-    height: 40px;
+    width: 100px;
+    height: 50px;
   }
 
   font-size: 12px;
@@ -1146,10 +1208,11 @@ td.level {
 }
 
 td.last-updated {
-  width: 180px;;
+  width: 110px;;
   font-size: 12px;
   line-height: 17px;
   color: @odiGreyDark;
+  padding-left: 20px;
 
   time {
     font-size: 15px;
@@ -1158,7 +1221,7 @@ td.last-updated {
 }
 
 td.status {
-  width: 300px;
+  width: 250px;
   font-size: 15px;
 
   &.published {
@@ -1438,6 +1501,10 @@ td.action {
     width: 50%;
     float: left;
 
+    h4 {
+      margin-bottom: 5px;
+    }
+
     p {
       font-size: 19px;
       margin-right: 20px;
@@ -1655,7 +1722,7 @@ section.improvement{
 
     font-size: 27px;
     margin: 0;
-    padding-left: 90px;
+    padding-left: 100px;
 
   }
 
@@ -1663,7 +1730,7 @@ section.improvement{
 
     line-height: 20px;
     margin: 0 0 15px 0;
-    padding-left: 90px;
+    padding-left: 100px;
     max-width: 90%;
 
   }
@@ -1715,3 +1782,221 @@ section.improvement{
   }
 
 }
+
+
+// Media queries
+
+
+
+
+
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+
+@media (max-width: 767px) {
+
+p.logo {
+  display: none;
+}
+
+#login, #register  {
+  width: 335px;
+}
+
+#login input[type="text"], #register input[type="text"], #login input[type="email"], #register input[type="email"], #login input[type="password"], #register input[type="password"] {
+  width: 330px;
+}
+
+#start-cert-modal{
+margin-left: 0;
+width: 100%;
+
+  h1 {
+    display: block;
+    clear: both;
+    margin-bottom: 20px;
+  }
+}
+
+.modal-body {
+  padding-left: 30px;
+padding-right: 20px;
+.log-in {
+background: none;
+  }
+}
+
+
+
+}
+
+
+
+
+
+//
+// Responsive: phone
+// --------------------------------------------------
+
+
+@media (max-width: 479px) {
+
+.odi-bleed .navbar .brand {
+padding-bottom: 18px;
+}
+
+.navbar-inverse .navbar-inner {
+  border-bottom: 1px solid #707070;
+}
+
+.navbar .nav.pull-right {
+  float: left;
+  display: block;
+  clear: both;
+}
+
+
+.certificate.hero-unit .btn-info {
+  margin: -102px auto 8px;
+  background-color: #fff;
+  float: none;
+display: block;
+color: @odiBlue;
+}
+
+#register {
+  left: -2px;
+}
+
+#login {
+  left: -109px;
+}
+
+}
+
+
+
+// 
+// Responsive: tablet
+// --------------------------------------------------
+
+
+@media (min-width: 480px) and (max-width: 767px) {
+
+
+
+}
+
+
+@media (max-width: 979px) {
+
+
+  #footer .footer-nav {
+clear: both;
+width: auto;
+margin-left: 0;
+margin-top: 30px;
+
+  ul.pull-right {
+    float: left;
+
+    li {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+  }
+}
+
+.certificate-summary {
+padding: 0;
+}
+
+.certificate-data li {
+  width: 100%;
+}
+
+
+
+
+}
+
+
+
+
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+
+
+#padd {
+  .container {
+    .offset8 {
+margin-left: 416px;
+}
+    .span4 {
+width: 328px;
+}
+    }
+  }
+
+}
+
+  //
+// Responsive: desktop to Large desktop 
+// --------------------------------------------------
+
+
+@media  (max-width: 1200px) {
+
+  .home .steps {
+  background: none;
+}
+
+#padd {
+  .container {
+    h1 {
+    font-size: 56px;
+    line-height: 69px;
+    background-color: #fff;
+    padding: 0 5px;
+      }
+
+    h2 {
+      font-size: 28px;
+line-height: 37px;
+ background-color: #fff;
+    padding: 0 3px;
+    }
+    }
+  }
+
+.span6.homepage-about-content {
+  clear: both;
+  margin-top: 30px;
+  width: auto;
+}
+
+.question-meta p {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+#surveyor fieldset.question-row aside {
+  padding: 10px;
+width: 230px;
+}
+
+
+}
+
+
+
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528163600) do
+ActiveRecord::Schema.define(:version => 20130619124058) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -50,10 +50,11 @@ ActiveRecord::Schema.define(:version => 20130528163600) do
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "attained_level"
     t.string   "curator"
+    t.boolean  "published",       :default => false
   end
 
   create_table "datasets", :force => true do |t|
@@ -130,21 +131,32 @@ ActiveRecord::Schema.define(:version => 20130528163600) do
     t.integer  "display_width"
     t.string   "custom_class"
     t.string   "custom_renderer"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
     t.string   "requirement"
-    t.string   "required",               :default => "",    :null => false
+    t.string   "required",                                 :default => "",    :null => false
     t.string   "help_text_more_url"
     t.string   "text_as_statement"
-    t.boolean  "display_on_certificate", :default => false
+    t.boolean  "display_on_certificate",                   :default => false
+    t.string   "question_corresponding_to_requirement_id"
+    t.string   "answer_corresponding_to_requirement_id"
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
   add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
+
+  create_table "response_cache_maps", :force => true do |t|
+    t.integer  "origin_id"
+    t.integer  "target_id"
+    t.integer  "response_set_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "api_id"
+  end
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"
@@ -173,10 +185,11 @@ ActiveRecord::Schema.define(:version => 20130528163600) do
     t.string   "string_value"
     t.string   "response_other"
     t.string   "response_group"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "survey_section_id"
     t.string   "api_id"
+    t.boolean  "error",             :default => false
   end
 
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true

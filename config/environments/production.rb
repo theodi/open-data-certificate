@@ -6,12 +6,18 @@ OpenDataCertificate::Application.configure do
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
   
   if ENV["MEMCACHED_HOSTS"]
     config.cache_store = :mem_cache_store, ENV["MEMCACHED_HOSTS"]
   else
     config.cache_store = :memory_store
+  end
+  
+  config.lograge.enabled = true
+
+  config.lograge.custom_options = lambda do |event|
+    {:time => event.time}
   end
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -52,7 +58,7 @@ OpenDataCertificate::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( badge.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -81,8 +87,8 @@ OpenDataCertificate::Application.configure do
   end
   
   # Load Google Analytics tracking ID
-  if ENV['GOOGLE_ANALYTICS_TRACKER']
-    GA.tracker = ENV['GOOGLE_ANALYTICS_TRACKER']
+  if ENV['GOOGLE_ANALYTICS_CERTIFICATE']
+    GA.tracker = ENV['GOOGLE_ANALYTICS_CERTIFICATE']
   end
 
   # Enable threaded mode

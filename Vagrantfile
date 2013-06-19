@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     mysql_certificate_config.vm.provider :rackspace do |rs|
       rs.username        = y["username"]
       rs.api_key         = y["api_key"]
-      rs.flavor          = /1GB/
+      rs.flavor          = /8GB/
       rs.image           = /Precise/
       rs.public_key_path = "./.chef/id_rsa.pub"
 #      rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
       config.vm.provider :rackspace do |rs|
         rs.username        = y["username"]
         rs.api_key         = y["api_key"]
-        rs.flavor          = /512MB/
+        rs.flavor          = /1GB/
         rs.image           = /Precise/
         rs.public_key_path = "./.chef/id_rsa.pub"
 #        rs.endpoint        = "https://lon.servers.api.rackspacecloud.com/v2"
@@ -77,7 +77,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  6.times do |num|
+  10.times do |num|
 
     index = "%02d" % [ num + 1 ]
 
