@@ -25,7 +25,7 @@ en:
 
   levels:
     none:
-      title: None
+      title: No level
       title_with_level: No level
       description: this data does not satisfy the fundamental requirements for open data.
     basic:
@@ -69,8 +69,8 @@ en:
     page_title: My certificates
     latest_published_certificate: Latest published certificate
     copy_certificate:
-      make_a_copy: Make a copy
-      and_edit: and edit
+      make_a_copy: Update
+      and_edit: this questionnaire
     previous_versions: Previous versions
     start_new_certificate: Start new certificate
     you_are_currently_editing_this_certificate: You are currently editing this certificate
