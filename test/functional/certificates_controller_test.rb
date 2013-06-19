@@ -16,9 +16,4 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-
-  test "other" do
-    assert false
-  end
-
 end
