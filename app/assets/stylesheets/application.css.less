@@ -80,6 +80,7 @@
 
 @odiOrange: #f99C06;
 @odiOrangeDark: darken(@odiOrange, 6%);
+@odiOrangeLight: lighten(@odiOrange, 39%);
 
 @odiGreen: #0DBC37;
 @odiGreenDark: darken(@odiGreen, 6%);
@@ -1181,7 +1182,7 @@ td.level {
 }
 
 td.last-updated {
-  width: 180px;;
+  width: 180px;
   font-size: 12px;
   line-height: 17px;
   color: @odiGreyDark;
@@ -1375,7 +1376,7 @@ td.action {
 
   &.highlight-mandatory{
     .mandatory{
-      background-color:@odiCrimsonLight;
+      background-color:@odiOrangeLight;
       &.has-response{
         background-color:@white;
         &.active{
@@ -1403,7 +1404,7 @@ td.action {
   // also .hover for oldie fallback
   &:hover, &.hover, &.stick{
     right:0px;
-  };
+  }
 
   &.affix, &.affix-bottom{
     position: fixed;
@@ -1891,8 +1892,6 @@ padding: 0;
 }
 
 
-
-
 }
 
 
@@ -1904,7 +1903,6 @@ padding: 0;
 
 
 @media (min-width: 768px) and (max-width: 979px) {
-
 
 
 #padd {
@@ -1928,42 +1926,48 @@ width: 328px;
 @media  (max-width: 1200px) {
 
   .home .steps {
-  background: none;
-}
+    background: none;
+  }
 
-#padd {
-  .container {
-    h1 {
-    font-size: 56px;
-    line-height: 69px;
-    background-color: #fff;
-    padding: 0 5px;
+  #padd {
+    .container {
+      h1 {
+      font-size: 56px;
+      line-height: 69px;
+      background-color: #fff;
+      padding: 0 5px;
+        }
+
+      h2 {
+        font-size: 28px;
+        line-height: 37px;
+        background-color: #fff;
+        padding: 0 3px;
       }
-
-    h2 {
-      font-size: 28px;
-line-height: 37px;
- background-color: #fff;
-    padding: 0 3px;
-    }
     }
   }
 
-.span6.homepage-about-content {
-  clear: both;
-  margin-top: 30px;
-  width: auto;
-}
+  .span6.homepage-about-content {
+    clear: both;
+    margin-top: 30px;
+    width: auto;
+  }
 
-.question-meta p {
-  font-size: 15px;
-  line-height: 20px;
-}
+  .question-meta p {
+    font-size: 15px;
+    line-height: 20px;
+  }
 
-#surveyor fieldset.question-row aside {
-  padding: 10px;
-width: 230px;
-}
+  #surveyor fieldset.question-row aside {
+    padding: 10px;
+    width: 230px;
+  }
+
+  #footer {
+    .footer-nav {
+      margin-left: 0;
+    }
+  }
 
 
 }
