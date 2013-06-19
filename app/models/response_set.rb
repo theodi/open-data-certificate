@@ -2,6 +2,7 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
 
   before_save :generate_certificate
+  after_destroy :destroy_dataset_if_no_repsonses
 
   attr_accessible :dataset_id
 
@@ -176,6 +177,11 @@ class ResponseSet < ActiveRecord::Base
   def newest_completed_in_dataset?
     # TODO: this method would need to be extended to handle "newest for survey" - for phase 2...
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
+  end
+
+  private
+  def destroy_dataset_if_no_repsonses
+    dataset.destroy_if_no_repsonses
   end
 
 end

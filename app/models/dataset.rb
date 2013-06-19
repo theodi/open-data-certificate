@@ -22,4 +22,8 @@ class Dataset < ActiveRecord::Base
     response_sets.completed.by_newest.limit(1).first
   end
 
+  def destroy_if_no_repsonses
+    destroy if response_sets.empty?
+  end
+
 end
