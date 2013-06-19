@@ -181,7 +181,7 @@ class ResponseSet < ActiveRecord::Base
 
   private
   def destroy_dataset_if_no_repsonses
-    dataset.destroy_if_no_repsonses
+    dataset.try(:destroy_if_no_repsonses)
   end
 
 end
