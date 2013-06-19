@@ -368,6 +368,11 @@ jQuery(document).ready(function(){
             checkMe("documentationMetadata", 197)
           }
           
+          // Distributions
+          if (json.distributions.length > 0) {
+            checkMe("documentationMetadata", 198)
+          }
+          
           // Do the data formats use vocabularies?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
