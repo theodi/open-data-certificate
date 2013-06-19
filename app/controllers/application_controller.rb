@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
         @response_set.copy_answers_from_response_set!(source_response_set)
       end
 
-      flash[:notice] = t('surveyor.survey_started_success')
+      # flash[:notice] = t('surveyor.survey_started_success')
       redirect_to(surveyor.edit_my_survey_path(
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
     else
