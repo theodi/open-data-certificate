@@ -11,7 +11,7 @@ class ValidatorsController < ApplicationController
     end
   end
    
-  def data_kitten
+  def autofill
     dataset = DataKitten::Dataset.new(access_url: params[:url])
     if dataset.supported?
       render :json => {
