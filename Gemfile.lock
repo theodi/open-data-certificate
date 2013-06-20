@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/theodi/data-kitten.git
-  revision: 85533a5ec3c818af33445b0276fe49554c98daaa
+  remote: git://github.com/theodi/data_kitten.git
+  revision: de82eb07484c4ca0fa172213ba19c52c0082a5c5
   specs:
-    data-kitten (0.0.1)
+    data_kitten (0.0.1)
       git
       json
       linkeddata
@@ -297,7 +297,7 @@ DEPENDENCIES
   airbrake
   cancan
   coffee-rails (~> 3.2.1)
-  data-kitten!
+  data_kitten!
   devise (>= 2.2.3)
   dotenv-rails
   factory_girl_rails (~> 4.0)
