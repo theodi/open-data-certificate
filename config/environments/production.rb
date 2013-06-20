@@ -15,6 +15,7 @@ OpenDataCertificate::Application.configure do
   end
   
   config.lograge.enabled = true
+  config.lograge.log_format = :logstash
 
   config.lograge.custom_options = lambda do |event|
     {:time => event.time}
