@@ -13,7 +13,7 @@ class ValidatorsController < ApplicationController
    
   def data_kitten
     dataset = DataKitten::Dataset.new(access_url: params[:url])
-    unless dataset.supported? == nil
+    if dataset.supported?
       render :json => {
         :title => dataset.data_title,
         :description => dataset.description,
