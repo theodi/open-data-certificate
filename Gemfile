@@ -80,4 +80,4 @@ gem "devise", ">= 2.2.3"
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'google-analytics-rails'
-gem 'data-kitten', :git => "git://github.com/theodi/data-kitten.git"
+gem 'data-kitten', :require => 'data_kitten', :git => "git://github.com/theodi/data-kitten.git"
