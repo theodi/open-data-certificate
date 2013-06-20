@@ -198,7 +198,7 @@ jQuery(document).ready(function(){
     var regex = new RegExp("^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?");
     if(el.value.match(urlRegex)) {
       $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
-      $.getJSON('/data_kitten', { url: el.value } )
+      $.getJSON('/autofill', { url: el.value } )
         .done(function(json) {
           // Title
           fillMe("dataTitle", json.title)
@@ -309,16 +309,14 @@ jQuery(document).ready(function(){
           }
           
           for (var i = 0; i < json.distributions.length; i++) {
-            machineReadable = ["CSV", "XLS", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "GEORSS", "SHP"]
-            openFormat = ["CSV", "HTML", "RDF", "XML", "WMS", "ODS", "RDFA", "KML", "RSS", "JSON", "ICAL", "SPARQL", "KML", "SHP", "GEORSS"]
             
             // Is this data machine-readable?
-            if ($.inArray(json.distributions[i].format.toUpperCase(), machineReadable)) {
+            if (json.distributions[i].structured === true) {
               checkMe("machineReadable", 151)
             }
             
             // Is this data in a standard open format?
-            if ($.inArray(json.distributions[i].format.toUpperCase(), openFormat)) {
+            if (json.distributions[i].open === true) {
               checkMe("openStandard", 153)
             }
           }
