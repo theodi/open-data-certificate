@@ -47,6 +47,7 @@ group :production do
   gem 'mysql2'
   gem 'airbrake'
   gem 'memcache-client'
+  gem 'logstash-event'
   gem 'lograge'
 end
 

@@ -107,6 +107,7 @@ GEM
     lograge (0.2.0)
       actionpack
       activesupport
+    logstash-event (1.1.5)
     lumberjack (1.0.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -235,6 +236,7 @@ DEPENDENCIES
   less-rails
   less-rails-bootstrap
   lograge
+  logstash-event
   memcache-client
   mocha
   mysql2
