@@ -159,10 +159,13 @@ jQuery(document).ready(function(){
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
   
   // Resolve URLs
+  
+  var urlRegex = /^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?/i;
+  
   $('input[type=url]').change(function () {
     var el = this
-    var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
-    if(regex.test(el.value)) {
+    var regex = new RegExp("^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?");
+    if(el.value.match(urlRegex)) {
       $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
       $.getJSON('/resolve', { url: el.value } )
         .done(function(json) {
@@ -192,8 +195,8 @@ jQuery(document).ready(function(){
   
   $('[data-reference-identifier="documentationUrl"] input.string').change(function () {
     var el = this
-    var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
-    if(regex.test(el.value)) {
+    var regex = new RegExp("^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?");
+    if(el.value.match(urlRegex)) {
       $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
       $.getJSON('/data_kitten', { url: el.value } )
         .done(function(json) {
