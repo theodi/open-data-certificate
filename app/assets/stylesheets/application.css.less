@@ -254,10 +254,6 @@
 
       }
 
-      /* Making input text white loses the 'invalid' colour */
-      /* Add it back */
-      input[type=email]:invalid { color: #cc0000; }
-      input[type=email]:valid { color: #fff; }
 
     }
 
@@ -773,11 +769,6 @@ nav .dropdown-menu-button {
     color: #fff;
     font-size: 20px;
   }
-
-  /* Making input text white loses the 'invalid' colour */
-  /* Add it back */
-  input[type=email]:invalid { color: #cc0000; }
-  input[type=email]:valid { color: #fff; }
 
   .form-field-inline {
     float: left;
@@ -1369,13 +1360,16 @@ td.action {
     position: relative;
     padding-top: 10px;
 
-    // focussed elements
-    &.active{
+
+    &.active {
+
       // hard to do the odd outline
 
       // outline: 1px solid @odiBlueLight;
       background-color: @odiBlueLighter;
     }
+
+
 
     aside{
       display:none;
@@ -1406,7 +1400,6 @@ td.action {
       background-color:@odiCrimsonLight;
     }
   }
-
 
 }
 
@@ -1473,7 +1466,7 @@ td.action {
 
   .status_texts {
     dd,dt{
-      display:none;
+      display:none; 
       &.active{
         display:block;
       }

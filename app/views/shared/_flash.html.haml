@@ -1,4 +1,4 @@
-.flash.alert{ :class => "alert-#{type}" }
+.flash.alert{ :class => "alert-#{type}", 'data-dismiss' => "alert" }
   - if type.to_s == 'alert'
     %i.icon-exclamation-sign.icon-large.icon-white
   - if type.to_s == 'notice'
