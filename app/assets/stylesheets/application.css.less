@@ -1282,6 +1282,7 @@ td.action {
     margin: 15px 0;
   }
 
+
   // custom
   input.string{
     width:100%;
@@ -1381,6 +1382,7 @@ td.action {
   }
 
 }
+
 
 #status_panel{
   .transition(right 0.5s);
@@ -1966,6 +1968,26 @@ width: 328px;
 }
 
 
+//
+// IE conditional styles
+// --------------------------------------------------
 
+.lt9 {
+
+  /* Setting line-heights in IE centres the input text.
+     Doing this in other browsers means you get a massive text cursor - not great. */
+
+  #login, #register, .modal-body .log-in .form-field {
+    input[type="text"], input[type="email"], input[type="password"] {
+      line-height: 60px;
+    }
+  }
+
+  .main-default input,
+  input.string {
+    line-height: 60px;
+  }
+
+}
 
 
