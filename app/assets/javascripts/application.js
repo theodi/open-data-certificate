@@ -335,5 +335,9 @@ $(function(){
   $('#status_panel').trigger('update');
 
 
+  // Placeholders for <= IE9
+
+  $('input, textarea').placeholder();
+
 
 });
