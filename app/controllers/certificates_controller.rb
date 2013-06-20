@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  before_filter :redirect_to_root, except: [:show, :embed, :badge] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
+  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
 
   def index
     @search = params[:search]
@@ -25,6 +25,19 @@ class CertificatesController < ApplicationController
     # placeholder to handle searching as a POST from the index page
     index
     render action: 'index'
+  end
+
+  # for now, this is very restricted - will only allow user to publish
+  def update
+    @certificate = Certificate.find params[:id]
+
+    if current_user && current_user == @certificate.user
+      @certificate.update_attributes published: true
+      flash[:notice] = "Published"
+    else
+      flash[:warning] = "Unable to publish"
+    end
+    redirect_to dashboard_path
   end
 
   def embed

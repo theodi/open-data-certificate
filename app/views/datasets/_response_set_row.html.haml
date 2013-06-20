@@ -23,7 +23,14 @@
       = link_to(t('dashboard.edit_and_publish'), surveyor.continue_my_survey_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code), :class => 'btn btn-small btn-info')
   %td.action
     - if response_set.newest_completed_in_dataset? && response_set.certificate
-      = link_to(t('dashboard.embed_code'), "#embed-code-#{response_set.certificate.id}", :class => 'btn btn-small btn-info btn-unstyled', 'data-toggle' => :modal)
+
+      - if response_set.certificate.published?
+        = link_to(t('dashboard.embed_code'), "#embed-code-#{response_set.certificate.id}", :class => 'btn btn-small btn-info btn-unstyled', 'data-toggle' => :modal)
+      - else
+        -# form slightly messes up the styling
+        = form_for response_set.certificate do |f|
+          = f.hidden_field :published, value: true
+          = f.submit t('dashboard.publish_certificate'), class: 'btn btn-small btn-info btn-unstyled'
   %td.action
     - if response_set.newest_completed_in_dataset? && first_response_set
       = form_for response_set.dataset, :url => dataset_start_questionnaire_path(response_set.dataset) do |f|

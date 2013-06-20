@@ -1,6 +1,9 @@
 .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
 
-  = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+  - if @certificate.published?
+    = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+  - else
+    %p.btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
 
   .certificate-badge.centered
 
