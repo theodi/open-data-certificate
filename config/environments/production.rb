@@ -15,10 +15,7 @@ OpenDataCertificate::Application.configure do
   end
   
   config.lograge.enabled = true
-
-  config.lograge.custom_options = lambda do |event|
-    {:time => event.time}
-  end
+  config.lograge.log_format = :logstash
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
