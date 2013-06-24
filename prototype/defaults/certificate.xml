@@ -106,10 +106,10 @@
 		<group id="licensing">
 			<label>Licensing</label>
 			<help>how you give people permission to use your data</help>
-			<question id="copyrightURL" display="Copyright and database rights are described at">
-				<label>Where do you describe copyright and database rights?</label>
-				<input type="url" placeholder="Rights Statement URL"/>
-				<help>Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.</help>
+			<question id="copyrightURL" display="Copyright is described at">
+				<label>Where do you describe the copyright of this data?</label>
+				<input type="url" placeholder="Copyright Statement URL"/>
+				<help>Give a URL to a copyright statement which shows who owns copyright for the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.</help>
 				<requirement level="pilot">You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data.</requirement>
 			</question>
 			<if test="this.copyrightURL() !== ''">
