@@ -9,9 +9,6 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="questionnaire" mode="structure" />
 	</xsl:variable>
-	<xsl:result-document href="odc_questionnaire.xml" method="xml" indent="yes">
-		<xsl:sequence select="$structure" />
-	</xsl:result-document>
 	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
