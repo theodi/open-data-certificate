@@ -139,88 +139,17 @@
 					<help more="http://labs.creativecommons.org/2011/ccrel-guide/">It's good practice to embed information about licences in machine-readable formats so people can automatically attribute your data back to you when they use it.</help>
 				</question>
 			</if>
-			<question id="dataLicence" display="This data is available under">
-				<label>Under which licence can people reuse this data?</label>
-				<select required="required">
-					<option/>
-					<option value="odc-by">Open Data Commons Attribution License</option>
-					<option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
-					<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
-					<option value="na" display="">Not applicable</option>
-					<option value="other" display="">Other...</option>
-				</select>
-				<help>Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights, they've expired, or you've waived them, choose 'Not applicable'.</help>
-			</question>
-			<if test="this.dataLicence() === 'na'">
-				<question id="dataNotApplicable" display="This data is not licensed because">
-					<label>Why does a licence not apply to this data?</label>
-					<radioset required="required">
-						<option value="norights" display="there are no database rights in it">
-							<label>there are no database rights in this data</label>
-							<help>Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything.</help>
-						</option>
-						<option value="expired" display="the database rights have expired">
-							<label>database rights have expired</label>
-							<help>Database rights last ten years. If data was last changed over ten years ago then database rights have expired.</help>
-						</option>
-						<option value="waived" display="">
-							<label>database rights have been waived</label>
-							<help>This means no one owns the rights and anyone can do whatever they want with this data.</help>
-						</option>
-					</radioset>
-				</question>
-				<if test="this.dataNotApplicable() === 'waived'">
-					<question id="dataWaiver" display="Database rights have been waived with">
-						<label>Which waiver do you use to waive database rights?</label>
-						<select required="required">
-							<option/>
-							<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-							<option value="cc0">Creative Commons CCZero</option>
-							<option value="other" display="">Other...</option>
-						</select>
-						<help>You need a statement to show people you've done this so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.</help>
-					</question>
-					<if test="this.dataWaiver() === 'other'">
-						<question id="dataOtherWaiver" display="Database rights have been waived with">
-							<label>Where is the waiver for the database rights?</label>
-							<input type="url" required="required" placeholder="Waiver URL"/>
-							<help>Give a URL to your own publicly available waiver so people can check that it does waive your database rights.</help>
-						</question>
-					</if>
-				</if>
-			</if>
-			<if test="this.dataLicence() === 'other'">
-				<question id="otherDataLicenceName" display="This data is available under">
-					<label>What is the name of your licence?</label>
-					<input required="required" placeholder="Other Licence Name"/>
-					<help>If you use a different licence, we need the name so people can see it on your Open Data Certificate.</help>
-				</question>
-				<question id="otherDataLicenceURL" display="This licence is at">
-					<label>Where is your licence?</label>
-					<input type="url" required="required" placeholder="Other Licence URL"/>
-					<help>Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
-				</question>
-				<question id="otherDataLicenceOpen">
-					<label>Is the licence an open licence?</label>
-					<yesno required="required"/>
-					<help more="http://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
-					<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
-				</question>
-			</if>
-			<question id="contentLicence" display="The content is available under">
-				<label>Under which licence can others reuse content?</label>
+			<question id="contentLicence" display="The data is available under">
+				<label>Under which licence can others reuse this data?</label>
 				<select required="required">
 					<option/>
 					<option value="cc-by">Creative Commons Attribution</option>
 					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
-				<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'.</help>
+				<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the data, it's expired, or you've waived them, choose 'Not applicable'.</help>
 			</question>
 			<if test="this.contentLicence() === 'na'">
 				<question id="contentNotApplicable" display="The content in this data is not licensed because">
@@ -248,7 +177,7 @@
 							<option value="cc0">Creative Commons CCZero</option>
 							<option value="other">Other...</option>
 						</select>
-						<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.</help>
+						<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.</help>
 					</question>
 					<if test="this.contentWaiver() === 'other'">
 						<question id="contentOtherWaiver" display="Copyright has been waived with">
@@ -309,7 +238,7 @@
 				<question id="appliedAnon" display="This data about individuals has been">
 					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
 					<yesno required="pilot" yes="anonymised" />
-					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the <a href="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">ICO Anonymisation Code of Practice</a>.</help>
+					<help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
@@ -326,42 +255,25 @@
 					</if>
 				</if>
 				<if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-					<question id="privacyImpactAssessmentExists" display="The curator has">
-						<label>Have you carried out a Privacy Impact Assessment?</label>
-						<yesno yes="carried out a Privacy Impact Assessment" no="not carried out a Privacy Impact Assessment" />
-						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
-						<requirement level="pilot">You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals.</requirement>
+					<question id="riskAssessmentExists" display="The curator has">
+						<label>Have you assessed the risks of disclosing personal data?</label>
+						<yesno yes="carried out a privacy risk assessment" no="not carried out a privacy risk assessment" />
+						<help>A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
+						<requirement level="pilot">You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.</requirement>
 					</question>
-					<if test="this.privacyImpactAssessmentExists() === 'true'">
-						<question id="privacyImpactAssessmentUrl" display="The Privacy Impact Assessment is published at">
-							<label>Where is your Privacy Impact Assessment published?</label>
-							<input type="url" placeholder="Privacy Impact Assessment URL"/>
-							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
-							<requirement level="standard">You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
+					<if test="this.riskAssessmentExists() === 'true'">
+						<question id="riskAssessmentUrl" display="The risk assessment is published at">
+							<label>Where is your risk assessment published?</label>
+							<input type="url" placeholder="Risk Assessment URL"/>
+							<help>Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
+							<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
-						<if test="this.privacyImpactAssessmentUrl() !== ''">
-							<question id="piaAudited" display="The Privacy Impact Assessment has been">
-								<label>Has your Privacy Impact Assessment been independently audited?</label>
+						<if test="this.riskAssessmentUrl() !== ''">
+							<question id="riskAssessmentAudited" display="The risk assessment has been">
+								<label>Has your risk assessment been independently audited?</label>
 								<yesno yes="independently audited" />
-								<help>It's good practice to check your assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-								<requirement level="standard">You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
-							</question>
-						</if>
-						<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
-							<label>Where is the privacy notice for individuals affected by your data?</label>
-							<input type="url" placeholder="Privacy Notice URL"/>
-							<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.</help>
-							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.</requirement>
-						</question>
-						<question id="dpStaff">
-							<label>Is there someone in your organisation who is responsible for data protection?</label>
-							<yesno required="pilot"/>
-						</question>
-						<if test="this.dpStaff() === 'true'">
-							<question id="dbStaffConsulted" display="The individual responsible for data protection">
-								<label>Have you involved them in the Privacy Impact Assessment process?</label>
-								<yesno yes="has been consulted" />
-								<requirement level="pilot">You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.</requirement>
+								<help>It's good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+								<requirement level="standard">You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 							</question>
 						</if>
 						<question id="anonymisationAudited" display="The anonymisation of the data has been">
