@@ -147,7 +147,6 @@
 					<option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
 					<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
@@ -216,7 +215,6 @@
 					<option value="cc-by">Creative Commons Attribution</option>
 					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
@@ -248,7 +246,7 @@
 							<option value="cc0">Creative Commons CCZero</option>
 							<option value="other">Other...</option>
 						</select>
-						<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.</help>
+						<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.</help>
 					</question>
 					<if test="this.contentWaiver() === 'other'">
 						<question id="contentOtherWaiver" display="Copyright has been waived with">
@@ -309,7 +307,7 @@
 				<question id="appliedAnon" display="This data about individuals has been">
 					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
 					<yesno required="pilot" yes="anonymised" />
-					<help more="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have and this is explored in the <a href="http://www.ico.org.uk/news/latest_news/2012/~/media/documents/library/Data_Protection/Practical_application/anonymisation_code.ashx">ICO Anonymisation Code of Practice</a>.</help>
+					<help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
@@ -326,32 +324,32 @@
 					</if>
 				</if>
 				<if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-					<question id="privacyImpactAssessmentExists" display="The curator has">
-						<label>Have you carried out a Privacy Impact Assessment?</label>
-						<yesno yes="carried out a Privacy Impact Assessment" no="not carried out a Privacy Impact Assessment" />
-						<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
-						<requirement level="pilot">You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals.</requirement>
+					<question id="riskAssessmentExists" display="The curator has">
+						<label>Have you assessed the risks of disclosing personal data?</label>
+						<yesno yes="carried out a privacy risk assessment" no="not carried out a privacy risk assessment" />
+						<help>A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
+						<requirement level="pilot">You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.</requirement>
 					</question>
-					<if test="this.privacyImpactAssessmentExists() === 'true'">
-						<question id="privacyImpactAssessmentUrl" display="The Privacy Impact Assessment is published at">
-							<label>Where is your Privacy Impact Assessment published?</label>
-							<input type="url" placeholder="Privacy Impact Assessment URL"/>
-							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
-							<requirement level="standard">You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
+					<if test="this.riskAssessmentExists() === 'true'">
+						<question id="riskAssessmentUrl" display="The risk assessment is published at">
+							<label>Where is your risk assessment published?</label>
+							<input type="url" placeholder="Risk Assessment URL"/>
+							<help>Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
+							<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
-						<if test="this.privacyImpactAssessmentUrl() !== ''">
-							<question id="piaAudited" display="The Privacy Impact Assessment has been">
-								<label>Has your Privacy Impact Assessment been independently audited?</label>
+						<if test="this.riskAssessmentUrl() !== ''">
+							<question id="riskAssessmentAudited" display="The risk assessment has been">
+								<label>Has your risk assessment been independently audited?</label>
 								<yesno yes="independently audited" />
-								<help>It's good practice to check your assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-								<requirement level="standard">You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
+								<help>It's good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+								<requirement level="standard">You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 							</question>
 						</if>
 						<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
 							<label>Where is the privacy notice for individuals affected by your data?</label>
 							<input type="url" placeholder="Privacy Notice URL"/>
-							<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.</help>
-							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.</requirement>
+							<help>When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.</help>
+							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.</requirement>
 						</question>
 						<question id="dpStaff">
 							<label>Is there someone in your organisation who is responsible for data protection?</label>
@@ -359,7 +357,7 @@
 						</question>
 						<if test="this.dpStaff() === 'true'">
 							<question id="dbStaffConsulted" display="The individual responsible for data protection">
-								<label>Have you involved them in the Privacy Impact Assessment process?</label>
+								<label>Have you involved them in the risk assessment process?</label>
 								<yesno yes="has been consulted" />
 								<requirement level="pilot">You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.</requirement>
 							</question>
