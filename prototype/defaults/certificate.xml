@@ -4,7 +4,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
-<questionnaire version="0.7" jurisdiction="" xml:lang="en">
+<questionnaire version="0.7" status="alpha" jurisdiction="" xml:lang="en">
 	<group id="legal">
 		<label>Legal Information</label>
 		<help>Rights, licensing and privacy</help>
