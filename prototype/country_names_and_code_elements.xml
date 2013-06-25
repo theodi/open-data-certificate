@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-	<ISO_3166-1_List_en xml:lang="en">
+<?xml-stylesheet type="application/xslt+xml" href="jurisdictions.xsl" ?>
+<ISO_3166-1_List_en xml:lang="en">
 
 	<ISO_3166-1_Entry>
 		<ISO_3166-1_Country_name>AFGHANISTAN</ISO_3166-1_Country_name>
