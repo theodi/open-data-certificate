@@ -14,10 +14,10 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
-	<xsl:result-document href="../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.{questionnaire/@version}.rb" method="text">
+	<xsl:result-document href="../../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.{questionnaire/@version}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
-	<xsl:result-document href="../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@version}.{questionnaire/@xml:lang}.yml" method="text">
+	<xsl:result-document href="../../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@version}.{questionnaire/@xml:lang}.yml" method="text">
 		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
@@ -49,9 +49,11 @@
 <xsl:template match="questionnaire" mode="structure">
 	<survey label="Open Data Certificate Questionnaire" 
 		default_mandatory="false" 
-		dataset_title="dataTitle">
+		dataset_title="dataTitle"
+		country="{@jurisdiction}"
+		status="{@status}">
 		<xsl:attribute name="description">
-			<xsl:apply-templates select="help" mode="html" />
+			<xsl:apply-templates select="help/*" mode="html" />
 		</xsl:attribute>
 		<translations en="default" />
 		<xsl:apply-templates select="group" mode="structure" />
