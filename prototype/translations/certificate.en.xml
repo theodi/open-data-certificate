@@ -12,54 +12,57 @@
 		<level id="standard">Regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.</level>
 		<level id="exemplar">This is above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.</level>
 	</levels>
-	<question id="dataTitle">
-		<label>What's this data called?</label>
-		<input placeholder="Data Title" required="required"/>
-		<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
-	</question>
-	<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
-	<question id="documentationUrl" display="This data is described at">
-		<label>Where is it described?</label>
-		<input type="url" placeholder="Documentation URL"/>
-		<help>Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.</help>
-		<if test="this.releaseType() !== 'collection'">
-			<requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
-		</if>
-		<if test="this.releaseType() === 'collection'">
-			<requirement test="this.documentationUrl() !== ''">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.</requirement>
-		</if>
-	</question>
-	<question id="publisher" display="This data is published by">
-		<label>Who publishes this data?</label>
-		<input placeholder="Data Publisher" required="required"/>
-		<help>Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.</help>
-	</question>
-	<question id="publisherUrl" display="The data is published on">
-		<label>What website is the data published on?</label>
-		<input type="url" placeholder="Publisher URL"/>
-		<help>Give a URL to a website, this helps us to group data from the same organisation even if people give different names.</help>
-	</question>
-	<question id="releaseType">
-		<label>What kind of release is this?</label>
-		<radioset required="required">
-			<option value="oneoff">
-				<label>a one-off release of a single dataset</label>
-				<help>This is a single file and you don’t currently plan to publish similar files in the future.</help>
-			</option>
-			<option value="collection">
-				<label>a one-off release of a set of related datasets</label>
-				<help>This is a collection of related files about the same data and you don’t currently plan to publish similar collections in the future.</help>
-			</option>
-			<option value="series">
-				<label>ongoing release of a series of related datasets</label>
-				<help>This is a sequence of datasets with planned periodic updates in the future.</help>
-			</option>
-			<option value="service">
-				<label>a service or API for accessing open data</label>
-				<help>This is a live web service that exposes your data to programmers through an interface they can query.</help>
-			</option>
-		</radioset>
-	</question>
+	<group id="general">
+		<label>General Information</label>
+		<question id="dataTitle">
+			<label>What's this data called?</label>
+			<input placeholder="Data Title" required="required"/>
+			<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+		</question>
+		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
+		<question id="documentationUrl" display="This data is described at">
+			<label>Where is it described?</label>
+			<input type="url" placeholder="Documentation URL"/>
+			<help>Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.</help>
+			<if test="this.releaseType() !== 'collection'">
+				<requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
+			</if>
+			<if test="this.releaseType() === 'collection'">
+				<requirement test="this.documentationUrl() !== ''">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.</requirement>
+			</if>
+		</question>
+		<question id="publisher" display="This data is published by">
+			<label>Who publishes this data?</label>
+			<input placeholder="Data Publisher" required="required"/>
+			<help>Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.</help>
+		</question>
+		<question id="publisherUrl" display="The data is published on">
+			<label>What website is the data published on?</label>
+			<input type="url" placeholder="Publisher URL"/>
+			<help>Give a URL to a website, this helps us to group data from the same organisation even if people give different names.</help>
+		</question>
+		<question id="releaseType">
+			<label>What kind of release is this?</label>
+			<radioset required="required">
+				<option value="oneoff">
+					<label>a one-off release of a single dataset</label>
+					<help>This is a single file and you don’t currently plan to publish similar files in the future.</help>
+				</option>
+				<option value="collection">
+					<label>a one-off release of a set of related datasets</label>
+					<help>This is a collection of related files about the same data and you don’t currently plan to publish similar collections in the future.</help>
+				</option>
+				<option value="series">
+					<label>ongoing release of a series of related datasets</label>
+					<help>This is a sequence of datasets with planned periodic updates in the future.</help>
+				</option>
+				<option value="service">
+					<label>a service or API for accessing open data</label>
+					<help>This is a live web service that exposes your data to programmers through an interface they can query.</help>
+				</option>
+			</radioset>
+		</question>
+	</group>
 	<group id="practical">
 		<label>Practical Information</label>
 		<help>Findability, accuracy, quality and guarantees</help>
