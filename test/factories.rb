@@ -4,6 +4,12 @@ FactoryGirl.define do
     email "test@example.com"
     password "testpassword"
     password_confirmation "testpassword"
+
+    factory :user_with_datasets do
+      after(:create) do |user|
+        FactoryGirl.create_list(:dataset, 3, user: user)
+      end
+    end
   end
 
   factory :dataset do
