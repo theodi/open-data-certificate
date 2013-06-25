@@ -3,8 +3,13 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
 <questionnaire version="0.7" status="beta" jurisdiction="UK" xml:lang="en">
+	<help>
+		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
+		<p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p>
+		<p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>
+	</help>
 	<group id="legal">
 		<label>Legal Information</label>
 		<help>Rights, licensing and privacy</help>
