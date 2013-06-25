@@ -52,11 +52,13 @@
 				<xsl:when test="$code = $european">
 					<xsl:apply-templates select="$europeanCertificate">
 						<xsl:with-param name="country" tunnel="yes" select="$code" />
+						<xsl:with-param name="countryName" tunnel="yes" select="ISO_3166-1_Country_name" />
 					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:apply-templates select="$defaultCertificate">
 						<xsl:with-param name="country" tunnel="yes" select="$code" />
+						<xsl:with-param name="countryName" tunnel="yes" select="ISO_3166-1_Country_name" />
 					</xsl:apply-templates>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -69,10 +71,31 @@
 	<xsl:attribute name="jurisdiction" select="$country" />
 </xsl:template>
 
+<xsl:template match="questionnaire/help">
+	<xsl:param name="country" as="xs:string" tunnel="yes" required="yes" />
+	<xsl:param name="countryName" as="xs:string" tunnel="yes" required="yes" />
+	<help>
+		<p><strong>This has been generated based on a default<xsl:if test="$country = $european"> for EU countries</xsl:if> and needs to be localised for <xsl:value-of select="local:titleCase($countryName)" />.</strong></p>
+		<xsl:sequence select="node()" />
+	</help>
+</xsl:template>
+
 <xsl:template match="node()|@*">
 	<xsl:copy>
 		<xsl:apply-templates select="@*|node()" />
 	</xsl:copy>
 </xsl:template>
+
+<xsl:function name="local:titleCase" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:value-of>
+		<xsl:for-each select="tokenize($string, ' ')">
+			<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+			<xsl:if test="position() != last()">
+				<xsl:text> </xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:value-of>
+</xsl:function>
 
 </xsl:stylesheet>
