@@ -3,7 +3,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
-<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
 <questionnaire version="0.7" status="alpha" jurisdiction="EU" xml:lang="en">
 	<help>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
