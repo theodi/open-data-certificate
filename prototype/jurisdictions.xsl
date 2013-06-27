@@ -39,10 +39,6 @@
 <xsl:variable name="defaultCertificate" as="document-node()" select="doc('defaults/certificate.xml')" />
 <xsl:variable name="europeanCertificate" as="document-node()" select="doc('defaults/certificate.EU.xml')" />
 	
-<xsl:template match="/">
-	<xsl:apply-templates select="ISO_3166-1_List_en" />
-</xsl:template>
-	
 <xsl:template match="ISO_3166-1_List_en">
 	<xsl:apply-templates select="ISO_3166-1_Entry" />
 </xsl:template>
