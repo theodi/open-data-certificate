@@ -39,6 +39,10 @@
 <xsl:variable name="defaultCertificate" as="document-node()" select="doc('defaults/certificate.xml')" />
 <xsl:variable name="europeanCertificate" as="document-node()" select="doc('defaults/certificate.EU.xml')" />
 	
+<xsl:template match="/">
+	<xsl:apply-templates select="ISO_3166-1_List_en" />
+</xsl:template>
+	
 <xsl:template match="ISO_3166-1_List_en">
 	<xsl:apply-templates select="ISO_3166-1_Entry" />
 </xsl:template>
@@ -75,7 +79,7 @@
 	<xsl:param name="country" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:param name="countryName" as="xs:string" tunnel="yes" required="yes" />
 	<help>
-		<p><strong>This has been generated based on a default<xsl:if test="$country = $european"> for EU countries</xsl:if> and needs to be localised for <xsl:value-of select="local:titleCase($countryName)" />.</strong></p>
+		<p><strong>This has been generated based on a default<xsl:if test="$country = $european"> for EU countries</xsl:if> and needs to be localised for <xsl:value-of select="local:titleCase($countryName)" />. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
 		<xsl:sequence select="node()" />
 	</help>
 </xsl:template>
