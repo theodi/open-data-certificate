@@ -9,8 +9,12 @@
       = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn'}
       
     .span4
-      %h3 Current Status:
-      = response_set.aasm_state
+      %h3= t('dashboard.current_status')
+
+      %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
+      
+      %p= response_set.aasm_state
+
       
     .span4
       %h3 What to do next?
