@@ -1,4 +1,23 @@
 module DatasetsHelper
+
+  def edit_path(response_set)
+    unless response_set.new_record?
+      surveyor.edit_my_survey_path(
+        survey_code: response_set.survey.access_code, 
+        response_set_code: response_set.access_code
+      )
+    end
+  end
+
+  def requirements_path(response_set)
+    unless response_set.new_record?
+      surveyor.view_my_survey_requirements_path(
+        survey_code: response_set.survey.access_code, 
+        response_set_code: response_set.access_code
+      )
+    end
+  end
+
   def status_description_for_response_set_row(response_set)
     case
     when response_set.incomplete?
@@ -24,4 +43,5 @@ module DatasetsHelper
       end
     end
   end
+
 end
