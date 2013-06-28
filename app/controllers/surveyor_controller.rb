@@ -2,7 +2,8 @@ class SurveyorController < ApplicationController
   unloadable
   include Surveyor::SurveyorControllerMethods
 
-  before_filter :ensure_response_set_is_incomplete, only: [:continue, :edit, :update]
+  before_filter :set_response_set_and_render_context
+  before_filter :ensure_modifications_allowed, except: [:requirements]
 
 
   layout 'application'
@@ -14,7 +15,6 @@ class SurveyorController < ApplicationController
   end
 
   def continue
-    set_response_set_and_render_context
     if @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
       # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
       # and delete the old responses.
@@ -39,8 +39,6 @@ class SurveyorController < ApplicationController
   end
 
   def update
-    set_response_set_and_render_context
-
     if @response_set
 
       if @response_set.complete?
@@ -96,21 +94,7 @@ class SurveyorController < ApplicationController
     end
   end
 
-  def attained_level
-    set_response_set_and_render_context
-    if @response_set
-      respond_to do |format|
-        format.html
-        format.json { @response_set.attained_level.to_json }
-      end
-    else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
-      redirect_to surveyor_index
-    end
-  end
-
   def requirements
-    set_response_set_and_render_context
     if @response_set
 
       @requirements = @response_set.outstanding_requirements
@@ -135,10 +119,9 @@ class SurveyorController < ApplicationController
   end
 
   private
-  def ensure_response_set_is_incomplete
-    set_response_set_and_render_context
-    if @response_set && @response_set.complete?
-      flash[:notice] = t('surveyor.that_response_set_is_complete')
+  def ensure_modifications_allowed
+    unless @response_set.modifications_allowed?
+      flash[:notice] = t('surveyor.modifications_not_allowed')
       redirect_to dashboard_path
     end
   end
