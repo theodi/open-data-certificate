@@ -1,9 +1,12 @@
 .response_set{class: "response-set-#{response_set.aasm_state}"}
   .row-fluid
     .span4
-      %h3 Your Level
-      = response_set.attained_level
-      = link_to 'requirements', requirements_path(response_set)
+      %h3= t('dashboard.level_attained')
+
+      .level-badge{class: "level-badge-#{response_set.attained_level}"}
+        =response_set.attained_level
+
+      = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn'}
       
     .span4
       %h3 Current Status:
