@@ -15,24 +15,14 @@ class ResponseSet < ActiveRecord::Base
   # has_many :dependencies, :through => :survey
 
   aasm do
-    state :in_progress, :initial => true
-    state :completed
+    state :draft, :initial => true
     state :published
     state :archived
 
     # not yet used
-    # (also, clash with complete/incomplete)
-    #
-    # event :complete do
-    #   transitions from: :in_progress, to: :completed
-    # end
-    #
-    # event :uncomplete do
-    #   transitions from: :completed, to: :in_progress
-    # end
     #
     # event :publish do
-    #   transitions from: :completed, to: :published
+    #   transitions from: :draft, to: :published
     # end
     #
     # event :archive do
