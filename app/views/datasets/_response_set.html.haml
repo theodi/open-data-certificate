@@ -1,0 +1,20 @@
+.response_set{class: "response-set-#{response_set.aasm_state}"}
+  .row-fluid
+    .span4
+      %h3 Your Level
+      = response_set.attained_level
+      = link_to 'requirements', requirements_path(response_set)
+      
+    .span4
+      %h3 Current Status:
+      = response_set.aasm_state
+      
+    .span4
+      %h3 What to do next?
+      %ul
+        %li
+          = link_to "View certificate", response_set.certificate
+        %li
+          = link_to "Embed code"
+        %li
+          = link_to 'Edit', edit_path(response_set)

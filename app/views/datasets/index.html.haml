@@ -1,6 +1,6 @@
 - content_for :header_title, t('dashboard.page_title')
 
-= render partial: 'datasets/dataset', collection: current_user.datasets
+= render partial: :dataset, collection: current_user.datasets
 
 -if current_user.datasets.blank?
   %p= t("dashboard.no_certificates_yet")

@@ -2,7 +2,7 @@
   %dt= dataset.title
   %dd
     - if dataset.response_sets.any?
-      = render partial: 'datasets/response_sets', locals: {response_sets: dataset.response_sets }
+      =  render partial: 'response_set', collection: dataset.response_sets
     - else
       = form_for dataset, :url => dataset_start_questionnaire_path(dataset) do |f|
         - if @surveys.count > 1
