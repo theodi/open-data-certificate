@@ -40,7 +40,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def modifications_allowed?
-    in_progress? || completed?
+    draft?
   end
 
   # find which dependencies are active for this response set as a whole
