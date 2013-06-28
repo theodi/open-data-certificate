@@ -1,5 +1,6 @@
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
+  include AASM
 
   before_save :generate_certificate
   after_destroy :destroy_dataset_if_no_repsonses
@@ -13,6 +14,32 @@ class ResponseSet < ActiveRecord::Base
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
 
+  aasm do
+    state :in_progress, :initial => true
+    state :completed
+    state :published
+    state :archived
+
+    # not yet used
+    # (also, clash with complete/incomplete)
+    #
+    # event :complete do
+    #   transitions from: :in_progress, to: :completed
+    # end
+    #
+    # event :uncomplete do
+    #   transitions from: :completed, to: :in_progress
+    # end
+    #
+    # event :publish do
+    #   transitions from: :completed, to: :published
+    # end
+    #
+    # event :archive do
+    #   transitions from: :published, to: :archived
+    # end
+  end
+
   DEFAULT_TITLE = 'Untitled'
 
   scope :by_newest, order("response_sets.created_at DESC")
@@ -20,6 +47,10 @@ class ResponseSet < ActiveRecord::Base
 
   def title
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+  end
+
+  def modifications_allowed?
+    in_progress? || completed?
   end
 
   # find which dependencies are active for this response set as a whole
@@ -84,6 +115,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def minimum_outstanding_requirement_level
+    return 1 if survey.nil?
     return 1 unless all_mandatory_questions_complete? # if there are any mandatory questions outstanding, they achieve no level
     @minimum_outstanding_requirement_level ||= (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
   end

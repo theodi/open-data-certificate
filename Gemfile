@@ -54,6 +54,9 @@ gem 'jquery-rails'
 #To serve static content / styleguide
 gem 'high_voltage'
 
+# states of the questionnaires
+gem 'aasm'
+
 # authorization
 gem 'cancan'
 
