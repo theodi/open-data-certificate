@@ -18,7 +18,7 @@
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
 	<xsl:result-document href="../../surveys/translations/odc.{if (questionnaire/@jurisdiction = 'GB') then 'UK' else questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
-		<xsl:apply-templates select="questionnaire" mode="translation" />
+		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
 
@@ -564,15 +564,11 @@
 <xsl:template match="questionnaire" mode="translation">
 	<xsl:text>title: "Open Data Certificate Questionnaire"&#xA;</xsl:text>
 	<xsl:text>description: "</xsl:text>
-	<xsl:apply-templates select="help" mode="html" />
+	<xsl:apply-templates select="help/*" mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
 	<xsl:text>survey_sections:&#xA;</xsl:text>
-	<xsl:text>  general:&#xA;</xsl:text>
-	<xsl:text>    title: "General Information"&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
-	<xsl:text># General Information&#xA;</xsl:text>
-	<xsl:apply-templates select="question" mode="translation" />
 	<xsl:for-each select="group">
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
@@ -581,8 +577,6 @@
 	</xsl:for-each>
 	<xsl:text>labels:&#xA;</xsl:text>
 	<xsl:apply-templates select="group//group" mode="translation" />
-	<xsl:text># General Information Requirements&#xA;</xsl:text>
-	<xsl:apply-templates select="question//requirement" mode="translation" />
 	<xsl:for-each select="group">
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
