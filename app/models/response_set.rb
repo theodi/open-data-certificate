@@ -7,7 +7,7 @@ class ResponseSet < ActiveRecord::Base
 
   attr_accessible :dataset_id
 
-  belongs_to :dataset
+  belongs_to :dataset, touch: true
   belongs_to :survey
   has_one :certificate
 

@@ -29,7 +29,6 @@
       %ul.unstyled
         %li
           = link_to 'Edit Questionnaire', edit_path(response_set), class: 'btn btn-large btn-primary btn-block'
-        %li
          
 
   .row-fluid
@@ -37,7 +36,8 @@
       = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn btn-block'}
     .span3
       %p
-        last updated …
+        = time_ago_in_words response_set.updated_at
+        ago
     .span3.offset3
       = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), :class => 'btn btn-danger btn-block'} do
         %i.icon-remove.icon-white
