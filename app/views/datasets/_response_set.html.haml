@@ -1,14 +1,12 @@
 .response_set{class: "response-set-#{response_set.aasm_state}"}
   .row-fluid
-    .span4
+    .span3
       %h3= t('dashboard.level_attained')
 
       .level-badge{class: "level-badge-#{response_set.attained_level}"}
         =response_set.attained_level
-
-      = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn'}
       
-    .span4
+    .span3
       %h3= t('dashboard.current_status')
 
       %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
@@ -16,14 +14,31 @@
       %p= response_set.aasm_state
 
       
-    .span4
+    .span3
       %h3 What to do next?
-      %ul
+      %ul.unstyled
         %li
-          = link_to "View certificate", response_set.certificate
+          = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
         %li
           - unless response_set.certificate.blank?
-            = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal)
+            = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
             =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
+
+    .span3
+      %h3= '&nbsp;'.html_safe
+      %ul.unstyled
         %li
-          = link_to 'Edit', edit_path(response_set)
+          = link_to 'Edit Questionnaire', edit_path(response_set), class: 'btn btn-large btn-primary btn-block'
+        %li
+         
+
+  .row-fluid
+    .span3
+      = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn btn-block'}
+    .span3
+      %p
+        last updated …
+    .span3.offset3
+      = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), :class => 'btn btn-danger btn-block'} do
+        %i.icon-remove.icon-white
+        Delete
