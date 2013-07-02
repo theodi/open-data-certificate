@@ -2,7 +2,7 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
 
-  before_save :generate_certificate
+  after_save :update_certificate
   after_destroy :destroy_dataset_if_no_repsonses
 
   attr_accessible :dataset_id
@@ -106,7 +106,6 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def minimum_outstanding_requirement_level
-    return 1 if survey.nil?
     return 1 unless all_mandatory_questions_complete? # if there are any mandatory questions outstanding, they achieve no level
     @minimum_outstanding_requirement_level ||= (outstanding_requirements.map(&:requirement_level_index) << Survey::REQUIREMENT_LEVELS.size).min
   end
@@ -125,10 +124,10 @@ class ResponseSet < ActiveRecord::Base
              .order('questions.display_order ASC')
   end
 
-  def generate_certificate
-    if self.complete? && self.certificate.nil?
-      create_certificate attained_level: self.attained_level, curator: curator_determined_from_responses, name: title
-    end
+  def update_certificate
+    create_certificate if certificate.nil?
+
+    certificate.update_from_response_set
   end
 
   def copy_answers_from_response_set!(source_response_set)

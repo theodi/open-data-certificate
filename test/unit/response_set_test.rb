@@ -5,8 +5,8 @@ class ResponseSetTest < ActiveSupport::TestCase
   should belong_to(:dataset)
   should have_one(:certificate)
 
-  test "creating a response set does not a certificate" do
-    assert_no_difference "Certificate.count" do
+  test "creating a response set creates a certificate" do
+    assert_difference "Certificate.count", 1 do
       FactoryGirl.create :response_set
     end
   end
@@ -257,18 +257,20 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#generate_certificate creates a new certificate on save of completed response_sets" do
-    attained_level = 'test_level'
+    # not stubbing out the attained level because the certificate reloads the response_set
+    # attained_level = 'test_level'
     response_set = FactoryGirl.build(:completed_response_set)
-    response_set.stubs(:attained_level).returns(attained_level)
+    # response_set.stubs(:attained_level).returns(attained_level)
     assert_nil response_set.certificate
     response_set.save!
-    assert_equal attained_level, response_set.certificate.try(:attained_level)
+
+    assert_equal response_set.attained_level, response_set.certificate.try(:attained_level)
   end
 
   test "#generate_certificate does not overwrite existing certificate" do
     response_set = FactoryGirl.create(:completed_response_set)
     assert_not_nil certificate = response_set.certificate
-    response_set.generate_certificate
+    response_set.update_certificate
     assert_equal certificate, response_set.certificate
   end
 

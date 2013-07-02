@@ -41,4 +41,23 @@ class Certificate < ActiveRecord::Base
   end
 
 
+  def update_from_response_set
+
+    unless response_set_id.nil?
+
+      # because of the caching of attained level etc, we have to load
+      # a new instance of the response_set to calculate these freshly
+      #
+      # A fix to this is to calculate the attained_level
+      # more effectively (related - #362)
+      r2 = ResponseSet.find response_set_id
+      update_attributes({
+        attained_level: r2.attained_level,
+        curator:  r2.curator_determined_from_responses,
+        name:  r2.title
+      })
+
+    end
+  end
+
 end
