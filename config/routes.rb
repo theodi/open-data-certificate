@@ -9,7 +9,9 @@ OpenDataCertificate::Application.routes.draw do
     # have a response_set resource for deleting for now, have
     # a feeling that this could include a couple of the other 
     # routes,  though try it out for now
-    resources :response_sets, :only => :destroy
+    resources :response_sets, :only => :destroy do
+      post :publish, on: :member
+    end
 
   end
   post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'

@@ -17,6 +17,10 @@
     .span3
       %h3 What to do next?
       %ul.unstyled
+        -if response_set.draft?
+          %li
+            = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-primary btn-large btn-block' do
+              Publish Certificate
         %li
           = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
         %li
