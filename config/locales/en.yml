@@ -81,6 +81,7 @@ en:
     unable_to_delete_response_set: Unable to delete questionnaire
     deleted_response_set: Deleted questionnaire
     unable_to_publish_response_set: Unable to publish questionnaire
+    unable_to_publish_response_set_invalid: Unable to publish questionnaire - are mandatory questions answered?
     published_response_set: Published questionnaire
     publish_certificate: Publish
     embed: Embed Code
