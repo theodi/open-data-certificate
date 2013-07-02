@@ -336,4 +336,18 @@ class ResponseSetTest < ActiveSupport::TestCase
     end
   end
 
+
+  ### stateful things
+
+  test "publishing a response_set published the certificate" do
+    response_set = FactoryGirl.create(:response_set)
+
+    assert_false response_set.certificate.published, "certificate starts unpublished"
+
+    assert response_set.publish, "was able to publish"
+
+    assert response_set.certificate.published, "certificate was published"
+  end
+
+
 end

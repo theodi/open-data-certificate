@@ -16,19 +16,22 @@ class ResponseSet < ActiveRecord::Base
 
   aasm do
     state :draft, :initial => true
-    state :published
+    state :published, :before_enter => :publish_certificate
     state :archived
 
-    # not yet used
-    #
-    # event :publish do
-    #   transitions from: :draft, to: :published
-    # end
+    event :publish do
+      transitions from: :draft, to: :published
+    end
     #
     # event :archive do
     #   transitions from: :published, to: :archived
     # end
   end
+
+  def publish_certificate
+    certificate.update_attribute :published, true
+  end
+
 
   DEFAULT_TITLE = 'Untitled'
 
