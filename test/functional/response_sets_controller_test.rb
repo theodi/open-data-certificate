@@ -33,4 +33,20 @@ class ResponseSetsControllerTest < ActionController::TestCase
   end
 
 
+  test "user can publish their response_set" do
+    @user = FactoryGirl.create(:user)
+    @response_set = FactoryGirl.create(:response_set, :user => @user)
+
+    sign_in @user
+
+    post :publish, use_route: :surveyor, id: @response_set.id
+
+    assert_redirected_to dashboard_path
+
+    @response_set.reload
+    assert @response_set.published?, "response set was published"
+
+  end
+
+
 end

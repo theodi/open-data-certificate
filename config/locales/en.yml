@@ -80,6 +80,8 @@ en:
     confirm_deletion: Are you sure you want to delete this item?
     unable_to_delete_response_set: Unable to delete questionnaire
     deleted_response_set: Deleted questionnaire
+    unable_to_publish_response_set: Unable to delete questionnaire
+    published_response_set: Deleted questionnaire
     publish_certificate: Publish
     embed: Embed Code
     improvements_link: How can I improve this data?
