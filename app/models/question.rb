@@ -25,7 +25,7 @@ class Question < ActiveRecord::Base
   end
 
   def requirement_level_index
-    @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
+    @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level) || 0
   end
 
   def is_a_requirement?
