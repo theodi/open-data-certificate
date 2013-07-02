@@ -87,8 +87,9 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_requirements
     @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.id ? 
-        depends[r.dependency.id] : true
+      r.dependency.nil? ? 
+        true : 
+        depends[r.dependency.id]
     end
 
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
