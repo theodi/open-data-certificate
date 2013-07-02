@@ -20,7 +20,7 @@ class ResponseSet < ActiveRecord::Base
     state :archived
 
     event :publish do
-      transitions from: :draft, to: :published
+      transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
     end
     #
     # event :archive do

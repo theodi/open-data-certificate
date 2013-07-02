@@ -344,10 +344,23 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     assert_false response_set.certificate.published, "certificate starts unpublished"
 
-    assert response_set.publish, "was able to publish"
+    response_set.publish
 
     assert response_set.certificate.published, "certificate was published"
   end
 
+  test "can't publish an unpublishable response_set" do
+
+    # mandatory question
+    question = FactoryGirl.create(:question, is_mandatory: true)
+    survey_section = question.survey_section
+    survey = survey_section.survey
+
+    # which was not answered
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+
+    assert !response_set.may_publish?
+
+  end
 
 end
