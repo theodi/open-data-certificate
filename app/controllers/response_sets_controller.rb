@@ -8,7 +8,7 @@ class ResponseSetsController < ApplicationController
       @response_set.destroy
       redirect_to dashboard_path, :notice => t('dashboard.deleted_response_set')
     else
-      redirect_to dashboard_path, status: 304, :notice => t('dashboard.unable_to_delete_response_set')
+      redirect_to dashboard_path, status: 304, :warning => t('dashboard.unable_to_delete_response_set')
     end
 
   end
@@ -24,7 +24,7 @@ class ResponseSetsController < ApplicationController
         redirect_to dashboard_path, :notice => t('dashboard.unable_to_publish_response_set_invalid')
       end
     else
-      redirect_to dashboard_path, status: 304, :notice => t('dashboard.unable_to_publish_response_set')
+      redirect_to dashboard_path, status: 304, :warning => t('dashboard.unable_to_publish_response_set')
     end
     
   end

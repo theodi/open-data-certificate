@@ -42,7 +42,7 @@ class SurveyorController < ApplicationController
     if @response_set
 
       if @response_set.complete?
-        return redirect_with_message(surveyor_index, :notice, t('surveyor.that_response_set_is_complete'))
+        return redirect_with_message(surveyor_index, :warning, t('surveyor.that_response_set_is_complete'))
       end
 
       # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
@@ -77,7 +77,7 @@ class SurveyorController < ApplicationController
     respond_to do |format|
       format.html do
         if @response_set
-          flash[:notice] = t('surveyor.unable_to_update_survey') unless saved
+          flash[:warning] = t('surveyor.unable_to_update_survey') unless saved
           redirect_to surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
         else
           redirect_with_message(surveyor.available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
@@ -105,7 +105,7 @@ class SurveyorController < ApplicationController
         format.json { @response_set.outstanding_requirements.to_json }
       end
     else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
+      flash[:warning] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index
     end
   end
