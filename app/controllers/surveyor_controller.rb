@@ -3,7 +3,7 @@ class SurveyorController < ApplicationController
   include Surveyor::SurveyorControllerMethods
 
   before_filter :set_response_set_and_render_context
-  before_filter :ensure_modifications_allowed, except: [:requirements]
+  before_filter :ensure_modifications_allowed, only: [:continue, :edit, :update]
 
 
   layout 'application'
