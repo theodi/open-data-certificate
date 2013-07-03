@@ -1,6 +1,8 @@
 class Dataset < ActiveRecord::Base
   belongs_to :user
 
+  after_touch :destroy_if_no_responses
+
   has_many :response_sets, :order => "response_sets.created_at DESC"
 
   def title
@@ -22,7 +24,7 @@ class Dataset < ActiveRecord::Base
     response_sets.completed.by_newest.limit(1).first
   end
 
-  def destroy_if_no_repsonses
+  def destroy_if_no_responses
     destroy if response_sets.empty?
   end
 

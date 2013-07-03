@@ -3,7 +3,6 @@ class ResponseSet < ActiveRecord::Base
   include AASM
 
   after_save :update_certificate
-  after_destroy :destroy_dataset_if_no_repsonses
 
   attr_accessible :dataset_id
 
@@ -204,9 +203,5 @@ class ResponseSet < ActiveRecord::Base
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
 
-  private
-  def destroy_dataset_if_no_repsonses
-    dataset.try(:destroy_if_no_repsonses)
-  end
 
 end
