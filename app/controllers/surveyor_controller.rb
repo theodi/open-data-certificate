@@ -121,7 +121,7 @@ class SurveyorController < ApplicationController
   private
   def ensure_modifications_allowed
     unless @response_set.modifications_allowed?
-      flash[:notice] = t('surveyor.modifications_not_allowed')
+      flash[:warning] = t('surveyor.modifications_not_allowed')
       redirect_to dashboard_path
     end
   end
