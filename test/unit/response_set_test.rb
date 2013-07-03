@@ -275,7 +275,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "Should be able to assign_to_user - which creates dataset" do
-    response_set = FactoryGirl.create(:response_set)
+    response_set = FactoryGirl.create(:response_set, user: nil)
     user = FactoryGirl.create(:user)
     assert [response_set.user, response_set.dataset].none?
     response_set.assign_to_user!(user)

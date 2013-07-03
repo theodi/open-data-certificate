@@ -1,7 +1,10 @@
 FactoryGirl.define do
 
   factory :user do
-    email "test@example.com"
+    sequence :email do |n|
+      "test#{n}@example.com"
+    end
+
     password "testpassword"
     password_confirmation "testpassword"
 
@@ -155,7 +158,7 @@ questions:
   end
 
   factory :response_set do |r|
-    r.user_id {}
+    user
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
