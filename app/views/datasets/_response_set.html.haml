@@ -1,4 +1,4 @@
-.response_set{class: "response-set-#{response_set.aasm_state}"}
+.response_set{class: "response-set-#{response_set.aasm_state} response-set-#{response_set == primary ? 'primary' : 'secondry'}"}
   .row-fluid
     .span3
       %h3= t('dashboard.level_attained')
