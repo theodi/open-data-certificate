@@ -24,15 +24,16 @@
         %li
           = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
         %li
-          - unless response_set.certificate.blank?
+          - unless response_set.archived?
             = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
             =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
     .span3
       %h3= '&nbsp;'.html_safe
       %ul.unstyled
-        %li
-          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-primary btn-block'
+        - unless response_set.archived?
+          %li
+            = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-primary btn-block'
          
 
   .row-fluid
