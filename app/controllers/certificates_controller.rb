@@ -27,19 +27,6 @@ class CertificatesController < ApplicationController
     render action: 'index'
   end
 
-  # for now, this is very restricted - will only allow user to publish
-  def update
-    @certificate = Certificate.find params[:id]
-
-    if current_user && current_user == @certificate.user
-      @certificate.update_attributes published: true
-      flash[:notice] = "Published"
-    else
-      flash[:warning] = "Unable to publish"
-    end
-    redirect_to dashboard_path
-  end
-
   def embed
     @certificate = Certificate.find params[:id]
     render layout: 'embedded_certificate'
