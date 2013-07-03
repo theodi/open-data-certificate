@@ -1,8 +1,8 @@
 module DatasetsHelper
 
-  def edit_path(response_set)
+  def continue_path(response_set)
     unless response_set.new_record?
-      surveyor.edit_my_survey_path(
+      surveyor.continue_my_survey_path(
         survey_code: response_set.survey.access_code, 
         response_set_code: response_set.access_code
       )
