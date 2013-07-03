@@ -15,20 +15,31 @@ class ResponseSet < ActiveRecord::Base
 
   aasm do
     state :draft, :initial => true
-    state :published, :before_enter => :publish_certificate
+    state :published, :before_enter => :publish_certificate, :after_enter => :archive_other_response_sets
     state :archived
 
     event :publish do
       transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
     end
-    #
-    # event :archive do
-    #   transitions from: :published, to: :archived
-    # end
+    
+    event :archive do
+      transitions from: :published, to: :archived
+    end
   end
 
   def publish_certificate
     certificate.update_attribute :published, true
+  end
+
+  def archive_other_response_sets
+    related = dataset.try(:response_sets) || []
+
+    related.each do |response_set|
+      if response_set.id != self.id
+        response_set.archive!
+      end
+    end
+
   end
 
 
