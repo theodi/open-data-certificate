@@ -44,4 +44,22 @@ class SurveyorControllerTest < ActionController::TestCase
 
   end
 
+
+  test "continue a completed questionnaire" do 
+    @response_set = FactoryGirl.create(:response_set)
+    @response_set.update_attribute :aasm_state, 'archived'
+
+    sign_in @response_set.user
+    
+    assert_difference 'ResponseSet.count', 1 do
+      post :continue, use_route: :surveyor, 
+              survey_code: @response_set.survey.access_code, 
+              response_set_code: @response_set.access_code
+    end
+
+    r = ResponseSet.last
+    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
+
+  end
+
 end

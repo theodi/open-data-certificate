@@ -3,7 +3,7 @@ class SurveyorController < ApplicationController
   include Surveyor::SurveyorControllerMethods
 
   before_filter :set_response_set_and_render_context
-  before_filter :ensure_modifications_allowed, only: [:continue, :edit, :update]
+  before_filter :ensure_modifications_allowed, only: [:edit, :update]
 
 
   layout 'application'
@@ -15,7 +15,19 @@ class SurveyorController < ApplicationController
   end
 
   def continue
-    if @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
+
+    if !@response_set.modifications_allowed?
+      # they *actually* want to create a new response set
+
+      attrs = @response_set.attributes.keep_if do |key|
+        %w(survey_id user_id dataset_id).include? key
+      end
+      new_response_set = ResponseSet.create attrs
+      new_response_set.copy_answers_from_response_set!(@response_set)
+
+      @response_set = new_response_set
+
+    elsif @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
       # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
       # and delete the old responses.
       # TODO: determine if this is actually what is wanted, or if a more interactive user experience is preferred
