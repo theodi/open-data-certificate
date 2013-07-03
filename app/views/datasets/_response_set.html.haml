@@ -15,11 +15,11 @@
 
       
     .span3
-      %h3 What to do next?
+      %h3 What can I do next?
       %ul.unstyled
         -if response_set.draft?
           %li
-            = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-primary btn-large btn-block' do
+            = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
               Publish Certificate
         %li
           = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
@@ -29,21 +29,24 @@
             =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
     .span3
-      %h3= '&nbsp;'.html_safe
+      %h3 Needs a title
       %ul.unstyled
         - unless response_set.archived?
           %li
-            = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-primary btn-block'
+            = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
          
-
-  .row-fluid
-    .span3
-      = link_to t('dashboard.improvements_link'), requirements_path(response_set), {class: 'btn btn-block'}
+  .row-fluid.secondary
     .span3
       %p
+      %small
+        = link_to t('dashboard.improvements_link'), requirements_path(response_set)
+    .span3
+      %p
+      %small
         = time_ago_in_words response_set.updated_at
         ago
     .span3.offset3
-      = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), :class => 'btn btn-danger btn-block'} do
-        %i.icon-remove.icon-white
-        Delete
+      = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion')} do
+        %p
+        %small.delete
+          Delete
