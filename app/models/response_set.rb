@@ -36,7 +36,7 @@ class ResponseSet < ActiveRecord::Base
 
     related.each do |response_set|
       if response_set.id != self.id
-        response_set.archive!
+        response_set.archive! if response_set.published?
       end
     end
 
