@@ -45,7 +45,8 @@
       %small
         = time_ago_in_words response_set.updated_at
         ago
-    .span3.offset3
+    .span3
+    .span3
       = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion')} do
         %p
         %small.delete
