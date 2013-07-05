@@ -47,10 +47,9 @@
 <!-- STRUCTURE -->
 
 <xsl:template match="questionnaire" mode="structure">
-	<survey label="Open Data Certificate Questionnaire" 
+	<survey label="{@jurisdiction}" 
 		default_mandatory="false" 
 		dataset_title="dataTitle"
-		country="{@jurisdiction}"
 		status="{@status}">
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
