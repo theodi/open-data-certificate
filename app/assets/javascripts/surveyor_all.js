@@ -89,6 +89,9 @@ jQuery(document).ready(function(){
       data: question_data, dataType: 'json',
       success: function(response) {
         successfulSave(response);
+      },
+      error: function(){
+        alert("an error occured when saving your response");
       }
     });
   });
