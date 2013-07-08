@@ -1,32 +1,24 @@
 # Trying out having a separate controller from the central surveyor one.
 class ResponseSetsController < ApplicationController
 
+  load_and_authorize_resource
+
   def destroy
-    @response_set = ResponseSet.find params[:id]
-
-    if current_user && @response_set.user == current_user
-      @response_set.destroy
-      redirect_to dashboard_path, :notice => t('dashboard.deleted_response_set')
-    else
-      redirect_to dashboard_path, status: 304, :warning => t('dashboard.unable_to_delete_response_set')
-    end
-
+    @response_set.destroy
+    redirect_to dashboard_path, notice: t('dashboard.deleted_response_set')
   end
 
   def publish
-    @response_set = ResponseSet.find params[:id]
-
-    if current_user && @response_set.user == current_user
-      begin
-        @response_set.publish!
-        redirect_to dashboard_path, :notice => t('dashboard.published_response_set')
-      rescue AASM::InvalidTransition
-        redirect_to dashboard_path, :notice => t('dashboard.unable_to_publish_response_set_invalid')
-      end
-    else
-      redirect_to dashboard_path, status: 304, :warning => t('dashboard.unable_to_publish_response_set')
+    begin
+      @response_set.publish!
+      redirect_to dashboard_path, notice: t('dashboard.published_response_set')
+    rescue AASM::InvalidTransition
+      redirect_to dashboard_path, warning: t('dashboard.unable_to_publish_response_set_invalid')
     end
-    
   end
+
+  rescue_from CanCan::AccessDenied do |exception|  
+    redirect_to dashboard_path, warning: t('dashboard.unable_to_access_response_set')
+  end  
 
 end

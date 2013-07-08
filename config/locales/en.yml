@@ -78,10 +78,9 @@ en:
     view_certificate: View certificate
     how_do_i_improve_my_open_data: How can I improve my open data?
     confirm_deletion: Are you sure you want to delete this item?
-    unable_to_delete_response_set: Unable to delete questionnaire
     deleted_response_set: Deleted questionnaire
-    unable_to_publish_response_set: Unable to publish certificate
     unable_to_publish_response_set_invalid: You need to answer all the required questions before you can publish a certificate
+    unable_to_access_response_set: Unable to access questionnaire
     published_response_set: Published questionnaire
     publish_certificate: Publish
     embed: Embed Code
@@ -89,6 +88,7 @@ en:
     level_attained: 'Level attained:'
     current_status: Current status
     last_updated_at: 'Last updated: %{time_span} ago'
+
     states:
       draft: Draft
       published: Published

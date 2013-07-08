@@ -28,7 +28,7 @@ class ResponseSetsControllerTest < ActionController::TestCase
       delete :destroy, use_route: :surveyor, id: @response_set.id
     end
 
-    assert_response 304
+    assert_response 302
 
   end
 
