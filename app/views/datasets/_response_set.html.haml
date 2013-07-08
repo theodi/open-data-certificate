@@ -12,8 +12,14 @@
       %h3= t('dashboard.current_status')
 
       %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
-      
-      %p= t ['dashboard.states', response_set.aasm_state ]
+
+      %p= t ['dashboard.states', response_set.aasm_state]
+
+      %p
+        [
+        %strong= response_set.survey.title
+        = t 'dashboard.jurisdiction'
+        ]
 
       
     .span3
