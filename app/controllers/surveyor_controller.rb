@@ -53,8 +53,8 @@ class SurveyorController < ApplicationController
   def update
     if @response_set
 
-      if @response_set.complete?
-        return redirect_with_message(surveyor_index, :warning, t('surveyor.that_response_set_is_complete'))
+      if @response_set.published?
+        return redirect_with_message(surveyor_index, :warning, t('surveyor.response_set_is_published'))
       end
 
       # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
