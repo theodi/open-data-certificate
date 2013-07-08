@@ -1312,10 +1312,33 @@ td.action {
 
 }
 
+.response-set-secondry{
+  h3{display:none}
+  .level-badge, .status-badge{
+    width:55px;
+    height:50px;
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin:10px;
+  }
+  .level-badge, .status-badge, p{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  p{
+    margin:0;
+  }
+  .btn-group{
+    margin-top:10px;
+  }
+}
+
+
 
 .level-badge{
   width:133px;
-  padding-top:118px; // we want text at the bottom, so padding rather than height
+  height:118px;
   background-image:url(/assets/badges/no_level_badge.png);
   background-repeat: no-repeat;
   margin: auto;
@@ -1341,7 +1364,7 @@ td.action {
 
 .status-badge{
   width:100px;
-  padding-top:100px; // we want text at the bottom, so padding rather than height
+  height:100px; // we want text at the bottom, so padding rather than height
   background-image:url(/assets/status/none.png);
   background-repeat: no-repeat;
   display:block;
