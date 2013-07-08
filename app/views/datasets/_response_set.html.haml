@@ -4,14 +4,15 @@
       %h3= t('dashboard.level_attained')
 
       .level-badge{class: "level-badge-#{response_set.attained_level}"}
-        =response_set.attained_level
+
+      %p= t "levels.#{response_set.attained_level}.title"
       
     .span3
       %h3= t('dashboard.current_status')
 
       %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
       
-      %p= response_set.aasm_state
+      %p= t ['dashboard.states', response_set.aasm_state, ]
 
       
     .span3
