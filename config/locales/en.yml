@@ -153,6 +153,11 @@ en:
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
 
+  response_set:
+    choose_a_jurisdiction: Choose a new Jurisdiction
+    choose_jurisdiction: --- Select Jurisdiction ---
+    start_new_jurisdiction: Change Jurisdiction
+
   authentication:
     sign_in: Sign in
     sign_up: Sign up
