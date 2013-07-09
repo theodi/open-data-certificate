@@ -15,11 +15,8 @@
 
       %p= t ['dashboard.states', response_set.aasm_state]
 
-      %p
-        [
-        %strong= response_set.survey.title
-        = t 'dashboard.jurisdiction'
-        ]
+      %p.jurisdiction
+        %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.survey.title})}}= response_set.survey.title
 
       
     .span3
@@ -36,12 +33,15 @@
       - unless response_set.archived?
         =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
-    .span3
+    .span3.edit-jurisdiction
       %h3 Your answers
       -if is_primary
-        %ul.unstyled
-          %li
-            = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
+        %p
+          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
+        %p
+          = link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+
+        =render :partial => 'shared/switch_jurisdiction', locals: {response_set: response_set}
          
   .row-fluid.baseline
     .span3

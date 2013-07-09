@@ -337,4 +337,12 @@ $(function(){
 
 
 
+  // ## dashboard
+
+  // initialise some of the popover
+  $('.popdown').popover({
+    placement:'bottom',
+    trigger:'hover'
+  });
+
 });
