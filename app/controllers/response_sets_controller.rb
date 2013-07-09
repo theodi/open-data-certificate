@@ -13,12 +13,12 @@ class ResponseSetsController < ApplicationController
       @response_set.publish!
       redirect_to dashboard_path, notice: t('dashboard.published_response_set')
     rescue AASM::InvalidTransition
-      redirect_to dashboard_path, warning: t('dashboard.unable_to_publish_response_set_invalid')
+      redirect_to dashboard_path, alert: t('dashboard.unable_to_publish_response_set_invalid')
     end
   end
 
   rescue_from CanCan::AccessDenied do |exception|  
-    redirect_to dashboard_path, warning: t('dashboard.unable_to_access_response_set')
+    redirect_to dashboard_path, alert: t('dashboard.unable_to_access_response_set')
   end  
 
 end
