@@ -1,4 +1,5 @@
-.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{response_set == primary ? 'primary' : 'secondry'}"}
+- is_primary = response_set == primary
+.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondry'}"}
   .row-fluid
     .span3
       %h3= t('dashboard.level_attained')
@@ -12,7 +13,7 @@
 
       %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
       
-      %p= t ['dashboard.states', response_set.aasm_state, ]
+      %p= t ['dashboard.states', response_set.aasm_state ]
 
       
     .span3
@@ -30,8 +31,8 @@
         =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
     .span3
-      - unless response_set.archived?
-        %h3 Your answers
+      %h3 Your answers
+      -if is_primary
         %ul.unstyled
           %li
             = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
