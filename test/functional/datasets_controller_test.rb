@@ -15,7 +15,7 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   test "index response sets" do
-    sign_in FactoryGirl.create(:user_with_datasets)
+    sign_in FactoryGirl.create(:user_with_responses)
     get :index
     assert_response 200
     assert assigns(:datasets).size > 0
