@@ -11,9 +11,8 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "unpublished certificates can't be shown" do
     cert = FactoryGirl.create(:certificate)
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get :show, {id: cert.id}
-    end
+    get :show, {id: cert.id}
+    assert_response 404
   end
 
   test "unpublished certificates can be shown to their creator" do
