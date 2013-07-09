@@ -150,6 +150,7 @@ en:
     embed_instructions: Use the code below to embed this certificate on your site
     embed_badge: Badge
     view_embed_page: Certificate
+    edit_questionnaire: Edit questionnaire
 
   authentication:
     sign_in: Sign in
