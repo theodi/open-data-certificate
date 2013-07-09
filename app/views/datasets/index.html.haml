@@ -3,5 +3,5 @@
 = render partial: :dataset, collection: current_user.datasets
 
 -if current_user.datasets.blank?
-  %p= t("dashboard.no_certificates_yet")
+  %p= t("dashboard.no_certificates_to_show")
   = link_to t('menu.create_certificate'), authenticated_start_questionnaire_path, :class => 'btn btn-primary'

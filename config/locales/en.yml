@@ -68,7 +68,7 @@ en:
     embed_code: Embed code
     page_title: My certificates
     latest_published_certificate: Latest published certificate
-    no_certificates_yet: You don't have any certificates yet
+    no_certificates_to_show: You don't have any certificates yet
     copy_certificate:
       make_a_copy: Update
       and_edit: this questionnaire
