@@ -28,7 +28,7 @@ class SurveyorController < ApplicationController
         attrs = @response_set.attributes.keep_if do |key|
           %w(user_id dataset_id).include? key
         end
-        attrs.survey_id = survey.id;
+        attrs[:survey_id] = survey.id;
         new_response_set = ResponseSet.create attrs
 
         new_response_set.copy_answers_from_response_set!(@response_set)
