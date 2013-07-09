@@ -16,7 +16,7 @@
 
       
     .span3
-      %h3 What can I do next?
+      %h3 Your certificate
       .btn-group.btn-group-vertical
         -if response_set.draft?
           = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
@@ -30,11 +30,12 @@
         =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
     .span3
-      %h3 Needs a title
-      %ul.unstyled
-        - unless response_set.archived?
+      - unless response_set.archived?
+        %h3 Your answers
+        %ul.unstyled
           %li
             = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
+'
          
   .row-fluid.baseline
     .span3
