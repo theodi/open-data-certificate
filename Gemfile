@@ -22,6 +22,7 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'less-rails'
   gem 'less-rails-bootstrap'#, :git => 'git://github.com/theodi/less-rails-bootstrap.git'
+  gem 'twitter-bootstrap-rails-confirm'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -54,6 +55,9 @@ gem 'jquery-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
+
+# states of the questionnaires
+gem 'aasm'
 
 # authorization
 gem 'cancan'

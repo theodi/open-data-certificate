@@ -100,4 +100,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  private
+
+  # display 404 when we can't find a record
+  def record_not_found
+    render :file => Rails.root.join('public','404.html'), :status => "404 Not Found", layout: false
+  end
+
 end

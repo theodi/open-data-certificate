@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :datasets
+  has_many :datasets, :order => "created_at DESC"
   has_many :response_sets
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
