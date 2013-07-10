@@ -1,7 +1,8 @@
 - content_for :header_title, t('dashboard.page_title')
 
-= render partial: :dataset, collection: current_user.datasets
-
--if current_user.datasets.blank?
-  %p= t("dashboard.no_certificates_to_show")
-  = link_to t('menu.create_certificate'), authenticated_start_questionnaire_path, :class => 'btn btn-primary'
+- if current_user.datasets.any?
+  = render partial: 'datasets/dataset', collection: current_user.datasets
+- else
+  %p You don't have any certificates yet.
+  = form_tag non_authenticated_start_questionnaire_path do
+    %button.btn.btn-primary Start a new certificate

@@ -3,22 +3,22 @@ require 'test_helper'
 class DatasetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test "index (non logged in)" do
-    get :index
+  test "not signed_in users should get redirected to login" do
+    get :new
     assert_response :redirect
   end
 
-  test "index no response sets" do
+  test "signed_in users should get new" do
     sign_in FactoryGirl.create(:user)
-    get :index
-    assert_response 200
+    get :new
+    assert_response :success
   end
 
-  test "index response sets" do
-    sign_in FactoryGirl.create(:user_with_responses)
-    get :index
-    assert_response 200
-    assert assigns(:datasets).size > 0
+  test "signed_in users should create dataset" do
+    sign_in FactoryGirl.create(:user)
+    assert_difference('Dataset.count') do
+      post :create, dataset: {title: 'my dataset' }
+    end
   end
-  
+
 end

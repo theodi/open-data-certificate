@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
+  before_filter :redirect_to_root, except: [:show, :embed, :badge] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
 
   def index
     @search = params[:search]
@@ -10,15 +10,6 @@ class CertificatesController < ApplicationController
 
   def show
     @certificate = Certificate.find params[:id]
-
-    # pretend unpublished certificates don't exist
-    unless @certificate.published?
-
-      # but not if the current user owns them
-      unless current_user && current_user == @certificate.user
-        raise ActiveRecord::RecordNotFound
-      end
-    end
   end
 
   def create

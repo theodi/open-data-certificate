@@ -1,0 +1,31 @@
+- first_response_set ||= false
+- attained_level = response_set.certificate.try(:attained_level) || :none
+
+%tr{class: ["#{attained_level}-level", first_response_set ? 'first-response-set' : 'previous-response-set'] }
+  %td.level<
+    - if first_response_set
+      .certificate-badge
+    = t("levels.#{attained_level}.title")
+
+  %td.last-updated<
+    - if first_response_set
+      last updated
+    = time_tag(response_set.updated_at, response_set.updated_at.to_date.to_formatted_s(:rfc822))
+  %td.status{class: status_class_for_response_set_row(response_set)}= status_description_for_response_set_row(response_set)
+  %td.action<
+    - if response_set.complete?
+      = link_to(t('dashboard.view_certificate'), response_set.certificate, :class => 'btn btn-small btn-info btn-unstyled') if response_set.complete?
+    - else
+      = link_to(t('dashboard.edit_and_publish'), surveyor.continue_my_survey_path(:survey_code => response_set.survey.access_code, :response_set_code => response_set.access_code), :class => 'btn btn-small btn-info')
+  %td.action
+    - if response_set.newest_completed_in_dataset? && response_set.certificate
+      = link_to(t('dashboard.embed_code'), "#embed-code-#{response_set.certificate.id}", :class => 'btn btn-small btn-info btn-unstyled', 'data-toggle' => :modal)
+  %td.action<
+    - if response_set.newest_completed_in_dataset? && first_response_set
+      = form_for response_set.dataset, :url => dataset_start_questionnaire_path(response_set.dataset) do |f|
+        - if @surveys.count > 1
+          = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
+        = hidden_field_tag :source_response_set_id, response_set.id
+        %button.copy-certificate.btn.btn-small.btn-info
+          = t('dashboard.copy_certificate.make_a_copy')
+          %span= t('dashboard.copy_certificate.and_edit')

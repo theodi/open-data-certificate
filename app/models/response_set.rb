@@ -1,47 +1,16 @@
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
-  include AASM
 
-  after_save :update_certificate
+  before_save :generate_certificate
 
   attr_accessible :dataset_id
 
-  belongs_to :dataset, touch: true
+  belongs_to :dataset
   belongs_to :survey
   has_one :certificate
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
-
-  aasm do
-    state :draft, :initial => true
-    state :published, :before_enter => :publish_certificate, :after_enter => :archive_other_response_sets
-    state :archived
-
-    event :publish do
-      transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
-    end
-    
-    event :archive do
-      transitions from: :published, to: :archived
-    end
-  end
-
-  def publish_certificate
-    certificate.update_attribute :published, true
-  end
-
-  def archive_other_response_sets
-    related = dataset.try(:response_sets) || []
-
-    related.each do |response_set|
-      if response_set.id != self.id
-        response_set.archive! if response_set.published?
-      end
-    end
-
-  end
-
 
   DEFAULT_TITLE = 'Untitled'
 
@@ -50,10 +19,6 @@ class ResponseSet < ActiveRecord::Base
 
   def title
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
-  end
-
-  def modifications_allowed?
-    draft?
   end
 
   # find which dependencies are active for this response set as a whole
@@ -100,9 +65,8 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_requirements
     @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.nil? ? 
-        true : 
-        depends[r.dependency.id]
+      r.dependency.id ? 
+        depends[r.dependency.id] : true
     end
 
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
@@ -137,10 +101,10 @@ class ResponseSet < ActiveRecord::Base
              .order('questions.display_order ASC')
   end
 
-  def update_certificate
-    create_certificate if certificate.nil?
-
-    certificate.update_from_response_set
+  def generate_certificate
+    if self.complete? && self.certificate.nil?
+      create_certificate attained_level: self.attained_level, curator: curator_determined_from_responses, name: title
+    end
   end
 
   def copy_answers_from_response_set!(source_response_set)
@@ -213,6 +177,5 @@ class ResponseSet < ActiveRecord::Base
     # TODO: this method would need to be extended to handle "newest for survey" - for phase 2...
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
-
 
 end

@@ -89,11 +89,6 @@ jQuery(document).ready(function(){
       data: question_data, dataType: 'json',
       success: function(response) {
         successfulSave(response);
-      },
-      error: function(){
-        // This throws on aborted requests (so when the save button is clicked and page unloaded while it is being sent)
-        // would be good to have this in still, though to stop the alert when you save (and it has saved), removing for now
-        //alert("an error occured when saving your response");
       }
     });
   });

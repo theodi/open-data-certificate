@@ -10,10 +10,7 @@
           %h1= t('improvements.heading')
           %h3= @response_set.title
         .span3
-          -if @response_set.incomplete?
-            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
-          -else
-            =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large', :role => "button"
+          =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
@@ -38,9 +35,9 @@
         %ul
           -fields.each do |field|
             %li
-              =link_to @response_set.complete? ? '#' : "take#q_#{field.id}" do
+              =link_to "take#q_#{field.id}" do
                 answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
 
           -requirements.each do |requirement|
             %li
-              = link_to without_instruction(requirement.text).html_safe, @response_set.complete? ? '#' : "take#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
+              = link_to without_instruction(requirement.text).html_safe, "take#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
