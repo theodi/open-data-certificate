@@ -2,6 +2,9 @@ class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
 
+  # override with :touch
+  belongs_to :response_set, touch: true
+
   after_save :set_default_dataset_title
   after_save :update_survey_section_id
 

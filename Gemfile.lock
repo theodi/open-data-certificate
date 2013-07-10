@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.0.19)
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
       mail (~> 2.5.3)
@@ -205,6 +206,7 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-bootstrap-rails-confirm (1.0.1)
     tzinfo (0.3.37)
     uglifier (2.1.1)
       execjs (>= 0.3.0)
@@ -217,6 +219,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   airbrake
   cancan
   coffee-rails (~> 3.2.1)
@@ -247,4 +250,5 @@ DEPENDENCIES
   test-unit
   therubyracer
   thin
+  twitter-bootstrap-rails-confirm
   uglifier (>= 1.0.3)
