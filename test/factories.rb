@@ -1,9 +1,21 @@
 FactoryGirl.define do
 
   factory :user do
-    email "test@example.com"
+    sequence :email do |n|
+      "test#{n}@example.com"
+    end
+
     password "testpassword"
     password_confirmation "testpassword"
+
+    factory :user_with_responses do
+      after(:create) do |user|
+        FactoryGirl.create_list(:dataset, 3, user: user)
+        user.datasets.each do |dataset|
+          FactoryGirl.create_list(:response_set, 2, user: user, dataset: dataset)
+        end
+      end
+    end
   end
 
   factory :dataset do
@@ -16,6 +28,10 @@ FactoryGirl.define do
 
   factory :certificate do
     response_set
+
+    factory :published_certificate do
+      published true
+    end
   end
 
   sequence :unique_survey_access_code do |n|
@@ -145,7 +161,7 @@ questions:
   end
 
   factory :response_set do |r|
-    r.user_id {}
+    user
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }

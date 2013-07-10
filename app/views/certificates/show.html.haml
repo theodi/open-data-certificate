@@ -1,6 +1,15 @@
-.certificate.hero-unit{class:@certificate.attained_level+'-level'}
+.certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
 
-  = link_to(t("certificates.embed_this_on_your_site"), "#embed-code-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+  - if @certificate.response_set.published?
+    = link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+  - elsif @certificate.response_set.draft?
+    %ul.pull-right.unstyled
+      %li
+        .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
+      %li
+        =#link_to t('certificate.edit_questionnaire'), [surveyor, @certificate.response_set], class: 'btn btn-small btn-info pull-left'
+        =link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), class: 'btn btn-small btn-info pull-left'
+
 
   .certificate-badge.centered
 
