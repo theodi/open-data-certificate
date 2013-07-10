@@ -157,6 +157,7 @@ en:
 
   response_set:
     choose_a_jurisdiction: Choose a new Jurisdiction
+    dialog_body: Select a new jurisdiction below and your answers will be copied across to a new questionnaire
     choose_jurisdiction: --- Select Jurisdiction ---
     start_new_jurisdiction: Change Jurisdiction
 

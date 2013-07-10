@@ -3,6 +3,7 @@
     %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
     %h3= t('response_set.choose_a_jurisdiction')
   .modal-body
+    %p= t 'response_set.dialog_body'
     -# only show surveys that aren't down for migration from
     - surveys = @surveys.keep_if {|s| ! Survey::MIGRATIONS.has_key? s.access_code}
     =# form_for [surveyor, response_set] do |f| (see surveyor#continue refactor note)
