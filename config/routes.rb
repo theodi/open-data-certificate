@@ -6,6 +6,12 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements', :via => :get
     match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
+
+    # have a response_set resource for deleting for now, have
+    # a feeling that this could include a couple of the other 
+    # routes,  though try it out for now
+    resources :response_sets, :only => :destroy
+
   end
   post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
   get 'start_certificate', :to => 'application#start_questionnaire', :as => 'authenticated_start_questionnaire'

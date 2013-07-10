@@ -25,7 +25,7 @@ en:
 
   levels:
     none:
-      title: None
+      title: No level
       title_with_level: No level
       description: this data does not satisfy the fundamental requirements for open data.
     basic:
@@ -64,17 +64,22 @@ en:
 
   dashboard:
     archived: Archived
-    edit_and_publish: Edit and publish
+    edit_and_publish: Edit questionnaire
     embed_code: Embed code
     page_title: My certificates
     latest_published_certificate: Latest published certificate
     copy_certificate:
-      make_a_copy: Make a copy
-      and_edit: and edit
+      make_a_copy: Update
+      and_edit: this questionnaire
     previous_versions: Previous versions
     start_new_certificate: Start new certificate
     you_are_currently_editing_this_certificate: You are currently editing this certificate
     view_certificate: View certificate
+    how_do_i_improve_my_open_data: How can I improve my open data?
+    confirm_deletion: Are you sure you want to delete this item?
+    unable_to_delete_response_set: Unable to delete questionnaire
+    deleted_response_set: Deleted questionnaire
+    publish_certificate: Publish
 
   homepage:
     log_in: Log in
@@ -126,6 +131,7 @@ en:
     this_data_has_achieved: This data has achieved
     which_means: which means
     embeddable_certificate: Embed on your site
+    not_yet_published: Not yet published
     embed_badge_instructions: Use the code below to add this badge to your site
     embed_instructions: Use the code below to embed this certificate on your site
     embed_badge: Badge
@@ -160,6 +166,7 @@ en:
   improvements:
     heading: How can I improve my open data?
     return_to_questionnaire: Return to questionnaire
+    return_to_dashboard: Return to dashboard
     levels:
       basic:
         title: The basics
