@@ -1254,14 +1254,13 @@ td.action {
   &, .row-fluid{
     padding-right: 20px;
   }
-  .row-fluid.baseline {
-    background-color: rgb(222, 222, 222);
-  }
+ 
 
   // bit of a hack to get lines mid-gutter
   .row-fluid{
     position: relative
   }
+
 
   [class*="span"]:before{
     content:'';
@@ -1285,6 +1284,7 @@ td.action {
     }
   }
 
+ 
 
   a .delete {
     background-image:url(/assets/status/remove-sign.png);
@@ -1303,9 +1303,13 @@ td.action {
 
 }
 
+.response-set.response-set-primary .row-fluid.baseline {
+    background-color: rgb(222, 222, 222);
+  }
+
 .response-set-secondry{
   h3{display:none}
-  .level-badge, .status-badge{
+  .level-badge{
     width:55px;
     height:50px;
     padding-top:0;
@@ -1313,6 +1317,16 @@ td.action {
     background-position: center center;
     margin:10px;
   }
+
+  .status-badge{
+    width:35px;
+    height:40px;
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin:10px;
+   }
+    
   .level-badge, .status-badge, p{
     display: inline-block;
     vertical-align: middle;
@@ -1322,7 +1336,25 @@ td.action {
   }
   .btn-group{
     margin-top:10px;
+   
+    .btn {
+    background-color: transparent;
+    background-image: none;
+    border:none;
+    box-shadow: none;
+    color: @odiBlueDark;
+    font-size: 16px;
+    padding: 10px 0 0;
+  
+
   }
+  :hover {
+      color: @odiBlueDarker;
+      text-decoration: underline;
+    }
+  }
+
+  
 }
 
 
@@ -1354,8 +1386,8 @@ td.action {
 
 
 .status-badge{
-  width:100px;
-  height:100px; // we want text at the bottom, so padding rather than height
+  width:80px;
+  height:80px; // we want text at the bottom, so padding rather than height
   background-image:url(/assets/status/none.png);
   background-repeat: no-repeat;
   display:block;
