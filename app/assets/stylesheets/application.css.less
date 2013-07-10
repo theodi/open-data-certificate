@@ -318,6 +318,22 @@
 }
 
 
+// override default label & badges colours
+.label, .badge {
+  color: @white;
+  background-color: @odiBlue;
+
+  &-inverse{
+    text-shadow:none;
+    color: @odiBlue; 
+    background-color: @white;
+  }
+  &-inverse[href]{
+    background-color: darken(@white, 10%);
+  }
+}
+
+
 /************************************************
     Bootstrap --> Rails
 ************************************************/
