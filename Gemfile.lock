@@ -145,6 +145,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-footnotes (3.7.9)
+      rails (>= 3.0.0)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -241,6 +243,7 @@ DEPENDENCIES
   mocha
   mysql2
   rails (= 3.2.13)
+  rails-footnotes (>= 3.7.9)
   ruby-prof
   sass-rails (~> 3.2.3)
   shoulda
