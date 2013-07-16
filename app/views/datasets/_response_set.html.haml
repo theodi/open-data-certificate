@@ -30,7 +30,7 @@
         - unless response_set.archived? || response_set.draft?
           = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
 
-      - unless response_set.archived?
+      - unless response_set.archived? || response_set.draft?
         =render :partial => 'shared/embed_code', :locals => {:certificate => response_set.certificate}
 
     .span3.edit-jurisdiction
