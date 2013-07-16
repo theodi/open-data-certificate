@@ -17,6 +17,7 @@
     %p.certificate-level
       = t("levels.#{@certificate.attained_level}.title_with_level")
       %small= t("certificate.self_certified")
+      %span.badge= @certificate.survey.title
     %h1= @certificate.response_set.title
     %p
       = t("certificate.this_data_has_achieved")
