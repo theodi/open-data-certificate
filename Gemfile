@@ -40,6 +40,7 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'ruby-prof'
+  gem 'rails-footnotes', '>= 3.7.9'
 end
 
 group :production do
@@ -47,6 +48,7 @@ group :production do
   gem 'mysql2'
   gem 'airbrake'
   gem 'memcache-client'
+  gem 'logstash-event'
   gem 'lograge'
 end
 

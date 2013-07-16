@@ -147,13 +147,15 @@
       margin-bottom: 15px; 
     }
 
-    .span6:first-child {
+    .open-data-certificate {
+        width: 60px;
+        margin: 0 auto;
+        }
+
+    .span6:last-child {
       border-right: thin white solid;
     }
 
-    .span6 div:first-child {
-      margin-left: 138px;
-    }
 
     .span6:last-child p:first-child {
       text-align: center;
@@ -255,10 +257,6 @@
 
       }
 
-      /* Making input text white loses the 'invalid' colour */
-      /* Add it back */
-      input[type=email]:invalid { color: #cc0000; }
-      input[type=email]:valid { color: #fff; }
 
     }
 
@@ -318,6 +316,22 @@
 .btn.btn-confirmed{
   &,&:hover{
     #gradient > .striped(@btnPrimaryBackground);
+  }
+}
+
+
+// override default label & badges colours
+.label, .badge {
+  color: @white;
+  background-color: @odiBlue;
+
+  &-inverse{
+    text-shadow:none;
+    color: @odiBlue; 
+    background-color: @white;
+  }
+  &-inverse[href]{
+    background-color: darken(@white, 10%);
   }
 }
 
@@ -775,11 +789,6 @@ nav .dropdown-menu-button {
     font-size: 20px;
   }
 
-  /* Making input text white loses the 'invalid' colour */
-  /* Add it back */
-  input[type=email]:invalid { color: #cc0000; }
-  input[type=email]:valid { color: #fff; }
-
   .form-field-inline {
     float: left;
     margin: 3px 0 0 0;
@@ -848,6 +857,13 @@ header {
 
   h1,h2,h3,h4,h5,h6{
     font-weight:normal;
+  }
+
+  h1{  
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom:0.1em;
   }
 }
 
@@ -1111,7 +1127,7 @@ th {
 
 
 
-// My certificates view //
+/* My certificates view //
 
 .main-default .first-response-set i, .main-default  .previous-response-set i {
 display: inline-block;
@@ -1248,7 +1264,7 @@ td.action {
 }
 
 
-
+*/
 
 // UPDATED My Certificates (/Dashboard) view (remove above when ready)
 
@@ -1263,14 +1279,13 @@ td.action {
   &, .row-fluid{
     padding-right: 20px;
   }
-  .row-fluid.baseline {
-    background-color: rgb(222, 222, 222);
-  }
+ 
 
   // bit of a hack to get lines mid-gutter
   .row-fluid{
     position: relative
   }
+
 
   [class*="span"]:before{
     content:'';
@@ -1294,6 +1309,7 @@ td.action {
     }
   }
 
+ 
 
   a .delete {
     background-image:url(/assets/status/remove-sign.png);
@@ -1310,11 +1326,20 @@ td.action {
    color: @odiCrimsonDark;
   }
 
+  // jurisdiction badge
+  .jurisdiction{margin:.5em;}
+
 }
 
+.response-set.response-set-primary .row-fluid.baseline {
+    background-color: rgb(222, 222, 222);
+  }
+
 .response-set-secondry{
-  h3{display:none}
-  .level-badge, .status-badge{
+
+  h3, .edit-jurisdiction a{display:none}
+
+  .level-badge{
     width:55px;
     height:50px;
     padding-top:0;
@@ -1322,6 +1347,16 @@ td.action {
     background-position: center center;
     margin:10px;
   }
+
+  .status-badge{
+    width:35px;
+    height:40px;
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin:10px;
+   }
+    
   .level-badge, .status-badge, p{
     display: inline-block;
     vertical-align: middle;
@@ -1331,6 +1366,21 @@ td.action {
   }
   .btn-group{
     margin-top:10px;
+   
+    .btn {
+      background-color: transparent;
+      background-image: none;
+      border:none;
+      box-shadow: none;
+      color: @odiBlueDark;
+      font-size: 16px;
+      padding: 10px 0 0;
+    }
+
+    :hover {
+      color: @odiBlueDarker;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -1363,8 +1413,8 @@ td.action {
 
 
 .status-badge{
-  width:100px;
-  height:100px; // we want text at the bottom, so padding rather than height
+  width:80px;
+  height:80px; // we want text at the bottom, so padding rather than height
   background-image:url(/assets/status/none.png);
   background-repeat: no-repeat;
   display:block;
@@ -1388,6 +1438,26 @@ td.action {
 
 
 // Questionnaire (survey) view //
+
+// jurisdiction select at the top of the certificate
+header .jurisdiction{
+  a{
+    cursor: pointer;
+
+    // match the badge styles
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: @baseFontSize * .846;
+    font-weight: bold;
+    line-height: 14px; // ensure proper line-height if floated
+    color: @white;
+    vertical-align: baseline;
+    white-space: nowrap;
+  }
+  .popover{
+    color:@black;
+  }
+}
 
 #surveyor{
 
@@ -1459,6 +1529,7 @@ td.action {
     margin: 15px 0;
   }
 
+
   // custom
   input.string{
     width:100%;
@@ -1519,13 +1590,16 @@ td.action {
     position: relative;
     padding-top: 10px;
 
-    // focussed elements
-    &.active{
+
+    &.active {
+
       // hard to do the odd outline
 
       // outline: 1px solid @odiBlueLight;
       background-color: @odiBlueLighter;
     }
+
+
 
     aside{
       display:none;
@@ -1554,8 +1628,8 @@ td.action {
     }
   }
 
-
 }
+
 
 #status_panel{
   .transition(right 0.5s);
@@ -1620,7 +1694,7 @@ td.action {
 
   .status_texts {
     dd,dt{
-      display:none;
+      display:none; 
       &.active{
         display:block;
       }
@@ -2145,6 +2219,43 @@ width: 328px;
 }
 
 
+//
+// IE conditional styles
+// --------------------------------------------------
+
+.lt9 {
+
+  /* Setting line-heights in IE centres the input text.
+     Doing this in other browsers means you get a massive text cursor - not great. */
+
+  #login, #register, .modal-body .log-in .form-field {
+    input[type="text"], input[type="email"], input[type="password"] {
+      line-height: 60px;
+    }
+  }
+
+  .main-default input,
+  input.string {
+    line-height: 60px;
+  }
+
+}
 
 
 
+
+// Debug styles
+#footnotes_debug {
+  margin: 0;
+  padding:1em;
+  background-color:#fff;
+  font-size: 13px; font-weight: normal; text-align: center; color: #444; line-height: 16px;
+  th, td {color: #444; line-height: 18px;}
+  a {color: #9b1b1b; font-weight: inherit; text-decoration: none; line-height: 18px;}
+  table {text-align: center;}
+  table td {padding: 0 5px;}
+  tbody {text-align: left;}
+  .name_values td {vertical-align: top;}
+  legend {background-color: #fff;}
+  fieldset {text-align: left; border: 1px dashed #aaa; padding: 0.5em 1em 1em 1em; margin: 1em 2em; color: #444; background-color: #FFF;}
+}

@@ -89,7 +89,10 @@ en:
     level_attained: 'Level attained:'
     current_status: Current status
     last_updated_at: 'Last updated: %{time_span} ago'
-
+    jurisdiction: jurisdiction
+    popover:
+      about_jurisdiction: 'This has been entered under the %{jurisdiction} jurisdiction'
+      change_jurisdiction: You can use this data to start a new questionnaire with a different jurisdiction
     states:
       draft: Draft
       published: Published
@@ -151,6 +154,12 @@ en:
     embed_badge: Badge
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
+
+  response_set:
+    choose_a_jurisdiction: Choose a new Jurisdiction
+    dialog_body: Select a new jurisdiction below and your answers will be copied across to a new questionnaire
+    choose_jurisdiction: --- Select Jurisdiction ---
+    start_new_jurisdiction: Change Jurisdiction
 
   authentication:
     sign_in: Sign in

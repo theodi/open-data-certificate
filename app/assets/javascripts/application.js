@@ -336,5 +336,19 @@ $(function(){
   $('#status_panel').trigger('update');
 
 
+  // Placeholders for <= IE9 - https://github.com/mathiasbynens/jquery-placeholder
+
+  // If the browser supports HTML5 placeholder, it won't do anything
+  
+  $('input, textarea').placeholder();
+
+
+  // ## dashboard
+
+  // initialise some of the popover
+  $('.popdown').popover({
+    placement:'bottom',
+    trigger:'hover'
+  });
 
 });

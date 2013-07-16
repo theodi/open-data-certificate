@@ -14,9 +14,30 @@ class SurveyorController < ApplicationController
     start_questionnaire
   end
 
+  # it might be a *really* nice refactor to take this to response_set_controller#update
+  # then we could use things like `form_for [surveyor, response_set] do |f|`
+  #
+  # also, GET here is totally totally wrong
   def continue
 
-    if !@response_set.modifications_allowed?
+    if params[:juristiction_access_code]
+      # they *actually* want to swap the jurisdiction
+
+      survey = Survey.newest_survey_for_access_code(params[:juristiction_access_code])
+      unless survey.nil?
+        attrs = @response_set.attributes.keep_if do |key|
+          %w(user_id dataset_id).include? key
+        end
+        attrs[:survey_id] = survey.id;
+        new_response_set = ResponseSet.create attrs
+
+        new_response_set.copy_answers_from_response_set!(@response_set)
+        # @response_set.destroy
+
+        @response_set = new_response_set
+      end
+
+    elsif !@response_set.modifications_allowed?
       # they *actually* want to create a new response set
 
       attrs = @response_set.attributes.keep_if do |key|

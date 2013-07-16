@@ -3,6 +3,12 @@ class Survey < ActiveRecord::Base
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
+  # this is access_codes of surveys that we want the user to move from->to
+  MIGRATIONS = {'open-data-certificate-questionnaire' => 'gb'}
+
+  # temorary - when we have the jurisdiction choice at the start, this won't be needed
+  DEFAULT_ACCESS_CODE = 'gb'
+
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   validates :dataset_title, :presence => true
   attr_accessible :dataset_curator, :dataset_title
