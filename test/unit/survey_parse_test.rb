@@ -38,7 +38,6 @@ class SurveyParseTest < ActiveSupport::TestCase
   # end
 
   test "The default survey parses correctly" do
-    return
     ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
 
     assert_difference 'Survey.count', 1 do
@@ -47,7 +46,6 @@ class SurveyParseTest < ActiveSupport::TestCase
   end
 
   test "Surveys have valid ruby syntax" do
-    return
     surveyDir = Rails.root.join('surveys')
 
     files = Dir.entries(surveyDir).select { |file| file =~ /.*\.rb$/ }
