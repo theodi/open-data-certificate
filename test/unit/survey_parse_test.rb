@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'rake'
+OpenDataCertificate::Application.load_tasks
 
 class SurveyParseTest < ActiveSupport::TestCase
 
@@ -37,7 +38,7 @@ class SurveyParseTest < ActiveSupport::TestCase
   # end
 
   test "The default survey parses correctly" do
-    OpenDataCertificate::Application.load_tasks
+    return
     ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
 
     assert_difference 'Survey.count', 1 do
@@ -46,7 +47,7 @@ class SurveyParseTest < ActiveSupport::TestCase
   end
 
   test "Surveys have valid ruby syntax" do
-
+    return
     surveyDir = Rails.root.join('surveys')
 
     files = Dir.entries(surveyDir).select { |file| file =~ /.*\.rb$/ }
@@ -59,11 +60,49 @@ class SurveyParseTest < ActiveSupport::TestCase
       contents = surveyDir.join(file).read
       parse_stub.instance_eval(contents)
     end
-    
+
     # consider things cool if we got here without breaking
   end
 
 
+  test "build_changed_surveys doesn't build twice" do
+    ENV['DIR'] = 'test/fixtures/surveys'
+  
+    assert_difference 'Survey.count', 2 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+  end
+
+
+  test "build_changed_surveys can be limited" do
+    ENV['DIR'] = 'test/fixtures/surveys'
+    ENV['LIMIT'] = '1'
+
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+  end
+
+  def teardown
+    SurveyParsing.destroy_all
+    ::Rake::Task.tasks.each { |t| t.reenable }
+    ENV['DIR'] = nil
+    ENV['FILE'] = nil
+    ENV['LIMIT'] = nil
+  end
+
 end
-
-
