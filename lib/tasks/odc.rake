@@ -41,7 +41,7 @@ namespace :odc do
 
     purge_before = Time.now - 12.hours
 
-    rs = ResponseSet.
+    ResponseSet.
       where(user_id: nil). # unclaimed response_sets
       where(ResponseSet.arel_table[:updated_at].lt(purge_before)).
       destroy_all
