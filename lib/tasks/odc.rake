@@ -36,7 +36,7 @@ namespace :surveyor do
   end
 
   desc  'build a survey only if file has changed'
-  task :build_changed_survey do
+  task :build_changed_survey => :environment do
     file = Rails.root.join ENV["FILE"]
     raise "File does not exist: #{file}" unless FileTest.exists? file
 
