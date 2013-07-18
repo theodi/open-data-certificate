@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SurveyParseTest < ActiveSupport::TestCase
+class OdcRakeTest < ActiveSupport::TestCase
 
   test "all the surveys in surveys directory parse" do
     require 'rake'
@@ -30,6 +30,7 @@ class SurveyParseTest < ActiveSupport::TestCase
     # together with their filename to aid bugfixing
     assert @result.values.none?, @result.delete_if{|k,v|v.blank?}.map {|k,v| ["survey: #{k}", "#{v}\n"] }.unshift("\n").join("\n")
   end
+  
 end
 
 
