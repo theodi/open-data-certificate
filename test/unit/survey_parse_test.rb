@@ -95,6 +95,21 @@ class SurveyParseTest < ActiveSupport::TestCase
 
   end
 
+
+  test "build changed survey for single file" do
+    ENV['FILE'] = 'test/fixtures/surveys/one.rb'
+
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_survey"].invoke
+    end
+
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_survey"].invoke
+    end
+
+  end
+
+
   def teardown
     SurveyParsing.destroy_all
     ::Rake::Task.tasks.each { |t| t.reenable }

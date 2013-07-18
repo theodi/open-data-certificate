@@ -33,6 +33,22 @@ namespace :surveyor do
         puts "--- Skipped #{file}"
       end
     end
+  end
+
+  desc  'build a survey only if file has changed'
+  task :build_changed_survey do
+    file = Rails.root.join ENV["FILE"]
+    raise "File does not exist: #{file}" unless FileTest.exists? file
+
+    md5 = Digest::MD5.hexdigest(file.read)
+    survey_parsing = SurveyParsing.find_or_create_by_file_name(ENV['FILE'])
+
+    if survey_parsing.md5 != md5
+      Rake::Task["surveyor"].invoke
+    else
+      puts "--- Skipped #{file}"
+    end
+
 
   end
 end
