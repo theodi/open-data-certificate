@@ -8,7 +8,7 @@ class ResponseSet < ActiveRecord::Base
 
   belongs_to :dataset, touch: true
   belongs_to :survey
-  has_one :certificate
+  has_one :certificate, dependent: :destroy
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
