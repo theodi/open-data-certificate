@@ -20,8 +20,7 @@ class Survey < ActiveRecord::Base
 
   class << self
     def available_to_complete
-      #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
-      order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
+      order('access_code DESC, survey_version DESC').group(:access_code)
     end
 
     def newest_survey_for_access_code(access_code)
