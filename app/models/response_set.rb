@@ -52,6 +52,15 @@ class ResponseSet < ActiveRecord::Base
     title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
+  def jurisdiction
+    if Survey::MIGRATIONS.has_key? survey.access_code
+      target_access_code = Survey::MIGRATIONS[survey.access_code]
+      Survey.where(access_code: target_access_code).first.try(:title)
+    else
+      survey.title
+    end
+  end
+
   def modifications_allowed?
     draft?
   end

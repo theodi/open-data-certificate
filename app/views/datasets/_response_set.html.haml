@@ -17,7 +17,7 @@
       %p= t ['dashboard.states', response_set.aasm_state]
 
       %p.jurisdiction
-        %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.survey.title})}}= response_set.survey.title
+        %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction
 
       
     .span3
