@@ -9,8 +9,8 @@ class SurveySection < ActiveRecord::Base
     # preload if questions have been triggered
     dep_map = response_set.depends
 
-    questions.where(:display_on_certificate => true)
-             .select {|q| q.dependency.nil? ?  true : dep_map[q.dependency.id] }
+    questions.includes(:dependency).where(:display_on_certificate => true).
+             select {|q| q.dependency.nil? ?  true : dep_map[q.dependency.id] }
   end
 
 end
