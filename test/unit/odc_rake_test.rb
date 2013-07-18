@@ -2,7 +2,7 @@ require 'test_helper'
 require 'rake'
 OpenDataCertificate::Application.load_tasks
 
-class SurveyParseTest < ActiveSupport::TestCase
+class OdcRakeTest < ActiveSupport::TestCase
 
   # We are no longer testing all surveys (as there are ~250 now), instead we test (below) if:
   #   * the UK parses correctly
@@ -109,6 +109,25 @@ class SurveyParseTest < ActiveSupport::TestCase
 
   end
 
+
+  test "purge_questionnaires gets rid of unanswered questionnaires" do
+
+    yesterday =  Time.now - 24.hours
+
+    @a = FactoryGirl.create :response_set, user: nil
+    @b = FactoryGirl.create :response_set, updated_at: yesterday, user: nil
+    @c = FactoryGirl.create :response_set, updated_at: yesterday, user: FactoryGirl.create(:user)
+
+    assert_difference 'ResponseSet.count', -1 do
+      Rake::Task["odc:purge_questionnaires"].invoke
+    end
+
+    assert ResponseSet.exists? @a
+    assert_false ResponseSet.exists? @b
+    assert ResponseSet.exists? @c
+
+  end
+  
 
   def teardown
     SurveyParsing.destroy_all
