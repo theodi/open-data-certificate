@@ -19,6 +19,12 @@ class Survey < ActiveRecord::Base
   has_many :dependencies, :through => :questions
 
   class << self
+
+    def build(path)
+      puts "--- building #{path} [NOT IMPLEMENTED]"
+    end
+    handle_asynchronously :build, :priority => 10
+
     def available_to_complete
       #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
       order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}

@@ -31,5 +31,31 @@ namespace :surveyor do
     end
 
   end
+
+  desc "queue up surveys to be built by delayed job"
+  task :enqueue_surveys => :environment do
+    # This is a stub for now, implemented in the jurisdictions branch
+    t = Time.now.to_i
+    Survey.build("#{t}-example-file1.rb")
+    Survey.build("#{t}-example-file2.rb")
+    Survey.build("#{t}-example-file3.rb")
+    Survey.build("#{t}-example-file4.rb")
+  end
+
 end
 
+
+namespace :odc do
+
+  desc "remove (12h) old and unclaimed questionnaires"
+  task :purge_questionnaires => :environment do
+
+    purge_before = Time.now - 12.hours
+
+    ResponseSet.
+      where(user_id: nil). # unclaimed response_sets
+      where(ResponseSet.arel_table[:updated_at].lt(purge_before)).
+      destroy_all
+
+  end
+end
