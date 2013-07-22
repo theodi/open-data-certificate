@@ -127,7 +127,18 @@ class OdcRakeTest < ActiveSupport::TestCase
     assert ResponseSet.exists? @c
 
   end
-  
+
+  test "enqueue_surveys" do
+    ENV['DIR'] = 'test/fixtures/surveys'
+
+    Survey::DEFAULT_ACCESS_CODE = 'one'
+
+    assert_difference 'Delayed::Job.count', 2 do
+      assert_difference 'Delayed::Job.where(priority:5).count', 1,  'The default survey is prioritised' do
+        Rake::Task["surveyor:enqueue_surveys"].invoke
+      end
+    end
+  end
 
   def teardown
     SurveyParsing.destroy_all

@@ -54,12 +54,17 @@ namespace :surveyor do
 
   desc "queue up surveys to be built by delayed job"
   task :enqueue_surveys => :environment do
-    # This is a stub for now, implemented in the jurisdictions branch
-    t = Time.now.to_i
-    Survey.build("#{t}-example-file1.rb")
-    Survey.build("#{t}-example-file2.rb")
-    Survey.build("#{t}-example-file3.rb")
-    Survey.build("#{t}-example-file4.rb")
+    dir = ENV['DIR'] || 'surveys'
+    files = Dir.entries(Rails.root.join(dir)).select { |file| file =~ /.*\.rb/ }
+
+    files.each do |file|
+      builder = SurveyBuilder.new(dir, file)
+
+      # default survey is a higher priority
+      priority =  builder.default_survey? ? 5 : 10
+
+      Delayed::Job.enqueue builder, priority: priority
+    end
   end
 
 end
