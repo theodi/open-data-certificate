@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     render '/home/index'
   end
 
+  def status
+    @job_count = Delayed::Job.count
+    render '/home/status'
+  end
+
   # A user pings this url if they have js enabled, so we can tell surveyor
   # not to find unnecessary requirements.
   def has_js
