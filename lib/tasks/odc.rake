@@ -51,6 +51,17 @@ namespace :surveyor do
 
 
   end
+
+  desc "queue up surveys to be built by delayed job"
+  task :enqueue_surveys => :environment do
+    # This is a stub for now, implemented in the jurisdictions branch
+    t = Time.now.to_i
+    Survey.build("#{t}-example-file1.rb")
+    Survey.build("#{t}-example-file2.rb")
+    Survey.build("#{t}-example-file3.rb")
+    Survey.build("#{t}-example-file4.rb")
+  end
+
 end
 
 

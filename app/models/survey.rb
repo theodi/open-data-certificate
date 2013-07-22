@@ -19,6 +19,12 @@ class Survey < ActiveRecord::Base
   has_many :dependencies, :through => :questions
 
   class << self
+
+    def build(path)
+      puts "--- building #{path} [NOT IMPLEMENTED]"
+    end
+    handle_asynchronously :build, :priority => 10
+
     def available_to_complete
       order('access_code DESC, survey_version DESC').group(:access_code)
     end
