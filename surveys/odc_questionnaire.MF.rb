@@ -1,4 +1,5 @@
 survey 'MF',
+  :full_title => 'SaintMartin(frenchPart)',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

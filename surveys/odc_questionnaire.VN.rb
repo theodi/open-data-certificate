@@ -1,4 +1,5 @@
 survey 'VN',
+  :full_title => 'VietNam',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

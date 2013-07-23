@@ -1,4 +1,5 @@
 survey 'MR',
+  :full_title => 'Mauritania',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

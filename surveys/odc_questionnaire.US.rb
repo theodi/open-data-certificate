@@ -1,4 +1,5 @@
 survey 'US',
+  :full_title => 'UnitedStates',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

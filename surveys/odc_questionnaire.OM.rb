@@ -1,4 +1,5 @@
 survey 'OM',
+  :full_title => 'Oman',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'DE',
+  :full_title => 'Germany',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

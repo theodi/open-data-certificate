@@ -1,4 +1,5 @@
 survey 'BB',
+  :full_title => 'Barbados',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

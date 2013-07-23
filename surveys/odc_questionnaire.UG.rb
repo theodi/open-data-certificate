@@ -1,4 +1,5 @@
 survey 'UG',
+  :full_title => 'Uganda',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'RW',
+  :full_title => 'Rwanda',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

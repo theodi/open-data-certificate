@@ -1,4 +1,5 @@
 survey 'TK',
+  :full_title => 'Tokelau',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

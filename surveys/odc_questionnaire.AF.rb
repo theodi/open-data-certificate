@@ -1,4 +1,5 @@
 survey 'AF',
+  :full_title => 'Afghanistan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

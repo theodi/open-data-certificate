@@ -1,4 +1,5 @@
 survey 'IS',
+  :full_title => 'Iceland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

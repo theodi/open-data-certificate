@@ -1,4 +1,5 @@
 survey 'KR',
+  :full_title => 'Korea,RepublicOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'AW',
+  :full_title => 'Aruba',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

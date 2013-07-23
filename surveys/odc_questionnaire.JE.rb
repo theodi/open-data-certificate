@@ -1,4 +1,5 @@
 survey 'JE',
+  :full_title => 'Jersey',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

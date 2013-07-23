@@ -1,4 +1,5 @@
 survey 'GM',
+  :full_title => 'Gambia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

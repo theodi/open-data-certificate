@@ -1,4 +1,5 @@
 survey 'BG',
+  :full_title => 'Bulgaria',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

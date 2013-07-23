@@ -1,4 +1,5 @@
 survey 'MN',
+  :full_title => 'Mongolia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

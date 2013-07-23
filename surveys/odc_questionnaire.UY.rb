@@ -1,4 +1,5 @@
 survey 'UY',
+  :full_title => 'Uruguay',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

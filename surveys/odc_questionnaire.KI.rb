@@ -1,4 +1,5 @@
 survey 'KI',
+  :full_title => 'Kiribati',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

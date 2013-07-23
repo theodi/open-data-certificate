@@ -1,4 +1,5 @@
 survey 'KN',
+  :full_title => 'SaintKittsAndNevis',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'AL',
+  :full_title => 'Albania',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

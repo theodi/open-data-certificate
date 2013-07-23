@@ -1,4 +1,5 @@
 survey 'BM',
+  :full_title => 'Bermuda',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

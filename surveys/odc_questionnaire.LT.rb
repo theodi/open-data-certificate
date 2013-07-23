@@ -1,4 +1,5 @@
 survey 'LT',
+  :full_title => 'Lithuania',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'CX',
+  :full_title => 'ChristmasIsland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

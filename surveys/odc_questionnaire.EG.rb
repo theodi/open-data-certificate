@@ -1,4 +1,5 @@
 survey 'EG',
+  :full_title => 'Egypt',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

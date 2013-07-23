@@ -1,4 +1,5 @@
 survey 'KE',
+  :full_title => 'Kenya',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

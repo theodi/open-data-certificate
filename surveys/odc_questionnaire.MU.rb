@@ -1,4 +1,5 @@
 survey 'MU',
+  :full_title => 'Mauritius',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

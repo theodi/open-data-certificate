@@ -1,4 +1,5 @@
 survey 'NU',
+  :full_title => 'Niue',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

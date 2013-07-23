@@ -1,4 +1,5 @@
 survey 'IO',
+  :full_title => 'BritishIndianOceanTerritory',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

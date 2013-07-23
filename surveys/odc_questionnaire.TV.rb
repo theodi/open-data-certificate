@@ -1,4 +1,5 @@
 survey 'TV',
+  :full_title => 'Tuvalu',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

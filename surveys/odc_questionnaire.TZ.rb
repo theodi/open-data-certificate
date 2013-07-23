@@ -1,4 +1,5 @@
 survey 'TZ',
+  :full_title => 'Tanzania,UnitedRepublicOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

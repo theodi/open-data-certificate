@@ -1,4 +1,5 @@
 survey 'MH',
+  :full_title => 'MarshallIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

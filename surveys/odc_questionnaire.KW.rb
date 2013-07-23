@@ -1,4 +1,5 @@
 survey 'KW',
+  :full_title => 'Kuwait',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

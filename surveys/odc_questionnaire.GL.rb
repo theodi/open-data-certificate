@@ -1,4 +1,5 @@
 survey 'GL',
+  :full_title => 'Greenland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

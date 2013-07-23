@@ -1,4 +1,5 @@
 survey 'EE',
+  :full_title => 'Estonia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

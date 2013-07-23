@@ -1,4 +1,5 @@
 survey 'BE',
+  :full_title => 'Belgium',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

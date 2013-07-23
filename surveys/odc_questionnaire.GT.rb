@@ -1,4 +1,5 @@
 survey 'GT',
+  :full_title => 'Guatemala',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

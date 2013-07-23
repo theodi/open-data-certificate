@@ -1,4 +1,5 @@
 survey 'HM',
+  :full_title => 'HeardIslandAndMcdonaldIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

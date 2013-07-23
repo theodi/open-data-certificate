@@ -1,4 +1,5 @@
 survey 'MV',
+  :full_title => 'Maldives',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

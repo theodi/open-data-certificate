@@ -1,4 +1,5 @@
 survey 'AG',
+  :full_title => 'AntiguaAndBarbuda',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

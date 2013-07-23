@@ -1,4 +1,5 @@
 survey 'GR',
+  :full_title => 'Greece',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

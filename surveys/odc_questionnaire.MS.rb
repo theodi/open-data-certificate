@@ -1,4 +1,5 @@
 survey 'MS',
+  :full_title => 'Montserrat',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'MQ',
+  :full_title => 'Martinique',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

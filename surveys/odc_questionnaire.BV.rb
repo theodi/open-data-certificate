@@ -1,4 +1,5 @@
 survey 'BV',
+  :full_title => 'BouvetIsland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

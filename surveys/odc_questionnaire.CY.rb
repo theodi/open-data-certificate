@@ -1,4 +1,5 @@
 survey 'CY',
+  :full_title => 'Cyprus',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

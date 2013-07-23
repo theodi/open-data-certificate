@@ -1,4 +1,5 @@
 survey 'SH',
+  :full_title => 'SaintHelena,AscensionAndTristanDaCunha',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'MG',
+  :full_title => 'Madagascar',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

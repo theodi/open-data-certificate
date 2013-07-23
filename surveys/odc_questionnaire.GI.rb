@@ -1,4 +1,5 @@
 survey 'GI',
+  :full_title => 'Gibraltar',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

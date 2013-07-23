@@ -1,4 +1,5 @@
 survey 'LB',
+  :full_title => 'Lebanon',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

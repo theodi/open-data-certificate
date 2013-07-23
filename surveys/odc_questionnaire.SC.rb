@@ -1,4 +1,5 @@
 survey 'SC',
+  :full_title => 'Seychelles',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'CW',
+  :full_title => 'Curaãao',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

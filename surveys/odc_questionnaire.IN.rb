@@ -1,4 +1,5 @@
 survey 'IN',
+  :full_title => 'India',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

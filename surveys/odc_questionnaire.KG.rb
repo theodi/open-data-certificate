@@ -1,4 +1,5 @@
 survey 'KG',
+  :full_title => 'Kyrgyzstan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'VE',
+  :full_title => 'Venezuela,BolivarianRepublicOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

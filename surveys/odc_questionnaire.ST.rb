@@ -1,4 +1,5 @@
 survey 'ST',
+  :full_title => 'SaoTomeAndPrincipe',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

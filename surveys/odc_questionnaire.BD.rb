@@ -1,4 +1,5 @@
 survey 'BD',
+  :full_title => 'Bangladesh',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

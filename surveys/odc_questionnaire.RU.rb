@@ -1,4 +1,5 @@
 survey 'RU',
+  :full_title => 'RussianFederation',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

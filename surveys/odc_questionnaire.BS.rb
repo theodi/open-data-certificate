@@ -1,4 +1,5 @@
 survey 'BS',
+  :full_title => 'Bahamas',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'CC',
+  :full_title => 'Cocos(keeling)Islands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

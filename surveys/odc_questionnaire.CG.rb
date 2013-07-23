@@ -1,4 +1,5 @@
 survey 'CG',
+  :full_title => 'Congo',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

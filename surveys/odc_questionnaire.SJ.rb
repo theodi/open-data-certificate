@@ -1,4 +1,5 @@
 survey 'SJ',
+  :full_title => 'SvalbardAndJanMayen',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

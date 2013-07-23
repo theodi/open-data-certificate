@@ -1,4 +1,5 @@
 survey 'NG',
+  :full_title => 'Nigeria',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'IM',
+  :full_title => 'IsleOfMan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

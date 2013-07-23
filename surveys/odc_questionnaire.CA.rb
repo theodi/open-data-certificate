@@ -1,4 +1,5 @@
 survey 'CA',
+  :full_title => 'Canada',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

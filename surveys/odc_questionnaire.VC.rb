@@ -1,4 +1,5 @@
 survey 'VC',
+  :full_title => 'SaintVincentAndTheGrenadines',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

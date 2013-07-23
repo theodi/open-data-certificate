@@ -1,4 +1,5 @@
 survey 'HT',
+  :full_title => 'Haiti',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

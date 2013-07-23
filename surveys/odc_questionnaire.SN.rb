@@ -1,4 +1,5 @@
 survey 'SN',
+  :full_title => 'Senegal',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

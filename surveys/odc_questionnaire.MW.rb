@@ -1,4 +1,5 @@
 survey 'MW',
+  :full_title => 'Malawi',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

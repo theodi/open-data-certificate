@@ -1,4 +1,5 @@
 survey 'PK',
+  :full_title => 'Pakistan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

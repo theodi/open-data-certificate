@@ -1,4 +1,5 @@
 survey 'SD',
+  :full_title => 'Sudan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

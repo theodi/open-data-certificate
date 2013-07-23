@@ -1,4 +1,5 @@
 survey 'ES',
+  :full_title => 'Spain',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',
