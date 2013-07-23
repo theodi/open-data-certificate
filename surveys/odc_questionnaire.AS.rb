@@ -1,4 +1,5 @@
 survey 'AS',
+  :full_title => 'AmericanSamoa',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

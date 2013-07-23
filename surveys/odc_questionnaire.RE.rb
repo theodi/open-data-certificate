@@ -1,4 +1,5 @@
 survey 'RE',
+  :full_title => 'Rãunion',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

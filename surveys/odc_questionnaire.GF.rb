@@ -1,4 +1,5 @@
 survey 'GF',
+  :full_title => 'FrenchGuiana',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

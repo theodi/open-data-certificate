@@ -1,4 +1,5 @@
 survey 'EC',
+  :full_title => 'Ecuador',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

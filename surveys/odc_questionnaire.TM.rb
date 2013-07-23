@@ -1,4 +1,5 @@
 survey 'TM',
+  :full_title => 'Turkmenistan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

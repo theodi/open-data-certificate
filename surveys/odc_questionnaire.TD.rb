@@ -1,4 +1,5 @@
 survey 'TD',
+  :full_title => 'Chad',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

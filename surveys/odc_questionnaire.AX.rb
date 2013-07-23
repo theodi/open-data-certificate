@@ -1,4 +1,5 @@
 survey 'AX',
+  :full_title => 'ÃlandIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

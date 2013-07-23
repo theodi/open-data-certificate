@@ -1,4 +1,5 @@
 survey 'SV',
+  :full_title => 'ElSalvador',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

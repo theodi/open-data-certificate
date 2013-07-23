@@ -1,4 +1,5 @@
 survey 'BJ',
+  :full_title => 'Benin',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

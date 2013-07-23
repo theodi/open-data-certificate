@@ -1,4 +1,5 @@
 survey 'BZ',
+  :full_title => 'Belize',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

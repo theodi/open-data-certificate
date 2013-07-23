@@ -1,4 +1,5 @@
 survey 'TF',
+  :full_title => 'FrenchSouthernTerritories',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

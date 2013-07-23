@@ -1,4 +1,5 @@
 survey 'SR',
+  :full_title => 'Suriname',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

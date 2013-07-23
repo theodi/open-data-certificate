@@ -1,4 +1,5 @@
 survey 'ZA',
+  :full_title => 'SouthAfrica',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

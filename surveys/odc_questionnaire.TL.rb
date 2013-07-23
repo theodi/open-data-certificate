@@ -1,4 +1,5 @@
 survey 'TL',
+  :full_title => 'Timor-leste',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

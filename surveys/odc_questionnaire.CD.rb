@@ -1,4 +1,5 @@
 survey 'CD',
+  :full_title => 'Congo,TheDemocraticRepublicOfThe',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

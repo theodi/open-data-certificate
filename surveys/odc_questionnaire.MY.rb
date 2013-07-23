@@ -1,4 +1,5 @@
 survey 'MY',
+  :full_title => 'Malaysia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

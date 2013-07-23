@@ -1,4 +1,5 @@
 survey 'YT',
+  :full_title => 'Mayotte',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

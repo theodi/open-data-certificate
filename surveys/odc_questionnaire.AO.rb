@@ -1,4 +1,5 @@
 survey 'AO',
+  :full_title => 'Angola',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

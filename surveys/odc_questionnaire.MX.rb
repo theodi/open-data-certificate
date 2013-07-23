@@ -1,4 +1,5 @@
 survey 'MX',
+  :full_title => 'Mexico',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

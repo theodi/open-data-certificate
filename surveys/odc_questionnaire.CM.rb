@@ -1,4 +1,5 @@
 survey 'CM',
+  :full_title => 'Cameroon',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

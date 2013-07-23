@@ -1,4 +1,5 @@
 survey 'MC',
+  :full_title => 'Monaco',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

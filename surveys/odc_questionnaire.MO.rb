@@ -1,4 +1,5 @@
 survey 'MO',
+  :full_title => 'Macao',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

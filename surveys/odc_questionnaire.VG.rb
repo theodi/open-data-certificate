@@ -1,4 +1,5 @@
 survey 'VG',
+  :full_title => 'VirginIslands,British',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

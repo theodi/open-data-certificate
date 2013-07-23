@@ -1,4 +1,5 @@
 survey 'UA',
+  :full_title => 'Ukraine',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'BT',
+  :full_title => 'Bhutan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

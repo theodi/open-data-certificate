@@ -1,4 +1,5 @@
 survey 'BO',
+  :full_title => 'Bolivia,PlurinationalStateOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

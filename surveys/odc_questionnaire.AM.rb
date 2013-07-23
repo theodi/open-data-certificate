@@ -1,4 +1,5 @@
 survey 'AM',
+  :full_title => 'Armenia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

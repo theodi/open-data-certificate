@@ -1,4 +1,5 @@
 survey 'KZ',
+  :full_title => 'Kazakhstan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

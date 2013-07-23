@@ -1,4 +1,5 @@
 survey 'SZ',
+  :full_title => 'Swaziland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

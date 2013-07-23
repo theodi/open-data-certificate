@@ -1,4 +1,5 @@
 survey 'BQ',
+  :full_title => 'Bonaire,SintEustatiusAndSaba',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

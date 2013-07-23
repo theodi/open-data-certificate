@@ -1,4 +1,5 @@
 survey 'FI',
+  :full_title => 'Finland',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'CI',
+  :full_title => 'CãteD\'ivoire',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

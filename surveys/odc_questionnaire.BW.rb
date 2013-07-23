@@ -1,4 +1,5 @@
 survey 'BW',
+  :full_title => 'Botswana',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'TJ',
+  :full_title => 'Tajikistan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

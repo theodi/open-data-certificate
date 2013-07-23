@@ -1,4 +1,5 @@
 survey 'PE',
+  :full_title => 'Peru',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

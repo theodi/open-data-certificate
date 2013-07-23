@@ -1,4 +1,5 @@
 survey 'PN',
+  :full_title => 'Pitcairn',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

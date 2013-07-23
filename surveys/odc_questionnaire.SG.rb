@@ -1,4 +1,5 @@
 survey 'SG',
+  :full_title => 'Singapore',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'KM',
+  :full_title => 'Comoros',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

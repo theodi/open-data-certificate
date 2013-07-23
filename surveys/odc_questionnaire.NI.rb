@@ -1,4 +1,5 @@
 survey 'NI',
+  :full_title => 'Nicaragua',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

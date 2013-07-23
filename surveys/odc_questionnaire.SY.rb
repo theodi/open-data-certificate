@@ -1,4 +1,5 @@
 survey 'SY',
+  :full_title => 'SyrianArabRepublic',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

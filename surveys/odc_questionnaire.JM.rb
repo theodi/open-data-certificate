@@ -1,4 +1,5 @@
 survey 'JM',
+  :full_title => 'Jamaica',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

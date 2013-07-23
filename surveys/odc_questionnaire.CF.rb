@@ -1,4 +1,5 @@
 survey 'CF',
+  :full_title => 'CentralAfricanRepublic',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

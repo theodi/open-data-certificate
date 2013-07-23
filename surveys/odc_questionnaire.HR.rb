@@ -1,4 +1,5 @@
 survey 'HR',
+  :full_title => 'Croatia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'IL',
+  :full_title => 'Israel',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

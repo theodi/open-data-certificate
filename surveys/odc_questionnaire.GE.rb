@@ -1,4 +1,5 @@
 survey 'GE',
+  :full_title => 'Georgia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

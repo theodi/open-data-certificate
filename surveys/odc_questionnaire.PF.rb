@@ -1,4 +1,5 @@
 survey 'PF',
+  :full_title => 'FrenchPolynesia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

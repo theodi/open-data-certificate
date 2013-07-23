@@ -1,4 +1,5 @@
 survey 'LI',
+  :full_title => 'Liechtenstein',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

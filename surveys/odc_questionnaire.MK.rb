@@ -1,4 +1,5 @@
 survey 'MK',
+  :full_title => 'Macedonia,TheFormerYugoslavRepublicOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

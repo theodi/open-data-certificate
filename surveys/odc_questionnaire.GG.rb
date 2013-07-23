@@ -1,4 +1,5 @@
 survey 'GG',
+  :full_title => 'Guernsey',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

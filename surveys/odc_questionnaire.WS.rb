@@ -1,4 +1,5 @@
 survey 'WS',
+  :full_title => 'Samoa',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

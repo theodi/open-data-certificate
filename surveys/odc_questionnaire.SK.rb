@@ -1,4 +1,5 @@
 survey 'SK',
+  :full_title => 'Slovakia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

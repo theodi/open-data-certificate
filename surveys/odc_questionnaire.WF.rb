@@ -1,4 +1,5 @@
 survey 'WF',
+  :full_title => 'WallisAndFutuna',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

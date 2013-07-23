@@ -1,4 +1,5 @@
 survey 'CL',
+  :full_title => 'Chile',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

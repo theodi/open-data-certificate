@@ -1,4 +1,5 @@
 survey 'ET',
+  :full_title => 'Ethiopia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

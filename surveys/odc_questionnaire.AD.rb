@@ -1,4 +1,5 @@
 survey 'AD',
+  :full_title => 'Andorra',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

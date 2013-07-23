@@ -1,4 +1,5 @@
 survey 'CU',
+  :full_title => 'Cuba',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

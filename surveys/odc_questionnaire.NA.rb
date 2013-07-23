@@ -1,4 +1,5 @@
 survey 'NA',
+  :full_title => 'Namibia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

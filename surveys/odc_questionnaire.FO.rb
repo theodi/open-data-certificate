@@ -1,4 +1,5 @@
 survey 'FO',
+  :full_title => 'FaroeIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

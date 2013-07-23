@@ -1,4 +1,5 @@
 survey 'ZW',
+  :full_title => 'Zimbabwe',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

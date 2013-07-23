@@ -1,4 +1,5 @@
 survey 'PA',
+  :full_title => 'Panama',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

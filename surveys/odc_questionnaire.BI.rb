@@ -1,4 +1,5 @@
 survey 'BI',
+  :full_title => 'Burundi',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

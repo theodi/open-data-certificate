@@ -1,4 +1,5 @@
 survey 'DM',
+  :full_title => 'Dominica',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

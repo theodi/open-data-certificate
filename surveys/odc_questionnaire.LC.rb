@@ -1,4 +1,5 @@
 survey 'LC',
+  :full_title => 'SaintLucia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

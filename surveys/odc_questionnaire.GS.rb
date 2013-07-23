@@ -1,4 +1,5 @@
 survey 'GS',
+  :full_title => 'SouthGeorgiaAndTheSouthSandwichIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

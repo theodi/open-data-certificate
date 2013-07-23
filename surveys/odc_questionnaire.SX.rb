@@ -1,4 +1,5 @@
 survey 'SX',
+  :full_title => 'SintMaarten(dutchPart)',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

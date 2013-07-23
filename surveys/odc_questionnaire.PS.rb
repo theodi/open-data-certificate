@@ -1,4 +1,5 @@
 survey 'PS',
+  :full_title => 'Palestine,StateOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

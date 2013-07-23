@@ -1,4 +1,5 @@
 survey 'DJ',
+  :full_title => 'Djibouti',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'VU',
+  :full_title => 'Vanuatu',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

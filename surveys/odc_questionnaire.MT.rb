@@ -1,4 +1,5 @@
 survey 'MT',
+  :full_title => 'Malta',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

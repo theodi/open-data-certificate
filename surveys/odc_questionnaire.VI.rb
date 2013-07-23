@@ -1,4 +1,5 @@
 survey 'VI',
+  :full_title => 'VirginIslands,U.s.',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

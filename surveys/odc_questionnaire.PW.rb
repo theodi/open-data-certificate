@@ -1,4 +1,5 @@
 survey 'PW',
+  :full_title => 'Palau',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

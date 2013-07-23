@@ -1,4 +1,5 @@
 survey 'GP',
+  :full_title => 'Guadeloupe',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

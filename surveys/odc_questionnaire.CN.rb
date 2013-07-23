@@ -1,4 +1,5 @@
 survey 'CN',
+  :full_title => 'China',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

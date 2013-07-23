@@ -1,4 +1,5 @@
 survey 'NR',
+  :full_title => 'Nauru',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

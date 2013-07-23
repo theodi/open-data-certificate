@@ -1,4 +1,5 @@
 survey 'LS',
+  :full_title => 'Lesotho',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

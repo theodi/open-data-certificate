@@ -1,4 +1,5 @@
 survey 'AQ',
+  :full_title => 'Antarctica',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

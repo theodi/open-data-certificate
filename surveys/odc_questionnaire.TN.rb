@@ -1,4 +1,5 @@
 survey 'TN',
+  :full_title => 'Tunisia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

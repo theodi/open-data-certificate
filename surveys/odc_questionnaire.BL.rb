@@ -1,4 +1,5 @@
 survey 'BL',
+  :full_title => 'SaintBarthãlemy',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

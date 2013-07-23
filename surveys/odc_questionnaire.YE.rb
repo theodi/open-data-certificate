@@ -1,4 +1,5 @@
 survey 'YE',
+  :full_title => 'Yemen',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'UM',
+  :full_title => 'UnitedStatesMinorOutlyingIslands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

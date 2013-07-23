@@ -1,4 +1,5 @@
 survey 'PY',
+  :full_title => 'Paraguay',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

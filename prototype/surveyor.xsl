@@ -5,6 +5,9 @@
 	xmlns:local="http://theodi.org/ns/func"
 	exclude-result-prefixes="#all">
 
+<xsl:variable name="countries" as="document-node()" select="doc('country_names_and_code_elements.xml')" />
+<xsl:key name="countries" match="ISO_3166-1_Country_name" use="../ISO_3166-1_Alpha-2_Code_element" />
+
 <xsl:template match="/">
 	<xsl:variable name="merged" as="document-node()">
 		<xsl:document>
@@ -47,7 +50,8 @@
 <!-- STRUCTURE -->
 
 <xsl:template match="questionnaire" mode="structure">
-	<survey label="{@jurisdiction}" 
+	<survey label="{@jurisdiction}"
+		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
 		default_mandatory="false" 
 		dataset_title="dataTitle"
 		status="{@status}">
@@ -710,6 +714,15 @@
 <xsl:function name="local:conditionId" as="xs:string">
 	<xsl:param name="condition" as="element(condition)" />
 	<xsl:number select="$condition" format="A" level="any" />
+</xsl:function>
+
+<xsl:function name="local:titleCase" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:value-of separator=" ">
+		<xsl:for-each select="tokenize($string, ' ')">
+			<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+		</xsl:for-each>
+	</xsl:value-of>
 </xsl:function>
 
 <xsl:function name="local:parseTest" as="element()">

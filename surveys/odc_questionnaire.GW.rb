@@ -1,4 +1,5 @@
 survey 'GW',
+  :full_title => 'Guinea-bissau',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'LA',
+  :full_title => 'LaoPeople\'sDemocraticRepublic',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

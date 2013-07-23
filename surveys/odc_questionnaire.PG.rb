@@ -1,4 +1,5 @@
 survey 'PG',
+  :full_title => 'PapuaNewGuinea',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

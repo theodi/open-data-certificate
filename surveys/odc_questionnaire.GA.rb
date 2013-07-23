@@ -1,4 +1,5 @@
 survey 'GA',
+  :full_title => 'Gabon',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

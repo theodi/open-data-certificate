@@ -1,4 +1,5 @@
 survey 'KP',
+  :full_title => 'Korea,DemocraticPeople\'sRepublicOf',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

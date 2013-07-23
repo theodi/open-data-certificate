@@ -1,4 +1,5 @@
 survey 'LY',
+  :full_title => 'Libya',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,4 +1,5 @@
 survey 'IT',
+  :full_title => 'Italy',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

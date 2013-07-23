@@ -1,4 +1,5 @@
 survey 'KH',
+  :full_title => 'Cambodia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

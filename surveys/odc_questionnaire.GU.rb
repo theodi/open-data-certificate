@@ -1,4 +1,5 @@
 survey 'GU',
+  :full_title => 'Guam',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',
