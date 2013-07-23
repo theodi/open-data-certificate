@@ -71,7 +71,7 @@ class ResponseSet < ActiveRecord::Base
 
     deps = survey.dependencies.includes({:dependency_conditions => {:question => :answers}})
 
-    resps = self.responses.all
+    resps = self.responses.includes(:answer)
 
     # gather if the dependencies are met in a hash
     @depends = deps.all.reduce({}) do |mem, v|
