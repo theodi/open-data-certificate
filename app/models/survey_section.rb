@@ -10,7 +10,7 @@ class SurveySection < ActiveRecord::Base
     dep_map = response_set.depends
 
     questions.includes(:dependency).where(:display_on_certificate => true).
-             select {|q| q.dependency.nil? ?  true : dep_map[q.dependency.id] }
+             select {|q| q.dependency.nil? || dep_map[q.dependency.id] }
   end
 
 end
