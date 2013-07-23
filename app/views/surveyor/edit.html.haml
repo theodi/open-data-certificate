@@ -18,7 +18,7 @@
         .row
           .span9
             .jurisdiction
-              .badge.badge-inverse=  @survey.title
+              .badge.badge-inverse=  @response_set.jurisdiction
               = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
             %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3

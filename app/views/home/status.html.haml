@@ -1,0 +1,9 @@
+- content_for :header_title do
+  Application Status
+
+%h1
+  Job queue
+
+%p
+  %strong= pluralize @job_count, 'jobs'
+  queued

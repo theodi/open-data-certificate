@@ -19,8 +19,26 @@ class SurveyorController < ApplicationController
   #
   # also, GET here is totally totally wrong
   def continue
+    if Survey::MIGRATIONS.has_key? params[:survey_code]
+      # lets switch over to the new questionnaire
+      nxt = Survey::MIGRATIONS[params[:survey_code]]
 
-    if params[:juristiction_access_code]
+      survey = Survey.newest_survey_for_access_code nxt
+
+      unless survey.nil?
+        attrs = @response_set.attributes.keep_if do |key|
+          %w(user_id dataset_id).include? key
+        end
+        attrs[:survey_id] = survey.id;
+        new_response_set = ResponseSet.create attrs
+
+        new_response_set.copy_answers_from_response_set!(@response_set)
+        # @response_set.destroy
+
+        @response_set = new_response_set
+      end
+
+    elsif params[:juristiction_access_code]
       # they *actually* want to swap the jurisdiction
 
       survey = Survey.newest_survey_for_access_code(params[:juristiction_access_code])
