@@ -35,10 +35,10 @@ class DependencyCondition < ActiveRecord::Base
         op, i = self.operator.scan(/^count(>|>=|<|<=|==|!=)(\d+)$/).flatten
         # logger.warn({rule_key.to_sym => responses.count.send(op, i.to_i)})
         return {rule_key.to_sym => (op == "!=" ? !responses.count.send("==", i.to_i) : responses.count.send(op, i.to_i))}
-      elsif operator == "!=" and (responses.blank? or responses.none?{|r| r.answer.id == self.answer_id})
+      elsif operator == "!=" and (responses.blank? or responses.none?{|r| r.answer_id == self.answer_id})
         # logger.warn( {rule_key.to_sym => true})
         return {rule_key.to_sym => true}
-      elsif response = responses.detect{|r| r.answer.id == self.answer_id}
+      elsif response = responses.detect{|r| r.answer_id == self.answer_id}
         klass = response.answer.response_class
         klass = "answer" if self.as(klass).nil? # it should compare answer ids when the dependency condition *_value is nil
         case self.operator
