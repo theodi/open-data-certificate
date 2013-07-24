@@ -2,7 +2,8 @@ class SurveyorController < ApplicationController
   unloadable
   include Surveyor::SurveyorControllerMethods
 
-  before_filter :ensure_response_set_is_incomplete, only: [:continue, :edit, :update]
+  before_filter :set_response_set_and_render_context
+  before_filter :ensure_modifications_allowed, only: [:edit, :update]
 
 
   layout 'application'
@@ -14,8 +15,19 @@ class SurveyorController < ApplicationController
   end
 
   def continue
-    set_response_set_and_render_context
-    if @response_set.survey.superceded? && @response_set.incomplete? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
+
+    if !@response_set.modifications_allowed?
+      # they *actually* want to create a new response set
+
+      attrs = @response_set.attributes.keep_if do |key|
+        %w(survey_id user_id dataset_id).include? key
+      end
+      new_response_set = ResponseSet.create attrs
+      new_response_set.copy_answers_from_response_set!(@response_set)
+
+      @response_set = new_response_set
+
+    elsif @response_set.survey.superceded? && @response_set.draft? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
       # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
       # and delete the old responses.
       # TODO: determine if this is actually what is wanted, or if a more interactive user experience is preferred
@@ -39,12 +51,10 @@ class SurveyorController < ApplicationController
   end
 
   def update
-    set_response_set_and_render_context
-
     if @response_set
 
-      if @response_set.complete?
-        return redirect_with_message(surveyor_index, :notice, t('surveyor.that_response_set_is_complete'))
+      if @response_set.published?
+        return redirect_with_message(surveyor_index, :warning, t('surveyor.response_set_is_published'))
       end
 
       # Remove and track the finish trigger to prevent surveyor completing the survey premuturely
@@ -88,7 +98,7 @@ class SurveyorController < ApplicationController
     respond_to do |format|
       format.html do
         if @response_set
-          flash[:notice] = t('surveyor.unable_to_update_survey') unless saved
+          flash[:warning] = t('surveyor.unable_to_update_survey') unless saved
           redirect_to surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
         else
           redirect_with_message(surveyor.available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
@@ -105,21 +115,7 @@ class SurveyorController < ApplicationController
     end
   end
 
-  def attained_level
-    set_response_set_and_render_context
-    if @response_set
-      respond_to do |format|
-        format.html
-        format.json { @response_set.attained_level.to_json }
-      end
-    else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
-      redirect_to surveyor_index
-    end
-  end
-
   def requirements
-    set_response_set_and_render_context
     if @response_set
 
       @requirements = @response_set.outstanding_requirements
@@ -130,7 +126,7 @@ class SurveyorController < ApplicationController
         format.json { @response_set.outstanding_requirements.to_json }
       end
     else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
+      flash[:warning] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index
     end
   end
@@ -144,10 +140,9 @@ class SurveyorController < ApplicationController
   end
 
   private
-  def ensure_response_set_is_incomplete
-    set_response_set_and_render_context
-    if @response_set && @response_set.complete?
-      flash[:notice] = t('surveyor.that_response_set_is_complete')
+  def ensure_modifications_allowed
+    unless @response_set.modifications_allowed?
+      flash[:warning] = t('surveyor.modifications_not_allowed')
       redirect_to dashboard_path
     end
   end

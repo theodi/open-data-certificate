@@ -22,6 +22,7 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'less-rails'
   gem 'less-rails-bootstrap'#, :git => 'git://github.com/theodi/less-rails-bootstrap.git'
+  gem 'twitter-bootstrap-rails-confirm'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -39,6 +40,7 @@ group :development do
   gem 'guard'
   gem 'guard-test'
   gem 'ruby-prof'
+  gem 'rails-footnotes', '>= 3.7.9'
 end
 
 group :production do
@@ -46,6 +48,7 @@ group :production do
   gem 'mysql2'
   gem 'airbrake'
   gem 'memcache-client'
+  gem 'logstash-event'
   gem 'lograge'
 end
 
@@ -53,6 +56,9 @@ gem 'jquery-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
+
+# states of the questionnaires
+gem 'aasm'
 
 # authorization
 gem 'cancan'
@@ -74,10 +80,9 @@ gem 'thin'
 # gem 'debugger'
 
 gem 'surveyor'
-
 gem "devise", ">= 2.2.3"
-
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'google-analytics-rails'
 gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
+gem 'delayed_job_active_record'

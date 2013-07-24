@@ -67,6 +67,7 @@
 /* odiBlueLight - primarily for background of inputs in modals */
 @odiBlueLight: lighten(@odiBlue, 15%);
 @odiBlueLighter: lighten(@odiBlue, 36%);
+@odiBlueTint: #e7f7fc;
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
 
@@ -146,13 +147,15 @@
       margin-bottom: 15px; 
     }
 
-    .span6:first-child {
+    .open-data-certificate {
+        width: 60px;
+        margin: 0 auto;
+        }
+
+    .span6:last-child {
       border-right: thin white solid;
     }
 
-    .span6 div:first-child {
-      margin-left: 138px;
-    }
 
     .span6:last-child p:first-child {
       text-align: center;
@@ -1060,28 +1063,28 @@ th {
         display: inline;
       }
     }
-  }
 
-  input {
-    height: 60px;
-    font-size: 20px;
-    padding: 0 10px;
-    margin: 15px 0;
-  }
+    input {
+      height: 60px;
+      font-size: 20px;
+      padding: 0 10px;
+      margin: 15px 0;
+    }
 
-  input[type='submit'] {
-    margin: 15px 0 30px;
-  }
+    input[type='submit'] {
+      margin: 15px 0 30px;
+    }
 
-  label {
-    font-size: 22px;
-  }
+    label {
+      font-size: 22px;
+    }
 
-  i {
-    font-size: 15px;
-    font-style: normal;
-    color: @odiGrey;
-    display: block;
+    i {
+      font-size: 15px;
+      font-style: normal;
+      color: @odiGrey;
+      display: block;
+    }
   }
 }
 
@@ -1103,13 +1106,30 @@ th {
 
 // My certificates view //
 
+.main-default .first-response-set i, .main-default  .previous-response-set i {
+display: inline-block;
+color: @odiRed;
+}
+
 .first-response-set {
-  background: @odiBlueLighter;
+  background: @odiBlueTint;
 
   td.level {
     text-align: center;
     padding: 13px 30px 5px 15px;
     width: 48px;
+    border-right: 1px solid #fff;
+  
+    p {
+    line-height: 15px;
+
+      small a {
+      font-size: 12px;
+      color: @odiBlue;
+      font-weight: normal;
+      
+     }
+    }
   }
 
   td.last-updated {
@@ -1123,7 +1143,16 @@ th {
   }
 }
 
+td.delete {
+    .btn-small {
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+  }
+
 .previous-response-set {
+
+  border-top: 1px solid @odiGreyLighter;
 
   td {
     height: 30px;
@@ -1163,8 +1192,8 @@ th.previous-title {
 td.level {
   .certificate-badge {
     margin: 0 auto;
-    width: 50px;
-    height: 40px;
+    width: 100px;
+    height: 50px;
   }
 
   font-size: 12px;
@@ -1173,10 +1202,11 @@ td.level {
 }
 
 td.last-updated {
-  width: 180px;
+  width: 110px;
   font-size: 12px;
   line-height: 17px;
   color: @odiGreyDark;
+  padding-left: 20px;
 
   time {
     font-size: 15px;
@@ -1185,7 +1215,7 @@ td.last-updated {
 }
 
 td.status {
-  width: 300px;
+  width: 250px;
   font-size: 15px;
 
   &.published {
@@ -1209,6 +1239,178 @@ td.action {
     margin: 0;
   }
 }
+
+
+
+
+// UPDATED My Certificates (/Dashboard) view (remove above when ready)
+
+
+
+.response-set{
+  background-color: #f4f4f4;
+  margin-bottom:1em;
+  text-align: center;
+
+  // space in the right buttons
+  &, .row-fluid{
+    padding-right: 20px;
+  }
+ 
+
+  // bit of a hack to get lines mid-gutter
+  .row-fluid{
+    position: relative
+  }
+
+
+  [class*="span"]:before{
+    content:'';
+    border-right: 1px solid #fff;
+    position: absolute;
+    top:0;
+    height:100%;
+    background-color:#f08;
+    display:block;
+    
+
+    margin-left:-10px;
+    @media (min-width: 1200px) {
+      margin-left:-15px;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      margin-left:-10px;
+    }
+    @media (max-width: 767px) {
+      display:none;
+    }
+  }
+
+ 
+
+  a .delete {
+    background-image:url(/assets/status/remove-sign.png);
+    background-repeat: no-repeat;
+    display:inline-block;
+    margin:auto;
+    width:25px;
+    height: 25px;
+    padding-left: 23px;
+    color: @odiCrimson;
+  }
+
+  a:hover .delete {
+   color: @odiCrimsonDark;
+  }
+
+}
+
+.response-set.response-set-primary .row-fluid.baseline {
+    background-color: rgb(222, 222, 222);
+  }
+
+.response-set-secondry{
+  h3{display:none}
+  .level-badge{
+    width:55px;
+    height:50px;
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin:10px;
+  }
+
+  .status-badge{
+    width:35px;
+    height:40px;
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin:10px;
+   }
+    
+  .level-badge, .status-badge, p{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  p{
+    margin:0;
+  }
+  .btn-group{
+    margin-top:10px;
+   
+    .btn {
+    background-color: transparent;
+    background-image: none;
+    border:none;
+    box-shadow: none;
+    color: @odiBlueDark;
+    font-size: 16px;
+    padding: 10px 0 0;
+  
+
+  }
+  :hover {
+      color: @odiBlueDarker;
+      text-decoration: underline;
+    }
+  }
+
+  
+}
+
+
+
+.level-badge{
+  width:133px;
+  height:118px;
+  background-image:url(/assets/badges/no_level_badge.png);
+  background-repeat: no-repeat;
+  margin: auto;
+
+
+  text-align:center;
+  line-height: 200%;
+}
+
+.level-badge-basic{
+  background-image:url(/assets/badges/raw_level_badge.png);
+}
+.level-badge-pilot{
+  background-image:url(/assets/badges/pilot_level_badge.png);
+}
+.level-badge-standard{
+  background-image:url(/assets/badges/standard_level_badge.png);
+}
+.level-badge-exemplar{
+  background-image:url(/assets/badges/exemplar_level_badge.png);
+}
+
+
+.status-badge{
+  width:80px;
+  height:80px; // we want text at the bottom, so padding rather than height
+  background-image:url(/assets/status/none.png);
+  background-repeat: no-repeat;
+  display:block;
+  margin:auto;
+
+
+  text-align:center;
+  line-height: 200%;
+}
+
+.status-badge-draft{
+  background-image:url(/assets/status/draft.png);
+}
+.status-badge-published{
+  background-image:url(/assets/status/published.png);
+}
+.status-badge-archived{
+  background-image:url(/assets/status/archived.png);
+}
+
+
 
 // Questionnaire (survey) view //
 
@@ -1281,6 +1483,7 @@ td.action {
     padding: 0 10px;
     margin: 15px 0;
   }
+
 
   // custom
   input.string{
@@ -1403,6 +1606,7 @@ td.action {
 
 }
 
+
 #status_panel{
   .transition(right 0.5s);
   background-color:@odiGreyLighter;
@@ -1515,13 +1719,15 @@ td.action {
 .certificate.hero-unit {
   margin: -50px auto 30px;
   padding: 0 15px;
-
+  ul{
+    margin-top: 70px;
+  }
   .btn-info {
     font-size: 14px;
     line-height: 15px;
     padding: 8px 12px;
     width: 80px;
-    margin-top: 80px;
+    margin-top:10px;
   }
 }
 
@@ -1564,7 +1770,9 @@ strong.certificate-level {
     color: @color;
   }
 }
-
+.none-level {
+  .level-styles(@basic, url(/assets/badges/no_level_badge.png));
+}
 .basic-level {
   .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
 }
@@ -1987,6 +2195,43 @@ width: 328px;
 }
 
 
+//
+// IE conditional styles
+// --------------------------------------------------
+
+.lt9 {
+
+  /* Setting line-heights in IE centres the input text.
+     Doing this in other browsers means you get a massive text cursor - not great. */
+
+  #login, #register, .modal-body .log-in .form-field {
+    input[type="text"], input[type="email"], input[type="password"] {
+      line-height: 60px;
+    }
+  }
+
+  .main-default input,
+  input.string {
+    line-height: 60px;
+  }
+
+}
 
 
 
+
+// Debug styles
+#footnotes_debug {
+  margin: 0;
+  padding:1em;
+  background-color:#fff;
+  font-size: 13px; font-weight: normal; text-align: center; color: #444; line-height: 16px;
+  th, td {color: #444; line-height: 18px;}
+  a {color: #9b1b1b; font-weight: inherit; text-decoration: none; line-height: 18px;}
+  table {text-align: center;}
+  table td {padding: 0 5px;}
+  tbody {text-align: left;}
+  .name_values td {vertical-align: top;}
+  legend {background-color: #fff;}
+  fieldset {text-align: left; border: 1px dashed #aaa; padding: 0.5em 1em 1em 1em; margin: 1em 2em; color: #444; background-color: #FFF;}
+}

@@ -11,4 +11,6 @@ guard :test do
   watch(%r{^app/controllers/(.+)\.rb$})              { |m| "test/functional/#{m[1]}_test.rb" }
   watch(%r{^app/views/.+\.rb$})                      { "test/integration" }
   watch('app/controllers/application_controller.rb') { ["test/functional", "test/integration"] }
+
+  watch('lib/tasks/odc.rake') { "test/unit/odc_rake_test.rb" }
 end
