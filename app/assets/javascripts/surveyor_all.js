@@ -69,24 +69,28 @@ jQuery(document).ready(function(){
     }
   });
 
-  jQuery('.surveyor_radio input[type=text]').change(function(){
-    var textValue = $(this).val()
-    if (textValue.length > 0) {
+  jQuery('.surveyor_radio input[type=text]').change(function() {
+    if ($(this).val().length > 0) {
       $(this).parent().children().has('input[type="radio"]')[0].children[0].checked = true;
     }
   });
 
-  jQuery("form#survey_form input, form#survey_form select, form#survey_form textarea").change(function(){
-    var elements = [$('[type="submit"]').parent(), $('[name="' + this.name +'"]').closest('li')];
+  jQuery("form#survey_form input, form#survey_form select, form#survey_form textarea").change(function() {
+    var elements = questionFields($(this))
+      .add($("form#survey_form input[name='authenticity_token']"));
 
-    question_data = $(this).parents('fieldset[id^="q_"],tr[id^="q_"]').
-      find("input, select, textarea").
-      add($("form#survey_form input[name='authenticity_token']")).
-      serialize();
+    updateFormElements($(this).closest('form#survey_form'), elements);
+  });
+
+  function questionFields(field) {
+    return field.parents('fieldset[id^="q_"],tr[id^="q_"]').find("input, select, textarea");
+  }
+
+  function updateFormElements(form, elements) {
     $.ajax({
       type: "PUT",
-      url: $(this).parents('form#survey_form').attr("action"),
-      data: question_data, dataType: 'json',
+      url: form.attr("action"),
+      data: elements.serialize(), dataType: 'json',
       success: function(response) {
         successfulSave(response);
       },
@@ -96,7 +100,7 @@ jQuery(document).ready(function(){
         //alert("an error occured when saving your response");
       }
     });
-  });
+  }
 
   // http://www.filamentgroup.com/lab/update_jquery_ui_slider_from_a_select_element_now_with_aria_support/
   $('fieldset.q_slider select').each(function(i,e) {
@@ -162,14 +166,13 @@ jQuery(document).ready(function(){
   // translations selection
   $(".surveyor_language_selection").show();
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
-  
+
   // Resolve URLs
-  
+
   var urlRegex = /^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?/i;
-  
+
   $('input[type=url]').change(function () {
     var el = this
-    var regex = new RegExp("^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?");
     if(el.value.match(urlRegex)) {
       $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
       $.getJSON('/resolve', { url: el.value } )
@@ -185,218 +188,229 @@ jQuery(document).ready(function(){
         });
     }
   })
-  
+
   // Data Kitten Stuff
-  
+
   // Utility function to populate input fields by identifier
   function fillMe(identifier, val) {
-    $('[data-reference-identifier="'+ identifier +'"] input.string, [data-reference-identifier="'+ identifier +'"] select').val(val)
+    return $('[data-reference-identifier="'+ identifier +'"] input.string, [data-reference-identifier="'+ identifier +'"] select').val(val)
   }
-  
+
   // Utility function to check input fields by identifier
   function checkMe(identifier, value) {
-    $('[data-reference-identifier="'+ identifier +'"] [value="'+ value +'"]').prop('checked', true)
+    return $('[data-reference-identifier="'+ identifier +'"] [value="'+ value +'"]').prop('checked', true)
   }
-  
+
   $('[data-reference-identifier="documentationUrl"] input.string').change(function () {
     var el = this
-    var regex = new RegExp("^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?");
     if(el.value.match(urlRegex)) {
       $(el).parent().spin({lines: 8, length: 4, width: 3, radius: 5, direction: 1, color: '#000', speed: 1, trail: 60, top: '70px', left: '750px', zIndex: 9});
       $.getJSON('/autofill', { url: el.value } )
         .done(function(json) {
+
+          var affectedFields = [];
+
           // Title
-          fillMe("dataTitle", json.title)
-          
+          affectedFields.push(fillMe("dataTitle", json.title))
+
           if (json.publishers.length > 0) {
             // Publisher name
-            fillMe("publisher", json.publishers[0].name)
+            affectedFields.push(fillMe("publisher", json.publishers[0].name))
             // Publisher URL
-            fillMe("publisherUrl", json.publishers[0].homepage)
+            affectedFields.push(fillMe("publisherUrl", json.publishers[0].homepage))
           }
-          
+
           // Data type
-                
+
           if (json.update_frequency.length == 0 && json.distributions.length == 1) {
             // One-off release of a single dataset
-            checkMe("releaseType", 4)
+            affectedFields.push(checkMe("releaseType", 4))
           } else if (json.update_frequency.length == 0 && json.distributions.length > 1) {
-            checkMe("releaseType", 3)
+            affectedFields.push(checkMe("releaseType", 3))
             // One-off release of a set of related datasets
           } else if (json.update_frequency.length > 0 && json.distributions.length > 1) {
             // Ongoing release
-            checkMe("releaseType", 5)
+            affectedFields.push(checkMe("releaseType", 5))
           }
-          
+
           // A service or API for accessing open data
           if (json.title.indexOf("API") >= 0 || json.description.indexOf("API") >= 0 ) {
-            checkMe("releaseType", 6)
+            affectedFields.push(checkMe("releaseType", 6))
           }
-                      
+
           // Rights information
           if (json.rights) {
             // Yes, you have the rights to publish this data as open data
-            checkMe("publisherRights", 9)
+            affectedFields.push(checkMe("publisherRights", 9))
             // Rights statement
-            fillMe("copyrightURL", json.rights.uri)
-            
+            affectedFields.push(fillMe("copyrightURL", json.rights.uri))
+
             // Data License
             switch(json.rights.dataLicense) {
               case "http://opendatacommons.org/licenses/by/":
-                fillMe("dataLicence", 34)
+                affectedFields.push(fillMe("dataLicence", 34))
                 break;
               case "http://opendatacommons.org/licenses/odbl/":
-                fillMe("dataLicence", 35)
+                affectedFields.push(fillMe("dataLicence", 35))
                 break;
               case "http://opendatacommons.org/licenses/pddl/":
-                fillMe("dataLicence", 36)
+                affectedFields.push(fillMe("dataLicence", 36))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                fillMe("dataLicence", 37)
+                affectedFields.push(fillMe("dataLicence", 37))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
-                fillMe("dataLicence", 38)
+                affectedFields.push(fillMe("dataLicence", 38))
                 break;
             }
-            
+
             // Content License
             switch(json.rights.contentLicense) {
               case "http://creativecommons.org/licenses/by/2.0/uk/":
-                fillMe("contentLicence", 52)
+                affectedFields.push(fillMe("contentLicence", 52))
                 break;
               case "http://creativecommons.org/licenses/by-sa/2.0/uk/":
-                fillMe("contentLicence", 53)
+                affectedFields.push(fillMe("contentLicence", 53))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                fillMe("contentLicence", 54)
+                affectedFields.push(fillMe("contentLicence", 54))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
-                fillMe("contentLicence", 55)
+                affectedFields.push(fillMe("contentLicence", 55))
                 break;
             }
           } else if (json.licenses) {
             // Yes, you have the rights to publish this data as open data
-            checkMe("publisherRights", 9)
-          
+            affectedFields.push(checkMe("publisherRights", 9))
+
             // Data License
             switch(json.licenses[0].uri) {
               case "http://opendatacommons.org/licenses/by/":
-                fillMe("dataLicence", 34)
+                affectedFields.push(fillMe("dataLicence", 34))
                 break;
               case "http://opendatacommons.org/licenses/odbl/":
-                fillMe("dataLicence", 35)
+                affectedFields.push(fillMe("dataLicence", 35))
                 break;
               case "http://opendatacommons.org/licenses/pddl/":
-                fillMe("dataLicence", 36)
+                affectedFields.push(fillMe("dataLicence", 36))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                fillMe("dataLicence", 37)
+                affectedFields.push(fillMe("dataLicence", 37))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
                 // Open Government Licence covers data and content
-                fillMe("dataLicence", 38)
-                fillMe("contentLicence", 55)
+                affectedFields.push(fillMe("dataLicence", 38))
+                affectedFields.push(fillMe("contentLicence", 55))
                 break;
             }
-        
+
           }
-          
-          // Was all this data originally created or gathered by you? 
+
+          // Was all this data originally created or gathered by you?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("publisherOrigin", 13)
+            affectedFields.push(checkMe("publisherOrigin", 13))
           }
-          
+
           // Can individuals be identified from this data?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("dataPersonal", 68)
+            affectedFields.push(checkMe("dataPersonal", 68))
           }
-          
+
           for (var i = 0; i < json.distributions.length; i++) {
-            
+
             // Is this data machine-readable?
             if (json.distributions[i].structured === true) {
-              checkMe("machineReadable", 151)
+              affectedFields.push(checkMe("machineReadable", 151))
             }
-            
+
             // Is this data in a standard open format?
             if (json.distributions[i].open === true) {
-              checkMe("openStandard", 153)
+              affectedFields.push(checkMe("openStandard", 153))
             }
           }
-          
+
           // Does this data change at least daily?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("frequentChanges", 103)
+            affectedFields.push(checkMe("frequentChanges", 103))
           }
-                      
+
           // Does your data documentation contain machine readable documentation for:
-          
+
           // Title
           if (json.title.length > 0) {
-            checkMe("documentationMetadata", 185)
+            affectedFields.push(checkMe("documentationMetadata", 185))
           }
 
           // Description
           if (json.description.length > 0) {
-            checkMe("documentationMetadata", 186)
+            affectedFields.push(checkMe("documentationMetadata", 186))
           }
 
           // Release Date
           if (json.release_date.length > 0) {
-            checkMe("documentationMetadata", 187)
+            affectedFields.push(checkMe("documentationMetadata", 187))
           }
-          
+
           // Modification Date
           if (json.modified_date.length > 0) {
-            checkMe("documentationMetadata", 188)
+            affectedFields.push(checkMe("documentationMetadata", 188))
           }
-          
+
           // Publisher
           if (json.publishers.length > 0) {
-            checkMe("documentationMetadata", 193)
+            affectedFields.push(checkMe("documentationMetadata", 193))
           }
-          
+
           // Temporal coverage
           if (json.temporal_coverage.start != null && json.temporal_coverage.end != null) {
-            checkMe("documentationMetadata", 195)
+            affectedFields.push(checkMe("documentationMetadata", 195))
           }
-          
+
           // Frequency of releases
           if (json.update_frequency) {
-            checkMe("documentationMetadata", 189)
+            affectedFields.push(checkMe("documentationMetadata", 189))
           }
-          
+
           // Keywords
           if (json.keywords.length > 0) {
-            checkMe("documentationMetadata", 197)
+            affectedFields.push(checkMe("documentationMetadata", 197))
           }
-          
+
           // Distributions
           if (json.distributions.length > 0) {
-            checkMe("documentationMetadata", 198)
+            affectedFields.push(checkMe("documentationMetadata", 198))
           }
-          
+
           // Do the data formats use vocabularies?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("vocabulary", 209)
+            affectedFields.push(checkMe("vocabulary", 209))
           }
-          
-          // Are there any codes used in this data? 
+
+          // Are there any codes used in this data?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            checkMe("codelists", 212)
+            affectedFields.push(checkMe("codelists", 212))
           }
-          
+
           // Contact email address
-          fillMe("contactEmail", json.publishers[0].mbox)
-          
+          affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
+
+          // Trigger a single save event with surveyor
+          updateFormElements(
+            $('form#survey_form'),
+
+            // All fields for questions which were changed, plus the CSRF token
+            questionFields($(affectedFields).map(function() { return this.toArray(); }))
+              .add($("form#survey_form input[name='authenticity_token']"))
+          );
+
           // Trigger status panel update
           $('#status_panel').trigger('update');
-          
+
         });
     }
   });
