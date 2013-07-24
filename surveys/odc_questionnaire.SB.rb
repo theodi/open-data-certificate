@@ -1,5 +1,5 @@
 survey 'SB',
-  :full_title => 'SolomonIslands',
+  :full_title => 'Solomon Islands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

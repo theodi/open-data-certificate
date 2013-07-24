@@ -1,5 +1,5 @@
 survey 'NZ',
-  :full_title => 'NewZealand',
+  :full_title => 'New Zealand',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

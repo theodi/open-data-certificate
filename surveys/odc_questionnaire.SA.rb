@@ -1,5 +1,5 @@
 survey 'SA',
-  :full_title => 'SaudiArabia',
+  :full_title => 'Saudi Arabia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

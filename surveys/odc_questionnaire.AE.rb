@@ -1,5 +1,5 @@
 survey 'AE',
-  :full_title => 'UnitedArabEmirates',
+  :full_title => 'United Arab Emirates',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

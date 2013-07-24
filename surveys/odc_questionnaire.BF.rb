@@ -1,5 +1,5 @@
 survey 'BF',
-  :full_title => 'BurkinaFaso',
+  :full_title => 'Burkina Faso',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

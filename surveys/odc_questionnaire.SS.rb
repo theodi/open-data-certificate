@@ -1,5 +1,5 @@
 survey 'SS',
-  :full_title => 'SouthSudan',
+  :full_title => 'South Sudan',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,5 +1,5 @@
 survey 'DO',
-  :full_title => 'DominicanRepublic',
+  :full_title => 'Dominican Republic',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

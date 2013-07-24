@@ -1,5 +1,5 @@
 survey 'GQ',
-  :full_title => 'EquatorialGuinea',
+  :full_title => 'Equatorial Guinea',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

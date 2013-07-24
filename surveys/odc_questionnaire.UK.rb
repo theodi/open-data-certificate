@@ -1,5 +1,5 @@
 survey 'GB',
-  :full_title => 'UnitedKingdom',
+  :full_title => 'United Kingdom',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'beta',

@@ -565,7 +565,12 @@
 <!-- TRANSLATION -->
 
 <xsl:template match="questionnaire" mode="translation">
-	<xsl:text>title: "Open Data Certificate Questionnaire"&#xA;</xsl:text>
+	<xsl:text>title: "</xsl:text>
+	<xsl:value-of select="@jurisdiction" />
+	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>full_title: "</xsl:text>
+	<xsl:value-of select="local:titleCase(key('countries', @jurisdiction, $countries))" />
+	<xsl:text>"&#xA;</xsl:text>
 	<xsl:text>description: "</xsl:text>
 	<xsl:apply-templates select="help/*" mode="html" />
 	<xsl:text>"&#xA;</xsl:text>
@@ -718,9 +723,26 @@
 
 <xsl:function name="local:titleCase" as="xs:string">
 	<xsl:param name="string" as="xs:string" />
-	<xsl:value-of separator=" ">
+	<xsl:value-of>
 		<xsl:for-each select="tokenize($string, ' ')">
-			<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+			<xsl:choose>
+				<xsl:when test=". = ('AND', 'OF')">
+					<xsl:value-of select="lower-case(.)" />
+				</xsl:when>
+				<xsl:when test=". = ('U.S.')">
+					<xsl:value-of select="." />
+				</xsl:when>
+				<xsl:when test="starts-with(., '(')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 2)), lower-case(substring(., 3)))" />
+				</xsl:when>
+				<xsl:when test="starts-with(., 'D''')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 3)), lower-case(substring(., 4)))" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:if test="position() != last()"><xsl:text> </xsl:text></xsl:if>
 		</xsl:for-each>
 	</xsl:value-of>
 </xsl:function>

@@ -1,5 +1,5 @@
 survey 'NC',
-  :full_title => 'NewCaledonia',
+  :full_title => 'New Caledonia',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,5 +1,5 @@
 survey 'BN',
-  :full_title => 'BruneiDarussalam',
+  :full_title => 'Brunei Darussalam',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

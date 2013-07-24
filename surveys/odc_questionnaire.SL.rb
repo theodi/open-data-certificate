@@ -1,5 +1,5 @@
 survey 'SL',
-  :full_title => 'SierraLeone',
+  :full_title => 'Sierra Leone',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

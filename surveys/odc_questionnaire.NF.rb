@@ -1,5 +1,5 @@
 survey 'NF',
-  :full_title => 'NorfolkIsland',
+  :full_title => 'Norfolk Island',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<?xml-stylesheet type="application/xslt+xml" href="jurisdictions.xsl" ?>
+	<?xml-stylesheet type="text/xsl" href="jurisdictions.xsl"?>
 <ISO_3166-1_List_en xml:lang="en">
 
 	<ISO_3166-1_Entry>

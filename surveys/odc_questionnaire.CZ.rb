@@ -1,5 +1,5 @@
 survey 'CZ',
-  :full_title => 'CzechRepublic',
+  :full_title => 'Czech Republic',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

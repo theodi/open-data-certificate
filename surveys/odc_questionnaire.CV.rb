@@ -1,5 +1,5 @@
 survey 'CV',
-  :full_title => 'CapeVerde',
+  :full_title => 'Cape Verde',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

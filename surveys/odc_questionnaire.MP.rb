@@ -1,5 +1,5 @@
 survey 'MP',
-  :full_title => 'NorthernMarianaIslands',
+  :full_title => 'Northern Mariana Islands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

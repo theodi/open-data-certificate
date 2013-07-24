@@ -92,7 +92,7 @@ en:
     jurisdiction: jurisdiction
     popover:
       about_jurisdiction: 'This has been entered under the %{jurisdiction} jurisdiction'
-      change_jurisdiction: You can use this data to start a new questionnaire with a different jurisdiction
+      change_jurisdiction: Switch to the jurisdiction that this data is published in
     states:
       draft: Draft
       published: Published
@@ -156,10 +156,10 @@ en:
     edit_questionnaire: Edit questionnaire
 
   response_set:
-    choose_a_jurisdiction: Choose a new Jurisdiction
-    dialog_body: Select a new jurisdiction below and your answers will be copied across to a new questionnaire
-    choose_jurisdiction: --- Select Jurisdiction ---
-    start_new_jurisdiction: Change Jurisdiction
+    choose_a_jurisdiction: Choose a new jurisdiction
+    dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
+    choose_jurisdiction: --- Select jurisdiction ---
+    start_new_jurisdiction: Change jurisdiction
 
   authentication:
     sign_in: Sign in
