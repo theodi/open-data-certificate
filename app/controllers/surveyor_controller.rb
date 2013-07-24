@@ -53,6 +53,12 @@ class SurveyorController < ApplicationController
         # @response_set.destroy
 
         @response_set = new_response_set
+
+        # the user has made a concious effort to switch jurisdictions, so set it as their default
+        if user_signed_in?
+          current_user.update_attributes default_jurisdiction: params[:juristiction_access_code]
+        end
+
       end
 
     elsif !@response_set.modifications_allowed?
