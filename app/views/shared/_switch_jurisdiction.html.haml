@@ -8,5 +8,5 @@
     - surveys = @surveys.keep_if {|s| ! Survey::MIGRATIONS.has_key? s.access_code}
     =# form_for [surveyor, response_set] do |f| (see surveyor#continue refactor note)
     = form_tag surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code), method: :get, :class => 'form-inline' do
-      = select_tag(:juristiction_access_code, options_for_select([[t('response_set.choose_jurisdiction'), ""]] + surveys.map{|s|[s.full_title.try(:titlecase) || s.title, s.access_code]}))
+      = select_tag(:juristiction_access_code, options_for_select([[t('response_set.choose_jurisdiction'), ""]] + surveys.map{|s|[s.full_title || s.title, s.access_code]}))
       = submit_tag t('response_set.start_new_jurisdiction'), :class => 'btn btn-primary btn-submit'
