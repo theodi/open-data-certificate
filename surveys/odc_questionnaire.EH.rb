@@ -1,5 +1,5 @@
 survey 'EH',
-  :full_title => 'WesternSahara',
+  :full_title => 'Western Sahara',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

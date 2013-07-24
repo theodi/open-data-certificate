@@ -1,5 +1,5 @@
 survey 'AS',
-  :full_title => 'AmericanSamoa',
+  :full_title => 'American Samoa',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

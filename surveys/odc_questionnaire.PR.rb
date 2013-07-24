@@ -1,5 +1,5 @@
 survey 'PR',
-  :full_title => 'PuertoRico',
+  :full_title => 'Puerto Rico',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

@@ -1,5 +1,5 @@
 survey 'CK',
-  :full_title => 'CookIslands',
+  :full_title => 'Cook Islands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

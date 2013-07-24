@@ -1,5 +1,5 @@
 survey 'KY',
-  :full_title => 'CaymanIslands',
+  :full_title => 'Cayman Islands',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

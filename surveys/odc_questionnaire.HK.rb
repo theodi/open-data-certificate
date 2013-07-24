@@ -1,5 +1,5 @@
 survey 'HK',
-  :full_title => 'HongKong',
+  :full_title => 'Hong Kong',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

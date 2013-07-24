@@ -1,5 +1,5 @@
 survey 'LK',
-  :full_title => 'SriLanka',
+  :full_title => 'Sri Lanka',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

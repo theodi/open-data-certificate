@@ -75,7 +75,7 @@
 	<xsl:param name="country" as="xs:string" tunnel="yes" required="yes" />
 	<xsl:param name="countryName" as="xs:string" tunnel="yes" required="yes" />
 	<help>
-		<p><strong>This has been generated based on a default<xsl:if test="$country = $european"> for EU countries</xsl:if> and needs to be localised for <xsl:value-of select="local:titleCase($countryName)" />. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
+		<p><strong>This has been generated based on a default<xsl:if test="$country = $european"> for EU countries</xsl:if> and needs to be localised for <xsl:value-of select="if (contains($countryName, ',')) then local:titleCase(concat(substring-after($countryName, ', '), ' ', substring-before($countryName, ','))) else local:titleCase($countryName)" />. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
 		<xsl:sequence select="node()" />
 	</help>
 </xsl:template>
@@ -90,7 +90,23 @@
 	<xsl:param name="string" as="xs:string" />
 	<xsl:value-of>
 		<xsl:for-each select="tokenize($string, ' ')">
-			<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+			<xsl:choose>
+				<xsl:when test=". = ('AND', 'OF')">
+					<xsl:value-of select="lower-case(.)" />
+				</xsl:when>
+				<xsl:when test=". = ('U.S.')">
+					<xsl:value-of select="." />
+				</xsl:when>
+				<xsl:when test="starts-with(., '(')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 2)), lower-case(substring(., 3)))" />
+				</xsl:when>
+				<xsl:when test="starts-with(., 'D''')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 3)), lower-case(substring(., 4)))" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:if test="position() != last()">
 				<xsl:text> </xsl:text>
 			</xsl:if>

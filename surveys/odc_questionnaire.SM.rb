@@ -1,5 +1,5 @@
 survey 'SM',
-  :full_title => 'SanMarino',
+  :full_title => 'San Marino',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',

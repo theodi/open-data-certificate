@@ -1,5 +1,5 @@
 survey 'CR',
-  :full_title => 'CostaRica',
+  :full_title => 'Costa Rica',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
   :status => 'alpha',
