@@ -39,7 +39,8 @@ class ApplicationController < ActionController::Base
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
     # When multiple legislations are available, this value will need to be provided by the form
-    params[:survey_access_code] = Survey::DEFAULT_ACCESS_CODE if params[:survey_access_code].blank?
+    user_default = current_user.try(:default_jurisdiction)
+    params[:survey_access_code] = (user_default.blank? ? Survey::DEFAULT_ACCESS_CODE : user_default) if params[:survey_access_code].blank?
 
     # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
     @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? Dataset.create(user: current_user) : Dataset.new)

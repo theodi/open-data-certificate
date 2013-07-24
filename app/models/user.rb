@@ -8,5 +8,5 @@ class User < ActiveRecord::Base
   has_many :datasets, :order => "created_at DESC"
   has_many :response_sets
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :default_jurisdiction
 end

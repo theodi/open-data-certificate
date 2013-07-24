@@ -1,4 +1,5 @@
-survey "two", :dataset_title => 'title' do
+# gb == Survey::DEFAULT_ACCESS_CODE
+survey "gb", :dataset_title => 'title' do
   section "first" do
     q_title 'name?'
     a_1 'title', :string
