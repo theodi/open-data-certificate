@@ -26,5 +26,8 @@
   .form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => 'span8'
+  .form-field
+    = f.label :default_jurisdiction
+    = f.select(:default_jurisdiction, options_for_select(jurisdiction_options(@surveys),resource.default_jurisdiction))
 
   = f.submit t("authentication.update_profile"), :class => 'btn btn-primary'

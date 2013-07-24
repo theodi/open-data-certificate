@@ -1,10 +1,13 @@
-survey 'Open Data Certificate Questionnaire',
+survey 'GB',
+  :full_title => 'United Kingdom',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
-  :description => ' <p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :status => 'beta',
+  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
   section_general 'General Information',
+    :description => '',
     :display_header => false do
 
     q_dataTitle 'What\'s this data called?',
@@ -75,7 +78,7 @@ survey 'Open Data Certificate Questionnaire',
   section_legal 'Legal Information',
     :description => 'Rights, licensing and privacy' do
 
-    label_group_1 'Rights',
+    label_group_2 'Rights',
       :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
@@ -270,7 +273,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_2 'Licensing',
+    label_group_3 'Licensing',
       :help_text => 'how you give people permission to use your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -557,7 +560,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_contentLicence, '==', :a_other
     condition_B :q_otherContentLicenceOpen, '==', :a_false
 
-    label_group_3 'Privacy',
+    label_group_4 'Privacy',
       :help_text => 'how you protect people\'s privacy',
       :customer_renderer => '/partials/fieldset'
 
@@ -826,7 +829,7 @@ survey 'Open Data Certificate Questionnaire',
   section_practical 'Practical Information',
     :description => 'Findability, accuracy, quality and guarantees' do
 
-    label_group_5 'Findability',
+    label_group_6 'Findability',
       :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -911,7 +914,7 @@ survey 'Open Data Certificate Questionnaire',
 
     end
 
-    label_group_6 'Accuracy',
+    label_group_7 'Accuracy',
       :help_text => 'how you keep your data up-to-date',
       :customer_renderer => '/partials/fieldset'
 
@@ -1209,7 +1212,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_7 'Quality',
+    label_group_8 'Quality',
       :help_text => 'how much people can rely on your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1245,7 +1248,7 @@ survey 'Open Data Certificate Questionnaire',
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_8 'Guarantees',
+    label_group_9 'Guarantees',
       :help_text => 'how much people can depend on your data’s availability',
       :customer_renderer => '/partials/fieldset'
 
@@ -1334,7 +1337,7 @@ survey 'Open Data Certificate Questionnaire',
   section_technical 'Technical Information',
     :description => 'Locations, formats and trust' do
 
-    label_group_10 'Locations',
+    label_group_11 'Locations',
       :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1579,7 +1582,7 @@ survey 'Open Data Certificate Questionnaire',
       :placeholder => 'Change Feed URL',
       :required => :required
 
-    label_group_11 'Formats',
+    label_group_12 'Formats',
       :help_text => 'how people can work with your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1875,7 +1878,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_12 'Trust',
+    label_group_13 'Trust',
       :help_text => 'how much trust people can put in your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1918,7 +1921,7 @@ survey 'Open Data Certificate Questionnaire',
   section_social 'Social Information',
     :description => 'Documentation, support and services' do
 
-    label_group_14 'Documentation',
+    label_group_15 'Documentation',
       :help_text => 'how you help people understand the context and content of your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2201,7 +2204,7 @@ survey 'Open Data Certificate Questionnaire',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_15 'Support',
+    label_group_16 'Support',
       :help_text => 'how you communicate with people who use your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2360,7 +2363,7 @@ survey 'Open Data Certificate Questionnaire',
       :placeholder => 'Community Engagement Team Home Page URL',
       :required => :required
 
-    label_group_16 'Services',
+    label_group_17 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',
       :customer_renderer => '/partials/fieldset'
 

@@ -83,8 +83,11 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 
     bundle install
     rake db:migrate
-    rake surveyor:build_changed_surveys
+    rake surveyor:build_changed_survey FILE=surveys/odc_questionnaire.UK.rb
     rails s
+
+    # to include some other jurisdictions
+    rake surveyor:build_changed_surveys LIMIT=5
 
 #### Development things
 
