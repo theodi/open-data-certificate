@@ -224,83 +224,83 @@ jQuery(document).ready(function(){
 
           if (json.update_frequency.length == 0 && json.distributions.length == 1) {
             // One-off release of a single dataset
-            affectedFields.push(checkMe("releaseType", 4))
+            affectedFields.push(checkMe("releaseType", 0))
           } else if (json.update_frequency.length == 0 && json.distributions.length > 1) {
-            affectedFields.push(checkMe("releaseType", 3))
+            affectedFields.push(checkMe("releaseType", 1))
             // One-off release of a set of related datasets
           } else if (json.update_frequency.length > 0 && json.distributions.length > 1) {
             // Ongoing release
-            affectedFields.push(checkMe("releaseType", 5))
+            affectedFields.push(checkMe("releaseType", 2))
           }
 
           // A service or API for accessing open data
           if (json.title.indexOf("API") >= 0 || json.description.indexOf("API") >= 0 ) {
-            affectedFields.push(checkMe("releaseType", 6))
+            affectedFields.push(checkMe("releaseType", 3))
           }
 
           // Rights information
           if (json.rights) {
             // Yes, you have the rights to publish this data as open data
-            affectedFields.push(checkMe("publisherRights", 9))
+            affectedFields.push(checkMe("publisherRights", 0))
             // Rights statement
             affectedFields.push(fillMe("copyrightURL", json.rights.uri))
 
             // Data License
             switch(json.rights.dataLicense) {
               case "http://opendatacommons.org/licenses/by/":
-                affectedFields.push(fillMe("dataLicence", 34))
+                affectedFields.push(selectMe("dataLicence", 1))
                 break;
               case "http://opendatacommons.org/licenses/odbl/":
-                affectedFields.push(fillMe("dataLicence", 35))
+                affectedFields.push(selectMe("dataLicence", 2))
                 break;
               case "http://opendatacommons.org/licenses/pddl/":
-                affectedFields.push(fillMe("dataLicence", 36))
+                affectedFields.push(selectMe("dataLicence", 3))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                affectedFields.push(fillMe("dataLicence", 37))
+                affectedFields.push(selectMe("dataLicence", 4))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
-                affectedFields.push(fillMe("dataLicence", 38))
+                affectedFields.push(selectMe("dataLicence", 5))
                 break;
             }
 
             // Content License
             switch(json.rights.contentLicense) {
               case "http://creativecommons.org/licenses/by/2.0/uk/":
-                affectedFields.push(fillMe("contentLicence", 52))
+                affectedFields.push(selectMe("contentLicence", 1))
                 break;
               case "http://creativecommons.org/licenses/by-sa/2.0/uk/":
-                affectedFields.push(fillMe("contentLicence", 53))
+                affectedFields.push(selectMe("contentLicence", 2))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                affectedFields.push(fillMe("contentLicence", 54))
+                affectedFields.push(selectMe("contentLicence", 3))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
-                affectedFields.push(fillMe("contentLicence", 55))
+                affectedFields.push(selectMe("contentLicence", 4))
                 break;
             }
           } else if (json.licenses) {
             // Yes, you have the rights to publish this data as open data
-            affectedFields.push(checkMe("publisherRights", 9))
+            affectedFields.push(checkMe("publisherRights", 0))
 
             // Data License
             switch(json.licenses[0].uri) {
               case "http://opendatacommons.org/licenses/by/":
-                affectedFields.push(fillMe("dataLicence", 34))
+                affectedFields.push(selectMe("dataLicence", 1))
                 break;
               case "http://opendatacommons.org/licenses/odbl/":
-                affectedFields.push(fillMe("dataLicence", 35))
+                affectedFields.push(selectMe("dataLicence", 2))
                 break;
               case "http://opendatacommons.org/licenses/pddl/":
-                affectedFields.push(fillMe("dataLicence", 36))
+                affectedFields.push(selectMe("dataLicence", 3))
                 break;
               case "http://creativecommons.org/publicdomain/zero/1.0/":
-                affectedFields.push(fillMe("dataLicence", 37))
+                affectedFields.push(selectMe("dataLicence", 4))
                 break;
               case "http://reference.data.gov.uk/id/open-government-licence":
                 // Open Government Licence covers data and content
-                affectedFields.push(fillMe("dataLicence", 38))
-                affectedFields.push(fillMe("contentLicence", 55))
+                affectedFields.push(selectMe("dataLicence", 5))
+                affectedFields.push(selectMe("contentLicence", 4))
                 break;
             }
 
@@ -309,91 +309,91 @@ jQuery(document).ready(function(){
           // Was all this data originally created or gathered by you?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            affectedFields.push(checkMe("publisherOrigin", 13))
+            affectedFields.push(checkMe("publisherOrigin", 1))
           }
 
           // Can individuals be identified from this data?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            affectedFields.push(checkMe("dataPersonal", 68))
+            affectedFields.push(checkMe("dataPersonal", 0))
           }
 
           for (var i = 0; i < json.distributions.length; i++) {
 
             // Is this data machine-readable?
             if (json.distributions[i].structured === true) {
-              affectedFields.push(checkMe("machineReadable", 151))
+              affectedFields.push(checkMe("machineReadable", 1))
             }
 
             // Is this data in a standard open format?
             if (json.distributions[i].open === true) {
-              affectedFields.push(checkMe("openStandard", 153))
+              affectedFields.push(checkMe("openStandard", 1))
             }
           }
 
           // Does this data change at least daily?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            affectedFields.push(checkMe("frequentChanges", 103))
+            affectedFields.push(checkMe("frequentChanges", 0))
           }
 
           // Does your data documentation contain machine readable documentation for:
 
           // Title
           if (json.title.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 185))
+            affectedFields.push(checkMe("documentationMetadata", 0))
           }
 
           // Description
           if (json.description.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 186))
+            affectedFields.push(checkMe("documentationMetadata", 1))
           }
 
           // Release Date
           if (json.release_date.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 187))
+            affectedFields.push(checkMe("documentationMetadata", 2))
           }
 
           // Modification Date
           if (json.modified_date.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 188))
+            affectedFields.push(checkMe("documentationMetadata", 3))
           }
+
+         // Frequency of releases
+         if (json.update_frequency) {
+           affectedFields.push(checkMe("documentationMetadata", 4))
+         }
 
           // Publisher
           if (json.publishers.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 193))
+            affectedFields.push(checkMe("documentationMetadata", 8))
           }
 
           // Temporal coverage
           if (json.temporal_coverage.start != null && json.temporal_coverage.end != null) {
-            affectedFields.push(checkMe("documentationMetadata", 195))
-          }
-
-          // Frequency of releases
-          if (json.update_frequency) {
-            affectedFields.push(checkMe("documentationMetadata", 189))
+            affectedFields.push(checkMe("documentationMetadata", 10))
           }
 
           // Keywords
           if (json.keywords.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 197))
+            affectedFields.push(checkMe("documentationMetadata", 13))
           }
 
           // Distributions
           if (json.distributions.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 198))
+            affectedFields.push(checkMe("documentationMetadata", 13))
           }
 
           // Do the data formats use vocabularies?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            affectedFields.push(checkMe("vocabulary", 209))
+            affectedFields.push(checkMe("vocabulary", 0))
           }
 
           // Are there any codes used in this data?
           // Assumption for data.gov.uk
           if (el.value.indexOf("data.gov.uk") != -1) {
-            affectedFields.push(checkMe("codelists", 212))
+            affectedFields.push(checkMe("codelists", 0))
           }
 
           // Contact email address
