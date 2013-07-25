@@ -6,7 +6,7 @@ namespace :cache do
     if Rails.cache.is_a? ActiveSupport::Cache::MemoryStore
       message = 'Unable to clear cache, using :memory_store so different process from rake (you should try restarting the app server)'
       if defined? Airbrake
-        Airbrake.notify message
+        Airbrake.notify :error_message => message
       else
         raise message
       end
