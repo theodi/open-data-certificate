@@ -1534,7 +1534,25 @@ header .jurisdiction{
   input.string{
     width:100%;
   }
-
+  
+  input.string.fail {
+    border-color: #e9322d;
+    color: #b94a48;
+    -webkit-box-shadow: 0 0 6px #f8b9b7;
+    -moz-box-shadow: 0 0 6px #f8b9b7;
+    box-shadow: 0 0 6px #f8b9b7;
+  }
+  
+  p.url_error {
+    background: #ff6700;
+    color: white;
+    padding: 20px;
+    margin-left: 0;
+    
+    &.hidden {
+      display: none;
+    }
+  }
 
   // this is our label replacement (for the question of multiple answers)
   .group_label{
@@ -1625,6 +1643,9 @@ header .jurisdiction{
           background-color:@odiBlueLighter;
         }
       }
+    }
+    .url-error{
+      background-color:@odiCrimsonLight;
     }
   }
 

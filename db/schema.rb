@@ -202,10 +202,11 @@ ActiveRecord::Schema.define(:version => 20130724115538) do
     t.string   "string_value"
     t.string   "response_other"
     t.string   "response_group"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "survey_section_id"
     t.string   "api_id"
+    t.boolean  "error",             :default => false
   end
 
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true
