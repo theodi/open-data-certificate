@@ -79,14 +79,19 @@ jQuery(document).ready(function(){
     var elements = questionFields($(this))
       .add($("form#survey_form input[name='authenticity_token']"));
 
-    updateFormElements($(this).closest('form#survey_form'), elements);
+    autofillFields($(this)).val(false);
+    saveFormElements($(this).closest('form#survey_form'), elements);
   });
 
   function questionFields(field) {
     return field.parents('fieldset[id^="q_"],tr[id^="q_"]').find("input, select, textarea");
   }
 
-  function updateFormElements(form, elements) {
+  function autofillFields(field) {
+    return field.parents('fieldset[id^="q_"],tr[id^="q_"]').find('input[id$="_autocompleted"]');
+  }
+
+  function saveFormElements(form, elements) {
     $.ajax({
       type: "PUT",
       url: form.attr("action"),
@@ -399,12 +404,16 @@ jQuery(document).ready(function(){
           // Contact email address
           affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
 
+          affectedFields = $(affectedFields).map(function() { return this.toArray(); })
+
+          autofillFields(affectedFields).val(true)
+
           // Trigger a single save event with surveyor
-          updateFormElements(
+          saveFormElements(
             $('form#survey_form'),
 
             // All fields for questions which were changed, plus the CSRF token
-            questionFields($(affectedFields).map(function() { return this.toArray(); }))
+            questionFields(affectedFields)
               .add($("form#survey_form input[name='authenticity_token']"))
           );
 
