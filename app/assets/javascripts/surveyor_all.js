@@ -196,9 +196,14 @@ jQuery(document).ready(function(){
     return $('[data-reference-identifier="'+ identifier +'"] input.string, [data-reference-identifier="'+ identifier +'"] select').val(val)
   }
 
-  // Utility function to check input fields by identifier
+  // Utility function to select nth option
+  function selectMe(identifier, value) {
+     return $('[data-reference-identifier="'+ identifier +'"] select option:eq('+ value +')').prop('selected', 'selected');
+  }
+
+  // Utility function to check input fields by index
   function checkMe(identifier, value) {
-    return $('[data-reference-identifier="'+ identifier +'"] [value="'+ value +'"]').prop('checked', true)
+   return $('[data-reference-identifier="'+ identifier +'"] [type="radio"], [data-reference-identifier="'+ identifier +'"] [type="checkbox"]').eq(value).prop('checked', true) 
   }
 
   $('[data-reference-identifier="documentationUrl"] input.string').change(function () {
@@ -302,6 +307,16 @@ jQuery(document).ready(function(){
                 affectedFields.push(selectMe("dataLicence", 5))
                 affectedFields.push(selectMe("contentLicence", 4))
                 break;
+			 case "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf":
+				selectMe("dataLicence", 7)
+				selectMe("contentLicence", 6)
+				fillMe("otherDataLicenceName", "OS OpenData Licence")
+				fillMe("otherDataLicenceURL", "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf")
+				checkMe("otherDataLicenceOpen", 1)
+				fillMe("otherContentLicenceName", "OS OpenData Licence")
+				fillMe("otherContentLicenceURL", "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf")
+				checkMe("otherContentLicenceOpen", 1)
+				break;
             }
 
           }
