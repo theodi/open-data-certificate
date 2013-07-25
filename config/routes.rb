@@ -46,6 +46,10 @@ OpenDataCertificate::Application.routes.draw do
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'contact' => 'high_voltage/pages#show', :id => 'contact'
   get 'terms' => 'high_voltage/pages#show', :id => 'terms'
+  
+  # Validators
+  get 'resolve' => 'validators#resolve'
+  get 'autofill' => 'validators#autofill'
 
   get 'has_js' => 'application#has_js'
 
