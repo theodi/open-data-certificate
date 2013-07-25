@@ -5,6 +5,11 @@
   / header overridden
 - content_for(:main_container_class) {'non-container'}
 
+
+/ has it's own form, so need it up here
+-@surveys = Survey.available_to_complete
+=render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
+
 = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
   .affixed
@@ -12,8 +17,10 @@
       .container
         .row
           .span9
-            %h1 New Certificate
-            %h3{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
+            .jurisdiction
+              .badge.badge-inverse=  @response_set.jurisdiction
+              = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+            %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3
             - if user_signed_in?
               = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'

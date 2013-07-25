@@ -320,6 +320,22 @@
 }
 
 
+// override default label & badges colours
+.label, .badge {
+  color: @white;
+  background-color: @odiBlue;
+
+  &-inverse{
+    text-shadow:none;
+    color: @odiBlue; 
+    background-color: @white;
+  }
+  &-inverse[href]{
+    background-color: darken(@white, 10%);
+  }
+}
+
+
 /************************************************
     Bootstrap --> Rails
 ************************************************/
@@ -842,6 +858,13 @@ header {
   h1,h2,h3,h4,h5,h6{
     font-weight:normal;
   }
+
+  h1{  
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom:0.1em;
+  }
 }
 
 .container.main {
@@ -1104,7 +1127,7 @@ th {
 
 
 
-// My certificates view //
+/* My certificates view //
 
 .main-default .first-response-set i, .main-default  .previous-response-set i {
 display: inline-block;
@@ -1241,7 +1264,7 @@ td.action {
 }
 
 
-
+*/
 
 // UPDATED My Certificates (/Dashboard) view (remove above when ready)
 
@@ -1303,6 +1326,9 @@ td.action {
    color: @odiCrimsonDark;
   }
 
+  // jurisdiction badge
+  .jurisdiction{margin:.5em;}
+
 }
 
 .response-set.response-set-primary .row-fluid.baseline {
@@ -1310,7 +1336,9 @@ td.action {
   }
 
 .response-set-secondry{
-  h3{display:none}
+
+  h3, .edit-jurisdiction a{display:none}
+
   .level-badge{
     width:55px;
     height:50px;
@@ -1340,23 +1368,20 @@ td.action {
     margin-top:10px;
    
     .btn {
-    background-color: transparent;
-    background-image: none;
-    border:none;
-    box-shadow: none;
-    color: @odiBlueDark;
-    font-size: 16px;
-    padding: 10px 0 0;
-  
+      background-color: transparent;
+      background-image: none;
+      border:none;
+      box-shadow: none;
+      color: @odiBlueDark;
+      font-size: 16px;
+      padding: 10px 0 0;
+    }
 
-  }
-  :hover {
+    :hover {
       color: @odiBlueDarker;
       text-decoration: underline;
     }
   }
-
-  
 }
 
 
@@ -1413,6 +1438,26 @@ td.action {
 
 
 // Questionnaire (survey) view //
+
+// jurisdiction select at the top of the certificate
+header .jurisdiction{
+  a{
+    cursor: pointer;
+
+    // match the badge styles
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: @baseFontSize * .846;
+    font-weight: bold;
+    line-height: 14px; // ensure proper line-height if floated
+    color: @white;
+    vertical-align: baseline;
+    white-space: nowrap;
+  }
+  .popover{
+    color:@black;
+  }
+}
 
 #surveyor{
 

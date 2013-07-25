@@ -5,32 +5,60 @@
 	xmlns:local="http://theodi.org/ns/func"
 	exclude-result-prefixes="#all">
 
+<xsl:variable name="countries" as="document-node()" select="doc('country_names_and_code_elements.xml')" />
+<xsl:key name="countries" match="ISO_3166-1_Country_name" use="../ISO_3166-1_Alpha-2_Code_element" />
+
 <xsl:template match="/">
-	<xsl:variable name="structure" as="element()">
-		<xsl:apply-templates select="questionnaire" mode="structure" />
+	<xsl:variable name="merged" as="document-node()">
+		<xsl:document>
+			<xsl:apply-templates select="questionnaire" mode="merge" />
+		</xsl:document>
 	</xsl:variable>
-	<xsl:result-document href="odc_questionnaire.xml" method="xml" indent="yes">
-		<xsl:sequence select="$structure" />
-	</xsl:result-document>
-	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
+	<xsl:variable name="structure" as="element()">
+		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
+	</xsl:variable>
+	<xsl:result-document href="../../surveys/odc_questionnaire.{if (questionnaire/@jurisdiction = 'GB') then 'UK' else questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
-	<xsl:result-document href="translations/odc.{questionnaire/@jurisdiction}.en.yml" method="text">
-		<xsl:apply-templates select="questionnaire" mode="translation" />
+	<xsl:result-document href="../../surveys/translations/odc.{if (questionnaire/@jurisdiction = 'GB') then 'UK' else questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
+		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
 	</xsl:result-document>
+</xsl:template>
+
+<!-- MERGE -->
+
+<xsl:template match="questionnaire" mode="merge">
+	<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', @xml:lang, '.xml')" />
+	<xsl:choose>
+		<xsl:when test="doc-available($langPath)">
+			<xsl:variable name="langVersion" as="element()" select="doc($langPath)/questionnaire" />
+			<questionnaire>
+				<xsl:sequence select="@*" />
+				<xsl:sequence select="help" />
+				<xsl:sequence select="$langVersion/levels" />
+				<xsl:sequence select="$langVersion/group[1]" />
+				<xsl:sequence select="group" />
+				<xsl:sequence select="$langVersion/group[position() > 1]" />
+			</questionnaire>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:message terminate="yes">Could not find version of certificate in language <xsl:value-of select="@xml:lang" /> at <xsl:value-of select="$langPath" /></xsl:message>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <!-- STRUCTURE -->
 
 <xsl:template match="questionnaire" mode="structure">
-	<survey label="Open Data Certificate Questionnaire" 
+	<survey label="{@jurisdiction}"
+		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
 		default_mandatory="false" 
 		dataset_title="dataTitle"
-		description="&lt;p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.&lt;/p>&lt;p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).&lt;/p>&lt;p>&lt;strong>You do not need to answer all the questions to get a certificate.&lt;/strong> Just answer those you can.&lt;/p>">
+		status="{@status}">
+		<xsl:attribute name="description">
+			<xsl:apply-templates select="help/*" mode="html" />
+		</xsl:attribute>
 		<translations en="default" />
-		<section_general label="General Information" display_header="false">
-			<xsl:apply-templates select="levels/following-sibling::* except group" mode="structure" />
-		</section_general>
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
 </xsl:template>
@@ -39,6 +67,9 @@
 	<xsl:element name="section_{@id}">
 		<xsl:attribute name="label" select="label" />
 		<xsl:attribute name="description" select="help" />
+		<xsl:if test="not(preceding-sibling::group)">
+			<xsl:attribute name="display_header">false</xsl:attribute>
+		</xsl:if>
 		<xsl:apply-templates select="* except label" mode="structure" />
 	</xsl:element>
 </xsl:template>
@@ -345,6 +376,12 @@
 	<xsl:apply-templates mode="html" />
 </xsl:template>
 
+<xsl:template match="p" mode="html">
+	<xsl:text>&lt;p&gt;</xsl:text>
+	<xsl:apply-templates mode="html" />
+	<xsl:text>&lt;/p&gt;</xsl:text>
+</xsl:template>
+
 <xsl:template match="em" mode="html">
 	<xsl:text>&lt;em&gt;</xsl:text>
 	<xsl:apply-templates mode="html" />
@@ -528,14 +565,18 @@
 <!-- TRANSLATION -->
 
 <xsl:template match="questionnaire" mode="translation">
-	<xsl:text>title: "Open Data Certificate Questionnaire"&#xA;</xsl:text>
+	<xsl:text>title: "</xsl:text>
+	<xsl:value-of select="@jurisdiction" />
+	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>full_title: "</xsl:text>
+	<xsl:value-of select="local:titleCase(key('countries', @jurisdiction, $countries))" />
+	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>description: "</xsl:text>
+	<xsl:apply-templates select="help/*" mode="html" />
+	<xsl:text>"&#xA;</xsl:text>
 	<xsl:text>survey_sections:&#xA;</xsl:text>
-	<xsl:text>  general:&#xA;</xsl:text>
-	<xsl:text>    title: "General Information"&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
-	<xsl:text># General Information&#xA;</xsl:text>
-	<xsl:apply-templates select="question" mode="translation" />
 	<xsl:for-each select="group">
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
@@ -544,8 +585,6 @@
 	</xsl:for-each>
 	<xsl:text>labels:&#xA;</xsl:text>
 	<xsl:apply-templates select="group//group" mode="translation" />
-	<xsl:text># General Information Requirements&#xA;</xsl:text>
-	<xsl:apply-templates select="question//requirement" mode="translation" />
 	<xsl:for-each select="group">
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
@@ -680,6 +719,32 @@
 <xsl:function name="local:conditionId" as="xs:string">
 	<xsl:param name="condition" as="element(condition)" />
 	<xsl:number select="$condition" format="A" level="any" />
+</xsl:function>
+
+<xsl:function name="local:titleCase" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:value-of>
+		<xsl:for-each select="tokenize($string, ' ')">
+			<xsl:choose>
+				<xsl:when test=". = ('AND', 'OF')">
+					<xsl:value-of select="lower-case(.)" />
+				</xsl:when>
+				<xsl:when test=". = ('U.S.')">
+					<xsl:value-of select="." />
+				</xsl:when>
+				<xsl:when test="starts-with(., '(')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 2)), lower-case(substring(., 3)))" />
+				</xsl:when>
+				<xsl:when test="starts-with(., 'D''')">
+					<xsl:value-of select="concat(upper-case(substring(., 1, 3)), lower-case(substring(., 4)))" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat(upper-case(substring(., 1, 1)), lower-case(substring(., 2)))" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:if test="position() != last()"><xsl:text> </xsl:text></xsl:if>
+		</xsl:for-each>
+	</xsl:value-of>
 </xsl:function>
 
 <xsl:function name="local:parseTest" as="element()">

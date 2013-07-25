@@ -13,6 +13,7 @@ namespace :surveyor do
   desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys`)'
   task :build_changed_surveys => :environment do
     dir = ENV['DIR'] || 'surveys'
+    limit = (ENV['LIMIT'] || '10000').to_i
     # Compares the MD5 of each file in the 'surveys' folder with the stored hash in the file's SurveyParsing record
     files = Dir.entries(File.join(Rails.root, dir)).select { |file| file =~ /.*\.rb/ }
 
@@ -23,23 +24,47 @@ namespace :surveyor do
       survey_parsing = SurveyParsing.find_or_create_by_file_name(ENV['FILE'])
 
       if survey_parsing.md5 != md5
-        Rake::Task["surveyor"].invoke
-        ::Rake::Task.tasks.each { |t| t.reenable } # re-enabling *all* Rake tasks... is there a better way of re-enabling dependencies?
+        if limit > 0
+          limit -= 1
+          Rake::Task["surveyor"].invoke
+          ::Rake::Task.tasks.each { |t| t.reenable } # re-enabling *all* Rake tasks... is there a better way of re-enabling dependencies?
+        end
       else
-        puts "--- #{file} not changed"
+        puts "--- Skipped #{file}"
       end
     end
+  end
+
+  desc  'build a survey only if file has changed'
+  task :build_changed_survey => :environment do
+    file = Rails.root.join ENV["FILE"]
+    raise "File does not exist: #{file}" unless FileTest.exists? file
+
+    md5 = Digest::MD5.hexdigest(file.read)
+    survey_parsing = SurveyParsing.find_or_create_by_file_name(ENV['FILE'])
+
+    if survey_parsing.md5 != md5
+      Rake::Task["surveyor"].invoke
+    else
+      puts "--- Skipped #{file}"
+    end
+
 
   end
 
   desc "queue up surveys to be built by delayed job"
   task :enqueue_surveys => :environment do
-    # This is a stub for now, implemented in the jurisdictions branch
-    t = Time.now.to_i
-    Survey.build("#{t}-example-file1.rb")
-    Survey.build("#{t}-example-file2.rb")
-    Survey.build("#{t}-example-file3.rb")
-    Survey.build("#{t}-example-file4.rb")
+    dir = ENV['DIR'] || 'surveys'
+    files = Dir.entries(Rails.root.join(dir)).select { |file| file =~ /.*\.rb/ }
+
+    files.each do |file|
+      builder = SurveyBuilder.new(dir, file)
+
+      # default survey is a higher priority
+      priority =  builder.default_survey? ? 5 : 10
+
+      Delayed::Job.enqueue builder, priority: priority
+    end
   end
 
 end
