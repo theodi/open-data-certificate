@@ -49,6 +49,9 @@ OpenDataCertificate::Application.routes.draw do
 
   get 'has_js' => 'application#has_js'
 
+  # (public) stats about the application
+  get 'status' => 'application#status'
+
   root :to => 'application#home'
 
   # The priority is based upon order of creation:

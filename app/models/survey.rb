@@ -3,9 +3,15 @@ class Survey < ActiveRecord::Base
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
+  # this is access_codes of surveys that we want the user to move from->to
+  MIGRATIONS = {'open-data-certificate-questionnaire' => 'gb'}
+
+  # temorary - when we have the jurisdiction choice at the start, this won't be needed
+  DEFAULT_ACCESS_CODE = 'gb'
+
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   validates :dataset_title, :presence => true
-  attr_accessible :dataset_curator, :dataset_title
+  attr_accessible :dataset_curator, :dataset_title, :full_title
 
   has_many :response_sets
 
@@ -20,8 +26,7 @@ class Survey < ActiveRecord::Base
     handle_asynchronously :build, :priority => 10
 
     def available_to_complete
-      #order('title DESC, survey_version DESC').select(&:active?).group_by(&:access_code).map{|k,v| v.first} # TODO: all the surveys need to be set to be activated in the DB to use this line - though for live it will (probably) be wanted
-      order('title DESC, survey_version DESC').group_by(&:access_code).map{|k,v| v.first}
+      order('access_code DESC, survey_version DESC').group(:access_code)
     end
 
     def newest_survey_for_access_code(access_code)
