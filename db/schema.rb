@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719130347) do
+ActiveRecord::Schema.define(:version => 20130724161019) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20130719130347) do
     t.integer  "survey_section_id"
     t.string   "api_id"
     t.boolean  "error",             :default => false
+    t.boolean  "autocompleted",     :default => false
   end
 
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true

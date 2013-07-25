@@ -7,6 +7,7 @@
 = f.semantic_fields_for i, r do |ff|
   = ff.input :question_id, :as => :quiet unless q.pick == "one" # don't repeat question_id if we're on radio buttons
   = ff.input :api_id, :as => :quiet unless q.pick == "one"
+  = ff.input :autocompleted, :as => :quiet
   = ff.input :response_group, :value => rg, :as => :quiet if q.pick != "one" && g && g.display_type == "repeater"
   - case q.pick
   - when "one"
@@ -33,7 +34,7 @@
         != a.help_text_for(@render_context, I18n.locale)
         - if (a.help_text_more_url)
           %a{:href => a.help_text_more_url} Read more...
-    
+
 - if a.input_type == "url"
   %p{:class => "span7 url_error #{r.error === true ? '': 'hidden'}", :id => "r_#{q.id}_string_value_url_error"}
     = t('surveyor.please_check_that_the_url_exists')

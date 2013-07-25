@@ -31,6 +31,7 @@
                           = f.semantic_fields_for i, r do |ff|
                             = ff.input :question_id, :as => :quiet
                             = ff.input :api_id, :as => :quiet
+                            = ff.input :autocompleted, :as => :quiet
                         - q.answers.each do |a|
                           %td= render(a.custom_renderer || '/partials/answer', :g => g, :q => q, :a => a, :f => f) unless q.display_type == "label"
                         %th= q.text_for(:post, @render_context, I18n.locale)
