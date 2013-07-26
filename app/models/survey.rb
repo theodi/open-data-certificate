@@ -78,6 +78,21 @@ class Survey < ActiveRecord::Base
     return errors.empty?
   end
 
+  ### override surveyor methods
+
+  def translation(locale_symbol)
+    {:title => self.title, :description => self.description}.with_indifferent_access.merge(trns(locale_symbol))
+  end
+
+  # prevent the translations from being loaded all the time
+  def trns(locale_symbol)
+    return @trns unless @trns.nil?
+    t = self.translations.where(:locale => locale_symbol.to_s).first
+    @trns = t ? YAML.load(t.translation || "{}").with_indifferent_access : {}
+  end
+
+  ### /override surveyor methods
+
   private
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet

@@ -53,6 +53,9 @@ OpenDataCertificate::Application.routes.draw do
 
   get 'has_js' => 'application#has_js'
 
+  # temporary measure - until #397 is resolved
+  get 'clear_cache' => 'application#clear_cache', :via => :post
+
   # (public) stats about the application
   get 'status' => 'application#status'
 
