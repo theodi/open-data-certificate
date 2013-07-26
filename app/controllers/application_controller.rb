@@ -35,6 +35,12 @@ class ApplicationController < ActionController::Base
     render :text => 'ok'
   end
 
+  # method for clearing the cache
+  def clear_cache
+    Rails.cache.clear
+    render :text => 'cleared'
+  end
+
   # mostly lifted from surveyor#create
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
