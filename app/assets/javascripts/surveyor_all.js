@@ -391,7 +391,7 @@ jQuery(document).ready(function(){
 
           // Keywords
           if (json.keywords.length > 0) {
-            affectedFields.push(checkMe("documentationMetadata", 13))
+            affectedFields.push(checkMe("documentationMetadata", 12))
           }
 
           // Distributions
