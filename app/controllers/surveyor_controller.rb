@@ -176,6 +176,18 @@ class SurveyorController < ApplicationController
     end
   end
 
+  def edit
+    # @response_set is set in before_filter - set_response_set_and_render_context
+    if @response_set
+      @survey = @response_set.survey
+      @sections = @survey.sections.with_includes
+      set_dependents
+    else
+      flash[:notice] = t('surveyor.unable_to_find_your_responses')
+      redirect_to surveyor_index
+    end
+  end
+
 
   # where to send the user once the survey has been completed
   # if there was a dataset, go back to it
