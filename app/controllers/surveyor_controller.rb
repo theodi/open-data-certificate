@@ -181,7 +181,7 @@ class SurveyorController < ApplicationController
     if @response_set
       @survey = @response_set.survey
       @sections = @survey.sections.with_includes
-      set_dependents
+      @dependents = []
     else
       flash[:notice] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index
