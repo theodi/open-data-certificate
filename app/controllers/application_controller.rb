@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
 
     if params[:survey_access_code].blank?
       flash[:notice] = t('surveyor.please_choose_a_legislation')
-      redirect_to (@dataset.persisted? ? @dataset : root_url) and return
+      redirect_to (user_signed_in? ? dashboard_path : root_path) and return
     end
 
     surveys = Survey.where(:access_code => params[:survey_access_code]).order("survey_version DESC")
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
     else
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
-      redirect_to @dataset.persisted? ? @dataset : root_url
+      redirect_to (user_signed_in? ? dashboard_path : root_path) and return
     end
   end
 
