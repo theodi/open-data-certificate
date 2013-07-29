@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724115538) do
+ActiveRecord::Schema.define(:version => 20130729153219) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -59,13 +59,9 @@ ActiveRecord::Schema.define(:version => 20130724115538) do
 
   create_table "datasets", :force => true do |t|
     t.string   "title"
-    t.string   "documentation_url"
-    t.string   "curating_org"
-    t.string   "curator_url"
-    t.string   "data_kind"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
