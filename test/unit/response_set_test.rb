@@ -281,6 +281,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set.assign_to_user!(user)
 
     assert_equal user, response_set.user
+    assert_equal user, response_set.dataset.user
     assert_not_nil response_set.dataset
   end
 

@@ -232,7 +232,7 @@ class ResponseSet < ActiveRecord::Base
     # This is a bit fragile, as it assumes that there is both no current user and no current dataset, and raises no notification of any issues
     # TODO: revisit and improve its handling of unexpected cases
     self.user = user
-    self.dataset = Dataset.create(:user => user)
+    self.dataset = user.datasets.create
     save
   end
 
