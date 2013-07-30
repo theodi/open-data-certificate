@@ -15,8 +15,13 @@
 - else
   %li.container
     - r = response_for(@response_set, q, nil, rg)
+
+    - state = 'ok' unless r.new_record?
+    - state = 'error' if highlight_mandatory && q.is_mandatory && r.new_record?
+    - state = 'warning' if r.error
+
     -# if we are using the default renderer, we will display the question text within that
-    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} #{q.is_mandatory ? 'mandatory' : ''} #{r.new_record? ? '' : 'has-response'} #{r.error === false ? '' : 'url-error'} row question-row", 'data-reference-identifier' => rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier do
+    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "q_#{renderer} #{q.css_class(@response_set)} #{q.is_mandatory ? 'mandatory' : ''} #{r.new_record? ? '' : 'has-response'} #{state} #{r.autocompleted ? 'autocompleted' : ''} row question-row", 'data-reference-identifier' => rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier do
 
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
