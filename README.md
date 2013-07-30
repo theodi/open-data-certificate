@@ -94,7 +94,11 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 
 #### Development things
 
-    # generate development surveys
+    # generate a stripped back version of the default survey (GB)
+    # - makes page loads more bearable in development
+    rake surveyor:build_changed_survey FILE=surveys/development/odc_GB_stub.rb
+
+    # generate development surveys (includes GB stub)
     rake surveyor:build_changed_surveys DIR=surveys/development
 
     # run tests on file change
