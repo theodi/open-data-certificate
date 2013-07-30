@@ -100,35 +100,37 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_requirements
     @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.nil? ? 
-        true : 
+      r.dependency.nil? ?
+        true :
         depends[r.dependency.id]
     end
 
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
-  
+
   def responses_with_url_type
     responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
   end
-  
+
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
-      response_code = Rails.cache.fetch(response.string_value) 
-      if response_code.nil?
-        response_code = HTTParty.get(response.string_value).code rescue nil
-      end
-      if response_code != 200
-        response.error = true
-        response.save
-        errors << response 
-      else
-        response.error = false
-        response.save
+      if response.string_value
+        response_code = Rails.cache.fetch(response.string_value)
+        if response_code.nil?
+          response_code = HTTParty.get(response.string_value).code rescue nil
+        end
+        if response_code != 200
+          response.error = true
+          response.save
+          errors << response
+        else
+          response.error = false
+          response.save
+        end
       end
     end
-    errors.length > 0 or true
+    errors.length == 0
   end
 
   def all_mandatory_questions_complete?
