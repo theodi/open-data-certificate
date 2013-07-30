@@ -4,7 +4,7 @@
 //= require surveyor/jquery.maskedinput
 
 // Javascript UI for surveyor
-jQuery(document).ready(function(){
+$(document).ready(function(){
   // if(jQuery.browser.msie){
   //  // IE has trouble with the change event for form radio/checkbox elements - bind click instead
   //  jQuery("form#survey_form input[type=radio], form#survey_form [type=checkbox]").bind("click", function(){
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
   // });
 
   // Default Datepicker uses jQuery UI Datepicker
-  jQuery("input[type='text'].datetime").datetimepicker({
+  $("input[type='text'].datetime").datetimepicker({
     showSecond: true,
     showMillisec: false,
     timeFormat: 'HH:mm:ss',
@@ -45,31 +45,31 @@ jQuery(document).ready(function(){
     changeMonth: true,
     changeYear: true
   });
-  jQuery("li.date input").datepicker({
+  $("li.date input").datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
-  jQuery("input[type='text'].date").datepicker({
+  $("input[type='text'].date").datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
-  jQuery("input[type='text'].datepicker").datepicker({
+  $("input[type='text'].datepicker").datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
-  jQuery("input[type='text'].time").timepicker({});
+  $("input[type='text'].time").timepicker({});
 
-  jQuery('.surveyor_check_boxes input[type=text]').change(function(){
+  $('.surveyor_check_boxes input[type=text]').change(function(){
     var textValue = $(this).val()
     if (textValue.length > 0) {
       $(this).parent().children().has('input[type="checkbox"]')[0].children[0].checked = true;
     }
   });
 
-  jQuery('.surveyor_radio input[type=text]').change(function() {
+  $('.surveyor_radio input[type=text]').change(function() {
     if ($(this).val().length > 0) {
       $(this).parent().children().has('input[type="radio"]')[0].children[0].checked = true;
     }
@@ -114,33 +114,33 @@ jQuery(document).ready(function(){
 
   // If javascript works, we don't need to show dependents from
   // previous sections at the top of the page.
-  jQuery("#dependents").remove();
+  $("#dependents").remove();
 
   function successfulSave(responseText) {
     // surveyor_controller returns a json object to show/hide elements
     // e.g. {"hide":["question_12","question_13"],"show":["question_14"]}
-    jQuery.each(responseText.show, function(){ showElement(this) });
-    jQuery.each(responseText.hide, function(){ hideElement(this) });
+    $.each(responseText.show, function(){ showElement(this) });
+    $.each(responseText.hide, function(){ hideElement(this) });
 
-    jQuery(document).trigger('surveyor-update', responseText);
+    $(document).trigger('surveyor-update', responseText);
     return false;
   }
 
   function showElement(id){
     group = id.match('^g_') ? true : false;
     if (group) {
-      jQuery('#' + id).removeClass("g_hidden");
+      $('#' + id).removeClass("g_hidden");
     } else {
-      jQuery('#' + id).removeClass("q_hidden");
+      $('#' + id).removeClass("q_hidden");
     }
   }
 
   function hideElement(id){
     group = id.match('^g_') ? true : false;
     if (group) {
-      jQuery('#' + id).addClass("g_hidden");
+      $('#' + id).addClass("g_hidden");
     } else {
-      jQuery('#' + id).addClass("q_hidden");
+      $('#' + id).addClass("q_hidden");
     }
   }
 
@@ -161,7 +161,7 @@ jQuery(document).ready(function(){
     }
   });
 
-  jQuery("input[data-input-mask]").each(function(i,e){
+  $("input[data-input-mask]").each(function(i,e){
     var inputMask = $(e).attr('data-input-mask');
     var placeholder = $(e).attr('data-input-mask-placeholder');
     var options = { placeholder: placeholder };
