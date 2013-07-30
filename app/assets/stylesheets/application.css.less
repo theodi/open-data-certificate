@@ -24,11 +24,6 @@
 // font awesome config
 @FontAwesomePath: "/assets";
 
-// override bootstrap variables here, see options at:
-//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
-@iconSpritePath:          "glyphicons-halflings.png";
-@iconWhiteSpritePath:     "glyphicons-halflings-white.png";
-
 // use our own grey for the input field
 @gray: @odiGrey;
 @placeholderText: @odiGreyLight;
@@ -39,7 +34,6 @@
 // @gridColumnWidth:         70px;
 // @gridGutterWidth:         30px;
 // @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
 
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
@@ -939,13 +933,13 @@ section {
     margin-right: 6px;
   }
 
-  .close, .close:hover, .close:active {
-    opacity: 1;
-    width: 14px;
-    height: 14px;
-    position: static;
-    background-image: url(/assets/glyphicons-halflings-white.png);
-    background-position: -312px 0;
+  .icon-remove, .icon-remove:hover, .icon-remove:active {
+    float: right;
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-top: -3px;
+    margin-right: -3px;
   }
 }
 
@@ -981,32 +975,6 @@ section {
     }
   }
 }
-
-// Icons //
-
-// .icon-large {
-
-//   width: 28px;
-//   height: 28px;
-//   background-image: url(/assets/glyphicons.png);
-
-//   &.icon-white {
-//     background-image: url(/assets/glyphicons_white.png);
-//   }
-
-//   // Spacing between icons in file
-//   @spacing: -48px;
-
-//   // Mixin to help select correct icon
-//   .icon-position(@top, @left) {
-//     background-position: @spacing * @left (@spacing * @top) + 1;
-//   }
-
-//   &.icon-ok-sign { .icon-position(19, 3); }
-//   &.icon-info-sign { .icon-position(19, 5); }
-//   &.icon-exclamation-sign { .icon-position(19, 6); }
-//   &.icon-ban-circle { .icon-position(19, 9); }
-// }
 
 // Tables //
 
