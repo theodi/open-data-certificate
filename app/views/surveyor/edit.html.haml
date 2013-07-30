@@ -31,7 +31,7 @@
   = render :partial => 'status_panel'
   = render :partial => 'shared/flashes'
 
-  #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
+  #surveyor{'data-url-incorrect' => t('surveyor.please_check_that_the_url_exists'), 'data-autocompleted' => t('surveyor.autocompleted_data'), 'data-autocompleted-url-incorrect' => t('surveyor.autocompleted_url_incorrect')}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container
@@ -44,9 +44,9 @@
     -# other new users
     - if @response_set.responses.empty?
       = cache("blank_survey_#{@response_set.survey_id}") do
-        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
+        = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f, :highlight_mandatory => params[:highlight_mandatory]}
     - else # no cache
-      = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f}
+      = render :partial => '/partials/section', :collection => @sections, :as => :section, :locals => {:f => f, :highlight_mandatory => params[:highlight_mandatory]}
 
 :javascript
   $(document).ready(function() {
@@ -64,6 +64,7 @@
       } else if ($requirements.is('.requirement_exemplar')) {
         text = '#{t('requirement_label.requirement_exemplar')}';
       }
+
       if (text !== '') {
         $label.append(' <small>' + text + '</small>');
       }
