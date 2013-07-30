@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: a0c6cdf5e69179c06e373ea4d80828963ad3fb30
+  revision: 8c988519acb036e295f3d7e25111b6a863d28c38
   specs:
     data_kitten (0.0.1)
       curb
@@ -235,7 +235,7 @@ GEM
       rdf-turtle (>= 1.0.7)
     rdf-trix (1.0.0)
       rdf (>= 1.0)
-    rdf-turtle (1.0.8)
+    rdf-turtle (1.0.9)
       ebnf (>= 0.3.0)
       rdf (>= 1.0.7)
     rdf-xsd (1.0.2.1)
