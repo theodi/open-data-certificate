@@ -436,13 +436,13 @@ $(document).ready(function(){
 
         // Was all this data originally created or gathered by you?
         // Assumption for data.gov.uk
-        if (el.value.indexOf("data.gov.uk") != -1) {
+        if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("publisherOrigin", 1))
         }
 
         // Can individuals be identified from this data?
         // Assumption for data.gov.uk
-        if (el.value.indexOf("data.gov.uk") != -1) {
+        if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("dataPersonal", 0))
         }
 
@@ -461,7 +461,7 @@ $(document).ready(function(){
 
         // Does this data change at least daily?
         // Assumption for data.gov.uk
-        if (el.value.indexOf("data.gov.uk") != -1) {
+        if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("frequentChanges", 0))
         }
 
@@ -514,13 +514,13 @@ $(document).ready(function(){
 
         // Do the data formats use vocabularies?
         // Assumption for data.gov.uk
-        if (el.value.indexOf("data.gov.uk") != -1) {
+        if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("vocabulary", 0))
         }
 
         // Are there any codes used in this data?
         // Assumption for data.gov.uk
-        if (el.value.indexOf("data.gov.uk") != -1) {
+        if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("codelists", 0))
         }
 
