@@ -148,7 +148,7 @@ $(document).ready(function(){
       var field = $(this)
 
       // Set field to not autofilled
-      autocompleteFields(field, form, false)
+      markAutocompleted(field, form, false)
 
       validateField(field, form, csrfToken)
 
@@ -176,15 +176,19 @@ $(document).ready(function(){
         field.next('.icon-loading').show()
 
         field.data('cancel-callbacks', autocomplete(field.val(), {
+          beforeProcessing: function() {
+            // Mark questions which have selected radio buttons or checkboxes
+            form.find('fieldset.question-row').each(function() {
+              var row = $(this);
+              row.toggleClass('touched', row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
+            })
+          },
           success: function(fields) {
             row.addClass('ok')
             field.next('.icon-loading').hide()
 
-            // Convert array to jQuery object
-            fields = $(fields).map(function() { return this.toArray() })
-
             // Mark fields as autcompleted
-            autocompleteFields(fields, form, true)
+            markAutocompleted(fields, form, true)
 
             // Run validation on each field
             fields.each(function() { validateField($(this), form, csrfToken) })
@@ -269,12 +273,12 @@ $(document).ready(function(){
   }
 
   function questionFields(field) {
-    return field.parents('fieldset[id^="q_"],tr[id^="q_"]').find("input, select, textarea");
+    return field.closest('fieldset.question-row').find("input, select, textarea");
   }
 
-  function autocompleteFields(fields, form, value) {
+  function markAutocompleted(fields, form, value) {
     // Toggle autocompleted field
-    fields.parents('fieldset[id^="q_"],tr[id^="q_"]').find('input[id$="_autocompleted"]').val(value);
+    fields.closest('fieldset.question-row').find('input[id$="_autocompleted"]').val(value);
 
     // Update autocompleted class on row
     fields.each(function() {
@@ -305,17 +309,23 @@ $(document).ready(function(){
 
   // Utility function to select nth option
   function selectMe(identifier, value) {
-     return $('[data-reference-identifier="'+ identifier +'"] select option:eq('+ value +')').prop('selected', 'selected');
+     var field = $('fieldset[data-reference-identifier="'+ identifier +'"] select')
+     if (field.val()) return
+     return field.children().eq(value).prop('selected', 'selected')
   }
 
   // Utility function to populate input fields by identifier
   function fillMe(identifier, val) {
-    return $('[data-reference-identifier="'+ identifier +'"] input.string, [data-reference-identifier="'+ identifier +'"] select').val(val)
+    var field = $('fieldset[data-reference-identifier="'+ identifier +'"]').find('input.string, select')
+    if (field.val() && field.val().match(/[^\s]/)) return
+    return field.val(val)
   }
 
-  // Utility function to check input fields by index
+  // Utility function to check input fields by identifier
   function checkMe(identifier, value) {
-   return $('[data-reference-identifier="'+ identifier +'"] [type="radio"], [data-reference-identifier="'+ identifier +'"] [type="checkbox"]').eq(value).prop('checked', true)
+    var row = $('fieldset[data-reference-identifier="'+ identifier +'"]')
+    if (row.hasClass('touched')) return
+    return row.find('input[type=radio], input[type=checkbox]').eq(value).prop('checked', true)
   }
 
   // Data Kitten autocompletion
@@ -327,6 +337,8 @@ $(document).ready(function(){
         callbacks.fail();
       })
       .done(function(json) {
+
+        callbacks.beforeProcessing();
 
         var affectedFields = [];
 
@@ -527,11 +539,15 @@ $(document).ready(function(){
         // Contact email address
         affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
 
+        // Convert sparse array to jQuery object
+        affectedFields = $(affectedFields.filter(function(field) { return field; })).map(function() { return this.toArray() })
+
         callbacks.success(affectedFields);
       })
 
     // Function to clear callbacks if this request is superceeded
     return function() {
+      callbacks.beforeProcessing = function() {}
       callbacks.success = function() {}
       callbacks.fail = function() {}
     }
