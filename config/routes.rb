@@ -34,6 +34,8 @@ OpenDataCertificate::Application.routes.draw do
 
   devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
+    get '/users/:id/edit', to: 'registrations#edit', as: 'edit_user_registration'
+    put '/users/:id/edit', to: 'registrations#update', as: 'registration'
     resource :registration,
              only: [:new, :create, :edit, :update],
              path: 'users',
