@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge, :legacy_show, :latest] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
+  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge, :legacy_show, :latest, :improvements] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
 
   def index
     @search = params[:search]
@@ -40,6 +40,26 @@ class CertificatesController < ApplicationController
       redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
     elsif params[:type] == "badge"
       redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
+    end
+  end
+  
+  def improvements
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @response_set = @certificate.response_set
+    if @response_set
+
+      @requirements = @response_set.outstanding_requirements
+      @mandatory_fields = @response_set.incomplete_triggered_mandatory_questions
+
+      respond_to do |format|
+        format.html do
+          render 'surveyor/requirements'
+        end
+        format.json { @response_set.outstanding_requirements.to_json }
+      end
+    else
+      flash[:warning] = t('surveyor.unable_to_find_your_responses')
+      redirect_to surveyor_index
     end
   end
 
