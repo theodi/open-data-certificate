@@ -330,6 +330,7 @@ DEPENDENCIES
   memcache-client
   mocha
   mysql2
+  pry
   rails (= 3.2.13)
   rails-footnotes (>= 3.7.9)
   ruby-prof
