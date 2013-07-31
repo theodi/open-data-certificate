@@ -54,6 +54,7 @@
 		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
 		default_mandatory="false" 
 		dataset_title="dataTitle"
+		dataset_curator="publisher"
 		status="{@status}">
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
