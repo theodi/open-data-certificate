@@ -1,24 +1,27 @@
-- attained_level = certificate.attained_level || :none
+%dt= certificate.name
 
-%li
-  = link_to certificate.name, certificate
+%dd
+  .response-set
+    .row-fluid
+      .span3
+        %h3= t('dashboard.level_attained')
+        .level-badge{class: "level-badge-#{certificate.response_set.attained_level}"}
+        %h4= t 'levels.#{certificate.attained_level}.title'
 
-  %table.table
-    %tbody
-      %tr{class: "#{attained_level}-level"}
-        %td.level<
-          .certificate-badge
-          = t("levels.#{attained_level}.title")
+      .span3
+        %h3= t('dashboard.current_status')
+        %i.status-badge{class: "status-badge-#{certificate.response_set.aasm_state}"}
+        %p= t ['dashboard.states', certificate.response_set.aasm_state]
+        %p.jurisdiction
+          %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:certificate.response_set.jurisdiction})}}= certificate.response_set.jurisdiction
+        %p
+        %small
+          = t 'dashboard.last_updated_at', time_span: time_ago_in_words(certificate.response_set.updated_at)
+      .span3
+        %h3= t('dashboard.publisher')
+        %h1= certificate.curator
 
-        %td.last-updated<
-          = t('certificates.last_updated')
-          = time_tag(certificate.created_at, certificate.created_at.to_date.to_formatted_s(:rfc822))
-
-        -# TODO: I anticipate someone with awesome CSS-fu will get rid of the stinky br tag from the next block... I've only put it in for quick layout... 0ne-thousand apologies :-)
-        %td.curator
-          - unless certificate.curator.blank?
-            #{t('certificates.curated_by')}:
-            %br/
-            #{certificate.curator}
-
-  = link_to t('certificates.view_certificate'), certificate
+      .span3
+        %h3= '&nbsp'.html_safe
+        = link_to t('dashboard.view_certificate'), certificate, class: 'btn btn-large btn-info btn-block'
+  %hr.heavy

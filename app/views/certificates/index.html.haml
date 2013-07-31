@@ -3,7 +3,7 @@
 / = render partial: 'certificates/search_form', locals: { search: @search }
 
 - if @certificates.any?
-  %ul.unstyled
+  %dl.unstyled
     = render partial: 'certificates/certificate', collection: @certificates
 - else
   %p= t('certificates.no_certificates_found')
