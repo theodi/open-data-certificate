@@ -4,6 +4,10 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+
+  end
+  
+  def dashboard
     @datasets = current_user.try(:datasets) || []
     @surveys = Survey.available_to_complete
   end

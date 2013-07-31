@@ -21,7 +21,9 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
   end
 
-  get 'dashboard' => 'datasets#index'
+  # User dashboard
+  get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
+  get 'dashboard', to: redirect('/users/dashboard')
 
   resources :certificates, :only => :show do
     member do
