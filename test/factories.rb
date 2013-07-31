@@ -162,6 +162,7 @@ questions:
 
   factory :response_set do |r|
     user
+    r.association :dataset
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
