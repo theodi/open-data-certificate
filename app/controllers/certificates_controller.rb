@@ -21,12 +21,6 @@ class CertificatesController < ApplicationController
     end
   end
 
-  def create
-    # placeholder to handle searching as a POST from the index page
-    index
-    render action: 'index'
-  end
-
   def embed
     @certificate = Certificate.find params[:id]
     render layout: 'embedded_certificate'
