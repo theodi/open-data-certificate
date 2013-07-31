@@ -19,18 +19,25 @@ OpenDataCertificate::Application.routes.draw do
 
   resources :datasets do
     put 'start_questionnaire'
+    get 'certificates/latest', to: 'certificates#latest', as: 'latest'
+    get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
+    
+    resources :certificates, :only => :show do
+       member do
+         get 'embed', to: 'certificates#embed', as: 'embed'
+         get 'badge', to: 'certificates#badge', as: 'badge'
+       end
+    end
   end
+  
+  # Certificate legacy redirects
+  get '/certificates/:id', to: 'certificates#legacy_show'
+  get '/certificates/:id/:type', to: 'certificates#legacy_show'
 
   # User dashboard
   get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
   get 'dashboard', to: redirect('/users/dashboard')
 
-  resources :certificates, :only => :show do
-    member do
-      get 'embed', to: 'certificates#embed', as: 'embed'
-      get 'badge', to: 'certificates#badge', as: 'badge'
-    end
-  end
 
   devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
