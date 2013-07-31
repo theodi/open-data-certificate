@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge, :legacy_show] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
+  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge, :legacy_show, :latest] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
 
   def index
     @search = params[:search]
@@ -22,7 +22,14 @@ class CertificatesController < ApplicationController
   end
   
   def latest
-    certificate = Dataset.find(params[:dataset_id]).newest_completed_response_set
+    certificate = Dataset.find(params[:dataset_id]).certificates.latest
+    if params[:type].nil?
+      redirect_to dataset_certificate_path params[:dataset_id], certificate.id
+    elsif params[:type] == "embed"
+      redirect_to embed_dataset_certificate_path params[:dataset_id], certificate.id
+    elsif params[:type] == "badge"
+      redirect_to badge_dataset_certificate_path params[:dataset_id], certificate.id
+    end
   end
   
   def legacy_show
