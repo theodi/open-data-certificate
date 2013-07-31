@@ -27,7 +27,7 @@
                          :hint       => a.text_for(:post, @render_context, I18n.locale), |
                          :label      => "#{h question_text}".html_safe, |
                          :input_html => generate_pick_none_input_html(r.to_formatted_s, a.default_value_for(@render_context, I18n.locale), a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder), |
-                         :status_message => { :message => t(status_message) } |
+                         :status_message => { :message => status_message ? t(status_message) : nil } |
                        } |
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?
       - answer_attrs[:input_html][:placeholder] = a.placeholder_for(@render_context, I18n.locale) unless a.placeholder.blank?
