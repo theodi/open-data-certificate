@@ -3,7 +3,7 @@
 - image_level = level == 'basic' ? 'raw' : level == 'expert' ? 'exemplar' : level
 %div.open-data-certificate
   %style="@import url(https://#{request.host_with_port}/assets/badge.css);"
-  = link_to certificate_url(certificate) do image_tag("https://#{request.host_with_port}/assets/badges/#{image_level}_level_badge.png") end
+  = link_to [certificate.response_set.dataset, certificate] do image_tag("https://#{request.host_with_port}/assets/badges/#{image_level}_level_badge.png") end
   %ul.open-data-certificate-details
     %li
       %span="#{t("levels.#{level}.title")} Open Data Certificate (beta)"

@@ -27,7 +27,7 @@
           = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
             Publish certificate
 
-        = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
+        = link_to "View certificate", [response_set.dataset, response_set.certificate], class: 'btn btn-large btn-block'
         - unless response_set.archived? || response_set.draft?
           = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
 
