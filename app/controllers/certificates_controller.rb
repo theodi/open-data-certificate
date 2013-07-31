@@ -1,11 +1,7 @@
 class CertificatesController < ApplicationController
-  before_filter :redirect_to_root, except: [:show, :update, :embed, :badge] #TODO: Commented browse certificate functionality - remove this filter when browsing certificates goes back
 
   def index
-    @search = params[:search]
-    # TODO: if the search ever needs to change (adding fields, etc), it would be very sensible to slot the Ransack gem in...
-    @certificates = @search ? Certificate.search(@search) : Certificate
-    @certificates = @certificates.by_newest.includes(:response_set => :survey)
+    @certificates = Certificate.where(:published => true)
   end
 
   def show
@@ -29,12 +25,6 @@ class CertificatesController < ApplicationController
   def badge
     @certificate = Certificate.find params[:id]
     send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline')
-  end
-
-  private
-  def redirect_to_root
-    #TODO: Commented browse certificate functionality - remove this method when browsing certificates goes back
-    redirect_to root_url
   end
 
 end

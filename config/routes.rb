@@ -23,7 +23,7 @@ OpenDataCertificate::Application.routes.draw do
 
   get 'dashboard' => 'datasets#index'
 
-  resources :certificates, :only => :show do
+  resources :certificates, :only => [:show,:index] do
     member do
       get 'embed', to: 'certificates#embed', as: 'embed'
       get 'badge', to: 'certificates#badge', as: 'badge'
