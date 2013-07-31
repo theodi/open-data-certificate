@@ -9,18 +9,19 @@
   = ff.input :api_id, :as => :quiet unless q.pick == "one"
   = ff.input :autocompleted, :as => :quiet
   = ff.input :response_group, :value => rg, :as => :quiet if q.pick != "one" && g && g.display_type == "repeater"
+
+  - status_message = 'surveyor.autocompleted_data' if r.autocompleted
+  - if a.input_type == 'url' && r.error
+    - status_message = r.autocompleted ? 'surveyor.autocompleted_url_incorrect' : 'surveyor.please_check_that_the_url_exists'
+
   - case q.pick
   - when "one"
-    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
+    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => t(status_message) }
   - when "any"
-    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class
+    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => t(status_message) }
   - when "none"
     - if %w(date datetime time float integer string text).include? a.response_class
       = ff.input :answer_id, :as => :quiet, :input_html => {:class => a.css_class, :value => a.id}
-
-      - status_message = 'surveyor.autocompleted_data' if r.autocompleted
-      - if a.input_type == 'url' && r.error
-        - status_message = r.autocompleted ? 'surveyor.autocompleted_url_incorrect' : 'surveyor.please_check_that_the_url_exists'
 
       - answer_attrs = { :as         => rc_to_as(a.response_class), |
                          :hint       => a.text_for(:post, @render_context, I18n.locale), |
