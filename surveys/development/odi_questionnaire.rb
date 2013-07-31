@@ -1,7 +1,7 @@
 # encoding: UTF-8
 # Question#is_mandatory is now false by default. The default_mandatory option allows you to set
 #   is_mandatory for all questions in a survey.
-survey 'ODI Questionnaire', :default_mandatory => false, :dataset_title => 'q_dataTitle' do
+survey 'ODI Questionnaire', :default_mandatory => false, :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle' do
 
   section 'About' do
 
