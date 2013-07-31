@@ -36,6 +36,13 @@ module ApplicationHelper
 		content_for :body_class
   end
 
+  def jurisdiction_options(available_surveys)
+    # todo: cleanup, next two lines could be arel
+    surveys = available_surveys.keep_if {|s| ! Survey::MIGRATIONS.has_key? s.access_code}
+    surveys.sort! {|a,b| (a.full_title || a.title).to_s <=> (b.full_title || b.title).to_s }
+    [[t('response_set.choose_jurisdiction'), nil]] + surveys.map{|s|[s.full_title || s.title, s.access_code]}
+  end
+
   # devise mapping
   def resource_name
     :user

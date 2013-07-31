@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     render '/home/index'
   end
 
+  def status
+    @job_count = Delayed::Job.count
+    render '/home/status'
+  end
+
   # A user pings this url if they have js enabled, so we can tell surveyor
   # not to find unnecessary requirements.
   def has_js
@@ -30,11 +35,18 @@ class ApplicationController < ActionController::Base
     render :text => 'ok'
   end
 
+  # method for clearing the cache
+  def clear_cache
+    Rails.cache.clear
+    render :text => 'cleared'
+  end
+
   # mostly lifted from surveyor#create
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
     # When multiple legislations are available, this value will need to be provided by the form
-    params[:survey_access_code] = Survey.available_to_complete.first.try(:access_code) if params[:survey_access_code].blank?
+    user_default = current_user.try(:default_jurisdiction)
+    params[:survey_access_code] = (user_default.blank? ? Survey::DEFAULT_ACCESS_CODE : user_default) if params[:survey_access_code].blank?
 
     # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
     @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? Dataset.create(user: current_user) : Dataset.new)

@@ -12,11 +12,11 @@ class ValidatorsController < ApplicationController
   end
    
   def autofill
-    dataset = DataKitten::Dataset.new(access_url: params[:url])
-    if dataset.supported?
+    dataset = DataKitten::Dataset.new(access_url: params[:url]) rescue nil
+    if dataset != nil && dataset.supported?
       distributions = []
       
-      dataset.distributions.each do |distribution|
+      dataset.distributions.try(:each) { |distribution|
         distributions << {
           :title       => distribution.title,
           :description => distribution.description,
@@ -25,7 +25,7 @@ class ValidatorsController < ApplicationController
           :open        => distribution.format.open?,
           :structured  => distribution.format.structured?
         }
-      end
+      }
       
       render :json => {
         :title             => dataset.data_title,

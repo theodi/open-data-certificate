@@ -14,9 +14,54 @@ class SurveyorController < ApplicationController
     start_questionnaire
   end
 
+  # it might be a *really* nice refactor to take this to response_set_controller#update
+  # then we could use things like `form_for [surveyor, response_set] do |f|`
+  #
+  # also, GET here is totally totally wrong
   def continue
+    if Survey::MIGRATIONS.has_key? params[:survey_code]
+      # lets switch over to the new questionnaire
+      nxt = Survey::MIGRATIONS[params[:survey_code]]
 
-    if !@response_set.modifications_allowed?
+      survey = Survey.newest_survey_for_access_code nxt
+
+      unless survey.nil?
+        attrs = @response_set.attributes.keep_if do |key|
+          %w(user_id dataset_id).include? key
+        end
+        attrs[:survey_id] = survey.id;
+        new_response_set = ResponseSet.create attrs
+
+        new_response_set.copy_answers_from_response_set!(@response_set)
+        # @response_set.destroy
+
+        @response_set = new_response_set
+      end
+
+    elsif params[:juristiction_access_code]
+      # they *actually* want to swap the jurisdiction
+
+      survey = Survey.newest_survey_for_access_code(params[:juristiction_access_code])
+      unless survey.nil?
+        attrs = @response_set.attributes.keep_if do |key|
+          %w(user_id dataset_id).include? key
+        end
+        attrs[:survey_id] = survey.id;
+        new_response_set = ResponseSet.create attrs
+
+        new_response_set.copy_answers_from_response_set!(@response_set)
+        # @response_set.destroy
+
+        @response_set = new_response_set
+
+        # the user has made a concious effort to switch jurisdictions, so set it as their default
+        if user_signed_in?
+          current_user.update_attributes default_jurisdiction: params[:juristiction_access_code]
+        end
+
+      end
+
+    elsif !@response_set.modifications_allowed?
       # they *actually* want to create a new response set
 
       attrs = @response_set.attributes.keep_if do |key|
@@ -123,6 +168,18 @@ class SurveyorController < ApplicationController
       end
     else
       flash[:warning] = t('surveyor.unable_to_find_your_responses')
+      redirect_to surveyor_index
+    end
+  end
+
+  def edit
+    # @response_set is set in before_filter - set_response_set_and_render_context
+    if @response_set
+      @survey = @response_set.survey
+      @sections = @survey.sections.with_includes
+      @dependents = []
+    else
+      flash[:notice] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index
     end
   end

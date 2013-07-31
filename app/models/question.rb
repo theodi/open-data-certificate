@@ -46,7 +46,8 @@ class Question < ActiveRecord::Base
   end
 
   def triggered?(response_set)
-    @triggered_q ||= (dependent? ? self.dependency(includes: :dependency_conditions).is_met?(response_set) : true)
+    dep_map = response_set.depends
+    @triggered_q ||= dependency.nil? || dep_map[dependency.id]
   end
 
   private
