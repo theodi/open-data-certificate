@@ -1,13 +1,9 @@
-%section
-  %h1= t('certificates.certificates')
+- content_for :header_title, t('certificates.certificates')
 
-  = render partial: 'certificates/search_form', locals: { search: @search }
+/ = render partial: 'certificates/search_form', locals: { search: @search }
 
-  %h2= t('certificates.latest_certificates')
-
-  - if @certificates.any?
-    - certificates = @certificates.group_by{|c|"#{c.response_set.survey.title}:#{c.response_set.dataset_id}"}
-    - most_recent_certificates = certificates.map{|k,v|v.first}.compact
-    = render partial: 'certificates/certificates', locals: {certificates: most_recent_certificates }
-  - else
-    %p= t('certificates.no_certificates_found')
+- if @certificates.any?
+  %ul.unstyled
+    = render partial: 'certificates/certificate', collection: @certificates
+- else
+  %p= t('certificates.no_certificates_found')
