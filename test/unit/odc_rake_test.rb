@@ -136,6 +136,13 @@ class OdcRakeTest < ActiveSupport::TestCase
         Rake::Task["surveyor:enqueue_surveys"].invoke
       end
     end
+
+    assert_difference 'Survey.count', 2, "surveys were generated" do
+      Delayed::Worker.new({exit_on_complete: true}).start
+    end
+
+    assert_equal Delayed::Job.count, 0, "all jobs were processed"
+
   end
 
   def teardown
