@@ -33,6 +33,14 @@ FactoryGirl.define do
       published true
     end
   end
+  
+  factory :certificate_with_dataset, :class => Certificate do
+    response_set { FactoryGirl.create(:response_set_with_dataset) }
+    
+    factory :published_certificate_with_dataset do
+      published true
+    end
+  end
 
   sequence :unique_survey_access_code do |n|
     "simple_survey_#{UUIDTools::UUID.random_create.to_s}"
@@ -169,6 +177,14 @@ questions:
     factory :completed_response_set do
       completed_at { Time.now }
     end
+  end
+  
+  factory :response_set_with_dataset, :class => ResponseSet do |r|
+    user
+    r.association :dataset
+    r.association :survey # r.survey_id       {}
+    r.access_code { Surveyor::Common.make_tiny_code }
+    r.started_at { Time.now }
   end
 
   factory :response do |r|

@@ -2,7 +2,16 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :html, :js
 
   def edit
-    @surveys = Survey.available_to_complete
-    super
+    if params[:id].to_i == current_user.id
+      @surveys = Survey.available_to_complete
+      super
+    else
+      raise ActionController::RoutingError.new('Not Found') 
+    end
+  end
+  
+  def redirect
+    id = current_user.id
+    redirect_to edit_user_registration_path id
   end
 end
