@@ -37,7 +37,7 @@ class Certificate < ActiveRecord::Base
     end
     
     def latest
-      where(:published => true).first
+      joins(:response_set).merge(ResponseSet.published).first
     end
   end
 
