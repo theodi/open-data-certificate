@@ -23,5 +23,5 @@
 
       .span3
         %h3= '&nbsp'.html_safe
-        = link_to t('dashboard.view_certificate'), certificate, class: 'btn btn-large btn-info btn-block'
+        = link_to t('dashboard.view_certificate'), [certificate.dataset, certificate], class: 'btn btn-large btn-info btn-block'
   %hr.heavy
