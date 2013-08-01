@@ -74,13 +74,13 @@ class CertificatesController < ApplicationController
   end
 
   def embed
-    @certificate = Certificate.find params[:id]
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     render layout: 'embedded_certificate'
   end
 
   def badge
-    @certificate = Certificate.find params[:id]
     send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline')
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
   end
 
   private
