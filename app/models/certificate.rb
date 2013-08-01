@@ -39,12 +39,20 @@ class Certificate < ActiveRecord::Base
     def latest
       joins(:response_set).merge(ResponseSet.published).first
     end
+    
   end
 
   def badge_file
     Certificate.badge_file_for_level(attained_level)
   end
+  
+  def badge_url
+    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
+  end
 
+  def embed_url
+    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
+  end
 
   def update_from_response_set
 
