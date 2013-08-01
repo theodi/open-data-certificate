@@ -22,7 +22,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     
-    resources :certificates, :only => :show do
+    resources :certificates, :only => [:show,:index] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'
          get 'embed', to: 'certificates#embed', as: 'embed'
