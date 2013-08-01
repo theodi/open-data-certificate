@@ -1,6 +1,7 @@
 survey 'Open Data Certificate Frågeformulär - Svensk Lagstiftning',
        :default_mandatory => 'false',
-       :dataset_title => 'q_dataTitle' do
+       :dataset_title => 'dataTitle', 
+       :dataset_curator => 'dataTitle' do
 
   section_general 'Allmän Information' do
 
