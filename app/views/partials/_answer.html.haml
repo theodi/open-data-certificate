@@ -17,6 +17,7 @@
   - case q.pick
   - when "one"
     = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => t(status_message) }
+
   - when "any"
     = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => t(status_message) }
   - when "none"

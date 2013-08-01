@@ -205,7 +205,7 @@ $(document).ready(function(){
             field.next('.icon-loading').hide()
 
             var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            field.parent().find('.status .info span').text(form.find('#surveyor').data(message))
+            row.find('.status-message span').text(form.find('#surveyor').data(message))
           }
         }))
       }
@@ -226,7 +226,7 @@ $(document).ready(function(){
             field.next('.icon-loading').hide()
 
             var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            field.parent().find('.status .info span').text(form.find('#surveyor').data(message))
+            row.find('.status-message span').text(form.find('#surveyor').data(message))
           }
         }))
       }
@@ -282,13 +282,14 @@ $(document).ready(function(){
 
     // Update autocompleted class on row
     fields.each(function() {
-      bindQuestionRow($(this)).toggleClass('autocompleted', value)
-    })
+      var row = bindQuestionRow($(this))
+      row.toggleClass('autocompleted', value)
 
-    // Set autocompleted message
-    if (value) {
-      fields.parent().find('.status .info span').text(form.find('#surveyor').data('autocompleted'))
-    }
+      // Set autocompleted message
+      if (value) {
+        row.find('.status-message span').text(form.find('#surveyor').data('autocompleted'))
+      }
+    })
   }
 
   function saveFormElements(form, elements) {
@@ -333,9 +334,7 @@ $(document).ready(function(){
     if (!validateUrl(url)) return callbacks.fail();
 
     $.getJSON('/autofill', { url: url } )
-      .error(function() {
-        callbacks.fail();
-      })
+      .error(callbacks.fail)
       .done(function(json) {
 
         callbacks.beforeProcessing();

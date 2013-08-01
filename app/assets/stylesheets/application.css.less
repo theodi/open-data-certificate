@@ -1545,6 +1545,10 @@ header .jurisdiction{
       position: relative;
     }
 
+    select {
+      margin-bottom: 30px;
+    }
+
     .icon-loading {
       display: none;
       position: absolute;
@@ -1553,7 +1557,7 @@ header .jurisdiction{
       color: #333;
     }
 
-    .status {
+    .status-icon {
       display: none;
       width: 60px;
       height: 60px;
@@ -1573,49 +1577,87 @@ header .jurisdiction{
         color: white;
         text-align: center;
       }
+    }
 
-      .info {
-        display: none;
-        height: 38px;
+    .status-wrapper {
+      position: relative;
+
+      aside.answer-meta {
+        top: -45px;
+        right: -400px;
+      }
+
+      &.choice-buttons {
+        padding-bottom: 15px;
+      }
+    }
+
+    .status-message {
+      display: none;
+      float: none;
+      position: relative;
+      height: 38px;
+      margin: -17px 0 15px;
+      text-align: right;
+
+      span {
+        float: right;
+        font-size: 14px;
+        color: white;
+        background: @odiGreen;
+        border: 1px solid white;
+        padding: 8px 12px;
+      }
+
+      i.arrow, i.arrow-border {
         position: absolute;
-        right: -1px;
-        bottom: -36px;
-        text-align: right;
+        top: -5px;
+        right: 23px;
+        width: 0;
+        height: 0;
+        border-width: 0 7px 6px 7px;
+        border-color: transparent transparent @odiGreen transparent;
+        background: none;
+        padding: 0;
+        border-style: solid;
+      }
 
-        span {
-          float: right;
-          font-size: 14px;
-          color: white;
-          background: @odiGreen;
-          border: 1px solid white;
-          padding: 8px 12px;
-        }
+      i.arrow-border {
+        top: -7px;
+        right: 21px;
+        border-width: 0 9px 8px 9px;
+        border-bottom-color: white;
       }
     }
 
     &.warning {
-      padding-bottom: 35px;
+      input.string, .choice {
+        padding-right: 70px;
+      }
 
       input.string {
         color: @odiOrangeDark;
         background-color: @odiOrangeLight;
-        padding-right: 70px;
       }
 
-      .status {
+      .status-icon {
         display: block;
         background: @odiOrange;
 
         .icon {
           &:before { content: @exclamation; }
         }
+      }
 
-        .info {
-          display: block;
+      .status-message {
+        display: block;
 
-          span {
-            background: @odiOrange;
-          }
+        span {
+          background: @odiOrange;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiOrange;
         }
       }
     }
@@ -1623,37 +1665,52 @@ header .jurisdiction{
     &.error {
       background: @odiCrimsonLight;
 
-      .status {
+      input.string, .choice {
+        padding-right: 70px;
+      }
+
+      .status-icon {
         display: block;
         background: @odiCrimson;
 
         .icon {
           &:before { content: @exclamation; }
         }
+      }
 
-        .info {
+      .status-message {
 
-          span {
-            background: @odiCrimson;
-          }
+        span {
+          background: @odiCrimson;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiCrimson;
         }
       }
     }
 
     &.ok {
-      .status {
+      input.string, .choice {
+        padding-right: 70px;
+      }
+
+      .status-icon {
         display: block;
         background: @odiGreen;
 
         .icon {
           &:before { content: @ok; }
         }
+      }
 
-        .info {
+      .status-message {
+        span {
+          background: @odiGreen;
+        }
 
-          span {
-            background: @odiGreen;
-          }
+        i.arrow {
+          border-bottom-color: @odiGreen;
         }
       }
     }
@@ -1678,9 +1735,7 @@ header .jurisdiction{
     }
 
     &.autocompleted {
-      padding-bottom: 35px;
-
-      .status .info {
+      .status-message {
         display: block;
       }
     }
