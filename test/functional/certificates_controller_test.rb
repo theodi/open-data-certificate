@@ -5,13 +5,13 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "index shows all published certificates" do
     5.times do
-      FactoryGirl.create(:published_certificate)
+      FactoryGirl.create(:published_certificate_with_dataset)
     end
     5.times do
-      FactoryGirl.create(:certificate)
+      FactoryGirl.create(:certificate_with_dataset)
     end
 
-    get :index
+    get :index, {dataset_id: 'all'}
 
     assert_response :success
     assert_equal 5, assigns(:certificates).size
