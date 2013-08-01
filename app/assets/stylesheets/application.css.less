@@ -17,39 +17,12 @@
 *= require surveyor_all
 */
 
+// import bootstrap this way so that we can alter variables just for this app
 
-/* import bootstrap this way so that we can alter variables just for this app */
-@import "twitter/bootstrap";
+@import "bootstrap/bootstrap.less";
 
-// RESPONSIVE CLASSES
-// ------------------
-
-@import "twitter/bootstrap/responsive-utilities.less";
-
-
-// MEDIA QUERIES
-// ------------------
-
-// Large desktops
-@import "twitter/bootstrap/responsive-1200px-min.less";
-
-// Tablets to regular desktops
-@import "twitter/bootstrap/responsive-768px-979px.less";
-
-// Phones to portrait tablets and narrow desktops
-@import "twitter/bootstrap/responsive-767px-max.less";
-
-
-// RESPONSIVE NAVBAR
-// ------------------
-
-// From 979px and below, show a button to toggle navbar contents
-@import "twitter/bootstrap/responsive-navbar.less";
-
-// override bootstrap variables here, see options at:
-//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
-@iconSpritePath:          "glyphicons-halflings.png";
-@iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+// font awesome config
+@FontAwesomePath: "/assets";
 
 // use our own grey for the input field
 @gray: @odiGrey;
@@ -61,7 +34,6 @@
 // @gridColumnWidth:         70px;
 // @gridGutterWidth:         30px;
 // @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
 
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
@@ -143,8 +115,8 @@
       }
     }
 
-    textarea { 
-      margin-bottom: 15px; 
+    textarea {
+      margin-bottom: 15px;
     }
 
     .open-data-certificate {
@@ -327,7 +299,7 @@
 
   &-inverse{
     text-shadow:none;
-    color: @odiBlue; 
+    color: @odiBlue;
     background-color: @white;
   }
   &-inverse[href]{
@@ -491,7 +463,7 @@ header.affix {
       margin-bottom: 40px;
       color: @odiGrey;
       padding-left: 3px;
-      
+
       strong {
          color: @odiGreyDark;
       }
@@ -841,7 +813,7 @@ nav .dropdown-menu-button {
   h3 {
     display: inline;
   }
-} 
+}
 
 header {
   background-color: @odiBlue;
@@ -859,7 +831,7 @@ header {
     font-weight:normal;
   }
 
-  h1{  
+  h1{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -981,18 +953,16 @@ section {
   vertical-align: middle;
 
   .icon-large {
-    margin-bottom: 1px;
     margin-right: 6px;
-    vertical-align: middle;
   }
 
-  .close, .close:hover, .close:active {
-    opacity: 1;
-    width: 14px;
-    height: 14px;
-    position: static;
-    background-image: url(/assets/glyphicons-halflings-white.png);
-    background-position: -312px 0;
+  .icon-remove, .icon-remove:hover, .icon-remove:active {
+    float: right;
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-top: -3px;
+    margin-right: -3px;
   }
 }
 
@@ -1027,32 +997,6 @@ section {
       border: none;
     }
   }
-}
-
-// Icons //
-
-.icon-large {
-
-  width: 28px;
-  height: 28px;
-  background-image: url(/assets/glyphicons.png);
-
-  &.icon-white {
-    background-image: url(/assets/glyphicons_white.png);
-  }
-
-  // Spacing between icons in file
-  @spacing: -48px;
-
-  // Mixin to help select correct icon
-  .icon-position(@top, @left) {
-    background-position: @spacing * @left (@spacing * @top) + 1;
-  }
-
-  &.icon-ok-sign { .icon-position(19, 3); }
-  &.icon-info-sign { .icon-position(19, 5); }
-  &.icon-exclamation-sign { .icon-position(19, 6); }
-  &.icon-ban-circle { .icon-position(19, 9); }
 }
 
 // Tables //
@@ -1142,7 +1086,7 @@ color: @odiRed;
     padding: 13px 30px 5px 15px;
     width: 48px;
     border-right: 1px solid #fff;
-  
+
     p {
     line-height: 15px;
 
@@ -1150,7 +1094,7 @@ color: @odiRed;
       font-size: 12px;
       color: @odiBlue;
       font-weight: normal;
-      
+
      }
     }
   }
@@ -1279,7 +1223,7 @@ td.action {
   &, .row-fluid{
     padding-right: 20px;
   }
- 
+
 
   // bit of a hack to get lines mid-gutter
   .row-fluid{
@@ -1295,7 +1239,7 @@ td.action {
     height:100%;
     background-color:#f08;
     display:block;
-    
+
 
     margin-left:-10px;
     @media (min-width: 1200px) {
@@ -1309,7 +1253,7 @@ td.action {
     }
   }
 
- 
+
 
   a .delete {
     background-image:url(/assets/status/remove-sign.png);
@@ -1356,7 +1300,7 @@ td.action {
     background-position: center center;
     margin:10px;
    }
-    
+
   .level-badge, .status-badge, p{
     display: inline-block;
     vertical-align: middle;
@@ -1366,7 +1310,7 @@ td.action {
   }
   .btn-group{
     margin-top:10px;
-   
+
     .btn {
       background-color: transparent;
       background-image: none;
@@ -1497,6 +1441,10 @@ header .jurisdiction{
     margin:auto;
   }
 
+  fieldset ol li {
+    position: relative;
+  }
+
   // brought in from main styles
   label {
     font-size: 22px;
@@ -1522,36 +1470,21 @@ header .jurisdiction{
   }
 
 
-  input.string{
+  input.string {
+    width:100%;
     height: 60px;
     font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
+    box-sizing: border-box;
   }
 
-
-  // custom
-  input.string{
-    width:100%;
-  }
-  
   input.string.fail {
     border-color: #e9322d;
     color: #b94a48;
     -webkit-box-shadow: 0 0 6px #f8b9b7;
     -moz-box-shadow: 0 0 6px #f8b9b7;
     box-shadow: 0 0 6px #f8b9b7;
-  }
-  
-  p.url_error {
-    background: #ff6700;
-    color: white;
-    padding: 20px;
-    margin-left: 0;
-    
-    &.hidden {
-      display: none;
-    }
   }
 
   // this is our label replacement (for the question of multiple answers)
@@ -1604,22 +1537,191 @@ header .jurisdiction{
     }
   }
 
-  fieldset.question-row{
-    position: relative;
+  fieldset.question-row {
+    .border-radius(6px);
     padding-top: 10px;
 
+    ol {
+      position: relative;
+    }
+
+    select {
+      margin-bottom: 30px;
+    }
+
+    .icon-loading {
+      display: none;
+      position: absolute;
+      right: 20px;
+      bottom: 35px;
+      color: #333;
+    }
+
+    .status-icon {
+      display: none;
+      width: 60px;
+      height: 60px;
+      background: @odiGreen;
+      margin: 16px 0;
+      border-radius: 3px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      .icon {
+        &:before { content: @ok; }
+        width: 100%;
+        margin: 15px 0;
+        display: inline-block;
+        font-size: 30px;
+        color: white;
+        text-align: center;
+      }
+    }
+
+    .status-wrapper {
+      position: relative;
+
+      aside.answer-meta {
+        top: -45px;
+        right: -400px;
+      }
+
+      &.choice-buttons {
+        padding-bottom: 15px;
+      }
+    }
+
+    .status-message {
+      display: none;
+      float: none;
+      position: relative;
+      height: 38px;
+      margin: -17px 0 15px;
+      text-align: right;
+
+      span {
+        float: right;
+        font-size: 14px;
+        color: white;
+        background: @odiGreen;
+        border: 1px solid white;
+        padding: 8px 12px;
+      }
+
+      i.arrow, i.arrow-border {
+        position: absolute;
+        top: -5px;
+        right: 23px;
+        width: 0;
+        height: 0;
+        border-width: 0 7px 6px 7px;
+        border-color: transparent transparent @odiGreen transparent;
+        background: none;
+        padding: 0;
+        border-style: solid;
+      }
+
+      i.arrow-border {
+        top: -7px;
+        right: 21px;
+        border-width: 0 9px 8px 9px;
+        border-bottom-color: white;
+      }
+    }
+
+    &.warning {
+      input.string, .choice {
+        padding-right: 70px;
+      }
+
+      input.string {
+        color: @odiOrangeDark;
+        background-color: @odiOrangeLight;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiOrange;
+
+        .icon {
+          &:before { content: @exclamation; }
+        }
+      }
+
+      .status-message {
+        display: block;
+
+        span {
+          background: @odiOrange;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiOrange;
+        }
+      }
+    }
+
+    &.error {
+      background: @odiCrimsonLight;
+
+      input.string, .choice {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiCrimson;
+
+        .icon {
+          &:before { content: @exclamation; }
+        }
+      }
+
+      .status-message {
+
+        span {
+          background: @odiCrimson;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiCrimson;
+        }
+      }
+    }
+
+    &.ok {
+      input.string, .choice {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiGreen;
+
+        .icon {
+          &:before { content: @ok; }
+        }
+      }
+
+      .status-message {
+        span {
+          background: @odiGreen;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiGreen;
+        }
+      }
+    }
 
     &.active {
-
-      // hard to do the odd outline
-
       // outline: 1px solid @odiBlueLight;
       background-color: @odiBlueLighter;
     }
 
-
-
-    aside{
+    aside {
+      .border-radius(6px);
       display:none;
       position:absolute;
       right:0;
@@ -1631,24 +1733,13 @@ header .jurisdiction{
         top: 10px;
       }
     }
-  }
 
-
-  &.highlight-mandatory{
-    .mandatory{
-      background-color:@odiOrangeLight;
-      &.has-response{
-        background-color:@white;
-        &.active{
-          background-color:@odiBlueLighter;
-        }
+    &.autocompleted {
+      .status-message {
+        display: block;
       }
     }
-    .url-error{
-      background-color:@odiCrimsonLight;
-    }
   }
-
 }
 
 
@@ -1715,7 +1806,7 @@ header .jurisdiction{
 
   .status_texts {
     dd,dt{
-      display:none; 
+      display:none;
       &.active{
         display:block;
       }
@@ -1749,7 +1840,7 @@ header .jurisdiction{
       a {
         color: inherit;
       }
-    
+
       .cropped {
         display: inline-block;
         max-width: 100%;
@@ -1898,7 +1989,7 @@ strong.certificate-level {
         min-height: 60px;
         padding-left: 75px;
         padding-top: 5px;
-        
+
       }
 
       li.kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
@@ -1975,9 +2066,9 @@ section.improvement{
 
   }
 
- 
-  .requirements { 
-    padding: 25px 0 35px 0; 
+
+  .requirements {
+    padding: 25px 0 35px 0;
   }
 
   li {
@@ -2004,7 +2095,7 @@ section.improvement{
   &.improvement-exemplar header .container{
     background-image: url(/assets/badges/exemplar_level_badge.png);
   }
-  
+
   &.improvement-basic {
     header{
       background: #333;
@@ -2015,8 +2106,8 @@ section.improvement{
 
     li, p { color: #fff; -webkit-font-smoothing: antialiased; }
 
-    strong, a { 
-      color: #fff; 
+    strong, a {
+      color: #fff;
     }
 
   }
@@ -2119,7 +2210,7 @@ color: @odiBlue;
 
 
 
-// 
+//
 // Responsive: tablet
 // --------------------------------------------------
 
@@ -2186,7 +2277,7 @@ width: 328px;
 }
 
   //
-// Responsive: desktop to Large desktop 
+// Responsive: desktop to Large desktop
 // --------------------------------------------------
 
 
@@ -2226,6 +2317,7 @@ width: 328px;
   }
 
   #surveyor fieldset.question-row aside {
+
     padding: 10px;
     width: 230px;
   }

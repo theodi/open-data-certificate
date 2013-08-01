@@ -12,7 +12,7 @@
         - qs << q # gather up the group questions
         - if (i+1 >= questions.size) or (q.question_group_id != questions[i+1].question_group_id)
           - # this is the last question of the section, or the group
-          = render q.question_group.custom_renderer || "/partials/question_group", :g => q.question_group, :qs => qs, :f => f
+          = render q.question_group.custom_renderer || "/partials/question_group", :g => q.question_group, :qs => qs, :f => f, :highlight_mandatory => highlight_mandatory
           - qs = []
       - else # gather up the group questions
-        = render q.custom_renderer || "/partials/question", :q => q, :f => f
+        = render q.custom_renderer || "/partials/question", :q => q, :f => f, :highlight_mandatory => highlight_mandatory
