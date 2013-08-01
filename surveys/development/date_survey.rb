@@ -1,5 +1,5 @@
 # encoding: UTF-8
-survey "Date Survey", :dataset_title => 'q_dataTitle' do
+survey "Date Survey", :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle' do
 
   section "Simple date questions" do
 

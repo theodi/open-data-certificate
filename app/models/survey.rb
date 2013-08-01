@@ -10,7 +10,7 @@ class Survey < ActiveRecord::Base
   DEFAULT_ACCESS_CODE = 'gb'
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
-  validates :dataset_title, :presence => true
+  validates :dataset_title, :dataset_curator, :presence => true
   attr_accessible :dataset_curator, :dataset_title, :full_title
 
   has_many :response_sets
