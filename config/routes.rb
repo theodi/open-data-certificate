@@ -39,11 +39,11 @@ OpenDataCertificate::Application.routes.draw do
   get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
   get 'dashboard', to: redirect('/users/dashboard')
 
-
   devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
     get '/users/:id/edit', to: 'registrations#edit', as: 'edit_user_registration'
     put '/users/:id/edit', to: 'registrations#update', as: 'registration'
+    get '/users/edit', to: 'registrations#redirect'
     resource :registration,
              only: [:new, :create, :edit, :update],
              path: 'users',

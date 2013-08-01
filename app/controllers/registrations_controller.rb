@@ -9,4 +9,9 @@ class RegistrationsController < Devise::RegistrationsController
       raise ActionController::RoutingError.new('Not Found') 
     end
   end
+  
+  def redirect
+    id = current_user.id
+    redirect_to edit_user_registration_path id
+  end
 end
