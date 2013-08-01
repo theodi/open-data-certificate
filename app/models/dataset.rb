@@ -4,6 +4,7 @@ class Dataset < ActiveRecord::Base
   after_touch :destroy_if_no_responses
 
   has_many :response_sets, :order => "response_sets.created_at DESC"
+  has_many :certificates, :through => :response_sets
 
   def title
     read_attribute(:title) || set_default_title!(response_sets.first.try(:title_determined_from_responses)) || response_sets.first.try(:title) || ResponseSet::DEFAULT_TITLE
