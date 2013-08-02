@@ -10,6 +10,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
   
+  def update
+    @surveys = Survey.available_to_complete
+    super
+  end
+  
   def redirect
     id = current_user.id
     redirect_to edit_user_registration_path id
