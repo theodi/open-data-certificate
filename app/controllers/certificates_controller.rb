@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  
+
   def index
     @certificates = Certificate.where(:published => true)
   end
@@ -74,6 +74,19 @@ class CertificatesController < ApplicationController
       format.js
       format.any(:png, :html) { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
     end
+  end
+  
+  def get_badge
+    params[:datasetUrl] ||= request.env['HTTP_REFERER']
+    unless params[:datasetUrl].nil?
+      @certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
+      unless @certificate.nil?
+        respond_to do |format|
+          format.any(:js, :html) { render 'badge.js' and return }
+        end
+      end
+    end
+    render :nothing => true
   end
 
 end

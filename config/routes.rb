@@ -52,6 +52,9 @@ OpenDataCertificate::Application.routes.draw do
       get :cancel
     end
   end
+  
+  # Get badge for a url
+  get 'get_badge' => 'certificates#get_badge'
 
   # 'Static' pages managed by HighVoltage here...
   get 'about' => 'high_voltage/pages#show', :id => 'about'
