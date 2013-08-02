@@ -47,13 +47,18 @@ FactoryGirl.define do
   end
 
   factory :survey do |s|
+    meta_hash = {
+        dataset_title: 'testDataTitle', 
+        dataset_curator: 'testPublisher',
+        dataset_documentation_url: 'testDocumentationUrl'
+      }
+    
     s.title "Simple survey"
     s.description "A simple survey for testing"
     s.access_code { FactoryGirl.generate :unique_survey_access_code }
     s.survey_version 0
-    s.dataset_title 'testDataTitle'
-    s.dataset_curator 'testPublisher'
-
+    s.meta_map meta_hash
+  
     after(:create) do |survey, evaluator|
       FactoryGirl.create_list(:survey_section, 3, survey: survey)
     end
