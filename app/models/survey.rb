@@ -1,5 +1,7 @@
 class Survey < ActiveRecord::Base
   include Surveyor::Models::SurveyMethods
+  
+  serialize :meta_map, Hash
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
@@ -10,8 +12,8 @@ class Survey < ActiveRecord::Base
   DEFAULT_ACCESS_CODE = 'gb'
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
-  validates :dataset_title, :dataset_curator, :presence => true
-  attr_accessible :dataset_curator, :dataset_title, :full_title
+  validates :meta_map, :presence => true
+  attr_accessible :full_title, :meta_map
 
   has_many :response_sets
 
