@@ -53,12 +53,15 @@
 	<survey label="{@jurisdiction}"
 		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
 		default_mandatory="false" 
-		dataset_title="dataTitle"
-		dataset_curator="publisher"
 		status="{@status}">
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
 		</xsl:attribute>
+		<meta_map
+			dataset_title="dataTitle"
+			dataset_curator="publisher"
+			dataset_documentation_url="documentationUrl"
+		/>
 		<translations en="default" />
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
@@ -486,23 +489,43 @@
 	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
+<xsl:template match="meta_map" mode="syntax">
+	<xsl:param name="indent" as="xs:string" select="''" tunnel="yes" />
+	<xsl:text>:</xsl:text>
+	<xsl:value-of select="name()" />
+	<xsl:text> => {&#xA;</xsl:text>
+	<xsl:for-each select="@*">
+		<xsl:value-of select="concat($indent, '  ')" />
+		<xsl:value-of select="name()" />
+		<xsl:text>: '</xsl:text>
+		<xsl:value-of select="." />
+		<xsl:text>'</xsl:text>
+		<xsl:if test="position() != last()">,</xsl:if>
+		<xsl:text>&#xA;</xsl:text>
+	</xsl:for-each>
+	<xsl:value-of select="$indent" />
+	<xsl:text>}</xsl:text>
+</xsl:template>
+
 <xsl:template match="*" mode="syntax">
 	<xsl:param name="indent" as="xs:string" select="''" tunnel="yes" />
 	<xsl:value-of select="$indent" />
 	<xsl:value-of select="name()" />
 	<xsl:text> </xsl:text>
-	<xsl:for-each select="@label, @type, (@* except (@label, @type))">
+	<xsl:for-each select="@label, @type, (@* except (@label, @type)), meta_map">
 		<xsl:if test="position() > 1">
 			<xsl:text>,&#xA;</xsl:text>
 			<xsl:value-of select="$indent" />
 			<xsl:text>  </xsl:text>
 		</xsl:if>
-		<xsl:apply-templates select="." mode="syntax" />
+		<xsl:apply-templates select="." mode="syntax">
+			<xsl:with-param name="indent" tunnel="yes" select="concat($indent, '  ')" />
+		</xsl:apply-templates>
 	</xsl:for-each>
-	<xsl:if test="*">
+	<xsl:if test="* except meta_map">
 		<xsl:text> do</xsl:text>
 		<xsl:text>&#xA;&#xA;</xsl:text>
-		<xsl:apply-templates mode="syntax">
+		<xsl:apply-templates select="node() except meta_map" mode="syntax">
 			<xsl:with-param name="indent" select="concat($indent, '  ')" tunnel="yes" />
 		</xsl:apply-templates>
 		<xsl:value-of select="$indent" />

@@ -1,13 +1,13 @@
 survey 'GB',
   :full_title => 'United Kingdom',
   :default_mandatory => 'false',
-  :meta_map => {
-      dataset_title: 'dataTitle', 
-      dataset_curator: 'publisher',
-      dataset_documentation_url: 'documentationUrl'
-    },
   :status => 'beta',
-  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>',
+  :meta_map => {
+    dataset_title: 'dataTitle',
+    dataset_curator: 'publisher',
+    dataset_documentation_url: 'documentationUrl'
+  } do
 
   translations :en => :default
   section_general 'General Information',
