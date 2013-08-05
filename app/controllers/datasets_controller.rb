@@ -1,7 +1,7 @@
 class DatasetsController < ApplicationController
   load_and_authorize_resource
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: :dashboard
 
   def index
     @certificates = Certificate.where(:published => true).by_newest
