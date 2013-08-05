@@ -1,5 +1,5 @@
 # encoding: UTF-8
-survey "Favorites", :dataset_title => 'q_dataTitle' do
+survey "Favorites", :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle' do
   section "Foods" do
 
     q_dataTitle "What's a good title for this data?"

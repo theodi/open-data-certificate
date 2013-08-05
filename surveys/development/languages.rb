@@ -1,5 +1,5 @@
 # encoding: UTF-8
-survey "One language is never enough", :dataset_title => 'q_dataTitle' do
+survey "One language is never enough", :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle' do
   translations :en =>:default, :es => "../translations/languages.es.yml", :he => "../translations/languages.he.yml", :ko => "../translations/languages.ko.yml"
   section_one "One" do
 

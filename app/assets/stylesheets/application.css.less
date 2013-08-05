@@ -1335,9 +1335,24 @@ td.action {
     background-color: rgb(222, 222, 222);
   }
 
-.response-set-secondry{
 
+// don't display the headers, links or actions in secondary ones
+.response-set-secondary{
   h3, .edit-jurisdiction a{display:none}
+}
+
+.response-set-inline{
+  h3{margin:0;} 
+  h4{display:inline-block;}
+  .last-updated{
+    display:block;
+    padding-bottom: 0.5em;
+  }
+}
+
+.response-set-secondary, .response-set-inline{
+
+  
 
   .level-badge{
     width:55px;

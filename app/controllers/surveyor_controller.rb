@@ -162,14 +162,7 @@ class SurveyorController < ApplicationController
 
   def requirements
     if @response_set
-
-      @requirements = @response_set.outstanding_requirements
-      @mandatory_fields = @response_set.incomplete_triggered_mandatory_questions
-
-      respond_to do |format|
-        format.html
-        format.json { @response_set.outstanding_requirements.to_json }
-      end
+      redirect_to improvements_dataset_certificate_path(@response_set.dataset, @response_set.certificate)
     else
       flash[:warning] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index

@@ -81,11 +81,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def title_determined_from_responses
-    @title_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_title}).first.try(:string_value)
+    @title_determined_from_responses ||= value_for survey.dataset_title
   end
 
   def curator_determined_from_responses
-    @curator_determined_from_responses ||= responses.joins(:question).where(questions: {reference_identifier: survey.dataset_curator}).first.try(:string_value)
+    @curator_determined_from_responses ||= value_for survey.dataset_curator
   end
 
   def incomplete?
@@ -246,5 +246,11 @@ class ResponseSet < ActiveRecord::Base
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
 
+
+  # finds the string value for a given response_identifier
+  private
+  def value_for reference_identifier
+    responses.joins(:question).where(questions: {reference_identifier: reference_identifier}).first.try(:string_value)
+  end
 
 end

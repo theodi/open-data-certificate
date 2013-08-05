@@ -2,6 +2,7 @@ survey 'CG',
   :full_title => 'Congo',
   :default_mandatory => 'false',
   :dataset_title => 'dataTitle',
+  :dataset_curator => 'publisher',
   :status => 'alpha',
   :description => '<p><strong>This has been generated based on a default and needs to be localised for Congo. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 

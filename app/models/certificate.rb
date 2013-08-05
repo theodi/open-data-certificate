@@ -1,8 +1,9 @@
 class Certificate < ActiveRecord::Base
   belongs_to :response_set
 
-  has_one :survey, through: :response_set
-  has_one :user,   through: :response_set
+  has_one :survey,  through: :response_set
+  has_one :user,    through: :response_set
+  has_one :dataset, through: :response_set
 
   attr_accessible :published, :name, :attained_level, :curator
 
@@ -34,6 +35,10 @@ class Certificate < ActiveRecord::Base
                  end
 
       File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
+    end
+    
+    def latest
+      joins(:response_set).merge(ResponseSet.published).first
     end
   end
 

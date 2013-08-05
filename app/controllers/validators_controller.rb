@@ -16,7 +16,7 @@ class ValidatorsController < ApplicationController
     if dataset != nil && dataset.supported?
       distributions = []
       
-      dataset.distributions.each do |distribution|
+      dataset.distributions.try(:each) { |distribution|
         distributions << {
           :title       => distribution.title,
           :description => distribution.description,
@@ -25,7 +25,7 @@ class ValidatorsController < ApplicationController
           :open        => distribution.format.open?,
           :structured  => distribution.format.structured?
         }
-      end
+      }
       
       render :json => {
         :title             => dataset.data_title,

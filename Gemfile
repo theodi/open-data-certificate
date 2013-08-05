@@ -34,6 +34,7 @@ group :test do
   gem 'shoulda'
   gem 'mocha', require: false
   gem 'test-unit'
+  gem 'pry'
 end
 
 group :development do

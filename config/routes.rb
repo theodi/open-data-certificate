@@ -19,21 +19,32 @@ OpenDataCertificate::Application.routes.draw do
 
   resources :datasets do
     put 'start_questionnaire'
-  end
-
-  get 'dashboard' => 'datasets#index'
-
-  resources :certificates, :only => :show do
-    member do
-      get 'embed', to: 'certificates#embed', as: 'embed'
-      get 'badge', to: 'certificates#badge', as: 'badge'
+    get 'certificates/latest', to: 'certificates#latest', as: 'latest'
+    get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
+    
+    resources :certificates, :only => [:show,:index] do
+       member do
+         get 'improvements', to: 'certificates#improvements', as: 'improvements'
+         get 'embed', to: 'certificates#embed', as: 'embed'
+         get 'badge', to: 'certificates#badge', as: 'badge'
+       end
     end
   end
+  
+  # Certificate legacy redirects
+  get '/certificates/:id', to: 'certificates#legacy_show'
+  get '/certificates/:id/:type', to: 'certificates#legacy_show'
+
+  # User dashboard
+  get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
+  get 'dashboard', to: redirect('/users/dashboard')
 
   devise_for :users, skip: :registration, :controllers => {sessions: 'sessions'}
   devise_scope :user do
+    get '/users/:id/edit', to: 'registrations#edit', as: 'edit_user_registration'
+    get '/users/edit', to: 'registrations#redirect'
     resource :registration,
-             only: [:new, :create, :edit, :update],
+             only: [:new, :create, :update],
              path: 'users',
              path_names: { new: 'sign_up' },
              controller: 'registrations',

@@ -1,0 +1,27 @@
+%dt= certificate.name
+
+%dd
+  .response-set.response-set-inline
+    .row-fluid
+      .span3
+        %h3= t('dashboard.level_attained')
+        .level-badge{class: "level-badge-#{certificate.attained_level}"}
+        %h4= t 'levels.#{certificate.attained_level}.title'
+
+      .span3
+        %h3= t('dashboard.current_status')
+        %i.status-badge{class: "status-badge-#{certificate.response_set.aasm_state}"}
+        %p= t ['dashboard.states', certificate.response_set.aasm_state]
+        %p.jurisdiction
+          %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:certificate.response_set.jurisdiction})}}= certificate.response_set.jurisdiction
+        %p.last-updated
+          %small
+            = t 'dashboard.last_updated_at', time_span: time_ago_in_words(certificate.response_set.updated_at)
+      .span3
+        %h3= t('dashboard.publisher')
+        %p= certificate.curator
+
+      .span3
+        %h3= '&nbsp'.html_safe
+        = link_to t('dashboard.view_certificate'), [certificate.dataset, certificate], class: 'btn btn-large btn-info btn-block'
+  %hr.heavy

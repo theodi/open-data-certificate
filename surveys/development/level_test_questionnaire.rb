@@ -1,6 +1,7 @@
 survey 'Level Test Questionnaire',
        :default_mandatory => 'false',
-       :dataset_title => 'dataTitle' do
+       :dataset_title => 'dataTitle',
+       :dataset_curator => 'dataTitle' do
 
   section_general 'General Information', :display_header => false do
 
