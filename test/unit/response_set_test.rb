@@ -247,6 +247,16 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     assert_equal expected_value, response_set.curator_determined_from_responses
   end
+  
+  test "#documentation_url_determined_from_responses returns the answer of the response to the question referenced as 'documentationUrl'" do
+    question = FactoryGirl.create(:question, reference_identifier: 'testDocumentationUrl')
+    answer = FactoryGirl.create(:answer, question: question)
+    expected_value = 'http://example.com'
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.documentation_url_determined_from_responses
+  end
 
   test "#incomplete? returns true for an incomplete response_set" do
     assert_equal true, FactoryGirl.build(:response_set).incomplete?
