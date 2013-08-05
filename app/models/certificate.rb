@@ -8,10 +8,26 @@ class Certificate < ActiveRecord::Base
   attr_accessible :published, :name, :attained_level, :curator
 
   class << self
-    def search(search)
+    def search_title(title)
       query = self.where({})
-      search.downcase.split(/\s+/).each do |term|
+      title.downcase.split(/\s+/).each do |term|
         query = query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
+      end
+      query
+    end
+
+    def search_publisher(publisher)
+      query = self.where({})
+      publisher.downcase.split(/\s+/).each do |term|
+        query = query.where("LOWER(certificates.curator) LIKE ?", "%#{term}%")
+      end
+      query
+    end
+
+    def search_country(country)
+      query = self.where({})
+      country.downcase.split(/\s+/).each do |term|
+        query = query.joins(response_set: :survey).where("LOWER(surveys.full_title) LIKE ?", "%#{term}%")
       end
       query
     end
@@ -36,7 +52,7 @@ class Certificate < ActiveRecord::Base
 
       File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
     end
-    
+
     def latest
       joins(:response_set).merge(ResponseSet.published).first
     end
