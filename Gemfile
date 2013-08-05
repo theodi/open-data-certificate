@@ -89,3 +89,4 @@ gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
 gem 'delayed_job_active_record'
 gem 'linkeddata'
 gem 'rack-linkeddata'
+gem 'jbuilder'
