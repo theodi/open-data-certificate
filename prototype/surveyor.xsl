@@ -57,11 +57,6 @@
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
 		</xsl:attribute>
-		<meta_map
-			dataset_title="dataTitle"
-			dataset_curator="publisher"
-			dataset_documentation_url="documentationUrl"
-		/>
 		<translations en="default" />
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
