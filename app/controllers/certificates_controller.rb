@@ -1,4 +1,5 @@
 class CertificatesController < ApplicationController
+  include CertificatesHelper
 
   def index
     @certificates = Certificate.where(:published => true)
@@ -14,6 +15,16 @@ class CertificatesController < ApplicationController
       unless current_user && current_user == @certificate.user
         raise ActiveRecord::RecordNotFound
       end
+    end
+    
+    respond_to do |format|
+      format.html
+      format.ttl { 
+        dump_graph(@certificate, :turtle, request.format)
+      }
+      format.rdf { 
+        dump_graph(@certificate, :rdfxml, request.format)
+      }
     end
   end
   
