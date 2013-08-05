@@ -52,7 +52,7 @@ class Certificate < ActiveRecord::Base
 
       File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
     end
-    
+
     def latest
       joins(:response_set).merge(ResponseSet.published).first
     end
