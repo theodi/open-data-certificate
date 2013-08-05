@@ -21,7 +21,7 @@ class DatasetsController < ApplicationController
   end
 
   def show
-    @surveys = Survey.available_to_complete
+    @dataset = Dataset.find(params[:id])
+    @certificates = @dataset.certificates.where(:published => true).by_newest
   end
-
 end

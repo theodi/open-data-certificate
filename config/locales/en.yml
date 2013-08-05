@@ -139,7 +139,7 @@ en:
     view_certificate: View
     embed_this_on_your_site: Embed this on your site
     search:
-      search_label: Search for
+      search_label: Search certificates
       submit_search: Go
 
   certificate:
