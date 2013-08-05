@@ -31,17 +31,7 @@ module CertificatesHelper
     graph << [general, prefixes[:skos].prefLabel, "General Information"]
     graph << [general, prefixes[:skos].inScheme, categories]    
     
-    responses = []
-    
-    certificate.response_set.survey.sections.each do |section|
-      qs = section.questions_for_certificate certificate.response_set
-      rs = certificate.response_set.responses_for_questions qs
-      if rs.any?
-        rs.each do |r|
-          responses << r
-        end
-      end
-    end
+    responses = get_responses(certificate)
     
     responses.each do |response|
       question = RDF::URI.new("https://certificates.theodi.org/surveys/questions/#{response.question.id}")
@@ -90,6 +80,23 @@ module CertificatesHelper
   def dump_graph(certificate, format, content_type)
     graph = generate_rdf(certificate)
     render :text => graph.dump(format, :prefixes => prefixes), content_type: content_type
+  end
+  
+  def get_responses(certificate)
+    responses = []
+
+    certificate.response_set.survey.sections.each do |section|
+      qs = section.questions_for_certificate certificate.response_set
+      rs = certificate.response_set.responses_for_questions qs
+      if rs.any?
+        rs.each do |r|
+          if r.statement_text != ''
+            responses << r
+          end
+        end
+      end
+    end
+    responses
   end
   
 end
