@@ -1,5 +1,5 @@
 class CertificatesController < ApplicationController
-  
+
   def index
     @certificates = Certificate.where(:published => true)
   end
@@ -64,13 +64,29 @@ class CertificatesController < ApplicationController
   end
 
   def embed
-    @certificate = Certificate.find params[:id]
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     render layout: 'embedded_certificate'
   end
 
   def badge
-    @certificate = Certificate.find params[:id]
-    send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline')
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    respond_to do |format|
+      format.js
+      format.any(:png, :html) { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
+    end
+  end
+  
+  def get_badge
+    params[:datasetUrl] ||= request.env['HTTP_REFERER']
+    unless params[:datasetUrl].nil?
+      @certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
+      unless @certificate.nil?
+        respond_to do |format|
+          format.any(:js, :html) { render 'badge.js' and return }
+        end
+      end
+    end
+    render :nothing => true
   end
 
 end

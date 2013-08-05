@@ -20,4 +20,23 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(dataset.title, 'Test dataset default title')
   end
+  
+  test "Should set the documentation URL if it hasn't been set before" do
+    dataset = FactoryGirl.create(:dataset_without_documentation_url)
+    dataset.set_default_documentation_url!('http://foo.com')
+    dataset.reload
+
+    assert_equal(dataset.documentation_url, 'http://foo.com')
+  end
+
+  test "Should overwrite the documentation URL if it has been set before" do
+    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
+    assert_equal(dataset.documentation_url, 'http://foo.com')
+    dataset.reload
+
+    dataset.set_default_documentation_url!('http://foo.com/bar')
+    dataset.reload
+
+    assert_equal(dataset.documentation_url, 'http://foo.com/bar')
+  end
 end
