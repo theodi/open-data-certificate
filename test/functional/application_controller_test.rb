@@ -44,5 +44,12 @@ class ApplicationControllerTest < ActionController::TestCase
 
   end
 
+  test "start_questionnaire entities belongs to user" do
+    sign_in @user = FactoryGirl.create(:user)
+
+    post :start_questionnaire
+    assert_equal assigns(:response_set).user_id, @user.id, "response set belongs to user"
+    assert_equal assigns(:dataset).user_id, @user.id, "dataset belongs to user"
+  end
 
 end
