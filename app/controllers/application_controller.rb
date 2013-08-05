@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
     else
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
-      redirect_to (user_signed_in? ? dashboard_path : root_path) and return
+      redirect_to (user_signed_in? ? dashboard_path : root_path)
     end
   end
 
