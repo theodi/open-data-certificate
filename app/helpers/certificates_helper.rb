@@ -60,7 +60,7 @@ module CertificatesHelper
     graph << [dataset, prefixes[:cert].certificate, od_certificate]
     
     graph << [od_certificate, RDF.type, prefixes[:cert].Certificate]
-    graph << [od_certificate, RDF.type, prefixes[:cert].StandardCertificate]
+    graph << [od_certificate, RDF.type, prefixes[:cert]["#{certificate.attained_level.titleize}Certificate"]]
     graph << [od_certificate, prefixes[:rdfs].label, "Open Data Certificate for #{certificate.dataset.title}"]
     graph << [od_certificate, prefixes[:dct].published, certificate.created_at.to_date]
     graph << [od_certificate, prefixes[:cert].jurisdiction, prefixes[:jurisdiction][certificate.response_set.jurisdiction.downcase]]
