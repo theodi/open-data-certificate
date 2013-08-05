@@ -1,9 +1,5 @@
 class CertificatesController < ApplicationController
 
-  def index
-    redirect_to dataset_path(params[:dataset_id])
-  end
-
   def show
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
 
