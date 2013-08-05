@@ -97,6 +97,16 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
     # run tests on file change
     bundle exec guard
 
+#### Changing surveys
+
+To change surveys, you'll need Saxon installed. On a Mac, this is as simple as running:
+
+		brew install saxon 
+
+You can then change the `prototype/survey.xsl` file and run:
+
+		saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
+
 ---
 
 The approach to the new app is outlined in a [google doc](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#), which will be moved into this readme file.
