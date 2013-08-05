@@ -143,8 +143,8 @@
       }
     }
 
-    textarea { 
-      margin-bottom: 15px; 
+    textarea {
+      margin-bottom: 15px;
     }
 
     .open-data-certificate {
@@ -327,7 +327,7 @@
 
   &-inverse{
     text-shadow:none;
-    color: @odiBlue; 
+    color: @odiBlue;
     background-color: @white;
   }
   &-inverse[href]{
@@ -491,7 +491,7 @@ header.affix {
       margin-bottom: 40px;
       color: @odiGrey;
       padding-left: 3px;
-      
+
       strong {
          color: @odiGreyDark;
       }
@@ -682,6 +682,21 @@ hr.heavy {
       a:hover, a.active {
         background-color: @odiRed;
       }
+
+      &.search {
+        height: auto;
+        padding: 15px 20px;
+        border: 0;
+
+        form {
+          margin: 0;
+
+          input, label {
+            display: inline;
+            margin: 0;
+          }
+        }
+      }
     }
   }
 
@@ -841,7 +856,7 @@ nav .dropdown-menu-button {
   h3 {
     display: inline;
   }
-} 
+}
 
 header {
   background-color: @odiBlue;
@@ -859,7 +874,7 @@ header {
     font-weight:normal;
   }
 
-  h1{  
+  h1{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1142,7 +1157,7 @@ color: @odiRed;
     padding: 13px 30px 5px 15px;
     width: 48px;
     border-right: 1px solid #fff;
-  
+
     p {
     line-height: 15px;
 
@@ -1150,7 +1165,7 @@ color: @odiRed;
       font-size: 12px;
       color: @odiBlue;
       font-weight: normal;
-      
+
      }
     }
   }
@@ -1279,7 +1294,7 @@ td.action {
   &, .row-fluid{
     padding-right: 20px;
   }
- 
+
 
   // bit of a hack to get lines mid-gutter
   .row-fluid{
@@ -1295,7 +1310,7 @@ td.action {
     height:100%;
     background-color:#f08;
     display:block;
-    
+
 
     margin-left:-10px;
     @media (min-width: 1200px) {
@@ -1309,7 +1324,7 @@ td.action {
     }
   }
 
- 
+
 
   a .delete {
     background-image:url(/assets/status/remove-sign.png);
@@ -1342,7 +1357,7 @@ td.action {
 }
 
 .response-set-inline{
-  h3{margin:0;} 
+  h3{margin:0;}
   h4{display:inline-block;}
   .last-updated{
     display:block;
@@ -1352,7 +1367,7 @@ td.action {
 
 .response-set-secondary, .response-set-inline{
 
-  
+
 
   .level-badge{
     width:55px;
@@ -1371,7 +1386,7 @@ td.action {
     background-position: center center;
     margin:10px;
    }
-    
+
   .level-badge, .status-badge, p{
     display: inline-block;
     vertical-align: middle;
@@ -1381,7 +1396,7 @@ td.action {
   }
   .btn-group{
     margin-top:10px;
-   
+
     .btn {
       background-color: transparent;
       background-image: none;
@@ -1549,7 +1564,7 @@ header .jurisdiction{
   input.string{
     width:100%;
   }
-  
+
   input.string.fail {
     border-color: #e9322d;
     color: #b94a48;
@@ -1557,13 +1572,13 @@ header .jurisdiction{
     -moz-box-shadow: 0 0 6px #f8b9b7;
     box-shadow: 0 0 6px #f8b9b7;
   }
-  
+
   p.url_error {
     background: #ff6700;
     color: white;
     padding: 20px;
     margin-left: 0;
-    
+
     &.hidden {
       display: none;
     }
@@ -1730,7 +1745,7 @@ header .jurisdiction{
 
   .status_texts {
     dd,dt{
-      display:none; 
+      display:none;
       &.active{
         display:block;
       }
@@ -1764,7 +1779,7 @@ header .jurisdiction{
       a {
         color: inherit;
       }
-    
+
       .cropped {
         display: inline-block;
         max-width: 100%;
@@ -1792,12 +1807,12 @@ header .jurisdiction{
 }
 
 .certificate-summary {
-  padding: 0 90px;
+  padding: 0 120px;
 }
 
 .certificate-badge {
-  width: 160px;
-  height: 140px;
+  width: 133px;
+  height: 118px;
   // background: #bbb;
   margin-bottom: 10px;
   background: transparent center center no-repeat;
@@ -1913,7 +1928,7 @@ strong.certificate-level {
         min-height: 60px;
         padding-left: 75px;
         padding-top: 5px;
-        
+
       }
 
       li.kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
@@ -1990,9 +2005,9 @@ section.improvement{
 
   }
 
- 
-  .requirements { 
-    padding: 25px 0 35px 0; 
+
+  .requirements {
+    padding: 25px 0 35px 0;
   }
 
   li {
@@ -2019,7 +2034,7 @@ section.improvement{
   &.improvement-exemplar header .container{
     background-image: url(/assets/badges/exemplar_level_badge.png);
   }
-  
+
   &.improvement-basic {
     header{
       background: #333;
@@ -2030,8 +2045,8 @@ section.improvement{
 
     li, p { color: #fff; -webkit-font-smoothing: antialiased; }
 
-    strong, a { 
-      color: #fff; 
+    strong, a {
+      color: #fff;
     }
 
   }
@@ -2134,7 +2149,7 @@ color: @odiBlue;
 
 
 
-// 
+//
 // Responsive: tablet
 // --------------------------------------------------
 
@@ -2201,7 +2216,7 @@ width: 328px;
 }
 
   //
-// Responsive: desktop to Large desktop 
+// Responsive: desktop to Large desktop
 // --------------------------------------------------
 
 

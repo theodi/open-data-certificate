@@ -1,12 +1,8 @@
 class CertificatesController < ApplicationController
 
-  def index
-    @certificates = Certificate.where(:published => true)
-  end
-
   def show
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
-    
+
     # pretend unpublished certificates don't exist
     unless @certificate.published?
 
@@ -16,7 +12,7 @@ class CertificatesController < ApplicationController
       end
     end
   end
-  
+
   def latest
     certificate = Dataset.find(params[:dataset_id]).certificates.latest
     unless certificate.nil?
@@ -31,7 +27,7 @@ class CertificatesController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
   end
-  
+
   def legacy_show
     certificate = Certificate.find params[:id]
     if params[:type].nil?
@@ -42,7 +38,7 @@ class CertificatesController < ApplicationController
       redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
     end
   end
-  
+
   def improvements
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @response_set = @certificate.response_set

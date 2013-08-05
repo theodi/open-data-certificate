@@ -3,21 +3,6 @@ require 'test_helper'
 class CertificatesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test "index shows all published certificates" do
-    5.times do
-      FactoryGirl.create(:published_certificate_with_dataset)
-    end
-    5.times do
-      FactoryGirl.create(:certificate_with_dataset)
-    end
-
-    get :index, {dataset_id: 'all'}
-
-    assert_response :success
-    assert_equal 5, assigns(:certificates).size
-    assert assigns(:certificates).first.published
-  end
-
   test "published certificates can be shown" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     get :show, {dataset_id: cert.response_set.dataset.id, id: cert.id}
