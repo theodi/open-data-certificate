@@ -155,6 +155,9 @@ en:
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
 
+  datasets:
+    page_title: Search certificates
+
   response_set:
     choose_a_jurisdiction: Choose a new jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.

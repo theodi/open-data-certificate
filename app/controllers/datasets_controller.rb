@@ -2,9 +2,17 @@ class DatasetsController < ApplicationController
   load_and_authorize_resource
 
   before_filter :authenticate_user!
-  
+
   def index
-    redirect_to dashboard_path
+    @certificates = Certificate.where(:published => true).by_newest
+
+    if params[:search]
+      @certificates = [
+        @certificates.search_title(params[:search]),
+        @certificates.search_publisher(params[:search]),
+        @certificates.search_country(params[:search])
+      ].flatten.uniq
+    end
   end
 
   def dashboard

@@ -1,7 +1,7 @@
 class CertificatesController < ApplicationController
 
   def index
-    @certificates = Certificate.where(:published => true)
+    redirect_to dataset_path(params[:dataset_id])
   end
 
   def show
