@@ -1,6 +1,8 @@
 class Dataset < ActiveRecord::Base
   belongs_to :user
 
+  attr_accessible :title
+
   after_touch :destroy_if_no_responses
 
   has_many :response_sets, :order => "response_sets.created_at DESC"

@@ -45,26 +45,21 @@ class ApplicationController < ActionController::Base
   def start_questionnaire
     # bypassing the need for the user to select the survey - since we're launching with just one 'legislation'
     # When multiple legislations are available, this value will need to be provided by the form
-    user_default = current_user.try(:default_jurisdiction)
-    params[:survey_access_code] = (user_default.blank? ? Survey::DEFAULT_ACCESS_CODE : user_default) if params[:survey_access_code].blank?
+    access_code = params[:survey_access_code] ||
+                  current_user.try(:default_jurisdiction) ||
+                  Survey::DEFAULT_ACCESS_CODE
+
 
     # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
-    @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? Dataset.create(user: current_user) : Dataset.new)
+    @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? current_user.datasets.create : Dataset.new)
     authorize! :update, @dataset
 
-    if params[:survey_access_code].blank?
-      flash[:notice] = t('surveyor.please_choose_a_legislation')
-      redirect_to (@dataset.persisted? ? @dataset : root_url) and return
-    end
-
-    surveys = Survey.where(:access_code => params[:survey_access_code]).order("survey_version DESC")
-
-    # use the most recent survey for now
-    @survey = surveys.first
+    # use the most recent survey
+    @survey = Survey.where(:access_code => access_code).order("survey_version DESC").first
 
     @response_set = ResponseSet.
       create(:survey => @survey,
-             :user_id => (current_user.nil? ? current_user : current_user.id),
+             :user_id => current_user.try(:id),
              :dataset_id => @dataset.id
     )
 
@@ -81,7 +76,7 @@ class ApplicationController < ActionController::Base
                     :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
     else
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
-      redirect_to @dataset.persisted? ? @dataset : root_url
+      redirect_to (user_signed_in? ? dashboard_path : root_path)
     end
   end
 
