@@ -65,11 +65,11 @@ module CertificatesHelper
       question = RDF::URI.new("https://certificates.theodi.org/surveys/questions/#{response.question.id}")
       graph << [answer, RDF.type, prefixes[:cert].Answer]
       graph << [answer, prefixes[:cert].question, question]
-      graph << [answer, prefixes[:rdfs].label, response.question.text_as_statement]
+      graph << [answer, prefixes[:rdfs].label, response.question.text]
       if response.answer.input_type == 'url'
         graph << [answer, prefixes[:cert].response, RDF::URI.new(response.statement_text)]
       else
-        graph << [answer, prefixes[:cert].response, response.statement_text]
+        graph << [answer, prefixes[:cert].response, response.question.text_as_statement + " " + response.statement_text]
       end
     end
     
