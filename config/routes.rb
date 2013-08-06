@@ -7,7 +7,7 @@ OpenDataCertificate::Application.routes.draw do
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
     # have a response_set resource for deleting for now, have
-    # a feeling that this could include a couple of the other 
+    # a feeling that this could include a couple of the other
     # routes,  though try it out for now
     resources :response_sets, :only => :destroy do
       post :publish, on: :member
@@ -21,8 +21,8 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
-    
-    resources :certificates, :only => [:show,:index] do
+
+    resources :certificates, :only => [:show] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'
          get 'embed', to: 'certificates#embed', as: 'embed'
@@ -30,7 +30,7 @@ OpenDataCertificate::Application.routes.draw do
        end
     end
   end
-  
+
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
@@ -60,7 +60,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'about' => 'high_voltage/pages#show', :id => 'about'
   get 'contact' => 'high_voltage/pages#show', :id => 'contact'
   get 'terms' => 'high_voltage/pages#show', :id => 'terms'
-  
+
   # Validators
   get 'resolve' => 'validators#resolve'
   get 'autofill' => 'validators#autofill'

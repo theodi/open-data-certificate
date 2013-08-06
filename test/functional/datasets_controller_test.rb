@@ -3,6 +3,22 @@ require 'test_helper'
 class DatasetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
+  test "index shows all published certificates" do
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    5.times do
+      FactoryGirl.create(:certificate_with_dataset)
+    end
+
+    get :index
+
+    assert_response :success
+    assert_equal 5, assigns(:certificates).size
+    assert assigns(:certificates).first.published
+  end
+
+
   test "index (non logged in)" do
     get :dashboard
     assert_response :redirect

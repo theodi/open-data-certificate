@@ -1,10 +1,18 @@
 class DatasetsController < ApplicationController
   load_and_authorize_resource
 
-  before_filter :authenticate_user!
-  
+  before_filter :authenticate_user!, only: :dashboard
+
   def index
-    redirect_to dashboard_path
+    @certificates = Certificate.where(:published => true).by_newest
+
+    if params[:search]
+      @certificates = [
+        @certificates.search_title(params[:search]),
+        @certificates.search_publisher(params[:search]),
+        @certificates.search_country(params[:search])
+      ].flatten.uniq
+    end
   end
 
   def dashboard
@@ -13,7 +21,7 @@ class DatasetsController < ApplicationController
   end
 
   def show
-    @surveys = Survey.available_to_complete
+    @dataset = Dataset.find(params[:id])
+    @certificates = @dataset.certificates.where(:published => true).by_newest
   end
-
 end

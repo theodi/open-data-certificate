@@ -38,10 +38,10 @@ FactoryGirl.define do
       published true
     end
   end
-  
+
   factory :certificate_with_dataset, :class => Certificate do
     response_set { FactoryGirl.create(:response_set_with_dataset) }
-    
+
     factory :published_certificate_with_dataset do
       published true
     end
@@ -67,6 +67,8 @@ FactoryGirl.define do
     after(:create) do |survey, evaluator|
       FactoryGirl.create_list(:survey_section, 3, survey: survey)
     end
+
+
   end
 
   factory :survey_translation do |t|
@@ -188,7 +190,7 @@ questions:
       completed_at { Time.now }
     end
   end
-  
+
   factory :response_set_with_dataset, :class => ResponseSet do |r|
     user
     r.association :dataset
