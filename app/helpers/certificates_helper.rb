@@ -47,6 +47,10 @@ module CertificatesHelper
     graph << [dataset, RDF.type, prefixes[:dcat].Dataset]
     graph << [dataset, prefixes[:dct].title, certificate.dataset.title]
     graph << [dataset, prefixes[:foaf].homepage, RDF::URI.new(certificate.dataset.documentation_url)]
+    publisher = RDF::Node.new
+    graph << [dataset, prefixes[:dct].publisher, publisher]
+    graph << [publisher, RDF.type, prefixes[:foaf].Organization]
+    graph << [publisher, prefixes[:foaf].name, certificate.response_set.curator_determined_from_responses]
     graph << [dataset, prefixes[:cert].certificate, od_certificate]
     
     graph << [od_certificate, RDF.type, prefixes[:cert].Certificate]
