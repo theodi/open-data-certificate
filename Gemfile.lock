@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/theodi/ODLifier.git
+  revision: cb558a160d228ed8ca657628326d574fb7aba164
+  specs:
+    ODLifier (0.0.1)
+      httparty
+
+GIT
   remote: git://github.com/theodi/data_kitten.git
   revision: 8c988519acb036e295f3d7e25111b6a863d28c38
   specs:
@@ -312,6 +319,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ODLifier!
   aasm
   airbrake
   cancan
