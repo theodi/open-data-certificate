@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/theodi/ODLifier.git
-  revision: cb558a160d228ed8ca657628326d574fb7aba164
-  specs:
-    ODLifier (0.0.1)
-      httparty
-
-GIT
   remote: git://github.com/theodi/data_kitten.git
   revision: 8c988519acb036e295f3d7e25111b6a863d28c38
   specs:
@@ -16,6 +9,13 @@ GIT
       linkeddata
       nokogiri
       rest-client
+
+GIT
+  remote: git://github.com/theodi/odlifier.git
+  revision: 602935d283f9a39cd6b3c7ff703368956fd3df12
+  specs:
+    odlifier (0.0.1)
+      httparty
 
 GEM
   remote: https://rubygems.org/
@@ -319,7 +319,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ODLifier!
   aasm
   airbrake
   cancan
@@ -346,6 +345,7 @@ DEPENDENCIES
   memcache-client
   mocha
   mysql2
+  odlifier!
   pry
   rack-linkeddata
   rails (= 3.2.13)
