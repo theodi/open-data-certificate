@@ -1592,7 +1592,9 @@ header .jurisdiction{
     }
 
     select {
-      margin-bottom: 30px;
+      height: 60px;
+      width: 100%;
+      margin: 15px 0;
     }
 
     .icon-loading {
@@ -1601,6 +1603,16 @@ header .jurisdiction{
       right: 20px;
       bottom: 35px;
       color: #333;
+    }
+
+    &.loading {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .icon-loading {
+        display: inline;
+      }
     }
 
     .status-icon {
@@ -1642,8 +1654,8 @@ header .jurisdiction{
       display: none;
       float: none;
       position: relative;
+      margin: 0;
       height: 38px;
-      margin: -17px 0 15px;
       text-align: right;
 
       span {
@@ -1677,7 +1689,7 @@ header .jurisdiction{
     }
 
     &.warning {
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1711,7 +1723,7 @@ header .jurisdiction{
     &.error {
       background: @odiCrimsonLight;
 
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1737,7 +1749,7 @@ header .jurisdiction{
     }
 
     &.ok {
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1784,6 +1796,56 @@ header .jurisdiction{
       .status-message {
         display: block;
       }
+    }
+
+    .select, &.choice-boxes {
+      .status-icon {
+        .border-radius(0);
+        position: relative;
+        float: left;
+        margin: 0;
+        height: 38px;
+        width: 38px;
+        font-size: 12px;
+
+        .icon {
+          margin: 10px 0;
+          font-size: 18px;
+        }
+      }
+
+      .status-message {
+        span {
+          margin-left: 38px;
+          text-align: left;
+          float: none;
+          display: block;
+        }
+
+        i.arrow, i.arrow-border {
+          top: 14px;
+          left: 33px;
+          border-width: 6px 6px 6px 0;
+          border-color: transparent @odiGreen transparent transparent;
+        }
+
+        i.arrow-border {
+          top: 12px;
+          left: 31px;
+          border-width: 8px 8px 8px 0;
+          border-right-color: white;
+        }
+      }
+    }
+
+    .status-above {
+      .clearfix;
+    }
+
+    .status-below {
+      .clearfix;
+      margin-top: -17px;
+      margin-bottom: 15px;
     }
   }
 }

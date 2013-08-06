@@ -12,13 +12,19 @@ class SelectInput < Formtastic::Inputs::SelectInput
     status = options[:status_message] || {}
 
     input_wrapping do
-      "<div class='status-wrapper'>".html_safe <<
-        hidden_input <<
-        label_html <<
-        (options[:group_by] ? grouped_select_html : select_html) <<
-        "<div class='status-icon'><i class='icon icon-variable'></i></div>".html_safe <<
-      "</div>".html_safe <<
-      "<div class='span8 status-message'><span>#{status[:message]}</span><i class='arrow-border'></i><i class='arrow'></i></div>".html_safe
+      [
+        "<div class='status-wrapper'>",
+          hidden_input,
+          label_html,
+          options[:group_by] ? grouped_select_html : select_html,
+        "</div>",
+        "<div class='status-below'>",
+          "<div class='status-icon'><i class='icon icon-variable'></i></div>",
+          "<div class='span8 status-message'>",
+            "<span>#{status[:message]}</span><i class='arrow-border'></i><i class='arrow'></i>",
+          "</div>",
+        "</div>"
+      ].join("\n").html_safe
     end
   end
 

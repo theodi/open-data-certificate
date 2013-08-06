@@ -165,7 +165,7 @@ $(document).ready(function(){
     if (field.data('cancel-callbacks')) field.data('cancel-callbacks')()
 
     // Reset styles
-    field.next('.icon-loading').hide()
+    row.removeClass('loading')
     row.removeClass('error').removeClass('ok').removeClass('warning')
 
     if (field.val() && field.val().match(/[^\s]/)) {
@@ -173,7 +173,7 @@ $(document).ready(function(){
       // Attempt to autocomplete fields
       if (row.data('reference-identifier') == 'documentationUrl') {
 
-        field.next('.icon-loading').show()
+        row.addClass('loading')
 
         field.data('cancel-callbacks', autocomplete(field.val(), {
           beforeProcessing: function() {
@@ -185,7 +185,7 @@ $(document).ready(function(){
           },
           success: function(fields) {
             row.addClass('ok')
-            field.next('.icon-loading').hide()
+            row.removeClass('loading')
 
             // Mark fields as autcompleted
             markAutocompleted(fields, form, true)
@@ -202,7 +202,7 @@ $(document).ready(function(){
 
           fail: function() {
             row.addClass('warning')
-            field.next('.icon-loading').hide()
+            row.removeClass('loading')
 
             var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
             row.find('.status-message span').text(form.find('#surveyor').data(message))
@@ -213,17 +213,17 @@ $(document).ready(function(){
       // Attempt to verify URL
       else if (field.attr('type') == 'url') {
 
-        field.next('.icon-loading').show()
+        row.addClass('loading')
 
         field.data('cancel-callbacks', verifyUrl(field.val(), {
           success: function() {
             row.addClass('ok')
-            field.next('.icon-loading').hide()
+            row.removeClass('loading')
           },
 
           fail: function() {
             row.addClass('warning')
-            field.next('.icon-loading').hide()
+            row.removeClass('loading')
 
             var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
             row.find('.status-message span').text(form.find('#surveyor').data(message))
