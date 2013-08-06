@@ -13,7 +13,8 @@ module CertificatesHelper
       :skos         => RDF::Vocabulary.new("http://www.w3.org/2004/02/skos/core#"),
       :xsd          => RDF::Vocabulary.new("http://www.w3.org/2001/XMLSchema#"),
       :cert         => RDF::Vocabulary.new("http://schema.theodi.org/certificate#"),
-      :jurisdiction => RDF::Vocabulary.new("https://certificates.theodi.org/jurisdictions/")
+      :jurisdiction => RDF::Vocabulary.new("https://certificates.theodi.org/jurisdictions/"),
+      :odrs         => RDF::Vocabulary.new("http://schema.theodi.org/odrs#")
     }
   end
   
@@ -47,10 +48,18 @@ module CertificatesHelper
     graph << [dataset, RDF.type, prefixes[:dcat].Dataset]
     graph << [dataset, prefixes[:dct].title, certificate.dataset.title]
     graph << [dataset, prefixes[:foaf].homepage, RDF::URI.new(certificate.dataset.documentation_url)]
+    
     publisher = RDF::Node.new
     graph << [dataset, prefixes[:dct].publisher, publisher]
     graph << [publisher, RDF.type, prefixes[:foaf].Organization]
     graph << [publisher, prefixes[:foaf].name, certificate.response_set.curator_determined_from_responses]
+    
+    rights = RDF::Node.new
+    graph << [dataset, prefixes[:dct].rights, rights]
+    graph << [rights, RDF.type, prefixes[:odrs].RightsStatement]
+    graph << [rights, prefixes[:odrs].dataLicence, RDF::URI.new(certificate.response_set.data_licence_determined_from_responses[:url])]
+    graph << [rights, prefixes[:odrs].contentLicence, RDF::URI.new(certificate.response_set.content_licence_determined_from_responses[:url])]
+    
     graph << [dataset, prefixes[:cert].certificate, od_certificate]
     
     graph << [od_certificate, RDF.type, prefixes[:cert].Certificate]
