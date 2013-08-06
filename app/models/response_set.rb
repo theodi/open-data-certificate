@@ -91,6 +91,58 @@ class ResponseSet < ActiveRecord::Base
   def documentation_url_determined_from_responses
     @documentation_url_determined_from_responses ||= value_for "dataset_documentation_url"
   end
+  
+  def data_licence_determined_from_responses
+    if @data_licence_determined_from_responses.nil? 
+      ref = value_for "data_licence", :reference_identifier
+      case ref
+      when "na"
+        @data_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
+      when "other"
+         @data_licence_determined_from_responses = {
+          :title => value_for("other_dataset_licence_name"),
+          :url   => value_for("other_dataset_licence_url")
+         }
+      else
+        licence = ODLifier::License.new(ref)
+        @data_licence_determined_from_responses = {
+          :title => licence.title,
+          :url   => licence.url
+        }
+      end
+    else
+      @data_licence_determined_from_responses
+    end
+  end
+  
+  def content_licence_determined_from_responses
+    if @content_licence_determined_from_responses.nil? 
+      ref = value_for "content_licence", :reference_identifier
+      case ref
+      when "na"
+        @content_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
+      when "other"
+         @content_licence_determined_from_responses = {
+          :title => value_for("other_content_licence_name"),
+          :url   => value_for("other_content_licence_url") 
+         }
+      else
+        licence = ODLifier::License.new(ref)
+        @content_licence_determined_from_responses = {
+          :title => licence.title,
+          :url   => licence.url
+        }
+      end
+    else
+      @content_licence_determined_from_responses
+    end
+  end
 
   def incomplete?
     !complete?
@@ -252,8 +304,8 @@ class ResponseSet < ActiveRecord::Base
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier
-    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(:string_value)
+  def value_for reference_identifier, value = :string_value
+    q = responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(value)
   end
 
 end
