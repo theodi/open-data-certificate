@@ -286,7 +286,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   
   test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk-ogl")
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
     expected_value = {
       :title => "UK Open Government Licence (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
@@ -299,7 +299,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   
   test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk-ogl")
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
     expected_value = {
       :title => "UK Open Government Licence (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
