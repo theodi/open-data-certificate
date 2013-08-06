@@ -92,6 +92,10 @@ class ResponseSet < ActiveRecord::Base
     @documentation_url_determined_from_responses ||= value_for "dataset_documentation_url"
   end
   
+  def curator_url_determined_from_responses
+    @curator_url_determined_from_responses ||= value_for "dataset_curator_url"
+  end
+  
   def data_licence_determined_from_responses
     if @data_licence_determined_from_responses.nil? 
       ref = value_for "data_licence", :reference_identifier
