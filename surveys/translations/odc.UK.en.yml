@@ -188,16 +188,16 @@ questions:
       odc_by:
         text: "Open Data Commons Attribution License"
         text_as_statement: "Open Data Commons Attribution License"
-      odc_by_sa:
+      odc_odbl:
         text: "Open Data Commons Open Database License (ODbL)"
         text_as_statement: "Open Data Commons Open Database License (ODbL)"
-      pddl:
+      odc_pddl:
         text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
-      cc0:
+      cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
-      ogl:
+      uk_ogl:
         text: "UK Open Government Licence"
         text_as_statement: "UK Open Government Licence"
       na:
@@ -276,10 +276,10 @@ questions:
       cc_by_sa:
         text: "Creative Commons Attribution Share-Alike"
         text_as_statement: "Creative Commons Attribution Share-Alike"
-      cc0:
+      cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
-      ogl:
+      uk_ogl:
         text: "UK Open Government Licence"
         text_as_statement: "UK Open Government Licence"
       na:
