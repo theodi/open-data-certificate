@@ -1,7 +1,13 @@
-- content_for :header_title, t('dashboard.page_title')
+- content_for :header_title, t('datasets.page_title')
 
-= render partial: :dataset, collection: current_user.datasets
+%section
+  = form_tag datasets_path, method: 'get' do
+    %div.form-search
+      = text_field_tag :search, params[:search]
+      = submit_tag t('certificates.search.submit_search'), :class => 'btn'
 
--if current_user.datasets.blank?
-  %p= t("dashboard.no_certificates_to_show")
-  = link_to t('menu.create_certificate'), authenticated_start_questionnaire_path, :class => 'btn btn-primary'
+- if @certificates.any?
+  %dl.unstyled
+    = render partial: 'certificates/certificate', collection: @certificates
+- else
+  %p= t('certificates.no_certificates_found')

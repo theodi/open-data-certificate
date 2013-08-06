@@ -20,9 +20,14 @@ FactoryGirl.define do
 
   factory :dataset do
     title "Test dataset"
+    documentation_url "http://www.example.com"
 
     factory :untitled_dataset do
       title nil
+    end
+    
+    factory :dataset_without_documentation_url do
+      documentation_url nil
     end
   end
 
@@ -34,21 +39,36 @@ FactoryGirl.define do
     end
   end
 
+  factory :certificate_with_dataset, :class => Certificate do
+    response_set { FactoryGirl.create(:response_set_with_dataset) }
+
+    factory :published_certificate_with_dataset do
+      published true
+    end
+  end
+
   sequence :unique_survey_access_code do |n|
     "simple_survey_#{UUIDTools::UUID.random_create.to_s}"
   end
 
   factory :survey do |s|
+    meta_hash = {
+        dataset_title: 'testDataTitle', 
+        dataset_curator: 'testPublisher',
+        dataset_documentation_url: 'testDocumentationUrl'
+      }
+    
     s.title "Simple survey"
     s.description "A simple survey for testing"
     s.access_code { FactoryGirl.generate :unique_survey_access_code }
     s.survey_version 0
-    s.dataset_title 'testDataTitle'
-    s.dataset_curator 'testPublisher'
-
+    s.meta_map meta_hash
+  
     after(:create) do |survey, evaluator|
       FactoryGirl.create_list(:survey_section, 3, survey: survey)
     end
+
+
   end
 
   factory :survey_translation do |t|
@@ -169,6 +189,14 @@ questions:
     factory :completed_response_set do
       completed_at { Time.now }
     end
+  end
+
+  factory :response_set_with_dataset, :class => ResponseSet do |r|
+    user
+    r.association :dataset
+    r.association :survey # r.survey_id       {}
+    r.access_code { Surveyor::Common.make_tiny_code }
+    r.started_at { Time.now }
   end
 
   factory :response do |r|

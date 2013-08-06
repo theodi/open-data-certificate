@@ -654,6 +654,21 @@ hr.heavy {
       a:hover, a.active {
         background-color: @odiRed;
       }
+
+      &.search {
+        height: auto;
+        padding: 15px 20px;
+        border: 0;
+
+        form {
+          margin: 0;
+
+          input, label {
+            display: inline;
+            margin: 0;
+          }
+        }
+      }
     }
   }
 
@@ -1279,9 +1294,24 @@ td.action {
     background-color: rgb(222, 222, 222);
   }
 
-.response-set-secondry{
 
+// don't display the headers, links or actions in secondary ones
+.response-set-secondary{
   h3, .edit-jurisdiction a{display:none}
+}
+
+.response-set-inline{
+  h3{margin:0;}
+  h4{display:inline-block;}
+  .last-updated{
+    display:block;
+    padding-bottom: 0.5em;
+  }
+}
+
+.response-set-secondary, .response-set-inline{
+
+
 
   .level-badge{
     width:55px;
@@ -1479,12 +1509,28 @@ header .jurisdiction{
     box-sizing: border-box;
   }
 
+  // custom
+  input.string{
+    width:100%;
+  }
+
   input.string.fail {
     border-color: #e9322d;
     color: #b94a48;
     -webkit-box-shadow: 0 0 6px #f8b9b7;
     -moz-box-shadow: 0 0 6px #f8b9b7;
     box-shadow: 0 0 6px #f8b9b7;
+  }
+
+  p.url_error {
+    background: #ff6700;
+    color: white;
+    padding: 20px;
+    margin-left: 0;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   // this is our label replacement (for the question of multiple answers)
@@ -1868,12 +1914,12 @@ header .jurisdiction{
 }
 
 .certificate-summary {
-  padding: 0 90px;
+  padding: 0 120px;
 }
 
 .certificate-badge {
-  width: 160px;
-  height: 140px;
+  width: 133px;
+  height: 118px;
   // background: #bbb;
   margin-bottom: 10px;
   background: transparent center center no-repeat;
