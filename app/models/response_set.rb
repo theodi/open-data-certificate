@@ -111,15 +111,14 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for("other_dataset_licence_url")
          }
       else
-        licence = ODLifier::License.new(ref)
+        licence = ODLifier::License.new(ref.dasherize)
         @data_licence_determined_from_responses = {
           :title => licence.title,
           :url   => licence.url
         }
       end
-    else
-      @data_licence_determined_from_responses
     end
+    @data_licence_determined_from_responses
   end
   
   def content_licence_determined_from_responses
@@ -137,7 +136,7 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for("other_content_licence_url") 
          }
       else
-        licence = ODLifier::License.new(ref)
+        licence = ODLifier::License.new(ref.dasherize)
         @content_licence_determined_from_responses = {
           :title => licence.title,
           :url   => licence.url
