@@ -339,6 +339,10 @@ $(document).ready(function(){
 
         callbacks.beforeProcessing();
 
+        if (!json.data_exists) {
+          return callbacks.success($([]));
+        }
+
         var affectedFields = [];
 
         // Title

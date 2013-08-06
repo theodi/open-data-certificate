@@ -28,6 +28,7 @@ class ValidatorsController < ApplicationController
       }
       
       render :json => {
+        :data_exists       => true,
         :title             => dataset.data_title,
         :description       => dataset.description,
         :publishers        => dataset.publishers,
@@ -41,7 +42,9 @@ class ValidatorsController < ApplicationController
         :temporal_coverage => dataset.temporal
       }
     else
-      render :nothing => true
+      render :json => {
+        :data_exists => false
+      }
     end
   end
 end
