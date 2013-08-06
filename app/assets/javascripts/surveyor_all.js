@@ -141,112 +141,112 @@ $(document).ready(function(){
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
 
   $("#survey_form").each(function() {
-    var form = $(this)
-    var csrfToken = form.find("input[name='authenticity_token']")
+    var $form = $(this)
+    var csrfToken = $form.find("input[name='authenticity_token']")
 
-    form.find("input, select, textarea").change(function() {
-      var field = $(this)
+    $form.find("input, select, textarea").change(function() {
+      var $field = $(this)
 
       // Set field to not autofilled
-      markAutocompleted(field, form, false)
+      markAutocompleted($field, $form, false)
 
-      validateField(field, form, csrfToken)
+      validateField($field, $form, csrfToken)
 
       // Save changes to this field
-      saveFormElements(form, questionFields(field).add(csrfToken))
+      saveFormElements($form, questionFields($field).add(csrfToken))
     })
   })
 
-  function validateField(field, form, csrfToken) {
+  function validateField($field, $form, csrfToken) {
     // Cache row element on field
-    var row = bindQuestionRow(field);
+    var $row = bindQuestionRow($field);
 
     // Cancel any ajax callbacks
-    if (field.data('cancel-callbacks')) field.data('cancel-callbacks')()
+    if ($field.data('cancel-callbacks')) $field.data('cancel-callbacks')()
 
     // Reset styles
-    row.removeClass('loading')
-    row.removeClass('error').removeClass('ok').removeClass('warning')
+    $row.removeClass('loading')
+    $row.removeClass('error').removeClass('ok').removeClass('warning')
 
-    if (field.val() && field.val().match(/[^\s]/)) {
+    if ($field.val() && $field.val().match(/[^\s]/)) {
 
       // Attempt to autocomplete fields
-      if (row.data('reference-identifier') == 'documentationUrl') {
+      if ($row.data('reference-identifier') == 'documentationUrl') {
 
-        row.addClass('loading')
+        $row.addClass('loading')
 
-        field.data('cancel-callbacks', autocomplete(field.val(), {
+        $field.data('cancel-callbacks', autocomplete($field.val(), {
           beforeProcessing: function() {
             // Mark questions which have selected radio buttons or checkboxes
-            form.find('fieldset.question-row').each(function() {
-              var row = $(this);
-              row.toggleClass('touched', row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
+            $form.find('fieldset.question-row').each(function() {
+              var $row = $(this);
+              $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
             })
           },
-          success: function(fields) {
-            row.addClass('ok')
-            row.removeClass('loading')
+          success: function($fields) {
+            $row.addClass('ok')
+            $row.removeClass('loading')
 
             // Mark fields as autcompleted
-            markAutocompleted(fields, form, true)
+            markAutocompleted($fields, $form, true)
 
             // Run validation on each field
-            fields.each(function() { validateField($(this), form, csrfToken) })
+            $fields.each(function() { validateField($(this), $form, csrfToken) })
 
             // Save autocompleted fields
-            saveFormElements(form, questionFields(fields).add(csrfToken))
+            saveFormElements($form, questionFields($fields).add(csrfToken))
 
             // Trigger status panel update
             $('#status_panel').trigger('update');
           },
 
           fail: function() {
-            row.addClass('warning')
-            row.removeClass('loading')
+            $row.addClass('warning')
+            $row.removeClass('loading')
 
-            var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            row.find('.status-message span').text(form.find('#surveyor').data(message))
+            var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
+            $row.find('.status-message span').text($form.find('#surveyor').data(message))
           }
         }))
       }
 
       // Attempt to verify URL
-      else if (field.attr('type') == 'url') {
+      else if ($field.attr('type') == 'url') {
 
-        row.addClass('loading')
+        $row.addClass('loading')
 
-        field.data('cancel-callbacks', verifyUrl(field.val(), {
+        $field.data('cancel-callbacks', verifyUrl($field.val(), {
           success: function() {
-            row.addClass('ok')
-            row.removeClass('loading')
+            $row.addClass('ok')
+            $row.removeClass('loading')
           },
 
           fail: function() {
-            row.addClass('warning')
-            row.removeClass('loading')
+            $row.addClass('warning')
+            $row.removeClass('loading')
 
-            var message = row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            row.find('.status-message span').text(form.find('#surveyor').data(message))
+            var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
+            $row.find('.status-message span').text($form.find('#surveyor').data(message))
           }
         }))
       }
 
       // Approve regular field
       else {
-        row.addClass('ok')
+        $row.addClass('ok')
       }
     }
 
     // Show errors for missing mandatory fields
-    else if (row.hasClass('mandatory')) {
-      row.addClass('error')
+    else if ($row.hasClass('mandatory')) {
+      $row.addClass('error')
     }
   }
 
-  function bindQuestionRow(field) {
-    var row = field.data('question-row') || field.closest('.question-row')
-    field.data('question-row', row)
-    return row;
+  function bindQuestionRow($field) {
+    var $row = $field.data('question-row') || $field.closest('.question-row')
+    $field.data('question-row', $row)
+    return $row;
   }
 
   function verifyUrl(url, callbacks) {
@@ -272,31 +272,31 @@ $(document).ready(function(){
     return url.match(/^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?/i)
   }
 
-  function questionFields(field) {
-    return field.closest('fieldset.question-row').find("input, select, textarea");
+  function questionFields($field) {
+    return $field.closest('fieldset.question-row').find("input, select, textarea");
   }
 
-  function markAutocompleted(fields, form, value) {
+  function markAutocompleted($fields, $form, value) {
     // Toggle autocompleted field
-    fields.closest('fieldset.question-row').find('input[id$="_autocompleted"]').val(value);
+    $fields.closest('fieldset.question-row').find('input[id$="_autocompleted"]').val(value);
 
     // Update autocompleted class on row
-    fields.each(function() {
-      var row = bindQuestionRow($(this))
-      row.toggleClass('autocompleted', value)
+    $fields.each(function() {
+      var $row = bindQuestionRow($(this))
+      $row.toggleClass('autocompleted', value)
 
       // Set autocompleted message
       if (value) {
-        row.find('.status-message span').text(form.find('#surveyor').data('autocompleted'))
+        $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
       }
     })
   }
 
-  function saveFormElements(form, elements) {
+  function saveFormElements($form, $elements) {
     $.ajax({
       type: "PUT",
-      url: form.attr("action"),
-      data: elements.serialize(), dataType: 'json',
+      url: $form.attr("action"),
+      data: $elements.serialize(), dataType: 'json',
       success: function(response) {
         successfulSave(response);
       },
@@ -310,23 +310,23 @@ $(document).ready(function(){
 
   // Utility function to select nth option
   function selectMe(identifier, value) {
-     var field = $('fieldset[data-reference-identifier="'+ identifier +'"] select')
-     if (field.val()) return
-     return field.children().eq(value).prop('selected', 'selected')
+     var $field = $('fieldset[data-reference-identifier="'+ identifier +'"] select')
+     if ($field.val()) return
+     return $field.children().eq(value).prop('selected', 'selected')
   }
 
   // Utility function to populate input fields by identifier
   function fillMe(identifier, val) {
-    var field = $('fieldset[data-reference-identifier="'+ identifier +'"]').find('input.string, select')
-    if (field.val() && field.val().match(/[^\s]/)) return
-    return field.val(val)
+    var $field = $('fieldset[data-reference-identifier="'+ identifier +'"]').find('input.string, select')
+    if ($field.val() && $field.val().match(/[^\s]/)) return
+    return $field.val(val)
   }
 
   // Utility function to check input fields by identifier
   function checkMe(identifier, value) {
-    var row = $('fieldset[data-reference-identifier="'+ identifier +'"]')
-    if (row.hasClass('touched')) return
-    return row.find('input[type=radio], input[type=checkbox]').eq(value).prop('checked', true)
+    var $row = $('fieldset[data-reference-identifier="'+ identifier +'"]')
+    if ($row.hasClass('touched')) return
+    return $row.find('input[type=radio], input[type=checkbox]').eq(value).prop('checked', true)
   }
 
   // Data Kitten autocompletion
@@ -543,9 +543,9 @@ $(document).ready(function(){
         affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
 
         // Convert sparse array to jQuery object
-        affectedFields = $(affectedFields.filter(function(field) { return field; })).map(function() { return this.toArray() })
+        var $affectedFields = $(affectedFields.filter(function(field) { return field; })).map(function() { return this.toArray() })
 
-        callbacks.success(affectedFields);
+        callbacks.success($affectedFields);
       })
 
     // Function to clear callbacks if this request is superceeded
