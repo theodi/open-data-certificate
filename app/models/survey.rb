@@ -43,10 +43,16 @@ class Survey < ActiveRecord::Base
   
   def map
     {
-      :dataset_title             => 'dataTitle', 
-      :dataset_curator           => 'publisher',
-      :dataset_documentation_url => 'documentationUrl',
-      :dataset_curator_url       => 'publisherUrl'
+      :dataset_title              => 'dataTitle', 
+      :dataset_curator            => 'publisher',
+      :dataset_documentation_url  => 'documentationUrl',
+      :dataset_curator_url        => 'publisherUrl',
+      :data_licence               => 'dataLicence',
+      :content_licence            => 'contentLicence',
+      :other_dataset_licence_name => 'otherDataLicenceName', 
+      :other_dataset_licence_url  => 'otherDataLicenceURL',
+      :other_content_licence_name => 'otherContentLicenceName', 
+      :other_content_licence_url  => 'otherContentLicenceURL'
     }
   end
 
