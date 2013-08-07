@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
+//= require lodash
 //= require_tree .
 
 $(function(){
@@ -350,5 +351,33 @@ $(function(){
     placement:'bottom',
     trigger:'hover'
   });
+
+
+  // search typeahead
+  $('.typeahead-search').typeahead([{
+      name:"datasets",
+      header: '<h3>Datasets</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=dataset&q=%QUERY',
+        filter: _.partialRight(_.pluck,'title')
+      }
+    },
+    {
+      name:"publisher",
+      header: '<h3>Publisher</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=publisher&q=%QUERY',
+        filter: _.partialRight(_.pluck,'curator')
+      }
+    },
+    {
+      name:"jurisdiction",
+      header: '<h3>Jurisdiction</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=country&q=%QUERY',
+        filter: _.partialRight(_.pluck,'title')
+      }
+    }
+  ]);
 
 });
