@@ -1466,7 +1466,13 @@ td.action {
   background-image:url(/assets/status/archived.png);
 }
 
-
+.jurisdiction {
+  .status {
+    font-weight: normal;
+    font-size: 13px;
+    color: @odiBlue;
+  }
+}
 
 // Questionnaire (survey) view //
 
@@ -1474,9 +1480,6 @@ td.action {
 header .jurisdiction{
   a {
     cursor: pointer;
-
-    // match the badge styles
-    display: inline-block;
     margin-left: 11px;
     font-size: 14px;
     font-weight: bold;
@@ -1487,7 +1490,7 @@ header .jurisdiction{
     color: @black;
   }
   .status {
-    font-size: 13px;
+    color: @white;
   }
 }
 
