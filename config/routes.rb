@@ -21,6 +21,7 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
+    get :typeahead, on: :collection
 
     resources :certificates, :only => [:show] do
        member do
