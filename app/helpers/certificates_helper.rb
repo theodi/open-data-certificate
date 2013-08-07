@@ -42,9 +42,15 @@ module CertificatesHelper
       unless response.question.text_as_statement.nil?
         graph << [question, prefixes[:cert].statement, response.question.text_as_statement]
       end
-      if response.answer.input_type == 'url'
+      
+      if response.answer.reference_identifier =~ /false|true/
+        graph << [question, prefixes[:rdfs].range, prefixes[:xsd].boolean ]
+      elsif response.answer.input_type == 'url' || response.question.pick != "none"
         graph << [question, prefixes[:rdfs].range, prefixes[:xsd].anyURI ]
+      elsif response.question.pick == "none"
+        graph << [question, prefixes[:rdfs].range, prefixes[:xsd].literal ]
       end
+      
       graph << [question, prefixes[:rdfs].label, ActionView::Base.full_sanitizer.sanitize(response.question.text)]
       graph << [question, prefixes[:dct].subject, general]
     end
@@ -93,12 +99,6 @@ module CertificatesHelper
           graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::URI.new("http://open-data-certificate.dev/question/#{response.question.reference_identifier}/answer/#{response.answer.reference_identifier}")]
         end
       end
-      
-      # if response.answer.input_type == 'url'
-      #   graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::URI.new(response.statement_text)]
-      # else
-      #   graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], response.statement_text]
-      # end
     end
     
     return graph
