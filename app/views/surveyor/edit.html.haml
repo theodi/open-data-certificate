@@ -19,6 +19,8 @@
           .span9
             .jurisdiction
               .badge.badge-inverse=  @response_set.jurisdiction
+              %span.status
+                = @survey.try(:status)
               = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
             %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
           .span3
@@ -62,11 +64,11 @@
       } else if ($requirements.is('.requirement_exemplar')) {
         text = '#{t('requirement_label.requirement_exemplar')}';
       }
-      
+
       if (text !== '') {
         $label.append(' <small>' + text + '</small>');
       }
-    });    
+    });
   });
 
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?

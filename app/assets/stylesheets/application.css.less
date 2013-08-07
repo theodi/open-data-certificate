@@ -1342,7 +1342,8 @@ td.action {
   }
 
   // jurisdiction badge
-  .jurisdiction{margin:.5em;}
+  .jurisdiction{
+    margin:.5em;}
 
 }
 
@@ -1471,21 +1472,22 @@ td.action {
 
 // jurisdiction select at the top of the certificate
 header .jurisdiction{
-  a{
+  a {
     cursor: pointer;
 
     // match the badge styles
     display: inline-block;
-    padding: 2px 4px;
-    font-size: @baseFontSize * .846;
+    margin-left: 11px;
+    font-size: 14px;
     font-weight: bold;
-    line-height: 14px; // ensure proper line-height if floated
     color: @white;
-    vertical-align: baseline;
     white-space: nowrap;
   }
-  .popover{
-    color:@black;
+  .popover {
+    color: @black;
+  }
+  .status {
+    font-size: 13px;
   }
 }
 
