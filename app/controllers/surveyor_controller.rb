@@ -108,35 +108,31 @@ class SurveyorController < ApplicationController
       saved = load_and_update_response_set_with_retries
 
       if saved && finish
-        
-        messages = []
-        
+
         if user_signed_in?
           if @response_set.all_mandatory_questions_complete? == false
-            messages << t('surveyor.all_mandatory_questions_need_to_be_completed')
+            flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
           end
-          
+
           if @response_set.all_urls_resolve? === false
-            messages << t('surveyor.please_check_all_your_urls_exist')
+            flash[:warning] = t('surveyor.please_check_all_your_urls_exist')
           end
-          
+
           if @response_set.all_mandatory_questions_complete? && @response_set.all_urls_resolve?
             @response_set.complete!
             @response_set.save
-            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey')) 
+
+            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
           end
         else
-          messages << t('surveyor.must_be_logged_in_to_complete')
+          flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
         end
 
-        return redirect_with_message(
-          surveyor.edit_my_survey_path(
-            :anchor => anchor_from(params[:section]),
-            :section => section_id_from(params),
-            :highlight_mandatory => true
-          ),
-          :warning, messages
-        )
+        return redirect_to(surveyor.edit_my_survey_path(
+          :anchor => anchor_from(params[:section]),
+          :section => section_id_from(params),
+          :highlight_mandatory => true
+        ))
       end
     end
 

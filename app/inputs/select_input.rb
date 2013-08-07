@@ -1,4 +1,4 @@
-class StringInput < Formtastic::Inputs::StringInput
+class SelectInput < Formtastic::Inputs::SelectInput
 
   # prevent the <label> from having the 'label' branch
   def label_html_options
@@ -14,13 +14,15 @@ class StringInput < Formtastic::Inputs::StringInput
     input_wrapping do
       [
         "<div class='status-wrapper'>",
+          hidden_input,
           label_html,
-          builder.text_field(method, input_html_options),
-          "<i class='icon-loading icon-spin icon-refresh icon-large'></i>",
-          "<div class='status-icon'><i class='icon icon-variable'></i></div>",
+          options[:group_by] ? grouped_select_html : select_html,
         "</div>",
         "<div class='status-below'>",
-          "<div class='span8 status-message'><span>#{status[:message]}</span><i class='arrow-border'></i><i class='arrow'></i></div>",
+          "<div class='status-icon'><i class='icon icon-variable'></i></div>",
+          "<div class='span8 status-message'>",
+            "<span>#{status[:message]}</span><i class='arrow-border'></i><i class='arrow'></i>",
+          "</div>",
         "</div>"
       ].join("\n").html_safe
     end
