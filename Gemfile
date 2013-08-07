@@ -80,6 +80,8 @@ gem 'thin'
 # To use debugger
 # gem 'debugger'
 
+gem "ransack"
+gem 'lodash-rails'
 gem 'surveyor'
 gem "devise", ">= 2.2.3"
 gem 'dotenv-rails'
