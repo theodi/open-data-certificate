@@ -16,6 +16,10 @@ class Dataset < ActiveRecord::Base
     read_attribute(:documentation_url) || set_default_documentation_url!(response_sets.first.try(:documentation_url_determined_from_responses))
   end
 
+  def curator
+    read_attribute(:curator) || set_default_curator!(response_sets.first.try(:curator_determined_from_responses))
+  end
+
   def set_default_title!(title)
     if title && persisted?
       self.title = title
@@ -24,6 +28,14 @@ class Dataset < ActiveRecord::Base
   end
   
   def set_default_documentation_url!(url)
+    if url && persisted?
+      self.documentation_url = url
+      save
+      url
+    end
+  end
+
+  def set_default_curator!(url)
     if url && persisted?
       self.documentation_url = url
       save
