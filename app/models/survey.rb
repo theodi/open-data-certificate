@@ -33,6 +33,7 @@ class Survey < ActiveRecord::Base
     def newest_survey_for_access_code(access_code)
       where(:access_code => access_code).order("surveys.survey_version DESC").first
     end
+
   end
   
   def meta_map
@@ -98,6 +99,10 @@ class Survey < ActiveRecord::Base
     end
 
     return errors.empty?
+  end
+  
+  def language
+    translations.first.locale
   end
 
   ### override surveyor methods

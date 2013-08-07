@@ -33,11 +33,18 @@ module CertificatesHelper
     graph << [general, prefixes[:skos].inScheme, categories]    
     
     responses = get_responses(certificate)
-    
+
     responses.each do |response|
-      question = RDF::URI.new("https://certificates.theodi.org/surveys/questions/#{response.question.id}")
+      question = prefixes[:cert][response.question.reference_identifier]
       
       graph << [question, RDF.type, prefixes[:cert].Question]
+      graph << [question, RDF.type, RDF.Property]
+      unless response.question.text_as_statement.nil?
+        graph << [question, prefixes[:cert].statement, response.question.text_as_statement]
+      end
+      if response.answer.input_type == 'url'
+        graph << [question, prefixes[:rdfs].range, prefixes[:xsd].anyURI ]
+      end
       graph << [question, prefixes[:rdfs].label, ActionView::Base.full_sanitizer.sanitize(response.question.text)]
       graph << [question, prefixes[:dct].subject, general]
     end
@@ -46,13 +53,13 @@ module CertificatesHelper
     od_certificate = RDF::URI.new(dataset_certificate_url(certificate.dataset, certificate))
     
     graph << [dataset, RDF.type, prefixes[:dcat].Dataset]
-    graph << [dataset, prefixes[:dct].title, certificate.dataset.title]
+    graph << [dataset, prefixes[:dct].title, RDF::Literal.new(certificate.dataset.title, :language => certificate.survey.language.to_sym)]
     graph << [dataset, prefixes[:foaf].homepage, RDF::URI.new(certificate.dataset.documentation_url)]
     
     publisher = RDF::Node.new
     graph << [dataset, prefixes[:dct].publisher, publisher]
     graph << [publisher, RDF.type, prefixes[:foaf].Organization]
-    graph << [publisher, prefixes[:foaf].name, certificate.response_set.curator_determined_from_responses]
+    graph << [publisher, prefixes[:foaf].name, RDF::Literal.new(certificate.response_set.curator_determined_from_responses, :language => certificate.survey.language.to_sym)]
     
     rights = RDF::Node.new
     graph << [dataset, prefixes[:dct].rights, rights]
@@ -64,26 +71,34 @@ module CertificatesHelper
     
     graph << [od_certificate, RDF.type, prefixes[:cert].Certificate]
     graph << [od_certificate, RDF.type, prefixes[:cert]["#{certificate.attained_level.titleize}Certificate"]]
-    graph << [od_certificate, prefixes[:rdfs].label, "Open Data Certificate for #{certificate.dataset.title}"]
+    graph << [od_certificate, prefixes[:rdfs].label, RDF::Literal.new("#{t('certificate.open_data_certificate_for')} #{certificate.dataset.title}", :language => certificate.survey.language.to_sym)]
     graph << [od_certificate, prefixes[:dct].published, certificate.created_at.to_date]
-    graph << [od_certificate, prefixes[:cert].jurisdiction, prefixes[:jurisdiction][certificate.response_set.jurisdiction.downcase]]
+    graph << [od_certificate, prefixes[:cert].jurisdiction, RDF::URI.new("http://ontologi.es/place/" + certificate.response_set.jurisdiction)]
     graph << [od_certificate, prefixes[:cert].badge, RDF::URI.new(badge_dataset_certificate_url(certificate.dataset, certificate, 'png'))]
     graph << [od_certificate, prefixes[:cert].embeddable, RDF::URI.new(badge_dataset_certificate_url(certificate.dataset, certificate, 'js'))]
     
     answers = []
     
     responses.each do |response|
-      answer = RDF::Node.new
-      graph << [od_certificate, prefixes[:cert].answer, answer]
-      question = RDF::URI.new("https://certificates.theodi.org/surveys/questions/#{response.question.id}")
-      graph << [answer, RDF.type, prefixes[:cert].Answer]
-      graph << [answer, prefixes[:cert].question, question]
-      graph << [answer, prefixes[:rdfs].label, ActionView::Base.full_sanitizer.sanitize(response.question.text)]
-      if response.answer.input_type == 'url'
-        graph << [answer, prefixes[:cert].response, RDF::URI.new(response.statement_text)]
+      if response.question.pick == 'none'
+        if response.answer.input_type == 'url'
+          graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::URI.new(response.statement_text)]
+        else
+          graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::Literal.new(response.statement_text, :language => certificate.survey.language.to_sym)]
+        end
       else
-        graph << [answer, prefixes[:cert].response, response.question.text_as_statement + " " + response.statement_text]
+        if response.answer.reference_identifier =~ /false|true/
+          graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::Literal.new(!!(response.answer.reference_identifier == "true"))]
+        else
+          graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::URI.new("http://open-data-certificate.dev/question/#{response.question.reference_identifier}/answer/#{response.answer.reference_identifier}")]
+        end
       end
+      
+      # if response.answer.input_type == 'url'
+      #   graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], RDF::URI.new(response.statement_text)]
+      # else
+      #   graph << [od_certificate, prefixes[:cert][response.question.reference_identifier], response.statement_text]
+      # end
     end
     
     return graph

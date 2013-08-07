@@ -1,8 +1,15 @@
 json.certificate do |certificate|
-	certificate.title @certificate.response_set.title
+	certificate.title "Open Data Certificate for #{@certificate.response_set.title}"
+	certificate.dataset do |dataset|
+	  dataset.title @certificate.response_set.title
+	  dataset.publisher @certificate.response_set.curator_determined_from_responses
+	  dataset.dataLicence @certificate.response_set.data_licence_determined_from_responses[:url]
+	  dataset.contentLicence @certificate.response_set.content_licence_determined_from_responses[:url]
+	  dataset.uri dataset_url(@certificate.dataset)
+  end
 	certificate.jurisdiction do |jurisdiction|
 		jurisdiction.label @certificate.response_set.jurisdiction
-		jurisdiction.uri prefixes[:jurisdiction][@certificate.response_set.jurisdiction.downcase].to_s
+		jurisdiction.uri "http://ontologi.es/place/" + @certificate.response_set.jurisdiction
 	end
 	certificate.level do |level|
 		level.label @certificate.attained_level.titleize
@@ -11,14 +18,10 @@ json.certificate do |certificate|
 	certificate.created_at @certificate.created_at
 
   responses = get_responses(@certificate)
-
-  certificate.responses responses do |json, response|
-    json.question do |question|
-      question.text response.question.text
-      question.uri question = RDF::URI.new("https://certificates.theodi.org/surveys/questions/#{response.question.id}").to_s
-    end
-    json.answer do |answer|
-      answer.text response.question.text_as_statement + " " + response.statement_text
+  
+  certificate.answers do |answer|
+    responses.each do |response|
+      answer.set! response.question.reference_identifier, response.statement_text
     end
   end
 end
