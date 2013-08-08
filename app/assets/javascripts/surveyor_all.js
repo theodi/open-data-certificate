@@ -300,6 +300,11 @@ $(document).ready(function(){
     });
   }
 
+  // Checks if a string is empty (blank or whitespace only)
+  function empty(text) {
+    return !text || text.match(/^[\s]*$/)
+  }
+
   // Utility function to select nth option
   function selectMe(question, answer) {
     var $field = $('fieldset[data-reference-identifier="'+ question +'"] select')
@@ -310,7 +315,7 @@ $(document).ready(function(){
   // Utility function to populate input fields by identifier
   function fillMe(identifier, val) {
     var $field = $('fieldset[data-reference-identifier="'+ identifier +'"]').find('input.string, select')
-    if ($field.val() && $field.val().match(/[^\s]/)) return
+    if (!empty($field.val()) || empty(val)) return
     return $field.val(val)
   }
 
@@ -348,6 +353,8 @@ $(document).ready(function(){
           // Contact email address
           affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
         }
+
+        affectedFields.push(fillMe("publisherUrl", ' '))
 
         // Data type
         if (json.update_frequency.length == 0 && json.distributions.length == 1) {
