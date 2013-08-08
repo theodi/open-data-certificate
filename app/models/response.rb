@@ -13,6 +13,10 @@ class Response < ActiveRecord::Base
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
   end
+  
+  def reference_identifier
+    @reference_identifier ||= answer.reference_identifier
+  end
 
   def requirement_level
     @requirement_level ||= answer.requirement_level

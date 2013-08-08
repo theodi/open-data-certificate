@@ -346,7 +346,7 @@ survey 'TV',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc0 'Creative Commons CCZero',
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_na 'Not applicable',
       :text_as_statement => ''

@@ -33,6 +33,7 @@ class Survey < ActiveRecord::Base
     def newest_survey_for_access_code(access_code)
       where(:access_code => access_code).order("surveys.survey_version DESC").first
     end
+
   end
   
   def meta_map
@@ -43,10 +44,16 @@ class Survey < ActiveRecord::Base
   
   def map
     {
-      :dataset_title             => 'dataTitle', 
-      :dataset_curator           => 'publisher',
-      :dataset_documentation_url => 'documentationUrl',
-      :dataset_curator_url       => 'publisherUrl'
+      :dataset_title              => 'dataTitle', 
+      :dataset_curator            => 'publisher',
+      :dataset_documentation_url  => 'documentationUrl',
+      :dataset_curator_url        => 'publisherUrl',
+      :data_licence               => 'dataLicence',
+      :content_licence            => 'contentLicence',
+      :other_dataset_licence_name => 'otherDataLicenceName', 
+      :other_dataset_licence_url  => 'otherDataLicenceURL',
+      :other_content_licence_name => 'otherContentLicenceName', 
+      :other_content_licence_url  => 'otherContentLicenceURL'
     }
   end
 
@@ -92,6 +99,10 @@ class Survey < ActiveRecord::Base
     end
 
     return errors.empty?
+  end
+  
+  def language
+    translations.first.locale
   end
 
   ### override surveyor methods

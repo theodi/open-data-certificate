@@ -257,6 +257,81 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     assert_equal expected_value, response_set.documentation_url_determined_from_responses
   end
+  
+  test "#data_licence_determined_from_responses returns 'Not applicable' when the data licence is not applicable" do
+    question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "na")
+    expected_value = {
+      :title => "Not Applicable",
+      :url => nil
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  
+    assert_equal expected_value, response_set.data_licence_determined_from_responses
+  end
+  
+  test "#content_licence_determined_from_responses returns 'Not applicable' when the content licence is not applicable" do
+    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "na")
+    expected_value = {
+      :title => "Not Applicable",
+      :url => nil
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  
+    assert_equal expected_value, response_set.content_licence_determined_from_responses
+  end
+  
+  test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
+    question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
+    expected_value = {
+      :title => "UK Open Government Licence (OGL)",
+      :url => "http://reference.data.gov.uk/id/open-government-licence"
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  
+    assert_equal expected_value, response_set.data_licence_determined_from_responses
+  end
+  
+  test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
+    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
+    expected_value = {
+      :title => "UK Open Government Licence (OGL)",
+      :url => "http://reference.data.gov.uk/id/open-government-licence"
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  
+    assert_equal expected_value, response_set.content_licence_determined_from_responses
+  end
+  
+  test "#data_licence_determined_from_responses returns the correct response when the data licence is a non-standard licence" do
+    other_data_name_question = FactoryGirl.create(:question, reference_identifier: 'otherDataLicenceName')
+    other_data_name_answer = FactoryGirl.create(:answer, question: other_data_name_question)
+    other_data_name = 'A made up licence'
+    
+    other_data_url_question = FactoryGirl.create(:question, reference_identifier: 'otherDataLicenceURL')
+    other_data_url_answer = FactoryGirl.create(:answer, question: other_data_url_question)
+    other_data_url = 'http://www.example.com/id/made-up-licence'
+    
+    question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "other")
+    expected_value = {
+      :title => other_data_name,
+      :url => other_data_url
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+    other_data_name_response = FactoryGirl.create(:response, response_set: response_set, string_value: other_data_name, question: other_data_name_question, answer: other_data_name_answer)
+    other_data_url_response = FactoryGirl.create(:response, response_set: response_set, string_value: other_data_url, question: other_data_url_question, answer: other_data_url_answer)
+  
+    assert_equal expected_value, response_set.data_licence_determined_from_responses
+  end
 
   test "#incomplete? returns true for an incomplete response_set" do
     assert_equal true, FactoryGirl.build(:response_set).incomplete?
