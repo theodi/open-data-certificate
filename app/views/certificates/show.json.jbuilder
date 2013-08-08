@@ -5,8 +5,6 @@ json.certificate do |certificate|
 	certificate.dataset do |dataset|
 	  dataset.title @certificate.response_set.title
 	  dataset.publisher @certificate.response_set.curator_determined_from_responses
-	  dataset.dataLicence @certificate.response_set.data_licence_determined_from_responses[:url]
-	  dataset.contentLicence @certificate.response_set.content_licence_determined_from_responses[:url]
 	  dataset.uri dataset_url(@certificate.dataset)
 	  responses.each do |k, response|
       if response.count == 1
