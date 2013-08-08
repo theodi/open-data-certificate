@@ -36,28 +36,30 @@
         %label.span8.question_label!= question_text
 
       .span8
+        - i = response_idx
+
         - case renderer
-        - when  :image, :label, :default_label, :inline_label, :repeater_label
+        - when :image, :label, :default_label, :inline_label, :repeater_label
         - when :dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown
-          - i = response_idx
           - status_message = 'surveyor.autocompleted_data' if r.autocompleted
           = f.semantic_fields_for i, r do |ff|
             = ff.input :question_id, :as => :quiet
             = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
-            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message ? t(status_message) : nil }
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message ? t(status_message) : nil }
         - else # :default, :inline, :inline_default
 
           - if q.pick == "one"
-            - i = response_idx  # increment the response index since the answer partial skips for q.pick == one
             = f.semantic_fields_for i, r do |ff|
               = ff.input :question_id, :as => :quiet
               = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
               = ff.input :api_id, :as => :quiet
+
+          - if q.pick == "one" || q.pick == "any"
+            = f.semantic_fields_for i, r do |ff|
               = ff.input :autocompleted, :as => :quiet
 
-          - if q.pick == "one" or q.pick == "any"
             %div.status-above
               %div.status-icon
                 %i.icon.icon-variable
