@@ -4,6 +4,7 @@ json.version 0.1
 json.license "http://opendatacommons.org/licenses/odbl/"
 json.certificate do |certificate|
 	certificate.title "Open Data Certificate for #{@certificate.response_set.title}"
+	certificate.uri dataset_certificate_url(@certificate.dataset, @certificate)
 	certificate.dataset do |dataset|
 	  dataset.title @certificate.response_set.title
 	  dataset.publisher @certificate.response_set.curator_determined_from_responses
