@@ -45,21 +45,13 @@ $(document).ready(function(){
     changeMonth: true,
     changeYear: true
   });
-  $("li.date input").datepicker({
+
+  $("li.date input, input[type='text'].date, input[type='text'].datepicker").datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
-  $("input[type='text'].date").datepicker({
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-  });
-  $("input[type='text'].datepicker").datepicker({
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-  });
+
   $("input[type='text'].time").timepicker({});
 
   $('.surveyor_check_boxes input[type=text]').change(function(){
