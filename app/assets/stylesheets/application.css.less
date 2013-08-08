@@ -1798,7 +1798,7 @@ header .jurisdiction{
       }
     }
 
-    .select, &.choice-boxes {
+    &.compact-validation {
       .status-icon {
         .border-radius(0);
         position: relative;
@@ -1835,6 +1835,14 @@ header .jurisdiction{
           border-width: 8px 8px 8px 0;
           border-right-color: white;
         }
+      }
+
+      &.error .status-message i.arrow {
+        border-right-color: @odiCrimson;
+      }
+
+      &.warning .status-message i.arrow {
+        border-right-color: @odiOrange;
       }
     }
 
