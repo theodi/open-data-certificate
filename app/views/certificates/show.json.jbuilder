@@ -21,7 +21,7 @@ json.certificate do |certificate|
             dataset.set! response.question.reference_identifier, response.statement_text
           end
         elsif response.question.pick == 'one'
-          if response.answer.reference_identifier =~ /false|true/
+          if response.answer.reference_identifier =~ /false|true/ && response.question.answers.count == 2
             dataset.set! response.question.reference_identifier, !!(response.answer.reference_identifier == "true")
           elsif response.question.reference_identifier !~ /dataLicence|contentLicence/
             dataset.set! response.question.reference_identifier, response.answer.reference_identifier
