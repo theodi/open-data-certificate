@@ -19,9 +19,27 @@ json.certificate do |certificate|
 
   responses = get_responses(@certificate)
   
-  certificate.answers do |answer|
-    responses.each do |response|
-      answer.set! response.question.reference_identifier, response.statement_text
-    end
+  responses.each do |k, response|
+    if response.count == 1
+      if response[0].question.pick == 'none'
+        if response[0].answer.input_type == 'url'
+          certificate.set! response[0].question.reference_identifier, response[0].statement_text
+        else
+          certificate.set! response[0].question.reference_identifier, response[0].statement_text
+        end
+      elsif response[0].question.pick == 'one'
+        if response[0].answer.reference_identifier =~ /false|true/
+          certificate.set! response[0].question.reference_identifier, !!(response[0].answer.reference_identifier == "true")
+        else
+          certificate.set! response[0].question.reference_identifier, "http://schema.theodi.org/certificate/question/#{response[0].question.reference_identifier}/answer/#{response[0].answer.reference_identifier}"
+        end
+      end  
+    else
+      resps = []
+      response.each do |r|
+        resps << "http://schema.theodi.org/certificate/question/#{r.question.reference_identifier}/answer/#{r.answer.reference_identifier}"
+      end
+      certificate.set! response[0].question.reference_identifier, resps
+    end      
   end
 end

@@ -124,7 +124,7 @@ module CertificatesHelper
         end
       end
     end
-    responses
+    responses.group_by { |r| r.question_id }
   end
   
 end
