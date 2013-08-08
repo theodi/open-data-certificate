@@ -1,6 +1,8 @@
 responses = get_responses(@certificate)
 
 json.certificate do |certificate|
+  certificate.version 0.1
+  certificate.license "http://opendatacommons.org/licenses/odbl/"
 	certificate.title "Open Data Certificate for #{@certificate.response_set.title}"
 	certificate.dataset do |dataset|
 	  dataset.title @certificate.response_set.title
