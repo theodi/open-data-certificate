@@ -190,6 +190,8 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-cors (0.2.8)
+      rack
     rack-linkeddata (1.0.0)
       linkeddata (>= 1.0)
       rack (>= 1.4.4)
@@ -347,6 +349,7 @@ DEPENDENCIES
   mysql2
   odlifier!
   pry
+  rack-cors
   rack-linkeddata
   rails (= 3.2.13)
   rails-footnotes (>= 3.7.9)
