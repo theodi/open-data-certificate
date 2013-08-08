@@ -20,7 +20,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (3.0.19)
+    aasm (3.0.20)
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
       mail (~> 2.5.3)
@@ -133,6 +133,9 @@ GEM
       json (>= 1.7.5)
       rdf (>= 1.0)
     json_pure (1.8.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     less (2.3.2)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -339,6 +342,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jquery-rails
+  kaminari
   less-rails
   less-rails-bootstrap
   linkeddata

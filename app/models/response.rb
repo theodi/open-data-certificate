@@ -2,6 +2,8 @@ class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
 
+  attr_accessible :autocompleted
+
   # override with :touch
   belongs_to :response_set, touch: true
 
