@@ -8,6 +8,8 @@ json.certificate do |certificate|
 	  dataset.title @certificate.response_set.title
 	  dataset.publisher @certificate.response_set.curator_determined_from_responses
 	  dataset.uri dataset_url(@certificate.dataset)
+    dataset.dataLicense @certificate.response_set.data_licence_determined_from_responses[:url]
+    dataset.contentLicense @certificate.response_set.content_licence_determined_from_responses[:url]
 	  responses.each do |k, response|
       if response.count == 1
         response = response[0]
@@ -20,7 +22,7 @@ json.certificate do |certificate|
         elsif response.question.pick == 'one'
           if response.answer.reference_identifier =~ /false|true/
             dataset.set! response.question.reference_identifier, !!(response.answer.reference_identifier == "true")
-          else
+          elsif response.question.reference_identifier !~ /dataLicence|contentLicence/
             dataset.set! response.question.reference_identifier, "http://schema.theodi.org/certificate/question/#{response.question.reference_identifier}/answer/#{response.answer.reference_identifier}"
           end
         end  
