@@ -345,6 +345,8 @@ $(document).ready(function(){
           affectedFields.push(fillMe("publisher", json.publishers[0].name))
           // Publisher URL
           affectedFields.push(fillMe("publisherUrl", json.publishers[0].homepage))
+          // Contact email address
+          affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
         }
 
         // Data type
@@ -530,9 +532,6 @@ $(document).ready(function(){
         if (url.indexOf("data.gov.uk") != -1) {
           affectedFields.push(checkMe("codelists", "false"))
         }
-
-        // Contact email address
-        affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
 
         // Convert sparse array to jQuery object
         var $affectedFields = $(affectedFields.filter(function(field) { return field; })).map(function() { return this.toArray() })
