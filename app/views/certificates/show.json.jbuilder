@@ -10,17 +10,18 @@ json.certificate do |certificate|
 	  dataset.uri dataset_url(@certificate.dataset)
 	  responses.each do |k, response|
       if response.count == 1
-        if response[0].question.pick == 'none'
-          if response[0].answer.input_type == 'url'
-            dataset.set! response[0].question.reference_identifier, response[0].statement_text
+        response = response[0]
+        if response.question.pick == 'none'
+          if response.answer.input_type == 'url'
+            dataset.set! response.question.reference_identifier, response.statement_text
           else
-            dataset.set! response[0].question.reference_identifier, response[0].statement_text
+            dataset.set! response.question.reference_identifier, response.statement_text
           end
-        elsif response[0].question.pick == 'one'
-          if response[0].answer.reference_identifier =~ /false|true/
-            dataset.set! response[0].question.reference_identifier, !!(response[0].answer.reference_identifier == "true")
+        elsif response.question.pick == 'one'
+          if response.answer.reference_identifier =~ /false|true/
+            dataset.set! response.question.reference_identifier, !!(response.answer.reference_identifier == "true")
           else
-            dataset.set! response[0].question.reference_identifier, "http://schema.theodi.org/certificate/question/#{response[0].question.reference_identifier}/answer/#{response[0].answer.reference_identifier}"
+            dataset.set! response.question.reference_identifier, "http://schema.theodi.org/certificate/question/#{response.question.reference_identifier}/answer/#{response.answer.reference_identifier}"
           end
         end  
       else
