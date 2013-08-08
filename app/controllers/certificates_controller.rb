@@ -16,12 +16,6 @@ class CertificatesController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.ttl { 
-        dump_graph(@certificate, :turtle, request.format)
-      }
-      format.rdf { 
-        dump_graph(@certificate, :rdfxml, request.format)
-      }
     end
   end
 
