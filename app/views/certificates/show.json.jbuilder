@@ -24,25 +24,19 @@ json.certificate do |certificate|
           if response.answer.reference_identifier =~ /false|true/
             dataset.set! response.question.reference_identifier, !!(response.answer.reference_identifier == "true")
           elsif response.question.reference_identifier !~ /dataLicence|contentLicence/
-            dataset.set! response.question.reference_identifier, "http://schema.theodi.org/certificate/question/#{response.question.reference_identifier}/answer/#{response.answer.reference_identifier}"
+            dataset.set! response.question.reference_identifier, response.answer.reference_identifier
           end
         end  
       else
         resps = []
         response.each do |r|
-          resps << "http://schema.theodi.org/certificate/question/#{r.question.reference_identifier}/answer/#{r.answer.reference_identifier}"
+          resps << r.answer.reference_identifier
         end
         dataset.set! response[0].question.reference_identifier, resps
       end      
     end
   end
-	certificate.jurisdiction do |jurisdiction|
-		jurisdiction.label @certificate.response_set.jurisdiction
-		jurisdiction.uri "http://ontologi.es/place/" + @certificate.response_set.jurisdiction
-	end
-	certificate.level do |level|
-		level.label @certificate.attained_level.titleize
-		level.uri prefixes[:cert]["#{@certificate.attained_level.titleize}Certificate"].to_s
-	end
+	certificate.jurisdiction @certificate.response_set.jurisdiction
+	certificate.level @certificate.attained_level.titleize
 	certificate.created_at @certificate.created_at
 end
