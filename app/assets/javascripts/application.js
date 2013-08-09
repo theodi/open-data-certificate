@@ -358,26 +358,26 @@ $(function(){
       name:"datasets",
       header: '<h3>Datasets</h3>',
       remote: {
-        url:'/datasets/typeahead?mode=dataset&q=%QUERY',
-        filter: _.partialRight(_.pluck,'title')
+        url:'/datasets/typeahead?mode=dataset&q=%QUERY'
       }
     },
     {
       name:"publisher",
       header: '<h3>Publisher</h3>',
       remote: {
-        url:'/datasets/typeahead?mode=publisher&q=%QUERY',
-        filter: _.partialRight(_.pluck,'curator')
+        url:'/datasets/typeahead?mode=publisher&q=%QUERY'
       }
     },
     {
       name:"jurisdiction",
       header: '<h3>Jurisdiction</h3>',
       remote: {
-        url:'/datasets/typeahead?mode=country&q=%QUERY',
-        filter: _.partialRight(_.pluck,'title')
+        url:'/datasets/typeahead?mode=country&q=%QUERY'
       }
     }
-  ]);
+  ])
+  .on('typeahead:selected typeahead:autocompleted', function(e, datum, dataset){
+    if(datum.path){ document.location = datum.path; }
+  });
 
 });
