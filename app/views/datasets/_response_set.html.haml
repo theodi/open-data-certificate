@@ -1,5 +1,5 @@
 - is_primary = response_set == primary
-.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondry'}"}
+.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
   .row-fluid
     .span3
       %h3= t('dashboard.level_attained')
@@ -27,7 +27,7 @@
           = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
             Publish certificate
 
-        = link_to "View certificate", response_set.certificate, class: 'btn btn-large btn-block'
+        = link_to "View certificate", [response_set.dataset, response_set.certificate], class: 'btn btn-large btn-block'
         - unless response_set.archived? || response_set.draft?
           = link_to(t("dashboard.embed"), "#embed-#{response_set.certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
 
@@ -48,7 +48,7 @@
     .span3
       %p
       %small
-        = link_to t('dashboard.improvements_link'), requirements_path(response_set)
+        = link_to t('dashboard.improvements_link'), improvements_dataset_certificate_path(response_set.dataset, response_set.certificate)
     .span3
       %p
       %small

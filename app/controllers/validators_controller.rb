@@ -1,7 +1,7 @@
 class ValidatorsController < ApplicationController
   respond_to :js
-   
-  def resolve  
+
+  def resolve
     if params[:url] =~ /^#{URI::regexp}$/
       code = HTTParty.get(params[:url]).code rescue nil
       Rails.cache.write(params[:url], code)
@@ -10,12 +10,12 @@ class ValidatorsController < ApplicationController
       render :nothing => true
     end
   end
-   
+
   def autofill
     dataset = DataKitten::Dataset.new(access_url: params[:url]) rescue nil
     if dataset != nil && dataset.supported?
       distributions = []
-      
+
       dataset.distributions.try(:each) { |distribution|
         distributions << {
           :title       => distribution.title,
@@ -26,8 +26,9 @@ class ValidatorsController < ApplicationController
           :structured  => distribution.format.structured?
         }
       }
-      
+
       render :json => {
+        :data_exists       => true,
         :title             => dataset.data_title,
         :description       => dataset.description,
         :publishers        => dataset.publishers,
@@ -41,7 +42,9 @@ class ValidatorsController < ApplicationController
         :temporal_coverage => dataset.temporal
       }
     else
-      render :nothing => true
+      render :json => {
+        :data_exists => false
+      }
     end
   end
 end

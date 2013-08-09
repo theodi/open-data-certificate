@@ -1,0 +1,25 @@
+<% level = @certificate.attained_level || "none" %>
+<% image_level = level == "basic" ? "raw" : level == "expert" ? "exemplar" : level %>
+<%
+str = """
+<div class=\"open-data-certificate\">
+<style>@import url(https://#{request.host_with_port}/assets/badge.css);</style>
+#{link_to [@certificate.response_set.dataset, @certificate] do image_tag("https://#{request.host_with_port}#{@certificate.badge_url}") end}
+<ul class=\"open-data-certificate-details\">
+<li>
+<span>#{t("levels.#{level}.title")} Open Data Certificate (beta)</span>
+</li>
+<li>
+<span>self-certified</span>
+</li>
+<li>
+<span>#{@certificate.response_set.title}</span>
+</li>
+<li>
+<span>awarded #{@certificate.created_at.strftime("%-d %b %Y")}</span>
+</li>
+</ul>
+</div>
+""".squish
+%>
+<%= "document.write('#{str}')".html_safe %>

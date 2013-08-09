@@ -1,8 +1,9 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
+//= require lodash
+//= require_tree .
 
 $(function(){
   //////
@@ -116,12 +117,12 @@ $(function(){
 
   // a map from reference_id to the relevant fieldset (DOM, not $wrapped)
   var reference_id_els = {};
-  var surveyElements = $('[data-reference-identifier]');
-  surveyElements.each(function(){
+  var $surveyElements = $('[data-reference-identifier]');
+  $surveyElements.each(function(){
     reference_id_els[$(this).data('reference-identifier')] = this;
   });
 
-  surveyElements.on('mouseover', function(){
+  $surveyElements.on('mouseover', function(){
     $(this).addClass('active').trigger('_focus');
   }).on('mouseout', function(){
     $(this).removeClass('active').trigger('_blur');
@@ -149,7 +150,7 @@ $(function(){
     metas.push(this);
     $el.data('metas', metas);
   });
-  surveyElements.on('_focus', function(){
+  $surveyElements.on('_focus', function(){
     $($(this).data('metas')).show();
   }).on('_blur', function(){
     $($(this).data('metas')).hide();
@@ -349,6 +350,34 @@ $(function(){
   $('.popdown').popover({
     placement:'bottom',
     trigger:'hover'
+  });
+
+
+  // search typeahead
+  $('.typeahead-search').typeahead([{
+      name:"datasets",
+      header: '<h3>Datasets</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=dataset&q=%QUERY'
+      }
+    },
+    {
+      name:"publisher",
+      header: '<h3>Publisher</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=publisher&q=%QUERY'
+      }
+    },
+    {
+      name:"jurisdiction",
+      header: '<h3>Jurisdiction</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=country&q=%QUERY'
+      }
+    }
+  ])
+  .on('typeahead:selected typeahead:autocompleted', function(e, datum, dataset){
+    if(datum.path){ document.location = datum.path; }
   });
 
 });

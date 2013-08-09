@@ -1,8 +1,6 @@
 survey 'SE',
   :full_title => 'Sweden',
   :default_mandatory => 'false',
-  :dataset_title => 'dataTitle',
-  :dataset_curator => 'publisher',
   :status => 'alpha',
   :description => '<p><strong>This has been generated based on a default for EU countries and needs to be localised for Sweden. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
@@ -346,11 +344,11 @@ survey 'SE',
       :display_type => 'dropdown'
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
-    a_odc_by_sa 'Open Data Commons Open Database License (ODbL)',
+    a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_cc0 'Creative Commons CCZero',
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_na 'Not applicable',
       :text_as_statement => ''
@@ -460,7 +458,7 @@ survey 'SE',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc0 'Creative Commons CCZero',
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_na 'Not applicable',
       :text_as_statement => ''

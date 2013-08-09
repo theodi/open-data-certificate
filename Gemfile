@@ -34,6 +34,7 @@ group :test do
   gem 'shoulda'
   gem 'mocha', require: false
   gem 'test-unit'
+  gem 'pry'
 end
 
 group :development do
@@ -63,6 +64,9 @@ gem 'aasm'
 # authorization
 gem 'cancan'
 
+# pagination
+gem 'kaminari'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -79,6 +83,8 @@ gem 'thin'
 # To use debugger
 # gem 'debugger'
 
+gem "ransack"
+gem 'lodash-rails'
 gem 'surveyor'
 gem "devise", ">= 2.2.3"
 gem 'dotenv-rails'
@@ -86,3 +92,8 @@ gem 'httparty'
 gem 'google-analytics-rails'
 gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
 gem 'delayed_job_active_record'
+gem 'linkeddata'
+gem 'rack-linkeddata'
+gem 'jbuilder'
+gem 'odlifier', :github => 'theodi/odlifier'
+gem 'rack-cors'

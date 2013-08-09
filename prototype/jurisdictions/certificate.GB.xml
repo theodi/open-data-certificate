@@ -149,10 +149,10 @@
 				<select required="required">
 					<option/>
 					<option value="odc-by">Open Data Commons Attribution License</option>
-					<option value="odc-by-sa">Open Data Commons Open Database License (ODbL)</option>
-					<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
+					<option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
+					<option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
+					<option value="cc-zero">Creative Commons CCZero</option>
+					<option value="uk-ogl">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
@@ -220,8 +220,8 @@
 					<option/>
 					<option value="cc-by">Creative Commons Attribution</option>
 					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-					<option value="cc0">Creative Commons CCZero</option>
-					<option value="ogl">UK Open Government Licence</option>
+					<option value="cc-zero">Creative Commons CCZero</option>
+					<option value="uk-ogl">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>

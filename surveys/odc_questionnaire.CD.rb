@@ -1,8 +1,6 @@
 survey 'CD',
   :full_title => 'Congo, The Democratic Republic of The',
   :default_mandatory => 'false',
-  :dataset_title => 'dataTitle',
-  :dataset_curator => 'publisher',
   :status => 'alpha',
   :description => '<p><strong>This has been generated based on a default and needs to be localised for The Democratic Republic of The Congo. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
@@ -348,7 +346,7 @@ survey 'CD',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc0 'Creative Commons CCZero',
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_na 'Not applicable',
       :text_as_statement => ''

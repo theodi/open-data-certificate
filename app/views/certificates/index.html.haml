@@ -5,5 +5,7 @@
 - if @certificates.any?
   %dl.unstyled
     = render partial: 'certificates/certificate', collection: @certificates
+  = paginate @certificates
+
 - else
   %p= t('certificates.no_certificates_found')

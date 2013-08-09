@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731211151) do
+ActiveRecord::Schema.define(:version => 20130806160042) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -59,13 +59,11 @@ ActiveRecord::Schema.define(:version => 20130731211151) do
 
   create_table "datasets", :force => true do |t|
     t.string   "title"
-    t.string   "documentation_url"
-    t.string   "curating_org"
-    t.string   "curator_url"
-    t.string   "data_kind"
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "documentation_url"
+    t.string   "curator"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -265,6 +263,7 @@ ActiveRecord::Schema.define(:version => 20130731211151) do
     t.string   "dataset_title"
     t.string   "dataset_curator"
     t.string   "full_title"
+    t.string   "meta_map"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true

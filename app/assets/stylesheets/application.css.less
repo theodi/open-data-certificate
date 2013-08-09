@@ -325,6 +325,56 @@
 
 
 /************************************************
+    Typeahead --> Bootstrap
+************************************************/
+
+.tt-dropdown-menu {
+  min-width: 160px;
+  margin-top: 2px;
+  padding: 5px 0;
+  background-color: @dropdownBackground;
+  border: 1px solid #ccc;
+  border: 1px solid @dropdownBorder;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  .border-radius(6px);
+  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+.tt-suggestion {
+  display: block;
+  padding: 3px 20px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+  color: @dropdownLinkColorHover;
+  #gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 5%));
+}
+
+.tt-suggestion.tt-is-under-cursor a {
+  color: @dropdownBackground;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.tt-dropdown-menu h3{
+  margin: 0;
+  margin-top:.5em;
+  color: #ccc;
+  font-weight: normal;
+  font-size: 0.8em;
+  padding-left: 1em;
+  padding: 0px 10px;
+  line-height: normal;
+}
+
+
+/************************************************
     ODI Styling
 ************************************************/
 // source https://github.com/theodi/less-rails-bootstrap/blob/master/vendor/frameworks/twitter/bootstrap/odi.less
@@ -653,6 +703,21 @@ hr.heavy {
 
       a:hover, a.active {
         background-color: @odiRed;
+      }
+
+      &.search {
+        height: auto;
+        padding: 15px 20px;
+        border: 0;
+
+        form {
+          margin: 0;
+
+          input, label {
+            display: inline;
+            margin: 0;
+          }
+        }
       }
     }
   }
@@ -1279,9 +1344,24 @@ td.action {
     background-color: rgb(222, 222, 222);
   }
 
-.response-set-secondry{
 
+// don't display the headers, links or actions in secondary ones
+.response-set-secondary{
   h3, .edit-jurisdiction a{display:none}
+}
+
+.response-set-inline{
+  h3{margin:0;}
+  h4{display:inline-block;}
+  .last-updated{
+    display:block;
+    padding-bottom: 0.5em;
+  }
+}
+
+.response-set-secondary, .response-set-inline{
+
+
 
   .level-badge{
     width:55px;
@@ -1476,7 +1556,12 @@ header .jurisdiction{
     font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
-    box-sizing: border-box;
+    .box-sizing(border-box);
+  }
+
+  // custom
+  input.string{
+    width:100%;
   }
 
   input.string.fail {
@@ -1485,6 +1570,17 @@ header .jurisdiction{
     -webkit-box-shadow: 0 0 6px #f8b9b7;
     -moz-box-shadow: 0 0 6px #f8b9b7;
     box-shadow: 0 0 6px #f8b9b7;
+  }
+
+  p.url_error {
+    background: #ff6700;
+    color: white;
+    padding: 20px;
+    margin-left: 0;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   // this is our label replacement (for the question of multiple answers)
@@ -1546,7 +1642,9 @@ header .jurisdiction{
     }
 
     select {
-      margin-bottom: 30px;
+      height: 60px;
+      width: 100%;
+      margin: 15px 0;
     }
 
     .icon-loading {
@@ -1555,6 +1653,16 @@ header .jurisdiction{
       right: 20px;
       bottom: 35px;
       color: #333;
+    }
+
+    &.loading {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .icon-loading {
+        display: inline;
+      }
     }
 
     .status-icon {
@@ -1596,8 +1704,8 @@ header .jurisdiction{
       display: none;
       float: none;
       position: relative;
+      margin: 0;
       height: 38px;
-      margin: -17px 0 15px;
       text-align: right;
 
       span {
@@ -1631,7 +1739,7 @@ header .jurisdiction{
     }
 
     &.warning {
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1665,7 +1773,7 @@ header .jurisdiction{
     &.error {
       background: @odiCrimsonLight;
 
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1691,7 +1799,7 @@ header .jurisdiction{
     }
 
     &.ok {
-      input.string, .choice {
+      input.string {
         padding-right: 70px;
       }
 
@@ -1738,6 +1846,56 @@ header .jurisdiction{
       .status-message {
         display: block;
       }
+    }
+
+    .select, &.choice-boxes {
+      .status-icon {
+        .border-radius(0);
+        position: relative;
+        float: left;
+        margin: 0;
+        height: 38px;
+        width: 38px;
+        font-size: 12px;
+
+        .icon {
+          margin: 10px 0;
+          font-size: 18px;
+        }
+      }
+
+      .status-message {
+        span {
+          margin-left: 38px;
+          text-align: left;
+          float: none;
+          display: block;
+        }
+
+        i.arrow, i.arrow-border {
+          top: 14px;
+          left: 33px;
+          border-width: 6px 6px 6px 0;
+          border-color: transparent @odiGreen transparent transparent;
+        }
+
+        i.arrow-border {
+          top: 12px;
+          left: 31px;
+          border-width: 8px 8px 8px 0;
+          border-right-color: white;
+        }
+      }
+    }
+
+    .status-above {
+      .clearfix;
+    }
+
+    .status-below {
+      .clearfix;
+      margin-top: -17px;
+      margin-bottom: 15px;
     }
   }
 }
@@ -1868,12 +2026,12 @@ header .jurisdiction{
 }
 
 .certificate-summary {
-  padding: 0 90px;
+  padding: 0 120px;
 }
 
 .certificate-badge {
-  width: 160px;
-  height: 140px;
+  width: 133px;
+  height: 118px;
   // background: #bbb;
   margin-bottom: 10px;
   background: transparent center center no-repeat;
@@ -1941,7 +2099,7 @@ strong.certificate-level {
 
 .embed-code {
   textarea {
-    box-sizing: border-box;
+    .box-sizing(border-box);
     width: 300px;
   }
 }

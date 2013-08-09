@@ -7,11 +7,15 @@ class Response < ActiveRecord::Base
   # override with :touch
   belongs_to :response_set, touch: true
 
-  after_save :set_default_dataset_title
+  after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
 
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
+  end
+  
+  def reference_identifier
+    @reference_identifier ||= answer.reference_identifier
   end
 
   def requirement_level
@@ -40,7 +44,11 @@ class Response < ActiveRecord::Base
 
   private
   def set_default_dataset_title
-    dataset.try(:set_default_title!, response_set.title_determined_from_responses)
+    dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
+  end
+
+  def set_default_documentation_url
+    dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
   end
 
   private

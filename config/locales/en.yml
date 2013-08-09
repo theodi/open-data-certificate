@@ -139,7 +139,7 @@ en:
     view_certificate: View
     embed_this_on_your_site: Embed this on your site
     search:
-      search_label: Search for
+      search_label: Search certificates
       submit_search: Go
 
   certificate:
@@ -154,6 +154,10 @@ en:
     embed_badge: Badge
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
+    open_data_certificate_for: Open Data Certificate for
+
+  datasets:
+    page_title: Search certificates
 
   response_set:
     choose_a_jurisdiction: Choose a new jurisdiction
