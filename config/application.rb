@@ -73,6 +73,12 @@ module OpenDataCertificate
     end
     
     config.middleware.use "ContentLocation"
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
+      end
+    end
 
   end
 end
