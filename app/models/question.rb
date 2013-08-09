@@ -45,6 +45,10 @@ class Question < ActiveRecord::Base
     @dependent_q ||= self.dependency(includes: :dependency_conditions) != nil
   end
 
+  def metadata_field?
+    @metadata_field ||= survey_section.survey.meta_map[:dataset_metadata_fields].include?(reference_identifier)
+  end
+
   def triggered?(response_set)
     dep_map = response_set.depends
     @triggered_q ||= dependency.nil? || dep_map[dependency.id]

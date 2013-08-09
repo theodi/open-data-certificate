@@ -46,7 +46,8 @@ class Survey < ActiveRecord::Base
       :dataset_title             => 'dataTitle', 
       :dataset_curator           => 'publisher',
       :dataset_documentation_url => 'documentationUrl',
-      :dataset_curator_url       => 'publisherUrl'
+      :dataset_curator_url       => 'publisherUrl',
+      :dataset_metadata_fields   => ['copyrightStatementMetadata', 'documentationMetadata', 'distributionMetadata']
     }
   end
 
