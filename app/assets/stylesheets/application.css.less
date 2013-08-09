@@ -17,39 +17,12 @@
 *= require surveyor_all
 */
 
+// import bootstrap this way so that we can alter variables just for this app
 
-/* import bootstrap this way so that we can alter variables just for this app */
-@import "twitter/bootstrap";
+@import "bootstrap/bootstrap.less";
 
-// RESPONSIVE CLASSES
-// ------------------
-
-@import "twitter/bootstrap/responsive-utilities.less";
-
-
-// MEDIA QUERIES
-// ------------------
-
-// Large desktops
-@import "twitter/bootstrap/responsive-1200px-min.less";
-
-// Tablets to regular desktops
-@import "twitter/bootstrap/responsive-768px-979px.less";
-
-// Phones to portrait tablets and narrow desktops
-@import "twitter/bootstrap/responsive-767px-max.less";
-
-
-// RESPONSIVE NAVBAR
-// ------------------
-
-// From 979px and below, show a button to toggle navbar contents
-@import "twitter/bootstrap/responsive-navbar.less";
-
-// override bootstrap variables here, see options at:
-//   https://github.com/twitter/bootstrap/blob/master/less/variables.less
-@iconSpritePath:          "glyphicons-halflings.png";
-@iconWhiteSpritePath:     "glyphicons-halflings-white.png";
+// font awesome config
+@FontAwesomePath: "/assets";
 
 // use our own grey for the input field
 @gray: @odiGrey;
@@ -61,7 +34,6 @@
 // @gridColumnWidth:         70px;
 // @gridGutterWidth:         30px;
 // @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
 
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
@@ -1046,18 +1018,16 @@ section {
   vertical-align: middle;
 
   .icon-large {
-    margin-bottom: 1px;
     margin-right: 6px;
-    vertical-align: middle;
   }
 
-  .close, .close:hover, .close:active {
-    opacity: 1;
-    width: 14px;
-    height: 14px;
-    position: static;
-    background-image: url(/assets/glyphicons-halflings-white.png);
-    background-position: -312px 0;
+  .icon-remove, .icon-remove:hover, .icon-remove:active {
+    float: right;
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-top: -3px;
+    margin-right: -3px;
   }
 }
 
@@ -1092,32 +1062,6 @@ section {
       border: none;
     }
   }
-}
-
-// Icons //
-
-.icon-large {
-
-  width: 28px;
-  height: 28px;
-  background-image: url(/assets/glyphicons.png);
-
-  &.icon-white {
-    background-image: url(/assets/glyphicons_white.png);
-  }
-
-  // Spacing between icons in file
-  @spacing: -48px;
-
-  // Mixin to help select correct icon
-  .icon-position(@top, @left) {
-    background-position: @spacing * @left (@spacing * @top) + 1;
-  }
-
-  &.icon-ok-sign { .icon-position(19, 3); }
-  &.icon-info-sign { .icon-position(19, 5); }
-  &.icon-exclamation-sign { .icon-position(19, 6); }
-  &.icon-ban-circle { .icon-position(19, 9); }
 }
 
 // Tables //
@@ -1577,6 +1521,10 @@ header .jurisdiction{
     margin:auto;
   }
 
+  fieldset ol li {
+    position: relative;
+  }
+
   // brought in from main styles
   label {
     font-size: 22px;
@@ -1602,13 +1550,14 @@ header .jurisdiction{
   }
 
 
-  input.string{
+  input.string {
+    width:100%;
     height: 60px;
     font-size: 23px;
     padding: 0 10px;
     margin: 15px 0;
+    .box-sizing(border-box);
   }
-
 
   // custom
   input.string{
@@ -1684,22 +1633,203 @@ header .jurisdiction{
     }
   }
 
-  fieldset.question-row{
-    position: relative;
+  fieldset.question-row {
+    .border-radius(6px);
     padding-top: 10px;
 
+    ol {
+      position: relative;
+    }
+
+    select {
+      height: 60px;
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    .icon-loading {
+      display: none;
+      position: absolute;
+      right: 20px;
+      bottom: 35px;
+      color: #333;
+    }
+
+    &.loading {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .icon-loading {
+        display: inline;
+      }
+    }
+
+    .status-icon {
+      display: none;
+      width: 60px;
+      height: 60px;
+      background: @odiGreen;
+      margin: 16px 0;
+      border-radius: 3px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      .icon {
+        &:before { content: @ok; }
+        width: 100%;
+        margin: 15px 0;
+        display: inline-block;
+        font-size: 30px;
+        color: white;
+        text-align: center;
+      }
+    }
+
+    .status-wrapper {
+      position: relative;
+
+      aside.answer-meta {
+        top: -45px;
+        right: -400px;
+      }
+
+      &.choice-buttons {
+        padding-bottom: 15px;
+      }
+    }
+
+    .status-message {
+      display: none;
+      float: none;
+      position: relative;
+      margin: 0;
+      height: 38px;
+      text-align: right;
+
+      span {
+        float: right;
+        font-size: 14px;
+        color: white;
+        background: @odiGreen;
+        border: 1px solid white;
+        padding: 8px 12px;
+      }
+
+      i.arrow, i.arrow-border {
+        position: absolute;
+        top: -5px;
+        right: 23px;
+        width: 0;
+        height: 0;
+        border-width: 0 7px 6px 7px;
+        border-color: transparent transparent @odiGreen transparent;
+        background: none;
+        padding: 0;
+        border-style: solid;
+      }
+
+      i.arrow-border {
+        top: -7px;
+        right: 21px;
+        border-width: 0 9px 8px 9px;
+        border-bottom-color: white;
+      }
+    }
+
+    &.warning {
+      input.string {
+        padding-right: 70px;
+      }
+
+      input.string {
+        color: @odiOrangeDark;
+        background-color: @odiOrangeLight;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiOrange;
+
+        .icon {
+          &:before { content: @exclamation; }
+        }
+      }
+
+      .status-message {
+        display: block;
+
+        span {
+          background: @odiOrange;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiOrange;
+        }
+      }
+    }
+
+    &.error {
+      background: @odiCrimsonLight;
+
+      input.string {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiCrimson;
+
+        .icon {
+          &:before { content: @exclamation; }
+        }
+      }
+
+      .status-message {
+
+        span {
+          background: @odiCrimson;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiCrimson;
+        }
+      }
+    }
+
+    &.ok {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        display: block;
+        background: @odiGreen;
+
+        .icon {
+          &:before { content: @ok; }
+        }
+      }
+
+      .status-message {
+        span {
+          background: @odiGreen;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiGreen;
+        }
+      }
+    }
 
     &.active {
-
-      // hard to do the odd outline
-
       // outline: 1px solid @odiBlueLight;
       background-color: @odiBlueLighter;
     }
 
-
-
-    aside{
+    aside {
+      .border-radius(6px);
       display:none;
       position:absolute;
       right:0;
@@ -1711,24 +1841,63 @@ header .jurisdiction{
         top: 10px;
       }
     }
-  }
 
+    &.autocompleted {
+      .status-message {
+        display: block;
+      }
+    }
 
-  &.highlight-mandatory{
-    .mandatory{
-      background-color:@odiOrangeLight;
-      &.has-response{
-        background-color:@white;
-        &.active{
-          background-color:@odiBlueLighter;
+    .select, &.choice-boxes {
+      .status-icon {
+        .border-radius(0);
+        position: relative;
+        float: left;
+        margin: 0;
+        height: 38px;
+        width: 38px;
+        font-size: 12px;
+
+        .icon {
+          margin: 10px 0;
+          font-size: 18px;
+        }
+      }
+
+      .status-message {
+        span {
+          margin-left: 38px;
+          text-align: left;
+          float: none;
+          display: block;
+        }
+
+        i.arrow, i.arrow-border {
+          top: 14px;
+          left: 33px;
+          border-width: 6px 6px 6px 0;
+          border-color: transparent @odiGreen transparent transparent;
+        }
+
+        i.arrow-border {
+          top: 12px;
+          left: 31px;
+          border-width: 8px 8px 8px 0;
+          border-right-color: white;
         }
       }
     }
-    .url-error{
-      background-color:@odiCrimsonLight;
+
+    .status-above {
+      .clearfix;
+    }
+
+    .status-below {
+      .clearfix;
+      margin-top: -17px;
+      margin-bottom: 15px;
     }
   }
-
 }
 
 
@@ -1930,7 +2099,7 @@ strong.certificate-level {
 
 .embed-code {
   textarea {
-    box-sizing: border-box;
+    .box-sizing(border-box);
     width: 300px;
   }
 }
@@ -2306,6 +2475,7 @@ width: 328px;
   }
 
   #surveyor fieldset.question-row aside {
+
     padding: 10px;
     width: 230px;
   }

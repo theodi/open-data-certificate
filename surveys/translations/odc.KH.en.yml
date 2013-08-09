@@ -191,7 +191,7 @@ questions:
       cc_by_sa:
         text: "Creative Commons Attribution Share-Alike"
         text_as_statement: "Creative Commons Attribution Share-Alike"
-      cc0:
+      cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
       na:

@@ -4,14 +4,14 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user!, only: :dashboard
 
   def index
-    @certificates = Certificate.where(:published => true).by_newest
+    @certificates = Certificate.where(:published => true).by_newest.page params[:page]
 
     if params[:search]
-      @certificates = [
+      @certificates = Kaminari.paginate_array([
         @certificates.search_title(params[:search]),
         @certificates.search_publisher(params[:search]),
         @certificates.search_country(params[:search])
-      ].flatten.uniq
+      ].flatten.uniq).page params[:page]
     end
   end
 

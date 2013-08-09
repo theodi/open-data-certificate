@@ -9,11 +9,11 @@ class Dataset < ActiveRecord::Base
   has_many :certificates, :through => :response_sets
 
   def title
-    read_attribute(:title) || set_default_title!(response_sets.first.try(:title_determined_from_responses)) || response_sets.first.try(:title) || ResponseSet::DEFAULT_TITLE
+    read_attribute(:title) || set_default_title!(response_sets.first.try(:dataset_title_determined_from_responses)) || response_sets.first.try(:title) || ResponseSet::DEFAULT_TITLE
   end
   
   def documentation_url
-    read_attribute(:documentation_url) || set_default_documentation_url!(response_sets.first.try(:documentation_url_determined_from_responses))
+    read_attribute(:documentation_url) || set_default_documentation_url!(response_sets.first.try(:dataset_documentation_url_determined_from_responses))
   end
 
   def curator

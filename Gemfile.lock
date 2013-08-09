@@ -10,10 +10,17 @@ GIT
       nokogiri
       rest-client
 
+GIT
+  remote: git://github.com/theodi/odlifier.git
+  revision: 602935d283f9a39cd6b3c7ff703368956fd3df12
+  specs:
+    odlifier (0.0.1)
+      httparty
+
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (3.0.19)
+    aasm (3.0.20)
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
       mail (~> 2.5.3)
@@ -66,7 +73,7 @@ GEM
     delayed_job_active_record (4.0.0)
       activerecord (>= 3.0, < 4.1)
       delayed_job (>= 3.0, < 4.1)
-    devise (3.0.0)
+    devise (3.0.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -114,6 +121,9 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.1)
+    jbuilder (1.5.0)
+      activesupport (>= 3.0.0)
+      multi_json (>= 1.2.0)
     journey (1.0.4)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -123,6 +133,9 @@ GEM
       json (>= 1.7.5)
       rdf (>= 1.0)
     json_pure (1.8.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     less (2.3.2)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -164,8 +177,8 @@ GEM
     mini_portile (0.5.1)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
-    multi_json (1.7.7)
-    multi_xml (0.5.4)
+    multi_json (1.7.8)
+    multi_xml (0.5.5)
     mustache (0.99.4)
     mysql2 (0.3.13)
     nokogiri (1.6.0)
@@ -184,6 +197,11 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-cors (0.2.8)
+      rack
+    rack-linkeddata (1.0.0)
+      linkeddata (>= 1.0)
+      rack (>= 1.4.4)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -330,16 +348,22 @@ DEPENDENCIES
   haml
   high_voltage
   httparty
+  jbuilder
   jquery-rails
+  kaminari
   less-rails
   less-rails-bootstrap
+  linkeddata
   lodash-rails
   lograge
   logstash-event
   memcache-client
   mocha
   mysql2
+  odlifier!
   pry
+  rack-cors
+  rack-linkeddata
   rails (= 3.2.13)
   rails-footnotes (>= 3.7.9)
   ransack

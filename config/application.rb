@@ -56,6 +56,9 @@ module OpenDataCertificate
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # Add fonts to asset pipeline
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     # Get around heroku deployment issues
     # https://devcenter.heroku.com/articles/rails-asset-pipeline#troubleshooting
     config.assets.initialize_on_precompile = false
@@ -67,6 +70,13 @@ module OpenDataCertificate
     # This is a workaround from: https://github.com/vidibus/vidibus-routing_error
     config.after_initialize do |app|
       app.routes.append{match '*path', :to => 'application#routing_error'}
+    end
+    
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
+      end
     end
 
   end
