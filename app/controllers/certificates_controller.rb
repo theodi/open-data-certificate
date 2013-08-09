@@ -1,5 +1,7 @@
 class CertificatesController < ApplicationController
   include CertificatesHelper
+  
+  before_filter(:only => [:show]) { alternate_formats [:json] }
 
   def show
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
