@@ -32,7 +32,7 @@
   = render :partial => 'status_panel'
   = render :partial => 'shared/flashes'
 
-  #surveyor{class: params[:highlight_mandatory] ? 'highlight-mandatory' : ''}
+  #surveyor{'data-url-incorrect' => t('surveyor.please_check_that_the_url_exists'), 'data-autocompleted' => t('surveyor.autocompleted_data'), 'data-autocompleted-url-incorrect' => t('surveyor.autocompleted_url_incorrect')}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container
@@ -45,7 +45,7 @@
     -# other new users
     - cache_key = @response_set.responses.empty? ? "blank_survey_#{@response_set.survey_id}" : @response_set
     = cache(cache_key) do
-      =render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+      =render :partial => '/partials/section', :collection => @sections, :locals => {:f => f, :highlight_mandatory => params[:highlight_mandatory]}
 
 :javascript
   $(document).ready(function() {

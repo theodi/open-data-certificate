@@ -83,7 +83,7 @@ class Certificate < ActiveRecord::Base
       r2 = ResponseSet.find response_set_id
       update_attributes({
         attained_level: r2.attained_level,
-        curator:  r2.curator_determined_from_responses,
+        curator:  r2.dataset_curator_determined_from_responses,
         name:  r2.title
       })
 

@@ -21,7 +21,7 @@ class ResponseSet < ActiveRecord::Base
     event :publish do
       transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
     end
-    
+
     event :archive do
       transitions from: :published, to: :archived
     end
@@ -49,7 +49,7 @@ class ResponseSet < ActiveRecord::Base
   scope :completed, where("response_sets.completed_at IS NOT NULL")
 
   def title
-    title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+    dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
   def jurisdiction
@@ -67,7 +67,7 @@ class ResponseSet < ActiveRecord::Base
 
   # find which dependencies are active for this response set as a whole
   def depends
-    return @depends if @depends 
+    return @depends if @depends
 
     deps = survey.dependencies.includes({:dependency_conditions => {:question => :answers}})
 
@@ -80,16 +80,65 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def title_determined_from_responses
-    @title_determined_from_responses ||= value_for "dataset_title"
+  def method_missing(method_name, *args, &blk)
+    val = method_name.to_s.match(/(.+)_determined_from_responses/)
+    unless val.nil? and survey.map[val[1].to_sym].nil?
+      var = instance_variable_get("@#{method_name}")
+      var ||= value_for val[1]
+    else
+      super
+    end
   end
 
-  def curator_determined_from_responses
-    @curator_determined_from_responses ||= value_for "dataset_curator"
+  def data_licence_determined_from_responses
+    if @data_licence_determined_from_responses.nil? 
+      ref = value_for "data_licence", :reference_identifier
+      case ref
+      when "na"
+        @data_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
+      when "other"
+         @data_licence_determined_from_responses = {
+          :title => value_for("other_dataset_licence_name"),
+          :url   => value_for("other_dataset_licence_url")
+         }
+      else
+        licence = Odlifier::License.new(ref.dasherize)
+        @data_licence_determined_from_responses = {
+          :title => licence.title,
+          :url   => licence.url
+        }
+      end
+    end
+    @data_licence_determined_from_responses
   end
   
-  def documentation_url_determined_from_responses
-    @documentation_url_determined_from_responses ||= value_for "dataset_documentation_url"
+  def content_licence_determined_from_responses
+    if @content_licence_determined_from_responses.nil? 
+      ref = value_for "content_licence", :reference_identifier
+      case ref
+      when "na"
+        @content_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
+      when "other"
+         @content_licence_determined_from_responses = {
+          :title => value_for("other_content_licence_name"),
+          :url   => value_for("other_content_licence_url") 
+         }
+      else
+        licence = Odlifier::License.new(ref.dasherize)
+        @content_licence_determined_from_responses = {
+          :title => licence.title,
+          :url   => licence.url
+        }
+      end
+    else
+      @content_licence_determined_from_responses
+    end
   end
 
   def incomplete?
@@ -98,13 +147,13 @@ class ResponseSet < ActiveRecord::Base
 
   def incomplete_triggered_mandatory_questions
     responded_to_question_ids = responses.map(&:question_id)
-    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }    
+    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }
   end
 
   def triggered_mandatory_questions
 
     @triggered_mandatory_questions ||= survey.mandatory_questions.select do |r|
-      r.dependency.nil? ? 
+      r.dependency.nil? ?
         true : depends[r.dependency.id]
     end
 
@@ -113,35 +162,37 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_requirements
     @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.nil? ? 
-        true : 
+      r.dependency.nil? ?
+        true :
         depends[r.dependency.id]
     end
 
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
-  
+
   def responses_with_url_type
     responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
   end
-  
+
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
-      response_code = Rails.cache.fetch(response.string_value) 
-      if response_code.nil?
-        response_code = HTTParty.get(response.string_value).code rescue nil
-      end
-      if response_code != 200
-        response.error = true
-        response.save
-        errors << response 
-      else
-        response.error = false
-        response.save
+      if response.string_value
+        response_code = Rails.cache.fetch(response.string_value)
+        if response_code.nil?
+          response_code = HTTParty.get(response.string_value).code rescue nil
+        end
+        if response_code != 200
+          response.error = true
+          response.save
+          errors << response
+        else
+          response.error = false
+          response.save
+        end
       end
     end
-    errors.length > 0 or true
+    errors.length == 0
   end
 
   def all_mandatory_questions_complete?
@@ -198,7 +249,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
 
-  # run updates through the response_cache_map, so that we can deal 
+  # run updates through the response_cache_map, so that we can deal
   # with fields that have been claimed by a different response_set
   #
   # (allows us to cache the question html)
@@ -214,7 +265,7 @@ class ResponseSet < ActiveRecord::Base
 
     # find responses that have been claimed by another response_sets
     Response.where(api_id: api_ids).where('response_set_id != ?', id).each do |response|
-      
+
       # use a mapping to this response_sets api_id instead
       rcm = ResponseCacheMap.find_or_create_by_origin_id_and_response_set_id(response.id, self.id)
 
@@ -227,7 +278,7 @@ class ResponseSet < ActiveRecord::Base
         end
       end
     end
-    
+
     # pass through to the original method
     original_update_from_ui_hash(ui_hash)
   end
@@ -252,8 +303,8 @@ class ResponseSet < ActiveRecord::Base
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier
-    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(:string_value)
+  def value_for reference_identifier, value = :string_value
+    q = responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(value)
   end
 
 end
