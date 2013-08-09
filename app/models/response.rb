@@ -10,6 +10,11 @@ class Response < ActiveRecord::Base
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
 
+  # gets all responses in the same response set for a question, useful for checkbox questions
+  def sibling_responses
+    @sibling_responses ||= Response.where(question_id: question_id, response_set_id: response_set_id)
+  end
+
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
   end
