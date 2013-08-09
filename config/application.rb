@@ -71,6 +71,8 @@ module OpenDataCertificate
     config.after_initialize do |app|
       app.routes.append{match '*path', :to => 'application#routing_error'}
     end
+    
+    config.middleware.use "ContentLocation"
 
   end
 end
