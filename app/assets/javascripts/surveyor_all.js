@@ -142,10 +142,10 @@ $(document).ready(function(){
       // Set field to not autofilled
       markAutocompleted($field, $form, false)
 
-      validateField($field, $form, csrfToken)
-
       // Save changes to this field
-      saveFormElements($form, questionFields($field).add(csrfToken))
+      saveFormElements($form, questionFields($field).add(csrfToken), function() {
+        validateField($field, $form, csrfToken)
+      })
     })
   })
 
@@ -284,13 +284,14 @@ $(document).ready(function(){
     })
   }
 
-  function saveFormElements($form, $elements) {
+  function saveFormElements($form, $elements, callback) {
     $.ajax({
       type: "PUT",
       url: $form.attr("action"),
       data: $elements.serialize(), dataType: 'json',
       success: function(response) {
         successfulSave(response);
+        if (callback) callback();
       },
       error: function(){
         // This throws on aborted requests (so when the save button is clicked and page unloaded while it is being sent)
