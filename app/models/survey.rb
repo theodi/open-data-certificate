@@ -1,6 +1,6 @@
 class Survey < ActiveRecord::Base
   include Surveyor::Models::SurveyMethods
-  
+
   serialize :meta_map, Hash
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
@@ -34,16 +34,16 @@ class Survey < ActiveRecord::Base
       where(:access_code => access_code).order("surveys.survey_version DESC").first
     end
   end
-  
+
   def meta_map
     meta = read_attribute(:meta_map)
     map.each { |attr, val| meta[attr.to_sym] ||= val }
     meta
   end
-  
+
   def map
     {
-      :dataset_title             => 'dataTitle', 
+      :dataset_title             => 'dataTitle',
       :dataset_curator           => 'publisher',
       :dataset_documentation_url => 'documentationUrl',
       :dataset_curator_url       => 'publisherUrl',
@@ -111,7 +111,7 @@ class Survey < ActiveRecord::Base
   ### /override surveyor methods
 
   private
-  
+
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
     questions = sections.map(&:questions).flatten.compact
