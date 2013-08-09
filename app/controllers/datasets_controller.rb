@@ -5,7 +5,17 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user!, only: :dashboard
 
   def index
-    @certificates = Certificate.where(:published => true).by_newest.page params[:page]
+    @certificates = Certificate.where(:published => true).by_newest
+
+    # add filters on results
+    if(params[:jurisdiction])
+      @certificates = @certificates.joins(:survey).where(surveys: {title: params[:jurisdiction]})
+    end
+    if(params[:publisher])
+      @certificates = @certificates.where(curator: params[:publisher])
+    end
+
+    @certificates = @certificates.page params[:page]
 
     if params[:search]
       @certificates = Kaminari.paginate_array([
@@ -40,7 +50,7 @@ class DatasetsController < ApplicationController
       when 'country'
         Survey.search({full_title_cont:params[:q]}).result.limit(5).map do |survey|
           {
-            value: survey.full_title || survey.title,
+            value: survey.full_title,
             path: datasets_path(jurisdiction:survey.title)
           }
         end
