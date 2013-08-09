@@ -46,7 +46,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_equal [
       {
-        "title" =>'my second dataset',
+        "value" =>'my second dataset',
         "path" => "/datasets/#{@second.id}"
       }
     ], assigns(:response)
@@ -62,7 +62,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_equal [
       {
-        "title" =>'curator one',
+        "value" =>'curator one',
         "path" => "/datasets?publisher=curator+one"
       }
     ], assigns(:response)
@@ -80,7 +80,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_equal [
       {
-        "title" =>'United Kingdom',
+        "value" =>'United Kingdom',
         "path" => "/datasets?jurisdiction=GB"
       }
     ], assigns(:response)
