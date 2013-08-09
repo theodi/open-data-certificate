@@ -1,5 +1,6 @@
 class DatasetsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
 
@@ -55,7 +56,6 @@ class DatasetsController < ApplicationController
   end
 
   def show
-    @dataset = Dataset.find(params[:id])
     @certificates = @dataset.certificates.where(:published => true).by_newest
   end
 end
