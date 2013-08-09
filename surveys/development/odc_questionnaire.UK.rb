@@ -579,25 +579,6 @@ survey 'GB',
       :text_as_statement => 'information that could identify individuals',
       :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
 
-    q_statisticalAnonAudited 'Has your anonymisation process been independently audited?',
-      :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation process has been',
-      :pick => :any
-    a_false 'no, the anonymisation is rubbish',
-      :text_as_statement => ''
-    a_both 'both, the anonymisation is both rubbish and great',
-      :text_as_statement => ''
-    a_true 'yes, the anonymisation is brilliant',
-      :text_as_statement => 'independently audited',
-      :requirement => ['standard_3']
-
-    label_standard_3 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_3'
-    dependency :rule => 'A and B'
-    condition_A :q_dataPersonal, '==', :a_summarised
-    condition_B :q_statisticalAnonAudited, '==', :a_false
-
     q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
       :display_on_certificate => true,
       :text_as_statement => 'This data about individuals has been',
@@ -824,5 +805,61 @@ survey 'GB',
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     condition_E :q_anonymisationAudited, '==', :a_false
 
+  end
+
+  section_social 'Social Information',
+    :description => 'Documentation, support and services' do
+
+    label_group_15 'Documentation',
+      :help_text => 'how you help people understand the context and content of your data',
+      :customer_renderer => '/partials/fieldset'
+
+    q_documentationMetadata 'Does your data documentation include machine-readable data for:',
+      :display_on_certificate => true,
+      :text_as_statement => 'The documentation includes machine-readable data for',
+      :pick => :any
+    dependency :rule => 'A'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    a_title 'title',
+      :text_as_statement => 'title',
+      :requirement => ['standard_30']
+    a_description 'description',
+      :text_as_statement => 'description',
+      :requirement => ['standard_31']
+    a_issued 'release date',
+      :text_as_statement => 'release date',
+      :requirement => ['standard_32']
+    a_modified 'modification date',
+      :text_as_statement => 'modification date',
+      :requirement => ['standard_33']
+    a_accrualPeriodicity 'frequency of releases',
+      :text_as_statement => 'release frequency',
+      :requirement => ['standard_34']
+    a_identifier 'identifier',
+      :text_as_statement => 'identifier',
+      :requirement => ['standard_35']
+    a_landingPage 'landing page',
+      :text_as_statement => 'landing page',
+      :requirement => ['standard_36']
+    a_language 'language',
+      :text_as_statement => 'language',
+      :requirement => ['standard_37']
+    a_publisher 'publisher',
+      :text_as_statement => 'publisher',
+      :requirement => ['standard_38']
+    a_spatial 'spatial/geographical coverage',
+      :text_as_statement => 'spatial/geographical coverage',
+      :requirement => ['standard_39']
+    a_temporal 'temporal coverage',
+      :text_as_statement => 'temporal coverage',
+      :requirement => ['standard_40']
+    a_theme 'theme(s)',
+      :text_as_statement => 'theme(s)',
+      :requirement => ['standard_41']
+    a_keyword 'keyword(s) or tag(s)',
+      :text_as_statement => 'keyword(s) or tag(s)',
+      :requirement => ['standard_42']
+    a_distribution 'distribution(s)',
+      :text_as_statement => 'distribution(s)'
   end
 end
