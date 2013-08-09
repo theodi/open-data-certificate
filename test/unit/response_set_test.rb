@@ -211,14 +211,14 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal [triggered_requirements.last], response_set.outstanding_requirements
   end
 
-  test "#title_determined_from_responses returns the answer of the response to the question referenced as 'dataTitle'" do
+  test "#dataset_title_determined_from_responses returns the answer of the response to the question referenced as 'dataTitle'" do
     question = FactoryGirl.create(:question, reference_identifier: 'testDataTitle')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'my response set title'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
 
-    assert_equal expected_value, response_set.title_determined_from_responses
+    assert_equal expected_value, response_set.dataset_title_determined_from_responses
   end
 
   test "#title returns the title determined from the responses if there is one" do
@@ -238,24 +238,24 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.title
   end
 
-  test "#curator_determined_from_responses returns the answer of the response to the question referenced as 'publisher'" do
+  test "#dataset_curator_determined_from_responses returns the answer of the response to the question referenced as 'publisher'" do
     question = FactoryGirl.create(:question, reference_identifier: 'testPublisher')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'my curator'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
 
-    assert_equal expected_value, response_set.curator_determined_from_responses
+    assert_equal expected_value, response_set.dataset_curator_determined_from_responses
   end
   
-  test "#documentation_url_determined_from_responses returns the answer of the response to the question referenced as 'documentationUrl'" do
+  test "#dataset_documentation_url_determined_from_responses returns the answer of the response to the question referenced as 'documentationUrl'" do
     question = FactoryGirl.create(:question, reference_identifier: 'testDocumentationUrl')
     answer = FactoryGirl.create(:answer, question: question)
     expected_value = 'http://example.com'
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     response = FactoryGirl.create(:response, response_set: response_set, string_value: expected_value, question: question, answer: answer)
 
-    assert_equal expected_value, response_set.documentation_url_determined_from_responses
+    assert_equal expected_value, response_set.dataset_documentation_url_determined_from_responses
   end
   
   test "#data_licence_determined_from_responses returns 'Not applicable' when the data licence is not applicable" do

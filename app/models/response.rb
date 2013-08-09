@@ -44,11 +44,11 @@ class Response < ActiveRecord::Base
 
   private
   def set_default_dataset_title
-    dataset.try(:set_default_title!, response_set.title_determined_from_responses)
+    dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
   end
 
   def set_default_documentation_url
-    dataset.try(:set_default_documentation_url!, response_set.documentation_url_determined_from_responses)
+    dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
   end
 
   private
