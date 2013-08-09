@@ -49,7 +49,7 @@ class ResponseSet < ActiveRecord::Base
   scope :completed, where("response_sets.completed_at IS NOT NULL")
 
   def title
-    title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+    dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
   def jurisdiction
@@ -80,22 +80,16 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def title_determined_from_responses
-    @title_determined_from_responses ||= value_for "dataset_title"
+  def method_missing(method_name, *args, &blk)
+    val = method_name.to_s.match(/(.+)_determined_from_responses/)
+    unless val.nil? and survey.map[val[1].to_sym].nil?
+      var = instance_variable_get("@#{method_name}")
+      var ||= value_for val[1]
+    else
+      super
+    end
   end
 
-  def curator_determined_from_responses
-    @curator_determined_from_responses ||= value_for "dataset_curator"
-  end
-  
-  def documentation_url_determined_from_responses
-    @documentation_url_determined_from_responses ||= value_for "dataset_documentation_url"
-  end
-  
-  def curator_url_determined_from_responses
-    @curator_url_determined_from_responses ||= value_for "dataset_curator_url"
-  end
-  
   def data_licence_determined_from_responses
     if @data_licence_determined_from_responses.nil? 
       ref = value_for "data_licence", :reference_identifier
