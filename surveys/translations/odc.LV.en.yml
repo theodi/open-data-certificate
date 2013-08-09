@@ -191,7 +191,7 @@ questions:
       odc_odbl:
         text: "Open Data Commons Open Database License (ODbL)"
         text_as_statement: "Open Data Commons Open Database License (ODbL)"
-      pddl:
+      odc_pddl:
         text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
       cc_zero:
