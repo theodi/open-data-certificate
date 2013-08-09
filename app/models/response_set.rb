@@ -81,15 +81,15 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def title_determined_from_responses
-    @title_determined_from_responses ||= value_for "dataset_title"
+    @title_determined_from_responses ||= value_for :dataset_title
   end
 
   def curator_determined_from_responses
-    @curator_determined_from_responses ||= value_for "dataset_curator"
+    @curator_determined_from_responses ||= value_for :dataset_curator
   end
-  
+
   def documentation_url_determined_from_responses
-    @documentation_url_determined_from_responses ||= value_for "dataset_documentation_url"
+    @documentation_url_determined_from_responses ||= value_for :dataset_documentation_url
   end
 
   def incomplete?
@@ -255,7 +255,7 @@ class ResponseSet < ActiveRecord::Base
   # finds the string value for a given response_identifier
   private
   def value_for reference_identifier
-    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(:string_value)
+    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(:string_value)
   end
 
 end
