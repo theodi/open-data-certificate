@@ -254,8 +254,8 @@ ActiveRecord::Schema.define(:version => 20130809150653) do
     t.datetime "inactive_at"
     t.string   "css_url"
     t.string   "custom_class"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "display_order"
     t.string   "api_id"
     t.integer  "survey_version",         :default => 0
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(:version => 20130809150653) do
     t.string   "dataset_curator"
     t.string   "full_title"
     t.string   "meta_map"
+    t.string   "status",                 :default => "alpha"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true
