@@ -54,8 +54,8 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   test "typeahead for publisher" do
-    @first  = FactoryGirl.create(:dataset, title:'my first dataset', curator: 'curator one')
-    @second = FactoryGirl.create(:dataset, title:'my second dataset', curator: 'curator two')
+    @first  = FactoryGirl.create(:certificate, curator: 'curator one')
+    @second = FactoryGirl.create(:certificate, curator: 'curator two')
 
     get :typeahead, mode: 'publisher', q: 'one'
     assert_response 200
