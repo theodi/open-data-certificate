@@ -1,4 +1,4 @@
-- content_for :header_title, t('certificates.certificates')
+- content_for :header_title, t('datasets.show_title', title: @dataset.title)
 
 - if @certificates.any?
   %dl.unstyled

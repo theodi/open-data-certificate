@@ -158,6 +158,7 @@ en:
 
   datasets:
     page_title: Search certificates
+    show_title: "Dataset: %{title}"
 
   response_set:
     choose_a_jurisdiction: Choose a new jurisdiction
