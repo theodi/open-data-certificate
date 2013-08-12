@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
-//= require lodash
 //= require_tree .
 
 $(function(){
