@@ -66,3 +66,16 @@
         = link_to t('homepage.about_odi.title'), '/contact'
       %p.about-odi= t('homepage.about_odi.description', odi_name_link: link_to(t('homepage.about_odi.odi_name'), 'http://theodi.org')).html_safe
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
+
+
+#international-reach
+  .row
+    .span8
+      .map
+    .span4
+      %h2 International Reach
+      %p select a juristictiction to view status 
+      %p= select_tag(:juristiction_access_code, options_for_select(jurisdiction_options(@surveys)))
+
+- content_for(:foot_scripts) do
+  = javascript_include_tag :map
