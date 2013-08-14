@@ -387,16 +387,16 @@ $(document).ready(function(){
               affectedFields.push(selectMe("dataLicence", "odc_by"))
               break;
             case "http://opendatacommons.org/licenses/odbl/":
-              affectedFields.push(selectMe("dataLicence", "odc_by_sa"))
+              affectedFields.push(selectMe("dataLicence", "odc_odbl"))
               break;
             case "http://opendatacommons.org/licenses/pddl/":
-              affectedFields.push(selectMe("dataLicence", "pddl"))
+              affectedFields.push(selectMe("dataLicence", "odc_pddl"))
               break;
             case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("dataLicence", "cc0"))
+              affectedFields.push(selectMe("dataLicence", "cc_zero"))
               break;
             case "http://reference.data.gov.uk/id/open-government-licence":
-              affectedFields.push(selectMe("dataLicence", "ogl"))
+              affectedFields.push(selectMe("dataLicence", "uk_ogl"))
               break;
           }
 
@@ -409,10 +409,10 @@ $(document).ready(function(){
               affectedFields.push(selectMe("contentLicence", "cc_by_sa"))
               break;
             case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("contentLicence", "cc0"))
+              affectedFields.push(selectMe("contentLicence", "cc_zero"))
               break;
             case "http://reference.data.gov.uk/id/open-government-licence":
-              affectedFields.push(selectMe("contentLicence", "ogl"))
+              affectedFields.push(selectMe("contentLicence", "uk_ogl"))
               break;
           }
         } else if (json.licenses) {
@@ -425,18 +425,18 @@ $(document).ready(function(){
               affectedFields.push(selectMe("dataLicence", "odc_by"))
               break;
             case "http://opendatacommons.org/licenses/odbl/":
-              affectedFields.push(selectMe("dataLicence", "odc_by_sa"))
+              affectedFields.push(selectMe("dataLicence", "odc_odbl"))
               break;
             case "http://opendatacommons.org/licenses/pddl/":
-              affectedFields.push(selectMe("dataLicence", "pddl"))
+              affectedFields.push(selectMe("dataLicence", "odc_pddl"))
               break;
             case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("dataLicence", "cc0"))
+              affectedFields.push(selectMe("dataLicence", "cc_zero"))
               break;
             case "http://reference.data.gov.uk/id/open-government-licence":
               // Open Government Licence covers data and content
-              affectedFields.push(selectMe("dataLicence", "ogl"))
-              affectedFields.push(selectMe("contentLicence", "ogl"))
+              affectedFields.push(selectMe("dataLicence", "uk_ogl"))
+              affectedFields.push(selectMe("contentLicence", "uk_ogl"))
               break;
             case "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf":
               selectMe("dataLicence", "other")
