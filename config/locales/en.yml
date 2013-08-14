@@ -154,6 +154,7 @@ en:
     embed_badge: Badge
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
+    open_data_certificate_for: Open Data Certificate for
 
   datasets:
     page_title: Search certificates

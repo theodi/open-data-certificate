@@ -24,6 +24,8 @@
     - state = 'warning' if r.error
 
     - classes = {'row' => true, 'question-row' => true, "q_#{renderer}" => true}
+    - classes[q.css_class(@response_set)] = true
+    - classes['choice-boxes'] = q.pick == "one" || q.pick == "any"
     - classes['compact-validation'] = pickTypes.include?(q.pick) || selectFields.include?(renderer)
     - classes['mandatory'] = q.is_mandatory
     - classes['has-response'] = !r.new_record?

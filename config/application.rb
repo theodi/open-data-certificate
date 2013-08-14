@@ -71,6 +71,13 @@ module OpenDataCertificate
     config.after_initialize do |app|
       app.routes.append{match '*path', :to => 'application#routing_error'}
     end
+    
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
+      end
+    end
 
   end
 end
