@@ -57,9 +57,9 @@ OpenDataCertificate::Application.routes.draw do
   get 'get_badge' => 'certificates#get_badge'
 
   # 'Static' pages managed by HighVoltage here...
-  get 'about' => 'high_voltage/pages#show', :id => 'about'
-  get 'contact' => 'high_voltage/pages#show', :id => 'contact'
-  get 'terms' => 'high_voltage/pages#show', :id => 'terms'
+  get 'about' => 'pages#show', :id => 'about'
+  get 'contact' => 'pages#show', :id => 'contact'
+  get 'terms' => 'pages#show', :id => 'terms'
 
   # Validators
   get 'resolve' => 'validators#resolve'
