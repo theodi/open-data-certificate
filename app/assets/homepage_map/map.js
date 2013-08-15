@@ -2,51 +2,38 @@
 //= require lib/queue.v1
 //= require lib/topojson
 
-console.log(">>> MAPS !!!")
-
 $(function(){
 
 
     // homepage map visualisation
   $('#international-reach').each(function(){
 
+    var autochange = true;
+
+    var $panel = $(this);
+
+    $panel.hover(function(){
+      autochange = false;
+    }, function(){
+      autochange = true;
+    })
+
     $map = $('.map', this);
+    $jurisdictions = $('select', this);
+    $actions = $('.actions', this);
 
-    // var width = 500,
-    //     height = 500;
+    var access_code;
+    $actions.on('click', '.create-certificate', function(){
+      // use the related certificate to populate the dialog form
+      
+      var $hidden = $('<input>', {type: 'hidden', name:'survey_access_code', value:access_code})
+      $hidden.appendTo('form.start-survey');
 
-    // var projection = d3.geo.orthographic()
-    //     .scale(250)
-    //     .translate([width / 2, height/2])
-    //     .clipAngle(90);
-
-    // var path = d3.geo.path()
-    //     .projection(projection);
-
-    // var λ = d3.scale.linear()
-    //     .domain([0, width])
-    //     .range([-180, 180]);
-
-    // var φ = d3.scale.linear()
-    //     .domain([0, height])
-    //     .range([90, -90]);
-
-    // var svg = d3.select($map.get(0)).append("svg")
-    //     .attr("width", width)
-    //     .attr("height", height);
-
-    // svg.on("mousemove", function() {
-    //   var p = d3.mouse(this);
-    //   projection.rotate([λ(p[0]), φ(p[1])]);
-    //   svg.selectAll("path").attr("d", path);
-    // });
-
-    // d3.json("/assets/data/world-110m.json", function(error, world) {
-    //   svg.append("path")
-    //       .datum(topojson.feature(world, world.objects.land))
-    //       .attr("class", "land")
-    //       .attr("d", path);
-    // });
+      // remove on close
+      $(document).one('hidden', '.modal', function () {
+        $hidden.remove();
+      });
+    })
 
 
     var width = 500,
@@ -68,14 +55,15 @@ $(function(){
         .context(c);
 
     var title = d3.select("h1");
+    var dropdown = d3.select($jurisdictions.get(0));
 
-    queue()
+   queue()
     .defer(d3.json, "/assets/data/world-110m.json")
     .defer(d3.tsv, "/assets/data/world-country-names.tsv")
+    .defer(d3.json, "/surveys/jurisdictions.json")
     .await(ready);
 
-    function ready(error, world, names) {
-      console.log(error, world, names)
+    function ready(error, world, names, jurisdictions) {
       var globe = {type: "Sphere"},
           land = topojson.feature(world, world.objects.land),
           countries = topojson.feature(world, world.objects.countries).features,
@@ -86,32 +74,71 @@ $(function(){
       countries = countries.filter(function(d) {
         return names.some(function(n) {
           if (d.id == n.id) return d.name = n.name;
+        }) && jurisdictions.some(function(n) {
+          if (d.name == n.title){
+            return $.extend(d, n);
+          }
         });
       }).sort(function(a, b) {
         return a.name.localeCompare(b.name);
       });
 
-      (function transition() {
-        d3.transition()
+      dropdown
+        .on('change', function(d){
+          setJurisdiction(this.options[this.selectedIndex].__data__);
+          autochange = false
+        })
+        .selectAll('option')
+        .data(countries).enter().append("option")
+        .text(function(d){ return d.full_title; })
+
+
+      function setJurisdiction(country){
+          d3.transition()
             .duration(1250)
             .each("start", function() {
-              title.text(countries[i = (i + 1) % n].name);
+              $actions.find('.badge').text(country.name);
+              $actions.find('.status').text(country.status);
+              $actions.show();
+
+              access_code = country.access_code;
+
+              dropdown.selectAll('option')
+                .property('selected', function(d){return d.id == country.id ? 'selected' : ''})
+
+
             })
             .tween("rotate", function() {
-              var p = d3.geo.centroid(countries[i]),
+              var p = d3.geo.centroid(country),
                   r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
               return function(t) {
                 projection.rotate(r(t));
                 c.clearRect(0, 0, width, height);
                 c.fillStyle = "#000", c.beginPath(), path(land), c.fill();
-                c.fillStyle = "#f00", c.beginPath(), path(countries[i]), c.fill();
+                c.fillStyle = "#00b7ff", c.beginPath(), path(country), c.fill();
                 c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
                 // c.strokeStyle = "#000", c.lineWidth = 1, c.beginPath(), path(globe), c.stroke();
               };
             })
-          .transition()
-            .each("end", transition);
-      })();
+      }
+
+
+      function randomJurisdiction(){
+        var country = countries[Math.floor(Math.random()*countries.length)];
+        setJurisdiction(country);
+      };
+
+
+      setInterval(function(){
+        if(autochange) randomJurisdiction();
+      }, 2500);
+
+      // start now
+      randomJurisdiction();
+
+      // display the panel
+      $panel.css({visibility:'visible',height:''});
+
     }
 
 

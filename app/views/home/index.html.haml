@@ -68,14 +68,22 @@
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
 
 
-#international-reach
+#international-reach{style: 'visibility:hidden;height:500px;'}
   .row
     .span8
       .map
-    .span4
-      %h2 International Reach
+    .span4.controls
+      %h3
+        International Reach
       %p select a juristictiction to view status 
-      %p= select_tag(:juristiction_access_code, options_for_select(jurisdiction_options(@surveys)))
+      %select
+      .actions
+        %p
+          = new_certificate_link({role: 'button', class: ['btn', 'btn-small', 'btn-primary', 'create-certificate'], link_text: t('homepage.start_new_certificate')})
+        .jurisdiction
+          .badge
+          %span.status
+
 
 - content_for(:foot_scripts) do
   = javascript_include_tag :map
