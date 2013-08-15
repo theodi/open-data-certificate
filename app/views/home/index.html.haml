@@ -70,12 +70,11 @@
 
 #international-reach{style: 'visibility:hidden;height:500px;'}
   .row
-    .span8
+    .span6
       .map
-    .span4.controls
-      %h3
-        International Reach
-      %p select a juristictiction to view status 
+    .span6.controls
+      %h2= t('homepage.international_reach.title')
+      %p= t('homepage.international_reach.description')
       %select
       .actions
         %p

@@ -129,6 +129,9 @@ en:
       description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
       odi_name: Open Data Institute
       link: Get in touch
+    international_reach:
+      title: Where can you create certificates?
+      description: Different countries have different laws, so their certificates are slightly different too. Choose your country to create the right certificate.
 
   certificates:
     certificates: Certificates
