@@ -57,7 +57,7 @@
           %h1
             %a{:href => "http://www.theodi.org"}= t('footmenu.odi_name')
           %p
-            %a{:href => "http://www.theodi.org/contact"}= t('footmenu.odi_name') + (', 65 Clifton Street, London EC2A 4JE')
+            = link_to "#{t('footmenu.odi_name')}, 65 Clifton Street, London EC2A 4JE", 'http://www.theodi.org/contact'
             
           %p
             %a{:href => "mailto:info@theodi.org"} info@theodi.org
