@@ -78,7 +78,7 @@ $(function(){
           if (d.name == n.title) return $.extend(d, n);
         });
       }).sort(function(a, b) {
-        return a.name.localeCompare(b.name);
+        return a.full_title.localeCompare(b.full_title);
       });
 
       dropdown
