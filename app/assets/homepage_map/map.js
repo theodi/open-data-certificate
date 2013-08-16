@@ -16,7 +16,7 @@ $(function(){
       autochange = false;
     }, function(){
       autochange = true;
-    })
+    });
 
     $map = $('.map', this);
     $jurisdictions = $('select', this);
@@ -26,14 +26,14 @@ $(function(){
     $actions.on('click', '.create-certificate', function(){
       // use the related certificate to populate the dialog form
       
-      var $hidden = $('<input>', {type: 'hidden', name:'survey_access_code', value:access_code})
+      var $hidden = $('<input>', {type: 'hidden', name:'survey_access_code', value:access_code});
       $hidden.appendTo('form.start-survey');
 
       // remove on close
       $(document).one('hidden', '.modal', function () {
         $hidden.remove();
       });
-    })
+    });
 
 
     var width = 500,
@@ -73,11 +73,9 @@ $(function(){
 
       countries = countries.filter(function(d) {
         return names.some(function(n) {
-          if (d.id == n.id) return d.name = n.name;
+          if (d.id == n.id) return (d.name = n.name);
         }) && jurisdictions.some(function(n) {
-          if (d.name == n.title){
-            return $.extend(d, n);
-          }
+          if (d.name == n.title) return $.extend(d, n);
         });
       }).sort(function(a, b) {
         return a.name.localeCompare(b.name);
@@ -86,11 +84,11 @@ $(function(){
       dropdown
         .on('change', function(d){
           setJurisdiction(this.options[this.selectedIndex].__data__);
-          autochange = false
+          autochange = false;
         })
         .selectAll('option')
         .data(countries).enter().append("option")
-        .text(function(d){ return d.full_title; })
+        .text(function(d){ return d.full_title; });
 
 
       function setJurisdiction(country){
@@ -104,7 +102,7 @@ $(function(){
               access_code = country.access_code;
 
               dropdown.selectAll('option')
-                .property('selected', function(d){return d.id == country.id ? 'selected' : ''})
+                .property('selected', function(d){return d.id == country.id ? 'selected' : '';});
 
 
             })
@@ -119,14 +117,14 @@ $(function(){
                 c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
                 // c.strokeStyle = "#000", c.lineWidth = 1, c.beginPath(), path(globe), c.stroke();
               };
-            })
+            });
       }
 
 
       function randomJurisdiction(){
         var country = countries[Math.floor(Math.random()*countries.length)];
         setJurisdiction(country);
-      };
+      }
 
 
       setInterval(function(){
