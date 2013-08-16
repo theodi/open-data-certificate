@@ -82,6 +82,13 @@
         .jurisdiction
           .badge
           %span.status
+        %dl.statuses
+          %dt= t('statuses.alpha.title')
+          %dd= markdown t('statuses.alpha.about')
+          %dt= t('statuses.beta.title')
+          %dd= markdown t('statuses.beta.about')
+          %dt= t('statuses.final.title')
+          %dd= markdown t('statuses.final.about')
 
 
 - content_for(:foot_scripts) do
