@@ -65,11 +65,21 @@ class DatasetTest < ActiveSupport::TestCase
     refute_nil(dataset)
   end
 
+  test "#destroy_if_no_responses should destroy the dataset if the response_sets is empty"  do 
+
+    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
+
+    dataset.reload
+
+    dataset.destroy_if_no_responses
+    dataset = Dataset.find_by_id(dataset.id)
+    assert_nil(dataset)
+  end
+
+
 
       
-      # create a response set or three
-      # make sure the most recent one is returned
-
+      
 
 
   
