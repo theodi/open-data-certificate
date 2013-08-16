@@ -12,7 +12,7 @@ class Survey < ActiveRecord::Base
   DEFAULT_ACCESS_CODE = 'gb'
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
-  attr_accessible :full_title, :meta_map
+  attr_accessible :full_title, :meta_map, :status
 
   has_many :response_sets
 
