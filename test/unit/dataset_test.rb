@@ -52,6 +52,19 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(dataset.newest_response_set, response_set_2)
   end
 
+  test "#newest_completed_response_set should return the most recent response set completed" do
+    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
+    survey = FactoryGirl.create(:survey)
+    response_set_1 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
+    completed_response_set_2 = FactoryGirl.create(:completed_response_set, survey: survey, dataset: dataset)
+    completed_response_set_3 = FactoryGirl.create(:completed_response_set, survey: survey, dataset: dataset)
+    response_set_4 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
+
+    dataset.reload
+
+    assert_equal(dataset.newest_completed_response_set, completed_response_set_3)
+  end
+
   test "#destroy_if_no_responses should not destroy the dataset if the response_sets is not empty" do
 
     dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
@@ -76,11 +89,4 @@ class DatasetTest < ActiveSupport::TestCase
     assert_nil(dataset)
   end
 
-
-
-      
-      
-
-
-  
 end
