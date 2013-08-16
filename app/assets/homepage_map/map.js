@@ -4,6 +4,14 @@
 
 $(function(){
 
+  var colours = {
+    alpha: "#666",
+    beta: "#000",
+    "final": "#0f0",
+    selected: "#00b7ff",
+    border: "#fff"
+  };
+
 
     // homepage map visualisation
   $('#international-reach').each(function(){
@@ -80,6 +88,19 @@ $(function(){
         return a.full_title.localeCompare(b.full_title);
       });
 
+      // This isn't a very efficient way to do this, ideally we'd create 
+      // seperate land regions for each status, though this will work while
+      // we've only got a few
+      var achieved = {
+        // 'alpha' : default colour
+        'beta':countries.filter(function(d){
+          return d.status == 'beta';
+        }),
+        'final':countries.filter(function(d){
+          return d.status == 'final';
+        })
+      };
+
       dropdown
         .on('change', function(d){
           setJurisdiction(this.options[this.selectedIndex].__data__);
@@ -114,9 +135,23 @@ $(function(){
               return function(t) {
                 projection.rotate(r(t));
                 c.clearRect(0, 0, width, height);
-                c.fillStyle = "#000", c.beginPath(), path(land), c.fill();
-                c.fillStyle = "#00b7ff", c.beginPath(), path(country), c.fill();
-                c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
+
+                // alpha (everything)
+                c.fillStyle = colours.alpha, c.beginPath(), path(land), c.fill();
+
+                // beta
+                c.fillStyle = colours.beta, c.beginPath(), achieved.beta.forEach(path), c.fill();
+
+                // final
+                c.fillStyle = colours['final'], c.beginPath(), achieved['final'].forEach(path), c.fill();
+
+                // selected
+                c.fillStyle = colours.selected, c.beginPath(), path(country), c.fill();
+
+                // borders
+                c.strokeStyle = colours.border, c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
+
+                // outline
                 // c.strokeStyle = "#000", c.lineWidth = 1, c.beginPath(), path(globe), c.stroke();
               };
             });
