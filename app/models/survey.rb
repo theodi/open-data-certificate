@@ -63,7 +63,8 @@ class Survey < ActiveRecord::Base
 
   def requirements
     # questions.select(&:is_a_requirement?)
-    questions.where(display_type: 'label').where('requirement > ""')
+    # questions.where(display_type: 'label').where('requirement > ""')
+    questions.required
   end
 
   def only_questions
@@ -71,7 +72,8 @@ class Survey < ActiveRecord::Base
   end
 
   def mandatory_questions
-    questions.where(:is_mandatory => true)
+    # questions.where(:is_mandatory => true)
+    questions.mandatory
   end
 
   def valid?(context = nil)

@@ -4,6 +4,8 @@ class Question < ActiveRecord::Base
   attr_accessible :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
+  scope :required, -> { where('display_type = "label" AND requirement > ""') }
+  scope :mandatory, -> { where(is_mandatory: true) }
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
