@@ -8,9 +8,13 @@ $(function(){
     // homepage map visualisation
   $('#international-reach').each(function(){
 
-    var autochange = true;
-
-    var $panel = $(this);
+    var access_code,
+        autochange = true,
+        $panel = $(this),
+        $map = $('.map', this),
+        $jurisdictions = $('select', this),
+        $actions = $('.actions', this),
+        $statuses = $('.statuses', this);
 
     $panel.hover(function(){
       autochange = false;
@@ -18,12 +22,6 @@ $(function(){
       autochange = true;
     });
 
-    $map = $('.map', this);
-    $jurisdictions = $('select', this);
-    $actions = $('.actions', this);
-    $statuses = $('.statuses', this);
-
-    var access_code;
     $actions.on('click', '.create-certificate', function(){
       // use the related certificate to populate the dialog form
       
