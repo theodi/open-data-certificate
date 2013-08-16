@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def markdown text
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @markdown.render(text).html_safe
+  end
+
   # the class for the main div (allows you to override .container when you
   # want more control)
   def main_container_class
