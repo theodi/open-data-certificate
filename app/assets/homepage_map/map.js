@@ -21,6 +21,7 @@ $(function(){
     $map = $('.map', this);
     $jurisdictions = $('select', this);
     $actions = $('.actions', this);
+    $statuses = $('.statuses', this);
 
     var access_code;
     $actions.on('click', '.create-certificate', function(){
@@ -98,6 +99,9 @@ $(function(){
               $actions.find('.badge').text(country.name);
               $actions.find('.status').text(country.status);
               $actions.show();
+
+              $statuses.children('.' + country.status).show()
+                        .siblings().hide();
 
               access_code = country.access_code;
 
