@@ -202,6 +202,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    railroady (1.1.0)
     rails (3.2.13)
       actionmailer (= 3.2.13)
       actionpack (= 3.2.13)
@@ -355,6 +356,7 @@ DEPENDENCIES
   pry
   rack-cors
   rack-linkeddata
+  railroady
   rails (= 3.2.13)
   rails-footnotes (>= 3.7.9)
   ruby-prof
