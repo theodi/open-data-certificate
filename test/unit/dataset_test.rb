@@ -39,4 +39,24 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(dataset.documentation_url, 'http://foo.com/bar')
   end
+
+  test "#newest_response_set should return the most recent response set" do
+      
+    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
+    survey = FactoryGirl.create(:survey)
+    response_set_1 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
+    response_set_2 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
+
+    dataset.reload
+
+    assert_equal(dataset.newest_response_set, response_set_2)
+  end
+
+      
+      # create a response set or three
+      # make sure the most recent one is returned
+
+
+
+  
 end
