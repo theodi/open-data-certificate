@@ -17,18 +17,20 @@ $(function(){
   $('#international-reach').each(function(){
 
     var access_code,
-        autochange = true,
+        autoadvance = true,
         $panel = $(this),
         $map = $('.map', this),
         $jurisdictions = $('select', this),
         $actions = $('.actions', this),
-        $statuses = $('.statuses', this);
+        $statuses = $('.statuses', this),
+        $autoadvance = $('.autoadvance', this);
 
-    $panel.hover(function(){
-      autochange = false;
-    }, function(){
-      autochange = true;
-    });
+    $autoadvance.on('click', function(){
+      $autoadvance.fadeOut();
+      autoadvance = true;
+    })
+    // autoadvance by default
+    .hide();
 
     $actions.on('click', '.create-certificate', function(){
       // use the related certificate to populate the dialog form
@@ -85,7 +87,7 @@ $(function(){
           if (d.name == n.title) return $.extend(d, n);
         });
       }).sort(function(a, b) {
-        return a.full_title.localeCompare(b.full_title);
+        return (a.full_title||"").localeCompare(b.full_title);
       });
 
       // This isn't a very efficient way to do this, ideally we'd create 
@@ -104,7 +106,8 @@ $(function(){
       dropdown
         .on('change', function(d){
           setJurisdiction(this.options[this.selectedIndex].__data__);
-          autochange = false;
+          autoadvance = false;
+          $autoadvance.fadeIn();
         })
         .selectAll('option')
         .data(countries).enter().append("option")
@@ -165,7 +168,7 @@ $(function(){
 
 
       setInterval(function(){
-        if(autochange) randomJurisdiction();
+        if(autoadvance) randomJurisdiction();
       }, 2500);
 
       // start now

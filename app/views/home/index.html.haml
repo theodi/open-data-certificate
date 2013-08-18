@@ -75,7 +75,10 @@
     .span6.controls
       %h2= t('homepage.international_reach.title')
       %p= t('homepage.international_reach.description')
-      %select
+      .form-inline
+        %select
+        %a.autoadvance.btn{title: t('homepage.international_reach.auto_advance')}
+          %i.icon.icon-refresh
       .actions
         %p
           = new_certificate_link({role: 'button', class: ['btn', 'btn-small', 'btn-primary', 'create-certificate'], link_text: t('homepage.start_new_certificate')})
