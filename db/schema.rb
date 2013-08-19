@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806160042) do
+ActiveRecord::Schema.define(:version => 20130819113304) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -178,11 +178,12 @@ ActiveRecord::Schema.define(:version => 20130806160042) do
     t.string   "access_code"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "api_id"
     t.integer  "dataset_id"
-    t.string   "aasm_state",   :default => "draft"
+    t.string   "aasm_state",     :default => "draft"
+    t.integer  "attained_index"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
