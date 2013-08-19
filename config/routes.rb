@@ -11,6 +11,7 @@ OpenDataCertificate::Application.routes.draw do
     # routes,  though try it out for now
     resources :response_sets, :only => :destroy do
       post :publish, on: :member
+      get :autofill, on: :member
     end
 
   end
@@ -52,7 +53,7 @@ OpenDataCertificate::Application.routes.draw do
       get :cancel
     end
   end
-  
+
   # Get badge for a url
   get 'get_badge' => 'certificates#get_badge'
 

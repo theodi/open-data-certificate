@@ -355,8 +355,6 @@ $(document).ready(function(){
           affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
         }
 
-        affectedFields.push(fillMe("publisherUrl", ' '))
-
         // Data type
         if (json.update_frequency.length == 0 && json.distributions.length == 1) {
           // One-off release of a single dataset
