@@ -271,6 +271,7 @@ GEM
       rdf (>= 0.3.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.0.0)
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -369,6 +370,7 @@ DEPENDENCIES
   rack-linkeddata
   rails (= 3.2.13)
   rails-footnotes (>= 3.7.9)
+  redcarpet
   ruby-prof
   sass-rails (~> 3.2.3)
   shoulda

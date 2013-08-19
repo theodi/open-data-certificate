@@ -10,6 +10,7 @@
       .span6
         %h1= t('homepage.dont_have_an_account')
         %p= t('homepage.register_later_message')
-        = form_tag non_authenticated_start_questionnaire_path do
+        = form_tag non_authenticated_start_questionnaire_path, class: 'start-survey' do
+        
           %button.btn.btn-large.btn-primary{"data-btn-confirmable" => t('homepage.creating_questionnaire')}= t('homepage.continue_without_registering')
         = link_to t('homepage.create_an_account'), new_user_registration_path, :class => 'btn btn-large btn-info btn-info-modal'
