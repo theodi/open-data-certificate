@@ -24,36 +24,36 @@ class KittenData < ActiveRecord::Base
   def map
     fields = {}
 
-    fields["dataTitle"] = data.title
+    fields["dataTitle"] = data[:title]
 
-    if data.publishers.any?
-      fields["publisher"] = data.publishers[0].name
-      fields["publisherUrl"] = data.publishers[0].homepage
-      fields["contactEmail"] = data.publishers[0].mbox
+    if data[:publishers].any?
+      fields["publisher"] = data[:publishers][0].name
+      fields["publisherUrl"] = data[:publishers][0].homepage
+      fields["contactEmail"] = data[:publishers][0].mbox
     end
 
-    # Data type
-    if data.update_frequency.empty? && data.distributions.length == 1
+    # Release type
+    if data[:update_frequency].empty? && data[:distributions].length == 1
       fields["releaseType"] = "oneoff"
-    elsif data.update_frequency.empty? && data.distributions.length > 1
+    elsif data[:update_frequency].empty? && data[:distributions].length > 1
       fields["releaseType"] = "collection"
-    elsif data.update_frequency.any? && data.distributions.length > 1
+    elsif data[:update_frequency].any? && data[:distributions].length > 1
       fields["releaseType"] = "series"
     end
 
-    if data.title.include?("API") || data.description.include?("API")
+    if data[:title].include?("API") || data[:description].include?("API")
       fields["releaseType"] = "service"
     end
 
-    if data.rights
+    if data[:rights]
       fields["publisherRights"] = "yes"
-      fields["copyrightURL"] = data.rights.uri
-      fields["dataLicence"] = KittenData::DATA_LICENCES[data.rights.dataLicense]
-      fields["contentLicence"] = KittenData::CONTENT_LICENCES[data.rights.contentLicense]
+      fields["copyrightURL"] = data[:rights].uri
+      fields["dataLicence"] = KittenData::DATA_LICENCES[data[:rights].dataLicense]
+      fields["contentLicence"] = KittenData::CONTENT_LICENCES[data[:rights].contentLicense]
 
-    elsif data.licenses.any?
+    elsif data[:licenses].any?
       fields["publisherRights"] = "yes"
-      fields["dataLicence"] = KittenData::DATA_LICENCES[data.licenses[0].uri]
+      fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
 
       fields["contentLicence"] = "uk_ogl" if fields["dataLicence"] == "uk_ogl"
 
@@ -77,27 +77,28 @@ class KittenData < ActiveRecord::Base
       fields["codelists"] = "false"
     end
 
-    data.distributions.map do |distribution|
-      if data.distributions[i].structured
+    # Checks if any of the distributions are machine readable or open
+    data[:distributions].map do |distribution|
+      if data[:distributions][i].structured
         fields["machineReadable"] = "true"
       end
 
-      if data.distributions[i].open
+      if data[:distributions][i].open
         fields["openStandard"] = "true"
       end
     end
 
     # Does your data documentation contain machine readable documentation for:
     metadata = []
-    metadata.push("title") unless data.title.empty?
-    metadata.push("description") unless data.description.empty?
-    metadata.push("issued") unless data.release_date.empty?
-    metadata.push("modified") unless data.modified_date.empty?
-    metadata.push("accrualPeriodicity") unless data.update_frequency.empty?
-    metadata.push("publisher") unless data.publishers.empty?
-    metadata.push("keyword") unless data.keywords.empty?
-    metadata.push("distribution") unless data.distributions.empty?
-    metadata.push("temporal") unless data.temporal_coverage.start.nil? && data.temporal_coverage.end.nil?
+    metadata.push("title") unless data[:title].empty?
+    metadata.push("description") unless data[:description].empty?
+    metadata.push("issued") unless data[:release_date].empty?
+    metadata.push("modified") unless data[:modified_date].empty?
+    metadata.push("accrualPeriodicity") unless data[:update_frequency].empty?
+    metadata.push("publisher") unless data[:publishers].empty?
+    metadata.push("keyword") unless data[:keywords].empty?
+    metadata.push("distribution") unless data[:distributions].empty?
+    metadata.push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
 
     fields["documentationMetadata"] = metadata
   end
