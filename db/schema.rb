@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(:version => 20130816161535) do
   add_index "answers", ["question_id", "display_order"], :name => "i_answers_on_question_id_and_display_order"
   add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
 
+  create_table "autocompleted_responses", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
@@ -212,6 +217,7 @@ ActiveRecord::Schema.define(:version => 20130816161535) do
     t.string   "api_id"
     t.boolean  "error",             :default => false
     t.boolean  "autocompleted",     :default => false
+    t.string   "type"
   end
 
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true

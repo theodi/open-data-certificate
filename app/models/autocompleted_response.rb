@@ -1,0 +1,2 @@
+class AutocompletedResponse < Response
+end
