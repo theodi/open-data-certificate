@@ -215,7 +215,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def outstanding_requirements
-    @outstanding_requirements ||= (triggered_requirements - completed_requirements)
+    @outstanding_requirements ||= triggered_requirements.select { |r| !r.requirement_met_by_responses?(self.responses) }
   end
 
   def responses_for_questions(questions)
