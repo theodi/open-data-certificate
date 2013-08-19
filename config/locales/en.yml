@@ -143,7 +143,7 @@ en:
     international_reach:
       title: Where can you create certificates?
       description: Different countries have different laws, so their certificates are slightly different too. Choose your country to create the right certificate.
-      auto_advance: Randomise selection
+      auto_advance: Cycle jurisdictions
       legend:
         legend: Legend
         alpha:  Certificate in alpha stage
