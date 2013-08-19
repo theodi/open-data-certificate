@@ -45,6 +45,17 @@ en:
       title_with_level: Expert level
       description: this open data is an exceptional example of information infrastructure.
 
+  statuses:
+    alpha:
+      title: Alpha
+      about: "This certificate hasn't been properly [localised](https://github.com/theodi/open-data-certificate/wiki/Localisation) yet, and we need your help! Please contact [certificate@theodi.org](mailto:certificate@theodi.org)"
+    beta:
+      title: Beta
+      about: "This certificate has been localised and is undergoing some final testing. Take a look and see if you agree that it's fit for purpose. If not, please contact [certificate@theodi.org](mailto:certificate@theodi.org) or [raise an issue on GitHub](https://github.com/theodi/open-data-certificate/issues?labels=questionnaire)."
+    final:
+      title: Final
+      about: "This certificate has been tested and is ready for action, but if you spot any problems, please contact [certificate@theodi.org](mailto:certificate@theodi.org) or [raise an issue on GitHub](https://github.com/theodi/open-data-certificate/issues?labels=questionnaire)."
+
   questionnaire_header: 'All open data is good, but some is better than others. This tool gives you a certificate that will help people understand the open data you are publishing.'
 
   questionnaire_footer: Improving Your Open Data
@@ -129,6 +140,15 @@ en:
       description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
       odi_name: Open Data Institute
       link: Get in touch
+    international_reach:
+      title: Where can you create certificates?
+      description: Different countries have different laws, so their certificates are slightly different too. Choose your country to create the right certificate.
+      auto_advance: Cycle jurisdictions
+      legend:
+        legend: Legend
+        alpha:  Certificate in alpha stage
+        beta:   Certificate in beta stage
+        final:  Certificate in final stage
 
   certificates:
     certificates: Certificates

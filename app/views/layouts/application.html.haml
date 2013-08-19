@@ -83,3 +83,4 @@
                 = link_to t('footmenu.get_in_touch'), '/contact'
 
     = analytics_init if Rails.env.production?
+    = yield(:foot_scripts)
