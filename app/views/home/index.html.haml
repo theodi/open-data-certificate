@@ -78,8 +78,10 @@
       %p= t('homepage.international_reach.description')
       .form-inline
         %select
-        %a.autoadvance.btn{title: t('homepage.international_reach.auto_advance')}
+        %a.autoadvance{title: t('homepage.international_reach.auto_advance')}
           %i.icon.icon-refresh
+            %small
+              Randomise selection
       .actions
         %p
           = new_certificate_link({role: 'button', class: ['btn', 'btn-small', 'btn-primary', 'create-certificate'], link_text: t('homepage.start_new_certificate')})
@@ -93,6 +95,15 @@
           %dd.beta= markdown t('statuses.beta.about')
           %dt= t('statuses.final.title')
           %dd.final= markdown t('statuses.final.about')
+        %hr
+        %h3 
+          Legend
+        %span.label.alpha
+          Certificate in alpha stage
+        %span.label.beta
+          Certificate in beta stage
+        %span.label.final
+          Certificate in final stage
 
 
 - content_for(:foot_scripts) do

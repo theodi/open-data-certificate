@@ -7,7 +7,7 @@ $(function(){
   var colours = {
     alpha: "#666",
     beta: "#000",
-    "final": "#0f0",
+    "final": "#006e99",
     selected: "#00b7ff",
     border: "#fff"
   };
