@@ -6,6 +6,8 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
+    resources :jurisdictions, :only => :index
+
     # have a response_set resource for deleting for now, have
     # a feeling that this could include a couple of the other
     # routes,  though try it out for now
@@ -57,9 +59,9 @@ OpenDataCertificate::Application.routes.draw do
   get 'get_badge' => 'certificates#get_badge'
 
   # 'Static' pages managed by HighVoltage here...
-  get 'about' => 'high_voltage/pages#show', :id => 'about'
-  get 'contact' => 'high_voltage/pages#show', :id => 'contact'
-  get 'terms' => 'high_voltage/pages#show', :id => 'terms'
+  get 'about' => 'pages#show', :id => 'about'
+  get 'contact' => 'pages#show', :id => 'contact'
+  get 'terms' => 'pages#show', :id => 'terms'
 
   # Validators
   get 'resolve' => 'validators#resolve'

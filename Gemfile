@@ -84,6 +84,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem 'surveyor'
+gem 'redcarpet'
 gem "devise", ">= 2.2.3"
 gem 'dotenv-rails'
 gem 'httparty'
@@ -95,3 +96,4 @@ gem 'rack-linkeddata'
 gem 'jbuilder'
 gem 'odlifier', :github => 'theodi/odlifier'
 gem 'rack-cors'
+gem 'alternate_rails', :github => 'theodi/alternate-rails'

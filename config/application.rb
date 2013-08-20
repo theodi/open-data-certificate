@@ -59,6 +59,10 @@ module OpenDataCertificate
     # Add fonts to asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+    # Add homepage map to the asset pipeline
+    config.assets.paths << Rails.root.join("app", "assets", "homepage_map")
+    config.assets.precompile += %w( map.js )
+
     # Get around heroku deployment issues
     # https://devcenter.heroku.com/articles/rails-asset-pipeline#troubleshooting
     config.assets.initialize_on_precompile = false
