@@ -23,8 +23,8 @@ en:
     modifications_not_allowed: You cannot change your answers now
     all_mandatory_questions_need_to_be_completed: "All mandatory questions need to be completed"
     please_check_all_your_urls_exist: "Please check all your URLs are correct"
-    must_be_logged_in_to_complete: "Please login or register to complete this questionnaire"
-    you_need_to_register_or_sign_in_to_save: "To generate a certificate and retain your answers for future reference, you need to login or register."
+    must_be_logged_in_to_complete: "Please sign in or register to complete this questionnaire"
+    you_need_to_register_or_sign_in_to_save: "To generate a certificate and retain your answers for future reference, you need to sign in or register."
     please_check_that_the_url_exists: "Please check that the your URL is correct"
     autocompleted_data: "We have automatically completed this data from your previous answers, but you can still change it"
     autocompleted_url_incorrect: "We have automatically completed this URL, but it doesn't seem to be correct"
