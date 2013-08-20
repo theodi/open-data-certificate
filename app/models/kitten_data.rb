@@ -1,7 +1,7 @@
 class KittenData < ActiveRecord::Base
   belongs_to :response_set
 
-  attr_accessible :data
+  attr_accessible :data, :url, :response_set
 
   serialize :data
 

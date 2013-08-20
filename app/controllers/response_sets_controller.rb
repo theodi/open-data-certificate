@@ -18,38 +18,22 @@ class ResponseSetsController < ApplicationController
   end
 
   def autofill
-    @response_set.kitten_data = KittenData.new
+    kitten_data = KittenData.where(url: params[:url], response_set_id: @response_set.id).first_or_create
 
-    dataset = DataKitten::Dataset.new(access_url: params[:url]) rescue nil
-    if dataset != nil && dataset.supported?
-      distributions = []
+    unless kitten_data.data
+      kitten_data.request_data
+      kitten_data.save
+    end
 
-      dataset.distributions.try(:each) { |distribution|
-        distributions << {
-          :title       => distribution.title,
-          :description => distribution.description,
-          :access_url  => distribution.access_url,
-          :extension   => distribution.format.extension,
-          :open        => distribution.format.open?,
-          :structured  => distribution.format.structured?
-        }
+    if kitten_data.data
+      render :json => {
+        data_exists: true,
+        data: kitten_data.fields
       }
-
-      @response_set.kitten_data.data = {
-        :title             => dataset.data_title,
-        :description       => dataset.description,
-        :publishers        => dataset.publishers,
-        :rights            => dataset.rights,
-        :licenses          => dataset.licenses,
-        :update_frequency  => dataset.update_frequency,
-        :keywords          => dataset.keywords,
-        :release_date      => dataset.issued,
-        :modified_date     => dataset.modified,
-        :temporal_coverage => dataset.temporal,
-        :distributions     => distributions
+    else
+      render :json => {
+        data_exists: false
       }
-
-      @response_set.kitten_data.save
     end
   end
 
