@@ -97,7 +97,7 @@ class ResponseSet < ActiveRecord::Base
     val = method_name.to_s.match(/(.+)_determined_from_responses/)
     unless val.nil? and survey.map[val[1].to_sym].nil?
       var = instance_variable_get("@#{method_name}")
-      var ||= value_for val[1]
+      var ||= value_for val[1].to_sym
     else
       super
     end
@@ -105,7 +105,7 @@ class ResponseSet < ActiveRecord::Base
 
   def data_licence_determined_from_responses
     if @data_licence_determined_from_responses.nil?
-      ref = value_for "data_licence", :reference_identifier
+      ref = value_for :data_licence, :reference_identifier
       case ref
       when "na"
         @data_licence_determined_from_responses = {
@@ -114,8 +114,8 @@ class ResponseSet < ActiveRecord::Base
         }
       when "other"
          @data_licence_determined_from_responses = {
-          :title => value_for("other_dataset_licence_name"),
-          :url   => value_for("other_dataset_licence_url")
+          :title => value_for(:other_dataset_licence_name),
+          :url   => value_for(:other_dataset_licence_url)
          }
       else
         licence = Odlifier::License.new(ref.dasherize)
@@ -130,7 +130,7 @@ class ResponseSet < ActiveRecord::Base
 
   def content_licence_determined_from_responses
     if @content_licence_determined_from_responses.nil?
-      ref = value_for "content_licence", :reference_identifier
+      ref = value_for :content_licence, :reference_identifier
       case ref
       when "na"
         @content_licence_determined_from_responses = {
@@ -139,8 +139,8 @@ class ResponseSet < ActiveRecord::Base
         }
       when "other"
          @content_licence_determined_from_responses = {
-          :title => value_for("other_content_licence_name"),
-          :url   => value_for("other_content_licence_url")
+          :title => value_for(:other_content_licence_name),
+          :url   => value_for(:other_content_licence_url)
          }
       else
         licence = Odlifier::License.new(ref.dasherize)
