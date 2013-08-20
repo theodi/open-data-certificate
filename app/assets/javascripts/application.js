@@ -16,13 +16,15 @@ $(function(){
 
     if($target.size()){
       // create a div to show the message in
-      $('<div class="alert alert-box alert-alert"><h3></h3></div>')
-      .find('h3').text(message)
-      .end().appendTo($target);
+      $('<div>',{class:'alert alert-box alert-alert'})
+      .append($('<h3>',{text:message}))
+      .appendTo($target);
     } else {
       alert(message);
     }
 
+  }).on('ajax:beforeSend.rails', 'form[data-remote-error-message]', function(){
+    $('.form-errors', this).empty();
   });
 
   // Skrollr data settings
