@@ -11,7 +11,7 @@ OpenDataCertificate::Application.routes.draw do
     # routes,  though try it out for now
     resources :response_sets, :only => :destroy do
       post :publish, on: :member
-      get :autofill, on: :member
+      post :autofill, on: :member
     end
 
   end

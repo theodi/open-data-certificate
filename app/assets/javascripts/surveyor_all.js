@@ -331,7 +331,9 @@ $(document).ready(function(){
   function autocomplete(url, callbacks) {
     if (!validateUrl(url)) return callbacks.fail();
 
-    $.getJSON('/autofill', { url: url } )
+    var id = $('#surveyor').data('response-id')
+
+    $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
       .error(callbacks.fail)
       .done(function(json) {
 
