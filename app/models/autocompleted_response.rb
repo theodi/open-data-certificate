@@ -1,2 +1,0 @@
-class AutocompletedResponse < Response
-end
