@@ -3,6 +3,12 @@ module DeviseHelper
     return "" if resource.errors.empty?
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    if resource.errors.include?(:password)
+      unless resource.errors.include?(:password_confirmation)
+        resource.errors.add(:password_confirmation, '')
+      end
+    end
+
 
     html = <<-HTML
     <div class="alert alert-box alert-alert">

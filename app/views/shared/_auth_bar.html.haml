@@ -11,5 +11,5 @@
     = link_to('Register', new_user_registration_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#register")
     #register.registration_form_container= render 'devise/registrations/form', :resource => User.new, :resource_name => 'user', :remote => true
   %li.dropdown-menu-button
-    = link_to('Login', new_user_session_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#login")
+    = link_to(t('homepage.log_in'), new_user_session_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#login")
     #login.sign_in_form_container= render 'devise/sessions/form', :resource => User.new, :resource_name => 'user', :remote => true
