@@ -976,6 +976,23 @@ section {
 
 }
 
+// responsive youtube embed via - http://avexdesigns.com/responsive-youtube-embed/
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-unit {
   background: none;
   padding: 0;
@@ -1336,7 +1353,8 @@ td.action {
   }
 
   // jurisdiction badge
-  .jurisdiction{margin:.5em;}
+  .jurisdiction{
+    margin:.5em;}
 
 }
 
@@ -1459,27 +1477,31 @@ td.action {
   background-image:url(/assets/status/archived.png);
 }
 
-
+.jurisdiction {
+  .status {
+    font-weight: normal;
+    font-size: 13px;
+    color: @odiBlue;
+  }
+}
 
 // Questionnaire (survey) view //
 
 // jurisdiction select at the top of the certificate
 header .jurisdiction{
-  a{
+  a {
     cursor: pointer;
-
-    // match the badge styles
-    display: inline-block;
-    padding: 2px 4px;
-    font-size: @baseFontSize * .846;
+    margin-left: 11px;
+    font-size: 14px;
     font-weight: bold;
-    line-height: 14px; // ensure proper line-height if floated
     color: @white;
-    vertical-align: baseline;
     white-space: nowrap;
   }
-  .popover{
-    color:@black;
+  .popover {
+    color: @black;
+  }
+  .status {
+    color: @white;
   }
 }
 
@@ -1770,7 +1792,7 @@ header .jurisdiction{
       }
     }
 
-    &.error {
+    .highlight_mandatory&.mandatory.no-response{
       background: @odiCrimsonLight;
 
       input.string {
@@ -2101,6 +2123,11 @@ strong.certificate-level {
   textarea {
     .box-sizing(border-box);
     width: 300px;
+    height: 70px;
+  }
+
+  p {
+    margin-bottom: 12px;
   }
 }
 
@@ -2529,4 +2556,45 @@ width: 328px;
   .name_values td {vertical-align: top;}
   legend {background-color: #fff;}
   fieldset {text-align: left; border: 1px dashed #aaa; padding: 0.5em 1em 1em 1em; margin: 1em 2em; color: #444; background-color: #FFF;}
+}
+
+
+#international-reach{
+  .map{
+    text-align: center; 
+    margin-top: 40px;
+  }
+  canvas{
+    max-width: 100%;
+  }
+
+  .autoadvance{
+    cursor: pointer;
+    padding-left: 10px
+  }
+
+  .actions{
+    margin-top:1em;
+  }
+  .controls{
+    h2 {
+      color: #0088CC;
+      font-weight: normal;
+      border-top: 1px solid #e1e1e1;
+      padding-top: 20px;
+      margin-top: 25px;
+    }
+  }
+  
+  span.label.alpha {
+    background-color: #666;
+    display: inline-block;
+  }
+  span.label.beta {
+    background-color: #000;
+  }
+  span.label.final {
+    background-color: #006e99;
+  }
+
 }

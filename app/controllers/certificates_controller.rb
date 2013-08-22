@@ -1,5 +1,7 @@
 class CertificatesController < ApplicationController
   include CertificatesHelper
+  
+  before_filter(:only => [:show]) { alternate_formats [:json] }
 
   def show
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
@@ -54,10 +56,8 @@ class CertificatesController < ApplicationController
       @mandatory_fields = @response_set.incomplete_triggered_mandatory_questions
 
       respond_to do |format|
-        format.html do
-          render 'surveyor/requirements'
-        end
-        format.json { @response_set.outstanding_requirements.to_json }
+        format.html { render 'surveyor/requirements' }
+        format.json { render :text => @response_set.outstanding_requirements.to_json, content_type: "application/json" }
       end
     else
       flash[:warning] = t('surveyor.unable_to_find_your_responses')
@@ -67,7 +67,9 @@ class CertificatesController < ApplicationController
 
   def embed
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
-    render layout: 'embedded_certificate'
+    respond_to do |format|
+      format.html { render layout: 'embedded_certificate' }
+    end
   end
 
   def badge

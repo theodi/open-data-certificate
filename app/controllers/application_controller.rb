@@ -20,12 +20,16 @@ class ApplicationController < ActionController::Base
 
   def home
     @surveys = Survey.available_to_complete
-    render '/home/index'
+    respond_to do |format|
+      format.html { render '/home/index' }
+    end
   end
 
   def status
     @job_count = Delayed::Job.count
-    render '/home/status'
+    respond_to do |format|
+      format.html { render '/home/status' }
+    end
   end
 
   # A user pings this url if they have js enabled, so we can tell surveyor

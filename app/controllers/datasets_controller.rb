@@ -24,6 +24,10 @@ class DatasetsController < ApplicationController
         @certificates.search_country(params[:search])
       ].flatten.uniq).page params[:page]
     end
+    
+    respond_to do |format|
+      format.html
+    end
   end
 
   def typeahead
@@ -64,9 +68,17 @@ class DatasetsController < ApplicationController
   def dashboard
     @datasets = current_user.try(:datasets) || []
     @surveys = Survey.available_to_complete
+    
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
     @certificates = @dataset.certificates.where(:published => true).by_newest
+    
+    respond_to do |format|
+      format.html
+    end
   end
 end

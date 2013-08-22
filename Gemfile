@@ -8,8 +8,6 @@ gem 'rails', '3.2.13'
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
 
-gem 'surveyor'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -85,6 +83,7 @@ gem 'thin'
 
 gem "ransack"
 gem 'surveyor'
+gem 'redcarpet'
 gem "devise", ">= 2.2.3"
 gem 'dotenv-rails'
 gem 'httparty'
@@ -96,3 +95,4 @@ gem 'rack-linkeddata'
 gem 'jbuilder'
 gem 'odlifier', :github => 'theodi/odlifier'
 gem 'rack-cors'
+gem 'alternate_rails', :github => 'theodi/alternate-rails'

@@ -346,7 +346,7 @@ survey 'SE',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
-    a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
+    a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
