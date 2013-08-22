@@ -17,7 +17,6 @@
     - r = response_for(@response_set, q, nil, rg)
 
     - state = 'ok' unless r.new_record?
-    - state = 'error' if highlight_mandatory && q.is_mandatory && r.new_record?
     - state = 'warning' if r.error
 
     - classes = {'row' => true, 'question-row' => true, "q_#{renderer}" => true}
@@ -25,6 +24,7 @@
     - classes['choice-boxes'] = q.pick == "one" || q.pick == "any"
     - classes['mandatory'] = q.is_mandatory
     - classes['has-response'] = !r.new_record?
+    - classes['no-response'] = r.new_record?
     - classes['autocompleted'] = r.autocompleted
     - classes[state] = true if state
 
