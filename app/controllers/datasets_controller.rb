@@ -5,7 +5,11 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user!, only: :dashboard
 
   def index
-    @certificates = Certificate.where(:published => true).by_newest
+
+    @certificates = Certificate.where(:published => true)
+      .joins(:response_set)
+      .order('attained_index DESC, name')
+      .by_newest
 
     # add filters on results
     if(params[:jurisdiction])
