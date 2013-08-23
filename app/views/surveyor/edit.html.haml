@@ -32,7 +32,13 @@
   = render :partial => 'status_panel'
   = render :partial => 'shared/flashes'
 
-  #surveyor{'data-url-incorrect' => t('surveyor.please_check_that_the_url_exists'), 'data-autocompleted' => t('surveyor.autocompleted_data'), 'data-autocompleted-url-incorrect' => t('surveyor.autocompleted_url_incorrect'), 'data-response-id' => @response_set.id}
+  - data = {'response-id' => @response_set.id}
+  - data['autocompleted'] = t('surveyor.autocompleted_data')
+  - data['url-incorrect'] = t('surveyor.please_check_that_the_url_exists')
+  - data['autocompleted-url-incorrect'] = t('surveyor.autocompleted_url_incorrect')
+  - data['missing-metadata'] = t('surveyor.missing_metadata')
+
+  #surveyor{data: data}
     = hidden_field_tag :surveyor_javascript_enabled, false
 
     .container

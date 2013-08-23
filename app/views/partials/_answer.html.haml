@@ -4,22 +4,23 @@
 - i = response_idx(q.pick != "one") # argument will be false (don't increment i) if we're on radio buttons
 - disabled = defined?(disableFlag) ? disableFlag : false
 - reference_identifier = "#{q.reference_identifier}_#{a.reference_identifier}"
+
 = f.semantic_fields_for i, r do |ff|
   = ff.input :question_id, :as => :quiet unless q.pick == "one" # don't repeat question_id if we're on radio buttons
   = ff.input :api_id, :as => :quiet unless q.pick == "one"
   = ff.input :response_group, :value => rg, :as => :quiet if q.pick != "one" && g && g.display_type == "repeater"
 
-  - status_message = 'surveyor.autocompleted_data' if r.autocompleted
+  - status_message = t('surveyor.autocompleted_data')
   - if a.input_type == 'url' && r.error
-    - status_message = r.autocompleted ? 'surveyor.autocompleted_url_incorrect' : 'surveyor.please_check_that_the_url_exists'
+    - status_message = r.autocompleted ? t('surveyor.autocompleted_url_incorrect') : t('surveyor.please_check_that_the_url_exists')
 
   - case q.pick
   - when "one"
-    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => status_message ? t(status_message) : nil }
+    = ff.input :answer_id, :as => :surveyor_radio, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => status_message }
 
   - when "any"
     = ff.input :autocompleted, :as => :quiet
-    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier}, :response_class => a.response_class, :status_message => { :message => status_message ? t(status_message) : nil }
+    = ff.input :answer_id, :as => :surveyor_check_boxes, :collection => [[a.text_for(nil, @render_context, I18n.locale).html_safe, a.id]], :label => false, :input_html => {:class => a.css_class, :disabled => disabled}, :wrapper_html => {'data-reference-identifier' => reference_identifier, :class => r.metadata_missing ? 'warning' : ''}, :response_class => a.response_class, :status_message => { :message => status_message }
 
   - when "none"
     - if %w(date datetime time float integer string text).include? a.response_class
@@ -29,7 +30,7 @@
                          :hint       => a.text_for(:post, @render_context, I18n.locale), |
                          :label      => "#{h question_text}".html_safe, |
                          :input_html => generate_pick_none_input_html(r.to_formatted_s, a.default_value_for(@render_context, I18n.locale), a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder), |
-                         :status_message => { :message => status_message ? t(status_message) : nil } |
+                         :status_message => { :message => status_message } |
                        } |
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?
       - answer_attrs[:input_html][:placeholder] = a.placeholder_for(@render_context, I18n.locale) unless a.placeholder.blank?

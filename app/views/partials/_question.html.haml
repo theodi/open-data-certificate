@@ -32,8 +32,17 @@
     - classes['autocompleted'] = r.autocompleted
     - classes[state] = true if state
 
+    - data = {}
+    - data['reference-identifier'] = rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier
+    - data['autocompleted-value'] = r.auto_value.kind_of?(Array) ? r.auto_value.try(:join, ',') : r.auto_value if r.auto_value
+    - data['metadata-field'] = true if q.metadata_field?
+
+    - attrs = {:data => data}
+    - attrs[:id] = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
+    - attrs[:class] = classes.select{ |key, value| value }.keys.join(' ')
+
     -# if we are using the default renderer, we will display the question text within that
-    = f.inputs (renderer == :default ? '' : question_text), :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => classes.select{ |key, value| value }.keys.join(' '), 'data-reference-identifier' => rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier do
+    = f.inputs (renderer == :default ? '' : question_text), attrs do
 
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
@@ -46,13 +55,12 @@
         - case renderer
         - when :image, :label, :default_label, :inline_label, :repeater_label
         - when :dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown
-          - status_message = 'surveyor.autocompleted_data' if r.autocompleted
           = f.semantic_fields_for i, r do |ff|
             = ff.input :question_id, :as => :quiet
             = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
-            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message ? t(status_message) : nil }
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => t('surveyor.autocompleted_data') }
         - else # :default, :inline, :inline_default
 
           - if q.pick == "one"
