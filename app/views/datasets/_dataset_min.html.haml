@@ -1,0 +1,26 @@
+/ Down the line, this will support the dashboard view too
+- dataset = dataset_min
+
+.row.response-set-inline
+  .span6
+    %h3
+      .level-badge{class: "level-badge-#{dataset.response_sets.first.certificate.attained_level}"}
+      = dataset.title
+  .span3{style: 'text-align:right'}
+    %p
+      %small
+        Published by 
+        %strong= dataset.curator
+        %br
+        Last updated: #{time_ago_in_words dataset.created_at} ago
+  .span3
+    .jurisdiction
+      .badge
+        = dataset.response_sets.first.jurisdiction
+      %span.status
+        = dataset.response_sets.first.survey.try(:status)
+    %p
+      =link_to 'view certificate', [dataset, dataset.response_sets.first.certificate], class: 'btn btn-mini btn-primary'
+
+
+%hr.heavy

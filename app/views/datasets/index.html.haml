@@ -1,15 +1,18 @@
 - content_for :header_title, t('datasets.page_title')
 
+
+
 %section
   = form_tag datasets_path, method: 'get' do
     %div.form-search
       = text_field_tag :search, params[:search], class: 'typeahead-search'
       = submit_tag t('certificates.search.submit_search'), :class => 'btn'
 
-- if @certificates.any?
-  %dl.unstyled
-    = render partial: 'certificates/certificate', collection: @certificates
-  = paginate @certificates
+- if @datasets.any?
+
+  %hr.heavy
+  = render partial: 'dataset_min', collection: @datasets
+  = paginate @datasets
 
 - else
   %p= t('certificates.no_certificates_found')

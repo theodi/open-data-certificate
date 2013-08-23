@@ -3,7 +3,7 @@ require 'test_helper'
 class DatasetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test "index shows all published certificates" do
+  test "index shows all published datasets" do
     5.times do
       FactoryGirl.create(:published_certificate_with_dataset)
     end
@@ -14,8 +14,34 @@ class DatasetsControllerTest < ActionController::TestCase
     get :index
 
     assert_response :success
-    assert_equal 5, assigns(:certificates).size
-    assert assigns(:certificates).first.published
+    assert_equal 5, assigns(:datasets).size
+    assert assigns(:datasets).first.response_set.published?
+  end
+
+  test "index filters by jurisdiction" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    FactoryGirl.create(:published_certificate_with_dataset)
+    FactoryGirl.create(:certificate_with_dataset)
+
+    cert.response_set.survey.update_attribute(:title, 'UK')
+
+    get :index, jurisdiction: 'UK'
+
+    assert_response :success
+    assert_equal [cert.dataset], assigns(:datasets)
+  end
+
+  test "index filters by publisher" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    FactoryGirl.create(:published_certificate_with_dataset)
+    FactoryGirl.create(:certificate_with_dataset)
+
+    cert.update_attribute(:curator, 'theodi')
+
+    get :index, publisher: 'theodi'
+
+    assert_response :success
+    assert_equal [cert.dataset], assigns(:datasets)
   end
 
 
