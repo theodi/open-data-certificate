@@ -160,8 +160,7 @@ $(document).ready(function(){
     if ($field.data('cancel-callbacks')) $field.data('cancel-callbacks')()
 
     // Reset styles
-    $row.removeClass('loading')
-    $row.removeClass('error').removeClass('ok').removeClass('warning')
+    $row.removeClass('loading').removeClass('no-response').removeClass('ok').removeClass('warning')
 
     if ($field.val() && $field.val().match(/[^\s]/)) {
 
@@ -233,8 +232,8 @@ $(document).ready(function(){
     }
 
     // Show errors for missing mandatory fields
-    else if ($row.hasClass('mandatory')) {
-      $row.addClass('error')
+    else {
+      $row.addClass('no-response')
     }
   }
 

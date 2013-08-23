@@ -20,7 +20,6 @@
     - r = response_for(@response_set, q, nil, rg)
 
     - state = 'ok' unless r.new_record?
-    - state = 'error' if highlight_mandatory && q.is_mandatory && r.new_record?
     - state = 'warning' if r.error || r.any_metadata_missing
 
     - classes = {'row' => true, 'question-row' => true, "q_#{renderer}" => true}
