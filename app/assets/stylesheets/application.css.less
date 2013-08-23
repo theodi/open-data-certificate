@@ -1480,6 +1480,29 @@ header .jurisdiction{
     position: relative;
   }
 
+  fieldset .choice-buttons li {
+    fieldset {
+      padding: 5px 0;
+      margin: 0;
+    }
+
+    &.input {
+      padding: 1px 1px 1px 12px;
+      margin-bottom: 5px;
+
+      &.quiet {
+        margin: 0;
+        padding: 0;
+      }
+
+      &.warning {
+        background: @odiOrangeLight;
+        border: 1px solid @odiOrange;
+        padding: 0 0 0 11px;
+      }
+    }
+  }
+
   // brought in from main styles
   label {
     font-size: 22px;
@@ -1853,6 +1876,7 @@ header .jurisdiction{
 
     .status-above {
       .clearfix;
+      margin-bottom: 7px;
     }
 
     .status-below {

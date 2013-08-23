@@ -139,12 +139,15 @@ $(document).ready(function(){
     $form.find("input, select, textarea").change(function() {
       var $field = $(this)
 
-      // Set field to not autofilled
-      markAutocompleted($field, $form, false)
+      // Detect and mark autocompleted fields
+      markAutocompleted($field, $form)
+
+      checkMetadataFields($field, $form)
 
       // Save changes to this field
       saveFormElements($form, questionFields($field).add(csrfToken), function() {
         validateField($field, $form, csrfToken)
+        checkMetadataFields($field, $form)
       })
     })
   })
@@ -180,7 +183,7 @@ $(document).ready(function(){
             $row.removeClass('loading')
 
             // Mark fields as autcompleted
-            markAutocompleted($fields, $form, true)
+            markAutocompleted($fields, $form)
 
             // Run validation on each field
             $fields.each(function() { validateField($(this), $form, csrfToken) })
@@ -268,18 +271,75 @@ $(document).ready(function(){
     return $field.closest('fieldset.question-row').find("input, select, textarea");
   }
 
-  function markAutocompleted($fields, $form, value) {
-    // Toggle autocompleted field
-    $fields.closest('fieldset.question-row').find('input[id$="_autocompleted"]').val(value);
+  function answerIdentifier($question, $answer) {
+    return $question + '_' + $answer
+  }
 
-    // Update autocompleted class on row
+  function markAutocompleted($fields, $form) {
     $fields.each(function() {
       var $row = bindQuestionRow($(this))
-      $row.toggleClass('autocompleted', value)
+      var $input = $row.find('li.input')
+      var question = $row.data('reference-identifier');
+
+      var autocompleted = false
+
+      if ($row.data('autocompleted-value')) {
+        var autoValue = $row.data('autocompleted-value').toString()
+
+        if ($input.hasClass('string')) {
+          autocompleted = autoValue == $row.find('input.string').val()
+        }
+
+        if ($input.hasClass('select')) {
+          autocompleted = answerIdentifier($row.data('reference-identifier'), autoValue) == $row.find('option:selected').data('reference-identifier')
+        }
+
+        if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
+          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
+          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
+          var equalLength = selectedValues.length == autoValues.length
+          autocompleted = equalLength && autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0
+        }
+      }
+
+      $row.find('input[id$="_autocompleted"]').val(autocompleted);
+      $row.toggleClass('autocompleted', autocompleted)
 
       // Set autocompleted message
-      if (value) {
+      if (autocompleted) {
         $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
+      }
+    })
+  }
+
+  function checkMetadataFields($fields, $form) {
+    $fields.each(function() {
+      var $row = bindQuestionRow($(this))
+      var $input = $row.find('li.input')
+      var question = $row.data('reference-identifier');
+
+      if ($row.data('metadata-field') && $row.data('autocompleted-value')) {
+        var autoValue = $row.data('autocompleted-value').toString()
+
+        if ($input.hasClass('surveyor_check_boxes')) {
+          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
+          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
+
+          var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
+
+          var missingValues = selectedValues.filter(function(value) { return autoValues.indexOf(value) === -1; })
+          if (missingValues.length) {
+            $row.removeClass('ok').addClass('warning')
+            $row.find('.status-message span').text($form.find('#surveyor').data('missing-metadata'))
+
+            missingValues.map(function(value) {
+              $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning')
+            })
+          }
+          else {
+            $row.removeClass('warning').addClass('ok')
+          }
+        }
       }
     })
   }
@@ -312,45 +372,44 @@ $(document).ready(function(){
 
   function fillField(question, answer) {
     var $row = $('fieldset[data-reference-identifier="'+ question +'"]')
+    $row.data('autocompleted-value', answer instanceof Array ? answer.join(',') : answer);
     var $input = $row.find('li.input')
 
     if ($input.hasClass('string')) {
-      return fillMe(question, answer)
+      return fillMe($row, question, answer)
     }
 
     if ($input.hasClass('select')) {
-      console.log(question, answer);
-      return selectMe(question, answer)
+      return selectMe($row, question, answer)
     }
 
     if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
       if (answer instanceof Array) {
-        return toJquery(answer.map(function(option) { return checkMe(question, option) }))
+        return toJquery(answer.map(function(option) { return checkMe($row, question, option) }))
       }
 
-      return checkMe(question, answer)
+      return checkMe($row, question, answer)
     }
   }
 
   // Utility function to select nth option
-  function selectMe(question, answer) {
-    var $field = $('fieldset[data-reference-identifier="'+ question +'"] select')
+  function selectMe($row, question, answer) {
+    var $field = $row.find('select')
     if ($field.val()) return
-    return $field.children('option[data-reference-identifier="'+ question+"_"+answer +'"]').prop('selected', true)
+    return $field.children('option[data-reference-identifier="'+ answerIdentifier(question,answer) +'"]').prop('selected', true)
   }
 
   // Utility function to populate input fields by identifier
-  function fillMe(question, value) {
-    var $field = $('fieldset[data-reference-identifier="'+ question +'"]').find('input.string')
+  function fillMe($row, question, value) {
+    var $field = $row.find('input.string')
     if (!empty($field.val()) || empty(value)) return
     return $field.val(value)
   }
 
   // Utility function to check input fields by identifier
-  function checkMe(question, answer) {
-    var $row = $('fieldset[data-reference-identifier="'+ question +'"]')
+  function checkMe($row, question, answer) {
     if ($row.hasClass('touched')) return
-    return $row.find('li[data-reference-identifier="'+ question+"_"+answer +'"] input').prop('checked', true)
+    return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true)
   }
 
   // Data Kitten autocompletion
