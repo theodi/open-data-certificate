@@ -21,7 +21,7 @@
 
     - state = 'ok' unless r.new_record?
     - state = 'error' if highlight_mandatory && q.is_mandatory && r.new_record?
-    - state = 'warning' if r.error
+    - state = 'warning' if r.error || r.any_metadata_missing
 
     - classes = {'row' => true, 'question-row' => true, "q_#{renderer}" => true}
     - classes[q.css_class(@response_set)] = true
@@ -29,7 +29,7 @@
     - classes['compact-validation'] = pickTypes.include?(q.pick) || selectFields.include?(renderer)
     - classes['mandatory'] = q.is_mandatory
     - classes['has-response'] = !r.new_record?
-    - classes['autocompleted'] = r.autocompleted
+    - classes['autocompleted'] = r.all_autocompleted
     - classes[state] = true if state
 
     - data = {}
@@ -75,8 +75,7 @@
               %div.status-icon
                 %i.icon.icon-variable
               %div.span8.status-message
-                %span
-                  = t('surveyor.autocompleted_data') if r.autocompleted
+                %span= r.any_metadata_missing ? t('surveyor.missing_metadata') : t('surveyor.autocompleted_data')
                 %i.arrow-border
                 %i.arrow
             %div.choice-buttons.status-wrapper

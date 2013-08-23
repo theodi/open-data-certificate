@@ -1,6 +1,9 @@
 -# TODO: disabled
 - rg ||= nil
+
 - r = response_for(@response_set, q, a, rg)
+- r.reference_identifier = a.reference_identifier
+
 - i = response_idx(q.pick != "one") # argument will be false (don't increment i) if we're on radio buttons
 - disabled = defined?(disableFlag) ? disableFlag : false
 - reference_identifier = "#{q.reference_identifier}_#{a.reference_identifier}"

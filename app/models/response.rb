@@ -18,7 +18,11 @@ class Response < ActiveRecord::Base
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
   end
-  
+
+  def reference_identifier=(id)
+    @reference_identifier = id
+  end
+
   def reference_identifier
     @reference_identifier ||= answer.reference_identifier
   end
@@ -47,6 +51,46 @@ class Response < ActiveRecord::Base
     response_set.try(:dataset)
   end
 
+  def auto_value
+    @auto_value ||= response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
+  end
+
+  def any_metadata_missing
+    @any_metadata_missing ||= question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
+  end
+
+  def metadata_missing
+    @metadata_missing ||= question.metadata_field? && auto_value && !autocompleted && answer
+  end
+
+  def all_autocompleted
+    if question.pick == 'any' && auto_value
+      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort == auto_value.sort
+    end
+
+    @all_autocompleted ||= autocompleted
+  end
+
+  def autocompleted
+    @autocompleted ||= compute_autocompleted
+  end
+
+  def compute_autocompleted
+    if auto_value
+      if question.pick == 'none'
+        return auto_value && string_value == auto_value
+      end
+
+      if question.pick == 'one'
+        return answer && auto_value == answer.reference_identifier
+      end
+
+      if question.pick == 'any'
+        return (!answer && !auto_value.include?(reference_identifier)) || (answer && auto_value.include?(answer.reference_identifier))
+      end
+    end
+  end
+
   private
   def set_default_dataset_title
     dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
@@ -56,7 +100,6 @@ class Response < ActiveRecord::Base
     dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
   end
 
-  private
   def update_survey_section_id
     if survey_section_id.blank?
       survey_section_id = question.try(:survey_section_id)
