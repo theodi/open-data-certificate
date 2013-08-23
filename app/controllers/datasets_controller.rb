@@ -7,8 +7,9 @@ class DatasetsController < ApplicationController
   def index
 
     @datasets = Dataset
+                .includes(:response_set, :certificate)
                 .joins(:response_set)
-                .order('attained_index DESC')
+                .order('response_sets.attained_index DESC')
                 .page params[:page]
 
     if(params[:jurisdiction])
