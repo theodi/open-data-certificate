@@ -94,7 +94,7 @@ class ResponseSet < ActiveRecord::Base
 
   def method_missing(method_name, *args, &blk)
     val = method_name.to_s.match(/(.+)_determined_from_responses/)
-    unless val.nil? and survey.map[val[1].to_sym].nil?
+    unless val.nil? or survey.map[val[1].to_sym].nil?
       var = instance_variable_get("@#{method_name}")
       var ||= value_for val[1]
     else
