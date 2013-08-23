@@ -38,6 +38,7 @@ end
 group :development do
   gem 'guard'
   gem 'guard-test'
+  gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
 end
