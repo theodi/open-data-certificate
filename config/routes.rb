@@ -23,6 +23,7 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
+    get 'to_atom', to: 'datasets#to_atom'
 
     resources :certificates, :only => [:show] do
        member do
@@ -54,7 +55,7 @@ OpenDataCertificate::Application.routes.draw do
       get :cancel
     end
   end
-  
+
   # Get badge for a url
   get 'get_badge' => 'certificates#get_badge'
 
