@@ -29,7 +29,8 @@
     - classes['compact-validation'] = pickTypes.include?(q.pick) || selectFields.include?(renderer)
     - classes['mandatory'] = q.is_mandatory
     - classes['has-response'] = !r.new_record?
-    - classes['autocompleted'] = r.all_autocompleted
+    - classes['no-response'] = r.new_record?
+    - classes['autocompleted'] = r.autocompleted
     - classes[state] = true if state
 
     - data = {}

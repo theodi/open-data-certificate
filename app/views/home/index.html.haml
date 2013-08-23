@@ -54,7 +54,8 @@
 .main
   .row
     .span6
-      %iframe{width: 560, height: 315, src: 'https://www.youtube.com/embed/_k5pQxeQq9w', frameborder: 0, allowfullscreen: 'allowfullscreen'}
+      .video-container
+        %iframe{width: 560, height: 315, src: 'https://www.youtube.com/embed/_k5pQxeQq9w', frameborder: 0, allowfullscreen: 'allowfullscreen'}
     .span6.homepage-about-content
       %h2.about-certificate
         -#= link_to t('homepage.about_certificate.title'), certificates_path #TODO: Commented browse certificate functionality
@@ -66,3 +67,44 @@
         = link_to t('homepage.about_odi.title'), '/contact'
       %p.about-odi= t('homepage.about_odi.description', odi_name_link: link_to(t('homepage.about_odi.odi_name'), 'http://theodi.org')).html_safe
       = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
+
+
+#international-reach{style: 'visibility:hidden;height:500px;'}
+  .row
+    .span6
+      .map
+    .span6.controls
+      %h2= t('homepage.international_reach.title')
+      %p= t('homepage.international_reach.description')
+      .form-inline
+        %select
+        %a.autoadvance
+          %i.icon.icon-refresh
+            %small
+              = t('homepage.international_reach.auto_advance')
+      .actions
+        %p
+          = new_certificate_link({role: 'button', class: ['btn', 'btn-small', 'btn-primary', 'create-certificate'], link_text: t('homepage.start_new_certificate')})
+        .jurisdiction
+          .badge
+          %span.status
+        %dl.statuses
+          %dt= t('statuses.alpha.title')
+          %dd.alpha= markdown t('statuses.alpha.about')
+          %dt= t('statuses.beta.title')
+          %dd.beta= markdown t('statuses.beta.about')
+          %dt= t('statuses.final.title')
+          %dd.final= markdown t('statuses.final.about')
+        %hr
+        %h3 
+          = t('homepage.international_reach.legend.legend')
+        %span.label.alpha
+          = t('homepage.international_reach.legend.alpha')
+        %span.label.beta
+          = t('homepage.international_reach.legend.beta')
+        %span.label.final
+          = t('homepage.international_reach.legend.final')
+
+
+- content_for(:foot_scripts) do
+  = javascript_include_tag :map
