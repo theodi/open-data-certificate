@@ -360,6 +360,7 @@ $(document).ready(function(){
     });
   }
 
+  // Collects a sparse array of jQuery objects into a single jQuery object
   function toJquery(array) {
     return $(array.filter(function(field) { return field; })).map(function() { return this.toArray() })
   }
@@ -371,7 +372,7 @@ $(document).ready(function(){
 
   function fillField(question, answer) {
     var $row = $('fieldset[data-reference-identifier="'+ question +'"]')
-    $row.data('autocompleted-value', answer instanceof Array ? answer.join(',') : answer);
+    $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
     var $input = $row.find('li.input')
 
     if ($input.hasClass('string')) {
@@ -383,7 +384,7 @@ $(document).ready(function(){
     }
 
     if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
-      if (answer instanceof Array) {
+      if ($.isArray(answer)) {
         return toJquery(answer.map(function(option) { return checkMe($row, question, option) }))
       }
 

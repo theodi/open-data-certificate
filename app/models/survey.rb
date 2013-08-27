@@ -36,6 +36,10 @@ class Survey < ActiveRecord::Base
 
   end
 
+  def metadata_fields
+    Set.new ['copyrightStatementMetadata', 'documentationMetadata', 'distributionMetadata']
+  end
+
   def meta_map
     meta = read_attribute(:meta_map)
     map.each { |attr, val| meta[attr.to_sym] ||= val }
@@ -53,12 +57,7 @@ class Survey < ActiveRecord::Base
       :other_dataset_licence_name => 'otherDataLicenceName',
       :other_dataset_licence_url  => 'otherDataLicenceURL',
       :other_content_licence_name => 'otherContentLicenceName',
-      :other_content_licence_url  => 'otherContentLicenceURL',
-      :dataset_metadata_fields    => [
-        'copyrightStatementMetadata',
-        'documentationMetadata',
-        'distributionMetadata'
-      ]
+      :other_content_licence_url  => 'otherContentLicenceURL'
     }
   end
 

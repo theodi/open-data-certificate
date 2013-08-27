@@ -81,18 +81,6 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def title_determined_from_responses
-    @title_determined_from_responses ||= value_for :dataset_title
-  end
-
-  def curator_determined_from_responses
-    @curator_determined_from_responses ||= value_for :dataset_curator
-  end
-
-  def documentation_url_determined_from_responses
-    @documentation_url_determined_from_responses ||= value_for :dataset_documentation_url
-  end
-
   def method_missing(method_name, *args, &blk)
     val = method_name.to_s.match(/(.+)_determined_from_responses/)
     unless val.nil? and survey.map[val[1].to_sym].nil?

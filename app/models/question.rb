@@ -46,7 +46,7 @@ class Question < ActiveRecord::Base
   end
 
   def metadata_field?
-    @metadata_field ||= survey_section.survey.meta_map[:dataset_metadata_fields].include?(reference_identifier)
+    @metadata_field ||= survey_section.survey.metadata_fields.include?(reference_identifier)
   end
 
   def triggered?(response_set)

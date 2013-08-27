@@ -2,6 +2,7 @@ class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
 
+  attr_writer :reference_identifier
   attr_accessible :autocompleted
 
   # override with :touch
@@ -17,10 +18,6 @@ class Response < ActiveRecord::Base
 
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
-  end
-
-  def reference_identifier=(id)
-    @reference_identifier = id
   end
 
   def reference_identifier
