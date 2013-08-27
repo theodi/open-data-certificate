@@ -873,7 +873,7 @@
             },
             query: {
                 position: "relative",
-                verticalAlign: "top",
+                verticalAlign: "middle",
                 backgroundColor: "transparent"
             },
             dropdown: {
