@@ -9,6 +9,7 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
   has_one :certificate, dependent: :destroy
+  has_one :kitten_data
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
@@ -96,15 +97,15 @@ class ResponseSet < ActiveRecord::Base
     val = method_name.to_s.match(/(.+)_determined_from_responses/)
     unless val.nil? or survey.map[val[1].to_sym].nil?
       var = instance_variable_get("@#{method_name}")
-      var ||= value_for val[1]
+      var ||= value_for val[1].to_sym
     else
       super
     end
   end
 
   def data_licence_determined_from_responses
-    if @data_licence_determined_from_responses.nil? 
-      ref = value_for "data_licence", :reference_identifier
+    if @data_licence_determined_from_responses.nil?
+      ref = value_for :data_licence, :reference_identifier
       case ref
       when "na"
         @data_licence_determined_from_responses = {
@@ -113,8 +114,8 @@ class ResponseSet < ActiveRecord::Base
         }
       when "other"
          @data_licence_determined_from_responses = {
-          :title => value_for("other_dataset_licence_name"),
-          :url   => value_for("other_dataset_licence_url")
+          :title => value_for(:other_dataset_licence_name),
+          :url   => value_for(:other_dataset_licence_url)
          }
       else
         licence = Odlifier::License.new(ref.dasherize)
@@ -126,10 +127,10 @@ class ResponseSet < ActiveRecord::Base
     end
     @data_licence_determined_from_responses
   end
-  
+
   def content_licence_determined_from_responses
-    if @content_licence_determined_from_responses.nil? 
-      ref = value_for "content_licence", :reference_identifier
+    if @content_licence_determined_from_responses.nil?
+      ref = value_for :content_licence, :reference_identifier
       case ref
       when "na"
         @content_licence_determined_from_responses = {
@@ -138,8 +139,8 @@ class ResponseSet < ActiveRecord::Base
         }
       when "other"
          @content_licence_determined_from_responses = {
-          :title => value_for("other_content_licence_name"),
-          :url   => value_for("other_content_licence_url") 
+          :title => value_for(:other_content_licence_name),
+          :url   => value_for(:other_content_licence_url)
          }
       else
         licence = Odlifier::License.new(ref.dasherize)
@@ -316,7 +317,7 @@ class ResponseSet < ActiveRecord::Base
   # finds the string value for a given response_identifier
   private
   def value_for reference_identifier, value = :string_value
-    q = responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier.to_sym]}).first.try(value)
+    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
   end
 
 end
