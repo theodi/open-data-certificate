@@ -1,6 +1,6 @@
 class Survey < ActiveRecord::Base
   include Surveyor::Models::SurveyMethods
-  
+
   serialize :meta_map, Hash
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
@@ -35,24 +35,28 @@ class Survey < ActiveRecord::Base
     end
 
   end
-  
+
+  def metadata_fields
+    Set.new ['copyrightStatementMetadata', 'documentationMetadata', 'distributionMetadata']
+  end
+
   def meta_map
     meta = read_attribute(:meta_map)
     map.each { |attr, val| meta[attr.to_sym] ||= val }
     meta
   end
-  
+
   def map
     {
-      :dataset_title              => 'dataTitle', 
+      :dataset_title              => 'dataTitle',
       :dataset_curator            => 'publisher',
       :dataset_documentation_url  => 'documentationUrl',
       :dataset_curator_url        => 'publisherUrl',
       :data_licence               => 'dataLicence',
       :content_licence            => 'contentLicence',
-      :other_dataset_licence_name => 'otherDataLicenceName', 
+      :other_dataset_licence_name => 'otherDataLicenceName',
       :other_dataset_licence_url  => 'otherDataLicenceURL',
-      :other_content_licence_name => 'otherContentLicenceName', 
+      :other_content_licence_name => 'otherContentLicenceName',
       :other_content_licence_url  => 'otherContentLicenceURL'
     }
   end
@@ -100,7 +104,7 @@ class Survey < ActiveRecord::Base
 
     return errors.empty?
   end
-  
+
   def language
     translations.first.locale
   end
@@ -121,7 +125,7 @@ class Survey < ActiveRecord::Base
   ### /override surveyor methods
 
   private
-  
+
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
     questions = sections.map(&:questions).flatten.compact

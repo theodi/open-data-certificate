@@ -45,21 +45,13 @@ $(document).ready(function(){
     changeMonth: true,
     changeYear: true
   });
-  $("li.date input").datepicker({
+
+  $("li.date input, input[type='text'].date, input[type='text'].datepicker").datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
-  $("input[type='text'].date").datepicker({
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-  });
-  $("input[type='text'].datepicker").datepicker({
-    dateFormat: 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-  });
+
   $("input[type='text'].time").timepicker({});
 
   $('.surveyor_check_boxes input[type=text]').change(function(){
@@ -147,13 +139,16 @@ $(document).ready(function(){
     $form.find("input, select, textarea").change(function() {
       var $field = $(this)
 
-      // Set field to not autofilled
-      markAutocompleted($field, $form, false)
+      // Detect and mark autocompleted fields
+      markAutocompleted($field, $form)
 
-      validateField($field, $form, csrfToken)
+      checkMetadataFields($field, $form)
 
       // Save changes to this field
-      saveFormElements($form, questionFields($field).add(csrfToken))
+      saveFormElements($form, questionFields($field).add(csrfToken), function() {
+        validateField($field, $form, csrfToken)
+        checkMetadataFields($field, $form)
+      })
     })
   })
 
@@ -165,8 +160,7 @@ $(document).ready(function(){
     if ($field.data('cancel-callbacks')) $field.data('cancel-callbacks')()
 
     // Reset styles
-    $row.removeClass('loading')
-    $row.removeClass('error').removeClass('ok').removeClass('warning')
+    $row.removeClass('loading').removeClass('no-response').removeClass('ok').removeClass('warning')
 
     if ($field.val() && $field.val().match(/[^\s]/)) {
 
@@ -188,7 +182,7 @@ $(document).ready(function(){
             $row.removeClass('loading')
 
             // Mark fields as autcompleted
-            markAutocompleted($fields, $form, true)
+            markAutocompleted($fields, $form)
 
             // Run validation on each field
             $fields.each(function() { validateField($(this), $form, csrfToken) })
@@ -238,8 +232,8 @@ $(document).ready(function(){
     }
 
     // Show errors for missing mandatory fields
-    else if ($row.hasClass('mandatory')) {
-      $row.addClass('error')
+    else {
+      $row.addClass('no-response')
     }
   }
 
@@ -276,29 +270,87 @@ $(document).ready(function(){
     return $field.closest('fieldset.question-row').find("input, select, textarea");
   }
 
-  function markAutocompleted($fields, $form, value) {
-    // Toggle autocompleted field
-    $fields.closest('fieldset.question-row').find('input[id$="_autocompleted"]').val(value);
+  function answerIdentifier($question, $answer) {
+    return $question + '_' + $answer
+  }
 
-    // Update autocompleted class on row
+  function markAutocompleted($fields, $form) {
     $fields.each(function() {
       var $row = bindQuestionRow($(this))
-      $row.toggleClass('autocompleted', value)
+      var $input = $row.find('li.input')
+      var question = $row.data('reference-identifier');
+
+      var autocompleted = false
+
+      if ($row.data('autocompleted-value')) {
+        var autoValue = $row.data('autocompleted-value').toString()
+
+        if ($input.hasClass('string')) {
+          autocompleted = autoValue == $row.find('input.string').val()
+        }
+
+        if ($input.hasClass('select')) {
+          autocompleted = answerIdentifier($row.data('reference-identifier'), autoValue) == $row.find('option:selected').data('reference-identifier')
+        }
+
+        if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
+          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
+          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
+          var equalLength = selectedValues.length == autoValues.length
+          autocompleted = equalLength && autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0
+        }
+      }
+
+      $row.find('input[id$="_autocompleted"]').val(autocompleted);
+      $row.toggleClass('autocompleted', autocompleted)
 
       // Set autocompleted message
-      if (value) {
+      if (autocompleted) {
         $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
       }
     })
   }
 
-  function saveFormElements($form, $elements) {
+  function checkMetadataFields($fields, $form) {
+    $fields.each(function() {
+      var $row = bindQuestionRow($(this))
+      var $input = $row.find('li.input')
+      var question = $row.data('reference-identifier');
+
+      if ($row.data('metadata-field') && $row.data('autocompleted-value')) {
+        var autoValue = $row.data('autocompleted-value').toString()
+
+        if ($input.hasClass('surveyor_check_boxes')) {
+          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
+          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
+
+          var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
+
+          var missingValues = selectedValues.filter(function(value) { return autoValues.indexOf(value) === -1; })
+          if (missingValues.length) {
+            $row.removeClass('ok').addClass('warning')
+            $row.find('.status-message span').text($form.find('#surveyor').data('missing-metadata'))
+
+            missingValues.map(function(value) {
+              $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning')
+            })
+          }
+          else {
+            $row.removeClass('warning').addClass('ok')
+          }
+        }
+      }
+    })
+  }
+
+  function saveFormElements($form, $elements, callback) {
     $.ajax({
       type: "PUT",
       url: $form.attr("action"),
       data: $elements.serialize(), dataType: 'json',
       success: function(response) {
         successfulSave(response);
+        if (callback) callback();
       },
       error: function(){
         // This throws on aborted requests (so when the save button is clicked and page unloaded while it is being sent)
@@ -308,244 +360,80 @@ $(document).ready(function(){
     });
   }
 
+  // Collects a sparse array of jQuery objects into a single jQuery object
+  function toJquery(array) {
+    return $(array.filter(function(field) { return field; })).map(function() { return this.toArray() })
+  }
+
+  // Checks if a string is empty (blank or whitespace only)
+  function empty(text) {
+    return !text || text.match(/^[\s]*$/)
+  }
+
+  function fillField(question, answer) {
+    var $row = $('fieldset[data-reference-identifier="'+ question +'"]')
+    $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
+    var $input = $row.find('li.input')
+
+    if ($input.hasClass('string')) {
+      return fillMe($row, question, answer)
+    }
+
+    if ($input.hasClass('select')) {
+      return selectMe($row, question, answer)
+    }
+
+    if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
+      if ($.isArray(answer)) {
+        return toJquery(answer.map(function(option) { return checkMe($row, question, option) }))
+      }
+
+      return checkMe($row, question, answer)
+    }
+  }
+
   // Utility function to select nth option
-  function selectMe(identifier, value) {
-     var $field = $('fieldset[data-reference-identifier="'+ identifier +'"] select')
-     if ($field.val()) return
-     return $field.children().eq(value).prop('selected', 'selected')
+  function selectMe($row, question, answer) {
+    var $field = $row.find('select')
+    if ($field.val()) return
+    return $field.children('option[data-reference-identifier="'+ answerIdentifier(question,answer) +'"]').prop('selected', true)
   }
 
   // Utility function to populate input fields by identifier
-  function fillMe(identifier, val) {
-    var $field = $('fieldset[data-reference-identifier="'+ identifier +'"]').find('input.string, select')
-    if ($field.val() && $field.val().match(/[^\s]/)) return
-    return $field.val(val)
+  function fillMe($row, question, value) {
+    var $field = $row.find('input.string')
+    if (!empty($field.val()) || empty(value)) return
+    return $field.val(value)
   }
 
   // Utility function to check input fields by identifier
-  function checkMe(identifier, value) {
-    var $row = $('fieldset[data-reference-identifier="'+ identifier +'"]')
+  function checkMe($row, question, answer) {
     if ($row.hasClass('touched')) return
-    return $row.find('input[type=radio], input[type=checkbox]').eq(value).prop('checked', true)
+    return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true)
   }
 
   // Data Kitten autocompletion
   function autocomplete(url, callbacks) {
     if (!validateUrl(url)) return callbacks.fail();
 
-    $.getJSON('/autofill', { url: url } )
+    var id = $('#surveyor').data('response-id')
+
+    $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
       .error(callbacks.fail)
       .done(function(json) {
 
         callbacks.beforeProcessing();
 
-        if (!json.data_exists) {
-          return callbacks.success($([]));
-        }
-
         var affectedFields = [];
 
-        // Title
-        affectedFields.push(fillMe("dataTitle", json.title))
-
-        if (json.publishers.length > 0) {
-          // Publisher name
-          affectedFields.push(fillMe("publisher", json.publishers[0].name))
-          // Publisher URL
-          affectedFields.push(fillMe("publisherUrl", json.publishers[0].homepage))
-        }
-
-        // Data type
-        if (json.update_frequency.length == 0 && json.distributions.length == 1) {
-          // One-off release of a single dataset
-          affectedFields.push(checkMe("releaseType", 0))
-        } else if (json.update_frequency.length == 0 && json.distributions.length > 1) {
-          affectedFields.push(checkMe("releaseType", 1))
-          // One-off release of a set of related datasets
-        } else if (json.update_frequency.length > 0 && json.distributions.length > 1) {
-          // Ongoing release
-          affectedFields.push(checkMe("releaseType", 2))
-        }
-
-        // A service or API for accessing open data
-        if (json.title.indexOf("API") >= 0 || json.description.indexOf("API") >= 0 ) {
-          affectedFields.push(checkMe("releaseType", 3))
-        }
-
-        // Rights information
-        if (json.rights) {
-          // Yes, you have the rights to publish this data as open data
-          affectedFields.push(checkMe("publisherRights", 0))
-          // Rights statement
-          affectedFields.push(fillMe("copyrightURL", json.rights.uri))
-
-          // Data License
-          switch(json.rights.dataLicense) {
-            case "http://opendatacommons.org/licenses/by/":
-              affectedFields.push(selectMe("dataLicence", 1))
-              break;
-            case "http://opendatacommons.org/licenses/odbl/":
-              affectedFields.push(selectMe("dataLicence", 2))
-              break;
-            case "http://opendatacommons.org/licenses/pddl/":
-              affectedFields.push(selectMe("dataLicence", 3))
-              break;
-            case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("dataLicence", 4))
-              break;
-            case "http://reference.data.gov.uk/id/open-government-licence":
-              affectedFields.push(selectMe("dataLicence", 5))
-              break;
-          }
-
-          // Content License
-          switch(json.rights.contentLicense) {
-            case "http://creativecommons.org/licenses/by/2.0/uk/":
-              affectedFields.push(selectMe("contentLicence", 1))
-              break;
-            case "http://creativecommons.org/licenses/by-sa/2.0/uk/":
-              affectedFields.push(selectMe("contentLicence", 2))
-              break;
-            case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("contentLicence", 3))
-              break;
-            case "http://reference.data.gov.uk/id/open-government-licence":
-              affectedFields.push(selectMe("contentLicence", 4))
-              break;
-          }
-        } else if (json.licenses) {
-          // Yes, you have the rights to publish this data as open data
-          affectedFields.push(checkMe("publisherRights", 0))
-
-          // Data License
-          switch(json.licenses[0].uri) {
-            case "http://opendatacommons.org/licenses/by/":
-              affectedFields.push(selectMe("dataLicence", 1))
-              break;
-            case "http://opendatacommons.org/licenses/odbl/":
-              affectedFields.push(selectMe("dataLicence", 2))
-              break;
-            case "http://opendatacommons.org/licenses/pddl/":
-              affectedFields.push(selectMe("dataLicence", 3))
-              break;
-            case "http://creativecommons.org/publicdomain/zero/1.0/":
-              affectedFields.push(selectMe("dataLicence", 4))
-              break;
-            case "http://reference.data.gov.uk/id/open-government-licence":
-              // Open Government Licence covers data and content
-              affectedFields.push(selectMe("dataLicence", 5))
-              affectedFields.push(selectMe("contentLicence", 4))
-              break;
-            case "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf":
-              selectMe("dataLicence", 7)
-              selectMe("contentLicence", 6)
-              fillMe("otherDataLicenceName", "OS OpenData Licence")
-              fillMe("otherDataLicenceURL", "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf")
-              checkMe("otherDataLicenceOpen", 1)
-              fillMe("otherContentLicenceName", "OS OpenData Licence")
-              fillMe("otherContentLicenceURL", "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf")
-              checkMe("otherContentLicenceOpen", 1)
-              break;
+        if (json.data_exists) {
+          var field;
+          for (field in json.data) {
+            affectedFields.push(fillField(field, json.data[field]));
           }
         }
 
-        // Was all this data originally created or gathered by you?
-        // Assumption for data.gov.uk
-        if (url.indexOf("data.gov.uk") != -1) {
-          affectedFields.push(checkMe("publisherOrigin", 1))
-        }
-
-        // Can individuals be identified from this data?
-        // Assumption for data.gov.uk
-        if (url.indexOf("data.gov.uk") != -1) {
-          affectedFields.push(checkMe("dataPersonal", 0))
-        }
-
-        for (var i = 0; i < json.distributions.length; i++) {
-
-          // Is this data machine-readable?
-          if (json.distributions[i].structured === true) {
-            affectedFields.push(checkMe("machineReadable", 1))
-          }
-
-          // Is this data in a standard open format?
-          if (json.distributions[i].open === true) {
-            affectedFields.push(checkMe("openStandard", 1))
-          }
-        }
-
-        // Does this data change at least daily?
-        // Assumption for data.gov.uk
-        if (url.indexOf("data.gov.uk") != -1) {
-          affectedFields.push(checkMe("frequentChanges", 0))
-        }
-
-        // Does your data documentation contain machine readable documentation for:
-
-        // Title
-        if (json.title.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 0))
-        }
-
-        // Description
-        if (json.description.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 1))
-        }
-
-        // Release Date
-        if (json.release_date.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 2))
-        }
-
-        // Modification Date
-        if (json.modified_date.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 3))
-        }
-
-        // Frequency of releases
-        if (json.update_frequency) {
-         affectedFields.push(checkMe("documentationMetadata", 4))
-        }
-
-        // Publisher
-        if (json.publishers.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 8))
-        }
-
-        // Temporal coverage
-        if (json.temporal_coverage.start != null && json.temporal_coverage.end != null) {
-          affectedFields.push(checkMe("documentationMetadata", 10))
-        }
-
-        // Keywords
-        if (json.keywords.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 12))
-        }
-
-        // Distributions
-        if (json.distributions.length > 0) {
-          affectedFields.push(checkMe("documentationMetadata", 13))
-        }
-
-        // Do the data formats use vocabularies?
-        // Assumption for data.gov.uk
-        if (url.indexOf("data.gov.uk") != -1) {
-          affectedFields.push(checkMe("vocabulary", 0))
-        }
-
-        // Are there any codes used in this data?
-        // Assumption for data.gov.uk
-        if (url.indexOf("data.gov.uk") != -1) {
-          affectedFields.push(checkMe("codelists", 0))
-        }
-
-        // Contact email address
-        affectedFields.push(fillMe("contactEmail", json.publishers[0].mbox))
-
-        // Convert sparse array to jQuery object
-        var $affectedFields = $(affectedFields.filter(function(field) { return field; })).map(function() { return this.toArray() })
-
-        callbacks.success($affectedFields);
+        callbacks.success(toJquery(affectedFields));
       })
 
     // Function to clear callbacks if this request is superceeded

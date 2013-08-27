@@ -17,8 +17,28 @@ class ResponseSetsController < ApplicationController
     end
   end
 
-  rescue_from CanCan::AccessDenied do |exception|  
+  def autofill
+    kitten_data = KittenData.where(url: params[:url], response_set_id: @response_set.id).first_or_create
+
+    unless kitten_data.data
+      kitten_data.request_data
+      kitten_data.save
+    end
+
+    if kitten_data.data
+      render :json => {
+        data_exists: true,
+        data: kitten_data.fields
+      }
+    else
+      render :json => {
+        data_exists: false
+      }
+    end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
     redirect_to dashboard_path, alert: t('dashboard.unable_to_access_response_set')
-  end  
+  end
 
 end
