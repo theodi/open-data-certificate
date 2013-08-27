@@ -33,7 +33,7 @@ class XMLFeed
             item.title = certificate.name
             item.content.content = certificate.attained_level
             item.updated = certificate.updated_at.to_s
-            item.id = "#{dataset_url}certificates/#{certificate.id}"
+            item.id = item.link
           end
         end
      end

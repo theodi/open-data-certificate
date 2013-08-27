@@ -23,7 +23,7 @@ OpenDataCertificate::Application.routes.draw do
     put 'start_questionnaire'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
-    get 'to_atom', to: 'datasets#to_atom'
+    get 'atom.xml', to: 'datasets#to_atom', format: false
 
     resources :certificates, :only => [:show] do
        member do
