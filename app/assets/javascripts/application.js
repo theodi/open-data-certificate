@@ -295,7 +295,7 @@ $(function(){
         required += requirements.standard.required;
         complete += requirements.standard.complete;
       }
-      if(window.console) console.log('setting ' + level + ': ' + complete + ' / ' + required);
+      //if(window.console) console.log('setting ' + level + ': ' + complete + ' / ' + required);
       $('#bar-' + level).width((required === 0 ? '0' : 100*(complete/required)) + '%');
     });
 

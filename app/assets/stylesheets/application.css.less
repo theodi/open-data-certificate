@@ -932,7 +932,7 @@ section {
     padding-bottom: 56.25%;
     padding-top: 30px; height: 0; overflow: hidden;
 }
- 
+
 .video-container iframe,
 .video-container object,
 .video-container embed {
@@ -1497,6 +1497,29 @@ header .jurisdiction{
     position: relative;
   }
 
+  fieldset .choice-buttons li {
+    fieldset {
+      padding: 5px 0;
+      margin: 0;
+    }
+
+    &.input {
+      padding: 1px 1px 1px 12px;
+      margin-bottom: 5px;
+
+      &.quiet {
+        margin: 0;
+        padding: 0;
+      }
+
+      &.warning {
+        background: @odiOrangeLight;
+        border: 1px solid @odiOrange;
+        padding: 0 0 0 11px;
+      }
+    }
+  }
+
   // brought in from main styles
   label {
     font-size: 22px;
@@ -1677,7 +1700,6 @@ header .jurisdiction{
       float: none;
       position: relative;
       margin: 0;
-      height: 38px;
       text-align: right;
 
       span {
@@ -1820,7 +1842,7 @@ header .jurisdiction{
       }
     }
 
-    .select, &.choice-boxes {
+    &.compact-validation {
       .status-icon {
         .border-radius(0);
         position: relative;
@@ -1858,10 +1880,19 @@ header .jurisdiction{
           border-right-color: white;
         }
       }
+
+      &.error .status-message i.arrow {
+        border-right-color: @odiCrimson;
+      }
+
+      &.warning .status-message i.arrow {
+        border-right-color: @odiOrange;
+      }
     }
 
     .status-above {
       .clearfix;
+      margin-bottom: 7px;
     }
 
     .status-below {
@@ -2511,7 +2542,7 @@ width: 328px;
 
 #international-reach{
   .map{
-    text-align: center; 
+    text-align: center;
     margin-top: 40px;
   }
   canvas{
@@ -2535,7 +2566,7 @@ width: 328px;
       margin-top: 25px;
     }
   }
-  
+
   span.label.alpha {
     background-color: #666;
     display: inline-block;

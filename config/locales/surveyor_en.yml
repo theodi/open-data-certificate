@@ -28,6 +28,7 @@ en:
     please_check_that_the_url_exists: "Please check that the your URL is correct"
     autocompleted_data: "We have automatically completed this data from your previous answers, but you can still change it"
     autocompleted_url_incorrect: "We have automatically completed this URL, but it doesn't seem to be correct"
+    missing_metadata: "Some of these items could not be found on the documentation page"
 
   requirement_label:
     requirement: This is required for <strong>all levels</strong>
