@@ -177,7 +177,7 @@ en:
     open_data_certificate_for: Open Data Certificate for
 
   datasets:
-    page_title: Search certificates
+    page_title: Datasets
     show_title: "Dataset: %{title}"
 
   response_set:
