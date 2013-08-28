@@ -95,11 +95,14 @@ class DatasetsControllerTest < ActionController::TestCase
 
   end
 
-
-
   test "typeahead for country" do
-    @first  = FactoryGirl.create(:survey, full_title:'United Kingdom', title:'GB')
-    @second = FactoryGirl.create(:survey, full_title:'Andorra', title: 'AD')
+    FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', survey_version: 1)
+    @gb = FactoryGirl.create(:survey, full_title:'United Kingdom', title:'GB', survey_version: 2)
+    FactoryGirl.create(:survey, full_title:'United States', title:'US')
+    FactoryGirl.create(:survey, full_title:'Andorra', title: 'AD')
+
+    # only shows countries with published response sets
+    FactoryGirl.create(:response_set, survey: @gb).publish!
 
     get :typeahead, mode: 'country', q: 'united'
     assert_response 200
@@ -112,6 +115,5 @@ class DatasetsControllerTest < ActionController::TestCase
     ], assigns(:response)
 
   end
-
   
 end

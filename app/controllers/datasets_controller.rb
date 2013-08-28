@@ -60,7 +60,11 @@ class DatasetsController < ApplicationController
           }
         end
       when 'country'
-        Survey.search({full_title_cont:params[:q]}).result.limit(5).map do |survey|
+        Survey.search({full_title_cont:params[:q]}).result
+              .joins(:response_sets).merge(ResponseSet.published)
+              .group(:title)
+              .order(:survey_version)
+              .limit(5).map do |survey|
           {
             value: survey.full_title,
             path: datasets_path(jurisdiction:survey.title)
