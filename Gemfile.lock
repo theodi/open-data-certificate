@@ -146,7 +146,7 @@ GEM
     less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
-    less-rails-bootstrap (3.0.0.1)
+    less-rails-bootstrap (2.3.3)
       less-rails (~> 2.3.1)
     libv8 (3.16.14.3)
     linkeddata (1.0.5)
@@ -351,7 +351,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   less-rails
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 2.3.3)
   linkeddata
   lograge
   logstash-event
