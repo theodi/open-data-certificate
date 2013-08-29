@@ -7,3 +7,14 @@
 %p
   %strong= pluralize @job_count, 'jobs'
   queued
+
+%hr.heavy
+
+%h1
+  Certificate Counts
+
+%ul
+  -@counts.each do |k,count|
+    %li
+      %strong= k
+      = count
