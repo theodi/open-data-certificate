@@ -166,9 +166,14 @@ $(function(){
         setJurisdiction(country);
       }
 
+      function inView($element){
+        var $window = $(window);
+        return $element.offset().top < ($window.height() + $window.scrollTop());
+      }
+
 
       setInterval(function(){
-        if(autoadvance) randomJurisdiction();
+        if(autoadvance && inView($panel)) randomJurisdiction();
       }, 2500);
 
       // start now
