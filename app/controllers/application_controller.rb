@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
 
   def status
     @job_count = Delayed::Job.count
+
+    @counts = {
+      'Published Certificates' =>            Certificate.where(published: true).count,
+      'Published Certificates This Month' => Certificate.where(published: true).where('"created_at" > ?', [Time.now - 1.month]).count,
+      'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
+      'Published Datasets This Month' =>     ResponseSet.published.select("DISTINCT(dataset_id)").where('"created_at" > ?', [Time.now - 1.month]).count
+    }
+
     respond_to do |format|
       format.html { render '/home/status' }
     end
