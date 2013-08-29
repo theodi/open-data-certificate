@@ -69,9 +69,10 @@ class DatasetsControllerTest < ActionController::TestCase
 
     get :typeahead, mode: 'dataset', q: 'second'
     assert_response 200
-
+    
     assert_equal [
       {
+        "attained_index" => nil,
         "value" =>'my second dataset',
         "path" => "/datasets/#{@second.id}"
       }

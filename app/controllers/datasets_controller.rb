@@ -43,10 +43,13 @@ class DatasetsController < ApplicationController
     # [{title:"the match title", path:"/some/path"},…]
     @response = case params[:mode]
       when 'dataset'
-        Dataset.search({title_cont:params[:q]}).result.limit(5).map do |dataset|
+        Dataset.search({title_cont:params[:q]}).result
+               .includes(:response_set)
+               .limit(5).map do |dataset|
           {
             value: dataset.title,
-            path: dataset_path(dataset)
+            path: dataset_path(dataset),
+            attained_index: dataset.response_set.try(:attained_index)
           }
         end
       when 'publisher'
