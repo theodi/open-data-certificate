@@ -373,6 +373,24 @@
   line-height: normal;
 }
 
+// badges for the datasets
+.tt-suggestion .attained{
+  padding-left:35px;
+  background: none no-repeat left top;
+
+  @exemplar_badge_small: asset-path('badges-small/exemplar_level_badge.png');
+  @no_badge_small:       asset-path('badges-small/no_level_badge.png');
+  @pilot_badge_small:    asset-path('badges-small/pilot_level_badge.png');
+  @raw_badge_small:      asset-path('badges-small/raw_level_badge.png');
+  @standard_badge_small: asset-path('badges-small/standard_level_badge.png');
+
+  &.attained-0{ background-image: url(@no_badge_small) }
+  &.attained-1{ background-image: url(@raw_badge_small) }
+  &.attained-2{ background-image: url(@pilot_badge_small) }
+  &.attained-3{ background-image: url(@standard_badge_small) }
+  &.attained-4{ background-image: url(@exemplar_badge_small) }
+}
+
 
 /************************************************
     ODI Styling

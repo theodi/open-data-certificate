@@ -358,6 +358,8 @@ $(function(){
   $('.typeahead-search').typeahead([{
       name:"datasets",
       header: '<h3>Datasets</h3>',
+      template: '<p class="attained attained-{{attained_index}}">{{value}}</p>',
+      engine: Hogan,
       remote: {
         url:'/datasets/typeahead?mode=dataset&q=%QUERY'
       }
