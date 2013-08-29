@@ -4,6 +4,9 @@
 
 $(function(){
 
+  // hide the panel when d3 is unsupported
+  if(typeof(d3) === 'undefined') return $('#international-reach').hide();
+
   var colours = {
     alpha: "#666",
     beta: "#000",
