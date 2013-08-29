@@ -28,11 +28,13 @@ class ApplicationController < ActionController::Base
   def status
     @job_count = Delayed::Job.count
 
+    within_last_month = (Time.now - 1.month)..Time.now
+
     @counts = {
       'Published Certificates' =>            Certificate.where(published: true).count,
-      'Published Certificates This Month' => Certificate.where(published: true).where('"created_at" > ?', [Time.now - 1.month]).count,
+      'Published Certificates This Month' => Certificate.where(published: true, created_at: within_last_month).count,
       'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
-      'Published Datasets This Month' =>     ResponseSet.published.select("DISTINCT(dataset_id)").where('"created_at" > ?', [Time.now - 1.month]).count
+      'Published Datasets This Month' =>     ResponseSet.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
     }
 
     respond_to do |format|
