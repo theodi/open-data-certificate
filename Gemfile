@@ -19,7 +19,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'less-rails'
-  gem 'less-rails-bootstrap'#, :git => 'git://github.com/theodi/less-rails-bootstrap.git'
+  gem 'less-rails-bootstrap', '~> 2.3.3'
   gem 'twitter-bootstrap-rails-confirm'
 
   gem 'uglifier', '>= 1.0.3'
