@@ -4,6 +4,9 @@
 
 $(function(){
 
+  // hide the panel when d3 is unsupported
+  if(typeof(d3) === 'undefined') return $('#international-reach').hide();
+
   var colours = {
     alpha: "#666",
     beta: "#000",
@@ -166,9 +169,14 @@ $(function(){
         setJurisdiction(country);
       }
 
+      function inView($element){
+        var $window = $(window);
+        return $element.offset().top < ($window.height() + $window.scrollTop());
+      }
+
 
       setInterval(function(){
-        if(autoadvance) randomJurisdiction();
+        if(autoadvance && inView($panel)) randomJurisdiction();
       }, 2500);
 
       // start now
