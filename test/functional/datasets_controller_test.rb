@@ -87,9 +87,6 @@ class DatasetsControllerTest < ActionController::TestCase
     @first  = FactoryGirl.create(:published_certificate_with_dataset, curator: 'curator one')
     @second = FactoryGirl.create(:published_certificate_with_dataset, curator: 'curator two')
 
-    # FactoryGirl.create(:published_response_set, certificate: @first)
-    # FactoryGirl.create(:published_response_set, certificate: @second)
-
     get :typeahead, mode: 'publisher', q: 'one'
     assert_response 200
 

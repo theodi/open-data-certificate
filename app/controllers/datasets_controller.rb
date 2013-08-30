@@ -12,12 +12,12 @@ class DatasetsController < ApplicationController
                 .order('response_sets.attained_index DESC')
                 .page params[:page]
 
-    if(params[:jurisdiction])
+    if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)
                            .merge(Survey.where(title: params[:jurisdiction]))
     end
 
-    if(params[:publisher])
+    if params[:publisher]
       @datasets = @datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
