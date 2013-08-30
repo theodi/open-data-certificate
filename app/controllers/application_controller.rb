@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     within_last_month = (Time.now - 1.month)..Time.now
 
     @counts = {
+      'All Certificates' =>                  Certificate.count,
+      'All Certificates This Month' =>       Certificate.where(created_at: within_last_month).count,
+      'All Datasets' =>                      ResponseSet.select("DISTINCT(dataset_id)").count,
+      'All Datasets This Month' =>           ResponseSet.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
       'Published Certificates' =>            Certificate.where(published: true).count,
       'Published Certificates This Month' => Certificate.where(published: true, created_at: within_last_month).count,
       'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
