@@ -46,6 +46,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def status_response_sets
+    @response_sets = ResponseSet.all.map do |m|
+      {
+        id: m.id,
+        created_at: m.created_at.to_i,
+        state: m.aasm_state
+      }
+    end
+
+    respond_to do |format|
+      format.json { render json: @response_sets.to_json  }
+    end
+  end
+
   # A user pings this url if they have js enabled, so we can tell surveyor
   # not to find unnecessary requirements.
   def has_js
