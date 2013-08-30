@@ -45,6 +45,7 @@ class DatasetsController < ApplicationController
       when 'dataset'
         Dataset.search({title_cont:params[:q]}).result
                .includes(:response_set)
+               .merge(ResponseSet.published)
                .limit(5).map do |dataset|
           {
             value: dataset.title,
@@ -55,6 +56,7 @@ class DatasetsController < ApplicationController
       when 'publisher'
         Certificate.search({curator_cont:params[:q]}).result
                 .where(Certificate.arel_table[:curator].not_eq(nil))
+                .includes(:response_set).merge(ResponseSet.published)
                 .group(:curator)
                 .limit(5).map do |dataset|
           {
