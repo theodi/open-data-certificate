@@ -5,7 +5,7 @@
   .span6
     %h3
       .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
-      = dataset.title
+      = link_to dataset.title, dataset
   .span3{style: 'text-align:right'}
     %p
       %small
