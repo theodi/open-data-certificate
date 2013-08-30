@@ -29,6 +29,10 @@ en:
     autocompleted_data: "We have automatically completed this data from your previous answers, but you can still change it"
     autocompleted_url_incorrect: "We have automatically completed this URL, but it doesn't seem to be correct"
     missing_metadata: "Some of these items could not be found on the documentation page"
+    autocomplete_override_warning: "Please provide an explanation below for changing this answer"
+    autocomplete_explanation:
+        title: Explanation
+        subtitle: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
 
   requirement_label:
     requirement: This is required for <strong>all levels</strong>
