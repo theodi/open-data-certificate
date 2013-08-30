@@ -75,6 +75,7 @@ OpenDataCertificate::Application.routes.draw do
 
   # (public) stats about the application
   get 'status' => 'application#status'
+  get 'status/response_sets' => 'application#status_response_sets'
 
   root :to => 'application#home'
 

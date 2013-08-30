@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     within_last_month = (Time.now - 1.month)..Time.now
 
     @counts = {
+      'All Certificates' =>                  Certificate.count,
+      'All Certificates This Month' =>       Certificate.where(created_at: within_last_month).count,
+      'All Datasets' =>                      ResponseSet.select("DISTINCT(dataset_id)").count,
+      'All Datasets This Month' =>           ResponseSet.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
       'Published Certificates' =>            Certificate.where(published: true).count,
       'Published Certificates This Month' => Certificate.where(published: true, created_at: within_last_month).count,
       'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
@@ -39,6 +43,20 @@ class ApplicationController < ActionController::Base
 
     respond_to do |format|
       format.html { render '/home/status' }
+    end
+  end
+
+  def status_response_sets
+    @response_sets = ResponseSet.all.map do |m|
+      {
+        id: m.id,
+        created_at: m.created_at.to_i,
+        state: m.aasm_state
+      }
+    end
+
+    respond_to do |format|
+      format.json { render json: @response_sets.to_json  }
     end
   end
 
