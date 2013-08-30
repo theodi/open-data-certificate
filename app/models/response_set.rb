@@ -107,11 +107,6 @@ class ResponseSet < ActiveRecord::Base
     if @data_licence_determined_from_responses.nil?
       ref = value_for :data_licence, :reference_identifier
       case ref
-      when nil
-        @data_licence_determined_from_responses = {
-          title: nil,
-          url: nil
-        }
       when "na"
         @data_licence_determined_from_responses = {
           :title => "Not Applicable",
