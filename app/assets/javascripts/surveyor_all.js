@@ -152,6 +152,10 @@ $(document).ready(function(){
     })
   })
 
+  function changeState($row, state) {
+    $row.removeClass('loading no-response ok warning').addClass(state)
+  }
+
   function validateField($field, $form, csrfToken) {
     // Cache row element on field
     var $row = bindQuestionRow($field);
@@ -159,15 +163,15 @@ $(document).ready(function(){
     // Cancel any ajax callbacks
     if ($field.data('cancel-callbacks')) $field.data('cancel-callbacks')()
 
-    // Reset styles
-    $row.removeClass('loading').removeClass('no-response').removeClass('ok').removeClass('warning')
+    // Mark autocompleted initially
+    markAutocompleted($field, $form)
 
     if ($field.val() && $field.val().match(/[^\s]/)) {
 
       // Attempt to autocomplete fields
       if ($row.data('reference-identifier') == 'documentationUrl') {
 
-        $row.addClass('loading')
+        changeState($row, 'loading')
 
         $field.data('cancel-callbacks', autocomplete($field.val(), {
           beforeProcessing: function() {
@@ -178,10 +182,8 @@ $(document).ready(function(){
             })
           },
           success: function($fields) {
-            $row.addClass('ok')
-            $row.removeClass('loading')
+            changeState($row, 'ok')
 
-            // Mark fields as autcompleted
             markAutocompleted($fields, $form)
 
             // Run validation on each field
@@ -195,45 +197,49 @@ $(document).ready(function(){
           },
 
           fail: function() {
-            $row.addClass('warning')
-            $row.removeClass('loading')
+            changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
             $row.find('.status-message span').text($form.find('#surveyor').data(message))
+
+            markAutocompleted($field, $form)
           }
         }))
       }
 
       // Attempt to verify URL
       else if ($field.attr('type') == 'url') {
-
-        $row.addClass('loading')
+        changeState($row, 'loading')
 
         $field.data('cancel-callbacks', verifyUrl($field.val(), {
           success: function() {
-            $row.addClass('ok')
-            $row.removeClass('loading')
+            changeState($row, 'ok')
+
+            markAutocompleted($field, $form)
           },
 
           fail: function() {
-            $row.addClass('warning')
-            $row.removeClass('loading')
+            changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
             $row.find('.status-message span').text($form.find('#surveyor').data(message))
+
+            markAutocompleted($field, $form)
           }
         }))
       }
 
       // Approve regular field
       else {
-        $row.addClass('ok')
+        changeState($row, 'ok')
+        markAutocompleted($field, $form)
       }
     }
 
     // Show errors for missing mandatory fields
     else {
-      $row.addClass('no-response')
+      changeState($row, 'no-response')
+      markAutocompleted($field, $form)
     }
   }
 
@@ -301,11 +307,11 @@ $(document).ready(function(){
         }
       }
 
-      $row.find('input[id$="_autocompleted"]').val(autocompleted);
+      $row.find('input[id$="_autocompleted"]').val(autocompleted)
       $row.toggleClass('autocompleted', autocompleted)
 
-      // Set autocompleted message
       if (autocompleted) {
+        changeState($row, 'ok')
         $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
       }
     })
@@ -328,7 +334,8 @@ $(document).ready(function(){
 
           var missingValues = selectedValues.filter(function(value) { return autoValues.indexOf(value) === -1; })
           if (missingValues.length) {
-            $row.removeClass('ok').addClass('warning')
+
+            changeState($row, 'warning')
             $row.find('.status-message span').text($form.find('#surveyor').data('missing-metadata'))
 
             missingValues.map(function(value) {
@@ -336,7 +343,7 @@ $(document).ready(function(){
             })
           }
           else {
-            $row.removeClass('warning').addClass('ok')
+            changeState($row, 'ok')
           }
         }
       }
