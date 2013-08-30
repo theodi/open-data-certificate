@@ -54,15 +54,15 @@ class Certificate < ActiveRecord::Base
     end
 
     def latest
-      joins(:response_set).merge(ResponseSet.published).first
+      where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
-    
+
   end
 
   def badge_file
     Certificate.badge_file_for_level(attained_level)
   end
-  
+
   def badge_url
     "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
   end
