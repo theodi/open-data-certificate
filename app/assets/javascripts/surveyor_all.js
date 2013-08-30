@@ -305,6 +305,8 @@ $(document).ready(function(){
           var equalLength = selectedValues.length == autoValues.length
           autocompleted = equalLength && autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0
         }
+
+        $row.find('.autocomplete-override').toggleClass('none', autocompleted)
       }
 
       $row.find('input[id$="_autocompleted"]').val(autocompleted)
@@ -313,6 +315,10 @@ $(document).ready(function(){
       if (autocompleted) {
         changeState($row, 'ok')
         $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
+      }
+      else if ($row.data('autocompleted-value')) {
+        changeState($row, 'warning')
+        $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
       }
     })
   }

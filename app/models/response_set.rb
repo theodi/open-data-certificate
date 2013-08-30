@@ -14,6 +14,12 @@ class ResponseSet < ActiveRecord::Base
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
 
+  def self.has_blank_value?(hash)
+    return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
+    return false if (q = Question.find_by_id(hash["question_id"])) and q.pick == "one"
+    false
+  end
+
   aasm do
     state :draft, :initial => true
     state :published, :before_enter => :publish_certificate, :after_enter => :archive_other_response_sets
