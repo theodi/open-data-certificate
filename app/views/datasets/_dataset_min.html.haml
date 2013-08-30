@@ -6,14 +6,12 @@
     %h3
       .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
       = link_to dataset.title, dataset
-  .span3{style: 'text-align:right'}
-    %p
-      %small
-        Published by 
-        %strong= dataset.certificate.curator
-        %br
-        Last updated: #{time_ago_in_words dataset.updated_at} ago
-  .span3
+  .span4{style: 'text-align:right'}
+    .details
+      =detail_item('Published By') { dataset.certificate.curator }
+      =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
+      =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
+  .span2
     .jurisdiction
       .badge
         = dataset.response_set.jurisdiction
