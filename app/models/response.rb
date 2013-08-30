@@ -3,7 +3,7 @@ class Response < ActiveRecord::Base
   include Surveyor::Models::ResponseMethods
 
   attr_writer :reference_identifier
-  attr_accessible :autocompleted
+  attr_accessible :autocompleted, :autocomplete_override_explanation
 
   # override with :touch
   belongs_to :response_set, touch: true
