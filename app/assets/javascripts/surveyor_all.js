@@ -316,7 +316,7 @@ $(document).ready(function(){
         changeState($row, 'ok')
         $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
       }
-      else if ($row.data('autocompleted-value')) {
+      else if ($row.data('autocompleted-value') && empty($row.find('.autocomplete-override textarea').val())) {
         changeState($row, 'warning')
         $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
       }
@@ -347,9 +347,6 @@ $(document).ready(function(){
             missingValues.map(function(value) {
               $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning')
             })
-          }
-          else {
-            changeState($row, 'ok')
           }
         }
       }
