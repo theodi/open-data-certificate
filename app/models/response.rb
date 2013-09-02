@@ -52,6 +52,10 @@ class Response < ActiveRecord::Base
     @auto_value ||= response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
   end
 
+  def autocompletable?
+    auto_value && !auto_value.empty?
+  end
+
   def any_metadata_missing
     @any_metadata_missing ||= question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
   end

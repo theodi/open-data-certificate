@@ -10,6 +10,7 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :survey
   has_one :certificate, dependent: :destroy
   has_one :kitten_data
+  has_many :autocomplete_override_messages
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
@@ -264,11 +265,15 @@ class ResponseSet < ActiveRecord::Base
   alias :original_update_from_ui_hash :update_from_ui_hash
   def update_from_ui_hash(ui_hash)
 
+    ui_hash.each do |_ord, response_hash|
+      autocomplete_message = autocomplete_override_message_for(response_hash[:question_id])
+      autocomplete_message.update_attributes(response_hash.delete('autocomplete_override_message'))
+    end
+
     # the api_ids in the ui_hash
     api_ids = ui_hash.map do |_ord, response_hash|
       response_hash["api_id"]
     end
-
 
     # find responses that have been claimed by another response_sets
     Response.where(api_id: api_ids).where('response_set_id != ?', id).each do |response|
@@ -306,6 +311,10 @@ class ResponseSet < ActiveRecord::Base
   def newest_completed_in_dataset?
     # TODO: this method would need to be extended to handle "newest for survey" - for phase 2...
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
+  end
+
+  def autocomplete_override_message_for(question)
+    autocomplete_override_messages.where(question_id: question).first_or_create
   end
 
   # finds the string value for a given response_identifier
