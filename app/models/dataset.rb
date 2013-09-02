@@ -11,7 +11,7 @@ class Dataset < ActiveRecord::Base
   def title
     read_attribute(:title) || set_default_title!(response_sets.first.try(:dataset_title_determined_from_responses)) || response_sets.first.try(:title) || ResponseSet::DEFAULT_TITLE
   end
-  
+
   def documentation_url
     read_attribute(:documentation_url) || set_default_documentation_url!(response_sets.first.try(:dataset_documentation_url_determined_from_responses))
   end
@@ -22,7 +22,7 @@ class Dataset < ActiveRecord::Base
       save
     end
   end
-  
+
   def set_default_documentation_url!(url)
     if url && persisted?
       self.documentation_url = url
@@ -41,6 +41,10 @@ class Dataset < ActiveRecord::Base
 
   def destroy_if_no_responses
     destroy if response_sets.empty?
+  end
+
+  def user_full_name
+    user.full_name if user
   end
 
 end
