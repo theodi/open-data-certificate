@@ -9,8 +9,8 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
   has_one :certificate, dependent: :destroy
-  has_one :kitten_data, dependant: :destroy
-  has_many :autocomplete_override_messages, dependant: :destroy
+  has_one :kitten_data, dependent: :destroy
+  has_many :autocomplete_override_messages, dependent: :destroy
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
