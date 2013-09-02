@@ -1,12 +1,12 @@
 / Down the line, this will support the dashboard view too
 - dataset = dataset_min
 
-.row.response-set-inline
+.row.dataset
   .span6
+    .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
     %h3
-      .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
       = link_to dataset.title, dataset
-  .span4{style: 'text-align:right'}
+  .span4
     .details
       =detail_item('Published By') { dataset.certificate.curator }
       =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}

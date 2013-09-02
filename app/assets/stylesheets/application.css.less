@@ -1461,7 +1461,44 @@ td.action {
   }
 }
 
+// UPDATED (again), new dataset styling //
+// will be consistent across dashboard in time
 
+.dataset{
+  h3 a{
+    color:inherit;
+  }
+
+  .level-badge{
+    @height: 3em;
+    height:@height;
+    width:@height * 1.1;
+
+    padding-top:0;
+    background-size:100%;
+    background-position: center center;
+    margin: 10px;
+    margin-left: 0;
+    float:left;
+  }
+
+  // match the level badge height
+  h3{
+    font-size:1em;
+    line-height: 1em;
+    margin-top:1.5em;
+  }
+
+  .details p{
+    font-size:.75em;
+    margin:0;
+    text-align: right;
+  }
+
+}
+
+
+// dataset / repsonse badges //
 
 .level-badge{
   width:133px;
