@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828102632) do
+ActiveRecord::Schema.define(:version => 20130830100636) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20130828102632) do
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
   add_index "answers", ["question_id", "display_order"], :name => "i_answers_on_question_id_and_display_order"
   add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
+
+  create_table "autocomplete_override_messages", :force => true do |t|
+    t.integer  "response_set_id"
+    t.integer  "question_id"
+    t.text     "message"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
