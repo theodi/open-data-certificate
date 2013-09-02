@@ -1,7 +1,11 @@
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
 %li.container
-  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "row q_#{renderer} #{q.css_class(@response_set)} requirement_#{requirement}" do
-    %li.span7
-      %p
-        != q_text(q, @render_context, I18n.locale)
+  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "row q_#{renderer} #{q.css_class(@response_set)} requirement_#{requirement} inline-validation" do
+    .status-error.span8
+      .status-icon
+        %i.icon.icon-variable
+      .status-message
+        %span= q_text(q, @render_context, I18n.locale).html_safe
+        %i.arrow-border
+        %i.arrow

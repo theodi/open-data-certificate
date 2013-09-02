@@ -46,6 +46,8 @@ class KittenData < ActiveRecord::Base
           }
         }
       }
+    else
+      self.data = {}
     end
   end
 
@@ -55,6 +57,8 @@ class KittenData < ActiveRecord::Base
 
   def compute_fields
     @fields = {}
+
+    return @fields if !data
 
     @fields["dataTitle"] = data[:title]
 
