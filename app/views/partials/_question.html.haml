@@ -18,28 +18,36 @@
 - else
   %li.container
     - r = response_for(@response_set, q, nil, rg)
+    - a = @response_set.autocomplete_override_message_for(q)
+
+    - explanation_required = r.autocompletable? && !r.all_autocompleted
+    - explanation_given = explanation_required && a.message.strip.blank?
 
     - state = 'ok' unless r.new_record?
-    - state = 'warning' if r.error || r.any_metadata_missing
+    - state = 'warning' if r.error || r.any_metadata_missing || explanation_given
 
-    - classes = {'row' => true, 'question-row' => true, "q_#{renderer}" => true}
-    - classes[q.css_class(@response_set)] = true
-    - classes['choice-boxes'] = q.pick == "one" || q.pick == "any"
-    - classes['compact-validation'] = pickTypes.include?(q.pick) || selectFields.include?(renderer)
-    - classes['mandatory'] = q.is_mandatory
-    - classes['has-response'] = !r.new_record?
-    - classes['no-response'] = r.new_record?
-    - classes['autocompleted'] = r.all_autocompleted
-    - classes[state] = true if state
+    - status_message = t('surveyor.autocompleted_data')
+    - status_message = t('surveyor.autocomplete_override_warning') if explanation_given
+    - status_message = t('surveyor.missing_metadata') if r.any_metadata_missing
+
+    - classes = ['row', 'question-row', "q_#{renderer}"]
+    - classes << q.css_class(@response_set)
+    - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
+    - classes << 'mandatory' if q.is_mandatory
+    - classes << 'has-response' unless r.new_record?
+    - classes << 'no-response' if r.new_record?
+    - classes << 'autocompleted' if r.autocompletable? && r.all_autocompleted
+    - classes << state if state
+    - if pickTypes.include?(q.pick) || selectFields.include?(renderer)
+      - classes << ['inline-validation', 'compact-validation']
 
     - data = {}
     - data['reference-identifier'] = rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier
     - data['autocompleted-value'] = r.auto_value.kind_of?(Array) ? r.auto_value.try(:join, ',') : r.auto_value if r.auto_value
     - data['metadata-field'] = true if q.metadata_field?
 
-    - attrs = {:data => data}
-    - attrs[:id] = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
-    - attrs[:class] = classes.select{ |key, value| value }.keys.join(' ')
+    - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
+    - attrs = {data: data, id: id, class: classes.join(' ')}
 
     -# if we are using the default renderer, we will display the question text within that
     = f.inputs (renderer == :default ? '' : question_text), attrs do
@@ -60,7 +68,7 @@
             = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
-            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => t('surveyor.autocompleted_data') }
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }
         - else # :default, :inline, :inline_default
 
           - if q.pick == "one"
@@ -75,24 +83,23 @@
               %div.status-icon
                 %i.icon.icon-variable
               %div.span8.status-message
-                %span= r.any_metadata_missing ? t('surveyor.missing_metadata') : t('surveyor.autocompleted_data')
+                %span= status_message
                 %i.arrow-border
                 %i.arrow
             %div.choice-buttons.status-wrapper
               - q.answers.each do |a|
                 - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
-                = render a.custom_renderer || '/partials/answer', :q => q, :a => a, :f => f, :rg => rg, :g => g, :disableFlag => disabled, :question_text => question_text
+                = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
 
           - else
             - q.answers.each do |a|
-              = render a.custom_renderer || '/partials/answer', :q => q, :a => a, :f => f, :rg => rg, :g => g, :disableFlag => disabled, :question_text => question_text
+              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
 
-        .autocomplete-override{class: r.auto_value && !r.all_autocompleted ? '' : 'none'}
-          - r = response_for(@response_set, q, q.answers.first, rg)
+        .autocomplete-override{class: explanation_required ? '' : 'none'}
           - i = (i.to_i + 1).to_s if q.pick == 'any'
           - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
-          = f.semantic_fields_for i, r do |ff|
-            = ff.input :autocomplete_override_explanation, :as => :additional_text, :label => t('surveyor.autocomplete_explanation.title'), :subtitle => t('surveyor.autocomplete_explanation.subtitle')
+          = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
+            = ff.input :message, as: :additional_text, label: t('surveyor.autocomplete_explanation.title'), subtitle: t('surveyor.autocomplete_explanation.subtitle')
 
       - unless (q.help_text.blank?)
         %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}

@@ -13,9 +13,9 @@
   = ff.input :api_id, :as => :quiet unless q.pick == "one"
   = ff.input :response_group, :value => rg, :as => :quiet if q.pick != "one" && g && g.display_type == "repeater"
 
-  - status_message = t('surveyor.autocompleted_data')
   - if a.input_type == 'url' && r.error
-    - status_message = r.autocompleted ? t('surveyor.autocompleted_url_incorrect') : t('surveyor.please_check_that_the_url_exists')
+    - status_message = t('surveyor.please_check_that_the_url_exists')
+    - status_message = t('surveyor.autocompleted_url_incorrect') if r.autocompleted
 
   - case q.pick
   - when "one"
