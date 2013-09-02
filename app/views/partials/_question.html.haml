@@ -21,13 +21,13 @@
     - a = @response_set.autocomplete_override_message_for(q)
 
     - explanation_required = r.autocompletable? && !r.all_autocompleted
-    - explanation_given = explanation_required && a.message.strip.blank?
+    - explanation_missing = explanation_required && (a.message || '').strip.blank?
 
     - state = 'ok' unless r.new_record?
-    - state = 'warning' if r.error || r.any_metadata_missing || explanation_given
+    - state = 'warning' if r.error || r.any_metadata_missing || explanation_missing
 
     - status_message = t('surveyor.autocompleted_data')
-    - status_message = t('surveyor.autocomplete_override_warning') if explanation_given
+    - status_message = t('surveyor.autocomplete_override_warning') if explanation_missing
     - status_message = t('surveyor.missing_metadata') if r.any_metadata_missing
 
     - classes = ['row', 'question-row', "q_#{renderer}"]
