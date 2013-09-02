@@ -1,6 +1,8 @@
 %li.search
-  /= form_tag datasets_path, method: 'get' do
-  /  = text_field_tag 'search', params[:search], id: 'search_certificates', placeholder: t('certificates.search.search_label')
+  = form_tag datasets_path, method: 'get' do
+    .input-append
+      = text_field_tag 'search', params[:search], id: 'search_certificates', placeholder: t('certificates.search.search_label'), class: 'typeahead-search span3'
+      = submit_tag t('certificates.search.submit_search'), :class => 'btn'
 
 - if user_signed_in?
   %li= link_to "Account", edit_user_registration_path(current_user.id)

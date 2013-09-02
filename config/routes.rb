@@ -25,6 +25,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get 'atom.xml', to: 'datasets#to_atom', format: false, as: 'atom'
+    get :typeahead, on: :collection
 
     resources :certificates, :only => [:show] do
        member do
