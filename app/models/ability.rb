@@ -15,5 +15,7 @@ class Ability
         dataset.user == user
     end
 
+    can :read, Dataset
+
   end
 end
