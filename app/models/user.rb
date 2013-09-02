@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   has_many :response_sets
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :default_jurisdiction
+
+  def full_name
+    [first_name, last_name].delete_if(&:blank?).join(' ')
+  end
 end
