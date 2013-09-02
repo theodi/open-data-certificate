@@ -89,4 +89,28 @@ class DatasetTest < ActiveSupport::TestCase
     assert_nil(dataset)
   end
 
+  test "#response_set should give the published dataset" do
+
+    dataset = FactoryGirl.create(:dataset)
+
+    FactoryGirl.create_list(:response_set, 10, dataset: dataset)
+
+    active = dataset.response_sets[5]
+    active.publish!
+
+    assert_equal active, dataset.response_set
+  end
+
+  test "#certificate should give the published certificate" do
+
+    dataset = FactoryGirl.create(:dataset)
+
+    FactoryGirl.create_list(:response_set, 10, dataset: dataset)
+
+    active = dataset.response_sets[5]
+    active.publish!
+
+    assert_equal active.certificate, dataset.certificate
+  end
+
 end

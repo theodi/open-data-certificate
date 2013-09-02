@@ -1,7 +1,5 @@
-- content_for :header_title, t('certificates.certificates')
+- content_for :header_title do
+	#{link_to t('datasets.datasets'), datasets_path} / #{@dataset.title}
 
-- if @certificates.any?
-  %dl.unstyled
-    = render partial: 'certificates/certificate', collection: @certificates
-- else
-  %p= t('certificates.no_certificates_found')
+%hr.heavy
+= render partial: 'dataset_min', object: @dataset

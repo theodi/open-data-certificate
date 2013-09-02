@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130830100636) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "documentation_url"
+    t.string   "curator"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -193,11 +194,12 @@ ActiveRecord::Schema.define(:version => 20130830100636) do
     t.string   "access_code"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "api_id"
     t.integer  "dataset_id"
-    t.string   "aasm_state",   :default => "draft"
+    t.string   "aasm_state",     :default => "draft"
+    t.integer  "attained_index"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true

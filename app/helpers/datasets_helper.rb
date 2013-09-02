@@ -1,5 +1,19 @@
 module DatasetsHelper
 
+  # for printing a list of key values in the dataset items will 
+  # be skipped if there is no content (or it throws an error)
+  def detail_item title
+    begin
+      throw unless value = yield
+      content_tag(:p, 
+        content_tag(:span, title << ' ') + 
+        content_tag(:strong, value)
+      )
+    rescue
+      ""
+    end
+  end
+
   def continue_path(response_set)
     unless response_set.new_record?
       surveyor.continue_my_survey_path(

@@ -13,6 +13,7 @@ FactoryGirl.define do
 
     factory :published_certificate_with_dataset do
       published true
+      response_set {FactoryGirl.create(:response_set_with_dataset, aasm_state: 'published')}
     end
   end
 
