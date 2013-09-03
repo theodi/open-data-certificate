@@ -209,7 +209,7 @@ $(function(){
 
   // Open sections that contain incomplete mandatory questions
   if ($('#surveyor').hasClass('highlight-mandatory')) {
-    $('.survey-section:has(.mandatory:not(.has-response):not(.q_hidden))')
+    $('.survey-section:has(.mandatory.no-response:not(.q_hidden))')
       .find('ul')
       .collapse('show');
   }

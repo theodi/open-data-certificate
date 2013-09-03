@@ -168,9 +168,16 @@ $(document).ready(function(){
     });
 
     // Updates autocomplete override fields
-    $form.find(".autocomplete-override textarea").keyup(function() {
-      var $row = bindQuestionRow($(this));
-      markAutocompleted($row.find("input, select"), $form);
+    $form.find(".autocomplete-override textarea").each(function() {
+      var $field = $(this);
+      var debounced = _.debounce(saveFormElements, 700);
+
+      $field.keyup(function() {
+        var $row = bindQuestionRow($(this))
+        var $fields = $row.find("input, select")
+        markAutocompleted($fields, $form)
+        debounced($form, questionFields($field).add(csrfToken))
+      })
     })
   })
 
