@@ -152,19 +152,26 @@ $(document).ready(function(){
       })
     }
 
+    // Update radio, checkbox and select form fields on click
     $form.find("input[type!=text][type!=url], select").change(updateField)
 
-    // Updates form after users finish typing
-    $form.find("input[type=text], input[type=url], textarea").each(function() {
+    // Updates text form after users finish typing
+    $form.find("input[type=text], input[type=url]").each(function() {
       var $field = $(this);
       var $row = bindQuestionRow($field);
       var debounced = _.debounce(updateField, 700);
 
-      $field.bind('keydown', function() {
+      $field.keyup(function() {
         $row.addClass('loading');
         debounced.call($field);
       });
     });
+
+    // Updates autocomplete override fields
+    $form.find(".autocomplete-override textarea").keyup(function() {
+      var $row = bindQuestionRow($(this));
+      markAutocompleted($row.find("input, select"), $form);
+    })
   })
 
   function changeState($row, state) {
@@ -300,7 +307,8 @@ $(document).ready(function(){
   }
 
   function markAutocompleted($fields, $form) {
-    $fields.each(function() {
+    $fields.filter('[type!=hidden]').each(function() {
+      var $field = $(this)
       var $row = bindQuestionRow($(this))
       var $input = $row.find('li.input')
       var question = $row.data('reference-identifier');
@@ -326,18 +334,27 @@ $(document).ready(function(){
         }
 
         $row.find('.autocomplete-override').toggleClass('none', autocompleted)
-      }
+        $row.find('input[id$="_autocompleted"]').val(autocompleted)
+        $row.toggleClass('autocompleted', autocompleted)
 
-      $row.find('input[id$="_autocompleted"]').val(autocompleted)
-      $row.toggleClass('autocompleted', autocompleted)
-
-      if (autocompleted) {
-        changeState($row, 'ok')
-        $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
-      }
-      else if ($row.data('autocompleted-value') && empty($row.find('.autocomplete-override textarea').val())) {
-        changeState($row, 'warning')
-        $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
+        if (autocompleted) {
+          changeState($row, 'ok')
+          $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
+        }
+        else {
+          if ($field.val() && $field.val().match(/[^\s]/)) {
+            if (empty($row.find('.autocomplete-override textarea').val())) {
+              changeState($row, 'warning')
+              $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
+            }
+            else {
+              changeState($row, 'ok')
+            }
+          }
+          else {
+            changeState($row, 'no-response')
+          }
+        }
       }
     })
   }
