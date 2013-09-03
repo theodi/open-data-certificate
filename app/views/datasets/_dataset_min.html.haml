@@ -6,7 +6,7 @@
     .span6
       .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
       %h3.badge-align
-        = link_to dataset.title, dataset
+        = link_to_unless_current dataset.title, dataset
     .span4
       .details
         =detail_item('Published By') { dataset.certificate.curator }
