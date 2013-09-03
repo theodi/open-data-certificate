@@ -40,6 +40,7 @@ group :development do
   gem 'guard-test'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
+  gem 'railroady'
   gem 'rails-footnotes', '>= 3.7.9'
 end
 
