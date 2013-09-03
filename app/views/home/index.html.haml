@@ -11,7 +11,7 @@
           %h1= t('homepage.title')
           %h2= t('homepage.tagline').html_safe
           = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
-          -#= link_to t('homepage.browse_all_new_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-info'] #TODO: Commented browse certificate functionality
+          = link_to t('homepage.browse_all_new_certificates'), datasets_path, class: ['btn', 'btn-large', 'btn-info']
 
 - content_for(:header) do
   #empty
@@ -44,12 +44,11 @@
 .home-header-buttons
   .row
     .span4
-      -#= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
+      %p.logo ODI
     .span4
       = new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')})
     .span4
-      -#= link_to t('homepage.browse_certificates'), certificates_path, class: ['btn', 'btn-large', 'btn-primary'] #TODO: Commented browse certificate functionality
-      %p.logo ODI
+      = link_to t('homepage.browse_certificates'), datasets_path, class: ['btn', 'btn-large', 'btn-primary']
 
 .main
   .row

@@ -1,8 +1,8 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
+//= require_tree .
 
 $(function(){
   //////
@@ -335,6 +335,36 @@ $(function(){
   $('.popdown').popover({
     placement:'bottom',
     trigger:'hover'
+  });
+
+
+  // search typeahead
+  $('.typeahead-search').typeahead([{
+      name:"datasets",
+      header: '<h3>Datasets</h3>',
+      template: '<p class="attained attained-{{attained_index}}">{{value}}</p>',
+      engine: Hogan,
+      remote: {
+        url:'/datasets/typeahead?mode=dataset&q=%QUERY'
+      }
+    },
+    {
+      name:"publisher",
+      header: '<h3>Publisher</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=publisher&q=%QUERY'
+      }
+    },
+    {
+      name:"jurisdiction",
+      header: '<h3>Jurisdiction</h3>',
+      remote: {
+        url:'/datasets/typeahead?mode=country&q=%QUERY'
+      }
+    }
+  ])
+  .on('typeahead:selected typeahead:autocompleted', function(e, datum, dataset){
+    if(datum.path){ document.location = datum.path; }
   });
 
 });

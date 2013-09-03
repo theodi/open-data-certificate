@@ -9,6 +9,11 @@ FactoryGirl.define do
     factory :completed_response_set do
       completed_at { Time.now }
     end
+
+    factory :published_response_set do
+      completed_at { Time.now }
+      aasm_state :published
+    end
   end
 
   factory :response_set_with_dataset, :class => ResponseSet do |r|

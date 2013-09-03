@@ -449,4 +449,14 @@ class ResponseSetTest < ActiveSupport::TestCase
 
   end
 
+  test "publishing a certificate populates the attained_index" do
+    response_set = FactoryGirl.create(:response_set)
+
+    assert_equal nil, response_set.attained_index
+
+    response_set.publish!
+
+    assert_not_equal nil, response_set.attained_index
+  end
+
 end

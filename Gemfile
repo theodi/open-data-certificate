@@ -38,6 +38,7 @@ end
 group :development do
   gem 'guard'
   gem 'guard-test'
+  gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
 end
@@ -81,6 +82,7 @@ gem 'thin'
 # To use debugger
 # gem 'debugger'
 
+gem "ransack"
 gem 'surveyor'
 gem 'redcarpet'
 gem "devise", ">= 2.2.3"

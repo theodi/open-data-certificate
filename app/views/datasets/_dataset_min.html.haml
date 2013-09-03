@@ -1,0 +1,24 @@
+/ Down the line, this will support the dashboard view too
+- dataset = dataset_min
+
+.row.dataset
+  .span6
+    .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
+    %h3
+      = link_to dataset.title, dataset
+  .span4
+    .details
+      =detail_item('Published By') { dataset.certificate.curator }
+      =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
+      =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
+  .span2
+    .jurisdiction
+      .badge
+        = dataset.response_set.jurisdiction
+      %span.status
+        = dataset.response_set.survey.try(:status)
+    %p
+      =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-mini btn-primary'
+
+
+%hr.heavy

@@ -22,8 +22,13 @@ class ResponseSet < ActiveRecord::Base
   end
 
   aasm do
-    state :draft, :initial => true
-    state :published, :before_enter => :publish_certificate, :after_enter => :archive_other_response_sets
+    state :draft,
+              :initial => true
+
+    state :published,
+              :before_enter => :publish_certificate,
+              :after_enter => [:archive_other_response_sets, :store_attained_index]
+
     state :archived
 
     event :publish do
@@ -48,6 +53,13 @@ class ResponseSet < ActiveRecord::Base
       end
     end
 
+  end
+
+  # store the attained level so that it's queryable (only stored
+  # once the certificate has been published)
+  def store_attained_index
+    index = minimum_outstanding_requirement_level-1
+    update_attribute(:attained_index, index)
   end
 
 
@@ -90,7 +102,7 @@ class ResponseSet < ActiveRecord::Base
 
   def method_missing(method_name, *args, &blk)
     val = method_name.to_s.match(/(.+)_determined_from_responses/)
-    unless val.nil? and survey.map[val[1].to_sym].nil?
+    unless val.nil? or survey.map[val[1].to_sym].nil?
       var = instance_variable_get("@#{method_name}")
       var ||= value_for val[1].to_sym
     else
@@ -223,7 +235,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def outstanding_requirements
-    @outstanding_requirements ||= (triggered_requirements - completed_requirements)
+    @outstanding_requirements ||= triggered_requirements.select { |r| !r.requirement_met_by_responses?(self.responses) }
   end
 
   def responses_for_questions(questions)
