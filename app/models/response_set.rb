@@ -331,7 +331,7 @@ class ResponseSet < ActiveRecord::Base
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier, value = :string_value
+  def value_for reference_identifier, value = :to_s
     responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
   end
 
