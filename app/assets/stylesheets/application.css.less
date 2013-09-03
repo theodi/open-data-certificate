@@ -1646,25 +1646,14 @@ header .jurisdiction{
       display: none;
       position: absolute;
       right: 20px;
-      bottom: 35px;
+      bottom: 18px;
       color: #333;
     }
 
-    &.loading {
-      input.string {
-        padding-right: 70px;
-      }
-
-      .icon-loading {
-        display: inline;
-      }
-    }
-
     .status-icon {
-      display: none;
       width: 60px;
       height: 60px;
-      background: @odiGreen;
+      background: none;
       margin: 16px 0;
       border-radius: 3px;
       position: absolute;
@@ -1672,10 +1661,10 @@ header .jurisdiction{
       bottom: 0;
 
       .icon {
+        display: none;
         &:before { content: @ok; }
         width: 100%;
         margin: 15px 0;
-        display: inline-block;
         font-size: 30px;
         color: white;
         text-align: center;
@@ -1743,10 +1732,10 @@ header .jurisdiction{
       }
 
       .status-icon {
-        display: block;
         background: @odiOrange;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -1776,6 +1765,7 @@ header .jurisdiction{
         background: @odiCrimson;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -1798,10 +1788,10 @@ header .jurisdiction{
       }
 
       .status-icon {
-        display: block;
         background: @odiGreen;
 
         .icon {
+          display: inline-block;
           &:before { content: @ok; }
         }
       }
@@ -1844,7 +1834,7 @@ header .jurisdiction{
 
     &.inline-validation {
       .status-icon {
-        .border-radius(0);
+        .border-radius(2px);
         position: relative;
         float: left;
         margin: 0;
@@ -1878,6 +1868,18 @@ header .jurisdiction{
           left: 39px;
           border-width: 8px 8px 8px 0;
           border-right-color: white;
+        }
+      }
+
+      &.loading {
+        .status-icon {
+          background: white;
+
+          .icon-loading {
+            font-size: 16px;
+            right: 10px;
+            bottom: 9px;
+          }
         }
       }
 
@@ -1931,13 +1933,12 @@ header .jurisdiction{
     }
 
     .status-error {
-      background: @odiCrimsonLight;
 
       .status-icon {
-        display: block;
         background: @odiCrimson;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -1951,6 +1952,23 @@ header .jurisdiction{
 
         i.arrow {
           border-right-color: @odiCrimson;
+        }
+      }
+    }
+
+    &.loading {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        background: none;
+
+        .icon-loading {
+          display: inline;
+        }
+        .icon {
+          display: none;
         }
       }
     }

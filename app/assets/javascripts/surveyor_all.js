@@ -136,24 +136,39 @@ $(document).ready(function(){
     var $form = $(this)
     var csrfToken = $form.find("input[name='authenticity_token']")
 
-    $form.find("input, select, textarea").change(function() {
+    function updateField() {
       var $field = $(this)
+      var $row = bindQuestionRow($field);
 
-      // Detect and mark autocompleted fields
       markAutocompleted($field, $form)
-
       checkMetadataFields($field, $form)
 
       // Save changes to this field
+      $row.addClass('loading');
       saveFormElements($form, questionFields($field).add(csrfToken), function() {
+        $row.removeClass('loading');
         validateField($field, $form, csrfToken)
         checkMetadataFields($field, $form)
       })
-    })
+    }
+
+    $form.find("input[type!=text][type!=url], select").change(updateField)
+
+    // Updates form after users finish typing
+    $form.find("input[type=text], input[type=url], textarea").each(function() {
+      var $field = $(this);
+      var $row = bindQuestionRow($field);
+      var debounced = _.debounce(updateField, 700);
+
+      $field.bind('keydown', function() {
+        $row.addClass('loading');
+        debounced.call($field);
+      });
+    });
   })
 
   function changeState($row, state) {
-    $row.removeClass('loading no-response ok warning').addClass(state)
+    $row.removeClass('no-response ok warning').addClass(state)
   }
 
   function validateField($field, $form, csrfToken) {
@@ -171,7 +186,7 @@ $(document).ready(function(){
       // Attempt to autocomplete fields
       if ($row.data('reference-identifier') == 'documentationUrl') {
 
-        changeState($row, 'loading')
+        $row.addClass('loading');
 
         $field.data('cancel-callbacks', autocomplete($field.val(), {
           beforeProcessing: function() {
@@ -182,6 +197,7 @@ $(document).ready(function(){
             })
           },
           success: function($fields) {
+            $row.removeClass('loading')
             changeState($row, 'ok')
 
             markAutocompleted($fields, $form)
@@ -197,6 +213,7 @@ $(document).ready(function(){
           },
 
           fail: function() {
+            $row.removeClass('loading')
             changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
@@ -209,16 +226,18 @@ $(document).ready(function(){
 
       // Attempt to verify URL
       else if ($field.attr('type') == 'url') {
-        changeState($row, 'loading')
+        $row.addClass('loading');
 
         $field.data('cancel-callbacks', verifyUrl($field.val(), {
           success: function() {
+            $row.removeClass('loading');
             changeState($row, 'ok')
 
             markAutocompleted($field, $form)
           },
 
           fail: function() {
+            $row.removeClass('loading');
             changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
