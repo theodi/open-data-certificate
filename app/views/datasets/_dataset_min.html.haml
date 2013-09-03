@@ -11,7 +11,6 @@
       .details
         =detail_item('Published By') { dataset.certificate.curator }
         =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
-        =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
     .span2
       .expand
         %i.show-more.icon-chevron-down
@@ -21,31 +20,25 @@
           = dataset.response_set.jurisdiction
         %span.status
           = dataset.response_set.survey.try(:status)
-      %p
-        =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-mini btn-primary'
 
   .more
     %hr
     .row
       .span3
         %h3 Summary
-        %p
-          %strong Type of release:
-          Something here
-        %p
-          %strong Licence:
-          Creative Commons
-        %p
-          %strong Data type:
-          Geographical
+
+        =detail_item('Type of release:') { dataset.response_set.release_type_determined_from_responses }
+        =detail_item('Data Licence:')    { dataset.response_set.data_licence_determined_from_responses[:title] }
+        =detail_item('Content Licence:') { dataset.response_set.content_licence_determined_from_responses[:title] }
+
       .span9
         %h3 Description
 
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        %p
+          =dataset.response_set.kitten_data.data[:description] rescue ''
 
-      
-        %p  
-          %a.btn.btn-large.btn-info View certificate
+        %p
+          =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-large btn-info'
 
 
 
