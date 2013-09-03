@@ -94,27 +94,8 @@ $(function(){
   });
 
 
-
   //////
   // Questionnaire
-
-
-  /*
-    The fieldset surrounding an input is the base of a question being 'active', it will
-      - have an 'active' class added
-      - emit 'odc.focus' & 'odc.blur' events (?)
-  */
-
-
-  // trigger the highlighting of fieldsets
-  $('#surveyor')
-    .on('focus', 'input, select, textarea', function(){
-      $(this).parents('fieldset').addClass('active').trigger('_focus');
-    })
-    .on('blur', 'input, select, textarea', function(){
-      $(this).parents('fieldset').removeClass('active').trigger('_blur');
-    });
-
 
   // a map from reference_id to the relevant fieldset (DOM, not $wrapped)
   var reference_id_els = {};
@@ -123,9 +104,12 @@ $(function(){
     reference_id_els[$(this).data('reference-identifier')] = this;
   });
 
-  $surveyElements.on('mouseover', function(){
+  // The fieldset surrounding an input is the base of a question being 'active', it will
+  // - have an 'active' class added
+  // - emit 'odc.focus' & 'odc.blur' events (?)
+  $surveyElements.on('mouseenter', function(){
     $(this).addClass('active').trigger('_focus');
-  }).on('mouseout', function(){
+  }).on('mouseleave', function(){
     $(this).removeClass('active').trigger('_blur');
   });
 
