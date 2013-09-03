@@ -1469,33 +1469,61 @@ td.action {
     color:inherit;
   }
 
-  .level-badge{
-    @height: 3em;
-    height:@height;
-    width:@height * 1.1;
+  @badgeHeight: 2em;
 
+  .level-badge{
+    height:@badgeHeight;
+    width:@badgeHeight * 1.1;
     padding-top:0;
     background-size:100%;
     background-position: center center;
-    margin: 10px;
+    margin: .25em;
     margin-left: 0;
     float:left;
   }
 
   // match the level badge height
-  h3{
+  .badge-align{
     font-size:1em;
     line-height: 1em;
-    margin-top:1.5em;
+    margin-top: (@badgeHeight/2) - .25em;
   }
 
   .details p{
-    font-size:.75em;
+    font-size: 0.8em;
     margin:0;
     text-align: right;
   }
 
+  .expand{
+    float:right;
+    cursor: pointer;
+  }
+
+  .show-more{display:block}
+  .hide-more{display:none}
+  .more{
+    .transition(all .5s);
+    height:0; overflow: hidden;
+    opacity:0;
+  }
+
+  &.expanded{
+    .show-more{display:none}
+    .hide-more{display:block}
+
+    .more{height:auto; opacity:1;}
+  }
+
+  .no-js &{
+    .expand{display: none;}
+    .more{height:auto; opacity:1;}
+  }
+
+
+
 }
+
 
 
 // dataset / repsonse badges //

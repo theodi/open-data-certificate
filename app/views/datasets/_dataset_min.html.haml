@@ -1,24 +1,52 @@
 / Down the line, this will support the dashboard view too
 - dataset = dataset_min
 
-.row.dataset
-  .span6
-    .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
-    %h3
-      = link_to dataset.title, dataset
-  .span4
-    .details
-      =detail_item('Published By') { dataset.certificate.curator }
-      =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
-      =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
-  .span2
-    .jurisdiction
-      .badge
-        = dataset.response_set.jurisdiction
-      %span.status
-        = dataset.response_set.survey.try(:status)
-    %p
-      =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-mini btn-primary'
+.dataset{class: defined?(expanded) ? 'expanded': ''}
+  .row
+    .span6
+      .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
+      %h3.badge-align
+        = link_to dataset.title, dataset
+    .span4
+      .details
+        =detail_item('Published By') { dataset.certificate.curator }
+        =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
+        =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
+    .span2
+      .expand
+        %i.show-more.icon-chevron-down
+        %i.hide-more.icon-chevron-up
+      .jurisdiction
+        .badge
+          = dataset.response_set.jurisdiction
+        %span.status
+          = dataset.response_set.survey.try(:status)
+      %p
+        =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-mini btn-primary'
+
+  .more
+    %hr
+    .row
+      .span3
+        %h3 Summary
+        %p
+          %strong Type of release:
+          Something here
+        %p
+          %strong Licence:
+          Creative Commons
+        %p
+          %strong Data type:
+          Geographical
+      .span9
+        %h3 Description
+
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      
+        %p  
+          %a.btn.btn-large.btn-info View certificate
+
 
 
 %hr.heavy
