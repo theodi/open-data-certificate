@@ -161,6 +161,13 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+  def licences
+    {
+      data: data_licence_determined_from_responses,
+      content: content_licence_determined_from_responses
+    }
+  end
+
   def incomplete?
     !complete?
   end
