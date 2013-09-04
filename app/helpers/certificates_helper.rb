@@ -65,7 +65,7 @@ module CertificatesHelper
     publisher = RDF::Node.new
     graph << [dataset, prefixes[:dct].publisher, publisher]
     graph << [publisher, RDF.type, prefixes[:foaf].Organization]
-    graph << [publisher, prefixes[:foaf].name, RDF::Literal.new(certificate.response_set.curator_determined_from_responses, :language => certificate.survey.language.to_sym)]
+    graph << [publisher, prefixes[:foaf].name, RDF::Literal.new(certificate.response_set.dataset_curator_determined_from_responses, :language => certificate.survey.language.to_sym)]
     
     rights = RDF::Node.new
     graph << [dataset, prefixes[:dct].rights, rights]
