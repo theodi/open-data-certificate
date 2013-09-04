@@ -32,8 +32,10 @@
 .row
   .span3
     .well
-      =render 'shared/response_set_summary', response_set: @certificate.response_set
-      =render 'shared/response_set_description', response_set: @certificate.response_set, leading_hr: true
+      -if @certificate.response_set.kitten_data.try(:data)
+        =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
+      -else
+        =render 'shared/response_set_summary', response_set: @certificate.response_set
 
   .span9
     =render @certificate.response_set

@@ -1,0 +1,12 @@
+- if kitten_data && kitten_data.data
+
+  %dl
+    - kitten_data.data.each do |key, v|
+
+      - value = kitten_value(v)
+
+      -unless value.blank?
+
+        %dt= t key, scope: :data_kitten
+
+        %dd!= value
