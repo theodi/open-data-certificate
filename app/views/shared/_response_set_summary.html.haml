@@ -2,11 +2,11 @@
 
 .summary-data
 
-  =detail_item('Type of release:')   { response_set.release_type_determined_from_responses }
+  =detail_item(t :type_of_release, scope: :summary_data)   { response_set.release_type_determined_from_responses }
 
   - licences = response_set.licences
   - if licences[:data] === licences[:content]
-    =detail_item('Licence:')         { licences[:data][:title] }
+    =detail_item(t :licence, scope: :summary_data)         { licences[:data][:title] }
   - else
-    =detail_item('Data Licence:')    { licences[:data][:title] }
-    =detail_item('Content Licence:') { licences[:content][:title] }
+    =detail_item(t :data_licence, scope: :summary_data)    { licences[:data][:title] }
+    =detail_item(t :content_licence, scope: :summary_data) { licences[:content][:title] }

@@ -185,6 +185,25 @@ en:
     choose_jurisdiction: --- Select jurisdiction ---
     start_new_jurisdiction: Change jurisdiction
 
+  summary_data:
+    type_of_release: Type of release
+    licence: "Licence:"
+    data_licence: "Data Licence:"
+    content_licence: "Content Licence:"
+
+  data_kitten:
+    title: Title
+    description: Description
+    publishers: Publishers
+    rights: Rights
+    licenses: Licenses
+    update_frequency: Update Frequency
+    keywords: Keywords
+    release_date: Release Date
+    modified_date: Modified Date
+    temporal_coverage: Temporal Coverage
+    distributions: Distributions
+
   authentication:
     sign_in: Sign in
     sign_up: Sign up
