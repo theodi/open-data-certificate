@@ -114,6 +114,23 @@ $(function(){
     $(this).removeClass('active').trigger('_blur');
   });
 
+  // trigger the highlighting of fieldsets
+  $('#surveyor')
+    .on('mousedown', 'fieldset', function(e){
+      $(this).data('keep-active', true)
+    })
+    .on('mouseup', 'fieldset', function(e){
+      $(this).data('keep-active', false)
+    })
+    .on('focus', 'fieldset', function(){
+      $(this).addClass('active').trigger('_focus');
+    })
+    .on('blur', 'fieldset', function(){
+      if (!$(this).data('keep-active')) {
+        $(this).removeClass('active').trigger('_blur');
+      }
+    });
+
   // binding the text of this to the value of a
   // particular input, keyed by data-reference-identifier
   // (this is for the the title to show the questionnaire title)
