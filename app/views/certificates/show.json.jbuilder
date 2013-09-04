@@ -7,7 +7,7 @@ json.certificate do |certificate|
 	certificate.uri dataset_certificate_url(@certificate.dataset, @certificate)
 	certificate.dataset do |dataset|
 	  dataset.title @certificate.response_set.title
-	  dataset.publisher @certificate.response_set.curator_determined_from_responses
+	  dataset.publisher @certificate.response_set.dataset_curator_determined_from_responses
 	  dataset.uri dataset_url(@certificate.dataset)
     dataset.dataLicense @certificate.response_set.data_licence_determined_from_responses[:url]
     dataset.contentLicense @certificate.response_set.content_licence_determined_from_responses[:url]
