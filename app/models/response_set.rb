@@ -162,9 +162,12 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def licences
+    data    = data_licence_determined_from_responses    rescue nil
+    content = content_licence_determined_from_responses rescue nil
+    
     {
-      data: data_licence_determined_from_responses,
-      content: content_licence_determined_from_responses
+      data: data,
+      content: content
     }
   end
 
