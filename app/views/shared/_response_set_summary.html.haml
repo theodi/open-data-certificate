@@ -1,0 +1,6 @@
+%h3 Summary
+
+.summary-data
+	=detail_item('Type of release:') { response_set.release_type_determined_from_responses }
+	=detail_item('Data Licence:')    { response_set.data_licence_determined_from_responses[:title] }
+	=detail_item('Content Licence:') { response_set.content_licence_determined_from_responses[:title] }
