@@ -33,7 +33,7 @@
   .span3
     .well
       =render 'shared/response_set_summary', response_set: @certificate.response_set
-      =render 'shared/response_set_description', response_set: @certificate.response_set
+      =render 'shared/response_set_description', response_set: @certificate.response_set, leading_hr: true
 
   .span9
     =render @certificate.response_set

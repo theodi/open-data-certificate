@@ -25,17 +25,10 @@
     %hr
     .row
       .span3
-        %h3 Summary
-
-        =detail_item('Type of release:') { dataset.response_set.release_type_determined_from_responses }
-        =detail_item('Data Licence:')    { dataset.response_set.data_licence_determined_from_responses[:title] }
-        =detail_item('Content Licence:') { dataset.response_set.content_licence_determined_from_responses[:title] }
+        =render 'shared/response_set_summary', response_set: dataset.response_set
 
       .span9
-        %h3 Description
-
-        %p
-          =dataset.response_set.kitten_data.data[:description] rescue ''
+        =render 'shared/response_set_description', response_set: dataset.response_set
 
         %p
           =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-large btn-info'
