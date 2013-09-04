@@ -1,0 +1,12 @@
+%h3 Summary
+
+.summary-data
+
+  =detail_item('Type of release:')   { response_set.release_type_determined_from_responses }
+
+  - licences = response_set.licences
+  - if licences[:data] === licences[:content]
+    =detail_item('Licence:')         { licences[:data][:title] }
+  - else
+    =detail_item('Data Licence:')    { licences[:data][:title] }
+    =detail_item('Content Licence:') { licences[:content][:title] }

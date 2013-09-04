@@ -333,6 +333,19 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.data_licence_determined_from_responses
   end
 
+  test "#licences returns both data and content licences" do
+    rs = FactoryGirl.create(:response_set)
+    rs.stubs(:data_licence_determined_from_responses).returns({title:"data"})
+    rs.stubs(:content_licence_determined_from_responses).returns({title:"content"})
+
+    expected = {
+      data:    {title: "data"},
+      content: {title: "content"}
+    }
+
+    assert_equal expected, rs.licences
+  end
+
   test "#incomplete? returns true for an incomplete response_set" do
     assert_equal true, FactoryGirl.build(:response_set).incomplete?
   end
