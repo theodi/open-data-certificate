@@ -60,6 +60,8 @@ class KittenData < ActiveRecord::Base
 
     return @fields if !data
 
+    begin
+
     @fields["dataTitle"] = data[:title]
 
     if data[:publishers].any?
@@ -132,6 +134,12 @@ class KittenData < ActiveRecord::Base
     metadata.push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
 
     @fields["documentationMetadata"] = metadata
+
+    rescue => ex
+      if defined? notify_airbrake
+        notify_airbrake ex
+      end
+    end
 
     @fields
   end
