@@ -3,6 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
+  before_filter(:only => [:show]) { alternate_formats [:feed] }
 
   def index
 
