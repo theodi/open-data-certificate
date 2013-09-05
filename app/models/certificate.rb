@@ -70,6 +70,10 @@ class Certificate < ActiveRecord::Base
   def embed_url
     "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
   end
+  
+  def attained_level_title
+    "#{self.attained_level.titleize} Level Certificate"
+  end
 
   def update_from_response_set
 

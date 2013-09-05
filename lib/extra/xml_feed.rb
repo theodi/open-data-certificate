@@ -37,6 +37,27 @@ class XMLFeed
         end
       end
     end
+    
+    def self.datasets_to_feed(title, datasets, protocol, host, path)
+      
+      RSS::Maker.make("atom") do |maker|
+        maker.channel.updated = DateTime.now.to_s
+        maker.channel.id = protocol + host + path
+        maker.channel.title = title
+        maker.channel.link = protocol + host + path
+        maker.channel.author =  "Open Data Institute"
+
+        datasets.each do |dataset|
+          maker.items.new_item do |item|
+            item.title = dataset.title
+            item.link = dataset_url(dataset, host: host, protocol: protocol)
+            item.content.content = dataset.certificate.attained_level_title
+            item.updated = dataset.updated_at.to_s
+            item.id = item.link
+          end
+        end
+      end
+    end
 
   end
 end

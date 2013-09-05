@@ -3,7 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
-  before_filter(:only => [:show]) { alternate_formats [:feed] }
+  before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
 
@@ -40,6 +40,10 @@ class DatasetsController < ApplicationController
     
     respond_to do |format|
       format.html
+      format.feed {
+        atom = XMLFeed::Atom.datasets_to_feed(@title, @datasets, request.protocol, request.host, request.fullpath) 
+        render xml: atom.to_xml
+      }
     end
   end
 
