@@ -15,7 +15,7 @@ class XMLFeed
     # This function will rely on the current route paths, as it uses the certificate / dataset path.
     #
     # *************************************************************************************
-    def self.dataset_to_feed(dataset, host)
+    def self.dataset_to_feed(dataset, protocol, host)
       # Makes sure is dataset.
       return unless dataset.is_a?(Dataset)
 
@@ -28,7 +28,7 @@ class XMLFeed
 
         dataset.certificates.where(published: true).by_newest.each do |certificate|
           maker.items.new_item do |item|
-            item.link = dataset_certificate_url(dataset, certificate, host: host)
+            item.link = dataset_certificate_url(dataset, certificate, host: host, protocol: protocol)
             item.title = certificate.name
             item.content.content = certificate.attained_level
             item.updated = certificate.updated_at.to_s
