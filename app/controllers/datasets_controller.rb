@@ -96,15 +96,11 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.feed {
+        host = request.env["HTTP_HOST"]
+        atom = XMLFeed::Atom.dataset_to_feed(@dataset, host) 
+        render xml: atom.to_xml
+      }
     end
-  end
-
-   def to_atom
-    dataset = Dataset.find(params[:dataset_id])
-
-    host = request.env["HTTP_HOST"] # default_url_options[:host] is not set, so having to pass the request host to the Atom builder
-    atom=XMLFeed::Atom.dataset_to_feed(dataset, host)
-
-    render xml: atom.to_xml
   end
 end
