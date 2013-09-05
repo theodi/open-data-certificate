@@ -22,7 +22,7 @@ class XMLFeed
       RSS::Maker.make("atom") do |maker|
         maker.channel.author =  dataset.user_full_name
         maker.channel.updated = dataset.updated_at.to_s
-        maker.channel.id = dataset_atom_url(dataset, host: host)
+        maker.channel.id = dataset_url(dataset, host: host, format: :feed)
         maker.channel.title = dataset.title
         maker.channel.link = dataset.documentation_url
 
