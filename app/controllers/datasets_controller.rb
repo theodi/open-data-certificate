@@ -98,8 +98,7 @@ class DatasetsController < ApplicationController
     respond_to do |format|
       format.html
       format.feed {
-        host = request.env["HTTP_HOST"]
-        atom = XMLFeed::Atom.dataset_to_feed(@dataset, host) 
+        atom = XMLFeed::Atom.dataset_to_feed(@dataset, request.host) 
         render xml: atom.to_xml
       }
     end
