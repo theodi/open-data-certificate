@@ -40,10 +40,7 @@ class DatasetsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.feed {
-        atom = XMLFeed::Atom.datasets_to_feed(@title, @datasets, request.protocol, request.host, request.fullpath) 
-        render xml: atom.to_xml
-      }
+      format.feed { render :layout => false  }
     end
   end
 
@@ -105,10 +102,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.feed {
-        atom = XMLFeed::Atom.dataset_to_feed(@dataset, request.protocol, request.host) 
-        render xml: atom.to_xml
-      }
+      format.feed { render :layout => false }
     end
   end
 end
