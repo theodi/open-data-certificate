@@ -197,7 +197,7 @@ class ResponseSet < ActiveRecord::Base
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
-      if response.string_value
+      unless response.string_value.blank?
         response_code = Rails.cache.fetch(response.string_value)
         if response_code.nil?
           response_code = HTTParty.get(response.string_value).code rescue nil
