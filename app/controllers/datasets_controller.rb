@@ -12,6 +12,8 @@ class DatasetsController < ApplicationController
                 .joins(:response_set)
                 .order('response_sets.attained_index DESC')
                 .page params[:page]
+    
+    @title = t('datasets.datasets')
 
     if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)
@@ -24,6 +26,8 @@ class DatasetsController < ApplicationController
     end
 
     if params[:search]
+      @title = t('datasets.search_results')
+      
       base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
 
       # this is far from ideal - loads in all matches then limits for pagination
@@ -33,7 +37,7 @@ class DatasetsController < ApplicationController
 
       @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
     end
-
+    
     respond_to do |format|
       format.html
     end

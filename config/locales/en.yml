@@ -178,6 +178,7 @@ en:
 
   datasets:
     datasets: Datasets
+    search_results: Search Results
 
   response_set:
     choose_a_jurisdiction: Choose a new jurisdiction
