@@ -11,7 +11,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
     xml.entry do
       xml.link :href=> dataset_certificate_url(@dataset, certificate)
       xml.title certificate.name
-      xml.content certificate.attained_level
+      xml.content certificate.attained_level_title
       xml.updated DateTime.parse(certificate.updated_at.to_s).rfc3339
       xml.id dataset_certificate_url(@dataset, certificate)
     end
