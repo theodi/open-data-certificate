@@ -11,7 +11,6 @@ class DatasetsController < ApplicationController
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
                 .order('response_sets.attained_index DESC')
-                .page params[:page]
     
     @title = t('datasets.datasets')
 
@@ -36,8 +35,10 @@ class DatasetsController < ApplicationController
                 base.merge(Survey.search(full_title_cont: params[:search]).result).all
 
       @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
+    else
+      @datasets = @datasets.page params[:page]
     end
-    
+        
     respond_to do |format|
       format.html
       format.feed { render :layout => false  }
