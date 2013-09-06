@@ -1,5 +1,6 @@
 -# TODO: js for slider
 - rg ||= nil
+- repeated_template ||= false
 - renderer = q.renderer(g ||= nil)
 - disabled = defined?(disableFlag) ? disableFlag : false
 - question_text = q_text(q, @render_context, I18n.locale)
@@ -35,7 +36,7 @@
     - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
     - classes << 'mandatory' if q.is_mandatory
     - classes << 'has-response' unless r.new_record?
-    - classes << 'no-response' if r.new_record?
+    - classes << 'no-response' if r.new_record? && !repeated_template
     - classes << 'autocompleted' if r.autocompletable? && r.all_autocompleted
     - classes << state if state
     - if pickTypes.include?(q.pick) || selectFields.include?(renderer)
