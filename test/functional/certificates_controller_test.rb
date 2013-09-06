@@ -26,5 +26,14 @@ class CertificatesControllerTest < ActionController::TestCase
     
     assert_response :success
   end
+  
+  test "Requesting a JSON version of a certificate returns JSON" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save 
+    get :show, {dataset_id: cert.response_set.dataset.id, id: cert.id, format: "json"}
+    assert_response :success
+    assert_equal "application/json", response.content_type
+  end
 
 end
