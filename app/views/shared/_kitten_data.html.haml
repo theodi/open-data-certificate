@@ -5,6 +5,12 @@
 
       - value = kitten_value(v)
 
+      / skip if we have the same title as the certificate
+      - next if key == :title && defined?(@certificate) && @certificate.response_set.try(:title) == value
+
+      / don't show distributions for now
+      - next if key == :distributions
+      
       -unless value.blank?
 
         %dt= t key, scope: :data_kitten
