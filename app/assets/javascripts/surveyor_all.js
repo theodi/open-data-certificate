@@ -132,23 +132,48 @@ $(document).ready(function(){
   $(".surveyor_language_selection").show();
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
 
-  $("#survey_form").each(function() {
-    var $form = $(this)
-    var csrfToken = $form.find("input[name='authenticity_token']")
+  var $form = $("#survey_form")
+  var csrfToken = $form.find("input[name='authenticity_token']")
 
-    $form.find("input, select, textarea").change(function() {
-      var $field = $(this)
+  $('.add_row').each(function() {
+    var $button = $(this)
+    var $row = $button.closest('.g_repeater')
 
-      // Detect and mark autocompleted fields
-      markAutocompleted($field, $form)
+    var templateUrl = 'repeater_field/:question_id/:response_index/:response_group'
+    var questionId = $row.find('input[name*=question_id]').val()
 
-      checkMetadataFields($field, $form)
-
-      // Save changes to this field
-      saveFormElements($form, questionFields($field).add(csrfToken), function() {
-        validateField($field, $form, csrfToken)
-        checkMetadataFields($field, $form)
+    $button.click(function() {
+      var responseGroup = $row.find('.q_repeater_default').length
+      var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
+        return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
       })
+      var responseIndex = Math.max.apply(this, responseIndexes)
+
+      var url = templateUrl
+        .replace(':question_id', questionId)
+        .replace(':response_index', responseIndex + 1)
+        .replace(':response_group', responseGroup)
+
+      $.ajax(url).done(function(html) {
+        $button.before(html);
+      })
+
+      return false;
+    });
+  })
+
+  $form.on("change", "input, select, textarea", function() {
+    var $field = $(this)
+
+    // Detect and mark autocompleted fields
+    markAutocompleted($field, $form)
+
+    checkMetadataFields($field, $form)
+
+    // Save changes to this field
+    saveFormElements($form, questionFields($field).add(csrfToken), function() {
+      validateField($field, $form, csrfToken)
+      checkMetadataFields($field, $form)
     })
   })
 
