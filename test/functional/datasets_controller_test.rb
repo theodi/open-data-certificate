@@ -117,7 +117,48 @@ class DatasetsControllerTest < ActionController::TestCase
         "path" => "/datasets?jurisdiction=GB"
       }
     ], assigns(:response)
-
+  
   end
+  
+  test "Requesting an Atom feed for a dataset returns Atom" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :show, {id: cert.response_set.dataset.id, format: "feed"}
+    assert_response :success
+    assert_equal "application/atom+xml", response.content_type
+  end
+  
+  test "Requesting an Atom feed for all datasets returns Atom" do
+    10.times do 
+      cert = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    get :index, { format: "feed" }
+    assert_response :success
+    assert_equal "application/atom+xml", response.content_type    
+  end
+  
+  test "Requesting an Atom feed for a search query returns Atom" do
+    100.times do 
+      cert = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    get :index, { search: "", format: "feed" }  
+    assert_response :success
+    assert_equal "application/atom+xml", response.content_type
+  end
+  
+  test "Requesting an Atom feed for a search query returns correct pagination" do
+    100.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    get :index, { search: "Test", format: "feed" }  
+    assert_response :success
+    
+    doc = Nokogiri::XML(response.body)
+    assert_match /page=4/, doc.css('link[rel="last"]').first[:href]
+    assert_match /page=1/, doc.css('link[rel="first"]').first[:href]
+    assert_match /page=2/, doc.css('link[rel="next"]').first[:href]
+  end
+  
   
 end

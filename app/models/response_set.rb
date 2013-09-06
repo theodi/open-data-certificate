@@ -114,6 +114,11 @@ class ResponseSet < ActiveRecord::Base
     if @data_licence_determined_from_responses.nil?
       ref = value_for :data_licence, :reference_identifier
       case ref
+      when nil
+        @data_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @data_licence_determined_from_responses = {
           :title => "Not Applicable",
@@ -139,6 +144,11 @@ class ResponseSet < ActiveRecord::Base
     if @content_licence_determined_from_responses.nil?
       ref = value_for :content_licence, :reference_identifier
       case ref
+      when nil
+        @content_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @content_licence_determined_from_responses = {
           :title => "Not Applicable",
