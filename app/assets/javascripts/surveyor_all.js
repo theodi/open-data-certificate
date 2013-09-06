@@ -135,6 +135,7 @@ $(document).ready(function(){
   var $form = $("#survey_form")
   var csrfToken = $form.find("input[name='authenticity_token']")
 
+  var busy = false
   $('.add_row').each(function() {
     var $button = $(this)
     var $row = $button.closest('.g_repeater')
@@ -143,6 +144,10 @@ $(document).ready(function(){
     var questionId = $row.find('input[name*=question_id]').val()
 
     $button.click(function() {
+
+      if (busy) return
+      busy = true
+
       var responseGroup = $row.find('.q_repeater_default').length
       var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
         return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
@@ -156,6 +161,7 @@ $(document).ready(function(){
 
       $.ajax(url).done(function(html) {
         $button.before(html);
+        busy = false
       })
 
       return false;
