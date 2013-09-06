@@ -2,4 +2,4 @@
 	#{link_to t('datasets.datasets'), datasets_path} / #{@dataset.title}
 
 %hr.heavy
-= render partial: 'dataset_min', object: @dataset
+= render partial: 'dataset_min', object: @dataset, locals: {expanded: true}

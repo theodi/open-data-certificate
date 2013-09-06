@@ -1,0 +1,10 @@
+- description = response_set.kitten_data.data[:description] rescue nil
+
+- if description
+
+  -if defined?(leading_hr) && leading_hr
+    %hr.heavy
+
+  %h3 Description
+
+  %p= response_set.kitten_data.data[:description]

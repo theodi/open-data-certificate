@@ -383,4 +383,9 @@ $(function(){
     if(datum.path){ document.location = datum.path; }
   });
 
+
+  $(document).on('click', '.dataset .show-more, .dataset .hide-more', function(){
+    $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
+  })
+
 });
