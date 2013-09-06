@@ -136,24 +136,53 @@ $(document).ready(function(){
     var $form = $(this)
     var csrfToken = $form.find("input[name='authenticity_token']")
 
-    $form.find("input, select, textarea").change(function() {
+    function updateField() {
       var $field = $(this)
+      var $row = bindQuestionRow($field);
 
-      // Detect and mark autocompleted fields
       markAutocompleted($field, $form)
-
       checkMetadataFields($field, $form)
 
       // Save changes to this field
+      $row.addClass('loading');
       saveFormElements($form, questionFields($field).add(csrfToken), function() {
+        $row.removeClass('loading');
         validateField($field, $form, csrfToken)
         checkMetadataFields($field, $form)
+      })
+    }
+
+    // Update radio, checkbox and select form fields on click
+    $form.find("input[type!=text][type!=url], select").change(updateField)
+
+    // Updates text form after users finish typing
+    $form.find("input[type=text], input[type=url]").each(function() {
+      var $field = $(this);
+      var $row = bindQuestionRow($field);
+      var debounced = _.debounce(updateField, 700);
+
+      $field.keyup(function() {
+        $row.addClass('loading');
+        debounced.call($field);
+      });
+    });
+
+    // Updates autocomplete override fields
+    $form.find(".autocomplete-override textarea").each(function() {
+      var $field = $(this);
+      var debounced = _.debounce(saveFormElements, 700);
+
+      $field.keyup(function() {
+        var $row = bindQuestionRow($(this))
+        var $fields = $row.find("input, select")
+        markAutocompleted($fields, $form)
+        debounced($form, questionFields($field).add(csrfToken))
       })
     })
   })
 
   function changeState($row, state) {
-    $row.removeClass('loading no-response ok warning').addClass(state)
+    $row.removeClass('no-response ok warning').addClass(state)
   }
 
   function validateField($field, $form, csrfToken) {
@@ -171,7 +200,7 @@ $(document).ready(function(){
       // Attempt to autocomplete fields
       if ($row.data('reference-identifier') == 'documentationUrl') {
 
-        changeState($row, 'loading')
+        $row.addClass('loading');
 
         $field.data('cancel-callbacks', autocomplete($field.val(), {
           beforeProcessing: function() {
@@ -182,6 +211,7 @@ $(document).ready(function(){
             })
           },
           success: function($fields) {
+            $row.removeClass('loading')
             changeState($row, 'ok')
 
             markAutocompleted($fields, $form)
@@ -197,6 +227,7 @@ $(document).ready(function(){
           },
 
           fail: function() {
+            $row.removeClass('loading')
             changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
@@ -209,16 +240,18 @@ $(document).ready(function(){
 
       // Attempt to verify URL
       else if ($field.attr('type') == 'url') {
-        changeState($row, 'loading')
+        $row.addClass('loading');
 
         $field.data('cancel-callbacks', verifyUrl($field.val(), {
           success: function() {
+            $row.removeClass('loading');
             changeState($row, 'ok')
 
             markAutocompleted($field, $form)
           },
 
           fail: function() {
+            $row.removeClass('loading');
             changeState($row, 'warning')
 
             var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
@@ -281,7 +314,8 @@ $(document).ready(function(){
   }
 
   function markAutocompleted($fields, $form) {
-    $fields.each(function() {
+    $fields.filter('[type!=hidden]').each(function() {
+      var $field = $(this)
       var $row = bindQuestionRow($(this))
       var $input = $row.find('li.input')
       var question = $row.data('reference-identifier');
@@ -307,18 +341,27 @@ $(document).ready(function(){
         }
 
         $row.find('.autocomplete-override').toggleClass('none', autocompleted)
-      }
+        $row.find('input[id$="_autocompleted"]').val(autocompleted)
+        $row.toggleClass('autocompleted', autocompleted)
 
-      $row.find('input[id$="_autocompleted"]').val(autocompleted)
-      $row.toggleClass('autocompleted', autocompleted)
-
-      if (autocompleted) {
-        changeState($row, 'ok')
-        $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
-      }
-      else if ($row.data('autocompleted-value') && empty($row.find('.autocomplete-override textarea').val())) {
-        changeState($row, 'warning')
-        $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
+        if (autocompleted) {
+          changeState($row, 'ok')
+          $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
+        }
+        else {
+          if ($field.val() && $field.val().match(/[^\s]/)) {
+            if (empty($row.find('.autocomplete-override textarea').val())) {
+              changeState($row, 'warning')
+              $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
+            }
+            else {
+              changeState($row, 'ok')
+            }
+          }
+          else {
+            changeState($row, 'no-response')
+          }
+        }
       }
     })
   }

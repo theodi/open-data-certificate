@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
+//= require underscore
 //= require_tree .
 
 $(function(){
@@ -94,27 +95,8 @@ $(function(){
   });
 
 
-
   //////
   // Questionnaire
-
-
-  /*
-    The fieldset surrounding an input is the base of a question being 'active', it will
-      - have an 'active' class added
-      - emit 'odc.focus' & 'odc.blur' events (?)
-  */
-
-
-  // trigger the highlighting of fieldsets
-  $('#surveyor')
-    .on('focus', 'input, select, textarea', function(){
-      $(this).parents('fieldset').addClass('active').trigger('_focus');
-    })
-    .on('blur', 'input, select, textarea', function(){
-      $(this).parents('fieldset').removeClass('active').trigger('_blur');
-    });
-
 
   // a map from reference_id to the relevant fieldset (DOM, not $wrapped)
   var reference_id_els = {};
@@ -123,11 +105,31 @@ $(function(){
     reference_id_els[$(this).data('reference-identifier')] = this;
   });
 
-  $surveyElements.on('mouseover', function(){
+  // The fieldset surrounding an input is the base of a question being 'active', it will
+  // - have an 'active' class added
+  // - emit 'odc.focus' & 'odc.blur' events (?)
+  $surveyElements.on('mouseenter', function(){
     $(this).addClass('active').trigger('_focus');
-  }).on('mouseout', function(){
+  }).on('mouseleave', function(){
     $(this).removeClass('active').trigger('_blur');
   });
+
+  // trigger the highlighting of fieldsets
+  $('#surveyor')
+    .on('mousedown', 'fieldset', function(e){
+      $(this).data('keep-active', true)
+    })
+    .on('mouseup', 'fieldset', function(e){
+      $(this).data('keep-active', false)
+    })
+    .on('focus', 'fieldset', function(){
+      $(this).addClass('active').trigger('_focus');
+    })
+    .on('blur', 'fieldset', function(){
+      if (!$(this).data('keep-active')) {
+        $(this).removeClass('active').trigger('_blur');
+      }
+    });
 
   // binding the text of this to the value of a
   // particular input, keyed by data-reference-identifier
@@ -225,7 +227,7 @@ $(function(){
 
   // Open sections that contain incomplete mandatory questions
   if ($('#surveyor').hasClass('highlight-mandatory')) {
-    $('.survey-section:has(.mandatory:not(.has-response):not(.q_hidden))')
+    $('.survey-section:has(.mandatory.no-response:not(.q_hidden))')
       .find('ul')
       .collapse('show');
   }
