@@ -4,14 +4,17 @@ module DataDump
   
   def self.current
     a = []
+    
+    json = '{"version": 0.1,"license": "http://opendatacommons.org/licenses/odbl/","certificates": {'
       
     certs = Certificate.where(:published => true)
     certs.each do |cert|
       a << build_item(cert)
     end
-  
-    json = "{#{a.join(',')}}"
-  
+    
+    json << a.join(',')
+    json << "}}"
+       
     upload(json)
   end
   
