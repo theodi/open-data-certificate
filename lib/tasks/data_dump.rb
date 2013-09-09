@@ -33,19 +33,10 @@ module DataDump
       # Loop through results
       certs.each do |cert|
         url = av.dataset_certificate_url(cert.dataset, cert)
-        if json[url].nil?
-          # If certificate doesn't exist, add it
-          json << JSON.parse("{"+ build_item(cert) +"}")
-          new += 1
-        else
-          # If not, update what's already there
-          json[url] = JSON.parse("{"+ build_item(cert) +"}")
-          updated += 1
-        end
+        j = JSON.parse("{"+ build_item(cert) +"}").flatten
+        json["certificates"][url] = j.last
       end
-      upload(json.to_s)
-      puts "#{new} certificates added"
-      puts "#{updated} certificates updated"
+      upload(json.to_json)
     end
   end
   
