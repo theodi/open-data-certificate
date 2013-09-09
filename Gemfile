@@ -53,6 +53,7 @@ group :production do
 end
 
 gem 'jquery-rails'
+gem 'underscore-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
