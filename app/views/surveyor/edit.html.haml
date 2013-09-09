@@ -10,49 +10,50 @@
 -@surveys = Survey.available_to_complete
 =render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
 
-= semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
+- scope_locale @response_set.locale do
+  = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
-  .affixed
-    %header
+    .affixed
+      %header
+        .container
+          .row
+            .span9
+              .jurisdiction
+                .badge.badge-inverse=  @response_set.jurisdiction
+                %span.status= @survey.try(:status)
+                = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+              %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
+            .span3
+              - if user_signed_in?
+                = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
+              - else
+                =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
+
+
+    = render :partial => 'status_panel'
+    = render :partial => 'shared/flashes'
+
+    - data = {'response-id' => @response_set.id}
+    - data['autocompleted'] = t('surveyor.autocompleted_data')
+    - data['url-incorrect'] = t('surveyor.please_check_that_the_url_exists')
+    - data['missing-metadata'] = t('surveyor.missing_metadata')
+    - data['autocomplete-override-warning'] = t('surveyor.autocomplete_override_warning')
+    - data['autocompleted-url-incorrect'] = t('surveyor.autocompleted_url_incorrect')
+
+    #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
+      = hidden_field_tag :surveyor_javascript_enabled, false
+
       .container
         .row
-          .span9
-            .jurisdiction
-              .badge.badge-inverse=  @response_set.jurisdiction
-              %span.status= @survey.try(:status)
-              = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
-            %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
-          .span3
-            - if user_signed_in?
-              = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
-            - else
-              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
+          .lead.span8= @survey.translation(I18n.locale)[:description].try(:html_safe)
 
+      = render 'partials/dependents' unless @dependents.empty?
 
-  = render :partial => 'status_panel'
-  = render :partial => 'shared/flashes'
-
-  - data = {'response-id' => @response_set.id}
-  - data['autocompleted'] = t('surveyor.autocompleted_data')
-  - data['url-incorrect'] = t('surveyor.please_check_that_the_url_exists')
-  - data['missing-metadata'] = t('surveyor.missing_metadata')
-  - data['autocomplete-override-warning'] = t('surveyor.autocomplete_override_warning')
-  - data['autocompleted-url-incorrect'] = t('surveyor.autocompleted_url_incorrect')
-
-  #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
-    = hidden_field_tag :surveyor_javascript_enabled, false
-
-    .container
-      .row
-        .lead.span8= @survey.translation(I18n.locale)[:description].try(:html_safe)
-
-    = render 'partials/dependents' unless @dependents.empty?
-
-    -# If there were no responses by the user, the cache the blank survey for
-    -# other new users
-    - cache_key = @response_set.responses.empty? ? "blank_survey_#{@response_set.survey_id}" : @response_set
-    = cache(cache_key) do
-      =render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+      -# If there were no responses by the user, the cache the blank survey for
+      -# other new users
+      - cache_key = @response_set.responses.empty? ? "blank_survey_#{@response_set.survey_id}" : @response_set
+      = cache(cache_key) do
+        =render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
 :javascript
   $(document).ready(function() {
