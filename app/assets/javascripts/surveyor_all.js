@@ -36,6 +36,10 @@ $(document).ready(function(){
   //     format: 'dd mmm yyyy'
   // });
 
+  _.templateSettings = {
+    interpolate: /:(\w+)/g
+  };
+
   // Default Datepicker uses jQuery UI Datepicker
   $("input[type='text'].datetime").datetimepicker({
     showSecond: true,
@@ -132,53 +136,79 @@ $(document).ready(function(){
   $(".surveyor_language_selection").show();
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
 
-  $("#survey_form").each(function() {
-    var $form = $(this)
-    var csrfToken = $form.find("input[name='authenticity_token']")
+  var $form = $("#survey_form")
+  var csrfToken = $form.find("input[name='authenticity_token']")
 
-    function updateField() {
-      var $field = $(this)
-      var $row = bindQuestionRow($field);
+  var busy = false
+  var template = _.template("repeater_field/:question_id/:response_index/:response_group")
 
-      markAutocompleted($field, $form)
-      checkMetadataFields($field, $form)
+  $form.on('click', '.add_row', function() {
+    if (busy) return
+    busy = true
 
-      // Save changes to this field
-      $row.addClass('loading');
-      saveFormElements($form, questionFields($field).add(csrfToken), function() {
-        $row.removeClass('loading');
-        validateField($field, $form, csrfToken)
-        checkMetadataFields($field, $form)
-      })
-    }
+    var $button = $(this)
+    var $row = $button.closest('.g_repeater')
 
-    // Update radio, checkbox and select form fields on click
-    $form.find("input[type!=text][type!=url], select").change(updateField)
-
-    // Updates text form after users finish typing
-    $form.find("input[type=text], input[type=url]").each(function() {
-      var $field = $(this);
-      var $row = bindQuestionRow($field);
-      var debounced = _.debounce(updateField, 700);
-
-      $field.keyup(function() {
-        $row.addClass('loading');
-        debounced.call($field);
-      });
-    });
-
-    // Updates autocomplete override fields
-    $form.find(".autocomplete-override textarea").each(function() {
-      var $field = $(this);
-      var debounced = _.debounce(saveFormElements, 700);
-
-      $field.keyup(function() {
-        var $row = bindQuestionRow($(this))
-        var $fields = $row.find("input, select")
-        markAutocompleted($fields, $form)
-        debounced($form, questionFields($field).add(csrfToken))
-      })
+    var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
+      return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
     })
+
+    var url = template({
+      question_id: $row.find('input[name*=question_id]').val(),
+      response_index: Math.max.apply(this, responseIndexes) + 1,
+      response_group: $row.find('.q_repeater_default').length
+    })
+
+    $.ajax(url).done(function(html) {
+      $button.before(html);
+      busy = false
+    })
+
+    return false;
+  })
+
+  function updateField() {
+    var $field = $(this)
+    var $row = bindQuestionRow($field);
+
+    markAutocompleted($field, $form)
+    checkMetadataFields($field, $form)
+
+    // Save changes to this field
+    $row.addClass('loading');
+    saveFormElements($form, questionFields($field).add(csrfToken), function() {
+      $row.removeClass('loading');
+      validateField($field, $form, csrfToken)
+      checkMetadataFields($field, $form)
+    })
+  }
+
+  // Update radio, checkbox and select form fields on click
+  $form.on("change", "input[type!=text][type!=url], select", updateField);
+
+  // Updates text form after users finish typing
+  $form.on("keyup change", "input[type=text], input[type=url]", function() {
+    var $field = $(this);
+    var $row = bindQuestionRow($field);
+
+    var debouncedUpdate = $row.data('update-callback') || _.debounce(updateField, 700)
+    $row.data('update-callback', debouncedUpdate)
+
+    $row.addClass('loading');
+    debouncedUpdate.call($field);
+  });
+
+  // Updates autocomplete override fields
+  $form.on("keyup change", ".autocomplete-override textarea", function() {
+    var $field = $(this);
+    var $row = bindQuestionRow($(this))
+    var $fields = $row.find("input, select")
+
+    var debouncedSave = $row.data('save-callback') || _.debounce(debouncedSave, 700)
+    $row.data('save-callback', debouncedSave)
+
+    markAutocompleted($fields, $form)
+    debouncedSave($form, questionFields($field).add(csrfToken))
   })
 
   function changeState($row, state) {
