@@ -1,5 +1,6 @@
 -# TODO: js for slider
 - rg ||= nil
+- repeated_template ||= false
 - renderer = q.renderer(g ||= nil)
 - disabled = defined?(disableFlag) ? disableFlag : false
 - question_text = q_text(q, @render_context, I18n.locale)
@@ -25,7 +26,7 @@
 
     - state = 'ok' unless r.new_record?
     - state = 'warning' if r.error || r.any_metadata_missing || explanation_missing
-    - state = 'no-response' if q.is_mandatory && (q.pick == "none" ? r.string_value.blank? : !r.answer_id)
+    - state = 'no-response' if q.is_mandatory && (q.pick == "none" ? r.string_value.blank? : !r.answer_id) && !repeated_template
 
     - status_message = t('surveyor.autocompleted_data')
     - status_message = t('surveyor.autocomplete_override_warning') if explanation_missing
@@ -35,7 +36,6 @@
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
     - classes << 'mandatory' if q.is_mandatory
-
     - classes << 'autocompleted' if r.autocompletable? && r.all_autocompleted
     - classes << state if state
     - if pickTypes.include?(q.pick) || selectFields.include?(renderer)
