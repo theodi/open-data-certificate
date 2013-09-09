@@ -76,7 +76,8 @@ module DataDump
   def self.build_item(certificate)
     json = "\"#{av.dataset_certificate_url(certificate.dataset, certificate)}\":"
     json << av.render(
-        :file => 'certificates/_certificate.json', 
+        :file => 'certificates/_certificate',
+        :formats => [:json],
         :layout => nil, 
         :locals => { :cert => certificate }
         )
