@@ -32,8 +32,11 @@ module DataDump
       json = JSON.parse(file.body)
       # Loop through results
       certs.each do |cert|
+        # Generate url for certificate
         url = av.dataset_certificate_url(cert.dataset, cert)
+        # Generate JSON from partial
         j = JSON.parse("{"+ build_item(cert) +"}").flatten
+        # Replace or add generated json to hash
         json["certificates"][url] = j.last
       end
       upload(json.to_json)
