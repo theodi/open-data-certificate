@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830105802) do
+ActiveRecord::Schema.define(:version => 20130909123307) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20130830105802) do
     t.integer  "dataset_id"
     t.string   "aasm_state",     :default => "draft"
     t.integer  "attained_index"
+    t.string   "locale"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
