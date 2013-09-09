@@ -19,7 +19,10 @@ class SurveyorController < ApplicationController
   #
   # also, GET here is totally totally wrong
   def continue
-    if Survey::MIGRATIONS.has_key? params[:survey_code]
+    if params[:survey_locale]
+      @response_set.update_attribute :locale, params[:survey_locale]
+
+    elsif Survey::MIGRATIONS.has_key? params[:survey_code]
       # lets switch over to the new questionnaire
       nxt = Survey::MIGRATIONS[params[:survey_code]]
 
