@@ -26,6 +26,7 @@
 
     - state = 'ok' unless r.new_record?
     - state = 'warning' if r.error || r.any_metadata_missing || explanation_missing
+    - state = 'no-response' if q.is_mandatory && (q.pick == "none" ? r.string_value.blank? : !r.answer_id) && !repeated_template
 
     - status_message = t('surveyor.autocompleted_data')
     - status_message = t('surveyor.autocomplete_override_warning') if explanation_missing
@@ -35,8 +36,6 @@
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
     - classes << 'mandatory' if q.is_mandatory
-    - classes << 'has-response' unless r.new_record?
-    - classes << 'no-response' if r.new_record? && !repeated_template
     - classes << 'autocompleted' if r.autocompletable? && r.all_autocompleted
     - classes << state if state
     - if pickTypes.include?(q.pick) || selectFields.include?(renderer)
@@ -82,6 +81,7 @@
           - if q.pick == 'one' || q.pick == 'any'
             %div.status-above
               %div.status-icon
+                %i.icon-loading.icon-spin.icon-refresh.icon-large
                 %i.icon.icon-variable
               %div.span8.status-message
                 %span= status_message

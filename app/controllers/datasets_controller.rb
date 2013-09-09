@@ -3,6 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
+  before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
 
@@ -10,7 +11,8 @@ class DatasetsController < ApplicationController
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
                 .order('response_sets.attained_index DESC')
-                .page params[:page]
+    
+    @title = t('datasets.datasets')
 
     if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)
@@ -23,6 +25,8 @@ class DatasetsController < ApplicationController
     end
 
     if params[:search]
+      @title = t('datasets.search_results')
+      
       base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
 
       # this is far from ideal - loads in all matches then limits for pagination
@@ -31,10 +35,13 @@ class DatasetsController < ApplicationController
                 base.merge(Survey.search(full_title_cont: params[:search]).result).all
 
       @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
+    else
+      @datasets = @datasets.page params[:page]
     end
-
+        
     respond_to do |format|
       format.html
+      format.feed { render :layout => false  }
     end
   end
 
@@ -96,15 +103,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.feed { render :layout => false }
     end
-  end
-
-   def to_atom
-    dataset = Dataset.find(params[:dataset_id])
-
-    host = request.env["HTTP_HOST"] # default_url_options[:host] is not set, so having to pass the request host to the Atom builder
-    atom=XMLFeed::Atom.dataset_to_feed(dataset, host)
-
-    render xml: atom.to_xml
   end
 end

@@ -1469,33 +1469,69 @@ td.action {
     color:inherit;
   }
 
-  .level-badge{
-    @height: 3em;
-    height:@height;
-    width:@height * 1.1;
+  @badgeHeight: 2em;
 
+  .level-badge{
+    height:@badgeHeight;
+    width:@badgeHeight * 1.1;
     padding-top:0;
     background-size:100%;
     background-position: center center;
-    margin: 10px;
+    margin: .25em;
     margin-left: 0;
     float:left;
   }
 
   // match the level badge height
-  h3{
+  .badge-align{
     font-size:1em;
     line-height: 1em;
-    margin-top:1.5em;
+    margin-top: (@badgeHeight/2) - .25em;
   }
 
   .details p{
-    font-size:.75em;
+    font-size: 0.8em;
     margin:0;
     text-align: right;
   }
 
+  .expand{
+    float:right;
+    cursor: pointer;
+  }
+
+  .show-more{display:block}
+  .hide-more{display:none}
+  .more{
+    .transition(all .5s);
+    height:0; overflow: hidden;
+    opacity:0;
+  }
+
+  &.expanded{
+    .show-more{display:none}
+    .hide-more{display:block}
+
+    .more{height:auto; opacity:1;}
+  }
+
+  .no-js &{
+    .expand{display: none;}
+    .more{height:auto; opacity:1;}
+  }
+
+
+
 }
+
+.summary-data{
+  font-size:0.75em;
+
+  p{
+    font-size:inherit;
+  }
+}
+
 
 
 // dataset / repsonse badges //
@@ -1768,25 +1804,14 @@ header .jurisdiction{
       display: none;
       position: absolute;
       right: 20px;
-      bottom: 35px;
+      bottom: 18px;
       color: #333;
     }
 
-    &.loading {
-      input.string {
-        padding-right: 70px;
-      }
-
-      .icon-loading {
-        display: inline;
-      }
-    }
-
     .status-icon {
-      display: none;
       width: 60px;
       height: 60px;
-      background: @odiGreen;
+      background: none;
       margin: 16px 0;
       border-radius: 3px;
       position: absolute;
@@ -1794,10 +1819,10 @@ header .jurisdiction{
       bottom: 0;
 
       .icon {
+        display: none;
         &:before { content: @ok; }
         width: 100%;
         margin: 15px 0;
-        display: inline-block;
         font-size: 30px;
         color: white;
         text-align: center;
@@ -1865,10 +1890,10 @@ header .jurisdiction{
       }
 
       .status-icon {
-        display: block;
         background: @odiOrange;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -1898,6 +1923,7 @@ header .jurisdiction{
         background: @odiCrimson;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -1920,10 +1946,10 @@ header .jurisdiction{
       }
 
       .status-icon {
-        display: block;
         background: @odiGreen;
 
         .icon {
+          display: inline-block;
           &:before { content: @ok; }
         }
       }
@@ -1966,7 +1992,7 @@ header .jurisdiction{
 
     &.inline-validation {
       .status-icon {
-        .border-radius(0);
+        .border-radius(2px);
         position: relative;
         float: left;
         margin: 0;
@@ -2003,6 +2029,18 @@ header .jurisdiction{
         }
       }
 
+      &.loading.question-row .span8 {
+        .status-icon {
+          background: white;
+
+          .icon-loading {
+            font-size: 16px;
+            right: 10px;
+            bottom: 9px;
+          }
+        }
+      }
+
       &.error .status-message i.arrow {
         border-right-color: @odiCrimson;
       }
@@ -2012,7 +2050,7 @@ header .jurisdiction{
       }
     }
 
-    &.compact-validation {
+    &.compact-validation.question-row {
       .status-icon {
         height: 38px;
         width: 38px;
@@ -2053,13 +2091,12 @@ header .jurisdiction{
     }
 
     .status-error {
-      background: @odiCrimsonLight;
 
       .status-icon {
-        display: block;
         background: @odiCrimson;
 
         .icon {
+          display: inline-block;
           &:before { content: @exclamation; }
         }
       }
@@ -2073,6 +2110,23 @@ header .jurisdiction{
 
         i.arrow {
           border-right-color: @odiCrimson;
+        }
+      }
+    }
+
+    &.loading.question-row .span8 {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .status-icon {
+        background: none;
+
+        .icon-loading {
+          display: inline;
+        }
+        .icon {
+          display: none;
         }
       }
     }

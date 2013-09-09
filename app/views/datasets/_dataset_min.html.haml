@@ -1,24 +1,38 @@
 / Down the line, this will support the dashboard view too
 - dataset = dataset_min
 
-.row.dataset
-  .span6
-    .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
-    %h3
-      = link_to dataset.title, dataset
-  .span4
-    .details
-      =detail_item('Published By') { dataset.certificate.curator }
-      =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
-      =detail_item('Licence') { dataset.response_set.data_licence_determined_from_responses[:title] }
-  .span2
-    .jurisdiction
-      .badge
-        = dataset.response_set.jurisdiction
-      %span.status
-        = dataset.response_set.survey.try(:status)
-    %p
-      =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-mini btn-primary'
+.dataset{class: defined?(expanded) ? 'expanded': ''}
+  .row
+    .span6
+      .level-badge{class: "level-badge-#{dataset.certificate.attained_level}"}
+      %h3.badge-align
+        = link_to_unless_current dataset.title, dataset
+    .span4
+      .details
+        =detail_item('Published By') { dataset.certificate.curator }
+        =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
+    .span2
+      .expand
+        %i.show-more.icon-chevron-down
+        %i.hide-more.icon-chevron-up
+      .jurisdiction
+        .badge
+          = dataset.response_set.jurisdiction
+        %span.status
+          = dataset.response_set.survey.try(:status)
+
+  .more
+    %hr
+    .row
+      .span4
+        =render 'shared/response_set_summary', response_set: dataset.response_set
+
+      .span8
+        =render 'shared/response_set_description', response_set: dataset.response_set
+
+        %p
+          =link_to 'view certificate', [dataset, dataset.certificate], class: 'btn btn-large btn-info'
+
 
 
 %hr.heavy

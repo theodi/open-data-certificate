@@ -1,5 +1,29 @@
 module ApplicationHelper
 
+  # renders an item in the kittenData data
+  def kitten_value value
+    if value.kind_of?(Array)
+      value.map {|v| kitten_value v}.join(' ')
+    else
+      case value.class.to_s
+      when 'DataKitten::Agent'
+        h(value.name) << ' ' << content_tag(:small, mail_to(value.mbox))
+      when 'DataKitten::License'
+        link_to(value.name, value.uri)
+      when 'DataKitten::Temporal'
+        h(value.start) + h(value.end)
+      when 'String'
+        h(value)
+      when 'Date'
+        h(value.to_s)
+      when 'Hash'
+        h(value[:title])
+      else
+        value
+      end
+    end
+  end
+
   def markdown text
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @markdown.render(text).html_safe

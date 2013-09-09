@@ -116,6 +116,11 @@ class ResponseSet < ActiveRecord::Base
     if @data_licence_determined_from_responses.nil?
       ref = value_for :data_licence, :reference_identifier
       case ref
+      when nil
+        @data_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @data_licence_determined_from_responses = {
           :title => "Not Applicable",
@@ -141,6 +146,11 @@ class ResponseSet < ActiveRecord::Base
     if @content_licence_determined_from_responses.nil?
       ref = value_for :content_licence, :reference_identifier
       case ref
+      when nil
+        @content_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @content_licence_determined_from_responses = {
           :title => "Not Applicable",
@@ -161,6 +171,13 @@ class ResponseSet < ActiveRecord::Base
     else
       @content_licence_determined_from_responses
     end
+  end
+
+  def licences
+    {
+      data:     begin data_licence_determined_from_responses    rescue nil end,
+      content:  begin content_licence_determined_from_responses rescue nil end
+    }
   end
 
   def incomplete?
@@ -199,8 +216,8 @@ class ResponseSet < ActiveRecord::Base
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
-      if response.string_value
-        response_code = Rails.cache.fetch(response.string_value)
+      unless response.string_value.blank?
+        response_code = Rails.cache.fetch(response.string_value) rescue nil
         if response_code.nil?
           response_code = HTTParty.get(response.string_value).code rescue nil
         end
@@ -333,7 +350,7 @@ class ResponseSet < ActiveRecord::Base
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier, value = :string_value
+  def value_for reference_identifier, value = :to_s
     responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
   end
 
