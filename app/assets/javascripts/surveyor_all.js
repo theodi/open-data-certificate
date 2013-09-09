@@ -36,6 +36,10 @@ $(document).ready(function(){
   //     format: 'dd mmm yyyy'
   // });
 
+  _.templateSettings = {
+    interpolate: /:(\w+)/g
+  };
+
   // Default Datepicker uses jQuery UI Datepicker
   $("input[type='text'].datetime").datetimepicker({
     showSecond: true,
@@ -140,7 +144,7 @@ $(document).ready(function(){
     var $button = $(this)
     var $row = $button.closest('.g_repeater')
 
-    var templateUrl = 'repeater_field/:question_id/:response_index/:response_group'
+    var template = _.template("repeater_field/:question_id/:response_index/:response_group")
     var questionId = $row.find('input[name*=question_id]').val()
 
     $button.click(function() {
@@ -154,10 +158,11 @@ $(document).ready(function(){
       })
       var responseIndex = Math.max.apply(this, responseIndexes)
 
-      var url = templateUrl
-        .replace(':question_id', questionId)
-        .replace(':response_index', responseIndex + 1)
-        .replace(':response_group', responseGroup)
+      var url = template({
+        question_id: questionId,
+        response_index: responseIndex + 1,
+        response_group: responseGroup
+      })
 
       $.ajax(url).done(function(html) {
         $button.before(html);
