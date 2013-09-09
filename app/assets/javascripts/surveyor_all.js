@@ -140,37 +140,31 @@ $(document).ready(function(){
   var csrfToken = $form.find("input[name='authenticity_token']")
 
   var busy = false
-  $('.add_row').each(function() {
+  var template = _.template("repeater_field/:question_id/:response_index/:response_group")
+
+  $form.on('click', '.add_row', function() {
+    if (busy) return
+    busy = true
+
     var $button = $(this)
     var $row = $button.closest('.g_repeater')
 
-    var template = _.template("repeater_field/:question_id/:response_index/:response_group")
-    var questionId = $row.find('input[name*=question_id]').val()
+    var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
+      return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
+    })
 
-    $button.click(function() {
+    var url = template({
+      question_id: $row.find('input[name*=question_id]').val(),
+      response_index: Math.max.apply(this, responseIndexes) + 1,
+      response_group: $row.find('.q_repeater_default').length
+    })
 
-      if (busy) return
-      busy = true
+    $.ajax(url).done(function(html) {
+      $button.before(html);
+      busy = false
+    })
 
-      var responseGroup = $row.find('.q_repeater_default').length
-      var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
-        return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
-      })
-      var responseIndex = Math.max.apply(this, responseIndexes)
-
-      var url = template({
-        question_id: questionId,
-        response_index: responseIndex + 1,
-        response_group: responseGroup
-      })
-
-      $.ajax(url).done(function(html) {
-        $button.before(html);
-        busy = false
-      })
-
-      return false;
-    });
+    return false;
   })
 
   function updateField() {
@@ -190,31 +184,31 @@ $(document).ready(function(){
   }
 
   // Update radio, checkbox and select form fields on click
-  $form.find("input[type!=text][type!=url], select").change(updateField)
+  $form.on("change", "input[type!=text][type!=url], select", updateField);
 
   // Updates text form after users finish typing
-  $form.find("input[type=text], input[type=url]").each(function() {
+  $form.on("keyup change", "input[type=text], input[type=url]", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
-    var debounced = _.debounce(updateField, 700);
 
-    $field.keyup(function() {
-      $row.addClass('loading');
-      debounced.call($field);
-    });
+    var debouncedUpdate = $row.data('update-callback') || _.debounce(updateField, 700)
+    $row.data('update-callback', debouncedUpdate)
+
+    $row.addClass('loading');
+    debouncedUpdate.call($field);
   });
 
   // Updates autocomplete override fields
-  $form.find(".autocomplete-override textarea").each(function() {
+  $form.on("keyup change", ".autocomplete-override textarea", function() {
     var $field = $(this);
-    var debounced = _.debounce(saveFormElements, 700);
+    var $row = bindQuestionRow($(this))
+    var $fields = $row.find("input, select")
 
-    $field.keyup(function() {
-      var $row = bindQuestionRow($(this))
-      var $fields = $row.find("input, select")
-      markAutocompleted($fields, $form)
-      debounced($form, questionFields($field).add(csrfToken))
-    })
+    var debouncedSave = $row.data('save-callback') || _.debounce(debouncedSave, 700)
+    $row.data('save-callback', debouncedSave)
+
+    markAutocompleted($fields, $form)
+    debouncedSave($form, questionFields($field).add(csrfToken))
   })
 
   function changeState($row, state) {
