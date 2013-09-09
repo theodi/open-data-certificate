@@ -29,7 +29,7 @@ module DataDump
               where("updated_at > ?", file.last_modified)
     
     if certs.count > 0
-      json = JSON.parse(dir.files.get("certificates.json").body)
+      json = JSON.parse(file.body)
       # Loop through results
       certs.each do |cert|
         url = av.dataset_certificate_url(cert.dataset, cert)
