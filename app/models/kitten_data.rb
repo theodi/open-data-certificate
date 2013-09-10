@@ -10,8 +10,7 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl",
-    "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf" => "other"
+    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
   }
 
   CONTENT_LICENCES = {
@@ -20,6 +19,10 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
   }
+
+  def dataset
+    @dataset
+  end
 
   def request_data
     @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
@@ -92,7 +95,9 @@ class KittenData < ActiveRecord::Base
 
       @fields["contentLicence"] = "uk_ogl" if @fields["dataLicence"] == "uk_ogl"
 
-      if @fields["dataLicence"] == "other"
+      # Settings for ordnance survey licences
+      if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
+        @fields["dataLicence"] = "other"
         @fields["contentLicence"] = "other"
         @fields["otherDataLicenceName"] = "OS OpenData Licence"
         @fields["otherDataLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
@@ -113,10 +118,8 @@ class KittenData < ActiveRecord::Base
     end
 
     # Checks if any of the distributions are machine readable or open
-    data[:distributions].map do |distribution|
-      @fields["machineReadable"] = "true" if distribution[:structured]
-      @fields["openStandard"] = "true" if distribution[:open]
-    end
+    @fields["machineReadable"] = "true" if data[:distributions].detect{|d| d[:structured] }
+    @fields["openStandard"] = "true" if data[:distributions].detect{|d| d[:open] }
 
     # Does your data documentation contain machine readable documentation for:
     metadata = []
