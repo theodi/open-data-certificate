@@ -2,7 +2,7 @@ require 'fog'
 
 module DataDump
   
-  def self.current  
+  def self.current_certificates
     json = {
       "version" => 0.1,
       "license" => "http://opendatacommons.org/licenses/odbl/",
@@ -17,8 +17,8 @@ module DataDump
     upload(json.to_json)
   end
   
-  def self.latest  
     dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
+  def self.latest_certificates
     file = dir.files.head "certificates.json"
     
     certs = Certificate.where(:published => true).
