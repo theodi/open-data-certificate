@@ -15,4 +15,18 @@ namespace :dump do
     end
   
   end
+  
+  namespace :stats do
+    
+    desc "Dump statistics"
+    task :today => :environment do
+      DataDump.current_stats
+    end
+    
+    desc "Dump statistics for today"
+    task :today => :environment do
+      DataDump.latest_stats
+    end
+    
+  end
 end

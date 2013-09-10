@@ -34,6 +34,45 @@ module DataDump
     end
   end
   
+  def self.current_stats
+    csv = CSV.generate do |csv|
+      csv << [
+          "Date", 
+          "All Certificates", 
+          "All Datasets", 
+          "Published Certificates", 
+          "Published Datasets"
+        ]
+      csv << [
+          Date.today.to_s, 
+          Certificate.counts[:all], 
+          ResponseSet.counts[:all_datasets], 
+          Certificate.counts[:published], 
+          ResponseSet.counts[:published_datasets]
+        ]
+    end
+    
+    upload("statistics.csv", csv)
+  end
+  
+  def self.latest_stats
+    file = dir.files.head "statistics.csv"
+    csv = CSV.parse(file.body)
+    csv << [
+          Date.today.to_s, 
+          Certificate.counts[:all], 
+          ResponseSet.counts[:all_datasets], 
+          Certificate.counts[:published], 
+          ResponseSet.counts[:published_datasets]
+        ]
+    
+    body = CSV.generate do |body|
+      csv.each { |row| body << row }
+    end
+    
+    upload("statistics.csv", body)
+  end
+  
   private
 
   def self.service
