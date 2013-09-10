@@ -1,4 +1,5 @@
 require 'fog'
+require 'csv'
 
 module DataDump
   
