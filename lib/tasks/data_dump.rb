@@ -17,7 +17,6 @@ module DataDump
     upload("certificates.json", json.to_json)
   end
   
-    dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
   def self.latest_certificates
     file = dir.files.head "certificates.json"
     
@@ -44,6 +43,10 @@ module DataDump
         :rackspace_auth_url  => Fog::Rackspace::UK_AUTH_ENDPOINT,
         :rackspace_region    => :lon
     })
+  end
+  
+  def self.dir
+    service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
   end
 
   def self.view
