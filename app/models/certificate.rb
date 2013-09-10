@@ -65,10 +65,10 @@ class Certificate < ActiveRecord::Base
         :published            => self.where(published: true).count,
         :published_this_month => self.where(published: true, created_at: within_last_month).count,
         :levels               => {
-          :basic              => self.where(level: "basic").count,
-          :pilot              => self.where(level: "pilot").count,
-          :standard           => self.where(level: "standard").count,
-          :expert             => self.where(level: "expert").count 
+          :basic              => self.where(published: true, attained_level: "basic").count,
+          :pilot              => self.where(published: true, attained_level: "pilot").count,
+          :standard           => self.where(published: true, attained_level: "standard").count,
+          :expert             => self.where(published: true, attained_level: "expert").count 
         }
       }
     end
