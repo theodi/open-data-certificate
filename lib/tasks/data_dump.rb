@@ -11,8 +11,7 @@ module DataDump
           
     certs = Certificate.where(:published => true)
     certs.each do |cert|
-      url = view.dataset_certificate_url(cert.dataset, cert)
-      json["certificates"][url] = build_item(cert)
+      append_json(json, cert)
     end
        
     upload(json.to_json)
@@ -29,10 +28,7 @@ module DataDump
       json = JSON.parse(file.body)
       # Loop through results
       certs.each do |cert|
-        # Generate url for certificate
-        url = view.dataset_certificate_url(cert.dataset, cert)
-        # Replace or add generated json to hash
-        json["certificates"][url] = build_item(cert)
+        append_json(json, cert)
       end
       upload(json.to_json)
     end
@@ -66,6 +62,11 @@ module DataDump
     json = JbuilderTemplate.new(view).tap do |json|
       json.partial! 'certificates/certificate', cert: cert
     end
+  end
+  
+  def self.append_json(json, cert)
+    url = view.dataset_certificate_url(cert.dataset, cert)
+    json["certificates"][url] = build_item(cert)
   end
 
   def self.upload(json)
