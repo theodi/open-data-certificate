@@ -14,7 +14,7 @@ module DataDump
       append_json(json, cert)
     end
        
-    upload(json.to_json)
+    upload("certificates.json", json.to_json)
   end
   
     dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
@@ -30,7 +30,7 @@ module DataDump
       certs.each do |cert|
         append_json(json, cert)
       end
-      upload(json.to_json)
+      upload("certificates.json", json.to_json)
     end
   end
   
@@ -69,9 +69,9 @@ module DataDump
     json["certificates"][url] = build_item(cert)
   end
 
-  def self.upload(json)
+  def self.upload(filename, body)
     dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
-    dir.files.create :key => "certificates.json", :body => json
+    dir.files.create :key => filename, :body => body
   end
 
 end
