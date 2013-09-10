@@ -22,9 +22,10 @@ class ResponseSet < ActiveRecord::Base
     def counts
       within_last_month = (Time.now - 1.month)..Time.now
       {
-        :all_datasets => self.select("DISTINCT(dataset_id)").count,
-        :all_datasets_this_month => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
-        :published_datasets => self.published.select("DISTINCT(dataset_id)").count,
+        :all                           => self.count,
+        :all_datasets                  => self.select("DISTINCT(dataset_id)").count,
+        :all_datasets_this_month       => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
+        :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
         :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
       }
     end

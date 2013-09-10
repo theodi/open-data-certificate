@@ -37,18 +37,28 @@ module DataDump
   def self.current_stats
     csv = CSV.generate do |csv|
       csv << [
-          "Date", 
+          "Date",
+          "All surveys started",
           "All Certificates", 
           "All Datasets", 
           "Published Certificates", 
-          "Published Datasets"
+          "Published Datasets",
+          "Raw level Certificates",
+          "Pilot level Certificates",
+          "Standard level Certificates",
+          "Expert level Certificates",
         ]
       csv << [
           Date.today.to_s, 
           Certificate.counts[:all], 
+          ResponseSet.counts[:all],
           ResponseSet.counts[:all_datasets], 
           Certificate.counts[:published], 
-          ResponseSet.counts[:published_datasets]
+          ResponseSet.counts[:published_datasets],
+          Certificate.counts[:levels][:basic],
+          Certificate.counts[:levels][:pilot],
+          Certificate.counts[:levels][:standard],
+          Certificate.counts[:levels][:expert],
         ]
     end
     
@@ -63,7 +73,11 @@ module DataDump
           Certificate.counts[:all], 
           ResponseSet.counts[:all_datasets], 
           Certificate.counts[:published], 
-          ResponseSet.counts[:published_datasets]
+          ResponseSet.counts[:published_datasets],
+          Certificate.counts[:levels][:basic],
+          Certificate.counts[:levels][:pilot],
+          Certificate.counts[:levels][:standard],
+          Certificate.counts[:levels][:expert],
         ]
     
     body = CSV.generate do |body|
