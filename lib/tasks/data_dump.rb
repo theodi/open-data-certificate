@@ -2,20 +2,20 @@ require 'fog'
 
 module DataDump
   
-  def self.current
-    a = []
-    
-    json = '{"version": 0.1,"license": "http://opendatacommons.org/licenses/odbl/","certificates": {'
-      
+  def self.current  
+    json = {
+      "version" => 0.1,
+      "license" => "http://opendatacommons.org/licenses/odbl/",
+      "certificates" => {}
+    }
+          
     certs = Certificate.where(:published => true)
     certs.each do |cert|
-      a << build_item(cert)
+      url = view.dataset_certificate_url(cert.dataset, cert)
+      json["certificates"][url] = build_item(cert)
     end
-    
-    json << a.join(',')
-    json << "}}"
        
-    upload(json)
+    upload(json.to_json)
   end
   
   def self.latest
@@ -33,11 +33,9 @@ module DataDump
       # Loop through results
       certs.each do |cert|
         # Generate url for certificate
-        url = av.dataset_certificate_url(cert.dataset, cert)
-        # Generate JSON from partial
-        j = JSON.parse("{"+ build_item(cert) +"}").flatten
+        url = view.dataset_certificate_url(cert.dataset, cert)
         # Replace or add generated json to hash
-        json["certificates"][url] = j.last
+        json["certificates"][url] = build_item(cert)
       end
       upload(json.to_json)
     end
@@ -55,26 +53,22 @@ module DataDump
     })
   end
 
-  def self.av
-    av = ActionView::Base.new
-    av.view_paths = ActionController::Base.view_paths
+  def self.view
+    view = ApplicationController.view_context_class.new
+    view.view_paths.unshift("#{Rails.root}/app/views/")
 
-    class << av
+    class << view
         routes = Rails.application.routes
         routes.default_url_options = {:host => 'certificates.theodi.org', :protocol => 'https'}
         include routes.url_helpers
     end
-    av
+    view
   end
 
-  def self.build_item(certificate)
-    json = "\"#{av.dataset_certificate_url(certificate.dataset, certificate)}\":"
-    json << av.render(
-        :file => 'certificates/_certificate',
-        :formats => [:json],
-        :layout => nil, 
-        :locals => { :cert => certificate }
-        )
+  def self.build_item(cert)
+    json = JbuilderTemplate.new(view).tap do |json|
+      json.partial! 'certificates/certificate', cert: cert
+    end
   end
 
   def self.upload(json)
