@@ -18,10 +18,7 @@ module DataDump
     upload(json.to_json)
   end
   
-  def self.latest
-    new = 0
-    updated = 0
-    
+  def self.latest  
     dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
     file = dir.files.head "certificates.json"
     
