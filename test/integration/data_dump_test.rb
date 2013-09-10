@@ -19,7 +19,7 @@ class DataDumpTest < ActionDispatch::IntegrationTest
       FactoryGirl.create(:published_certificate_with_dataset)
     end
     
-    DataDump.current
+    DataDump.current_certificates
     file = dir.files.get "certificates.json"
     json = JSON.parse(file.body)
     
@@ -44,7 +44,7 @@ class DataDumpTest < ActionDispatch::IntegrationTest
       FactoryGirl.create(:published_certificate_with_dataset)
     end
     
-    DataDump.current
+    DataDump.current_certificates
     
     updated = Certificate.where(:published => true).first
     updated.attained_level = "standard"
@@ -52,7 +52,7 @@ class DataDumpTest < ActionDispatch::IntegrationTest
     
     new = FactoryGirl.create(:published_certificate_with_dataset)
     
-    DataDump.latest
+    DataDump.latest_certificates
         
     file = dir.files.get "certificates.json"
     json = JSON.parse(file.body)
