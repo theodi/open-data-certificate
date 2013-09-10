@@ -70,6 +70,10 @@ class Certificate < ActiveRecord::Base
   def embed_url
     "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
   end
+  
+  def attained_level_title
+    "#{self.attained_level.titleize} Level Certificate"
+  end
 
   def update_from_response_set
 
@@ -88,6 +92,23 @@ class Certificate < ActiveRecord::Base
       })
 
     end
+  end
+  
+  def get_responses
+    responses = []
+
+    self.response_set.survey.sections.each do |section|
+      qs = section.questions_for_certificate self.response_set
+      rs = self.response_set.responses_for_questions qs
+      if rs.any?
+        rs.each do |r|
+          if r.statement_text != ''
+            responses << r
+          end
+        end
+      end
+    end
+    responses.group_by { |r| r.question_id }
   end
 
 end

@@ -52,7 +52,8 @@ class Survey < ActiveRecord::Base
       :other_dataset_licence_name => 'otherDataLicenceName',
       :other_dataset_licence_url  => 'otherDataLicenceURL',
       :other_content_licence_name => 'otherContentLicenceName',
-      :other_content_licence_url  => 'otherContentLicenceURL'
+      :other_content_licence_url  => 'otherContentLicenceURL',
+      :release_type               => 'releaseType',
     }
   end
 

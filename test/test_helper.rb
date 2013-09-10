@@ -15,6 +15,8 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER'] = "certificates_test"
 
   def assert_attribute_exists(model, attribute)
     assert_respond_to model, attribute

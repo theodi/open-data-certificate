@@ -29,6 +29,15 @@
       = t("certificate.which_means")
       = t("levels.#{@certificate.attained_level}.description")
 
-=render @certificate.response_set
+.row
+  .span3
+    .well
+      -if @certificate.response_set.kitten_data.try(:data)
+        =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
+      -else
+        =render 'shared/response_set_summary', response_set: @certificate.response_set
+
+  .span9
+    =render @certificate.response_set
 
 =render :partial => 'shared/embed_code', :locals => {:certificate => @certificate}

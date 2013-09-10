@@ -53,6 +53,7 @@ group :production do
 end
 
 gem 'jquery-rails'
+gem 'underscore-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
@@ -97,3 +98,4 @@ gem 'jbuilder'
 gem 'odlifier', :github => 'theodi/odlifier'
 gem 'rack-cors'
 gem 'alternate_rails', :github => 'theodi/alternate-rails'
+gem 'fog'

@@ -12,13 +12,15 @@ class ResponseSet < ActiveRecord::Base
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
 
+  VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
+
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
     return false if (q = Question.find_by_id(hash["question_id"])) and q.pick == "one"
-    false
+    hash.slice(*VALUE_FIELDS).any?{|k,v| v.is_a?(Array) ? v.all?{|x| x.to_s.blank?} : v.to_s.blank?}
   end
 
   aasm do
@@ -114,6 +116,11 @@ class ResponseSet < ActiveRecord::Base
     if @data_licence_determined_from_responses.nil?
       ref = value_for :data_licence, :reference_identifier
       case ref
+      when nil
+        @data_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @data_licence_determined_from_responses = {
           :title => "Not Applicable",
@@ -139,6 +146,11 @@ class ResponseSet < ActiveRecord::Base
     if @content_licence_determined_from_responses.nil?
       ref = value_for :content_licence, :reference_identifier
       case ref
+      when nil
+        @content_licence_determined_from_responses = {
+          :title => "Not Applicable",
+          :url => nil
+        }
       when "na"
         @content_licence_determined_from_responses = {
           :title => "Not Applicable",
@@ -159,6 +171,13 @@ class ResponseSet < ActiveRecord::Base
     else
       @content_licence_determined_from_responses
     end
+  end
+
+  def licences
+    {
+      data:     begin data_licence_determined_from_responses    rescue nil end,
+      content:  begin content_licence_determined_from_responses rescue nil end
+    }
   end
 
   def incomplete?
@@ -197,8 +216,8 @@ class ResponseSet < ActiveRecord::Base
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
-      if response.string_value
-        response_code = Rails.cache.fetch(response.string_value)
+      unless response.string_value.blank?
+        response_code = Rails.cache.fetch(response.string_value) rescue nil
         if response_code.nil?
           response_code = HTTParty.get(response.string_value).code rescue nil
         end
@@ -331,7 +350,7 @@ class ResponseSet < ActiveRecord::Base
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier, value = :string_value
+  def value_for reference_identifier, value = :to_s
     responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
   end
 
