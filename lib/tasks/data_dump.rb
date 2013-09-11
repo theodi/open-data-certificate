@@ -34,7 +34,7 @@ module DataDump
     end
   end
   
-  def self.current_stats
+  def self.setup_stats
     csv = CSV.generate do |csv|
       csv << [
           "Date",

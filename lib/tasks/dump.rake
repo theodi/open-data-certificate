@@ -20,7 +20,7 @@ namespace :dump do
     
     desc "Dump statistics"
     task :setup => :environment do
-      DataDump.current_stats
+      DataDump.setup_stats
     end
     
     desc "Dump statistics for today"
