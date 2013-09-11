@@ -9,7 +9,7 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
   has_one :certificate, dependent: :destroy
-  has_one :kitten_data, dependent: :destroy
+  has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
 
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]

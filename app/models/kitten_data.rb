@@ -10,8 +10,7 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl",
-    "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf" => "other"
+    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
   }
 
   CONTENT_LICENCES = {
@@ -21,34 +20,35 @@ class KittenData < ActiveRecord::Base
     "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
   }
 
+  def dataset
+    @dataset
+  end
+
   def request_data
-    dataset = DataKitten::Dataset.new(access_url: url) rescue nil
-    if dataset && dataset.supported?
-      self.data = {
-        :title             => dataset.data_title,
-        :description       => dataset.description,
-        :publishers        => dataset.publishers,
-        :rights            => dataset.rights,
-        :licenses          => dataset.licenses,
-        :update_frequency  => dataset.update_frequency,
-        :keywords          => dataset.keywords,
-        :release_date      => dataset.issued,
-        :modified_date     => dataset.modified,
-        :temporal_coverage => dataset.temporal,
-        :distributions     => dataset.distributions.try(:map) { |distribution|
-          {
-            :title       => distribution.title,
-            :description => distribution.description,
-            :access_url  => distribution.access_url,
-            :extension   => distribution.format.extension,
-            :open        => distribution.format.open?,
-            :structured  => distribution.format.structured?
-          }
+    @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
+
+    self.data = {
+      :title             => dataset_field(:data_title, ''),
+      :description       => dataset_field(:description, ''),
+      :publishers        => dataset_field(:publishers, []),
+      :rights            => dataset_field(:rights),
+      :licenses          => dataset_field(:licenses, []),
+      :update_frequency  => dataset_field(:update_frequency, ''),
+      :keywords          => dataset_field(:keywords, []),
+      :release_date      => dataset_field(:issued),
+      :modified_date     => dataset_field(:modified),
+      :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+      :distributions     => dataset_field(:distributions, []).map { |distribution|
+        {
+          :title       => distribution.title,
+          :description => distribution.description,
+          :access_url  => distribution.access_url,
+          :extension   => distribution.format.extension,
+          :open        => distribution.format.open?,
+          :structured  => distribution.format.structured?
         }
       }
-    else
-      self.data = {}
-    end
+    }
   end
 
   def fields
@@ -95,7 +95,9 @@ class KittenData < ActiveRecord::Base
 
       @fields["contentLicence"] = "uk_ogl" if @fields["dataLicence"] == "uk_ogl"
 
-      if @fields["dataLicence"] == "other"
+      # Settings for ordnance survey licences
+      if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
+        @fields["dataLicence"] = "other"
         @fields["contentLicence"] = "other"
         @fields["otherDataLicenceName"] = "OS OpenData Licence"
         @fields["otherDataLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
@@ -116,10 +118,8 @@ class KittenData < ActiveRecord::Base
     end
 
     # Checks if any of the distributions are machine readable or open
-    data[:distributions].map do |distribution|
-      @fields["machineReadable"] = "true" if distribution[:structured]
-      @fields["openStandard"] = "true" if distribution[:open]
-    end
+    @fields["machineReadable"] = "true" if data[:distributions].detect{|d| d[:structured] }
+    @fields["openStandard"] = "true" if data[:distributions].detect{|d| d[:open] }
 
     # Does your data documentation contain machine readable documentation for:
     metadata = []
@@ -142,5 +142,10 @@ class KittenData < ActiveRecord::Base
     end
 
     @fields
+  end
+
+  private
+  def dataset_field(method, default = nil)
+    (@dataset && @dataset.supported? && @dataset.try(method)) || default
   end
 end
