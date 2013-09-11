@@ -283,8 +283,8 @@ class ResponseSet < ActiveRecord::Base
                               answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
-      update_from_ui_hash(ui_hash)
     end
+    update_from_ui_hash(ui_hash)
   end
 
 
