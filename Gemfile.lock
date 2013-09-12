@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/alternate-rails.git
-  revision: 01a4086c6e8c4f9ef1a6508ce2d50a3c787546ed
+  revision: 3af5c79a8af8b60648b46b742b1b2ad3f669a1c9
   specs:
     alternate_rails (0.0.1)
       rails (~> 3.2.13)
