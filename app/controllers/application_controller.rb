@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
       format.html { render '/home/status' }
       format.csv {
         csv = Rails.cache.fetch('statuscsv', :expires_in => 12.hour) do
-          Net::HTTP.get(URI("http://82570906174353dce96d-bb325bab383329882a2b020fbec21867.r31.cf3.rackcdn.com/statistics.csv"))
+          Rackspace.dir.files.get("statistics.csv").body
         end
         render text: csv, content_type: "text/csv" 
       }
