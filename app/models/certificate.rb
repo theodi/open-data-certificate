@@ -54,7 +54,7 @@ class Certificate < ActiveRecord::Base
     end
 
     def latest
-      where(published: true).jns(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
+      where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
     
     def counts
