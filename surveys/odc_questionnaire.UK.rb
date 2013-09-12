@@ -1,4 +1,4 @@
-survey 'GB',
+survey 'GB', 
   :full_title => 'United Kingdom',
   :default_mandatory => 'false',
   :status => 'beta',
