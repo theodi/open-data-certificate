@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
+  before_filter(:only => [:status]) { alternate_formats [:csv] }
 
   helper_method :after_sign_in_path_for
 
@@ -28,21 +29,25 @@ class ApplicationController < ActionController::Base
   def status
     @job_count = Delayed::Job.count
 
-    within_last_month = (Time.now - 1.month)..Time.now
-
     @counts = {
-      'All Certificates' =>                  Certificate.count,
-      'All Certificates This Month' =>       Certificate.where(created_at: within_last_month).count,
-      'All Datasets' =>                      ResponseSet.select("DISTINCT(dataset_id)").count,
-      'All Datasets This Month' =>           ResponseSet.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
-      'Published Certificates' =>            Certificate.where(published: true).count,
-      'Published Certificates This Month' => Certificate.where(published: true, created_at: within_last_month).count,
-      'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
-      'Published Datasets This Month' =>     ResponseSet.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
+      'All Certificates' =>                  Certificate.counts[:all],
+      'All Certificates This Month' =>       Certificate.counts[:all_this_month],
+      'All Datasets' =>                      ResponseSet.counts[:all_datasets],
+      'All Datasets This Month' =>           ResponseSet.counts[:all_datasets_this_month],
+      'Published Certificates' =>            Certificate.counts[:published],
+      'Published Certificates This Month' => Certificate.counts[:published_this_month],
+      'Published Datasets' =>                ResponseSet.counts[:published_datasets],
+      'Published Datasets This Month' =>     ResponseSet.counts[:published_datasets_this_month]
     }
 
     respond_to do |format|
       format.html { render '/home/status' }
+      format.csv {
+        csv = Rails.cache.fetch('statuscsv', :expires_in => 12.hour) do
+          Rackspace.dir.files.get("statistics.csv").body
+        end
+        render text: csv, content_type: "text/csv" 
+      }
     end
   end
 

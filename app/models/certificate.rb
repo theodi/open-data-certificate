@@ -56,6 +56,22 @@ class Certificate < ActiveRecord::Base
     def latest
       where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
+    
+    def counts
+      within_last_month = (Time.now - 1.month)..Time.now
+      {
+        :all                  => self.count,
+        :all_this_month       => self.where(created_at: within_last_month).count,
+        :published            => self.where(published: true).count,
+        :published_this_month => self.where(published: true, created_at: within_last_month).count,
+        :levels               => {
+          :basic              => self.where(published: true, attained_level: "basic").count,
+          :pilot              => self.where(published: true, attained_level: "pilot").count,
+          :standard           => self.where(published: true, attained_level: "standard").count,
+          :expert             => self.where(published: true, attained_level: "expert").count 
+        }
+      }
+    end
 
   end
 
