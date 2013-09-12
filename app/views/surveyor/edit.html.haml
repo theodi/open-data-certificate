@@ -19,13 +19,16 @@
           .row
             .span9
               .jurisdiction
+                Jurisdiction:
                 .badge.badge-inverse=  @response_set.jurisdiction
                 %span.status= @survey.try(:status)
-                = link_to 'Change Jurisdiction', "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
-              - if @survey.translations.count > 1
-                .badge.badge-inverse= @response_set.locale || I18n.locale
-                = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
+                = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
                   %i.icon.icon-pencil
+                - if @survey.translations.count > 1
+                  Language:
+                  .badge.badge-inverse= @response_set.locale_name
+                  = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
+                    %i.icon.icon-pencil
 
               %h1{'data-bind-to-input' => @survey.dataset_title}= @response_set.title
             .span3
