@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912131601) do
+ActiveRecord::Schema.define(:version => 20130912193154) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -256,9 +256,9 @@ ActiveRecord::Schema.define(:version => 20130912131601) do
   create_table "survey_translations", :force => true do |t|
     t.integer  "survey_id"
     t.string   "locale"
-    t.text     "translation"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "translation", :limit => 16777215
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "surveys", :force => true do |t|
