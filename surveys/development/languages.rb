@@ -1,5 +1,5 @@
 # encoding: UTF-8
-survey "dv1", :full_title => 'Language Test (dv1)', :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle' do
+survey "dv1", :full_title => 'Language Test (dv1)', :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle', default_locale_name: 'English' do
   translations :en =>:default, :es => "../translations/languages.es.yml", :he => "../translations/languages.he.yml", :ko => "../translations/languages.ko.yml"
 
   section_one "One" do
