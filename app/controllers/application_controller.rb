@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
+  before_filter(:only => [:status]) { alternate_formats [:csv] }
 
   helper_method :after_sign_in_path_for
 
@@ -41,6 +42,12 @@ class ApplicationController < ActionController::Base
 
     respond_to do |format|
       format.html { render '/home/status' }
+      format.csv {
+        csv = Rails.cache.fetch('statuscsv', :expires_in => 12.hour) do
+          Net::HTTP.get(URI("http://82570906174353dce96d-bb325bab383329882a2b020fbec21867.r31.cf3.rackcdn.com/statistics.csv"))
+        end
+        render text: csv, content_type: "text/csv" 
+      }
     end
   end
 
