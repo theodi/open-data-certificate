@@ -28,18 +28,7 @@ module StatsDump
           "Standard level Certificates",
           "Expert level Certificates",
         ]
-      csv << [
-          Date.today.to_s, 
-          Certificate.counts[:all], 
-          ResponseSet.counts[:all],
-          ResponseSet.counts[:all_datasets], 
-          Certificate.counts[:published], 
-          ResponseSet.counts[:published_datasets],
-          Certificate.counts[:levels][:basic],
-          Certificate.counts[:levels][:pilot],
-          Certificate.counts[:levels][:standard],
-          Certificate.counts[:levels][:expert],
-        ]
+      csv << stats_row
     end
     
     Rackspace.upload(FILENAME, csv)
@@ -48,17 +37,7 @@ module StatsDump
   def self.latest
     file = Rackspace.dir.files.head FILENAME
     csv = CSV.parse(file.body)
-    csv << [
-          Date.today.to_s, 
-          Certificate.counts[:all], 
-          ResponseSet.counts[:all_datasets], 
-          Certificate.counts[:published], 
-          ResponseSet.counts[:published_datasets],
-          Certificate.counts[:levels][:basic],
-          Certificate.counts[:levels][:pilot],
-          Certificate.counts[:levels][:standard],
-          Certificate.counts[:levels][:expert],
-        ]
+    csv << stats_row
     
     body = CSV.generate do |body|
       csv.each { |row| body << row }
@@ -66,4 +45,20 @@ module StatsDump
     
     Rackspace.upload(FILENAME, body)
   end
+  
+  def self.stats_row
+    [
+      Date.today.to_s, 
+      Certificate.counts[:all], 
+      ResponseSet.counts[:all],
+      ResponseSet.counts[:all_datasets], 
+      Certificate.counts[:published], 
+      ResponseSet.counts[:published_datasets],
+      Certificate.counts[:levels][:basic],
+      Certificate.counts[:levels][:pilot],
+      Certificate.counts[:levels][:standard],
+      Certificate.counts[:levels][:expert]
+    ]
+  end
+  
 end
