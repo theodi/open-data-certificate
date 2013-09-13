@@ -28,24 +28,16 @@ class ApplicationController < ActionController::Base
 
   def status
     @job_count = Delayed::Job.count
-
+    
     @counts = {
-      'All Certificates' =>                  Certificate.counts[:all],
-      'All Certificates This Month' =>       Certificate.counts[:all_this_month],
-      'All Datasets' =>                      ResponseSet.counts[:all_datasets],
-      'All Datasets This Month' =>           ResponseSet.counts[:all_datasets_this_month],
-      'Published Certificates' =>            Certificate.counts[:published],
-      'Published Certificates This Month' => Certificate.counts[:published_this_month],
-      'Published Datasets' =>                ResponseSet.counts[:published_datasets],
-      'Published Datasets This Month' =>     ResponseSet.counts[:published_datasets_this_month]
+      'certificates' => Certificate.counts,
+      'datasets'     => ResponseSet.counts
     }
 
     respond_to do |format|
       format.html { render '/home/status' }
       format.csv {
-        csv = Rails.cache.fetch('statuscsv', :expires_in => 12.hour) do
-          Rackspace.dir.files.get("statistics.csv").body
-        end
+        csv = Rackspace.fetch_cache("statistics.csv")
         render text: csv, content_type: "text/csv" 
       }
     end
