@@ -62,6 +62,24 @@ class OdcRakeTest < ActiveSupport::TestCase
     # consider things cool if we got here without breaking
   end
 
+  # currently almost all the translations are invalid yaml, uncomment this test when they
+  # have been re-exported
+  #
+  # test "Survey translations are valid yaml" do
+  #   translationDir = Rails.root.join('surveys','translations')
+
+  #   files = Dir.entries(translationDir).select { |file| file =~ /.*\.yml$/ }
+
+  #   files.each do |file|
+  #     contents = translationDir.join(file).read
+  #     begin
+  #       YAML.load(contents)
+  #     rescue Psych::SyntaxError => e
+  #       flunk "Syntax Error in #{file} - #{e}"
+  #     end
+  #   end
+  # end
+
 
   test "build_changed_surveys doesn't build twice" do
     ENV['DIR'] = 'test/fixtures/surveys'
