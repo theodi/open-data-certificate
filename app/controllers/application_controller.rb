@@ -37,9 +37,7 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html { render '/home/status' }
       format.csv {
-        csv = Rails.cache.fetch('statuscsv', :expires_in => 12.hour) do
-          Rackspace.dir.files.get("statistics.csv").body
-        end
+        csv = Rackspace.fetch_cache("statistics.csv")
         render text: csv, content_type: "text/csv" 
       }
     end
