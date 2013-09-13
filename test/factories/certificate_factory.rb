@@ -16,6 +16,18 @@ FactoryGirl.define do
       published true
       attained_level "basic"
       response_set {FactoryGirl.create(:response_set_with_dataset, aasm_state: 'published')}
+      
+      factory :published_pilot_certificate_with_dataset do
+        attained_level "pilot"
+      end
+
+      factory :published_standard_certificate_with_dataset do
+        attained_level "standard"
+      end
+      
+      factory :published_expert_certificate_with_dataset do
+        attained_level "expert"
+      end
     end
   end
 

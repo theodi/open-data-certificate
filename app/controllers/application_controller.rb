@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
+  before_filter(:only => [:status]) { alternate_formats [:csv] }
 
   helper_method :after_sign_in_path_for
 
@@ -27,22 +28,18 @@ class ApplicationController < ActionController::Base
 
   def status
     @job_count = Delayed::Job.count
-
-    within_last_month = (Time.now - 1.month)..Time.now
-
+    
     @counts = {
-      'All Certificates' =>                  Certificate.count,
-      'All Certificates This Month' =>       Certificate.where(created_at: within_last_month).count,
-      'All Datasets' =>                      ResponseSet.select("DISTINCT(dataset_id)").count,
-      'All Datasets This Month' =>           ResponseSet.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
-      'Published Certificates' =>            Certificate.where(published: true).count,
-      'Published Certificates This Month' => Certificate.where(published: true, created_at: within_last_month).count,
-      'Published Datasets' =>                ResponseSet.published.select("DISTINCT(dataset_id)").count,
-      'Published Datasets This Month' =>     ResponseSet.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
+      'certificates' => Certificate.counts,
+      'datasets'     => ResponseSet.counts
     }
 
     respond_to do |format|
       format.html { render '/home/status' }
+      format.csv {
+        csv = Rackspace.fetch_cache("statistics.csv")
+        render text: csv, content_type: "text/csv" 
+      }
     end
   end
 

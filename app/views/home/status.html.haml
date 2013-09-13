@@ -11,10 +11,25 @@
 %hr.heavy
 
 %h1
-  Certificate Counts
+  Counts
 
-%ul
-  -@counts.each do |k,count|
-    %li
-      %strong= k
-      = count
+-@counts.each do |k,count|
+  %h2= k.titleize
+  %ul
+    -count.each do |c,v|
+      %li
+        %strong= c.to_s.humanize
+        -if v.class == Hash
+          %ul
+            -v.each do |l,n|
+              %li
+                %strong= l.to_s.humanize
+                = n
+        -else
+          = v
+
+%hr.heavy
+
+%p.data
+  Get historic data as 
+  =alternate_link_buttons(:class => 'badge')

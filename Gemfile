@@ -86,7 +86,7 @@ gem 'thin'
 gem "ransack"
 gem 'surveyor'
 gem 'redcarpet'
-gem "devise", ">= 2.2.3"
+gem "devise", "3.0.3"
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'google-analytics-rails'

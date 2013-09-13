@@ -9,13 +9,29 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
   has_one :certificate, dependent: :destroy
-  has_one :kitten_data, dependent: :destroy
+  has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
 
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
+  
+  class << self
+    
+    def counts
+      within_last_month = (Time.now - 1.month)..Time.now
+      {
+        :all                           => self.count,
+        :all_datasets                  => self.select("DISTINCT(dataset_id)").count,
+        :all_datasets_this_month       => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
+        :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
+        :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
+      }
+    end
+    
+  end
+  
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
@@ -291,8 +307,8 @@ class ResponseSet < ActiveRecord::Base
                               answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
-      update_from_ui_hash(ui_hash)
     end
+    update_from_ui_hash(ui_hash)
   end
 
 
