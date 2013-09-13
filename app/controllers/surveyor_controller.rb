@@ -159,6 +159,12 @@ class SurveyorController < ApplicationController
     end
   end
 
+  def repeater_field
+    question = Question.find(params[:question_id])
+    @rc = params[:response_index].to_i
+    render :partial => "partials/repeater_field", locals: {response_group: params[:response_group] || 0, question: question}
+  end
+
   def requirements
     if @response_set
       redirect_to improvements_dataset_certificate_path(@response_set.dataset, @response_set.certificate)

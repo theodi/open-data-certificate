@@ -93,5 +93,22 @@ class Certificate < ActiveRecord::Base
 
     end
   end
+  
+  def get_responses
+    responses = []
+
+    self.response_set.survey.sections.each do |section|
+      qs = section.questions_for_certificate self.response_set
+      rs = self.response_set.responses_for_questions qs
+      if rs.any?
+        rs.each do |r|
+          if r.statement_text != ''
+            responses << r
+          end
+        end
+      end
+    end
+    responses.group_by { |r| r.question_id }
+  end
 
 end

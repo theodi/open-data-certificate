@@ -12,13 +12,15 @@ class ResponseSet < ActiveRecord::Base
   has_one :kitten_data, dependent: :destroy
   has_many :autocomplete_override_messages, dependent: :destroy
 
+  VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
+
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
     return false if (q = Question.find_by_id(hash["question_id"])) and q.pick == "one"
-    false
+    hash.slice(*VALUE_FIELDS).any?{|k,v| v.is_a?(Array) ? v.all?{|x| x.to_s.blank?} : v.to_s.blank?}
   end
 
   aasm do
