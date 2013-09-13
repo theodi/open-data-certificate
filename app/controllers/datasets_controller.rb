@@ -8,6 +8,7 @@ class DatasetsController < ApplicationController
   def index
 
     @datasets = Dataset
+                .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
                 .order('response_sets.attained_index DESC')
