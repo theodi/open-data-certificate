@@ -28,16 +28,10 @@ class ApplicationController < ActionController::Base
 
   def status
     @job_count = Delayed::Job.count
-
+    
     @counts = {
-      'All Certificates' =>                  Certificate.counts[:all],
-      'All Certificates This Month' =>       Certificate.counts[:all_this_month],
-      'All Datasets' =>                      ResponseSet.counts[:all_datasets],
-      'All Datasets This Month' =>           ResponseSet.counts[:all_datasets_this_month],
-      'Published Certificates' =>            Certificate.counts[:published],
-      'Published Certificates This Month' => Certificate.counts[:published_this_month],
-      'Published Datasets' =>                ResponseSet.counts[:published_datasets],
-      'Published Datasets This Month' =>     ResponseSet.counts[:published_datasets_this_month]
+      'certificates' => Certificate.counts,
+      'datasets'     => ResponseSet.counts
     }
 
     respond_to do |format|
