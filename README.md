@@ -110,6 +110,14 @@ rake surveyor:build_changed_surveys DIR=surveys/development
 bundle exec guard
 ```
 
+#### Admin functions
+
+To mark a user as being an admin - the users ID should be included in the `ODC_ADMIN_IDS` environment variable (comma separated).  The easiest way to find the ID is to look on the URL of their account page.
+
+Admins are able to block a dataset from displaying on the public /datasets page by visiting the dataset and toggling the visibility at the top of the page.
+
+Removed datasets are listed at `/datasets/admin` (only accessible by admin users).
+
 #### Changing surveys
 
 To change surveys, you'll need Saxon installed. On a Mac, this is as simple as running:
