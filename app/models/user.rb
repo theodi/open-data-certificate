@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def full_name
     [first_name, last_name].delete_if(&:blank?).join(' ')
   end
+
+  def admin?
+    (ENV['ODC_ADMIN_IDS'] || '').split(',').include? id.to_s
+  end
 end
