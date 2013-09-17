@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20130913150629) do
     t.integer  "dataset_id"
     t.string   "aasm_state",     :default => "draft"
     t.integer  "attained_index"
+    t.string   "locale"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
@@ -256,9 +257,9 @@ ActiveRecord::Schema.define(:version => 20130913150629) do
   create_table "survey_translations", :force => true do |t|
     t.integer  "survey_id"
     t.string   "locale"
-    t.text     "translation"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "translation", :limit => 16777215
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "surveys", :force => true do |t|
@@ -283,6 +284,7 @@ ActiveRecord::Schema.define(:version => 20130913150629) do
     t.string   "full_title"
     t.string   "meta_map"
     t.string   "status",                 :default => "alpha"
+    t.string   "default_locale_name"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true

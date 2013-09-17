@@ -53,6 +53,8 @@ Questions and Answers are associated to requirements by having their 'requiremen
 
 * `:description` - Copy to be displayed above the questionnaire
 
+* `:default_locale_name` - When there are multiple translations, this is the friendly name for the default one (the others are defined in the translation files)
+
 ##### section
 
 * `:display_header` - Whether the header should be displayed on the header (defaults to true)
@@ -82,6 +84,22 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 * `:input_type` - alternative input types (eg. url, number, phone)
 
 * `:placeholder` - placeholder text displayed in a field before anything is entered
+
+
+### Translations
+
+Questionnaires are able to be translated and a user can select the locale when they are filling them out.
+
+To enable this for a questionnaire:
+
+* specify a `default_locale_name` for the survey
+* set any alternative translations files using the `translations` method (eg. `:es => 'translations/my-file.es.yml'`)
+
+In the translation file (eg. surveys/translations/my-file.es.yml)
+
+* set the locale name with `es: Spanish` (where 'es' was the reference given in the survey file)
+
+There is an example of adding a translation on [this gist](https://gist.github.com/benfoxall/c35ad597fd2c2d7fcdc6#file-0002-manually-corrected-translation-yaml-patch)
 
 
 ### Running

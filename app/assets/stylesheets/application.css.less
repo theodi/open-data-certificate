@@ -95,6 +95,8 @@
 */
 .modal {
 
+  -webkit-font-smoothing:antialiased;
+
   &.embed-code {
 
     .btn-info {
@@ -1595,14 +1597,15 @@ td.action {
 // Questionnaire (survey) view //
 
 // jurisdiction select at the top of the certificate
-header .jurisdiction{
+header .jurisdiction{  
+  font-size: 14px;
   a {
     cursor: pointer;
-    margin-left: 11px;
-    font-size: 14px;
-    font-weight: bold;
     color: @white;
     white-space: nowrap;
+    margin-left: 8px;
+    margin-right: 30px;
+
   }
   .popover {
     color: @black;
