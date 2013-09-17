@@ -186,6 +186,11 @@ en:
     choose_jurisdiction: --- Select jurisdiction ---
     start_new_jurisdiction: Change jurisdiction
 
+    choose_a_language: Choose a new language
+    language_dialog_body: Choose a different language below
+    choose_language: --- Select language ---
+    start_new_language: Change language
+
   summary_data:
     type_of_release: Type of release
     licence: "Licence:"

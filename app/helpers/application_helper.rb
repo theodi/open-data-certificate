@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  # temporarily switch to a new locale
+  def scope_locale locale
+    locale, I18n.locale = I18n.locale, locale || I18n.locale
+    yield
+    I18n.locale = locale
+  end
+
   # renders an item in the kittenData data
   def kitten_value value
     if value.kind_of?(Array)
