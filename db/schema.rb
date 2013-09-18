@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912193154) do
+ActiveRecord::Schema.define(:version => 20130917150936) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -68,10 +68,11 @@ ActiveRecord::Schema.define(:version => 20130912193154) do
   create_table "datasets", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "documentation_url"
     t.string   "curator"
+    t.boolean  "removed",           :default => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -288,6 +289,15 @@ ActiveRecord::Schema.define(:version => 20130912193154) do
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true
   add_index "surveys", ["api_id"], :name => "uq_surveys_api_id", :unique => true
+
+  create_table "transfers", :force => true do |t|
+    t.integer  "dataset_id"
+    t.integer  "user_id"
+    t.string   "target_email"
+    t.string   "aasm_state",   :default => "new"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
