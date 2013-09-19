@@ -36,6 +36,10 @@ OpenDataCertificate::Application.routes.draw do
     end
   end
 
+  resources :transfers, :only => [] do 
+    get :claim, on: :member
+  end
+
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
