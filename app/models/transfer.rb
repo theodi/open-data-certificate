@@ -3,6 +3,8 @@ class Transfer < ActiveRecord::Base
 
   attr_accessible :target_email
 
+  before_create :generate_token
+
   belongs_to :user
   belongs_to :dataset
 
@@ -18,18 +20,22 @@ class Transfer < ActiveRecord::Base
       transitions from: :new, to: :notified
     end
 
-
     # state :accepted
 
     # state :cancelled
-
 
   end
 
   private
 
-  def notify_target_user
-    # send an email out
+  def generate_token
+    self.token = SecureRandom::hex(32)
   end
+
+  def notify_target_user
+    TransferMailer.notify(self).deliver
+  end
+
+  handle_asynchronously :notify_target_user
 
 end
