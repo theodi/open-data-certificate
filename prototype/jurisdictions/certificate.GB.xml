@@ -4,7 +4,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="0.7" status="beta" jurisdiction="GB" xml:lang="en">
+<questionnaire version="0.8" status="beta" jurisdiction="GB" xml:lang="en">
 	<help>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
 		<p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p>
@@ -21,6 +21,7 @@
 				<radioset required="required">
 					<option value="yes">
 						<label>yes, you have the rights to publish this data as open data</label>
+						<requirement level="standard">You should have a <strong>clear legal right to publish this data</strong>.</requirement>
 					</option>
 					<option value="no">
 						<label>no, you don't have the rights to publish this data as open data</label>
@@ -28,12 +29,23 @@
 					<option value="unsure">
 						<label>you're not sure if you have the rights to publish this data as open data</label>
 					</option>
+					<option value="complicated">
+						<label>the rights in this data are complicated or unclear</label>
+					</option>
 				</radioset>
 				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish your data</strong>.</requirement>
 				</if>
 			</question>
+			<if test="this.publisherRights() === 'complicated'">
+				<question id="rightsRiskAssessment" display="Risks in using this data are described at">
+					<label>Where do you detail the risks people might encounter if they use this data?</label>
+					<input type="url" placeholder="Risk Documentation URL"/>
+					<help>It can be risky for people to use data without a clear legal right to do so. Give a URL for a page that describes the risk of using this data.</help>
+					<requirement level="pilot">You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.</requirement>
+				</question>
+			</if>
 			<if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
 				<question id="publisherOrigin" display="This data was">
 					<label>Was <em>all</em> this data originally created or gathered by you?</label>
