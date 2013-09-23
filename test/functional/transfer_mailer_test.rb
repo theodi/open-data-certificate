@@ -2,8 +2,6 @@ require 'test_helper'
 
 class TransferMailerTest < ActionMailer::TestCase
 
-  include ActionDispatch::Routing::UrlFor
-
   test "transfer notify" do
     transfer = FactoryGirl.create :transfer
 
