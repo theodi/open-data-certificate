@@ -21,7 +21,7 @@
     - r = response_for(@response_set, q, nil, rg)
     - a = @response_set.autocomplete_override_message_for(q)
 
-    - explanation_required = r.autocompletable? && !r.all_autocompleted
+    - explanation_required = (r.autocompletable? && !r.all_autocompleted) || r.error
     - explanation_missing = explanation_required && (a.message || '').strip.blank?
 
     - state = 'ok' unless r.new_record?

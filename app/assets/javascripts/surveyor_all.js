@@ -260,8 +260,7 @@ $(document).ready(function(){
             $row.removeClass('loading')
             changeState($row, 'warning')
 
-            var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            $row.find('.status-message span').text($form.find('#surveyor').data(message))
+            $row.find('.status-message span').text($form.find('#surveyor').data('url-incorrect'))
 
             markAutocompleted($field, $form)
           }
@@ -278,6 +277,10 @@ $(document).ready(function(){
             changeState($row, 'ok')
 
             markAutocompleted($field, $form)
+
+            if (!$row.data('autocompleted-value')) {
+              $row.find('.autocomplete-override').addClass('none')
+            }
           },
 
           fail: function() {
@@ -288,6 +291,11 @@ $(document).ready(function(){
             $row.find('.status-message span').text($form.find('#surveyor').data(message))
 
             markAutocompleted($field, $form)
+
+            if (!$row.data('autocompleted-value')) {
+              var override = $row.find('.autocomplete-override');
+              override.removeClass('none').find('p').text($form.find('#surveyor').data('url-explanation'))
+            }
           }
         }))
       }
@@ -371,6 +379,7 @@ $(document).ready(function(){
         }
 
         $row.find('.autocomplete-override').toggleClass('none', autocompleted)
+          .find('p').text($form.find('#surveyor').data('autocomplete-explanation'))
         $row.find('input[id$="_autocompleted"]').val(autocompleted)
         $row.toggleClass('autocompleted', autocompleted)
 
@@ -379,7 +388,7 @@ $(document).ready(function(){
           $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
         }
         else {
-          if ($field.val() && $field.val().match(/[^\s]/)) {
+          // if ($field.val() && $field.val().match(/[^\s]/)) {
             if (empty($row.find('.autocomplete-override textarea').val())) {
               changeState($row, 'warning')
               $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
@@ -387,10 +396,10 @@ $(document).ready(function(){
             else {
               changeState($row, 'ok')
             }
-          }
-          else {
-            changeState($row, 'no-response')
-          }
+          // }
+          // else {
+          //   changeState($row, 'no-response')
+          // }
         }
       }
     })
