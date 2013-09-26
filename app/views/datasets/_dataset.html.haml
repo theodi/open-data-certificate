@@ -1,5 +1,7 @@
 %dl
-  %dt= dataset.title
+  %dt
+    = dataset.title
+    = render dataset.transfer || dataset.build_transfer
   %dd
     - if dataset.response_sets.any?
       =  render partial: 'response_set', collection: dataset.response_sets, locals: {primary: dataset.response_sets.first}
