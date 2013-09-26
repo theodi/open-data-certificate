@@ -100,7 +100,7 @@
           - i = (i.to_i + 1).to_s if q.pick == 'any'
           - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
           = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
-            = ff.input :message, as: :additional_text, label: t('surveyor.autocomplete_explanation.title'), subtitle: t('surveyor.autocomplete_explanation.subtitle')
+            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.autocomplete_explanation')
 
       - unless (q.help_text.blank?)
         %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}

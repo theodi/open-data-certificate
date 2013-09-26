@@ -30,9 +30,9 @@ en:
     autocompleted_url_incorrect: "We have automatically completed this URL, but it doesn't seem to be correct"
     missing_metadata: "Some of these items could not be found on the documentation page"
     autocomplete_override_warning: "Please provide an explanation below for changing this answer"
-    autocomplete_explanation:
-        title: Explanation
-        subtitle: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
+    override_explanation_title: Explanation
+    autocomplete_explanation: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
+    url_explanation: Please explain your urlings
 
   requirement_label:
     requirement: This is required for <strong>all levels</strong>
