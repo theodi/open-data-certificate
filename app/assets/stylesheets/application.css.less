@@ -97,6 +97,8 @@
 
   -webkit-font-smoothing:antialiased;
 
+  font-weight:normal;
+
   &.embed-code {
 
     .btn-info {
@@ -138,8 +140,11 @@
   }
 
   background: @odiBlue;
-  width: 788px;
-  margin-left: -394px;
+
+  &#start-cert-modal{ 
+    width: 788px;
+    margin-left: -394px; 
+  }
   .border-radius(0);
 
   h1 {
@@ -169,6 +174,16 @@
     }
   }
 
+  form.form-transfer{
+    label, .help-inline {
+      font-size:1em;
+      color:#fff;
+    }
+    label div{
+      margin-top:.5em;
+    }
+  }
+
 }
 
 .modal-header {
@@ -194,6 +209,12 @@
   padding-bottom: 40px;
   padding-top: 30px;
 
+}
+
+.modal-footer {
+  background: lighten(@odiBlue, 10%);
+  border-top: none;
+  .box-shadow(none);
 }
 
 .modal-body {
@@ -1076,7 +1097,7 @@ section {
   }
 }
 
-.alert-alert {
+.alert-alert, .alert-error {
   background: @odiCrimson;
   border: 1px solid @odiCrimsonDark;
 }
@@ -2568,7 +2589,7 @@ p.logo {
   width: 330px;
 }
 
-#start-cert-modal{
+.modal#start-cert-modal{
 margin-left: 0;
 width: 100%;
 
