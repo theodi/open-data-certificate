@@ -1,0 +1,29 @@
+- if transfer.new_record?
+  - modal_dom_id = "transfer_dataset_#{transfer.dataset_id}"
+  - email_dom_id = "#{modal_dom_id}_email"
+  =link_to "##{modal_dom_id}", 'data-toggle' => 'modal' do
+    .icon-cog
+    Editing Settings
+  .modal.fade{id: modal_dom_id}
+    .modal-header
+      %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+      %h3 
+        .icon-cog
+        Editing settings
+    .modal-body
+      %p You can pass the editing rights to this certificate over to another collaborator
+      = form_for transfer, html:{class: 'form-transfer'} do |f|
+        = f.hidden_field :dataset_id
+        %label
+          Invite collaborator:
+          %div
+            = f.email_field :target_email, placeholder: 'email address', class: 'span3'
+
+        
+        = f.submit 'Send invite', class: 'btn btn-primary'
+        %span.help-inline Note: only one collaborator can edit a certifcate at once
+        
+- else
+  %small
+    open transfer to #{transfer.target_email}
+    = link_to "[cancel]", transfer, method: :delete

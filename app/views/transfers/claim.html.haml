@@ -1,0 +1,8 @@
+- content_for :header_title, "Dataset Transfer"
+
+%h3
+  You have been offered to take control of "#{@transfer.dataset.title}"
+
+= form_for @transfer, url: {action: :accept}  do |f|
+  = hidden_field_tag :token, params[:token]
+  = f.submit "Accept dataset", class: 'btn'
