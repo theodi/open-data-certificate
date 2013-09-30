@@ -1,6 +1,6 @@
 title: "AI"
 full_title: "Anguilla"
-description: "<p><strong>This has been generated based on a default and needs to be localised for Anguilla. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>"
+description: "<p><strong>This has been generated based on a default and needs to be localised for Anguilla. Please help us! Contact <a href=\"mailto:certificate@theodi.org\">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>"
 survey_sections:
   general:
     title: "General Information"
@@ -250,7 +250,7 @@ questions:
         text: "Licence URL"
   otherContentLicenceOpen:
     text: "Is the licence an open licence?"
-    help_text: "If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
     answers:
       a_false:
         text: no
@@ -722,8 +722,8 @@ questions:
     text_as_statement: "Statistical data is published"
     answers:
       statistical:
-        text: "expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>"
-        help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure."
+        text: "expose the structure of statistical hypercube data like <a href=\"http://sdmx.org/\">SDMX</a> or <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a>"
+        help_text: "Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href=\"http://sdmx.org/\">SDMX</a> and <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> are designed to express this underlying structure."
         text_as_statement: "in a statistical data format"
       tabular:
         text: "treat statistical data as a table like CSV"
@@ -742,7 +742,7 @@ questions:
     text_as_statement: "Geographic data is published"
     answers:
       specific:
-        text: "are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>"
+        text: "are designed for geographic data like <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> or <a href=\"http://www.geojson.org/\">GeoJSON</a>"
         help_text: "These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically."
         text_as_statement: "in a geographic data format"
       generic:
@@ -789,7 +789,7 @@ questions:
         text_as_statement: "resolve using a service"
       resolvable:
         text: "yes, the identifiers are URLs that resolve to give information"
-        help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data."
+        help_text: "URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href=\"http://opencorporates.com/companies/gb/08030289\">companies</a> and <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data."
         text_as_statement: "resolve because they are URLs"
   resolutionServiceURL:
     text: "Where is the service that is used to resolve the identifiers?"
