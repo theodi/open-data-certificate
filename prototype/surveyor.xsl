@@ -492,9 +492,8 @@
 	<xsl:for-each select="@*">
 		<xsl:value-of select="concat($indent, '  ')" />
 		<xsl:value-of select="name()" />
-		<xsl:text>: '</xsl:text>
-		<xsl:value-of select="." />
-		<xsl:text>'</xsl:text>
+		<xsl:text>: </xsl:text>
+		<xsl:value-of select="local:rubyQuotedText(.)" />
 		<xsl:if test="position() != last()">,</xsl:if>
 		<xsl:text>&#xA;</xsl:text>
 	</xsl:for-each>
@@ -532,15 +531,12 @@
 <xsl:template match="@*" mode="syntax">
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
-	<xsl:text> => '</xsl:text>
-	<xsl:value-of select="replace(., '''', '\\''')" />
-	<xsl:text>'</xsl:text>
+	<xsl:text> => </xsl:text>
+	<xsl:value-of select="local:rubyQuotedText(.)" />
 </xsl:template>
 
 <xsl:template match="@label" mode="syntax">
-	<xsl:text>'</xsl:text>
-	<xsl:value-of select="replace(., '''', '\\''')" />
-	<xsl:text>'</xsl:text>
+	<xsl:sequence select="local:rubyQuotedText(.)" />
 </xsl:template>
 
 <xsl:template match="@type" mode="syntax">
@@ -584,15 +580,18 @@
 <!-- TRANSLATION -->
 
 <xsl:template match="questionnaire" mode="translation">
-	<xsl:text>title: "</xsl:text>
-	<xsl:value-of select="@jurisdiction" />
-	<xsl:text>"&#xA;</xsl:text>
-	<xsl:text>full_title: "</xsl:text>
-	<xsl:value-of select="local:titleCase(key('countries', @jurisdiction, $countries))" />
-	<xsl:text>"&#xA;</xsl:text>
-	<xsl:text>description: "</xsl:text>
-	<xsl:apply-templates select="help/*" mode="html" />
-	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>title: </xsl:text>
+	<xsl:value-of select="local:yamlQuotedText(@jurisdiction)" />
+	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>full_title: </xsl:text>
+	<xsl:value-of select="local:yamlQuotedText(local:titleCase(key('countries', @jurisdiction, $countries)))" />
+	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>description: </xsl:text>
+	<xsl:variable name="description">
+		<xsl:apply-templates select="help/*" mode="html" />
+	</xsl:variable>
+	<xsl:value-of select="local:yamlQuotedText($description)" />
+	<xsl:text>&#xA;</xsl:text>
 	<xsl:text>survey_sections:&#xA;</xsl:text>
 	<xsl:apply-templates select="group" mode="translation" />
 	<xsl:text>questions:&#xA;</xsl:text>
@@ -616,9 +615,12 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    title: "</xsl:text>
-	<xsl:apply-templates select="label" mode="html" />
-	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>    title: </xsl:text>
+	<xsl:variable name="title">
+		<xsl:apply-templates select="label" mode="html" />
+	</xsl:variable>
+	<xsl:value-of select="local:yamlQuotedText($title)" />
+	<xsl:text>&#xA;</xsl:text>
 	<xsl:apply-templates select="help" mode="translation" />
 </xsl:template>
 
@@ -626,37 +628,40 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: "</xsl:text>
-	<xsl:apply-templates select="label" mode="html" />
-	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>    text: </xsl:text>
+	<xsl:variable name="text">
+		<xsl:apply-templates select="label" mode="html" />
+	</xsl:variable>
+	<xsl:value-of select="local:yamlQuotedText($text)" />
+	<xsl:text>&#xA;</xsl:text>
 	<xsl:if test="@display">
-		<xsl:text>    text_as_statement: "</xsl:text>
-		<xsl:value-of select="@display" />
-		<xsl:text>"&#xA;</xsl:text>
+		<xsl:text>    text_as_statement: </xsl:text>
+		<xsl:value-of select="local:yamlQuotedText(@display)" />
+		<xsl:text>&#xA;</xsl:text>
 	</xsl:if>
 	<xsl:apply-templates select="help" mode="translation" />
 	<xsl:text>    answers:&#xA;</xsl:text>
 	<xsl:choose>
 		<xsl:when test="input">
 			<xsl:text>      a_1:&#xA;</xsl:text>
-			<xsl:text>        text: "</xsl:text>
-			<xsl:value-of select="input/@placeholder" />
-			<xsl:text>"&#xA;</xsl:text>
+			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="local:yamlQuotedText(input/@placeholder)" />
+			<xsl:text>&#xA;</xsl:text>
 		</xsl:when>
 		<xsl:when test="yesno">
 			<xsl:text>      a_false:&#xA;</xsl:text>
 			<xsl:text>        text: no&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
-				<xsl:text>        text_as_statement: "</xsl:text>
-				<xsl:value-of select="yesno/@no" />
-				<xsl:text>"&#xA;</xsl:text>
+				<xsl:text>        text_as_statement: </xsl:text>
+				<xsl:value-of select="local:yamlQuotedText((yesno/@no, '')[1])" />
+				<xsl:text>&#xA;</xsl:text>
 			</xsl:if>
 			<xsl:text>      a_true:&#xA;</xsl:text>
 			<xsl:text>        text: yes&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
-				<xsl:text>        text_as_statement: "</xsl:text>
-				<xsl:value-of select="yesno/@yes" />
-				<xsl:text>"&#xA;</xsl:text>
+				<xsl:text>        text_as_statement: </xsl:text>
+				<xsl:value-of select="local:yamlQuotedText((yesno/@yes, '')[1])" />
+				<xsl:text>&#xA;</xsl:text>
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
@@ -664,25 +669,9 @@
 				<xsl:text>      </xsl:text>
 				<xsl:value-of select="local:token(@value)" />
 				<xsl:text>:&#xA;</xsl:text>
-				<xsl:text>        text: "</xsl:text>
-				<xsl:choose>
-					<xsl:when test="label">
-						<xsl:apply-templates select="label" mode="html" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="." />
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:text>"&#xA;</xsl:text>
-				<xsl:apply-templates select="help" mode="translation">
-					<xsl:with-param name="indent" select="'        '" />
-				</xsl:apply-templates>
-				<xsl:if test="ancestor::question/@display">
-					<xsl:text>        text_as_statement: "</xsl:text>
+				<xsl:text>        text: </xsl:text>
+				<xsl:variable name="text">
 					<xsl:choose>
-						<xsl:when test="@display">
-							<xsl:value-of select="@display" />
-						</xsl:when>
 						<xsl:when test="label">
 							<xsl:apply-templates select="label" mode="html" />
 						</xsl:when>
@@ -690,7 +679,29 @@
 							<xsl:value-of select="." />
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:text>"&#xA;</xsl:text>
+				</xsl:variable>
+				<xsl:value-of select="local:yamlQuotedText($text)" />
+				<xsl:text>&#xA;</xsl:text>
+				<xsl:apply-templates select="help" mode="translation">
+					<xsl:with-param name="indent" select="'        '" />
+				</xsl:apply-templates>
+				<xsl:if test="ancestor::question/@display">
+					<xsl:text>        text_as_statement: </xsl:text>
+					<xsl:variable name="text_as_statement">
+						<xsl:choose>
+							<xsl:when test="@display">
+								<xsl:value-of select="@display" />
+							</xsl:when>
+							<xsl:when test="label">
+								<xsl:apply-templates select="label" mode="html" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="." />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+					<xsl:value-of select="local:yamlQuotedText($text_as_statement)" />
+					<xsl:text>&#xA;</xsl:text>
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:otherwise>
@@ -701,17 +712,23 @@
 	<xsl:text>  </xsl:text>
 	<xsl:value-of select="local:requirementId(.)" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: "</xsl:text>
-	<xsl:apply-templates select="." mode="html" />
-	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>    text: </xsl:text>
+	<xsl:variable name="text">
+		<xsl:apply-templates select="." mode="html" />
+	</xsl:variable>
+	<xsl:value-of select="local:yamlQuotedText($text)" />
+	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="help" mode="translation">
 	<xsl:param name="indent" as="xs:string" select="'    '" />
 	<xsl:value-of select="$indent" />
-	<xsl:text>help_text: "</xsl:text>
-	<xsl:apply-templates select="." mode="html" />
-	<xsl:text>"&#xA;</xsl:text>
+	<xsl:text>help_text: </xsl:text>
+	<xsl:variable name="help_text">
+		<xsl:apply-templates select="." mode="html" />
+	</xsl:variable>
+	<xsl:value-of select="local:yamlQuotedText($help_text)" />
+	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="translation" />
@@ -738,6 +755,16 @@
 <xsl:function name="local:conditionId" as="xs:string">
 	<xsl:param name="condition" as="element(condition)" />
 	<xsl:number select="$condition" format="A" level="any" />
+</xsl:function>
+
+<xsl:function name="local:rubyQuotedText" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:sequence select="concat('''', replace($string, '''', '\\'''), '''')" />
+</xsl:function>
+
+<xsl:function name="local:yamlQuotedText" as="xs:string">
+	<xsl:param name="string" as="xs:string" />
+	<xsl:sequence select="concat('&quot;', replace($string, '&quot;', '\\&quot;'), '&quot;')" />
 </xsl:function>
 
 <xsl:function name="local:titleCase" as="xs:string">
