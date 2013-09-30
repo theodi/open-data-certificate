@@ -40,5 +40,5 @@ OpenDataCertificate::Application.configure do
   config.assets.debug = true
 
   # execute delayed jobs instantly
-  Delayed::Worker.delay_jobs = false
+  # Delayed::Worker.delay_jobs = false
 end
