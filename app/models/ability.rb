@@ -19,6 +19,7 @@ class Ability
     can :read, Dataset
 
     can :accept, Transfer do |transfer|
+      user &&
       (transfer.token == transfer.token_confirmation) &&
       (transfer.target_email == user.email)
     end
