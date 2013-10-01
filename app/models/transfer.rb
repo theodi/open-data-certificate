@@ -59,6 +59,6 @@ class Transfer < ActiveRecord::Base
     TransferMailer.notify(self).deliver
   end
 
-  handle_asynchronously :notify_target_user
+  #handle_asynchronously :notify_target_user
 
 end
