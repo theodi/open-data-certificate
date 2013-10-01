@@ -5,5 +5,5 @@
   
 
 = form_for @transfer, url: {action: :accept}  do |f|
-  = hidden_field_tag :token, params[:token]
+  = f.hidden_field :token_confirmation, value: params[:token]
   = f.submit t(".accept"), class: 'btn btn-primary'
