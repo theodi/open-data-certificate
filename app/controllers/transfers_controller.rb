@@ -19,6 +19,7 @@ class TransfersController < ApplicationController
 
   def claim
     @transfer = Transfer.find params[:id]
+    session[:sign_in_redirect] = request.original_fullpath unless user_signed_in? 
   end
 
   def accept
