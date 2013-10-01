@@ -37,7 +37,66 @@ class TransfersControllerTest < ActionController::TestCase
 
   test "should get claim" do
     transfer = FactoryGirl.create :transfer
+
     get :claim, id: transfer.id
     assert_response :success
   end
+
+  test "accept claim" do
+    sign_in user = FactoryGirl.create(:user)
+    transfer = FactoryGirl.create :notified_transfer, target_email: user.email
+
+    assert_difference ->{user.reload.datasets.count}, 1 do
+      put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+    end
+
+    assert_redirected_to '/users/dashboard'
+    assert_equal 'Transfer completed', flash[:notice]
+    assert transfer.reload.accepted?
+
+  end
+
+  test "accept claim fails without token confirmation" do
+    sign_in user = FactoryGirl.create(:user)
+    transfer = FactoryGirl.create :notified_transfer, target_email: user.email
+
+    put :accept, id: transfer.id
+
+    assert_equal 'Access Denied', flash[:error]
+    refute transfer.reload.accepted?
+  end
+
+  test "accept claim fails without matching user email" do
+    sign_in user = FactoryGirl.create(:user)
+    transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
+
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+
+    assert_equal 'Access Denied', flash[:error]
+    refute transfer.reload.accepted?
+  end
+
+
+  test "user can destroy a transfer they initiated" do
+    transfer = FactoryGirl.create :transfer
+    sign_in transfer.user
+
+    assert_difference 'Transfer.count', -1 do
+      put :destroy, id: transfer.id
+    end
+
+    assert flash[:error].nil?
+  end
+
+  test "user can't destroy a transfer they not initiated" do
+    transfer = FactoryGirl.create :transfer
+    sign_in FactoryGirl.create(:user)
+
+    assert_no_difference 'Transfer.count' do
+      put :destroy, id: transfer.id
+    end
+
+    assert_equal 'Access Denied', flash[:error]
+  end
+
 end
