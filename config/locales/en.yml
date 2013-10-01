@@ -267,6 +267,10 @@ en:
       help_text: "Note: only one collaborator can edit a certifcate at once"
       transferring: open transfer to %{email}
       cancel_transfer: '[cancel]'
+    claim:
+      title: Dataset Transfer
+      body: 'You have been offered to take control of "%{dataset_title}"'
+      accept: Accept Dataset
   transfer_mailer:
     notify:
       subject: Dataset Transfer
