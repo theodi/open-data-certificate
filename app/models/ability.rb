@@ -16,6 +16,13 @@ class Ability
         dataset.user == user
     end
 
+    can :accept, Transfer do |transfer|
+      (transfer.token == transfer.token_confirmation) &&
+      (transfer.target_email == user.email)
+    end
+
+    can :destroy, Transfer, user_id: user.id
+
     can :read, Dataset
 
   end

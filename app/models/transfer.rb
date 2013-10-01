@@ -1,10 +1,11 @@
 class Transfer < ActiveRecord::Base
   include AASM
 
-  attr_accessible :target_email, :dataset_id
+  attr_accessible :target_email, :dataset_id, :token_confirmation
 
   before_create :generate_token
   attr_readonly :token
+  attr_accessor :token_confirmation
 
   belongs_to :user
   belongs_to :target_user, class_name: 'User'
@@ -12,7 +13,6 @@ class Transfer < ActiveRecord::Base
 
   validates :target_email, presence: true
   validates_associated :user, :dataset
-  validate :target_user_matches_target_email
 
   aasm do
     state :new, initial: true
@@ -28,22 +28,12 @@ class Transfer < ActiveRecord::Base
     event :accept do
       transitions from: :notified, to: :accepted
     end
-
-
-    # state :cancelled
-
   end
 
   private
 
   def generate_token
     self.token = SecureRandom::hex(32)
-  end
-
-  def target_user_matches_target_email
-    if target_user && target_user.email != target_email
-      errors.base << "user does not match specified email address"
-    end
   end
 
   def transfer_dataset

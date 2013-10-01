@@ -23,20 +23,28 @@ class TransfersController < ApplicationController
 
   def accept
     @transfer = Transfer.find params[:id]
-    if params[:token] == @transfer.token
-      @transfer.target_user = current_user
-      @transfer.accept!
+    @transfer.assign_attributes params[:transfer]
+    @transfer.target_user = current_user
+
+    begin
+      authorize! :accept, @transfer
+      flash[:notice] = 'Transfer completed' if @transfer.accept!
+    rescue CanCan::AccessDenied
+      flash[:error] = 'Access Denied'
     end
+
     redirect_to dashboard_path
   end
 
   def destroy 
     @transfer = Transfer.find params[:id]
 
-    ## wrong
-    authorize! :manage, @transfer.dataset
-
-    @transfer.destroy
+    begin
+      authorize! :destroy, @transfer
+      @transfer.destroy
+    rescue CanCan::AccessDenied
+      flash[:error] = 'Access Denied'
+    end
 
     redirect_to dashboard_path
     
