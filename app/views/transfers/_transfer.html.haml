@@ -9,21 +9,19 @@
       %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
       %h3 
         .icon-cog
-        Editing settings
+        = t '.title'
     .modal-body
-      %p You can pass the editing rights to this certificate over to another collaborator
+      %p= t '.body'
       = form_for transfer, html:{class: 'form-transfer'} do |f|
         = f.hidden_field :dataset_id
         %label
-          Invite collaborator:
+          = t '.input_prompt'
           %div
-            = f.email_field :target_email, placeholder: 'email address', class: 'span3'
-
-        
-        = f.submit 'Send invite', class: 'btn btn-primary'
-        %span.help-inline Note: only one collaborator can edit a certifcate at once
+            = f.email_field :target_email, placeholder: t('.input_placeholder', rescue_format: :text), class: 'span3'
+        = f.submit t('.submit', rescue_format: :text), class: 'btn btn-primary'
+        %span.help-inline= t('.help_text')
         
 - else
   %small
-    open transfer to #{transfer.target_email}
-    = link_to "[cancel]", transfer, method: :delete
+    = t '.transferring', email: transfer.target_email
+    = link_to t('.cancel_transfer'), transfer, method: :delete

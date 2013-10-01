@@ -257,3 +257,14 @@ en:
         title: Expert requirements
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
         instruction: "To reach Expert level you should:"
+  transfers:
+    transfer: # The transfer dataset modal
+      title: Editing Settings
+      body: You can pass the editing rights to this certificate over to another collaborator
+      input_prompt: "Invite collaborator:"
+      input_placeholder: email address
+      submit: Send invite
+      help_text: "Note: only one collaborator can edit a certifcate at once"
+      transferring: open transfer to %{email}
+      cancel_transfer: '[cancel]'
+
