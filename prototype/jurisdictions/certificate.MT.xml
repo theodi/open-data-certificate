@@ -2,7 +2,7 @@
 	© 2013 Open Data Institute
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
-  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.8" status="alpha" jurisdiction="MT" xml:lang="en">
+  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="MT" xml:lang="en">
 	<help><p><strong>This has been generated based on a default for EU countries and needs to be localised for Malta. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
 		<p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p>
@@ -33,7 +33,7 @@
 				</radioset>
 				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
 				<if test="this.publisherRights() === 'no'">
-					<requirement>You must have the <strong>right to publish your data</strong>.</requirement>
+					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
 			</question>
 			<if test="this.publisherRights() === 'complicated'">
@@ -65,7 +65,7 @@
 						<question id="thirdPartyOpen" display="This data is created from">
 							<label>Are <em>all</em> sources of this data already published as open data?</label>
 							<yesno required="required" yes="open data sources"/>
-							<help>You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of your data is not like this then you'll need legal advice before you can publish it.</help>
+							<help>You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you'll need legal advice before you can publish it.</help>
 							<if test="this.thirdPartyOpen() === 'false'">
 								<requirement>You should get <strong>legal advice to make sure you have the right to publish this data</strong>.</requirement>
 							</if>
@@ -74,14 +74,14 @@
 					<question id="crowdsourced" display="Some of this data is">
 						<label>Was some of this data crowdsourced?</label>
 						<yesno required="required" yes="crowdsourced"/>
-						<help>If your data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.</help>
+						<help>If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.</help>
 						<if test="this.thirdPartyOrigin() === 'false'">
 							<requirement test="this.crowdsourced() === 'true'">You indicated that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowdsourced.</requirement>
 						</if>
 					</question>
 					<if test="this.crowdsourced() === 'true'">
 						<question id="crowdsourcedContent">
-							<label>Did contributors to your data use their judgement?</label>
+							<label>Did contributors to this data use their judgement?</label>
 							<yesno required="required"/>
 							<help>If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.</help>
 						</question>
@@ -105,53 +105,71 @@
 				<question id="sourceDocumentationUrl" display="The sources of this data are described at">
 					<label>Where do you describe sources of this data?</label>
 					<input type="url" placeholder="Data Sources Documentation URL"/>
-					<help>Give a URL that documents where your data was sourced from (its provenance) and the rights under which you publish the data. Do this even if the data wasn't originally created or gathered by you and even though you have the rights to publish it.</help>
-					<requirement level="pilot">You should document <strong>where your data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.</requirement>
+					<help>Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
+					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.</requirement>
 				</question>
 				<if test="this.sourceDocumentationUrl() !== ''">
 					<question id="sourceDocumentationMetadata" display="The curator has published">
 						<label>Is documentation about the sources of this data also in machine-readable format?</label>
 						<yesno yes="machine-readable data about the sources of this data"/>
 						<help>Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.</help>
-						<requirement level="standard">You should <strong>include machine-readable data about the sources of your data</strong>.</requirement>
+						<requirement level="standard">You should <strong>include machine-readable data about the sources of this data</strong>.</requirement>
 					</question>
 				</if>
 			</if>
 		</group>
 		<group id="licensing">
 			<label>Licensing</label>
-			<help>how you give people permission to use your data</help>
-			<question id="copyrightURL" display="Copyright and database rights are described at">
-				<label>Where do you describe copyright and database rights?</label>
+			<help>how you give people permission to use this data</help>
+			<question id="copyrightURL" display="The rights statement is at">
+				<label>Where have you published the rights statement for this dataset?</label>
 				<input type="url" placeholder="Rights Statement URL"/>
-				<help>Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.</help>
-				<requirement level="pilot">You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data.</requirement>
+				<help>Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data.</help>
+				<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.</requirement>
 			</question>
 			<if test="this.copyrightURL() !== ''">
 				<question id="copyrightStatementMetadata" display="The rights statement includes data about">
 					<label>Does your rights statement include machine-readable versions of</label>
-					<!-- these are properties from the CC licensing vocabulary at http://creativecommons.org/ns -->
+					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
 					<checkboxset>
-						<option value="license" display="the data licence">
-							<label>licences</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your copyright statement about licences</strong> which affect your data so automatic tools can use it.</requirement>
+						<option value="dataLicense" display="its data licence">
+							<label>data licence</label>
+							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the data licence</strong> for this data, so automatic tools can use it.</requirement>
 						</option>
-						<option value="attribution" display="what attribution to use">
-							<label>attribution</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your copyright statement about attribution</strong> of your data so automatic tools can use it.</requirement>
+						<option value="contentLicense" display="its content licence">
+							<label>content licence</label>
+							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the content licence</strong> for this data, so automatic tools can use it.</requirement>
+						</option>
+						<option value="attribution" display="what attribution text to use">
+							<label>attribution text</label>
+							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.</requirement>
 						</option>
 						<option value="attributionURL" display="what attribution link to give">
 							<label>attribution URL</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your copyright statement about the URL of your data</strong> that must be linked to, so automatic tools can use it.</requirement>
+							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it.</requirement>
 						</option>
-						<option value="morePermissions" display="other permissions for use">
-							<label>other permissions or alternative licences</label>
+						<option value="copyrightNotice" display="a copyright notice or statement">
+							<label>copyright notice or statement</label>
+							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.</requirement>
 						</option>
-						<option value="useGuidelines" display="guidelines for use">
-							<label>non-binding use guidelines</label>
+						<option value="copyrightYear" display="the copyright year">
+							<label>copyright year</label>
+							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it.</requirement>
+						</option>
+						<option value="copyrightHolder" display="the copyright holder">
+							<label>copyright holder</label>
+							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.</requirement>
+						</option>
+						<option value="databaseRightYear" display="the database right year">
+							<label>database right year</label>
+							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.</requirement>
+						</option>
+						<option value="copyrightHolder" display="the database right holder">
+							<label>database right holder</label>
+							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.</requirement>
 						</option>
 					</checkboxset>
-					<help more="http://labs.creativecommons.org/2011/ccrel-guide/">It's good practice to embed information about licences in machine-readable formats so people can automatically attribute your data back to you when they use it.</help>
+					<help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.</help>
 				</question>
 			</if>
 			<question id="dataLicence" display="This data is available under">
