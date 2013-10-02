@@ -259,19 +259,19 @@ en:
         instruction: "To reach Expert level you should:"
   transfers:
     transfer: # The transfer dataset modal
-      title: Editing Settings
-      body: You can pass the editing rights to this certificate over to another collaborator
-      input_prompt: "Invite collaborator:"
+      title: Pass to colleague
+      body: You can hand over this questionnaire to a colleague to complete.
+      input_prompt: "Pass to colleague:"
       input_placeholder: email address
       submit: Send invite
-      help_text: "Note: only one collaborator can edit a certifcate at once"
-      transferring: open transfer to %{email}
+      help_text: "Note: only one person can edit a questionnaire at a time."
+      transferring: handing over to %{email}
       cancel_transfer: '[cancel]'
     claim:
-      title: Dataset Transfer
-      body: 'You have been offered to take control of "%{dataset_title}"'
-      accept: Accept Dataset
+      title: Questionnaire Hand Over
+      body: 'You have been asked to take over editing the questionnaire for "%{dataset_title}".'
+      accept: Accept Hand Over
   transfer_mailer:
     notify:
-      subject: Dataset Transfer
-      message: You have been offered editing rights for a dataset - please visit %{url} to claim it
+      subject: Questionnaire Hand Over
+      message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
