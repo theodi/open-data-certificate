@@ -1,9 +1,9 @@
 - if transfer.new_record?
   - modal_dom_id = "transfer_dataset_#{transfer.dataset_id}"
   - email_dom_id = "#{modal_dom_id}_email"
-  =link_to "##{modal_dom_id}", 'data-toggle' => 'modal' do
+  =link_to "##{modal_dom_id}", 'data-toggle' => 'modal', 'class' => 'transfer' do
     .icon-cog
-    Editing Settings
+    = t '.title'
   .modal.fade{id: modal_dom_id}
     .modal-header
       %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
