@@ -98,8 +98,9 @@ $(document).ready(function(){
   $(".surveyor_language_selection").show();
   $(".surveyor_language_selection select#locale").change(function(){ this.form.submit(); });
 
-  var $form = $("#survey_form")
-  var csrfToken = $form.find("input[name='authenticity_token']")
+  var $form = $("#survey_form");
+  var $surveyor = $form.find('#surveyor');
+  var csrfToken = $form.find("input[name='authenticity_token']");
 
   var busy = false
   var template = _.template("repeater_field/:question_id/:response_index/:response_group")
@@ -129,176 +130,177 @@ $(document).ready(function(){
     return false;
   })
 
-  function updateField() {
-    var $field = $(this)
+  function updateField($field) {
     var $row = bindQuestionRow($field);
 
-    markAutocompleted($field, $form)
-    checkMetadataFields($field, $form)
-
-    // Save changes to this field
-    $row.addClass('loading');
+    $row.countToggleClass('loading', 1);
     saveFormElements($form, questionFields($field).add(csrfToken), function() {
-      $row.removeClass('loading');
-      validateField($field, $form, csrfToken)
-      checkMetadataFields($field, $form)
-    })
+      $row.countToggleClass('loading', -1);
+    });
+    validateField($field);
   }
 
   // Update radio, checkbox and select form fields on click
-  $form.on("change", "input[type!=text][type!=url], select", updateField);
-
-  // Updates text form after users finish typing
-  $form.on("keyup change", "input[type=text], input[type=url]", function() {
+  $form.on("change paste", "input, select, textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
 
-    var debouncedUpdate = $row.data('update-callback') || _.debounce(updateField, 700)
-    $row.data('update-callback', debouncedUpdate)
-
-    $row.addClass('loading');
-    debouncedUpdate.call($field);
+    clearTimeout($row.data('update-timeout'));
+    updateField($field);
   });
 
-  // Updates autocomplete override fields
-  $form.on("keyup change", ".autocomplete-override textarea", function() {
+  // Updates text form after users finish typing
+  $form.on("keyup", "input[type=text], input[type=url], input[type=email], textarea", function() {
     var $field = $(this);
-    var $row = bindQuestionRow($(this))
-    var $fields = $row.find("input, select")
+    var $row = bindQuestionRow($field);
 
-    var debouncedSave = $row.data('save-callback') || _.debounce(debouncedSave, 700)
-    $row.data('save-callback', debouncedSave)
-
-    markAutocompleted($fields, $form)
-    debouncedSave($form, questionFields($field).add(csrfToken))
-  })
+    clearTimeout($row.data('update-timeout'));
+    $row.data('update-timeout', setTimeout(function() {
+      updateField($field);
+    }, 700));
+  });
 
   function changeState($row, state) {
     $row.removeClass('no-response ok warning').addClass(state)
   }
 
-  function validateField($field, $form, csrfToken) {
-    // Cache row element on field
+  var validations = {
+    documentationUrl: function($row, $field) { return $row.data('reference-identifier') == 'documentationUrl'; },
+    url: function($row, $field) { return $field.attr('type') == 'url'; },
+    metadata: function($row, $field) { return $row.data('metadata-field') && $row.data('autocompleted-value') !== undefined; },
+    other: function($row, $field) { return true; }
+  };
+
+  var actions = {
+    documentationUrl: function($row, $field, callback) {
+      var url = $field.val();
+      if (empty(url)) return callback(true);
+      if (!validateUrl(url)) return callback(false);
+
+      var id = $surveyor.data('response-id');
+      $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
+        .done(function(json) {
+
+          // Mark questions which have selected radio buttons or checkboxes
+          $form.find('fieldset.question-row').each(function() {
+            var $row = $(this);
+            $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
+          })
+
+          // Fill in fields
+          var affectedFields = [];
+          if (json.data_exists) {
+            var field;
+            for (field in json.data) {
+              affectedFields.push(fillField(field, json.data[field]));
+            }
+          }
+          callback(true, {fields: toJquery(affectedFields)});
+        })
+        .error(function() { callback(false) });
+    },
+    url: function($row, $field, callback) {
+      var url = $field.val();
+      if (empty(url)) return callback(true);
+      if (!validateUrl(url)) return callback(false);
+
+      $.getJSON('/resolve', { url: url } ).done(function(json) {
+        callback(json.status == 200);
+      });
+    },
+    metadata: function($row, $field, callback) {
+      var question = $row.data('reference-identifier');
+      var autoValue = $row.data('autocompleted-value').toString();
+      var autoValues = autoValue.split(',').map(function(value) {
+        return answerIdentifier(question, value);
+      }).sort();
+
+      var selectedValues = $row.find('li:has(input:checked)').map(function() {
+        return $(this).data('reference-identifier');
+      }).get().sort();
+
+      var missingValues = selectedValues.filter(function(value) {
+        return autoValues.indexOf(value) === -1;
+      });
+
+      callback(missingValues.length == 0, {missingValues: missingValues});
+    },
+    other: function($row, $field, callback) { callback(true); }
+  };
+
+  var responses = {
+    documentationUrl: function($row, $field, success, data) {
+      if (success) {
+        data.fields.each(function() { validateField($(this)); });
+        saveFormElements($form, questionFields(data.fields).add(csrfToken));
+        $('#status_panel').trigger('update');
+      }
+      responses.url($row, $field, success);
+    },
+    url: function($row, $field, success) {
+      $row.data('url-verified', success);
+      if (!success) {
+        $row.find('.status-message span').text($surveyor.data('url-incorrect'));
+      }
+    },
+    metadata: function($row, $field, success, data) {
+      $row.find('.surveyor_check_boxes').removeClass('warning');
+      $row.data('metadata-missing', !success);
+
+      if (!success) {
+        var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
+        data.missingValues.map(function(value) {
+          $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning');
+        });
+      }
+    }
+  };
+
+  function validateField($field) {
     var $row = bindQuestionRow($field);
 
-    // Cancel any ajax callbacks
-    if ($field.data('cancel-callbacks')) $field.data('cancel-callbacks')()
+    var matched = false;
+    ['documentationUrl', 'url', 'metadata', 'other'].map(function(name) {
+      if (!matched && validations[name]($row, $field)) {
+        matched = true;
 
-    // Mark autocompleted initially
-    markAutocompleted($field, $form)
+        $row.countToggleClass('loading', 1);
 
-    if ($field.val() && $field.val().match(/[^\s]/)) {
+        if ($row.data('validate-callback')) $row.data('validate-callback').cancelled = true;
+        var status = {cancelled: false};
+        $row.data('validate-callback', status);
 
-      // Attempt to autocomplete fields
-      if ($row.data('reference-identifier') == 'documentationUrl') {
+        var callback = function(success, $data) {
+          $row.countToggleClass('loading', -1);
+          if (status.cancelled) return;
 
-        $row.addClass('loading');
+          changeState($row, success ? 'ok' : 'warning');
 
-        $field.data('cancel-callbacks', autocomplete($field.val(), {
-          beforeProcessing: function() {
-            // Mark questions which have selected radio buttons or checkboxes
-            $form.find('fieldset.question-row').each(function() {
-              var $row = $(this);
-              $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
-            })
-          },
-          success: function($fields) {
-            $row.removeClass('loading')
-            changeState($row, 'ok')
-
-            markAutocompleted($fields, $form)
-
-            // Run validation on each field
-            $fields.each(function() { validateField($(this), $form, csrfToken) })
-
-            // Save autocompleted fields
-            saveFormElements($form, questionFields($fields).add(csrfToken))
-
-            // Trigger status panel update
-            $('#status_panel').trigger('update');
-          },
-
-          fail: function() {
-            $row.removeClass('loading')
-            changeState($row, 'warning')
-
-            $row.find('.status-message span').text($form.find('#surveyor').data('url-incorrect'))
-
-            markAutocompleted($field, $form)
+          if (responses[name]) {
+            responses[name]($row, $field, success, $data || {});
           }
-        }))
-      }
 
-      // Attempt to verify URL
-      else if ($field.attr('type') == 'url') {
-        $row.addClass('loading');
-
-        $field.data('cancel-callbacks', verifyUrl($field.val(), {
-          success: function() {
-            $row.removeClass('loading');
-            changeState($row, 'ok')
-
-            markAutocompleted($field, $form)
-
-            if (!$row.data('autocompleted-value')) {
-              $row.find('.autocomplete-override').addClass('none')
-            }
-          },
-
-          fail: function() {
-            $row.removeClass('loading');
-            changeState($row, 'warning')
-
-            var message = $row.hasClass('autocompleted') ? 'autocompleted-url-incorrect' : 'url-incorrect'
-            $row.find('.status-message span').text($form.find('#surveyor').data(message))
-
-            markAutocompleted($field, $form)
-
-            if (!$row.data('autocompleted-value')) {
-              var override = $row.find('.autocomplete-override');
-              override.removeClass('none').find('p').text($form.find('#surveyor').data('url-explanation'))
-            }
+          // If the field can be autocompleted
+          if (checkAutocompletable($row)) {
+            markAutocompleted($row, checkAutocompleted($row));
           }
-        }))
-      }
+          // Otherwise remove all state if the field is empty
+          else if (empty($field.val())) {
+            changeState($row, '');
+          }
 
-      // Approve regular field
-      else {
-        changeState($row, 'ok')
-        markAutocompleted($field, $form)
-      }
-    }
+          updateExplanation($row);
+        };
 
-    // Show errors for missing mandatory fields
-    else {
-      changeState($row, 'no-response')
-      markAutocompleted($field, $form)
-    }
+        actions[name]($row, $field, callback);
+      }
+    });
   }
 
   function bindQuestionRow($field) {
     var $row = $field.data('question-row') || $field.closest('.question-row')
     $field.data('question-row', $row)
     return $row;
-  }
-
-  function verifyUrl(url, callbacks) {
-    if (!validateUrl(url)) return callbacks.fail();
-
-    $.getJSON('/resolve', { url: url } )
-      .done(function(json) {
-        if (json.status == 200) {
-          callbacks.success()
-        } else {
-          callbacks.fail()
-        }
-      })
-
-    // Function to clear callbacks if this request is superceeded
-    return function() {
-      callbacks.success = function() {}
-      callbacks.fail = function() {}
-    }
   }
 
   function validateUrl(url) {
@@ -313,88 +315,73 @@ $(document).ready(function(){
     return $question + '_' + $answer
   }
 
-  function markAutocompleted($fields, $form) {
-    $fields.filter('[type!=hidden]').each(function() {
-      var $field = $(this)
-      var $row = bindQuestionRow($(this))
-      var $input = $row.find('li.input')
-      var question = $row.data('reference-identifier');
-
-      var autocompleted = false
-
-      if ($row.data('autocompleted-value')) {
-        var autoValue = $row.data('autocompleted-value').toString()
-
-        if ($input.hasClass('string')) {
-          autocompleted = autoValue == $row.find('input.string').val()
-        }
-
-        if ($input.hasClass('select')) {
-          autocompleted = answerIdentifier($row.data('reference-identifier'), autoValue) == $row.find('option:selected').data('reference-identifier')
-        }
-
-        if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
-          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
-          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
-          var equalLength = selectedValues.length == autoValues.length
-          autocompleted = equalLength && autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0
-        }
-
-        $row.find('.autocomplete-override').toggleClass('none', autocompleted)
-          .find('p').text($form.find('#surveyor').data('autocomplete-explanation'))
-        $row.find('input[id$="_autocompleted"]').val(autocompleted)
-        $row.toggleClass('autocompleted', autocompleted)
-
-        if (autocompleted) {
-          changeState($row, 'ok')
-          $row.find('.status-message span').text($form.find('#surveyor').data('autocompleted'))
-        }
-        else {
-          // if ($field.val() && $field.val().match(/[^\s]/)) {
-            if (empty($row.find('.autocomplete-override textarea').val())) {
-              changeState($row, 'warning')
-              $row.find('.status-message span').text($form.find('#surveyor').data('autocomplete-override-warning'))
-            }
-            else {
-              changeState($row, 'ok')
-            }
-          // }
-          // else {
-          //   changeState($row, 'no-response')
-          // }
-        }
-      }
-    })
+  function checkAutocompletable($row) {
+    return $row.data('autocompleted-value') !== undefined;
   }
 
-  function checkMetadataFields($fields, $form) {
-    $fields.each(function() {
-      var $row = bindQuestionRow($(this))
-      var $input = $row.find('li.input')
-      var question = $row.data('reference-identifier');
+  function checkAutocompleted($row) {
+    if (!checkAutocompletable($row)) return false;
 
-      if ($row.data('metadata-field') && $row.data('autocompleted-value')) {
-        var autoValue = $row.data('autocompleted-value').toString()
+    var autoValue = $row.data('autocompleted-value').toString();
 
-        if ($input.hasClass('surveyor_check_boxes')) {
-          var autoValues = autoValue.split(',').map(function(value) { return answerIdentifier(question, value); }).sort()
-          var selectedValues = $row.find('li:has(input:checked)').map(function() { return $(this).data('reference-identifier'); }).get().sort()
+    var $inputs = $row.find('li.input');
+    var question = $row.data('reference-identifier');
 
-          var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
 
-          var missingValues = selectedValues.filter(function(value) { return autoValues.indexOf(value) === -1; })
-          if (missingValues.length) {
+    if ($inputs.hasClass('string')) {
+      return autoValue == $row.find('input.string').val();
+    }
 
-            changeState($row, 'warning')
-            $row.find('.status-message span').text($form.find('#surveyor').data('missing-metadata'))
+    if ($inputs.hasClass('select')) {
+      var identifier = $row.find('option:selected').data('reference-identifier');
+      return answerIdentifier($row.data('reference-identifier'), autoValue) == identifier;
+    }
 
-            missingValues.map(function(value) {
-              $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning')
-            })
-          }
-        }
-      }
-    })
+    if ($inputs.hasClass('surveyor_check_boxes') || $inputs.hasClass('surveyor_radio')) {
+      var autoValues = autoValue.split(',').map(function(value) {
+        return answerIdentifier(question, value);
+      }).sort();
+
+      var selectedValues = $row.find('li:has(input:checked)').map(function() {
+        return $(this).data('reference-identifier');
+      }).get().sort();
+
+      if (selectedValues.length != autoValues.length) return false;
+
+      return autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0;
+    }
+  }
+
+  function markAutocompleted($row, autocompleted) {
+    if (!checkAutocompletable($row)) return;
+
+    $row.find('input[id$="_autocompleted"]').val(autocompleted);
+    $row.toggleClass('autocompleted', autocompleted);
+    $row.data('autocompleted', autocompleted);
+
+    var message = autocompleted ? 'autocompleted' : 'autocomplete-override-warning';
+    if ($row.data('metadata-missing')) message = 'missing-metadata';
+    if ($row.data('url-verified') === false && autocompleted) message = 'autocompleted-url-incorrect';
+    $row.find('.status-message span').text($surveyor.data(message));
+  }
+
+  function updateExplanation($row) {
+    var explanationEmpty = empty($row.find('.autocomplete-override textarea').val());
+
+    var message = null;
+    if ($row.data('url-verified') === false) {
+      message = $surveyor.data('url-explanation');
+    }
+    if ($row.data('autocompleted') === false) {
+      message = $surveyor.data('autocomplete-explanation');
+    }
+
+    var override = $row.find('.autocomplete-override');
+    override.slide(message).find('p').text(message);
+
+    if (!$row.data('metadata-missing')) {
+      changeState($row, message && explanationEmpty ? 'warning' : 'ok');
+    }
   }
 
   function saveFormElements($form, $elements, callback) {
@@ -464,37 +451,5 @@ $(document).ready(function(){
   function checkMe($row, question, answer) {
     if ($row.hasClass('touched')) return
     return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true)
-  }
-
-  // Data Kitten autocompletion
-  function autocomplete(url, callbacks) {
-    if (!validateUrl(url)) return callbacks.fail();
-
-    var id = $('#surveyor').data('response-id')
-
-    $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
-      .error(callbacks.fail)
-      .done(function(json) {
-
-        callbacks.beforeProcessing();
-
-        var affectedFields = [];
-
-        if (json.data_exists) {
-          var field;
-          for (field in json.data) {
-            affectedFields.push(fillField(field, json.data[field]));
-          }
-        }
-
-        callbacks.success(toJquery(affectedFields));
-      })
-
-    // Function to clear callbacks if this request is superceeded
-    return function() {
-      callbacks.beforeProcessing = function() {}
-      callbacks.success = function() {}
-      callbacks.fail = function() {}
-    }
   }
 })
