@@ -6,6 +6,16 @@
 // Javascript UI for surveyor
 $(document).ready(function(){
 
+  $.fn.slide = function(state) {
+    return this.animate({height: state ? 'show' : 'hide'});
+  };
+
+  $.fn.countToggleClass = function(className, increment) {
+    var key = 'count-toggle-'+className
+    this.data(key, (this.data(key) || 0) + (increment || 1));
+    return this.toggleClass(className, this.data(key) > 0);
+  };
+
   _.templateSettings = {
     interpolate: /:(\w+)/g
   };
