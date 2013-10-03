@@ -63,29 +63,11 @@ $(document).ready(function(){
   function successfulSave(responseText) {
     // surveyor_controller returns a json object to show/hide elements
     // e.g. {"hide":["question_12","question_13"],"show":["question_14"]}
-    $.each(responseText.show, function(){ showElement(this) });
-    $.each(responseText.hide, function(){ hideElement(this) });
+    $.each(responseText.show, function(id) { $('#'+id).removeClass("g_hidden q_hidden"); });
+    $.each(responseText.hide, function(id) { $('#'+id).addClass("g_hidden q_hidden"); });
 
     $(document).trigger('surveyor-update', responseText);
     return false;
-  }
-
-  function showElement(id){
-    group = id.match('^g_') ? true : false;
-    if (group) {
-      $('#' + id).removeClass("g_hidden");
-    } else {
-      $('#' + id).removeClass("q_hidden");
-    }
-  }
-
-  function hideElement(id){
-    group = id.match('^g_') ? true : false;
-    if (group) {
-      $('#' + id).addClass("g_hidden");
-    } else {
-      $('#' + id).addClass("q_hidden");
-    }
   }
 
   // is_exclusive checkboxes should disble sibling checkboxes
