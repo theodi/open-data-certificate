@@ -63,8 +63,8 @@ $(document).ready(function(){
   function successfulSave(responseText) {
     // surveyor_controller returns a json object to show/hide elements
     // e.g. {"hide":["question_12","question_13"],"show":["question_14"]}
-    $.each(responseText.show, function(id) { $('#'+id).removeClass("g_hidden q_hidden"); });
-    $.each(responseText.hide, function(id) { $('#'+id).addClass("g_hidden q_hidden"); });
+    $.each(responseText.show, function(key, id) { $('#'+id).removeClass("g_hidden q_hidden"); });
+    $.each(responseText.hide, function(key, id) { $('#'+id).addClass("g_hidden q_hidden"); });
 
     $(document).trigger('surveyor-update', responseText);
     return false;
