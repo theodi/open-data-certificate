@@ -18,8 +18,8 @@ OpenDataCertificate::Application.routes.draw do
     end
 
   end
-  post 'surveys', :to => 'application#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
-  get 'start_certificate', :to => 'application#start_questionnaire', :as => 'authenticated_start_questionnaire'
+  post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
+  get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
 
   resources :datasets do
     put 'start_questionnaire'
@@ -70,16 +70,16 @@ OpenDataCertificate::Application.routes.draw do
   get 'resolve' => 'validators#resolve'
   get 'autofill' => 'validators#autofill'
 
-  get 'has_js' => 'application#has_js'
+  get 'has_js' => 'main#has_js'
 
   # temporary measure - until #397 is resolved
-  get 'clear_cache' => 'application#clear_cache', :via => :post
+  get 'clear_cache' => 'main#clear_cache', :via => :post
 
   # (public) stats about the application
-  get 'status' => 'application#status'
-  get 'status/response_sets' => 'application#status_response_sets'
+  get 'status' => 'main#status'
+  get 'status/response_sets' => 'main#status_response_sets'
 
-  root :to => 'application#home'
+  root :to => 'main#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
