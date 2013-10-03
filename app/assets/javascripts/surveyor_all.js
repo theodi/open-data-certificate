@@ -5,36 +5,6 @@
 
 // Javascript UI for surveyor
 $(document).ready(function(){
-  // if(jQuery.browser.msie){
-  //  // IE has trouble with the change event for form radio/checkbox elements - bind click instead
-  //  jQuery("form#survey_form input[type=radio], form#survey_form [type=checkbox]").bind("click", function(){
-  //    jQuery(this).parents("form").ajaxSubmit({dataType: 'json', success: successfulSave});
-  //  });
-  //  // IE fires the change event for all other (not radio/checkbox) elements of the form
-  //  jQuery("form#survey_form *").not("input[type=radio], input[type=checkbox]").bind("change", function(){
-  //    jQuery(this).parents("form").ajaxSubmit({dataType: 'json', success: successfulSave});
-  //  });
-  // }else{
-  //  // Other browsers just use the change event on the form
-
-  //
-  // Uncomment the following to use the jQuery Tools Datepicker (http://jquerytools.org/demos/dateinput/index.html)
-  // instead of the default jQuery UI Datepicker (http://jqueryui.com/demos/datepicker/)
-  //
-  // For a date input, i.e. using dateinput from jQuery tools, the value is not updated
-  // before the onChange or change event is fired, so we hang this in before the update is
-  // sent to the server and set the correct value from the dateinput object.
-  // jQuery('li.date input').change(function(){
-  //     if ( $(this).data('dateinput') ) {
-  //         var date_obj = $(this).data('dateinput').getValue();
-  //         this.value = date_obj.getFullYear() + "-" + (date_obj.getMonth()+1) + "-" +
-  //             date_obj.getDate() + " 00:00:00 UTC";
-  //     }
-  // });
-  //
-  // $('li input.date').dateinput({
-  //     format: 'dd mmm yyyy'
-  // });
 
   _.templateSettings = {
     interpolate: /:(\w+)/g
