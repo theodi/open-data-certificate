@@ -18,6 +18,13 @@ GIT
       rest-client
 
 GIT
+  remote: git://github.com/theodi/juvia_rails.git
+  revision: 1f8891fa7d45546767ce08e16c6775ed00ae9ba3
+  specs:
+    juvia_rails (0.0.1)
+      rails (~> 3.2.1)
+
+GIT
   remote: git://github.com/theodi/odlifier.git
   revision: 00bc05b1935cbc8c5fe56339904b3abdd50a2d98
   specs:
@@ -374,6 +381,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jquery-rails
+  juvia_rails!
   kaminari
   less-rails
   less-rails-bootstrap (~> 2.3.3)
