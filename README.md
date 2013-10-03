@@ -128,6 +128,24 @@ rake surveyor:build_changed_surveys DIR=surveys/development
 bundle exec guard
 ```
 
+#### Environment variables
+
+Some environment variables are required for the certificates site, these can be set in a .env file in the root of the project.
+
+```
+# Rackspace credentials for saving certificate dumps
+RACKSPACE_USERNAME
+RACKSPACE_API_KEY
+RACKSPACE_CERTIFICATE_DUMP_CONTAINER
+
+# Juvia details to allow commenting
+JUVIA_SERVER_URL
+JUVIA_SITE_KEY
+
+# Sending error reports to airbrake
+AIRBRAKE_CERTIFICATE_KEY
+```
+
 #### Changing surveys
 
 To change surveys, you'll need Saxon installed. On a Mac, this is as simple as running:
