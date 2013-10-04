@@ -14,6 +14,8 @@ class MainController < ApplicationController
       'datasets'     => ResponseSet.counts
     }
 
+    @head_commit = `git rev-parse HEAD`
+
     respond_to do |format|
       format.html { render '/home/status' }
       format.csv {
