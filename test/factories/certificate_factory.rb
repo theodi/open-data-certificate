@@ -28,6 +28,12 @@ FactoryGirl.define do
       factory :published_expert_certificate_with_dataset do
         attained_level "expert"
       end
+
+      factory :published_certificate_with_removed_dataset do
+        after(:create) do |certificate, evaluator|
+          certificate.dataset.update_attribute('removed', true)
+        end
+      end
     end
   end
 
