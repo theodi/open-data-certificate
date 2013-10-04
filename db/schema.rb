@@ -68,11 +68,10 @@ ActiveRecord::Schema.define(:version => 20130925153832) do
   create_table "datasets", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "documentation_url"
     t.string   "curator"
-    t.boolean  "removed",           :default => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
