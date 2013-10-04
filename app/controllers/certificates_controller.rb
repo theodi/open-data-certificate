@@ -68,7 +68,7 @@ class CertificatesController < ApplicationController
   def embed
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
-      format.html { render layout: 'embedded_certificate' }
+      format.html { render :show, layout: 'embedded_certificate' }
     end
   end
 

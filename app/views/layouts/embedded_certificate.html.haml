@@ -7,4 +7,5 @@
     = csrf_meta_tags
   %body{:class => body_class}
     #embedded-certificate
-      = yield
+      .container
+        = yield
