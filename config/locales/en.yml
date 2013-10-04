@@ -268,7 +268,7 @@ en:
       transferring: handing over to %{email}
       cancel_transfer: '[cancel]'
     claim:
-      title: Questionnaire Hand Over
+      title: Questionnaire hand over
       body: 'You have been asked to take over editing the questionnaire for "%{dataset_title}".'
       accept: Accept Hand Over
     flashes:
@@ -278,5 +278,5 @@ en:
       access_denied: Access Denied
   transfer_mailer:
     notify:
-      subject: Questionnaire Hand Over
+      subject: Questionnaire hand over
       message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
