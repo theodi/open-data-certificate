@@ -1,5 +1,18 @@
 - content_for :header_title do
-	#{link_to t('datasets.datasets'), datasets_path} / #{@dataset.title}
+  #{link_to t('datasets.datasets'), datasets_path} / #{@dataset.title}
+
+- if current_user.try(:admin?)
+  = form_for @dataset, html: {class: 'admin-functions'} do |f|
+    - if @dataset.removed
+      %i.icon-flag.icon-large
+      This dataset has been removed
+    - else
+      %i.icon-ok.icon-large
+      This dataset is visible
+
+    = f.hidden_field :removed, value: !@dataset.removed
+    =submit_tag "toggle", class: 'btn'
+
 
 %hr.heavy
 = render partial: 'dataset_min', object: @dataset, locals: {expanded: true}

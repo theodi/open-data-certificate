@@ -159,6 +159,16 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /page=1/, doc.css('link[rel="first"]').first[:href]
     assert_match /page=2/, doc.css('link[rel="next"]').first[:href]
   end
+
+  test "removed datasets are not shown in index" do
+    FactoryGirl.create(:published_certificate_with_removed_dataset)
+    FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index
+
+    assert_equal 1, assigns(:datasets).size
+
+  end
   
   
 end
