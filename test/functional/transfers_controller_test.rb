@@ -52,7 +52,7 @@ class TransfersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to '/users/dashboard'
-    assert_equal 'Transfer completed', flash[:notice]
+    assert_equal I18n.t('transfers.flashes.complete'), flash[:notice]
     assert transfer.reload.accepted?
 
   end
@@ -63,7 +63,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     put :accept, id: transfer.id
 
-    assert_equal 'Access Denied', flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
     refute transfer.reload.accepted?
   end
 
@@ -73,7 +73,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
 
-    assert_equal 'Access Denied', flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
     refute transfer.reload.accepted?
   end
 
@@ -97,7 +97,7 @@ class TransfersControllerTest < ActionController::TestCase
       put :destroy, id: transfer.id
     end
 
-    assert_equal 'Access Denied', flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
   end
 
 end

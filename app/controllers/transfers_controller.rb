@@ -1,3 +1,4 @@
+
 class TransfersController < ApplicationController
 
   def create
@@ -8,9 +9,9 @@ class TransfersController < ApplicationController
 
     if @transfer.save
       @transfer.notify!
-      flash[:notice] = 'Transfer created'
+      flash[:notice] = t('transfers.flashes.created')
     else
-      flash[:error] = "Unable to create transfer #{@transfer.errors.full_messages.join ', '}"
+      flash[:error] = t('transfers.flashes.unable_to_create', errors: @transfer.errors.full_messages.join(', '))
     end
 
     redirect_to dashboard_path
@@ -29,9 +30,9 @@ class TransfersController < ApplicationController
 
     begin
       authorize! :accept, @transfer
-      flash[:notice] = 'Transfer completed' if @transfer.accept!
+      flash[:notice] = t('transfers.flashes.complete') if @transfer.accept!
     rescue CanCan::AccessDenied
-      flash[:error] = 'Access Denied'
+      flash[:error] = t('transfers.flashes.access_denied')
     end
 
     redirect_to dashboard_path

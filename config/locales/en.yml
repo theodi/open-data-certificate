@@ -271,6 +271,11 @@ en:
       title: Questionnaire Hand Over
       body: 'You have been asked to take over editing the questionnaire for "%{dataset_title}".'
       accept: Accept Hand Over
+    flashes:
+      created: Transfer created
+      unable_to_create: 'Unable to create transfer: %{errors}'
+      complete: Transfer completed
+      access_denied: Access Denied
   transfer_mailer:
     notify:
       subject: Questionnaire Hand Over
