@@ -8,6 +8,7 @@
     %title ODI Open Data Certificate
     = favicon_link_tag       "favicon.ico"
     = stylesheet_link_tag    "application", :media => "all"
+    = begin airbrake_javascript_notifier rescue '' end
     = javascript_include_tag "application"
     = alternate_auto_discovery_link_tags
     = csrf_meta_tags
