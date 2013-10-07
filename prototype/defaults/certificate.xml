@@ -42,7 +42,7 @@
 				<question id="rightsRiskAssessment" display="Risks in using this data are described at">
 					<label>Where do you detail the risks people might encounter if they use this data?</label>
 					<input type="url" placeholder="Risk Documentation URL"/>
-					<help>It can be risky for people to use data without a clear legal right to do so. Give a URL for a page that describes the risk of using this data.</help>
+					<help>It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.</help>
 					<requirement level="pilot">You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.</requirement>
 				</question>
 			</if>
