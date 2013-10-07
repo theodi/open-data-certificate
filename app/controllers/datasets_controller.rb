@@ -8,6 +8,7 @@ class DatasetsController < ApplicationController
   def index
 
     @datasets = Dataset
+                .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
                 .order('response_sets.attained_index DESC')
@@ -106,4 +107,18 @@ class DatasetsController < ApplicationController
       format.feed { render :layout => false }
     end
   end
+
+  # currently only used by an admin to remove an item from the public view
+  def update
+    authorize! :manage, @dataset
+    @dataset.update_attribute :removed, params[:dataset][:removed]
+    redirect_to @dataset
+  end
+
+  def admin
+    authorize! :manage, @datasets
+    @datasets = Dataset.where(removed: true).page params[:page]
+    @title = "Admin - **removed** datasets"
+  end
+
 end

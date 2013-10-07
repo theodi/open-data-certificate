@@ -16,6 +16,10 @@ class Ability
         dataset.user == user
     end
 
+    if user.try(:admin?)
+      can :manage, :all
+    end
+
     can :read, Dataset
 
     can :accept, Transfer do |transfer|
