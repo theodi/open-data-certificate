@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def comment_link topic
+    content = '<i class="icon-comment"></i> comment'
+    link_to content.html_safe, comment_path(topic: topic), class: 'btn'
+  end
+
   # temporarily switch to a new locale
   def scope_locale locale
     locale, I18n.locale = I18n.locale, locale || I18n.locale
