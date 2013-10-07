@@ -6,6 +6,10 @@ class MainController < ApplicationController
     end
   end
 
+  def comment
+    @topic = params[:topic]
+  end
+
   def status
     @job_count = Delayed::Job.count
     

@@ -70,6 +70,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'resolve' => 'validators#resolve'
   get 'autofill' => 'validators#autofill'
 
+  get 'comment' => 'main#comment', as: :comment
   get 'has_js' => 'main#has_js'
 
   # temporary measure - until #397 is resolved
