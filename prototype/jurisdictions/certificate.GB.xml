@@ -216,10 +216,18 @@
 					</option>
 				</radioset>
 			</question>
-			<if test="this.contentRights() !== 'mixedrights'">
+			<if test="this.contentRights() === 'norights'">
+				<question id="explicitWaiver" display="The content has been">
+					<label>Is the content of the data marked as public domain?</label>
+					<yesno yes="marked as public domain" />
+					<help>Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.</help>
+					<requirement level="standard">You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.</requirement>
+				</question>
+			</if>
+			<if test="this.contentRights() === 'samerights'">
 				<question id="contentLicence" display="The content is available under">
 					<label>Under which licence can others reuse content?</label>
-					<select>
+					<select required="required">
 						<option/>
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
@@ -229,12 +237,6 @@
 						<option value="other" display="">Other...</option>
 					</select>
 					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'.</help>
-					<if test="this.contentRights() === 'samerights'">
-						<requirement test="this.contentLicence() !== ''">You must <strong>license the content of the data</strong> so that it can be reused.</requirement>
-					</if>
-					<if test="this.contentRights() === 'norights'">
-						<requirement test="this.contentLicence() !== ''" level="standard">You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it.</requirement>
-					</if>
 				</question>
 				<if test="this.contentLicence() === 'na'">
 					<question id="contentNotApplicable" display="The content in this data is not licensed because">

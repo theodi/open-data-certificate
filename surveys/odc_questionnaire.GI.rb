@@ -446,15 +446,35 @@ survey 'GI',
       :text_as_statement => '',
       :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
 
+    q_explicitWaiver 'Is the content of the data marked as public domain?',
+      :display_on_certificate => true,
+      :text_as_statement => 'The content has been',
+      :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
+      :pick => :one
+    dependency :rule => 'A'
+    condition_A :q_contentRights, '==', :a_norights
+    a_false 'no',
+      :text_as_statement => ''
+    a_true 'yes',
+      :text_as_statement => 'marked as public domain',
+      :requirement => ['standard_3']
+
+    label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_3'
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_norights
+    condition_B :q_explicitWaiver, '==', :a_false
+
     q_contentLicence 'Under which licence can others reuse content?',
       :display_on_certificate => true,
       :text_as_statement => 'The content is available under',
       :help_text => 'Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it\'s expired, or you\'ve waived them, choose \'Not applicable\'.',
-      :requirement => ['basic_8', 'standard_3'],
       :pick => :one,
+      :required => :required,
       :display_type => 'dropdown'
     dependency :rule => 'A'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     a_cc_by 'Creative Commons Attribution',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
@@ -466,29 +486,13 @@ survey 'GI',
     a_other 'Other...',
       :text_as_statement => ''
 
-    label_basic_8 'You must <strong>license the content of the data</strong> so that it can be reused.',
-      :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_8'
-    dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '!=', :a_mixedrights
-    condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', {:string_value => '', :answer_reference => '1'}
-
-    label_standard_3 'You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_3'
-    dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '!=', :a_mixedrights
-    condition_B :q_contentRights, '==', :a_norights
-    condition_C :q_contentLicence, '==', {:string_value => '', :answer_reference => '1'}
-
     q_contentNotApplicable 'Why doesn\'t a licence apply to the content of the data?',
       :display_on_certificate => true,
       :text_as_statement => 'The content in this data is not licensed because',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     a_norights 'there is no copyright in the content of this data',
       :text_as_statement => 'there is no copyright',
@@ -508,7 +512,7 @@ survey 'GI',
       :required => :required,
       :display_type => 'dropdown'
     dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     condition_C :q_contentNotApplicable, '==', :a_waived
     a_cc0 'Creative Commons CCZero',
@@ -522,7 +526,7 @@ survey 'GI',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
       :required => :required
     dependency :rule => 'A and B and C and D'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     condition_C :q_contentNotApplicable, '==', :a_waived
     condition_D :q_contentWaiver, '==', :a_other
@@ -538,7 +542,7 @@ survey 'GI',
       :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
       :required => :required
     dependency :rule => 'A and B'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
@@ -551,7 +555,7 @@ survey 'GI',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
     dependency :rule => 'A and B'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
       :string,
@@ -565,17 +569,17 @@ survey 'GI',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
-      :requirement => ['basic_9']
+      :requirement => ['basic_8']
 
-    label_basic_9 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
+    label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_9'
+      :requirement => 'basic_8'
     dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '!=', :a_mixedrights
+    condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     condition_C :q_otherContentLicenceOpen, '==', :a_false
 
@@ -1395,11 +1399,11 @@ survey 'GI',
       :string,
       :input_type => :url,
       :placeholder => 'Dataset URL',
-      :requirement => ['basic_10', 'pilot_13']
+      :requirement => ['basic_9', 'pilot_13']
 
-    label_basic_10 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
+    label_basic_9 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_10'
+      :requirement => 'basic_9'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -1414,7 +1418,7 @@ survey 'GI',
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_versionManagement 'How do you publish a series of the same dataset?',
-      :requirement => ['basic_11'],
+      :requirement => ['basic_10'],
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
@@ -1449,9 +1453,9 @@ survey 'GI',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_list
 
-    label_basic_11 'You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.',
+    label_basic_10 'You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_11'
+      :requirement => 'basic_10'
     dependency :rule => 'A and (B and C and D and E)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -1511,11 +1515,11 @@ survey 'GI',
       :string,
       :input_type => :url,
       :placeholder => 'Endpoint URL',
-      :requirement => ['basic_12', 'standard_27']
+      :requirement => ['basic_11', 'standard_27']
 
-    label_basic_12 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
+    label_basic_11 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_12'
+      :requirement => 'basic_11'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
