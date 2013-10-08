@@ -16,15 +16,13 @@ class MainController < ApplicationController
 
     @head_commit = `git rev-parse HEAD`
 
-    respond_to do |format|
-      format.html { render '/home/status' }
-      format.csv {
-        csv = Rackspace.fetch_cache("statistics.csv")
-        render text: csv, content_type: "text/csv" 
-      }
-    end
+    render '/home/status'
   end
 
+  def status_csv
+    csv = Rackspace.fetch_cache("statistics.csv")
+    render text: csv, content_type: "text/csv"
+  end
 
   def status_response_sets
     @response_sets = ResponseSet.all.map do |m|
