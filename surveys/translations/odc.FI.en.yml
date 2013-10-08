@@ -1067,9 +1067,9 @@ questions:
       modified:
         text: "modification date"
         text_as_statement: "modification date"
-      license:
-        text: "licence"
-        text_as_statement: "licence"
+      rights:
+        text: "rights statement"
+        text_as_statement: "rights statement"
       accessURL:
         text: "URL to access the data"
         help_text: "This metadata should be used when your data isn't available as a download, like an API for example."
@@ -1443,7 +1443,7 @@ labels:
   standard_51:
     text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
   standard_52:
-    text: "You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution."
+    text: "You should <strong>include a link to the applicable rights statement</strong> so people can find out what they can do with a data distribution."
   pilot_22:
     text: "You should <strong>provide technical documentation for the data</strong> so that people understand how to use it."
   standard_53:

@@ -2131,8 +2131,8 @@ survey 'LA',
     a_modified 'modification date',
       :text_as_statement => 'modification date',
       :requirement => ['standard_51']
-    a_license 'licence',
-      :text_as_statement => 'licence',
+    a_rights 'rights statement',
+      :text_as_statement => 'rights statement',
       :requirement => ['standard_52']
     a_accessURL 'URL to access the data',
       :text_as_statement => 'a URL to access the data',
@@ -2176,13 +2176,13 @@ survey 'LA',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_modified
 
-    label_standard_52 'You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution.',
+    label_standard_52 'You should <strong>include a link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_52'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
-    condition_C :q_distributionMetadata, '!=', :a_license
+    condition_C :q_distributionMetadata, '!=', :a_rights
 
     q_technicalDocumentation 'Where is the technical documentation for the data?',
       :display_on_certificate => true,

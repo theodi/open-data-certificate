@@ -737,9 +737,9 @@
 								<label>modification date</label>
 								<requirement level="standard">You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.</requirement>
 							</option>
-							<option value="license">
-								<label>licence</label>
-								<requirement level="standard">You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution.</requirement>
+							<option value="rights">
+								<label>rights statement</label>
+								<requirement level="standard">You should <strong>include a link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.</requirement>
 							</option>
 							<option value="accessURL" display="a URL to access the data">
 								<label>URL to access the data</label>
