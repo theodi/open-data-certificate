@@ -2184,23 +2184,20 @@ survey 'VA',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_license
 
-    q_serviceDocumentation 'Where is the documentation for the API?',
+    q_technicalDocumentation 'Where is the technical documentation for the data?',
       :display_on_certificate => true,
-      :text_as_statement => 'The data API service is documented at'
-    dependency :rule => 'A'
-    condition_A :q_releaseType, '==', :a_service
-    a_1 'Service Documentation URL',
+      :text_as_statement => 'The technical documentation for the data is at'
+    a_1 'Technical Documentation URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Service Documentation URL',
+      :placeholder => 'Technical Documentation URL',
       :requirement => ['pilot_20']
 
-    label_pilot_20 'You should <strong>document how your API works</strong> so that people understand how to use it.',
+    label_pilot_20 'You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_20'
-    dependency :rule => 'A and B'
-    condition_A :q_releaseType, '==', :a_service
-    condition_B :q_serviceDocumentation, '==', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A'
+    condition_A :q_technicalDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
     q_vocabulary 'Do the data formats use vocabularies or schemas?',
       :help_text => 'Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains.',

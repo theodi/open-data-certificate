@@ -758,13 +758,11 @@
 					</question>
 				</if>
 			</if>
-			<if test="this.releaseType() === 'service'">
-				<question id="serviceDocumentation" display="The data API service is documented at">
-					<label>Where is the documentation for the API?</label>
-					<input type="url" placeholder="Service Documentation URL"/>
-					<requirement level="pilot">You should <strong>document how your API works</strong> so that people understand how to use it.</requirement>
-				</question>
-			</if>
+			<question id="technicalDocumentation" display="The technical documentation for the data is at">
+				<label>Where is the technical documentation for the data?</label>
+				<input type="url" placeholder="Technical Documentation URL"/>
+				<requirement level="pilot">You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.</requirement>
+			</question>
 			<question id="vocabulary">
 				<label>Do the data formats use vocabularies or schemas?</label>
 				<yesno required="standard"/>

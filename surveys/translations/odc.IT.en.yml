@@ -1083,12 +1083,12 @@ questions:
       mediaType:
         text: "type of download media"
         text_as_statement: "type of download media"
-  serviceDocumentation:
-    text: "Where is the documentation for the API?"
-    text_as_statement: "The data API service is documented at"
+  technicalDocumentation:
+    text: "Where is the technical documentation for the data?"
+    text_as_statement: "The technical documentation for the data is at"
     answers:
       a_1:
-        text: "Service Documentation URL"
+        text: "Technical Documentation URL"
   vocabulary:
     text: "Do the data formats use vocabularies or schemas?"
     help_text: "Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains."
@@ -1445,7 +1445,7 @@ labels:
   standard_52:
     text: "You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution."
   pilot_22:
-    text: "You should <strong>document how your API works</strong> so that people understand how to use it."
+    text: "You should <strong>provide technical documentation for the data</strong> so that people understand how to use it."
   standard_53:
     text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
   standard_54:
