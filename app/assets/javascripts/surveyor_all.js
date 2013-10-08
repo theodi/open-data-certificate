@@ -6,12 +6,15 @@
 // Javascript UI for surveyor
 $(document).ready(function(){
 
+  // A reimplementation of slideToggle which accepts a boolean parameter
   $.fn.slide = function(state) {
     return this.animate({height: state ? 'show' : 'hide'});
   };
 
+  // A toggle class which tracks an integer value
+  // Allows a loading icon to be toggled by multiple events
   $.fn.countToggleClass = function(className, increment) {
-    var key = 'count-toggle-'+className
+    var key = 'count-toggle-'+className;
     this.data(key, (this.data(key) || 0) + (increment || 1));
     return this.toggleClass(className, this.data(key) > 0);
   };
