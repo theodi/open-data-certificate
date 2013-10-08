@@ -267,6 +267,17 @@ questions:
         text: "yes, and the rights are held by different people or organisations"
         help_text: "In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too."
         text_as_statement: ""
+  explicitWaiver:
+    text: "Is the content of the data marked as public domain?"
+    text_as_statement: "The content has been"
+    help_text: "Content can be marked as public domain using the <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused."
+    answers:
+      a_false:
+        text: no
+        text_as_statement: ""
+      a_true:
+        text: yes
+        text_as_statement: "marked as public domain"
   contentLicence:
     text: "Under which licence can others reuse content?"
     text_as_statement: "The content is available under"
@@ -1218,11 +1229,9 @@ labels:
     text: "You should <strong>publish a rights statement</strong> that details copyright, licensing and how people should give attribution to the data."
   basic_7:
     text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
-  basic_8:
-    text: "You must <strong>license the content of the data</strong> so that it can be reused."
   standard_3:
-    text: "You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it."
-  basic_9:
+    text: "You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it."
+  basic_8:
     text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
   standard_4:
     text: "You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it."
@@ -1304,7 +1313,7 @@ labels:
   exemplar_10:
     text: "You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data."
 # Technical Information Requirements
-  basic_10:
+  basic_9:
     text: "You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it."
   pilot_13:
     text: "You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily."
@@ -1314,9 +1323,9 @@ labels:
     text: "You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically."
   standard_26:
     text: "You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all."
-  basic_11:
+  basic_10:
     text: "You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
-  basic_12:
+  basic_11:
     text: "You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it."
   standard_27:
     text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
