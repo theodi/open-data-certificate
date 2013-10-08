@@ -4,8 +4,7 @@
     - responses = response_set.responses_for_questions questions
     - if responses.any?
       %hr.heavy
-      - if section.title != 'General'
-        %h3= section.title
+      %h3= section.title
       %ul
         - responses.each do |response|
           - response_text = response.statement_text
