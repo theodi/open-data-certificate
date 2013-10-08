@@ -2104,91 +2104,91 @@ survey 'DE',
     a_distribution 'distribution(s)',
       :text_as_statement => 'distribution(s)'
 
-    label_standard_35 'You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.',
+    label_standard_35 'You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_35'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_title
 
-    label_standard_36 'You should <strong>include a data description in your documentation</strong> so that people know what it contains.',
+    label_standard_36 'You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_36'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_description
 
-    label_standard_37 'You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.',
+    label_standard_37 'You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_37'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_issued
 
-    label_standard_38 'You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data.',
+    label_standard_38 'You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_38'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_modified
 
-    label_standard_39 'You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it.',
+    label_standard_39 'You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_39'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_accrualPeriodicity
 
-    label_standard_40 'You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently.',
+    label_standard_40 'You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_40'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_identifier
 
-    label_standard_41 'You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently.',
+    label_standard_41 'You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_41'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_landingPage
 
-    label_standard_42 'You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it.',
+    label_standard_42 'You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_42'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_language
 
-    label_standard_43 'You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data.',
+    label_standard_43 'You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_43'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_publisher
 
-    label_standard_44 'You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to.',
+    label_standard_44 'You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_44'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_spatial
 
-    label_standard_45 'You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to.',
+    label_standard_45 'You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_45'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_temporal
 
-    label_standard_46 'You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about.',
+    label_standard_46 'You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_46'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_theme
 
-    label_standard_47 'You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively.',
+    label_standard_47 'You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_47'
     dependency :rule => 'A and B'
@@ -2227,7 +2227,7 @@ survey 'DE',
     a_mediaType 'type of download media',
       :text_as_statement => 'type of download media'
 
-    label_standard_48 'You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.',
+    label_standard_48 'You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_48'
     dependency :rule => 'A and B and C'
@@ -2235,7 +2235,7 @@ survey 'DE',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_title
 
-    label_standard_49 'You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.',
+    label_standard_49 'You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_49'
     dependency :rule => 'A and B and C'
@@ -2243,7 +2243,7 @@ survey 'DE',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_description
 
-    label_standard_50 'You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.',
+    label_standard_50 'You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_50'
     dependency :rule => 'A and B and C'
@@ -2251,7 +2251,7 @@ survey 'DE',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_issued
 
-    label_standard_51 'You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.',
+    label_standard_51 'You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_51'
     dependency :rule => 'A and B and C'
@@ -2259,7 +2259,7 @@ survey 'DE',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_modified
 
-    label_standard_52 'You should <strong>include a link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.',
+    label_standard_52 'You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_52'
     dependency :rule => 'A and B and C'

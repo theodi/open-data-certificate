@@ -1372,41 +1372,41 @@ labels:
     text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
   standard_35:
-    text: "You should <strong>include a data title in your documentation</strong> so that people know how to refer to it."
+    text: "You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it."
   standard_36:
-    text: "You should <strong>include a data description in your documentation</strong> so that people know what it contains."
+    text: "You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains."
   standard_37:
-    text: "You should <strong>include a data release date in your documentation</strong> so that people know how timely it is."
+    text: "You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is."
   standard_38:
-    text: "You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data."
+    text: "You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data."
   standard_39:
-    text: "You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it."
+    text: "You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it."
   standard_40:
-    text: "You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently."
+    text: "You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently."
   standard_41:
-    text: "You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently."
+    text: "You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently."
   standard_42:
-    text: "You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it."
+    text: "You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it."
   standard_43:
-    text: "You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data."
+    text: "You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data."
   standard_44:
-    text: "You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to."
+    text: "You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to."
   standard_45:
-    text: "You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to."
+    text: "You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to."
   standard_46:
-    text: "You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about."
+    text: "You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about."
   standard_47:
-    text: "You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively."
+    text: "You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively."
   standard_48:
-    text: "You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution."
+    text: "You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution."
   standard_49:
-    text: "You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains."
+    text: "You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains."
   standard_50:
-    text: "You should <strong>include release dates within your documentation</strong> so people know how current each distribution is."
+    text: "You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is."
   standard_51:
-    text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
+    text: "You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
   standard_52:
-    text: "You should <strong>include a link to the applicable rights statement</strong> so people can find out what they can do with a data distribution."
+    text: "You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution."
   pilot_20:
     text: "You should <strong>provide technical documentation for the data</strong> so that people understand how to use it."
   standard_53:
