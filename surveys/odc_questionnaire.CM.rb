@@ -899,7 +899,7 @@ survey 'CM',
     condition_A :q_linkedTo, '==', :a_false
 
     q_listed 'Is your data listed within a collection?',
-      :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public or health for example, or when it turns up in relevant search results.',
+      :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -2385,6 +2385,8 @@ survey 'CM',
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
     q_engagementTeam 'Do you have anyone who actively builds a community around this data?',
+      :help_text => 'A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data.',
+      :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
     a_false 'no'
     a_true 'yes',
