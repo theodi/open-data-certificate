@@ -54,6 +54,10 @@ class Question < ActiveRecord::Base
     @triggered_q ||= dependency.nil? || dep_map[dependency.id]
   end
 
+  def required?
+    is_mandatory || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+  end
+
   private
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in

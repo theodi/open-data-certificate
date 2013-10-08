@@ -17,9 +17,9 @@ $(function(){
 
     if($target.size()){
       // create a div to show the message in
-      $('<div>',{class:'alert alert-box alert-alert'})
-      .append($('<h3>',{text:message}))
-      .appendTo($target);
+      $('<div>', {'class':'alert alert-box alert-alert'})
+        .append($('<h3>',{text:message}))
+        .appendTo($target);
     } else {
       alert(message);
     }
