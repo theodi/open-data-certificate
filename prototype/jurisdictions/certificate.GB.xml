@@ -230,10 +230,10 @@
 					</select>
 					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'.</help>
 					<if test="this.contentRights() === 'samerights'">
-						<requirement>You must <strong>license the content of the data</strong> so that it can be reused.</requirement>
+						<requirement test="this.contentLicence() !== ''">You must <strong>license the content of the data</strong> so that it can be reused.</requirement>
 					</if>
 					<if test="this.contentRights() === 'norights'">
-						<requirement level="standard">You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it.</requirement>
+						<requirement test="this.contentLicence() !== ''" level="standard">You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it.</requirement>
 					</if>
 				</question>
 				<if test="this.contentLicence() === 'na'">

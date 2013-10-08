@@ -76,7 +76,7 @@ questions:
   rightsRiskAssessment:
     text: "Where do you detail the risks people might encounter if they use this data?"
     text_as_statement: "Risks in using this data are described at"
-    help_text: "It can be risky for people to use data without a clear legal right to do so. Give a URL for a page that describes the risk of using this data."
+    help_text: "It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data."
     answers:
       a_1:
         text: "Risk Documentation URL"
@@ -169,33 +169,108 @@ questions:
     answers:
       a_1:
         text: "Rights Statement URL"
-  copyrightStatementMetadata:
-    text: "Does your rights statement include machine-readable versions of"
-    text_as_statement: "The rights statement includes data about"
-    help_text: "It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it."
-    answers:
-      license:
-        text: "licence"
-        text_as_statement: "its licence"
-      attribution:
-        text: "attribution text"
-        text_as_statement: "what attribution text to use"
-      attributionURL:
-        text: "attribution URL"
-        text_as_statement: "what attribution link to give"
-      copyrightNotice:
-        text: "copyright notice or statement"
-        text_as_statement: "a copyright notice or statement"
-      copyrightYear:
-        text: "copyright year"
-        text_as_statement: "the copyright year"
-      copyrightHolder:
-        text: "copyright holder"
-        text_as_statement: "the copyright holder"
-  contentLicence:
+  dataLicence:
     text: "Under which licence can people reuse this data?"
     text_as_statement: "This data is available under"
-    help_text: "Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the data, it's expired, or you've waived them, choose 'Not applicable'."
+    help_text: "Remember that whoever spends intellectual effort creating content automatically gets rights over it. Creative content includes the organisation and selection of items within data, but does not include facts. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the data, it's expired, or you've waived them, choose 'Not applicable'."
+    answers:
+      odc_by:
+        text: "Open Data Commons Attribution License"
+        text_as_statement: "Open Data Commons Attribution License"
+      odc_odbl:
+        text: "Open Data Commons Open Database License (ODbL)"
+        text_as_statement: "Open Data Commons Open Database License (ODbL)"
+      odc_pddl:
+        text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+        text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+      cc_zero:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
+      na:
+        text: "Not applicable"
+        text_as_statement: ""
+      other:
+        text: "Other..."
+        text_as_statement: ""
+  dataNotApplicable:
+    text: "Why doesn't a licence apply to this data?"
+    text_as_statement: "This data is not licensed because"
+    answers:
+      norights:
+        text: "there is no copyright in this data"
+        help_text: "Copyright only applies to data if you spent intellectual effort creating what's in it, for example, by writing text that's within the data, or deciding whether particular data is included. There's no copyright if the data only contains facts where no judgements were made about whether to include them or not."
+        text_as_statement: "there is no copyright in it"
+      expired:
+        text: "copyright has expired"
+        help_text: "Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired."
+        text_as_statement: "copyright has expired"
+      waived:
+        text: "copyright has been waived"
+        help_text: "This means no one owns copyright and anyone can do whatever they want with this data."
+        text_as_statement: ""
+  dataWaiver:
+    text: "Which waiver do you use to waive copyright in the data?"
+    text_as_statement: "Rights in the data have been waived with"
+    help_text: "You need a statement to show people copyright has been waived, so they understand that they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice."
+    answers:
+      pddl:
+        text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+        text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+      cc0:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
+      other:
+        text: "Other..."
+        text_as_statement: ""
+  dataOtherWaiver:
+    text: "Where is the waiver for the copyright in the data?"
+    text_as_statement: "Rights in the data have been waived with"
+    help_text: "Give a URL to your own publicly available waiver so people can check that it does waive copyright in the data."
+    answers:
+      a_1:
+        text: "Waiver URL"
+  otherDataLicenceName:
+    text: "What is the name of the licence?"
+    text_as_statement: "This data is available under"
+    help_text: "If you use a different licence, we need the name so people can see it on your Open Data Certificate."
+    answers:
+      a_1:
+        text: "Other Licence Name"
+  otherDataLicenceURL:
+    text: "Where is the licence?"
+    text_as_statement: "This licence is at"
+    help_text: "Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available."
+    answers:
+      a_1:
+        text: "Other Licence URL"
+  otherDataLicenceOpen:
+    text: "Is the licence an open licence?"
+    help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
+  contentRights:
+    text: "Is there any copyright in the content of this data?"
+    text_as_statement: "There are"
+    answers:
+      norights:
+        text: "no, the data only contains facts and numbers"
+        help_text: "There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content."
+        text_as_statement: "no rights in the content of the data"
+      samerights:
+        text: "yes, and the rights are all held by the same person or organisation"
+        help_text: "Choose this option if the content in the data was all created by or transferred to the same person or organisation."
+        text_as_statement: ""
+      mixedrights:
+        text: "yes, and the rights are held by different people or organisations"
+        help_text: "In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too."
+        text_as_statement: ""
+  contentLicence:
+    text: "Under which licence can others reuse content?"
+    text_as_statement: "The content is available under"
+    help_text: "Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'."
     answers:
       cc_by:
         text: "Creative Commons Attribution"
@@ -213,12 +288,12 @@ questions:
         text: "Other..."
         text_as_statement: ""
   contentNotApplicable:
-    text: "Why doesn't a licence apply to this data?"
+    text: "Why doesn't a licence apply to the content of the data?"
     text_as_statement: "The content in this data is not licensed because"
     answers:
       norights:
-        text: "there is no copyright in this data"
-        help_text: "Copyright only applies to data if you spent intellectual effort creating what's in it, for example, by writing text that's within the data, or deciding whether particular data is included. There's no copyright if the data only contains facts where no judgements were made about whether to include them or not."
+        text: "there is no copyright in the content of this data"
+        help_text: "Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that's within the data. There's no copyright if the content only contains facts."
         text_as_statement: "there is no copyright"
       expired:
         text: "copyright has expired"
@@ -268,6 +343,39 @@ questions:
         text: no
       a_true:
         text: yes
+  contentRightsURL:
+    text: "Where are the rights and licensing of the content explained?"
+    text_as_statement: "The rights and licensing of the content are explained at"
+    help_text: "Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data."
+    answers:
+      a_1:
+        text: "Content Rights Description URL"
+  copyrightStatementMetadata:
+    text: "Does your rights statement include machine-readable versions of"
+    text_as_statement: "The rights statement includes data about"
+    help_text: "It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it."
+    answers:
+      dataLicense:
+        text: "data licence"
+        text_as_statement: "its data licence"
+      contentLicense:
+        text: "content licence"
+        text_as_statement: "its content licence"
+      attribution:
+        text: "attribution text"
+        text_as_statement: "what attribution text to use"
+      attributionURL:
+        text: "attribution URL"
+        text_as_statement: "what attribution link to give"
+      copyrightNotice:
+        text: "copyright notice or statement"
+        text_as_statement: "a copyright notice or statement"
+      copyrightYear:
+        text: "copyright year"
+        text_as_statement: "the copyright year"
+      copyrightHolder:
+        text: "copyright holder"
+        text_as_statement: "the copyright holder"
   dataPersonal:
     text: "Can individuals be identified from this data?"
     text_as_statement: "This data contains"
@@ -1108,11 +1216,21 @@ labels:
     text: "You should <strong>include machine-readable data about the sources of this data</strong>."
   pilot_4:
     text: "You should <strong>publish a rights statement</strong> that details copyright, licensing and how people should give attribution to the data."
+  basic_7:
+    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
+  basic_8:
+    text: "You must <strong>license the content of the data</strong> so that it can be reused."
   standard_3:
-    text: "You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it."
+    text: "You should <strong>license the content of the data</strong> with an open licence, so reusers know they can do anything with it."
+  basic_9:
+    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
   standard_4:
-    text: "You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it."
+    text: "You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it."
   standard_5:
+    text: "You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it."
+  standard_6:
+    text: "You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it."
+  standard_7:
     text: "You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it."
   exemplar_1:
     text: "You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it."
@@ -1120,91 +1238,89 @@ labels:
     text: "You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it."
   exemplar_3:
     text: "You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it."
-  basic_7:
-    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
-  standard_6:
+  standard_8:
     text: "You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
   pilot_5:
     text: "You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>."
-  standard_7:
+  standard_9:
     text: "You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure."
   pilot_6:
     text: "You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals."
-  standard_8:
-    text: "You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data."
-  standard_9:
-    text: "You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly."
   standard_10:
+    text: "You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data."
+  standard_11:
+    text: "You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly."
+  standard_12:
     text: "You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data."
 # Practical Information Requirements
-  standard_11:
-    text: "You should <strong>ensure that people can easily find your data</strong> from the home page of the site it's published on."
-  standard_12:
-    text: "You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data."
   standard_13:
+    text: "You should <strong>ensure that people can easily find your data</strong> from the home page of the site it's published on."
+  standard_14:
+    text: "You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data."
+  standard_15:
     text: "You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context."
   pilot_7:
     text: "You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire."
-  standard_14:
+  standard_16:
     text: "You should <strong>publish updates to time-sensitive data</strong> so that it does not go stale."
   exemplar_4:
     text: "You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate."
   pilot_8:
     text: "You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate."
-  standard_15:
+  standard_17:
     text: "You should <strong>create a new dataset release every week</strong> so people keep their copies up-to-date and accurate."
   exemplar_5:
     text: "You should <strong>create a new dataset release every day</strong> so people keep their copies up-to-date and accurate."
   pilot_9:
     text: "You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate."
-  standard_16:
+  standard_18:
     text: "You should <strong>have a short delay between when you create and publish a dataset</strong> that is less than half the gap between releases so people keep their copies up-to-date and accurate."
   exemplar_6:
     text: "You should <strong>have minimal or no delay between when you create and publish a dataset</strong> so people keep their copies up-to-date and accurate."
-  standard_17:
+  standard_19:
     text: "You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data."
   pilot_10:
     text: "You should <strong>create a new database dump every month</strong> so that people have the latest data."
-  standard_18:
+  standard_20:
     text: "You should <strong>create a new database dump within a week of any change</strong> so that people have less time to wait for the latest data."
   exemplar_7:
     text: "You should <strong>create a new database dump within a day of any change</strong> so that people find it easier to get the latest data."
-  standard_19:
+  standard_21:
     text: "You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy."
-  standard_20:
+  standard_22:
     text: "You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data."
   exemplar_8:
     text: "You should <strong>document your quality control process</strong> so that people can decide how much to trust your data."
   pilot_11:
     text: "You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data."
-  standard_21:
+  standard_23:
     text: "You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data."
   exemplar_9:
     text: "You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data."
   pilot_12:
     text: "You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data."
-  standard_22:
+  standard_24:
     text: "You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data."
   exemplar_10:
     text: "You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data."
 # Technical Information Requirements
-  basic_8:
+  basic_10:
     text: "You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it."
   pilot_13:
     text: "You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily."
-  standard_23:
+  standard_25:
     text: "You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily."
   pilot_14:
     text: "You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically."
-  standard_24:
-    text: "You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all."
-  basic_9:
-    text: "You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
-  basic_10:
-    text: "You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it."
-  standard_25:
-    text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
   standard_26:
+    text: "You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all."
+  basic_11:
+    text: "You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
+  basic_12:
+    text: "You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it."
+  standard_27:
+    text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
+  standard_28:
     text: "You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it."
   exemplar_11:
     text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
@@ -1212,15 +1328,15 @@ labels:
     text: "You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all"
   pilot_15:
     text: "You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process."
-  standard_27:
+  standard_29:
     text: "You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily."
-  standard_28:
+  standard_30:
     text: "You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles."
   pilot_16:
     text: "You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process."
   exemplar_13:
     text: "You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse."
-  standard_29:
+  standard_31:
     text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
   pilot_17:
     text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
@@ -1230,13 +1346,13 @@ labels:
     text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
   pilot_19:
     text: "You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process."
-  standard_30:
+  standard_32:
     text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
-  standard_31:
+  standard_33:
     text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
   exemplar_15:
     text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
-  standard_32:
+  standard_34:
     text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
   exemplar_16:
     text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
@@ -1245,47 +1361,47 @@ labels:
   exemplar_18:
     text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
-  standard_33:
-    text: "You should <strong>include a data title in your documentation</strong> so that people know how to refer to it."
-  standard_34:
-    text: "You should <strong>include a data description in your documentation</strong> so that people know what it contains."
   standard_35:
-    text: "You should <strong>include a data release date in your documentation</strong> so that people know how timely it is."
+    text: "You should <strong>include a data title in your documentation</strong> so that people know how to refer to it."
   standard_36:
-    text: "You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data."
+    text: "You should <strong>include a data description in your documentation</strong> so that people know what it contains."
   standard_37:
-    text: "You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it."
+    text: "You should <strong>include a data release date in your documentation</strong> so that people know how timely it is."
   standard_38:
-    text: "You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently."
+    text: "You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data."
   standard_39:
-    text: "You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently."
+    text: "You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it."
   standard_40:
-    text: "You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it."
+    text: "You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently."
   standard_41:
-    text: "You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data."
+    text: "You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently."
   standard_42:
-    text: "You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to."
+    text: "You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it."
   standard_43:
-    text: "You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to."
+    text: "You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data."
   standard_44:
-    text: "You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about."
+    text: "You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to."
   standard_45:
-    text: "You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively."
+    text: "You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to."
   standard_46:
-    text: "You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution."
+    text: "You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about."
   standard_47:
-    text: "You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains."
+    text: "You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively."
   standard_48:
-    text: "You should <strong>include release dates within your documentation</strong> so people know how current each distribution is."
+    text: "You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution."
   standard_49:
-    text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
+    text: "You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains."
   standard_50:
+    text: "You should <strong>include release dates within your documentation</strong> so people know how current each distribution is."
+  standard_51:
+    text: "You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
+  standard_52:
     text: "You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution."
   pilot_20:
     text: "You should <strong>document how your API works</strong> so that people understand how to use it."
-  standard_51:
+  standard_53:
     text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
-  standard_52:
+  standard_54:
     text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
   pilot_21:
     text: "You should <strong>provide an email address for people to send questions</strong> about your data to."
@@ -1293,13 +1409,13 @@ labels:
     text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
   pilot_23:
     text: "You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details."
-  standard_53:
-    text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
-  standard_54:
-    text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
   standard_55:
-    text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
+    text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
   standard_56:
+    text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
+  standard_57:
+    text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
+  standard_58:
     text: "You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date."
   exemplar_19:
     text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
