@@ -347,9 +347,9 @@
 						<label>no, the data is not about people or their activities</label>
 						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
 					</option>
-					<option value="summarised" display="aggregated data">
-						<label>no, the data has been aggregated so individuals can't be identified</label>
-						<help>Statistical analysis can aggregate data so that individuals are no longer be identifiable.</help>
+					<option value="summarised" display="summarised data">
+						<label>no, the data has been summarised so individuals can't be identified</label>
+						<help>Statistical analysis can aggregate data so that individuals are no longer be identifiable. These summaries should go through statistical disclosure controls to ensure individuals can't be identified.</help>
 					</option>
 					<option value="individual" display="information that could identify individuals">
 						<label>yes, there is a risk that individuals be identified, for example by third parties with access to extra information</label>
@@ -358,10 +358,10 @@
 				</radioset>
 			</question>
 			<if test="this.dataPersonal() === 'summarised'">
-				<question id="statisticalAnonAudited" display="The anonymisation process has been">
-					<label>Has your anonymisation process been independently audited?</label>
+				<question id="statisticalAnonAudited" display="The statistical disclosure controls have been">
+					<label>Have your statistical disclosure controls been independently audited?</label>
 					<yesno yes="independently audited" />
-					<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
+					<requirement level="standard">You should <strong>have your statistical disclosure controls audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
 				</question>
 			</if>
 			<if test="this.dataPersonal() === 'individual'">

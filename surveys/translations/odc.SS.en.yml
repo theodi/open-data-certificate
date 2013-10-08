@@ -396,16 +396,16 @@ questions:
         help_text: "Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person."
         text_as_statement: "no data about individuals"
       summarised:
-        text: "no, the data has been aggregated so individuals can't be identified"
-        help_text: "Statistical analysis can aggregate data so that individuals are no longer be identifiable."
-        text_as_statement: "aggregated data"
+        text: "no, the data has been summarised so individuals can't be identified"
+        help_text: "Statistical analysis can aggregate data so that individuals are no longer be identifiable. These summaries should go through statistical disclosure controls to ensure individuals can't be identified."
+        text_as_statement: "summarised data"
       individual:
         text: "yes, there is a risk that individuals be identified, for example by third parties with access to extra information"
         help_text: "Some data is legitimately about individuals like civil service pay or public expenses for example."
         text_as_statement: "information that could identify individuals"
   statisticalAnonAudited:
-    text: "Has your anonymisation process been independently audited?"
-    text_as_statement: "The anonymisation process has been"
+    text: "Have your statistical disclosure controls been independently audited?"
+    text_as_statement: "The statistical disclosure controls have been"
     answers:
       a_false:
         text: no
@@ -1249,7 +1249,7 @@ labels:
   exemplar_3:
     text: "You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it."
   standard_8:
-    text: "You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
+    text: "You should <strong>have your statistical disclosure controls audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
   pilot_5:
     text: "You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>."
   standard_9:

@@ -687,16 +687,16 @@ survey 'NC',
     a_not_personal 'no, the data is not about people or their activities',
       :text_as_statement => 'no data about individuals',
       :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
-    a_summarised 'no, the data has been aggregated so individuals can\'t be identified',
-      :text_as_statement => 'aggregated data',
-      :help_text => 'Statistical analysis can aggregate data so that individuals are no longer be identifiable.'
+    a_summarised 'no, the data has been summarised so individuals can\'t be identified',
+      :text_as_statement => 'summarised data',
+      :help_text => 'Statistical analysis can aggregate data so that individuals are no longer be identifiable. These summaries should go through statistical disclosure controls to ensure individuals can\'t be identified.'
     a_individual 'yes, there is a risk that individuals be identified, for example by third parties with access to extra information',
       :text_as_statement => 'information that could identify individuals',
       :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
 
-    q_statisticalAnonAudited 'Has your anonymisation process been independently audited?',
+    q_statisticalAnonAudited 'Have your statistical disclosure controls been independently audited?',
       :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation process has been',
+      :text_as_statement => 'The statistical disclosure controls have been',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
@@ -706,7 +706,7 @@ survey 'NC',
       :text_as_statement => 'independently audited',
       :requirement => ['standard_8']
 
-    label_standard_8 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
+    label_standard_8 'You should <strong>have your statistical disclosure controls audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_8'
     dependency :rule => 'A and B'
