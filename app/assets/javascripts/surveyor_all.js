@@ -252,7 +252,7 @@ $(document).ready(function(){
 
       if (!success) {
         var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
-        data.missingValues.map(function(value) {
+        data.missingValues.each(function(value) {
           $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning');
         });
       }
@@ -263,7 +263,7 @@ $(document).ready(function(){
     var $row = bindQuestionRow($field);
 
     var matched = false;
-    ['documentationUrl', 'url', 'metadata', 'other'].map(function(name) {
+    ['documentationUrl', 'url', 'metadata', 'other'].each(function(name) {
       if (!matched && validations[name]($row, $field)) {
         matched = true;
 
