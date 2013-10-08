@@ -1087,25 +1087,25 @@ questions:
     answers:
       a_1:
         text: "Codelist Documentation URL"
-  contactEmail:
-    text: "Who should people email with questions about this data?"
-    text_as_statement: "Send questions about this data to"
-    help_text: "Give an email address that people can send questions about the data to."
+  contactUrl:
+    text: "Where can people find out how to contact someone with questions about this data?"
+    text_as_statement: "Find out how to contact someone about this data at"
+    help_text: "Give a URL for a page that describes how people can contact someone if they have questions about the data."
     answers:
       a_1:
-        text: "Contact Email Address"
+        text: "Contact Documentation"
   improvementsContact:
     text: "Where can people find out how to improve the way your data is published?"
     text_as_statement: "Find out how to suggest improvements to publication at"
     answers:
       a_1:
         text: "Improvement Suggestions URL"
-  dataProtectionEmail:
-    text: "Who should people email with questions about privacy?"
-    text_as_statement: "Send questions about privacy to"
+  dataProtectionUrl:
+    text: "Where can people find out how to contact someone with questions about privacy?"
+    text_as_statement: "Find out where to send questions about privacy at"
     answers:
       a_1:
-        text: "Confidentiality Contact Email Address"
+        text: "Confidentiality Contact Documentation"
   socialMedia:
     text: "Do you use social media to connect with people who use your data?"
     answers:
@@ -1414,11 +1414,11 @@ labels:
   standard_54:
     text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
   pilot_21:
-    text: "You should <strong>provide an email address for people to send questions</strong> about your data to."
+    text: "You should <strong>provide contact information for people to send questions</strong> about your data to."
   pilot_22:
     text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
   pilot_23:
-    text: "You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details."
+    text: "You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to."
   standard_55:
     text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
   standard_56:

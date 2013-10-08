@@ -2253,21 +2253,21 @@ survey 'DO',
       :help_text => 'how you communicate with people who use your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_contactEmail 'Who should people email with questions about this data?',
+    q_contactUrl 'Where can people find out how to contact someone with questions about this data?',
       :display_on_certificate => true,
-      :text_as_statement => 'Send questions about this data to',
-      :help_text => 'Give an email address that people can send questions about the data to.'
-    a_1 'Contact Email Address',
+      :text_as_statement => 'Find out how to contact someone about this data at',
+      :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
+    a_1 'Contact Documentation',
       :string,
-      :input_type => :email,
-      :placeholder => 'Contact Email Address',
+      :input_type => :url,
+      :placeholder => 'Contact Documentation',
       :requirement => ['pilot_21']
 
-    label_pilot_21 'You should <strong>provide an email address for people to send questions</strong> about your data to.',
+    label_pilot_21 'You should <strong>provide contact information for people to send questions</strong> about your data to.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_21'
     dependency :rule => 'A'
-    condition_A :q_contactEmail, '==', {:string_value => '', :answer_reference => '1'}
+    condition_A :q_contactUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_improvementsContact 'Where can people find out how to improve the way your data is published?',
       :display_on_certificate => true,
@@ -2284,20 +2284,20 @@ survey 'DO',
     dependency :rule => 'A'
     condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataProtectionEmail 'Who should people email with questions about privacy?',
+    q_dataProtectionUrl 'Where can people find out how to contact someone with questions about privacy?',
       :display_on_certificate => true,
-      :text_as_statement => 'Send questions about privacy to'
-    a_1 'Confidentiality Contact Email Address',
+      :text_as_statement => 'Find out where to send questions about privacy at'
+    a_1 'Confidentiality Contact Documentation',
       :string,
-      :input_type => :email,
-      :placeholder => 'Confidentiality Contact Email Address',
+      :input_type => :url,
+      :placeholder => 'Confidentiality Contact Documentation',
       :requirement => ['pilot_23']
 
-    label_pilot_23 'You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details.',
+    label_pilot_23 'You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_23'
     dependency :rule => 'A'
-    condition_A :q_dataProtectionEmail, '==', {:string_value => '', :answer_reference => '1'}
+    condition_A :q_dataProtectionUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_socialMedia 'Do you use social media to connect with people who use your data?',
       :pick => :one
