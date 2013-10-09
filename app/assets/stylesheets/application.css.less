@@ -141,9 +141,9 @@
 
   background: @odiBlue;
 
-  &.modal-wide{ 
+  &.modal-wide{
     width: 788px;
-    margin-left: -394px; 
+    margin-left: -394px;
   }
   .border-radius(0);
 
@@ -2285,10 +2285,78 @@ header .jurisdiction{
 
       .cropped {
         display: inline-block;
-        max-width: 100%;
+        max-width: 90%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+    }
+
+    .icon {
+      display: none;
+      padding-right: 2px;
+      vertical-align: middle;
+    }
+
+    .error {
+      font-size: 16px;
+      line-height: 20px;
+      max-height: none;
+
+      a {
+        text-decoration: underline;
+
+        .icon {
+          vertical-align: baseline;
+          display: inline;
+        }
+      }
+    }
+
+    .well {
+      display: none;
+      padding: 6px 9px;
+      margin-right: 10px;
+
+      h5 {
+        margin: 0 0 7px;
+      }
+
+      p {
+        margin-right: 0;
+        color: @odiGreyDark;
+        max-height: none;
+        line-height: 20px;
+        font-size: 15px;
+      }
+    }
+
+    &.warning {
+      .answer {
+        .icon {
+          display: inline-block;
+          &:before { content: @warning-sign; }
+          color: @odiOrange;
+        }
+      }
+
+      .error {
+        color: @odiOrange;
+      }
+    }
+
+    &.error {
+      .answer {
+        .icon {
+          display: inline-block;
+          &:before { content: @exclamation-sign; }
+          color: @odiCrimson;
+        }
+      }
+
+      .error {
+        color: @odiCrimson;
       }
     }
   }
@@ -2576,38 +2644,36 @@ section.improvement{
 
 @media (max-width: 767px) {
 
-p.logo {
-  display: none;
-}
-
-#login, #register  {
-  width: 335px;
-}
-
-#login input[type="text"], #register input[type="text"], #login input[type="email"], #register input[type="email"], #login input[type="password"], #register input[type="password"] {
-  width: 330px;
-}
-
-.modal.modal-wide{
-margin-left: 0;
-width: 100%;
-
-  h1 {
-    display: block;
-    clear: both;
-    margin-bottom: 20px;
+  p.logo {
+    display: none;
   }
-}
 
-.modal-body {
-  padding-left: 30px;
-padding-right: 20px;
-.log-in {
-background: none;
+  #login, #register  {
+    width: 335px;
   }
-}
 
+  #login input[type="text"], #register input[type="text"], #login input[type="email"], #register input[type="email"], #login input[type="password"], #register input[type="password"] {
+    width: 330px;
+  }
 
+  .modal.modal-wide{
+    margin-left: 0;
+    width: 100%;
+
+    h1 {
+      display: block;
+      clear: both;
+      margin-bottom: 20px;
+    }
+  }
+
+  .modal-body {
+    padding-left: 30px;
+    padding-right: 20px;
+    .log-in {
+      background: none;
+    }
+  }
 
 }
 
@@ -2622,36 +2688,35 @@ background: none;
 
 @media (max-width: 479px) {
 
-.odi-bleed .navbar .brand {
-padding-bottom: 18px;
-}
+  .odi-bleed .navbar .brand {
+    padding-bottom: 18px;
+  }
 
-.navbar-inverse .navbar-inner {
-  border-bottom: 1px solid #707070;
-}
+  .navbar-inverse .navbar-inner {
+    border-bottom: 1px solid #707070;
+  }
 
-.navbar .nav.pull-right {
-  float: left;
-  display: block;
-  clear: both;
-}
+  .navbar .nav.pull-right {
+    float: left;
+    display: block;
+    clear: both;
+  }
 
+  .certificate.hero-unit .btn-info {
+    margin: -102px auto 8px;
+    background-color: #fff;
+    float: none;
+    display: block;
+    color: @odiBlue;
+  }
 
-.certificate.hero-unit .btn-info {
-  margin: -102px auto 8px;
-  background-color: #fff;
-  float: none;
-display: block;
-color: @odiBlue;
-}
+  #register {
+    left: -2px;
+  }
 
-#register {
-  left: -2px;
-}
-
-#login {
-  left: -109px;
-}
+  #login {
+    left: -109px;
+  }
 
 }
 
@@ -2661,45 +2726,37 @@ color: @odiBlue;
 // Responsive: tablet
 // --------------------------------------------------
 
-
-@media (min-width: 480px) and (max-width: 767px) {
-
-
-
-}
-
-
 @media (max-width: 979px) {
 
-
   #footer .footer-nav {
-clear: both;
-width: auto;
-margin-left: 0;
-margin-top: 30px;
+    clear: both;
+    width: auto;
+    margin-left: 0;
+    margin-top: 30px;
 
-  ul.pull-right {
-    float: left;
+    ul.pull-right {
+      float: left;
 
-    li {
-      margin-right: 20px;
-      margin-left: 0;
+      li {
+        margin-right: 20px;
+        margin-left: 0;
+      }
     }
   }
+
+  .certificate-summary {
+    padding: 0;
+  }
+
+  .certificate-data li {
+    width: 100%;
+  }
+
+  .certificate-data li .well {
+    margin-right: 0;
+  }
+
 }
-
-.certificate-summary {
-padding: 0;
-}
-
-.certificate-data li {
-  width: 100%;
-}
-
-
-}
-
-
 
 
 //
@@ -2709,15 +2766,12 @@ padding: 0;
 
 @media (min-width: 768px) and (max-width: 979px) {
 
-
-#padd {
-  .container {
+  #padd .container {
     .offset8 {
-margin-left: 416px;
-}
+      margin-left: 416px;
+    }
     .span4 {
-width: 328px;
-}
+      width: 328px;
     }
   }
 
@@ -2774,7 +2828,6 @@ width: 328px;
       margin-left: 0;
     }
   }
-
 
 }
 

@@ -79,6 +79,17 @@ $(function(){
     return false;
   });
 
+  // Toggles content based on a button
+  $('[data-content=toggle]').each(function() {
+    var self = $(this);
+    self.data('target', self.find(self.data('target')));
+    self.data('button', self.find(self.data('button')));
+
+    self.data('button').click(function() {
+      self.data('target').animate({opacity: 'toggle'}, 250);
+    });
+  });
+
   $('.embed-code textarea').click(function() {
     this.select();
   });
