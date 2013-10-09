@@ -4,17 +4,38 @@
     - responses = response_set.responses_for_questions questions
     - if responses.any?
       %hr.heavy
-      - if section.title != 'General'
-        %h3= section.title
+      %h3= section.title
       %ul
         - responses.each do |response|
           - response_text = response.statement_text
-          - if (response_text != '')
-            %li
+          - answer = response_set.autocomplete_override_message_for(response.question)
+          - if response_text != ''
+            - explanation_required = (response.autocompletable? && !response.all_autocompleted) || response.error
+
+            - state = 'error' if explanation_required
+            - state = 'warning' if explanation_required && answer.message?
+
+            - error_message = t('surveyor.publisher_changed_autocompleted') if explanation_required
+            - error_message = t('surveyor.publisher_url_invalid') if response.error && response.answer.input_type == 'url'
+
+            %li{class: state, data: {content: 'toggle', button: '.error a', target: '.well'}}
               %h4= response.question.statement_text
-              %p
-                - if (response.answer.input_type == 'url')
+              %p.answer
+                %i.icon.icon-variable
+                - if response.answer.input_type == 'url'
                   = link_to(response_text, response_text, :title => response_text, :class => 'cropped')
                 - else
                   = response_text
+              - if state
+                %p.error
+                  = error_message
+                  - if answer.message?
+                    %a{href: '#more'}
+                      = t('surveyor.find_out_more')
+                      %i.icon.icon-angle-down
+
+                - if answer.message?
+                  .well.well-small
+                    %h5= t('surveyor.from_publisher')
+                    %p= answer.message
   %hr.heavy
