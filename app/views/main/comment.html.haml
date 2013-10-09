@@ -1,4 +1,4 @@
 - content_for :header_title do
-  Comments - #{@topic}
+  #{link_to @topic, @back} / Comments
 
 = juvia_comments @topic

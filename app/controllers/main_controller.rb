@@ -8,6 +8,7 @@ class MainController < ApplicationController
 
   def comment
     @topic = params[:topic]
+    @back  = params[:back]
   end
 
   def status
