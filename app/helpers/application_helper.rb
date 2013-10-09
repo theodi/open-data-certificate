@@ -1,8 +1,8 @@
 module ApplicationHelper
 
-  def comment_link topic
-    content = '<i class="icon-comment"></i> comment'
-    link_to content.html_safe, comment_path(topic: topic), class: 'btn'
+  def comment_link topic, message = 'comment'
+    content = "<i class=\"icon-comments\"></i> <span>#{message}</span>"
+    link_to content.html_safe, comment_path(topic: topic, back: request.original_fullpath), class: 'link-comment'
   end
 
   # temporarily switch to a new locale
