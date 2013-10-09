@@ -34,6 +34,9 @@ en:
         title: Explanation
         subtitle: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
     question_comment: Ask for help with this question
+    override_explanation_title: Explanation
+    autocomplete_explanation: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
+    url_explanation: Please explain why this URL doesn't appear to be valid. This can help those using your data to understand it better.
 
   requirement_label:
     requirement: This is required for <strong>all levels</strong>

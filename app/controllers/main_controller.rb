@@ -19,15 +19,15 @@ class MainController < ApplicationController
       'datasets'     => ResponseSet.counts
     }
 
-    respond_to do |format|
-      format.html { render '/home/status' }
-      format.csv {
-        csv = Rackspace.fetch_cache("statistics.csv")
-        render text: csv, content_type: "text/csv" 
-      }
-    end
+    @head_commit = `git rev-parse HEAD`
+
+    render '/home/status'
   end
 
+  def status_csv
+    csv = Rackspace.fetch_cache("statistics.csv")
+    render text: csv, content_type: "text/csv"
+  end
 
   def status_response_sets
     @response_sets = ResponseSet.all.map do |m|

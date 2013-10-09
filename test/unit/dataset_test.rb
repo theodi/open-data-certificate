@@ -113,4 +113,11 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal active.certificate, dataset.certificate
   end
 
+  test "removed is false by default and not mass-assignable" do
+    dataset = FactoryGirl.create(:dataset)
+    dataset.update_attributes({removed: true})
+
+    refute dataset.removed
+  end
+
 end

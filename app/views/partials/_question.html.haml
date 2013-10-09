@@ -21,7 +21,7 @@
     - r = response_for(@response_set, q, nil, rg)
     - a = @response_set.autocomplete_override_message_for(q)
 
-    - explanation_required = r.autocompletable? && !r.all_autocompleted
+    - explanation_required = (r.autocompletable? && !r.all_autocompleted) || r.error
     - explanation_missing = explanation_required && (a.message || '').strip.blank?
 
     - state = 'ok' unless r.new_record?
@@ -100,7 +100,7 @@
           - i = (i.to_i + 1).to_s if q.pick == 'any'
           - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
           = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
-            = ff.input :message, as: :additional_text, label: t('surveyor.autocomplete_explanation.title'), subtitle: t('surveyor.autocomplete_explanation.subtitle')
+            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.autocomplete_explanation')
 
       %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}
         - unless (q.help_text.blank?)

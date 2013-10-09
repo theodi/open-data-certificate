@@ -1,0 +1,10 @@
+- content_for :header_title, @title
+
+- if @datasets.any?
+
+  %hr.heavy
+  = render partial: 'dataset_min', collection: @datasets
+  = paginate @datasets
+
+- else
+  %p= t('certificates.no_certificates_found')

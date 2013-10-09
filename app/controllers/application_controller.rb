@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
         # if the user has authenticated from the start_cert_modal_form then redirect to the start_questionnaire path
         authenticated_start_questionnaire_path
 
+      when session[:sign_in_redirect]
+        # a sign in path was set at some point
+        session.delete(:sign_in_redirect)
+
       else
         dashboard_path
     end

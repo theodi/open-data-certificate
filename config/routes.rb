@@ -26,6 +26,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
+    get :admin, on: :collection
 
     resources :certificates, :only => [:show] do
        member do
@@ -34,6 +35,11 @@ OpenDataCertificate::Application.routes.draw do
          get 'badge', to: 'certificates#badge', as: 'badge'
        end
     end
+  end
+
+  resources :transfers, :only => [:create, :destroy] do
+    get :claim,  on: :member
+    put :accept, on: :member
   end
 
   # Certificate legacy redirects
@@ -77,6 +83,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'clear_cache' => 'main#clear_cache', :via => :post
 
   # (public) stats about the application
+  get 'status.csv' => 'main#status_csv'
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
 

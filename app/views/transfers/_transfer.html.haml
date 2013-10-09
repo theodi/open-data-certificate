@@ -1,0 +1,27 @@
+- if transfer.new_record?
+  - modal_dom_id = "transfer_dataset_#{transfer.dataset_id}"
+  - email_dom_id = "#{modal_dom_id}_email"
+  =link_to "##{modal_dom_id}", 'data-toggle' => 'modal', 'class' => 'transfer' do
+    .icon-cog
+    = t '.title'
+  .modal.fade{id: modal_dom_id}
+    .modal-header
+      %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+      %h3 
+        .icon-cog
+        = t '.title'
+    .modal-body
+      %p= t '.body'
+      = form_for transfer, html:{class: 'form-transfer'} do |f|
+        = f.hidden_field :dataset_id
+        %label
+          = t '.input_prompt'
+          %div
+            = f.email_field :target_email, placeholder: t('.input_placeholder', rescue_format: :text), class: 'span3'
+        = f.submit t('.submit', rescue_format: :text), class: 'btn btn-primary'
+        %span.help-inline= t('.help_text')
+        
+- else
+  %small
+    = t '.transferring', email: transfer.target_email
+    = link_to t('.cancel_transfer'), transfer, method: :delete

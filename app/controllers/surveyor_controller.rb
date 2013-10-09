@@ -110,6 +110,8 @@ class SurveyorController < ApplicationController
 
       saved = load_and_update_response_set_with_retries
 
+      urls_resolve = @response_set.all_urls_resolve?
+
       if saved && finish
 
         if user_signed_in?
@@ -117,11 +119,11 @@ class SurveyorController < ApplicationController
             flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
           end
 
-          if @response_set.all_urls_resolve? === false
+          unless urls_resolve
             flash[:warning] = t('surveyor.please_check_all_your_urls_exist')
           end
 
-          if @response_set.all_mandatory_questions_complete? && @response_set.all_urls_resolve?
+          if @response_set.all_mandatory_questions_complete? && urls_resolve
             @response_set.complete!
             @response_set.save
 

@@ -97,6 +97,8 @@
 
   -webkit-font-smoothing:antialiased;
 
+  font-weight:normal;
+
   &.embed-code {
 
     .btn-info {
@@ -138,8 +140,11 @@
   }
 
   background: @odiBlue;
-  width: 788px;
-  margin-left: -394px;
+
+  &.modal-wide{ 
+    width: 788px;
+    margin-left: -394px; 
+  }
   .border-radius(0);
 
   h1 {
@@ -169,6 +174,16 @@
     }
   }
 
+  form.form-transfer{
+    label, .help-inline {
+      font-size:1em;
+      color:#fff;
+    }
+    label div{
+      margin-top:.5em;
+    }
+  }
+
 }
 
 .modal-header {
@@ -194,6 +209,12 @@
   padding-bottom: 40px;
   padding-top: 30px;
 
+}
+
+.modal-footer {
+  background: lighten(@odiBlue, 10%);
+  border-top: none;
+  .box-shadow(none);
 }
 
 .modal-body {
@@ -324,7 +345,6 @@
 .field_with_errors {
   .control-group.error();
 }
-
 
 /************************************************
     Typeahead --> Bootstrap
@@ -1076,7 +1096,7 @@ section {
   }
 }
 
-.alert-alert {
+.alert-alert, .alert-error {
   background: @odiCrimson;
   border: 1px solid @odiCrimsonDark;
 }
@@ -1317,12 +1337,14 @@ td.action {
   }
 }
 
-
 */
 
 // UPDATED My Certificates (/Dashboard) view (remove above when ready)
 
 
+a.transfer {
+  font-size: 0.8em;
+}
 
 .response-set{
   background-color: #f4f4f4;
@@ -1362,8 +1384,6 @@ td.action {
       display:none;
     }
   }
-
-
 
   a .delete {
     background-image:url(/assets/status/remove-sign.png);
@@ -1598,7 +1618,7 @@ td.action {
 // Questionnaire (survey) view //
 
 // jurisdiction select at the top of the certificate
-header .jurisdiction{  
+header .jurisdiction{
   font-size: 14px;
   a {
     cursor: pointer;
@@ -2184,7 +2204,7 @@ header .jurisdiction{
 
   &.affix, &.affix-bottom{
     position: fixed;
-    top:130px;
+    top: 105px;
   }
 
   #panel_handle{
@@ -2568,7 +2588,7 @@ p.logo {
   width: 330px;
 }
 
-#start-cert-modal{
+.modal.modal-wide{
 margin-left: 0;
 width: 100%;
 
@@ -2843,12 +2863,13 @@ width: 328px;
 
 p.data {
   text-align: right;
-  
+
   .badge {
     font-size: 0.9em;
     padding: 2px 9px 3px 9px;
   }
 }
+
 
 body{
   .juvia-comment-count-header{
@@ -2870,4 +2891,13 @@ body{
   span{
     text-decoration: underline;
   }
+}
+
+// block only visible to administrators
+.admin-functions {
+  .alert();
+  .alert-info();
+  color:#444;
+  text-shadow:none;
+  font-size: 1em;
 }

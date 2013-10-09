@@ -1,0 +1,9 @@
+- content_for :header_title, t('.title')
+
+%h3
+  = t('.body', dataset_title: @transfer.dataset.title )
+  
+
+= form_for @transfer, url: {action: :accept}  do |f|
+  = f.hidden_field :token_confirmation, value: params[:token]
+  = f.submit t(".accept"), class: 'btn btn-primary'
