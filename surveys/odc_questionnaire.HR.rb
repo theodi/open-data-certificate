@@ -707,9 +707,9 @@ survey 'HR',
     a_not_personal 'no, the data is not about people or their activities',
       :text_as_statement => 'no data about individuals',
       :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
-    a_summarised 'no, the data has been aggregated so individuals can\'t be identified',
+    a_summarised 'no, the data has been anonymised by aggregating individuals into groups, so they can\'t be distinguished from other people in the group',
       :text_as_statement => 'aggregated data',
-      :help_text => 'Statistical analysis can aggregate data so that individuals are no longer be identifiable.'
+      :help_text => 'Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.'
     a_individual 'yes, there is a risk that individuals be identified, for example by third parties with access to extra information',
       :text_as_statement => 'information that could identify individuals',
       :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
