@@ -33,6 +33,10 @@ en:
     override_explanation_title: Explanation
     autocomplete_explanation: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
     url_explanation: Please explain your urlings
+    publisher_url_invalid: This data has failed automatic validation because the URL is not correct.
+    publisher_changed_autocompleted: The publisher has changed the automatically completed data.
+    find_out_more: Find out more
+    from_publisher: 'From the publisher:'
 
   requirement_label:
     requirement: This is required for <strong>all levels</strong>
