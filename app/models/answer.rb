@@ -3,6 +3,10 @@ class Answer < ActiveRecord::Base
 
   attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement
 
+  def message?
+    !(message || '').strip.blank?
+  end
+
   def requirement
     @requirement ||= [read_attribute(:requirement), question.try(:requirement)].delete_if(&:blank?).first
   end
