@@ -407,4 +407,19 @@ $(function(){
     e.preventDefault();
   });
 
+
+  $('.certificate-data').popover({
+    selector:'.odc-popover',
+    trigger:'click',
+    html:true,
+    content: function(){
+      // pull out the content from the child element (hidden with css)
+      return $('.odc-popover-content', this).html()
+    },
+    template: '<div class="popover popover-light"><div class="arrow"></div>'+
+              '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  })
+  .on('mouseover', '.answer', function(){$(this).toggleClass('odc-popover-active', true)})
+  .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)})
+
 });

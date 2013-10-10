@@ -39,6 +39,7 @@
 /* odiBlueLight - primarily for background of inputs in modals */
 @odiBlueLight: lighten(@odiBlue, 15%);
 @odiBlueLighter: lighten(@odiBlue, 36%);
+@odiBlueLightest: lighten(@odiBlue, 44%);
 @odiBlueTint: #e7f7fc;
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
@@ -2953,4 +2954,50 @@ body{
   color:#444;
   text-shadow:none;
   font-size: 1em;
+}
+
+.js .odc-popover-content{
+  display:none;
+  span{
+    display:block;
+  }
+}
+
+.js .odc-popover{
+  opacity: 0.15;
+  cursor: pointer;
+  .transition(opacity 0.25s)
+}
+.js .odc-popover-active .odc-popover{
+  opacity: 1;
+}
+
+.popover-light{
+  @popoverBackground: @odiBlueLightest;
+  @popoverArrowColor: @odiBlueLightest;
+  @popoverArrowOuterColor: @odiBlueLight;
+  @popoverArrowOuterWidth: 8px;
+  @popoverArrowWidth: 8px;
+
+  // re-apply popover styles
+  .popover;
+  .arrow {
+    border-width: @popoverArrowOuterWidth;
+    &:after {
+      border-width: @popoverArrowWidth;
+    }
+  }
+
+  border-color: @odiBlueLight;
+  padding:0em;
+
+  // color:@odiGrey;
+  font-size:0.6em;
+  line-height: 1.5em;
+
+  width:105px;
+
+  .popover-content{
+    padding:7px 8px;
+  }
 }
