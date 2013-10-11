@@ -132,6 +132,32 @@ $(document).ready(function(){
 
     return false;
   })
+  .on('click', '.remove_row', function(e){
+    e.preventDefault();
+
+    var $rm_button = $(this).attr('disabled',true),
+        $row = $rm_button.closest('.g_repeater'),
+        $fieldset = $rm_button.closest('fieldset');
+
+    // blank out the answer_id (which will destroy the response)
+    $fieldset.find('input[name$="[answer_id]"]').val("");
+
+    // re-index the fields (doesn't seem to make a difference)
+    $row.find('input[name$="[response_group]"]').val('')
+    .filter(function(){
+      return ! $.contains($fieldset, this);
+    })
+    .each(function(i){
+      $(this).val(i);
+    });
+
+    saveFormElements($form, $row.find('input').add(csrfToken), function(){
+      $fieldset.remove();
+      // $fieldset.hide(); use this to inspect how the form was changed
+    })
+  })
+
+  
 
   function updateField($field) {
     var $row = bindQuestionRow($field);
