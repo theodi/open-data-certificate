@@ -80,11 +80,15 @@ class ResponseSet < ActiveRecord::Base
     update_attribute(:attained_index, index)
   end
 
-
   DEFAULT_TITLE = 'Untitled'
 
   scope :by_newest, order("response_sets.created_at DESC")
   scope :completed, where("response_sets.completed_at IS NOT NULL")
+
+  alias_method :original_dataset, :dataset
+  def dataset
+    dataset = original_dataset || Dataset.create
+  end
 
   def title
     dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
@@ -351,10 +355,9 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def assign_to_user!(user)
-    # This is a bit fragile, as it assumes that there is both no current user and no current dataset, and raises no notification of any issues
-    # TODO: revisit and improve its handling of unexpected cases
     self.user = user
-    self.dataset = user.datasets.create
+    self.dataset = user.datasets.create if !self.dataset
+    self.dataset.update_attribute(:user, user)
     save
   end
 
