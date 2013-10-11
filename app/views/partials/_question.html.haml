@@ -69,8 +69,7 @@
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
             = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }
-        - else # :default, :inline, :inline_default
-
+        - else # :default, :inline, :inline_default, :repeater_default
           - if q.pick == "one"
             = f.semantic_fields_for i, r do |ff|
               = ff.input :question_id, :as => :quiet
@@ -94,7 +93,7 @@
 
           - else
             - q.answers.each do |a|
-              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
+              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template
 
         .autocomplete-override{class: explanation_required ? '' : 'none'}
           - i = (i.to_i + 1).to_s if q.pick == 'any'
