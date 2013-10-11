@@ -8,7 +8,7 @@ class MainController < ApplicationController
 
   def status
     @job_count = Delayed::Job.count
-    
+
     @counts = {
       'certificates' => Certificate.counts,
       'datasets'     => ResponseSet.counts

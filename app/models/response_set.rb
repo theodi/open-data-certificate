@@ -16,9 +16,9 @@ class ResponseSet < ActiveRecord::Base
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
-  
+
   class << self
-    
+
     def counts
       within_last_month = (Time.now - 1.month)..Time.now
       {
@@ -29,9 +29,9 @@ class ResponseSet < ActiveRecord::Base
         :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
       }
     end
-    
+
   end
-  
+
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
