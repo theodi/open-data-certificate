@@ -881,22 +881,37 @@ survey 'SM',
       :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_linkedTo 'Can people find your data within three clicks of the home page?',
-      :display_on_certificate => true,
-      :text_as_statement => 'The data is reachable',
-      :help_text => 'If documentation is reachable via links from the home page of the site it\'s published on, people can find it quickly without searching. You should make it more accessible on your website if they can\'t.',
+    q_onWebsite 'Is there a link to your data from your main website?',
+      :help_text => 'Data can be found more easily if it is linked to from your main website.',
       :pick => :one
-    a_false 'no',
-      :text_as_statement => ''
+    a_false 'no'
     a_true 'yes',
-      :text_as_statement => 'within three clicks of the home page',
       :requirement => ['standard_13']
 
-    label_standard_13 'You should <strong>ensure that people can easily find your data</strong> from the home page of the site it\'s published on.',
+    label_standard_13 'You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_13'
     dependency :rule => 'A'
-    condition_A :q_linkedTo, '==', :a_false
+    condition_A :q_onWebsite, '==', :a_false
+
+    repeater 'Web Page' do
+
+      dependency :rule => 'A'
+      condition_A :q_onWebsite, '==', :a_true
+      q_webpage 'Which page on your website links to the data?',
+        :display_on_certificate => true,
+        :text_as_statement => 'The website links to the data from',
+        :help_text => 'Give a URL on your main website that includes a link to this data.',
+        :required => :required
+      dependency :rule => 'A'
+      condition_A :q_onWebsite, '==', :a_true
+      a_1 'Web page URL',
+        :string,
+        :input_type => :url,
+        :required => :required,
+        :placeholder => 'Web page URL'
+
+    end
 
     q_listed 'Is your data listed within a collection?',
       :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',

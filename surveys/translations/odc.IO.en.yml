@@ -481,17 +481,21 @@ questions:
         text: yes
         text_as_statement: "independently audited"
 # Practical Information
-  linkedTo:
-    text: "Can people find your data within three clicks of the home page?"
-    text_as_statement: "The data is reachable"
-    help_text: "If documentation is reachable via links from the home page of the site it's published on, people can find it quickly without searching. You should make it more accessible on your website if they can't."
+  onWebsite:
+    text: "Is there a link to your data from your main website?"
+    help_text: "Data can be found more easily if it is linked to from your main website."
     answers:
       a_false:
         text: no
-        text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "within three clicks of the home page"
+  webpage:
+    text: "Which page on your website links to the data?"
+    text_as_statement: "The website links to the data from"
+    help_text: "Give a URL on your main website that includes a link to this data."
+    answers:
+      a_1:
+        text: "Web page URL"
   listed:
     text: "Is your data listed within a collection?"
     help_text: "Data is easier for people to find when it's in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results."
@@ -1272,7 +1276,7 @@ labels:
     text: "You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data."
 # Practical Information Requirements
   standard_13:
-    text: "You should <strong>ensure that people can easily find your data</strong> from the home page of the site it's published on."
+    text: "You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily."
   standard_14:
     text: "You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data."
   standard_15:
