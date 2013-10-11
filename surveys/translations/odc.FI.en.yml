@@ -704,23 +704,31 @@ questions:
     answers:
       a_1:
         text: "Quality Control Process Description URL"
-  serviceAvailability:
-    text: "What is the availability of your data?"
-    text_as_statement: "The service that hosts this data is"
-    help_text: "Most server hosting providers have a service-level agreement (SLA) between you and them. This should guarantee uptime for the servers and determine the availability of your data."
+  backups:
+    text: "Do you take offsite backups?"
+    text_as_statement: "The data is"
+    help_text: "Taking a regular offsite backup helps ensure that the data won't be lost in the case of accident."
     answers:
-      minimal:
-        text: "you don't monitor its availability"
+      a_false:
+        text: no
         text_as_statement: ""
-      atleast99:
-        text: "there has been less than 4 days downtime in the past year (or equivalent)"
-        text_as_statement: "available 99% of the time"
-      atleast99_5:
-        text: "there has been less than 2 days downtime in the past year (or equivalent)"
-        text_as_statement: "available 99.5% of the time"
-      atleast99_9:
-        text: "there has been less than 9 hours downtime in the past year (or equivalent)"
-        text_as_statement: "available 99.9% of the time"
+      a_true:
+        text: yes
+        text_as_statement: "backed up offsite"
+  slaUrl:
+    text: "Where do you describe any guarantees about service availability?"
+    text_as_statement: "Service availability is described at"
+    help_text: "Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees."
+    answers:
+      a_1:
+        text: "Service Availability Documentation URL"
+  statusUrl:
+    text: "Where do you give information about the current status of the service?"
+    text_as_statement: "Service status is given at"
+    help_text: "Give a URL for a page that tells people about the current status of your service, including any faults you are aware of."
+    answers:
+      a_1:
+        text: "Service Status URL"
   onGoingAvailability:
     text: "How long will this data be available for?"
     text_as_statement: "The data is available"
@@ -1339,133 +1347,133 @@ labels:
     text: "You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data."
   exemplar_10:
     text: "You should <strong>document your quality control process</strong> so that people can decide how much to trust your data."
-  pilot_13:
-    text: "You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data."
   standard_23:
-    text: "You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data."
-  exemplar_11:
-    text: "You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data."
-  pilot_14:
-    text: "You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data."
+    text: "You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens."
   standard_24:
+    text: "You should <strong>describe what guarantees you have around service availability</strong> so that people know how much they can rely on it."
+  expert_1:
+    text: "You should <strong>have a service status page</strong> that tells people about the current status of your service."
+  pilot_13:
+    text: "You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data."
+  standard_25:
     text: "You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data."
-  exemplar_12:
+  exemplar_11:
     text: "You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data."
 # Technical Information Requirements
   basic_9:
     text: "You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it."
-  pilot_15:
+  pilot_14:
     text: "You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily."
-  standard_25:
-    text: "You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily."
-  pilot_16:
-    text: "You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically."
   standard_26:
+    text: "You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily."
+  pilot_15:
+    text: "You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically."
+  standard_27:
     text: "You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all."
   basic_10:
     text: "You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it."
   basic_11:
     text: "You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it."
-  standard_27:
-    text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
   standard_28:
-    text: "You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it."
-  exemplar_13:
-    text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
-  exemplar_14:
-    text: "You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all"
-  pilot_17:
-    text: "You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process."
+    text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
   standard_29:
-    text: "You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily."
+    text: "You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it."
+  exemplar_12:
+    text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
+  exemplar_13:
+    text: "You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all"
+  pilot_16:
+    text: "You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process."
   standard_30:
-    text: "You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles."
-  pilot_18:
-    text: "You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process."
-  exemplar_15:
-    text: "You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse."
+    text: "You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily."
   standard_31:
-    text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
-  pilot_19:
-    text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
-  exemplar_16:
-    text: "You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it."
-  pilot_20:
-    text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
-  pilot_21:
-    text: "You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process."
+    text: "You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles."
+  pilot_17:
+    text: "You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process."
+  exemplar_14:
+    text: "You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse."
   standard_32:
-    text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
+    text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
+  pilot_18:
+    text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
+  exemplar_15:
+    text: "You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it."
+  pilot_19:
+    text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
+  pilot_20:
+    text: "You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process."
   standard_33:
-    text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
-  exemplar_17:
-    text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
+    text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
   standard_34:
+    text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
+  exemplar_16:
+    text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
+  standard_35:
     text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
-  exemplar_18:
+  exemplar_17:
     text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
-  exemplar_19:
+  exemplar_18:
     text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
-  exemplar_20:
+  exemplar_19:
     text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
-  standard_35:
-    text: "You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it."
   standard_36:
-    text: "You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains."
+    text: "You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it."
   standard_37:
-    text: "You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is."
+    text: "You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains."
   standard_38:
-    text: "You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data."
+    text: "You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is."
   standard_39:
-    text: "You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it."
+    text: "You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data."
   standard_40:
-    text: "You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently."
+    text: "You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it."
   standard_41:
-    text: "You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently."
+    text: "You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently."
   standard_42:
-    text: "You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it."
+    text: "You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently."
   standard_43:
-    text: "You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data."
+    text: "You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it."
   standard_44:
-    text: "You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to."
+    text: "You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data."
   standard_45:
-    text: "You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to."
+    text: "You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to."
   standard_46:
-    text: "You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about."
+    text: "You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to."
   standard_47:
-    text: "You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively."
+    text: "You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about."
   standard_48:
-    text: "You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution."
+    text: "You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively."
   standard_49:
-    text: "You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains."
+    text: "You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution."
   standard_50:
-    text: "You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is."
+    text: "You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains."
   standard_51:
-    text: "You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
+    text: "You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is."
   standard_52:
-    text: "You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution."
-  pilot_22:
-    text: "You should <strong>provide technical documentation for the data</strong> so that people understand how to use it."
+    text: "You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date."
   standard_53:
-    text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
+    text: "You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution."
+  pilot_21:
+    text: "You should <strong>provide technical documentation for the data</strong> so that people understand how to use it."
   standard_54:
-    text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
-  pilot_23:
-    text: "You should <strong>provide contact information for people to send questions</strong> about your data to."
-  pilot_24:
-    text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
-  pilot_25:
-    text: "You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to."
+    text: "You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it."
   standard_55:
-    text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
+    text: "You should <strong>document the codes used within your data</strong> so that people know how to interpret them."
+  pilot_22:
+    text: "You should <strong>provide contact information for people to send questions</strong> about your data to."
+  pilot_23:
+    text: "You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need."
+  pilot_24:
+    text: "You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to."
   standard_56:
-    text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
+    text: "You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used"
   standard_57:
-    text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
+    text: "You should <strong>tell people where they can discuss your data</strong> and support one another."
   standard_58:
+    text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
+  standard_59:
     text: "You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date."
-  exemplar_21:
+  exemplar_20:
     text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
-  exemplar_22:
+  exemplar_21:
     text: "You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data."

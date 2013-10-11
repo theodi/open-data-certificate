@@ -283,27 +283,24 @@
 		<group id="guarantees">
 			<label>Guarantees</label>
 			<help>how much people can depend on your data’s availability</help>
+			<question id="backups" display="The data is">
+				<label>Do you take offsite backups?</label>
+				<yesno yes="backed up offsite" />
+				<help>Taking a regular offsite backup helps ensure that the data won't be lost in the case of accident.</help>
+				<requirement level="standard">You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens.</requirement>
+			</question>
 			<if test="this.releaseType() === 'service'">
-				<question id="serviceAvailability" display="The service that hosts this data is">
-					<label>What is the availability of your data?</label>
-					<radioset>
-						<option value="minimal" display="">
-							<label>you don't monitor its availability</label>
-						</option>
-						<option value="atleast99" display="available 99% of the time">
-							<label>there has been less than 4 days downtime in the past year (or equivalent)</label>
-							<requirement level="pilot">You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-						<option value="atleast99.5" display="available 99.5% of the time">
-							<label>there has been less than 2 days downtime in the past year (or equivalent)</label>
-							<requirement level="standard">You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-						<option value="atleast99.9" display="available 99.9% of the time">
-							<label>there has been less than 9 hours downtime in the past year (or equivalent)</label>
-							<requirement level="exemplar">You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-					</radioset>
-					<help>Most server hosting providers have a service-level agreement (SLA) between you and them. This should guarantee uptime for the servers and determine the availability of your data.</help>
+				<question id="slaUrl" display="Service availability is described at">
+					<label>Where do you describe any guarantees about service availability?</label>
+					<input type="url" placeholder="Service Availability Documentation URL" />
+					<help>Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees.</help>
+					<requirement level="standard">You should <strong>describe what guarantees you have around service availability</strong> so that people know how much they can rely on it.</requirement>
+				</question>
+				<question id="statusUrl" display="Service status is given at">
+					<label>Where do you give information about the current status of the service?</label>
+					<input type="url" placeholder="Service Status URL" />
+					<help>Give a URL for a page that tells people about the current status of your service, including any faults you are aware of.</help>
+					<requirement level="expert">You should <strong>have a service status page</strong> that tells people about the current status of your service.</requirement>
 				</question>
 			</if>
 			<question id="onGoingAvailability" display="The data is available">
