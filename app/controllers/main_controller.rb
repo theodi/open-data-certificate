@@ -8,7 +8,7 @@ class MainController < ApplicationController
 
   def status
     @job_count = Delayed::Job.count
-    
+
     @counts = {
       'certificates' => Certificate.counts,
       'datasets'     => ResponseSet.counts
@@ -62,7 +62,7 @@ class MainController < ApplicationController
 
 
     # if a dataset isn't supplied, create one for an authenticated user, or mock one for unauthenticated
-    @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? current_user.datasets.create : Dataset.new)
+    @dataset = Dataset.find_by_id(params[:dataset_id]) || (user_signed_in? ? current_user.datasets.create : Dataset.create)
     authorize! :update, @dataset
 
     # use the most recent survey
