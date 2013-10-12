@@ -1,6 +1,6 @@
 title: "US"
 full_title: "United States"
-description: "<p><strong>This has been generated based on a default and needs to be localised for United States. Please help us! Contact <a href=\"mailto:certificate@theodi.org\">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>"
+description: "<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>"
 survey_sections:
   general:
     title: "General Information"
@@ -61,6 +61,14 @@ questions:
         text: "a service or API for accessing open data"
         help_text: "This is a live web service that exposes your data to programmers through an interface they can query."
 # Legal Information
+  usGovData:
+    text: "Was the data created by the US Government?"
+    help_text: "If the data was created by the US Government, and you are in the US, then you have the right to publish it. US Government works do not receive copyright protection"
+    answers:
+      a_false:
+        text: no
+      a_true:
+        text: yes
   publisherRights:
     text: "Do you have the rights to publish this data as open data?"
     help_text: "If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it."
@@ -169,6 +177,29 @@ questions:
     answers:
       a_1:
         text: "Rights Statement URL"
+  internationalDataLicence:
+    text: "Under which licence can people outside the US reuse this data?"
+    text_as_statement: "Outside the US, this data is available under"
+    help_text: "US Government works do have copyright protection outside the US. So people outside the US need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the data, it's expired, or you've waived them, choose 'Not applicable'."
+    answers:
+      odc_by:
+        text: "Open Data Commons Attribution License"
+        text_as_statement: "Open Data Commons Attribution License"
+      odc_odbl:
+        text: "Open Data Commons Open Database License (ODbL)"
+        text_as_statement: "Open Data Commons Open Database License (ODbL)"
+      odc_pddl:
+        text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+        text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+      cc_zero:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
+      na:
+        text: "Not applicable"
+        text_as_statement: ""
+      other:
+        text: "Other..."
+        text_as_statement: ""
   dataLicence:
     text: "Under which licence can people reuse this data?"
     text_as_statement: "This data is available under"
