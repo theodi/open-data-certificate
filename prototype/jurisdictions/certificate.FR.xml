@@ -2,36 +2,36 @@
 	© 2013 Open Data Institute
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
-  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="FR" xml:lang="en">
-	<help><p><strong>This has been generated based on a default for EU countries and needs to be localised for France. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
-		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
-		<p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p>
-		<p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>
+  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="FR" xml:lang="fr">
+	<help>
+		<p>Ce questionnaire d’auto­évaluation permet de générer un certificat et un badge open data, que vous pouvez publier pour donner des informations à propos de vos données ouvertes. Nous utilisons aussi vos réponses pour comprendre comment les organisations publient leurs données ouvertes.</p>
+		<p>Répondre à ces questions vous permet de montrer vos efforts pour vous conformer à la législation française. Nous vous recommandons de vous renseigner aussi sur les autres règles et lois qui s’appliquent à votre secteur d’activité, particulièrement si vous résidez en dehors de la France.</p>
+		<p><strong>Il n’est pas nécessaire de répondre à toutes les questions pour obtenir un certificat.</strong> Répondez seulement à celles vous concernant.</p>
 	</help>
 	<group id="legal">
-		<label>Legal Information</label>
-		<help>Rights, licensing and privacy</help>
+		<label>Informations Legales</label>
+		<help>Droits, autorisations et confidentialité</help>
 		<group id="ownership">
-			<label>Rights</label>
-			<help>your right to share this data with people</help>
+			<label>Droits</label>
+			<help>vos droits de partager ces données</help>
 			<question id="publisherRights">
-				<label>Do you have the rights to publish this data as open data?</label>
+				<label>Disposez­vous des droits nécessaires pour publier ces données en tant que données ouvertes?</label>
 				<radioset required="required">
 					<option value="yes">
-						<label>yes, you have the rights to publish this data as open data</label>
+						<label>oui, vous avez les droits nécessaires pour publier ces données en tant que données ouvertes</label>
 						<requirement level="standard">You should have a <strong>clear legal right to publish this data</strong>.</requirement>
 					</option>
 					<option value="no">
-						<label>no, you don't have the rights to publish this data as open data</label>
+						<label>non, vous n’avez pas les droits nécessaires pour publier ces données en tant que données ouvertes</label>
 					</option>
 					<option value="unsure">
-						<label>you're not sure if you have the rights to publish this data as open data</label>
+						<label>vous n’êtes pas sûr d’avoir les droits nécessaires pour publier ces données en tant que données ouvertes</label>
 					</option>
 					<option value="complicated">
 						<label>the rights in this data are complicated or unclear</label>
 					</option>
 				</radioset>
-				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
+				<help>Si vous organisation n’est pas à l’origine de la création ou de la récupération de ces données, il est possible que vous n’ayez pas le droit de les publier. Si vous n’êtes pas sûr, renseignez vous auprès du détenteur des données, car vous allez avoir besoin de sa permission pour les publier.</help>
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
@@ -119,8 +119,8 @@
 			</if>
 		</group>
 		<group id="licensing">
-			<label>Licensing</label>
-			<help>how you give people permission to use this data</help>
+			<label>Autorisations</label>
+			<help>la manière dont vous accordez aux gens la permission d’utiliser vos données</help>
 			<question id="copyrightURL" display="The rights statement is at">
 				<label>Where have you published the rights statement for this dataset?</label>
 				<input type="url" placeholder="Rights Statement URL"/>
@@ -344,48 +344,48 @@
 			</if>
 		</group>
 		<group id="privacy">
-			<label>Privacy</label>
-			<help>how you protect people's privacy</help>
+			<label>Confidentialite</label>
+			<help>la manière dont vous protégez la vie privée des gens</help>
 			<question id="dataPersonal" display="This data contains">
-				<label>Can individuals be identified from this data?</label>
+				<label>Ces données permettent­elles d’identifier des individus?</label>
 				<radioset required="pilot">
 					<option value="not-personal" display="no data about individuals">
-						<label>no, the data is not about people or their activities</label>
-						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
+						<label>non, ces données ne concernent pas des individus ou leurs activités</label>
+						<help>Rappelez­vous que des individus peuvent être identifiés même si les données ne les concernent pas directement. Par exemple, des données concernant le trafic routier combinées avec des données concernant les trajets quotidiens d’une personne pourraient révéler des informations sur cette personne.</help>
 					</option>
 					<option value="summarised" display="aggregated data">
 						<label>no, the data has been anonymised by aggregating individuals into groups, so they can't be distinguished from other people in the group</label>
 						<help>Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.</help>
 					</option>
 					<option value="individual" display="information that could identify individuals">
-						<label>yes, there is a risk that individuals be identified, for example by third parties with access to extra information</label>
-						<help>Some data is legitimately about individuals like civil service pay or public expenses for example.</help>
+						<label>oui, il existe un risque que des individus soient identifiés, par exemple par un tiers disposant d’un accès à d’autres informations</label>
+						<help>Certaines données concernent les individus de manière légitime, comme par exemple les salaires dans la fonction publique ou les dépenses publiques.</help>
 					</option>
 				</radioset>
 			</question>
 			<if test="this.dataPersonal() === 'summarised'">
 				<question id="statisticalAnonAudited" display="The anonymisation process has been">
-					<label>Has your anonymisation process been independently audited?</label>
+					<label>Votre processus d’anonymisation a­t­il été contrôlé par un organisme indépendant?</label>
 					<yesno yes="independently audited"/>
 					<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
 				</question>
 			</if>
 			<if test="this.dataPersonal() === 'individual'">
 				<question id="appliedAnon" display="This data about individuals has been">
-					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
+					<label>Avez­vous tenté de réduire ou de supprimer la possibilité que des individus soient identifiés?</label>
 					<yesno required="pilot" yes="anonymised"/>
-					<help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>
+					<help>L’anonymisation permet de réduire le risque que des individus soient identifiés à partir des données que vous publiez. Le choix de la meilleure technique à utiliser dépend du type de vos données.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
-						<label>Are you required or permitted by law to publish this data about individuals?</label>
+						<label>Etes vous autorisés ou forcés par la loi à publier ces données concernant des individus?</label>
 						<yesno yes="must be published"/>
 						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'true'">
 						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
-							<label>Where do you document your right to publish data about individuals?</label>
-							<input type="url" placeholder="Disclosure Rationale URL"/>
+							<label>Où peut­on trouver des informations sur votre droit de publication d’informations personnelles?</label>
+							<input type="url" placeholder="URL de la déclaration"/>
 							<requirement level="standard">You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.</requirement>
 						</question>
 					</if>
@@ -419,12 +419,12 @@
 							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.</requirement>
 						</question>
 						<question id="dpStaff">
-							<label>Is there someone in your organisation who is responsible for data protection?</label>
+							<label>Existe­t­il au sein de votre organisation une personne responsable de la protection des données?</label>
 							<yesno required="pilot"/>
 						</question>
 						<if test="this.dpStaff() === 'true'">
 							<question id="dbStaffConsulted" display="The individual responsible for data protection">
-								<label>Have you involved them in the risk assessment process?</label>
+								<label>Avez­vous impliqué cette personne dans le processus de mise en place de la Déclaration d’Impact de Confidentialité?</label>
 								<yesno yes="has been consulted"/>
 								<requirement level="pilot">You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.</requirement>
 							</question>

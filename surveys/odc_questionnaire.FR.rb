@@ -2,29 +2,29 @@ survey 'FR',
   :full_title => 'France',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p><strong>This has been generated based on a default for EU countries and needs to be localised for France. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p>Ce questionnaire d’auto­évaluation permet de générer un certificat et un badge open data, que vous pouvez publier pour donner des informations à propos de vos données ouvertes. Nous utilisons aussi vos réponses pour comprendre comment les organisations publient leurs données ouvertes.</p><p>Répondre à ces questions vous permet de montrer vos efforts pour vous conformer à la législation française. Nous vous recommandons de vous renseigner aussi sur les autres règles et lois qui s’appliquent à votre secteur d’activité, particulièrement si vous résidez en dehors de la France.</p><p><strong>Il n’est pas nécessaire de répondre à toutes les questions pour obtenir un certificat.</strong> Répondez seulement à celles vous concernant.</p>' do
 
   translations :en => :default
   section_general 'General Information',
     :description => '',
     :display_header => false do
 
-    q_dataTitle 'What\'s this data called?',
-      :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
+    q_dataTitle 'Comment sont nommées vos données?',
+      :help_text => 'Le nom de vos données apparaîtra dans une liste de données similaires, Remplissez donc ce champ en étant aussi précis et descriptif que possible, afin qu’il soit facile et rapide d’identifier les particularités de vos données.',
       :required => :required
-    a_1 'Data Title',
+    a_1 'Titre',
       :string,
-      :placeholder => 'Data Title',
+      :placeholder => 'Titre',
       :required => :required
 
-    q_documentationUrl 'Where is it described?',
+    q_documentationUrl 'Où sont­elles décrites?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is described at',
-      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
-    a_1 'Documentation URL',
+      :help_text => 'Indiquez une adresse internet à laquelle on peut trouver le contenu détaillé de vos données. Il est possible d’indiquer un site avec un plus gros catalogue tel que data.gov.uk.'
+    a_1 'URL des documents',
       :string,
       :input_type => :url,
-      :placeholder => 'Documentation URL',
+      :placeholder => 'URL des documents',
       :requirement => ['pilot_1', 'basic_1']
 
     label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
@@ -41,55 +41,55 @@ survey 'FR',
     condition_A :q_releaseType, '==', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisher 'Who publishes this data?',
+    q_publisher 'Qui publie ces données?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is published by',
-      :help_text => 'Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
+      :help_text => 'Indiquez le nom de l’organisation qui publie ces données. Il s’agit probablement de votre employeur, à moins que vous effectuiez ces démarches au nom de quelqu’un d’autre.',
       :required => :required
-    a_1 'Data Publisher',
+    a_1 'Editeur des données',
       :string,
-      :placeholder => 'Data Publisher',
+      :placeholder => 'Editeur des données',
       :required => :required
 
-    q_publisherUrl 'What website is the data published on?',
+    q_publisherUrl 'Sur quel site internet sont publiées ces données?',
       :display_on_certificate => true,
       :text_as_statement => 'The data is published on',
-      :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
-    a_1 'Publisher URL',
+      :help_text => 'Indiquez l’adresse internet du site de l’éditeur. Cela nous permet de grouper les données provenant de la même organisation, même si les noms donnés sont différents.'
+    a_1 'Site de l’éditeur',
       :string,
       :input_type => :url,
-      :placeholder => 'Publisher URL'
+      :placeholder => 'Site de l’éditeur'
 
-    q_releaseType 'What kind of release is this?',
+    q_releaseType 'De quel genre de parution s’agit­il?',
       :pick => :one,
       :required => :required
-    a_oneoff 'a one-off release of a single dataset',
-      :help_text => 'This is a single file and you don’t currently plan to publish similar files in the future.'
-    a_collection 'a one-off release of a set of related datasets',
-      :help_text => 'This is a collection of related files about the same data and you don’t currently plan to publish similar collections in the future.'
-    a_series 'ongoing release of a series of related datasets',
-      :help_text => 'This is a sequence of datasets with planned periodic updates in the future.'
-    a_service 'a service or API for accessing open data',
-      :help_text => 'This is a live web service that exposes your data to programmers through an interface they can query.'
+    a_oneoff 'une parution exceptionnelle d’un unique jeu de données',
+      :help_text => 'Il s’agit d’un seul fichier, et vous ne prévoyez pas actuellement de publier d’autres fichiers de ce type dans le futur.'
+    a_collection 'une parution exceptionnelle de plusieurs jeux de données connexes',
+      :help_text => 'Il s’agit d’un ensemble de fichiers concernant les mêmes données, et vous ne prévoyez pas actuellement de publier d’autres fichiers de ce type dans le futur.'
+    a_series 'une parution en cours d’une série de jeux de données',
+      :help_text => 'Il s’agit d’une série de jeux de données dont la publication est en cours et qui est mise à jour de manière périodique.'
+    a_service 'un service ou une API permettant d’accéder à des données ouvertes',
+      :help_text => 'Il s’agit d’un service web qui présente vos données aux programmeurs à travers une interface interactive.'
 
   end
 
-  section_legal 'Legal Information',
-    :description => 'Rights, licensing and privacy' do
+  section_legal 'Informations Legales',
+    :description => 'Droits, autorisations et confidentialité' do
 
-    label_group_2 'Rights',
-      :help_text => 'your right to share this data with people',
+    label_group_2 'Droits',
+      :help_text => 'vos droits de partager ces données',
       :customer_renderer => '/partials/fieldset'
 
-    q_publisherRights 'Do you have the rights to publish this data as open data?',
-      :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
+    q_publisherRights 'Disposez­vous des droits nécessaires pour publier ces données en tant que données ouvertes?',
+      :help_text => 'Si vous organisation n’est pas à l’origine de la création ou de la récupération de ces données, il est possible que vous n’ayez pas le droit de les publier. Si vous n’êtes pas sûr, renseignez vous auprès du détenteur des données, car vous allez avoir besoin de sa permission pour les publier.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'yes, you have the rights to publish this data as open data',
+    a_yes 'oui, vous avez les droits nécessaires pour publier ces données en tant que données ouvertes',
       :requirement => ['standard_1']
-    a_no 'no, you don\'t have the rights to publish this data as open data'
-    a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
+    a_no 'non, vous n’avez pas les droits nécessaires pour publier ces données en tant que données ouvertes'
+    a_unsure 'vous n’êtes pas sûr d’avoir les droits nécessaires pour publier ces données en tant que données ouvertes'
     a_complicated 'the rights in this data are complicated or unclear'
 
     label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
@@ -299,8 +299,8 @@ survey 'FR',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_3 'Licensing',
-      :help_text => 'how you give people permission to use this data',
+    label_group_3 'Autorisations',
+      :help_text => 'la manière dont vous accordez aux gens la permission d’utiliser vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_copyrightURL 'Where have you published the rights statement for this dataset?',
@@ -695,26 +695,26 @@ survey 'FR',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightHolder
 
-    label_group_4 'Privacy',
-      :help_text => 'how you protect people\'s privacy',
+    label_group_4 'Confidentialite',
+      :help_text => 'la manière dont vous protégez la vie privée des gens',
       :customer_renderer => '/partials/fieldset'
 
-    q_dataPersonal 'Can individuals be identified from this data?',
+    q_dataPersonal 'Ces données permettent­elles d’identifier des individus?',
       :display_on_certificate => true,
       :text_as_statement => 'This data contains',
       :pick => :one,
       :required => :pilot
-    a_not_personal 'no, the data is not about people or their activities',
+    a_not_personal 'non, ces données ne concernent pas des individus ou leurs activités',
       :text_as_statement => 'no data about individuals',
-      :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
+      :help_text => 'Rappelez­vous que des individus peuvent être identifiés même si les données ne les concernent pas directement. Par exemple, des données concernant le trafic routier combinées avec des données concernant les trajets quotidiens d’une personne pourraient révéler des informations sur cette personne.'
     a_summarised 'no, the data has been anonymised by aggregating individuals into groups, so they can\'t be distinguished from other people in the group',
       :text_as_statement => 'aggregated data',
       :help_text => 'Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.'
-    a_individual 'yes, there is a risk that individuals be identified, for example by third parties with access to extra information',
+    a_individual 'oui, il existe un risque que des individus soient identifiés, par exemple par un tiers disposant d’un accès à d’autres informations',
       :text_as_statement => 'information that could identify individuals',
-      :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
+      :help_text => 'Certaines données concernent les individus de manière légitime, comme par exemple les salaires dans la fonction publique ou les dépenses publiques.'
 
-    q_statisticalAnonAudited 'Has your anonymisation process been independently audited?',
+    q_statisticalAnonAudited 'Votre processus d’anonymisation a­t­il été contrôlé par un organisme indépendant?',
       :display_on_certificate => true,
       :text_as_statement => 'The anonymisation process has been',
       :pick => :one
@@ -733,10 +733,10 @@ survey 'FR',
     condition_A :q_dataPersonal, '==', :a_summarised
     condition_B :q_statisticalAnonAudited, '==', :a_false
 
-    q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
+    q_appliedAnon 'Avez­vous tenté de réduire ou de supprimer la possibilité que des individus soient identifiés?',
       :display_on_certificate => true,
       :text_as_statement => 'This data about individuals has been',
-      :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.',
+      :help_text => 'L’anonymisation permet de réduire le risque que des individus soient identifiés à partir des données que vous publiez. Le choix de la meilleure technique à utiliser dépend du type de vos données.',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
@@ -746,7 +746,7 @@ survey 'FR',
     a_true 'yes',
       :text_as_statement => 'anonymised'
 
-    q_lawfulDisclosure 'Are you required or permitted by law to publish this data about individuals?',
+    q_lawfulDisclosure 'Etes vous autorisés ou forcés par la loi à publier ces données concernant des individus?',
       :display_on_certificate => true,
       :text_as_statement => 'By law, this data about individuals',
       :pick => :one
@@ -767,17 +767,17 @@ survey 'FR',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_false
 
-    q_lawfulDisclosureURL 'Where do you document your right to publish data about individuals?',
+    q_lawfulDisclosureURL 'Où peut­on trouver des informations sur votre droit de publication d’informations personnelles?',
       :display_on_certificate => true,
       :text_as_statement => 'The right to publish this data about individuals is documented at'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
-    a_1 'Disclosure Rationale URL',
+    a_1 'URL de la déclaration',
       :string,
       :input_type => :url,
-      :placeholder => 'Disclosure Rationale URL',
+      :placeholder => 'URL de la déclaration',
       :requirement => ['standard_9']
 
     label_standard_9 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
@@ -891,7 +891,7 @@ survey 'FR',
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
+    q_dpStaff 'Existe­t­il au sein de votre organisation une personne responsable de la protection des données?',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A and (B or C) and D'
@@ -902,7 +902,7 @@ survey 'FR',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted 'Have you involved them in the risk assessment process?',
+    q_dbStaffConsulted 'Avez­vous impliqué cette personne dans le processus de mise en place de la Déclaration d’Impact de Confidentialité?',
       :display_on_certificate => true,
       :text_as_statement => 'The individual responsible for data protection',
       :pick => :one
@@ -957,11 +957,11 @@ survey 'FR',
 
   end
 
-  section_practical 'Practical Information',
-    :description => 'Findability, accuracy, quality and guarantees' do
+  section_practical 'Informations Pratiques',
+    :description => 'Accessibilité, précision, qualité et garanties' do
 
-    label_group_6 'Findability',
-      :help_text => 'how you help people find your data',
+    label_group_6 'Accessibilité',
+      :help_text => 'la manière dont les gens peuvent trouver vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_onWebsite 'Is there a link to your data from your main website?',
@@ -996,8 +996,8 @@ survey 'FR',
 
     end
 
-    q_listed 'Is your data listed within a collection?',
-      :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',
+    q_listed 'Est­ce que vos données sont listées dans une catégorie?',
+      :help_text => 'Il est plus simple de trouver vos données lorsqu’elles sont listées dans des catégories pertinentes (par exemple académique, public ou santé), ou lorsqu’elles apparaissent dans des résultats de recherches pertinents.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1028,8 +1028,8 @@ survey 'FR',
 
     end
 
-    q_referenced 'Is this data referenced from your own publications?',
-      :help_text => 'When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.',
+    q_referenced 'Est­ce que ces données sont référencées dans vos propres publications?',
+      :help_text => 'Lorsque vous référencez vos données dans vos propres publications, telles que des rapports, des présentations ou des billets de blog, vous les inscrivez dans un contexte et aidez les gens à les trouver et à les comprendre plus facilement.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1060,8 +1060,8 @@ survey 'FR',
 
     end
 
-    label_group_7 'Accuracy',
-      :help_text => 'how you keep your data up-to-date',
+    label_group_7 'Précision',
+      :help_text => 'la manière dont vous gardez vos données à jour',
       :customer_renderer => '/partials/fieldset'
 
     q_serviceType 'Does the data behind your API change?',
@@ -1358,18 +1358,18 @@ survey 'FR',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_8 'Quality',
-      :help_text => 'how much people can rely on your data',
+    label_group_8 'Qualité',
+      :help_text => 'a quel point les gens peuvent se fier à vos données',
       :customer_renderer => '/partials/fieldset'
 
-    q_qualityUrl 'Where do you document issues with the quality of this data?',
+    q_qualityUrl 'A quel endroit vos documents traitent de la qualité de vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'Data quality is documented at',
-      :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
-    a_1 'Data Quality Documentation URL',
+      :help_text => 'Donnez une URL à laquelle il est possible de se renseigner sur la qualité de vos données. Les erreurs sont inévitables, et elles peuvent provenir par exemple de problèmes techniques ou d’erreurs apparaissant durant les changements de système. Nous vous recommandons d’être transparents sur la qualité de vos données, afin que les gens puissent savoir à quel point ils peuvent s’y fier.'
+    a_1 'URL des documents traitant de la qualité des données',
       :string,
       :input_type => :url,
-      :placeholder => 'Data Quality Documentation URL',
+      :placeholder => 'URL des documents traitant de la qualité des données',
       :requirement => ['standard_22']
 
     label_standard_22 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
@@ -1378,14 +1378,14 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_qualityUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_qualityControlUrl 'Where is your quality control process described?',
+    q_qualityControlUrl 'Où est décrit votre processus de contrôle qualité?',
       :display_on_certificate => true,
       :text_as_statement => 'Quality control processes are described at',
-      :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
-    a_1 'Quality Control Process Description URL',
+      :help_text => 'Donnez une URL à laquelle les gens peuvent se rendre pour se renseigner sur les contrôles en cours sur vos données, qu’ils soient automatiques ou manuels. Cela permet de les rassurer sur votre sérieux et sur la qualité de vos données, et peut amener à des améliorations bénéfiques pour tous.'
+    a_1 'URL de description du processus de contrôle qualité',
       :string,
       :input_type => :url,
-      :placeholder => 'Quality Control Process Description URL',
+      :placeholder => 'URL de description du processus de contrôle qualité',
       :requirement => ['exemplar_10']
 
     label_exemplar_10 'You should <strong>document your quality control process</strong> so that people can decide how much to trust your data.',
@@ -1394,8 +1394,8 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_9 'Guarantees',
-      :help_text => 'how much people can depend on your data’s availability',
+    label_group_9 'Garanties',
+      :help_text => 'a quel point les gens peuvent s’appuyer sur la disponibilité de vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_backups 'Do you take offsite backups?',
@@ -1453,19 +1453,19 @@ survey 'FR',
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_statusUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_onGoingAvailability 'How long will this data be available for?',
+    q_onGoingAvailability 'Pour combien de temps ces données seront­elles disponibles?',
       :display_on_certificate => true,
       :text_as_statement => 'The data is available',
       :pick => :one
-    a_experimental 'it might disappear at any time',
+    a_experimental 'elles pourraient disparaître à n’importe quel moment',
       :text_as_statement => 'experimentally and might disappear at any time'
-    a_short 'it\'s available experimentally but should be around for another year or so',
+    a_short 'elles sont disponibles à titre expérimental, mais devraient être disponibles pour encore environ un an',
       :text_as_statement => 'experimentally for another year or so',
       :requirement => ['pilot_13']
-    a_medium 'it\'s in your medium-term plans so should be around for a couple of years',
+    a_medium 'elles font partie de vos plans à moyen terme et devraient être encore disponibles pour environ deux ans',
       :text_as_statement => 'for at least a couple of years',
       :requirement => ['standard_25']
-    a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
+    a_long 'elles font partie de vos opérations quotidiennes et resteront donc publiées pendant longtemps',
       :text_as_statement => 'for a long time',
       :requirement => ['exemplar_11']
 
@@ -1492,11 +1492,11 @@ survey 'FR',
 
   end
 
-  section_technical 'Technical Information',
-    :description => 'Locations, formats and trust' do
+  section_technical 'Informations Techniques',
+    :description => 'Emplacement, formats et confiance' do
 
-    label_group_11 'Locations',
-      :help_text => 'how people can access your data',
+    label_group_11 'Emplacements',
+      :help_text => 'la manière dont les gens peuvent accéder à vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_datasetUrl 'Where is your dataset?',
@@ -1741,13 +1741,13 @@ survey 'FR',
       :required => :required
 
     label_group_12 'Formats',
-      :help_text => 'how people can work with your data',
+      :help_text => 'la manière dont les gens peuvent travailler avec vos données',
       :customer_renderer => '/partials/fieldset'
 
-    q_machineReadable 'Is this data machine-readable?',
+    q_machineReadable 'Vos données sont­elles lisibles par machine?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is',
-      :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
+      :help_text => 'Les gens préfèrent les formats qui sont facilement traitables par ordinateur, pour des raisons de rapidité et de précision. Par exemple, une photocopie scannée d’une feuille de calcul ne serait pas lisible par machine, contrairement à un fichier CSV.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1761,11 +1761,10 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
 
-    q_openStandard 'Is this data in a standard open format?',
+    q_openStandard 'Vos données sont­elles dans un format open data standard?',
       :display_on_certificate => true,
       :text_as_statement => 'The format of this data is',
-      :help_text => 'Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there’s lots of support so it’s easier for you to share data with more people. For example, XML, CSV and JSON are open standards.',
-      :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
+      :help_text => 'Les standards open data sont créés au travers d’un processus équitable, transparent et collaboratif. N’importe qui peut les mettre en place, et bénéficier de beaucoup d’assistance. Ils vous permettent donc de partager vos données plus facilement. Les formats XML, CSV et JSON sont par exemple des standards open data.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1779,16 +1778,16 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_openStandard, '==', :a_false
 
-    q_dataType 'What kind of data do you publish?',
+    q_dataType 'Quel genre de données publiez­vous?',
       :pick => :any
-    a_documents 'human-readable documents',
-      :help_text => 'Choose this if your data is meant for human consumption. For example; policy documents, white papers, reports and meeting minutes. These usually have some structure to them but are mostly text.'
-    a_statistical 'statistical data like counts, averages and percentages',
-      :help_text => 'Choose this if your data is statistical or numeric data like counts, averages or percentages. Like census results, traffic flow information or crime statistics for example.'
-    a_geographic 'geographic information, such as points and boundaries',
-      :help_text => 'Choose this if your data can be plotted on a map as points, boundaries or lines.'
-    a_structured 'other kinds of structured data',
-      :help_text => 'Choose this if your data is structured in other ways. Like event details, railway timetables, contact information or anything that can be interpreted as data, and analysed and presented in multiple ways.'
+    a_documents 'documents lisibles par des humains',
+      :help_text => 'Cochez cette case si vos données sont destinées à une consommation humaine. Par exemple: documents protocolaires, livres blancs, rapports et compte rendus de réunions. Ces documents sont généralement structurés, mais contiennent surtout du texte.'
+    a_statistical 'données statistiques, telles que des comptes, des moyennes ou des pourcentages',
+      :help_text => 'Cochez cette case si vos données sont des données statistiques ou numériques, telles que des comptes, des moyennes ou des pourcentages. Par exemple: résultats de recensement, informations sur le trafic routier, statistiques sur la criminalité...'
+    a_geographic 'informations géographiques, telles que des points et des frontières',
+      :help_text => 'Cochez cette case si vos données peuvent être indiquées sur une carte sous forme de points, de frontières ou de lignes.'
+    a_structured 'autre genre de données structurées',
+      :help_text => 'Cochez cette case si vos données sont structurées d’une autre manière. Par exemple des détails d’évènements, des horaires de train, des listes de contacts ou tout autre type de données qui peuvent être interprétées, analysées et présentées de différentes manières.'
 
     q_documentFormat 'Do your human-readable documents include formats that',
       :display_on_certificate => true,
@@ -1923,10 +1922,10 @@ survey 'FR',
     condition_A :q_dataType, '==', :a_structured
     condition_B :q_structuredFormat, '!=', :a_suitable
 
-    q_identifiers 'Does your data use persistent identifiers?',
+    q_identifiers 'Vos données utilisent­elles des identifiants homogènes?',
       :display_on_certificate => true,
       :text_as_statement => 'The data includes',
-      :help_text => 'Data is usually about real things like schools or roads or uses a coding scheme. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
+      :help_text => 'Les données traitent généralement de choses concrètes, comme des écoles ou des routes, ou bien utilisent un système de codage. Si des données provenant de différentes sources utilisent le même unique identifiant pour se référer aux mêmes choses de manière durable, il est facile de combiner les sources afin de créer des données plus utiles. Les identifiants peuvent être des GUIDs, des DOIs ou des URLs.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -2036,14 +2035,14 @@ survey 'FR',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_13 'Trust',
-      :help_text => 'how much trust people can put in your data',
+    label_group_13 'Confiance',
+      :help_text => 'a quel point les gens peuvent faire confiance à vos données',
       :customer_renderer => '/partials/fieldset'
 
-    q_provenance 'Do you provide machine-readable provenance for your data?',
+    q_provenance 'Fournissez­vous des informations lisibles par machine sur la provenance de vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'The provenance of this data is',
-      :help_text => 'This about the origins of how your data was created and processed before it was published. It builds trust in the data you publish because people can trace back how it has been handled.',
+      :help_text => 'Cela concerne les origines de vos données et la manière dont elles ont été créées et traitées avant d’être publiées. Cela permet de renforcer la confiance dans les données que vous publiez, puisqu’il est facile de remonter à la source et de savoir comment elles ont été gérées.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no',
@@ -2058,14 +2057,14 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
-    q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
+    q_digitalCertificate 'À quel endroit expliquez­vous le processus de vérification de vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'This data can be verified using',
-      :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
-    a_1 'Verification Process URL',
+      :help_text => 'Si vous fournissez des données importantes à quelqu’un, cette personne devrait pouvoir être en mesure de vérifier que les données qu’elle a reçues sont les mêmes que celles que vous publiez. Vous pouvez par exemple signer digitalement les données que vous publiez, afin qu’il soit possible de vérifier qu’elles n’ont pas été altérées.'
+    a_1 'URL du processus de vérification',
       :string,
       :input_type => :url,
-      :placeholder => 'Verification Process URL',
+      :placeholder => 'URL du processus de vérification',
       :requirement => ['exemplar_19']
 
     label_exemplar_19 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
@@ -2076,11 +2075,11 @@ survey 'FR',
 
   end
 
-  section_social 'Social Information',
-    :description => 'Documentation, support and services' do
+  section_social 'Informations Sociales',
+    :description => 'Documentation, assistance et services' do
 
     label_group_15 'Documentation',
-      :help_text => 'how you help people understand the context and content of your data',
+      :help_text => 'comment vous aidez les gens à comprendre le contenu et le contexte de vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_documentationMetadata 'Does your data documentation include machine-readable data for:',
@@ -2309,8 +2308,8 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_technicalDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_vocabulary 'Do the data formats use vocabularies or schemas?',
-      :help_text => 'Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains.',
+    q_vocabulary 'Est­ce que les formats de vos données utilisent des «vocabularies» ou des «schemas»?',
+      :help_text => 'Les formats tels que CSV, JSON, XML ou Turtle utilisent un «vocabulary» ou des «schemas» qui indiquent quelles rubriques ou quelles propriétés les données contiennent.',
       :pick => :one,
       :required => :standard
     a_false 'no'
@@ -2334,8 +2333,8 @@ survey 'FR',
     condition_A :q_vocabulary, '==', :a_true
     condition_B :q_schemaDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_codelists 'Are there any codes used in this data?',
-      :help_text => 'If your data uses codes to refer to things like geographical areas, spending categories or diseases for example, these need to be explained to people.',
+    q_codelists 'Vos données utilisent­elles des codes?',
+      :help_text => 'Si vos données utilisent des codes pour se référer à certains éléments, comme par exemple des zones géographiques, des catégories de dépenses ou des maladies, il est nécessaire que ce soit expliqué.',
       :pick => :one,
       :required => :standard
     a_false 'no'
@@ -2359,8 +2358,8 @@ survey 'FR',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_16 'Support',
-      :help_text => 'how you communicate with people who use your data',
+    label_group_16 'Assistance',
+      :help_text => 'comment vous communiquez avec les utilisateurs de vos données',
       :customer_renderer => '/partials/fieldset'
 
     q_contactUrl 'Where can people find out how to contact someone with questions about this data?',
@@ -2379,13 +2378,13 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_contactUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_improvementsContact 'Where can people find out how to improve the way your data is published?',
+    q_improvementsContact 'A qui peuvent s’adresser les personnes ayant des suggestions sur la manière dont vous publiez vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to suggest improvements to publication at'
-    a_1 'Improvement Suggestions URL',
+    a_1 'URL de suggestion',
       :string,
       :input_type => :url,
-      :placeholder => 'Improvement Suggestions URL',
+      :placeholder => 'URL de suggestion',
       :requirement => ['pilot_23']
 
     label_pilot_23 'You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.',
@@ -2409,7 +2408,7 @@ survey 'FR',
     dependency :rule => 'A'
     condition_A :q_dataProtectionUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_socialMedia 'Do you use social media to connect with people who use your data?',
+    q_socialMedia 'Utilisez­vous les réseaux et médias sociaux pour entrer en contact avec les personnes qui utilisent vos données?',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -2440,14 +2439,14 @@ survey 'FR',
 
     end
 
-    q_forum 'Where should people discuss this dataset?',
+    q_forum 'A quel endroit est­il possible de discuter à propos de vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'Discuss this data at',
-      :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
-    a_1 'Forum or Mailing List URL',
+      :help_text => 'Donnez l’adresse de votre forum ou d’une mailing list permettant de parler de vos données'
+    a_1 'URL de forum ou mailing list',
       :string,
       :input_type => :url,
-      :placeholder => 'Forum or Mailing List URL',
+      :placeholder => 'URL de forum ou mailing list',
       :requirement => ['standard_57']
 
     label_standard_57 'You should <strong>tell people where they can discuss your data</strong> and support one another.',
@@ -2494,7 +2493,7 @@ survey 'FR',
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_engagementTeam 'Do you have anyone who actively builds a community around this data?',
+    q_engagementTeam 'Quelqu’un est­il chargé de créer activement une communauté autour de ces données?',
       :help_text => 'A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
@@ -2521,17 +2520,17 @@ survey 'FR',
       :required => :required
 
     label_group_17 'Services',
-      :help_text => 'how you give people access to tools they need to work with your data',
+      :help_text => 'comment vous donnez accès aux outils nécessaires pour travailler avec vos données',
       :customer_renderer => '/partials/fieldset'
 
-    q_libraries 'Where do you list tools to work with your data?',
+    q_libraries 'A quel endroit listez­vous les outils permettant de travailler avec vos données?',
       :display_on_certificate => true,
       :text_as_statement => 'Tools to help use this data are listed at',
-      :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
-    a_1 'Tool URL',
+      :help_text => 'Indiquez une URL listant les outils permettant de travailler avec vos données que vous connaissez ou que vous recommandez.'
+    a_1 'URL des outils',
       :string,
       :input_type => :url,
-      :placeholder => 'Tool URL',
+      :placeholder => 'URL des outils',
       :requirement => ['exemplar_21']
 
     label_exemplar_21 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
