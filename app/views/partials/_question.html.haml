@@ -17,7 +17,7 @@
       %small= q.help_text
 
 - else
-  %li.container
+  %div.question.container
     - r = response_for(@response_set, q, nil, rg)
     - a = @response_set.autocomplete_override_message_for(q)
 

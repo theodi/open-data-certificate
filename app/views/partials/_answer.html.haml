@@ -38,9 +38,11 @@
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?
       - answer_attrs[:input_html][:placeholder] = a.placeholder_for(@render_context, I18n.locale) unless a.placeholder.blank?
       - answer_attrs[:input_html][:required] = 'required' if q.is_mandatory?
+
+      - if q.renderer == :repeater_default
+        - hidden = !repeated_template && @response_set.count_group_responses([q]) == 1
+        = link_to 'remove', '#', class: "btn btn-danger btn-mini remove_row #{'hide' if hidden}"
       = ff.input rc_to_attr(a.response_class), answer_attrs
-      - if repeated_template
-        = link_to 'remove', '#', class: 'btn btn-danger btn-mini remove_row'
     - else
       = a.text_for(nil, @render_context, I18n.locale)
   - unless (g && g.display_type == "grid") || a.help_text.blank?
