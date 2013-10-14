@@ -36,7 +36,7 @@
                           %td= render(a.custom_renderer || '/partials/answer', :g => g, :q => q, :a => a, :f => f) unless q.display_type == "label"
                         %th= q.text_for(:post, @render_context, I18n.locale)
         - when :repeater
-          - (@response_set.count_group_responses(qs) + 1).times do |rg|
+          - [@response_set.count_group_responses(qs), 1].max.times do |rg|
             - qs.each do |q|
               = render q.custom_renderer || "/partials/question", :g => g, :rg => rg, :q => q, :f => f, :repeated_template => rg > 0
           = submit_tag("Add #{g.text_for(@render_context, I18n.locale)}", :name => "section[#{qs.first.survey_section_id}][g_#{g.id}]", :class => "btn btn-primary add_row")

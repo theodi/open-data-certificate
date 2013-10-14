@@ -1,5 +1,6 @@
 -# TODO: disabled
 - rg ||= nil
+- repeated_template ||= false
 
 - r = response_for(@response_set, q, a, rg)
 - r.reference_identifier = a.reference_identifier
@@ -28,16 +29,21 @@
   - when "none"
     - if %w(date datetime time float integer string text).include? a.response_class
       = ff.input :answer_id, :as => :quiet, :input_html => {:class => a.css_class, :value => a.id}
+      - answer_attrs = {}
+      - answer_attrs[:as] = rc_to_as(a.response_class)
+      - answer_attrs[:hint] = a.text_for(:post, @render_context, I18n.locale)
+      - answer_attrs[:label] = "#{h question_text}".html_safe
 
-      - answer_attrs = { :as         => rc_to_as(a.response_class), |
-                         :hint       => a.text_for(:post, @render_context, I18n.locale), |
-                         :label      => "#{h question_text}".html_safe, |
-                         :input_html => generate_pick_none_input_html(r.to_formatted_s, a.default_value_for(@render_context, I18n.locale), a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder), |
-                         :status_message => { :message => status_message } |
-                       } |
+      - answer_attrs[:status_message] = { :message => status_message }
+      - if q.renderer == :repeater_default
+        - answer_attrs[:remove_button] = repeated_template || @response_set.count_group_responses([q]) != 1
+
+      - default_value = a.default_value_for(@render_context, I18n.locale)
+      - answer_attrs[:input_html] = generate_pick_none_input_html(r.to_formatted_s, default_value, a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder)
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?
       - answer_attrs[:input_html][:placeholder] = a.placeholder_for(@render_context, I18n.locale) unless a.placeholder.blank?
       - answer_attrs[:input_html][:required] = 'required' if q.is_mandatory?
+
       = ff.input rc_to_attr(a.response_class), answer_attrs
     - else
       = a.text_for(nil, @render_context, I18n.locale)
