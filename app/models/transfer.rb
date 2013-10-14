@@ -30,6 +30,18 @@ class Transfer < ActiveRecord::Base
     end
   end
 
+  def token_match?
+    token == token_confirmation
+  end
+
+  def target_email_match?
+    target_user.try(:email) == target_email
+  end
+
+  def has_target_user?
+    ! target_user.nil?
+  end
+
   private
 
   def generate_token
@@ -39,10 +51,6 @@ class Transfer < ActiveRecord::Base
   def transfer_dataset
     dataset.update_attribute(:user_id, target_user_id)
     dataset.response_sets.update_all(user_id: target_user_id)
-  end
-
-  def has_target_user
-    ! target_user.nil?
   end
 
   def notify_target_user

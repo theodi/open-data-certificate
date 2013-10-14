@@ -23,10 +23,10 @@ class Ability
     can :read, Dataset
 
     can :accept, Transfer do |transfer|
-      user &&
-      (transfer.token == transfer.token_confirmation) &&
-      (transfer.target_email == user.email) &&
-      ! transfer.target_email_changed?
+      transfer.has_target_user? &&
+      transfer.token_match? &&
+      transfer.target_email_match? &&
+      !transfer.target_email_changed?
     end
 
     can :destroy, Transfer, user: user
