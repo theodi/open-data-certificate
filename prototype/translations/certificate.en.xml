@@ -310,7 +310,7 @@
 					<label>Where do you give information about the current status of the service?</label>
 					<input type="url" placeholder="Service Status URL" />
 					<help>Give a URL for a page that tells people about the current status of your service, including any faults you are aware of.</help>
-					<requirement level="expert">You should <strong>have a service status page</strong> that tells people about the current status of your service.</requirement>
+					<requirement level="exemplar">You should <strong>have a service status page</strong> that tells people about the current status of your service.</requirement>
 				</question>
 			</if>
 			<question id="onGoingAvailability" display="The data is available">

@@ -1,8 +1,8 @@
 survey 'US',
   :full_title => 'United States',
   :default_mandatory => 'false',
-  :status => 'alpha',
-  :description => '<p><strong>This has been generated based on a default and needs to be localised for United States. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :status => 'beta',
+  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -81,11 +81,20 @@ survey 'US',
       :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
+    q_usGovData 'Was the data created by the US Government?',
+      :help_text => 'If the data was created by the US Government, and you are in the US, then you have the right to publish it. US Government works do not receive copyright protection',
+      :help_text_more_url => 'http://www.cendi.gov/publications/04-8copyright.html#312',
+      :pick => :one
+    a_false 'no'
+    a_true 'yes'
+
     q_publisherRights 'Do you have the rights to publish this data as open data?',
       :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
+    dependency :rule => 'A'
+    condition_A :q_usGovData, '==', :a_false
     a_yes 'yes, you have the rights to publish this data as open data',
       :requirement => ['standard_1']
     a_no 'no, you don\'t have the rights to publish this data as open data'
@@ -95,21 +104,24 @@ survey 'US',
     label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_1'
-    dependency :rule => 'A'
-    condition_A :q_publisherRights, '!=', :a_yes
+    dependency :rule => 'A and (B)'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '!=', :a_yes
 
     label_basic_2 'You must have the <strong>right to publish this data</strong>.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_2'
-    dependency :rule => 'A'
-    condition_A :q_publisherRights, '==', :a_no
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_no
 
     q_rightsRiskAssessment 'Where do you detail the risks people might encounter if they use this data?',
       :display_on_certificate => true,
       :text_as_statement => 'Risks in using this data are described at',
       :help_text => 'It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.'
-    dependency :rule => 'A'
-    condition_A :q_publisherRights, '==', :a_complicated
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_complicated
     a_1 'Risk Documentation URL',
       :string,
       :input_type => :url,
@@ -119,9 +131,10 @@ survey 'US',
     label_pilot_2 'You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_2'
-    dependency :rule => 'A and B'
-    condition_A :q_publisherRights, '==', :a_complicated
-    condition_B :q_rightsRiskAssessment, '==', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_complicated
+    condition_C :q_rightsRiskAssessment, '==', {:string_value => '', :answer_reference => '1'}
 
     q_publisherOrigin 'Was <em>all</em> this data originally created or gathered by you?',
       :display_on_certificate => true,
@@ -129,9 +142,10 @@ survey 'US',
       :help_text => 'If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.',
       :pick => :one,
       :required => :required
-    dependency :rule => '(A or B)'
-    condition_A :q_publisherRights, '==', :a_yes
-    condition_B :q_publisherRights, '==', :a_unsure
+    dependency :rule => 'A and (B or C)'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_yes
+    condition_C :q_publisherRights, '==', :a_unsure
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -141,9 +155,10 @@ survey 'US',
       :help_text => 'An extract or smaller part of someone else\'s data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_3']
@@ -151,11 +166,12 @@ survey 'US',
     label_basic_3 'You indicated that this data wasn\'t originally created or gathered by you, and wasn\'t crowdsourced, so it must have been extracted or calculated from other data sources.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_3'
-    dependency :rule => 'A and B and C and D'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_crowdsourced, '==', :a_false
-    condition_D :q_thirdPartyOrigin, '!=', :a_true
+    dependency :rule => 'A and B and C and D and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_crowdsourced, '==', :a_false
+    condition_E :q_thirdPartyOrigin, '!=', :a_true
 
     q_thirdPartyOpen 'Are <em>all</em> sources of this data already published as open data?',
       :display_on_certificate => true,
@@ -163,10 +179,11 @@ survey 'US',
       :help_text => 'You\'re allowed to republish someone else\'s data if it\'s already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you\'ll need legal advice before you can publish it.',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B and C'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_thirdPartyOrigin, '==', :a_true
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_thirdPartyOrigin, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -176,12 +193,13 @@ survey 'US',
     label_basic_4 'You should get <strong>legal advice to make sure you have the right to publish this data</strong>.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_4'
-    dependency :rule => 'A and B and C and D and E'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_thirdPartyOrigin, '==', :a_true
-    condition_D :q_thirdPartyOpen, '==', :a_false
+    dependency :rule => 'A and B and C and D and E and F'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_thirdPartyOrigin, '==', :a_true
     condition_E :q_thirdPartyOpen, '==', :a_false
+    condition_F :q_thirdPartyOpen, '==', :a_false
 
     q_crowdsourced 'Was some of this data crowdsourced?',
       :display_on_certificate => true,
@@ -189,9 +207,10 @@ survey 'US',
       :help_text => 'If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -201,20 +220,22 @@ survey 'US',
     label_basic_5 'You indicated that the data wasn\'t originally created or gathered by you, and wasn\'t extracted or calculated from other data, so it must have been crowdsourced.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_5'
-    dependency :rule => 'A and B and C and D'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_thirdPartyOrigin, '==', :a_false
-    condition_D :q_crowdsourced, '!=', :a_true
+    dependency :rule => 'A and B and C and D and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_thirdPartyOrigin, '==', :a_false
+    condition_E :q_crowdsourced, '!=', :a_true
 
     q_crowdsourcedContent 'Did contributors to this data use their judgement?',
       :help_text => 'If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B and C'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_crowdsourced, '==', :a_true
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_crowdsourced, '==', :a_true
     a_false 'no'
     a_true 'yes'
 
@@ -224,11 +245,12 @@ survey 'US',
       :help_text => 'Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor\'s rights to you, waive their rights, or license the data to you so you can publish it.',
       :help_text_more_url => 'http://en.wikipedia.org/wiki/Contributor_License_Agreement',
       :required => :required
-    dependency :rule => 'A and B and C and D'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_crowdsourced, '==', :a_true
-    condition_D :q_crowdsourcedContent, '==', :a_true
+    dependency :rule => 'A and B and C and D and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_crowdsourced, '==', :a_true
+    condition_E :q_crowdsourcedContent, '==', :a_true
     a_1 'Contributor Licence Agreement URL',
       :string,
       :input_type => :url,
@@ -239,11 +261,12 @@ survey 'US',
       :help_text => 'Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B and C and D'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_crowdsourced, '==', :a_true
-    condition_D :q_crowdsourcedContent, '==', :a_true
+    dependency :rule => 'A and B and C and D and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_crowdsourced, '==', :a_true
+    condition_E :q_crowdsourcedContent, '==', :a_true
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_6']
@@ -251,19 +274,21 @@ survey 'US',
     label_basic_6 'You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_6'
-    dependency :rule => 'A and B and C and D and E'
-    condition_A :q_publisherRights, '==', :a_unsure
-    condition_B :q_publisherOrigin, '==', :a_false
-    condition_C :q_crowdsourced, '==', :a_true
-    condition_D :q_crowdsourcedContent, '==', :a_true
-    condition_E :q_cldsRecorded, '==', :a_false
+    dependency :rule => 'A and B and C and D and E and F'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherRights, '==', :a_unsure
+    condition_C :q_publisherOrigin, '==', :a_false
+    condition_D :q_crowdsourced, '==', :a_true
+    condition_E :q_crowdsourcedContent, '==', :a_true
+    condition_F :q_cldsRecorded, '==', :a_false
 
     q_sourceDocumentationUrl 'Where do you describe sources of this data?',
       :display_on_certificate => true,
       :text_as_statement => 'The sources of this data are described at',
       :help_text => 'Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.'
-    dependency :rule => 'A'
-    condition_A :q_publisherOrigin, '==', :a_false
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherOrigin, '==', :a_false
     a_1 'Data Sources Documentation URL',
       :string,
       :input_type => :url,
@@ -273,18 +298,20 @@ survey 'US',
     label_pilot_3 'You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_3'
-    dependency :rule => 'A and B'
-    condition_A :q_publisherOrigin, '==', :a_false
-    condition_B :q_sourceDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherOrigin, '==', :a_false
+    condition_C :q_sourceDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_sourceDocumentationMetadata 'Is documentation about the sources of this data also in machine-readable format?',
       :display_on_certificate => true,
       :text_as_statement => 'The curator has published',
       :help_text => 'Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.',
       :pick => :one
-    dependency :rule => 'A and B'
-    condition_A :q_publisherOrigin, '==', :a_false
-    condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherOrigin, '==', :a_false
+    condition_C :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -294,10 +321,11 @@ survey 'US',
     label_standard_2 'You should <strong>include machine-readable data about the sources of this data</strong>.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_2'
-    dependency :rule => 'A and B and C'
-    condition_A :q_publisherOrigin, '==', :a_false
-    condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_C :q_sourceDocumentationMetadata, '==', :a_false
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_publisherOrigin, '==', :a_false
+    condition_C :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_D :q_sourceDocumentationMetadata, '==', :a_false
 
     label_group_3 'Licensing',
       :help_text => 'how you give people permission to use this data',
@@ -319,6 +347,28 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
+    q_internationalDataLicence 'Under which licence can people outside the US reuse this data?',
+      :display_on_certificate => true,
+      :text_as_statement => 'Outside the US, this data is available under',
+      :help_text => 'US Government works do have copyright protection outside the US. So people outside the US need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the data, it\'s expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :pick => :one,
+      :required => :required,
+      :display_type => 'dropdown'
+    dependency :rule => 'A'
+    condition_A :q_usGovData, '==', :a_true
+    a_odc_by 'Open Data Commons Attribution License',
+      :text_as_statement => 'Open Data Commons Attribution License'
+    a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
+      :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
+    a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
+    a_cc_zero 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
+    a_na 'Not applicable',
+      :text_as_statement => ''
+    a_other 'Other...',
+      :text_as_statement => ''
+
     q_dataLicence 'Under which licence can people reuse this data?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is available under',
@@ -326,6 +376,8 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    dependency :rule => 'A'
+    condition_A :q_usGovData, '==', :a_false
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
@@ -344,8 +396,9 @@ survey 'US',
       :text_as_statement => 'This data is not licensed because',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A'
+    dependency :rule => '(A or B)'
     condition_A :q_dataLicence, '==', :a_na
+    condition_B :q_internationalDataLicence, '==', :a_na
     a_norights 'there is no copyright in this data',
       :text_as_statement => 'there is no copyright in it',
       :help_text => 'Copyright only applies to data if you spent intellectual effort creating what\'s in it, for example, by writing text that\'s within the data, or deciding whether particular data is included. There\'s no copyright if the data only contains facts where no judgements were made about whether to include them or not.'
@@ -363,9 +416,10 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A and B'
+    dependency :rule => '(A or B) and C'
     condition_A :q_dataLicence, '==', :a_na
-    condition_B :q_dataNotApplicable, '==', :a_waived
+    condition_B :q_internationalDataLicence, '==', :a_na
+    condition_C :q_dataNotApplicable, '==', :a_waived
     a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
     a_cc0 'Creative Commons CCZero',
@@ -378,10 +432,11 @@ survey 'US',
       :text_as_statement => 'Rights in the data have been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive copyright in the data.',
       :required => :required
-    dependency :rule => 'A and B and C'
+    dependency :rule => '(A or B) and C and D'
     condition_A :q_dataLicence, '==', :a_na
-    condition_B :q_dataNotApplicable, '==', :a_waived
-    condition_C :q_dataWaiver, '==', :a_other
+    condition_B :q_internationalDataLicence, '==', :a_na
+    condition_C :q_dataNotApplicable, '==', :a_waived
+    condition_D :q_dataWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
       :input_type => :url,
@@ -393,8 +448,9 @@ survey 'US',
       :text_as_statement => 'This data is available under',
       :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.',
       :required => :required
-    dependency :rule => 'A'
+    dependency :rule => '(A or B)'
     condition_A :q_dataLicence, '==', :a_other
+    condition_B :q_internationalDataLicence, '==', :a_other
     a_1 'Other Licence Name',
       :string,
       :required => :required,
@@ -405,8 +461,9 @@ survey 'US',
       :text_as_statement => 'This licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
-    dependency :rule => 'A'
+    dependency :rule => '(A or B)'
     condition_A :q_dataLicence, '==', :a_other
+    condition_B :q_internationalDataLicence, '==', :a_other
     a_1 'Other Licence URL',
       :string,
       :input_type => :url,
@@ -418,8 +475,9 @@ survey 'US',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A'
+    dependency :rule => '(A or B)'
     condition_A :q_dataLicence, '==', :a_other
+    condition_B :q_internationalDataLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_7']
@@ -427,15 +485,18 @@ survey 'US',
     label_basic_7 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_7'
-    dependency :rule => 'A and B'
+    dependency :rule => '(A or B) and C'
     condition_A :q_dataLicence, '==', :a_other
-    condition_B :q_otherDataLicenceOpen, '==', :a_false
+    condition_B :q_internationalDataLicence, '==', :a_other
+    condition_C :q_otherDataLicenceOpen, '==', :a_false
 
     q_contentRights 'Is there any copyright in the content of this data?',
       :display_on_certificate => true,
       :text_as_statement => 'There are',
       :pick => :one,
       :required => :required
+    dependency :rule => 'A'
+    condition_A :q_usGovData, '==', :a_false
     a_norights 'no, the data only contains facts and numbers',
       :text_as_statement => 'no rights in the content of the data',
       :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
@@ -451,8 +512,9 @@ survey 'US',
       :text_as_statement => 'The content has been',
       :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
       :pick => :one
-    dependency :rule => 'A'
-    condition_A :q_contentRights, '==', :a_norights
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -462,9 +524,10 @@ survey 'US',
     label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_3'
-    dependency :rule => 'A and B'
-    condition_A :q_contentRights, '==', :a_norights
-    condition_B :q_explicitWaiver, '==', :a_false
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_norights
+    condition_C :q_explicitWaiver, '==', :a_false
 
     q_contentLicence 'Under which licence can others reuse content?',
       :display_on_certificate => true,
@@ -473,8 +536,9 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A'
-    condition_A :q_contentRights, '==', :a_samerights
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
     a_cc_by 'Creative Commons Attribution',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
@@ -491,9 +555,10 @@ survey 'US',
       :text_as_statement => 'The content in this data is not licensed because',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_na
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_na
     a_norights 'there is no copyright in the content of this data',
       :text_as_statement => 'there is no copyright',
       :help_text => 'Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that\'s within the data. There\'s no copyright if the content only contains facts.'
@@ -511,10 +576,11 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_na
-    condition_C :q_contentNotApplicable, '==', :a_waived
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_na
+    condition_D :q_contentNotApplicable, '==', :a_waived
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_other 'Other...',
@@ -525,11 +591,12 @@ survey 'US',
       :text_as_statement => 'Copyright has been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
       :required => :required
-    dependency :rule => 'A and B and C and D'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_na
-    condition_C :q_contentNotApplicable, '==', :a_waived
-    condition_D :q_contentWaiver, '==', :a_other
+    dependency :rule => 'A and B and C and D and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_na
+    condition_D :q_contentNotApplicable, '==', :a_waived
+    condition_E :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
       :input_type => :url,
@@ -541,9 +608,10 @@ survey 'US',
       :text_as_statement => 'The content is available under',
       :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
       :required => :required,
@@ -554,9 +622,10 @@ survey 'US',
       :text_as_statement => 'The content licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
       :string,
       :input_type => :url,
@@ -568,9 +637,10 @@ survey 'US',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B and C'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_8']
@@ -578,18 +648,20 @@ survey 'US',
     label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_8'
-    dependency :rule => 'A and B and C'
-    condition_A :q_contentRights, '==', :a_samerights
-    condition_B :q_contentLicence, '==', :a_other
-    condition_C :q_otherContentLicenceOpen, '==', :a_false
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_contentLicence, '==', :a_other
+    condition_D :q_otherContentLicenceOpen, '==', :a_false
 
     q_contentRightsURL 'Where are the rights and licensing of the content explained?',
       :display_on_certificate => true,
       :text_as_statement => 'The rights and licensing of the content are explained at',
       :help_text => 'Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.',
       :required => :required
-    dependency :rule => 'A'
-    condition_A :q_contentRights, '==', :a_mixedrights
+    dependency :rule => 'A and B'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_contentRights, '==', :a_mixedrights
     a_1 'Content Rights Description URL',
       :string,
       :input_type => :url,
@@ -1361,11 +1433,11 @@ survey 'US',
       :string,
       :input_type => :url,
       :placeholder => 'Service Status URL',
-      :requirement => ['expert_1']
+      :requirement => ['exemplar_9']
 
-    label_expert_1 'You should <strong>have a service status page</strong> that tells people about the current status of your service.',
-      :custom_renderer => '/partials/requirement_expert',
-      :requirement => 'expert_1'
+    label_exemplar_9 'You should <strong>have a service status page</strong> that tells people about the current status of your service.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_9'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_statusUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -1384,7 +1456,7 @@ survey 'US',
       :requirement => ['standard_25']
     a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
       :text_as_statement => 'for a long time',
-      :requirement => ['exemplar_9']
+      :requirement => ['exemplar_10']
 
     label_pilot_11 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1401,9 +1473,9 @@ survey 'US',
     condition_A :q_onGoingAvailability, '!=', :a_medium
     condition_B :q_onGoingAvailability, '!=', :a_long
 
-    label_exemplar_9 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
+    label_exemplar_10 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_9'
+      :requirement => 'exemplar_10'
     dependency :rule => 'A'
     condition_A :q_onGoingAvailability, '!=', :a_long
 
@@ -1570,10 +1642,10 @@ survey 'US',
       :requirement => ['standard_29']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_10']
+      :requirement => ['exemplar_11']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_11']
+      :requirement => ['exemplar_12']
 
     label_standard_29 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1583,17 +1655,17 @@ survey 'US',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_current
 
-    label_exemplar_10 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
+    label_exemplar_11 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_10'
+      :requirement => 'exemplar_11'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_template
 
-    label_exemplar_11 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
+    label_exemplar_12 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_11'
+      :requirement => 'exemplar_12'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
@@ -1749,7 +1821,7 @@ survey 'US',
     a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
-      :requirement => ['exemplar_12']
+      :requirement => ['exemplar_13']
     a_tabular 'treat statistical data as a table like CSV',
       :text_as_statement => 'in a tabular data format',
       :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
@@ -1762,9 +1834,9 @@ survey 'US',
       :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
 
-    label_exemplar_12 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
+    label_exemplar_13 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_12'
+      :requirement => 'exemplar_13'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
@@ -1795,7 +1867,7 @@ survey 'US',
     a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
-      :requirement => ['exemplar_13']
+      :requirement => ['exemplar_14']
     a_generic 'keeps data structured like JSON, XML or CSV',
       :text_as_statement => 'in a generic data format',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
@@ -1804,9 +1876,9 @@ survey 'US',
       :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
 
-    label_exemplar_13 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
+    label_exemplar_14 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_13'
+      :requirement => 'exemplar_14'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_geographic
     condition_B :q_geographicFormat, '!=', :a_specific
@@ -1872,7 +1944,7 @@ survey 'US',
     a_resolvable 'yes, the identifiers are URLs that resolve to give information',
       :text_as_statement => 'resolve because they are URLs',
       :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.',
-      :requirement => ['exemplar_14']
+      :requirement => ['exemplar_15']
 
     label_standard_34 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1882,9 +1954,9 @@ survey 'US',
     condition_B :q_resolvingIds, '!=', :a_service
     condition_C :q_resolvingIds, '!=', :a_resolvable
 
-    label_exemplar_14 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
+    label_exemplar_15 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_14'
+      :requirement => 'exemplar_15'
     dependency :rule => 'A and (B)'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '!=', :a_resolvable
@@ -1942,11 +2014,11 @@ survey 'US',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'referenced in this data',
-      :requirement => ['exemplar_15']
+      :requirement => ['exemplar_16']
 
-    label_exemplar_15 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
+    label_exemplar_16 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_15'
+      :requirement => 'exemplar_16'
     dependency :rule => 'A and B and C and D'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
@@ -1967,11 +2039,11 @@ survey 'US',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => ['exemplar_16']
+      :requirement => ['exemplar_17']
 
-    label_exemplar_16 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
+    label_exemplar_17 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_16'
+      :requirement => 'exemplar_17'
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
@@ -1983,11 +2055,11 @@ survey 'US',
       :string,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
-      :requirement => ['exemplar_17']
+      :requirement => ['exemplar_18']
 
-    label_exemplar_17 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
+    label_exemplar_18 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_17'
+      :requirement => 'exemplar_18'
     dependency :rule => 'A'
     condition_A :q_digitalCertificate, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2417,11 +2489,11 @@ survey 'US',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['exemplar_18']
+      :requirement => ['exemplar_19']
 
-    label_exemplar_18 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
+    label_exemplar_19 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_18'
+      :requirement => 'exemplar_19'
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_false
 
@@ -2449,11 +2521,11 @@ survey 'US',
       :string,
       :input_type => :url,
       :placeholder => 'Tool URL',
-      :requirement => ['exemplar_19']
+      :requirement => ['exemplar_20']
 
-    label_exemplar_19 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
+    label_exemplar_20 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_19'
+      :requirement => 'exemplar_20'
     dependency :rule => 'A'
     condition_A :q_libraries, '==', {:string_value => '', :answer_reference => '1'}
 

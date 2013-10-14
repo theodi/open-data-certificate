@@ -1317,13 +1317,13 @@ labels:
     text: "You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens."
   standard_24:
     text: "You should <strong>describe what guarantees you have around service availability</strong> so that people know how much they can rely on it."
-  expert_1:
+  exemplar_9:
     text: "You should <strong>have a service status page</strong> that tells people about the current status of your service."
   pilot_11:
     text: "You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data."
   standard_25:
     text: "You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data."
-  exemplar_9:
+  exemplar_10:
     text: "You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data."
 # Technical Information Requirements
   basic_9:
@@ -1344,9 +1344,9 @@ labels:
     text: "You should <strong>have a service description document or single entry point for your API</strong> so that people can access it."
   standard_29:
     text: "You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it."
-  exemplar_10:
-    text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
   exemplar_11:
+    text: "You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically."
+  exemplar_12:
     text: "You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all"
   pilot_14:
     text: "You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process."
@@ -1356,13 +1356,13 @@ labels:
     text: "You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles."
   pilot_15:
     text: "You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process."
-  exemplar_12:
+  exemplar_13:
     text: "You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse."
   standard_32:
     text: "You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse."
   pilot_16:
     text: "You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process."
-  exemplar_13:
+  exemplar_14:
     text: "You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it."
   pilot_17:
     text: "You should <strong>publish geographic data as structured data</strong> so that it's easy to process."
@@ -1372,15 +1372,15 @@ labels:
     text: "You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things."
   standard_34:
     text: "You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them."
-  exemplar_14:
+  exemplar_15:
     text: "You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information."
   standard_35:
     text: "You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer."
-  exemplar_15:
-    text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
   exemplar_16:
-    text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
+    text: "You should <strong>use URLs to third-party information in your data</strong> so that it's easy to combine with other data that uses those URLs."
   exemplar_17:
+    text: "You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed."
+  exemplar_18:
     text: "You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it."
 # Social Information Requirements
   standard_36:
@@ -1439,7 +1439,7 @@ labels:
     text: "You should <strong>provide instructions about how people can report errors</strong> in your data."
   standard_59:
     text: "You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date."
-  exemplar_18:
-    text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
   exemplar_19:
+    text: "You should <strong>build a community of people around your data</strong> to encourage wider use of your data."
+  exemplar_20:
     text: "You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data."
