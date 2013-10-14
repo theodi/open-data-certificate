@@ -77,6 +77,17 @@ class TransfersControllerTest < ActionController::TestCase
     refute transfer.reload.accepted?
   end
 
+  test "accepting user can't override the target_email" do
+    sign_in user = FactoryGirl.create(:user)
+    transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
+
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: user.email} 
+
+    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+    refute transfer.reload.accepted?
+
+  end
+
 
   test "user can destroy a transfer they initiated" do
     transfer = FactoryGirl.create :transfer
@@ -89,7 +100,7 @@ class TransfersControllerTest < ActionController::TestCase
     assert flash[:error].nil?
   end
 
-  test "user can't destroy a transfer they not initiated" do
+  test "user can't destroy a transfer they did not initiate" do
     transfer = FactoryGirl.create :transfer
     sign_in FactoryGirl.create(:user)
 

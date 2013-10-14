@@ -25,7 +25,8 @@ class Ability
     can :accept, Transfer do |transfer|
       user &&
       (transfer.token == transfer.token_confirmation) &&
-      (transfer.target_email == user.email)
+      (transfer.target_email == user.email) &&
+      ! transfer.target_email_changed?
     end
 
     can :destroy, Transfer, user: user
