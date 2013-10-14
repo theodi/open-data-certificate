@@ -3,6 +3,7 @@ class ResponseSet < ActiveRecord::Base
   include AASM
 
   after_save :update_certificate
+  before_save :update_dataset
 
   attr_accessible :dataset_id
 
@@ -84,11 +85,6 @@ class ResponseSet < ActiveRecord::Base
 
   scope :by_newest, order("response_sets.created_at DESC")
   scope :completed, where("response_sets.completed_at IS NOT NULL")
-
-  alias_method :original_dataset, :dataset
-  def dataset
-    dataset = original_dataset || Dataset.create
-  end
 
   def title
     dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
@@ -295,6 +291,10 @@ class ResponseSet < ActiveRecord::Base
     create_certificate if certificate.nil?
 
     certificate.update_from_response_set
+  end
+
+  def update_dataset
+    create_dataset if dataset.nil?
   end
 
   def copy_answers_from_response_set!(source_response_set)
