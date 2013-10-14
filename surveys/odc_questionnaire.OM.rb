@@ -1361,11 +1361,11 @@ survey 'OM',
       :string,
       :input_type => :url,
       :placeholder => 'Service Status URL',
-      :requirement => ['expert_1']
+      :requirement => ['exemplar_9']
 
-    label_expert_1 'You should <strong>have a service status page</strong> that tells people about the current status of your service.',
-      :custom_renderer => '/partials/requirement_expert',
-      :requirement => 'expert_1'
+    label_exemplar_9 'You should <strong>have a service status page</strong> that tells people about the current status of your service.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_9'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_statusUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -1384,7 +1384,7 @@ survey 'OM',
       :requirement => ['standard_25']
     a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
       :text_as_statement => 'for a long time',
-      :requirement => ['exemplar_9']
+      :requirement => ['exemplar_10']
 
     label_pilot_11 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
       :custom_renderer => '/partials/requirement_pilot',
@@ -1401,9 +1401,9 @@ survey 'OM',
     condition_A :q_onGoingAvailability, '!=', :a_medium
     condition_B :q_onGoingAvailability, '!=', :a_long
 
-    label_exemplar_9 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
+    label_exemplar_10 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_9'
+      :requirement => 'exemplar_10'
     dependency :rule => 'A'
     condition_A :q_onGoingAvailability, '!=', :a_long
 
@@ -1570,10 +1570,10 @@ survey 'OM',
       :requirement => ['standard_29']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_10']
+      :requirement => ['exemplar_11']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_11']
+      :requirement => ['exemplar_12']
 
     label_standard_29 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1583,17 +1583,17 @@ survey 'OM',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_current
 
-    label_exemplar_10 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
+    label_exemplar_11 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_10'
+      :requirement => 'exemplar_11'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_template
 
-    label_exemplar_11 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
+    label_exemplar_12 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_11'
+      :requirement => 'exemplar_12'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
@@ -1749,7 +1749,7 @@ survey 'OM',
     a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
-      :requirement => ['exemplar_12']
+      :requirement => ['exemplar_13']
     a_tabular 'treat statistical data as a table like CSV',
       :text_as_statement => 'in a tabular data format',
       :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
@@ -1762,9 +1762,9 @@ survey 'OM',
       :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
 
-    label_exemplar_12 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
+    label_exemplar_13 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_12'
+      :requirement => 'exemplar_13'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
@@ -1795,7 +1795,7 @@ survey 'OM',
     a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
-      :requirement => ['exemplar_13']
+      :requirement => ['exemplar_14']
     a_generic 'keeps data structured like JSON, XML or CSV',
       :text_as_statement => 'in a generic data format',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
@@ -1804,9 +1804,9 @@ survey 'OM',
       :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
 
-    label_exemplar_13 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
+    label_exemplar_14 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_13'
+      :requirement => 'exemplar_14'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_geographic
     condition_B :q_geographicFormat, '!=', :a_specific
@@ -1872,7 +1872,7 @@ survey 'OM',
     a_resolvable 'yes, the identifiers are URLs that resolve to give information',
       :text_as_statement => 'resolve because they are URLs',
       :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.',
-      :requirement => ['exemplar_14']
+      :requirement => ['exemplar_15']
 
     label_standard_34 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
       :custom_renderer => '/partials/requirement_standard',
@@ -1882,9 +1882,9 @@ survey 'OM',
     condition_B :q_resolvingIds, '!=', :a_service
     condition_C :q_resolvingIds, '!=', :a_resolvable
 
-    label_exemplar_14 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
+    label_exemplar_15 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_14'
+      :requirement => 'exemplar_15'
     dependency :rule => 'A and (B)'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '!=', :a_resolvable
@@ -1942,11 +1942,11 @@ survey 'OM',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'referenced in this data',
-      :requirement => ['exemplar_15']
+      :requirement => ['exemplar_16']
 
-    label_exemplar_15 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
+    label_exemplar_16 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_15'
+      :requirement => 'exemplar_16'
     dependency :rule => 'A and B and C and D'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
@@ -1967,11 +1967,11 @@ survey 'OM',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => ['exemplar_16']
+      :requirement => ['exemplar_17']
 
-    label_exemplar_16 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
+    label_exemplar_17 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_16'
+      :requirement => 'exemplar_17'
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
@@ -1983,11 +1983,11 @@ survey 'OM',
       :string,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
-      :requirement => ['exemplar_17']
+      :requirement => ['exemplar_18']
 
-    label_exemplar_17 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
+    label_exemplar_18 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_17'
+      :requirement => 'exemplar_18'
     dependency :rule => 'A'
     condition_A :q_digitalCertificate, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2417,11 +2417,11 @@ survey 'OM',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['exemplar_18']
+      :requirement => ['exemplar_19']
 
-    label_exemplar_18 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
+    label_exemplar_19 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_18'
+      :requirement => 'exemplar_19'
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_false
 
@@ -2449,11 +2449,11 @@ survey 'OM',
       :string,
       :input_type => :url,
       :placeholder => 'Tool URL',
-      :requirement => ['exemplar_19']
+      :requirement => ['exemplar_20']
 
-    label_exemplar_19 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
+    label_exemplar_20 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_19'
+      :requirement => 'exemplar_20'
     dependency :rule => 'A'
     condition_A :q_libraries, '==', {:string_value => '', :answer_reference => '1'}
 
