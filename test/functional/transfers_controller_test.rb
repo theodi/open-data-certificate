@@ -63,7 +63,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     put :accept, id: transfer.id
 
-    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied_token'), flash[:error]
     refute transfer.reload.accepted?
   end
 
@@ -73,7 +73,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
 
-    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied_email'), flash[:error]
     refute transfer.reload.accepted?
   end
 

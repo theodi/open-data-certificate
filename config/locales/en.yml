@@ -276,6 +276,8 @@ en:
       unable_to_create: 'Unable to create transfer: %{errors}'
       complete: Transfer completed
       access_denied: Access Denied
+      access_denied_email: Access Denied - target email doesn't match logged in user
+      access_denied_token: Access Denied - token didn't match
   transfer_mailer:
     notify:
       subject: Questionnaire hand over
