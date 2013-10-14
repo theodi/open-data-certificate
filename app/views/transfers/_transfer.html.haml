@@ -4,7 +4,7 @@
   =link_to "##{modal_dom_id}", 'data-toggle' => 'modal', 'class' => 'transfer' do
     .icon-cog
     = t '.title'
-  .modal.fade{id: modal_dom_id}
+  .modal.hide.fade{id: modal_dom_id}
     .modal-header
       %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
       %h3 
