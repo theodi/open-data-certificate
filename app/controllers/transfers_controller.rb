@@ -32,7 +32,15 @@ class TransfersController < ApplicationController
       authorize! :accept, @transfer
       flash[:notice] = t('transfers.flashes.complete') if @transfer.accept!
     rescue CanCan::AccessDenied
-      flash[:error] = t('transfers.flashes.access_denied')
+      flash[:error] =
+        if !@transfer.token_match?
+          t('transfers.flashes.access_denied_token')
+        elsif !@transfer.target_email_match?
+          t('transfers.flashes.access_denied_email')
+        else
+          t('transfers.flashes.access_denied')
+        end
+          
     end
 
     redirect_to dashboard_path
