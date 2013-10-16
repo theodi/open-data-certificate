@@ -46,3 +46,5 @@ app/assets/images/.DS_Store
 
 # Chef secrets and that
 .chef/
+
+.DS_Store

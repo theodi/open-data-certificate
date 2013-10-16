@@ -396,9 +396,11 @@ survey 'US',
       :text_as_statement => 'This data is not licensed because',
       :pick => :one,
       :required => :required
-    dependency :rule => '(A or B)'
-    condition_A :q_dataLicence, '==', :a_na
-    condition_B :q_internationalDataLicence, '==', :a_na
+    dependency :rule => '((A and B) or (C and D))'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_na
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_na
     a_norights 'there is no copyright in this data',
       :text_as_statement => 'there is no copyright in it',
       :help_text => 'Copyright only applies to data if you spent intellectual effort creating what\'s in it, for example, by writing text that\'s within the data, or deciding whether particular data is included. There\'s no copyright if the data only contains facts where no judgements were made about whether to include them or not.'
@@ -416,10 +418,12 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => '(A or B) and C'
-    condition_A :q_dataLicence, '==', :a_na
-    condition_B :q_internationalDataLicence, '==', :a_na
-    condition_C :q_dataNotApplicable, '==', :a_waived
+    dependency :rule => '((A and B) or (C and D)) and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_na
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_na
+    condition_E :q_dataNotApplicable, '==', :a_waived
     a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
     a_cc0 'Creative Commons CCZero',
@@ -432,11 +436,13 @@ survey 'US',
       :text_as_statement => 'Rights in the data have been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive copyright in the data.',
       :required => :required
-    dependency :rule => '(A or B) and C and D'
-    condition_A :q_dataLicence, '==', :a_na
-    condition_B :q_internationalDataLicence, '==', :a_na
-    condition_C :q_dataNotApplicable, '==', :a_waived
-    condition_D :q_dataWaiver, '==', :a_other
+    dependency :rule => '((A and B) or (C and D)) and E and F'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_na
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_na
+    condition_E :q_dataNotApplicable, '==', :a_waived
+    condition_F :q_dataWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
       :input_type => :url,
@@ -448,9 +454,11 @@ survey 'US',
       :text_as_statement => 'This data is available under',
       :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.',
       :required => :required
-    dependency :rule => '(A or B)'
-    condition_A :q_dataLicence, '==', :a_other
-    condition_B :q_internationalDataLicence, '==', :a_other
+    dependency :rule => '((A and B) or (C and D))'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_other
     a_1 'Other Licence Name',
       :string,
       :required => :required,
@@ -461,9 +469,11 @@ survey 'US',
       :text_as_statement => 'This licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
-    dependency :rule => '(A or B)'
-    condition_A :q_dataLicence, '==', :a_other
-    condition_B :q_internationalDataLicence, '==', :a_other
+    dependency :rule => '((A and B) or (C and D))'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_other
     a_1 'Other Licence URL',
       :string,
       :input_type => :url,
@@ -475,9 +485,11 @@ survey 'US',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
-    dependency :rule => '(A or B)'
-    condition_A :q_dataLicence, '==', :a_other
-    condition_B :q_internationalDataLicence, '==', :a_other
+    dependency :rule => '((A and B) or (C and D))'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_7']
@@ -485,10 +497,29 @@ survey 'US',
     label_basic_7 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_7'
-    dependency :rule => '(A or B) and C'
-    condition_A :q_dataLicence, '==', :a_other
-    condition_B :q_internationalDataLicence, '==', :a_other
-    condition_C :q_otherDataLicenceOpen, '==', :a_false
+    dependency :rule => '((A and B) or (C and D)) and E'
+    condition_A :q_usGovData, '==', :a_false
+    condition_B :q_dataLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalDataLicence, '==', :a_other
+    condition_E :q_otherDataLicenceOpen, '==', :a_false
+
+    q_internationalContentRights 'For those outside the US, is there any copyright in the content of this data?',
+      :display_on_certificate => true,
+      :text_as_statement => 'There are',
+      :pick => :one,
+      :required => :required
+    dependency :rule => 'A'
+    condition_A :q_usGovData, '==', :a_true
+    a_norights 'no, the data only contains facts and numbers',
+      :text_as_statement => 'no rights in the content of the data',
+      :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
+    a_samerights 'yes, and the rights are all held by the same person or organisation',
+      :text_as_statement => '',
+      :help_text => 'Choose this option if the content in the data was all created by or transferred to the same person or organisation.'
+    a_mixedrights 'yes, and the rights are held by different people or organisations',
+      :text_as_statement => '',
+      :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
 
     q_contentRights 'Is there any copyright in the content of this data?',
       :display_on_certificate => true,
@@ -512,9 +543,11 @@ survey 'US',
       :text_as_statement => 'The content has been',
       :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
       :pick => :one
-    dependency :rule => 'A and B'
+    dependency :rule => '((A and B) or (C and D))'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_norights
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
@@ -524,10 +557,12 @@ survey 'US',
     label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_3'
-    dependency :rule => 'A and B and C'
+    dependency :rule => '((A and B) or (C and D)) and E'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_norights
-    condition_C :q_explicitWaiver, '==', :a_false
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_norights
+    condition_E :q_explicitWaiver, '==', :a_false
 
     q_contentLicence 'Under which licence can others reuse content?',
       :display_on_certificate => true,
@@ -536,9 +571,11 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A and B'
+    dependency :rule => '((A and B) or (C and D))'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
     a_cc_by 'Creative Commons Attribution',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
@@ -555,10 +592,12 @@ survey 'US',
       :text_as_statement => 'The content in this data is not licensed because',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B and C'
+    dependency :rule => '((A and B) or (C and D)) and E'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_na
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_na
     a_norights 'there is no copyright in the content of this data',
       :text_as_statement => 'there is no copyright',
       :help_text => 'Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that\'s within the data. There\'s no copyright if the content only contains facts.'
@@ -576,11 +615,13 @@ survey 'US',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A and B and C and D'
+    dependency :rule => '((A and B) or (C and D)) and E and F'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_na
-    condition_D :q_contentNotApplicable, '==', :a_waived
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_na
+    condition_F :q_contentNotApplicable, '==', :a_waived
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_other 'Other...',
@@ -591,12 +632,14 @@ survey 'US',
       :text_as_statement => 'Copyright has been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
       :required => :required
-    dependency :rule => 'A and B and C and D and E'
+    dependency :rule => '((A and B) or (C and D)) and E and F and G'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_na
-    condition_D :q_contentNotApplicable, '==', :a_waived
-    condition_E :q_contentWaiver, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_na
+    condition_F :q_contentNotApplicable, '==', :a_waived
+    condition_G :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
       :input_type => :url,
@@ -608,10 +651,12 @@ survey 'US',
       :text_as_statement => 'The content is available under',
       :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
       :required => :required
-    dependency :rule => 'A and B and C'
+    dependency :rule => '((A and B) or (C and D)) and E'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
       :required => :required,
@@ -622,10 +667,12 @@ survey 'US',
       :text_as_statement => 'The content licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
-    dependency :rule => 'A and B and C'
+    dependency :rule => '((A and B) or (C and D)) and E'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
       :string,
       :input_type => :url,
@@ -637,10 +684,12 @@ survey 'US',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A and B and C'
+    dependency :rule => '((A and B) or (C and D)) and E'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_other
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_8']
@@ -648,20 +697,24 @@ survey 'US',
     label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_8'
-    dependency :rule => 'A and B and C and D'
+    dependency :rule => '((A and B) or (C and D)) and E and F'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_samerights
-    condition_C :q_contentLicence, '==', :a_other
-    condition_D :q_otherContentLicenceOpen, '==', :a_false
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_samerights
+    condition_E :q_contentLicence, '==', :a_other
+    condition_F :q_otherContentLicenceOpen, '==', :a_false
 
     q_contentRightsURL 'Where are the rights and licensing of the content explained?',
       :display_on_certificate => true,
       :text_as_statement => 'The rights and licensing of the content are explained at',
       :help_text => 'Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.',
       :required => :required
-    dependency :rule => 'A and B'
+    dependency :rule => '((A and B) or (C and D))'
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_contentRights, '==', :a_mixedrights
+    condition_C :q_usGovData, '==', :a_true
+    condition_D :q_internationalContentRights, '==', :a_mixedrights
     a_1 'Content Rights Description URL',
       :string,
       :input_type => :url,
