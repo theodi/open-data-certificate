@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def embed_protocol
+    Rails.env.production? ? 'https://' : request.protocol
+  end
+
   # temporarily switch to a new locale
   def scope_locale locale
     locale, I18n.locale = I18n.locale, locale || I18n.locale

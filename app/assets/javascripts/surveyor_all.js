@@ -1,10 +1,15 @@
 //= require surveyor/jquery-ui-1.10.0.custom
 //= require surveyor/jquery-ui-timepicker-addon
 //= require surveyor/jquery.selectToUISlider
-//= require surveyor/jquery.maskedinput
+//X require surveyor/jquery.maskedinput
+
+/*jshint quotmark: false */
+/*global $, _ */
 
 // Javascript UI for surveyor
 $(document).ready(function(){
+
+  'use strict';
 
   // A reimplementation of slideToggle which accepts a boolean parameter
   $.fn.slide = function(state) {
@@ -24,7 +29,7 @@ $(document).ready(function(){
   };
 
   // Default Datepicker uses jQuery UI Datepicker
-  $("input[type='text'].datetime").datetimepicker({
+  $('input[type="text"].datetime').datetimepicker({
     showSecond: true,
     showMillisec: false,
     timeFormat: 'HH:mm:ss',
@@ -33,16 +38,16 @@ $(document).ready(function(){
     changeYear: true
   });
 
-  $("li.date input, input[type='text'].date, input[type='text'].datepicker").datepicker({
+  $('li.date input, input[type="text"].date, input[type="text"].datepicker').datepicker({
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
 
-  $("input[type='text'].time").timepicker({});
+  $('input[type="text"].time').timepicker({});
 
   $('.surveyor_check_boxes input[type=text]').change(function(){
-    var textValue = $(this).val()
+    var textValue = $(this).val();
     if (textValue.length > 0) {
       $(this).parent().children().has('input[type="checkbox"]')[0].children[0].checked = true;
     }
@@ -56,7 +61,7 @@ $(document).ready(function(){
 
   // http://www.filamentgroup.com/lab/update_jquery_ui_slider_from_a_select_element_now_with_aria_support/
   $('fieldset.q_slider select').each(function(i,e) {
-    $(e).selectToUISlider({"labelSrc": "text"}).hide()
+    $(e).selectToUISlider({"labelSrc": "text"}).hide();
   });
 
   // If javascript works, we don't need to show dependents from
@@ -90,11 +95,22 @@ $(document).ready(function(){
     }
   });
 
+  // we don't use the input mask anymore because of problems with
+  // IE, if it ever does get used, notify us through airbrake.
   $("input[data-input-mask]").each(function(i,e){
-    var inputMask = $(e).attr('data-input-mask');
-    var placeholder = $(e).attr('data-input-mask-placeholder');
-    var options = { placeholder: placeholder };
-    $(e).mask(inputMask, options);
+    var message = "input mask not supported on certificates"; 
+    if(window.Airbrake){
+      window.Airbrake.notify({
+        message: message,
+        stack: '()@surveyor_all.js:0'
+      });
+    } else {
+      console.error(message);
+    }
+    // var inputMask = $(e).attr('data-input-mask');
+    // var placeholder = $(e).attr('data-input-mask-placeholder');
+    // var options = { placeholder: placeholder };
+    // $(e).mask(inputMask, options);
   });
 
   // translations selection
@@ -105,8 +121,8 @@ $(document).ready(function(){
   var $surveyor = $form.find('#surveyor');
   var csrfToken = $form.find("input[name='authenticity_token']");
 
-  var busy = false
-  var template = _.template("repeater_field/:question_id/:response_index/:response_group")
+  var busy = false;
+  var template = _.template("repeater_field/:question_id/:response_index/:response_group");
 
   $form.on('click', '.add_row', function() {
     if (busy) return;
@@ -116,7 +132,7 @@ $(document).ready(function(){
     var $row = $button.closest('.g_repeater');
 
     var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
-      return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
+      return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0, 10);
     });
 
     var url = template({
@@ -147,8 +163,7 @@ $(document).ready(function(){
     $row.find('.remove_row').toggleClass('hide', $row.find('.question').length == 1);
 
     return false;
-  })
-
+  });
 
 
   function updateField($field) {
@@ -182,14 +197,14 @@ $(document).ready(function(){
   });
 
   function changeState($row, state) {
-    $row.removeClass('no-response ok warning').addClass(state)
+    $row.removeClass('no-response ok warning').addClass(state);
   }
 
   var validations = {
-    documentationUrl: function($row, $field) { return $row.data('reference-identifier') == 'documentationUrl'; },
+    documentationUrl: function($row) { return $row.data('reference-identifier') == 'documentationUrl'; },
     url: function($row, $field) { return $field.attr('type') == 'url'; },
-    metadata: function($row, $field) { return $row.data('metadata-field') && $row.data('autocompleted-value') !== undefined; },
-    other: function($row, $field) { return true; }
+    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompleted-value') !== undefined; },
+    other: function() { return true; }
   };
 
   var actions = {
@@ -205,8 +220,8 @@ $(document).ready(function(){
           // Mark questions which have selected radio buttons or checkboxes
           $form.find('fieldset.question-row').each(function() {
             var $row = $(this);
-            $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0)
-          })
+            $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0);
+          });
 
           // Fill in fields
           var affectedFields = [];
@@ -218,7 +233,7 @@ $(document).ready(function(){
           }
           callback(true, {fields: toJquery(affectedFields)});
         })
-        .error(function() { callback(false) });
+        .error(function() { callback(false); });
     },
     url: function($row, $field, callback) {
       var url = $field.val();
@@ -244,7 +259,7 @@ $(document).ready(function(){
         return autoValues.indexOf(value) === -1;
       });
 
-      callback(missingValues.length == 0, {missingValues: missingValues});
+      callback(missingValues.length === 0, {missingValues: missingValues});
     },
     other: function($row, $field, callback) { callback(true); }
   };
@@ -269,7 +284,7 @@ $(document).ready(function(){
       $row.data('metadata-missing', !success);
 
       if (!success) {
-        var $answers = $row.find('.surveyor_check_boxes').removeClass('warning')
+        var $answers = $row.find('.surveyor_check_boxes').removeClass('warning');
         data.missingValues.each(function(value) {
           $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning');
         });
@@ -319,13 +334,13 @@ $(document).ready(function(){
   }
 
   function bindQuestionRow($field) {
-    var $row = $field.data('question-row') || $field.closest('.question-row')
-    $field.data('question-row', $row)
+    var $row = $field.data('question-row') || $field.closest('.question-row');
+    $field.data('question-row', $row);
     return $row;
   }
 
   function validateUrl(url) {
-    return url.match(/^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?/i)
+    return url.match(/^(https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?/i);
   }
 
   function questionFields($field) {
@@ -333,7 +348,7 @@ $(document).ready(function(){
   }
 
   function answerIdentifier($question, $answer) {
-    return $question + '_' + $answer
+    return $question + '_' + $answer;
   }
 
   function checkAutocompletable($row) {
@@ -369,7 +384,7 @@ $(document).ready(function(){
 
       if (selectedValues.length != autoValues.length) return false;
 
-      return autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length == 0;
+      return autoValues.filter(function(value, i) { return value != selectedValues[i]; }).length === 0;
     }
   }
 
@@ -424,53 +439,53 @@ $(document).ready(function(){
 
   // Collects a sparse array of jQuery objects into a single jQuery object
   function toJquery(array) {
-    return $(array.filter(function(field) { return field; })).map(function() { return this.toArray() })
+    return $(array.filter(function(field) { return field; })).map(function() { return this.toArray(); });
   }
 
   // Checks if a string is empty (blank or whitespace only)
   function empty(text) {
-    return !text || text.match(/^[\s]*$/)
+    return !text || text.match(/^[\s]*$/);
   }
 
   function fillField(question, answer) {
-    var $row = $('fieldset[data-reference-identifier="'+ question +'"]')
+    var $row = $('fieldset[data-reference-identifier="'+ question +'"]');
     $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
-    var $input = $row.find('li.input')
+    var $input = $row.find('li.input');
 
     if ($input.hasClass('string')) {
-      return fillMe($row, question, answer)
+      return fillMe($row, question, answer);
     }
 
     if ($input.hasClass('select')) {
-      return selectMe($row, question, answer)
+      return selectMe($row, question, answer);
     }
 
     if ($input.hasClass('surveyor_check_boxes') || $input.hasClass('surveyor_radio')) {
       if ($.isArray(answer)) {
-        return toJquery(answer.map(function(option) { return checkMe($row, question, option) }))
+        return toJquery(answer.map(function(option) { return checkMe($row, question, option); }));
       }
 
-      return checkMe($row, question, answer)
+      return checkMe($row, question, answer);
     }
   }
 
   // Utility function to select nth option
   function selectMe($row, question, answer) {
-    var $field = $row.find('select')
-    if ($field.val()) return
-    return $field.children('option[data-reference-identifier="'+ answerIdentifier(question,answer) +'"]').prop('selected', true)
+    var $field = $row.find('select');
+    if ($field.val()) return;
+    return $field.children('option[data-reference-identifier="'+ answerIdentifier(question,answer) +'"]').prop('selected', true);
   }
 
   // Utility function to populate input fields by identifier
   function fillMe($row, question, value) {
-    var $field = $row.find('input.string')
-    if (!empty($field.val()) || empty(value)) return
-    return $field.val(value)
+    var $field = $row.find('input.string');
+    if (!empty($field.val()) || empty(value)) return;
+    return $field.val(value);
   }
 
   // Utility function to check input fields by identifier
   function checkMe($row, question, answer) {
-    if ($row.hasClass('touched')) return
-    return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true)
+    if ($row.hasClass('touched')) return;
+    return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true);
   }
-})
+});
