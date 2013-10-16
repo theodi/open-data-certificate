@@ -1,7 +1,7 @@
 //= require surveyor/jquery-ui-1.10.0.custom
 //= require surveyor/jquery-ui-timepicker-addon
 //= require surveyor/jquery.selectToUISlider
-//= require surveyor/jquery.maskedinput
+//X require surveyor/jquery.maskedinput
 
 /*jshint quotmark: false */
 /*global $, _ */
