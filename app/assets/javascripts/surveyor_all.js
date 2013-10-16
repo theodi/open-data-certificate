@@ -109,29 +109,47 @@ $(document).ready(function(){
   var template = _.template("repeater_field/:question_id/:response_index/:response_group")
 
   $form.on('click', '.add_row', function() {
-    if (busy) return
-    busy = true
+    if (busy) return;
+    busy = true;
 
-    var $button = $(this)
-    var $row = $button.closest('.g_repeater')
+    var $button = $(this);
+    var $row = $button.closest('.g_repeater');
 
     var responseIndexes = $form.find('input[name^=r\\[]').toArray().map(function(elem) {
       return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0)
-    })
+    });
 
     var url = template({
       question_id: $row.find('input[name*=question_id]').val(),
       response_index: Math.max.apply(this, responseIndexes) + 1,
       response_group: $row.find('.q_repeater_default').length
-    })
+    });
 
     $.ajax(url).done(function(html) {
       $button.before(html);
-      busy = false
-    })
+      $row.find('.remove_row').toggleClass('hide', $row.find('.question').length == 1);
+      busy = false;
+    });
 
     return false;
   })
+  .on('click', '.remove_row', function() {
+    var $button = $(this).attr('disabled',true);
+    var $row = $button.closest('.g_repeater');
+    var $question = $button.closest('.question');
+
+    $question.find('input.string').val('');
+    $question.insertBefore($row.find('.add_row')).hide();
+    $row.find('input[name$="[response_group]"]').each(function(i){ $(this).val(i); });
+
+    saveFormElements($form, $row.find('input').add(csrfToken));
+    $question.remove();
+    $row.find('.remove_row').toggleClass('hide', $row.find('.question').length == 1);
+
+    return false;
+  })
+
+
 
   function updateField($field) {
     var $row = bindQuestionRow($field);

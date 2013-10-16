@@ -36,7 +36,7 @@ group :test do
 end
 
 group :development do
-  gem 'guard'
+  gem 'guard', '~> 1.8.3'
   gem 'guard-test'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
