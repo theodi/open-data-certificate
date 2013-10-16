@@ -22,4 +22,10 @@ class TransferTest < ActiveSupport::TestCase
 
     refute transfer.token.blank?
   end
+
+  test "target emails are downcased" do
+    transfer = FactoryGirl.create :transfer, target_email: "EMAIL.Address@example.com"
+
+    assert_equal 'email.address@example.com', transfer.target_email
+  end
 end
