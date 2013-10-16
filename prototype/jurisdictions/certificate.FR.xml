@@ -2,438 +2,459 @@
 	© 2013 Open Data Institute
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
-  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="FR" xml:lang="en">
-	<help><p><strong>This has been generated based on a default for EU countries and needs to be localised for France. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
-		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
-		<p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p>
-		<p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>
+  --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="FR" xml:lang="fr">
+	<help>
+		<p>Ce questionnaire d’auto­évaluation permet de générer un certificat et un badge open data, que vous pouvez publier pour donner des informations à propos de vos données ouvertes. Nous utilisons aussi vos réponses pour comprendre comment les organisations publient leurs données ouvertes.</p>
+		<p>Répondre à ces questions vous permet de montrer vos efforts pour vous conformer à la législation française. Nous vous recommandons de vous renseigner aussi sur les autres règles et lois qui s’appliquent à votre secteur d’activité, particulièrement si vous résidez en dehors de la France.</p>
+		<p><strong>Il n’est pas nécessaire de répondre à toutes les questions pour obtenir un certificat.</strong> Répondez seulement à celles vous concernant.</p>
 	</help>
 	<group id="legal">
-		<label>Legal Information</label>
-		<help>Rights, licensing and privacy</help>
+		<label>Informations Legales</label>
+		<help>Droits, autorisations et confidentialité</help>
 		<group id="ownership">
-			<label>Rights</label>
-			<help>your right to share this data with people</help>
+			<label>Droits</label>
+			<help>vos droits de partager ces données</help>
 			<question id="publisherRights">
-				<label>Do you have the rights to publish this data as open data?</label>
+				<label>Disposez­vous des droits nécessaires pour publier ces données en tant que données ouvertes?</label>
 				<radioset required="required">
 					<option value="yes">
-						<label>yes, you have the rights to publish this data as open data</label>
-						<requirement level="standard">You should have a <strong>clear legal right to publish this data</strong>.</requirement>
+						<label>oui, vous avez les droits nécessaires pour publier ces données en tant que données ouvertes</label>
+						<requirement level="standard">Vous devez avoir un <strong>droit légal clair de publier ces données</strong>.</requirement>
 					</option>
 					<option value="no">
-						<label>no, you don't have the rights to publish this data as open data</label>
+						<label>non, vous n’avez pas les droits nécessaires pour publier ces données en tant que données ouvertes</label>
 					</option>
 					<option value="unsure">
-						<label>you're not sure if you have the rights to publish this data as open data</label>
+						<label>vous n’êtes pas sûr d’avoir les droits nécessaires pour publier ces données en tant que données ouvertes</label>
 					</option>
 					<option value="complicated">
-						<label>the rights in this data are complicated or unclear</label>
+						<label>les droits de ces données sont compliquées ou imprécises</label>
 					</option>
 				</radioset>
-				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
+				<help>Si vous organisation n’est pas à l’origine de la création ou de la récupération de ces données, il est possible que vous n’ayez pas le droit de les publier. Si vous n’êtes pas sûr, renseignez vous auprès du détenteur des données, car vous allez avoir besoin de sa permission pour les publier.</help>
 				<if test="this.publisherRights() === 'no'">
-					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
+					<requirement>Vous devez avoir le <strong>droit de publier ces données</strong>.</requirement>
 				</if>
 			</question>
 			<if test="this.publisherRights() === 'complicated'">
-				<question id="rightsRiskAssessment" display="Risks in using this data are described at">
-					<label>Where do you detail the risks people might encounter if they use this data?</label>
-					<input type="url" placeholder="Risk Documentation URL"/>
-					<help>It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.</help>
-					<requirement level="pilot">You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.</requirement>
+				<question id="rightsRiskAssessment"
+							 display="Risque en utilisant ces données sont décrites au">
+					<label>Où avez-vous détailler les risques gens pourraient rencontrer s'ils utilisent ces données?</label>
+					<input type="url" placeholder="Documentation des risques d'URL"/>
+					<help>Il peut être risqué pour les gens à utiliser les données sans droit légal clair de le faire. Par exemple, les données pourraient être prises vers le bas en réponse à une contestation judiciaire. Donnez une URL d'une page qui décrit le risque d'utiliser ces données.</help>
+					<requirement level="pilot">Vous devez documenter les risques <strong>associés à l'utilisation de ces données</strong>, afin que les gens puissent travailler sur la façon dont ils veulent l'utiliser.</requirement>
 				</question>
 			</if>
 			<if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
-				<question id="publisherOrigin" display="This data was">
-					<label>Was <em>all</em> this data originally created or gathered by you?</label>
-					<yesno required="required" yes="originally created or generated by its curator"/>
-					<help>If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.</help>
+				<question id="publisherOrigin" display="Ces données ont été">
+					<label>Est <em>tous</em> de ces données créés à l'origine ou collectées par vous?</label>
+					<yesno required="required"
+							 yes="à l'origine créée ou générée par son conservateur"/>
+					<help>Si une partie de ces données a été adjugé à l'extérieur de votre organisation par d'autres personnes ou organisations, alors vous devez donner des informations supplémentaires au sujet de votre droit de le publier.</help>
 				</question>
 			</if>
 			<if test="this.publisherRights() === 'unsure'">
 				<if test="this.publisherOrigin() === 'false'">
 					<question id="thirdPartyOrigin">
-						<label>Was some of this data extracted or calculated from other data?</label>
+						<label>été certaines de ces données extraites ou calculées à partir d'autres données?</label>
 						<yesno required="required"/>
-						<help>An extract or smaller part of someone else's data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.</help>
+						<help>Un extrait ou moins partie des données de quelqu'un d'autre veut encore vos droits d'utilisation qu'il pourrait en être affectée. Il pourrait aussi y avoir des problèmes juridiques si vous avez analysé les données pour produire de nouveaux résultats de celle-ci.</help>
 						<if test="this.crowdsourced() === 'false'">
-							<requirement test="this.thirdPartyOrigin() === 'true'">You indicated that this data wasn't originally created or gathered by you, and wasn't crowdsourced, so it must have been extracted or calculated from other data sources.</requirement>
+							<requirement test="this.thirdPartyOrigin() === 'true'">Vous avez dit que ces données n'ont pas été créés à l'origine ou rassemblés par vous, et n'a pas été crowdsourcing, donc il doit avoir été extraite ou calculée à partir d'autres sources de données.</requirement>
 						</if>
 					</question>
 					<if test="this.thirdPartyOrigin() === 'true'">
-						<question id="thirdPartyOpen" display="This data is created from">
-							<label>Are <em>all</em> sources of this data already published as open data?</label>
-							<yesno required="required" yes="open data sources"/>
-							<help>You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you'll need legal advice before you can publish it.</help>
+						<question id="thirdPartyOpen" display="Ces données sont créées à partir de">
+							<label>Y <em>tous</em> sources de ces données déjà publiées comme les données ouvertes?</label>
+							<yesno required="required" yes="sources de données ouvertes"/>
+							<help>Vous êtes autorisé à publier à quelqu'un d'autre données si elle est déjà sous une licence ouverte de données ou si leurs droits ont expiré ou ont été abandonnés. Si une partie de ces données n'est pas comme cela, alors vous aurez besoin de conseils juridiques avant de pouvoir le publier.</help>
 							<if test="this.thirdPartyOpen() === 'false'">
-								<requirement>You should get <strong>legal advice to make sure you have the right to publish this data</strong>.</requirement>
+								<requirement>Vous devriez obtenir des conseils juridiques <strong>vous assurer que vous avez le droit de publier ces données</strong>.</requirement>
 							</if>
 						</question>
 					</if>
-					<question id="crowdsourced" display="Some of this data is">
-						<label>Was some of this data crowdsourced?</label>
-						<yesno required="required" yes="crowdsourced"/>
-						<help>If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.</help>
+					<question id="crowdsourced" display="Certaines de ces données est">
+						<label>Était certaines de ces données crowdsourcing?</label>
+						<yesno required="required" yes="crowdsourcing"/>
+						<help>Si les données comprennent des informations apportées par des personnes extérieures à votre organisation, vous avez besoin de leur permission de publier leurs contributions sous forme de données ouvertes.</help>
 						<if test="this.thirdPartyOrigin() === 'false'">
-							<requirement test="this.crowdsourced() === 'true'">You indicated that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowdsourced.</requirement>
+							<requirement test="this.crowdsourced() === 'true'">Vous avez dit que les données n'ont pas été créés à l'origine ou rassemblés par vous et n'a pas été extrait ou calculée à partir d'autres données, donc il doit avoir été externalisées.</requirement>
 						</if>
 					</question>
 					<if test="this.crowdsourced() === 'true'">
 						<question id="crowdsourcedContent">
-							<label>Did contributors to this data use their judgement?</label>
+							<label>Ont contribué à ces données utilisent leur jugement?</label>
 							<yesno required="required"/>
-							<help>If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.</help>
+							<help>Si les gens ont utilisé leur créativité ou d'un jugement de fournir des données, puis ils ont droit d'auteur sur leur travail. Par exemple, une description ou de décider d'inclure ou non certaines données dans un ensemble de données exigerait jugement. Alors contributeurs doivent transférer ou renoncer à leurs droits ou une licence les données avant que vous pouvez publier.</help>
 						</question>
 						<if test="this.crowdsourcedContent() === 'true'">
-							<question id="claUrl" display="The Contributor Licence Agreement is at">
-								<label>Where is the Contributor Licence Agreement (CLA)?</label>
-								<input type="url" placeholder="Contributor Licence Agreement URL" required="required"/>
-								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
+							<question id="claUrl" display="Le contrat de licence de contributeur est à">
+								<label>Où est le contrat de licence de contributeur (CLA)?</label>
+								<input type="url"
+										 placeholder="Contributeur contrat de licence d' URL"
+										 required="required"/>
+								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Donne un lien vers un accord qui montre contributeurs vous permettent de réutiliser leurs données. A CLA sera soit transférer les droits du cotisant pour vous, renoncer à leurs droits ou une licence les données pour vous afin que vous puissiez le publier.</help>
 							</question>
 							<question id="cldsRecorded">
-								<label>Have all contributors agreed to the Contributor Licence Agreement (CLA)?</label>
+								<label>Ont tous les contributeurs accepté le contrat de licence de contributeur (CLA)?</label>
 								<yesno required="required"/>
-								<help>Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.</help>
-								<requirement>You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.</requirement>
+								<help>Consultez toutes les apporteurs y consentent à une CLA avant de les réutiliser ou de publier leurs contributions. Vous devez tenir un registre des contributions qui ont donné et si oui ou non ils acceptent de le CLA.</help>
+								<requirement>Vous devez obtenir contributeurs <strong>de convenir d'un accord de licence de contributeur</strong> (CLA) qui vous donne le droit de publier leur travail l'ouverture des données.</requirement>
 							</question>
 						</if>
 					</if>
 				</if>
 			</if>
 			<if test="this.publisherOrigin() === 'false'">
-				<question id="sourceDocumentationUrl" display="The sources of this data are described at">
-					<label>Where do you describe sources of this data?</label>
-					<input type="url" placeholder="Data Sources Documentation URL"/>
-					<help>Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
-					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.</requirement>
+				<question id="sourceDocumentationUrl"
+							 display="Les sources de ces données sont décrites au">
+					<label>Où avez-vous décrire les sources de ces données?</label>
+					<input type="url" placeholder="Sources de données Documentation URL"/>
+					<help>Donnez une URL que les documents où les données a été adjugé à partir de ( sa provenance ) et les droits en vertu de laquelle vous publier les données. Cela aide les gens à comprendre où proviennent les données.</help>
+					<requirement level="pilot">Vous devez documenter <strong>où proviennent les données et les droits en vertu de laquelle le publier</strong>, afin que les gens êtes assuré qu'ils peuvent utiliser des pièces qui sont venus auprès de tiers.</requirement>
 				</question>
 				<if test="this.sourceDocumentationUrl() !== ''">
-					<question id="sourceDocumentationMetadata" display="The curator has published">
-						<label>Is documentation about the sources of this data also in machine-readable format?</label>
-						<yesno yes="machine-readable data about the sources of this data"/>
-						<help>Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.</help>
-						<requirement level="standard">You should <strong>include machine-readable data about the sources of this data</strong>.</requirement>
+					<question id="sourceDocumentationMetadata" display="Le commissaire a publié">
+						<label>Est documentation sur les sources de ces données aussi en format lisible par machine?</label>
+						<yesno yes="les données lisibles par machine sur les sources de ces données"/>
+						<help>Information sur les sources de données doit être lisible par l'homme afin que les gens puissent le comprendre, ainsi que dans un format de métadonnées que les ordinateurs peuvent traiter. Quand tout le monde fait ce qu'il aide d'autres personnes découvrent comment les mêmes données ouvertes est utilisé et justifier sa publication en cours.</help>
+						<requirement level="standard">Vous devez <strong>inclure des données lisibles par machine sur les sources de ces données</strong>.</requirement>
 					</question>
 				</if>
 			</if>
 		</group>
 		<group id="licensing">
-			<label>Licensing</label>
-			<help>how you give people permission to use this data</help>
-			<question id="copyrightURL" display="The rights statement is at">
-				<label>Where have you published the rights statement for this dataset?</label>
-				<input type="url" placeholder="Rights Statement URL"/>
-				<help>Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data.</help>
-				<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.</requirement>
+			<label>Autorisations</label>
+			<help>la manière dont vous accordez aux gens la permission d’utiliser vos données</help>
+			<question id="copyrightURL" display="La déclaration des droits est au">
+				<label>Où avez-vous publié la déclaration des droits pour cet ensemble de données?</label>
+				<input type="url" placeholder="URL Déclaration des droits"/>
+				<help>Donner l'URL vers une page qui décrit le droit de réutiliser cet ensemble de données. Cela devrait inclure une référence à sa licence, les conditions d' attribution et une déclaration sur le droit d'auteur pertinent et droits de base de données. Une déclaration des droits aide les gens à comprendre ce qu'ils peuvent et ne peuvent pas faire avec les données.</help>
+				<requirement level="pilot">Vous devez <strong>publier une déclaration des droits</strong> que les détails d'auteur, droits de base de données, les licences et comment les gens devraient donner l'attribution aux données.</requirement>
 			</question>
-			<question id="dataLicence" display="This data is available under">
-				<label>Under which licence can people reuse this data?</label>
+			<question id="dataLicence" display="Ces données sont disponibles sous">
+				<label>Sous quelle licence les gens peuvent réutiliser ces données?</label>
 				<select required="required">
 					<option/>
 					<option value="odc-by">Open Data Commons Attribution License</option>
 					<option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
 					<option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 					<option value="cc-zero">Creative Commons CCZero</option>
-					<option value="na" display="">Not applicable</option>
-					<option value="other" display="">Other...</option>
+					<option value="na" display="">Non applicable</option>
+					<option value="other" display="">Autre...</option>
 				</select>
-				<help>Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they've expired, or you've waived them, choose 'Not applicable'.</help>
+				<help>Rappelez-vous que celui qui rassemble l'origine, crée, vérifie ou présente une base de données automatiquement obtient les droits sur elle. Il peut aussi y avoir droit d'auteur dans l'organisation et la sélection des données. Alors, les gens ont besoin d'une renonciation ou d'une licence qui prouve qu'ils peuvent utiliser les données et explique comment ils peuvent le faire légalement. Nous listons les licences les plus communs ici, s'il n'y a pas de droits de base de données ou droits d'auteur, ils ont expiré, ou si vous avez n'exigeons plus leur paiement, choisissez « Non applicable ».</help>
 			</question>
 			<if test="this.dataLicence() === 'na'">
-				<question id="dataNotApplicable" display="This data is not licensed because">
-					<label>Why doesn't a licence apply to this data?</label>
+				<question id="dataNotApplicable"
+							 display="Ces données n'est pas autorisé parce que">
+					<label>Pourquoi pas une licence s'applique à ces données?</label>
 					<radioset required="required">
-						<option value="norights" display="there are no rights in it">
-							<label>there are no copyright or database rights in this data</label>
-							<help>Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way.</help>
+						<option value="norights" display="il n'y a pas de droits dans ce">
+							<label>il n'y a pas de droits d'auteur ou de la base de l'homme dans ces données</label>
+							<help>droits de base de données s'appliquent si vous avez passé la collecte d' efforts considérables, la vérification ou la présentation il. Il n'y a pas de droits de base de données si, par exemple, les données sont créées à partir de zéro, présenté d'une façon évidente, et non vérifiée par rapport à quoi que ce soit. Vous avez le droit d'auteur si vous sélectionnez les éléments dans les données ou de les organiser d'une manière non évidente.</help>
 						</option>
-						<option value="expired" display="the rights have expired">
-							<label>copyright and database rights have expired</label>
-							<help>Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired.</help>
+						<option value="expired" display="les droits ont expiré">
+							<label>droit d'auteur et les droits ont expiré base de données</label>
+							<help>droits de base de données dix derniers années. Si les données Dernière modification il ya plus de dix ans puis les droits de base de données ont expiré. Droit d'auteur dure pendant une période de temps déterminée, basée soit sur le nombre d'années après la mort de son créateur ou de sa publication. Droit d'auteur est peu probable d'avoir expiré.</help>
 						</option>
 						<option value="waived" display="">
-							<label>copyright and database rights have been waived</label>
-							<help>This means no one owns the rights and anyone can do whatever they want with this data.</help>
+							<label>droits d'auteur et droits base de données ont été renoncé</label>
+							<help>Cela signifie que personne ne possède les droits et tout le monde peut faire ce qu'ils veulent avec ces données.</help>
 						</option>
 					</radioset>
 				</question>
 				<if test="this.dataNotApplicable() === 'waived'">
-					<question id="dataWaiver" display="Rights in the data have been waived with">
-						<label>Which waiver do you use to waive rights in the data?</label>
+					<question id="dataWaiver"
+								 display="Homme dans les données ont été abandonnés avec">
+						<label>Quelle renonciation utilisez-vous pour renoncer à ses droits dans les données?</label>
 						<select required="required">
 							<option/>
 							<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 							<option value="cc0">Creative Commons CCZero</option>
-							<option value="other" display="">Other...</option>
+							<option value="other" display="">Autre...</option>
 						</select>
-						<help>You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.</help>
+						<help>Vous avez besoin d'une déclaration de montrer aux gens les droits ont été levées afin qu'ils comprennent qu'ils peuvent faire ce qu'ils veulent avec ces données. Renonciations standards existent déjà comme PDDL et CCZero mais vous pouvez écrire votre propre avec des conseils juridiques.</help>
 					</question>
 					<if test="this.dataWaiver() === 'other'">
-						<question id="dataOtherWaiver" display="Rights in the data have been waived with">
-							<label>Where is the waiver for the rights in the data?</label>
-							<input type="url" required="required" placeholder="Waiver URL"/>
-							<help>Give a URL to the publicly available waiver so people can check that it does waive the rights in the data.</help>
+						<question id="dataOtherWaiver"
+									 display="Homme dans les données ont été abandonnés avec">
+							<label>Où est la renonciation à des droits dans les données?</label>
+							<input type="url" required="required" placeholder="Renonciation URL"/>
+							<help>Donnez une URL à la renonciation à la disposition du public afin que les gens puissent vérifier qu'il ne renonce pas aux droits dans les données.</help>
 						</question>
 					</if>
 				</if>
 			</if>
 			<if test="this.dataLicence() === 'other'">
-				<question id="otherDataLicenceName" display="This data is available under">
-					<label>What is the name of the licence?</label>
-					<input required="required" placeholder="Other Licence Name"/>
-					<help>If you use a different licence, we need the name so people can see it on your Open Data Certificate.</help>
+				<question id="otherDataLicenceName" display="Ces données sont disponibles sous">
+					<label>Quel est le nom de la licence?</label>
+					<input required="required" placeholder="Autre Licence Nom"/>
+					<help>Si vous utilisez une licence différente, nous avons besoin du nom que les gens puissent le voir sur votre certificat d' Open Data.</help>
 				</question>
-				<question id="otherDataLicenceURL" display="This licence is at">
-					<label>Where is the licence?</label>
-					<input type="url" required="required" placeholder="Other Licence URL"/>
-					<help>Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
+				<question id="otherDataLicenceURL" display="Cette licence est à">
+					<label>Où est la licence?</label>
+					<input type="url" required="required" placeholder="Other URL de licence"/>
+					<help>Donnez une URL à la licence, afin que les gens puissent le voir sur votre certificat d' Open Data et vérifier qu'il est accessible au public.</help>
 				</question>
 				<question id="otherDataLicenceOpen">
-					<label>Is the licence an open licence?</label>
+					<label>Est ce que la licence une licence libre?</label>
 					<yesno required="required"/>
-					<help more="http://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
-					<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
+					<help more="http://opendefinition.org/">Si vous n'êtes pas sûr de ce que une licence ouverte est ensuite lu le <a href="http://opendefinition.org/">Ouvert Définition de connaissances</a> définition. Ensuite, choisissez votre licence de la href="http://licenses.opendefinition.org/"&gt; Ouvert Définition du conseil consultatif de liste des licences open &lt;a &lt;/ a&gt;. Si une licence n'est pas dans leur liste, c'est soit pas ouvert ou n'a pas encore été évalué.</help>
+					<requirement>Vous devez <strong>publier des données ouvertes sous une licence open</strong> afin que les gens puissent l'utiliser.</requirement>
 				</question>
 			</if>
-			<question id="contentRights" display="There are">
-				<label>Is there any copyright in the content of this data?</label>
+			<question id="contentRights" display="Il ya">
+				<label>Yat-il un droit d'auteur sur le contenu de ces données?</label>
 				<radioset required="required">
-					<option value="norights" display="no rights in the content of the data">
-						<label>no, the data only contains facts and numbers</label>
-						<help>There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.</help>
+					<option value="norights" display="aucun droit sur le contenu des données">
+						<label>non, les données ne contient que des faits et des chiffres</label>
+						<help>Il n'ya pas de droit d'auteur sur des informations factuelles. Si les données ne contiennent pas de contenu qui a été créé par un effort intellectuel, il n'y a pas de droits sur le contenu.</help>
 					</option>
 					<option value="samerights" display="">
-						<label>yes, and the rights are all held by the same person or organisation</label>
-						<help>Choose this option if the content in the data was all created by or transferred to the same person or organisation.</help>
+						<label>Oui, et les droits sont détenus par la même personne ou organisation</label>
+						<help>Choisissez cette option si le contenu dans les données ont été tous créés par ou transféré à la même personne ou organisation.</help>
 					</option>
 					<option value="mixedrights" display="">
-						<label>yes, and the rights are held by different people or organisations</label>
-						<help>In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.</help>
+						<label>Oui, et les droits sont détenus par différentes personnes ou organisations</label>
+						<help>Dans certaines données, les droits sur les différents dossiers sont détenus par différentes personnes ou organisations. Information sur les droits doit être maintenu dans les données aussi.</help>
 					</option>
 				</radioset>
 			</question>
 			<if test="this.contentRights() === 'norights'">
-				<question id="explicitWaiver" display="The content has been">
-					<label>Is the content of the data marked as public domain?</label>
-					<yesno yes="marked as public domain"/>
-					<help>Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.</help>
-					<requirement level="standard">You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.</requirement>
+				<question id="explicitWaiver" display="Le contenu a été">
+					<label>Est ce que le contenu des données marquées comme domaine public?</label>
+					<yesno yes="marqués comme domaine public"/>
+					<help>Le contenu peut être marqué comme domaine public en utilisant le <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. Cela aide les gens savent qu'il peut être réutilisé librement.</help>
+					<requirement level="standard">Vous devez <strong>marquer contenus du domaine public que du domaine public</strong> afin que les gens savent qu'ils peuvent réutiliser.</requirement>
 				</question>
 			</if>
 			<if test="this.contentRights() === 'samerights'">
-				<question id="contentLicence" display="The content is available under">
-					<label>Under which licence can others reuse content?</label>
+				<question id="contentLicence" display="Le contenu est disponible sous">
+					<label>Sous quelle licence d'autres peuvent réutiliser le contenu?</label>
 					<select required="required">
 						<option/>
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 						<option value="cc-zero">Creative Commons CCZero</option>
-						<option value="na" display="">Not applicable</option>
-						<option value="other" display="">Other...</option>
+						<option value="na" display="">Non applicable</option>
+						<option value="other" display="">Autre...</option>
 					</select>
-					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'.</help>
+					<help>Rappelez-vous que celui qui consacre l'effort intellectuel création de contenu obtient automatiquement les droits sur le contenu créatif, mais ne comprend pas les faits. Alors, les gens ont besoin d'une renonciation ou d'une licence qui prouve qu'ils peuvent utiliser le contenu et explique comment ils peuvent le faire légalement. Nous listons les licences les plus communs ici, s'il n'ya pas de droit d'auteur dans le contenu, il est arrivé à expiration, ou si vous avez n'exigeons plus leur paiement, choisissez « Non applicable ».</help>
 				</question>
 				<if test="this.contentLicence() === 'na'">
-					<question id="contentNotApplicable" display="The content in this data is not licensed because">
-						<label>Why doesn't a licence apply to the content of the data?</label>
+					<question id="contentNotApplicable"
+								 display="Le contenu de ces données n'est pas autorisé parce que">
+						<label>Pourquoi pas une licence s'applique pas au contenu des données?</label>
 						<radioset required="required">
-							<option value="norights" display="there is no copyright">
-								<label>there is no copyright in the content of this data</label>
-								<help>Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that's within the data. There's no copyright if the content only contains facts.</help>
+							<option value="norights" display="il n'ya pas de droit d'auteur">
+								<label>il n'ya pas de droit d'auteur sur le contenu de ces données</label>
+								<help>droit d'auteur s'applique uniquement au contenu si vous avez passé effort intellectuel créant, par exemple, par l'écriture du texte qui est dans les données. Il n'ya pas de droit d'auteur si le contenu ne contient que des faits.</help>
 							</option>
-							<option value="expired" display="copyright has expired">
-								<label>copyright has expired</label>
-								<help>Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.</help>
+							<option value="expired" display="copyright a expiré">
+								<label>copyright a expiré</label>
+								<help>Copyright dure pendant une période de temps déterminée, basée soit sur le nombre d'années après la mort de son créateur ou de sa publication. Vous devriez vérifier si le contenu a été créé ou publié parce que si c'était il ya longtemps, auteur aurait expiré.</help>
 							</option>
 							<option value="waived" display="">
-								<label>copyright has been waived</label>
-								<help>This means no one owns copyright and anyone can do whatever they want with this data.</help>
+								<label>droit d'auteur a été levée</label>
+								<help>Cela signifie que personne ne détient le droit d'auteur et tout le monde peut faire ce qu'ils veulent avec ces données.</help>
 							</option>
 						</radioset>
 					</question>
 					<if test="this.contentNotApplicable() === 'waived'">
-						<question id="contentWaiver" display="Copyright has been waived with">
-							<label>Which waiver do you use to waive copyright?</label>
+						<question id="contentWaiver" display="droit d'auteur a été levée avec">
+							<label>Quelle renonciation utilisez-vous pour renoncer droit d'auteur?</label>
 							<select required="required">
 								<option/>
 								<option value="cc0">Creative Commons CCZero</option>
-								<option value="other">Other...</option>
+								<option value="other">Autre...</option>
 							</select>
-							<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.</help>
+							<help>Vous avez besoin d'une déclaration de montrer aux gens que vous avez fait cela, alors ils comprennent qu'ils peuvent faire ce qu'ils veulent avec ces données. Renonciations standards existent déjà comme CCZero mais vous pouvez écrire votre propre avec des conseils juridiques.</help>
 						</question>
 						<if test="this.contentWaiver() === 'other'">
-							<question id="contentOtherWaiver" display="Copyright has been waived with">
-								<label>Where is the waiver for the copyright?</label>
-								<input type="url" required="required" placeholder="Waiver URL"/>
-								<help>Give a URL to your own publicly available waiver so people can check that it does waive your copyright.</help>
+							<question id="contentOtherWaiver" display="droit d'auteur a été levée avec">
+								<label>Où est la dérogation pour le droit d'auteur?</label>
+								<input type="url" required="required" placeholder="Renonciation URL"/>
+								<help>Donnez une URL à votre propre renonciation disposition du public afin que les gens puissent vérifier qu'il ne renonce vos droits d'auteur.</help>
 							</question>
 						</if>
 					</if>
 				</if>
 				<if test="this.contentLicence() === 'other'">
-					<question id="otherContentLicenceName" display="The content is available under">
-						<label>What's the name of the licence?</label>
-						<input required="required" placeholder="Licence Name"/>
-						<help>If you use a different licence, we need its name so people can see it on your Open Data Certificate.</help>
+					<question id="otherContentLicenceName" display="Le contenu est disponible sous">
+						<label>Quel est le nom de la licence?</label>
+						<input required="required" placeholder="Nom de licence"/>
+						<help>Si vous utilisez une licence différente, nous avons besoin de son nom pour que les gens puissent le voir sur votre certificat d' Open Data.</help>
 					</question>
-					<question id="otherContentLicenceURL" display="The content licence is at">
-						<label>Where is the licence?</label>
-						<input type="url" required="required" placeholder="Licence URL"/>
-						<help>Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
+					<question id="otherContentLicenceURL" display="La licence de contenu est à">
+						<label>Où est la licence?</label>
+						<input type="url" required="required" placeholder="URL licence"/>
+						<help>Donnez une URL à la licence, afin que les gens puissent le voir sur votre certificat d' Open Data et vérifier qu'il est accessible au public.</help>
 					</question>
 					<question id="otherContentLicenceOpen">
-						<label>Is the licence an open licence?</label>
+						<label>Est ce que la licence une licence libre?</label>
 						<yesno required="required"/>
-						<help more="http://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
-						<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
+						<help more="http://opendefinition.org/">Si vous n'êtes pas sûr de ce que une licence ouverte est ensuite lu le <a href="http://opendefinition.org/">Ouvert Définition de connaissances</a> définition. Ensuite, choisissez votre licence de la href="http://licenses.opendefinition.org/"&gt; Ouvert Définition du conseil consultatif de liste des licences open &lt;a &lt;/ a&gt;. Si une licence n'est pas dans leur liste, c'est soit pas ouvert ou n'a pas encore été évalué.</help>
+						<requirement>Vous devez <strong>publier des données ouvertes sous une licence open</strong> afin que les gens puissent l'utiliser.</requirement>
 					</question>
 				</if>
 			</if>
 			<if test="this.contentRights() === 'mixedrights'">
-				<question id="contentRightsURL" display="The rights and licensing of the content are explained at">
-					<label>Where are the rights and licensing of the content explained?</label>
-					<input type="url" required="required" placeholder="Content Rights Description URL"/>
-					<help>Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.</help>
+				<question id="contentRightsURL"
+							 display="Les droits et la licence du contenu sont expliquées">
+					<label>Où sont les droits et licences pour le contenu expliqués?</label>
+					<input type="url"
+							 required="required"
+							 placeholder="Contenu droits Description URL"/>
+					<help>Donner l'URL d'une page où vous décrivez comment quelqu'un peut-il savoir les droits et licences d'un morceau de contenu à partir des données.</help>
 				</question>
 			</if>
 			<if test="this.copyrightURL() !== ''">
-				<question id="copyrightStatementMetadata" display="The rights statement includes data about">
-					<label>Does your rights statement include machine-readable versions of</label>
+				<question id="copyrightStatementMetadata"
+							 display="La déclaration des droits de l' renferme des données sur">
+					<label>Est-ce que votre déclaration des droits de l' inclure versions lisibles à la machine de</label>
 					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
 					<checkboxset>
-						<option value="dataLicense" display="its data licence">
-							<label>data licence</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.</requirement>
+						<option value="dataLicense" display="sa licence de données">
+							<label>Licence données</label>
+							<requirement level="standard">Vous devez fournir les données lisibles par machine <strong>dans votre déclaration des droits sur la licence</strong> pour ces données, les outils de manière automatique peuvent utiliser.</requirement>
 						</option>
-						<option value="contentLicense" display="its content licence">
-							<label>content licence</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.</requirement>
+						<option value="contentLicense" display="sa licence de contenu">
+							<label>licence de contenu</label>
+							<requirement level="standard">Vous devez fournir <strong>données lisibles par machine dans votre déclaration des droits sur la licence du contenu</strong> de ces données, les outils de manière automatique peuvent utiliser elle.</requirement>
 						</option>
-						<option value="attribution" display="what attribution text to use">
-							<label>attribution text</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.</requirement>
+						<option value="attribution" display="ce texte d'attribution d'utiliser">
+							<label>texte attribution</label>
+							<requirement level="standard">Vous devez fournir <strong>données lisibles par machine dans votre déclaration des droits sur le texte à utiliser lorsque l'on cite les données</strong>, outils afin automatiques peuvent utiliser elle.</requirement>
 						</option>
-						<option value="attributionURL" display="what attribution link to give">
+						<option value="attributionURL" display="quel lien d'attribution de donner">
 							<label>attribution URL</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it.</requirement>
+							<requirement level="standard">Vous devez fournir les données lisibles par machine <strong>dans votre déclaration des droits de l' URL à utiliser lorsque l'on cite ces données</strong>, des outils automatiques peuvent donc l'utiliser.</requirement>
 						</option>
-						<option value="copyrightNotice" display="a copyright notice or statement">
-							<label>copyright notice or statement</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.</requirement>
+						<option value="copyrightNotice"
+								  display="un avis de droit d'auteur ou de la déclaration">
+							<label>avis de copyright ou de la déclaration</label>
+							<requirement level="exemplar">Vous devez fournir <strong>données lisibles par machine dans votre déclaration des droits sur la déclaration des droits d'auteur ou de l'avis de ces données</strong>, outils afin automatiques peuvent utiliser elle.</requirement>
 						</option>
-						<option value="copyrightYear" display="the copyright year">
-							<label>copyright year</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it.</requirement>
+						<option value="copyrightYear" display="l' année de copyright">
+							<label>année de copyright</label>
+							<requirement level="exemplar">Vous devez fournir les données lisibles par machine <strong>dans votre déclaration des droits sur l'année des droits d'auteur pour les données</strong>, des outils automatiques pour pouvoir l'utiliser.</requirement>
 						</option>
-						<option value="copyrightHolder" display="the copyright holder">
-							<label>copyright holder</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.</requirement>
+						<option value="copyrightHolder" display="le titulaire du droit d'auteur">
+							<label>titulaire du droit d'auteur</label>
+							<requirement level="exemplar">Vous devez fournir <strong>données lisibles par machine dans votre déclaration des droits concernant le titulaire du droit d'auteur pour les données</strong>, des outils automatiques pour pouvoir l'utiliser.</requirement>
 						</option>
-						<option value="databaseRightYear" display="the database right year">
-							<label>database right year</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.</requirement>
+						<option value="databaseRightYear" display="la base de données l'année droit">
+							<label>base de l'année de droit</label>
+							<requirement level="exemplar">Vous devez fournir les données lisibles par machine <strong>dans votre déclaration des droits sur la base de l'année droite pour les données</strong>, outils afin automatiques peuvent utiliser.</requirement>
 						</option>
-						<option value="databaseRightHolder" display="the database right holder">
-							<label>database right holder</label>
-							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.</requirement>
+						<option value="databaseRightHolder"
+								  display="le titulaire du droit de base de données">
+							<label>titulaire du droit de base de données</label>
+							<requirement level="exemplar">Vous devez fournir <strong>données lisibles par machine dans votre déclaration des droits sur le titulaire du droit de base de données pour les données</strong>, outils afin automatiques peuvent utiliser.</requirement>
 						</option>
 					</checkboxset>
-					<help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.</help>
+					<help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">C'est une bonne pratique à intégrer des informations sur les droits dans des formats lisibles par machine afin que les gens peuvent attribuer automatiquement ces données vers vous quand ils l'utilisent.</help>
 				</question>
 			</if>
 		</group>
 		<group id="privacy">
-			<label>Privacy</label>
-			<help>how you protect people's privacy</help>
-			<question id="dataPersonal" display="This data contains">
-				<label>Can individuals be identified from this data?</label>
+			<label>Confidentialite</label>
+			<help>la manière dont vous protégez la vie privée des gens</help>
+			<question id="dataPersonal" display="Ces données contiennent">
+				<label>Ces données permettent­elles d’identifier des individus?</label>
 				<radioset required="pilot">
-					<option value="not-personal" display="no data about individuals">
-						<label>no, the data is not about people or their activities</label>
-						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
+					<option value="not-personal" display="pas de données sur les personnes">
+						<label>non, ces données ne concernent pas des individus ou leurs activités</label>
+						<help>Rappelez­vous que des individus peuvent être identifiés même si les données ne les concernent pas directement. Par exemple, des données concernant le trafic routier combinées avec des données concernant les trajets quotidiens d’une personne pourraient révéler des informations sur cette personne.</help>
 					</option>
-					<option value="summarised" display="aggregated data">
-						<label>no, the data has been anonymised by aggregating individuals into groups, so they can't be distinguished from other people in the group</label>
-						<help>Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.</help>
+					<option value="summarised" display="données agrégées">
+						<label>non, les données ont été rendues anonymes en agrégeant les individus dans des groupes, de sorte qu'ils ne peuvent pas être distinguées des autres personnes dans le groupe</label>
+						<help>Contrôles de divulgation statistique peuvent aider à faire en sorte que les individus ne sont pas identifiables dans les données agrégées.</help>
 					</option>
-					<option value="individual" display="information that could identify individuals">
-						<label>yes, there is a risk that individuals be identified, for example by third parties with access to extra information</label>
-						<help>Some data is legitimately about individuals like civil service pay or public expenses for example.</help>
+					<option value="individual"
+							  display="l'information qui permettrait d'identifier les individus">
+						<label>oui, il existe un risque que des individus soient identifiés, par exemple par un tiers disposant d’un accès à d’autres informations</label>
+						<help>Certaines données concernent les individus de manière légitime, comme par exemple les salaires dans la fonction publique ou les dépenses publiques.</help>
 					</option>
 				</radioset>
 			</question>
 			<if test="this.dataPersonal() === 'summarised'">
 				<question id="statisticalAnonAudited" display="The anonymisation process has been">
-					<label>Has your anonymisation process been independently audited?</label>
-					<yesno yes="independently audited"/>
-					<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
+					<label>Votre processus d’anonymisation a­t­il été contrôlé par un organisme indépendant?</label>
+					<yesno yes="un audit indépendant"/>
+					<requirement level="standard">Vous devez <strong>avoir votre processus d' anonymisation audit indépendant</strong> afin de s'assurer qu'elle réduit le risque des individus étant réidentifié.</requirement>
 				</question>
 			</if>
 			<if test="this.dataPersonal() === 'individual'">
-				<question id="appliedAnon" display="This data about individuals has been">
-					<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
-					<yesno required="pilot" yes="anonymised"/>
-					<help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>
+				<question id="appliedAnon" display="Ces données sur les individus a été">
+					<label>Avez­vous tenté de réduire ou de supprimer la possibilité que des individus soient identifiés?</label>
+					<yesno required="pilot" yes="anonymisées"/>
+					<help>L’anonymisation permet de réduire le risque que des individus soient identifiés à partir des données que vous publiez. Le choix de la meilleure technique à utiliser dépend du type de vos données.</help>
 				</question>
 				<if test="this.appliedAnon() === 'false'">
-					<question id="lawfulDisclosure" display="By law, this data about individuals">
-						<label>Are you required or permitted by law to publish this data about individuals?</label>
-						<yesno yes="must be published"/>
-						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
+					<question id="lawfulDisclosure"
+								 display="Selon la loi, ces données sur les individus">
+						<label>Etes vous autorisés ou forcés par la loi à publier ces données concernant des individus?</label>
+						<yesno yes="doit être publié"/>
+						<requirement level="pilot">Vous devez <strong>seulement publier des données personnelles sans anonymisation si vous êtes tenu ou autorisé à le faire par la loi</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'true'">
-						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
-							<label>Where do you document your right to publish data about individuals?</label>
-							<input type="url" placeholder="Disclosure Rationale URL"/>
-							<requirement level="standard">You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.</requirement>
+						<question id="lawfulDisclosureURL"
+									 display="Le droit de publier ces données sur les individus est documentée à">
+							<label>Où peut­on trouver des informations sur votre droit de publication d’informations personnelles?</label>
+							<input type="url" placeholder="URL de la déclaration"/>
+							<requirement level="standard">Vous devez <strong>documenter votre droit de publier des données sur les personnes</strong> pour les personnes qui utilisent vos données et pour ceux qui sont touchés par la divulgation.</requirement>
 						</question>
 					</if>
 				</if>
 				<if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-					<question id="riskAssessmentExists" display="The curator has">
-						<label>Have you assessed the risks of disclosing personal data?</label>
-						<yesno yes="carried out a privacy risk assessment" no="not carried out a privacy risk assessment"/>
-						<help>A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
-						<requirement level="pilot">You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.</requirement>
+					<question id="riskAssessmentExists" display="Le commissaire a">
+						<label>Avez-vous évalué les risques de divulgation de données personnelles?</label>
+						<yesno yes="a réalisé une évaluation des risques de la vie privée"
+								 no="pas effectué une évaluation des risques de la vie privée"/>
+						<help>mesure une évaluation des risques des risques pour la vie privée des personnes dans vos données, ainsi que l' utilisation et la divulgation de cette information.</help>
+						<requirement level="pilot">Vous devez <strong>évaluer les risques de divulgation de données personnelles</strong> si vous publiez des données sur les personnes.</requirement>
 					</question>
 					<if test="this.riskAssessmentExists() === 'true'">
-						<question id="riskAssessmentUrl" display="The risk assessment is published at">
-							<label>Where is your risk assessment published?</label>
-							<input type="url" placeholder="Risk Assessment URL"/>
-							<help>Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
-							<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
+						<question id="riskAssessmentUrl" display="L'évaluation des risques est publié à">
+							<label>Où est publié votre évaluation des risques?</label>
+							<input type="url" placeholder="Risque URL d'évaluation"/>
+							<help>Donnez une URL à l'endroit où les gens peuvent vérifier comment vous avez évalué les risques de la vie privée des individus. Cela peut être expurgée ou résumée si elle contient des informations sensibles.</help>
+							<requirement level="standard">Vous devez <strong>publier votre évaluation des risques de la vie privée</strong> les gens puissent comprendre comment vous avez évalué les risques de données révélant.</requirement>
 						</question>
 						<if test="this.riskAssessmentUrl() !== ''">
-							<question id="riskAssessmentAudited" display="The risk assessment has been">
-								<label>Has your risk assessment been independently audited?</label>
-								<yesno yes="independently audited"/>
-								<help>It's good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-								<requirement level="standard">You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
+							<question id="riskAssessmentAudited" display="L'évaluation des risques a été">
+								<label>Est-ce que votre évaluation des risques été vérifiés de manière indépendante?</label>
+								<yesno yes="un audit indépendant"/>
+								<help>C'est une bonne habitude de vérifier votre évaluation des risques a été effectuée correctement. Des audits indépendants par des spécialistes ou par des tiers ont tendance à être plus rigoureux et impartial.</help>
+								<requirement level="standard">Vous devriez avoir <strong>votre évaluation des risques audité indépendamment</strong> pour s'assurer qu'il a été correctement effectuée.</requirement>
 							</question>
 						</if>
-						<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
-							<label>Where is the privacy notice for individuals affected by your data?</label>
-							<input type="url" placeholder="Privacy Notice URL"/>
-							<help>When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.</help>
-							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.</requirement>
+						<question id="individualConsentURL"
+									 display="Les personnes touchées par ces données ont cet avis de confidentialité">
+							<label>Où est l'avis de confidentialité pour les personnes touchées par vos données?</label>
+							<input type="url" placeholder="URL Confidentialité"/>
+							<help>Lorsque vous collectez des données sur les personnes que vous devez leur dire comment ces données seront utilisées. Les personnes qui utilisent vos données en aurez besoin pour s'assurer qu'ils sont conformes à la législation de protection des données.</help>
+							<requirement level="pilot">Vous devez <strong>dire aux gens quelles fins les individus de vos données consenti à vous en utilisant leurs données d'</strong> afin qu'ils utilisent vos données pour l' mêmes objectifs et conformes à la législation sur la protection des données.</requirement>
 						</question>
 						<question id="dpStaff">
-							<label>Is there someone in your organisation who is responsible for data protection?</label>
+							<label>Existe­t­il au sein de votre organisation une personne responsable de la protection des données?</label>
 							<yesno required="pilot"/>
 						</question>
 						<if test="this.dpStaff() === 'true'">
-							<question id="dbStaffConsulted" display="The individual responsible for data protection">
-								<label>Have you involved them in the risk assessment process?</label>
-								<yesno yes="has been consulted"/>
-								<requirement level="pilot">You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.</requirement>
+							<question id="dbStaffConsulted"
+										 display="La personne responsable de la protection des données">
+								<label>Avez­vous impliqué cette personne dans le processus de mise en place de la Déclaration d’Impact de Confidentialité?</label>
+								<yesno yes="a été consulté"/>
+								<requirement level="pilot">Vous devez <strong>impliquer la personne responsable de la protection des données</strong> dans votre organisation avant de publier ces données.</requirement>
 							</question>
 						</if>
-						<question id="anonymisationAudited" display="The anonymisation of the data has been">
-							<label>Has your anonymisation approach been independently audited?</label>
-							<yesno yes="independently audited"/>
-							<help>It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-							<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.</requirement>
+						<question id="anonymisationAudited" display="Le anonymisation des données a été">
+							<label>Est-ce que votre approche de anonymisation été vérifiés de manière indépendante?</label>
+							<yesno yes="un audit indépendant"/>
+							<help>Il est recommandé de s'assurer que votre processus de suppression des données personnelles identifiables fonctionne correctement. Des audits indépendants par des spécialistes ou par des tiers ont tendance à être plus rigoureux et impartial.</help>
+							<requirement level="standard">Vous devriez avoir <strong>votre processus d' anonymisation audit indépendant</strong> par un expert pour s'assurer qu'il est approprié pour vos données.</requirement>
 						</question>
 					</if>
 				</if>

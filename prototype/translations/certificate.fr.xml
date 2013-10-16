@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+	-->
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<questionnaire version="0.7" xml:lang="en">
+	<levels>
+		<!-- not changing names of levels here as they are hard-coded throughout Ruby code base -->
+		<level id="basic">Un début fantastique sur les bases de la publication de données ouvertes. Il en faut beaucoup pour arriver ici même.</level>
+		<level id="pilot">effort supplémentaire est allé pour soutenir et encourager les commentaires des gens qui utilisent ces données ouvertes.</level>
+		<level id="standard">l'ouverture des données régulièrement publiées avec l'appui solide que les gens peuvent compter pour construire des projets toujours plus ambitieux et les entreprises au-dessus de.</level>
+		<level id="exemplar">C'est au-delà de ce qui est attendu - un bel exemple d' infrastructure de l'information pour tout le monde à aspirer.</level>
+	</levels>
+	<group id="general">
+		<label>Informations générales</label>
+		<question id="dataTitle">
+			<label>Comment sont nommées vos données?</label>
+			<input placeholder="Titre" required="required"/>
+			<help>Le nom de vos données apparaîtra dans une liste de données similaires, Remplissez donc ce champ en étant aussi précis et descriptif que possible, afin qu’il soit facile et rapide d’identifier les particularités de vos données.</help>
+		</question>
+		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
+		<question id="documentationUrl" display="Ces données sont décrites au">
+			<label>Où sont­elles décrites?</label>
+			<input type="url" placeholder="URL des documents"/>
+			<help>Indiquez une adresse internet à laquelle on peut trouver le contenu détaillé de vos données. Il est possible d’indiquer un site avec un plus gros catalogue tel que data.gov.uk.</help>
+			<!-- TODO: Give example other that data.gov.uk? -->
+			<if test="this.releaseType() !== 'collection'">
+				<requirement level="pilot">Vous devez avoir une page web qui offre <strong>documentation</strong> sur les données ouvertes que vous publiez afin que les gens puissent comprendre le contexte, le contenu et l'utilité.</requirement>
+			</if>
+			<if test="this.releaseType() === 'collection'">
+				<requirement test="this.documentationUrl() !== ''">Vous devez avoir une page web <strong>qui donne documentation</strong> et l'accès aux données ouvertes que vous publiez afin que les gens puissent l'utiliser.</requirement>
+			</if>
+		</question>
+		<question id="publisher" display="Ces données sont publiées par">
+			<label>Qui publie ces données?</label>
+			<input placeholder="Editeur des données" required="required"/>
+			<help>Indiquez le nom de l’organisation qui publie ces données. Il s’agit probablement de votre employeur, à moins que vous effectuiez ces démarches au nom de quelqu’un d’autre.</help>
+		</question>
+		<question id="publisherUrl" display="Les données sont publiées sur">
+			<label>Sur quel site internet sont publiées ces données?</label>
+			<input type="url" placeholder="Site de l’éditeur"/>
+			<help>Indiquez l’adresse internet du site de l’éditeur. Cela nous permet de grouper les données provenant de la même organisation, même si les noms donnés sont différents.</help>
+		</question>
+		<question id="releaseType">
+			<label>De quel genre de parution s’agit­il?</label>
+			<radioset required="required">
+				<option value="oneoff">
+					<label>une parution exceptionnelle d’un unique jeu de données</label>
+					<help>Il s’agit d’un seul fichier, et vous ne prévoyez pas actuellement de publier d’autres fichiers de ce type dans le futur.</help>
+				</option>
+				<option value="collection">
+					<label>une parution exceptionnelle de plusieurs jeux de données connexes</label>
+					<help>Il s’agit d’un ensemble de fichiers concernant les mêmes données, et vous ne prévoyez pas actuellement de publier d’autres fichiers de ce type dans le futur.</help>
+				</option>
+				<option value="series">
+					<label>une parution en cours d’une série de jeux de données</label>
+					<help>Il s’agit d’une série de jeux de données dont la publication est en cours et qui est mise à jour de manière périodique.</help>
+				</option>
+				<option value="service">
+					<label>un service ou une API permettant d’accéder à des données ouvertes</label>
+					<help>Il s’agit d’un service web qui présente vos données aux programmeurs à travers une interface interactive.</help>
+				</option>
+			</radioset>
+		</question>
+	</group>
+	<group id="practical">
+		<label>Informations Pratiques</label>
+		<help>Accessibilité, précision, qualité et garanties</help>
+		<group id="findability">
+			<label>Accessibilité</label>
+			<help>la manière dont les gens peuvent trouver vos données</help>
+			<question id="onWebsite">
+				<label>Y at-il un lien à vos données à partir de votre site principal?</label>
+				<yesno/>
+				<help>Les données peuvent être trouvés plus facilement si elle est liée à partir de votre site principal.</help>
+				<requirement level="standard">Vous devez <strong>veiller à ce que les gens peuvent trouver les données de votre site principal</strong> afin que les gens puissent trouver plus facilement.</requirement>
+			</question>
+			<if test="this.onWebsite() === 'true'">
+				<repeat id="webPages">
+					<label>page Web</label>
+					<question id="webpage" display="Les liens de site Web pour les données de">
+						<label>quelle page sur votre site des liens vers les données?</label>
+						<input type="url" required="required" placeholder="Web URL de la page"/>
+						<help>Donnez une URL sur votre site principal qui comprend un lien vers ces données.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="listed">
+				<label>Est­ce que vos données sont listées dans une catégorie?</label>
+				<yesno/>
+				<help>Il est plus simple de trouver vos données lorsqu’elles sont listées dans des catégories pertinentes (par exemple académique, public ou santé), ou lorsqu’elles apparaissent dans des résultats de recherches pertinents.</help>
+				<requirement level="standard">Vous devez <strong>veiller à ce que les gens peuvent trouver vos données quand ils cherchent pour cela</strong> dans des endroits que les données de la liste.</requirement>
+			</question>
+			<if test="this.listed() === 'true'">
+				<repeat id="listings">
+					<label>Listing</label>
+					<question id="listing" display="Les données apparaissent dans cette collection">
+						<label>Où est-il dans la liste?</label>
+						<input type="url" required="required" placeholder="Listing URL"/>
+						<help>Donnez une URL où ces données est répertorié dans une collection pertinente. Par exemple, data.gov.uk (si ce n'est UK données du secteur public ), hub.data.ac.uk (s'il s'agit de données du Royaume-Uni universitaires ) ou une URL pour les résultats des moteurs de recherche.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="referenced">
+				<label>Est­ce que ces données sont référencées dans vos propres publications?</label>
+				<yesno/>
+				<help>Lorsque vous référencez vos données dans vos propres publications, telles que des rapports, des présentations ou des billets de blog, vous les inscrivez dans un contexte et aidez les gens à les trouver et à les comprendre plus facilement.</help>
+				<requirement level="standard">Vous devez <strong>référencer les données de vos propres publications</strong> afin que les gens sont au courant de sa disponibilité et de son contexte.</requirement>
+			</question>
+			<if test="this.referenced() === 'true'">
+				<repeat id="references">
+					<label>Référence</label>
+					<question id="reference" display="Ces données sont référencées à partir de">
+						<label>Où est référencé vos données?</label>
+						<input type="url" required="required" placeholder="URL de référence"/>
+						<help>Donnez une URL à un document qui cite ou des références de ces données.</help>
+					</question>
+				</repeat>
+			</if>
+		</group>
+		<group id="accuracy">
+			<label>Précision</label>
+			<help>la manière dont vous gardez vos données à jour</help>
+			<if test="this.releaseType() === 'service'">
+				<question id="serviceType" display="Les données sous-jacentes de l'API">
+					<label>Est-ce que les données derrière votre changement d' API?</label>
+					<radioset required="pilot">
+						<option value="static" display="ne changera pas">
+							<label>non, l'API donne accès à des données immuables</label>
+							<help>Certaines API juste faire accéder à un ensemble de données immuable facile, surtout quand il ya beaucoup d'elle.</help>
+						</option>
+						<option value="changing" display="va changer">
+							<label>oui, l'API donne accès à l'évolution des données</label>
+							<help>Certaines API donne un accès instantané à plus à jour et en constante évolution des données</help>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'oneoff' || this.releaseType() === 'collection' || (this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'static')">
+				<question id="timeSensitive"
+							 display="la précision ou la pertinence de ces données">
+					<label>Est-ce que vos données sortir de ce jour?</label>
+					<radioset>
+						<option value="true" display="sortir de la date">
+							<label>oui, ces données vont être mis à jour</label>
+							<help>Par exemple, un ensemble de données sur l'emplacement des arrêts de bus sera mis à jour au fil du temps comme certains sont déplacés ou en créer de nouvelles.</help>
+						</option>
+						<option value="timestamped" display="sortir de date, mais il est horodaté">
+							<label>oui, ces données vont être mis à jour au fil du temps mais il est temps estampillé</label>
+							<help>Par exemple, les statistiques de la population comprennent généralement un timestamp fixe pour indiquer que les statistiques étaient pertinentes.</help>
+							<requirement level="pilot">Vous devez <strong>mettre horodateurs dans vos données lorsque vous la relâchez</strong> afin que les gens sachent la période où il concerne et quand il expire.</requirement>
+						</option>
+						<option value="false" display="ne pas sortir de la date">
+							<label>non, ces données ne contient pas d'informations sensibles au facteur temps</label>
+							<help>Par exemple, les résultats d'une expérience n'ira pas à jour parce que les données indique avec précision les résultats observés.</help>
+							<requirement level="standard">Vous devez <strong>publier des mises à jour de données sensibles</strong> de sorte que cela ne va pas vicié.</requirement>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'series'">
+				<question id="frequentChanges" display="Ces données changements">
+					<label>Est-ce que ce changement de données au moins tous les jours?</label>
+					<yesno required="pilot" yes="au moins quotidiennement"/>
+					<help>Dites aux gens si les modifications apportées aux données sous-jacentes sur la plupart des jours. Lorsque les données changent fréquemment, il va également être mis à jour rapidement, afin que les gens ont besoin de savoir si vous mettez à jour aussi fréquemment et rapidement aussi.</help>
+				</question>
+				<if test="this.frequentChanges() === 'true'">
+					<question id="seriesType" display="Ces données sont une série de">
+						<label>Quel type de série de données est-ce?</label>
+						<radioset required="exemplar">
+							<option value="dumps" display="copies d'une base de données">
+								<label>copies régulières d'une base de données complète</label>
+								<help>Choisissez si vous publiez des nouvelles et mises à jour des copies de votre base de données complète régulièrement. Lorsque vous créez des décharges de base de données, il est utile que les gens aient accès à une alimentation de ces changements afin qu'ils puissent garder leurs copies à jour.</help>
+							</option>
+							<option value="aggregate" display="agrégats de l'évolution des données">
+								<label>agrégats réguliers de l'évolution des données</label>
+								<help>Choisissez si vous créez de nouveaux ensembles de données régulièrement. Vous pouvez le faire si les données sous-jacentes ne peuvent être libérés que les données ouvertes ou si vous ne publiez que les données de neuf depuis la dernière publication.</help>
+							</option>
+						</radioset>
+					</question>
+					<if test="this.seriesType() === 'dumps'">
+						<question id="changeFeed"
+									 display="Une alimentation de modifications à ces données">
+							<label>est un aliment de changements possibles?</label>
+							<yesno yes="est disponible"/>
+							<help>Dites aux gens si vous fournissez un flux de changements qui affectent ces données, comme de nouvelles entrées ou des modifications des entrées existantes. Feeds pourrait être en RSS, Atom ou formats personnalisés.</help>
+							<requirement level="exemplar">Vous devez <strong>fournir une alimentation de modifications à vos données</strong> afin que les gens gardent leurs copies mises à jour et exacts.</requirement>
+						</question>
+					</if>
+					<question id="frequentSeriesPublication"
+								 display="Les nouvelles versions de ces données sont">
+						<label>Combien de fois avez-vous créer une nouvelle version?</label>
+						<radioset>
+							<option value="rarely">
+								<label>moins d'une fois par mois</label>
+							</option>
+							<option value="monthly">
+								<label>au moins tous les mois</label>
+								<requirement level="pilot">Vous devez <strong>créer une nouvelle version du jeu de données chaque mois</strong> afin que les gens gardent leurs copies mises à jour et exacts.</requirement>
+							</option>
+							<option value="weekly">
+								<label>au moins chaque semaine</label>
+								<requirement level="standard">Vous devez <strong>créer une nouvelle version du jeu de données toutes les semaines</strong> afin que les gens gardent leurs copies mises à jour et exacts.</requirement>
+							</option>
+							<option value="daily">
+								<label>au moins chaque jour</label>
+								<requirement level="exemplar">Vous devez <strong>créer une nouvelle version du jeu de données chaque jour</strong> afin que les gens gardent leurs copies mises à jour et exacts.</requirement>
+							</option>
+						</radioset>
+						<help>Ceci détermine à jour ces données devient avant que les gens peuvent obtenir une mise à jour.</help>
+					</question>
+				</if>
+				<question id="seriesPublicationDelay"
+							 display="Le décalage entre la création et la publication de ces données est">
+					<label>Combien de temps est le délai entre le moment où vous créez un dataset et quand vous le publiez -il?</label>
+					<radioset>
+						<option value="extreme">
+							<label>plus que l'écart entre les versions</label>
+							<help>Par exemple, si vous créez une nouvelle version du jeu de données chaque jour, choisissez cette option si elle prend plus d'une journée pour qu'il soit publié.</help>
+						</option>
+						<option value="reasonable">
+							<label>environ le même que l'écart entre les versions</label>
+							<help>Par exemple, si vous créez une nouvelle version du jeu de données chaque jour, choisissez cette option si il faut environ une journée pour qu'il soit publié.</help>
+							<requirement level="pilot">Vous devez <strong>avoir un délai raisonnable entre le moment où vous créez et publiez un ensemble de données</strong> qui est inférieur à l'écart entre les différentes versions afin que les gens gardent leur copies mises à jour et exacts.</requirement>
+						</option>
+						<option value="good">
+							<label>moins de la moitié de l'écart entre les versions</label>
+							<help>Par exemple, si vous créez une nouvelle version du jeu de données chaque jour, choisissez cette option si elle prend moins de douze heures pour qu'il soit publié.</help>
+							<requirement level="standard">Vous devez <strong>avoir un court délai entre le moment où vous créez et publiez un ensemble de données</strong> qui est moins de la moitié de l'écart entre les différentes versions afin que les gens gardent leurs copies mises à jour et exacts.</requirement>
+						</option>
+						<option value="minimal" display="minimes">
+							<label>il ya peu ou pas de retard</label>
+							<help>Choisissez cette option si vous publiez en quelques secondes ou quelques minutes.</help>
+							<requirement level="exemplar">Vous devez <strong>avoir peu ou pas de délai entre le moment où vous créez et publiez un ensemble de données</strong> afin que les gens gardent leurs copies up-to- date et précise.</requirement>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'service'">
+				<question id="provideDumps" display="Le commissaire publie">
+					<label>Vous publiez également des décharges de cet ensemble de données?</label>
+					<yesno yes="décharges des données"/>
+					<help>Une sauvegarde est un extrait de l'ensemble des données dans un fichier que l'on peut télécharger. Cela permet aux gens de faire une analyse qui est différent de l'analyse avec un accès API.</help>
+					<requirement level="standard">Vous devez <strong>laisser les gens télécharger l'intégralité de votre ensemble de données</strong> afin qu'ils puissent faire une analyse plus complète et précise à toutes les données.</requirement>
+				</question>
+				<if test="this.serviceType() === 'changing'">
+					<if test="this.provideDumps() === 'true'">
+						<question id="dumpFrequency" display="dumps de base de données sont créés">
+							<label>À quelle fréquence voulez-vous créer une nouvelle décharge de base de données?</label>
+							<radioset>
+								<option value="rarely">
+									<label>moins d'une fois par mois</label>
+								</option>
+								<option value="monthly">
+									<label>au moins tous les mois</label>
+									<requirement level="pilot">Vous devez <strong>créer une nouvelle base de vider tous les mois</strong> afin que les gens ont les données les plus récentes.</requirement>
+								</option>
+								<option value="weekly">
+									<label>moins d'une semaine de tout changement</label>
+									<requirement level="standard">Vous devez <strong>créer une nouvelle sauvegarde de base de données au sein d'une semaine de tout changement</strong> afin que les gens ont moins de temps à attendre les données les plus récentes.</requirement>
+								</option>
+								<option value="daily">
+									<label>dans un jour de tout changement</label>
+									<requirement level="exemplar">Vous devez <strong>créer une nouvelle sauvegarde de base de données dans un jour de tout changement</strong> afin que les gens trouvent qu'il est plus facile d'obtenir l' données les plus récentes.</requirement>
+								</option>
+							</radioset>
+							<help>accès plus rapide aux extraits plus fréquentes de l'ensemble des données signifie que les gens peuvent commencer plus rapide avec les données les plus à jour.</help>
+						</question>
+					</if>
+				</if>
+				<if test="this.timeSensitive() !== 'true'">
+					<question id="corrected" display="Toute erreur dans ces données sont">
+						<label>sera corrigé vos données si elle contient des erreurs?</label>
+						<yesno yes="corrigé"/>
+						<help>C'est une bonne pratique pour corriger les erreurs dans vos données, surtout si vous utilisez vous-même. Lorsque vous effectuez des corrections, les gens doivent être informés à leur sujet.</help>
+						<requirement level="standard">Vous devez <strong>corriger les données lorsque les gens signalent des erreurs</strong> Donc tout le monde bénéficie de l'amélioration de la précision.</requirement>
+					</question>
+				</if>
+			</if>
+		</group>
+		<group id="quality">
+			<label>Qualité</label>
+			<help>a quel point les gens peuvent se fier à vos données</help>
+			<question id="qualityUrl" display="la qualité des données est documentée à">
+				<label>A quel endroit vos documents traitent de la qualité de vos données?</label>
+				<input type="url" placeholder="URL des documents traitant de la qualité des données"/>
+				<help>Donnez une URL à laquelle il est possible de se renseigner sur la qualité de vos données. Les erreurs sont inévitables, et elles peuvent provenir par exemple de problèmes techniques ou d’erreurs apparaissant durant les changements de système. Nous vous recommandons d’être transparents sur la qualité de vos données, afin que les gens puissent savoir à quel point ils peuvent s’y fier.</help>
+				<requirement level="standard">Vous devez <strong>documenter les problèmes connus avec la qualité de vos données</strong> afin que les gens puissent décider combien de faire confiance à vos données.</requirement>
+			</question>
+			<question id="qualityControlUrl"
+						 display="les processus de contrôle de qualité sont décrits à">
+				<label>Où est décrit votre processus de contrôle qualité?</label>
+				<input type="url" placeholder="URL de description du processus de contrôle qualité"/>
+				<help>Donnez une URL à laquelle les gens peuvent se rendre pour se renseigner sur les contrôles en cours sur vos données, qu’ils soient automatiques ou manuels. Cela permet de les rassurer sur votre sérieux et sur la qualité de vos données, et peut amener à des améliorations bénéfiques pour tous.</help>
+				<requirement level="exemplar">Vous devez <strong>documenter votre processus de contrôle de qualité</strong> afin que les gens puissent décider combien de faire confiance à vos données.</requirement>
+			</question>
+		</group>
+		<group id="guarantees">
+			<label>Garanties</label>
+			<help>a quel point les gens peuvent s’appuyer sur la disponibilité de vos données</help>
+			<question id="backups" display="Les données sont">
+				<label>Prenez-vous des sauvegardes hors site?</label>
+				<yesno yes="sauvegarder hors site"/>
+				<help>Faire une sauvegarde hors site régulier permet de s'assurer que les données ne seront pas perdues en cas d' accident.</help>
+				<requirement level="standard">Vous devez <strong>jeter un résultat sauvegarde hors site</strong> afin que les données ne seront pas perdues en cas d'accident.</requirement>
+			</question>
+			<if test="this.releaseType() === 'service'">
+				<question id="slaUrl" display="La disponibilité du service est décrit au">
+					<label>Où voulez- vous décrivez aucune garantie sur la disponibilité du service?</label>
+					<input type="url" placeholder="Disponibilité du Service Documentation URL"/>
+					<help>Donnez une URL d'une page qui décrit ce que vous garantit avoir au sujet de votre service étant disponible pour les personnes à utiliser. Par exemple, vous pourriez avoir une garantie de disponibilité de 99,5%, ou vous pourriez fournir aucune garantie.</help>
+					<requirement level="standard">Vous devez <strong>décrire quelles garanties vous avez autour de la disponibilité du service</strong> afin que les gens sachent combien ils peuvent compter sur elle.</requirement>
+				</question>
+				<question id="statusUrl" display="statut de la fonction est donnée à">
+					<label>Où voulez- vous donner des informations sur l'état actuel du service?</label>
+					<input type="url" placeholder="l'état du service URL"/>
+					<help>Donnez une URL d'une page qui dit aux gens au sujet de l'état actuel de votre service, y compris les défauts que vous êtes au courant.</help>
+					<requirement level="expert">Vous devez <strong>avoir une page d'état du service</strong> qui dit aux gens au sujet de l'état actuel de votre service.</requirement>
+				</question>
+			</if>
+			<question id="onGoingAvailability" display="Les données sont disponibles">
+				<label>Pour combien de temps ces données seront­elles disponibles?</label>
+				<radioset>
+					<option value="experimental"
+								display="expérimentalement et pourraient disparaître à tout moment">
+						<label>elles pourraient disparaître à n’importe quel moment</label>
+					</option>
+					<option value="short" display="expérimentalement pour un an ou deux">
+						<label>elles sont disponibles à titre expérimental, mais devraient être disponibles pour encore environ un an</label>
+						<requirement level="pilot">Vous devez <strong>garantir que vos données seront disponibles sous cette forme pendant au moins un an</strong> afin que les gens puissent décider combien de compter sur votre données.</requirement>
+					</option>
+					<option value="medium" display="pendant au moins deux ans">
+						<label>elles font partie de vos plans à moyen terme et devraient être encore disponibles pour environ deux ans</label>
+						<requirement level="standard">Vous devez <strong>garantir que vos données seront disponibles sous cette forme dans le moyen terme</strong> afin que les gens puissent décider combien de faire confiance à vos données.</requirement>
+					</option>
+					<option value="long" display="pendant une longue période">
+						<label>elles font partie de vos opérations quotidiennes et resteront donc publiées pendant longtemps</label>
+						<requirement level="exemplar">Vous devez <strong>garantir que vos données seront disponibles sous cette forme dans le long terme</strong> afin que les gens puissent décider combien de faire confiance à vos données.</requirement>
+					</option>
+				</radioset>
+			</question>
+		</group>
+	</group>
+	<group id="technical">
+		<label>Informations Techniques</label>
+		<help>Emplacement, formats et confiance</help>
+		<group id="locations">
+			<label>Emplacements</label>
+			<help>la manière dont les gens peuvent accéder à vos données</help>
+			<if test="this.releaseType() === 'oneoff'">
+				<question id="datasetUrl" display="Ces données sont publiées au">
+					<label>Où est votre ensemble de données?</label>
+					<input type="url" placeholder="Dataset URL"/>
+					<help>Donnez une URL pour l'ensemble de données elle-même. Ouvrir les données devraient être liés à directement sur ​​le web afin que les gens peuvent facilement trouver et réutiliser.</help>
+					<if test="this.documentationUrl() === ''">
+						<requirement test="this.datasetUrl() !== ''">Vous devez <strong>fournir une URL à vos données ou une URL à la documentation</strong> à ce sujet afin que les gens puissent le trouver.</requirement>
+					</if>
+					<if test="this.documentationUrl() !== ''">
+						<requirement test="this.datasetUrl() !== ''" level="pilot">Vous devez <strong>avoir une URL qui est un lien direct vers les données elle-même</strong> afin que les gens puissent y accéder facilement.</requirement>
+					</if>
+				</question>
+			</if>
+			<if test="this.releaseType() === 'series'">
+				<question id="versionManagement">
+					<label>Comment vous publiez faire une série du même ensemble de données?</label>
+					<checkboxset>
+						<option value="current">
+							<label>comme une URL unique qui est régulièrement mis à jour</label>
+							<help>Choisissez cette option si il ya une URL pour les gens de télécharger la version la plus récente du jeu de données actuel.</help>
+							<requirement level="standard">Vous devez <strong>avoir une URL unique persistant pour télécharger la version actuelle de vos données</strong> afin que les gens puissent y accéder facilement.</requirement>
+						</option>
+						<option value="template">
+							<label>que les URL cohérente pour chaque version</label>
+							<help>Choisissez cette option si votre URL de données suivent un schéma régulier qui comprend la date de publication, par exemple, une URL qui commence '2013 - 04 '. Cela aide les gens à comprendre comment souvent vous relâchez données et d'écrire des scripts qui récupèrent de nouveaux à chaque fois qu'ils sont libérés.</help>
+							<requirement level="pilot">Vous devez <strong>utiliser un modèle cohérent pour différentes URL de presse</strong> de sorte que les gens peuvent télécharger chacun automatiquement.</requirement>
+						</option>
+						<option value="list">
+							<label>une liste des communiqués</label>
+							<help>Choisissez cette option si vous avez une liste de bases de données sur une page Web ou d'un aliment (comme Atom ou RSS ) avec des liens vers chaque version individuelle et ses détails. Cela aide les gens à comprendre comment souvent vous relâchez données et d'écrire des scripts qui récupèrent de nouveaux à chaque fois qu'ils sont libérés.</help>
+							<requirement level="standard">Vous devez <strong>avoir un document ou animale avec une liste des versions disponibles</strong> les gens puissent créer des scripts pour télécharger tous.</requirement>
+						</option>
+					</checkboxset>
+					<if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
+						<requirement>Vous devez <strong>donner accès aux versions de vos données via une URL</strong> qui donne la version actuelle, une série découverte d'URL ou par l'intermédiaire d'une page de documentation afin que les gens puissent le trouver.</requirement>
+					</if>
+				</question>
+				<if test="this.versionManagement().current">
+					<question id="currentDatasetUrl" display="Le jeu de données est disponible à l'">
+						<label>Où est votre ensemble de données actuel?</label>
+						<input type="url" placeholder="Dataset actuelle URL" required="required"/>
+						<help>Donnez une URL unique pour la version la plus récente de l'ensemble de données. Le contenu à cette adresse URL doit changer à chaque fois une nouvelle version est disponible.</help>
+					</question>
+				</if>
+				<if test="this.versionManagement().template">
+					<question id="versionsTemplateUrl"
+								 display="presse suivent ce modèle d'URL cohérente">
+						<label>Quel format ne suivent URL de libération de données?</label>
+						<input type="url" placeholder="Version Template URL" required="required"/>
+						<help>C'est la structure des URL lorsque vous publiez différentes versions. Utiliser ` {variable }` pour indiquer des parties de l'URL du modèle que le changement, par exemple, ` http://example.com/data/monthly/mydata- { YY } { MM}. Csv `</help>
+					</question>
+				</if>
+				<if test="this.versionManagement().list">
+					<question id="versionsUrl" display="Les rejets de ces données sont inscrites à">
+						<label>Où est votre liste de communiqués de dataset?</label>
+						<input type="url" placeholder="Version Liste URL" required="required"/>
+						<help>Donnez une URL vers une page ou animale avec une liste lisible par machine de jeux de données. Utilisez l'URL de la première page qui devrait relier au reste des pages.</help>
+					</question>
+				</if>
+			</if>
+			<if test="this.releaseType() === 'service'">
+				<question id="endpointUrl" display="La terminaison de service API est">
+					<label>Où se trouve le point de terminaison pour votre API?</label>
+					<input type="url" placeholder="Endpoint URL"/>
+					<help>Donnez une URL qui est un point de départ pour les scripts de personnes d'accéder à votre API. Ce devrait être un document de description de service qui aide le script fonctionne sur lesquels il existe des services.</help>
+					<if test="this.documentationUrl() === ''">
+						<requirement test="this.endpointUrl() !== ''">Vous devez <strong>fournir soit un URL d'extrémité API ou une URL à sa documentation</strong> afin que les gens puissent le trouver.</requirement>
+					</if>
+					<if test="this.documentationUrl() !== ''">
+						<requirement test="this.endpointUrl() !== ''" level="standard">Vous devez <strong>avoir un document de description de service ou de point d'entrée unique pour votre API</strong> afin que les gens puissent y accéder.</requirement>
+					</if>
+				</question>
+				<if test="this.provideDumps() === 'true'">
+					<question id="dumpManagement">
+						<label>Comment vous publiez ne dumps de base de données?</label>
+						<checkboxset>
+							<option value="current">
+								<label>comme une URL unique qui est régulièrement mis à jour</label>
+								<help>Choisissez cette option si il ya une URL pour les gens de télécharger la version la plus récente de la décharge de la base de données actuelle.</help>
+								<requirement level="standard">Vous devez <strong>avoir une URL unique persistant pour télécharger la décharge actuelle de votre base de données</strong> afin que les gens puissent le trouver.</requirement>
+							</option>
+							<option value="template">
+								<label>que les URL cohérente pour chaque version</label>
+								<help>Choisissez cette option si votre base de données dépotoir URL suivent un schéma régulier qui comprend la date de publication, par exemple, une URL qui commence '2013 - 04 '. Cela aide les gens à comprendre comment souvent vous relâchez données et d'écrire des scripts qui récupèrent de nouveaux à chaque fois qu'ils sont libérés.</help>
+								<requirement level="exemplar">Vous devez <strong>utiliser un modèle cohérent de base décharge URL</strong> afin que les gens peuvent télécharger chacun automatiquement.</requirement>
+							</option>
+							<option value="list">
+								<label>une liste des communiqués</label>
+								<help>Choisissez cette option si vous avez une liste de décharges de bases de données sur une page Web ou d'un aliment (comme Atom ou RSS ) avec des liens vers chaque version individuelle et ses détails. Cela aide les gens à comprendre comment souvent vous relâchez données et d'écrire des scripts qui récupèrent de nouveaux à chaque fois qu'ils sont libérés.</help>
+								<requirement level="exemplar">Vous devez <strong>avoir un document ou animale avec une liste des dumps des bases de données disponibles</strong> les gens puissent créer des scripts pour télécharger les tous</requirement>
+							</option>
+						</checkboxset>
+					</question>
+					<if test="this.dumpManagement().current">
+						<question id="currentDumpUrl"
+									 display="La dernière sauvegarde de base de données est toujours disponible au">
+							<label>Où se trouve le dump de base de données actuelle?</label>
+							<input type="url" placeholder="Dump actuelle URL" required="required"/>
+							<help>Donnez une URL à la déchetterie la plus récente de la base de données. Le contenu à cette adresse URL doit changer à chaque fois une nouvelle décharge de base de données est créée.</help>
+						</question>
+					</if>
+					<if test="this.dumpManagement().template">
+						<question id="dumpsTemplateUrl"
+									 display="dumps de base de données suivent le modèle d'URL cohérente">
+							<label>Quel format ne suivent base décharge URL?</label>
+							<input type="url" placeholder="Dump modèle URL" required="required"/>
+							<help>C'est la structure des URL lorsque vous publiez différentes versions. Utiliser ` {variable }` pour indiquer des parties de l'URL du modèle que le changement, par exemple, ` http://example.com/data/monthly/mydata- { YY } { MM}. Csv `</help>
+						</question>
+					</if>
+					<if test="this.dumpManagement().list">
+						<question id="dumpsUrl" display="Une liste des dumps de base de données est à">
+							<label>Où est votre liste de dépôts de base de données disponibles?</label>
+							<input type="url" placeholder="Dump liste URL" required="required"/>
+							<help>Donnez une URL vers une page ou animale avec une liste lisible par machine des décharges de base de données. Utilisez l'URL de la première page qui devrait relier au reste des pages.</help>
+						</question>
+					</if>
+				</if>
+			</if>
+			<if test="this.changeFeed() === 'true'">
+				<question id="changeFeedUrl"
+							 display="Une alimentation de modifications à ces données est à">
+					<label>Où est votre flux de changements?</label>
+					<input type="url" placeholder="Changement URL du flux" required="required"/>
+					<help>Donnez une URL vers une page ou animale qui fournit une liste lisible par machine des versions précédentes des dumps de base de données. Utilisez l'URL de la première page qui devrait relier au reste des pages.</help>
+				</question>
+			</if>
+		</group>
+		<group id="format">
+			<label>Formats</label>
+			<help>la manière dont les gens peuvent travailler avec vos données</help>
+			<question id="machineReadable" display="Ces données sont">
+				<label>Vos données sont­elles lisibles par machine?</label>
+				<yesno yes="lisible par machine"/>
+				<help>Les gens préfèrent les formats qui sont facilement traitables par ordinateur, pour des raisons de rapidité et de précision. Par exemple, une photocopie scannée d’une feuille de calcul ne serait pas lisible par machine, contrairement à un fichier CSV.</help>
+				<requirement level="pilot">Vous devez <strong>fournir vos données dans un format lisible par machine</strong> de sorte qu'il est facile à traiter.</requirement>
+			</question>
+			<question id="openStandard" display="Le format des données est">
+				<label>Vos données sont­elles dans un format open data standard?</label>
+				<yesno yes="un format standard ouvert"/>
+				<help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Les standards open data sont créés au travers d’un processus équitable, transparent et collaboratif. N’importe qui peut les mettre en place, et bénéficier de beaucoup d’assistance. Ils vous permettent donc de partager vos données plus facilement. Les formats XML, CSV et JSON sont par exemple des standards open data.</help>
+				<requirement level="standard">Vous devez <strong>fournir vos données dans un format standard ouvert</strong> afin que les gens peuvent utiliser des outils largement disponibles pour traiter plus facilement.</requirement>
+			</question>
+			<question id="dataType">
+				<label>Quel genre de données publiez­vous?</label>
+				<checkboxset required="pilot">
+					<option value="documents">
+						<label>documents lisibles par des humains</label>
+						<help>Cochez cette case si vos données sont destinées à une consommation humaine. Par exemple: documents protocolaires, livres blancs, rapports et compte rendus de réunions. Ces documents sont généralement structurés, mais contiennent surtout du texte.</help>
+					</option>
+					<option value="statistical">
+						<label>données statistiques, telles que des comptes, des moyennes ou des pourcentages</label>
+						<help>Cochez cette case si vos données sont des données statistiques ou numériques, telles que des comptes, des moyennes ou des pourcentages. Par exemple: résultats de recensement, informations sur le trafic routier, statistiques sur la criminalité...</help>
+					</option>
+					<option value="geographic">
+						<label>informations géographiques, telles que des points et des frontières</label>
+						<help>Cochez cette case si vos données peuvent être indiquées sur une carte sous forme de points, de frontières ou de lignes.</help>
+					</option>
+					<option value="structured">
+						<label>autre genre de données structurées</label>
+						<help>Cochez cette case si vos données sont structurées d’une autre manière. Par exemple des détails d’évènements, des horaires de train, des listes de contacts ou tout autre type de données qui peuvent être interprétées, analysées et présentées de différentes manières.</help>
+					</option>
+				</checkboxset>
+			</question>
+			<if test="this.dataType().documents">
+				<question id="documentFormat" display="Les documents sont publiés">
+					<label>Vos documents lisibles par l'homme incluent formats</label>
+					<radioset>
+						<option value="semantic" display="dans un format sémantique">
+							<label>décrire la structure sémantique comme le HTML, DocBook ou Markdown</label>
+							<help>Ces structures d'étiquettes de formats comme des chapitres, des titres et des tableaux qui font qu'il est facile de créer automatiquement des résumés comme des tables des matières et les glossaires. Ils permettent également facile à appliquer différents styles au document afin de ses changements d'apparence.</help>
+							<requirement level="standard">Vous devez <strong>publier des documents dans un format qui expose structure sémantique</strong> afin que les gens peuvent les afficher dans des styles différents.</requirement>
+						</option>
+						<option value="format" display="dans un format d'affichage">
+							<label>décrire des informations sur le formatage comme OOXML ou PDF</label>
+							<help>Ces formats apparence soulignent comme les polices, les couleurs et le positionnement des différents éléments dans la page. Ils sont bons pour la consommation humaine, mais ne sont pas aussi facile pour les gens de traiter automatiquement et changer de style.</help>
+							<requirement level="pilot">Vous devez <strong>publier des documents dans un format spécialement conçu pour eux</strong> de sorte qu'ils sont faciles à traiter.</requirement>
+						</option>
+						<option value="unsuitable" display="dans un format inadapté aux documents">
+							<label>ne sont pas faits pour des documents tels que Excel, CSV ou JSON</label>
+							<help>Ces formats de mieux répondre à des données tabulaires ou structurée.</help>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.dataType().statistical">
+				<question id="statisticalFormat" display="Les données statistiques sont publiées">
+					<label>Est-ce que vos données statistiques comprennent les formats</label>
+					<radioset>
+						<option value="statistical" display="dans un format de données statistiques">
+							<label>exposer la structure de données statistiques comme hypercube <a href="http://sdmx.org/">SDMX</a> ou <a href="http://www.w3.org/TR/vocab-data-cube/">Cube données</a>
+							</label>
+							<help>observations individuelles dans hypercubes se rapportent à une mesure particulière et un ensemble de dimensions. Chaque observation peut également être liée à des annotations qui donnent contexte supplémentaire. Formats comme <a href="http://sdmx.org/">SDMX</a> et <a href="http://www.w3.org/TR/vocab-data-cube/">Cube de données</a> sont conçus pour exprimer cette structure sous-jacente.</help>
+							<requirement level="exemplar">Vous devez <strong>publier des données statistiques dans un format qui expose dimensions et mesures</strong> de sorte qu'il est facile à analyser.</requirement>
+						</option>
+						<option value="tabular" display="dans un format de données tabulaires">
+							<label>traiter des données statistiques sous forme de tableau comme CSV</label>
+							<help>Ces formats organiser les données statistiques dans un tableau de lignes et de colonnes. Ce manque de contexte supplémentaires sur l' hypercube sous-jacente mais est facile à traiter.</help>
+							<requirement level="standard">Vous devez <strong>publier des tableaux de données dans un format qui expose des tableaux de données</strong> de sorte qu'il est facile à analyser.</requirement>
+						</option>
+						<option value="format" display="dans un format de présentation">
+							<label>se concentrer sur le format des données tabulaires comme Excel</label>
+							<help>Spreadsheets utilisation formatage comme du texte en italique ou en gras, et le retrait dans les champs pour décrire son apparence et la structure sous-jacente. Ce style permet aux gens de comprendre la signification de vos données, mais il est moins adapté pour les ordinateurs de processus.</help>
+							<requirement level="pilot">Vous devez <strong>publier des tableaux de données dans un format conçu à cette fin</strong> de sorte qu'il est facile à traiter.</requirement>
+						</option>
+						<option value="unsuitable"
+									display="dans un format inadapté aux données statistiques">
+							<label>ne sont pas destinées données statistiques ou de tableaux tels que Word ou PDF</label>
+							<help>Ces formats ne conviennent pas à des données statistiques, car ils masquent la structure sous-jacente des données.</help>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.dataType().geographic">
+				<question id="geographicFormat" display="Les données géographiques sont publiés">
+					<label>Est-ce que vos données géographiques comprennent formats</label>
+					<radioset>
+						<option value="specific" display="dans un format de données géographiques">
+							<label>sont conçus pour des données géographiques comme <a href="http://www.opengeospatial.org/standards/kml/">KML</a> ou <a href="http://www.geojson.org/">GeoJSON</a>
+							</label>
+							<help>Ces formats décrivent des points, des lignes et des frontières, et exposent les structures dans les données qui le rendent plus facile à traiter automatiquement.</help>
+							<requirement level="exemplar">Vous devez <strong>publier des données géographiques dans un format conçu à cette fin</strong> afin que les gens peuvent utiliser des outils largement disponibles pour la traiter.</requirement>
+						</option>
+						<option value="generic" display="dans un format de données générique">
+							<label>conserve les données structurées comme JSON, XML ou CSV</label>
+							<help>Tous les formats qui stocke des données structurées normales peut exprimer données géographiques trop, surtout si elle ne détient que des données sur les points.</help>
+							<requirement level="pilot">Vous devez <strong>publier des données géographiques sous forme de données structurées</strong> de sorte qu'il est facile à traiter.</requirement>
+						</option>
+						<option value="unsuitable"
+									display="dans un format inadapté pour les données géographiques">
+							<label>ne sont pas conçus pour les données géographiques telles que Word ou PDF</label>
+							<help>Ces formats ne conviennent pas à des données géographiques, car ils masquent la structure sous-jacente des données.</help>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<if test="this.dataType().structured">
+				<question id="structuredFormat" display="données structurées sont publiés">
+					<label>Est-ce que vos données structurées comprennent formats</label>
+					<radioset>
+						<option value="suitable" display="dans un format de données structurées">
+							<label>sont conçus pour les données structurées comme JSON, XML, CSV ou tortue</label>
+							<help>Ces formats d'organiser les données dans une structure de base des choses qui ont une valeur pour un ensemble connu de propriétés. Ces formats sont faciles pour les ordinateurs pour les traiter automatiquement.</help>
+							<requirement level="pilot">Vous devez <strong>publier des données structurées dans un format conçu à cette fin</strong> de sorte qu'il est facile à traiter.</requirement>
+						</option>
+						<option value="unsuitable"
+									display="dans un format inadapté pour les données structurées">
+							<label>ne sont pas conçus pour les données structurées telles que Word ou PDF</label>
+							<help>Ces formats ne conviennent pas à ce type de données car elles masquent la structure sous-jacente.</help>
+						</option>
+					</radioset>
+				</question>
+			</if>
+			<question id="identifiers" display="Les données comprennent">
+				<label>Vos données utilisent­elles des identifiants homogènes?</label>
+				<yesno yes="identificateurs persistants"/>
+				<help>Les données traitent généralement de choses concrètes, comme des écoles ou des routes, ou bien utilisent un système de codage. Si des données provenant de différentes sources utilisent le même unique identifiant pour se référer aux mêmes choses de manière durable, il est facile de combiner les sources afin de créer des données plus utiles. Les identifiants peuvent être des GUIDs, des DOIs ou des URLs.</help>
+				<requirement level="standard">Vous devez <strong>utiliser des identificateurs de choses dans vos données</strong> de sorte qu'ils peuvent être facilement reliés à d'autres données au sujet de ces choses.</requirement>
+			</question>
+			<if test="this.identifiers() === 'true'">
+				<question id="resolvingIds" display="Les identificateurs persistants">
+					<label>Peut les identificateurs de vos données soient utilisées pour trouver des informations supplémentaires?</label>
+					<radioset>
+						<option value="false" display="">
+							<label>non, les identifiants ne peut pas être utilisé pour trouver des informations supplémentaires</label>
+						</option>
+						<option value="service" display="résoudre en utilisant un service">
+							<label>oui, il ya un service que les gens peuvent utiliser pour résoudre les identificateurs</label>
+							<help>services en ligne peuvent être utilisés pour donner aux gens des informations sur les identificateurs tels que GUID ou identificateurs d'objets numériques qui ne sont pas accessibles directement dans la façon dont les URL sont.</help>
+							<requirement level="standard">Vous devez fournir <strong>un service pour résoudre les identifiants que vous utilisez</strong> de sorte que les gens peuvent trouver des informations supplémentaires à leur sujet.</requirement>
+						</option>
+						<option value="resolvable" display="résoudre parce qu'ils sont des URL">
+							<label>oui, les identificateurs sont des URL qui décident de donner des informations</label>
+							<help>URLs sont utiles pour les personnes et les ordinateurs. Les gens peuvent mettre un URL dans leur navigateur et de lire plus d'informations, comme <a href="http://opencorporates.com/companies/gb/08030289">entreprises</a> et <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">codes postaux</a>. Les ordinateurs peuvent aussi traiter cette information supplémentaire en utilisant des scripts pour accéder aux données sous-jacentes.</help>
+							<requirement level="exemplar">Vous devez <strong>un lien vers une page web d'information sur chacune des choses dans vos données</strong> de sorte que les gens peuvent facilement trouver et partager informations.</requirement>
+						</option>
+					</radioset>
+				</question>
+				<if test="this.resolvingIds() === 'service'">
+					<question id="resolutionServiceURL"
+								 display="Le service de résolution de l'identifiant est à">
+						<label>Où est le service qui est utilisé pour résoudre les identifiants?</label>
+						<input type="url" placeholder="Identifier Résolution URL du service"/>
+						<help>Le service de résolution devrait prendre un identifiant comme un paramètre de requête et de redonner un peu d'informations sur la chose qu'il identifie.</help>
+						<requirement level="standard">Vous devez <strong>avoir une URL par lequel les identificateurs peuvent être résolus</strong> de sorte que plus d'informations à leur sujet peut être trouvé par un ordinateur.</requirement>
+					</question>
+				</if>
+				<question id="existingExternalUrls">
+					<label>Y at-il des renseignements de tiers sur les choses à vos données sur le web?</label>
+					<yesno required="exemplar"/>
+					<help>Parfois, d'autres personnes en dehors de votre contrôle fournissent des URL pour les choses de vos données est environ. Par exemple, vos données pourraient avoir des codes postaux en elle qui pointent vers le site de l'Ordnance Survey.</help>
+				</question>
+				<if test="this.existingExternalUrls() === 'true'">
+					<question id="reliableExternalUrls">
+						<label>Est-ce que les renseignements de tiers fiables?</label>
+						<yesno required="exemplar"/>
+						<help>Si une tierce partie fournit les URL publique de choses dans vos données, ils prennent probablement des mesures pour assurer la qualité et la fiabilité des données. Il s'agit d'une mesure de combien vous avez confiance de leurs processus pour le faire. Chercher leur certificat de données ouvert ou signes distinctifs similaires pour les aider à prendre votre décision.</help>
+					</question>
+					<if test="this.reliableExternalUrls">
+						<question id="externalUrls" display="URL de sites tiers sont">
+							<label>Est-ce que vos données utilisent ces URL tiers?</label>
+							<yesno yes="les données citées dans le présent"/>
+							<help>Vous devez utiliser des URL tierces qui résolvent des informations sur les choses que vos données décrit. Cela permet de réduire les doubles emplois et aide les gens à combiner les données provenant de différentes sources pour la rendre plus utile.</help>
+							<requirement level="exemplar">Vous devez <strong>utiliser des URL à l'information des tiers à vos données</strong> de sorte qu'il est facile à combiner avec d'autres données qui utilise ces URL.</requirement>
+						</question>
+					</if>
+				</if>
+			</if>
+		</group>
+		<group id="trust">
+			<label>Confiance</label>
+			<help>a quel point les gens peuvent faire confiance à vos données</help>
+			<question id="provenance" display="La provenance de ces données est">
+				<label>Fournissez­vous des informations lisibles par machine sur la provenance de vos données?</label>
+				<yesno yes="machine-readable" />
+				<help more="http://www.w3.org/TR/prov-primer/">Cela concerne les origines de vos données et la manière dont elles ont été créées et traitées avant d’être publiées. Cela permet de renforcer la confiance dans les données que vous publiez, puisqu’il est facile de remonter à la source et de savoir comment elles ont été gérées.</help>
+			  <requirement level="exemplar">Vous devez <strong>fournir une piste de provenance lisible par machine</strong> à propos de vos données afin que les gens puissent suivre la façon dont elle a été traitée.</requirement>
+			</question>
+			<question id="digitalCertificate"
+						 display="Ces données peuvent être vérifiées à l'aide">
+				<label>À quel endroit expliquez­vous le processus de vérification de vos données?</label>
+				<input type="url" placeholder="Processus de vérification URL"/>
+				<help>Si vous fournissez des données importantes à quelqu’un, cette personne devrait pouvoir être en mesure de vérifier que les données qu’elle a reçues sont les mêmes que celles que vous publiez. Vous pouvez par exemple signer digitalement les données que vous publiez, afin qu’il soit possible de vérifier qu’elles n’ont pas été altérées.</help>
+				<requirement level="exemplar">Vous devez <strong>décrire comment les gens peuvent vérifier que les données qu'ils reçoivent est le même que ce que vous avez publié</strong> afin qu'ils puissent lui faire confiance.</requirement>
+			</question>
+		</group>
+	</group>
+	<group id="social">
+		<label>Informations Sociales</label>
+		<help>Documentation, assistance et services</help>
+		<group id="documentation">
+			<label>Documentation</label>
+			<help>comment vous aidez les gens à comprendre le contenu et le contexte de vos données</help>
+			<if test="this.documentationUrl() !== ''">
+				<question id="documentationMetadata"
+							 display="La documentation contient des données lisibles par machine pour">
+					<label>Est-ce que votre documentation de données comprennent des données lisibles par machine pour:</label>
+					<!-- these are properties from DCAT -->
+					<checkboxset>
+						<option value="title">
+							<label>titre</label>
+							<requirement level="standard">Vous devez <strong>inclure un titre de données lisibles par machine dans votre documentation</strong> afin que les gens savent comment s'y référer.</requirement>
+						</option>
+						<option value="description">
+							<label>Description</label>
+							<requirement level="standard">Vous devez <strong>inclure une description des données lisibles par machine dans votre documentation</strong> afin que les gens sachent ce qu'il contient.</requirement>
+						</option>
+						<option value="issued">
+							<label>date de sortie</label>
+							<requirement level="standard">Vous devez <strong>inclure une date lisible par machine des données libération dans la documentation</strong> afin que les gens sachent comment il est opportun.</requirement>
+						</option>
+						<option value="modified">
+							<label>Date de modification</label>
+							<requirement level="standard">Vous devez <strong>inclure une date limite lisible à la machine de modification dans la documentation</strong> afin que les gens savent qu'ils ont données les plus récentes.</requirement>
+						</option>
+						<option value="accrualPeriodicity" display="fréquence de sortie">
+							<label>fréquence des rejets</label>
+							<requirement level="standard">Vous devez <strong>fournir des métadonnées lisibles par machine sur la fréquence que vous relâchiez nouvelles versions de vos données</strong> afin que les gens sachent à quelle fréquence vous mettez à jour.</requirement>
+						</option>
+						<option value="identifier">
+							<label>identificateur</label>
+							<requirement level="standard">Vous devez <strong>inclure une URL canonique pour les données de votre documentation lisible par machine</strong> afin que les gens sachent comment y avoir accès de manière cohérente.</requirement>
+						</option>
+						<option value="landingPage">
+							<label>page d'atterrissage</label>
+							<requirement level="standard">Vous devez <strong>inclure une URL canonique de la documentation lisible par la machine elle-même</strong> afin que les gens sachent comment accéder à systématiquement.</requirement>
+						</option>
+						<option value="language">
+							<label>langue</label>
+							<requirement level="standard">Vous devez <strong>comprendre la langue des données dans votre documentation lisible par machine</strong> afin que les gens qui cherchent pour elle sauront s'ils peuvent comprendre.</requirement>
+						</option>
+						<option value="publisher">
+							<label>éditeur</label>
+							<requirement level="standard">Vous devez <strong>indiquer l'éditeur de données dans votre documentation lisible par machine</strong> les gens puissent décider combien de faire confiance à vos données.</requirement>
+						</option>
+						<option value="spatial">
+							<label>couverture spatiale / géographique</label>
+							<requirement level="standard">Vous devez <strong>inclure la couverture géographique dans la documentation lisible par machine</strong> pour que les gens comprennent où vos données s'applique.</requirement>
+						</option>
+						<option value="temporal">
+							<label>couverture temporelle</label>
+							<requirement level="standard">Vous devez <strong>inclure la période de temps dans votre documentation lisible par machine</strong> pour que les gens comprennent quand vos données s'applique.</requirement>
+						</option>
+						<option value="theme">
+							<label>Thème (s)</label>
+							<requirement level="standard">Vous devez <strong>inclure le sujet dans la documentation lisible par machine</strong> afin que les gens savent à peu près ce que vos données sont sur ​​.</requirement>
+						</option>
+						<option value="keyword">
+							<label>Mot-clé (s) ou tag (s)</label>
+							<requirement level="standard">Vous devez <strong>inclure des mots clés lisibles à la machine ou des étiquettes dans votre documentation</strong> pour aider les gens à chercher dans les données de manière efficace.</requirement>
+						</option>
+						<option value="distribution">
+							<label>distribution ( s)</label>
+						</option>
+					</checkboxset>
+				</question>
+				<if test="this.documentationMetadata().distribution">
+					<question id="distributionMetadata"
+								 display="La documentation sur chaque distribution comprend des données lisibles par machine pour">
+						<label>Est-ce que votre documentation comprend des métadonnées lisibles par machine pour chaque distribution sur :</label>
+						<checkboxset>
+							<option value="title">
+								<label>titre</label>
+								<requirement level="standard">Vous devez <strong>inclure les titres lisibles par machine dans votre documentation</strong> afin que les gens savent comment faire référence à chaque distribution de données.</requirement>
+							</option>
+							<option value="description">
+								<label>Description</label>
+								<requirement level="standard">Vous devez <strong>inclure des descriptions lisibles par machine dans votre documentation</strong> afin que les gens savent ce que chaque distribution de données contient.</requirement>
+							</option>
+							<option value="issued">
+								<label>date de sortie</label>
+								<requirement level="standard">Vous devez <strong>inclure les dates de sortie lisibles par machine dans votre documentation</strong> afin que les gens sachent comment chaque distribution actuel est.</requirement>
+							</option>
+							<option value="modified">
+								<label>Date de modification</label>
+								<requirement level="standard">Vous devriez inclure <strong>lisibles par machine dernières dates de modification au sein de votre documentation</strong> afin que les gens sachent si leur copie d'une distribution des données est en place à jour.</requirement>
+							</option>
+							<option value="rights">
+								<label>déclaration des droits</label>
+								<requirement level="standard">Vous devez <strong>inclure un lien lisible à la machine à la déclaration des droits de l' objet</strong> les gens puissent savoir ce qu'ils peuvent faire avec un la distribution de données.</requirement>
+							</option>
+							<option value="accessURL" display="une URL d'accès aux données">
+								<label>URL d'accès aux données</label>
+								<help>Cette méta-données doit être utilisée lorsque vos données ne sont pas disponibles en téléchargement, comme une API par exemple.</help>
+							</option>
+							<option value="downloadURL"
+										display="une URL pour télécharger l'ensemble des données">
+								<label>URL pour télécharger l'ensemble des données</label>
+							</option>
+							<option value="byteSize">
+								<label>taille en octets</label>
+							</option>
+							<option value="mediaType">
+								<label>type de support de téléchargement</label>
+							</option>
+						</checkboxset>
+					</question>
+				</if>
+			</if>
+			<question id="technicalDocumentation"
+						 display="La documentation technique des données est à">
+				<label>Où se trouve la documentation technique pour les données?</label>
+				<input type="url" placeholder="URL de documentation technique"/>
+				<requirement level="pilot">Vous devez <strong>fournir une documentation technique pour les données</strong> afin que les gens comprennent comment l'utiliser.</requirement>
+			</question>
+			<question id="vocabulary">
+				<label>Est­ce que les formats de vos données utilisent des «vocabularies» ou des «schemas»?</label>
+				<yesno required="standard"/>
+				<help>Les formats tels que CSV, JSON, XML ou Turtle utilisent un «vocabulary» ou des «schemas» qui indiquent quelles rubriques ou quelles propriétés les données contiennent.</help>
+			</question>
+			<if test="this.vocabulary() === 'true'">
+				<question id="schemaDocumentationUrl"
+							 display="Les vocabulaires utilisés par ces données sont documentés au">
+					<label>Où se trouve la documentation sur vos vocabulaires de données?</label>
+					<input type="url" placeholder="Schema Documentation URL"/>
+					<requirement level="standard">Vous devez <strong>documenter toute vocabulaire que vous utilisez à l'intérieur de vos données</strong> afin que les gens sachent comment l'interpréter.</requirement>
+				</question>
+			</if>
+			<question id="codelists">
+				<label>Vos données utilisent­elles des codes?</label>
+				<yesno required="standard"/>
+				<help>Si vos données utilisent des codes pour se référer à certains éléments, comme par exemple des zones géographiques, des catégories de dépenses ou des maladies, il est nécessaire que ce soit expliqué.</help>
+			</question>
+			<if test="this.codelists() === 'true'">
+				<question id="codelistDocumentationUrl"
+							 display="Les codes de ces données sont documentés au">
+					<label>Où sont tous les codes de vos données documentées?</label>
+					<input type="url" placeholder="Documentation de liste de codes d'URL"/>
+					<requirement level="standard">Vous devez <strong>documenter les codes utilisés à l'intérieur de vos données</strong> afin que les gens savent comment les interpréter.</requirement>
+				</question>
+			</if>
+		</group>
+		<group id="support">
+			<label>Assistance</label>
+			<help>comment vous communiquez avec les utilisateurs de vos données</help>
+			<question id="contactUrl"
+						 display="Découvrez comment communiquer avec quelqu'un à propos de ces données à">
+				<label>Où peut-on savoir comment contacter quelqu'un avec des questions sur ces données?</label>
+				<input type="url" placeholder="Contact Documentation"/>
+				<help>Donnez une URL d'une page qui décrit comment les gens peuvent communiquer avec quelqu'un si elles ont des questions sur les données.</help>
+				<requirement level="pilot">Vous devez <strong>fournir des informations de contact pour les gens à envoyer des questions</strong> de vos données vers.</requirement>
+			</question>
+			<question id="improvementsContact"
+						 display="Découvrez comment proposer des améliorations à la publication à">
+				<label>A qui peuvent s’adresser les personnes ayant des suggestions sur la manière dont vous publiez vos données?</label>
+				<input type="url" placeholder="URL de suggestion"/>
+				<requirement level="pilot">Vous devez <strong>fournir des instructions sur la façon de suggérer des améliorations</strong> à la façon dont vous publiez des données afin que vous puissiez découvrir ce que les gens ont besoin.</requirement>
+			</question>
+			<question id="dataProtectionUrl"
+						 display="savoir où envoyer des questions sur la vie privée à">
+				<label>Où peut-on savoir comment contacter quelqu'un avec des questions sur la vie privée?</label>
+				<input type="url" placeholder="Confidentialité Contact Documentation"/>
+				<requirement level="pilot">Vous devez <strong>fournir des informations de contact pour les gens d'envoyer des questions sur la confidentialité</strong> et la divulgation de données personnelles à.</requirement>
+			</question>
+			<question id="socialMedia">
+				<label>Utilisez­vous les réseaux et médias sociaux pour entrer en contact avec les personnes qui utilisent vos données?</label>
+				<yesno/>
+				<requirement level="standard">Vous devez <strong>utiliser les médias sociaux pour atteindre les gens qui utilisent vos données</strong> et découvrez comment vos données sont utilisées</requirement>
+			</question>
+			<if test="this.socialMedia() === 'true'">
+				<repeat id="accounts">
+					<label>compte</label>
+					<question id="account"
+								 display="Contactez le conservateur grâce à ces comptes de médias sociaux">
+						<label>Quels sont les comptes de médias sociaux peuvent vous joindre sur?</label>
+						<input type="url" required="required" placeholder="Social URL des médias"/>
+						<help>Donnez URL à vos comptes de médias sociaux, comme Twitter ou Facebook votre page de profil.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="forum" display="Discuter de ces données à">
+				<label>A quel endroit est­il possible de discuter à propos de vos données?</label>
+				<input type="url" placeholder="URL de forum ou mailing list"/>
+				<help>Donnez l’adresse de votre forum ou d’une mailing list permettant de parler de vos données</help>
+				<requirement level="standard">Vous devez <strong>dire aux gens où ils peuvent discuter de vos données</strong> et se soutenir mutuellement.</requirement>
+			</question>
+			<if test="this.corrected() === 'true'">
+				<question id="correctionReporting"
+							 display="Découvrez comment demander des corrections de données à">
+					<label>Où peut-on savoir comment demander des rectifications à vos données?</label>
+					<input type="url" placeholder="Correction Instructions URL"/>
+					<help>Donnez une URL où les gens peuvent rapporter des erreurs qu'ils repèrent dans vos données.</help>
+					<requirement level="standard">Vous devez <strong>fournir des instructions sur la façon dont les gens peuvent rapporter des erreurs</strong> dans vos données.</requirement>
+				</question>
+				<question id="correctionDiscovery"
+							 display="Découvrez comment obtenir des notifications concernant des corrections de données à">
+					<label>Où peut-on trouver comment obtenir des notifications de corrections à vos données?</label>
+					<input type="url" placeholder="Correction notification URL"/>
+					<help>Donnez une URL où vous décrivez comment notifications concernant les corrections sont partagées avec les gens.</help>
+					<requirement level="standard">Vous devez <strong>fournir une liste de diffusion ou animale avec les mises à jour</strong> que les gens peuvent utiliser pour conserver leurs copies de vos données à jour.</requirement>
+				</question>
+			</if>
+			<question id="engagementTeam">
+				<label>Quelqu’un est­il chargé de créer activement une communauté autour de ces données?</label>
+				<yesno/>
+				<help more="http://theodi.org/guide/engaging-reusers">Une équipe d'engagement communautaire va s'engager dans les médias sociaux, les blogs et organiser hackdays ou des concours pour encourager les gens à utiliser les données.</help>
+				<requirement level="exemplar">Vous devez <strong>construire une communauté de gens autour de vos données</strong> pour encourager une plus large utilisation de vos données.</requirement>
+			</question>
+			<if test="this.engagementTeam() === 'true'">
+				<question id="engagementTeamUrl"
+							 display="L'engagement communautaire est effectué par">
+					<label>Où est leur page d'accueil?</label>
+					<input type="url"
+							 placeholder="Engagement communautaire équipe URL"
+							 required="required"/>
+				</question>
+			</if>
+		</group>
+		<group id="services">
+			<label>Services</label>
+			<help>comment vous donnez accès aux outils nécessaires pour travailler avec vos données</help>
+			<question id="libraries"
+						 display="des outils pour aider utilisent ces données sont inscrites à">
+				<label>A quel endroit listez­vous les outils permettant de travailler avec vos données?</label>
+				<input type="url" placeholder="URL des outils"/>
+				<help>Indiquez une URL listant les outils permettant de travailler avec vos données que vous connaissez ou que vous recommandez.</help>
+				<requirement level="exemplar">Vous devez <strong>fournir une liste de bibliothèques de logiciels et d'autres outils facilement disponibles</strong> de sorte que les gens peuvent rapidement se mettre au travail avec vos données.</requirement>
+			</question>
+		</group>
+	</group>
+</questionnaire>
