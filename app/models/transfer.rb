@@ -2,6 +2,7 @@ class Transfer < ActiveRecord::Base
   include AASM
 
   attr_accessible :target_email, :dataset_id, :token_confirmation
+  before_save :downcase_target_email
 
   before_create :generate_token
   attr_readonly :token
@@ -43,6 +44,10 @@ class Transfer < ActiveRecord::Base
   end
 
   private
+
+  def downcase_target_email
+    self.target_email = self.target_email.downcase
+  end
 
   def generate_token
     self.token = SecureRandom::hex(32)
