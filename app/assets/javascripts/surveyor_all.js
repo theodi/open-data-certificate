@@ -95,11 +95,22 @@ $(document).ready(function(){
     }
   });
 
+  // we don't use the input mask anymore because of problems with
+  // IE, if it ever does get used, notify us through airbrake.
   $("input[data-input-mask]").each(function(i,e){
-    var inputMask = $(e).attr('data-input-mask');
-    var placeholder = $(e).attr('data-input-mask-placeholder');
-    var options = { placeholder: placeholder };
-    $(e).mask(inputMask, options);
+    var message = "input mask not supported on certificates"; 
+    if(window.Airbrake){
+      window.Airbrake.notify({
+        message: message,
+        stack: '()@surveyor_all.js:0'
+      });
+    } else {
+      console.error(message);
+    }
+    // var inputMask = $(e).attr('data-input-mask');
+    // var placeholder = $(e).attr('data-input-mask-placeholder');
+    // var options = { placeholder: placeholder };
+    // $(e).mask(inputMask, options);
   });
 
   // translations selection
