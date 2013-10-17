@@ -1,3 +1,4 @@
+if(window.enableMap){
 topojson = (function() {
 
   function merge(topology, arcs) {
@@ -278,3 +279,4 @@ topojson = (function() {
     neighbors: neighbors
   };
 })();
+}

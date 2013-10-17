@@ -1,15 +1,15 @@
 .open-data-certificate
-  %style= "@import url(https://#{request.host_with_port}/assets/badge.css);"
-  = link_to dataset_certificate_url(@certificate.response_set.dataset, @certificate, protocol: 'https://') do
-    = image_tag("https://#{request.host_with_port}#{@certificate.badge_url}")
+  %style= "@import url(#{embed_protocol}#{request.host_with_port}/assets/badge.css);"
+  = link_to dataset_certificate_url(badge.response_set.dataset, badge, protocol: embed_protocol) do
+    = image_tag("#{embed_protocol}#{request.host_with_port}#{badge.badge_url}")
   %ul.open-data-certificate-details
     %li
-      %span= "#{t("levels.#{@certificate.attained_level || 'none'}.title")} Open Data Certificate (beta)"
+      %span= "#{t("levels.#{badge.attained_level || 'none'}.title")} Open Data Certificate (beta)"
     %li
       %span self-certified
     %li
-      %span= "#{@certificate.response_set.jurisdiction} (#{@certificate.response_set.survey.try(:status)})"
+      %span= "#{badge.response_set.jurisdiction} (#{badge.response_set.survey.try(:status)})"
     %li
-      %span= @certificate.response_set.title
+      %span= badge.response_set.title
     %li
-      %span= "awarded #{@certificate.created_at.strftime("%-d %b %Y")}"
+      %span= "awarded #{badge.created_at.strftime("%-d %b %Y")}"
