@@ -5,10 +5,17 @@
 //= require underscore
 //= require_tree .
 
+/* global $, skrollr, alert, Hogan */
+
+// whether or not the homepage map should be loaded
+window.enableMap = document.querySelectorAll && Modernizr.svg;
+
 $(function(){
   //////
   // Rails support
   //
+
+  'use strict';
 
   // Display when an remote form failed
   $(document).on('ajax:error', 'form[data-remote-error-message]', function(){
@@ -95,7 +102,7 @@ $(function(){
   });
 
   // display confirmation of clicking certain buttons
-  $(document).on('click', '[data-btn-confirmable]', function(e){
+  $(document).on('click', '[data-btn-confirmable]', function(){
     var $this = $(this),
         message = $this.data('btn-confirmable');
 
@@ -127,11 +134,11 @@ $(function(){
 
   // trigger the highlighting of fieldsets
   $('#surveyor')
-    .on('mousedown', 'fieldset', function(e){
-      $(this).data('keep-active', true)
+    .on('mousedown', 'fieldset', function(){
+      $(this).data('keep-active', true);
     })
-    .on('mouseup', 'fieldset', function(e){
-      $(this).data('keep-active', false)
+    .on('mouseup', 'fieldset', function(){
+      $(this).data('keep-active', false);
     })
     .on('focus', 'fieldset', function(){
       $(this).addClass('active').trigger('_focus');
@@ -369,7 +376,7 @@ $(function(){
 
   // search typeahead
   $('.typeahead-search').typeahead([{
-      name:"datasets",
+      name:'datasets',
       header: '<h3>Datasets</h3>',
       template: '<p class="attained attained-{{attained_index}}">{{value}}</p>',
       engine: Hogan,
@@ -378,33 +385,32 @@ $(function(){
       }
     },
     {
-      name:"publisher",
+      name:'publisher',
       header: '<h3>Publisher</h3>',
       remote: {
         url:'/datasets/typeahead?mode=publisher&q=%QUERY'
       }
     },
     {
-      name:"jurisdiction",
+      name:'jurisdiction',
       header: '<h3>Jurisdiction</h3>',
       remote: {
         url:'/datasets/typeahead?mode=country&q=%QUERY'
       }
     }
   ])
-  .on('typeahead:selected typeahead:autocompleted', function(e, datum, dataset){
+  .on('typeahead:selected typeahead:autocompleted', function(e, datum){
     if(datum.path){ document.location = datum.path; }
   });
-
-
-  $(document).on('click', '.dataset .show-more, .dataset .hide-more', function(){
-    $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
-  })
 
   // Stop the jump to the top of the page when the delete dialog is confirmed.
   // placeholder till bluerail/twitter-bootstrap-rails-confirm#9 gets published
   $(document).on('click', "#confirmation_dialog [href='#']", function(e){
     e.preventDefault();
+  })
+
+  .on('click', '.dataset .show-more, .dataset .hide-more', function(){
+    $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
   });
 
 });

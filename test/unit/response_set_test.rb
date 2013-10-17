@@ -372,10 +372,10 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal certificate, response_set.certificate
   end
 
-  test "Should be able to assign_to_user - which creates dataset" do
+  test "Should be able to assign_to_user" do
     response_set = FactoryGirl.create(:response_set, user: nil)
     user = FactoryGirl.create(:user)
-    assert [response_set.user, response_set.dataset].none?
+    assert response_set.user.nil?
     response_set.assign_to_user!(user)
 
     assert_equal user, response_set.user

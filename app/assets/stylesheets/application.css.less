@@ -519,6 +519,15 @@ input, textarea{
   background: @odiRedDark;
 }
 
+.btn-danger {
+  background: @odiPomegranate;
+}
+
+.btn-danger:active, .btn-danger:hover, .btn-danger:focus {
+  background: @odiPomegranateDark;
+}
+
+
 .btn-large {
   font-size: 18px;
   padding: 10px 20px;
@@ -1862,6 +1871,17 @@ header .jurisdiction{
 
       &.choice-buttons {
         padding-bottom: 15px;
+      }
+
+      .remove_row {
+        position: absolute;
+        bottom: 30px;
+        right: 74px;
+        -webkit-font-smoothing: antialiased;
+
+        .icon {
+          margin-right: 4px;
+        }
       }
     }
 

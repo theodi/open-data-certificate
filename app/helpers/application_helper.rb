@@ -5,6 +5,10 @@ module ApplicationHelper
     link_to content.html_safe, comment_path(topic: topic, back: request.original_fullpath), class: 'link-comment'
   end
 
+  def embed_protocol
+    Rails.env.production? ? 'https://' : request.protocol
+  end
+
   # temporarily switch to a new locale
   def scope_locale locale
     locale, I18n.locale = I18n.locale, locale || I18n.locale
