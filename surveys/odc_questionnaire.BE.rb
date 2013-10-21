@@ -86,15 +86,42 @@ survey 'BE',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'yes, you have the rights to publish this data as open data'
+    a_yes 'yes, you have the rights to publish this data as open data',
+      :requirement => ['standard_1']
     a_no 'no, you don\'t have the rights to publish this data as open data'
     a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
+    a_complicated 'the rights in this data are complicated or unclear'
 
-    label_basic_2 'You must have the <strong>right to publish your data</strong>.',
+    label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_1'
+    dependency :rule => 'A'
+    condition_A :q_publisherRights, '!=', :a_yes
+
+    label_basic_2 'You must have the <strong>right to publish this data</strong>.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_2'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_no
+
+    q_rightsRiskAssessment 'Where do you detail the risks people might encounter if they use this data?',
+      :display_on_certificate => true,
+      :text_as_statement => 'Risks in using this data are described at',
+      :help_text => 'It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.'
+    dependency :rule => 'A'
+    condition_A :q_publisherRights, '==', :a_complicated
+    a_1 'Risk Documentation URL',
+      :string,
+      :input_type => :url,
+      :placeholder => 'Risk Documentation URL',
+      :requirement => ['pilot_2']
+
+    label_pilot_2 'You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.',
+      :custom_renderer => '/partials/requirement_pilot',
+      :requirement => 'pilot_2'
+    dependency :rule => 'A and B'
+    condition_A :q_publisherRights, '==', :a_complicated
+    condition_B :q_rightsRiskAssessment, '==', {:string_value => '', :answer_reference => '1'}
 
     q_publisherOrigin 'Was <em>all</em> this data originally created or gathered by you?',
       :display_on_certificate => true,
@@ -133,7 +160,7 @@ survey 'BE',
     q_thirdPartyOpen 'Are <em>all</em> sources of this data already published as open data?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is created from',
-      :help_text => 'You\'re allowed to republish someone else\'s data if it\'s already under an open data licence or if their rights have expired or been waived. If any part of your data is not like this then you\'ll need legal advice before you can publish it.',
+      :help_text => 'You\'re allowed to republish someone else\'s data if it\'s already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you\'ll need legal advice before you can publish it.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C'
@@ -159,7 +186,7 @@ survey 'BE',
     q_crowdsourced 'Was some of this data crowdsourced?',
       :display_on_certificate => true,
       :text_as_statement => 'Some of this data is',
-      :help_text => 'If your data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
+      :help_text => 'If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
@@ -180,7 +207,7 @@ survey 'BE',
     condition_C :q_thirdPartyOrigin, '==', :a_false
     condition_D :q_crowdsourced, '!=', :a_true
 
-    q_crowdsourcedContent 'Did contributors to your data use their judgement?',
+    q_crowdsourcedContent 'Did contributors to this data use their judgement?',
       :help_text => 'If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.',
       :pick => :one,
       :required => :required
@@ -234,18 +261,18 @@ survey 'BE',
     q_sourceDocumentationUrl 'Where do you describe sources of this data?',
       :display_on_certificate => true,
       :text_as_statement => 'The sources of this data are described at',
-      :help_text => 'Give a URL that documents where your data was sourced from (its provenance) and the rights under which you publish the data. Do this even if the data wasn\'t originally created or gathered by you and even though you have the rights to publish it.'
+      :help_text => 'Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.'
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
     a_1 'Data Sources Documentation URL',
       :string,
       :input_type => :url,
       :placeholder => 'Data Sources Documentation URL',
-      :requirement => ['pilot_2']
+      :requirement => ['pilot_3']
 
-    label_pilot_2 'You should document <strong>where your data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
+    label_pilot_3 'You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_2'
+      :requirement => 'pilot_3'
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -262,83 +289,40 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable data about the sources of this data',
-      :requirement => ['standard_1']
+      :requirement => ['standard_2']
 
-    label_standard_1 'You should <strong>include machine-readable data about the sources of your data</strong>.',
+    label_standard_2 'You should <strong>include machine-readable data about the sources of this data</strong>.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_1'
+      :requirement => 'standard_2'
     dependency :rule => 'A and B and C'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
     label_group_3 'Licensing',
-      :help_text => 'how you give people permission to use your data',
+      :help_text => 'how you give people permission to use this data',
       :customer_renderer => '/partials/fieldset'
 
-    q_copyrightURL 'Where do you describe copyright and database rights?',
+    q_copyrightURL 'Where have you published the rights statement for this dataset?',
       :display_on_certificate => true,
-      :text_as_statement => 'Copyright and database rights are described at',
-      :help_text => 'Give a URL to a rights statement which shows who owns copyright and database rights to the data. This statement also says what you allow people to do with this data under licence and it helps them understand the terms under which you make it available.'
+      :text_as_statement => 'The rights statement is at',
+      :help_text => 'Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can\'t do with the data.'
     a_1 'Rights Statement URL',
       :string,
       :input_type => :url,
       :placeholder => 'Rights Statement URL',
-      :requirement => ['pilot_3']
+      :requirement => ['pilot_4']
 
-    label_pilot_3 'You should have a <strong>web page that states your copyright</strong> and details of how people should give attribution to your data.',
+    label_pilot_4 'You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_3'
+      :requirement => 'pilot_4'
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
-
-    q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
-      :display_on_certificate => true,
-      :text_as_statement => 'The rights statement includes data about',
-      :help_text => 'It\'s good practice to embed information about licences in machine-readable formats so people can automatically attribute your data back to you when they use it.',
-      :help_text_more_url => 'http://labs.creativecommons.org/2011/ccrel-guide/',
-      :pick => :any
-    dependency :rule => 'A'
-    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    a_license 'licences',
-      :text_as_statement => 'the data licence',
-      :requirement => ['standard_2']
-    a_attribution 'attribution',
-      :text_as_statement => 'what attribution to use',
-      :requirement => ['exemplar_1']
-    a_attributionURL 'attribution URL',
-      :text_as_statement => 'what attribution link to give',
-      :requirement => ['exemplar_2']
-    a_morePermissions 'other permissions or alternative licences',
-      :text_as_statement => 'other permissions for use'
-    a_useGuidelines 'non-binding use guidelines',
-      :text_as_statement => 'guidelines for use'
-
-    label_standard_2 'You should provide <strong>machine-readable data in your copyright statement about licences</strong> which affect your data so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_2'
-    dependency :rule => 'A and B'
-    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_copyrightStatementMetadata, '!=', :a_license
-
-    label_exemplar_1 'You should provide <strong>machine-readable data in your copyright statement about attribution</strong> of your data so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_1'
-    dependency :rule => 'A and B'
-    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_copyrightStatementMetadata, '!=', :a_attribution
-
-    label_exemplar_2 'You should provide <strong>machine-readable data in your copyright statement about the URL of your data</strong> that must be linked to, so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_2'
-    dependency :rule => 'A and B'
-    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_copyrightStatementMetadata, '!=', :a_attributionURL
 
     q_dataLicence 'Under which licence can people reuse this data?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is available under',
-      :help_text => 'Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights, they\'ve expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :help_text => 'Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they\'ve expired, or you\'ve waived them, choose \'Not applicable\'.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -355,27 +339,27 @@ survey 'BE',
     a_other 'Other...',
       :text_as_statement => ''
 
-    q_dataNotApplicable 'Why does a licence not apply to this data?',
+    q_dataNotApplicable 'Why doesn\'t a licence apply to this data?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is not licensed because',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_na
-    a_norights 'there are no database rights in this data',
-      :text_as_statement => 'there are no database rights in it',
-      :help_text => 'Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything.'
-    a_expired 'database rights have expired',
-      :text_as_statement => 'the database rights have expired',
-      :help_text => 'Database rights last ten years. If data was last changed over ten years ago then database rights have expired.'
-    a_waived 'database rights have been waived',
+    a_norights 'there are no copyright or database rights in this data',
+      :text_as_statement => 'there are no rights in it',
+      :help_text => 'Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way.'
+    a_expired 'copyright and database rights have expired',
+      :text_as_statement => 'the rights have expired',
+      :help_text => 'Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired.'
+    a_waived 'copyright and database rights have been waived',
       :text_as_statement => '',
       :help_text => 'This means no one owns the rights and anyone can do whatever they want with this data.'
 
-    q_dataWaiver 'Which waiver do you use to waive database rights?',
+    q_dataWaiver 'Which waiver do you use to waive rights in the data?',
       :display_on_certificate => true,
-      :text_as_statement => 'Database rights have been waived with',
-      :help_text => 'You need a statement to show people you\'ve done this so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.',
+      :text_as_statement => 'Rights in the data have been waived with',
+      :help_text => 'You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -389,10 +373,10 @@ survey 'BE',
     a_other 'Other...',
       :text_as_statement => ''
 
-    q_dataOtherWaiver 'Where is the waiver for the database rights?',
+    q_dataOtherWaiver 'Where is the waiver for the rights in the data?',
       :display_on_certificate => true,
-      :text_as_statement => 'Database rights have been waived with',
-      :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your database rights.',
+      :text_as_statement => 'Rights in the data have been waived with',
+      :help_text => 'Give a URL to the publicly available waiver so people can check that it does waive the rights in the data.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_dataLicence, '==', :a_na
@@ -404,7 +388,7 @@ survey 'BE',
       :required => :required,
       :placeholder => 'Waiver URL'
 
-    q_otherDataLicenceName 'What is the name of your licence?',
+    q_otherDataLicenceName 'What is the name of the licence?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is available under',
       :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.',
@@ -416,7 +400,7 @@ survey 'BE',
       :required => :required,
       :placeholder => 'Other Licence Name'
 
-    q_otherDataLicenceURL 'Where is your licence?',
+    q_otherDataLicenceURL 'Where is the licence?',
       :display_on_certificate => true,
       :text_as_statement => 'This licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
@@ -447,6 +431,41 @@ survey 'BE',
     condition_A :q_dataLicence, '==', :a_other
     condition_B :q_otherDataLicenceOpen, '==', :a_false
 
+    q_contentRights 'Is there any copyright in the content of this data?',
+      :display_on_certificate => true,
+      :text_as_statement => 'There are',
+      :pick => :one,
+      :required => :required
+    a_norights 'no, the data only contains facts and numbers',
+      :text_as_statement => 'no rights in the content of the data',
+      :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
+    a_samerights 'yes, and the rights are all held by the same person or organisation',
+      :text_as_statement => '',
+      :help_text => 'Choose this option if the content in the data was all created by or transferred to the same person or organisation.'
+    a_mixedrights 'yes, and the rights are held by different people or organisations',
+      :text_as_statement => '',
+      :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
+
+    q_explicitWaiver 'Is the content of the data marked as public domain?',
+      :display_on_certificate => true,
+      :text_as_statement => 'The content has been',
+      :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
+      :pick => :one
+    dependency :rule => 'A'
+    condition_A :q_contentRights, '==', :a_norights
+    a_false 'no',
+      :text_as_statement => ''
+    a_true 'yes',
+      :text_as_statement => 'marked as public domain',
+      :requirement => ['standard_3']
+
+    label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_3'
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_norights
+    condition_B :q_explicitWaiver, '==', :a_false
+
     q_contentLicence 'Under which licence can others reuse content?',
       :display_on_certificate => true,
       :text_as_statement => 'The content is available under',
@@ -454,6 +473,8 @@ survey 'BE',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    dependency :rule => 'A'
+    condition_A :q_contentRights, '==', :a_samerights
     a_cc_by 'Creative Commons Attribution',
       :text_as_statement => 'Creative Commons Attribution'
     a_cc_by_sa 'Creative Commons Attribution Share-Alike',
@@ -465,16 +486,17 @@ survey 'BE',
     a_other 'Other...',
       :text_as_statement => ''
 
-    q_contentNotApplicable 'Why doesn\'t a licence apply to this data?',
+    q_contentNotApplicable 'Why doesn\'t a licence apply to the content of the data?',
       :display_on_certificate => true,
       :text_as_statement => 'The content in this data is not licensed because',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A'
-    condition_A :q_contentLicence, '==', :a_na
-    a_norights 'there is no copyright in this data',
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_na
+    a_norights 'there is no copyright in the content of this data',
       :text_as_statement => 'there is no copyright',
-      :help_text => 'Copyright only applies to data if you spent intellectual effort creating what\'s in it, for example, by writing text that\'s within the data, or deciding whether particular data is included. There\'s no copyright if the data only contains facts where no judgements were made about whether to include them or not.'
+      :help_text => 'Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that\'s within the data. There\'s no copyright if the content only contains facts.'
     a_expired 'copyright has expired',
       :text_as_statement => 'copyright has expired',
       :help_text => 'Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.'
@@ -489,9 +511,10 @@ survey 'BE',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    dependency :rule => 'A and B'
-    condition_A :q_contentLicence, '==', :a_na
-    condition_B :q_contentNotApplicable, '==', :a_waived
+    dependency :rule => 'A and B and C'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_na
+    condition_C :q_contentNotApplicable, '==', :a_waived
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
     a_other 'Other...',
@@ -502,10 +525,11 @@ survey 'BE',
       :text_as_statement => 'Copyright has been waived with',
       :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
       :required => :required
-    dependency :rule => 'A and B and C'
-    condition_A :q_contentLicence, '==', :a_na
-    condition_B :q_contentNotApplicable, '==', :a_waived
-    condition_C :q_contentWaiver, '==', :a_other
+    dependency :rule => 'A and B and C and D'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_na
+    condition_C :q_contentNotApplicable, '==', :a_waived
+    condition_D :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
       :string,
       :input_type => :url,
@@ -517,8 +541,9 @@ survey 'BE',
       :text_as_statement => 'The content is available under',
       :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
       :required => :required
-    dependency :rule => 'A'
-    condition_A :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
       :required => :required,
@@ -529,8 +554,9 @@ survey 'BE',
       :text_as_statement => 'The content licence is at',
       :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
       :required => :required
-    dependency :rule => 'A'
-    condition_A :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
       :string,
       :input_type => :url,
@@ -542,8 +568,9 @@ survey 'BE',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
-    dependency :rule => 'A'
-    condition_A :q_contentLicence, '==', :a_other
+    dependency :rule => 'A and B'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_other
     a_false 'no'
     a_true 'yes',
       :requirement => ['basic_8']
@@ -551,9 +578,122 @@ survey 'BE',
     label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_8'
+    dependency :rule => 'A and B and C'
+    condition_A :q_contentRights, '==', :a_samerights
+    condition_B :q_contentLicence, '==', :a_other
+    condition_C :q_otherContentLicenceOpen, '==', :a_false
+
+    q_contentRightsURL 'Where are the rights and licensing of the content explained?',
+      :display_on_certificate => true,
+      :text_as_statement => 'The rights and licensing of the content are explained at',
+      :help_text => 'Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.',
+      :required => :required
+    dependency :rule => 'A'
+    condition_A :q_contentRights, '==', :a_mixedrights
+    a_1 'Content Rights Description URL',
+      :string,
+      :input_type => :url,
+      :required => :required,
+      :placeholder => 'Content Rights Description URL'
+
+    q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
+      :display_on_certificate => true,
+      :text_as_statement => 'The rights statement includes data about',
+      :help_text => 'It\'s good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.',
+      :help_text_more_url => 'https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md',
+      :pick => :any
+    dependency :rule => 'A'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    a_dataLicense 'data licence',
+      :text_as_statement => 'its data licence',
+      :requirement => ['standard_4']
+    a_contentLicense 'content licence',
+      :text_as_statement => 'its content licence',
+      :requirement => ['standard_5']
+    a_attribution 'attribution text',
+      :text_as_statement => 'what attribution text to use',
+      :requirement => ['standard_6']
+    a_attributionURL 'attribution URL',
+      :text_as_statement => 'what attribution link to give',
+      :requirement => ['standard_7']
+    a_copyrightNotice 'copyright notice or statement',
+      :text_as_statement => 'a copyright notice or statement',
+      :requirement => ['exemplar_1']
+    a_copyrightYear 'copyright year',
+      :text_as_statement => 'the copyright year',
+      :requirement => ['exemplar_2']
+    a_copyrightHolder 'copyright holder',
+      :text_as_statement => 'the copyright holder',
+      :requirement => ['exemplar_3']
+    a_databaseRightYear 'database right year',
+      :text_as_statement => 'the database right year',
+      :requirement => ['exemplar_4']
+    a_databaseRightHolder 'database right holder',
+      :text_as_statement => 'the database right holder',
+      :requirement => ['exemplar_5']
+
+    label_standard_4 'You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_4'
     dependency :rule => 'A and B'
-    condition_A :q_contentLicence, '==', :a_other
-    condition_B :q_otherContentLicenceOpen, '==', :a_false
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_dataLicense
+
+    label_standard_5 'You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_5'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_contentLicense
+
+    label_standard_6 'You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_6'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_attribution
+
+    label_standard_7 'You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_7'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_attributionURL
+
+    label_exemplar_1 'You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_1'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightNotice
+
+    label_exemplar_2 'You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_2'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightYear
+
+    label_exemplar_3 'You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_3'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
+
+    label_exemplar_4 'You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_4'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightYear
+
+    label_exemplar_5 'You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.',
+      :custom_renderer => '/partials/requirement_exemplar',
+      :requirement => 'exemplar_5'
+    dependency :rule => 'A and B'
+    condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightHolder
 
     label_group_4 'Privacy',
       :help_text => 'how you protect people\'s privacy',
@@ -584,11 +724,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => ['standard_3']
+      :requirement => ['standard_8']
 
-    label_standard_3 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
+    label_standard_8 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_3'
+      :requirement => 'standard_8'
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_summarised
     condition_B :q_statisticalAnonAudited, '==', :a_false
@@ -617,11 +757,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'must be published',
-      :requirement => ['pilot_4']
+      :requirement => ['pilot_5']
 
-    label_pilot_4 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',
+    label_pilot_5 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_4'
+      :requirement => 'pilot_5'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
@@ -638,11 +778,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Disclosure Rationale URL',
-      :requirement => ['standard_4']
+      :requirement => ['standard_9']
 
-    label_standard_4 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
+    label_standard_9 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_4'
+      :requirement => 'standard_9'
     dependency :rule => 'A and B and C and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
@@ -662,11 +802,11 @@ survey 'BE',
       :text_as_statement => 'not carried out a privacy risk assessment'
     a_true 'yes',
       :text_as_statement => 'carried out a privacy risk assessment',
-      :requirement => ['pilot_5']
+      :requirement => ['pilot_6']
 
-    label_pilot_5 'You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.',
+    label_pilot_6 'You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_5'
+      :requirement => 'pilot_6'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -686,11 +826,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Risk Assessment URL',
-      :requirement => ['standard_5']
+      :requirement => ['standard_10']
 
-    label_standard_5 'You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.',
+    label_standard_10 'You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_5'
+      :requirement => 'standard_10'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -713,11 +853,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => ['standard_6']
+      :requirement => ['standard_11']
 
-    label_standard_6 'You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.',
+    label_standard_11 'You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_6'
+      :requirement => 'standard_11'
     dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -739,11 +879,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Privacy Notice URL',
-      :requirement => ['pilot_6']
+      :requirement => ['pilot_7']
 
-    label_pilot_6 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.',
+    label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_6'
+      :requirement => 'pilot_7'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -776,11 +916,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'has been consulted',
-      :requirement => ['pilot_7']
+      :requirement => ['pilot_8']
 
-    label_pilot_7 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
+    label_pilot_8 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_7'
+      :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -803,11 +943,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'independently audited',
-      :requirement => ['standard_7']
+      :requirement => ['standard_12']
 
-    label_standard_7 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
+    label_standard_12 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_7'
+      :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -833,11 +973,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'within three clicks of the home page',
-      :requirement => ['standard_8']
+      :requirement => ['standard_13']
 
-    label_standard_8 'You should <strong>ensure that people can easily find your data</strong> from the home page of the site it\'s published on.',
+    label_standard_13 'You should <strong>ensure that people can easily find your data</strong> from the home page of the site it\'s published on.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_8'
+      :requirement => 'standard_13'
     dependency :rule => 'A'
     condition_A :q_linkedTo, '==', :a_false
 
@@ -846,11 +986,11 @@ survey 'BE',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['standard_9']
+      :requirement => ['standard_14']
 
-    label_standard_9 'You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.',
+    label_standard_14 'You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_9'
+      :requirement => 'standard_14'
     dependency :rule => 'A'
     condition_A :q_listed, '==', :a_false
 
@@ -878,11 +1018,11 @@ survey 'BE',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['standard_10']
+      :requirement => ['standard_15']
 
-    label_standard_10 'You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.',
+    label_standard_15 'You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_10'
+      :requirement => 'standard_15'
     dependency :rule => 'A'
     condition_A :q_referenced, '==', :a_false
 
@@ -938,15 +1078,15 @@ survey 'BE',
     a_timestamped 'yes, this data will go out of date over time but it’s time stamped',
       :text_as_statement => 'go out of date but it is timestamped',
       :help_text => 'For example, population statistics usually include a fixed timestamp to indicate when the statistics were relevant.',
-      :requirement => ['pilot_8']
+      :requirement => ['pilot_9']
     a_false 'no, this data does not contain any time-sensitive information',
       :text_as_statement => 'not go out of date',
       :help_text => 'For example, the results of an experiment will not go out of date because the data accurately reports observed outcomes.',
-      :requirement => ['standard_11']
+      :requirement => ['standard_16']
 
-    label_pilot_8 'You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire.',
+    label_pilot_9 'You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_8'
+      :requirement => 'pilot_9'
     dependency :rule => '(A or B or (C and D)) and (E and F)'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_collection
@@ -955,9 +1095,9 @@ survey 'BE',
     condition_E :q_timeSensitive, '!=', :a_timestamped
     condition_F :q_timeSensitive, '!=', :a_false
 
-    label_standard_11 'You should <strong>publish updates to time-sensitive data</strong> so that it does not go stale.',
+    label_standard_16 'You should <strong>publish updates to time-sensitive data</strong> so that it does not go stale.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_11'
+      :requirement => 'standard_16'
     dependency :rule => '(A or B or (C and D)) and (E)'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_collection
@@ -1006,11 +1146,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'is available',
-      :requirement => ['exemplar_3']
+      :requirement => ['exemplar_6']
 
-    label_exemplar_3 'You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_6 'You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_3'
+      :requirement => 'exemplar_6'
     dependency :rule => 'A and B and C and D'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
@@ -1029,17 +1169,17 @@ survey 'BE',
       :text_as_statement => 'less than once a month'
     a_monthly 'at least every month',
       :text_as_statement => 'at least every month',
-      :requirement => ['pilot_9']
+      :requirement => ['pilot_10']
     a_weekly 'at least every week',
       :text_as_statement => 'at least every week',
-      :requirement => ['standard_12']
+      :requirement => ['standard_17']
     a_daily 'at least every day',
       :text_as_statement => 'at least every day',
-      :requirement => ['exemplar_4']
+      :requirement => ['exemplar_7']
 
-    label_pilot_9 'You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate.',
+    label_pilot_10 'You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_9'
+      :requirement => 'pilot_10'
     dependency :rule => 'A and B and (C and D and E)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
@@ -1047,18 +1187,18 @@ survey 'BE',
     condition_D :q_frequentSeriesPublication, '!=', :a_weekly
     condition_E :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_standard_12 'You should <strong>create a new dataset release every week</strong> so people keep their copies up-to-date and accurate.',
+    label_standard_17 'You should <strong>create a new dataset release every week</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_12'
+      :requirement => 'standard_17'
     dependency :rule => 'A and B and (C and D)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_frequentSeriesPublication, '!=', :a_weekly
     condition_D :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_exemplar_4 'You should <strong>create a new dataset release every day</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_7 'You should <strong>create a new dataset release every day</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_4'
+      :requirement => 'exemplar_7'
     dependency :rule => 'A and B and (C)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
@@ -1076,36 +1216,36 @@ survey 'BE',
     a_reasonable 'about the same as the gap between releases',
       :text_as_statement => 'about the same as the gap between releases',
       :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes about a day for it to be published.',
-      :requirement => ['pilot_10']
+      :requirement => ['pilot_11']
     a_good 'less than half the gap between releases',
       :text_as_statement => 'less than half the gap between releases',
       :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes less than twelve hours for it to be published.',
-      :requirement => ['standard_13']
+      :requirement => ['standard_18']
     a_minimal 'there is minimal or no delay',
       :text_as_statement => 'minimal',
       :help_text => 'Choose this if you publish within a few seconds or a few minutes.',
-      :requirement => ['exemplar_5']
+      :requirement => ['exemplar_8']
 
-    label_pilot_10 'You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate.',
+    label_pilot_11 'You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_10'
+      :requirement => 'pilot_11'
     dependency :rule => 'A and (B and C and D)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_seriesPublicationDelay, '!=', :a_reasonable
     condition_C :q_seriesPublicationDelay, '!=', :a_good
     condition_D :q_seriesPublicationDelay, '!=', :a_minimal
 
-    label_standard_13 'You should <strong>have a short delay between when you create and publish a dataset</strong> that is less than half the gap between releases so people keep their copies up-to-date and accurate.',
+    label_standard_18 'You should <strong>have a short delay between when you create and publish a dataset</strong> that is less than half the gap between releases so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_13'
+      :requirement => 'standard_18'
     dependency :rule => 'A and (B and C)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_seriesPublicationDelay, '!=', :a_good
     condition_C :q_seriesPublicationDelay, '!=', :a_minimal
 
-    label_exemplar_5 'You should <strong>have minimal or no delay between when you create and publish a dataset</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_8 'You should <strong>have minimal or no delay between when you create and publish a dataset</strong> so people keep their copies up-to-date and accurate.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_5'
+      :requirement => 'exemplar_8'
     dependency :rule => 'A and (B)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_seriesPublicationDelay, '!=', :a_minimal
@@ -1121,11 +1261,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'dumps of the data',
-      :requirement => ['standard_14']
+      :requirement => ['standard_19']
 
-    label_standard_14 'You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data.',
+    label_standard_19 'You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_14'
+      :requirement => 'standard_19'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_false
@@ -1143,17 +1283,17 @@ survey 'BE',
       :text_as_statement => 'less frequently than once a month'
     a_monthly 'at least every month',
       :text_as_statement => 'at least every month',
-      :requirement => ['pilot_11']
+      :requirement => ['pilot_12']
     a_weekly 'within a week of any change',
       :text_as_statement => 'within a week of any change',
-      :requirement => ['standard_15']
+      :requirement => ['standard_20']
     a_daily 'within a day of any change',
       :text_as_statement => 'within a day of any change',
-      :requirement => ['exemplar_6']
+      :requirement => ['exemplar_9']
 
-    label_pilot_11 'You should <strong>create a new database dump every month</strong> so that people have the latest data.',
+    label_pilot_12 'You should <strong>create a new database dump every month</strong> so that people have the latest data.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_11'
+      :requirement => 'pilot_12'
     dependency :rule => 'A and B and C and (D and E and F)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceType, '==', :a_changing
@@ -1162,9 +1302,9 @@ survey 'BE',
     condition_E :q_dumpFrequency, '!=', :a_weekly
     condition_F :q_dumpFrequency, '!=', :a_daily
 
-    label_standard_15 'You should <strong>create a new database dump within a week of any change</strong> so that people have less time to wait for the latest data.',
+    label_standard_20 'You should <strong>create a new database dump within a week of any change</strong> so that people have less time to wait for the latest data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_15'
+      :requirement => 'standard_20'
     dependency :rule => 'A and B and C and (D and E)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceType, '==', :a_changing
@@ -1172,9 +1312,9 @@ survey 'BE',
     condition_D :q_dumpFrequency, '!=', :a_weekly
     condition_E :q_dumpFrequency, '!=', :a_daily
 
-    label_exemplar_6 'You should <strong>create a new database dump within a day of any change</strong> so that people find it easier to get the latest data.',
+    label_exemplar_9 'You should <strong>create a new database dump within a day of any change</strong> so that people find it easier to get the latest data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_6'
+      :requirement => 'exemplar_9'
     dependency :rule => 'A and B and C and (D)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceType, '==', :a_changing
@@ -1193,11 +1333,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'corrected',
-      :requirement => ['standard_16']
+      :requirement => ['standard_21']
 
-    label_standard_16 'You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy.',
+    label_standard_21 'You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_16'
+      :requirement => 'standard_21'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_timeSensitive, '!=', :a_true
@@ -1215,11 +1355,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Data Quality Documentation URL',
-      :requirement => ['standard_17']
+      :requirement => ['standard_22']
 
-    label_standard_17 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
+    label_standard_22 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_17'
+      :requirement => 'standard_22'
     dependency :rule => 'A'
     condition_A :q_qualityUrl, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -1231,11 +1371,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Quality Control Process Description URL',
-      :requirement => ['exemplar_7']
+      :requirement => ['exemplar_10']
 
-    label_exemplar_7 'You should <strong>document your quality control process</strong> so that people can decide how much to trust your data.',
+    label_exemplar_10 'You should <strong>document your quality control process</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_7'
+      :requirement => 'exemplar_10'
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -1254,34 +1394,34 @@ survey 'BE',
       :text_as_statement => ''
     a_atleast99 'there has been less than 4 days downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99% of the time',
-      :requirement => ['pilot_12']
+      :requirement => ['pilot_13']
     a_atleast99_5 'there has been less than 2 days downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99.5% of the time',
-      :requirement => ['standard_18']
+      :requirement => ['standard_23']
     a_atleast99_9 'there has been less than 9 hours downtime in the past year (or equivalent)',
       :text_as_statement => 'available 99.9% of the time',
-      :requirement => ['exemplar_8']
+      :requirement => ['exemplar_11']
 
-    label_pilot_12 'You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.',
+    label_pilot_13 'You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_12'
+      :requirement => 'pilot_13'
     dependency :rule => 'A and (B and C and D)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceAvailability, '!=', :a_atleast99
     condition_C :q_serviceAvailability, '!=', :a_atleast99_5
     condition_D :q_serviceAvailability, '!=', :a_atleast99_9
 
-    label_standard_18 'You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data.',
+    label_standard_23 'You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_18'
+      :requirement => 'standard_23'
     dependency :rule => 'A and (B and C)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceAvailability, '!=', :a_atleast99_5
     condition_C :q_serviceAvailability, '!=', :a_atleast99_9
 
-    label_exemplar_8 'You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data.',
+    label_exemplar_11 'You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_8'
+      :requirement => 'exemplar_11'
     dependency :rule => 'A and (B)'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceAvailability, '!=', :a_atleast99_9
@@ -1294,32 +1434,32 @@ survey 'BE',
       :text_as_statement => 'experimentally and might disappear at any time'
     a_short 'it\'s available experimentally but should be around for another year or so',
       :text_as_statement => 'experimentally for another year or so',
-      :requirement => ['pilot_13']
+      :requirement => ['pilot_14']
     a_medium 'it\'s in your medium-term plans so should be around for a couple of years',
       :text_as_statement => 'for at least a couple of years',
-      :requirement => ['standard_19']
+      :requirement => ['standard_24']
     a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
       :text_as_statement => 'for a long time',
-      :requirement => ['exemplar_9']
+      :requirement => ['exemplar_12']
 
-    label_pilot_13 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
+    label_pilot_14 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_13'
+      :requirement => 'pilot_14'
     dependency :rule => 'A and B and C'
     condition_A :q_onGoingAvailability, '!=', :a_short
     condition_B :q_onGoingAvailability, '!=', :a_medium
     condition_C :q_onGoingAvailability, '!=', :a_long
 
-    label_standard_19 'You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data.',
+    label_standard_24 'You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_19'
+      :requirement => 'standard_24'
     dependency :rule => 'A and B'
     condition_A :q_onGoingAvailability, '!=', :a_medium
     condition_B :q_onGoingAvailability, '!=', :a_long
 
-    label_exemplar_9 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
+    label_exemplar_12 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_9'
+      :requirement => 'exemplar_12'
     dependency :rule => 'A'
     condition_A :q_onGoingAvailability, '!=', :a_long
 
@@ -1342,7 +1482,7 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Dataset URL',
-      :requirement => ['basic_9', 'pilot_14']
+      :requirement => ['basic_9', 'pilot_15']
 
     label_basic_9 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
@@ -1352,9 +1492,9 @@ survey 'BE',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_pilot_14 'You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.',
+    label_pilot_15 'You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_14'
+      :requirement => 'pilot_15'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -1367,31 +1507,31 @@ survey 'BE',
     condition_A :q_releaseType, '==', :a_series
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current dataset.',
-      :requirement => ['standard_20']
+      :requirement => ['standard_25']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your dataset URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['pilot_15']
+      :requirement => ['pilot_16']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of datasets on a web page or a feed (like Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['standard_21']
+      :requirement => ['standard_26']
 
-    label_standard_20 'You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.',
+    label_standard_25 'You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_20'
+      :requirement => 'standard_25'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_current
 
-    label_pilot_15 'You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.',
+    label_pilot_16 'You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_15'
+      :requirement => 'pilot_16'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_template
 
-    label_standard_21 'You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.',
+    label_standard_26 'You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_21'
+      :requirement => 'standard_26'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_list
@@ -1458,7 +1598,7 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Endpoint URL',
-      :requirement => ['basic_11', 'standard_22']
+      :requirement => ['basic_11', 'standard_27']
 
     label_basic_11 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_basic',
@@ -1468,9 +1608,9 @@ survey 'BE',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
     condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_standard_22 'You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.',
+    label_standard_27 'You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_22'
+      :requirement => 'standard_27'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -1483,33 +1623,33 @@ survey 'BE',
     condition_B :q_provideDumps, '==', :a_true
     a_current 'as a single URL that\'s regularly updated',
       :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current database dump.',
-      :requirement => ['standard_23']
+      :requirement => ['standard_28']
     a_template 'as consistent URLs for each release',
       :help_text => 'Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_10']
+      :requirement => ['exemplar_13']
     a_list 'as a list of releases',
       :help_text => 'Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
-      :requirement => ['exemplar_11']
+      :requirement => ['exemplar_14']
 
-    label_standard_23 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
+    label_standard_28 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_23'
+      :requirement => 'standard_28'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_current
 
-    label_exemplar_10 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
+    label_exemplar_13 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_10'
+      :requirement => 'exemplar_13'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_template
 
-    label_exemplar_11 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
+    label_exemplar_14 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_11'
+      :requirement => 'exemplar_14'
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
@@ -1586,11 +1726,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => ['pilot_16']
+      :requirement => ['pilot_17']
 
-    label_pilot_16 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
+    label_pilot_17 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_16'
+      :requirement => 'pilot_17'
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
 
@@ -1604,11 +1744,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'a standard open format',
-      :requirement => ['standard_24']
+      :requirement => ['standard_29']
 
-    label_standard_24 'You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.',
+    label_standard_29 'You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_24'
+      :requirement => 'standard_29'
     dependency :rule => 'A'
     condition_A :q_openStandard, '==', :a_false
 
@@ -1632,25 +1772,25 @@ survey 'BE',
     a_semantic 'describe semantic structure like HTML, Docbook or Markdown',
       :text_as_statement => 'in a semantic format',
       :help_text => 'These formats label structures like chapters, headings and tables that make it easy to automatically create summaries like tables of contents and glossaries. They also make it easy to apply different styles to the document so its appearance changes.',
-      :requirement => ['standard_25']
+      :requirement => ['standard_30']
     a_format 'describe information on formatting like OOXML or PDF',
       :text_as_statement => 'in a display format',
       :help_text => 'These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren\'t as easy for people to process automatically and change style.',
-      :requirement => ['pilot_17']
+      :requirement => ['pilot_18']
     a_unsuitable 'aren\'t meant for documents like Excel, JSON or CSV',
       :text_as_statement => 'in a format unsuitable for documents',
       :help_text => 'These formats better suit tabular or structured data.'
 
-    label_standard_25 'You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles.',
+    label_standard_30 'You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_25'
+      :requirement => 'standard_30'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_documents
     condition_B :q_documentFormat, '!=', :a_semantic
 
-    label_pilot_17 'You should <strong>publish documents in a format designed specifically for them</strong> so that they\'re easy to process.',
+    label_pilot_18 'You should <strong>publish documents in a format designed specifically for them</strong> so that they\'re easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_17'
+      :requirement => 'pilot_18'
     dependency :rule => 'A and (B and C)'
     condition_A :q_dataType, '==', :a_documents
     condition_B :q_documentFormat, '!=', :a_semantic
@@ -1665,37 +1805,37 @@ survey 'BE',
     a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
-      :requirement => ['exemplar_12']
+      :requirement => ['exemplar_15']
     a_tabular 'treat statistical data as a table like CSV',
       :text_as_statement => 'in a tabular data format',
       :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
-      :requirement => ['standard_26']
+      :requirement => ['standard_31']
     a_format 'focus on the format of tabular data like Excel',
       :text_as_statement => 'in a presentation format',
       :help_text => 'Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.',
-      :requirement => ['pilot_18']
+      :requirement => ['pilot_19']
     a_unsuitable 'aren\'t meant for statistical or tabular data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
 
-    label_exemplar_12 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
+    label_exemplar_15 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_12'
+      :requirement => 'exemplar_15'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
 
-    label_standard_26 'You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it\'s easy to analyse.',
+    label_standard_31 'You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it\'s easy to analyse.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_26'
+      :requirement => 'standard_31'
     dependency :rule => 'A and (B and C)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
     condition_C :q_statisticalFormat, '!=', :a_tabular
 
-    label_pilot_18 'You should <strong>publish tabular data in a format designed for that purpose</strong> so that it\'s easy to process.',
+    label_pilot_19 'You should <strong>publish tabular data in a format designed for that purpose</strong> so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_18'
+      :requirement => 'pilot_19'
     dependency :rule => 'A and (B and C and D)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
@@ -1711,25 +1851,25 @@ survey 'BE',
     a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
-      :requirement => ['exemplar_13']
+      :requirement => ['exemplar_16']
     a_generic 'keeps data structured like JSON, XML or CSV',
       :text_as_statement => 'in a generic data format',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
-      :requirement => ['pilot_19']
+      :requirement => ['pilot_20']
     a_unsuitable 'aren\'t designed for geographic data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
 
-    label_exemplar_13 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
+    label_exemplar_16 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_13'
+      :requirement => 'exemplar_16'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_geographic
     condition_B :q_geographicFormat, '!=', :a_specific
 
-    label_pilot_19 'You should <strong>publish geographic data as structured data</strong> so that it\'s easy to process.',
+    label_pilot_20 'You should <strong>publish geographic data as structured data</strong> so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_19'
+      :requirement => 'pilot_20'
     dependency :rule => 'A and (B and C)'
     condition_A :q_dataType, '==', :a_geographic
     condition_B :q_geographicFormat, '!=', :a_specific
@@ -1744,14 +1884,14 @@ survey 'BE',
     a_suitable 'are designed for structured data like JSON, XML, Turtle or CSV',
       :text_as_statement => 'in a structured data format',
       :help_text => 'These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.',
-      :requirement => ['pilot_20']
+      :requirement => ['pilot_21']
     a_unsuitable 'aren\'t designed for structured data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for structured data',
       :help_text => 'These formats don\'t suit this kind of data because they obscure its underlying structure.'
 
-    label_pilot_20 'You should <strong>publish structured data in a format designed that purpose</strong> so that it\'s easy to process.',
+    label_pilot_21 'You should <strong>publish structured data in a format designed that purpose</strong> so that it\'s easy to process.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_20'
+      :requirement => 'pilot_21'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_structured
     condition_B :q_structuredFormat, '!=', :a_suitable
@@ -1765,11 +1905,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'persistent identifiers',
-      :requirement => ['standard_27']
+      :requirement => ['standard_32']
 
-    label_standard_27 'You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.',
+    label_standard_32 'You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_27'
+      :requirement => 'standard_32'
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_false
 
@@ -1784,23 +1924,23 @@ survey 'BE',
     a_service 'yes, there is a service that people can use to resolve the identifiers',
       :text_as_statement => 'resolve using a service',
       :help_text => 'Online services can be used to give people information about identifiers such as GUIDs or DOIs which can\'t be directly accessed in the way that URLs are.',
-      :requirement => ['standard_28']
+      :requirement => ['standard_33']
     a_resolvable 'yes, the identifiers are URLs that resolve to give information',
       :text_as_statement => 'resolve because they are URLs',
       :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.',
-      :requirement => ['exemplar_14']
+      :requirement => ['exemplar_17']
 
-    label_standard_28 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
+    label_standard_33 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_28'
+      :requirement => 'standard_33'
     dependency :rule => 'A and (B and C)'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '!=', :a_service
     condition_C :q_resolvingIds, '!=', :a_resolvable
 
-    label_exemplar_14 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
+    label_exemplar_17 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_14'
+      :requirement => 'exemplar_17'
     dependency :rule => 'A and (B)'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '!=', :a_resolvable
@@ -1816,11 +1956,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Identifier Resolution Service URL',
-      :requirement => ['standard_29']
+      :requirement => ['standard_34']
 
-    label_standard_29 'You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.',
+    label_standard_34 'You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_29'
+      :requirement => 'standard_34'
     dependency :rule => 'A and B and C'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '==', :a_service
@@ -1858,11 +1998,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'referenced in this data',
-      :requirement => ['exemplar_15']
+      :requirement => ['exemplar_18']
 
-    label_exemplar_15 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
+    label_exemplar_18 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_15'
+      :requirement => 'exemplar_18'
     dependency :rule => 'A and B and C and D'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
@@ -1883,11 +2023,11 @@ survey 'BE',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => ['exemplar_16']
+      :requirement => ['exemplar_19']
 
-    label_exemplar_16 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
+    label_exemplar_19 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_16'
+      :requirement => 'exemplar_19'
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
@@ -1899,11 +2039,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
-      :requirement => ['exemplar_17']
+      :requirement => ['exemplar_20']
 
-    label_exemplar_17 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
+    label_exemplar_20 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_17'
+      :requirement => 'exemplar_20'
     dependency :rule => 'A'
     condition_A :q_digitalCertificate, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -1924,133 +2064,133 @@ survey 'BE',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_title 'title',
       :text_as_statement => 'title',
-      :requirement => ['standard_30']
+      :requirement => ['standard_35']
     a_description 'description',
       :text_as_statement => 'description',
-      :requirement => ['standard_31']
+      :requirement => ['standard_36']
     a_issued 'release date',
       :text_as_statement => 'release date',
-      :requirement => ['standard_32']
+      :requirement => ['standard_37']
     a_modified 'modification date',
       :text_as_statement => 'modification date',
-      :requirement => ['standard_33']
+      :requirement => ['standard_38']
     a_accrualPeriodicity 'frequency of releases',
       :text_as_statement => 'release frequency',
-      :requirement => ['standard_34']
+      :requirement => ['standard_39']
     a_identifier 'identifier',
       :text_as_statement => 'identifier',
-      :requirement => ['standard_35']
+      :requirement => ['standard_40']
     a_landingPage 'landing page',
       :text_as_statement => 'landing page',
-      :requirement => ['standard_36']
+      :requirement => ['standard_41']
     a_language 'language',
       :text_as_statement => 'language',
-      :requirement => ['standard_37']
+      :requirement => ['standard_42']
     a_publisher 'publisher',
       :text_as_statement => 'publisher',
-      :requirement => ['standard_38']
+      :requirement => ['standard_43']
     a_spatial 'spatial/geographical coverage',
       :text_as_statement => 'spatial/geographical coverage',
-      :requirement => ['standard_39']
+      :requirement => ['standard_44']
     a_temporal 'temporal coverage',
       :text_as_statement => 'temporal coverage',
-      :requirement => ['standard_40']
+      :requirement => ['standard_45']
     a_theme 'theme(s)',
       :text_as_statement => 'theme(s)',
-      :requirement => ['standard_41']
+      :requirement => ['standard_46']
     a_keyword 'keyword(s) or tag(s)',
       :text_as_statement => 'keyword(s) or tag(s)',
-      :requirement => ['standard_42']
+      :requirement => ['standard_47']
     a_distribution 'distribution(s)',
       :text_as_statement => 'distribution(s)'
 
-    label_standard_30 'You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_30'
-    dependency :rule => 'A and B'
-    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_title
-
-    label_standard_31 'You should <strong>include a data description in your documentation</strong> so that people know what it contains.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_31'
-    dependency :rule => 'A and B'
-    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_description
-
-    label_standard_32 'You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_32'
-    dependency :rule => 'A and B'
-    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_issued
-
-    label_standard_33 'You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_33'
-    dependency :rule => 'A and B'
-    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_modified
-
-    label_standard_34 'You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_34'
-    dependency :rule => 'A and B'
-    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_accrualPeriodicity
-
-    label_standard_35 'You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently.',
+    label_standard_35 'You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_35'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_identifier
+    condition_B :q_documentationMetadata, '!=', :a_title
 
-    label_standard_36 'You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently.',
+    label_standard_36 'You should <strong>include a data description in your documentation</strong> so that people know what it contains.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_36'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_landingPage
+    condition_B :q_documentationMetadata, '!=', :a_description
 
-    label_standard_37 'You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it.',
+    label_standard_37 'You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_37'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_language
+    condition_B :q_documentationMetadata, '!=', :a_issued
 
-    label_standard_38 'You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data.',
+    label_standard_38 'You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_38'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_publisher
+    condition_B :q_documentationMetadata, '!=', :a_modified
 
-    label_standard_39 'You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to.',
+    label_standard_39 'You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_39'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_spatial
+    condition_B :q_documentationMetadata, '!=', :a_accrualPeriodicity
 
-    label_standard_40 'You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to.',
+    label_standard_40 'You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_40'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_temporal
+    condition_B :q_documentationMetadata, '!=', :a_identifier
 
-    label_standard_41 'You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about.',
+    label_standard_41 'You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_41'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    condition_B :q_documentationMetadata, '!=', :a_theme
+    condition_B :q_documentationMetadata, '!=', :a_landingPage
 
-    label_standard_42 'You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively.',
+    label_standard_42 'You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_42'
+    dependency :rule => 'A and B'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationMetadata, '!=', :a_language
+
+    label_standard_43 'You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_43'
+    dependency :rule => 'A and B'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationMetadata, '!=', :a_publisher
+
+    label_standard_44 'You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_44'
+    dependency :rule => 'A and B'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationMetadata, '!=', :a_spatial
+
+    label_standard_45 'You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_45'
+    dependency :rule => 'A and B'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationMetadata, '!=', :a_temporal
+
+    label_standard_46 'You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_46'
+    dependency :rule => 'A and B'
+    condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
+    condition_B :q_documentationMetadata, '!=', :a_theme
+
+    label_standard_47 'You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively.',
+      :custom_renderer => '/partials/requirement_standard',
+      :requirement => 'standard_47'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_keyword
@@ -2064,19 +2204,19 @@ survey 'BE',
     condition_B :q_documentationMetadata, '==', :a_distribution
     a_title 'title',
       :text_as_statement => 'title',
-      :requirement => ['standard_43']
+      :requirement => ['standard_48']
     a_description 'description',
       :text_as_statement => 'description',
-      :requirement => ['standard_44']
+      :requirement => ['standard_49']
     a_issued 'release date',
       :text_as_statement => 'release date',
-      :requirement => ['standard_45']
+      :requirement => ['standard_50']
     a_modified 'modification date',
       :text_as_statement => 'modification date',
-      :requirement => ['standard_46']
+      :requirement => ['standard_51']
     a_license 'licence',
       :text_as_statement => 'licence',
-      :requirement => ['standard_47']
+      :requirement => ['standard_52']
     a_accessURL 'URL to access the data',
       :text_as_statement => 'a URL to access the data',
       :help_text => 'This metadata should be used when your data isn\'t available as a download, like an API for example.'
@@ -2087,41 +2227,41 @@ survey 'BE',
     a_mediaType 'type of download media',
       :text_as_statement => 'type of download media'
 
-    label_standard_43 'You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.',
+    label_standard_48 'You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_43'
+      :requirement => 'standard_48'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_title
 
-    label_standard_44 'You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.',
+    label_standard_49 'You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_44'
+      :requirement => 'standard_49'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_description
 
-    label_standard_45 'You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.',
+    label_standard_50 'You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_45'
+      :requirement => 'standard_50'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_issued
 
-    label_standard_46 'You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.',
+    label_standard_51 'You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_46'
+      :requirement => 'standard_51'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_modified
 
-    label_standard_47 'You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution.',
+    label_standard_52 'You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_47'
+      :requirement => 'standard_52'
     dependency :rule => 'A and B and C'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
@@ -2136,11 +2276,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Service Documentation URL',
-      :requirement => ['pilot_21']
+      :requirement => ['pilot_22']
 
-    label_pilot_21 'You should <strong>document how your API works</strong> so that people understand how to use it.',
+    label_pilot_22 'You should <strong>document how your API works</strong> so that people understand how to use it.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_21'
+      :requirement => 'pilot_22'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceDocumentation, '==', {:string_value => '', :answer_reference => '1'}
@@ -2161,11 +2301,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Schema Documentation URL',
-      :requirement => ['standard_48']
+      :requirement => ['standard_53']
 
-    label_standard_48 'You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it.',
+    label_standard_53 'You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_48'
+      :requirement => 'standard_53'
     dependency :rule => 'A and B'
     condition_A :q_vocabulary, '==', :a_true
     condition_B :q_schemaDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -2186,11 +2326,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Codelist Documentation URL',
-      :requirement => ['standard_49']
+      :requirement => ['standard_54']
 
-    label_standard_49 'You should <strong>document the codes used within your data</strong> so that people know how to interpret them.',
+    label_standard_54 'You should <strong>document the codes used within your data</strong> so that people know how to interpret them.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_49'
+      :requirement => 'standard_54'
     dependency :rule => 'A and B'
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -2207,11 +2347,11 @@ survey 'BE',
       :string,
       :input_type => :email,
       :placeholder => 'Contact Email Address',
-      :requirement => ['pilot_22']
+      :requirement => ['pilot_23']
 
-    label_pilot_22 'You should <strong>provide an email address for people to send questions</strong> about your data to.',
+    label_pilot_23 'You should <strong>provide an email address for people to send questions</strong> about your data to.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_22'
+      :requirement => 'pilot_23'
     dependency :rule => 'A'
     condition_A :q_contactEmail, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2222,11 +2362,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Improvement Suggestions URL',
-      :requirement => ['pilot_23']
+      :requirement => ['pilot_24']
 
-    label_pilot_23 'You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.',
+    label_pilot_24 'You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_23'
+      :requirement => 'pilot_24'
     dependency :rule => 'A'
     condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2237,11 +2377,11 @@ survey 'BE',
       :string,
       :input_type => :email,
       :placeholder => 'Confidentiality Contact Email Address',
-      :requirement => ['pilot_24']
+      :requirement => ['pilot_25']
 
-    label_pilot_24 'You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details.',
+    label_pilot_25 'You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details.',
       :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_24'
+      :requirement => 'pilot_25'
     dependency :rule => 'A'
     condition_A :q_dataProtectionEmail, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2249,11 +2389,11 @@ survey 'BE',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['standard_50']
+      :requirement => ['standard_55']
 
-    label_standard_50 'You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used',
+    label_standard_55 'You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_50'
+      :requirement => 'standard_55'
     dependency :rule => 'A'
     condition_A :q_socialMedia, '==', :a_false
 
@@ -2284,11 +2424,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Forum or Mailing List URL',
-      :requirement => ['standard_51']
+      :requirement => ['standard_56']
 
-    label_standard_51 'You should <strong>tell people where they can discuss your data</strong> and support one another.',
+    label_standard_56 'You should <strong>tell people where they can discuss your data</strong> and support one another.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_51'
+      :requirement => 'standard_56'
     dependency :rule => 'A'
     condition_A :q_forum, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -2302,11 +2442,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Correction Instructions URL',
-      :requirement => ['standard_52']
+      :requirement => ['standard_57']
 
-    label_standard_52 'You should <strong>provide instructions about how people can report errors</strong> in your data.',
+    label_standard_57 'You should <strong>provide instructions about how people can report errors</strong> in your data.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_52'
+      :requirement => 'standard_57'
     dependency :rule => 'A and B'
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionReporting, '==', {:string_value => '', :answer_reference => '1'}
@@ -2321,11 +2461,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Correction Notification URL',
-      :requirement => ['standard_53']
+      :requirement => ['standard_58']
 
-    label_standard_53 'You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date.',
+    label_standard_58 'You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date.',
       :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_53'
+      :requirement => 'standard_58'
     dependency :rule => 'A and B'
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
@@ -2334,11 +2474,11 @@ survey 'BE',
       :pick => :one
     a_false 'no'
     a_true 'yes',
-      :requirement => ['exemplar_18']
+      :requirement => ['exemplar_21']
 
-    label_exemplar_18 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
+    label_exemplar_21 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_18'
+      :requirement => 'exemplar_21'
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_false
 
@@ -2366,11 +2506,11 @@ survey 'BE',
       :string,
       :input_type => :url,
       :placeholder => 'Tool URL',
-      :requirement => ['exemplar_19']
+      :requirement => ['exemplar_22']
 
-    label_exemplar_19 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
+    label_exemplar_22 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
       :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_19'
+      :requirement => 'exemplar_22'
     dependency :rule => 'A'
     condition_A :q_libraries, '==', {:string_value => '', :answer_reference => '1'}
 
