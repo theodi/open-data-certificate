@@ -107,4 +107,4 @@
             != q.help_text_for(@render_context, I18n.locale)
             - if (q.help_text_more_url)
               %a{:href => q.help_text_more_url} Read more...
-        = comment_link "/surveys/questions/#{rg || q.reference_identifier}", t('surveyor.question_comment')
+        = comment_link "/surveys/questions/#{rg || q.reference_identifier}", t('surveyor.question_comment'), q.text
