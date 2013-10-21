@@ -30,7 +30,7 @@
                   %span.icon.icon-flag
                   %span.odc-popover-content
                     Do you think this data is incorrect?
-                    = link_to comment_path(topic: "certificates/#{response_set.certificate.id}/#{response.question.reference_identifier}", back: request.original_fullpath) do
+                    = link_to comment_path(topic: "certificates/#{response_set.certificate.id}/#{response.question.reference_identifier}", back: request.original_fullpath, title: "#{response.question.statement_text} #{response_text} ") do
                       %span.btn.btn-mini.btn-info Let us know &gt;
 
               - if state
