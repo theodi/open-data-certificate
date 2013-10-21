@@ -1,8 +1,8 @@
 module ApplicationHelper
 
-  def comment_link topic, message = 'comment', title = topic
+  def comment_link topic, message = 'comment', title = topic, key = nil
     content = "<i class=\"icon-comments\"></i> <span>#{message}</span>"
-    link_to content.html_safe, comment_path(topic: topic, back: request.original_fullpath, title: title), class: 'link-comment'
+    link_to content.html_safe, comment_path(topic: topic, back: request.original_fullpath, title: title, key: key), class: 'link-comment'
   end
 
   def embed_protocol

@@ -1,4 +1,7 @@
 - content_for :header_title do
   #{link_to @title, @back} - Comments
 
+.discussion_help
+  = markdown @help
+
 = juvia_comments @topic
