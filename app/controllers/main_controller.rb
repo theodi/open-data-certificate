@@ -8,7 +8,9 @@ class MainController < ApplicationController
 
   def comment
     @topic = params[:topic]
+    @title = params[:title] || @topic
     @back  = params[:back]
+    @help  = I18n.t params[:key], scope: :discussions, default: ''
   end
 
   def status

@@ -5,7 +5,8 @@
   .modal-body
     .row-fluid
       .span6
-        =render(:partial => 'shared/embed_badge', :locals => {:certificate => certificate})
+        // write the badge partial straight to the page (which is what embedding the js would do)
+        =render(:partial => 'certificates/badge', :object => certificate)
         %h4= t("certificate.embed_badge")
         %p= t("certificate.embed_badge_instructions")
         %textarea= render(:partial => 'shared/embed_badge', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
