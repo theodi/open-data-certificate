@@ -413,11 +413,10 @@ $(function(){
     $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
   })
 
-  .on('click', '[data-scroll-to]', function(e){
+  .on('click', '.join-discussion a', function(e){
     e.preventDefault();
-    var top = $($(this).data('scroll-to')).offset().top;
+    var top = $('.juvia-add-comment-form').prev().offset().top;
     $('body').animate({scrollTop:top})
-
   });
 
 
