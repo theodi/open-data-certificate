@@ -109,6 +109,11 @@ en:
       published: Published
       archived: Archived
 
+  # main controller
+  main:
+    comment:
+      markdown_help: Markdown Help
+
   homepage:
     log_in: Sign in
     dont_have_an_account: Don't have an account?

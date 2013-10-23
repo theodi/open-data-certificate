@@ -71,7 +71,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'about' => 'pages#show', :id => 'about'
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
-  get 'markdown_help' => 'pages#show', :id => 'markdown_help'
+  get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
 
   # Validators
   get 'resolve' => 'validators#resolve'
