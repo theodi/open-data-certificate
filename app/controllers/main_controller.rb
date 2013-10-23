@@ -13,6 +13,12 @@ class MainController < ApplicationController
     @help  = I18n.t params[:key], scope: :discussions, default: ''
   end
 
+  def discussion
+    @topic = 'general'
+    @help  = I18n.t 'general', scope: :discussions, default: ''
+    render 'comment'
+  end
+
   def status
     @job_count = Delayed::Job.count
 

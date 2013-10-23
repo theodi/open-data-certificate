@@ -411,6 +411,13 @@ $(function(){
 
   .on('click', '.dataset .show-more, .dataset .hide-more', function(){
     $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
+  })
+
+  .on('click', '[data-scroll-to]', function(e){
+    e.preventDefault();
+    var top = $($(this).data('scroll-to')).offset().top;
+    $('body').animate({scrollTop:top})
+
   });
 
 

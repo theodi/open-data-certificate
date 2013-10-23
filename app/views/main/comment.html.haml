@@ -1,8 +1,14 @@
 - content_for :header_title do
-  #{link_to @title, @back} - Comments
+  - if @back
+    #{link_to @title, @back} -
+  = t('.discussion')
 
 .discussion_help
   = markdown @help
+
+%p.join-discussion
+  %a.btn.btn-primary.btn-large{'data-scroll-to' => ".juvia-add-comment-form"}
+    = t('.join_the_discussion')
 
 = juvia_comments @topic
 

@@ -16,6 +16,7 @@ en:
     feedback:       Feedback
     privacy:        Privacy policy
     about:          About
+    discussion:     Discussion
     get_in_touch:   Get in touch
     terms:          Terms of use
     odi_name:       Open Data Institute
@@ -112,6 +113,7 @@ en:
   # main controller
   main:
     comment:
+      discussion: Discussion
       markdown_help: Markdown Help
 
   homepage:

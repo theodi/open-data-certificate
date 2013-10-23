@@ -58,6 +58,7 @@ module ApplicationHelper
       { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
       { link_text: t('menu.browse_all_certificates'), path: datasets_path },
       { link_text: t('footmenu.about'), path: '/about' },
+      { link_text: t('menu.discussion'), path: discussion_path },
       { link_text: t('footmenu.get_in_touch'), path: '/contact' },
     ]
     render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
