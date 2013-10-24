@@ -1,0 +1,5 @@
+
+- @events.each do |e|
+  %h3= e.created_at.to_s(:short)
+  %p= e.message
+  %hr

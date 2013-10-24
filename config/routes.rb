@@ -90,6 +90,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'status.csv' => 'main#status_csv'
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
+  get 'status/events' => 'main#status_events'
 
   root :to => 'main#home'
 

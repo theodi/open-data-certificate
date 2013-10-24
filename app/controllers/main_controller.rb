@@ -51,6 +51,10 @@ class MainController < ApplicationController
     end
   end
 
+  def status_events
+    @events = DevEvent.order('created_at DESC').limit(500).all
+  end
+
   # A user pings this url if they have js enabled, so we can tell surveyor
   # not to find unnecessary requirements.
   def has_js

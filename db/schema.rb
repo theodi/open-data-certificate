@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925153832) do
+ActiveRecord::Schema.define(:version => 20131024143408) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -119,6 +119,12 @@ ActiveRecord::Schema.define(:version => 20130925153832) do
   end
 
   add_index "dependency_conditions", ["dependency_id"], :name => "i_dependency_conditions_on_dependencies_question_id"
+
+  create_table "dev_events", :force => true do |t|
+    t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "kitten_data", :force => true do |t|
     t.text     "data"
