@@ -21,9 +21,9 @@ class SurveyBuilder < Struct.new(:dir, :basename)
     stub.name == Survey::DEFAULT_ACCESS_CODE
   end
 
-  # def error(job, exception)
-  #   Airbrake.notify(exception)
-  # end
+  def error(job, exception)
+    Airbrake.notify(exception) if defined? Airbrake
+  end
 
   private
 
