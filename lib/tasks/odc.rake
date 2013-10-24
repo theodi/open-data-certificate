@@ -54,6 +54,8 @@ namespace :surveyor do
 
   desc "queue up surveys to be built by delayed job"
   task :enqueue_surveys => :environment do
+    DevEvent.create message: "surveyor:enqueue_surveys"
+
     dir = ENV['DIR'] || 'surveys'
     files = Dir.entries(Rails.root.join(dir)).select { |file| file =~ /.*\.rb/ }
 
@@ -64,6 +66,8 @@ namespace :surveyor do
       priority =  builder.default_survey? ? 5 : 10
 
       Delayed::Job.enqueue builder, priority: priority
+
+      DevEvent.create message: "surveyor:enqueued #{file}"
     end
   end
 
