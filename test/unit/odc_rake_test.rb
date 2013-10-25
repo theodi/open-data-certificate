@@ -37,135 +37,135 @@ class OdcRakeTest < ActiveSupport::TestCase
   #   assert @result.values.none?, @result.delete_if{|k,v|v.blank?}.map {|k,v| ["survey: #{k}", "#{v}\n"] }.unshift("\n").join("\n")
   # end
 
-  # test "The default survey parses correctly" do
-  #   ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
+  test "The default survey parses correctly" do
+    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
 
-  #   assert_difference 'Survey.count', 1 do
-  #     Rake::Task["surveyor"].invoke
-  #   end
-  # end
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor"].invoke
+    end
+  end
 
-  # test "Surveys have valid ruby syntax" do
-  #   surveyDir = Rails.root.join('surveys')
+  test "Surveys have valid ruby syntax" do
+    surveyDir = Rails.root.join('surveys')
 
-  #   files = Dir.entries(surveyDir).select { |file| file =~ /.*\.rb$/ }
+    files = Dir.entries(surveyDir).select { |file| file =~ /.*\.rb$/ }
 
-  #   files.each do |file|
+    files.each do |file|
 
-  #     # a stub for evaluating the file within
-  #     parse_stub = stub(:survey)
+      # a stub for evaluating the file within
+      parse_stub = stub(:survey)
 
-  #     contents = surveyDir.join(file).read
-  #     parse_stub.instance_eval(contents)
-  #   end
+      contents = surveyDir.join(file).read
+      parse_stub.instance_eval(contents)
+    end
 
-  #   # consider things cool if we got here without breaking
-  # end
+    # consider things cool if we got here without breaking
+  end
 
-  # test "Survey translations are valid yaml" do
-  #   translationDir = Rails.root.join('surveys','translations')
+  test "Survey translations are valid yaml" do
+    translationDir = Rails.root.join('surveys','translations')
 
-  #   files = Dir.entries(translationDir).select { |file| file =~ /.*\.yml$/ }
+    files = Dir.entries(translationDir).select { |file| file =~ /.*\.yml$/ }
 
-  #   files.each do |file|
-  #     contents = translationDir.join(file).read
-  #     begin
-  #       YAML.load(contents)
-  #     rescue Psych::SyntaxError => e
-  #       flunk "Syntax Error in #{file} - #{e}"
-  #     end
-  #   end
-  # end
+    files.each do |file|
+      contents = translationDir.join(file).read
+      begin
+        YAML.load(contents)
+      rescue Psych::SyntaxError => e
+        flunk "Syntax Error in #{file} - #{e}"
+      end
+    end
+  end
 
 
-  # test "build_changed_surveys doesn't build twice" do
-  #   ENV['DIR'] = 'test/fixtures/surveys'
+  test "build_changed_surveys doesn't build twice" do
+    ENV['DIR'] = 'test/fixtures/surveys'
   
-  #   assert_difference 'Survey.count', 2 do
-  #     Rake::Task["surveyor:build_changed_surveys"].invoke
-  #   end
+    assert_difference 'Survey.count', 2 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
 
-  #   assert_no_difference 'Survey.count' do
-  #     Rake::Task["surveyor:build_changed_surveys"].invoke
-  #   end
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
 
-  # end
-
-
-  # test "build_changed_surveys can be limited" do
-  #   ENV['DIR'] = 'test/fixtures/surveys'
-  #   ENV['LIMIT'] = '1'
-
-  #   assert_difference 'Survey.count', 1 do
-  #     Rake::Task["surveyor:build_changed_surveys"].invoke
-  #   end
-
-  #   assert_difference 'Survey.count', 1 do
-  #     Rake::Task["surveyor:build_changed_surveys"].invoke
-  #   end
-
-  #   assert_no_difference 'Survey.count' do
-  #     Rake::Task["surveyor:build_changed_surveys"].invoke
-  #   end
-
-  # end
+  end
 
 
-  # test "build changed survey for single file" do
-  #   ENV['FILE'] = 'test/fixtures/surveys/one.rb'
+  test "build_changed_surveys can be limited" do
+    ENV['DIR'] = 'test/fixtures/surveys'
+    ENV['LIMIT'] = '1'
 
-  #   assert_difference 'Survey.count', 1 do
-  #     Rake::Task["surveyor:build_changed_survey"].invoke
-  #   end
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
 
-  #   assert_no_difference 'Survey.count' do
-  #     Rake::Task["surveyor:build_changed_survey"].invoke
-  #   end
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
 
-  # end
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_surveys"].invoke
+    end
+
+  end
 
 
-  # test "purge_questionnaires gets rid of unanswered questionnaires" do
+  test "build changed survey for single file" do
+    ENV['FILE'] = 'test/fixtures/surveys/one.rb'
 
-  #   yesterday =  Time.now - 24.hours
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor:build_changed_survey"].invoke
+    end
 
-  #   @a = FactoryGirl.create :response_set, user: nil
-  #   @b = FactoryGirl.create :response_set, updated_at: yesterday, user: nil
-  #   @c = FactoryGirl.create :response_set, updated_at: yesterday, user: FactoryGirl.create(:user)
+    assert_no_difference 'Survey.count' do
+      Rake::Task["surveyor:build_changed_survey"].invoke
+    end
 
-  #   assert_difference 'ResponseSet.count', -1 do
-  #     Rake::Task["odc:purge_questionnaires"].invoke
-  #   end
+  end
 
-  #   assert ResponseSet.exists? @a
-  #   assert_false ResponseSet.exists? @b
-  #   assert ResponseSet.exists? @c
 
-  # end
+  test "purge_questionnaires gets rid of unanswered questionnaires" do
 
-  # test "enqueue_surveys" do
-  #   ENV['DIR'] = 'test/fixtures/surveys'
+    yesterday =  Time.now - 24.hours
 
-  #   assert_difference 'Delayed::Job.count', 2 do
-  #     assert_difference 'Delayed::Job.where(priority:5).count', 1,  'The default survey is prioritised' do
-  #       Rake::Task["surveyor:enqueue_surveys"].invoke
-  #     end
-  #   end
+    @a = FactoryGirl.create :response_set, user: nil
+    @b = FactoryGirl.create :response_set, updated_at: yesterday, user: nil
+    @c = FactoryGirl.create :response_set, updated_at: yesterday, user: FactoryGirl.create(:user)
 
-  #   assert_difference 'Survey.count', 2, "surveys were generated" do
-  #     Delayed::Worker.new({exit_on_complete: true}).start
-  #   end
+    assert_difference 'ResponseSet.count', -1 do
+      Rake::Task["odc:purge_questionnaires"].invoke
+    end
 
-  #   assert_equal Delayed::Job.count, 0, "all jobs were processed"
+    assert ResponseSet.exists? @a
+    assert_false ResponseSet.exists? @b
+    assert ResponseSet.exists? @c
 
-  # end
+  end
 
-  # def teardown
-  #   SurveyParsing.destroy_all
-  #   ::Rake::Task.tasks.each { |t| t.reenable }
-  #   ENV['DIR'] = nil
-  #   ENV['FILE'] = nil
-  #   ENV['LIMIT'] = nil
-  # end
+  test "enqueue_surveys" do
+    ENV['DIR'] = 'test/fixtures/surveys'
+
+    assert_difference 'Delayed::Job.count', 2 do
+      assert_difference 'Delayed::Job.where(priority:5).count', 1,  'The default survey is prioritised' do
+        Rake::Task["surveyor:enqueue_surveys"].invoke
+      end
+    end
+
+    assert_difference 'Survey.count', 2, "surveys were generated" do
+      Delayed::Worker.new({exit_on_complete: true}).start
+    end
+
+    assert_equal Delayed::Job.count, 0, "all jobs were processed"
+
+  end
+
+  def teardown
+    SurveyParsing.destroy_all
+    ::Rake::Task.tasks.each { |t| t.reenable }
+    ENV['DIR'] = nil
+    ENV['FILE'] = nil
+    ENV['LIMIT'] = nil
+  end
 
 end
