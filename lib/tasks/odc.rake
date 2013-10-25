@@ -9,6 +9,13 @@ require File.join(Rails.root, 'lib/tasks/overloading_rake_tasks.rb')
 #   survey_parsing.update_attribute :md5, Digest::MD5.hexdigest(File.read(File.join(Dir.pwd, ENV['FILE'])))
 # end
 
+namespace :jobs do
+  override_task :work => :environment do
+    DevEvent.create message: "jobs:work"
+    Rake::Task["jobs:work:original"].invoke
+  end
+end
+
 namespace :surveyor do
   # desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys`)'
   # task :build_changed_surveys => :environment do
