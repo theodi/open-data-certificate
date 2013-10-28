@@ -2,17 +2,18 @@
 class SurveyBuilder < Struct.new(:dir, :basename)
 
   def perform
-    puts "--- Building #{dir}, #{basename}"
+    puts "--- Building #{dir}, #{basename}" unless Rails.env.test?
 
     survey_parsing = SurveyParsing.find_or_create_by_file_name("#{dir}/#{basename}")
     survey_parsing.md5 = Digest::MD5.hexdigest(file_contents)
 
-    if survey_parsing.changed? && survey_parsing.save
-      Surveyor::Parser.parse_file(file)
-      puts " ^---> Built"
-    else
-      puts " ^---> Skipped"
-    end
+    @changed = survey_parsing.changed? && survey_parsing.save
+
+    Surveyor::Parser.parse_file(file) if @changed
+
+    puts " ^---> #{@changed ? 'Built' : 'Skipped'}" unless Rails.env.test?
+
+    @changed
   end
 
   def default_survey?
