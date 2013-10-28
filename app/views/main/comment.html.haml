@@ -1,0 +1,16 @@
+- content_for :header_title do
+  - if @back
+    #{link_to @title, @back} -
+  = t('.discussion')
+
+.discussion_help
+  = markdown @help
+
+%p.join-discussion
+  %a.btn.btn-primary.btn-large
+    = t('.join_the_discussion')
+
+= juvia_comments @topic
+
+%hr
+%p= link_to t(".markdown_help"), markdown_help_path

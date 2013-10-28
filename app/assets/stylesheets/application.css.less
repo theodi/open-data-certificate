@@ -38,7 +38,8 @@
 @odiBlue: #00b7ff;
 /* odiBlueLight - primarily for background of inputs in modals */
 @odiBlueLight: lighten(@odiBlue, 15%);
-@odiBlueLighter: lighten(@odiBlue, 36%);
+@odiBlueLighter: #DFF4FC;
+@odiBlueLightest: lighten(@odiBlue, 44%);
 @odiBlueTint: #e7f7fc;
 @odiBlueDark: darken(@odiBlue, 5%);
 @odiBlueDarker: darken(@odiBlue, 20%);
@@ -2315,7 +2316,7 @@ header .jurisdiction{
       }
     }
 
-    .icon {
+    .icon-variable {
       display: none;
       padding-right: 2px;
       vertical-align: middle;
@@ -2329,7 +2330,7 @@ header .jurisdiction{
       a {
         text-decoration: underline;
 
-        .icon {
+        .icon-variable {
           vertical-align: baseline;
           display: inline;
         }
@@ -2356,7 +2357,7 @@ header .jurisdiction{
 
     &.warning {
       .answer {
-        .icon {
+        .icon-variable {
           display: inline-block;
           &:before { content: @warning-sign; }
           color: @odiOrange;
@@ -2370,7 +2371,7 @@ header .jurisdiction{
 
     &.error {
       .answer {
-        .icon {
+        .icon-variable {
           display: inline-block;
           &:before { content: @exclamation-sign; }
           color: @odiCrimson;
@@ -2945,6 +2946,55 @@ p.data {
   }
 }
 
+
+body{
+  .juvia-comment-count-header{
+    font-size:2em;
+  }
+  .juvia-comment .juvia-metadata{
+    background:@odiBlueLighter;
+  }
+  .juvia-action input{
+    .btn;
+    .btn-primary;
+  }
+  .juvia-add-comment-form{
+    input[type=text], textarea{
+      color:#000;
+
+      &.juvia-example-text{
+        //placeholder
+        color:#8e8c8c
+      }
+    }
+  }
+  .juvia-container blockquote {
+    font-size: 16px;
+    line-height: 1.35em;
+    font-family: @sansFontFamily
+  }
+}
+
+
+.link-comment{
+  font-size:0.8em;
+  color:@odiBlue;
+  span{
+    text-decoration: underline;
+  }
+}
+
+.discussion_help p{
+  .lead;
+}
+
+.join-discussion {
+  margin-bottom:3em;
+  .no-js &{
+    display:none;
+  }
+}
+
 // block only visible to administrators
 .admin-functions {
   .alert();
@@ -2954,3 +3004,48 @@ p.data {
   font-size: 1em;
 }
 
+.js .odc-popover-content{
+  display:none;
+  span{
+    display:block;
+  }
+}
+
+.js .odc-popover{
+  opacity: 0.15;
+  cursor: pointer;
+  .transition(opacity 0.25s)
+}
+.js .odc-popover-active .odc-popover{
+  opacity: 1;
+}
+
+.popover-light{
+  @popoverBackground: @odiBlueLightest;
+  @popoverArrowColor: @odiBlueLightest;
+  @popoverArrowOuterColor: @odiBlueLight;
+  @popoverArrowOuterWidth: 8px;
+  @popoverArrowWidth: 8px;
+
+  // re-apply popover styles
+  .popover;
+  .arrow {
+    border-width: @popoverArrowOuterWidth;
+    &:after {
+      border-width: @popoverArrowWidth;
+    }
+  }
+
+  border-color: @odiBlueLight;
+  padding:0em;
+
+  // color:@odiGrey;
+  font-size:0.6em;
+  line-height: 1.5em;
+
+  width:105px;
+
+  .popover-content{
+    padding:7px 8px;
+  }
+}

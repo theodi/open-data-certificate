@@ -128,6 +128,24 @@ rake surveyor:build_changed_surveys DIR=surveys/development
 bundle exec guard
 ```
 
+#### Environment variables
+
+Some environment variables are required for the certificates site, these can be set in a .env file in the root of the project.
+
+```
+# Rackspace credentials for saving certificate dumps
+RACKSPACE_USERNAME
+RACKSPACE_API_KEY
+RACKSPACE_CERTIFICATE_DUMP_CONTAINER
+
+# Juvia details to allow commenting
+JUVIA_BASE_URL
+CERTIFICATE_JUVIA_SITE_KEY
+
+# Sending error reports to airbrake
+AIRBRAKE_CERTIFICATE_KEY
+```
+
 #### Admin functions
 
 To mark a user as being an admin - the users ID should be included in the `ODC_ADMIN_IDS` environment variable (comma separated).  The easiest way to find the ID is to look on the URL of their account page.

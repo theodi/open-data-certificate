@@ -414,7 +414,35 @@ $(function(){
     if(datum.path){ document.location = datum.path; }
   });
 
-  $(document).on('click', '.dataset .show-more, .dataset .hide-more', function(){
+  // Stop the jump to the top of the page when the delete dialog is confirmed.
+  // placeholder till bluerail/twitter-bootstrap-rails-confirm#9 gets published
+  $(document).on('click', "#confirmation_dialog [href='#']", function(e){
+    e.preventDefault();
+  })
+
+  .on('click', '.dataset .show-more, .dataset .hide-more', function(){
     $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
+  })
+
+  .on('click', '.join-discussion a', function(e){
+    e.preventDefault();
+    var top = $('.juvia-add-comment-form').prev().offset().top;
+    $('body').animate({scrollTop:top})
   });
+
+
+  $('.certificate-data').popover({
+    selector:'.odc-popover',
+    trigger:'click',
+    html:true,
+    content: function(){
+      // pull out the content from the child element (hidden with css)
+      return $('.odc-popover-content', this).html()
+    },
+    template: '<div class="popover popover-light"><div class="arrow"></div>'+
+              '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  })
+  .on('mouseover', '.answer', function(){$(this).toggleClass('odc-popover-active', true)})
+  .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)})
+
 });

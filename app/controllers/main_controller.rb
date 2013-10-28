@@ -6,6 +6,19 @@ class MainController < ApplicationController
     end
   end
 
+  def comment
+    @topic = params[:topic]
+    @title = params[:title] || @topic
+    @back  = params[:back]
+    @help  = I18n.t params[:key], scope: :discussions, default: ''
+  end
+
+  def discussion
+    @topic = 'general'
+    @help  = I18n.t 'general', scope: :discussions, default: ''
+    render 'comment'
+  end
+
   def status
     @job_count = Delayed::Job.count
 
@@ -36,6 +49,10 @@ class MainController < ApplicationController
     respond_to do |format|
       format.json { render json: @response_sets.to_json  }
     end
+  end
+
+  def status_events
+    @events = DevEvent.order('created_at DESC').limit(500).all
   end
 
   # A user pings this url if they have js enabled, so we can tell surveyor

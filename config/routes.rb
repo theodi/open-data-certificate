@@ -71,10 +71,15 @@ OpenDataCertificate::Application.routes.draw do
   get 'about' => 'pages#show', :id => 'about'
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
+  get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
 
   # Validators
   get 'resolve' => 'validators#resolve'
   get 'autofill' => 'validators#autofill'
+
+  # comment pages
+  get 'comment' => 'main#comment', as: :comment
+  get 'discussion' => 'main#discussion', as: :discussion # general/site-wide
 
   get 'has_js' => 'main#has_js'
 
@@ -85,6 +90,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'status.csv' => 'main#status_csv'
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
+  get 'status/events' => 'main#status_events'
 
   root :to => 'main#home'
 
