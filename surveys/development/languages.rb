@@ -2,15 +2,14 @@
 survey "dv1", :full_title => 'Language Test (dv1)', :dataset_title => 'dataTitle', :dataset_curator => 'dataTitle', default_locale_name: 'English' do
   translations :en =>:default, :es => "../translations/languages.es.yml", :he => "../translations/languages.he.yml", :ko => "../translations/languages.ko.yml"
 
-  section_one "One" do
+  section_one "One", display_header: false do
 
     q_dataTitle "What's a good title for this data?"
     a_1 'Data Title', :string
 
-    g_hello "Hello" do
-      q_name "What is your name?"
-      a_name :string, :help_text => "My name is..."
-    end
+    q_name "What is your name?"
+    a_name :string, :help_text => "My name is..."
+  
   end
   section_two "Two" do
     q_color "What is your favorite color?"

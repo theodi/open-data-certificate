@@ -403,7 +403,14 @@ $(function(){
     if(datum.path){ document.location = datum.path; }
   });
 
-  $(document).on('click', '.dataset .show-more, .dataset .hide-more', function(){
+  // Stop the jump to the top of the page when the delete dialog is confirmed.
+  // placeholder till bluerail/twitter-bootstrap-rails-confirm#9 gets published
+  $(document).on('click', "#confirmation_dialog [href='#']", function(e){
+    e.preventDefault();
+  })
+
+  .on('click', '.dataset .show-more, .dataset .hide-more', function(){
     $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
   });
+
 });
