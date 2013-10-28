@@ -19,7 +19,9 @@ class SurveyBuilder < Struct.new(:dir, :basename)
   def default_survey?
     stub = ParseStub.new
     stub.instance_eval(file_contents)
-    stub.name == Survey::DEFAULT_ACCESS_CODE
+    
+    # temporarily build US version first too
+    (stub.name == Survey::DEFAULT_ACCESS_CODE) || (stub.name == 'us')
   end
 
 
