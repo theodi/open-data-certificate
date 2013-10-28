@@ -125,24 +125,6 @@ class OdcRakeTest < ActiveSupport::TestCase
   end
 
 
-  test "purge_questionnaires gets rid of unanswered questionnaires" do
-
-    yesterday =  Time.now - 24.hours
-
-    @a = FactoryGirl.create :response_set, user: nil
-    @b = FactoryGirl.create :response_set, updated_at: yesterday, user: nil
-    @c = FactoryGirl.create :response_set, updated_at: yesterday, user: FactoryGirl.create(:user)
-
-    assert_difference 'ResponseSet.count', -1 do
-      Rake::Task["odc:purge_questionnaires"].invoke
-    end
-
-    assert ResponseSet.exists? @a
-    assert_false ResponseSet.exists? @b
-    assert ResponseSet.exists? @c
-
-  end
-
   test "enqueue_surveys" do
     ENV['DIR'] = 'test/fixtures/surveys'
 
