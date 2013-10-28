@@ -127,24 +127,18 @@ $(function(){
   // - have an 'active' class added
   // - emit 'odc.focus' & 'odc.blur' events (?)
   $surveyElements.on('mouseenter', function(){
-    $(this).addClass('active').trigger('_focus');
-  }).on('mouseleave', function(){
-    $(this).removeClass('active').trigger('_blur');
+    $(this).addClass('active').data('mouseover', true).trigger('_focus');
+  }).on('mouseleave', function(){;
+    $(this).removeClass('active').data('mouseover', false).trigger('_blur');
   });
 
   // trigger the highlighting of fieldsets
   $('#surveyor')
-    .on('mousedown', 'fieldset', function(){
-      $(this).data('keep-active', true);
-    })
-    .on('mouseup', 'fieldset', function(){
-      $(this).data('keep-active', false);
-    })
     .on('focus', 'fieldset', function(){
       $(this).addClass('active').trigger('_focus');
     })
     .on('blur', 'fieldset', function(){
-      if (!$(this).data('keep-active')) {
+      if (!$(this).data('mouseover')) {
         $(this).removeClass('active').trigger('_blur');
       }
     });
@@ -164,19 +158,36 @@ $(function(){
 
 
   // elements that have to be shown along with the fieldsets
-  $('[data-meta-for]').each(function(){
+  $('[data-meta-for]').each(function() {
     var ref_id = $(this).data('meta-for'),
         $el = $(reference_id_els[ref_id]),
+        $row = $(this).closest('.question-row'),
         metas = $el.data('metas') || [];
+
     metas.push(this);
     $el.data('metas', metas);
+
+    if ($el.hasClass('input')) {
+      $row.data('input-metas', $row.data('input-metas') || []);
+      $row.data('input-metas').push(this);
+    }
   });
-  $surveyElements.on('_focus', function(){
+
+  $surveyElements.filter('.question-row').on('_focus', function() {
     $($(this).data('metas')).show();
   }).on('_blur', function(){
     $($(this).data('metas')).hide();
+    $($(this).data('input-metas')).hide();
+    return false;
   });
 
+  $surveyElements.filter('.input').on('_focus', function() {
+    $($(this).closest('.question-row').data('input-metas')).hide();
+    $($(this).data('metas')).show();
+    return false;
+  }).on('_blur', function(){
+    return false;
+  });
 
   // deal with accordion section changes
   $('.survey-section .collapse').on('show', function(){
