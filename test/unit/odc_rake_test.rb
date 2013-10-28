@@ -100,10 +100,6 @@ class OdcRakeTest < ActiveSupport::TestCase
       Rake::Task["surveyor:build_changed_surveys"].invoke
     end
 
-    assert_difference 'Survey.count', 1 do
-      Rake::Task["surveyor:build_changed_surveys"].invoke
-    end
-
     assert_no_difference 'Survey.count' do
       Rake::Task["surveyor:build_changed_surveys"].invoke
     end
