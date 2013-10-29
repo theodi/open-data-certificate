@@ -1,3 +1,6 @@
 class CertificateValidation < ActiveRecord::Base
-  attr_accessible :certificate_id, :user_id, :value
+  belongs_to :user
+  belongs_to :certificate
+
+  attr_accessible :value
 end
