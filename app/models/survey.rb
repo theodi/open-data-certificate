@@ -35,12 +35,12 @@ class Survey < ActiveRecord::Base
 
   end
 
-  def all_survey_versions
-    Survey.where(access_code: access_code)
+  def previous_surveys
+    Survey.where(access_code: access_code).where(Survey.arel_table[:survey_version].lt(survey_version))
   end
 
   def previous_survey
-    @previous_survey ||= Survey.where(access_code: access_code, survey_version: self.survey_version - 1).first
+    @previous_survey ||= Survey.where(access_code: access_code, survey_version: survey_version - 1).first
   end
 
   def status_incremented?
@@ -49,8 +49,8 @@ class Survey < ActiveRecord::Base
 
   def schedule_expiries
     if status_incremented?
-      t = ResponseSet.arel_table
-      ResponseSet.where(t[:survey_id].in(all_survey_versions.map(&:id)))
+      survey_id = ResponseSet.arel_table[:survey_id]
+      ResponseSet.where(survey_id.in(previous_surveys.map(&:id))).where(expires_at: nil)
         .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
     end
   end
