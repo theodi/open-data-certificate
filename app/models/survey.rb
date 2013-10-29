@@ -3,6 +3,8 @@ class Survey < ActiveRecord::Base
 
   serialize :meta_map, Hash
 
+  STATUSES = %w(alpha beta final)
+
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
   # this is access_codes of surveys that we want the user to move from->to
@@ -10,6 +12,8 @@ class Survey < ActiveRecord::Base
 
   # temorary - when we have the jurisdiction choice at the start, this won't be needed
   DEFAULT_ACCESS_CODE = 'gb'
+
+  EXPIRY_NOTICE = 1.month
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
@@ -26,9 +30,29 @@ class Survey < ActiveRecord::Base
     end
 
     def newest_survey_for_access_code(access_code)
-      where(:access_code => access_code).order("surveys.survey_version DESC").first
+      where(access_code: access_code).order("surveys.survey_version DESC").first
     end
 
+  end
+
+  def all_survey_versions
+    Survey.where(access_code: access_code)
+  end
+
+  def previous_survey
+    @previous_survey ||= Survey.where(access_code: access_code, survey_version: self.survey_version - 1).first
+  end
+
+  def status_incremented?
+    previous_survey ? STATUSES.index(status) > STATUSES.index(previous_survey.status) : false
+  end
+
+  def schedule_expiries
+    if status_incremented?
+      t = ResponseSet.arel_table
+      ResponseSet.where(t[:survey_id].in(all_survey_versions.map(&:id)))
+        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+    end
   end
 
   def metadata_fields
