@@ -4,11 +4,13 @@ class CertificateValidation < ActiveRecord::Base
 
   attr_accessible :value
 
-  validates :user, presence: true
-  validates :certificate, presence: true
-  validate :not_same_user
+  validates :user_id,        presence: true, uniqueness: {scope: :certificate_id}
+  validates :certificate_id, presence: true
+  validate  :not_same_user
 
   def not_same_user
-    errors.add(:user_id, "cannot self validate") if self.user == certificate.try(:user)
+    if self.user == certificate.try(:user)
+      errors.add(:user_id, "cannot self validate")
+    end
   end
 end

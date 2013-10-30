@@ -19,4 +19,13 @@ class CertificateValidationTest < ActiveSupport::TestCase
     assert !cv.save
   end
 
+  test "a certificate can't be validated multiple times by the same user" do
+    cv = FactoryGirl.create :certificate_validation
+
+    cv2 = FactoryGirl.build :certificate_validation, 
+                             user: cv.user, certificate: cv.certificate
+    assert !cv2.save
+
+  end
+
 end
