@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131029141150) do
     t.string   "attained_level"
     t.string   "curator"
     t.boolean  "published",       :default => false
+    t.datetime "expires_at"
   end
 
   create_table "datasets", :force => true do |t|
@@ -208,7 +209,6 @@ ActiveRecord::Schema.define(:version => 20131029141150) do
     t.string   "aasm_state",     :default => "draft"
     t.integer  "attained_index"
     t.string   "locale"
-    t.datetime "expires_at"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
