@@ -4,6 +4,7 @@ class Certificate < ActiveRecord::Base
   has_one :survey,  through: :response_set
   has_one :user,    through: :response_set
   has_one :dataset, through: :response_set
+  has_many :certificate_validations
 
   attr_accessible :published, :name, :attained_level, :curator
 
@@ -73,6 +74,10 @@ class Certificate < ActiveRecord::Base
       }
     end
 
+  end
+
+  def verified_by_user? user
+    certificate_validations.exists? user_id: user.id
   end
 
   def badge_file

@@ -41,4 +41,12 @@ class CertificateTest < ActiveSupport::TestCase
   test 'search country matches multiple terms' do
     assert_equal [@certificate1], Certificate.search_country('United Kingdom')
   end
+
+  test 'verified by user' do
+    cv = FactoryGirl.create(:certificate_validation)
+    user2 = FactoryGirl.create(:user)
+
+    assert cv.certificate.verified_by_user? cv.user
+    refute cv.certificate.verified_by_user? user2
+  end
 end
