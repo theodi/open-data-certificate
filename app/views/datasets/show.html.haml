@@ -16,3 +16,6 @@
 
 %hr.heavy
 = render partial: 'dataset_min', object: @dataset, locals: {expanded: true}
+
+- content_for :rss_feed do
+  = dataset_path(@dataset, format: 'feed')
