@@ -34,9 +34,22 @@
         = t("levels.#{@certificate.attained_level}.description")
 
 
+  -if user_signed_in?
+    .well
+      %h4 community certification
+      -if @certificate.verified_by_user? current_user
+        %p
+          You've marked this as accurate!
+          =link_to 'undo', verify_dataset_certificate_path(undo: true), method: 'post'
+      -else
+        %p
+          Mark this as accurate
+          =link_to 'verify', verify_dataset_certificate_path, method: 'post'
+
+
+
   - if minimal # don't show the summary
     =render @certificate.response_set
-
   - else
     .row
       .span3
