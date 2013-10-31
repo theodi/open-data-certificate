@@ -38,6 +38,7 @@ end
 group :development do
   gem 'guard', '~> 1.8.3'
   gem 'guard-test'
+  gem 'spring', github: 'jonleighton/spring'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
