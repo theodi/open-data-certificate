@@ -2,7 +2,7 @@ class CertificateValidation < ActiveRecord::Base
   belongs_to :user
   belongs_to :certificate
 
-  attr_accessible :value
+  attr_accessible :value, :user_id
 
   validates :user_id,        presence: true, uniqueness: {scope: :certificate_id}
   validates :certificate_id, presence: true
