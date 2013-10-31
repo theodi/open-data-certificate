@@ -7,6 +7,8 @@ class Certificate < ActiveRecord::Base
 
   attr_accessible :published, :name, :attained_level, :curator
 
+  EXPIRY_NOTICE = 1.month
+
   class << self
     def search_title(title)
       query = self.where({})
@@ -73,6 +75,12 @@ class Certificate < ActiveRecord::Base
       }
     end
 
+    def set_expired(surveys)
+      self.joins(:response_set)
+        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
+        .where(expires_at: nil)
+        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+    end
   end
 
   def expiring?

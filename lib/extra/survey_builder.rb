@@ -9,7 +9,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
 
     @changed = survey_parsing.changed? && survey_parsing.save
 
-    parse_file(file).schedule_expiries if @changed
+    parse_file(file).set_expired_certificates if @changed
 
     puts " ^---> #{@changed ? 'Built' : 'Skipped'}" unless Rails.env.test?
 

@@ -13,8 +13,6 @@ class Survey < ActiveRecord::Base
   # temorary - when we have the jurisdiction choice at the start, this won't be needed
   DEFAULT_ACCESS_CODE = 'gb'
 
-  EXPIRY_NOTICE = 1.month
-
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
 
@@ -47,11 +45,9 @@ class Survey < ActiveRecord::Base
     previous_survey ? STATUSES.index(status) > STATUSES.index(previous_survey.status) : false
   end
 
-  def schedule_expiries
+  def set_expired_certificates
     if status_incremented?
-      survey_id = ResponseSet.arel_table[:survey_id]
-      ResponseSet.where(survey_id.in(previous_surveys.map(&:id))).where(expires_at: nil)
-        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+      Certificate.set_expired(previous_surveys)
     end
   end
 
