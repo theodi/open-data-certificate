@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024143408) do
+ActiveRecord::Schema.define(:version => 20131031124226) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131024143408) do
     t.string   "attained_level"
     t.string   "curator"
     t.boolean  "published",       :default => false
+    t.datetime "expires_at"
   end
 
   create_table "datasets", :force => true do |t|

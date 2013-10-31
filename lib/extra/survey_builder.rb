@@ -9,7 +9,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
 
     @changed = survey_parsing.changed? && survey_parsing.save
 
-    Surveyor::Parser.parse_file(file) if @changed
+    parse_file(file).set_expired_certificates if @changed
 
     puts " ^---> #{@changed ? 'Built' : 'Skipped'}" unless Rails.env.test?
 
@@ -22,6 +22,17 @@ class SurveyBuilder < Struct.new(:dir, :basename)
     stub.name == Survey::DEFAULT_ACCESS_CODE
   end
 
+  # Parse code taken from surveyor to allow the survey object to be returned
+  def parse_file(filename, options={})
+    str = File.read(filename)
+    Surveyor::Parser.ensure_attrs
+    Surveyor::Parser.options = {filename: filename}.merge(options)
+    Surveyor::Parser.log[:source] = str
+    Surveyor::Parser.rake_trace "\n"
+    survey = Surveyor::Parser.new.parse(str)
+    Surveyor::Parser.rake_trace "\n"
+    survey
+  end
 
   # tracking events for debugging
 

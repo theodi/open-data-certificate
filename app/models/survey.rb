@@ -3,6 +3,8 @@ class Survey < ActiveRecord::Base
 
   serialize :meta_map, Hash
 
+  STATUSES = %w(alpha beta final)
+
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
   # this is access_codes of surveys that we want the user to move from->to
@@ -26,9 +28,27 @@ class Survey < ActiveRecord::Base
     end
 
     def newest_survey_for_access_code(access_code)
-      where(:access_code => access_code).order("surveys.survey_version DESC").first
+      where(access_code: access_code).order("surveys.survey_version DESC").first
     end
 
+  end
+
+  def previous_surveys
+    Survey.where(access_code: access_code).where(Survey.arel_table[:survey_version].lt(survey_version))
+  end
+
+  def previous_survey
+    @previous_survey ||= Survey.where(access_code: access_code, survey_version: survey_version - 1).first
+  end
+
+  def status_incremented?
+    previous_survey ? STATUSES.index(status) > STATUSES.index(previous_survey.status) : false
+  end
+
+  def set_expired_certificates
+    if status_incremented?
+      Certificate.set_expired(previous_surveys)
+    end
   end
 
   def metadata_fields

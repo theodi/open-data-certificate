@@ -14,14 +14,15 @@
 /log/*.log
 /tmp
 
-# Ignore local VM properties. 
+# Ignore local VM properties.
 /.vagrant
 
 # Ignore code-coverage results.
 /coverage
 
 
-/.DS_Store
+.DS_Store
+
 prototype/odc_questionnaire.xml
 
 prototype/surveyor-result.html
@@ -34,11 +35,6 @@ prototype/open-data-certificate.xpr
 
 /prototype/badge/
 
-app/.DS_Store
-
-app/assets/.DS_Store
-
-app/assets/images/.DS_Store
 
 # RubyMine cruft
 
