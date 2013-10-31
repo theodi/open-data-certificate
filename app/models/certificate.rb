@@ -84,11 +84,11 @@ class Certificate < ActiveRecord::Base
   end
 
   def expiring?
-    response_set.expires_at != nil
+    expires_at != nil
   end
 
   def expired?
-    expiring? && response_set.expires_at < DateTime.now
+    expiring? && expires_at < DateTime.now
   end
 
   def badge_file
