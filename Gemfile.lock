@@ -107,7 +107,7 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
-    ffi (1.9.2)
+    ffi (1.9.3)
     fog (1.17.0)
       builder
       excon (~> 0.27.0)
