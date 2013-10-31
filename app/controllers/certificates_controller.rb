@@ -100,9 +100,9 @@ class CertificatesController < ApplicationController
 
     if user_signed_in?
       if params[:undo]
-        @certificate.certificate_validations.where(user_id: current_user.id).first.try(:destroy)
+        @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
       else
-        @certificate.certificate_validations.create user_id: current_user.id
+        @certificate.verifications.create user_id: current_user.id
       end
     end
 

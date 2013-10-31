@@ -1,6 +1,6 @@
 FactoryGirl.define do
   
-  factory :certificate_validation do
+  factory :verification do
     user
     certificate
   end

@@ -43,7 +43,7 @@ class CertificateTest < ActiveSupport::TestCase
   end
 
   test 'verified by user' do
-    cv = FactoryGirl.create(:certificate_validation)
+    cv = FactoryGirl.create(:verification)
     user2 = FactoryGirl.create(:user)
 
     assert cv.certificate.verified_by_user? cv.user

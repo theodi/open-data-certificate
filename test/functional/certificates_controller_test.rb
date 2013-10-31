@@ -41,7 +41,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    assert_difference ->{cert.certificate_validations.count}, 1 do
+    assert_difference ->{cert.verifications.count}, 1 do
       post :verify, {dataset_id: cert.dataset.id, id: cert.id}
     end
   end
@@ -50,7 +50,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:certificate_with_dataset)
     user = FactoryGirl.create(:user)
 
-    assert_no_difference ->{cert.certificate_validations.count} do
+    assert_no_difference ->{cert.verifications.count} do
       post :verify, {dataset_id: cert.dataset.id, id: cert.id}
     end
 
@@ -59,11 +59,11 @@ class CertificatesControllerTest < ActionController::TestCase
   end
 
   test "undo validation" do
-    cv = FactoryGirl.create :certificate_validation
+    cv = FactoryGirl.create :verification
     cert = cv.certificate
     sign_in cv.user
 
-    assert_difference ->{cert.certificate_validations.count}, -1 do
+    assert_difference ->{cert.verifications.count}, -1 do
       post :verify, {dataset_id: cert.dataset.id, id: cert.id, undo: true}
     end
   end

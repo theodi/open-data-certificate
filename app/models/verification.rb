@@ -1,4 +1,4 @@
-class CertificateValidation < ActiveRecord::Base
+class Verification < ActiveRecord::Base
   belongs_to :user
   belongs_to :certificate
 
