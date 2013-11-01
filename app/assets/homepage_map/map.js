@@ -106,10 +106,12 @@ $(function(){
       };
 
       dropdown
-        .on('change', function(d){
-          setJurisdiction(this.options[this.selectedIndex].__data__);
+        .on('focus', function(){
           autoadvance = false;
           $autoadvance.fadeIn();
+        })
+        .on('change', function(d){
+          setJurisdiction(this.options[this.selectedIndex].__data__);
         })
         .selectAll('option')
         .data(countries).enter().append("option")
