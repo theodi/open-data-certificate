@@ -323,10 +323,10 @@ $(document).ready(function(){
           }
           // Otherwise remove all state if the field is empty
           else if (empty($field.val())) {
-            changeState($row, '');
+            changeState($row, 'no-response');
           }
 
-          updateExplanation($row);
+          updateExplanation($row, empty($field.val()));
         };
 
         actions[name]($row, $field, callback);
@@ -398,10 +398,10 @@ $(document).ready(function(){
     $row.find('.status-message span').text($surveyor.data(message));
   }
 
-  function updateExplanation($row) {
+  function updateExplanation($row, fieldEmpty) {
     var explanationEmpty = empty($row.find('.autocomplete-override textarea').val());
 
-    var message = null;
+    var message = '';
     if ($row.data('url-verified') === false) {
       message = $surveyor.data('url-explanation');
     }
@@ -410,9 +410,10 @@ $(document).ready(function(){
     }
 
     var override = $row.find('.autocomplete-override');
-    override.slide(message).find('p').text(message);
+    if (message) override.find('p').text(message);
+    override.slide(message);
 
-    if (!$row.data('metadata-missing')) {
+    if (!$row.data('metadata-missing') && !fieldEmpty) {
       changeState($row, message && explanationEmpty ? 'warning' : 'ok');
     }
   }
