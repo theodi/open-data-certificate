@@ -8,6 +8,8 @@ class Certificate < ActiveRecord::Base
 
   attr_accessible :published, :name, :attained_level, :curator
 
+  EXPIRY_NOTICE = 1.month
+
   class << self
     def search_title(title)
       query = self.where({})
@@ -57,7 +59,7 @@ class Certificate < ActiveRecord::Base
     def latest
       where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
-    
+
     def counts
       within_last_month = (Time.now - 1.month)..Time.now
       {
@@ -69,11 +71,25 @@ class Certificate < ActiveRecord::Base
           :basic              => self.where(published: true, attained_level: "basic").count,
           :pilot              => self.where(published: true, attained_level: "pilot").count,
           :standard           => self.where(published: true, attained_level: "standard").count,
-          :expert             => self.where(published: true, attained_level: "expert").count 
+          :expert             => self.where(published: true, attained_level: "expert").count
         }
       }
     end
 
+    def set_expired(surveys)
+      self.joins(:response_set)
+        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
+        .where(expires_at: nil)
+        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+    end
+  end
+
+  def expiring?
+    expires_at != nil
+  end
+
+  def expired?
+    expiring? && expires_at < DateTime.now
   end
 
   def verified_by_user? user
@@ -91,7 +107,7 @@ class Certificate < ActiveRecord::Base
   def embed_url
     "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
   end
-  
+
   def attained_level_title
     "#{self.attained_level.titleize} Level Certificate"
   end
@@ -114,7 +130,7 @@ class Certificate < ActiveRecord::Base
 
     end
   end
-  
+
   def get_responses
     responses = []
 

@@ -950,6 +950,27 @@ header {
     min-height: 60px;
   }
 
+  &.notice {
+    text-align: center;
+
+    h1 {
+      text-transform: uppercase;
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-bottom: 18px;
+    }
+
+    &.notice-error {
+      background-color: @odiCrimson;
+    }
+
+    &.notice-warning {
+      background-color: @odiOrange;
+    }
+  }
+
   h1,h2,h3,h4,h5,h6{
     font-weight:normal;
   }
