@@ -231,7 +231,7 @@ $(document).ready(function(){
               affectedFields.push(fillField(field, json.data[field]));
             }
           }
-          callback(true, {fields: toJquery(affectedFields)});
+          callback(json.status == 200, {fields: toJquery(affectedFields)});
         })
         .error(function() { callback(false); });
     },
@@ -240,7 +240,8 @@ $(document).ready(function(){
       if (empty(url)) return callback(true);
       if (!validateUrl(url)) return callback(false);
 
-      $.getJSON('/resolve', { url: url } ).done(function(json) {
+      var id = $surveyor.data('response-id');
+      $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
         callback(json.status == 200);
       });
     },
