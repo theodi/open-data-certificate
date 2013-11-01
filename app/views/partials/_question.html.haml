@@ -43,7 +43,8 @@
 
     - data = {}
     - data['reference-identifier'] = rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier
-    - data['autocompleted-value'] = r.auto_value.kind_of?(Array) ? r.auto_value.try(:join, ',') : r.auto_value if r.auto_value
+    - data['autocompletable'] = r.autocompletable?
+    - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"

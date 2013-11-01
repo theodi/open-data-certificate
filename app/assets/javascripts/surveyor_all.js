@@ -98,7 +98,7 @@ $(document).ready(function(){
   // we don't use the input mask anymore because of problems with
   // IE, if it ever does get used, notify us through airbrake.
   $("input[data-input-mask]").each(function(i,e){
-    var message = "input mask not supported on certificates"; 
+    var message = "input mask not supported on certificates";
     if(window.Airbrake){
       window.Airbrake.notify({
         message: message,
@@ -203,7 +203,7 @@ $(document).ready(function(){
   var validations = {
     documentationUrl: function($row) { return $row.data('reference-identifier') == 'documentationUrl'; },
     url: function($row, $field) { return $field.attr('type') == 'url'; },
-    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompleted-value') !== undefined; },
+    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompletable'); },
     other: function() { return true; }
   };
 
@@ -317,7 +317,7 @@ $(document).ready(function(){
           }
 
           // If the field can be autocompleted
-          if (checkAutocompletable($row)) {
+          if ($row.data('autocompletable')) {
             markAutocompleted($row, checkAutocompleted($row));
           }
           // Otherwise remove all state if the field is empty
@@ -351,12 +351,8 @@ $(document).ready(function(){
     return $question + '_' + $answer;
   }
 
-  function checkAutocompletable($row) {
-    return $row.data('autocompleted-value') !== undefined;
-  }
-
   function checkAutocompleted($row) {
-    if (!checkAutocompletable($row)) return false;
+    if (!$row.data('autocompletable')) return false;
 
     var autoValue = $row.data('autocompleted-value').toString();
 
@@ -389,7 +385,7 @@ $(document).ready(function(){
   }
 
   function markAutocompleted($row, autocompleted) {
-    if (!checkAutocompletable($row)) return;
+    if (!$row.data('autocompletable')) return;
 
     $row.find('input[id$="_autocompleted"]').val(autocompleted);
     $row.toggleClass('autocompleted', autocompleted);
@@ -450,6 +446,7 @@ $(document).ready(function(){
   function fillField(question, answer) {
     var $row = $('fieldset[data-reference-identifier="'+ question +'"]');
     $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
+    $row.data('autocompletable', true);
     var $input = $row.find('li.input');
 
     if ($input.hasClass('string')) {
