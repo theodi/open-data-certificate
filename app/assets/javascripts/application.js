@@ -430,11 +430,14 @@ $(function(){
     $('body').animate({scrollTop:top})
   });
 
-
-  $('.certificate-data').popover({
+  
+  $('.certificate-data,.certificate-summary').popover({
     selector:'.odc-popover',
     trigger:'click',
     html:true,
+    placement:function(){
+      return this.$element.data('placement') || 'right';
+    },
     content: function(){
       // pull out the content from the child element (hidden with css)
       return $('.odc-popover-content', this).html()
