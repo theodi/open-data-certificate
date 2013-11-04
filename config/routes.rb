@@ -80,6 +80,7 @@ OpenDataCertificate::Application.routes.draw do
   # comment pages
   get 'comment' => 'main#comment', as: :comment
   get 'discussion' => 'main#discussion', as: :discussion # general/site-wide
+  match 'juvia_proxy/*path' => 'main#juvia_proxy'
 
   get 'has_js' => 'main#has_js'
 
