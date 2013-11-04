@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20131031142907) do
     t.string   "attained_level"
     t.string   "curator"
     t.boolean  "published",       :default => false
+    t.datetime "expires_at"
   end
 
   create_table "datasets", :force => true do |t|

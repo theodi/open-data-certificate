@@ -15,6 +15,7 @@ OpenDataCertificate::Application.routes.draw do
     resources :response_sets, :only => :destroy do
       post :publish, on: :member
       post :autofill, on: :member
+      post :resolve, on: :member
     end
 
   end
@@ -73,10 +74,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
   get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
-
-  # Validators
-  get 'resolve' => 'validators#resolve'
-  get 'autofill' => 'validators#autofill'
 
   # comment pages
   get 'comment' => 'main#comment', as: :comment

@@ -1,8 +1,19 @@
 - minimal = params[:action] === 'embed'
 
+- if @certificate.expired? || @certificate.expiring?
+  - content_for :header do
+    %header.notice{class: @certificate.expired? ? 'notice-error' : 'notice-warning'}
+      .container
+        %h1
+          %i.icon.icon-warning-sign
+          - if @certificate.expired?
+            Expired
+          - else
+            Warning
+        %p= "This certificate should be updated to reflect the #{@certificate.response_set.survey.try(:status)} questionnaire for #{@certificate.response_set.jurisdiction}."
+
 - scope_locale @certificate.response_set.locale do
   .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
-
     - unless minimal
       %ul.pull-right.unstyled
         - if @certificate.response_set.published?

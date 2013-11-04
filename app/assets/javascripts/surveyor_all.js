@@ -98,7 +98,7 @@ $(document).ready(function(){
   // we don't use the input mask anymore because of problems with
   // IE, if it ever does get used, notify us through airbrake.
   $("input[data-input-mask]").each(function(i,e){
-    var message = "input mask not supported on certificates"; 
+    var message = "input mask not supported on certificates";
     if(window.Airbrake){
       window.Airbrake.notify({
         message: message,
@@ -203,7 +203,7 @@ $(document).ready(function(){
   var validations = {
     documentationUrl: function($row) { return $row.data('reference-identifier') == 'documentationUrl'; },
     url: function($row, $field) { return $field.attr('type') == 'url'; },
-    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompleted-value') !== undefined; },
+    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompletable'); },
     other: function() { return true; }
   };
 
@@ -231,7 +231,7 @@ $(document).ready(function(){
               affectedFields.push(fillField(field, json.data[field]));
             }
           }
-          callback(true, {fields: toJquery(affectedFields)});
+          callback(json.status == 200, {fields: toJquery(affectedFields)});
         })
         .error(function() { callback(false); });
     },
@@ -240,7 +240,8 @@ $(document).ready(function(){
       if (empty(url)) return callback(true);
       if (!validateUrl(url)) return callback(false);
 
-      $.getJSON('/resolve', { url: url } ).done(function(json) {
+      var id = $surveyor.data('response-id');
+      $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
         callback(json.status == 200);
       });
     },
@@ -317,15 +318,15 @@ $(document).ready(function(){
           }
 
           // If the field can be autocompleted
-          if (checkAutocompletable($row)) {
+          if ($row.data('autocompletable')) {
             markAutocompleted($row, checkAutocompleted($row));
           }
           // Otherwise remove all state if the field is empty
           else if (empty($field.val())) {
-            changeState($row, '');
+            changeState($row, 'no-response');
           }
 
-          updateExplanation($row);
+          updateExplanation($row, empty($field.val()));
         };
 
         actions[name]($row, $field, callback);
@@ -351,12 +352,8 @@ $(document).ready(function(){
     return $question + '_' + $answer;
   }
 
-  function checkAutocompletable($row) {
-    return $row.data('autocompleted-value') !== undefined;
-  }
-
   function checkAutocompleted($row) {
-    if (!checkAutocompletable($row)) return false;
+    if (!$row.data('autocompletable')) return false;
 
     var autoValue = $row.data('autocompleted-value').toString();
 
@@ -389,7 +386,7 @@ $(document).ready(function(){
   }
 
   function markAutocompleted($row, autocompleted) {
-    if (!checkAutocompletable($row)) return;
+    if (!$row.data('autocompletable')) return;
 
     $row.find('input[id$="_autocompleted"]').val(autocompleted);
     $row.toggleClass('autocompleted', autocompleted);
@@ -401,10 +398,10 @@ $(document).ready(function(){
     $row.find('.status-message span').text($surveyor.data(message));
   }
 
-  function updateExplanation($row) {
+  function updateExplanation($row, fieldEmpty) {
     var explanationEmpty = empty($row.find('.autocomplete-override textarea').val());
 
-    var message = null;
+    var message = '';
     if ($row.data('url-verified') === false) {
       message = $surveyor.data('url-explanation');
     }
@@ -413,9 +410,10 @@ $(document).ready(function(){
     }
 
     var override = $row.find('.autocomplete-override');
-    override.slide(message).find('p').text(message);
+    if (message) override.find('p').text(message);
+    override.slide(message);
 
-    if (!$row.data('metadata-missing')) {
+    if (!$row.data('metadata-missing') && !fieldEmpty) {
       changeState($row, message && explanationEmpty ? 'warning' : 'ok');
     }
   }
@@ -450,6 +448,7 @@ $(document).ready(function(){
   function fillField(question, answer) {
     var $row = $('fieldset[data-reference-identifier="'+ question +'"]');
     $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
+    $row.data('autocompletable', true);
     var $input = $row.find('li.input');
 
     if ($input.hasClass('string')) {
