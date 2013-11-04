@@ -83,5 +83,10 @@
               %li
                 = link_to t('footmenu.get_in_touch'), '/contact'
 
+          %p.rss.pull-right
+            - if content_for? :rss_feed
+              %i.icon.icon-rss-sign
+              %a{href: yield(:rss_feed)} Subscribe to the RSS feed
+
     = analytics_init if Rails.env.production?
     = yield(:foot_scripts)
