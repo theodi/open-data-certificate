@@ -7,7 +7,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
 
     @changed = survey_parsing.changed? && survey_parsing.save
 
-    record_event "SurveyBuilder: #{dir}/#{basename} - #{@changed ? 'building' : 'skipping'}"
+    record_event "SurveyBuilder: #{dir}/#{basename} - #{@changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
 
     parse_file(file).set_expired_certificates if @changed
 
@@ -18,7 +18,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
     stub = ParseStub.new
     stub.instance_eval(file_contents)
     return 1 if stub.name == Survey::DEFAULT_ACCESS_CODE
-    return 2 if stub.args[0][:status] == :beta
+    return 2 if stub.args[0][:status].to_s == 'beta'
     return 3
   end
 
