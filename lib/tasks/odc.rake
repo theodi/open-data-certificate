@@ -50,8 +50,8 @@ namespace :surveyor do
     files.each do |file|
       builder = SurveyBuilder.new(dir, file)
 
-      # default survey is a higher priority
-      priority =  builder.default_survey? ? 5 : 10
+      # build is prioritised by being default survey or beta status
+      priority =  builder.build_priority
 
       Delayed::Job.enqueue builder, priority: priority
     end
