@@ -14,6 +14,15 @@ class User < ActiveRecord::Base
     [first_name, last_name].delete_if(&:blank?).join(' ')
   end
 
+  # name isn't mandatory on signup, so fall back to email
+  def identifier
+    unless full_name.blank?
+      full_name
+    else
+      email
+    end
+  end
+
   def admin?
     (ENV['ODC_ADMIN_IDS'] || '').split(',').include? id.to_s
   end

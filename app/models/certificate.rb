@@ -5,6 +5,7 @@ class Certificate < ActiveRecord::Base
   has_one :user,    through: :response_set
   has_one :dataset, through: :response_set
   has_many :verifications
+  has_many :verifying_users, through: :verifications, source: :user
 
   attr_accessible :published, :name, :attained_level, :curator
 
