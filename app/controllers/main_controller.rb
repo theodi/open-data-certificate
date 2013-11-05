@@ -67,7 +67,7 @@ class MainController < ApplicationController
   end
 
   def status_events
-    @events = DevEvent.order('created_at DESC').limit(500).all
+    @events = DevEvent.order('created_at DESC').page(params[:page]).per(100)
   end
 
   # A user pings this url if they have js enabled, so we can tell surveyor
