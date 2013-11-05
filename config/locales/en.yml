@@ -169,6 +169,16 @@ en:
       search_label: Search certificates
       submit_search: Go
 
+    community_verification_panel:
+      title: Community Verification
+      description: Members of the community can verify whether the answers on this certificate are accurate.
+      status: This certificate is **self certified**
+      verify_certificate: Verify Certificate
+      verified: verified
+      undo: undo
+      certifiers: "This certificate has been verified by **%{count}**:"
+      person: person
+
   certificate:
     on_date: "on %{date}"
     self_certified: self certified

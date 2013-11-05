@@ -33,19 +33,6 @@
         = t("levels.#{@certificate.attained_level}.title_with_level")
         %small
           = t("certificate.self_certified")
-          -if user_signed_in?
-            - verified = @certificate.verified_by_user? current_user
-            %span.badge.odc-popover
-              %i.icon{class: verified ? 'icon-ok' : 'icon-question'}
-              %span.odc-popover-content
-                %strong Is this data accurate?
-                %br
-                -if verified
-                  You've verified this certificate
-                  =link_to 'unverify', verify_dataset_certificate_path(undo: true), method: 'post'
-                -else
-                  =link_to 'Verify it', verify_dataset_certificate_path, method: 'post'
-                  to gain Community Certified status
         %span.jurisdiction
           %span.badge= @certificate.response_set.jurisdiction
           %span.status= @certificate.response_set.survey.try(:status)
@@ -68,6 +55,9 @@
             =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
           -else
             =render 'shared/response_set_summary', response_set: @certificate.response_set
+        
+        -if user_signed_in?
+          = render 'community_verification_panel'
 
       .span9
         =render @certificate.response_set
