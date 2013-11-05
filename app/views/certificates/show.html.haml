@@ -31,7 +31,21 @@
     .certificate-summary
       %p.certificate-level
         = t("levels.#{@certificate.attained_level}.title_with_level")
-        %small= t("certificate.self_certified")
+        %small
+          = t("certificate.self_certified")
+          -if user_signed_in?
+            - verified = @certificate.verified_by_user? current_user
+            %span.badge.odc-popover
+              %i.icon{class: verified ? 'icon-ok' : 'icon-question'}
+              %span.odc-popover-content
+                %strong Is this data accurate?
+                %br
+                -if verified
+                  You've verified this certificate
+                  =link_to 'unverify', verify_dataset_certificate_path(undo: true), method: 'post'
+                -else
+                  =link_to 'Verify it', verify_dataset_certificate_path, method: 'post'
+                  to gain Community Certified status
         %span.jurisdiction
           %span.badge= @certificate.response_set.jurisdiction
           %span.status= @certificate.response_set.survey.try(:status)
@@ -43,21 +57,6 @@
         = t("certificate.on_date", date: @certificate.created_at.strftime("%d %B %Y"))
         = t("certificate.which_means")
         = t("levels.#{@certificate.attained_level}.description")
-
-
-  -if user_signed_in?
-    .well
-      %h4 community certification
-      -if @certificate.verified_by_user? current_user
-        %p
-          You've marked this as accurate!
-          =link_to 'undo', verify_dataset_certificate_path(undo: true), method: 'post'
-      -else
-        %p
-          Mark this as accurate
-          =link_to 'verify', verify_dataset_certificate_path, method: 'post'
-
-
 
   - if minimal # don't show the summary
     =render @certificate.response_set
