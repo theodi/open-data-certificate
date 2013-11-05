@@ -54,9 +54,9 @@ namespace :surveyor do
       priority =  builder.default_survey? ? 5 : 10
 
       Delayed::Job.enqueue builder, priority: priority
-
-      DevEvent.create message: "surveyor:enqueued #{file}"
     end
+
+    DevEvent.create message: "surveyor:enqueued #{files.join(', ')}"
   end
 
 end
