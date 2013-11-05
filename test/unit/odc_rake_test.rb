@@ -41,6 +41,16 @@ class OdcRakeTest < ActiveSupport::TestCase
     ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
 
     assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor"].reenable
+      Rake::Task["surveyor"].invoke
+    end
+  end
+
+  test "The US survey parses correctly" do
+    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.US.rb'
+
+    assert_difference 'Survey.count', 1 do
+      Rake::Task["surveyor"].reenable
       Rake::Task["surveyor"].invoke
     end
   end
