@@ -19,6 +19,21 @@ class MainController < ApplicationController
     render 'comment'
   end
 
+  def juvia_proxy
+    path = request.fullpath.gsub(/^\/juvia_proxy/,"")
+    juvia_base = ENV['JUVIA_BASE_URL'] # 'http://juvia.theodi.org'
+    url = "#{juvia_base}#{path}"
+
+    response = request.method == 'POST' ?
+      HTTParty.post(url, body: request.request_parameters) :
+      HTTParty.get(url)
+
+    # alter the response to re-request back to the proxy
+    body = response.body.gsub juvia_base, '/juvia_proxy'
+
+    render text: body
+  end
+
   def status
     @job_count = Delayed::Job.count
 
@@ -52,7 +67,7 @@ class MainController < ApplicationController
   end
 
   def status_events
-    @events = DevEvent.order('created_at DESC').limit(500).all
+    @events = DevEvent.order('created_at DESC').page(params[:page]).per(100)
   end
 
   # A user pings this url if they have js enabled, so we can tell surveyor

@@ -14,3 +14,6 @@
 
 - else
   %p= t('certificates.no_certificates_found')
+
+- content_for :rss_feed do
+  = datasets_path(format: 'feed')

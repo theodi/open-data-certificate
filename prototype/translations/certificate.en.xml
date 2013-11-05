@@ -69,16 +69,26 @@
 		<group id="findability">
 			<label>Findability</label>
 			<help>how you help people find your data</help>
-			<question id="linkedTo" display="The data is reachable">
-				<label>Can people find your data within three clicks of the home page?</label>
-				<yesno yes="within three clicks of the home page" />
-				<help>If documentation is reachable via links from the home page of the site it's published on, people can find it quickly without searching. You should make it more accessible on your website if they can't.</help>
-				<requirement level="standard">You should <strong>ensure that people can easily find your data</strong> from the home page of the site it's published on.</requirement>
+			<question id="onWebsite">
+				<label>Is there a link to your data from your main website?</label>
+				<yesno/>
+				<help>Data can be found more easily if it is linked to from your main website.</help>
+				<requirement level="standard">You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily.</requirement>
 			</question>
+			<if test="this.onWebsite() === 'true'">
+				<repeat id="webPages">
+					<label>Web Page</label>
+					<question id="webpage" display="The website links to the data from">
+						<label>Which page on your website links to the data?</label>
+						<input type="url" required="required" placeholder="Web page URL"/>
+						<help>Give a URL on your main website that includes a link to this data.</help>
+					</question>
+				</repeat>
+			</if>
 			<question id="listed">
 				<label>Is your data listed within a collection?</label>
 				<yesno/>
-				<help>Data is easier for people to find when it's in relevant data catalogs like academic, public or health for example, or when it turns up in relevant search results.</help>
+				<help>Data is easier for people to find when it's in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.</help>
 				<requirement level="standard">You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
@@ -283,27 +293,24 @@
 		<group id="guarantees">
 			<label>Guarantees</label>
 			<help>how much people can depend on your data’s availability</help>
+			<question id="backups" display="The data is">
+				<label>Do you take offsite backups?</label>
+				<yesno yes="backed up offsite" />
+				<help>Taking a regular offsite backup helps ensure that the data won't be lost in the case of accident.</help>
+				<requirement level="standard">You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens.</requirement>
+			</question>
 			<if test="this.releaseType() === 'service'">
-				<question id="serviceAvailability" display="The service that hosts this data is">
-					<label>What is the availability of your data?</label>
-					<radioset>
-						<option value="minimal" display="">
-							<label>you don't monitor its availability</label>
-						</option>
-						<option value="atleast99" display="available 99% of the time">
-							<label>there has been less than 4 days downtime in the past year (or equivalent)</label>
-							<requirement level="pilot">You should <strong>ensure your data does not have more than 4 days downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-						<option value="atleast99.5" display="available 99.5% of the time">
-							<label>there has been less than 2 days downtime in the past year (or equivalent)</label>
-							<requirement level="standard">You should <strong>ensure your data does not have more than 2 days downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-						<option value="atleast99.9" display="available 99.9% of the time">
-							<label>there has been less than 9 hours downtime in the past year (or equivalent)</label>
-							<requirement level="exemplar">You should <strong>ensure your data does not have more than 9 hours downtime/year</strong> so that people can rely on access to your data.</requirement>
-						</option>
-					</radioset>
-					<help>Most server hosting providers have a service-level agreement (SLA) between you and them. This should guarantee uptime for the servers and determine the availability of your data.</help>
+				<question id="slaUrl" display="Service availability is described at">
+					<label>Where do you describe any guarantees about service availability?</label>
+					<input type="url" placeholder="Service Availability Documentation URL" />
+					<help>Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees.</help>
+					<requirement level="standard">You should <strong>describe what guarantees you have around service availability</strong> so that people know how much they can rely on it.</requirement>
+				</question>
+				<question id="statusUrl" display="Service status is given at">
+					<label>Where do you give information about the current status of the service?</label>
+					<input type="url" placeholder="Service Status URL" />
+					<help>Give a URL for a page that tells people about the current status of your service, including any faults you are aware of.</help>
+					<requirement level="exemplar">You should <strong>have a service status page</strong> that tells people about the current status of your service.</requirement>
 				</question>
 			</if>
 			<question id="onGoingAvailability" display="The data is available">
@@ -662,55 +669,55 @@
 					<checkboxset>
 						<option value="title">
 							<label>title</label>
-							<requirement level="standard">You should <strong>include a data title in your documentation</strong> so that people know how to refer to it.</requirement>
+							<requirement level="standard">You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it.</requirement>
 						</option>
 						<option value="description">
 							<label>description</label>
-							<requirement level="standard">You should <strong>include a data description in your documentation</strong> so that people know what it contains.</requirement>
+							<requirement level="standard">You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains.</requirement>
 						</option>
 						<option value="issued">
 							<label>release date</label>
-							<requirement level="standard">You should <strong>include a data release date in your documentation</strong> so that people know how timely it is.</requirement>
+							<requirement level="standard">You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is.</requirement>
 						</option>
 						<option value="modified">
 							<label>modification date</label>
-							<requirement level="standard">You should <strong>include a last modification date in your documentation</strong> so that people know they have the latest data.</requirement>
+							<requirement level="standard">You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data.</requirement>
 						</option>
 						<option value="accrualPeriodicity" display="release frequency">
 							<label>frequency of releases</label>
-							<requirement level="standard">You should <strong>document how frequently you release new versions of your data</strong> so people know how often you update it.</requirement>
+							<requirement level="standard">You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it.</requirement>
 						</option>
 						<option value="identifier">
 							<label>identifier</label>
-							<requirement level="standard">You should <strong>include a canonical URL for the data in your documentation</strong> so that people know how to access it consistently.</requirement>
+							<requirement level="standard">You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently.</requirement>
 						</option>
 						<option value="landingPage">
 							<label>landing page</label>
-							<requirement level="standard">You should <strong>include a canonical URL to the documentation itself</strong> so that people know how to access to it consistently.</requirement>
+							<requirement level="standard">You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently.</requirement>
 						</option>
 						<option value="language">
 							<label>language</label>
-							<requirement level="standard">You should <strong>include the data language in your documentation</strong> so that people who search for it will know whether they can understand it.</requirement>
+							<requirement level="standard">You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it.</requirement>
 						</option>
 						<option value="publisher">
 							<label>publisher</label>
-							<requirement level="standard">You should <strong>indicate the data publisher in your documentation</strong> so people can decide how much to trust your data.</requirement>
+							<requirement level="standard">You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data.</requirement>
 						</option>
 						<option value="spatial">
 							<label>spatial/geographical coverage</label>
-							<requirement level="standard">You should <strong>include the geographic area in your documentation</strong> so that people understand where your data applies to.</requirement>
+							<requirement level="standard">You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to.</requirement>
 						</option>
 						<option value="temporal">
 							<label>temporal coverage</label>
-							<requirement level="standard">You should <strong>include the time period in your documentation</strong> so that people understand when your data applies to.</requirement>
+							<requirement level="standard">You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to.</requirement>
 						</option>
 						<option value="theme">
 							<label>theme(s)</label>
-							<requirement level="standard">You should <strong>include the subject in your documentation</strong> so that people know roughly what your data is about.</requirement>
+							<requirement level="standard">You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about.</requirement>
 						</option>
 						<option value="keyword">
 							<label>keyword(s) or tag(s)</label>
-							<requirement level="standard">You should <strong>include keywords or tags in your documentation</strong> to help people search within the data effectively.</requirement>
+							<requirement level="standard">You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively.</requirement>
 						</option>
 						<option value="distribution">
 							<label>distribution(s)</label>
@@ -723,23 +730,23 @@
 						<checkboxset>
 							<option value="title">
 								<label>title</label>
-								<requirement level="standard">You should <strong>include titles within your documentation</strong> so people know how to refer to each data distribution.</requirement>
+								<requirement level="standard">You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution.</requirement>
 							</option>
 							<option value="description">
 								<label>description</label>
-								<requirement level="standard">You should <strong>include descriptions within your documentation</strong> so people know what each data distribution contains.</requirement>
+								<requirement level="standard">You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains.</requirement>
 							</option>
 							<option value="issued">
 								<label>release date</label>
-								<requirement level="standard">You should <strong>include release dates within your documentation</strong> so people know how current each distribution is.</requirement>
+								<requirement level="standard">You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is.</requirement>
 							</option>
 							<option value="modified">
 								<label>modification date</label>
-								<requirement level="standard">You should <strong>include last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.</requirement>
+								<requirement level="standard">You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.</requirement>
 							</option>
-							<option value="license">
-								<label>licence</label>
-								<requirement level="standard">You should <strong>document applicable licences or waivers</strong> so people know what they can do with a data distribution.</requirement>
+							<option value="rights">
+								<label>rights statement</label>
+								<requirement level="standard">You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.</requirement>
 							</option>
 							<option value="accessURL" display="a URL to access the data">
 								<label>URL to access the data</label>
@@ -758,13 +765,11 @@
 					</question>
 				</if>
 			</if>
-			<if test="this.releaseType() === 'service'">
-				<question id="serviceDocumentation" display="The data API service is documented at">
-					<label>Where is the documentation for the API?</label>
-					<input type="url" placeholder="Service Documentation URL"/>
-					<requirement level="pilot">You should <strong>document how your API works</strong> so that people understand how to use it.</requirement>
-				</question>
-			</if>
+			<question id="technicalDocumentation" display="The technical documentation for the data is at">
+				<label>Where is the technical documentation for the data?</label>
+				<input type="url" placeholder="Technical Documentation URL"/>
+				<requirement level="pilot">You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.</requirement>
+			</question>
 			<question id="vocabulary">
 				<label>Do the data formats use vocabularies or schemas?</label>
 				<yesno required="standard"/>
@@ -793,21 +798,21 @@
 		<group id="support">
 			<label>Support</label>
 			<help>how you communicate with people who use your data</help>
-			<question id="contactEmail" display="Send questions about this data to">
-				<label>Who should people email with questions about this data?</label>
-				<input type="email" placeholder="Contact Email Address"/>
-				<help>Give an email address that people can send questions about the data to.</help>
-				<requirement level="pilot">You should <strong>provide an email address for people to send questions</strong> about your data to.</requirement>
+			<question id="contactUrl" display="Find out how to contact someone about this data at">
+				<label>Where can people find out how to contact someone with questions about this data?</label>
+				<input type="url" placeholder="Contact Documentation"/>
+				<help>Give a URL for a page that describes how people can contact someone if they have questions about the data.</help>
+				<requirement level="pilot">You should <strong>provide contact information for people to send questions</strong> about your data to.</requirement>
 			</question>
 			<question id="improvementsContact" display="Find out how to suggest improvements to publication at">
 				<label>Where can people find out how to improve the way your data is published?</label>
 				<input type="url" placeholder="Improvement Suggestions URL"/>
 				<requirement level="pilot">You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.</requirement>
 			</question>
-			<question id="dataProtectionEmail" display="Send questions about privacy to">
-				<label>Who should people email with questions about privacy?</label>
-				<input type="email" placeholder="Confidentiality Contact Email Address"/>
-				<requirement level="pilot">You should <strong>provide an email address for people to send questions about privacy to</strong> and disclosure of personal details.</requirement>
+			<question id="dataProtectionUrl" display="Find out where to send questions about privacy at">
+				<label>Where can people find out how to contact someone with questions about privacy?</label>
+				<input type="url" placeholder="Confidentiality Contact Documentation"/>
+				<requirement level="pilot">You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to.</requirement>
 			</question>
 			<question id="socialMedia">
 				<label>Do you use social media to connect with people who use your data?</label>
@@ -847,6 +852,7 @@
 			<question id="engagementTeam">
 				<label>Do you have anyone who actively builds a community around this data?</label>
 				<yesno />
+				<help more="http://theodi.org/guide/engaging-reusers">A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data.</help>
 				<requirement level="exemplar">You should <strong>build a community of people around your data</strong> to encourage wider use of your data.</requirement>
 			</question>
 			<if test="this.engagementTeam() === 'true'">

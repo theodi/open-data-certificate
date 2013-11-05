@@ -42,3 +42,5 @@ prototype/open-data-certificate.xpr
 
 # Chef secrets and that
 .chef/
+
+.DS_Store
