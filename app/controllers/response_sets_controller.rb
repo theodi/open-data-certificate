@@ -17,7 +17,28 @@ class ResponseSetsController < ApplicationController
     end
   end
 
+  def resolve_url
+    if params[:url] =~ /^#{URI::regexp}$/
+      HTTParty.get(params[:url]).code rescue nil
+    end
+  end
+
+  def resolve
+    if code = resolve_url
+      Rails.cache.write(params[:url], code)
+      render json: {status: code}
+    else
+      render :nothing => true
+    end
+  end
+
   def autofill
+    code = resolve_url
+
+    if code != 200
+      return render json: {data_exists: false, status: code}
+    end
+
     kitten_data = KittenData.where(url: params[:url], response_set_id: @response_set.id).first_or_create
 
     unless kitten_data.data
@@ -26,12 +47,14 @@ class ResponseSetsController < ApplicationController
     end
 
     if kitten_data.data
-      render :json => {
+      render json: {
+        status: code,
         data_exists: true,
         data: kitten_data.fields
       }
     else
-      render :json => {
+      render json: {
+        status: code,
         data_exists: false
       }
     end

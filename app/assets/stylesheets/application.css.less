@@ -1720,7 +1720,7 @@ header .jurisdiction{
     }
 
     &.input {
-      padding: 1px 1px 1px 12px;
+      padding: 1px 12px;
       margin-bottom: 5px;
       float: left;
       clear: left;
@@ -1733,7 +1733,7 @@ header .jurisdiction{
       &.warning {
         background: @odiOrangeLight;
         border: 1px solid @odiOrange;
-        padding: 0 0 0 11px;
+        padding: 0 11px;
       }
     }
   }
@@ -1827,12 +1827,6 @@ header .jurisdiction{
     }
   }
 
-  fieldset.requirement_basic li {
-    background: @odiRed;
-    color: white;
-    padding: 20px 20px 10px;
-  }
-
   fieldset.requirement_pilot,
   fieldset.requirement_standard,
   fieldset.requirement_exemplar {
@@ -1843,6 +1837,28 @@ header .jurisdiction{
       position: absolute;
       left: -70px;
       top: 10px;
+    }
+  }
+
+  #legal-section {
+    fieldset.requirement_pilot {
+      display: block;
+
+      .status-error {
+        .status-icon {
+          background: @odiOrange;
+        }
+
+        .status-message {
+          span {
+            background: @odiOrange;
+          }
+
+          i.arrow {
+            border-right-color: @odiOrange;
+          }
+        }
+      }
     }
   }
 
@@ -1898,6 +1914,7 @@ header .jurisdiction{
       }
 
       &.choice-buttons {
+        .clearfix;
         padding-bottom: 15px;
       }
 
@@ -1982,8 +1999,12 @@ header .jurisdiction{
       }
     }
 
-    .highlight_mandatory&.mandatory.no-response{
+    .highlight_mandatory&.mandatory.no-response {
       background: @odiCrimsonLight;
+
+      aside {
+        background: @odiCrimsonLight;
+      }
 
       input.string {
         padding-right: 70px;
