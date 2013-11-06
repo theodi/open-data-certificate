@@ -431,13 +431,10 @@ $(function(){
   });
 
   
-  $('.certificate-data,.certificate-summary').popover({
+  $('.certificate-data').popover({
     selector:'.odc-popover',
     trigger:'click',
     html:true,
-    placement:function(){
-      return this.$element.data('placement') || 'right';
-    },
     content: function(){
       // pull out the content from the child element (hidden with css)
       return $('.odc-popover-content', this).html()
