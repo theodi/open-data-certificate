@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     unless full_name.blank?
       full_name
     else
-      email
+      email.split('@').join(' from ')
     end
   end
 
