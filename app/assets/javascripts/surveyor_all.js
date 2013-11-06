@@ -7,7 +7,7 @@
 /*global $, _ */
 
 // Javascript UI for surveyor
-$(document).ready(function(){
+$(document).ready(function($){
 
   'use strict';
 
