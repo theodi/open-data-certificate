@@ -176,6 +176,8 @@ en:
       verify_certificate: Verify Certificate
       verified: verified
       undo: undo
+      sign_in: Sign in
+      sign_in_text: to verify this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
       person: person
 

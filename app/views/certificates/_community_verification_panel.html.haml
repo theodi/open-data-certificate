@@ -1,25 +1,28 @@
-.well
-  %h3= t '.title'
-  =markdown t '.description'
-  =markdown t '.status'
+%h3= t '.title'
+=markdown t '.description'
+=markdown t '.status'
 
-  -if @certificate.verified_by_user? current_user    
-    %i.icon.icon-ok
-    = t '.verified'
-    = link_to t('.undo'), verify_dataset_certificate_path(undo: true), method: :post
+-if current_user.nil?
+  %p
+    =link_to t('.sign_in'), new_user_session_path
+    = t('.sign_in_text')
+-elsif @certificate.verified_by_user? current_user    
+  %i.icon.icon-ok
+  = t '.verified'
+  = link_to t('.undo'), verify_dataset_certificate_path(undo: true), method: :post
 
-  -else
-    =form_tag verify_dataset_certificate_path, method: :post do
-      %button.btn.btn-info{type: :submit}
-        %i.icon.icon-check
-        = t '.verify_certificate'
+-else
+  =form_tag verify_dataset_certificate_path, method: :post do
+    %button.btn.btn-info{type: :submit}
+      %i.icon.icon-check
+      = t '.verify_certificate'
 
-  - if @certificate.verifying_users.any?
-    %hr
-    .muted
-      = markdown t('.certifiers', count: pluralize(@certificate.verifying_users.count, t('.person')))
+- if @certificate.verifying_users.any?
+  %hr
+  .muted
+    = markdown t('.certifiers', count: pluralize(@certificate.verifying_users.count, t('.person')))
 
-    %ul.unstyled
-      - @certificate.verifying_users.each do |user|
-        %li
-          = user.identifier
+  %ul.unstyled
+    - @certificate.verifying_users.each do |user|
+      %li
+        = user.identifier

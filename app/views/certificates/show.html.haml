@@ -55,8 +55,8 @@
             =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
           -else
             =render 'shared/response_set_summary', response_set: @certificate.response_set
-        
-        -if user_signed_in?
+
+        .well
           = render 'community_verification_panel'
 
       .span9
