@@ -32,7 +32,7 @@
       %p.certificate-level
         = t("levels.#{@certificate.attained_level}.title_with_level")
         %small
-          = t("certificate.self_certified")
+          = t @certificate.certification_type, scope: 'certificate.certification_types'
         %span.jurisdiction
           %span.badge= @certificate.response_set.jurisdiction
           %span.status= @certificate.response_set.survey.try(:status)

@@ -172,7 +172,7 @@ en:
     community_verification_panel:
       title: Community Verification
       description: Members of the community can verify whether the answers on this certificate are accurate.
-      status: This certificate is **self certified**
+      status: This certificate is **%{certification}**
       verify_certificate: Verify Certificate
       verified: verified
       undo: undo
@@ -183,7 +183,6 @@ en:
 
   certificate:
     on_date: "on %{date}"
-    self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
     embeddable_certificate: Embed on your site
@@ -194,6 +193,9 @@ en:
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
     open_data_certificate_for: Open Data Certificate for
+    certification_types:
+      self: self certified
+      community: community certified
 
   datasets:
     datasets: Datasets

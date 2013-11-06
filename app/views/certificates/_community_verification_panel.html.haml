@@ -1,6 +1,6 @@
 %h3= t '.title'
 =markdown t '.description'
-=markdown t '.status'
+=markdown t '.status', certification: t(@certificate.certification_type, scope: 'certificate.certification_types')
 
 -if current_user.nil?
   %p
