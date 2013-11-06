@@ -1,4 +1,4 @@
-%section.survey-section{'data-reference-identifier' => section.reference_identifier}
+%section.survey-section{'data-reference-identifier' => section.reference_identifier, id: "#{section.reference_identifier}-section"}
   - if section.display_header
     %header.inactive{'data-toggle'=>"collapse", "data-target"=>".survey-section[data-reference-identifier=#{section.reference_identifier}] ul"}
       .container

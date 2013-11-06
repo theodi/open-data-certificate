@@ -52,8 +52,12 @@ class Response < ActiveRecord::Base
     @auto_value ||= response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
   end
 
+  def formatted_auto_value
+    auto_value.kind_of?(Array) ? auto_value.try(:join, ',') : auto_value
+  end
+
   def autocompletable?
-    auto_value && !auto_value.empty?
+    !!(auto_value && !auto_value.empty?)
   end
 
   def any_metadata_missing
@@ -61,11 +65,11 @@ class Response < ActiveRecord::Base
   end
 
   def metadata_missing
-    @metadata_missing ||= question.metadata_field? && auto_value && !autocompleted && answer
+    @metadata_missing ||= question.metadata_field? && autocompletable? && !autocompleted && answer
   end
 
   def all_autocompleted
-    if question.pick == 'any' && auto_value
+    if question.pick == 'any' && autocompletable?
       return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort == auto_value.sort
     end
 
@@ -77,9 +81,9 @@ class Response < ActiveRecord::Base
   end
 
   def compute_autocompleted
-    if auto_value
+    if autocompletable?
       if question.pick == 'none'
-        return auto_value && string_value == auto_value
+        return string_value == auto_value
       end
 
       if question.pick == 'one'

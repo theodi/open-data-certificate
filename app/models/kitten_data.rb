@@ -27,28 +27,32 @@ class KittenData < ActiveRecord::Base
   def request_data
     @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
 
-    self.data = {
-      :title             => dataset_field(:data_title, ''),
-      :description       => dataset_field(:description, ''),
-      :publishers        => dataset_field(:publishers, []),
-      :rights            => dataset_field(:rights),
-      :licenses          => dataset_field(:licenses, []),
-      :update_frequency  => dataset_field(:update_frequency, ''),
-      :keywords          => dataset_field(:keywords, []),
-      :release_date      => dataset_field(:issued),
-      :modified_date     => dataset_field(:modified),
-      :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
-      :distributions     => dataset_field(:distributions, []).map { |distribution|
-        {
-          :title       => distribution.title,
-          :description => distribution.description,
-          :access_url  => distribution.access_url,
-          :extension   => distribution.format.extension,
-          :open        => distribution.format.open?,
-          :structured  => distribution.format.structured?
+    if @dataset && @dataset.supported?
+      self.data = {
+        :title             => dataset_field(:data_title, ''),
+        :description       => dataset_field(:description, ''),
+        :publishers        => dataset_field(:publishers, []),
+        :rights            => dataset_field(:rights),
+        :licenses          => dataset_field(:licenses, []),
+        :update_frequency  => dataset_field(:update_frequency, ''),
+        :keywords          => dataset_field(:keywords, []),
+        :release_date      => dataset_field(:issued),
+        :modified_date     => dataset_field(:modified),
+        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :distributions     => dataset_field(:distributions, []).map { |distribution|
+          {
+            :title       => distribution.title,
+            :description => distribution.description,
+            :access_url  => distribution.access_url,
+            :extension   => distribution.format.extension,
+            :open        => distribution.format.open?,
+            :structured  => distribution.format.structured?
+          }
         }
       }
-    }
+    else
+      self.data = false
+    end
   end
 
   def fields
@@ -146,6 +150,6 @@ class KittenData < ActiveRecord::Base
 
   private
   def dataset_field(method, default = nil)
-    (@dataset && @dataset.supported? && @dataset.try(method)) || default
+    @dataset.try(method) || default
   end
 end

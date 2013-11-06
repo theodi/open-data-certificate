@@ -1,4 +1,4 @@
-survey 'US', 
+survey 'US',
   :full_title => 'United States',
   :default_mandatory => 'false',
   :status => 'beta',
