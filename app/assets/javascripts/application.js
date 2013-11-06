@@ -10,7 +10,7 @@
 // whether or not the homepage map should be loaded
 window.enableMap = document.querySelectorAll && Modernizr.svg;
 
-$(function(){
+$(document).ready(function($){
   //////
   // Rails support
   //
