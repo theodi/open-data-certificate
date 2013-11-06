@@ -49,4 +49,19 @@ class CertificateTest < ActiveSupport::TestCase
     assert cv.certificate.verified_by_user? cv.user
     refute cv.certificate.verified_by_user? user2
   end
+
+  test 'certification_type' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+
+    assert_equal :self, certificate.certification_type,
+                        'defaults to self certified'
+
+    2.times do
+      FactoryGirl.create :verification, certificate: certificate
+    end
+
+    assert_equal :community, certificate.certification_type,
+                             'community certifified when verified by 2 users'
+
+  end
 end

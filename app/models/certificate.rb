@@ -113,6 +113,10 @@ class Certificate < ActiveRecord::Base
     "#{self.attained_level.titleize} Level Certificate"
   end
 
+  def certification_type
+    verifications.count >= 2 ? :community : :self
+  end
+
   def update_from_response_set
 
     unless response_set_id.nil?
