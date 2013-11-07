@@ -71,12 +71,15 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @response_set = @certificate.response_set
 
-    @responses = @response_set.survey.questions.map {|r| 
+    @responses = @response_set.survey.answers.map {|r| 
+      req = r[:requirement] || ''
+      req.gsub!('\n','')
+
       {
-        reference_identifier: r[:reference_identifier],
-        requirement: r[:requirement],
-        answered: @response_set.is_answered?(r),
-        triggered: r.triggered?(@response_set),
+        reference_identifier: r.question[:reference_identifier],
+        requirement: req,
+        answered: @response_set.is_answered?(r.question),
+        triggered: r.question.triggered?(@response_set),
         id: r[:id]
       }
     }
