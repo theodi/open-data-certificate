@@ -32,6 +32,7 @@ OpenDataCertificate::Application.routes.draw do
     resources :certificates, :only => [:show] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'
+         get 'progress', to: 'certificates#progress'
          get 'embed', to: 'certificates#embed', as: 'embed'
          get 'badge', to: 'certificates#badge', as: 'badge'
        end

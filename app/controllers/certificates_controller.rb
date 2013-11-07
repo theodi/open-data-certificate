@@ -65,6 +65,25 @@ class CertificatesController < ApplicationController
     end
   end
 
+  # this is similiar to the improvements, but returns
+  # json only, and includes completed questions too
+  def progress
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @response_set = @certificate.response_set
+
+    @responses = @response_set.survey.questions.map {|r| 
+      {
+        reference_identifier: r[:reference_identifier],
+        requirement: r[:requirement],
+        answered: @response_set.is_answered?(r),
+        triggered: r.triggered?(@response_set),
+        id: r[:id]
+      }
+    }
+
+    render json: @responses
+  end
+
   def embed
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
