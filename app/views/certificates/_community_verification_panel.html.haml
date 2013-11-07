@@ -2,6 +2,9 @@
 =markdown t '.description'
 =markdown t '.status', certification: t(@certificate.certification_type, scope: 'certificate.certification_types')
 
+- if @certificate.certification_type == :self
+  =markdown t '.status_self_certified'
+
 -if current_user.nil?
   %p
     =link_to t('.sign_in'), new_user_session_path
