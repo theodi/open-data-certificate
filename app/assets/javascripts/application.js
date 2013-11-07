@@ -15,7 +15,7 @@ $(document).ready(function($){
   // Rails support
   //
 
-  'use strict';
+  // 'use strict';
 
   // Display when an remote form failed
   $(document).on('ajax:error', 'form[data-remote-error-message]', function(){
@@ -358,6 +358,60 @@ $(document).ready(function($){
 
 
 
+  $('#status_panel').on('update', function(){
+    // render from cert progress
+    var url = $(this).data('progress-url');
+    console.log("url:", url)
+    $.getJSON(url)
+    .then(function(data){
+      console.clear();
+      console.log("--", data)
+
+      // global debug
+      debug_data = data;
+
+      /* 
+        data = [{
+          answered: true,
+          id: 6992,
+          reference_identifier: "pilot_4",
+          requirement: "pilot_4",
+          triggered: true
+        },…]
+      */
+
+      // group the items by level
+      var levels = ['basic', 'pilot', 'standard', 'exemplar'];
+
+      function meetsLevel(level){
+        return function(item){
+          return item.requirement && item.requirement.match(level + '_');
+        }
+      }
+
+      // questions have many levels, will be repetitions
+      var grouped = {};
+      _.each(levels, function(level){
+        grouped[level] = _.filter(data, meetsLevel(level));
+      });
+
+
+      function out(items, level){
+        var triggered = items.filter(function(d){return d.triggered}),
+            triggered_and_answered = triggered.filter(function(d){return d.answered});
+        $('#bar-' + level).parent().next()
+          .text('all='+items.length+', visible='+triggered.length+', answered='+triggered_and_answered.length)
+          .css('color','#f08')// debug
+
+
+        console.log("level: %s, items: %d, triggered: %d, triggered+answered: %d", level, items.length, triggered.length, triggered_and_answered.length)
+      }
+
+      out(data, "all")
+      _.each(grouped,out)
+
+    });
+  });
 
 
   // when surveyor has displayed/hidden elements
