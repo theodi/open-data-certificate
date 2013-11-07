@@ -171,8 +171,8 @@ en:
 
     community_verification_panel:
       title: Community Verification
-      description: Members of the community can verify whether the answers on this certificate are accurate.
-      status: This certificate is **%{certification}**
+      description: Other people can verify whether the answers on this certificate are correct.
+      status: This certificate is **%{certification}**.
       verify_certificate: Verify Certificate
       verified: verified
       undo: undo
