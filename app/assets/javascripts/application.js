@@ -106,7 +106,7 @@ $(document).ready(function($){
     var $this = $(this),
         message = $this.data('btn-confirmable');
 
-    if(message) $this.text(message);
+    if(message) $this.is('input') ? $this.val(message) : $this.text(message);
 
     $this.addClass('btn-confirmed disabled');
 

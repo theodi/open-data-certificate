@@ -14,6 +14,7 @@ en:
     please_choose_a_legislation: "Please choose a jurisdiction"
     survey_started_success: "Questionnaire started successfully"
     click_here_to_finish: "Save questionnaire"
+    saving_questionnaire: "Saving questionnaire"
     previous_section: "&laquo; Previous section"
     next_section: "Next section &raquo;"
     select_one: "Select one ..."
