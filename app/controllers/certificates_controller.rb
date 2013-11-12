@@ -93,4 +93,21 @@ class CertificatesController < ApplicationController
     render :nothing => true
   end
 
+
+  # community certification
+  def verify
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+
+    if user_signed_in?
+      if params[:undo]
+        @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
+      else
+        @certificate.verifications.create user_id: current_user.id
+      end
+    end
+
+    redirect_to dataset_certificate_path params.select {|d| [:dataset_id, :id].include? d}
+  end
+
+
 end

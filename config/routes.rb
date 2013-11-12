@@ -34,6 +34,7 @@ OpenDataCertificate::Application.routes.draw do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'
          get 'embed', to: 'certificates#embed', as: 'embed'
          get 'badge', to: 'certificates#badge', as: 'badge'
+         post 'verify'
        end
     end
   end

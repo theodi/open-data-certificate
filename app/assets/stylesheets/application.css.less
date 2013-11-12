@@ -700,6 +700,10 @@ header.affix {
 h3 {
   font-size: 19px;
 }
+.well h3{
+  font-size: 18px;
+  line-height: 25px;
+}
 
 h4 {
   font-size: 16px;
@@ -2225,6 +2229,9 @@ header .jurisdiction{
   }
 
   .autocomplete-override {
+
+    clear:both;
+
     &.none {
       display: none;
     }
@@ -3058,11 +3065,13 @@ body{
 }
 
 .js .odc-popover{
-  opacity: 0.15;
   cursor: pointer;
+}
+.js .answer .odc-popover{
+  opacity: 0.15;
   .transition(opacity 0.25s)
 }
-.js .odc-popover-active .odc-popover{
+.js .answer.odc-popover-active .odc-popover{
   opacity: 1;
 }
 
