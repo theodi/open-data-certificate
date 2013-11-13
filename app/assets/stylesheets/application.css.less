@@ -1447,8 +1447,15 @@ a.transfer {
 
 .response-set.response-set-primary .row-fluid.baseline {
     background-color: rgb(222, 222, 222);
-  }
+}
 
+.response-set .row-fluid.baseline {
+
+    // Even out the spacing around the last line of data in each certificate
+    // panel on the "My Certificates" page
+    padding-bottom: 5px;
+
+}
 
 // don't display the headers, links or actions in secondary ones
 .response-set-secondary{
@@ -2914,19 +2921,129 @@ section.improvement{
 
 .lt9 {
 
-  /* Setting line-heights in IE centres the input text.
+    /* Setting line-heights in IE centres the input text.
      Doing this in other browsers means you get a massive text cursor - not great. */
 
-  #login, #register, .modal-body .log-in .form-field {
-    input[type="text"], input[type="email"], input[type="password"] {
-      line-height: 60px;
+    #login, #register, .modal-body .log-in .form-field {
+        input[type="text"], input[type="email"], input[type="password"] {
+            line-height: 60px;
+        }
     }
-  }
 
-  .main-default input,
-  input.string {
-    line-height: 60px;
-  }
+    .main-default input,
+    input.string {
+        line-height: 60px;
+    }
+
+    // No background-size in IE so fall back to re-exported resized images
+    // Badges on "My Certificates" page, on edited copies of published certificates
+    .response-set-secondary .level-badge, .response-set-inline .level-badge {
+
+        &.level-badge-basic{
+            background-image:url(/assets/ie/badges/raw_level_badge_55x50.png);
+        }
+        &.level-badge-pilot{
+            background-image:url(/assets/ie/badges/pilot_level_badge_55x50.png);
+        }
+        &.level-badge-standard{
+            background-image:url(/assets/ie/badges/standard_level_badge_55x50.png);
+        }
+        &.level-badge-exemplar{
+            background-image:url(/assets/ie/badges/exemplar_level_badge_55x50.png);
+        }
+
+    }
+
+    // No background-size in IE so fall back to re-exported resized images
+    // Published status icons on "My Certificates" page, on edited copies of published certificates
+    .response-set-secondary .status-badge, .response-set-inline .status-badge {
+
+        &.status-badge-draft{
+            background-image:url(/assets/ie/status/draft_35x40.png);
+        }
+        &.status-badge-published{
+            background-image:url(/assets/ie/status/published_35x40.png);
+        }
+        &.status-badge-archived{
+            background-image:url(/assets/ie/status/archived_35x40.png);
+        }
+
+    }
+
+    // No background-size in IE so fall back to re-exported resized images
+    // Badges on the "Browse all certificates" page
+    .dataset .level-badge {
+
+        &.level-badge-basic{
+            background-image:url(/assets/ie/badges/raw_level_badge_40x36.png);
+        }
+        &.level-badge-pilot{
+            background-image:url(/assets/ie/badges/pilot_level_badge_40x36.png);
+        }
+        &.level-badge-standard{
+            background-image:url(/assets/ie/badges/standard_level_badge_40x36.png);
+        }
+        &.level-badge-exemplar{
+            background-image:url(/assets/ie/badges/exemplar_level_badge_40x36png);
+        }
+
+    }
+
+    // No background-size in IE so fall back to re-exported resized images
+    // Badges on "How can I improve my open data?" page
+    section.improvement {
+
+        &.improvement-pilot header .container {
+            background-image: url(/assets/ie/badges/pilot_level_badge_71x63.png);
+        }
+        &.improvement-standard header .container {
+            background-image: url(/assets/ie/badges/standard_level_badge_71x63.png);
+        }
+        &.improvement-exemplar header .container {
+            background-image: url(/assets/ie/badges/exemplar_level_badge_71x63.png);
+        }
+
+    }
+
+    // No background-size in IE so fall back to re-exported resized images
+    // Badges on About page
+    .container.about .span8 ul.kitemarks {
+
+        li.kitemark1 { background: url(/assets/ie/badges/raw_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark2 { background: url(/assets/ie/badges/pilot_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark3 { background: url(/assets/ie/badges/standard_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark4 { background: url(/assets/ie/badges/exemplar_level_badge_65x58.png) no-repeat top left;}
+
+    }
+
+    // Fix height of button on "Browse all certificates" page
+    .input-append .add-on, .input-append .btn, .input-append .btn-group {
+
+        line-height: 20px;
+
+    }
+
+    // Stop aside blocks in Certificate edit form from overlapping the form
+    // form fields they're attached to
+    #surveyor fieldset.row aside {
+
+        width: 260px;
+
+    }
+
+    // Asides with multiple choice answers in them were too far over
+    #surveyor fieldset.row .status-wrapper aside.answer-meta {
+
+        right: -320px;
+
+    }
+
+    // Get footer links back over to the right, but displaying in a vertical list
+    .footer-nav {
+
+        width: 30%;
+
+    }
 
 }
 
