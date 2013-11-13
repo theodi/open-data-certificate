@@ -1447,8 +1447,15 @@ a.transfer {
 
 .response-set.response-set-primary .row-fluid.baseline {
     background-color: rgb(222, 222, 222);
-  }
+}
 
+.response-set .row-fluid.baseline {
+
+    // Even out the spacing around the last line of data in each certificate
+    // panel on the "My Certificates" page
+    padding-bottom: 5px;
+
+}
 
 // don't display the headers, links or actions in secondary ones
 .response-set-secondary{
@@ -2998,7 +3005,27 @@ section.improvement{
 
     }
 
-    //
+    // Fix height of button on "Browse all certificates" page
+    .input-append .add-on, .input-append .btn, .input-append .btn-group {
+
+        line-height: 20px;
+
+    }
+
+    // Stop aside blocks in Certificate edit form from overlapping the form
+    // form fields they're attached to
+    #surveyor fieldset.row aside {
+
+        width: 260px;
+
+    }
+
+    // Asides with multiple choice answers in them were too far over
+    #surveyor fieldset.row .status-wrapper aside.answer-meta {
+
+        right: -320px;
+
+    }
 
 }
 
