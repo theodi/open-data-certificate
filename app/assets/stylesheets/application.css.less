@@ -3005,6 +3005,17 @@ section.improvement{
 
     }
 
+    // No background-size in IE so fall back to re-exported resized images
+    // Badges on About page
+    .container.about .span8 ul.kitemarks {
+
+        li.kitemark1 { background: url(/assets/ie/badges/raw_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark2 { background: url(/assets/ie/badges/pilot_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark3 { background: url(/assets/ie/badges/standard_level_badge_65x58.png) no-repeat top left;}
+        li.kitemark4 { background: url(/assets/ie/badges/exemplar_level_badge_65x58.png) no-repeat top left;}
+
+    }
+
     // Fix height of button on "Browse all certificates" page
     .input-append .add-on, .input-append .btn, .input-append .btn-group {
 
@@ -3024,6 +3035,13 @@ section.improvement{
     #surveyor fieldset.row .status-wrapper aside.answer-meta {
 
         right: -320px;
+
+    }
+
+    // Get footer links back over to the right, but displaying in a vertical list
+    .footer-nav {
+
+        width: 30%;
 
     }
 
