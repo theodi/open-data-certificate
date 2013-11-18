@@ -4,6 +4,8 @@ class Certificate < ActiveRecord::Base
   has_one :survey,  through: :response_set
   has_one :user,    through: :response_set
   has_one :dataset, through: :response_set
+  has_many :verifications
+  has_many :verifying_users, through: :verifications, source: :user
 
   attr_accessible :published, :name, :attained_level, :curator
 
@@ -91,6 +93,10 @@ class Certificate < ActiveRecord::Base
     expiring? && expires_at < DateTime.now
   end
 
+  def verified_by_user? user
+    verifications.exists? user_id: user.id
+  end
+
   def badge_file
     Certificate.badge_file_for_level(attained_level)
   end
@@ -105,6 +111,10 @@ class Certificate < ActiveRecord::Base
 
   def attained_level_title
     "#{self.attained_level.titleize} Level Certificate"
+  end
+
+  def certification_type
+    verifications.count >= 2 ? :community : :self
   end
 
   def update_from_response_set

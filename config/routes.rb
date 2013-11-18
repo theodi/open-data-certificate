@@ -35,6 +35,7 @@ OpenDataCertificate::Application.routes.draw do
          get 'progress', to: 'certificates#progress'
          get 'embed', to: 'certificates#embed', as: 'embed'
          get 'badge', to: 'certificates#badge', as: 'badge'
+         post 'verify'
        end
     end
   end
@@ -78,7 +79,6 @@ OpenDataCertificate::Application.routes.draw do
   # comment pages
   get 'comment' => 'main#comment', as: :comment
   get 'discussion' => 'main#discussion', as: :discussion # general/site-wide
-  match 'juvia_proxy/*path' => 'main#juvia_proxy'
 
   get 'has_js' => 'main#has_js'
 

@@ -2,7 +2,6 @@
 
 [![Build Status](http://jenkins.theodi.org/job/open-data-certificate-master/badge/icon)](http://jenkins.theodi.org/job/open-data-certificate-master/) [![Code Climate](https://codeclimate.com/repos/519228b056b10279600066b5/badges/772e6d53c060a1268449/gpa.png)](https://codeclimate.com/repos/519228b056b10279600066b5/feed) [![Dependency Status](https://gemnasium.com/theodi/open-data-certificate.png)](https://gemnasium.com/theodi/open-data-certificate)
 
-
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
 
 ### Surveyor
@@ -85,7 +84,6 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 
 * `:placeholder` - placeholder text displayed in a field before anything is entered
 
-
 ### Translations
 
 Questionnaires are able to be translated and a user can select the locale when they are filling them out.
@@ -100,7 +98,6 @@ In the translation file (eg. surveys/translations/my-file.es.yml)
 * set the locale name with `es: Spanish` (where 'es' was the reference given in the survey file)
 
 There is an example of adding a translation on [this gist](https://gist.github.com/benfoxall/c35ad597fd2c2d7fcdc6#file-0002-manually-corrected-translation-yaml-patch)
-
 
 ### Running
 
@@ -163,7 +160,6 @@ brew install saxon
 ```
 
 You can then change the `prototype/survey.xsl` file and run:
-
 
 ```bash
 saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/

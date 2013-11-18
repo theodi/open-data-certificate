@@ -31,7 +31,8 @@
     .certificate-summary
       %p.certificate-level
         = t("levels.#{@certificate.attained_level}.title_with_level")
-        %small= t("certificate.self_certified")
+        %small
+          = t @certificate.certification_type, scope: 'certificate.certification_types'
         %span.jurisdiction
           %span.badge= @certificate.response_set.jurisdiction
           %span.status= @certificate.response_set.survey.try(:status)
@@ -44,10 +45,8 @@
         = t("certificate.which_means")
         = t("levels.#{@certificate.attained_level}.description")
 
-
   - if minimal # don't show the summary
     =render @certificate.response_set
-
   - else
     .row
       .span3
@@ -56,6 +55,9 @@
             =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
           -else
             =render 'shared/response_set_summary', response_set: @certificate.response_set
+
+        .well
+          = render 'community_verification_panel'
 
       .span9
         =render @certificate.response_set

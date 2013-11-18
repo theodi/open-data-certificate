@@ -3,7 +3,7 @@
 	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?><questionnaire version="0.9" status="alpha" jurisdiction="TW" xml:lang="en">
-	<help><p><strong>This has been generated based on a default and needs to be localised for Province of China Taiwan. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
+	<help><p><strong>This has been generated based on a default and needs to be localised for Taiwan. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
 		<p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p>
 		<p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>

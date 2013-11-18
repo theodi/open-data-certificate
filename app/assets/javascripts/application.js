@@ -492,7 +492,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-
+  
   $('.certificate-data').popover({
     selector:'.odc-popover',
     trigger:'click',

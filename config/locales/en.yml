@@ -169,9 +169,21 @@ en:
       search_label: Search certificates
       submit_search: Go
 
+    community_verification_panel:
+      title: Community Verification
+      description: Other people can verify whether the answers on this certificate are correct.
+      status: This certificate is **%{certification}**.
+      status_self_certified: If two or more people verify it, this certificate will become community certified.
+      verify_certificate: Verify Certificate
+      verified: verified
+      undo: undo
+      sign_in: Sign in
+      sign_in_text: to verify this certificate
+      certifiers: "This certificate has been verified by **%{count}**:"
+      person: person
+
   certificate:
     on_date: "on %{date}"
-    self_certified: self certified
     this_data_has_achieved: This data has achieved
     which_means: which means
     embeddable_certificate: Embed on your site
@@ -182,6 +194,9 @@ en:
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
     open_data_certificate_for: Open Data Certificate for
+    certification_types:
+      self: self certified
+      community: community certified
 
   datasets:
     datasets: Datasets
