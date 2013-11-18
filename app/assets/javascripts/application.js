@@ -361,10 +361,11 @@ $(document).ready(function($){
   $('#status_panel').on('update', function(){
     // render from cert progress
     var url = $(this).data('progress-url');
-    console.log("url:", url)
+    
     $.getJSON(url)
     .then(function(data){
       console.clear();
+      console.log("url:", url)
       console.log("--", data)
 
       // global debug
@@ -389,13 +390,20 @@ $(document).ready(function($){
         }
       }
 
+      function isMandatory(item){
+        return item.is_mandatory;
+      }
+
       // questions have many levels, will be repetitions
       var grouped = {};
       _.each(levels, function(level){
         grouped[level] = _.filter(data, meetsLevel(level));
       });
 
+      grouped['mandatory'] = _.filter(data, isMandatory);
 
+
+      // debug logging
       function out(items, level){
         var triggered = items.filter(function(d){return d.triggered}),
             triggered_and_answered = triggered.filter(function(d){return d.answered});

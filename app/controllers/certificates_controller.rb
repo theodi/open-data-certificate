@@ -77,6 +77,7 @@ class CertificatesController < ApplicationController
 
       {
         reference_identifier: r.question[:reference_identifier],
+        is_mandatory: r.question[:is_mandatory],
         requirement: req,
         answered: @response_set.is_answered?(r.question),
         triggered: r.question.triggered?(@response_set),
