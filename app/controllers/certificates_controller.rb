@@ -86,7 +86,8 @@ class CertificatesController < ApplicationController
       @certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
       unless @certificate.nil?
         respond_to do |format|
-          format.any(:js, :html) { render 'badge.js' and return }
+          format.js { render 'badge.js' and return }
+          format.html { render 'badge.html', :layout => false and return }
         end
       end
     end
