@@ -88,6 +88,7 @@ class CertificatesController < ApplicationController
         respond_to do |format|
           format.js { render 'badge.js' and return }
           format.html { render 'badge.html', :layout => false and return }
+          format.json { render 'show.json' and return }
         end
       end
     end
