@@ -80,7 +80,7 @@ class CertificatesController < ApplicationController
     end
   end
   
-  def get_badge
+  def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
     unless params[:datasetUrl].nil?
       @certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
