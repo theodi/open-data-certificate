@@ -76,7 +76,8 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
       format.js
-      format.any(:png, :html) { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
+      format.html { render 'badge', :layout => false }
+      format.png { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
     end
   end
   
