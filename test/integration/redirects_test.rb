@@ -45,29 +45,29 @@ class RedirectsTest < ActionDispatch::IntegrationTest
     end
     
     should "redirect to the certificate page if no type is specified" do
-       get "/certificates?datasetUrl=http://www.example.com"
+       get "/datasets?datasetUrl=http://www.example.com"
        assert_response :redirect
        assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}"
     end
     
     should "redirect to the embed page if embed type is specified" do
-      get "/certificates/embed?datasetUrl=http://www.example.com"
+      get "/datasets/embed?datasetUrl=http://www.example.com"
       assert_response :redirect
       assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/embed"
     end
 
     should "redirect to the badge if badge type is specified" do
-      get "/certificates/badge?datasetUrl=http://www.example.com"
+      get "/datasets/badge?datasetUrl=http://www.example.com"
       assert_response :redirect
       assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/badge"
     end
     
     should "preserve the format if a format is specified" do
-      get "/certificates.json?datasetUrl=http://www.example.com"
+      get "/datasets.json?datasetUrl=http://www.example.com"
       assert_response :redirect
       assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}.json"
       
-      get "/certificates/badge.js?datasetUrl=http://www.example.com"
+      get "/datasets/badge.js?datasetUrl=http://www.example.com"
       assert_response :redirect
       assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/badge.js"
     end
