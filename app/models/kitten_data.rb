@@ -115,10 +115,14 @@ class KittenData < ActiveRecord::Base
     # Assumptions for data.gov.uk
     if url.include?("data.gov.uk")
       @fields["publisherOrigin"] = "true"
+      @fields["copyrightURL"] = url
       @fields["dataPersonal"] = "not_personal"
       @fields["frequentChanges"] = "false"
+      @fields["listed"] = "true"
+      @fields["listing_0"] = "http://data.gov.uk"
       @fields["vocabulary"] = "false"
       @fields["codelists"] = "false"
+      @fields["contentRights"] = "samerights"
     end
 
     # Checks if any of the distributions are machine readable or open
