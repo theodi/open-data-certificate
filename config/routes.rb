@@ -66,7 +66,8 @@ OpenDataCertificate::Application.routes.draw do
   get 'get_badge' => 'certificates#certificate_from_dataset_url' 
   
   # Get certificate from dataset url
-  get '/certificates/from_url' => 'certificates#certificate_from_dataset_url' 
+  get '/certificates(/:type)' => 'certificates#certificate_from_dataset_url', 
+                     :constraints => lambda { |request| request.params[:datasetUrl].present? } 
 
   # 'Static' pages managed by HighVoltage here...
   get 'about' => 'pages#show', :id => 'about'
