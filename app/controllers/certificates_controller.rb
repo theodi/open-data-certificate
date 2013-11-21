@@ -71,19 +71,34 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @response_set = @certificate.response_set
 
-    @responses = @response_set.survey.answers.map {|r| 
-      req = r[:requirement] || ''
-      req.gsub!('\n','')
+    items = @response_set.triggered_requirements.map do |r|
+      r.reference_identifier
+    end
 
-      {
-        reference_identifier: r.question[:reference_identifier],
-        is_mandatory: r.question[:is_mandatory],
-        requirement: req,
-        answered: @response_set.is_answered?(r.question),
-        triggered: r.question.triggered?(@response_set),
-        id: r[:id]
-      }
+    items.sort!
+
+    requirements = @response_set.outstanding_requirements
+
+    # filled out mandatory questions
+    mandatory_completed = @response_set.responses.map(&:question).select(&:is_mandatory).count
+
+    # questions that have been answered and their requirements
+    entered = @response_set.responses.map(&:answer).map do |a|
+      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
+    end
+
+    entered.reject!(&:nil?)
+    entered.flatten!
+    entered.uniq!
+    entered.sort!
+
+    @responses = {
+      entered: entered,
+      outstanding: items,
+      mandatory: @response_set.incomplete_triggered_mandatory_questions.count,
+      mandatory_completed: mandatory_completed
     }
+
 
     render json: @responses
   end

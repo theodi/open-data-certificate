@@ -327,7 +327,7 @@ $(document).ready(function($){
         complete += requirements.standard.complete;
       }
       //if(window.console) console.log('setting ' + level + ': ' + complete + ' / ' + required);
-      $('#bar-' + level).width((required === 0 ? '0' : 100*(complete/required)) + '%');
+      //$('#bar-' + level).width((required === 0 ? '0' : 100*(complete/required)) + '%');
     });
 
     // first incomplete is our target
@@ -364,59 +364,36 @@ $(document).ready(function($){
     
     $.getJSON(url)
     .then(function(data){
-      console.clear();
-      console.log("url:", url)
-      console.log("--", data)
+      // console.log("url:", url)
 
       // global debug
       debug_data = data;
 
-      /* 
-        data = [{
-          answered: true,
-          id: 6992,
-          reference_identifier: "pilot_4",
-          requirement: "pilot_4",
-          triggered: true
-        },…]
-      */
-
-      // group the items by level
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
 
-      function meetsLevel(level){
-        return function(item){
-          return item.requirement && item.requirement.match(level + '_');
-        }
-      }
+      var pending = data.mandatory,
+          complete = data.mandatory_completed,
+          percentage;
 
-      function isMandatory(item){
-        return item.is_mandatory;
-      }
-
-      // questions have many levels, will be repetitions
-      var grouped = {};
       _.each(levels, function(level){
-        grouped[level] = _.filter(data, meetsLevel(level));
+
+        // rolling values
+        pending  += _.filter(data.outstanding, has_level(level)).length;
+        complete += _.filter(data.entered,     has_level(level)).length;
+
+        percentage = ((complete / (pending + complete))*100)
+
+        $('#bar-' + level).width(percentage + '%');
+
+        // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
 
-      grouped['mandatory'] = _.filter(data, isMandatory);
 
-
-      // debug logging
-      function out(items, level){
-        var triggered = items.filter(function(d){return d.triggered}),
-            triggered_and_answered = triggered.filter(function(d){return d.answered});
-        $('#bar-' + level).parent().next()
-          .text('all='+items.length+', visible='+triggered.length+', answered='+triggered_and_answered.length)
-          .css('color','#f08')// debug
-
-
-        console.log("level: %s, items: %d, triggered: %d, triggered+answered: %d", level, items.length, triggered.length, triggered_and_answered.length)
+      function has_level(name){
+        return function(item){
+          return item.indexOf(name+'_') === 0
+        }
       }
-
-      out(data, "all")
-      _.each(grouped,out)
 
     });
   });
