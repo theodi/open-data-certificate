@@ -341,6 +341,8 @@ $(document).ready(function($){
       }
     }
 
+    return;
+
     $('.status_texts dt').filter(function(){return $(this).text() == completed;})
       // display the dd
       .next().addClass('active')
@@ -373,7 +375,7 @@ $(document).ready(function($){
 
       var pending = data.mandatory,
           complete = data.mandatory_completed,
-          percentage;
+          percentage, attained = 'none';
 
       _.each(levels, function(level){
 
@@ -385,8 +387,29 @@ $(document).ready(function($){
 
         $('#bar-' + level).width(percentage + '%');
 
+        if(percentage === 100){attained = level}
+
+        // debug
         // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
+
+
+      // update the overal attainment
+
+      $('.status_texts dt')
+        // display the active dd
+        .filter(function(){return $(this).text() == attained;})
+        .next().addClass('active')
+
+        // hide any others
+        .siblings().removeClass('active');
+
+
+      $('#panel_handle')
+        // removed any 'attained-' classes
+        .toggleClass(function(i, name){return name.indexOf('attained-') === -1})
+        // set to the correct level
+        .addClass('attained-' + attained);
 
 
       function has_level(name){
