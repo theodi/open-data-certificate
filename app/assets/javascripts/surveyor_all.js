@@ -448,6 +448,7 @@ $(document).ready(function($){
   function fillField(question, answer) {
     var $row = $('fieldset[data-reference-identifier="'+ question +'"]');
     $row.data('autocompleted-value', $.isArray(answer) ? answer.join(',') : answer);
+    $row.removeClass('q_hidden');
     $row.data('autocompletable', true);
     var $input = $row.find('li.input');
 

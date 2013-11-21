@@ -114,11 +114,20 @@ class KittenData < ActiveRecord::Base
 
     # Assumptions for data.gov.uk
     if url.include?("data.gov.uk")
+      uri = URI(url)
+      package = uri.path.split("/").last
+      
       @fields["publisherOrigin"] = "true"
+      @fields["copyrightURL"] = url
       @fields["dataPersonal"] = "not_personal"
       @fields["frequentChanges"] = "false"
+      @fields["listed"] = "true"
+      @fields["listing_0"] = "http://data.gov.uk"
       @fields["vocabulary"] = "false"
       @fields["codelists"] = "false"
+      @fields["contentRights"] = "samerights"
+      @fields["versionManagement"] = ["list"]
+      @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
     end
 
     # Checks if any of the distributions are machine readable or open
