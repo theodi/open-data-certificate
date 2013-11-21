@@ -130,6 +130,27 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal "application/atom+xml", response.content_type
   end
   
+  test "Requesting an Atom feed for a dataset returns the correct stuff" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :show, {id: cert.response_set.dataset.id, format: "feed"}
+    assert_response :success
+    
+    feed = RSS::Parser.parse response.body, false
+    
+    assert_equal "http://www.example.com", feed.entry.links[2].href
+    assert_equal "about", feed.entry.links[2].rel
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}.json", feed.entry.links[3].href
+    assert_equal "alternate", feed.entry.links[3].rel
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.html", feed.entry.links[4].href
+    assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[4].rel
+    assert_equal "text/html", feed.entry.links[4].type
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.js", feed.entry.links[5].href
+    assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[5].rel
+    assert_equal "application/javascript", feed.entry.links[5].type
+  end
+  
   test "Requesting an Atom feed for all datasets returns Atom" do
     10.times do 
       cert = FactoryGirl.create(:published_certificate_with_dataset)
