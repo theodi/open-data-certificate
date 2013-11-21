@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'rss'
 
 class DatasetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -136,6 +137,27 @@ class DatasetsControllerTest < ActionController::TestCase
     get :index, { format: "feed" }
     assert_response :success
     assert_equal "application/atom+xml", response.content_type    
+  end
+  
+  test "atom feed for all datasets returns the correct stuff" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, { :format => :feed }
+    
+    feed = RSS::Parser.parse response.body
+
+    assert_response :success
+    assert_equal 1, feed.entries.count
+    assert_equal "http://www.example.com", feed.entry.links[1].href
+    assert_equal "about", feed.entry.links[1].rel
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}.json", feed.entry.links[2].href
+    assert_equal "alternate", feed.entry.links[2].rel
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.html", feed.entry.links[3].href
+    assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[3].rel
+    assert_equal "text/html", feed.entry.links[3].type
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.js", feed.entry.links[4].href
+    assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[4].rel
+    assert_equal "application/javascript", feed.entry.links[4].type
   end
   
   test "Requesting an Atom feed for a search query returns Atom" do
