@@ -264,13 +264,18 @@ $(document).ready(function($){
 
   // Questionnaire status panel
   $('#status_panel').on('update', function(){
+    var panel = this;
 
     // progress url set as data attribute
     var url = $(this).data('progress-url');
+
+    $(panel).addClass('loading');
     
     $.getJSON(url)
     .then(function(data){
       // console.log("url:", url)
+
+      $(panel).removeClass('loading');
 
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
 

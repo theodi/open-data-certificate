@@ -2312,6 +2312,20 @@ header .jurisdiction{
     left:-78px;
   }
 
+  #panel_loading{
+    float:right;
+    display:none;
+  }
+
+  &.loading{
+    #panel_loading{
+      display:block;
+    }
+    .bar{
+      opacity:0.5;
+    }
+  }
+
   h3 {
     margin-bottom: 0;
     display: inline;
