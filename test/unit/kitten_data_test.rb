@@ -235,6 +235,8 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "true", @kitten_data.fields["listed"]
     assert_equal "http://data.gov.uk", @kitten_data.fields["listing_0"]
     assert_equal "samerights", @kitten_data.fields["contentRights"]
+    assert_equal ["list"], @kitten_data.fields["versionManagement"]
+    assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", @kitten_data.fields["versionsUrl"]
   end
 
   test 'Distribution metadata is set correctly' do
