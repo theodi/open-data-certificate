@@ -15,7 +15,7 @@ $(document).ready(function($){
   // Rails support
   //
 
-  // 'use strict';
+  'use strict';
 
   // Display when an remote form failed
   $(document).on('ajax:error', 'form[data-remote-error-message]', function(){
@@ -271,9 +271,6 @@ $(document).ready(function($){
     $.getJSON(url)
     .then(function(data){
       // console.log("url:", url)
-
-      // global debug
-      debug_data = data;
 
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
 
