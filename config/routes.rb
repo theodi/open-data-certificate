@@ -22,6 +22,10 @@ OpenDataCertificate::Application.routes.draw do
   post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
   get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
 
+  # Get certificate from dataset url
+  get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url', 
+                     :constraints => lambda { |request| request.params[:datasetUrl].present? }
+
   resources :datasets do
     put 'start_questionnaire'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
@@ -44,10 +48,6 @@ OpenDataCertificate::Application.routes.draw do
     put :accept, on: :member
   end
 
-  # Certificate legacy redirects
-  get '/certificates/:id', to: 'certificates#legacy_show'
-  get '/certificates/:id/:type', to: 'certificates#legacy_show'
-
   # User dashboard
   get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
   get 'dashboard', to: redirect('/users/dashboard')
@@ -67,7 +67,7 @@ OpenDataCertificate::Application.routes.draw do
   end
 
   # Get badge for a url
-  get 'get_badge' => 'certificates#get_badge'
+  get 'get_badge' => 'certificates#certificate_from_dataset_url' 
 
   # 'Static' pages managed by HighVoltage here...
   get 'about' => 'pages#show', :id => 'about'
@@ -91,6 +91,10 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/events' => 'main#status_events'
 
   root :to => 'main#home'
+  
+  # Certificate legacy redirects
+  get '/certificates/:id', to: 'certificates#legacy_show'
+  get '/certificates/:id/:type', to: 'certificates#legacy_show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

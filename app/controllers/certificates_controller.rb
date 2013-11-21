@@ -76,21 +76,23 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
       format.js
-      format.any(:png, :html) { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
+      format.html { render 'badge', :layout => false }
+      format.png { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
     end
   end
   
-  def get_badge
+  def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
-    unless params[:datasetUrl].nil?
-      @certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
-      unless @certificate.nil?
-        respond_to do |format|
-          format.any(:js, :html) { render 'badge.js' and return }
-        end
+    certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
+    unless certificate.nil?
+      if params[:type].nil?
+        redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
+      elsif params[:type] == "embed"
+        redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
+      elsif params[:type] == "badge"
+        redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
       end
     end
-    render :nothing => true
   end
 
 
