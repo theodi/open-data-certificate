@@ -11,9 +11,14 @@ class DatasetsController < ApplicationController
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
-                .order('response_sets.attained_index DESC')
     
     @title = t('datasets.datasets')
+    
+    if params[:format] == "feed"
+      @datasets = @datasets.order('datasets.updated_at DESC')
+    else
+      @datasets = @datasets.order('response_sets.attained_index DESC')
+    end
 
     if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)
@@ -24,7 +29,7 @@ class DatasetsController < ApplicationController
       @datasets = @datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
-
+    
     if params[:search]
       @title = t('datasets.search_results')
       
