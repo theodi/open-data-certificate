@@ -1,5 +1,4 @@
 builder.id dataset_url(dataset)
-builder.link :href => dataset_url(dataset)
 builder.link :rel => "about", :href => dataset.documentation_url
 builder.link :rel => "alternate", :type => "application/json", 
          :href => polymorphic_url([dataset, certificate], :format => :json)
