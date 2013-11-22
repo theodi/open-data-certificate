@@ -25,11 +25,11 @@ class CertificatesController < ApplicationController
     certificate = Dataset.find(params[:dataset_id]).certificates.latest
     unless certificate.nil?
       if params[:type].nil?
-        redirect_to dataset_certificate_path params[:dataset_id], certificate.id
+        redirect_to dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
       elsif params[:type] == "embed"
-        redirect_to embed_dataset_certificate_path params[:dataset_id], certificate.id
+        redirect_to embed_dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
       elsif params[:type] == "badge"
-        redirect_to badge_dataset_certificate_path params[:dataset_id], certificate.id
+        redirect_to badge_dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
       end
     else
       raise ActiveRecord::RecordNotFound
