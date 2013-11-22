@@ -13,7 +13,8 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
       xml.title certificate.name
       xml.content certificate.attained_level_title
       xml.updated DateTime.parse(certificate.updated_at.to_s).rfc3339
-      xml.id dataset_certificate_url(@dataset, certificate)
+      render(:partial => 'datasets/dataset', 
+             :locals => {:builder => xml, :dataset => @dataset, :certificate => certificate })
     end
   end
 end
