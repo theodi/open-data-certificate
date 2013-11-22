@@ -8,28 +8,25 @@ json.dataset do |dataset|
   dataset.dataLicense cert.response_set.data_licence_determined_from_responses[:url]
   dataset.contentLicense cert.response_set.content_licence_determined_from_responses[:url]
   responses.each do |k, response|
-    if response.count == 1
-      response = response[0]
-      if response.question.pick == 'none'
-        if response.answer.input_type == 'url'
-          dataset.set! response.question.reference_identifier, response.statement_text
-        else
-          dataset.set! response.question.reference_identifier, response.statement_text
+    resps = []
+    response.each do |r|
+      if r.question.pick == 'none'
+        resps << r.statement_text
+      elsif r.question.pick == 'one'
+        if r.answer.reference_identifier =~ /false|true/ && r.question.answers.count == 2
+          resps << !!(r.answer.reference_identifier == "true")
+        elsif r.question.reference_identifier !~ /dataLicence|contentLicence/
+          resps << r.answer.reference_identifier
         end
-      elsif response.question.pick == 'one'
-        if response.answer.reference_identifier =~ /false|true/ && response.question.answers.count == 2
-          dataset.set! response.question.reference_identifier, !!(response.answer.reference_identifier == "true")
-        elsif response.question.reference_identifier !~ /dataLicence|contentLicence/
-          dataset.set! response.question.reference_identifier, response.answer.reference_identifier
-        end
-      end  
-    else
-      resps = []
-      response.each do |r|
+      else
         resps << r.answer.reference_identifier
-      end
+      end  
+    end
+    if resps.count == 1
+      dataset.set! response[0].question.reference_identifier, resps[0]
+    elsif resps.count > 1
       dataset.set! response[0].question.reference_identifier, resps
-    end      
+    end
   end
 end
 json.jurisdiction cert.response_set.jurisdiction
