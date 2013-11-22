@@ -35,6 +35,45 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal "application/json", response.content_type
   end
+  
+  test "Requesting a JSON version of a certificate returns the correct level" do
+    levels = {
+        "basic" => "raw",
+        "pilot" => "pilot",
+        "standard" => "standard",
+        "exemplar" => "expert"
+      }
+      
+    levels.each do |level, actual|
+      cert = FactoryGirl.create(:published_certificate_with_dataset, attained_level: level)
+      get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+      
+      json = JSON.parse(response.body)
+      
+      assert_equal actual, json["certificate"]["level"]
+    end
+  end
+  
+  test "Requesting a JSON version of a certificate returns the correct juristiction and status" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    
+    json = JSON.parse(response.body)
+    
+    assert_equal "Simple survey", json["certificate"]["jurisdiction"]
+    assert_equal "alpha", json["certificate"]["status"]
+  end
+  
+  test "Requesting a JSON version of a certificate returns the correct badge urls" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    
+    json = JSON.parse(response.body)
+    
+    assert_equal "http://test.host/datasets/1/certificates/2/badge.js", json["certificate"]["badges"]["application/javascript"]
+    assert_equal "http://test.host/datasets/1/certificates/2/badge.html", json["certificate"]["badges"]["text/html"]
+    assert_equal "http://test.host/datasets/1/certificates/2/badge.png", json["certificate"]["badges"]["image/png"]
+  end
 
   test "mark certificate as valid" do
     cert = FactoryGirl.create(:certificate_with_dataset)

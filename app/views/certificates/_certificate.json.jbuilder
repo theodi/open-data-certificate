@@ -1,6 +1,13 @@
 responses = cert.get_responses
 json.title "Open Data Certificate for #{cert.response_set.title}"
 json.uri dataset_certificate_url(cert.dataset, cert)
+json.jurisdiction cert.response_set.jurisdiction
+json.status cert.response_set.survey.try(:status)
+json.badges do |badge|
+  badge.set! "application/javascript", badge_dataset_certificate_url(cert.dataset, cert, :format => "js")
+  badge.set! "text/html", badge_dataset_certificate_url(cert.dataset, cert, :format => "html")
+  badge.set! "image/png", badge_dataset_certificate_url(cert.dataset, cert, :format => "png")
+end
 json.dataset do |dataset|
   dataset.title cert.response_set.title
   dataset.publisher cert.response_set.dataset_curator_determined_from_responses
@@ -30,5 +37,5 @@ json.dataset do |dataset|
   end
 end
 json.jurisdiction cert.response_set.jurisdiction
-json.level cert.attained_level.titleize
+json.level t("levels.#{cert.attained_level}.title").downcase
 json.created_at cert.created_at
