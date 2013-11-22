@@ -38,6 +38,47 @@ class RedirectsTest < ActionDispatch::IntegrationTest
     assert_redirected_to "/users/#{user.id}/edit"
   end
   
+  context "latest certificate URL" do
+    
+    setup do
+      @cert = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    
+    should "redirect to the correct certificate" do
+      get "/datasets/#{@cert.response_set.dataset.id}/certificates/latest"
+      
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}"
+    end
+    
+    should "redirect to the correct badge" do
+      get "/datasets/#{@cert.response_set.dataset.id}/certificates/latest/badge"
+      
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/badge"
+    end
+    
+    should "redirect to the correct embed page" do
+      get "/datasets/#{@cert.response_set.dataset.id}/certificates/latest/embed"
+      
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/embed"
+    end
+    
+    should "preserve the format when redirecting" do
+      get "/datasets/#{@cert.response_set.dataset.id}/certificates/latest.json"
+      
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}.json"
+      
+      get "/datasets/#{@cert.response_set.dataset.id}/certificates/latest/badge.js"
+      
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/badge.js"
+    end
+    
+  end
+  
   context "certificate from dataset URL" do
     
     setup do
