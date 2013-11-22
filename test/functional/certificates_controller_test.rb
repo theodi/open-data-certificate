@@ -53,6 +53,16 @@ class CertificatesControllerTest < ActionController::TestCase
       assert_equal actual, json["certificate"]["level"]
     end
   end
+  
+  test "Requesting a JSON version of a certificate returns the correct juristiction and status" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    
+    json = JSON.parse(response.body)
+    
+    assert_equal "Simple survey", json["certificate"]["jurisdiction"]
+    assert_equal "alpha", json["certificate"]["status"]
+  end
 
   test "mark certificate as valid" do
     cert = FactoryGirl.create(:certificate_with_dataset)

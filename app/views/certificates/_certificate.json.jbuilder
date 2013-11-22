@@ -1,6 +1,8 @@
 responses = cert.get_responses
 json.title "Open Data Certificate for #{cert.response_set.title}"
 json.uri dataset_certificate_url(cert.dataset, cert)
+json.jurisdiction cert.response_set.jurisdiction
+json.status cert.response_set.survey.try(:status)
 json.dataset do |dataset|
   dataset.title cert.response_set.title
   dataset.publisher cert.response_set.dataset_curator_determined_from_responses
