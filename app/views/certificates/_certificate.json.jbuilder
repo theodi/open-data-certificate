@@ -30,5 +30,5 @@ json.dataset do |dataset|
   end
 end
 json.jurisdiction cert.response_set.jurisdiction
-json.level cert.attained_level.titleize
+json.level t("levels.#{cert.attained_level}.title").downcase
 json.created_at cert.created_at
