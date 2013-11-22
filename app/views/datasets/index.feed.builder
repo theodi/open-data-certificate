@@ -12,19 +12,12 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.title @title
   xml.updated DateTime.now.rfc3339.to_s
   @datasets.each do |dataset|
-    xml.entry do 
+    xml.entry do
       xml.title dataset.title
       xml.content dataset.certificate.attained_level_title
       xml.updated DateTime.parse(dataset.updated_at.to_s).rfc3339
-      xml.id dataset_url(dataset)
-      xml.link :href => dataset_url(dataset)
-      xml.link :rel => "about", :href => dataset.documentation_url
-      xml.link :rel => "alternate", :type => "application/json", 
-               :href => polymorphic_url([dataset, dataset.certificates.latest], :format => :json)
-      xml.link :rel => "http://schema.theodi.org/certificate#badge", :type => "text/html",
-               :href => badge_dataset_certificate_url(dataset.id, dataset.certificates.latest.id, :format => :html)
-      xml.link :rel => "http://schema.theodi.org/certificate#badge", :type => "application/javascript",
-               :href => badge_dataset_certificate_url(dataset.id, dataset.certificates.latest.id, :format => :js)
+      render(:partial => 'datasets/dataset', 
+             :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificates.latest })
     end
   end
 end
