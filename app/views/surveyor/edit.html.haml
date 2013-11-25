@@ -33,7 +33,7 @@
               %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
             .span3
               - if user_signed_in?
-                = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large'
+                = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large', 'data-btn-confirmable' => t('surveyor.saving_questionnaire')
               - else
                 =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
 

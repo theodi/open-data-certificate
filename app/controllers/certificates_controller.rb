@@ -65,6 +65,39 @@ class CertificatesController < ApplicationController
     end
   end
 
+  # this is similiar to the improvements, but returns
+  # json only, and includes completed questions too
+  def progress
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @response_set = @certificate.response_set
+
+    # requirements still to be met
+    outstanding = @response_set.triggered_requirements.map do |r|
+      r.reference_identifier
+    end
+
+    # questions that have been answered and their requirements
+    entered = @response_set.responses.map(&:answer).map do |a|
+      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
+    end
+
+    # the counts of mandatory questions and completions
+    mandatory = @response_set.incomplete_triggered_mandatory_questions.count
+    mandatory_completed = @response_set.responses.map(&:question).select(&:is_mandatory).count
+
+
+    @responses = {
+      outstanding: outstanding.sort,
+      entered: entered.flatten.compact.sort,
+
+      # counts only
+      mandatory: mandatory,
+      mandatory_completed: mandatory_completed
+    }
+
+    render json: @responses
+  end
+
   def embed
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|

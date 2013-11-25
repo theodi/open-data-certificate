@@ -1,4 +1,4 @@
-#status_panel
+#status_panel{data:{progress_url: progress_dataset_certificate_path(dataset_id:@response_set.dataset_id, id: @response_set.certificate.id)}}
   #panel_handle
   %dl.status_texts
     %dt none
@@ -13,24 +13,29 @@
     %dd= t('level_status.exemplar').html_safe
 
   %hr
-  %h3 Raw 
+  #panel_loading
+    = t '.updating'
+    %i.icon.icon-refresh.icon-spin
+
+  %h3= t '.raw'
   .progress.progress-striped.progress-info
     .bar#bar-basic
 
   %hr
-  %h3 Pilot
+  %h3= t '.pilot'
   .progress.progress-striped.progress-warning
     .bar#bar-pilot
  
   %hr
-  %h3 Standard
+  %h3= t '.standard'
   .progress.progress-striped.progress-success
     .bar#bar-standard
 
   %hr
-  %h3 Expert
+  %h3= t '.expert'
   .progress.progress-striped.progress-danger
     .bar#bar-exemplar
+  
   %hr
   %p 
   =link_to t('level_status.improve'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)

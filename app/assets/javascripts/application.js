@@ -106,7 +106,7 @@ $(document).ready(function($){
     var $this = $(this),
         message = $this.data('btn-confirmable');
 
-    if(message) $this.text(message);
+    if(message) $this.is('input') ? $this.val(message) : $this.text(message);
 
     $this.addClass('btn-confirmed disabled');
 
@@ -263,101 +263,64 @@ $(document).ready(function($){
 
 
   // Questionnaire status panel
-
-  // test if a fieldset has been filled out of not
-  $.fn.is_completed = function(){
-    var $inputs = $('li:not(.quiet)', this).find('input, select');
-    return (($inputs.length === 1 && $inputs.val() !== '') || $inputs.is(':checked'));
-  };
-
   $('#status_panel').on('update', function(){
-    var levels = ['basic', 'pilot', 'standard', 'exemplar'];
-    var requirements = {};
-    $.each(levels, function(i, level){
-      requirements[level] = { required: 0, complete: 0 };
-    });
+    var panel = this;
 
-    var $questions = $('fieldset.question-row:not(.q_hidden)');
+    // progress url set as data attribute
+    var url = $(this).data('progress-url');
 
-    // mandatory fields count as a basic requirement
-    var $mandatory = $questions.filter('.mandatory'),
-        $mandatoryComplete = $mandatory.filter($.fn.is_completed);
+    $(panel).addClass('loading');
+    
+    $.getJSON(url)
+    .then(function(data){
+      // console.log("url:", url)
 
-    requirements.basic.required += $mandatory.size();
-    requirements.basic.complete += $mandatoryComplete.size();
+      $(panel).removeClass('loading');
 
-    $questions.each(function(){
-      var $this = $(this);
-      var $requirement = $this.closest('li.container').find('fieldset.q_label');
-      var completed = $this.is_completed();
+      var levels = ['basic', 'pilot', 'standard', 'exemplar'];
 
-      $.each(levels,function(i, level){
-        if($requirement.is('.requirement_' + level)){
-          requirements[level].required ++;
-          if(completed && $requirement.is('.q_hidden.requirement_' + level)) {
-            requirements[level].complete ++;
-          }
-        }
+      var pending = data.mandatory,
+          complete = data.mandatory_completed,
+          percentage, attained = 'none';
+
+      _.each(levels, function(level){
+
+        // rolling values
+        pending  += _.filter(data.outstanding, has_level(level)).length;
+        complete += _.filter(data.entered,     has_level(level)).length;
+
+        percentage = ((complete / (pending + complete))*100)
+
+        $('#bar-' + level).width(percentage + '%');
+
+        if(percentage === 100){attained = level}
+
+        // debug
+        // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
+
+
+      // display the overal attainment
+      $('.status_texts dt') // matching description title
+        .filter(function(){return $(this).text() == attained;})
+        .next().addClass('active')
+        .siblings().removeClass('active');
+
+
+      $('#panel_handle')
+        // removed any 'attained-' classes
+        .toggleClass(function(i, name){return name.indexOf('attained-') === -1})
+        .addClass('attained-' + attained);
+
+
+      function has_level(name){
+        return function(item){
+          return item.indexOf(name+'_') === 0
+        }
+      }
+
     });
-
-    // previously based on requirements (keeping this because it
-    // might be useful for collecting items for the ui)
-    // $.each(levels,function(i, level){
-    //   $('.requirement_' + level).each(function(){
-    //     requirements[level].required += $(this).size();
-    //     requirements[level].complete += $(this).filter('.q_hidden').size();
-    //   });
-    // });
-
-    // update the bars
-    $.each(requirements, function(level, totals) {
-      var required = totals.required,
-          complete = totals.complete;
-      if (level !== 'basic') {
-        required += requirements.basic.required;
-        complete += requirements.basic.complete;
-      }
-      if (level === 'standard' || level === 'exemplar') {
-        required += requirements.pilot.required;
-        complete += requirements.pilot.complete;
-      }
-      if (level === 'exemplar') {
-        required += requirements.standard.required;
-        complete += requirements.standard.complete;
-      }
-      //if(window.console) console.log('setting ' + level + ': ' + complete + ' / ' + required);
-      $('#bar-' + level).width((required === 0 ? '0' : 100*(complete/required)) + '%');
-    });
-
-    // first incomplete is our target
-    var completed = 'none';
-    for (var i = 0; i < levels.length; i++) {
-      var level = levels[i], r = requirements[level];
-      if(r.required === r.complete){
-        completed = level;
-      } else {
-        break;
-      }
-    }
-
-    $('.status_texts dt').filter(function(){return $(this).text() == completed;})
-      // display the dd
-      .next().addClass('active')
-
-      // hide any others
-      .siblings().removeClass('active');
-
-    // update the handle image
-    var $handle = $('#panel_handle');
-    $.each(levels, function(i, l){
-      $handle.toggleClass('attained-' + l, l == completed);
-    });
-
   });
-
-
-
 
 
   // when surveyor has displayed/hidden elements
