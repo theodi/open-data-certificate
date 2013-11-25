@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031142907) do
+ActiveRecord::Schema.define(:version => 20131125100024) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20131031142907) do
     t.boolean  "display_on_certificate",                   :default => false
     t.string   "question_corresponding_to_requirement_id"
     t.string   "answer_corresponding_to_requirement_id"
+    t.string   "discussion_topic"
   end
 
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
