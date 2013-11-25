@@ -12,7 +12,8 @@ survey 'GB',
 
     q_dataTitle 'What\'s this data called?',
       :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
-      :required => :required
+      :required => :required,
+      :discussion_topic => :dataTitle_gb
     a_1 'Data Title',
       :string,
       :placeholder => 'Data Title',
