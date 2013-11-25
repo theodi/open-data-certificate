@@ -43,6 +43,14 @@ en:
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
 
+    # right hand sidebar
+    status_panel:
+        updating: updating
+        raw: Raw
+        pilot: Pilot
+        standard: Standard
+        expert: Expert
+
   requirement_label:
     requirement: This is required for <strong>all levels</strong>
     requirement_pilot: This is required for <strong>pilot level</strong> and above
