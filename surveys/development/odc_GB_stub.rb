@@ -13,7 +13,7 @@ survey 'GB',
     q_dataTitle 'What\'s this data called?',
       :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
       :required => :required,
-      :discussion_topic => :dataTitle_gb
+      :discussion_topic => :gb_dataTitle
     a_1 'Data Title',
       :string,
       :placeholder => 'Data Title',
@@ -22,7 +22,8 @@ survey 'GB',
     q_documentationUrl 'Where is it described?',
       :display_on_certificate => true,
       :text_as_statement => 'This data is described at',
-      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
+      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.',
+      :discussion_topic => :gb_documentationUrl
     a_1 'Documentation URL',
       :string,
       :input_type => :url,
@@ -47,7 +48,8 @@ survey 'GB',
       :display_on_certificate => true,
       :text_as_statement => 'This data is published by',
       :help_text => 'Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
-      :required => :required
+      :required => :required,
+      :discussion_topic => :gb_publisher
     a_1 'Data Publisher',
       :string,
       :placeholder => 'Data Publisher',
@@ -56,7 +58,8 @@ survey 'GB',
     q_publisherUrl 'What website is the data published on?',
       :display_on_certificate => true,
       :text_as_statement => 'The data is published on',
-      :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
+      :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.',
+      :discussion_topic => :gb_publisherUrl
     a_1 'Publisher URL',
       :string,
       :input_type => :url,
@@ -64,7 +67,8 @@ survey 'GB',
 
     q_releaseType 'What kind of release is this?',
       :pick => :one,
-      :required => :required
+      :required => :required,
+      :discussion_topic => :gb_releaseType
     a_oneoff 'a one-off release of a single dataset',
       :help_text => 'This is a single file and you don’t currently plan to publish similar files in the future.'
     a_collection 'a one-off release of a set of related datasets',
