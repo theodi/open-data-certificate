@@ -3,8 +3,9 @@
     #{link_to @title, @back} -
   = t('.discussion')
 
-.discussion_help
-  = markdown @help
+-if @topic_help
+  .discussion_help
+    = markdown(@topic_help)
 
 %p.join-discussion
   %a.btn.btn-primary.btn-large
