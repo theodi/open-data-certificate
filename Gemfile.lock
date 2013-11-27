@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 6c53b0b708366df26447a074b826d18f5b74cd1d
+  revision: 91ac3c9b87a34e60ed3b7b16a51c61f9aa26c52d
   specs:
     data_kitten (0.0.1)
       curb
@@ -34,7 +34,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (3.0.23)
+    aasm (3.0.24)
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
       mail (~> 2.5.3)
@@ -91,7 +91,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.3)
-    docile (1.1.0)
+    docile (1.1.1)
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
@@ -157,7 +157,7 @@ GEM
       json (>= 1.7.5)
       rdf (>= 1.0.8)
     json_pure (1.8.1)
-    kaminari (0.14.1)
+    kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.3.3)
@@ -184,7 +184,6 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
-    lockfile (2.1.0)
     lograge (0.2.2)
       actionpack (>= 3)
       activesupport (>= 3)
@@ -197,7 +196,7 @@ GEM
     memcache-client (1.8.5)
     metaclass (0.0.1)
     method_source (0.8.2)
-    mime-types (1.25)
+    mime-types (1.25.1)
     mini_portile (0.5.2)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
@@ -214,7 +213,7 @@ GEM
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
-    pry (0.9.12.3)
+    pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -312,9 +311,8 @@ GEM
     shoulda-context (1.1.6)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
-    simplecov (0.8.1)
+    simplecov (0.8.2)
       docile (~> 1.1.0)
-      lockfile (>= 2.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
