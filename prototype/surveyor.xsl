@@ -102,6 +102,7 @@
 	<_group>
 		<_group>
 			<xsl:element name="q_{@id}">
+				<xsl:attribute name="discussion_topic" select="concat(if (ancestor::group[@id = 'legal']) then lower-case(/questionnaire/@jurisdiction) else 'gb', '_', @id)" />
 				<xsl:attribute name="label">
 					<xsl:apply-templates select="label" mode="html" />
 				</xsl:attribute>
@@ -549,7 +550,7 @@
 </xsl:template>
 
 <!-- properties whose values are tokens rather than strings -->
-<xsl:template match="@required | @input_type | @pick | translations/@en" mode="syntax">
+<xsl:template match="@required | @input_type | @pick | translations/@en | @discussion_topic" mode="syntax">
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>

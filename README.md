@@ -72,6 +72,8 @@ If the question is a "normal" question (ie: not a label), the requirement attrib
 
 * `:display_on_certificate` - If the question should appear on the certificate
 
+* `:discussion_topic` - Sets the topic (and enables) juvia discussion for this question (accessible by clicking "Ask for help with this question").  The `:help_text` value for this question will appear at the top of the discussion page.
+
 ##### answer
 
 * `:requirement` - Identifies the recommended improvement that this answer satisfies.

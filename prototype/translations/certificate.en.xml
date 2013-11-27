@@ -388,7 +388,7 @@
 				<if test="this.versionManagement().template">
 					<question id="versionsTemplateUrl" display="Releases follow this consistent URL pattern">
 						<label>What format do dataset release URLs follow?</label>
-						<input type="url" placeholder="Version Template URL" required="required"/>
+						<input type="text" placeholder="Version Template URL" required="required"/>
 						<help>This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`</help>
 					</question>
 				</if>
@@ -443,7 +443,7 @@
 					<if test="this.dumpManagement().template">
 						<question id="dumpsTemplateUrl" display="Database dumps follow the consistent URL pattern">
 							<label>What format do database dump URLs follow?</label>
-							<input type="url" placeholder="Dump Template URL" required="required"/>
+							<input type="text" placeholder="Dump Template URL" required="required"/>
 							<help>This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`</help>
 						</question>
 					</if>
