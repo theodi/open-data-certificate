@@ -2,7 +2,7 @@ survey 'AD',
   :full_title => 'Andorra',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p><strong><!-- TESTING -->This has been generated based on a default and needs to be localised for Andorra. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p><strong>This has been generated based on a default and needs to be localised for Andorra. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -1514,7 +1514,7 @@ survey 'AD',
     condition_B :q_versionManagement, '==', :a_template
     a_1 'Version Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Version Template URL',
       :required => :required
 
@@ -1625,7 +1625,7 @@ survey 'AD',
     condition_C :q_dumpManagement, '==', :a_template
     a_1 'Dump Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Dump Template URL',
       :required => :required
 

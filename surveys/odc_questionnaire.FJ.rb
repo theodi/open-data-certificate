@@ -1514,7 +1514,7 @@ survey 'FJ',
     condition_B :q_versionManagement, '==', :a_template
     a_1 'Version Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Version Template URL',
       :required => :required
 
@@ -1625,7 +1625,7 @@ survey 'FJ',
     condition_C :q_dumpManagement, '==', :a_template
     a_1 'Dump Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Dump Template URL',
       :required => :required
 
