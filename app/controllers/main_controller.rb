@@ -12,7 +12,11 @@ class MainController < ApplicationController
     @back  = params[:back]
 
     # Look for a question with this topic and use the help text
-    @topic_help = Question.where(discussion_topic: @topic).order(:updated_at).last.try(:help_text)
+    @topic_help = begin
+      Question.find(params[:question_id]).help_text
+    rescue ActiveRecord::RecordNotFound
+      ''
+    end
   end
 
   def discussion
