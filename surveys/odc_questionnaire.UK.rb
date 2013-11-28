@@ -2,7 +2,7 @@ survey 'GB',
   :full_title => 'United Kingdom',
   :default_mandatory => 'false',
   :status => 'beta',
-  :description => '<p><!-- TESTING 123 -->This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -1605,7 +1605,7 @@ survey 'GB',
     condition_B :q_versionManagement, '==', :a_template
     a_1 'Version Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Version Template URL',
       :required => :required
 
@@ -1716,7 +1716,7 @@ survey 'GB',
     condition_C :q_dumpManagement, '==', :a_template
     a_1 'Dump Template URL',
       :string,
-      :input_type => :url,
+      :input_type => :text,
       :placeholder => 'Dump Template URL',
       :required => :required
 
