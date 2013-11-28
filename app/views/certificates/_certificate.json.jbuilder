@@ -3,6 +3,7 @@ json.title "Open Data Certificate for #{cert.response_set.title}"
 json.uri dataset_certificate_url(cert.dataset, cert)
 json.jurisdiction cert.response_set.jurisdiction
 json.status cert.response_set.survey.try(:status)
+json.certification_type t(cert.certification_type, scope: 'certificate.certification_types')
 json.badges do |badge|
   badge.set! "application/javascript", badge_dataset_certificate_url(cert.dataset, cert, :format => "js")
   badge.set! "text/html", badge_dataset_certificate_url(cert.dataset, cert, :format => "html")
