@@ -116,8 +116,20 @@ class CertificatesController < ApplicationController
   
   def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
-    certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
-    unless certificate.nil?
+    datasets = Dataset.where(:documentation_url => params[:datasetUrl])
+    if datasets.count > 1
+      # Try and find the dataset where the user's email domain matches the documentation_url
+      dataset = datasets.select { |d| Domainatrix.parse(d.documentation_url).domain == Domainatrix.parse(d.user.email).domain }.first
+            
+      # If not, just default to first
+      if dataset.nil?
+        dataset = datasets.first
+      end
+    else
+      dataset = datasets.first
+    end
+    certificate = dataset.certificates.latest
+    unless certificate.nil?  
       if params[:type].nil?
         redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
       elsif params[:type] == "embed"

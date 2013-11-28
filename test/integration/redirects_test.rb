@@ -113,6 +113,23 @@ class RedirectsTest < ActionDispatch::IntegrationTest
       assert_redirected_to "/datasets/#{@cert.response_set.dataset.id}/certificates/#{@cert.id}/badge.js"
     end
     
+    should "redirect to a certificate created by a user that has the same domain email address as the dataset" do
+      user = FactoryGirl.create(:user, email: "bruce@wayne-enterprises.com")
+      dataset = FactoryGirl.create(:dataset, documentation_url: "http://www.wayne-enterprises.com/data/batcave-plans", user: user)
+      response_set = FactoryGirl.create(:response_set, dataset: dataset, aasm_state: 'published')
+      cert = FactoryGirl.create(:published_certificate, response_set: response_set, user: user)
+                  
+      5.times do
+        user = FactoryGirl.create(:user)
+        dataset = FactoryGirl.create(:dataset, documentation_url: "http://www.wayne-enterprises.com/data/batcave-plans", user: user)
+        FactoryGirl.create(:published_certificate, dataset: dataset, user: user)
+      end
+      
+      get "/datasets?datasetUrl=http://www.wayne-enterprises.com/data/batcave-plans"
+      assert_response :redirect
+      assert_redirected_to "/datasets/#{cert.response_set.dataset.id}/certificates/#{cert.id}"
+    end
+    
   end
 
 end

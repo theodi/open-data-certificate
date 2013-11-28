@@ -53,6 +53,8 @@ group :production do
   gem 'lograge'
 end
 
+gem 'mysql2'
+
 gem 'jquery-rails'
 gem 'underscore-rails'
 

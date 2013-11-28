@@ -92,6 +92,8 @@ GEM
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.3)
     docile (1.1.1)
+    domainatrix (0.0.11)
+      addressable
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
@@ -370,6 +372,7 @@ DEPENDENCIES
   data_kitten!
   delayed_job_active_record
   devise (= 3.0.3)
+  domainatrix
   dotenv-rails
   factory_girl_rails (~> 4.0)
   fog
