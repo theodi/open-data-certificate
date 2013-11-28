@@ -10,7 +10,7 @@ survey 'KI',
     :display_header => false do
 
     q_dataTitle 'What\'s this data called?',
-      :discussion_topic => :gb_dataTitle,
+      :discussion_topic => :dataTitle,
       :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
       :required => :required
     a_1 'Data Title',
@@ -19,7 +19,7 @@ survey 'KI',
       :required => :required
 
     q_documentationUrl 'Where is it described?',
-      :discussion_topic => :gb_documentationUrl,
+      :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
       :text_as_statement => 'This data is described at',
       :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
@@ -44,7 +44,7 @@ survey 'KI',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_publisher 'Who publishes this data?',
-      :discussion_topic => :gb_publisher,
+      :discussion_topic => :publisher,
       :display_on_certificate => true,
       :text_as_statement => 'This data is published by',
       :help_text => 'Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
@@ -55,7 +55,7 @@ survey 'KI',
       :required => :required
 
     q_publisherUrl 'What website is the data published on?',
-      :discussion_topic => :gb_publisherUrl,
+      :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The data is published on',
       :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
@@ -65,7 +65,7 @@ survey 'KI',
       :placeholder => 'Publisher URL'
 
     q_releaseType 'What kind of release is this?',
-      :discussion_topic => :gb_releaseType,
+      :discussion_topic => :releaseType,
       :pick => :one,
       :required => :required
     a_oneoff 'a one-off release of a single dataset',
@@ -926,7 +926,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_onWebsite 'Is there a link to your data from your main website?',
-      :discussion_topic => :gb_onWebsite,
+      :discussion_topic => :onWebsite,
       :help_text => 'Data can be found more easily if it is linked to from your main website.',
       :pick => :one
     a_false 'no'
@@ -944,7 +944,7 @@ survey 'KI',
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
       q_webpage 'Which page on your website links to the data?',
-        :discussion_topic => :gb_webpage,
+        :discussion_topic => :webpage,
         :display_on_certificate => true,
         :text_as_statement => 'The website links to the data from',
         :help_text => 'Give a URL on your main website that includes a link to this data.',
@@ -960,7 +960,7 @@ survey 'KI',
     end
 
     q_listed 'Is your data listed within a collection?',
-      :discussion_topic => :gb_listed,
+      :discussion_topic => :listed,
       :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',
       :pick => :one
     a_false 'no'
@@ -978,7 +978,7 @@ survey 'KI',
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
       q_listing 'Where is it listed?',
-        :discussion_topic => :gb_listing,
+        :discussion_topic => :listing,
         :display_on_certificate => true,
         :text_as_statement => 'The data appears in this collection',
         :help_text => 'Give a URL where this data is listed within a relevant collection. For example, data.gov.uk (if it\'s UK public sector data), hub.data.ac.uk (if it\'s UK academia data) or a URL for search engine results.',
@@ -994,7 +994,7 @@ survey 'KI',
     end
 
     q_referenced 'Is this data referenced from your own publications?',
-      :discussion_topic => :gb_referenced,
+      :discussion_topic => :referenced,
       :help_text => 'When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.',
       :pick => :one
     a_false 'no'
@@ -1012,7 +1012,7 @@ survey 'KI',
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       q_reference 'Where is your data referenced?',
-        :discussion_topic => :gb_reference,
+        :discussion_topic => :reference,
         :display_on_certificate => true,
         :text_as_statement => 'This data is referenced from',
         :help_text => 'Give a URL to a document that cites or references this data.',
@@ -1032,7 +1032,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_serviceType 'Does the data behind your API change?',
-      :discussion_topic => :gb_serviceType,
+      :discussion_topic => :serviceType,
       :display_on_certificate => true,
       :text_as_statement => 'The data behind the API',
       :pick => :one,
@@ -1047,7 +1047,7 @@ survey 'KI',
       :help_text => 'Some APIs give instant access to more up-to-date and ever-changing data'
 
     q_timeSensitive 'Will your data go out of date?',
-      :discussion_topic => :gb_timeSensitive,
+      :discussion_topic => :timeSensitive,
       :display_on_certificate => true,
       :text_as_statement => 'The accuracy or relevance of this data will',
       :pick => :one
@@ -1090,7 +1090,7 @@ survey 'KI',
     condition_E :q_timeSensitive, '!=', :a_false
 
     q_frequentChanges 'Does this data change at least daily?',
-      :discussion_topic => :gb_frequentChanges,
+      :discussion_topic => :frequentChanges,
       :display_on_certificate => true,
       :text_as_statement => 'This data changes',
       :help_text => 'Tell people if the underlying data changes on most days. When data changes frequently it also goes out of date quickly, so people need to know if you also update it frequently and quickly too.',
@@ -1104,7 +1104,7 @@ survey 'KI',
       :text_as_statement => 'at least daily'
 
     q_seriesType 'What type of dataset series is this?',
-      :discussion_topic => :gb_seriesType,
+      :discussion_topic => :seriesType,
       :display_on_certificate => true,
       :text_as_statement => 'This data is a series of',
       :pick => :one,
@@ -1120,7 +1120,7 @@ survey 'KI',
       :help_text => 'Choose if you create new datasets regularly. You might do this if the underlying data can\'t be released as open data or if you only publish data that\'s new since the last publication.'
 
     q_changeFeed 'Is a feed of changes available?',
-      :discussion_topic => :gb_changeFeed,
+      :discussion_topic => :changeFeed,
       :display_on_certificate => true,
       :text_as_statement => 'A feed of changes to this data',
       :help_text => 'Tell people if you provide a stream of changes that affect this data, like new entries or amendments to existing entries. Feeds might be in RSS, Atom or custom formats.',
@@ -1145,7 +1145,7 @@ survey 'KI',
     condition_D :q_changeFeed, '==', :a_false
 
     q_frequentSeriesPublication 'How often do you create a new release?',
-      :discussion_topic => :gb_frequentSeriesPublication,
+      :discussion_topic => :frequentSeriesPublication,
       :display_on_certificate => true,
       :text_as_statement => 'New releases of this data are made',
       :help_text => 'This determines how out of date this data becomes before people can get an update.',
@@ -1193,7 +1193,7 @@ survey 'KI',
     condition_C :q_frequentSeriesPublication, '!=', :a_daily
 
     q_seriesPublicationDelay 'How long is the delay between when you create a dataset and when you publish it it?',
-      :discussion_topic => :gb_seriesPublicationDelay,
+      :discussion_topic => :seriesPublicationDelay,
       :display_on_certificate => true,
       :text_as_statement => 'The lag between creation and publication of this data is',
       :pick => :one
@@ -1240,7 +1240,7 @@ survey 'KI',
     condition_B :q_seriesPublicationDelay, '!=', :a_minimal
 
     q_provideDumps 'Do you also publish dumps of this dataset?',
-      :discussion_topic => :gb_provideDumps,
+      :discussion_topic => :provideDumps,
       :display_on_certificate => true,
       :text_as_statement => 'The curator publishes',
       :help_text => 'A dump is an extract of the whole dataset into a file that people can download. This lets people do analysis that\'s different to analysis with API access.',
@@ -1261,7 +1261,7 @@ survey 'KI',
     condition_B :q_provideDumps, '==', :a_false
 
     q_dumpFrequency 'How frequently do you create a new database dump?',
-      :discussion_topic => :gb_dumpFrequency,
+      :discussion_topic => :dumpFrequency,
       :display_on_certificate => true,
       :text_as_statement => 'Database dumps are created',
       :help_text => 'Faster access to more frequent extracts of the whole dataset means people can get started quicker with the most up-to-date data.',
@@ -1313,7 +1313,7 @@ survey 'KI',
     condition_D :q_dumpFrequency, '!=', :a_daily
 
     q_corrected 'Will your data be corrected if it has errors?',
-      :discussion_topic => :gb_corrected,
+      :discussion_topic => :corrected,
       :display_on_certificate => true,
       :text_as_statement => 'Any errors in this data are',
       :help_text => 'It\'s good practice to fix errors in your data especially if you use it yourself. When you make corrections, people need to be told about them.',
@@ -1340,7 +1340,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_qualityUrl 'Where do you document issues with the quality of this data?',
-      :discussion_topic => :gb_qualityUrl,
+      :discussion_topic => :qualityUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Data quality is documented at',
       :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
@@ -1357,7 +1357,7 @@ survey 'KI',
     condition_A :q_qualityUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_qualityControlUrl 'Where is your quality control process described?',
-      :discussion_topic => :gb_qualityControlUrl,
+      :discussion_topic => :qualityControlUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Quality control processes are described at',
       :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
@@ -1378,7 +1378,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_backups 'Do you take offsite backups?',
-      :discussion_topic => :gb_backups,
+      :discussion_topic => :backups,
       :display_on_certificate => true,
       :text_as_statement => 'The data is',
       :help_text => 'Taking a regular offsite backup helps ensure that the data won\'t be lost in the case of accident.',
@@ -1396,7 +1396,7 @@ survey 'KI',
     condition_A :q_backups, '==', :a_false
 
     q_slaUrl 'Where do you describe any guarantees about service availability?',
-      :discussion_topic => :gb_slaUrl,
+      :discussion_topic => :slaUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Service availability is described at',
       :help_text => 'Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees.'
@@ -1416,7 +1416,7 @@ survey 'KI',
     condition_B :q_slaUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_statusUrl 'Where do you give information about the current status of the service?',
-      :discussion_topic => :gb_statusUrl,
+      :discussion_topic => :statusUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Service status is given at',
       :help_text => 'Give a URL for a page that tells people about the current status of your service, including any faults you are aware of.'
@@ -1436,7 +1436,7 @@ survey 'KI',
     condition_B :q_statusUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_onGoingAvailability 'How long will this data be available for?',
-      :discussion_topic => :gb_onGoingAvailability,
+      :discussion_topic => :onGoingAvailability,
       :display_on_certificate => true,
       :text_as_statement => 'The data is available',
       :pick => :one
@@ -1483,7 +1483,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_datasetUrl 'Where is your dataset?',
-      :discussion_topic => :gb_datasetUrl,
+      :discussion_topic => :datasetUrl,
       :display_on_certificate => true,
       :text_as_statement => 'This data is published at',
       :help_text => 'Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.'
@@ -1512,7 +1512,7 @@ survey 'KI',
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_versionManagement 'How do you publish a series of the same dataset?',
-      :discussion_topic => :gb_versionManagement,
+      :discussion_topic => :versionManagement,
       :requirement => ['basic_10'],
       :pick => :any
     dependency :rule => 'A'
@@ -1559,7 +1559,7 @@ survey 'KI',
     condition_E :q_versionManagement, '!=', :a_list
 
     q_currentDatasetUrl 'Where is your current dataset?',
-      :discussion_topic => :gb_currentDatasetUrl,
+      :discussion_topic => :currentDatasetUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The current dataset is available at',
       :help_text => 'Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released.',
@@ -1574,7 +1574,7 @@ survey 'KI',
       :required => :required
 
     q_versionsTemplateUrl 'What format do dataset release URLs follow?',
-      :discussion_topic => :gb_versionsTemplateUrl,
+      :discussion_topic => :versionsTemplateUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Releases follow this consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
@@ -1589,7 +1589,7 @@ survey 'KI',
       :required => :required
 
     q_versionsUrl 'Where is your list of dataset releases?',
-      :discussion_topic => :gb_versionsUrl,
+      :discussion_topic => :versionsUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Releases of this data are listed at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.',
@@ -1604,7 +1604,7 @@ survey 'KI',
       :required => :required
 
     q_endpointUrl 'Where is the endpoint for your API?',
-      :discussion_topic => :gb_endpointUrl,
+      :discussion_topic => :endpointUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The API service endpoint is',
       :help_text => 'Give a URL that\'s a starting point for people\'s scripts to access your API. This should be a service description document that helps the script to work out which services exist.'
@@ -1633,7 +1633,7 @@ survey 'KI',
     condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dumpManagement 'How do you publish database dumps?',
-      :discussion_topic => :gb_dumpManagement,
+      :discussion_topic => :dumpManagement,
       :pick => :any
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
@@ -1673,7 +1673,7 @@ survey 'KI',
     condition_C :q_dumpManagement, '!=', :a_list
 
     q_currentDumpUrl 'Where is the current database dump?',
-      :discussion_topic => :gb_currentDumpUrl,
+      :discussion_topic => :currentDumpUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The most recent database dump is always available at',
       :help_text => 'Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.',
@@ -1689,7 +1689,7 @@ survey 'KI',
       :required => :required
 
     q_dumpsTemplateUrl 'What format do database dump URLs follow?',
-      :discussion_topic => :gb_dumpsTemplateUrl,
+      :discussion_topic => :dumpsTemplateUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Database dumps follow the consistent URL pattern',
       :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
@@ -1705,7 +1705,7 @@ survey 'KI',
       :required => :required
 
     q_dumpsUrl 'Where is your list of available database dumps?',
-      :discussion_topic => :gb_dumpsUrl,
+      :discussion_topic => :dumpsUrl,
       :display_on_certificate => true,
       :text_as_statement => 'A list of database dumps is at',
       :help_text => 'Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.',
@@ -1721,7 +1721,7 @@ survey 'KI',
       :required => :required
 
     q_changeFeedUrl 'Where is your feed of changes?',
-      :discussion_topic => :gb_changeFeedUrl,
+      :discussion_topic => :changeFeedUrl,
       :display_on_certificate => true,
       :text_as_statement => 'A feed of changes to this data is at',
       :help_text => 'Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.',
@@ -1739,7 +1739,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_machineReadable 'Is this data machine-readable?',
-      :discussion_topic => :gb_machineReadable,
+      :discussion_topic => :machineReadable,
       :display_on_certificate => true,
       :text_as_statement => 'This data is',
       :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
@@ -1757,7 +1757,7 @@ survey 'KI',
     condition_A :q_machineReadable, '==', :a_false
 
     q_openStandard 'Is this data in a standard open format?',
-      :discussion_topic => :gb_openStandard,
+      :discussion_topic => :openStandard,
       :display_on_certificate => true,
       :text_as_statement => 'The format of this data is',
       :help_text => 'Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there’s lots of support so it’s easier for you to share data with more people. For example, XML, CSV and JSON are open standards.',
@@ -1776,7 +1776,7 @@ survey 'KI',
     condition_A :q_openStandard, '==', :a_false
 
     q_dataType 'What kind of data do you publish?',
-      :discussion_topic => :gb_dataType,
+      :discussion_topic => :dataType,
       :pick => :any
     a_documents 'human-readable documents',
       :help_text => 'Choose this if your data is meant for human consumption. For example; policy documents, white papers, reports and meeting minutes. These usually have some structure to them but are mostly text.'
@@ -1788,7 +1788,7 @@ survey 'KI',
       :help_text => 'Choose this if your data is structured in other ways. Like event details, railway timetables, contact information or anything that can be interpreted as data, and analysed and presented in multiple ways.'
 
     q_documentFormat 'Do your human-readable documents include formats that',
-      :discussion_topic => :gb_documentFormat,
+      :discussion_topic => :documentFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Documents are published',
       :pick => :one
@@ -1822,7 +1822,7 @@ survey 'KI',
     condition_C :q_documentFormat, '!=', :a_format
 
     q_statisticalFormat 'Does your statistical data include formats that',
-      :discussion_topic => :gb_statisticalFormat,
+      :discussion_topic => :statisticalFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Statistical data is published',
       :pick => :one
@@ -1869,7 +1869,7 @@ survey 'KI',
     condition_D :q_statisticalFormat, '!=', :a_format
 
     q_geographicFormat 'Does your geographic data include formats that',
-      :discussion_topic => :gb_geographicFormat,
+      :discussion_topic => :geographicFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Geographic data is published',
       :pick => :one
@@ -1903,7 +1903,7 @@ survey 'KI',
     condition_C :q_geographicFormat, '!=', :a_generic
 
     q_structuredFormat 'Does your structured data include formats that',
-      :discussion_topic => :gb_structuredFormat,
+      :discussion_topic => :structuredFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Structured data is published',
       :pick => :one
@@ -1925,7 +1925,7 @@ survey 'KI',
     condition_B :q_structuredFormat, '!=', :a_suitable
 
     q_identifiers 'Does your data use persistent identifiers?',
-      :discussion_topic => :gb_identifiers,
+      :discussion_topic => :identifiers,
       :display_on_certificate => true,
       :text_as_statement => 'The data includes',
       :help_text => 'Data is usually about real things like schools or roads or uses a coding scheme. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
@@ -1943,7 +1943,7 @@ survey 'KI',
     condition_A :q_identifiers, '==', :a_false
 
     q_resolvingIds 'Can the identifiers in your data be used to find extra information?',
-      :discussion_topic => :gb_resolvingIds,
+      :discussion_topic => :resolvingIds,
       :display_on_certificate => true,
       :text_as_statement => 'The persistent identifiers',
       :pick => :one
@@ -1976,7 +1976,7 @@ survey 'KI',
     condition_B :q_resolvingIds, '!=', :a_resolvable
 
     q_resolutionServiceURL 'Where is the service that is used to resolve the identifiers?',
-      :discussion_topic => :gb_resolutionServiceURL,
+      :discussion_topic => :resolutionServiceURL,
       :display_on_certificate => true,
       :text_as_statement => 'The identifier resolution service is at',
       :help_text => 'The resolution service should take an identifier as a query parameter and give back some information about the thing it identifies.'
@@ -1998,7 +1998,7 @@ survey 'KI',
     condition_C :q_resolutionServiceURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_existingExternalUrls 'Is there third-party information about things in your data on the web?',
-      :discussion_topic => :gb_existingExternalUrls,
+      :discussion_topic => :existingExternalUrls,
       :help_text => 'Sometimes other people outside your control provide URLs to the things your data is about. For example, your data might have postcodes in it that link to the Ordnance Survey website.',
       :pick => :one,
       :required => :exemplar
@@ -2008,7 +2008,7 @@ survey 'KI',
     a_true 'yes'
 
     q_reliableExternalUrls 'Is that third-party information reliable?',
-      :discussion_topic => :gb_reliableExternalUrls,
+      :discussion_topic => :reliableExternalUrls,
       :help_text => 'If a third-party provides public URLs about things in your data, they probably take steps to ensure data quality and reliability. This is a measure of how much you trust their processes to do that. Look for their open data certificate or similar hallmarks to help make your decision.',
       :pick => :one,
       :required => :exemplar
@@ -2019,7 +2019,7 @@ survey 'KI',
     a_true 'yes'
 
     q_externalUrls 'Does your data use those third-party URLs?',
-      :discussion_topic => :gb_externalUrls,
+      :discussion_topic => :externalUrls,
       :display_on_certificate => true,
       :text_as_statement => 'Third-party URLs are',
       :help_text => 'You should use third-party URLs that resolve to information about the things your data describes. This reduces duplication and helps people combine data from different sources to make it more useful.',
@@ -2048,7 +2048,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_provenance 'Do you provide machine-readable provenance for your data?',
-      :discussion_topic => :gb_provenance,
+      :discussion_topic => :provenance,
       :display_on_certificate => true,
       :text_as_statement => 'The provenance of this data is',
       :help_text => 'This about the origins of how your data was created and processed before it was published. It builds trust in the data you publish because people can trace back how it has been handled.',
@@ -2067,7 +2067,7 @@ survey 'KI',
     condition_A :q_provenance, '==', :a_false
 
     q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
-      :discussion_topic => :gb_digitalCertificate,
+      :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
       :text_as_statement => 'This data can be verified using',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
@@ -2093,7 +2093,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_documentationMetadata 'Does your data documentation include machine-readable data for:',
-      :discussion_topic => :gb_documentationMetadata,
+      :discussion_topic => :documentationMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'The documentation includes machine-readable data for',
       :pick => :any
@@ -2233,7 +2233,7 @@ survey 'KI',
     condition_B :q_documentationMetadata, '!=', :a_keyword
 
     q_distributionMetadata 'Does your documentation include machine-readable metadata for each distribution on:',
-      :discussion_topic => :gb_distributionMetadata,
+      :discussion_topic => :distributionMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'The documentation about each distribution includes machine-readable data for',
       :pick => :any
@@ -2306,7 +2306,7 @@ survey 'KI',
     condition_C :q_distributionMetadata, '!=', :a_rights
 
     q_technicalDocumentation 'Where is the technical documentation for the data?',
-      :discussion_topic => :gb_technicalDocumentation,
+      :discussion_topic => :technicalDocumentation,
       :display_on_certificate => true,
       :text_as_statement => 'The technical documentation for the data is at'
     a_1 'Technical Documentation URL',
@@ -2322,7 +2322,7 @@ survey 'KI',
     condition_A :q_technicalDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
     q_vocabulary 'Do the data formats use vocabularies or schemas?',
-      :discussion_topic => :gb_vocabulary,
+      :discussion_topic => :vocabulary,
       :help_text => 'Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains.',
       :pick => :one,
       :required => :standard
@@ -2330,7 +2330,7 @@ survey 'KI',
     a_true 'yes'
 
     q_schemaDocumentationUrl 'Where is documentation about your data vocabularies?',
-      :discussion_topic => :gb_schemaDocumentationUrl,
+      :discussion_topic => :schemaDocumentationUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The vocabularies used by this data are documented at'
     dependency :rule => 'A'
@@ -2349,7 +2349,7 @@ survey 'KI',
     condition_B :q_schemaDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_codelists 'Are there any codes used in this data?',
-      :discussion_topic => :gb_codelists,
+      :discussion_topic => :codelists,
       :help_text => 'If your data uses codes to refer to things like geographical areas, spending categories or diseases for example, these need to be explained to people.',
       :pick => :one,
       :required => :standard
@@ -2357,7 +2357,7 @@ survey 'KI',
     a_true 'yes'
 
     q_codelistDocumentationUrl 'Where are any codes in your data documented?',
-      :discussion_topic => :gb_codelistDocumentationUrl,
+      :discussion_topic => :codelistDocumentationUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The codes in this data are documented at'
     dependency :rule => 'A'
@@ -2380,7 +2380,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_contactUrl 'Where can people find out how to contact someone with questions about this data?',
-      :discussion_topic => :gb_contactUrl,
+      :discussion_topic => :contactUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to contact someone about this data at',
       :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
@@ -2397,7 +2397,7 @@ survey 'KI',
     condition_A :q_contactUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_improvementsContact 'Where can people find out how to improve the way your data is published?',
-      :discussion_topic => :gb_improvementsContact,
+      :discussion_topic => :improvementsContact,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to suggest improvements to publication at'
     a_1 'Improvement Suggestions URL',
@@ -2413,7 +2413,7 @@ survey 'KI',
     condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dataProtectionUrl 'Where can people find out how to contact someone with questions about privacy?',
-      :discussion_topic => :gb_dataProtectionUrl,
+      :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Find out where to send questions about privacy at'
     a_1 'Confidentiality Contact Documentation',
@@ -2429,7 +2429,7 @@ survey 'KI',
     condition_A :q_dataProtectionUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     q_socialMedia 'Do you use social media to connect with people who use your data?',
-      :discussion_topic => :gb_socialMedia,
+      :discussion_topic => :socialMedia,
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -2446,7 +2446,7 @@ survey 'KI',
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
       q_account 'Which social media accounts can people reach you on?',
-        :discussion_topic => :gb_account,
+        :discussion_topic => :account,
         :display_on_certificate => true,
         :text_as_statement => 'Contact the curator through these social media accounts',
         :help_text => 'Give URLs to your social media accounts, like your Twitter or Facebook profile page.',
@@ -2462,7 +2462,7 @@ survey 'KI',
     end
 
     q_forum 'Where should people discuss this dataset?',
-      :discussion_topic => :gb_forum,
+      :discussion_topic => :forum,
       :display_on_certificate => true,
       :text_as_statement => 'Discuss this data at',
       :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
@@ -2479,7 +2479,7 @@ survey 'KI',
     condition_A :q_forum, '==', {:string_value => '', :answer_reference => '1'}
 
     q_correctionReporting 'Where can people find out how to request corrections to your data?',
-      :discussion_topic => :gb_correctionReporting,
+      :discussion_topic => :correctionReporting,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to request data corrections at',
       :help_text => 'Give a URL where people can report errors they spot in your data.'
@@ -2499,7 +2499,7 @@ survey 'KI',
     condition_B :q_correctionReporting, '==', {:string_value => '', :answer_reference => '1'}
 
     q_correctionDiscovery 'Where can people find out how to get notifications of corrections to your data?',
-      :discussion_topic => :gb_correctionDiscovery,
+      :discussion_topic => :correctionDiscovery,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to get notifications about data corrections at',
       :help_text => 'Give a URL where you describe how notifications about corrections are shared with people.'
@@ -2519,7 +2519,7 @@ survey 'KI',
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
     q_engagementTeam 'Do you have anyone who actively builds a community around this data?',
-      :discussion_topic => :gb_engagementTeam,
+      :discussion_topic => :engagementTeam,
       :help_text => 'A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
@@ -2534,7 +2534,7 @@ survey 'KI',
     condition_A :q_engagementTeam, '==', :a_false
 
     q_engagementTeamUrl 'Where is their home page?',
-      :discussion_topic => :gb_engagementTeamUrl,
+      :discussion_topic => :engagementTeamUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Community engagement is done by',
       :required => :required
@@ -2551,7 +2551,7 @@ survey 'KI',
       :customer_renderer => '/partials/fieldset'
 
     q_libraries 'Where do you list tools to work with your data?',
-      :discussion_topic => :gb_libraries,
+      :discussion_topic => :libraries,
       :display_on_certificate => true,
       :text_as_statement => 'Tools to help use this data are listed at',
       :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'

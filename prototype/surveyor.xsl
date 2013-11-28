@@ -102,7 +102,7 @@
 	<_group>
 		<_group>
 			<xsl:element name="q_{@id}">
-				<xsl:attribute name="discussion_topic" select="concat(if (ancestor::group[@id = 'legal']) then lower-case(/questionnaire/@jurisdiction) else 'gb', '_', @id)" />
+				<xsl:attribute name="discussion_topic" select="concat(if (ancestor::group[@id = 'legal']) then concat(lower-case(/questionnaire/@jurisdiction), '_') else '', @id)" />
 				<xsl:attribute name="label">
 					<xsl:apply-templates select="label" mode="html" />
 				</xsl:attribute>
