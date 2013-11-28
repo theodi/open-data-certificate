@@ -161,9 +161,6 @@ class OdcRakeTest < ActiveSupport::TestCase
     end
 
     assert_difference 'Survey.count', 3, "surveys were generated" do
-      # run all jobs at once
-      Delayed::Job.update_all run_at: nil
-
       Delayed::Worker.new({exit_on_complete: true}).start
     end
 
