@@ -151,13 +151,31 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal "application/javascript", feed.entry.links[4].type
   end
   
+  test "Requesting an Atom feed for a dataset in production returns https urls" do
+    Rails.env.stubs :production? => true
+    
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :show, {id: cert.response_set.dataset.id, format: "feed"}
+    assert_response :success
+    
+    feed = RSS::Parser.parse response.body, false
+    
+    assert_match /https:\/\//, feed.id.content
+    assert_match /https:\/\//, feed.entry.links[2].href
+    assert_match /https:\/\//, feed.entry.links[3].href
+    assert_match /https:\/\//, feed.entry.links[4].href
+  end
+  
   test "Requesting an Atom feed for all datasets returns Atom" do
     10.times do 
       cert = FactoryGirl.create(:published_certificate_with_dataset)
     end
     get :index, { format: "feed" }
     assert_response :success
-    assert_equal "application/atom+xml", response.content_type    
+    
+    assert_equal "application/atom+xml", response.content_type 
   end
   
   test "Requesting an Atom feed for all datasets returns results in reverse date order" do
@@ -192,6 +210,24 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.js", feed.entry.links[3].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[3].rel
     assert_equal "application/javascript", feed.entry.links[3].type
+  end
+  
+  test "atom feed for all datasets in production returns https urls" do
+    Rails.env.stubs :production? => true
+    
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, { :format => :feed }
+    
+    feed = RSS::Parser.parse response.body
+        
+    assert_match /https:\/\//, feed.id.content
+    assert_match /https:\/\//, feed.links[0].href
+    assert_match /https:\/\//, feed.links[1].href
+    assert_match /https:\/\//, feed.links[2].href
+    assert_match /https:\/\//, feed.entry.links[1].href
+    assert_match /https:\/\//, feed.entry.links[2].href
+    assert_match /https:\/\//, feed.entry.links[3].href
   end
   
   test "Requesting an Atom feed for a search query returns Atom" do
