@@ -3,12 +3,12 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.author do |author|
     author.name "Open Data Institute"
   end
-  xml.id request.url
-  xml.link :href => request.url, :rel => "self"
-  xml.link :href => url_for(params.merge(:only_path => false, :page => 1)), :rel => "first"
-  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.num_pages)), :rel => "last"
-  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page + 1)), :rel => "next" if @datasets.page(@datasets.current_page + 1).length > 0
-  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page - 1)), :rel => "prev" if (@datasets.current_page - 1) >= 1
+  xml.id "#{embed_protocol}#{request.host_with_port}#{request.path}"
+  xml.link :href => "#{embed_protocol}#{request.host_with_port}#{request.path}", :rel => "self"
+  xml.link :href => url_for(params.merge(:only_path => false, :page => 1, :protocol => embed_protocol)), :rel => "first"
+  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.num_pages, :protocol => embed_protocol)), :rel => "last"
+  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page + 1, :protocol => embed_protocol)), :rel => "next" if @datasets.page(@datasets.current_page + 1).length > 0
+  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page - 1, :protocol => embed_protocol)), :rel => "prev" if (@datasets.current_page - 1) >= 1
   xml.title @title
   xml.updated DateTime.now.rfc3339.to_s
   @datasets.each do |dataset|

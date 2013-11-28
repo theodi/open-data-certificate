@@ -74,6 +74,20 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_equal "http://test.host/datasets/1/certificates/2/badge.html", json["certificate"]["badges"]["text/html"]
     assert_equal "http://test.host/datasets/1/certificates/2/badge.png", json["certificate"]["badges"]["image/png"]
   end
+  
+  test "Requesting a JSON version of a certificate in production returns https urls" do
+    Rails.env.stubs :production? => true
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    
+    json = JSON.parse(response.body)
+        
+    assert_match /https:\/\//, json["certificate"]["uri"]
+    assert_match /https:\/\//, json["certificate"]["badges"]["application/javascript"]
+    assert_match /https:\/\//, json["certificate"]["badges"]["text/html"]
+    assert_match /https:\/\//, json["certificate"]["badges"]["image/png"]
+    assert_match /https:\/\//, json["certificate"]["dataset"]["uri"]
+  end
 
   test "mark certificate as valid" do
     cert = FactoryGirl.create(:certificate_with_dataset)
