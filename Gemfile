@@ -53,8 +53,6 @@ group :production do
   gem 'lograge'
 end
 
-gem 'mysql2'
-
 gem 'jquery-rails'
 gem 'underscore-rails'
 
@@ -103,3 +101,4 @@ gem 'rack-cors'
 gem 'alternate_rails', :github => 'theodi/alternate-rails'
 gem 'fog'
 gem 'juvia_rails', github: 'theodi/juvia_rails'
+gem 'domainatrix'
