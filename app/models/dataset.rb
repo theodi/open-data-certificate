@@ -16,14 +16,15 @@ class Dataset < ActiveRecord::Base
   
   class << self
     def match_to_user_domain(datasetUrl)
-      datasets = where(:documentation_url => datasetUrl)
-      dataset = datasets.select { |d| 
-                  email = d.user.email rescue nil
-                  Domainatrix.parse(d.documentation_url).domain == Domainatrix.parse(email).domain 
-                  }.first
-
+      domain = Domainatrix.parse(datasetUrl).domain
+      
+      dataset = joins(:user)
+                  .where(documentation_url: datasetUrl)
+                  .order("users.email LIKE '%#{domain}'")
+                  .first
+                  
       if dataset.nil?
-        dataset = datasets.first
+        dataset = where(:documentation_url => datasetUrl).first
       end
       dataset
     end
