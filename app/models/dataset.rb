@@ -20,7 +20,7 @@ class Dataset < ActiveRecord::Base
       
       dataset = joins(:user)
                   .where(documentation_url: datasetUrl)
-                  .order("users.email LIKE '%#{domain}'")
+                  .order(User.arel_table[:email].matches(domain))
                   .first
                   
       if dataset.nil?
