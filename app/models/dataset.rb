@@ -13,6 +13,22 @@ class Dataset < ActiveRecord::Base
   has_one :certificate, through: :response_set
 
   has_one :transfer, conditions: {aasm_state: :notified}
+  
+  class << self
+    def match_to_user_domain(datasetUrl)
+      domain = Domainatrix.parse(datasetUrl).domain
+      
+      dataset = joins(:user)
+                  .where(documentation_url: datasetUrl)
+                  .order(User.arel_table[:email].matches(domain))
+                  .first
+                  
+      if dataset.nil?
+        dataset = where(:documentation_url => datasetUrl).first
+      end
+      dataset
+    end
+  end
 
   def title
     read_attribute(:title) || set_default_title!(response_sets.first.try(:dataset_title_determined_from_responses)) || response_sets.first.try(:title) || ResponseSet::DEFAULT_TITLE

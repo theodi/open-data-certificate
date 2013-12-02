@@ -116,8 +116,9 @@ class CertificatesController < ApplicationController
   
   def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
-    certificate = Dataset.where(:documentation_url => params[:datasetUrl]).last.certificates.latest
-    unless certificate.nil?
+    dataset = Dataset.match_to_user_domain(params[:datasetUrl])
+    certificate = dataset.certificates.latest
+    unless certificate.nil?  
       if params[:type].nil?
         redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
       elsif params[:type] == "embed"
