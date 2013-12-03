@@ -1,12 +1,12 @@
 ## Certificate API
 
-To fit in with the current url scheme, the request would be something like:
+The request to generate a certificate would be:
 
-    POST /datasets/_/certificates
+    POST /datasets
 
-The '_' is because there wouldn't be an existing dataset (one would be generated along with the certificate).
+Updating a certificate would follow the current url structure of:
 
-This would give the usual response codes and redirect to `/datasets/:d_id/certificates/:c_id` 
+    POST /datasets/:d_id/certificates
 
 ### Authentication
 
@@ -52,8 +52,8 @@ Some of the content in the response wouldn't be able to be set by the api (as th
 ```js
 {
   jurisdiction: 'US',
-  transfer_email: 'user@example.com',
-  responses:{
+  user_email: 'user@example.com',
+  dataset:{
     dataTitle: 'Some dataset',
     documentationUrl: 'http://…',
     releaseType: 'oneoff',
@@ -66,7 +66,7 @@ Some of the content in the response wouldn't be able to be set by the api (as th
 
 This could be implemented a CertificateGenerator model, which stores details of the request and attempts to create the certificate/dataset.  We could use this to work out which certificates have been generated via the api down the line.
 
-There are a few different response types that need to be catered for.
+There are a few different response types that need to be catered for, each should match the certificate json.
 
 * Text field - `"title": "the data title"`
 * Radio buttons - `"releaseType": "oneoff"` ('oneoff' must be an answer)
@@ -83,9 +83,3 @@ Surveyor repeating sections are potentially more complex, though within the ODC 
 When someone enters a data.gov.uk address as a documentation url, a lot of the responses can be automatically filled out.  The questions are filled out and saved from the client side code, so it may take some effort to also implement this on the server side.
 
 This would have an impact on the certificate page where you are notified if answers don't match the data-kitten response.
-
-#### Populating Hidden responses
-
-A web user is given a sub-set of triggered questions to answer, though answers could be given for any question through the api.
-
-A possible ramification of this could be that a user could recieve a dataset, want to change an incorrect value but be unable to find it on the questionnaire interface.
