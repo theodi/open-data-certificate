@@ -53,7 +53,7 @@ namespace :surveyor do
       # build is prioritised by being default survey or beta status
       priority =  builder.build_priority
 
-      Delayed::Job.enqueue builder, priority: priority
+      Delayed::Job.enqueue builder, priority: priority, run_at: 5.minutes.from_now
     end
 
     DevEvent.create message: "surveyor:enqueued #{files.join(', ')}"
