@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 91ac3c9b87a34e60ed3b7b16a51c61f9aa26c52d
+  revision: d32f3d11e4cb70fea6b32bdf83be5d100afee4c6
   specs:
     data_kitten (0.0.1)
       curb
