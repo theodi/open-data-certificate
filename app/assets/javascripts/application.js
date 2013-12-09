@@ -173,20 +173,35 @@ $(document).ready(function($){
     }
   });
 
+  var $currentRow = $();
+
+  // Moves highlighting to a row on hover and tab, removes focus from the previous row
   $surveyElements.filter('.question-row').on('_focus', function() {
+    if ($currentRow[0] != $(this).closest('.question-row')[0]) {
+
+      $($currentRow.data('metas')).hide();
+      $($currentRow.data('input-metas')).hide();
+
+      $currentRow = $(this).closest('.question-row');
+    }
+
     $($(this).data('metas')).show();
-  }).on('_blur', function(){
-    $($(this).data('metas')).hide();
-    $($(this).data('input-metas')).hide();
-    return false;
+    $($currentRow.data('metas')).show();
+
   });
 
+  // Shows the appropriate information for a radio button or checkbox
   $surveyElements.filter('.input').on('_focus', function() {
-    $($(this).closest('.question-row').data('input-metas')).hide();
+    $($currentRow.data('input-metas')).hide();
     $($(this).data('metas')).show();
-    return false;
-  }).on('_blur', function(){
-    return false;
+  });
+
+  // Removes highlighting and information on mouseleave
+  $surveyElements.on('mouseleave', function(){
+    $($currentRow.data('metas')).hide();
+    $($currentRow.data('input-metas')).hide();
+
+    $currentRow = $();
   });
 
   // deal with accordion section changes
@@ -270,7 +285,7 @@ $(document).ready(function($){
     var url = $(this).data('progress-url');
 
     $(panel).addClass('loading');
-    
+
     $.getJSON(url)
     .then(function(data){
       // console.log("url:", url)
@@ -393,7 +408,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  
+
   $('.certificate-data').popover({
     selector:'.odc-popover',
     trigger:'click',
