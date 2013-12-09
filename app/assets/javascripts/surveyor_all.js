@@ -301,12 +301,10 @@ $(document).ready(function($){
 
   var responses = {
     documentationUrl: function($row, $field, success, data) {
-      if (success) {
-        if (data.fields) {
-          data.fields.each(function() { validateField($(this)); });
-          saveFormElements($form, questionFields(data.fields).add(csrfToken));
-          $('#status_panel').trigger('update');
-        }
+      if (success && data.fields) {
+        data.fields.each(function() { validateField($(this)); });
+        saveFormElements($form, questionFields(data.fields).add(csrfToken));
+        $('#status_panel').trigger('update');
       }
       responses.url($row, $field, success);
     },

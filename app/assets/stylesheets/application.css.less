@@ -1049,6 +1049,14 @@ header {
   }
 }
 
+// rss link at the top
+p.rss-top {
+  &, & a{
+    color:@odiBlue;
+  }
+  font-size: 14px;
+}
+
 section {
   //background-color: white;
   // margin: 15px 0;
@@ -2383,7 +2391,7 @@ header .jurisdiction{
 
       .cropped {
         display: inline-block;
-        max-width: 90%;
+        max-width: 80%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -2605,12 +2613,20 @@ strong.certificate-level {
 
       }
 
-      li.kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
-      li.kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; background-size: 65px;}
-      li.kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; background-size: 65px;}
-      li.kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; background-size: 65px;}
-
     }
+
+    h2.kitemark1, h2.kitemark2, h2.kitemark3, h2.kitemark4 {
+      min-height: 46px;
+      padding-left: 75px;
+      padding-top: 14px;
+      margin-top: 30px;
+    }
+
+    .kitemark1 { background: url(/assets/badges/raw_level_badge.png) no-repeat top left; background-size: 65px;}
+    .kitemark2 { background: url(/assets/badges/pilot_level_badge.png) no-repeat top left; background-size: 65px;}
+    .kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; background-size: 65px;}
+    .kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; background-size: 65px;}
+
 
   }
 

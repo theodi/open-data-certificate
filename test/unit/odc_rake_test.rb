@@ -160,6 +160,13 @@ class OdcRakeTest < ActiveSupport::TestCase
       end
     end
 
+    assert_no_difference 'Survey.count', "surveys were queued" do
+      Delayed::Worker.new({exit_on_complete: true}).start
+    end
+
+    # run all jobs at once
+    Delayed::Job.update_all run_at: 1.minute.ago
+
     assert_difference 'Survey.count', 3, "surveys were generated" do
       Delayed::Worker.new({exit_on_complete: true}).start
     end

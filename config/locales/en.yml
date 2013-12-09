@@ -251,6 +251,9 @@ en:
   about:
     heading_about: About
 
+  overview:
+    heading_overview: Overview
+
   contact:
     heading_contact: Contact the ODI
 
