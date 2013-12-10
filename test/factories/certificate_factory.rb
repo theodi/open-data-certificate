@@ -34,6 +34,12 @@ FactoryGirl.define do
           certificate.dataset.update_attribute('removed', true)
         end
       end
+
+      factory :published_audited_certificate_with_dataset do
+        after(:create) do |certificate, evaluator|
+          certificate.update_attribute('audited', true)
+        end
+      end
     end
   end
 
