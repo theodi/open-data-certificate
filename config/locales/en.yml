@@ -171,13 +171,13 @@ en:
       submit_search: Go
 
     community_verification_panel:
-      title: Community Verification
+      title: Community verification
       description: Other people can verify whether the answers on this certificate are correct.
       status: This certificate is **%{certification}**.
       status_self_certified: If two or more people verify it, this certificate will become community certified.
-      verify_certificate: Verify Certificate
-      verified: verified
-      undo: undo
+      verify_certificate: Verify certificate
+      verified: Verified
+      undo: Undo
       sign_in: Sign in
       sign_in_text: to verify this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
