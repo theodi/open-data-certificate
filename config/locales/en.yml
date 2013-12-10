@@ -199,6 +199,10 @@ en:
       self: self certified
       community: community certified
       odi_audited: ODI audited
+    mark_audited: Mark audited
+    unmark_audited: Unmark audited
+    audited: This certificate has been marked as ODI audited
+    not_audited: This certificate has not been marked as ODI audited
 
   datasets:
     datasets: Datasets
