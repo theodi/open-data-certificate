@@ -109,6 +109,7 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+    verification: 'Verification:'
 
   # main controller
   main:
@@ -197,6 +198,7 @@ en:
     certification_types:
       self: self certified
       community: community certified
+      odi_audited: ODI audited
 
   datasets:
     datasets: Datasets
@@ -218,6 +220,7 @@ en:
     licence: "Licence:"
     data_licence: "Data Licence:"
     content_licence: "Content Licence:"
+    verification: "Verification:"
 
   data_kitten:
     title: Title
