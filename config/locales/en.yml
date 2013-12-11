@@ -268,8 +268,8 @@ en:
     levels:
       basic:
         title: The basics
-        subtitle: The bare minimum required to publish a certificate
-        instruction: "To get a certificate you must:"
+        subtitle: The bare minimum required to publish a certificate - a fantastic start!
+        instruction: "You must provide data for the following questions:"
       pilot:
         title: Pilot requirements
         subtitle: You put extra effort in to supporting and encouraging feedback from people who use this open data.

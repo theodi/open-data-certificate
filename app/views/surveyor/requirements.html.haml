@@ -12,9 +12,9 @@
           %h3= @response_set.title
         .span3
           -if @response_set.incomplete?
-            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
+            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large return', :role => "button"
           -else
-            =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large', :role => "button"
+            =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large return', :role => "button"
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
@@ -34,13 +34,22 @@
           %h3= t("improvements.levels.#{level}.subtitle")
 
       .requirements.container
-        %p= t("improvements.levels.#{level}.instruction")
+        %p.instruction= t("improvements.levels.#{level}.instruction")
+        %hr.heavy
 
         %ul
           -fields.each do |field|
             %li
-              =link_to "#{resume_path}#q_#{field.id}" do
-                answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
+              .dataset{class: defined?(expanded) ? 'expanded': ''}
+                -#=link_to "#{resume_path}#q_#{field.id}" do
+                  -#<strong>#{field.text.html_safe}</strong>
+                %p.requirement-title= "#{field.text.html_safe}"
+                .expand
+                  %i.show-more.icon-chevron-down
+                  %i.hide-more.icon-chevron-up
+                .more
+                  %p= "More content"
+              %hr.heavy
 
           -requirements.each do |requirement|
             %li

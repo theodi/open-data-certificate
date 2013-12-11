@@ -2670,19 +2670,26 @@ strong.certificate-level {
 // ***** Improvements page *****
 //
 */
-section.improvement{
+.non-container.improvements {
+
+  // Return to questionnaire button towards top of page
+  .return { margin: 60px 0 0 0; }
+
+}
+
+section.improvement {
 
   header .container {
     background-size: 71px 63px;
     background-repeat: no-repeat;
-    background-position: 20px 5px;
+    background-position: 0px 5px;
   }
 
   h2 {
 
     font-size: 27px;
     margin: 0;
-    padding-left: 100px;
+    padding-left: 80px;
 
   }
 
@@ -2690,53 +2697,121 @@ section.improvement{
 
     line-height: 20px;
     margin: 0 0 15px 0;
-    padding-left: 100px;
+    padding-left: 80px;
     max-width: 90%;
 
   }
 
-
   .requirements {
+
     padding: 25px 0 35px 0;
+
+    // Equalise gaps around all HRs and list items
+    .heavy, li { margin: 0; }
+
+    .dataset {
+
+      // Container for toggle arrows
+      .expand {
+
+        width: 100%;
+        margin: -77px 0 0 0;
+
+        // Easiest way to move the clickable area above the title (so title is clickable)
+        position: relative;
+
+        .show-more, .hide-more {
+
+          // Align toggle arrows to the right
+          width: 100%;
+          text-align: right;
+
+          // Indent the arrows from the right edge a bit
+          // Also increase the title to the correct height
+          padding: 30px 20px 29px 0;
+          .box-sizing(border-box);
+
+        }
+
+      }
+
+      // Title of togglable section
+      .requirement-title {
+
+        width: 100%;
+        padding: 26px 0 28px 0;
+        margin-bottom: 0;
+
+      }
+
+      &.expanded {
+
+        .requirement-title { background-color: @odiBlue; }
+
+      }
+
+    }
+
   }
 
-  li {
-    margin-bottom: 20px;
+  ul { margin-left: 0; }
 
+  li {
+
+    margin-bottom: 20px;
     font-size: 16px;
     color: #4d4d4d;
-    width: 66%;
+    list-style: none;
+
   }
 
   strong { color: #000; }
+
   a { color: #000; }
 
-  p { margin-bottom: 20px; }
+  p {
 
+    margin-bottom: 20px;
 
-  // level specific styles
-  &.improvement-pilot header .container{
+    // More space below instructions
+    &.instruction { margin-bottom: 40px; }
+
+  }
+
+  // Level specific styles
+  &.improvement-basic header .container {
+    background-image: url(/assets/badges/no_level_badge.png);
+  }
+  &.improvement-pilot header .container {
     background-image: url(/assets/badges/pilot_level_badge.png);
   }
-  &.improvement-standard header .container{
+  &.improvement-standard header .container {
     background-image: url(/assets/badges/standard_level_badge.png);
   }
-  &.improvement-exemplar header .container{
+  &.improvement-exemplar header .container {
     background-image: url(/assets/badges/exemplar_level_badge.png);
   }
 
   &.improvement-basic {
-    header{
-      background: #333;
-      h2, h3 { padding-left: 0; }
+
+    header {
+
+      background: #fff;
+
+      h2, h3 {
+
+        color: @odiGrey;
+
+      }
+
     }
 
-    background: #474747;
-
-    li, p { color: #fff; -webkit-font-smoothing: antialiased; }
+    li, p { color: @odiGreyDarker; -webkit-font-smoothing: antialiased; }
 
     strong, a {
-      color: #fff;
+
+      color: @odiGreyDarker;
+
     }
 
   }
