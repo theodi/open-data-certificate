@@ -43,7 +43,8 @@
               .dataset{class: defined?(expanded) ? 'expanded': ''}
                 -#=link_to "#{resume_path}#q_#{field.id}" do
                   -#<strong>#{field.text.html_safe}</strong>
-                %p.requirement-title= "#{field.text.html_safe}"
+                .requirement-title
+                  %span= "#{field.text.html_safe}"
                 .expand
                   %i.show-more.icon-chevron-down
                   %i.hide-more.icon-chevron-up

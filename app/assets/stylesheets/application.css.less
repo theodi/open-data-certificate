@@ -2711,14 +2711,30 @@ section.improvement {
 
     .dataset {
 
+      // Ready for absolutely positioned elements within
+      position: relative;
+
+      // Hover state
+      &:hover, &:focus {
+
+        // Indent the title
+        .requirement-title {
+
+          padding: 26px 0 28px 20px;
+
+        }
+
+      }
+
       // Container for toggle arrows
       .expand {
 
         width: 100%;
-        margin: -77px 0 0 0;
+        height: 100%;
 
         // Easiest way to move the clickable area above the title (so title is clickable)
-        position: relative;
+        position: absolute;
+        top: 0;
 
         .show-more, .hide-more {
 
@@ -2728,7 +2744,8 @@ section.improvement {
 
           // Indent the arrows from the right edge a bit
           // Also increase the title to the correct height
-          padding: 30px 20px 29px 0;
+          padding: 26px 20px 0 0;
+          height: 100%;
           .box-sizing(border-box);
 
         }
@@ -2741,12 +2758,39 @@ section.improvement {
         width: 100%;
         padding: 26px 0 28px 0;
         margin-bottom: 0;
+        font-weight: bold;
+        .transition(e("background-color, padding"));
+        .transition-duration(0.2s);
+
+        // Stop padding indent from affecting background coloured area
+        .box-sizing(border-box);
+
+        // Limit width of text
+        span {
+
+          width: 66%;
+          display: block;
+
+        }
 
       }
 
+      // Toggle content
+      .more {
+
+        position: relative;
+
+      }
+
+      // Toggled open state
       &.expanded {
 
-        .requirement-title { background-color: @odiBlue; }
+        .requirement-title {
+
+          background-color: @odiBlue;
+          padding: 26px 0 28px 20px;
+
+        }
 
       }
 
