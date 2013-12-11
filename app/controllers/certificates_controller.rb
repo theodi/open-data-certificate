@@ -1,6 +1,6 @@
 class CertificatesController < ApplicationController
   include CertificatesHelper
-  
+
   before_filter(:only => [:show]) { alternate_formats [:json] }
 
   def show
@@ -14,7 +14,7 @@ class CertificatesController < ApplicationController
         raise ActiveRecord::RecordNotFound
       end
     end
-    
+
     respond_to do |format|
       format.html
       format.json
@@ -113,12 +113,12 @@ class CertificatesController < ApplicationController
       format.png { send_data(@certificate.badge_file.read, :type => "image/png", :disposition => 'inline') }
     end
   end
-  
+
   def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
     dataset = Dataset.match_to_user_domain(params[:datasetUrl])
     certificate = dataset.certificates.latest
-    unless certificate.nil?  
+    unless certificate.nil?
       if params[:type].nil?
         redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
       elsif params[:type] == "embed"
@@ -145,5 +145,11 @@ class CertificatesController < ApplicationController
     redirect_to dataset_certificate_path params.select {|d| [:dataset_id, :id].include? d}
   end
 
-
+  # used by an admin to mark as audited
+  def update
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    authorize! :manage, @certificate
+    @certificate.update_attribute :audited, params[:certificate] && params[:certificate][:audited]
+    redirect_to dataset_certificate_path @certificate.response_set.dataset.id, @certificate.id
+  end
 end
