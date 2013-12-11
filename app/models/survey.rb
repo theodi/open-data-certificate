@@ -35,12 +35,21 @@ class Survey < ActiveRecord::Base
 
   end
 
+  def previous_access_codes
+    Survey::MIGRATIONS.select{|k, v| v == access_code}.keys
+  end
+
   def previous_surveys
-    Survey.where(access_code: access_code).where(Survey.arel_table[:survey_version].lt(survey_version))
+    t = Survey.arel_table
+    Survey.where(
+      t[:access_code].in([previous_access_codes]).or(
+        t[:survey_version].lt(survey_version).and(t[:access_code].eq(access_code))
+      )
+    ).order("created_at DESC")
   end
 
   def previous_survey
-    @previous_survey ||= Survey.where(access_code: access_code, survey_version: survey_version - 1).first
+    @previous_survey ||= previous_surveys.first
   end
 
   def status_incremented?
