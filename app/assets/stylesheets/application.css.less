@@ -62,6 +62,9 @@
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
 
+@odiRaspberry: #c92957;
+@odiRaspberryDark: darken(@odiRaspberry, 3%);
+
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
@@ -526,6 +529,14 @@ input, textarea{
 
 .btn-danger:active, .btn-danger:hover, .btn-danger:focus {
   background: @odiPomegranateDark;
+}
+
+.btn-negative {
+  background: @odiRaspberry;
+}
+
+.btn-negative:active, .btn-negative:hover, .btn-negative:focus {
+  background: @odiRaspberryDark;
 }
 
 
@@ -2720,7 +2731,7 @@ section.improvement {
         // Indent the title
         .requirement-title {
 
-          padding: 26px 0 28px 20px;
+          padding: 26px 0 28px 30px;
 
         }
 
@@ -2760,7 +2771,7 @@ section.improvement {
         margin-bottom: 0;
         font-weight: bold;
         .transition(e("background-color, padding"));
-        .transition-duration(0.2s);
+        .transition-duration(0.3s);
 
         // Stop padding indent from affecting background coloured area
         .box-sizing(border-box);
@@ -2778,7 +2789,30 @@ section.improvement {
       // Toggle content
       .more {
 
+        // This will stop the toggle hit area covering the More content
         position: relative;
+
+        // Spacing (no bottom as this will be handled by the P tag inside this block)
+        margin: 0;
+        p { padding: 18px 0 0 30px; }
+
+        // Buttons
+        .btn {
+
+          // Equalise widths and left-align text
+          width: 64%;
+          .box-sizing(border-box);
+          text-align: left;
+          margin: 18px 0 0 30px;
+
+          // When buttons wrap, add a gap under the second one
+          &.btn-negative {
+
+            margin-bottom: 30px;
+
+          }
+
+        }
 
       }
 
@@ -2788,7 +2822,7 @@ section.improvement {
         .requirement-title {
 
           background-color: @odiBlue;
-          padding: 26px 0 28px 20px;
+          padding: 26px 0 28px 30px;
 
         }
 
@@ -2808,10 +2842,6 @@ section.improvement {
     list-style: none;
 
   }
-
-  strong { color: #000; }
-
-  a { color: #000; }
 
   p {
 
@@ -2854,7 +2884,7 @@ section.improvement {
 
     strong, a {
 
-      color: @odiGreyDarker;
+      //color: @odiGreyDarker;
 
     }
 
