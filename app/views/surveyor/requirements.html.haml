@@ -54,11 +54,29 @@
                       %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{field.id}"}
                         %strong= t('improvements.buttons.understood')
                         =t('improvements.buttons.understood_action')
-                      %a.btn.btn-primary.btn-large.btn-negative{:href => "http://www.this-needs-linking-to-help-page.com"}
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => "http://www.this-needs-linking.com"}
                         %strong= t('improvements.buttons.misunderstood')
                         =t('improvements.buttons.misunderstood_action')
               %hr.heavy
 
           -requirements.each do |requirement|
             %li
-              = link_to without_instruction(requirement.text).html_safe, "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
+              .dataset{class: defined?(expanded) ? 'expanded': ''}
+                .requirement-title
+                  %span= requirement.text.html_safe
+                .expand
+                  %i.show-more.icon-chevron-down
+                  %i.hide-more.icon-chevron-up
+                .more
+                  .row
+                    .span4
+                      %p= "Temporary text, make this dynamic! Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains."
+                    .span6.offset2
+                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"}
+                        %strong= t('improvements.buttons.understood')
+                        =t('improvements.buttons.understood_action')
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => "http://www.this-needs-linking.com"}
+                        %strong= t('improvements.buttons.misunderstood')
+                        =t('improvements.buttons.misunderstood_action')
+              %hr.heavy
+              -#= link_to without_instruction(requirement.text).html_safe, "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"

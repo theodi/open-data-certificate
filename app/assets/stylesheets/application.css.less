@@ -2771,7 +2771,7 @@ section.improvement {
         margin-bottom: 0;
         font-weight: bold;
         .transition(e("background-color, padding"));
-        .transition-duration(0.3s);
+        .transition-duration(0.2s);
 
         // Stop padding indent from affecting background coloured area
         .box-sizing(border-box);
@@ -2783,6 +2783,10 @@ section.improvement {
           display: block;
 
         }
+
+        // Make any bold text in the title stand out
+        color: @odiGreyDarker;
+        strong { color: @odiGrey; }
 
       }
 
@@ -2823,6 +2827,9 @@ section.improvement {
 
           background-color: @odiBlue;
           padding: 26px 0 28px 30px;
+
+          // Make any bold text in the title stand out
+          strong { color: @odiGreyDark; }
 
         }
 
