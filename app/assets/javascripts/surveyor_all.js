@@ -176,6 +176,7 @@ $(document).ready(function($){
     validateField($field);
   }
 
+  // Finds the value from the row to check if the field has changed
   function rowValue($row) {
     var $input = $row.find('li.input');
 
