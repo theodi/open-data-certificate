@@ -2810,11 +2810,7 @@ section.improvement {
           margin: 18px 0 0 30px;
 
           // When buttons wrap, add a gap under the second one
-          &.btn-negative {
-
-            margin-bottom: 30px;
-
-          }
+          &.btn-negative { margin-bottom: 30px; }
 
         }
 
@@ -3180,6 +3176,9 @@ section.improvement {
     // Badges on "How can I improve my open data?" page
     section.improvement {
 
+        &.improvement-basic header .container {
+            background-image: url(/assets/ie/badges/no_level_badge_71x63.png);
+        }
         &.improvement-pilot header .container {
             background-image: url(/assets/ie/badges/pilot_level_badge_71x63.png);
         }

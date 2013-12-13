@@ -79,4 +79,3 @@
                         %strong= t('improvements.buttons.misunderstood')
                         =t('improvements.buttons.misunderstood_action')
               %hr.heavy
-              -#= link_to without_instruction(requirement.text).html_safe, "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
