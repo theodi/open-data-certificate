@@ -49,17 +49,18 @@
                 .more
                   .row
                     .span4
-                      %p= "Temporary text, make this dynamic! If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re unsure, check with the data owner because you will need their permission to publish it."
+                      %p= markdown(field.help_text || '')
                     .span6.offset2
                       %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{field.id}"}
                         %strong= t('improvements.buttons.understood')
                         =t('improvements.buttons.understood_action')
-                      %a.btn.btn-primary.btn-large.btn-negative{:href => "http://www.this-needs-linking.com"}
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: field.discussion_topic, back: request.original_fullpath, title: field.text, question_id: field.id)}
                         %strong= t('improvements.buttons.misunderstood')
                         =t('improvements.buttons.misunderstood_action')
               %hr.heavy
 
           -requirements.each do |requirement|
+            - question = requirement.question_corresponding_to_requirement || requirement.answer_corresponding_to_requirement.try(:question)
             %li
               .dataset{class: defined?(expanded) ? 'expanded': ''}
                 .requirement-title
@@ -70,12 +71,12 @@
                 .more
                   .row
                     .span4
-                      %p= "Temporary text, make this dynamic! Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains."
+                      %p= markdown(question.try(:help_text) || '')
                     .span6.offset2
-                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"}
+                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{question.try(:id)}"}
                         %strong= t('improvements.buttons.understood')
                         =t('improvements.buttons.understood_action')
-                      %a.btn.btn-primary.btn-large.btn-negative{:href => "http://www.this-needs-linking.com"}
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: question.discussion_topic, back: request.original_fullpath, title: question.text, question_id: question.id)}
                         %strong= t('improvements.buttons.misunderstood')
                         =t('improvements.buttons.misunderstood_action')
               %hr.heavy
