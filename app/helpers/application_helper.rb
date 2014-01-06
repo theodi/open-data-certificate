@@ -31,7 +31,7 @@ module ApplicationHelper
       when 'String'
         h(value)
       when 'Date'
-        h(value.to_s)
+        h(value.strftime('%e %B %Y'))
       when 'Hash'
         h(value[:title])
       else
