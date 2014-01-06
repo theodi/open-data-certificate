@@ -19,7 +19,7 @@ module ApplicationHelper
   # renders an item in the kittenData data
   def kitten_value value
     if value.kind_of?(Array)
-      value.map {|v| kitten_value v}.join(' ')
+      value.map {|v| kitten_value v}.join(', ')
     else
       case value.class.to_s
       when 'DataKitten::Agent'
