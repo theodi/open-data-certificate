@@ -36,7 +36,6 @@
         %span.jurisdiction
           %span.badge= @certificate.response_set.jurisdiction
           %span.status= @certificate.response_set.survey.try(:status)
-      %h1= @certificate.response_set.title
       %p
         = t("certificate.this_data_has_achieved")
         %strong.certificate-level
@@ -45,19 +44,21 @@
         = t("certificate.which_means")
         = t("levels.#{@certificate.attained_level}.description")
 
+    %div
+      .row
+        .span9.offset3
+          %h1= @certificate.response_set.title
+
   - if minimal # don't show the summary
     =render @certificate.response_set
   - else
     .row
       .span3
-        .well
-          -if @certificate.response_set.kitten_data.try(:data)
-            =render 'shared/kitten_data', kitten_data: @certificate.response_set.kitten_data
-          -else
-            =render 'shared/response_set_summary', response_set: @certificate.response_set
+        .well.summary
+          = render 'shared/response_set_summary', response_set: @certificate.response_set
 
-        .well
+        .well.verification
           = render 'community_verification_panel'
 
       .span9
-        =render @certificate.response_set
+        = render @certificate.response_set

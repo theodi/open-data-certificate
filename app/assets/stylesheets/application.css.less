@@ -62,6 +62,8 @@
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
 
+@odiTurquoise: #00CBA3;
+
 @odiGrey: #aaa;
 @odiGreyDark: darken(@odiGrey, 18%);
 @odiGreyDarker: darken(@odiGrey, 40%);
@@ -72,6 +74,8 @@
 @btnPrimaryBackgroundHighlight: @odiRed;
 @btnInfoBackground:  @odiBlue;
 @btnInfoBackgroundHighlight: @odiBlue;
+
+
 
 @odiGrey: #8e8c8c;
 
@@ -700,10 +704,6 @@ header.affix {
 h3 {
   font-size: 19px;
 }
-.well h3{
-  font-size: 18px;
-  line-height: 25px;
-}
 
 h4 {
   font-size: 16px;
@@ -713,7 +713,7 @@ h4 {
 }
 
 hr {
-  margin: 12px 0;
+  margin: 0 0 12px;
 }
 
 hr.heavy {
@@ -1098,7 +1098,7 @@ section {
     margin-right: auto;
   }
 
-  h1, h2, p, small, span {
+  h2, p, small, span {
     text-align: center;
   }
 
@@ -1110,8 +1110,17 @@ section {
   }
 
   p {
-    font-size: 23px;
-    line-height: 32px;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 15px;
+
+    strong.certificate-level {
+      font-size: 15px;
+    }
+
+    &.certificate-level {
+      font-size: 24px;
+    }
   }
 }
 
@@ -2365,6 +2374,11 @@ header .jurisdiction{
 // Certificate view //
 
 .certificate-data {
+
+  p.description {
+    margin-bottom: 25px;
+  }
+
   ul {
     .clearfix;
     margin-left: 0;
@@ -2469,8 +2483,8 @@ header .jurisdiction{
 }
 
 .certificate.hero-unit {
-  margin: -50px auto 30px;
-  padding: 0 15px;
+  margin: -50px auto 10px;
+  padding: 0 0;
   ul{
     margin-top: 70px;
   }
@@ -2485,6 +2499,7 @@ header .jurisdiction{
 
 .certificate-summary {
   padding: 0 120px;
+  margin-bottom: 50px;
 }
 
 .certificate-badge {
@@ -2503,6 +2518,7 @@ header .jurisdiction{
   margin-bottom: 30px;
 
   small {
+    margin-top: 5px;
     display: block;
     font-weight: normal;
     font-size: 17px;
@@ -2741,6 +2757,61 @@ section.improvement{
 
   }
 
+}
+
+.well {
+  .border-radius(0);
+  padding: 16px 27px;
+
+  h1, h2, h3, h4 {
+    color: black;
+  }
+
+  h3 {
+    font-size: 19px;
+    line-height: 25px;
+    margin: 5px 0;
+  }
+
+  p, a, dt, dd {
+    font-size: 15px;
+    line-height: 25px;
+    color: white;
+  }
+
+  dl {
+    margin-bottom: 10px;
+  }
+
+  dd, dt {
+    margin: 0;
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-bottom: 12px;
+  }
+
+  small {
+    font-size: 100%;
+  }
+
+  a {
+    border-bottom: 1px white solid;
+  }
+
+  &.summary {
+    background: @odiTurquoise;
+    border-color: darken(@odiTurquoise, 9%);
+  }
+
+  &.verification {
+    background: @odiBlue;
+    border-color: darken(@odiBlue, 9%);
+  }
 }
 
 

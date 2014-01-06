@@ -194,6 +194,7 @@ en:
     view_embed_page: Certificate
     edit_questionnaire: Edit questionnaire
     open_data_certificate_for: Open Data Certificate for
+    description: Description
     certification_types:
       self: self certified
       community: community certified
@@ -214,10 +215,11 @@ en:
     start_new_language: Change language
 
   summary_data:
+    summary: Summary
     type_of_release: Type of release
-    licence: "Licence:"
-    data_licence: "Data Licence:"
-    content_licence: "Content Licence:"
+    licence: Licence
+    data_licence: Data Licence
+    content_licence: Content Licence
 
   data_kitten:
     title: Title
@@ -282,6 +284,7 @@ en:
         title: Expert requirements
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
         instruction: "To reach Expert level you should:"
+    delete_button: 'Delete'
   transfers:
     transfer: # The transfer dataset modal
       title: Pass to colleague
