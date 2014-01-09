@@ -128,6 +128,20 @@ class CertificateGenerator < ActiveRecord::Base
         })
       end
 
+    when :repeater
+      # the value is an array of answers
+      answer = question.answers.first
+      i = 0
+      data.each do |value|
+        response_set.responses.create({
+          answer: answer,
+          question: question,
+          string_value: value,
+          response_group: i
+        })
+        i += 1
+      end
+
     else
       throw "not handled> #{question.inspect}"
     end
