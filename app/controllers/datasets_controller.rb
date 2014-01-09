@@ -11,9 +11,9 @@ class DatasetsController < ApplicationController
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
-    
+
     @title = t('datasets.datasets')
-    
+
     if params[:format] == "feed"
       @datasets = @datasets.order('datasets.updated_at DESC')
     else
@@ -29,10 +29,10 @@ class DatasetsController < ApplicationController
       @datasets = @datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
-    
+
     if params[:search]
       @title = t('datasets.search_results')
-      
+
       base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
 
       # this is far from ideal - loads in all matches then limits for pagination
@@ -44,7 +44,7 @@ class DatasetsController < ApplicationController
     else
       @datasets = @datasets.page params[:page]
     end
-        
+
     respond_to do |format|
       format.html
       format.feed { render :layout => false  }
