@@ -1,18 +1,25 @@
-survey 'cert-generator', 
-  dataset_title: 'dataTitle', 
-  dataset_curator: 'dataTitle', 
+survey 'cert-generator',
+  dataset_title: 'dataTitle',
+  dataset_curator: 'dataTitle',
   description: '' do
-  
+
   section 'General', :display_header => false do
-    
 
-    q_dataTitle 'What\'s a good title for this data?'
-
+    q_dataTitle 'What\'s a good title for this data?',
+      :required => :required
     a_1 'what you call the data', :string
 
+    q_publisherUrl 'What website is the data published on?',
+      :required => :required,
+      :text_as_statement => 'The data is published on'
+    a_1 'Publisher URL',
+      :string,
+      :input_type => :url
+
     # we won't show this question
-    q_releaseType 'Data release type?', :pick => :one,
-                :text_as_statement => 'Data Title'
+    q_releaseType 'Data release type?',
+      :pick => :one,
+      :text_as_statement => 'Data release type'
 
     a_oneoff 'a one-off release of a single dataset'
     a_collection 'a one-off release of a set of related datasets'
@@ -24,8 +31,8 @@ survey 'cert-generator',
   section_legal 'Legal Information' do
 
     q_publisherRights 'Do you have the rights to publish the data as open data?',
-                      :pick => :one,
-                      :required => :required
+      :pick => :one,
+      :required => :required
     a_yes 'yes, you have the right to publish the data as open data'
     a_no 'no, you don\'t have the right to publish the data as open data'
     a_unsure 'you don\'t know whether you have the right to publish the data as open data'
@@ -45,11 +52,14 @@ survey 'cert-generator',
     q_chooseAny 'Choose some of these options',
       :pick => :any,
       :required => :required
-
     a_one '1'
     a_two '2'
     a_three '3'
 
+    repeater "Your cats" do
+      q_cats "What are your cats called?"
+      a_1 "your cat's name", :string
+    end
 
   end
 
