@@ -8,8 +8,33 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :survey, through: :response_set
 
   after_create :generate
+  TYPES =  {
+    none: 'string',
+    one: 'radio',
+    any: 'checkbox',
+    repeater: 'repeating'
+  }
 
-  private
+  def self.schema(request)
+    survey = Survey.newest_survey_for_access_code request['jurisdiction']
+    return {errors: ['Jurisdiction not found']} if !survey
+
+    schema = {}
+    survey.questions.each do |q|
+      next if q.display_type == 'label'
+      type = q.question_group && q.question_group.display_type == 'repeater' ? :repeater : q.pick.to_sym
+      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[type], required: q.is_mandatory}
+
+      if type == :one || type == :any
+        question['options'] = {}
+        q.answers.each{|a| question['options'][a.reference_identifier] = a.text }
+      end
+
+      question
+    end
+
+    {schema: schema}
+  end
 
   # attempt to build a certificate from the request
   def generate
@@ -27,6 +52,8 @@ class CertificateGenerator < ActiveRecord::Base
     response_set.publish! if response_set.may_publish?
 
   end
+
+  private
 
   # the dataset parameters from the request, defaults to {}
   def request_dataset

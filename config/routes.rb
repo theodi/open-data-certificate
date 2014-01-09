@@ -32,6 +32,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
     get :admin, on: :collection
+    get :schema, on: :collection
 
     resources :certificates, :only => [:show] do
        member do

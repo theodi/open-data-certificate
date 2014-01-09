@@ -126,4 +126,7 @@ class DatasetsController < ApplicationController
     @title = "Admin - **removed** datasets"
   end
 
+  def schema
+    render json: CertificateGenerator.schema(params)
+  end
 end
