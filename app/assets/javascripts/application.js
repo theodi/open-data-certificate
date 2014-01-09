@@ -97,7 +97,7 @@ $(document).ready(function($){
     });
   });
 
-  $('.embed-code textarea').click(function() {
+  $('[data-content=highlight]').click(function() {
     this.select();
   });
 
@@ -270,7 +270,7 @@ $(document).ready(function($){
     var url = $(this).data('progress-url');
 
     $(panel).addClass('loading');
-    
+
     $.getJSON(url)
     .then(function(data){
       // console.log("url:", url)
@@ -393,7 +393,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  
+
   $('.certificate-data').popover({
     selector:'.odc-popover',
     trigger:'click',
