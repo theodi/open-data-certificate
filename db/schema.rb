@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211113948) do
+ActiveRecord::Schema.define(:version => 20140109155237) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -333,8 +333,10 @@ ActiveRecord::Schema.define(:version => 20131211113948) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "default_jurisdiction"
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
