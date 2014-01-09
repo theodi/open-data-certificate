@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -9,6 +7,21 @@ class User < ActiveRecord::Base
   has_many :response_sets
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :default_jurisdiction
+
+  before_save :ensure_authentication_token
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
 
   def full_name
     [first_name, last_name].delete_if(&:blank?).join(' ')
