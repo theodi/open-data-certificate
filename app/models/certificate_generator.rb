@@ -41,15 +41,8 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    certificate = self.create(request: request).generate(survey)
-
+    certificate = self.create(request: request, survey: survey).generate(survey)
     response_set = certificate.response_set
-    mandatory_complete = response_set.all_mandatory_questions_complete?
-    urls_resolve = response_set.all_urls_resolve?
-    if published = mandatory_complete && urls_resolve
-      response_set.complete!
-      response_set.save
-    end
 
     errors = certificate.errors.to_a
 
@@ -67,11 +60,10 @@ class CertificateGenerator < ActiveRecord::Base
       end
     end
 
-    {success: certificate.valid?, published: published, errors: errors}
+    {success: certificate.valid?, published: !!response_set.completed_at, errors: errors}
   end
 
   def generate(survey)
-    create_response_set(survey: survey)
 
     # find the questions which are to be answered
     survey.questions
@@ -79,7 +71,14 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
-    response_set.publish! if response_set.may_publish?
+    mandatory_complete = response_set.all_mandatory_questions_complete?
+    urls_resolve = response_set.all_urls_resolve?
+
+    if mandatory_complete && urls_resolve
+      response_set.complete!
+      response_set.publish!
+      response_set.save
+    end
 
     certificate
   end
@@ -137,5 +136,3 @@ class CertificateGenerator < ActiveRecord::Base
   end
 
 end
-
-
