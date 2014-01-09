@@ -7,7 +7,6 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
-  after_create :generate
   TYPES =  {
     none: 'string',
     one: 'radio',
@@ -37,20 +36,52 @@ class CertificateGenerator < ActiveRecord::Base
   end
 
   # attempt to build a certificate from the request
-  def generate
+  def self.generate(request)
 
-    s = Survey.newest_survey_for_access_code request[:jurisdiction]
+    survey = Survey.newest_survey_for_access_code request[:jurisdiction]
+    return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    create_response_set(survey: s)
+    certificate = self.create(request: request).generate(survey)
+
+    response_set = certificate.response_set
+    mandatory_complete = response_set.all_mandatory_questions_complete?
+    urls_resolve = response_set.all_urls_resolve?
+    if published = mandatory_complete && urls_resolve
+      response_set.complete!
+      response_set.save
+    end
+
+    errors = certificate.errors.to_a
+
+    response_set.responses_with_url_type.each do |response|
+      if response.error
+        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+      end
+    end
+
+    survey.questions.where(is_mandatory: true).each do |question|
+      response = response_set.responses.detect {|r| r.question_id == question.id}
+
+      if !response || (question.pick == "none" ? response.string_value.blank? : !response.answer_id)
+        errors.push("The question '#{question.reference_identifier}' is mandatory")
+      end
+    end
+
+    {success: certificate.valid?, published: published, errors: errors}
+  end
+
+  def generate(survey)
+    create_response_set(survey: survey)
 
     # find the questions which are to be answered
     survey.questions
           .where({reference_identifier: request_dataset.keys})
           .includes(:answers)
-          .all.each {|question| answer question}
+          .each {|question| answer question}
 
     response_set.publish! if response_set.may_publish?
 
+    certificate
   end
 
   private
@@ -66,34 +97,40 @@ class CertificateGenerator < ActiveRecord::Base
     # find the value that should be entered
     value = request_dataset[question[:reference_identifier]]
 
+    response_set.responses.where(question_id: question).delete_all
+
     case question.pick
+
     when 'none'
+      answer = question.answers.first
       response_set.responses.create({
-        string_value: value,
-        question: question
+        answer: answer,
+        question: question,
+        string_value: value
       })
+
     when 'one'
-      # the value is the reference identifier of the target answer 
+      # the value is the reference identifier of the target answer
       answer = question.answers.where(reference_identifier: value).first
-      
+
       unless answer.nil?
         response_set.responses.create({
-          answer_id: answer.id,
+          answer: answer,
           question: question
         })
       end
-    when 'many'
 
-      # the value is an array of the answers
+    when 'any'
+      # the value is an array of the chosen answers
       answers = question.answers.where(reference_identifier: value)
       answers.each do |answer|
         response_set.responses.create({
-          answer_id: answer.id,
+          answer: answer,
           question: question
         })
       end
 
-    else 
+    else
       throw "not handled> #{question.inspect}"
     end
 
