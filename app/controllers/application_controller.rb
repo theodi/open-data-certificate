@@ -54,6 +54,20 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_user_from_token!
+    email = params[:email].presence
+    user = email && User.find_by_email(email)
+
+    # Notice how we use Devise.secure_compare to compare the token
+    # in the database with the token given in the params, mitigating
+    # timing attacks.
+    if user && Devise.secure_compare(user.authentication_token, params[:token])
+      sign_in user, store: false
+    else
+      render json: {success: false, errors: ['Authentication failed']}, status: :unauthorized
+    end
+  end
+
   # display 404 when we can't find a record
   def record_not_found
     render :file => Rails.root.join('public','404.html'), :status => "404 Not Found", layout: false
