@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(:version => 20131211113948) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "certificate_generators", :force => true do |t|
+    t.integer  "response_set_id"
+    t.integer  "user_id"
+    t.text     "request"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
