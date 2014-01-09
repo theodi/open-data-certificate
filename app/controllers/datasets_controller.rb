@@ -128,7 +128,7 @@ class DatasetsController < ApplicationController
   end
 
   def create
-    render json: CertificateGenerator.generate(params)
+    render json: CertificateGenerator.generate(params, current_user)
   end
 
   def schema

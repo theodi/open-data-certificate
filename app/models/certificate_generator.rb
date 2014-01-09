@@ -35,12 +35,12 @@ class CertificateGenerator < ActiveRecord::Base
   end
 
   # attempt to build a certificate from the request
-  def self.generate(request)
+  def self.generate(request, user)
 
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    certificate = self.create(request: request, survey: survey).generate(survey)
+    certificate = self.create(request: request, survey: survey, user: user).generate
     response_set = certificate.response_set
 
     errors = certificate.errors.to_a
@@ -62,7 +62,10 @@ class CertificateGenerator < ActiveRecord::Base
     {success: certificate.valid?, published: !!response_set.completed_at, errors: errors}
   end
 
-  def generate(survey)
+  def generate
+
+    response_set.update_attribute(:user, user)
+    response_set.dataset.update_attribute(:user, user)
 
     # find the questions which are to be answered
     survey.questions

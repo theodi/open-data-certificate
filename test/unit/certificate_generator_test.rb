@@ -2,6 +2,10 @@ require 'test_helper'
 
 class CertificateGeneratorTest < ActiveSupport::TestCase
 
+  def setup
+    @user = FactoryGirl.create :user
+  end
+
   test "creating blank certificate" do
     load_custom_survey 'blank.rb'
 
@@ -10,7 +14,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request)
+      response = CertificateGenerator.generate(request, @user)
       assert_equal({success: true, published: true, errors: []}, response)
       assert_equal('blank', CertificateGenerator.last.survey.access_code)
     end
@@ -34,7 +38,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request)
+      response = CertificateGenerator.generate(request, @user)
       assert_equal({success: true, published: true, errors: []}, response)
     end
   end
@@ -55,7 +59,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request)
+      response = CertificateGenerator.generate(request, @user)
       assert_equal({success: true, published: false, errors: ["The question 'dataTitle' is mandatory"]}, response)
     end
   end
@@ -77,13 +81,14 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request)
+      response = CertificateGenerator.generate(request, @user)
       assert_equal({success: true, published: false, errors: ["The question 'publisherUrl' must have a valid URL"]}, response)
     end
   end
 
   test "unknown jurisdiction" do
-    response = CertificateGenerator.generate({jurisdiction: 'non-existant'})
+    request = {jurisdiction: 'non-existant'}
+    response = CertificateGenerator.generate(request, @user)
     assert_equal({success: false, errors: ["Jurisdiction not found"]}, response)
   end
 
