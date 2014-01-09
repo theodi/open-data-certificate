@@ -9,7 +9,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
 
     record_event "SurveyBuilder: #{dir}/#{basename} - #{@changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
 
-    parse_file(file).set_expired_certificates if @changed
+    parse_file.set_expired_certificates if @changed
 
     @changed
   end
@@ -23,10 +23,10 @@ class SurveyBuilder < Struct.new(:dir, :basename)
   end
 
   # Parse code taken from surveyor to allow the survey object to be returned
-  def parse_file(filename, options={})
-    str = File.read(filename)
+  def parse_file(options={})
+    str = File.read(file)
     Surveyor::Parser.ensure_attrs
-    Surveyor::Parser.options = {filename: filename}.merge(options)
+    Surveyor::Parser.options = {filename: file}.merge(options)
     Surveyor::Parser.log[:source] = str
     Surveyor::Parser.rake_trace "\n"
     survey = Surveyor::Parser.new.parse(str)
