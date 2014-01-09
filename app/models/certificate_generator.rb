@@ -21,10 +21,9 @@ class CertificateGenerator < ActiveRecord::Base
     schema = {}
     survey.questions.each do |q|
       next if q.display_type == 'label'
-      type = q.question_group && q.question_group.display_type == 'repeater' ? :repeater : q.pick.to_sym
-      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[type], required: q.is_mandatory}
+      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[q.type], required: q.is_mandatory}
 
-      if type == :one || type == :any
+      if q.type == :one || q.type == :any
         question['options'] = {}
         q.answers.each{|a| question['options'][a.reference_identifier] = a.text }
       end
@@ -94,23 +93,23 @@ class CertificateGenerator < ActiveRecord::Base
   def answer question
 
     # find the value that should be entered
-    value = request_dataset[question[:reference_identifier]]
+    data = request_dataset[question[:reference_identifier]]
 
     response_set.responses.where(question_id: question).delete_all
 
-    case question.pick
+    case question.type
 
-    when 'none'
+    when :none
       answer = question.answers.first
       response_set.responses.create({
         answer: answer,
         question: question,
-        string_value: value
+        string_value: data
       })
 
-    when 'one'
+    when :one
       # the value is the reference identifier of the target answer
-      answer = question.answers.where(reference_identifier: value).first
+      answer = question.answers.where(reference_identifier: data).first
 
       unless answer.nil?
         response_set.responses.create({
@@ -119,9 +118,9 @@ class CertificateGenerator < ActiveRecord::Base
         })
       end
 
-    when 'any'
+    when :any
       # the value is an array of the chosen answers
-      answers = question.answers.where(reference_identifier: value)
+      answers = question.answers.where(reference_identifier: data)
       answers.each do |answer|
         response_set.responses.create({
           answer: answer,
