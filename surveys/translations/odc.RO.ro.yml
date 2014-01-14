@@ -710,7 +710,7 @@ questions:
       a_1:
         text: "URL pentru Descrierea Procesului de Control al Calității"
   backups:
-    text: "Vă creați o copie de rezervă a datelor în afara serverului?"
+    text: "Vă creați o copie de rezervă a datelor în afara sitului (clădirii)?"
     text_as_statement: "Datele sunt"
     help_text: "Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident."
     answers:
@@ -719,7 +719,7 @@ questions:
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "susținute și în afara serverului"
+        text_as_statement: "susținute și în afara sitului"
   slaUrl:
     text: "Unde descrieți garanțiile cu privire la disponibilitatea serviciului?"
     text_as_statement: "Disponibilitatea serviciului este descrisă la"
@@ -1355,7 +1355,7 @@ labels:
   exemplar_10:
     text: "Ar trebui <strong>să vă documentați procesul de control al calității</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dumneavoastră."
   standard_23:
-    text: "Ar trebui <strong>să faceți o copie de rezervă în afara serverului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident."
+    text: "Ar trebui <strong>să faceți o copie de rezervă în afara sitului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident."
   standard_24:
     text: "Ar trebuii <strong>să descrieți ce garanții aveți referitor la disponibilitatea serviciilor</strong>, astfel încât oamenii să știe cât de mult se pot baza pe ele."
   exemplar_11:

@@ -1464,7 +1464,7 @@ survey 'RO',
       :help_text => 'cât de mult pot oamenii să depindă de disponibilitatea datelor dumneavoastră',
       :customer_renderer => '/partials/fieldset'
 
-    q_backups 'Vă creați o copie de rezervă a datelor în afara serverului?',
+    q_backups 'Vă creați o copie de rezervă a datelor în afara sitului (clădirii)?',
       :discussion_topic => :backups,
       :display_on_certificate => true,
       :text_as_statement => 'Datele sunt',
@@ -1473,10 +1473,10 @@ survey 'RO',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'susținute și în afara serverului',
+      :text_as_statement => 'susținute și în afara sitului',
       :requirement => ['standard_23']
 
-    label_standard_23 'Ar trebui <strong>să faceți o copie de rezervă în afara serverului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident.',
+    label_standard_23 'Ar trebui <strong>să faceți o copie de rezervă în afara sitului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_23'
     dependency :rule => 'A'

@@ -292,10 +292,10 @@
          <label>Garanții</label>
          <help>cât de mult pot oamenii să depindă de disponibilitatea datelor dumneavoastră</help>
          <question id="backups" display="Datele sunt">
-            <label>Vă creați o copie de rezervă a datelor în afara serverului?</label>
-            <yesno yes="susținute și în afara serverului"/>
+            <label>Vă creați o copie de rezervă a datelor în afara sitului (clădirii)?</label>
+            <yesno yes="susținute și în afara sitului"/>
             <help>Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident.</help>
-            <requirement level="standard">Ar trebui <strong>să faceți o copie de rezervă în afara serverului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident.</requirement>
+            <requirement level="standard">Ar trebui <strong>să faceți o copie de rezervă în afara sitului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident.</requirement>
          </question>
          <if test="this.releaseType() === 'service'">
             <question id="slaUrl" display="Disponibilitatea serviciului este descrisă la">
