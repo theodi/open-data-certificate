@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: d32f3d11e4cb70fea6b32bdf83be5d100afee4c6
+  revision: 72e16b679dae81677c8596a0d9b70011f536e70f
   specs:
     data_kitten (0.0.1)
       curb
@@ -63,9 +63,9 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     addressable (2.3.5)
-    airbrake (3.1.14)
+    airbrake (3.1.15)
       builder
-      json
+      multi_json
     arel (3.0.3)
     bcrypt-ruby (3.1.2)
     builder (3.0.4)
@@ -138,7 +138,7 @@ GEM
     guard-test (1.0.0)
       guard (>= 1.8)
       test-unit (~> 2.2)
-    haml (4.0.4)
+    haml (4.0.5)
       tilt
     high_voltage (2.1.0)
     hike (1.2.3)
@@ -147,7 +147,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    jbuilder (2.0.1)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     journey (1.0.4)
@@ -302,7 +302,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby-hmac (0.4.0)
-    ruby-prof (0.13.1)
+    ruby-prof (0.14.2)
     sass (3.2.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
