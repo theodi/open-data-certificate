@@ -1538,7 +1538,7 @@ a.transfer {
       box-shadow: none;
       color: @odiBlueDark;
       font-size: 16px;
-      padding: 10px 0 0;
+      padding: 0 0 10px;
     }
 
     :hover {
@@ -3358,6 +3358,11 @@ body{
   color:#444;
   text-shadow:none;
   font-size: 1em;
+
+  &.admin-approved {
+    background-color: @successBackground;
+    border-color: @successBorder;
+  }
 }
 
 .js .odc-popover-content{
