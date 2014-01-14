@@ -176,10 +176,41 @@ $(document).ready(function($){
     validateField($field);
   }
 
-  // Update radio, checkbox and select form fields on click
+  // Finds the value from the row to check if the field has changed
+  function rowValue($row) {
+    var $input = $row.find('li.input');
+
+    if ($input.hasClass('string')) {
+      return $input.find('input.string').val();
+    }
+
+    if ($input.hasClass('select')) {
+      return $input.find('select').val();
+    }
+
+    if ($input.hasClass('surveyor_check_boxes')) {
+      return $input.find('input:checked').toArray().map(function(input) { return $(input).val(); }).join(',');
+    }
+
+    if ($input.hasClass('surveyor_radio')) {
+      return $input.find('input:checked').val();
+    }
+  };
+
+  // Sets initial form values
+  $form.find('.question-row').each(function() {
+    var $row = bindQuestionRow($(this));
+    $row.data('value', rowValue($row));
+  });
+
+  // Updates radio, checkbox and select form fields on click
   $form.on("change paste", "input, select, textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     updateField($field);
@@ -189,6 +220,10 @@ $(document).ready(function($){
   $form.on("keyup", "input[type=text], input[type=url], input[type=email], textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     $row.data('update-timeout', setTimeout(function() {
