@@ -33,6 +33,9 @@ class Survey < ActiveRecord::Base
       where(access_code: access_code).order("surveys.survey_version DESC").first
     end
 
+    def migrate_access_code(access_code)
+      Survey::MIGRATIONS[access_code] || access_code
+    end
   end
 
   def previous_access_codes
