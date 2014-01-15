@@ -55,13 +55,13 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user_from_token!
-    email = params[:email].presence
+    email = request.headers['username'].presence
     user = email && User.find_by_email(email)
 
     # Notice how we use Devise.secure_compare to compare the token
     # in the database with the token given in the params, mitigating
     # timing attacks.
-    if user && Devise.secure_compare(user.authentication_token, params[:token])
+    if user && Devise.secure_compare(user.authentication_token, request.headers['token'])
       sign_in user, store: false
     else
       render json: {success: false, errors: ['Authentication failed']}, status: :unauthorized
