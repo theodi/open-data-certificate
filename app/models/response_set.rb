@@ -260,7 +260,7 @@ class ResponseSet < ActiveRecord::Base
 
   def all_mandatory_questions_complete?
     mandatory_question_ids = triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = responses.map(&:question_id)
+    responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
     (mandatory_question_ids - responded_to_question_ids).blank?
   end
 
