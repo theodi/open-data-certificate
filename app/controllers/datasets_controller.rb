@@ -3,7 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
-  before_filter :authenticate_user_from_token!, only: :create
+  before_filter :authenticate_user_from_token!, only: [:create, :update_certificate]
   before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
@@ -129,6 +129,11 @@ class DatasetsController < ApplicationController
 
   def create
     render json: CertificateGenerator.generate(params, current_user)
+  end
+
+  def update_certificate
+    @dataset = Dataset.find(params[:dataset_id])
+    render json: CertificateGenerator.update(@dataset, params, current_user)
   end
 
   def schema

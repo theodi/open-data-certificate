@@ -1,9 +1,8 @@
 class CertificateGenerator < ActiveRecord::Base
 
-  attr_readonly :request
-
   belongs_to :user
   belongs_to :response_set
+  has_one :dataset, through: :response_set
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
@@ -54,12 +53,53 @@ class CertificateGenerator < ActiveRecord::Base
     survey.questions.where(is_mandatory: true).each do |question|
       response = response_set.responses.detect {|r| r.question_id == question.id}
 
-      if !response || (question.pick == "none" ? response.string_value.blank? : !response.answer_id)
+      if !response || response.empty?
         errors.push("The question '#{question.reference_identifier}' is mandatory")
       end
     end
 
-    {success: true, published: !!response_set.completed_at, errors: errors}
+    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
+  end
+
+  # attempt to build a certificate from the request
+  def self.update(dataset, request, user)
+
+    # Finds a migrated survey if there is one
+    survey = Survey.newest_survey_for_access_code Survey::migrate_access_code(request[:jurisdiction])
+    return {success: false, errors: ['Jurisdiction not found']} if !survey
+
+    response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+    return {success: false, errors: ['Dataset not found']} if !response_set
+
+    if survey != response_set.survey || !response_set.modifications_allowed?
+      new_response_set = ResponseSet.create(survey: survey, user_id: user.id, dataset_id: response_set.dataset_id)
+      new_response_set.copy_answers_from_response_set!(response_set)
+      response_set = new_response_set
+    end
+
+    generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
+    generator.request = request
+    was_published = response_set.published?
+    certificate = generator.generate
+    response_set = certificate.response_set
+
+    errors = []
+
+    response_set.responses_with_url_type.each do |response|
+      if response.error
+        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+      end
+    end
+
+    survey.questions.where(is_mandatory: true).each do |question|
+      response = response_set.responses.detect {|r| r.question_id == question.id}
+
+      if !response || response.empty?
+        errors.push("The question '#{question.reference_identifier}' is mandatory")
+      end
+    end
+
+    {success: true, published: response_set.published?, errors: errors}
   end
 
   def generate
@@ -73,6 +113,7 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
+    response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
 

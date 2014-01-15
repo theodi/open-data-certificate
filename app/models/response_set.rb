@@ -12,6 +12,7 @@ class ResponseSet < ActiveRecord::Base
   has_one :certificate, dependent: :destroy
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
+  has_one :certificate_generator
 
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
 

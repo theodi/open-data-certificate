@@ -28,6 +28,7 @@ OpenDataCertificate::Application.routes.draw do
 
   resources :datasets do
     put 'start_questionnaire'
+    post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
