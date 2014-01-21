@@ -8,14 +8,32 @@ The original prototype has been moved to [/prototype](https://github.com/theodi/
 
 Certificates can be created and updated using the JSON API.
 
-Each user can access an API token from their account page. This token is required to authenticate with the API.
-To authenticate an API request, the `username` (email address) and `token` headers must be set.
-
 The API methods are:
 
 - GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction with the `jursidiction` GET parameter
 - POST `/datasets` - This method allows you to create a new dataset, it will be automatically published if valid
 - POST `/datasets/:id/certificates` - This method allows you to update a dataset, it will be automatically published if valid
+
+
+#### Authentication
+
+Each user can access their API token from their account page. This token is required to authenticate with the API.
+
+To authenticate an API request, custom headers `Username` (email address) and `Token` must be set. Below is an example request:
+
+    POST /datasets HTTP/1.1
+    Host: certificates.theodi.org
+    Content-Type: application/json
+    Username: john@example.com
+    Token: ad54965ec45d78ab6f
+
+    {
+      "jurisdiction": "GB",
+      "dataset": {
+        "dataTitle": "My dataset"
+      }
+    }
+
 
 #### Questionnaire schema
 
