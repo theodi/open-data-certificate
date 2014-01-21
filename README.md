@@ -10,7 +10,8 @@ Certificates can be created and updated using the JSON API.
 
 The API methods are:
 
-- GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction with the `jursidiction` GET parameter
+- GET `/jurisdictions` - This method provides a list of the available jurisdictions and associated information
+- GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction by title with the `jursidiction` GET parameter
 - POST `/datasets` - This method allows you to create a new dataset, it will be automatically published if valid
 - POST `/datasets/:id/certificates` - This method allows you to update a dataset, it will be automatically published if valid
 

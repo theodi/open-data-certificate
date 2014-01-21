@@ -21,6 +21,7 @@ OpenDataCertificate::Application.routes.draw do
   end
   post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
   get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
+  get 'jurisdictions', :to => 'jurisdictions#index'
 
   # Get certificate from dataset url
   get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
