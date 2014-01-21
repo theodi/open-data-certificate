@@ -106,11 +106,13 @@ With this in mind, be careful:
 * that different survey files have unique names
 * that changing the name of the survey might be painful.
 
+
 #### Surveyor extensions
 
 We've extended surveyor with some attributes for the Open Data Certificate.
 
-##### requirment
+##### requirement
+
 A 'Requirement' is a bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
 This is not the same as being "required" - which is about whether a question is mandatory to be completed.
 For the moment, requirements are stored in the questions database table as labels with a 'requirement' attribute set.
@@ -174,6 +176,7 @@ In the translation file (eg. surveys/translations/my-file.es.yml)
 
 There is an example of adding a translation on [this gist](https://gist.github.com/benfoxall/c35ad597fd2c2d7fcdc6#file-0002-manually-corrected-translation-yaml-patch)
 
+
 ### Running
 
 ```bash
@@ -185,6 +188,7 @@ rails s
 # to include some other jurisdictions
 rake surveyor:build_changed_surveys LIMIT=5
 ```
+
 
 #### Development things
 
@@ -199,6 +203,7 @@ rake surveyor:build_changed_surveys DIR=surveys/development
 # run tests on file change
 bundle exec guard
 ```
+
 
 #### Environment variables
 
@@ -218,6 +223,7 @@ CERTIFICATE_JUVIA_SITE_KEY
 AIRBRAKE_CERTIFICATE_KEY
 ```
 
+
 #### Admin functions
 
 To mark a user as being an admin - the users ID should be included in the `ODC_ADMIN_IDS` environment variable (comma separated).  The easiest way to find the ID is to look on the URL of their account page.
@@ -226,12 +232,13 @@ Admins are able to block a dataset from displaying on the public /datasets page 
 
 Removed datasets are listed at `/datasets/admin` (only accessible by admin users).
 
+
 #### Changing surveys
 
 To change surveys, you'll need Saxon installed. On a Mac, this is as simple as running:
 
 ```bash
-brew install saxon 
+brew install saxon
 ```
 
 You can then change the `prototype/survey.xsl` file and run:
