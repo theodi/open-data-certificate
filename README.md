@@ -4,11 +4,84 @@
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
 
+### API
+
+Certificates can be created and updated using the JSON API.
+
+Each user can access an API token from their account page. This token is required to authenticate with the API.
+To authenticate an API request, the `username` (email address) and `token` headers must be set.
+
+The API methods are:
+
+- GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction with the `jursidiction` GET parameter
+- POST `/datasets` - This method allows you to create a new dataset, it will be automatically published if valid
+- POST `/datasets/:id/certificates` - This method allows you to update a dataset, it will be automatically published if valid
+
+#### Questionnaire schema
+
+The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash, which specifies the allowed options, which should be identified by their key.
+
+Questions which are required to publish the dataset will also have `required: true`.
+
+An example:
+
+    {"schema": {
+        "dataTitle": {
+            "question": "What's a good title for this data?",
+            "type": "string",
+            "required": true
+        },
+        "publisherRights": {
+            "question": "Do you have the rights to publish the data as open data?",
+            "type": "radio",
+            "required": true,
+            "options": {
+                "yes": "yes, you have the right to publish the data as open data",
+                "no": "no, you don't have the right to publish the data as open data",
+                "unsure": "you don't know whether you have the right to publish the data as open data"
+            }
+        },
+        "versionManagement": {
+            "question": "How do you publish a series of the same dataset?",
+            "type": "checkbox",
+            "required": false,
+            "options": {
+                "url": "as a single URL",
+                "consistent": "as consistent URLs for each release",
+                "list": "as a list of releases"
+            }
+        },
+        "administrators": {
+            "question": "Who is responsible for administrating this data?",
+            "type": "repeating",
+            "required": false
+        }
+    }}
+
+#### Posting to a dataset
+
+To create or update a dataset data should be sent in the format (using the above schema):
+
+    {
+        "jurisdiction": "GB",
+        "dataset": {
+            "dataTitle": "My open data",
+            "publisherRights": "unsure",
+            "versionManagement": ["url", "list"],
+            "administrators": ["John Smith"]
+        }
+    }
+
+
+- Checkbox and radio fields should use the option key from the schema
+- Checkbox and repeating fields should be sent as an array
+
 ### Surveyor
 
 The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.  We've changed the look, feel & structure to fit the site and extended it to support certificate levels.
 
 Although all of Surveyor's functionality is supported - much of it isn't incorporated into the initial designs, and so hasn't been tested to work correctly. Experiments with the demo "kitchen sink survey" illustrate that some of the question types that Surveyor supports break the CSS, so please beware if extending the current questionnaire with other question types - they will need to be tested and possibly need CSS/renderer design changes.
+
 
 #### Deploying questionnaires
 
