@@ -109,6 +109,7 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+    verification: 'Verification:'
 
   # main controller
   main:
@@ -170,13 +171,13 @@ en:
       submit_search: Go
 
     community_verification_panel:
-      title: Community Verification
+      title: Community verification
       description: Other people can verify whether the answers on this certificate are correct.
       status: This certificate is **%{certification}**.
       status_self_certified: If two or more people verify it, this certificate will become community certified.
-      verify_certificate: Verify Certificate
-      verified: verified
-      undo: undo
+      verify_certificate: Verify certificate
+      verified: Verified
+      undo: Undo
       sign_in: Sign in
       sign_in_text: to verify this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
@@ -197,6 +198,11 @@ en:
     certification_types:
       self: self certified
       community: community certified
+      odi_audited: ODI audited
+    mark_audited: Mark audited
+    unmark_audited: Unmark audited
+    audited: This certificate has been marked as ODI audited
+    not_audited: This certificate has not been marked as ODI audited
 
   datasets:
     datasets: Datasets
@@ -218,6 +224,7 @@ en:
     licence: "Licence:"
     data_licence: "Data Licence:"
     content_licence: "Content Licence:"
+    verification: "Verification:"
 
   data_kitten:
     title: Title
