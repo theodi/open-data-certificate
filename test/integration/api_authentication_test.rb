@@ -8,13 +8,13 @@ class ApiAuthenticationTest < ActionDispatch::IntegrationTest
 
   test "Unauthorised user tries to create a dataset" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    post "/datasets", {}, {'username' => 'test@example.com', 'token' => 'test123'}
+    post "/datasets", {}, {'Username' => 'test@example.com', 'Token' => 'test123'}
     assert_response :unauthorized
   end
 
   test "Authorised user tries to create a dataset" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    post "/datasets", {}, {'username' => 'test@example.com', 'token' => 'test1234'}
+    post "/datasets", {}, {'Username' => 'test@example.com', 'Token' => 'test1234'}
     assert_response :success
   end
 end
