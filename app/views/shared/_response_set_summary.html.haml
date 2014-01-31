@@ -13,29 +13,35 @@
       =detail_item(t :content_licence, scope: :summary_data) { licences[:content][:title] }
 
     - if kitten_data
-      %dt= t :release_date, scope: :data_kitten
-      %dd!= kitten_value(kitten_data[:release_date]).to_s
+      - if kitten_value(kitten_data[:release_date])
+        %dt= t :release_date, scope: :data_kitten
+        %dd!= kitten_value(kitten_data[:release_date]).to_s
 
-      %dt= t :modified_date, scope: :data_kitten
-      %dd!= kitten_value(kitten_data[:modified_date])
+      - if kitten_value(kitten_data[:modified_date])
+        %dt= t :modified_date, scope: :data_kitten
+        %dd!= kitten_value(kitten_data[:modified_date])
 
-      %dt= t :update_frequency, scope: :data_kitten
-      %dd!= kitten_value(kitten_data[:update_frequency])
+      - if kitten_value(kitten_data[:update_frequency])
+        %dt= t :update_frequency, scope: :data_kitten
+        %dd!= kitten_value(kitten_data[:update_frequency])
 
   - if kitten_data
     %hr.heavy
 
-    %h3= t :publishers, scope: :data_kitten
-    %dl
-      %dd!= kitten_value(kitten_data[:publishers])
+    - unless kitten_value(kitten_data[:publishers]).empty?
+      %h3= t :publishers, scope: :data_kitten
+      %dl
+        %dd!= kitten_value(kitten_data[:publishers])
 
-    %h3= t :licenses, scope: :data_kitten
-    %dl
-      %dd!= kitten_value(kitten_data[:licenses])
+    - unless kitten_value(kitten_data[:licenses]).empty?
+      %h3= t :licenses, scope: :data_kitten
+      %dl
+        %dd!= kitten_value(kitten_data[:licenses])
 
-    %h3= t :keywords, scope: :data_kitten
-    %dl
-      %dd!= kitten_value(kitten_data[:keywords])
+    - unless kitten_value(kitten_data[:keywords]).empty?
+      %h3= t :keywords, scope: :data_kitten
+      %dl
+        %dd!= kitten_value(kitten_data[:keywords])
 
     - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
     - extra_data = kitten_data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
