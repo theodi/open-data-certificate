@@ -19,21 +19,7 @@ The API methods are:
 #### Authentication
 
 Each user can access their API token from their account page. This token is required to authenticate with the API.
-
-To authenticate an API request, custom headers `Username` (email address) and `Token` must be set. Below is an example request:
-
-    POST /datasets HTTP/1.1
-    Host: certificates.theodi.org
-    Content-Type: application/json
-    Username: john@example.com
-    Token: ad54965ec45d78ab6f
-
-    {
-      "jurisdiction": "GB",
-      "dataset": {
-        "dataTitle": "My dataset"
-      }
-    }
+The request should authenticated with Basic HTTP Authentication, using the user's email address as the username and token as the password i.e. `john@example.com:ad54965ec45d78ab6f`.
 
 
 #### Questionnaire schema
