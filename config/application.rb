@@ -75,7 +75,9 @@ module OpenDataCertificate
     config.after_initialize do |app|
       app.routes.append{match '*path', :to => 'application#routing_error'}
     end
-    
+
+    config.middleware.insert_before ActionDispatch::ParamsParser, "CatchJsonParseErrors"
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
