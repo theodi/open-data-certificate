@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: d720d6a64b2b90445b5d3c1956a44270afdf2c03
+  revision: 86f10c04d431c7ec397265cd6b169e60406b1cf9
   specs:
     data_kitten (0.0.1)
       curb
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: c5fadc804338f9671f8c5ead9687bc250e6d021e
+  revision: b81bdbac62b9ba78e71e30c6d223d4d97c700f45
   specs:
     odlifier (0.0.1)
       httparty
@@ -77,7 +77,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.7.0)
     commonjs (0.2.7)
     curb (0.8.5)
     daemons (1.1.9)
@@ -153,13 +153,13 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     journey (1.0.4)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     json-ld (1.1.1)
       rdf (>= 1.0.8)
-    kaminari (0.15.0)
+    kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.3.3)
@@ -210,19 +210,19 @@ GEM
     multi_json (1.8.4)
     multi_xml (0.5.5)
     mustache (0.99.4)
-    mysql2 (0.3.14)
-    net-http-persistent (2.9)
+    mysql2 (0.3.15)
+    net-http-persistent (2.9.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
-    newrelic_rpm (3.7.1.182)
+    newrelic_rpm (3.7.1.188)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
-    pry (0.9.12.4)
+    pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -267,7 +267,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
-    rdf (1.1.1.1)
+    rdf (1.1.2.1)
     rdf-aggregate-repo (1.1.0)
       rdf (>= 1.1)
     rdf-isomorphic (1.1.0)
@@ -281,7 +281,7 @@ GEM
       rdf-xsd (>= 1.1.0)
     rdf-n3 (1.1.0)
       rdf (>= 1.1)
-    rdf-rdfa (1.1.1)
+    rdf-rdfa (1.1.2)
       haml (>= 4.0)
       htmlentities (>= 4.3.1)
       rdf (>= 1.1.0)
@@ -309,7 +309,7 @@ GEM
       mime-types (>= 1.16)
     ruby-hmac (0.4.0)
     ruby-prof (0.14.2)
-    sass (3.2.13)
+    sass (3.2.14)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
