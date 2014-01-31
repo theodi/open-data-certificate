@@ -12,6 +12,8 @@
       =detail_item(t :data_licence, scope: :summary_data)    { licences[:data][:title] }
       =detail_item(t :content_licence, scope: :summary_data) { licences[:content][:title] }
 
+    =detail_item(t :verification, scope: :summary_data) { t response_set.certificate.certification_type, scope: 'certificate.certification_types' }
+
     - if kitten_data
       - if kitten_value(kitten_data[:release_date])
         %dt= t :release_date, scope: :data_kitten

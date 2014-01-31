@@ -114,6 +114,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def certification_type
+    return :odi_audited if self.audited
     verifications.count >= 2 ? :community : :self
   end
 

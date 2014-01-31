@@ -176,10 +176,41 @@ $(document).ready(function($){
     validateField($field);
   }
 
-  // Update radio, checkbox and select form fields on click
+  // Finds the value from the row to check if the field has changed
+  function rowValue($row) {
+    var $input = $row.find('li.input');
+
+    if ($input.hasClass('string')) {
+      return $input.find('input.string').val();
+    }
+
+    if ($input.hasClass('select')) {
+      return $input.find('select').val();
+    }
+
+    if ($input.hasClass('surveyor_check_boxes')) {
+      return $input.find('input:checked').toArray().map(function(input) { return $(input).val(); }).join(',');
+    }
+
+    if ($input.hasClass('surveyor_radio')) {
+      return $input.find('input:checked').val();
+    }
+  };
+
+  // Sets initial form values
+  $form.find('.question-row').each(function() {
+    var $row = bindQuestionRow($(this));
+    $row.data('value', rowValue($row));
+  });
+
+  // Updates radio, checkbox and select form fields on click
   $form.on("change paste", "input, select, textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     updateField($field);
@@ -189,6 +220,10 @@ $(document).ready(function($){
   $form.on("keyup", "input[type=text], input[type=url], input[type=email], textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     $row.data('update-timeout', setTimeout(function() {
@@ -211,7 +246,13 @@ $(document).ready(function($){
     documentationUrl: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
@@ -238,7 +279,13 @@ $(document).ready(function($){
     url: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {

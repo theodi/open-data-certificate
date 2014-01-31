@@ -13,6 +13,7 @@
         %p= "This certificate should be updated to reflect the #{@certificate.response_set.survey.try(:status)} questionnaire for #{@certificate.response_set.jurisdiction}."
 
 - scope_locale @certificate.response_set.locale do
+
   .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
     - unless minimal
       %ul.pull-right.unstyled
@@ -48,6 +49,18 @@
       .row
         .span9.offset3
           %h1= @certificate.response_set.title
+
+  - if current_user.try(:admin?)
+    = form_for @certificate, url: dataset_certificate_path(@certificate.response_set.dataset.id, @certificate.id), html: {class: "admin-functions #{@certificate.audited ? 'admin-approved' : ''}"} do |f|
+      - if @certificate.audited
+        %i.icon-ok.icon-large
+        = t("certificate.audited")
+      - else
+        %i.icon-info-sign.icon-large
+        = t("certificate.not_audited")
+
+      = f.hidden_field :audited, value: !@certificate.audited
+      =submit_tag t(@certificate.audited ? "certificate.unmark_audited" : "certificate.mark_audited"), class: 'btn'
 
   - if minimal # don't show the summary
     =render @certificate.response_set
