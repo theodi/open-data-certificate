@@ -97,7 +97,7 @@ $(document).ready(function($){
     });
   });
 
-  $('.embed-code textarea').click(function() {
+  $('[data-content=highlight]').click(function() {
     this.select();
   });
 

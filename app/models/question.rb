@@ -58,6 +58,10 @@ class Question < ActiveRecord::Base
     is_mandatory || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
   end
 
+  def type
+    @type ||= question_group && question_group.display_type == 'repeater' ? :repeater : pick.to_sym
+  end
+
   private
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in

@@ -12,6 +12,7 @@ class ResponseSet < ActiveRecord::Base
   has_one :certificate, dependent: :destroy
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
+  has_one :certificate_generator
 
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
 
@@ -260,7 +261,7 @@ class ResponseSet < ActiveRecord::Base
 
   def all_mandatory_questions_complete?
     mandatory_question_ids = triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = responses.map(&:question_id)
+    responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
     (mandatory_question_ids - responded_to_question_ids).blank?
   end
 
@@ -308,7 +309,8 @@ class ResponseSet < ActiveRecord::Base
           api_id = Surveyor::Common.generate_api_id
           ui_hash[api_id] = { question_id: question.id.to_s,
                               api_id: api_id,
-                              answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
+                              answer_id: answer.id.to_s,
+                              response_group: previous_response.response_group }.merge(previous_response.ui_hash_values)
         end
       end
     end

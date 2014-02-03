@@ -36,6 +36,14 @@ class Response < ActiveRecord::Base
     @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end
 
+  def empty?
+    question.pick == "none" ? string_value.blank? : !answer_id
+  end
+
+  def filled?
+    !empty?
+  end
+
   def ui_hash_values
     [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other].reduce({}) do |memo, key|
       value = self.send(key)
