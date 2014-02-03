@@ -246,7 +246,13 @@ $(document).ready(function($){
     documentationUrl: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
@@ -273,7 +279,13 @@ $(document).ready(function($){
     url: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
