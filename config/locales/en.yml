@@ -109,7 +109,7 @@ en:
       draft: Draft
       published: Published
       archived: Archived
-    verification: 'Verification:'
+    verification: Verification
 
   # main controller
   main:
