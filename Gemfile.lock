@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 86f10c04d431c7ec397265cd6b169e60406b1cf9
+  revision: 28e566a055dcc1471fa7a4fc6e1278496f4006aa
   specs:
     data_kitten (0.0.1)
       curb
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: b81bdbac62b9ba78e71e30c6d223d4d97c700f45
+  revision: 0200c462fe85edd4ed991d289eb9001912409b5b
   specs:
     odlifier (0.0.1)
       httparty
@@ -34,7 +34,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (3.0.26)
+    aasm (3.1.0)
     actionmailer (3.2.16)
       actionpack (= 3.2.16)
       mail (~> 2.5.4)
@@ -91,7 +91,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.3)
-    docile (1.1.2)
+    docile (1.1.3)
     domainatrix (0.0.11)
       addressable
     dotenv (0.9.0)
@@ -214,7 +214,7 @@ GEM
     net-http-persistent (2.9.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
+    net-ssh (2.8.0)
     newrelic_rpm (3.7.1.188)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -357,7 +357,7 @@ GEM
     sxp (0.1.5)
     terminal-notifier-guard (1.5.3)
     test-unit (2.5.5)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thin (1.6.1)
