@@ -190,10 +190,7 @@ $(document).ready(function($){
   function updateField($field) {
     var $row = bindQuestionRow($field);
 
-    updateLoading(1);
-    saveFormElements($form, questionFields($field).add(csrfToken), function() {
-      updateLoading(-1);
-    });
+    saveFormElements($form, questionFields($field).add(csrfToken));
     validateField($field);
   }
 
@@ -486,20 +483,16 @@ $(document).ready(function($){
     }
   }
 
-  function saveFormElements($form, $elements, callback) {
+  function saveFormElements($form, $elements) {
+    updateLoading(1);
     $.ajax({
       type: "PUT",
       url: $form.attr("action"),
-      data: $elements.serialize(), dataType: 'json',
-      success: function(response) {
-        successfulSave(response);
-        if (callback) callback();
-      },
-      error: function(){
-        // This throws on aborted requests (so when the save button is clicked and page unloaded while it is being sent)
-        // would be good to have this in still, though to stop the alert when you save (and it has saved), removing for now
-        //alert("an error occured when saving your response");
-      }
+      data: $elements.serialize(), dataType: 'json'
+    })
+    .done(successfulSave)
+    .always(function() {
+      updateLoading(-1);
     });
   }
 
