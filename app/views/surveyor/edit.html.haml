@@ -31,11 +31,14 @@
                     %i.icon.icon-pencil
 
               %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
-            .span3
+            .span3.save-button
               - if user_signed_in?
-                = f.submit t('surveyor.click_here_to_finish'), :name => :finish, :class => 'btn btn-primary btn-large', 'data-btn-confirmable' => t('surveyor.saving_questionnaire')
+                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish, "data-btn-loading" => t('surveyor.saving_questionnaire')}
+                  %i.icon-loading.icon-spin.icon-refresh.icon-large
+                  %span= t('surveyor.click_here_to_finish')
               - else
-                =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large', :role=>"button", 'data-toggle' => "modal"
+                =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
+
 
 
     = render :partial => 'status_panel'

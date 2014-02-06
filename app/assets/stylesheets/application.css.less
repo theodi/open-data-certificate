@@ -1690,6 +1690,25 @@ header .jurisdiction{
   }
 }
 
+header .save-button {
+
+  .btn.btn-large {
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 20px 10px 18px;
+
+    i.icon-loading {
+      display: none;
+      height: 12px;
+      width: 20px;
+      margin-right: 6px;
+    }
+  }
+
+  &.loading .btn.btn-large i.icon-loading {
+    display: inline-block;
+  }
+}
+
 #surveyor{
 
   padding-top:20px;
