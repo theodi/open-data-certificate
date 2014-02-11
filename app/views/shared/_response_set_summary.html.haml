@@ -15,15 +15,15 @@
     =detail_item(t :verification, scope: :summary_data) { t response_set.certificate.certification_type, scope: 'certificate.certification_types' }
 
     - if kitten_data
-      - if kitten_value(kitten_data[:release_date])
+      - unless kitten_value(kitten_data[:release_date]).empty?
         %dt= t :release_date, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:release_date]).to_s
 
-      - if kitten_value(kitten_data[:modified_date])
+      - unless kitten_value(kitten_data[:modified_date]).empty?
         %dt= t :modified_date, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:modified_date])
 
-      - if kitten_value(kitten_data[:update_frequency])
+      - unless kitten_value(kitten_data[:update_frequency]).empty?
         %dt= t :update_frequency, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:update_frequency])
 
