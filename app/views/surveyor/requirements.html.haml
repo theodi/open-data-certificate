@@ -42,7 +42,7 @@
             %li
               .dataset{class: defined?(expanded) ? 'expanded': ''}
                 .requirement-title
-                  %span= "#{field.text.html_safe}"
+                  %span= field.text.html_safe
                 .expand
                   %i.show-more.icon-chevron-down
                   %i.hide-more.icon-chevron-up
@@ -60,7 +60,8 @@
               %hr.heavy
 
           -requirements.each do |requirement|
-            - question = requirement.question_corresponding_to_requirement || requirement.answer_corresponding_to_requirement.try(:question)
+            - answer = requirement.answer_corresponding_to_requirement
+            - question = requirement.question_corresponding_to_requirement || answer.try(:question)
             %li
               .dataset{class: defined?(expanded) ? 'expanded': ''}
                 .requirement-title
@@ -71,7 +72,7 @@
                 .more
                   .row
                     .span4
-                      %p= markdown(question.try(:help_text) || '')
+                      %p= markdown(answer.try(:help_text) || question.try(:help_text) || '')
                     .span6.offset2
                       %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{question.try(:id)}"}
                         %strong= t('improvements.buttons.understood')
