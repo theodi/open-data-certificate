@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/theodi/alternate-rails.git
-  revision: a5e9b1d0cc80e5015c3035d1e00e4ac38f660082
+  revision: 17c8e8295f46a5e51915fd1eef329eabe1b2a426
   specs:
     alternate_rails (0.0.1)
       rails (~> 3.2.13)
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 28e566a055dcc1471fa7a4fc6e1278496f4006aa
+  revision: ed567207486d00af9a33728e5cc0ddf8216f5acc
   specs:
     data_kitten (0.0.1)
       curb
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: 0200c462fe85edd4ed991d289eb9001912409b5b
+  revision: 0ce21d2fe105961a76f4b0cbd48052166c12ffb1
   specs:
     odlifier (0.0.1)
       httparty
@@ -106,14 +106,14 @@ GEM
     eventmachine (1.0.3)
     excon (0.31.0)
     execjs (2.0.2)
-    factory_girl (4.3.0)
+    factory_girl (4.4.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.3.0)
-      factory_girl (~> 4.3.0)
+    factory_girl_rails (4.4.0)
+      factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.9.3)
-    fog (1.19.0)
+    fog (1.20.0)
       builder
       excon (~> 0.31.0)
       formatador (~> 0.2.0)
@@ -121,8 +121,7 @@ GEM
       multi_json (~> 1.0)
       net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
-      nokogiri (~> 1.5)
-      ruby-hmac
+      nokogiri (>= 1.5.11)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -211,11 +210,11 @@ GEM
     multi_xml (0.5.5)
     mustache (0.99.4)
     mysql2 (0.3.15)
-    net-http-persistent (2.9.1)
+    net-http-persistent (2.9.4)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
-    newrelic_rpm (3.7.1.188)
+    newrelic_rpm (3.7.2.192)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
@@ -307,7 +306,6 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    ruby-hmac (0.4.0)
     ruby-prof (0.14.2)
     sass (3.2.14)
     sass-rails (3.2.6)
