@@ -35,7 +35,7 @@ module ApplicationHelper
       when 'Hash'
         h(value[:title])
       else
-        value
+        value.to_s
       end
     end
   end
