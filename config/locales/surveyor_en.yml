@@ -48,12 +48,6 @@ en:
         standard: Standard
         expert: Expert
 
-  requirement_label:
-    requirement: This is required for <strong>all levels</strong>
-    requirement_pilot: This is required for <strong>pilot level</strong> and above
-    requirement_standard: This is required for <strong>standard level</strong> and above
-    requirement_exemplar: This is required for <strong>expert level</strong>
-
   level_status:
     none: This shows how many questions you’ve answered and which open data certificate you’ll get.<br /><a href="/about">Read how it works</a>
     basic: You’ve achieved an open data certificate. You’re now on your way to <strong>Pilot</strong> level.
