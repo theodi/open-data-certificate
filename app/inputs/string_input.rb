@@ -8,6 +8,14 @@ class StringInput < Formtastic::Inputs::StringInput
     }
   end
 
+  def label_text
+    ((localized_label || humanized_method_name) + requirement_text + ' ' + label_level_status).html_safe
+  end
+
+  def label_level_status
+    "<small>#{I18n.t(options[:minimum_level], scope: 'requirements')}</small>".html_safe if options[:minimum_level]
+  end
+
   def to_html
     status = options[:status_message] || {}
 
@@ -28,5 +36,4 @@ class StringInput < Formtastic::Inputs::StringInput
       ].join("\n").html_safe
     end
   end
-
 end
