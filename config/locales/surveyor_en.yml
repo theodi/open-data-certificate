@@ -61,3 +61,9 @@ en:
     standard: You’ve achieved a <strong>Standard</strong> open data certificate so far. You’re now on your way to <strong>Expert</strong> level.
     exemplar: You've achieved an <strong>Expert</strong> open data certificate. Congratulations!
     improve: How can I improve my open data?
+
+  requirements:
+    basic: This is required for <strong>all levels</strong>
+    pilot: This is required for <strong>pilot level</strong> and above
+    standard: This is required for <strong>standard level</strong> and above
+    exemplar: This is required for <strong>expert level</strong>

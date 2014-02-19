@@ -56,7 +56,9 @@
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
       - if q.pick == 'one' || q.pick == 'any'
-        %label.span8.question_label!= question_text
+        %label.span8.question_label
+          != question_text
+          %small!= t(q.minimum_level, scope: 'requirements') if q.minimum_level
 
       .span8
         - i = response_idx
@@ -94,7 +96,7 @@
 
           - else
             - q.answers.each do |a|
-              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template
+              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
 
         .autocomplete-override{class: explanation_required ? '' : 'none'}
           - i = (i.to_i + 1).to_s if q.pick == 'any'
