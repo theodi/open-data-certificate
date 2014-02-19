@@ -293,14 +293,6 @@ $(document).ready(function($){
         // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
 
-
-      // display the overal attainment
-      $('.status_texts dt') // matching description title
-        .filter(function(){return $(this).text() == attained;})
-        .next().addClass('active')
-        .siblings().removeClass('active');
-
-
       $('#panel_handle')
         // removed any 'attained-' classes
         .toggleClass(function(i, name){return name.indexOf('attained-') === -1})

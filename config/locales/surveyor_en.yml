@@ -40,13 +40,6 @@ en:
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
 
-    # right hand sidebar
-    status_panel:
-        updating: updating
-        raw: Raw
-        pilot: Pilot
-        standard: Standard
-        expert: Expert
 
   level_status:
     none: This shows how many questions you’ve answered and which open data certificate you’ll get.<br /><a href="/about">Read how it works</a>

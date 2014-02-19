@@ -2307,6 +2307,16 @@ header .save-button {
 
   right:-320px;
 
+  h2 {
+    color: @odiGrey;
+    font-size: 26px;
+    font-weight: normal;
+  }
+
+  p {
+    font-size: 17px;
+  }
+
   // also .hover for oldie fallback
   &:hover, &.hover, &.stick{
     right:0px;
@@ -2315,6 +2325,13 @@ header .save-button {
   &.affix, &.affix-bottom{
     position: fixed;
     top: 105px;
+  }
+
+  .certificate-badge {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 9px;
   }
 
   #panel_handle{
@@ -2355,9 +2372,10 @@ header .save-button {
   }
 
   h3 {
-    margin-bottom: 0;
-    display: inline;
-    width: 50%;
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: normal;
+    margin-bottom: 8px;
   }
 
   img {
@@ -2369,15 +2387,6 @@ header .save-button {
   .progress {
     margin-bottom: 10px;
     clear: both;
-  }
-
-  .status_texts {
-    dd,dt{
-      display:none;
-      &.active{
-        display:block;
-      }
-    }
   }
 }
 
