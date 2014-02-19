@@ -1968,6 +1968,14 @@ header .save-button {
       }
     }
 
+    .question_label {
+      cursor: auto;
+
+      .odc-popover {
+        color: @odiBlueLight;
+      }
+    }
+
     .status-message {
       display: none;
       float: none;
@@ -3275,13 +3283,42 @@ body{
   border-color: @odiBlueLight;
   padding:0em;
 
-  // color:@odiGrey;
-  font-size:0.6em;
-  line-height: 1.5em;
+  color: @odiGreyDarker;
+  font-size: 11px;
+  line-height: 140%;
 
-  width:105px;
+  max-width: 220px;
 
   .popover-content{
+    .clearfix;
     padding:7px 8px;
+
+    a {
+      display: block;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .btn {
+      margin-top: 3px;
+      float: left;
+    }
+
+    .badge {
+      float: left;
+      padding: 0;
+      margin-right: 6px;
+      height: 40px;
+      width: 40px;
+
+      &:empty { display: block; }
+
+      &.basic { background: no-repeat url('/assets/badges-medium/raw_level_badge.png'); }
+      &.pilot { background: no-repeat url('/assets/badges-medium/pilot_level_badge.png'); }
+      &.standard { background: no-repeat url('/assets/badges-medium/standard_level_badge.png'); }
+      &.exemplar { background: no-repeat url('/assets/badges-medium/exemplar_level_badge.png'); }
+    }
   }
 }

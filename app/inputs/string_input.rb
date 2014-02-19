@@ -13,7 +13,22 @@ class StringInput < Formtastic::Inputs::StringInput
   end
 
   def label_level_status
-    "<small>#{I18n.t(options[:minimum_level], scope: 'requirements')}</small>".html_safe if options[:minimum_level]
+    level = options[:minimum_level]
+    if level
+      [
+        "<small>",
+          I18n.t('required_for'),
+          " <span class='odc-popover'>",
+            I18n.t(level, scope: 'requirement_levels'),
+            "<span class='odc-popover-content'>",
+              "<i class='badge #{level}'></i>",
+              I18n.t(level, scope: 'level_descriptions').html_safe,
+            "</span>",
+          "</span> ",
+          (I18n.t('and_above') if level != 'exemplar'),
+        "</small>"
+      ].join.html_safe
+    end
   end
 
   def to_html

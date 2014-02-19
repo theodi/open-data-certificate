@@ -58,7 +58,15 @@
       - if q.pick == 'one' || q.pick == 'any'
         %label.span8.question_label
           != question_text
-          %small!= t(q.minimum_level, scope: 'requirements') if q.minimum_level
+          - if q.minimum_level
+            %small
+              = t('required_for')
+              %span.odc-popover
+                != t(q.minimum_level, scope: 'requirement_levels')
+                %span.odc-popover-content
+                  %i.badge{class: q.minimum_level}
+                  != t(q.minimum_level, scope: 'level_descriptions')
+              = t('and_above') if q.minimum_level != 'exemplar'
 
       .span8
         - i = response_idx

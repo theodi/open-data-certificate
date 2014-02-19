@@ -46,6 +46,22 @@ en:
       title_with_level: Expert level
       description: this open data is an exceptional example of information infrastructure.
 
+  level_descriptions:
+    basic: '<strong>Raw:</strong> A great start at the basics of publishing open data.'
+    pilot: '<strong>Pilot:</strong> Data users receive extra support from, and can provide feedback to the publisher.'
+    standard: '<strong>Standard:</strong> Regularly published open data with robust support that people can rely on.'
+    exemplar: '<strong>Expert:</strong> An exceptional example of information infrastructure.'
+
+  requirement_levels:
+    basic: Raw level certification
+    pilot: Pilot level certification
+    standard: Standard level certification
+    exemplar: Expert level certification
+
+  required_for: This is required for
+  and_above: and above
+
+
   statuses:
     alpha:
       title: Alpha
@@ -321,3 +337,4 @@ en:
     title: Certificate level key
     description: This shows your progress towards each data certificate.
     about: Read how it works.
+    improve_data: How can I improve my open data?

@@ -380,7 +380,7 @@ $(document).ready(function($){
   });
 
 
-  $('.certificate-data').popover({
+  $('.certificate-data, #survey_form').popover({
     selector:'.odc-popover',
     trigger:'click',
     html:true,
