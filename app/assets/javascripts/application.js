@@ -205,10 +205,14 @@ $(document).ready(function($){
   });
 
   // deal with accordion section changes
-  $('.survey-section .collapse').on('show', function(){
-    $(this).prev().removeClass('inactive');
-  }).on('hidden', function(){
-    $(this).prev().addClass('inactive');
+  $('.survey-section .collapse').on('show', function(e){
+    if (e.target == this) {
+      $(this).prev().removeClass('inactive');
+    }
+  }).on('hidden', function(e){
+    if (e.target == this) {
+      $(this).prev().addClass('inactive');
+    }
   });
 
   $('.affixed').each(function(){
