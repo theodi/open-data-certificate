@@ -5,7 +5,7 @@ module DatasetsHelper
   def detail_item title
     begin
       throw unless value = yield
-      content_tag(:dt, title << ' ') + content_tag(:dd, value)
+      content_tag(:p, content_tag(:dt, title << ' ') + content_tag(:dd, value))
     rescue
       ""
     end

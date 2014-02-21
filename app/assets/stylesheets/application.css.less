@@ -1554,6 +1554,20 @@ a.transfer {
     color:inherit;
   }
 
+  .row {
+    margin-bottom: 12px;
+
+    .btn {
+      margin: 8px 0;
+    }
+  }
+
+  .summary-data {
+    dt, dd {
+      display: inline;
+    }
+  }
+
   @badgeHeight: 2em;
 
   .level-badge{
@@ -1574,10 +1588,12 @@ a.transfer {
     margin-top: (@badgeHeight/2) - .25em;
   }
 
-  .details p{
-    font-size: 0.8em;
-    margin:0;
-    text-align: right;
+  .details {
+    p {
+      font-size: 0.8em;
+      margin:0;
+      text-align: right;
+    }
   }
 
   .expand{
@@ -1604,9 +1620,6 @@ a.transfer {
     .expand{display: none;}
     .more{height:auto; opacity:1;}
   }
-
-
-
 }
 
 .summary-data{
