@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/theodi/alternate-rails.git
-  revision: b5e1fcc893c39b4dc8f6aeaea98215cc8928fd9a
+  revision: 188889d66c5df1d7d13f7c6e53e8088e3503dea1
   specs:
     alternate_rails (0.0.1)
       rails (~> 3.2.13)
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: c54626deda50feef55b3bb7652aae4c710f7deec
+  revision: d2e0472570cbcf06921db272a4881de0f614618f
   specs:
     data_kitten (0.0.1)
       curb
@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: 3e626287402c140b55493464e22f641f1f66cee5
+  revision: 11d94821245d04a4e73405176b62a696fb959e7f
   specs:
     odlifier (0.0.1)
       httparty
