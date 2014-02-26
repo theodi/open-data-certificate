@@ -1,20 +1,22 @@
 GIT
   remote: git://github.com/theodi/alternate-rails.git
-  revision: 451bf7e71abe849094e99806e4b751d9a0761ce3
+  revision: b5e1fcc893c39b4dc8f6aeaea98215cc8928fd9a
   specs:
     alternate_rails (0.0.1)
       rails (~> 3.2.13)
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 83f520177ae8ddbe22372e7de6908f82ee0a6b27
+  revision: c54626deda50feef55b3bb7652aae4c710f7deec
   specs:
     data_kitten (0.0.1)
       curb
+      datapackage
       git
       json
       linkeddata
       nokogiri
+      rake
       rest-client
 
 GIT
@@ -26,7 +28,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: 0ce21d2fe105961a76f4b0cbd48052166c12ffb1
+  revision: 3e626287402c140b55493464e22f641f1f66cee5
   specs:
     odlifier (0.0.1)
       httparty
@@ -67,7 +69,9 @@ GEM
       builder
       multi_json
     arel (3.0.3)
-    bcrypt-ruby (3.1.2)
+    bcrypt (3.1.7)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     builder (3.0.4)
     cancan (1.6.10)
     coderay (1.1.0)
@@ -78,9 +82,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    colorize (0.6.0)
     commonjs (0.2.7)
     curb (0.8.5)
     daemons (1.1.9)
+    datapackage (0.0.4)
+      colorize
+      json
+      json-schema
+      rest-client
     delayed_job (4.0.0)
       activesupport (>= 3.0, < 4.1)
     delayed_job_active_record (4.0.0)
@@ -94,9 +104,9 @@ GEM
     docile (1.1.3)
     domainatrix (0.0.11)
       addressable
-    dotenv (0.9.0)
-    dotenv-rails (0.9.0)
-      dotenv (= 0.9.0)
+    dotenv (0.10.0)
+    dotenv-rails (0.10.0)
+      dotenv (= 0.10.0)
     ebnf (0.3.5)
       rdf
       sxp
@@ -158,6 +168,7 @@ GEM
     json (1.8.1)
     json-ld (1.1.1)
       rdf (>= 1.0.8)
+    json-schema (2.2.1)
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -200,7 +211,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     memcache-client (1.8.5)
-    metaclass (0.0.2)
+    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
@@ -264,7 +275,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
-    rb-kqueue (0.2.0)
+    rb-kqueue (0.2.2)
       ffi (>= 0.5.0)
     rdf (1.1.2.1)
     rdf-aggregate-repo (1.1.0)
@@ -342,7 +353,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.8)
+    sqlite3 (1.3.9)
     surveyor (1.4.0)
       fastercsv (~> 1.5.4)
       formtastic (~> 2.1.0)
