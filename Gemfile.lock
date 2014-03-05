@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: d2e0472570cbcf06921db272a4881de0f614618f
+  revision: cbace2595ba5899830a0bf731cba9b0088d1d4a1
   specs:
     data_kitten (0.0.1)
       curb
@@ -21,14 +21,14 @@ GIT
 
 GIT
   remote: git://github.com/theodi/juvia_rails.git
-  revision: 804cccff11bf5757ffdcf47034e4566ff067c4bb
+  revision: 94f982aa8188a18bc0f37c16218c85e890d25294
   specs:
     juvia_rails (0.0.1)
       rails (~> 3.2.1)
 
 GIT
   remote: git://github.com/theodi/odlifier.git
-  revision: 11d94821245d04a4e73405176b62a696fb959e7f
+  revision: d5afa7c5beffb3fdb09d17e1e5a9fdcd4e032cd6
   specs:
     odlifier (0.0.1)
       httparty
@@ -36,7 +36,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (3.1.0)
+    aasm (3.1.1)
     actionmailer (3.2.17)
       actionpack (= 3.2.17)
       mail (~> 2.5.4)
@@ -118,7 +118,7 @@ GEM
     execjs (2.0.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.4.0)
+    factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
@@ -139,7 +139,7 @@ GEM
     formtastic (2.1.1)
       actionpack (~> 3.0)
     git (1.2.6)
-    google-analytics-rails (0.0.4)
+    google-analytics-rails (0.0.5)
     guard (1.8.3)
       formatador (>= 0.2.4)
       listen (~> 1.3)
@@ -158,7 +158,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    jbuilder (2.0.3)
+    jbuilder (2.0.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     journey (1.0.4)
@@ -369,7 +369,7 @@ GEM
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thin (1.6.1)
+    thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
