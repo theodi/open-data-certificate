@@ -2097,10 +2097,37 @@ header .save-button {
     }
 
     &.autocompleted {
+      .status-icon {
+        background: @odiGreen;
+
+        .icon {
+          display: inline-block;
+          &:before { content: @ok; }
+        }
+      }
+
+      // if it's a text input box, put the word "validated"
+      // under the tick icon
+      .input.string .icon {
+        margin:6px 0;
+        &:after  {
+          content: "validated";
+          font-size: 10px;
+          vertical-align: top;
+        }
+      }
+
       .status-message {
-        display: block;
+        span {
+          background: @odiGreen;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiGreen;
+        }
       }
     }
+
 
     &.inline-validation {
       .status-icon {
