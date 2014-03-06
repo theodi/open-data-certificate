@@ -58,6 +58,7 @@
 
 @odiGreen: #0DBC37;
 @odiGreenDark: darken(@odiGreen, 6%);
+@odiGreenTint: rgb(222, 249, 229);
 
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
@@ -2072,26 +2073,7 @@ header .save-button {
 
     &.ok {
       input.string {
-        padding-right: 70px;
-      }
-
-      .status-icon {
-        background: @odiGreen;
-
-        .icon {
-          display: inline-block;
-          &:before { content: @ok; }
-        }
-      }
-
-      .status-message {
-        span {
-          background: @odiGreen;
-        }
-
-        i.arrow {
-          border-bottom-color: @odiGreen;
-        }
+        background: @odiGreenTint;
       }
     }
 
