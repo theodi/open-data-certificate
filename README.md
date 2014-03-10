@@ -1,6 +1,6 @@
 ## ODI Open Data Certificate
 
-[![Build Status](http://jenkins.theodi.org/job/open-data-certificate-master/badge/icon)](http://jenkins.theodi.org/job/open-data-certificate-master/) [![Code Climate](https://codeclimate.com/repos/519228b056b10279600066b5/badges/772e6d53c060a1268449/gpa.png)](https://codeclimate.com/repos/519228b056b10279600066b5/feed) [![Dependency Status](https://gemnasium.com/theodi/open-data-certificate.png)](https://gemnasium.com/theodi/open-data-certificate)
+[![Build Status](https://travis-ci.org/theodi/open-data-certificate.png?branch=master)](https://travis-ci.org/theodi/open-data-certificate) [![Code Climate](https://codeclimate.com/repos/519228b056b10279600066b5/badges/772e6d53c060a1268449/gpa.png)](https://codeclimate.com/repos/519228b056b10279600066b5/feed) [![Dependency Status](https://gemnasium.com/theodi/open-data-certificate.png)](https://gemnasium.com/theodi/open-data-certificate)
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
 
