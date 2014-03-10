@@ -53,6 +53,10 @@
     - data['url-explanation'] = t('surveyor.url_explanation')
     - data['autocomplete-explanation'] = t('surveyor.autocomplete_explanation')
 
+    // there are no responses, but we have some kitten data
+    - if @response_set.responses.empty? && !@response_set.kitten_data.nil?
+      - data['autofill-repopulate'] = @response_set.kitten_data.url
+
     #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
       = hidden_field_tag :surveyor_javascript_enabled, false
 

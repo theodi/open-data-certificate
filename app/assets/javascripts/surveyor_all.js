@@ -549,4 +549,11 @@ $(document).ready(function($){
     if ($row.hasClass('touched')) return;
     return $row.find('li[data-reference-identifier="'+ answerIdentifier(question,answer) +'"] input').prop('checked', true);
   }
+
+  // the autofill needs to be re-fired if the user 
+  var repopulate_url = $surveyor.data('autofill-repopulate');
+  if(repopulate_url){
+    $('[data-reference-identifier=documentationUrl] input.string').val(repopulate_url).change()
+  }
+
 });
