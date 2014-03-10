@@ -6,6 +6,7 @@ class ResponseSet < ActiveRecord::Base
   before_save :update_dataset
 
   attr_accessible :dataset_id
+  attr_accessor :preflight_url
 
   belongs_to :dataset, touch: true
   belongs_to :survey
