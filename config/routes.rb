@@ -7,6 +7,8 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field', :via => :get
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
+    get  '/:survey_code/:response_set_code/preflight', :to => 'surveyor#preflight', as: 'preflight'
+
     resources :jurisdictions, :only => :index
 
     # have a response_set resource for deleting for now, have

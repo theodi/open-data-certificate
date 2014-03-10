@@ -81,4 +81,16 @@ class SurveyorControllerTest < ActionController::TestCase
 
   end
 
+
+  test "preflight page" do
+    @response_set = FactoryGirl.create(:response_set)
+    sign_in @response_set.user
+
+    get :preflight, use_route: :surveyor,
+            survey_code: @response_set.survey.access_code,
+            response_set_code: @response_set.access_code
+
+    assert_response 200
+  end
+
 end
