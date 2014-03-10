@@ -60,6 +60,28 @@ class ResponseSetsController < ApplicationController
     end
   end
 
+  # check the users documentation url to try and pre-populate
+  def preflight
+
+    url = params[:response_set][:preflight_url]
+
+    kitten_data = KittenData.where(url: url, response_set_id: @response_set.id).first_or_create
+
+    unless kitten_data.data
+      kitten_data.request_data
+      kitten_data.save
+    end
+
+    if kitten_data.data
+      flash[:notice] = "Entering information based on description url"
+    else  
+      flash[:notice] = "No data found from description url"
+    end
+
+    redirect_to(surveyor.edit_my_survey_path(
+                    :survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code))
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to dashboard_path, alert: t('dashboard.unable_to_access_response_set')
   end

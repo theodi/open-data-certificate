@@ -18,6 +18,7 @@ OpenDataCertificate::Application.routes.draw do
       post :publish, on: :member
       post :autofill, on: :member
       post :resolve, on: :member
+      put  :preflight, on: :member
     end
 
   end
