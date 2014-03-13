@@ -46,6 +46,22 @@ en:
       title_with_level: Expert level
       description: this open data is an exceptional example of information infrastructure.
 
+  level_descriptions:
+    basic: '<strong>Raw:</strong> A great start at the basics of publishing open data.'
+    pilot: '<strong>Pilot:</strong> Data users receive extra support from, and can provide feedback to the publisher.'
+    standard: '<strong>Standard:</strong> Regularly published open data with robust support that people can rely on.'
+    exemplar: '<strong>Expert:</strong> An exceptional example of information infrastructure.'
+
+  requirement_levels:
+    basic: Raw level certification
+    pilot: Pilot level certification
+    standard: Standard level certification
+    exemplar: Expert level certification
+
+  required_for: This is required for
+  and_above: and above
+
+
   statuses:
     alpha:
       title: Alpha
@@ -289,6 +305,7 @@ en:
         title: Expert requirements
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
         instruction: "To reach Expert level you should:"
+
   transfers:
     transfer: # The transfer dataset modal
       title: Pass to colleague
@@ -310,7 +327,14 @@ en:
       access_denied: Access Denied
       access_denied_email: Access Denied - you are not logged in with the email this transfer was sent to
       access_denied_token: 'Access Denied - token did not match, please ensure you copied from email in full'
+
   transfer_mailer:
     notify:
       subject: Questionnaire hand over
       message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
+
+  status_panel:
+    title: Certificate level key
+    description: This shows your progress towards each data certificate.
+    about: Read how it works.
+    improve_data: How can I improve my open data?

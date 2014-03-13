@@ -56,7 +56,17 @@
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
       - if q.pick == 'one' || q.pick == 'any'
-        %label.span8.question_label!= question_text
+        %label.span8.question_label
+          != question_text
+          - if q.minimum_level
+            %small
+              = t('required_for')
+              %span.odc-popover
+                != t(q.minimum_level, scope: 'requirement_levels')
+                %span.odc-popover-content
+                  %i.badge{class: q.minimum_level}
+                  != t(q.minimum_level, scope: 'level_descriptions')
+              = t('and_above') if q.minimum_level != 'exemplar'
 
       .span8
         - i = response_idx
@@ -94,7 +104,7 @@
 
           - else
             - q.answers.each do |a|
-              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template
+              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
 
         .autocomplete-override{class: explanation_required ? '' : 'none'}
           - i = (i.to_i + 1).to_s if q.pick == 'any'

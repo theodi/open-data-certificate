@@ -205,10 +205,14 @@ $(document).ready(function($){
   });
 
   // deal with accordion section changes
-  $('.survey-section .collapse').on('show', function(){
-    $(this).prev().removeClass('inactive');
-  }).on('hidden', function(){
-    $(this).prev().addClass('inactive');
+  $('.survey-section .collapse').on('show', function(e){
+    if (e.target == this) {
+      $(this).prev().removeClass('inactive');
+    }
+  }).on('hidden', function(e){
+    if (e.target == this) {
+      $(this).prev().addClass('inactive');
+    }
   });
 
   $('.affixed').each(function(){
@@ -222,28 +226,7 @@ $(document).ready(function($){
 
   });
 
-
-  // major massive massive hack
-  //
-  // This collects all the sections that are requirements, and
-  // bundles them into the aside of the previous question (that
-  // they hopefully pertain to)
-  var $current;
-  $('.survey-section > ul > li > fieldset').each(function(){
-    var $this = $(this),
-        ref_id = $this.data('reference-identifier');
-    if(ref_id){
-      $current = $this;
-    } else if($current && !($this.hasClass('g_repeater'))){
-      $this
-        .closest('li.container')
-        .remove()
-        .end()
-        .appendTo($current.closest('li.container'));
-    }
-  });
-
-  // Old ie only supports :hover on anchors
+  // Old IE only supports :hover on anchors
   $('#status_panel').hover(function(){
     $(this).addClass('hover');
   }, function(){
@@ -313,14 +296,6 @@ $(document).ready(function($){
         // debug
         // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
-
-
-      // display the overal attainment
-      $('.status_texts dt') // matching description title
-        .filter(function(){return $(this).text() == attained;})
-        .next().addClass('active')
-        .siblings().removeClass('active');
-
 
       $('#panel_handle')
         // removed any 'attained-' classes
@@ -409,7 +384,7 @@ $(document).ready(function($){
   });
 
 
-  $('.certificate-data').popover({
+  $('.certificate-data, #survey_form').popover({
     selector:'.odc-popover',
     trigger:'click',
     html:true,

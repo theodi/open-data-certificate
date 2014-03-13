@@ -40,24 +40,3 @@ en:
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
 
-    # right hand sidebar
-    status_panel:
-        updating: updating
-        raw: Raw
-        pilot: Pilot
-        standard: Standard
-        expert: Expert
-
-  requirement_label:
-    requirement: This is required for <strong>all levels</strong>
-    requirement_pilot: This is required for <strong>pilot level</strong> and above
-    requirement_standard: This is required for <strong>standard level</strong> and above
-    requirement_exemplar: This is required for <strong>expert level</strong>
-
-  level_status:
-    none: This shows how many questions you’ve answered and which open data certificate you’ll get.<br /><a href="/about">Read how it works</a>
-    basic: You’ve achieved an open data certificate. You’re now on your way to <strong>Pilot</strong> level.
-    pilot: You’ve achieved a <strong>Pilot</strong> open data certificate so far. You’re now on your way to <strong>Standard</strong> level.
-    standard: You’ve achieved a <strong>Standard</strong> open data certificate so far. You’re now on your way to <strong>Expert</strong> level.
-    exemplar: You've achieved an <strong>Expert</strong> open data certificate. Congratulations!
-    improve: How can I improve my open data?
