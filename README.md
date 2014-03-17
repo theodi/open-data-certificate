@@ -252,6 +252,18 @@ You can then change the `prototype/survey.xsl` file and run:
 saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
 ```
 
+### Autocompletion
+
+The survey attempts to fetch answers from the documentation URL and fill them into the questionnaire. These answers are marked as autocompleted.
+
+Some examples of URLS that can be autocompleted:
+
+- http://data.gov.uk/dataset/overseas_travel_and_tourism
+- http://data.gov.uk/dataset/apprenticeship-success-rates-in-england-2011-2012
+- http://data.ordnancesurvey.co.uk/datasets/50k-gazetteer
+- http://data.ordnancesurvey.co.uk/datasets/boundary-line
+- http://smtm.labs.theodi.org/download/
+
 ---
 
 The approach to the new app is outlined in a [google doc](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#), which will be moved into this readme file.
