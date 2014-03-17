@@ -46,6 +46,22 @@ en:
       title_with_level: Expert level
       description: this open data is an exceptional example of information infrastructure.
 
+  level_descriptions:
+    basic: '<strong>Raw:</strong> A great start at the basics of publishing open data.'
+    pilot: '<strong>Pilot:</strong> Data users receive extra support from, and can provide feedback to the publisher.'
+    standard: '<strong>Standard:</strong> Regularly published open data with robust support that people can rely on.'
+    exemplar: '<strong>Expert:</strong> An exceptional example of information infrastructure.'
+
+  requirement_levels:
+    basic: Raw level certification
+    pilot: Pilot level certification
+    standard: Standard level certification
+    exemplar: Expert level certification
+
+  required_for: This is required for
+  and_above: and above
+
+
   statuses:
     alpha:
       title: Alpha
@@ -109,6 +125,7 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+    verification: 'Verification:'
 
   # main controller
   main:
@@ -170,13 +187,13 @@ en:
       submit_search: Go
 
     community_verification_panel:
-      title: Community Verification
+      title: Community verification
       description: Other people can verify whether the answers on this certificate are correct.
       status: This certificate is **%{certification}**.
       status_self_certified: If two or more people verify it, this certificate will become community certified.
-      verify_certificate: Verify Certificate
-      verified: verified
-      undo: undo
+      verify_certificate: Verify certificate
+      verified: Verified
+      undo: Undo
       sign_in: Sign in
       sign_in_text: to verify this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
@@ -197,6 +214,11 @@ en:
     certification_types:
       self: self certified
       community: community certified
+      odi_audited: ODI audited
+    mark_audited: Mark audited
+    unmark_audited: Unmark audited
+    audited: This certificate has been marked as ODI audited
+    not_audited: This certificate has not been marked as ODI audited
 
   datasets:
     datasets: Datasets
@@ -218,6 +240,7 @@ en:
     licence: "Licence:"
     data_licence: "Data Licence:"
     content_licence: "Content Licence:"
+    verification: "Verification:"
 
   data_kitten:
     title: Title
@@ -287,6 +310,7 @@ en:
       misunderstood: "I don’t understand:"
       understood_action: edit questionnaire
       misunderstood_action: speak to a human
+
   transfers:
     transfer: # The transfer dataset modal
       title: Pass to colleague
@@ -308,7 +332,14 @@ en:
       access_denied: Access Denied
       access_denied_email: Access Denied - you are not logged in with the email this transfer was sent to
       access_denied_token: 'Access Denied - token did not match, please ensure you copied from email in full'
+
   transfer_mailer:
     notify:
       subject: Questionnaire hand over
       message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
+
+  status_panel:
+    title: Certificate level key
+    description: This shows your progress towards each data certificate.
+    about: Read how it works.
+    improve_data: How can I improve my open data?

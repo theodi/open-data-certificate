@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125100024) do
+ActiveRecord::Schema.define(:version => 20140109180040) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(:version => 20131125100024) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "certificate_generators", :force => true do |t|
+    t.integer  "response_set_id"
+    t.integer  "user_id"
+    t.text     "request"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
@@ -64,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20131125100024) do
     t.string   "curator"
     t.boolean  "published",       :default => false
     t.datetime "expires_at"
+    t.boolean  "audited",         :default => false
   end
 
   create_table "datasets", :force => true do |t|
@@ -325,8 +334,10 @@ ActiveRecord::Schema.define(:version => 20131125100024) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "default_jurisdiction"
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

@@ -3,6 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
+  before_filter :authenticate_user_from_token!, only: [:create, :update_certificate]
   before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
@@ -11,9 +12,9 @@ class DatasetsController < ApplicationController
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
-    
+
     @title = t('datasets.datasets')
-    
+
     if params[:format] == "feed"
       @datasets = @datasets.order('datasets.updated_at DESC')
     else
@@ -29,10 +30,10 @@ class DatasetsController < ApplicationController
       @datasets = @datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
-    
+
     if params[:search]
       @title = t('datasets.search_results')
-      
+
       base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
 
       # this is far from ideal - loads in all matches then limits for pagination
@@ -44,7 +45,7 @@ class DatasetsController < ApplicationController
     else
       @datasets = @datasets.page params[:page]
     end
-        
+
     respond_to do |format|
       format.html
       format.feed { render :layout => false  }
@@ -126,4 +127,16 @@ class DatasetsController < ApplicationController
     @title = "Admin - **removed** datasets"
   end
 
+  def create
+    render json: CertificateGenerator.generate(params, current_user)
+  end
+
+  def update_certificate
+    @dataset = Dataset.find(params[:dataset_id])
+    render json: CertificateGenerator.update(@dataset, params, current_user)
+  end
+
+  def schema
+    render json: CertificateGenerator.schema(params)
+  end
 end

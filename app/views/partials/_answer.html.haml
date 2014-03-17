@@ -34,6 +34,7 @@
       - answer_attrs[:hint] = a.text_for(:post, @render_context, I18n.locale)
       - answer_attrs[:label] = "#{h question_text}".html_safe
 
+      - answer_attrs[:minimum_level] = minimum_level
       - answer_attrs[:status_message] = { :message => status_message }
       - if q.renderer == :repeater_default
         - answer_attrs[:remove_button] = repeated_template || @response_set.count_group_responses([q]) != 1

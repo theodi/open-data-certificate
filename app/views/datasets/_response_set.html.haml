@@ -19,7 +19,7 @@
       %p.jurisdiction
         %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction
 
-      
+
     .span3
       %h3 Your certificate
       .btn-group.btn-group-vertical
@@ -43,7 +43,7 @@
           = link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
 
         =render :partial => 'shared/switch_jurisdiction', locals: {response_set: response_set}
-         
+
   .row-fluid.baseline
     .span3
       %p
@@ -54,6 +54,8 @@
       %small
         = t 'dashboard.last_updated_at', time_span: time_ago_in_words(response_set.updated_at)
     .span3
+      %p
+      %small= "#{t('dashboard.verification')}: #{t(response_set.certificate.certification_type, scope: 'certificate.certification_types')}"
     .span3
       = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}} do
         %p

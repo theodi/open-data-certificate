@@ -97,7 +97,7 @@ $(document).ready(function($){
     });
   });
 
-  $('.embed-code textarea').click(function() {
+  $('[data-content=highlight]').click(function() {
     this.select();
   });
 
@@ -173,27 +173,46 @@ $(document).ready(function($){
     }
   });
 
+  var $currentRow = $();
+
+  // Moves highlighting to a row on hover and tab, removes focus from the previous row
   $surveyElements.filter('.question-row').on('_focus', function() {
+    if ($currentRow[0] != $(this).closest('.question-row')[0]) {
+
+      $($currentRow.data('metas')).hide();
+      $($currentRow.data('input-metas')).hide();
+
+      $currentRow = $(this).closest('.question-row');
+    }
+
     $($(this).data('metas')).show();
-  }).on('_blur', function(){
-    $($(this).data('metas')).hide();
-    $($(this).data('input-metas')).hide();
-    return false;
+    $($currentRow.data('metas')).show();
+
   });
 
+  // Shows the appropriate information for a radio button or checkbox
   $surveyElements.filter('.input').on('_focus', function() {
-    $($(this).closest('.question-row').data('input-metas')).hide();
+    $($currentRow.data('input-metas')).hide();
     $($(this).data('metas')).show();
-    return false;
-  }).on('_blur', function(){
-    return false;
+  });
+
+  // Removes highlighting and information on mouseleave
+  $surveyElements.on('mouseleave', function(){
+    $($currentRow.data('metas')).hide();
+    $($currentRow.data('input-metas')).hide();
+
+    $currentRow = $();
   });
 
   // deal with accordion section changes
-  $('.survey-section .collapse').on('show', function(){
-    $(this).prev().removeClass('inactive');
-  }).on('hidden', function(){
-    $(this).prev().addClass('inactive');
+  $('.survey-section .collapse').on('show', function(e){
+    if (e.target == this) {
+      $(this).prev().removeClass('inactive');
+    }
+  }).on('hidden', function(e){
+    if (e.target == this) {
+      $(this).prev().addClass('inactive');
+    }
   });
 
   $('.affixed').each(function(){
@@ -207,28 +226,7 @@ $(document).ready(function($){
 
   });
 
-
-  // major massive massive hack
-  //
-  // This collects all the sections that are requirements, and
-  // bundles them into the aside of the previous question (that
-  // they hopefully pertain to)
-  var $current;
-  $('.survey-section > ul > li > fieldset').each(function(){
-    var $this = $(this),
-        ref_id = $this.data('reference-identifier');
-    if(ref_id){
-      $current = $this;
-    } else if($current && !($this.hasClass('g_repeater'))){
-      $this
-        .closest('li.container')
-        .remove()
-        .end()
-        .appendTo($current.closest('li.container'));
-    }
-  });
-
-  // Old ie only supports :hover on anchors
+  // Old IE only supports :hover on anchors
   $('#status_panel').hover(function(){
     $(this).addClass('hover');
   }, function(){
@@ -270,7 +268,7 @@ $(document).ready(function($){
     var url = $(this).data('progress-url');
 
     $(panel).addClass('loading');
-    
+
     $.getJSON(url)
     .then(function(data){
       // console.log("url:", url)
@@ -298,14 +296,6 @@ $(document).ready(function($){
         // debug
         // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
       });
-
-
-      // display the overal attainment
-      $('.status_texts dt') // matching description title
-        .filter(function(){return $(this).text() == attained;})
-        .next().addClass('active')
-        .siblings().removeClass('active');
-
 
       $('#panel_handle')
         // removed any 'attained-' classes
@@ -393,8 +383,8 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  
-  $('.certificate-data').popover({
+
+  $('.certificate-data, #survey_form').popover({
     selector:'.odc-popover',
     trigger:'click',
     html:true,

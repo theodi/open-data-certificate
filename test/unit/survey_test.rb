@@ -38,10 +38,36 @@ class SurveyTest < ActiveSupport::TestCase
     assert_false survey3.status_incremented?
   end
 
+  test "#status_incremented? returns true when a migrated survey has a lower status" do
+    survey1 = FactoryGirl.create :survey, access_code: 'open-data-certificate-questionnaire', status: 'alpha'
+    survey2 = FactoryGirl.create :survey, access_code: 'gb', status: 'beta', survey_version: nil
+
+    assert survey2.status_incremented?
+  end
+
+  test "#status_incremented? returns false when a migrated survey has the same status" do
+    survey1 = FactoryGirl.create :survey, access_code: 'open-data-certificate-questionnaire', status: 'beta'
+    survey2 = FactoryGirl.create :survey, access_code: 'gb', status: 'beta', survey_version: nil
+
+    assert_false survey2.status_incremented?
+  end
+
+  test "#previous_survey returns the correct previous survey with the same access code" do
+    survey1 = FactoryGirl.create :survey, access_code: 'open-data-certificate-questionnaire', survey_version: 1, status: 'alpha'
+    survey2 = FactoryGirl.create :survey, access_code: 'open-data-certificate-questionnaire', survey_version: 2, status: 'alpha'
+    survey3 = FactoryGirl.create :survey, access_code: 'gb', survey_version: 0, status: 'alpha'
+    survey4 = FactoryGirl.create :survey, access_code: 'gb', survey_version: 1, status: 'beta'
+
+    assert survey1.previous_survey == nil
+    assert survey2.previous_survey == survey1
+    assert survey3.previous_survey == survey2
+    assert survey4.previous_survey == survey3
+  end
+
   test "#previous_surveys returns all surveys with the same access code" do
-    survey1 = FactoryGirl.create :survey
-    survey2 = FactoryGirl.create :survey, access_code: survey1.access_code, survey_version: nil
-    survey3 = FactoryGirl.create :survey, access_code: survey1.access_code, survey_version: nil
+    survey1 = FactoryGirl.create :survey, access_code: 'open-data-certificate-questionnaire'
+    survey2 = FactoryGirl.create :survey, access_code: 'gb', survey_version: nil
+    survey3 = FactoryGirl.create :survey, access_code: 'gb', survey_version: nil
 
     assert survey1.previous_surveys.length == 0
     assert survey2.previous_surveys.length == 1

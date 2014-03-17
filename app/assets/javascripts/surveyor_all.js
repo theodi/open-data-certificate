@@ -121,6 +121,27 @@ $(document).ready(function($){
   var $surveyor = $form.find('#surveyor');
   var csrfToken = $form.find("input[name='authenticity_token']");
 
+  // Tracks whether the form is currently saving
+  var updateLoading = (function() {
+    var $saveButton = $(".save-button");
+    var $input = $saveButton.find('.btn');
+    var $text = $input.find('span');
+    var count = 0;
+
+    $input.data('btn-default', $text.text());
+
+    var update = function(i) {
+      count = count + i;
+      $saveButton.toggleClass('loading', count > 0);
+      $input.toggleClass('btn-confirmed disabled', count > 0);
+     $text.text(count > 0 ? $input.data('btn-loading') : $input.data('btn-default'));
+    }
+
+    $input.click(function() { update(1); });
+
+    return update;
+  })();
+
   var busy = false;
   var template = _.template("repeater_field/:question_id/:response_index/:response_group");
 
@@ -169,17 +190,45 @@ $(document).ready(function($){
   function updateField($field) {
     var $row = bindQuestionRow($field);
 
-    $row.countToggleClass('loading', 1);
-    saveFormElements($form, questionFields($field).add(csrfToken), function() {
-      $row.countToggleClass('loading', -1);
-    });
+    saveFormElements($form, questionFields($field).add(csrfToken));
     validateField($field);
   }
 
-  // Update radio, checkbox and select form fields on click
+  // Finds the value from the row to check if the field has changed
+  function rowValue($row) {
+    var $input = $row.find('li.input');
+
+    if ($input.hasClass('string')) {
+      return $input.find('input.string').val();
+    }
+
+    if ($input.hasClass('select')) {
+      return $input.find('select').val();
+    }
+
+    if ($input.hasClass('surveyor_check_boxes')) {
+      return $input.find('input:checked').toArray().map(function(input) { return $(input).val(); }).join(',');
+    }
+
+    if ($input.hasClass('surveyor_radio')) {
+      return $input.find('input:checked').val();
+    }
+  };
+
+  // Sets initial form values
+  $form.find('.question-row').each(function() {
+    var $row = bindQuestionRow($(this));
+    $row.data('value', rowValue($row));
+  });
+
+  // Updates radio, checkbox and select form fields on click
   $form.on("change paste", "input, select, textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     updateField($field);
@@ -189,6 +238,10 @@ $(document).ready(function($){
   $form.on("keyup", "input[type=text], input[type=url], input[type=email], textarea", function() {
     var $field = $(this);
     var $row = bindQuestionRow($field);
+
+    var value = rowValue($row);
+    if ($row.data('value') == value) return;
+    $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     $row.data('update-timeout', setTimeout(function() {
@@ -211,7 +264,13 @@ $(document).ready(function($){
     documentationUrl: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
@@ -238,7 +297,13 @@ $(document).ready(function($){
     url: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
-      if (!validateUrl(url)) return callback(false);
+      if (!validateUrl(url)) {
+        if (!validateUrl('http://'+url)) {
+          return callback(false);
+        }
+
+        $field.val(url = 'http://'+url);
+      }
 
       var id = $surveyor.data('response-id');
       $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
@@ -301,14 +366,14 @@ $(document).ready(function($){
       if (!matched && validations[name]($row, $field)) {
         matched = true;
 
-        $row.countToggleClass('loading', 1);
+        updateLoading(1);
 
         if ($row.data('validate-callback')) $row.data('validate-callback').cancelled = true;
         var status = {cancelled: false};
         $row.data('validate-callback', status);
 
         var callback = function(success, $data) {
-          $row.countToggleClass('loading', -1);
+          updateLoading(-1);
           if (status.cancelled) return;
 
           changeState($row, success ? 'ok' : 'warning');
@@ -418,20 +483,16 @@ $(document).ready(function($){
     }
   }
 
-  function saveFormElements($form, $elements, callback) {
+  function saveFormElements($form, $elements) {
+    updateLoading(1);
     $.ajax({
       type: "PUT",
       url: $form.attr("action"),
-      data: $elements.serialize(), dataType: 'json',
-      success: function(response) {
-        successfulSave(response);
-        if (callback) callback();
-      },
-      error: function(){
-        // This throws on aborted requests (so when the save button is clicked and page unloaded while it is being sent)
-        // would be good to have this in still, though to stop the alert when you save (and it has saved), removing for now
-        //alert("an error occured when saving your response");
-      }
+      data: $elements.serialize(), dataType: 'json'
+    })
+    .done(successfulSave)
+    .always(function() {
+      updateLoading(-1);
     });
   }
 

@@ -21,19 +21,22 @@ OpenDataCertificate::Application.routes.draw do
   end
   post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
   get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
+  get 'jurisdictions', :to => 'jurisdictions#index'
 
   # Get certificate from dataset url
-  get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url', 
+  get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
                      :constraints => lambda { |request| request.params[:datasetUrl].present? }
 
   resources :datasets do
     put 'start_questionnaire'
+    post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
     get 'certificates/latest', to: 'certificates#latest', as: 'latest'
     get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
     get :admin, on: :collection
+    get :schema, on: :collection
 
-    resources :certificates, :only => [:show] do
+    resources :certificates, :only => [:show, :update] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'
          get 'progress', to: 'certificates#progress'
@@ -68,7 +71,7 @@ OpenDataCertificate::Application.routes.draw do
   end
 
   # Get badge for a url
-  get 'get_badge' => 'certificates#certificate_from_dataset_url' 
+  get 'get_badge' => 'certificates#certificate_from_dataset_url'
 
   # 'Static' pages managed by HighVoltage here...
   get 'about' => 'pages#show', :id => 'about'
@@ -93,7 +96,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/events' => 'main#status_events'
 
   root :to => 'main#home'
-  
+
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
