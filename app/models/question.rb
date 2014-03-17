@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   include Surveyor::Models::QuestionMethods
 
   attr_accessible :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
+  attr_accessor :minimum_level
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
 
@@ -11,6 +12,28 @@ class Question < ActiveRecord::Base
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
+
+  LEVELS = {
+    'basic' => 1,
+    'pilot' => 2,
+    'standard' => 3,
+    'exemplar' => 4
+  }
+
+  class << self
+    def compute_levels(questions)
+      questions.map.with_index do |question, i|
+        requirements = []
+        i += 1
+        while questions[i] && questions[i].is_a_requirement? do
+          requirements.push(questions[i])
+          i += 1
+        end
+        level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
+        question.minimum_level = LEVELS.key(level) || (question.required? ? 'basic' : nil)
+      end
+    end
+  end
 
   # either provided text_as_statement, or fall back to text
   def statement_text
@@ -56,6 +79,10 @@ class Question < ActiveRecord::Base
 
   def required?
     is_mandatory || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+  end
+
+  def type
+    @type ||= question_group && question_group.display_type == 'repeater' ? :repeater : pick.to_sym
   end
 
   private

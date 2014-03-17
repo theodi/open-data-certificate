@@ -31,3 +31,10 @@
     = f.select(:default_jurisdiction, options_for_select(jurisdiction_options(@surveys),resource.default_jurisdiction))
 
   = f.submit t("authentication.update_profile"), :class => 'btn btn-primary'
+
+.well
+  = form_for(resource, :as => resource_name, :url => '') do |f|
+    %h2 API
+    .form-field
+      = f.label :authentication_token
+      = f.text_field :authentication_token, class: 'span8', data: {content: :highlight}

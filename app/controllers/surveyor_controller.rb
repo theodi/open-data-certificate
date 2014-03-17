@@ -181,6 +181,7 @@ class SurveyorController < ApplicationController
     if @response_set
       @survey = @response_set.survey
       @sections = @survey.sections.with_includes
+      @sections.each{|s| Question.compute_levels(s.questions) }
       @dependents = []
     else
       flash[:notice] = t('surveyor.unable_to_find_your_responses')
