@@ -92,6 +92,14 @@ class ResponseSet < ActiveRecord::Base
     dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
   end
 
+  def response(identifier)
+    responses.select{|r| r.question.reference_identifier == identifier }.first
+  end
+
+  def documentation_url
+    response 'documentationUrl'
+  end
+
   def jurisdiction
     if Survey::MIGRATIONS.has_key? survey.access_code
       target_access_code = Survey::MIGRATIONS[survey.access_code]
