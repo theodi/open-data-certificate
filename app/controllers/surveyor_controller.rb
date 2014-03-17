@@ -188,12 +188,11 @@ class SurveyorController < ApplicationController
     end
   end
 
-  def preflight
+  def start
     # this is an alternate view of the edit functionality,
     # with only the documentation url displayed
     edit
   end
-
 
   # where to send the user once the survey has been completed
   # if there was a dataset, go back to it
