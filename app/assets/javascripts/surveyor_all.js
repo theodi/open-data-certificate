@@ -254,46 +254,12 @@ $(document).ready(function($){
   }
 
   var validations = {
-    documentationUrl: function($row) { return $row.data('reference-identifier') == 'documentationUrl'; },
     url: function($row, $field) { return $field.attr('type') == 'url'; },
     metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompletable'); },
     other: function() { return true; }
   };
 
   var actions = {
-    documentationUrl: function($row, $field, callback) {
-      var url = $field.val();
-      if (empty(url)) return callback(true);
-      if (!validateUrl(url)) {
-        if (!validateUrl('http://'+url)) {
-          return callback(false);
-        }
-
-        $field.val(url = 'http://'+url);
-      }
-
-      var id = $surveyor.data('response-id');
-      $.post('/surveys/response_sets/'+id+'/autofill', {url: url, dataType: 'json'})
-        .done(function(json) {
-
-          // Mark questions which have selected radio buttons or checkboxes
-          $form.find('fieldset.question-row').each(function() {
-            var $row = $(this);
-            $row.toggleClass('touched', $row.find('input:checked').filter('[type=radio], [type=checkbox]').length > 0);
-          });
-
-          // Fill in fields
-          var affectedFields = [];
-          if (json.data_exists) {
-            var field;
-            for (field in json.data) {
-              affectedFields.push(fillField(field, json.data[field]));
-            }
-          }
-          callback(json.status == 200, {fields: toJquery(affectedFields)});
-        })
-        .error(function() { callback(false); });
-    },
     url: function($row, $field, callback) {
       var url = $field.val();
       if (empty(url)) return callback(true);
@@ -331,14 +297,6 @@ $(document).ready(function($){
   };
 
   var responses = {
-    documentationUrl: function($row, $field, success, data) {
-      if (success && data.fields) {
-        data.fields.each(function() { validateField($(this)); });
-        saveFormElements($form, questionFields(data.fields).add(csrfToken));
-        $('#status_panel').trigger('update');
-      }
-      responses.url($row, $field, success);
-    },
     url: function($row, $field, success) {
       $row.data('url-verified', success);
       if (!success) {
@@ -362,7 +320,7 @@ $(document).ready(function($){
     var $row = bindQuestionRow($field);
 
     var matched = false;
-    ['documentationUrl', 'url', 'metadata', 'other'].each(function(name) {
+    ['url', 'metadata', 'other'].each(function(name) {
       if (!matched && validations[name]($row, $field)) {
         matched = true;
 
