@@ -16,4 +16,8 @@ class SurveySection < ActiveRecord::Base
              select {|q| q.dependency.nil? || dep_map[q.dependency.id] }
   end
 
+  def survey_questions
+    questions.select{|q| q.reference_identifier != 'documentationUrl' }
+  end
+
 end
