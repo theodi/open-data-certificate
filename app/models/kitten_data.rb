@@ -116,13 +116,13 @@ class KittenData < ActiveRecord::Base
     if url.include?("data.gov.uk")
       uri = URI(url)
       package = uri.path.split("/").last
-      
+
       @fields["publisherOrigin"] = "true"
       @fields["copyrightURL"] = url
       @fields["dataPersonal"] = "not_personal"
       @fields["frequentChanges"] = "false"
       @fields["listed"] = "true"
-      @fields["listing_0"] = "http://data.gov.uk"
+      @fields["listing"] = "http://data.gov.uk"
       @fields["vocabulary"] = "false"
       @fields["codelists"] = "false"
       @fields["contentRights"] = "samerights"
