@@ -44,9 +44,9 @@ class KittenData < ActiveRecord::Base
             :title       => distribution.title,
             :description => distribution.description,
             :access_url  => distribution.access_url,
-            :extension   => distribution.format.extension,
-            :open        => distribution.format.open?,
-            :structured  => distribution.format.structured?
+            :extension   => distribution.format.try(:extension),
+            :open        => distribution.format.try(:open?),
+            :structured  => distribution.format.try(:structured?)
           }
         }
       }
