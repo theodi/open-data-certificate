@@ -254,6 +254,12 @@ $(document).ready(function($){
     $(this).toggleClass('stick');
   });
 
+  $('.survey-intro .submit').click(function() {
+    $(this).addClass('disabled');
+    $(this).popover('show');
+    $(this.form).submit();
+    return false;
+  });
 
   // scroll to question / repeated section
   var $question = $(document.location.hash);

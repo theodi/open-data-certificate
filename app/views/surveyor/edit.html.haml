@@ -39,8 +39,6 @@
               - else
                 =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
 
-
-
     = render :partial => 'status_panel'
     = render :partial => 'shared/flashes'
 
@@ -53,16 +51,34 @@
     - data['url-explanation'] = t('surveyor.url_explanation')
     - data['autocomplete-explanation'] = t('surveyor.autocomplete_explanation')
 
-    // there are no responses, but we have some kitten data
-    - if @response_set.responses.empty? && !@response_set.kitten_data.nil?
-      - data['autofill-repopulate'] = @response_set.kitten_data.url
-
     #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
       = hidden_field_tag :surveyor_javascript_enabled, false
 
-      .container
-        .row
-          .lead.span8= @survey.translation(I18n.locale)[:description].try(:html_safe)
+      .container.survey-intro
+        .well
+          %h2 Introduction
+          .row-fluid
+            .span8.lead
+              = @survey.translation(I18n.locale)[:description].try(:html_safe)
+            .span4
+              %a.btn{href: about_url} Read more about Open Data Certificates
+
+          .documentation-url
+            %label Where is your data described?
+            .row-fluid
+              .span8
+                %p= @response_set.documentation_url
+
+                - if @response_set.kitten_data && @response_set.kitten_data.data
+                  .alert.alert-success
+                    We have automatically completed information using this URL
+                - else
+                  .alert.alert-info
+                    No machine readable data found at this URL
+
+              .span4
+                %a.btn.btn-large.btn-primary{href: 'start'} Edit
+
 
       = render 'partials/dependents' unless @dependents.empty?
 
