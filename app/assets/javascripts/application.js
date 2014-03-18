@@ -413,6 +413,4 @@ $(document).ready(function($){
   certificateBody
     .on('mouseover', '.answer', function(){$(this).toggleClass('odc-popover-active', true)})
     .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)});
-
-  setInterval(function() { certificateBody.popover('hide'); }, 1000);
 });
