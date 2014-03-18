@@ -383,19 +383,34 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
+  var certificateBody = $('.certificate-data');
 
-  $('.certificate-data, #survey_form').popover({
-    selector:'.odc-popover',
-    trigger:'click',
-    html:true,
-    content: function(){
-      // pull out the content from the child element (hidden with css)
-      return $('.odc-popover-content', this).html()
-    },
-    template: '<div class="popover popover-light"><div class="arrow"></div>'+
-              '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-  })
-  .on('mouseover', '.answer', function(){$(this).toggleClass('odc-popover-active', true)})
-  .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)})
+  certificateBody.click(function() {
+    certificateBody.find('.odc-popover').popover('hide');
+  });
 
+  certificateBody.find('.odc-popover').each(function() {
+    var self = $(this);
+    self.popover({
+      trigger: 'manual',
+      html: true,
+      content: function() {
+        // pull out the content from the child element (hidden with css)
+        $(this).data('visible', true);
+        return $('.odc-popover-content', this).html();
+      },
+      template: '<div class="popover popover-light"><div class="arrow"></div>'+
+                '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+    });
+  });
+
+  certificateBody.on('click', '.odc-popover', function() {
+    certificateBody.find('.odc-popover').not(this).popover('hide');
+    $(this).popover('toggle');
+    return false;
+  });
+
+  certificateBody
+    .on('mouseover', '.answer', function(){$(this).toggleClass('odc-popover-active', true)})
+    .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)});
 });
