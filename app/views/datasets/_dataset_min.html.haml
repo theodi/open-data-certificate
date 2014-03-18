@@ -3,14 +3,20 @@
 
 .dataset{class: defined?(expanded) ? 'expanded': ''}
   .row
-    .span6
+    .span4
       %a.level-badge{class: "level-badge-#{dataset.certificate.attained_level}", href: url_for(dataset)}
       %h3.badge-align
         = link_to_unless_current dataset.title, dataset
-    .span4
+    .span3
+      =link_to 'View certificate', [dataset, dataset.certificate], class: 'btn btn-info'
+    .span3
       .details
-        =detail_item('Published By') { dataset.certificate.curator }
-        =detail_item('Issued') { time_ago_in_words(dataset.updated_at) << ' ago'}
+        %p
+          %span Published By
+          %strong= dataset.certificate.curator
+        %p
+          %span Issued
+          %strong= "#{time_ago_in_words(dataset.updated_at)} ago"
     .span2
       .expand
         %i.show-more.icon-chevron-down
@@ -25,14 +31,9 @@
     %hr
     .row
       .span4
-        =render 'shared/response_set_summary', response_set: dataset.response_set
+        =render 'shared/response_set_summary_short', response_set: dataset.response_set
 
       .span8
         =render 'shared/response_set_description', response_set: dataset.response_set
-
-        %p
-          =link_to 'View certificate', [dataset, dataset.certificate], class: 'btn btn-large btn-info'
-
-
 
 %hr.heavy
