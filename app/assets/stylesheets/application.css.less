@@ -62,6 +62,9 @@
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
 
+@odiRaspberry: #c92957;
+@odiRaspberryDark: darken(@odiRaspberry, 3%);
+
 @odiTurquoise: #00CBA3;
 
 @odiGrey: #aaa;
@@ -530,6 +533,14 @@ input, textarea{
 
 .btn-danger:active, .btn-danger:hover, .btn-danger:focus {
   background: @odiPomegranateDark;
+}
+
+.btn-negative {
+  background: @odiRaspberry;
+}
+
+.btn-negative:active, .btn-negative:hover, .btn-negative:focus {
+  background: @odiRaspberryDark;
 }
 
 
@@ -2735,19 +2746,26 @@ strong.certificate-level {
 // ***** Improvements page *****
 //
 */
-section.improvement{
+.non-container.improvements {
+
+  // Return to questionnaire button towards top of page
+  .return { margin: 60px 0 0 0; }
+
+}
+
+section.improvement {
 
   header .container {
     background-size: 71px 63px;
     background-repeat: no-repeat;
-    background-position: 20px 5px;
+    background-position: 0px 5px;
   }
 
   h2 {
 
     font-size: 27px;
     margin: 0;
-    padding-left: 100px;
+    padding-left: 80px;
 
   }
 
@@ -2755,53 +2773,187 @@ section.improvement{
 
     line-height: 20px;
     margin: 0 0 15px 0;
-    padding-left: 100px;
+    padding-left: 80px;
     max-width: 90%;
 
   }
 
-
   .requirements {
+
     padding: 25px 0 35px 0;
+
+    // Equalise gaps around all HRs and list items
+    .heavy, li { margin: 0; }
+
+    .dataset {
+
+      // Ready for absolutely positioned elements within
+      position: relative;
+
+      // Hover state
+      &:hover, &:focus {
+
+        // Indent the title
+        .requirement-title {
+
+          padding: 26px 0 28px 30px;
+
+        }
+
+      }
+
+      // Container for toggle arrows
+      .expand {
+
+        width: 100%;
+        height: 100%;
+
+        // Easiest way to move the clickable area above the title (so title is clickable)
+        position: absolute;
+        top: 0;
+
+        .show-more, .hide-more {
+
+          // Align toggle arrows to the right
+          width: 100%;
+          text-align: right;
+
+          // Indent the arrows from the right edge a bit
+          // Also increase the title to the correct height
+          padding: 26px 20px 0 0;
+          height: 100%;
+          .box-sizing(border-box);
+
+        }
+
+      }
+
+      // Title of togglable section
+      .requirement-title {
+
+        width: 100%;
+        padding: 26px 0 28px 0;
+        margin-bottom: 0;
+        font-weight: bold;
+        .transition(e("background-color, padding"));
+        .transition-duration(0.2s);
+
+        // Stop padding indent from affecting background coloured area
+        .box-sizing(border-box);
+
+        // Limit width of text
+        span {
+
+          width: 66%;
+          display: block;
+
+        }
+
+        // Make any bold text in the title stand out
+        color: @odiGreyDarker;
+        strong { color: @odiGrey; }
+
+      }
+
+      // Toggle content
+      .more {
+
+        // This will stop the toggle hit area covering the More content
+        position: relative;
+
+        // Spacing (no bottom as this will be handled by the P tag inside this block)
+        margin: 0;
+        p { padding: 18px 0 0 30px; }
+
+        // Buttons
+        .btn {
+
+          // Equalise widths and left-align text
+          width: 64%;
+          .box-sizing(border-box);
+          text-align: left;
+          margin: 18px 0 0 30px;
+
+          // When buttons wrap, add a gap under the second one
+          &.btn-negative { margin-bottom: 30px; }
+
+        }
+
+      }
+
+      // Toggled open state
+      &.expanded {
+
+        .requirement-title {
+
+          background-color: @odiBlue;
+          padding: 26px 0 28px 30px;
+
+          // Make any bold text in the title stand out
+          strong { color: @odiGreyDark; }
+
+        }
+
+      }
+
+    }
+
   }
+
+  ul { margin-left: 0; }
 
   li {
-    margin-bottom: 20px;
 
+    margin-bottom: 20px;
     font-size: 16px;
     color: #4d4d4d;
-    width: 66%;
+    list-style: none;
+
   }
 
-  strong { color: #000; }
-  a { color: #000; }
+  p {
 
-  p { margin-bottom: 20px; }
+    margin-bottom: 20px;
 
+    // More space below instructions
+    &.instruction { margin-bottom: 40px; }
 
-  // level specific styles
-  &.improvement-pilot header .container{
+  }
+
+  // Level specific styles
+  &.improvement-basic header .container {
+    background-image: url(/assets/badges/no_level_badge.png);
+  }
+  &.improvement-pilot header .container {
     background-image: url(/assets/badges/pilot_level_badge.png);
   }
-  &.improvement-standard header .container{
+  &.improvement-standard header .container {
     background-image: url(/assets/badges/standard_level_badge.png);
   }
-  &.improvement-exemplar header .container{
+  &.improvement-exemplar header .container {
     background-image: url(/assets/badges/exemplar_level_badge.png);
   }
 
   &.improvement-basic {
-    header{
-      background: #333;
-      h2, h3 { padding-left: 0; }
+
+    header {
+
+      background: #fff;
+
+      h2, h3 {
+
+        color: @odiGrey;
+
+      }
+
     }
 
-    background: #474747;
-
-    li, p { color: #fff; -webkit-font-smoothing: antialiased; }
+    li, p { color: @odiGreyDarker; -webkit-font-smoothing: antialiased; }
 
     strong, a {
-      color: #fff;
+
+      //color: @odiGreyDarker;
+
     }
 
   }
@@ -3144,6 +3296,9 @@ section.improvement{
     // Badges on "How can I improve my open data?" page
     section.improvement {
 
+        &.improvement-basic header .container {
+            background-image: url(/assets/ie/badges/no_level_badge_71x63.png);
+        }
         &.improvement-pilot header .container {
             background-image: url(/assets/ie/badges/pilot_level_badge_71x63.png);
         }

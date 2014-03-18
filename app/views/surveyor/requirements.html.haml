@@ -12,9 +12,9 @@
           %h3= @response_set.title
         .span3
           -if @response_set.incomplete?
-            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large', :role => "button"
+            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large return', :role => "button"
           -else
-            =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large', :role => "button"
+            =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large return', :role => "button"
 
 - ['basic', 'pilot', 'standard', 'exemplar'].each do |level|
 
@@ -34,14 +34,50 @@
           %h3= t("improvements.levels.#{level}.subtitle")
 
       .requirements.container
-        %p= t("improvements.levels.#{level}.instruction")
+        %p.instruction= t("improvements.levels.#{level}.instruction")
+        %hr.heavy
 
         %ul
           -fields.each do |field|
             %li
-              =link_to "#{resume_path}#q_#{field.id}" do
-                answer &lsquo;<strong>#{field.text.html_safe}</strong>&rsquo;
+              .dataset{class: defined?(expanded) ? 'expanded': ''}
+                .requirement-title
+                  %span= field.text.html_safe
+                .expand
+                  %i.show-more.icon-chevron-down
+                  %i.hide-more.icon-chevron-up
+                .more
+                  .row
+                    .span4
+                      %p= markdown(field.help_text || '')
+                    .span6.offset2
+                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{field.id}"}
+                        %strong= t('improvements.buttons.understood')
+                        =t('improvements.buttons.understood_action')
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: field.discussion_topic, back: request.original_fullpath, title: field.text, question_id: field.id)}
+                        %strong= t('improvements.buttons.misunderstood')
+                        =t('improvements.buttons.misunderstood_action')
+              %hr.heavy
 
           -requirements.each do |requirement|
+            - answer = requirement.answer_corresponding_to_requirement
+            - question = requirement.question_corresponding_to_requirement || answer.try(:question)
             %li
-              = link_to without_instruction(requirement.text).html_safe, "#{resume_path}#q_#{requirement.question_corresponding_to_requirement.try(:id) || requirement.answer_corresponding_to_requirement.try(:question).try(:id)}"
+              .dataset{class: defined?(expanded) ? 'expanded': ''}
+                .requirement-title
+                  %span= requirement.text.html_safe
+                .expand
+                  %i.show-more.icon-chevron-down
+                  %i.hide-more.icon-chevron-up
+                .more
+                  .row
+                    .span4
+                      %p= markdown(answer.try(:help_text) || question.try(:help_text) || '')
+                    .span6.offset2
+                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{question.try(:id)}"}
+                        %strong= t('improvements.buttons.understood')
+                        =t('improvements.buttons.understood_action')
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: question.discussion_topic, back: request.original_fullpath, title: question.text, question_id: question.id)}
+                        %strong= t('improvements.buttons.misunderstood')
+                        =t('improvements.buttons.misunderstood_action')
+              %hr.heavy
