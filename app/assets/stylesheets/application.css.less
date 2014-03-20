@@ -58,6 +58,7 @@
 
 @odiGreen: #0DBC37;
 @odiGreenDark: darken(@odiGreen, 6%);
+@odiGreenTint: rgb(222, 249, 229);
 
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
@@ -2113,26 +2114,7 @@ header .save-button {
 
     &.ok {
       input.string {
-        padding-right: 70px;
-      }
-
-      .status-icon {
-        background: @odiGreen;
-
-        .icon {
-          display: inline-block;
-          &:before { content: @ok; }
-        }
-      }
-
-      .status-message {
-        span {
-          background: @odiGreen;
-        }
-
-        i.arrow {
-          border-bottom-color: @odiGreen;
-        }
+        background: @odiGreenTint;
       }
     }
 
@@ -2156,10 +2138,37 @@ header .save-button {
     }
 
     &.autocompleted {
+      .status-icon {
+        background: @odiGreen;
+
+        .icon {
+          display: inline-block;
+          &:before { content: @ok; }
+        }
+      }
+
+      // if it's a text input box, put the word "validated"
+      // under the tick icon
+      .input.string .icon {
+        margin:6px 0;
+        &:after  {
+          content: "validated";
+          font-size: 10px;
+          vertical-align: top;
+        }
+      }
+
       .status-message {
-        display: block;
+        span {
+          background: @odiGreen;
+        }
+
+        i.arrow {
+          border-bottom-color: @odiGreen;
+        }
       }
     }
+
 
     &.inline-validation {
       .status-icon {
