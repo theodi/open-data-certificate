@@ -57,7 +57,7 @@ class ResponseSetsController < ApplicationController
       question = @response_set.survey.question(key)
       response = @response_set.response(key)
 
-      next if value.nil?
+      next if value.nil? || question.nil?
 
       if question.type == :none || question.type == :repeater
         responses.push(HashWithIndifferentAccess.new(
