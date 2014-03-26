@@ -18,7 +18,6 @@
 */
 
 // import bootstrap this way so that we can alter variables just for this app
-
 @import "bootstrap/bootstrap.less";
 
 // font awesome config
@@ -456,11 +455,18 @@ p {
   line-height: 24px;
 }
 
+.lead {
+  margin-bottom: 15px;
+}
+
 .lead p,
 p.lead {
   font-size: 17px;
   color: @odiGrey;
-  margin-bottom: 30px;
+
+  strong {
+    font-weight: 400;
+  }
 }
 
 dl {
@@ -1728,6 +1734,66 @@ header .save-button {
 
   &.loading .btn.btn-large i.icon-loading {
     display: inline-block;
+  }
+}
+
+.survey-intro {
+  .btn.btn-large { margin-bottom: 15px; }
+
+  h2 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  form {
+    margin: 0;
+  }
+
+  form .btn-large, .documentation-url .btn {
+    margin-top: 20px;
+    line-height: 140%;
+  }
+
+  form .btn-large {
+    i.icon-loading {
+      display: none;
+      margin-right: 3px;
+    }
+
+    &.disabled {
+      i.icon-loading { display: inline-block; }
+    }
+  }
+
+  .documentation-url {
+    p {
+      height: 58px;
+      margin: 15px 0;
+      padding: 0 10px;
+      color: @odiGrey;
+      border: 1px solid #bbb;
+      font-size: 22px;
+      font-weight: 300;
+      overflow: hidden;
+      line-height: 270%;
+    }
+
+
+  }
+
+  .alert {
+    border: 1px solid white;
+    .border-radius(0);
+
+    &.alert-success {
+      background: @odiGreen;
+    }
+
+    &.alert-info {
+      background: @odiBlue;
+    }
   }
 }
 
@@ -3346,6 +3412,10 @@ body{
 }
 .js .answer.odc-popover-active .odc-popover{
   opacity: 1;
+}
+
+.popover-content{
+  font-size: 15px;
 }
 
 .popover-light{

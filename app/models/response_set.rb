@@ -6,6 +6,7 @@ class ResponseSet < ActiveRecord::Base
   before_save :update_dataset
 
   attr_accessible :dataset_id
+  attr_accessor :documentation_url
 
   belongs_to :dataset, touch: true
   belongs_to :survey
@@ -89,6 +90,14 @@ class ResponseSet < ActiveRecord::Base
 
   def title
     dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+  end
+
+  def response(identifier)
+    responses.select{|r| r.question.reference_identifier == identifier }.first
+  end
+
+  def documentation_url
+    response 'documentationUrl'
   end
 
   def jurisdiction
@@ -316,7 +325,6 @@ class ResponseSet < ActiveRecord::Base
     end
     update_from_ui_hash(ui_hash)
   end
-
 
   # run updates through the response_cache_map, so that we can deal
   # with fields that have been claimed by a different response_set
