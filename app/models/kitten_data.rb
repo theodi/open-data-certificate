@@ -27,7 +27,7 @@ class KittenData < ActiveRecord::Base
   def request_data
     @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
 
-    if @dataset && @dataset.supported?
+    if @dataset && @dataset.supported? && dataset_field(:data_title)
       self.data = {
         :title             => dataset_field(:data_title, ''),
         :description       => dataset_field(:description, ''),
