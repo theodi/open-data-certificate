@@ -254,6 +254,7 @@ You can then change the `prototype/survey.xsl` file and run:
 saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
 ```
 
+
 ### Autocompletion
 
 The survey attempts to fetch answers from the documentation URL and fill them into the questionnaire. These answers are marked as autocompleted.
@@ -265,6 +266,23 @@ Some examples of URLS that can be autocompleted:
 - http://data.ordnancesurvey.co.uk/datasets/50k-gazetteer
 - http://data.ordnancesurvey.co.uk/datasets/boundary-line
 - http://smtm.labs.theodi.org/download/
+
+
+#### Surveyor validation
+
+A breakdown of the validation states that exist in the survey:
+
+- `no-response` a field which has not been filled in, white
+- `ok` a completed field (light green)
+- `error` a mandatory field which hasn't been filled in, shown after trying to finish the survey (light red)
+- `url-verified` a URL field which has been verified (light green with message)
+- `autocompleted` an autocompleted field (light green with message)
+- `autocompleted-changed` an autocompleted, but changed field (light orange with message and explanation box)
+- `autocompleted-explained` an autocompleted, changed field which has an explanation (light green with message and explanation box)
+- `url-warning` a URL field which has failed verification (light orange with message and explanation box)
+- `autocompleted-url-warning` a URL field which has been autocompleted AND failed verification (light orange with message and explanation box)
+- `url-explained` a URL field which has failed verification but has an explanation (light green with message and explanation box)
+- `metadata-missing` the documentation metadata field, which has values selected incorrectly (light orange with message and explanation box)
 
 #### Additional documentation
 
