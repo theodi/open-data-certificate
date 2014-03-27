@@ -1996,10 +1996,51 @@ header .save-button {
       position: relative;
     }
 
-    select {
+    select, .select-box {
+      position: relative;
       height: 60px;
+      margin: 0;
+      padding: 0 10px;
+      font-size: 23px;
+      font-weight: normal;
+      color: #8e8c8c;
+      border: 1px solid #cccccc;
+      background-color: #fff;
+      -webkit-appearance: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    option {
+      font-size: 16px;
+    }
+
+    select {
       width: 100%;
-      margin: 15px 0;
+
+      .js & {
+        position: absolute;
+        font-size: 14px;
+        opacity: 0;
+        filter: ~'alpha(opacity = 0)';
+        z-index: 5;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .select-box {
+      padding: 15px 10px;
+      height: 28px;
+
+      &:after {
+        font-family: FontAwesome;
+        content: @chevron-down;
+        float: right;
+        margin-right: 8px;
+        font-size: 28px;
+        line-height: 100%;
+      }
     }
 
     .icon-loading {
