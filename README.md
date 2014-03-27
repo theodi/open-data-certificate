@@ -226,8 +226,10 @@ CERTIFICATE_JUVIA_SITE_KEY
 
 # Sending error reports to airbrake
 AIRBRAKE_CERTIFICATE_KEY
-```
 
+# Disable the rails footnotes to increase performance
+DISABLE_FOOTNOTES=true
+```
 
 #### Admin functions
 
