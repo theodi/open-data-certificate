@@ -17,7 +17,7 @@ class SurveySection < ActiveRecord::Base
   end
 
   def survey_questions
-    questions.select{|q| q.reference_identifier != 'documentationUrl' }
+    questions.select{|q| !['documentationUrl', 'pilot_1', 'basic_1'].include?(q.reference_identifier) }
   end
 
 end
