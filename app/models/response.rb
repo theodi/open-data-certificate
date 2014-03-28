@@ -78,7 +78,7 @@ class Response < ActiveRecord::Base
 
   def all_autocompleted
     if question.pick == 'any' && autocompletable?
-      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort == auto_value.sort
+      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
     end
 
     @all_autocompleted ||= autocompleted
