@@ -37,6 +37,10 @@ class ResponseSetsController < ApplicationController
 
     url = params[:response_set][:documentation_url]
 
+    @response_set.update_responses({documentationUrl: url})
+    @response_set.responses.update_all(autocompleted: false)
+    @response_set.update_attribute('kitten_data', nil)
+
     code = resolve_url(url)
     if code != 200
       return redirect_to(surveyor.edit_my_survey_path(
@@ -50,57 +54,7 @@ class ResponseSetsController < ApplicationController
     kitten_data.save
 
     @response_set.update_attribute('kitten_data', kitten_data)
-    @response_set.responses.update_all(autocompleted: false)
-
-    responses = []
-    kitten_data.fields.each do |key, value|
-      question = @response_set.survey.question(key)
-      response = @response_set.response(key)
-
-      next if value.nil? || question.nil?
-
-      if question.type == :none || question.type == :repeater
-        responses.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answers.first.id.to_s,
-          string_value: value,
-          autocompleted: true
-        ))
-      end
-
-      if question.type == :one
-        responses.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answer(value).id.to_s,
-          autocompleted: true
-        ))
-      end
-
-      if question.type == :any
-        value.each do |item|
-          responses.push(HashWithIndifferentAccess.new(
-            question_id: question.id.to_s,
-            api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-            answer_id: question.answer(item).id.to_s,
-            autocompleted: true
-          ))
-        end
-      end
-    end
-
-    question = @response_set.survey.documentation_url
-    response = @response_set.documentation_url
-
-    responses.push(HashWithIndifferentAccess.new(
-      question_id: question.id.to_s,
-      answer_id: question.answers.first.id,
-      string_value: url,
-      api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-    ))
-
-    @response_set.update_from_ui_hash(Hash[responses.map.with_index { |value, i| [i.to_s, value] }])
+    @response_set.update_responses(kitten_data.fields)
 
     redirect_to(surveyor.edit_my_survey_path(
       :survey_code => @response_set.survey.access_code,
