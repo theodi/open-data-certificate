@@ -153,12 +153,11 @@ class Survey < ActiveRecord::Base
   end
 
   def question(identifier)
-    questions.select{|q| q.reference_identifier == identifier }.first
+    questions.select{|q| q.reference_identifier == identifier.to_s }.first
   end
 
   def documentation_url
     question 'documentationUrl'
-    questions.select{|q| q.reference_identifier == 'documentationUrl' }.first
   end
 
   ### /override surveyor methods

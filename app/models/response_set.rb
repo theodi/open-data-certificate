@@ -93,7 +93,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def response(identifier)
-    responses.select{|r| r.question.reference_identifier == identifier }.first
+    responses.select{|r| r.question.reference_identifier == identifier.to_s }.first
   end
 
   def documentation_url
