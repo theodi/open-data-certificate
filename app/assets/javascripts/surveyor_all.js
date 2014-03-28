@@ -187,11 +187,32 @@ $(document).ready(function($){
   });
 
 
-  function updateField($field) {
-    var $row = bindQuestionRow($field);
+  function updateField($row) {
+    var $field = $row.find('input[type=text], input[type=url], input[type=email], input[type=checkbox], input[type=radio], select');
 
     saveFormElements($form, questionFields($field).add(csrfToken));
-    validateField($field);
+
+    $row.data('field', $field);
+    $row.data('url-field', urlField($field));
+    $row.data('autocompleted', checkAutocompleted($row));
+    $row.data('explained', explanationGiven($row));
+    $row.data('empty', fieldEmpty($field));
+
+    updateCheckedFields($row);
+
+    var missing = metadataMissing($row);
+    updateMetadata($row, missing);
+    $row.data('metadata-missing', missing && missing.length);
+
+    if ($row.data('url-field')) {
+      verifyUrl($row, function(verified) {
+        $row.data('url-verified', verified);
+
+        validateField($row);
+      });
+    }
+
+    validateField($row);
   }
 
   // Finds the value from the row to check if the field has changed
@@ -231,7 +252,7 @@ $(document).ready(function($){
     $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
-    updateField($field);
+    updateField($row);
   });
 
   // Updates text form after users finish typing
@@ -240,121 +261,148 @@ $(document).ready(function($){
     var $row = bindQuestionRow($field);
 
     var value = rowValue($row);
-    if ($row.data('value') == value) return;
+    if (!$field.is('textarea') && $row.data('value') == value) return;
     $row.data('value', value);
 
     clearTimeout($row.data('update-timeout'));
     $row.data('update-timeout', setTimeout(function() {
-      updateField($field);
+      updateField($row);
     }, 700));
   });
 
+  var states = [
+    'no-response',
+    'ok',
+    'error',
+    'url-verified',
+    'autocompleted',
+    'autocompleted-changed',
+    'autocompleted-explained',
+    'url-warning',
+    'autocompleted-url-warning',
+    'url-explained',
+    'metadata-missing'
+  ];
+
   function changeState($row, state) {
-    $row.removeClass('no-response ok warning').addClass(state);
+    $row.removeClass(states.join(' ')).addClass(state);
+    $row.find('.status-message span').text($surveyor.data(state));
   }
 
-  var validations = {
-    url: function($row, $field) { return $field.attr('type') == 'url'; },
-    metadata: function($row) { return $row.data('metadata-field') && $row.data('autocompletable'); },
-    other: function() { return true; }
+  function changeExplanation($row, explanation) {
+    $row.find('.explanation .subtitle').text($surveyor.data(explanation));
+  }
+
+  function verifyUrl($row, next) {
+    var url = $row.data('field').val();
+    if ($row.data('empty')) return next(true);
+    if (!validateUrl(url)) {
+      if (!validateUrl('http://'+url)) {
+        return next(false);
+      }
+
+      $row.data('field').val(url = 'http://'+url);
+    }
+
+    var id = $surveyor.data('response-id');
+    $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
+      next(json.status == 200);
+    });
+  }
+
+  function urlField($field) {
+    return $field.attr('type') == 'url';
+  }
+
+  function metadataMissing($row) {
+    if (!$row.data('metadata-field') || !$row.data('autocompletable')) return false;
+
+    var question = $row.data('reference-identifier');
+    var autoValue = $row.data('autocompleted-value');
+    var autoValues = (autoValue === null ? '' : autoValue.toString()).split(',').map(function(value) {
+      return answerIdentifier(question, value);
+    }).sort();
+
+    var selectedValues = $row.find('li:has(input:checked)').map(function() {
+      return $(this).data('reference-identifier');
+    }).get().sort();
+
+    return selectedValues.filter(function(value) {
+      return autoValues.indexOf(value) === -1;
+    });
   };
 
-  var actions = {
-    url: function($row, $field, callback) {
-      var url = $field.val();
-      if (empty(url)) return callback(true);
-      if (!validateUrl(url)) {
-        if (!validateUrl('http://'+url)) {
-          return callback(false);
+  function updateMetadata($row, missing) {
+    if (!missing) return;
+
+    var $answers = $row.find('.surveyor_check_boxes').removeClass('warning');
+    missing.each(function(value) {
+      $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning');
+    });
+  }
+
+  function updateCheckedFields($row) {
+    $row.find('.surveyor_check_boxes, .surveyor_radio').each(function() {
+      $(this).toggleClass('checked', $(this).find('[type=checkbox], [type=radio]').prop('checked'));
+    })
+  }
+
+  function explanationGiven($row) {
+    return !fieldEmpty($row.find('.explanation textarea'));
+  };
+
+  function validateField($row) {
+    var $field = $row.data('field');
+
+    var state = 'no-response';
+
+    if (!$row.data('empty')) {
+      state = 'ok';
+    }
+
+    if ($row.data('empty') && $row.data('mandatory')) {
+      state = 'error';
+    }
+
+    if (!$row.data('empty') && $row.data('url-field')) {
+      state = 'url-verified';
+    }
+
+    if ($row.data('autocompletable')) {
+      changeExplanation($row, 'autocomplete-explanation');
+      state = 'autocompleted';
+
+      if (!$row.data('autocompleted')) {
+        state = 'autocompleted-changed';
+
+        if ($row.data('explained')) {
+          state = 'autocompleted-explained';
         }
-
-        $field.val(url = 'http://'+url);
-      }
-
-      var id = $surveyor.data('response-id');
-      $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
-        callback(json.status == 200);
-      });
-    },
-    metadata: function($row, $field, callback) {
-      var question = $row.data('reference-identifier');
-      var autoValue = $row.data('autocompleted-value').toString();
-      var autoValues = autoValue.split(',').map(function(value) {
-        return answerIdentifier(question, value);
-      }).sort();
-
-      var selectedValues = $row.find('li:has(input:checked)').map(function() {
-        return $(this).data('reference-identifier');
-      }).get().sort();
-
-      var missingValues = selectedValues.filter(function(value) {
-        return autoValues.indexOf(value) === -1;
-      });
-
-      callback(missingValues.length === 0, {missingValues: missingValues});
-    },
-    other: function($row, $field, callback) { callback(true); }
-  };
-
-  var responses = {
-    url: function($row, $field, success) {
-      $row.data('url-verified', success);
-      if (!success) {
-        $row.find('.status-message span').text($surveyor.data('url-incorrect'));
-      }
-    },
-    metadata: function($row, $field, success, data) {
-      $row.find('.surveyor_check_boxes').removeClass('warning');
-      $row.data('metadata-missing', !success);
-
-      if (!success) {
-        var $answers = $row.find('.surveyor_check_boxes').removeClass('warning');
-        data.missingValues.each(function(value) {
-          $answers.filter('[data-reference-identifier="'+ value +'"]').addClass('warning');
-        });
       }
     }
-  };
 
-  function validateField($field) {
-    var $row = bindQuestionRow($field);
+    if ($row.data('url-field') && !$row.data('url-verified')) {
+      changeExplanation($row, 'url-explanation');
+      state = 'url-warning';
 
-    var matched = false;
-    ['url', 'metadata', 'other'].each(function(name) {
-      if (!matched && validations[name]($row, $field)) {
-        matched = true;
-
-        updateLoading(1);
-
-        if ($row.data('validate-callback')) $row.data('validate-callback').cancelled = true;
-        var status = {cancelled: false};
-        $row.data('validate-callback', status);
-
-        var callback = function(success, $data) {
-          updateLoading(-1);
-          if (status.cancelled) return;
-
-          changeState($row, success ? 'ok' : 'warning');
-
-          if (responses[name]) {
-            responses[name]($row, $field, success, $data || {});
-          }
-
-          // If the field can be autocompleted
-          if ($row.data('autocompletable')) {
-            markAutocompleted($row, checkAutocompleted($row));
-          }
-          // Otherwise remove all state if the field is empty
-          else if (empty($field.val())) {
-            changeState($row, 'no-response');
-          }
-
-          updateExplanation($row, empty($field.val()));
-        };
-
-        actions[name]($row, $field, callback);
+      if ($row.data('autocompleted')) {
+        state = 'autocompleted-url-warning';
       }
-    });
+
+      if ($row.data('explained')) {
+        state = 'url-explained';
+      }
+    }
+
+    if ($row.data('metadata-missing')) {
+      state = 'metadata-missing';
+
+      if ($row.data('explained')) {
+        state = 'autocompleted-explained';
+      }
+    }
+
+    changeState($row, state);
   }
 
   function bindQuestionRow($field) {
@@ -408,39 +456,6 @@ $(document).ready(function($){
     }
   }
 
-  function markAutocompleted($row, autocompleted) {
-    if (!$row.data('autocompletable')) return;
-
-    $row.find('input[id$="_autocompleted"]').val(autocompleted);
-    $row.toggleClass('autocompleted', autocompleted);
-    $row.data('autocompleted', autocompleted);
-
-    var message = autocompleted ? 'autocompleted' : 'autocomplete-override-warning';
-    if ($row.data('metadata-missing')) message = 'missing-metadata';
-    if ($row.data('url-verified') === false && autocompleted) message = 'autocompleted-url-incorrect';
-    $row.find('.status-message span').text($surveyor.data(message));
-  }
-
-  function updateExplanation($row, fieldEmpty) {
-    var explanationEmpty = empty($row.find('.autocomplete-override textarea').val());
-
-    var message = '';
-    if ($row.data('url-verified') === false) {
-      message = $surveyor.data('url-explanation');
-    }
-    if ($row.data('autocompleted') === false) {
-      message = $surveyor.data('autocomplete-explanation');
-    }
-
-    var override = $row.find('.autocomplete-override');
-    if (message) override.find('p').text(message);
-    override.slide(message);
-
-    if (!$row.data('metadata-missing') && !fieldEmpty) {
-      changeState($row, message && explanationEmpty ? 'warning' : 'ok');
-    }
-  }
-
   function saveFormElements($form, $elements) {
     updateLoading(1);
     $.ajax({
@@ -462,6 +477,10 @@ $(document).ready(function($){
   // Checks if a string is empty (blank or whitespace only)
   function empty(text) {
     return !text || text.match(/^[\s]*$/);
+  }
+
+  function fieldEmpty($field) {
+    return empty($field.val());
   }
 
   function fillField(question, answer) {
