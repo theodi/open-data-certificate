@@ -364,6 +364,51 @@ class ResponseSet < ActiveRecord::Base
     original_update_from_ui_hash(ui_hash)
   end
 
+  # Updates responses without using a surveyor form
+  def update_responses(responses)
+
+    ui_hash = []
+
+    responses.each do |key, value|
+      question = survey.question(key)
+      response = response(key)
+
+      next if value.nil? || question.nil?
+
+      if question.type == :none || question.type == :repeater
+        ui_hash.push(HashWithIndifferentAccess.new(
+          question_id: question.id.to_s,
+          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+          answer_id: question.answers.first.id.to_s,
+          string_value: value,
+          autocompleted: true
+        ))
+      end
+
+      if question.type == :one
+        ui_hash.push(HashWithIndifferentAccess.new(
+          question_id: question.id.to_s,
+          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+          answer_id: question.answer(value).id.to_s,
+          autocompleted: true
+        ))
+      end
+
+      if question.type == :any
+        value.each do |item|
+          ui_hash.push(HashWithIndifferentAccess.new(
+            question_id: question.id.to_s,
+            api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+            answer_id: question.answer(item).id.to_s,
+            autocompleted: true
+          ))
+        end
+      end
+    end
+
+    update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+  end
+
   def assign_to_user!(user)
     self.user = user
     self.dataset = user.datasets.create if !self.dataset
