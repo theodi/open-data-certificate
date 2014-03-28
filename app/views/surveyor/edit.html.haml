@@ -43,13 +43,17 @@
     = render :partial => 'shared/flashes'
 
     - data = {'response-id' => @response_set.id}
-    - data['autocompleted'] = t('surveyor.autocompleted_data')
-    - data['url-incorrect'] = t('surveyor.please_check_that_the_url_exists')
-    - data['missing-metadata'] = t('surveyor.missing_metadata')
-    - data['autocomplete-override-warning'] = t('surveyor.autocomplete_override_warning')
-    - data['autocompleted-url-incorrect'] = t('surveyor.autocompleted_url_incorrect')
-    - data['url-explanation'] = t('surveyor.url_explanation')
-    - data['autocomplete-explanation'] = t('surveyor.autocomplete_explanation')
+    - data['url-verified']              = t('surveyor.url_verified')
+    - data['autocompleted']             = t('surveyor.autocompleted')
+    - data['autocompleted-changed']     = t('surveyor.autocompleted_changed')
+    - data['autocompleted-explained']   = t('surveyor.autocompleted_explained')
+    - data['url-warning']               = t('surveyor.url_warning')
+    - data['autocompleted-url-warning'] = t('surveyor.autocompleted_url_warning')
+    - data['url-explained']             = t('surveyor.url_explained')
+    - data['metadata-missing']          = t('surveyor.metadata_missing')
+
+    - data['url-explanation']           = t('surveyor.url_explanation')
+    - data['autocomplete-explanation']  = t('surveyor.autocomplete_explanation')
 
     #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
       = hidden_field_tag :surveyor_javascript_enabled, false
