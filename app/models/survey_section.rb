@@ -17,7 +17,7 @@ class SurveySection < ActiveRecord::Base
   end
 
   def survey_questions
-    questions.select{|q| !['documentationUrl', 'pilot_1', 'basic_1'].include?(q.reference_identifier) }
+    questions.where(Question.arel_table[:reference_identifier].not_in %w(documentationUrl pilot_1 basic_1))
   end
 
 end
