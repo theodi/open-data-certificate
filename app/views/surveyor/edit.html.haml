@@ -71,12 +71,12 @@
             %label Where is your data described?
             .row-fluid
               .span8
-                %p.url= @response_set.documentation_url
-
                 - if @response_set.documentation_url.blank?
+                  %p.url.placeholder No documentation URL
                   .alert.alert-error
                     = t('surveyor.documentation_url.missing')
                 - else
+                  %p.url= @response_set.documentation_url
                   - if @response_set.kitten_data && @response_set.kitten_data.data
                     .alert.alert-success
                       = t('surveyor.documentation_url.autocompleted')
