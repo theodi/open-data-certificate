@@ -4,8 +4,8 @@ class ChangeOglukLicenceId < ActiveRecord::Migration
     
     data.each do |d|
       case d.reference_identifier
-      when "ogl_uk"
-        d.update_attributes(:reference_identifier => "uk_ogl")
+      when "uk_ogl"
+        d.update_attributes(:reference_identifier => "ogl_uk")
       end
     end
     
@@ -13,8 +13,8 @@ class ChangeOglukLicenceId < ActiveRecord::Migration
     
     content.each do |c|    
       case c.reference_identifier
-      when "ogl_uk"
-        c.update_attributes(:reference_identifier => "uk_ogl")
+      when "uk_ogl"
+        c.update_attributes(:reference_identifier => "ogl_uk")
       end
     end
   end
