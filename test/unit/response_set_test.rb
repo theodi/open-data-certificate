@@ -288,7 +288,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
     answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "UK Open Government Licence (OGL)",
+      :title => "UK Open Government Licence 1.0 (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
@@ -301,7 +301,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
     answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "UK Open Government Licence (OGL)",
+      :title => "UK Open Government Licence 1.0 (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
