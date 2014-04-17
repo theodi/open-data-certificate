@@ -201,8 +201,8 @@ class KittenDataTest < ActiveSupport::TestCase
     @kitten_data.request_data
 
     assert_equal "yes", @kitten_data.fields["publisherRights"]
-    assert_equal "uk_ogl", @kitten_data.fields["dataLicence"]
-    assert_equal "uk_ogl", @kitten_data.fields["contentLicence"]
+    assert_equal "ogl_uk", @kitten_data.fields["dataLicence"]
+    assert_equal "ogl_uk", @kitten_data.fields["contentLicence"]
   end
 
   test 'Ordinance Survey license fields are set correctly' do
