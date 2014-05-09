@@ -33,7 +33,7 @@ class MainController < ApplicationController
       'datasets'     => ResponseSet.counts
     }
 
-    @head_commit = `git rev-parse HEAD`
+    @head_commit = Rails.root.to_s.split("/").last
 
     render '/home/status'
   end
