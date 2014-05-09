@@ -187,11 +187,18 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for(:other_content_licence_url)
          }
       else
-        licence = Odlifier::License.new(ref.dasherize)
-        @content_licence_determined_from_responses = {
-          :title => licence.title,
-          :url   => licence.url
-        }
+        begin
+          licence = Odlifier::License.new(ref.dasherize)
+          @content_licence_determined_from_responses = {
+            :title => licence.title,
+            :url   => licence.url
+          }
+        rescue ArgumentError
+          @content_licence_determined_from_responses = {
+            :title => 'Unknown',
+            :url   => nil
+          }
+        end
       end
     else
       @content_licence_determined_from_responses

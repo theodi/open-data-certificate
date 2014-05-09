@@ -284,6 +284,19 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
+  test "#content_licence_determined_from_responses returns 'Unknown' when the content licence is not found" do
+    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "this-is-not-a-licence")
+    expected_value = {
+      :title => "Unknown",
+      :url => nil
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.content_licence_determined_from_responses
+  end
+
   test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
     answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
