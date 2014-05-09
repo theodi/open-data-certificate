@@ -1,0 +1,58 @@
+-# we need to break from the .container and
+-# also surround everything in a form
+
+- content_for(:header) do
+  / header overridden
+- content_for(:main_container_class) {'non-container'}
+
+/ has it's own form, so need it up here
+-@surveys = Survey.available_to_complete
+=render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
+=render :partial => 'shared/switch_language', locals: {response_set: @response_set}
+
+- scope_locale @response_set.locale do
+  %header
+    .container
+      .row
+        .span9
+          .jurisdiction
+            Jurisdiction:
+            .badge.badge-inverse=  @response_set.jurisdiction
+            %span.status= @survey.try(:status)
+            = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
+              %i.icon.icon-pencil
+            - if @survey.translations.count > 1
+              Language:
+              .badge.badge-inverse= @response_set.locale_name
+              = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
+                %i.icon.icon-pencil
+
+          %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
+
+  #surveyor
+    .container.survey-intro
+      .well
+        %h2 Introduction
+        .row-fluid
+          .span8.lead
+            = @survey.translation(I18n.locale)[:description].try(:html_safe)
+          .span4
+            %a.btn{href: about_url} Read more about Open Data Certificates
+
+        = form_for [surveyor, :start, @response_set] do |f|
+          = f.label :documentation_url, 'Where is your data described?'
+
+          .row-fluid
+            .span8
+              = f.url_field :documentation_url, class: 'string', placeholder: 'Documentation URL', value: @response_set.documentation_url
+            .span4
+              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: 'Please wait while we check this URL'}}
+                %i.icon-loading.icon-spin.icon-refresh
+                Check URL
+
+          %p
+            I don't have a URL
+            %a.btn{href: 'take'} Skip this
+
+
+/ #surveyor fieldset ol li label, #surveyor fieldset ol li input

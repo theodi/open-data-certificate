@@ -44,9 +44,9 @@ class KittenData < ActiveRecord::Base
             :title       => distribution.title,
             :description => distribution.description,
             :access_url  => distribution.access_url,
-            :extension   => distribution.format.extension,
-            :open        => distribution.format.open?,
-            :structured  => distribution.format.structured?
+            :extension   => distribution.format.try(:extension),
+            :open        => distribution.format.try(:open?),
+            :structured  => distribution.format.try(:structured?)
           }
         }
       }
@@ -116,13 +116,13 @@ class KittenData < ActiveRecord::Base
     if url.include?("data.gov.uk")
       uri = URI(url)
       package = uri.path.split("/").last
-      
+
       @fields["publisherOrigin"] = "true"
       @fields["copyrightURL"] = url
       @fields["dataPersonal"] = "not_personal"
       @fields["frequentChanges"] = "false"
       @fields["listed"] = "true"
-      @fields["listing_0"] = "http://data.gov.uk"
+      @fields["listing"] = "http://data.gov.uk"
       @fields["vocabulary"] = "false"
       @fields["codelists"] = "false"
       @fields["contentRights"] = "samerights"

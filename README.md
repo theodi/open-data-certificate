@@ -1,6 +1,6 @@
 ## ODI Open Data Certificate
 
-[![Build Status](http://jenkins.theodi.org/job/open-data-certificate-master/badge/icon)](http://jenkins.theodi.org/job/open-data-certificate-master/) [![Code Climate](https://codeclimate.com/repos/519228b056b10279600066b5/badges/772e6d53c060a1268449/gpa.png)](https://codeclimate.com/repos/519228b056b10279600066b5/feed) [![Dependency Status](https://gemnasium.com/theodi/open-data-certificate.png)](https://gemnasium.com/theodi/open-data-certificate)
+[![Build Status](https://travis-ci.org/theodi/open-data-certificate.png?branch=master)](https://travis-ci.org/theodi/open-data-certificate) [![Code Climate](https://codeclimate.com/repos/519228b056b10279600066b5/badges/772e6d53c060a1268449/gpa.png)](https://codeclimate.com/repos/519228b056b10279600066b5/feed) [![Dependency Status](https://gemnasium.com/theodi/open-data-certificate.png)](https://gemnasium.com/theodi/open-data-certificate)
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
 
@@ -251,6 +251,18 @@ You can then change the `prototype/survey.xsl` file and run:
 ```bash
 saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
 ```
+
+### Autocompletion
+
+The survey attempts to fetch answers from the documentation URL and fill them into the questionnaire. These answers are marked as autocompleted.
+
+Some examples of URLS that can be autocompleted:
+
+- http://data.gov.uk/dataset/overseas_travel_and_tourism
+- http://data.gov.uk/dataset/apprenticeship-success-rates-in-england-2011-2012
+- http://data.ordnancesurvey.co.uk/datasets/50k-gazetteer
+- http://data.ordnancesurvey.co.uk/datasets/boundary-line
+- http://smtm.labs.theodi.org/download/
 
 ---
 
