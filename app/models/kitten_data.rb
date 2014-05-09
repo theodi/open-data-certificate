@@ -10,14 +10,14 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk"
   }
 
   CONTENT_LICENCES = {
     "http://creativecommons.org/licenses/by/2.0/uk/" => "cc_by",
     "http://creativecommons.org/licenses/by-sa/2.0/uk/" => "cc_by_sa",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk"
   }
 
   def dataset
@@ -97,7 +97,7 @@ class KittenData < ActiveRecord::Base
       @fields["publisherRights"] = "yes"
       @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
 
-      @fields["contentLicence"] = "uk_ogl" if @fields["dataLicence"] == "uk_ogl"
+      @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
 
       # Settings for ordnance survey licences
       if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
