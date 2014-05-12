@@ -32,7 +32,6 @@
   #surveyor
     .container.survey-intro
       .well
-        %h2 Introduction
         .row-fluid
           .span8.lead
             = @survey.translation(I18n.locale)[:description].try(:html_safe)
