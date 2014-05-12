@@ -28,7 +28,7 @@ end
 group :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'sqlite3'
-  gem 'simplecov'
+  gem 'coveralls'
   gem 'shoulda'
   gem 'mocha', require: false
   gem 'test-unit'
