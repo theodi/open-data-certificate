@@ -36,8 +36,8 @@
         .row-fluid
           .span8.lead
             = @survey.translation(I18n.locale)[:description].try(:html_safe)
-          .span4
-            %a.btn{href: about_url} Read more about Open Data Certificates
+            %p
+              %a{href: about_url} Read more about Open Data Certificates
 
         = form_for [surveyor, :start, @response_set] do |f|
           = f.label :documentation_url, 'Where is your data described?'
