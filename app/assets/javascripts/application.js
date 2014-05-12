@@ -237,6 +237,12 @@ $(document).ready(function($){
     $(this).toggleClass('stick');
   });
 
+  // Start with status panel in sticky mode, then hide after 10 seconds
+  $('#status_panel').toggleClass('stick');
+  setTimeout(function() {
+    $('#status_panel').removeClass('stick');
+  },5000);
+
   $('.survey-intro .submit').click(function() {
     $(this).addClass('disabled');
     $(this).popover('show');
