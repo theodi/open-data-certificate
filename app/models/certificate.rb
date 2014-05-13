@@ -77,6 +77,22 @@ class Certificate < ActiveRecord::Base
       }
     end
 
+    def published_certificates
+      self.where(published: true).map do |certificate|
+        {
+          name: certificate.name,
+          publisher: certificate.curator,
+          created: certificate.created_at,
+          user: certificate.user.email,
+          country: certificate.survey.title,
+          type: certificate.survey.status,
+          level: certificate.attained_level,
+          verification_type: certificate.certification_type,
+          date_verified: certificate.verifications.count == 0 ? nil : certificate.verifications.last.updated_at
+        }
+      end
+    end
+
     def set_expired(surveys)
       self.joins(:response_set)
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
