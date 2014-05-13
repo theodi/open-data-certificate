@@ -52,4 +52,41 @@ class MainControllerTest < ActionController::TestCase
     assert_equal assigns(:dataset).user_id, @user.id, "dataset belongs to user"
   end
 
+  test "published_certificates return a CSV file with correct stuff" do
+    user = FactoryGirl.create :user
+    ENV['ODC_ADMIN_IDS'] = "#{user.id}"
+
+    sign_in user
+
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+
+    get :published_certificates
+
+    csv = CSV.parse(response.body)
+
+    assert_response 200
+    assert_match /text\/csv; header=present/, response.headers["Content-Type"]
+    assert_equal 6, csv.count
+    assert_true Csvlint::Validator.new( StringIO.new(response.body) ).valid?
+  end
+
+  test "published_certificates redirects to homepage for non-logged in user" do
+    get :published_certificates
+    assert_response 302
+    assert_equal "http://test.host/", response.header["Location"]
+  end
+
+  test "published_certificates redirects to homepage for non-admin user" do
+    user = FactoryGirl.create :user
+    ENV['ODC_ADMIN_IDS'] = ""
+
+    sign_in user
+    
+    get :published_certificates
+    assert_response 302
+    assert_equal "http://test.host/", response.header["Location"]
+  end
+
 end

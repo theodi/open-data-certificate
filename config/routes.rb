@@ -98,6 +98,9 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/response_sets' => 'main#status_response_sets'
   get 'status/events' => 'main#status_events'
 
+  # private stats
+  get 'status/published_certificates.csv' => 'main#published_certificates'
+
   root :to => 'main#home'
 
   # Certificate legacy redirects

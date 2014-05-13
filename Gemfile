@@ -33,6 +33,7 @@ group :test do
   gem 'mocha', require: false
   gem 'test-unit'
   gem 'pry'
+  gem 'csvlint', github: 'theodi/csvlint.rb'
 end
 
 group :development do
