@@ -7,6 +7,8 @@ OpenDataCertificate::Application.routes.draw do
     match '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field', :via => :get
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
+    get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+
     resources :jurisdictions, :only => :index
 
     # have a response_set resource for deleting for now, have
@@ -16,6 +18,7 @@ OpenDataCertificate::Application.routes.draw do
       post :publish, on: :member
       post :autofill, on: :member
       post :resolve, on: :member
+      put  :start, on: :member
     end
 
   end
@@ -94,6 +97,9 @@ OpenDataCertificate::Application.routes.draw do
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
   get 'status/events' => 'main#status_events'
+
+  # private stats
+  get 'status/published_certificates.csv' => 'main#published_certificates'
 
   root :to => 'main#home'
 

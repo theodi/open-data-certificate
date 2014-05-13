@@ -20,7 +20,7 @@ namespace :surveyor do
     files.each do |file|
       if limit > 0
         builder = SurveyBuilder.new(dir, file)
-        
+
         limit -= 1 if builder.perform
       end
     end
@@ -29,11 +29,11 @@ namespace :surveyor do
   desc  'build a survey only if file has changed'
   task :build_changed_survey => :environment do
     f_arg = ENV["FILE"]
-    file = Rails.root.join f_arg
-    raise "File does not exist: #{file}" unless FileTest.exists? file
+    file = Rails.root.join f_arg.to_s
+    raise "File does not exist: #{file}" if f_arg.nil? || !FileTest.exists?(file)
 
     # convert into the correct format for the survey builder
-    base = File.basename(f_arg)
+    base = File.basename(f_arg.to_s)
     dir = f_arg[0...f_arg.rindex(base)]
 
     builder = SurveyBuilder.new(dir, base)

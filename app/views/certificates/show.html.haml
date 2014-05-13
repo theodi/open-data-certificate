@@ -65,7 +65,7 @@
   - if minimal # don't show the summary
     =render @certificate.response_set
   - else
-    .row
+    .row.certicate-content
       .span3
         .well.summary
           = render 'shared/response_set_summary', response_set: @certificate.response_set
