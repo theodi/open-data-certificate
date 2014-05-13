@@ -10,14 +10,16 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
   }
 
   CONTENT_LICENCES = {
     "http://creativecommons.org/licenses/by/2.0/uk/" => "cc_by",
     "http://creativecommons.org/licenses/by-sa/2.0/uk/" => "cc_by_sa",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
   }
 
   def dataset
