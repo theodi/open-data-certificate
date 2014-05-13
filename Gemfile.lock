@@ -6,6 +6,17 @@ GIT
       rails (~> 3.2.13)
 
 GIT
+  remote: git://github.com/theodi/csvlint.rb.git
+  revision: 3dc689f4625c8edd4f7b725d1d420fdd67a67df9
+  specs:
+    csvlint (0.0.1)
+      activesupport
+      addressable
+      colorize
+      mime-types
+      open_uri_redirections
+
+GIT
   remote: git://github.com/theodi/data_kitten.git
   revision: cbace2595ba5899830a0bf731cba9b0088d1d4a1
   specs:
@@ -234,6 +245,7 @@ GEM
     newrelic_rpm (3.7.2.195)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    open_uri_redirections (0.1.4)
     orm_adapter (0.5.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
@@ -407,6 +419,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   coveralls
+  csvlint!
   data_kitten!
   delayed_job_active_record
   devise (= 3.0.3)
