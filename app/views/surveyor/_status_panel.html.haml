@@ -1,46 +1,47 @@
 #status_panel{data:{progress_url: progress_dataset_certificate_path(dataset_id:@response_set.dataset_id, id: @response_set.certificate.id)}}
   #panel_handle
-  %h2= t('status_panel.title')
-  %p
-    = t('status_panel.description')
-    =link_to t('status_panel.about'), '/about'
+  #panel_inner
+    %h2= t('status_panel.title')
+    %p
+      = t('status_panel.description')
+      =link_to t('status_panel.about'), '/about'
 
-  %hr
-  #panel_loading
-    = t('.updating')
-    %i.icon.icon-refresh.icon-spin
+    %hr
+    #panel_loading
+      = t('.updating')
+      %i.icon.icon-refresh.icon-spin
 
-  %h3.basic-level
-    .certificate-badge
-    %strong= t('levels.basic.title')+':'
-    = t('levels.basic.description')
-  .progress.progress-striped.progress-info
-    .bar#bar-basic
+    %h3.basic-level
+      .certificate-badge
+      %strong= t('levels.basic.title')+':'
+      = t('levels.basic.description')
+    .progress.progress-striped.progress-info
+      .bar#bar-basic
 
-  %hr
-  %h3.pilot-level
-    .certificate-badge
-    %strong= t('levels.pilot.title')+':'
-    = t('levels.pilot.description')
-  .progress.progress-striped.progress-warning
-    .bar#bar-pilot
+    %hr
+    %h3.pilot-level
+      .certificate-badge
+      %strong= t('levels.pilot.title')+':'
+      = t('levels.pilot.description')
+    .progress.progress-striped.progress-warning
+      .bar#bar-pilot
 
-  %hr
-  %h3.standard-level
-    .certificate-badge
-    %strong= t('levels.standard.title')+':'
-    = t('levels.standard.description')
-  .progress.progress-striped.progress-success
-    .bar#bar-standard
+    %hr
+    %h3.standard-level
+      .certificate-badge
+      %strong= t('levels.standard.title')+':'
+      = t('levels.standard.description')
+    .progress.progress-striped.progress-success
+      .bar#bar-standard
 
-  %hr
-  %h3.exemplar-level
-    .certificate-badge
-    %strong= t('levels.exemplar.title')+':'
-    = t('levels.exemplar.description')
-  .progress.progress-striped.progress-danger
-    .bar#bar-exemplar
+    %hr
+    %h3.exemplar-level
+      .certificate-badge
+      %strong= t('levels.exemplar.title')+':'
+      = t('levels.exemplar.description')
+    .progress.progress-striped.progress-danger
+      .bar#bar-exemplar
 
-  %hr
-  %p
-  =link_to t('status_panel.improve_data'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
+    %hr
+    %p
+    =link_to t('status_panel.improve_data'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
