@@ -75,7 +75,7 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal 3, certificates.count
     assert_equal "Banana certificate", certificates.first[:name]
     assert_equal "John Smith", certificates.first[:publisher]
-    assert_equal "test7@example.com", certificates.first[:user]
+    assert_match /test[0-9]+@example\.com/, certificates.first[:user]
     assert_equal "alpha", certificates.first[:type]
     assert_equal "exemplar", certificates.first[:level]
     assert_equal :self, certificates.first[:verification_type]
