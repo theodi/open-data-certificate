@@ -21,24 +21,56 @@
     - r = response_for(@response_set, q, nil, rg)
     - a = @response_set.autocomplete_override_message_for(q)
 
-    - explanation_required = (r.autocompletable? && !r.all_autocompleted) || r.error
-    - explanation_missing = explanation_required && !a.message?
+    - url_field = r.answer && r.answer.input_type == 'url'
+    - url_error = r.error
 
-    - state = 'ok' unless r.new_record?
-    - state = 'warning' if r.error || r.any_metadata_missing || explanation_missing
-    - state = 'no-response' if q.is_mandatory && (q.pick == "none" ? r.string_value.blank? : !r.answer_id) && !repeated_template
+    - state = 'no-response'
+    - state = 'ok' if r.filled?
+    - state = 'error' if r.empty? && q.is_mandatory
 
-    - status_message = t('surveyor.autocompleted_data')
-    - status_message = t('surveyor.autocomplete_override_warning') if explanation_missing
-    - status_message = t('surveyor.missing_metadata') if r.any_metadata_missing
+    - if url_field
+      - state = 'url-verified'
+      - status_message = t('surveyor.url_verified')
+
+    - if r.autocompletable?
+      - state = 'autocompleted'
+      - status_message = t('surveyor.autocompleted')
+
+      - if !r.all_autocompleted
+        - state = 'autocompleted-changed'
+        - status_message = t('surveyor.autocompleted_changed')
+
+        - if a.message?
+          - state = 'autocompleted-explained'
+          - status_message = t('surveyor.autocompleted_explained')
+
+    - if url_field && url_error
+      - state = 'url-warning'
+      - status_message = t('surveyor.url_warning')
+
+      - if r.all_autocompleted
+        - state = 'autocompleted-url-warning'
+        - status_message = t('surveyor.autocomplete_url_warning')
+
+      - if a.message?
+        - state = 'url-explained'
+        - status_message = t('surveyor.url_explained')
+
+    - if r.any_metadata_missing
+      - state = 'metadata-missing'
+      - status_message = t('surveyor.metadata_missing')
+
+      - if a.message?
+        - state = 'autocompleted-explained'
+        - status_message = t('surveyor.autocompleted_explained')
 
     - classes = ['row', 'question-row', "q_#{renderer}"]
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
     - classes << 'mandatory' if q.is_mandatory
-    - classes << 'autocompleted' if r.autocompletable? && r.all_autocompleted
+    - classes << 'autocompleted' if r.all_autocompleted
     - classes << state if state
-    - if pickTypes.include?(q.pick) || selectFields.include?(renderer)
+    - if pickTypes.include?(q.pick) && renderer != :dropdown
       - classes << ['inline-validation', 'compact-validation']
 
     - data = {}
@@ -46,6 +78,7 @@
     - data['autocompletable'] = r.autocompletable?
     - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
+    - data['mandatory'] = !!q.is_mandatory
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
     - attrs = {data: data, id: id, class: classes.join(' ')}
@@ -79,7 +112,7 @@
             = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
-            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }, :prompt => "Please select..."
         - else # :default, :inline, :inline_default, :repeater_default
           - if q.pick == "one"
             = f.semantic_fields_for i, r do |ff|
@@ -89,7 +122,11 @@
               = ff.input :autocompleted, :as => :quiet
 
           - if q.pick == 'one' || q.pick == 'any'
-            %div.status-above
+            %div.choice-buttons.status-wrapper
+              - q.answers.each do |a|
+                - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
+                = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
+            %div.status-below
               %div.status-icon
                 %i.icon-loading.icon-spin.icon-refresh.icon-large
                 %i.icon.icon-variable
@@ -97,20 +134,16 @@
                 %span= status_message
                 %i.arrow-border
                 %i.arrow
-            %div.choice-buttons.status-wrapper
-              - q.answers.each do |a|
-                - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
-                = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
 
           - else
             - q.answers.each do |a|
               = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
 
-        .autocomplete-override{class: explanation_required ? '' : 'none'}
+        .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'
           - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
           = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
-            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.autocomplete_explanation')
+            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
 
       %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}
         - unless (q.help_text.blank?)

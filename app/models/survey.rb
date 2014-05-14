@@ -152,6 +152,14 @@ class Survey < ActiveRecord::Base
     @trns = t ? YAML.load(t.translation || "{}").with_indifferent_access : {}
   end
 
+  def question(identifier)
+    questions.select{|q| q.reference_identifier == identifier.to_s }.first
+  end
+
+  def documentation_url
+    question 'documentationUrl'
+  end
+
   ### /override surveyor methods
 
   private

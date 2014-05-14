@@ -26,11 +26,14 @@ en:
     please_check_all_your_urls_exist: "Please check all your URLs are correct"
     must_be_logged_in_to_complete: "Please sign in or register to complete this questionnaire"
     you_need_to_register_or_sign_in_to_save: "To generate a certificate and retain your answers for future reference, you need to sign in or register."
-    please_check_that_the_url_exists: "Please check that the your URL is correct"
-    autocompleted_data: "We have automatically completed this data from your previous answers, but you can still change it"
-    autocompleted_url_incorrect: "We have automatically completed this URL, but it doesn't seem to be correct"
-    missing_metadata: "Some of these items could not be found on the documentation page"
-    autocomplete_override_warning: "Please provide an explanation below for changing this answer"
+    url_verified: "This URL has been verified"
+    url_warning: "Please check that your URL is correct"
+    url_explained: "You have provided an explanation for why your URL cannot be verified"
+    autocompleted: "We have automatically completed this data from your previous answers, but you can still change it"
+    autocompleted_changed: "Please provide an explanation below for changing this answer"
+    autocompleted_explained: "You have provided an explanation for changing the autocompleted value"
+    autocompleted_url_warning: "We have automatically completed this URL, but it doesn't seem to be correct"
+    metadata_missing: "Some of these items could not be found on the documentation page"
     question_comment: Ask for help with this question
     override_explanation_title: Explanation
     autocomplete_explanation: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
@@ -39,4 +42,7 @@ en:
     publisher_changed_autocompleted: The publisher has changed the automatically completed data.
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
-
+    documentation_url:
+        autocompleted: We have automatically completed information using this URL
+        not_autocompleted: No machine readable data found at this URL
+        missing: "You should have a web page that offers documentation about the open data you publish so that people can understand its context, content and utility."

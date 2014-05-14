@@ -39,26 +39,54 @@
               - else
                 =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
 
-
-
     = render :partial => 'status_panel'
     = render :partial => 'shared/flashes'
 
     - data = {'response-id' => @response_set.id}
-    - data['autocompleted'] = t('surveyor.autocompleted_data')
-    - data['url-incorrect'] = t('surveyor.please_check_that_the_url_exists')
-    - data['missing-metadata'] = t('surveyor.missing_metadata')
-    - data['autocomplete-override-warning'] = t('surveyor.autocomplete_override_warning')
-    - data['autocompleted-url-incorrect'] = t('surveyor.autocompleted_url_incorrect')
-    - data['url-explanation'] = t('surveyor.url_explanation')
-    - data['autocomplete-explanation'] = t('surveyor.autocomplete_explanation')
+    - data['url-verified']              = t('surveyor.url_verified')
+    - data['autocompleted']             = t('surveyor.autocompleted')
+    - data['autocompleted-changed']     = t('surveyor.autocompleted_changed')
+    - data['autocompleted-explained']   = t('surveyor.autocompleted_explained')
+    - data['url-warning']               = t('surveyor.url_warning')
+    - data['autocompleted-url-warning'] = t('surveyor.autocompleted_url_warning')
+    - data['url-explained']             = t('surveyor.url_explained')
+    - data['metadata-missing']          = t('surveyor.metadata_missing')
+
+    - data['url-explanation']           = t('surveyor.url_explanation')
+    - data['autocomplete-explanation']  = t('surveyor.autocomplete_explanation')
 
     #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
       = hidden_field_tag :surveyor_javascript_enabled, false
 
-      .container
-        .row
-          .lead.span8= @survey.translation(I18n.locale)[:description].try(:html_safe)
+      .container.survey-intro
+        .well
+          .row-fluid
+            .span8.lead
+              = @survey.translation(I18n.locale)[:description].try(:html_safe)
+              %p
+                %a{href: about_url} Read more about Open Data Certificates
+
+
+          .documentation-url
+            %label Where is your data described?
+            .row-fluid
+              .span8
+                - if @response_set.documentation_url.blank?
+                  %p.url.placeholder No documentation URL
+                  .alert.alert-error
+                    = t('surveyor.documentation_url.missing')
+                - else
+                  %p.url= @response_set.documentation_url
+                  - if @response_set.kitten_data && @response_set.kitten_data.data
+                    .alert.alert-success
+                      = t('surveyor.documentation_url.autocompleted')
+                  - else
+                    .alert.alert-info
+                      = t('surveyor.documentation_url.not_autocompleted')
+
+              .span4
+                %a.btn.btn-large.btn-primary{href: 'start'} Edit
+
 
       = render 'partials/dependents' unless @dependents.empty?
 
@@ -66,10 +94,9 @@
       -# other new users
       - cache_key = @response_set.responses.empty? ? "blank_survey_#{@response_set.survey_id}_#{@response_set.locale}" : @response_set
       = cache(cache_key) do
-        =render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+        = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
-
 
 :javascript
   $(document).ready(function() {
