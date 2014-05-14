@@ -70,6 +70,8 @@ class MainControllerTest < ActionController::TestCase
     assert_match /text\/csv; header=present/, response.headers["Content-Type"]
     assert_equal 6, csv.count
     assert_true Csvlint::Validator.new( StringIO.new(response.body) ).valid?
+
+    ENV['ODC_ADMIN_IDS'] = ""
   end
 
   test "published_certificates redirects to homepage for non-logged in user" do
@@ -83,7 +85,7 @@ class MainControllerTest < ActionController::TestCase
     ENV['ODC_ADMIN_IDS'] = ""
 
     sign_in user
-    
+
     get :published_certificates
     assert_response 302
     assert_equal "http://test.host/", response.header["Location"]
