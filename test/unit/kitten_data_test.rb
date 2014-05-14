@@ -61,9 +61,19 @@ class KittenDataTest < ActiveSupport::TestCase
     end
   end
 
-  def set_nil_data
+  def set_blank_data
     data = {
-      data_title: nil,
+      data_title: nil
+    }
+
+    data.each do |key, value|
+      DataKitten::Dataset.any_instance.stubs(key).returns(value)
+    end
+  end
+
+  def set_minimum_data
+    data = {
+      data_title: 'test',
       description: nil,
       publishers: nil,
       rights: nil,
@@ -113,9 +123,9 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'Nil data is extracted from Data Kitten in the correct format' do
-    set_nil_data
+    set_minimum_data
 
-    assert_equal '', @kitten_data.request_data[:title]
+    assert_equal 'test', @kitten_data.request_data[:title]
     assert_equal '', @kitten_data.request_data[:description]
     assert_equal [], @kitten_data.request_data[:publishers]
     assert_nil @kitten_data.request_data[:rights]
@@ -233,7 +243,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "false", @kitten_data.fields["codelists"]
     assert_equal @kitten_data.url, @kitten_data.fields["copyrightURL"]
     assert_equal "true", @kitten_data.fields["listed"]
-    assert_equal "http://data.gov.uk", @kitten_data.fields["listing_0"]
+    assert_equal "http://data.gov.uk", @kitten_data.fields["listing"]
     assert_equal "samerights", @kitten_data.fields["contentRights"]
     assert_equal ["list"], @kitten_data.fields["versionManagement"]
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", @kitten_data.fields["versionsUrl"]
@@ -267,9 +277,9 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'No metadata fields are set when data is not present' do
-    set_nil_data
+    set_blank_data
     @kitten_data.request_data
 
-    assert_equal [], @kitten_data.fields["documentationMetadata"]
+    assert_equal nil, @kitten_data.fields["documentationMetadata"]
   end
 end

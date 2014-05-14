@@ -18,7 +18,6 @@
 */
 
 // import bootstrap this way so that we can alter variables just for this app
-
 @import "bootstrap/bootstrap.less";
 
 // font awesome config
@@ -58,6 +57,7 @@
 
 @odiGreen: #0DBC37;
 @odiGreenDark: darken(@odiGreen, 6%);
+@odiGreenLight: #defaeb;
 
 @odiPomegranate: #dc4810;
 @odiPomegranateDark: darken(@odiPomegranate, 3%);
@@ -459,11 +459,18 @@ p {
   line-height: 24px;
 }
 
+.lead {
+  margin-bottom: 15px;
+}
+
 .lead p,
 p.lead {
   font-size: 17px;
   color: @odiGrey;
-  margin-bottom: 30px;
+
+  strong {
+    font-weight: 400;
+  }
 }
 
 dl {
@@ -1724,6 +1731,7 @@ header .jurisdiction{
 }
 
 header .save-button {
+  margin-top: 18px;
 
   .btn.btn-large {
     -webkit-font-smoothing: antialiased;
@@ -1739,6 +1747,74 @@ header .save-button {
 
   &.loading .btn.btn-large i.icon-loading {
     display: inline-block;
+  }
+}
+
+.survey-intro {
+  .btn.btn-large { margin-bottom: 15px; }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  form {
+    margin: 0;
+  }
+
+  form .btn-large, .documentation-url .btn {
+    margin-top: 6px;
+    line-height: 140%;
+  }
+
+  form .btn-large {
+    i.icon-loading {
+      display: none;
+      margin-right: 3px;
+    }
+
+    &.disabled {
+      i.icon-loading { display: inline-block; }
+    }
+  }
+
+  .documentation-url {
+    .url {
+      height: 58px;
+      margin-bottom: 10px;
+      padding: 1px 11px;
+      color: @odiGreyDark;
+
+      font-size: 22px;
+      font-weight: 300;
+      overflow: hidden;
+      line-height: 270%;
+
+      &.placeholder {
+        color: @odiGrey;
+      }
+    }
+  }
+
+  .alert {
+    padding: 9px 16px;
+    line-height: 140%;
+    border: 1px solid white;
+    .border-radius(0);
+
+    &.alert-success {
+      background: @odiGreen;
+    }
+
+    &.alert-info {
+      background: @odiBlue;
+    }
   }
 }
 
@@ -1801,10 +1877,18 @@ header .save-button {
         padding: 0;
       }
 
+      &.checked {
+        background: @odiGreenLight;
+        border: 1px solid #cccccc;
+        padding: 0 11px;
+        label { color: @odiGreen; }
+      }
+
       &.warning {
         background: @odiOrangeLight;
         border: 1px solid @odiOrange;
         padding: 0 11px;
+        label { color: @odiGrey; }
       }
     }
   }
@@ -1839,7 +1923,7 @@ header .save-button {
     height: 60px;
     font-size: 23px;
     padding: 0 10px;
-    margin: 15px 0;
+    margin: 0;
     .box-sizing(border-box);
   }
 
@@ -1941,10 +2025,60 @@ header .save-button {
       position: relative;
     }
 
+    .select-wrapper {
+      position: relative;
+    }
+
+    select, .select-box {
+      position: relative;
+      height: 58px;
+      margin: 0;
+      padding: 0 10px;
+      font-size: 23px;
+      font-weight: normal;
+      color: #8e8c8c;
+      border: 1px solid #cccccc;
+      background-color: #fff;
+      -webkit-appearance: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    option {
+      font-size: 16px;
+    }
+
     select {
-      height: 60px;
       width: 100%;
-      margin: 15px 0;
+
+      .js & {
+        position: absolute;
+        font-size: 14px;
+        opacity: 0;
+        filter: ~'alpha(opacity = 0)';
+        z-index: 5;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .select-box {
+      padding: 0 10px;
+      line-height: 250%;
+      overflow: hidden;
+
+      &:after {
+        font-family: FontAwesome;
+        content: @chevron-down;
+        position: absolute;
+        top: 0;
+        right: 14px;
+        font-size: 28px;
+      }
+    }
+
+    input.string, .select-box {
+      background-color: white;
     }
 
     .icon-loading {
@@ -1959,7 +2093,6 @@ header .save-button {
       width: 60px;
       height: 60px;
       background: none;
-      margin: 16px 0;
       border-radius: 3px;
       position: absolute;
       right: 0;
@@ -1978,20 +2111,20 @@ header .save-button {
 
     .status-wrapper {
       position: relative;
+      margin-bottom: 20px;
 
       aside.answer-meta {
-        top: -45px;
+        top: 0;
         right: -400px;
       }
 
       &.choice-buttons {
         .clearfix;
-        padding-bottom: 15px;
       }
 
       .remove_row {
         position: absolute;
-        bottom: 30px;
+        bottom: 15px;
         right: 74px;
         -webkit-font-smoothing: antialiased;
 
@@ -2002,6 +2135,7 @@ header .save-button {
     }
 
     .question_label {
+      margin-bottom: 12px;
       cursor: auto;
 
       .odc-popover {
@@ -2046,14 +2180,24 @@ header .save-button {
       }
     }
 
-    &.warning {
+    &.url-warning, &.autocompleted-changed, &.autocompleted-url-warning, &.metadata-missing {
       input.string {
         padding-right: 70px;
-      }
-
-      input.string {
         color: @odiOrangeDark;
         background-color: @odiOrangeLight;
+      }
+
+      .choice-buttons li.input.checked {
+        background: none;
+        border: 0;
+        padding: 1px 12px;
+        label { color: @odiGrey; }
+
+        &.warning {
+          background: @odiOrangeLight;
+          border: 1px solid @odiOrange;
+          padding: 0 11px;
+        }
       }
 
       .status-icon {
@@ -2076,17 +2220,25 @@ header .save-button {
           border-bottom-color: @odiOrange;
         }
       }
+
+      &.inline-validation {
+        .status-message i.arrow {
+          border-right-color: @odiOrange;
+        }
+      }
     }
 
-    .highlight_mandatory&.mandatory.no-response {
-      background: @odiCrimsonLight;
-
-      aside {
+    .highlight_mandatory&.error {
+      &, aside {
         background: @odiCrimsonLight;
       }
 
       input.string {
         padding-right: 70px;
+      }
+
+      .select-wrapper {
+        padding-right: 59px;
       }
 
       .status-icon {
@@ -2099,30 +2251,24 @@ header .save-button {
         }
       }
 
-      .status-message {
-
-        span {
-          background: @odiCrimson;
-        }
-
-        i.arrow {
-          border-bottom-color: @odiCrimson;
-        }
+      .odc-popover {
+        color: @odiGreyDark;
       }
     }
 
-    &.ok {
-      input.string {
-        padding-right: 70px;
+    &.ok, &.url-verified, &.autocompleted, &.autocompleted-explained, &.url-explained {
+      input.string, .select-box {
+        color: @odiGreenDark;
+        background-color: @odiGreenLight;
       }
 
       .status-icon {
-        background: @odiGreen;
+        // background: @odiGreen;
 
-        .icon {
-          display: inline-block;
-          &:before { content: @ok; }
-        }
+        // .icon {
+        //   display: inline-block;
+        //   &:before { content: @ok; }
+        // }
       }
 
       .status-message {
@@ -2133,6 +2279,20 @@ header .save-button {
         i.arrow {
           border-bottom-color: @odiGreen;
         }
+      }
+    }
+
+    &.url-warning, &.autocompleted-changed, &.autocompleted-url-warning, &.metadata-missing, &.autocompleted-explained, &.url-explained {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .select-wrapper {
+        padding-right: 59px;
+      }
+
+      .explanation {
+        display: block;
       }
     }
 
@@ -2155,9 +2315,26 @@ header .save-button {
       }
     }
 
-    &.autocompleted {
+    &.url-verified, &.autocompleted, &.autocompleted-explained, &.url-explained {
+      input.string {
+        padding-right: 70px;
+      }
+
+      .select-wrapper {
+        padding-right: 59px;
+      }
+
       .status-message {
         display: block;
+      }
+
+      .status-icon {
+        background: @odiGreen;
+
+        .icon {
+          display: inline-block;
+          &:before { content: @ok; }
+        }
       }
     }
 
@@ -2215,10 +2392,6 @@ header .save-button {
       &.error .status-message i.arrow {
         border-right-color: @odiCrimson;
       }
-
-      &.warning .status-message i.arrow {
-        border-right-color: @odiOrange;
-      }
     }
 
     &.compact-validation.question-row {
@@ -2250,15 +2423,14 @@ header .save-button {
       }
     }
 
-    .status-above {
-      .clearfix;
-      margin-bottom: 7px;
-    }
-
     .status-below {
       .clearfix;
-      margin-top: -17px;
-      margin-bottom: 15px;
+      margin-top: -20px;
+      margin-bottom: 20px;
+
+      &.status-below-compact {
+        margin-top: -22px;
+      }
     }
 
     .status-error {
@@ -2303,13 +2475,9 @@ header .save-button {
     }
   }
 
-  .autocomplete-override {
-
-    clear:both;
-
-    &.none {
-      display: none;
-    }
+  .explanation {
+    display: none;
+    clear: both;
 
     label {
       background: none;
@@ -2395,6 +2563,11 @@ header .save-button {
     height:72px;
     position: absolute;
     left:-78px;
+  }
+
+  #panel_inner {
+    overflow-y: auto;
+    height: 75%;
   }
 
   #panel_loading{
@@ -2960,58 +3133,60 @@ section.improvement {
 
 }
 
-.well {
-  .border-radius(0);
-  padding: 16px 27px;
+.certicate-content {
+  .well {
+    .border-radius(0);
+    padding: 16px 27px;
 
-  h1, h2, h3, h4 {
-    color: black;
-  }
+    h1, h2, h3, h4 {
+      color: black;
+    }
 
-  h3 {
-    font-size: 19px;
-    line-height: 25px;
-    margin: 5px 0;
-  }
+    h3 {
+      font-size: 19px;
+      line-height: 25px;
+      margin: 5px 0;
+    }
 
-  p, a, dt, dd {
-    font-size: 15px;
-    line-height: 25px;
-    color: white;
-  }
+    p, a, dt, dd {
+      font-size: 15px;
+      line-height: 25px;
+      color: white;
+    }
 
-  dl {
-    margin-bottom: 10px;
-  }
+    dl {
+      margin-bottom: 10px;
+    }
 
-  dd, dt {
-    margin: 0;
-  }
+    dd, dt {
+      margin: 0;
+    }
 
-  dt {
-    font-weight: bold;
-  }
+    dt {
+      font-weight: bold;
+    }
 
-  dd {
-    margin-bottom: 12px;
-  }
+    dd {
+      margin-bottom: 12px;
+    }
 
-  small {
-    font-size: 100%;
-  }
+    small {
+      font-size: 100%;
+    }
 
-  a {
-    border-bottom: 1px white solid;
-  }
+    a {
+      border-bottom: 1px white solid;
+    }
 
-  &.summary {
-    background: @odiTurquoise;
-    border-color: darken(@odiTurquoise, 9%);
-  }
+    &.summary {
+      background: @odiTurquoise;
+      border-color: darken(@odiTurquoise, 9%);
+    }
 
-  &.verification {
-    background: @odiBlue;
-    border-color: darken(@odiBlue, 9%);
+    &.verification {
+      background: @odiBlue;
+      border-color: darken(@odiBlue, 9%);
+    }
   }
 }
 
@@ -3501,6 +3676,10 @@ body{
 }
 .js .answer.odc-popover-active .odc-popover{
   opacity: 1;
+}
+
+.popover-content{
+  font-size: 15px;
 }
 
 .popover-light{
