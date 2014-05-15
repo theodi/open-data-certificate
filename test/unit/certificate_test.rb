@@ -64,4 +64,20 @@ class CertificateTest < ActiveSupport::TestCase
                              'community certifified when verified by 2 users'
 
   end
+
+  test 'published_certificates' do
+    @certificate1.update_attributes(published: true)
+    @certificate2.update_attributes(published: true)
+    @certificate3.update_attributes(published: true)
+
+    certificates = Certificate.published_certificates
+
+    assert_equal 3, certificates.count
+    assert_equal "Banana certificate", certificates.first[:name]
+    assert_equal "John Smith", certificates.first[:publisher]
+    assert_match /test[0-9]+@example\.com/, certificates.first[:user]
+    assert_equal "alpha", certificates.first[:type]
+    assert_equal "exemplar", certificates.first[:level]
+    assert_equal :self, certificates.first[:verification_type]
+  end
 end

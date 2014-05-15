@@ -43,6 +43,24 @@ class MainController < ApplicationController
     render text: csv, content_type: "text/csv"
   end
 
+  def published_certificates
+    if current_user.try(:admin?)
+      certificates = Certificate.published_certificates
+
+      csv = CSV.generate(force_quotes: true, row_sep: "\r\n") do |csv|
+        # Header row goes here
+        headers = certificates.first.keys
+        csv << headers
+
+        certificates.each {|c| csv << headers.map { |h| c[h] } }
+      end
+
+      render text: csv, content_type: "text/csv; header=present"
+    else
+      redirect_to "/"
+    end
+  end
+
   def status_response_sets
     @response_sets = ResponseSet.all.map do |m|
       {
