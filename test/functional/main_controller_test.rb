@@ -74,6 +74,30 @@ class MainControllerTest < ActionController::TestCase
     ENV['ODC_ADMIN_IDS'] = ""
   end
 
+  test "all_certificates return a CSV file with correct stuff" do
+    Certificate.delete_all
+
+    user = FactoryGirl.create :user
+    ENV['ODC_ADMIN_IDS'] = "#{user.id}"
+
+    sign_in user
+
+    5.times do
+      FactoryGirl.create(:response_set_with_dataset)
+    end
+
+    get :all_certificates
+
+    csv = CSV.parse(response.body)
+
+    assert_response 200
+    assert_match /text\/csv; header=present/, response.headers["Content-Type"]
+    assert_equal 6, csv.count
+    assert_true Csvlint::Validator.new( StringIO.new(response.body) ).valid?
+
+    ENV['ODC_ADMIN_IDS'] = ""
+  end
+
   test "published_certificates redirects to homepage for non-logged in user" do
     get :published_certificates
     assert_response 302
