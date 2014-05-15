@@ -80,4 +80,42 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal "exemplar", certificates.first[:level]
     assert_equal :self, certificates.first[:verification_type]
   end
+
+  test 'progress_by_level' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+
+    certificate.stubs(:progress).returns({
+        mandatory: 3,
+        mandatory_completed: 11,
+        outstanding: [
+          "basic_1",
+          "basic_2",
+          "pilot_6",
+          "pilot_7",
+          "pilot_8",
+          "standard_11",
+          "standard_12",
+          "standard_13",
+          "exemplar_16",
+          "exemplar_18",
+          "exemplar_19"
+        ],
+        entered: [
+          "basic_3",
+          "basic_4",
+          "basic_5",
+          "pilot_9",
+          "pilot_10",
+          "standard_14",
+          "standard_15"
+        ]
+      })
+
+    progress = certificate.progress_by_level
+
+    assert_equal progress[:basic], 73.7
+    assert_equal progress[:pilot], 66.7
+    assert_equal progress[:standard], 62.1
+    assert_equal progress[:exemplar], 56.3
+  end
 end

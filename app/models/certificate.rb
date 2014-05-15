@@ -194,4 +194,25 @@ class Certificate < ActiveRecord::Base
       mandatory_completed: mandatory_completed
     }
   end
+
+  def progress_by_level
+    result = {}
+    progress ||= self.progress
+    pending = progress[:mandatory]
+    complete = progress[:mandatory_completed]
+
+    [
+     'basic',
+     'pilot',
+     'standard',
+     'exemplar'
+    ].each do |level|
+      pending += progress[:outstanding].select { |p| p =~ /#{level}_/ }.count
+      complete += progress[:entered].select { |p| p =~ /#{level}_/ }.count
+
+      result[level.to_sym] = ((complete.to_f / (pending.to_f + complete.to_f)) * 100).round(1)
+    end
+    result
+  end
+
 end
