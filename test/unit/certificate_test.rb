@@ -118,4 +118,29 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal progress[:standard], 62.1
     assert_equal progress[:exemplar], 56.3
   end
+
+  test 'all_certificates' do
+    @certificate1.update_attributes(published: false)
+
+    Certificate.any_instance.stubs(:progress_by_level).returns({
+        basic: 73.7,
+        pilot: 66.1,
+        standard: 62.1,
+        exemplar: 56.3
+    })
+
+    all_certificates = Certificate.all_certificates
+
+    assert_equal 3, all_certificates.count
+    assert_equal "Banana certificate", all_certificates.first[:name]
+    assert_equal "John Smith", all_certificates.first[:publisher]
+    assert_match /test[0-9]+@example\.com/, all_certificates.first[:user]
+    assert_equal "Simple survey", all_certificates.first[:country]
+    assert_equal "draft", all_certificates.first[:status]
+    assert_equal "exemplar", all_certificates.first[:level]
+    assert_equal 73.7, all_certificates.first[:raw_progress]
+    assert_equal 66.1, all_certificates.first[:pilot_progress]
+    assert_equal 62.1, all_certificates.first[:standard_progress]
+    assert_equal 56.3, all_certificates.first[:expert_progress]
+  end
 end

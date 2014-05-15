@@ -93,6 +93,27 @@ class Certificate < ActiveRecord::Base
       end
     end
 
+    def all_certificates
+      self.all.map do |certificate|
+        progress = certificate.progress_by_level
+
+        {
+          name: certificate.name, 
+          publisher: certificate.curator,
+          created: certificate.created_at,
+          last_edited: certificate.updated_at,
+          user: certificate.user.nil? ? "N/A" : certificate.user.email,
+          country: certificate.survey.title,
+          status: certificate.published? ? "published" : "draft",
+          level: certificate.attained_level,
+          raw_progress: progress[:basic],
+          pilot_progress: progress[:pilot],
+          standard_progress: progress[:standard],
+          expert_progress: progress[:exemplar]
+        }
+      end
+    end
+
     def set_expired(surveys)
       self.joins(:response_set)
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
