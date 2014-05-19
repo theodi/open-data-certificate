@@ -80,4 +80,67 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal "exemplar", certificates.first[:level]
     assert_equal :self, certificates.first[:verification_type]
   end
+
+  test 'progress_by_level' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+
+    certificate.stubs(:progress).returns({
+        mandatory: 3,
+        mandatory_completed: 11,
+        outstanding: [
+          "basic_1",
+          "basic_2",
+          "pilot_6",
+          "pilot_7",
+          "pilot_8",
+          "standard_11",
+          "standard_12",
+          "standard_13",
+          "exemplar_16",
+          "exemplar_18",
+          "exemplar_19"
+        ],
+        entered: [
+          "basic_3",
+          "basic_4",
+          "basic_5",
+          "pilot_9",
+          "pilot_10",
+          "standard_14",
+          "standard_15"
+        ]
+      })
+
+    progress = certificate.progress_by_level
+
+    assert_equal progress[:basic], 73.7
+    assert_equal progress[:pilot], 66.7
+    assert_equal progress[:standard], 62.1
+    assert_equal progress[:exemplar], 56.3
+  end
+
+  test 'all_certificates' do
+    @certificate1.update_attributes(published: false)
+
+    Certificate.any_instance.stubs(:progress_by_level).returns({
+        basic: 73.7,
+        pilot: 66.1,
+        standard: 62.1,
+        exemplar: 56.3
+    })
+
+    all_certificates = Certificate.all_certificates
+
+    assert_equal 3, all_certificates.count
+    assert_equal "Banana certificate", all_certificates.first[:name]
+    assert_equal "John Smith", all_certificates.first[:publisher]
+    assert_match /test[0-9]+@example\.com/, all_certificates.first[:user]
+    assert_equal "Simple survey", all_certificates.first[:country]
+    assert_equal "draft", all_certificates.first[:status]
+    assert_equal "exemplar", all_certificates.first[:level]
+    assert_equal 73.7, all_certificates.first[:raw_progress]
+    assert_equal 66.1, all_certificates.first[:pilot_progress]
+    assert_equal 62.1, all_certificates.first[:standard_progress]
+    assert_equal 56.3, all_certificates.first[:expert_progress]
+  end
 end

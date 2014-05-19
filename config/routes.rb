@@ -100,6 +100,7 @@ OpenDataCertificate::Application.routes.draw do
 
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'
+  get 'status/all_certificates.csv' => 'main#all_certificates'
 
   root :to => 'main#home'
 
