@@ -314,7 +314,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - GoogleLogin auth=DQAAAPQAAABvtbbxctJOeKL_nzsE-EVrANal0XEE_Tv-Lbs2Rum2MOGpDUYKdPmxHYXO7lYw4VmiiASMoN3-gGE_HB21u4lPnY6MKgajkANbxDm093EwWV0nBhGILCLKfSaIEdsm9U1Lp6DFGmu8xhaCHC0d-xkwYaVZBtY4kfhKe8-ITEFnpf3N6QmwWAVdxITIcGxOp0fChpmxmfBBNTWl1syFQcTymFA-th2zp1C3bOYyYkLOk_ugGYT2_NvHGE9qeFqH4HaCEIiMI9Btmibgb9BVOQd8M9OLQzedEO2HFGmK2p7nx7jdEcxYH1zAouf0l-5vQYmWN0O_hq3M6PEtLf18KiBC
+      - GoogleLogin auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTXTE6oB5iDDuPKREu5CL7NHAr6k7g5icTp9mFNFlrYOfV8YTVMOP69nxlOeiaBtla6HX_OEHsYffR8i6MPJvKLU6cUQ6Ud8QvnaxPFRnAXGhAo_8asqZYQFViX2HqI3mKfmNDxuR4lwEY_Mzkdkr6_18AQNNTN4zhvUqQetosowIb-jAEv9DiZZRs5U7ldmseiRQsPMJqagkntzNxEuA62OlqKzVdO4AyEtUODKnOFhbjYuNBPIOq-uL1Xy-v6CimCVmBWKc4OhkH2BQFjgmh0
       Gdata-Version:
       - '3.0'
       Content-Type:
@@ -333,9 +333,9 @@ http_interactions:
       Content-Type:
       - application/atom+xml; charset=UTF-8; type=feed
       Expires:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:28 GMT
       Date:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:28 GMT
       Cache-Control:
       - private, max-age=0, must-revalidate
       Vary:
@@ -343,9 +343,9 @@ http_interactions:
       Gdata-Version:
       - '3.0'
       Etag:
-      - W/"C08AQ34_fyt7ImA9XRZTFk0."
+      - W/"D0YERnc4fCt7ImA9XRZTFk0."
       Last-Modified:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:27 GMT
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -363,7 +363,7 @@ http_interactions:
       string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
         xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
         xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
-        gd:etag='W/&quot;C08AQ34_fyt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents</id><updated>2014-05-20T16:04:02.047Z</updated><category
+        gd:etag='W/&quot;D0YERnc4fCt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents</id><updated>2014-05-20T16:58:27.934Z</updated><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
         label='item'/><title>Documents in "My Drive"</title><link rel='alternate'
         type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0AHnZlEPTl6bPUk9PVA&amp;usp=drive_web'/><link
@@ -375,8 +375,8 @@ http_interactions:
         rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents'/><link
         rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/batch'/><link
         rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/-/folder?title=ODI+Drive&amp;title-exact=true'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
-        gd:etag='&quot;H0ABTBpAByt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM</id><published>2012-11-22T16:23:15.438Z</published><updated>2014-05-12T21:26:48.659Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:51:52.261Z</app:edited><category
+        gd:etag='&quot;H0AEE0QDAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM</id><published>2012-11-22T16:23:15.438Z</published><updated>2014-05-12T21:26:48.659Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:57:40.529Z</app:edited><category
         scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#viewed'
         label='viewed'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
@@ -394,7 +394,7 @@ http_interactions:
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/acl'/></entry></feed>
     http_version: 
-  recorded_at: Tue, 20 May 2014 16:04:08 GMT
+  recorded_at: Tue, 20 May 2014 16:58:28 GMT
 - request:
     method: get
     uri: https://docs.google.com/feeds/default/private/full/folder:0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/-/folder
@@ -403,7 +403,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - GoogleLogin auth=DQAAAPQAAABvtbbxctJOeKL_nzsE-EVrANal0XEE_Tv-Lbs2Rum2MOGpDUYKdPmxHYXO7lYw4VmiiASMoN3-gGE_HB21u4lPnY6MKgajkANbxDm093EwWV0nBhGILCLKfSaIEdsm9U1Lp6DFGmu8xhaCHC0d-xkwYaVZBtY4kfhKe8-ITEFnpf3N6QmwWAVdxITIcGxOp0fChpmxmfBBNTWl1syFQcTymFA-th2zp1C3bOYyYkLOk_ugGYT2_NvHGE9qeFqH4HaCEIiMI9Btmibgb9BVOQd8M9OLQzedEO2HFGmK2p7nx7jdEcxYH1zAouf0l-5vQYmWN0O_hq3M6PEtLf18KiBC
+      - GoogleLogin auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTXTE6oB5iDDuPKREu5CL7NHAr6k7g5icTp9mFNFlrYOfV8YTVMOP69nxlOeiaBtla6HX_OEHsYffR8i6MPJvKLU6cUQ6Ud8QvnaxPFRnAXGhAo_8asqZYQFViX2HqI3mKfmNDxuR4lwEY_Mzkdkr6_18AQNNTN4zhvUqQetosowIb-jAEv9DiZZRs5U7ldmseiRQsPMJqagkntzNxEuA62OlqKzVdO4AyEtUODKnOFhbjYuNBPIOq-uL1Xy-v6CimCVmBWKc4OhkH2BQFjgmh0
       Gdata-Version:
       - '3.0'
       Content-Type:
@@ -422,9 +422,9 @@ http_interactions:
       Content-Type:
       - application/atom+xml; charset=UTF-8; type=feed
       Expires:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:28 GMT
       Date:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:28 GMT
       Cache-Control:
       - private, max-age=0, must-revalidate
       Vary:
@@ -432,9 +432,9 @@ http_interactions:
       Gdata-Version:
       - '3.0'
       Etag:
-      - W/"C08AQ3o4eyt7ImA9XRZTFk0."
+      - W/"D0YESXo8fyt7ImA9XRZTFk0."
       Last-Modified:
-      - Tue, 20 May 2014 16:04:02 GMT
+      - Tue, 20 May 2014 16:58:28 GMT
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -452,7 +452,7 @@ http_interactions:
       string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
         xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
         xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
-        gd:etag='W/&quot;C08AQ3o4eyt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents</id><updated>2014-05-20T16:04:02.433Z</updated><category
+        gd:etag='W/&quot;D0YESXo8fyt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents</id><updated>2014-05-20T16:58:28.477Z</updated><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
         label='item'/><title>Documents in "ODI Drive"</title><link rel='alternate'
         type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B1VBoooQ3X5jUXpsZjAwVzJwaHM&amp;usp=drive_web'/><link
@@ -464,8 +464,8 @@ http_interactions:
         rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
         rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/batch'/><link
         rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
-        gd:etag='&quot;H0ABTAUPAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCX2g5ZzVyRUNmQnc</id><published>2014-05-20T14:52:05.951Z</published><updated>2014-05-20T14:52:05.951Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:52:13.217Z</app:edited><category
+        gd:etag='&quot;H0AFUkxSEyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCX2g5ZzVyRUNmQnc</id><published>2014-05-20T14:52:05.951Z</published><updated>2014-05-20T14:52:05.951Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:48:10.561Z</app:edited><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
         term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Learning
@@ -521,8 +521,8 @@ http_interactions:
         value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>andrea.cox</name><email>andrea.cox@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc/acl'/></entry><entry
-        gd:etag='&quot;H0ABSQlXTyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems</id><published>2013-01-23T18:28:34.112Z</published><updated>2014-05-15T12:14:21.433Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:49:48.656Z</app:edited><category
+        gd:etag='&quot;H0AEE0RKBit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems</id><published>2013-01-23T18:28:34.112Z</published><updated>2014-05-15T12:14:21.433Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:57:41.102Z</app:edited><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
         term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Technical</title><content
@@ -676,8 +676,8 @@ http_interactions:
         value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M/acl'/></entry><entry
-        gd:etag='&quot;H0BaTgldRCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U</id><published>2012-12-15T19:01:28.324Z</published><updated>2014-05-11T19:28:53.842Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:57:42.483Z</app:edited><category
+        gd:etag='&quot;H0AFEQteRyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U</id><published>2012-12-15T19:01:28.324Z</published><updated>2014-05-11T19:28:53.842Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:28:36.228Z</app:edited><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
         term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Commercial</title><content
@@ -811,7 +811,7 @@ http_interactions:
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ/acl'/></entry></feed>
     http_version: 
-  recorded_at: Tue, 20 May 2014 16:04:09 GMT
+  recorded_at: Tue, 20 May 2014 16:58:28 GMT
 - request:
     method: get
     uri: https://docs.google.com/feeds/default/private/full/folder:0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/-/folder
@@ -820,7 +820,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - GoogleLogin auth=DQAAAPQAAABvtbbxctJOeKL_nzsE-EVrANal0XEE_Tv-Lbs2Rum2MOGpDUYKdPmxHYXO7lYw4VmiiASMoN3-gGE_HB21u4lPnY6MKgajkANbxDm093EwWV0nBhGILCLKfSaIEdsm9U1Lp6DFGmu8xhaCHC0d-xkwYaVZBtY4kfhKe8-ITEFnpf3N6QmwWAVdxITIcGxOp0fChpmxmfBBNTWl1syFQcTymFA-th2zp1C3bOYyYkLOk_ugGYT2_NvHGE9qeFqH4HaCEIiMI9Btmibgb9BVOQd8M9OLQzedEO2HFGmK2p7nx7jdEcxYH1zAouf0l-5vQYmWN0O_hq3M6PEtLf18KiBC
+      - GoogleLogin auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTXTE6oB5iDDuPKREu5CL7NHAr6k7g5icTp9mFNFlrYOfV8YTVMOP69nxlOeiaBtla6HX_OEHsYffR8i6MPJvKLU6cUQ6Ud8QvnaxPFRnAXGhAo_8asqZYQFViX2HqI3mKfmNDxuR4lwEY_Mzkdkr6_18AQNNTN4zhvUqQetosowIb-jAEv9DiZZRs5U7ldmseiRQsPMJqagkntzNxEuA62OlqKzVdO4AyEtUODKnOFhbjYuNBPIOq-uL1Xy-v6CimCVmBWKc4OhkH2BQFjgmh0
       Gdata-Version:
       - '3.0'
       Content-Type:
@@ -839,9 +839,9 @@ http_interactions:
       Content-Type:
       - application/atom+xml; charset=UTF-8; type=feed
       Expires:
-      - Tue, 20 May 2014 16:04:04 GMT
+      - Tue, 20 May 2014 16:58:29 GMT
       Date:
-      - Tue, 20 May 2014 16:04:04 GMT
+      - Tue, 20 May 2014 16:58:29 GMT
       Cache-Control:
       - private, max-age=0, must-revalidate
       Vary:
@@ -849,9 +849,9 @@ http_interactions:
       Gdata-Version:
       - '3.0'
       Etag:
-      - W/"C08AQnw-fyt7ImA9XRZTFk0."
+      - W/"D0YESH89eit7ImA9XRZTFk0."
       Last-Modified:
-      - Tue, 20 May 2014 16:04:03 GMT
+      - Tue, 20 May 2014 16:58:29 GMT
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -869,7 +869,7 @@ http_interactions:
       string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
         xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
         xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
-        gd:etag='W/&quot;C08AQnw-fyt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents</id><updated>2014-05-20T16:04:03.257Z</updated><category
+        gd:etag='W/&quot;D0YESH89eit7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents</id><updated>2014-05-20T16:58:29.162Z</updated><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
         label='item'/><title>Documents in "Technical"</title><link rel='alternate'
         type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGU3hQS3hTZkIxems&amp;usp=drive_web'/><link
@@ -881,8 +881,8 @@ http_interactions:
         rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
         rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/batch'/><link
         rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
-        gd:etag='&quot;H0ACRhxUDit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c</id><published>2014-05-20T13:57:05.845Z</published><updated>2014-05-20T13:57:05.845Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:19:04.510Z</app:edited><category
+        gd:etag='&quot;H0AEExwMFSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c</id><published>2014-05-20T13:57:05.845Z</published><updated>2014-05-20T13:57:05.845Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:57:41.699Z</app:edited><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
         term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Test
@@ -1224,7 +1224,7 @@ http_interactions:
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU/acl'/></entry></feed>
     http_version: 
-  recorded_at: Tue, 20 May 2014 16:04:10 GMT
+  recorded_at: Tue, 20 May 2014 16:58:29 GMT
 - request:
     method: get
     uri: https://docs.google.com/feeds/default/private/full/folder:0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/-/folder
@@ -1233,7 +1233,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - GoogleLogin auth=DQAAAPQAAABvtbbxctJOeKL_nzsE-EVrANal0XEE_Tv-Lbs2Rum2MOGpDUYKdPmxHYXO7lYw4VmiiASMoN3-gGE_HB21u4lPnY6MKgajkANbxDm093EwWV0nBhGILCLKfSaIEdsm9U1Lp6DFGmu8xhaCHC0d-xkwYaVZBtY4kfhKe8-ITEFnpf3N6QmwWAVdxITIcGxOp0fChpmxmfBBNTWl1syFQcTymFA-th2zp1C3bOYyYkLOk_ugGYT2_NvHGE9qeFqH4HaCEIiMI9Btmibgb9BVOQd8M9OLQzedEO2HFGmK2p7nx7jdEcxYH1zAouf0l-5vQYmWN0O_hq3M6PEtLf18KiBC
+      - GoogleLogin auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTXTE6oB5iDDuPKREu5CL7NHAr6k7g5icTp9mFNFlrYOfV8YTVMOP69nxlOeiaBtla6HX_OEHsYffR8i6MPJvKLU6cUQ6Ud8QvnaxPFRnAXGhAo_8asqZYQFViX2HqI3mKfmNDxuR4lwEY_Mzkdkr6_18AQNNTN4zhvUqQetosowIb-jAEv9DiZZRs5U7ldmseiRQsPMJqagkntzNxEuA62OlqKzVdO4AyEtUODKnOFhbjYuNBPIOq-uL1Xy-v6CimCVmBWKc4OhkH2BQFjgmh0
       Gdata-Version:
       - '3.0'
       Content-Type:
@@ -1252,9 +1252,9 @@ http_interactions:
       Content-Type:
       - application/atom+xml; charset=UTF-8; type=feed
       Expires:
-      - Tue, 20 May 2014 16:04:05 GMT
+      - Tue, 20 May 2014 16:58:30 GMT
       Date:
-      - Tue, 20 May 2014 16:04:05 GMT
+      - Tue, 20 May 2014 16:58:30 GMT
       Cache-Control:
       - private, max-age=0, must-revalidate
       Vary:
@@ -1262,9 +1262,9 @@ http_interactions:
       Gdata-Version:
       - '3.0'
       Etag:
-      - W/"C08ARXc5eSt7ImA9XRZTFk0."
+      - W/"D0YESHY-fyt7ImA9XRZTFk0."
       Last-Modified:
-      - Tue, 20 May 2014 16:04:04 GMT
+      - Tue, 20 May 2014 16:58:29 GMT
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -1282,7 +1282,7 @@ http_interactions:
       string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
         xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
         xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
-        gd:etag='W/&quot;C08ARXc5eSt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents</id><updated>2014-05-20T16:04:04.921Z</updated><category
+        gd:etag='W/&quot;D0YESHY-fyt7ImA9XRZTFk0.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents</id><updated>2014-05-20T16:58:29.857Z</updated><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
         label='item'/><title>Documents in "Test Data"</title><link rel='alternate'
         type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4n_avj5tPqbUGNiaEk5V2dVa2c&amp;usp=drive_web'/><link
@@ -1294,8 +1294,8 @@ http_interactions:
         rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
         rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/batch'/><link
         rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
-        gd:etag='&quot;H0ABRRVeGyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8</id><published>2014-05-20T13:57:20.978Z</published><updated>2014-05-20T14:09:35.433Z</updated><app:edited
-        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:46:26.169Z</app:edited><category
+        gd:etag='&quot;H0AEE0VDBCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8</id><published>2014-05-20T13:57:20.978Z</published><updated>2014-05-20T16:55:30.368Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T16:57:40.132Z</app:edited><category
         scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
         label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
         term='http://schemas.google.com/g/2005/labels#modified-by-me' label='modified-by-me'/><category
@@ -1312,9 +1312,9 @@ http_interactions:
         href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/contents'/><link
         rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8'/><link
         rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8'/><author><name>stuart.harrison</name><email>stuart.harrison@theodi.org</email></author><gd:resourceId>folder:0B4n_avj5tPqbdGNScmxsWFVpeW8</gd:resourceId><docs:isShareable
-        value='true'/><docs:isShareableByMe value='true'/><docs:modifiedByMeDate>2014-05-20T14:09:35.433Z</docs:modifiedByMeDate><gd:lastModifiedBy><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><docs:isShareableByMe value='true'/><docs:modifiedByMeDate>2014-05-20T16:55:30.368Z</docs:modifiedByMeDate><gd:lastModifiedBy><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
         value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
         href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/acl'/></entry></feed>
     http_version: 
-  recorded_at: Tue, 20 May 2014 16:04:11 GMT
+  recorded_at: Tue, 20 May 2014 16:58:30 GMT
 recorded_with: VCR 2.9.0
