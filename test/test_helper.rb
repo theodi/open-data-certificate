@@ -17,7 +17,7 @@ VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/cassettes'
   c.default_cassette_options = { :record => :once }
   c.hook_into :webmock
-  c.ignore_hosts 'licenses.opendefinition.org'
+  c.ignore_hosts 'licenses.opendefinition.org', 'www.example.com'
 end
 
 class ActiveSupport::TestCase
