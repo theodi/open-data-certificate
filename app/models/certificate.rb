@@ -94,23 +94,27 @@ class Certificate < ActiveRecord::Base
     end
 
     def all_certificates
-      self.all.map do |certificate|
-        progress = certificate.progress_by_level
+      Certificate.all.map do |certificate|
+        begin
+          progress = certificate.progress_by_level
 
-        {
-          name: certificate.name, 
-          publisher: certificate.curator,
-          created: certificate.created_at,
-          last_edited: certificate.updated_at,
-          user: certificate.user.nil? ? "N/A" : certificate.user.email,
-          country: certificate.survey.title,
-          status: certificate.published? ? "published" : "draft",
-          level: certificate.attained_level,
-          raw_progress: progress[:basic],
-          pilot_progress: progress[:pilot],
-          standard_progress: progress[:standard],
-          expert_progress: progress[:exemplar]
-        }
+          {
+            name: certificate.name,
+            publisher: certificate.curator,
+            created: certificate.created_at,
+            last_edited: certificate.updated_at,
+            user: certificate.user.nil? ? "N/A" : certificate.user.email,
+            country: certificate.survey.title,
+            status: certificate.published? ? "published" : "draft",
+            level: certificate.attained_level,
+            raw_progress: progress[:basic],
+            pilot_progress: progress[:pilot],
+            standard_progress: progress[:standard],
+            expert_progress: progress[:exemplar]
+          }
+        rescue
+          nil
+        end
       end
     end
 
@@ -234,6 +238,23 @@ class Certificate < ActiveRecord::Base
       result[level.to_sym] = ((complete.to_f / (pending.to_f + complete.to_f)) * 100).round(1)
     end
     result
+  end
+
+  def progress_by_section
+    results = {
+      outstanding: {},
+      entered: {}
+    }
+    progress ||= self.progress
+
+    results.map do |k,v|
+      progress[k].each do |p|
+        q = Question.where(reference_identifier: p).first
+        v[q.survey_section_id] ||= []
+        v[q.survey_section_id] << p
+      end
+    end
+
   end
 
 end
