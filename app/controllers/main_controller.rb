@@ -1,5 +1,4 @@
 class MainController < ApplicationController
-  before_filter :check_admin, only: [:published_certificates, :all_certificates]
 
   def home
     @surveys = Survey.available_to_complete
@@ -43,14 +42,6 @@ class MainController < ApplicationController
   def status_csv
     csv = Rackspace.fetch_cache("statistics.csv")
     render text: csv, content_type: "text/csv"
-  end
-
-  def published_certificates
-    render_csv(Certificate.published_certificates)
-  end
-
-  def all_certificates
-    render_csv(Certificate.all_certificates)
   end
 
   def status_response_sets
@@ -126,21 +117,4 @@ class MainController < ApplicationController
     end
   end
 
-  private
-
-    def render_csv(certificates)
-      csv = CSV.generate(force_quotes: true, row_sep: "\r\n") do |csv|
-        # Header row goes here
-        headers = certificates.first.keys
-        csv << headers
-
-        certificates.each {|c| csv << headers.map { |h| c[h] } }
-      end
-
-      render text: csv, content_type: "text/csv; header=present"
-    end
-
-    def check_admin
-      redirect_to "/" unless current_user.try(:admin?)
-    end
 end
