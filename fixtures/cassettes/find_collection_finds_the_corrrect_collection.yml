@@ -1,0 +1,1199 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents/-/folder
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPMAAADKFL4j7xUMorej10XhVKHi4NOaIg7G71_ULhSBYCMbASnrjxhEVtnCS3n6sfxzc2ihdaiN0FC0xzm1oHll_0nbyEJ-SXvnxY3PGRG43FS_8uOYuHM_LHTgI1sMzmGtxdt43DSP9m_UDENrz5ssV3pgIWzZpjw4lO4GcAyx8Fm_BBMb6LUuK3C3UszIV5jJJWIFq_iIsKuj-XNGX3uBkjLZ5vurd2BSLhV3WKISog-tP9wvL87aPy-JYny1aLOR-euD6YHyt7euxKemeX5vYlJTE_-CM14gIUJpoSg6yp3R0WCE0RJqSs9oioYLV32lbm6TZGImgHBONC11GPS4_-uD
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 13:42:46 GMT
+      Date:
+      - Tue, 20 May 2014 13:42:46 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"CUQCRHw8eCt7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 13:42:45 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;CUQCRHw8eCt7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents</id><updated>2014-05-20T13:42:45.270Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "Products"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCaG84SEQ3UEg3bkk&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BbVkldDSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU</id><published>2014-05-15T12:07:35.474Z</published><updated>2014-05-16T14:24:12.982Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:35:23.747Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#viewed'
+        label='viewed'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Open
+        Data Certificate</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk'
+        title='Products'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCUWhBVUV0OFZoOEU&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU'/><author><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></author><gd:resourceId>folder:0B4LsiZCae2gCUWhBVUV0OFZoOEU</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:lastViewed>2014-05-20T10:38:56.234Z</gd:lastViewed><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 13:42:50 GMT
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/-/folder
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPMAAADKFL4j7xUMorej10XhVKHi4NOaIg7G71_ULhSBYCMbASnrjxhEVtnCS3n6sfxzc2ihdaiN0FC0xzm1oHll_0nbyEJ-SXvnxY3PGRG43FS_8uOYuHM_LHTgI1sMzmGtxdt43DSP9m_UDENrz5ssV3pgIWzZpjw4lO4GcAyx8Fm_BBMb6LUuK3C3UszIV5jJJWIFq_iIsKuj-XNGX3uBkjLZ5vurd2BSLhV3WKISog-tP9wvL87aPy-JYny1aLOR-euD6YHyt7euxKemeX5vYlJTE_-CM14gIUJpoSg6yp3R0WCE0RJqSs9oioYLV32lbm6TZGImgHBONC11GPS4_-uD
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 13:42:46 GMT
+      Date:
+      - Tue, 20 May 2014 13:42:46 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"CUQCR3k7fCt7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 13:42:46 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;CUQCR3k7fCt7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents</id><updated>2014-05-20T13:42:46.704Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "Open Data Certificate"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCUWhBVUV0OFZoOEU&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BaEUpVFSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE</id><published>2014-05-16T15:31:26.835Z</published><updated>2014-05-20T13:40:07.833Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:40:07.835Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#viewed'
+        label='viewed'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#modified-by-me' label='modified-by-me'/><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#shared'
+        label='shared'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared-with-me' label='shared-with-me'/><title>Usage
+        Data</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU'
+        title='Open Data Certificate'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCNEN1dUhMVklTcFE&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE'/><author><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></author><gd:resourceId>folder:0B4LsiZCae2gCNEN1dUhMVklTcFE</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><docs:modifiedByMeDate>2014-05-20T13:40:07.833Z</docs:modifiedByMeDate><docs:sharedWithMeDate>2014-05-20T10:41:10.370Z</docs:sharedWithMeDate><gd:lastModifiedBy><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></gd:lastModifiedBy><gd:lastViewed>2014-05-20T10:38:55.555Z</gd:lastViewed><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCNEN1dUhMVklTcFE/acl'/></entry><entry
+        gd:etag='&quot;H0BRGR5RAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0</id><published>2014-05-15T12:08:15.411Z</published><updated>2014-05-15T12:14:58.268Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:30.125Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Archive</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU'
+        title='Open Data Certificate'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCQUJvTlc0Um9zSU0&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCUWhBVUV0OFZoOEU/contents/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0'/><author><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></author><gd:resourceId>folder:0B4LsiZCae2gCQUJvTlc0Um9zSU0</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCQUJvTlc0Um9zSU0/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 13:42:51 GMT
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:root/contents/-/folder?title=ODI%20Drive&title-exact=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPUAAAADMTneCWLKlsjNmU2_RbZ1PebjfJ-EsIs5gK9Moxf4re4JetUm-Pe2YvXQZluLj6f7yp7LUlWThWDSu6INqkOCIsdDkHQJCXZu7W1ldnA4jzG2swmEbo_sYU6Pvl_J1qD_t5ilUlrOcrcgHglHnWqK00ZFgIdm-37BC05dr6aPxQ5klwC99VNI5KHk_VBuIqddCrldlek5kaL7fcbHmvqmO3nUuXALLiFQHdJFvJxUJXXUfROwkLpofF9ORCJzmYhq6nhgPelwiHjecbHHLHxQCF7JWDrDopqKxn6LlwbEfEKKW9rkLYJjLK9sxAJKpnx2TmKGuKJp_Ue9B2zQH_kM
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 14:07:06 GMT
+      Date:
+      - Tue, 20 May 2014 14:07:06 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"Dk8GR3w7eit7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 14:07:06 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;Dk8GR3w7eit7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents</id><updated>2014-05-20T14:07:06.202Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "My Drive"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0AHnZlEPTl6bPUk9PVA&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3Aroot/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3Aroot/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/-/folder?title=ODI+Drive&amp;title-exact=true'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BaUBlXHSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM</id><published>2012-11-22T16:23:15.438Z</published><updated>2014-05-12T21:26:48.659Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:58:55.291Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#viewed'
+        label='viewed'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>ODI
+        Drive</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B1VBoooQ3X5jUXpsZjAwVzJwaHM&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3Aroot/contents/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B1VBoooQ3X5jUXpsZjAwVzJwaHM</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jeni</name><email>jeni@theodi.org</email></gd:lastModifiedBy><gd:lastViewed>2014-05-20T10:38:55.623Z</gd:lastViewed><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 14:07:11 GMT
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/-/folder
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPUAAAADMTneCWLKlsjNmU2_RbZ1PebjfJ-EsIs5gK9Moxf4re4JetUm-Pe2YvXQZluLj6f7yp7LUlWThWDSu6INqkOCIsdDkHQJCXZu7W1ldnA4jzG2swmEbo_sYU6Pvl_J1qD_t5ilUlrOcrcgHglHnWqK00ZFgIdm-37BC05dr6aPxQ5klwC99VNI5KHk_VBuIqddCrldlek5kaL7fcbHmvqmO3nUuXALLiFQHdJFvJxUJXXUfROwkLpofF9ORCJzmYhq6nhgPelwiHjecbHHLHxQCF7JWDrDopqKxn6LlwbEfEKKW9rkLYJjLK9sxAJKpnx2TmKGuKJp_Ue9B2zQH_kM
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 14:07:06 GMT
+      Date:
+      - Tue, 20 May 2014 14:07:06 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"Dk8GR3k5cSt7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 14:07:06 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;Dk8GR3k5cSt7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents</id><updated>2014-05-20T14:07:06.729Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "ODI Drive"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B1VBoooQ3X5jUXpsZjAwVzJwaHM&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BbVglcBCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM</id><published>2012-11-22T18:04:14.747Z</published><updated>2014-05-19T13:09:35.903Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:35:56.104Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Team</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAayNXZKaDNQUUZCMnM&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAayNXZKaDNQUUZCMnM</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>michelle.prescott</name><email>michelle.prescott@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayNXZKaDNQUUZCMnM/acl'/></entry><entry
+        gd:etag='&quot;H0BbVhtARyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc</id><published>2013-06-19T14:17:02.991Z</published><updated>2014-05-16T18:40:09.543Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:35:38.652Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>International</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0WecX9LW9oITUl4VzA0VXIzMnc&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc'/><author><name>jade.croucher</name><email>jade.croucher@theodi.org</email></author><gd:resourceId>folder:0B0WecX9LW9oITUl4VzA0VXIzMnc</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>andrea.cox</name><email>andrea.cox@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0WecX9LW9oITUl4VzA0VXIzMnc/acl'/></entry><entry
+        gd:etag='&quot;H0BaUBgKQCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems</id><published>2013-01-23T18:28:34.112Z</published><updated>2014-05-15T12:14:21.433Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:58:55.783Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Technical</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGU3hQS3hTZkIxems&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'/><author><name>jeni</name><email>jeni@theodi.org</email></author><gd:resourceId>folder:0Bxhx_VUnRJFGU3hQS3hTZkIxems</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/acl'/></entry><entry
+        gd:etag='&quot;H0BbVkkNBCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk</id><published>2014-05-15T12:06:16.354Z</published><updated>2014-05-15T12:06:16.354Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:35:23.416Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#viewed'
+        label='viewed'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Products</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4LsiZCae2gCaG84SEQ3UEg3bkk&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk'/><author><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></author><gd:resourceId>folder:0B4LsiZCae2gCaG84SEQ3UEg3bkk</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:lastViewed>2014-05-20T10:38:55.946Z</gd:lastViewed><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4LsiZCae2gCaG84SEQ3UEg3bkk/acl'/></entry><entry
+        gd:etag='&quot;H0BWEwhIFCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00</id><published>2012-11-20T09:27:19.722Z</published><updated>2014-05-12T16:25:32.105Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T11:50:12.600Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Presentations</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM'
+        title='Comms &amp; Marketing'/><link rel='http://schemas.google.com/docs/2007#parent'
+        type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAayTWpjMHFjbnZtb00&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAayTWpjMHFjbnZtb00</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayTWpjMHFjbnZtb00/acl'/></entry><entry
+        gd:etag='&quot;H0BbVxhKRCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc</id><published>2012-10-26T14:03:15.936Z</published><updated>2014-05-12T16:25:20.465Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:23.655Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Planning</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAaycTlRWlVaQlV1NHc&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAaycTlRWlVaQlV1NHc</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAaycTlRWlVaQlV1NHc/acl'/></entry><entry
+        gd:etag='&quot;H0BbVxRcQCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c</id><published>2012-11-21T11:56:40.286Z</published><updated>2014-05-12T16:25:04.954Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:28.483Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Notes</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAayOFIzcW85WC1Id3c&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAayOFIzcW85WC1Id3c</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayOFIzcW85WC1Id3c/acl'/></entry><entry
+        gd:etag='&quot;H0BbVxdJGit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU</id><published>2014-04-01T11:26:39.148Z</published><updated>2014-05-11T19:30:59.528Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:30.262Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Non-commercial</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B9fr2tYJliWOdzNxZ29ONk5udEU&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU'/><author><name>richard.stirling</name><email>richard.stirling@theodi.org</email></author><gd:resourceId>folder:0B9fr2tYJliWOdzNxZ29ONk5udEU</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B9fr2tYJliWOdzNxZ29ONk5udEU/acl'/></entry><entry
+        gd:etag='&quot;H0BbVw9RHCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c</id><published>2014-03-14T14:13:15.052Z</published><updated>2014-05-11T19:30:42.215Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:40.340Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Business
+        Support</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0BwGIgzxGXdmpa3N5all2dl9oX2c&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c'/><author><name>amy.williams</name><email>amy.williams@theodi.org</email></author><gd:resourceId>folder:0BwGIgzxGXdmpa3N5all2dl9oX2c</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0BwGIgzxGXdmpa3N5all2dl9oX2c/acl'/></entry><entry
+        gd:etag='&quot;H0BbWE1UQCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M</id><published>2012-11-26T14:45:18.015Z</published><updated>2014-05-11T19:30:30.621Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:52.099Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Events</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B1ANC6s8ZQ97N19pNGY3Rk92Y2M&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M'/><author><name>jade.croucher</name><email>jade.croucher@theodi.org</email></author><gd:resourceId>folder:0B1ANC6s8ZQ97N19pNGY3Rk92Y2M</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1ANC6s8ZQ97N19pNGY3Rk92Y2M/acl'/></entry><entry
+        gd:etag='&quot;H0BaTgldRCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U</id><published>2012-12-15T19:01:28.324Z</published><updated>2014-05-11T19:28:53.842Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:57:42.483Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Commercial</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B1za984SVbNNSWRQLUt0SmFhQ1U&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U'/><author><name>stuart</name><email>stuart@theodi.org</email></author><gd:resourceId>folder:0B1za984SVbNNSWRQLUt0SmFhQ1U</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1za984SVbNNSWRQLUt0SmFhQ1U/acl'/></entry><entry
+        gd:etag='&quot;H0BVWg5WFCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc</id><published>2012-11-21T11:59:22.001Z</published><updated>2014-05-04T09:16:10.589Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T12:43:02.400Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Projects</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAayUWUxSDI0d1VhZXc&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAayUWUxSDI0d1VhZXc</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jeni</name><email>jeni@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayUWUxSDI0d1VhZXc/acl'/></entry><entry
+        gd:etag='&quot;H0BRGRxUFit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU</id><published>2014-04-29T11:28:35.281Z</published><updated>2014-04-29T11:30:05.396Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:27.622Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Proposal
+        and Contract Registry</title><content type='application/atom+xml;type=feed'
+        src='https://docs.google.com/feeds/default/private/full/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B3oNrt39HyseSzhEMnpLTS1DWkU&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU'/><author><name>louise.burke</name><email>louise.burke@theodi.org</email></author><gd:resourceId>folder:0B3oNrt39HyseSzhEMnpLTS1DWkU</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>georgia.phillips</name><email>georgia.phillips@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B3oNrt39HyseSzhEMnpLTS1DWkU/acl'/></entry><entry
+        gd:etag='&quot;H0BaEwpARyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U</id><published>2013-01-07T16:41:37.836Z</published><updated>2014-04-15T18:31:43.575Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:42:13.932Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Training</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B57wctCBAFyZU3FHMkI1SFBHM1U&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U'/><author><name>kathryn.corrick</name><email>kathryn.corrick@theodi.org</email></author><gd:resourceId>folder:0B57wctCBAFyZU3FHMkI1SFBHM1U</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>kathryn.corrick</name><email>kathryn.corrick@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B57wctCBAFyZU3FHMkI1SFBHM1U/acl'/></entry><entry
+        gd:etag='&quot;H0BWSAhbBSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8</id><published>2013-08-14T14:42:52.066Z</published><updated>2014-03-31T16:13:56.382Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T12:01:05.187Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Production
+        &amp; Design</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4rriq9nxtslbDFtcXRNc3AtNm8&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8'/><author><name>phil.lang</name><email>phil.lang@theodi.org</email></author><gd:resourceId>folder:0B4rriq9nxtslbDFtcXRNc3AtNm8</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>gavin</name><email>gavin@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4rriq9nxtslbDFtcXRNc3AtNm8/acl'/></entry><entry
+        gd:etag='&quot;H0BRGR5MDSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM</id><published>2012-10-03T09:28:27.248Z</published><updated>2013-11-20T12:06:18.625Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:30.527Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Comms
+        &amp; Marketing</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAayUjAwX1diekFlUHM&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAayUjAwX1diekFlUHM</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>richard.stirling</name><email>richard.stirling@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAayUjAwX1diekFlUHM/acl'/></entry><entry
+        gd:etag='&quot;H0BbWE5DRyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ</id><published>2012-10-03T09:22:23.670Z</published><updated>2013-07-30T09:18:36.967Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:36:56.376Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Guides
+        and office</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM'
+        title='ODI Drive'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B0-lNj2cKAaybEJudENiWW9VSTQ&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B1VBoooQ3X5jUXpsZjAwVzJwaHM/contents/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ'/><author><name>gavin</name><email>gavin@theodi.org</email></author><gd:resourceId>folder:0B0-lNj2cKAaybEJudENiWW9VSTQ</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jade.croucher</name><email>jade.croucher@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B0-lNj2cKAaybEJudENiWW9VSTQ/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 14:07:11 GMT
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/-/folder
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPUAAAADMTneCWLKlsjNmU2_RbZ1PebjfJ-EsIs5gK9Moxf4re4JetUm-Pe2YvXQZluLj6f7yp7LUlWThWDSu6INqkOCIsdDkHQJCXZu7W1ldnA4jzG2swmEbo_sYU6Pvl_J1qD_t5ilUlrOcrcgHglHnWqK00ZFgIdm-37BC05dr6aPxQ5klwC99VNI5KHk_VBuIqddCrldlek5kaL7fcbHmvqmO3nUuXALLiFQHdJFvJxUJXXUfROwkLpofF9ORCJzmYhq6nhgPelwiHjecbHHLHxQCF7JWDrDopqKxn6LlwbEfEKKW9rkLYJjLK9sxAJKpnx2TmKGuKJp_Ue9B2zQH_kM
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 14:07:07 GMT
+      Date:
+      - Tue, 20 May 2014 14:07:07 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"Dk8GRnwzfit7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 14:07:07 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;Dk8GRnwzfit7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents</id><updated>2014-05-20T14:07:07.286Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "Technical"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGU3hQS3hTZkIxems&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BaUBgDEyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c</id><published>2014-05-20T13:57:05.845Z</published><updated>2014-05-20T13:57:05.845Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T13:58:56.113Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Test
+        Data</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4n_avj5tPqbUGNiaEk5V2dVa2c&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c'/><author><name>stuart.harrison</name><email>stuart.harrison@theodi.org</email></author><gd:resourceId>folder:0B4n_avj5tPqbUGNiaEk5V2dVa2c</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>stuart.harrison</name><email>stuart.harrison@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdbGCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s</id><published>2013-02-05T17:27:58.508Z</published><updated>2014-05-19T15:59:31.041Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.568Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Passwords</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B7ESY46tesBidkxoSnpOUm94V2s&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s'/><author><name>tom.heath</name><email>tom.heath@theodi.org</email></author><gd:resourceId>folder:0B7ESY46tesBidkxoSnpOUm94V2s</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBidkxoSnpOUm94V2s/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdJAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg</id><published>2013-01-30T14:23:28.121Z</published><updated>2014-05-08T13:56:05.709Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:31:00.221Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Research</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B7ESY46tesBiV1l2clVIS0NMejg&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg'/><author><name>tom.heath</name><email>tom.heath@theodi.org</email></author><gd:resourceId>folder:0B7ESY46tesBiV1l2clVIS0NMejg</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>richard.stirling</name><email>richard.stirling@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiV1l2clVIS0NMejg/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQ9KHyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA</id><published>2013-02-04T14:13:02.309Z</published><updated>2014-05-06T14:33:18.478Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:49.733Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Sprints</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGSlVOaVhzSzBSeDA&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA'/><author><name>jeni</name><email>jeni@theodi.org</email></author><gd:resourceId>folder:0Bxhx_VUnRJFGSlVOaVhzSzBSeDA</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sumika.sakanishi</name><email>sumika.sakanishi@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGSlVOaVhzSzBSeDA/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQxDByt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0</id><published>2014-01-08T15:16:06.088Z</published><updated>2014-01-08T15:16:06.088Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:48.769Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Server
+        Costs</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B-kNKHlzaxtYb2pWVlJlcDVyNE0&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0'/><author><name>james.smith</name><email>james.smith@theodi.org</email></author><gd:resourceId>folder:0B-kNKHlzaxtYb2pWVlJlcDVyNE0</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>james.smith</name><email>james.smith@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYb2pWVlJlcDVyNE0/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQ1PEit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs</id><published>2013-11-18T11:35:34.279Z</published><updated>2013-12-09T19:59:27.437Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:47.318Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Dashboards</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs'/><author><name>jeni</name><email>jeni@theodi.org</email></author><gd:resourceId>folder:0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jeni</name><email>jeni@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGcjhYdUpOZ0ZqeWs/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdcGCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE</id><published>2013-03-19T11:01:45.918Z</published><updated>2013-10-21T17:15:06.294Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.748Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>UKAN
+        and privacy</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0BxeygzpA1RyrQ1MyT2dDNG1FNEE&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE'/><author><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></author><gd:resourceId>folder:0BxeygzpA1RyrQ1MyT2dDNG1FNEE</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrQ1MyT2dDNG1FNEE/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdbGCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k</id><published>2013-02-20T12:59:18.815Z</published><updated>2013-10-11T16:57:49.338Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.568Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Resources</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B7ESY46tesBiTi0zbURlYV9TT0k&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k'/><author><name>tom.heath</name><email>tom.heath@theodi.org</email></author><gd:resourceId>folder:0B7ESY46tesBiTi0zbURlYV9TT0k</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiTi0zbURlYV9TT0k/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdIRSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M</id><published>2013-02-07T08:29:07.855Z</published><updated>2013-10-11T16:57:49.338Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:31:00.158Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Talks</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B-kNKHlzaxtYNnlXYkFXOXFMa3M&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M'/><author><name>james.smith</name><email>james.smith@theodi.org</email></author><gd:resourceId>folder:0B-kNKHlzaxtYNnlXYkFXOXFMa3M</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYNnlXYkFXOXFMa3M/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQxMHCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg</id><published>2013-03-13T13:56:56.564Z</published><updated>2013-08-19T07:48:14.480Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:48.656Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Benefit
+        Case of OD</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0BxeygzpA1RyrNW1ndFdKdzF4TDg&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg'/><author><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></author><gd:resourceId>folder:0BxeygzpA1RyrNW1ndFdKdzF4TDg</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrNW1ndFdKdzF4TDg/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdcGCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc</id><published>2013-08-15T18:59:54.419Z</published><updated>2013-08-15T19:00:12.548Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.748Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Tech
+        review</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0BxeygzpA1RyrcUM1SC1PMkNEeGc&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc'/><author><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></author><gd:resourceId>folder:0BxeygzpA1RyrcUM1SC1PMkNEeGc</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0BxeygzpA1RyrcUM1SC1PMkNEeGc/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQhURyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM</id><published>2013-01-31T13:11:55.253Z</published><updated>2013-08-15T19:00:09.530Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:53.532Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Attic</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B-kNKHlzaxtYbmdwNW1rbHU3bnM&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM'/><author><name>james.smith</name><email>james.smith@theodi.org</email></author><gd:resourceId>folder:0B-kNKHlzaxtYbmdwNW1rbHU3bnM</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>ulrich.atz</name><email>ulrich.atz@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYbmdwNW1rbHU3bnM/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQ9OAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k</id><published>2013-05-28T10:31:44.123Z</published><updated>2013-07-15T15:12:44.119Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:49.889Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Online
+        Delivery Plan</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B-kNKHlzaxtYRWtoOXVBZERHa0k&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k'/><author><name>james.smith</name><email>james.smith@theodi.org</email></author><gd:resourceId>folder:0B-kNKHlzaxtYRWtoOXVBZERHa0k</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jeni</name><email>jeni@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B-kNKHlzaxtYRWtoOXVBZERHa0k/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdbGCt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU</id><published>2013-05-01T14:11:39.878Z</published><updated>2013-05-01T14:11:39.878Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.568Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Documentation</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B7ESY46tesBiOFY1YkNnYmo2dUU&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU'/><author><name>tom.heath</name><email>tom.heath@theodi.org</email></author><gd:resourceId>folder:0B7ESY46tesBiOFY1YkNnYmo2dUU</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>tom.heath</name><email>tom.heath@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiOFY1YkNnYmo2dUU/acl'/></entry><entry
+        gd:etag='&quot;H0BRGRdDByt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M</id><published>2013-03-22T21:27:47.934Z</published><updated>2013-04-09T09:42:38.314Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:39.697Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Community
+        Engagement</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0Bxhx_VUnRJFGVy04OExhRkkwM3M&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M'/><author><name>jeni</name><email>jeni@theodi.org</email></author><gd:resourceId>folder:0Bxhx_VUnRJFGVy04OExhRkkwM3M</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>jeni</name><email>jeni@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGVy04OExhRkkwM3M/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQdJAyt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA</id><published>2013-02-28T15:59:52.755Z</published><updated>2013-02-28T15:59:52.755Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:31:00.221Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Services</title><content
+        type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B7ESY46tesBiVTR1QUZqb0RsazA&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA'/><author><name>tom.heath</name><email>tom.heath@theodi.org</email></author><gd:resourceId>folder:0B7ESY46tesBiVTR1QUZqb0RsazA</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>tom.heath</name><email>tom.heath@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B7ESY46tesBiVTR1QUZqb0RsazA/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQcOBSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms</id><published>2012-09-20T10:14:43.469Z</published><updated>2013-01-31T13:12:15.407Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:59.355Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>ODI
+        Website</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B6kCaT7Q3IBbeTVZNUxsTjIyZms&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms'/><author><name>davetaz</name><email>davetaz@gmail.com</email></author><gd:resourceId>folder:0B6kCaT7Q3IBbeTVZNUxsTjIyZms</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>james.smith</name><email>james.smith@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B6kCaT7Q3IBbeTVZNUxsTjIyZms/acl'/></entry><entry
+        gd:etag='&quot;H0BRGQVcAit7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU</id><published>2013-01-24T10:34:24.701Z</published><updated>2013-01-24T10:34:24.701Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T10:30:57.162Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#shared' label='shared'/><title>Server
+        Documentation</title><content type='application/atom+xml;type=feed' src='https://docs.google.com/feeds/default/private/full/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems'
+        title='Technical'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B8EH-bzsP1r8R2toUVIzQVM2ZkU&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0Bxhx_VUnRJFGU3hQS3hTZkIxems/contents/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU'/><author><name>sam.pikesley</name><email>sam.pikesley@theodi.org</email></author><gd:resourceId>folder:0B8EH-bzsP1r8R2toUVIzQVM2ZkU</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><gd:lastModifiedBy><name>sam.pikesley</name><email>sam.pikesley@theodi.org</email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B8EH-bzsP1r8R2toUVIzQVM2ZkU/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 14:07:12 GMT
+- request:
+    method: get
+    uri: https://docs.google.com/feeds/default/private/full/folder:0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/-/folder
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - GoogleLogin auth=DQAAAPUAAAADMTneCWLKlsjNmU2_RbZ1PebjfJ-EsIs5gK9Moxf4re4JetUm-Pe2YvXQZluLj6f7yp7LUlWThWDSu6INqkOCIsdDkHQJCXZu7W1ldnA4jzG2swmEbo_sYU6Pvl_J1qD_t5ilUlrOcrcgHglHnWqK00ZFgIdm-37BC05dr6aPxQ5klwC99VNI5KHk_VBuIqddCrldlek5kaL7fcbHmvqmO3nUuXALLiFQHdJFvJxUJXXUfROwkLpofF9ORCJzmYhq6nhgPelwiHjecbHHLHxQCF7JWDrDopqKxn6LlwbEfEKKW9rkLYJjLK9sxAJKpnx2TmKGuKJp_Ue9B2zQH_kM
+      Gdata-Version:
+      - '3.0'
+      Content-Type:
+      - application/atom+xml;charset=utf-8
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Tue, 20 May 2014 14:07:08 GMT
+      Date:
+      - Tue, 20 May 2014 14:07:08 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Vary:
+      - Accept, X-GData-Authorization, GData-Version
+      Gdata-Version:
+      - '3.0'
+      Etag:
+      - W/"Dk8GRnYyfyt7ImA9XRZTFUQ."
+      Last-Modified:
+      - Tue, 20 May 2014 14:07:07 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:docs='http://schemas.google.com/docs/2007'
+        xmlns:batch='http://schemas.google.com/gdata/batch' xmlns:gd='http://schemas.google.com/g/2005'
+        gd:etag='W/&quot;Dk8GRnYyfyt7ImA9XRZTFUQ.&quot;'><id>https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents</id><updated>2014-05-20T14:07:07.897Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#item'
+        label='item'/><title>Documents in "Test Data"</title><link rel='alternate'
+        type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4n_avj5tPqbUGNiaEk5V2dVa2c&amp;usp=drive_web'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/batch'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/-/folder'/><author><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></author><openSearch:startIndex>1</openSearch:startIndex><entry
+        gd:etag='&quot;H0BaVQlQBSt7ImBk&quot;'><id>https://docs.google.com/feeds/id/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8</id><published>2014-05-20T13:57:20.978Z</published><updated>2014-05-20T14:03:09.204Z</updated><app:edited
+        xmlns:app='http://www.w3.org/2007/app'>2014-05-20T14:03:09.207Z</app:edited><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/docs/2007#folder'
+        label='folder'/><category scheme='http://schemas.google.com/g/2005/labels'
+        term='http://schemas.google.com/g/2005/labels#modified-by-me' label='modified-by-me'/><category
+        scheme='http://schemas.google.com/g/2005/labels' term='http://schemas.google.com/g/2005/labels#shared'
+        label='shared'/><title>Usage Data</title><content type='application/atom+xml;type=feed'
+        src='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/contents'/><link
+        rel='http://schemas.google.com/docs/2007#parent' type='application/atom+xml'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c'
+        title='Test Data'/><link rel='alternate' type='text/html' href='https://docs.google.com/a/theodi.org/folderview?id=0B4n_avj5tPqbdGNScmxsWFVpeW8&amp;usp=docslist_api'/><link
+        rel='http://schemas.google.com/docs/2007#icon' type='image/png' href='https://ssl.gstatic.com/docs/doclist/images/icon_11_shared_collection_list.png'/><link
+        rel='http://schemas.google.com/g/2005#resumable-create-media' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/contents'/><link
+        rel='http://schemas.google.com/docs/2007#alt-post' type='application/atom+xml'
+        href='https://docs.google.com/feeds/upload/file/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/contents'/><link
+        rel='self' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8'/><link
+        rel='edit' type='application/atom+xml' href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbUGNiaEk5V2dVa2c/contents/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8'/><author><name>stuart.harrison</name><email>stuart.harrison@theodi.org</email></author><gd:resourceId>folder:0B4n_avj5tPqbdGNScmxsWFVpeW8</gd:resourceId><docs:isShareable
+        value='true'/><docs:isShareableByMe value='true'/><docs:modifiedByMeDate>2014-05-20T14:03:09.204Z</docs:modifiedByMeDate><gd:lastModifiedBy><name>systems-robot</name><email><GAPPS_USER_EMAIL></email></gd:lastModifiedBy><gd:quotaBytesUsed>0</gd:quotaBytesUsed><docs:writersCanInvite
+        value='true'/><gd:feedLink rel='http://schemas.google.com/acl/2007#accessControlList'
+        href='https://docs.google.com/feeds/default/private/full/folder%3A0B4n_avj5tPqbdGNScmxsWFVpeW8/acl'/></entry></feed>
+    http_version: 
+  recorded_at: Tue, 20 May 2014 14:07:12 GMT
+recorded_with: VCR 2.9.0
