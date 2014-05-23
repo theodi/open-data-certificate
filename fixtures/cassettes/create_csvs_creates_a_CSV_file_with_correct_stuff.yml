@@ -1,0 +1,105 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.google.com/accounts/ClientLogin
+    body:
+      encoding: US-ASCII
+      string: accountType=HOSTED_OR_GOOGLE&Email=systems-robot%40theodi.org&Passwd=<GAPPS_PASSWORD>&service=wise&source=Gimite-RubyGoogleDrive-1.00
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain
+      X-Frame-Options:
+      - DENY
+      Cache-Control:
+      - no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Mon, 01-Jan-1990 00:00:00 GMT
+      Date:
+      - Tue, 20 May 2014 16:58:26 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '1073'
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+    body:
+      encoding: US-ASCII
+      string: ! 'SID=DQAAAPMAAAAR9sloKXiCR7pz1bLm6kXNizJuNWavtUcb6J-MGAo97l7rMC14sYjlvU2qdtQ2al_u9bLDP1eyZCjlnF1ISmNiGK3Ypa13D1F7bx19yYXNmYO1dI2F-8U19YQsBK-R0n-kaDJzY_6aq5j0vzpMm7xDzFjuZ-jxLDzx5k4ROWPEmdg1nsZe57h02HlbCmWw2bIUAq7SNfsY2nWKsjLLOyyBeyXIDNZEFAiLXb9W7OifcwXcs4hZGeICEsduk1fz7BuW3uksY564nl5rTvxqNH5vAYCq3SOu0B08bgUIukuBUaaea3rYx0sp--aVlIXLqsQghoNiBfdCR_AX3NaWWYBi
+
+        LSID=DQAAAPQAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTyv_TTlJwe7_xs9aIYsfj6MLJ0Ba5wRFDxxBpgxkuzunyPi-YoGKRAJDSeT0dhYGNbImvugr-5VRauV_fKK4z-1SC9XDrzBeRVjWfxSr23APidnp3XYYOEhbBWdIXHn4aZBe-uROPEurQ_RexmNBQ_UTuLBbKjc29CZEKUfLdKXh0GF3gCIP_gksDCX__twOzv7LG_A6p2cgICqBpWKzm54GnznJd-7h4T8v3uVFXNUm-iEUMpbjYJUPZVMyp5VBxinQD6ddRh_VG6OVXInbV9
+
+        Auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRQsSRQNqyfE7GYvjgTB4-rAoyOD9zBXTcDWX7Kjr6J-qAmOLnxYlh5twnLsL3LSMD6nQiQw3nEZW1Tm1-jdzDHERpaY86bHbl_Llhr-xx8XqwS1XYlB0OV0Xi0BIGs6j4LRTWFtj4X-yELVWA2VkdZbdNGfqTGnR1Q7kikNNSbczHD8kkQCBfdGoHMckXwFVtzaaPnCWji-chK0YgoLMpFcVKuilYY5cgJp1ewkWxLEhlFl3Ax6Ygsa6tpSIkV5W8AqciYun3wLHqqHd47E69w4
+
+'
+    http_version: 
+  recorded_at: Tue, 20 May 2014 16:58:26 GMT
+- request:
+    method: post
+    uri: https://www.google.com/accounts/ClientLogin
+    body:
+      encoding: US-ASCII
+      string: accountType=HOSTED_OR_GOOGLE&Email=systems-robot%40theodi.org&Passwd=<GAPPS_PASSWORD>&service=writely&source=Gimite-RubyGoogleDrive-1.00
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain
+      X-Frame-Options:
+      - DENY
+      Cache-Control:
+      - no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Mon, 01-Jan-1990 00:00:00 GMT
+      Date:
+      - Tue, 20 May 2014 16:58:26 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '1073'
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic
+    body:
+      encoding: US-ASCII
+      string: ! 'SID=DQAAAPEAAAAR9sloKXiCR7pz1bLm6kXNizJuNWavtUcb6J-MGAo97l7rMC14sYjlvU2qdtQ2al_u9bLDP1eyZCjlnF1ISmNiGK3Ypa13D1F7bx19yYXNmYO1dI2F-8U19YQsBK-R0n-kaDJzY_6aq5j0vzpMm7xDzFjuZ-jxLDzx5k4ROWPEmdg1nsZe57h02HlbCmWw2bIUAq7SNfsY2nWKsjLLOyyBeyXIDNZEFAiLXb9W7OifcwXcs4hZGeICEsduk1fz7Bu3B_Wy_JLzz0uHLQgG03O4kWdquAFJebST0PNKA3t4FbadK77iliLdxVQJ1kGI_TcCzPeRcmzpy-3iC75jidM4
+
+        LSID=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTyv_TTlJwe7_xs9aIYsfj6MLJ0Ba5wRFDxxBpgxkuzunyPi-YoGKRAJDSeT0dhYGNbImvugr-5VRauV_fKK4z-1SC9XDrzBeRVjWfxSr23APidnp3XYYOEhbBWdIXHn4aZBe-uROPEurQ_RexmNBQ_UTuLBbKjc29CZEKUfLdKXh0GF3gCIP_gksDCX__twOzvXoweQy0vf5fVGBPQdbHH7prW74OKmIIX3x9cEeY_YnZBj7TZinHzv-boA25eEZxbUcHZ9mSVC-uh8A73ra00
+
+        Auth=DQAAAPMAAAA-yeSjxNoDZ1gTYUKEmCLwDA4T8MdxTHFemXW-jgKPyjg-2q2rL7d24v1ntZxwHRTXTE6oB5iDDuPKREu5CL7NHAr6k7g5icTp9mFNFlrYOfV8YTVMOP69nxlOeiaBtla6HX_OEHsYffR8i6MPJvKLU6cUQ6Ud8QvnaxPFRnAXGhAo_8asqZYQFViX2HqI3mKfmNDxuR4lwEY_Mzkdkr6_18AQNNTN4zhvUqQetosowIb-jAEv9DiZZRs5U7ldmseiRQsPMJqagkntzNxEuA62OlqKzVdO4AyEtUODKnOFhbjYuNBPIOq-uL1Xy-v6CimCVmBWKc4OhkH2BQFjgmh0
+
+'
+    http_version: 
+  recorded_at: Tue, 20 May 2014 16:58:27 GMT
+recorded_with: VCR 2.9.0
