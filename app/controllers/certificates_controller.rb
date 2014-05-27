@@ -43,7 +43,7 @@ class CertificatesController < ApplicationController
     elsif params[:type] == "embed"
       redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
     elsif params[:type] == "badge"
-      redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
+      redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
     end
   end
 
