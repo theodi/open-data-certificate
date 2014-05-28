@@ -8,9 +8,15 @@ after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
   curl -v -X POST -d ''{"ref":"refs/tags/CURRENT","sha":"''$TRAVIS_COMMIT''"}''  --header
   "Content-Type:application/json" -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs"'
+- ! '[ "$TRAVIS_BRANCH" == "staging" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
+  curl -v -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs/tags/STAGING"'
+- ! '[ "$TRAVIS_BRANCH" == "staging" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
+  curl -v -X POST -d ''{"ref":"refs/tags/STAGING","sha":"''$TRAVIS_COMMIT''"}''  --header
+  "Content-Type:application/json" -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs"'
 branches:
   except:
   - CURRENT
+  - STAGING
 notifications:
   irc:
     channels:
@@ -23,3 +29,6 @@ env:
   global:
   - secure: ktiYuRyE9BN2wa65zkATI37ABnL5I/eUfV3FDnSzDKqhcN7QhqiqzGKRiPXsXRkQRloUoP9p2AZH4rhHUSkWtdtJWMlCzgkh3PHjNFHRGIwL6YfeEOiMMbRrhnwpT4uAjPAahxsUZRnc7TmsoFSRazALgK8DQ+SdN3vt5pwJZU8=
   - secure: fFtR5aMYwdFBKDaj+2u3HsDuVAO9SUZ25sMqxp17y1RSQa0zUTEMGtXZhjVn5VTX14voYDmo0vYkqtxovXBrPfFn0jdENYum+yu38XuLmFdReLoIh1EzC/pT9xTLNkYfGZj/a+IPIlj0TPkSHOSj6vuV/aT85QSUx+gpisfnCoA=
+  - secure: W/BRRQ3WK92W7olcCAwAJnYFuHfyNunrA6MCTwecOX4hCLw1900lSKs0MnJ7QvdiBvzuo/qLBKsfaZoNGoIwTgpT2P3MFcnJozehhPXkAaWixIkmN3u1oeZ6OdDDU9NIYgUzm8lzoqXGiTbIb4z5lZMmfx+j/CZXoT86V+b1U4U=
+  - secure: Li3T6biupLWMx3dvzqzR2qS28HaOCiiyzm/MxVmexvwLGgiTVV4py+LwTGXfI6niJ5gzt1SLOLUW0ZnBtN4qv8mtQKcFgKkkpt62eeBxCwWGu7pbJ0rjz7ujiQsR70XsW8c0McAwYavRxlHD83KGdVlXklhZ+4+lnduhlIpgYAY=
+  - GAPPS_CERTIFICATE_USAGE_COLLECTION="ODI Drive/Technical/Test Data/Usage Data"

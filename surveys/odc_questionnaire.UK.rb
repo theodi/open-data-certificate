@@ -352,7 +352,7 @@ survey 'GB',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_uk_ogl 'UK Open Government Licence',
+    a_ogl_uk 'UK Open Government Licence',
       :text_as_statement => 'UK Open Government Licence'
     a_na 'Not applicable',
       :text_as_statement => ''
@@ -510,7 +510,7 @@ survey 'GB',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_uk_ogl 'UK Open Government Licence',
+    a_ogl_uk 'UK Open Government Licence',
       :text_as_statement => 'UK Open Government Licence'
     a_na 'Not applicable',
       :text_as_statement => ''

@@ -43,7 +43,7 @@ class CertificatesController < ApplicationController
     elsif params[:type] == "embed"
       redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
     elsif params[:type] == "badge"
-      redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
+      redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
     end
   end
 
@@ -69,33 +69,9 @@ class CertificatesController < ApplicationController
   # json only, and includes completed questions too
   def progress
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
-    @response_set = @certificate.response_set
+    @progress = @certificate.progress
 
-    # requirements still to be met
-    outstanding = @response_set.triggered_requirements.map do |r|
-      r.reference_identifier
-    end
-
-    # questions that have been answered and their requirements
-    entered = @response_set.responses.map(&:answer).map do |a|
-      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
-    end
-
-    # the counts of mandatory questions and completions
-    mandatory = @response_set.incomplete_triggered_mandatory_questions.count
-    mandatory_completed = @response_set.responses.map(&:question).select(&:is_mandatory).count
-
-
-    @responses = {
-      outstanding: outstanding.sort,
-      entered: entered.flatten.compact.sort,
-
-      # counts only
-      mandatory: mandatory,
-      mandatory_completed: mandatory_completed
-    }
-
-    render json: @responses
+    render json: @progress
   end
 
   def embed

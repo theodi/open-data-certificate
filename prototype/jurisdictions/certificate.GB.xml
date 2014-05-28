@@ -137,7 +137,7 @@
 					<option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
 					<option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
 					<option value="cc-zero">Creative Commons CCZero</option>
-					<option value="uk-ogl">UK Open Government Licence</option>
+					<option value="ogl-uk">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
@@ -232,7 +232,7 @@
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 						<option value="cc-zero">Creative Commons CCZero</option>
-						<option value="uk-ogl">UK Open Government Licence</option>
+						<option value="ogl-uk">UK Open Government Licence</option>
 						<option value="na" display="">Not applicable</option>
 						<option value="other" display="">Other...</option>
 					</select>

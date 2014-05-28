@@ -284,11 +284,24 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
+  test "#content_licence_determined_from_responses returns 'Unknown' when the content licence is not found" do
+    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "this-is-not-a-licence")
+    expected_value = {
+      :title => "Unknown",
+      :url => nil
+    }
+    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+
+    assert_equal expected_value, response_set.content_licence_determined_from_responses
+  end
+
   test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "UK Open Government Licence (OGL)",
+      :title => "UK Open Government Licence 1.0 (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
@@ -299,9 +312,9 @@ class ResponseSetTest < ActiveSupport::TestCase
 
   test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "uk_ogl")
+    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "UK Open Government Licence (OGL)",
+      :title => "UK Open Government Licence 1.0 (OGL)",
       :url => "http://reference.data.gov.uk/id/open-government-licence"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)

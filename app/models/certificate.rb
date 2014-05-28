@@ -77,6 +77,47 @@ class Certificate < ActiveRecord::Base
       }
     end
 
+    def published_certificates
+      self.where(published: true).map do |certificate|
+        {
+          name: certificate.name,
+          publisher: certificate.curator,
+          created: certificate.created_at,
+          user: certificate.user.email,
+          country: certificate.survey.title,
+          type: certificate.survey.status,
+          level: certificate.attained_level,
+          verification_type: certificate.certification_type,
+          date_verified: certificate.verifications.count == 0 ? nil : certificate.verifications.last.updated_at
+        }
+      end
+    end
+
+    def all_certificates
+      Certificate.all.map do |certificate|
+        begin
+          progress = certificate.progress_by_level
+
+          {
+            name: certificate.name,
+            publisher: certificate.curator,
+            created: certificate.created_at,
+            last_edited: certificate.updated_at,
+            user: certificate.user.nil? ? "N/A" : certificate.user.email,
+            country: certificate.survey.title,
+            status: certificate.published? ? "published" : "draft",
+            level: certificate.attained_level,
+            raw_progress: progress[:basic],
+            pilot_progress: progress[:pilot],
+            standard_progress: progress[:standard],
+            expert_progress: progress[:exemplar]
+          }
+        rescue
+          nil
+        end
+      end
+    end
+
     def set_expired(surveys)
       self.joins(:response_set)
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
@@ -152,6 +193,68 @@ class Certificate < ActiveRecord::Base
       end
     end
     responses.group_by { |r| r.question_id }
+  end
+
+  def progress
+    response_set = self.response_set
+
+    # requirements still to be met
+    outstanding = response_set.triggered_requirements.map do |r|
+      r.reference_identifier
+    end
+
+    # questions that have been answered and their requirements
+    entered = response_set.responses.map(&:answer).map do |a|
+      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
+    end
+
+    # the counts of mandatory questions and completions
+    mandatory = response_set.incomplete_triggered_mandatory_questions.count
+    mandatory_completed = response_set.responses.map(&:question).select(&:is_mandatory).count
+
+    {
+      outstanding: outstanding.sort,
+      entered: entered.flatten.compact.sort,
+      mandatory: mandatory,
+      mandatory_completed: mandatory_completed
+    }
+  end
+
+  def progress_by_level
+    result = {}
+    progress ||= self.progress
+    pending = progress[:mandatory]
+    complete = progress[:mandatory_completed]
+
+    [
+     'basic',
+     'pilot',
+     'standard',
+     'exemplar'
+    ].each do |level|
+      pending += progress[:outstanding].select { |p| p =~ /#{level}_/ }.count
+      complete += progress[:entered].select { |p| p =~ /#{level}_/ }.count
+
+      result[level.to_sym] = ((complete.to_f / (pending.to_f + complete.to_f)) * 100).round(1)
+    end
+    result
+  end
+
+  def progress_by_section
+    results = {
+      outstanding: {},
+      entered: {}
+    }
+    progress ||= self.progress
+
+    results.map do |k,v|
+      progress[k].each do |p|
+        q = Question.where(reference_identifier: p).first
+        v[q.survey_section_id] ||= []
+        v[q.survey_section_id] << p
+      end
+    end
+
   end
 
 end

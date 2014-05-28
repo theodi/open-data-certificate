@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+
   def home
     @surveys = Survey.available_to_complete
     respond_to do |format|
@@ -33,7 +34,7 @@ class MainController < ApplicationController
       'datasets'     => ResponseSet.counts
     }
 
-    @head_commit = `git rev-parse HEAD`
+    @head_commit = Rails.root.to_s.split("/").last
 
     render '/home/status'
   end
@@ -106,11 +107,14 @@ class MainController < ApplicationController
       end
 
       # flash[:notice] = t('surveyor.survey_started_success')
-      redirect_to(surveyor.edit_my_survey_path(
-                    :survey_code => @survey.access_code, :response_set_code => @response_set.access_code))
+      redirect_to(surveyor.start_path(
+        :survey_code => @survey.access_code,
+        :response_set_code => @response_set.access_code
+      ))
     else
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
       redirect_to (user_signed_in? ? dashboard_path : root_path)
     end
   end
+
 end

@@ -186,7 +186,7 @@ questions:
       cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
-      uk_ogl:
+      ogl_uk:
         text: "UK Open Government Licence"
         text_as_statement: "UK Open Government Licence"
       na:
@@ -295,7 +295,7 @@ questions:
       cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
-      uk_ogl:
+      ogl_uk:
         text: "UK Open Government Licence"
         text_as_statement: "UK Open Government Licence"
       na:

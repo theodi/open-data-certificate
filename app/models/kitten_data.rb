@@ -10,14 +10,16 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
   }
 
   CONTENT_LICENCES = {
     "http://creativecommons.org/licenses/by/2.0/uk/" => "cc_by",
     "http://creativecommons.org/licenses/by-sa/2.0/uk/" => "cc_by_sa",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
-    "http://reference.data.gov.uk/id/open-government-licence" => "uk_ogl"
+    "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
   }
 
   def dataset
@@ -27,7 +29,7 @@ class KittenData < ActiveRecord::Base
   def request_data
     @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
 
-    if @dataset && @dataset.supported?
+    if @dataset && @dataset.supported? && dataset_field(:data_title)
       self.data = {
         :title             => dataset_field(:data_title, ''),
         :description       => dataset_field(:description, ''),
@@ -44,9 +46,9 @@ class KittenData < ActiveRecord::Base
             :title       => distribution.title,
             :description => distribution.description,
             :access_url  => distribution.access_url,
-            :extension   => distribution.format.extension,
-            :open        => distribution.format.open?,
-            :structured  => distribution.format.structured?
+            :extension   => distribution.format.try(:extension),
+            :open        => distribution.format.try(:open?),
+            :structured  => distribution.format.try(:structured?)
           }
         }
       }
@@ -97,7 +99,7 @@ class KittenData < ActiveRecord::Base
       @fields["publisherRights"] = "yes"
       @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
 
-      @fields["contentLicence"] = "uk_ogl" if @fields["dataLicence"] == "uk_ogl"
+      @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
 
       # Settings for ordnance survey licences
       if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
@@ -116,13 +118,13 @@ class KittenData < ActiveRecord::Base
     if url.include?("data.gov.uk")
       uri = URI(url)
       package = uri.path.split("/").last
-      
+
       @fields["publisherOrigin"] = "true"
       @fields["copyrightURL"] = url
       @fields["dataPersonal"] = "not_personal"
       @fields["frequentChanges"] = "false"
       @fields["listed"] = "true"
-      @fields["listing_0"] = "http://data.gov.uk"
+      @fields["listing"] = "http://data.gov.uk"
       @fields["vocabulary"] = "false"
       @fields["codelists"] = "false"
       @fields["contentRights"] = "samerights"

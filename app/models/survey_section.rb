@@ -16,4 +16,8 @@ class SurveySection < ActiveRecord::Base
              select {|q| q.dependency.nil? || dep_map[q.dependency.id] }
   end
 
+  def survey_questions
+    questions.where(Question.arel_table[:reference_identifier].not_in %w(documentationUrl pilot_1 basic_1))
+  end
+
 end

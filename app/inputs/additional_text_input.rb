@@ -12,7 +12,7 @@ class AdditionalTextInput < Formtastic::Inputs::TextInput
     input_wrapping do
       [
         label_html,
-        "<p>#{options[:subtitle]}</p>",
+        "<p class='subtitle'>#{options[:subtitle]}</p>",
         builder.text_area(method, input_html_options)
       ].join('').html_safe
     end

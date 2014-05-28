@@ -6,6 +6,7 @@ class ResponseSet < ActiveRecord::Base
   before_save :update_dataset
 
   attr_accessible :dataset_id
+  attr_accessor :documentation_url
 
   belongs_to :dataset, touch: true
   belongs_to :survey
@@ -89,6 +90,14 @@ class ResponseSet < ActiveRecord::Base
 
   def title
     dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+  end
+
+  def response(identifier)
+    responses.select{|r| r.question.reference_identifier == identifier.to_s }.first
+  end
+
+  def documentation_url
+    response 'documentationUrl'
   end
 
   def jurisdiction
@@ -187,11 +196,18 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for(:other_content_licence_url)
          }
       else
-        licence = Odlifier::License.new(ref.dasherize)
-        @content_licence_determined_from_responses = {
-          :title => licence.title,
-          :url   => licence.url
-        }
+        begin
+          licence = Odlifier::License.new(ref.dasherize)
+          @content_licence_determined_from_responses = {
+            :title => licence.title,
+            :url   => licence.url
+          }
+        rescue ArgumentError
+          @content_licence_determined_from_responses = {
+            :title => 'Unknown',
+            :url   => nil
+          }
+        end
       end
     else
       @content_licence_determined_from_responses
@@ -317,7 +333,6 @@ class ResponseSet < ActiveRecord::Base
     update_from_ui_hash(ui_hash)
   end
 
-
   # run updates through the response_cache_map, so that we can deal
   # with fields that have been claimed by a different response_set
   #
@@ -354,6 +369,51 @@ class ResponseSet < ActiveRecord::Base
 
     # pass through to the original method
     original_update_from_ui_hash(ui_hash)
+  end
+
+  # Updates responses without using a surveyor form
+  def update_responses(responses)
+
+    ui_hash = []
+
+    responses.each do |key, value|
+      question = survey.question(key)
+      response = response(key)
+
+      next if value.nil? || question.nil?
+
+      if question.type == :none || question.type == :repeater
+        ui_hash.push(HashWithIndifferentAccess.new(
+          question_id: question.id.to_s,
+          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+          answer_id: question.answers.first.id.to_s,
+          string_value: value,
+          autocompleted: true
+        ))
+      end
+
+      if question.type == :one
+        ui_hash.push(HashWithIndifferentAccess.new(
+          question_id: question.id.to_s,
+          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+          answer_id: question.answer(value).id.to_s,
+          autocompleted: true
+        ))
+      end
+
+      if question.type == :any
+        value.each do |item|
+          ui_hash.push(HashWithIndifferentAccess.new(
+            question_id: question.id.to_s,
+            api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+            answer_id: question.answer(item).id.to_s,
+            autocompleted: true
+          ))
+        end
+      end
+    end
+
+    update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
   end
 
   def assign_to_user!(user)

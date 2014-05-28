@@ -36,6 +36,23 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_equal "application/json", response.content_type
   end
 
+  test "Requesting legacy url performs a redirect" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :legacy_show, {id: cert.id}
+    assert_redirected_to dataset_certificate_url dataset_id: cert.dataset.id, id: cert.id
+  end
+
+  test "Requesting legacy url for badge performs a redirect" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :legacy_show, {id: cert.id, type: "badge", format: "png"}
+    
+    assert_redirected_to "http://test.host/datasets/1/certificates/2/badge.png"
+  end  
+  
   test "Requesting a JSON version of a certificate returns the correct level" do
     levels = {
         "basic" => "raw",
