@@ -383,7 +383,7 @@
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
 						<label>Are you required or permitted by law to publish this data about individuals?</label>
-						<yesno yes="must be published" />
+						<yesno yes="can be published" />
 						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'true'">
