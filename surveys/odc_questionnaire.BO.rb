@@ -344,14 +344,18 @@ survey 'BO',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    a_cc_by 'Creative Commons Attribution',
+      :text_as_statement => 'Creative Commons Attribution'
+    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
+      :text_as_statement => 'Creative Commons Attribution Share-Alike'
+    a_cc_zero 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
     a_na 'Not applicable',
       :text_as_statement => ''
     a_other 'Other...',
@@ -768,6 +772,7 @@ survey 'BO',
       :discussion_topic => :bo_lawfulDisclosure,
       :display_on_certificate => true,
       :text_as_statement => 'By law, this data about individuals',
+      :help_text => 'The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -775,7 +780,7 @@ survey 'BO',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'must be published',
+      :text_as_statement => 'can be published',
       :requirement => ['pilot_5']
 
     label_pilot_5 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',

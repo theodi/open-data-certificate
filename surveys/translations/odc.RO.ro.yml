@@ -175,6 +175,15 @@ questions:
     text_as_statement: "Aceste date sunt disponibile sub"
     help_text: "Amintiți-vă că oricine adună, creează, verifică sau prezintă o bază de date inițial, deține în mod automat drepturile pentru acel lucru. Poate exista de asemenea copyright în organizarea și selectarea datelor. Așa că, oamenii au nevoie de o anulare a acelor drepturi sau o licență care dovedește că ei pot utiliza datele și care explica modul în care aceasta se poate face legal. Vom enumera cele mai frecvente licențe aici; în cazul în care nu există drepturi asupra bazelor de date sau copyright, acestea au expirat, sau le-ați anulat, alegeți \"Nu este aplicabil\"."
     answers:
+      cc_by:
+        text: "Creative Commons Attribution"
+        text_as_statement: "Creative Commons Attribution"
+      cc_by_sa:
+        text: "Creative Commons Attribution Share-Alike"
+        text_as_statement: "Creative Commons Attribution Share-Alike"
+      cc_zero:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
       odc_by:
         text: "Open Data Commons Attribution License"
         text_as_statement: "Open Data Commons Attribution License"
@@ -184,9 +193,6 @@ questions:
       odc_pddl:
         text: "Dedicație Open Data Commons Domeniului Public și de licență (PDDL)"
         text_as_statement: "Dedicație Open Data Commons Domeniului Public și de licență (PDDL)"
-      cc_zero:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
       na:
         text: "Nu este aplicabil"
         text_as_statement: ""
