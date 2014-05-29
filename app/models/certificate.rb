@@ -96,8 +96,6 @@ class Certificate < ActiveRecord::Base
     def all_certificates
       Certificate.all.map do |certificate|
         begin
-          progress = certificate.progress_by_level
-
           {
             name: certificate.name,
             publisher: certificate.curator,
@@ -107,10 +105,6 @@ class Certificate < ActiveRecord::Base
             country: certificate.survey.title,
             status: certificate.published? ? "published" : "draft",
             level: certificate.attained_level,
-            raw_progress: progress[:basic],
-            pilot_progress: progress[:pilot],
-            standard_progress: progress[:standard],
-            expert_progress: progress[:exemplar]
           }
         rescue
           nil
