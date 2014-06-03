@@ -286,6 +286,9 @@ en:
     errors_occurred: Errors occurred
     server_error: A server error occurred
 
+  branding:
+    heading: Using the ODC trademarks
+
   improvements:
     heading: How can I improve my open data?
     return_to_questionnaire: Return to questionnaire
