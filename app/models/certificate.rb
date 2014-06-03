@@ -199,28 +199,32 @@ class Certificate < ActiveRecord::Base
   end
 
   def progress
-    response_set = self.response_set
-
-    # requirements still to be met
-    outstanding = response_set.triggered_requirements.map do |r|
-      r.reference_identifier
-    end
-
-    # questions that have been answered and their requirements
-    entered = response_set.responses.map(&:answer).map do |a|
-      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
-    end
-
-    # the counts of mandatory questions and completions
-    mandatory = response_set.incomplete_triggered_mandatory_questions.count
-    mandatory_completed = response_set.responses.map(&:question).select(&:is_mandatory).count
-
     {
       outstanding: outstanding.sort,
       entered: entered.flatten.compact.sort,
       mandatory: mandatory,
       mandatory_completed: mandatory_completed
     }
+  end
+
+  def outstanding
+    response_set.triggered_requirements.map do |r|
+      r.reference_identifier
+    end
+  end
+
+  def entered
+    response_set.responses.map(&:answer).map do |a|
+      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
+    end
+  end
+
+  def mandatory
+    response_set.incomplete_triggered_mandatory_questions.count
+  end
+
+  def mandatory_completed
+    response_set.responses.map(&:question).select(&:is_mandatory).count
   end
 
   def progress_by_level
