@@ -1,9 +1,5 @@
-require 'concerns/badges'
-require 'concerns/counts'
-
 class Certificate < ActiveRecord::Base
-  include Badges
-  include Counts
+  include Badges, Counts
 
   belongs_to :response_set
 
