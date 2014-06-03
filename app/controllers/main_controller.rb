@@ -30,7 +30,7 @@ class MainController < ApplicationController
     @job_count = Delayed::Job.count
 
     @counts = {
-      'certificates' => Certificate::Counts.counts,
+      'certificates' => Certificate.counts,
       'datasets'     => ResponseSet.counts
     }
 
