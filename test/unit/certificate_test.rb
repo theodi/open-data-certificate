@@ -70,15 +70,7 @@ class CertificateTest < ActiveSupport::TestCase
     @certificate2.update_attributes(published: true)
     @certificate3.update_attributes(published: true)
 
-    certificates = Certificate.published_certificates
-
-    assert_equal 3, certificates.count
-    assert_equal "Banana certificate", certificates.first[:name]
-    assert_equal "John Smith", certificates.first[:publisher]
-    assert_match /test[0-9]+@example\.com/, certificates.first[:user]
-    assert_equal "alpha", certificates.first[:type]
-    assert_equal "exemplar", certificates.first[:level]
-    assert_equal :self, certificates.first[:verification_type]
+    assert_equal 3, Certificate.published.count
   end
 
   test 'progress_by_level' do
@@ -119,22 +111,10 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal progress[:exemplar], 56.3
   end
 
-  test 'all_certificates' do
-    @certificate1.update_attributes(published: false)
-
-    all_certificates = Certificate.all_certificates
   test "status returns the expected status" do
     @certificate1.update_attributes(published: true)
     assert_equal @certificate1.status, "published"
 
-    assert_equal 3, all_certificates.count
-    assert_equal "Banana certificate", all_certificates.first[:name]
-    assert_equal "John Smith", all_certificates.first[:publisher]
-    assert_equal " ", all_certificates.first[:user_name]
-    assert_match /test[0-9]+@example\.com/, all_certificates.first[:user_email]
-    assert_equal "Simple survey", all_certificates.first[:country]
-    assert_equal "draft", all_certificates.first[:status]
-    assert_equal "exemplar", all_certificates.first[:level]
     @certificate1.update_attributes(published: false)
     assert_equal @certificate1.status, "draft"
   end

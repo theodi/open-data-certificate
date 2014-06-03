@@ -8,7 +8,11 @@ class UploadUsageDataTest < ActiveSupport::TestCase
         FactoryGirl.create(:published_certificate_with_dataset)
       end
 
-      data = Certificate.published_certificates
+      certificates = Certificate.published
+      data = certificates.map do |cert|
+        CertificatePresenter.new(cert).published_data
+      end
+
       csv = UploadUsageData.create_csv(data)
 
       assert_equal 6, CSV.parse(csv).count
@@ -29,7 +33,12 @@ class UploadUsageDataTest < ActiveSupport::TestCase
         FactoryGirl.create(:published_certificate_with_dataset)
       end
 
-      data = Certificate.published_certificates
+      certificates = Certificate.published
+
+      data = certificates.map do |cert|
+        CertificatePresenter.new(cert).published_data
+      end
+
       csv = UploadUsageData.create_csv(data)
 
       session = GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])

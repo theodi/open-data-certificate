@@ -6,10 +6,13 @@ module UploadUsageData
 
   def self.perform
     [
-      "published_certificates",
-      "all_certificates"
+      "published",
+      "all"
     ].each do |type|
-      data = Certificate.send(type)
+      certificates = Certificate.send(type)
+      data = certificates.map do |cert|
+        CertificatePresenter.new(cert).send("#{type}_data")
+      end
       csv = create_csv(data)
       upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
     end
