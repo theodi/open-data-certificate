@@ -24,13 +24,7 @@ class CertificatesController < ApplicationController
   def latest
     certificate = Dataset.find(params[:dataset_id]).certificates.latest
     unless certificate.nil?
-      if params[:type].nil?
-        redirect_to dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
-      elsif params[:type] == "embed"
-        redirect_to embed_dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
-      elsif params[:type] == "badge"
-        redirect_to badge_dataset_certificate_path params[:dataset_id], certificate.id, format: params[:format]
-      end
+      redirect_to_certificate(params[:dataset_id], certificate.id, params[:type], params[:format])
     else
       raise ActiveRecord::RecordNotFound
     end
@@ -38,7 +32,7 @@ class CertificatesController < ApplicationController
 
   def legacy_show
     certificate = Certificate.find params[:id]
-    redirect_to_certificate(certificate, params[:type], params[:format])
+    redirect_to_certificate(certificate.response_set.dataset.id, certificate.id, params[:type], params[:format])
   end
 
   def improvements
@@ -90,7 +84,7 @@ class CertificatesController < ApplicationController
     certificate = dataset.certificates.latest
 
     unless certificate.nil?
-      redirect_to_certificate(certificate, params[:type], params[:format])
+      redirect_to_certificate(certificate.response_set.dataset.id, certificate.id, params[:type], params[:format])
     end
   end
 
@@ -120,7 +114,7 @@ class CertificatesController < ApplicationController
 
   private
 
-    def redirect_to_certificate(certificate, type, format)
+    def redirect_to_certificate(dataset_id, certificate_id, type, format)
       if type.nil?
         redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
       elsif type == "embed"
