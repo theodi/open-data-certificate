@@ -119,6 +119,10 @@ class Certificate < ActiveRecord::Base
     end
   end
 
+  def status
+    published? ? "published" : "draft"
+  end
+
   def expiring?
     expires_at != nil
   end

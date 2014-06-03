@@ -123,6 +123,9 @@ class CertificateTest < ActiveSupport::TestCase
     @certificate1.update_attributes(published: false)
 
     all_certificates = Certificate.all_certificates
+  test "status returns the expected status" do
+    @certificate1.update_attributes(published: true)
+    assert_equal @certificate1.status, "published"
 
     assert_equal 3, all_certificates.count
     assert_equal "Banana certificate", all_certificates.first[:name]
@@ -132,6 +135,8 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal "Simple survey", all_certificates.first[:country]
     assert_equal "draft", all_certificates.first[:status]
     assert_equal "exemplar", all_certificates.first[:level]
+    @certificate1.update_attributes(published: false)
+    assert_equal @certificate1.status, "draft"
   end
 
   test 'days_to_expiry returns correct number of days' do
