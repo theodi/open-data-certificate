@@ -1,33 +1,37 @@
 module Counts
   extend ActiveSupport::Concern
 
-  class << self
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
 
     def counts
       Hash[[:all, :all_this_month, :published, :published_this_month, :levels].map do |count|
-        [count, Certificate::Counts.send(count)]
+        [count, Certificate.send("count_#{count}")]
       end]
     end
 
-    def levels
+    def count_levels
       Hash[[:basic, :pilot, :standard, :expert].map do |level|
         [level, Certificate.where(published: true, attained_level: level).count]
       end]
     end
 
-    def all
+    def count_all
       Certificate.count
     end
 
-    def all_this_month
+    def count_all_this_month
       Certificate.where(created_at: within_last_month).count
     end
 
-    def published
+    def count_published
       Certificate.where(published: true).count
     end
 
-    def published_this_month
+    def count_published_this_month
       Certificate.where(published: true, created_at: within_last_month).count
     end
 
