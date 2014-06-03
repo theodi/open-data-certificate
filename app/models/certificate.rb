@@ -222,7 +222,11 @@ class Certificate < ActiveRecord::Base
   end
 
   def mandatory_completed
-    response_set.responses.map(&:question).select(&:is_mandatory).count
+    completed_questions.select(&:is_mandatory).count
+  end
+
+  def completed_questions
+    response_set.responses.map(&:question)
   end
 
   def progress_by_level
