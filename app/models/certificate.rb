@@ -1,4 +1,8 @@
+require 'concerns/badges'
+
 class Certificate < ActiveRecord::Base
+  include Badges
+
   belongs_to :response_set
 
   has_one :survey,  through: :response_set
@@ -40,19 +44,6 @@ class Certificate < ActiveRecord::Base
 
     def group_similar
       joins(:response_set => [:survey]).group('surveys.title, response_sets.dataset_id')
-    end
-
-    def badge_file_for_level(level)
-      filename = case level
-                   when 'basic'
-                     'raw_level_badge.png'
-                   when 'raw', 'pilot', 'standard', 'exemplar'
-                     "#{level}_level_badge.png"
-                   else
-                     'no_level_badge.png'
-                 end
-
-      File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
     end
 
     def latest
@@ -128,18 +119,6 @@ class Certificate < ActiveRecord::Base
 
   def verified_by_user? user
     verifications.exists? user_id: user.id
-  end
-
-  def badge_file
-    Certificate.badge_file_for_level(attained_level)
-  end
-
-  def badge_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
-  end
-
-  def embed_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
   end
 
   def attained_level_title
