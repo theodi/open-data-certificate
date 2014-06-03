@@ -44,19 +44,8 @@ class CertificateGenerator < ActiveRecord::Base
 
     errors = []
 
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
+    check_urls(response_set, errors)
+    check_mandatory(survey, response_set, errors)
 
     {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
   end
@@ -85,12 +74,13 @@ class CertificateGenerator < ActiveRecord::Base
 
     errors = []
 
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
+    check_urls(response_set, errors)
+    check_mandatory(survey, response_set, errors)
 
+    {success: true, published: response_set.published?, errors: errors}
+  end
+
+  def self.check_mandatory(survey, response_set, errors)
     survey.questions.where(is_mandatory: true).each do |question|
       response = response_set.responses.detect {|r| r.question_id == question.id}
 
@@ -98,8 +88,14 @@ class CertificateGenerator < ActiveRecord::Base
         errors.push("The question '#{question.reference_identifier}' is mandatory")
       end
     end
+  end
 
-    {success: true, published: response_set.published?, errors: errors}
+  def self.check_urls(response_set, errors)
+    response_set.responses_with_url_type.each do |response|
+      if response.error
+        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+      end
+    end
   end
 
   def generate
