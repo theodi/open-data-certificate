@@ -12,7 +12,7 @@ class Certificate < ActiveRecord::Base
   EXPIRY_NOTICE = 1.month
 
   class << self
-    def search(type, term, query)
+    def type_search(type, term, query)
       case type
       when "title"
         query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
@@ -28,7 +28,7 @@ class Certificate < ActiveRecord::Base
       if match
         query = self.where({})
         args.first.split(/\s+/).each do |term|
-          query = self.search(match[1], term, query)
+          query = self.type_search(match[1], term, query)
         end
         query
       end
