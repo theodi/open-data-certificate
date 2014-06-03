@@ -169,11 +169,7 @@ class Certificate < ActiveRecord::Base
       qs = section.questions_for_certificate self.response_set
       rs = self.response_set.responses_for_questions qs
       if rs.any?
-        rs.each do |r|
-          if r.statement_text != ''
-            responses << r
-          end
-        end
+        rs.each { |r| responses << r if r.statement_text != '' }
       end
     end
     responses.group_by { |r| r.question_id }
