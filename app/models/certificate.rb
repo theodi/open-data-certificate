@@ -12,28 +12,26 @@ class Certificate < ActiveRecord::Base
   EXPIRY_NOTICE = 1.month
 
   class << self
-    def search_title(title)
-      query = self.where({})
-      title.downcase.split(/\s+/).each do |term|
-        query = query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
+    def search(type, term, query)
+      case type
+      when "title"
+        query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
+      when "publisher"
+        query.where("LOWER(certificates.curator) LIKE ?", "%#{term}%")
+      when "country"
+        query.joins(response_set: :survey).where("LOWER(surveys.full_title) LIKE ?", "%#{term}%")
       end
-      query
     end
 
-    def search_publisher(publisher)
-      query = self.where({})
-      publisher.downcase.split(/\s+/).each do |term|
-        query = query.where("LOWER(certificates.curator) LIKE ?", "%#{term}%")
+    def method_missing(name, *args, &block)
+      match = name.to_s.match(/^search_(.*)$/)
+      if match
+        query = self.where({})
+        args.first.split(/\s+/).each do |term|
+          query = self.search(match[1], term, query)
+        end
+        query
       end
-      query
-    end
-
-    def search_country(country)
-      query = self.where({})
-      country.downcase.split(/\s+/).each do |term|
-        query = query.joins(response_set: :survey).where("LOWER(surveys.full_title) LIKE ?", "%#{term}%")
-      end
-      query
     end
 
     def by_newest
