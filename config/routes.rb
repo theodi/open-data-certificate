@@ -82,6 +82,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
   get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
+  get 'using-the-marks' => 'pages#show', :id => 'branding'
 
   # comment pages
   get 'comment' => 'main#comment', as: :comment
