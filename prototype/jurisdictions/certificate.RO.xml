@@ -135,10 +135,12 @@
             <label>Sub ce licență pot oamenii reutiliza aceste date?</label>
             <select required="required">
                <option/>
+               <option value="cc-by">Creative Commons Attribution</option>
+               <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+               <option value="cc-zero">Creative Commons CCZero</option>
                <option value="odc-by">Open Data Commons Attribution License</option>
                <option value="odc-odbl">Open Data Commons Open License Database (ODbL)</option>
                <option value="odc-pddl">Dedicație Open Data Commons Domeniului Public și de licență (PDDL)</option>
-               <option value="cc-zero">Creative Commons CCZero</option>
                <option value="na" display="">Nu este aplicabil</option>
                <option value="other" display="">Altele...</option>
             </select>

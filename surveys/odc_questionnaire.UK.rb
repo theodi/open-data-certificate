@@ -1,7 +1,7 @@
 survey 'GB',
   :full_title => 'United Kingdom',
   :default_mandatory => 'false',
-  :status => 'beta',
+  :status => 'final',
   :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
@@ -344,16 +344,20 @@ survey 'GB',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    a_cc_by 'Creative Commons Attribution',
+      :text_as_statement => 'Creative Commons Attribution'
+    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
+      :text_as_statement => 'Creative Commons Attribution Share-Alike'
+    a_cc_zero 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
+    a_ogl_uk 'UK Open Government Licence',
+      :text_as_statement => 'UK Open Government Licence'
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_ogl_uk 'UK Open Government Licence',
-      :text_as_statement => 'UK Open Government Licence'
     a_na 'Not applicable',
       :text_as_statement => ''
     a_other 'Other...',
@@ -793,6 +797,7 @@ survey 'GB',
       :discussion_topic => :gb_lawfulDisclosure,
       :display_on_certificate => true,
       :text_as_statement => 'By law, this data about individuals',
+      :help_text => 'The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -800,7 +805,7 @@ survey 'GB',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'must be published',
+      :text_as_statement => 'can be published',
       :requirement => ['pilot_5']
 
     label_pilot_5 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',

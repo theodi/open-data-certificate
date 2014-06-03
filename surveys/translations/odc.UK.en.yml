@@ -174,6 +174,18 @@ questions:
     text_as_statement: "This data is available under"
     help_text: "Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they've expired, or you've waived them, choose 'Not applicable'."
     answers:
+      cc_by:
+        text: "Creative Commons Attribution"
+        text_as_statement: "Creative Commons Attribution"
+      cc_by_sa:
+        text: "Creative Commons Attribution Share-Alike"
+        text_as_statement: "Creative Commons Attribution Share-Alike"
+      cc_zero:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
+      ogl_uk:
+        text: "UK Open Government Licence"
+        text_as_statement: "UK Open Government Licence"
       odc_by:
         text: "Open Data Commons Attribution License"
         text_as_statement: "Open Data Commons Attribution License"
@@ -183,12 +195,6 @@ questions:
       odc_pddl:
         text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
-      cc_zero:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
-      ogl_uk:
-        text: "UK Open Government Licence"
-        text_as_statement: "UK Open Government Licence"
       na:
         text: "Not applicable"
         text_as_statement: ""
@@ -439,13 +445,14 @@ questions:
   lawfulDisclosure:
     text: "Are you required or permitted by law to publish this data about individuals?"
     text_as_statement: "By law, this data about individuals"
+    help_text: "The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "must be published"
+        text_as_statement: "can be published"
   lawfulDisclosureURL:
     text: "Where do you document your right to publish data about individuals?"
     text_as_statement: "The right to publish this data about individuals is documented at"
