@@ -96,10 +96,13 @@ class Certificate < ActiveRecord::Base
     end
 
     def set_expired(surveys)
+      expired.update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+    end
+
+    def expired
       self.joins(:response_set)
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
         .where(expires_at: nil)
-        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
     end
   end
 
