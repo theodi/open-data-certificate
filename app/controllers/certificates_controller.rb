@@ -38,13 +38,7 @@ class CertificatesController < ApplicationController
 
   def legacy_show
     certificate = Certificate.find params[:id]
-    if params[:type].nil?
-      redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id
-    elsif params[:type] == "embed"
-      redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
-    elsif params[:type] == "badge"
-      redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
-    end
+    redirect_to_certificate(certificate, params[:type], params[:format])
   end
 
   def improvements
@@ -94,14 +88,9 @@ class CertificatesController < ApplicationController
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
     dataset = Dataset.match_to_user_domain(params[:datasetUrl])
     certificate = dataset.certificates.latest
+
     unless certificate.nil?
-      if params[:type].nil?
-        redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
-      elsif params[:type] == "embed"
-        redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
-      elsif params[:type] == "badge"
-        redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
-      end
+      redirect_to_certificate(certificate, params[:type], params[:format])
     end
   end
 
@@ -128,4 +117,16 @@ class CertificatesController < ApplicationController
     @certificate.update_attribute :audited, params[:certificate] && params[:certificate][:audited]
     redirect_to dataset_certificate_path @certificate.response_set.dataset.id, @certificate.id
   end
+
+  private
+
+    def redirect_to_certificate(certificate, type, format)
+      if type.nil?
+        redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
+      elsif type == "embed"
+        redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
+      elsif type == "badge"
+        redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
+      end
+    end
 end
