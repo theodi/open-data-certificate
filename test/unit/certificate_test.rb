@@ -118,4 +118,24 @@ class CertificateTest < ActiveSupport::TestCase
     @certificate1.update_attributes(published: false)
     assert_equal @certificate1.status, "draft"
   end
+
+  test "certificate counts return the correct counts" do
+    @certificate1.update_attributes(published: false)
+    @certificate2.update_attributes(published: true)
+    @certificate3.update_attributes(published: true)
+
+    @certificate2.update_attributes(attained_level: "pilot")
+    @certificate3.update_attributes(attained_level: "standard")
+
+    counts = Certificate.counts
+
+    assert_equal 3, counts[:all]
+    assert_equal 3, counts[:all_this_month]
+    assert_equal 2, counts[:published]
+    assert_equal 2, counts[:published_this_month]
+    assert_equal 0, counts[:levels][:basic]
+    assert_equal 1, counts[:levels][:pilot]
+    assert_equal 1, counts[:levels][:standard]
+    assert_equal 0, counts[:levels][:expert]
+  end
 end
