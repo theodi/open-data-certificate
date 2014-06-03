@@ -115,12 +115,7 @@ class CertificatesController < ApplicationController
   private
 
     def redirect_to_certificate(dataset_id, certificate_id, type, format)
-      if type.nil?
-        redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
-      elsif type == "embed"
-        redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
-      elsif type == "badge"
-        redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: format
-      end
+      path = "#{type}_dataset_certificate_path".gsub(/^_/, "")
+      redirect_to self.send(path, dataset_id, certificate_id, format: format)
     end
 end
