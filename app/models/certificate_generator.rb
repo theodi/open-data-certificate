@@ -131,7 +131,6 @@ class CertificateGenerator < ActiveRecord::Base
 
   # answer a question from the request
   def answer question
-
     # find the value that should be entered
     data = request_dataset[question[:reference_identifier]]
 
@@ -141,31 +140,21 @@ class CertificateGenerator < ActiveRecord::Base
 
     when :none
       answer = question.answers.first
-      response_set.responses.create({
-        answer: answer,
-        question: question,
-        string_value: data
-      })
+      create_response(answer, question, data)
 
     when :one
       # the value is the reference identifier of the target answer
       answer = question.answers.where(reference_identifier: data).first
 
       unless answer.nil?
-        response_set.responses.create({
-          answer: answer,
-          question: question
-        })
+        create_response(answer, question)
       end
 
     when :any
       # the value is an array of the chosen answers
       answers = question.answers.where(reference_identifier: data)
       answers.each do |answer|
-        response_set.responses.create({
-          answer: answer,
-          question: question
-        })
+        create_response(answer, question)
       end
 
     when :repeater
@@ -173,12 +162,7 @@ class CertificateGenerator < ActiveRecord::Base
       answer = question.answers.first
       i = 0
       data.each do |value|
-        response_set.responses.create({
-          answer: answer,
-          question: question,
-          string_value: value,
-          response_group: i
-        })
+        create_response(answer, question, value, i)
         i += 1
       end
 
@@ -186,6 +170,15 @@ class CertificateGenerator < ActiveRecord::Base
       throw "not handled> #{question.inspect}"
     end
 
+  end
+
+  def create_response(answer, question, string_value = nil, response_group = nil)
+    response_set.responses.create({
+      answer: answer,
+      question: question,
+      string_value: string_value,
+      response_group: response_group
+    }.delete_if { |k,v| v.nil? })
   end
 
 end
