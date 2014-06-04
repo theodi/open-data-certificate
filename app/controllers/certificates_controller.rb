@@ -39,10 +39,6 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @response_set = @certificate.response_set
     if @response_set
-
-      @requirements = @response_set.outstanding_requirements
-      @mandatory_fields = @response_set.incomplete_triggered_mandatory_questions
-
       respond_to do |format|
         format.html { render 'surveyor/requirements' }
         format.json { render :text => @response_set.outstanding_requirements.to_json, content_type: "application/json" }
