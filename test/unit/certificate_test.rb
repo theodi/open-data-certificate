@@ -100,4 +100,9 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal 1, counts[:levels][:standard]
     assert_equal 0, counts[:levels][:expert]
   end
+
+  test "find by dataset and certificate id returns the correct certificate" do
+    certificate = Certificate.find_by_dataset_and_certificate_id(@certificate1.dataset.id, @certificate1.id)
+    assert_equal certificate, @certificate1
+  end
 end

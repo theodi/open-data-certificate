@@ -61,6 +61,10 @@ class Certificate < ActiveRecord::Base
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
         .where(expires_at: nil)
     end
+
+    def find_by_dataset_and_certificate_id(dataset_id, certificate_id)
+      Dataset.find(dataset_id).certificates.find(certificate_id)
+    end
   end
 
   def status

@@ -4,7 +4,7 @@ class CertificatesController < ApplicationController
   before_filter(:only => [:show]) { alternate_formats [:json] }
 
   def show
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
 
     # pretend unpublished certificates don't exist
     unless @certificate.published?
@@ -36,7 +36,7 @@ class CertificatesController < ApplicationController
   end
 
   def improvements
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
     @response_set = @certificate.response_set
     if @response_set
       respond_to do |format|
@@ -52,21 +52,21 @@ class CertificatesController < ApplicationController
   # this is similiar to the improvements, but returns
   # json only, and includes completed questions too
   def progress
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
     @progress = @certificate.progress
 
     render json: @progress
   end
 
   def embed
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
     respond_to do |format|
       format.html { render :show, layout: 'embedded_certificate' }
     end
   end
 
   def badge
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
     respond_to do |format|
       format.js
       format.html { render 'badge', :layout => false }
@@ -87,7 +87,7 @@ class CertificatesController < ApplicationController
 
   # community certification
   def verify
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
 
     if user_signed_in?
       @certificate.verifications.create user_id: current_user.id
@@ -98,7 +98,7 @@ class CertificatesController < ApplicationController
 
   # undo verification
   def verify_undo
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
 
     if user_signed_in?
       @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
@@ -109,7 +109,7 @@ class CertificatesController < ApplicationController
 
   # used by an admin to mark as audited
   def update
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    @certificate = Certificate.find_by_dataset_and_certificate_id(params[:dataset_id], params[:id])
     authorize! :manage, @certificate
     @certificate.update_attribute :audited, params[:certificate] && params[:certificate][:audited]
     redirect_to dataset_certificate_path @certificate.response_set.dataset.id, @certificate.id
