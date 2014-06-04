@@ -90,11 +90,18 @@ class CertificatesController < ApplicationController
     @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
 
     if user_signed_in?
-      if params[:undo]
-        @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
-      else
-        @certificate.verifications.create user_id: current_user.id
-      end
+      @certificate.verifications.create user_id: current_user.id
+    end
+
+    redirect_to dataset_certificate_path params.select {|d| [:dataset_id, :id].include? d}
+  end
+
+  # undo verification
+  def verify_undo
+    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+
+    if user_signed_in?
+      @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
     end
 
     redirect_to dataset_certificate_path params.select {|d| [:dataset_id, :id].include? d}
