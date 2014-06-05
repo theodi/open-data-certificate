@@ -34,10 +34,12 @@ class DatasetsController < ApplicationController
   def typeahead
     # responses for the autocomplete, gives results in
     # [{title:"the match title", path:"/some/path"},…]
-    query = TypeaheadQuery.new(params[:q])
-    @response = query.send(params[:mode].to_sym) rescue []
+    if ['country', 'dataset', 'publisher']. include?(params[:mode])
+      query = TypeaheadQuery.new(params[:q])
+      @response = query.send(params[:mode].to_sym) rescue []
 
-    render json: @response
+      render json: @response
+    end
   end
 
   def dashboard
