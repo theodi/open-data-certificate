@@ -62,80 +62,108 @@ class KittenData < ActiveRecord::Base
   end
 
   def compute_fields
-    @fields = {}
-
-    return @fields if !data
+    return {} if !data
 
     begin
+      @fields = {}
 
-    @fields["dataTitle"] = data[:title]
-
-    if data[:publishers].any?
-      @fields["publisher"] = data[:publishers][0].name
-      @fields["publisherUrl"] = data[:publishers][0].homepage
-      @fields["contactEmail"] = data[:publishers][0].mbox
-    end
-
-    # Release type
-    if data[:update_frequency].empty? && data[:distributions].length == 1
-      @fields["releaseType"] = "oneoff"
-    elsif data[:update_frequency].empty? && data[:distributions].length > 1
-      @fields["releaseType"] = "collection"
-    elsif !data[:update_frequency].empty? && data[:distributions].length > 1
-      @fields["releaseType"] = "series"
-    end
-
-    if data[:title].include?("API") || data[:description].include?("API")
-      @fields["releaseType"] = "service"
-    end
-
-    if data[:rights]
-      @fields["publisherRights"] = "yes"
-      @fields["copyrightURL"] = data[:rights].uri
-      @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:rights].dataLicense]
-      @fields["contentLicence"] = KittenData::CONTENT_LICENCES[data[:rights].contentLicense]
-
-    elsif data[:licenses].any?
-      @fields["publisherRights"] = "yes"
-      @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
-
-      @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
-
-      # Settings for ordnance survey licences
-      if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
-        @fields["dataLicence"] = "other"
-        @fields["contentLicence"] = "other"
-        @fields["otherDataLicenceName"] = "OS OpenData Licence"
-        @fields["otherDataLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
-        @fields["otherDataLicenceOpen"] = "true"
-        @fields["otherContentLicenceName"] = "OS OpenData Licence"
-        @fields["otherContentLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
-        @fields["otherContentLicenceOpen"] = "true"
+      KittenData.instance_methods(false).each do |method|
+        self.send(method) if method.match(/set_[a-z_]+/)
+      end
+    rescue => ex
+      if defined? notify_airbrake
+        notify_airbrake ex
       end
     end
 
-    # Assumptions for data.gov.uk
-    if url.include?("data.gov.uk")
-      uri = URI(url)
-      package = uri.path.split("/").last
+    @fields
+  end
 
-      @fields["publisherOrigin"] = "true"
-      @fields["copyrightURL"] = url
-      @fields["dataPersonal"] = "not_personal"
-      @fields["frequentChanges"] = "false"
-      @fields["listed"] = "true"
-      @fields["listing"] = "http://data.gov.uk"
-      @fields["vocabulary"] = "false"
-      @fields["codelists"] = "false"
-      @fields["contentRights"] = "samerights"
-      @fields["versionManagement"] = ["list"]
-      @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
+  protected
+
+  def set_title
+    @fields["dataTitle"] = data[:title]
+  end
+
+  def set_publisher
+    return unless data[:publishers].any?
+
+    @fields["publisher"] = data[:publishers][0].name
+    @fields["publisherUrl"] = data[:publishers][0].homepage
+    @fields["contactEmail"] = data[:publishers][0].mbox
+  end
+
+  def set_rights
+    return unless data[:rights]
+
+    @fields["publisherRights"] = "yes"
+    @fields["copyrightURL"] = data[:rights].uri
+    @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:rights].dataLicense]
+    @fields["contentLicence"] = KittenData::CONTENT_LICENCES[data[:rights].contentLicense]
+  end
+
+  def set_license
+    return if @fields["dataLicence"]
+    return unless data[:licenses].any?
+
+    @fields["publisherRights"] = "yes"
+    @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
+
+    @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
+
+    # Settings for ordnance survey licences
+    if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
+      @fields["dataLicence"] = "other"
+      @fields["contentLicence"] = "other"
+      @fields["otherDataLicenceName"] = "OS OpenData Licence"
+      @fields["otherDataLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
+      @fields["otherDataLicenceOpen"] = "true"
+      @fields["otherContentLicenceName"] = "OS OpenData Licence"
+      @fields["otherContentLicenceURL"] = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
+      @fields["otherContentLicenceOpen"] = "true"
     end
+  end
 
+  def set_release_type
+    if data[:title].include?("API") || data[:description].include?("API")
+      @fields["releaseType"] = "service"
+    else
+      if data[:update_frequency].empty? && data[:distributions].length == 1
+        @fields["releaseType"] = "oneoff"
+      elsif data[:update_frequency].empty? && data[:distributions].length > 1
+        @fields["releaseType"] = "collection"
+      elsif !data[:update_frequency].empty? && data[:distributions].length > 1
+        @fields["releaseType"] = "series"
+      end
+    end
+  end
+
+  def set_dgu_assumptions
+    return unless url.include?("data.gov.uk")
+    # Assumptions for data.gov.uk
+    uri = URI(url)
+    package = uri.path.split("/").last
+
+    @fields["publisherOrigin"] = "true"
+    @fields["copyrightURL"] = url
+    @fields["dataPersonal"] = "not_personal"
+    @fields["frequentChanges"] = "false"
+    @fields["listed"] = "true"
+    @fields["listing"] = "http://data.gov.uk"
+    @fields["vocabulary"] = "false"
+    @fields["codelists"] = "false"
+    @fields["contentRights"] = "samerights"
+    @fields["versionManagement"] = ["list"]
+    @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
+  end
+
+  def set_structured_open
     # Checks if any of the distributions are machine readable or open
     @fields["machineReadable"] = "true" if data[:distributions].detect{|d| d[:structured] }
     @fields["openStandard"] = "true" if data[:distributions].detect{|d| d[:open] }
+  end
 
+  def set_metadata
     # Does your data documentation contain machine readable documentation for:
     metadata = []
     metadata.push("title") unless data[:title].empty?
@@ -149,18 +177,11 @@ class KittenData < ActiveRecord::Base
     metadata.push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
 
     @fields["documentationMetadata"] = metadata
-
-    rescue => ex
-      if defined? notify_airbrake
-        notify_airbrake ex
-      end
-    end
-
-    @fields
   end
 
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
   end
+
 end
