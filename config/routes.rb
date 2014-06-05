@@ -29,6 +29,7 @@ OpenDataCertificate::Application.routes.draw do
   # Get certificate from dataset url
   get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
                      :constraints => lambda { |request| request.params[:datasetUrl].present? }
+  get '/datasets/search', to: 'datasets#search'
 
   resources :datasets do
     put 'start_questionnaire'

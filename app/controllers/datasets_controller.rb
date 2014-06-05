@@ -12,25 +12,32 @@ class DatasetsController < ApplicationController
 
     @datasets = @datasets.view_by_jurisdiction(params[:jurisdiction]) if params[:jurisdiction]
     @datasets = @datasets.view_by_publisher(params[:publisher]) if params[:publisher]
-
-    if params[:search]
-      @title = t('datasets.search_results')
-
-      base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
-
-      # this is far from ideal - loads in all matches then limits for pagination
-      results = base.merge(Certificate.search(name_cont: params[:search]).result).all +
-                base.merge(Certificate.search(curator_cont: params[:search]).result).all +
-                base.merge(Survey.search(full_title_cont: params[:search]).result).all
-
-      @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
-    else
-      @datasets = @datasets.page params[:page]
-    end
+    @datasets = @datasets.page params[:page]
 
     respond_to do |format|
       format.html
       format.feed { render :layout => false  }
+    end
+  end
+
+  def search
+    @title = t('datasets.search_results')
+
+    base = Dataset.show_all(params[:format])
+                           .joins(:certificate)
+                           .joins({response_set: :survey}).reorder('')
+
+    # this is far from ideal - loads in all matches then limits for pagination
+    results = base.merge(Certificate.search(name_cont: params[:search]).result).all +
+              base.merge(Certificate.search(curator_cont: params[:search]).result).all +
+              base.merge(Survey.search(full_title_cont: params[:search]).result).all
+
+    @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
+    @datasets = @datasets.page params[:page]
+
+    respond_to do |format|
+      format.html { render :template => 'datasets/index' }
+      format.feed { render :template => 'datasets/index', :layout => false  }
     end
   end
 
