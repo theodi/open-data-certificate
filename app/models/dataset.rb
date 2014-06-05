@@ -32,7 +32,7 @@ class Dataset < ActiveRecord::Base
       dataset
     end
 
-    def show_all(format)
+    def show_all(format = nil)
       all = where(removed: false)
            .includes(:response_set, :certificate)
            .joins(:response_set)
@@ -42,6 +42,18 @@ class Dataset < ActiveRecord::Base
       else
         all.order('response_sets.attained_index DESC')
       end
+    end
+
+    def multi_search(query)
+      base = show_all.joins(:certificate)
+                     .joins({response_set: :survey}).reorder('')
+
+      # this is far from ideal - loads in all matches then limits for pagination
+      results = base.merge(Certificate.search(name_cont: query).result).all +
+      base.merge(Certificate.search(curator_cont: query).result).all +
+      base.merge(Survey.search(full_title_cont: query).result).all
+
+      results.flatten.uniq
     end
 
   end

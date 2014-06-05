@@ -20,7 +20,7 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(dataset.title, 'Test dataset default title')
   end
-  
+
   test "Should set the documentation URL if it hasn't been set before" do
     dataset = FactoryGirl.create(:dataset_without_documentation_url)
     dataset.set_default_documentation_url!('http://foo.com')
@@ -41,7 +41,7 @@ class DatasetTest < ActiveSupport::TestCase
   end
 
   test "#newest_response_set should return the most recent response set" do
-      
+
     dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
     survey = FactoryGirl.create(:survey)
     response_set_1 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
@@ -78,7 +78,7 @@ class DatasetTest < ActiveSupport::TestCase
     refute_nil(dataset)
   end
 
-  test "#destroy_if_no_responses should destroy the dataset if the response_sets is empty"  do 
+  test "#destroy_if_no_responses should destroy the dataset if the response_sets is empty"  do
 
     dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
 
@@ -118,6 +118,58 @@ class DatasetTest < ActiveSupport::TestCase
     dataset.update_attributes({removed: true})
 
     refute dataset.removed
+  end
+
+  test "#show_all should return all published datasets which have a response set and certificate" do
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    5.times do
+      FactoryGirl.create(:certificate_with_dataset)
+    end
+
+    datasets = Dataset.show_all
+
+    assert_equal 5, datasets.count
+  end
+
+  test "#multi_search should search by certificate name" do
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+
+    FactoryGirl.create(:published_certificate_with_dataset, name: "Banana Certificate")
+
+    search = Dataset.multi_search("Banana")
+
+    assert_equal 1, search.count
+    assert_equal "Banana Certificate", search.first.certificate.name
+  end
+
+  test "#multi_search should search by curator name" do
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+
+    FactoryGirl.create(:published_certificate_with_dataset, curator: "Banana Phone")
+
+    search = Dataset.multi_search("Banana")
+
+    assert_equal 1, search.count
+    assert_equal "Banana Phone", search.first.certificate.curator
+  end
+
+  test "#multi_search should search by survey name" do
+    5.times do
+      FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    survey = FactoryGirl.create(:survey, full_title: "My cool survey")
+    FactoryGirl.create(:published_certificate_with_dataset, survey: survey)
+
+    search = Dataset.multi_search("cool")
+
+    assert_equal 1, search.count
+    assert_equal survey, search.first.certificate.survey
   end
 
 end

@@ -22,18 +22,8 @@ class DatasetsController < ApplicationController
 
   def search
     @title = t('datasets.search_results')
-
-    base = Dataset.show_all(params[:format])
-                           .joins(:certificate)
-                           .joins({response_set: :survey}).reorder('')
-
-    # this is far from ideal - loads in all matches then limits for pagination
-    results = base.merge(Certificate.search(name_cont: params[:search]).result).all +
-              base.merge(Certificate.search(curator_cont: params[:search]).result).all +
-              base.merge(Survey.search(full_title_cont: params[:search]).result).all
-
-    @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
-    @datasets = @datasets.page params[:page]
+    results = Dataset.multi_search(params[:search])
+    @datasets = Kaminari.paginate_array(results).page params[:page]
 
     respond_to do |format|
       format.html { render :template => 'datasets/index' }
