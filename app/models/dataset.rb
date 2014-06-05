@@ -28,6 +28,19 @@ class Dataset < ActiveRecord::Base
       end
       dataset
     end
+
+    def show_all(format)
+      all = where(removed: false)
+           .includes(:response_set, :certificate)
+           .joins(:response_set)
+
+      if format == "feed"
+        all.order('datasets.updated_at DESC')
+      else
+        all.order('response_sets.attained_index DESC')
+      end
+    end
+
   end
 
   def title

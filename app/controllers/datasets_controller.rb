@@ -7,19 +7,9 @@ class DatasetsController < ApplicationController
   before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
-
-    @datasets = Dataset
-                .where(removed: false)
-                .includes(:response_set, :certificate)
-                .joins(:response_set)
-
+    @datasets = Dataset.show_all(params[:format])
     @title = t('datasets.datasets')
 
-    if params[:format] == "feed"
-      @datasets = @datasets.order('datasets.updated_at DESC')
-    else
-      @datasets = @datasets.order('response_sets.attained_index DESC')
-    end
 
     if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)
