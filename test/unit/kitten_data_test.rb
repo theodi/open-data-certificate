@@ -264,12 +264,12 @@ class KittenDataTest < ActiveSupport::TestCase
     metadata = [
       "title",
       "description",
-      "issued",
-      "modified",
       "accrualPeriodicity",
       "publisher",
       "keyword",
       "distribution",
+      "issued",
+      "modified",
       "temporal"
     ]
 

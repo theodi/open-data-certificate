@@ -164,19 +164,28 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_metadata
-    # Does your data documentation contain machine readable documentation for:
-    metadata = []
-    metadata.push("title") unless data[:title].empty?
-    metadata.push("description") unless data[:description].empty?
-    metadata.push("issued") unless data[:release_date].nil?
-    metadata.push("modified") unless data[:modified_date].nil?
-    metadata.push("accrualPeriodicity") unless data[:update_frequency].empty?
-    metadata.push("publisher") unless data[:publishers].empty?
-    metadata.push("keyword") unless data[:keywords].empty?
-    metadata.push("distribution") unless data[:distributions].empty?
-    metadata.push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
+      @fields["documentationMetadata"] = []
 
-    @fields["documentationMetadata"] = metadata
+    # Does your data documentation contain machine readable documentation for:
+    {
+      "title" => :title,
+      "description" =>  :description,
+      "accrualPeriodicity" => :update_frequency,
+      "publisher" => :publishers,
+      "keyword" => :keywords,
+      "distribution" => :distributions
+    }.each do |k,v|
+        @fields["documentationMetadata"].push(k) unless data[v].empty?
+    end
+
+    {
+      "issued" => :release_date,
+      "modified" => :modified_date
+    }.each do |k,v|
+        @fields["documentationMetadata"].push(k) unless data[v].nil?
+    end
+
+    @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
   end
 
   private
