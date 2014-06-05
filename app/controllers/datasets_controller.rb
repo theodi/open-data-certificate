@@ -10,16 +10,8 @@ class DatasetsController < ApplicationController
     @datasets = Dataset.show_all(params[:format])
     @title = t('datasets.datasets')
 
-
-    if params[:jurisdiction]
-      @datasets = @datasets.joins(response_set: :survey)
-                           .merge(Survey.where(title: params[:jurisdiction]))
-    end
-
-    if params[:publisher]
-      @datasets = @datasets.joins(response_set: :certificate)
-                           .merge(Certificate.where(curator: params[:publisher]))
-    end
+    @datasets = @datasets.view_by_jurisdiction(params[:jurisdiction]) if params[:jurisdiction]
+    @datasets = @datasets.view_by_publisher(params[:publisher]) if params[:publisher]
 
     if params[:search]
       @title = t('datasets.search_results')
