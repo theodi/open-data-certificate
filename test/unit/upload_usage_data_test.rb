@@ -16,6 +16,14 @@ class UploadUsageDataTest < ActiveSupport::TestCase
     end
   end
 
+  test "create_csvs shouldn't choke on blank rows" do
+    data = [{foo: "foo", baz: "baz"}, nil, {foo: "baz", baz: "foo"}, nil]
+    csv = UploadUsageData.create_csv(data)
+
+    assert_equal 3, CSV.parse(csv).count
+    assert_true Csvlint::Validator.new( StringIO.new(csv) ).valid?
+  end
+
   test "find_collection finds the corrrect collection" do
     VCR.use_cassette('find_collection finds the corrrect collection') do
       collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
