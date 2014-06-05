@@ -19,6 +19,7 @@ module OpenDataCertificate
     config.autoload_paths += %W(
       #{config.root}/lib/extra
       #{config.root}/app/models/concerns
+      #{config.root}/app/queries
     )
 
     # Only load the plugins named here, in the order given (default is alphabetical).

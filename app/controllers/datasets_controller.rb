@@ -34,16 +34,8 @@ class DatasetsController < ApplicationController
   def typeahead
     # responses for the autocomplete, gives results in
     # [{title:"the match title", path:"/some/path"},…]
-    @response = case params[:mode]
-      when 'dataset'
-        Dataset.typeahead_search(params[:q])
-      when 'publisher'
-        Certificate.typeahead_search(params[:q])
-      when 'country'
-        Survey.typeahead_search(params[:q])
-      else
-        []
-      end
+    query = TypeaheadQuery.new(params[:q])
+    @response = query.send(params[:mode].to_sym) rescue []
 
     render json: @response
   end

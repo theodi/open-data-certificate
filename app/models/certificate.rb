@@ -65,19 +65,6 @@ class Certificate < ActiveRecord::Base
     def find_by_dataset_and_certificate_id(dataset_id, certificate_id)
       Dataset.find(dataset_id).certificates.find(certificate_id)
     end
-
-    def typeahead_search(query)
-      search({curator_cont:query}).result
-              .where(Certificate.arel_table[:curator].not_eq(nil))
-              .includes(:response_set).merge(ResponseSet.published)
-              .group(:curator)
-              .limit(5).map do |dataset|
-        {
-          value: dataset.curator,
-          path:  Rails.application.routes.url_helpers.datasets_path(publisher:dataset.curator)
-        }
-      end
-    end
   end
 
   def status

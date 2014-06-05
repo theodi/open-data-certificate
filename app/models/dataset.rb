@@ -56,19 +56,6 @@ class Dataset < ActiveRecord::Base
       results.flatten.uniq
     end
 
-    def typeahead_search(query)
-      search({title_cont:query}).result
-             .includes(:response_set)
-             .merge(ResponseSet.published)
-             .limit(5).map do |dataset|
-        {
-          value: dataset.title,
-          path: Rails.application.routes.url_helpers.dataset_path(dataset),
-          attained_index: dataset.response_set.try(:attained_index)
-        }
-      end
-    end
-
   end
 
   def title
