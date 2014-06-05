@@ -36,6 +36,19 @@ class Survey < ActiveRecord::Base
     def migrate_access_code(access_code)
       Survey::MIGRATIONS[access_code] || access_code
     end
+
+    def typeahead_search(query)
+      search({full_title_cont:query}).result
+            .joins(:response_sets).merge(ResponseSet.published)
+            .group(:title)
+            .order(:survey_version)
+            .limit(5).map do |survey|
+        {
+          value: survey.full_title,
+          path: Rails.application.routes.url_helpers.datasets_path(jurisdiction:survey.title)
+        }
+      end
+    end
   end
 
   def previous_access_codes

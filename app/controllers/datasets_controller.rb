@@ -36,38 +36,11 @@ class DatasetsController < ApplicationController
     # [{title:"the match title", path:"/some/path"},…]
     @response = case params[:mode]
       when 'dataset'
-        Dataset.search({title_cont:params[:q]}).result
-               .includes(:response_set)
-               .merge(ResponseSet.published)
-               .limit(5).map do |dataset|
-          {
-            value: dataset.title,
-            path: dataset_path(dataset),
-            attained_index: dataset.response_set.try(:attained_index)
-          }
-        end
+        Dataset.typeahead_search(params[:q])
       when 'publisher'
-        Certificate.search({curator_cont:params[:q]}).result
-                .where(Certificate.arel_table[:curator].not_eq(nil))
-                .includes(:response_set).merge(ResponseSet.published)
-                .group(:curator)
-                .limit(5).map do |dataset|
-          {
-            value: dataset.curator,
-            path:  datasets_path(publisher:dataset.curator)
-          }
-        end
+        Certificate.typeahead_search(params[:q])
       when 'country'
-        Survey.search({full_title_cont:params[:q]}).result
-              .joins(:response_sets).merge(ResponseSet.published)
-              .group(:title)
-              .order(:survey_version)
-              .limit(5).map do |survey|
-          {
-            value: survey.full_title,
-            path: datasets_path(jurisdiction:survey.title)
-          }
-        end
+        Survey.typeahead_search(params[:q])
       else
         []
       end
