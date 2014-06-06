@@ -1,5 +1,5 @@
 class Survey < ActiveRecord::Base
-  include Surveyor::Models::SurveyMethods
+  include Surveyor::Models::SurveyMethods, SurveyorOverrides
 
   serialize :meta_map, Hash
 
@@ -145,53 +145,6 @@ class Survey < ActiveRecord::Base
 
   def language
     translations.first.locale
-  end
-
-  ### override surveyor methods
-
-  def translation(locale_symbol)
-    {:title => self.title, :description => self.description}.with_indifferent_access.merge(trns(locale_symbol))
-  end
-
-  # prevent the translations from being loaded all the time
-  def trns(locale_symbol)
-    return @trns unless @trns.nil?
-    t = self.translations.where(:locale => locale_symbol.to_s).first
-    @trns = t ? YAML.load(t.translation || "{}").with_indifferent_access : {}
-  end
-
-  def question(identifier)
-    questions.select{|q| q.reference_identifier == identifier.to_s }.first
-  end
-
-  def documentation_url
-    question 'documentationUrl'
-  end
-
-  ### /override surveyor methods
-
-  private
-
-  def ensure_requirements_are_linked_to_only_one_question_or_answer
-    requirements.each do |requirement|
-      amount = new_questions.select { |q| q != requirement && q.requirement && q.requirement.include?(requirement.requirement) }.count + new_answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
-      if amount == 0
-        errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
-      elsif amount > 1
-        errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
-      end
-    end
-  end
-
-  # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
-  def new_questions
-    questions = sections.map(&:questions).flatten.compact
-    requirements = questions.select(&:is_a_requirement?)
-    (questions - requirements)
-  end
-
-  def new_answers
-    only_questions.map(&:answers).flatten.compact
   end
 
 end
