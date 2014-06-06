@@ -147,4 +147,28 @@ class Survey < ActiveRecord::Base
     translations.first.locale
   end
 
+  private
+
+  def ensure_requirements_are_linked_to_only_one_question_or_answer
+    requirements.each do |requirement|
+      amount = new_questions.select { |q| q != requirement && q.requirement && q.requirement.include?(requirement.requirement) }.count + new_answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
+      if amount == 0
+        errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
+      elsif amount > 1
+        errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
+      end
+    end
+  end
+
+  # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
+  def new_questions
+    questions = sections.map(&:questions).flatten.compact
+    requirements = questions.select(&:is_a_requirement?)
+    (questions - requirements)
+  end
+
+  def new_answers
+    only_questions.map(&:answers).flatten.compact
+  end
+
 end
