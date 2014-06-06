@@ -374,46 +374,40 @@ class ResponseSet < ActiveRecord::Base
   # Updates responses without using a surveyor form
   def update_responses(responses)
 
-    ui_hash = []
+    @ui_hash = []
 
     responses.each do |key, value|
-      question = survey.question(key)
-      response = response(key)
+      @question = survey.question(key)
+      @response = response(key)
 
       next if value.nil? || question.nil?
 
       if question.type == :none || question.type == :repeater
-        ui_hash.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answers.first.id.to_s,
-          string_value: value,
-          autocompleted: true
-        ))
+        update_response(@question.answers.first.id.to_s, value)
       end
 
       if question.type == :one
-        ui_hash.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answer(value).id.to_s,
-          autocompleted: true
-        ))
+        update_response(@question.answer(value).id.to_s)
       end
 
       if question.type == :any
         value.each do |item|
-          ui_hash.push(HashWithIndifferentAccess.new(
-            question_id: question.id.to_s,
-            api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-            answer_id: question.answer(item).id.to_s,
-            autocompleted: true
-          ))
+          update_response(@question.answer(item).id.to_s)
         end
       end
     end
 
-    update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+    update_from_ui_hash(Hash[@ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+  end
+
+  def update_response(answer_id, string_value = nil)
+    @ui_hash.push(HashWithIndifferentAccess.new(
+      question_id: @question.id.to_s,
+      api_id: @response ? @response.api_id : Surveyor::Common.generate_api_id,
+      answer_id: answer_id,
+      string_value: string_value,
+      autocompleted: true
+    ).delete_if { |k,v| v.nil? })
   end
 
   def assign_to_user!(user)
