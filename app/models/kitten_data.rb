@@ -41,20 +41,24 @@ class KittenData < ActiveRecord::Base
         :release_date      => dataset_field(:issued),
         :modified_date     => dataset_field(:modified),
         :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
-        :distributions     => dataset_field(:distributions, []).map { |distribution|
-          {
-            :title       => distribution.title,
-            :description => distribution.description,
-            :access_url  => distribution.access_url,
-            :extension   => distribution.format.try(:extension),
-            :open        => distribution.format.try(:open?),
-            :structured  => distribution.format.try(:structured?)
-          }
-        }
+        :distributions     => distributions
       }
     else
       self.data = false
     end
+  end
+
+  def distributions
+    dataset_field(:distributions, []).map { |distribution|
+      {
+        :title       => distribution.title,
+        :description => distribution.description,
+        :access_url  => distribution.access_url,
+        :extension   => distribution.format.try(:extension),
+        :open        => distribution.format.try(:open?),
+        :structured  => distribution.format.try(:structured?)
+      }
+    }
   end
 
   def fields
