@@ -132,13 +132,7 @@ class KittenData < ActiveRecord::Base
     if data[:title].include?("API") || data[:description].include?("API")
       @fields["releaseType"] = "service"
     else
-      if data[:update_frequency].empty? && data[:distributions].length == 1
-        @fields["releaseType"] = "oneoff"
-      elsif data[:update_frequency].empty? && data[:distributions].length > 1
-        @fields["releaseType"] = "collection"
-      elsif !data[:update_frequency].empty? && data[:distributions].length > 1
-        @fields["releaseType"] = "series"
-      end
+      check_frequency
     end
   end
 
@@ -168,7 +162,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_metadata
-      @fields["documentationMetadata"] = []
+    @fields["documentationMetadata"] = []
 
     # Does your data documentation contain machine readable documentation for:
     {
@@ -190,6 +184,14 @@ class KittenData < ActiveRecord::Base
     end
 
     @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
+  end
+
+  def check_frequency
+    if data[:update_frequency].empty?
+      data[:distributions].length == 1 ? @fields["releaseType"] = "oneoff" : @fields["releaseType"] = "collection"
+    else
+      data[:distributions].length > 1 if @fields["releaseType"] = "series"
+    end
   end
 
   private
