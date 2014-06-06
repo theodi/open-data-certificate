@@ -169,11 +169,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def all_urls_resolve?
-    @errors = []
+    @url_errors = []
     responses_with_url_type.each do |response|
       resolve_url(response)
     end
-    @errors.length == 0
+    @url_errors.length == 0
   end
 
   def resolve_url(response)
@@ -185,7 +185,7 @@ class ResponseSet < ActiveRecord::Base
     end
     response.error = (response_code != 200)
     response.save
-    @errors << response if response.error === true
+    @url_errors << response if response.error === true
   end
 
   def all_mandatory_questions_complete?
