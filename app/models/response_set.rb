@@ -155,21 +155,12 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_mandatory_questions
 
-    @triggered_mandatory_questions ||= survey.mandatory_questions.select do |r|
-      r.dependency.nil? ?
-        true : depends[r.dependency.id]
-    end
-
+    @triggered_mandatory_questions ||= select_triggered(survey.mandatory_questions)
     # @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
 
   def triggered_requirements
-    @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.nil? ?
-        true :
-        depends[r.dependency.id]
-    end
-
+    @triggered_requirements ||= select_triggered(survey.requirements)
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
 
@@ -352,6 +343,14 @@ class ResponseSet < ActiveRecord::Base
   private
   def value_for reference_identifier, value = :to_s
     responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
+  end
+
+  def select_triggered(selector)
+    selector.select do |r|
+      r.dependency.nil? ?
+        true :
+        depends[r.dependency.id]
+    end
   end
 
 end
