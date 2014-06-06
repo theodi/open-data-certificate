@@ -89,7 +89,7 @@ class CertificateTest < ActiveSupport::TestCase
     @certificate2.update_attributes(attained_level: "pilot")
     @certificate3.update_attributes(attained_level: "standard")
 
-    counts = Certificate.counts
+    counts = Stats::Certificate.counts
 
     assert_equal 3, counts[:all]
     assert_equal 3, counts[:all_this_month]
