@@ -169,24 +169,23 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def all_urls_resolve?
-    errors = []
+    @errors = []
     responses_with_url_type.each do |response|
-      unless response.string_value.blank?
-        response_code = Rails.cache.fetch(response.string_value) rescue nil
-        if response_code.nil?
-          response_code = HTTParty.get(response.string_value).code rescue nil
-        end
-        if response_code != 200
-          response.error = true
-          response.save
-          errors << response
-        else
-          response.error = false
-          response.save
-        end
-      end
+      resolve_url(response)
     end
-    errors.length == 0
+    @errors.length == 0
+  end
+
+  def resolve_url(response)
+    return nil if response.string_value.blank?
+
+    response_code = Rails.cache.fetch(response.string_value) rescue nil
+    if response_code.nil?
+      response_code = HTTParty.get(response.string_value).code rescue nil
+    end
+    response.error = (response_code != 200)
+    response.save
+    @errors << response if response.error === true
   end
 
   def all_mandatory_questions_complete?
