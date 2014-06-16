@@ -10,7 +10,7 @@
             Expired
           - else
             Warning
-        %p= "This certificate should be updated to reflect the #{@certificate.response_set.survey.try(:status)} questionnaire for #{@certificate.response_set.jurisdiction}."
+        %p= "This certificate should be updated to reflect the latest questionnaire for #{@certificate.response_set.jurisdiction}."
 
 - scope_locale @certificate.response_set.locale do
 
