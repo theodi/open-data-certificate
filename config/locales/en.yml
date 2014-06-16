@@ -223,6 +223,8 @@ en:
     unmark_audited: Unmark audited
     audited: This certificate has been marked as ODI audited
     not_audited: This certificate has not been marked as ODI audited
+    expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
+    expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
 
   datasets:
     datasets: Datasets

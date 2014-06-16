@@ -5,12 +5,14 @@
     %header.notice{class: @certificate.expired? ? 'notice-error' : 'notice-warning'}
       .container
         %h1
-          %i.icon.icon-warning-sign
           - if @certificate.expired?
-            Expired
+            %i.icon.icon-warning-sign
+              Expired
+            %p= t('certificate.expired_notice', jurisdiction: @certificate.response_set.jurisdiction)
           - else
-            Warning
-        %p= "This certificate should be updated to reflect the latest questionnaire for #{@certificate.response_set.jurisdiction}."
+            %i.icon.icon-warning-sign
+              Warning
+            %p= t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, days: @certificate.days_to_expiry)
 
 - scope_locale @certificate.response_set.locale do
 
