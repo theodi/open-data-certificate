@@ -14,7 +14,7 @@
 
       %i.status-badge{class: "status-badge-#{response_set.state}"}
 
-      %p= t("dashboard.states.#{response_set.state}")
+      %p= t("dashboard.states.#{response_set.state}", days: response_set.certificate.days_to_expiry)
 
       %p.jurisdiction
         %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction

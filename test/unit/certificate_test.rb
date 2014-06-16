@@ -133,4 +133,11 @@ class CertificateTest < ActiveSupport::TestCase
     assert_equal "draft", all_certificates.first[:status]
     assert_equal "exemplar", all_certificates.first[:level]
   end
+
+  test 'days_to_expiry returns correct number of days' do
+    @certificate1.expires_at = DateTime.now + 14
+    @certificate1.save
+
+    assert_equal 14, @certificate1.days_to_expiry
+  end
 end
