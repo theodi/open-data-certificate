@@ -1,5 +1,5 @@
 - is_primary = response_set == primary
-.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
+.response-set{class: "response-set-#{response_set.state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
   .row-fluid
     .span3
       %h3= t('dashboard.level_attained')
@@ -12,9 +12,9 @@
     .span3
       %h3= t('dashboard.current_status')
 
-      %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
+      %i.status-badge{class: "status-badge-#{response_set.state}"}
 
-      %p= t ['dashboard.states', response_set.aasm_state]
+      %p= t("dashboard.states.#{response_set.state}")
 
       %p.jurisdiction
         %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction
