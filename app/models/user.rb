@@ -39,4 +39,9 @@ class User < ActiveRecord::Base
   def admin?
     (ENV['ODC_ADMIN_IDS'] || '').split(',').include? id.to_s
   end
+
+  def has_expired_or_expiring_certificates?
+    response_sets.any? { |r| r.certificate.expired? || r.certificate.expiring? unless r.certificate.nil? }
+  end
+
 end
