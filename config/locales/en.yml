@@ -125,6 +125,8 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+      expired: Expired
+      expiring: 'Expires in %{days} days'
     verification: Verification
     expiring_certificates: Some of your certificates should be updated to reflect the latest version of their questionnaires
 
