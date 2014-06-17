@@ -8,9 +8,11 @@
           %i.icon.icon-warning-sign
           - if @certificate.expired?
             Expired
+            - notice = t('certificate.expired_notice', jurisdiction: @certificate.response_set.jurisdiction)
           - else
             Warning
-        %p= "This certificate should be updated to reflect the latest questionnaire for #{@certificate.response_set.jurisdiction}."
+            - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, days: @certificate.days_to_expiry)
+        %p= notice
 
 - scope_locale @certificate.response_set.locale do
 

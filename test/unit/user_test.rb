@@ -16,4 +16,42 @@ class UserTest < ActiveSupport::TestCase
     ENV['ODC_ADMIN_IDS'] = nil
   end
 
+  test "has_expired_or_expiring_certificates? returns false if user's certificates are up to date" do
+    user = FactoryGirl.create(:user)
+
+    5.times do
+       FactoryGirl.create(:response_set_with_dataset, user: user)
+    end
+
+    assert_equal false, user.has_expired_or_expiring_certificates?
+  end
+
+  test "has_expired_or_expiring_certificates? returns true if user has expiring certificates" do
+    user = FactoryGirl.create(:user)
+
+    5.times do
+       FactoryGirl.create(:response_set_with_dataset, user: user)
+    end
+
+    certificate = Certificate.last
+    certificate.expires_at =  DateTime.now + 1.day
+    certificate.save
+
+    assert_equal true, user.has_expired_or_expiring_certificates?
+  end
+
+  test "has_expired_or_expiring_certificates? returns true if the user has expired certificates" do
+    user = FactoryGirl.create(:user)
+
+    5.times do
+       FactoryGirl.create(:response_set_with_dataset, user: user)
+    end
+
+    certificate = Certificate.last
+    certificate.expires_at =  DateTime.now - 1.day
+    certificate.save
+
+    assert_equal true, user.has_expired_or_expiring_certificates?
+  end
+
 end
