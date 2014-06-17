@@ -20,7 +20,7 @@ class UserTest < ActiveSupport::TestCase
     user = FactoryGirl.create(:user)
 
     5.times do
-       FactoryGirl.create(:response_set_with_dataset, user: user)
+       FactoryGirl.create(:response_set_with_dataset, user: user, aasm_state: "published")
     end
 
     assert_equal false, user.has_expired_or_expiring_certificates?
@@ -30,7 +30,7 @@ class UserTest < ActiveSupport::TestCase
     user = FactoryGirl.create(:user)
 
     5.times do
-       FactoryGirl.create(:response_set_with_dataset, user: user)
+       FactoryGirl.create(:response_set_with_dataset, user: user, aasm_state: "published")
     end
 
     certificate = Certificate.last
@@ -44,7 +44,7 @@ class UserTest < ActiveSupport::TestCase
     user = FactoryGirl.create(:user)
 
     5.times do
-       FactoryGirl.create(:response_set_with_dataset, user: user)
+       FactoryGirl.create(:response_set_with_dataset, user: user, aasm_state: "published")
     end
 
     certificate = Certificate.last
@@ -52,6 +52,22 @@ class UserTest < ActiveSupport::TestCase
     certificate.save
 
     assert_equal true, user.has_expired_or_expiring_certificates?
+  end
+
+  test "has_expired_or_expiring_certificates? returns false if a user has an unpublished expiring certificate" do
+    user = FactoryGirl.create(:user)
+
+    5.times do
+       FactoryGirl.create(:response_set_with_dataset, user: user, aasm_state: "published")
+    end
+
+    FactoryGirl.create(:response_set_with_dataset, user: user, aasm_state: "draft")
+
+    certificate = Certificate.last
+    certificate.expires_at =  DateTime.now - 1.day
+    certificate.save
+
+    assert_equal false, user.has_expired_or_expiring_certificates?
   end
 
 end
