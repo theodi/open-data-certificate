@@ -1,6 +1,14 @@
 language: ruby
 rvm:
 - 1.9.3
+bundler_args: --without development --path=~/.bundle
+before_install:
+- gem install nokogiri -- --use-system-libraries
+- ! 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+- gem install bundler bundle_cache
+- bundle_cache_install
+after_script:
+- bundle_cache
 before_script: bundle exec rake db:schema:load
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
@@ -32,3 +40,7 @@ env:
   - secure: W/BRRQ3WK92W7olcCAwAJnYFuHfyNunrA6MCTwecOX4hCLw1900lSKs0MnJ7QvdiBvzuo/qLBKsfaZoNGoIwTgpT2P3MFcnJozehhPXkAaWixIkmN3u1oeZ6OdDDU9NIYgUzm8lzoqXGiTbIb4z5lZMmfx+j/CZXoT86V+b1U4U=
   - secure: Li3T6biupLWMx3dvzqzR2qS28HaOCiiyzm/MxVmexvwLGgiTVV4py+LwTGXfI6niJ5gzt1SLOLUW0ZnBtN4qv8mtQKcFgKkkpt62eeBxCwWGu7pbJ0rjz7ujiQsR70XsW8c0McAwYavRxlHD83KGdVlXklhZ+4+lnduhlIpgYAY=
   - GAPPS_CERTIFICATE_USAGE_COLLECTION="ODI Drive/Technical/Test Data/Usage Data"
+  - BUNDLE_ARCHIVE=odc
+  - AWS_S3_BUCKET=theodi-travis-bundle-cache
+  - secure: N2zoCCMSpUlDeZRH5Dd8f58EDLuufNPPpmBeakohVL8JAc6j9r4qKfYwrgdQGm20Dzljgu9agD2UDE9AziSTeunsTobZtW6Yy3mobuNUgUZvn75sqBV8QLj1seMtSQjAsFvRn9AgrESyPX4GCfvRBmaqxFghr6ZspWbRl5L6pZ8=
+  - secure: jTdqip9A5G0g6JkbBZ2tz/l8kVv9RAWpsHe8Tw9V+YCO7I5PlxEdwvkA9gVbu4gexHczU9dMzDK5u484ZaJW5FYnkUuAMmpio+hJYjwUdlWAabSn4skuXRardkkELllrqLxF9577VOEI7j4pz5prv52CGn+57LzxKXF6HI+wiw4=

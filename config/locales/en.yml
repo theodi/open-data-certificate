@@ -241,6 +241,8 @@ en:
     choose_language: --- Select language ---
     start_new_language: Change language
 
+    update_instructions: "Please review your questionnaire to check your answers are still correct and you have completed all of the mandatory questions. <br />When you are happy, click 'Save and finish' to update your Certificate to the latest questionnaire."
+
   summary_data:
     summary: Summary
     type_of_release: Type of release
