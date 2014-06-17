@@ -18,6 +18,7 @@ module UploadUsageData
   end
 
   def self.create_csv(data)
+    data.reject! { |d| d.nil? }
     csv = CSV.generate(force_quotes: true, row_sep: "\r\n") do |csv|
       # Header row goes here
       headers = data.first.keys

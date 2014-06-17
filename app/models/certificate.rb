@@ -129,6 +129,14 @@ class Certificate < ActiveRecord::Base
     expiring? && expires_at < DateTime.now
   end
 
+  def days_to_expiry
+    if expiring?
+      (expires_at.to_date - Date.today).to_i
+    else
+      nil
+    end
+  end
+
   def verified_by_user? user
     verifications.exists? user_id: user.id
   end

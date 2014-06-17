@@ -61,6 +61,16 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+  def state
+    if certificate.expired? && aasm_state == "published"
+      "expired"
+    elsif certificate.expiring? && aasm_state == "published"
+      "expiring"
+    else
+      aasm_state
+    end
+  end
+
   def publish_certificate
     certificate.update_attribute :published, true
   end
