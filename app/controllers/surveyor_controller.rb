@@ -89,6 +89,11 @@ class SurveyorController < ApplicationController
 
       @response_set = new_response_set
     end
+
+    if params[:update]
+      flash[:warning] = t('response_set.update_instructions')
+    end
+
     redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
   end
 
