@@ -62,9 +62,9 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def state
-    if certificate.expired?
+    if certificate.expired? && aasm_state == "published"
       "expired"
-    elsif certificate.expiring?
+    elsif certificate.expiring? && aasm_state == "published"
       "expiring"
     else
       aasm_state
