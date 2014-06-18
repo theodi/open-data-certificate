@@ -1,4 +1,5 @@
 class ResponseSet < ActiveRecord::Base
+  include DetermineFromResponses
   include Surveyor::Models::ResponseSetMethods
   include AASM
 
@@ -19,22 +20,6 @@ class ResponseSet < ActiveRecord::Base
 
   # there is already a protected method with this
   # has_many :dependencies, :through => :survey
-
-  class << self
-
-    def counts
-      within_last_month = (Time.now - 1.month)..Time.now
-      {
-        :all                           => self.count,
-        :all_datasets                  => self.select("DISTINCT(dataset_id)").count,
-        :all_datasets_this_month       => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
-        :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
-        :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
-      }
-    end
-
-  end
-
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
@@ -146,84 +131,6 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def method_missing(method_name, *args, &blk)
-    val = method_name.to_s.match(/(.+)_determined_from_responses/)
-    unless val.nil? or survey.map[val[1].to_sym].nil?
-      var = instance_variable_get("@#{method_name}")
-      var ||= value_for val[1].to_sym
-    else
-      super
-    end
-  end
-
-  def data_licence_determined_from_responses
-    if @data_licence_determined_from_responses.nil?
-      ref = value_for :data_licence, :reference_identifier
-      case ref
-      when nil
-        @data_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "na"
-        @data_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "other"
-         @data_licence_determined_from_responses = {
-          :title => value_for(:other_dataset_licence_name),
-          :url   => value_for(:other_dataset_licence_url)
-         }
-      else
-        licence = Odlifier::License.new(ref.dasherize)
-        @data_licence_determined_from_responses = {
-          :title => licence.title,
-          :url   => licence.url
-        }
-      end
-    end
-    @data_licence_determined_from_responses
-  end
-
-  def content_licence_determined_from_responses
-    if @content_licence_determined_from_responses.nil?
-      ref = value_for :content_licence, :reference_identifier
-      case ref
-      when nil
-        @content_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "na"
-        @content_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "other"
-         @content_licence_determined_from_responses = {
-          :title => value_for(:other_content_licence_name),
-          :url   => value_for(:other_content_licence_url)
-         }
-      else
-        begin
-          licence = Odlifier::License.new(ref.dasherize)
-          @content_licence_determined_from_responses = {
-            :title => licence.title,
-            :url   => licence.url
-          }
-        rescue ArgumentError
-          @content_licence_determined_from_responses = {
-            :title => 'Unknown',
-            :url   => nil
-          }
-        end
-      end
-    else
-      @content_licence_determined_from_responses
-    end
-  end
-
   def licences
     {
       data:     begin data_licence_determined_from_responses    rescue nil end,
@@ -242,21 +149,12 @@ class ResponseSet < ActiveRecord::Base
 
   def triggered_mandatory_questions
 
-    @triggered_mandatory_questions ||= survey.mandatory_questions.select do |r|
-      r.dependency.nil? ?
-        true : depends[r.dependency.id]
-    end
-
+    @triggered_mandatory_questions ||= select_triggered(survey.mandatory_questions)
     # @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
 
   def triggered_requirements
-    @triggered_requirements ||= survey.requirements.select do |r|
-      r.dependency.nil? ?
-        true :
-        depends[r.dependency.id]
-    end
-
+    @triggered_requirements ||= select_triggered(survey.requirements)
     # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
 
@@ -265,24 +163,23 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def all_urls_resolve?
-    errors = []
+    @url_errors = []
     responses_with_url_type.each do |response|
-      unless response.string_value.blank?
-        response_code = Rails.cache.fetch(response.string_value) rescue nil
-        if response_code.nil?
-          response_code = HTTParty.get(response.string_value).code rescue nil
-        end
-        if response_code != 200
-          response.error = true
-          response.save
-          errors << response
-        else
-          response.error = false
-          response.save
-        end
-      end
+      resolve_url(response)
     end
-    errors.length == 0
+    @url_errors.length == 0
+  end
+
+  def resolve_url(response)
+    return nil if response.string_value.blank?
+
+    response_code = Rails.cache.fetch(response.string_value) rescue nil
+    if response_code.nil?
+      response_code = HTTParty.get(response.string_value).code rescue nil
+    end
+    response.error = (response_code != 200)
+    response.save
+    @url_errors << response if response.error === true
   end
 
   def all_mandatory_questions_complete?
@@ -384,7 +281,7 @@ class ResponseSet < ActiveRecord::Base
   # Updates responses without using a surveyor form
   def update_responses(responses)
 
-    ui_hash = []
+    @ui_hash = []
 
     responses.each do |key, value|
       question = survey.question(key)
@@ -392,38 +289,26 @@ class ResponseSet < ActiveRecord::Base
 
       next if value.nil? || question.nil?
 
-      if question.type == :none || question.type == :repeater
-        ui_hash.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answers.first.id.to_s,
-          string_value: value,
-          autocompleted: true
-        ))
-      end
-
-      if question.type == :one
-        ui_hash.push(HashWithIndifferentAccess.new(
-          question_id: question.id.to_s,
-          api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answer(value).id.to_s,
-          autocompleted: true
-        ))
-      end
-
-      if question.type == :any
-        value.each do |item|
-          ui_hash.push(HashWithIndifferentAccess.new(
-            question_id: question.id.to_s,
-            api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-            answer_id: question.answer(item).id.to_s,
-            autocompleted: true
-          ))
-        end
-      end
+      update_response(question, response, [value])
     end
 
-    update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+    update_from_ui_hash(Hash[@ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+  end
+
+  def update_response(question, response, value)
+    value.flatten.each do |value|
+      if question.type == :none || question.type == :repeater
+        string_value = value
+      end
+
+      @ui_hash.push(HashWithIndifferentAccess.new(
+        question_id: question.id.to_s,
+        api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
+        answer_id: string_value.nil? ? question.answer(value).id.to_s : question.answers.first.id.to_s,
+        string_value: string_value,
+        autocompleted: true
+      ).delete_if { |k,v| v.nil? })
+    end
   end
 
   def assign_to_user!(user)
@@ -451,6 +336,14 @@ class ResponseSet < ActiveRecord::Base
   private
   def value_for reference_identifier, value = :to_s
     responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
+  end
+
+  def select_triggered(selector)
+    selector.select do |r|
+      r.dependency.nil? ?
+        true :
+        depends[r.dependency.id]
+    end
   end
 
 end

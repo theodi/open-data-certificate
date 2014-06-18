@@ -70,68 +70,40 @@ class CertificateTest < ActiveSupport::TestCase
     @certificate2.update_attributes(published: true)
     @certificate3.update_attributes(published: true)
 
-    certificates = Certificate.published_certificates
-
-    assert_equal 3, certificates.count
-    assert_equal "Banana certificate", certificates.first[:name]
-    assert_equal "John Smith", certificates.first[:publisher]
-    assert_match /test[0-9]+@example\.com/, certificates.first[:user]
-    assert_equal "alpha", certificates.first[:type]
-    assert_equal "exemplar", certificates.first[:level]
-    assert_equal :self, certificates.first[:verification_type]
+    assert_equal 3, Certificate.published.count
   end
 
-  test 'progress_by_level' do
-    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+  test "status returns the expected status" do
+    @certificate1.update_attributes(published: true)
+    assert_equal @certificate1.status, "published"
 
-    certificate.stubs(:progress).returns({
-        mandatory: 3,
-        mandatory_completed: 11,
-        outstanding: [
-          "basic_1",
-          "basic_2",
-          "pilot_6",
-          "pilot_7",
-          "pilot_8",
-          "standard_11",
-          "standard_12",
-          "standard_13",
-          "exemplar_16",
-          "exemplar_18",
-          "exemplar_19"
-        ],
-        entered: [
-          "basic_3",
-          "basic_4",
-          "basic_5",
-          "pilot_9",
-          "pilot_10",
-          "standard_14",
-          "standard_15"
-        ]
-      })
-
-    progress = certificate.progress_by_level
-
-    assert_equal progress[:basic], 73.7
-    assert_equal progress[:pilot], 66.7
-    assert_equal progress[:standard], 62.1
-    assert_equal progress[:exemplar], 56.3
-  end
-
-  test 'all_certificates' do
     @certificate1.update_attributes(published: false)
+    assert_equal @certificate1.status, "draft"
+  end
 
-    all_certificates = Certificate.all_certificates
+  test "certificate counts return the correct counts" do
+    @certificate1.update_attributes(published: false)
+    @certificate2.update_attributes(published: true)
+    @certificate3.update_attributes(published: true)
 
-    assert_equal 3, all_certificates.count
-    assert_equal "Banana certificate", all_certificates.first[:name]
-    assert_equal "John Smith", all_certificates.first[:publisher]
-    assert_equal " ", all_certificates.first[:user_name]
-    assert_match /test[0-9]+@example\.com/, all_certificates.first[:user_email]
-    assert_equal "Simple survey", all_certificates.first[:country]
-    assert_equal "draft", all_certificates.first[:status]
-    assert_equal "exemplar", all_certificates.first[:level]
+    @certificate2.update_attributes(attained_level: "pilot")
+    @certificate3.update_attributes(attained_level: "standard")
+
+    counts = Stats::Certificate.counts
+
+    assert_equal 3, counts[:all]
+    assert_equal 3, counts[:all_this_month]
+    assert_equal 2, counts[:published]
+    assert_equal 2, counts[:published_this_month]
+    assert_equal 0, counts[:levels][:basic]
+    assert_equal 1, counts[:levels][:pilot]
+    assert_equal 1, counts[:levels][:standard]
+    assert_equal 0, counts[:levels][:expert]
+  end
+
+  test "find by dataset and certificate id returns the correct certificate" do
+    certificate = Certificate.find_by_dataset_and_certificate_id(@certificate1.dataset.id, @certificate1.id)
+    assert_equal certificate, @certificate1
   end
 
   test 'days_to_expiry returns correct number of days' do

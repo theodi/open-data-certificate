@@ -1,5 +1,5 @@
 class Survey < ActiveRecord::Base
-  include Surveyor::Models::SurveyMethods
+  include Surveyor::Models::SurveyMethods, SurveyorOverrides
 
   serialize :meta_map, Hash
 
@@ -111,74 +111,64 @@ class Survey < ActiveRecord::Base
   def valid?(context = nil)
     super(context)
     unless errors.empty?
-
       sections.each do |section|
-        unless section.errors.empty?
-          puts "section '#{section.title}' errors: #{section.errors.full_messages}"
-
-          questions.each do |question|
-            unless question.errors.empty?
-              puts "question '#{question.text}' errors: #{question.errors.full_messages}"
-
-              question.answers.each do |answer|
-                puts "answer '#{answer.text}' errors: #{answer.errors.full_messages}" unless answer.errors.empty?
-              end
-
-            end
-          end
-
-        end
+        validate_sections
       end
-
     end
 
     return errors.empty?
+  end
+
+  def validate_sections
+    sections.each do |section|
+      unless section.errors.empty?
+        puts "section '#{section.title}' errors: #{section.errors.full_messages}"
+        validate_questions
+      end
+    end
+  end
+
+  def validate_questions
+    questions.each do |question|
+      unless question.errors.empty?
+        puts "question '#{question.text}' errors: #{question.errors.full_messages}"
+        validate_answers(question.answers)
+      end
+    end
+  end
+
+  def validate_answers(answers)
+    answers.each do |answer|
+      puts "answer '#{answer.text}' errors: #{answer.errors.full_messages}" unless answer.errors.empty?
+    end
   end
 
   def language
     translations.first.locale
   end
 
-  ### override surveyor methods
-
-  def translation(locale_symbol)
-    {:title => self.title, :description => self.description}.with_indifferent_access.merge(trns(locale_symbol))
-  end
-
-  # prevent the translations from being loaded all the time
-  def trns(locale_symbol)
-    return @trns unless @trns.nil?
-    t = self.translations.where(:locale => locale_symbol.to_s).first
-    @trns = t ? YAML.load(t.translation || "{}").with_indifferent_access : {}
-  end
-
-  def question(identifier)
-    questions.select{|q| q.reference_identifier == identifier.to_s }.first
-  end
-
-  def documentation_url
-    question 'documentationUrl'
-  end
-
-  ### /override surveyor methods
-
   private
 
   def ensure_requirements_are_linked_to_only_one_question_or_answer
-    # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
-    questions = sections.map(&:questions).flatten.compact
-    requirements = questions.select(&:is_a_requirement?)
-    only_questions = (questions - requirements)
-    answers = only_questions.map(&:answers).flatten.compact
-
     requirements.each do |requirement|
-      amount = only_questions.select { |q| q != requirement && q.requirement && q.requirement.include?(requirement.requirement) }.count + answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
+      amount = new_questions.select { |q| q != requirement && q.requirement && q.requirement.include?(requirement.requirement) }.count + new_answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
       if amount == 0
         errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
       elsif amount > 1
         errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
       end
     end
+  end
+
+  # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
+  def new_questions
+    questions = sections.map(&:questions).flatten.compact
+    requirements = questions.select(&:is_a_requirement?)
+    (questions - requirements)
+  end
+
+  def new_answers
+    only_questions.map(&:answers).flatten.compact
   end
 
 end

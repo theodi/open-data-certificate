@@ -12,7 +12,7 @@
 -elsif @certificate.verified_by_user? current_user
   %i.icon.icon-ok
   = t '.verified'
-  = link_to t('.undo'), verify_dataset_certificate_path(undo: true), method: :post
+  = link_to t('.undo'), verify_undo_dataset_certificate_path, method: :post
 
 -else
   =form_tag verify_dataset_certificate_path, method: :post do

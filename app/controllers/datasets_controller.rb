@@ -7,44 +7,12 @@ class DatasetsController < ApplicationController
   before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
 
   def index
-
-    @datasets = Dataset
-                .where(removed: false)
-                .includes(:response_set, :certificate)
-                .joins(:response_set)
-
+    @datasets = Dataset.show_all(params[:format])
     @title = t('datasets.datasets')
 
-    if params[:format] == "feed"
-      @datasets = @datasets.order('datasets.updated_at DESC')
-    else
-      @datasets = @datasets.order('response_sets.attained_index DESC')
-    end
-
-    if params[:jurisdiction]
-      @datasets = @datasets.joins(response_set: :survey)
-                           .merge(Survey.where(title: params[:jurisdiction]))
-    end
-
-    if params[:publisher]
-      @datasets = @datasets.joins(response_set: :certificate)
-                           .merge(Certificate.where(curator: params[:publisher]))
-    end
-
-    if params[:search]
-      @title = t('datasets.search_results')
-
-      base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
-
-      # this is far from ideal - loads in all matches then limits for pagination
-      results = base.merge(Certificate.search(name_cont: params[:search]).result).all +
-                base.merge(Certificate.search(curator_cont: params[:search]).result).all +
-                base.merge(Survey.search(full_title_cont: params[:search]).result).all
-
-      @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
-    else
-      @datasets = @datasets.page params[:page]
-    end
+    @datasets = @datasets.view_by_jurisdiction(params[:jurisdiction]) if params[:jurisdiction]
+    @datasets = @datasets.view_by_publisher(params[:publisher]) if params[:publisher]
+    @datasets = @datasets.page params[:page]
 
     respond_to do |format|
       format.html
@@ -52,48 +20,26 @@ class DatasetsController < ApplicationController
     end
   end
 
+  def search
+    @title = t('datasets.search_results')
+    results = Dataset.multi_search(params[:search])
+    @datasets = Kaminari.paginate_array(results).page params[:page]
+
+    respond_to do |format|
+      format.html { render :template => 'datasets/index' }
+      format.feed { render :template => 'datasets/index', :layout => false  }
+    end
+  end
+
   def typeahead
     # responses for the autocomplete, gives results in
     # [{title:"the match title", path:"/some/path"},…]
-    @response = case params[:mode]
-      when 'dataset'
-        Dataset.search({title_cont:params[:q]}).result
-               .includes(:response_set)
-               .merge(ResponseSet.published)
-               .limit(5).map do |dataset|
-          {
-            value: dataset.title,
-            path: dataset_path(dataset),
-            attained_index: dataset.response_set.try(:attained_index)
-          }
-        end
-      when 'publisher'
-        Certificate.search({curator_cont:params[:q]}).result
-                .where(Certificate.arel_table[:curator].not_eq(nil))
-                .includes(:response_set).merge(ResponseSet.published)
-                .group(:curator)
-                .limit(5).map do |dataset|
-          {
-            value: dataset.curator,
-            path:  datasets_path(publisher:dataset.curator)
-          }
-        end
-      when 'country'
-        Survey.search({full_title_cont:params[:q]}).result
-              .joins(:response_sets).merge(ResponseSet.published)
-              .group(:title)
-              .order(:survey_version)
-              .limit(5).map do |survey|
-          {
-            value: survey.full_title,
-            path: datasets_path(jurisdiction:survey.title)
-          }
-        end
-      else
-        []
-      end
+    if ['country', 'dataset', 'publisher']. include?(params[:mode])
+      query = TypeaheadQuery.new(params[:q])
+      @response = query.send(params[:mode].to_sym) rescue []
 
-    render json: @response
+      render json: @response
+    end
   end
 
   def dashboard

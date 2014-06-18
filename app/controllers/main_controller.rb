@@ -30,8 +30,8 @@ class MainController < ApplicationController
     @job_count = Delayed::Job.count
 
     @counts = {
-      'certificates' => Certificate.counts,
-      'datasets'     => ResponseSet.counts
+      'certificates' => Stats::Certificate.counts,
+      'datasets'     => Stats::ResponseSet.counts
     }
 
     @head_commit = Rails.root.to_s.split("/").last

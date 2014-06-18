@@ -44,19 +44,8 @@ class CertificateGenerator < ActiveRecord::Base
 
     errors = []
 
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
+    check_urls(response_set, errors)
+    check_mandatory(survey, response_set, errors)
 
     {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
   end
@@ -85,12 +74,13 @@ class CertificateGenerator < ActiveRecord::Base
 
     errors = []
 
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
+    check_urls(response_set, errors)
+    check_mandatory(survey, response_set, errors)
 
+    {success: true, published: response_set.published?, errors: errors}
+  end
+
+  def self.check_mandatory(survey, response_set, errors)
     survey.questions.where(is_mandatory: true).each do |question|
       response = response_set.responses.detect {|r| r.question_id == question.id}
 
@@ -98,8 +88,14 @@ class CertificateGenerator < ActiveRecord::Base
         errors.push("The question '#{question.reference_identifier}' is mandatory")
       end
     end
+  end
 
-    {success: true, published: response_set.published?, errors: errors}
+  def self.check_urls(response_set, errors)
+    response_set.responses_with_url_type.each do |response|
+      if response.error
+        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+      end
+    end
   end
 
   def generate
@@ -135,7 +131,6 @@ class CertificateGenerator < ActiveRecord::Base
 
   # answer a question from the request
   def answer question
-
     # find the value that should be entered
     data = request_dataset[question[:reference_identifier]]
 
@@ -145,31 +140,21 @@ class CertificateGenerator < ActiveRecord::Base
 
     when :none
       answer = question.answers.first
-      response_set.responses.create({
-        answer: answer,
-        question: question,
-        string_value: data
-      })
+      create_response(answer, question, data)
 
     when :one
       # the value is the reference identifier of the target answer
       answer = question.answers.where(reference_identifier: data).first
 
       unless answer.nil?
-        response_set.responses.create({
-          answer: answer,
-          question: question
-        })
+        create_response(answer, question)
       end
 
     when :any
       # the value is an array of the chosen answers
       answers = question.answers.where(reference_identifier: data)
       answers.each do |answer|
-        response_set.responses.create({
-          answer: answer,
-          question: question
-        })
+        create_response(answer, question)
       end
 
     when :repeater
@@ -177,12 +162,7 @@ class CertificateGenerator < ActiveRecord::Base
       answer = question.answers.first
       i = 0
       data.each do |value|
-        response_set.responses.create({
-          answer: answer,
-          question: question,
-          string_value: value,
-          response_group: i
-        })
+        create_response(answer, question, value, i)
         i += 1
       end
 
@@ -190,6 +170,15 @@ class CertificateGenerator < ActiveRecord::Base
       throw "not handled> #{question.inspect}"
     end
 
+  end
+
+  def create_response(answer, question, string_value = nil, response_group = nil)
+    response_set.responses.create({
+      answer: answer,
+      question: question,
+      string_value: string_value,
+      response_group: response_group
+    }.delete_if { |k,v| v.nil? })
   end
 
 end

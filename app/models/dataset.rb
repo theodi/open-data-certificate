@@ -8,26 +8,54 @@ class Dataset < ActiveRecord::Base
   has_many :response_sets, :order => "response_sets.created_at DESC"
   has_many :certificates, :through => :response_sets
 
+  scope :view_by_jurisdiction, ->(jurisdiction) { joins(response_set: :survey).merge(Survey.where(title: jurisdiction)) }
+  scope :view_by_publisher, ->(publisher) { joins(response_set: :certificate).merge(Certificate.where(curator: publisher)) }
+
   # the currently published response set
   has_one :response_set, conditions: {aasm_state: 'published'}
   has_one :certificate, through: :response_set
 
   has_one :transfer, conditions: {aasm_state: :notified}
-  
+
   class << self
     def match_to_user_domain(datasetUrl)
       domain = Domainatrix.parse(datasetUrl).domain
-      
+
       dataset = joins(:user)
                   .where(documentation_url: datasetUrl)
                   .order(User.arel_table[:email].matches(domain))
                   .first
-                  
+
       if dataset.nil?
         dataset = where(:documentation_url => datasetUrl).first
       end
       dataset
     end
+
+    def show_all(format = nil)
+      all = where(removed: false)
+           .includes(:response_set, :certificate)
+           .joins(:response_set)
+
+      if format == "feed"
+        all.order('datasets.updated_at DESC')
+      else
+        all.order('response_sets.attained_index DESC')
+      end
+    end
+
+    def multi_search(query)
+      base = show_all.joins(:certificate)
+                     .joins({response_set: :survey}).reorder('')
+
+      # this is far from ideal - loads in all matches then limits for pagination
+      results = base.merge(Certificate.search(name_cont: query).result).all +
+      base.merge(Certificate.search(curator_cont: query).result).all +
+      base.merge(Survey.search(full_title_cont: query).result).all
+
+      results.flatten.uniq
+    end
+
   end
 
   def title

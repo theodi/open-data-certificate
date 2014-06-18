@@ -49,10 +49,10 @@ class CertificatesControllerTest < ActionController::TestCase
     cert.attained_level = "basic"
     cert.save
     get :legacy_show, {id: cert.id, type: "badge", format: "png"}
-    
+
     assert_redirected_to "http://test.host/datasets/1/certificates/2/badge.png"
-  end  
-  
+  end
+
   test "Requesting a JSON version of a certificate returns the correct level" do
     levels = {
         "basic" => "raw",
@@ -134,7 +134,7 @@ class CertificatesControllerTest < ActionController::TestCase
     sign_in cv.user
 
     assert_difference ->{cert.verifications.count}, -1 do
-      post :verify, {dataset_id: cert.dataset.id, id: cert.id, undo: true}
+      post :verify_undo, {dataset_id: cert.dataset.id, id: cert.id}
     end
   end
 
