@@ -145,11 +145,12 @@ class SurveyorController < ApplicationController
           flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
         end
 
-        return redirect_to(surveyor.edit_my_survey_path(
+        return redirect_to(surveyor.edit_my_survey_path({
           :anchor => anchor_from(params[:section]),
           :section => section_id_from(params),
-          :highlight_mandatory => true
-        ))
+          :highlight_mandatory => true,
+          :update => params[:update]
+        }.reject! {|k, v| v.nil? }))
       end
     end
 
