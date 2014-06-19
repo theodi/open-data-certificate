@@ -92,9 +92,11 @@ class SurveyorController < ApplicationController
 
     if params[:update]
       flash[:warning] = t('response_set.update_instructions')
+      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code, update: true)
+    else
+      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
     end
 
-    redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
   end
 
   def force_save_questionnaire
