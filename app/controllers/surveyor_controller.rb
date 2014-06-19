@@ -195,6 +195,7 @@ class SurveyorController < ApplicationController
       @sections = @survey.sections.with_includes
       @sections.each{|s| Question.compute_levels(s.questions) }
       @dependents = []
+      @update = true if params[:update]
     else
       flash[:notice] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index
