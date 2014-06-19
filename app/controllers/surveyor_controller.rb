@@ -134,7 +134,12 @@ class SurveyorController < ApplicationController
             @response_set.complete!
             @response_set.save
 
-            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+            if params[:update]
+              @response_set.publish!
+              return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
+            else
+              return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+            end
           end
         else
           flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
