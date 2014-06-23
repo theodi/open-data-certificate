@@ -129,7 +129,7 @@ en:
       expired: Expired
       expiring: 'Expires in %{days} days'
     verification: Verification
-    expiring_certificates: Some of your certificates should be updated to reflect the latest version of their questionnaires
+    expiring_certificates: Some of your certificates should be updated to reflect the latest version of their questionnaires.
     updated_response_set: Certificate updated
 
   # main controller
