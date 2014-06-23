@@ -1701,11 +1701,25 @@ a.transfer {
 .status-badge-archived{
   background-image:url(/assets/status/archived.png);
 }
-.status-badge-expired{
-  background-image:url(/assets/status/draft.png);
+
+.icon-exclamation-sign {
+  &.expiring {
+    color: @odiOrange;
+  }
+
+  &.expired {
+    color: @odiRed;
+  }
 }
-.status-badge-expiring{
-  background-image:url(/assets/status/draft.png);
+
+.response-set-secondary {
+  p.expiring-state {
+    display: block;
+  }
+
+  .icon-exclamation-sign {
+    padding: 10px;
+  }
 }
 
 .jurisdiction {

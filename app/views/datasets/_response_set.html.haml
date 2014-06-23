@@ -1,5 +1,5 @@
 - is_primary = response_set == primary
-.response-set{class: "response-set-#{response_set.state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
+.response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
   .row-fluid
     .span3
       %h3= t('dashboard.level_attained')
@@ -12,9 +12,14 @@
     .span3
       %h3= t('dashboard.current_status')
 
-      %i.status-badge{class: "status-badge-#{response_set.state}"}
+      %i.status-badge{class: "status-badge-#{response_set.aasm_state}"}
 
-      %p= t("dashboard.states.#{response_set.state}", days: response_set.certificate.days_to_expiry)
+      %p= t("dashboard.states.#{response_set.aasm_state}", days: response_set.certificate.days_to_expiry)
+
+      - unless response_set.certificate.expiring_state.nil?
+        %p.expiring-state
+          %i.icon-exclamation-sign{class: response_set.certificate.expiring_state}
+          = t("dashboard.expiring_states.#{response_set.certificate.expiring_state}", days: response_set.certificate.days_to_expiry)
 
       %p.jurisdiction
         %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction
@@ -27,7 +32,7 @@
           = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
             Publish certificate
 
-        -if ['expired','expiring'].include?(response_set.state)
+        -if ['expired','expiring'].include?(response_set.aasm_state)
           = link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
 
         = link_to "View certificate", [response_set.dataset, response_set.certificate], class: 'btn btn-large btn-block'

@@ -125,6 +125,7 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+    expiring_states:
       expired: Expired
       expiring: 'Expires in %{days} days'
     verification: Verification
