@@ -28,11 +28,11 @@
     .span3
       %h3 Your certificate
       .btn-group.btn-group-vertical
-        -if response_set.draft?
+        -if response_set.draft? && response_set.certificate.expiring_state.nil?
           = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
             Publish certificate
 
-        -if ['expired','expiring'].include?(response_set.aasm_state)
+        -unless response_set.certificate.expiring_state.nil?
           = link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
 
         = link_to "View certificate", [response_set.dataset, response_set.certificate], class: 'btn btn-large btn-block'
