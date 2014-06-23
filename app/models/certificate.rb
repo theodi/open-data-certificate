@@ -83,6 +83,16 @@ class Certificate < ActiveRecord::Base
     end
   end
 
+  def expiring_state
+    if expired?
+      "expired"
+    elsif expiring?
+      "expiring"
+    else
+      nil
+    end
+  end
+
   def verified_by_user? user
     verifications.exists? user_id: user.id
   end

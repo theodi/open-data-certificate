@@ -57,6 +57,8 @@
 
     #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
       = hidden_field_tag :surveyor_javascript_enabled, false
+      - if @update
+        = hidden_field_tag :update, true
 
       .container.survey-intro
         .well
