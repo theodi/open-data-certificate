@@ -435,13 +435,15 @@
                         <requirement level="standard">Ar trebui <strong>să aveți evaluarea riscului auditată independent</strong> pentru a se asigura efectuarea ei în mod corect.</requirement>
                      </question>
                   </if>
-                  <question id="individualConsentURL"
+                  <if test="this.lawfulDisclosure() !== 'true'">
+                     <question id="individualConsentURL"
                             display="Persoanele afectate de aceste date primesc această notificare de confidențialitate">
-                     <label>Unde este notificarea de confidențialitate pentru persoanele afectate de datele dumneavoastră?</label>
-                     <input type="url" placeholder="URL pentru Notificarea de Confidențialitate"/>
-                     <help>Când colectați date despre persoane, trebuie să le spuneți cum vor fi utilizate. Oamenii care folosesc datele dumneavoastră au nevoie de acest lucru pentru a se asigura că respectă legislația privind protecția datelor.</help>
-                     <requirement level="pilot">Ar trebui <strong>să spuneți oamenilor în ce scopuri au fost de acord persoanele ca dumneavoastră să le folosiți datele</strong>, astfel încât aceștia să folosească datele în aceleași scopuri și în conformitate cu legislația privind protecția datelor.</requirement>
-                  </question>
+                        <label>Unde este notificarea de confidențialitate pentru persoanele afectate de datele dumneavoastră?</label>
+                        <input type="url" placeholder="URL pentru Notificarea de Confidențialitate"/>
+                        <help>Când colectați date despre persoane, trebuie să le spuneți cum vor fi utilizate. Oamenii care folosesc datele dumneavoastră au nevoie de acest lucru pentru a se asigura că respectă legislația privind protecția datelor.</help>
+                        <requirement level="pilot">Ar trebui <strong>să spuneți oamenilor în ce scopuri au fost de acord persoanele ca dumneavoastră să le folosiți datele</strong>, astfel încât aceștia să folosească datele în aceleași scopuri și în conformitate cu legislația privind protecția datelor.</requirement>
+                     </question>
+                  </if>
                   <question id="dpStaff">
                      <label>Este cineva din organizația dumneavoastră responsabil de protecția datelor?</label>
                      <yesno required="pilot"/>
