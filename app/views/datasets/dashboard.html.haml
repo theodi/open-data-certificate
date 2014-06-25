@@ -1,5 +1,13 @@
 - content_for :header_title, t('dashboard.page_title')
 
+- if current_user.has_expired_or_expiring_certificates?
+  %header.notice{class: 'notice-warning'}
+    .container
+      %h1
+        %i.icon.icon-warning-sign
+          Warning
+      %p= t('dashboard.expiring_certificates')
+
 = render partial: :dataset, collection: current_user.datasets
 
 -if current_user.datasets.blank?

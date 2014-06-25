@@ -89,7 +89,14 @@ class SurveyorController < ApplicationController
 
       @response_set = new_response_set
     end
-    redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
+
+    if params[:update]
+      flash[:warning] = t('response_set.update_instructions')
+      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code, update: true)
+    else
+      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
+    end
+
   end
 
   def force_save_questionnaire
@@ -127,17 +134,23 @@ class SurveyorController < ApplicationController
             @response_set.complete!
             @response_set.save
 
-            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+            if params[:update]
+              @response_set.publish!
+              return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
+            else
+              return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+            end
           end
         else
           flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
         end
 
-        return redirect_to(surveyor.edit_my_survey_path(
+        return redirect_to(surveyor.edit_my_survey_path({
           :anchor => anchor_from(params[:section]),
           :section => section_id_from(params),
-          :highlight_mandatory => true
-        ))
+          :highlight_mandatory => true,
+          :update => params[:update]
+        }.reject! {|k, v| v.nil? }))
       end
     end
 
@@ -183,6 +196,7 @@ class SurveyorController < ApplicationController
       @sections = @survey.sections.with_includes
       @sections.each{|s| Question.compute_levels(s.questions) }
       @dependents = []
+      @update = true if params[:update]
     else
       flash[:notice] = t('surveyor.unable_to_find_your_responses')
       redirect_to surveyor_index

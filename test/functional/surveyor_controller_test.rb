@@ -17,6 +17,21 @@ class SurveyorControllerTest < ActionController::TestCase
 
   end
 
+  test "continue with expired survey" do
+    @response_set = FactoryGirl.create(:response_set)
+    @response_set.certificate.update_attribute :expires_at, DateTime.now - 1.day
+    sign_in @response_set.user
+
+    assert_no_difference('ResponseSet.count') do
+      post :continue, use_route: :surveyor,
+              survey_code: @response_set.survey.access_code,
+              response_set_code: @response_set.access_code,
+              update: true
+    end
+
+    assert_redirected_to "/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take?update=true"
+
+  end
 
   test "continue with superceeded survey" do
     @response_set = FactoryGirl.create(:response_set)
@@ -59,7 +74,23 @@ class SurveyorControllerTest < ActionController::TestCase
 
     r = ResponseSet.last
     assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
+  end
 
+  test "update an expired questionnaire" do
+    @response_set = FactoryGirl.create(:response_set)
+
+    sign_in @response_set.user
+
+    post :update, use_route: :surveyor,
+                  survey_code: @response_set.survey.access_code,
+                  response_set_code: @response_set.access_code,
+                  update: true,
+                  finish: true
+
+    @response_set.reload
+    assert_equal true, ResponseSet.last.published?
+
+    assert_redirected_to dashboard_url
   end
 
   test "continue migrated questionnaire" do

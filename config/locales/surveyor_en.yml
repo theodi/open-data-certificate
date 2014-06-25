@@ -43,6 +43,6 @@ en:
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
     documentation_url:
-        autocompleted: We have automatically completed information using this URL
-        not_autocompleted: No machine readable data found at this URL
+        autocompleted: We have automatically completed information using this URL.
+        not_autocompleted: We were unable to automatically complete questions using data from this URL.
         missing: "You should have a web page that offers documentation about the open data you publish so that people can understand its context, content and utility."

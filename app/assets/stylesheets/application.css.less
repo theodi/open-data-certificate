@@ -1158,6 +1158,7 @@ section {
 
   .icon-large {
     margin-right: 6px;
+    float:left;
   }
 
   .icon-remove, .icon-remove:hover, .icon-remove:active {
@@ -1699,6 +1700,26 @@ a.transfer {
 }
 .status-badge-archived{
   background-image:url(/assets/status/archived.png);
+}
+
+.icon-exclamation-sign {
+  &.expiring {
+    color: @odiOrange;
+  }
+
+  &.expired {
+    color: @odiRed;
+  }
+}
+
+.response-set-secondary {
+  p.expiring-state {
+    display: block;
+  }
+
+  .icon-exclamation-sign {
+    padding: 10px;
+  }
 }
 
 .jurisdiction {
@@ -3594,6 +3615,12 @@ p.data {
   .badge {
     font-size: 0.9em;
     padding: 2px 9px 3px 9px;
+  }
+}
+
+.marks {
+  img {
+    margin:45px 0;
   }
 }
 

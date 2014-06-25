@@ -1,4 +1,6 @@
 class Certificate < ActiveRecord::Base
+  include Badges, Counts
+
   belongs_to :response_set
 
   has_one :survey,  through: :response_set
@@ -12,28 +14,26 @@ class Certificate < ActiveRecord::Base
   EXPIRY_NOTICE = 1.month
 
   class << self
-    def search_title(title)
-      query = self.where({})
-      title.downcase.split(/\s+/).each do |term|
-        query = query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
+    def type_search(type, term, query)
+      case type
+      when "title"
+        query.where("LOWER(certificates.name) LIKE ?", "%#{term}%")
+      when "publisher"
+        query.where("LOWER(certificates.curator) LIKE ?", "%#{term}%")
+      when "country"
+        query.joins(response_set: :survey).where("LOWER(surveys.full_title) LIKE ?", "%#{term}%")
       end
-      query
     end
 
-    def search_publisher(publisher)
-      query = self.where({})
-      publisher.downcase.split(/\s+/).each do |term|
-        query = query.where("LOWER(certificates.curator) LIKE ?", "%#{term}%")
+    def method_missing(name, *args, &block)
+      match = name.to_s.match(/^search_(.*)$/)
+      if match
+        query = self.where({})
+        args.first.split(/\s+/).each do |term|
+          query = self.type_search(match[1], term, query)
+        end
+        query
       end
-      query
-    end
-
-    def search_country(country)
-      query = self.where({})
-      country.downcase.split(/\s+/).each do |term|
-        query = query.joins(response_set: :survey).where("LOWER(surveys.full_title) LIKE ?", "%#{term}%")
-      end
-      query
     end
 
     def by_newest
@@ -44,86 +44,27 @@ class Certificate < ActiveRecord::Base
       joins(:response_set => [:survey]).group('surveys.title, response_sets.dataset_id')
     end
 
-    def badge_file_for_level(level)
-      filename = case level
-                   when 'basic'
-                     'raw_level_badge.png'
-                   when 'raw', 'pilot', 'standard', 'exemplar'
-                     "#{level}_level_badge.png"
-                   else
-                     'no_level_badge.png'
-                 end
-
-      File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
-    end
-
     def latest
       where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
 
-    def counts
-      within_last_month = (Time.now - 1.month)..Time.now
-      {
-        :all                  => self.count,
-        :all_this_month       => self.where(created_at: within_last_month).count,
-        :published            => self.where(published: true).count,
-        :published_this_month => self.where(published: true, created_at: within_last_month).count,
-        :levels               => {
-          :basic              => self.where(published: true, attained_level: "basic").count,
-          :pilot              => self.where(published: true, attained_level: "pilot").count,
-          :standard           => self.where(published: true, attained_level: "standard").count,
-          :expert             => self.where(published: true, attained_level: "expert").count
-        }
-      }
-    end
-
-    def published_certificates
-      self.where(published: true).map do |certificate|
-        {
-          name: certificate.name,
-          publisher: certificate.curator,
-          created: certificate.created_at,
-          user: certificate.user.email,
-          country: certificate.survey.title,
-          type: certificate.survey.status,
-          level: certificate.attained_level,
-          verification_type: certificate.certification_type,
-          date_verified: certificate.verifications.count == 0 ? nil : certificate.verifications.last.updated_at
-        }
-      end
-    end
-
-    def all_certificates
-      Certificate.all.map do |certificate|
-        begin
-          progress = certificate.progress_by_level
-
-          {
-            name: certificate.name,
-            publisher: certificate.curator,
-            created: certificate.created_at,
-            last_edited: certificate.updated_at,
-            user: certificate.user.nil? ? "N/A" : certificate.user.email,
-            country: certificate.survey.title,
-            status: certificate.published? ? "published" : "draft",
-            level: certificate.attained_level,
-            raw_progress: progress[:basic],
-            pilot_progress: progress[:pilot],
-            standard_progress: progress[:standard],
-            expert_progress: progress[:exemplar]
-          }
-        rescue
-          nil
-        end
-      end
+    def published
+      self.where(published: true)
     end
 
     def set_expired(surveys)
+      expired(surveys).update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+    end
+
+    def expired(surveys)
       self.joins(:response_set)
         .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
         .where(expires_at: nil)
-        .update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
     end
+  end
+
+  def status
+    published? ? "published" : "draft"
   end
 
   def expiring?
@@ -134,20 +75,26 @@ class Certificate < ActiveRecord::Base
     expiring? && expires_at < DateTime.now
   end
 
+  def days_to_expiry
+    if expiring?
+      (expires_at.to_date - Date.today).to_i
+    else
+      nil
+    end
+  end
+
+  def expiring_state
+    if expired?
+      "expired"
+    elsif expiring?
+      "expiring"
+    else
+      nil
+    end
+  end
+
   def verified_by_user? user
     verifications.exists? user_id: user.id
-  end
-
-  def badge_file
-    Certificate.badge_file_for_level(attained_level)
-  end
-
-  def badge_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
-  end
-
-  def embed_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
   end
 
   def attained_level_title
@@ -185,33 +132,13 @@ class Certificate < ActiveRecord::Base
       qs = section.questions_for_certificate self.response_set
       rs = self.response_set.responses_for_questions qs
       if rs.any?
-        rs.each do |r|
-          if r.statement_text != ''
-            responses << r
-          end
-        end
+        rs.each { |r| responses << r if r.statement_text != '' }
       end
     end
     responses.group_by { |r| r.question_id }
   end
 
   def progress
-    response_set = self.response_set
-
-    # requirements still to be met
-    outstanding = response_set.triggered_requirements.map do |r|
-      r.reference_identifier
-    end
-
-    # questions that have been answered and their requirements
-    entered = response_set.responses.map(&:answer).map do |a|
-      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
-    end
-
-    # the counts of mandatory questions and completions
-    mandatory = response_set.incomplete_triggered_mandatory_questions.count
-    mandatory_completed = response_set.responses.map(&:question).select(&:is_mandatory).count
-
     {
       outstanding: outstanding.sort,
       entered: entered.flatten.compact.sort,
@@ -220,41 +147,28 @@ class Certificate < ActiveRecord::Base
     }
   end
 
-  def progress_by_level
-    result = {}
-    progress ||= self.progress
-    pending = progress[:mandatory]
-    complete = progress[:mandatory_completed]
-
-    [
-     'basic',
-     'pilot',
-     'standard',
-     'exemplar'
-    ].each do |level|
-      pending += progress[:outstanding].select { |p| p =~ /#{level}_/ }.count
-      complete += progress[:entered].select { |p| p =~ /#{level}_/ }.count
-
-      result[level.to_sym] = ((complete.to_f / (pending.to_f + complete.to_f)) * 100).round(1)
+  def outstanding
+    response_set.triggered_requirements.map do |r|
+      r.reference_identifier
     end
-    result
   end
 
-  def progress_by_section
-    results = {
-      outstanding: {},
-      entered: {}
-    }
-    progress ||= self.progress
-
-    results.map do |k,v|
-      progress[k].each do |p|
-        q = Question.where(reference_identifier: p).first
-        v[q.survey_section_id] ||= []
-        v[q.survey_section_id] << p
-      end
+  def entered
+    response_set.responses.map(&:answer).map do |a|
+      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
     end
+  end
 
+  def mandatory
+    response_set.incomplete_triggered_mandatory_questions.count
+  end
+
+  def mandatory_completed
+    completed_questions.select(&:is_mandatory).count
+  end
+
+  def completed_questions
+    response_set.responses.map(&:question)
   end
 
 end

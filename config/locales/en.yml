@@ -125,7 +125,12 @@ en:
       draft: Draft
       published: Published
       archived: Archived
+    expiring_states:
+      expired: Expired
+      expiring: 'Expires in %{days} days'
     verification: Verification
+    expiring_certificates: Some of your certificates should be updated to reflect the latest version of their questionnaires
+    updated_response_set: Certificate updated
 
   # main controller
   main:
@@ -220,6 +225,8 @@ en:
     unmark_audited: Unmark audited
     audited: This certificate has been marked as ODI audited
     not_audited: This certificate has not been marked as ODI audited
+    expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
+    expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
 
   datasets:
     datasets: Datasets
@@ -235,6 +242,8 @@ en:
     language_dialog_body: Choose a different language below
     choose_language: --- Select language ---
     start_new_language: Change language
+
+    update_instructions: "Please check the information is up to date and all the mandatory fields are completed. Select 'Save and finish' to update."
 
   summary_data:
     summary: Summary
@@ -285,6 +294,9 @@ en:
   errors:
     errors_occurred: Errors occurred
     server_error: A server error occurred
+
+  branding:
+    heading: Using the ODC marks
 
   improvements:
     heading: How can I improve my open data?

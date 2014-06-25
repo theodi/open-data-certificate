@@ -8,12 +8,24 @@ class UploadUsageDataTest < ActiveSupport::TestCase
         FactoryGirl.create(:published_certificate_with_dataset)
       end
 
-      data = Certificate.published_certificates
+      certificates = Certificate.published
+      data = certificates.map do |cert|
+        CertificatePresenter.new(cert).published_data
+      end
+
       csv = UploadUsageData.create_csv(data)
 
       assert_equal 6, CSV.parse(csv).count
       assert_true Csvlint::Validator.new( StringIO.new(csv) ).valid?
     end
+  end
+
+  test "create_csvs shouldn't choke on blank rows" do
+    data = [{foo: "foo", baz: "baz"}, nil, {foo: "baz", baz: "foo"}, nil]
+    csv = UploadUsageData.create_csv(data)
+
+    assert_equal 3, CSV.parse(csv).count
+    assert_true Csvlint::Validator.new( StringIO.new(csv) ).valid?
   end
 
   test "find_collection finds the corrrect collection" do
@@ -29,7 +41,12 @@ class UploadUsageDataTest < ActiveSupport::TestCase
         FactoryGirl.create(:published_certificate_with_dataset)
       end
 
-      data = Certificate.published_certificates
+      certificates = Certificate.published
+
+      data = certificates.map do |cert|
+        CertificatePresenter.new(cert).published_data
+      end
+
       csv = UploadUsageData.create_csv(data)
 
       session = GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
