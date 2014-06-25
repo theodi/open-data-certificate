@@ -417,12 +417,14 @@
 								<requirement level="standard">You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 							</question>
 						</if>
-						<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
-							<label>Where is the privacy notice for individuals affected by your data?</label>
-							<input type="url" placeholder="Privacy Notice URL"/>
-							<help>When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.</help>
-							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.</requirement>
-						</question>
+						<if test="this.lawfulDisclosure() !== 'true'">
+							<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
+								<label>Where is the privacy notice for individuals affected by your data?</label>
+								<input type="url" placeholder="Privacy Notice URL"/>
+								<help>When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.</help>
+								<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.</requirement>
+							</question>
+						</if>
 						<question id="dpStaff">
 							<label>Is there someone in your organisation who is responsible for data protection?</label>
 							<yesno required="pilot"/>
