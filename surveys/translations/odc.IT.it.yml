@@ -174,6 +174,15 @@ questions:
     text_as_statement: "Questi dati sono disponibili sotto"
     help_text: "Ricorda che chi raccoglie in origine, crea, verifica o presenta un database automaticamente ottiene i diritti su di esso. Ci può essere anche copyright sull'organizzazione e la selezione dei dati. Così le persone hanno bisogno di un atto di cessione o di una licenza che dimostra che essi possono utilizzare i dati e spiega come possono farlo legalmente. Elenchiamo le licenze più comuni qui, se non ci fossero diritti connessi alle banche dati o diritti d'autore, nel caso fossero scaduti, o si fosse verificata unacessione degli stessi, scegli 'Non applicabile'."
     answers:
+      cc_by:
+        text: "Creative Commons Attribution"
+        text_as_statement: "Creative Commons Attribution"
+      cc_by_sa:
+        text: "Creative Commons Attribution Share-Alike"
+        text_as_statement: "Creative Commons Attribution Share-Alike"
+      cc_zero:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
       odc_by:
         text: "Open Data Commons Attribution License"
         text_as_statement: "Open Data Commons Attribution License"
@@ -183,9 +192,6 @@ questions:
       odc_pddl:
         text: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
-      cc_zero:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
       na:
         text: "Non applicabile"
         text_as_statement: ""

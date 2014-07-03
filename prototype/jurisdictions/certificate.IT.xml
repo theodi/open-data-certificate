@@ -134,10 +134,12 @@
             <label>sotto quale licenza può la gente riutilizzare questi dati?</label>
             <select required="required">
                <option/>
+               <option value="cc-by">Creative Commons Attribution</option>
+               <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+               <option value="cc-zero">Creative Commons CCZero</option>
                <option value="odc-by">Open Data Commons Attribution License</option>
                <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
                <option value="odc-pddl">Open Data Commons Public Domain Dedication e Licenza (PDDL)</option>
-               <option value="cc-zero">Creative Commons CCZero</option>
                <option value="na" display="">Non applicabile</option>
                <option value="other" display="">Altro...</option>
             </select>
@@ -432,13 +434,15 @@
                         <requirement level="standard">Dovresti <strong>sottoporre la tua valutazione del rischio ad una revisione indipendente</strong> per assicurarti che sia stata effettuata correttamente.</requirement>
                      </question>
                   </if>
-                  <question id="individualConsentURL"
+                  <if test="this.lawfulDisclosure() !== 'true'">
+                     <question id="individualConsentURL"
                             display="Gli individui affetti da questi dati ricevono questa informativa sulla privacy">
-                     <label>Dov'è l'informativa sulla privacy per gli individui affetti dai tuoi dati?</label>
-                     <input type="url" placeholder="URL Informativa Privacy"/>
-                     <help>Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.</help>
-                     <requirement level="pilot">Dovresti <strong>comunicare per quali ragioni le persone menzionate nei tuoi dati hanno dato il loro consenso per l'utilizzo dei loro dati</strong> in modo che la gente possa utilizzare i dati per le stesse finalità conformemente alla normativa sulla protezione dei dati.</requirement>
-                  </question>
+                        <label>Dov'è l'informativa sulla privacy per gli individui affetti dai tuoi dati?</label>
+                        <input type="url" placeholder="URL Informativa Privacy"/>
+                        <help>Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.</help>
+                        <requirement level="pilot">Dovresti <strong>comunicare per quali ragioni le persone menzionate nei tuoi dati hanno dato il loro consenso per l'utilizzo dei loro dati</strong> in modo che la gente possa utilizzare i dati per le stesse finalità conformemente alla normativa sulla protezione dei dati.</requirement>
+                     </question>
+                  </if>
                   <question id="dpStaff">
                      <label>C'è qualcuno nella tua organizzazione che è responsabile per la protezione dei dati?</label>
                      <yesno required="pilot"/>

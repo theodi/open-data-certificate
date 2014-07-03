@@ -345,14 +345,18 @@ survey 'RO',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    a_cc_by 'Creative Commons Attribution',
+      :text_as_statement => 'Creative Commons Attribution'
+    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
+      :text_as_statement => 'Creative Commons Attribution Share-Alike'
+    a_cc_zero 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open License Database (ODbL)',
       :text_as_statement => 'Open Data Commons Open License Database (ODbL)'
     a_odc_pddl 'Dedicație Open Data Commons Domeniului Public și de licență (PDDL)',
       :text_as_statement => 'Dedicație Open Data Commons Domeniului Public și de licență (PDDL)'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
     a_na 'Nu este aplicabil',
       :text_as_statement => ''
     a_other 'Altele...',

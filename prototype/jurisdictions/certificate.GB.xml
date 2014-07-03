@@ -4,7 +4,7 @@
 	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="0.9" status="beta" jurisdiction="GB" xml:lang="en">
+<questionnaire version="1.0" status="final" jurisdiction="GB" xml:lang="en">
 	<help>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
 		<p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p>
@@ -133,11 +133,13 @@
 				<label>Under which licence can people reuse this data?</label>
 				<select required="required">
 					<option/>
+					<option value="cc-by">Creative Commons Attribution</option>
+					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+					<option value="cc-zero">Creative Commons CCZero</option>
+					<option value="ogl-uk">UK Open Government Licence</option>
 					<option value="odc-by">Open Data Commons Attribution License</option>
 					<option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
 					<option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-					<option value="cc-zero">Creative Commons CCZero</option>
-					<option value="ogl-uk">UK Open Government Licence</option>
 					<option value="na" display="">Not applicable</option>
 					<option value="other" display="">Other...</option>
 				</select>
@@ -383,7 +385,8 @@
 				<if test="this.appliedAnon() === 'false'">
 					<question id="lawfulDisclosure" display="By law, this data about individuals">
 						<label>Are you required or permitted by law to publish this data about individuals?</label>
-						<yesno yes="must be published" />
+						<yesno yes="can be published" />
+						<help>The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.</help>
 						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'true'">
@@ -416,12 +419,14 @@
 								<requirement level="standard">You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 							</question>
 						</if>
-						<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
-							<label>Where is the privacy notice for individuals affected by your data?</label>
-							<input type="url" placeholder="Privacy Notice URL"/>
-							<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.</help>
-							<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.</requirement>
-						</question>
+						<if test="this.lawfulDisclosure() !== 'true'">
+							<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
+								<label>Where is the privacy notice for individuals affected by your data?</label>
+								<input type="url" placeholder="Privacy Notice URL"/>
+								<help more="http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2">When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.</help>
+								<requirement level="pilot">You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.</requirement>
+							</question>
+						</if>
 						<question id="dpStaff">
 							<label>Is there someone in your organisation who is responsible for data protection?</label>
 							<yesno required="pilot"/>
