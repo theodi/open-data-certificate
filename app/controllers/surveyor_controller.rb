@@ -29,16 +29,8 @@ class SurveyorController < ApplicationController
       survey = Survey.newest_survey_for_access_code nxt
 
       unless survey.nil?
-        attrs = @response_set.attributes.keep_if do |key|
-          %w(user_id dataset_id).include? key
-        end
-        attrs[:survey_id] = survey.id;
-        new_response_set = ResponseSet.create attrs
-
-        new_response_set.copy_answers_from_response_set!(@response_set)
-        # @response_set.destroy
-
-        @response_set = new_response_set
+        attrs = prepare_new_response_set
+        switch_survey(attrs, survey)
       end
 
     elsif params[:juristiction_access_code]
@@ -46,35 +38,21 @@ class SurveyorController < ApplicationController
 
       survey = Survey.newest_survey_for_access_code(params[:juristiction_access_code])
       unless survey.nil?
-        attrs = @response_set.attributes.keep_if do |key|
-          %w(user_id dataset_id).include? key
-        end
-        attrs[:survey_id] = survey.id;
-        new_response_set = ResponseSet.create attrs
-
-        new_response_set.copy_answers_from_response_set!(@response_set)
-        # @response_set.destroy
-
-        @response_set = new_response_set
+        attrs = prepare_new_response_set
+        switch_survey(attrs, survey)
 
         # the user has made a concious effort to switch jurisdictions, so set it as their default
         if user_signed_in?
           current_user.update_attributes default_jurisdiction: params[:juristiction_access_code]
         end
-
       end
 
     elsif !@response_set.modifications_allowed?
       # they *actually* want to create a new response set
+      attrs = prepare_new_response_set
+      create_new_response_set(attrs)
 
-      attrs = @response_set.attributes.keep_if do |key|
-        %w(survey_id user_id dataset_id).include? key
       end
-      new_response_set = ResponseSet.create attrs
-      new_response_set.copy_answers_from_response_set!(@response_set)
-
-      @response_set = new_response_set
-
     elsif @response_set.survey.superceded? && @response_set.draft? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
       # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
       # and delete the old responses.
@@ -228,6 +206,26 @@ class SurveyorController < ApplicationController
   def set_response_set_and_render_context
     super
     authorize!(:edit, @response_set) if @response_set
+  end
+
+  def prepare_new_response_set
+    @response_set.attributes.keep_if do |key|
+      %w(survey_id user_id dataset_id).include? key
+    end
+  end
+
+  def create_new_response_set(attrs)
+    new_response_set = ResponseSet.create attrs
+
+    new_response_set.copy_answers_from_response_set!(@response_set)
+
+    @response_set = new_response_set
+  end
+
+  def switch_survey(attrs, survey)
+    attrs = prepare_new_response_set
+    attrs[:survey_id] = survey.id
+    create_new_response_set(attrs)
   end
 
 end
