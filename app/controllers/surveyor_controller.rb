@@ -52,20 +52,12 @@ class SurveyorController < ApplicationController
       attrs = prepare_new_response_set
       create_new_response_set(attrs)
 
+    elsif @response_set.survey.superceded?
+      latest_survey = Survey.newest_survey_for_access_code(params[:survey_code])
+      unless latest_survey.nil?
+        attrs = prepare_new_response_set
+        switch_survey(attrs, latest_survey)
       end
-    elsif @response_set.survey.superceded? && @response_set.draft? # This is a double-check, as the filter should stop incomplete response sets getting this far... but just in case, since this is a destructive method...
-      # If a newer version of the survey has been released for an incomplete response_set, then upgrade to the new survey
-      # and delete the old responses.
-      # TODO: determine if this is actually what is wanted, or if a more interactive user experience is preferred
-      new_response_set = ResponseSet.
-        create(:survey => Survey.newest_survey_for_access_code(@response_set.survey.access_code),
-               :user_id => (current_user.nil? ? current_user : current_user.id),
-               :dataset_id => @response_set.dataset_id
-      )
-      new_response_set.copy_answers_from_response_set!(@response_set)
-      @response_set.destroy
-
-      @response_set = new_response_set
     end
 
     if params[:update]
