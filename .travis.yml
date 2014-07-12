@@ -1,14 +1,9 @@
 language: ruby
+cache: bundler
+sudo: false
 rvm:
 - 1.9.3
 bundler_args: --without development --path=~/.bundle
-before_install:
-- gem install nokogiri -- --use-system-libraries
-- ! 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
-- gem install bundler bundle_cache
-- bundle_cache_install
-after_script:
-- bundle_cache
 before_script: bundle exec rake db:schema:load
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
