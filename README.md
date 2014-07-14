@@ -7,7 +7,7 @@
 ## ODI Open Data Certificate
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
-
+ 
 ### API
 
 Certificates can be created and updated using the JSON API.
