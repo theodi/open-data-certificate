@@ -47,17 +47,16 @@ class SurveyorController < ApplicationController
         end
       end
 
-    elsif !@response_set.modifications_allowed?
-      # they *actually* want to create a new response set
-      attrs = prepare_new_response_set
-      create_new_response_set(attrs)
-
     elsif @response_set.survey.superceded?
       latest_survey = Survey.newest_survey_for_access_code(params[:survey_code])
       unless latest_survey.nil?
         attrs = prepare_new_response_set
         switch_survey(attrs, latest_survey)
       end
+    elsif !@response_set.modifications_allowed?
+      # they *actually* want to create a new response set
+      attrs = prepare_new_response_set
+      create_new_response_set(attrs)
     end
 
     if params[:update]
