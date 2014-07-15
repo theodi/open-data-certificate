@@ -36,6 +36,8 @@ group :test do
   gem 'csvlint', github: 'theodi/csvlint.rb'
   gem 'vcr'
   gem 'webmock'
+  gem 'spork-rails'
+  gem 'spork-testunit'
 end
 
 group :development do
@@ -107,3 +109,4 @@ gem 'juvia_rails', github: 'theodi/juvia_rails'
 gem 'domainatrix'
 gem 'newrelic_rpm'
 gem 'google_drive'
+gem 'pry-remote'

@@ -272,6 +272,9 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
     rabl (0.6.14)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
@@ -385,6 +388,12 @@ GEM
       json (>= 1.8)
       net-http-persistent (>= 1.4)
       rdf (>= 1.1)
+    spork (1.0.0rc4)
+    spork-rails (4.0.0)
+      rails (>= 3.0.0, < 5)
+      spork (>= 1.0rc0)
+    spork-testunit (0.0.8)
+      spork (>= 0.6.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -473,6 +482,7 @@ DEPENDENCIES
   newrelic_rpm
   odlifier!
   pry
+  pry-remote
   rack-cors
   rack-linkeddata
   rails (~> 3.2.13)
@@ -482,6 +492,8 @@ DEPENDENCIES
   ruby-prof
   sass-rails (~> 3.2.3)
   shoulda
+  spork-rails
+  spork-testunit
   sqlite3
   surveyor
   terminal-notifier-guard
