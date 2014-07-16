@@ -97,7 +97,7 @@ class DatasetsController < ApplicationController
   end
 
   def dashboard
-    @datasets = current_user.try(:datasets) || []
+    @datasets = current_user.try(:datasets).reject {|d| d.response_set.nil? } || []
     @surveys = Survey.available_to_complete
 
     respond_to do |format|
