@@ -8,8 +8,8 @@
           Warning
       %p= t('dashboard.expiring_certificates')
 
-= render partial: :dataset, collection: current_user.datasets
+= render partial: :dataset, collection: @datasets
 
--if current_user.datasets.blank?
+-if @datasets.blank?
   %p= t("dashboard.no_certificates_to_show")
   = link_to t('menu.create_certificate'), authenticated_start_questionnaire_path, :class => 'btn btn-primary'
