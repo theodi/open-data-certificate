@@ -84,6 +84,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def expiring_state
+    return nil if ["draft", "archived"].include?(response_set.aasm_state)
     if expired?
       "expired"
     elsif expiring?
