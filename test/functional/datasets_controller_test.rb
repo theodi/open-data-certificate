@@ -64,21 +64,6 @@ class DatasetsControllerTest < ActionController::TestCase
     assert assigns(:datasets).size > 0
   end
 
-  test "dashboard doesn't show datasets with unpublished response sets" do
-    user = FactoryGirl.create(:user)
-    dataset1 = FactoryGirl.create(:dataset, user: user)
-    FactoryGirl.create(:response_set, dataset: dataset1)
-
-    dataset2 = FactoryGirl.create(:dataset, user: user)
-    FactoryGirl.create(:published_response_set, dataset: dataset2)
-
-    sign_in user
-
-    get :dashboard
-    assert_response 200
-    assert_equal 1, assigns(:datasets).size
-  end
-
   test "dashboard doesn't show datasets without response sets" do
     user = FactoryGirl.create(:user)
     dataset1 = FactoryGirl.create(:dataset, user: user)
