@@ -29,9 +29,6 @@ class Answer < ActiveRecord::Base
      :help_text => self.help_text,
      :default_value => self.default_value,
      :placeholder => self.placeholder,
-    }.with_indifferent_access.merge(
-      (self.question.translation(locale)[:answers] || {})[self.reference_identifier] || {}
-    )
+    }.with_indifferent_access
   end
-
 end
