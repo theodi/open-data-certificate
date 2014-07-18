@@ -160,6 +160,10 @@ class Survey < ActiveRecord::Base
     question 'documentationUrl'
   end
 
+  def translation(locale_symbol)
+    {:title => self.title, :description => self.description}.with_indifferent_access
+  end
+
   ### /override surveyor methods
 
   private

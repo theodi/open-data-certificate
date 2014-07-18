@@ -89,6 +89,10 @@ class Question < ActiveRecord::Base
     answers.select{|a| a.reference_identifier == identifier }.first
   end
 
+  def translation(locale)
+    {:text => self.text, :help_text => self.help_text}.with_indifferent_access
+  end
+
   private
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
