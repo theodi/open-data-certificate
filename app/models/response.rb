@@ -11,9 +11,12 @@ class Response < ActiveRecord::Base
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
 
-  # gets all responses in the same response set for a question, useful for checkbox questions
+  def compute_sibling_responses(responses)
+    @sibling_responses = responses.select{|r| r.question_id == question_id && r.response_set_id == response_set_id} || []
+  end
+
   def sibling_responses
-    @sibling_responses ||= Response.where(question_id: question_id, response_set_id: response_set_id)
+    @sibling_responses
   end
 
   def statement_text
@@ -69,7 +72,7 @@ class Response < ActiveRecord::Base
   end
 
   def any_metadata_missing
-    @any_metadata_missing ||= question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
+    @any_metadata_missing ||= question.metadata_field? && @sibling_responses.select(&:metadata_missing).any?
   end
 
   def metadata_missing
@@ -78,7 +81,7 @@ class Response < ActiveRecord::Base
 
   def all_autocompleted
     if question.pick == 'any' && autocompletable?
-      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
+      return @all_autocompleted ||= @sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
     end
 
     @all_autocompleted ||= autocompleted
