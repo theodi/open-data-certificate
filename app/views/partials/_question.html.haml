@@ -56,7 +56,7 @@
         - state = 'url-explained'
         - status_message = t('surveyor.url_explained')
 
-    - if r.any_metadata_missing
+    - if r.any_metadata_missing(@responses)
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
