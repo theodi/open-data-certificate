@@ -74,8 +74,8 @@ class Response < ActiveRecord::Base
     !!(auto_value && !auto_value.empty?)
   end
 
-  def any_metadata_missing
-    question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
+  def any_metadata_missing(responses)
+    question.metadata_field? && sibling_responses(responses).select(&:metadata_missing).any?
   end
   memoize :any_metadata_missing
 
