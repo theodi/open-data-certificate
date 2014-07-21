@@ -162,7 +162,6 @@ class SurveyorController < ApplicationController
     # @response_set is set in before_filter - set_response_set_and_render_context
     if @response_set
       @responses = @response_set.responses.includes(:question).all
-      @responses.each{|r| r.compute_sibling_responses(@responses) }
       @survey = @response_set.survey
       @sections = @survey.sections.with_includes
       @sections.each{|s| Question.compute_levels(s.questions) }
