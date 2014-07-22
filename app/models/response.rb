@@ -22,7 +22,7 @@ class Response < ActiveRecord::Base
   end
 
   def reference_identifier
-    answer.reference_identifier
+    answer.try(:reference_identifier)
   end
   memoize :reference_identifier
 
