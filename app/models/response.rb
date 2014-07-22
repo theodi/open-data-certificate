@@ -84,9 +84,9 @@ class Response < ActiveRecord::Base
   end
   memoize :metadata_missing
 
-  def all_autocompleted
+  def all_autocompleted(responses)
     if question.pick == 'any' && autocompletable?
-      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
+      return @all_autocompleted ||= sibling_responses(responses).map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
     end
 
     @all_autocompleted ||= autocompleted
