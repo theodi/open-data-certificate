@@ -2,12 +2,16 @@
 [![Dependency Status](http://img.shields.io/gemnasium/theodi/open-data-certificate.svg)](https://gemnasium.com/theodi/open-data-certificate)
 [![Coverage Status](http://img.shields.io/coveralls/theodi/open-data-certificate.svg)](https://coveralls.io/r/theodi/open-data-certificate)
 [![Code Climate](http://img.shields.io/codeclimate/github/theodi/open-data-certificate.svg)](https://codeclimate.com/github/theodi/open-data-certificate)
-[![Badges](http://img.shields.io/:badges-5/5-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
+[![License](http://b.adge.me/:license-mit-green.svg)](http://theodi.mit-license.org/)
+[![Badges](http://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
 
 ## ODI Open Data Certificate
 
-The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
- 
+### License
+
+This code is open source under the MIT license. See the LICENSE.md file for
+full details.
+
 ### API
 
 Certificates can be created and updated using the JSON API.
@@ -291,3 +295,5 @@ A breakdown of the validation states that exist in the survey:
 #### Additional documentation
 
 [App approach document](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#)
+
+The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
