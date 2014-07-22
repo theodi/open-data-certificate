@@ -246,7 +246,16 @@ $(document).ready(function($){
   $('.survey-intro .submit').click(function() {
     $(this).addClass('disabled');
     $(this).popover('show');
-    $(this.form).submit();
+    var form = $(this.form);
+    $.ajax({
+      type: 'POST',
+      cache: false,
+      url: form.attr('action') + ".json",
+      data: form.serialize(),
+      success: function(data) {
+        window.location.replace(data.survey_path)
+      }
+    })
     return false;
   });
 
