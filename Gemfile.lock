@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 2b35d6a1798b02e42655222d1e81c3d14f345cb8
+  revision: 903e32427ec671de8dcd574c3deae5ef2a7fb561
   specs:
     data_kitten (0.0.1)
       curb
@@ -159,7 +159,7 @@ GEM
     formatador (0.2.4)
     formtastic (2.1.1)
       actionpack (~> 3.0)
-    git (1.2.6)
+    git (1.2.7)
     google-analytics-rails (0.0.5)
     google_drive (0.3.9)
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
@@ -193,7 +193,7 @@ GEM
     json (1.8.1)
     json-ld (1.1.1)
       rdf (>= 1.0.8)
-    json-schema (2.2.2)
+    json-schema (2.2.4)
     jwt (0.1.13)
       multi_json (>= 1.5)
     kaminari (0.15.1)
