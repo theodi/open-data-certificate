@@ -69,13 +69,6 @@ namespace :odc do
 
   desc "remove (12h) old and unclaimed questionnaires"
   task :purge_questionnaires => :environment do
-
-    purge_before = Time.now - 12.hours
-
-    ResponseSet.
-      where(user_id: nil). # unclaimed response_sets
-      where(ResponseSet.arel_table[:updated_at].lt(purge_before)).
-      destroy_all
-
+    ResponseSet.purge!
   end
 end

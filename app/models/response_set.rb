@@ -35,6 +35,14 @@ class ResponseSet < ActiveRecord::Base
 
   end
 
+  def self.purge!
+    purge_before = Time.now - 12.hours
+    ResponseSet.
+      where(user_id: nil). # unclaimed response_sets
+      where(ResponseSet.arel_table[:updated_at].lt(purge_before)).
+      destroy_all
+  end
+
 
   def self.has_blank_value?(hash)
     return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
