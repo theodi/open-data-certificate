@@ -46,7 +46,7 @@
       %h3 Your answers
       -if is_primary
         %p
-          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block'
+          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block edit_questionaire'
         %p
           = link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
 
