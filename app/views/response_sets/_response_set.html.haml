@@ -15,7 +15,7 @@
           - response_text = response.statement_text
           - answer = response_set.autocomplete_override_message_for(response.question)
           - if response_text != ''
-            - explanation_required = (response.autocompletable? && !response.all_autocompleted) || response.error
+            - explanation_required = (response.autocompletable? && !response.all_autocompleted(@responses)) || response.error
 
             - state = 'error' if explanation_required
             - state = 'warning' if explanation_required && answer.message?

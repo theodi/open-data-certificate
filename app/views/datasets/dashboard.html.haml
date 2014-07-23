@@ -10,6 +10,14 @@
 
 = render partial: :dataset, collection: @datasets
 
+:javascript
+
+  $('.edit_questionaire').click(function() {
+    btn = $(this)
+    btn.text('Loading Questionniare')
+    btn.prepend('<i class="icon-loading icon-spin icon-refresh icon-md"></i>')
+  })
+
 -if @datasets.blank?
   %p= t("dashboard.no_certificates_to_show")
   = link_to t('menu.create_certificate'), authenticated_start_questionnaire_path, :class => 'btn btn-primary'

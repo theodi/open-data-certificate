@@ -9,8 +9,15 @@ module SurveyorHelper
   # or "you should" prefix.
   #
   # not locale friendly
-  # 
+  #
   def without_instruction(text)
     text.gsub(/^you (should|must)/i, '').gsub(/\.$/, '')
+  end
+
+  # Debug response_for method
+  def response_for(response_set, responses, question, answer = nil, response_group = nil)
+    return nil unless responses && question && question.id
+    result = responses.detect{|r| (r.question_id == question.id) && (answer.blank? ? true : r.answer_id == answer.id) && (r.response_group.blank? ? true : r.response_group.to_i == response_group.to_i)}
+    result ? result : response_set.responses.build(:question_id => question.id, :response_group => response_group)
   end
 end

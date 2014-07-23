@@ -56,10 +56,22 @@ class ResponseSetsController < ApplicationController
     @response_set.update_attribute('kitten_data', kitten_data)
     @response_set.update_responses(kitten_data.fields)
 
-    redirect_to(surveyor.edit_my_survey_path(
-      :survey_code => @response_set.survey.access_code,
-      :response_set_code => @response_set.access_code
-    ))
+    respond_to do |format|
+      format.html do
+        redirect_to(surveyor.edit_my_survey_path(
+          :survey_code => @response_set.survey.access_code,
+          :response_set_code => @response_set.access_code
+        ))
+      end
+      format.json do
+        render json: {
+          survey_path: surveyor.edit_my_survey_path(
+            :survey_code => @response_set.survey.access_code,
+            :response_set_code => @response_set.access_code
+          )
+        }
+      end
+    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
