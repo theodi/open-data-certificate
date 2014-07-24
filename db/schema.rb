@@ -57,8 +57,7 @@ ActiveRecord::Schema.define(:version => 20140721090011) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "autocomplete_override_messages", ["question_id"], :name => "index_autocomplete_override_messages_on_question_id"
-  add_index "autocomplete_override_messages", ["response_set_id"], :name => "index_autocomplete_override_messages_on_response_set_id"
+  add_index "autocomplete_override_messages", ["response_set_id", "question_id"], :name => "i_on_response_set_id_and_question_id"
 
   create_table "certificate_generators", :force => true do |t|
     t.integer  "response_set_id"
@@ -121,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20140721090011) do
     t.datetime "updated_at",        :null => false
   end
 
-  add_index "dependencies", ["question_group_id"], :name => "index_dependencies_on_question_group_id"
   add_index "dependencies", ["question_id"], :name => "i_dependencies_on_question_id"
 
   create_table "dependency_conditions", :force => true do |t|
@@ -146,9 +144,9 @@ ActiveRecord::Schema.define(:version => 20140721090011) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "message",    :limit => 65535
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "kitten_data", :force => true do |t|
