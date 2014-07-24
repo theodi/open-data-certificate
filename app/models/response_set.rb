@@ -62,7 +62,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def publish_certificate
-    certificate.update_attribute :published, true
+    certificate.publish!
   end
 
   def archive_other_response_sets

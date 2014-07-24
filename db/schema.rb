@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140724102203) do
+ActiveRecord::Schema.define(:version => 20140724115451) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
     t.datetime "expires_at"
     t.boolean  "audited",         :default => false
     t.datetime "published_at"
+    t.string   "aasm_state"
   end
 
   add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"

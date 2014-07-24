@@ -74,10 +74,10 @@ class CertificateTest < ActiveSupport::TestCase
   end
 
   test "status returns the expected status" do
-    @certificate1.update_attributes(published: true)
+    @certificate1.publish!
     assert_equal @certificate1.status, "published"
 
-    @certificate1.update_attributes(published: false)
+    @certificate1.draft!
     assert_equal @certificate1.status, "draft"
   end
 
@@ -107,4 +107,19 @@ class CertificateTest < ActiveSupport::TestCase
 
     assert_equal 14, @certificate1.days_to_expiry
   end
+
+  test 'publishing certificate sets published date' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+    certificate.publish!
+
+    assert_equal Date.today, certificate.published_at.to_date
+  end
+
+  test 'publishing certificate through aasm sets published state sucessfully' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+    certificate.publish!
+
+    assert certificate.published
+  end
+
 end
