@@ -40,7 +40,7 @@ module UploadUsageData
 
   def self.upload_csv(csv, title)
     file = session.upload_from_string(csv, title, content_type: "text/csv")
-    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
     collection.add(file)
   end
 
