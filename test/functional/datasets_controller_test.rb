@@ -191,19 +191,6 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal "application/atom+xml", response.content_type
   end
 
-  test "Requesting an Atom feed for all datasets returns results in reverse date order" do
-    10.times do
-      @cert = FactoryGirl.create(:published_certificate_with_dataset)
-    end
-
-    get :index, { format: "feed" }
-    assert_response :success
-
-    feed = RSS::Parser.parse response.body, false
-
-    assert_equal "http://test.host/datasets/#{@cert.dataset.id}", feed.entries[0].id.content
-  end
-
   test "atom feed for all datasets returns the correct stuff" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
