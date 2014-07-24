@@ -9,7 +9,7 @@ class Certificate < ActiveRecord::Base
   has_many :verifications
   has_many :verifying_users, through: :verifications, source: :user
 
-  attr_accessible :published, :name, :attained_level, :curator
+  attr_accessible :published, :published_at, :name, :attained_level, :curator
 
   EXPIRY_NOTICE = 1.month
 
