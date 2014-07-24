@@ -7,35 +7,44 @@ class Survey < ActiveRecord::Base
 
   REQUIREMENT_LEVELS = %w(none basic pilot standard exemplar)
 
-  # this is access_codes of surveys that we want the user to move from->to
+  # Hash of access survey codes which have changed
   MIGRATIONS = {'open-data-certificate-questionnaire' => 'gb'}
 
-  # temorary - when we have the jurisdiction choice at the start, this won't be needed
+  # Temporary - when we have the jurisdiction choice at the start, this won't be needed
   DEFAULT_ACCESS_CODE = 'gb'
+
+  RESPONSE_MAP = {
+    :dataset_title              => 'dataTitle',
+    :dataset_curator            => 'publisher',
+    :dataset_documentation_url  => 'documentationUrl',
+    :dataset_curator_url        => 'publisherUrl',
+    :data_licence               => 'dataLicence',
+    :content_licence            => 'contentLicence',
+    :other_dataset_licence_name => 'otherDataLicenceName',
+    :other_dataset_licence_url  => 'otherDataLicenceURL',
+    :other_content_licence_name => 'otherContentLicenceName',
+    :other_content_licence_url  => 'otherContentLicenceURL',
+    :release_type               => 'releaseType',
+  }
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
 
   has_many :response_sets
-
   has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
   has_many :dependencies, :through => :questions
-
   has_many :answers, through: :questions
 
-  class << self
+  def self.available_to_complete
+    order('access_code DESC, survey_version DESC').group(:access_code)
+  end
 
-    def available_to_complete
-      order('access_code DESC, survey_version DESC').group(:access_code)
-    end
+  def self.newest_survey_for_access_code(access_code)
+    where(access_code: access_code).order("surveys.survey_version DESC").first
+  end
 
-    def newest_survey_for_access_code(access_code)
-      where(access_code: access_code).order("surveys.survey_version DESC").first
-    end
-
-    def migrate_access_code(access_code)
-      Survey::MIGRATIONS[access_code] || access_code
-    end
+  def self.migrate_access_code(access_code)
+    Survey::MIGRATIONS[access_code] || access_code
   end
 
   def previous_access_codes
@@ -71,24 +80,8 @@ class Survey < ActiveRecord::Base
 
   def meta_map
     meta = read_attribute(:meta_map)
-    map.each { |attr, val| meta[attr.to_sym] ||= val }
+    RESPONSE_MAP.each{|attr, val| meta[attr.to_sym] ||= val }
     meta
-  end
-
-  def map
-    {
-      :dataset_title              => 'dataTitle',
-      :dataset_curator            => 'publisher',
-      :dataset_documentation_url  => 'documentationUrl',
-      :dataset_curator_url        => 'publisherUrl',
-      :data_licence               => 'dataLicence',
-      :content_licence            => 'contentLicence',
-      :other_dataset_licence_name => 'otherDataLicenceName',
-      :other_dataset_licence_url  => 'otherDataLicenceURL',
-      :other_content_licence_name => 'otherContentLicenceName',
-      :other_content_licence_url  => 'otherContentLicenceURL',
-      :release_type               => 'releaseType',
-    }
   end
 
   def superceded?
