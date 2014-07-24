@@ -356,6 +356,10 @@ survey 'IT',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_odc_pddl 'Open Data Commons Public Domain Dedication e Licenza (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication e Licenza (PDDL)'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
@@ -513,6 +517,10 @@ survey 'IT',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
