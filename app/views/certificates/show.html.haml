@@ -47,7 +47,7 @@
         = t("certificate.this_data_has_achieved")
         %strong.certificate-level
           #{t("levels.#{@certificate.attained_level}.title_with_level")}
-        = t("certificate.on_date", date: @certificate.created_at.strftime("%d %B %Y"))
+        = t("certificate.on_date", date: @certificate.published_at.strftime("%d %B %Y")) if @certificate.published?
         = t("certificate.which_means")
         = t("levels.#{@certificate.attained_level}.description")
 
