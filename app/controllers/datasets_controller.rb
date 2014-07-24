@@ -12,7 +12,7 @@ class DatasetsController < ApplicationController
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
-                .order('datasets.updated_at DESC')
+                .order('certificates.published_at DESC')
 
     @title = t('datasets.datasets')
 
