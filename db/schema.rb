@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140724115451) do
+ActiveRecord::Schema.define(:version => 20140724102203) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -57,8 +57,7 @@ ActiveRecord::Schema.define(:version => 20140724115451) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "autocomplete_override_messages", ["question_id"], :name => "index_autocomplete_override_messages_on_question_id"
-  add_index "autocomplete_override_messages", ["response_set_id"], :name => "index_autocomplete_override_messages_on_response_set_id"
+  add_index "autocomplete_override_messages", ["response_set_id", "question_id"], :name => "i_on_response_set_id_and_question_id"
 
   create_table "certificate_generators", :force => true do |t|
     t.integer  "response_set_id"
@@ -123,7 +122,6 @@ ActiveRecord::Schema.define(:version => 20140724115451) do
     t.datetime "updated_at",        :null => false
   end
 
-  add_index "dependencies", ["question_group_id"], :name => "index_dependencies_on_question_group_id"
   add_index "dependencies", ["question_id"], :name => "i_dependencies_on_question_id"
 
   create_table "dependency_conditions", :force => true do |t|
