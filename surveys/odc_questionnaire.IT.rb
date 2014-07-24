@@ -142,7 +142,7 @@ survey 'IT',
     condition_B :q_publisherRights, '==', :a_unsure
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'originariamente creati o generati dal suo curatore'
 
     q_thirdPartyOrigin 'Alcuni di questi dati sono stati estratti o rielaborati da altri dati?',
@@ -154,7 +154,7 @@ survey 'IT',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     a_false 'no'
-    a_true 'sì',
+    a_true 'yes',
       :requirement => ['basic_3']
 
     label_basic_3 'Hai indicato che questi dati non sono stati originariamente creati o raccolti da te, non sono raccolti su base volontaria/crowdsourced, quindi devono necessariamente essere stati estratti da o rielaborati usando altre fonti di dati.',
@@ -179,7 +179,7 @@ survey 'IT',
     condition_C :q_thirdPartyOrigin, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'fonti di dati aperti',
       :requirement => ['basic_4']
 
@@ -205,7 +205,7 @@ survey 'IT',
     condition_B :q_publisherOrigin, '==', :a_false
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'su base volontaria',
       :requirement => ['basic_5']
 
@@ -228,7 +228,7 @@ survey 'IT',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_claUrl 'Dov\'è il Contributor Licence Ageement (CLA)?',
       :discussion_topic => :it_claUrl,
@@ -259,7 +259,7 @@ survey 'IT',
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_false 'no'
-    a_true 'sì',
+    a_true 'yes',
       :requirement => ['basic_6']
 
     label_basic_6 'È necessario per te ottenere <strong>che i contributori accettino un Contributor Licence Agreement</strong> (CLA) che ti conferisce il diritto di pubblicare il loro lavoro come open data.',
@@ -303,7 +303,7 @@ survey 'IT',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'dati processabili dai computer sulle fonti di questi dati',
       :requirement => ['standard_2']
 
@@ -356,6 +356,10 @@ survey 'IT',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_odc_pddl 'Open Data Commons Public Domain Dedication e Licenza (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication e Licenza (PDDL)'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
@@ -449,7 +453,7 @@ survey 'IT',
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
     a_false 'no'
-    a_true 'sì',
+    a_true 'yes',
       :requirement => ['basic_7']
 
     label_basic_7 '
@@ -486,7 +490,7 @@ survey 'IT',
     condition_A :q_contentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'contrassegnato come pubblico dominio',
       :requirement => ['standard_3']
 
@@ -513,6 +517,10 @@ survey 'IT',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
@@ -610,7 +618,7 @@ survey 'IT',
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_false 'no'
-    a_true 'sì',
+    a_true 'yes',
       :requirement => ['basic_8']
 
     label_basic_8 '
@@ -765,7 +773,7 @@ survey 'IT',
     condition_A :q_dataPersonal, '==', :a_summarised
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'sottoposto a revisione indipendente',
       :requirement => ['standard_8']
 
@@ -787,7 +795,7 @@ survey 'IT',
     condition_A :q_dataPersonal, '==', :a_individual
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'anonimizzati'
 
     q_lawfulDisclosure 'Sei autorizzato a pubblicare questi dati sui singoli individui nei modi richiesti e consentiti dalla legge?',
@@ -800,7 +808,7 @@ survey 'IT',
     condition_B :q_appliedAnon, '==', :a_false
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'deve essere pubblicati',
       :requirement => ['pilot_5']
 
@@ -847,7 +855,7 @@ survey 'IT',
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no',
       :text_as_statement => 'non effettuato una valutazione del rischio privacy'
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'effettuato una valutazione del rischio privacy',
       :requirement => ['pilot_6']
 
@@ -900,7 +908,7 @@ survey 'IT',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'sottoposto a revisione indipendente',
       :requirement => ['standard_11']
 
@@ -920,11 +928,12 @@ survey 'IT',
       :display_on_certificate => true,
       :text_as_statement => 'Gli individui affetti da questi dati ricevono questa informativa sulla privacy',
       :help_text => 'Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.'
-    dependency :rule => 'A and (B or C) and D'
+    dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
     a_1 'URL Informativa Privacy',
       :string,
       :input_type => :url,
@@ -934,12 +943,13 @@ survey 'IT',
     label_pilot_7 'Dovresti <strong>comunicare per quali ragioni le persone menzionate nei tuoi dati hanno dato il loro consenso per l\'utilizzo dei loro dati</strong> in modo che la gente possa utilizzare i dati per le stesse finalità conformemente alla normativa sulla protezione dei dati.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
-    dependency :rule => 'A and (B or C) and D and E'
+    dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dpStaff 'C\'è qualcuno nella tua organizzazione che è responsabile per la protezione dei dati?',
       :discussion_topic => :it_dpStaff,
@@ -951,7 +961,7 @@ survey 'IT',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_dbStaffConsulted 'Li avete coinvolti nel processo di valutazione del rischio?',
       :discussion_topic => :it_dbStaffConsulted,
@@ -966,7 +976,7 @@ survey 'IT',
     condition_E :q_dpStaff, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'è stato consultato',
       :requirement => ['pilot_8']
 
@@ -994,7 +1004,7 @@ survey 'IT',
     condition_D :q_riskAssessmentExists, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'sottoposto a revisione indipendente',
       :requirement => ['standard_12']
 
@@ -1021,8 +1031,10 @@ survey 'IT',
       :discussion_topic => :onWebsite,
       :help_text => 'E\' più facile trovare i dati se sono collegati a partire dal tuo sito web principale.',
       :pick => :one
-    a_false 'no'
-    a_true 'sì',
+    a_false 'no',
+      :text_as_statement => 'no'
+    a_true 'yes',
+      :text_as_statement => 'sí',
       :requirement => ['standard_13']
 
     label_standard_13 'Dovresti <strong>assicurarti che le persone possano trovare i dati a partire dal tuo sito web principale </strong> per facilitarne l\'accesso',
@@ -1055,8 +1067,10 @@ survey 'IT',
       :discussion_topic => :listed,
       :help_text => 'In generale è più facile trovare i dati quando fanno parte di un catalogo di dati come ad esempio quelli accademici, del settore pubblico o della sanità oppure quando appaiono in risultati di ricerca pertinenti.',
       :pick => :one
-    a_false 'no'
-    a_true 'sì',
+    a_false 'no',
+      :text_as_statement => 'no'
+    a_true 'yes',
+      :text_as_statement => 'sí',
       :requirement => ['standard_14']
 
     label_standard_14 'Dovresti <strong>fare in modo che le persone possano trovare i tuoi dati quando li cercano </strong>all\'interno di elenchi specifici.',
@@ -1089,8 +1103,10 @@ survey 'IT',
       :discussion_topic => :referenced,
       :help_text => 'Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, dai più contesto ed aiuti le persone a trovare e comprendere più facilmente i tuoi dati',
       :pick => :one
-    a_false 'no'
-    a_true 'sì',
+    a_false 'no',
+      :text_as_statement => 'no'
+    a_true 'yes',
+      :text_as_statement => 'sí',
       :requirement => ['standard_15']
 
     label_standard_15 'Dovresti <strong>far riferimento a questi dati a partire dalle tue pubblicazioni</strong> in modo che le persone possano venire a conoscenza della loro esistenza e contesto.',
@@ -1193,7 +1209,7 @@ survey 'IT',
     condition_A :q_releaseType, '==', :a_series
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'Si, almeno una volta al giorno'
 
     q_seriesType 'Di che tipo di pacchetti di dati si tratta?',
@@ -1224,7 +1240,7 @@ survey 'IT',
     condition_C :q_seriesType, '==', :a_dumps
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'è disponibile',
       :requirement => ['exemplar_6']
 
@@ -1342,7 +1358,7 @@ survey 'IT',
     condition_A :q_releaseType, '==', :a_service
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'Estrazioni (dump) dei dati',
       :requirement => ['standard_19']
 
@@ -1416,7 +1432,7 @@ survey 'IT',
     condition_B :q_timeSensitive, '!=', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'corretti',
       :requirement => ['standard_21']
 
@@ -1478,7 +1494,7 @@ survey 'IT',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'il backup è fatto parallelamente',
       :requirement => ['standard_23']
 
@@ -1840,7 +1856,7 @@ survey 'IT',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'processabili dal computer',
       :requirement => ['pilot_16']
 
@@ -1859,7 +1875,7 @@ survey 'IT',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'formato standard aperto',
       :requirement => ['standard_30']
 
@@ -2028,7 +2044,7 @@ survey 'IT',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'identificatori persistenti',
       :requirement => ['standard_33']
 
@@ -2101,7 +2117,7 @@ survey 'IT',
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_reliableExternalUrls 'Sono affidabili le informazioni di queste parti terze?',
       :discussion_topic => :reliableExternalUrls,
@@ -2112,7 +2128,7 @@ survey 'IT',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_externalUrls 'I tuoi dati utilizzano le URL di tali parti terze?',
       :discussion_topic => :externalUrls,
@@ -2126,7 +2142,7 @@ survey 'IT',
     condition_C :q_reliableExternalUrls, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'fanno riferimento a questi dati',
       :requirement => ['exemplar_18']
 
@@ -2152,7 +2168,7 @@ survey 'IT',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'sì',
+    a_true 'yes',
       :text_as_statement => 'processabile dal computer',
       :requirement => ['exemplar_19']
 
@@ -2423,7 +2439,7 @@ survey 'IT',
       :pick => :one,
       :required => :standard
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_schemaDocumentationUrl 'Dove si trova la documentazione sui vocabolari usati dai vostri dati?',
       :discussion_topic => :schemaDocumentationUrl,
@@ -2450,7 +2466,7 @@ survey 'IT',
       :pick => :one,
       :required => :standard
     a_false 'no'
-    a_true 'sì'
+    a_true 'yes'
 
     q_codelistDocumentationUrl 'Dove sono documentati i codici che si trovano nei tuoi dati?',
       :discussion_topic => :codelistDocumentationUrl,
@@ -2527,8 +2543,10 @@ survey 'IT',
     q_socialMedia 'Usi i social media per connetterti con le persone che usano i tuoi dati?',
       :discussion_topic => :socialMedia,
       :pick => :one
-    a_false 'no'
-    a_true 'sì',
+    a_false 'no',
+      :text_as_statement => 'no'
+    a_true 'yes',
+      :text_as_statement => 'sí',
       :requirement => ['standard_56']
 
     label_standard_56 'Dovresti <strong>utilizzare i social media per contattare le persone che usano i tuoi dati </strong> e scoprire come vengono utilizzati',
@@ -2619,8 +2637,10 @@ survey 'IT',
       :help_text => 'Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone ad utilizzare i dati.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
-    a_false 'no'
-    a_true 'sì',
+    a_false 'no',
+      :text_as_statement => 'no'
+    a_true 'yes',
+      :text_as_statement => 'sí',
       :requirement => ['exemplar_21']
 
     label_exemplar_21 'Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un uso più ampio.',

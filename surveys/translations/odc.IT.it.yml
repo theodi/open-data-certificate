@@ -89,7 +89,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "originariamente creati o generati dal suo curatore"
   thirdPartyOrigin:
     text: "Alcuni di questi dati sono stati estratti o rielaborati da altri dati?"
@@ -98,7 +98,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   thirdPartyOpen:
     text: "Sono <em>tutti </em> le fonti di questi dati già pubblicate come dati aperti?"
     text_as_statement: "Questi dati sono creati da"
@@ -108,7 +108,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "fonti di dati aperti"
   crowdsourced:
     text: "Alcuni di questi dati sono stati raccolti su base volontaria, ovvero sono crowdsourced?"
@@ -119,7 +119,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "su base volontaria"
   crowdsourcedContent:
     text: "I contributori di questi dati hanno usato la loro capacità di giudizio soggettiva?"
@@ -128,7 +128,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   claUrl:
     text: "Dov'è il Contributor Licence Ageement (CLA)?"
     text_as_statement: "La Contributor Licence Agreement (Accordo di licenza del contributore) è in"
@@ -143,7 +143,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   sourceDocumentationUrl:
     text: "Dove descrivi le fonti di questi dati?"
     text_as_statement: "Le fonti di questi dati sono descritti in"
@@ -160,7 +160,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "dati processabili dai computer sulle fonti di questi dati"
   copyrightURL:
     text: "Dove hai pubblicato la dichiarazione dei diritti per questo set di dati?"
@@ -192,6 +192,12 @@ questions:
       odc_pddl:
         text: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
+      iodl:
+        text: "Italian Open Data License v1.0"
+        text_as_statement: "Italian Open Data License v1.0"
+      iodl_2_0:
+        text: "Italian Open Data License v2.0"
+        text_as_statement: "Italian Open Data License v2.0"
       na:
         text: "Non applicabile"
         text_as_statement: ""
@@ -256,7 +262,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   contentRights:
     text: "C'è diritto di autore sul contenuto di questi dati?"
     text_as_statement: "Ci sono"
@@ -282,7 +288,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "contrassegnato come pubblico dominio"
   contentLicence:
     text: "Sotto quale licenza altri possono riutilizzare i contenuti?"
@@ -298,6 +304,12 @@ questions:
       cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
+      iodl:
+        text: "Italian Open Data License v1.0"
+        text_as_statement: "Italian Open Data License v1.0"
+      iodl_2_0:
+        text: "Italian Open Data License v2.0"
+        text_as_statement: "Italian Open Data License v2.0"
       na:
         text: "Non applicabile"
         text_as_statement: ""
@@ -359,7 +371,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   contentRightsURL:
     text: "Dove si trovano spiegazioni sui diritti e le licenze relative al contenuto?"
     text_as_statement: "I diritti e le licenze dei contenuti sono spiegati in"
@@ -423,7 +435,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "sottoposto a revisione indipendente"
   appliedAnon:
     text: "Si è cercato di ridurre o eliminare la possibilità di identificazione per i singoli individui?"
@@ -434,7 +446,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "anonimizzati"
   lawfulDisclosure:
     text: "Sei autorizzato a pubblicare questi dati sui singoli individui nei modi richiesti e consentiti dalla legge?"
@@ -444,7 +456,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "deve essere pubblicati"
   lawfulDisclosureURL:
     text: "Dove documenti il diritto di pubblicare i dati relativi a singoli individui?"
@@ -461,7 +473,7 @@ questions:
         text: no
         text_as_statement: "non effettuato una valutazione del rischio privacy"
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "effettuato una valutazione del rischio privacy"
   riskAssessmentUrl:
     text: "Dove è pubblicata la tua valutazione di rischio?"
@@ -479,7 +491,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "sottoposto a revisione indipendente"
   individualConsentURL:
     text: "Dov'è l'informativa sulla privacy per gli individui affetti dai tuoi dati?"
@@ -494,7 +506,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   dbStaffConsulted:
     text: "Li avete coinvolti nel processo di valutazione del rischio?"
     text_as_statement: "Il responsabile della protezione dei dati"
@@ -503,7 +515,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "è stato consultato"
   anonymisationAudited:
     text: "Il vostro approccio all'anonimizzazione è stato sottoposto a una revisione indipendente?"
@@ -514,7 +526,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "sottoposto a revisione indipendente"
 # Informazioni pratiche
   onWebsite:
@@ -523,8 +535,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
-        text: sì
+        text: yes
+        text_as_statement: "sí"
   webpage:
     text: "Nel tuo sito web, qual'è la pagina che dà accesso ai dati?"
     text_as_statement: "il sito web collega i dati da"
@@ -538,8 +552,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
-        text: sì
+        text: yes
+        text_as_statement: "sí"
   listing:
     text: "Dove sono elencati?"
     text_as_statement: "I dati fanno parte di questa collezione"
@@ -553,8 +569,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
-        text: sì
+        text: yes
+        text_as_statement: "sí"
   reference:
     text: "Dove sono menzionati i tuoi dati?"
     text_as_statement: "Questi dati sono menzionati in"
@@ -599,7 +617,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "Si, almeno una volta al giorno"
   seriesType:
     text: "Di che tipo di pacchetti di dati si tratta?"
@@ -622,7 +640,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "è disponibile"
   frequentSeriesPublication:
     text: "Ogni quanto crei un aggiornamento?"
@@ -670,7 +688,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "Estrazioni (dump) dei dati"
   dumpFrequency:
     text: "Con che frequenza crei un'estrazione della banca dati?"
@@ -698,7 +716,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "corretti"
   qualityUrl:
     text: "Dove riporti i problemi qualitativi di questi dati?"
@@ -723,7 +741,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "il backup è fatto parallelamente"
   slaUrl:
     text: "Dove descrivi le garanzie sulla disponibilità del servizio?"
@@ -852,7 +870,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "processabili dal computer"
   openStandard:
     text: "Questi dati sono disponibili in un formato standard aperto?"
@@ -863,7 +881,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "formato standard aperto"
   dataType:
     text: "Che tipo di dati pubblichi?"
@@ -955,7 +973,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "identificatori persistenti"
   resolvingIds:
     text: "Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni addizionali?"
@@ -986,7 +1004,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   reliableExternalUrls:
     text: "Sono affidabili le informazioni di queste parti terze?"
     help_text: "se una parte terza fornisce delle URL pubbliche sui valori che si trovano nei tuoi dati, ha probabilmente adottato delle misure per garantire la qualità e l'affidabilità di questi dati. Questa è un'indicazione di quanto ti fidi della loro procedura per farlo. Cerca il loro certificato di dati aperto o segni distintivi analoghi per decidere."
@@ -994,7 +1012,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   externalUrls:
     text: "I tuoi dati utilizzano le URL di tali parti terze?"
     text_as_statement: "Le URL di parti terze sono"
@@ -1004,7 +1022,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "fanno riferimento a questi dati"
   provenance:
     text: "Dai accesso ai tuoi dati in un formato che sia processabile dal computer?"
@@ -1015,7 +1033,7 @@ questions:
         text: no
         text_as_statement: ""
       a_true:
-        text: sì
+        text: yes
         text_as_statement: "processabile dal computer"
   digitalCertificate:
     text: "Dove descrivi il modo in cui la gente può verificare che i dati ricevuti provengono da te?"
@@ -1116,7 +1134,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   schemaDocumentationUrl:
     text: "Dove si trova la documentazione sui vocabolari usati dai vostri dati?"
     text_as_statement: "I vocabolari utilizzati da questi dati sono documentati in"
@@ -1130,7 +1148,7 @@ questions:
       a_false:
         text: no
       a_true:
-        text: sì
+        text: yes
   codelistDocumentationUrl:
     text: "Dove sono documentati i codici che si trovano nei tuoi dati?"
     text_as_statement: "I codici che si trovano in questi dati sono documentati in"
@@ -1161,8 +1179,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
-        text: sì
+        text: yes
+        text_as_statement: "sí"
   account:
     text: "Attraverso quali profili di social media le persone possono contattarti?"
     text_as_statement: "Contattare il curatore attraverso questi social media"
@@ -1197,8 +1217,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
-        text: sì
+        text: yes
+        text_as_statement: "sí"
   engagementTeamUrl:
     text: "Dov'è la loro home page?"
     text_as_statement: "L'impegno della comunità è gestito da"

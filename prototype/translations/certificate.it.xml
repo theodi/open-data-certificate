@@ -64,7 +64,7 @@
          <help>Come aiutare le persone a trovare i tuoi dati</help>
          <question id="onWebsite">
             <label>Il tuo sito web principale ha un link ai tuoi dati?</label>
-            <yesno/>
+            <yesno yes="sí" no="no"/>
             <help>E' più facile trovare i dati se sono collegati a partire dal tuo sito web principale.</help>
             <requirement level="standard">Dovresti <strong>assicurarti che le persone possano trovare i dati a partire dal tuo sito web principale </strong> per facilitarne l'accesso</requirement>
          </question>
@@ -80,7 +80,7 @@
          </if>
          <question id="listed">
             <label>I tuoi dati fanno parte di un elenco di dati?</label>
-            <yesno/>
+            <yesno yes="sí" no="no"/>
             <help>In generale è più facile trovare i dati quando fanno parte di un catalogo di dati come ad esempio quelli accademici, del settore pubblico o della sanità oppure quando appaiono in risultati di ricerca pertinenti.</help>
             <requirement level="standard">Dovresti <strong>fare in modo che le persone possano trovare i tuoi dati quando li cercano </strong>all'interno di elenchi specifici.</requirement>
          </question>
@@ -96,7 +96,7 @@
          </if>
          <question id="referenced">
             <label>Le tue pubbblicazioni fanno riferimento a questi dati?</label>
-            <yesno/>
+            <yesno yes="sí" no="no"/>
             <help>Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, dai più contesto ed aiuti le persone a trovare e comprendere più facilmente i tuoi dati</help>
             <requirement level="standard">Dovresti <strong>far riferimento a questi dati a partire dalle tue pubblicazioni</strong> in modo che le persone possano venire a conoscenza della loro esistenza e contesto.</requirement>
          </question>
@@ -860,7 +860,7 @@
          </question>
          <question id="socialMedia">
             <label>Usi i social media per connetterti con le persone che usano i tuoi dati?</label>
-            <yesno/>
+            <yesno yes="sí" no="no"/>
             <requirement level="standard">Dovresti <strong>utilizzare i social media per contattare le persone che usano i tuoi dati </strong> e scoprire come vengono utilizzati</requirement>
          </question>
          <if test="this.socialMedia() === 'true'">
@@ -899,7 +899,7 @@
          </if>
          <question id="engagementTeam">
             <label>Hai qualcuno che costruisce attivamente una comunità attorno a questi dati?</label>
-            <yesno/>
+            <yesno yes="sí" no="no"/>
             <help more="http://theodi.org/guide/engaging-reusers">Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone ad utilizzare i dati.</help>
             <requirement level="exemplar">Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un uso più ampio.</requirement>
          </question>

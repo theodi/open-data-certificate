@@ -140,6 +140,8 @@
                <option value="odc-by">Open Data Commons Attribution License</option>
                <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
                <option value="odc-pddl">Open Data Commons Public Domain Dedication e Licenza (PDDL)</option>
+               <option value="iodl">Italian Open Data License v1.0</option>
+               <option value="iodl_2_0">Italian Open Data License v2.0</option>
                <option value="na" display="">Non applicabile</option>
                <option value="other" display="">Altro...</option>
             </select>
@@ -236,6 +238,8 @@
                   <option value="cc-by">Creative Commons Attribuzione</option>
                   <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
                   <option value="cc-zero">Creative Commons CCZero</option>
+                  <option value="iodl">Italian Open Data License v1.0</option>
+                  <option value="iodl_2_0">Italian Open Data License v2.0</option>
                   <option value="na" display="">Non applicabile</option>
                   <option value="other" display="">Altro...</option>
                </select>
