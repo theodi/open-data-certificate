@@ -13,7 +13,7 @@ class Response < ActiveRecord::Base
   after_save :update_survey_section_id
 
   def sibling_responses(responses)
-    responses.select{|r| r.question_id == question_id && r.response_set_id == response_set_id} || []
+    (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end
   memoize :sibling_responses
 
