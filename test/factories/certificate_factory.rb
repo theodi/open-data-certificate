@@ -5,6 +5,8 @@ FactoryGirl.define do
 
     factory :published_certificate do
       aasm_state "published"
+      published true
+      published_at DateTime.now
     end
   end
 
@@ -14,6 +16,8 @@ FactoryGirl.define do
 
     factory :published_certificate_with_dataset do
       aasm_state "published"
+      published true
+      published_at DateTime.now
       attained_level "basic"
       response_set {FactoryGirl.create(:response_set_with_dataset, aasm_state: 'published')}
 
