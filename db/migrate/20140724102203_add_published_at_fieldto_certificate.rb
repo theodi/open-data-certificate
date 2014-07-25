@@ -1,7 +1,10 @@
 class AddPublishedAtFieldtoCertificate < ActiveRecord::Migration
   def up
     add_column :certificates, :published_at, :datetime
-    Certificate.where(published: true).each { |c| c.update_attributes(published_at: c.created_at) }
+    add_column :certificates, :aasm_state, :string
+
+    Certificate.where(published: true).each { |c| c.update_attributes(aasm_state: :published, published_at: c.created_at) }
+    Certificate.where(published: false).each { |c| c.update_attributes(aasm_state: :draft) }
   end
 
   def down
