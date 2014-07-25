@@ -30,7 +30,7 @@ class UploadUsageDataTest < ActiveSupport::TestCase
 
   test "find_collection finds the corrrect collection" do
     VCR.use_cassette('find_collection finds the corrrect collection') do
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
       assert_equal "Usage Data", collection.title
     end
   end
@@ -54,7 +54,7 @@ class UploadUsageDataTest < ActiveSupport::TestCase
       UploadUsageData.upload_csv(csv, 'ODCs Test file upload')
 
       file = session.file_by_title('ODCs Test file upload')
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
 
       assert_equal 'ODCs Test file upload', file.title
       assert_equal 1, collection.files.select {|f| f.title == 'ODCs Test file upload'}.count
@@ -71,7 +71,7 @@ class UploadUsageDataTest < ActiveSupport::TestCase
 
       UploadUsageData.perform
 
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
 
       published_certificates = collection.files.select {|f| f.title.match /Published certificates - [0-9]+\-[0-9]+\-[0-9]+/}
       all_certificates = collection.files.select {|f| f.title.match /All certificates - [0-9]+\-[0-9]+\-[0-9]+/}

@@ -146,9 +146,9 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "message",    :limit => 65535
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "kitten_data", :force => true do |t|
