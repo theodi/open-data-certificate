@@ -1,5 +1,5 @@
-builder.id dataset_url(dataset)
-builder.link :href=> dataset_url(dataset)
+builder.id dataset_url(dataset, :protocol => embed_protocol)
+builder.link :href=> dataset_url(dataset, :protocol => embed_protocol)
 builder.link :rel => "http://schema.theodi.org/certificate#certificate", :type => "text/html",
          :href => dataset_certificate_url(dataset.id, certificate.id, :protocol => embed_protocol)
 builder.link :rel => "about", :href => dataset.documentation_url
