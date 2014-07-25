@@ -436,7 +436,7 @@ $(document).ready(function($){
     .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)});
 
   // Replace select boxes visually
-  $('select').each(function() {
+  $('#surveyor select').each(function() {
     var self = $(this);
 
     var selectBox = $('<div class="select-box">');
