@@ -920,11 +920,12 @@ survey 'IT',
       :display_on_certificate => true,
       :text_as_statement => 'Gli individui affetti da questi dati ricevono questa informativa sulla privacy',
       :help_text => 'Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.'
-    dependency :rule => 'A and (B or C) and D'
+    dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
     a_1 'URL Informativa Privacy',
       :string,
       :input_type => :url,
@@ -934,12 +935,13 @@ survey 'IT',
     label_pilot_7 'Dovresti <strong>comunicare per quali ragioni le persone menzionate nei tuoi dati hanno dato il loro consenso per l\'utilizzo dei loro dati</strong> in modo che la gente possa utilizzare i dati per le stesse finalità conformemente alla normativa sulla protezione dei dati.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
-    dependency :rule => 'A and (B or C) and D and E'
+    dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dpStaff 'C\'è qualcuno nella tua organizzazione che è responsabile per la protezione dei dati?',
       :discussion_topic => :it_dpStaff,
