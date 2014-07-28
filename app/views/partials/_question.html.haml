@@ -18,7 +18,7 @@
 
 - else
   %div.question.container
-    - r = response_for(@response_set, q, nil, rg)
+    - r = response_for(@response_set, @responses, q, nil, rg)
     - a = @response_set.autocomplete_override_message_for(q)
 
     - url_field = r.answer && r.answer.input_type == 'url'
@@ -36,7 +36,7 @@
       - state = 'autocompleted'
       - status_message = t('surveyor.autocompleted')
 
-      - if !r.all_autocompleted
+      - if !r.all_autocompleted(@responses)
         - state = 'autocompleted-changed'
         - status_message = t('surveyor.autocompleted_changed')
 
@@ -48,7 +48,7 @@
       - state = 'url-warning'
       - status_message = t('surveyor.url_warning')
 
-      - if r.all_autocompleted
+      - if r.all_autocompleted(@responses)
         - state = 'autocompleted-url-warning'
         - status_message = t('surveyor.autocomplete_url_warning')
 
@@ -56,7 +56,7 @@
         - state = 'url-explained'
         - status_message = t('surveyor.url_explained')
 
-    - if r.any_metadata_missing
+    - if r.any_metadata_missing(@responses)
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
@@ -68,7 +68,7 @@
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
     - classes << 'mandatory' if q.is_mandatory
-    - classes << 'autocompleted' if r.all_autocompleted
+    - classes << 'autocompleted' if r.all_autocompleted(@responses)
     - classes << state if state
     - if pickTypes.include?(q.pick) && renderer != :dropdown
       - classes << ['inline-validation', 'compact-validation']

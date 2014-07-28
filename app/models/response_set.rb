@@ -2,6 +2,12 @@ class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
 
+  # Surveyor field types
+  VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
+
+  # Default title for a response set / dataset
+  DEFAULT_TITLE = 'Untitled'
+
   after_save :update_certificate
   before_save :update_dataset
 
@@ -10,45 +16,53 @@ class ResponseSet < ActiveRecord::Base
 
   belongs_to :dataset, touch: true
   belongs_to :survey
+
+  # One to one relationship with certificate
   has_one :certificate, dependent: :destroy
+
+  # One to one relationship with kitten data object
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
   has_many :autocomplete_override_messages, dependent: :destroy
   has_one :certificate_generator
 
-  VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
-
-  # there is already a protected method with this
-  # has_many :dependencies, :through => :survey
-
-  class << self
-
-    def counts
-      within_last_month = (Time.now - 1.month)..Time.now
-      {
-        :all                           => self.count,
-        :all_datasets                  => self.select("DISTINCT(dataset_id)").count,
-        :all_datasets_this_month       => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
-        :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
-        :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
-      }
-    end
-
+  # Checks if a value is blank by Surveyor's standards
+  def self.is_blank_value?(value)
+    value.is_a?(Array) ? value.all?{|values| values.blank? } : value.to_s.blank?
   end
 
-
+  # Checks if a surveyor hash for a quesiton is considered blank (unanswered)
+  # Overloads Surveyor's method to ensure only surveyor values are considered
   def self.has_blank_value?(hash)
-    return true if hash["answer_id"].kind_of?(Array) ? hash["answer_id"].all?{|id| id.blank?} : hash["answer_id"].blank?
+
+    # It's definitely blank if there's no answer id
+    return true if is_blank_value?(hash["answer_id"])
+
+    # Otherwise it isn't blank if the question is a radio question
     return false if (q = Question.find_by_id(hash["question_id"])) and q.pick == "one"
-    hash.slice(*VALUE_FIELDS).any?{|k,v| v.is_a?(Array) ? v.all?{|x| x.to_s.blank?} : v.to_s.blank?}
+
+    # Otherwise check surveyor values are blank
+    hash.slice(*VALUE_FIELDS).any?{|k,v| is_blank_value?(v) }
   end
 
+  # Gets data for status page
+  def self.counts
+    within_last_month = (Time.now - 1.month)..Time.now
+    {
+      :all                           => self.count,
+      :all_datasets                  => self.select("DISTINCT(dataset_id)").count,
+      :all_datasets_this_month       => self.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count,
+      :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
+      :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
+    }
+  end
+
+  # Simple state machine describing response set states
   aasm do
-    state :draft,
-              :initial => true
+    state :draft, :initial => true
 
     state :published,
-              :before_enter => :publish_certificate,
-              :after_enter => [:archive_other_response_sets, :store_attained_index]
+      :before_enter => :publish_certificate,
+      :after_enter => [:archive_other_response_sets, :store_attained_index]
 
     state :archived
 
@@ -62,7 +76,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def publish_certificate
-    certificate.update_attribute :published, true
+    certificate.publish!
   end
 
   def archive_other_response_sets
@@ -76,20 +90,18 @@ class ResponseSet < ActiveRecord::Base
 
   end
 
-  # store the attained level so that it's queryable (only stored
-  # once the certificate has been published)
+  # Store the attained level so that it's queryable
+  # Only stored once the certificate has been published
   def store_attained_index
     index = minimum_outstanding_requirement_level-1
     update_attribute(:attained_index, index)
   end
 
-  DEFAULT_TITLE = 'Untitled'
-
   scope :by_newest, order("response_sets.created_at DESC")
   scope :completed, where("response_sets.completed_at IS NOT NULL")
 
   def title
-    dataset_title_determined_from_responses || ResponseSet::DEFAULT_TITLE
+    dataset_title_determined_from_responses || DEFAULT_TITLE
   end
 
   def response(identifier)
@@ -100,6 +112,7 @@ class ResponseSet < ActiveRecord::Base
     response 'documentationUrl'
   end
 
+  # This picks up the jurisdiction (survey title) from the survey, or the migrated survey
   def jurisdiction
     if Survey::MIGRATIONS.has_key? survey.access_code
       target_access_code = Survey::MIGRATIONS[survey.access_code]
@@ -121,7 +134,7 @@ class ResponseSet < ActiveRecord::Base
     draft?
   end
 
-  # find which dependencies are active for this response set as a whole
+  # Finds which dependencies are active for this response set as a whole
   def depends
     return @depends if @depends
 
@@ -136,16 +149,22 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+  # Allows response values to be accessed using the suffix '_determined_from_responses'
   def method_missing(method_name, *args, &blk)
-    val = method_name.to_s.match(/(.+)_determined_from_responses/)
-    unless val.nil? or survey.map[val[1].to_sym].nil?
-      var = instance_variable_get("@#{method_name}")
-      var ||= value_for val[1].to_sym
+    match = method_name.to_s.match(/^(.+)_determined_from_responses$/)
+    identifier = match && match[1].to_sym
+
+    # Checks to see if the response identifier is valid
+    if Survey::RESPONSE_MAP[identifier]
+      # Tries to get an existing instance variable  before loading the value from the database
+      var = instance_variable_get("@#{method_name}") || value_for(identifier)
     else
+      # Otherwise defaults to Surveyor's method_missing
       super
     end
   end
 
+  # Custom getter which chooses an appropriate data licence
   def data_licence_determined_from_responses
     if @data_licence_determined_from_responses.nil?
       ref = value_for :data_licence, :reference_identifier
@@ -176,6 +195,7 @@ class ResponseSet < ActiveRecord::Base
     @data_licence_determined_from_responses
   end
 
+  # Custom getter which chooses an appropriate content licence
   def content_licence_determined_from_responses
     if @content_licence_determined_from_responses.nil?
       ref = value_for :content_licence, :reference_identifier

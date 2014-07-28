@@ -16,7 +16,7 @@
           %strong= dataset.certificate.curator
         %p
           %span Issued
-          %strong= "#{time_ago_in_words(dataset.updated_at)} ago"
+          %strong= "#{time_ago_in_words(dataset.certificate.published_at)} ago"
     .span2
       .expand
         %i.show-more.icon-chevron-down

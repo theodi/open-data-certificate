@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def has_expired_or_expiring_certificates?
     response_sets.any? do |r|
-      unless r.certificate.nil?
+      unless r.certificate.nil? || ["draft", "archived"].include?(r.aasm_state)
         r.certificate.expired? || r.certificate.expiring?
       end
     end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.7" xml:lang="ro">
+<questionnaire version="0.7" xml:lang="ro" yes="da" no="nu">
    <levels>
       <level id="basic">Un început extraordinar pentru a pune bazele procesului de publicare a datelor deschise. Este nevoie de multă muncă pentru a ajunge chiar și aici.</level>
       <level id="pilot">Efort suplimentar s-a depus în sprijinirea și încurajarea feedback-ului de la oamenii care folosesc aceste date deschise.</level>

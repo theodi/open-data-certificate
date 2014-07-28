@@ -148,7 +148,7 @@ Questions and Answers are associated to requirements by having their 'requiremen
 
 ##### question
 
-* `:requirment` - If the question is a Label-type, requirement is the identifier of an improvement that is recommended to meet a certain level.
+* `:requirement` - If the question is a Label-type, requirement is the identifier of an improvement that is recommended to meet a certain level.
 The value will be stored as `"pilot_1"`, `"pilot_2"`, `"pilot_3"`, `"basic_1"`, `"basic_2"`, etc. With the part before the underscore representing the level, and everything after the underscore uniquely identifying the requirement.
 If the question is a "normal" question (ie: not a label), the requirement attribute is used to identify to the recommended improvement this question satisfies.
 

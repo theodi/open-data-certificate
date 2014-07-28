@@ -12,14 +12,9 @@ class DatasetsController < ApplicationController
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
+                .order('certificates.published_at DESC')
 
     @title = t('datasets.datasets')
-
-    if params[:format] == "feed"
-      @datasets = @datasets.order('datasets.updated_at DESC')
-    else
-      @datasets = @datasets.order('response_sets.attained_index DESC')
-    end
 
     if params[:jurisdiction]
       @datasets = @datasets.joins(response_set: :survey)

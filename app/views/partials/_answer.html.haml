@@ -2,7 +2,7 @@
 - rg ||= nil
 - repeated_template ||= false
 
-- r = response_for(@response_set, q, a, rg)
+- r = response_for(@response_set, @responses, q, a, rg)
 - r.reference_identifier = a.reference_identifier
 
 - i = response_idx(q.pick != "one") # argument will be false (don't increment i) if we're on radio buttons

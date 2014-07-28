@@ -1,6 +1,7 @@
 class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
+  extend Memoist
 
   attr_writer :reference_identifier
   attr_accessible :autocompleted
@@ -11,30 +12,34 @@ class Response < ActiveRecord::Base
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
 
-  # gets all responses in the same response set for a question, useful for checkbox questions
-  def sibling_responses
-    @sibling_responses ||= Response.where(question_id: question_id, response_set_id: response_set_id)
+  def sibling_responses(responses)
+    (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end
+  memoize :sibling_responses
 
   def statement_text
     answer.try(:text_as_statement) || to_formatted_s
   end
 
   def reference_identifier
-    @reference_identifier ||= answer.reference_identifier
+    answer.try(:reference_identifier)
   end
+  memoize :reference_identifier
 
   def requirement_level
-    @requirement_level ||= answer.requirement_level
+    answer.requirement_level
   end
+  memoize :requirement_level
 
   def requirement
-    @requirement ||= answer.requirement
+    answer.requirement
   end
+  memoize :requirement
 
   def requirement_level_index
-    @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
+    Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end
+  memoize :requirement_level_index
 
   def empty?
     question.pick == "none" ? string_value.blank? : !answer_id
@@ -57,8 +62,9 @@ class Response < ActiveRecord::Base
   end
 
   def auto_value
-    @auto_value ||= response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
+    response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
   end
+  memoize :auto_value
 
   def formatted_auto_value
     auto_value.kind_of?(Array) ? auto_value.try(:join, ',') : auto_value
@@ -68,25 +74,28 @@ class Response < ActiveRecord::Base
     !!(auto_value && !auto_value.empty?)
   end
 
-  def any_metadata_missing
-    @any_metadata_missing ||= question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
+  def any_metadata_missing(responses)
+    question.metadata_field? && sibling_responses(responses).select(&:metadata_missing).any?
   end
+  memoize :any_metadata_missing
 
   def metadata_missing
-    @metadata_missing ||= question.metadata_field? && autocompletable? && !autocompleted && answer
+    question.metadata_field? && autocompletable? && !autocompleted && answer
   end
+  memoize :metadata_missing
 
-  def all_autocompleted
+  def all_autocompleted(responses)
     if question.pick == 'any' && autocompletable?
-      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
+      return @all_autocompleted ||= sibling_responses(responses).map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
     end
 
     @all_autocompleted ||= autocompleted
   end
 
   def autocompleted
-    @autocompleted ||= compute_autocompleted
+    compute_autocompleted
   end
+  memoize :autocompleted
 
   def compute_autocompleted
     if autocompletable?

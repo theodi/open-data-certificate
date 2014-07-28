@@ -2,8 +2,6 @@ require 'google_drive'
 
 module UploadUsageData
 
-  @@session = GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
-
   def self.perform
     [
       "published",
@@ -42,12 +40,12 @@ module UploadUsageData
 
   def self.upload_csv(csv, title)
     file = session.upload_from_string(csv, title, content_type: "text/csv")
-    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
     collection.add(file)
   end
 
   def self.session
-    @@session
+    @@session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
   end
 
 end

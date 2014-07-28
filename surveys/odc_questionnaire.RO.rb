@@ -140,9 +140,9 @@ survey 'RO',
     dependency :rule => '(A or B)'
     condition_A :q_publisherRights, '==', :a_yes
     condition_B :q_publisherRights, '==', :a_unsure
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'create sau generate inițial de curatorul acestora'
 
     q_thirdPartyOrigin 'O parte din aceste date a fost extrasă sau calculată din alte date?',
@@ -153,8 +153,8 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['basic_3']
 
     label_basic_3 'Ați spus că aceste date nu au fost create sau adunate inițial de dumneavoastră, și nu au fost obținute prin crowdsourcing, prin urmare au fost extrase sau calculate din alte surse de date.',
@@ -178,9 +178,9 @@ survey 'RO',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_thirdPartyOrigin, '==', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'surse de date deschise',
       :requirement => ['basic_4']
 
@@ -204,9 +204,9 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'obținută prin crowdsourcing',
       :requirement => ['basic_5']
 
@@ -228,8 +228,8 @@ survey 'RO',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_claUrl 'Unde este Acordul asupra Licenței de Colaborator (ALC)?',
       :discussion_topic => :ro_claUrl,
@@ -259,8 +259,8 @@ survey 'RO',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['basic_6']
 
     label_basic_6 'Trebuie să obțineți <strong>acceptul colaboratorilor referitor la Acordul asupra Licenței de Colaborator</strong> (ALC), care vă oferă dreptul de a publica munca lor ca date deschise.',
@@ -302,9 +302,9 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'date ce sunt lizibile pentru mașină despre sursele acestor date',
       :requirement => ['standard_2']
 
@@ -449,8 +449,8 @@ survey 'RO',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['basic_7']
 
     label_basic_7 'Trebuie să <strong>publicați datele deschise sub o licență deschisă</strong>, astfel încât oamenii să le poată folosi.',
@@ -484,9 +484,9 @@ survey 'RO',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'marcat ca făcând parte din domeniul public',
       :requirement => ['standard_3']
 
@@ -609,8 +609,8 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['basic_8']
 
     label_basic_8 'Trebuie <strong>să publicați datele deschise sub o licență deschisă</strong>, astfel încât oamenii să le poată folosi.',
@@ -762,9 +762,9 @@ survey 'RO',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'auditat independent',
       :requirement => ['standard_8']
 
@@ -784,9 +784,9 @@ survey 'RO',
       :required => :pilot
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_individual
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'anonimizate'
 
     q_lawfulDisclosure 'Este impus sau permis de lege să publicați aceste date despre persoane?',
@@ -797,9 +797,9 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'trebuie să fie publicate',
       :requirement => ['pilot_5']
 
@@ -844,9 +844,9 @@ survey 'RO',
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => 'nu a efectuat o evaluare a riscurilor de confidențialitate'
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'a efectuat o evaluare a riscurilor de confidențialitate',
       :requirement => ['pilot_6']
 
@@ -897,9 +897,9 @@ survey 'RO',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'auditată independent',
       :requirement => ['standard_11']
 
@@ -919,11 +919,12 @@ survey 'RO',
       :display_on_certificate => true,
       :text_as_statement => 'Persoanele afectate de aceste date primesc această notificare de confidențialitate',
       :help_text => 'Când colectați date despre persoane, trebuie să le spuneți cum vor fi utilizate. Oamenii care folosesc datele dumneavoastră au nevoie de acest lucru pentru a se asigura că respectă legislația privind protecția datelor.'
-    dependency :rule => 'A and (B or C) and D'
+    dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
     a_1 'URL pentru Notificarea de Confidențialitate',
       :string,
       :input_type => :url,
@@ -933,12 +934,13 @@ survey 'RO',
     label_pilot_7 'Ar trebui <strong>să spuneți oamenilor în ce scopuri au fost de acord persoanele ca dumneavoastră să le folosiți datele</strong>, astfel încât aceștia să folosească datele în aceleași scopuri și în conformitate cu legislația privind protecția datelor.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
-    dependency :rule => 'A and (B or C) and D and E'
+    dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dpStaff 'Este cineva din organizația dumneavoastră responsabil de protecția datelor?',
       :discussion_topic => :ro_dpStaff,
@@ -949,8 +951,8 @@ survey 'RO',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_dbStaffConsulted 'I-ați implicat în procesul de evaluare a riscurilor?',
       :discussion_topic => :ro_dbStaffConsulted,
@@ -963,9 +965,9 @@ survey 'RO',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_dpStaff, '==', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'a fost consultată',
       :requirement => ['pilot_8']
 
@@ -991,9 +993,9 @@ survey 'RO',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'auditată independent',
       :requirement => ['standard_12']
 
@@ -1020,8 +1022,8 @@ survey 'RO',
       :discussion_topic => :onWebsite,
       :help_text => 'Datele pot fi găsite mai ușor dacă există un link către ele pe site-ul dvs. principal.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['standard_13']
 
     label_standard_13 'Ar trebui <strong>să vă asigurați că oamenii pot găsi datele direct din site-ul dvs. principal</strong>, astfel încât să poată fi găsite mai ușor.',
@@ -1054,8 +1056,8 @@ survey 'RO',
       :discussion_topic => :listed,
       :help_text => 'Date sunt mai ușor de găsit atunci când sunt în cataloage de date relevante cum ar fi sectorul public, academic sau de sănătate, sau atunci când sunt găsite în rezultatele unei căutări relevante.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['standard_14']
 
     label_standard_14 'Ar trebuie <strong>să vă asigurați că oamenii pot găsi datele dvs. atunci când le caută </strong>în locații care listează date.',
@@ -1088,8 +1090,8 @@ survey 'RO',
       :discussion_topic => :referenced,
       :help_text => 'Când faceți referință la date în propriile publicații precum rapoarte, prezentări sau posturi pe blog, le oferiți context și îi ajutați pe oamenii să le găsească și să le înțeleagă mai bine.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['standard_15']
 
     label_standard_15 'Ar trebui <strong>să faceți referință la date în publicațiile proprii</strong>, pentru ca oamenii să afle de disponibilitatea și contextul lor.',
@@ -1189,9 +1191,9 @@ survey 'RO',
       :required => :pilot
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'cel puțin zilnic'
 
     q_seriesType 'Ce tip de serie de seturi de date este aceasta?',
@@ -1220,9 +1222,9 @@ survey 'RO',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_seriesType, '==', :a_dumps
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'este disponibil',
       :requirement => ['exemplar_6']
 
@@ -1338,9 +1340,9 @@ survey 'RO',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'copii ale datelor în format pentru export',
       :requirement => ['standard_19']
 
@@ -1412,9 +1414,9 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_timeSensitive, '!=', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'corectate',
       :requirement => ['standard_21']
 
@@ -1474,9 +1476,9 @@ survey 'RO',
       :text_as_statement => 'Datele sunt',
       :help_text => 'Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident.',
       :pick => :one
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'susținute și în afara sitului',
       :requirement => ['standard_23']
 
@@ -1835,9 +1837,9 @@ survey 'RO',
       :text_as_statement => 'Aceste date sunt',
       :help_text => 'Oamenii preferă formatele de date care sunt ușor procesate de un calculator, pentru viteză și precizie. De exemplu, o copie scanată a unei foi de calcul nu este lizibilă pentru mașini, dar un fișier CSV ar putea fi.',
       :pick => :one
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'sunt lizibile pentru mașini',
       :requirement => ['pilot_16']
 
@@ -1854,9 +1856,9 @@ survey 'RO',
       :help_text => 'Standardele deschise sunt create printr-un proces corect, transparent și colaborativ. Oricine le poate implementa și există multă asistență, astfel încât este mai ușor pentru dumneavoastră să împărțiți datele cu mai multe persoane. De exemplu, XML, CSV și JSON sunt standarde deschise.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'un format deschis standard',
       :requirement => ['standard_30']
 
@@ -2023,9 +2025,9 @@ survey 'RO',
       :text_as_statement => 'Datele includ',
       :help_text => 'Datele sunt, de obicei, despre lucruri reale precum școli sau drumuri sau utilizează un sistem de codificare. Dacă datele din diferite surse folosesc aceiași identificatori persistenți unici pentru a se referi la aceleași lucruri, oamenii pot combina sursele cu ușurință, pentru a crea date și mai utile. Identificatorii ar putea fi de tip GUID, DOI sau URL.',
       :pick => :one
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'identificatori persistenți',
       :requirement => ['standard_33']
 
@@ -2097,8 +2099,8 @@ survey 'RO',
       :required => :exemplar
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_reliableExternalUrls 'Aceste informații de la părți terțe sunt de încredere?',
       :discussion_topic => :reliableExternalUrls,
@@ -2108,8 +2110,8 @@ survey 'RO',
     dependency :rule => 'A and B'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_externalUrls 'Datele dvs. folosesc acele URL-uri de la o parte terță?',
       :discussion_topic => :externalUrls,
@@ -2121,9 +2123,9 @@ survey 'RO',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
     condition_C :q_reliableExternalUrls, '==', :a_true
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'referențiate în aceste date',
       :requirement => ['exemplar_18']
 
@@ -2147,9 +2149,9 @@ survey 'RO',
       :help_text => 'Este vorba despre originile datelor, de modul în care datele dumneavoastră au fost create și prelucrate, înainte de a fi publicate. Se mărește încrederea în datele pe care le publicați, deoarece oamenii pot urmări modul în care acestea au fost procesate.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
-    a_false 'no',
+    a_false 'nu',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'da',
       :text_as_statement => 'lizibile pentru mașini',
       :requirement => ['exemplar_19']
 
@@ -2419,8 +2421,8 @@ survey 'RO',
       :help_text => 'Formate, cum ar fi CSV, JSON, XML sau Turtle folosesc vocabulare personalizate sau scheme, care spun ce coloane sau proprietăți conțin datele.',
       :pick => :one,
       :required => :standard
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_schemaDocumentationUrl 'Unde se află documentația despre vocabularele de date?',
       :discussion_topic => :schemaDocumentationUrl,
@@ -2446,8 +2448,8 @@ survey 'RO',
       :help_text => 'Dacă datele dvs. utilizează coduri pentru a se referi la lucruri cum ar fi zone geografice, categorii de cheltuieli sau boli, acestea trebuie să fie explicate oamenilor.',
       :pick => :one,
       :required => :standard
-    a_false 'no'
-    a_true 'yes'
+    a_false 'nu'
+    a_true 'da'
 
     q_codelistDocumentationUrl 'Unde sunt documentate codurile din datele dumneavoastră?',
       :discussion_topic => :codelistDocumentationUrl,
@@ -2524,8 +2526,8 @@ survey 'RO',
     q_socialMedia 'Utilizați mediile de socializare pentru a vă conecta cu persoane care utilizează datele dumneavoastră?',
       :discussion_topic => :socialMedia,
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['standard_56']
 
     label_standard_56 'Ar trebui <strong>să folosiți mediile de socializare pentru a ajunge la oamenii care folosesc datele dumneavoastră</strong> și pentru a descoperi modul în care sunt utilizate acestea.',
@@ -2616,8 +2618,8 @@ survey 'RO',
       :help_text => 'O echipa de implicare a comunității va face acest lucru prin intermediul mediilor de socializare, blogging-ulului, și va aranja hackdays sau concursuri, pentru a încuraja oamenii să folosească datele dumneavoastră.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'nu'
+    a_true 'da',
       :requirement => ['exemplar_21']
 
     label_exemplar_21 'Ar trebui <strong>să construiți o comunitate de oameni în jurul datelor dumneavoastră</strong>, pentru a încuraja utilizarea lor pe scară largă.',

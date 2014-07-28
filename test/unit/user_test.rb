@@ -54,7 +54,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.has_expired_or_expiring_certificates?
   end
 
-  test "has_expired_or_expiring_certificates? returns true if a user has an unpublished expiring certificate" do
+  test "has_expired_or_expiring_certificates? returns false if a user has an unpublished expiring certificate" do
     user = FactoryGirl.create(:user)
 
     5.times do
@@ -67,7 +67,7 @@ class UserTest < ActiveSupport::TestCase
     certificate.expires_at =  DateTime.now - 1.day
     certificate.save
 
-    assert_equal true, user.has_expired_or_expiring_certificates?
+    assert_equal false, user.has_expired_or_expiring_certificates?
   end
 
 end

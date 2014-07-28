@@ -26,7 +26,7 @@
                         = q.text_for(:pre, @render_context, I18n.locale)
                         = q.help_text_for(@render_context, I18n.locale)
                         - if q.pick == "one"
-                          - r = response_for(@response_set, q, nil, g)
+                          - r = response_for(@response_set, @responses, q, nil, g)
                           - i = response_idx  # increment the response index since the answer partial skips for q.pick == one
                           = f.semantic_fields_for i, r do |ff|
                             = ff.input :question_id, :as => :quiet

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.7" xml:lang="it">
+<questionnaire version="0.7" xml:lang="it" yes="sì">
    <levels>
       <level id="basic">Ecco un inizio fantastico per pubblicare open data. Essere arrivati sino a qui è già un gran successo.</level>
       <level id="pilot">Un ulteriore sforzo è stato fatto affinché gli utenti esprimano la loro opinione sugli open data</level>

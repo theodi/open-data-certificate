@@ -86,19 +86,19 @@ questions:
     help_text: "În cazul în care orice parte din aceste date a fost obținută din afara organizației dvs., de la alte persoane sau organizații, atunci trebuie să oferiți informații suplimentare cu privire la dreptul dumneavoastră de a le publica."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "create sau generate inițial de curatorul acestora"
   thirdPartyOrigin:
     text: "O parte din aceste date a fost extrasă sau calculată din alte date?"
     help_text: "Folosirea unui extract sau a unei mici părți din datele altcuiva înseamnă că drepturile dvs. de a utiliza aceste date ar putea fi afectate. Ar putea exista, de asemenea, probleme legale dacă ați analizat datele lor pentru a produce date noi."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   thirdPartyOpen:
     text: "
                         <em>Toate</em> sursele acestor date au fost deja publicate ca date deschise?"
@@ -106,10 +106,10 @@ questions:
     help_text: "Aveți voie să republicați datele altcuiva dacă sunt deja sub o licență de date deschise sau în cazul în care drepturile lor au expirat sau au fost anulate. Dacă oricare parte a acestor date nu îndeplinește aceste condiții, atunci veți avea nevoie de consultanță juridică înainte de a putea publica."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "surse de date deschise"
   crowdsourced:
     text: "O parte din aceste date a fost obținută prin crowdsourcing?"
@@ -117,19 +117,19 @@ questions:
     help_text: "În cazul în care datele includ informații la care au contribuit persoane din afara organizației dumneavoastră, aveți nevoie de permisiunea lor pentru a le publica contribuțiile ca date deschise."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "obținută prin crowdsourcing"
   crowdsourcedContent:
     text: "Cei care au contribuit la obținerea acestor date au folosit judecata lor?"
     help_text: "În cazul în care oamenii și-au folosit creativitatea sau judecata lor pentru a contribui date, atunci ei au drept de copyright asupra muncii lor. De exemplu, scrierea unei descrieri sau luarea unei decizii referitor la includerea unor date într-un set de date ar necesita judecată. Astfel colaboratorii trebuie să transfere sau să renunțe la drepturile lor, sau să vă licențieze datele înainte ca dumneavoastră să le publicați."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   claUrl:
     text: "Unde este Acordul asupra Licenței de Colaborator (ALC)?"
     text_as_statement: "Acordul asupra Licenței de Colaborator se găsește la"
@@ -142,9 +142,9 @@ questions:
     help_text: "Verificați dacă toți colaboratorii au acceptat ALC înainte de a reutiliza sau republica contribuțiile lor. Trebuie să țineți o evidență a colaboratorilor și a celor care au fost sau nu de acord cu ALC."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   sourceDocumentationUrl:
     text: "Unde sunt descrise sursele acestor date?"
     text_as_statement: "Sursele acestor date sunt descrise la"
@@ -158,10 +158,10 @@ questions:
     help_text: "Informațiile despre sursele datelor ar trebui să fie într-un format lizibil de către om, astfel încât oamenii să poată înțelege, precum și într-un format de metadate care poate fi prelucrat de computere. Când toată lumea face acest lucru, ajută alți oameni să afle cum este utilizat un anumit set de date deschise și să justifice continuarea publicării sale."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "date ce sunt lizibile pentru mașină despre sursele acestor date"
   copyrightURL:
     text: "Unde ați publicat declarația drepturilor pentru acest set de date?"
@@ -255,9 +255,9 @@ questions:
     help_text: "Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a>. Apoi, alegeți-vă licența de la <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. În cazul în care o licență nu este în lista lor, înseamnă că aceasta nu este o licență deschisă sau nu a fost evaluată încă."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   contentRights:
     text: "Exista drepturi de autor în conținutul acestor date?"
     text_as_statement: "Sunt"
@@ -280,10 +280,10 @@ questions:
     help_text: "Conținutul poate fi marcat ca făcând parte din domeniul public, folosind <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark</a>. Acest lucru ajută oamenii să știe că acesta poate fi reutilizat în mod liber."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "marcat ca făcând parte din domeniul public"
   contentLicence:
     text: "Sub ce licență pot alții reutiliza conținutul?"
@@ -358,9 +358,9 @@ questions:
     help_text: "Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a>. Apoi, alegeți licența de la <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. În cazul în care o licență nu este în lista lor, înseamnă că nu este o licență deschisă sau nu a fost evaluată încă."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   contentRightsURL:
     text: "Unde sunt explicate drepturile și licența asupra conținutului?"
     text_as_statement: "Drepturile și licența asupra conținutului sunt explicate la"
@@ -421,10 +421,10 @@ questions:
     text_as_statement: "Procesul de anonimizare a fost"
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "auditat independent"
   appliedAnon:
     text: "Ați încercat să reduceți sau să eliminați posibilitatea ca persoanele să fie identificate?"
@@ -432,20 +432,20 @@ questions:
     help_text: "Anonimizarea reduce riscul ca persoanele să fie identificate din datele pe care le publicați. Cea mai bună tehnică de utilizat depinde de tipul de date pe care îl aveți."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "anonimizate"
   lawfulDisclosure:
     text: "Este impus sau permis de lege să publicați aceste date despre persoane?"
     text_as_statement: "Prin lege, aceste date despre persoane"
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "trebuie să fie publicate"
   lawfulDisclosureURL:
     text: "Unde documentați dreptul de a publica date despre persoane?"
@@ -459,10 +459,10 @@ questions:
     help_text: "O evaluare a riscurilor măsoară riscurile pentru confidențialitatea persoanelor din datele dumneavoastră, precum și utilizarea și publicarea acestor informații."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: "nu a efectuat o evaluare a riscurilor de confidențialitate"
       a_true:
-        text: yes
+        text: da
         text_as_statement: "a efectuat o evaluare a riscurilor de confidențialitate"
   riskAssessmentUrl:
     text: "Unde este publicată evaluarea riscurilor?"
@@ -477,10 +477,10 @@ questions:
     help_text: "Este o bună practică să verificați dacă evaluarea riscului a fost făcută în mod corect. Audituri independente făcute de specialiști sau de părți terțe tind să fie mai riguroase și mai imparțiale."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "auditată independent"
   individualConsentURL:
     text: "Unde este notificarea de confidențialitate pentru persoanele afectate de datele dumneavoastră?"
@@ -493,18 +493,18 @@ questions:
     text: "Este cineva din organizația dumneavoastră responsabil de protecția datelor?"
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   dbStaffConsulted:
     text: "I-ați implicat în procesul de evaluare a riscurilor?"
     text_as_statement: "Persoana responsabilă de protecția datelor"
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "a fost consultată"
   anonymisationAudited:
     text: "Abordarea anonimizării a fost auditată independent?"
@@ -512,10 +512,10 @@ questions:
     help_text: "Este o bună practică să vă asigurați că procesul de a elimina datele de identificare personală funcționează în mod corespunzător. Audituri independente făcute de specialiști sau de părți terțe tind să fie mai riguroase și mai imparțiale."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "auditată independent"
 # Informații Practice
   onWebsite:
@@ -523,9 +523,9 @@ questions:
     help_text: "Datele pot fi găsite mai ușor dacă există un link către ele pe site-ul dvs. principal."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   webpage:
     text: "Care pagină din site-ul dvs. conține link către date?"
     text_as_statement: "Site-ul conține link către date la"
@@ -538,9 +538,9 @@ questions:
     help_text: "Date sunt mai ușor de găsit atunci când sunt în cataloage de date relevante cum ar fi sectorul public, academic sau de sănătate, sau atunci când sunt găsite în rezultatele unei căutări relevante."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   listing:
     text: "Unde sunt listate?"
     text_as_statement: "Datele apar în această colecție"
@@ -553,9 +553,9 @@ questions:
     help_text: "Când faceți referință la date în propriile publicații precum rapoarte, prezentări sau posturi pe blog, le oferiți context și îi ajutați pe oamenii să le găsească și să le înțeleagă mai bine."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   reference:
     text: "Unde există referința către datele dumneavoastră?"
     text_as_statement: "Aceste date au referința la"
@@ -597,10 +597,10 @@ questions:
     help_text: "Spuneți-le oamenilor în cazul în care schimbările datelor au loc aproape zilnic. Atunci când datele se schimbă frecvent, acestea ies din uz mai rapid, astfel încât oamenii trebuie să știe dacă și dumneavoastră le actualizați frecvent și rapid."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "cel puțin zilnic"
   seriesType:
     text: "Ce tip de serie de seturi de date este aceasta?"
@@ -620,10 +620,10 @@ questions:
     help_text: "Spuneți-le oamenilor, dacă oferiți fluxul de modificări care afectează aceste date, cum ar fi înregistrări noi sau modificări ale înregistrărilor existente. Fluxul ar putea fi în format RSS, Atom sau alt format."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "este disponibil"
   frequentSeriesPublication:
     text: "Cât de des creați o nouă versiune?"
@@ -668,10 +668,10 @@ questions:
     help_text: "Un dump este un extras conținând întregul set de date într-un fișier pe care oamenii îl pot descărca. Acesta permite oamenilor să facă analize diferite de cele prin acces API."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "copii ale datelor în format pentru export"
   dumpFrequency:
     text: "Cât de des creați un dump al bazelor de date?"
@@ -696,10 +696,10 @@ questions:
     help_text: "Este o bună practică să remediați erorile din date, mai ales daca le folosiți și dumneavoastră. Oamenii ar trebui să știe când faceți corecții."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "corectate"
   qualityUrl:
     text: "Unde documentați problemele legate de calitatea acestor date?"
@@ -721,10 +721,10 @@ questions:
     help_text: "Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "susținute și în afara sitului"
   slaUrl:
     text: "Unde descrieți garanțiile cu privire la disponibilitatea serviciului?"
@@ -850,10 +850,10 @@ questions:
     help_text: "Oamenii preferă formatele de date care sunt ușor procesate de un calculator, pentru viteză și precizie. De exemplu, o copie scanată a unei foi de calcul nu este lizibilă pentru mașini, dar un fișier CSV ar putea fi."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "sunt lizibile pentru mașini"
   openStandard:
     text: "Sunt aceste date într-un format deschis standard?"
@@ -861,10 +861,10 @@ questions:
     help_text: "Standardele deschise sunt create printr-un proces corect, transparent și colaborativ. Oricine le poate implementa și există multă asistență, astfel încât este mai ușor pentru dumneavoastră să împărțiți datele cu mai multe persoane. De exemplu, XML, CSV și JSON sunt standarde deschise."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "un format deschis standard"
   dataType:
     text: "Ce fel de date publicați?"
@@ -953,10 +953,10 @@ questions:
     help_text: "Datele sunt, de obicei, despre lucruri reale precum școli sau drumuri sau utilizează un sistem de codificare. Dacă datele din diferite surse folosesc aceiași identificatori persistenți unici pentru a se referi la aceleași lucruri, oamenii pot combina sursele cu ușurință, pentru a crea date și mai utile. Identificatorii ar putea fi de tip GUID, DOI sau URL."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "identificatori persistenți"
   resolvingIds:
     text: "Se pot folosi identificatorii din datele dumneavoastră pentru a găsi informații suplimentare?"
@@ -985,27 +985,27 @@ questions:
     help_text: "Uneori, alte persoane aflate în afara controlului dumneavoastră furnizează URL-uri pentru anumite entități despre care aveți date. De exemplu, datele dumneavoastră ar putea conține coduri poștale care fac legătura cu site-ul Ordnance Survey."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   reliableExternalUrls:
     text: "Aceste informații de la părți terțe sunt de încredere?"
     help_text: "În cazul în care o parte terță furnizează URL-uri publice cu privire la entități din datele dumneavoastră, probabil că au luat măsuri pentru a asigura calitatea și fiabilitatea datelor. Aceasta este o măsură a încrederii dumneavoastră în procesele pe care ei le folosesc, pentru a asigura aceste lucruri. Uitați-vă după certificatul lor pentru date deschise sau alte semne similare, pentru a vă ajuta să luați o decizie în privința lor."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   externalUrls:
     text: "Datele dvs. folosesc acele URL-uri de la o parte terță?"
     text_as_statement: "URL-urile către părțile terțe sunt"
     help_text: "Ar trebui să utilizați URL-uri de la părți terțe, care se referă la informații despre lucrurile descrise de datele dumneavoastră. Acest lucru reduce duplicarea și îi ajută pe oameni să combine date din surse diferite pentru a le face mai utile."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "referențiate în aceste date"
   provenance:
     text: "Furnizați surse ce pot fi lizibile pentru mașini, pentru datele dumneavoastră?"
@@ -1013,10 +1013,10 @@ questions:
     help_text: "Este vorba despre originile datelor, de modul în care datele dumneavoastră au fost create și prelucrate, înainte de a fi publicate. Se mărește încrederea în datele pe care le publicați, deoarece oamenii pot urmări modul în care acestea au fost procesate."
     answers:
       a_false:
-        text: no
+        text: nu
         text_as_statement: ""
       a_true:
-        text: yes
+        text: da
         text_as_statement: "lizibile pentru mașini"
   digitalCertificate:
     text: "Unde descrieți modul în care oamenii pot verifica dacă datele pe care le primesc vin de la dumneavoastră?"
@@ -1115,9 +1115,9 @@ questions:
     help_text: "Formate, cum ar fi CSV, JSON, XML sau Turtle folosesc vocabulare personalizate sau scheme, care spun ce coloane sau proprietăți conțin datele."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   schemaDocumentationUrl:
     text: "Unde se află documentația despre vocabularele de date?"
     text_as_statement: "Vocabularele folosite de aceste date sunt documentate la"
@@ -1129,9 +1129,9 @@ questions:
     help_text: "Dacă datele dvs. utilizează coduri pentru a se referi la lucruri cum ar fi zone geografice, categorii de cheltuieli sau boli, acestea trebuie să fie explicate oamenilor."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   codelistDocumentationUrl:
     text: "Unde sunt documentate codurile din datele dumneavoastră?"
     text_as_statement: "Codurile din aceste date sunt documentate la"
@@ -1161,9 +1161,9 @@ questions:
     text: "Utilizați mediile de socializare pentru a vă conecta cu persoane care utilizează datele dumneavoastră?"
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   account:
     text: "Pe ce conturi pentru mediile de socializare vă pot contacta oamenii?"
     text_as_statement: "Contactați curatorul prin intermediul acestor conturi pentru mediile de socializare"
@@ -1197,9 +1197,9 @@ questions:
     help_text: "O echipa de implicare a comunității va face acest lucru prin intermediul mediilor de socializare, blogging-ulului, și va aranja hackdays sau concursuri, pentru a încuraja oamenii să folosească datele dumneavoastră."
     answers:
       a_false:
-        text: no
+        text: nu
       a_true:
-        text: yes
+        text: da
   engagementTeamUrl:
     text: "Unde se află pagina lor de start?"
     text_as_statement: "Implicarea comunității se face prin"

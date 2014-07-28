@@ -1,5 +1,6 @@
 class Certificate < ActiveRecord::Base
   include Badges, Counts
+  include AASM
 
   belongs_to :response_set
 
@@ -9,7 +10,7 @@ class Certificate < ActiveRecord::Base
   has_many :verifications
   has_many :verifying_users, through: :verifications, source: :user
 
-  attr_accessible :published, :name, :attained_level, :curator
+  attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
   EXPIRY_NOTICE = 1.month
 
@@ -63,6 +64,26 @@ class Certificate < ActiveRecord::Base
     end
   end
 
+  aasm do
+    state :draft,
+          initial: true
+
+    state :published,
+          before_enter: :publish_certificate
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :draft do
+      transitions from: :published, to: :draft
+    end
+  end
+
+  def publish_certificate
+    update_attributes(published: true, published_at: DateTime.now)
+  end
+
   def status
     published? ? "published" : "draft"
   end
@@ -84,6 +105,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def expiring_state
+    return nil if ["draft", "archived"].include?(response_set.aasm_state)
     if expired?
       "expired"
     elsif expiring?
