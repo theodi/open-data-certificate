@@ -207,11 +207,7 @@ class SurveyorController < ApplicationController
   end
 
   def create_new_response_set(attrs)
-    new_response_set = ResponseSet.create attrs
-
-    new_response_set.copy_answers_from_response_set!(@response_set)
-
-    @response_set = new_response_set
+    @response_set = ResponseSet.clone_response_set(@response_set, attrs)
   end
 
   def switch_survey(attrs, survey)

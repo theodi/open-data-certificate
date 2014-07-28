@@ -61,6 +61,43 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
+  def prepare_response_set(response_value = "Foo bar")
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: response_value,
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+    source_response_set
+  end
+
+  test "should create a new cloned response set" do
+    response_value = rand.to_s
+    source_response_set = prepare_response_set(response_value)
+
+    response_set = ResponseSet.clone_response_set(source_response_set)
+
+    assert response_set.responses.first.try(:string_value) == response_value
+  end
+
+  test "should clone with kitten_data intact" do
+    source_response_set = prepare_response_set
+    source_response_set.kitten_data = KittenData.create(url: 'http://www.example.com')
+
+    response_set = ResponseSet.clone_response_set(source_response_set)
+
+    assert response_set.kitten_data.url == 'http://www.example.com'
+  end
+
+  test "should clone with extra attributes" do
+    source_response_set = prepare_response_set
+    response_set = ResponseSet.clone_response_set(source_response_set, {user_id: 123})
+
+    assert response_set.user_id == 123
+  end
 
   test "Should raise an error if populating response_set answers from another response_set when responses already exist" do
     response_value = rand.to_s
