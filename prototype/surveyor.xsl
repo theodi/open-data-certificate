@@ -34,6 +34,7 @@
 			<xsl:variable name="langVersion" as="element()" select="doc($langPath)/questionnaire" />
 			<questionnaire>
 				<xsl:sequence select="@*" />
+				<xsl:sequence select="$langVersion/@yes, $langVersion/@no" />
 				<xsl:sequence select="help" />
 				<xsl:sequence select="$langVersion/levels" />
 				<xsl:sequence select="$langVersion/group[1]" />
@@ -207,12 +208,12 @@
 </xsl:template>
 
 <xsl:template match="yesno" mode="structure">
-	<a_false label="no">
+	<a_false label="{(//questionnaire/@no, 'no')[1]}">
 		<xsl:if test="@yes or @no">
 			<xsl:attribute name="text_as_statement" select="@no" />
 		</xsl:if>
 	</a_false>
-	<a_true label="yes">
+	<a_true label="{(//questionnaire/@yes, 'yes')[1]}">
 		<xsl:if test="@yes or @no">
 			<xsl:attribute name="text_as_statement" select="@yes" />
 		</xsl:if>
@@ -651,14 +652,18 @@
 		</xsl:when>
 		<xsl:when test="yesno">
 			<xsl:text>      a_false:&#xA;</xsl:text>
-			<xsl:text>        text: no&#xA;</xsl:text>
+			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="(//questionnaire/@no, 'no')[1]" />
+			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:text>        text_as_statement: </xsl:text>
 				<xsl:value-of select="local:yamlQuotedText((yesno/@no, '')[1])" />
 				<xsl:text>&#xA;</xsl:text>
 			</xsl:if>
 			<xsl:text>      a_true:&#xA;</xsl:text>
-			<xsl:text>        text: yes&#xA;</xsl:text>
+			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="(//questionnaire/@yes, 'yes')[1]" />
+			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:text>        text_as_statement: </xsl:text>
 				<xsl:value-of select="local:yamlQuotedText((yesno/@yes, '')[1])" />
