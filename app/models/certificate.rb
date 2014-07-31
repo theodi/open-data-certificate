@@ -115,6 +115,10 @@ class Certificate < ActiveRecord::Base
     end
   end
 
+  def aasm_state
+    self[:aasm_state] || "draft"
+  end
+
   def verified_by_user? user
     verifications.exists? user_id: user.id
   end
