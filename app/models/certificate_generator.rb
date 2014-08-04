@@ -72,9 +72,7 @@ class CertificateGenerator < ActiveRecord::Base
     return {success: false, errors: ['Dataset not found']} if !response_set
 
     if survey != response_set.survey || !response_set.modifications_allowed?
-      new_response_set = ResponseSet.create(survey: survey, user_id: user.id, dataset_id: response_set.dataset_id)
-      new_response_set.copy_answers_from_response_set!(response_set)
-      response_set = new_response_set
+      response_set = ResponseSet.clone_response_set(response_set, {survey_id: survey.id, user_id: user.id, dataset_id: response_set.dataset_id})
     end
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
