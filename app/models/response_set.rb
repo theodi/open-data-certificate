@@ -286,11 +286,8 @@ class ResponseSet < ActiveRecord::Base
     errors = []
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
-        response_code = Rails.cache.fetch(response.string_value) rescue nil
-        if response_code.nil?
-          response_code = HTTParty.get(response.string_value).code rescue nil
-        end
-        if response_code != 200
+        response_code = ODIBot.new(response.string_value).response_code
+        if response_code !=~ /[2|3]/
           response.error = true
           response.save
           errors << response

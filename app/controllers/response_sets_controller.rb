@@ -19,7 +19,7 @@ class ResponseSetsController < ApplicationController
 
   def resolve_url(url)
     if url =~ /^#{URI::regexp}$/
-      HTTParty.get(url).code rescue nil
+      ODIBot.new(url).response_code rescue nil
     end
   end
 
