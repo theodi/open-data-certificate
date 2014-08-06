@@ -287,7 +287,7 @@ class ResponseSet < ActiveRecord::Base
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
         response_code = ODIBot.new(response.string_value).response_code
-        if response_code !=~ /[2|3]/
+        if response_code != 200
           response.error = true
           response.save
           errors << response
