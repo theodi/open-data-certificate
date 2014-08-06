@@ -70,6 +70,9 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
   end
 
   test "creating certificate with invalid URL" do
+    stub_request(:get, "http://www.example/error").
+                to_return(:body => "", status: 404)
+
     load_custom_survey 'cert_generator.rb'
 
     request = {
