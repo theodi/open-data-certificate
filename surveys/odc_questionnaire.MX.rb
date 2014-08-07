@@ -344,18 +344,22 @@ survey 'MX',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Licencia de reconocimento Open Data Commons',
+    a_cc_by 'Reconocimiento Creative Commons',
+      :text_as_statement => 'Reconocimiento Creative Commons'
+    a_cc_by_sa 'Reconocimiento-Compartir igual Creative Commons',
+      :text_as_statement => 'Reconocimiento-Compartir igual Creative Commons'
+    a_cc_zero 'CCZero Creative Commons',
+      :text_as_statement => 'CCZero Creative Commons'
+    a_odc_by 'Licencia de reconocimento Open Data Commons',
       :text_as_statement => 'Licencia de reconocimento Open Data Commons'
-    a_cc_by_sa 'Licencia de base de datos abierta Open Data Commons',
+    a_odc_odbl 'Licencia de base de datos abierta Open Data Commons',
       :text_as_statement => 'Licencia de base de datos abierta Open Data Commons'
-    a_cc_zero 'Licencia de dedicatoria al dominio público Open Data Commons',
+    a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
-    a_odc_by 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_odc_odbl 'No aplicable',
-      :text_as_statement => 'No aplicable'
-    a_odc_pddl 'Otros…',
-      :text_as_statement => 'Otros…'
+    a_na 'No aplicable',
+      :text_as_statement => ''
+    a_other 'Otros…',
+      :text_as_statement => ''
 
     q_dataNotApplicable '¿Por qué no aplica ninguna licencia a estos datos?',
       :discussion_topic => :mx_dataNotApplicable,

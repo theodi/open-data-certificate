@@ -133,14 +133,14 @@
             <label>¿Bajo qué licencia puede el público reutilizar los datos?</label>
             <select required="required">
                <option/>
-               <option value="cc-by">Licencia de reconocimento Open Data Commons</option>
-               <option value="cc-by-sa">Licencia de base de datos abierta Open Data Commons</option>
-               <option value="cc-zero">Licencia de dedicatoria al dominio público Open Data Commons</option>
-               <option value="odc-by">Creative Commons CCZero</option>
-               <option value="odc-odbl">No aplicable</option>
-               <option value="odc-pddl">Otros…</option>
-               <option value="na" display=""/>
-               <option value="other" display=""/>
+               <option value="cc-by">Reconocimiento Creative Commons</option>
+               <option value="cc-by-sa">Reconocimiento-Compartir igual Creative Commons</option>
+               <option value="cc-zero">CCZero Creative Commons</option>
+               <option value="odc-by">Licencia de reconocimento Open Data Commons</option>
+               <option value="odc-odbl">Licencia de base de datos abierta Open Data Commons</option>
+               <option value="odc-pddl">Licencia de dedicatoria al dominio público Open Data Commons</option>
+               <option value="na" display="">No aplicable</option>
+               <option value="other" display="">Otros…</option>
             </select>
             <help>Recuerde que todo aquél que realice un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos conteidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes; Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione "No aplicable"</help>
          </question>
