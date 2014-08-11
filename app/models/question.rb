@@ -109,7 +109,7 @@ class Question < ActiveRecord::Base
     survey_section.survey.only_questions.map(&:answers).flatten
   end
 
-  def get_answers
+  def get_questions
     survey_section.survey.only_questions
   end
 
