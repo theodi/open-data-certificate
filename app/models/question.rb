@@ -127,10 +127,21 @@ class Question < ActiveRecord::Base
 
   def response_level_index(question, responses)
     if question.pick == 'one'
-      responses.where(:question_id => question.id).map(&:requirement_level_index).max.to_i # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
+      max_level_for_responses(question.id, responses)
     else
-      responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement]).first.try(:requirement_level_index).to_i # for everything else, get the requirement level for the response for the requirement in the
+      requirement_level_for_responses(question_id, responses)
     end
+  end
+
+  def max_level_for_responses(question_id, responses)
+    responses.where(:question_id => question_id).map(&:requirement_level_index).max.to_i
+  end
+
+  def requirement_level_for_responses(question_id, responses)
+    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement])
+                            .first
+                            .try(:requirement_level_index)
+                            .to_i
   end
 
   def update_mandatory
