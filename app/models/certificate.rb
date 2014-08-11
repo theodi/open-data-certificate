@@ -59,8 +59,7 @@ class Certificate < ActiveRecord::Base
 
     def expired(surveys)
       self.joins(:response_set)
-        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
-        .where(expires_at: nil)
+        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)), expires_at: nil)
     end
   end
 
