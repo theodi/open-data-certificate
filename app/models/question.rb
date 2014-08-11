@@ -97,13 +97,13 @@ class Question < ActiveRecord::Base
     {:text => self.text, :help_text => self.help_text}.with_indifferent_access
   end
 
-  def question_corresponding_to_requirement
+  def calculate_question_corresponding_to_requirement
     survey_section.survey.only_questions.detect do |q|
       q.requirement && requirement && q.requirement.include?(requirement)
     end
   end
 
-  def answer_corresponding_to_requirement
+  def calculate_answer_corresponding_to_requirement
     survey_section.survey.only_questions.map(&:answers).flatten.detect do |a|
       a.requirement && requirement && a.requirement.include?(requirement)
     end
@@ -156,10 +156,10 @@ class Question < ActiveRecord::Base
 
   def cache_question_or_answer_corresponding_to_requirement
     if survey_section && is_a_requirement?
-      self.question_corresponding_to_requirement ||= question_corresponding_to_requirement
+      self.question_corresponding_to_requirement ||= calculate_question_corresponding_to_requirement
 
       unless self.question_corresponding_to_requirement
-        self.answer_corresponding_to_requirement ||= answer_corresponding_to_requirement
+        self.answer_corresponding_to_requirement ||= calculate_answer_corresponding_to_requirement
       end
     end
   end
