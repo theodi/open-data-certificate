@@ -98,15 +98,23 @@ class Question < ActiveRecord::Base
   end
 
   def calculate_question_corresponding_to_requirement
-    survey_section.survey.only_questions.detect do |q|
-      q.requirement && requirement && q.requirement.include?(requirement)
-    end
+    get_questions.detect { |q| corresponds_to_requirement?(q, requirement) }
   end
 
   def calculate_answer_corresponding_to_requirement
-    survey_section.survey.only_questions.map(&:answers).flatten.detect do |a|
-      a.requirement && requirement && a.requirement.include?(requirement)
-    end
+    get_answers.detect { |a| corresponds_to_requirement?(a, requirement) }
+  end
+
+  def get_answers
+    survey_section.survey.only_questions.map(&:answers).flatten
+  end
+
+  def get_answers
+    survey_section.survey.only_questions
+  end
+
+  def corresponds_to_requirement?(subject, requirement)
+    subject.requirement && requirement && subject.requirement.include?(requirement)
   end
 
   private
