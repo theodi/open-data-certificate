@@ -129,7 +129,7 @@ class Question < ActiveRecord::Base
     if question.pick == 'one'
       max_level_for_responses(question.id, responses)
     else
-      requirement_level_for_responses(question_id, responses)
+      requirement_level_for_responses(question.id, responses)
     end
   end
 
@@ -138,7 +138,7 @@ class Question < ActiveRecord::Base
   end
 
   def requirement_level_for_responses(question_id, responses)
-    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement])
+    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question_id, requirement])
                             .first
                             .try(:requirement_level_index)
                             .to_i
