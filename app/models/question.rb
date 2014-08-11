@@ -32,7 +32,7 @@ class Question < ActiveRecord::Base
         question.minimum_level = get_minimum_level(requirements)
       end
     end
-    
+
     def get_minimum_level(requirements)
       level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
       LEVELS.key(level) || (question.required? ? 'basic' : nil)
@@ -122,14 +122,15 @@ class Question < ActiveRecord::Base
 
     return false unless question # if for some reason a matching question is not found
 
-    response_level_index = case question.pick # radio buttons will return 'one' as their .pick attribute value
-                             when 'one'
-                               responses.where(:question_id => question.id).map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
-                             else
-                               responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement]).first.try(:requirement_level_index) # for everything else, get the requirement level for the response for the requirement in the
-                           end
+    !!(response_level_index(question, responses) >= requirement_level_index)
+  end
 
-    !!(response_level_index.to_i >= requirement_level_index)
+  def response_level_index(question, responses)
+    if question.pick == 'one'
+      responses.where(:question_id => question.id).map(&:requirement_level_index).max.to_i # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
+    else
+      responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement]).first.try(:requirement_level_index).to_i # for everything else, get the requirement level for the response for the requirement in the
+    end
   end
 
   def update_mandatory
