@@ -29,9 +29,13 @@ class Question < ActiveRecord::Base
           requirements.push(questions[i])
           i += 1
         end
-        level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
-        question.minimum_level = LEVELS.key(level) || (question.required? ? 'basic' : nil)
+        question.minimum_level = get_minimum_level(requirements)
       end
+    end
+    
+    def get_minimum_level(requirements)
+      level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
+      LEVELS.key(level) || (question.required? ? 'basic' : nil)
     end
   end
 
@@ -106,7 +110,7 @@ class Question < ActiveRecord::Base
   end
 
   private
-  
+
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
     #       a survey
