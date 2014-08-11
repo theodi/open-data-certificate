@@ -106,6 +106,7 @@ class Question < ActiveRecord::Base
   end
 
   private
+  
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
     #       a survey
@@ -127,19 +128,16 @@ class Question < ActiveRecord::Base
     !!(response_level_index.to_i >= requirement_level_index)
   end
 
-  private
   def update_mandatory
     #TODO: swap to using an observer instead?
     self.is_mandatory ||= required.present?
     Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
   end
 
-  private
   def set_default_value_for_required
     self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
-  private
   def cache_question_or_answer_corresponding_to_requirement
     if survey_section && is_a_requirement?
       self.question_corresponding_to_requirement ||= question_corresponding_to_requirement
