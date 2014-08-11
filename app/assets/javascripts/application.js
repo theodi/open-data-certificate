@@ -255,6 +255,7 @@ $(document).ready(function($){
       success: function(data) {
         window.location.replace(data.survey_path)
       }
+      timeout: 120000
     })
     return false;
   });
