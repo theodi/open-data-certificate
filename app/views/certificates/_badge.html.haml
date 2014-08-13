@@ -4,12 +4,8 @@
     = image_tag("#{embed_protocol}#{request.host_with_port}#{badge.badge_url}")
   %ul.open-data-certificate-details
     %li
-      %span= "#{t("levels.#{badge.attained_level || 'none'}.title")} Open Data Certificate (beta)"
-    %li
-      %span self-certified
-    %li
-      %span= "#{badge.response_set.jurisdiction} (#{badge.response_set.survey.try(:status)})"
-    %li
       %span= badge.response_set.title
     %li
-      %span= "awarded #{badge.created_at.strftime("%-d %b %Y")}"
+      %span= "#{t("levels.#{badge.attained_level || 'none'}.title")} Open Data Certificate (#{badge.response_set.survey.try(:status)})"
+    %li
+      %span= "#{badge.expired? ? 'Expired' : 'Active'} - #{t("#{badge.certification_type}", scope: 'certificate.certification_types')}"
