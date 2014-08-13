@@ -29,11 +29,11 @@ class Question < ActiveRecord::Base
           requirements.push(questions[i])
           i += 1
         end
-        question.minimum_level = get_minimum_level(requirements)
+        question.minimum_level = get_minimum_level(question, requirements)
       end
     end
 
-    def get_minimum_level(requirements)
+    def get_minimum_level(question, requirements)
       level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
       LEVELS.key(level) || (question.required? ? 'basic' : nil)
     end
