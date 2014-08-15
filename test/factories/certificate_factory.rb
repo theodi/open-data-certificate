@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :certificate do
     after(:create) do |cert|
-      cert.update_attribute(:response_set, FactoryGirl.create(:response_set, certificate: cert))
+      cert.update_attribute(:response_set, FactoryGirl.create(:response_set, certificate: cert)) if cert.response_set.nil?
     end
 
     factory :published_certificate do
@@ -16,7 +16,7 @@ FactoryGirl.define do
     name "Test certificate"
     after(:create) do |cert|
       Certificate.any_instance.stubs(:update_from_response_set).returns(nil)
-      cert.update_attribute(:response_set, FactoryGirl.create(:response_set_with_dataset, certificate: cert))
+      cert.update_attribute(:response_set, FactoryGirl.create(:response_set_with_dataset, certificate: cert)) if cert.response_set.nil?
     end
 
     factory :published_certificate_with_dataset do
@@ -27,7 +27,7 @@ FactoryGirl.define do
 
       after(:create) do |cert|
         Certificate.any_instance.stubs(:update_from_response_set).returns(nil)
-        cert.update_attribute(:response_set, FactoryGirl.create(:response_set_with_dataset, certificate: cert, aasm_state: 'published'))
+        cert.update_attribute(:response_set, FactoryGirl.create(:response_set_with_dataset, certificate: cert, aasm_state: 'published')) if cert.response_set.nil?
       end
 
       factory :published_pilot_certificate_with_dataset do
