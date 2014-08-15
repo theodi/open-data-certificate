@@ -29,9 +29,13 @@ class Question < ActiveRecord::Base
           requirements.push(questions[i])
           i += 1
         end
-        level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
-        question.minimum_level = LEVELS.key(level) || (question.required? ? 'basic' : nil)
+        question.minimum_level = get_minimum_level(question, requirements)
       end
+    end
+
+    def get_minimum_level(question, requirements)
+      level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
+      LEVELS.key(level) || (question.required? ? 'basic' : nil)
     end
   end
 
@@ -93,7 +97,28 @@ class Question < ActiveRecord::Base
     {:text => self.text, :help_text => self.help_text}.with_indifferent_access
   end
 
+  def calculate_question_corresponding_to_requirement
+    get_questions.detect { |q| corresponds_to_requirement?(q, requirement) }
+  end
+
+  def calculate_answer_corresponding_to_requirement
+    get_answers.detect { |a| corresponds_to_requirement?(a, requirement) }
+  end
+
+  def get_answers
+    survey_section.survey.only_questions.map(&:answers).flatten
+  end
+
+  def get_questions
+    survey_section.survey.only_questions
+  end
+
+  def corresponds_to_requirement?(subject, requirement)
+    subject.requirement && requirement && subject.requirement.include?(requirement)
+  end
+
   private
+
   def calculate_if_requirement_met_by_responses(responses)
     # NOTE: At the moment, there is an expectation that each requirement is associated to only one question or answer in
     #       a survey
@@ -105,39 +130,44 @@ class Question < ActiveRecord::Base
 
     return false unless question # if for some reason a matching question is not found
 
-    response_level_index = case question.pick # radio buttons will return 'one' as their .pick attribute value
-                             when 'one'
-                               responses.where(:question_id => question.id).map(&:requirement_level_index).max # for radio buttons, the achieved level supersedes lower levels, so return the max level of all the responses to the question
-                             else
-                               responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question.id, requirement]).first.try(:requirement_level_index) # for everything else, get the requirement level for the response for the requirement in the
-                           end
-
-    !!(response_level_index.to_i >= requirement_level_index)
+    !!(response_level_index(question, responses) >= requirement_level_index)
   end
 
-  private
+  def response_level_index(question, responses)
+    if question.pick == 'one'
+      max_level_for_responses(question.id, responses)
+    else
+      requirement_level_for_responses(question.id, responses)
+    end
+  end
+
+  def max_level_for_responses(question_id, responses)
+    responses.where(:question_id => question_id).map(&:requirement_level_index).max.to_i
+  end
+
+  def requirement_level_for_responses(question_id, responses)
+    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question_id, requirement])
+                            .first
+                            .try(:requirement_level_index)
+                            .to_i
+  end
+
   def update_mandatory
     #TODO: swap to using an observer instead?
     self.is_mandatory ||= required.present?
     Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
   end
 
-  private
   def set_default_value_for_required
     self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
-  private
   def cache_question_or_answer_corresponding_to_requirement
     if survey_section && is_a_requirement?
-      self.question_corresponding_to_requirement ||= survey_section.survey.only_questions.detect do |q|
-        q.requirement && requirement && q.requirement.include?(requirement)
-      end
+      self.question_corresponding_to_requirement ||= calculate_question_corresponding_to_requirement
 
       unless self.question_corresponding_to_requirement
-        self.answer_corresponding_to_requirement ||= survey_section.survey.only_questions.map(&:answers).flatten.detect do |a|
-          a.requirement && requirement && a.requirement.include?(requirement)
-        end
+        self.answer_corresponding_to_requirement ||= calculate_answer_corresponding_to_requirement
       end
     end
   end

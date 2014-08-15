@@ -46,3 +46,5 @@ prototype/open-data-certificate.xpr
 .DS_Store
 
 /.env
+
+bootstrap/
