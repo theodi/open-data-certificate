@@ -1,3 +1,5 @@
+require 'odibot'
+
 # Trying out having a separate controller from the central surveyor one.
 class ResponseSetsController < ApplicationController
 
