@@ -28,6 +28,9 @@ FactoryGirl.define do
         cert.save
       end
 
+      factory :published_basic_certificate_with_dataset do
+      end
+
       factory :published_pilot_certificate_with_dataset do
         after(:create) do |cert|
           cert.attained_level = "pilot"
