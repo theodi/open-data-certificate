@@ -143,6 +143,12 @@ class SurveyorControllerTest < ActionController::TestCase
   test "start page" do
     ResponseSet.any_instance.stubs(:documentation_url_explanation).returns(nil)
     @response_set = FactoryGirl.create(:response_set)
+    survey = @response_set.survey
+    section = FactoryGirl.create(:survey_section)
+    survey.sections << section
+    question = FactoryGirl.create(:question, reference_identifier: "documentationURL", survey_section: section)
+    question.answers << FactoryGirl.create(:answer) 
+
     sign_in @response_set.user
 
     get :start, use_route: :surveyor,
