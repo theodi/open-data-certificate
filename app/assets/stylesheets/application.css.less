@@ -1801,13 +1801,17 @@ header .save-button {
   }
 
   form .btn-large {
-    i.icon-loading {
+    i.icon-loading, i.icon-exclamation-sign {
       display: none;
       margin-right: 3px;
     }
 
     &.disabled {
       i.icon-loading { display: inline-block; }
+    }
+
+    &.error {
+      i.icon-exclamation-sign { display: inline-block; }
     }
   }
 
