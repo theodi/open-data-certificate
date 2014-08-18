@@ -12,6 +12,7 @@ Spork.prefork do
   require 'factory_girl'
   require 'vcr'
   require 'mocha/setup'
+  require 'webmock/test_unit'
 end
 
 Spork.each_run do

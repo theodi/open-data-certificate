@@ -1,3 +1,5 @@
+require 'odibot'
+
 # Trying out having a separate controller from the central surveyor one.
 class ResponseSetsController < ApplicationController
 
@@ -19,7 +21,7 @@ class ResponseSetsController < ApplicationController
 
   def resolve_url(url)
     if url =~ /^#{URI::regexp}$/
-      HTTParty.get(url).code rescue nil
+      ODIBot.new(url).response_code rescue nil
     end
   end
 
@@ -42,19 +44,15 @@ class ResponseSetsController < ApplicationController
     @response_set.update_attribute('kitten_data', nil)
 
     code = resolve_url(url)
-    if code != 200
-      return redirect_to(surveyor.edit_my_survey_path(
-        :survey_code => @response_set.survey.access_code,
-        :response_set_code => @response_set.access_code
-      ))
+
+    if code == 200
+      kitten_data = KittenData.create(url: url, response_set: @response_set)
+      kitten_data.request_data
+      kitten_data.save
+
+      @response_set.update_attribute('kitten_data', kitten_data)
+      @response_set.update_responses(kitten_data.fields)
     end
-
-    kitten_data = KittenData.create(url: url, response_set: @response_set)
-    kitten_data.request_data
-    kitten_data.save
-
-    @response_set.update_attribute('kitten_data', kitten_data)
-    @response_set.update_responses(kitten_data.fields)
 
     respond_to do |format|
       format.html do
