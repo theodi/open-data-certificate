@@ -38,6 +38,7 @@ group :test do
   gem 'webmock'
   gem 'spork-rails'
   gem 'spork-testunit'
+  gem 'shoulda-context'
 end
 
 group :development do
