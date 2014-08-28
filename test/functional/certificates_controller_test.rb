@@ -133,8 +133,6 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = cv.certificate
     sign_in cv.user
 
-    binding.pry
-
     assert_difference ->{cert.verifications.count}, -1 do
       post :verify, {dataset_id: cert.dataset.id, id: cert.id, undo: true}
     end
