@@ -24,6 +24,7 @@ FactoryGirl.define do
         r = cert.response_set
         r.aasm_state = 'published'
         r.save
+        cert.name = "Test dataset"
         cert.attained_level = "basic"
         cert.save
       end
@@ -33,20 +34,23 @@ FactoryGirl.define do
 
       factory :published_pilot_certificate_with_dataset do
         after(:create) do |cert|
+          cert.name = "Test dataset"
           cert.attained_level = "pilot"
           cert.save
         end
       end
-      
+
       factory :published_standard_certificate_with_dataset do
         after(:create) do |cert|
+          cert.name = "Test dataset"
           cert.attained_level = "standard"
           cert.save
         end
       end
-      
+
       factory :published_exemplar_certificate_with_dataset do
         after(:create) do |cert|
+          cert.name = "Test dataset"
           cert.attained_level = "exemplar"
           cert.save
         end
