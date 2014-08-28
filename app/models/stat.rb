@@ -1,7 +1,8 @@
 class Stat < ActiveRecord::Base
 
   def self.generate(type, result)
-    s = create(type: type)
+    s = create
+    s.type = "type"
     s.all = result.count
     s.expired = result.select {|r| r.certificate.expires_at < DateTime.now rescue nil}.count
     s.publishers = result.uniq_by { |d| d.certificate.curator }.count
