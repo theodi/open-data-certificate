@@ -1,19 +1,34 @@
 class Stat < ActiveRecord::Base
 
   def self.generate(type, result)
-    s = create
-    s.name = type
-    s.all = result.count
-    s.expired = result.select {|r| r.certificate.expires_at < DateTime.now rescue nil}.count
-    s.publishers = result.uniq_by { |d| d.certificate.curator }.count
-    s.this_month = result.select {|r| r.certificate.created_at >= Time.now - 1.month }.count
+    create({
+        name: type,
+        all: result.count,
+        expired: expired(result),
+        publishers: publishers(result),
+        this_month: this_month(result),
+        level_none: level('none', result),
+        level_basic: level('basic', result),
+        level_pilot: level('pilot', result),
+        level_standard: level('standard', result),
+        level_exemplar: level('exemplar', result),
+      })
+  end
 
-    ['none', 'basic', 'pilot', 'standard', 'exemplar'].each do |level|
-      s.send("level_#{level}=", result.select{|r| r.certificate.attained_level == level}.count)
-    end
+  def self.expired(result)
+    result.select {|r| r.certificate.expires_at < DateTime.now rescue nil}.count
+  end
 
-    s.save
-    s
+  def self.publishers(result)
+    result.uniq_by { |d| d.certificate.curator }.count
+  end
+
+  def self.this_month(result)
+    result.select {|r| r.certificate.created_at >= Time.now - 1.month }.count
+  end
+
+  def self.level(level, result)
+    result.select{|r| r.certificate.attained_level == level}.count
   end
 
   def self.generate_published
