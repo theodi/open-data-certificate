@@ -71,7 +71,7 @@ class MainControllerTest < ActionController::TestCase
     get :status, format: "csv", type: "all"
 
     assert_equal "text/csv; header=present; charset=utf-8", response.headers["Content-Type"]
-    assery_match "attachment; filename=\"all.csv\"", response.headers["Content-Disposition"]
+    assert_match "attachment; filename=\"all.csv\"", response.headers["Content-Disposition"]
     assert_equal 6, CSV.parse(response.body).count
 
     get :status, format: "csv", type: "published"
