@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/theodi/juvia_rails.git
+  revision: 94f982aa8188a18bc0f37c16218c85e890d25294
+  specs:
+    juvia_rails (0.0.1)
+      rails (~> 3.2.1)
+
+GIT
   remote: git://github.com/theodi/alternate-rails.git
   revision: 188889d66c5df1d7d13f7c6e53e8088e3503dea1
   specs:
@@ -6,15 +13,11 @@ GIT
       rails (~> 3.2.13)
 
 GIT
-  remote: git://github.com/theodi/csvlint.rb.git
-  revision: 3dc689f4625c8edd4f7b725d1d420fdd67a67df9
+  remote: git://github.com/theodi/odlifier.git
+  revision: d5afa7c5beffb3fdb09d17e1e5a9fdcd4e032cd6
   specs:
-    csvlint (0.0.1)
-      activesupport
-      addressable
-      colorize
-      mime-types
-      open_uri_redirections
+    odlifier (0.0.1)
+      httparty
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
@@ -31,18 +34,15 @@ GIT
       rest-client
 
 GIT
-  remote: git://github.com/theodi/juvia_rails.git
-  revision: 94f982aa8188a18bc0f37c16218c85e890d25294
+  remote: git://github.com/theodi/csvlint.rb.git
+  revision: 3dc689f4625c8edd4f7b725d1d420fdd67a67df9
   specs:
-    juvia_rails (0.0.1)
-      rails (~> 3.2.1)
-
-GIT
-  remote: git://github.com/theodi/odlifier.git
-  revision: d5afa7c5beffb3fdb09d17e1e5a9fdcd4e032cd6
-  specs:
-    odlifier (0.0.1)
-      httparty
+    csvlint (0.0.1)
+      activesupport
+      addressable
+      colorize
+      mime-types
+      open_uri_redirections
 
 GEM
   remote: https://rubygems.org/
@@ -424,6 +424,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
+    timecop (0.7.1)
     tins (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -494,6 +495,7 @@ DEPENDENCIES
   ruby-prof
   sass-rails (~> 3.2.3)
   shoulda
+  shoulda-context
   spork-rails
   spork-testunit
   sqlite3
@@ -502,6 +504,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   thin
+  timecop
   twitter-bootstrap-rails-confirm
   uglifier (>= 1.0.3)
   underscore-rails

@@ -1,7 +1,6 @@
 FactoryGirl.define do
 
   factory :certificate do
-    response_set
 
     factory :published_certificate do
       aasm_state "published"
@@ -12,25 +11,49 @@ FactoryGirl.define do
 
   factory :certificate_with_dataset, :class => Certificate do
     name "Test certificate"
-    response_set { FactoryGirl.create(:response_set_with_dataset) }
+    after(:create) do |cert|
+      FactoryGirl.create(:response_set_with_dataset, certificate: cert)
+    end
 
     factory :published_certificate_with_dataset do
       aasm_state "published"
       published true
       published_at DateTime.now
-      attained_level "basic"
-      response_set {FactoryGirl.create(:response_set_with_dataset, aasm_state: 'published')}
+
+      after(:create) do |cert|
+        r = cert.response_set
+        r.aasm_state = 'published'
+        r.save
+        cert.name = "Test dataset"
+        cert.attained_level = "basic"
+        cert.save
+      end
+
+      factory :published_basic_certificate_with_dataset do
+      end
 
       factory :published_pilot_certificate_with_dataset do
-        attained_level "pilot"
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "pilot"
+          cert.save
+        end
       end
 
       factory :published_standard_certificate_with_dataset do
-        attained_level "standard"
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "standard"
+          cert.save
+        end
       end
 
-      factory :published_expert_certificate_with_dataset do
-        attained_level "expert"
+      factory :published_exemplar_certificate_with_dataset do
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "exemplar"
+          cert.save
+        end
       end
 
       factory :published_certificate_with_removed_dataset do

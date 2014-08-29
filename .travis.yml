@@ -35,3 +35,5 @@ env:
   - secure: W/BRRQ3WK92W7olcCAwAJnYFuHfyNunrA6MCTwecOX4hCLw1900lSKs0MnJ7QvdiBvzuo/qLBKsfaZoNGoIwTgpT2P3MFcnJozehhPXkAaWixIkmN3u1oeZ6OdDDU9NIYgUzm8lzoqXGiTbIb4z5lZMmfx+j/CZXoT86V+b1U4U=
   - secure: Li3T6biupLWMx3dvzqzR2qS28HaOCiiyzm/MxVmexvwLGgiTVV4py+LwTGXfI6niJ5gzt1SLOLUW0ZnBtN4qv8mtQKcFgKkkpt62eeBxCwWGu7pbJ0rjz7ujiQsR70XsW8c0McAwYavRxlHD83KGdVlXklhZ+4+lnduhlIpgYAY=
   - GAPPS_CERTIFICATE_USAGE_COLLECTION="ODI Drive/Technical/Test Data/Usage Data"
+git:
+  depth: 10
