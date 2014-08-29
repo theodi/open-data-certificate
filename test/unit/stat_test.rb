@@ -102,19 +102,35 @@ class StatTest < ActiveSupport::TestCase
     should "correct counts for levels are generated" do
       5.times do
         FactoryGirl.create(:published_certificate_with_dataset)
-        FactoryGirl.create(:certificate_with_dataset)
+        c = FactoryGirl.create(:published_certificate_with_dataset)
+        c.response_set.aasm_state = "draft"
+        c.response_set.save
+        c.aasm_state = "draft"
+        c.save
       end
       4.times do
         FactoryGirl.create(:published_pilot_certificate_with_dataset)
-        FactoryGirl.create(:pilot_certificate_with_dataset)
+        c = FactoryGirl.create(:published_pilot_certificate_with_dataset)
+        c.response_set.aasm_state = "draft"
+        c.response_set.save
+        c.aasm_state = "draft"
+        c.save
       end
       3.times do
         FactoryGirl.create(:published_standard_certificate_with_dataset)
-        FactoryGirl.create(:standard_certificate_with_dataset)
+        c = FactoryGirl.create(:published_standard_certificate_with_dataset)
+        c.response_set.aasm_state = "draft"
+        c.response_set.save
+        c.aasm_state = "draft"
+        c.save
       end
       2.times do
         FactoryGirl.create(:published_exemplar_certificate_with_dataset)
-        FactoryGirl.create(:exemplar_certificate_with_dataset)
+        c = FactoryGirl.create(:published_exemplar_certificate_with_dataset)
+        c.response_set.aasm_state = "draft"
+        c.response_set.save
+        c.aasm_state = "draft"
+        c.save
       end
 
       s = Stat.generate_all
@@ -156,7 +172,7 @@ class StatTest < ActiveSupport::TestCase
     should "correct correct counts for certificates this month are generated" do
       5.times do
         FactoryGirl.create(:published_certificate_with_dataset)
-        FactoryGirl.create(:certificate_with_dataset)
+        c = FactoryGirl.create(:certificate_with_dataset)
       end
 
       5.times do
