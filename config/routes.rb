@@ -97,6 +97,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
   get 'status/events' => 'main#status_events'
+  get 'legacy_stats.csv' => 'main#legacy_stats', format: 'csv'
 
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'

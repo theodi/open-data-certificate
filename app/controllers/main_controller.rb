@@ -40,6 +40,11 @@ class MainController < ApplicationController
     end
   end
 
+  def legacy_stats
+    csv = Rackspace.fetch_cache("statistics.csv")
+    send_data csv, filename: "legacy_stats.csv", type: "text/csv; header=present; charset=utf-8"
+  end
+
   def status_response_sets
     @response_sets = ResponseSet.all.map do |m|
       {

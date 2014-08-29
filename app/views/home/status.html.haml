@@ -33,3 +33,6 @@
 %h1 Published and draft datasets with certificates
 
 = render partial: "home/stats", locals: {type: "all"}
+
+%p.data
+  = link_to("Download legacy data", "legacy_stats.csv")
