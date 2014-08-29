@@ -1,0 +1,17 @@
+%ul
+  - ['all', 'expired', 'this_month', 'publishers'].each do |a|
+    %li{ class: "#{type}-#{a}" }
+      %strong= a.humanize
+      = instance_variable_get("@#{type}").send(a)
+
+  %li
+    %strong Levels
+    %ul
+      - ['none', 'basic', 'pilot', 'standard', 'exemplar'].each do |level|
+        %li{ class: "#{type}-#{level}" }
+          %strong= level.humanize
+          = instance_variable_get("@#{type}").send("level_#{level}")
+%p
+  =link_to "Get historic data", status_path(format: "csv", type: type)
+
+%hr.heavy
