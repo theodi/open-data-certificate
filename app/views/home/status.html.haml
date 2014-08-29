@@ -18,12 +18,18 @@
 %hr.heavy
 
 %h1
-  Counts
+  Surveys
 
-%h2 Published datasets with certificates
+%p
+  %strong= pluralize ResponseSet.counts[:all], 'surveys'
+  started
+
+%hr.heavy
+
+%h1 Published datasets with certificates
 
 = render partial: "home/stats", locals: {type: "published"}
 
-%h2 Published and draft datasets with certificates
+%h1 Published and draft datasets with certificates
 
 = render partial: "home/stats", locals: {type: "all"}
