@@ -1,11 +1,10 @@
 class CertificatesController < ApplicationController
   include CertificatesHelper
 
+  before_filter(:except => [:latest, :legacy_show, :certificate_from_dataset_url]) { get_certificate }
   before_filter(:only => [:show]) { alternate_formats [:json] }
 
   def show
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
-
     # pretend unpublished certificates don't exist
     unless @certificate.published?
 
@@ -48,7 +47,6 @@ class CertificatesController < ApplicationController
   end
 
   def improvements
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @response_set = @certificate.response_set
     if @response_set
 
@@ -68,21 +66,18 @@ class CertificatesController < ApplicationController
   # this is similiar to the improvements, but returns
   # json only, and includes completed questions too
   def progress
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     @progress = @certificate.progress
 
     render json: @progress
   end
 
   def embed
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
       format.html { render :show, layout: 'embedded_certificate' }
     end
   end
 
   def badge
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     respond_to do |format|
       format.js
       format.html { render 'badge', :layout => false }
@@ -108,8 +103,6 @@ class CertificatesController < ApplicationController
 
   # community certification
   def verify
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
-
     if user_signed_in?
       if params[:undo]
         @certificate.verifications.where(user_id: current_user.id).first.try(:destroy)
@@ -123,9 +116,15 @@ class CertificatesController < ApplicationController
 
   # used by an admin to mark as audited
   def update
-    @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
     authorize! :manage, @certificate
     @certificate.update_attribute :audited, params[:certificate] && params[:certificate][:audited]
     redirect_to dataset_certificate_path @certificate.response_set.dataset.id, @certificate.id
   end
+
+  private
+
+    def get_certificate
+      @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    end
+
 end
