@@ -79,4 +79,96 @@ class StatTest < ActiveSupport::TestCase
 
   end
 
+  context "with all certificates" do
+
+    should "type is generated" do
+      s = Stat.generate_all
+
+      assert_equal s.type, 'all'
+    end
+
+    should "correct count for all certificates is generated" do
+      5.times do
+        FactoryGirl.create(:published_certificate_with_dataset)
+      end
+      5.times do
+        FactoryGirl.create(:certificate_with_dataset)
+      end
+
+      s = Stat.generate_all
+      assert_equal s.all, 10
+    end
+
+    should "correct counts for levels are generated" do
+      5.times do
+        FactoryGirl.create(:published_certificate_with_dataset)
+        FactoryGirl.create(:certificate_with_dataset)
+      end
+      4.times do
+        FactoryGirl.create(:published_pilot_certificate_with_dataset)
+        FactoryGirl.create(:pilot_certificate_with_dataset)
+      end
+      3.times do
+        FactoryGirl.create(:published_standard_certificate_with_dataset)
+        FactoryGirl.create(:standard_certificate_with_dataset)
+      end
+      2.times do
+        FactoryGirl.create(:published_exemplar_certificate_with_dataset)
+        FactoryGirl.create(:exemplar_certificate_with_dataset)
+      end
+
+      s = Stat.generate_all
+
+      assert_equal s.level_basic, 10
+      assert_equal s.level_pilot, 8
+      assert_equal s.level_standard, 6
+      assert_equal s.level_exemplar, 4
+    end
+
+    should "correct correct counts for expired certificates are generated" do
+      2.times do
+        FactoryGirl.create(:published_certificate_with_dataset, expires_at: DateTime.now - 1.year)
+      end
+      2.times do
+        FactoryGirl.create(:certificate_with_dataset, expires_at: DateTime.now - 1.year)
+      end
+
+      s = Stat.generate_all
+
+      assert_equal s.expired, 4
+    end
+
+    should "correct correct counts for publishers are generated" do
+      ['Batman', 'Wonder Woman', 'Superman'].each do |hero|
+        cert = FactoryGirl.create(:published_certificate_with_dataset)
+        cert.curator = hero
+        cert.save
+      end
+
+      cert = FactoryGirl.create(:certificate_with_dataset)
+      cert.curator = 'Iron Man'
+
+      s = Stat.generate_all
+
+      assert_equal s.publishers, 4
+    end
+
+    should "correct correct counts for certificates this month are generated" do
+      5.times do
+        FactoryGirl.create(:published_certificate_with_dataset)
+        FactoryGirl.create(:certificate_with_dataset)
+      end
+
+      5.times do
+        FactoryGirl.create(:published_certificate_with_dataset, created_at: 2.month.ago)
+        FactoryGirl.create(:certificate_with_dataset, created_at: 2.month.ago)
+      end
+
+      s = Stat.generate_all
+
+      assert_equal s.this_month, 10
+    end
+
+  end
+
 end
