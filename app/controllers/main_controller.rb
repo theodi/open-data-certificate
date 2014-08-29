@@ -32,9 +32,11 @@ class MainController < ApplicationController
     @published = Stat.where(name: 'published').last
     @head_commit = Rails.root.to_s.split("/").last
 
+    type = params[:type] || "all"
+
     respond_to do |format|
       format.html { render '/home/status' }
-      format.csv { render text: Stat.csv(params[:type] || "all"), content_type: "text/csv; header=present" }
+      format.csv { send_data Stat.csv(type), filename: "#{type}.csv", type: "text/csv; header=present; charset=utf-8" }
     end
   end
 
