@@ -94,7 +94,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'clear_cache' => 'main#clear_cache', :via => :post
 
   # (public) stats about the application
-  get 'status.csv' => 'main#status_csv'
   get 'status' => 'main#status'
   get 'status/response_sets' => 'main#status_response_sets'
   get 'status/events' => 'main#status_events'

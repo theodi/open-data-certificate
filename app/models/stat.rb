@@ -41,4 +41,23 @@ class Stat < ActiveRecord::Base
     generate('all', result)
   end
 
+  def self.csv(name)
+    CSV.generate(row_sep: "\r\n") do |csv|
+      csv << csv_cols.map { |c| c.humanize.titleize }
+      where(name: name).each { |s| csv << s.csv_row }
+    end
+  end
+
+  def self.csv_cols
+    ["date"] + (column_names - ["id", "name", "updated_at", "created_at"])
+  end
+
+  def csv_row
+    Stat.csv_cols.map { |c| send(c) }
+  end
+
+  def date
+    created_at.to_date.iso8601
+  end
+
 end

@@ -59,6 +59,25 @@ class MainControllerTest < ActionController::TestCase
     assert_match /#{published.level_exemplar}/, html.css('.published-exemplar').first.text
   end
 
+  test "status csv shows correct stats" do
+    5.times do
+      FactoryGirl.create(:all_stat)
+    end
+
+    2.times do
+      FactoryGirl.create(:published_stat)
+    end
+
+    get :status, format: "csv", type: "all"
+
+    assert_equal "text/csv; header=present; charset=utf-8", response.headers["Content-Type"]
+    assert_equal 6, CSV.parse(response.body).count
+
+    get :status, format: "csv", type: "published"
+
+    assert_equal 3, CSV.parse(response.body).count
+  end
+
   test "has_js" do
     get :has_js
     assert_response 200

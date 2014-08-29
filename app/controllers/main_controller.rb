@@ -31,13 +31,11 @@ class MainController < ApplicationController
     @all = Stat.where(name: 'all').last
     @published = Stat.where(name: 'published').last
     @head_commit = Rails.root.to_s.split("/").last
-    
-    render '/home/status'
-  end
 
-  def status_csv
-    csv = Rackspace.fetch_cache("statistics.csv")
-    render text: csv, content_type: "text/csv"
+    respond_to do |format|
+      format.html { render '/home/status' }
+      format.csv { render text: Stat.csv(params[:type] || "all"), content_type: "text/csv; header=present" }
+    end
   end
 
   def status_response_sets

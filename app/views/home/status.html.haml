@@ -37,9 +37,7 @@
           %li{ class: "#{type}-#{level}" }
             %strong= level.humanize
             = instance_variable_get("@#{type}").send("level_#{level}")
+  %p
+    =link_to "Get historic data", status_path(format: "csv", type: type)
 
-%hr.heavy
-
-%p.data
-  Get historic data as
-  =alternate_link_buttons(:class => 'badge')
+  %hr.heavy

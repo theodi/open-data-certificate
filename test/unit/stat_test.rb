@@ -187,4 +187,34 @@ class StatTest < ActiveSupport::TestCase
 
   end
 
+  should "generate a correct csv row" do
+    stat = FactoryGirl.create(:all_stat,
+                              all: 10,
+                              expired: 5,
+                              publishers: 5,
+                              this_month: 2,
+                              level_none: 6,
+                              level_basic: 5,
+                              level_pilot: 4,
+                              level_standard: 3,
+                              level_exemplar: 2
+                            )
+
+    assert_equal stat.csv_row, [Date.today.iso8601, 10, 5, 5, 2, 6, 5, 4, 3, 2]
+  end
+
+  should "generate a csv correctly" do
+    5.times do
+      FactoryGirl.create(:all_stat)
+    end
+
+    2.times do
+      FactoryGirl.create(:published_stat)
+    end
+
+    csv = CSV.parse(Stat.csv("all"))
+
+    assert_equal 6, csv.count
+  end
+
 end
