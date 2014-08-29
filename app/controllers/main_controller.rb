@@ -28,14 +28,10 @@ class MainController < ApplicationController
 
   def status
     @job_count = Delayed::Job.count
-
-    @counts = {
-      'certificates' => Certificate.counts,
-      'datasets'     => ResponseSet.counts
-    }
-
+    @all = Stat.where(name: 'all').last
+    @published = Stat.where(name: 'published').last
     @head_commit = Rails.root.to_s.split("/").last
-
+    
     render '/home/status'
   end
 
