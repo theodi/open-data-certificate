@@ -7,7 +7,7 @@ class StatTest < ActiveSupport::TestCase
     should "type is generated" do
       s = Stat.generate_published
 
-      assert_equal s.type, 'published'
+      assert_equal s.name, 'published'
     end
 
     should "correct count for all certificates is generated" do
@@ -84,7 +84,7 @@ class StatTest < ActiveSupport::TestCase
     should "type is generated" do
       s = Stat.generate_all
 
-      assert_equal s.type, 'all'
+      assert_equal s.name, 'all'
     end
 
     should "correct count for all certificates is generated" do

@@ -1,7 +1,7 @@
 class CreateStats < ActiveRecord::Migration
   def change
     create_table :stats do |t|
-      t.string  :type
+      t.string  :name
       t.integer :all
       t.integer :expired
       t.integer :publishers
