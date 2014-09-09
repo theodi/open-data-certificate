@@ -130,7 +130,7 @@ class CertificatesController < ApplicationController
 
     def log_embed
       unless request.referer =~ /https?:\/\/#{request.host_with_port}./
-        @certificate.register_embed(request.referer)
+        @certificate.dataset.register_embed(request.referer)
       end
     end
 

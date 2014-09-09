@@ -9,7 +9,6 @@ class Certificate < ActiveRecord::Base
   has_one :dataset, through: :response_set
   has_many :verifications
   has_many :verifying_users, through: :verifications, source: :user
-  has_many :embed_stats
 
   attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
@@ -195,14 +194,6 @@ class Certificate < ActiveRecord::Base
 
   def completed_questions
     response_set.responses.map(&:question)
-  end
-
-  def register_embed(referer)
-    begin
-      embed_stats.create(referer: referer)
-    rescue ActiveRecord::RecordNotUnique
-      nil
-    end
   end
 
 end

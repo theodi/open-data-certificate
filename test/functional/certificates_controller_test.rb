@@ -184,7 +184,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
-    assert_difference ->{cert.embed_stats.count}, 1 do
+    assert_difference ->{cert.dataset.embed_stats.count}, 1 do
       get :badge, {dataset_id: cert.dataset.id, id: cert.id}
     end
   end
@@ -194,7 +194,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
-    assert_no_difference ->{cert.embed_stats.count} do
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
       get :badge, {dataset_id: cert.dataset.id, id: cert.id}
     end
   end
@@ -204,7 +204,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
-    assert_no_difference ->{cert.embed_stats.count} do
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
       get :badge, {dataset_id: cert.dataset.id, id: cert.id}
     end
   end

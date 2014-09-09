@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20140909140044) do
     t.boolean  "audited",         :default => false
     t.datetime "published_at"
     t.string   "aasm_state"
-    t.integer  "embed_stat_id"
   end
 
   add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"
@@ -95,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20140909140044) do
     t.string   "documentation_url"
     t.string   "curator"
     t.boolean  "removed",           :default => false
+    t.integer  "embed_stat_id"
   end
 
   add_index "datasets", ["user_id"], :name => "index_datasets_on_user_id"
@@ -154,9 +154,9 @@ ActiveRecord::Schema.define(:version => 20140909140044) do
 
   create_table "embed_stats", :force => true do |t|
     t.string   "referer"
-    t.integer  "certificate_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "dataset_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "embed_stats", ["referer"], :name => "index_embed_stats_on_referer", :unique => true

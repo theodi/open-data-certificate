@@ -122,20 +122,4 @@ class CertificateTest < ActiveSupport::TestCase
     assert certificate.published
   end
 
-  test 'creates an embed stat' do
-    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
-    certificate.register_embed("http://example.com/page")
-
-    assert_equal 1, EmbedStat.all.count
-    assert_equal certificate, EmbedStat.first.certificate
-  end
-
-  test 'only creates one embed stat per URL' do
-    EmbedStat.create(referer: "http://example.com/page")
-    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
-    certificate.register_embed("http://example.com/page")
-
-    assert_equal 1, EmbedStat.all.count
-  end
-
 end

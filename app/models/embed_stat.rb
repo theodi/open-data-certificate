@@ -1,5 +1,5 @@
 class EmbedStat < ActiveRecord::Base
-  belongs_to :certificate
+  belongs_to :dataset
 
   attr_accessible :referer
 
