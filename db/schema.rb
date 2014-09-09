@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(:version => 20140829144357) do
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
 
   create_table "stats", :force => true do |t|
-    t.string   "type"
+    t.string   "name"
     t.integer  "all"
     t.integer  "expired"
     t.integer  "publishers"
