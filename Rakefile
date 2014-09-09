@@ -6,7 +6,11 @@ require File.expand_path('../config/application', __FILE__)
 
 OpenDataCertificate::Application.load_tasks
 
-require 'coveralls/rake/task'
-Coveralls::RakeTask.new
+if Rails.env.test?
 
-task :default => ["test", "coveralls:push"]
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+
+  task :default => ["test", "coveralls:push"]
+
+end
