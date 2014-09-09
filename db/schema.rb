@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140829104356) do
+ActiveRecord::Schema.define(:version => 20140829144357) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -146,10 +146,19 @@ ActiveRecord::Schema.define(:version => 20140829104356) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "message",    :limit => 65535
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
+
+  create_table "embed_stats", :force => true do |t|
+    t.string   "referer"
+    t.integer  "certificate_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "embed_stats", ["referer"], :name => "index_embed_stats_on_referer", :unique => true
 
   create_table "kitten_data", :force => true do |t|
     t.text     "data"
@@ -278,7 +287,7 @@ ActiveRecord::Schema.define(:version => 20140829104356) do
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
 
   create_table "stats", :force => true do |t|
-    t.string   "name"
+    t.string   "type"
     t.integer  "all"
     t.integer  "expired"
     t.integer  "publishers"
