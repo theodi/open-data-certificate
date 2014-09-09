@@ -3,4 +3,5 @@ class EmbedStat < ActiveRecord::Base
 
   attr_accessible :referer
 
+  validates :referer, url: true
 end
