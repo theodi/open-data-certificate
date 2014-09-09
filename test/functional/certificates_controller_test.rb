@@ -179,4 +179,34 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_equal false, cert.audited
   end
 
+  test "creates an embed stat when a badge is embeded" do
+    @request.env['HTTP_REFERER'] = 'http://example.com'
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_difference ->{cert.embed_stats.count}, 1 do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+  end
+
+  test "doesn't create a stat when there is no referrer" do
+    @request.env['HTTP_REFERER'] = nil
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_no_difference ->{cert.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+  end
+
+  test "doesn't create a stat when the referrer is local" do
+    @request.env['HTTP_REFERER'] = 'http://test.host/example.html'
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_no_difference ->{cert.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+  end
+
 end

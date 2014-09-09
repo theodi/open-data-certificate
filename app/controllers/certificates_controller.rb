@@ -3,6 +3,7 @@ class CertificatesController < ApplicationController
 
   before_filter(:except => [:latest, :legacy_show, :certificate_from_dataset_url]) { get_certificate }
   before_filter(:only => [:show]) { alternate_formats [:json] }
+  before_filter(:only => [:badge]) { log_embed }
 
   def show
     # pretend unpublished certificates don't exist
@@ -125,6 +126,12 @@ class CertificatesController < ApplicationController
 
     def get_certificate
       @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+    end
+
+    def log_embed
+      unless request.referer =~ /https?:\/\/#{request.host_with_port}./
+        @certificate.register_embed(request.referer)
+      end
     end
 
 end
