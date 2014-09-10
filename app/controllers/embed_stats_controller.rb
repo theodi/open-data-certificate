@@ -1,7 +1,7 @@
 class EmbedStatsController < ActionController::Base
 
   def index
-    render text: EmbedStat.csv, content_type: "text/csv; header=present"
+    send_data EmbedStat.csv, filename: "badges.csv", type: "text/csv; header=present; charset=utf-8"
   end
 
 end
