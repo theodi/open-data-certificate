@@ -159,8 +159,6 @@ ActiveRecord::Schema.define(:version => 20140909140044) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "embed_stats", ["referer"], :name => "index_embed_stats_on_referer", :unique => true
-
   create_table "kitten_data", :force => true do |t|
     t.text     "data"
     t.integer  "response_set_id"

@@ -6,7 +6,5 @@ class CreateEmbedStats < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index :embed_stats, :referer, :unique => true
   end
 end

@@ -16,6 +16,15 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal e.errors.first, [:referer, "is not a valid URL"]
   end
 
+  test "should created an embed stat for the same url but different dataset" do
+    5.times.each do |n|
+      dataset = FactoryGirl.create(:dataset, title: "Dataset #{n}")
+      2.times.each { dataset.register_embed("http://example.com") }
+    end
+
+    assert_equal EmbedStat.count, 5
+  end
+
   test "should generate a CSV" do
     5.times.each do |n|
       dataset = FactoryGirl.create(:dataset, title: "Dataset #{n}")

@@ -4,6 +4,7 @@ class EmbedStat < ActiveRecord::Base
   attr_accessible :referer
 
   validates :referer, url: true
+  validates_uniqueness_of :referer, :scope => :dataset_id
 
   def self.csv
     CSV.generate(row_sep: "\r\n") do |csv|
