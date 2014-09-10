@@ -128,12 +128,13 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal dataset, EmbedStat.first.dataset
   end
 
-  test 'only creates one embed stat per URL' do
-    EmbedStat.create(referer: "http://example.com/page")
-    dataset = FactoryGirl.create(:dataset)
-    dataset.register_embed("http://example.com/page")
+  test 'creates one embed stat per URL through dataset' do
+    2.times do |i|
+      dataset = FactoryGirl.create(:dataset)
+      5.times { dataset.register_embed("http://example.com/page") }
+    end
 
-    assert_equal 1, EmbedStat.all.count
+    assert_equal 2, EmbedStat.all.count
   end
 
 end
