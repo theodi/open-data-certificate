@@ -111,6 +111,8 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
+    autocomplete(request_dataset["documentationUrl"])
+
     response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
@@ -188,6 +190,27 @@ class CertificateGenerator < ActiveRecord::Base
       throw "not handled> #{question.inspect}"
     end
 
+  end
+
+  def autocomplete(url)
+    return nil if url.nil?
+    
+    code = resolve_url(url)
+
+    if code == 200
+      kitten_data = KittenData.create(url: url, response_set: response_set)
+      kitten_data.request_data
+      kitten_data.save
+
+      response_set.update_attribute('kitten_data', kitten_data)
+      response_set.update_responses(kitten_data.fields)
+    end
+  end
+
+  def resolve_url(url)
+    if url =~ /^#{URI::regexp}$/
+      ODIBot.new(url).response_code rescue nil
+    end
   end
 
 end
