@@ -36,23 +36,7 @@ class ResponseSetsController < ApplicationController
 
   # Check the user's documentation url and populate answers from it
   def start
-
-    url = params[:response_set][:documentation_url]
-
-    @response_set.update_responses({documentationUrl: url})
-    @response_set.responses.update_all(autocompleted: false)
-    @response_set.update_attribute('kitten_data', nil)
-
-    code = resolve_url(url)
-
-    if code == 200
-      kitten_data = KittenData.create(url: url, response_set: @response_set)
-      kitten_data.request_data
-      kitten_data.save
-
-      @response_set.update_attribute('kitten_data', kitten_data)
-      @response_set.update_responses(kitten_data.fields)
-    end
+    @response_set.autocomplete(params[:response_set][:documentation_url])
 
     respond_to do |format|
       format.html do
