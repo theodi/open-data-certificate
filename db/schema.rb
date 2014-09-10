@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140829104356) do
+ActiveRecord::Schema.define(:version => 20140909140044) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20140829104356) do
     t.string   "documentation_url"
     t.string   "curator"
     t.boolean  "removed",           :default => false
+    t.integer  "embed_stat_id"
   end
 
   add_index "datasets", ["user_id"], :name => "index_datasets_on_user_id"
@@ -146,7 +147,14 @@ ActiveRecord::Schema.define(:version => 20140829104356) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message"
+    t.text     "message",    :limit => 65535
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "embed_stats", :force => true do |t|
+    t.string   "referer"
+    t.integer  "dataset_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

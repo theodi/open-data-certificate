@@ -436,6 +436,9 @@ GEM
       json (>= 1.8.0)
     underscore-rails (1.5.2)
     uuidtools (2.1.4)
+    validate_url (0.2.2)
+      activemodel (>= 3.0.0)
+      addressable
     vcr (2.9.0)
     warden (1.2.3)
       rack (>= 1.0)
@@ -508,5 +511,6 @@ DEPENDENCIES
   twitter-bootstrap-rails-confirm
   uglifier (>= 1.0.3)
   underscore-rails
+  validate_url
   vcr
   webmock

@@ -20,7 +20,7 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(dataset.title, 'Test dataset default title')
   end
-  
+
   test "Should set the documentation URL if it hasn't been set before" do
     dataset = FactoryGirl.create(:dataset_without_documentation_url)
     dataset.set_default_documentation_url!('http://foo.com')
@@ -41,7 +41,7 @@ class DatasetTest < ActiveSupport::TestCase
   end
 
   test "#newest_response_set should return the most recent response set" do
-      
+
     dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
     survey = FactoryGirl.create(:survey)
     response_set_1 = FactoryGirl.create(:response_set, survey: survey, dataset: dataset)
@@ -78,7 +78,7 @@ class DatasetTest < ActiveSupport::TestCase
     refute_nil(dataset)
   end
 
-  test "#destroy_if_no_responses should destroy the dataset if the response_sets is empty"  do 
+  test "#destroy_if_no_responses should destroy the dataset if the response_sets is empty"  do
 
     dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
 
@@ -118,6 +118,23 @@ class DatasetTest < ActiveSupport::TestCase
     dataset.update_attributes({removed: true})
 
     refute dataset.removed
+  end
+
+  test 'creates an embed stat' do
+    dataset = FactoryGirl.create(:dataset)
+    dataset.register_embed("http://example.com/page")
+
+    assert_equal 1, EmbedStat.all.count
+    assert_equal dataset, EmbedStat.first.dataset
+  end
+
+  test 'creates one embed stat per URL through dataset' do
+    2.times do |i|
+      dataset = FactoryGirl.create(:dataset)
+      5.times { dataset.register_embed("http://example.com/page") }
+    end
+
+    assert_equal 2, EmbedStat.all.count
   end
 
 end

@@ -13,16 +13,18 @@ class Dataset < ActiveRecord::Base
   has_one :certificate, through: :response_set
 
   has_one :transfer, conditions: {aasm_state: :notified}
-  
+
+  has_many :embed_stats
+
   class << self
     def match_to_user_domain(datasetUrl)
       domain = Domainatrix.parse(datasetUrl).domain
-      
+
       dataset = joins(:user)
                   .where(documentation_url: datasetUrl)
                   .order(User.arel_table[:email].matches(domain))
                   .first
-                  
+
       if dataset.nil?
         dataset = where(:documentation_url => datasetUrl).first
       end
@@ -79,6 +81,14 @@ class Dataset < ActiveRecord::Base
 
   def user_full_name
     user.full_name if user
+  end
+
+  def register_embed(referer)
+    begin
+      embed_stats.create(referer: referer)
+    rescue ActiveRecord::RecordNotUnique
+      nil
+    end
   end
 
 end
