@@ -59,6 +59,23 @@ class MainControllerTest < ActionController::TestCase
     assert_match /#{published.level_exemplar}/, html.css('.published-exemplar').first.text
   end
 
+  test "status shows correct number of embedded certificates" do
+    FactoryGirl.create(:all_stat)
+    FactoryGirl.create(:published_stat)
+
+    5.times do |i|
+      dataset = FactoryGirl.create :dataset
+      dataset.register_embed("http://example#{i}.com")
+    end
+
+    get :status
+    assert_response 200
+
+    html = Nokogiri::HTML response.body
+
+    assert_match /5 certificates\nembedded/, html.css('.embedded').first.text
+  end
+
   test "status csv shows correct stats" do
     5.times do
       FactoryGirl.create(:all_stat)
