@@ -1,3 +1,5 @@
+require 'odibot'
+
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
