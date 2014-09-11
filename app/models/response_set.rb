@@ -1,3 +1,5 @@
+require 'odibot'
+
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
@@ -462,6 +464,29 @@ class ResponseSet < ActiveRecord::Base
 
   def autocomplete_override_message_for(question)
     autocomplete_override_messages.where(question_id: question).first_or_create
+  end
+
+  def autocomplete(url)
+    update_responses({documentationUrl: url})
+    responses.update_all(autocompleted: false)
+    update_attribute('kitten_data', nil)
+
+    code = resolve_url(url)
+
+    if code == 200
+      kitten_data = KittenData.create(url: url, response_set: self)
+      kitten_data.request_data
+      kitten_data.save
+
+      update_attribute('kitten_data', kitten_data)
+      update_responses(kitten_data.fields)
+    end
+  end
+
+  def resolve_url(url)
+    if url =~ /^#{URI::regexp}$/
+      ODIBot.new(url).response_code rescue nil
+    end
   end
 
   # finds the string value for a given response_identifier

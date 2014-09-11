@@ -111,6 +111,8 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
+    response_set.autocomplete(request_dataset["documentationUrl"])
+
     response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
