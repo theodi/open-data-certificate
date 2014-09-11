@@ -20,20 +20,6 @@ GIT
       httparty
 
 GIT
-  remote: git://github.com/theodi/data_kitten.git
-  revision: 903e32427ec671de8dcd574c3deae5ef2a7fb561
-  specs:
-    data_kitten (0.0.1)
-      curb
-      datapackage
-      git
-      json
-      linkeddata
-      nokogiri
-      rake
-      rest-client
-
-GIT
   remote: git://github.com/theodi/csvlint.rb.git
   revision: 3dc689f4625c8edd4f7b725d1d420fdd67a67df9
   specs:
@@ -103,8 +89,17 @@ GEM
       thor
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    curb (0.8.5)
+    curb (0.8.6)
     daemons (1.1.9)
+    data_kitten (1.0.1)
+      curb
+      datapackage
+      git
+      json
+      linkeddata
+      nokogiri
+      rake
+      rest-client
     datapackage (0.0.4)
       colorize
       json
@@ -159,7 +154,7 @@ GEM
     formatador (0.2.4)
     formtastic (2.1.1)
       actionpack (~> 3.0)
-    git (1.2.7)
+    git (1.2.8)
     google-analytics-rails (0.0.5)
     google_drive (0.3.9)
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
@@ -193,7 +188,7 @@ GEM
     json (1.8.1)
     json-ld (1.1.1)
       rdf (>= 1.0.8)
-    json-schema (2.2.4)
+    json-schema (2.2.5)
     jwt (0.1.13)
       multi_json (>= 1.5)
     kaminari (0.15.1)
@@ -457,7 +452,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   coveralls
   csvlint!
-  data_kitten!
+  data_kitten
   delayed_job_active_record
   devise (= 3.0.3)
   domainatrix
