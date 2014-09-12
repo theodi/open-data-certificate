@@ -39,7 +39,7 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    certificate = self.create(request: request, survey: survey, user: user).generate
+    certificate = self.create(request: request, survey: survey, user: user).generate(!request[:create_user].blank?)
     response_set = certificate.response_set
 
     errors = []
@@ -100,11 +100,7 @@ class CertificateGenerator < ActiveRecord::Base
     {success: true, published: response_set.published?, errors: errors}
   end
 
-  def generate
-
-    response_set.update_attribute(:user, user)
-    response_set.dataset.update_attribute(:user, user)
-
+  def generate(create_user = false)
     # find the questions which are to be answered
     survey.questions
           .where({reference_identifier: request_dataset.keys})
@@ -112,6 +108,20 @@ class CertificateGenerator < ActiveRecord::Base
           .each {|question| answer question}
 
     response_set.autocomplete(request_dataset["documentationUrl"])
+
+    user = self.user
+
+    if response_set.kitten_data && create_user === true
+      email = response_set.kitten_data[:data][:publishers].first[:mbox] rescue nil
+      if email
+        user = User.find_or_create_by_email(email) do |user|
+                  user.password = SecureRandom.base64
+               end
+      end      
+    end
+
+    response_set.dataset.update_attribute(:user, user)
+    response_set.update_attribute(:user, user)
 
     response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?

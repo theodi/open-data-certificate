@@ -40,6 +40,8 @@ group :test do
   gem 'spork-testunit'
   gem 'shoulda-context'
   gem 'timecop'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
