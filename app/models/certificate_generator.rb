@@ -109,17 +109,15 @@ class CertificateGenerator < ActiveRecord::Base
 
     response_set.autocomplete(request_dataset["documentationUrl"])
 
+    user = self.user
+
     if response_set.kitten_data && create_user === true
       email = response_set.kitten_data[:data][:publishers].first[:mbox] rescue nil
       if email
         user = User.find_or_create_by_email(email) do |user|
                   user.password = SecureRandom.base64
                end
-      else
-        user = User.find(ENV['ODC_ADMIN_IDS'].split(",").first)
-      end
-    else
-      user = self.user
+      end      
     end
 
     response_set.dataset.update_attribute(:user, user)
