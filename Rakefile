@@ -9,4 +9,4 @@ OpenDataCertificate::Application.load_tasks
 require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 
-task :default => ["test", "coveralls:push"]
+task :default => ["test", "cucumber", "coveralls:push"]
