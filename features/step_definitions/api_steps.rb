@@ -65,31 +65,3 @@ When(/^the certificate should use the account that made the API request$/) do
 
   assert_equal Dataset.all.first.user, user
 end
-
-Given(/^that the contact for a given dataset has no person name$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^a new user should be created for that certificate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the user account should have no name$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^that no contact details are available for a given dataset$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^a user account should not be created for that certificate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^a new user should not be created for that certificate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^that the contact for the dataset has no person name$/) do
-  pending # express the regexp above with the code you wish you had
-end
