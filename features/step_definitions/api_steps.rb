@@ -69,5 +69,5 @@ end
 Then(/^the API response should contain the user's email$/) do
   json = JSON.parse(@response.body)
 
-  assert_equal @email, json['user']
+  assert_equal @email, json['owner_email']
 end
