@@ -39,6 +39,11 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
+    if request[:dataset]
+      unique = Dataset.find_by_documentation_url(request[:dataset][:documentationUrl]).nil?
+      return {success: false, errors: ['Dataset already exists']} if !unique
+    end
+
     certificate = self.create(request: request, survey: survey, user: user).generate(!request[:create_user].blank?)
     response_set = certificate.response_set
 
