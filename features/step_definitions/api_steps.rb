@@ -18,6 +18,7 @@ Given(/^my dataset does not contain contact details$/) do
   ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
       publishers: []
     }})
+  @email = @api_user.email
 end
 
 Given(/^I provide the API with a URL that autocompletes$/) do
@@ -30,12 +31,11 @@ Given(/^I provide the API with a URL that autocompletes$/) do
 end
 
 When(/^I create a certificate via the API$/) do
-  @api_user = User.create(email: "api@example.com", password: "password", authentication_token: "")
   @body["jurisdiction"] = "GB"
 
   authorize @api_user.email, @api_user.authentication_token
 
-  post '/datasets', @body
+  @response = post '/datasets', @body
 end
 
 Given(/^that email address is used for an existing user$/) do
@@ -64,4 +64,10 @@ When(/^the certificate should use the account that made the API request$/) do
   user = User.find_by_email("api@example.com")
 
   assert_equal Dataset.all.first.user, user
+end
+
+Then(/^the API response should contain the user's email$/) do
+  json = JSON.parse(@response.body)
+
+  assert_equal @email, json['user']
 end

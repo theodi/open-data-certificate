@@ -58,7 +58,7 @@ class CertificateGenerator < ActiveRecord::Base
       end
     end
 
-    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
+    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, user: certificate.user.email, errors: errors}
   end
 
   # attempt to build a certificate from the request
@@ -117,7 +117,7 @@ class CertificateGenerator < ActiveRecord::Base
         user = User.find_or_create_by_email(email) do |user|
                   user.password = SecureRandom.base64
                end
-      end      
+      end
     end
 
     response_set.dataset.update_attribute(:user, user)
