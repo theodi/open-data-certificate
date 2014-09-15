@@ -1,3 +1,4 @@
+@api
 Feature: Open Data Certificate API
 
   Scenario: API call with autocompleting data

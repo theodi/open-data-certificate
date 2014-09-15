@@ -63,7 +63,7 @@ class CertificateGenerator < ActiveRecord::Base
       end
     end
 
-    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
+    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, owner_email: certificate.user.email, errors: errors}
   end
 
   # attempt to build a certificate from the request
