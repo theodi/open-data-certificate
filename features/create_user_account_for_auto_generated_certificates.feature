@@ -1,3 +1,4 @@
+@api
 Feature: Create user account for auto-generated certificates
 
   Scenario: User is created
