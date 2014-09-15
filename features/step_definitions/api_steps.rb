@@ -22,8 +22,9 @@ end
 
 Given(/^I provide the API with a URL that autocompletes$/) do
   @body ||= {}
+  @documentationURL = "http://example.com/dataset"
   @body["dataset"] = {
-      "documentationUrl" => "http://example.com/dataset"
+      "documentationUrl" => @documentationURL
     }
 
   ResponseSet.any_instance.stubs(:autocomplete)
@@ -35,7 +36,7 @@ When(/^I create a certificate via the API$/) do
 
   authorize @api_user.email, @api_user.authentication_token
 
-  post '/datasets', @body
+  @response = post '/datasets', @body
 end
 
 Given(/^that email address is used for an existing user$/) do
@@ -64,4 +65,24 @@ When(/^the certificate should use the account that made the API request$/) do
   user = User.find_by_email("api@example.com")
 
   assert_equal Dataset.all.first.user, user
+end
+
+Then(/^the API response should return sucessfully$/) do
+  assert_match /\"success\":true/,  @response.body
+end
+
+Then(/^my certificate should be published$/) do
+  assert Dataset.first.certificate.published
+end
+
+Given(/^that URL already has a dataset$/) do
+  FactoryGirl.create(:dataset, documentation_url: @documentationURL)
+end
+
+Then(/^the API response should return unsucessfully$/) do
+  assert_match /\"success\":false/,  @response.body
+end
+
+Then(/^there should only be one dataset$/) do
+  assert_equal Dataset.count, 1
 end
