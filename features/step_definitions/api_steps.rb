@@ -20,7 +20,7 @@ Given(/^my dataset does not contain contact details$/) do
     }})
 end
 
-Given(/^I provide a CKAN URL$/) do
+Given(/^I provide the API with a URL that autocompletes$/) do
   @body ||= {}
   @body["dataset"] = {
       "documentationUrl" => "http://example.com/dataset"
