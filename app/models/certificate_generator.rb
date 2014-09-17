@@ -124,11 +124,15 @@ class CertificateGenerator < ActiveRecord::Base
     certificate
   end
 
+  def get_request
+    request.class == String ? YAML.load(request) : request
+  end
+
   private
 
   # the dataset parameters from the request, defaults to {}
   def request_dataset
-    HashWithIndifferentAccess.new request[:dataset]
+    HashWithIndifferentAccess.new get_request[:dataset]
   end
 
   # answer a question from the request
