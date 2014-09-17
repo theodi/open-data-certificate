@@ -118,9 +118,9 @@ class CertificateGenerator < ActiveRecord::Base
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
-      response_set.save
     end
 
+    response_set.save
     certificate
   end
 

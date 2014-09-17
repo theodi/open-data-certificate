@@ -137,4 +137,85 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal 2, EmbedStat.all.count
   end
 
+  test 'get results of autopublished certificate' do
+    load_custom_survey 'cert_generator.rb'
+    user = FactoryGirl.create :user
+    survey = Survey.newest_survey_for_access_code 'cert-generator'
+
+    request = {
+      jurisdiction: 'cert-generator',
+      dataset: {
+        dataTitle: 'The title',
+        releaseType: 'oneoff',
+        publisherUrl: 'http://www.example.com',
+        publisherRights: 'yes',
+        publisherOrigin: 'true',
+        linkedTo: 'true',
+        chooseAny: ['one', 'two']
+      }
+    }
+
+    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(true, response[:published])
+    assert_equal(user.email, response[:owner_email])
+    assert_equal([], response[:errors])
+  end
+
+  test 'get results of certificate with missing field' do
+    load_custom_survey 'cert_generator.rb'
+    user = FactoryGirl.create :user
+    survey = Survey.newest_survey_for_access_code 'cert-generator'
+
+    request = {
+      jurisdiction: 'cert-generator',
+      dataset: {
+        releaseType: 'oneoff',
+        publisherUrl: 'http://www.example.com',
+        publisherRights: 'yes',
+        publisherOrigin: 'true',
+        linkedTo: 'true',
+        chooseAny: ['one', 'two']
+      }
+    }
+
+    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(false, response[:published])
+    assert_equal(["The question 'dataTitle' is mandatory"], response[:errors])
+  end
+
+  test 'get results of certificate with invalid URL' do
+    load_custom_survey 'cert_generator.rb'
+    user = FactoryGirl.create :user
+    survey = Survey.newest_survey_for_access_code 'cert-generator'
+
+    stub_request(:get, "http://www.example/error").
+        to_return(:body => "", status: 404)
+
+    request = {
+      jurisdiction: 'cert-generator',
+      dataset: {
+        dataTitle: 'The title',
+        releaseType: 'oneoff',
+        publisherUrl: 'http://www.example/error',
+        publisherRights: 'yes',
+        publisherOrigin: 'true',
+        linkedTo: 'true',
+        chooseAny: ['one', 'two']
+      }
+    }
+
+    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(false, response[:published])
+    assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
+  end
+
 end

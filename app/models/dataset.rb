@@ -91,4 +91,30 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def generation_result
+    response_set = ResponseSet.find_by_dataset_id(id)
+
+    if !response_set.nil?
+      errors = []
+
+      response_set.responses_with_url_type.each do |response|
+        if response.error
+          errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+        end
+      end
+
+      response_set.survey.questions.where(is_mandatory: true).each do |question|
+        response = response_set.responses.detect {|r| r.question_id == question.id}
+
+        if !response || response.empty?
+          errors.push("The question '#{question.reference_identifier}' is mandatory")
+        end
+      end
+
+      {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, owner_email: response_set.user.email, errors: errors}
+    else
+      {success: "pending", dataset_id: self.id}
+    end
+  end
+
 end

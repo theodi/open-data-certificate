@@ -106,6 +106,7 @@ class DatasetsController < ApplicationController
     respond_to do |format|
       format.html
       format.feed { render :layout => false }
+      format.json { render :json => @dataset.generation_result }
     end
   end
 
