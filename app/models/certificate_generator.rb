@@ -35,7 +35,6 @@ class CertificateGenerator < ActiveRecord::Base
 
   # attempt to build a certificate from the request
   def self.generate(request, user)
-
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
@@ -44,26 +43,10 @@ class CertificateGenerator < ActiveRecord::Base
       return {success: false, errors: ['Dataset already exists']} if !unique
     end
 
-    certificate = self.create(request: request, survey: survey, user: user).generate(!request[:create_user].blank?)
-    response_set = certificate.response_set
+    generator = self.create(request: request, survey: survey, user: user)
+    generator.delay.generate(!request[:create_user].blank?)
 
-    errors = []
-
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
-
-    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, owner_email: certificate.user.email, errors: errors}
+    return {success: "pending", dataset_id: generator.response_set.dataset_id}
   end
 
   # attempt to build a certificate from the request
