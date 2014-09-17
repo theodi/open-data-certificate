@@ -42,6 +42,11 @@ Spork.each_run do
     def assert_attribute_exists(model, attribute)
       assert_respond_to model, attribute
     end
+
+    def load_custom_survey fname
+      builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
+      builder.parse_file
+    end
   end
 
 end

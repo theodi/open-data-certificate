@@ -244,11 +244,4 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
       end
     end
 
-private
-
-  def load_custom_survey fname
-    builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
-    builder.parse_file
-  end
-
 end
