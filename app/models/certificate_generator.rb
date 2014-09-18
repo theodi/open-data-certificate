@@ -46,7 +46,7 @@ class CertificateGenerator < ActiveRecord::Base
     generator = self.create(request: request, survey: survey, user: user)
     generator.delay.generate(!request[:create_user].blank?)
 
-    return {success: "pending", dataset_id: generator.response_set.dataset_id}
+    return {success: "pending", dataset_id: generator.response_set.dataset_id, dataset_url: generator.dataset.api_url }
   end
 
   # attempt to build a certificate from the request

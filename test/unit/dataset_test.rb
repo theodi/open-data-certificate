@@ -240,6 +240,7 @@ class DatasetTest < ActiveSupport::TestCase
     response = Dataset.last.generation_result
 
     assert_equal("pending", response[:success])
+    assert_equal("http://test.dev/datasets/#{Dataset.last.id}.json", response[:dataset_url])
 
     cert.generate(false)
     response = Dataset.last.generation_result
@@ -248,6 +249,12 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(true, response[:published])
     assert_equal(user.email, response[:owner_email])
     assert_equal([], response[:errors])
+  end
+
+  test 'returns an api_url' do
+    dataset = FactoryGirl.create(:dataset)
+
+    assert_equal "http://test.dev/datasets/1.json", dataset.api_url
   end
 
 end

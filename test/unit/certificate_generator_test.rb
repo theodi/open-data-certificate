@@ -21,6 +21,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     response = CertificateGenerator.generate(request, @user)
     assert_equal("pending", response[:success])
     assert_equal(Dataset.last.id, response[:dataset_id])
+    assert_equal("http://test.dev/datasets/#{Dataset.last.id}.json", response[:dataset_url])
   end
 
   test "creating blank certificate" do

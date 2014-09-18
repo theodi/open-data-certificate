@@ -113,8 +113,12 @@ class Dataset < ActiveRecord::Base
 
       {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, owner_email: response_set.user.email, errors: errors}
     else
-      {success: "pending", dataset_id: self.id}
+      {success: "pending", dataset_id: self.id, dataset_url: self.api_url}
     end
+  end
+
+  def api_url
+    Rails.application.routes.url_helpers.dataset_url(self, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host], format: :json)
   end
 
 end
