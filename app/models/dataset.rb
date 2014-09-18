@@ -94,7 +94,7 @@ class Dataset < ActiveRecord::Base
   def generation_result
     response_set = newest_response_set
 
-    if response_set.responses.count > 0
+    if response_set.certificate_generator && response_set.certificate_generator.completed?
       errors = []
 
       response_set.responses_with_url_type.each do |response|
