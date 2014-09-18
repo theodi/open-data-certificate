@@ -24,6 +24,15 @@ Given(/^I want to create a certificate via the API$/) do
   }
 end
 
+Given(/^I create a certificate via the API$/) do
+  steps %Q{
+    When I request a certificate via the API
+    And the certificate is created
+    And I request the results via the API
+    Then the API response should return sucessfully
+  }
+end
+
 Given(/^I request that the API creates a user$/) do
   @body[:create_user] = "true"
 end
@@ -57,7 +66,7 @@ When(/^I request a certificate via the API$/) do
 end
 
 When(/^the certificate is created$/) do
-  CertificateGenerator.first.generate
+  CertificateGenerator.first.generate(!@body[:create_user].blank?)
 end
 
 When(/^I request the results via the API$/) do

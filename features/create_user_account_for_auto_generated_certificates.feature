@@ -1,6 +1,9 @@
 @api
 Feature: Create user account for auto-generated certificates
 
+  Background:
+    Given I want to create a certificate via the API
+
   Scenario: User is created
     Given I request that the API creates a user
     And I provide the API with a URL that autocompletes
