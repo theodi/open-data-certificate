@@ -218,4 +218,36 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
   end
 
+  test 'doesn\'t show results when generation hasn\'t happened' do
+    load_custom_survey 'cert_generator.rb'
+    user = FactoryGirl.create :user
+    survey = Survey.newest_survey_for_access_code 'cert-generator'
+
+    request = {
+      jurisdiction: 'cert-generator',
+      dataset: {
+        dataTitle: 'The title',
+        releaseType: 'oneoff',
+        publisherUrl: 'http://www.example.com',
+        publisherRights: 'yes',
+        publisherOrigin: 'true',
+        linkedTo: 'true',
+        chooseAny: ['one', 'two']
+      }
+    }
+
+    cert = CertificateGenerator.create(request: request, survey: survey, user: user)
+    response = Dataset.last.generation_result
+
+    assert_equal("pending", response[:success])
+
+    cert.generate(false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(true, response[:published])
+    assert_equal(user.email, response[:owner_email])
+    assert_equal([], response[:errors])
+  end
+
 end
