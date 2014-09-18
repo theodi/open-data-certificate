@@ -1,12 +1,7 @@
 Given(/^I want to create a certificate via the API$/) do
   @documentationURL = 'http://example.com/dataset'
 
-  stub_request(:get, @documentationURL).
-        with(:headers => {'User-Agent'=>'ODICertBot 1.0 (+https://certificates.theodi.org/)'}).
-        to_return(:status => 200, :body => "", :headers => {})
-
-  stub_request(:get, "http://www.example.com/").
-        with(:headers => {'User-Agent'=>'ODICertBot 1.0 (+https://certificates.theodi.org/)'}).
+  stub_request(:any, /http:\/\/*example.com\/*/).
         to_return(:status => 200, :body => "", :headers => {})
 
   @body = {
@@ -111,6 +106,11 @@ Then(/^the API response should return sucessfully$/) do
   assert_match /\"success\":true/,  @response.body
 end
 
+Then(/^the API response should return pending$/) do
+  assert_match /\"success\":\"pending\"/,  @response.body
+end
+
+
 Then(/^my certificate should be published$/) do
   assert Dataset.first.certificate.published
 end
@@ -125,4 +125,9 @@ end
 
 Then(/^there should only be one dataset$/) do
   assert_equal Dataset.count, 1
+end
+
+Then(/^the generate job should be queued$/) do
+  CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
+  CertificateGenerator.any_instance.expects(:generate).once
 end
