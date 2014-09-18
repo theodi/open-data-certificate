@@ -92,7 +92,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def generation_result
-    response_set = ResponseSet.find_by_dataset_id(id)
+    response_set = newest_response_set
 
     if !response_set.nil?
       errors = []
