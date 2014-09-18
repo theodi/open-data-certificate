@@ -126,8 +126,3 @@ end
 Then(/^there should only be one dataset$/) do
   assert_equal Dataset.count, 1
 end
-
-Then(/^the generate job should be queued$/) do
-  CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
-  CertificateGenerator.any_instance.expects(:generate).once
-end

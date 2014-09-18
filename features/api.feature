@@ -4,10 +4,6 @@ Feature: Open Data Certificate API
   Background:
     Given I want to create a certificate via the API
 
-  Scenario: API call creates background job
-   Then the generate job should be queued
-   When I request a certificate via the API
-
   Scenario: API call returns pending initially
     When I request a certificate via the API
     And I request the results via the API
