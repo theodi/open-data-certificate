@@ -120,6 +120,9 @@ class CertificateGenerator < ActiveRecord::Base
       response_set.publish!
     end
 
+    self.completed = true
+    save
+
     certificate
   end
 

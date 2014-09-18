@@ -58,7 +58,9 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     }
 
     assert_difference 'Certificate.count', 1 do
-      CertificateGenerator.create(request: request, survey: @survey, user: @user).generate(false)
+      generator = CertificateGenerator.create(request: request, survey: @survey, user: @user).generate(false)
+
+      assert CertificateGenerator.last.completed
 
       certificate = Certificate.last
 
