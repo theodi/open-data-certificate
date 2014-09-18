@@ -1,5 +1,30 @@
+Given(/^I want to create a certificate via the API$/) do
+  @documentationURL = 'http://example.com/dataset'
+
+  stub_request(:get, @documentationURL).
+        with(:headers => {'User-Agent'=>'ODICertBot 1.0 (+https://certificates.theodi.org/)'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+  stub_request(:get, "http://www.example.com/").
+        with(:headers => {'User-Agent'=>'ODICertBot 1.0 (+https://certificates.theodi.org/)'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+  @body = {
+    jurisdiction: 'cert-generator',
+    dataset: {
+      dataTitle: 'Example Dataset',
+      releaseType: 'oneoff',
+      documentationUrl: @documentationURL,
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+  }
+end
+
 Given(/^I request that the API creates a user$/) do
-  @body ||= {}
   @body[:create_user] = "true"
 end
 
@@ -22,21 +47,21 @@ Given(/^my dataset does not contain contact details$/) do
 end
 
 Given(/^I provide the API with a URL that autocompletes$/) do
-  @body ||= {}
-  @documentationURL = "http://example.com/dataset"
-  @body["dataset"] = {
-      "documentationUrl" => @documentationURL
-    }
-
   ResponseSet.any_instance.stubs(:autocomplete)
 end
 
-When(/^I create a certificate via the API$/) do
-  @body["jurisdiction"] = "GB"
-
+When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
   @response = post '/datasets', @body
+end
+
+When(/^the certificate is created$/) do
+  CertificateGenerator.first.generate
+end
+
+When(/^I request the results via the API$/) do
+  @response = get "/datasets/#{Dataset.last.id}.json"
 end
 
 Given(/^that email address is used for an existing user$/) do

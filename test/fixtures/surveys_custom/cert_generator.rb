@@ -9,6 +9,13 @@ survey 'cert-generator',
       :required => :required
     a_1 'what you call the data', :string
 
+    q_documentationUrl 'Where is it described?',
+      :text_as_statement => 'This data is described at',
+      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
+    a_1 'Documentation URL',
+      :string,
+      :input_type => :url
+      
     q_publisherUrl 'What website is the data published on?',
       :required => :required,
       :text_as_statement => 'The data is published on'
