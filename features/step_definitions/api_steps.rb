@@ -1,7 +1,7 @@
 Given(/^I want to create a certificate via the API$/) do
   @documentationURL = 'http://example.com/dataset'
 
-  stub_request(:any, /http:\/\/*example.com\/*/).
+  stub_request(:any, /http:\/\/.*example.com\/.*/).
         to_return(:status => 200, :body => "", :headers => {})
 
   @body = {
