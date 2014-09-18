@@ -94,7 +94,7 @@ class Dataset < ActiveRecord::Base
   def generation_result
     response_set = newest_response_set
 
-    if !response_set.nil?
+    if response_set.responses.count > 0
       errors = []
 
       response_set.responses_with_url_type.each do |response|
