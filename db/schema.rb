@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140909140044) do
+ActiveRecord::Schema.define(:version => 20140918143425) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20140909140044) do
     t.text     "request"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "completed"
   end
 
   add_index "certificate_generators", ["response_set_id"], :name => "index_certificate_generators_on_response_set_id"
