@@ -2,6 +2,8 @@ class CertificateGenerator < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :response_set
+  belongs_to :certification_campaign
+
   has_one :dataset, through: :response_set
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
