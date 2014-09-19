@@ -45,7 +45,13 @@ class CertificateGenerator < ActiveRecord::Base
       return {success: false, errors: ['Dataset already exists']} if !unique
     end
 
-    generator = self.create(request: request, survey: survey, user: user)
+    campaign = nil
+
+    if request[:campaign]
+      campaign = CertificationCampaign.find_or_create_by_name(request[:campaign])
+    end
+
+    generator = self.create(request: request, survey: survey, user: user, certification_campaign: campaign)
     generator.delay.generate(!request[:create_user].blank?)
 
     return {success: "pending", dataset_id: generator.response_set.dataset_id, dataset_url: generator.dataset.api_url }
