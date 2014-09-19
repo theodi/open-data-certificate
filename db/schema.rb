@@ -87,6 +87,12 @@ ActiveRecord::Schema.define(:version => 20140918143425) do
 
   add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"
 
+  create_table "certification_campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "datasets", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
