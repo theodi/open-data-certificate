@@ -125,8 +125,8 @@ class DatasetsController < ApplicationController
 
   def create
     response = CertificateGenerator.generate(params, current_user)
-    response[:success] == "pending" ? status = :accepted : status = :ok
-    render json: response, status: status 
+    response[:success] == "pending" ? status = :accepted : status = :unprocessable_entity
+    render json: response, status: status
   end
 
   def update_certificate
@@ -137,4 +137,5 @@ class DatasetsController < ApplicationController
   def schema
     render json: CertificateGenerator.schema(params)
   end
+
 end
