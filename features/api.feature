@@ -19,6 +19,7 @@ Feature: Open Data Certificate API
     And I request the results via the API
     Then the API response should return sucessfully
     And my certificate should be published
+    And I should get the certificate URL
 
   Scenario: API call when documentation URL already exists
     Given I provide the API with a URL that autocompletes

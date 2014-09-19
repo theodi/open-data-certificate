@@ -126,3 +126,7 @@ end
 Then(/^there should only be one dataset$/) do
   assert_equal Dataset.count, 1
 end
+
+Then(/^I should get the certificate URL$/) do
+  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+/,  @response.body
+end
