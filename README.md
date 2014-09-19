@@ -89,6 +89,23 @@ To create or update a dataset data should be sent in the format (using the above
 - Checkbox and radio fields should use the option key from the schema
 - Checkbox and repeating fields should be sent as an array
 
+If your request has a `documentationUrl`, the system will attempt to use
+that dataset's metadata (for example: if it is hosted in a [CKAN](http://ckan.org/)
+repository or marked up with [DCAT](http://theodi.org/guides/marking-up-your-dataset-with-dcat))
+to autocomplete as many questions as possible.
+
+You will then get a response in this format:
+
+    {
+      "success": "pending",
+      "dataset_id": 123,
+      "dataset_url": "http://certificates.theodi.org/datasets/123.json"
+    }
+
+You can then make a request to the `dataset_url` to get the final response.
+There may be a delay before your dataset is created, so if you get a `success`
+state of `pending`, please try again in a few seconds.
+
 ### Surveyor
 
 The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.  We've changed the look, feel & structure to fit the site and extended it to support certificate levels.

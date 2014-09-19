@@ -16,6 +16,6 @@ class ApiAuthenticationTest < ActionDispatch::IntegrationTest
   test "Authorised user tries to create a dataset" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     post "/datasets", {}, {"HTTP_AUTHORIZATION" => "Basic "+Base64.encode64('test@example.com:test1234').gsub(/\n/, '')}
-    assert_response :success
+    assert_response :unprocessable_entity
   end
 end

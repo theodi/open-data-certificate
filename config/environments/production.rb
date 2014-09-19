@@ -63,13 +63,13 @@ OpenDataCertificate::Application.configure do
   # **IMPORTANT** Define the default url (for devise)
 
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => "#{Dir.pwd.match(/staging\./).to_s}certificates.theodi.org" }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill
   if ENV["MANDRILL_USERNAME"]
 
     # **IMPORTANT** Define the default url (for devise)
-    config.action_mailer.default_url_options = { :host => 'certificates.theodi.org' }
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",

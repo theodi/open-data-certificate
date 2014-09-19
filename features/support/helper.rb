@@ -8,5 +8,7 @@ end
 
 Before("@api") do
   @api_user = User.create(email: "api@example.com", password: "password", authentication_token: "")
-  FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
+  builder = SurveyBuilder.new 'test/fixtures/surveys_custom', 'cert_generator.rb'
+  builder.parse_file
+  #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
 end

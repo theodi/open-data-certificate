@@ -40,7 +40,7 @@ group :test do
   gem 'spork-testunit'
   gem 'shoulda-context'
   gem 'timecop'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end
 

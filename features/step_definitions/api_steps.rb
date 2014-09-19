@@ -1,5 +1,34 @@
+Given(/^I want to create a certificate via the API$/) do
+  @documentationURL = 'http://example.com/dataset'
+
+  stub_request(:any, /http:\/\/.*example.com\/.*/).
+        to_return(:status => 200, :body => "", :headers => {})
+
+  @body = {
+    jurisdiction: 'cert-generator',
+    dataset: {
+      dataTitle: 'Example Dataset',
+      releaseType: 'oneoff',
+      documentationUrl: @documentationURL,
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+  }
+end
+
+Given(/^I create a certificate via the API$/) do
+  steps %Q{
+    When I request a certificate via the API
+    And the certificate is created
+    And I request the results via the API
+    Then the API response should return sucessfully
+  }
+end
+
 Given(/^I request that the API creates a user$/) do
-  @body ||= {}
   @body[:create_user] = "true"
 end
 
@@ -22,21 +51,21 @@ Given(/^my dataset does not contain contact details$/) do
 end
 
 Given(/^I provide the API with a URL that autocompletes$/) do
-  @body ||= {}
-  @documentationURL = "http://example.com/dataset"
-  @body["dataset"] = {
-      "documentationUrl" => @documentationURL
-    }
-
   ResponseSet.any_instance.stubs(:autocomplete)
 end
 
-When(/^I create a certificate via the API$/) do
-  @body["jurisdiction"] = "GB"
-
+When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
   @response = post '/datasets', @body
+end
+
+When(/^the certificate is created$/) do
+  CertificateGenerator.first.generate(!@body[:create_user].blank?)
+end
+
+When(/^I request the results via the API$/) do
+  @response = get "/datasets/#{Dataset.last.id}.json"
 end
 
 Given(/^that email address is used for an existing user$/) do
@@ -77,6 +106,11 @@ Then(/^the API response should return sucessfully$/) do
   assert_match /\"success\":true/,  @response.body
 end
 
+Then(/^the API response should return pending$/) do
+  assert_match /\"success\":\"pending\"/,  @response.body
+end
+
+
 Then(/^my certificate should be published$/) do
   assert Dataset.first.certificate.published
 end
@@ -91,4 +125,8 @@ end
 
 Then(/^there should only be one dataset$/) do
   assert_equal Dataset.count, 1
+end
+
+Then(/^I should get the certificate URL$/) do
+  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+/,  @response.body
 end

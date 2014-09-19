@@ -106,6 +106,7 @@ class DatasetsController < ApplicationController
     respond_to do |format|
       format.html
       format.feed { render :layout => false }
+      format.json { render :json => @dataset.generation_result }
     end
   end
 
@@ -123,7 +124,9 @@ class DatasetsController < ApplicationController
   end
 
   def create
-    render json: CertificateGenerator.generate(params, current_user)
+    response = CertificateGenerator.generate(params, current_user)
+    response[:success] == "pending" ? status = :accepted : status = :unprocessable_entity
+    render json: response, status: status
   end
 
   def update_certificate
@@ -134,4 +137,5 @@ class DatasetsController < ApplicationController
   def schema
     render json: CertificateGenerator.schema(params)
   end
+
 end

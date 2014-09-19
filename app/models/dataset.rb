@@ -91,4 +91,36 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def generation_result
+    response_set = newest_response_set
+
+    if response_set.certificate_generator && response_set.certificate_generator.completed?
+      errors = []
+
+      response_set.responses_with_url_type.each do |response|
+        if response.error
+          errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
+        end
+      end
+
+      response_set.survey.questions.where(is_mandatory: true).each do |question|
+        response = response_set.responses.detect {|r| r.question_id == question.id}
+
+        if !response || response.empty?
+          errors.push("The question '#{question.reference_identifier}' is mandatory")
+        end
+      end
+
+      certificate_url = certificate.url if certificate
+
+      {success: true, dataset_id: response_set.dataset_id, certificate_url: certificate_url, published: response_set.published?, owner_email: response_set.user.email, errors: errors}
+    else
+      {success: "pending", dataset_id: self.id, dataset_url: self.api_url}
+    end
+  end
+
+  def api_url
+    Rails.application.routes.url_helpers.dataset_url(self, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host], format: :json)
+  end
+
 end
