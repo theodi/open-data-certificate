@@ -104,6 +104,9 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/published_certificates.csv' => 'main#published_certificates'
   get 'status/all_certificates.csv' => 'main#all_certificates'
 
+  # Admin section
+  get 'admin' => 'admin#index'
+
   root :to => 'main#home'
 
   # Certificate legacy redirects
