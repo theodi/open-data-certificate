@@ -7,6 +7,13 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    @published_count = @campaign.certificate_generators.inject(0) do |total, cert| 
+      if cert.certificate.published? 
+        total += 1 
+      else
+        total
+      end
+    end
   end
 
   private
