@@ -304,10 +304,14 @@ class ResponseSet < ActiveRecord::Base
     errors.length == 0
   end
 
-  def all_mandatory_questions_complete?
+  def uncompleted_mandatory_questions_count
     mandatory_question_ids = triggered_mandatory_questions.map(&:id)
     responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
-    (mandatory_question_ids - responded_to_question_ids).blank?
+    (mandatory_question_ids - responded_to_question_ids).count
+  end
+
+  def all_mandatory_questions_complete?
+    uncompleted_mandatory_questions_count == 0
   end
 
   def attained_level
