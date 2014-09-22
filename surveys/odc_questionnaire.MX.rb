@@ -2,20 +2,20 @@ survey 'MX',
   :full_title => 'Mexico',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p><p>Al responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p><p>No es necesario reponder todas las preguntas para obtener el certificado. Responda solamente las que pueda.</p>' do
+  :description => '<p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que usted puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p><p>El responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p><p>No es necesario reponder todas las preguntas para obtener el certificado. Responda solamente las que pueda.</p>' do
 
   translations :en => :default
   section_general 'Información General',
     :description => '',
     :display_header => false do
 
-    q_dataTitle '¿Cómo se llaman estos datos?',
+    q_dataTitle 'Coloque el título de la base de datos',
       :discussion_topic => :dataTitle,
-      :help_text => 'Las personas ven el nombre de los datos abiertos en una lista con otros similares, por lo que deben ser lo menos ambiguo y más descriptivo posible en esta pequeña caja, para que ellos identifiquen rápidamente lo qué la hace única.',
+      :help_text => 'Las personas ven el nombre de la base de datos abiertos en una lista con otros similares, por lo que debe ser lo menos ambiguo y más descriptivo posible. De manera que ellos identifiquen rápidamente lo que la hace única.',
       :required => :required
-    a_1 'Título de datos',
+    a_1 'Título de base de datos',
       :string,
-      :placeholder => 'Título de datos',
+      :placeholder => 'Título de base de datos',
       :required => :required
 
     q_documentationUrl '¿Dónde se describe?',
@@ -43,39 +43,39 @@ survey 'MX',
     condition_A :q_releaseType, '==', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisher '¿Quién publica estos datos?',
+    q_publisher 'Coloque el nombre de quién publica los datos',
       :discussion_topic => :publisher,
       :display_on_certificate => true,
       :text_as_statement => 'Estos datos son publicados por',
-      :help_text => 'De el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que los este haciendo en nombre de alguien más.',
+      :help_text => 'Escriba el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que lo este haciendo en nombre de alguien más.',
       :required => :required
-    a_1 'Editor de datos',
+    a_1 'Publicador de datos',
       :string,
-      :placeholder => 'Editor de datos',
+      :placeholder => 'Publicador de datos',
       :required => :required
 
-    q_publisherUrl '¿En qué página web fueron publicados los datos?',
+    q_publisherUrl '¿En qué página web se publicaron los datos?',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Estos datos son publicados en',
-      :help_text => 'Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización, incluso si las personas dan diferentes nombres.'
+      :help_text => 'Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización; incluso si las personas registran diferentes nombres.'
     a_1 'URL de quien publica',
       :string,
       :input_type => :url,
       :placeholder => 'URL de quien publica'
 
-    q_releaseType '¿Qué tipo de publicación es esta?',
+    q_releaseType '¿De qué tipo de publicación se trata?',
       :discussion_topic => :releaseType,
       :pick => :one,
       :required => :required
-    a_oneoff 'Un lanzamientoúnico de un solo conjunto de datos',
-      :help_text => 'Este es un archivo único y usted actualmente no planea publicar archivos similares en el futuro.'
-    a_collection 'Un lanzamiento unico de varios conjuntos de datos relacionadas.',
-      :help_text => 'Esta es una colección de archivos relacionados sobre los mismos datos y usted actualmente no planea publicar colecciones similares en el futuro.'
+    a_oneoff 'Un lanzamiento único de un solo conjunto de datos',
+      :help_text => 'Este es un archivo único y usted, actualmente, no planea publicar archivos similares en el futuro.'
+    a_collection 'Un lanzamiento único de varios conjuntos de datos relacionados.',
+      :help_text => 'Esta es una colección de archivos relacionados sobre los mismos datos y usted, actualmente, no planea publicar colecciones similares en el futuro.'
     a_series 'Una publicación periódica de series de conjuntos de datos relacionadas.',
       :help_text => 'Esta es una secuencia de conjuntos de datos con actualizaciones periódicas planeadas para el futuro.'
     a_service 'Un servicio o API para acceder a los datos abiertos.',
-      :help_text => 'Este es un servicio web en vivo que expone los datos a los programadores mediante una interfaz que ellos puedan consultar.'
+      :help_text => 'Este es un servicio web en vivo que expone los datos a los programadores, mediante una interfaz que ellos puedan consultar.'
 
   end
 
@@ -88,11 +88,11 @@ survey 'MX',
 
     q_publisherRights '¿Sus derechos le permiten publicar estos datos como datos abiertos?',
       :discussion_topic => :mx_publisherRights,
-      :help_text => 'Si su organización no es el creador original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos.',
+      :help_text => 'Si su organización no es la creadora original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'Si. Sus derechos le permiten publicar estos datos como datos abiertos.',
+    a_yes 'Sí. Sus derechos le permiten publicar estos datos como datos abiertos.',
       :requirement => ['standard_1']
     a_no 'No. No tiene los derechos necesarios para publicar estos datos como datos abiertos.'
     a_unsure 'No está seguro de contar con los derechos necesarios para publicar estos datos como datos abiertos.'
@@ -316,21 +316,21 @@ survey 'MX',
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
     label_group_3 'Licenciamiento',
-      :help_text => 'Como autoriza al público a usar estos datos',
+      :help_text => '¿Cómo autoriza al público a usar estos datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_copyrightURL '¿dónde ha publicado la declaración sobre derechos para este conjunto de datos?',
+    q_copyrightURL '¿En dónde publicó la declaración sobre derechos para este conjunto de datos?',
       :discussion_topic => :mx_copyrightURL,
       :display_on_certificate => true,
       :text_as_statement => 'La declaración sobre derechos está en',
-      :help_text => 'Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda que es lo que puede y que es lo que no puede hacer con los datos.'
+      :help_text => 'Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda qué es lo que puede y qué es lo que no puede hacer con los datos.'
     a_1 'URL de la declaración sobre derechos',
       :string,
       :input_type => :url,
       :placeholder => 'URL de la declaración sobre derechos',
       :requirement => ['pilot_4']
 
-    label_pilot_4 'Deberái publicar una declaración de datos que detalle los derechos de autor, licenciamiento y la manera en que el público deba reconocer y citar la autoría de los datos.',
+    label_pilot_4 'Debería publicar una declaración de derechos que detalle los derechos de autor, licenciamiento y la manera en que el público debe reconocer y citar la autoría de los datos.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_4'
     dependency :rule => 'A'
@@ -340,26 +340,22 @@ survey 'MX',
       :discussion_topic => :mx_dataLicence,
       :display_on_certificate => true,
       :text_as_statement => 'Los datos están disponibles bajo',
-      :help_text => 'Recuerde que todo aquél que realice un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos conteidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes; Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione "No aplicable"',
+      :help_text => 'Recuerde que todo aquél que realiza un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos contenidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia, la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes. Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione "No aplicable"',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Reconocimiento Creative Commons',
-      :text_as_statement => 'Reconocimiento Creative Commons'
-    a_cc_by_sa 'Reconocimiento-Compartir igual Creative Commons',
-      :text_as_statement => 'Reconocimiento-Compartir igual Creative Commons'
-    a_cc_zero 'CCZero Creative Commons',
-      :text_as_statement => 'CCZero Creative Commons'
-    a_odc_by 'Licencia de reconocimento Open Data Commons',
+    a_cc_by 'Licencia de reconocimento Open Data Commons',
       :text_as_statement => 'Licencia de reconocimento Open Data Commons'
-    a_odc_odbl 'Licencia de base de datos abierta Open Data Commons',
+    a_cc_by_sa 'Licencia de base de datos abierta Open Data Commons',
       :text_as_statement => 'Licencia de base de datos abierta Open Data Commons'
-    a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
+    a_cc_zero 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
-    a_na 'No aplicable',
-      :text_as_statement => ''
-    a_other 'Otros…',
-      :text_as_statement => ''
+    a_odc_by 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
+    a_odc_odbl 'No aplicable',
+      :text_as_statement => 'No aplicable'
+    a_odc_pddl 'Otros…',
+      :text_as_statement => 'Otros…'
 
     q_dataNotApplicable '¿Por qué no aplica ninguna licencia a estos datos?',
       :discussion_topic => :mx_dataNotApplicable,
@@ -459,7 +455,7 @@ survey 'MX',
     condition_A :q_dataLicence, '==', :a_other
     condition_B :q_otherDataLicenceOpen, '==', :a_false
 
-    q_contentRights '¿Algunos de los datos está sujeto a derecho de autor?',
+    q_contentRights '¿Existe algún tipo de derehco de autor en estos datos?',
       :discussion_topic => :mx_contentRights,
       :display_on_certificate => true,
       :text_as_statement => 'Existen',
@@ -467,13 +463,13 @@ survey 'MX',
       :required => :required
     a_norights 'No, los datos solamente contienen hechos y cifras',
       :text_as_statement => 'ningún derecho sobre el contenido de los datos',
-      :help_text => 'Los hechos no están sujetos a derecho de autor. Si los datos no abarcan contenido creado a partir de un esfuerzo intelectual, entonces no están sujetos a derechos de autor.'
-    a_samerights 'si y los derechos le corresopnden a una sola persona u organización',
+      :help_text => 'Los hechos no están sujetos a derecho de autor. Cuando los datos no abarcan contenido creado a partir de un esfuerzo intelectual, no están sujetos a derechos de autor.'
+    a_samerights 'Sí y los derechos le corresopnden a una sola persona u organización',
       :text_as_statement => '',
       :help_text => 'Elija esta opción si el contenido de los datos fue creado o cedido a una misma persona u organización'
-    a_mixedrights 'si y los derechos le corresponden a diferentes personas u organizaciones',
+    a_mixedrights 'Sí y los derechos le corresponden a diferentes personas u organizaciones',
       :text_as_statement => '',
-      :help_text => 'En algunos casos, los derechos sobre diferentes registros le corresponden a diferentes personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos.'
+      :help_text => 'En algunos casos, los derechos sobre diferentes registros le corresponden a diversas personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos.'
 
     q_explicitWaiver '¿Los datos y su contenido están marcados como del dominio público?',
       :discussion_topic => :mx_explicitWaiver,
@@ -727,12 +723,12 @@ survey 'MX',
     a_not_personal 'No, los datos no tratan sobre personas o sus actividades',
       :text_as_statement => 'Ningún dato sobre individuos',
       :help_text => 'Recuerde que las personas pueden ser identificadas aún cuando los datos no estén directamente relacionados con ellas. Por ejemplo, los datos sobre flujo de tránsito combinados con la costumbre de transporte de una persona, podría identificar a la persona.'
-    a_summarised 'No, los datos han sido dissociados y anonimizados agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados.',
+    a_summarised 'No, los datos han sido disociados y anonimizados, agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados.',
       :text_as_statement => 'datos agregados',
-      :help_text => 'Establecer controles sobre revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de dtos'
-    a_individual 'Si, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo.',
+      :help_text => 'Establecer controles sobre la revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de datos'
+    a_individual 'Sí, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo.',
       :text_as_statement => 'información que pudiera identificar individuos',
-      :help_text => 'Algunos datos se refieren a información pública sobre individuos como es el caso del pago de contribuciones o gastos públicos.'
+      :help_text => 'Algunos datos se refieren a información pública sobre individuos, como es el caso del pago de contribuciones o gastos públicos.'
 
     q_statisticalAnonAudited 'Su proceso de anonimización ¿ha sido auditado por un auditor independiente?',
       :discussion_topic => :mx_statisticalAnonAudited,
@@ -926,15 +922,15 @@ survey 'MX',
   end
 
   section_practical 'Información práctica',
-    :description => 'Facilidad de localización, precisión, calidad y garantías.' do
+    :description => 'Facilidad de localización, precisión, calidad y garantía' do
 
     label_group_6 'Facilidad de localización.',
-      :help_text => '¿Cómo ayuda usted a las personas a encontrar sus datos?',
+      :help_text => '¿Cómo ayuda a las personas a encontrar sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_onWebsite '¿Existe un enlace hacia estos datos abiertos, desde su sitio web principal?',
+    q_onWebsite '¿Existe un enlace hacia estos datos abiertos desde su sitio web principal?',
       :discussion_topic => :onWebsite,
-      :help_text => 'Los datos pueden ser más fácilmente encontrados si cuentan con un enlace desde su sitio web principal.',
+      :help_text => 'Los datos pueden ser encontrados más fácilmente si cuentan con un enlace desde su sitio web principal.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -966,9 +962,9 @@ survey 'MX',
 
     end
 
-    q_listed '¿Están sus datos enlistados dentro de alguna colección?',
+    q_listed '¿Están sus datos enlistados dentro de alguna colección de bases de datos?',
       :discussion_topic => :listed,
-      :help_text => 'Los datos son más fácilmente encontrados por las personas cuando están en catálogos de datos relevantes, por ejemplo académicos, del sector público de salud; o cuando aparecen resultados de búsqueda relevantes.',
+      :help_text => 'Los datos son encontrados más fácilmente por las personas cuando están en catálogos de datos relevantes. Por ejemplo, académicos, del sector público, de salud; o cuando aparecen en resultados de investigaciones relevantes.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1000,9 +996,9 @@ survey 'MX',
 
     end
 
-    q_referenced '¿Son estos datos referidos desde sus propias publicaciones?',
+    q_referenced '¿Son estos datos referidos en publicaciones suyas?',
       :discussion_topic => :referenced,
-      :help_text => 'Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs, usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor.',
+      :help_text => 'Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs; usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1346,7 +1342,7 @@ survey 'MX',
       :help_text => '¿Cuántas personas pueden confiar en sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_qualityUrl '¿En dónde documenta usted asuntos sobre la calidad de estos datos?',
+    q_qualityUrl '¿En dónde documenta cuestiones sobre la calidad de los datos?',
       :discussion_topic => :qualityUrl,
       :display_on_certificate => true,
       :text_as_statement => 'La calidad de los datos está documentada en',
@@ -1367,7 +1363,7 @@ survey 'MX',
       :discussion_topic => :qualityControlUrl,
       :display_on_certificate => true,
       :text_as_statement => 'El proceso de control de calidad se describe en',
-      :help_text => 'Ofrezca un URL para que las personas puedan conocer sobre los chequeos en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos.'
+      :help_text => 'Ofrezca un URL para que las personas puedan conocer sobre las revisiones en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos.'
     a_1 'URL de la descripción del proceso de control de calidad',
       :string,
       :input_type => :url,
@@ -1381,14 +1377,14 @@ survey 'MX',
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_group_9 'Garantías',
-      :help_text => '¿Cuántas personas pueden depender de sus datos, disponibilidad?',
+      :help_text => '¿Cuántas personas pueden depender de la disponibilidad de sus datos?',
       :customer_renderer => '/partials/fieldset'
 
     q_backups '¿Realiza usted respaldos fuera del sitio?',
       :discussion_topic => :backups,
       :display_on_certificate => true,
       :text_as_statement => 'Los datos están',
-      :help_text => 'El realizar respaldos fuera del sitio regulares ayuda a asegurar que los datos no se perderán en caso de un accidente.',
+      :help_text => 'El realizar respaldos regualres fuera del sitio ayuda a asegurar que los datos no se perderán en caso de un accidente.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1449,13 +1445,13 @@ survey 'MX',
       :pick => :one
     a_experimental 'Podrían desaparecer en cualquier momento',
       :text_as_statement => 'Experimentalmente y podrían desaparecer en cualquier tiempo'
-    a_short 'Está disponible experimentalmente pero debe estarlo más o menos por otro año',
+    a_short 'Están disponibles de manera experimental, pero deben estarlo aproximadamente por otro año',
       :text_as_statement => 'Experimentalmente más o menos por otro año',
       :requirement => ['pilot_11']
-    a_medium 'Está en sus planes a mediano plazo por lo deberían estar más o menos un par de años',
+    a_medium 'Están en un plan a mediano plazo, por lo que deberían seguir aproximadamente por un par de años',
       :text_as_statement => 'Por lo menos por un par de años',
       :requirement => ['standard_25']
-    a_long 'Es parte de sus operaciones día a día por lo que estarán publicados por un largo tiempo',
+    a_long 'Es parte de sus operaciones día a día, por lo que estarán publicados por un largo tiempo',
       :text_as_statement => 'Por un largo tiempo',
       :requirement => ['exemplar_10']
 
@@ -1745,7 +1741,7 @@ survey 'MX',
       :help_text => '¿Cómo pueden las personas trabajar con sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_machineReadable '¿Los datos son legibles por máquina?',
+    q_machineReadable '¿Los datos son legibles para una computadora?',
       :discussion_topic => :machineReadable,
       :display_on_certificate => true,
       :text_as_statement => 'Estos datos son',
@@ -1763,11 +1759,11 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
 
-    q_openStandard '¿Están estos datos en un formato estándar de datos abiertos?',
+    q_openStandard '¿Están los datos en un formato estándar de datos abiertos?',
       :discussion_topic => :openStandard,
       :display_on_certificate => true,
       :text_as_statement => 'El formato de estos datos es',
-      :help_text => 'Los estándares abiertos con creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos.',
+      :help_text => 'Los estándares abiertos son creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual, es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'no',
@@ -1786,13 +1782,13 @@ survey 'MX',
       :discussion_topic => :dataType,
       :pick => :any
     a_documents 'Documentos de lectura humana',
-      :help_text => 'Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para si, pero son en su mayoría texto.'
+      :help_text => 'Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para sí, pero son en su mayoría texto.'
     a_statistical 'Datos estadísticos como cuentas, promedios y porcentajes',
-      :help_text => 'Elija eso si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Como resultados de censo, información del flujo vehicular o estadísticas de crímenes, por ejemplo.'
+      :help_text => 'Elija esto si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Puede tratarse de resultados de censo, información del flujo vehicular o estadísticas de crímenes.'
     a_geographic 'Información geográfica, tales como puntos y límites.',
-      :help_text => 'Elija esto si sus datos pueden trazados en un mapa como puntos, límites o líneas.'
+      :help_text => 'Elija esto si sus datos pueden ser trazados en un mapa como puntos, límites o líneas.'
     a_structured 'Otros tipos de datos estructurados',
-      :help_text => 'Elija esto si sus datos son estructurados en otras maneras. Como detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas.'
+      :help_text => 'Elija esto si sus datos son estructurados en otras maneras. Puede tratarse de detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas.'
 
     q_documentFormat '¿Sus documentos de lectura humana incluyen formatos que?',
       :discussion_topic => :documentFormat,
@@ -1937,7 +1933,7 @@ survey 'MX',
       :discussion_topic => :identifiers,
       :display_on_certificate => true,
       :text_as_statement => 'Los datos incluyen',
-      :help_text => 'Los datos son usualmente acerca de cosas reales como escuelas o caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL',
+      :help_text => 'Los datos son usualmente acerca de cosas reales como escuelas, caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -2053,14 +2049,14 @@ survey 'MX',
     condition_D :q_externalUrls, '==', :a_false
 
     label_group_13 'Confianza',
-      :help_text => '¿Cuánta confianza pueden las personas depositar en sus datos?',
+      :help_text => '¿Cuánto pueden confiar las personas en sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_provenance '¿Usted provee una procedencia de lectura mecánica para sus datos?',
+    q_provenance '¿Usted provee una procedencia legible para computadora de sus datos?',
       :discussion_topic => :provenance,
       :display_on_certificate => true,
       :text_as_statement => 'La procedencia de estos datos es',
-      :help_text => 'Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica porque las personas pueden rastrear cómo han sido manejados.',
+      :help_text => 'Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica, porque las personas pueden rastrear cómo han sido manejados.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no',
@@ -2075,11 +2071,11 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
-    q_digitalCertificate '¿Dónde describe usted cómo pueden las personas verificar que los datos que reciben vienen de usted?',
+    q_digitalCertificate '¿En dónde especifica cómo pueden las personas verificar que los datos que reciben provienen de usted?',
       :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
       :text_as_statement => 'Estos datos pueden ser verificados usando',
-      :help_text => 'Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de checar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados.'
+      :help_text => 'Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de revisar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados.'
     a_1 'URL de proceso de verificación',
       :string,
       :input_type => :url,
@@ -2314,7 +2310,7 @@ survey 'MX',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_rights
 
-    q_technicalDocumentation '¿Dónde está la documentación técnica de los datos?',
+    q_technicalDocumentation '¿En dónde está la documentación técnica de los datos?',
       :discussion_topic => :technicalDocumentation,
       :display_on_certificate => true,
       :text_as_statement => 'La documentación técnica para estos datos está en'
@@ -2330,7 +2326,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_technicalDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_vocabulary '¿Los formatos de datos usan vocabularios o esquemas?',
+    q_vocabulary '¿Los formatos de datos usan vocabularios o esquemas personalizados?',
       :discussion_topic => :vocabulary,
       :help_text => 'Formatos como CSV, JSON, XML o Turtle usan vocabularios o esquemas personalizados que indican qué columnas o propiedades contienen los datos',
       :pick => :one,
@@ -2359,7 +2355,7 @@ survey 'MX',
 
     q_codelists '¿Existe algún código utilizado en estos datos?',
       :discussion_topic => :codelists,
-      :help_text => 'Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades por ejemplo, esto necesita ser explicados a las personas',
+      :help_text => 'Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades, por ejemplo; estos necesitan ser explicados a las personas',
       :pick => :one,
       :required => :standard
     a_false 'no'
@@ -2384,19 +2380,19 @@ survey 'MX',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_16 'Apoyo',
+    label_group_16 'Asistencia',
       :help_text => '¿Cómo se comunica usted con las personas que utilizan sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_contactUrl '¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas acerca de estos datos?',
+    q_contactUrl '¿En dónde pueden las personas encontrar los contactos necesarios para realizar acerca de estos datos?',
       :discussion_topic => :contactUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Encuentre la manera de contactar a alguien sobre estos datos en',
       :help_text => 'Ofrezca un URL a una página que describa cómo las personas pueden contactar a alguien si tienen dudas sobre los datos'
-    a_1 'Documentación de contacto',
+    a_1 'URL de contacto',
       :string,
       :input_type => :url,
-      :placeholder => 'Documentación de contacto',
+      :placeholder => 'URL de contacto',
       :requirement => ['pilot_20']
 
     label_pilot_20 'Usted debería proveer información de contactos para que las personas envíen preguntas sobre sus datos también',
@@ -2405,7 +2401,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_contactUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_improvementsContact '¿Dónde pueden las personas encontrar cómo mejorar la manera en que sus datos son publicados?',
+    q_improvementsContact '¿En dónde pueden las personas encontrar cómo mejorar la forma en que los datos fueron publicados?',
       :discussion_topic => :improvementsContact,
       :display_on_certificate => true,
       :text_as_statement => 'Encuentre cómo sugerir mejoras a una publicación en'
@@ -2421,7 +2417,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataProtectionUrl '¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas sobre la privacidad?',
+    q_dataProtectionUrl '¿En dónde pueden las personas encontrar cómo contactar a alguien para preguntar sobre la privacidad?',
       :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Encuentre a dónde enviar preguntas sobre privacidad'
@@ -2437,7 +2433,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_dataProtectionUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_socialMedia '¿Usted utiliza redes sociales para conectarse con las personas que utilizan sus datos?',
+    q_socialMedia '¿Hace uso redes sociales para conectarse con las personas que utilizan sus datos?',
       :discussion_topic => :socialMedia,
       :pick => :one
     a_false 'no'
@@ -2470,7 +2466,7 @@ survey 'MX',
 
     end
 
-    q_forum '¿Dónde deberían las personas discutir esta base de datos?',
+    q_forum '¿En dónde deberían las personas discutir sobre esta base de datos?',
       :discussion_topic => :forum,
       :display_on_certificate => true,
       :text_as_statement => 'Discuta estos datos en',
@@ -2527,9 +2523,9 @@ survey 'MX',
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_engagementTeam '¿Usted tiene a alguien que activamente construya una comunidad alrededor de estos datos?',
+    q_engagementTeam '¿Tiene usted a alguien que activamente construya una comunidad alrededor de estos datos?',
       :discussion_topic => :engagementTeam,
-      :help_text => 'Un equipo de compromiso comunitario se involucrará a través de redes sociales, blogs, y organizará hackdays o competencias para alentar a las personas a usar los datos',
+      :help_text => 'Un equipo de compromiso comunitario se involucra a través de redes sociales, blogs; organiza hackdays o competencias para alentar a las personas a usar los datos',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
     a_false 'no'
@@ -2556,14 +2552,14 @@ survey 'MX',
       :required => :required
 
     label_group_17 'Servicios',
-      :help_text => '¿Cómo le da usted a las personas acceso a herramientas que necesitan para trabajar con sus datos?',
+      :help_text => '¿Cómo ofrece acceso a herramientas que las personas necesitan para trabajar con sus datos?',
       :customer_renderer => '/partials/fieldset'
 
-    q_libraries '¿Dónde enlista usted herramientas para trabajar con sus datos?',
+    q_libraries '¿En dónde enlista herramientas para trabajar con sus datos?',
       :discussion_topic => :libraries,
       :display_on_certificate => true,
       :text_as_statement => 'Herramientas que ayudan a utilizar estos datos se enlistan en',
-      :help_text => 'De un Ural que enliste las herramientas que usted conoce o recomienda que las personas las utilicen cuando trabajen con sus datos'
+      :help_text => 'Ofrezca un URL que enliste las herramientas que usted conoce o recomienda, de manera que las personas las utilicen cuando trabajen con sus datos'
     a_1 'URL de herramientas',
       :string,
       :input_type => :url,

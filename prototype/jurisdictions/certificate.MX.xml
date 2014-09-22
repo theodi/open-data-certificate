@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <questionnaire version="0.9" status="alpha" jurisdiction="MX" xml:lang="es">
    <help>
-      <p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p>
-      <p>Al responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p>
+      <p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que usted puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p>
+      <p>El responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p>
       <p>No es necesario reponder todas las preguntas para obtener el certificado. Responda solamente las que pueda.</p>
    </help>
    <group id="legal">
@@ -15,7 +15,7 @@
             <label>¿Sus derechos le permiten publicar estos datos como datos abiertos?</label>
             <radioset required="required">
                <option value="yes">
-                  <label>Si. Sus derechos le permiten publicar estos datos como datos abiertos.</label>
+                  <label>Sí. Sus derechos le permiten publicar estos datos como datos abiertos.</label>
                   <requirement level="standard">Debería tener un derecho que le permita publicar estos datos.</requirement>
                </option>
                <option value="no">
@@ -28,7 +28,7 @@
                   <label>Los derechos relacionados con estos datos no están claros o su situación es difícil de determinar.</label>
                </option>
             </radioset>
-            <help>Si su organización no es el creador original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos.</help>
+            <help>Si su organización no es la creadora original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos.</help>
             <if test="this.publisherRights() === 'no'">
                <requirement>Debe tener los derechos para publicar estos datos</requirement>
             </if>
@@ -122,27 +122,27 @@
       </group>
       <group id="licensing">
          <label>Licenciamiento</label>
-         <help>Como autoriza al público a usar estos datos</help>
+         <help>¿Cómo autoriza al público a usar estos datos?</help>
          <question id="copyrightURL" display="La declaración sobre derechos está en">
-            <label>¿dónde ha publicado la declaración sobre derechos para este conjunto de datos?</label>
+            <label>¿En dónde publicó la declaración sobre derechos para este conjunto de datos?</label>
             <input type="url" placeholder="URL de la declaración sobre derechos"/>
-            <help>Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda que es lo que puede y que es lo que no puede hacer con los datos.</help>
-            <requirement level="pilot">Deberái publicar una declaración de datos que detalle los derechos de autor, licenciamiento y la manera en que el público deba reconocer y citar la autoría de los datos.</requirement>
+            <help>Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda qué es lo que puede y qué es lo que no puede hacer con los datos.</help>
+            <requirement level="pilot">Debería publicar una declaración de derechos que detalle los derechos de autor, licenciamiento y la manera en que el público debe reconocer y citar la autoría de los datos.</requirement>
          </question>
          <question id="dataLicence" display="Los datos están disponibles bajo">
             <label>¿Bajo qué licencia puede el público reutilizar los datos?</label>
             <select required="required">
                <option/>
-               <option value="cc-by">Reconocimiento Creative Commons</option>
-               <option value="cc-by-sa">Reconocimiento-Compartir igual Creative Commons</option>
-               <option value="cc-zero">CCZero Creative Commons</option>
-               <option value="odc-by">Licencia de reconocimento Open Data Commons</option>
-               <option value="odc-odbl">Licencia de base de datos abierta Open Data Commons</option>
-               <option value="odc-pddl">Licencia de dedicatoria al dominio público Open Data Commons</option>
-               <option value="na" display="">No aplicable</option>
-               <option value="other" display="">Otros…</option>
+               <option value="cc-by">Licencia de reconocimento Open Data Commons</option>
+               <option value="cc-by-sa">Licencia de base de datos abierta Open Data Commons</option>
+               <option value="cc-zero">Licencia de dedicatoria al dominio público Open Data Commons</option>
+               <option value="odc-by">Creative Commons CCZero</option>
+               <option value="odc-odbl">No aplicable</option>
+               <option value="odc-pddl">Otros…</option>
+               <option value="na" display=""/>
+               <option value="other" display=""/>
             </select>
-            <help>Recuerde que todo aquél que realice un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos conteidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes; Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione "No aplicable"</help>
+            <help>Recuerde que todo aquél que realiza un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos contenidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia, la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes. Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione "No aplicable"</help>
          </question>
          <if test="this.dataLicence() === 'na'">
             <question id="dataNotApplicable"
@@ -204,20 +204,20 @@
             </question>
          </if>
          <question id="contentRights" display="Existen">
-            <label>¿Algunos de los datos está sujeto a derecho de autor?</label>
+            <label>¿Existe algún tipo de derehco de autor en estos datos?</label>
             <radioset required="required">
                <option value="norights"
                        display="ningún derecho sobre el contenido de los datos">
                   <label>No, los datos solamente contienen hechos y cifras</label>
-                  <help>Los hechos no están sujetos a derecho de autor. Si los datos no abarcan contenido creado a partir de un esfuerzo intelectual, entonces no están sujetos a derechos de autor.</help>
+                  <help>Los hechos no están sujetos a derecho de autor. Cuando los datos no abarcan contenido creado a partir de un esfuerzo intelectual, no están sujetos a derechos de autor.</help>
                </option>
                <option value="samerights" display="">
-                  <label>si y los derechos le corresopnden a una sola persona u organización</label>
+                  <label>Sí y los derechos le corresopnden a una sola persona u organización</label>
                   <help>Elija esta opción si el contenido de los datos fue creado o cedido a una misma persona u organización</help>
                </option>
                <option value="mixedrights" display="">
-                  <label>si y los derechos le corresponden a diferentes personas u organizaciones</label>
-                  <help>En algunos casos, los derechos sobre diferentes registros le corresponden a diferentes personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos.</help>
+                  <label>Sí y los derechos le corresponden a diferentes personas u organizaciones</label>
+                  <help>En algunos casos, los derechos sobre diferentes registros le corresponden a diversas personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos.</help>
                </option>
             </radioset>
          </question>
@@ -364,13 +364,13 @@
                   <help>Recuerde que las personas pueden ser identificadas aún cuando los datos no estén directamente relacionados con ellas. Por ejemplo, los datos sobre flujo de tránsito combinados con la costumbre de transporte de una persona, podría identificar a la persona.</help>
                </option>
                <option value="summarised" display="datos agregados">
-                  <label>No, los datos han sido dissociados y anonimizados agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados.</label>
-                  <help>Establecer controles sobre revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de dtos</help>
+                  <label>No, los datos han sido disociados y anonimizados, agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados.</label>
+                  <help>Establecer controles sobre la revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de datos</help>
                </option>
                <option value="individual"
                        display="información que pudiera identificar individuos">
-                  <label>Si, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo.</label>
-                  <help>Algunos datos se refieren a información pública sobre individuos como es el caso del pago de contribuciones o gastos públicos.</help>
+                  <label>Sí, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo.</label>
+                  <help>Algunos datos se refieren a información pública sobre individuos, como es el caso del pago de contribuciones o gastos públicos.</help>
                </option>
             </radioset>
          </question>

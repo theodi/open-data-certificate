@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.7" xml:lang="es">
+<questionnaire version="0.7" xml:lang="en">
    <levels>
       <level id="basic">Un comienzo fantástico en los pasos básicos para la publicación de datos abiertos. Se requiere mucho para llegar aquí.</level>
       <level id="pilot">Existe un esfuerzo extra para apoyar y promover la retroalimentación de las personas que usan estos datos abiertos.</level>
@@ -9,9 +9,9 @@
    <group id="general">
       <label>Información General</label>
       <question id="dataTitle">
-         <label>¿Cómo se llaman estos datos?</label>
-         <input placeholder="Título de datos" required="required"/>
-         <help>Las personas ven el nombre de los datos abiertos en una lista con otros similares, por lo que deben ser lo menos ambiguo y más descriptivo posible en esta pequeña caja, para que ellos identifiquen rápidamente lo qué la hace única.</help>
+         <label>Coloque el título de la base de datos</label>
+         <input placeholder="Título de base de datos" required="required"/>
+         <help>Las personas ven el nombre de la base de datos abiertos en una lista con otros similares, por lo que debe ser lo menos ambiguo y más descriptivo posible. De manera que ellos identifiquen rápidamente lo que la hace única.</help>
       </question>
       <question id="documentationUrl" display="Estos datos se describen como">
          <label>¿Dónde se describe?</label>
@@ -25,25 +25,25 @@
          </if>
       </question>
       <question id="publisher" display="Estos datos son publicados por">
-         <label>¿Quién publica estos datos?</label>
-         <input placeholder="Editor de datos" required="required"/>
-         <help>De el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que los este haciendo en nombre de alguien más.</help>
+         <label>Coloque el nombre de quién publica los datos</label>
+         <input placeholder="Publicador de datos" required="required"/>
+         <help>Escriba el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que lo este haciendo en nombre de alguien más.</help>
       </question>
       <question id="publisherUrl" display="Estos datos son publicados en">
-         <label>¿En qué página web fueron publicados los datos?</label>
+         <label>¿En qué página web se publicaron los datos?</label>
          <input type="url" placeholder="URL de quien publica"/>
-         <help>Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización, incluso si las personas dan diferentes nombres.</help>
+         <help>Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización; incluso si las personas registran diferentes nombres.</help>
       </question>
       <question id="releaseType">
-         <label>¿Qué tipo de publicación es esta?</label>
+         <label>¿De qué tipo de publicación se trata?</label>
          <radioset required="required">
             <option value="oneoff">
-               <label>Un lanzamientoúnico de un solo conjunto de datos</label>
-               <help>Este es un archivo único y usted actualmente no planea publicar archivos similares en el futuro.</help>
+               <label>Un lanzamiento único de un solo conjunto de datos</label>
+               <help>Este es un archivo único y usted, actualmente, no planea publicar archivos similares en el futuro.</help>
             </option>
             <option value="collection">
-               <label>Un lanzamiento unico de varios conjuntos de datos relacionadas.</label>
-               <help>Esta es una colección de archivos relacionados sobre los mismos datos y usted actualmente no planea publicar colecciones similares en el futuro.</help>
+               <label>Un lanzamiento único de varios conjuntos de datos relacionados.</label>
+               <help>Esta es una colección de archivos relacionados sobre los mismos datos y usted, actualmente, no planea publicar colecciones similares en el futuro.</help>
             </option>
             <option value="series">
                <label>Una publicación periódica de series de conjuntos de datos relacionadas.</label>
@@ -51,21 +51,21 @@
             </option>
             <option value="service">
                <label>Un servicio o API para acceder a los datos abiertos.</label>
-               <help>Este es un servicio web en vivo que expone los datos a los programadores mediante una interfaz que ellos puedan consultar.</help>
+               <help>Este es un servicio web en vivo que expone los datos a los programadores, mediante una interfaz que ellos puedan consultar.</help>
             </option>
          </radioset>
       </question>
    </group>
    <group id="practical">
       <label>Información práctica</label>
-      <help>Facilidad de localización, precisión, calidad y garantías.</help>
+      <help>Facilidad de localización, precisión, calidad y garantía</help>
       <group id="findability">
          <label>Facilidad de localización.</label>
-         <help>¿Cómo ayuda usted a las personas a encontrar sus datos?</help>
+         <help>¿Cómo ayuda a las personas a encontrar sus datos?</help>
          <question id="onWebsite">
-            <label>¿Existe un enlace hacia estos datos abiertos, desde su sitio web principal?</label>
+            <label>¿Existe un enlace hacia estos datos abiertos desde su sitio web principal?</label>
             <yesno/>
-            <help>Los datos pueden ser más fácilmente encontrados si cuentan con un enlace desde su sitio web principal.</help>
+            <help>Los datos pueden ser encontrados más fácilmente si cuentan con un enlace desde su sitio web principal.</help>
             <requirement level="standard">Usted debe asegurar que las personas puedan encontrar sus datos desde su sitio web principal, de manera que las personas puedan encontrarlos más fácilmente.</requirement>
          </question>
          <if test="this.onWebsite() === 'true'">
@@ -79,9 +79,9 @@
             </repeat>
          </if>
          <question id="listed">
-            <label>¿Están sus datos enlistados dentro de alguna colección?</label>
+            <label>¿Están sus datos enlistados dentro de alguna colección de bases de datos?</label>
             <yesno/>
-            <help>Los datos son más fácilmente encontrados por las personas cuando están en catálogos de datos relevantes, por ejemplo académicos, del sector público de salud; o cuando aparecen resultados de búsqueda relevantes.</help>
+            <help>Los datos son encontrados más fácilmente por las personas cuando están en catálogos de datos relevantes. Por ejemplo, académicos, del sector público, de salud; o cuando aparecen en resultados de investigaciones relevantes.</help>
             <requirement level="standard">Usted debería asegurar que las personas puedan encontrar sus datos cuando los busquen en lugares que enlistan datos.</requirement>
          </question>
          <if test="this.listed() === 'true'">
@@ -95,9 +95,9 @@
             </repeat>
          </if>
          <question id="referenced">
-            <label>¿Son estos datos referidos desde sus propias publicaciones?</label>
+            <label>¿Son estos datos referidos en publicaciones suyas?</label>
             <yesno/>
-            <help>Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs, usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor.</help>
+            <help>Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs; usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor.</help>
             <requirement level="standard">Usted debería hacer referencia a sus datos desde sus propias publicaciones, para que las personas estén al tanto de su disponibilidad y su contexto.</requirement>
          </question>
          <if test="this.referenced() === 'true'">
@@ -275,7 +275,7 @@
          <label>Calidad</label>
          <help>¿Cuántas personas pueden confiar en sus datos?</help>
          <question id="qualityUrl" display="La calidad de los datos está documentada en">
-            <label>¿En dónde documenta usted asuntos sobre la calidad de estos datos?</label>
+            <label>¿En dónde documenta cuestiones sobre la calidad de los datos?</label>
             <input type="url"
                    placeholder="URL de la documentación de calidad de los datos"/>
             <help>Ofrezca un URL donde las personas puedan informarse sobre la calidad de sus datos. Las personas aceptan que los errores son inevitables, desde un malfuncionamiento del equipo o errores que suceden en la migración de sistemas. Usted debe ser abierto sobre la calidad para que las personas puedan juzgar qué tanto confían en sus datos.</help>
@@ -286,17 +286,17 @@
             <label>¿En dónde se describe su proceso de control de calidad?</label>
             <input type="url"
                    placeholder="URL de la descripción del proceso de control de calidad"/>
-            <help>Ofrezca un URL para que las personas puedan conocer sobre los chequeos en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos.</help>
+            <help>Ofrezca un URL para que las personas puedan conocer sobre las revisiones en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos.</help>
             <requirement level="exemplar">Usted debería documentar su proceso de control de calidad, para que las personas puedan decidir que tanto confían en sus datos.</requirement>
          </question>
       </group>
       <group id="guarantees">
          <label>Garantías</label>
-         <help>¿Cuántas personas pueden depender de sus datos, disponibilidad?</help>
+         <help>¿Cuántas personas pueden depender de la disponibilidad de sus datos?</help>
          <question id="backups" display="Los datos están">
             <label>¿Realiza usted respaldos fuera del sitio?</label>
             <yesno yes="Respaldo fuera del sitio"/>
-            <help>El realizar respaldos fuera del sitio regulares ayuda a asegurar que los datos no se perderán en caso de un accidente.</help>
+            <help>El realizar respaldos regualres fuera del sitio ayuda a asegurar que los datos no se perderán en caso de un accidente.</help>
             <requirement level="standard">Usted debería tener un respaldo fuera de sitio, para que los datos no se pierdan en caso de que un accidente suceda</requirement>
          </question>
          <if test="this.releaseType() === 'service'">
@@ -322,15 +322,15 @@
                   <label>Podrían desaparecer en cualquier momento</label>
                </option>
                <option value="short" display="Experimentalmente más o menos por otro año">
-                  <label>Está disponible experimentalmente pero debe estarlo más o menos por otro año</label>
+                  <label>Están disponibles de manera experimental, pero deben estarlo aproximadamente por otro año</label>
                   <requirement level="pilot">Usted debería garantizar que sus datos estarán disponibles en este formato por lo menos un año, para que las personas pueden decidir que tanto depender en sus datos.</requirement>
                </option>
                <option value="medium" display="Por lo menos por un par de años">
-                  <label>Está en sus planes a mediano plazo por lo deberían estar más o menos un par de años</label>
+                  <label>Están en un plan a mediano plazo, por lo que deberían seguir aproximadamente por un par de años</label>
                   <requirement level="standard">Usted debería garantizar que sus datos estarán disponibles en este formato en plazo mediano, para que las personas puedan decidir que tanto depender en sus datos.</requirement>
                </option>
                <option value="long" display="Por un largo tiempo">
-                  <label>Es parte de sus operaciones día a día por lo que estarán publicados por un largo tiempo</label>
+                  <label>Es parte de sus operaciones día a día, por lo que estarán publicados por un largo tiempo</label>
                   <requirement level="exemplar">Usted debería garantizar que sus datos estarán disponibles en este formato en un largo plazo, para que las personas puedan decidir que tanto depender en sus datos.</requirement>
                </option>
             </radioset>
@@ -486,15 +486,15 @@
          <label>Formatos</label>
          <help>¿Cómo pueden las personas trabajar con sus datos?</help>
          <question id="machineReadable" display="Estos datos son">
-            <label>¿Los datos son legibles por máquina?</label>
+            <label>¿Los datos son legibles para una computadora?</label>
             <yesno yes="Legible por máquinas"/>
             <help>Las personas prefieren formatos de datos en los que sea sencillo para una computadora procesarlos, por rapidez y precisión. Por ejemplo, una fotocopia escaneada de una hoja de cálculo no podrá tener una lectura mecánica pero un archivo CSV sí.</help>
             <requirement level="pilot">Usted debería proveer sus datos en un formato legible por máquinas, para que sea fácil de procesar.</requirement>
          </question>
          <question id="openStandard" display="El formato de estos datos es">
-            <label>¿Están estos datos en un formato estándar de datos abiertos?</label>
+            <label>¿Están los datos en un formato estándar de datos abiertos?</label>
             <yesno yes="Un formato abierto estandar"/>
-            <help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Los estándares abiertos con creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos.</help>
+            <help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Los estándares abiertos son creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual, es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos.</help>
             <requirement level="standard">Usted debería proveer sus datos en un formato abierto estandar, para que las personas puedan usar ampliamente herramientas para procesarlo más fácilmente.</requirement>
          </question>
          <question id="dataType">
@@ -502,19 +502,19 @@
             <checkboxset required="pilot">
                <option value="documents">
                   <label>Documentos de lectura humana</label>
-                  <help>Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para si, pero son en su mayoría texto.</help>
+                  <help>Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para sí, pero son en su mayoría texto.</help>
                </option>
                <option value="statistical">
                   <label>Datos estadísticos como cuentas, promedios y porcentajes</label>
-                  <help>Elija eso si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Como resultados de censo, información del flujo vehicular o estadísticas de crímenes, por ejemplo.</help>
+                  <help>Elija esto si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Puede tratarse de resultados de censo, información del flujo vehicular o estadísticas de crímenes.</help>
                </option>
                <option value="geographic">
                   <label>Información geográfica, tales como puntos y límites.</label>
-                  <help>Elija esto si sus datos pueden trazados en un mapa como puntos, límites o líneas.</help>
+                  <help>Elija esto si sus datos pueden ser trazados en un mapa como puntos, límites o líneas.</help>
                </option>
                <option value="structured">
                   <label>Otros tipos de datos estructurados</label>
-                  <help>Elija esto si sus datos son estructurados en otras maneras. Como detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas.</help>
+                  <help>Elija esto si sus datos son estructurados en otras maneras. Puede tratarse de detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas.</help>
                </option>
             </checkboxset>
          </question>
@@ -610,7 +610,7 @@
          <question id="identifiers" display="Los datos incluyen">
             <label>¿Sus datos utilizan identificadores persistentes?</label>
             <yesno yes="Identificadores persistentes"/>
-            <help>Los datos son usualmente acerca de cosas reales como escuelas o caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL</help>
+            <help>Los datos son usualmente acerca de cosas reales como escuelas, caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL</help>
             <requirement level="standard">Usted debería utilizar identificadores para cosas en sus datos, para que sean fácilmente relacionados con otros datos sobre esas mismas cosas</requirement>
          </question>
          <if test="this.identifiers() === 'true'">
@@ -666,18 +666,18 @@
       </group>
       <group id="trust">
          <label>Confianza</label>
-         <help>¿Cuánta confianza pueden las personas depositar en sus datos?</help>
+         <help>¿Cuánto pueden confiar las personas en sus datos?</help>
          <question id="provenance" display="La procedencia de estos datos es">
-            <label>¿Usted provee una procedencia de lectura mecánica para sus datos?</label>
+            <label>¿Usted provee una procedencia legible para computadora de sus datos?</label>
             <yesno yes="Lectura mecánica"/>
-            <help more="http://www.w3.org/TR/prov-primer/">Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica porque las personas pueden rastrear cómo han sido manejados.</help>
+            <help more="http://www.w3.org/TR/prov-primer/">Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica, porque las personas pueden rastrear cómo han sido manejados.</help>
             <requirement level="exemplar">Usted debería proveer un rastro de procedencia de lectura mecánica sobre sus datos, para que las personas puedan rastrear cómo fueron procesados.</requirement>
          </question>
          <question id="digitalCertificate"
                    display="Estos datos pueden ser verificados usando">
-            <label>¿Dónde describe usted cómo pueden las personas verificar que los datos que reciben vienen de usted?</label>
+            <label>¿En dónde especifica cómo pueden las personas verificar que los datos que reciben provienen de usted?</label>
             <input type="url" placeholder="URL de proceso de verificación"/>
-            <help>Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de checar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados.</help>
+            <help>Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de revisar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados.</help>
             <requirement level="exemplar">Usted debería describir cómo las personas pueden revisar que los datos que reciben son los mismo que usted publica, para que puedan confiar en estos.</requirement>
          </question>
       </group>
@@ -794,12 +794,12 @@
          </if>
          <question id="technicalDocumentation"
                    display="La documentación técnica para estos datos está en">
-            <label>¿Dónde está la documentación técnica de los datos?</label>
+            <label>¿En dónde está la documentación técnica de los datos?</label>
             <input type="url" placeholder="URL de documentación técnica"/>
             <requirement level="pilot">Usted debería proveer documentación técnica para los datos, para que las personas puedan entender cómo usarlos</requirement>
          </question>
          <question id="vocabulary">
-            <label>¿Los formatos de datos usan vocabularios o esquemas?</label>
+            <label>¿Los formatos de datos usan vocabularios o esquemas personalizados?</label>
             <yesno required="standard"/>
             <help>Formatos como CSV, JSON, XML o Turtle usan vocabularios o esquemas personalizados que indican qué columnas o propiedades contienen los datos</help>
          </question>
@@ -814,7 +814,7 @@
          <question id="codelists">
             <label>¿Existe algún código utilizado en estos datos?</label>
             <yesno required="standard"/>
-            <help>Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades por ejemplo, esto necesita ser explicados a las personas</help>
+            <help>Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades, por ejemplo; estos necesitan ser explicados a las personas</help>
          </question>
          <if test="this.codelists() === 'true'">
             <question id="codelistDocumentationUrl"
@@ -826,29 +826,29 @@
          </if>
       </group>
       <group id="support">
-         <label>Apoyo</label>
+         <label>Asistencia</label>
          <help>¿Cómo se comunica usted con las personas que utilizan sus datos?</help>
          <question id="contactUrl"
                    display="Encuentre la manera de contactar a alguien sobre estos datos en">
-            <label>¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas acerca de estos datos?</label>
-            <input type="url" placeholder="Documentación de contacto"/>
+            <label>¿En dónde pueden las personas encontrar los contactos necesarios para realizar acerca de estos datos?</label>
+            <input type="url" placeholder="URL de contacto"/>
             <help>Ofrezca un URL a una página que describa cómo las personas pueden contactar a alguien si tienen dudas sobre los datos</help>
             <requirement level="pilot">Usted debería proveer información de contactos para que las personas envíen preguntas sobre sus datos también</requirement>
          </question>
          <question id="improvementsContact"
                    display="Encuentre cómo sugerir mejoras a una publicación en">
-            <label>¿Dónde pueden las personas encontrar cómo mejorar la manera en que sus datos son publicados?</label>
+            <label>¿En dónde pueden las personas encontrar cómo mejorar la forma en que los datos fueron publicados?</label>
             <input type="url" placeholder="URL de sugerencia de mejoras"/>
             <requirement level="pilot">Usted debería proveer instrucciones acerca de cómo sugerir mejoras a la manera en que usted publica sus datos, para que usted descubra lo que las personas necesitan</requirement>
          </question>
          <question id="dataProtectionUrl"
                    display="Encuentre a dónde enviar preguntas sobre privacidad">
-            <label>¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas sobre la privacidad?</label>
+            <label>¿En dónde pueden las personas encontrar cómo contactar a alguien para preguntar sobre la privacidad?</label>
             <input type="url" placeholder="Documentación de contactos de confidencialidad"/>
             <requirement level="pilot">Usted debería proveer información de contactos para que las personas envíen preguntas sobre la privacidad y la divulgación de detalles personales también</requirement>
          </question>
          <question id="socialMedia">
-            <label>¿Usted utiliza redes sociales para conectarse con las personas que utilizan sus datos?</label>
+            <label>¿Hace uso redes sociales para conectarse con las personas que utilizan sus datos?</label>
             <yesno/>
             <requirement level="standard">Usted debería utilizar redes sociales para llegar a las personas que usan sus datos y descubrir cómo están siendo utilizados sus datos.</requirement>
          </question>
@@ -864,7 +864,7 @@
             </repeat>
          </if>
          <question id="forum" display="Discuta estos datos en">
-            <label>¿Dónde deberían las personas discutir esta base de datos?</label>
+            <label>¿En dónde deberían las personas discutir sobre esta base de datos?</label>
             <input type="url" placeholder="URL de fórums o lista de correos"/>
             <help>De un URL a su fórum o lista de correos donde las personas puedan hablar sobre sus datos</help>
             <requirement level="standard">Usted debería decirle a las personas en dónde pueden discutir sus datos y apoyarse el uno al otro</requirement>
@@ -886,9 +886,9 @@
             </question>
          </if>
          <question id="engagementTeam">
-            <label>¿Usted tiene a alguien que activamente construya una comunidad alrededor de estos datos?</label>
+            <label>¿Tiene usted a alguien que activamente construya una comunidad alrededor de estos datos?</label>
             <yesno/>
-            <help more="http://theodi.org/guide/engaging-reusers">Un equipo de compromiso comunitario se involucrará a través de redes sociales, blogs, y organizará hackdays o competencias para alentar a las personas a usar los datos</help>
+            <help more="http://theodi.org/guide/engaging-reusers">Un equipo de compromiso comunitario se involucra a través de redes sociales, blogs; organiza hackdays o competencias para alentar a las personas a usar los datos</help>
             <requirement level="exemplar">Usted debería construir una comunidad de personas alrededor de sus datos para alentar un amplio uso de sus datos</requirement>
          </question>
          <if test="this.engagementTeam() === 'true'">
@@ -903,12 +903,12 @@
       </group>
       <group id="services">
          <label>Servicios</label>
-         <help>¿Cómo le da usted a las personas acceso a herramientas que necesitan para trabajar con sus datos?</help>
+         <help>¿Cómo ofrece acceso a herramientas que las personas necesitan para trabajar con sus datos?</help>
          <question id="libraries"
                    display="Herramientas que ayudan a utilizar estos datos se enlistan en">
-            <label>¿Dónde enlista usted herramientas para trabajar con sus datos?</label>
+            <label>¿En dónde enlista herramientas para trabajar con sus datos?</label>
             <input type="url" placeholder="URL de herramientas"/>
-            <help>De un Ural que enliste las herramientas que usted conoce o recomienda que las personas las utilicen cuando trabajen con sus datos</help>
+            <help>Ofrezca un URL que enliste las herramientas que usted conoce o recomienda, de manera que las personas las utilicen cuando trabajen con sus datos</help>
             <requirement level="exemplar">Usted debería proveer una lista de bibliotecas de software y otras herramientas de lectura disponible, para que las personas puedan rápidamente trabajar con sus datos.</requirement>
          </question>
       </group>

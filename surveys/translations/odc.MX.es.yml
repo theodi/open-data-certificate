@@ -1,6 +1,6 @@
 title: "MX"
 full_title: "Mexico"
-description: "<p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p><p>Al responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p><p>No es necesario reponder todas las preguntas para obtener el certificado. Responda solamente las que pueda.</p>"
+description: "<p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que usted puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p><p>El responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p><p>No es necesario reponder todas las preguntas para obtener el certificado. Responda solamente las que pueda.</p>"
 survey_sections:
   general:
     title: "Información General"
@@ -9,7 +9,7 @@ survey_sections:
     help_text: "Derechos, licenciamiento y privacidad"
   practical:
     title: "Información práctica"
-    help_text: "Facilidad de localización, precisión, calidad y garantías."
+    help_text: "Facilidad de localización, precisión, calidad y garantía"
   technical:
     title: "Información técnica"
     help_text: "Locaciones, formatos y confianza"
@@ -19,11 +19,11 @@ survey_sections:
 questions:
 # Información General
   dataTitle:
-    text: "¿Cómo se llaman estos datos?"
-    help_text: "Las personas ven el nombre de los datos abiertos en una lista con otros similares, por lo que deben ser lo menos ambiguo y más descriptivo posible en esta pequeña caja, para que ellos identifiquen rápidamente lo qué la hace única."
+    text: "Coloque el título de la base de datos"
+    help_text: "Las personas ven el nombre de la base de datos abiertos en una lista con otros similares, por lo que debe ser lo menos ambiguo y más descriptivo posible. De manera que ellos identifiquen rápidamente lo que la hace única."
     answers:
       a_1:
-        text: "Título de datos"
+        text: "Título de base de datos"
   documentationUrl:
     text: "¿Dónde se describe?"
     text_as_statement: "Estos datos se describen como"
@@ -32,41 +32,41 @@ questions:
       a_1:
         text: "Documentación URL"
   publisher:
-    text: "¿Quién publica estos datos?"
+    text: "Coloque el nombre de quién publica los datos"
     text_as_statement: "Estos datos son publicados por"
-    help_text: "De el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que los este haciendo en nombre de alguien más."
+    help_text: "Escriba el nombre de la organización que publica estos datos. Es probable que sea para quien usted trabaja, a menos que lo este haciendo en nombre de alguien más."
     answers:
       a_1:
-        text: "Editor de datos"
+        text: "Publicador de datos"
   publisherUrl:
-    text: "¿En qué página web fueron publicados los datos?"
+    text: "¿En qué página web se publicaron los datos?"
     text_as_statement: "Estos datos son publicados en"
-    help_text: "Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización, incluso si las personas dan diferentes nombres."
+    help_text: "Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización; incluso si las personas registran diferentes nombres."
     answers:
       a_1:
         text: "URL de quien publica"
   releaseType:
-    text: "¿Qué tipo de publicación es esta?"
+    text: "¿De qué tipo de publicación se trata?"
     answers:
       oneoff:
-        text: "Un lanzamientoúnico de un solo conjunto de datos"
-        help_text: "Este es un archivo único y usted actualmente no planea publicar archivos similares en el futuro."
+        text: "Un lanzamiento único de un solo conjunto de datos"
+        help_text: "Este es un archivo único y usted, actualmente, no planea publicar archivos similares en el futuro."
       collection:
-        text: "Un lanzamiento unico de varios conjuntos de datos relacionadas."
-        help_text: "Esta es una colección de archivos relacionados sobre los mismos datos y usted actualmente no planea publicar colecciones similares en el futuro."
+        text: "Un lanzamiento único de varios conjuntos de datos relacionados."
+        help_text: "Esta es una colección de archivos relacionados sobre los mismos datos y usted, actualmente, no planea publicar colecciones similares en el futuro."
       series:
         text: "Una publicación periódica de series de conjuntos de datos relacionadas."
         help_text: "Esta es una secuencia de conjuntos de datos con actualizaciones periódicas planeadas para el futuro."
       service:
         text: "Un servicio o API para acceder a los datos abiertos."
-        help_text: "Este es un servicio web en vivo que expone los datos a los programadores mediante una interfaz que ellos puedan consultar."
+        help_text: "Este es un servicio web en vivo que expone los datos a los programadores, mediante una interfaz que ellos puedan consultar."
 # Información legal
   publisherRights:
     text: "¿Sus derechos le permiten publicar estos datos como datos abiertos?"
-    help_text: "Si su organización no es el creador original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos."
+    help_text: "Si su organización no es la creadora original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos."
     answers:
       yes:
-        text: "Si. Sus derechos le permiten publicar estos datos como datos abiertos."
+        text: "Sí. Sus derechos le permiten publicar estos datos como datos abiertos."
       no:
         text: "No. No tiene los derechos necesarios para publicar estos datos como datos abiertos."
       unsure:
@@ -163,40 +163,40 @@ questions:
         text: yes
         text_as_statement: "datos legibles por máquina sobre el origen de los datos"
   copyrightURL:
-    text: "¿dónde ha publicado la declaración sobre derechos para este conjunto de datos?"
+    text: "¿En dónde publicó la declaración sobre derechos para este conjunto de datos?"
     text_as_statement: "La declaración sobre derechos está en"
-    help_text: "Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda que es lo que puede y que es lo que no puede hacer con los datos."
+    help_text: "Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda qué es lo que puede y qué es lo que no puede hacer con los datos."
     answers:
       a_1:
         text: "URL de la declaración sobre derechos"
   dataLicence:
     text: "¿Bajo qué licencia puede el público reutilizar los datos?"
     text_as_statement: "Los datos están disponibles bajo"
-    help_text: "Recuerde que todo aquél que realice un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos conteidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes; Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione \"No aplicable\""
+    help_text: "Recuerde que todo aquél que realiza un esfuerzo intelectual para crear contenidos, automáticamente obtiene derechos sobre dichos contenidos. La selección y organización de datos (no así de hechos) es una forma de creación. En consecuencia, la gente necesita una licencia o autorización en donde conste y se sustente legalmente que pueden utilizar los datos. A continuación enlistamos las licencias más comunes. Si los datos no están sujetos a derechos, los derechos han caducado o el titular ha renunciado a sus derechos, seleccione \"No aplicable\""
     answers:
       cc_by:
-        text: "Reconocimiento Creative Commons"
-        text_as_statement: "Reconocimiento Creative Commons"
-      cc_by_sa:
-        text: "Reconocimiento-Compartir igual Creative Commons"
-        text_as_statement: "Reconocimiento-Compartir igual Creative Commons"
-      cc_zero:
-        text: "CCZero Creative Commons"
-        text_as_statement: "CCZero Creative Commons"
-      odc_by:
         text: "Licencia de reconocimento Open Data Commons"
         text_as_statement: "Licencia de reconocimento Open Data Commons"
-      odc_odbl:
+      cc_by_sa:
         text: "Licencia de base de datos abierta Open Data Commons"
         text_as_statement: "Licencia de base de datos abierta Open Data Commons"
-      odc_pddl:
+      cc_zero:
         text: "Licencia de dedicatoria al dominio público Open Data Commons"
         text_as_statement: "Licencia de dedicatoria al dominio público Open Data Commons"
-      na:
+      odc_by:
+        text: "Creative Commons CCZero"
+        text_as_statement: "Creative Commons CCZero"
+      odc_odbl:
         text: "No aplicable"
+        text_as_statement: "No aplicable"
+      odc_pddl:
+        text: "Otros…"
+        text_as_statement: "Otros…"
+      na:
+        text: ""
         text_as_statement: ""
       other:
-        text: "Otros…"
+        text: ""
         text_as_statement: ""
   dataNotApplicable:
     text: "¿Por qué no aplica ninguna licencia a estos datos?"
@@ -258,20 +258,20 @@ questions:
       a_true:
         text: yes
   contentRights:
-    text: "¿Algunos de los datos está sujeto a derecho de autor?"
+    text: "¿Existe algún tipo de derehco de autor en estos datos?"
     text_as_statement: "Existen"
     answers:
       norights:
         text: "No, los datos solamente contienen hechos y cifras"
-        help_text: "Los hechos no están sujetos a derecho de autor. Si los datos no abarcan contenido creado a partir de un esfuerzo intelectual, entonces no están sujetos a derechos de autor."
+        help_text: "Los hechos no están sujetos a derecho de autor. Cuando los datos no abarcan contenido creado a partir de un esfuerzo intelectual, no están sujetos a derechos de autor."
         text_as_statement: "ningún derecho sobre el contenido de los datos"
       samerights:
-        text: "si y los derechos le corresopnden a una sola persona u organización"
+        text: "Sí y los derechos le corresopnden a una sola persona u organización"
         help_text: "Elija esta opción si el contenido de los datos fue creado o cedido a una misma persona u organización"
         text_as_statement: ""
       mixedrights:
-        text: "si y los derechos le corresponden a diferentes personas u organizaciones"
-        help_text: "En algunos casos, los derechos sobre diferentes registros le corresponden a diferentes personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos."
+        text: "Sí y los derechos le corresponden a diferentes personas u organizaciones"
+        help_text: "En algunos casos, los derechos sobre diferentes registros le corresponden a diversas personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos."
         text_as_statement: ""
   explicitWaiver:
     text: "¿Los datos y su contenido están marcados como del dominio público?"
@@ -402,12 +402,12 @@ questions:
         help_text: "Recuerde que las personas pueden ser identificadas aún cuando los datos no estén directamente relacionados con ellas. Por ejemplo, los datos sobre flujo de tránsito combinados con la costumbre de transporte de una persona, podría identificar a la persona."
         text_as_statement: "Ningún dato sobre individuos"
       summarised:
-        text: "No, los datos han sido dissociados y anonimizados agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados."
-        help_text: "Establecer controles sobre revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de dtos"
+        text: "No, los datos han sido disociados y anonimizados, agrupándolos a fin de que los individuos que conforman el grupo no puedan ser identificados."
+        help_text: "Establecer controles sobre la revelación estadística puede contribuir a asegurarse que las personas no puedan ser identificadas en lo individual a partir de la agregación de datos"
         text_as_statement: "datos agregados"
       individual:
-        text: "Si, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo."
-        help_text: "Algunos datos se refieren a información pública sobre individuos como es el caso del pago de contribuciones o gastos públicos."
+        text: "Sí, existe el riesgo de que algunos individuos puedan ser identificados por terceros que tengan acceso a información adicional, por ejemplo."
+        help_text: "Algunos datos se refieren a información pública sobre individuos, como es el caso del pago de contribuciones o gastos públicos."
         text_as_statement: "información que pudiera identificar individuos"
   statisticalAnonAudited:
     text: "Su proceso de anonimización ¿ha sido auditado por un auditor independiente?"
@@ -489,8 +489,8 @@ questions:
         text_as_statement: "auditado por un auditor independiente"
 # Información práctica
   onWebsite:
-    text: "¿Existe un enlace hacia estos datos abiertos, desde su sitio web principal?"
-    help_text: "Los datos pueden ser más fácilmente encontrados si cuentan con un enlace desde su sitio web principal."
+    text: "¿Existe un enlace hacia estos datos abiertos desde su sitio web principal?"
+    help_text: "Los datos pueden ser encontrados más fácilmente si cuentan con un enlace desde su sitio web principal."
     answers:
       a_false:
         text: no
@@ -504,8 +504,8 @@ questions:
       a_1:
         text: "URL de la página web"
   listed:
-    text: "¿Están sus datos enlistados dentro de alguna colección?"
-    help_text: "Los datos son más fácilmente encontrados por las personas cuando están en catálogos de datos relevantes, por ejemplo académicos, del sector público de salud; o cuando aparecen resultados de búsqueda relevantes."
+    text: "¿Están sus datos enlistados dentro de alguna colección de bases de datos?"
+    help_text: "Los datos son encontrados más fácilmente por las personas cuando están en catálogos de datos relevantes. Por ejemplo, académicos, del sector público, de salud; o cuando aparecen en resultados de investigaciones relevantes."
     answers:
       a_false:
         text: no
@@ -519,8 +519,8 @@ questions:
       a_1:
         text: "URL del listado"
   referenced:
-    text: "¿Son estos datos referidos desde sus propias publicaciones?"
-    help_text: "Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs, usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor."
+    text: "¿Son estos datos referidos en publicaciones suyas?"
+    help_text: "Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs; usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor."
     answers:
       a_false:
         text: no
@@ -672,7 +672,7 @@ questions:
         text: yes
         text_as_statement: "Corregido"
   qualityUrl:
-    text: "¿En dónde documenta usted asuntos sobre la calidad de estos datos?"
+    text: "¿En dónde documenta cuestiones sobre la calidad de los datos?"
     text_as_statement: "La calidad de los datos está documentada en"
     help_text: "Ofrezca un URL donde las personas puedan informarse sobre la calidad de sus datos. Las personas aceptan que los errores son inevitables, desde un malfuncionamiento del equipo o errores que suceden en la migración de sistemas. Usted debe ser abierto sobre la calidad para que las personas puedan juzgar qué tanto confían en sus datos."
     answers:
@@ -681,14 +681,14 @@ questions:
   qualityControlUrl:
     text: "¿En dónde se describe su proceso de control de calidad?"
     text_as_statement: "El proceso de control de calidad se describe en"
-    help_text: "Ofrezca un URL para que las personas puedan conocer sobre los chequeos en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos."
+    help_text: "Ofrezca un URL para que las personas puedan conocer sobre las revisiones en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos."
     answers:
       a_1:
         text: "URL de la descripción del proceso de control de calidad"
   backups:
     text: "¿Realiza usted respaldos fuera del sitio?"
     text_as_statement: "Los datos están"
-    help_text: "El realizar respaldos fuera del sitio regulares ayuda a asegurar que los datos no se perderán en caso de un accidente."
+    help_text: "El realizar respaldos regualres fuera del sitio ayuda a asegurar que los datos no se perderán en caso de un accidente."
     answers:
       a_false:
         text: no
@@ -718,13 +718,13 @@ questions:
         text: "Podrían desaparecer en cualquier momento"
         text_as_statement: "Experimentalmente y podrían desaparecer en cualquier tiempo"
       short:
-        text: "Está disponible experimentalmente pero debe estarlo más o menos por otro año"
+        text: "Están disponibles de manera experimental, pero deben estarlo aproximadamente por otro año"
         text_as_statement: "Experimentalmente más o menos por otro año"
       medium:
-        text: "Está en sus planes a mediano plazo por lo deberían estar más o menos un par de años"
+        text: "Están en un plan a mediano plazo, por lo que deberían seguir aproximadamente por un par de años"
         text_as_statement: "Por lo menos por un par de años"
       long:
-        text: "Es parte de sus operaciones día a día por lo que estarán publicados por un largo tiempo"
+        text: "Es parte de sus operaciones día a día, por lo que estarán publicados por un largo tiempo"
         text_as_statement: "Por un largo tiempo"
 # Información técnica
   datasetUrl:
@@ -815,7 +815,7 @@ questions:
       a_1:
         text: "URL de fuente de cambios"
   machineReadable:
-    text: "¿Los datos son legibles por máquina?"
+    text: "¿Los datos son legibles para una computadora?"
     text_as_statement: "Estos datos son"
     help_text: "Las personas prefieren formatos de datos en los que sea sencillo para una computadora procesarlos, por rapidez y precisión. Por ejemplo, una fotocopia escaneada de una hoja de cálculo no podrá tener una lectura mecánica pero un archivo CSV sí."
     answers:
@@ -826,9 +826,9 @@ questions:
         text: yes
         text_as_statement: "Legible por máquinas"
   openStandard:
-    text: "¿Están estos datos en un formato estándar de datos abiertos?"
+    text: "¿Están los datos en un formato estándar de datos abiertos?"
     text_as_statement: "El formato de estos datos es"
-    help_text: "Los estándares abiertos con creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos."
+    help_text: "Los estándares abiertos son creados a través de un proceso justo, transparente y colectivo. Cualquiera puede implementarlos y existe mucho apoyo, por lo cual, es más fácil para usted compartir datos con más personas. Por ejemplo, XML, CSV, y JSON son estándares abiertos."
     answers:
       a_false:
         text: no
@@ -841,16 +841,16 @@ questions:
     answers:
       documents:
         text: "Documentos de lectura humana"
-        help_text: "Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para si, pero son en su mayoría texto."
+        help_text: "Elija esto si sus datos son intencionados para consumo humano. Por ejemplo, documentos de políticas, documentos técnicos, reportes y minutas de reuniones. Estos usualmente tienen alguna estructura para sí, pero son en su mayoría texto."
       statistical:
         text: "Datos estadísticos como cuentas, promedios y porcentajes"
-        help_text: "Elija eso si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Como resultados de censo, información del flujo vehicular o estadísticas de crímenes, por ejemplo."
+        help_text: "Elija esto si sus datos son estadísticas o datos numéricos como cuentas, promedios y porcentajes. Puede tratarse de resultados de censo, información del flujo vehicular o estadísticas de crímenes."
       geographic:
         text: "Información geográfica, tales como puntos y límites."
-        help_text: "Elija esto si sus datos pueden trazados en un mapa como puntos, límites o líneas."
+        help_text: "Elija esto si sus datos pueden ser trazados en un mapa como puntos, límites o líneas."
       structured:
         text: "Otros tipos de datos estructurados"
-        help_text: "Elija esto si sus datos son estructurados en otras maneras. Como detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas."
+        help_text: "Elija esto si sus datos son estructurados en otras maneras. Puede tratarse de detalles de eventos, horarios de trenes, información de contacto o cualquier cosa que pueda ser interpretada como datos, y analizada y presentada en múltiples formas."
   documentFormat:
     text: "¿Sus documentos de lectura humana incluyen formatos que?"
     text_as_statement: "Documentos son publicados"
@@ -920,7 +920,7 @@ questions:
   identifiers:
     text: "¿Sus datos utilizan identificadores persistentes?"
     text_as_statement: "Los datos incluyen"
-    help_text: "Los datos son usualmente acerca de cosas reales como escuelas o caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL"
+    help_text: "Los datos son usualmente acerca de cosas reales como escuelas, caminos o usos de un esquema de codificación. Si los datos de diferentes fuentes utilizan el mismo identificador persistente y único para referirse a las mismas cosas, las personas pueden combinar fuentes fácilmente para crear datos más útiles. Los identificadores pueden ser GUIDs, DOIs o URL"
     answers:
       a_false:
         text: no
@@ -978,9 +978,9 @@ questions:
         text: yes
         text_as_statement: "Referencias en estos datos"
   provenance:
-    text: "¿Usted provee una procedencia de lectura mecánica para sus datos?"
+    text: "¿Usted provee una procedencia legible para computadora de sus datos?"
     text_as_statement: "La procedencia de estos datos es"
-    help_text: "Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica porque las personas pueden rastrear cómo han sido manejados."
+    help_text: "Esto es acerca de los orígenes de cómo sus datos fueron creados y procesados antes de ser publicados. Genera confianza en los datos que usted publica, porque las personas pueden rastrear cómo han sido manejados."
     answers:
       a_false:
         text: no
@@ -989,9 +989,9 @@ questions:
         text: yes
         text_as_statement: "Lectura mecánica"
   digitalCertificate:
-    text: "¿Dónde describe usted cómo pueden las personas verificar que los datos que reciben vienen de usted?"
+    text: "¿En dónde especifica cómo pueden las personas verificar que los datos que reciben provienen de usted?"
     text_as_statement: "Estos datos pueden ser verificados usando"
-    help_text: "Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de checar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados."
+    help_text: "Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de revisar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados."
     answers:
       a_1:
         text: "URL de proceso de verificación"
@@ -1075,13 +1075,13 @@ questions:
         text: "Tipos de medios de descarga"
         text_as_statement: "Tipos de medios de descarga"
   technicalDocumentation:
-    text: "¿Dónde está la documentación técnica de los datos?"
+    text: "¿En dónde está la documentación técnica de los datos?"
     text_as_statement: "La documentación técnica para estos datos está en"
     answers:
       a_1:
         text: "URL de documentación técnica"
   vocabulary:
-    text: "¿Los formatos de datos usan vocabularios o esquemas?"
+    text: "¿Los formatos de datos usan vocabularios o esquemas personalizados?"
     help_text: "Formatos como CSV, JSON, XML o Turtle usan vocabularios o esquemas personalizados que indican qué columnas o propiedades contienen los datos"
     answers:
       a_false:
@@ -1096,7 +1096,7 @@ questions:
         text: "URL de la documentación de esquemas"
   codelists:
     text: "¿Existe algún código utilizado en estos datos?"
-    help_text: "Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades por ejemplo, esto necesita ser explicados a las personas"
+    help_text: "Si sus datos utilizan códigos para referirse a cosas como áreas geográficas, categorías de gastos o enfermedades, por ejemplo; estos necesitan ser explicados a las personas"
     answers:
       a_false:
         text: no
@@ -1109,26 +1109,26 @@ questions:
       a_1:
         text: "URL documentación de lista de códigos"
   contactUrl:
-    text: "¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas acerca de estos datos?"
+    text: "¿En dónde pueden las personas encontrar los contactos necesarios para realizar acerca de estos datos?"
     text_as_statement: "Encuentre la manera de contactar a alguien sobre estos datos en"
     help_text: "Ofrezca un URL a una página que describa cómo las personas pueden contactar a alguien si tienen dudas sobre los datos"
     answers:
       a_1:
-        text: "Documentación de contacto"
+        text: "URL de contacto"
   improvementsContact:
-    text: "¿Dónde pueden las personas encontrar cómo mejorar la manera en que sus datos son publicados?"
+    text: "¿En dónde pueden las personas encontrar cómo mejorar la forma en que los datos fueron publicados?"
     text_as_statement: "Encuentre cómo sugerir mejoras a una publicación en"
     answers:
       a_1:
         text: "URL de sugerencia de mejoras"
   dataProtectionUrl:
-    text: "¿Dónde pueden las personas encontrar cómo contactar a alguien con preguntas sobre la privacidad?"
+    text: "¿En dónde pueden las personas encontrar cómo contactar a alguien para preguntar sobre la privacidad?"
     text_as_statement: "Encuentre a dónde enviar preguntas sobre privacidad"
     answers:
       a_1:
         text: "Documentación de contactos de confidencialidad"
   socialMedia:
-    text: "¿Usted utiliza redes sociales para conectarse con las personas que utilizan sus datos?"
+    text: "¿Hace uso redes sociales para conectarse con las personas que utilizan sus datos?"
     answers:
       a_false:
         text: no
@@ -1142,7 +1142,7 @@ questions:
       a_1:
         text: "URL de redes sociales"
   forum:
-    text: "¿Dónde deberían las personas discutir esta base de datos?"
+    text: "¿En dónde deberían las personas discutir sobre esta base de datos?"
     text_as_statement: "Discuta estos datos en"
     help_text: "De un URL a su fórum o lista de correos donde las personas puedan hablar sobre sus datos"
     answers:
@@ -1163,8 +1163,8 @@ questions:
       a_1:
         text: "URL de notificación de correcciones"
   engagementTeam:
-    text: "¿Usted tiene a alguien que activamente construya una comunidad alrededor de estos datos?"
-    help_text: "Un equipo de compromiso comunitario se involucrará a través de redes sociales, blogs, y organizará hackdays o competencias para alentar a las personas a usar los datos"
+    text: "¿Tiene usted a alguien que activamente construya una comunidad alrededor de estos datos?"
+    help_text: "Un equipo de compromiso comunitario se involucra a través de redes sociales, blogs; organiza hackdays o competencias para alentar a las personas a usar los datos"
     answers:
       a_false:
         text: no
@@ -1177,9 +1177,9 @@ questions:
       a_1:
         text: "URL de la página principal del equipo de compromiso comunitario"
   libraries:
-    text: "¿Dónde enlista usted herramientas para trabajar con sus datos?"
+    text: "¿En dónde enlista herramientas para trabajar con sus datos?"
     text_as_statement: "Herramientas que ayudan a utilizar estos datos se enlistan en"
-    help_text: "De un Ural que enliste las herramientas que usted conoce o recomienda que las personas las utilicen cuando trabajen con sus datos"
+    help_text: "Ofrezca un URL que enliste las herramientas que usted conoce o recomienda, de manera que las personas las utilicen cuando trabajen con sus datos"
     answers:
       a_1:
         text: "URL de herramientas"
@@ -1189,13 +1189,13 @@ labels:
     help_text: "Su derecho a compartir los datos con el público."
   licensing:
     title: "Licenciamiento"
-    help_text: "Como autoriza al público a usar estos datos"
+    help_text: "¿Cómo autoriza al público a usar estos datos?"
   privacy:
     title: "Privacidad"
     help_text: "¿Cómo protege la privacidad de la gente?"
   findability:
     title: "Facilidad de localización."
-    help_text: "¿Cómo ayuda usted a las personas a encontrar sus datos?"
+    help_text: "¿Cómo ayuda a las personas a encontrar sus datos?"
   accuracy:
     title: "Precisión"
     help_text: "¿Cómo mantiene sus datos actualizados?"
@@ -1204,7 +1204,7 @@ labels:
     help_text: "¿Cuántas personas pueden confiar en sus datos?"
   guarantees:
     title: "Garantías"
-    help_text: "¿Cuántas personas pueden depender de sus datos, disponibilidad?"
+    help_text: "¿Cuántas personas pueden depender de la disponibilidad de sus datos?"
   locations:
     title: "Locaciones"
     help_text: "¿Cómo pueden las personas acceder a sus datos?"
@@ -1213,16 +1213,16 @@ labels:
     help_text: "¿Cómo pueden las personas trabajar con sus datos?"
   trust:
     title: "Confianza"
-    help_text: "¿Cuánta confianza pueden las personas depositar en sus datos?"
+    help_text: "¿Cuánto pueden confiar las personas en sus datos?"
   documentation:
     title: "Documentación"
     help_text: "¿Cómo ayuda usted a las personas a entender el contexto y contenido de sus datos?"
   support:
-    title: "Apoyo"
+    title: "Asistencia"
     help_text: "¿Cómo se comunica usted con las personas que utilizan sus datos?"
   services:
     title: "Servicios"
-    help_text: "¿Cómo le da usted a las personas acceso a herramientas que necesitan para trabajar con sus datos?"
+    help_text: "¿Cómo ofrece acceso a herramientas que las personas necesitan para trabajar con sus datos?"
 # Información General Requirements
   pilot_1:
     text: "Usted debe tener una página web <sólida> que ofrezca documentación sobre los datos abiertos que usted publica, de manera que la gente entienda su contexto, contenido y utilidad."
@@ -1248,7 +1248,7 @@ labels:
   standard_2:
     text: "Debería incluir información sobre el origen de los datos en formato legible por máquinas."
   pilot_4:
-    text: "Deberái publicar una declaración de datos que detalle los derechos de autor, licenciamiento y la manera en que el público deba reconocer y citar la autoría de los datos."
+    text: "Debería publicar una declaración de derechos que detalle los derechos de autor, licenciamiento y la manera en que el público debe reconocer y citar la autoría de los datos."
   basic_7:
     text: "Debe publicar los datos abiertos bajo una licencia abierta a fin de que la demás gente pueda utilizarlos"
   standard_3:
