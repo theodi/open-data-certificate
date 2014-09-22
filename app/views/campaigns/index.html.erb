@@ -1,0 +1,8 @@
+<h1>Certification Campaigns</h1>
+<ul>
+  <% @campaigns.each do |campaign| %>
+    <li>
+      <%= link_to campaign.name, campaign_path(campaign) %>
+    </li>
+  <% end %>
+</ul>
