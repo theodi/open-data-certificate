@@ -245,6 +245,7 @@ $(document).ready(function($){
 
   $('.survey-intro .submit').click(function() {
     $(this).addClass('disabled');
+    $(this).removeClass('error');
     $(this).popover('show');
     var form = $(this.form);
     $.ajax({
@@ -254,7 +255,15 @@ $(document).ready(function($){
       data: form.serialize(),
       success: function(data) {
         window.location.replace(data.survey_path)
-      }
+      },
+      error: function() {
+        $('.survey-intro .submit').removeClass('disabled')
+        $('.survey-intro .submit').addClass('error')
+        var popover = $('.survey-intro .submit').data('popover')
+        popover.options.content = "Sorry, an error occurred. Please try again."
+        popover.show()
+      },
+      timeout: 120000
     })
     return false;
   });

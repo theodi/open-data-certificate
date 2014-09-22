@@ -28,20 +28,21 @@ class MainController < ApplicationController
 
   def status
     @job_count = Delayed::Job.count
-
-    @counts = {
-      'certificates' => Certificate.counts,
-      'datasets'     => ResponseSet.counts
-    }
-
+    @all = Stat.where(name: 'all').last
+    @published = Stat.where(name: 'published').last
     @head_commit = Rails.root.to_s.split("/").last
 
-    render '/home/status'
+    type = params[:type] || "all"
+
+    respond_to do |format|
+      format.html { render '/home/status' }
+      format.csv { send_data Stat.csv(type), filename: "#{type}.csv", type: "text/csv; header=present; charset=utf-8" }
+    end
   end
 
-  def status_csv
+  def legacy_stats
     csv = Rackspace.fetch_cache("statistics.csv")
-    render text: csv, content_type: "text/csv"
+    send_data csv, filename: "legacy_stats.csv", type: "text/csv; header=present; charset=utf-8"
   end
 
   def status_response_sets

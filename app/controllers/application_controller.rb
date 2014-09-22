@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
-  before_filter(:only => [:status]) { alternate_formats [:csv] }
 
   helper_method :after_sign_in_path_for
 

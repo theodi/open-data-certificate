@@ -59,8 +59,7 @@ class Certificate < ActiveRecord::Base
 
     def expired(surveys)
       self.joins(:response_set)
-        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)))
-        .where(expires_at: nil)
+        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)), expires_at: nil)
     end
   end
 
@@ -195,6 +194,10 @@ class Certificate < ActiveRecord::Base
 
   def completed_questions
     response_set.responses.map(&:question)
+  end
+
+  def url
+    Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host])
   end
 
 end

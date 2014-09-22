@@ -3,7 +3,7 @@ require 'spork'
 
 Spork.prefork do
   require 'coveralls'
-  Coveralls.wear! 'rails'
+  Coveralls.wear_merged! 'rails'
 
   ENV["RAILS_ENV"] = "test"
   require File.expand_path('../../config/environment', __FILE__)
@@ -12,6 +12,7 @@ Spork.prefork do
   require 'factory_girl'
   require 'vcr'
   require 'mocha/setup'
+  require 'webmock/test_unit'
 end
 
 Spork.each_run do
@@ -40,6 +41,11 @@ Spork.each_run do
 
     def assert_attribute_exists(model, attribute)
       assert_respond_to model, attribute
+    end
+
+    def load_custom_survey fname
+      builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
+      builder.parse_file
     end
   end
 

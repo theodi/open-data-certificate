@@ -2,7 +2,7 @@
   - if response_set.kitten_data && response_set.kitten_data.data && !response_set.kitten_data.data[:description].empty?
     %hr.heavy
     %h3= t 'certificate.description'
-    %p.description= response_set.kitten_data.data[:description]
+    %p.description= strip_tags response_set.kitten_data.data[:description]
 
   - response_set.survey.sections.each do |section|
     - questions = section.questions_for_certificate response_set

@@ -38,6 +38,10 @@ group :test do
   gem 'webmock'
   gem 'spork-rails'
   gem 'spork-testunit'
+  gem 'shoulda-context'
+  gem 'timecop'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -96,7 +100,7 @@ gem "devise", "3.0.3"
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'google-analytics-rails'
-gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
+gem 'data_kitten'
 gem 'delayed_job_active_record'
 gem 'linkeddata'
 gem 'rack-linkeddata'
@@ -111,3 +115,4 @@ gem 'newrelic_rpm'
 gem 'google_drive'
 gem 'pry-remote'
 gem 'memoist'
+gem 'validate_url'

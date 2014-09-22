@@ -4,7 +4,7 @@
 
 
 .pull-right
-  Last commit 
+  Last commit
   = link_to @head_commit[0..6] , "https://github.com/theodi/open-data-certificate/commit/#{@head_commit}", class: 'badge'
 
 
@@ -18,25 +18,35 @@
 %hr.heavy
 
 %h1
-  Counts
+  Surveys
 
--@counts.each do |k,count|
-  %h2= k.titleize
-  %ul
-    -count.each do |c,v|
-      %li
-        %strong= c.to_s.humanize
-        -if v.class == Hash
-          %ul
-            -v.each do |l,n|
-              %li
-                %strong= l.to_s.humanize
-                = n
-        -else
-          = v
+%p
+  %strong= pluralize Certificate.counts[:all], 'surveys'
+  started
 
 %hr.heavy
 
+.embedded
+
+  %h1
+    Embedded certificates
+
+  %p
+    %strong= pluralize EmbedStat.all.count, 'certificates'
+    embedded
+
+  %p
+    =link_to "Download list of embedded certificates", embed_stats_path(format: "csv")
+
+  %hr.heavy
+
+%h1 Published datasets with certificates
+
+= render partial: "home/stats", locals: {type: "published"}
+
+%h1 Published and draft datasets with certificates
+
+= render partial: "home/stats", locals: {type: "all"}
+
 %p.data
-  Get historic data as 
-  =alternate_link_buttons(:class => 'badge')
+  = link_to("Download legacy data", "legacy_stats.csv")

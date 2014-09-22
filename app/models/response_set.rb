@@ -1,3 +1,5 @@
+require 'odibot'
+
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
@@ -7,6 +9,8 @@ class ResponseSet < ActiveRecord::Base
 
   # Default title for a response set / dataset
   DEFAULT_TITLE = 'Untitled'
+
+  REF_CHANGES = {"ogl_uk" => "OGL-UK-2.0"}
 
   after_save :update_certificate
   before_save :update_dataset
@@ -193,7 +197,7 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for(:other_dataset_licence_url)
          }
       else
-        licence = Odlifier::License.new(ref.dasherize)
+        licence = Odlifier::License.new(REF_CHANGES[ref] || ref.dasherize)
         @data_licence_determined_from_responses = {
           :title => licence.title,
           :url   => licence.url
@@ -225,7 +229,7 @@ class ResponseSet < ActiveRecord::Base
          }
       else
         begin
-          licence = Odlifier::License.new(ref.dasherize)
+          licence = Odlifier::License.new(REF_CHANGES[ref] || ref.dasherize)
           @content_licence_determined_from_responses = {
             :title => licence.title,
             :url   => licence.url
@@ -286,10 +290,7 @@ class ResponseSet < ActiveRecord::Base
     errors = []
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
-        response_code = Rails.cache.fetch(response.string_value) rescue nil
-        if response_code.nil?
-          response_code = HTTParty.get(response.string_value).code rescue nil
-        end
+        response_code = ODIBot.new(response.string_value).response_code
         if response_code != 200
           response.error = true
           response.save
@@ -463,6 +464,29 @@ class ResponseSet < ActiveRecord::Base
 
   def autocomplete_override_message_for(question)
     autocomplete_override_messages.where(question_id: question).first_or_create
+  end
+
+  def autocomplete(url)
+    update_responses({documentationUrl: url})
+    responses.update_all(autocompleted: false)
+    update_attribute('kitten_data', nil)
+
+    code = resolve_url(url)
+
+    if code == 200
+      kitten_data = KittenData.create(url: url, response_set: self)
+      kitten_data.request_data
+      kitten_data.save
+
+      update_attribute('kitten_data', kitten_data)
+      update_responses(kitten_data.fields)
+    end
+  end
+
+  def resolve_url(url)
+    if url =~ /^#{URI::regexp}$/
+      ODIBot.new(url).response_code rescue nil
+    end
   end
 
   # finds the string value for a given response_identifier

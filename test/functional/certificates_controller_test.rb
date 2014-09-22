@@ -50,7 +50,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert.save
     get :legacy_show, {id: cert.id, type: "badge", format: "png"}
 
-    assert_redirected_to "http://test.host/datasets/1/certificates/2/badge.png"
+    assert_redirected_to "http://test.host/datasets/1/certificates/1/badge.png"
   end
 
   test "Requesting a JSON version of a certificate returns the correct level" do
@@ -62,7 +62,7 @@ class CertificatesControllerTest < ActionController::TestCase
       }
 
     levels.each do |level, actual|
-      cert = FactoryGirl.create(:published_certificate_with_dataset, attained_level: level)
+      cert = FactoryGirl.create(:"published_#{level}_certificate_with_dataset")
       get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
 
       json = JSON.parse(response.body)
@@ -87,9 +87,9 @@ class CertificatesControllerTest < ActionController::TestCase
 
     json = JSON.parse(response.body)
 
-    assert_equal "http://test.host/datasets/1/certificates/2/badge.js", json["certificate"]["badges"]["application/javascript"]
-    assert_equal "http://test.host/datasets/1/certificates/2/badge.html", json["certificate"]["badges"]["text/html"]
-    assert_equal "http://test.host/datasets/1/certificates/2/badge.png", json["certificate"]["badges"]["image/png"]
+    assert_equal "http://test.host/datasets/1/certificates/1/badge.js", json["certificate"]["badges"]["application/javascript"]
+    assert_equal "http://test.host/datasets/1/certificates/1/badge.html", json["certificate"]["badges"]["text/html"]
+    assert_equal "http://test.host/datasets/1/certificates/1/badge.png", json["certificate"]["badges"]["image/png"]
   end
 
   test "Requesting a JSON version of a certificate in production returns https urls" do
@@ -129,7 +129,7 @@ class CertificatesControllerTest < ActionController::TestCase
   end
 
   test "undo validation" do
-    cv = FactoryGirl.create :verification
+    cv = FactoryGirl.create(:verification, certificate: FactoryGirl.create(:certificate_with_dataset))
     cert = cv.certificate
     sign_in cv.user
 
@@ -177,6 +177,36 @@ class CertificatesControllerTest < ActionController::TestCase
 
     cert.reload
     assert_equal false, cert.audited
+  end
+
+  test "creates an embed stat when a badge is embeded" do
+    @request.env['HTTP_REFERER'] = 'http://example.com'
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_difference ->{cert.dataset.embed_stats.count}, 1 do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+  end
+
+  test "doesn't create a stat when there is no referrer" do
+    @request.env['HTTP_REFERER'] = nil
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+  end
+
+  test "doesn't create a stat when the referrer is local" do
+    @request.env['HTTP_REFERER'] = 'http://test.host/example.html'
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
   end
 
 end
