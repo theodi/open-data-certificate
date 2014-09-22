@@ -344,17 +344,17 @@ survey 'MX',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Licencia de reconocimento Open Data Commons',
+    a_odc_by 'Licencia de reconocimento Open Data Commons',
       :text_as_statement => 'Licencia de reconocimento Open Data Commons'
-    a_cc_by_sa 'Licencia de base de datos abierta Open Data Commons',
+    a_odc_odbl 'Licencia de base de datos abierta Open Data Commons',
       :text_as_statement => 'Licencia de base de datos abierta Open Data Commons'
-    a_cc_zero 'Licencia de dedicatoria al dominio público Open Data Commons',
+    a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
-    a_odc_by 'Creative Commons CCZero',
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_odc_odbl 'No aplicable',
+    a_na 'No aplicable',
       :text_as_statement => 'No aplicable'
-    a_odc_pddl 'Otros…',
+    a_other 'Otros…',
       :text_as_statement => 'Otros…'
 
     q_dataNotApplicable '¿Por qué no aplica ninguna licencia a estos datos?',
@@ -386,7 +386,7 @@ survey 'MX',
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_na
     condition_B :q_dataNotApplicable, '==', :a_waived
-    a_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
+    a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
