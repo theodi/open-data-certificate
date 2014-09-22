@@ -4,4 +4,9 @@ class CertificationCampaign < ActiveRecord::Base
   has_many :certificate_generators
 
   attr_accessible :name
+  
+  def to_param
+    name
+  end
+  
 end
