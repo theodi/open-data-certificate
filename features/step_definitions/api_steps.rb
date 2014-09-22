@@ -19,6 +19,20 @@ Given(/^I want to create a certificate via the API$/) do
   }
 end
 
+Given(/^I apply a campaign "(.*?)"$/) do |tag|
+  @body[:campaign] = tag
+end
+
+Given(/^I request (\d+) certifcates with the campaign "(.*?)"$/) do |num, tag|
+  num.to_i.times do |i|
+    steps %Q{
+      Given I want to create a certificate via the API
+      And I apply a campaign "#{tag}"
+      And I request a certificate via the API
+    }
+  end
+end
+
 Given(/^I create a certificate via the API$/) do
   steps %Q{
     When I request a certificate via the API
@@ -128,5 +142,28 @@ Then(/^there should only be one dataset$/) do
 end
 
 Then(/^I should get the certificate URL$/) do
-  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+/,  @response.body
+  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+\"/,  @response.body
+end
+
+Then(/^my certificate should be linked to a campaign$/) do
+  @generator = CertificateGenerator.last
+  refute @generator.certification_campaign.nil?
+end
+
+Then(/^my certificate should not be linked to a campaign$/) do
+  @generator = CertificateGenerator.last
+  assert @generator.certification_campaign.nil?
+end
+
+Then(/^that campaign should be called "(.*?)"$/) do |campaign|
+  assert_equal @generator.certification_campaign.name, campaign
+end
+
+Then(/^there should be one campaign$/) do
+  assert_equal 1, CertificationCampaign.count
+end
+
+Then(/^that campaign should have (\d+) certificate generators$/) do |num|
+  campaign = CertificationCampaign.first
+  assert_equal num.to_i, campaign.certificate_generators.count
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140918143425) do
+ActiveRecord::Schema.define(:version => 20140919150414) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -63,9 +63,10 @@ ActiveRecord::Schema.define(:version => 20140918143425) do
     t.integer  "response_set_id"
     t.integer  "user_id"
     t.text     "request"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.boolean  "completed"
+    t.integer  "certification_campaign_id"
   end
 
   add_index "certificate_generators", ["response_set_id"], :name => "index_certificate_generators_on_response_set_id"
@@ -86,6 +87,12 @@ ActiveRecord::Schema.define(:version => 20140918143425) do
   end
 
   add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"
+
+  create_table "certification_campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "datasets", :force => true do |t|
     t.string   "title"
