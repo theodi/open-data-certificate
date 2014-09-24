@@ -1,0 +1,13 @@
+- content_for :header_title, @title
+
+%h1
+  Switch user
+
+%form.form-horizontal
+  .control-group
+    %label.control-label
+      Choose user
+    .controls
+      = switch_user_select
+
+%hr.heavy
