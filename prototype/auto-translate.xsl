@@ -7,7 +7,7 @@
 
 <xsl:output method="xml" indent="yes" />
 
-<xsl:variable name="translationFile" as="xs:string" select="'jurisdictions/temp/certificate.RO.ro.txt'" />
+<xsl:variable name="translationFile" as="xs:string" select="'translations/temp/certificate.es.txt'" />
 <xsl:variable name="translationDoc" as="document-node()">
 	<xsl:document>
 		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^.+$" flags="m">
@@ -34,15 +34,15 @@
 	<xsl:variable name="path" select="concat($path, '/', position())" />
 	<xsl:variable name="translation" select="key('translation', $path, $translationDoc)" />
 	<xsl:copy>
-		<xsl:apply-templates select="@*">
-			<xsl:with-param name="path" select="$path" />
-		</xsl:apply-templates>
 		<xsl:choose>
 			<xsl:when test="$translation">
+				<xsl:apply-templates select="@*">
+					<xsl:with-param name="path" select="$path" />
+				</xsl:apply-templates>
 				<xsl:sequence select="local:markup($translation)" />
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:apply-templates select="*">
+				<xsl:apply-templates select="@*|*">
 					<xsl:with-param name="path" select="$path" />
 				</xsl:apply-templates>
 			</xsl:otherwise>
