@@ -522,4 +522,55 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_not_equal nil, response_set.attained_index
   end
 
+  test "all urls resolve returns true if all urls resolve sucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+    stub_request(:get, "http://www.example.com/success").
+                to_return(:body => "", status: 200)
+
+    5.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    assert response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns false if some urls resolve unsucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+    stub_request(:get, "http://www.example.com/success").
+                to_return(:body => "", status: 200)
+    stub_request(:get, "http://www.example.com/fail").
+                to_return(:body => "", status: 404)
+
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail")
+    end
+
+    refute response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns true if an explanation given" do
+    response_set = FactoryGirl.create(:response_set)
+
+    stub_request(:get, "http://www.example.com/fail").
+                to_return(:body => "", status: 404)
+
+    question = FactoryGirl.create(:question, reference_identifier: "url")
+    answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail")
+
+    response_set.stubs(:explanation_not_given?).returns(false)
+
+    assert response_set.all_urls_resolve?
+  end
+
 end
