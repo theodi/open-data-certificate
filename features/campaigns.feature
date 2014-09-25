@@ -13,6 +13,7 @@ Feature: Display information about campaigns in UI
     
   Scenario: view single campaign
     When I visit the campaign page for "brian"
-    Then I should see "0 datasets loaded"
+    Then I should see "1 dataset inspected"
+    And I should see "0 datasets added"
     And I should see "0 certificates published"
     And I should see "1 dataset already existed"
