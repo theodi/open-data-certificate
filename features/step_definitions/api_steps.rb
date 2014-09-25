@@ -179,4 +179,9 @@ end
 
 Then(/^I should get a CSV file$/) do
   assert_equal page.response_headers["Content-Type"], 'text/csv; header=present; charset=utf-8'
+  @csv = CSV.parse page.body, headers: true
+end
+
+Then(/^CSV row (\d+) column "(.*?)" should be "(.*?)"$/) do |row, col, value|
+  assert_equal value, @csv[row.to_i][col]
 end

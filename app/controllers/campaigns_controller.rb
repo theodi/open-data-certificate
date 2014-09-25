@@ -22,10 +22,19 @@ class CampaignsController < ApplicationController
           csv << [
             "Success?",
             "Published?",
-            "Documenation URL",
+            "Documentation URL",
             "Certificate URL",
             "User"
           ]
+          @campaign.certificate_generators.each do |gen|
+            csv << [
+              "true",
+              gen.certificate.published?,
+              gen.dataset.documentation_url,
+              dataset_certificate_url(gen.dataset, gen.certificate),
+              gen.dataset.user.email
+            ]
+          end
         end
         send_data csv, filename: "#{@campaign.name}.csv", type: "text/csv; header=present; charset=utf-8"
       end

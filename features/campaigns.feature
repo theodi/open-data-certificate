@@ -22,3 +22,8 @@ Feature: Display information about campaigns in UI
   Scenario: view single campaign as CSV
     When I visit the campaign page for "brian.csv"
     Then I should get a CSV file
+    And CSV row 0 column "Success?" should be "true"
+    And CSV row 0 column "Published?" should be "true"
+    And CSV row 0 column "Documentation URL" should be "http://example.com/dataset"
+    And CSV row 0 column "Certificate URL" should be "http://www.example.com/datasets/1/certificates/1"
+    And CSV row 0 column "User" should be "api@example.com"
