@@ -1,8 +1,9 @@
 <h1>Campaign Details</h1>
 <h2><%= @campaign.name %></h2>
 <ul>
-  <li><%= @campaign.certificate_generators.count %> datasets loaded</li>
-  <li><%= @published_count %> certificates published</li>
+  <li><%= pluralize @campaign.certificate_generators.count, 'dataset' %> loaded</li>
+  <li><%= pluralize @published_count, 'certificate' %> published</li>
+  <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
 </ul>
 <table class='table table-striped'>
   <tr>
