@@ -3,8 +3,9 @@ Feature: Display information about campaigns in UI
 
   Background: 
     Given I want to create a certificate via the API
-    But that URL already has a dataset
     And I apply a campaign "brian"
+    And I request a certificate via the API
+    And the certificate is created
     And I request a certificate via the API
     
   Scenario: list campaigns
@@ -13,9 +14,9 @@ Feature: Display information about campaigns in UI
     
   Scenario: view single campaign
     When I visit the campaign page for "brian"
-    Then I should see "1 dataset inspected"
-    And I should see "0 datasets added"
-    And I should see "0 certificates published"
+    Then I should see "2 datasets inspected"
+    And I should see "1 dataset added"
+    And I should see "1 certificate published"
     And I should see "1 dataset already existed"
     
   Scenario: view single campaign as CSV
