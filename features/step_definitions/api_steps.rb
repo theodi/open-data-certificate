@@ -159,11 +159,20 @@ Then(/^that campaign should be called "(.*?)"$/) do |campaign|
   assert_equal @generator.certification_campaign.name, campaign
 end
 
-Then(/^there should be one campaign$/) do
-  assert_equal 1, CertificationCampaign.count
+Then(/^there should be (\d+) campaigns?$/) do |count|
+  assert_equal count.to_i, CertificationCampaign.count
 end
 
 Then(/^that campaign should have (\d+) certificate generators$/) do |num|
   campaign = CertificationCampaign.first
   assert_equal num.to_i, campaign.certificate_generators.count
+end
+
+Then(/^there should be (\d+) datasets?$/) do |count|
+  assert_equal count.to_i, Dataset.count
+end
+
+Then(/^that campaign should have a duplicate count of (\d+)$/) do |num|
+  campaign = CertificationCampaign.first
+  assert_equal num.to_i, campaign.duplicate_count
 end

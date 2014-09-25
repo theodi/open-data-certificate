@@ -40,15 +40,21 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    if request[:dataset]
-      unique = Dataset.find_by_documentation_url(request[:dataset][:documentationUrl]).nil?
-      return {success: false, errors: ['Dataset already exists']} if !unique
-    end
-
     campaign = nil
 
     if request[:campaign]
       campaign = CertificationCampaign.find_or_create_by_name(request[:campaign])
+    end
+
+    if request[:dataset]
+      unique = Dataset.find_by_documentation_url(request[:dataset][:documentationUrl]).nil?
+      if !unique
+        if campaign
+          campaign.duplicate_count += 1
+          campaign.save! 
+        end
+        return {success: false, errors: ['Dataset already exists']} 
+      end
     end
 
     generator = self.create(request: request, survey: survey, user: user, certification_campaign: campaign)
