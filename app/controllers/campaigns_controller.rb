@@ -15,6 +15,21 @@ class CampaignsController < ApplicationController
         total
       end
     end
+    respond_to do |want|
+      want.html
+      want.csv do
+        csv = CSV.generate do |csv|
+          csv << [
+            "Success?",
+            "Published?",
+            "Documenation URL",
+            "Certificate URL",
+            "User"
+          ]
+        end
+        send_data csv, filename: "#{@campaign.name}.csv", type: "text/csv; header=present; charset=utf-8"
+      end
+    end
   end
 
   private

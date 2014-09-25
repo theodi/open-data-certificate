@@ -176,3 +176,7 @@ Then(/^that campaign should have a duplicate count of (\d+)$/) do |num|
   campaign = CertificationCampaign.first
   assert_equal num.to_i, campaign.duplicate_count
 end
+
+Then(/^I should get a CSV file$/) do
+  assert_equal page.response_headers["Content-Type"], 'text/csv; header=present; charset=utf-8'
+end

@@ -17,3 +17,7 @@ Feature: Display information about campaigns in UI
     And I should see "0 datasets added"
     And I should see "0 certificates published"
     And I should see "1 dataset already existed"
+    
+  Scenario: view single campaign as CSV
+    When I visit the campaign page for "brian.csv"
+    Then I should get a CSV file
