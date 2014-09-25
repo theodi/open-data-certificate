@@ -1,6 +1,57 @@
-<h1>Campaigns#show</h1>
-<p>Find me in app/views/campaigns/show.html.erb</p>
+<h1>Campaign Details</h1>
+<h2><%= @campaign.name %></h2>
+<ul>
+  <li><%= pluralize @total_count, 'dataset' %> inspected</li>
+  <li><%= pluralize @campaign.certificate_generators.count, 'dataset' %> added</li>
+  <li><%= pluralize @published_count, 'certificate' %> published</li>
+  <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
+</ul>
+<table class='table table-striped'>
+  <tr>
+    <td>
+      Success
+    </td>
+    <td>
+      Published
+    </td>
+    <td>
+      Source
+    </td>
+    <td>
+      Certificate
+    </td>
+    <td>
+      User
+    </td>
+  </tr>
+  <% @campaign.certificate_generators.each do |generator| %>
+    <tr>
+      <td>
+        &check;
+      </td>
+      <td>
+        <%= generator.certificate.published? ? "&check;".html_safe : "" %>
+      </td>
+      <td>
+        <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+      </td>
+      <td>
+        <% if generator.certificate.published? %>
+          <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+        <% else %>
+          <% if !generator.response_set.all_mandatory_questions_complete? %>
+            <%= generator.response_set.uncompleted_mandatory_questions_count %> missing answers
+          <% end %>
+          <% if !generator.response_set.all_urls_resolve? %>
+            Couldn't resolve all URLs
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <%= generator.dataset.user.email if generator.dataset.user%>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
-<p>
-  <%= @campaign.certificate_generators.count %>
-</p>
+<%= link_to 'Download CSV', format: "csv" %>

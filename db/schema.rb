@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140919150414) do
+ActiveRecord::Schema.define(:version => 20140924121759) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -90,8 +90,9 @@ ActiveRecord::Schema.define(:version => 20140919150414) do
 
   create_table "certification_campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "duplicate_count", :default => 0
   end
 
   create_table "datasets", :force => true do |t|
