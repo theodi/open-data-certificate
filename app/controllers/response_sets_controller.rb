@@ -35,7 +35,7 @@ class ResponseSetsController < ApplicationController
   end
 
   def check_url(url, explanation)
-    if resolve_url(url).nil?
+    if resolve_url(url) != 200
       if explanation.blank?
         respond_to do |format|
           format.json do
