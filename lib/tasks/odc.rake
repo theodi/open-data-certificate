@@ -65,7 +65,7 @@ end
 namespace :odc do
 
   desc "Task to run when a new version of the app has been deployed"
-  task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires cache:clear)
+  task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires cache:clear airbrake:deploy)
 
   desc "remove (12h) old and unclaimed questionnaires"
   task :purge_questionnaires => :environment do
