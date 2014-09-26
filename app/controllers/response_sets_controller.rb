@@ -34,8 +34,19 @@ class ResponseSetsController < ApplicationController
     end
   end
 
+  def check_url(url, explanation)
+    if resolve_url(url).nil?
+        respond_to do |format|
+          format.json do
+            raise ActionController::RoutingError.new('Not Found')
+          end
+        end
+    end
+  end
   # Check the user's documentation url and populate answers from it
   def start
+    check_url(params[:response_set][:documentation_url], params[:response_set][:documentation_url_explanation])
+
     @response_set.autocomplete(params[:response_set][:documentation_url])
 
     respond_to do |format|
