@@ -41,6 +41,11 @@ class ResponseSetsController < ApplicationController
           format.json do
             raise ActionController::RoutingError.new('Not Found')
           end
+          format.html do
+            @url_error = true
+            @documentation_url = url
+            @survey = @response_set.survey
+          end
         end
       else
         @response_set.documentation_url_explanation = explanation
@@ -53,6 +58,8 @@ class ResponseSetsController < ApplicationController
   # Check the user's documentation url and populate answers from it
   def start
     check_url(params[:response_set][:documentation_url], params[:response_set][:documentation_url_explanation])
+
+    render 'surveyor/start.html.haml' and return if @url_error
 
     @response_set.autocomplete(params[:response_set][:documentation_url])
 
