@@ -44,7 +44,7 @@
           .row-fluid
             .span8
               = f.url_field :documentation_url, class: 'string', placeholder: 'Documentation URL', value: @response_set.documentation_url
-              #explanation{class: "hidden"}
+              #start_url_explanation.explanation
                 = f.input :documentation_url_explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.url_explanation')
 
               .lead
