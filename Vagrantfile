@@ -10,7 +10,7 @@ defaults = {
 nodesets = [
   {
     name: 'certificate',
-    count: 4,
+    count: 3,
     chef_env: 'odc-prod',
     run_list: [
       "recipe[chef-open-data-certificate]"
