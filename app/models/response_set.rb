@@ -308,7 +308,7 @@ class ResponseSet < ActiveRecord::Base
     errors = []
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
-        response_code = ODIBot.new(response.string_value).response_code
+        response_code = ODIBot.new(response.string_value).response_code rescue nil
         if response_code != 200 && explanation_not_given?(response.question)
           response.error = true
           response.save
