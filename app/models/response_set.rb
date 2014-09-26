@@ -124,6 +124,20 @@ class ResponseSet < ActiveRecord::Base
     response 'documentationUrl'
   end
 
+  def documentation_url_question
+    survey.question 'documentationUrl'
+  end
+
+  def documentation_url_explanation
+    autocomplete_override_message_for(documentation_url_question.id).message
+  end
+
+  def documentation_url_explanation=(val)
+    explanation = autocomplete_override_message_for(documentation_url_question.id)
+    explanation.message = val
+    explanation.save
+  end
+
   # This picks up the jurisdiction (survey title) from the survey, or the migrated survey
   def jurisdiction
     if Survey::MIGRATIONS.has_key? survey.access_code
