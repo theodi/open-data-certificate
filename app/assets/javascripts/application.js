@@ -267,6 +267,8 @@ $(document).ready(function($){
           popover.options.content = "Sorry, an error occurred. Please try again."
         }
         popover.show()
+        debugger;
+        setTimeout(function(){ popover.hide() }, 3000);
       },
       timeout: 120000
     })
