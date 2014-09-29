@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140924121759) do
+ActiveRecord::Schema.define(:version => 20140929131433) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20140924121759) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.integer  "duplicate_count", :default => 0
+    t.integer  "user_id"
   end
 
   create_table "datasets", :force => true do |t|
@@ -156,9 +157,9 @@ ActiveRecord::Schema.define(:version => 20140924121759) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message",    :limit => 65535
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "embed_stats", :force => true do |t|
