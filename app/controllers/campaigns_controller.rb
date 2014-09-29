@@ -1,9 +1,10 @@
 class CampaignsController < ApplicationController
 
+  before_filter :authenticate_user!
   before_filter :get_campaign, except: [:index]
 
   def index
-    @campaigns = CertificationCampaign.all
+    @campaigns = CertificationCampaign.where(user_id: current_user)
   end
 
   def show
