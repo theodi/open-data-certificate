@@ -61,7 +61,7 @@ class EmbedStatTest < ActiveSupport::TestCase
       Random.rand(1..10).times.each { |n| EmbedStat.create(referer: "#{host}/#{n}.html") }
     end
 
-    assert_equal 4, EmbedStat.unique_sites
+    assert_equal 4, EmbedStat.unique_domains
   end
 
   test "should group by dataset" do
