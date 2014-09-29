@@ -3,6 +3,11 @@ require 'test_helper'
 class CampaignsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
+  setup do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
+
   test "should list all campaigns" do
     get :index
     assert_response :success
@@ -14,7 +19,7 @@ class CampaignsControllerTest < ActionController::TestCase
   end
 
   test "should show details for a single campaign" do
-    FactoryGirl.create :certification_campaign, name: 'data.gov.uk'
+    FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
     get :show, id: 'data.gov.uk'
     assert_response :success
   end
