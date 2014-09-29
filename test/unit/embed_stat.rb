@@ -51,4 +51,16 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal Date.parse(csv.last[3]), Date.today
   end
 
+  test "should group by domain" do
+    [
+      "http://www.example.com",
+      "http://www.example.org",
+      "http://www.example1.com",
+      "http://www.example2.com"
+    ].each do |host|
+      Random.rand(1..10).times.each { |n| EmbedStat.create(referer: "#{host}/#{n}.html") }
+    end
+
+    assert_equal 4, EmbedStat.unique_sites
+  end
 end
