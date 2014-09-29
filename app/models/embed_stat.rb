@@ -17,7 +17,12 @@ class EmbedStat < ActiveRecord::Base
     all.group_by { |e| URI.parse(e.referer).host }.count
   end
 
+  def self.unique_datasets
+    all.group_by { |e| e.dataset }.count
+  end
+
   def dataset_path
     Rails.application.routes.url_helpers.dataset_url(dataset, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host])
   end
+
 end

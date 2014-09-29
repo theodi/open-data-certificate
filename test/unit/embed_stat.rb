@@ -63,4 +63,14 @@ class EmbedStatTest < ActiveSupport::TestCase
 
     assert_equal 4, EmbedStat.unique_sites
   end
+
+  test "should group by dataset" do
+    5.times.each do |n|
+      dataset = FactoryGirl.create(:dataset, title: "Dataset #{n}")
+      2.times.each { |i| dataset.register_embed("http://example#{n}.com/#{i}") }
+    end
+
+    assert_equal 5, EmbedStat.unique_datasets
+  end
+
 end
