@@ -28,3 +28,8 @@ Feature: Display information about campaigns in UI
     And CSV row 0 column "Documentation URL" should be "http://example.com/dataset"
     And CSV row 0 column "Certificate URL" should be "http://www.example.com/datasets/1/certificates/1"
     And CSV row 0 column "User" should be "api@example.com"
+
+  Scenario: view single campaign as unauthenticated user
+    Given I have signed out
+    When I visit the campaign page for "brian"
+    Then I should be told I need to sign in
