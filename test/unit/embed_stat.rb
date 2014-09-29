@@ -51,4 +51,26 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal Date.parse(csv.last[3]), Date.today
   end
 
+  test "should group by domain" do
+    [
+      "http://www.example.com",
+      "http://www.example.org",
+      "http://www.example1.com",
+      "http://www.example2.com"
+    ].each do |host|
+      Random.rand(1..10).times.each { |n| EmbedStat.create(referer: "#{host}/#{n}.html") }
+    end
+
+    assert_equal 4, EmbedStat.unique_domains
+  end
+
+  test "should group by dataset" do
+    5.times.each do |n|
+      dataset = FactoryGirl.create(:dataset, title: "Dataset #{n}")
+      2.times.each { |i| dataset.register_embed("http://example#{n}.com/#{i}") }
+    end
+
+    assert_equal 5, EmbedStat.unique_datasets
+  end
+
 end
