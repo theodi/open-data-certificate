@@ -32,8 +32,11 @@
     Embedded certificates
 
   %p
-    %strong= pluralize EmbedStat.all.count, 'certificates'
-    embedded
+    %strong= pluralize EmbedStat.unique_datasets, 'certificates'
+    embedded on
+    %strong= pluralize EmbedStat.all.count, 'webpages'
+    and
+    %strong= pluralize EmbedStat.unique_domains, 'domains'
 
   %p
     =link_to "Download list of embedded certificates", embed_stats_path(format: "csv")
