@@ -43,7 +43,9 @@ class CertificateGenerator < ActiveRecord::Base
     campaign = nil
 
     if request[:campaign]
-      campaign = CertificationCampaign.find_or_create_by_name(request[:campaign])
+      campaign = CertificationCampaign.find_or_create_by_name(request[:campaign]) do |campaign|
+        campaign.user = user
+      end
     end
 
     if request[:dataset]
@@ -51,9 +53,9 @@ class CertificateGenerator < ActiveRecord::Base
       if !unique
         if campaign
           campaign.duplicate_count += 1
-          campaign.save! 
+          campaign.save!
         end
-        return {success: false, errors: ['Dataset already exists']} 
+        return {success: false, errors: ['Dataset already exists']}
       end
     end
 
