@@ -114,7 +114,7 @@ class CertificateGenerator < ActiveRecord::Base
     user = self.user
 
     if response_set.kitten_data && create_user === true
-      email = response_set.kitten_data[:data][:publishers].first[:mbox] rescue nil
+      email = response_set.kitten_data[:data][:publishers].first.mbox rescue nil
       if email
         user = User.find_or_create_by_email(email) do |user|
                   user.password = SecureRandom.base64

@@ -50,9 +50,7 @@ Given(/^my dataset contains contact details$/) do
   @email = "newuser@example.com"
   ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
       publishers: [
-        {
-          mbox: @email
-        }
+        DataKitten::Agent.new(mbox: @email)
       ]
     }})
 end
