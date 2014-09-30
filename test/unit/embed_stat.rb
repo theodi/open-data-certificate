@@ -64,6 +64,19 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal 4, EmbedStat.unique_domains
   end
 
+  test "should group by domain with unescaped urls" do
+    [
+      "http://example.com/?a=\11\15",
+      "http://www.example.org",
+      "http://www.example1.com",
+      "http://www.example2.com"
+    ].each do |host|
+      Random.rand(1..10).times.each { |n| EmbedStat.create(referer: "#{host}/#{n}.html") }
+    end
+
+    assert_equal 4, EmbedStat.unique_domains
+  end
+
   test "should group by dataset" do
     5.times.each do |n|
       dataset = FactoryGirl.create(:dataset, title: "Dataset #{n}")
