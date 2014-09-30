@@ -14,7 +14,7 @@ class EmbedStat < ActiveRecord::Base
   end
 
   def self.unique_domains
-    all.group_by { |e| URI.parse(e.referer).host }.count
+    all.group_by { |e| URI.parse(URI.escape(e.referer)).host }.count
   end
 
   def self.unique_datasets
