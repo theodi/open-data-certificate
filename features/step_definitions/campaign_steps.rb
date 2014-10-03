@@ -9,3 +9,7 @@ end
 When(/^I visit the campaign page for "(.*?)"$/) do |campaign|
   visit '/campaigns/'+campaign
 end
+
+And (/^the campaign should be owned by my user account$/) do
+  assert_equal @generator.certification_campaign.user, @api_user
+end

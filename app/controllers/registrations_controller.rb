@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   def edit
     if params[:id].to_i == current_user.id
       @surveys = Survey.available_to_complete
+      @campaigns = CertificationCampaign.where(user_id: current_user.id).count
       super
     else
       raise ActionController::RoutingError.new('Not Found')

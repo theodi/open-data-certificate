@@ -7,6 +7,7 @@ Feature: Track certificate generation campaigns
     And I request a certificate via the API
     Then my certificate should be linked to a campaign
     And that campaign should be called "brian"
+    And the campaign should be owned by my user account
 
   Scenario: Don't link to campaign if no campaign specified
     Given I want to create a certificate via the API

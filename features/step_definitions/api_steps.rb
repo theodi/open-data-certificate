@@ -183,3 +183,18 @@ end
 Then(/^CSV row (\d+) column "(.*?)" should be "(.*?)"$/) do |row, col, value|
   assert_equal value, @csv[row.to_i][col]
 end
+
+Given(/^I am signed in as the API user$/) do
+  visit '/users/sign_in'
+  first('#main #user_email').set("api@example.com")
+  first('#main #user_password').set("password")
+  first('#main .btn').click
+end
+
+Given(/^I have signed out$/) do
+  first('a[href="/users/sign_out"]').click
+end
+
+Then(/^I should be told I need to sign in$/) do
+  assert_match /You need to sign in or sign up before continuing/, page.body
+end

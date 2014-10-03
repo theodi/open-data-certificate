@@ -38,3 +38,6 @@
     .form-field
       = f.label :authentication_token
       = f.text_field :authentication_token, class: 'span8', data: {content: :highlight}
+
+  - if @campaigns > 0
+    = link_to 'View API certification campaigns', campaigns_path
