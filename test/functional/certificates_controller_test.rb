@@ -143,9 +143,9 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    assert_raise(CanCan::AccessDenied) {
-      put :update, {dataset_id: cert.dataset.id, id: cert.id, audited: true}
-    }
+    put :update, {dataset_id: cert.dataset.id, id: cert.id, audited: true}
+
+    assert_response 403
   end
 
   test "Admin marks a certificate as audited" do

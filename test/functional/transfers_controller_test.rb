@@ -29,9 +29,9 @@ class TransfersControllerTest < ActionController::TestCase
     transfer = FactoryGirl.build :transfer, dataset: dataset
 
     assert_no_difference 'Transfer.count' do
-      assert_raises CanCan::AccessDenied do
-        post :create, transfer: transfer.attributes
-      end
+      post :create, transfer: transfer.attributes
+
+      assert_response 403
     end
   end
 
@@ -48,7 +48,7 @@ class TransfersControllerTest < ActionController::TestCase
     transfer = FactoryGirl.create :notified_transfer, target_email: user.email
 
     assert_difference ->{user.reload.datasets.count}, 1 do
-      put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+      put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token}
     end
 
     assert_redirected_to '/users/dashboard'
@@ -71,7 +71,7 @@ class TransfersControllerTest < ActionController::TestCase
     sign_in user = FactoryGirl.create(:user)
     transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
 
-    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token}
 
     assert_equal I18n.t('transfers.flashes.access_denied_email'), flash[:error]
     refute transfer.reload.accepted?
@@ -81,7 +81,7 @@ class TransfersControllerTest < ActionController::TestCase
     sign_in user = FactoryGirl.create(:user)
     transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
 
-    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: user.email} 
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: user.email}
 
     assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
     refute transfer.reload.accepted?

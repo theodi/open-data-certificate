@@ -11,10 +11,10 @@ class AdminControllerTest < ActionController::TestCase
   end
 
   test "cannot be accessed by normal user" do
-    assert_raises(CanCan::AccessDenied) do
-      sign_in @user
-      get :index
-    end
+    sign_in @user
+    get :index
+
+    assert_response 403
   end
 
   test "can be accessed by admin user" do
