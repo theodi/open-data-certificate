@@ -10,6 +10,7 @@ en:
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
     my_certificates: My certificates
+    admin: Admin
 
   footmenu:
     cookies:        Cookie policy
