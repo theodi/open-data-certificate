@@ -43,7 +43,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @datasets.to_json }
+      format.json
       format.feed { render :layout => false  }
     end
   end
