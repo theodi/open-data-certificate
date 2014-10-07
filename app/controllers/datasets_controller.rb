@@ -4,7 +4,7 @@ class DatasetsController < ApplicationController
 
   before_filter :authenticate_user!, only: :dashboard
   before_filter :authenticate_user_from_token!, only: [:create, :update_certificate]
-  before_filter(:only => [:show, :index]) { alternate_formats [:feed] }
+  before_filter(:only => [:show, :index]) { alternate_formats [:feed, :json] }
 
   def index
 
@@ -43,6 +43,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json
       format.feed { render :layout => false  }
     end
   end

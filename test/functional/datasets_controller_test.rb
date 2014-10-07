@@ -244,6 +244,15 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /https:\/\//, feed.entry.links[5].href
   end
 
+  test "Requesting JSON for a search query returns JSON" do
+    100.times do
+      cert = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    get :index, { search: "", format: "json" }
+    assert_response :success
+    assert_equal "application/json", response.content_type
+  end
+
   test "Requesting an Atom feed for a search query returns Atom" do
     100.times do
       cert = FactoryGirl.create(:published_certificate_with_dataset)
