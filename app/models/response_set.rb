@@ -197,7 +197,7 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for(:other_dataset_licence_url)
          }
       else
-        licence = Odlifier::License.new(REF_CHANGES[ref] || ref.dasherize)
+        licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
         @data_licence_determined_from_responses = {
           :title => licence.title,
           :url   => licence.url
@@ -229,7 +229,7 @@ class ResponseSet < ActiveRecord::Base
          }
       else
         begin
-          licence = Odlifier::License.new(REF_CHANGES[ref] || ref.dasherize)
+          licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
           @content_licence_determined_from_responses = {
             :title => licence.title,
             :url   => licence.url
