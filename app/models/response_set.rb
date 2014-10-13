@@ -12,7 +12,8 @@ class ResponseSet < ActiveRecord::Base
 
   REF_CHANGES = {
                   "ogl_uk" => "OGL-UK-2.0",
-                  "cc_zero" => "CC0-1.0"
+                  "cc_zero" => "CC0-1.0",
+                  "odc_odbl" => "ODbL-1.0"
                 }
 
   after_save :update_certificate
