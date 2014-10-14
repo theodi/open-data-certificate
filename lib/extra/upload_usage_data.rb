@@ -10,9 +10,11 @@ module UploadUsageData
       certificates = Certificate.send(type)
       data = certificates.map do |cert|
         CertificatePresenter.new(cert).send("#{type}_data")
+      end.compact
+      unless data.empty?
+        csv = create_csv(data)
+        upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
       end
-      csv = create_csv(data)
-      upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
     end
 
   ensure
@@ -20,7 +22,6 @@ module UploadUsageData
   end
 
   def self.create_csv(data)
-    data.reject! { |d| d.nil? }
     csv = CSV.generate(force_quotes: true, row_sep: "\r\n") do |csv|
       # Header row goes here
       headers = data.first.keys
