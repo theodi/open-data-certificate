@@ -26,7 +26,7 @@ class CertificatePresenterTest < ActiveSupport::TestCase
 
     assert_equal "Banana certificate", presenter[:name]
     assert_equal "John Smith", presenter[:publisher]
-    assert_equal " ", presenter[:user_name]
+    assert_equal "", presenter[:user_name]
     assert_match /test[0-9]+@example\.com/, presenter[:user_email]
     assert_equal "Simple survey", presenter[:country]
     assert_equal "draft", presenter[:status]
@@ -39,4 +39,14 @@ class CertificatePresenterTest < ActiveSupport::TestCase
     assert_equal 'expired', presenter[:status]
   end
 
+  test "gives blank user_name for no associated user" do
+    presenter = CertificatePresenter.new(@certificate).all_data
+    assert_equal "", presenter[:user_name]
+  end
+
+  test "constructs user_name from user association" do
+    @certificate.user = FactoryGirl.create(:user, :first_name => "Joan", :last_name => "Jett")
+    presenter = CertificatePresenter.new(@certificate).all_data
+    assert_equal "Joan Jett", presenter[:user_name]
+  end
 end

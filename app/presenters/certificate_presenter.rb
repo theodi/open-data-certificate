@@ -17,20 +17,22 @@ class CertificatePresenter < SimpleDelegator
   end
 
   def all_data
-    begin
-      {
-        name: certificate.name,
-        publisher: certificate.curator,
-        user_email: certificate.user.nil? ? "N/A" : certificate.user.email,
-        user_name: "#{certificate.user.first_name} #{certificate.user.last_name}",
-        created: certificate.created_at,
-        last_edited: certificate.updated_at,
-        country: certificate.survey.title,
-        status: certificate.expired? ? 'expired' : certificate.status,
-        level: certificate.attained_level,
-      }
-    rescue
-      nil
+    {
+      name: certificate.name,
+      publisher: certificate.curator,
+      user_email: certificate.user.nil? ? "N/A" : certificate.user.email,
+      user_name: user_name, #"#{certificate.user.first_name} #{certificate.user.last_name}",
+      created: certificate.created_at,
+      last_edited: certificate.updated_at,
+      country: certificate.survey.title,
+      status: certificate.expired? ? 'expired' : certificate.status,
+      level: certificate.attained_level,
+    }
+  end
+
+  def user_name
+    if user
+      "#{user.first_name} #{user.last_name}".strip
     end
   end
 

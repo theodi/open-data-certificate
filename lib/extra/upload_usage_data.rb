@@ -7,10 +7,7 @@ module UploadUsageData
       "published",
       "all"
     ].each do |type|
-      certificates = Certificate.send(type)
-      data = certificates.map do |cert|
-        CertificatePresenter.new(cert).send("#{type}_data")
-      end.compact
+      data = certificate_data_by_type(type)
       unless data.empty?
         csv = create_csv(data)
         upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
@@ -19,6 +16,13 @@ module UploadUsageData
 
   ensure
     enqueue_next_run
+  end
+
+  def self.certificate_data_by_type(type)
+    certificates = Certificate.send(type)
+    return certificates.map do |cert|
+      CertificatePresenter.new(cert).send("#{type}_data")
+    end
   end
 
   def self.create_csv(data)
