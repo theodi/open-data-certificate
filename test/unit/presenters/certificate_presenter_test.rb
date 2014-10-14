@@ -49,4 +49,10 @@ class CertificatePresenterTest < ActiveSupport::TestCase
     presenter = CertificatePresenter.new(@certificate).all_data
     assert_equal "Joan Jett", presenter[:user_name]
   end
+
+  test "gives N/A if user email blank" do
+    @certificate.user.email = " "
+    presenter = CertificatePresenter.new(@certificate).published_data
+    assert_equal "N/A", presenter[:user]
+  end
 end
