@@ -355,10 +355,10 @@ class ResponseSetTest < ActiveSupport::TestCase
       title: "Open Data Commons Attribution License 1.0",
       url: "http://www.opendefinition.org/licenses/odc-by"
     },
-    # "odc_odbl" => {
-    #   title: "Open Data Commons Open Database License 1.0",
-    #   url: "http://www.opendefinition.org/licenses/odc-odbl"
-    # },
+     "odc_odbl" => {
+       title: "Open Data Commons Open Database License 1.0",
+       url: "http://www.opendefinition.org/licenses/odc-odbl"
+    },
     # Can't test this because of broken capitalisation on http://licenses.opendefinition.org/ - see https://github.com/okfn/licenses/issues/36
     "odc_pddl" => {
       title: "Open Data Commons Public Domain Dedication and Licence 1.0",
