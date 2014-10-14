@@ -15,7 +15,8 @@ module UploadUsageData
       upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
     end
 
-    Delayed::Job.enqueue UploadUsageData, { :priority => 5, :run_at => 1.week.from_now }
+  ensure
+    enqueue_next_run
   end
 
   def self.create_csv(data)
@@ -46,6 +47,15 @@ module UploadUsageData
 
   def self.session
     @@session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
+  end
+
+  def self.enqueue_next_run
+    next_run_date = DateTime.now.utc.next_week
+    # This is disgusting but Delayed::Job has no decent way to query outstanding jobs
+    # We don't want to enqueue next weeks job more than once if it has to retry due to failures
+    if Delayed::Job.where(["handler like ? and run_at > ?", "%#{name}%", DateTime.now.utc]).empty?
+      Delayed::Job.enqueue UploadUsageData, { :priority => 5, :run_at => next_run_date }
+    end
   end
 
 end

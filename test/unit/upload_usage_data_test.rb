@@ -81,4 +81,36 @@ class UploadUsageDataTest < ActiveSupport::TestCase
     end
   end
 
+  test "does not fail if no certificates exist" do
+    VCR.use_cassette('perform uploads the correct files') do
+      UploadUsageData.perform
+    end
+  end
+
+  test "job is enqueued for next week" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      Delayed::Job.expects(:enqueue).with(UploadUsageData, has_entries(:run_at => next_week))
+      UploadUsageData.perform
+    end
+  end
+
+  test "job is enqueued for next week after failure" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      Delayed::Job.expects(:enqueue).with(UploadUsageData, has_entries(:run_at => next_week))
+      UploadUsageData.stubs(:create_csv).raises(ArgumentError, 'deliberate failure')
+      UploadUsageData.perform rescue nil
+    end
+  end
+
+  test "job is not enqued if there is already one pending" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      UploadUsageData.perform
+      Delayed::Job.expects(:enqueue).never
+      UploadUsageData.perform
+    end
+  end
+
 end
