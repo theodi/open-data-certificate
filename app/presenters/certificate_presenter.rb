@@ -26,7 +26,7 @@ class CertificatePresenter < SimpleDelegator
         created: certificate.created_at,
         last_edited: certificate.updated_at,
         country: certificate.survey.title,
-        status: certificate.status,
+        status: certificate.expired? ? 'expired' : certificate.status,
         level: certificate.attained_level,
       }
     rescue

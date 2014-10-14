@@ -33,4 +33,10 @@ class CertificatePresenterTest < ActiveSupport::TestCase
     assert_equal "exemplar", presenter[:level]
   end
 
+  test "all data status is expired if past expiry date" do
+    @certificate.expires_at = 1.month.ago
+    presenter = CertificatePresenter.new(@certificate).all_data
+    assert_equal 'expired', presenter[:status]
+  end
+
 end
