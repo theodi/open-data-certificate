@@ -2,42 +2,29 @@ require 'test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
 
-  test "Should set the title if it hasn't been set before" do
-    dataset = FactoryGirl.create(:untitled_dataset)
-    dataset.set_default_title!('Test dataset default title')
-    dataset.reload
+  [
+    [:untitled_dataset, :title, :set_default_title!, "Test original title", "Test dataset default title"],
+    [:dataset, :curator, :set_default_curator!, "Some Org", "Newer Org"],
+    [:dataset_without_documentation_url, :documentation_url, :set_default_documentation_url!, "http://original.org", "http://new.org"]
+  ].each do |factory, attr, method, orig_value, new_value|
+    test "sets the #{attr} if it hasn't been set before" do
+      dataset = FactoryGirl.create(factory)
+      dataset.send(method, new_value)
+      dataset.reload
 
-    assert_equal(dataset.title, 'Test dataset default title')
-  end
+      assert_equal(dataset.send(attr), new_value)
+    end
 
-  test "Should overwrite the title if it has been set before" do
-    dataset = FactoryGirl.create(:dataset, title: 'Test original title')
-    assert_equal(dataset.title, 'Test original title')
-    dataset.reload
+    test "overwrites the #{attr} if it has been set before" do
+      dataset = FactoryGirl.create(factory, attr => orig_value)
+      assert_equal(dataset.send(attr), orig_value)
+      dataset.reload
 
-    dataset.set_default_title!('Test dataset default title')
-    dataset.reload
+      dataset.send(method, new_value)
+      dataset.reload
 
-    assert_equal(dataset.title, 'Test dataset default title')
-  end
-
-  test "Should set the documentation URL if it hasn't been set before" do
-    dataset = FactoryGirl.create(:dataset_without_documentation_url)
-    dataset.set_default_documentation_url!('http://foo.com')
-    dataset.reload
-
-    assert_equal(dataset.documentation_url, 'http://foo.com')
-  end
-
-  test "Should overwrite the documentation URL if it has been set before" do
-    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
-    assert_equal(dataset.documentation_url, 'http://foo.com')
-    dataset.reload
-
-    dataset.set_default_documentation_url!('http://foo.com/bar')
-    dataset.reload
-
-    assert_equal(dataset.documentation_url, 'http://foo.com/bar')
+      assert_equal(dataset.send(attr), new_value)
+    end
   end
 
   test "#newest_response_set should return the most recent response set" do

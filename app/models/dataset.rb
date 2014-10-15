@@ -61,7 +61,7 @@ class Dataset < ActiveRecord::Base
 
   def set_default_curator!(url)
     if url && persisted?
-      self.documentation_url = url
+      self.curator = url
       save unless readonly?
       url
     end
