@@ -69,8 +69,8 @@ class UploadUsageDataTest < ActiveSupport::TestCase
 
       collection = UploadUsageData.find_collection(@gdocs_path)
 
-      published_certificates = collection.files.select {|f| f.title.match /Published certificates - [0-9]+\-[0-9]+\-[0-9]+/}
-      all_certificates = collection.files.select {|f| f.title.match /All certificates - [0-9]+\-[0-9]+\-[0-9]+/}
+      published_certificates = collection.files.select {|f| f.title.match /Published - [0-9]+\-[0-9]+\-[0-9]+/}
+      all_certificates = collection.files.select {|f| f.title.match /All - [0-9]+\-[0-9]+\-[0-9]+/}
 
       assert_equal 1, published_certificates.count
       assert_equal 1, all_certificates.count
