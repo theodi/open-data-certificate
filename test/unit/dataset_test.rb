@@ -205,7 +205,7 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
   end
 
-  test 'doesn\'t show results when generation hasn\'t happened' do
+  test "doesn't show results when generation hasn't happened" do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
     survey = Survey.newest_survey_for_access_code 'cert-generator'
