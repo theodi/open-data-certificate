@@ -77,6 +77,14 @@ class UploadUsageDataTest < ActiveSupport::TestCase
     end
   end
 
+  test "creates collections if missing" do
+    VCR.use_cassette('perform uploads the correct files') do
+      new_collection = UploadUsageData.find_collection("#{@gdocs_path}/Test Folder")
+      collection = UploadUsageData.find_collection(@gdocs_path)
+      assert_not_nil collection.subcollection_by_title("Test Folder")
+    end
+  end
+
   test "does not fail if no certificates exist" do
     VCR.use_cassette('perform uploads the correct files') do
       UploadUsageData.perform

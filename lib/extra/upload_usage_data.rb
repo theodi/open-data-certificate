@@ -36,12 +36,11 @@ module UploadUsageData
   end
 
   def self.find_collection(path)
-    path = path.split("/")
-    collection = session.collection_by_title(path.shift)
-    path.each do |title|
-      collection = collection.subcollections.select { |s| s.title == title }[0]
+    segments = path.split("/")
+    segments.reduce(session.root_collection) do |collection, path_segment|
+      collection.subcollection_by_title(path_segment) ||
+        collection.create_subcollection(path_segment)
     end
-    collection
   end
 
   def self.upload_csv(csv, title)
