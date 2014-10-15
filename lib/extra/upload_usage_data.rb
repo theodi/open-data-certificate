@@ -51,7 +51,7 @@ module UploadUsageData
   end
 
   def self.session
-    @@session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
+    @session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
   end
 
   def self.enqueue_next_run
