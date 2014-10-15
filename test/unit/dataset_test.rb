@@ -238,6 +238,38 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal([], response[:errors])
   end
 
+  test "generation result for unclaimed certificate" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code 'cert-generator'
+
+    request = {
+      jurisdiction: 'cert-generator',
+      dataset: {
+        dataTitle: 'The title',
+        releaseType: 'oneoff',
+        publisherUrl: 'http://www.example.com',
+        publisherRights: 'yes',
+        publisherOrigin: 'true',
+        linkedTo: 'true',
+        chooseAny: ['one', 'two']
+      }
+    }
+
+    cert = CertificateGenerator.create(request: request, survey: survey)
+    response = Dataset.last.generation_result
+
+    assert_equal("pending", response[:success])
+    assert_equal("http://test.dev/datasets/#{Dataset.last.id}.json", response[:dataset_url])
+
+    cert.generate(false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(true, response[:published])
+    assert_equal(nil, response[:owner_email])
+    assert_equal([], response[:errors])
+  end
+
   test 'returns an api_url' do
     dataset = FactoryGirl.create(:dataset)
 

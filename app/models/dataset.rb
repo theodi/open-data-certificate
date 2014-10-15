@@ -113,7 +113,14 @@ class Dataset < ActiveRecord::Base
 
       certificate_url = certificate.url if certificate
 
-      {success: true, dataset_id: response_set.dataset_id, certificate_url: certificate_url, published: response_set.published?, owner_email: response_set.user.email, errors: errors}
+      {
+        success: true,
+        dataset_id: response_set.dataset_id,
+        certificate_url: certificate_url,
+        published: response_set.published?,
+        owner_email: response_set.user.try(:email),
+        errors: errors
+      }
     else
       {success: "pending", dataset_id: self.id, dataset_url: self.api_url}
     end
