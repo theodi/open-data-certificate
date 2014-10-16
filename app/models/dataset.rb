@@ -1,6 +1,8 @@
 class Dataset < ActiveRecord::Base
   belongs_to :user
 
+  delegate :full_name, :email, :to => :user, :prefix => true, :allow_nil => true
+
   attr_accessible :title
 
   after_touch :destroy_if_no_responses
@@ -79,10 +81,6 @@ class Dataset < ActiveRecord::Base
     destroy if response_sets.empty?
   end
 
-  def user_full_name
-    user.full_name if user
-  end
-
   def register_embed(referer)
     begin
       embed_stats.create(referer: referer)
@@ -118,7 +116,7 @@ class Dataset < ActiveRecord::Base
         dataset_id: response_set.dataset_id,
         certificate_url: certificate_url,
         published: response_set.published?,
-        owner_email: response_set.user.try(:email),
+        owner_email: user_email,
         errors: errors
       }
     else

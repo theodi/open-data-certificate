@@ -33,7 +33,7 @@ class CampaignsController < ApplicationController
               gen.certificate.published?,
               gen.dataset.documentation_url,
               dataset_certificate_url(gen.dataset, gen.certificate),
-              gen.dataset.user.email
+              gen.dataset.user_email
             ]
           end
         end
