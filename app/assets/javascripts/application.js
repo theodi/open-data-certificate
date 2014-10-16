@@ -256,12 +256,18 @@ $(document).ready(function($){
       success: function(data) {
         window.location.replace(data.survey_path)
       },
-      error: function() {
+      error: function(xhr) {
         $('.survey-intro .submit').removeClass('disabled')
         $('.survey-intro .submit').addClass('error')
         var popover = $('.survey-intro .submit').data('popover')
-        popover.options.content = "Sorry, an error occurred. Please try again."
+        if (xhr.status == 404) {
+          popover.options.content = "There was a problem with your URL, please check, or fill out the explanation"
+          $("#start_url_explanation").attr('style', 'display: block')
+        } else {
+          popover.options.content = "Sorry, an error occurred. Please try again."
+        }
         popover.show()
+        setTimeout(function(){ popover.hide() }, 3000);
       },
       timeout: 120000
     })

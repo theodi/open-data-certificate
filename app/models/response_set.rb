@@ -128,6 +128,20 @@ class ResponseSet < ActiveRecord::Base
     response 'documentationUrl'
   end
 
+  def documentation_url_question
+    survey.question 'documentationUrl'
+  end
+
+  def documentation_url_explanation
+    autocomplete_override_message_for(documentation_url_question.id).message
+  end
+
+  def documentation_url_explanation=(val)
+    explanation = autocomplete_override_message_for(documentation_url_question.id)
+    explanation.message = val
+    explanation.save
+  end
+
   # This picks up the jurisdiction (survey title) from the survey, or the migrated survey
   def jurisdiction
     if Survey::MIGRATIONS.has_key? survey.access_code
@@ -290,12 +304,16 @@ class ResponseSet < ActiveRecord::Base
     responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
   end
 
+  def explanation_not_given?(question)
+    !autocomplete_override_message_for(question).message?
+  end
+
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
-        response_code = ODIBot.new(response.string_value).response_code
-        if response_code != 200
+        response_code = ODIBot.new(response.string_value).response_code rescue nil
+        if response_code != 200 && explanation_not_given?(response.question)
           response.error = true
           response.save
           errors << response

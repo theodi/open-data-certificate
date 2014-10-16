@@ -31,6 +31,11 @@
 
   #surveyor
     .container.survey-intro
+      -if @url_error
+        .alert.alert-alert.flash{"data-dismiss" => "alert"}
+          %i.icon-exclamation-sign.icon-large.icon-white
+          %button.icon-remove{"data-dismiss" => "alert", :type => "button"}
+          There was a problem with your URL, please check, or fill out the explanation below
       .well
         .row-fluid
           .span8.lead
@@ -38,12 +43,16 @@
             %p
               %a{href: about_url} Read more about Open Data Certificates
 
-        = form_for [surveyor, :start, @response_set] do |f|
+        = semantic_form_for [surveyor, :start, @response_set] do |f|
           = f.label :documentation_url, 'Where is your data described?'
 
           .row-fluid
             .span8
-              = f.url_field :documentation_url, class: 'string', placeholder: 'Documentation URL', value: @response_set.documentation_url
+              = f.url_field :documentation_url, class: 'string', placeholder: 'Documentation URL', value: @response_set.documentation_url || @documentation_url
+              - explanation_class = "show" if @url_error
+              #start_url_explanation.explanation{class: explanation_class}
+                = f.input :documentation_url_explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.url_explanation')
+
               .lead
                 :markdown
                   If your data is stored in a [CKAN](http://ckan.org/) repository (such as data.gov.uk), or marked up with

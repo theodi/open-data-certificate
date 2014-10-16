@@ -111,6 +111,7 @@ class SurveyorControllerTest < ActionController::TestCase
 
 
   test "start page" do
+    ResponseSet.any_instance.stubs(:documentation_url_explanation).returns(nil)
     @response_set = FactoryGirl.create(:response_set)
     sign_in @response_set.user
 
