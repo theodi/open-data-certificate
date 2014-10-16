@@ -43,7 +43,7 @@ Given(/^I create a certificate via the API$/) do
 end
 
 Given(/^I request that the API creates a user$/) do
-  @body[:create_user] = "true"
+  @body[:create_user] = true
 end
 
 Given(/^my dataset contains contact details$/) do
@@ -73,7 +73,7 @@ When(/^I request a certificate via the API$/) do
 end
 
 When(/^the certificate is created$/) do
-  CertificateGenerator.first.generate(!@body[:create_user].blank?)
+  CertificateGenerator.first.generate(@body[:create_user])
 end
 
 When(/^I request the results via the API$/) do

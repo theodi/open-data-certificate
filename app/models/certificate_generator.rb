@@ -60,7 +60,7 @@ class CertificateGenerator < ActiveRecord::Base
     end
 
     generator = self.create(request: request, survey: survey, user: user, certification_campaign: campaign)
-    generator.delay.generate(!request[:create_user].blank?)
+    generator.delay.generate(request[:create_user])
 
     return {success: "pending", dataset_id: generator.response_set.dataset_id, dataset_url: generator.dataset.api_url }
   end
@@ -115,7 +115,7 @@ class CertificateGenerator < ActiveRecord::Base
 
     user = self.user
 
-    if response_set.kitten_data && create_user === true
+    if response_set.kitten_data && create_user
       email = response_set.kitten_data[:data][:publishers].first.mbox rescue nil
       if email
         user = User.find_or_create_by_email(email) do |user|
