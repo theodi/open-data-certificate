@@ -24,6 +24,41 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     assert_equal("http://test.dev/datasets/#{Dataset.last.id}.json", response[:dataset_url])
   end
 
+  test "generating certificate as part of campaign" do
+    load_custom_survey 'blank.rb'
+
+    request = {
+      jurisdiction: 'blank',
+      campaign: 'campaign-name'
+    }
+
+    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
+    CertificateGenerator.any_instance.stubs(:generate)
+
+    response = CertificateGenerator.generate(request, @user)
+
+    assert CertificationCampaign.where(user_id: @user_id, name: 'campaign-name').exists
+  end
+
+  test "certificate campaigns are per user" do
+    load_custom_survey 'blank.rb'
+
+    request = {
+      jurisdiction: 'blank',
+      campaign: 'campaign-name'
+    }
+
+    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
+    CertificateGenerator.any_instance.stubs(:generate)
+
+    generating_user = FactoryGirl.create(:user)
+
+    response = CertificateGenerator.generate(request, generating_user)
+
+    assert CertificationCampaign.where(user_id: generating_user.id, name: 'campaign-name').exists?
+    refute CertificationCampaign.where(user_id: @user.id, name: 'campaign-name').exists?
+  end
+
   test "creating blank certificate" do
     load_custom_survey 'blank.rb'
 
