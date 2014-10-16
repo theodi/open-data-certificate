@@ -40,8 +40,6 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code request[:jurisdiction]
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    campaign = nil
-
     if request[:campaign]
       campaign = CertificationCampaign.find_or_create_by_name(request[:campaign]) do |campaign|
         campaign.user = user
