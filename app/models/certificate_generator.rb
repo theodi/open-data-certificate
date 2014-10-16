@@ -49,10 +49,7 @@ class CertificateGenerator < ActiveRecord::Base
     if request[:dataset]
       unique = Dataset.find_by_documentation_url(request[:dataset][:documentationUrl]).nil?
       if !unique
-        if campaign
-          campaign.duplicate_count += 1
-          campaign.save!
-        end
+        campaign.increment!(:duplicate_count) if campaign
         return {success: false, errors: ['Dataset already exists']}
       end
     end
