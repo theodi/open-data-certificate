@@ -14,11 +14,18 @@ class EmbedStat < ActiveRecord::Base
   end
 
   def self.unique_domains
-    all.group_by { |e| URI.parse(URI.escape(e.referer)).host }.count
+    all.group_by { |e| e.host }.count
   end
 
   def self.unique_datasets
     all.group_by { |e| e.dataset }.count
+  end
+
+  def host
+    URI.parse(URI.escape(referer)).host
+  rescue URI::InvalidURIError => e
+    Airbrake.notify :error_message => [e.message, referer.inspect].join(' - ')
+    nil
   end
 
   def dataset_path
