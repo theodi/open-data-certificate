@@ -29,7 +29,7 @@ class EmbedStat < ActiveRecord::Base
   end
 
   def dataset_path
-    Rails.application.routes.url_helpers.dataset_url(dataset, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host])
+    Rails.application.routes.url_helpers.dataset_url(dataset, host: OpenDataCertificate.hostname)
   end
 
 end
