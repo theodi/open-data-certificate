@@ -117,8 +117,7 @@ class CertificateGenerator < ActiveRecord::Base
       end
     end
 
-    response_set.dataset.update_attribute(:user, user)
-    response_set.update_attribute(:user, user)
+    response_set.assign_to_user!(user)
 
     response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
