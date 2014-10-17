@@ -21,6 +21,7 @@ branches:
   - CURRENT
   - STAGING
 notifications:
+  email: false
   irc:
     channels:
     - irc.freenode.net#theodi
