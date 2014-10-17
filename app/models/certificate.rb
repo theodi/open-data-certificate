@@ -197,7 +197,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def url
-    Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host])
+    Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate.hostname)
   end
 
 end

@@ -120,7 +120,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def api_url
-    Rails.application.routes.url_helpers.dataset_url(self, host: OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host], format: :json)
+    Rails.application.routes.url_helpers.dataset_url(self, format: :json, host: OpenDataCertificate.hostname)
   end
 
 end

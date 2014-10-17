@@ -51,6 +51,11 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal Date.parse(csv.last[3]), Date.today
   end
 
+  test "generates csv for embed_stat missing a dataset" do
+    EmbedStat.create(:referer => "http://example.org/path")
+    EmbedStat.csv
+  end
+
   test "should group by domain" do
     [
       "http://www.example.com",
