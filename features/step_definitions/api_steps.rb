@@ -64,6 +64,15 @@ Given(/^my dataset does not contain contact details$/) do
   @email = @api_user.email
 end
 
+Given(/^my dataset contains invalid contact details$/) do
+  ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
+      publishers: [
+        DataKitten::Agent.new(mbox: "bad email@example.org")
+      ]
+    }})
+  @email = @api_user.email
+end
+
 Given(/^I provide the API with a URL that autocompletes$/) do
   ResponseSet.any_instance.stubs(:autocomplete)
 end

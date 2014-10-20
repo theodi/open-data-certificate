@@ -106,17 +106,16 @@ class CertificateGenerator < ActiveRecord::Base
 
     response_set.autocomplete(request_dataset["documentationUrl"])
 
-    user = self.user
-
     if response_set.kitten_data && create_user
       email = response_set.kitten_data[:data][:publishers].first.mbox.presence rescue nil
       if email
-        user = User.find_or_create_by_email(email) do |user|
-                  user.password = SecureRandom.base64
-               end
+        new_user = User.find_or_create_by_email(email) do |user|
+          user.password = SecureRandom.base64
+        end
       end
     end
 
+    user = new_user.try(:persisted?) ? new_user : self.user
     response_set.assign_to_user!(user)
 
     response_set.reload
