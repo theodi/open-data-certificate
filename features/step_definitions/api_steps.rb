@@ -57,7 +57,9 @@ end
 
 Given(/^my dataset does not contain contact details$/) do
   ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
-      publishers: []
+      publishers: [
+        DataKitten::Agent.new(mbox: "")
+      ]
     }})
   @email = @api_user.email
 end
