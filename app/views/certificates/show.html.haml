@@ -22,15 +22,20 @@
         - if (@certificate.expiring? || @certificate.expired?) && (current_user && current_user == @certificate.user) && @certificate.published?
           %li= link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: @certificate.survey.access_code, response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-small btn-info pull-right'
 
-        - if @certificate.response_set.published?
-          %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
-        - elsif @certificate.response_set.draft?
+        - if current_user == @certificate.user
+          - if @certificate.response_set.published?
+            %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+          - elsif @certificate.response_set.draft?
+            %li
+              .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
+            %li
+              =#link_to t('certificate.edit_questionnaire'), [surveyor, @certificate.response_set], class: 'btn btn-small btn-info pull-left'
+              =link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), class: 'btn btn-small btn-info pull-left'
+        - else
           %li
-            .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
-          %li
-            =#link_to t('certificate.edit_questionnaire'), [surveyor, @certificate.response_set], class: 'btn btn-small btn-info pull-left'
-            =link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), class: 'btn btn-small btn-info pull-left'
+            =link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
       =render :partial => 'shared/embed_code', :locals => {:certificate => @certificate}
+      =render :partial => 'transfers/claim', :locals => {:certificate => @certificate}
 
 
     .certificate-badge.centered

@@ -1,0 +1,10 @@
+.modal.modal-wide.hide.fade.claim-certificate{:id => "claim-#{certificate.id}"}
+  .modal-header
+    %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+    %h3
+      .icon-cog
+      =t("certificate.claim_certificate")
+  .modal-body
+    .row-fluid
+      .span6.last
+        =t("certificate.claim_your_certificate")
