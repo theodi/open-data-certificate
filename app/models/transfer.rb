@@ -40,7 +40,7 @@ class Transfer < ActiveRecord::Base
   end
 
   def has_target_user?
-    ! target_user.nil?
+    target_user.present?
   end
 
   private
