@@ -54,8 +54,7 @@ class Transfer < ActiveRecord::Base
   end
 
   def transfer_dataset
-    dataset.update_attribute(:user_id, target_user_id)
-    dataset.response_sets.update_all(user_id: target_user_id)
+    dataset.change_owner!(target_user)
   end
 
   def notify_target_user

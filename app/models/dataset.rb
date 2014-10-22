@@ -139,4 +139,9 @@ class Dataset < ActiveRecord::Base
     Rails.application.routes.url_helpers.dataset_url(self, format: :json, host: OpenDataCertificate.hostname)
   end
 
+  def change_owner!(user)
+    update_attribute(:user_id, user.id)
+    response_sets.update_all(user_id: user.id)
+  end
+
 end
