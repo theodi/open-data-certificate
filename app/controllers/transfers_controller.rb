@@ -25,7 +25,7 @@ class TransfersController < ApplicationController
 
   def accept
     @transfer = Transfer.find params[:id]
-    @transfer.assign_attributes params[:transfer]
+    @transfer.token_confirmation = params.fetch(:transfer, {})[:token_confirmation]
     @transfer.target_user = current_user
     @transfer.save
 

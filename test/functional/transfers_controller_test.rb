@@ -77,13 +77,13 @@ class TransfersControllerTest < ActionController::TestCase
     refute transfer.reload.accepted?
   end
 
-  test "accepting user can't override the target_email" do
+  test "accepting user can't override the target_email to bypass check" do
     sign_in user = FactoryGirl.create(:user)
     transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
 
-    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: user.email}
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: "foo+#{user.email}"}
 
-    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied_email'), flash[:error]
     refute transfer.reload.accepted?
 
   end
