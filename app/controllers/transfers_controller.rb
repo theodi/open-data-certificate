@@ -27,6 +27,7 @@ class TransfersController < ApplicationController
     @transfer = Transfer.find params[:id]
     @transfer.assign_attributes params[:transfer]
     @transfer.target_user = current_user
+    @transfer.save
 
     begin
       authorize! :accept, @transfer

@@ -59,7 +59,7 @@ class Transfer < ActiveRecord::Base
   end
 
   def notify_target_user
-    TransferMailer.notify(self).deliver
+    TransferMailer.notify(id).deliver
   end
   handle_asynchronously :notify_target_user
 
