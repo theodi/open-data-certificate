@@ -35,12 +35,16 @@ class Survey < ActiveRecord::Base
   has_many :dependencies, :through => :questions
   has_many :answers, through: :questions
 
+  def self.by_jurisdiction(access_code)
+    where(access_code: access_code)
+  end
+
   def self.available_to_complete
     order('access_code DESC, survey_version DESC').group(:access_code)
   end
 
   def self.newest_survey_for_access_code(access_code)
-    where(access_code: access_code).order("surveys.survey_version DESC").first
+    by_jurisdiction(access_code).order("surveys.survey_version DESC").first
   end
 
   def self.migrate_access_code(access_code)

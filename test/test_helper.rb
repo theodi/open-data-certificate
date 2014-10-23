@@ -47,6 +47,13 @@ Spork.each_run do
       builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
       builder.parse_file
     end
+
+    def http_auth(user)
+      header = ActionController::HttpAuthentication::Basic.encode_credentials(
+        user.email, user.authentication_token)
+      request.env['HTTP_AUTHORIZATION'] = header
+      sign_in user
+    end
   end
 
 end

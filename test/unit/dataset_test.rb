@@ -127,22 +127,18 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of autopublished certificate' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -154,21 +150,17 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of certificate with missing field' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -179,25 +171,21 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of certificate with invalid URL' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     stub_request(:get, "http://www.example/error").
         to_return(:body => "", status: 404)
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example/error',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example/error',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -208,28 +196,18 @@ class DatasetTest < ActiveSupport::TestCase
   test "doesn't show results when generation hasn't happened" do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    cert = CertificateGenerator.create(request: request, survey: survey, user: user)
-    response = Dataset.last.generation_result
-
-    assert_equal("pending", response[:success])
-    assert_equal("http://test.host/datasets/#{Dataset.last.id}.json", response[:dataset_url])
-
-    cert.generate(false)
+    cert = CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -240,28 +218,18 @@ class DatasetTest < ActiveSupport::TestCase
 
   test "generation result for unclaimed certificate" do
     load_custom_survey 'cert_generator.rb'
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    cert = CertificateGenerator.create(request: request, survey: survey)
-    response = Dataset.last.generation_result
-
-    assert_equal("pending", response[:success])
-    assert_equal("http://test.host/datasets/#{Dataset.last.id}.json", response[:dataset_url])
-
-    cert.generate(false)
+    cert = CertificateGenerator.create(request: request).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
