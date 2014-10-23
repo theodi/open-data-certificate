@@ -69,6 +69,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_ability
+    @current_ability ||= Hash.new { |h, k| Ability.new(k) }
+    @current_ability[current_user]
+  end
+
   # display 404 when we can't find a record
   def record_not_found
     render :file => Rails.root.join('public','404.html'), :status => "404 Not Found", layout: false
