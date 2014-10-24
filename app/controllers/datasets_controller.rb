@@ -157,8 +157,7 @@ class DatasetsController < ApplicationController
     generator = CertificateGenerator.find(params[:certificate_generator_id])
     authorize! :read, generator
     if generator.completed?
-      dataset = generator.dataset
-      render json: {success: true, dataset_id: dataset.id, dataset_url: dataset.api_url}
+      redirect_to generator.dataset_url
     else
       render json: {success: "pending", dataset_id: nil, dataset_url: status_datasets_url(generator)}
     end

@@ -114,6 +114,10 @@ class CertificateGenerator < ActiveRecord::Base
     certificate
   end
 
+  def dataset_url
+    dataset.api_url
+  end
+
   # the dataset parameters from the request, defaults to {}
   def request=(value)
     write_attribute(:request, value.with_indifferent_access)

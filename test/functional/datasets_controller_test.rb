@@ -384,6 +384,8 @@ class DatasetsControllerTest < ActionController::TestCase
     response_set = FactoryGirl.create(:response_set_with_dataset)
     generator = CertificateGenerator.create(user: user, completed: true, response_set: response_set)
     get :import_status, certificate_generator_id: generator.id
+    assert_redirected_to dataset_url(response_set.dataset_id, format: :json)
+    get :show, id: response_set.dataset_id, format: :json
     body = JSON.parse(response.body)
     assert_equal(true, body['success'])
     assert_equal(response_set.dataset_id, body['dataset_id'])
