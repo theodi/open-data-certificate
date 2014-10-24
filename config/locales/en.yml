@@ -220,6 +220,7 @@ en:
     description: Description
     certification_types:
       self: self certified
+      auto: automatically awarded
       community: community certified
       odi_audited: ODI audited
     mark_audited: Mark audited
