@@ -114,6 +114,7 @@ class Dataset < ActiveRecord::Base
       {
         success: true,
         dataset_id: id,
+        dataset_url: api_url,
         certificate_url: certificate_url,
         published: response_set.published?,
         owner_email: user_email,
