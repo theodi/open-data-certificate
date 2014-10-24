@@ -37,6 +37,10 @@ FactoryGirl.define do
     r.string_value {}
     r.response_other {}
     r.response_group {}
+
+    factory :valid_response do |r|
+      question
+      answer
+    end
   end
-  
 end

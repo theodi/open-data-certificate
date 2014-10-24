@@ -7,6 +7,7 @@ class Certificate < ActiveRecord::Base
   has_one :survey,  through: :response_set
   has_one :user,    through: :response_set
   has_one :dataset, through: :response_set
+  has_one :certificate_generator, through: :response_set
   has_many :verifications
   has_many :verifying_users, through: :verifications, source: :user
 
@@ -127,8 +128,24 @@ class Certificate < ActiveRecord::Base
   end
 
   def certification_type
-    return :odi_audited if self.audited
-    verifications.count >= 2 ? :community : :self
+    if self.audited?
+      :odi_audited
+    elsif verifications.count >= 2
+      :community
+    elsif machine_generated? && !has_newer_responses?(certificate_generator.updated_at)
+      :auto
+    else
+      :self
+    end
+  end
+
+  def machine_generated?
+    certificate_generator.present?
+  end
+
+  def has_newer_responses?(datetime)
+    newest_response_at = response_set.responses.maximum(:updated_at)
+    newest_response_at && newest_response_at > datetime
   end
 
   def update_from_response_set

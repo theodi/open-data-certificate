@@ -65,6 +65,24 @@ class CertificateTest < ActiveSupport::TestCase
 
   end
 
+  test 'certification_type if auto generated' do
+    response_set = FactoryGirl.create(:response_set_with_dataset)
+    3.times { FactoryGirl.create(:valid_response, response_set: response_set) }
+    certificate_generator = CertificateGenerator.create(response_set: response_set)
+    certificate = response_set.certificate
+
+    assert_equal :auto, certificate.certification_type
+  end
+
+  test 'no longer auto generated if responses have been updated since generation' do
+    response_set = FactoryGirl.create(:response_set_with_dataset, updated_at: 4.minutes.ago)
+    3.times { FactoryGirl.create(:valid_response, response_set: response_set, updated_at: 6.minutes.ago) }
+    certificate_generator = CertificateGenerator.create(response_set: response_set, updated_at: 5.minutes.ago)
+    certificate = response_set.certificate
+
+    assert_equal :self, certificate.certification_type
+  end
+
   test 'published_certificates' do
     @certificate1.update_attributes(published: true)
     @certificate2.update_attributes(published: true)
