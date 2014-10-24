@@ -39,6 +39,10 @@ OpenDataCertificate::Application.routes.draw do
     get :admin, on: :collection
     get :schema, on: :collection
 
+    collection do
+      get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+    end
+
     resources :certificates, :only => [:show, :update] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'

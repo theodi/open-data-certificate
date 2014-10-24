@@ -31,9 +31,7 @@ class CertificatePresenter < SimpleDelegator
   end
 
   def user_name
-    if user
-      [user.first_name, user.last_name].join(" ").strip
-    end
+    user.try(:full_name)
   end
 
   def published_email

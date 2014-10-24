@@ -143,7 +143,7 @@ class CertificateTest < ActiveSupport::TestCase
   test 'returns url of certificate' do
     certificate = FactoryGirl.create(:response_set_with_dataset).certificate
 
-    assert_match /http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+/, certificate.url
+    assert_match /http:\/\/test\.host\/datasets\/[0-9]+\/certificates\/[0-9]+/, certificate.url
   end
 
 end

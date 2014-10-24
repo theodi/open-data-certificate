@@ -3,7 +3,7 @@ class DatasetsController < ApplicationController
   skip_authorize_resource :only => :show
 
   before_filter :authenticate_user!, only: :dashboard
-  before_filter :authenticate_user_from_token!, only: [:create, :update_certificate]
+  before_filter :authenticate_user_from_token!, only: [:create, :update_certificate, :import_status]
   before_filter(:only => [:show, :index]) { alternate_formats [:feed, :json] }
 
   def index
@@ -125,14 +125,48 @@ class DatasetsController < ApplicationController
   end
 
   def create
-    response = CertificateGenerator.generate(params, current_user)
-    response[:success] == "pending" ? status = :accepted : status = :unprocessable_entity
-    render json: response, status: status
+    jurisdiction, dataset = params.values_at(:jurisdiction, :dataset)
+    campaign, create_user = params.values_at(:campaign, :create_user)
+    status = :unprocessable_entity
+    result = if Survey.by_jurisdiction(jurisdiction).exists?
+      if campaign
+        campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(campaign)
+      end
+      if dataset
+        if Dataset.where(documentation_url: dataset[:documentationUrl]).exists?
+          campaign.increment!(:duplicate_count) if campaign
+
+          {success: false, errors: ['Dataset already exists']}
+        else
+          generator = CertificateGenerator.create(request: dataset, user: current_user, certification_campaign: campaign)
+          generator.delay.generate(jurisdiction, create_user)
+
+          status = :accepted
+          {success: "pending", dataset_id: nil, dataset_url: status_datasets_url(generator)}
+        end
+      else
+        {success: false, errors: ['Dataset information required']}
+      end
+    else
+      {success: false, errors: ['Jurisdiction not found']}
+    end
+    render json: result, status: status
+  end
+
+  def import_status
+    generator = CertificateGenerator.find(params[:certificate_generator_id])
+    authorize! :read, generator
+    if generator.completed?
+      redirect_to generator.dataset_url
+    else
+      render json: {success: "pending", dataset_id: nil, dataset_url: status_datasets_url(generator)}
+    end
   end
 
   def update_certificate
-    @dataset = Dataset.find(params[:dataset_id])
-    render json: CertificateGenerator.update(@dataset, params, current_user)
+    jurisdiction, dataset = params.values_at(:jurisdiction, :dataset)
+    dataset_model = Dataset.find(params[:dataset_id])
+    render json: CertificateGenerator.update(dataset_model, dataset, jurisdiction, current_user)
   end
 
   def schema

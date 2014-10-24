@@ -43,7 +43,7 @@ Given(/^I create a certificate via the API$/) do
 end
 
 Given(/^I request that the API creates a user$/) do
-  @body[:create_user] = "true"
+  @body[:create_user] = true
 end
 
 Given(/^my dataset contains contact details$/) do
@@ -57,7 +57,18 @@ end
 
 Given(/^my dataset does not contain contact details$/) do
   ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
-      publishers: []
+      publishers: [
+        DataKitten::Agent.new(mbox: "")
+      ]
+    }})
+  @email = @api_user.email
+end
+
+Given(/^my dataset contains invalid contact details$/) do
+  ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
+      publishers: [
+        DataKitten::Agent.new(mbox: "bad email@example.org")
+      ]
     }})
   @email = @api_user.email
 end
@@ -70,10 +81,15 @@ When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
   @response = post '/datasets', @body
+  @status_url = JSON.parse(@response.body)['dataset_url']
 end
 
 When(/^the certificate is created$/) do
-  CertificateGenerator.first.generate(!@body[:create_user].blank?)
+  CertificateGenerator.first.generate(@body[:jurisdiction], @body[:create_user])
+end
+
+When(/^I request the status via the API$/) do
+  @response = get @status_url
 end
 
 When(/^I request the results via the API$/) do
@@ -140,7 +156,7 @@ Then(/^there should only be one dataset$/) do
 end
 
 Then(/^I should get the certificate URL$/) do
-  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+\"/,  @response.body
+  assert_match /\"certificate_url\":\"http:\/\/test\.host\/datasets\/[0-9]+\/certificates\/[0-9]+\"/,  @response.body
 end
 
 Then(/^my certificate should be linked to a campaign$/) do

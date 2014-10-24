@@ -285,4 +285,119 @@ class DatasetsControllerTest < ActionController::TestCase
 
   end
 
+  test "creating a certificate without a jurisdiction" do
+    http_auth FactoryGirl.create(:user)
+    post :create
+    body = JSON.parse(response.body)
+    assert_equal(422, response.status)
+    assert_equal(false, body['success'])
+    assert_equal(["Jurisdiction not found"], body['errors'])
+  end
+
+  test "creating a certificate requires some dataset information" do
+    load_custom_survey 'cert_generator.rb'
+    http_auth FactoryGirl.create(:user)
+    post :create, jurisdiction: 'cert-generator'
+    body = JSON.parse(response.body)
+    assert_equal(422, response.status)
+    assert_equal(false, body['success'])
+    assert_equal(["Dataset information required"], body['errors'])
+  end
+
+  test "failure to create a duplicate certificate" do
+    load_custom_survey 'cert_generator.rb'
+    dataset = FactoryGirl.create(:dataset)
+    http_auth FactoryGirl.create(:user)
+    post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
+    body = JSON.parse(response.body)
+    assert_equal(422, response.status)
+    assert_equal(false, body['success'])
+    assert_equal(["Dataset already exists"], body['errors'])
+  end
+
+  test "delays generating the certificate" do
+    load_custom_survey 'cert_generator.rb'
+    http_auth FactoryGirl.create(:user)
+
+    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
+    CertificateGenerator.any_instance.expects(:generate).once
+
+    assert_difference "CertificateGenerator.count", 1 do
+      post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: "http://example.org"}
+    end
+    body = JSON.parse(response.body)
+    assert_equal(202, response.status)
+    assert_equal("pending", body['success'])
+    assert_equal(status_datasets_url(CertificateGenerator.last), body['dataset_url'])
+  end
+
+  test "associates certificate generation with a campaign" do
+    load_custom_survey 'cert_generator.rb'
+    user = FactoryGirl.create(:user)
+    http_auth user
+
+    CertificateGenerator.any_instance.stubs(:delay).returns stub(generate: nil)
+
+    assert_difference "CertificationCampaign.count", 1 do
+      post :create, jurisdiction: 'cert-generator',
+        dataset: {documentationUrl: "http://example.org"},
+        campaign: 'fourmoreyears'
+    end
+
+    CertificationCampaign.last.tap do |campaign|
+      assert_equal('fourmoreyears', campaign.name)
+      assert_equal(user, campaign.user)
+    end
+  end
+
+  test "certificate campaigns are per user" do
+    load_custom_survey 'cert_generator.rb'
+    generating_user = FactoryGirl.create(:user)
+    other_user = FactoryGirl.create(:user)
+    http_auth generating_user
+
+    CertificateGenerator.any_instance.stubs(:delay).returns stub(generate: nil)
+
+    assert_difference "CertificationCampaign.count", 1 do
+      post :create, jurisdiction: 'cert-generator',
+        dataset: {documentationUrl: "http://example.org"},
+        campaign: 'fourmoreyears'
+    end
+
+    assert CertificationCampaign.where(user_id: generating_user.id, name: 'fourmoreyears').exists?
+    refute CertificationCampaign.where(user_id: other_user.id, name: 'fourmoreyears').exists?
+  end
+
+  test "pending status endpoint" do
+    user = FactoryGirl.create(:user)
+    http_auth user
+    generator = CertificateGenerator.create(user: user)
+    get :import_status, certificate_generator_id: generator.id
+    body = JSON.parse(response.body)
+    assert_equal("pending", body['success'])
+    assert_equal(status_datasets_url(CertificateGenerator.last), body['dataset_url'])
+  end
+
+  test "completed status endpoint" do
+    user = FactoryGirl.create(:user)
+    http_auth user
+    response_set = FactoryGirl.create(:response_set_with_dataset)
+    generator = CertificateGenerator.create(user: user, completed: true, response_set: response_set)
+    get :import_status, certificate_generator_id: generator.id
+    assert_redirected_to dataset_url(response_set.dataset_id, format: :json)
+    get :show, id: response_set.dataset_id, format: :json
+    body = JSON.parse(response.body)
+    assert_equal(true, body['success'])
+    assert_equal(response_set.dataset_id, body['dataset_id'])
+    assert_equal(dataset_url(response_set.dataset_id, :format => :json), body['dataset_url'])
+  end
+
+  test "status endpoint is limited to creating user" do
+    generating_user = FactoryGirl.create(:user)
+    other_user = FactoryGirl.create(:user)
+    http_auth other_user
+    generator = CertificateGenerator.create(user: generating_user)
+    get :import_status, certificate_generator_id: generator.id
+    assert_response 403
+  end
 end

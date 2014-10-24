@@ -1,6 +1,8 @@
 class Dataset < ActiveRecord::Base
   belongs_to :user
 
+  delegate :full_name, :email, :to => :user, :prefix => true, :allow_nil => true
+
   attr_accessible :title
 
   after_touch :destroy_if_no_responses
@@ -61,7 +63,7 @@ class Dataset < ActiveRecord::Base
 
   def set_default_curator!(url)
     if url && persisted?
-      self.documentation_url = url
+      self.curator = url
       save unless readonly?
       url
     end
@@ -77,10 +79,6 @@ class Dataset < ActiveRecord::Base
 
   def destroy_if_no_responses
     destroy if response_sets.empty?
-  end
-
-  def user_full_name
-    user.full_name if user
   end
 
   def register_embed(referer)
@@ -113,9 +111,17 @@ class Dataset < ActiveRecord::Base
 
       certificate_url = certificate.url if certificate
 
-      {success: true, dataset_id: response_set.dataset_id, certificate_url: certificate_url, published: response_set.published?, owner_email: response_set.user.email, errors: errors}
+      {
+        success: true,
+        dataset_id: id,
+        dataset_url: api_url,
+        certificate_url: certificate_url,
+        published: response_set.published?,
+        owner_email: user_email,
+        errors: errors
+      }
     else
-      {success: "pending", dataset_id: self.id, dataset_url: self.api_url}
+      {success: "pending", dataset_id: id, dataset_url: api_url}
     end
   end
 

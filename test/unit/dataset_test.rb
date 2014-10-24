@@ -2,42 +2,29 @@ require 'test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
 
-  test "Should set the title if it hasn't been set before" do
-    dataset = FactoryGirl.create(:untitled_dataset)
-    dataset.set_default_title!('Test dataset default title')
-    dataset.reload
+  [
+    [:untitled_dataset, :title, :set_default_title!, "Test original title", "Test dataset default title"],
+    [:dataset, :curator, :set_default_curator!, "Some Org", "Newer Org"],
+    [:dataset_without_documentation_url, :documentation_url, :set_default_documentation_url!, "http://original.org", "http://new.org"]
+  ].each do |factory, attr, method, orig_value, new_value|
+    test "sets the #{attr} if it hasn't been set before" do
+      dataset = FactoryGirl.create(factory)
+      dataset.send(method, new_value)
+      dataset.reload
 
-    assert_equal(dataset.title, 'Test dataset default title')
-  end
+      assert_equal(dataset.send(attr), new_value)
+    end
 
-  test "Should overwrite the title if it has been set before" do
-    dataset = FactoryGirl.create(:dataset, title: 'Test original title')
-    assert_equal(dataset.title, 'Test original title')
-    dataset.reload
+    test "overwrites the #{attr} if it has been set before" do
+      dataset = FactoryGirl.create(factory, attr => orig_value)
+      assert_equal(dataset.send(attr), orig_value)
+      dataset.reload
 
-    dataset.set_default_title!('Test dataset default title')
-    dataset.reload
+      dataset.send(method, new_value)
+      dataset.reload
 
-    assert_equal(dataset.title, 'Test dataset default title')
-  end
-
-  test "Should set the documentation URL if it hasn't been set before" do
-    dataset = FactoryGirl.create(:dataset_without_documentation_url)
-    dataset.set_default_documentation_url!('http://foo.com')
-    dataset.reload
-
-    assert_equal(dataset.documentation_url, 'http://foo.com')
-  end
-
-  test "Should overwrite the documentation URL if it has been set before" do
-    dataset = FactoryGirl.create(:dataset, documentation_url: 'http://foo.com')
-    assert_equal(dataset.documentation_url, 'http://foo.com')
-    dataset.reload
-
-    dataset.set_default_documentation_url!('http://foo.com/bar')
-    dataset.reload
-
-    assert_equal(dataset.documentation_url, 'http://foo.com/bar')
+      assert_equal(dataset.send(attr), new_value)
+    end
   end
 
   test "#newest_response_set should return the most recent response set" do
@@ -140,22 +127,18 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of autopublished certificate' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -167,21 +150,17 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of certificate with missing field' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -192,25 +171,21 @@ class DatasetTest < ActiveSupport::TestCase
   test 'get results of certificate with invalid URL' do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     stub_request(:get, "http://www.example/error").
         to_return(:body => "", status: 404)
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example/error',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example/error',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    CertificateGenerator.create(request: request, survey: survey, user: user).generate(false)
+    CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -218,31 +193,21 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
   end
 
-  test 'doesn\'t show results when generation hasn\'t happened' do
+  test "doesn't show results when generation hasn't happened" do
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
-    survey = Survey.newest_survey_for_access_code 'cert-generator'
 
     request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
-    cert = CertificateGenerator.create(request: request, survey: survey, user: user)
-    response = Dataset.last.generation_result
-
-    assert_equal("pending", response[:success])
-    assert_equal("http://test.dev/datasets/#{Dataset.last.id}.json", response[:dataset_url])
-
-    cert.generate(false)
+    cert = CertificateGenerator.create(request: request, user: user).generate('cert-generator', false)
     response = Dataset.last.generation_result
 
     assert_equal(true, response[:success])
@@ -251,10 +216,32 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal([], response[:errors])
   end
 
+  test "generation result for unclaimed certificate" do
+    load_custom_survey 'cert_generator.rb'
+
+    request = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+
+    cert = CertificateGenerator.create(request: request).generate('cert-generator', false)
+    response = Dataset.last.generation_result
+
+    assert_equal(true, response[:success])
+    assert_equal(true, response[:published])
+    assert_equal(nil, response[:owner_email])
+    assert_equal([], response[:errors])
+  end
+
   test 'returns an api_url' do
     dataset = FactoryGirl.create(:dataset)
 
-    assert_equal "http://test.dev/datasets/1.json", dataset.api_url
+    assert_equal "http://test.host/datasets/1.json", dataset.api_url
   end
 
 end

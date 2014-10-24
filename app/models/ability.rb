@@ -31,5 +31,9 @@ class Ability
 
     can :destroy, Transfer, user: user
 
+    can :read, CertificateGenerator do |generator|
+      generator.try(:user) == user
+    end
+
   end
 end
