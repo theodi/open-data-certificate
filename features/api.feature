@@ -6,7 +6,7 @@ Feature: Open Data Certificate API
 
   Scenario: API call returns pending initially
     When I request a certificate via the API
-    And I request the results via the API
+    And I request the status via the API
     Then the API response should return pending
     When the certificate is created
     And I request the results via the API

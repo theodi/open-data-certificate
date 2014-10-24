@@ -81,10 +81,15 @@ When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
   @response = post '/datasets', @body
+  @status_url = JSON.parse(@response.body)['dataset_url']
 end
 
 When(/^the certificate is created$/) do
-  CertificateGenerator.first.generate(@body[:create_user])
+  CertificateGenerator.first.generate(@body[:jurisdiction], @body[:create_user])
+end
+
+When(/^I request the status via the API$/) do
+  @response = get @status_url
 end
 
 When(/^I request the results via the API$/) do
@@ -151,7 +156,7 @@ Then(/^there should only be one dataset$/) do
 end
 
 Then(/^I should get the certificate URL$/) do
-  assert_match /\"certificate_url\":\"http:\/\/test\.dev\/datasets\/[0-9]+\/certificates\/[0-9]+\"/,  @response.body
+  assert_match /\"certificate_url\":\"http:\/\/test\.host\/datasets\/[0-9]+\/certificates\/[0-9]+\"/,  @response.body
 end
 
 Then(/^my certificate should be linked to a campaign$/) do
