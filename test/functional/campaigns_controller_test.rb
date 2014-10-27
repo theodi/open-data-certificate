@@ -19,8 +19,8 @@ class CampaignsControllerTest < ActionController::TestCase
   end
 
   test "should show details for a single campaign" do
-    FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
-    get :show, id: 'data.gov.uk'
+    campaign = FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
+    get :show, id: campaign.id
     assert_response :success
   end
 
