@@ -21,7 +21,8 @@ Feature: Display information about campaigns in UI
     And I should see "1 dataset already existed"
 
   Scenario: view single campaign as CSV
-    When I visit the campaign page for "brian.csv"
+    When I visit the campaign page for "brian"
+    And I click the "Download CSV" link
     Then I should get a CSV file
     And CSV row 0 column "Success?" should be "true"
     And CSV row 0 column "Published?" should be "true"
