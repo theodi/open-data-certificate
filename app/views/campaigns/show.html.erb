@@ -1,9 +1,10 @@
-<h1>Campaign Details</h1>
+<% content_for :header_title, "Campaign Details" %>
 <h2><%= @campaign.name %></h2>
+<p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 <ul>
-  <li><%= pluralize @total_count, 'dataset' %> inspected</li>
-  <li><%= pluralize @campaign.certificate_generators.count, 'dataset' %> added</li>
-  <li><%= pluralize @published_count, 'certificate' %> published</li>
+  <li><%= pluralize @campaign.total_count, 'dataset' %> inspected</li>
+  <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
+  <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
 </ul>
 <table class='table table-striped'>
@@ -24,13 +25,13 @@
       User
     </td>
   </tr>
-  <% @campaign.certificate_generators.each do |generator| %>
+  <% @generators.each do |generator| %>
     <tr>
       <td>
-        &check;
+        <%= boolean_mark(generator.completed?) %>
       </td>
       <td>
-        <%= generator.certificate.published? ? "&check;".html_safe : "" %>
+        <%= boolean_mark(generator.certificate.published?) %>
       </td>
       <td>
         <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
@@ -53,5 +54,6 @@
     </tr>
   <% end %>
 </table>
+<%= paginate @generators %>
 
 <%= link_to 'Download CSV', format: "csv" %>

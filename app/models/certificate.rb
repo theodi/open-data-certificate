@@ -13,6 +13,8 @@ class Certificate < ActiveRecord::Base
 
   attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
+  scope :published, where(:published => true)
+
   EXPIRY_NOTICE = 1.month
 
   class << self

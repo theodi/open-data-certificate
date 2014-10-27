@@ -8,16 +8,11 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @total_count = @campaign.certificate_generators.count + @campaign.duplicate_count
-    @published_count = @campaign.certificate_generators.inject(0) do |total, cert|
-      if cert.certificate.published?
-        total += 1
-      else
-        total
-      end
-    end
+    @generators = @campaign.certificate_generators.includes(:dataset, :certificate)
     respond_to do |want|
-      want.html
+      want.html do
+        @generators = @generators.page(params[:page]).per(100)
+      end
       want.csv do
         csv = CSV.generate do |csv|
           csv << [
@@ -27,9 +22,9 @@ class CampaignsController < ApplicationController
             "Certificate URL",
             "User"
           ]
-          @campaign.certificate_generators.each do |gen|
+          @generators.each do |gen|
             csv << [
-              "true",
+              gen.completed?,
               gen.certificate.published?,
               gen.dataset.documentation_url,
               dataset_certificate_url(gen.dataset, gen.certificate),
@@ -45,9 +40,8 @@ class CampaignsController < ApplicationController
   private
 
   def get_campaign
-    @campaign = CertificationCampaign.find_by_name(params[:id])
-    raise ActiveRecord::RecordNotFound unless @campaign # why is this necessary?
-    raise ActionController::RoutingError.new('Forbidden') unless @campaign.user_id == current_user.id
+    @campaign = CertificationCampaign.find(params[:id])
+    authorize! :read, @campaign
   end
 
 end

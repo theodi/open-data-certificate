@@ -6,8 +6,16 @@ class CertificationCampaign < ActiveRecord::Base
 
   attr_accessible :name
 
-  def to_param
-    name
+  def total_count
+    generated_count + duplicate_count
+  end
+
+  def generated_count
+    certificate_generators.count
+  end
+
+  def published_count
+    certificate_generators.joins(:certificate).merge(Certificate.published).count
   end
 
 end
