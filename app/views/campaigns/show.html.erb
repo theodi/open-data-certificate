@@ -1,5 +1,6 @@
 <h1>Campaign Details</h1>
 <h2><%= @campaign.name %></h2>
+<p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 <ul>
   <li><%= pluralize @campaign.total_count, 'dataset' %> inspected</li>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
