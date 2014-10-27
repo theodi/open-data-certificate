@@ -8,6 +8,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    @generators = @campaign.certificate_generators.includes(:dataset, :certificate)
     respond_to do |want|
       want.html
       want.csv do
@@ -19,7 +20,7 @@ class CampaignsController < ApplicationController
             "Certificate URL",
             "User"
           ]
-          @campaign.certificate_generators.each do |gen|
+          @generators.each do |gen|
             csv << [
               "true",
               gen.certificate.published?,
