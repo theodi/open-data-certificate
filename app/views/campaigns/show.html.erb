@@ -1,4 +1,4 @@
-<h1>Campaign Details</h1>
+<% content_for :header_title, "Campaign Details" %>
 <h2><%= @campaign.name %></h2>
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 <ul>
