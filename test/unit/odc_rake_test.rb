@@ -38,20 +38,14 @@ class OdcRakeTest < ActiveSupport::TestCase
   # end
 
   test "The default survey parses correctly" do
-    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
-
     assert_difference 'Survey.count', 1 do
-      Rake::Task["surveyor"].reenable
-      Rake::Task["surveyor"].invoke
+      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.UK.rb'))
     end
   end
 
   test "The US survey parses correctly" do
-    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.US.rb'
-
     assert_difference 'Survey.count', 1 do
-      Rake::Task["surveyor"].reenable
-      Rake::Task["surveyor"].invoke
+      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.US.rb'))
     end
   end
 
