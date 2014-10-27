@@ -41,7 +41,7 @@ class CampaignsController < ApplicationController
 
   def get_campaign
     @campaign = CertificationCampaign.find(params[:id])
-    raise ActionController::RoutingError.new('Forbidden') unless @campaign.user_id == current_user.id
+    authorize! :read, @campaign
   end
 
 end

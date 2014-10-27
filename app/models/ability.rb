@@ -35,5 +35,9 @@ class Ability
       generator.try(:user) == user
     end
 
+    can :read, CertificationCampaign do |campaign|
+      campaign.try(:user) == user
+    end
+
   end
 end
