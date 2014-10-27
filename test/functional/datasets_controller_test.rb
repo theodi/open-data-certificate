@@ -312,6 +312,8 @@ class DatasetsControllerTest < ActionController::TestCase
     body = JSON.parse(response.body)
     assert_equal(422, response.status)
     assert_equal(false, body['success'])
+    assert_equal(dataset.id, body['dataset_id'])
+    assert_equal(dataset_url(dataset, :format => :json), body['dataset_url'])
     assert_equal(["Dataset already exists"], body['errors'])
   end
 

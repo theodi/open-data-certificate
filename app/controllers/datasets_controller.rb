@@ -133,10 +133,10 @@ class DatasetsController < ApplicationController
         campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(campaign)
       end
       if dataset
-        if Dataset.where(documentation_url: dataset[:documentationUrl]).exists?
+        if existing_dataset = Dataset.where(documentation_url: dataset[:documentationUrl]).first
           campaign.increment!(:duplicate_count) if campaign
 
-          {success: false, errors: ['Dataset already exists']}
+          {success: false, errors: ['Dataset already exists'], dataset_id: existing_dataset.id, dataset_url: existing_dataset.api_url}
         else
           generator = CertificateGenerator.create(request: dataset, user: current_user, certification_campaign: campaign)
           generator.delay.generate(jurisdiction, create_user)
