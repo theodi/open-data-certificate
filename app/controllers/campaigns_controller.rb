@@ -10,7 +10,9 @@ class CampaignsController < ApplicationController
   def show
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate)
     respond_to do |want|
-      want.html
+      want.html do
+        @generators = @generators.page(params[:page]).per(100)
+      end
       want.csv do
         csv = CSV.generate do |csv|
           csv << [
