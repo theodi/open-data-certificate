@@ -38,7 +38,7 @@ class CampaignsController < ApplicationController
   private
 
   def get_campaign
-    @campaign = CertificationCampaign.find_by_name!(params[:id])
+    @campaign = CertificationCampaign.find(params[:id])
     raise ActionController::RoutingError.new('Forbidden') unless @campaign.user_id == current_user.id
   end
 

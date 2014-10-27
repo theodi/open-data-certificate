@@ -6,10 +6,6 @@ class CertificationCampaign < ActiveRecord::Base
 
   attr_accessible :name
 
-  def to_param
-    name
-  end
-
   def total_count
     generated_count + duplicate_count
   end
