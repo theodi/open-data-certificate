@@ -26,6 +26,11 @@ class MainController < ApplicationController
     render 'comment'
   end
 
+  def git_head
+    head = Rails.root.to_s.split("/").last
+    render :text => head
+  end
+
   def status
     @job_count = Delayed::Job.count
     @all = Stat.where(name: 'all').last
