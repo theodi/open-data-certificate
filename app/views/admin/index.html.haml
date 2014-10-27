@@ -1,6 +1,6 @@
 - content_for :header_title, @title
 
-%h1
+%h2
   Switch user
 
 %form.form-horizontal
@@ -11,3 +11,6 @@
       = switch_user_select
 
 %hr.heavy
+
+%h2 Certificate generation campaigns
+= link_to "All campaigns", campaigns_path
