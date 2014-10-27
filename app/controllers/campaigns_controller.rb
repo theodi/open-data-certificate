@@ -24,7 +24,7 @@ class CampaignsController < ApplicationController
           ]
           @generators.each do |gen|
             csv << [
-              "true",
+              gen.completed?,
               gen.certificate.published?,
               gen.dataset.documentation_url,
               dataset_certificate_url(gen.dataset, gen.certificate),

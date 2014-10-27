@@ -28,10 +28,10 @@
   <% @generators.each do |generator| %>
     <tr>
       <td>
-        &check;
+        <%= boolean_mark(generator.completed?) %>
       </td>
       <td>
-        <%= generator.certificate.published? ? "&check;".html_safe : "" %>
+        <%= boolean_mark(generator.certificate.published?) %>
       </td>
       <td>
         <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
