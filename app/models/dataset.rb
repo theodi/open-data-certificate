@@ -18,6 +18,11 @@ class Dataset < ActiveRecord::Base
 
   has_many :embed_stats
 
+  # this subquery is necessary because a group('responses_sets.dataset_id')
+  # entirely changes the behaviour of count() so that the pagination fails
+  # by generating invalid sql
+  scope :with_responses, where(:id => joins(:response_sets).select('datasets.id'))
+
   class << self
     def match_to_user_domain(datasetUrl)
       domain = Domainatrix.parse(datasetUrl).domain

@@ -8,7 +8,9 @@
           Warning
       %p= t('dashboard.expiring_certificates')
 
-= render partial: :dataset, collection: @datasets
+- if @datasets.present?
+  = render partial: :dataset, collection: @datasets
+  = paginate @datasets
 
 :javascript
 

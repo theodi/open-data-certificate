@@ -93,7 +93,9 @@ class DatasetsController < ApplicationController
   end
 
   def dashboard
-    @datasets = current_user.try(:datasets).reject {|d| d.response_sets.blank? } || []
+    if current_user
+      @datasets = current_user.datasets.with_responses.page params[:page]
+    end
     @surveys = Survey.available_to_complete
 
     respond_to do |format|
