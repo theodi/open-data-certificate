@@ -402,4 +402,27 @@ class DatasetsControllerTest < ActionController::TestCase
     get :import_status, certificate_generator_id: generator.id
     assert_response 403
   end
+
+  test "dataset info endpoint with no data" do
+    get :info, format: :json
+    assert_response :ok
+    body = JSON.parse(response.body)
+    assert_equal(0, body['published_certificate_count'])
+  end
+
+  test "dataset info with draft datasets" do
+    3.times { FactoryGirl.create(:dataset) }
+    get :info, format: :json
+    assert_response :ok
+    body = JSON.parse(response.body)
+    assert_equal(0, body['published_certificate_count'])
+  end
+
+  test "dataset info with published datasets" do
+    3.times { FactoryGirl.create(:published_certificate_with_dataset) }
+    get :info, format: :json
+    assert_response :ok
+    body = JSON.parse(response.body)
+    assert_equal(3, body['published_certificate_count'])
+  end
 end

@@ -38,6 +38,7 @@ OpenDataCertificate::Application.routes.draw do
     get :typeahead, on: :collection
     get :admin, on: :collection
     get :schema, on: :collection
+    get :info, on: :collection
 
     collection do
       get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
