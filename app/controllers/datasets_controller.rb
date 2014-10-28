@@ -6,6 +6,16 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user_from_token!, only: [:create, :update_certificate, :import_status]
   before_filter(:only => [:show, :index]) { alternate_formats [:feed, :json] }
 
+  def info
+    respond_to do |format|
+      format.json do
+        render json: {
+          published_certificate_count: Dataset.published_count
+        }
+      end
+    end
+  end
+
   def index
 
     @datasets = Dataset
