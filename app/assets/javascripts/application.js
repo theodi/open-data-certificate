@@ -469,4 +469,14 @@ $(document).ready(function($){
         selectBox.text(self.find(':selected').text());
     });
   });
+
+  $('.claim .approval [data-type=json]').on('ajax:success', function(evt, data, status, xhr) {
+    var buttons = $(this).parents('.approval').find('input[type=submit]');
+    var button = $(this).find('input[type=submit]');
+    var label = button.data('disabled-text');
+    window.setTimeout(function() {
+        button.val(data.message);
+        buttons.prop('disabled', true);
+    }, 0);
+  });
 });

@@ -60,6 +60,11 @@ OpenDataCertificate::Application.routes.draw do
     put :accept, on: :member
   end
 
+  resources :claims, :except => :destroy do
+    post :approve, on: :member
+    post :deny, on: :member
+  end
+
   # User dashboard
   get 'users/dashboard', to: 'datasets#dashboard', as: 'dashboard'
   get 'dashboard', to: redirect('/users/dashboard')

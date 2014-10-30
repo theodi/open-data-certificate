@@ -7,6 +7,8 @@ class Claim < ActiveRecord::Base
 
   validates_associated :user, :dataset, :initiating_user
 
+  scope :outstanding, where(:aasm_state => [:new, :notified])
+
   before_create do
     self.user ||= dataset.user
   end

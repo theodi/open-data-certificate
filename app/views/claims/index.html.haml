@@ -1,0 +1,12 @@
+- content_for :header_title, t('.outstanding_claims')
+
+%section
+
+- if @outstanding_claims.any?
+
+  %hr.heavy
+  = render partial: 'outstanding_claim', collection: @outstanding_claims
+  = paginate @outstanding_claims
+
+- else
+  %p= t('.no_outstanding_claims')

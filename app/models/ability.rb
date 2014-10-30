@@ -29,6 +29,10 @@ class Ability
       !transfer.target_email_changed?
     end
 
+    can :manage, Claim do |claim|
+      user.admin? || claim.try(:user) == user
+    end
+
     can :destroy, Transfer, user: user
 
     can :read, CertificateGenerator do |generator|
