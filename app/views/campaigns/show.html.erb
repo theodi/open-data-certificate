@@ -42,13 +42,6 @@
       <td>
         <% if generator.certificate.published? %>
           <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
-        <% else %>
-          <% if !generator.response_set.all_mandatory_questions_complete? %>
-            <%= generator.response_set.uncompleted_mandatory_questions_count %> missing answers
-          <% end %>
-          <% if !generator.response_set.all_urls_resolve? %>
-            Couldn't resolve all URLs
-          <% end %>
         <% end %>
       </td>
       <td>
