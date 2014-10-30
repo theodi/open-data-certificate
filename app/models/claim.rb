@@ -1,6 +1,8 @@
 class Claim < ActiveRecord::Base
   include AASM
 
+  DELIVERY_ADMIN_OVERRIDE = true
+
   belongs_to :dataset
   belongs_to :user
   belongs_to :initiating_user, class_name: 'User'
@@ -16,11 +18,11 @@ class Claim < ActiveRecord::Base
   aasm do
     state :new, initial: true
 
-    state :notified, before_enter: :notify_user
+    state :notified, after_enter: :notify_user
 
-    state :accepted, before_enter: :transfer_dataset
+    state :accepted, before_enter: :transfer_dataset!, after_enter: :notify_of_approval
 
-    state :denied, before_enter: :notify_initiator
+    state :denied, after_enter: :notify_of_denial
 
     event :notify do
       transitions from: :new, to: :notified
@@ -35,17 +37,22 @@ class Claim < ActiveRecord::Base
     end
   end
 
-  def transfer_dataset
+  def transfer_dataset!
     dataset.change_owner!(initiating_user)
   end
 
   def notify_user
-    ClaimMailer.notify(id).deliver
+    ClaimMailer.notify(self).deliver
   end
   handle_asynchronously :notify_user
 
-  def notify_initiator
-    ClaimMailer.notify_of_denial(id).deliver
+  def notify_of_denial
+    ClaimMailer.notify_of_denial(self).deliver
   end
-  handle_asynchronously :notify_initiator
+  handle_asynchronously :notify_of_denial
+
+  def notify_of_approval
+    ClaimMailer.notify_of_approval(self).deliver
+  end
+  handle_asynchronously :notify_of_approval
 end

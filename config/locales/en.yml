@@ -390,6 +390,23 @@ en:
     approved: Transfer approved
     denied: Trasnfer denied
 
+  claim_mailer:
+    notify:
+      subject: There has been an ownership claim made for '%{title}'
+      admin_subject: "Certificate ownership transfer: %{dataset_id}"
+      message: |
+        You have been asked to hand over ownership of an Open Data Certificate.
+        Please visit %{url} to accept or deny this claim.
+    notify_of_approval:
+      subject: You have been given ownership of '%{title}'
+      message: |
+        The ownership you requested of '%{title}' has been approved.
+        You can update information about the dataset by visiting %{url}
+    notify_of_denial:
+      subject: Transfer of ownership of '%{title}' has been denied
+      message: |
+        The ownership you requested of '%{title}' has not been granted.
+
   status_panel:
     title: Certificate level key
     description: This shows your progress towards each data certificate.
