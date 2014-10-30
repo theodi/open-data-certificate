@@ -55,6 +55,7 @@ class ClaimsControllerTest < ActionController::TestCase
 
     assert_response :ok
     assert_equal 3, assigns(:outstanding_claims).size
+    ENV['ODC_ADMIN_IDS'] = ''
   end
 
   test "approving claim" do
