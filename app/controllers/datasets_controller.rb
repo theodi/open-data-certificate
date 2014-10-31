@@ -18,7 +18,7 @@ class DatasetsController < ApplicationController
 
   def index
 
-    @datasets = Dataset
+    datasets = Dataset
                 .where(removed: false)
                 .includes(:response_set, :certificate)
                 .joins(:response_set)
@@ -27,29 +27,30 @@ class DatasetsController < ApplicationController
     @title = t('datasets.datasets')
 
     if params[:jurisdiction]
-      @datasets = @datasets.joins(response_set: :survey)
+      datasets = datasets.joins(response_set: :survey)
                            .merge(Survey.where(title: params[:jurisdiction]))
     end
 
     if params[:publisher]
-      @datasets = @datasets.joins(response_set: :certificate)
+      datasets = datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
 
-    if params[:search]
+    if term = params[:search]
       @title = t('datasets.search_results')
 
-      base = @datasets.joins(:certificate).joins({response_set: :survey}).reorder('')
-
-      # this is far from ideal - loads in all matches then limits for pagination
-      results = base.merge(Certificate.search(name_cont: params[:search]).result).all +
-                base.merge(Certificate.search(curator_cont: params[:search]).result).all +
-                base.merge(Survey.search(full_title_cont: params[:search]).result).all
-
-      @datasets = Kaminari.paginate_array(results.flatten.uniq).page params[:page]
-    else
-      @datasets = @datasets.page params[:page]
+      datasets = datasets.joins(:certificate)
+        .joins({response_set: :survey})
+        .reorder('')
+        .search(
+          m: 'or',
+          certificates_name_cont: term,
+          certificates_curator_cont: term,
+          survey_full_title_cont: term)
+        .result
     end
+
+    @datasets = datasets.page params[:page]
 
     respond_to do |format|
       format.html
