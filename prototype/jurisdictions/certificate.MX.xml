@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.9" status="alpha" jurisdiction="MX" xml:lang="es">
+<questionnaire version="0.9" status="beta" jurisdiction="MX" xml:lang="es">
    <help>
       <p>El presente cuestionario de autoevaluación genera un certificado e insignia de datos abiertos que usted puede publicar para informar al público sobre estos datos abiertos. Nosotros utilizaremos sus respuestas para determinar la manera en que las organizaciones publican los datos abiertos.</p>
       <p>El responder estas preguntas, demuestra el esfuerzo hecho para cumplir con la legislación relativa a datos abiertos. Adicionalmente, sugerimos revise la legislación aplicable específicamente a su sector.</p>
