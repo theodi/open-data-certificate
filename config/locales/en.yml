@@ -384,7 +384,7 @@ en:
       claim_certificate: If this is your dataset, then let us know so you can own and manage the certificate.
       send_request: Send request for this certificate
     flashes:
-      created: You've successfully made a claim for the certificate
+      created: You've requested the ownership for this certificate
     approved: Transfer approved
     denied: Trasnfer denied
 
