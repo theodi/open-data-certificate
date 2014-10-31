@@ -387,7 +387,7 @@ en:
     flashes:
       created: You've requested the ownership for this certificate
     approved: Transfer approved
-    denied: Trasnfer denied
+    denied: Transfer denied
 
   claim_mailer:
     notify:
