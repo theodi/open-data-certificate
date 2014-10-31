@@ -13,8 +13,10 @@ class Certificate < ActiveRecord::Base
 
   attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
-  scope :published, where(:published => true)
+  scope :published, where(published: true)
+  scope :expired, -> { where("expires_at < ?", Time.current) }
   scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
+  scope :without_expiry, where(expires_at: nil)
 
   EXPIRY_NOTICE = 1.month
 
@@ -53,17 +55,12 @@ class Certificate < ActiveRecord::Base
       where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
     end
 
-    def published
-      self.where(published: true)
-    end
-
     def set_expired(surveys)
-      expired(surveys).update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
+      for_surveys(surveys).without_expiry.update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
     end
 
-    def expired(surveys)
-      self.joins(:response_set)
-        .where(ResponseSet.arel_table[:survey_id].in(surveys.map(&:id)), expires_at: nil)
+    def for_surveys(surveys)
+      joins(:response_set).merge(ResponseSet.where(survey_id: surveys.select('surveys.id')))
     end
   end
 

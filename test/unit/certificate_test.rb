@@ -145,5 +145,37 @@ class CertificateTest < ActiveSupport::TestCase
 
     assert_match /http:\/\/test\.host\/datasets\/[0-9]+\/certificates\/[0-9]+/, certificate.url
   end
+end
+
+class CertificateScopeTest < ActiveSupport::TestCase
+
+  test "published scope" do
+    unpublished = FactoryGirl.create(:certificate_with_dataset)
+    published = FactoryGirl.create(:published_certificate_with_dataset)
+    assert_equal [published], Certificate.published
+  end
+
+  test "expired scope with expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate, :expires_at => 3.days.from_now)
+    assert_equal [expired], Certificate.expired
+  end
+
+  test "expired scope without expiry date" do
+    FactoryGirl.create(:certificate)
+    assert_empty Certificate.expired
+  end
+
+  test "current scope with expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate, :expires_at => 3.days.from_now)
+    assert_equal [current], Certificate.current
+  end
+
+  test "current scope without expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate)
+    assert_equal [current], Certificate.current
+  end
 
 end
