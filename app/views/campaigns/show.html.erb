@@ -9,21 +9,24 @@
 </ul>
 <table class='table table-striped'>
   <tr>
-    <td>
+    <th>
       Success
-    </td>
-    <td>
+    </th>
+    <th>
       Published
-    </td>
-    <td>
+    </th>
+    <th>
       Source
-    </td>
-    <td>
+    </th>
+    <th>
       Certificate
-    </td>
-    <td>
+    </th>
+    <th>
+      Action
+    </th>
+    <th>
       User
-    </td>
+    </th>
   </tr>
   <% @generators.each do |generator| %>
     <tr>
@@ -39,13 +42,11 @@
       <td>
         <% if generator.certificate.published? %>
           <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
-        <% else %>
-          <% if !generator.response_set.all_mandatory_questions_complete? %>
-            <%= generator.response_set.uncompleted_mandatory_questions_count %> missing answers
-          <% end %>
-          <% if !generator.response_set.all_urls_resolve? %>
-            Couldn't resolve all URLs
-          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% if can? :edit, generator.response_set %>
+          <%= link_to "edit", continue_path(generator.response_set) %>
         <% end %>
       </td>
       <td>
