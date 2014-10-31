@@ -14,6 +14,7 @@ class Certificate < ActiveRecord::Base
   attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
   scope :published, where(:published => true)
+  scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
 
   EXPIRY_NOTICE = 1.month
 

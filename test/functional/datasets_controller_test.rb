@@ -425,4 +425,13 @@ class DatasetsControllerTest < ActionController::TestCase
     body = JSON.parse(response.body)
     assert_equal(3, body['published_certificate_count'])
   end
+
+  test "dataset info with published but expired certificates" do
+    certs = FactoryGirl.create_list(:published_certificate_with_dataset, 3)
+    certs.last.update_attribute(:expires_at, 1.day.ago)
+    get :info, format: :json
+    assert_response :ok
+    body = JSON.parse(response.body)
+    assert_equal(2, body['published_certificate_count'])
+  end
 end
