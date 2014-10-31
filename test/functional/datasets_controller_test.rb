@@ -410,19 +410,28 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal(0, body['published_certificate_count'])
   end
 
-  test "dataset info with draft datasets" do
-    3.times { FactoryGirl.create(:dataset) }
+  test "dataset info with draft certificate" do
+    FactoryGirl.create_list(:certificate_with_dataset, 3)
     get :info, format: :json
     assert_response :ok
     body = JSON.parse(response.body)
     assert_equal(0, body['published_certificate_count'])
   end
 
-  test "dataset info with published datasets" do
-    3.times { FactoryGirl.create(:published_certificate_with_dataset) }
+  test "dataset info with published certificates" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 3)
     get :info, format: :json
     assert_response :ok
     body = JSON.parse(response.body)
     assert_equal(3, body['published_certificate_count'])
+  end
+
+  test "dataset info with published but expired certificates" do
+    certs = FactoryGirl.create_list(:published_certificate_with_dataset, 3)
+    certs.last.update_attribute(:expires_at, 1.day.ago)
+    get :info, format: :json
+    assert_response :ok
+    body = JSON.parse(response.body)
+    assert_equal(2, body['published_certificate_count'])
   end
 end

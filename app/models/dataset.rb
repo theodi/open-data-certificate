@@ -22,6 +22,7 @@ class Dataset < ActiveRecord::Base
   # entirely changes the behaviour of count() so that the pagination fails
   # by generating invalid sql
   scope :with_responses, where(:id => joins(:response_sets).select('datasets.id'))
+  scope :with_current_published_certificate, joins(:certificates).merge(Certificate.published.current)
 
   class << self
     def match_to_user_domain(datasetUrl)
@@ -40,7 +41,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def self.published_count
-    Dataset.joins(:certificates).merge(Certificate.published).count(:distinct => 'datasets.id')
+    with_current_published_certificate.count(:distinct => 'datasets.id')
   end
 
   def title
