@@ -376,14 +376,14 @@ en:
       confirm_denial: Are you sure?
       confirm_title: Deny transfer of dataset
     claim:
-      claim_heading: Want to claim this certificate?
-      certificate_award: This certificate was automatically awarded to your dataset on your behalf.
+      claim_heading: Claim this dataset
+      certificate_award: This certificate was automatically awarded to the dataset.
       explanation: "Open Data Certificate lets you:"
       explanation_open: Demonstrate that your data is open
       explanation_improve: Find out how you can improve your open data
       explanation_badge: Embed a badge on your website to share your achievement
       claim_certificate: If this is your dataset, then let us know so you can own and manage the certificate.
-      send_request: Send request for this certificate
+      send_request: Request ownership of this dataset
     flashes:
       created: You've requested the ownership for this certificate
     approved: Transfer approved
