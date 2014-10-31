@@ -372,8 +372,6 @@ en:
       deny_transfer: Deny
       approving_transfer: Approving transfer…
       denying_transfer: Denying…
-      approved_transfer: Approved transfer
-      denied_transfer: Denied
       confirm_denial: Are you sure?
       confirm_title: Deny transfer of dataset
     claim:
