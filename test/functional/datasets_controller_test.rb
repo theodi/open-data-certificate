@@ -45,6 +45,29 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal [cert.dataset], assigns(:datasets)
   end
 
+  test "index filters by domain of documentation url" do
+    example = FactoryGirl.create(:published_certificate_with_dataset)
+    example.dataset.update_attribute(:documentation_url, 'http://example.org/data')
+    data = FactoryGirl.create(:published_certificate_with_dataset)
+    data.dataset.update_attribute(:documentation_url, 'http://data.org/data')
+
+    get :index, :domain => 'data.org'
+
+    assert_response :success
+    assert_equal [data.dataset], assigns(:datasets)
+  end
+
+  test "index filters by domain of documentation url with https" do
+    example = FactoryGirl.create(:published_certificate_with_dataset)
+    example.dataset.update_attribute(:documentation_url, 'https://example.org/data')
+    data = FactoryGirl.create(:published_certificate_with_dataset)
+    data.dataset.update_attribute(:documentation_url, 'https://data.org/data')
+
+    get :index, :domain => 'data.org'
+
+    assert_response :success
+    assert_equal [data.dataset], assigns(:datasets)
+  end
 
   test "index (non logged in)" do
     get :dashboard

@@ -1,7 +1,7 @@
 - content_for :header_title, @title
 
 - content_for :rss_feed do
-  = datasets_path(format: 'feed')
+  = datasets_path(params.merge(format: 'feed'))
 
 %section
   %p.rss-top.pull-right
