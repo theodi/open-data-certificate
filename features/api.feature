@@ -23,7 +23,7 @@ Feature: Open Data Certificate API
 
   Scenario: API call when documentation URL already exists
     Given I provide the API with a URL that autocompletes
-    And that URL already has a dataset
+    And that URL already has a published certificate
     When I request a certificate via the API
     Then the API response should return unsucessfully
     And there should only be one dataset

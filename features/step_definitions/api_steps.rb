@@ -143,8 +143,9 @@ Then(/^my certificate should be published$/) do
   assert Dataset.first.certificate.published
 end
 
-Given(/^that URL already has a dataset$/) do
-  FactoryGirl.create(:dataset, documentation_url: @documentationURL)
+Given(/^that URL already has a published certificate$/) do
+  certificate = FactoryGirl.create(:published_certificate_with_dataset)
+  certificate.dataset.update_attribute(:documentation_url, @documentationURL)
 end
 
 Then(/^the API response should return unsucessfully$/) do

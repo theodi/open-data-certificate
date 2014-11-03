@@ -21,7 +21,7 @@ Feature: Track certificate generation campaigns
 
   Scenario: Count duplicate certificates requested in a campaign
     Given I want to create a certificate via the API
-    But that URL already has a dataset
+    But that URL already has a published certificate
     And I apply a campaign "brian"
     And I request a certificate via the API
     Then there should be 1 dataset
