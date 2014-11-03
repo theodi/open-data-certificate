@@ -403,6 +403,13 @@ $(document).ready(function($){
     if(datum.path){ document.location = datum.path; }
   });
 
+  // toggle advanced search
+  $('form .advanced-search button[name=advanced-search]').on('click', function(e) {
+    console.log('advanced-search');
+    $(this).siblings('.options').toggleClass('hidden');
+    $(this).blur();
+  });
+
   // Stop the jump to the top of the page when the delete dialog is confirmed.
   // placeholder till bluerail/twitter-bootstrap-rails-confirm#9 gets published
   $(document).on('click', "#confirmation_dialog [href='#']", function(e){

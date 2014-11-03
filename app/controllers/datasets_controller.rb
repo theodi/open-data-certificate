@@ -29,24 +29,28 @@ class DatasetsController < ApplicationController
 
     @title = t('datasets.datasets')
 
-    if params[:jurisdiction]
+    if params[:jurisdiction].presence
       datasets = datasets.joins(response_set: :survey)
                            .merge(Survey.where(title: params[:jurisdiction]))
     end
 
-    if params[:publisher]
+    if params[:publisher].presence
       datasets = datasets.joins(response_set: :certificate)
                            .merge(Certificate.where(curator: params[:publisher]))
     end
 
-    if domain = params[:domain]
+    if level = params[:level].presence
+      datasets = datasets.merge(Certificate.where(attained_level: level))
+    end
+
+    if domain = params[:domain].presence
       datasets = datasets.where(
         "documentation_url like ? or documentation_url like ?",
         "http://#{domain}%",
         "https://#{domain}%")
     end
 
-    if term = params[:search]
+    if term = params[:search].presence
       @title = t('datasets.search_results')
 
       datasets = datasets.joins(:certificate)

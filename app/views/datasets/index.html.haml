@@ -10,9 +10,18 @@
   
 
   = form_tag datasets_path, method: 'get' do
-    %div.form-search.input-append
+    .form-search.input-append
       = text_field_tag :search, params[:search], class: 'typeahead-search'
-      = submit_tag t('certificates.search.submit_search'), :class => 'btn'
+      = submit_tag t('certificates.search.submit_search'), class: 'btn'
+    .advanced-search
+      = button_tag t('certificates.search.advanced_search'), class: 'btn btn-link', type: 'button', name: 'advanced-search'
+      %ul.options.hidden
+        %li.input-prepend
+          %span.add-on= label_tag :domain, t('certificates.search.domain')
+          = text_field_tag :domain, params[:domain], placeholder: 'domain', class: 'input-medium'
+        %li.input-prepend
+          %span.add-on= label_tag :level, t('certificates.search.level')
+          = select_tag :level, options_for_select(%w[basic pilot standard exemplar].map {|level| [t("certificates.search.levels.#{level}"), level]}, params[:level]), include_blank: true, class: 'input-medium'
 
 - if @datasets.any?
 
