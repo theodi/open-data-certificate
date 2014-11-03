@@ -5,6 +5,8 @@ class DatasetsController < ApplicationController
   before_filter :authenticate_user!, only: :dashboard
   before_filter :authenticate_user_from_token!, only: [:create, :update_certificate, :import_status]
   before_filter(:only => [:show, :index]) { alternate_formats [:feed, :json] }
+  before_filter :jurisdiction_required, only: :create
+  before_filter :dataset_information_required, only: :create
 
   def info
     respond_to do |format|
@@ -145,36 +147,27 @@ class DatasetsController < ApplicationController
   end
 
   def create
-    jurisdiction, dataset = params.values_at(:jurisdiction, :dataset)
-    campaign, create_user = params.values_at(:campaign, :create_user)
+    jurisdiction, dataset, create_user = params.values_at(:jurisdiction, :dataset, :create_user)
     status = :unprocessable_entity
-    result = if Survey.by_jurisdiction(jurisdiction).exists?
-      if campaign
-        campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(campaign)
-      end
-      if dataset
-        if existing_dataset = Dataset.where(documentation_url: dataset[:documentationUrl]).first
-          if existing_dataset.certificate
-            campaign.increment!(:duplicate_count) if campaign
-            {
-              success: false,
-              errors: ['Dataset already exists'],
-              dataset_id: existing_dataset.id,
-              dataset_url: existing_dataset.api_url
-            }
-          else
-            status = :accepted
-            {dataset_id: existing_dataset.id}
-          end
-        else
-          status = :accepted
-          {dataset_id: nil}
-        end
+    if campaign_name = params[:campaign]
+      campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(campaign_name)
+    end
+    result = if existing_dataset = Dataset.where(documentation_url: dataset[:documentationUrl]).first
+      if existing_dataset.certificate
+        campaign.increment!(:duplicate_count) if campaign
+        {
+          success: false,
+          errors: ['Dataset already exists'],
+          dataset_id: existing_dataset.id,
+          dataset_url: existing_dataset.api_url
+        }
       else
-        {success: false, errors: ['Dataset information required']}
+        status = :accepted
+        {dataset_id: existing_dataset.id}
       end
     else
-      {success: false, errors: ['Jurisdiction not found']}
+      status = :accepted
+      {dataset_id: nil}
     end
     if status == :accepted
       generator = CertificateGenerator.create(
@@ -208,4 +201,16 @@ class DatasetsController < ApplicationController
     render json: CertificateGenerator.schema(params)
   end
 
+  protected
+  def jurisdiction_required
+    unless Survey.by_jurisdiction(params[:jurisdiction]).exists?
+      render status: :unprocessable_entity, json: {success: false, errors: ['Jurisdiction not found']}
+    end
+  end
+
+  def dataset_information_required
+    unless params[:dataset].present?
+      render status: :unprocessable_entity, json: {success: false, errors: ['Dataset information required']}
+    end
+  end
 end
