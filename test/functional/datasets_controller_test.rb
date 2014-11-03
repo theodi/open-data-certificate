@@ -342,6 +342,7 @@ class DatasetsControllerTest < ActionController::TestCase
     body = JSON.parse(response.body)
     assert_equal(202, response.status)
     assert_equal("pending", body['success'])
+    assert_equal(dataset.id, body['dataset_id'])
     assert_equal(status_datasets_url(CertificateGenerator.last), body['dataset_url'])
   end
 

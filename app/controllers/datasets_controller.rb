@@ -7,6 +7,7 @@ class DatasetsController < ApplicationController
   before_filter(:only => [:show, :index]) { alternate_formats [:feed, :json] }
   before_filter :jurisdiction_required, only: :create
   before_filter :dataset_information_required, only: :create
+  before_filter :no_published_certificate_exists, only: :create
 
   def info
     respond_to do |format|
@@ -148,37 +149,17 @@ class DatasetsController < ApplicationController
 
   def create
     jurisdiction, dataset, create_user = params.values_at(:jurisdiction, :dataset, :create_user)
-    status = :unprocessable_entity
-    if campaign_name = params[:campaign]
-      campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(campaign_name)
-    end
-    result = if existing_dataset = Dataset.where(documentation_url: dataset[:documentationUrl]).first
-      if existing_dataset.certificate
-        campaign.increment!(:duplicate_count) if campaign
-        {
-          success: false,
-          errors: ['Dataset already exists'],
-          dataset_id: existing_dataset.id,
-          dataset_url: existing_dataset.api_url
-        }
-      else
-        status = :accepted
-        {dataset_id: existing_dataset.id}
-      end
-    else
-      status = :accepted
-      {dataset_id: nil}
-    end
-    if status == :accepted
-      generator = CertificateGenerator.create(
-        request: dataset,
-        user: current_user,
-        certification_campaign: campaign
-      )
-      generator.delay.generate(jurisdiction, create_user)
-      result.merge!(success: "pending", dataset_url: status_datasets_url(generator))
-    end
-    render json: result, status: status
+    generator = CertificateGenerator.create(
+      request: dataset,
+      user: current_user,
+      certification_campaign: campaign
+    )
+    generator.delay.generate(jurisdiction, create_user)
+    render status: :accepted, json: {
+      success: "pending",
+      dataset_id: params[:existing_dataset].try(:id),
+      dataset_url: status_datasets_url(generator)
+    }
   end
 
   def import_status
@@ -211,6 +192,29 @@ class DatasetsController < ApplicationController
   def dataset_information_required
     unless params[:dataset].present?
       render status: :unprocessable_entity, json: {success: false, errors: ['Dataset information required']}
+    end
+  end
+
+  def campaign
+    @campaign_name ||= params.fetch(:campaign, :nil_but_true)
+    unless @campaign_name == :nil_but_true
+      @campaign ||= CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(@campaign_name)
+    end
+  end
+
+  def no_published_certificate_exists
+    documentation_url = params[:dataset][:documentationUrl]
+    existing_dataset = Dataset.where(documentation_url: documentation_url).first
+    if existing_dataset.try(:certificate).present?
+      campaign.increment!(:duplicate_count) if campaign
+      render status: :unprocessable_entity, json: {
+        success: false,
+        errors: ['Dataset already exists'],
+        dataset_id: existing_dataset.id,
+        dataset_url: existing_dataset.api_url
+      }
+    else
+      params[:existing_dataset] = existing_dataset if existing_dataset
     end
   end
 end
