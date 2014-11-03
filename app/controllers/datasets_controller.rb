@@ -154,21 +154,36 @@ class DatasetsController < ApplicationController
       end
       if dataset
         if existing_dataset = Dataset.where(documentation_url: dataset[:documentationUrl]).first
-          campaign.increment!(:duplicate_count) if campaign
-
-          {success: false, errors: ['Dataset already exists'], dataset_id: existing_dataset.id, dataset_url: existing_dataset.api_url}
+          if existing_dataset.certificate
+            campaign.increment!(:duplicate_count) if campaign
+            {
+              success: false,
+              errors: ['Dataset already exists'],
+              dataset_id: existing_dataset.id,
+              dataset_url: existing_dataset.api_url
+            }
+          else
+            status = :accepted
+            {dataset_id: existing_dataset.id}
+          end
         else
-          generator = CertificateGenerator.create(request: dataset, user: current_user, certification_campaign: campaign)
-          generator.delay.generate(jurisdiction, create_user)
-
           status = :accepted
-          {success: "pending", dataset_id: nil, dataset_url: status_datasets_url(generator)}
+          {dataset_id: nil}
         end
       else
         {success: false, errors: ['Dataset information required']}
       end
     else
       {success: false, errors: ['Jurisdiction not found']}
+    end
+    if status == :accepted
+      generator = CertificateGenerator.create(
+        request: dataset,
+        user: current_user,
+        certification_campaign: campaign
+      )
+      generator.delay.generate(jurisdiction, create_user)
+      result.merge!(success: "pending", dataset_url: status_datasets_url(generator))
     end
     render json: result, status: status
   end

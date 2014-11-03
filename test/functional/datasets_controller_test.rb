@@ -327,9 +327,28 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal(["Dataset information required"], body['errors'])
   end
 
-  test "failure to create a duplicate certificate" do
+  test "creates a certificate if draft certificates exist" do
     load_custom_survey 'cert_generator.rb'
-    dataset = FactoryGirl.create(:dataset)
+    certificate = FactoryGirl.create(:certificate_with_dataset)
+    dataset = certificate.dataset
+    http_auth FactoryGirl.create(:user)
+
+    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
+    CertificateGenerator.any_instance.expects(:generate).once
+
+    assert_difference "CertificateGenerator.count", 1 do
+      post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
+    end
+    body = JSON.parse(response.body)
+    assert_equal(202, response.status)
+    assert_equal("pending", body['success'])
+    assert_equal(status_datasets_url(CertificateGenerator.last), body['dataset_url'])
+  end
+
+  test "failure to create a duplicate of a dataset with a published certificate" do
+    load_custom_survey 'cert_generator.rb'
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    dataset = certificate.dataset
     http_auth FactoryGirl.create(:user)
     post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
     body = JSON.parse(response.body)
