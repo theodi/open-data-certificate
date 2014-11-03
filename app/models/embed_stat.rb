@@ -26,7 +26,6 @@ class EmbedStat < ActiveRecord::Base
   def host
     URI.parse(URI.escape(referer)).host
   rescue URI::InvalidURIError => e
-    Airbrake.notify :error_message => [e.message, referer.inspect].join(' - ')
     nil
   end
 
