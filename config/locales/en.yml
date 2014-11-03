@@ -191,6 +191,14 @@ en:
     search:
       search_label: Search certificates
       submit_search: Go
+      advanced_search: Advanced search
+      domain: Filter by domain
+      level: Filter by certificate level
+      levels:
+        basic: Raw level
+        pilot: Pilot level
+        standard: Standard level
+        exemplar: Exemplar level
 
     community_verification_panel:
       title: Community verification
