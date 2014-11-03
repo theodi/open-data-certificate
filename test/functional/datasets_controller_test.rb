@@ -69,6 +69,21 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal [data.dataset], assigns(:datasets)
   end
 
+  %w[basic pilot standard exemplar].each do |level|
+    test "index filters by #{level} level" do
+      FactoryGirl.create(:published_basic_certificate_with_dataset)
+      FactoryGirl.create(:published_pilot_certificate_with_dataset)
+      FactoryGirl.create(:published_standard_certificate_with_dataset)
+      FactoryGirl.create(:published_exemplar_certificate_with_dataset)
+
+      get :index, :level => level
+
+      assert_response :success
+      assert_equal 1, assigns(:datasets).size
+      assert_equal level, assigns(:datasets).first.certificate.attained_level
+    end
+  end
+
   test "index (non logged in)" do
     get :dashboard
     assert_response :redirect

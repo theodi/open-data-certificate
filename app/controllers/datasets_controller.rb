@@ -39,6 +39,10 @@ class DatasetsController < ApplicationController
                            .merge(Certificate.where(curator: params[:publisher]))
     end
 
+    if level = params[:level]
+      datasets = datasets.merge(Certificate.where(attained_level: level))
+    end
+
     if domain = params[:domain]
       datasets = datasets.where(
         "documentation_url like ? or documentation_url like ?",
