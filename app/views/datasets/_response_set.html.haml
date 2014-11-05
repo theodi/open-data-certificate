@@ -1,4 +1,4 @@
-- is_primary = response_set == primary
+- is_primary = response_set_counter == 0
 .response-set{class: "response-set-#{response_set.aasm_state} response-set-#{is_primary ? 'primary' : 'secondary'}"}
   .row-fluid
     .span3
