@@ -129,9 +129,7 @@ class DatasetsController < ApplicationController
   end
 
   def dashboard
-    if current_user
-      @datasets = current_user.datasets.with_responses.page params[:page]
-    end
+    @datasets = current_user.datasets.with_responses.page params[:page]
 
     respond_to do |format|
       format.html
