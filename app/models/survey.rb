@@ -40,7 +40,7 @@ class Survey < ActiveRecord::Base
   end
 
   def self.available_to_complete
-    order('access_code DESC, survey_version DESC').group(:access_code)
+    order('coalesce(full_title, title), survey_version DESC').group(:access_code)
   end
 
   def self.newest_survey_for_access_code(access_code)
@@ -76,6 +76,10 @@ class Survey < ActiveRecord::Base
     if status_incremented?
       Certificate.set_expired(previous_surveys)
     end
+  end
+
+  def complete_title
+    full_title || title
   end
 
   def metadata_fields
