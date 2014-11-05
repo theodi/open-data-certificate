@@ -33,6 +33,8 @@ class ResponseSet < ActiveRecord::Base
   has_many :autocomplete_override_messages, dependent: :destroy
   has_one :certificate_generator
 
+  scope :published, where(:aasm_state => 'published')
+
   # Checks if a value is blank by Surveyor's standards
   def self.is_blank_value?(value)
     value.is_a?(Array) ? value.all?{|values| values.blank? } : value.to_s.blank?

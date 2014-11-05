@@ -13,12 +13,13 @@ class Certificate < ActiveRecord::Base
 
   attr_accessible :published, :published_at, :name, :attained_level, :curator, :aasm_state
 
+  EXPIRY_NOTICE = 1.month
+
   scope :published, where(published: true)
   scope :expired, -> { where("expires_at < ?", Time.current) }
+  scope :past_expiry_notice, -> { where(arel_table[:expires_at].lt(Time.current + EXPIRY_NOTICE)) }
   scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
   scope :without_expiry, where(expires_at: nil)
-
-  EXPIRY_NOTICE = 1.month
 
   class << self
     def type_search(type, term, query)
