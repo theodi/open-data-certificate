@@ -40,7 +40,7 @@ class Transfer < ActiveRecord::Base
   end
 
   def has_target_user?
-    ! target_user.nil?
+    target_user.present?
   end
 
   private
@@ -54,14 +54,12 @@ class Transfer < ActiveRecord::Base
   end
 
   def transfer_dataset
-    dataset.update_attribute(:user_id, target_user_id)
-    dataset.response_sets.update_all(user_id: target_user_id)
+    dataset.change_owner!(target_user)
   end
 
   def notify_target_user
     TransferMailer.notify(self).deliver
   end
-
-  #handle_asynchronously :notify_target_user
+  handle_asynchronously :notify_target_user
 
 end

@@ -88,4 +88,5 @@
               %a{href: yield(:rss_feed)} Subscribe to the RSS feed
 
     = analytics_init if Rails.env.production?
+    = yield(:modal_content)
     = yield(:foot_scripts)

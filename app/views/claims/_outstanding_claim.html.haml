@@ -1,0 +1,20 @@
+- dataset = outstanding_claim.dataset
+
+.claim.dataset.row
+  .span4
+    %a.level-badge{class: "level-badge-#{dataset.certificate.attained_level}", href: url_for(dataset)}
+    %h3.badge-align
+      = link_to_unless_current dataset.title, dataset
+  .details.span3
+    %p
+      Currently owned by
+      %strong= dataset.user
+    %p
+      Transfer requested by
+      %strong= outstanding_claim.initiating_user
+    %p
+      = time_ago_in_words(outstanding_claim.created_at)
+      ago
+  .approval.span4.pull-right
+    = button_to t('.approve_transfer'), approve_claim_path(outstanding_claim), disable_with: t('.approving_transfer'), class: 'btn btn-success', remote: true, form: {data: { type: :json }}
+    = button_to t('.deny_transfer'), deny_claim_path(outstanding_claim), disable_with: t('.denying_transfer'), class: 'btn btn-danger', remote: true, form: { data: { type: :json }}, confirm: t('.confirm_denial'), data: { confirm_title: t('.confirm_title') }

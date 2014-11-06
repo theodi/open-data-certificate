@@ -237,6 +237,7 @@ en:
     not_audited: This certificate has not been marked as ODI audited
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
     expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
+    claim_this_certificate: "Is this your dataset?"
 
   datasets:
     datasets: Datasets
@@ -362,6 +363,48 @@ en:
     notify:
       subject: Questionnaire hand over
       message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
+
+  claims:
+    index:
+      outstanding_claims: Outstanding claims for datasets
+      no_outstanding_claims: There are no outstanding claims at the moment
+    outstanding_claim:
+      approve_transfer: Approve transfer
+      deny_transfer: Deny
+      approving_transfer: Approving transfer…
+      denying_transfer: Denying…
+      confirm_denial: Are you sure?
+      confirm_title: Deny transfer of dataset
+    claim:
+      claim_heading: Claim this dataset
+      certificate_award: This certificate was automatically awarded to the dataset.
+      explanation: "Open Data Certificate lets you:"
+      explanation_open: Demonstrate that your data is open
+      explanation_improve: Find out how you can improve your open data
+      explanation_badge: Embed a badge on your website to share your achievement
+      claim_certificate: If this is your dataset, then let us know so you can own and manage the certificate.
+      send_request: Request ownership of this dataset
+    flashes:
+      created: You've requested the ownership for this certificate
+    approved: Transfer approved
+    denied: Transfer denied
+
+  claim_mailer:
+    notify:
+      subject: There has been an ownership claim made for '%{title}'
+      admin_subject: "Certificate ownership transfer: %{dataset_id}"
+      message: |
+        You have been asked to hand over ownership of an Open Data Certificate.
+        Please visit %{url} to accept or deny this claim.
+    notify_of_approval:
+      subject: You have been given ownership of '%{title}'
+      message: |
+        The ownership you requested of '%{title}' has been approved.
+        You can update information about the dataset by visiting %{url}
+    notify_of_denial:
+      subject: Transfer of ownership of '%{title}' has been denied
+      message: |
+        The ownership you requested of '%{title}' has not been granted.
 
   status_panel:
     title: Certificate level key
