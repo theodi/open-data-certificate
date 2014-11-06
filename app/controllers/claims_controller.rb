@@ -4,6 +4,7 @@ class ClaimsController < ApplicationController
   def create
     claim = current_user.sent_claims.create!(:dataset_id => claim_data[:dataset_id])
     flash[:notice] = I18n.t('claims.flashes.created')
+    claim.notify!
     redirect_to dataset_certificate_path(claim.dataset.id, claim.dataset.certificate)
   end
 

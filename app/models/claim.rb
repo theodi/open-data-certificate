@@ -41,6 +41,12 @@ class Claim < ActiveRecord::Base
     dataset.change_owner!(initiating_user)
   end
 
+  def notify!
+    notify
+    save!
+  end
+  handle_asynchronously :notify!
+
   def notify_user
     ClaimMailer.notify(self).deliver
   end

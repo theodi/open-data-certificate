@@ -21,6 +21,9 @@ class ClaimsControllerTest < ActionController::TestCase
 
     assert_redirected_to dataset_certificate_path(dataset, certificate)
     assert_equal I18n.t('claims.flashes.created'), flash[:notice]
+    job = Delayed::Job.last.payload_object
+    assert_equal claim, job.object
+    assert_equal :notify_without_delay!, job.method_name
   end
 
   test "creating a claim without being logged in" do
