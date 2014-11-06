@@ -17,8 +17,8 @@
       = button_tag t('certificates.search.advanced_search'), class: 'btn btn-link', type: 'button', name: 'advanced-search'
       %ul.options.hidden
         %li.input-prepend
-          %span.add-on= label_tag :domain, t('certificates.search.domain')
-          = text_field_tag :domain, params[:domain], placeholder: 'domain', class: 'input-medium'
+          %span.add-on= label_tag :datahub, t('certificates.search.datahub')
+          = text_field_tag :datahub, params[:datahub], placeholder: 'domain', class: 'input-medium'
         %li.input-prepend
           %span.add-on= label_tag :level, t('certificates.search.level')
           = select_tag :level, options_for_select(%w[basic pilot standard exemplar].map {|level| [t("certificates.search.levels.#{level}"), level]}, params[:level]), include_blank: true, class: 'input-medium'

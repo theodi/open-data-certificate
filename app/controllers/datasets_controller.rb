@@ -43,11 +43,11 @@ class DatasetsController < ApplicationController
       datasets = datasets.merge(Certificate.where(attained_level: level))
     end
 
-    if domain = params[:domain].presence
+    if datahub = params[:datahub].presence
       datasets = datasets.where(
         "documentation_url like ? or documentation_url like ?",
-        "http://#{domain}%",
-        "https://#{domain}%")
+        "http://#{datahub}%",
+        "https://#{datahub}%")
     end
 
     if term = params[:search].presence
