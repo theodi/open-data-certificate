@@ -192,7 +192,7 @@ en:
       search_label: Search certificates
       submit_search: Go
       advanced_search: Advanced search
-      domain: Filter by domain
+      datahub: Filter by domain
       level: Filter by certificate level
       levels:
         basic: Raw level
