@@ -9,6 +9,8 @@ class DatasetsController < ApplicationController
   before_filter :dataset_information_required, only: :create
   before_filter :no_published_certificate_exists, only: :create
 
+  before_filter :clean_params, only: :index
+
   def info
     respond_to do |format|
       format.json do
@@ -219,6 +221,13 @@ class DatasetsController < ApplicationController
       }
     else
       params[:existing_dataset] = existing_dataset if existing_dataset
+    end
+  end
+
+  def clean_params
+    params.delete('utf8')
+    params.each do |key, value|
+      params.delete(key) unless value.present?
     end
   end
 end
