@@ -348,7 +348,7 @@ class ResponseSetTest < ActiveSupport::TestCase
       url: "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     "ogl_uk" => {
-      title: "Open Government License 2.0 (United Kingdom)",
+      title: "Open Government Licence 2.0 (United Kingdom)",
       url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     },
     "odc_by" => {
@@ -379,7 +379,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
     answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "Open Government License 2.0 (United Kingdom)",
+      :title => "Open Government Licence 2.0 (United Kingdom)",
       :url => "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
