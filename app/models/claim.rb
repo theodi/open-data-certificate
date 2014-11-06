@@ -18,7 +18,7 @@ class Claim < ActiveRecord::Base
   aasm do
     state :new, initial: true
 
-    state :notified, after_enter: :notify_user
+    state :notified, before_enter: :notify_user
 
     state :accepted, before_enter: :transfer_dataset!, after_enter: :notify_of_approval
 
