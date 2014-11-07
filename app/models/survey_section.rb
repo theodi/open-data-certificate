@@ -23,4 +23,17 @@ class SurveySection < ActiveRecord::Base
   def translation(locale)
     {:title => self.title, :description => self.description}.with_indifferent_access
   end
+
+  def questions_by_group
+    initial = [nil, []]
+    survey_questions.eager_load(:question_group).inject([initial]) do |groups, question|
+      group, questions = groups.last
+      if group == question.question_group
+        questions << question
+      else
+        groups << [question.question_group, [question]]
+      end
+      groups
+    end
+  end
 end
