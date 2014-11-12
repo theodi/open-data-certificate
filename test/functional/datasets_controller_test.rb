@@ -84,6 +84,24 @@ class DatasetsControllerTest < ActionController::TestCase
     end
   end
 
+  test "index filters by modified date of datasets" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, :since => 2.days.ago.iso8601
+
+    assert_equal 1, assigns(:datasets).size
+  end
+
+  test "index ignores argument if dateformat is wrong" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, :since => "2 days ago"
+
+    assert_equal 2, assigns(:datasets).size
+  end
+
   test "index (non logged in)" do
     get :dashboard
     assert_response :redirect

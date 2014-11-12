@@ -115,6 +115,7 @@ class ResponseSet < ActiveRecord::Base
 
   scope :by_newest, order("response_sets.created_at DESC")
   scope :completed, where("response_sets.completed_at IS NOT NULL")
+  scope :modified_since, ->(date) { where(arel_table[:updated_at].gteq(date)) }
 
   def title
     dataset_title_determined_from_responses || DEFAULT_TITLE

@@ -52,6 +52,14 @@ class DatasetsController < ApplicationController
         "https://#{datahub}%")
     end
 
+    if since = params[:since].presence
+      begin
+        datetime = DateTime.iso8601(since)
+        datasets = datasets.modified_since(datetime)
+      rescue ArgumentError
+      end
+    end
+
     if term = params[:search].presence
       @title = t('datasets.search_results')
 
