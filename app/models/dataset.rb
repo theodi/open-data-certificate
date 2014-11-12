@@ -24,6 +24,7 @@ class Dataset < ActiveRecord::Base
   scope :with_responses, where(:id => joins(:response_sets).select('datasets.id'))
   scope :with_current_published_certificate, joins(:certificates).merge(Certificate.published.current)
   scope :modified_since, ->(date) { joins(:response_sets).merge(ResponseSet.modified_since(date)) }
+  scope :visible, where(removed: false).joins(:response_sets).merge(ResponseSet.published)
 
   class << self
     def match_to_user_domain(datasetUrl)
@@ -43,6 +44,10 @@ class Dataset < ActiveRecord::Base
 
   def self.published_count
     with_current_published_certificate.count(:distinct => 'datasets.id')
+  end
+
+  def visible?
+    !removed && response_set.try(:published?)
   end
 
   def title

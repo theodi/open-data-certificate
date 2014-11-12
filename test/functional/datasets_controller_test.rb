@@ -470,12 +470,13 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   test "completed status endpoint" do
-    user = FactoryGirl.create(:user)
-    http_auth user
     response_set = FactoryGirl.create(:response_set_with_dataset)
+    user = response_set.user
     generator = CertificateGenerator.create(user: user, completed: true, response_set: response_set)
+    http_auth user
     get :import_status, certificate_generator_id: generator.id
     assert_redirected_to dataset_url(response_set.dataset_id, format: :json)
+    http_auth user
     get :show, id: response_set.dataset_id, format: :json
     body = JSON.parse(response.body)
     assert_equal(true, body['success'])
@@ -522,5 +523,27 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_response :ok
     body = JSON.parse(response.body)
     assert_equal(2, body['published_certificate_count'])
+  end
+
+  test "dataset is not visible if removed and not an admin" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.dataset.update_attribute(:removed, true)
+
+    get :show, id: cert.dataset.id
+
+    assert_response :not_found
+  end
+
+  test "dataset is visible if removed and admin" do
+    user = FactoryGirl.create(:user)
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.dataset.update_attribute(:removed, true)
+
+    ENV['ODC_ADMIN_IDS'] = user.id.to_s
+    sign_in user
+    get :show, id: cert.dataset.id
+    ENV['ODC_ADMIN_IDS'] = ""
+
+    assert_response :ok
   end
 end

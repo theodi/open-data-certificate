@@ -24,9 +24,8 @@ class DatasetsController < ApplicationController
   def index
 
     datasets = Dataset
-                .where(removed: false)
+                .visible
                 .includes(:response_set, :certificate)
-                .joins(:response_set)
                 .order('certificates.published_at DESC')
 
     @title = t('datasets.datasets')
@@ -92,9 +91,7 @@ class DatasetsController < ApplicationController
     # [{title:"the match title", path:"/some/path"},…]
     @response = case params[:mode]
       when 'dataset'
-        Dataset.search({title_cont:params[:q]}).result
-               .includes(:response_set)
-               .merge(ResponseSet.published)
+        Dataset.visible.search({title_cont:params[:q]}).result
                .limit(5).map do |dataset|
           {
             value: dataset.title,
@@ -143,6 +140,7 @@ class DatasetsController < ApplicationController
   end
 
   def show
+    raise ActiveRecord::RecordNotFound unless can?(:read, @dataset)
     @certificates = @dataset.certificates.where(:published => true).by_newest
 
     respond_to do |format|

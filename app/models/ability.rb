@@ -11,6 +11,11 @@ class Ability
         )
     end
     
+    can :read, Dataset do |dataset|
+      dataset.visible? || user.try(:admin?) ||
+        (dataset.user.present? && dataset.user == user)
+    end
+
     can :manage, Dataset do |dataset|
       dataset.user.nil? ||
         dataset.user == user
@@ -19,8 +24,6 @@ class Ability
     if user.try(:admin?)
       can :manage, :all
     end
-
-    can :read, Dataset
 
     can :accept, Transfer do |transfer|
       transfer.has_target_user? &&
