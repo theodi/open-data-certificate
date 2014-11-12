@@ -46,5 +46,17 @@ class Ability
       campaign.try(:user) == user
     end
 
+    can :read, Certificate do |certificate|
+      certificate.visible? || owns(user, certificate)
+    end
+
+    can :manage, Certificate do |certificate|
+      owns(user, certificate)
+    end
+
+  end
+
+  def owns(user, model)
+    model.user.present? && model.user == user
   end
 end
