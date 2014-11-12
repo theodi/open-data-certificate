@@ -63,6 +63,10 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def modified_date
+    [updated_at, response_set.updated_at].max
+  end
+
   def set_default_documentation_url!(url)
     if url && persisted?
       self.documentation_url = url
