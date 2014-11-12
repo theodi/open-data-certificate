@@ -66,12 +66,16 @@ class DatasetsController < ApplicationController
         .result
     end
 
-    @datasets = datasets.page params[:page]
+    @last_modified_date = datasets.maximum('response_sets.updated_at')
 
-    respond_to do |format|
-      format.html
-      format.json
-      format.feed { render :layout => false  }
+    if stale?(last_modified: @last_modified_date)
+      @datasets = datasets.page params[:page]
+
+      respond_to do |format|
+        format.html
+        format.json
+        format.feed { render :layout => false  }
+      end
     end
   end
 

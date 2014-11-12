@@ -282,6 +282,19 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /https:\/\//, feed.entry.links[5].href
   end
 
+  test "atom feed last modified header is updated_at date of most recent response_set" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    recent_time = 2.days.ago.change(:usec => 0).utc
+    Timecop.freeze(recent_time) { FactoryGirl.create(:published_certificate_with_dataset) }
+
+    get :index, format: :feed
+
+    last_modified = @response.headers['Last-Modified']
+    assert_equal recent_time.httpdate, last_modified
+    feed = RSS::Parser.parse response.body
+    assert_equal recent_time, feed.updated.content.utc
+  end
+
   test "Requesting JSON for a search query returns JSON" do
     100.times do
       cert = FactoryGirl.create(:published_certificate_with_dataset)
