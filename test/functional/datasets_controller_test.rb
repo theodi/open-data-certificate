@@ -84,6 +84,24 @@ class DatasetsControllerTest < ActionController::TestCase
     end
   end
 
+  test "index filters by modified date of datasets" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, :since => 2.days.ago.iso8601
+
+    assert_equal 1, assigns(:datasets).size
+  end
+
+  test "index ignores argument if dateformat is wrong" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    FactoryGirl.create(:published_certificate_with_dataset)
+
+    get :index, :since => "2 days ago"
+
+    assert_equal 2, assigns(:datasets).size
+  end
+
   test "index (non logged in)" do
     get :dashboard
     assert_response :redirect
@@ -280,6 +298,19 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /https:\/\//, feed.entry.links[3].href
     assert_match /https:\/\//, feed.entry.links[4].href
     assert_match /https:\/\//, feed.entry.links[5].href
+  end
+
+  test "atom feed last modified header is updated_at date of most recent response_set" do
+    Timecop.freeze(3.days.ago) { FactoryGirl.create(:published_certificate_with_dataset) }
+    recent_time = 2.days.ago.change(:usec => 0).utc
+    Timecop.freeze(recent_time) { FactoryGirl.create(:published_certificate_with_dataset) }
+
+    get :index, format: :feed
+
+    last_modified = @response.headers['Last-Modified']
+    assert_equal recent_time.httpdate, last_modified
+    feed = RSS::Parser.parse response.body
+    assert_equal recent_time, feed.updated.content.utc
   end
 
   test "Requesting JSON for a search query returns JSON" do

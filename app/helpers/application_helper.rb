@@ -115,6 +115,10 @@ module ApplicationHelper
     value ? check_mark : cross_mark
   end
 
+  def atom_datetime(value)
+    value.to_datetime.rfc3339.sub(/\+00:00$/, 'Z')
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?

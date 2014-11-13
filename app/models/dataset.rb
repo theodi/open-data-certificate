@@ -23,6 +23,7 @@ class Dataset < ActiveRecord::Base
   # by generating invalid sql
   scope :with_responses, where(:id => joins(:response_sets).select('datasets.id'))
   scope :with_current_published_certificate, joins(:certificates).merge(Certificate.published.current)
+  scope :modified_since, ->(date) { joins(:response_sets).merge(ResponseSet.modified_since(date)) }
 
   class << self
     def match_to_user_domain(datasetUrl)
@@ -61,6 +62,10 @@ class Dataset < ActiveRecord::Base
       self.title = title
       save unless readonly?
     end
+  end
+
+  def modified_date
+    [updated_at, response_set.updated_at].max
   end
 
   def set_default_documentation_url!(url)

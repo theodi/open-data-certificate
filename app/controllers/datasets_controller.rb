@@ -52,6 +52,14 @@ class DatasetsController < ApplicationController
         "https://#{datahub}%")
     end
 
+    if since = params[:since].presence
+      begin
+        datetime = DateTime.iso8601(since)
+        datasets = datasets.modified_since(datetime)
+      rescue ArgumentError
+      end
+    end
+
     if term = params[:search].presence
       @title = t('datasets.search_results')
 
@@ -66,12 +74,16 @@ class DatasetsController < ApplicationController
         .result
     end
 
-    @datasets = datasets.page params[:page]
+    @last_modified_date = datasets.maximum('response_sets.updated_at')
 
-    respond_to do |format|
-      format.html
-      format.json
-      format.feed { render :layout => false  }
+    if stale?(last_modified: @last_modified_date)
+      @datasets = datasets.page params[:page]
+
+      respond_to do |format|
+        format.html
+        format.json
+        format.feed { render :layout => false  }
+      end
     end
   end
 

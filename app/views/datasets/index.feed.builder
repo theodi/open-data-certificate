@@ -10,12 +10,12 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page + 1, :protocol => embed_protocol)), :rel => "next" if @datasets.page(@datasets.current_page + 1).length > 0
   xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page - 1, :protocol => embed_protocol)), :rel => "prev" if (@datasets.current_page - 1) >= 1
   xml.title @title
-  xml.updated DateTime.now.rfc3339.to_s
+  xml.updated atom_datetime(@last_modified_date)
   @datasets.each do |dataset|
     xml.entry do
       xml.title dataset.title
       xml.content dataset.certificate.attained_level_title
-      xml.updated DateTime.parse(dataset.updated_at.to_s).rfc3339
+      xml.updated atom_datetime(dataset.modified_date)
       render(:partial => 'datasets/dataset', 
              :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificates.latest })
     end

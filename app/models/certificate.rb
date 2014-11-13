@@ -2,7 +2,7 @@ class Certificate < ActiveRecord::Base
   include Badges, Counts
   include AASM
 
-  belongs_to :response_set
+  belongs_to :response_set, touch: true
 
   has_one :survey,  through: :response_set
   has_one :user,    through: :response_set
