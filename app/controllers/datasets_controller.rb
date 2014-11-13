@@ -74,7 +74,7 @@ class DatasetsController < ApplicationController
         .result
     end
 
-    @last_modified_date = datasets.maximum('response_sets.updated_at')
+    @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if stale?(last_modified: @last_modified_date)
       @datasets = datasets.page params[:page]
