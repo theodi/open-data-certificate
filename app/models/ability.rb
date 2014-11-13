@@ -11,6 +11,11 @@ class Ability
         )
     end
     
+    can :read, Dataset do |dataset|
+      dataset.visible? || user.try(:admin?) ||
+        (dataset.user.present? && dataset.user == user)
+    end
+
     can :manage, Dataset do |dataset|
       dataset.user.nil? ||
         dataset.user == user
@@ -19,8 +24,6 @@ class Ability
     if user.try(:admin?)
       can :manage, :all
     end
-
-    can :read, Dataset
 
     can :accept, Transfer do |transfer|
       transfer.has_target_user? &&
@@ -43,5 +46,17 @@ class Ability
       campaign.try(:user) == user
     end
 
+    can :read, Certificate do |certificate|
+      certificate.visible? || owns(user, certificate)
+    end
+
+    can :manage, Certificate do |certificate|
+      owns(user, certificate)
+    end
+
+  end
+
+  def owns(user, model)
+    model.user.present? && model.user == user
   end
 end
