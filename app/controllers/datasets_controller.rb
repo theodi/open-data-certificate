@@ -53,7 +53,7 @@ class DatasetsController < ApplicationController
 
     if since = params[:since].presence
       begin
-        datetime = DateTime.iso8601(since)
+        datetime = parse_iso8601(since)
         datasets = datasets.modified_since(datetime)
       rescue ArgumentError
       end
@@ -73,7 +73,7 @@ class DatasetsController < ApplicationController
         .result
     end
 
-    @last_modified_date = datasets.maximum('response_sets.updated_at')
+    @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if stale?(last_modified: @last_modified_date)
       @datasets = datasets.page params[:page]

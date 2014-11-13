@@ -70,7 +70,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def modified_date
-    [updated_at, response_set.updated_at].max
+    response_set.try(:updated_at) || updated_at
   end
 
   def set_default_documentation_url!(url)

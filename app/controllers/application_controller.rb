@@ -52,6 +52,19 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from CanCan::AccessDenied, with: :not_authorised
 
+  protected
+  def parse_iso8601(value)
+    case value.strip
+    when /^\d{4}$/
+      DateTime.new(value.to_i)
+    when /^\d{4}-?\d{2}$/
+      h, m = /(\d{4})-?(\d{2})/.match(value)[1,2]
+      DateTime.new(h.to_i, m.to_i)
+    else
+      DateTime.iso8601(value)
+    end
+  end
+
   private
 
   def authenticate_user_from_token!
