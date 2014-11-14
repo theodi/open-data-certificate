@@ -14,6 +14,10 @@ module OpenDataCertificate
     ::OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host]
   end
 
+  def self.staging?
+    /staging/ =~ Dir.pwd
+  end
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
