@@ -221,4 +221,9 @@ class Certificate < ActiveRecord::Base
     Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate.hostname)
   end
 
+  def report!(reason, reporter)
+    CertificateMailer.report(self, reason, reporter).deliver
+  end
+  handle_asynchronously :report!
+
 end

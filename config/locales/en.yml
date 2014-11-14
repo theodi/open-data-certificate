@@ -213,6 +213,16 @@ en:
       certifiers: "This certificate has been verified by **%{count}**:"
       person: person
 
+    report:
+      heading: Report a problem with this certificate
+      intro: "Please describe the problem you've found with the certificate for '%{name}'"
+      report: "Report certifcate"
+      contact_email: Contact email
+      describe_the_problem: Describe the problem
+
+    flashes:
+      reported: 'This certificate has been reported to The ODI'
+
   certificate:
     on_date: "on %{date}"
     this_data_has_achieved: This data has achieved
@@ -238,6 +248,9 @@ en:
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
     expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
     claim_this_certificate: "Is this your dataset?"
+    report:
+      link: Report a problem
+      text: with this certificate
 
   datasets:
     datasets: Datasets

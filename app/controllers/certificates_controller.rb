@@ -108,6 +108,13 @@ class CertificatesController < ApplicationController
     redirect_to dataset_certificate_path params.select {|d| [:dataset_id, :id].include? d}
   end
 
+  def report
+    @certificate.report!(params[:reasons], params[:email])
+
+    flash[:notice] = I18n.t('certificates.flashes.reported')
+    redirect_to dataset_certificate_path(params[:dataset_id], @certificate)
+  end
+
   # used by an admin to mark as audited
   def update
     authorize! :manage, @certificate
