@@ -209,4 +209,12 @@ class CertificatesControllerTest < ActionController::TestCase
     end
   end
 
+  test "reporting certificate sends an email" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+      Delayed::Worker.new.work_off 1
+    end
+  end
+
 end

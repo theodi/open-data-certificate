@@ -1,0 +1,10 @@
+<%= @certificate.name %>
+<%= "-" * [@certificate.name.size, 80].min %>
+
+This certificate has been reported as having a problem:
+
+<%= @reason %>
+
+<%= "-" * [@certificate.name.size, 80].min %>
+
+<%= @certificate.url %>
