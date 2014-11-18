@@ -44,7 +44,11 @@ class CertificateGenerator < ActiveRecord::Base
     survey = Survey.newest_survey_for_access_code Survey::migrate_access_code(jurisdiction)
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+    if user.admin?
+      response_set = ResponseSet.where(dataset_id: dataset).last
+    else
+      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+    end
     return {success: false, errors: ['Dataset not found']} if !response_set
 
     if survey != response_set.survey || !response_set.modifications_allowed?

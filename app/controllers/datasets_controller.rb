@@ -191,7 +191,8 @@ class DatasetsController < ApplicationController
   def update_certificate
     jurisdiction, dataset = params.values_at(:jurisdiction, :dataset)
     dataset_model = Dataset.find(params[:dataset_id])
-    render json: CertificateGenerator.update(dataset_model, dataset, jurisdiction, current_user)
+    result = CertificateGenerator.update(dataset_model, dataset, jurisdiction, current_user)
+    render json: result, status: result[:success] ? :ok : :unprocessable_entity
   end
 
   def schema
