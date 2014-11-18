@@ -119,6 +119,28 @@ module ApplicationHelper
     value.to_datetime.rfc3339.sub(/\+00:00$/, 'Z')
   end
 
+  def modal_popup(id, cls, heading)
+    close_button = content_tag(
+      :button,
+      '&times;'.html_safe,
+      :class => 'close',
+      :type => 'button',
+      'data-dismiss' => 'modal',
+      'aria-hidden' => true
+    )
+    modal_classes = "modal modal-wide hide fade #{cls}"
+    cog = content_tag(:span, '', :class => 'icon-cog')
+    content_tag(:div, :id => id, :class => modal_classes) do
+      content_tag(:div, :class => 'modal-header') do
+        title = content_tag(:h3, cog + " " + heading)
+        close_button + title
+      end +
+      content_tag(:div, :class => 'modal-body') do
+        yield
+      end
+    end
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
