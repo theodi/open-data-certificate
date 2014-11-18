@@ -14,6 +14,15 @@ var Tracking = (function($){
             $('.advanced-search [type=button]').on('click', function(){
                 ga('send', 'event', 'Search', 'toggle', 'advanced-options');
             });
+
+            // Track show hide of collapsed sections in questionnaire
+            $('.survey-section .collapse').on('shown', function(e){
+                var section = $(this).parent('section').attr('id');
+                ga('send', 'event', 'Questionnaire', 'show', section);
+            }).on('hide', function() {
+                var section = $(this).parent('section').attr('id');
+                ga('send', 'event', 'Questionnaire', 'hide', section);
+            });
         }
     }
 })(jQuery);
