@@ -479,4 +479,6 @@ $(document).ready(function($){
         buttons.prop('disabled', true);
     }, 0);
   });
+
+  Tracking.init();
 });
