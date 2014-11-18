@@ -87,6 +87,6 @@
               %i.icon.icon-rss-sign
               %a{href: yield(:rss_feed)} Subscribe to the RSS feed
 
-    = analytics_init if Rails.env.production?
     = yield(:modal_content)
+    = render :partial => 'layouts/analytics' if Rails.env.production?
     = yield(:foot_scripts)
