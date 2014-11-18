@@ -405,7 +405,6 @@ $(document).ready(function($){
 
   // toggle advanced search
   $('form .advanced-search button[name=advanced-search]').on('click', function(e) {
-    console.log('advanced-search');
     $(this).siblings('.options').toggleClass('hidden');
     $(this).blur();
   });
@@ -479,4 +478,6 @@ $(document).ready(function($){
         buttons.prop('disabled', true);
     }, 0);
   });
+
+  Tracking.init();
 });

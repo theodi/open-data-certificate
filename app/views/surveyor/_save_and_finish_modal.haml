@@ -1,12 +1,8 @@
-.modal.modal-wide.hide.fade#save-and-finish-modal
-  .modal-header
-    %button.close{:type => :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
-    %h3= t('surveyor.save_and_finish')
-  .modal-body
-    .row-fluid
-      .span6.log-in
-        %h1= t('homepage.log_in')
-        = render 'devise/sessions/form', resource: User.new, resource_name: 'user', remote: true, form_id: 'save_and_finish_modal_form'
-      .span6
-        %p= t('surveyor.you_need_to_register_or_sign_in_to_save')
-        = link_to t('homepage.create_an_account'), new_user_registration_path, :class => 'btn btn-large btn-info btn-info-modal'
+= modal_popup('save-and-finish-modal', '', t('surveyor.save_and_finish')) do
+  .row-fluid
+    .span6.log-in
+      %h1= t('homepage.log_in')
+      = render 'devise/sessions/form', resource: User.new, resource_name: 'user', remote: true, form_id: 'save_and_finish_modal_form'
+    .span6
+      %p= t('surveyor.you_need_to_register_or_sign_in_to_save')
+      = link_to t('homepage.create_an_account'), new_user_registration_path, :class => 'btn btn-large btn-info btn-info-modal'
