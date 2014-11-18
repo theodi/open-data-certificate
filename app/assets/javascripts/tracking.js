@@ -9,6 +9,11 @@ var Tracking = (function($){
             }).on('hide', function() {
                 ga('send', 'event', 'Popup', 'hide', $(this).attr('id'));
             });
+
+            // Track advanced search usage
+            $('.advanced-search [type=button]').on('click', function(){
+                ga('send', 'event', 'Search', 'toggle', 'advanced-options');
+            });
         }
     }
 })(jQuery);
