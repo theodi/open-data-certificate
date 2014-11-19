@@ -77,7 +77,7 @@
     - data['autocompletable'] = r.autocompletable?
     - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
-    - data['mandatory'] = !!q.is_mandatory
+    - data['mandatory'] = q.is_mandatory
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
     - attrs = {data: data, id: id, class: classes.join(' ')}
