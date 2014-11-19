@@ -18,7 +18,6 @@
 - else
   %div.question.container
     - r = response_for(@response_set, @responses, q, nil, rg)
-    - a = @response_set.autocomplete_override_message_for(q)
     - all_autocompleted = r.all_autocompleted(@responses)
 
     - url_field = r.answer && r.answer.input_type == 'url'
@@ -32,6 +31,10 @@
       - state = 'url-verified'
       - status_message = t('surveyor.url_verified')
 
+      - if r.explanation.present?
+        - state = 'url-explained'
+        - status_message = t('surveyor.url_explained')
+
     - if r.autocompletable?
       - state = 'autocompleted'
       - status_message = t('surveyor.autocompleted')
@@ -40,7 +43,7 @@
         - state = 'autocompleted-changed'
         - status_message = t('surveyor.autocompleted_changed')
 
-        - if a.message?
+        - if r.explanation.present?
           - state = 'autocompleted-explained'
           - status_message = t('surveyor.autocompleted_explained')
 
@@ -52,15 +55,11 @@
         - state = 'autocompleted-url-warning'
         - status_message = t('surveyor.autocomplete_url_warning')
 
-      - if a.message?
-        - state = 'url-explained'
-        - status_message = t('surveyor.url_explained')
-
     - if r.any_metadata_missing(@responses)
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
-      - if a.message?
+      - if r.explanation
         - state = 'autocompleted-explained'
         - status_message = t('surveyor.autocompleted_explained')
 
@@ -142,8 +141,8 @@
         .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'
           - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
-          = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
-            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
+          = f.semantic_fields_for i, r do |ff|
+            = ff.input :explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
 
       %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}
         - unless (q.help_text.blank?)

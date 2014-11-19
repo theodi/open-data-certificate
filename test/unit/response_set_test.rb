@@ -61,6 +61,28 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
+  test "copies explanations for responses along with answers" do
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q, input_type: 'url')
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: "example.org/fail",
+                                    explanation: "can't even protocol",
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+
+    response_set = FactoryGirl.create :response_set, survey: source_response_set.survey
+    response_set.reload
+
+    response_set.copy_answers_from_response_set!(source_response_set)
+
+    response = response_set.responses.first
+    assert response_set.responses.first.string_value == "example.org/fail"
+    assert response_set.responses.first.explanation == "can't even protocol"
+  end
+
   def prepare_response_set(response_value = "Foo bar")
     q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
     a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
@@ -594,9 +616,7 @@ class ResponseSetTest < ActiveSupport::TestCase
 
     question = FactoryGirl.create(:question, reference_identifier: "url")
     answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail")
-
-    response_set.stubs(:explanation_not_given?).returns(false)
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail", explanation: "is not blank")
 
     assert response_set.all_urls_resolve?
   end

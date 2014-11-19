@@ -4,7 +4,7 @@ class Response < ActiveRecord::Base
   extend Memoist
 
   attr_writer :reference_identifier
-  attr_accessible :autocompleted
+  attr_accessible :autocompleted, :explanation
 
   # override with :touch
   belongs_to :response_set, touch: true
@@ -50,7 +50,7 @@ class Response < ActiveRecord::Base
   end
 
   def ui_hash_values
-    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other].reduce({}) do |memo, key|
+    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :explanation].reduce({}) do |memo, key|
       value = self.send(key)
       memo[key] = value unless value.blank?
       memo

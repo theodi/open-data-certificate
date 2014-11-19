@@ -30,7 +30,6 @@ class ResponseSet < ActiveRecord::Base
 
   # One to one relationship with kitten data object
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
-  has_many :autocomplete_override_messages, dependent: :destroy
   has_one :certificate_generator
 
   scope :published, where(:aasm_state => 'published')
@@ -136,13 +135,13 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def documentation_url_explanation
-    autocomplete_override_message_for(documentation_url_question.id).message
+    response_for(documentation_url_question.id).explanation
   end
 
   def documentation_url_explanation=(val)
-    explanation = autocomplete_override_message_for(documentation_url_question.id)
-    explanation.message = val
-    explanation.save
+    response = response_for(documentation_url_question.id)
+    response.explanation = val.presence
+    response.save
   end
 
   # This picks up the jurisdiction (survey title) from the survey, or the migrated survey
@@ -307,16 +306,12 @@ class ResponseSet < ActiveRecord::Base
     responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
   end
 
-  def explanation_not_given?(question)
-    !autocomplete_override_message_for(question).message?
-  end
-
   def all_urls_resolve?
     errors = []
     responses_with_url_type.each do |response|
       unless response.string_value.blank?
         response_code = ODIBot.new(response.string_value).response_code rescue nil
-        if response_code != 200 && explanation_not_given?(response.question)
+        if response_code != 200 && response.explanation.blank?
           response.error = true
           response.save
           errors << response
@@ -402,11 +397,6 @@ class ResponseSet < ActiveRecord::Base
   #
   alias :original_update_from_ui_hash :update_from_ui_hash
   def update_from_ui_hash(ui_hash)
-
-    ui_hash.each do |_ord, response_hash|
-      autocomplete_message = autocomplete_override_message_for(response_hash[:question_id])
-      autocomplete_message.update_attributes(response_hash.delete('autocomplete_override_message'))
-    end
 
     # the api_ids in the ui_hash
     api_ids = ui_hash.map do |_ord, response_hash|
@@ -495,8 +485,8 @@ class ResponseSet < ActiveRecord::Base
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
 
-  def autocomplete_override_message_for(question)
-    autocomplete_override_messages.where(question_id: question).first_or_create
+  def response_for(question_id)
+    responses.where(question_id: question_id).first || responses.where(question_id: question_id).build
   end
 
   def autocomplete(url)
