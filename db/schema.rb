@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141117145346) do
+ActiveRecord::Schema.define(:version => 20141120173301) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20141117145346) do
     t.integer  "embed_stat_id"
   end
 
-  add_index "datasets", ["user_id"], :name => "index_datasets_on_user_id"
+  add_index "datasets", ["user_id", "created_at"], :name => "index_datasets_on_user_id_and_created_at"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
