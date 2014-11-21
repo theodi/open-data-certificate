@@ -370,10 +370,6 @@ class ResponseSet < ActiveRecord::Base
     uncompleted_mandatory_questions_count == 0
   end
 
-  def certificate_level
-    certificate.attained_level
-  end
-
   def attained_level
     @attained_level ||= Survey::REQUIREMENT_LEVELS[minimum_outstanding_requirement_level-1]
   end

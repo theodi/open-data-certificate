@@ -630,8 +630,6 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal 0, progress['standard']
     assert_equal 0, progress['exemplar']
     assert_equal nil, progress['attained']
-
-    q = FactoryGirl.create(:question, :survey_section_id => response_set.survey.sections.first.id)
   end
 
 end
