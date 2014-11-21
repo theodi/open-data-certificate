@@ -211,11 +211,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def mandatory_completed
-    completed_questions.select(&:is_mandatory).count
-  end
-
-  def completed_questions
-    response_set.responses.map(&:question)
+    response_set.questions.mandatory.count
   end
 
   def url

@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   attr_accessor :minimum_level
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
+  scope :mandatory, where(is_mandatory: true)
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required

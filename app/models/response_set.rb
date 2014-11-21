@@ -25,6 +25,8 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
 
+  has_many :questions, through: :responses
+
   # One to one relationship with certificate
   has_one :certificate, dependent: :destroy
 
