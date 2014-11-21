@@ -98,7 +98,7 @@ class Survey < ActiveRecord::Base
 
   def requirements
     # questions.select(&:is_a_requirement?)
-    questions.where(display_type: 'label').where('requirement > ""')
+    questions.where(display_type: 'label').where('requirement is not null')
   end
 
   def only_questions
