@@ -106,7 +106,7 @@ class Survey < ActiveRecord::Base
   end
 
   def mandatory_questions
-    questions.where(:is_mandatory => true)
+    questions.mandatory
   end
 
   def valid?(context = nil)
