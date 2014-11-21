@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :datasets, :order => "created_at DESC"
+  has_many :datasets, :order => "datasets.created_at DESC"
   has_many :response_sets
   has_many :sent_claims, class_name: 'Claim', foreign_key: 'initiating_user_id'
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
