@@ -290,8 +290,6 @@ class ResponseSet < ActiveRecord::Base
       r.dependency.nil? ?
         true : depends[r.dependency.id]
     end
-
-    # @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
 
   def triggered_requirements
@@ -300,8 +298,6 @@ class ResponseSet < ActiveRecord::Base
         true :
         depends[r.dependency.id]
     end
-
-    # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
   end
 
   def responses_with_url_type
