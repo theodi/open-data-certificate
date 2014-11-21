@@ -4,10 +4,9 @@
     .span3
       %h3= t('dashboard.level_attained')
 
-      - cache ['dash/attained_level', response_set] do
-        .level-badge{class: "level-badge-#{response_set.attained_level}"}
+      .level-badge{class: "level-badge-#{response_set.certificate_level}"}
 
-        %p= t "levels.#{response_set.attained_level}.title"
+      %p= t "levels.#{response_set.certificate_level}.title"
 
     .span3
       %h3= t('dashboard.current_status')
