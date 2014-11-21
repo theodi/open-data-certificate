@@ -8,7 +8,7 @@ class Answer < ActiveRecord::Base
   end
 
   def requirement
-    @requirement ||= [read_attribute(:requirement), question.try(:requirement)].delete_if(&:blank?).first
+    @requirement ||= read_attribute(:requirement).presence || question.try(:requirement).presence
   end
 
   def requirement_level

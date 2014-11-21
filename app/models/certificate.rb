@@ -185,35 +185,6 @@ class Certificate < ActiveRecord::Base
     responses.group_by { |r| r.question_id }
   end
 
-  def progress
-    {
-      outstanding: outstanding.sort,
-      entered: entered.flatten.compact.sort,
-      mandatory: mandatory,
-      mandatory_completed: mandatory_completed
-    }
-  end
-
-  def outstanding
-    response_set.triggered_requirements.map do |r|
-      r.reference_identifier
-    end
-  end
-
-  def entered
-    response_set.responses.map(&:answer).map do |a|
-      a.requirement.try(:scan, /\S+_\d+/) #if a.question.triggered? @response_set
-    end
-  end
-
-  def mandatory
-    response_set.incomplete_triggered_mandatory_questions.count
-  end
-
-  def mandatory_completed
-    response_set.questions.mandatory.count
-  end
-
   def url
     Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate.hostname)
   end

@@ -621,4 +621,17 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.all_urls_resolve?
   end
 
+  test "progress calculation of response_set" do
+    response_set = FactoryGirl.create(:response_set)
+    progress = response_set.progress
+
+    assert_equal 0, progress['basic']
+    assert_equal 0, progress['pilot']
+    assert_equal 0, progress['standard']
+    assert_equal 0, progress['exemplar']
+    assert_equal nil, progress['attained']
+
+    q = FactoryGirl.create(:question, :survey_section_id => response_set.survey.sections.first.id)
+  end
+
 end

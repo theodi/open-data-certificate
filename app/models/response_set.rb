@@ -26,6 +26,7 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :survey
 
   has_many :questions, through: :responses
+  has_many :answers, through: :responses
 
   # One to one relationship with certificate
   has_one :certificate, dependent: :destroy
@@ -298,6 +299,43 @@ class ResponseSet < ActiveRecord::Base
         true :
         depends[r.dependency.id]
     end
+  end
+
+  def outstanding_reference_identifiers
+    triggered_requirements.map(&:reference_identifier)
+  end
+
+  def entered_reference_identifiers
+    answers.includes(:question).map(&:requirement).map do |ref|
+      ref.try(:scan, /\S+_\d+/)
+    end.flatten.compact
+  end
+
+  def levels_count(reference_identifiers)
+    # split level name off before _, count by occurance
+    Hash[reference_identifiers.group_by { |r| r.split('_')[0] }.map { |k, v| [k, v.size] }]
+  end
+
+  def progress
+    pending = incomplete_triggered_mandatory_questions.count
+    complete = questions.mandatory.count
+    outstanding = levels_count(outstanding_reference_identifiers)
+    entered = levels_count(entered_reference_identifiers)
+
+    result = {
+      attained: certificate.attained_level
+    }
+    %w[basic pilot standard exemplar].each do |level|
+      pending += outstanding[level] || 0
+      complete += entered[level] || 0
+      total = pending+complete
+      if total > 0
+        result[level] = (100.0*complete/total).to_i
+      else
+        result[level] = 0
+      end
+    end
+    result
   end
 
   def responses_with_url_type
