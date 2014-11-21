@@ -281,7 +281,7 @@ class ResponseSet < ActiveRecord::Base
 
   def incomplete_triggered_mandatory_questions
     responded_to_question_ids = responses.pluck('question_id')
-    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }
+    triggered_mandatory_questions.reject { |q| responded_to_question_ids.include? q.id }
   end
 
   def triggered_mandatory_questions
