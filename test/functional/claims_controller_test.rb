@@ -49,8 +49,7 @@ class ClaimsControllerTest < ActionController::TestCase
   end
 
   test "listing outstanding claims to admin" do
-    admin = FactoryGirl.create(:user)
-    ENV['ODC_ADMIN_IDS'] = admin.id.to_s
+    admin = FactoryGirl.create(:admin_user)
     FactoryGirl.create_list(:claim_on_published_certificate, 3)
 
     sign_in admin
@@ -58,7 +57,6 @@ class ClaimsControllerTest < ActionController::TestCase
 
     assert_response :ok
     assert_equal 3, assigns(:outstanding_claims).size
-    ENV['ODC_ADMIN_IDS'] = ''
   end
 
   test "approving claim" do

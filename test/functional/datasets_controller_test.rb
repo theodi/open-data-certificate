@@ -535,14 +535,12 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   test "dataset is visible if removed and admin" do
-    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:admin_user)
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     cert.dataset.update_attribute(:removed, true)
 
-    ENV['ODC_ADMIN_IDS'] = user.id.to_s
     sign_in user
     get :show, id: cert.dataset.id
-    ENV['ODC_ADMIN_IDS'] = ""
 
     assert_response :ok
   end

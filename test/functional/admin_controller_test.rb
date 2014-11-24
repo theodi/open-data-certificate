@@ -5,9 +5,7 @@ class AdminControllerTest < ActionController::TestCase
 
   setup do
     @user = FactoryGirl.create :user
-    @admin = FactoryGirl.create :user
-
-    ENV['ODC_ADMIN_IDS'] = "#{@admin.id}"
+    @admin = FactoryGirl.create :admin_user
   end
 
   test "cannot be accessed by normal user" do
