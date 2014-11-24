@@ -150,15 +150,12 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "Admin marks a certificate as audited" do
     cert = FactoryGirl.create(:certificate_with_dataset)
-    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:admin_user)
     sign_in user
-
 
     assert_equal false, cert.audited
 
-    ENV['ODC_ADMIN_IDS'] = user.id.to_s
     put :update, {dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: true}}
-    ENV['ODC_ADMIN_IDS'] = nil
 
     cert.reload
     assert_equal true, cert.audited
@@ -166,14 +163,12 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "Admin unmarks a certificate as audited" do
     cert = FactoryGirl.create(:published_audited_certificate_with_dataset)
-    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:admin_user)
     sign_in user
 
     assert_equal true, cert.audited
 
-    ENV['ODC_ADMIN_IDS'] = user.id.to_s
     put :update, {dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: false}}
-    ENV['ODC_ADMIN_IDS'] = nil
 
     cert.reload
     assert_equal false, cert.audited

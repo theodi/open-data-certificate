@@ -106,12 +106,6 @@ Then(/^a new user should be created$/) do
   assert_equal Dataset.all.first.user, user
 end
 
-Then(/^that certificate should be linked to the ODI Administrator account$/) do
-  user = User.find(ENV['ODC_ADMIN_IDS'].split(",").first)
-
-  assert_equal Dataset.all.first.user, user
-end
-
 Then(/^the certificate should use the existing user account$/) do
   user = User.find_by_email(@email)
 
