@@ -343,21 +343,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def all_urls_resolve?
-    errors = []
-    responses_with_url_type.each do |response|
-      unless response.string_value.blank?
-        response_code = ODIBot.new(response.string_value).response_code rescue nil
-        if response_code != 200 && response.explanation.blank?
-          response.error = true
-          response.save
-          errors << response
-        else
-          response.error = false
-          response.save
-        end
-      end
-    end
-    errors.length == 0
+    responses_with_url_type.all?(&:url_valid_or_explained?)
   end
 
   def uncompleted_mandatory_questions_count

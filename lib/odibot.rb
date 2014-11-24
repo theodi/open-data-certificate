@@ -16,4 +16,14 @@ class ODIBot
     end
     code
   end
+
+  def is_http_url?
+    URI.parse(@url).kind_of?(URI::HTTP)
+  rescue URI::InvalidURIError
+    false
+  end
+
+  def valid?
+    is_http_url? && response_code == 200
+  end
 end

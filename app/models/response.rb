@@ -12,6 +12,8 @@ class Response < ActiveRecord::Base
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
 
+  before_save :resolve_if_url
+
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end
@@ -113,7 +115,17 @@ class Response < ActiveRecord::Base
     end
   end
 
+  def url_valid_or_explained?
+    !error || explanation.present?
+  end
+
   private
+  def resolve_if_url
+    return unless answer.input_type == 'url' && string_value.present?
+    self.error = !ODIBot.new(string_value).valid?
+    return nil # false value will stop active record saving
+  end
+
   def set_default_dataset_title
     dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
   end
