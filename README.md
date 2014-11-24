@@ -258,7 +258,9 @@ DISABLE_FOOTNOTES=true
 
 #### Admin functions
 
-To mark a user as being an admin - the users ID should be included in the `ODC_ADMIN_IDS` environment variable (comma separated).  The easiest way to find the ID is to look on the URL of their account page.
+To mark a user as being an admin use the rails console to set the `admin` field to true. The easiest way to find the ID is to look on the URL of their account page.
+
+    User.find(<id>).update_attributes(admin: true)
 
 Admins are able to block a dataset from displaying on the public /datasets page by visiting the dataset and toggling the visibility at the top of the page.
 
