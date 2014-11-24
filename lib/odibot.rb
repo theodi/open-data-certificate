@@ -15,6 +15,8 @@ class ODIBot
       Rails.cache.write(@url, code, expires_in: 5.minute)
     end
     code
+  rescue SocketError
+    0
   end
 
   def is_http_url?
