@@ -34,13 +34,13 @@
         <%= boolean_mark(generator.completed?) %>
       </td>
       <td>
-        <%= boolean_mark(generator.certificate.published?) %>
+        <%= boolean_mark(generator.published?) %>
       </td>
       <td>
         <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
       </td>
       <td>
-        <% if generator.certificate.published? %>
+        <% if generator.published? %>
           <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
         <% end %>
       </td>
