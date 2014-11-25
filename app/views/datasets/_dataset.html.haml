@@ -3,5 +3,5 @@
     = dataset.title
     = render dataset.transfer || dataset.build_transfer
   %dd
-    = render partial: 'response_set', collection: dataset.response_sets, locals: {primary: dataset.response_sets.first}
+    = render partial: 'response_set', collection: dataset.response_sets
   %hr.heavy

@@ -24,8 +24,4 @@ class RegistrationsController < Devise::RegistrationsController
   def campaigns
     CertificationCampaign.where(user_id: current_user.id).count
   end
-
-  def surveys
-    Survey.available_to_complete
-  end
 end

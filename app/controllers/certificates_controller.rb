@@ -60,9 +60,7 @@ class CertificatesController < ApplicationController
   # this is similiar to the improvements, but returns
   # json only, and includes completed questions too
   def progress
-    @progress = @certificate.progress
-
-    render json: @progress
+    render json: @certificate.response_set.progress
   end
 
   def embed

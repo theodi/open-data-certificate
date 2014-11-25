@@ -31,7 +31,7 @@
 
   #surveyor
     .container.survey-intro
-      -if @url_error
+      -if @url_error and @response_set.documentation_url_explanation.blank?
         .alert.alert-alert.flash{"data-dismiss" => "alert"}
           %i.icon-exclamation-sign.icon-large.icon-white
           %button.icon-remove{"data-dismiss" => "alert", :type => "button"}

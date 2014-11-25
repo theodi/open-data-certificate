@@ -47,11 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def has_expired_or_expiring_certificates?
-    response_sets.any? do |r|
-      unless r.certificate.nil? || ["draft", "archived"].include?(r.aasm_state)
-        r.certificate.expired? || r.certificate.expiring?
-      end
-    end
+    response_sets.published.includes(:certificate).merge(Certificate.past_expiry_notice).any?
   end
 
 end

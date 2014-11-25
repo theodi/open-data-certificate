@@ -307,44 +307,17 @@ $(document).ready(function($){
 
     $.getJSON(url)
     .then(function(data){
-      // console.log("url:", url)
-
       $(panel).removeClass('loading');
 
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
-
-      var pending = data.mandatory,
-          complete = data.mandatory_completed,
-          percentage, attained = 'none';
-
-      _.each(levels, function(level){
-
-        // rolling values
-        pending  += _.filter(data.outstanding, has_level(level)).length;
-        complete += _.filter(data.entered,     has_level(level)).length;
-
-        percentage = ((complete / (pending + complete))*100)
-
-        $('#bar-' + level).width(percentage + '%');
-
-        if(percentage === 100){attained = level}
-
-        // debug
-        // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
+      $.each(levels, function(idx, level) {
+          $('#bar-' + level).width(data[level] + '%');
       });
 
       $('#panel_handle')
         // removed any 'attained-' classes
         .toggleClass(function(i, name){return name.indexOf('attained-') === -1})
-        .addClass('attained-' + attained);
-
-
-      function has_level(name){
-        return function(item){
-          return item.indexOf(name+'_') === 0
-        }
-      }
-
+        .addClass('attained-' + data.attained);
     });
   });
 

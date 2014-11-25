@@ -44,4 +44,35 @@ class ODIBotTest < ActiveSupport::TestCase
     assert_equal 200, bot.response_code
   end
 
+  test "http url is valid" do
+    bot = ODIBot.new("http://example.org")
+    assert bot.is_http_url?
+  end
+
+  test "https url is valid" do
+    bot = ODIBot.new("https://example.org")
+    assert bot.is_http_url?
+  end
+
+  test "exception raising uri is invalid" do
+    bot = ODIBot.new("!:!:")
+    refute bot.is_http_url?
+  end
+
+  test "generic uri is invalid" do
+    bot = ODIBot.new("foo bar")
+    refute bot.is_http_url?
+  end
+
+  test "validates url by checking if http response is ok" do
+    stub_request(:get, "http://www.example.com").
+                to_return(:body => "", status: 200)
+    assert ODIBot.new("http://www.example.com").valid?
+  end
+
+  test "checks if url is http before fetching" do
+    ODIBot.expects(:get).never
+    refute ODIBot.new("foo bar").valid?
+  end
+
 end

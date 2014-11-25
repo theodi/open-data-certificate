@@ -4,13 +4,15 @@ class Response < ActiveRecord::Base
   extend Memoist
 
   attr_writer :reference_identifier
-  attr_accessible :autocompleted
+  attr_accessible :autocompleted, :explanation
 
   # override with :touch
   belongs_to :response_set, touch: true
 
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
+
+  before_save :resolve_if_url
 
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
@@ -50,7 +52,7 @@ class Response < ActiveRecord::Base
   end
 
   def ui_hash_values
-    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other].reduce({}) do |memo, key|
+    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :explanation].reduce({}) do |memo, key|
       value = self.send(key)
       memo[key] = value unless value.blank?
       memo
@@ -113,7 +115,17 @@ class Response < ActiveRecord::Base
     end
   end
 
+  def url_valid_or_explained?
+    !error || explanation.present?
+  end
+
   private
+  def resolve_if_url
+    return unless answer.input_type == 'url' && string_value.present?
+    self.error = !ODIBot.new(string_value).valid?
+    return nil # false value will stop active record saving
+  end
+
   def set_default_dataset_title
     dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
   end

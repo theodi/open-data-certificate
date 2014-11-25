@@ -49,16 +49,6 @@ ActiveRecord::Schema.define(:version => 20141124152635) do
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
 
-  create_table "autocomplete_override_messages", :force => true do |t|
-    t.integer  "response_set_id"
-    t.integer  "question_id"
-    t.text     "message"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "autocomplete_override_messages", ["response_set_id", "question_id"], :name => "i_on_response_set_id_and_question_id"
-
   create_table "certificate_generators", :force => true do |t|
     t.integer  "response_set_id"
     t.integer  "user_id"
@@ -296,6 +286,7 @@ ActiveRecord::Schema.define(:version => 20141124152635) do
     t.string   "api_id"
     t.boolean  "error",             :default => false
     t.boolean  "autocompleted",     :default => false
+    t.string   "explanation"
   end
 
   add_index "responses", ["answer_id"], :name => "index_responses_on_answer_id"

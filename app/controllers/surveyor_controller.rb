@@ -177,6 +177,7 @@ class SurveyorController < ApplicationController
     # this is an alternate view of the edit functionality,
     # with only the documentation url displayed
     edit
+    @url_error = @response_set.documentation_url_explanation.present?
   end
 
   # where to send the user once the survey has been completed

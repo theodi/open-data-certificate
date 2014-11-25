@@ -96,7 +96,7 @@ class MainController < ApplicationController
     authorize! :update, @dataset
 
     # use the most recent survey
-    @survey = Survey.where(:access_code => access_code).order("survey_version DESC").first
+    @survey = Survey.newest_survey_for_access_code(access_code)
 
     @response_set = ResponseSet.
       create(:survey => @survey,
