@@ -3,7 +3,6 @@ class RemoveAutocompleteOverrideDuplicates < ActiveRecord::Migration
     find_query = <<-SQL
       select count(id) as count, response_set_id, question_id
       from `autocomplete_override_messages`
-      where message is null or trim(message) = ''
       group by response_set_id, question_id
       having count(id) > 1;
     SQL
@@ -12,6 +11,7 @@ class RemoveAutocompleteOverrideDuplicates < ActiveRecord::Migration
         delete from autocomplete_override_messages
         where response_set_id = #{response_set_id}
           and question_id = #{question_id}
+          and (message is null or trim(message) = '')
         limit #{count - 1}
       SQL
       delete(delete_query)
