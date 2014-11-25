@@ -57,7 +57,6 @@ class CertificateGenerator < ActiveRecord::Base
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
     generator.request = request
-    was_published = response_set.published?
     certificate = generator.generate(jurisdiction, false)
     response_set = certificate.response_set
 
