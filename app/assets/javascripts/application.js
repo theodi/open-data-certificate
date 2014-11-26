@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
-//= require underscore
 //= require_tree .
 
 /* global $, skrollr, alert, Hogan */

@@ -122,4 +122,21 @@ class SurveyorControllerTest < ActionController::TestCase
     assert_response 200
   end
 
+  test "repeater field fragment" do
+    question = FactoryGirl.create(:question, question_group: FactoryGirl.create(:question_group, display_type: 'repeater'))
+    survey = question.survey_section.survey
+
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+    sign_in response_set.user
+
+    get :repeater_field, use_route: :surveyor,
+      survey_code: 'gb',
+      response_set_code: response_set.access_code,
+      question_id: question.id,
+      response_index: 1, # these numbers seem to not matter ¬_¬
+      response_group: 0
+
+    assert_response :ok
+  end
+
 end
