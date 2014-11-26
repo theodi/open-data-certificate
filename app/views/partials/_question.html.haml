@@ -19,7 +19,7 @@
     - all_autocompleted = r.all_autocompleted(@responses)
 
     - url_field = r.answer && r.answer.input_type == 'url'
-    - url_error = r.error
+    - url_error = !r.url_valid_or_explained?
 
     - state = 'no-response'
     - state = 'ok' if r.filled?
@@ -29,7 +29,7 @@
       - state = 'url-verified'
       - status_message = t('surveyor.url_verified')
 
-      - if r.explanation.present?
+      - if r.explained?
         - state = 'url-explained'
         - status_message = t('surveyor.url_explained')
 
@@ -41,7 +41,7 @@
         - state = 'autocompleted-changed'
         - status_message = t('surveyor.autocompleted_changed')
 
-        - if r.explanation.present?
+        - if r.explained?
           - state = 'autocompleted-explained'
           - status_message = t('surveyor.autocompleted_explained')
 
@@ -57,7 +57,7 @@
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
-      - if r.explanation
+      - if r.explained?
         - state = 'autocompleted-explained'
         - status_message = t('surveyor.autocompleted_explained')
 

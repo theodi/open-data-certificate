@@ -116,7 +116,11 @@ class Response < ActiveRecord::Base
   end
 
   def url_valid_or_explained?
-    !error || explanation.present?
+    !error || explained?
+  end
+
+  def explained?
+    explanation.present?
   end
 
   private
