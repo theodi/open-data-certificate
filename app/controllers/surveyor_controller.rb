@@ -144,6 +144,7 @@ class SurveyorController < ApplicationController
   end
 
   def repeater_field
+    @responses = @response_set.responses.includes(:question).all
     question = Question.find(params[:question_id])
     @rc = params[:response_index].to_i
     render :partial => "partials/repeater_field", locals: {response_group: params[:response_group] || 0, question: question}
