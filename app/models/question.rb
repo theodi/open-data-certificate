@@ -123,6 +123,10 @@ class Question < ActiveRecord::Base
     [(dependent? ? "q_dependent" : nil), (triggered ? nil : "q_hidden"), custom_class].compact.join(" ")
   end
 
+  def choice_type?
+    %w[one any].include?(pick)
+  end
+
   private
 
   def calculate_if_requirement_met_by_responses(responses)
