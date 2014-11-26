@@ -10,13 +10,13 @@
 - case q.display_type
 - when 'hidden' #don't do anything
 - when 'label'
-  .subsection-label
+  %li.subsection-label
     %h2.container
       != question_text
       %small= q.help_text
 
 - else
-  %div.question.container
+  %li.question.container
     - r = response_for(@response_set, @responses, q, nil, rg)
     - all_autocompleted = r.all_autocompleted(@responses)
 
