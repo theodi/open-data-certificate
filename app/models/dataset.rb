@@ -1,7 +1,7 @@
 class Dataset < ActiveRecord::Base
   belongs_to :user
 
-  delegate :full_name, :email, :to => :user, :prefix => true, :allow_nil => true
+  delegate :name, :email, :to => :user, :prefix => true, :allow_nil => true
 
   attr_accessible :title
 

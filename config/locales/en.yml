@@ -424,3 +424,8 @@ en:
     description: This shows your progress towards each data certificate.
     about: Read how it works.
     improve_data: How can I improve my open data?
+
+  helpers:
+    label:
+      user:
+        short_name: Short name or preferred way of being addressed

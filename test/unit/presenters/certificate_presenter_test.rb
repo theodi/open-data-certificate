@@ -45,7 +45,7 @@ class CertificatePresenterTest < ActiveSupport::TestCase
   end
 
   test "constructs user_name from user association" do
-    @certificate.user = FactoryGirl.create(:user, :first_name => "Joan", :last_name => "Jett")
+    @certificate.user = FactoryGirl.create(:user, :name => "Joan Jett")
     presenter = CertificatePresenter.new(@certificate).all_data
     assert_equal "Joan Jett", presenter[:user_name]
   end

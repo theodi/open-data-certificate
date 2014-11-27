@@ -31,7 +31,7 @@ class CertificatePresenter < SimpleDelegator
   end
 
   def user_name
-    user.try(:full_name)
+    user.try(:name).to_s
   end
 
   def published_email
