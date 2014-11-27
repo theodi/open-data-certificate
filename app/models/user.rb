@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def after_password_reset
+    confirm!
+  end
+
   def to_s
     if name.present?
       "#{name} <#{email}>"
