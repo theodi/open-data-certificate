@@ -111,4 +111,12 @@ class TransfersControllerTest < ActionController::TestCase
     assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
   end
 
+  test "accepting a certificate the user already own's redirects to dataset" do
+    transfer = FactoryGirl.create(:transfer, :aasm_state => :accepted)
+    assert transfer.accepted?
+    sign_in transfer.user
+    get :claim, id: transfer.id, token: transfer.token
+    assert_redirected_to dataset_path(transfer.dataset)
+  end
+
 end
