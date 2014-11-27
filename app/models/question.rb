@@ -118,6 +118,15 @@ class Question < ActiveRecord::Base
     subject.requirement && requirement && subject.requirement.include?(requirement)
   end
 
+  def css_class(response_set)
+    triggered = triggered?(response_set) || (part_of_group? && question_group.dependent?)
+    [(dependent? ? "q_dependent" : nil), (triggered ? nil : "q_hidden"), custom_class].compact.join(" ")
+  end
+
+  def choice_type?
+    %w[one any].include?(pick)
+  end
+
   private
 
   def calculate_if_requirement_met_by_responses(responses)

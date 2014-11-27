@@ -5,23 +5,21 @@
 - disabled = defined?(disableFlag) ? disableFlag : false
 - question_text = q_text(q, @render_context, I18n.locale)
 
-- pickTypes = Set.new(['one', 'any'])
-
 - case q.display_type
 - when 'hidden' #don't do anything
 - when 'label'
-  .subsection-label
+  %li.subsection-label
     %h2.container
       != question_text
       %small= q.help_text
 
 - else
-  %div.question.container
+  %li.question.container
     - r = response_for(@response_set, @responses, q, nil, rg)
     - all_autocompleted = r.all_autocompleted(@responses)
 
     - url_field = r.answer && r.answer.input_type == 'url'
-    - url_error = r.error
+    - url_error = !r.url_valid_or_explained?
 
     - state = 'no-response'
     - state = 'ok' if r.filled?
@@ -31,7 +29,7 @@
       - state = 'url-verified'
       - status_message = t('surveyor.url_verified')
 
-      - if r.explanation.present?
+      - if r.explained?
         - state = 'url-explained'
         - status_message = t('surveyor.url_explained')
 
@@ -43,7 +41,7 @@
         - state = 'autocompleted-changed'
         - status_message = t('surveyor.autocompleted_changed')
 
-        - if r.explanation.present?
+        - if r.explained?
           - state = 'autocompleted-explained'
           - status_message = t('surveyor.autocompleted_explained')
 
@@ -59,17 +57,17 @@
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
-      - if r.explanation
+      - if r.explained?
         - state = 'autocompleted-explained'
         - status_message = t('surveyor.autocompleted_explained')
 
     - classes = ['row', 'question-row', "q_#{renderer}"]
     - classes << q.css_class(@response_set)
-    - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
+    - classes << 'choice-boxes' if q.choice_type?
     - classes << 'mandatory' if q.is_mandatory
     - classes << 'autocompleted' if all_autocompleted
     - classes << state if state
-    - if pickTypes.include?(q.pick) && renderer != :dropdown
+    - if q.choice_type? && renderer != :dropdown
       - classes << ['inline-validation', 'compact-validation']
 
     - data = {}
@@ -87,7 +85,7 @@
 
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
-      - if q.pick == 'one' || q.pick == 'any'
+      - if q.choice_type?
         %label.span8.question_label
           != question_text
           - if q.minimum_level
@@ -120,7 +118,7 @@
               = ff.input :api_id, :as => :quiet
               = ff.input :autocompleted, :as => :quiet
 
-          - if q.pick == 'one' || q.pick == 'any'
+          - if q.choice_type?
             %div.choice-buttons.status-wrapper
               - q.answers.each do |a|
                 - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
@@ -140,7 +138,7 @@
 
         .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'
-          - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
+          - i = (i.to_i + q.answers.length).to_s unless q.choice_type?
           = f.semantic_fields_for i, r do |ff|
             = ff.input :explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
 
