@@ -167,7 +167,7 @@ class DatasetsController < ApplicationController
       user: current_user,
       certification_campaign: campaign
     )
-    generator.delay.generate(jurisdiction, create_user)
+    generator.delay.generate(jurisdiction, create_user, params[:existing_dataset])
     render status: :accepted, json: {
       success: "pending",
       dataset_id: params[:existing_dataset].try(:id),

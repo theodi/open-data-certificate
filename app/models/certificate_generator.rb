@@ -79,8 +79,11 @@ class CertificateGenerator < ActiveRecord::Base
     {success: true, published: response_set.published?, errors: errors}
   end
 
-  def generate(jurisdiction, create_user)
-    update_attribute(:survey, Survey.newest_survey_for_access_code(jurisdiction))
+  def generate(jurisdiction, create_user, dataset = nil)
+    build_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction))
+    # mass assignment protection avoidance
+    response_set.dataset = dataset if dataset
+    save!
 
     # find the questions which are to be answered
     survey.questions
