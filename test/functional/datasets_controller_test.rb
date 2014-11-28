@@ -471,6 +471,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
   test "completed status endpoint" do
     response_set = FactoryGirl.create(:response_set_with_dataset)
+    response_set.publish_certificate
     user = response_set.user
     generator = CertificateGenerator.create(user: user, completed: true, response_set: response_set)
     http_auth user
@@ -482,6 +483,19 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal(true, body['success'])
     assert_equal(response_set.dataset_id, body['dataset_id'])
     assert_equal(dataset_url(response_set.dataset_id, :format => :json), body['dataset_url'])
+  end
+
+  test "unpublished status endpoint" do
+    response_set = FactoryGirl.create(:response_set_with_dataset)
+    user = response_set.user
+    generator = CertificateGenerator.create(user: user, completed: true, response_set: response_set)
+    http_auth user
+    get :import_status, certificate_generator_id: generator.id
+    body = JSON.parse(response.body)
+    assert_equal(false, body['success'])
+    assert_equal(false, body['published'])
+    assert_equal(response_set.dataset_id, body['dataset_id'])
+    assert_equal(status_datasets_url(generator), body['dataset_url'])
   end
 
   test "status endpoint is limited to creating user" do
