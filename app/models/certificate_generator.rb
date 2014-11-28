@@ -45,9 +45,9 @@ class CertificateGenerator < ActiveRecord::Base
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
     if user.admin?
-      response_set = ResponseSet.where(dataset_id: dataset).last
+      response_set = ResponseSet.where(dataset_id: dataset).latest
     else
-      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).latest
     end
     return {success: false, errors: ['Dataset not found']} if !response_set
 
