@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version => "1.0"
 xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
   xml.author  do
-    xml.name @dataset.user_full_name
+    xml.name @dataset.user_name
   end
   xml.updated atom_datetime(@dataset.modified_date)
   xml.id dataset_url(@dataset, format: :feed, :protocol => embed_protocol)

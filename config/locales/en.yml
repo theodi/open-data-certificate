@@ -305,6 +305,7 @@ en:
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
     already_have_account: Already have an account?
+    resend_confirmation_instructions: Resend confirmation instructions
 
   about:
     heading_about: About
@@ -424,3 +425,8 @@ en:
     description: This shows your progress towards each data certificate.
     about: Read how it works.
     improve_data: How can I improve my open data?
+
+  helpers:
+    label:
+      user:
+        short_name: Short name or preferred way of being addressed

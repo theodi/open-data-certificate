@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :datasets, :order => "datasets.created_at DESC"
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :sent_claims, class_name: 'Claim', foreign_key: 'initiating_user_id'
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :default_jurisdiction
+  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction
 
   before_save :ensure_authentication_token
 
@@ -25,13 +25,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def full_name
-    [first_name, last_name].delete_if(&:blank?).join(' ')
+  def after_password_reset
+    confirm!
   end
 
   def to_s
-    if full_name.present?
-      "#{full_name} (#{email})"
+    if name.present?
+      "#{name} <#{email}>"
     else
       email
     end
@@ -39,11 +39,11 @@ class User < ActiveRecord::Base
 
   # name isn't mandatory on signup, so fall back to email
   def identifier
-    unless full_name.blank?
-      full_name
-    else
-      email.split('@').join(' from ')
-    end
+    name.presence || email.split('@').join(' from ')
+  end
+
+  def greeting
+    short_name.presence || name.presence || email.split("@").first
   end
 
   def has_expired_or_expiring_certificates?
