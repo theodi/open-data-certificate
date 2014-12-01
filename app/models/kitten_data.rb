@@ -155,6 +155,26 @@ class KittenData < ActiveRecord::Base
     @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
   end
 
+  def set_london_datastore_assumptions
+    return unless url.include?("data.london.gov.uk")
+    # Assumptions for data.london.gov.uk
+    # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
+    uri = URI(url)
+    package = uri.path.split("/").last
+
+    @fields["publisherOrigin"] = "true"
+    @fields["copyrightURL"] = url
+    @fields["dataPersonal"] = "not_personal"
+    @fields["frequentChanges"] = "false"
+    @fields["listed"] = "true"
+    @fields["listing"] = "http://data.london.gov.uk"
+    @fields["vocabulary"] = "false"
+    @fields["codelists"] = "false"
+    @fields["contentRights"] = "samerights"
+    @fields["versionManagement"] = ["list"]
+    @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
+  end
+
   def set_structured_open
     # Checks if any of the distributions are machine readable or open
     @fields["machineReadable"] = "true" if data[:distributions].detect{|d| d[:structured] }
