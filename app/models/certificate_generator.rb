@@ -98,6 +98,7 @@ class CertificateGenerator < ActiveRecord::Base
       if email
         new_user = User.find_or_create_by_email(email) do |user|
           user.password = SecureRandom.base64
+          user.skip_confirmation_notification!
         end
       end
     end
