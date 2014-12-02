@@ -45,9 +45,9 @@ class CertificateGenerator < ActiveRecord::Base
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
     if user.admin?
-      response_set = ResponseSet.where(dataset_id: dataset).last
+      response_set = ResponseSet.where(dataset_id: dataset).latest
     else
-      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).latest
     end
     return {success: false, errors: ['Dataset not found']} if !response_set
 
@@ -79,8 +79,13 @@ class CertificateGenerator < ActiveRecord::Base
     {success: true, published: response_set.published?, errors: errors}
   end
 
-  def generate(jurisdiction, create_user)
-    update_attribute(:survey, Survey.newest_survey_for_access_code(jurisdiction))
+  def generate(jurisdiction, create_user, dataset = nil)
+    unless response_set
+      build_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction))
+      # mass assignment protection avoidance
+      response_set.dataset = dataset if dataset
+      save!
+    end
 
     # find the questions which are to be answered
     survey.questions
@@ -95,6 +100,7 @@ class CertificateGenerator < ActiveRecord::Base
       if email
         new_user = User.find_or_create_by_email(email) do |user|
           user.password = SecureRandom.base64
+          user.skip_confirmation_notification!
         end
       end
     end

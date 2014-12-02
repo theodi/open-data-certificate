@@ -76,6 +76,10 @@ class ResponseSet < ActiveRecord::Base
     new_response_set
   end
 
+  def self.latest
+    order(arel_table[:created_at].desc).first
+  end
+
   # Simple state machine describing response set states
   aasm do
     state :draft, :initial => true
