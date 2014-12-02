@@ -199,7 +199,8 @@ class SurveyorController < ApplicationController
   private
   def set_response_set_and_render_context
     super
-    authorize!(:edit, @response_set) if @response_set
+    raise ActiveRecord::RecordNotFound unless @response_set.present?
+    authorize!(:edit, @response_set)
   end
 
   def prepare_new_response_set

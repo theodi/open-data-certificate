@@ -122,6 +122,16 @@ class SurveyorControllerTest < ActionController::TestCase
     assert_response 200
   end
 
+  test "404s if response_set does not exist" do
+    FactoryGirl.create(:survey, access_code: 'gb')
+
+    get :edit, use_route: :surveyor,
+      survey_code: "gb",
+      response_set: "nope"
+
+    assert_response :not_found
+  end
+
   test "repeater field fragment" do
     question = FactoryGirl.create(:question, question_group: FactoryGirl.create(:question_group, display_type: 'repeater'))
     survey = question.survey_section.survey
