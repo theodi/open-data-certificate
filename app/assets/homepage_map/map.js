@@ -37,13 +37,10 @@ $(function(){
     $actions.on('click', '.create-certificate', function(){
       // use the related certificate to populate the dialog form
       
+      var $form = $(this).parent('form');
+      $form.find('input[name=survey_access_code]').remove();
       var $hidden = $('<input>', {type: 'hidden', name:'survey_access_code', value:access_code});
-      $hidden.appendTo('form.start-survey');
-
-      // remove on close
-      $(document).one('hidden', '.modal', function () {
-        $hidden.remove();
-      });
+      $form.append($hidden);
     });
 
 
