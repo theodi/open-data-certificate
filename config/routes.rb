@@ -44,6 +44,11 @@ OpenDataCertificate::Application.routes.draw do
       get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
     end
 
+    resource :certificate, as: 'latest_certificate', only: [:show] do
+      get 'embed'
+      get 'badge'
+    end
+
     resources :certificates, :only => [:show, :update] do
        member do
          get 'improvements', to: 'certificates#improvements', as: 'improvements'

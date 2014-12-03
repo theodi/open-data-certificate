@@ -7,7 +7,7 @@
       %p= t("certificate.embed_badge_instructions")
       %textarea{data: {content: :highlight}}= render(:partial => 'shared/embed_badge', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe
     .span6.last
-      %p= link_to embed_dataset_certificate_path(certificate.response_set.dataset, certificate) do image_tag("certificate.png") end
+      %p= link_to embed_dataset_latest_certificate_path(certificate.dataset) do image_tag("certificate.png") end
       %h4= t("certificate.view_embed_page")
       %p= t("certificate.embed_instructions")
       %textarea{data: {content: :highlight}}= render(:partial => 'shared/embed_iframe', :locals => {:certificate => certificate}).gsub(/[&"'><]/, ERB::Util::HTML_ESCAPE).html_safe

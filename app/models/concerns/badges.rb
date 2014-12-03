@@ -19,11 +19,16 @@ module Badges
   end
 
   def badge_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'png')
   end
 
   def embed_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'js')
+  end
+
+  private
+  def urlgen
+    Rails.application.routes.url_helpers
   end
 
 end
