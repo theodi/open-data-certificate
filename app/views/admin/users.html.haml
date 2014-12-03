@@ -1,0 +1,18 @@
+- content_for :header_title, @user.name
+
+%h2 Datasets
+
+%table.table
+  %tr
+    %th Title
+    %th Visible
+    %th Certificate
+  - @datasets.each do |dataset|
+    %tr
+      %td= link_to dataset.title, dataset_path(dataset)
+      %td= boolean_mark(dataset.visible?)
+      %td
+        - if dataset.certificate
+          =link_to t("levels.#{dataset.certificate.attained_level}.title"), dataset_certificate_path(dataset, dataset.certificate)
+
+= paginate @datasets

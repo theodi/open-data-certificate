@@ -1,5 +1,9 @@
 - content_for :header_title, @title
+- content_for :foot_scripts do
+  = javascript_include_tag "admin"
 
+%h2 Adminster users and certificates
+= text_field_tag :search, nil, class: 'input-xlarge typeahead-user-search', autocomplete: 'off'
 
 %hr.heavy
 

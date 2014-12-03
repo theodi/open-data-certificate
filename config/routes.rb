@@ -119,6 +119,8 @@ OpenDataCertificate::Application.routes.draw do
 
   # Admin section
   get 'admin' => 'admin#index'
+  get 'admin/users/:user_id' => 'admin#users', as: 'admin_users'
+  get 'admin/typeahead' => 'admin#typeahead'
 
   root :to => 'main#home'
 
