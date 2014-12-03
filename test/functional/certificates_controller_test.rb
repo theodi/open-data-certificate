@@ -87,9 +87,9 @@ class CertificatesControllerTest < ActionController::TestCase
 
     json = JSON.parse(response.body)
 
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.js", json["certificate"]["badges"]["application/javascript"]
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.html", json["certificate"]["badges"]["text/html"]
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.png", json["certificate"]["badges"]["image/png"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.js", json["certificate"]["badges"]["application/javascript"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.html", json["certificate"]["badges"]["text/html"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.png", json["certificate"]["badges"]["image/png"]
   end
 
   test "Requesting a JSON version of a certificate in production returns https urls" do

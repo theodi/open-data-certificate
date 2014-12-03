@@ -9,7 +9,7 @@
         %h3.badge-align
           = link_to_unless_current dataset.title, dataset
       .span3
-        =link_to 'View certificate', [dataset, dataset.certificate], class: 'btn btn-info'
+        =link_to 'View certificate', dataset_latest_certificate_path(dataset), class: 'btn btn-info'
       .span3
         .details
           %p

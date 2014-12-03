@@ -85,6 +85,10 @@ class Certificate < ActiveRecord::Base
     published? && dataset.visible?
   end
 
+  def latest?
+    dataset.certificate == self
+  end
+
   def publish_certificate
     update_attributes(published: true, published_at: DateTime.now)
   end

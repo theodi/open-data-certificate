@@ -5,14 +5,14 @@ json.certificates do
   json.array! @datasets do |dataset|
     
     json.title "Open Data Certificate for #{dataset.certificate.response_set.title}"
-    json.uri dataset_certificate_url(dataset, dataset.certificate, :protocol => embed_protocol)
+    json.uri dataset_latest_certificate_url(dataset, :protocol => embed_protocol)
     json.jurisdiction dataset.certificate.response_set.jurisdiction
     json.status dataset.certificate.response_set.survey.try(:status)
     json.certification_type t(dataset.certificate.certification_type, scope: 'certificate.certification_types')
     json.badges do |badge|
-      badge.set! "application/javascript", badge_dataset_certificate_url(dataset, dataset.certificate, :format => "js", :protocol => embed_protocol)
-      badge.set! "text/html", badge_dataset_certificate_url(dataset, dataset.certificate, :format => "html", :protocol => embed_protocol)
-      badge.set! "image/png", badge_dataset_certificate_url(dataset, dataset.certificate, :format => "png", :protocol => embed_protocol)
+      badge.set! "application/javascript", badge_dataset_latest_certificate_url(dataset, :format => "js", :protocol => embed_protocol)
+      badge.set! "text/html", badge_dataset_latest_certificate_url(dataset, :format => "html", :protocol => embed_protocol)
+      badge.set! "image/png", badge_dataset_latest_certificate_url(dataset, :format => "png", :protocol => embed_protocol)
     end
     json.dataset do
       json.title dataset.certificate.response_set.title
