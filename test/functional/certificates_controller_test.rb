@@ -212,4 +212,21 @@ class CertificatesControllerTest < ActionController::TestCase
     end
   end
 
+  test "finds latest certificate when no :id specified" do
+    old_certificate = nil
+    Timecop.freeze(3.days.ago) do
+      old_certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    certificate.response_set.update_attribute(:dataset_id, old_certificate.dataset.id)
+    old_certificate.response_set.archive!
+    dataset = old_certificate.dataset
+
+    assert_equal dataset.id, certificate.dataset.id
+
+    get :show, dataset_id: certificate.dataset.id
+
+    assert_equal certificate, assigns(:certificate)
+  end
+
 end

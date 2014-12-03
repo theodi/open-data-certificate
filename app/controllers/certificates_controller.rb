@@ -123,7 +123,11 @@ class CertificatesController < ApplicationController
   private
 
     def get_certificate
-      @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+      if params[:id]
+        @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+      else
+        @certificate = Dataset.find(params[:dataset_id]).certificate
+      end
     end
 
     def log_embed
