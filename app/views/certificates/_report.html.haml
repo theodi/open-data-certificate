@@ -1,6 +1,6 @@
 = modal_popup("report-#{certificate.id}", "report-certificate", t(".heading")) do
   %p=t ".intro", :name => certificate.name
-  = form_tag report_dataset_certificate_path do |f|
+  = form_tag report_dataset_certificate_path(certificate.dataset, certificate) do |f|
     %p
       = text_area_tag :reasons, nil, :rows => 5, :placeholder => t('.describe_the_problem'), :class => 'input-xxlarge'
     %p
