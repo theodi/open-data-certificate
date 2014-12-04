@@ -7,6 +7,30 @@ class AdminController < ApplicationController
     @title = "Admin"
   end
 
+  def users
+    @user = User.find(params[:user_id])
+    authorize! :manage, @user
+    @datasets = @user.datasets.page(params[:page])
+  end
+
+  def typeahead
+    authorize! :manage, :all
+    users = User.search(
+      m: 'or',
+      email_cont: params[:q],
+      name_cont: params[:q],
+      short_name_cont: params[:q]
+    )
+    response = users.result.limit(5).map do |user|
+      {
+        user: user.to_s,
+        value: user.email,
+        path: admin_users_path(user)
+      }
+    end
+    render json: response
+  end
+
   private
 
     def set_cache_buster
