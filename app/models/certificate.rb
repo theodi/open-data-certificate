@@ -52,10 +52,6 @@ class Certificate < ActiveRecord::Base
       joins(:response_set => [:survey]).group('surveys.title, response_sets.dataset_id')
     end
 
-    def latest
-      where(published: true).joins(:response_set).merge(ResponseSet.published).order('certificates.created_at DESC').first
-    end
-
     def set_expired(surveys)
       for_surveys(surveys).without_expiry.update_all(expires_at: DateTime.now + EXPIRY_NOTICE)
     end

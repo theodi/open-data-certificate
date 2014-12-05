@@ -17,7 +17,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
       xml.content dataset.certificate.attained_level_title
       xml.updated atom_datetime(dataset.modified_date)
       render(:partial => 'datasets/dataset', 
-             :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificates.latest })
+             :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificate })
     end
   end
 end

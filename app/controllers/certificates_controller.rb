@@ -65,7 +65,7 @@ class CertificatesController < ApplicationController
   def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
     dataset = Dataset.match_to_user_domain(params[:datasetUrl])
-    certificate = dataset.certificates.latest
+    certificate = dataset.certificate
     unless certificate.nil?
       if params[:type].nil?
         redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
