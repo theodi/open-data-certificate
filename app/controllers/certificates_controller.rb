@@ -65,6 +65,7 @@ class CertificatesController < ApplicationController
   def certificate_from_dataset_url
     params[:datasetUrl] ||= request.env['HTTP_REFERER']
     dataset = Dataset.match_to_user_domain(params[:datasetUrl])
+    raise ActiveRecord::RecordNotFound unless dataset
     certificate = dataset.certificate
     unless certificate.nil?
       if params[:type].nil?

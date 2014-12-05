@@ -229,4 +229,19 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_equal certificate, assigns(:certificate)
   end
 
+  test "find certificate by dataset_url redirects to certificate path" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    dataset = certificate.dataset
+
+    get :certificate_from_dataset_url, :datasetUrl => dataset.documentation_url
+
+    assert_redirected_to dataset_certificate_path(dataset.id, certificate.id)
+  end
+
+  test "find certificate by dataset_url 404s on unfound dataset" do
+    get :certificate_from_dataset_url, :datasetUrl => "http://example.org"
+
+    assert_response :not_found
+  end
+
 end
