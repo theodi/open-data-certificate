@@ -129,7 +129,7 @@ class Dataset < ActiveRecord::Base
         end
       end
 
-      certificate_url = certificate.url if certificate
+      certificate_url = certificate.url(format: :json) if certificate
 
       {
         success: true,

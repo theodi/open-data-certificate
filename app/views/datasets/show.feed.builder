@@ -9,7 +9,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.link :href=> @dataset.documentation_url, :rel => "self", :protocol => embed_protocol
   @dataset.certificates.where(published: true).by_newest.each do |certificate|
     xml.entry do
-      xml.link :href=> dataset_certificate_url(@dataset, certificate, :protocol => embed_protocol)
+      xml.link :href=> dataset_latest_certificate_url(@dataset, :protocol => embed_protocol)
       xml.title certificate.name
       xml.content certificate.attained_level_title
       xml.updated atom_datetime(certificate.updated_at)

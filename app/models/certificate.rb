@@ -85,6 +85,10 @@ class Certificate < ActiveRecord::Base
     published? && dataset.visible?
   end
 
+  def latest?
+    dataset.certificate == self
+  end
+
   def publish_certificate
     update_attributes(published: true, published_at: DateTime.now)
   end
@@ -185,8 +189,14 @@ class Certificate < ActiveRecord::Base
     responses.group_by { |r| r.question_id }
   end
 
-  def url
-    Rails.application.routes.url_helpers.dataset_certificate_url(self.dataset, self, host: OpenDataCertificate.hostname)
+  def url(options={})
+    urlgen = Rails.application.routes.url_helpers
+    options = options.merge(host: OpenDataCertificate.hostname)
+    if latest?
+      urlgen.dataset_latest_certificate_url(self.dataset, options)
+    else
+      urlgen.dataset_certificate_url(self.dataset, self, options)
+    end
   end
 
   def report!(reason, reporter)

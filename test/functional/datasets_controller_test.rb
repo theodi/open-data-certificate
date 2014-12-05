@@ -215,15 +215,15 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_equal "http://test.host/datasets/#{cert.dataset.id}", feed.entry.links[1].href
     assert_equal "http://schema.theodi.org/certificate#certificate", feed.entry.links[2].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}", feed.entry.links[2].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate", feed.entry.links[2].href
     assert_equal "http://www.example.com", feed.entry.links[3].href
     assert_equal "about", feed.entry.links[3].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}.json", feed.entry.links[4].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[4].href
     assert_equal "alternate", feed.entry.links[4].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.html", feed.entry.links[5].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[5].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[5].rel
     assert_equal "text/html", feed.entry.links[5].type
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.js", feed.entry.links[6].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[6].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[6].rel
     assert_equal "application/javascript", feed.entry.links[6].type
   end
@@ -268,15 +268,15 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal 1, feed.entries.count
     assert_equal "http://test.host/datasets/#{cert.dataset.id}", feed.entry.links[0].href
     assert_equal "http://schema.theodi.org/certificate#certificate", feed.entry.links[1].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}", feed.entry.links[1].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate", feed.entry.links[1].href
     assert_equal "http://www.example.com", feed.entry.links[2].href
     assert_equal "about", feed.entry.links[2].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}.json", feed.entry.links[3].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[3].href
     assert_equal "alternate", feed.entry.links[3].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.html", feed.entry.links[4].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[4].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[4].rel
     assert_equal "text/html", feed.entry.links[4].type
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificates/#{cert.id}/badge.js", feed.entry.links[5].href
+    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[5].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[5].rel
     assert_equal "application/javascript", feed.entry.links[5].type
   end

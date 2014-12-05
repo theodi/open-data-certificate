@@ -35,11 +35,13 @@
         -if !certificate.expiring_state.nil? && response_set.published?
           = link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
 
-        = link_to "View certificate", [response_set.dataset, certificate], class: 'btn btn-large btn-block'
-        - unless response_set.archived? || response_set.draft?
+        - if response_set.published?
+          = link_to "View certificate", dataset_latest_certificate_path(response_set.dataset), class: 'btn btn-large btn-block'
           = link_to(t("dashboard.embed"), "#embed-#{certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
+        - else
+          = link_to "View certificate", [response_set.dataset, certificate], class: 'btn btn-large btn-block'
 
-      - unless response_set.archived? || response_set.draft?
+      - if response_set.published?
         =render :partial => 'shared/embed_code', :locals => {:certificate => certificate}
 
     .span3.edit-jurisdiction

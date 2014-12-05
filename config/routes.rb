@@ -33,8 +33,6 @@ OpenDataCertificate::Application.routes.draw do
   resources :datasets do
     put 'start_questionnaire'
     post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
-    get 'certificates/latest', to: 'certificates#latest', as: 'latest'
-    get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
     get :admin, on: :collection
     get :schema, on: :collection
@@ -42,6 +40,11 @@ OpenDataCertificate::Application.routes.draw do
 
     collection do
       get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+    end
+
+    resource :certificate, as: 'latest_certificate', only: [:show] do
+      get 'embed'
+      get 'badge'
     end
 
     resources :certificates, :only => [:show, :update] do

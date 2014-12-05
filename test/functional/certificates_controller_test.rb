@@ -87,9 +87,9 @@ class CertificatesControllerTest < ActionController::TestCase
 
     json = JSON.parse(response.body)
 
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.js", json["certificate"]["badges"]["application/javascript"]
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.html", json["certificate"]["badges"]["text/html"]
-    assert_equal "http://test.host/datasets/1/certificates/1/badge.png", json["certificate"]["badges"]["image/png"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.js", json["certificate"]["badges"]["application/javascript"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.html", json["certificate"]["badges"]["text/html"]
+    assert_equal "http://test.host/datasets/1/certificate/badge.png", json["certificate"]["badges"]["image/png"]
   end
 
   test "Requesting a JSON version of a certificate in production returns https urls" do
@@ -210,6 +210,23 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
       Delayed::Worker.new.work_off 1
     end
+  end
+
+  test "finds latest certificate when no :id specified" do
+    old_certificate = nil
+    Timecop.freeze(3.days.ago) do
+      old_certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    end
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    certificate.response_set.update_attribute(:dataset_id, old_certificate.dataset.id)
+    old_certificate.response_set.archive!
+    dataset = old_certificate.dataset
+
+    assert_equal dataset.id, certificate.dataset.id
+
+    get :show, dataset_id: certificate.dataset.id
+
+    assert_equal certificate, assigns(:certificate)
   end
 
 end
