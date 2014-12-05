@@ -244,4 +244,13 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
+  test "find certificate by dataset_url 404s on unpublished certificate" do
+    certificate = FactoryGirl.create(:certificate_with_dataset)
+    dataset = certificate.dataset
+
+    get :certificate_from_dataset_url, :datasetUrl => dataset.documentation_url
+
+    assert_response :not_found
+  end
+
 end
