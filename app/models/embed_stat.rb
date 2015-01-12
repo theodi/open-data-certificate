@@ -20,7 +20,7 @@ class EmbedStat < ActiveRecord::Base
   end
 
   def self.unique_datasets
-    all.group_by { |e| e.dataset }.count
+    count('distinct dataset_id')
   end
 
   def host
