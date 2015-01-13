@@ -13,7 +13,11 @@ class ResponseSet < ActiveRecord::Base
   REF_CHANGES = {
                   "ogl_uk" => "OGL-UK-2.0",
                   "cc_zero" => "CC0-1.0",
-                  "odc_odbl" => "ODbL-1.0"
+                  "odc_odbl" => "ODbL-1.0",
+                  "cc_by" => "CC-BY-4.0",
+                  "cc_by_sa" => "CC-BY-SA-4.0",
+                  "odc_by" => "ODC-BY-1.0",
+                  "odc_pddl" => "ODC-PDDL-1.0"
                 }
 
   after_save :update_certificate
@@ -261,7 +265,7 @@ class ResponseSet < ActiveRecord::Base
             :title => licence.title,
             :url   => licence.url
           }
-        rescue ArgumentError
+        rescue
           @content_licence_determined_from_responses = {
             :title => 'Unknown',
             :url   => nil
