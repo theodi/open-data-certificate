@@ -261,7 +261,7 @@ class ResponseSet < ActiveRecord::Base
             :title => licence.title,
             :url   => licence.url
           }
-        rescue ArgumentError
+        rescue
           @content_licence_determined_from_responses = {
             :title => 'Unknown',
             :url   => nil
