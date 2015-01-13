@@ -53,6 +53,26 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_redirected_to "http://test.host/datasets/1/certificates/1/badge.png"
   end
 
+  test "Requesting legacy url for embed performs a redirect" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :legacy_show, {id: cert.id, type: "embed"}
+
+    assert_redirected_to "http://test.host/datasets/1/certificates/1/embed"
+  end
+
+  test "requesting a legacy url with another type returns a not found" do
+    # Some spiders are mistaking arguments to juvia as urls to fetch
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    cert.attained_level = "basic"
+    cert.save
+    get :legacy_show, {id: cert.id, type: "random"}
+
+    assert_response :not_found
+  end
+
   test "Requesting a JSON version of a certificate returns the correct level" do
     levels = {
         "basic" => "raw",
