@@ -389,11 +389,10 @@ class ResponseSetTest < ActiveSupport::TestCase
     test "#data_licence_determined_from_responses returns the correct responses when the data licence is #{license}" do
       question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
       answer = FactoryGirl.create(:answer, question: question, reference_identifier: license)
-      expected_value = expected
       response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
       response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
 
-      assert_equal expected_value, response_set.data_licence_determined_from_responses
+      assert_equal expected, response_set.data_licence_determined_from_responses
     end
   end
 
