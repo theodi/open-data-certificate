@@ -16,12 +16,15 @@ class CertificatesController < ApplicationController
 
   def legacy_show
     certificate = Certificate.find params[:id]
-    if params[:type].nil?
+    case params[:type]
+    when nil
       redirect_to dataset_certificate_path certificate.response_set.dataset.id, certificate.id
-    elsif params[:type] == "embed"
+    when "embed"
       redirect_to embed_dataset_certificate_path certificate.response_set.dataset.id, certificate.id
-    elsif params[:type] == "badge"
+    when "badge"
       redirect_to badge_dataset_certificate_path certificate.response_set.dataset.id, certificate.id, format: params[:format]
+    else
+      raise ActiveRecord::RecordNotFound
     end
   end
 
