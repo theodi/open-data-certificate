@@ -2,7 +2,7 @@ survey 'IT',
   :full_title => 'Italy',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c\'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p><p>Quando rispondi a queste domande si dimostra la volontà a rispettare le normative pertinenti. Dovresti anche controllare quali ulteriori leggi e politiche risultano applicabili al settore in oggetto.</p><p><strong>Non hai bisogno di rispondere a tutte le domande per ottenere un certificato</strong> Basta rispondere a quelle che puoi.</p>' do
+  :description => '<p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c\'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p><p>Quando rispondi a queste domande dimostra la tua volontà a rispettare le normative pertinenti. Dovresti controllare ulteriormente quali leggi e politiche risultano applicabili al settore in oggetto.</p><p><strong>Non hai bisogno di rispondere a tutte le domande per ottenere un certificato</strong> Basta rispondere a quelle che puoi.</p>' do
 
   translations :en => :default
   section_general 'Informazioni generali',
@@ -21,7 +21,7 @@ survey 'IT',
     q_documentationUrl 'Dove sono descritti?',
       :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'questi dati sono descritti in',
+      :text_as_statement => 'Questi dati sono descritti in',
       :help_text => ''
     a_1 'La URL della documentazione',
       :string,
@@ -49,20 +49,20 @@ survey 'IT',
       :text_as_statement => 'Questi dati sono pubblicati da',
       :help_text => 'Inserisci il nome dell\'organizzazione che pubblica questi dati. Probabilmente è l\'organizzazione per cui lavori, a meno che tu non stia facendo il lavoro al posto di qualcun altro.',
       :required => :required
-    a_1 'informazioni sull\'editore',
+    a_1 'Informazioni sull\'autore',
       :string,
-      :placeholder => 'informazioni sull\'editore',
+      :placeholder => 'Informazioni sull\'autore',
       :required => :required
 
     q_publisherUrl 'Su quale sito si trovano i dati?',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
       :text_as_statement => 'I dati sono pubblicati su',
-      :help_text => 'dai al sito web una URL; questo ci aiuta a raggruppare i dati dello stesso organismo anche se le persone danno loro dei nomi diversi.'
-    a_1 'URL dell\'editore',
+      :help_text => 'Dai al sito web una URL; questo ci aiuta a raggruppare i dati della stessa organizzazione anche se le persone danno loro dei nomi diversi.'
+    a_1 'La URL dell\'autore',
       :string,
       :input_type => :url,
-      :placeholder => 'URL dell\'editore'
+      :placeholder => 'La URL dell\'autore'
 
     q_releaseType 'Di che tipo di aggiornamento si tratta?',
       :discussion_topic => :releaseType,
@@ -70,16 +70,16 @@ survey 'IT',
       :required => :required
     a_oneoff 'un unico aggiornamento di un pacchetto singolo di dati.',
       :help_text => 'Si tratta di un unico file e non prevedi di pubblicarne di simili in futuro'
-    a_collection 'Un unico aggiornamento di un insieme di pacchetti di dati correlati',
-      :help_text => 'E\' una raccolta di file correlati relativi agli stessi dati e per i quali al momento non prevedi di pubblicarne di simili in futuro'
+    a_collection 'Un aggiornamento unico di un insieme di pacchetti di dati correlati',
+      :help_text => 'È una raccolta di file correlati, relativi agli stessi dati, e per i quali al momento non prevedi di pubblicarne di simili in futuro'
     a_series 'Una serie di pacchetti di dati correlati in corso di pubblicazione',
       :help_text => 'Questa rappresenta una serie di pacchetti di dati con aggiornamenti periodici già previsti per il futuro'
-    a_service 'un servizio o un API per accedere agli open data',
-      :help_text => 'Questo è un live web service che permette ai programmatori di accedere ai tuoi dati attraverso un\'interfaccia di ricerca'
+    a_service 'un servizio o API per accedere agli open data',
+      :help_text => 'Questo è un web service in tempo reale che permette ai programmatori di accedere ai tuoi dati attraverso un\'interfaccia di interrogazione'
 
   end
 
-  section_legal 'Informazioni Legali',
+  section_legal 'Informazioni legali',
     :description => 'Diritti, licenze e privacy' do
 
     label_group_2 'Diritti',
@@ -96,7 +96,7 @@ survey 'IT',
       :requirement => ['standard_1']
     a_no 'no, non disponi dei titoli per pubblicare questi dati come dati aperti'
     a_unsure 'non sei sicuro di disporre dei diritti necessari per pubblicare questi dati come dati aperti'
-    a_complicated 'i diritti su questi dati sono complicati o poco chiari'
+    a_complicated 'i diritti su questi dati risultano complicati o poco chiari'
 
     label_standard_1 'Dovresti avere un <strong>chiaro titolo legale per la pubblicazione di questi dati</strong>.',
       :custom_renderer => '/partials/requirement_standard',
@@ -157,7 +157,7 @@ survey 'IT',
     a_true 'sì',
       :requirement => ['basic_3']
 
-    label_basic_3 'Hai indicato che questi dati non sono stati originariamente creati o raccolti da te, non sono raccolti su base volontaria/crowdsourced, quindi devono necessariamente essere stati estratti da o rielaborati usando altre fonti di dati.',
+    label_basic_3 'Hai indicato che questi dati non sono stati originariamente creati o raccolti da te, non sono raccolti su base volontaria, quindi devono necessariamente essere stati estratti da o rielaborati usando altre fonti di dati.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_3'
     dependency :rule => 'A and B and C and D'
@@ -166,7 +166,7 @@ survey 'IT',
     condition_C :q_crowdsourced, '==', :a_false
     condition_D :q_thirdPartyOrigin, '!=', :a_true
 
-    q_thirdPartyOpen 'Sono <em>tutti </em> le fonti di questi dati già pubblicate come dati aperti?',
+    q_thirdPartyOpen 'Sono <em>tutte </em> le fonti di questi dati già pubblicate come dati aperti?',
       :discussion_topic => :it_thirdPartyOpen,
       :display_on_certificate => true,
       :text_as_statement => 'Questi dati sono creati da',
@@ -209,7 +209,7 @@ survey 'IT',
       :text_as_statement => 'su base volontaria',
       :requirement => ['basic_5']
 
-    label_basic_5 'Hai indicato che i dati non sono stati originariamente creati o raccolte da te, e che non sono stato estratti o rielaborati da altri dati, quindi devono essere stati raccolti su base volontaria.',
+    label_basic_5 'Hai indicato che i dati non sono stati originariamente creati o raccolti da te, e che non sono stati estratti o rielaborati da altri dati, ma sono stati raccolti su base volontaria (crowdsourced).',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_5'
     dependency :rule => 'A and B and C and D'
@@ -234,7 +234,7 @@ survey 'IT',
       :discussion_topic => :it_claUrl,
       :display_on_certificate => true,
       :text_as_statement => 'La Contributor Licence Agreement (Accordo di licenza del contributore) è in',
-      :help_text => 'inserisci un link a un accordo che dimostra che i contributori acconsentono al riutilizzo dei loro dati. Un CLA trasferirà i diritti del contributore stesso a te, lo esenterà dai suoi diritti, o ti concederà in licenza i dati in modo che tu li possa pubblicare.',
+      :help_text => 'Inserisci un link a un accordo che dimostra che i contributori acconsentono al riutilizzo dei loro dati. Un CLA trasferirà i diritti del contributore stesso a te, lo esenterà dai suoi diritti, o ti concederà in licenza i dati in modo che tu li possa pubblicare.',
       :help_text_more_url => 'http://en.wikipedia.org/wiki/Contributor_License_Agreement',
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -242,15 +242,15 @@ survey 'IT',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
-    a_1 'la URL del Contributor Licence Agreement (Accordo di licenza del contributore)',
+    a_1 'La URL del Contributor Licence Agreement (Accordo di licenza del contributore)',
       :string,
       :input_type => :url,
-      :placeholder => 'la URL del Contributor Licence Agreement (Accordo di licenza del contributore)',
+      :placeholder => 'La URL del Contributor Licence Agreement (Accordo di licenza del contributore)',
       :required => :required
 
     q_cldsRecorded 'Tutti i contributori hanno accettato il Contributor Licence Agreement (CLA)?',
       :discussion_topic => :it_cldsRecorded,
-      :help_text => 'Controlla che tutti i collaboratori si impegnano a un CLA prima di riutilizzare o ripubblicare i loro contributi. Si consiglia di tenere un registro di chi ha dato contributi e se non sono d\'accordo per il CLA.',
+      :help_text => 'Controlla che tutti i collaboratori siano d\'accordo sul CLA prima di riutilizzare o ripubblicare i loro contributi. Si consiglia di tenere un registro su chi ha fornito i contributi e sulla loro accettazione o meno del CLA.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -276,7 +276,7 @@ survey 'IT',
       :discussion_topic => :it_sourceDocumentationUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Le fonti di questi dati sono descritti in',
-      :help_text => 'Inserisci un\'URL che documenti le fonti dalle quali i dati sono stati acquisiti da (la loro provenienza) e i diritti sotto cui si pubblicano i dati. Questo aiuta le persone a capire la provenienza dei dati.'
+      :help_text => 'Inserisci una URL che documenti le fonti dalle quali i dati sono stati acquisiti (la loro provenienza) e i diritti sotto cui si pubblicano i dati. Questo aiuta le persone a capire la provenienza dei dati.'
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
     a_1 'URL Documentazione Fonti dei dati',
@@ -296,7 +296,7 @@ survey 'IT',
       :discussion_topic => :it_sourceDocumentationMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'Il curatore ha pubblicato',
-      :help_text => 'Informazioni sulle fonti dei dati dovrebbero essere leggibili in modo che le persono possano comprenderle che, così come in un formato di metadati che i computer siano in grado di elaborare. Quando tutti fanno così, ciò aiut agli altri a scoprire come utilizzare gli stessi dati aperti possono essere utilizzati e giustificano la loro pubblicazione in corso.',
+      :help_text => 'Le informazioni sulle fonti dei dati dovrebbero essere leggibili in modo che le persone possano comprenderle, e anche in un formato di metadati che i computer siano in grado di elaborare. Se tutti procedono in questo modo, si aiutano altri a scoprire come gli stessi dati aperti possono essere utilizzati e ne giustificano la pubblicazione in corso.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
@@ -364,14 +364,14 @@ survey 'IT',
     q_dataNotApplicable 'Perché non si applica una licenza a questi dati?',
       :discussion_topic => :it_dataNotApplicable,
       :display_on_certificate => true,
-      :text_as_statement => 'Questi dati non sono concesso in licenza in quanto',
+      :text_as_statement => 'Questi dati non hanno licenza perché',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_na
     a_norights 'non ci sono diritti d\'autore o diritti su banche dati su questi dati',
       :text_as_statement => 'non ci sono diritti in esso',
-      :help_text => 'i diritti sulle banche dati si applicano se hai impiegato notevoli sforzi per la loro raccolta, verifica o presentazione. Non si possono rivendicare diritti sulle banche di dati se, ad esempio, i dati vengono creati da zero, presentati in modo strutturato, e non verificati. Hai diritto d\'autore, se hai selezionano gli elementi dei dati o li hai organizzati in modo non ovvio.'
+      :help_text => 'i diritti sulle banche dati si applicano se hai impiegato notevoli sforzi per la loro raccolta, verifica o presentazione. Non si possono rivendicare diritti sulle banche di dati se, ad esempio, i dati vengono creati da zero, presentati in modo strutturato, e non verificati. Hai diritto d\'autore, se hai selezionato gli elementi dei dati o li hai organizzati in modo non ovvio.'
     a_expired 'diritto d\'autore e diritti su banche dati sono scaduti',
       :text_as_statement => 'i diritti sono scaduti',
       :help_text => 'i diritti sulle banche dati durano dieci anni. Se i dati sono stati modificati più di dieci anni fa, quindi i diritti sulle banche dati decadono. Il diritto d\'autore dura per un determinato periodo di tempo, sia in base al numero di anni trascorsi dalla morte del suo creatore o dalla sua pubblicazione. Il copyright è improbabile che sia scaduto.'
@@ -401,7 +401,7 @@ survey 'IT',
       :discussion_topic => :it_dataOtherWaiver,
       :display_on_certificate => true,
       :text_as_statement => 'Diritti sui dati sono stati revocati con',
-      :help_text => 'Fornisci un URL per la rinuncia disponibile al pubblico così che le persone possano verificare la gente può verificare la revoca dei diritti sui dati.',
+      :help_text => 'Fornisci una URL per la rinuncia disponibile al pubblico così che si possa verificare la rinuncia ai diritti sui dati.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_dataLicence, '==', :a_na
@@ -430,7 +430,7 @@ survey 'IT',
       :discussion_topic => :it_otherDataLicenceURL,
       :display_on_certificate => true,
       :text_as_statement => 'Questa licenza è a',
-      :help_text => 'Fornisci un URL per la licenza, affinché si possa leggere sul Certificato Open Data e verificare che sia disponibile al pubblico.',
+      :help_text => 'Fornisci una URL per la licenza, affinché si possa leggere sul Certificato Open Data e verificare che sia disponibile al pubblico.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
@@ -469,7 +469,7 @@ survey 'IT',
     a_norights 'no, i dati contengono solo cifre e numeri',
       :text_as_statement => 'nessun diritto sul contenuto dei dati',
       :help_text => 'Non vi è alcun diritto d\'autore su informazioni oggettive. Se i dati non contengono alcun contenuto creato attraverso sforzo intellettuale, non ci sono diritti sul contenuto.'
-    a_samerights 'sì, ei diritti sono tutti in mano alla stessa persona o organizzazione',
+    a_samerights 'sì, e i diritti sono tutti in mano alla stessa persona o organizzazione',
       :text_as_statement => '',
       :help_text => 'Scegli questa opzione se il contenuto dei dati è stato creato interamente da o trasferito alla stessa persona o organizzazione.'
     a_mixedrights 'sì, e i diritti sono detenuti da persone o organizzazioni diverse',
@@ -480,7 +480,7 @@ survey 'IT',
       :discussion_topic => :it_explicitWaiver,
       :display_on_certificate => true,
       :text_as_statement => 'il contenuto è stato',
-      :help_text => 'Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark </a>. Questo aiuta la gente a scoprire che può essere liberamente riutilizzato.',
+      :help_text => 'Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark </a>. Questo aiuta le persone a capire che può essere liberamente riutilizzato.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
@@ -501,7 +501,7 @@ survey 'IT',
       :discussion_topic => :it_contentLicence,
       :display_on_certificate => true,
       :text_as_statement => 'Il contenuto è disponibile sotto',
-      :help_text => 'Ricorda che chi spende sforzo intellettuale nella creazione di contenuti acquisisce automaticamente i diritti su di essi, ma i contenuti creativi non includono elementi concretii. Per questo è necessaria una rinuncia o una licenza che dimostri che essi possono utilizzare il contenuto e che spieghi come possono farlo legalmente. Elenchiamo le licenze più comuni qui, se non vi fosse alcun diritto d\'autore sul contenuto, se fosse scaduto, se non si fosse verificato atto di rinuncia, scegli \'Non applicabile\'.',
+      :help_text => 'Ricorda che chi impiega sforzo intellettuale nella creazione di contenuti acquisisce automaticamente i diritti su di essi, ma i contenuti creativi non includono elementi concreti. Per questo è necessaria una rinuncia o una licenza che dimostri che essi possono utilizzare il contenuto e che spieghi come possono farlo legalmente. Elenchiamo le licenze più comuni qui, se non vi fosse alcun diritto d\'autore sul contenuto, se fosse scaduto, se non si fosse verificato atto di rinuncia, scegli \'Non applicabile\'.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -532,7 +532,7 @@ survey 'IT',
       :help_text => 'Il diritto di autore si applica al contenuto soltanto se al momento della creazione hai impiegato sforzo di tipo intellettuale, ad esempio, scrivendo il testo che è all\'interno dei dati. Non si puo\' rivendicare alcun diritto d\'autore se il contenuto contiene solo fatti.'
     a_expired 'il diritto di autore è scaduto',
       :text_as_statement => 'il diritto di autore è scaduto',
-      :help_text => 'IL diritto d\'autore dura per un determinato periodo di tempo, si basa sul numero di anni dopo la morte del suo creatore o la sua pubblicazione. Si dovrebbe verificare se il contenuto è stato creato o pubblicato, perché se era molto tempo fa, il copyright potrebbe essere scaduto.'
+      :help_text => 'Il diritto d\'autore dura per un determinato periodo di tempo, si basa sul numero di anni dopo la morte del suo creatore o la sua pubblicazione. Si dovrebbe verificare se il contenuto è stato creato o pubblicato, perché se era molto tempo fa, il copyright potrebbe essere scaduto.'
     a_waived 'Il diritto d\'autore è stato revocato',
       :text_as_statement => '',
       :help_text => 'questo significa che nessuno detiene diritti d\'autore e tutti possono fare ciò che vogliono con questi dati.'
@@ -589,7 +589,7 @@ survey 'IT',
       :discussion_topic => :it_otherContentLicenceURL,
       :display_on_certificate => true,
       :text_as_statement => 'La licenza sul contenuto è',
-      :help_text => 'Dare un URL per la patente, così la gente può vedere sul vostro Apri Certificato di dati e verificare che sia disponibile al pubblico.',
+      :help_text => 'Inserisci una URL per la licenza, così che possa essere visionata sul vostro Certificato Open Data e si possa controllare che sia pubblicamente disponibile.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
@@ -640,12 +640,12 @@ survey 'IT',
       :discussion_topic => :it_copyrightStatementMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'La dichiarazione dei diritti comprende i dati relativi',
-      :help_text => 'È buona prassi incorporare le informazioni sui diritti in formati leggibili dall\'elaboratore in modo tale da permettere agli utenti di attribuirti automaticamente questi dati quando li utilizzano.',
+      :help_text => 'È buona prassi incorporare le informazioni sui diritti in formati leggibili dalle macchine in modo tale da permettere agli utenti di attribuirti automaticamente questi dati quando li utilizzano.',
       :help_text_more_url => 'https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    a_dataLicense 'Licenza di dati',
+    a_dataLicense 'Licenza sui dati',
       :text_as_statement => 'la sua licenza sui dati',
       :requirement => ['standard_4']
     a_contentLicense 'licenza d\'uso sul contenuto',
@@ -658,7 +658,7 @@ survey 'IT',
       :text_as_statement => 'Quale link su attribuzione inserire',
       :requirement => ['standard_7']
     a_copyrightNotice 'avviso o dichiarazione di diritto d\'autore',
-      :text_as_statement => 'un avviso di ditirro d\'autore o dichiarazione',
+      :text_as_statement => 'un avviso di diritto d\'autore o dichiarazione',
       :requirement => ['exemplar_1']
     a_copyrightYear 'anno copyright',
       :text_as_statement => 'l\'anno del copyright',
@@ -749,14 +749,14 @@ survey 'IT',
     a_not_personal 'no, i dati non riguardano le persone o le loro attività',
       :text_as_statement => 'Nessun dato relativo a persone singole',
       :help_text => 'Ricorda che gli individui possono essere ancora identificati, anche se i dati non li riguardano direttamente. Ad esempio, i dati sul flusso del traffico stradale se combinati con i modelli di pendolarismo di un singolo individuo potrebbero rivelare informazioni su quella persona.'
-    a_summarised 'no, i dati sono stati resi anonimi aggregando i singoli in gruppi, in modo che non possano essere distinto da altre persone nel gruppo',
+    a_summarised 'no, i dati sono stati resi anonimi aggregando i singoli in gruppi, in modo che non possano essere distinti da altre persone nel gruppo',
       :text_as_statement => 'dati aggregati',
       :help_text => 'controlli informativi statistici possono aiutare a fare in modo che gli individui non siano identificabili all\'interno di dati aggregati.'
     a_individual 'sì, c\'è il rischio che i singoli siano identificati, per esempio da parte di terzi che hanno accesso a informazioni extra',
       :text_as_statement => 'informazioni che potrebbero identificare i singoli individui',
       :help_text => 'Alcuni dati su persone singole sono legittimi come le retribuzioni del pubblico impiego o la spesa pubblica per esempio.'
 
-    q_statisticalAnonAudited 'Il vostro processo di anonimizzazione è stato indipendentemente sottoposto a revisione?',
+    q_statisticalAnonAudited 'Il vostro processo di anonimizzazione è stato sottoposto a revisione indipendente?',
       :discussion_topic => :it_statisticalAnonAudited,
       :display_on_certificate => true,
       :text_as_statement => 'Il processo di anonimizzazione è stato',
@@ -801,7 +801,7 @@ survey 'IT',
     a_false 'no',
       :text_as_statement => ''
     a_true 'sì',
-      :text_as_statement => 'deve essere pubblicati',
+      :text_as_statement => 'devono essere pubblicati',
       :requirement => ['pilot_5']
 
     label_pilot_5 'Dovresti <strong>pubblicare dati personali senza anonimizzazione se sei autorizzato a farlo come richiesto e consentito dalla legge</strong>.',
@@ -870,10 +870,10 @@ survey 'IT',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_1 'URL sulla valutazione del rischio',
+    a_1 'URL sulla valutazione di rischio',
       :string,
       :input_type => :url,
-      :placeholder => 'URL sulla valutazione del rischio',
+      :placeholder => 'URL sulla valutazione di rischio',
       :requirement => ['standard_10']
 
     label_standard_10 'Dovresti <strong>pubblicare la tua valutazione del rischio privacy</strong>, in modo che le persone capiscano come è stato valutato il rischio di divulgazione dei dati.',
@@ -886,11 +886,11 @@ survey 'IT',
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_riskAssessmentUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_riskAssessmentAudited 'La vostra valutazione di rischi è stata oggetto di revisione indipendente?',
+    q_riskAssessmentAudited 'La vostra valutazione di rischio è stata oggetto di revisione indipendente?',
       :discussion_topic => :it_riskAssessmentAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'La valutazione dei rischi è stata',
-      :help_text => 'È buona norma controllare se la vostra valutazione dil rischio è stata effettuata correttamente. Verifiche indipendenti da parte di specialisti o di terzi tendono ad essere più rigorose e imparziali.',
+      :text_as_statement => 'La valutazione di rischio è stata',
+      :help_text => 'È buona norma controllare se la vostra valutazione di rischio è stata effettuata correttamente. Verifiche indipendenti da parte di specialisti o di terzi tendono a essere più rigorose e imparziali.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -915,10 +915,10 @@ survey 'IT',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL 'Dov\'è l\'informativa sulla privacy per gli individui affetti dai tuoi dati?',
+    q_individualConsentURL 'Dov\'è l\'informativa sulla privacy per i singoli individui affetti dai tuoi dati?',
       :discussion_topic => :it_individualConsentURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Gli individui affetti da questi dati ricevono questa informativa sulla privacy',
+      :text_as_statement => 'I singoli individui affetti da questi dati ricevono questa informativa sulla privacy',
       :help_text => 'Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -972,7 +972,7 @@ survey 'IT',
       :text_as_statement => 'è stato consultato',
       :requirement => ['pilot_8']
 
-    label_pilot_8 'Dovresti <strong>coinvolgere la persona responsabile per la protezione dei dati</strong> nella propria organizzazione prima di pubblicare questi dati.',
+    label_pilot_8 'Dovresti <strong>coinvolgere la persona responsabile per la protezione dei dati</strong> nella tua organizzazione prima di pubblicare questi dati.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -986,8 +986,8 @@ survey 'IT',
     q_anonymisationAudited 'Il vostro approccio all\'anonimizzazione è stato sottoposto a una revisione indipendente?',
       :discussion_topic => :it_anonymisationAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'L\' anonimizzazione dei dati è stata',
-      :help_text => 'È buona norma assicurarsi che il processo di rimozione dei dati personali identificabili funzioni correttamente. Verifiche indipendenti effettuate da specialisti o da terzi tendono ad essere più rigorose e imparziali.',
+      :text_as_statement => 'L\'anonimizzazione dei dati è stata',
+      :help_text => 'È buona norma assicurarsi che il processo di rimozione dei dati personali identificabili funzioni correttamente. Verifiche indipendenti effettuate da specialisti o da terzi tendono a essere più rigorose e imparziali.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -1000,7 +1000,7 @@ survey 'IT',
       :text_as_statement => 'sottoposto a revisione indipendente',
       :requirement => ['standard_12']
 
-    label_standard_12 'Dovresti <strong>assicurarti che il processo di anonimizzazione sia sottoposto a verifica indipendente</strong> da parte di un esperto per assicurarsi che risulti appropriato per i tuoi dati.',
+    label_standard_12 'Dovresti <strong>assicurarti che il processo di anonimizzazione sia sottoposto a verifica indipendente</strong> da parte di un esperto per assicurarti che risulti appropriato per i tuoi dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'
@@ -1019,9 +1019,9 @@ survey 'IT',
       :help_text => 'Come aiutare le persone a trovare i tuoi dati',
       :customer_renderer => '/partials/fieldset'
 
-    q_onWebsite 'Il tuo sito web principale ha un link ai tuoi dati?',
+    q_onWebsite 'Il tuo sito web principale contiene un link ai tuoi dati?',
       :discussion_topic => :onWebsite,
-      :help_text => 'E\' più facile trovare i dati se sono collegati a partire dal tuo sito web principale.',
+      :help_text => 'È più facile trovare i dati se sono collegati a partire dal tuo sito web principale.',
       :pick => :one
     a_false 'no'
     a_true 'sì',
@@ -1037,7 +1037,7 @@ survey 'IT',
 
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
-      q_webpage 'Nel tuo sito web, qual\'è la pagina che dà accesso ai dati?',
+      q_webpage 'Nel tuo sito web, quale è la pagina che dà accesso ai dati?',
         :discussion_topic => :webpage,
         :display_on_certificate => true,
         :text_as_statement => 'il sito web collega i dati da',
@@ -1075,7 +1075,7 @@ survey 'IT',
         :discussion_topic => :listing,
         :display_on_certificate => true,
         :text_as_statement => 'I dati fanno parte di questa collezione',
-        :help_text => 'Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, data.gov.uk ( se si tratta di dati del settore pubblico nel Regno Unito ), hub.data.ac.uk (se si tratta di dati accademici del Regno Unito) o una URL per i risultati del motore di ricerca.',
+        :help_text => 'Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, dati.gov.it (se si tratta di dati del settore pubblico italiano), dati.istat.it (se si tratta di dati dell\'ISTAT) o una URL per i risultati del motore di ricerca.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
@@ -1087,9 +1087,9 @@ survey 'IT',
 
     end
 
-    q_referenced 'Le tue pubbblicazioni fanno riferimento a questi dati?',
+    q_referenced 'Le tue pubblicazioni fanno riferimento a questi dati?',
       :discussion_topic => :referenced,
-      :help_text => 'Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, dai più contesto ed aiuti le persone a trovare e comprendere più facilmente i tuoi dati',
+      :help_text => 'Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, fornisci più contesto in modo da aiutare le persone a trovare e comprendere più facilmente i tuoi dati',
       :pick => :one
     a_false 'no'
     a_true 'sì',
@@ -1109,7 +1109,7 @@ survey 'IT',
         :discussion_topic => :reference,
         :display_on_certificate => true,
         :text_as_statement => 'Questi dati sono menzionati in',
-        :help_text => 'Dai una URL ad un documento che citi o faccia riferimento a questi dati.',
+        :help_text => 'Dai una URL a un documento che citi o faccia riferimento a questi dati.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
@@ -1138,9 +1138,9 @@ survey 'IT',
       :help_text => 'Alcune API rendono più facile l\'accesso a un gruppo di dati che non cambia, soprattutto quando ce ne sono molti.'
     a_changing 'sì, l\'API dà accesso a dei dati che cambiano nel corso del tempo',
       :text_as_statement => 'cambieranno',
-      :help_text => 'Alcune API danno accesso a dei dati che sono costantemente messi a giorno e che sono in continua evoluzione'
+      :help_text => 'Alcune API danno accesso a dei dati che sono costantemente aggiornati e in continua evoluzione'
 
-    q_timeSensitive 'I tuoi dati diventeranno obsoleti?',
+    q_timeSensitive 'I tuoi dati non saranno aggiornati?',
       :discussion_topic => :timeSensitive,
       :display_on_certificate => true,
       :text_as_statement => 'La precisione o la rilevanza di questi dati sarà',
@@ -1150,16 +1150,16 @@ survey 'IT',
     condition_B :q_releaseType, '==', :a_collection
     condition_C :q_releaseType, '==', :a_service
     condition_D :q_serviceType, '==', :a_static
-    a_true 'sì, questi dati diventeranno obsoleti',
-      :text_as_statement => 'diventeranno obsoleti',
-      :help_text => 'Ad esempio, i dati sulle fermate degli autobus diventeranno obsoleti nel momento in cui alcune fermate verranno spostate o delle nuove create.'
-    a_timestamped 'sì, questi dati diventeranno obsoleti; ma questa informazione verrà indicata.',
-      :text_as_statement => 'diventeranno obsoleti ma verrà indicato',
+    a_true 'sì, questi dati non saranno aggiornati',
+      :text_as_statement => 'non saranno aggiornati',
+      :help_text => 'Ad esempio, i dati sulle fermate degli autobus diventano obsoleti nel momento stesso in cui alcune fermate verranno spostate o create di nuove.'
+    a_timestamped 'sì, questi dati non saranno aggiornati; ma questo sarà esplicitamente indicato.',
+      :text_as_statement => 'non saranno aggiornati ma verrà indicato',
       :help_text => 'Ad esempio, le statistiche demografiche di solito includono il periodo in cui sono state rilevate.',
       :requirement => ['pilot_9']
     a_false 'no, questi dati non contegono nessuna informazione di carattere temporale',
-      :text_as_statement => 'non diventeranno obsoleti',
-      :help_text => 'Ad esempio, i risultati di un esperimento non diverranno mai obsoleti perché i dati indicano dei risultati riportati a seguito di risultati riscontrati.',
+      :text_as_statement => 'non necessitano di aggiornamento',
+      :help_text => 'Ad esempio, i risultati di un esperimento non diventeranno mai obsoleti perché i dati indicano dei risultati riportati a seguito di verifiche.',
       :requirement => ['standard_16']
 
     label_pilot_9 '
@@ -1184,11 +1184,11 @@ survey 'IT',
     condition_D :q_serviceType, '==', :a_static
     condition_E :q_timeSensitive, '!=', :a_false
 
-    q_frequentChanges 'Questi dati cambiano almeno una volta al giorno?',
+    q_frequentChanges 'Questi dati hanno un aggiornamento frequente?',
       :discussion_topic => :frequentChanges,
       :display_on_certificate => true,
-      :text_as_statement => 'Questi dati cambiano',
-      :help_text => 'Indica se i dati cambiano quasi tutti i giorni. Quando i dati cambiano frequentemente rischiano di diventare obsoleti altrettanto rapidamente e la gente deve sapere se li metti a giorno e con quale frequenza.',
+      :text_as_statement => 'Questi dati si aggiornano',
+      :help_text => 'Indica se i dati cambiano frequantemente. Quando i dati cambiano spesso rischiano di diventare obsoleti altrettanto rapidamente e la gente deve sapere la periodicità e frequenza di aggiornamento.',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
@@ -1207,18 +1207,18 @@ survey 'IT',
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
-    a_dumps 'Copie della banca dati ad intervalli regolari',
+    a_dumps 'copie della banca dati a intervalli regolari',
       :text_as_statement => 'Copie della banca dati',
-      :help_text => 'Scegli se pubblichi ad intervalli regolari copie di tutta la tua banca dati. Quando fai un\'estrazione della banca dati, è utile dare accesso ad un flusso di informazione che segnali eventuali modifiche della banca dati, così le persone possono mantenere le proprie copie aggiornate.'
-    a_aggregate 'Aggregazioni di dati variabili pubblicati ad intervalli regolari',
+      :help_text => 'Scegli se pubblichi a intervalli regolari copie di tutta la tua banca dati. Quando fai un\'estrazione della banca dati, è utile dare accesso a un flusso di informazione che segnali eventuali modifiche della banca dati, in modo che le persone possano mantenere le proprie copie aggiornate.'
+    a_aggregate 'Aggregazioni di dati variabili pubblicati a intervalli regolari',
       :text_as_statement => 'Aggregazioni di dati variabili',
-      :help_text => 'Scegli se crei nuovi pacchetti di dati ad intervalli regolari. Puoi scegliere questo approccio se i dati non possono essere pubblicati in formato aperto o se pubblichi solo dati nuovi rispetto all pubblicazione precedente.'
+      :help_text => 'Scegli se crei nuovi pacchetti di dati a intervalli regolari. Puoi scegliere questo approccio se i dati non possono essere pubblicati in formato aperto o se pubblichi solo dati nuovi rispetto alla pubblicazione precedente.'
 
-    q_changeFeed 'è disponibile un flusso d\'informazioni che notifichi le modifiche fatte su questi dati?',
+    q_changeFeed 'è disponibile un sistema di notifica sulle modifiche fatte su questi dati?',
       :discussion_topic => :changeFeed,
       :display_on_certificate => true,
-      :text_as_statement => 'Un flusso d\'informazione che notifichi le modifiche fatte su questi dati.',
-      :help_text => 'Informa le persone se fornisci un flusso d\'informazioni che notifica le modifiche che hanno un impatto su questi dati. I flussi d\'informazioni possono essere in RSS, Atom o formati personalizzati.',
+      :text_as_statement => 'Un sistema di modiche sulle modifiche fatte su questi dati.',
+      :help_text => 'Informa le persone se fornisci un sistema di notifica sulle modifiche che hanno un impatto su questi dati. I sistemi di notifica possono essere RSS, Atom o formati personalizzati.',
       :pick => :one
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_series
@@ -1230,7 +1230,7 @@ survey 'IT',
       :text_as_statement => 'è disponibile',
       :requirement => ['exemplar_6']
 
-    label_exemplar_6 'Dovresti <strong>fornire un flusso d\'informazioni che notifichi le modifiche apportate ai tuoi dati</strong> così le persone possono mantenere le loro copie aggiornate e corrette.',
+    label_exemplar_6 'Dovresti <strong>fornire un flusso d\'informazioni che notifichi le modifiche apportate ai tuoi dati</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_6'
     dependency :rule => 'A and B and C and D'
@@ -1260,7 +1260,7 @@ survey 'IT',
       :text_as_statement => 'almeno ogni giorno',
       :requirement => ['exemplar_7']
 
-    label_pilot_10 'Dovresti <strong>creare un aggiornamento ogni mese</strong> così le persone possono mantenere le loro copie aggiornate e corrette.',
+    label_pilot_10 'Dovresti <strong>creare un aggiornamento ogni mese</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_10'
     dependency :rule => 'A and B and (C and D and E)'
@@ -1270,7 +1270,7 @@ survey 'IT',
     condition_D :q_frequentSeriesPublication, '!=', :a_weekly
     condition_E :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_standard_17 'Dovresti <strong>creare un aggiornamento ogni settimana</strong> così le persone possono mantenere le loro copie aggiornate e corrette.',
+    label_standard_17 'Dovresti <strong>creare un aggiornamento ogni settimana</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_17'
     dependency :rule => 'A and B and (C and D)'
@@ -1279,7 +1279,7 @@ survey 'IT',
     condition_C :q_frequentSeriesPublication, '!=', :a_weekly
     condition_D :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_exemplar_7 'Dovresti <strong>creare un aggiornamento ogni giorno</strong> così le persone possono mantenere le proprie copie correttamente aggiornate.',
+    label_exemplar_7 'Dovresti <strong>creare un aggiornamento ogni giorno</strong> in questo modo le persone possono mantenere le proprie copie correttamente aggiornate.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_7'
     dependency :rule => 'A and B and (C)'
@@ -1287,7 +1287,7 @@ survey 'IT',
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_frequentSeriesPublication, '!=', :a_daily
 
-    q_seriesPublicationDelay 'Qual\' è il tempo tra il momento in cui un pacchetto di dati viene creato e il momento della sua pubblicazione ?',
+    q_seriesPublicationDelay 'Qual\' è il tempo tra il momento in cui un pacchetto di dati viene creato e il momento della sua pubblicazione?',
       :discussion_topic => :seriesPublicationDelay,
       :display_on_certificate => true,
       :text_as_statement => 'Il tempo tra la creazione e la pubblicazione di questi dati è di',
@@ -1310,7 +1310,7 @@ survey 'IT',
       :help_text => 'Scegliere questa opzione se pubblichi nel giro di pochi secondi o pochi minuti.',
       :requirement => ['exemplar_8']
 
-    label_pilot_11 'Dovresti fare in modo che <strong>ci sia un ritardo ragionevole tra il momento di creazione e quello di pubblicazione di un pacchetto di dati </strong> corrispondente ad un divario inferiore a quello che esiste tra le due pubblicazioni , così le persone mantengono le proprie copie correttamente aggiornate.',
+    label_pilot_11 'Dovresti fare in modo che <strong>ci sia un ritardo ragionevole tra il momento di creazione e quello di pubblicazione di un pacchetto di dati </strong> corrispondente a un divario inferiore a quello che esiste tra le due pubblicazioni , così le persone mantengono le proprie copie correttamente aggiornate.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_11'
     dependency :rule => 'A and (B and C and D)'
@@ -1334,11 +1334,11 @@ survey 'IT',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_seriesPublicationDelay, '!=', :a_minimal
 
-    q_provideDumps 'Pubblichi anche delle estrazioni di questi pacchetti di dati?',
+    q_provideDumps 'Pubblichi anche delle estrazioni della base dati?',
       :discussion_topic => :provideDumps,
       :display_on_certificate => true,
       :text_as_statement => 'Il gestore pubblica',
-      :help_text => 'Un dump è un\'estrazione del pacchetto intero di dati in un file che la gente può scaricare. Questo consente alle persone di fare delle analisi differenti rispetto a quelli possibili attraverso un accesso API.',
+      :help_text => 'Un dump è un\'estrazione dell\'intera banca dati in un file che chiunque può scaricare. Questo consente di fare delle analisi differenti rispetto a quelle possibili attraverso un accesso API.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
@@ -1422,7 +1422,7 @@ survey 'IT',
       :text_as_statement => 'corretti',
       :requirement => ['standard_21']
 
-    label_standard_21 'Dovresti <strong>correggere i dati quando le persone riportano degli errori</strong> in modo che tutti possano beneficiare dei miglioramenti apportati in termine di precisione.',
+    label_standard_21 'Dovresti <strong>correggere i dati quando le persone riportano degli errori</strong> in modo che tutti possano beneficiare dei miglioramenti apportati in termini di precisione.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_21'
     dependency :rule => 'A and B and C'
@@ -1438,7 +1438,7 @@ survey 'IT',
       :discussion_topic => :qualityUrl,
       :display_on_certificate => true,
       :text_as_statement => 'La qualità dei dati è documentata in',
-      :help_text => 'Attribuisci una URL dove le persone possono trovare informazioni sulla qualità dei tuoi dati. Le persone accettano l\'esistenza di errori dovuti a malfunzionamenti delle apparecchiature o errori che accadono in fase di migrazione di un sistema. Dovresti essere aperto alle osservazioni fatte sulla qualità dei dati, così la gente può giudicare quanto fare affidamento su tali dati.'
+      :help_text => 'Attribuisci una URL dove le persone possano trovare informazioni sulla qualità dei tuoi dati. Le persone accettano l\'esistenza di errori dovuti a malfunzionamenti delle apparecchiature o errori che ricorrono in fase di migrazione di un sistema. Dovresti essere aperto alle osservazioni fatte sulla qualità dei dati, così la gente può giudicare in che misura fare affidamento su tali dati.'
     a_1 'URL della documentazione relativa alla qualità dei dati',
       :string,
       :input_type => :url,
@@ -1536,7 +1536,7 @@ survey 'IT',
       :text_as_statement => 'I dati sono disponibili',
       :pick => :one
     a_experimental 'Potrebbero scomparire in qualsiasi momento',
-      :text_as_statement => 'Sono disponibili in modo sperimentale e potrebbero scomparire in qualsiasi momento'
+      :text_as_statement => 'Sono disponibili in via sperimentale e potrebbero scomparire in qualsiasi momento'
     a_short 'Sono disponibili in via sperimentale, ma lo saranno per circa un altro anno',
       :text_as_statement => 'Sono disponibili sperimentalmente più o meno per un anno',
       :requirement => ['pilot_13']
@@ -1571,23 +1571,23 @@ survey 'IT',
   end
 
   section_technical 'Informazioni tecniche',
-    :description => 'Luoghi, formati e fiducia' do
+    :description => 'Ubicazioni, formati e fiducia' do
 
-    label_group_11 'Luoghi',
+    label_group_11 'Ubicazioni',
       :help_text => 'Il modo in cui le persone possono accedere ai tuoi dati',
       :customer_renderer => '/partials/fieldset'
 
-    q_datasetUrl 'Dove si trova il tuo pacchetto di dati?',
+    q_datasetUrl 'Dove si trova il tuo dataset?',
       :discussion_topic => :datasetUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Questi dati sono pubblicati in',
-      :help_text => 'Dai una URL al pacchetto di dati stesso. Per essere disponibili in un formato aperto i dati dovrebbero essere collegati direttamente sul web, così la gente può facilmente trovarli e riutilizzarli.'
+      :help_text => 'Dai una URL al dataset. Per essere disponibili in un formato aperto i dati dovrebbero essere collegati direttamente sul web, così possano essere facilmente trovati e riutilizzati.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
-    a_1 'URL del pacchetto di dati',
+    a_1 'URL del dataset',
       :string,
       :input_type => :url,
-      :placeholder => 'URL del pacchetto di dati',
+      :placeholder => 'URL del dataset',
       :requirement => ['basic_9', 'pilot_14']
 
     label_basic_9 'Devi <strong>fornire una URL ai dati o una URL alla loro documentazione</strong> in modo che la gente possa trovare questa informazione.',
@@ -1606,20 +1606,20 @@ survey 'IT',
     condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_versionManagement 'Come si fa a pubblicare una serie di dati relativa agli stessi pacchetti di dati?',
+    q_versionManagement 'Come si fa a pubblicare una serie relativa allo stesso dataset?',
       :discussion_topic => :versionManagement,
       :requirement => ['basic_10'],
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
     a_current 'Come un\'unica URL che viene regolarmente aggiornata',
-      :help_text => 'Scegli questa opzione se c\'è una URL che permette alle persone di scaricare la versione più recente del pacchetto di dati.',
+      :help_text => 'Scegli questa opzione se c\'è una URL che permette di scaricare la versione più recente del dataset.',
       :requirement => ['standard_26']
-    a_template 'Una URLunica e coerente per ogni versione',
-      :help_text => 'Scegli questa opzione se la tua URL del pacchetto di dati segue uno schema regolare che include la data di pubblicazione, ad esempio, una URL che inizia con \'2013 - 04\'. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono rilasciati.',
+    a_template 'Una URL unica e coerente per ogni versione',
+      :help_text => 'Scegli questa opzione se la tua URL del dataset segue uno schema regolare che include la data di pubblicazione, ad esempio, una URL che inizia con \'2013 - 04\'. Questo aiuta a capire quanto spesso si pubblicano i dati e a creare script che recuperano quelli nuovi ogni volta che vengono rilasciati.',
       :requirement => ['pilot_15']
     a_list 'come una lista di versioni pubblicate',
-      :help_text => 'Scegli questa opzione se disponi di una lista di pacchetti di dati in una pagina Web o un feed (come Atom o RSS) con link per ogni versione pubblicata e relativi dettagli. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono pubblicati.',
+      :help_text => 'Scegli questa opzione se disponi di una lista di dataset in una pagina Web o un feed (come Atom o RSS) con link per ogni versione pubblicata e relativi dettagli. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono pubblicati.',
       :requirement => ['standard_27']
 
     label_standard_26 'Dovresti <strong>avere una URL unica e persistente per scaricare la versione attuale dei dati</strong> in modo che le persone possano accedervi facilmente.',
@@ -1656,7 +1656,7 @@ survey 'IT',
     q_currentDatasetUrl 'Dove si trova il pacchetto di dati attuale?',
       :discussion_topic => :currentDatasetUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'L\'attuale pacchetto di dati è disponibile su',
+      :text_as_statement => 'L\'attuale dataset è disponibile su',
       :help_text => 'Inserisci un\'unica URL per la versione più recente del pacchetto di dati. Il contenuto di questa URL dovrebbe cambiare ogni volta che una nuovo aggiornamento viene pubblicato.',
       :required => :required
     dependency :rule => 'A and B'
@@ -1712,7 +1712,7 @@ survey 'IT',
       :requirement => ['basic_11', 'standard_28']
 
     label_basic_11 '
-                     <strong>È necessario fornire sia un URL di endpoint di API o un URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione.',
+                     <strong>È necessario fornire sia una URL di endpoint di API o una URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_11'
     dependency :rule => 'A and B and C'
@@ -1784,11 +1784,11 @@ survey 'IT',
       :placeholder => 'URL dell\'estrazione più recente',
       :required => :required
 
-    q_dumpsTemplateUrl 'Qual è il formato URL seguito dall\'estrazione della banca dati?',
+    q_dumpsTemplateUrl 'Qual è il formato dell\'URL necessario all\'estrazione della banca dati?',
       :discussion_topic => :dumpsTemplateUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'L\'estrazione della banca dati segue lo schema corrente della URL',
-      :help_text => 'Questa è la struttura della URL quando diverse versioni vengono pubblicate. Usa ` { variabile } ` per indicare le parti della URL che cambiano, per esempio, ` http://example.com/data/monthly/mydata- { AA } { MM }. Csv `',
+      :text_as_statement => 'L\'URL per l\'estrazione della banca dati ha questo schema',
+      :help_text => 'Questa è la struttura della URL quando vengono pubblicate diverse versioni. Usa ` { variabile } ` per indicare le parti della URL che cambiano, per esempio, ` http://example.com/data/monthly/mydata- { AA } { MM }. Csv `',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
@@ -1800,11 +1800,11 @@ survey 'IT',
       :placeholder => 'URL del modello dell\'estrazione',
       :required => :required
 
-    q_dumpsUrl 'Dov\'è il tuo elenco delle disponibili estrazioni della banca dati?',
+    q_dumpsUrl 'Dov\'è il tuo elenco delle estrazioni disponibili?',
       :discussion_topic => :dumpsUrl,
       :display_on_certificate => true,
       :text_as_statement => 'un elenco delle estrazioni della banca dati si trova su',
-      :help_text => 'Inserisci una URL di una pagina o di un flusso d\'informazioni con l\'elenco dell\'estrazioni della banca dati processabile dal computer. Utilizzare la URL della prima pagina che dovrebbe collegare alle altre pagine.',
+      :help_text => 'Inserisci una URL di una pagina o di un flusso d\'informazioni con l\'elenco dell\'estrazioni della banca dati processabile dal computer. Utilizzare la URL della prima pagina che dovrebbe collegarsi alle altre pagine.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
@@ -1820,7 +1820,7 @@ survey 'IT',
       :discussion_topic => :changeFeedUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Un feed di modifiche a tali dati è disponibile su',
-      :help_text => 'Dai una URL ad una pagina o ad un flusso d\'informazioni che fornisca un elenco delle estrazioni precedenti della banca dati, processabili dal computer. Utilizza la URL della prima pagina che dovrebbe collegare alle altre pagine.',
+      :help_text => 'Dai una URL a una pagina o a un flusso d\'informazioni che fornisca un elenco delle estrazioni precedenti della banca dati, processabili dal computer. Utilizza la URL della prima pagina che dovrebbe collegarsi al resto delle pagine.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_changeFeed, '==', :a_true
@@ -1838,7 +1838,7 @@ survey 'IT',
       :discussion_topic => :machineReadable,
       :display_on_certificate => true,
       :text_as_statement => 'Questi dati sono',
-      :help_text => 'La gente preferisce formati che siano facilmente processabili dal computer, perché aumentano la velocità e precisione di trattamento dei dati. Per esempio, una fotocopia scannerizzata di un foglio di calcolo non può essere processata dal computer; al contrario un file CSV lo è.',
+      :help_text => 'La gente preferisce formati che siano facilmente processabili dal computer, perché aumentano la velocità e precisione di trattamento dei dati. Per esempio, una fotocopia scansionata di un foglio di calcolo non può essere processata dal computer; al contrario un file CSV lo è.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1875,7 +1875,7 @@ survey 'IT',
       :discussion_topic => :dataType,
       :pick => :any
     a_documents 'documenti che possono essere letti dalle persone',
-      :help_text => 'Scegli questa opzione se i dati sono usufruiti dall\'uomo. Per esempio, documenti politici, white paper, report e verbali delle riunioni. Questi di solito hanno una loro propria struttura, ma sono principalmente a carattere testuale.'
+      :help_text => 'Scegli questa opzione se i dati sono usati da umani. Per esempio, documenti di policy, white paper, report e verbali delle riunioni. Questi di solito hanno una struttura propria, ma sono principalmente a carattere testuale.'
     a_statistical 'dati statistici, come conteggi, medie e percentuali',
       :help_text => 'Scegli questa opzione se i dati sono di tipo numerico come conteggi, medie, percentuali o statistiche. Ad esempio, come risultati del censimento, informazioni sul flusso ed il traffico o statistiche sulla criminalità.'
     a_geographic 'informazioni geografiche, come punti e confini',
@@ -1927,7 +1927,7 @@ survey 'IT',
     a_statistical 'esponi la struttura dei dati statistici hypercube come <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>
                      ',
       :text_as_statement => 'in un formato statistico',
-      :help_text => 'osservazioni individuali in hypercubes riferiscono a una misura particolare e ad un insieme di dimensioni. Ogni osservazione può anche essere collegata ad annotazioni che danno più contesto. Formati come <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> sono progettati per esprimere questa struttura.',
+      :help_text => 'osservazioni individuali in hypercubes riferiscono a una misura particolare e a un insieme di dimensioni. Ogni osservazione può anche essere collegata ad annotazioni che danno più contesto. Formati come <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> sono progettati per esprimere questa struttura.',
       :requirement => ['exemplar_15']
     a_tabular 'trattare i dati statistici come una tabella, come CSV',
       :text_as_statement => 'in un formato di dati tabulare',
@@ -2009,13 +2009,13 @@ survey 'IT',
     condition_A :q_dataType, '==', :a_structured
     a_suitable 'sono ideati per dati strutturati come JSON, XML, Turtle o CSV',
       :text_as_statement => 'in un formato di dati strutturati',
-      :help_text => 'Questi formati organizzano i dati in una struttura di base che da dei valori ad un insieme noto di proprietà. Questi formati sono facilmente processabili in modo automatico dai computer.',
+      :help_text => 'Questi formati organizzano i dati in una struttura di base che dà dei valori a un insieme noto di proprietà. Questi formati sono facilmente processabili in modo automatico dai computer.',
       :requirement => ['pilot_20']
     a_unsuitable 'non sono ideati per i dati strutturati come Word o PDF',
       :text_as_statement => 'in un formato non adatto per i dati strutturati',
       :help_text => 'Questi formati non sono ideati per questo tipo di dati, perché oscurano la loro struttura di base.'
 
-    label_pilot_20 'Dovresti<strong>pubblicare dati strutturati in un formato che sia stato ideato per questo scopo</strong> in modo che i dati siano facile da processare.',
+    label_pilot_20 'Dovresti<strong>pubblicare dati strutturati in un formato che sia stato ideato per questo scopo</strong> in modo che i dati siano facili da processare.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_20'
     dependency :rule => 'A and (B)'
@@ -2034,13 +2034,13 @@ survey 'IT',
       :text_as_statement => 'identificatori persistenti',
       :requirement => ['standard_33']
 
-    label_standard_33 'Dovresti <strong>utilizzare identificatori i valori che sono presenti nei dati</strong> in modo che possano essere facilmente collegati ad altri dati.',
+    label_standard_33 'Dovresti <strong>utilizzare identificatori per i valori che sono presenti nei tuoi dati</strong> in modo che possano essere facilmente collegati ad altri dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_33'
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_false
 
-    q_resolvingIds 'Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni addizionali?',
+    q_resolvingIds 'Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni aggiuntive?',
       :discussion_topic => :resolvingIds,
       :display_on_certificate => true,
       :text_as_statement => 'Gli identificatori persistenti',
@@ -2050,10 +2050,10 @@ survey 'IT',
     a_false 'no, gli identificatori non possono essere usati per trovare informazioni aggiuntive',
       :text_as_statement => ''
     a_service 'sì, le persone possono utilizzare un servizio per risolvere gli identificatori',
-      :text_as_statement => 'risolvere utilizzando un servizio',
-      :help_text => 'E\' possibile utilizzare servizi online, come GUIDs o DOIs, per dare delle informazioni sugli identificatori,che non possono essere direttamente accessibili allo stesso modo delle URL.',
+      :text_as_statement => 'risolvi utilizzando un servizio',
+      :help_text => 'È possibile utilizzare servizi online, come GUIDs o DOIs, per dare delle informazioni sugli identificatori, che non possono essere direttamente accessibili allo stesso modo delle URL.',
       :requirement => ['standard_34']
-    a_resolvable 'sì, gli identificatori sono delle URL che si risolvono per dare delle informazioni',
+    a_resolvable 'sì, gli identificatori sono URL utili a chiarificare e dare informazioni',
       :text_as_statement => 'risolvono perché sono delle URL',
       :help_text => 'Le URL sono utili sia per le persone che per i computer. La gente può mettere una URL nel browser e leggere ulteriori informazioni, come <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. I computer possono anche elaborare queste informazioni usando script per accedere ai dati sottostanti.',
       :requirement => ['exemplar_17']
@@ -2066,7 +2066,7 @@ survey 'IT',
     condition_B :q_resolvingIds, '!=', :a_service
     condition_C :q_resolvingIds, '!=', :a_resolvable
 
-    label_exemplar_17 'Dovresti<strong>collegare ad una pagina web le informazioni su ciascuno dei valori presenti nei tuoi dati</strong> in modo che le persone possano facilmente trovare e condividere queste informazioni.',
+    label_exemplar_17 'Dovresti<strong>collegare a una pagina web le informazioni su ciascuno dei valori presenti nei tuoi dati</strong> in modo che le persone possano facilmente trovare e condividere queste informazioni.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_17'
     dependency :rule => 'A and (B)'
@@ -2097,7 +2097,7 @@ survey 'IT',
 
     q_existingExternalUrls 'Sono disponibili informazioni di terze parti nei tuoi dati pubblicati sul web?',
       :discussion_topic => :existingExternalUrls,
-      :help_text => 'A volte altre persone che non puoi controllare forniscono delle URL sui valori presenti nei tuoi dati. Ad esempio, i dati possono avere codici di avviamento postale che puntano al sito Ordnance Survey.',
+      :help_text => 'A volte altre persone che non puoi controllare forniscono delle URL sui valori presenti nei tuoi dati. Ad esempio, i dati possono avere codici che puntano agli identificativi amministrativi dell\'ISTAT.',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A'
@@ -2105,9 +2105,9 @@ survey 'IT',
     a_false 'no'
     a_true 'sì'
 
-    q_reliableExternalUrls 'Sono affidabili le informazioni di queste parti terze?',
+    q_reliableExternalUrls 'Sono affidabili le informazioni di queste terze parti?',
       :discussion_topic => :reliableExternalUrls,
-      :help_text => 'se una parte terza fornisce delle URL pubbliche sui valori che si trovano nei tuoi dati, ha probabilmente adottato delle misure per garantire la qualità e l\'affidabilità di questi dati. Questa è un\'indicazione di quanto ti fidi della loro procedura per farlo. Cerca il loro certificato di dati aperto o segni distintivi analoghi per decidere.',
+      :help_text => 'se una parte terza fornisce delle URL pubbliche sui valori che si trovano nei tuoi dati, ha probabilmente adottato delle misure per garantire la qualità e l\'affidabilità di questi dati. Questa è un\'indicazione di quanto ti fidi della loro procedura per farlo. Cerca il loro certificato open data o segni distintivi analoghi per decidere.',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A and B'
@@ -2120,7 +2120,7 @@ survey 'IT',
       :discussion_topic => :externalUrls,
       :display_on_certificate => true,
       :text_as_statement => 'Le URL di parti terze sono',
-      :help_text => 'E\' consigliabile utilizzare delle URL di parti terze che risolvono delle informazioni sui valori presenti nei tuoi dati. Questo riduce la duplicazione e aiuta le persone a combinare i dati provenienti da fonti diverse per renderli più utili.',
+      :help_text => 'È consigliabile utilizzare delle URL di parti terze che risolvono delle informazioni sui valori presenti nei tuoi dati. Questo riduce la duplicazione e aiuta le persone a combinare i dati provenienti da fonti diverse per renderli più utili.',
       :pick => :one
     dependency :rule => 'A and B and C'
     condition_A :q_identifiers, '==', :a_true
@@ -2164,11 +2164,11 @@ survey 'IT',
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
-    q_digitalCertificate 'Dove descrivi il modo in cui la gente può verificare che i dati ricevuti provengono da te?',
+    q_digitalCertificate 'Dove descrivi il modo attraverso cui è possibile verificare la provenienza dei dati?',
       :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
       :text_as_statement => 'Questi dati possono essere verificati utilizzando',
-      :help_text => 'se fornisci dei dati importanti, le persone dovrebbero essere in grado di verificare che quello che ricevono sia lo stesso di quello che hai pubblicato. Ad esempio, è possibile firmare digitalmente i dati pubblicati, per verificare che i dati non siano stati manomessi.'
+      :help_text => 'se fornisci dei dati importanti, chiunque dovrebbe essere in grado di verificare che quelli sono gli stessi che hai pubblicato. Ad esempio, è possibile firmare digitalmente i dati pubblicati, per verificare che i dati non siano stati manomessi.'
     a_1 'URL del procedimento di verifica',
       :string,
       :input_type => :url,
@@ -2183,7 +2183,7 @@ survey 'IT',
 
   end
 
-  section_social 'Informazione Sociale',
+  section_social 'Informazioni aggiuntive',
     :description => 'Documentazione, supporto e servizi' do
 
     label_group_15 'Documentazione',
@@ -2221,8 +2221,8 @@ survey 'IT',
     a_language 'lingua',
       :text_as_statement => 'lingua',
       :requirement => ['standard_43']
-    a_publisher 'editore',
-      :text_as_statement => 'editore',
+    a_publisher 'autore',
+      :text_as_statement => 'autore',
       :requirement => ['standard_44']
     a_spatial 'copertura spaziale / geografica',
       :text_as_statement => 'copertura spaziale / geografica',
@@ -2253,14 +2253,14 @@ survey 'IT',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_description
 
-    label_standard_38 'Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato che sia che sia processabile dal computer</strong> in modo che la gente possa conoscere la tempestività della pubblicazione.',
+    label_standard_38 'Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato che sia processabile dal computer</strong> in modo che le persone siano a conoscenza della tempestività della pubblicazione.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_38'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_issued
 
-    label_standard_39 'Dovresti <strong>includere nella tua documentazione l\'ulitma data di modifica dei dati in une formato che sia processabile dai computer </strong> in modo che le persone possano accedere ai dati più recenti.',
+    label_standard_39 'Dovresti <strong>includere nella tua documentazione l\'ultima data di modifica dei dati in un formato che sia processabile dai computer </strong> in modo che le persone possano accedere ai dati più recenti.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_39'
     dependency :rule => 'A and B'
@@ -2295,7 +2295,7 @@ survey 'IT',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_language
 
-    label_standard_44 'Dovresti <strong>indicare l\'editore di dati nella tua documentazione processabile dal computer</strong>, così la gente può decidere quanto fidarsi dei tuoi dati.',
+    label_standard_44 'Dovresti <strong>indicare l\'autore dei dati nella tua documentazione processabile dal computer</strong>, così la gente può decidere quanto fidarsi dei tuoi dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_44'
     dependency :rule => 'A and B'
@@ -2316,7 +2316,7 @@ survey 'IT',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_temporal
 
-    label_standard_47 'Dovresti <strong>includere nella tua documentazioneprocessabile dal computer il soggetto dei tuoi dati </strong> in modo che la gente possa capire quale sia il contenuto dei tuoi dati.',
+    label_standard_47 'Dovresti <strong>includere nella tua documentazione processabile dal computer il soggetto dei tuoi dati </strong> in modo che la gente possa capire quale sia il contenuto dei tuoi dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_47'
     dependency :rule => 'A and B'
@@ -2363,7 +2363,7 @@ survey 'IT',
     a_mediaType 'tipo di download multimediale',
       :text_as_statement => 'tipo di download multimediale'
 
-    label_standard_49 'Dovresti <strong>includere nella tua documentazione dei titoli che siano processabili dal computer </strong>, così la gente sa come citare ogni distribuzione di dati.',
+    label_standard_49 'Dovresti <strong>includere nella tua documentazione dei titoli che siano processabili dal computer </strong>, in modo che le persone sappiano come citare ogni distribuzione di dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_49'
     dependency :rule => 'A and B and C'
@@ -2371,7 +2371,7 @@ survey 'IT',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_title
 
-    label_standard_50 'Dovresti <strong>includere nella tua documentazione delle descrizioni che siano processabili dal computer</strong>, così la gente sa quello che è contenuto in ogni distribuzione di dati.',
+    label_standard_50 'Dovresti <strong>includere nella tua documentazione delle descrizioni che siano processabili dal computer</strong>, in modo che le persone sappiano quello che è contenuto in ogni distribuzione di dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_50'
     dependency :rule => 'A and B and C'
@@ -2379,7 +2379,7 @@ survey 'IT',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_description
 
-    label_standard_51 'Dovresti <strong>includere nella tua documentazione la data di pubblicazione in un formato che sia processabile dal computer</strong>, così la gente può valutare in che misura la distribuzione è aggiornata.',
+    label_standard_51 'Dovresti <strong>includere nella tua documentazione la data di pubblicazione in un formato che sia processabile dal computer</strong>, in modo che le persone possano valutare in che misura la distribuzione è aggiornata.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_51'
     dependency :rule => 'A and B and C'
@@ -2387,7 +2387,7 @@ survey 'IT',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_issued
 
-    label_standard_52 'dovresti <strong>includere nella tua documentazione la data di modifica in un formato che sia processabile dal computer l</strong> perché così le persone sanno se la loro copia di dati è aggiornata.',
+    label_standard_52 'dovresti <strong>includere nella tua documentazione la data di modifica in un formato che sia processabile dal computer l</strong> perché così le persone sanno se la loro copia dei dati è aggiornata.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_52'
     dependency :rule => 'A and B and C'
@@ -2395,7 +2395,7 @@ survey 'IT',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_modified
 
-    label_standard_53 'Dovresti <strong>includere un link sui tipi di diritti d\'applicazione sui dati in un formato che sia processabile dai computer</strong>, così la gente sa che cosa può fare con tali dati.',
+    label_standard_53 'Dovresti <strong>includere un link sui tipi di diritti d\'applicazione sui dati in un formato che sia processabile dai computer</strong>, in modo che le persone sappiano che cosa possono fare con tali dati.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_53'
     dependency :rule => 'A and B and C'
@@ -2421,7 +2421,7 @@ survey 'IT',
 
     q_vocabulary 'I formati dei dati utilizzano vocabolari o schemate?',
       :discussion_topic => :vocabulary,
-      :help_text => 'formati come CSV, JSON, XML o Turtle usano vocabolari personalizzati o schemate che indicano quali colonne o proprietà contegono i dati.',
+      :help_text => 'formati come CSV, JSON, XML o Turtle usano vocabolari personalizzati o schemi che indicano quali colonne o proprietà contegono i dati.',
       :pick => :one,
       :required => :standard
     a_false 'no'
@@ -2433,13 +2433,13 @@ survey 'IT',
       :text_as_statement => 'I vocabolari utilizzati da questi dati sono documentati in'
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
-    a_1 'URL dello schema della documentazione',
+    a_1 'URL dello schema di documentazione',
       :string,
       :input_type => :url,
-      :placeholder => 'URL dello schema della documentazione',
+      :placeholder => 'URL dello schema di documentazione',
       :requirement => ['standard_54']
 
-    label_standard_54 'Dovresti <strong>documentare tutti i vocabolari che usi all\'interno dei tuoi dati</strong> in modo che la gente sappia come interpretare quest ainformazione.',
+    label_standard_54 'Dovresti <strong>documentare tutti i vocabolari che usi all\'interno dei tuoi dati</strong> in modo che la gente sappia come interpretare questa informazione.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_54'
     dependency :rule => 'A and B'
@@ -2477,7 +2477,7 @@ survey 'IT',
       :help_text => 'come comunichi con le persone che utilizzano i tuoi dati',
       :customer_renderer => '/partials/fieldset'
 
-    q_contactUrl 'Dove si trovano le istruzioni per contattare qualcuno a cui porre delle domande inerenti a questo pacchetto di dati ?',
+    q_contactUrl 'Dove si trovano le istruzioni per contattare qualcuno a cui porre delle domande inerenti a questo pacchetto di dati?',
       :discussion_topic => :contactUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Scopri come contattare qualcuno a proposito di questi dati su',
@@ -2488,7 +2488,7 @@ survey 'IT',
       :placeholder => 'Documentazione sui contatti',
       :requirement => ['pilot_22']
 
-    label_pilot_22 'Dovresti <strong>fornire informazioni sui punti di contatto relativi ai tuoi dati per le persone che vogliono inviare delle domande</strong>.',
+    label_pilot_22 'Dovresti <strong>fornire informazioni sulla gestione della riservatezza dei contatti relativi a coloro che vogliono inviare domande sui dati pubblicati</strong>.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_22'
     dependency :rule => 'A'
@@ -2504,7 +2504,7 @@ survey 'IT',
       :placeholder => 'URL sui suggerimenti per migliorare la pubblicazione dei dati',
       :requirement => ['pilot_23']
 
-    label_pilot_23 'Dovresti <strong>dare delle istruzioni su come proporre miglioramenti</strong> sul modo di pubblicare i dati in modo da poter scoprire di che cosa ha bisogno la gente.',
+    label_pilot_23 'Dovresti <strong>dare delle istruzioni su come proporre miglioramenti</strong> sul modo di pubblicare i dati in modo da poter scoprire di che cosa hanno bisogno le persone.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_23'
     dependency :rule => 'A'
@@ -2514,10 +2514,10 @@ survey 'IT',
       :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Scopri dove inviare domande sulla privacy'
-    a_1 'Documentazione sul punto di contatto relativi alla privacy',
+    a_1 'Documentazione sulla gestione della riservatezza dei contatti',
       :string,
       :input_type => :url,
-      :placeholder => 'Documentazione sul punto di contatto relativi alla privacy',
+      :placeholder => 'Documentazione sulla gestione della riservatezza dei contatti',
       :requirement => ['pilot_24']
 
     label_pilot_24 'Dovresti <strong>fornire informazioni sul punto di contatto a cui inviare domande relative a questioni di privacy </strong> e la divulgazione di dati personali.',
@@ -2551,11 +2551,11 @@ survey 'IT',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
-      a_1 'URL del Social Media',
+      a_1 'URL Social Media',
         :string,
         :input_type => :url,
         :required => :required,
-        :placeholder => 'URL del Social Media'
+        :placeholder => 'URL Social Media'
 
     end
 
@@ -2580,7 +2580,7 @@ survey 'IT',
       :discussion_topic => :correctionReporting,
       :display_on_certificate => true,
       :text_as_statement => 'Scopri come richiedere correzioni dei dati su',
-      :help_text => 'Dai una URL dove le persone possono segnalare degli errori che hanno trovato nei tuoi dati.'
+      :help_text => 'Dai una URL dove le persone possono segnalare li errori che hanno trovato nei tuoi dati.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'URL sulle istruzioni inerenti alle correzioni',
@@ -2596,17 +2596,17 @@ survey 'IT',
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionReporting, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_correctionDiscovery 'Dov\'è possibile ottenere informazioni sulle notificazioni delle correzioni fatte ai tuoi dati?',
+    q_correctionDiscovery 'Dov\'è possibile ottenere informazioni sulle notifiche delle correzioni fatte ai tuoi dati?',
       :discussion_topic => :correctionDiscovery,
       :display_on_certificate => true,
-      :text_as_statement => 'Scopri come ottenere le notificazioni sulle correzioni fatte ai dati',
-      :help_text => 'Dai una URL in cui si descrive come le notificazioni sulle correzioni vengono condivise con la gente.'
+      :text_as_statement => 'Scopri come ottenere le notifiche sulle correzioni fatte ai dati',
+      :help_text => 'Dai una URL in cui si descrive come le notifiche sulle correzioni vengono condivise con la gente.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
-    a_1 'URL sulle notificazioni relative alle correzioni fatte sui dati',
+    a_1 'URL sulle notifiche relative alle correzioni fatte sui dati',
       :string,
       :input_type => :url,
-      :placeholder => 'URL sulle notificazioni relative alle correzioni fatte sui dati',
+      :placeholder => 'URL sulle notifiche relative alle correzioni fatte sui dati',
       :requirement => ['standard_59']
 
     label_standard_59 'Dovresti <strong>fornire una mailing list o un flusso d\'informazioni sugli aggiornamenti fatti</strong> così che le persone possano utilizzarli per mantenere aggiornate le loro copie dei dati.',
@@ -2616,16 +2616,16 @@ survey 'IT',
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_engagementTeam 'Hai qualcuno che costruisce attivamente una comunità attorno a questi dati?',
+    q_engagementTeam 'Hai qualcuno che costruisce attivamente una comunità intorno a questi dati?',
       :discussion_topic => :engagementTeam,
-      :help_text => 'Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone ad utilizzare i dati.',
+      :help_text => 'Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone a utilizzare i dati.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
     a_false 'no'
     a_true 'sì',
       :requirement => ['exemplar_21']
 
-    label_exemplar_21 'Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un uso più ampio.',
+    label_exemplar_21 'Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un utilizzo più ampio.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_21'
     dependency :rule => 'A'
