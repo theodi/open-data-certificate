@@ -13,7 +13,7 @@
          <input placeholder="Titolo dei dati" required="required"/>
          <help>I tuoi open data vengono visualizzati assieme ad altri dati similari. Quindi fai in modo che il nome inserito in questa casella sia il più possibile univoco e preciso per permettere agli utenti di identificare rapidamente la loro unicità.</help>
       </question>
-      <question id="documentationUrl" display="questi dati sono descritti in">
+      <question id="documentationUrl" display="Questi dati sono descritti in">
          <label>Dove sono descritti?</label>
          <input type="url" placeholder="La URL della documentazione"/>
          <help/>
@@ -26,13 +26,13 @@
       </question>
       <question id="publisher" display="Questi dati sono pubblicati da">
          <label>Chi pubblica questi dati?</label>
-         <input placeholder="informazioni sull'editore" required="required"/>
+         <input placeholder="Informazioni sull'autore" required="required"/>
          <help>Inserisci il nome dell'organizzazione che pubblica questi dati. Probabilmente è l'organizzazione per cui lavori, a meno che tu non stia facendo il lavoro al posto di qualcun altro.</help>
       </question>
       <question id="publisherUrl" display="I dati sono pubblicati su">
          <label>Su quale sito si trovano i dati?</label>
-         <input type="url" placeholder="URL dell'editore"/>
-         <help>dai al sito web una URL; questo ci aiuta a raggruppare i dati dello stesso organismo anche se le persone danno loro dei nomi diversi.</help>
+         <input type="url" placeholder="La URL dell'autore"/>
+         <help>Dai al sito web una URL; questo ci aiuta a raggruppare i dati della stessa organizzazione anche se le persone danno loro dei nomi diversi.</help>
       </question>
       <question id="releaseType">
          <label>Di che tipo di aggiornamento si tratta?</label>
@@ -42,16 +42,16 @@
                <help>Si tratta di un unico file e non prevedi di pubblicarne di simili in futuro</help>
             </option>
             <option value="collection">
-               <label>Un unico aggiornamento di un insieme di pacchetti di dati correlati</label>
-               <help>E' una raccolta di file correlati relativi agli stessi dati e per i quali al momento non prevedi di pubblicarne di simili in futuro</help>
+               <label>Un aggiornamento unico di un insieme di pacchetti di dati correlati</label>
+               <help>È una raccolta di file correlati, relativi agli stessi dati, e per i quali al momento non prevedi di pubblicarne di simili in futuro</help>
             </option>
             <option value="series">
                <label>Una serie di pacchetti di dati correlati in corso di pubblicazione</label>
                <help>Questa rappresenta una serie di pacchetti di dati con aggiornamenti periodici già previsti per il futuro</help>
             </option>
             <option value="service">
-               <label>un servizio o un API per accedere agli open data</label>
-               <help>Questo è un live web service che permette ai programmatori di accedere ai tuoi dati attraverso un'interfaccia di ricerca</help>
+               <label>un servizio o API per accedere agli open data</label>
+               <help>Questo è un web service in tempo reale che permette ai programmatori di accedere ai tuoi dati attraverso un'interfaccia di interrogazione</help>
             </option>
          </radioset>
       </question>
@@ -63,16 +63,16 @@
          <label>Reperibilità</label>
          <help>Come aiutare le persone a trovare i tuoi dati</help>
          <question id="onWebsite">
-            <label>Il tuo sito web principale ha un link ai tuoi dati?</label>
+            <label>Il tuo sito web principale contiene un link ai tuoi dati?</label>
             <yesno/>
-            <help>E' più facile trovare i dati se sono collegati a partire dal tuo sito web principale.</help>
+            <help>È più facile trovare i dati se sono collegati a partire dal tuo sito web principale.</help>
             <requirement level="standard">Dovresti <strong>assicurarti che le persone possano trovare i dati a partire dal tuo sito web principale </strong> per facilitarne l'accesso</requirement>
          </question>
          <if test="this.onWebsite() === 'true'">
             <repeat id="webPages">
                <label>Pagina Web</label>
                <question id="webpage" display="il sito web collega i dati da">
-                  <label>Nel tuo sito web, qual'è la pagina che dà accesso ai dati?</label>
+                  <label>Nel tuo sito web, quale è la pagina che dà accesso ai dati?</label>
                   <input type="url" required="required" placeholder="URL della pagina Web"/>
                   <help>Dai al tuo sito web principale una URL che dà accesso a questi dati</help>
                </question>
@@ -90,14 +90,14 @@
                <question id="listing" display="I dati fanno parte di questa collezione">
                   <label>Dove sono elencati?</label>
                   <input type="url" required="required" placeholder="Elenco di URL"/>
-                  <help>Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, data.gov.uk ( se si tratta di dati del settore pubblico nel Regno Unito ), hub.data.ac.uk (se si tratta di dati accademici del Regno Unito) o una URL per i risultati del motore di ricerca.</help>
+                  <help>Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, dati.gov.it (se si tratta di dati del settore pubblico italiano), dati.istat.it (se si tratta di dati dell'ISTAT) o una URL per i risultati del motore di ricerca.</help>
                </question>
             </repeat>
          </if>
          <question id="referenced">
-            <label>Le tue pubbblicazioni fanno riferimento a questi dati?</label>
+            <label>Le tue pubblicazioni fanno riferimento a questi dati?</label>
             <yesno/>
-            <help>Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, dai più contesto ed aiuti le persone a trovare e comprendere più facilmente i tuoi dati</help>
+            <help>Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, fornisci più contesto in modo da aiutare le persone a trovare e comprendere più facilmente i tuoi dati</help>
             <requirement level="standard">Dovresti <strong>far riferimento a questi dati a partire dalle tue pubblicazioni</strong> in modo che le persone possano venire a conoscenza della loro esistenza e contesto.</requirement>
          </question>
          <if test="this.referenced() === 'true'">
@@ -106,7 +106,7 @@
                <question id="reference" display="Questi dati sono menzionati in">
                   <label>Dove sono menzionati i tuoi dati?</label>
                   <input type="url" required="required" placeholder="URL di riferimento"/>
-                  <help>Dai una URL ad un documento che citi o faccia riferimento a questi dati.</help>
+                  <help>Dai una URL a un documento che citi o faccia riferimento a questi dati.</help>
                </question>
             </repeat>
          </if>
@@ -124,7 +124,7 @@
                   </option>
                   <option value="changing" display="cambieranno">
                      <label>sì, l'API dà accesso a dei dati che cambiano nel corso del tempo</label>
-                     <help>Alcune API danno accesso a dei dati che sono costantemente messi a giorno e che sono in continua evoluzione</help>
+                     <help>Alcune API danno accesso a dei dati che sono costantemente aggiornati e in continua evoluzione</help>
                   </option>
                </radioset>
             </question>
@@ -132,53 +132,53 @@
          <if test="this.releaseType() === 'oneoff' || this.releaseType() === 'collection' || (this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'static')">
             <question id="timeSensitive"
                       display="La precisione o la rilevanza di questi dati sarà">
-               <label>I tuoi dati diventeranno obsoleti?</label>
+               <label>I tuoi dati non saranno aggiornati?</label>
                <radioset>
-                  <option value="true" display="diventeranno obsoleti">
-                     <label>sì, questi dati diventeranno obsoleti</label>
-                     <help>Ad esempio, i dati sulle fermate degli autobus diventeranno obsoleti nel momento in cui alcune fermate verranno spostate o delle nuove create.</help>
+                  <option value="true" display="non saranno aggiornati">
+                     <label>sì, questi dati non saranno aggiornati</label>
+                     <help>Ad esempio, i dati sulle fermate degli autobus diventano obsoleti nel momento stesso in cui alcune fermate verranno spostate o create di nuove.</help>
                   </option>
-                  <option value="timestamped" display="diventeranno obsoleti ma verrà indicato">
-                     <label>sì, questi dati diventeranno obsoleti; ma questa informazione verrà indicata.</label>
+                  <option value="timestamped" display="non saranno aggiornati ma verrà indicato">
+                     <label>sì, questi dati non saranno aggiornati; ma questo sarà esplicitamente indicato.</label>
                      <help>Ad esempio, le statistiche demografiche di solito includono il periodo in cui sono state rilevate.</help>
                      <requirement level="pilot">
                         <strong>Quando pubblichi i tuoi dati dovresti indicare il periodo di riferimento </strong> così la gente sa quando i dati diventeranno obsoleti.</requirement>
                   </option>
-                  <option value="false" display="non diventeranno obsoleti">
+                  <option value="false" display="non necessitano di aggiornamento">
                      <label>no, questi dati non contegono nessuna informazione di carattere temporale</label>
-                     <help>Ad esempio, i risultati di un esperimento non diverranno mai obsoleti perché i dati indicano dei risultati riportati a seguito di risultati riscontrati.</help>
+                     <help>Ad esempio, i risultati di un esperimento non diventeranno mai obsoleti perché i dati indicano dei risultati riportati a seguito di verifiche.</help>
                      <requirement level="standard">Dovresti <strong>pubblicare gli aggiornamenti dei dati che contengono informazioni che variano nel tempo</strong> per evitare che diventino obsoleti</requirement>
                   </option>
                </radioset>
             </question>
          </if>
          <if test="this.releaseType() === 'series'">
-            <question id="frequentChanges" display="Questi dati cambiano">
-               <label>Questi dati cambiano almeno una volta al giorno?</label>
+            <question id="frequentChanges" display="Questi dati si aggiornano">
+               <label>Questi dati hanno un aggiornamento frequente?</label>
                <yesno required="pilot" yes="Si, almeno una volta al giorno"/>
-               <help>Indica se i dati cambiano quasi tutti i giorni. Quando i dati cambiano frequentemente rischiano di diventare obsoleti altrettanto rapidamente e la gente deve sapere se li metti a giorno e con quale frequenza.</help>
+               <help>Indica se i dati cambiano frequantemente. Quando i dati cambiano spesso rischiano di diventare obsoleti altrettanto rapidamente e la gente deve sapere la periodicità e frequenza di aggiornamento.</help>
             </question>
             <if test="this.frequentChanges() === 'true'">
                <question id="seriesType" display="Questi dati sono una serie di">
                   <label>Di che tipo di pacchetti di dati si tratta?</label>
                   <radioset required="exemplar">
                      <option value="dumps" display="Copie della banca dati">
-                        <label>Copie della banca dati ad intervalli regolari</label>
-                        <help>Scegli se pubblichi ad intervalli regolari copie di tutta la tua banca dati. Quando fai un'estrazione della banca dati, è utile dare accesso ad un flusso di informazione che segnali eventuali modifiche della banca dati, così le persone possono mantenere le proprie copie aggiornate.</help>
+                        <label>copie della banca dati a intervalli regolari</label>
+                        <help>Scegli se pubblichi a intervalli regolari copie di tutta la tua banca dati. Quando fai un'estrazione della banca dati, è utile dare accesso a un flusso di informazione che segnali eventuali modifiche della banca dati, in modo che le persone possano mantenere le proprie copie aggiornate.</help>
                      </option>
                      <option value="aggregate" display="Aggregazioni di dati variabili">
-                        <label>Aggregazioni di dati variabili pubblicati ad intervalli regolari</label>
-                        <help>Scegli se crei nuovi pacchetti di dati ad intervalli regolari. Puoi scegliere questo approccio se i dati non possono essere pubblicati in formato aperto o se pubblichi solo dati nuovi rispetto all pubblicazione precedente.</help>
+                        <label>Aggregazioni di dati variabili pubblicati a intervalli regolari</label>
+                        <help>Scegli se crei nuovi pacchetti di dati a intervalli regolari. Puoi scegliere questo approccio se i dati non possono essere pubblicati in formato aperto o se pubblichi solo dati nuovi rispetto alla pubblicazione precedente.</help>
                      </option>
                   </radioset>
                </question>
                <if test="this.seriesType() === 'dumps'">
                   <question id="changeFeed"
-                            display="Un flusso d'informazione che notifichi le modifiche fatte su questi dati.">
-                     <label>è disponibile un flusso d'informazioni che notifichi le modifiche fatte su questi dati?</label>
+                            display="Un sistema di modiche sulle modifiche fatte su questi dati.">
+                     <label>è disponibile un sistema di notifica sulle modifiche fatte su questi dati?</label>
                      <yesno yes="è disponibile"/>
-                     <help>Informa le persone se fornisci un flusso d'informazioni che notifica le modifiche che hanno un impatto su questi dati. I flussi d'informazioni possono essere in RSS, Atom o formati personalizzati.</help>
-                     <requirement level="exemplar">Dovresti <strong>fornire un flusso d'informazioni che notifichi le modifiche apportate ai tuoi dati</strong> così le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
+                     <help>Informa le persone se fornisci un sistema di notifica sulle modifiche che hanno un impatto su questi dati. I sistemi di notifica possono essere RSS, Atom o formati personalizzati.</help>
+                     <requirement level="exemplar">Dovresti <strong>fornire un flusso d'informazioni che notifichi le modifiche apportate ai tuoi dati</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
                   </question>
                </if>
                <question id="frequentSeriesPublication"
@@ -190,15 +190,15 @@
                      </option>
                      <option value="monthly">
                         <label>almeno ogni mese</label>
-                        <requirement level="pilot">Dovresti <strong>creare un aggiornamento ogni mese</strong> così le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
+                        <requirement level="pilot">Dovresti <strong>creare un aggiornamento ogni mese</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
                      </option>
                      <option value="weekly">
                         <label>almeno ogni settimana</label>
-                        <requirement level="standard">Dovresti <strong>creare un aggiornamento ogni settimana</strong> così le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
+                        <requirement level="standard">Dovresti <strong>creare un aggiornamento ogni settimana</strong> in questo modo le persone possono mantenere le loro copie aggiornate e corrette.</requirement>
                      </option>
                      <option value="daily">
                         <label>almeno ogni giorno</label>
-                        <requirement level="exemplar">Dovresti <strong>creare un aggiornamento ogni giorno</strong> così le persone possono mantenere le proprie copie correttamente aggiornate.</requirement>
+                        <requirement level="exemplar">Dovresti <strong>creare un aggiornamento ogni giorno</strong> in questo modo le persone possono mantenere le proprie copie correttamente aggiornate.</requirement>
                      </option>
                   </radioset>
                   <help>Questo determina i criteri che rendono obsoleti questi dati prima che le persone possano ottenere un aggiornamento.</help>
@@ -206,7 +206,7 @@
             </if>
             <question id="seriesPublicationDelay"
                       display="Il tempo tra la creazione e la pubblicazione di questi dati è di">
-               <label>Qual' è il tempo tra il momento in cui un pacchetto di dati viene creato e il momento della sua pubblicazione ?</label>
+               <label>Qual' è il tempo tra il momento in cui un pacchetto di dati viene creato e il momento della sua pubblicazione?</label>
                <radioset>
                   <option value="extreme">
                      <label>più lungo del divario fra le due versioni</label>
@@ -215,7 +215,7 @@
                   <option value="reasonable">
                      <label>più o meno come il divario fra le pubblicazioni</label>
                      <help>Ad esempio, se si crea una nuova versione del pacchetto di dati ogni giorno, scegliere questa opzione se ci vuole circa un giorno per essere pubblicato.</help>
-                     <requirement level="pilot">Dovresti fare in modo che <strong>ci sia un ritardo ragionevole tra il momento di creazione e quello di pubblicazione di un pacchetto di dati </strong> corrispondente ad un divario inferiore a quello che esiste tra le due pubblicazioni , così le persone mantengono le proprie copie correttamente aggiornate.</requirement>
+                     <requirement level="pilot">Dovresti fare in modo che <strong>ci sia un ritardo ragionevole tra il momento di creazione e quello di pubblicazione di un pacchetto di dati </strong> corrispondente a un divario inferiore a quello che esiste tra le due pubblicazioni , così le persone mantengono le proprie copie correttamente aggiornate.</requirement>
                   </option>
                   <option value="good">
                      <label>meno della metà del divario che esiste fra le versioni</label>
@@ -232,9 +232,9 @@
          </if>
          <if test="this.releaseType() === 'service'">
             <question id="provideDumps" display="Il gestore pubblica">
-               <label>Pubblichi anche delle estrazioni di questi pacchetti di dati?</label>
+               <label>Pubblichi anche delle estrazioni della base dati?</label>
                <yesno yes="Estrazioni (dump) dei dati"/>
-               <help>Un dump è un'estrazione del pacchetto intero di dati in un file che la gente può scaricare. Questo consente alle persone di fare delle analisi differenti rispetto a quelli possibili attraverso un accesso API.</help>
+               <help>Un dump è un'estrazione dell'intera banca dati in un file che chiunque può scaricare. Questo consente di fare delle analisi differenti rispetto a quelle possibili attraverso un accesso API.</help>
                <requirement level="standard">Dovresti <strong>far scaricare l'intero pacchetto di dati</strong> così da permettere delle analisi più complete ed accurate avendo tutti i dati a disposizione.</requirement>
             </question>
             <if test="this.serviceType() === 'changing'">
@@ -268,7 +268,7 @@
                   <label>I tuoi dati verranno corretti se hanno degli errori?</label>
                   <yesno yes="corretti"/>
                   <help>E' buona pratica correggere gli errori nei dati, soprattutto se li usi tu stesso. Quando si apportano le correzioni, la gente deve esserne informata.</help>
-                  <requirement level="standard">Dovresti <strong>correggere i dati quando le persone riportano degli errori</strong> in modo che tutti possano beneficiare dei miglioramenti apportati in termine di precisione.</requirement>
+                  <requirement level="standard">Dovresti <strong>correggere i dati quando le persone riportano degli errori</strong> in modo che tutti possano beneficiare dei miglioramenti apportati in termini di precisione.</requirement>
                </question>
             </if>
          </if>
@@ -280,7 +280,7 @@
             <label>Dove riporti i problemi qualitativi di questi dati?</label>
             <input type="url"
                    placeholder="URL della documentazione relativa alla qualità dei dati"/>
-            <help>Attribuisci una URL dove le persone possono trovare informazioni sulla qualità dei tuoi dati. Le persone accettano l'esistenza di errori dovuti a malfunzionamenti delle apparecchiature o errori che accadono in fase di migrazione di un sistema. Dovresti essere aperto alle osservazioni fatte sulla qualità dei dati, così la gente può giudicare quanto fare affidamento su tali dati.</help>
+            <help>Attribuisci una URL dove le persone possano trovare informazioni sulla qualità dei tuoi dati. Le persone accettano l'esistenza di errori dovuti a malfunzionamenti delle apparecchiature o errori che ricorrono in fase di migrazione di un sistema. Dovresti essere aperto alle osservazioni fatte sulla qualità dei dati, così la gente può giudicare in che misura fare affidamento su tali dati.</help>
             <requirement level="standard">Dovresti<strong>documentare i problemi noti sulla qualità dei dati </strong> in modo che le persone possano decidere quanto fidarsi dei tuoi dati.</requirement>
          </question>
          <question id="qualityControlUrl"
@@ -320,7 +320,7 @@
             <label>Per quanto tempo questi dati saranno disponibili?</label>
             <radioset>
                <option value="experimental"
-                       display="Sono disponibili in modo sperimentale e potrebbero scomparire in qualsiasi momento">
+                       display="Sono disponibili in via sperimentale e potrebbero scomparire in qualsiasi momento">
                   <label>Potrebbero scomparire in qualsiasi momento</label>
                </option>
                <option value="short"
@@ -342,15 +342,15 @@
    </group>
    <group id="technical">
       <label>Informazioni tecniche</label>
-      <help>Luoghi, formati e fiducia</help>
+      <help>Ubicazioni, formati e fiducia</help>
       <group id="locations">
-         <label>Luoghi</label>
+         <label>Ubicazioni</label>
          <help>Il modo in cui le persone possono accedere ai tuoi dati</help>
          <if test="this.releaseType() === 'oneoff'">
             <question id="datasetUrl" display="Questi dati sono pubblicati in">
-               <label>Dove si trova il tuo pacchetto di dati?</label>
-               <input type="url" placeholder="URL del pacchetto di dati"/>
-               <help>Dai una URL al pacchetto di dati stesso. Per essere disponibili in un formato aperto i dati dovrebbero essere collegati direttamente sul web, così la gente può facilmente trovarli e riutilizzarli.</help>
+               <label>Dove si trova il tuo dataset?</label>
+               <input type="url" placeholder="URL del dataset"/>
+               <help>Dai una URL al dataset. Per essere disponibili in un formato aperto i dati dovrebbero essere collegati direttamente sul web, così possano essere facilmente trovati e riutilizzati.</help>
                <if test="this.documentationUrl() === ''">
                   <requirement test="this.datasetUrl() !== ''">Devi <strong>fornire una URL ai dati o una URL alla loro documentazione</strong> in modo che la gente possa trovare questa informazione.</requirement>
                </if>
@@ -361,21 +361,21 @@
          </if>
          <if test="this.releaseType() === 'series'">
             <question id="versionManagement">
-               <label>Come si fa a pubblicare una serie di dati relativa agli stessi pacchetti di dati?</label>
+               <label>Come si fa a pubblicare una serie relativa allo stesso dataset?</label>
                <checkboxset>
                   <option value="current">
                      <label>Come un'unica URL che viene regolarmente aggiornata</label>
-                     <help>Scegli questa opzione se c'è una URL che permette alle persone di scaricare la versione più recente del pacchetto di dati.</help>
+                     <help>Scegli questa opzione se c'è una URL che permette di scaricare la versione più recente del dataset.</help>
                      <requirement level="standard">Dovresti <strong>avere una URL unica e persistente per scaricare la versione attuale dei dati</strong> in modo che le persone possano accedervi facilmente.</requirement>
                   </option>
                   <option value="template">
-                     <label>Una URLunica e coerente per ogni versione</label>
-                     <help>Scegli questa opzione se la tua URL del pacchetto di dati segue uno schema regolare che include la data di pubblicazione, ad esempio, una URL che inizia con '2013 - 04'. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono rilasciati.</help>
+                     <label>Una URL unica e coerente per ogni versione</label>
+                     <help>Scegli questa opzione se la tua URL del dataset segue uno schema regolare che include la data di pubblicazione, ad esempio, una URL che inizia con '2013 - 04'. Questo aiuta a capire quanto spesso si pubblicano i dati e a creare script che recuperano quelli nuovi ogni volta che vengono rilasciati.</help>
                      <requirement level="pilot">Dovresti <strong>utilizzare un modello coerente per le URL delle diverse versioni pubblicate</strong> in modo che le persone possano scaricarle automaticamente.</requirement>
                   </option>
                   <option value="list">
                      <label>come una lista di versioni pubblicate</label>
-                     <help>Scegli questa opzione se disponi di una lista di pacchetti di dati in una pagina Web o un feed (come Atom o RSS) con link per ogni versione pubblicata e relativi dettagli. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono pubblicati.</help>
+                     <help>Scegli questa opzione se disponi di una lista di dataset in una pagina Web o un feed (come Atom o RSS) con link per ogni versione pubblicata e relativi dettagli. Questo aiuta le persone a capire quanto spesso si pubblicano i dati e di scrivere script che recuperano quelli nuovi ogni volta che vengono pubblicati.</help>
                      <requirement level="standard">Dovresti <strong>avere un documento o un feed con un elenco di versioni pubblicate disponibili</strong>, così la gente può creare script per scaricarle tutte.</requirement>
                   </option>
                </checkboxset>
@@ -385,7 +385,7 @@
             </question>
             <if test="this.versionManagement().current">
                <question id="currentDatasetUrl"
-                         display="L'attuale pacchetto di dati è disponibile su">
+                         display="L'attuale dataset è disponibile su">
                   <label>Dove si trova il pacchetto di dati attuale?</label>
                   <input type="url"
                          placeholder="URL del pacchetto di dati attuale"
@@ -421,7 +421,7 @@
                <help>Dai una URL che sia il punto di partenza degli script per accedere alla tua API. In questa pagina ci dovrebbe essere un documento di descrizione del servizio che aiuta lo script a capire quali servizi esistono.</help>
                <if test="this.documentationUrl() === ''">
                   <requirement test="this.endpointUrl() !== ''">
-                     <strong>È necessario fornire sia un URL di endpoint di API o un URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione.</requirement>
+                     <strong>È necessario fornire sia una URL di endpoint di API o una URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione.</requirement>
                </if>
                <if test="this.documentationUrl() !== ''">
                   <requirement test="this.endpointUrl() !== ''" level="standard">Dovresti <strong>avere un documento che descrive il servizio o il punto di accesso unico per la vostra API</strong> per permettere alle persone di accedervi.</requirement>
@@ -460,22 +460,22 @@
                </if>
                <if test="this.dumpManagement().template">
                   <question id="dumpsTemplateUrl"
-                            display="L'estrazione della banca dati segue lo schema corrente della URL">
-                     <label>Qual è il formato URL seguito dall'estrazione della banca dati?</label>
+                            display="L'URL per l'estrazione della banca dati ha questo schema">
+                     <label>Qual è il formato dell'URL necessario all'estrazione della banca dati?</label>
                      <input type="text"
                             placeholder="URL del modello dell'estrazione"
                             required="required"/>
-                     <help>Questa è la struttura della URL quando diverse versioni vengono pubblicate. Usa ` { variabile } ` per indicare le parti della URL che cambiano, per esempio, ` http://example.com/data/monthly/mydata- { AA } { MM }. Csv `</help>
+                     <help>Questa è la struttura della URL quando vengono pubblicate diverse versioni. Usa ` { variabile } ` per indicare le parti della URL che cambiano, per esempio, ` http://example.com/data/monthly/mydata- { AA } { MM }. Csv `</help>
                   </question>
                </if>
                <if test="this.dumpManagement().list">
                   <question id="dumpsUrl"
                             display="un elenco delle estrazioni della banca dati si trova su">
-                     <label>Dov'è il tuo elenco delle disponibili estrazioni della banca dati?</label>
+                     <label>Dov'è il tuo elenco delle estrazioni disponibili?</label>
                      <input type="url"
                             placeholder="URL dell'elenco delle estrazioni"
                             required="required"/>
-                     <help>Inserisci una URL di una pagina o di un flusso d'informazioni con l'elenco dell'estrazioni della banca dati processabile dal computer. Utilizzare la URL della prima pagina che dovrebbe collegare alle altre pagine.</help>
+                     <help>Inserisci una URL di una pagina o di un flusso d'informazioni con l'elenco dell'estrazioni della banca dati processabile dal computer. Utilizzare la URL della prima pagina che dovrebbe collegarsi alle altre pagine.</help>
                   </question>
                </if>
             </if>
@@ -487,7 +487,7 @@
                <input type="url"
                       placeholder="URL del feed relativo alle modifiche"
                       required="required"/>
-               <help>Dai una URL ad una pagina o ad un flusso d'informazioni che fornisca un elenco delle estrazioni precedenti della banca dati, processabili dal computer. Utilizza la URL della prima pagina che dovrebbe collegare alle altre pagine.</help>
+               <help>Dai una URL a una pagina o a un flusso d'informazioni che fornisca un elenco delle estrazioni precedenti della banca dati, processabili dal computer. Utilizza la URL della prima pagina che dovrebbe collegarsi al resto delle pagine.</help>
             </question>
          </if>
       </group>
@@ -497,7 +497,7 @@
          <question id="machineReadable" display="Questi dati sono">
             <label>Questi dati sono processabili dal computer?</label>
             <yesno yes="processabili dal computer"/>
-            <help>La gente preferisce formati che siano facilmente processabili dal computer, perché aumentano la velocità e precisione di trattamento dei dati. Per esempio, una fotocopia scannerizzata di un foglio di calcolo non può essere processata dal computer; al contrario un file CSV lo è.</help>
+            <help>La gente preferisce formati che siano facilmente processabili dal computer, perché aumentano la velocità e precisione di trattamento dei dati. Per esempio, una fotocopia scansionata di un foglio di calcolo non può essere processata dal computer; al contrario un file CSV lo è.</help>
             <requirement level="pilot">Dovresti <strong>fornire i dati in un formato che sia processabile dal computer</strong> per permettere una facile elaborazione dei dati.</requirement>
          </question>
          <question id="openStandard" display="Il formato di questi dati è">
@@ -511,7 +511,7 @@
             <checkboxset required="pilot">
                <option value="documents">
                   <label>documenti che possono essere letti dalle persone</label>
-                  <help>Scegli questa opzione se i dati sono usufruiti dall'uomo. Per esempio, documenti politici, white paper, report e verbali delle riunioni. Questi di solito hanno una loro propria struttura, ma sono principalmente a carattere testuale.</help>
+                  <help>Scegli questa opzione se i dati sono usati da umani. Per esempio, documenti di policy, white paper, report e verbali delle riunioni. Questi di solito hanno una struttura propria, ma sono principalmente a carattere testuale.</help>
                </option>
                <option value="statistical">
                   <label>dati statistici, come conteggi, medie e percentuali</label>
@@ -555,7 +555,7 @@
                   <option value="statistical" display="in un formato statistico">
                      <label>esponi la struttura dei dati statistici hypercube come <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>
                      </label>
-                     <help>osservazioni individuali in hypercubes riferiscono a una misura particolare e ad un insieme di dimensioni. Ogni osservazione può anche essere collegata ad annotazioni che danno più contesto. Formati come <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> sono progettati per esprimere questa struttura.</help>
+                     <help>osservazioni individuali in hypercubes riferiscono a una misura particolare e a un insieme di dimensioni. Ogni osservazione può anche essere collegata ad annotazioni che danno più contesto. Formati come <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> sono progettati per esprimere questa struttura.</help>
                      <requirement level="exemplar">Dovresti<strong>pubblicare dati statistici in un formato che esponga dimensioni e misure</strong> in modo che siano facili da analizzare.</requirement>
                   </option>
                   <option value="tabular" display="in un formato di dati tabulare">
@@ -604,8 +604,8 @@
                <radioset>
                   <option value="suitable" display="in un formato di dati strutturati">
                      <label>sono ideati per dati strutturati come JSON, XML, Turtle o CSV</label>
-                     <help>Questi formati organizzano i dati in una struttura di base che da dei valori ad un insieme noto di proprietà. Questi formati sono facilmente processabili in modo automatico dai computer.</help>
-                     <requirement level="pilot">Dovresti<strong>pubblicare dati strutturati in un formato che sia stato ideato per questo scopo</strong> in modo che i dati siano facile da processare.</requirement>
+                     <help>Questi formati organizzano i dati in una struttura di base che dà dei valori a un insieme noto di proprietà. Questi formati sono facilmente processabili in modo automatico dai computer.</help>
+                     <requirement level="pilot">Dovresti<strong>pubblicare dati strutturati in un formato che sia stato ideato per questo scopo</strong> in modo che i dati siano facili da processare.</requirement>
                   </option>
                   <option value="unsuitable"
                           display="in un formato non adatto per i dati strutturati">
@@ -619,24 +619,24 @@
             <label>I vostri dati utilizzano identificatori persistenti?</label>
             <yesno yes="identificatori persistenti"/>
             <help>I dati fanno solitamente riferimento a cose reali come scuole o strade o utilizzano uno schema di codificazione. Se i dati provenienti da fonti diverse utilizzano lo stesso identificatore persistente ed unico per individuare la stessa cosa, le persone possono facilmente combinare risorse diverse per creare dati più utili. Gli identificatori possono essere GUIDs, DOI o URL.</help>
-            <requirement level="standard">Dovresti <strong>utilizzare identificatori i valori che sono presenti nei dati</strong> in modo che possano essere facilmente collegati ad altri dati.</requirement>
+            <requirement level="standard">Dovresti <strong>utilizzare identificatori per i valori che sono presenti nei tuoi dati</strong> in modo che possano essere facilmente collegati ad altri dati.</requirement>
          </question>
          <if test="this.identifiers() === 'true'">
             <question id="resolvingIds" display="Gli identificatori persistenti">
-               <label>Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni addizionali?</label>
+               <label>Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni aggiuntive?</label>
                <radioset>
                   <option value="false" display="">
                      <label>no, gli identificatori non possono essere usati per trovare informazioni aggiuntive</label>
                   </option>
-                  <option value="service" display="risolvere utilizzando un servizio">
+                  <option value="service" display="risolvi utilizzando un servizio">
                      <label>sì, le persone possono utilizzare un servizio per risolvere gli identificatori</label>
-                     <help>E' possibile utilizzare servizi online, come GUIDs o DOIs, per dare delle informazioni sugli identificatori,che non possono essere direttamente accessibili allo stesso modo delle URL.</help>
+                     <help>È possibile utilizzare servizi online, come GUIDs o DOIs, per dare delle informazioni sugli identificatori, che non possono essere direttamente accessibili allo stesso modo delle URL.</help>
                      <requirement level="standard">Dovresti <strong>fornire un servizio per risolvere gli identificatori utilizzati</strong> in modo che le persone possano trovare informazioni aggiuntive.</requirement>
                   </option>
                   <option value="resolvable" display="risolvono perché sono delle URL">
-                     <label>sì, gli identificatori sono delle URL che si risolvono per dare delle informazioni</label>
+                     <label>sì, gli identificatori sono URL utili a chiarificare e dare informazioni</label>
                      <help>Le URL sono utili sia per le persone che per i computer. La gente può mettere una URL nel browser e leggere ulteriori informazioni, come <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. I computer possono anche elaborare queste informazioni usando script per accedere ai dati sottostanti.</help>
-                     <requirement level="exemplar">Dovresti<strong>collegare ad una pagina web le informazioni su ciascuno dei valori presenti nei tuoi dati</strong> in modo che le persone possano facilmente trovare e condividere queste informazioni.</requirement>
+                     <requirement level="exemplar">Dovresti<strong>collegare a una pagina web le informazioni su ciascuno dei valori presenti nei tuoi dati</strong> in modo che le persone possano facilmente trovare e condividere queste informazioni.</requirement>
                   </option>
                </radioset>
             </question>
@@ -653,19 +653,19 @@
             <question id="existingExternalUrls">
                <label>Sono disponibili informazioni di terze parti nei tuoi dati pubblicati sul web?</label>
                <yesno required="exemplar"/>
-               <help>A volte altre persone che non puoi controllare forniscono delle URL sui valori presenti nei tuoi dati. Ad esempio, i dati possono avere codici di avviamento postale che puntano al sito Ordnance Survey.</help>
+               <help>A volte altre persone che non puoi controllare forniscono delle URL sui valori presenti nei tuoi dati. Ad esempio, i dati possono avere codici che puntano agli identificativi amministrativi dell'ISTAT.</help>
             </question>
             <if test="this.existingExternalUrls() === 'true'">
                <question id="reliableExternalUrls">
-                  <label>Sono affidabili le informazioni di queste parti terze?</label>
+                  <label>Sono affidabili le informazioni di queste terze parti?</label>
                   <yesno required="exemplar"/>
-                  <help>se una parte terza fornisce delle URL pubbliche sui valori che si trovano nei tuoi dati, ha probabilmente adottato delle misure per garantire la qualità e l'affidabilità di questi dati. Questa è un'indicazione di quanto ti fidi della loro procedura per farlo. Cerca il loro certificato di dati aperto o segni distintivi analoghi per decidere.</help>
+                  <help>se una parte terza fornisce delle URL pubbliche sui valori che si trovano nei tuoi dati, ha probabilmente adottato delle misure per garantire la qualità e l'affidabilità di questi dati. Questa è un'indicazione di quanto ti fidi della loro procedura per farlo. Cerca il loro certificato open data o segni distintivi analoghi per decidere.</help>
                </question>
                <if test="this.reliableExternalUrls">
                   <question id="externalUrls" display="Le URL di parti terze sono">
                      <label>I tuoi dati utilizzano le URL di tali parti terze?</label>
                      <yesno yes="fanno riferimento a questi dati"/>
-                     <help>E' consigliabile utilizzare delle URL di parti terze che risolvono delle informazioni sui valori presenti nei tuoi dati. Questo riduce la duplicazione e aiuta le persone a combinare i dati provenienti da fonti diverse per renderli più utili.</help>
+                     <help>È consigliabile utilizzare delle URL di parti terze che risolvono delle informazioni sui valori presenti nei tuoi dati. Questo riduce la duplicazione e aiuta le persone a combinare i dati provenienti da fonti diverse per renderli più utili.</help>
                      <requirement level="exemplar">Dovresti <strong>utilizzare le URL delle informazioni di parti terze </strong> in modo che sia facile combinare questa informazione con altri dati che utilizzano tali URL.</requirement>
                   </question>
                </if>
@@ -683,15 +683,15 @@
          </question>
          <question id="digitalCertificate"
                    display="Questi dati possono essere verificati utilizzando">
-            <label>Dove descrivi il modo in cui la gente può verificare che i dati ricevuti provengono da te?</label>
+            <label>Dove descrivi il modo attraverso cui è possibile verificare la provenienza dei dati?</label>
             <input type="url" placeholder="URL del procedimento di verifica"/>
-            <help>se fornisci dei dati importanti, le persone dovrebbero essere in grado di verificare che quello che ricevono sia lo stesso di quello che hai pubblicato. Ad esempio, è possibile firmare digitalmente i dati pubblicati, per verificare che i dati non siano stati manomessi.</help>
+            <help>se fornisci dei dati importanti, chiunque dovrebbe essere in grado di verificare che quelli sono gli stessi che hai pubblicato. Ad esempio, è possibile firmare digitalmente i dati pubblicati, per verificare che i dati non siano stati manomessi.</help>
             <requirement level="exemplar">Dovresti <strong>descrivere il modo in cui le persone possono controllare che i dati ricevuti siano gli stessi di quelli che hai pubblicato</strong> in modo che possano fidarsi.</requirement>
          </question>
       </group>
    </group>
    <group id="social">
-      <label>Informazione Sociale</label>
+      <label>Informazioni aggiuntive</label>
       <help>Documentazione, supporto e servizi</help>
       <group id="documentation">
          <label>Documentazione</label>
@@ -711,11 +711,11 @@
                   </option>
                   <option value="issued">
                      <label>data di pubblicazione</label>
-                     <requirement level="standard">Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato che sia che sia processabile dal computer</strong> in modo che la gente possa conoscere la tempestività della pubblicazione.</requirement>
+                     <requirement level="standard">Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato che sia processabile dal computer</strong> in modo che le persone siano a conoscenza della tempestività della pubblicazione.</requirement>
                   </option>
                   <option value="modified">
                      <label>data di modifica</label>
-                     <requirement level="standard">Dovresti <strong>includere nella tua documentazione l'ulitma data di modifica dei dati in une formato che sia processabile dai computer </strong> in modo che le persone possano accedere ai dati più recenti.</requirement>
+                     <requirement level="standard">Dovresti <strong>includere nella tua documentazione l'ultima data di modifica dei dati in un formato che sia processabile dai computer </strong> in modo che le persone possano accedere ai dati più recenti.</requirement>
                   </option>
                   <option value="accrualPeriodicity" display="frequenza degli aggiornamenti">
                      <label>frequenza degli aggiornamenti</label>
@@ -734,8 +734,8 @@
                      <requirement level="standard">Dovresti <strong>includere nella tua documentazione la versione linguistica dei tuoi dati che sia processabile dal computer</strong> in modo che le persone interessate a questo tipo d'informazione possano capirla facilmente.</requirement>
                   </option>
                   <option value="publisher">
-                     <label>editore</label>
-                     <requirement level="standard">Dovresti <strong>indicare l'editore di dati nella tua documentazione processabile dal computer</strong>, così la gente può decidere quanto fidarsi dei tuoi dati.</requirement>
+                     <label>autore</label>
+                     <requirement level="standard">Dovresti <strong>indicare l'autore dei dati nella tua documentazione processabile dal computer</strong>, così la gente può decidere quanto fidarsi dei tuoi dati.</requirement>
                   </option>
                   <option value="spatial">
                      <label>copertura spaziale / geografica</label>
@@ -747,7 +747,7 @@
                   </option>
                   <option value="theme">
                      <label>tema/i</label>
-                     <requirement level="standard">Dovresti <strong>includere nella tua documentazioneprocessabile dal computer il soggetto dei tuoi dati </strong> in modo che la gente possa capire quale sia il contenuto dei tuoi dati.</requirement>
+                     <requirement level="standard">Dovresti <strong>includere nella tua documentazione processabile dal computer il soggetto dei tuoi dati </strong> in modo che la gente possa capire quale sia il contenuto dei tuoi dati.</requirement>
                   </option>
                   <option value="keyword">
                      <label>parola/e chiave o tag (s)</label>
@@ -765,23 +765,23 @@
                   <checkboxset>
                      <option value="title">
                         <label>titolo</label>
-                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione dei titoli che siano processabili dal computer </strong>, così la gente sa come citare ogni distribuzione di dati.</requirement>
+                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione dei titoli che siano processabili dal computer </strong>, in modo che le persone sappiano come citare ogni distribuzione di dati.</requirement>
                      </option>
                      <option value="description">
                         <label>descrizione</label>
-                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione delle descrizioni che siano processabili dal computer</strong>, così la gente sa quello che è contenuto in ogni distribuzione di dati.</requirement>
+                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione delle descrizioni che siano processabili dal computer</strong>, in modo che le persone sappiano quello che è contenuto in ogni distribuzione di dati.</requirement>
                      </option>
                      <option value="issued">
                         <label>data di pubblicazione</label>
-                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione la data di pubblicazione in un formato che sia processabile dal computer</strong>, così la gente può valutare in che misura la distribuzione è aggiornata.</requirement>
+                        <requirement level="standard">Dovresti <strong>includere nella tua documentazione la data di pubblicazione in un formato che sia processabile dal computer</strong>, in modo che le persone possano valutare in che misura la distribuzione è aggiornata.</requirement>
                      </option>
                      <option value="modified">
                         <label>data di modifica</label>
-                        <requirement level="standard">dovresti <strong>includere nella tua documentazione la data di modifica in un formato che sia processabile dal computer l</strong> perché così le persone sanno se la loro copia di dati è aggiornata.</requirement>
+                        <requirement level="standard">dovresti <strong>includere nella tua documentazione la data di modifica in un formato che sia processabile dal computer l</strong> perché così le persone sanno se la loro copia dei dati è aggiornata.</requirement>
                      </option>
                      <option value="rights">
                         <label>dichiarazione dei diritti d'applicazione</label>
-                        <requirement level="standard">Dovresti <strong>includere un link sui tipi di diritti d'applicazione sui dati in un formato che sia processabile dai computer</strong>, così la gente sa che cosa può fare con tali dati.</requirement>
+                        <requirement level="standard">Dovresti <strong>includere un link sui tipi di diritti d'applicazione sui dati in un formato che sia processabile dai computer</strong>, in modo che le persone sappiano che cosa possono fare con tali dati.</requirement>
                      </option>
                      <option value="accessURL" display="una URL per accedere ai dati">
                         <label>URL per accedere ai dati</label>
@@ -810,14 +810,14 @@
          <question id="vocabulary">
             <label>I formati dei dati utilizzano vocabolari o schemate?</label>
             <yesno required="standard"/>
-            <help>formati come CSV, JSON, XML o Turtle usano vocabolari personalizzati o schemate che indicano quali colonne o proprietà contegono i dati.</help>
+            <help>formati come CSV, JSON, XML o Turtle usano vocabolari personalizzati o schemi che indicano quali colonne o proprietà contegono i dati.</help>
          </question>
          <if test="this.vocabulary() === 'true'">
             <question id="schemaDocumentationUrl"
                       display="I vocabolari utilizzati da questi dati sono documentati in">
                <label>Dove si trova la documentazione sui vocabolari usati dai vostri dati?</label>
-               <input type="url" placeholder="URL dello schema della documentazione"/>
-               <requirement level="standard">Dovresti <strong>documentare tutti i vocabolari che usi all'interno dei tuoi dati</strong> in modo che la gente sappia come interpretare quest ainformazione.</requirement>
+               <input type="url" placeholder="URL dello schema di documentazione"/>
+               <requirement level="standard">Dovresti <strong>documentare tutti i vocabolari che usi all'interno dei tuoi dati</strong> in modo che la gente sappia come interpretare questa informazione.</requirement>
             </question>
          </if>
          <question id="codelists">
@@ -839,23 +839,23 @@
          <help>come comunichi con le persone che utilizzano i tuoi dati</help>
          <question id="contactUrl"
                    display="Scopri come contattare qualcuno a proposito di questi dati su">
-            <label>Dove si trovano le istruzioni per contattare qualcuno a cui porre delle domande inerenti a questo pacchetto di dati ?</label>
+            <label>Dove si trovano le istruzioni per contattare qualcuno a cui porre delle domande inerenti a questo pacchetto di dati?</label>
             <input type="url" placeholder="Documentazione sui contatti"/>
             <help>Attribuisci una URL ad una pagina che descrive come fare per contattare qualcuno se si hanno domande su questi dati.</help>
-            <requirement level="pilot">Dovresti <strong>fornire informazioni sui punti di contatto relativi ai tuoi dati per le persone che vogliono inviare delle domande</strong>.</requirement>
+            <requirement level="pilot">Dovresti <strong>fornire informazioni sulla gestione della riservatezza dei contatti relativi a coloro che vogliono inviare domande sui dati pubblicati</strong>.</requirement>
          </question>
          <question id="improvementsContact"
                    display="Scopri come suggerire dei miglioramenti per la pubblicazione dei dati a">
             <label>Dove si possono trovare delle informazioni su come migliorare il modo in cui i tuoi dati vengono pubblicati?</label>
             <input type="url"
                    placeholder="URL sui suggerimenti per migliorare la pubblicazione dei dati"/>
-            <requirement level="pilot">Dovresti <strong>dare delle istruzioni su come proporre miglioramenti</strong> sul modo di pubblicare i dati in modo da poter scoprire di che cosa ha bisogno la gente.</requirement>
+            <requirement level="pilot">Dovresti <strong>dare delle istruzioni su come proporre miglioramenti</strong> sul modo di pubblicare i dati in modo da poter scoprire di che cosa hanno bisogno le persone.</requirement>
          </question>
          <question id="dataProtectionUrl"
                    display="Scopri dove inviare domande sulla privacy">
             <label>Dove si possono inviare domande relative a questioni di privacy?</label>
             <input type="url"
-                   placeholder="Documentazione sul punto di contatto relativi alla privacy"/>
+                   placeholder="Documentazione sulla gestione della riservatezza dei contatti"/>
             <requirement level="pilot">Dovresti <strong>fornire informazioni sul punto di contatto a cui inviare domande relative a questioni di privacy </strong> e la divulgazione di dati personali.</requirement>
          </question>
          <question id="socialMedia">
@@ -869,7 +869,7 @@
                <question id="account"
                          display="Contattare il curatore attraverso questi social media">
                   <label>Attraverso quali profili di social media le persone possono contattarti?</label>
-                  <input type="url" required="required" placeholder="URL del Social Media"/>
+                  <input type="url" required="required" placeholder="URL Social Media"/>
                   <help>Dai la URL dei tuoi profili dei social media, come il tuo profilo su Twitter o Facebook.</help>
                </question>
             </repeat>
@@ -885,23 +885,23 @@
                       display="Scopri come richiedere correzioni dei dati su">
                <label>Dove possiamo trovare il modo di richiedere correzioni sui tuoi dati?</label>
                <input type="url" placeholder="URL sulle istruzioni inerenti alle correzioni"/>
-               <help>Dai una URL dove le persone possono segnalare degli errori che hanno trovato nei tuoi dati.</help>
+               <help>Dai una URL dove le persone possono segnalare li errori che hanno trovato nei tuoi dati.</help>
                <requirement level="standard">Dovresti <strong>fornire istruzioni su come segnalare gli errori</strong> nei dati.</requirement>
             </question>
             <question id="correctionDiscovery"
-                      display="Scopri come ottenere le notificazioni sulle correzioni fatte ai dati">
-               <label>Dov'è possibile ottenere informazioni sulle notificazioni delle correzioni fatte ai tuoi dati?</label>
+                      display="Scopri come ottenere le notifiche sulle correzioni fatte ai dati">
+               <label>Dov'è possibile ottenere informazioni sulle notifiche delle correzioni fatte ai tuoi dati?</label>
                <input type="url"
-                      placeholder="URL sulle notificazioni relative alle correzioni fatte sui dati"/>
-               <help>Dai una URL in cui si descrive come le notificazioni sulle correzioni vengono condivise con la gente.</help>
+                      placeholder="URL sulle notifiche relative alle correzioni fatte sui dati"/>
+               <help>Dai una URL in cui si descrive come le notifiche sulle correzioni vengono condivise con la gente.</help>
                <requirement level="standard">Dovresti <strong>fornire una mailing list o un flusso d'informazioni sugli aggiornamenti fatti</strong> così che le persone possano utilizzarli per mantenere aggiornate le loro copie dei dati.</requirement>
             </question>
          </if>
          <question id="engagementTeam">
-            <label>Hai qualcuno che costruisce attivamente una comunità attorno a questi dati?</label>
+            <label>Hai qualcuno che costruisce attivamente una comunità intorno a questi dati?</label>
             <yesno/>
-            <help more="http://theodi.org/guide/engaging-reusers">Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone ad utilizzare i dati.</help>
-            <requirement level="exemplar">Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un uso più ampio.</requirement>
+            <help more="http://theodi.org/guide/engaging-reusers">Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone a utilizzare i dati.</help>
+            <requirement level="exemplar">Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un utilizzo più ampio.</requirement>
          </question>
          <if test="this.engagementTeam() === 'true'">
             <question id="engagementTeamUrl" display="L'impegno della comunità è gestito da">

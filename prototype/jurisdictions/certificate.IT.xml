@@ -2,11 +2,11 @@
 <questionnaire version="0.9" status="alpha" jurisdiction="IT" xml:lang="it">
    <help>
       <p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p>
-      <p>Quando rispondi a queste domande si dimostra la volontà a rispettare le normative pertinenti. Dovresti anche controllare quali ulteriori leggi e politiche risultano applicabili al settore in oggetto.</p>
+      <p>Quando rispondi a queste domande dimostra la tua volontà a rispettare le normative pertinenti. Dovresti controllare ulteriormente quali leggi e politiche risultano applicabili al settore in oggetto.</p>
       <p><strong>Non hai bisogno di rispondere a tutte le domande per ottenere un certificato</strong> Basta rispondere a quelle che puoi.</p>
    </help>
    <group id="legal">
-      <label>Informazioni Legali</label>
+      <label>Informazioni legali</label>
       <help>Diritti, licenze e privacy</help>
       <group id="ownership">
          <label>Diritti</label>
@@ -25,7 +25,7 @@
                   <label>non sei sicuro di disporre dei diritti necessari per pubblicare questi dati come dati aperti</label>
                </option>
                <option value="complicated">
-                  <label>i diritti su questi dati sono complicati o poco chiari</label>
+                  <label>i diritti su questi dati risultano complicati o poco chiari</label>
                </option>
             </radioset>
             <help>Se la tua organizzazione non ha originariamente creato o raccolto questi dati, allora è possibile che tu non abbia il diritto di pubblicarli. Nel caso non fossi sicuro, controlla con chi detiene la proprietà dei dati, perché è necessario il permesso per pubblicarli.</help>
@@ -57,12 +57,12 @@
                   <yesno required="required"/>
                   <help>Un estratto o una minima parte dei dati prodotti da qualcun altro significa ancora che i diritti all'uso di essi possono essere pregiudicati. Potrebbero esserci anche problemi legali se hai analizzato i loro dati per produrre nuovi risultati.</help>
                   <if test="this.crowdsourced() === 'false'">
-                     <requirement test="this.thirdPartyOrigin() === 'true'">Hai indicato che questi dati non sono stati originariamente creati o raccolti da te, non sono raccolti su base volontaria/crowdsourced, quindi devono necessariamente essere stati estratti da o rielaborati usando altre fonti di dati.</requirement>
+                     <requirement test="this.thirdPartyOrigin() === 'true'">Hai indicato che questi dati non sono stati originariamente creati o raccolti da te, non sono raccolti su base volontaria, quindi devono necessariamente essere stati estratti da o rielaborati usando altre fonti di dati.</requirement>
                   </if>
                </question>
                <if test="this.thirdPartyOrigin() === 'true'">
                   <question id="thirdPartyOpen" display="Questi dati sono creati da">
-                     <label>Sono <em>tutti </em> le fonti di questi dati già pubblicate come dati aperti?</label>
+                     <label>Sono <em>tutte </em> le fonti di questi dati già pubblicate come dati aperti?</label>
                      <yesno required="required" yes="fonti di dati aperti"/>
                      <help>Hai il permesso di ripubblicare i dati di qualcun altro se sono rilasciati già sotto una licenza open data o se i loro diritti sono decaduti o sono stati oggetto di rinuncia. Se parte di questi dati non ha queste caratteristiche allora hai bisogno di consulenza legale prima che tu possa pubblicarli.</help>
                      <if test="this.thirdPartyOpen() === 'false'">
@@ -75,7 +75,7 @@
                   <yesno required="required" yes="su base volontaria"/>
                   <help>se i dati includono informazioni fornite da persone esterne all'organizzazione, è necessario ottenere il permesso per pubblicare i loro contributi come dati aperti</help>
                   <if test="this.thirdPartyOrigin() === 'false'">
-                     <requirement test="this.crowdsourced() === 'true'">Hai indicato che i dati non sono stati originariamente creati o raccolte da te, e che non sono stato estratti o rielaborati da altri dati, quindi devono essere stati raccolti su base volontaria.</requirement>
+                     <requirement test="this.crowdsourced() === 'true'">Hai indicato che i dati non sono stati originariamente creati o raccolti da te, e che non sono stati estratti o rielaborati da altri dati, ma sono stati raccolti su base volontaria (crowdsourced).</requirement>
                   </if>
                </question>
                <if test="this.crowdsourced() === 'true'">
@@ -89,14 +89,14 @@
                                display="La Contributor Licence Agreement (Accordo di licenza del contributore) è in">
                         <label>Dov'è il Contributor Licence Ageement (CLA)?</label>
                         <input type="url"
-                               placeholder="la URL del Contributor Licence Agreement (Accordo di licenza del contributore)"
+                               placeholder="La URL del Contributor Licence Agreement (Accordo di licenza del contributore)"
                                required="required"/>
-                        <help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">inserisci un link a un accordo che dimostra che i contributori acconsentono al riutilizzo dei loro dati. Un CLA trasferirà i diritti del contributore stesso a te, lo esenterà dai suoi diritti, o ti concederà in licenza i dati in modo che tu li possa pubblicare.</help>
+                        <help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Inserisci un link a un accordo che dimostra che i contributori acconsentono al riutilizzo dei loro dati. Un CLA trasferirà i diritti del contributore stesso a te, lo esenterà dai suoi diritti, o ti concederà in licenza i dati in modo che tu li possa pubblicare.</help>
                      </question>
                      <question id="cldsRecorded">
                         <label>Tutti i contributori hanno accettato il Contributor Licence Agreement (CLA)?</label>
                         <yesno required="required"/>
-                        <help>Controlla che tutti i collaboratori si impegnano a un CLA prima di riutilizzare o ripubblicare i loro contributi. Si consiglia di tenere un registro di chi ha dato contributi e se non sono d'accordo per il CLA.</help>
+                        <help>Controlla che tutti i collaboratori siano d'accordo sul CLA prima di riutilizzare o ripubblicare i loro contributi. Si consiglia di tenere un registro su chi ha fornito i contributi e sulla loro accettazione o meno del CLA.</help>
                         <requirement>È necessario per te ottenere <strong>che i contributori accettino un Contributor Licence Agreement</strong> (CLA) che ti conferisce il diritto di pubblicare il loro lavoro come open data.</requirement>
                      </question>
                   </if>
@@ -108,14 +108,14 @@
                       display="Le fonti di questi dati sono descritti in">
                <label>Dove descrivi le fonti di questi dati?</label>
                <input type="url" placeholder="URL Documentazione Fonti dei dati"/>
-               <help>Inserisci un'URL che documenti le fonti dalle quali i dati sono stati acquisiti da (la loro provenienza) e i diritti sotto cui si pubblicano i dati. Questo aiuta le persone a capire la provenienza dei dati.</help>
+               <help>Inserisci una URL che documenti le fonti dalle quali i dati sono stati acquisiti (la loro provenienza) e i diritti sotto cui si pubblicano i dati. Questo aiuta le persone a capire la provenienza dei dati.</help>
                <requirement level="pilot">Dovresti documentare <strong>la provenienza dei dati e le condizioni d'uso sotto cui si pubblicano</strong>, permettendo così alle persone di poter utilizzare parti che provenivano da soggetti terzi.</requirement>
             </question>
             <if test="this.sourceDocumentationUrl() !== ''">
                <question id="sourceDocumentationMetadata" display="Il curatore ha pubblicato">
                   <label>la documentazione sulle fonti di questi dati è fornita anche in formato processabile dai computer?</label>
                   <yesno yes="dati processabili dai computer sulle fonti di questi dati"/>
-                  <help>Informazioni sulle fonti dei dati dovrebbero essere leggibili in modo che le persono possano comprenderle che, così come in un formato di metadati che i computer siano in grado di elaborare. Quando tutti fanno così, ciò aiut agli altri a scoprire come utilizzare gli stessi dati aperti possono essere utilizzati e giustificano la loro pubblicazione in corso.</help>
+                  <help>Le informazioni sulle fonti dei dati dovrebbero essere leggibili in modo che le persone possano comprenderle, e anche in un formato di metadati che i computer siano in grado di elaborare. Se tutti procedono in questo modo, si aiutano altri a scoprire come gli stessi dati aperti possono essere utilizzati e ne giustificano la pubblicazione in corso.</help>
                   <requirement level="standard">Dovresti <strong>includere dati in formato processabile dai computer sulle fonti di questi dati</strong>.</requirement>
                </question>
             </if>
@@ -147,12 +147,12 @@
          </question>
          <if test="this.dataLicence() === 'na'">
             <question id="dataNotApplicable"
-                      display="Questi dati non sono concesso in licenza in quanto">
+                      display="Questi dati non hanno licenza perché">
                <label>Perché non si applica una licenza a questi dati?</label>
                <radioset required="required">
                   <option value="norights" display="non ci sono diritti in esso">
                      <label>non ci sono diritti d'autore o diritti su banche dati su questi dati</label>
-                     <help>i diritti sulle banche dati si applicano se hai impiegato notevoli sforzi per la loro raccolta, verifica o presentazione. Non si possono rivendicare diritti sulle banche di dati se, ad esempio, i dati vengono creati da zero, presentati in modo strutturato, e non verificati. Hai diritto d'autore, se hai selezionano gli elementi dei dati o li hai organizzati in modo non ovvio.</help>
+                     <help>i diritti sulle banche dati si applicano se hai impiegato notevoli sforzi per la loro raccolta, verifica o presentazione. Non si possono rivendicare diritti sulle banche di dati se, ad esempio, i dati vengono creati da zero, presentati in modo strutturato, e non verificati. Hai diritto d'autore, se hai selezionato gli elementi dei dati o li hai organizzati in modo non ovvio.</help>
                   </option>
                   <option value="expired" display="i diritti sono scaduti">
                      <label>diritto d'autore e diritti su banche dati sono scaduti</label>
@@ -179,7 +179,7 @@
                   <question id="dataOtherWaiver" display="Diritti sui dati sono stati revocati con">
                      <label>Dove è la rinuncia dei diritti sui dati?</label>
                      <input type="url" required="required" placeholder="URL Rinuncia"/>
-                     <help>Fornisci un URL per la rinuncia disponibile al pubblico così che le persone possano verificare la gente può verificare la revoca dei diritti sui dati.</help>
+                     <help>Fornisci una URL per la rinuncia disponibile al pubblico così che si possa verificare la rinuncia ai diritti sui dati.</help>
                   </question>
                </if>
             </if>
@@ -193,7 +193,7 @@
             <question id="otherDataLicenceURL" display="Questa licenza è a">
                <label>Dove è la licenza?</label>
                <input type="url" required="required" placeholder="URL Altra licenza"/>
-               <help>Fornisci un URL per la licenza, affinché si possa leggere sul Certificato Open Data e verificare che sia disponibile al pubblico.</help>
+               <help>Fornisci una URL per la licenza, affinché si possa leggere sul Certificato Open Data e verificare che sia disponibile al pubblico.</help>
             </question>
             <question id="otherDataLicenceOpen">
                <label>la licenza è una licenza aperta?</label>
@@ -211,7 +211,7 @@
                   <help>Non vi è alcun diritto d'autore su informazioni oggettive. Se i dati non contengono alcun contenuto creato attraverso sforzo intellettuale, non ci sono diritti sul contenuto.</help>
                </option>
                <option value="samerights" display="">
-                  <label>sì, ei diritti sono tutti in mano alla stessa persona o organizzazione</label>
+                  <label>sì, e i diritti sono tutti in mano alla stessa persona o organizzazione</label>
                   <help>Scegli questa opzione se il contenuto dei dati è stato creato interamente da o trasferito alla stessa persona o organizzazione.</help>
                </option>
                <option value="mixedrights" display="">
@@ -224,7 +224,7 @@
             <question id="explicitWaiver" display="il contenuto è stato">
                <label>è il contenuto dei dati contrassegnati come dominio pubblico?</label>
                <yesno yes="contrassegnato come pubblico dominio"/>
-               <help>Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark </a>. Questo aiuta la gente a scoprire che può essere liberamente riutilizzato.</help>
+               <help>Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark </a>. Questo aiuta le persone a capire che può essere liberamente riutilizzato.</help>
                <requirement level="standard">Dovresti<strong>contrassegnare contenuti di dominio pubblico come dominio pubblico</strong> in modo che le persone sappiano di poterli riutilizzare.</requirement>
             </question>
          </if>
@@ -239,7 +239,7 @@
                   <option value="na" display="">Non applicabile</option>
                   <option value="other" display="">Altro...</option>
                </select>
-               <help>Ricorda che chi spende sforzo intellettuale nella creazione di contenuti acquisisce automaticamente i diritti su di essi, ma i contenuti creativi non includono elementi concretii. Per questo è necessaria una rinuncia o una licenza che dimostri che essi possono utilizzare il contenuto e che spieghi come possono farlo legalmente. Elenchiamo le licenze più comuni qui, se non vi fosse alcun diritto d'autore sul contenuto, se fosse scaduto, se non si fosse verificato atto di rinuncia, scegli 'Non applicabile'.</help>
+               <help>Ricorda che chi impiega sforzo intellettuale nella creazione di contenuti acquisisce automaticamente i diritti su di essi, ma i contenuti creativi non includono elementi concreti. Per questo è necessaria una rinuncia o una licenza che dimostri che essi possono utilizzare il contenuto e che spieghi come possono farlo legalmente. Elenchiamo le licenze più comuni qui, se non vi fosse alcun diritto d'autore sul contenuto, se fosse scaduto, se non si fosse verificato atto di rinuncia, scegli 'Non applicabile'.</help>
             </question>
             <if test="this.contentLicence() === 'na'">
                <question id="contentNotApplicable"
@@ -252,7 +252,7 @@
                      </option>
                      <option value="expired" display="il diritto di autore è scaduto">
                         <label>il diritto di autore è scaduto</label>
-                        <help>IL diritto d'autore dura per un determinato periodo di tempo, si basa sul numero di anni dopo la morte del suo creatore o la sua pubblicazione. Si dovrebbe verificare se il contenuto è stato creato o pubblicato, perché se era molto tempo fa, il copyright potrebbe essere scaduto.</help>
+                        <help>Il diritto d'autore dura per un determinato periodo di tempo, si basa sul numero di anni dopo la morte del suo creatore o la sua pubblicazione. Si dovrebbe verificare se il contenuto è stato creato o pubblicato, perché se era molto tempo fa, il copyright potrebbe essere scaduto.</help>
                      </option>
                      <option value="waived" display="">
                         <label>Il diritto d'autore è stato revocato</label>
@@ -290,7 +290,7 @@
                <question id="otherContentLicenceURL" display="La licenza sul contenuto è">
                   <label>Dove è la licenza?</label>
                   <input type="url" required="required" placeholder="URL licenza"/>
-                  <help>Dare un URL per la patente, così la gente può vedere sul vostro Apri Certificato di dati e verificare che sia disponibile al pubblico.</help>
+                  <help>Inserisci una URL per la licenza, così che possa essere visionata sul vostro Certificato Open Data e si possa controllare che sia pubblicamente disponibile.</help>
                </question>
                <question id="otherContentLicenceOpen">
                   <label>La licenza è una licenza aperta?</label>
@@ -317,7 +317,7 @@
                <label>La tua dichiarazione sui diritti include versioni processabili dai computer di</label>
                <checkboxset>
                   <option value="dataLicense" display="la sua licenza sui dati">
-                     <label>Licenza di dati</label>
+                     <label>Licenza sui dati</label>
                      <requirement level="standard">È necessario fornire <strong>dati processabili dai computer nella tua dichiarazione dei diritti sulla licenza</strong> per questi dati, in modo che gli strumenti possono automaticamente utilizzarli.</requirement>
                   </option>
                   <option value="contentLicense" display="la sua licenza sul contenuto">
@@ -333,7 +333,7 @@
                      <requirement level="standard">Dovresti fornire <strong>dati in formato processabile dai computer nella tua dichiarazione dei diritti circa l'URL dove collegarsi quando stai citando questi dati</strong>, in modo che gli strumenti automatizzati possano utilizzarli.</requirement>
                   </option>
                   <option value="copyrightNotice"
-                          display="un avviso di ditirro d'autore o dichiarazione">
+                          display="un avviso di diritto d'autore o dichiarazione">
                      <label>avviso o dichiarazione di diritto d'autore</label>
                      <requirement level="exemplar">Dovresti fornire <strong>dati in formato processabile dai computer nella tua dichiarazione dei diritti circa la dichiarazione o avviso di copyright su questi dati</strong>, in modo che strumenti automatizzati possano utilizzarli.</requirement>
                   </option>
@@ -355,7 +355,7 @@
                      <requirement level="exemplar">Dovresti fornire <strong>dati in formato processabile dai computer nella tua dichiarazione dei diritti del titolare dei diritti sulla base di dati</strong>, in modo che strumenti automatizzati possano utilizzarli.</requirement>
                   </option>
                </checkboxset>
-               <help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">È buona prassi incorporare le informazioni sui diritti in formati leggibili dall'elaboratore in modo tale da permettere agli utenti di attribuirti automaticamente questi dati quando li utilizzano.</help>
+               <help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">È buona prassi incorporare le informazioni sui diritti in formati leggibili dalle macchine in modo tale da permettere agli utenti di attribuirti automaticamente questi dati quando li utilizzano.</help>
             </question>
          </if>
       </group>
@@ -370,7 +370,7 @@
                   <help>Ricorda che gli individui possono essere ancora identificati, anche se i dati non li riguardano direttamente. Ad esempio, i dati sul flusso del traffico stradale se combinati con i modelli di pendolarismo di un singolo individuo potrebbero rivelare informazioni su quella persona.</help>
                </option>
                <option value="summarised" display="dati aggregati">
-                  <label>no, i dati sono stati resi anonimi aggregando i singoli in gruppi, in modo che non possano essere distinto da altre persone nel gruppo</label>
+                  <label>no, i dati sono stati resi anonimi aggregando i singoli in gruppi, in modo che non possano essere distinti da altre persone nel gruppo</label>
                   <help>controlli informativi statistici possono aiutare a fare in modo che gli individui non siano identificabili all'interno di dati aggregati.</help>
                </option>
                <option value="individual"
@@ -383,7 +383,7 @@
          <if test="this.dataPersonal() === 'summarised'">
             <question id="statisticalAnonAudited"
                       display="Il processo di anonimizzazione è stato">
-               <label>Il vostro processo di anonimizzazione è stato indipendentemente sottoposto a revisione?</label>
+               <label>Il vostro processo di anonimizzazione è stato sottoposto a revisione indipendente?</label>
                <yesno yes="sottoposto a revisione indipendente"/>
                <requirement level="standard">Dovresti <strong>assicurarti che il tuo processo di anonimizzazione sia indipendente</strong> per accertasri che il rischio di identificazione per i singoli sia ridotto.</requirement>
             </question>
@@ -398,7 +398,7 @@
                <question id="lawfulDisclosure"
                          display="Per legge, questi dati sui singoli individui">
                   <label>Sei autorizzato a pubblicare questi dati sui singoli individui nei modi richiesti e consentiti dalla legge?</label>
-                  <yesno yes="deve essere pubblicati"/>
+                  <yesno yes="devono essere pubblicati"/>
                   <requirement level="pilot">Dovresti <strong>pubblicare dati personali senza anonimizzazione se sei autorizzato a farlo come richiesto e consentito dalla legge</strong>.</requirement>
                </question>
                <if test="this.lawfulDisclosure() === 'true'">
@@ -422,22 +422,22 @@
                   <question id="riskAssessmentUrl"
                             display="La valutazione dei rischi è pubblicata in">
                      <label>Dove è pubblicata la tua valutazione di rischio?</label>
-                     <input type="url" placeholder="URL sulla valutazione del rischio"/>
+                     <input type="url" placeholder="URL sulla valutazione di rischio"/>
                      <help>Inserisci un URL da dove le persone possono controllare come hai valutato i rischi per la privacy dei singoli individui. Questo può essere redatto o riassunto se contiene informazioni sensibili.</help>
                      <requirement level="standard">Dovresti <strong>pubblicare la tua valutazione del rischio privacy</strong>, in modo che le persone capiscano come è stato valutato il rischio di divulgazione dei dati.</requirement>
                   </question>
                   <if test="this.riskAssessmentUrl() !== ''">
-                     <question id="riskAssessmentAudited" display="La valutazione dei rischi è stata">
-                        <label>La vostra valutazione di rischi è stata oggetto di revisione indipendente?</label>
+                     <question id="riskAssessmentAudited" display="La valutazione di rischio è stata">
+                        <label>La vostra valutazione di rischio è stata oggetto di revisione indipendente?</label>
                         <yesno yes="sottoposto a revisione indipendente"/>
-                        <help>È buona norma controllare se la vostra valutazione dil rischio è stata effettuata correttamente. Verifiche indipendenti da parte di specialisti o di terzi tendono ad essere più rigorose e imparziali.</help>
+                        <help>È buona norma controllare se la vostra valutazione di rischio è stata effettuata correttamente. Verifiche indipendenti da parte di specialisti o di terzi tendono a essere più rigorose e imparziali.</help>
                         <requirement level="standard">Dovresti <strong>sottoporre la tua valutazione del rischio ad una revisione indipendente</strong> per assicurarti che sia stata effettuata correttamente.</requirement>
                      </question>
                   </if>
                   <if test="this.lawfulDisclosure() !== 'true'">
                      <question id="individualConsentURL"
-                            display="Gli individui affetti da questi dati ricevono questa informativa sulla privacy">
-                        <label>Dov'è l'informativa sulla privacy per gli individui affetti dai tuoi dati?</label>
+                            display="I singoli individui affetti da questi dati ricevono questa informativa sulla privacy">
+                        <label>Dov'è l'informativa sulla privacy per i singoli individui affetti dai tuoi dati?</label>
                         <input type="url" placeholder="URL Informativa Privacy"/>
                         <help>Quando si raccolgono dati relativi a singoli individui persone è necessario comunicare loro come verranno utilizzati i dati. Le persone che utilizzano i tuoi dati ne hanno bisogno per assicurarsi che siano in conformità con la legislazione sulla protezione dei dati.</help>
                         <requirement level="pilot">Dovresti <strong>comunicare per quali ragioni le persone menzionate nei tuoi dati hanno dato il loro consenso per l'utilizzo dei loro dati</strong> in modo che la gente possa utilizzare i dati per le stesse finalità conformemente alla normativa sulla protezione dei dati.</requirement>
@@ -452,14 +452,14 @@
                                display="Il responsabile della protezione dei dati">
                         <label>Li avete coinvolti nel processo di valutazione del rischio?</label>
                         <yesno yes="è stato consultato"/>
-                        <requirement level="pilot">Dovresti <strong>coinvolgere la persona responsabile per la protezione dei dati</strong> nella propria organizzazione prima di pubblicare questi dati.</requirement>
+                        <requirement level="pilot">Dovresti <strong>coinvolgere la persona responsabile per la protezione dei dati</strong> nella tua organizzazione prima di pubblicare questi dati.</requirement>
                      </question>
                   </if>
-                  <question id="anonymisationAudited" display="L' anonimizzazione dei dati è stata">
+                  <question id="anonymisationAudited" display="L'anonimizzazione dei dati è stata">
                      <label>Il vostro approccio all'anonimizzazione è stato sottoposto a una revisione indipendente?</label>
                      <yesno yes="sottoposto a revisione indipendente"/>
-                     <help>È buona norma assicurarsi che il processo di rimozione dei dati personali identificabili funzioni correttamente. Verifiche indipendenti effettuate da specialisti o da terzi tendono ad essere più rigorose e imparziali.</help>
-                     <requirement level="standard">Dovresti <strong>assicurarti che il processo di anonimizzazione sia sottoposto a verifica indipendente</strong> da parte di un esperto per assicurarsi che risulti appropriato per i tuoi dati.</requirement>
+                     <help>È buona norma assicurarsi che il processo di rimozione dei dati personali identificabili funzioni correttamente. Verifiche indipendenti effettuate da specialisti o da terzi tendono a essere più rigorose e imparziali.</help>
+                     <requirement level="standard">Dovresti <strong>assicurarti che il processo di anonimizzazione sia sottoposto a verifica indipendente</strong> da parte di un esperto per assicurarti che risulti appropriato per i tuoi dati.</requirement>
                   </question>
                </if>
             </if>
