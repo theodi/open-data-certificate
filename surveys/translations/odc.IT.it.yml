@@ -1,4 +1,4 @@
-﻿title: "IT"
+title: "IT"
 full_title: "Italy"
 description: "<p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p><p>Quando rispondi a queste domande dimostra la tua volontà a rispettare le normative pertinenti. Dovresti controllare ulteriormente quali leggi e politiche risultano applicabili al settore in oggetto.</p><p><strong>Non hai bisogno di rispondere a tutte le domande per ottenere un certificato</strong> Basta rispondere a quelle che puoi.</p>"
 survey_sections:
@@ -276,7 +276,7 @@ questions:
   explicitWaiver:
     text: "è il contenuto dei dati contrassegnati come dominio pubblico?"
     text_as_statement: "il contenuto è stato"
-    help_text: "Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark </a>. Questo aiuta le  persone a capire che può essere liberamente riutilizzato."
+    help_text: "Il contenuto può essere contrassegnato come di pubblico dominio utilizzando il <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark </a>. Questo aiuta le persone a capire che può essere liberamente riutilizzato."
     answers:
       a_false:
         text: no
@@ -543,7 +543,7 @@ questions:
   listing:
     text: "Dove sono elencati?"
     text_as_statement: "I dati fanno parte di questa collezione"
-    help_text: "Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, dati.gov.it (se si tratta di dati del settore pubblico italiano ), dati.istat.it (se si tratta di dati dell'ISTAT) o una URL per i risultati del motore di ricerca."
+    help_text: "Attribuisci una URL che specifichi dove si trovano i dati. Ad esempio, dati.gov.it (se si tratta di dati del settore pubblico italiano), dati.istat.it (se si tratta di dati dell'ISTAT) o una URL per i risultati del motore di ricerca."
     answers:
       a_1:
         text: "Elenco di URL"
@@ -1252,12 +1252,12 @@ labels:
   services:
     title: "Servizi"
     help_text: "come dai accesso agli strumenti necessari per poter lavorare con i tuoi dati"
-# Informazioni generali Requisiti
+# Informazioni generali Requirements
   pilot_1:
     text: "Dovresti avere <strong>una pagina web che dia accesso alla documentazione</strong> sui tuoi open data così da capirne il contesto, contenuto ed utilità."
   basic_1:
     text: "Devi avere <strong>una pagina web che dia accesso alla documentazione</strong> sui tuoi open data così che la gente possa utilizzarli"
-# Informazioni Legali Requisiti
+# Informazioni legali Requirements
   standard_1:
     text: "Dovresti avere un <strong>chiaro titolo legale per la pubblicazione di questi dati</strong>."
   basic_2:
@@ -1432,13 +1432,13 @@ labels:
     text: "Dovresti <strong>fornire il percorso che stabilisce la provenienza dei tuoi dati in un formato processabile dai computer</strong> in modo che le persone possano risalire al modo in cui i tuoi dati sono stati elaborati."
   exemplar_20:
     text: "Dovresti <strong>descrivere il modo in cui le persone possono controllare che i dati ricevuti siano gli stessi di quelli che hai pubblicato</strong> in modo che possano fidarsi."
-# Informazioni aggiuntive Requisiti
+# Informazioni aggiuntive Requirements
   standard_36:
     text: "Dovresti <strong>includere un titolo che sia processabile dai computer nella tua documentazione</strong> in modo che la gente sappia come farvi riferimento."
   standard_37:
     text: "Dovresti <strong>includere nella tua documentazione una descrizione dei dati che sia processabile dal computer</strong> in modo che la gente sappia che cosa contiene."
   standard_38:
-    text: "Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato  che sia processabile dal computer</strong> in modo che le persone siano a conoscenza della tempestività della pubblicazione."
+    text: "Dovresti <strong>includere nella tua documentazione la data di pubblicazione dei dati in un formato che sia processabile dal computer</strong> in modo che le persone siano a conoscenza della tempestività della pubblicazione."
   standard_39:
     text: "Dovresti <strong>includere nella tua documentazione l'ultima data di modifica dei dati in un formato che sia processabile dai computer </strong> in modo che le persone possano accedere ai dati più recenti."
   standard_40:
