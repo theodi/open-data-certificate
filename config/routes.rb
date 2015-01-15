@@ -8,6 +8,7 @@ OpenDataCertificate::Application.routes.draw do
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
     get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+    get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
 
     resources :jurisdictions, :only => :index
 
