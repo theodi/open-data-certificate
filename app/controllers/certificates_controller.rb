@@ -3,11 +3,10 @@ class CertificatesController < ApplicationController
 
   before_filter(:except => [:legacy_show, :certificate_from_dataset_url]) { get_certificate }
   before_filter(:only => [:show]) { alternate_formats [:json] }
+  before_filter(:only => [:show, :badge]) { readable? }
   before_filter(:only => [:badge]) { log_embed }
 
   def show
-    raise ActiveRecord::RecordNotFound if cannot?(:read, @certificate)
-
     respond_to do |format|
       format.html
       format.json
@@ -111,15 +110,23 @@ class CertificatesController < ApplicationController
 
     def get_certificate
       if params[:id]
-        @certificate = Dataset.find(params[:dataset_id]).certificates.find(params[:id])
+        @certificate = get_dataset.certificates.find(params[:id])
       else
-        @certificate = Dataset.find(params[:dataset_id]).certificate
+        @certificate = get_dataset.certificate
       end
+    end
+
+    def get_dataset
+      @dataset = Dataset.find(params[:dataset_id])
+    end
+
+    def readable?
+      raise ActiveRecord::RecordNotFound unless @certificate && can?(:read, @certificate)
     end
 
     def log_embed
       unless request.referer =~ /https?:\/\/#{request.host_with_port}./
-        @certificate.dataset.register_embed(request.referer)
+        get_dataset.register_embed(request.referer)
       end
     end
 

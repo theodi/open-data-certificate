@@ -204,6 +204,16 @@ class CertificatesControllerTest < ActionController::TestCase
     end
   end
 
+  test "creates an embed stat when default badge is embeded" do
+    @request.env['HTTP_REFERER'] = 'http://example.com'
+
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+
+    assert_difference ->{cert.dataset.embed_stats.count}, 1 do
+      get :badge, {dataset_id: cert.dataset.id}
+    end
+  end
+
   test "doesn't create a stat when there is no referrer" do
     @request.env['HTTP_REFERER'] = nil
 
@@ -211,6 +221,22 @@ class CertificatesControllerTest < ActionController::TestCase
 
     assert_no_difference ->{cert.dataset.embed_stats.count} do
       get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id}
+    end
+  end
+
+  test "doesn't create a stat when unpublished" do
+    @request.env['HTTP_REFERER'] = 'http://example.com'
+
+    cert = FactoryGirl.create(:certificate_with_dataset)
+
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id}
     end
   end
 
@@ -221,6 +247,9 @@ class CertificatesControllerTest < ActionController::TestCase
 
     assert_no_difference ->{cert.dataset.embed_stats.count} do
       get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+    end
+    assert_no_difference ->{cert.dataset.embed_stats.count} do
+      get :badge, {dataset_id: cert.dataset.id}
     end
   end
 
@@ -271,6 +300,12 @@ class CertificatesControllerTest < ActionController::TestCase
     get :certificate_from_dataset_url, :datasetUrl => dataset.documentation_url
 
     assert_response :not_found
+  end
+
+  test "badge returns not found if certificate is draft" do
+    cert = FactoryGirl.create(:certificate_with_dataset)
+    get :badge, {dataset_id: cert.dataset.id}
+    assert_response 404
   end
 
 end
