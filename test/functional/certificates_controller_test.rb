@@ -273,4 +273,10 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
+  test "badge returns not found if certificate is draft" do
+    cert = FactoryGirl.create(:certificate_with_dataset)
+    get :badge, {dataset_id: cert.dataset.id}
+    assert_response 404
+  end
+
 end
