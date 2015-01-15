@@ -15,7 +15,7 @@ class ODIBot
       Rails.cache.write(@url, code, expires_in: 5.minute)
     end
     code
-  rescue SocketError
+  rescue SocketError, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error
     0
   end
 
