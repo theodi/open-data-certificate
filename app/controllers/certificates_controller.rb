@@ -3,11 +3,10 @@ class CertificatesController < ApplicationController
 
   before_filter(:except => [:legacy_show, :certificate_from_dataset_url]) { get_certificate }
   before_filter(:only => [:show]) { alternate_formats [:json] }
+  before_filter(:only => [:show, :badge]) { readable? }
   before_filter(:only => [:badge]) { log_embed }
 
   def show
-    raise ActiveRecord::RecordNotFound if cannot?(:read, @certificate)
-
     respond_to do |format|
       format.html
       format.json
@@ -58,7 +57,6 @@ class CertificatesController < ApplicationController
   end
 
   def badge
-    raise ActiveRecord::RecordNotFound unless @certificate
     respond_to do |format|
       format.js
       format.html { render 'badge', :layout => false }
@@ -120,6 +118,10 @@ class CertificatesController < ApplicationController
 
     def get_dataset
       @dataset = Dataset.find(params[:dataset_id])
+    end
+
+    def readable?
+      raise ActiveRecord::RecordNotFound unless @certificate && can?(:read, @certificate)
     end
 
     def log_embed
