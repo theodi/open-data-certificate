@@ -76,13 +76,24 @@ class DatasetsController < ApplicationController
     @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
-      @datasets = datasets.page params[:page]
-      @links = set_link_header(@datasets)
+      case params[:format] 
+      when 'csv'
+        @datasets = datasets
+      else
+        @datasets = datasets.page params[:page]
+        @links = set_link_header(@datasets)
+      end
 
       respond_to do |format|
         format.html
         format.json
         format.feed { render :layout => false  }
+        format.csv do
+          response.headers["Content-Transfer-Encoding"] = "binary"
+          response.headers['Content-Disposition'] = 'attachment; filename=open-data-certificates.csv'
+          response.content_type = 'text/csv; headers=present'
+          self.response_body = DatasetsCSV.new(@datasets, self)
+        end
       end
     end
   end
