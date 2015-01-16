@@ -1,3 +1,7 @@
+- content_for :meta do
+  - @links.each do |rel, href|
+    = tag(:link, rel: rel, href: href)
+
 - content_for :header_title, @title
 
 - content_for :rss_feed do
