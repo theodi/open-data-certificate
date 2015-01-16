@@ -77,6 +77,7 @@ class DatasetsController < ApplicationController
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
       @datasets = datasets.page params[:page]
+      @links = set_link_header(@datasets)
 
       respond_to do |format|
         format.html
@@ -246,5 +247,17 @@ class DatasetsController < ApplicationController
     params.each do |key, value|
       params.delete(key) unless value.present?
     end
+  end
+
+  def set_link_header(datasets)
+    format = ['*/*', 'html', :html].include?(params[:format]) ? nil : params[:format]
+    links = {first: datasets_url(format: format)}
+    links[:last] = datasets_url(page: datasets.total_pages, format: format) if datasets.total_pages > 1
+    links[:next] = datasets_url(page: datasets.next_page, format: format) unless datasets.last_page?
+    prev_page = datasets.prev_page.to_i > 1 ? datasets.prev_page : nil
+    links[:prev] = datasets_url(page: prev_page, format: format) unless datasets.first_page?
+    link_value = links.map { |rel, href| "<#{href}>; rel=#{rel}" }.join(', ')
+    response.headers['Link'] = link_value
+    links
   end
 end

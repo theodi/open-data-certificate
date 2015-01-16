@@ -558,4 +558,58 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_response :ok
   end
+
+  test "link header is present" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 20*2)
+    get :index
+    assert response.headers['Link']
+  end
+
+  test "first link is present in link header" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 20)
+    get :index
+    links = split_link_header(response.headers['Link'])
+    assert_equal datasets_url, links['first']
+  end
+
+  test "last link is present in link header if more than one page" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 20*3)
+    get :index
+    links = split_link_header(response.headers['Link'])
+    assert_equal datasets_url(page: 3), links['last']
+  end
+
+  test "last link is not present if only one page of results" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 10)
+    get :index
+    links = split_link_header(response.headers['Link'])
+    assert_nil links['last']
+  end
+
+  test "adds format to link urls if format not html" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 20*4)
+    get :index, page: 3, format: :json
+    links = split_link_header(response.headers['Link'])
+    assert_equal datasets_url(format: :json), links['first']
+    assert_equal datasets_url(format: :json, page: 4), links['last']
+    assert_equal datasets_url(format: :json, page: 4), links['next']
+    assert_equal datasets_url(format: :json, page: 2), links['prev']
+  end
+
+  test "does not use page=1 param for first page" do
+    FactoryGirl.create_list(:published_certificate_with_dataset, 20*2)
+    get :index, page: 2, format: :json
+    links = split_link_header(response.headers['Link'])
+    assert_equal datasets_url(format: :json), links['first']
+    assert_equal datasets_url(format: :json), links['prev']
+  end
+
+  def split_link_header(value)
+    links = value.split(',').map(&:strip)
+    links.inject({}) do |h, val|
+      href, rel = val.match(/<(.*?)>;.*rel=(.*)/)[1,2]
+      h[rel] = href
+      h
+    end
+  end
 end
