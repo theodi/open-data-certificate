@@ -5,7 +5,7 @@ def get_user(email)
 end
 
 When(/^I am signed in as "(.*?)"$/) do |email|
-  get_user(email)
+  @user = get_user(email)
   visit '/users/sign_in'
   first('#main #user_email').set(email)
   first('#main #user_password').set("password")
