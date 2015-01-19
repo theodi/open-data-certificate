@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :sent_claims, class_name: 'Claim', foreign_key: 'initiating_user_id'
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
 
-  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction
+  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms
 
   before_save :ensure_authentication_token
 

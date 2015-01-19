@@ -306,6 +306,8 @@ en:
     new_password_info: (leave blank if you don't want to change it)
     already_have_account: Already have an account?
     resend_confirmation_instructions: Resend confirmation instructions
+    agree_to_terms: "I've read and agree to the %{terms_link}."
+    terms: Terms of use
 
   about:
     heading_about: About
