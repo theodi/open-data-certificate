@@ -8,9 +8,14 @@
   = datasets_path(params.merge(format: 'feed'))
 
 %section
-  %p.rss-top.pull-right
-    %i.icon.icon-rss-sign
-    %a{href: yield(:rss_feed)} Subscribe to the RSS feed
+  %ul.rss-top.pull-right
+    %li
+      %i.icon.icon-rss-sign
+      %a{href: yield(:rss_feed)} Subscribe to the RSS feed
+    %li
+      %i.icon.icon-download
+      %a{href: datasets_path(format: 'csv')} Download a CSV
+
   
 
   = form_tag datasets_path, method: 'get' do
