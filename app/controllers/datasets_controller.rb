@@ -261,14 +261,28 @@ class DatasetsController < ApplicationController
   end
 
   def set_link_header(datasets)
-    format = ['*/*', 'html', :html].include?(params[:format]) ? nil : params[:format]
-    links = {first: datasets_url(format: format)}
-    links[:last] = datasets_url(page: datasets.total_pages, format: format) if datasets.total_pages > 1
-    links[:next] = datasets_url(page: datasets.next_page, format: format) unless datasets.last_page?
-    prev_page = datasets.prev_page.to_i > 1 ? datasets.prev_page : nil
-    links[:prev] = datasets_url(page: prev_page, format: format) unless datasets.first_page?
-    link_value = links.map { |rel, href| "<#{href}>; rel=#{rel}" }.join(', ')
-    response.headers['Link'] = link_value
+    links = link_header_params(datasets).map do |rel, page|
+      [rel, datasets_url(page: page, format: export_format)]
+    end
+    response.headers['Link'] = link_header(links)
     links
+  end
+
+  def export_format
+    params[:format] unless ['*/*', 'html', :html].include?(params[:format])
+  end
+
+  def link_header(links)
+    links.map { |rel, href| "<#{href}>; rel=#{rel}" }.join(', ')
+  end
+
+  def link_header_params(datasets)
+    links = {first: nil}
+    links[:last] = datasets.total_pages if datasets.total_pages > 1
+    links[:next] = datasets.next_page unless datasets.last_page?
+    unless datasets.first_page?
+      links[:prev] = datasets.prev_page.to_i > 1 ? datasets.prev_page : nil
+    end
+    return links
   end
 end
