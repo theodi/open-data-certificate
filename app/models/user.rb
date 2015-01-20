@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true 
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -27,34 +29,6 @@ class User < ActiveRecord::Base
 
   def after_password_reset
     confirm!
-  end
-
-  # Coped from https://github.com/plataformatec/devise/blob/v3.0.3/lib/devise/models/database_authenticatable.rb
-  # Sorry but I couldn't add a check around this method as .valid? wipes
-  # other errors from the hash
-  def update_with_password(params, *options)
-    current_password = params.delete(:current_password)
-
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
-
-    # special case for rails handling of boolean check_box
-    agreed_to_terms = params[:agreed_to_terms] == "1"
-
-    result = if valid_password?(current_password) && agreed_to_terms
-      update_attributes(params, *options)
-    else
-      self.assign_attributes(params, *options)
-      self.valid?
-      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid) unless valid_password?(current_password)
-      self.errors.add(:agreed_to_terms, :blank) unless agreed_to_terms?
-      false
-    end
-
-    clean_up_passwords
-    result
   end
 
   def to_s

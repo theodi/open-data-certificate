@@ -101,4 +101,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "Joan Jett <joan@example.com>", user.to_s
   end
 
+  test "can create a user without specifying agreement to terms" do
+    assert User.new(email: 'robyn@example.com', password: 'password').valid?
+  end
+
+  test "can create a user that agreeds to terms" do
+    assert User.new(email: 'robyn@example.com', password: 'password', agreed_to_terms: true).valid?
+  end
+
+  test "not agreeing to terms prevents saving" do
+    refute User.new(email: 'robyn@example.com', password: 'password', agreed_to_terms: false).valid?
+  end
+
 end
