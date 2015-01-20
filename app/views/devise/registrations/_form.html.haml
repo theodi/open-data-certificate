@@ -13,5 +13,9 @@
   .form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => 'span8'
+  .form-field
+    = f.label :agreed_to_terms do
+      = f.check_box :agreed_to_terms
+      = t('authentication.agree_to_terms', terms_link: link_to(t('authentication.terms'), terms_path)).html_safe
 
   = f.submit t("authentication.sign_up"), :class => 'btn btn-primary'
