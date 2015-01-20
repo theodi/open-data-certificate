@@ -779,6 +779,8 @@ hr.heavy {
 
       a {
         color: #fff;
+      }
+      > a {
         padding: 20px;
       }
 
@@ -3795,4 +3797,9 @@ body{
       &.exemplar { background: no-repeat url('/assets/badges-medium/exemplar_level_badge.png'); }
     }
   }
+}
+
+// Rails thinks it knows best but it doesn't
+.check_box .field_with_errors {
+  display: inline;
 }
