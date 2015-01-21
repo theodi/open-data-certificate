@@ -22,6 +22,9 @@
         %li.input-prepend
           %span.add-on= label_tag :level, t('certificates.search.level')
           = select_tag :level, options_for_select(%w[basic pilot standard exemplar].map {|level| [t("certificates.search.levels.#{level}"), level]}, params[:level]), include_blank: true, class: 'input-medium'
+        %li.input-prepend
+          %span.add-on= label_tag :jurisdiction, t('certificates.search.jurisdiction')
+          = select_tag :jurisdiction, options_for_select(Survey.options_for_select, params[:jurisdiction]), include_blank: true
 
 - if @datasets.any?
 
