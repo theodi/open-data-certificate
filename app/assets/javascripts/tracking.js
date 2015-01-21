@@ -23,6 +23,10 @@ var Tracking = (function($){
                 var section = $(this).parent('section').attr('id');
                 ga('send', 'event', 'Questionnaire', 'hide', section);
             });
+        },
+
+        event: function(category, action, label) {
+            ga('send', 'event', category, action, label);
         }
     }
 })(jQuery);

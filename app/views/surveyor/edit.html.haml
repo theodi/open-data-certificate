@@ -101,4 +101,5 @@
   :javascript
     $(document).ready(function() {
       $("input#surveyor_javascript_enabled").val(true);
+      Tracking.event('Questionnaire', 'continue', "#{@response_set.access_code}")
     });
