@@ -29,7 +29,7 @@
       %h3 Your certificate
       .btn-group.btn-group-vertical
         -if response_set.draft? && certificate.expiring_state.nil?
-          = link_to [surveyor, :publish, response_set], method: :post, class: 'btn btn-large btn-block' do
+          = link_to [surveyor, :publish, response_set], method: :post, data: {code: response_set.access_code}, class: 'btn btn-large btn-block publish-certificate' do
             Publish certificate
 
         -if !certificate.expiring_state.nil? && response_set.published?

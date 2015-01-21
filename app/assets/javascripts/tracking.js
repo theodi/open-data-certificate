@@ -23,6 +23,11 @@ var Tracking = (function($){
                 var section = $(this).parent('section').attr('id');
                 ga('send', 'event', 'Questionnaire', 'hide', section);
             });
+
+            $('.btn.publish-certificate').on('click', function(e) {
+                var identifier = $(this).data('code');
+                ga('send', 'event', 'Questionnaire', 'publish', identifier);
+            });
         },
 
         event: function(category, action, label) {
