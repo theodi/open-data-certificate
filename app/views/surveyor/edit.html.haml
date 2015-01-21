@@ -100,7 +100,8 @@
 
 = render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
 
-:javascript
-  $(document).ready(function() {
-    $("input#surveyor_javascript_enabled").val(true);
-  });
+- content_for(:foot_scripts) do
+  :javascript
+    $(document).ready(function() {
+      $("input#surveyor_javascript_enabled").val(true);
+    });
