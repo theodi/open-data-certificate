@@ -38,6 +38,8 @@
                   %span= t('surveyor.click_here_to_finish')
               - else
                 =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
+                - content_for(:modal_content) do
+                  = render :partial => 'surveyor/save_and_finish_modal'
 
     = render :partial => 'status_panel'
     = render :partial => 'shared/flashes'
@@ -92,15 +94,11 @@
 
       = render 'partials/dependents' unless @dependents.empty?
 
-      -# If there were no responses by the user, the cache the blank survey for
-      -# other new users
-      - cache_key = @responses.empty? ? "blank_survey_#{@response_set.survey_id}_#{@response_set.locale}" : @response_set
-      = cache(cache_key) do
+      = cache(survey_cache_key) do
         = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
-= render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
-
-:javascript
-  $(document).ready(function() {
-    $("input#surveyor_javascript_enabled").val(true);
-  });
+- content_for(:foot_scripts) do
+  :javascript
+    $(document).ready(function() {
+      $("input#surveyor_javascript_enabled").val(true);
+    });

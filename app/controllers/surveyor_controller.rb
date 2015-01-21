@@ -188,7 +188,6 @@ class SurveyorController < ApplicationController
     dashboard_path
   end
 
-  private
   def ensure_modifications_allowed
     unless @response_set.modifications_allowed?
       flash[:warning] = t('surveyor.modifications_not_allowed')
@@ -196,7 +195,6 @@ class SurveyorController < ApplicationController
     end
   end
 
-  private
   def set_response_set_and_render_context
     super
     raise ActiveRecord::RecordNotFound unless @response_set.present?
