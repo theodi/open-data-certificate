@@ -5,15 +5,6 @@ module SurveyorHelper
     "#{q.text_for(nil, context, locale)}"
   end
 
-  # gives the requirement text without the  "you must"
-  # or "you should" prefix.
-  #
-  # not locale friendly
-  #
-  def without_instruction(text)
-    text.gsub(/^you (should|must)/i, '').gsub(/\.$/, '')
-  end
-
   # Debug response_for method
   def response_for(response_set, responses, question, answer = nil, response_group = nil)
     return nil unless responses && question && question.id
