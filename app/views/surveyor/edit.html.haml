@@ -38,6 +38,8 @@
                   %span= t('surveyor.click_here_to_finish')
               - else
                 =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
+                - content_for(:modal_content) do
+                  = render :partial => 'surveyor/save_and_finish_modal'
 
     = render :partial => 'status_panel'
     = render :partial => 'shared/flashes'
@@ -94,8 +96,6 @@
 
       = cache(survey_cache_key) do
         = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
-
-= render :partial => 'surveyor/save_and_finish_modal' unless user_signed_in?
 
 - content_for(:foot_scripts) do
   :javascript
