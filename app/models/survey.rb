@@ -167,6 +167,10 @@ class Survey < ActiveRecord::Base
 
   ### /override surveyor methods
 
+  def self.options_for_select
+    available_to_complete.select([:access_code, :full_title]).map { |survey| [survey.full_title, survey.access_code] }
+  end
+
   private
 
   def ensure_requirements_are_linked_to_only_one_question_or_answer

@@ -15,13 +15,16 @@
       = submit_tag t('certificates.search.submit_search'), class: 'btn', name: nil
     .advanced-search
       = button_tag t('certificates.search.advanced_search'), class: 'btn btn-link', type: 'button', name: 'advanced-search'
-      %ul.options.hidden
+      %ul.options{class: ('hidden' unless params.values_at(:datahub, :level, :jurisdiction).any?)}
         %li.input-prepend
           %span.add-on= label_tag :datahub, t('certificates.search.datahub')
           = text_field_tag :datahub, params[:datahub], placeholder: 'domain', class: 'input-medium'
         %li.input-prepend
           %span.add-on= label_tag :level, t('certificates.search.level')
           = select_tag :level, options_for_select(%w[basic pilot standard exemplar].map {|level| [t("certificates.search.levels.#{level}"), level]}, params[:level]), include_blank: true, class: 'input-medium'
+        %li.input-prepend
+          %span.add-on= label_tag :jurisdiction, t('certificates.search.jurisdiction')
+          = select_tag :jurisdiction, options_for_select(Survey.options_for_select, params[:jurisdiction]), include_blank: true
 
 - if @datasets.any?
 
