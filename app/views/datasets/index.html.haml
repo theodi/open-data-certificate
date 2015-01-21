@@ -15,7 +15,7 @@
       = submit_tag t('certificates.search.submit_search'), class: 'btn', name: nil
     .advanced-search
       = button_tag t('certificates.search.advanced_search'), class: 'btn btn-link', type: 'button', name: 'advanced-search'
-      %ul.options.hidden
+      %ul.options{class: ('hidden' unless params.values_at(:datahub, :level, :jurisdiction).any?)}
         %li.input-prepend
           %span.add-on= label_tag :datahub, t('certificates.search.datahub')
           = text_field_tag :datahub, params[:datahub], placeholder: 'domain', class: 'input-medium'
