@@ -93,7 +93,13 @@ class CertificatesController < ApplicationController
   end
 
   def report
-    @certificate.report!(params[:reasons], params[:email])
+    reasons, email = params.values_at(:reasons, :email)
+    reporter = {
+      email: email,
+      remote_ip: request.remote_ip,
+      user_agent: request.env['HTTP_USER_AGENT']
+    }
+    @certificate.report!(params[:reasons], reporter)
 
     flash[:notice] = I18n.t('certificates.flashes.reported')
     redirect_to dataset_certificate_path(params[:dataset_id], @certificate)
