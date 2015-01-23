@@ -261,6 +261,36 @@ class CertificatesControllerTest < ActionController::TestCase
     end
   end
 
+  test "reporting certificate includes the reasons" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id, reasons: "broken"
+    Delayed::Worker.new.work_off 1
+    assert_match /broken/, ActionMailer::Base.deliveries.last.body
+  end
+
+  test "reporting certificate includes remote ip" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    @request.env['REMOTE_ADDR'] = '255.0.0.1'
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    Delayed::Worker.new.work_off 1
+    assert_match /255.0.0.1/, ActionMailer::Base.deliveries.last.body
+  end
+
+  test "reporting certificate includes user agent" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    @request.env['HTTP_USER_AGENT'] = 'Web Browser/1.0'
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    Delayed::Worker.new.work_off 1
+    assert_match /Web Browser\/1.0/, ActionMailer::Base.deliveries.last.body
+  end
+
+  test "reporting certificate has email as sender" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id, email: "sender@example.net" 
+    Delayed::Worker.new.work_off 1
+    assert ActionMailer::Base.deliveries.last.from.include?("sender@example.net")
+  end
+
   test "finds latest certificate when no :id specified" do
     old_certificate = nil
     Timecop.freeze(3.days.ago) do

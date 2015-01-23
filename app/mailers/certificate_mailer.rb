@@ -5,7 +5,9 @@ class CertificateMailer < ActionMailer::Base
   def report(certificate, reason, reporter)
     @certificate = certificate
     @reason = reason
-    from = reporter.presence || Devise.mailer_sender
+    @reporter = reporter
+    from = @reporter[:email].presence || Devise.mailer_sender
+
     mail(subject: "Reported certificate: #{certificate.name}", to: Devise.mailer_sender, from: from)
   end
   
