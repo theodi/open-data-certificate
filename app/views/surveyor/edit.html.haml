@@ -4,6 +4,7 @@
 - content_for(:header) do
   / header overridden
 - content_for(:main_container_class) {'non-container'}
+- content_for(:body_class) { 'questionnaire' }
 
 / has it's own form, so need it up here
 -@surveys = Survey.available_to_complete

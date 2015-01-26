@@ -28,6 +28,31 @@ var Tracking = (function($){
                 var identifier = $(this).data('code');
                 ga('send', 'event', 'Questionnaire', 'publish', identifier);
             });
+
+            // Track scroll position on page
+            if ($('body.questionnaire').length > 0) {
+                // furthest scroll point
+                var max = 0;
+                // if a section is expanded reset scroll position
+                // as document has gotten much longer
+                $('.survey-section .collapse').on('shown', function(e){
+                    max = 0;
+                });
+                // if scroll position is more than 1.5 times further down the page
+                // log this as a scroll event
+                $(window).on('scroll', function(e) {
+                    var body = $('body').get(0);
+                    var height = (body.scrollHeight - window.innerHeight);
+                    var position = body.scrollTop;
+                    if ( position > 0 && position <= height) {
+                        var scroll = parseInt(100*position/height);
+                        if ( scroll > 1.5*max ) {
+                            ga('send', 'event', 'Questionnaire', 'scroll', 'page', scroll);
+                            max = scroll;
+                        }
+                    }
+                });
+            }
         },
 
         event: function(category, action, label) {
