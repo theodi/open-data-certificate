@@ -26,4 +26,6 @@
 - if flash[:saved_response_set]
   = content_for(:foot_scripts) do
     :javascript
-      Tracking.event('Questionnaire', 'save', "#{flash.delete(:saved_response_set)}");
+      Tracking.event('Questionnaire', 'save', "#{flash[:saved_response_set]}");
+  - flash.delete(:saved_response_set)
+
