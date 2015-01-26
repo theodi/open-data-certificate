@@ -45,7 +45,9 @@ var Tracking = (function($){
                     var position = $('body').scrollTop();
                     if ( position > 0 && position <= height) {
                         var scroll = parseInt(100*position/height);
-                        var mark = 1.5*max;
+                        // made up curve to increase logging frequency
+                        // towards the 100% mark
+                        var mark = 140*Math.log((max+100)/100);
                         if ( scroll > mark ) {
                             ga('send', 'event', 'Questionnaire', 'scroll', 'page', scroll);
                             max = scroll;
