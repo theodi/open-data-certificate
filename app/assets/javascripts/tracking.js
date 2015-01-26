@@ -45,7 +45,8 @@ var Tracking = (function($){
                     var position = $('body').scrollTop();
                     if ( position > 0 && position <= height) {
                         var scroll = parseInt(100*position/height);
-                        if ( scroll > 1.5*max ) {
+                        var mark = 1.5*max;
+                        if ( scroll > mark ) {
                             ga('send', 'event', 'Questionnaire', 'scroll', 'page', scroll);
                             max = scroll;
                         }
