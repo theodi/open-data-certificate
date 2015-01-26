@@ -74,6 +74,12 @@ var Tracking = (function($){
                 last_question.question_id = $(this).parents('.container').find('[name="' + name + '"]').val();
                 last_question.question_text = $(this).parents('.container').find('label.question_label').text();
             });
+            // If save is clicked discard tracked question
+            // as we only want to find out what people are
+            // getting stuck on
+            $('button[name=finish]').on('click', function() {
+                last_question = {};
+            });
             // Track last answered question text and ID
             $(window).on('beforeunload', function() {
                 if ( last_question.question_id ) {
