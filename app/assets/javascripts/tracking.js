@@ -1,6 +1,11 @@
 var Tracking = (function($){
     "use strict;"
 
+    var last_question = {
+        question_id: null,
+        question_text: null
+    };
+
     return {
         init: function() {
             // Track show/hide of modal popups
@@ -55,6 +60,27 @@ var Tracking = (function($){
                     }
                 });
             }
+
+            // Listen to focus events on text inputs
+            // find the question id and label
+            $('.container input.string').on('focus', function() {
+                var name = $(this).attr('name').replace('string_value', 'question_id');
+                last_question.question_id = $(this).parents('.container').find('[name="' + name + '"]').val();
+                last_question.question_text = $('label[for="' + $(this).attr('id') + '"]').text();
+            });
+            // Listen to click events on multiple choice questions
+            $('.container .choice label').on('click', function() {
+                var name = $(this).find('input').attr('name').replace('answer_id', 'question_id');
+                last_question.question_id = $(this).parents('.container').find('[name="' + name + '"]').val();
+                last_question.question_text = $(this).parents('.container').find('label.question_label').text();
+            });
+            // Track last answered question text and ID
+            $(window).on('beforeunload', function() {
+                if ( last_question.question_id ) {
+                    ga('send', 'event', 'Questionnaire', 'last-question',
+                        last_question.question_text.trim(), last_question.question_id);
+                }
+            });
         },
 
         event: function(category, action, label) {
