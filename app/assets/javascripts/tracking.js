@@ -41,9 +41,8 @@ var Tracking = (function($){
                 // if scroll position is more than 1.5 times further down the page
                 // log this as a scroll event
                 $(window).on('scroll', function(e) {
-                    var body = $('body').get(0);
-                    var height = (body.scrollHeight - window.innerHeight);
-                    var position = body.scrollTop;
+                    var height = $('body').height();
+                    var position = $('body').scrollTop();
                     if ( position > 0 && position <= height) {
                         var scroll = parseInt(100*position/height);
                         if ( scroll > 1.5*max ) {
