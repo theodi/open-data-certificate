@@ -10,7 +10,7 @@ The browse page can filter by various fields and return results in either [HTML]
 Search parameters
 -----------------
 
-# jurisdiction
+### jurisdiction
 
 The `jurisdiction` is the set of questions that have been asked to determine the certificate. The value is a
 [2 letter country code][iso3166] e.g `us` or `kr`.
@@ -19,20 +19,20 @@ Note the value for The United Kingdom is `gb` not `uk`.
 
 [iso3166]: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
-# publisher
+### publisher
 
 The `publisher` is the name of the agency or department that has produced the dataset and is the an exact string match.
 e.g. `Torbay Council`
 
-# level
+### level
 
 Limits by the certificates attained level, possible values are `basic`, `pilot`, `standard` and `exemplar`
 
-# datahub
+### datahub
 
 Filters the results by where the dataset is hosted. It is the domain name of the datahub e.g. `data.gov.uk`
 
-# since
+### since
 
 Limits the search results to certificates where the responses have been updated more recently than the specified date.
 
@@ -44,7 +44,7 @@ the day or the first of January if just the year is specified.
 
 [time]: http://en.wikipedia.org/wiki/ISO_8601
 
-# search
+### search
 
 This runs a partial text search which matches any of the title of the certificate, the publishers name or
 the full title of the jurisdiction (which will be the name of the country).
