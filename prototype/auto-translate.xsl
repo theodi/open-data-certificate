@@ -7,7 +7,7 @@
 
 <xsl:output method="xml" indent="yes" />
 
-<xsl:variable name="translationFile" as="xs:string" select="'translations/temp/certificate.es.txt'" />
+<xsl:param name="translationFile" as="xs:string" select="'translations/temp/certificate.es.txt'" />
 <xsl:variable name="translationDoc" as="document-node()">
 	<xsl:document>
 		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^.+$" flags="m">
