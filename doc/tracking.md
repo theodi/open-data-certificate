@@ -60,3 +60,72 @@ the last question they clicked on should be recorded
 with `last-question` as the action, the text text
 of the question as the `label` and the database id
 of the question as the `value`.
+
+### Summary of events
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Action</th>
+      <th>Label</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+<tbody>
+  <tr>
+    <td rowspan=2>Popup</td>
+    <td>show</td>
+    <td>modal-id-value</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>hide</td>
+    <td>modal-id-value</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Search</td>
+    <td>toggle</td>
+    <td>advanced-options</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan=8>Questionnaire</td>
+    <td>show</td>
+    <td rowspan=2>section-id</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>hide</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>begin</td>
+    <td rowspan=4>response set access code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>continue</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>save</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>publish</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>scroll</td>
+    <td>page</td>
+    <td>percentage of page viewed</td>
+  </tr>
+  <tr>
+    <td>last-question</td>
+    <td>question text</td>
+    <td>question id</td>
+  </tr>
+</tbody>
+</table>
