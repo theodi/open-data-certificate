@@ -19,7 +19,7 @@ If the advanced search are shown then a
 
 # Questionnaire
 
-These actions are recorded with 'Questionnaire'
+These actions are recorded with `Questionnaire`
 as the category.
 
 ## Sections
