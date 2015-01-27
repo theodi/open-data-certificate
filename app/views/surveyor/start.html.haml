@@ -70,3 +70,8 @@
 
 
 / #surveyor fieldset ol li label, #surveyor fieldset ol li input
+- content_for(:foot_scripts) do
+  :javascript
+    $(document).ready(function() {
+      Tracking.event('Questionnaire', 'begin', "#{@response_set.access_code}")
+    });

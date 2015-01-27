@@ -90,6 +90,8 @@ class SurveyorController < ApplicationController
 
       if saved && finish
 
+        flash[:saved_response_set] = @response_set.access_code
+
         if user_signed_in?
           if @response_set.all_mandatory_questions_complete? == false
             flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
