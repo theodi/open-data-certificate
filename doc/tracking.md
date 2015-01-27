@@ -4,25 +4,25 @@ Google Analytics tracking
 Event tracking
 --------------
 
-# Modal dialogs
+### Modal dialogs
 
 Most modal dialogs on the site should trigger
 either a `show` or `hide` action under the
 `Popup` category with the `id` of the dialog
 as the `label`.
 
-# Search
+### Search
 
 If the advanced search are shown then a
 `toggle` action should be recorded under the
 `Search` category.
 
-# Questionnaire
+### Questionnaire
 
 These actions are recorded with `Questionnaire`
 as the category.
 
-## Sections
+#### Sections
 
 Sections that are collapsed or shown trigger
 `show` or `hide` actions with the `id` of the
@@ -43,14 +43,14 @@ button and the user ends up on the dashboard page.
 `publish` is the final event after the `Publish certificate`
 button.
 
-## Scrolling
+#### Scrolling
 
 Scroll events are recorded when the user moves down
 the page significantly. The action is `scroll` with
 a label of `page` and the `value` is the percentage
 down the page the browser is scrolled.
 
-## Last question
+#### Last question
 
 If the user leaves the page by some other means
 than pressing the `Save and finish` button then
