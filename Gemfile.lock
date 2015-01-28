@@ -372,6 +372,10 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     ruby-prof (0.14.2)
+    rubyXL (3.3.3)
+      nokogiri (>= 1.4.4)
+      rubyzip (>= 1.1.6)
+    rubyzip (1.1.6)
     safe_yaml (1.0.3)
     sass (3.2.14)
     sass-rails (3.2.6)
@@ -509,6 +513,7 @@ DEPENDENCIES
   ransack
   redcarpet
   ruby-prof
+  rubyXL
   sass-rails (~> 3.2.3)
   shoulda
   shoulda-context

@@ -1,5 +1,17 @@
 # How to apply translations
 
+## Use rake task [experimental]
+
+Make sure `saxon` is installed
+
+    brew install saxon
+
+and this should update translations
+
+    bundle exec rake translations:update TRANSLATIONS=translations.xlsx COUNTRY={country code eg. CZ} LANG={lang code eg. cz}
+
+## Or manually run the commands
+
 1. With a Translation file in the format of `example-translation.xlsx`, copy the
 first and third columns of the first worksheet  (The reference and the translation),
 and separate them by a colon and a space `: ` and save in `temp`
