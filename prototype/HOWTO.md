@@ -4,23 +4,23 @@
 first and third columns of the first worksheet  (The reference and the translation),
 and separate them by a colon and a space `: ` and save in `temp`
 
-2. Change the source in line 10 to point to your newly-created text file, then run
-the following:
+    # note path to {sheet1 filename} is relative to the location of auto-translate.xsl
+    # {country code} is in capitals, eg. MX, CZ
+    saxon -s:prototype/jurisdictions/certificate.{country code}.xml -xsl:prototype/auto-translate.xsl -o:prototype/temp/certificate.{country code}.xml translationFile=temp/{sheet1 filename}
 
-    saxon -s:prototype/jurisdictions/certificate.{country code}.xml -xsl:prototype/auto-translate.xsl -o:prototype/temp/certificate.{country code}.xml
-
-3. Verify that the translation has worked, and then move the resulting file to
+2. Verify that the translation has worked, and then move the resulting file to
 the `jurisdictions` directory
 
-4. Repeat step 1 with the second worksheet
+3. Repeat step 1 with the second worksheet
 
-5. Run the following:
+4. Run the following:
 
-    saxon -s:prototype/translations/certificate.en.xml -xsl:prototype/auto-translate.xsl -o:prototype/temp/certificate.{language code}.xml
+    # note {language code} is lower case, eg. en, cz
+    saxon -s:prototype/translations/certificate.en.xml -xsl:prototype/auto-translate.xsl -o:prototype/temp/certificate.{language code}.xml translationFile=temp/{sheet2 filename}
 
-6. Verify that the translation has worked, and then move the resulting file to
+5. Verify that the translation has worked, and then move the resulting file to
 the `translations` directory
 
-7. Finally, run:
+6. Finally, run:
 
     saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
