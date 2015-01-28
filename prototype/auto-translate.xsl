@@ -12,11 +12,11 @@
   <xsl:choose>
   <xsl:when test="unparsed-text-available($translationFile)">
 	<xsl:document>
-		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^.+$" flags="m">
+		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^(.+?):(.+)$" flags="m">
 			<xsl:matching-substring>
-				<xsl:variable name="key" select="substring-before(., ':')" />
+				<xsl:variable name="key" select="regex-group(1)" />
 				<t key="{$key}">
-					<xsl:value-of select="normalize-space(substring-after(., ':'))" />
+					<xsl:value-of select="regex-group(2)" />
 				</t>
 			</xsl:matching-substring>
 		</xsl:analyze-string>
