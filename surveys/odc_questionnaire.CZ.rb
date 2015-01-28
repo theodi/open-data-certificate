@@ -2,7 +2,10 @@ survey 'CZ',
   :full_title => 'Czech Republic',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p><strong>This has been generated based on a default for EU countries and needs to be localised for Czech Republic. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p><p>: Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p>
+         <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p><p>
+         <strong></strong>
+      </p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -79,62 +82,67 @@ survey 'CZ',
 
   end
 
-  section_legal 'Legal Information',
-    :description => 'Rights, licensing and privacy' do
+  section_legal 'Právní informace',
+    :description => 'Práva, licencování a ochrana osobních údajů' do
 
-    label_group_2 'Rights',
-      :help_text => 'your right to share this data with people',
+    label_group_2 'práva',
+      :help_text => 'Vaše právo zveřejnit data',
       :customer_renderer => '/partials/fieldset'
 
-    q_publisherRights 'Do you have the rights to publish this data as open data?',
+    q_publisherRights 'Máte právo tato data zveřejnit?',
       :discussion_topic => :cz_publisherRights,
-      :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
+      :help_text => 'Pokud jste data sami nevytvořili nebo nenasbírali, nemusíte mít právo je zveřejnit. Pokud si nejste jisti, obraťte se na původního vlastníka dat; ke zveřejnění dat budete pravděpodobně potřebovat jeho svolení.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'yes, you have the rights to publish this data as open data',
+    a_yes 'Ano, máme právo zveřejnit tato data jako otevřená.',
       :requirement => ['standard_1']
-    a_no 'no, you don\'t have the rights to publish this data as open data'
-    a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
-    a_complicated 'the rights in this data are complicated or unclear'
+    a_no 'Ne, nemáme právo ke zveřejnění těchto dat jako otevřených.'
+    a_unsure 'Nejsme si jisti, jestli máme právo data zveřejnit.'
+    a_complicated 'Práva k těmto datům jsou nejasná nebo složitá.'
 
-    label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
+    label_standard_1 '
+                     <strong>Ke zveřejnění dat byste měli mít nezpochybnitelné právo.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_1'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '!=', :a_yes
 
-    label_basic_2 'You must have the <strong>right to publish this data</strong>.',
+    label_basic_2 '
+                  <strong>Je nezbytné, abyste disponovali právy ke zveřejnění těchto dat.</strong>
+               ',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_2'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_no
 
-    q_rightsRiskAssessment 'Where do you detail the risks people might encounter if they use this data?',
+    q_rightsRiskAssessment 'Kde popisujete právní rizika, se kterými je užití dat spojeno?',
       :discussion_topic => :cz_rightsRiskAssessment,
       :display_on_certificate => true,
-      :text_as_statement => 'Risks in using this data are described at',
-      :help_text => 'It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.'
+      :text_as_statement => 'Právní rizika spojená s užitím dat',
+      :help_text => 'Užití dat bez nezpochybnitelných práv je riskantní – například se může stát, že budete data muset přestat data poskytovat na základě stížnosti. Uveďte URL stránky, na které se uživatelé o podobných rizicích dozví.'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_complicated
-    a_1 'Risk Documentation URL',
+    a_1 'URL dokumentace',
       :string,
       :input_type => :url,
-      :placeholder => 'Risk Documentation URL',
+      :placeholder => 'URL dokumentace',
       :requirement => ['pilot_2']
 
-    label_pilot_2 'You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.',
+    label_pilot_2 '
+                  <strong>Měli byste popsat možná rizika spojená s užitím vašich dat</strong>, aby se uživatelé mohli rozhodnout, jestli a jak je mohou užít.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_2'
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_complicated
     condition_B :q_rightsRiskAssessment, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisherOrigin 'Was <em>all</em> this data originally created or gathered by you?',
+    q_publisherOrigin 'Vycházeli jste <em>výhradně</em> z otevřených dat?',
       :discussion_topic => :cz_publisherOrigin,
       :display_on_certificate => true,
-      :text_as_statement => 'This data was',
-      :help_text => 'If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.',
+      :text_as_statement => 'Zdroje dat',
+      :help_text => 'Cizí data můžete publikovat pouze v případě, že byla zveřejněna pod otevřenou licencí, práva původního držitele vypršela nebo si jich držitel vzdal. Pokud to pro sebemenší část dat neplatí, musíte se před jejich zveřejněním poradit s právníky.',
       :pick => :one,
       :required => :required
     dependency :rule => '(A or B)'
@@ -143,11 +151,11 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'originally created or generated by its curator'
+      :text_as_statement => 'výhradně otevřená data'
 
-    q_thirdPartyOrigin 'Was some of this data extracted or calculated from other data?',
+    q_thirdPartyOrigin 'Vznikla část dat vytěžením nebo zpracováním cizích dat?',
       :discussion_topic => :cz_thirdPartyOrigin,
-      :help_text => 'An extract or smaller part of someone else\'s data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.',
+      :help_text => 'I výtah, případně malá část použitého cizího textu, může mít vliv na Vaše práva k užití. Stejně tak v případě, že jste analyzovali cizí data a vytvořili výstup odlišný od původních dat.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
@@ -157,7 +165,7 @@ survey 'CZ',
     a_true 'yes',
       :requirement => ['basic_3']
 
-    label_basic_3 'You indicated that this data wasn\'t originally created or gathered by you, and wasn\'t crowdsourced, so it must have been extracted or calculated from other data sources.',
+    label_basic_3 'Uvedli jste, že jste data nevytvořili ani samostaně nesesbírali (včetně formy crowdsourcingu), takže musela vzniknout vytěžením nebo zpracováním cizích datových zdrojů.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_3'
     dependency :rule => 'A and B and C and D'
@@ -166,11 +174,11 @@ survey 'CZ',
     condition_C :q_crowdsourced, '==', :a_false
     condition_D :q_thirdPartyOrigin, '!=', :a_true
 
-    q_thirdPartyOpen 'Are <em>all</em> sources of this data already published as open data?',
+    q_thirdPartyOpen 'Vycházeli jste <em>výhradně</em> z otevřených dat?',
       :discussion_topic => :cz_thirdPartyOpen,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is created from',
-      :help_text => 'You\'re allowed to republish someone else\'s data if it\'s already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you\'ll need legal advice before you can publish it.',
+      :text_as_statement => 'Zdroje dat',
+      :help_text => 'Cizí data můžete publikovat pouze v případě, že byla zveřejněna pod otevřenou licencí, práva původního držitele vypršela nebo si jich držitel vzdal. Pokud to pro sebemenší část dat neplatí, musíte se před jejich zveřejněním poradit s právníky.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C'
@@ -180,10 +188,12 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'open data sources',
+      :text_as_statement => 'výhradně otevřená data',
       :requirement => ['basic_4']
 
-    label_basic_4 'You should get <strong>legal advice to make sure you have the right to publish this data</strong>.',
+    label_basic_4 '
+                           <strong>Měli byste se poradit s právníky, abyste měli jistotu, že data můžete publikovat.</strong>
+                        ',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_4'
     dependency :rule => 'A and B and C and D and E'
@@ -193,11 +203,11 @@ survey 'CZ',
     condition_D :q_thirdPartyOpen, '==', :a_false
     condition_E :q_thirdPartyOpen, '==', :a_false
 
-    q_crowdsourced 'Was some of this data crowdsourced?',
+    q_crowdsourced 'Vznikla nějaká část dat pomocí crowdsourcingu?',
       :discussion_topic => :cz_crowdsourced,
       :display_on_certificate => true,
-      :text_as_statement => 'Some of this data is',
-      :help_text => 'If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
+      :text_as_statement => 'Crowdsourcing',
+      :help_text => 'Pokud nějaká část dat pochází od osob mimo vaši organizaci, musíte si od nich vyžádat svolení k publikování dat pod otevřenou licencí.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
@@ -206,10 +216,10 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'crowdsourced',
+      :text_as_statement => 'ano, aspoň část dat vznikla crowdsourcingem',
       :requirement => ['basic_5']
 
-    label_basic_5 'You indicated that the data wasn\'t originally created or gathered by you, and wasn\'t extracted or calculated from other data, so it must have been crowdsourced.',
+    label_basic_5 'Uvedli jste, že data původně nepochází od Vás a nevznikla ani výběrem nebo zpracováním cizích dat, takže musela vzniknout pomocí crowdsourcingu.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_5'
     dependency :rule => 'A and B and C and D'
@@ -218,9 +228,9 @@ survey 'CZ',
     condition_C :q_thirdPartyOrigin, '==', :a_false
     condition_D :q_crowdsourced, '!=', :a_true
 
-    q_crowdsourcedContent 'Did contributors to this data use their judgement?',
+    q_crowdsourcedContent 'Dá se práce přispěvatelů považovat za tvůrčí?',
       :discussion_topic => :cz_crowdsourcedContent,
-      :help_text => 'If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.',
+      :help_text => 'Na tvůrčí práci vyžadující jedinečný úsudek autora mají přispěvatelé autorská práva. Příkladem tvůrčí práce je například psaní popisků nebo i rozhodování o tom, kterou část zdrojových dat vybrat do výsledné datové sady. Pokud taková data chcete publikovat, přispěvatelé se musí vzdát svých autorských práv, převést je na vás, nebo vám data licencovat.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C'
@@ -230,11 +240,11 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_claUrl 'Where is the Contributor Licence Agreement (CLA)?',
+    q_claUrl 'Kde máte vystavenou přispěvatelskou licenční dohodu (CLA)?',
       :discussion_topic => :cz_claUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The Contributor Licence Agreement is at',
-      :help_text => 'Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor\'s rights to you, waive their rights, or license the data to you so you can publish it.',
+      :text_as_statement => 'Přispěvatelská licenční dohoda (CLA)',
+      :help_text => 'Uveďte odkaz na dokument, ve kterém vám přispěvatelé dovolují užití svých dat. Konkrétně se přispěvatelé mohou vzdát svých autorských práv, převést je na vás, nebo vám udělit licenci k jejich užití.',
       :help_text_more_url => 'http://en.wikipedia.org/wiki/Contributor_License_Agreement',
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -242,15 +252,15 @@ survey 'CZ',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
-    a_1 'Contributor Licence Agreement URL',
+    a_1 'URL licenční dohody',
       :string,
       :input_type => :url,
-      :placeholder => 'Contributor Licence Agreement URL',
+      :placeholder => 'URL licenční dohody',
       :required => :required
 
-    q_cldsRecorded 'Have all contributors agreed to the Contributor Licence Agreement (CLA)?',
+    q_cldsRecorded 'Souhlasili všichni přispěvatelé s přispěvatelskou licenční dohodou (CLA)?',
       :discussion_topic => :cz_cldsRecorded,
-      :help_text => 'Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.',
+      :help_text => 'Abyste mohli zveřejnit cizí příspěvky, musí jejich autoři souhlasit s přispěvatelskou licenční dohodou (CLA). Měli byste si vést seznam jednotlivých přispěvatelů a poznačit si, kteří souhlasili s přispěvatelskou licenční dohodou (CLA).',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -262,7 +272,7 @@ survey 'CZ',
     a_true 'yes',
       :requirement => ['basic_6']
 
-    label_basic_6 'You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.',
+    label_basic_6 'Každý přispěvatel musí souhlasit s přispěvatelskou licenční dohodou (CLA)</strong>, ve které vám uděluje právo zveřejnit jeho práci pod otevřenou licencí.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_6'
     dependency :rule => 'A and B and C and D and E'
@@ -272,31 +282,32 @@ survey 'CZ',
     condition_D :q_crowdsourcedContent, '==', :a_true
     condition_E :q_cldsRecorded, '==', :a_false
 
-    q_sourceDocumentationUrl 'Where do you describe sources of this data?',
+    q_sourceDocumentationUrl 'Kde jsou specifikované zdroje dat?',
       :discussion_topic => :cz_sourceDocumentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The sources of this data are described at',
-      :help_text => 'Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.'
+      :text_as_statement => 'Zdroje dat',
+      :help_text => 'Uveďte URL dokumentu, ve kterém popisujete zdroje dat a licenci, která vám umožňuje data zveřejnit.'
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
-    a_1 'Data Sources Documentation URL',
+    a_1 'URL k dokumentaci datových zdrojů',
       :string,
       :input_type => :url,
-      :placeholder => 'Data Sources Documentation URL',
+      :placeholder => 'URL k dokumentaci datových zdrojů',
       :requirement => ['pilot_3']
 
-    label_pilot_3 'You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
+    label_pilot_3 '
+                  <strong>Měli byste popsat, odkud pochází data a vaše práva je zveřejnit</strong>, aby uživatelé mohli bez obav použít i data pocházející z cizích zdrojů.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_3'
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_sourceDocumentationMetadata 'Is documentation about the sources of this data also in machine-readable format?',
+    q_sourceDocumentationMetadata 'Máte dokumentaci o zdrojích dat i ve strojově čitelné podobě?',
       :discussion_topic => :cz_sourceDocumentationMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The curator has published',
-      :help_text => 'Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.',
+      :text_as_statement => 'Strojově čitelné zdroje dat',
+      :help_text => 'Informace o zdrojích dat byste měli kromě lidsky srozumitelné podoby zveřejnit i ve strojově čitelném formátu. Díky tomu se dá lépe zjistit, jak jsou data používána, což zároveň vysvětluje jejich opakovanou publikaci.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
@@ -304,10 +315,12 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable data about the sources of this data',
+      :text_as_statement => 'zdroje dat jsou strojově čitelné',
       :requirement => ['standard_2']
 
-    label_standard_2 'You should <strong>include machine-readable data about the sources of this data</strong>.',
+    label_standard_2 '
+                     <strong>Měli byste zveřejnit strojově čitelné informace o zdrojích, ze kterých vaše data pochází.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_2'
     dependency :rule => 'A and B and C'
@@ -315,134 +328,131 @@ survey 'CZ',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_3 'Licensing',
-      :help_text => 'how you give people permission to use this data',
+    label_group_3 'Licence',
+      :help_text => 'jaká oprávnění poskytujete k užití těchto dat?',
       :customer_renderer => '/partials/fieldset'
 
-    q_copyrightURL 'Where have you published the rights statement for this dataset?',
+    q_copyrightURL 'Kde jste zveřejnili prohlášení o právech k této datové sadě?',
       :discussion_topic => :cz_copyrightURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights statement is at',
-      :help_text => 'Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can\'t do with the data.'
-    a_1 'Rights Statement URL',
+      :text_as_statement => 'Právní prohlášení',
+      :help_text => 'Uveďte URL dokumentu, který popisuje práva k opětovnému užití této datové sady. Dokument by měl odkazovat na text licence, popsat vaše požadavky na uvádění autorství, a obsahovat prohlášení o relevantních autorských a databázových právech. Právní prohlášení pomáhá uživatelům pochopit, co všechno s daty mohou a nemohou dělat.'
+    a_1 'URL právního prohlášení',
       :string,
       :input_type => :url,
-      :placeholder => 'Rights Statement URL',
+      :placeholder => 'URL právního prohlášení',
       :requirement => ['pilot_4']
 
-    label_pilot_4 'You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.',
+    label_pilot_4 '
+               <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autorství.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_4'
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataLicence 'Under which licence can people reuse this data?',
+    q_dataLicence 'Open Data Commons Attribution License',
       :discussion_topic => :cz_dataLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is available under',
-      :help_text => 'Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they\'ve expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :text_as_statement => 'Licence',
+      :help_text => 'Nezapomeňte na to, že k databázi drží práva každý, kdo data původně nasbíral, vytvořil, zkontroloval nebo vybral. Autorská práva mohou vznikat také při reorganizaci dat. Každý uživatel tedy potřebuje licenci k použití dat nebo doklad o tom, že se všichni autoři svých autorských práv vzdali. Do seznamu jsme vybrali nejčastěji používané licence. Pokud žádná autorská ani databázová práva nejsou ve hře, vypršela, nebo se jich autoři vzdali, vyberte možnost „nehodí se“.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Creative Commons Attribution',
-      :text_as_statement => 'Creative Commons Attribution'
-    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
-      :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_odc_by 'Open Data Commons Attribution License',
-      :text_as_statement => 'Open Data Commons Attribution License'
-    a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
+    a_cc_by 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
-    a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
-      :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_na 'Not applicable',
-      :text_as_statement => ''
-    a_other 'Other...',
-      :text_as_statement => ''
+    a_cc_by_sa 'Otevřená data Commons Open Database License (ODbL)',
+      :text_as_statement => 'Otevřená data Commons Open Database License (ODbL)'
+    a_cc_zero 'Open Data Commons Public Domain Dedication and License (PDDL)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
+    a_odc_by 'Creative Commons CCZero',
+      :text_as_statement => 'Creative Commons CCZero'
+    a_odc_odbl 'nehodí se',
+      :text_as_statement => 'nehodí se'
+    a_odc_pddl 'Jiná ...',
+      :text_as_statement => 'Jiná ...'
 
-    q_dataNotApplicable 'Why doesn\'t a licence apply to this data?',
+    q_dataNotApplicable 'Proč se na data nevztahuje žádná licence?',
       :discussion_topic => :cz_dataNotApplicable,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is not licensed because',
+      :text_as_statement => 'Důvody chybějící licence',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_na
-    a_norights 'there are no copyright or database rights in this data',
-      :text_as_statement => 'there are no rights in it',
-      :help_text => 'Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way.'
-    a_expired 'copyright and database rights have expired',
-      :text_as_statement => 'the rights have expired',
-      :help_text => 'Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired.'
-    a_waived 'copyright and database rights have been waived',
+    a_norights 'Na data se nevztahují žádná autorská ani databázová práva',
+      :text_as_statement => 'na data se nevztahuje žádná autorskoprávní ochrana',
+      :help_text => 'Databázová práva vznikají například vynaložením netriviálního úsilí při sběru, ověřování nebo prezentaci dat. Naopak nevznikají například u dat neověřovaných, vytvořených od nuly, nebo prezentovaných nějakým zjevným způsobem. Autorská práva k datům vznikají například při výběru nebo netriviální reorganizaci dat.'
+    a_expired 'autorská a databázová práva vypršela',
+      :text_as_statement => 'práva k datům vypršela',
+      :help_text => 'Ochrana databázových práv trvá deset let. Pokud se data naposledy měnila před více než deseti lety, databázová práva nejspíš vypršela. Pevnou dobu trvají také autorská majetková práva; lhůta se počítá od úmrtí autora nebo od vydání díla. Stručně řečeno je nepravděpodobné, že by u vašich dat autorská práva vypršela'
+    a_waived 'vlastníci se vzdali svých práv',
       :text_as_statement => '',
-      :help_text => 'This means no one owns the rights and anyone can do whatever they want with this data.'
+      :help_text => 'To znamená, že práva nikdo nevlastní a s daty může kdokoliv dělat cokoliv.'
 
-    q_dataWaiver 'Which waiver do you use to waive rights in the data?',
+    q_dataWaiver 'Jakým způsobem jste se autorských práv vzdali?',
       :discussion_topic => :cz_dataWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Rights in the data have been waived with',
-      :help_text => 'You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.',
+      :text_as_statement => 'Forma vzdání se autorských práv k datům',
+      :help_text => 'Musíte dát uživatelům nějak konkrétně najevo, že jste se práv vzdali a mohou si s daty nakládat podle svého. Můžete použít některý se standardních mechanismů, například PDDL nebo CCZero, nebo napsat vlastní právní dokument.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_na
     condition_B :q_dataNotApplicable, '==', :a_waived
-    a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
-      :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
+    a_pddl 'Open Data Commons Public Domain Dedication and License (PDDL)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_other 'Other...',
+    a_other 'Jiný ...',
       :text_as_statement => ''
 
-    q_dataOtherWaiver 'Where is the waiver for the rights in the data?',
+    q_dataOtherWaiver 'Kde je dokument, kterým se vzdáváte svých autorských práv?',
       :discussion_topic => :cz_dataOtherWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Rights in the data have been waived with',
-      :help_text => 'Give a URL to the publicly available waiver so people can check that it does waive the rights in the data.',
+      :text_as_statement => 'Forma vzdání se autorských práv k datům',
+      :help_text => 'Uveďte URL, na kterém si uživatelé vašich dat mohou ověřit, že jste se vzdali svých práv.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_dataLicence, '==', :a_na
     condition_B :q_dataNotApplicable, '==', :a_waived
     condition_C :q_dataWaiver, '==', :a_other
-    a_1 'Waiver URL',
+    a_1 'URL dokumentu',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Waiver URL'
+      :placeholder => 'URL dokumentu'
 
-    q_otherDataLicenceName 'What is the name of the licence?',
+    q_otherDataLicenceName 'Jaký je název použité licence?',
       :discussion_topic => :cz_otherDataLicenceName,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is available under',
-      :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.',
+      :text_as_statement => 'Data jsou licencována pod',
+      :help_text => 'Pokud data zveřejňujete pod jinou než nabízenou licencí, potřebujeme znát její název – bude součástí vašeho certifikátu otevřených dat.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'Other Licence Name',
+    a_1 'název licence',
       :string,
       :required => :required,
-      :placeholder => 'Other Licence Name'
+      :placeholder => 'název licence'
 
-    q_otherDataLicenceURL 'Where is the licence?',
+    q_otherDataLicenceURL 'Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst.',
       :discussion_topic => :cz_otherDataLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'This licence is at',
-      :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
+      :text_as_statement => 'Text licence',
+      :help_text => 'Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'Other Licence URL',
+    a_1 'Jde o otevřenou licenci?',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Other Licence URL'
+      :placeholder => 'Jde o otevřenou licenci?'
 
-    q_otherDataLicenceOpen 'Is the licence an open licence?',
+    q_otherDataLicenceOpen 'Jde o otevřenou licenci?',
       :discussion_topic => :cz_otherDataLicenceOpen,
-      :help_text => 'If you aren\'t sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn\'t in their list, it\'s either not open or hasn\'t been assessed yet.',
+      :help_text => 'Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>. Tamtéž najdete přímo <a href="http://opendefinition.org/licenses/">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil.',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
@@ -452,55 +462,57 @@ survey 'CZ',
     a_true 'yes',
       :requirement => ['basic_7']
 
-    label_basic_7 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
+    label_basic_7 '
+                  <strong>Otevřená data musíte publikovat pod otevřenou licencí</strong>, aby s nimi uživatelé mohli volně nakládat.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_7'
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_other
     condition_B :q_otherDataLicenceOpen, '==', :a_false
 
-    q_contentRights 'Is there any copyright in the content of this data?',
+    q_contentRights 'Vztahuje se na obsah dat autorské právo?',
       :discussion_topic => :cz_contentRights,
       :display_on_certificate => true,
-      :text_as_statement => 'There are',
+      :text_as_statement => 'Obsah chráněný autorským právem',
       :pick => :one,
       :required => :required
-    a_norights 'no, the data only contains facts and numbers',
-      :text_as_statement => 'no rights in the content of the data',
-      :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
-    a_samerights 'yes, and the rights are all held by the same person or organisation',
+    a_norights 'Ne, data obsahují pouze fakta a čísla.',
+      :text_as_statement => 'Žádná relevantní práva k obsahu data',
+      :help_text => 'Při licencování dat je občas dobré (nebo přímo nutné) posuzovat zvlášť obsah databáze a zvlášť databázi jako takovou. Tato otázka se vztahuje přímo na obsah databáze. Pokud databáze neobsahuje nic, co by vzniklo tvůrčím úsilím, autorské právo se na její obsah nevztahuje.'
+    a_samerights 'ano; držitel práv pouze jeden',
       :text_as_statement => '',
-      :help_text => 'Choose this option if the content in the data was all created by or transferred to the same person or organisation.'
-    a_mixedrights 'yes, and the rights are held by different people or organisations',
+      :help_text => 'Tuto možnost zvolte, pokud je obsah v datech byl celý vytvořen nebo převeden na stejnou osobu nebo organizaci.'
+    a_mixedrights 'ano; více různých držitelů práv',
       :text_as_statement => '',
-      :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
+      :help_text => 'Ano, a držitelem práv jsou různé osoby a organizace'
 
-    q_explicitWaiver 'Is the content of the data marked as public domain?',
+    q_explicitWaiver 'Je obsah dat volným dílem?',
       :discussion_topic => :cz_explicitWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'The content has been',
-      :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
+      :text_as_statement => 'Obsah byl',
+      :help_text => 'K prohlášení obsahu za volné dílo můžete použít například licenci <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. Tak se uživatelé snadno dozvědí, že mohou s obsahem dat volně nakládat.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'marked as public domain',
+      :text_as_statement => 'Je obsah dat volným dílem, tedy Public Domain?',
       :requirement => ['standard_3']
 
-    label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
+    label_standard_3 '
+                  <strong>Pokud je nějaká část obsahu vašich dat volným dílem, měli byste ji zveřejnit pod vhodnou licencí</strong>, aby uživatelé věděli, že s tímto obsahem mohou volně nakládat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_3'
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_norights
     condition_B :q_explicitWaiver, '==', :a_false
 
-    q_contentLicence 'Under which licence can others reuse content?',
+    q_contentLicence 'Pod jakou licencí zveřejňujete obsah dat?',
       :discussion_topic => :cz_contentLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'The content is available under',
-      :help_text => 'Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it\'s expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :text_as_statement => 'Licence obsahu',
+      :help_text => 'Nezapomeňte, že každé tvůrčí úsilí automaticky vede ke vzniku autorských práv k vytvořenému obsahu (s výjimkou čistě faktických údajů). Pokud tedy uživatelé chtějí váš obsah bez problémů používat, potřebují odpovídající licenci nebo dokument, ve kterém se vzdáváte svých autorských práv. V seznamu uvádíme nejčastěji používané licence. Pokud váš obsah není chráněný autorským právem, práva vypršela nebo jste se jich vzdali, vyberte možnost „nehodí se“.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -512,35 +524,35 @@ survey 'CZ',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_na 'Not applicable',
+    a_na 'Nehodí se',
       :text_as_statement => ''
-    a_other 'Other...',
+    a_other 'Jiná ...',
       :text_as_statement => ''
 
-    q_contentNotApplicable 'Why doesn\'t a licence apply to the content of the data?',
+    q_contentNotApplicable 'Proč se na obsah dat nevztahuje žádná licence?',
       :discussion_topic => :cz_contentNotApplicable,
       :display_on_certificate => true,
-      :text_as_statement => 'The content in this data is not licensed because',
+      :text_as_statement => 'Důvody chybějící licence',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
-    a_norights 'there is no copyright in the content of this data',
-      :text_as_statement => 'there is no copyright',
-      :help_text => 'Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that\'s within the data. There\'s no copyright if the content only contains facts.'
-    a_expired 'copyright has expired',
-      :text_as_statement => 'copyright has expired',
-      :help_text => 'Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.'
-    a_waived 'copyright has been waived',
+    a_norights 'Na obsah dat se nevztahují žádná autorská práva',
+      :text_as_statement => 'na obsah se nevztahují autorská práva',
+      :help_text => 'Autorská práva vznikají pouze tehdy, když k vytvoření obsahu vynaložíte netriviální tvůrčí úsilí, například psaním popisků. Pokud data obsahují pouze fakta, autorský zákon se na ně nevztahuje.'
+    a_expired 'Autorská práva už vypršela.',
+      :text_as_statement => 'autorská práva už vypršela',
+      :help_text => 'Autorská práva platí pouze omezenou dobu, počítanou buď od vydání díla, nebo od úmrtí autora. Zkontrolujte si datum vzniku a vydání obsahu – pokud je obsah dostatečně starý, autorská práva už mohla vypršet.'
+    a_waived 'Autor se svých práv vzdal.',
       :text_as_statement => '',
-      :help_text => 'This means no one owns copyright and anyone can do whatever they want with this data.'
+      :help_text => 'To znamená, že práva nikdo nevlastní a každý si s obsahem může nakládat podle svého.'
 
-    q_contentWaiver 'Which waiver do you use to waive copyright?',
+    q_contentWaiver 'Forma upuštění od autorských práv k obsahu',
       :discussion_topic => :cz_contentWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Copyright has been waived with',
-      :help_text => 'You need a statement to show people you\'ve done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.',
+      :text_as_statement => 'Copyright bylo upuštěno s',
+      :help_text => 'Pokud jste se autorských práv k obsahu vzdali, musíte to nějak doložit, aby uživatelé věděli, že s obsahem mohou bez rizika nakládat. Autorských práv se můžete vzdát nějakým zavedeným způsobem, třeba pomocí CCZero, ale i vlastním právním dokumentem.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -550,58 +562,58 @@ survey 'CZ',
     condition_C :q_contentNotApplicable, '==', :a_waived
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_other 'Other...',
-      :text_as_statement => 'Other...'
+    a_other 'Jiný ...',
+      :text_as_statement => 'Jiný ...'
 
-    q_contentOtherWaiver 'Where is the waiver for the copyright?',
+    q_contentOtherWaiver 'Kde je dokument, ve kterém se vzdáváte práv k obsahu?',
       :discussion_topic => :cz_contentOtherWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Copyright has been waived with',
-      :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
+      :text_as_statement => 'Forma upuštění od autorských práv k obsahu',
+      :help_text => 'Uveďte URL k veřejně dostupnému dokumentu, kterým se vzdáváte práv k obsahu dat. Uživatelé si díky němu mohou ověřit, že je obsah skutečně bez právních závazků.',
       :required => :required
     dependency :rule => 'A and B and C and D'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     condition_C :q_contentNotApplicable, '==', :a_waived
     condition_D :q_contentWaiver, '==', :a_other
-    a_1 'Waiver URL',
+    a_1 'URL k právnímu dokumentu',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Waiver URL'
+      :placeholder => 'URL k právnímu dokumentu'
 
-    q_otherContentLicenceName 'What\'s the name of the licence?',
+    q_otherContentLicenceName 'Jaký je název této licence?',
       :discussion_topic => :cz_otherContentLicenceName,
       :display_on_certificate => true,
-      :text_as_statement => 'The content is available under',
-      :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
+      :text_as_statement => 'Licence obsahu',
+      :help_text => 'Pokud používáte jinou licenci, potřebujeme znát její název, abychom ho mohli uvést na certifikátu otevřených dat.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_1 'Licence Name',
+    a_1 'název licence',
       :string,
       :required => :required,
-      :placeholder => 'Licence Name'
+      :placeholder => 'název licence'
 
-    q_otherContentLicenceURL 'Where is the licence?',
+    q_otherContentLicenceURL 'Kde je plný text této licence?',
       :discussion_topic => :cz_otherContentLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The content licence is at',
-      :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
+      :text_as_statement => 'Text licence k obsahu',
+      :help_text => 'Uveďte URL licenčního textu. Bude uvedeno na vašem certifikátu otevřených dat, aby si kdokoliv mohl licenci zkontrolovat.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_1 'Licence URL',
+    a_1 'URL k licenci',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Licence URL'
+      :placeholder => 'URL k licenci'
 
-    q_otherContentLicenceOpen 'Is the licence an open licence?',
+    q_otherContentLicenceOpen 'Jde o otevřenou licenci?',
       :discussion_topic => :cz_otherContentLicenceOpen,
-      :help_text => 'If you aren\'t sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn\'t in their list, it\'s either not open or hasn\'t been assessed yet.',
+      :help_text => 'Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>. Tamtéž najdete přímo <a href="http://opendefinition.org/licenses/">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil.',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
@@ -612,7 +624,9 @@ survey 'CZ',
     a_true 'yes',
       :requirement => ['basic_8']
 
-    label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
+    label_basic_8 '
+                     <strong>Data musíte zveřejnit pod otevřenou licencí, aby je ostatní mohli užít.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_8'
     dependency :rule => 'A and B and C'
@@ -620,165 +634,176 @@ survey 'CZ',
     condition_B :q_contentLicence, '==', :a_other
     condition_C :q_otherContentLicenceOpen, '==', :a_false
 
-    q_contentRightsURL 'Where are the rights and licensing of the content explained?',
+    q_contentRightsURL 'Kde popisujete právní a licenční podmínky spojené s obsahem dat?',
       :discussion_topic => :cz_contentRightsURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights and licensing of the content are explained at',
-      :help_text => 'Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.',
+      :text_as_statement => 'Právní prohlášení k obsahu dat',
+      :help_text => 'Uveďte URL stránky, na které vysvětlujete právní a licenční podmínky spojené s obsahem dat.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_mixedrights
-    a_1 'Content Rights Description URL',
+    a_1 'URL právního prohlášení',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Content Rights Description URL'
+      :placeholder => 'URL právního prohlášení'
 
-    q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
+    q_copyrightStatementMetadata 'Které části vašeho právního prohlášení jsou strojově čitelné?',
       :discussion_topic => :cz_copyrightStatementMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights statement includes data about',
-      :help_text => 'It\'s good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.',
+      :text_as_statement => 'Strojově čitelná data právního prohlášení',
+      :help_text => 'Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést vaše autorství.',
       :help_text_more_url => 'https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    a_dataLicense 'data licence',
-      :text_as_statement => 'its data licence',
+    a_dataLicense 'licence k datům',
+      :text_as_statement => 'licence k datům',
       :requirement => ['standard_4']
-    a_contentLicense 'content licence',
-      :text_as_statement => 'its content licence',
+    a_contentLicense 'licence k obsahu',
+      :text_as_statement => 'licence k obsahu',
       :requirement => ['standard_5']
-    a_attribution 'attribution text',
-      :text_as_statement => 'what attribution text to use',
+    a_attribution 'způsob uvádění autorství',
+      :text_as_statement => 'způsob uvádění autorství',
       :requirement => ['standard_6']
-    a_attributionURL 'attribution URL',
-      :text_as_statement => 'what attribution link to give',
+    a_attributionURL 'URL pro uvedení autorství',
+      :text_as_statement => 'URL pro uvedení autorství',
       :requirement => ['standard_7']
-    a_copyrightNotice 'copyright notice or statement',
-      :text_as_statement => 'a copyright notice or statement',
+    a_copyrightNotice 'informace o autorských právech',
+      :text_as_statement => 'informace o autorských právech',
       :requirement => ['exemplar_1']
-    a_copyrightYear 'copyright year',
-      :text_as_statement => 'the copyright year',
+    a_copyrightYear 'letopočet spojený s autorskými právy',
+      :text_as_statement => 'letopočet spojený s autorskými právy',
       :requirement => ['exemplar_2']
-    a_copyrightHolder 'copyright holder',
-      :text_as_statement => 'the copyright holder',
+    a_copyrightHolder 'držitel autorských práv',
+      :text_as_statement => 'držitel autorských práv',
       :requirement => ['exemplar_3']
-    a_databaseRightYear 'database right year',
+    a_databaseRightYear '',
       :text_as_statement => 'the database right year',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder 'database right holder',
+    a_databaseRightHolder '',
       :text_as_statement => 'the database right holder',
       :requirement => ['exemplar_5']
 
-    label_standard_4 'You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.',
+    label_standard_4 '
+                        <strong>Informace o licenci dat uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_dataLicense
 
-    label_standard_5 'You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.',
+    label_standard_5 'Měli byste zajistit <strong>strojově čitelných údajů ve svém prohlášení práv o povolení k obsahu </strong> z těchto údajů, takže automatické nástroje mohou používat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_5'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_contentLicense
 
-    label_standard_6 'You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.',
+    label_standard_6 '
+                        <strong>Požadovaný způsob uvádění autorství, který popisujete v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_6'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_attribution
 
-    label_standard_7 'You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it.',
+    label_standard_7 '
+                        <strong>Požadovaný způsob uvádění autorství, který popisujete v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_7'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_attributionURL
 
-    label_exemplar_1 'You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.',
+    label_exemplar_1 '
+                        <strong>Informace o autorských právech uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_1'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightNotice
 
-    label_exemplar_2 'You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it.',
+    label_exemplar_2 '
+                        <strong>Letopočet, spojený s autorskými právy, uvedený v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_2'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightYear
 
-    label_exemplar_3 'You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.',
+    label_exemplar_3 '
+                        <strong>Informace o držiteli autorských práv uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_3'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
 
-    label_exemplar_4 'You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.',
+    label_exemplar_4 '
+                        <strong></strong>
+                     ',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightYear
 
-    label_exemplar_5 'You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.',
+    label_exemplar_5 '
+                        <strong></strong>
+                     ',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_5'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightHolder
 
-    label_group_4 'Privacy',
-      :help_text => 'how you protect people\'s privacy',
+    label_group_4 'Ochrana osobních údajů',
+      :help_text => 'jak chránit soukromí osob',
       :customer_renderer => '/partials/fieldset'
 
-    q_dataPersonal 'Can individuals be identified from this data?',
+    q_dataPersonal 'Dají se podle vašich dat identifikovat konkrétní osoby?',
       :discussion_topic => :cz_dataPersonal,
       :display_on_certificate => true,
-      :text_as_statement => 'This data contains',
+      :text_as_statement => 'Ochrana osobních údajů',
       :pick => :one,
       :required => :pilot
-    a_not_personal 'no, the data is not about people or their activities',
-      :text_as_statement => 'no data about individuals',
-      :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
-    a_summarised 'no, the data has been anonymised by aggregating individuals into groups, so they can\'t be distinguished from other people in the group',
-      :text_as_statement => 'aggregated data',
-      :help_text => 'Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.'
-    a_individual 'yes, there is a risk that individuals be identified, for example by third parties with access to extra information',
-      :text_as_statement => 'information that could identify individuals',
-      :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
+    a_not_personal 'Ne, data se netýkají jednotlivců.',
+      :text_as_statement => 'nehraje roli, data se netýkají jednotlivců',
+      :help_text => 'Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí.'
+    a_summarised 'Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní.',
+      :text_as_statement => 'nehraje roli, jde o agregovaná data',
+      :help_text => 'Skutečná anonymita jednotlivců v agregovaných datech se dá ověřit statistickými metodami.'
+    a_individual 'Ano, existuje riziko, že by data mohla vést k identifikaci konkrétních osob, například nějakou třetí stranou disponující souvisejícími daty.',
+      :text_as_statement => 'data, která mohou sloužit k identifikaci osob',
+      :help_text => 'Některá data o konkrétních osobách se dají zveřejnit bez problémů, například platy státních zaměstnanců – v některých zemích – nebo veřejné výdaje.'
 
-    q_statisticalAnonAudited 'Has your anonymisation process been independently audited?',
+    q_statisticalAnonAudited 'Máte anonymizaci dat oveřenou nezávislým posudkem?',
       :discussion_topic => :cz_statisticalAnonAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation process has been',
+      :text_as_statement => 'Anonymizace dat',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'ověřena nezávislým posudkem',
       :requirement => ['standard_8']
 
-    label_standard_8 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
+    label_standard_8 '
+                  <strong>Měli byste si nechat vypracovat nezávislý posudek anonymizace dat</strong>, abyste minimalizovali riziko, že anonymizovaná data půjdou použít k identifikaci osob.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_8'
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_summarised
     condition_B :q_statisticalAnonAudited, '==', :a_false
 
-    q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
+    q_appliedAnon 'Pokusili jste se snížit nebo úplně vyloučit riziko identifikace osob podle vašich dat?',
       :discussion_topic => :cz_appliedAnon,
       :display_on_certificate => true,
-      :text_as_statement => 'This data about individuals has been',
-      :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.',
+      :text_as_statement => 'Anonymizace dat',
+      :help_text => 'Anonymizace snižuje riziko, že vaše data půjdou zneužít k identifikaci osob. Konkrétní techniky záleží na konkrétní podobě dat.',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
@@ -786,13 +811,15 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'anonymised'
+      :text_as_statement => 'data byla anonymizována'
 
-    q_lawfulDisclosure 'Are you required or permitted by law to publish this data about individuals?',
+    q_lawfulDisclosure 'Jste ze zákona povinni nebo oprávněni zveřejňovat tato osobní data?',
       :discussion_topic => :cz_lawfulDisclosure,
       :display_on_certificate => true,
-      :text_as_statement => 'By law, this data about individuals',
-      :help_text => 'The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.',
+      :text_as_statement => 'Publikace daná zákonem',
+      :help_text => '
+                     <strong>Osobní data byste bez anonymizace měli zveřejňovat jen v případech, kdy vám to povoluje nebo nařizuje zákon.</strong>
+                  ',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -800,10 +827,12 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'can be published',
+      :text_as_statement => 'zveřejnění dat je přikázáno zákonem',
       :requirement => ['pilot_5']
 
-    label_pilot_5 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',
+    label_pilot_5 '
+                     <strong></strong>
+                  ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_5'
     dependency :rule => 'A and B and C'
@@ -811,21 +840,22 @@ survey 'CZ',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_false
 
-    q_lawfulDisclosureURL 'Where do you document your right to publish data about individuals?',
+    q_lawfulDisclosureURL 'Který dokument vám umožnuje zveřejnit osobní data?',
       :discussion_topic => :cz_lawfulDisclosureURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The right to publish this data about individuals is documented at'
+      :text_as_statement => 'Právo ke zveřejnění osobních dat'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
-    a_1 'Disclosure Rationale URL',
+    a_1 'URL s odůvodněním',
       :string,
       :input_type => :url,
-      :placeholder => 'Disclosure Rationale URL',
+      :placeholder => 'URL s odůvodněním',
       :requirement => ['standard_9']
 
-    label_standard_9 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
+    label_standard_9 '
+                        <strong>Měli byste zveřejnit, odkud plynou vaše práva k publikování osobních údajů</strong>. Usnadníte tím situaci uživatelům svých dat i lidem, kterých se data týkají.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_9'
     dependency :rule => 'A and B and C and D'
@@ -834,23 +864,25 @@ survey 'CZ',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_lawfulDisclosureURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_riskAssessmentExists 'Have you assessed the risks of disclosing personal data?',
+    q_riskAssessmentExists 'Analyzovali jste rizika spojená se zveřejněním osobních údajů?',
       :discussion_topic => :cz_riskAssessmentExists,
       :display_on_certificate => true,
-      :text_as_statement => 'The curator has',
-      :help_text => 'A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information.',
+      :text_as_statement => 'Rizika spojená s osobními údaji',
+      :help_text => 'Analýza rizik se týká jak soukromí postižených osob, tak použití a zveřejnění těchto dat.',
       :pick => :one
     dependency :rule => 'A and (B or C)'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no',
-      :text_as_statement => 'not carried out a privacy risk assessment'
+      :text_as_statement => 'poskytovatel neprovedl analýzu rizik'
     a_true 'yes',
-      :text_as_statement => 'carried out a privacy risk assessment',
+      :text_as_statement => 'poskytovatel provedl analýzu rizik',
       :requirement => ['pilot_6']
 
-    label_pilot_6 'You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.',
+    label_pilot_6 '
+                     <strong>Pokud zveřejňujete osobní data, měli byste analyzovat související rizika.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_6'
     dependency :rule => 'A and (B or C) and D'
@@ -859,23 +891,24 @@ survey 'CZ',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_false
 
-    q_riskAssessmentUrl 'Where is your risk assessment published?',
+    q_riskAssessmentUrl 'Kde máte analýzu rizik zveřejněnou?',
       :discussion_topic => :cz_riskAssessmentUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The risk assessment is published at',
-      :help_text => 'Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.'
+      :text_as_statement => 'Analýza rizik',
+      :help_text => 'Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace, můžete ji pouze shrnout nebo příslušné části cenzurovat.'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_1 'Risk Assessment URL',
+    a_1 'URL analýzy rizik',
       :string,
       :input_type => :url,
-      :placeholder => 'Risk Assessment URL',
+      :placeholder => 'URL analýzy rizik',
       :requirement => ['standard_10']
 
-    label_standard_10 'You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.',
+    label_standard_10 '
+                        <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>, aby se zájemci mohli podívat, nakolik s příslušnými riziky počítáte.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_10'
     dependency :rule => 'A and (B or C) and D and E'
@@ -885,11 +918,11 @@ survey 'CZ',
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_riskAssessmentUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_riskAssessmentAudited 'Has your risk assessment been independently audited?',
+    q_riskAssessmentAudited 'Prošla vaše analýza rizik nezávislým auditem?',
       :discussion_topic => :cz_riskAssessmentAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The risk assessment has been',
-      :help_text => 'It\'s good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
+      :text_as_statement => 'Audit analýzy rizik',
+      :help_text => 'Je dobrým zvykem nechat si analýzu rizik ještě ověřit. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -900,10 +933,11 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'analýza rizik prošla nezávislým auditem',
       :requirement => ['standard_11']
 
-    label_standard_11 'You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.',
+    label_standard_11 '
+                           <strong>Analýza rizik by měla projít auditem</strong>, abyste měli jistotu, že je v pořádku.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_11'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -914,33 +948,37 @@ survey 'CZ',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
+    q_individualConsentURL '',
       :discussion_topic => :cz_individualConsentURL,
       :display_on_certificate => true,
       :text_as_statement => 'Individuals affected by this data have this privacy notice',
-      :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.'
-    dependency :rule => 'A and (B or C) and D'
+      :help_text => ''
+    dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
     a_1 'Privacy Notice URL',
       :string,
       :input_type => :url,
       :placeholder => 'Privacy Notice URL',
       :requirement => ['pilot_7']
 
-    label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.',
+    label_pilot_7 '
+                           <strong></strong>
+                        ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
-    dependency :rule => 'A and (B or C) and D and E'
+    dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
+    q_dpStaff '',
       :discussion_topic => :cz_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -952,7 +990,7 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted 'Have you involved them in the risk assessment process?',
+    q_dbStaffConsulted '',
       :discussion_topic => :cz_dbStaffConsulted,
       :display_on_certificate => true,
       :text_as_statement => 'The individual responsible for data protection',
@@ -969,7 +1007,9 @@ survey 'CZ',
       :text_as_statement => 'has been consulted',
       :requirement => ['pilot_8']
 
-    label_pilot_8 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
+    label_pilot_8 '
+                           <strong></strong>
+                        ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -980,11 +1020,11 @@ survey 'CZ',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
+    q_anonymisationAudited '',
       :discussion_topic => :cz_anonymisationAudited,
       :display_on_certificate => true,
       :text_as_statement => 'The anonymisation of the data has been',
-      :help_text => 'It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
+      :help_text => '',
       :pick => :one
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -997,7 +1037,9 @@ survey 'CZ',
       :text_as_statement => 'independently audited',
       :requirement => ['standard_12']
 
-    label_standard_12 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
+    label_standard_12 '
+                        <strong></strong>
+                     ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'

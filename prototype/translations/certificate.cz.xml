@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questionnaire version="0.7" xml:lang="en">
+   <levels>
+      <level id="basic">Skvělý začátek v publikování otevřených dat.</level>
+      <level id="pilot">Uživatelé dat mají podporu poskytovatele a možnost zpětné vazby.</level>
+      <level id="standard">Pravidelně publikovaná data se spolehlivou podporou, na které se dá stavět.</level>
+      <level id="exemplar">Výjimečný, ukázkový příklad informační infrastruktury.</level>
+   </levels>
+   <group id="general">
+      <label>Obecné informace</label>
+      <question id="dataTitle">
+         <label>Jaký je název datové sady?</label>
+         <input placeholder="Název datové sady" required="required"/>
+         <help>Uživatelé název uvidí v seznamu podobných zdrojů, takže se snažte, aby text názvu nebyl příliš dlouhý a zároveň byl unikátní a výstižný, aby se podle něj dalo rychle zorientovat.</help>
+      </question>
+      <question id="documentationUrl" display="Dokumentace">
+         <label>Kde je zveřejněna dokumentace?</label>
+         <input type="url" placeholder="URL dokumentace"/>
+         <help>Uveďte adresu, na které mohou uživatelé vašich dat získat podrobnější informace. Může jít například o záznam v nějakém datovém katalogu.</help>
+         <if test="this.releaseType() !== 'collection'">
+            <requirement level="pilot">
+               <strong>Měli byste zveřejnit dokumentaci dat</strong>, aby uživatelé získali lepší představu o jejich obsahu, kontextu a možnostech využití.</requirement>
+         </if>
+         <if test="this.releaseType() === 'collection'">
+            <requirement test="this.documentationUrl() !== ''">
+               <strong>Aby lidé mohli vaše data využít, je třeba zveřejnit jejich dokumentaci a odkaz na data samotná.</strong>
+            </requirement>
+         </if>
+      </question>
+      <question id="publisher" display="Poskytovatel">
+         <label>Kdo data publikuje?</label>
+         <input placeholder="název poskytovatele" required="required"/>
+         <help>Uveďte název organizace, která data publikuje.</help>
+      </question>
+      <question id="publisherUrl" display="Web poskytovatele">
+         <label>Webová stránka poskytovatele</label>
+         <input type="url" placeholder="Web poskytovatele"/>
+         <help>Uveďte prosím URL webu poskytovatele. To pomáhá identifikaci dat pocházejících od stejných poskytovatelů.</help>
+      </question>
+      <question id="releaseType">
+         <label>Co přesně zveřejňujete?</label>
+         <radioset required="required">
+            <option value="oneoff">
+               <label>jedna datová sada (jednorázová publikace)</label>
+               <help>Jedná se o jeden dataset a nečekáte, že byste výhledově zveřejňovali další podobné datasety.</help>
+            </option>
+            <option value="collection">
+               <label>několik souvisejících datových sad (jednorázová publikace)</label>
+               <help>Jde o několik datových sad a nečekáte, že byste výhledově zveřejňovali další podobné datové sady.</help>
+            </option>
+            <option value="series">
+               <label>několik souvisejících datových sad (průběžná aktualizace)</label>
+               <help>Jde o několik datových sad, které budete v budoucnu aktualizovat.</help>
+            </option>
+            <option value="service">
+               <label>službu nebo API pro přístup k otevřeným datům</label>
+               <help>Jde o webovou službu, přes kterou jde data získat automatizovaně.</help>
+            </option>
+         </radioset>
+      </question>
+   </group>
+   <group id="practical">
+      <label>Praktické informace</label>
+      <help>Vyhledávání dat, přesnost, kvalita a záruky</help>
+      <group id="findability">
+         <label>Vyhledávání dat</label>
+         <help>jak se lidé o vašich datech dozvědí</help>
+         <question id="onWebsite">
+            <label>Odkazujete na data z domovské stránky Vašeho webu?</label>
+            <yesno/>
+            <help>Pomocí odkazu z domovské stránky Vašeho webu se data lépe hledají.</help>
+            <requirement level="standard">
+               <strong>Měli byste na data odkazovat z domovské stránky Vašeho webu </strong>, aby je lidé lépe našli.</requirement>
+         </question>
+         <if test="this.onWebsite() === 'true'">
+            <repeat id="webPages">
+               <label>Odkazy na webu</label>
+               <question id="webpage" display="Webová stránka s odkazem na data">
+                  <label>Která stránka na vašem webu na data odkazuje?</label>
+                  <input type="url" required="required" placeholder="URL stránky"/>
+                  <help>URL stránky v rámci Vašeho webu, která na data odkazuje.</help>
+               </question>
+            </repeat>
+         </if>
+         <question id="listed">
+            <label>Jsou vaše data vedená v datovém katalogu?</label>
+            <yesno/>
+            <help>Data se lépe hledají, když jsou uvedená v relevantních katalozích, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy.</help>
+            <requirement level="standard">
+               <strong>Vaše data by měla být snadno k nalezení všude, kde by je uživatelé mohli hledat.</strong>
+            </requirement>
+         </question>
+         <if test="this.listed() === 'true'">
+            <repeat id="listings">
+               <label>Zařazení do datových katalogů</label>
+               <question id="listing" display="Relevantní datové katalogy">
+                  <label>V jakém datovém katalogu jsou data vedena?</label>
+                  <input type="url" required="required" placeholder="URL datového katalogu"/>
+                  <help>Uveďte URL datového katalogu, ve kterém jsou data zaregistrována. Můžete uvést také URL s výsledky vyhledávání pomocí webového vyhledávače.</help>
+               </question>
+            </repeat>
+         </if>
+         <question id="referenced">
+            <label>Odkazujete na tato data ve svých publikacích?</label>
+            <yesno/>
+            <help>Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, který pomáhá datům lépe rozumět.</help>
+            <requirement level="standard">
+               <strong>Měli byste na data odkazovat ve svých publikacích</strong>. Lidé je snáze najdou a budou zasazena do kontextu.</requirement>
+         </question>
+         <if test="this.referenced() === 'true'">
+            <repeat id="references">
+               <label>Odkazy</label>
+               <question id="reference" display="Související publikace">
+                  <label>Kde se na data odkazujete?</label>
+                  <input type="url" required="required" placeholder="URL dokumentu"/>
+                  <help>Uveďte URL dokumentu, který se na data odkazuje.</help>
+               </question>
+            </repeat>
+         </if>
+      </group>
+      <group id="accuracy">
+         <label>Zajištění aktuálnosti dat</label>
+         <help>jak zajišťujete aktuálnost dat</help>
+         <if test="this.releaseType() === 'service'">
+            <question id="serviceType" display="Mění se data zpřístupněná tímto API?">
+               <label>Mění se data, která zpřístupňujete prostřednictvím vašeho API?</label>
+               <radioset required="pilot">
+                  <option value="static" display="nemění se">
+                     <label>ne, API zpřístupňuje data, která se nemění</label>
+                     <help>Některá API slouží jen k jednoduššímu přístupu k neměnným datům, například kvůli jejich objemu</help>
+                  </option>
+                  <option value="changing" display="mění se">
+                     <label>ano, API zpřístupňuje data, která se mění</label>
+                     <help>Některá API zpřístupňují průběžně aktualizovaná data.</help>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.releaseType() === 'oneoff' || this.releaseType() === 'collection' || (this.releaseType() === 'service' &amp;&amp; this.serviceType() === 'static')">
+            <question id="timeSensitive" display="Včasnost dat">
+               <label>Budou vaše data v čase zastarávat?</label>
+               <radioset>
+                  <option value="true" display="data časem zastarají">
+                     <label>ano, tato data časem zastarají</label>
+                     <help>Například databáze autobusových zastávek časem zastará, protože některé zastávky zmizí a objeví se nové.</help>
+                  </option>
+                  <option value="timestamped"
+                          display="data časem zastarají, ale mají vyznačenou platnost">
+                     <label>ano, tato data časem zastarají, ale jsou doplněny informacemi o jejich platnosti</label>
+                     <help>Například demografické statistiky obvykle mívají vyznačenu časovou platnost. Podle toho se pozná, kdy byly aktuální.</help>
+                     <requirement level="pilot">
+                        <strong>Během vydání byste svá data měli opatřit údajem o časové platnosti dat</strong>, aby se poznalo, k jakému období se vztahují a kdy zastarají.</requirement>
+                  </option>
+                  <option value="false" display="data nezastarají">
+                     <label>ne, platnost těchto dat není závislá na čase</label>
+                     <help>Například výsledky vědeckého experimentu nepřestanou nutně platit jen kvůli tomu, že už jsou staré.</help>
+                     <requirement level="standard">
+                        <strong>Pokud vaše data závisí na čase, měli byste je aktualizovat</strong>, aby publikovaná data byla aktuální.</requirement>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.releaseType() === 'series'">
+            <question id="frequentChanges" display="Frekvence změn">
+               <label>Mění se data aspoň jednou denně?</label>
+               <yesno required="pilot" yes="data se mění aspoň jednou denně"/>
+               <help>Tímto informujete uživatele, zda se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete.</help>
+            </question>
+            <if test="this.frequentChanges() === 'true'">
+               <question id="seriesType" display="Typ aktualizací">
+                  <label>Jaký typ datového souboru řadě je to?</label>
+                  <radioset required="exemplar">
+                     <option value="dumps" display="úplný export všech dat datové sady">
+                        <label>pravidelně je publikován úplný export všech dat datové sady</label>
+                        <help>Zvolte, zda pravidelně zveřejňuje nové a aktualizované kopie vaší plné databáze. Při vytváření databáze skládek, je užitečné, aby lidé měli přístup k přívodu změn, aby mohli udržet své kopie aktuální.</help>
+                     </option>
+                     <option value="aggregate" display="agregáty změně dat">
+                        <label>pravidelné agregáty změně dat</label>
+                        <help>Vyberte, pokud pravidelně publikujete exporty, které obsahují úplný export všech dat datové sady, tj. obsahují nové, změněné i nezměněné údaje. Je dobré také nabídnout uživatelům přehled změn (například přes RSS), aby mohli snadno aktualizovat svou kopii dat.</help>
+                     </option>
+                  </radioset>
+               </question>
+               <if test="this.seriesType() === 'dumps'">
+                  <question id="changeFeed" display="export změněných dat">
+                     <label>pravidelně je publikován export změněných dat</label>
+                     <yesno yes="je k dispozici"/>
+                     <help>Dejte uživatelům vědět, pokud někde publikujete seznam změn ve svých datech, například nové přírůstky nebo změny stávajících záznamů. Seznam může být publikovaný například jako RSS, Atom, nebo v jiném vhodném formátu.</help>
+                     <requirement level="exemplar">
+                        <strong>Publikujte seznam změn ve svých datech</strong>, aby uživatelé mohli snadno aktualizovat své kopie.</requirement>
+                  </question>
+               </if>
+               <question id="frequentSeriesPublication" display="Nové verze těchto údajů jsou">
+                  <label>Jak často publikujete nové verze?</label>
+                  <radioset>
+                     <option value="rarely">
+                        <label>méně než jednou za měsíc</label>
+                     </option>
+                     <option value="monthly">
+                        <label>alespoň jednou měsíčně</label>
+                        <requirement level="pilot">
+                           <strong>Publikujte aspoň jednou měsíčně novou verzi</strong>, aby uživatelé měli aktuální a přesná data.</requirement>
+                     </option>
+                     <option value="weekly">
+                        <label>alespoň jednou týdně</label>
+                        <requirement level="standard">Publikujte aspoň jednou týdně novou verzi&lt;/strong&gt;, aby uživatelé měli aktuální a přesná data .</requirement>
+                     </option>
+                     <option value="daily">
+                        <label>alespoň jednou denně</label>
+                        <requirement level="exemplar">
+                           <strong>Publikujte aspoň jednou denně novou verzi</strong>, aby uživatelé měli aktuální a přesná data .</requirement>
+                     </option>
+                  </radioset>
+                  <help>Podle tohoto údaje uživatelé poznají, jak moc data zastarají, než vyjde další aktualizace.</help>
+               </question>
+            </if>
+            <question id="seriesPublicationDelay"
+                      display="Prodleva mezi vytvořením a zveřejněním dat">
+               <label>Jak dlouhá je prodleva mezi vytvořením dat a jejich zveřejněním?</label>
+               <radioset>
+                  <option value="extreme">
+                     <label>delší než časový úsek mezi dvěma vydáními</label>
+                     <help>Například zdrojová data se mění každý den, ale publikace dat trvá déle než jeden den.</help>
+                  </option>
+                  <option value="reasonable">
+                     <label>zhruba stejná jako časový úsek mezi dvěma vydáními</label>
+                     <help>Například zdrojová data se mění každý den a zhruba během jednoho dne je také publikujete.</help>
+                     <requirement level="pilot">
+                        <strong>Mezi vytvořením dat a jejich publikací by měla být přiměřeně krátká prodleva</strong>, menší než je prodleva mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data.</requirement>
+                  </option>
+                  <option value="good">
+                     <label>kratší než polovina časového úseku mezi vydáními</label>
+                     <help>Například když se zdrojová data mění každý den a publikace dat vám zabere nanejvýš dvanáct hodin.</help>
+                     <requirement level="standard">
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla přiměřeně krátká prodleva</strong>, menší než polovina prodlevy mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data .</requirement>
+                  </option>
+                  <option value="minimal" display="prodleva je minimální nebo žádná">
+                     <label>je minimální nebo žádné zpoždění</label>
+                     <help>Tuto možnost vyberte, pokud nové verze publikujete v řádu minut nebo sekund.</help>
+                     <requirement level="exemplar">
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla být co nejmenší prodleva</strong>, ideálně nulová, aby uživatelé vždy k dispozici aktuální a přesná data.</requirement>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.releaseType() === 'service'">
+            <question id="provideDumps" display="Datové soubory ke stažení">
+               <label>Zveřejňujete datové soubory ke stažení?</label>
+               <yesno yes="jsou k dispozici"/>
+               <help>Datový soubor s exportem obsahem datové sady, který si uživatelé mohou stáhnout. Datové soubory ke stažení umožňují uživatelů s daty pracovat i jinak, než jim dovoluje API.</help>
+               <requirement level="standard">
+                  <strong>Data byste měli publikovat v podobě datových souborů ke stažení</strong>. Umožníte tak uživatelům pracovat s úplnou datovou sadou.</requirement>
+            </question>
+            <if test="this.serviceType() === 'changing'">
+               <if test="this.provideDumps() === 'true'">
+                  <question id="dumpFrequency"
+                            display="Frekvence publikace datových souborů ke stažení">
+                     <label>Jak často publikujete datové soubory ke stažení?</label>
+                     <radioset>
+                        <option value="rarely">
+                           <label>méně často než jednou měsíčně</label>
+                        </option>
+                        <option value="monthly">
+                           <label>aspoň jednou měsíčně</label>
+                           <requirement level="pilot">
+                              <strong>Publikujete datové soubory ke stažení aspoň jednou měsíčně</strong>, aby uživatelé měli k dispozici aktuální data.</requirement>
+                        </option>
+                        <option value="weekly">
+                           <label>nejpozději týden od provedení změn</label>
+                           <requirement level="standard">
+                              <strong>Publikujete datové soubory ke stažení nejpozději týden od provedení změn</strong>, ať uživatelé dlouho nečekají na aktuální data.</requirement>
+                        </option>
+                        <option value="daily">
+                           <label>nejpozději den od provedení změn</label>
+                           <requirement level="exemplar">
+                              <strong>Publikujete datové soubory ke stažení do jednoho dne od provedení změn</strong>, ať mají uživatelé rychlý přístup k aktuálním datům.</requirement>
+                        </option>
+                     </radioset>
+                     <help>Častější publikace datových souborů ke stažení umožňuje uživatelům rychlejší přístup k aktuálním datům.</help>
+                  </question>
+               </if>
+            </if>
+            <if test="this.timeSensitive() !== 'true'">
+               <question id="corrected" display="Chyby v datech">
+                  <label>Je zajištěna oprava dat v případě, že budou objeveny chyby?</label>
+                  <yesno yes="budou opravovány"/>
+                  <help>Je dobrou praxí opravovat chyby v datech, zvláště pokud data sami používáte. Nezapomeňte na provedené opravy upozornit uživatele.</help>
+                  <requirement level="standard">
+                     <strong>Měli byste opravit nahlášené chyby</strong>, pomůžete tak všem uživatelům dat.</requirement>
+               </question>
+            </if>
+         </if>
+      </group>
+      <group id="quality">
+         <label>Kvalita dat</label>
+         <help>kvalita dat ovlivňuje, nakolik se vašim datům dá věřit</help>
+         <question id="qualityUrl" display="Dokumentace kvality dat">
+            <label>Kde jsou dokumentovány známé nedostatky a chyb v datech?</label>
+            <input type="url" placeholder="URL dokumentace"/>
+            <help>URL, kde se uživatelé mohou dozvědět podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při migraci dat. Buďte ohledně známých nedostatků v datech otevření a zvýšíte tak důvěryhodnost vašich dat.</help>
+            <requirement level="standard">
+               <strong>Známé nedostatky a chyby v datech by měly být dokumentovány a tato dokumentace by měla být zveřejněna</strong>, aby se uživatelé mohli rozhodnout, nakolik na ně mohou spoléhat.</requirement>
+         </question>
+         <question id="qualityControlUrl" display="Dokumentace systému řízení kvality dat">
+            <label>Kde máte popsaný svůj systém řízení kvality dat ?</label>
+            <input type="url"
+                   placeholder="URL popisující dokumentace systému řízení kvality dat řízení kvality"/>
+            <help>Uveďte adresu, kde se uživatelé mohou dozvědět o způsobu kontroly kvality dat, ať již automatizované či ruční. Dáváte tím najevo, že berete kvalitu dat vážně, a motivujete uživatele ke hlášení chyb, což přináší přínosy všem uživatelům.</help>
+            <requirement level="exemplar">
+               <strong>Měli byste popsat váš způsob zajištění kvality datDokumentujte své procesy pro řízení kvality</strong>, ať se uživatelé vímohou rozhodnout, nakolik mohou vašim datům důvěřovat.</requirement>
+         </question>
+      </group>
+      <group id="guarantees">
+         <label>Zajištění</label>
+         <help>dostupnosti vašich dat</help>
+         <question id="backups" display="Zálohování dat">
+            <label>Zálohujete data v oddělené lokalitě?</label>
+            <yesno yes="data jsou zálohována v oddělené lokalitě"/>
+            <help>Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody.</help>
+            <requirement level="standard">
+               <strong>Provádějte zálohování svých dat do oddělené lokality</strong>, abyste o ně v případě nehody nepřišli.</requirement>
+         </question>
+         <if test="this.releaseType() === 'service'">
+            <question id="slaUrl" display="Dostupnost služby">
+               <label>Kde je popsána garantovaná úroveň dostupnosti služby?</label>
+               <input type="url"
+                      placeholder="URL popisující garantovanou úroveň dostupnosti služby"/>
+               <help>Uveďte URL k dokumentu, který popisuje vámi garantovanou úroveň dostupnosti služby. Můžete například uvést, že garantujete dostupnost 99,5 %, nebo že dostupnost služeb nijak nezaručujete.</help>
+               <requirement level="standard">
+                  <strong>Měli byste uvést, jaká garantovaná úroveň dostupnosti služby</strong>, aby její uživatelé věděli, nakolik se na ni mohou spolehnout.</requirement>
+            </question>
+            <question id="statusUrl" display="Aktuální stav služby">
+               <label>Kde se poskytují informace o aktuálním stavu služby?</label>
+               <input type="url" placeholder="URL s popisem aktuálního stavu služby"/>
+               <help>Uveďte URL stránky, na které mohou uživatelé najít informace o aktuálním stavu služby, včetně případných výpadků.</help>
+               <requirement level="exemplar">Měli byste provozovat <strong>informační stránku s údaji o aktuálním stavu vaší služby</strong>, ať mají uživatelé přehled o aktuálním stavu služby.</requirement>
+            </question>
+         </if>
+         <question id="onGoingAvailability" display="Dlouhodobá dostupnost dat">
+            <label>Jak dlouho budou data dostupná?</label>
+            <radioset>
+               <option value="experimental"
+                       display="poskytování dat může být kdykoli ukončeno">
+                  <label>poskytování dat může být kdykoli ukončeno</label>
+               </option>
+               <option value="short" display="aspoň jeden rok">
+                  <label>data jsou publikována experimentálně, ale očekává se, že budou publikována alespoň rok</label>
+                  <requirement level="pilot">
+                     <strong>Měli byste se zaručit, že data budou ve stávající podobě k dispozici alespoň jeden rok.</strong>
+                  </requirement>
+               </option>
+               <option value="medium" display="očekává se, že budou publikována několik let">
+                  <label>ve střednědobém výhledu se počítá s publikací dat alespoň v řádu několika let</label>
+                  <requirement level="standard">
+                     <strong>Měli byste zaručit, že data ve stávající podobě budou k dispozici v horizontu několika let.</strong>
+                  </requirement>
+               </option>
+               <option value="long" display="očekává se, že budou publikována řadu let">
+                  <label>publikace dat je součástí běžného provozu a počítá se s dlouhodobou dostupností</label>
+                  <requirement level="exemplar">
+                     <strong>Měli byste zaručit, že data v současné podobě budou k dispozici dlouhodobě.</strong>
+                  </requirement>
+               </option>
+            </radioset>
+         </question>
+      </group>
+   </group>
+   <group id="technical">
+      <label>Technické informace</label>
+      <help>Umístění, formát a důvěryhodnost</help>
+      <group id="locations">
+         <label>Umístění</label>
+         <help>jakým způsobem mohou lidé přistupovat k vašim</help>
+         <if test="this.releaseType() === 'oneoff'">
+            <question id="datasetUrl" display="Odkaz na data">
+               <label>Kde je vaše datová sada k dispozici?</label>
+               <input type="url" placeholder="přímý odkaz (URL) na data"/>
+               <help>Uveďte přímý odkaz (URL) na data. Na otevřená data by z webu měl vést přímý odkaz, aby je lidé snadno našli a mohli využít.</help>
+               <if test="this.documentationUrl() === ''">
+                  <requirement test="this.datasetUrl() !== ''">
+                     <strong>Uveďte přímý odkaz (URL) na svá data nebo na jejich dokumentaci.</strong>
+                  </requirement>
+               </if>
+               <if test="this.documentationUrl() !== ''">
+                  <requirement test="this.datasetUrl() !== ''" level="pilot">
+                     <strong>Měli byste uvést přímý odkaz na data samotná</strong>, ať se k nim lidé snadno dostanou.</requirement>
+               </if>
+            </question>
+         </if>
+         <if test="this.releaseType() === 'series'">
+            <question id="versionManagement">
+               <label>Jak publikujete nové datové zdroje datové sady, např. soubory v časové řadě?</label>
+               <checkboxset>
+                  <option value="current">
+                     <label>URL zůstává stejné, ale mění se data dostupná po přistoupení na dané URLn</label>
+                     <help>Tuto možnost vyberte, pokud je aktuální verze dat vždy ke stažení na stejném URL.</help>
+                     <requirement level="standard">
+                        <strong>Měli byste stanovit URL, na kterém uživatelé vždy najdou aktuální verzi dat.</strong>
+                     </requirement>
+                  </option>
+                  <option value="template">
+                     <label>je definován vzor URL pro měnící se data</label>
+                     <help>Tuto možnost vyberte, pokud se URL s každého nově publikovaného datového zdroje mění podle definovaného vzoru. Např. zahrnutí data vydání do URL (například „2013-04“). To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.</help>
+                     <requirement level="pilot">Pro jednotlivé datové zdroje <strong>by měl být konzistentně používán definovaný vzor URL</strong>, aby je bylo možno stahovat automaticky.</requirement>
+                  </option>
+                  <option value="list">
+                     <label>jako seznam zpráv publikujeme seznam publikovaných datových zdrojů</label>
+                     <help>Tuto možnost vyberte, pokud poskytujete webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivé publikované datové zdroje a podrobnosti o nich. To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.</help>
+                     <requirement level="standard">
+                        <strong>Měl by být publikován dokument nebo feed se seznamem všech publikovaných datových zdrojů</strong>, ať si je lidé mohou snadno automaticky stáhnout.</requirement>
+                  </option>
+               </checkboxset>
+               <if test="this.documentationUrl() === '' &amp;&amp; this.versionManagement() !== 'current' &amp;&amp; this.versionManagement() !== 'template' &amp;&amp; this.versionManagement() !== 'list'">
+                  <requirement>Je třeba zajistit, že jsou aktuální data dostupná <strong>buď vždy na stálém URL, nebo je pro data využívána posloupnost URL podle definovaného vzoru, nebo na stránce se seznamem publikovaných datových zdrojů</strong>.v</requirement>
+               </if>
+            </question>
+            <if test="this.versionManagement().current">
+               <question id="currentDatasetUrl" display="Adresa aktuální datové sady">
+                  <label>Kde je umístěna vaše aktuální datová sada?</label>
+                  <input type="url"
+                         placeholder="URL aktuální datové sady"
+                         required="required"/>
+                  <help>Uveďte URL odkazu na aktuální verzi datové sady. Data na tomto URL by se měla měnit s vydáním každé nové verze.</help>
+               </question>
+            </if>
+            <if test="this.versionManagement().template">
+               <question id="versionsTemplateUrl" display="Formát URL">
+                  <label>Jaký formát mají URL průběžně publikovaných datových zdrojů?</label>
+                  <input type="text" placeholder="vzor URL" required="required"/>
+                  <help>Uveďte vzor, podle které jsou tvořena URL průběžně publikovaných datových zdrojů. Měnící se části URL můžete vyznačit `{takto}`, například: `http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv`.</help>
+               </question>
+            </if>
+            <if test="this.versionManagement().list">
+               <question id="versionsUrl" display="seznamem publikovaných datových zdrojů">
+                  <label>Kde publikujete seznam publikovaných datových zdrojů?</label>
+                  <input type="url"
+                         placeholder="URL seznamu publikovaných datových zdrojů"
+                         required="required"/>
+                  <help>Uveďte URL stránky nebo feedu se strojově čitelným seznamem publikovaných datových zdrojů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.</help>
+               </question>
+            </if>
+         </if>
+         <if test="this.releaseType() === 'service'">
+            <question id="endpointUrl" display="Kořenové URL datového API">
+               <label>Kořenové URL přístupového bodu vašeho API</label>
+               <input type="url" placeholder="kořenové URL"/>
+               <help>Uveďte URL, které odkazuje na přístupový bod vašeho API. Na tomto URL by skripty a aplikace měli získat popis služeb poskytovaných API.</help>
+               <if test="this.documentationUrl() === ''">
+                  <requirement test="this.endpointUrl() !== ''">Musíte dát k dispozici <strong>kořenové URL přístupového bodu vašeho datového API nebo URL dokumentace</strong>, aby je mohli uživatelé najít.</requirement>
+               </if>
+               <if test="this.documentationUrl() !== ''">
+                  <requirement test="this.endpointUrl() !== ''" level="standard">Měli byste dát k dispozici <strong>dokumentaci popisu služby nebo kořenové URL vašeho datového API</strong>, aby je mohli uživatelé najít .</requirement>
+               </if>
+            </question>
+            <if test="this.provideDumps() === 'true'">
+               <question id="dumpManagement">
+                  <label>Jak publikujete soubory dat ke stažení?</label>
+                  <checkboxset>
+                     <option value="current">
+                        <label>URL zůstává stejné, ale mění se data dostupná po přistoupení na dané URL</label>
+                        <help>Tuto možnost vyberte, pokud se aktuální export dat v podobě souboru ke stažení dá vždy najít na stejném URL.</help>
+                        <requirement level="standard">
+                           <strong>Měli byste uživatelům nabídnout jedno stálé URL, na kterém si stáhnou aktuální export dat v podobě souboru ke stažení.</strong>
+                        </requirement>
+                     </option>
+                     <option value="template">
+                        <label>je definován vzor URL pro měnící se data</label>
+                        <help>Tuto možnost vyberte, pokud se URL s každého nově publikovaného datového souboru ke stažení mění podle definovaného vzoru. Např. zahrnutí data vydání do URL (například „2013-04“). To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.</help>
+                        <requirement level="exemplar">
+                           <strong>URL jednotlivých souborů ke stažení s exportem dat vybírejte podle jasného vzoru</strong>, ať si je lidé mohou stahovat automaticky.</requirement>
+                     </option>
+                     <option value="list">
+                        <label>publikujeme seznam publikovaných datových souborů ke stažení</label>
+                        <help>Tuto možnost vyberte, pokud poskytujete webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivé publikované datové soubory ke stažení a podrobnosti o nich. To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat..</help>
+                        <requirement level="exemplar">
+                           <strong>Publikujte dokument nebo feed se seznamem všech souborů ke stažení</strong>, ať si je lidé mohou snadno automaticky stáhnout.</requirement>
+                     </option>
+                  </checkboxset>
+               </question>
+               <if test="this.dumpManagement().current">
+                  <question id="currentDumpUrl"
+                            display="Adresa nejaktuálnějšího souboru ke stažení">
+                     <label>Kde je aktuální soubor ke stažení?</label>
+                     <input type="url" placeholder="URL exportovaných dat" required="required"/>
+                     <help>Uveďte URL nejaktuálnějšího souboru ke stažení. Soubor dostupný na tomto URL by se měl měnit pokaždé, když provedete nový export dat.</help>
+                  </question>
+               </if>
+               <if test="this.dumpManagement().template">
+                  <question id="dumpsTemplateUrl" display="Formát URL">
+                     <label>Jaký formát mají URL jednotlivých datových souborů ke stažení?</label>
+                     <input type="text" placeholder="šablona URL" required="required"/>
+                     <help>Uveďte šablonu, podle které jsou tvořena URL jednotlivých souborů ke stažení. Měnící se části URL můžete vyznačit `{takto}`, například: `http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv`.</help>
+                  </question>
+               </if>
+               <if test="this.dumpManagement().list">
+                  <question id="dumpsUrl" display="Seznam souborů ke stažení">
+                     <label>Kde publikujete seznam souborů ke stažení?</label>
+                     <input type="url"
+                            placeholder="URL seznamu souborů ke stažení"
+                            required="required"/>
+                     <help>Uveďte URL stránky nebo feedu se strojově čitelným seznamem souborů ke stažení. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.</help>
+                  </question>
+               </if>
+            </if>
+         </if>
+         <if test="this.changeFeed() === 'true'">
+            <question id="changeFeedUrl" display="Seznam změn">
+               <label>Kde publikujete seznam změn v datech?</label>
+               <input type="url"
+                      placeholder="URL seznamu změn v datech"
+                      required="required"/>
+               <help>Uveďte odkaz na stránku nebo feed se strojově čitelným seznamem starších souborů ke stažení. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.</help>
+            </question>
+         </if>
+      </group>
+      <group id="format">
+         <label>Formát</label>
+         <help>jak lze s vašimi daty pracovat</help>
+         <question id="machineReadable" display="Strojová čitelnost">
+            <label>Jsou data strojově čitelná?</label>
+            <yesno yes="data jsou strojově čitelná"/>
+            <help>Lidé dávají přednost datům, která se dají snadno, rychle a přesně zpracovat počítačem. Například skenovaná kopie tabulky strojově čitelná není, zatímco CSV soubor jednoznačně ano.</help>
+            <requirement level="pilot">
+               <strong>Měli byste data poskytovat ve strojově čitelném formátu</strong>, aby se dala snadno zpracovat.</requirement>
+         </question>
+         <question id="openStandard" display="Formát dat">
+            <label>Jsou vaše data ve standardizovaném otevřeném formátu?</label>
+            <yesno yes="standardizovaný, otevřený"/>
+            <help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Otevřené standardy vznikají v rámci jasného a transparentního procesu spolupráce. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.</help>
+            <requirement level="standard">
+               <strong>Měli byste svá data publikovat v otevřeném standardizovaném formátu</strong>, aby je ostatní mohli snadno zpracovat pomocí běžně dostupných nástrojů.</requirement>
+         </question>
+         <question id="dataType">
+            <label>Jaký typ dat publikujete?</label>
+            <checkboxset required="pilot">
+               <option value="documents">
+                  <label>lidsky čitelné dokumenty</label>
+                  <help>Tuto možnost vyberte, pokud jsou vaše data určena pro přímé využití lidmi. Příkladem jsou třeba firemní předpisy, vědecké a novinové články nebo zápisy z porad. I tyto dokumenty mívají nějakou strukturu, ale vesměs jde převážně o text.</help>
+               </option>
+               <option value="statistical">
+                  <label>statistické údaje, například počty, průměry nebo podíly</label>
+                  <help>Tuto možnost vyberte, pokud jde o statistická nebo obecně číselná data, například počty, průměry nebo podíly. Sem patří například demografické údaje, údaje o dopravě nebo statistiky kriminality.</help>
+               </option>
+               <option value="geographic">
+                  <label>geografické (prostorové) informace, například body a hranice</label>
+                  <help>Tuto možnost vyberte, pokud se vaše data dají vynést na mapu, například jako body, hranice nebo čáry.</help>
+               </option>
+               <option value="structured">
+                  <label>jiná strukturovaná data</label>
+                  <help>Tuto možnost vyberte, pokud publikujete strukturovaná data jiného typu, například události, jízdní řády nebo kontakty. Nebo jakákoli jiná data, která lze analyzovat a interpretovat více způsoby.</help>
+               </option>
+            </checkboxset>
+         </question>
+         <if test="this.dataType().documents">
+            <question id="documentFormat" display="Formát dokumentů">
+               <label>Jaké z následujících vlastností mají vámi publikované dokumenty?</label>
+               <radioset>
+                  <option value="semantic" display="sémantické značkování">
+                     <label>Jsou sémanticky značkované, například pomocí HTML, DocBook nebo Markdown.</label>
+                     <help>Sémantické značkování dělí dokument na logické stavební prvky, jako jsou kapitoly, nadpisy nebo tabulky, takže se s nimi snadno automaticky pracuje – například není problém sestavit seznam tabulek nebo rejstřík. Sémantické značkování také usnadňuje formátování dokumentu podle potřeby.</help>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat sémanticky značkované dokumenty</strong>, aby si je uživatelé mohli snadno přeformátovat a jinak zpracovat.</requirement>
+                  </option>
+                  <option value="format" display="vizuální značkování">
+                     <label>Jsou optimalizované pro zobrazení, například OOXML nebo PDF.</label>
+                     <help>Tyto formáty se zabývají především vizuální podobou dokumentu, například písmem, barvami a umístěním prvků na stránce. Hodí se pro běžné čtení dokumentu, ale nejsou vhodné pro automatické zpracování a automatizované změny formátování.</help>
+                     <requirement level="pilot">
+                        <strong>Měli byste publikovat dokumenty ve formátu, který je pro dokumenty určený</strong>, protože je pak bude možné zpracovat pomocí nástrojů pro zpracování dokumentů.</requirement>
+                  </option>
+                  <option value="unsuitable" display="data nevhodná pro dokumenty">
+                     <label>Obsahují data ve formátech nevhodných pro dokumenty jako například tabulky Excelu, JSON nebo CSV.</label>
+                     <help>Pro tato data je lepší zvolit tabulkové nebo strukturované formáty.</help>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.dataType().statistical">
+            <question id="statisticalFormat" display="Formát statistických dat">
+               <label>V jakém formátu jsou vaše statistická data?</label>
+               <radioset>
+                  <option value="statistical" display="formát přímo určený pro statistická data">
+                     <label>Ve formátu přímo určeném pro statistická data, například <a href="http://sdmx.org/">SDMX</a> nebo <a>Data Cube</a>.</label>
+                     <help>Nativní formáty statistických dat jako <a href="http://sdmx.org/">SDMX</a> nebo <a>Data Cube</a> umožňují reprezentovat vícerozměrná statistická data ve formě záznamů o jednotlivých pozorováních a k nim přiřazených dimenzích. Každé pozorování může být navíc opatřeno anotací, která poskytuje další kontext.</help>
+                     <requirement level="exemplar">
+                        <strong>Statistická data byste měli publikovat ve formátu, který umožňuje reprezentovat jejich vícerozměrnou strukturu</strong> a usnadňuje tak jejich analýzu.</requirement>
+                  </option>
+                  <option value="tabular" display="tabulkový">
+                     <label>V tabulkovém formátu, například CSV.</label>
+                     <help>V tabulkových formátech jsou statistická data reprezentována jako řádky a sloupce tabulky. Snadno se zpracovávají, ale oproti nativním formátům statistických, ale nelze data reprezentovat v tabulkových formátech jako vícerozměrné (multidimenzionální) datové kostky.</help>
+                     <requirement level="standard">
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat.</requirement>
+                  </option>
+                  <option value="format" display="prezentační">
+                     <label>V prezentačním formátu s důrazem na formátování, například Excel.</label>
+                     <help>V tabulkových procesorech je občas struktura dat vyznačena vizuálně, například pomocí kurzívy nebo tučného písma. Lidem to pomáhá pochopit vztahy mezi jednotlivými částmi dat, ale strojově se dokumenty značkované pouze tímto způsobem zpracovávají obtížně.</help>
+                     <requirement level="pilot">
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat.</requirement>
+                  </option>
+                  <option value="unsuitable" display="nepříliš vhodný, dokumentový">
+                     <label>Ve formátu nevhodném pro statistická nebo tabulková data například Word nebo PDF.</label>
+                     <help>Zmíněné formáty se k uložení statistických dat příliš nehodí, protože strukturu dat v nich lze strukturu dat vyjádřit obtížně nebo vůbec.</help>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.dataType().geographic">
+            <question id="geographicFormat" display="Formát geografických dat">
+               <label>V jakém formátu jsou vaše prostorová (geografická) data?</label>
+               <radioset>
+                  <option value="specific" display="nativní geografický">
+                     <label>Ve formátu určeném pro prostorová data, například <a href="http://www.opengeospatial.org/standards/kml/">KML</a> nebo <a href="http://www.geojson.org/">GeoJSON</a>.</label>
+                     <help>Tyto formáty přímo pracují s body, čarami a hranicemi, a umožňují reprezentovat příslušnou strukturu dat, díky čemuž se dobře automatizovaně zpracovávají.</help>
+                     <requirement level="exemplar">
+                        <strong>Prostorová data byste měli zveřejňovat ve specializovaném formátu pro tento typ dat</strong>, aby je uživatelé mohli snadno zpracovat v aplikacích.</requirement>
+                  </option>
+                  <option value="generic" display="obecný strukturovaný">
+                     <label>V obecném strukturovaném formátu, například JSON, XML nebo CSV.</label>
+                     <help>Každý formát pro ukládání strukturovaných dat může posloužit i pro data prostorová, zvlášť pokud jde jen o uložení bodů.</help>
+                     <requirement level="pilot">
+                        <strong>Prostorová data byste měli zveřejňovat alespoň v nějakém strukturovaném formátu</strong>, aby se dala snadno zpracovat.</requirement>
+                  </option>
+                  <option value="unsuitable" display="nepříliš vhodný">
+                     <label>Ve formátu nevhodném pro prostorová data, například Word nebo PDF.</label>
+                     <help>Tyto formáty se k uložení geografických dat nehodí, protože v nich nelze reprezentovat potřebnou strukturu dat.</help>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <if test="this.dataType().structured">
+            <question id="structuredFormat" display="Formát strukturovaných dat">
+               <label>V jakém formátu jsou vaše strukturovaná data?</label>
+               <radioset>
+                  <option value="suitable" display="vhodný, strukturovaný">
+                     <label>Ve formátu určeném pro strukturovaná data, například JSON, XML, Turtle nebo CSV.</label>
+                     <help>Data v těchto formátech jsou reprezentovány jako entity/objekty a jejich vlastnosti. Dají se snadno automaticky zpracovávat.</help>
+                     <requirement level="pilot">
+                        <strong>Strukturovaná data byste měli zveřejňovat ve formátu určeném pro strukturovaná data</strong>, aby je bylo možno snadno automatizovaně zpracovat.</requirement>
+                  </option>
+                  <option value="unsuitable" display="nevhodný, prezentační">
+                     <label>Ve formátu, který není určen pro strukturovaná data jako například Word nebo PDF.</label>
+                     <help>Tyto formáty se k uložení strukturovaných dat nehodí, protože v nich nelze reprezentovat strukturu dat, příp. pouze omezeně.</help>
+                  </option>
+               </radioset>
+            </question>
+         </if>
+         <question id="identifiers" display="Identifikátory objektů">
+            <label>Používáte v datech persistentní identifikátory?</label>
+            <yesno yes="ano, jsou používány persistentní identifikátory (GUID, URL, …)"/>
+            <help>Data zpravidla vypovídají o objektech reálného světa jako například školy nebo, silnice nebo je pro ně může existovat definovaný způsob značení. Pokud se data z různých zdrojů využívají pro označování objektů stejné persistentní a unikátní identifikátory, je pak snadnější propojovat data z různých zdrojů a zvyšovat tak hodnotu dat. Příklady takovýchto identifikátorů jsou např. GUID, DOI nebo URL.</help>
+            <requirement level="standard">Měli byste<strong>ve vašich datech používat identifikátory pro označování objektů</strong>, aby vaše data bylo možno snadno kombinovat s jinými daty o stejných objektech.</requirement>
+         </question>
+         <if test="this.identifiers() === 'true'">
+            <question id="resolvingIds" display="Navigace pomocí identifikátorů">
+               <label>Lze pomocí Vámi používaných identifikátorů objektů vyhledávat o objektech další údaje?</label>
+               <radioset>
+                  <option value="false" display="používané identifikátory to neumožňují">
+                     <label>Ne, podle používané identifikátory nelze použít k vyhledávání dalších údajů.</label>
+                  </option>
+                  <option value="service"
+                          display="používané identifikátory jsou podporovány službami">
+                     <label>Ano, existuje služba, která identifikátory překládá a umožňuje navigaci na další související informace.</label>
+                     <help>Identifikátory GUID nebo DOI nemohou být použity přímo k navigaci mezi zdroji jako je tomu v případě URL, ale lze využití online služeb, které tyto identifikátory překládají a zprostředkují navigaci na související zdroje.</help>
+                     <requirement level="standard">Pokud používáte identifikátory, které nelze přímo použít k navigaci mezi zdroji, měli byste <strong>poskytnout službu, která umožní navigaci na související zdroje pomocí použitých identifikátorů</strong>.</requirement>
+                  </option>
+                  <option value="resolvable" display="jsou využity URL jako identifikátory">
+                     <label>Ano, jako identifikátory jsou použity dereferencovatelné URL.</label>
+                     <help>URL jsou využitelná jak lidmi, tak počítače. Lidé si mohou URL snadno otevřít ve svém prohlížeči a dohledat tak informace třeba o <a href="http://opencorporates.com/companies/gb/08030289">firmě</a> nebo <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">PSČ</a>. Počítače pak např. prostřednictvím skriptů mohou URL využít pro přístup k datům.</help>
+                     <requirement level="exemplar">
+                        <strong>Měli byste uvádět odkazy na webové stránky s informacemi o objektech ve vašich datech</strong>, aby uživatelé mohli snadno najít a sdílet související informace.</requirement>
+                  </option>
+               </radioset>
+            </question>
+            <if test="this.resolvingIds() === 'service'">
+               <question id="resolutionServiceURL"
+                         display="Služba pro navigaci pomocí identifikátorů">
+                  <label>Adresa služby pro navigaci pomocí identifikátorů:</label>
+                  <input type="url" placeholder="URL služby"/>
+                  <help>Služba by měla na základě identifikátoru zadaného jako parametr dotazu vrátit data o příslušném objektu, který je identifikátorem identifikován.</help>
+                  <requirement level="standard">
+                     <strong>Měli byste zpřístupnit URL, na kterém lze podle identifikátorů získat další data o identifikovaných objektech</strong>, aby bylo možno získávání těchto dat automatizovat.</requirement>
+               </question>
+            </if>
+            <question id="existingExternalUrls">
+               <label>Existují jinde na webu další informace o objektech, které se vyskytují ve vašich datech?</label>
+               <yesno required="exemplar"/>
+               <help>Je možné, že o stejných objektech, jaké se vyskytují ve vašich datech, jsou na webu dostupné informace třetích stran. Například když máte v databázi PSČ, bylo by možné je využít pro propojení na data na národním geoportálu.</help>
+            </question>
+            <if test="this.existingExternalUrls() === 'true'">
+               <question id="reliableExternalUrls">
+                  <label>Jsou informace poskytované třetími stranami spolehlivé?</label>
+                  <yesno required="exemplar"/>
+                  <help>Pokud jsou ke stejným objektům, jako ve vašich datech, dostupná URL někde jinde na webu je to známka, že se jejich poskytovatel snaží zajistit jejich kvalitu a dostupnost. Tímto hodnotíte, na kolik považujete tato data za spolehlivá. Při hodnocení se můžete se podívat na open data certifikát poskytovatele nebo na obdobnou známku kvality.</help>
+               </question>
+               <if test="this.reliableExternalUrls">
+                  <question id="externalUrls" display="Další informační zdroje">
+                     <label>Okazujete na tato cizí URL ve svých datech?</label>
+                     <yesno yes="data odkazují na URL z jiných zdrojů"/>
+                     <help>Při využívání URL třetích stran je doporučováno využívat dereferencovatelná URL, která umožňují získat data o objektu po přistoupení na dané URL. Tím se snižuje duplicita dat a je usnadněno kombinování dat z více zdrojů.</help>
+                     <requirement level="exemplar">
+                        <strong>Měli byste pomocí URL odkazovat na data třetích stran</strong>. Usnadníte tím kombinování dat s jinými daty, která také využívají tato URL.</requirement>
+                  </question>
+               </if>
+            </if>
+         </if>
+      </group>
+      <group id="trust">
+         <label>Důvěryhodnost</label>
+         <help>do jaké míry mohou uživatelé vašim datům důvěřovat</help>
+         <question id="provenance" display="Informace o původu dat">
+            <label>Publikujete strojově čitelná metadata o původu dat?</label>
+            <yesno yes="strojově čitelné metadata o původu dat"/>
+            <help more="http://www.w3.org/TR/prov-primer/">Je vhodné publikovat metadata o tom, jak byla data vytvořena a zpracována, než byla publikována. Tím pomáháte posilovat důvěru uživatelů ve vaše data, protože si uživatelé mohou ověřit, jak data vznikla. Více o metadatech o původu naleznete <a>zde</a>.</help>
+            <requirement level="exemplar">
+               <strong>Měli byste publikovat strojově čitelná metadata o původu a zpracování dat</strong>, aby si uživatelé mohli ověřit, jak byla data zpracována.</requirement>
+         </question>
+         <question id="digitalCertificate" display="Ověření původ dat">
+            <label>Jakým způsobem si uživatelé mohou ověřit, že data skutečně pochází od vás?</label>
+            <input type="url" placeholder="URL dokumentace způsobu ověření"/>
+            <help>Pokud zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás. Například můžete data digitálně podepsat, aby bylo možné rozpoznat, že data byla pozměněna.</help>
+            <requirement level="exemplar">
+               <strong>Měli byste zajistit, aby si uživatelé mohli ověřit, že získaná data skutečně odpovídají datům, které publikujete.</strong> Tento krok pomáhá budovat důvěru uživatelů.</requirement>
+         </question>
+      </group>
+   </group>
+   <group id="social">
+      <label>Sociální informace</label>
+      <help>Dokumentace, podpora a služby</help>
+      <group id="documentation">
+         <label>Dokumentace</label>
+         <help>pomocí které usnadňujete lidem pochopit kontext a obsah vašich dat</help>
+         <if test="this.documentationUrl() !== ''">
+            <question id="documentationMetadata" display="Strojově čitelná metadata">
+               <label>Jaká metadata publikujete ve strojově čitelné podobě?</label>
+               <checkboxset>
+                  <option value="title">
+                     <label>název datové sady</label>
+                     <requirement level="standard">&lt;strong&gt;Měli byste publikovat strojově čitelný název datové sady&lt;/strong, aby bylo jasné, jak se data nazývají.</requirement>
+                  </option>
+                  <option value="description">
+                     <label>popis</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelný popis datové sady</strong>, aby bylo zřejmé, jaká data a o čem datová sada obsahuje.</requirement>
+                  </option>
+                  <option value="issued">
+                     <label>datum publikace</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné datum publikace</strong>, aby uživatelé věděli, nakolik jsou data aktuální.</requirement>
+                  </option>
+                  <option value="modified">
+                     <label>datum poslední aktualizace datové sady</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné datum poslední aktualizace datové sady</strong>, aby uživatelé věděli, jestli mají aktuální data.</requirement>
+                  </option>
+                  <option value="accrualPeriodicity" display="periodicita publikace datové sady">
+                     <label>periodicita publikace datové sady</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o periodicitě publikace datové sady</strong>, aby uživatelé věděli, jak často jsou data aktualizována.</requirement>
+                  </option>
+                  <option value="identifier">
+                     <label>identifikátor</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o URL, které identifikátorem datové sady</strong>, aby se k ní uživatelé mohli konzistentně přistupovat.</requirement>
+                  </option>
+                  <option value="landingPage">
+                     <label>URL metadat</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o URL samotných metadat</strong>, aby se k nim uživatelé mohli konzistentně přistupovat .</requirement>
+                  </option>
+                  <option value="language">
+                     <label>jazyk</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o jazyce datové sady</strong>, aby uživatelé věděli, jestli jim budou rozumět.</requirement>
+                  </option>
+                  <option value="publisher">
+                     <label>poskytovatel</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje informace o poskytovateli dat</strong>, aby se uživatelé mohli rozhodnout, nakolik jim mohou věřit.</requirement>
+                  </option>
+                  <option value="spatial">
+                     <label>související geografické území</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o tom, k jakému zeměpisnému území se data vztahují, nebo o jakém vypovídají.</strong>
+                     </requirement>
+                  </option>
+                  <option value="temporal">
+                     <label>související časové období</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelné údaje o časovém úseku, kterého se data týkají, nebo o kterém vypovídají.</strong>
+                     </requirement>
+                  </option>
+                  <option value="theme">
+                     <label>klasifikace</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelným způsobem klasifikovat datovou sadu </strong>, aby uživatelé věděli, čeho se data týkají.</requirement>
+                  </option>
+                  <option value="keyword">
+                     <label>klíčová slova</label>
+                     <requirement level="standard">
+                        <strong>Měli byste publikovat strojově čitelná klíčová slova vztahující se k datové sadě</strong>, aby ji uživatelé mohli lépe vyhledávat.</requirement>
+                  </option>
+                  <option value="distribution">
+                     <label>Datové zdroje (distribuce)</label>
+                  </option>
+               </checkboxset>
+            </question>
+            <if test="this.documentationMetadata().distribution">
+               <question id="distributionMetadata"
+                         display="Strojově čitelná metadata o datových zdrojích (distribucích)">
+                  <label>Jaká strojově čitelná metadata o datových zdrojích (distribucích, např. stažitelných souborech datové sady) publikujete?</label>
+                  <checkboxset>
+                     <option value="title">
+                        <label>název datového zdroje</label>
+                        <requirement level="standard">
+                           <strong>Měli byste publikovat strojově čitelný název datového zdroje</strong>, aby bylo zřejmé, jak se jednotlivé datové zdroje nazývají.</requirement>
+                     </option>
+                     <option value="description">
+                        <label>popis</label>
+                        <requirement level="standard">
+                           <strong>Měli byste publikovat strojově čitelný popis datového zdroje</strong>, aby lidé věděli, co která distribuce obsahuje.</requirement>
+                     </option>
+                     <option value="issued">
+                        <label>datum publikace</label>
+                        <requirement level="standard">
+                           <strong>Měli byste publikovat strojově čitelné datum publikace datového zdroje</strong>, aby uživatelé věděli, jak je datový zdroj starý.</requirement>
+                     </option>
+                     <option value="modified">
+                        <label>datum aktualizace datového zdroje</label>
+                        <requirement level="standard">
+                           <strong>Měli byste publikovat strojově čitelné datum poslední aktualizace datového zdroje</strong>, aby lidé věděli, jestli mají aktuální verzi datového zdroje dat.</requirement>
+                     </option>
+                     <option value="rights">
+                        <label>podmínky užití</label>
+                        <requirement level="standard">
+                           <strong>Měli byste publikovat strojově čitelný odkaz na podmínky užití či licenci, pod kterou jsou data publikována</strong>, aby uživatelé věděli, jak mohou s datovým zdrojem nakládat.</requirement>
+                     </option>
+                     <option value="accessURL" display="URL pro přístup k datům">
+                        <label>URL pro přístup k datům</label>
+                        <help>Uveďte URL pro přístup k datům v případě, že vaše data nejsou dostupná ve formě souborů ke stažení, ale například jako API.</help>
+                     </option>
+                     <option value="downloadURL" display="URL datového zdroje">
+                        <label>URL datového zdroje</label>
+                     </option>
+                     <option value="byteSize">
+                        <label>velikost v bytech</label>
+                     </option>
+                     <option value="mediaType">
+                        <label>media type dle IANA</label>
+                     </option>
+                  </checkboxset>
+               </question>
+            </if>
+         </if>
+         <question id="technicalDocumentation" display="Technická dokumentace">
+            <label>Kde je umístěna technická dokumentace dat?</label>
+            <input type="url" placeholder="URL technické dokumentace"/>
+            <requirement level="pilot">
+               <strong>K datům byste měli poskytnout technickou dokumentaci</strong>, aby uživatelé snáze pochopili, jak s daty pracovat.</requirement>
+         </question>
+         <question id="vocabulary">
+            <label>Mají vaše data definováno schéma?</label>
+            <yesno required="standard"/>
+            <help>K datům ve formátech typu CSV, JSON, XML nebo Turtle formalizovaným způsobem definovat jejich schéma a popsat tak strukturu sloupců nebo objektů a jejich vlastností.</help>
+         </question>
+         <if test="this.vocabulary() === 'true'">
+            <question id="schemaDocumentationUrl" display="Dokumentace schématu">
+               <label>Kde je umístěna dokumentace schématu?</label>
+               <input type="url" placeholder="URL dokumentace schématu"/>
+               <requirement level="standard">
+                  <strong>Všechny slovníky použité v rámci vašich dat by měly být dokumentovány</strong>, aby uživatelé věděli, jak dat správně interpretovat.</requirement>
+            </question>
+         </if>
+         <question id="codelists">
+            <label>Používáte v datech nějaké číselníky?</label>
+            <yesno required="standard"/>
+            <help>Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat.</help>
+         </question>
+         <if test="this.codelists() === 'true'">
+            <question id="codelistDocumentationUrl" display="Dokumentace číselníků">
+               <label>Kde je umístěna dokumentace číselníků?</label>
+               <input type="url" placeholder="URL dokumentaci číselníků"/>
+               <requirement level="standard">
+                  <strong>Číselníky použité v datech byste měli dokumentovat</strong>, aby uživatelé věděli, jak mají data interpretovat.</requirement>
+            </question>
+         </if>
+      </group>
+      <group id="support">
+         <label>Podpora</label>
+         <help>- komunikace s lidmi, kteří vaše data používají</help>
+         <question id="contactUrl" display="Kontakty">
+            <label>Kde jsou umístěny informace o tom, jak vás mohou uživatelé dat kontaktovat?</label>
+            <input type="url" placeholder="kontaktní URL"/>
+            <help>Uveďte URL odkazující na informace o tom, jak vás mohou uživatelé dat kontaktovat v případě, že se chtějí na něco zeptat ohledně publikovaných dat.</help>
+            <requirement level="pilot">
+               <strong>Měli byste uživatelům dat poskytnout nějaké kontaktní informace</strong>, aby věděli, jak se na vás mohou obrátit v případě dotazů.</requirement>
+         </question>
+         <question id="improvementsContact"
+                   display="Zpětná vazba k publikovaným datovým sadám">
+            <label>Jak mohou uživatelé poskytnout zpětnou vazbu k publikovaným datovým sadám, např. náměty na zlepšení jejich publikace?</label>
+            <input type="url" placeholder="kontaktní URL"/>
+            <requirement level="pilot">
+               <strong>Měli byste uživatelům dát možnost zasílat připomínky k publikovaným datům a způsobu jejich publikace.</strong> To vám umožní zjistit, co uživatelé potřebují.</requirement>
+         </question>
+         <question id="dataProtectionUrl"
+                   display="Dotazy na ochranu soukromí a osobních údajů">
+            <label>Koho mohou uživatelé kontaktovat s dotazy , které se týkají ochranu soukromí a osobních údajů?</label>
+            <input type="url" placeholder="kontaktní URL"/>
+            <requirement level="pilot">
+               <strong>Měli byste zveřejnit kontaktní informace pro ty, kteří se potřebují zeptat na otázky ohledně ochrany soukromí a osobních údajů.</strong>
+            </requirement>
+         </question>
+         <question id="socialMedia">
+            <label>Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?</label>
+            <yesno/>
+            <requirement level="standard">
+               <strong>Měli byste s uživateli svých dat komunikovat prostřednictvím sociálních sítí</strong> a zjistit, jak vaše data používají.</requirement>
+         </question>
+         <if test="this.socialMedia() === 'true'">
+            <repeat id="accounts">
+               <label>Profily na sociálních sítích</label>
+               <question id="account" display="Profily na sociálních sítích">
+                  <label>Kde vás lidé najdou na sociálních sítích?</label>
+                  <input type="url"
+                         required="required"
+                         placeholder="URL účtu na sociální síti"/>
+                  <help>Uveďte URL účtu na nějaké sociální síti, například váš profil na Twitteru nebo Facebooku.</help>
+               </question>
+            </repeat>
+         </if>
+         <question id="forum" display="Diskuze">
+            <label>Kde mohou lidé o této datové sadě diskutovat?</label>
+            <input type="url" placeholder="URL diskuzního fóra nebo poštovní konference"/>
+            <help>Uveďte URL na fórum nebo poštovní konferenci, kde mohou uživatelé o vašich datech diskutovat.</help>
+            <requirement level="standard">
+               <strong>Měli byste uživatele informovat, kde mohou o vašich datech diskutovat</strong> a navzájem si pomáhat.</requirement>
+         </question>
+         <if test="this.corrected() === 'true'">
+            <question id="correctionReporting" display="Kde a jak nahlásit chyby v datech">
+               <label>Jak mohou uživatelé nahlásit chyby v datech?</label>
+               <input type="url" placeholder="kontaktní URL"/>
+               <help>Uveďte URL, kde mohou uživatelé hlásit chyby ve vašich datech.</help>
+               <requirement level="standard">
+                  <strong>Měli byste uživatele informovat, kde a jak mohou hlásit chyby ve vašich datech.</strong>
+               </requirement>
+            </question>
+            <question id="correctionDiscovery" display="Jak informujete o chybách v datech">
+               <label>Kde a jak se uživatelé mohou dozvědět o chybách ve vašich datech?</label>
+               <input type="url" placeholder="informační URL"/>
+               <help>Uveďte URL, kde popisujete, jakým způsobem informujete uživatele o chybách ve svých datech.</help>
+               <requirement level="standard">
+                  <strong>Měli byste uživatelům poskytnout poštovní konferenci nebo feed, kde budete oznamovat opravy chyb ve svých datech</strong>, aby všichni mohli včas aktualizovat.</requirement>
+            </question>
+         </if>
+         <question id="engagementTeam">
+            <label>Máte někoho, kdo se aktivně stará o komunitu okolo vašich dat?</label>
+            <yesno/>
+            <help more="http://theodi.org/guide/engaging-reusers">Tým, který má na starosti komunikaci v oblasti otevřených dat může k většímu zapojení uživatelů využít např. například sociální sítě, blogy, soutěže nebo hackatony.</help>
+            <requirement level="exemplar">
+               <strong>Měli byste kolem svých dat budovat komunitu</strong> a podporovat tak jejich větší využití.</requirement>
+         </question>
+         <if test="this.engagementTeam() === 'true'">
+            <question id="engagementTeamUrl" display="Kdo se stará o komunitu">
+               <label>Kdo se o tuto komunitu stará?</label>
+               <input type="url" placeholder="URL komunitního týmu" required="required"/>
+            </question>
+         </if>
+      </group>
+      <group id="services">
+         <label>Služby</label>
+         <help>nástroje pro práci s daty a informace o nich</help>
+         <question id="libraries" display="Nástroje pro práci s daty">
+            <label>Spravujete seznam nástrojů pro práci s publikovanými daty?</label>
+            <input type="url" placeholder="URL dokumentace nástrojů"/>
+            <help>Uveďte URL, kde uživatelé najdou seznam existujících nebo doporučených nástrojů pro práci s publikovanými daty.</help>
+            <requirement level="exemplar">
+               <strong>Měli byste uživatelům poskytnout seznam vhodných softwarových knihoven a dalších existujících nástrojů</strong> pro rychlou a pohodlnou práci s publikovanými daty.</requirement>
+         </question>
+      </group>
+   </group>
+</questionnaire>
