@@ -158,6 +158,13 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'oneoff', @kitten_data.fields["releaseType"]
   end
 
+  test 'Dataset URL is detected correctly' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
+    @kitten_data.request_data
+
+    assert_equal 'http://example.com/distribution', @kitten_data.fields["datasetUrl"]
+  end
+
   test 'Release type is detected as a collection' do
     distribution = DataKitten::Distribution.new(self, {})
     distribution.format = DataKitten::DistributionFormat.new(distribution)
