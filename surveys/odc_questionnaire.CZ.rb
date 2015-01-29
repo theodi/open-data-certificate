@@ -370,6 +370,10 @@ survey 'CZ',
       :text_as_statement => 'nehodí se'
     a_odc_pddl 'Jiná ...',
       :text_as_statement => 'Jiná ...'
+    a_na 'not applicable',
+      :text_as_statement => ''
+    a_other 'other...',
+      :text_as_statement => ''
 
     q_dataNotApplicable 'Proč se na data nevztahuje žádná licence?',
       :discussion_topic => :cz_dataNotApplicable,
@@ -678,10 +682,10 @@ survey 'CZ',
     a_copyrightHolder 'držitel autorských práv',
       :text_as_statement => 'držitel autorských práv',
       :requirement => ['exemplar_3']
-    a_databaseRightYear '',
+    a_databaseRightYear 'database right year',
       :text_as_statement => 'the database right year',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder '',
+    a_databaseRightHolder 'database right holder',
       :text_as_statement => 'the database right holder',
       :requirement => ['exemplar_5']
 
@@ -948,7 +952,7 @@ survey 'CZ',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL '',
+    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
       :discussion_topic => :cz_individualConsentURL,
       :display_on_certificate => true,
       :text_as_statement => 'Individuals affected by this data have this privacy notice',
@@ -978,7 +982,7 @@ survey 'CZ',
     condition_E :q_lawfulDisclosure, '!=', :a_true
     condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff '',
+    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
       :discussion_topic => :cz_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -990,7 +994,7 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted '',
+    q_dbStaffConsulted 'Have you involved them in the Privacy Impact Assessment process?',
       :discussion_topic => :cz_dbStaffConsulted,
       :display_on_certificate => true,
       :text_as_statement => 'The individual responsible for data protection',
@@ -1020,7 +1024,7 @@ survey 'CZ',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited '',
+    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
       :discussion_topic => :cz_anonymisationAudited,
       :display_on_certificate => true,
       :text_as_statement => 'The anonymisation of the data has been',
