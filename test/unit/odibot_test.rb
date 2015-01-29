@@ -75,6 +75,13 @@ class ODIBotTest < ActiveSupport::TestCase
     refute ODIBot.new("foo bar").valid?
   end
 
+  test "checks if url is specified enough to request" do
+    ODIBot.expects(:get).never
+    refute ODIBot.new("http://").valid?
+    refute ODIBot.new("http:///").valid?
+    refute ODIBot.new("http://notadomain").valid?
+  end
+
   [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error].each do |error|
     test "handles #{error.name}" do
       stub_request(:get, "http://www.example.com").to_raise(error)

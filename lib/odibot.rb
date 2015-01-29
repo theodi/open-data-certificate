@@ -20,7 +20,13 @@ class ODIBot
   end
 
   def is_http_url?
-    URI.parse(@url).kind_of?(URI::HTTP)
+    uri = URI.parse(@url)
+    if uri.kind_of?(URI::HTTP)
+      hostname = uri.hostname
+      hostname.present? && hostname.include?('.')
+    else
+      false
+    end
   rescue URI::InvalidURIError
     false
   end
