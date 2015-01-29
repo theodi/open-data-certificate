@@ -209,71 +209,40 @@ class ResponseSet < ActiveRecord::Base
 
   # Custom getter which chooses an appropriate data licence
   def data_licence_determined_from_responses
-    if @data_licence_determined_from_responses.nil?
-      ref = value_for :data_licence, :reference_identifier
-      case ref
-      when nil
-        @data_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "na"
-        @data_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "other"
-         @data_licence_determined_from_responses = {
-          :title => value_for(:other_dataset_licence_name),
-          :url   => value_for(:other_dataset_licence_url)
-         }
-      else
-        licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
-        @data_licence_determined_from_responses = {
-          :title => licence.title,
-          :url   => licence.url
-        }
-      end
-    end
-    @data_licence_determined_from_responses
+    @data_licence_determined_from_responses ||= licence_from_ref(value_for(:data_licence, :reference_identifier))
   end
 
   # Custom getter which chooses an appropriate content licence
   def content_licence_determined_from_responses
-    if @content_licence_determined_from_responses.nil?
-      ref = value_for :content_licence, :reference_identifier
-      case ref
-      when nil
-        @content_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "na"
-        @content_licence_determined_from_responses = {
-          :title => "Not Applicable",
-          :url => nil
-        }
-      when "other"
-         @content_licence_determined_from_responses = {
-          :title => value_for(:other_content_licence_name),
-          :url   => value_for(:other_content_licence_url)
-         }
-      else
-        begin
-          licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
-          @content_licence_determined_from_responses = {
-            :title => licence.title,
-            :url   => licence.url
-          }
-        rescue
-          @content_licence_determined_from_responses = {
-            :title => 'Unknown',
-            :url   => nil
-          }
-        end
-      end
+    @content_licence_determined_from_responses ||= licence_from_ref(value_for(:content_licence, :reference_identifier))
+  end
+
+  def licence_from_ref(ref)
+    case ref
+    when nil
+      {
+        :title => "Not Applicable",
+        :url => nil
+      }
+    when "na"
+      {
+        :title => "Not Applicable",
+        :url => nil
+      }
+    when "other"
+      {
+        :title => value_for(:other_content_licence_name),
+        :url   => value_for(:other_content_licence_url)
+      }
     else
-      @content_licence_determined_from_responses
+      failure = {:title => 'Unknown', :url => nil}
+      ODIBot.handle_errors(failure) do
+        licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
+        {
+          :title => licence.title,
+          :url   => licence.url
+        }
+      end
     end
   end
 
