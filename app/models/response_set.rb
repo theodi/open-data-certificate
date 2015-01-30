@@ -219,12 +219,7 @@ class ResponseSet < ActiveRecord::Base
 
   def licence_from_ref(ref)
     case ref
-    when nil
-      {
-        :title => "Not Applicable",
-        :url => nil
-      }
-    when "na"
+    when nil, "na"
       {
         :title => "Not Applicable",
         :url => nil
