@@ -89,8 +89,9 @@ class DatasetsController < ApplicationController
         format.json
         format.feed { render :layout => false  }
         format.csv do
-          response.headers["Content-Transfer-Encoding"] = "binary"
+          response.headers["Content-Transfer-Encoding"] = "chunked"
           response.headers['Content-Disposition'] = 'attachment; filename=open-data-certificates.csv'
+          response.headers['Last-Modified'] = @last_modified_date.httpdate
           response.content_type = 'text/csv; headers=present'
           self.response_body = DatasetsCSV.new(@datasets, self)
         end
