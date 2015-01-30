@@ -209,15 +209,16 @@ class ResponseSet < ActiveRecord::Base
 
   # Custom getter which chooses an appropriate data licence
   def data_licence_determined_from_responses
-    @data_licence_determined_from_responses ||= licence_from_ref(value_for(:data_licence, :reference_identifier))
+    @data_licence_determined_from_responses ||= licence_from_ref(:data_licence)
   end
 
   # Custom getter which chooses an appropriate content licence
   def content_licence_determined_from_responses
-    @content_licence_determined_from_responses ||= licence_from_ref(value_for(:content_licence, :reference_identifier))
+    @content_licence_determined_from_responses ||= licence_from_ref(:content_licence)
   end
 
-  def licence_from_ref(ref)
+  def licence_from_ref(licence_type)
+    ref = value_for(licence_type, :reference_identifier)
     case ref
     when nil, "na"
       {
@@ -225,10 +226,18 @@ class ResponseSet < ActiveRecord::Base
         :url => nil
       }
     when "other"
-      {
-        :title => value_for(:other_content_licence_name),
-        :url   => value_for(:other_content_licence_url)
-      }
+      case licence_type
+      when :data_licence
+        {
+          :title => value_for(:other_dataset_licence_name),
+          :url   => value_for(:other_dataset_licence_url)
+        }
+      when :content_licence
+        {
+          :title => value_for(:other_content_licence_name),
+          :url   => value_for(:other_content_licence_url)
+        }
+      end
     else
       failure = {:title => 'Unknown', :url => nil}
       ODIBot.handle_errors(failure) do
