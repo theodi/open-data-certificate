@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.9" status="alpha" jurisdiction="CZ" xml:lang="en">
+<questionnaire version="0.9" status="alpha" jurisdiction="CZ" xml:lang="cz">
    <help>
       <p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p>
-      <p>: Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p>
+      <p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p>
       <p>
          <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p>
       <p>
@@ -140,17 +140,17 @@
                <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autorství.</requirement>
          </question>
          <question id="dataLicence" display="Licence">
-            <label>Open Data Commons Attribution License</label>
+            <label>Za jakých licence mohou lidé znovu použít tato data?</label>
             <select required="required">
                <option/>
-               <option value="cc-by">Open Data Commons Open Database License (ODbL)</option>
-               <option value="cc-by-sa">Otevřená data Commons Open Database License (ODbL)</option>
-               <option value="cc-zero">Open Data Commons Public Domain Dedication and License (PDDL)</option>
-               <option value="odc-by">Creative Commons CCZero</option>
-               <option value="odc-odbl">nehodí se</option>
-               <option value="odc-pddl">Jiná ...</option>
-               <option value="na" display=""/>
-               <option value="other" display=""/>
+               <option value="cc-by">Creative Commons Attribution</option>
+               <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+               <option value="cc-zero">Creative Commons CCZero</option>
+               <option value="odc-by">Open Data Commons Attribution License</option>
+               <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
+               <option value="odc-pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
+               <option value="na" display="">nehodí se</option>
+               <option value="other" display="">Jiná ...</option>
             </select>
             <help>Nezapomeňte na to, že k databázi drží práva každý, kdo data původně nasbíral, vytvořil, zkontroloval nebo vybral. Autorská práva mohou vznikat také při reorganizaci dat. Každý uživatel tedy potřebuje licenci k použití dat nebo doklad o tom, že se všichni autoři svých autorských práv vzdali. Do seznamu jsme vybrali nejčastěji používané licence. Pokud žádná autorská ani databázová práva nejsou ve hře, vypršela, nebo se jich autoři vzdali, vyberte možnost „nehodí se“.</help>
          </question>

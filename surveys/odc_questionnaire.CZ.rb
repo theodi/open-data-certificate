@@ -2,83 +2,86 @@ survey 'CZ',
   :full_title => 'Czech Republic',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p><p>: Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p>
+  :description => '<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p><p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p>
          <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p><p>
          <strong></strong>
       </p>' do
 
   translations :en => :default
-  section_general 'General Information',
+  section_general 'Obecné informace',
     :description => '',
     :display_header => false do
 
-    q_dataTitle 'What\'s this data called?',
+    q_dataTitle 'Jaký je název datové sady?',
       :discussion_topic => :dataTitle,
-      :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
+      :help_text => 'Uživatelé název uvidí v seznamu podobných zdrojů, takže se snažte, aby text názvu nebyl příliš dlouhý a zároveň byl unikátní a výstižný, aby se podle něj dalo rychle zorientovat.',
       :required => :required
-    a_1 'Data Title',
+    a_1 'Název datové sady',
       :string,
-      :placeholder => 'Data Title',
+      :placeholder => 'Název datové sady',
       :required => :required
 
-    q_documentationUrl 'Where is it described?',
+    q_documentationUrl 'Kde je zveřejněna dokumentace?',
       :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is described at',
-      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
-    a_1 'Documentation URL',
+      :text_as_statement => 'Dokumentace',
+      :help_text => 'Uveďte adresu, na které mohou uživatelé vašich dat získat podrobnější informace. Může jít například o záznam v nějakém datovém katalogu.'
+    a_1 'URL dokumentace',
       :string,
       :input_type => :url,
-      :placeholder => 'Documentation URL',
+      :placeholder => 'URL dokumentace',
       :requirement => ['pilot_1', 'basic_1']
 
-    label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
+    label_pilot_1 '
+               <strong>Měli byste zveřejnit dokumentaci dat</strong>, aby uživatelé získali lepší představu o jejich obsahu, kontextu a možnostech využití.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_1'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '!=', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_basic_1 'You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.',
+    label_basic_1 '
+               <strong>Aby lidé mohli vaše data využít, je třeba zveřejnit jejich dokumentaci a odkaz na data samotná.</strong>
+            ',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_1'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_collection
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisher 'Who publishes this data?',
+    q_publisher 'Kdo data publikuje?',
       :discussion_topic => :publisher,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is published by',
-      :help_text => 'Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.',
+      :text_as_statement => 'Poskytovatel',
+      :help_text => 'Uveďte název organizace, která data publikuje.',
       :required => :required
-    a_1 'Data Publisher',
+    a_1 'název poskytovatele',
       :string,
-      :placeholder => 'Data Publisher',
+      :placeholder => 'název poskytovatele',
       :required => :required
 
-    q_publisherUrl 'What website is the data published on?',
+    q_publisherUrl 'Webová stránka poskytovatele',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The data is published on',
-      :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
-    a_1 'Publisher URL',
+      :text_as_statement => 'Web poskytovatele',
+      :help_text => 'Uveďte prosím URL webu poskytovatele. To pomáhá identifikaci dat pocházejících od stejných poskytovatelů.'
+    a_1 'Web poskytovatele',
       :string,
       :input_type => :url,
-      :placeholder => 'Publisher URL'
+      :placeholder => 'Web poskytovatele'
 
-    q_releaseType 'What kind of release is this?',
+    q_releaseType 'Co přesně zveřejňujete?',
       :discussion_topic => :releaseType,
       :pick => :one,
       :required => :required
-    a_oneoff 'a one-off release of a single dataset',
-      :help_text => 'This is a single file and you don’t currently plan to publish similar files in the future.'
-    a_collection 'a one-off release of a set of related datasets',
-      :help_text => 'This is a collection of related files about the same data and you don’t currently plan to publish similar collections in the future.'
-    a_series 'ongoing release of a series of related datasets',
-      :help_text => 'This is a sequence of datasets with planned periodic updates in the future.'
-    a_service 'a service or API for accessing open data',
-      :help_text => 'This is a live web service that exposes your data to programmers through an interface they can query.'
+    a_oneoff 'jedna datová sada (jednorázová publikace)',
+      :help_text => 'Jedná se o jeden dataset a nečekáte, že byste výhledově zveřejňovali další podobné datasety.'
+    a_collection 'několik souvisejících datových sad (jednorázová publikace)',
+      :help_text => 'Jde o několik datových sad a nečekáte, že byste výhledově zveřejňovali další podobné datové sady.'
+    a_series 'několik souvisejících datových sad (průběžná aktualizace)',
+      :help_text => 'Jde o několik datových sad, které budete v budoucnu aktualizovat.'
+    a_service 'službu nebo API pro přístup k otevřeným datům',
+      :help_text => 'Jde o webovou službu, přes kterou jde data získat automatizovaně.'
 
   end
 
@@ -350,7 +353,7 @@ survey 'CZ',
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataLicence 'Open Data Commons Attribution License',
+    q_dataLicence 'Za jakých licence mohou lidé znovu použít tato data?',
       :discussion_topic => :cz_dataLicence,
       :display_on_certificate => true,
       :text_as_statement => 'Licence',
@@ -358,21 +361,21 @@ survey 'CZ',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Open Data Commons Open Database License (ODbL)',
-      :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
-    a_cc_by_sa 'Otevřená data Commons Open Database License (ODbL)',
-      :text_as_statement => 'Otevřená data Commons Open Database License (ODbL)'
-    a_cc_zero 'Open Data Commons Public Domain Dedication and License (PDDL)',
-      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
-    a_odc_by 'Creative Commons CCZero',
+    a_cc_by 'Creative Commons Attribution',
+      :text_as_statement => 'Creative Commons Attribution'
+    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
+      :text_as_statement => 'Creative Commons Attribution Share-Alike'
+    a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
-    a_odc_odbl 'nehodí se',
-      :text_as_statement => 'nehodí se'
-    a_odc_pddl 'Jiná ...',
-      :text_as_statement => 'Jiná ...'
-    a_na 'not applicable',
+    a_odc_by 'Open Data Commons Attribution License',
+      :text_as_statement => 'Open Data Commons Attribution License'
+    a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
+      :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
+    a_odc_pddl 'Open Data Commons Public Domain Dedication and License (PDDL)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
+    a_na 'nehodí se',
       :text_as_statement => ''
-    a_other 'other...',
+    a_other 'Jiná ...',
       :text_as_statement => ''
 
     q_dataNotApplicable 'Proč se na data nevztahuje žádná licence?',
@@ -682,10 +685,10 @@ survey 'CZ',
     a_copyrightHolder 'držitel autorských práv',
       :text_as_statement => 'držitel autorských práv',
       :requirement => ['exemplar_3']
-    a_databaseRightYear 'database right year',
+    a_databaseRightYear '',
       :text_as_statement => 'the database right year',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder 'database right holder',
+    a_databaseRightHolder '',
       :text_as_statement => 'the database right holder',
       :requirement => ['exemplar_5']
 
@@ -952,7 +955,7 @@ survey 'CZ',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
+    q_individualConsentURL '',
       :discussion_topic => :cz_individualConsentURL,
       :display_on_certificate => true,
       :text_as_statement => 'Individuals affected by this data have this privacy notice',
@@ -982,7 +985,7 @@ survey 'CZ',
     condition_E :q_lawfulDisclosure, '!=', :a_true
     condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
+    q_dpStaff '',
       :discussion_topic => :cz_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -994,7 +997,7 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted 'Have you involved them in the Privacy Impact Assessment process?',
+    q_dbStaffConsulted '',
       :discussion_topic => :cz_dbStaffConsulted,
       :display_on_certificate => true,
       :text_as_statement => 'The individual responsible for data protection',
@@ -1024,7 +1027,7 @@ survey 'CZ',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
+    q_anonymisationAudited '',
       :discussion_topic => :cz_anonymisationAudited,
       :display_on_certificate => true,
       :text_as_statement => 'The anonymisation of the data has been',
@@ -1055,157 +1058,162 @@ survey 'CZ',
 
   end
 
-  section_practical 'Practical Information',
-    :description => 'Findability, accuracy, quality and guarantees' do
+  section_practical 'Praktické informace',
+    :description => 'Vyhledávání dat, přesnost, kvalita a záruky' do
 
-    label_group_6 'Findability',
-      :help_text => 'how you help people find your data',
+    label_group_6 'Vyhledávání dat',
+      :help_text => 'jak se lidé o vašich datech dozvědí',
       :customer_renderer => '/partials/fieldset'
 
-    q_onWebsite 'Is there a link to your data from your main website?',
+    q_onWebsite 'Odkazujete na data z domovské stránky Vašeho webu?',
       :discussion_topic => :onWebsite,
-      :help_text => 'Data can be found more easily if it is linked to from your main website.',
+      :help_text => 'Pomocí odkazu z domovské stránky Vašeho webu se data lépe hledají.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
       :requirement => ['standard_13']
 
-    label_standard_13 'You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily.',
+    label_standard_13 '
+               <strong>Měli byste na data odkazovat z domovské stránky Vašeho webu </strong>, aby je lidé lépe našli.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_13'
     dependency :rule => 'A'
     condition_A :q_onWebsite, '==', :a_false
 
-    repeater 'Web Page' do
+    repeater 'Odkazy na webu' do
 
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
-      q_webpage 'Which page on your website links to the data?',
+      q_webpage 'Která stránka na vašem webu na data odkazuje?',
         :discussion_topic => :webpage,
         :display_on_certificate => true,
-        :text_as_statement => 'The website links to the data from',
-        :help_text => 'Give a URL on your main website that includes a link to this data.',
+        :text_as_statement => 'Webová stránka s odkazem na data',
+        :help_text => 'URL stránky v rámci Vašeho webu, která na data odkazuje.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
-      a_1 'Web page URL',
+      a_1 'URL stránky',
         :string,
         :input_type => :url,
         :required => :required,
-        :placeholder => 'Web page URL'
+        :placeholder => 'URL stránky'
 
     end
 
-    q_listed 'Is your data listed within a collection?',
+    q_listed 'Jsou vaše data vedená v datovém katalogu?',
       :discussion_topic => :listed,
-      :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',
+      :help_text => 'Data se lépe hledají, když jsou uvedená v relevantních katalozích, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
       :requirement => ['standard_14']
 
-    label_standard_14 'You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.',
+    label_standard_14 '
+               <strong>Vaše data by měla být snadno k nalezení všude, kde by je uživatelé mohli hledat.</strong>
+            ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_14'
     dependency :rule => 'A'
     condition_A :q_listed, '==', :a_false
 
-    repeater 'Listing' do
+    repeater 'Zařazení do datových katalogů' do
 
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
-      q_listing 'Where is it listed?',
+      q_listing 'V jakém datovém katalogu jsou data vedena?',
         :discussion_topic => :listing,
         :display_on_certificate => true,
-        :text_as_statement => 'The data appears in this collection',
-        :help_text => 'Give a URL where this data is listed within a relevant collection. For example, data.gov.uk (if it\'s UK public sector data), hub.data.ac.uk (if it\'s UK academia data) or a URL for search engine results.',
+        :text_as_statement => 'Relevantní datové katalogy',
+        :help_text => 'Uveďte URL datového katalogu, ve kterém jsou data zaregistrována. Můžete uvést také URL s výsledky vyhledávání pomocí webového vyhledávače.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
-      a_1 'Listing URL',
+      a_1 'URL datového katalogu',
         :string,
         :input_type => :url,
         :required => :required,
-        :placeholder => 'Listing URL'
+        :placeholder => 'URL datového katalogu'
 
     end
 
-    q_referenced 'Is this data referenced from your own publications?',
+    q_referenced 'Odkazujete na tato data ve svých publikacích?',
       :discussion_topic => :referenced,
-      :help_text => 'When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.',
+      :help_text => 'Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, který pomáhá datům lépe rozumět.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
       :requirement => ['standard_15']
 
-    label_standard_15 'You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.',
+    label_standard_15 '
+               <strong>Měli byste na data odkazovat ve svých publikacích</strong>. Lidé je snáze najdou a budou zasazena do kontextu.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_15'
     dependency :rule => 'A'
     condition_A :q_referenced, '==', :a_false
 
-    repeater 'Reference' do
+    repeater 'Odkazy' do
 
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
-      q_reference 'Where is your data referenced?',
+      q_reference 'Kde se na data odkazujete?',
         :discussion_topic => :reference,
         :display_on_certificate => true,
-        :text_as_statement => 'This data is referenced from',
-        :help_text => 'Give a URL to a document that cites or references this data.',
+        :text_as_statement => 'Související publikace',
+        :help_text => 'Uveďte URL dokumentu, který se na data odkazuje.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
-      a_1 'Reference URL',
+      a_1 'URL dokumentu',
         :string,
         :input_type => :url,
         :required => :required,
-        :placeholder => 'Reference URL'
+        :placeholder => 'URL dokumentu'
 
     end
 
-    label_group_7 'Accuracy',
-      :help_text => 'how you keep your data up-to-date',
+    label_group_7 'Zajištění aktuálnosti dat',
+      :help_text => 'jak zajišťujete aktuálnost dat',
       :customer_renderer => '/partials/fieldset'
 
-    q_serviceType 'Does the data behind your API change?',
+    q_serviceType 'Mění se data, která zpřístupňujete prostřednictvím vašeho API?',
       :discussion_topic => :serviceType,
       :display_on_certificate => true,
-      :text_as_statement => 'The data behind the API',
+      :text_as_statement => 'Mění se data zpřístupněná tímto API?',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_static 'no, the API gives access to unchanging data',
-      :text_as_statement => 'will not change',
-      :help_text => 'Some APIs just make accessing an unchanging dataset easier, particularly when there\'s lots of it.'
-    a_changing 'yes, the API gives access to changing data',
-      :text_as_statement => 'will change',
-      :help_text => 'Some APIs give instant access to more up-to-date and ever-changing data'
+    a_static 'ne, API zpřístupňuje data, která se nemění',
+      :text_as_statement => 'nemění se',
+      :help_text => 'Některá API slouží jen k jednoduššímu přístupu k neměnným datům, například kvůli jejich objemu'
+    a_changing 'ano, API zpřístupňuje data, která se mění',
+      :text_as_statement => 'mění se',
+      :help_text => 'Některá API zpřístupňují průběžně aktualizovaná data.'
 
-    q_timeSensitive 'Will your data go out of date?',
+    q_timeSensitive 'Budou vaše data v čase zastarávat?',
       :discussion_topic => :timeSensitive,
       :display_on_certificate => true,
-      :text_as_statement => 'The accuracy or relevance of this data will',
+      :text_as_statement => 'Včasnost dat',
       :pick => :one
     dependency :rule => '(A or B or (C and D))'
     condition_A :q_releaseType, '==', :a_oneoff
     condition_B :q_releaseType, '==', :a_collection
     condition_C :q_releaseType, '==', :a_service
     condition_D :q_serviceType, '==', :a_static
-    a_true 'yes, this data will go out of date',
-      :text_as_statement => 'go out of date',
-      :help_text => 'For example, a dataset of bus stop locations will go out of date over time as some are moved or new ones created.'
-    a_timestamped 'yes, this data will go out of date over time but it’s time stamped',
-      :text_as_statement => 'go out of date but it is timestamped',
-      :help_text => 'For example, population statistics usually include a fixed timestamp to indicate when the statistics were relevant.',
+    a_true 'ano, tato data časem zastarají',
+      :text_as_statement => 'data časem zastarají',
+      :help_text => 'Například databáze autobusových zastávek časem zastará, protože některé zastávky zmizí a objeví se nové.'
+    a_timestamped 'ano, tato data časem zastarají, ale jsou doplněny informacemi o jejich platnosti',
+      :text_as_statement => 'data časem zastarají, ale mají vyznačenou platnost',
+      :help_text => 'Například demografické statistiky obvykle mívají vyznačenu časovou platnost. Podle toho se pozná, kdy byly aktuální.',
       :requirement => ['pilot_9']
-    a_false 'no, this data does not contain any time-sensitive information',
-      :text_as_statement => 'not go out of date',
-      :help_text => 'For example, the results of an experiment will not go out of date because the data accurately reports observed outcomes.',
+    a_false 'ne, platnost těchto dat není závislá na čase',
+      :text_as_statement => 'data nezastarají',
+      :help_text => 'Například výsledky vědeckého experimentu nepřestanou nutně platit jen kvůli tomu, že už jsou staré.',
       :requirement => ['standard_16']
 
-    label_pilot_9 'You should <strong>put timestamps in your data when you release it</strong> so people know the period it relates to and when it will expire.',
+    label_pilot_9 '
+                        <strong>Během vydání byste svá data měli opatřit údajem o časové platnosti dat</strong>, aby se poznalo, k jakému období se vztahují a kdy zastarají.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_9'
     dependency :rule => '(A or B or (C and D)) and (E and F)'
@@ -1216,7 +1224,8 @@ survey 'CZ',
     condition_E :q_timeSensitive, '!=', :a_timestamped
     condition_F :q_timeSensitive, '!=', :a_false
 
-    label_standard_16 'You should <strong>publish updates to time-sensitive data</strong> so that it does not go stale.',
+    label_standard_16 '
+                        <strong>Pokud vaše data závisí na čase, měli byste je aktualizovat</strong>, aby publikovaná data byla aktuální.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_16'
     dependency :rule => '(A or B or (C and D)) and (E)'
@@ -1226,11 +1235,11 @@ survey 'CZ',
     condition_D :q_serviceType, '==', :a_static
     condition_E :q_timeSensitive, '!=', :a_false
 
-    q_frequentChanges 'Does this data change at least daily?',
+    q_frequentChanges 'Mění se data aspoň jednou denně?',
       :discussion_topic => :frequentChanges,
       :display_on_certificate => true,
-      :text_as_statement => 'This data changes',
-      :help_text => 'Tell people if the underlying data changes on most days. When data changes frequently it also goes out of date quickly, so people need to know if you also update it frequently and quickly too.',
+      :text_as_statement => 'Frekvence změn',
+      :help_text => 'Tímto informujete uživatele, zda se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete.',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
@@ -1238,29 +1247,29 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'at least daily'
+      :text_as_statement => 'data se mění aspoň jednou denně'
 
-    q_seriesType 'What type of dataset series is this?',
+    q_seriesType 'Jaký typ datového souboru řadě je to?',
       :discussion_topic => :seriesType,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is a series of',
+      :text_as_statement => 'Typ aktualizací',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
-    a_dumps 'regular copies of a complete database',
-      :text_as_statement => 'copies of a database',
-      :help_text => 'Choose if you publish new and updated copies of your full database regularly. When you create database dumps, it\'s useful for people to have access to a feed of the changes so they can keep their copies up to date.'
-    a_aggregate 'regular aggregates of changing data',
-      :text_as_statement => 'aggregates of changing data',
-      :help_text => 'Choose if you create new datasets regularly. You might do this if the underlying data can\'t be released as open data or if you only publish data that\'s new since the last publication.'
+    a_dumps 'pravidelně je publikován úplný export všech dat datové sady',
+      :text_as_statement => 'úplný export všech dat datové sady',
+      :help_text => 'Zvolte, zda pravidelně zveřejňuje nové a aktualizované kopie vaší plné databáze. Při vytváření databáze skládek, je užitečné, aby lidé měli přístup k přívodu změn, aby mohli udržet své kopie aktuální.'
+    a_aggregate 'pravidelné agregáty změně dat',
+      :text_as_statement => 'agregáty změně dat',
+      :help_text => 'Vyberte, pokud pravidelně publikujete exporty, které obsahují úplný export všech dat datové sady, tj. obsahují nové, změněné i nezměněné údaje. Je dobré také nabídnout uživatelům přehled změn (například přes RSS), aby mohli snadno aktualizovat svou kopii dat.'
 
-    q_changeFeed 'Is a feed of changes available?',
+    q_changeFeed 'pravidelně je publikován export změněných dat',
       :discussion_topic => :changeFeed,
       :display_on_certificate => true,
-      :text_as_statement => 'A feed of changes to this data',
-      :help_text => 'Tell people if you provide a stream of changes that affect this data, like new entries or amendments to existing entries. Feeds might be in RSS, Atom or custom formats.',
+      :text_as_statement => 'export změněných dat',
+      :help_text => 'Dejte uživatelům vědět, pokud někde publikujete seznam změn ve svých datech, například nové přírůstky nebo změny stávajících záznamů. Seznam může být publikovaný například jako RSS, Atom, nebo v jiném vhodném formátu.',
       :pick => :one
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_series
@@ -1269,10 +1278,11 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'is available',
+      :text_as_statement => 'je k dispozici',
       :requirement => ['exemplar_6']
 
-    label_exemplar_6 'You should <strong>provide a feed of changes to your data</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_6 '
+                        <strong>Publikujte seznam změn ve svých datech</strong>, aby uživatelé mohli snadno aktualizovat své kopie.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_6'
     dependency :rule => 'A and B and C and D'
@@ -1281,28 +1291,29 @@ survey 'CZ',
     condition_C :q_seriesType, '==', :a_dumps
     condition_D :q_changeFeed, '==', :a_false
 
-    q_frequentSeriesPublication 'How often do you create a new release?',
+    q_frequentSeriesPublication 'Jak často publikujete nové verze?',
       :discussion_topic => :frequentSeriesPublication,
       :display_on_certificate => true,
-      :text_as_statement => 'New releases of this data are made',
-      :help_text => 'This determines how out of date this data becomes before people can get an update.',
+      :text_as_statement => 'Nové verze těchto údajů jsou',
+      :help_text => 'Podle tohoto údaje uživatelé poznají, jak moc data zastarají, než vyjde další aktualizace.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
-    a_rarely 'less than once a month',
-      :text_as_statement => 'less than once a month'
-    a_monthly 'at least every month',
-      :text_as_statement => 'at least every month',
+    a_rarely 'méně než jednou za měsíc',
+      :text_as_statement => 'méně než jednou za měsíc'
+    a_monthly 'alespoň jednou měsíčně',
+      :text_as_statement => 'alespoň jednou měsíčně',
       :requirement => ['pilot_10']
-    a_weekly 'at least every week',
-      :text_as_statement => 'at least every week',
+    a_weekly 'alespoň jednou týdně',
+      :text_as_statement => 'alespoň jednou týdně',
       :requirement => ['standard_17']
-    a_daily 'at least every day',
-      :text_as_statement => 'at least every day',
+    a_daily 'alespoň jednou denně',
+      :text_as_statement => 'alespoň jednou denně',
       :requirement => ['exemplar_7']
 
-    label_pilot_10 'You should <strong>create a new dataset release every month</strong> so people keep their copies up-to-date and accurate.',
+    label_pilot_10 '
+                           <strong>Publikujte aspoň jednou měsíčně novou verzi</strong>, aby uživatelé měli aktuální a přesná data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_10'
     dependency :rule => 'A and B and (C and D and E)'
@@ -1312,7 +1323,7 @@ survey 'CZ',
     condition_D :q_frequentSeriesPublication, '!=', :a_weekly
     condition_E :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_standard_17 'You should <strong>create a new dataset release every week</strong> so people keep their copies up-to-date and accurate.',
+    label_standard_17 'Publikujte aspoň jednou týdně novou verzi</strong>, aby uživatelé měli aktuální a přesná data .',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_17'
     dependency :rule => 'A and B and (C and D)'
@@ -1321,7 +1332,8 @@ survey 'CZ',
     condition_C :q_frequentSeriesPublication, '!=', :a_weekly
     condition_D :q_frequentSeriesPublication, '!=', :a_daily
 
-    label_exemplar_7 'You should <strong>create a new dataset release every day</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_7 '
+                           <strong>Publikujte aspoň jednou denně novou verzi</strong>, aby uživatelé měli aktuální a přesná data .',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_7'
     dependency :rule => 'A and B and (C)'
@@ -1329,30 +1341,31 @@ survey 'CZ',
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_frequentSeriesPublication, '!=', :a_daily
 
-    q_seriesPublicationDelay 'How long is the delay between when you create a dataset and when you publish it it?',
+    q_seriesPublicationDelay 'Jak dlouhá je prodleva mezi vytvořením dat a jejich zveřejněním?',
       :discussion_topic => :seriesPublicationDelay,
       :display_on_certificate => true,
-      :text_as_statement => 'The lag between creation and publication of this data is',
+      :text_as_statement => 'Prodleva mezi vytvořením a zveřejněním dat',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
-    a_extreme 'longer than the gap between releases',
-      :text_as_statement => 'longer than the gap between releases',
-      :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes more than a day for it to be published.'
-    a_reasonable 'about the same as the gap between releases',
-      :text_as_statement => 'about the same as the gap between releases',
-      :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes about a day for it to be published.',
+    a_extreme 'delší než časový úsek mezi dvěma vydáními',
+      :text_as_statement => 'delší než časový úsek mezi dvěma vydáními',
+      :help_text => 'Například zdrojová data se mění každý den, ale publikace dat trvá déle než jeden den.'
+    a_reasonable 'zhruba stejná jako časový úsek mezi dvěma vydáními',
+      :text_as_statement => 'zhruba stejná jako časový úsek mezi dvěma vydáními',
+      :help_text => 'Například zdrojová data se mění každý den a zhruba během jednoho dne je také publikujete.',
       :requirement => ['pilot_11']
-    a_good 'less than half the gap between releases',
-      :text_as_statement => 'less than half the gap between releases',
-      :help_text => 'For example, if you create a new version of the dataset every day, choose this if it takes less than twelve hours for it to be published.',
+    a_good 'kratší než polovina časového úseku mezi vydáními',
+      :text_as_statement => 'kratší než polovina časového úseku mezi vydáními',
+      :help_text => 'Například když se zdrojová data mění každý den a publikace dat vám zabere nanejvýš dvanáct hodin.',
       :requirement => ['standard_18']
-    a_minimal 'there is minimal or no delay',
-      :text_as_statement => 'minimal',
-      :help_text => 'Choose this if you publish within a few seconds or a few minutes.',
+    a_minimal 'je minimální nebo žádné zpoždění',
+      :text_as_statement => 'prodleva je minimální nebo žádná',
+      :help_text => 'Tuto možnost vyberte, pokud nové verze publikujete v řádu minut nebo sekund.',
       :requirement => ['exemplar_8']
 
-    label_pilot_11 'You should <strong>have a reasonable delay between when you create and publish a dataset</strong> that is less than the gap between releases so people keep their copies up-to-date and accurate.',
+    label_pilot_11 '
+                        <strong>Mezi vytvořením dat a jejich publikací by měla být přiměřeně krátká prodleva</strong>, menší než je prodleva mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_11'
     dependency :rule => 'A and (B and C and D)'
@@ -1361,7 +1374,8 @@ survey 'CZ',
     condition_C :q_seriesPublicationDelay, '!=', :a_good
     condition_D :q_seriesPublicationDelay, '!=', :a_minimal
 
-    label_standard_18 'You should <strong>have a short delay between when you create and publish a dataset</strong> that is less than half the gap between releases so people keep their copies up-to-date and accurate.',
+    label_standard_18 '
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla přiměřeně krátká prodleva</strong>, menší než polovina prodlevy mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data .',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_18'
     dependency :rule => 'A and (B and C)'
@@ -1369,57 +1383,60 @@ survey 'CZ',
     condition_B :q_seriesPublicationDelay, '!=', :a_good
     condition_C :q_seriesPublicationDelay, '!=', :a_minimal
 
-    label_exemplar_8 'You should <strong>have minimal or no delay between when you create and publish a dataset</strong> so people keep their copies up-to-date and accurate.',
+    label_exemplar_8 '
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla být co nejmenší prodleva</strong>, ideálně nulová, aby uživatelé vždy k dispozici aktuální a přesná data.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_8'
     dependency :rule => 'A and (B)'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_seriesPublicationDelay, '!=', :a_minimal
 
-    q_provideDumps 'Do you also publish dumps of this dataset?',
+    q_provideDumps 'Zveřejňujete datové soubory ke stažení?',
       :discussion_topic => :provideDumps,
       :display_on_certificate => true,
-      :text_as_statement => 'The curator publishes',
-      :help_text => 'A dump is an extract of the whole dataset into a file that people can download. This lets people do analysis that\'s different to analysis with API access.',
+      :text_as_statement => 'Datové soubory ke stažení',
+      :help_text => 'Datový soubor s exportem obsahem datové sady, který si uživatelé mohou stáhnout. Datové soubory ke stažení umožňují uživatelů s daty pracovat i jinak, než jim dovoluje API.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'dumps of the data',
+      :text_as_statement => 'jsou k dispozici',
       :requirement => ['standard_19']
 
-    label_standard_19 'You should <strong>let people download your entire dataset</strong> so that they can do more complete and accurate analysis with all the data.',
+    label_standard_19 '
+                  <strong>Data byste měli publikovat v podobě datových souborů ke stažení</strong>. Umožníte tak uživatelům pracovat s úplnou datovou sadou.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_19'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_false
 
-    q_dumpFrequency 'How frequently do you create a new database dump?',
+    q_dumpFrequency 'Jak často publikujete datové soubory ke stažení?',
       :discussion_topic => :dumpFrequency,
       :display_on_certificate => true,
-      :text_as_statement => 'Database dumps are created',
-      :help_text => 'Faster access to more frequent extracts of the whole dataset means people can get started quicker with the most up-to-date data.',
+      :text_as_statement => 'Frekvence publikace datových souborů ke stažení',
+      :help_text => 'Častější publikace datových souborů ke stažení umožňuje uživatelům rychlejší přístup k aktuálním datům.',
       :pick => :one
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_serviceType, '==', :a_changing
     condition_C :q_provideDumps, '==', :a_true
-    a_rarely 'less frequently than once a month',
-      :text_as_statement => 'less frequently than once a month'
-    a_monthly 'at least every month',
-      :text_as_statement => 'at least every month',
+    a_rarely 'méně často než jednou měsíčně',
+      :text_as_statement => 'méně často než jednou měsíčně'
+    a_monthly 'aspoň jednou měsíčně',
+      :text_as_statement => 'aspoň jednou měsíčně',
       :requirement => ['pilot_12']
-    a_weekly 'within a week of any change',
-      :text_as_statement => 'within a week of any change',
+    a_weekly 'nejpozději týden od provedení změn',
+      :text_as_statement => 'nejpozději týden od provedení změn',
       :requirement => ['standard_20']
-    a_daily 'within a day of any change',
-      :text_as_statement => 'within a day of any change',
+    a_daily 'nejpozději den od provedení změn',
+      :text_as_statement => 'nejpozději den od provedení změn',
       :requirement => ['exemplar_9']
 
-    label_pilot_12 'You should <strong>create a new database dump every month</strong> so that people have the latest data.',
+    label_pilot_12 '
+                              <strong>Publikujete datové soubory ke stažení aspoň jednou měsíčně</strong>, aby uživatelé měli k dispozici aktuální data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_12'
     dependency :rule => 'A and B and C and (D and E and F)'
@@ -1430,7 +1447,8 @@ survey 'CZ',
     condition_E :q_dumpFrequency, '!=', :a_weekly
     condition_F :q_dumpFrequency, '!=', :a_daily
 
-    label_standard_20 'You should <strong>create a new database dump within a week of any change</strong> so that people have less time to wait for the latest data.',
+    label_standard_20 '
+                              <strong>Publikujete datové soubory ke stažení nejpozději týden od provedení změn</strong>, ať uživatelé dlouho nečekají na aktuální data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_20'
     dependency :rule => 'A and B and C and (D and E)'
@@ -1440,7 +1458,8 @@ survey 'CZ',
     condition_D :q_dumpFrequency, '!=', :a_weekly
     condition_E :q_dumpFrequency, '!=', :a_daily
 
-    label_exemplar_9 'You should <strong>create a new database dump within a day of any change</strong> so that people find it easier to get the latest data.',
+    label_exemplar_9 '
+                              <strong>Publikujete datové soubory ke stažení do jednoho dne od provedení změn</strong>, ať mají uživatelé rychlý přístup k aktuálním datům.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_9'
     dependency :rule => 'A and B and C and (D)'
@@ -1449,11 +1468,11 @@ survey 'CZ',
     condition_C :q_provideDumps, '==', :a_true
     condition_D :q_dumpFrequency, '!=', :a_daily
 
-    q_corrected 'Will your data be corrected if it has errors?',
+    q_corrected 'Je zajištěna oprava dat v případě, že budou objeveny chyby?',
       :discussion_topic => :corrected,
       :display_on_certificate => true,
-      :text_as_statement => 'Any errors in this data are',
-      :help_text => 'It\'s good practice to fix errors in your data especially if you use it yourself. When you make corrections, people need to be told about them.',
+      :text_as_statement => 'Chyby v datech',
+      :help_text => 'Je dobrou praxí opravovat chyby v datech, zvláště pokud data sami používáte. Nezapomeňte na provedené opravy upozornit uživatele.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
@@ -1461,10 +1480,11 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'corrected',
+      :text_as_statement => 'budou opravovány',
       :requirement => ['standard_21']
 
-    label_standard_21 'You should <strong>correct data when people report errors</strong> so everyone benefits from improvements in accuracy.',
+    label_standard_21 '
+                     <strong>Měli byste opravit nahlášené chyby</strong>, pomůžete tak všem uživatelům dat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_21'
     dependency :rule => 'A and B and C'
@@ -1472,124 +1492,130 @@ survey 'CZ',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_8 'Quality',
-      :help_text => 'how much people can rely on your data',
+    label_group_8 'Kvalita dat',
+      :help_text => 'kvalita dat ovlivňuje, nakolik se vašim datům dá věřit',
       :customer_renderer => '/partials/fieldset'
 
-    q_qualityUrl 'Where do you document issues with the quality of this data?',
+    q_qualityUrl 'Kde jsou dokumentovány známé nedostatky a chyb v datech?',
       :discussion_topic => :qualityUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Data quality is documented at',
-      :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
-    a_1 'Data Quality Documentation URL',
+      :text_as_statement => 'Dokumentace kvality dat',
+      :help_text => 'URL, kde se uživatelé mohou dozvědět podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při migraci dat. Buďte ohledně známých nedostatků v datech otevření a zvýšíte tak důvěryhodnost vašich dat.'
+    a_1 'URL dokumentace',
       :string,
       :input_type => :url,
-      :placeholder => 'Data Quality Documentation URL',
+      :placeholder => 'URL dokumentace',
       :requirement => ['standard_22']
 
-    label_standard_22 'You should <strong>document any known issues with your data quality</strong> so that people can decide how much to trust your data.',
+    label_standard_22 '
+               <strong>Známé nedostatky a chyby v datech by měly být dokumentovány a tato dokumentace by měla být zveřejněna</strong>, aby se uživatelé mohli rozhodnout, nakolik na ně mohou spoléhat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_22'
     dependency :rule => 'A'
     condition_A :q_qualityUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_qualityControlUrl 'Where is your quality control process described?',
+    q_qualityControlUrl 'Kde máte popsaný svůj systém řízení kvality dat ?',
       :discussion_topic => :qualityControlUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Quality control processes are described at',
-      :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
-    a_1 'Quality Control Process Description URL',
+      :text_as_statement => 'Dokumentace systému řízení kvality dat',
+      :help_text => 'Uveďte adresu, kde se uživatelé mohou dozvědět o způsobu kontroly kvality dat, ať již automatizované či ruční. Dáváte tím najevo, že berete kvalitu dat vážně, a motivujete uživatele ke hlášení chyb, což přináší přínosy všem uživatelům.'
+    a_1 'URL popisující dokumentace systému řízení kvality dat řízení kvality',
       :string,
       :input_type => :url,
-      :placeholder => 'Quality Control Process Description URL',
+      :placeholder => 'URL popisující dokumentace systému řízení kvality dat řízení kvality',
       :requirement => ['exemplar_10']
 
-    label_exemplar_10 'You should <strong>document your quality control process</strong> so that people can decide how much to trust your data.',
+    label_exemplar_10 '
+               <strong>Měli byste popsat váš způsob zajištění kvality datDokumentujte své procesy pro řízení kvality</strong>, ať se uživatelé vímohou rozhodnout, nakolik mohou vašim datům důvěřovat.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_10'
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_9 'Guarantees',
-      :help_text => 'how much people can depend on your data’s availability',
+    label_group_9 'Zajištění',
+      :help_text => 'dostupnosti vašich dat',
       :customer_renderer => '/partials/fieldset'
 
-    q_backups 'Do you take offsite backups?',
+    q_backups 'Zálohujete data v oddělené lokalitě?',
       :discussion_topic => :backups,
       :display_on_certificate => true,
-      :text_as_statement => 'The data is',
-      :help_text => 'Taking a regular offsite backup helps ensure that the data won\'t be lost in the case of accident.',
+      :text_as_statement => 'Zálohování dat',
+      :help_text => 'Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'backed up offsite',
+      :text_as_statement => 'data jsou zálohována v oddělené lokalitě',
       :requirement => ['standard_23']
 
-    label_standard_23 'You should <strong>take a result offsite backup</strong> so that the data won\'t be lost if an accident happens.',
+    label_standard_23 '
+               <strong>Provádějte zálohování svých dat do oddělené lokality</strong>, abyste o ně v případě nehody nepřišli.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_23'
     dependency :rule => 'A'
     condition_A :q_backups, '==', :a_false
 
-    q_slaUrl 'Where do you describe any guarantees about service availability?',
+    q_slaUrl 'Kde je popsána garantovaná úroveň dostupnosti služby?',
       :discussion_topic => :slaUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Service availability is described at',
-      :help_text => 'Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees.'
+      :text_as_statement => 'Dostupnost služby',
+      :help_text => 'Uveďte URL k dokumentu, který popisuje vámi garantovanou úroveň dostupnosti služby. Můžete například uvést, že garantujete dostupnost 99,5 %, nebo že dostupnost služeb nijak nezaručujete.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_1 'Service Availability Documentation URL',
+    a_1 'URL popisující garantovanou úroveň dostupnosti služby',
       :string,
       :input_type => :url,
-      :placeholder => 'Service Availability Documentation URL',
+      :placeholder => 'URL popisující garantovanou úroveň dostupnosti služby',
       :requirement => ['standard_24']
 
-    label_standard_24 'You should <strong>describe what guarantees you have around service availability</strong> so that people know how much they can rely on it.',
+    label_standard_24 '
+                  <strong>Měli byste uvést, jaká garantovaná úroveň dostupnosti služby</strong>, aby její uživatelé věděli, nakolik se na ni mohou spolehnout.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_24'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_slaUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_statusUrl 'Where do you give information about the current status of the service?',
+    q_statusUrl 'Kde se poskytují informace o aktuálním stavu služby?',
       :discussion_topic => :statusUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Service status is given at',
-      :help_text => 'Give a URL for a page that tells people about the current status of your service, including any faults you are aware of.'
+      :text_as_statement => 'Aktuální stav služby',
+      :help_text => 'Uveďte URL stránky, na které mohou uživatelé najít informace o aktuálním stavu služby, včetně případných výpadků.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_1 'Service Status URL',
+    a_1 'URL s popisem aktuálního stavu služby',
       :string,
       :input_type => :url,
-      :placeholder => 'Service Status URL',
+      :placeholder => 'URL s popisem aktuálního stavu služby',
       :requirement => ['exemplar_11']
 
-    label_exemplar_11 'You should <strong>have a service status page</strong> that tells people about the current status of your service.',
+    label_exemplar_11 'Měli byste provozovat <strong>informační stránku s údaji o aktuálním stavu vaší služby</strong>, ať mají uživatelé přehled o aktuálním stavu služby.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_11'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_statusUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_onGoingAvailability 'How long will this data be available for?',
+    q_onGoingAvailability 'Jak dlouho budou data dostupná?',
       :discussion_topic => :onGoingAvailability,
       :display_on_certificate => true,
-      :text_as_statement => 'The data is available',
+      :text_as_statement => 'Dlouhodobá dostupnost dat',
       :pick => :one
-    a_experimental 'it might disappear at any time',
-      :text_as_statement => 'experimentally and might disappear at any time'
-    a_short 'it\'s available experimentally but should be around for another year or so',
-      :text_as_statement => 'experimentally for another year or so',
+    a_experimental 'poskytování dat může být kdykoli ukončeno',
+      :text_as_statement => 'poskytování dat může být kdykoli ukončeno'
+    a_short 'data jsou publikována experimentálně, ale očekává se, že budou publikována alespoň rok',
+      :text_as_statement => 'aspoň jeden rok',
       :requirement => ['pilot_13']
-    a_medium 'it\'s in your medium-term plans so should be around for a couple of years',
-      :text_as_statement => 'for at least a couple of years',
+    a_medium 've střednědobém výhledu se počítá s publikací dat alespoň v řádu několika let',
+      :text_as_statement => 'očekává se, že budou publikována několik let',
       :requirement => ['standard_25']
-    a_long 'it\'s part of your day-to-day operations so will stay published for a long time',
-      :text_as_statement => 'for a long time',
+    a_long 'publikace dat je součástí běžného provozu a počítá se s dlouhodobou dostupností',
+      :text_as_statement => 'očekává se, že budou publikována řadu let',
       :requirement => ['exemplar_12']
 
-    label_pilot_13 'You should <strong>guarantee that your data will be available in this form for at least a year</strong> so that people can decide how much to rely on your data.',
+    label_pilot_13 '
+                     <strong>Měli byste se zaručit, že data budou ve stávající podobě k dispozici alespoň jeden rok.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_13'
     dependency :rule => 'A and B and C'
@@ -1597,14 +1623,18 @@ survey 'CZ',
     condition_B :q_onGoingAvailability, '!=', :a_medium
     condition_C :q_onGoingAvailability, '!=', :a_long
 
-    label_standard_25 'You should <strong>guarantee that your data will be available in this form in the medium-term</strong> so that people can decide how much to trust your data.',
+    label_standard_25 '
+                     <strong>Měli byste zaručit, že data ve stávající podobě budou k dispozici v horizontu několika let.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_25'
     dependency :rule => 'A and B'
     condition_A :q_onGoingAvailability, '!=', :a_medium
     condition_B :q_onGoingAvailability, '!=', :a_long
 
-    label_exemplar_12 'You should <strong>guarantee that your data will be available in this form in the long-term</strong> so that people can decide how much to trust your data.',
+    label_exemplar_12 '
+                     <strong>Měli byste zaručit, že data v současné podobě budou k dispozici dlouhodobě.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_12'
     dependency :rule => 'A'
@@ -1612,27 +1642,29 @@ survey 'CZ',
 
   end
 
-  section_technical 'Technical Information',
-    :description => 'Locations, formats and trust' do
+  section_technical 'Technické informace',
+    :description => 'Umístění, formát a důvěryhodnost' do
 
-    label_group_11 'Locations',
-      :help_text => 'how people can access your data',
+    label_group_11 'Umístění',
+      :help_text => 'jakým způsobem mohou lidé přistupovat k vašim',
       :customer_renderer => '/partials/fieldset'
 
-    q_datasetUrl 'Where is your dataset?',
+    q_datasetUrl 'Kde je vaše datová sada k dispozici?',
       :discussion_topic => :datasetUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is published at',
-      :help_text => 'Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.'
+      :text_as_statement => 'Odkaz na data',
+      :help_text => 'Uveďte přímý odkaz (URL) na data. Na otevřená data by z webu měl vést přímý odkaz, aby je lidé snadno našli a mohli využít.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
-    a_1 'Dataset URL',
+    a_1 'přímý odkaz (URL) na data',
       :string,
       :input_type => :url,
-      :placeholder => 'Dataset URL',
+      :placeholder => 'přímý odkaz (URL) na data',
       :requirement => ['basic_9', 'pilot_14']
 
-    label_basic_9 'You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.',
+    label_basic_9 '
+                     <strong>Uveďte přímý odkaz (URL) na svá data nebo na jejich dokumentaci.</strong>
+                  ',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_9'
     dependency :rule => 'A and B and C'
@@ -1640,7 +1672,8 @@ survey 'CZ',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_pilot_14 'You should <strong>have a URL that is a direct link to the data itself</strong> so that people can access it easily.',
+    label_pilot_14 '
+                     <strong>Měli byste uvést přímý odkaz na data samotná</strong>, ať se k nim lidé snadno dostanou.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_14'
     dependency :rule => 'A and B and C'
@@ -1648,44 +1681,47 @@ survey 'CZ',
     condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_datasetUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_versionManagement 'How do you publish a series of the same dataset?',
+    q_versionManagement 'Jak publikujete nové datové zdroje datové sady, např. soubory v časové řadě?',
       :discussion_topic => :versionManagement,
       :requirement => ['basic_10'],
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
-    a_current 'as a single URL that\'s regularly updated',
-      :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current dataset.',
+    a_current 'URL zůstává stejné, ale mění se data dostupná po přistoupení na dané URLn',
+      :help_text => 'Tuto možnost vyberte, pokud je aktuální verze dat vždy ke stažení na stejném URL.',
       :requirement => ['standard_26']
-    a_template 'as consistent URLs for each release',
-      :help_text => 'Choose this if your dataset URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
+    a_template 'je definován vzor URL pro měnící se data',
+      :help_text => 'Tuto možnost vyberte, pokud se URL s každého nově publikovaného datového zdroje mění podle definovaného vzoru. Např. zahrnutí data vydání do URL (například „2013-04“). To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.',
       :requirement => ['pilot_15']
-    a_list 'as a list of releases',
-      :help_text => 'Choose this if you have a list of datasets on a web page or a feed (like Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
+    a_list 'jako seznam zpráv publikujeme seznam publikovaných datových zdrojů',
+      :help_text => 'Tuto možnost vyberte, pokud poskytujete webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivé publikované datové zdroje a podrobnosti o nich. To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.',
       :requirement => ['standard_27']
 
-    label_standard_26 'You should <strong>have a single persistent URL to download the current version of your data</strong> so that people can access it easily.',
+    label_standard_26 '
+                        <strong>Měli byste stanovit URL, na kterém uživatelé vždy najdou aktuální verzi dat.</strong>
+                     ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_26'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_current
 
-    label_pilot_15 'You should <strong>use a consistent pattern for different release URLs</strong> so that people can download each one automatically.',
+    label_pilot_15 'Pro jednotlivé datové zdroje <strong>by měl být konzistentně používán definovaný vzor URL</strong>, aby je bylo možno stahovat automaticky.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_15'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_template
 
-    label_standard_27 'You should <strong>have a document or feed with a list of available releases</strong> so people can create scripts to download them all.',
+    label_standard_27 '
+                        <strong>Měl by být publikován dokument nebo feed se seznamem všech publikovaných datových zdrojů</strong>, ať si je lidé mohou snadno automaticky stáhnout.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_27'
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '!=', :a_list
 
-    label_basic_10 'You must <strong>provide access to releases of your data through a URL</strong> that gives the current version, a discoverable series of URLs or through a documentation page so that people can find it.',
+    label_basic_10 'Je třeba zajistit, že jsou aktuální data dostupná <strong>buď vždy na stálém URL, nebo je pro data využívána posloupnost URL podle definovaného vzoru, nebo na stránce se seznamem publikovaných datových zdrojů</strong>.v',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_10'
     dependency :rule => 'A and (B and C and D and E)'
@@ -1695,65 +1731,65 @@ survey 'CZ',
     condition_D :q_versionManagement, '!=', :a_template
     condition_E :q_versionManagement, '!=', :a_list
 
-    q_currentDatasetUrl 'Where is your current dataset?',
+    q_currentDatasetUrl 'Kde je umístěna vaše aktuální datová sada?',
       :discussion_topic => :currentDatasetUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The current dataset is available at',
-      :help_text => 'Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released.',
+      :text_as_statement => 'Adresa aktuální datové sady',
+      :help_text => 'Uveďte URL odkazu na aktuální verzi datové sady. Data na tomto URL by se měla měnit s vydáním každé nové verze.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_current
-    a_1 'Current Dataset URL',
+    a_1 'URL aktuální datové sady',
       :string,
       :input_type => :url,
-      :placeholder => 'Current Dataset URL',
+      :placeholder => 'URL aktuální datové sady',
       :required => :required
 
-    q_versionsTemplateUrl 'What format do dataset release URLs follow?',
+    q_versionsTemplateUrl 'Jaký formát mají URL průběžně publikovaných datových zdrojů?',
       :discussion_topic => :versionsTemplateUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Releases follow this consistent URL pattern',
-      :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
+      :text_as_statement => 'Formát URL',
+      :help_text => 'Uveďte vzor, podle které jsou tvořena URL průběžně publikovaných datových zdrojů. Měnící se části URL můžete vyznačit `{takto}`, například: `http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv`.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_template
-    a_1 'Version Template URL',
+    a_1 'vzor URL',
       :string,
       :input_type => :text,
-      :placeholder => 'Version Template URL',
+      :placeholder => 'vzor URL',
       :required => :required
 
-    q_versionsUrl 'Where is your list of dataset releases?',
+    q_versionsUrl 'Kde publikujete seznam publikovaných datových zdrojů?',
       :discussion_topic => :versionsUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Releases of this data are listed at',
-      :help_text => 'Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages.',
+      :text_as_statement => 'seznamem publikovaných datových zdrojů',
+      :help_text => 'Uveďte URL stránky nebo feedu se strojově čitelným seznamem publikovaných datových zdrojů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_list
-    a_1 'Version List URL',
+    a_1 'URL seznamu publikovaných datových zdrojů',
       :string,
       :input_type => :url,
-      :placeholder => 'Version List URL',
+      :placeholder => 'URL seznamu publikovaných datových zdrojů',
       :required => :required
 
-    q_endpointUrl 'Where is the endpoint for your API?',
+    q_endpointUrl 'Kořenové URL přístupového bodu vašeho API',
       :discussion_topic => :endpointUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The API service endpoint is',
-      :help_text => 'Give a URL that\'s a starting point for people\'s scripts to access your API. This should be a service description document that helps the script to work out which services exist.'
+      :text_as_statement => 'Kořenové URL datového API',
+      :help_text => 'Uveďte URL, které odkazuje na přístupový bod vašeho API. Na tomto URL by skripty a aplikace měli získat popis služeb poskytovaných API.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_1 'Endpoint URL',
+    a_1 'kořenové URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Endpoint URL',
+      :placeholder => 'kořenové URL',
       :requirement => ['basic_11', 'standard_28']
 
-    label_basic_11 'You must <strong>provide either an API endpoint URL or a URL to its documentation</strong> so that people can find it.',
+    label_basic_11 'Musíte dát k dispozici <strong>kořenové URL přístupového bodu vašeho datového API nebo URL dokumentace</strong>, aby je mohli uživatelé najít.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_11'
     dependency :rule => 'A and B and C'
@@ -1761,7 +1797,7 @@ survey 'CZ',
     condition_B :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
     condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_standard_28 'You should <strong>have a service description document or single entry point for your API</strong> so that people can access it.',
+    label_standard_28 'Měli byste dát k dispozici <strong>dokumentaci popisu služby nebo kořenové URL vašeho datového API</strong>, aby je mohli uživatelé najít .',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_28'
     dependency :rule => 'A and B and C'
@@ -1769,23 +1805,25 @@ survey 'CZ',
     condition_B :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_endpointUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dumpManagement 'How do you publish database dumps?',
+    q_dumpManagement 'Jak publikujete soubory dat ke stažení?',
       :discussion_topic => :dumpManagement,
       :pick => :any
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
-    a_current 'as a single URL that\'s regularly updated',
-      :help_text => 'Choose this if there\'s one URL for people to download the most recent version of the current database dump.',
+    a_current 'URL zůstává stejné, ale mění se data dostupná po přistoupení na dané URL',
+      :help_text => 'Tuto možnost vyberte, pokud se aktuální export dat v podobě souboru ke stažení dá vždy najít na stejném URL.',
       :requirement => ['standard_29']
-    a_template 'as consistent URLs for each release',
-      :help_text => 'Choose this if your database dump URLs follow a regular pattern that includes the date of publication, for example, a URL that starts \'2013-04\'. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
+    a_template 'je definován vzor URL pro měnící se data',
+      :help_text => 'Tuto možnost vyberte, pokud se URL s každého nově publikovaného datového souboru ke stažení mění podle definovaného vzoru. Např. zahrnutí data vydání do URL (například „2013-04“). To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat.',
       :requirement => ['exemplar_13']
-    a_list 'as a list of releases',
-      :help_text => 'Choose this if you have a list of database dumps on a web page or a feed (such as Atom or RSS) with links to each individual release and its details. This helps people to understand how often you release data, and to write scripts that fetch new ones each time they\'re released.',
+    a_list 'publikujeme seznam publikovaných datových souborů ke stažení',
+      :help_text => 'Tuto možnost vyberte, pokud poskytujete webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivé publikované datové soubory ke stažení a podrobnosti o nich. To umožňuje uživatelům pochopit, jak často se data mění, a vytvářet skripty pro pravidelné stahování dat..',
       :requirement => ['exemplar_14']
 
-    label_standard_29 'You should <strong>have a single persistent URL to download the current dump of your database</strong> so that people can find it.',
+    label_standard_29 '
+                           <strong>Měli byste uživatelům nabídnout jedno stálé URL, na kterém si stáhnou aktuální export dat v podobě souboru ke stažení.</strong>
+                        ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_29'
     dependency :rule => 'A and B and C'
@@ -1793,7 +1831,8 @@ survey 'CZ',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_current
 
-    label_exemplar_13 'You should <strong>use a consistent pattern for database dump URLs</strong> so that people can can download each one automatically.',
+    label_exemplar_13 '
+                           <strong>URL jednotlivých souborů ke stažení s exportem dat vybírejte podle jasného vzoru</strong>, ať si je lidé mohou stahovat automaticky.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_13'
     dependency :rule => 'A and B and C'
@@ -1801,7 +1840,8 @@ survey 'CZ',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_template
 
-    label_exemplar_14 'You should <strong>have a document or feed with a list of available database dumps</strong> so people can create scripts to download them all',
+    label_exemplar_14 '
+                           <strong>Publikujte dokument nebo feed se seznamem všech souborů ke stažení</strong>, ať si je lidé mohou snadno automaticky stáhnout.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_14'
     dependency :rule => 'A and B and C'
@@ -1809,148 +1849,152 @@ survey 'CZ',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '!=', :a_list
 
-    q_currentDumpUrl 'Where is the current database dump?',
+    q_currentDumpUrl 'Kde je aktuální soubor ke stažení?',
       :discussion_topic => :currentDumpUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The most recent database dump is always available at',
-      :help_text => 'Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created.',
+      :text_as_statement => 'Adresa nejaktuálnějšího souboru ke stažení',
+      :help_text => 'Uveďte URL nejaktuálnějšího souboru ke stažení. Soubor dostupný na tomto URL by se měl měnit pokaždé, když provedete nový export dat.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_current
-    a_1 'Current Dump URL',
+    a_1 'URL exportovaných dat',
       :string,
       :input_type => :url,
-      :placeholder => 'Current Dump URL',
+      :placeholder => 'URL exportovaných dat',
       :required => :required
 
-    q_dumpsTemplateUrl 'What format do database dump URLs follow?',
+    q_dumpsTemplateUrl 'Jaký formát mají URL jednotlivých datových souborů ke stažení?',
       :discussion_topic => :dumpsTemplateUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Database dumps follow the consistent URL pattern',
-      :help_text => 'This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`',
+      :text_as_statement => 'Formát URL',
+      :help_text => 'Uveďte šablonu, podle které jsou tvořena URL jednotlivých souborů ke stažení. Měnící se části URL můžete vyznačit `{takto}`, například: `http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv`.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_template
-    a_1 'Dump Template URL',
+    a_1 'šablona URL',
       :string,
       :input_type => :text,
-      :placeholder => 'Dump Template URL',
+      :placeholder => 'šablona URL',
       :required => :required
 
-    q_dumpsUrl 'Where is your list of available database dumps?',
+    q_dumpsUrl 'Kde publikujete seznam souborů ke stažení?',
       :discussion_topic => :dumpsUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'A list of database dumps is at',
-      :help_text => 'Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages.',
+      :text_as_statement => 'Seznam souborů ke stažení',
+      :help_text => 'Uveďte URL stránky nebo feedu se strojově čitelným seznamem souborů ke stažení. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_list
-    a_1 'Dump List URL',
+    a_1 'URL seznamu souborů ke stažení',
       :string,
       :input_type => :url,
-      :placeholder => 'Dump List URL',
+      :placeholder => 'URL seznamu souborů ke stažení',
       :required => :required
 
-    q_changeFeedUrl 'Where is your feed of changes?',
+    q_changeFeedUrl 'Kde publikujete seznam změn v datech?',
       :discussion_topic => :changeFeedUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'A feed of changes to this data is at',
-      :help_text => 'Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages.',
+      :text_as_statement => 'Seznam změn',
+      :help_text => 'Uveďte odkaz na stránku nebo feed se strojově čitelným seznamem starších souborů ke stažení. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_changeFeed, '==', :a_true
-    a_1 'Change Feed URL',
+    a_1 'URL seznamu změn v datech',
       :string,
       :input_type => :url,
-      :placeholder => 'Change Feed URL',
+      :placeholder => 'URL seznamu změn v datech',
       :required => :required
 
-    label_group_12 'Formats',
-      :help_text => 'how people can work with your data',
+    label_group_12 'Formát',
+      :help_text => 'jak lze s vašimi daty pracovat',
       :customer_renderer => '/partials/fieldset'
 
-    q_machineReadable 'Is this data machine-readable?',
+    q_machineReadable 'Jsou data strojově čitelná?',
       :discussion_topic => :machineReadable,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is',
-      :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
+      :text_as_statement => 'Strojová čitelnost',
+      :help_text => 'Lidé dávají přednost datům, která se dají snadno, rychle a přesně zpracovat počítačem. Například skenovaná kopie tabulky strojově čitelná není, zatímco CSV soubor jednoznačně ano.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable',
+      :text_as_statement => 'data jsou strojově čitelná',
       :requirement => ['pilot_16']
 
-    label_pilot_16 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
+    label_pilot_16 '
+               <strong>Měli byste data poskytovat ve strojově čitelném formátu</strong>, aby se dala snadno zpracovat.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_16'
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
 
-    q_openStandard 'Is this data in a standard open format?',
+    q_openStandard 'Jsou vaše data ve standardizovaném otevřeném formátu?',
       :discussion_topic => :openStandard,
       :display_on_certificate => true,
-      :text_as_statement => 'The format of this data is',
-      :help_text => 'Open standards are created through a fair, transparent and collaborative process. Anyone can implement them and there’s lots of support so it’s easier for you to share data with more people. For example, XML, CSV and JSON are open standards.',
+      :text_as_statement => 'Formát dat',
+      :help_text => 'Otevřené standardy vznikají v rámci jasného a transparentního procesu spolupráce. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'a standard open format',
+      :text_as_statement => 'standardizovaný, otevřený',
       :requirement => ['standard_30']
 
-    label_standard_30 'You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.',
+    label_standard_30 '
+               <strong>Měli byste svá data publikovat v otevřeném standardizovaném formátu</strong>, aby je ostatní mohli snadno zpracovat pomocí běžně dostupných nástrojů.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_30'
     dependency :rule => 'A'
     condition_A :q_openStandard, '==', :a_false
 
-    q_dataType 'What kind of data do you publish?',
+    q_dataType 'Jaký typ dat publikujete?',
       :discussion_topic => :dataType,
       :pick => :any
-    a_documents 'human-readable documents',
-      :help_text => 'Choose this if your data is meant for human consumption. For example; policy documents, white papers, reports and meeting minutes. These usually have some structure to them but are mostly text.'
-    a_statistical 'statistical data like counts, averages and percentages',
-      :help_text => 'Choose this if your data is statistical or numeric data like counts, averages or percentages. Like census results, traffic flow information or crime statistics for example.'
-    a_geographic 'geographic information, such as points and boundaries',
-      :help_text => 'Choose this if your data can be plotted on a map as points, boundaries or lines.'
-    a_structured 'other kinds of structured data',
-      :help_text => 'Choose this if your data is structured in other ways. Like event details, railway timetables, contact information or anything that can be interpreted as data, and analysed and presented in multiple ways.'
+    a_documents 'lidsky čitelné dokumenty',
+      :help_text => 'Tuto možnost vyberte, pokud jsou vaše data určena pro přímé využití lidmi. Příkladem jsou třeba firemní předpisy, vědecké a novinové články nebo zápisy z porad. I tyto dokumenty mívají nějakou strukturu, ale vesměs jde převážně o text.'
+    a_statistical 'statistické údaje, například počty, průměry nebo podíly',
+      :help_text => 'Tuto možnost vyberte, pokud jde o statistická nebo obecně číselná data, například počty, průměry nebo podíly. Sem patří například demografické údaje, údaje o dopravě nebo statistiky kriminality.'
+    a_geographic 'geografické (prostorové) informace, například body a hranice',
+      :help_text => 'Tuto možnost vyberte, pokud se vaše data dají vynést na mapu, například jako body, hranice nebo čáry.'
+    a_structured 'jiná strukturovaná data',
+      :help_text => 'Tuto možnost vyberte, pokud publikujete strukturovaná data jiného typu, například události, jízdní řády nebo kontakty. Nebo jakákoli jiná data, která lze analyzovat a interpretovat více způsoby.'
 
-    q_documentFormat 'Do your human-readable documents include formats that',
+    q_documentFormat 'Jaké z následujících vlastností mají vámi publikované dokumenty?',
       :discussion_topic => :documentFormat,
       :display_on_certificate => true,
-      :text_as_statement => 'Documents are published',
+      :text_as_statement => 'Formát dokumentů',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_documents
-    a_semantic 'describe semantic structure like HTML, Docbook or Markdown',
-      :text_as_statement => 'in a semantic format',
-      :help_text => 'These formats label structures like chapters, headings and tables that make it easy to automatically create summaries like tables of contents and glossaries. They also make it easy to apply different styles to the document so its appearance changes.',
+    a_semantic 'Jsou sémanticky značkované, například pomocí HTML, DocBook nebo Markdown.',
+      :text_as_statement => 'sémantické značkování',
+      :help_text => 'Sémantické značkování dělí dokument na logické stavební prvky, jako jsou kapitoly, nadpisy nebo tabulky, takže se s nimi snadno automaticky pracuje – například není problém sestavit seznam tabulek nebo rejstřík. Sémantické značkování také usnadňuje formátování dokumentu podle potřeby.',
       :requirement => ['standard_31']
-    a_format 'describe information on formatting like OOXML or PDF',
-      :text_as_statement => 'in a display format',
-      :help_text => 'These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren\'t as easy for people to process automatically and change style.',
+    a_format 'Jsou optimalizované pro zobrazení, například OOXML nebo PDF.',
+      :text_as_statement => 'vizuální značkování',
+      :help_text => 'Tyto formáty se zabývají především vizuální podobou dokumentu, například písmem, barvami a umístěním prvků na stránce. Hodí se pro běžné čtení dokumentu, ale nejsou vhodné pro automatické zpracování a automatizované změny formátování.',
       :requirement => ['pilot_17']
-    a_unsuitable 'aren\'t meant for documents like Excel, JSON or CSV',
-      :text_as_statement => 'in a format unsuitable for documents',
-      :help_text => 'These formats better suit tabular or structured data.'
+    a_unsuitable 'Obsahují data ve formátech nevhodných pro dokumenty jako například tabulky Excelu, JSON nebo CSV.',
+      :text_as_statement => 'data nevhodná pro dokumenty',
+      :help_text => 'Pro tato data je lepší zvolit tabulkové nebo strukturované formáty.'
 
-    label_standard_31 'You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles.',
+    label_standard_31 '
+                        <strong>Měli byste publikovat sémanticky značkované dokumenty</strong>, aby si je uživatelé mohli snadno přeformátovat a jinak zpracovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_31'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_documents
     condition_B :q_documentFormat, '!=', :a_semantic
 
-    label_pilot_17 'You should <strong>publish documents in a format designed specifically for them</strong> so that they\'re easy to process.',
+    label_pilot_17 '
+                        <strong>Měli byste publikovat dokumenty ve formátu, který je pro dokumenty určený</strong>, protože je pak bude možné zpracovat pomocí nástrojů pro zpracování dokumentů.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_17'
     dependency :rule => 'A and (B and C)'
@@ -1958,37 +2002,39 @@ survey 'CZ',
     condition_B :q_documentFormat, '!=', :a_semantic
     condition_C :q_documentFormat, '!=', :a_format
 
-    q_statisticalFormat 'Does your statistical data include formats that',
+    q_statisticalFormat 'V jakém formátu jsou vaše statistická data?',
       :discussion_topic => :statisticalFormat,
       :display_on_certificate => true,
-      :text_as_statement => 'Statistical data is published',
+      :text_as_statement => 'Formát statistických dat',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_statistical
-    a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
-      :text_as_statement => 'in a statistical data format',
-      :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
+    a_statistical 'Ve formátu přímo určeném pro statistická data, například <a href="http://sdmx.org/">SDMX</a> nebo <a href="">Data Cube</a>.',
+      :text_as_statement => 'formát přímo určený pro statistická data',
+      :help_text => 'Nativní formáty statistických dat jako <a href="http://sdmx.org/">SDMX</a> nebo <a href="">Data Cube</a> umožňují reprezentovat vícerozměrná statistická data ve formě záznamů o jednotlivých pozorováních a k nim přiřazených dimenzích. Každé pozorování může být navíc opatřeno anotací, která poskytuje další kontext.',
       :requirement => ['exemplar_15']
-    a_tabular 'treat statistical data as a table like CSV',
-      :text_as_statement => 'in a tabular data format',
-      :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
+    a_tabular 'V tabulkovém formátu, například CSV.',
+      :text_as_statement => 'tabulkový',
+      :help_text => 'V tabulkových formátech jsou statistická data reprezentována jako řádky a sloupce tabulky. Snadno se zpracovávají, ale oproti nativním formátům statistických, ale nelze data reprezentovat v tabulkových formátech jako vícerozměrné (multidimenzionální) datové kostky.',
       :requirement => ['standard_32']
-    a_format 'focus on the format of tabular data like Excel',
-      :text_as_statement => 'in a presentation format',
-      :help_text => 'Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.',
+    a_format 'V prezentačním formátu s důrazem na formátování, například Excel.',
+      :text_as_statement => 'prezentační',
+      :help_text => 'V tabulkových procesorech je občas struktura dat vyznačena vizuálně, například pomocí kurzívy nebo tučného písma. Lidem to pomáhá pochopit vztahy mezi jednotlivými částmi dat, ale strojově se dokumenty značkované pouze tímto způsobem zpracovávají obtížně.',
       :requirement => ['pilot_18']
-    a_unsuitable 'aren\'t meant for statistical or tabular data like Word or PDF',
-      :text_as_statement => 'in a format unsuitable for statistical data',
-      :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
+    a_unsuitable 'Ve formátu nevhodném pro statistická nebo tabulková data například Word nebo PDF.',
+      :text_as_statement => 'nepříliš vhodný, dokumentový',
+      :help_text => 'Zmíněné formáty se k uložení statistických dat příliš nehodí, protože strukturu dat v nich lze strukturu dat vyjádřit obtížně nebo vůbec.'
 
-    label_exemplar_15 'You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it\'s easy to analyse.',
+    label_exemplar_15 '
+                        <strong>Statistická data byste měli publikovat ve formátu, který umožňuje reprezentovat jejich vícerozměrnou strukturu</strong> a usnadňuje tak jejich analýzu.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_15'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_statistical
     condition_B :q_statisticalFormat, '!=', :a_statistical
 
-    label_standard_32 'You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it\'s easy to analyse.',
+    label_standard_32 '
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_32'
     dependency :rule => 'A and (B and C)'
@@ -1996,7 +2042,8 @@ survey 'CZ',
     condition_B :q_statisticalFormat, '!=', :a_statistical
     condition_C :q_statisticalFormat, '!=', :a_tabular
 
-    label_pilot_18 'You should <strong>publish tabular data in a format designed for that purpose</strong> so that it\'s easy to process.',
+    label_pilot_18 '
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_18'
     dependency :rule => 'A and (B and C and D)'
@@ -2005,33 +2052,35 @@ survey 'CZ',
     condition_C :q_statisticalFormat, '!=', :a_tabular
     condition_D :q_statisticalFormat, '!=', :a_format
 
-    q_geographicFormat 'Does your geographic data include formats that',
+    q_geographicFormat 'V jakém formátu jsou vaše prostorová (geografická) data?',
       :discussion_topic => :geographicFormat,
       :display_on_certificate => true,
-      :text_as_statement => 'Geographic data is published',
+      :text_as_statement => 'Formát geografických dat',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_geographic
-    a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
-      :text_as_statement => 'in a geographic data format',
-      :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
+    a_specific 'Ve formátu určeném pro prostorová data, například <a href="http://www.opengeospatial.org/standards/kml/">KML</a> nebo <a href="http://www.geojson.org/">GeoJSON</a>.',
+      :text_as_statement => 'nativní geografický',
+      :help_text => 'Tyto formáty přímo pracují s body, čarami a hranicemi, a umožňují reprezentovat příslušnou strukturu dat, díky čemuž se dobře automatizovaně zpracovávají.',
       :requirement => ['exemplar_16']
-    a_generic 'keeps data structured like JSON, XML or CSV',
-      :text_as_statement => 'in a generic data format',
-      :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
+    a_generic 'V obecném strukturovaném formátu, například JSON, XML nebo CSV.',
+      :text_as_statement => 'obecný strukturovaný',
+      :help_text => 'Každý formát pro ukládání strukturovaných dat může posloužit i pro data prostorová, zvlášť pokud jde jen o uložení bodů.',
       :requirement => ['pilot_19']
-    a_unsuitable 'aren\'t designed for geographic data like Word or PDF',
-      :text_as_statement => 'in a format unsuitable for geographic data',
-      :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
+    a_unsuitable 'Ve formátu nevhodném pro prostorová data, například Word nebo PDF.',
+      :text_as_statement => 'nepříliš vhodný',
+      :help_text => 'Tyto formáty se k uložení geografických dat nehodí, protože v nich nelze reprezentovat potřebnou strukturu dat.'
 
-    label_exemplar_16 'You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.',
+    label_exemplar_16 '
+                        <strong>Prostorová data byste měli zveřejňovat ve specializovaném formátu pro tento typ dat</strong>, aby je uživatelé mohli snadno zpracovat v aplikacích.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_16'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_geographic
     condition_B :q_geographicFormat, '!=', :a_specific
 
-    label_pilot_19 'You should <strong>publish geographic data as structured data</strong> so that it\'s easy to process.',
+    label_pilot_19 '
+                        <strong>Prostorová data byste měli zveřejňovat alespoň v nějakém strukturovaném formátu</strong>, aby se dala snadno zpracovat.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_19'
     dependency :rule => 'A and (B and C)'
@@ -2039,65 +2088,66 @@ survey 'CZ',
     condition_B :q_geographicFormat, '!=', :a_specific
     condition_C :q_geographicFormat, '!=', :a_generic
 
-    q_structuredFormat 'Does your structured data include formats that',
+    q_structuredFormat 'V jakém formátu jsou vaše strukturovaná data?',
       :discussion_topic => :structuredFormat,
       :display_on_certificate => true,
-      :text_as_statement => 'Structured data is published',
+      :text_as_statement => 'Formát strukturovaných dat',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_structured
-    a_suitable 'are designed for structured data like JSON, XML, Turtle or CSV',
-      :text_as_statement => 'in a structured data format',
-      :help_text => 'These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.',
+    a_suitable 'Ve formátu určeném pro strukturovaná data, například JSON, XML, Turtle nebo CSV.',
+      :text_as_statement => 'vhodný, strukturovaný',
+      :help_text => 'Data v těchto formátech jsou reprezentovány jako entity/objekty a jejich vlastnosti. Dají se snadno automaticky zpracovávat.',
       :requirement => ['pilot_20']
-    a_unsuitable 'aren\'t designed for structured data like Word or PDF',
-      :text_as_statement => 'in a format unsuitable for structured data',
-      :help_text => 'These formats don\'t suit this kind of data because they obscure its underlying structure.'
+    a_unsuitable 'Ve formátu, který není určen pro strukturovaná data jako například Word nebo PDF.',
+      :text_as_statement => 'nevhodný, prezentační',
+      :help_text => 'Tyto formáty se k uložení strukturovaných dat nehodí, protože v nich nelze reprezentovat strukturu dat, příp. pouze omezeně.'
 
-    label_pilot_20 'You should <strong>publish structured data in a format designed that purpose</strong> so that it\'s easy to process.',
+    label_pilot_20 '
+                        <strong>Strukturovaná data byste měli zveřejňovat ve formátu určeném pro strukturovaná data</strong>, aby je bylo možno snadno automatizovaně zpracovat.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_20'
     dependency :rule => 'A and (B)'
     condition_A :q_dataType, '==', :a_structured
     condition_B :q_structuredFormat, '!=', :a_suitable
 
-    q_identifiers 'Does your data use persistent identifiers?',
+    q_identifiers 'Používáte v datech persistentní identifikátory?',
       :discussion_topic => :identifiers,
       :display_on_certificate => true,
-      :text_as_statement => 'The data includes',
-      :help_text => 'Data is usually about real things like schools or roads or uses a coding scheme. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.',
+      :text_as_statement => 'Identifikátory objektů',
+      :help_text => 'Data zpravidla vypovídají o objektech reálného světa jako například školy nebo, silnice nebo je pro ně může existovat definovaný způsob značení. Pokud se data z různých zdrojů využívají pro označování objektů stejné persistentní a unikátní identifikátory, je pak snadnější propojovat data z různých zdrojů a zvyšovat tak hodnotu dat. Příklady takovýchto identifikátorů jsou např. GUID, DOI nebo URL.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'persistent identifiers',
+      :text_as_statement => 'ano, jsou používány persistentní identifikátory (GUID, URL, …)',
       :requirement => ['standard_33']
 
-    label_standard_33 'You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.',
+    label_standard_33 'Měli byste<strong>ve vašich datech používat identifikátory pro označování objektů</strong>, aby vaše data bylo možno snadno kombinovat s jinými daty o stejných objektech.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_33'
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_false
 
-    q_resolvingIds 'Can the identifiers in your data be used to find extra information?',
+    q_resolvingIds 'Lze pomocí Vámi používaných identifikátorů objektů vyhledávat o objektech další údaje?',
       :discussion_topic => :resolvingIds,
       :display_on_certificate => true,
-      :text_as_statement => 'The persistent identifiers',
+      :text_as_statement => 'Navigace pomocí identifikátorů',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
-    a_false 'no, the identifiers can\'t be used to find extra information',
-      :text_as_statement => ''
-    a_service 'yes, there is a service that people can use to resolve the identifiers',
-      :text_as_statement => 'resolve using a service',
-      :help_text => 'Online services can be used to give people information about identifiers such as GUIDs or DOIs which can\'t be directly accessed in the way that URLs are.',
+    a_false 'Ne, podle používané identifikátory nelze použít k vyhledávání dalších údajů.',
+      :text_as_statement => 'používané identifikátory to neumožňují'
+    a_service 'Ano, existuje služba, která identifikátory překládá a umožňuje navigaci na další související informace.',
+      :text_as_statement => 'používané identifikátory jsou podporovány službami',
+      :help_text => 'Identifikátory GUID nebo DOI nemohou být použity přímo k navigaci mezi zdroji jako je tomu v případě URL, ale lze využití online služeb, které tyto identifikátory překládají a zprostředkují navigaci na související zdroje.',
       :requirement => ['standard_34']
-    a_resolvable 'yes, the identifiers are URLs that resolve to give information',
-      :text_as_statement => 'resolve because they are URLs',
-      :help_text => 'URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.',
+    a_resolvable 'Ano, jako identifikátory jsou použity dereferencovatelné URL.',
+      :text_as_statement => 'jsou využity URL jako identifikátory',
+      :help_text => 'URL jsou využitelná jak lidmi, tak počítače. Lidé si mohou URL snadno otevřít ve svém prohlížeči a dohledat tak informace třeba o <a href="http://opencorporates.com/companies/gb/08030289">firmě</a> nebo <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">PSČ</a>. Počítače pak např. prostřednictvím skriptů mohou URL využít pro přístup k datům.',
       :requirement => ['exemplar_17']
 
-    label_standard_34 'You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.',
+    label_standard_34 'Pokud používáte identifikátory, které nelze přímo použít k navigaci mezi zdroji, měli byste <strong>poskytnout službu, která umožní navigaci na související zdroje pomocí použitých identifikátorů</strong>.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_34'
     dependency :rule => 'A and (B and C)'
@@ -2105,28 +2155,30 @@ survey 'CZ',
     condition_B :q_resolvingIds, '!=', :a_service
     condition_C :q_resolvingIds, '!=', :a_resolvable
 
-    label_exemplar_17 'You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.',
+    label_exemplar_17 '
+                        <strong>Měli byste uvádět odkazy na webové stránky s informacemi o objektech ve vašich datech</strong>, aby uživatelé mohli snadno najít a sdílet související informace.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_17'
     dependency :rule => 'A and (B)'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '!=', :a_resolvable
 
-    q_resolutionServiceURL 'Where is the service that is used to resolve the identifiers?',
+    q_resolutionServiceURL 'Adresa služby pro navigaci pomocí identifikátorů:',
       :discussion_topic => :resolutionServiceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The identifier resolution service is at',
-      :help_text => 'The resolution service should take an identifier as a query parameter and give back some information about the thing it identifies.'
+      :text_as_statement => 'Služba pro navigaci pomocí identifikátorů',
+      :help_text => 'Služba by měla na základě identifikátoru zadaného jako parametr dotazu vrátit data o příslušném objektu, který je identifikátorem identifikován.'
     dependency :rule => 'A and B'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '==', :a_service
-    a_1 'Identifier Resolution Service URL',
+    a_1 'URL služby',
       :string,
       :input_type => :url,
-      :placeholder => 'Identifier Resolution Service URL',
+      :placeholder => 'URL služby',
       :requirement => ['standard_35']
 
-    label_standard_35 'You should <strong>have a URL through which identifiers can be resolved</strong> so that more information about them can be found by a computer.',
+    label_standard_35 '
+                     <strong>Měli byste zpřístupnit URL, na kterém lze podle identifikátorů získat další data o identifikovaných objektech</strong>, aby bylo možno získávání těchto dat automatizovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_35'
     dependency :rule => 'A and B and C'
@@ -2134,9 +2186,9 @@ survey 'CZ',
     condition_B :q_resolvingIds, '==', :a_service
     condition_C :q_resolutionServiceURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_existingExternalUrls 'Is there third-party information about things in your data on the web?',
+    q_existingExternalUrls 'Existují jinde na webu další informace o objektech, které se vyskytují ve vašich datech?',
       :discussion_topic => :existingExternalUrls,
-      :help_text => 'Sometimes other people outside your control provide URLs to the things your data is about. For example, your data might have postcodes in it that link to the Ordnance Survey website.',
+      :help_text => 'Je možné, že o stejných objektech, jaké se vyskytují ve vašich datech, jsou na webu dostupné informace třetích stran. Například když máte v databázi PSČ, bylo by možné je využít pro propojení na data na národním geoportálu.',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A'
@@ -2144,9 +2196,9 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_reliableExternalUrls 'Is that third-party information reliable?',
+    q_reliableExternalUrls 'Jsou informace poskytované třetími stranami spolehlivé?',
       :discussion_topic => :reliableExternalUrls,
-      :help_text => 'If a third-party provides public URLs about things in your data, they probably take steps to ensure data quality and reliability. This is a measure of how much you trust their processes to do that. Look for their open data certificate or similar hallmarks to help make your decision.',
+      :help_text => 'Pokud jsou ke stejným objektům, jako ve vašich datech, dostupná URL někde jinde na webu je to známka, že se jejich poskytovatel snaží zajistit jejich kvalitu a dostupnost. Tímto hodnotíte, na kolik považujete tato data za spolehlivá. Při hodnocení se můžete se podívat na open data certifikát poskytovatele nebo na obdobnou známku kvality.',
       :pick => :one,
       :required => :exemplar
     dependency :rule => 'A and B'
@@ -2155,11 +2207,11 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_externalUrls 'Does your data use those third-party URLs?',
+    q_externalUrls 'Okazujete na tato cizí URL ve svých datech?',
       :discussion_topic => :externalUrls,
       :display_on_certificate => true,
-      :text_as_statement => 'Third-party URLs are',
-      :help_text => 'You should use third-party URLs that resolve to information about the things your data describes. This reduces duplication and helps people combine data from different sources to make it more useful.',
+      :text_as_statement => 'Další informační zdroje',
+      :help_text => 'Při využívání URL třetích stran je doporučováno využívat dereferencovatelná URL, která umožňují získat data o objektu po přistoupení na dané URL. Tím se snižuje duplicita dat a je usnadněno kombinování dat z více zdrojů.',
       :pick => :one
     dependency :rule => 'A and B and C'
     condition_A :q_identifiers, '==', :a_true
@@ -2168,10 +2220,11 @@ survey 'CZ',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'referenced in this data',
+      :text_as_statement => 'data odkazují na URL z jiných zdrojů',
       :requirement => ['exemplar_18']
 
-    label_exemplar_18 'You should <strong>use URLs to third-party information in your data</strong> so that it\'s easy to combine with other data that uses those URLs.',
+    label_exemplar_18 '
+                        <strong>Měli byste pomocí URL odkazovat na data třetích stran</strong>. Usnadníte tím kombinování dat s jinými daty, která také využívají tato URL.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_18'
     dependency :rule => 'A and B and C and D'
@@ -2180,41 +2233,43 @@ survey 'CZ',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_13 'Trust',
-      :help_text => 'how much trust people can put in your data',
+    label_group_13 'Důvěryhodnost',
+      :help_text => 'do jaké míry mohou uživatelé vašim datům důvěřovat',
       :customer_renderer => '/partials/fieldset'
 
-    q_provenance 'Do you provide machine-readable provenance for your data?',
+    q_provenance 'Publikujete strojově čitelná metadata o původu dat?',
       :discussion_topic => :provenance,
       :display_on_certificate => true,
-      :text_as_statement => 'The provenance of this data is',
-      :help_text => 'This about the origins of how your data was created and processed before it was published. It builds trust in the data you publish because people can trace back how it has been handled.',
+      :text_as_statement => 'Informace o původu dat',
+      :help_text => 'Je vhodné publikovat metadata o tom, jak byla data vytvořena a zpracována, než byla publikována. Tím pomáháte posilovat důvěru uživatelů ve vaše data, protože si uživatelé mohou ověřit, jak data vznikla. Více o metadatech o původu naleznete <a href="">zde</a>.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable',
+      :text_as_statement => 'strojově čitelné metadata o původu dat',
       :requirement => ['exemplar_19']
 
-    label_exemplar_19 'You should <strong>provide a machine-readable provenance trail</strong> about your data so that people can trace how it was processed.',
+    label_exemplar_19 '
+               <strong>Měli byste publikovat strojově čitelná metadata o původu a zpracování dat</strong>, aby si uživatelé mohli ověřit, jak byla data zpracována.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_19'
     dependency :rule => 'A'
     condition_A :q_provenance, '==', :a_false
 
-    q_digitalCertificate 'Where do you describe how people can verify that data they receive comes from you?',
+    q_digitalCertificate 'Jakým způsobem si uživatelé mohou ověřit, že data skutečně pochází od vás?',
       :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
-      :text_as_statement => 'This data can be verified using',
-      :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
-    a_1 'Verification Process URL',
+      :text_as_statement => 'Ověření původ dat',
+      :help_text => 'Pokud zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás. Například můžete data digitálně podepsat, aby bylo možné rozpoznat, že data byla pozměněna.'
+    a_1 'URL dokumentace způsobu ověření',
       :string,
       :input_type => :url,
-      :placeholder => 'Verification Process URL',
+      :placeholder => 'URL dokumentace způsobu ověření',
       :requirement => ['exemplar_20']
 
-    label_exemplar_20 'You should <strong>describe how people can check that the data they receive is the same as what you published</strong> so that they can trust it.',
+    label_exemplar_20 '
+               <strong>Měli byste zajistit, aby si uživatelé mohli ověřit, že získaná data skutečně odpovídají datům, které publikujete.</strong> Tento krok pomáhá budovat důvěru uživatelů.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_20'
     dependency :rule => 'A'
@@ -2222,187 +2277,202 @@ survey 'CZ',
 
   end
 
-  section_social 'Social Information',
-    :description => 'Documentation, support and services' do
+  section_social 'Sociální informace',
+    :description => 'Dokumentace, podpora a služby' do
 
-    label_group_15 'Documentation',
-      :help_text => 'how you help people understand the context and content of your data',
+    label_group_15 'Dokumentace',
+      :help_text => 'pomocí které usnadňujete lidem pochopit kontext a obsah vašich dat',
       :customer_renderer => '/partials/fieldset'
 
-    q_documentationMetadata 'Does your data documentation include machine-readable data for:',
+    q_documentationMetadata 'Jaká metadata publikujete ve strojově čitelné podobě?',
       :discussion_topic => :documentationMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The documentation includes machine-readable data for',
+      :text_as_statement => 'Strojově čitelná metadata',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_title 'title',
-      :text_as_statement => 'title',
+    a_title 'název datové sady',
+      :text_as_statement => 'název datové sady',
       :requirement => ['standard_36']
-    a_description 'description',
-      :text_as_statement => 'description',
+    a_description 'popis',
+      :text_as_statement => 'popis',
       :requirement => ['standard_37']
-    a_issued 'release date',
-      :text_as_statement => 'release date',
+    a_issued 'datum publikace',
+      :text_as_statement => 'datum publikace',
       :requirement => ['standard_38']
-    a_modified 'modification date',
-      :text_as_statement => 'modification date',
+    a_modified 'datum poslední aktualizace datové sady',
+      :text_as_statement => 'datum poslední aktualizace datové sady',
       :requirement => ['standard_39']
-    a_accrualPeriodicity 'frequency of releases',
-      :text_as_statement => 'release frequency',
+    a_accrualPeriodicity 'periodicita publikace datové sady',
+      :text_as_statement => 'periodicita publikace datové sady',
       :requirement => ['standard_40']
-    a_identifier 'identifier',
-      :text_as_statement => 'identifier',
+    a_identifier 'identifikátor',
+      :text_as_statement => 'identifikátor',
       :requirement => ['standard_41']
-    a_landingPage 'landing page',
-      :text_as_statement => 'landing page',
+    a_landingPage 'URL metadat',
+      :text_as_statement => 'URL metadat',
       :requirement => ['standard_42']
-    a_language 'language',
-      :text_as_statement => 'language',
+    a_language 'jazyk',
+      :text_as_statement => 'jazyk',
       :requirement => ['standard_43']
-    a_publisher 'publisher',
-      :text_as_statement => 'publisher',
+    a_publisher 'poskytovatel',
+      :text_as_statement => 'poskytovatel',
       :requirement => ['standard_44']
-    a_spatial 'spatial/geographical coverage',
-      :text_as_statement => 'spatial/geographical coverage',
+    a_spatial 'související geografické území',
+      :text_as_statement => 'související geografické území',
       :requirement => ['standard_45']
-    a_temporal 'temporal coverage',
-      :text_as_statement => 'temporal coverage',
+    a_temporal 'související časové období',
+      :text_as_statement => 'související časové období',
       :requirement => ['standard_46']
-    a_theme 'theme(s)',
-      :text_as_statement => 'theme(s)',
+    a_theme 'klasifikace',
+      :text_as_statement => 'klasifikace',
       :requirement => ['standard_47']
-    a_keyword 'keyword(s) or tag(s)',
-      :text_as_statement => 'keyword(s) or tag(s)',
+    a_keyword 'klíčová slova',
+      :text_as_statement => 'klíčová slova',
       :requirement => ['standard_48']
-    a_distribution 'distribution(s)',
-      :text_as_statement => 'distribution(s)'
+    a_distribution 'Datové zdroje (distribuce)',
+      :text_as_statement => 'Datové zdroje (distribuce)'
 
-    label_standard_36 'You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it.',
+    label_standard_36 '<strong>Měli byste publikovat strojově čitelný název datové sady</strong, aby bylo jasné, jak se data nazývají.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_36'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_title
 
-    label_standard_37 'You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains.',
+    label_standard_37 '
+                        <strong>Měli byste publikovat strojově čitelný popis datové sady</strong>, aby bylo zřejmé, jaká data a o čem datová sada obsahuje.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_37'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_description
 
-    label_standard_38 'You should <strong>include a machine-readable data release date in your documentation</strong> so that people know how timely it is.',
+    label_standard_38 '
+                        <strong>Měli byste publikovat strojově čitelné datum publikace</strong>, aby uživatelé věděli, nakolik jsou data aktuální.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_38'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_issued
 
-    label_standard_39 'You should <strong>include a machine-readable last modification date in your documentation</strong> so that people know they have the latest data.',
+    label_standard_39 '
+                        <strong>Měli byste publikovat strojově čitelné datum poslední aktualizace datové sady</strong>, aby uživatelé věděli, jestli mají aktuální data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_39'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_modified
 
-    label_standard_40 'You should <strong>provide machine-readable metadata about how frequently you release new versions of your data</strong> so people know how often you update it.',
+    label_standard_40 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o periodicitě publikace datové sady</strong>, aby uživatelé věděli, jak často jsou data aktualizována.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_40'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_accrualPeriodicity
 
-    label_standard_41 'You should <strong>include a canonical URL for the data in your machine-readable documentation</strong> so that people know how to access it consistently.',
+    label_standard_41 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o URL, které identifikátorem datové sady</strong>, aby se k ní uživatelé mohli konzistentně přistupovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_41'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_identifier
 
-    label_standard_42 'You should <strong>include a canonical URL to the machine-readable documentation itself</strong> so that people know how to access to it consistently.',
+    label_standard_42 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o URL samotných metadat</strong>, aby se k nim uživatelé mohli konzistentně přistupovat .',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_42'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_landingPage
 
-    label_standard_43 'You should <strong>include the data language in your machine-readable documentation</strong> so that people who search for it will know whether they can understand it.',
+    label_standard_43 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o jazyce datové sady</strong>, aby uživatelé věděli, jestli jim budou rozumět.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_43'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_language
 
-    label_standard_44 'You should <strong>indicate the data publisher in your machine-readable documentation</strong> so people can decide how much to trust your data.',
+    label_standard_44 '
+                        <strong>Měli byste publikovat strojově čitelné údaje informace o poskytovateli dat</strong>, aby se uživatelé mohli rozhodnout, nakolik jim mohou věřit.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_44'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_publisher
 
-    label_standard_45 'You should <strong>include the geographic coverage in your machine-readable documentation</strong> so that people understand where your data applies to.',
+    label_standard_45 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o tom, k jakému zeměpisnému území se data vztahují, nebo o jakém vypovídají.</strong>
+                     ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_45'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_spatial
 
-    label_standard_46 'You should <strong>include the time period in your machine-readable documentation</strong> so that people understand when your data applies to.',
+    label_standard_46 '
+                        <strong>Měli byste publikovat strojově čitelné údaje o časovém úseku, kterého se data týkají, nebo o kterém vypovídají.</strong>
+                     ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_46'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_temporal
 
-    label_standard_47 'You should <strong>include the subject in your machine-readable documentation</strong> so that people know roughly what your data is about.',
+    label_standard_47 '
+                        <strong>Měli byste publikovat strojově čitelným způsobem klasifikovat datovou sadu </strong>, aby uživatelé věděli, čeho se data týkají.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_47'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_theme
 
-    label_standard_48 'You should <strong>include machine-readable keywords or tags in your documentation</strong> to help people search within the data effectively.',
+    label_standard_48 '
+                        <strong>Měli byste publikovat strojově čitelná klíčová slova vztahující se k datové sadě</strong>, aby ji uživatelé mohli lépe vyhledávat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_48'
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_keyword
 
-    q_distributionMetadata 'Does your documentation include machine-readable metadata for each distribution on:',
+    q_distributionMetadata 'Jaká strojově čitelná metadata o datových zdrojích (distribucích, např. stažitelných souborech datové sady) publikujete?',
       :discussion_topic => :distributionMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The documentation about each distribution includes machine-readable data for',
+      :text_as_statement => 'Strojově čitelná metadata o datových zdrojích (distribucích)',
       :pick => :any
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
-    a_title 'title',
-      :text_as_statement => 'title',
+    a_title 'název datového zdroje',
+      :text_as_statement => 'název datového zdroje',
       :requirement => ['standard_49']
-    a_description 'description',
-      :text_as_statement => 'description',
+    a_description 'popis',
+      :text_as_statement => 'popis',
       :requirement => ['standard_50']
-    a_issued 'release date',
-      :text_as_statement => 'release date',
+    a_issued 'datum publikace',
+      :text_as_statement => 'datum publikace',
       :requirement => ['standard_51']
-    a_modified 'modification date',
-      :text_as_statement => 'modification date',
+    a_modified 'datum aktualizace datového zdroje',
+      :text_as_statement => 'datum aktualizace datového zdroje',
       :requirement => ['standard_52']
-    a_rights 'rights statement',
-      :text_as_statement => 'rights statement',
+    a_rights 'podmínky užití',
+      :text_as_statement => 'podmínky užití',
       :requirement => ['standard_53']
-    a_accessURL 'URL to access the data',
-      :text_as_statement => 'a URL to access the data',
-      :help_text => 'This metadata should be used when your data isn\'t available as a download, like an API for example.'
-    a_downloadURL 'URL to download the dataset',
-      :text_as_statement => 'a URL to download the dataset'
-    a_byteSize 'size in bytes',
-      :text_as_statement => 'size in bytes'
-    a_mediaType 'type of download media',
-      :text_as_statement => 'type of download media'
+    a_accessURL 'URL pro přístup k datům',
+      :text_as_statement => 'URL pro přístup k datům',
+      :help_text => 'Uveďte URL pro přístup k datům v případě, že vaše data nejsou dostupná ve formě souborů ke stažení, ale například jako API.'
+    a_downloadURL 'URL datového zdroje',
+      :text_as_statement => 'URL datového zdroje'
+    a_byteSize 'velikost v bytech',
+      :text_as_statement => 'velikost v bytech'
+    a_mediaType 'media type dle IANA',
+      :text_as_statement => 'media type dle IANA'
 
-    label_standard_49 'You should <strong>include machine-readable titles within your documentation</strong> so people know how to refer to each data distribution.',
+    label_standard_49 '
+                           <strong>Měli byste publikovat strojově čitelný název datového zdroje</strong>, aby bylo zřejmé, jak se jednotlivé datové zdroje nazývají.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_49'
     dependency :rule => 'A and B and C'
@@ -2410,7 +2480,8 @@ survey 'CZ',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_title
 
-    label_standard_50 'You should <strong>include machine-readable descriptions within your documentation</strong> so people know what each data distribution contains.',
+    label_standard_50 '
+                           <strong>Měli byste publikovat strojově čitelný popis datového zdroje</strong>, aby lidé věděli, co která distribuce obsahuje.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_50'
     dependency :rule => 'A and B and C'
@@ -2418,7 +2489,8 @@ survey 'CZ',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_description
 
-    label_standard_51 'You should <strong>include machine-readable release dates within your documentation</strong> so people know how current each distribution is.',
+    label_standard_51 '
+                           <strong>Měli byste publikovat strojově čitelné datum publikace datového zdroje</strong>, aby uživatelé věděli, jak je datový zdroj starý.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_51'
     dependency :rule => 'A and B and C'
@@ -2426,7 +2498,8 @@ survey 'CZ',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_issued
 
-    label_standard_52 'You should <strong>include machine-readable last modification dates within your documentation</strong> so people know whether their copy of a data distribution is up-to-date.',
+    label_standard_52 '
+                           <strong>Měli byste publikovat strojově čitelné datum poslední aktualizace datového zdroje</strong>, aby lidé věděli, jestli mají aktuální verzi datového zdroje dat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_52'
     dependency :rule => 'A and B and C'
@@ -2434,7 +2507,8 @@ survey 'CZ',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_modified
 
-    label_standard_53 'You should <strong>include a machine-readable link to the applicable rights statement</strong> so people can find out what they can do with a data distribution.',
+    label_standard_53 '
+                           <strong>Měli byste publikovat strojově čitelný odkaz na podmínky užití či licenci, pod kterou jsou data publikována</strong>, aby uživatelé věděli, jak mohou s datovým zdrojem nakládat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_53'
     dependency :rule => 'A and B and C'
@@ -2442,263 +2516,277 @@ survey 'CZ',
     condition_B :q_documentationMetadata, '==', :a_distribution
     condition_C :q_distributionMetadata, '!=', :a_rights
 
-    q_technicalDocumentation 'Where is the technical documentation for the data?',
+    q_technicalDocumentation 'Kde je umístěna technická dokumentace dat?',
       :discussion_topic => :technicalDocumentation,
       :display_on_certificate => true,
-      :text_as_statement => 'The technical documentation for the data is at'
-    a_1 'Technical Documentation URL',
+      :text_as_statement => 'Technická dokumentace'
+    a_1 'URL technické dokumentace',
       :string,
       :input_type => :url,
-      :placeholder => 'Technical Documentation URL',
+      :placeholder => 'URL technické dokumentace',
       :requirement => ['pilot_21']
 
-    label_pilot_21 'You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.',
+    label_pilot_21 '
+               <strong>K datům byste měli poskytnout technickou dokumentaci</strong>, aby uživatelé snáze pochopili, jak s daty pracovat.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_21'
     dependency :rule => 'A'
     condition_A :q_technicalDocumentation, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_vocabulary 'Do the data formats use vocabularies or schemas?',
+    q_vocabulary 'Mají vaše data definováno schéma?',
       :discussion_topic => :vocabulary,
-      :help_text => 'Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains.',
+      :help_text => 'K datům ve formátech typu CSV, JSON, XML nebo Turtle formalizovaným způsobem definovat jejich schéma a popsat tak strukturu sloupců nebo objektů a jejich vlastností.',
       :pick => :one,
       :required => :standard
     a_false 'no'
     a_true 'yes'
 
-    q_schemaDocumentationUrl 'Where is documentation about your data vocabularies?',
+    q_schemaDocumentationUrl 'Kde je umístěna dokumentace schématu?',
       :discussion_topic => :schemaDocumentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The vocabularies used by this data are documented at'
+      :text_as_statement => 'Dokumentace schématu'
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
-    a_1 'Schema Documentation URL',
+    a_1 'URL dokumentace schématu',
       :string,
       :input_type => :url,
-      :placeholder => 'Schema Documentation URL',
+      :placeholder => 'URL dokumentace schématu',
       :requirement => ['standard_54']
 
-    label_standard_54 'You should <strong>document any vocabulary you use within your data</strong> so that people know how to interpret it.',
+    label_standard_54 '
+                  <strong>Všechny slovníky použité v rámci vašich dat by měly být dokumentovány</strong>, aby uživatelé věděli, jak dat správně interpretovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_54'
     dependency :rule => 'A and B'
     condition_A :q_vocabulary, '==', :a_true
     condition_B :q_schemaDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_codelists 'Are there any codes used in this data?',
+    q_codelists 'Používáte v datech nějaké číselníky?',
       :discussion_topic => :codelists,
-      :help_text => 'If your data uses codes to refer to things like geographical areas, spending categories or diseases for example, these need to be explained to people.',
+      :help_text => 'Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat.',
       :pick => :one,
       :required => :standard
     a_false 'no'
     a_true 'yes'
 
-    q_codelistDocumentationUrl 'Where are any codes in your data documented?',
+    q_codelistDocumentationUrl 'Kde je umístěna dokumentace číselníků?',
       :discussion_topic => :codelistDocumentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The codes in this data are documented at'
+      :text_as_statement => 'Dokumentace číselníků'
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
-    a_1 'Codelist Documentation URL',
+    a_1 'URL dokumentaci číselníků',
       :string,
       :input_type => :url,
-      :placeholder => 'Codelist Documentation URL',
+      :placeholder => 'URL dokumentaci číselníků',
       :requirement => ['standard_55']
 
-    label_standard_55 'You should <strong>document the codes used within your data</strong> so that people know how to interpret them.',
+    label_standard_55 '
+                  <strong>Číselníky použité v datech byste měli dokumentovat</strong>, aby uživatelé věděli, jak mají data interpretovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_55'
     dependency :rule => 'A and B'
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_16 'Support',
-      :help_text => 'how you communicate with people who use your data',
+    label_group_16 'Podpora',
+      :help_text => '- komunikace s lidmi, kteří vaše data používají',
       :customer_renderer => '/partials/fieldset'
 
-    q_contactUrl 'Where can people find out how to contact someone with questions about this data?',
+    q_contactUrl 'Kde jsou umístěny informace o tom, jak vás mohou uživatelé dat kontaktovat?',
       :discussion_topic => :contactUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out how to contact someone about this data at',
-      :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
-    a_1 'Contact Documentation',
+      :text_as_statement => 'Kontakty',
+      :help_text => 'Uveďte URL odkazující na informace o tom, jak vás mohou uživatelé dat kontaktovat v případě, že se chtějí na něco zeptat ohledně publikovaných dat.'
+    a_1 'kontaktní URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Contact Documentation',
+      :placeholder => 'kontaktní URL',
       :requirement => ['pilot_22']
 
-    label_pilot_22 'You should <strong>provide contact information for people to send questions</strong> about your data to.',
+    label_pilot_22 '
+               <strong>Měli byste uživatelům dat poskytnout nějaké kontaktní informace</strong>, aby věděli, jak se na vás mohou obrátit v případě dotazů.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_22'
     dependency :rule => 'A'
     condition_A :q_contactUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_improvementsContact 'Where can people find out how to improve the way your data is published?',
+    q_improvementsContact 'Jak mohou uživatelé poskytnout zpětnou vazbu k publikovaným datovým sadám, např. náměty na zlepšení jejich publikace?',
       :discussion_topic => :improvementsContact,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out how to suggest improvements to publication at'
-    a_1 'Improvement Suggestions URL',
+      :text_as_statement => 'Zpětná vazba k publikovaným datovým sadám'
+    a_1 'kontaktní URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Improvement Suggestions URL',
+      :placeholder => 'kontaktní URL',
       :requirement => ['pilot_23']
 
-    label_pilot_23 'You should <strong>provide instructions about how suggest improvements</strong> to the way you publish data so you can discover what people need.',
+    label_pilot_23 '
+               <strong>Měli byste uživatelům dát možnost zasílat připomínky k publikovaným datům a způsobu jejich publikace.</strong> To vám umožní zjistit, co uživatelé potřebují.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_23'
     dependency :rule => 'A'
     condition_A :q_improvementsContact, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataProtectionUrl 'Where can people find out how to contact someone with questions about privacy?',
+    q_dataProtectionUrl 'Koho mohou uživatelé kontaktovat s dotazy , které se týkají ochranu soukromí a osobních údajů?',
       :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out where to send questions about privacy at'
-    a_1 'Confidentiality Contact Documentation',
+      :text_as_statement => 'Dotazy na ochranu soukromí a osobních údajů'
+    a_1 'kontaktní URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Confidentiality Contact Documentation',
+      :placeholder => 'kontaktní URL',
       :requirement => ['pilot_24']
 
-    label_pilot_24 'You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to.',
+    label_pilot_24 '
+               <strong>Měli byste zveřejnit kontaktní informace pro ty, kteří se potřebují zeptat na otázky ohledně ochrany soukromí a osobních údajů.</strong>
+            ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_24'
     dependency :rule => 'A'
     condition_A :q_dataProtectionUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_socialMedia 'Do you use social media to connect with people who use your data?',
+    q_socialMedia 'Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?',
       :discussion_topic => :socialMedia,
       :pick => :one
     a_false 'no'
     a_true 'yes',
       :requirement => ['standard_56']
 
-    label_standard_56 'You should <strong>use social media to reach people who use your data</strong> and discover how your data is being used',
+    label_standard_56 '
+               <strong>Měli byste s uživateli svých dat komunikovat prostřednictvím sociálních sítí</strong> a zjistit, jak vaše data používají.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_56'
     dependency :rule => 'A'
     condition_A :q_socialMedia, '==', :a_false
 
-    repeater 'Account' do
+    repeater 'Profily na sociálních sítích' do
 
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
-      q_account 'Which social media accounts can people reach you on?',
+      q_account 'Kde vás lidé najdou na sociálních sítích?',
         :discussion_topic => :account,
         :display_on_certificate => true,
-        :text_as_statement => 'Contact the curator through these social media accounts',
-        :help_text => 'Give URLs to your social media accounts, like your Twitter or Facebook profile page.',
+        :text_as_statement => 'Profily na sociálních sítích',
+        :help_text => 'Uveďte URL účtu na nějaké sociální síti, například váš profil na Twitteru nebo Facebooku.',
         :required => :required
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
-      a_1 'Social Media URL',
+      a_1 'URL účtu na sociální síti',
         :string,
         :input_type => :url,
         :required => :required,
-        :placeholder => 'Social Media URL'
+        :placeholder => 'URL účtu na sociální síti'
 
     end
 
-    q_forum 'Where should people discuss this dataset?',
+    q_forum 'Kde mohou lidé o této datové sadě diskutovat?',
       :discussion_topic => :forum,
       :display_on_certificate => true,
-      :text_as_statement => 'Discuss this data at',
-      :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
-    a_1 'Forum or Mailing List URL',
+      :text_as_statement => 'Diskuze',
+      :help_text => 'Uveďte URL na fórum nebo poštovní konferenci, kde mohou uživatelé o vašich datech diskutovat.'
+    a_1 'URL diskuzního fóra nebo poštovní konference',
       :string,
       :input_type => :url,
-      :placeholder => 'Forum or Mailing List URL',
+      :placeholder => 'URL diskuzního fóra nebo poštovní konference',
       :requirement => ['standard_57']
 
-    label_standard_57 'You should <strong>tell people where they can discuss your data</strong> and support one another.',
+    label_standard_57 '
+               <strong>Měli byste uživatele informovat, kde mohou o vašich datech diskutovat</strong> a navzájem si pomáhat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_57'
     dependency :rule => 'A'
     condition_A :q_forum, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_correctionReporting 'Where can people find out how to request corrections to your data?',
+    q_correctionReporting 'Jak mohou uživatelé nahlásit chyby v datech?',
       :discussion_topic => :correctionReporting,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out how to request data corrections at',
-      :help_text => 'Give a URL where people can report errors they spot in your data.'
+      :text_as_statement => 'Kde a jak nahlásit chyby v datech',
+      :help_text => 'Uveďte URL, kde mohou uživatelé hlásit chyby ve vašich datech.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
-    a_1 'Correction Instructions URL',
+    a_1 'kontaktní URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Correction Instructions URL',
+      :placeholder => 'kontaktní URL',
       :requirement => ['standard_58']
 
-    label_standard_58 'You should <strong>provide instructions about how people can report errors</strong> in your data.',
+    label_standard_58 '
+                  <strong>Měli byste uživatele informovat, kde a jak mohou hlásit chyby ve vašich datech.</strong>
+               ',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_58'
     dependency :rule => 'A and B'
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionReporting, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_correctionDiscovery 'Where can people find out how to get notifications of corrections to your data?',
+    q_correctionDiscovery 'Kde a jak se uživatelé mohou dozvědět o chybách ve vašich datech?',
       :discussion_topic => :correctionDiscovery,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out how to get notifications about data corrections at',
-      :help_text => 'Give a URL where you describe how notifications about corrections are shared with people.'
+      :text_as_statement => 'Jak informujete o chybách v datech',
+      :help_text => 'Uveďte URL, kde popisujete, jakým způsobem informujete uživatele o chybách ve svých datech.'
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
-    a_1 'Correction Notification URL',
+    a_1 'informační URL',
       :string,
       :input_type => :url,
-      :placeholder => 'Correction Notification URL',
+      :placeholder => 'informační URL',
       :requirement => ['standard_59']
 
-    label_standard_59 'You should <strong>provide a mailing list or feed with updates</strong> that people can use to keep their copies of your data up-to-date.',
+    label_standard_59 '
+                  <strong>Měli byste uživatelům poskytnout poštovní konferenci nebo feed, kde budete oznamovat opravy chyb ve svých datech</strong>, aby všichni mohli včas aktualizovat.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_59'
     dependency :rule => 'A and B'
     condition_A :q_corrected, '==', :a_true
     condition_B :q_correctionDiscovery, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_engagementTeam 'Do you have anyone who actively builds a community around this data?',
+    q_engagementTeam 'Máte někoho, kdo se aktivně stará o komunitu okolo vašich dat?',
       :discussion_topic => :engagementTeam,
-      :help_text => 'A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data.',
+      :help_text => 'Tým, který má na starosti komunikaci v oblasti otevřených dat může k většímu zapojení uživatelů využít např. například sociální sítě, blogy, soutěže nebo hackatony.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
     a_false 'no'
     a_true 'yes',
       :requirement => ['exemplar_21']
 
-    label_exemplar_21 'You should <strong>build a community of people around your data</strong> to encourage wider use of your data.',
+    label_exemplar_21 '
+               <strong>Měli byste kolem svých dat budovat komunitu</strong> a podporovat tak jejich větší využití.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_21'
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_false
 
-    q_engagementTeamUrl 'Where is their home page?',
+    q_engagementTeamUrl 'Kdo se o tuto komunitu stará?',
       :discussion_topic => :engagementTeamUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Community engagement is done by',
+      :text_as_statement => 'Kdo se stará o komunitu',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_true
-    a_1 'Community Engagement Team Home Page URL',
+    a_1 'URL komunitního týmu',
       :string,
       :input_type => :url,
-      :placeholder => 'Community Engagement Team Home Page URL',
+      :placeholder => 'URL komunitního týmu',
       :required => :required
 
-    label_group_17 'Services',
-      :help_text => 'how you give people access to tools they need to work with your data',
+    label_group_17 'Služby',
+      :help_text => 'nástroje pro práci s daty a informace o nich',
       :customer_renderer => '/partials/fieldset'
 
-    q_libraries 'Where do you list tools to work with your data?',
+    q_libraries 'Spravujete seznam nástrojů pro práci s publikovanými daty?',
       :discussion_topic => :libraries,
       :display_on_certificate => true,
-      :text_as_statement => 'Tools to help use this data are listed at',
-      :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
-    a_1 'Tool URL',
+      :text_as_statement => 'Nástroje pro práci s daty',
+      :help_text => 'Uveďte URL, kde uživatelé najdou seznam existujících nebo doporučených nástrojů pro práci s publikovanými daty.'
+    a_1 'URL dokumentace nástrojů',
       :string,
       :input_type => :url,
-      :placeholder => 'Tool URL',
+      :placeholder => 'URL dokumentace nástrojů',
       :requirement => ['exemplar_22']
 
-    label_exemplar_22 'You should <strong>provide a list of software libraries and other readily-available tools</strong> so that people can quickly get to work with your data.',
+    label_exemplar_22 '
+               <strong>Měli byste uživatelům poskytnout seznam vhodných softwarových knihoven a dalších existujících nástrojů</strong> pro rychlou a pohodlnou práci s publikovanými daty.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_22'
     dependency :rule => 'A'
