@@ -685,10 +685,10 @@ survey 'CZ',
     a_copyrightHolder 'držitel autorských práv',
       :text_as_statement => 'držitel autorských práv',
       :requirement => ['exemplar_3']
-    a_databaseRightYear '',
+    a_databaseRightYear 'database right year',
       :text_as_statement => 'the database right year',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder '',
+    a_databaseRightHolder 'database right holder',
       :text_as_statement => 'the database right holder',
       :requirement => ['exemplar_5']
 
@@ -747,18 +747,14 @@ survey 'CZ',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
 
-    label_exemplar_4 '
-                        <strong></strong>
-                     ',
+    label_exemplar_4 'You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightYear
 
-    label_exemplar_5 '
-                        <strong></strong>
-                     ',
+    label_exemplar_5 'You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_5'
     dependency :rule => 'A and B'
@@ -955,11 +951,12 @@ survey 'CZ',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL '',
+    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
       :discussion_topic => :cz_individualConsentURL,
       :display_on_certificate => true,
       :text_as_statement => 'Individuals affected by this data have this privacy notice',
-      :help_text => ''
+      :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.',
+      :help_text_more_url => 'http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -972,9 +969,7 @@ survey 'CZ',
       :placeholder => 'Privacy Notice URL',
       :requirement => ['pilot_7']
 
-    label_pilot_7 '
-                           <strong></strong>
-                        ',
+    label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -985,7 +980,7 @@ survey 'CZ',
     condition_E :q_lawfulDisclosure, '!=', :a_true
     condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff '',
+    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
       :discussion_topic => :cz_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -997,7 +992,7 @@ survey 'CZ',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted '',
+    q_dbStaffConsulted 'Have you involved them in the Privacy Impact Assessment process?',
       :discussion_topic => :cz_dbStaffConsulted,
       :display_on_certificate => true,
       :text_as_statement => 'The individual responsible for data protection',
@@ -1014,9 +1009,7 @@ survey 'CZ',
       :text_as_statement => 'has been consulted',
       :requirement => ['pilot_8']
 
-    label_pilot_8 '
-                           <strong></strong>
-                        ',
+    label_pilot_8 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -1027,11 +1020,11 @@ survey 'CZ',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited '',
+    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
       :discussion_topic => :cz_anonymisationAudited,
       :display_on_certificate => true,
       :text_as_statement => 'The anonymisation of the data has been',
-      :help_text => '',
+      :help_text => 'It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -1044,9 +1037,7 @@ survey 'CZ',
       :text_as_statement => 'independently audited',
       :requirement => ['standard_12']
 
-    label_standard_12 '
-                        <strong></strong>
-                     ',
+    label_standard_12 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'
