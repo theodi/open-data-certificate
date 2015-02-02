@@ -25,7 +25,7 @@ module Translations
     end
 
     def clean(translation)
-      translation.gsub(/[[:space:]]+/, ' ').strip
+      translation.to_s.gsub(/[[:space:]]+/, ' ').strip
     end
   end
 end
