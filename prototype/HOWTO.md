@@ -2,6 +2,8 @@
 
 ## Use rake task [experimental]
 
+This doesn’t quite work yet, see note at step 4 below
+
 Make sure `saxon` is installed
 
     brew install saxon
@@ -29,6 +31,7 @@ the `jurisdictions` directory
 
     # note {language code} is lower case, eg. en, cz
     saxon -s:prototype/translations/certificate.en.xml -xsl:prototype/auto-translate.xsl -o:prototype/temp/certificate.{language code}.xml translationFile=temp/{sheet2 filename}
+    # then you need to edit the resulting certificate.cz.xml file and change the `xml:lang` property to `lang` from `en`
 
 5. Verify that the translation has worked, and then move the resulting file to
 the `translations` directory
