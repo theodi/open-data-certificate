@@ -49,3 +49,6 @@ prototype/open-data-certificate.xpr
 /.env
 
 bootstrap/
+
+# ignore dataset dump generated for download
+public/system/datasets.csv
