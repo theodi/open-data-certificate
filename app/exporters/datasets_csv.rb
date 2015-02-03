@@ -1,11 +1,10 @@
 class DatasetsCSV
   include ApplicationHelper
 
-  attr_reader :datasets, :controller
+  attr_reader :datasets
 
-  def initialize(datasets, controller)
+  def initialize(datasets)
     @datasets = datasets
-    @controller = controller
   end
 
   def each
@@ -15,8 +14,12 @@ class DatasetsCSV
     end
   end
 
-  def request
-    controller.request
+  def save(filename)
+    File.open(filename, 'w') do |f|
+      each do |row|
+        f.write(row)
+      end
+    end
   end
 
   def row(dataset)
@@ -24,22 +27,30 @@ class DatasetsCSV
     response_set = certificate.response_set
     [
       "Open Data Certificate for #{response_set.title}",
-      controller.dataset_latest_certificate_url(dataset, :protocol => embed_protocol),
+      url(:dataset_latest_certificate_url, dataset),
       response_set.jurisdiction,
       response_set.survey.try(:status),
       I18n.t("levels.#{certificate.attained_level}.title").downcase,
       certificate.created_at,
       I18n.t(certificate.certification_type, scope: 'certificate.certification_types'),
-      controller.badge_dataset_latest_certificate_url(dataset, :format => "js", :protocol => embed_protocol),
-      controller.badge_dataset_latest_certificate_url(dataset, :format => "html", :protocol => embed_protocol),
-      controller.badge_dataset_latest_certificate_url(dataset, :format => "png", :protocol => embed_protocol),
+      url(:badge_dataset_latest_certificate_url, dataset, :format => "js"),
+      url(:badge_dataset_latest_certificate_url, dataset, :format => "html"),
+      url(:badge_dataset_latest_certificate_url, dataset, :format => "png"),
       response_set.title,
       response_set.dataset_curator_determined_from_responses,
-      controller.dataset_url(dataset, :protocol => embed_protocol),
+      url(:dataset_url, dataset),
       response_set.data_licence_determined_from_responses[:url],
       response_set.content_licence_determined_from_responses[:url],
       (response_set.documentation_url.string_value if response_set.documentation_url)
     ]
+  end
+
+  def url(name, *options, **params)
+    params = {
+      host: OpenDataCertificate.hostname,
+      protocol: Rails.env.production? ? 'https' : 'http'
+    }.merge(params)
+    Rails.application.routes.url_helpers.send(name, *options, params)
   end
 
   def headers
