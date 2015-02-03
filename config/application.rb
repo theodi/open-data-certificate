@@ -99,7 +99,6 @@ module OpenDataCertificate
         resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
       end
     end
-    config.middleware.insert_after ActionDispatch::Static, Rack::Chunked
 
   end
 end

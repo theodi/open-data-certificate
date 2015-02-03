@@ -344,6 +344,21 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /page=2/, doc.css('link[rel="next"]').first[:href]
   end
 
+  test "requesting a csv sends the pregenerated file" do
+    @controller.expects(:send_file).with(instance_of(Pathname), anything)
+    @controller.stubs(:render)
+
+    get :index, format: "csv"
+  end
+
+  %w[search since datahub level publisher jurisdiction].each do |term|
+    test "requesting a csv with a filter of #{term} returns a 404" do
+      get :index, term => "test", format: "csv"
+
+      assert_response :not_found
+    end
+  end
+
   test "removed datasets are not shown in index" do
     FactoryGirl.create(:published_certificate_with_removed_dataset)
     FactoryGirl.create(:published_certificate_with_dataset)

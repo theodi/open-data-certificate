@@ -89,11 +89,15 @@ class DatasetsController < ApplicationController
         format.json
         format.feed { render :layout => false  }
         format.csv do
-          response.headers["Content-Transfer-Encoding"] = "chunked"
-          response.headers['Content-Disposition'] = 'attachment; filename=open-data-certificates.csv'
-          response.headers['Last-Modified'] = @last_modified_date.httpdate
-          response.content_type = 'text/csv; headers=present'
-          self.response_body = DatasetsCSV.new(@datasets, self)
+          raise ActiveRecord::RecordNotFound if search_filtered?
+          begin
+            send_file Rails.root.join("public/system/datasets.csv"),
+              type: 'text/csv; headers=present',
+              disposition: 'attachment',
+              filename: 'open-data-certificates.csv'
+          rescue ActionController::MissingFile
+            raise ActiveRecord::RecordNotFound
+          end
         end
       end
     end
@@ -219,6 +223,11 @@ class DatasetsController < ApplicationController
   end
 
   protected
+  def search_filtered?
+    search_filters = [:search, :jurisdiction, :level, :datahub, :since, :publisher]
+    params.values_at(*search_filters).any?(&:present?)
+  end
+
   def jurisdiction_required
     unless Survey.by_jurisdiction(params[:jurisdiction]).exists?
       render status: :unprocessable_entity, json: {success: false, errors: ['Jurisdiction not found']}
