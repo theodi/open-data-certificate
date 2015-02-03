@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.9" status="alpha" jurisdiction="CZ" xml:lang="cz">
+<questionnaire version="0.9" status="beta" jurisdiction="CZ" xml:lang="cz">
    <help>
       <p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p>
       <p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p>
