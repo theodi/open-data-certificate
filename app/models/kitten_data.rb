@@ -212,6 +212,10 @@ class KittenData < ActiveRecord::Base
     else
       data[:distributions].length > 1 if @fields["releaseType"] = "series"
     end
+
+    if @fields["releaseType"] == "oneoff"
+      @fields["datasetUrl"] = data[:distributions][0][:access_url]
+    end
   end
 
   private
