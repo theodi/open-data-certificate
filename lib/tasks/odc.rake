@@ -83,6 +83,6 @@ namespace :odc do
   end
 
   task :generate_dataset_csv => :environment do
-    Delayed::Job.enqueue DatasetsCSV, { :priority => 5, :run_at => 10.minutes.from_now.utc }
+    Delayed::Job.enqueue CSVExport, { :priority => 5, :run_at => 10.minutes.from_now.utc }
   end
 end
