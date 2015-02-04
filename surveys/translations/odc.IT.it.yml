@@ -192,6 +192,12 @@ questions:
       odc_pddl:
         text: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication e Licenza (PDDL)"
+      iodl:
+        text: "Italian Open Data License v1.0"
+        text_as_statement: "Italian Open Data License v1.0"
+      iodl_2_0:
+        text: "Italian Open Data License v2.0"
+        text_as_statement: "Italian Open Data License v2.0"
       na:
         text: "Non applicabile"
         text_as_statement: ""
@@ -298,6 +304,12 @@ questions:
       cc_zero:
         text: "Creative Commons CCZero"
         text_as_statement: "Creative Commons CCZero"
+      iodl:
+        text: "Italian Open Data License v1.0"
+        text_as_statement: "Italian Open Data License v1.0"
+      iodl_2_0:
+        text: "Italian Open Data License v2.0"
+        text_as_statement: "Italian Open Data License v2.0"
       na:
         text: "Non applicabile"
         text_as_statement: ""
@@ -523,8 +535,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
         text: sì
+        text_as_statement: "sí"
   webpage:
     text: "Nel tuo sito web, quale è la pagina che dà accesso ai dati?"
     text_as_statement: "il sito web collega i dati da"
@@ -538,8 +552,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
         text: sì
+        text_as_statement: "sí"
   listing:
     text: "Dove sono elencati?"
     text_as_statement: "I dati fanno parte di questa collezione"
@@ -553,8 +569,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
         text: sì
+        text_as_statement: "sí"
   reference:
     text: "Dove sono menzionati i tuoi dati?"
     text_as_statement: "Questi dati sono menzionati in"
@@ -1161,8 +1179,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
         text: sì
+        text_as_statement: "sí"
   account:
     text: "Attraverso quali profili di social media le persone possono contattarti?"
     text_as_statement: "Contattare il curatore attraverso questi social media"
@@ -1197,8 +1217,10 @@ questions:
     answers:
       a_false:
         text: no
+        text_as_statement: "no"
       a_true:
         text: sì
+        text_as_statement: "sí"
   engagementTeamUrl:
     text: "Dov'è la loro home page?"
     text_as_statement: "L'impegno della comunità è gestito da"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.9" status="alpha" jurisdiction="IT" xml:lang="it">
+<questionnaire version="0.9" status="beta" jurisdiction="IT" xml:lang="it">
    <help>
       <p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p>
       <p>Quando rispondi a queste domande dimostra la tua volontà a rispettare le normative pertinenti. Dovresti controllare ulteriormente quali leggi e politiche risultano applicabili al settore in oggetto.</p>
@@ -140,6 +140,8 @@
                <option value="odc-by">Open Data Commons Attribution License</option>
                <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
                <option value="odc-pddl">Open Data Commons Public Domain Dedication e Licenza (PDDL)</option>
+               <option value="iodl">Italian Open Data License v1.0</option>
+               <option value="iodl_2_0">Italian Open Data License v2.0</option>
                <option value="na" display="">Non applicabile</option>
                <option value="other" display="">Altro...</option>
             </select>
@@ -236,6 +238,8 @@
                   <option value="cc-by">Creative Commons Attribuzione</option>
                   <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
                   <option value="cc-zero">Creative Commons CCZero</option>
+                  <option value="iodl">Italian Open Data License v1.0</option>
+                  <option value="iodl_2_0">Italian Open Data License v2.0</option>
                   <option value="na" display="">Non applicabile</option>
                   <option value="other" display="">Altro...</option>
                </select>

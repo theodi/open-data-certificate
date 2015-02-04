@@ -1,7 +1,7 @@
 survey 'IT',
   :full_title => 'Italy',
   :default_mandatory => 'false',
-  :status => 'alpha',
+  :status => 'beta',
   :description => '<p>Questo questionario di autovalutazione genera un certificato open data e un distintivo che è possibile pubblicare a corredo dei dataset per spiegare tutto quello che c\'è da sapere su quei dati aperti. Utilizziamo le tue risposte anche per imparare il modo in cui le organizzazioni pubblicano dati aperti.</p><p>Quando rispondi a queste domande dimostra la tua volontà a rispettare le normative pertinenti. Dovresti controllare ulteriormente quali leggi e politiche risultano applicabili al settore in oggetto.</p><p><strong>Non hai bisogno di rispondere a tutte le domande per ottenere un certificato</strong> Basta rispondere a quelle che puoi.</p>' do
 
   translations :en => :default
@@ -356,6 +356,10 @@ survey 'IT',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
     a_odc_pddl 'Open Data Commons Public Domain Dedication e Licenza (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication e Licenza (PDDL)'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
@@ -513,6 +517,10 @@ survey 'IT',
       :text_as_statement => 'Creative Commons Attribution Share-Alike'
     a_cc_zero 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
+    a_iodl 'Italian Open Data License v1.0',
+      :text_as_statement => 'Italian Open Data License v1.0'
+    a_iodl_2_0 'Italian Open Data License v2.0',
+      :text_as_statement => 'Italian Open Data License v2.0'
     a_na 'Non applicabile',
       :text_as_statement => ''
     a_other 'Altro...',
@@ -1023,8 +1031,10 @@ survey 'IT',
       :discussion_topic => :onWebsite,
       :help_text => 'È più facile trovare i dati se sono collegati a partire dal tuo sito web principale.',
       :pick => :one
-    a_false 'no'
+    a_false 'no',
+      :text_as_statement => 'no'
     a_true 'sì',
+      :text_as_statement => 'sí',
       :requirement => ['standard_13']
 
     label_standard_13 'Dovresti <strong>assicurarti che le persone possano trovare i dati a partire dal tuo sito web principale </strong> per facilitarne l\'accesso',
@@ -1057,8 +1067,10 @@ survey 'IT',
       :discussion_topic => :listed,
       :help_text => 'In generale è più facile trovare i dati quando fanno parte di un catalogo di dati come ad esempio quelli accademici, del settore pubblico o della sanità oppure quando appaiono in risultati di ricerca pertinenti.',
       :pick => :one
-    a_false 'no'
+    a_false 'no',
+      :text_as_statement => 'no'
     a_true 'sì',
+      :text_as_statement => 'sí',
       :requirement => ['standard_14']
 
     label_standard_14 'Dovresti <strong>fare in modo che le persone possano trovare i tuoi dati quando li cercano </strong>all\'interno di elenchi specifici.',
@@ -1091,8 +1103,10 @@ survey 'IT',
       :discussion_topic => :referenced,
       :help_text => 'Quando fai riferimento ai tuoi dati nelle tue pubblicazioni, come nel caso di relazioni, presentazioni o blog, fornisci più contesto in modo da aiutare le persone a trovare e comprendere più facilmente i tuoi dati',
       :pick => :one
-    a_false 'no'
+    a_false 'no',
+      :text_as_statement => 'no'
     a_true 'sì',
+      :text_as_statement => 'sí',
       :requirement => ['standard_15']
 
     label_standard_15 'Dovresti <strong>far riferimento a questi dati a partire dalle tue pubblicazioni</strong> in modo che le persone possano venire a conoscenza della loro esistenza e contesto.',
@@ -2529,8 +2543,10 @@ survey 'IT',
     q_socialMedia 'Usi i social media per connetterti con le persone che usano i tuoi dati?',
       :discussion_topic => :socialMedia,
       :pick => :one
-    a_false 'no'
+    a_false 'no',
+      :text_as_statement => 'no'
     a_true 'sì',
+      :text_as_statement => 'sí',
       :requirement => ['standard_56']
 
     label_standard_56 'Dovresti <strong>utilizzare i social media per contattare le persone che usano i tuoi dati </strong> e scoprire come vengono utilizzati',
@@ -2621,8 +2637,10 @@ survey 'IT',
       :help_text => 'Un comunità si impegnerà attraverso i social media, blog, e organizzerà hackdays o concorsi per incoraggiare le persone a utilizzare i dati.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
-    a_false 'no'
+    a_false 'no',
+      :text_as_statement => 'no'
     a_true 'sì',
+      :text_as_statement => 'sí',
       :requirement => ['exemplar_21']
 
     label_exemplar_21 'Dovresti <strong>costruire una comunità che si interessi ai tuoi dati</strong> per favorirne un utilizzo più ampio.',
