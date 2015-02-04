@@ -76,12 +76,29 @@ class DatasetsController < ApplicationController
     @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
-      @datasets = datasets.page params[:page]
+      case params[:format] 
+      when 'csv'
+        @datasets = datasets
+      else
+        @datasets = datasets.page params[:page]
+        @links = set_link_header(@datasets)
+      end
 
       respond_to do |format|
         format.html
         format.json
         format.feed { render :layout => false  }
+        format.csv do
+          raise ActiveRecord::RecordNotFound if search_filtered?
+          begin
+            send_file Rails.root.join("public/system/datasets.csv"),
+              type: 'text/csv; headers=present',
+              disposition: 'attachment',
+              filename: 'open-data-certificates.csv'
+          rescue ActionController::MissingFile
+            raise ActiveRecord::RecordNotFound
+          end
+        end
       end
     end
   end
@@ -206,6 +223,11 @@ class DatasetsController < ApplicationController
   end
 
   protected
+  def search_filtered?
+    search_filters = [:search, :jurisdiction, :level, :datahub, :since, :publisher]
+    params.values_at(*search_filters).any?(&:present?)
+  end
+
   def jurisdiction_required
     unless Survey.by_jurisdiction(params[:jurisdiction]).exists?
       render status: :unprocessable_entity, json: {success: false, errors: ['Jurisdiction not found']}
@@ -246,5 +268,31 @@ class DatasetsController < ApplicationController
     params.each do |key, value|
       params.delete(key) unless value.present?
     end
+  end
+
+  def set_link_header(datasets)
+    links = link_header_params(datasets).map do |rel, page|
+      [rel, datasets_url(page: page, format: export_format)]
+    end
+    response.headers['Link'] = link_header(links)
+    links
+  end
+
+  def export_format
+    params[:format] unless ['*/*', 'html', :html].include?(params[:format])
+  end
+
+  def link_header(links)
+    links.map { |rel, href| "<#{href}>; rel=#{rel}" }.join(', ')
+  end
+
+  def link_header_params(datasets)
+    links = {first: nil}
+    links[:last] = datasets.total_pages if datasets.total_pages > 1
+    links[:next] = datasets.next_page unless datasets.last_page?
+    unless datasets.first_page?
+      links[:prev] = datasets.prev_page.to_i > 1 ? datasets.prev_page : nil
+    end
+    return links
   end
 end

@@ -1,21 +1,21 @@
 require 'google_drive'
 
 module UploadUsageData
+  extend RecurringJob
 
   def self.perform
-    [
-      "published",
-      "all"
-    ].each do |type|
-      data = certificate_data_by_type(type)
-      unless data.empty?
-        csv = create_csv(data)
-        upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
+    reenqueue_job do
+      [
+        "published",
+        "all"
+      ].each do |type|
+        data = certificate_data_by_type(type)
+        unless data.empty?
+          csv = create_csv(data)
+          upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
+        end
       end
     end
-
-  ensure
-    enqueue_next_run
   end
 
   def self.certificate_data_by_type(type)
@@ -53,13 +53,8 @@ module UploadUsageData
     @session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
   end
 
-  def self.enqueue_next_run
-    next_run_date = DateTime.now.utc.next_week
-    # This is disgusting but Delayed::Job has no decent way to query outstanding jobs
-    # We don't want to enqueue next weeks job more than once if it has to retry due to failures
-    if Delayed::Job.where(["handler like ? and run_at > ?", "%#{name}%", DateTime.now.utc]).empty?
-      Delayed::Job.enqueue UploadUsageData, { :priority => 5, :run_at => next_run_date }
-    end
+  def self.next_run_date
+    DateTime.now.utc.next_week
   end
 
 end

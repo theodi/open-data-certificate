@@ -1,5 +1,10 @@
 json.version 0.1
 json.license "http://opendatacommons.org/licenses/odbl/"
+json._links do |links|
+  @links.each do |rel, href|
+    links.set! rel, { href: href }
+  end
+end
 
 json.certificates do 
   json.array! @datasets do |dataset|
