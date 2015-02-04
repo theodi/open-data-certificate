@@ -111,6 +111,7 @@ class SurveyorControllerTest < ActionController::TestCase
 
 
   test "start page" do
+    ResponseSet.any_instance.stubs(:documentation_url_explanation).returns(nil)
     @response_set = FactoryGirl.create(:response_set)
     sign_in @response_set.user
 
@@ -119,6 +120,33 @@ class SurveyorControllerTest < ActionController::TestCase
             response_set_code: @response_set.access_code
 
     assert_response 200
+  end
+
+  test "404s if response_set does not exist" do
+    FactoryGirl.create(:survey, access_code: 'gb')
+
+    get :edit, use_route: :surveyor,
+      survey_code: "gb",
+      response_set: "nope"
+
+    assert_response :not_found
+  end
+
+  test "repeater field fragment" do
+    question = FactoryGirl.create(:question, question_group: FactoryGirl.create(:question_group, display_type: 'repeater'))
+    survey = question.survey_section.survey
+
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+    sign_in response_set.user
+
+    get :repeater_field, use_route: :surveyor,
+      survey_code: 'gb',
+      response_set_code: response_set.access_code,
+      question_id: question.id,
+      response_index: 1, # these numbers seem to not matter ¬_¬
+      response_group: 0
+
+    assert_response :ok
   end
 
 end

@@ -1,0 +1,15 @@
+<%= @certificate.name %>
+<%= "-" * [@certificate.name.size, 80].min %>
+
+This certificate has been reported as having a problem:
+
+<%= @reason %>
+
+<%= "-" * [@certificate.name.size, 80].min %>
+
+<%= @certificate.url %>
+
+<%= "-" * [@certificate.name.size, 80].min %>
+
+IP address: <%= @reporter[:remote_ip] %>
+User Agent: <%= @reporter[:user_agent] %>

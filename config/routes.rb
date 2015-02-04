@@ -2,12 +2,13 @@ OpenDataCertificate::Application.routes.draw do
 
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
-    match '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements', :via => :get
-    match '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey', :via => :get
-    match '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field', :via => :get
+    get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
+    get '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
+    get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
     get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
     get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+    get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
 
     resources :jurisdictions, :only => :index
 
@@ -33,11 +34,19 @@ OpenDataCertificate::Application.routes.draw do
   resources :datasets do
     put 'start_questionnaire'
     post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
-    get 'certificates/latest', to: 'certificates#latest', as: 'latest'
-    get 'certificates/latest/:type', to: 'certificates#latest', as: 'latest'
     get :typeahead, on: :collection
     get :admin, on: :collection
     get :schema, on: :collection
+    get :info, on: :collection
+
+    collection do
+      get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+    end
+
+    resource :certificate, as: 'latest_certificate', only: [:show] do
+      get 'embed'
+      get 'badge'
+    end
 
     resources :certificates, :only => [:show, :update] do
        member do
@@ -46,6 +55,7 @@ OpenDataCertificate::Application.routes.draw do
          get 'embed', to: 'certificates#embed', as: 'embed'
          get 'badge', to: 'certificates#badge', as: 'badge'
          post 'verify'
+         post :report
        end
     end
   end
@@ -53,6 +63,11 @@ OpenDataCertificate::Application.routes.draw do
   resources :transfers, :only => [:create, :destroy] do
     get :claim,  on: :member
     put :accept, on: :member
+  end
+
+  resources :claims, :except => :destroy do
+    post :approve, on: :member
+    post :deny, on: :member
   end
 
   # User dashboard
@@ -94,14 +109,22 @@ OpenDataCertificate::Application.routes.draw do
   get 'clear_cache' => 'main#clear_cache', :via => :post
 
   # (public) stats about the application
-  get 'status.csv' => 'main#status_csv'
   get 'status' => 'main#status'
+  get 'status/head' => 'main#git_head'
   get 'status/response_sets' => 'main#status_response_sets'
   get 'status/events' => 'main#status_events'
+  get 'legacy_stats.csv' => 'main#legacy_stats', format: 'csv'
+  get 'embed_stats.csv' => 'embed_stats#index', format: 'csv', as: :embed_stats
+  resources :campaigns
 
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'
   get 'status/all_certificates.csv' => 'main#all_certificates'
+
+  # Admin section
+  get 'admin' => 'admin#index'
+  get 'admin/users/:user_id' => 'admin#users', as: 'admin_users'
+  get 'admin/typeahead' => 'admin#typeahead'
 
   root :to => 'main#home'
 

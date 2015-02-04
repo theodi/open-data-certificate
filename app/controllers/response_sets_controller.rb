@@ -1,3 +1,5 @@
+require 'odibot'
+
 # Trying out having a separate controller from the central surveyor one.
 class ResponseSetsController < ApplicationController
 
@@ -19,7 +21,7 @@ class ResponseSetsController < ApplicationController
 
   def resolve_url(url)
     if url =~ /^#{URI::regexp}$/
-      HTTParty.get(url).code rescue nil
+      ODIBot.new(url).response_code rescue nil
     end
   end
 
@@ -32,29 +34,34 @@ class ResponseSetsController < ApplicationController
     end
   end
 
+  def check_url(url, explanation)
+    if resolve_url(url) != 200
+      if explanation.blank?
+        respond_to do |format|
+          format.json do
+            raise ActionController::RoutingError.new('Not Found')
+          end
+          format.html do
+            @url_error = true
+            @documentation_url = url
+            @survey = @response_set.survey
+          end
+        end
+      else
+        @response_set.documentation_url_explanation = explanation
+        @response_set.save
+        return nil
+      end
+    end
+  end
+
   # Check the user's documentation url and populate answers from it
   def start
+    check_url(params[:response_set][:documentation_url], params[:response_set][:documentation_url_explanation])
 
-    url = params[:response_set][:documentation_url]
+    render 'surveyor/start.html.haml' and return if @url_error
 
-    @response_set.update_responses({documentationUrl: url})
-    @response_set.responses.update_all(autocompleted: false)
-    @response_set.update_attribute('kitten_data', nil)
-
-    code = resolve_url(url)
-    if code != 200
-      return redirect_to(surveyor.edit_my_survey_path(
-        :survey_code => @response_set.survey.access_code,
-        :response_set_code => @response_set.access_code
-      ))
-    end
-
-    kitten_data = KittenData.create(url: url, response_set: @response_set)
-    kitten_data.request_data
-    kitten_data.save
-
-    @response_set.update_attribute('kitten_data', kitten_data)
-    @response_set.update_responses(kitten_data.fields)
+    @response_set.autocomplete(params[:response_set][:documentation_url])
 
     respond_to do |format|
       format.html do

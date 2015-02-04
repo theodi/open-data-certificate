@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140724102203) do
+ActiveRecord::Schema.define(:version => 20150119114745) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -49,22 +49,14 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
 
-  create_table "autocomplete_override_messages", :force => true do |t|
-    t.integer  "response_set_id"
-    t.integer  "question_id"
-    t.text     "message"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "autocomplete_override_messages", ["response_set_id", "question_id"], :name => "i_on_response_set_id_and_question_id"
-
   create_table "certificate_generators", :force => true do |t|
     t.integer  "response_set_id"
     t.integer  "user_id"
     t.text     "request"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.boolean  "completed"
+    t.integer  "certification_campaign_id"
   end
 
   add_index "certificate_generators", ["response_set_id"], :name => "index_certificate_generators_on_response_set_id"
@@ -86,6 +78,23 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
 
   add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"
 
+  create_table "certification_campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "duplicate_count", :default => 0
+    t.integer  "user_id"
+  end
+
+  create_table "claims", :force => true do |t|
+    t.integer  "dataset_id",         :null => false
+    t.integer  "initiating_user_id", :null => false
+    t.integer  "user_id",            :null => false
+    t.string   "aasm_state",         :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "datasets", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
@@ -94,9 +103,10 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
     t.string   "documentation_url"
     t.string   "curator"
     t.boolean  "removed",           :default => false
+    t.integer  "embed_stat_id"
   end
 
-  add_index "datasets", ["user_id"], :name => "index_datasets_on_user_id"
+  add_index "datasets", ["user_id", "created_at"], :name => "index_datasets_on_user_id_and_created_at"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -146,16 +156,26 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
   add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message",    :limit => 65535
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
+  create_table "embed_stats", :force => true do |t|
+    t.string   "referer"
+    t.integer  "dataset_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "domain",     :null => false
+  end
+
+  add_index "embed_stats", ["domain"], :name => "index_embed_stats_on_domain"
+
   create_table "kitten_data", :force => true do |t|
-    t.text     "data"
+    t.text     "data",            :limit => 16777215
     t.integer  "response_set_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "url"
   end
 
@@ -269,6 +289,7 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
     t.string   "api_id"
     t.boolean  "error",             :default => false
     t.boolean  "autocompleted",     :default => false
+    t.string   "explanation"
   end
 
   add_index "responses", ["answer_id"], :name => "index_responses_on_answer_id"
@@ -276,6 +297,21 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
   add_index "responses", ["question_id"], :name => "index_responses_on_question_id"
   add_index "responses", ["response_set_id"], :name => "index_responses_on_response_set_id"
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
+
+  create_table "stats", :force => true do |t|
+    t.string   "name"
+    t.integer  "all"
+    t.integer  "expired"
+    t.integer  "publishers"
+    t.integer  "this_month"
+    t.integer  "level_none"
+    t.integer  "level_basic"
+    t.integer  "level_pilot"
+    t.integer  "level_standard"
+    t.integer  "level_exemplar"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "survey_parsings", :force => true do |t|
     t.string   "file_name"
@@ -359,8 +395,10 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
   add_index "transfers", ["user_id"], :name => "index_transfers_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "name"
+    t.string   "short_name"
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -369,15 +407,21 @@ ActiveRecord::Schema.define(:version => 20140724102203) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "first_name"
-    t.string   "last_name"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "default_jurisdiction"
     t.string   "authentication_token"
+    t.boolean  "admin",                  :default => false, :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "organization"
+    t.boolean  "agreed_to_terms"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

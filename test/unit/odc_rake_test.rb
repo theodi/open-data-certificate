@@ -38,20 +38,14 @@ class OdcRakeTest < ActiveSupport::TestCase
   # end
 
   test "The default survey parses correctly" do
-    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.UK.rb'
-
     assert_difference 'Survey.count', 1 do
-      Rake::Task["surveyor"].reenable
-      Rake::Task["surveyor"].invoke
+      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.UK.rb'))
     end
   end
 
   test "The US survey parses correctly" do
-    ENV['FILE'] = File.join 'surveys', 'odc_questionnaire.US.rb'
-
     assert_difference 'Survey.count', 1 do
-      Rake::Task["surveyor"].reenable
-      Rake::Task["surveyor"].invoke
+      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.US.rb'))
     end
   end
 
@@ -133,18 +127,18 @@ class OdcRakeTest < ActiveSupport::TestCase
 
   test "purge_questionnaires gets rid of unanswered questionnaires" do
 
-    yesterday =  Time.now - 24.hours
-
     @a = FactoryGirl.create :response_set, user: nil
-    @b = FactoryGirl.create :response_set, updated_at: yesterday, user: nil
-    @c = FactoryGirl.create :response_set, updated_at: yesterday, user: FactoryGirl.create(:user)
+    Timecop.freeze(1.day.ago) do
+      @b = FactoryGirl.create :response_set, user: nil
+      @c = FactoryGirl.create :response_set, user: FactoryGirl.create(:user)
+    end
 
     assert_difference 'ResponseSet.count', -1 do
       Rake::Task["odc:purge_questionnaires"].invoke
     end
 
     assert ResponseSet.exists? @a
-    assert_false ResponseSet.exists? @b
+    refute ResponseSet.exists? @b
     assert ResponseSet.exists? @c
 
   end

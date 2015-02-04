@@ -35,12 +35,16 @@ class Survey < ActiveRecord::Base
   has_many :dependencies, :through => :questions
   has_many :answers, through: :questions
 
+  def self.by_jurisdiction(access_code)
+    where(access_code: access_code)
+  end
+
   def self.available_to_complete
-    order('access_code DESC, survey_version DESC').group(:access_code)
+    order('coalesce(full_title, title), survey_version DESC').group(:access_code)
   end
 
   def self.newest_survey_for_access_code(access_code)
-    where(access_code: access_code).order("surveys.survey_version DESC").first
+    by_jurisdiction(access_code).order("surveys.survey_version DESC").first
   end
 
   def self.migrate_access_code(access_code)
@@ -74,6 +78,10 @@ class Survey < ActiveRecord::Base
     end
   end
 
+  def complete_title
+    full_title || title
+  end
+
   def metadata_fields
     Set.new ['copyrightStatementMetadata', 'documentationMetadata', 'distributionMetadata']
   end
@@ -90,7 +98,7 @@ class Survey < ActiveRecord::Base
 
   def requirements
     # questions.select(&:is_a_requirement?)
-    questions.where(display_type: 'label').where('requirement > ""')
+    questions.where(display_type: 'label').where('requirement is not null')
   end
 
   def only_questions
@@ -98,7 +106,7 @@ class Survey < ActiveRecord::Base
   end
 
   def mandatory_questions
-    questions.where(:is_mandatory => true)
+    questions.mandatory
   end
 
   def valid?(context = nil)
@@ -158,6 +166,10 @@ class Survey < ActiveRecord::Base
   end
 
   ### /override surveyor methods
+
+  def self.options_for_select
+    available_to_complete.select([:access_code, :full_title]).map { |survey| [survey.full_title, survey.access_code] }
+  end
 
   private
 

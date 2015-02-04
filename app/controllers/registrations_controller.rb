@@ -1,18 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :html, :js
 
+  helper_method :campaigns, :surveys
+
   def edit
     if params[:id].to_i == current_user.id
-      @surveys = Survey.available_to_complete
       super
     else
       raise ActionController::RoutingError.new('Not Found')
     end
-  end
-
-  def update
-    @surveys = Survey.available_to_complete
-    super
   end
 
   def redirect
@@ -23,5 +19,9 @@ class RegistrationsController < Devise::RegistrationsController
   protected
   def after_update_path_for(resource)
     dashboard_path
+  end
+
+  def campaigns
+    CertificationCampaign.where(user_id: current_user.id).count
   end
 end

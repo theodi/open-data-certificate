@@ -4,38 +4,38 @@ class CertificatePresenter < SimpleDelegator
 
   def published_data
     {
-      name: certificate.name,
-      publisher: certificate.curator,
-      created: certificate.created_at,
-      user: certificate.user.nil? ? "N/A" : certificate.user.email,
-      country: certificate.survey.title,
-      type: certificate.survey.status,
-      level: certificate.attained_level,
-      verification_type: certificate.certification_type,
-      date_verified: certificate.verifications.count == 0 ? nil : certificate.verifications.last.updated_at
+      name: name,
+      publisher: curator,
+      created: created_at,
+      user: published_email,
+      country: survey.title,
+      type: survey.status,
+      level: attained_level,
+      verification_type: certification_type,
+      date_verified: verifications.count == 0 ? nil : verifications.last.updated_at
     }
   end
 
   def all_data
-    begin
-      {
-        name: certificate.name,
-        publisher: certificate.curator,
-        user_email: certificate.user.nil? ? "N/A" : certificate.user.email,
-        user_name: "#{certificate.user.first_name} #{certificate.user.last_name}",
-        created: certificate.created_at,
-        last_edited: certificate.updated_at,
-        country: certificate.survey.title,
-        status: certificate.status,
-        level: certificate.attained_level,
-      }
-    rescue
-      nil
-    end
+    {
+      name: name,
+      publisher: curator,
+      user_email: published_email,
+      user_name: user_name,
+      created: created_at,
+      last_edited: updated_at,
+      country: survey.title,
+      status: expired? ? 'expired' : status,
+      level: attained_level,
+    }
   end
 
-  def certificate
-    __getobj__
+  def user_name
+    user.try(:name).to_s
+  end
+
+  def published_email
+    user.try(:email).presence || "N/A"
   end
 
 end

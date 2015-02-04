@@ -5,24 +5,21 @@
 - disabled = defined?(disableFlag) ? disableFlag : false
 - question_text = q_text(q, @render_context, I18n.locale)
 
-- pickTypes = Set.new(['one', 'any'])
-- selectFields = Set.new([:dropdown, :inline_dropdown, :default_dropdown, :slider, :repeater_dropdown])
-
 - case q.display_type
 - when 'hidden' #don't do anything
 - when 'label'
-  .subsection-label
+  %li.subsection-label
     %h2.container
       != question_text
       %small= q.help_text
 
 - else
-  %div.question.container
+  %li.question.container
     - r = response_for(@response_set, @responses, q, nil, rg)
-    - a = @response_set.autocomplete_override_message_for(q)
+    - all_autocompleted = r.all_autocompleted(@responses)
 
     - url_field = r.answer && r.answer.input_type == 'url'
-    - url_error = r.error
+    - url_error = !r.url_valid_or_explained?
 
     - state = 'no-response'
     - state = 'ok' if r.filled?
@@ -32,15 +29,19 @@
       - state = 'url-verified'
       - status_message = t('surveyor.url_verified')
 
+      - if r.explained?
+        - state = 'url-explained'
+        - status_message = t('surveyor.url_explained')
+
     - if r.autocompletable?
       - state = 'autocompleted'
       - status_message = t('surveyor.autocompleted')
 
-      - if !r.all_autocompleted(@responses)
+      - if !all_autocompleted
         - state = 'autocompleted-changed'
         - status_message = t('surveyor.autocompleted_changed')
 
-        - if a.message?
+        - if r.explained?
           - state = 'autocompleted-explained'
           - status_message = t('surveyor.autocompleted_explained')
 
@@ -48,29 +49,25 @@
       - state = 'url-warning'
       - status_message = t('surveyor.url_warning')
 
-      - if r.all_autocompleted(@responses)
+      - if all_autocompleted
         - state = 'autocompleted-url-warning'
         - status_message = t('surveyor.autocomplete_url_warning')
-
-      - if a.message?
-        - state = 'url-explained'
-        - status_message = t('surveyor.url_explained')
 
     - if r.any_metadata_missing(@responses)
       - state = 'metadata-missing'
       - status_message = t('surveyor.metadata_missing')
 
-      - if a.message?
+      - if r.explained?
         - state = 'autocompleted-explained'
         - status_message = t('surveyor.autocompleted_explained')
 
     - classes = ['row', 'question-row', "q_#{renderer}"]
     - classes << q.css_class(@response_set)
-    - classes << 'choice-boxes' if q.pick == "one" || q.pick == "any"
+    - classes << 'choice-boxes' if q.choice_type?
     - classes << 'mandatory' if q.is_mandatory
-    - classes << 'autocompleted' if r.all_autocompleted(@responses)
+    - classes << 'autocompleted' if all_autocompleted
     - classes << state if state
-    - if pickTypes.include?(q.pick) && renderer != :dropdown
+    - if q.choice_type? && renderer != :dropdown
       - classes << ['inline-validation', 'compact-validation']
 
     - data = {}
@@ -78,7 +75,7 @@
     - data['autocompletable'] = r.autocompletable?
     - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
-    - data['mandatory'] = !!q.is_mandatory
+    - data['mandatory'] = q.is_mandatory
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
     - attrs = {data: data, id: id, class: classes.join(' ')}
@@ -88,7 +85,7 @@
 
       -# for multiple answers, we want to give the question once
       -# at the start of the questions
-      - if q.pick == 'one' || q.pick == 'any'
+      - if q.choice_type?
         %label.span8.question_label
           != question_text
           - if q.minimum_level
@@ -121,7 +118,7 @@
               = ff.input :api_id, :as => :quiet
               = ff.input :autocompleted, :as => :quiet
 
-          - if q.pick == 'one' || q.pick == 'any'
+          - if q.choice_type?
             %div.choice-buttons.status-wrapper
               - q.answers.each do |a|
                 - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
@@ -141,9 +138,9 @@
 
         .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'
-          - i = (i.to_i + q.answers.length).to_s if q.pick != 'one' && q.pick != 'any'
-          = f.semantic_fields_for i, a, index: 'autocomplete_override_message' do |ff|
-            = ff.input :message, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
+          - i = (i.to_i + q.answers.length).to_s unless q.choice_type?
+          = f.semantic_fields_for i, r do |ff|
+            = ff.input :explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: url_field && url_error ? t('surveyor.url_explanation') : t('surveyor.autocomplete_explanation')
 
       %aside.span4.question-meta{"data-meta-for"=> rg ? "#{q.reference_identifier}_#{rg}" : q.reference_identifier}
         - unless (q.help_text.blank?)

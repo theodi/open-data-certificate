@@ -2,9 +2,13 @@ class CertificateGenerator < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :response_set
+  belongs_to :certification_campaign
+
   has_one :dataset, through: :response_set
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
+
+  serialize :request, HashWithIndifferentAccess
 
   TYPES =  {
     none: 'string',
@@ -34,53 +38,26 @@ class CertificateGenerator < ActiveRecord::Base
   end
 
   # attempt to build a certificate from the request
-  def self.generate(request, user)
-
-    survey = Survey.newest_survey_for_access_code request[:jurisdiction]
-    return {success: false, errors: ['Jurisdiction not found']} if !survey
-
-    certificate = self.create(request: request, survey: survey, user: user).generate
-    response_set = certificate.response_set
-
-    errors = []
-
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
-
-    {success: true, dataset_id: response_set.dataset_id, published: response_set.published?, errors: errors}
-  end
-
-  # attempt to build a certificate from the request
-  def self.update(dataset, request, user)
+  def self.update(dataset, request, jurisdiction, user)
 
     # Finds a migrated survey if there is one
-    survey = Survey.newest_survey_for_access_code Survey::migrate_access_code(request[:jurisdiction])
+    survey = Survey.newest_survey_for_access_code Survey::migrate_access_code(jurisdiction)
     return {success: false, errors: ['Jurisdiction not found']} if !survey
 
-    response_set = ResponseSet.where(dataset_id: dataset, user_id: user).last
+    if user.admin?
+      response_set = ResponseSet.where(dataset_id: dataset).latest
+    else
+      response_set = ResponseSet.where(dataset_id: dataset, user_id: user).latest
+    end
     return {success: false, errors: ['Dataset not found']} if !response_set
 
     if survey != response_set.survey || !response_set.modifications_allowed?
-      new_response_set = ResponseSet.create(survey: survey, user_id: user.id, dataset_id: response_set.dataset_id)
-      new_response_set.copy_answers_from_response_set!(response_set)
-      response_set = new_response_set
+      response_set = ResponseSet.clone_response_set(response_set, {survey_id: survey.id, user_id: user.id, dataset_id: response_set.dataset_id})
     end
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
     generator.request = request
-    was_published = response_set.published?
-    certificate = generator.generate
+    certificate = generator.generate(jurisdiction, false)
     response_set = certificate.response_set
 
     errors = []
@@ -102,16 +79,34 @@ class CertificateGenerator < ActiveRecord::Base
     {success: true, published: response_set.published?, errors: errors}
   end
 
-  def generate
-
-    response_set.update_attribute(:user, user)
-    response_set.dataset.update_attribute(:user, user)
+  def generate(jurisdiction, create_user, dataset = nil)
+    unless response_set
+      build_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction))
+      # mass assignment protection avoidance
+      response_set.dataset = dataset if dataset
+      save!
+    end
 
     # find the questions which are to be answered
     survey.questions
-          .where({reference_identifier: request_dataset.keys})
+          .where({reference_identifier: request.keys})
           .includes(:answers)
           .each {|question| answer question}
+
+    response_set.autocomplete(request["documentationUrl"])
+
+    if response_set.kitten_data && create_user
+      email = response_set.kitten_data[:data][:publishers].first.mbox.presence rescue nil
+      if email
+        new_user = User.find_or_create_by_email(email) do |user|
+          user.password = SecureRandom.base64
+          user.skip_confirmation_notification!
+        end
+      end
+    end
+
+    user = new_user.try(:persisted?) ? new_user : self.user
+    response_set.assign_to_user!(user)
 
     response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
@@ -120,24 +115,33 @@ class CertificateGenerator < ActiveRecord::Base
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
-      response_set.save
     end
+
+    self.completed = true
+    save!
 
     certificate
   end
 
-  private
-
-  # the dataset parameters from the request, defaults to {}
-  def request_dataset
-    HashWithIndifferentAccess.new request[:dataset]
+  def published?
+    certificate.try(:published?)
   end
 
+  def dataset_url
+    dataset.api_url
+  end
+
+  # the dataset parameters from the request, defaults to {}
+  def request=(value)
+    write_attribute(:request, value.with_indifferent_access)
+  end
+
+  private
   # answer a question from the request
   def answer question
 
     # find the value that should be entered
-    data = request_dataset[question[:reference_identifier]]
+    data = request[question[:reference_identifier]]
 
     response_set.responses.where(question_id: question).delete_all
 

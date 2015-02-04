@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
-//= require underscore
 //= require_tree .
 
 /* global $, skrollr, alert, Hogan */
@@ -245,6 +244,7 @@ $(document).ready(function($){
 
   $('.survey-intro .submit').click(function() {
     $(this).addClass('disabled');
+    $(this).removeClass('error');
     $(this).popover('show');
     var form = $(this.form);
     $.ajax({
@@ -254,7 +254,21 @@ $(document).ready(function($){
       data: form.serialize(),
       success: function(data) {
         window.location.replace(data.survey_path)
-      }
+      },
+      error: function(xhr) {
+        $('.survey-intro .submit').removeClass('disabled')
+        $('.survey-intro .submit').addClass('error')
+        var popover = $('.survey-intro .submit').data('popover')
+        if (xhr.status == 404) {
+          popover.options.content = "There was a problem with your URL, please check, or fill out the explanation"
+          $("#start_url_explanation").attr('style', 'display: block')
+        } else {
+          popover.options.content = "Sorry, an error occurred. Please try again."
+        }
+        popover.show()
+        setTimeout(function(){ popover.hide() }, 3000);
+      },
+      timeout: 120000
     })
     return false;
   });
@@ -292,44 +306,17 @@ $(document).ready(function($){
 
     $.getJSON(url)
     .then(function(data){
-      // console.log("url:", url)
-
       $(panel).removeClass('loading');
 
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
-
-      var pending = data.mandatory,
-          complete = data.mandatory_completed,
-          percentage, attained = 'none';
-
-      _.each(levels, function(level){
-
-        // rolling values
-        pending  += _.filter(data.outstanding, has_level(level)).length;
-        complete += _.filter(data.entered,     has_level(level)).length;
-
-        percentage = ((complete / (pending + complete))*100)
-
-        $('#bar-' + level).width(percentage + '%');
-
-        if(percentage === 100){attained = level}
-
-        // debug
-        // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
+      $.each(levels, function(idx, level) {
+          $('#bar-' + level).width(data[level] + '%');
       });
 
       $('#panel_handle')
         // removed any 'attained-' classes
         .toggleClass(function(i, name){return name.indexOf('attained-') === -1})
-        .addClass('attained-' + attained);
-
-
-      function has_level(name){
-        return function(item){
-          return item.indexOf(name+'_') === 0
-        }
-      }
-
+        .addClass('attained-' + data.attained);
     });
   });
 
@@ -386,6 +373,12 @@ $(document).ready(function($){
   ])
   .on('typeahead:selected typeahead:autocompleted', function(e, datum){
     if(datum.path){ document.location = datum.path; }
+  });
+
+  // toggle advanced search
+  $('form .advanced-search button[name=advanced-search]').on('click', function(e) {
+    $(this).siblings('.options').toggleClass('hidden');
+    $(this).blur();
   });
 
   // Stop the jump to the top of the page when the delete dialog is confirmed.
@@ -447,4 +440,16 @@ $(document).ready(function($){
         selectBox.text(self.find(':selected').text());
     });
   });
+
+  $('.claim .approval [data-type=json]').on('ajax:success', function(evt, data, status, xhr) {
+    var buttons = $(this).parents('.approval').find('input[type=submit]');
+    var button = $(this).find('input[type=submit]');
+    var label = button.data('disabled-text');
+    window.setTimeout(function() {
+        button.val(data.message);
+        buttons.prop('disabled', true);
+    }, 0);
+  });
+
+  Tracking.init();
 });

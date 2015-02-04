@@ -9,6 +9,7 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -46,3 +47,8 @@ prototype/open-data-certificate.xpr
 .DS_Store
 
 /.env
+
+bootstrap/
+
+# ignore dataset dump generated for download
+public/system/datasets.csv

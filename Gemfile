@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
+gem 'rails', '~> 3.2.21'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -38,6 +38,10 @@ group :test do
   gem 'webmock'
   gem 'spork-rails'
   gem 'spork-testunit'
+  gem 'shoulda-context'
+  gem 'timecop'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -59,7 +63,6 @@ group :production do
 end
 
 gem 'jquery-rails'
-gem 'underscore-rails'
 
 #To serve static content / styleguide
 gem 'high_voltage'
@@ -95,19 +98,20 @@ gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
 gem 'httparty'
-gem 'google-analytics-rails'
-gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
+gem 'data_kitten'
 gem 'delayed_job_active_record'
 gem 'linkeddata'
 gem 'rack-linkeddata'
 gem 'jbuilder'
-gem 'odlifier', :github => 'theodi/odlifier'
+gem 'odlifier', '0.1.1'
 gem 'rack-cors'
 gem 'alternate_rails', :github => 'theodi/alternate-rails'
 gem 'fog'
 gem 'juvia_rails', github: 'theodi/juvia_rails'
 gem 'domainatrix'
-gem 'newrelic_rpm'
+# newrelic appears to be adding significant performance problems
+#gem 'newrelic_rpm'
 gem 'google_drive'
 gem 'pry-remote'
 gem 'memoist'
+gem 'validate_url'

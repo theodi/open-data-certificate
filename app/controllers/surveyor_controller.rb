@@ -90,6 +90,8 @@ class SurveyorController < ApplicationController
 
       if saved && finish
 
+        flash[:saved_response_set] = @response_set.access_code
+
         if user_signed_in?
           if @response_set.all_mandatory_questions_complete? == false
             flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
@@ -144,6 +146,7 @@ class SurveyorController < ApplicationController
   end
 
   def repeater_field
+    @responses = @response_set.responses.includes(:question).all
     question = Question.find(params[:question_id])
     @rc = params[:response_index].to_i
     render :partial => "partials/repeater_field", locals: {response_group: params[:response_group] || 0, question: question}
@@ -177,6 +180,7 @@ class SurveyorController < ApplicationController
     # this is an alternate view of the edit functionality,
     # with only the documentation url displayed
     edit
+    @url_error = @response_set.documentation_url_explanation.present?
   end
 
   # where to send the user once the survey has been completed
@@ -186,7 +190,6 @@ class SurveyorController < ApplicationController
     dashboard_path
   end
 
-  private
   def ensure_modifications_allowed
     unless @response_set.modifications_allowed?
       flash[:warning] = t('surveyor.modifications_not_allowed')
@@ -194,10 +197,10 @@ class SurveyorController < ApplicationController
     end
   end
 
-  private
   def set_response_set_and_render_context
     super
-    authorize!(:edit, @response_set) if @response_set
+    raise ActiveRecord::RecordNotFound unless @response_set.present?
+    authorize!(:edit, @response_set)
   end
 
   def prepare_new_response_set
@@ -207,11 +210,7 @@ class SurveyorController < ApplicationController
   end
 
   def create_new_response_set(attrs)
-    new_response_set = ResponseSet.create attrs
-
-    new_response_set.copy_answers_from_response_set!(@response_set)
-
-    @response_set = new_response_set
+    @response_set = ResponseSet.clone_response_set(@response_set, attrs)
   end
 
   def switch_survey(attrs, survey)

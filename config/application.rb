@@ -10,6 +10,14 @@ if defined?(Bundler)
 end
 
 module OpenDataCertificate
+  def self.hostname
+    ::OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host]
+  end
+
+  def self.staging?
+    /staging/ =~ Dir.pwd
+  end
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -35,6 +43,10 @@ module OpenDataCertificate
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # This setting is being defaulted to true in rails 4.0.2 onwards
+    # This removes a deprecation warning
+    config.i18n.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

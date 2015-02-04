@@ -16,7 +16,8 @@ class KittenDataTest < ActiveSupport::TestCase
       d.title = 'test_title'
       d.description = 'test_description'
       d.access_url = 'http://example.com/distribution'
-      d.format = DataKitten::DistributionFormat.new('txt', nil)
+      d.extension = 'txt'
+      d.format = DataKitten::DistributionFormat.new(d)
     end
 
     publisher = DataKitten::Agent.new({})
@@ -157,9 +158,16 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'oneoff', @kitten_data.fields["releaseType"]
   end
 
+  test 'Dataset URL is detected correctly' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
+    @kitten_data.request_data
+
+    assert_equal 'http://example.com/distribution', @kitten_data.fields["datasetUrl"]
+  end
+
   test 'Release type is detected as a collection' do
     distribution = DataKitten::Distribution.new(self, {})
-    distribution.format = DataKitten::DistributionFormat.new('txt', nil)
+    distribution.format = DataKitten::DistributionFormat.new(distribution)
 
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
@@ -170,7 +178,7 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Release type is detected as a series' do
     distribution = DataKitten::Distribution.new(self, {})
-    distribution.format = DataKitten::DistributionFormat.new('txt', nil)
+    distribution.format = DataKitten::DistributionFormat.new(distribution)
 
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
     @kitten_data.request_data
@@ -264,12 +272,12 @@ class KittenDataTest < ActiveSupport::TestCase
     metadata = [
       "title",
       "description",
-      "issued",
-      "modified",
       "accrualPeriodicity",
       "publisher",
       "keyword",
       "distribution",
+      "issued",
+      "modified",
       "temporal"
     ]
 

@@ -1,3 +1,5 @@
+require 'odibot'
+
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
@@ -8,6 +10,16 @@ class ResponseSet < ActiveRecord::Base
   # Default title for a response set / dataset
   DEFAULT_TITLE = 'Untitled'
 
+  REF_CHANGES = {
+                  "ogl_uk" => "OGL-UK-2.0",
+                  "cc_zero" => "CC0-1.0",
+                  "odc_odbl" => "ODbL-1.0",
+                  "cc_by" => "CC-BY-4.0",
+                  "cc_by_sa" => "CC-BY-SA-4.0",
+                  "odc_by" => "ODC-BY-1.0",
+                  "odc_pddl" => "ODC-PDDL-1.0"
+                }
+
   after_save :update_certificate
   before_save :update_dataset
 
@@ -17,13 +29,17 @@ class ResponseSet < ActiveRecord::Base
   belongs_to :dataset, touch: true
   belongs_to :survey
 
+  has_many :questions, through: :responses
+  has_many :answers, through: :responses
+
   # One to one relationship with certificate
   has_one :certificate, dependent: :destroy
 
   # One to one relationship with kitten data object
   has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
-  has_many :autocomplete_override_messages, dependent: :destroy
   has_one :certificate_generator
+
+  scope :published, where(:aasm_state => 'published')
 
   # Checks if a value is blank by Surveyor's standards
   def self.is_blank_value?(value)
@@ -54,6 +70,18 @@ class ResponseSet < ActiveRecord::Base
       :published_datasets            => self.published.select("DISTINCT(dataset_id)").count,
       :published_datasets_this_month => self.published.select("DISTINCT(dataset_id)").where(created_at: within_last_month).count
     }
+  end
+
+  def self.clone_response_set(source, attrs = {})
+    attrs["survey_id"] ||= source.survey_id
+    new_response_set = ResponseSet.create attrs
+    new_response_set.kitten_data = source.kitten_data
+    new_response_set.copy_answers_from_response_set!(source)
+    new_response_set
+  end
+
+  def self.latest
+    order(arel_table[:created_at].desc).first
   end
 
   # Simple state machine describing response set states
@@ -99,6 +127,7 @@ class ResponseSet < ActiveRecord::Base
 
   scope :by_newest, order("response_sets.created_at DESC")
   scope :completed, where("response_sets.completed_at IS NOT NULL")
+  scope :modified_since, ->(date) { where(arel_table[:updated_at].gteq(date)) }
 
   def title
     dataset_title_determined_from_responses || DEFAULT_TITLE
@@ -110,6 +139,20 @@ class ResponseSet < ActiveRecord::Base
 
   def documentation_url
     response 'documentationUrl'
+  end
+
+  def documentation_url_question
+    survey.question 'documentationUrl'
+  end
+
+  def documentation_url_explanation
+    response_for(documentation_url_question.id).explanation
+  end
+
+  def documentation_url_explanation=(val)
+    response = response_for(documentation_url_question.id)
+    response.explanation = val.presence
+    response.save
   end
 
   # This picks up the jurisdiction (survey title) from the survey, or the migrated survey
@@ -185,7 +228,7 @@ class ResponseSet < ActiveRecord::Base
           :url   => value_for(:other_dataset_licence_url)
          }
       else
-        licence = Odlifier::License.new(ref.dasherize)
+        licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
         @data_licence_determined_from_responses = {
           :title => licence.title,
           :url   => licence.url
@@ -217,12 +260,12 @@ class ResponseSet < ActiveRecord::Base
          }
       else
         begin
-          licence = Odlifier::License.new(ref.dasherize)
+          licence = Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
           @content_licence_determined_from_responses = {
             :title => licence.title,
             :url   => licence.url
           }
-        rescue ArgumentError
+        rescue
           @content_licence_determined_from_responses = {
             :title => 'Unknown',
             :url   => nil
@@ -246,8 +289,8 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def incomplete_triggered_mandatory_questions
-    responded_to_question_ids = responses.map(&:question_id)
-    triggered_mandatory_questions.select { |q| !responded_to_question_ids.include? q.id }
+    responded_to_question_ids = responses.pluck('question_id')
+    triggered_mandatory_questions.reject { |q| responded_to_question_ids.include? q.id }
   end
 
   def triggered_mandatory_questions
@@ -256,8 +299,6 @@ class ResponseSet < ActiveRecord::Base
       r.dependency.nil? ?
         true : depends[r.dependency.id]
     end
-
-    # @triggered_mandatory_questions ||= self.survey.mandatory_questions.select { |q| q.triggered?(self) }
   end
 
   def triggered_requirements
@@ -266,8 +307,43 @@ class ResponseSet < ActiveRecord::Base
         true :
         depends[r.dependency.id]
     end
+  end
 
-    # @triggered_requirements ||= survey.requirements.select { |r| r.triggered?(self) }
+  def outstanding_reference_identifiers
+    triggered_requirements.map(&:reference_identifier)
+  end
+
+  def entered_reference_identifiers
+    answers.includes(:question).map(&:requirement).map do |ref|
+      ref.try(:scan, /\S+_\d+/)
+    end.flatten.compact
+  end
+
+  def levels_count(reference_identifiers)
+    # split level name off before _, count by occurance
+    Hash[reference_identifiers.group_by { |r| r.split('_')[0] }.map { |k, v| [k, v.size] }]
+  end
+
+  def progress
+    pending = incomplete_triggered_mandatory_questions.count
+    complete = questions.mandatory.count
+    outstanding = levels_count(outstanding_reference_identifiers)
+    entered = levels_count(entered_reference_identifiers)
+
+    result = {
+      attained: certificate.attained_level
+    }
+    %w[basic pilot standard exemplar].each do |level|
+      pending += outstanding[level] || 0
+      complete += entered[level] || 0
+      total = pending+complete
+      if total > 0
+        result[level] = (100.0*complete/total).to_i
+      else
+        result[level] = 0
+      end
+    end
+    result
   end
 
   def responses_with_url_type
@@ -275,30 +351,17 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def all_urls_resolve?
-    errors = []
-    responses_with_url_type.each do |response|
-      unless response.string_value.blank?
-        response_code = Rails.cache.fetch(response.string_value) rescue nil
-        if response_code.nil?
-          response_code = HTTParty.get(response.string_value).code rescue nil
-        end
-        if response_code != 200
-          response.error = true
-          response.save
-          errors << response
-        else
-          response.error = false
-          response.save
-        end
-      end
-    end
-    errors.length == 0
+    responses_with_url_type.all?(&:url_valid_or_explained?)
+  end
+
+  def uncompleted_mandatory_questions_count
+    mandatory_question_ids = triggered_mandatory_questions.map(&:id)
+    responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
+    (mandatory_question_ids - responded_to_question_ids).count
   end
 
   def all_mandatory_questions_complete?
-    mandatory_question_ids = triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
-    (mandatory_question_ids - responded_to_question_ids).blank?
+    uncompleted_mandatory_questions_count == 0
   end
 
   def attained_level
@@ -360,11 +423,6 @@ class ResponseSet < ActiveRecord::Base
   #
   alias :original_update_from_ui_hash :update_from_ui_hash
   def update_from_ui_hash(ui_hash)
-
-    ui_hash.each do |_ord, response_hash|
-      autocomplete_message = autocomplete_override_message_for(response_hash[:question_id])
-      autocomplete_message.update_attributes(response_hash.delete('autocomplete_override_message'))
-    end
 
     # the api_ids in the ui_hash
     api_ids = ui_hash.map do |_ord, response_hash|
@@ -453,14 +511,38 @@ class ResponseSet < ActiveRecord::Base
     @newest_in_dataset_q ||= (dataset.try(:newest_completed_response_set) == self)
   end
 
-  def autocomplete_override_message_for(question)
-    autocomplete_override_messages.where(question_id: question).first_or_create
+  def response_for(question_id)
+    responses.where(question_id: question_id).first || responses.where(question_id: question_id).build
+  end
+
+  def autocomplete(url)
+    update_responses({documentationUrl: url})
+    responses.update_all(autocompleted: false)
+    update_attribute('kitten_data', nil)
+
+    code = resolve_url(url)
+
+    if code == 200
+      kitten_data = KittenData.create(url: url, response_set: self)
+      kitten_data.request_data
+      kitten_data.save
+
+      update_attribute('kitten_data', kitten_data)
+      update_responses(kitten_data.fields)
+    end
+  end
+
+  def resolve_url(url)
+    if url =~ /^#{URI::regexp}$/
+      ODIBot.new(url).response_code rescue nil
+    end
   end
 
   # finds the string value for a given response_identifier
   private
-  def value_for reference_identifier, value = :to_s
-    responses.joins(:question).where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
+  def value_for(reference_identifier, value = :to_s)
+    relation = responses.joins(:question).eager_load(:answer, :question)
+    relation.where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
   end
 
 end

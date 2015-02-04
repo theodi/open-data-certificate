@@ -1,18 +1,37 @@
+- content_for :meta do
+  - @links.each do |rel, href|
+    = tag(:link, rel: rel, href: href)
+
 - content_for :header_title, @title
 
 - content_for :rss_feed do
-  = datasets_path(format: 'feed')
+  = datasets_path(params.merge(format: 'feed'))
 
 %section
-  %p.rss-top.pull-right
-    %i.icon.icon-rss-sign
-    %a{href: yield(:rss_feed)} Subscribe to the RSS feed
-  
+  %ul.rss-top.pull-right
+    %li
+      %i.icon.icon-rss-sign
+      %a{href: yield(:rss_feed)} Subscribe to these results via RSS
+    %li
+      %i.icon.icon-download
+      %a{href: datasets_path(format: 'csv')} Download complete set as CSV
 
   = form_tag datasets_path, method: 'get' do
-    %div.form-search.input-append
+    .form-search.input-append
       = text_field_tag :search, params[:search], class: 'typeahead-search'
-      = submit_tag t('certificates.search.submit_search'), :class => 'btn'
+      = submit_tag t('certificates.search.submit_search'), class: 'btn', name: nil
+    .advanced-search
+      = button_tag t('certificates.search.advanced_search'), class: 'btn btn-link', type: 'button', name: 'advanced-search'
+      %ul.options{class: ('hidden' unless params.values_at(:datahub, :level, :jurisdiction).any?)}
+        %li.input-prepend
+          %span.add-on= label_tag :datahub, t('certificates.search.datahub')
+          = text_field_tag :datahub, params[:datahub], placeholder: 'domain', class: 'input-medium'
+        %li.input-prepend
+          %span.add-on= label_tag :level, t('certificates.search.level')
+          = select_tag :level, options_for_select(%w[basic pilot standard exemplar].map {|level| [t("certificates.search.levels.#{level}"), level]}, params[:level]), include_blank: true, class: 'input-medium'
+        %li.input-prepend
+          %span.add-on= label_tag :jurisdiction, t('certificates.search.jurisdiction')
+          = select_tag :jurisdiction, options_for_select(Survey.options_for_select, params[:jurisdiction]), include_blank: true
 
 - if @datasets.any?
 

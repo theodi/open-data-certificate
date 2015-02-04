@@ -22,6 +22,9 @@ FactoryGirl.define do
     r.association :survey # r.survey_id       {}
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
+    r.after(:create) do |rs, _|
+      rs.dataset.update_attribute(:user, rs.user)
+    end
   end
 
   factory :response do |r|
@@ -37,6 +40,10 @@ FactoryGirl.define do
     r.string_value {}
     r.response_other {}
     r.response_group {}
+
+    factory :valid_response do |r|
+      question
+      answer
+    end
   end
-  
 end

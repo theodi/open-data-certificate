@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_filter :set_locale
-  before_filter(:only => [:status]) { alternate_formats [:csv] }
 
   helper_method :after_sign_in_path_for
 
@@ -51,6 +50,20 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from CanCan::AccessDenied, with: :not_authorised
+
+  protected
+  def parse_iso8601(value)
+    case value.strip
+    when /^\d{4}$/
+      DateTime.new(value.to_i)
+    when /^\d{4}-?\d{2}$/
+      h, m = /(\d{4})-?(\d{2})/.match(value)[1,2]
+      DateTime.new(h.to_i, m.to_i)
+    else
+      DateTime.iso8601(value)
+    end
+  end
 
   private
 
@@ -69,9 +82,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_ability
+    @current_ability ||= Hash.new { |h, k| Ability.new(k) }
+    @current_ability[current_user]
+  end
+
   # display 404 when we can't find a record
   def record_not_found
     render :file => Rails.root.join('public','404.html'), :status => "404 Not Found", layout: false
+  end
+
+  def not_authorised
+    render :file => Rails.root.join('public','403.html'), :status => 403, layout: false
   end
 
 end

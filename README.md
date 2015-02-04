@@ -19,7 +19,7 @@ Certificates can be created and updated using the JSON API.
 The API methods are:
 
 - GET `/jurisdictions` - This method provides a list of the available jurisdictions and associated information
-- GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction by title with the `jursidiction` GET parameter
+- GET `/datasets/schema` - This method provides the list of questions, their types and possible choices. You must specify your jurisdiction by title with the `jurisdiction` GET parameter
 - POST `/datasets` - This method allows you to create a new dataset, it will be automatically published if valid
 - POST `/datasets/:id/certificates` - This method allows you to update a dataset, it will be automatically published if valid
 
@@ -88,6 +88,23 @@ To create or update a dataset data should be sent in the format (using the above
 
 - Checkbox and radio fields should use the option key from the schema
 - Checkbox and repeating fields should be sent as an array
+
+If your request has a `documentationUrl`, the system will attempt to use
+that dataset's metadata (for example: if it is hosted in a [CKAN](http://ckan.org/)
+repository or marked up with [DCAT](http://theodi.org/guides/marking-up-your-dataset-with-dcat))
+to autocomplete as many questions as possible.
+
+You will then get a response in this format:
+
+    {
+      "success": "pending",
+      "dataset_id": 123,
+      "dataset_url": "http://certificates.theodi.org/datasets/123.json"
+    }
+
+You can then make a request to the `dataset_url` to get the final response.
+There may be a delay before your dataset is created, so if you get a `success`
+state of `pending`, please try again in a few seconds.
 
 ### Surveyor
 
@@ -241,7 +258,9 @@ DISABLE_FOOTNOTES=true
 
 #### Admin functions
 
-To mark a user as being an admin - the users ID should be included in the `ODC_ADMIN_IDS` environment variable (comma separated).  The easiest way to find the ID is to look on the URL of their account page.
+To mark a user as being an admin use the rails console to set the `admin` field to true. The easiest way to find the ID is to look on the URL of their account page.
+
+    User.find(<id>).update_attributes(admin: true)
 
 Admins are able to block a dataset from displaying on the public /datasets page by visiting the dataset and toggling the visibility at the top of the page.
 

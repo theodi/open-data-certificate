@@ -15,6 +15,8 @@
 
 *= require_self
 *= require surveyor_all
+*= require datasets
+*= require claims
 */
 
 // import bootstrap this way so that we can alter variables just for this app
@@ -132,17 +134,18 @@
     }
 
     .open-data-certificate {
-        width: 60px;
+        width: 77px;
         margin: 0 auto;
         }
 
-    .span6:last-child {
+    .span6:first-child {
       border-right: thin white solid;
     }
 
 
     .span6:last-child p:first-child {
       text-align: center;
+      min-height: 70px;
     }
 
   }
@@ -165,6 +168,8 @@
   }
 
   p { color: #fff; font-size: 20px; }
+
+  ul { color: #fff; font-size: 14px; }
 
   .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
 
@@ -774,6 +779,8 @@ hr.heavy {
 
       a {
         color: #fff;
+      }
+      > a {
         padding: 20px;
       }
 
@@ -1068,11 +1075,13 @@ header {
 }
 
 // rss link at the top
-p.rss-top {
+ul.rss-top {
   &, & a{
     color:@odiBlue;
   }
   font-size: 14px;
+
+  list-style: none;
 }
 
 section {
@@ -1271,6 +1280,10 @@ th {
   .btn {
     float: left;
     margin-right: 4px;
+  }
+  a {
+    display: block;
+    line-height: 1.5;
   }
 }
 
@@ -1801,13 +1814,17 @@ header .save-button {
   }
 
   form .btn-large {
-    i.icon-loading {
+    i.icon-loading, i.icon-exclamation-sign {
       display: none;
       margin-right: 3px;
     }
 
     &.disabled {
       i.icon-loading { display: inline-block; }
+    }
+
+    &.error {
+      i.icon-exclamation-sign { display: inline-block; }
     }
   }
 
@@ -1841,6 +1858,16 @@ header .save-button {
 
     &.alert-info {
       background: @odiBlue;
+    }
+  }
+
+  #start_url_explanation {
+    margin-top: 30px;
+    li {
+      list-style: none;
+    }
+    &.show {
+      display: block !important;
     }
   }
 }
@@ -3772,4 +3799,9 @@ body{
       &.exemplar { background: no-repeat url('/assets/badges-medium/exemplar_level_badge.png'); }
     }
   }
+}
+
+// Rails thinks it knows best but it doesn't
+.check_box .field_with_errors {
+  display: inline;
 }

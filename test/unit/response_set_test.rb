@@ -61,6 +61,65 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
+  test "copies explanations for responses along with answers" do
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q, input_type: 'url')
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: "example.org/fail",
+                                    explanation: "can't even protocol",
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+
+    response_set = FactoryGirl.create :response_set, survey: source_response_set.survey
+    response_set.reload
+
+    response_set.copy_answers_from_response_set!(source_response_set)
+
+    response = response_set.responses.first
+    assert response_set.responses.first.string_value == "example.org/fail"
+    assert response_set.responses.first.explanation == "can't even protocol"
+  end
+
+  def prepare_response_set(response_value = "Foo bar")
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: response_value,
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+    source_response_set
+  end
+
+  test "should create a new cloned response set" do
+    response_value = rand.to_s
+    source_response_set = prepare_response_set(response_value)
+
+    response_set = ResponseSet.clone_response_set(source_response_set)
+
+    assert response_set.responses.first.try(:string_value) == response_value
+  end
+
+  test "should clone with kitten_data intact" do
+    source_response_set = prepare_response_set
+    source_response_set.kitten_data = KittenData.create(url: 'http://www.example.com')
+
+    response_set = ResponseSet.clone_response_set(source_response_set)
+
+    assert response_set.kitten_data.url == 'http://www.example.com'
+  end
+
+  test "should clone with extra attributes" do
+    source_response_set = prepare_response_set
+    response_set = ResponseSet.clone_response_set(source_response_set, {user_id: 123})
+
+    assert response_set.user_id == 123
+  end
 
   test "Should raise an error if populating response_set answers from another response_set when responses already exist" do
     response_value = rand.to_s
@@ -297,25 +356,52 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
-  test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
-    question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
-    expected_value = {
-      :title => "UK Open Government Licence 1.0 (OGL)",
-      :url => "http://reference.data.gov.uk/id/open-government-licence"
+  {
+    "cc_by" => {
+      title: "Creative Commons Attribution 4.0",
+      url: "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "cc_by_sa" => {
+      title: "Creative Commons Attribution Share-Alike 4.0",
+      url: "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "cc_zero" => {
+      title: "CC0 1.0",
+      url: "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "ogl_uk" => {
+      title: "Open Government Licence 2.0 (United Kingdom)",
+      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
+    },
+    "odc_by" => {
+      title: "Open Data Commons Attribution License 1.0",
+      url: "http://www.opendefinition.org/licenses/odc-by"
+    },
+     "odc_odbl" => {
+       title: "Open Data Commons Open Database License 1.0",
+       url: "http://www.opendefinition.org/licenses/odc-odbl"
+    },
+    "odc_pddl" => {
+      title: "Open Data Commons Public Domain Dedication and Licence 1.0",
+      url: "http://www.opendefinition.org/licenses/odc-pddl"
     }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  }.each_pair do |license, expected|
+    test "#data_licence_determined_from_responses returns the correct responses when the data licence is #{license}" do
+      question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
+      answer = FactoryGirl.create(:answer, question: question, reference_identifier: license)
+      response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
 
-    assert_equal expected_value, response_set.data_licence_determined_from_responses
+      assert_equal expected, response_set.data_licence_determined_from_responses
+    end
   end
 
   test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
     question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
     answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
     expected_value = {
-      :title => "UK Open Government Licence 1.0 (OGL)",
-      :url => "http://reference.data.gov.uk/id/open-government-licence"
+      :title => "Open Government Licence 2.0 (United Kingdom)",
+      :url => "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
     }
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
@@ -483,6 +569,63 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set.publish!
 
     assert_not_equal nil, response_set.attained_index
+  end
+
+  test "all urls resolve returns true if all urls resolve sucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+
+
+    ODIBot.stubs(:new).returns(stub(:valid? => true))
+    5.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    assert response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns false if some urls resolve unsucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+
+    ODIBot.stubs(:new).with("http://www.example.com/success").returns(stub(:valid? => true))
+    ODIBot.stubs(:new).with("http://www.example.com/fail").returns(stub(:valid? => false))
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail")
+    end
+
+    refute response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns true if an explanation given" do
+    response_set = FactoryGirl.create(:response_set)
+
+    ODIBot.stubs(:new).with("http://www.example.com/fail").returns(stub(:valid? => false))
+
+    question = FactoryGirl.create(:question, reference_identifier: "url")
+    answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail", explanation: "is not blank")
+
+    assert response_set.all_urls_resolve?
+  end
+
+  test "progress calculation of response_set" do
+    response_set = FactoryGirl.create(:response_set)
+    progress = response_set.progress
+
+    assert_equal 0, progress['basic']
+    assert_equal 0, progress['pilot']
+    assert_equal 0, progress['standard']
+    assert_equal 0, progress['exemplar']
+    assert_equal nil, progress['attained']
   end
 
 end

@@ -65,7 +65,10 @@ end
 namespace :odc do
 
   desc "Task to run when a new version of the app has been deployed"
-  task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires cache:clear)
+  task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires cache:clear) do
+    ENV['TO'] = ENV['RAILS_ENV']
+    Rake::Task['airbrake:deploy'].invoke
+  end
 
   desc "remove (12h) old and unclaimed questionnaires"
   task :purge_questionnaires => :environment do
@@ -77,5 +80,9 @@ namespace :odc do
       where(ResponseSet.arel_table[:updated_at].lt(purge_before)).
       destroy_all
 
+  end
+
+  task :generate_dataset_csv => :environment do
+    Delayed::Job.enqueue CSVExport, { :priority => 5, :run_at => 10.minutes.from_now.utc }
   end
 end

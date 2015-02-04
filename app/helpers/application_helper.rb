@@ -57,7 +57,8 @@ module ApplicationHelper
       new_certificate_link_hash,
       { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
       { link_text: t('menu.browse_all_certificates'), path: datasets_path },
-      { link_text: t('menu.discussion'), path: discussion_path }
+      { link_text: t('menu.discussion'), path: discussion_path },
+      { link_text: t('menu.admin'), path: admin_path, requires_signed_in_user: true, requires_admin_user: true}
     ]
     render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
   end
@@ -80,11 +81,9 @@ module ApplicationHelper
 		content_for :body_class
   end
 
-  def jurisdiction_options(available_surveys)
-    # todo: cleanup, next two lines could be arel
-    surveys = available_surveys.keep_if {|s| ! Survey::MIGRATIONS.has_key? s.access_code}
-    surveys.sort! {|a,b| (a.full_title || a.title).to_s <=> (b.full_title || b.title).to_s }
-    [[t('response_set.choose_jurisdiction'), nil]] + surveys.map{|s|[s.full_title || s.title, s.access_code]}
+  def jurisdiction_options_for_select(default=nil)
+    surveys = Survey.available_to_complete.where('access_code not in (?)', Survey::MIGRATIONS.keys)
+    options_for_select([[t('response_set.choose_jurisdiction'), nil]] + surveys.map{|s|[s.complete_title, s.access_code]}, default)
   end
 
   # devise mapping
@@ -100,6 +99,44 @@ module ApplicationHelper
   # devise mapping
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def check_mark
+    "&check;".html_safe
+  end
+
+  def cross_mark
+    "&cross;".html_safe
+  end
+
+  def boolean_mark(value)
+    value ? check_mark : cross_mark
+  end
+
+  def atom_datetime(value)
+    value.to_datetime.rfc3339.sub(/\+00:00$/, 'Z')
+  end
+
+  def modal_popup(id, cls, heading)
+    close_button = content_tag(
+      :button,
+      '&times;'.html_safe,
+      :class => 'close',
+      :type => 'button',
+      'data-dismiss' => 'modal',
+      'aria-hidden' => true
+    )
+    modal_classes = "modal modal-wide hide fade #{cls}"
+    cog = content_tag(:span, '', :class => 'icon-cog')
+    content_tag(:div, :id => id, :class => modal_classes) do
+      content_tag(:div, :class => 'modal-header') do
+        title = content_tag(:h3, cog + " " + heading)
+        close_button + title
+      end +
+      content_tag(:div, :class => 'modal-body') do
+        yield
+      end
+    end
   end
 
   private

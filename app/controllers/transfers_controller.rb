@@ -20,13 +20,17 @@ class TransfersController < ApplicationController
 
   def claim
     @transfer = Transfer.find params[:id]
+    if @transfer.accepted?
+      redirect_to dataset_path(@transfer.dataset)
+    end
     session[:sign_in_redirect] = request.original_fullpath unless user_signed_in? 
   end
 
   def accept
     @transfer = Transfer.find params[:id]
-    @transfer.assign_attributes params[:transfer]
+    @transfer.token_confirmation = params.fetch(:transfer, {})[:token_confirmation]
     @transfer.target_user = current_user
+    @transfer.save
 
     begin
       authorize! :accept, @transfer

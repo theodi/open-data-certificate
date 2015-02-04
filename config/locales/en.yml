@@ -10,6 +10,7 @@ en:
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
     my_certificates: My certificates
+    admin: Admin
 
   footmenu:
     cookies:        Cookie policy
@@ -190,6 +191,14 @@ en:
     search:
       search_label: Search certificates
       submit_search: Go
+      advanced_search: Advanced search
+      datahub: Filter by domain
+      level: Filter by certificate level
+      levels:
+        basic: Raw level
+        pilot: Pilot level
+        standard: Standard level
+        exemplar: Exemplar level
 
     community_verification_panel:
       title: Community verification
@@ -203,6 +212,16 @@ en:
       sign_in_text: to verify this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
       person: person
+
+    report:
+      heading: Report a problem with this certificate
+      intro: "Please describe the problem you've found with the certificate for '%{name}'"
+      report: "Report certifcate"
+      contact_email: Contact email
+      describe_the_problem: Describe the problem
+
+    flashes:
+      reported: 'This certificate has been reported to The ODI'
 
   certificate:
     on_date: "on %{date}"
@@ -219,6 +238,7 @@ en:
     description: Description
     certification_types:
       self: self certified
+      auto: automatically awarded
       community: community certified
       odi_audited: ODI audited
     mark_audited: Mark audited
@@ -227,6 +247,10 @@ en:
     not_audited: This certificate has not been marked as ODI audited
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
     expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
+    claim_this_certificate: "Is this your dataset?"
+    report:
+      link: Report a problem
+      text: with this certificate
 
   datasets:
     datasets: Datasets
@@ -281,6 +305,9 @@ en:
     current_password_info: (we need your current password to confirm your changes)
     new_password_info: (leave blank if you don't want to change it)
     already_have_account: Already have an account?
+    resend_confirmation_instructions: Resend confirmation instructions
+    agree_to_terms: "I've read and agree to the %{terms_link}."
+    terms: Terms of use
 
   about:
     heading_about: About
@@ -353,8 +380,55 @@ en:
       subject: Questionnaire hand over
       message: You have been asked to take over editing an Open Data Certificate questionnaire. Please visit %{url} to accept the hand over.
 
+  claims:
+    index:
+      outstanding_claims: Outstanding claims for datasets
+      no_outstanding_claims: There are no outstanding claims at the moment
+    outstanding_claim:
+      approve_transfer: Approve transfer
+      deny_transfer: Deny
+      approving_transfer: Approving transfer…
+      denying_transfer: Denying…
+      confirm_denial: Are you sure?
+      confirm_title: Deny transfer of dataset
+    claim:
+      claim_heading: Claim this dataset
+      certificate_award: This certificate was automatically awarded to the dataset.
+      explanation: "Open Data Certificate lets you:"
+      explanation_open: Demonstrate that your data is open
+      explanation_improve: Find out how you can improve your open data
+      explanation_badge: Embed a badge on your website to share your achievement
+      claim_certificate: If this is your dataset, then let us know so you can own and manage the certificate.
+      send_request: Request ownership of this dataset
+    flashes:
+      created: You've requested the ownership for this certificate
+    approved: Transfer approved
+    denied: Transfer denied
+
+  claim_mailer:
+    notify:
+      subject: There has been an ownership claim made for '%{title}'
+      admin_subject: "Certificate ownership transfer: %{dataset_id}"
+      message: |
+        You have been asked to hand over ownership of an Open Data Certificate.
+        Please visit %{url} to accept or deny this claim.
+    notify_of_approval:
+      subject: You have been given ownership of '%{title}'
+      message: |
+        The ownership you requested of '%{title}' has been approved.
+        You can update information about the dataset by visiting %{url}
+    notify_of_denial:
+      subject: Transfer of ownership of '%{title}' has been denied
+      message: |
+        The ownership you requested of '%{title}' has not been granted.
+
   status_panel:
     title: Certificate level key
     description: This shows your progress towards each data certificate.
     about: Read how it works.
     improve_data: How can I improve my open data?
+
+  helpers:
+    label:
+      user:
+        short_name: Short name or preferred way of being addressed

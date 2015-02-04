@@ -17,6 +17,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    = yield(:meta)
   %body{:class => body_class}
     = yield(:super_head)
     %nav
@@ -87,5 +88,6 @@
               %i.icon.icon-rss-sign
               %a{href: yield(:rss_feed)} Subscribe to the RSS feed
 
-    = analytics_init if Rails.env.production?
+    = yield(:modal_content)
+    = render :partial => 'layouts/analytics'
     = yield(:foot_scripts)

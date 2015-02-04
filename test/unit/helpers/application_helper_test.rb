@@ -5,8 +5,8 @@ class ApplicationHelperTest < ActionView::TestCase
     I18n.locale = :en
     called = false
 
-    scope_locale :pirate do
-      assert_equal :pirate, I18n.locale
+    scope_locale :fr do
+      assert_equal :fr, I18n.locale
       called = true
     end
 

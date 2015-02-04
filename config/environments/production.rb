@@ -55,7 +55,7 @@ OpenDataCertificate::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( badge.css )
+  config.assets.precompile += %w( badge.css admin.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -63,13 +63,15 @@ OpenDataCertificate::Application.configure do
   # **IMPORTANT** Define the default url (for devise)
 
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = {
+    :host => "#{'staging.' if OpenDataCertificate.staging?}certificates.theodi.org"
+  }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill
   if ENV["MANDRILL_USERNAME"]
 
     # **IMPORTANT** Define the default url (for devise)
-    config.action_mailer.default_url_options = { :host => 'certificates.theodi.org' }
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
@@ -83,11 +85,6 @@ OpenDataCertificate::Application.configure do
 
   end
   
-  # Load Google Analytics tracking ID
-  if ENV['GOOGLE_ANALYTICS_CERTIFICATE']
-    GA.tracker = ENV['GOOGLE_ANALYTICS_CERTIFICATE']
-  end
-
   # Enable threaded mode
   # config.threadsafe!
 
