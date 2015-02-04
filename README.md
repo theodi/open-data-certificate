@@ -89,6 +89,8 @@ To create or update a dataset data should be sent in the format (using the above
 - Checkbox and radio fields should use the option key from the schema
 - Checkbox and repeating fields should be sent as an array
 
+The request should contain a Content-Type header with the value `application/json`.
+
 If your request has a `documentationUrl`, the system will attempt to use
 that dataset's metadata (for example: if it is hosted in a [CKAN](http://ckan.org/)
 repository or marked up with [DCAT](http://theodi.org/guides/marking-up-your-dataset-with-dcat))
