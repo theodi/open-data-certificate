@@ -45,12 +45,12 @@ class DatasetsCSV
     ]
   end
 
-  def url(name, *options, **params)
+  def url(name, dataset, params={})
     params = {
       host: OpenDataCertificate.hostname,
       protocol: Rails.env.production? ? 'https' : 'http'
     }.merge(params)
-    Rails.application.routes.url_helpers.send(name, *options, params)
+    Rails.application.routes.url_helpers.send(name, dataset, params)
   end
 
   def headers
