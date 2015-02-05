@@ -51,6 +51,7 @@ group :development do
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
+  gem 'rubyXL'
 end
 
 group :production do

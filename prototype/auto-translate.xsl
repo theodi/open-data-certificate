@@ -7,18 +7,23 @@
 
 <xsl:output method="xml" indent="yes" />
 
-<xsl:param name="translationFile" as="xs:string" select="'translations/temp/certificate.es.txt'" />
+<xsl:param name="translationFile" as="xs:string">path to translation source</xsl:param>
 <xsl:variable name="translationDoc" as="document-node()">
+  <xsl:choose>
+  <xsl:when test="unparsed-text-available($translationFile)">
 	<xsl:document>
-		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^.+$" flags="m">
+		<xsl:analyze-string select="unparsed-text($translationFile)" regex="^(.+?):(.+)$" flags="m">
 			<xsl:matching-substring>
-				<xsl:variable name="key" select="substring-before(., ':')" />
-				<t key="{$key}">
-					<xsl:value-of select="normalize-space(substring-after(., ':'))" />
-				</t>
+				<xsl:variable name="key" select="regex-group(1)" />
+				<t key="{$key}"><xsl:value-of select="regex-group(2)" /></t>
 			</xsl:matching-substring>
 		</xsl:analyze-string>
 	</xsl:document>
+  </xsl:when>
+  <xsl:otherwise>
+    <xsl:message terminate="yes">auto-translate.xsl needs a translationFile=textfile parameter</xsl:message>
+  </xsl:otherwise>
+  </xsl:choose>
 </xsl:variable> 
 
 <xsl:key name="translation" match="t" use="@key" />
