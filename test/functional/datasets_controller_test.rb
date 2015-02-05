@@ -344,11 +344,17 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_match /page=2/, doc.css('link[rel="next"]').first[:href]
   end
 
-  test "requesting a csv sends the pregenerated file" do
-    @controller.expects(:send_file).with(instance_of(Pathname), anything)
-    @controller.stubs(:render)
-
+  test "requesting a csv sends a redirect to rackspace location" do
+    CSVExport.stubs(:download_url).returns("http://rackspace.example.com/open-data-certificates.csv")
     get :index, format: "csv"
+    assert_response :redirect
+    assert_equal "http://rackspace.example.com/open-data-certificates.csv", response.headers['Location']
+  end
+
+  test "requesting a csv when it's not generated returns a 404" do
+    CSVExport.stubs(:download_url).raises(ActiveRecord::RecordNotFound)
+    get :index, format: "csv"
+    assert_response :not_found
   end
 
   %w[search since datahub level publisher jurisdiction].each do |term|

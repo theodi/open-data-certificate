@@ -90,14 +90,7 @@ class DatasetsController < ApplicationController
         format.feed { render :layout => false  }
         format.csv do
           raise ActiveRecord::RecordNotFound if search_filtered?
-          begin
-            send_file Rails.root.join("public/system/datasets.csv"),
-              type: 'text/csv; headers=present',
-              disposition: 'attachment',
-              filename: 'open-data-certificates.csv'
-          rescue ActionController::MissingFile
-            raise ActiveRecord::RecordNotFound
-          end
+          redirect_to CSVExport.download_url
         end
       end
     end

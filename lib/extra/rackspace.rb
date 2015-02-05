@@ -15,9 +15,9 @@ module Rackspace
     service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
   end
 
-  def self.upload(filename, body)
+  def self.upload(filename, body, headers={})
     dir = service.directories.get ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER']
-    dir.files.create :key => filename, :body => body
+    dir.files.create headers.merge(:key => filename, :body => body)
   end
   
   def self.fetch_cache(file, expires = 12.hour)
