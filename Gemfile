@@ -57,6 +57,7 @@ group :production do
   gem 'foreman'
   gem 'mysql2'
   gem 'airbrake'
+  gem 'delayed-plugins-airbrake'
   gem 'memcache-client'
   gem 'logstash-event'
   gem 'lograge'

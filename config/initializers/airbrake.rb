@@ -6,4 +6,7 @@ if ENV['AIRBRAKE_CERTIFICATE_KEY']
     # displayed in the 500.html error page
     config.user_information = "Exception ID <strong>{{ error_id }}</strong>"
   end
+
+  require 'delayed-plugins-airbrake'
+  Delayed::Worker.plugins << Delayed::Plugins::Airbrake::Plugin
 end
