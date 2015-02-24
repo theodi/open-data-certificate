@@ -599,7 +599,7 @@ questions:
         text: "at least every day"
         text_as_statement: "at least every day"
   seriesPublicationDelay:
-    text: "How long is the delay between when you create a dataset and when you publish it it?"
+    text: "How long is the delay between when you create a dataset and when you publish it?"
     text_as_statement: "The lag between creation and publication of this data is"
     answers:
       extreme:

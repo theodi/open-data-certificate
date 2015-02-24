@@ -1197,7 +1197,7 @@ survey 'GI',
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_frequentSeriesPublication, '!=', :a_daily
 
-    q_seriesPublicationDelay 'How long is the delay between when you create a dataset and when you publish it it?',
+    q_seriesPublicationDelay 'How long is the delay between when you create a dataset and when you publish it?',
       :discussion_topic => :seriesPublicationDelay,
       :display_on_certificate => true,
       :text_as_statement => 'The lag between creation and publication of this data is',
