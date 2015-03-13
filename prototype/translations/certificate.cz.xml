@@ -29,7 +29,7 @@
       </question>
       <question id="publisher" display="Poskytovatel">
          <label>Kdo data publikuje?</label>
-         <input placeholder="název poskytovatele" required="required"/>
+         <input placeholder="Název poskytovatele" required="required"/>
          <help>Uveďte název organizace, která data publikuje.</help>
       </question>
       <question id="publisherUrl" display="Web poskytovatele">
@@ -652,8 +652,8 @@
             <question id="resolvingIds" display="Navigace pomocí identifikátorů">
                <label>Lze pomocí Vámi používaných identifikátorů objektů vyhledávat o objektech další údaje?</label>
                <radioset>
-                  <option value="false" display="používané identifikátory to neumožňují">
-                     <label>Ne, podle používané identifikátory nelze použít k vyhledávání dalších údajů.</label>
+                  <option value="false" display="">
+                     <label>Ne, používané identifikátory to neumožňují</label>
                   </option>
                   <option value="service"
                           display="používané identifikátory jsou podporovány službami">

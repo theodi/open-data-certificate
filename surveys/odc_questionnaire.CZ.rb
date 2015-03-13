@@ -2,7 +2,8 @@ survey 'CZ',
   :full_title => 'Czech Republic',
   :default_mandatory => 'false',
   :status => 'beta',
-  :description => '<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p><p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p><strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p>' do
+  :description => '<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak instituce a organizace zveřejňují svá data.</p><p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p>
+         <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p>' do
 
   translations :en => :default
   section_general 'Obecné informace',
@@ -52,9 +53,9 @@ survey 'CZ',
       :text_as_statement => 'Poskytovatel',
       :help_text => 'Uveďte název organizace, která data publikuje.',
       :required => :required
-    a_1 'název poskytovatele',
+    a_1 'Název poskytovatele',
       :string,
-      :placeholder => 'název poskytovatele',
+      :placeholder => 'Název poskytovatele',
       :required => :required
 
     q_publisherUrl 'Webová stránka poskytovatele',
@@ -85,8 +86,8 @@ survey 'CZ',
   section_legal 'Právní informace',
     :description => 'Práva, licencování a ochrana osobních údajů' do
 
-    label_group_2 'práva',
-      :help_text => 'Vaše právo zveřejnit data',
+    label_group_2 'Práva',
+      :help_text => 'vaše právo zveřejnit data',
       :customer_renderer => '/partials/fieldset'
 
     q_publisherRights 'Máte právo tato data zveřejnit?',
@@ -95,11 +96,11 @@ survey 'CZ',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'Ano, máme právo zveřejnit tato data jako otevřená.',
+    a_yes 'ano, máme právo zveřejnit tato data jako otevřená.',
       :requirement => ['standard_1']
-    a_no 'Ne, nemáme právo ke zveřejnění těchto dat jako otevřených.'
-    a_unsure 'Nejsme si jisti, jestli máme právo data zveřejnit.'
-    a_complicated 'Práva k těmto datům jsou nejasná nebo složitá.'
+    a_no 'ne, nemáme právo ke zveřejnění těchto dat jako otevřených.'
+    a_unsure 'nejsme si jisti, jestli máme právo data zveřejnit.'
+    a_complicated 'práva k těmto datům jsou nejasná nebo složitá.'
 
     label_standard_1 '
                      <strong>Ke zveřejnění dat byste měli mít nezpochybnitelné právo.</strong>
@@ -206,7 +207,7 @@ survey 'CZ',
     q_crowdsourced 'Vznikla nějaká část dat pomocí crowdsourcingu?',
       :discussion_topic => :cz_crowdsourced,
       :display_on_certificate => true,
-      :text_as_statement => 'Crowdsourcing',
+      :text_as_statement => 'Část dat byla získána',
       :help_text => 'Pokud nějaká část dat pochází od osob mimo vaši organizaci, musíte si od nich vyžádat svolení k publikování dat pod otevřenou licencí.',
       :pick => :one,
       :required => :required
@@ -216,7 +217,7 @@ survey 'CZ',
     a_false 'ne',
       :text_as_statement => ''
     a_true 'ano',
-      :text_as_statement => 'ano, aspoň část dat vznikla crowdsourcingem',
+      :text_as_statement => 'crowdsourcingem',
       :requirement => ['basic_5']
 
     label_basic_5 'Uvedli jste, že data původně nepochází od Vás a nevznikla ani výběrem nebo zpracováním cizích dat, takže musela vzniknout pomocí crowdsourcingu.',
@@ -353,7 +354,7 @@ survey 'CZ',
     q_dataLicence 'Za jakých licence mohou lidé znovu použít tato data?',
       :discussion_topic => :cz_dataLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'Licence',
+      :text_as_statement => 'Data jsou dostupná pod',
       :help_text => 'Nezapomeňte na to, že k databázi drží práva každý, kdo data původně nasbíral, vytvořil, zkontroloval nebo vybral. Autorská práva mohou vznikat také při reorganizaci dat. Každý uživatel tedy potřebuje licenci k použití dat nebo doklad o tom, že se všichni autoři svých autorských práv vzdali. Do seznamu jsme vybrali nejčastěji používané licence. Pokud žádná autorská ani databázová práva nejsou ve hře, vypršela, nebo se jich autoři vzdali, vyberte možnost „nehodí se“.',
       :pick => :one,
       :required => :required,
@@ -383,10 +384,10 @@ survey 'CZ',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_na
-    a_norights 'Na data se nevztahují žádná autorská ani databázová práva',
+    a_norights 'na data se nevztahují žádná autorská ani databázová práva',
       :text_as_statement => 'na data se nevztahuje žádná autorskoprávní ochrana',
       :help_text => 'Databázová práva vznikají například vynaložením netriviálního úsilí při sběru, ověřování nebo prezentaci dat. Naopak nevznikají například u dat neověřovaných, vytvořených od nuly, nebo prezentovaných nějakým zjevným způsobem. Autorská práva k datům vznikají například při výběru nebo netriviální reorganizaci dat.'
-    a_expired 'autorská a databázová práva vypršela',
+    a_expired 'práva k datům vypršela',
       :text_as_statement => 'práva k datům vypršela',
       :help_text => 'Ochrana databázových práv trvá deset let. Pokud se data naposledy měnila před více než deseti lety, databázová práva nejspíš vypršela. Pevnou dobu trvají také autorská majetková práva; lhůta se počítá od úmrtí autora nebo od vydání díla. Stručně řečeno je nepravděpodobné, že by u vašich dat autorská práva vypršela'
     a_waived 'vlastníci se vzdali svých práv',
@@ -435,24 +436,24 @@ survey 'CZ',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'název licence',
+    a_1 'Název jiné licence',
       :string,
       :required => :required,
-      :placeholder => 'název licence'
+      :placeholder => 'Název jiné licence'
 
-    q_otherDataLicenceURL 'Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst.',
+    q_otherDataLicenceURL 'Text licence je v',
       :discussion_topic => :cz_otherDataLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Text licence',
+      :text_as_statement => 'Text licence je v',
       :help_text => 'Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'Jde o otevřenou licenci?',
+    a_1 'URL jiné licence',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Jde o otevřenou licenci?'
+      :placeholder => 'URL jiné licence'
 
     q_otherDataLicenceOpen 'Jde o otevřenou licenci?',
       :discussion_topic => :cz_otherDataLicenceOpen,
@@ -477,18 +478,18 @@ survey 'CZ',
     q_contentRights 'Vztahuje se na obsah dat autorské právo?',
       :discussion_topic => :cz_contentRights,
       :display_on_certificate => true,
-      :text_as_statement => 'Obsah chráněný autorským právem',
+      :text_as_statement => 'Existují',
       :pick => :one,
       :required => :required
-    a_norights 'Ne, data obsahují pouze fakta a čísla.',
-      :text_as_statement => 'Žádná relevantní práva k obsahu data',
+    a_norights 'ne, data obsahují pouze fakta a čísla.',
+      :text_as_statement => 'žádná relevantní práva k obsahu data',
       :help_text => 'Při licencování dat je občas dobré (nebo přímo nutné) posuzovat zvlášť obsah databáze a zvlášť databázi jako takovou. Tato otázka se vztahuje přímo na obsah databáze. Pokud databáze neobsahuje nic, co by vzniklo tvůrčím úsilím, autorské právo se na její obsah nevztahuje.'
     a_samerights 'ano; držitel práv pouze jeden',
       :text_as_statement => '',
       :help_text => 'Tuto možnost zvolte, pokud je obsah v datech byl celý vytvořen nebo převeden na stejnou osobu nebo organizaci.'
     a_mixedrights 'ano; více různých držitelů práv',
       :text_as_statement => '',
-      :help_text => 'Ano, a držitelem práv jsou různé osoby a organizace'
+      :help_text => 'Ano, a držitelem práv jsou různé osoby a organizace. Informace o právech použití musí být součástí dat.'
 
     q_explicitWaiver 'Je obsah dat volným dílem?',
       :discussion_topic => :cz_explicitWaiver,
@@ -501,7 +502,7 @@ survey 'CZ',
     a_false 'ne',
       :text_as_statement => ''
     a_true 'ano',
-      :text_as_statement => 'Je obsah dat volným dílem, tedy Public Domain?',
+      :text_as_statement => 'obsah dat je volným dílem, tedy Public Domain',
       :requirement => ['standard_3']
 
     label_standard_3 '
@@ -515,7 +516,7 @@ survey 'CZ',
     q_contentLicence 'Pod jakou licencí zveřejňujete obsah dat?',
       :discussion_topic => :cz_contentLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'Licence obsahu',
+      :text_as_statement => 'Obsah je dostupný pod těmito licencemi',
       :help_text => 'Nezapomeňte, že každé tvůrčí úsilí automaticky vede ke vzniku autorských práv k vytvořenému obsahu (s výjimkou čistě faktických údajů). Pokud tedy uživatelé chtějí váš obsah bez problémů používat, potřebují odpovídající licenci nebo dokument, ve kterém se vzdáváte svých autorských práv. V seznamu uvádíme nejčastěji používané licence. Pokud váš obsah není chráněný autorským právem, práva vypršela nebo jste se jich vzdali, vyberte možnost „nehodí se“.',
       :pick => :one,
       :required => :required,
@@ -542,13 +543,13 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
-    a_norights 'Na obsah dat se nevztahují žádná autorská práva',
+    a_norights 'na obsah dat se nevztahují žádná autorská práva',
       :text_as_statement => 'na obsah se nevztahují autorská práva',
       :help_text => 'Autorská práva vznikají pouze tehdy, když k vytvoření obsahu vynaložíte netriviální tvůrčí úsilí, například psaním popisků. Pokud data obsahují pouze fakta, autorský zákon se na ně nevztahuje.'
-    a_expired 'Autorská práva už vypršela.',
+    a_expired 'autorská práva už vypršela.',
       :text_as_statement => 'autorská práva už vypršela',
       :help_text => 'Autorská práva platí pouze omezenou dobu, počítanou buď od vydání díla, nebo od úmrtí autora. Zkontrolujte si datum vzniku a vydání obsahu – pokud je obsah dostatečně starý, autorská práva už mohla vypršet.'
-    a_waived 'Autor se svých práv vzdal.',
+    a_waived 'autor se svých práv vzdal',
       :text_as_statement => '',
       :help_text => 'To znamená, že práva nikdo nevlastní a každý si s obsahem může nakládat podle svého.'
 
@@ -595,10 +596,10 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_1 'název licence',
+    a_1 'Název licence',
       :string,
       :required => :required,
-      :placeholder => 'název licence'
+      :placeholder => 'Název licence'
 
     q_otherContentLicenceURL 'Kde je plný text této licence?',
       :discussion_topic => :cz_otherContentLicenceURL,
@@ -682,11 +683,11 @@ survey 'CZ',
     a_copyrightHolder 'držitel autorských práv',
       :text_as_statement => 'držitel autorských práv',
       :requirement => ['exemplar_3']
-    a_databaseRightYear 'database right year',
-      :text_as_statement => 'the database right year',
+    a_databaseRightYear 'rok spojený s právy databáze',
+      :text_as_statement => 'rok spojený s právy databáze',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder 'database right holder',
-      :text_as_statement => 'the database right holder',
+    a_databaseRightHolder 'držitel databázových práv',
+      :text_as_statement => 'držitel databázových práv',
       :requirement => ['exemplar_5']
 
     label_standard_4 '
@@ -744,14 +745,15 @@ survey 'CZ',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
 
-    label_exemplar_4 'You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.',
+    label_exemplar_4 'Měli byste zajistit <strong>strojově čitelné údaje ve svém prohlášení práv o databázi, konkrétně rok údajů </strong>, tak aby jej automatický nástroj mohl použít.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightYear
 
-    label_exemplar_5 'You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.',
+    label_exemplar_5 '
+                        <strong>Informace o držiteli databázových práv, uvedené v právním prohlášení, by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_5'
     dependency :rule => 'A and B'
@@ -768,7 +770,7 @@ survey 'CZ',
       :text_as_statement => 'Ochrana osobních údajů',
       :pick => :one,
       :required => :pilot
-    a_not_personal 'Ne, data se netýkají jednotlivců.',
+    a_not_personal 'ne, data se netýkají jednotlivců.',
       :text_as_statement => 'nehraje roli, data se netýkají jednotlivců',
       :help_text => 'Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí.'
     a_summarised 'Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní.',
@@ -948,11 +950,11 @@ survey 'CZ',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
+    q_individualConsentURL 'Kde máte sdělení o ochraně osobních údajů dotčených osob?',
       :discussion_topic => :cz_individualConsentURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Individuals affected by this data have this privacy notice',
-      :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.',
+      :text_as_statement => 'Informace pro dotčené osoby',
+      :help_text => 'Pokud sbíráte data o jednotlivých lidech, musíte jim oznámit, co budete s daty dělat. Prohlášení o soukromí dotčených osob bude zajímat i uživatele vašich dat, aby se nedostali do sporu se zákonem na ochranu osobních údajů.',
       :help_text_more_url => 'http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -960,13 +962,14 @@ survey 'CZ',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_lawfulDisclosure, '!=', :a_true
-    a_1 'Privacy Notice URL',
+    a_1 'URL dokumentu',
       :string,
       :input_type => :url,
-      :placeholder => 'Privacy Notice URL',
+      :placeholder => 'URL dokumentu',
       :requirement => ['pilot_7']
 
-    label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.',
+    label_pilot_7 '
+                           <strong>Musíte uživatelům svých dat vysvětlit, k jakému využití svých osobních dat daly dotčené osoby svolení</strong>, aby se vaši uživatelé nedostali do sporu se zákonem na ochranu osobních údajů.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -977,7 +980,7 @@ survey 'CZ',
     condition_E :q_lawfulDisclosure, '!=', :a_true
     condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
+    q_dpStaff 'Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?',
       :discussion_topic => :cz_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -989,10 +992,10 @@ survey 'CZ',
     a_false 'ne'
     a_true 'ano'
 
-    q_dbStaffConsulted 'Have you involved them in the Privacy Impact Assessment process?',
+    q_dbStaffConsulted 'Podílel se na analýze rizik?',
       :discussion_topic => :cz_dbStaffConsulted,
       :display_on_certificate => true,
-      :text_as_statement => 'The individual responsible for data protection',
+      :text_as_statement => 'Zodpovědnost za ochranu osobních údajů',
       :pick => :one
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -1003,10 +1006,12 @@ survey 'CZ',
     a_false 'ne',
       :text_as_statement => ''
     a_true 'ano',
-      :text_as_statement => 'has been consulted',
+      :text_as_statement => 'zodpovědná osoba se podílela na analýze rizik',
       :requirement => ['pilot_8']
 
-    label_pilot_8 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
+    label_pilot_8 '
+                           <strong>Pokud máte někoho přímo zodpovědného za ochranu osobních údajů, měli byste ho přizvat k analýze rizik.</strong>
+                        ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -1017,11 +1022,11 @@ survey 'CZ',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
+    q_anonymisationAudited 'Nechali jste svůj systém anonymizace dat ověřit nezávislým auditem?',
       :discussion_topic => :cz_anonymisationAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation of the data has been',
-      :help_text => 'It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
+      :text_as_statement => 'Anonymizace dat',
+      :help_text => 'Je dobrým zvykem zkontrolovat, jestli váš systém filtrování osobních údajů funguje správně. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -1031,10 +1036,11 @@ survey 'CZ',
     a_false 'ne',
       :text_as_statement => ''
     a_true 'ano',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'ověřena nezávislým auditem',
       :requirement => ['standard_12']
 
-    label_standard_12 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
+    label_standard_12 '
+                        <strong>Váš systém anonymizace dat by měl projít nezávislým auditem</strong>, abyste měli jistotu, že se k vašim datům hodí a funguje správně.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'
@@ -2124,8 +2130,8 @@ survey 'CZ',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
-    a_false 'Ne, podle používané identifikátory nelze použít k vyhledávání dalších údajů.',
-      :text_as_statement => 'používané identifikátory to neumožňují'
+    a_false 'Ne, používané identifikátory to neumožňují',
+      :text_as_statement => ''
     a_service 'Ano, existuje služba, která identifikátory překládá a umožňuje navigaci na další související informace.',
       :text_as_statement => 'používané identifikátory jsou podporovány službami',
       :help_text => 'Identifikátory GUID nebo DOI nemohou být použity přímo k navigaci mezi zdroji jako je tomu v případě URL, ale lze využití online služeb, které tyto identifikátory překládají a zprostředkují navigaci na související zdroje.',
