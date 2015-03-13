@@ -149,9 +149,9 @@ survey 'CZ',
     dependency :rule => '(A or B)'
     condition_A :q_publisherRights, '==', :a_yes
     condition_B :q_publisherRights, '==', :a_unsure
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'výhradně otevřená data'
 
     q_thirdPartyOrigin 'Vznikla část dat vytěžením nebo zpracováním cizích dat?',
@@ -162,8 +162,8 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['basic_3']
 
     label_basic_3 'Uvedli jste, že jste data nevytvořili ani samostaně nesesbírali (včetně formy crowdsourcingu), takže musela vzniknout vytěžením nebo zpracováním cizích datových zdrojů.',
@@ -186,9 +186,9 @@ survey 'CZ',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_thirdPartyOrigin, '==', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'výhradně otevřená data',
       :requirement => ['basic_4']
 
@@ -214,9 +214,9 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'crowdsourcingem',
       :requirement => ['basic_5']
 
@@ -238,8 +238,8 @@ survey 'CZ',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_claUrl 'Kde máte vystavenou přispěvatelskou licenční dohodu (CLA)?',
       :discussion_topic => :cz_claUrl,
@@ -269,8 +269,8 @@ survey 'CZ',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['basic_6']
 
     label_basic_6 'Každý přispěvatel musí souhlasit s přispěvatelskou licenční dohodou (CLA)</strong>, ve které vám uděluje právo zveřejnit jeho práci pod otevřenou licencí.',
@@ -313,9 +313,9 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'zdroje dat jsou strojově čitelné',
       :requirement => ['standard_2']
 
@@ -463,8 +463,8 @@ survey 'CZ',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['basic_7']
 
     label_basic_7 '
@@ -499,9 +499,9 @@ survey 'CZ',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'obsah dat je volným dílem, tedy Public Domain',
       :requirement => ['standard_3']
 
@@ -625,8 +625,8 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['basic_8']
 
     label_basic_8 '
@@ -787,9 +787,9 @@ survey 'CZ',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'ověřena nezávislým posudkem',
       :requirement => ['standard_8']
 
@@ -810,9 +810,9 @@ survey 'CZ',
       :required => :pilot
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_individual
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'data byla anonymizována'
 
     q_lawfulDisclosure 'Jste ze zákona povinni nebo oprávněni zveřejňovat tato osobní data?',
@@ -826,9 +826,9 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'zveřejnění dat je přikázáno zákonem',
       :requirement => ['pilot_5']
 
@@ -876,9 +876,9 @@ survey 'CZ',
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => 'poskytovatel neprovedl analýzu rizik'
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'poskytovatel provedl analýzu rizik',
       :requirement => ['pilot_6']
 
@@ -932,9 +932,9 @@ survey 'CZ',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'analýza rizik prošla nezávislým auditem',
       :requirement => ['standard_11']
 
@@ -989,8 +989,8 @@ survey 'CZ',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_dbStaffConsulted 'Podílel se na analýze rizik?',
       :discussion_topic => :cz_dbStaffConsulted,
@@ -1003,9 +1003,9 @@ survey 'CZ',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_dpStaff, '==', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'zodpovědná osoba se podílela na analýze rizik',
       :requirement => ['pilot_8']
 
@@ -1033,9 +1033,9 @@ survey 'CZ',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'ověřena nezávislým auditem',
       :requirement => ['standard_12']
 
@@ -1063,8 +1063,8 @@ survey 'CZ',
       :discussion_topic => :onWebsite,
       :help_text => 'Pomocí odkazu z domovské stránky Vašeho webu se data lépe hledají.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['standard_13']
 
     label_standard_13 '
@@ -1098,8 +1098,8 @@ survey 'CZ',
       :discussion_topic => :listed,
       :help_text => 'Data se lépe hledají, když jsou uvedená v relevantních katalozích, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['standard_14']
 
     label_standard_14 '
@@ -1134,8 +1134,8 @@ survey 'CZ',
       :discussion_topic => :referenced,
       :help_text => 'Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, který pomáhá datům lépe rozumět.',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['standard_15']
 
     label_standard_15 '
@@ -1238,9 +1238,9 @@ survey 'CZ',
       :required => :pilot
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_series
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'data se mění aspoň jednou denně'
 
     q_seriesType 'Jaký typ datového souboru řadě je to?',
@@ -1269,9 +1269,9 @@ survey 'CZ',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_frequentChanges, '==', :a_true
     condition_C :q_seriesType, '==', :a_dumps
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'je k dispozici',
       :requirement => ['exemplar_6']
 
@@ -1393,9 +1393,9 @@ survey 'CZ',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'jsou k dispozici',
       :requirement => ['standard_19']
 
@@ -1471,9 +1471,9 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_releaseType, '==', :a_service
     condition_B :q_timeSensitive, '!=', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'budou opravovány',
       :requirement => ['standard_21']
 
@@ -1536,9 +1536,9 @@ survey 'CZ',
       :text_as_statement => 'Zálohování dat',
       :help_text => 'Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody.',
       :pick => :one
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'data jsou zálohována v oddělené lokalitě',
       :requirement => ['standard_23']
 
@@ -1915,9 +1915,9 @@ survey 'CZ',
       :text_as_statement => 'Strojová čitelnost',
       :help_text => 'Lidé dávají přednost datům, která se dají snadno, rychle a přesně zpracovat počítačem. Například skenovaná kopie tabulky strojově čitelná není, zatímco CSV soubor jednoznačně ano.',
       :pick => :one
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'data jsou strojově čitelná',
       :requirement => ['pilot_16']
 
@@ -1935,9 +1935,9 @@ survey 'CZ',
       :help_text => 'Otevřené standardy vznikají v rámci jasného a transparentního procesu spolupráce. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'standardizovaný, otevřený',
       :requirement => ['standard_30']
 
@@ -2111,9 +2111,9 @@ survey 'CZ',
       :text_as_statement => 'Identifikátory objektů',
       :help_text => 'Data zpravidla vypovídají o objektech reálného světa jako například školy nebo, silnice nebo je pro ně může existovat definovaný způsob značení. Pokud se data z různých zdrojů využívají pro označování objektů stejné persistentní a unikátní identifikátory, je pak snadnější propojovat data z různých zdrojů a zvyšovat tak hodnotu dat. Příklady takovýchto identifikátorů jsou např. GUID, DOI nebo URL.',
       :pick => :one
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'ano, jsou používány persistentní identifikátory (GUID, URL, …)',
       :requirement => ['standard_33']
 
@@ -2187,8 +2187,8 @@ survey 'CZ',
       :required => :exemplar
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_reliableExternalUrls 'Jsou informace poskytované třetími stranami spolehlivé?',
       :discussion_topic => :reliableExternalUrls,
@@ -2198,8 +2198,8 @@ survey 'CZ',
     dependency :rule => 'A and B'
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_externalUrls 'Okazujete na tato cizí URL ve svých datech?',
       :discussion_topic => :externalUrls,
@@ -2211,9 +2211,9 @@ survey 'CZ',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
     condition_C :q_reliableExternalUrls, '==', :a_true
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'data odkazují na URL z jiných zdrojů',
       :requirement => ['exemplar_18']
 
@@ -2238,9 +2238,9 @@ survey 'CZ',
       :help_text => 'Je vhodné publikovat metadata o tom, jak byla data vytvořena a zpracována, než byla publikována. Tím pomáháte posilovat důvěru uživatelů ve vaše data, protože si uživatelé mohou ověřit, jak data vznikla. Více o metadatech o původu naleznete <a href="">zde</a>.',
       :help_text_more_url => 'http://www.w3.org/TR/prov-primer/',
       :pick => :one
-    a_false 'no',
+    a_false 'ne',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'ano',
       :text_as_statement => 'strojově čitelné metadata o původu dat',
       :requirement => ['exemplar_19']
 
@@ -2532,8 +2532,8 @@ survey 'CZ',
       :help_text => 'K datům ve formátech typu CSV, JSON, XML nebo Turtle formalizovaným způsobem definovat jejich schéma a popsat tak strukturu sloupců nebo objektů a jejich vlastností.',
       :pick => :one,
       :required => :standard
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_schemaDocumentationUrl 'Kde je umístěna dokumentace schématu?',
       :discussion_topic => :schemaDocumentationUrl,
@@ -2560,8 +2560,8 @@ survey 'CZ',
       :help_text => 'Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat.',
       :pick => :one,
       :required => :standard
-    a_false 'no'
-    a_true 'yes'
+    a_false 'ne'
+    a_true 'ano'
 
     q_codelistDocumentationUrl 'Kde je umístěna dokumentace číselníků?',
       :discussion_topic => :codelistDocumentationUrl,
@@ -2643,8 +2643,8 @@ survey 'CZ',
     q_socialMedia 'Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?',
       :discussion_topic => :socialMedia,
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['standard_56']
 
     label_standard_56 '
@@ -2740,8 +2740,8 @@ survey 'CZ',
       :help_text => 'Tým, který má na starosti komunikaci v oblasti otevřených dat může k většímu zapojení uživatelů využít např. například sociální sítě, blogy, soutěže nebo hackatony.',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
-    a_false 'no'
-    a_true 'yes',
+    a_false 'ne'
+    a_true 'ano',
       :requirement => ['exemplar_21']
 
     label_exemplar_21 '

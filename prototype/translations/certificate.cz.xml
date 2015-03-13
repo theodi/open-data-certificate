@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.7" xml:lang="cz">
+<questionnaire version="0.7" xml:lang="cz" yes="ano" no="ne">
    <levels>
       <level id="basic">Skvělý začátek v publikování otevřených dat.</level>
       <level id="pilot">Uživatelé dat mají podporu poskytovatele a možnost zpětné vazby.</level>

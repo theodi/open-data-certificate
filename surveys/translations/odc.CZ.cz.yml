@@ -87,29 +87,29 @@ questions:
     help_text: "Cizí data můžete publikovat pouze v případě, že byla zveřejněna pod otevřenou licencí, práva původního držitele vypršela nebo si jich držitel vzdal. Pokud to pro sebemenší část dat neplatí, musíte se před jejich zveřejněním poradit s právníky."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "výhradně otevřená data"
   thirdPartyOrigin:
     text: "Vznikla část dat vytěžením nebo zpracováním cizích dat?"
     help_text: "I výtah, případně malá část použitého cizího textu, může mít vliv na Vaše práva k užití. Stejně tak v případě, že jste analyzovali cizí data a vytvořili výstup odlišný od původních dat."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   thirdPartyOpen:
     text: "Vycházeli jste <em>výhradně</em> z otevřených dat?"
     text_as_statement: "Zdroje dat"
     help_text: "Cizí data můžete publikovat pouze v případě, že byla zveřejněna pod otevřenou licencí, práva původního držitele vypršela nebo si jich držitel vzdal. Pokud to pro sebemenší část dat neplatí, musíte se před jejich zveřejněním poradit s právníky."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "výhradně otevřená data"
   crowdsourced:
     text: "Vznikla nějaká část dat pomocí crowdsourcingu?"
@@ -117,19 +117,19 @@ questions:
     help_text: "Pokud nějaká část dat pochází od osob mimo vaši organizaci, musíte si od nich vyžádat svolení k publikování dat pod otevřenou licencí."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "crowdsourcingem"
   crowdsourcedContent:
     text: "Dá se práce přispěvatelů považovat za tvůrčí?"
     help_text: "Na tvůrčí práci vyžadující jedinečný úsudek autora mají přispěvatelé autorská práva. Příkladem tvůrčí práce je například psaní popisků nebo i rozhodování o tom, kterou část zdrojových dat vybrat do výsledné datové sady. Pokud taková data chcete publikovat, přispěvatelé se musí vzdát svých autorských práv, převést je na vás, nebo vám data licencovat."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   claUrl:
     text: "Kde máte vystavenou přispěvatelskou licenční dohodu (CLA)?"
     text_as_statement: "Přispěvatelská licenční dohoda (CLA)"
@@ -142,9 +142,9 @@ questions:
     help_text: "Abyste mohli zveřejnit cizí příspěvky, musí jejich autoři souhlasit s přispěvatelskou licenční dohodou (CLA). Měli byste si vést seznam jednotlivých přispěvatelů a poznačit si, kteří souhlasili s přispěvatelskou licenční dohodou (CLA)."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   sourceDocumentationUrl:
     text: "Kde jsou specifikované zdroje dat?"
     text_as_statement: "Zdroje dat"
@@ -158,10 +158,10 @@ questions:
     help_text: "Informace o zdrojích dat byste měli kromě lidsky srozumitelné podoby zveřejnit i ve strojově čitelném formátu. Díky tomu se dá lépe zjistit, jak jsou data používána, což zároveň vysvětluje jejich opakovanou publikaci."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "zdroje dat jsou strojově čitelné"
   copyrightURL:
     text: "Kde jste zveřejnili prohlášení o právech k této datové sadě?"
@@ -255,9 +255,9 @@ questions:
     help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   contentRights:
     text: "Vztahuje se na obsah dat autorské právo?"
     text_as_statement: "Existují"
@@ -280,10 +280,10 @@ questions:
     help_text: "K prohlášení obsahu za volné dílo můžete použít například licenci <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark</a>. Tak se uživatelé snadno dozvědí, že mohou s obsahem dat volně nakládat."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "obsah dat je volným dílem, tedy Public Domain"
   contentLicence:
     text: "Pod jakou licencí zveřejňujete obsah dat?"
@@ -358,9 +358,9 @@ questions:
     help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   contentRightsURL:
     text: "Kde popisujete právní a licenční podmínky spojené s obsahem dat?"
     text_as_statement: "Právní prohlášení k obsahu dat"
@@ -421,10 +421,10 @@ questions:
     text_as_statement: "Anonymizace dat"
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "ověřena nezávislým posudkem"
   appliedAnon:
     text: "Pokusili jste se snížit nebo úplně vyloučit riziko identifikace osob podle vašich dat?"
@@ -432,10 +432,10 @@ questions:
     help_text: "Anonymizace snižuje riziko, že vaše data půjdou zneužít k identifikaci osob. Konkrétní techniky záleží na konkrétní podobě dat."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "data byla anonymizována"
   lawfulDisclosure:
     text: "Jste ze zákona povinni nebo oprávněni zveřejňovat tato osobní data?"
@@ -445,10 +445,10 @@ questions:
                   "
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "zveřejnění dat je přikázáno zákonem"
   lawfulDisclosureURL:
     text: "Který dokument vám umožnuje zveřejnit osobní data?"
@@ -462,10 +462,10 @@ questions:
     help_text: "Analýza rizik se týká jak soukromí postižených osob, tak použití a zveřejnění těchto dat."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: "poskytovatel neprovedl analýzu rizik"
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "poskytovatel provedl analýzu rizik"
   riskAssessmentUrl:
     text: "Kde máte analýzu rizik zveřejněnou?"
@@ -480,10 +480,10 @@ questions:
     help_text: "Je dobrým zvykem nechat si analýzu rizik ještě ověřit. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "analýza rizik prošla nezávislým auditem"
   individualConsentURL:
     text: "Kde máte sdělení o ochraně osobních údajů dotčených osob?"
@@ -496,18 +496,18 @@ questions:
     text: "Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?"
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   dbStaffConsulted:
     text: "Podílel se na analýze rizik?"
     text_as_statement: "Zodpovědnost za ochranu osobních údajů"
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "zodpovědná osoba se podílela na analýze rizik"
   anonymisationAudited:
     text: "Nechali jste svůj systém anonymizace dat ověřit nezávislým auditem?"
@@ -515,10 +515,10 @@ questions:
     help_text: "Je dobrým zvykem zkontrolovat, jestli váš systém filtrování osobních údajů funguje správně. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "ověřena nezávislým auditem"
 # Praktické informace
   onWebsite:
@@ -526,9 +526,9 @@ questions:
     help_text: "Pomocí odkazu z domovské stránky Vašeho webu se data lépe hledají."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   webpage:
     text: "Která stránka na vašem webu na data odkazuje?"
     text_as_statement: "Webová stránka s odkazem na data"
@@ -541,9 +541,9 @@ questions:
     help_text: "Data se lépe hledají, když jsou uvedená v relevantních katalozích, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   listing:
     text: "V jakém datovém katalogu jsou data vedena?"
     text_as_statement: "Relevantní datové katalogy"
@@ -556,9 +556,9 @@ questions:
     help_text: "Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, který pomáhá datům lépe rozumět."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   reference:
     text: "Kde se na data odkazujete?"
     text_as_statement: "Související publikace"
@@ -600,10 +600,10 @@ questions:
     help_text: "Tímto informujete uživatele, zda se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "data se mění aspoň jednou denně"
   seriesType:
     text: "Jaký typ datového souboru řadě je to?"
@@ -623,10 +623,10 @@ questions:
     help_text: "Dejte uživatelům vědět, pokud někde publikujete seznam změn ve svých datech, například nové přírůstky nebo změny stávajících záznamů. Seznam může být publikovaný například jako RSS, Atom, nebo v jiném vhodném formátu."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "je k dispozici"
   frequentSeriesPublication:
     text: "Jak často publikujete nové verze?"
@@ -671,10 +671,10 @@ questions:
     help_text: "Datový soubor s exportem obsahem datové sady, který si uživatelé mohou stáhnout. Datové soubory ke stažení umožňují uživatelů s daty pracovat i jinak, než jim dovoluje API."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "jsou k dispozici"
   dumpFrequency:
     text: "Jak často publikujete datové soubory ke stažení?"
@@ -699,10 +699,10 @@ questions:
     help_text: "Je dobrou praxí opravovat chyby v datech, zvláště pokud data sami používáte. Nezapomeňte na provedené opravy upozornit uživatele."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "budou opravovány"
   qualityUrl:
     text: "Kde jsou dokumentovány známé nedostatky a chyb v datech?"
@@ -724,10 +724,10 @@ questions:
     help_text: "Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "data jsou zálohována v oddělené lokalitě"
   slaUrl:
     text: "Kde je popsána garantovaná úroveň dostupnosti služby?"
@@ -853,10 +853,10 @@ questions:
     help_text: "Lidé dávají přednost datům, která se dají snadno, rychle a přesně zpracovat počítačem. Například skenovaná kopie tabulky strojově čitelná není, zatímco CSV soubor jednoznačně ano."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "data jsou strojově čitelná"
   openStandard:
     text: "Jsou vaše data ve standardizovaném otevřeném formátu?"
@@ -864,10 +864,10 @@ questions:
     help_text: "Otevřené standardy vznikají v rámci jasného a transparentního procesu spolupráce. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "standardizovaný, otevřený"
   dataType:
     text: "Jaký typ dat publikujete?"
@@ -954,10 +954,10 @@ questions:
     help_text: "Data zpravidla vypovídají o objektech reálného světa jako například školy nebo, silnice nebo je pro ně může existovat definovaný způsob značení. Pokud se data z různých zdrojů využívají pro označování objektů stejné persistentní a unikátní identifikátory, je pak snadnější propojovat data z různých zdrojů a zvyšovat tak hodnotu dat. Příklady takovýchto identifikátorů jsou např. GUID, DOI nebo URL."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "ano, jsou používány persistentní identifikátory (GUID, URL, …)"
   resolvingIds:
     text: "Lze pomocí Vámi používaných identifikátorů objektů vyhledávat o objektech další údaje?"
@@ -986,27 +986,27 @@ questions:
     help_text: "Je možné, že o stejných objektech, jaké se vyskytují ve vašich datech, jsou na webu dostupné informace třetích stran. Například když máte v databázi PSČ, bylo by možné je využít pro propojení na data na národním geoportálu."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   reliableExternalUrls:
     text: "Jsou informace poskytované třetími stranami spolehlivé?"
     help_text: "Pokud jsou ke stejným objektům, jako ve vašich datech, dostupná URL někde jinde na webu je to známka, že se jejich poskytovatel snaží zajistit jejich kvalitu a dostupnost. Tímto hodnotíte, na kolik považujete tato data za spolehlivá. Při hodnocení se můžete se podívat na open data certifikát poskytovatele nebo na obdobnou známku kvality."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   externalUrls:
     text: "Okazujete na tato cizí URL ve svých datech?"
     text_as_statement: "Další informační zdroje"
     help_text: "Při využívání URL třetích stran je doporučováno využívat dereferencovatelná URL, která umožňují získat data o objektu po přistoupení na dané URL. Tím se snižuje duplicita dat a je usnadněno kombinování dat z více zdrojů."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "data odkazují na URL z jiných zdrojů"
   provenance:
     text: "Publikujete strojově čitelná metadata o původu dat?"
@@ -1014,10 +1014,10 @@ questions:
     help_text: "Je vhodné publikovat metadata o tom, jak byla data vytvořena a zpracována, než byla publikována. Tím pomáháte posilovat důvěru uživatelů ve vaše data, protože si uživatelé mohou ověřit, jak data vznikla. Více o metadatech o původu naleznete <a href=\"\">zde</a>."
     answers:
       a_false:
-        text: no
+        text: ne
         text_as_statement: ""
       a_true:
-        text: yes
+        text: ano
         text_as_statement: "strojově čitelné metadata o původu dat"
   digitalCertificate:
     text: "Jakým způsobem si uživatelé mohou ověřit, že data skutečně pochází od vás?"
@@ -1116,9 +1116,9 @@ questions:
     help_text: "K datům ve formátech typu CSV, JSON, XML nebo Turtle formalizovaným způsobem definovat jejich schéma a popsat tak strukturu sloupců nebo objektů a jejich vlastností."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   schemaDocumentationUrl:
     text: "Kde je umístěna dokumentace schématu?"
     text_as_statement: "Dokumentace schématu"
@@ -1130,9 +1130,9 @@ questions:
     help_text: "Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   codelistDocumentationUrl:
     text: "Kde je umístěna dokumentace číselníků?"
     text_as_statement: "Dokumentace číselníků"
@@ -1162,9 +1162,9 @@ questions:
     text: "Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?"
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   account:
     text: "Kde vás lidé najdou na sociálních sítích?"
     text_as_statement: "Profily na sociálních sítích"
@@ -1198,9 +1198,9 @@ questions:
     help_text: "Tým, který má na starosti komunikaci v oblasti otevřených dat může k většímu zapojení uživatelů využít např. například sociální sítě, blogy, soutěže nebo hackatony."
     answers:
       a_false:
-        text: no
+        text: ne
       a_true:
-        text: yes
+        text: ano
   engagementTeamUrl:
     text: "Kdo se o tuto komunitu stará?"
     text_as_statement: "Kdo se stará o komunitu"
