@@ -196,6 +196,7 @@ class Certificate < ActiveRecord::Base
   end
 
   def report!(reason, reporter)
+    reporter = reporter.presence || 'certificate@theodi.org'
     CertificateMailer.report(self, reason, reporter).deliver
   rescue Net::SMTPServerBusy => e
     Airbrake.notify e, :error_message => "could not send certificate report email from #{reporter}"
