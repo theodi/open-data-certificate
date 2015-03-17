@@ -2,6 +2,7 @@ Feature: claiming an already imported dataset
 
   Background:
     Given there exists a dataset called "The Data"
+    And it was automatically generated
     And that is owned by "owner@data.org"
     And has a published certificate
 

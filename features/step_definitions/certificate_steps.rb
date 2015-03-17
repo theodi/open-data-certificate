@@ -18,6 +18,10 @@ Given(/^there exists a dataset called "(.*?)"$/) do |name|
   @response_set = ResponseSet.create!(dataset_id: @dataset.id, survey: @survey)
 end
 
+Given(/^it was automatically generated$/) do
+  CertificateGenerator.create(response_set: @response_set)
+end
+
 Given(/^that is owned by "(.*?)"$/) do |email|
   @response_set.assign_to_user!(get_user(email))
 end
