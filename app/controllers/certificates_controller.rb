@@ -5,6 +5,7 @@ class CertificatesController < ApplicationController
   before_filter(:only => [:show]) { alternate_formats [:json] }
   before_filter(:only => [:show, :badge]) { readable? }
   before_filter(:only => [:badge]) { log_embed }
+  before_filter :authenticate_user!, only: :report
 
   def show
     respond_to do |format|
@@ -93,9 +94,8 @@ class CertificatesController < ApplicationController
   end
 
   def report
-    reasons, email = params.values_at(:reasons, :email)
     reporter = {
-      email: email,
+      email: current_user.email,
       remote_ip: request.remote_ip,
       user_agent: request.env['HTTP_USER_AGENT']
     }

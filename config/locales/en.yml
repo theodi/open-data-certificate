@@ -209,7 +209,7 @@ en:
       verified: Verified
       undo: Undo
       sign_in: Sign in
-      sign_in_text: to verify this certificate
+      sign_in_text: to verify or report this certificate
       certifiers: "This certificate has been verified by **%{count}**:"
       person: person
 

@@ -29,9 +29,10 @@
       %li
         = user.identifier
 
-%p
-  =link_to t('certificate.report.link'), "#report-#{@certificate.id}", :'data-toggle' => :modal
-  =t 'certificate.report.text'
+- if current_user.present?
+  %p
+    =link_to t('certificate.report.link'), "#report-#{@certificate.id}", :'data-toggle' => :modal
+    =t 'certificate.report.text'
 
-- content_for :modal_content do
-  =render :partial => 'report', :locals => {:certificate => @certificate}
+  - content_for :modal_content do
+    =render :partial => 'report', :locals => {:certificate => @certificate}

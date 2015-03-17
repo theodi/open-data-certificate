@@ -197,6 +197,8 @@ class Certificate < ActiveRecord::Base
 
   def report!(reason, reporter)
     CertificateMailer.report(self, reason, reporter).deliver
+  rescue Net::SMTPServerBusy => e
+    Airbrake.notify e, :error_message => "could not send certificate report email from #{reporter}"
   end
   handle_asynchronously :report!
 
