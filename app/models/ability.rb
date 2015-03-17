@@ -21,6 +21,10 @@ class Ability
         dataset.user == user
     end
 
+    can :claim, Certificate do |certificate|
+      certificate.auto_generated?
+    end
+
     if user.try(:admin?)
       can :manage, :all
     end

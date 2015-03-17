@@ -148,6 +148,10 @@ class Certificate < ActiveRecord::Base
     certificate_generator.present?
   end
 
+  def auto_generated?
+    certification_type == :auto
+  end
+
   def has_newer_responses?(datetime)
     newest_response_at = response_set.responses.maximum(:updated_at)
     newest_response_at && newest_response_at > datetime
