@@ -253,7 +253,15 @@ class CertificatesControllerTest < ActionController::TestCase
     end
   end
 
+  test "reporting certificate requires user to be logged in" do
+    certificate = FactoryGirl.create(:published_certificate_with_dataset)
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    assert_response :found
+  end
+
   test "reporting certificate sends an email" do
+    user = FactoryGirl.create(:user)
+    sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     post :report, dataset_id: certificate.dataset.id, id: certificate.id
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
@@ -262,6 +270,8 @@ class CertificatesControllerTest < ActionController::TestCase
   end
 
   test "reporting certificate includes the reasons" do
+    user = FactoryGirl.create(:user)
+    sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     post :report, dataset_id: certificate.dataset.id, id: certificate.id, reasons: "broken"
     Delayed::Worker.new.work_off 1
@@ -269,6 +279,8 @@ class CertificatesControllerTest < ActionController::TestCase
   end
 
   test "reporting certificate includes remote ip" do
+    user = FactoryGirl.create(:user)
+    sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     @request.env['REMOTE_ADDR'] = '255.0.0.1'
     post :report, dataset_id: certificate.dataset.id, id: certificate.id
@@ -277,6 +289,8 @@ class CertificatesControllerTest < ActionController::TestCase
   end
 
   test "reporting certificate includes user agent" do
+    user = FactoryGirl.create(:user)
+    sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     @request.env['HTTP_USER_AGENT'] = 'Web Browser/1.0'
     post :report, dataset_id: certificate.dataset.id, id: certificate.id
@@ -284,11 +298,13 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_match /Web Browser\/1.0/, ActionMailer::Base.deliveries.last.body
   end
 
-  test "reporting certificate has email as sender" do
+  test "reporting certificate has email of user as sender" do
+    user = FactoryGirl.create(:user)
+    sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id, email: "sender@example.net" 
+    post :report, dataset_id: certificate.dataset.id, id: certificate.id
     Delayed::Worker.new.work_off 1
-    assert ActionMailer::Base.deliveries.last.from.include?("sender@example.net")
+    assert ActionMailer::Base.deliveries.last.from.include?(user.email)
   end
 
   test "finds latest certificate when no :id specified" do
