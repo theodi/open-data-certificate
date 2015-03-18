@@ -40,7 +40,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     get :claim, id: transfer.id
     assert_response :success
-    assert_equal "/transfers/#{transfer.id}/claim", session[:sign_in_redirect]
+    assert_equal "/transfers/#{transfer.id}/claim", session[:user_return_to]
   end
 
   test "accept claim" do

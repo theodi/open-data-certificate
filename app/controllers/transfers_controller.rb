@@ -23,7 +23,7 @@ class TransfersController < ApplicationController
     if @transfer.accepted?
       redirect_to dataset_path(@transfer.dataset)
     end
-    session[:sign_in_redirect] = request.original_fullpath unless user_signed_in? 
+    session[:user_return_to] = request.original_fullpath unless user_signed_in?
   end
 
   def accept
