@@ -2,10 +2,13 @@ class ClaimsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    claim = current_user.sent_claims.create!(:dataset_id => claim_data[:dataset_id])
+    dataset = Dataset.find(claim_data[:dataset_id])
+    certificate = dataset.certificate
+    authorize! :claim, certificate
+    claim = current_user.sent_claims.create!(:dataset => dataset)
     flash[:notice] = I18n.t('claims.flashes.created')
     claim.notify!
-    redirect_to dataset_certificate_path(claim.dataset.id, claim.dataset.certificate)
+    redirect_to dataset_certificate_path(dataset.id, certificate)
   end
 
   def index
