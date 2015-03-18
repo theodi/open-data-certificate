@@ -244,6 +244,7 @@ end
 
 Devise::FailureApp.class_eval do
   def store_location!
-    session[:"#{scope}_return_to"] = request.referer unless http_auth?
+    path = request.get? ? attempted_path : request.referer
+    session[:"#{scope}_return_to"] = path unless http_auth?
   end
 end
