@@ -241,3 +241,10 @@ Devise.setup do |config|
   config.http_authenticatable_on_xhr = false
   config.navigational_formats = ["*/*", :html, :json]
 end
+
+Devise::FailureApp.class_eval do
+  def store_location!
+    path = request.get? ? attempted_path : request.referer
+    session[:"#{scope}_return_to"] = path unless http_auth?
+  end
+end
