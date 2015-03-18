@@ -13,7 +13,9 @@ class EmbedStat < ActiveRecord::Base
   def self.csv
     CSV.generate(row_sep: "\r\n") do |csv|
       csv << ["Dataset Name", "Dataset URL", "Referring URL", "First Detected"]
-      all.each { |s| csv << [s.dataset_title, s.dataset_path, s.referer, s.created_at] }
+      includes(:dataset).find_each do |s|
+        csv << [s.dataset_title, s.dataset_path, s.referer, s.created_at]
+      end
     end
   end
 
