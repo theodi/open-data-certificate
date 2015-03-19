@@ -72,6 +72,8 @@ class StatTest < ActiveSupport::TestCase
         FactoryGirl.create(:published_certificate_with_dataset, created_at: 2.month.ago)
       end
 
+      FactoryGirl.create_list(:published_certificate_with_dataset, 5, created_at: 1.year.ago)
+
       s = Stat.generate_published
 
       assert_equal s.this_month, 5

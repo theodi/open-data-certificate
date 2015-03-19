@@ -24,7 +24,7 @@ class Stat < ActiveRecord::Base
   end
 
   def self.this_month(result)
-    result.select {|r| r.certificate.created_at.month == Date.today.month }.count
+    result.select {|r| r.certificate.created_at.beginning_of_month == Date.today.beginning_of_month }.count
   end
 
   def self.level(level, result)
