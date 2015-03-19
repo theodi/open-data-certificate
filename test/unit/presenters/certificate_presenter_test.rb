@@ -55,4 +55,12 @@ class CertificatePresenterTest < ActiveSupport::TestCase
     presenter = CertificatePresenter.new(@certificate).published_data
     assert_equal "N/A", presenter[:user]
   end
+
+  test "orphaned if response_set is blank" do
+    @certificate.response_set.destroy
+    pub_data = CertificatePresenter.new(@certificate).published_data
+    all_data = CertificatePresenter.new(@certificate).all_data
+    assert_equal "orphaned certificate", pub_data[:country]
+    assert_equal "orphaned certificate", all_data[:country]
+  end
 end
