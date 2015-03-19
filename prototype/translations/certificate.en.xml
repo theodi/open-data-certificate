@@ -208,7 +208,7 @@
 					</question>
 				</if>
 				<question id="seriesPublicationDelay" display="The lag between creation and publication of this data is">
-					<label>How long is the delay between when you create a dataset and when you publish it it?</label>
+					<label>How long is the delay between when you create a dataset and when you publish it?</label>
 					<radioset>
 						<option value="extreme">
 							<label>longer than the gap between releases</label>
