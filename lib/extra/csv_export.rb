@@ -4,7 +4,8 @@ module CSVExport
   FILENAME = 'open-data-certificates.csv'
   METADATA = {
     content_type: 'text/csv',
-    content_disposition: 'attachment'
+    content_disposition: 'attachment',
+    public: true
   }
 
   def self.perform

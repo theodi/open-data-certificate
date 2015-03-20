@@ -64,13 +64,9 @@ class StatTest < ActiveSupport::TestCase
     end
 
     should "correct correct counts for certificates this month are generated" do
-      5.times do
-        FactoryGirl.create(:published_certificate_with_dataset)
-      end
-
-      5.times do
-        FactoryGirl.create(:published_certificate_with_dataset, created_at: 2.month.ago)
-      end
+      FactoryGirl.create_list(:published_certificate_with_dataset, 5)
+      FactoryGirl.create_list(:published_certificate_with_dataset, 5, created_at: 2.month.ago)
+      FactoryGirl.create_list(:published_certificate_with_dataset, 5, created_at: 1.year.ago)
 
       s = Stat.generate_published
 

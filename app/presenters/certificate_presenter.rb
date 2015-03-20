@@ -8,8 +8,8 @@ class CertificatePresenter < SimpleDelegator
       publisher: curator,
       created: created_at,
       user: published_email,
-      country: survey.title,
-      type: survey.status,
+      country: survey_title,
+      type: survey_status,
       level: attained_level,
       verification_type: certification_type,
       date_verified: verifications.count == 0 ? nil : verifications.last.updated_at
@@ -24,7 +24,7 @@ class CertificatePresenter < SimpleDelegator
       user_name: user_name,
       created: created_at,
       last_edited: updated_at,
-      country: survey.title,
+      country: survey_title,
       status: expired? ? 'expired' : status,
       level: attained_level,
     }
@@ -36,6 +36,14 @@ class CertificatePresenter < SimpleDelegator
 
   def published_email
     user.try(:email).presence || "N/A"
+  end
+
+  def survey_title
+    survey.try(:title) || 'orphaned certificate'
+  end
+
+  def survey_status
+    survey.try(:status) || "N/A"
   end
 
 end
