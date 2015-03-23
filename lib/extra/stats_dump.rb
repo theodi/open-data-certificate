@@ -57,7 +57,7 @@ module StatsDump
       Certificate.counts[:levels][:basic],
       Certificate.counts[:levels][:pilot],
       Certificate.counts[:levels][:standard],
-      Certificate.counts[:levels][:expert]
+      Certificate.counts[:levels][:exemplar]
     ]
   end
   
