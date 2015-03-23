@@ -2,7 +2,10 @@ survey 'GR',
   :full_title => 'Greece',
   :default_mandatory => 'false',
   :status => 'alpha',
-  :description => '<p><strong>This has been generated based on a default for EU countries and needs to be localised for Greece. Please help us! Contact <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
+  :description => '<p>Αυτό το ερωτηματολόγιο αυτο-αξιολόγησης δημιουργεί ένα πιστοποιητικό ανοιχτών δεδομένων και ένα σήμα που μπορείτε να δημοσιεύσετε έτσι ώστε να ενημερωθούν όλοι σχετικά με τα ανοικτά δεδομένα. Επίσης, οι απαντήσεις σας θα χρησιμοποιηθούν για να μάθουμε το πώς οι οργανισμοί δημοσιεύουν ανοιχτά δεδομένα.</p><p>Απατώντας σε αυτά τα ερωτήματα θα φανούν οι προσπάθειές συμμόρφωσης σας με την σχετική νομοθεσία. Θα πρέπει επίσης να ελέγθεί σχετικά και με άλλους νόμους και πολιτικές που εφαρμόζονται στον τομέα σας.</p><p>
+         <strong>Δεν χρειάζεται να απαντήσετε σε όλες τις ερωτήσεις για να πάρετε το πιστοποιητικό.</strong> Απλά απαντήστε αυτές που μπορείτε.</p><p>
+         <strong></strong>
+      </p>' do
 
   translations :en => :default
   section_general 'General Information',
@@ -79,62 +82,62 @@ survey 'GR',
 
   end
 
-  section_legal 'Legal Information',
-    :description => 'Rights, licensing and privacy' do
+  section_legal 'Νομικές Πληροφορίες',
+    :description => 'Δικαιώματα, χορήγηση αδειών και ιδιωτικότητα' do
 
-    label_group_2 'Rights',
-      :help_text => 'your right to share this data with people',
+    label_group_2 'Δικαιώματα',
+      :help_text => 'το δικαίωμά σας να μοιραστείτε αυτά τα δεδομένα με άλλους',
       :customer_renderer => '/partials/fieldset'
 
-    q_publisherRights 'Do you have the rights to publish this data as open data?',
+    q_publisherRights 'Έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά;',
       :discussion_topic => :gr_publisherRights,
-      :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
+      :help_text => 'Αν ο οργανισμός σας δεν είχε αρχικά δημιουργήσει ή συγκεντρώσει αυτά τα δεδομένα τότε μπορεί να μην έχετε το δικαίωμα να τα δημοσιεύσετε. Αν δεν είστε σίγουροι, επικοινωνήστε με τον κάτοχο των δεδομένων, επειδή θα χρειαστείτε την άδειά του.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'yes, you have the rights to publish this data as open data',
+    a_yes 'ναι, έχετε το δικαίωμα να τα δημοσιεύσετε ως ανοικτά',
       :requirement => ['standard_1']
-    a_no 'no, you don\'t have the rights to publish this data as open data'
-    a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
-    a_complicated 'the rights in this data are complicated or unclear'
+    a_no 'Όχι, δεν έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά'
+    a_unsure 'δεν είστε βέβαιος για το αν έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά'
+    a_complicated 'τα δικαιώματα αυτών των δεδομένων είναι περίπλοκα ή ασαφή'
 
-    label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
+    label_standard_1 'Θα πρέπει να έχετε ένα <strong>σαφές νομικό δικαίωμα που να επιτρέπει την δημοσίευση των δεδομένων αυτών</strong>.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_1'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '!=', :a_yes
 
-    label_basic_2 'You must have the <strong>right to publish this data</strong>.',
+    label_basic_2 'Πρέπει να έχετε το <strong>δικαίωμα δημοσίευσης των δεδομένων αυτών</strong>.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_2'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_no
 
-    q_rightsRiskAssessment 'Where do you detail the risks people might encounter if they use this data?',
+    q_rightsRiskAssessment 'Ποιοι είναι λεπτομερώς οι κίνδυνοι που κάποιος μπορεί να αντιμετωπίσει αν χρησιμοποιήσει τα δεδομένα αυτά;',
       :discussion_topic => :gr_rightsRiskAssessment,
       :display_on_certificate => true,
-      :text_as_statement => 'Risks in using this data are described at',
-      :help_text => 'It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.'
+      :text_as_statement => 'Οι κίνδυνοι για τη χρήση αυτών των δεδομένων που περιγράφονται στο',
+      :help_text => 'Μπορεί να είναι επικίνδυνο για κάποιον να χρησιμοποιήσει δεδομένα χωρίς να έχει σαφή δικαιώματα. Για παράδειγμα, τέτοια δεδομένα θα μπορούσαν να μην ληφθούν υπ\'όψιν σε ένα δικαστήριο. Να δίνετε μια διεύθυνση συνδέσμου(URL) σελίδας που να περιγράφει τον κίνδυνο από την χρήση αυτών των δεδομένων.'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_complicated
-    a_1 'Risk Documentation URL',
+    a_1 'Σύνδεσμος(URL) Τεκμηρίωσης Κινδύνου',
       :string,
       :input_type => :url,
-      :placeholder => 'Risk Documentation URL',
+      :placeholder => 'Σύνδεσμος(URL) Τεκμηρίωσης Κινδύνου',
       :requirement => ['pilot_2']
 
-    label_pilot_2 'You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.',
+    label_pilot_2 'Θα πρέπει να τεκμηριώνετε <strong>τους κινδύνους που συνδέονται με την χρήση αυτών των δεδομένων</strong>, έτσι ώστε ο καθένας να μπορεί να βρει μια λύση σχετικά και με το πως θα ήθελε να τα χρησιμοποιήσει.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_2'
     dependency :rule => 'A and B'
     condition_A :q_publisherRights, '==', :a_complicated
     condition_B :q_rightsRiskAssessment, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_publisherOrigin 'Was <em>all</em> this data originally created or gathered by you?',
+    q_publisherOrigin 'Ήταν <em>όλα</em> αυτά τα δεδομένα αρχικώς δημιουργημένα ή συγκεντρωμένα από εσάς;',
       :discussion_topic => :gr_publisherOrigin,
       :display_on_certificate => true,
-      :text_as_statement => 'This data was',
-      :help_text => 'If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.',
+      :text_as_statement => 'Αυτά τα δεδομένα ήταν',
+      :help_text => 'Εάν οποιοδήποτε τμήμα αυτών των δεδομένων που δεν προήλθε από τον οργανισμό σας αλλά από άλλα άτομα ή οργανισμούς, τότε θα πρέπει να δοθούν επεπλέον πληροφορίες σχετικά με τα δικαιώματά σας για δημοσίευση.',
       :pick => :one,
       :required => :required
     dependency :rule => '(A or B)'
@@ -143,11 +146,11 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'originally created or generated by its curator'
+      :text_as_statement => 'αρχικά δημιουργήθηκε ή παράχθηκε από τον επιμελητή'
 
-    q_thirdPartyOrigin 'Was some of this data extracted or calculated from other data?',
+    q_thirdPartyOrigin 'Ήταν κάποια από αυτά τα δεδομένα παραγμένα ή υπολογισμένα από άλλα δεδομένα;',
       :discussion_topic => :gr_thirdPartyOrigin,
-      :help_text => 'An extract or smaller part of someone else\'s data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.',
+      :help_text => 'Ένα απόσπασμα ή μικρότερο μέρος των δεδομένων κάποιου άλλου μπορεί να επηρεάσει τα δικαιώματα για την χρήση του. Ενδέχεται επίσης να υπάρξουν νομικά ζητήματα, αν τα αναλύσετε και βγάλετε νέα αποτελέσματα.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
@@ -157,7 +160,7 @@ survey 'GR',
     a_true 'yes',
       :requirement => ['basic_3']
 
-    label_basic_3 'You indicated that this data wasn\'t originally created or gathered by you, and wasn\'t crowdsourced, so it must have been extracted or calculated from other data sources.',
+    label_basic_3 'Δηλώσατε ότι τα δεδομένα αυτά δεν δημιουργήθηκαν ούτε συγκεντρώθηκαν από εσάς αλλά ούτε και σας παραδώθηκαν μέσω πληθοπορισμού, οπότε θα πρέπει να έχουν εξαχθεί ή παραχθεί από άλλες πηγές δεδομένων',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_3'
     dependency :rule => 'A and B and C and D'
@@ -166,11 +169,11 @@ survey 'GR',
     condition_C :q_crowdsourced, '==', :a_false
     condition_D :q_thirdPartyOrigin, '!=', :a_true
 
-    q_thirdPartyOpen 'Are <em>all</em> sources of this data already published as open data?',
+    q_thirdPartyOpen 'Έχουν <em>όλες</em> οι πηγές αυτών των δεδομένων ήδη δημοδιευθεί ως ανοικτά δεδομένα;',
       :discussion_topic => :gr_thirdPartyOpen,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is created from',
-      :help_text => 'You\'re allowed to republish someone else\'s data if it\'s already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you\'ll need legal advice before you can publish it.',
+      :text_as_statement => 'Αυτά τα δεδομένα δημιουργήθηκαν από',
+      :help_text => 'Επιτρέπεται να αναδημοσιεύσετε δεδομένα κάποιου άλλου τα οποία είναι ανοικτά ή εάν τα δικαιώματά τους έχουν λήξει ή αρθεί. Εάν δεν ισχύει αυτό για κάποιο μέρος των δεδομένων τότε θα χρειαστείτε νομικές συμβουλές πριν μπορέσετε να τα δημοσιεύσετε.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C'
@@ -180,10 +183,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'open data sources',
+      :text_as_statement => 'πηγές ανοικτών δεδομένων',
       :requirement => ['basic_4']
 
-    label_basic_4 'You should get <strong>legal advice to make sure you have the right to publish this data</strong>.',
+    label_basic_4 'Θα πρέπει να λάβετε <strong>νομικές συμβουλές για να βεβαιωθείτε οτί έχετε το δικαίωμα να δημοσιεύσετε αυτά τα στοιχεία</strong>.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_4'
     dependency :rule => 'A and B and C and D and E'
@@ -193,11 +196,11 @@ survey 'GR',
     condition_D :q_thirdPartyOpen, '==', :a_false
     condition_E :q_thirdPartyOpen, '==', :a_false
 
-    q_crowdsourced 'Was some of this data crowdsourced?',
+    q_crowdsourced 'Ήταν κάποια από αυτά τα δεδομένα από πληθοπορισμό(crowdsourcing);',
       :discussion_topic => :gr_crowdsourced,
       :display_on_certificate => true,
-      :text_as_statement => 'Some of this data is',
-      :help_text => 'If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.',
+      :text_as_statement => 'Μερικά από αυτά τα δεδομένα είναι',
+      :help_text => 'Εάν τα δεδομένα περιλαμβάνουν στοιχεία προερχόμενα απο ανθρώπους εκτός του οργανισμού σας, θα πρέπει να έχετε την άδειά τους για να τα δημοσιεύσετε ως ανοικτά.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
@@ -206,10 +209,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'crowdsourced',
+      :text_as_statement => 'από πληθοπορισμό',
       :requirement => ['basic_5']
 
-    label_basic_5 'You indicated that the data wasn\'t originally created or gathered by you, and wasn\'t extracted or calculated from other data, so it must have been crowdsourced.',
+    label_basic_5 'Δηλώσατε ότι τα δεδομένα δεν δημιουργήθηκαν αρχικά από εσάς ούτε συλλέχθηκαν ή υπολογίστηκαν από άλλα δεδομένα, γι\'αυτό θα πρέπει να είναι απο πληθοπορισμό(crowdsourcing).',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_5'
     dependency :rule => 'A and B and C and D'
@@ -218,9 +221,9 @@ survey 'GR',
     condition_C :q_thirdPartyOrigin, '==', :a_false
     condition_D :q_crowdsourced, '!=', :a_true
 
-    q_crowdsourcedContent 'Did contributors to this data use their judgement?',
+    q_crowdsourcedContent 'Μήπως οι συνεισφέροντες σε αυτά τα δεδομένα χρησιμοποίησαν την κρίση τους;',
       :discussion_topic => :gr_crowdsourcedContent,
-      :help_text => 'If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.',
+      :help_text => 'Αν κάποιοι χρησιμοποίησαν την δημιουργικότητα ή την κρίση τους για να συνεισφέρουν δεδομένα τότε έχουν τα δικαιώματα του έργου τους. Για παράδειγμα, γράφοντας μια περιγραφή ή αποφασίζοντας για το αν θα συμπεριληφθούν ή όχι κάποια δεδομένα απαιτεί κρίση. Έτσι οι συνεισφέροντες πρέπει να μεταφέρουν ή να παραιτηθούν από τα δικαιώματά τους, ή να δώσουν την άδεια σε εσάς πριν μπορέσετε να το δημοσιεύσετε.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C'
@@ -230,11 +233,11 @@ survey 'GR',
     a_false 'no'
     a_true 'yes'
 
-    q_claUrl 'Where is the Contributor Licence Agreement (CLA)?',
+    q_claUrl 'Που είναι η Άδεια Συνεισφέροντος(CLA);',
       :discussion_topic => :gr_claUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The Contributor Licence Agreement is at',
-      :help_text => 'Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor\'s rights to you, waive their rights, or license the data to you so you can publish it.',
+      :text_as_statement => 'Η Άδεια Συνεισφέροντος(CLA) είναι',
+      :help_text => 'Δώστε ένα σύνδεσμο που να οδηγεί στο συμφωνητικού όπου φαίνεται πως οι συνεισφέροντες σας επιτρέπουν να επαναχρησιμοποιειτε τα δεδομένα τους. H CLA είτε θα μεταφέρει τα δικαιώματα σε εσάς, ή θα παραιτείται απο αυτά, είτε θα σας δίνει την άδεια δημοσίευσης τους.',
       :help_text_more_url => 'http://en.wikipedia.org/wiki/Contributor_License_Agreement',
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -242,15 +245,15 @@ survey 'GR',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
-    a_1 'Contributor Licence Agreement URL',
+    a_1 'Σύνδεσμος(URL) Άδεια Συνεισφέροντος(CLA)',
       :string,
       :input_type => :url,
-      :placeholder => 'Contributor Licence Agreement URL',
+      :placeholder => 'Σύνδεσμος(URL) Άδεια Συνεισφέροντος(CLA)',
       :required => :required
 
-    q_cldsRecorded 'Have all contributors agreed to the Contributor Licence Agreement (CLA)?',
+    q_cldsRecorded 'Έχουν όλοι οι συνεισφέροντες αποδεχθεί την Άδεια Συνεισφέροντος(CLA);',
       :discussion_topic => :gr_cldsRecorded,
-      :help_text => 'Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.',
+      :help_text => 'Ελέγξτε ότι όλοι οι συνεισφέροντες έχουν αποδεχθεί την CLA πριν επαναχρησιμοποιήσετε ή επαναδημοσιεύσετε την συνεισφορά τους. Θα πρέπει να κρατήσετε αρχείο με τους συνεισφέροντες και για το αν έχουν αποδεχθεί ή όχι την CLA.',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B and C and D'
@@ -262,7 +265,7 @@ survey 'GR',
     a_true 'yes',
       :requirement => ['basic_6']
 
-    label_basic_6 'You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.',
+    label_basic_6 'Θα πρέπει <strong>οι συνεισφέροντες να αποδεχθούν μια Άδεια Συνεισφέροντος(CLA)</strong>, που θα σας δίνει το δικαίωμα να δημοσιεύετε την εργασία τους ως ανοιχτα δεδομένα.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_6'
     dependency :rule => 'A and B and C and D and E'
@@ -272,31 +275,31 @@ survey 'GR',
     condition_D :q_crowdsourcedContent, '==', :a_true
     condition_E :q_cldsRecorded, '==', :a_false
 
-    q_sourceDocumentationUrl 'Where do you describe sources of this data?',
+    q_sourceDocumentationUrl 'Που περιγράφονται οι πηγές των δεδομένων;',
       :discussion_topic => :gr_sourceDocumentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The sources of this data are described at',
-      :help_text => 'Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.'
+      :text_as_statement => 'Οι πηγές των εν λόγω δεδομένων περιγράφονται στο',
+      :help_text => 'Δώστε την διεύθυνση συνδέσμου(URL) όπου τεκμηριώνεται η προέλευση των δεδομένων και τα δικαιώματα που απορρέουν από αυτά για να τα δημοσιεύσετε. Αυτό βοηθά τους ανθρώπους να κατανοήσουν το από που έρχονται τα δεδομένα αυτά.'
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
-    a_1 'Data Sources Documentation URL',
+    a_1 'Σύνδεσμος(URL) Τεκμηρίωσης Πηγών Δεδομένων',
       :string,
       :input_type => :url,
-      :placeholder => 'Data Sources Documentation URL',
+      :placeholder => 'Σύνδεσμος(URL) Τεκμηρίωσης Πηγών Δεδομένων',
       :requirement => ['pilot_3']
 
-    label_pilot_3 'You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.',
+    label_pilot_3 'Θα πρέπει να τεκμηριώσετε <strong>την προέλευση των δεδομένων και τα δικαιώματα υπό τα οποία εσείς τα δημοσιεύετε</strong>, έτσι ώστε κάποιος να μπορεί να είναι βέβαιος ότι μπορεί να χρησιμοποιήσει τα μέρη που προέρχονται από τρίτους.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_3'
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
     condition_B :q_sourceDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_sourceDocumentationMetadata 'Is documentation about the sources of this data also in machine-readable format?',
+    q_sourceDocumentationMetadata 'Είναι η τεκμηρίωση σχετικά με τις πηγών δεδομένων, επίσης σε μορφή αναγνωρίσιμη από μηχανές;',
       :discussion_topic => :gr_sourceDocumentationMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The curator has published',
-      :help_text => 'Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.',
+      :text_as_statement => 'Ο επιμελητής έχει δημοσιεύσει',
+      :help_text => 'Οι πληροφορίες σχετικά με τις πηγές των δεδομένων θα πρέπει να είναι αναγνωρίσιμες απο τους ανθρώπους ώστε να μπορούν να τις καταλάβουν καθώς αλλά και σε μορφή που να περιλαμβάνει μεταδεδομένα ώστε να μπορούν οι υπολογιστές να τις επεξεργαστούν. Όταν όλοι κάνουν το ίδιο, βοηθά στο να βρίσκουμε πως τα ίδια ανοικτά δεδομένα χρησιμοποιούνται και αιτιολογούν την εν εξελίξει δημοσίευσή τους.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_publisherOrigin, '==', :a_false
@@ -304,10 +307,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'machine-readable data about the sources of this data',
+      :text_as_statement => 'ανγνωρίσιμα από τις μηχανές δεδομένα σχετικά με τις πηγές αυτών των δεδομένων',
       :requirement => ['standard_2']
 
-    label_standard_2 'You should <strong>include machine-readable data about the sources of this data</strong>.',
+    label_standard_2 'Θα πρέπει να <strong>συμπεριλάβετε αναγνώσιμα από τη μηχανή δεδομένα σχετικά με τις πηγές των δεδομένων αυτών </strong>.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_2'
     dependency :rule => 'A and B and C'
@@ -315,75 +318,75 @@ survey 'GR',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_3 'Licensing',
-      :help_text => 'how you give people permission to use this data',
+    label_group_3 'Αδειοδότηση',
+      :help_text => 'πως δίνετε σε άλλους την άδεια να χρησιμοποιήσουν αυτά τα δεδομένα',
       :customer_renderer => '/partials/fieldset'
 
-    q_copyrightURL 'Where have you published the rights statement for this dataset?',
+    q_copyrightURL 'Που έχετε ανακοινώσει την δήλωση δικαιωμάτων για το σύνολο των δεδομένων αυτών;',
       :discussion_topic => :gr_copyrightURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights statement is at',
-      :help_text => 'Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can\'t do with the data.'
-    a_1 'Rights Statement URL',
+      :text_as_statement => 'Η δήλωση δικαιωμάτων είναι στο',
+      :help_text => 'Δώστε την διεύθυνση συνδέσμου(URL) όπου περιγράφεται το δικαίωμα επαναχρησιμοποίησης αυτών των δεδομένων. Αυτό θα πρέπει να περιλαμβάνει μια αναφορά στην άδεια χρήσης της, τις απαιτήσεις απόδοσης, καθώς και μια δήλωση σχετικά με τα πνευματικά δικαιώματα. Μια δήλωση δικαιωμάτων βοηθά στο να γίνει κατανοητό τι μπορεί ή δεν μπορεί κάποιος να κάνει με τα αυτά τα δεδομένα.'
+    a_1 'Σύνδεσμος(URL) Δήλωσης Δικαιωμάτων',
       :string,
       :input_type => :url,
-      :placeholder => 'Rights Statement URL',
+      :placeholder => 'Σύνδεσμος(URL) Δήλωσης Δικαιωμάτων',
       :requirement => ['pilot_4']
 
-    label_pilot_4 'You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.',
+    label_pilot_4 'Θα πρέπει να <strong>δημοσιεύσετε την δήλωση δικαιωμάτων </strong>που θα περιγράφει με λεπτομέρειες τα πνευματικά δικαιώματα, την χορήγηση αδειών καθώς και το πως θα δίνεται η αναφορά σε αυτά τα δεδομένα.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_4'
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_dataLicence 'Under which licence can people reuse this data?',
+    q_dataLicence 'Υπό ποιες άδειες μπορεί κάποιος να επαναχρησιμοποιήσει αυτά τα δεδομένα;',
       :discussion_topic => :gr_dataLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is available under',
-      :help_text => 'Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they\'ve expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :text_as_statement => 'Αυτά τα δεδομένα είναι διαθέσιμα υπό',
+      :help_text => 'Θυμηθείτε ότι όποιος αφιερώνει διανοητική προσπάθεια για τη δημιουργία περιεχομένου, παίρνει αυτόματα δικαιώματα πάνω του. Δημιουργικό περιεχόμενο περιλαμβάνει την οργάνωση και την επιλογή των στοιχείων εντός των δεδομένων, αλλά δεν περιλαμβάνει τα στοιχεία. Έτσι κάποιος θα χρειαστεί μια παραίτηση ή άδεια για αυτά, που να αποδεικνύει ότι μπορεί να τα χρησιμοποιήσει και να εξηγεί την νομιμότητα τους. Παραθέτουμε τις πιο συνηθισμένες άδειες εδώ; εάν δεν υπάρχει κανένα πνευματικό δικαίωμα σε δεδομένα, έχει λήξει ή έχετε παραιτηθεί από αυτά, επιλέξτε «Δεν ισχύει».',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
-    a_cc_by 'Creative Commons Attribution',
-      :text_as_statement => 'Creative Commons Attribution'
-    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
-      :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
+    a_cc_by 'Creative Commons Αναφορά',
+      :text_as_statement => 'Creative Commons Αναφορά'
+    a_cc_by_sa 'Creative Commons Αναφορά - Παρόμοια διανομή',
+      :text_as_statement => 'Creative Commons Αναφορά - Παρόμοια διανομή'
+    a_cc_zero 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)',
+      :text_as_statement => 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)'
     a_odc_by 'Open Data Commons Attribution License',
       :text_as_statement => 'Open Data Commons Attribution License'
     a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
       :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
-    a_odc_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
-      :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_na 'Not applicable',
+    a_odc_pddl 'Open Data Commons Public Domain Dedication and License (PDDL)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
+    a_na 'δεν εφαρμόζεται',
       :text_as_statement => ''
-    a_other 'Other...',
+    a_other 'Άλλο...',
       :text_as_statement => ''
 
-    q_dataNotApplicable 'Why doesn\'t a licence apply to this data?',
+    q_dataNotApplicable 'Γιατί δεν έχουν κάποια άδεια αυτά τα δεδομένα;',
       :discussion_topic => :gr_dataNotApplicable,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is not licensed because',
+      :text_as_statement => 'Αυτά τα δεδομένα δεν έχουν άδεια επειδή',
       :pick => :one,
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_na
-    a_norights 'there are no copyright or database rights in this data',
-      :text_as_statement => 'there are no rights in it',
-      :help_text => 'Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way.'
-    a_expired 'copyright and database rights have expired',
-      :text_as_statement => 'the rights have expired',
-      :help_text => 'Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired.'
-    a_waived 'copyright and database rights have been waived',
+    a_norights 'δεν υπάρχει κανένα πνευματικό δικαίωμα σε αυτά τα δεδομένα',
+      :text_as_statement => 'δεν υπάρχει κανένα πνευματικό δικαίωμα σε αυτά',
+      :help_text => 'Δικαιώματα πνευματικής ιδιοκτησίας εφαρμόζονται στα δεδομένα μόνο εαν χρειάστηκε πνευματική προσπάθεια δημιουργώντας κάτι που βρίσκεται μέσα σε αυτά, για παράδειγμα, γράφοντας το κείμενο μέσα στα δεδομένα, ή αποφασίζοντας αν συγκεκριμένα δεδομένα θα συμπεριληφθούν. Δεν υπάρχουν πνευματικά δικαιώματα εάν τα δεδομένα περιέχουν μόνο δεδομένα που δεν χρειάστηκε κρίση για το αν θα συμπεριληφθούν ή όχι.'
+    a_expired 'τα πνευματικά δικαιώματα έχουν λήξει',
+      :text_as_statement => 'τα πνευματικά δικαιώματα έχουν λήξει',
+      :help_text => 'Τα πνευματικά δικαιώματα διαρκούν για ένα συγκεκριμένο χρονικό διάστημα, με βάση είτε τον αριθμό των ετών μτά τον θάνατο του δημιουργού είτε της δημοσίευσής του. Θα πρέπει να ελέγξετε για το πότε το περιεχόμενο είχε δημιουργηθεί ή δημοσιευθεί επειδή εάν αυτό είχε συμβεί πριν πολύ καιρό τότε μπορεί τα πνευματικά δικαιώματα να έχουν λήξει.'
+    a_waived 'τα πνευματικά δικαιώματα έχουν αρθεί',
       :text_as_statement => '',
-      :help_text => 'This means no one owns the rights and anyone can do whatever they want with this data.'
+      :help_text => 'Αυτό σημαίνει πως κανείς δεν κατέχει πνευματικά δικαιώματα και ο καθένας μπορεί να κάνει ότι θέλει με αυτά τα δεδομένα.'
 
-    q_dataWaiver 'Which waiver do you use to waive rights in the data?',
+    q_dataWaiver 'Ποια άρση χρησιμοποιείτε για να παραιτηθείτε απο τα πνευματικά δικαιώματα αυτών των δεδομένων;',
       :discussion_topic => :gr_dataWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Rights in the data have been waived with',
-      :help_text => 'You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.',
+      :text_as_statement => 'Τα δικαιώματα σε αυτά τα δεδομένα έχουν αρθεί με',
+      :help_text => 'Θα χρειαστεί να κάνετε μια δήλωση για να δείξετε ότι τα πνευματικά δικαιώματα έχουν αρθεί, έτσι ώστε άλλοι να γνωρίζουν ότι μπορούν να κάνουν ότι θέλουν με τα δεδομένα αυτά. Πρότυπα παραίτησης υπάρχουν ήδη ώς PDDL και CCZero αλλά μπορείτε να γράψετε και την δική σας με ωομικές συμβουλές.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -392,57 +395,57 @@ survey 'GR',
     condition_B :q_dataNotApplicable, '==', :a_waived
     a_pddl 'Open Data Commons Public Domain Dedication and Licence (PDDL)',
       :text_as_statement => 'Open Data Commons Public Domain Dedication and Licence (PDDL)'
-    a_cc0 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_other 'Other...',
+    a_cc0 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)',
+      :text_as_statement => 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)'
+    a_other 'Άλλο...',
       :text_as_statement => ''
 
-    q_dataOtherWaiver 'Where is the waiver for the rights in the data?',
+    q_dataOtherWaiver 'Πού είναι η παραίτηση των πνευματικών δικαιωμάτων στα δεδομένα;',
       :discussion_topic => :gr_dataOtherWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Rights in the data have been waived with',
-      :help_text => 'Give a URL to the publicly available waiver so people can check that it does waive the rights in the data.',
+      :text_as_statement => 'Τα δικαιώματα στα δεδομένα έχουν αρθεί με',
+      :help_text => 'Δώστε ένα σύνδεσμο(URL) της δημόσια διαθέσιμης παραίτησής σας, έτσι ώστε να μπορεί να ελεγχθεί η άρση των πνευματικών δικαιωμάτων στα δεδομένα.',
       :required => :required
     dependency :rule => 'A and B and C'
     condition_A :q_dataLicence, '==', :a_na
     condition_B :q_dataNotApplicable, '==', :a_waived
     condition_C :q_dataWaiver, '==', :a_other
-    a_1 'Waiver URL',
+    a_1 'Σύνδεσμος(URL) Παραίτησης',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Waiver URL'
+      :placeholder => 'Σύνδεσμος(URL) Παραίτησης'
 
-    q_otherDataLicenceName 'What is the name of the licence?',
+    q_otherDataLicenceName 'Ποιο είναι το όνομα της άδειας;',
       :discussion_topic => :gr_otherDataLicenceName,
       :display_on_certificate => true,
-      :text_as_statement => 'This data is available under',
-      :help_text => 'If you use a different licence, we need the name so people can see it on your Open Data Certificate.',
+      :text_as_statement => 'Αυτά τα δεδομένα είναι διαθέσιμα υπό',
+      :help_text => 'Εάν χρησιμοποιείτε μια διαφορετική άδεια, χρειαζόμαστε το όνομα της έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'Other Licence Name',
+    a_1 'Άλλο Όνομα Άδειας',
       :string,
       :required => :required,
-      :placeholder => 'Other Licence Name'
+      :placeholder => 'Άλλο Όνομα Άδειας'
 
-    q_otherDataLicenceURL 'Where is the licence?',
+    q_otherDataLicenceURL 'Πού είναι η άδεια;',
       :discussion_topic => :gr_otherDataLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'This licence is at',
-      :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
+      :text_as_statement => 'Η άδεια αυτή είναι σε',
+      :help_text => 'Δώστε μια διεύθυνση(URL) για την άδεια, έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων και να ελέγξει ότι έιναι δημόσια διαθέσιμο.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
-    a_1 'Other Licence URL',
+    a_1 'Σύνδεσμος(URL) Άλλης Άδειας',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Other Licence URL'
+      :placeholder => 'Σύνδεσμος(URL) Άλλης Άδειας'
 
-    q_otherDataLicenceOpen 'Is the licence an open licence?',
+    q_otherDataLicenceOpen 'Είναι η άδεια μια ανοικτή άδεια;',
       :discussion_topic => :gr_otherDataLicenceOpen,
-      :help_text => 'If you aren\'t sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn\'t in their list, it\'s either not open or hasn\'t been assessed yet.',
+      :help_text => 'Αν δεν είστε σίγουροι για το τι είναι μια ανοιχτή άδεια τότε διαβάστε στο <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list </a>. Εάν η άδεια δεν είναι στη λίστα τους, τότε είτε δεν είναι ανοιχτή, είτε δεν έχει αξιολογηθεί ακόμα.',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
@@ -452,95 +455,95 @@ survey 'GR',
     a_true 'yes',
       :requirement => ['basic_7']
 
-    label_basic_7 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
+    label_basic_7 'Θα πρέπει να <strong>δημοσιεύετε ανοιχτά δεδομένα, με ανοιχτή άδεια </strong> έτσι ώστε όλοι να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_7'
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_other
     condition_B :q_otherDataLicenceOpen, '==', :a_false
 
-    q_contentRights 'Is there any copyright in the content of this data?',
+    q_contentRights 'Υπάρχουν κάποια πνευματικά δικαιώματα στο περιεχόμενο αυτών των δεδομένων;',
       :discussion_topic => :gr_contentRights,
       :display_on_certificate => true,
-      :text_as_statement => 'There are',
+      :text_as_statement => 'Υπάρχουν',
       :pick => :one,
       :required => :required
-    a_norights 'no, the data only contains facts and numbers',
-      :text_as_statement => 'no rights in the content of the data',
-      :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
-    a_samerights 'yes, and the rights are all held by the same person or organisation',
+    a_norights 'Όχι, τα δεδομένα περιέχουν μόνο στοιχεία και αριθμούς',
+      :text_as_statement => 'κανένα δικαίωμα στο περιεχόμενο των δεδομένων',
+      :help_text => 'Δεν υπάρχουν πνευματικά δικαίωματα σε πραγματικά στοιχεία. Εάν τα δεδομένα δεν περιέχουν οποιοδήποτε στοιχείο που να δημιουργήθηκε μέσα από την πνευματική προσπάθεια, τότε δεν υπάρχουν δικαιώματα πάνω στα δεδομένα.'
+    a_samerights 'Ναι, και τα δικαιώματα όλων κατέχονται από το ίδιο πρόσωπο ή οργανισμό',
       :text_as_statement => '',
-      :help_text => 'Choose this option if the content in the data was all created by or transferred to the same person or organisation.'
-    a_mixedrights 'yes, and the rights are held by different people or organisations',
+      :help_text => 'Επιλέξτε αυτή την επιλογή αν το περιεχόμενο των δεδομένων δημιουργήθηκε εξ\'ολοκλήρου απο το ίδιο πρόσωπο ή οργανισμό ή μεταφέρονται σε αυτό.'
+    a_mixedrights 'Ναι, και τα δικαιώματα κατέχονται από διαφορετικούς ανθρώπους ή οργανισμούς',
       :text_as_statement => '',
-      :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
+      :help_text => 'Σε ορισμένα δεδομένα, τα δικαιώματα σε διαφορετικές εγγραφές κατέχονται από διαφορετικά άτομα ή οργανισμούς. Πληροφορίες σχετικά με τα δικαιώματα θα πρέπει επίσης να διατηρούνται μέσα στα δεδομένα.'
 
-    q_explicitWaiver 'Is the content of the data marked as public domain?',
+    q_explicitWaiver 'Είναι το περιεχόμενο των δεδομένων επισημασμένο ως δημόσιος τομέας;',
       :discussion_topic => :gr_explicitWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'The content has been',
-      :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
+      :text_as_statement => 'Το περιεχόμενο έχει',
+      :help_text => 'Το περιεχόμενο μπορεί να επισημανθεί ως δημόσιος τομέας με τη χρήση του <a href="http://creativecommons.org/publicdomain/">Creative Commons Σήμα Δημόσιου Τομέα </a>. Αυτό βοηθά όλους να γνωρίζουν ότι μπορούν να τα επαναχρησιμοποιήσουν ελεύθερα.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'marked as public domain',
+      :text_as_statement => 'επισημασμένο ως δημόσιος τομέας',
       :requirement => ['standard_3']
 
-    label_standard_3 'You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.',
+    label_standard_3 'Θα πρέπει να <strong>σηματοδοτήσετε ως δημόσιο τομέα περιεχόμενο που ανήκει στο δημόσιο τομέα </strong> έτσι ώστε ο κόσμος να γνωρίζουν ότι μπορεί να το επαναχρησιμοποιήσει.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_3'
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_norights
     condition_B :q_explicitWaiver, '==', :a_false
 
-    q_contentLicence 'Under which licence can others reuse content?',
+    q_contentLicence 'Υπό ποια άδεια μπορεί κάποιος να επαναχρησιμοποιήσει το περιεχόμενο;',
       :discussion_topic => :gr_contentLicence,
       :display_on_certificate => true,
-      :text_as_statement => 'The content is available under',
-      :help_text => 'Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it\'s expired, or you\'ve waived them, choose \'Not applicable\'.',
+      :text_as_statement => 'Το περιεχόμενο διατίθεται υπό',
+      :help_text => 'Θυμηθείτε ότι όποιος αφιερώνει διανοητική προσπάθεια για την δημιουργία κάποιου περιεχομένου παίρνει αυτόματα τα δικαιώματα πάνω του, αλλά αυτό το δημιουργικό περιεχόμενο δεν περιλαμβάνει γεγονότα. Έτσι κάποιος θα χρειαστεί μια παραίτηση ή άδεια η οποία να αποδεικνύει ότι μπορεί να το χρησιμοποιήσει και να εξηγεί πως μπορεί να το κάνει νόμιμα. Παραθέτουμε τις πιο συνηθισμένες άδειες εδώ; αν δεν υπάρχουν πνευματικά δικαιώματα στο περιεχόμενο, είτε έχουν λήξει είτε έχετε παραιτηθεί από αυτά, τότε επιλέξτε \'Δεν εφαρμόζεται\'.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_samerights
-    a_cc_by 'Creative Commons Attribution',
-      :text_as_statement => 'Creative Commons Attribution'
-    a_cc_by_sa 'Creative Commons Attribution Share-Alike',
-      :text_as_statement => 'Creative Commons Attribution Share-Alike'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_na 'Not applicable',
+    a_cc_by 'Creative Commons Αναφορά',
+      :text_as_statement => 'Creative Commons Αναφορά'
+    a_cc_by_sa 'Creative Commons Αναφορά - Παρόμοια διανομή',
+      :text_as_statement => 'Creative Commons Αναφορά - Παρόμοια διανομή'
+    a_cc_zero 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)',
+      :text_as_statement => 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)'
+    a_na 'Δεν εφαρμόζεται',
       :text_as_statement => ''
-    a_other 'Other...',
+    a_other 'Άλλο',
       :text_as_statement => ''
 
-    q_contentNotApplicable 'Why doesn\'t a licence apply to the content of the data?',
+    q_contentNotApplicable 'Γιατί δεν ισχύει κάποια άδεια για το περιεχόμενο αυτών των δεδομένων;',
       :discussion_topic => :gr_contentNotApplicable,
       :display_on_certificate => true,
-      :text_as_statement => 'The content in this data is not licensed because',
+      :text_as_statement => 'Το περιεχόμενο σε αυτά τα δεδομένα, δεν έχει την άδεια, επειδή',
       :pick => :one,
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
-    a_norights 'there is no copyright in the content of this data',
-      :text_as_statement => 'there is no copyright',
-      :help_text => 'Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that\'s within the data. There\'s no copyright if the content only contains facts.'
-    a_expired 'copyright has expired',
-      :text_as_statement => 'copyright has expired',
-      :help_text => 'Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.'
-    a_waived 'copyright has been waived',
+    a_norights 'δεν υπάρχουν πνευματικά δικαιωμάτα στο περιεχόμενο αυτών των δεδομένων',
+      :text_as_statement => 'δεν υπάρχουν πνευματικά δικαιωμάτα',
+      :help_text => 'Δικαιώματα πνευματικής ιδιοκτησίας ισχύουν μόνο για το περιεχόμενο αν αναλώθηκε πνευματική προσπάθεια δημιουργώντας αυτό, για παράδειγμα, γράφοντας το κείμενο που είναι μέσα στα δεδομένα. Δεν υπάρχουν πνευματικά δικαιώματα, αν το περιεχόμενο περιέχει μόνο τα γεγονότα.'
+    a_expired 'τα πνευματικά δικαιώματα έχουν λήξει',
+      :text_as_statement => 'τα πνευματικά δικαιώματα έχουν λήξει',
+      :help_text => 'Τα πνευματικά δικαιώματα διαρκούν για ένα συγκεκριμένο χρονικό διάστημα, με βάση είτε τον αριθμό των ετών μτά τον θάνατο του δημιουργού είτε της δημοσίευσής του. Θα πρέπει να ελέγξετε για το πότε το περιεχόμενο είχε δημιουργηθεί ή δημοσιευθεί επειδή εάν αυτό είχε συμβεί πριν πολύ καιρό τότε μπορεί τα πνευματικά δικαιώματα να έχουν λήξει.'
+    a_waived 'τα πνευματικά δικαιώματα έχουν αρθεί',
       :text_as_statement => '',
-      :help_text => 'This means no one owns copyright and anyone can do whatever they want with this data.'
+      :help_text => 'Αυτό σημαίνει ότι κανείς δεν κατέχει πνευματικά δικαιώματα και ο καθένας μπορεί να κάνει ό, τι θέλει με αυτά τα δεδομένα.'
 
-    q_contentWaiver 'Which waiver do you use to waive copyright?',
+    q_contentWaiver 'Ποια παραίτηση χρησιμοποιείτε για την άρση πνευματικών δικαιωμάτων;',
       :discussion_topic => :gr_contentWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Copyright has been waived with',
-      :help_text => 'You need a statement to show people you\'ve done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.',
+      :text_as_statement => 'Τα πνευματικά δικαιώματα έχουν αρθεί με',
+      :help_text => 'Χρειάζεται μια δήλωση για να δείξετε στους άλλους ότι το έχετε κάνει αυτό, ούτως ώστε να καταλάβουν ότι μπορούν να κάνουν ότι θέλουν με αυτά τα δεδομένα. Πρότυπα παραιτήσεων υπάρχουν ήδη όπως το CCZero αλλά μπορείτε να συντάξετε και το δικό σας με τη βοήθεια νομικών συμβουλών.',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
@@ -548,60 +551,60 @@ survey 'GR',
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     condition_C :q_contentNotApplicable, '==', :a_waived
-    a_cc0 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
-    a_other 'Other...',
-      :text_as_statement => 'Other...'
+    a_cc0 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)',
+      :text_as_statement => 'Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)'
+    a_other 'Άλλο',
+      :text_as_statement => 'Άλλο'
 
-    q_contentOtherWaiver 'Where is the waiver for the copyright?',
+    q_contentOtherWaiver 'Που είναι η άρση των πνευματικών δικαιωμάτων;',
       :discussion_topic => :gr_contentOtherWaiver,
       :display_on_certificate => true,
-      :text_as_statement => 'Copyright has been waived with',
-      :help_text => 'Give a URL to your own publicly available waiver so people can check that it does waive your copyright.',
+      :text_as_statement => 'Τα πνευματικά δικαιώματα έχουν αρθεί με',
+      :help_text => 'Δώστε ένα σύνδεσμο URL της δικής σας δημόσια διαθέσιμης παραίτησης, ώστε οποιοσδήποτε να μπορεί να ελέγξει ότι όντως παραιτείστε από τα πνευματικά δικαιώματα.',
       :required => :required
     dependency :rule => 'A and B and C and D'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_na
     condition_C :q_contentNotApplicable, '==', :a_waived
     condition_D :q_contentWaiver, '==', :a_other
-    a_1 'Waiver URL',
+    a_1 'Σύνδεσμος(URL) Παραίτησης',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Waiver URL'
+      :placeholder => 'Σύνδεσμος(URL) Παραίτησης'
 
-    q_otherContentLicenceName 'What\'s the name of the licence?',
+    q_otherContentLicenceName 'Ποιό είναι το όνομα της άδειας;',
       :discussion_topic => :gr_otherContentLicenceName,
       :display_on_certificate => true,
-      :text_as_statement => 'The content is available under',
-      :help_text => 'If you use a different licence, we need its name so people can see it on your Open Data Certificate.',
+      :text_as_statement => 'Το περιεχόμενο είναι διαθέσιμο υπό',
+      :help_text => 'Εάν χρησιμοποιείτε μια διαφορετική άδεια, χρειαζόμαστε το όνομα της έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_1 'Licence Name',
+    a_1 'Όνομα Άδειας',
       :string,
       :required => :required,
-      :placeholder => 'Licence Name'
+      :placeholder => 'Όνομα Άδειας'
 
-    q_otherContentLicenceURL 'Where is the licence?',
+    q_otherContentLicenceURL 'Που είναι η άδεια;',
       :discussion_topic => :gr_otherContentLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The content licence is at',
-      :help_text => 'Give a URL to the licence, so people can see it on your Open Data Certificate and check that it\'s publicly available.',
+      :text_as_statement => 'Το περιεχόμενο της άδειας είναι στο',
+      :help_text => 'Δώστε μια διεύθυνση(URL) για την άδεια, έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων και να ελέγξει ότι έιναι δημόσια διαθέσιμο.',
       :required => :required
     dependency :rule => 'A and B'
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
-    a_1 'Licence URL',
+    a_1 'Σύνδεσμος(URL) Άδειας',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Licence URL'
+      :placeholder => 'Σύνδεσμος(URL) Άδειας'
 
-    q_otherContentLicenceOpen 'Is the licence an open licence?',
+    q_otherContentLicenceOpen 'Είναι η άδεια μια ανοικτή άδεια;',
       :discussion_topic => :gr_otherContentLicenceOpen,
-      :help_text => 'If you aren\'t sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn\'t in their list, it\'s either not open or hasn\'t been assessed yet.',
+      :help_text => 'Αν δεν είστε σίγουροι για το τι είναι μια ανοιχτή άδεια τότε διαβάστε στο <a href="http//opendefinition.org/">Open Knowledge Definition</a> definition. Στη συνέχεια, επιλέξτε την άδεια σας από την <a href="http//licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. Εάν η άδεια δεν είναι στη λίστα τους, τότε είτε δεν είναι ανοιχτή, είτε δεν έχει αξιολογηθεί ακόμα.',
       :help_text_more_url => 'http://opendefinition.org/',
       :pick => :one,
       :required => :required
@@ -612,7 +615,7 @@ survey 'GR',
     a_true 'yes',
       :requirement => ['basic_8']
 
-    label_basic_8 'You must <strong>publish open data under an open licence</strong> so that people can use it.',
+    label_basic_8 'Θα πρέπει να <strong>δημοσιεύετε ανοιχτά δεδομένα με ανοιχτή άδεια </strong>έτσι ώστε άλλοι να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_8'
     dependency :rule => 'A and B and C'
@@ -620,165 +623,165 @@ survey 'GR',
     condition_B :q_contentLicence, '==', :a_other
     condition_C :q_otherContentLicenceOpen, '==', :a_false
 
-    q_contentRightsURL 'Where are the rights and licensing of the content explained?',
+    q_contentRightsURL 'Που εξηγούνται τα δικαιώματα και η αδειοδότηση του περιεχομένου;',
       :discussion_topic => :gr_contentRightsURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights and licensing of the content are explained at',
-      :help_text => 'Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.',
+      :text_as_statement => 'Τα δικαιώματα και η αδειοδότηση του περιεχομένου εξηγούνται στο',
+      :help_text => 'Δώστε μια διεύθυνση URL σελίδας όπου περιγράφετε το πως κάποιος μπορεί να βρει τα δικαιώματα και τις άδειες ενός κομματιού από το περιεχόμενο των δεδομένων.',
       :required => :required
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_mixedrights
-    a_1 'Content Rights Description URL',
+    a_1 'Σύνδεσμος(URL) Περιγραφής Δικαιωμάτων Περιεχομένου (Content Rights Description)',
       :string,
       :input_type => :url,
       :required => :required,
-      :placeholder => 'Content Rights Description URL'
+      :placeholder => 'Σύνδεσμος(URL) Περιγραφής Δικαιωμάτων Περιεχομένου (Content Rights Description)'
 
-    q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
+    q_copyrightStatementMetadata 'Περιλαμβάνει η δήλωση των δικαιωμάτων σας αναγνώσιμες από την μηχανή εκδόσεις;',
       :discussion_topic => :gr_copyrightStatementMetadata,
       :display_on_certificate => true,
-      :text_as_statement => 'The rights statement includes data about',
-      :help_text => 'It\'s good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.',
+      :text_as_statement => 'Η δήλωση των δικαιωμάτων περιλαμβάνει δεδομένα σχετικά με',
+      :help_text => 'Είναι καλή πρακτική να ενσωματώσετε πληροφορίες σχετικά με τα δικαιώματα σε μορφές αναγνώσιμες απο την μηχανή, έτσι ώστε οι άλλοι να μπορούν αυτόματα να σας αποδώσουν πίσω τα δεδομένα όταν τα χρησιμοποιούν.',
       :help_text_more_url => 'https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
-    a_dataLicense 'data licence',
-      :text_as_statement => 'its data licence',
+    a_dataLicense 'άδεια δεδομένων',
+      :text_as_statement => 'η άδεια των δεδομένων του',
       :requirement => ['standard_4']
-    a_contentLicense 'content licence',
-      :text_as_statement => 'its content licence',
+    a_contentLicense 'άδεια περιεχομένου',
+      :text_as_statement => 'η άδεια του περιεχομένου του',
       :requirement => ['standard_5']
-    a_attribution 'attribution text',
-      :text_as_statement => 'what attribution text to use',
+    a_attribution 'απόδοση κειμένου',
+      :text_as_statement => 'ποια απόδοση κειμένου να χρησιμοποιηθεί',
       :requirement => ['standard_6']
-    a_attributionURL 'attribution URL',
-      :text_as_statement => 'what attribution link to give',
+    a_attributionURL 'Σύνδεσμος(URL) απόδοσης',
+      :text_as_statement => 'ποια σύνδεση απόδοσης να δωθεί',
       :requirement => ['standard_7']
-    a_copyrightNotice 'copyright notice or statement',
-      :text_as_statement => 'a copyright notice or statement',
+    a_copyrightNotice 'σημείωση πνευματικών δικαιωμάτων ή δήλωση',
+      :text_as_statement => 'μια σημείωση πνευματικών δικαιωμάτων ή δήλωση',
       :requirement => ['exemplar_1']
-    a_copyrightYear 'copyright year',
-      :text_as_statement => 'the copyright year',
+    a_copyrightYear 'έτος των πνευματικών δικαιωμάτων',
+      :text_as_statement => 'το έτος των πνευματικών δικαιωμάτων',
       :requirement => ['exemplar_2']
-    a_copyrightHolder 'copyright holder',
-      :text_as_statement => 'the copyright holder',
+    a_copyrightHolder 'κάτοχος των πνευματικών δικαιωμάτων',
+      :text_as_statement => 'ο κάτοχος των πνευματικών δικαιωμάτων',
       :requirement => ['exemplar_3']
-    a_databaseRightYear 'database right year',
-      :text_as_statement => 'the database right year',
+    a_databaseRightYear 'χρονολογία των δικαιωμάτων της βάσης δεδομένων',
+      :text_as_statement => 'η χρονολογία των δικαιωμάτων της βάσης δεδομένων',
       :requirement => ['exemplar_4']
-    a_databaseRightHolder 'database right holder',
-      :text_as_statement => 'the database right holder',
+    a_databaseRightHolder 'κάτοχος των δικαιωμάτων της βάσης δεδομένων',
+      :text_as_statement => 'ο κάτοχος των δικαιωμάτων της βάσης δεδομένων',
       :requirement => ['exemplar_5']
 
-    label_standard_4 'You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.',
+    label_standard_4 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την άδεια </strong> για αυτά τα δεδομένα,έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_dataLicense
 
-    label_standard_5 'You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.',
+    label_standard_5 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την άδεια για το περιεχόμενο</strong> για αυτά τα δεδομένα, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_5'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_contentLicense
 
-    label_standard_6 'You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.',
+    label_standard_6 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το κείμενο που θα χρησιμοποιηθεί όταν αναφέρεται στα δεδομένα</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_6'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_attribution
 
-    label_standard_7 'You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it.',
+    label_standard_7 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το σύνδεσμο(URL) της σύνδεσής του όταν παραθέτονται αυτά τα δεδομένα</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_7'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_attributionURL
 
-    label_exemplar_1 'You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.',
+    label_exemplar_1 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την σημείωση πνευματικών δικαιωμάτων ή δήλωση αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_1'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightNotice
 
-    label_exemplar_2 'You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it.',
+    label_exemplar_2 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το έτος των πνευματικών δικαιωμάτων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_2'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightYear
 
-    label_exemplar_3 'You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.',
+    label_exemplar_3 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τον κάτοχο των πνευματικών δικαιωμάτων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_3'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
 
-    label_exemplar_4 'You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it.',
+    label_exemplar_4 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τη χρονολογία των δικαιωμάτων της βάσης δεδομένων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_4'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightYear
 
-    label_exemplar_5 'You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it.',
+    label_exemplar_5 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τον κάτοχο των δικαιωμάτων της βάσης δεδομένων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
       :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_5'
     dependency :rule => 'A and B'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightHolder
 
-    label_group_4 'Privacy',
-      :help_text => 'how you protect people\'s privacy',
+    label_group_4 'Ιδιωτικότητα και προστασία δεδομένων προσωπικού χαρακτήρα',
+      :help_text => 'Πώς να προστατέψετε την ιδιωτικότητα των ανθρώπων',
       :customer_renderer => '/partials/fieldset'
 
-    q_dataPersonal 'Can individuals be identified from this data?',
+    q_dataPersonal 'Μπορούν να αναγνωριστούν άτομα από αυτά τα δεδομένα;',
       :discussion_topic => :gr_dataPersonal,
       :display_on_certificate => true,
-      :text_as_statement => 'This data contains',
+      :text_as_statement => 'Αυτά τα δεδομένα περιέχουν',
       :pick => :one,
       :required => :pilot
-    a_not_personal 'no, the data is not about people or their activities',
-      :text_as_statement => 'no data about individuals',
-      :help_text => 'Remember that individuals can still be identified even if data isn\'t directly about them. For example, road traffic flow data combined with an individual\'s commuting patterns could reveal information about that person.'
-    a_summarised 'no, the data has been anonymised by aggregating individuals into groups, so they can\'t be distinguished from other people in the group',
-      :text_as_statement => 'aggregated data',
-      :help_text => 'Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.'
-    a_individual 'yes, there is a risk that individuals be identified, for example by third parties with access to extra information',
-      :text_as_statement => 'information that could identify individuals',
-      :help_text => 'Some data is legitimately about individuals like civil service pay or public expenses for example.'
+    a_not_personal 'Όχι, τα δεδομένα δεν είναι για ανθρώπους ή τις δραστηριότητές τους',
+      :text_as_statement => 'δεν υπάρχουν στοιχεία για τα άτομα',
+      :help_text => 'Να θυμάστε ότι τα άτομα μπορούν ακόμα να προσδιορίζονται ακόμη και αν τα δεδομένα δεν είναι άμεσα γι \'αυτούς. Για παράδειγμα, τα δεδομένα ροής της οδικής κυκλοφορίας σε συνδυασμό με τα σχέδια μετακίνησης ενός ατόμου θα μπορούσαν να αποκαλύψουν πληροφορίες σχετικά με το εν λόγω πρόσωπο.'
+    a_summarised 'όχι, τα δεδομένα έχουν καταστεί ανώνυμα με τη συγκέντρωση των ατόμων σε ομάδες, έτσι δεν μπορούν να διακριθούν από άλλα άτομα στην ομάδα',
+      :text_as_statement => 'συσσωρευμένα δεδομένα',
+      :help_text => 'Συστήματα στατιστικού ελέγχου διασφαλίζουν ότι δεν είναι δυνατός ο προσδιορισμός του προσώπου με τη χρήση συσσωρευμένων δεδομένων.'
+    a_individual 'ναι, υπάρχει ο κίνδυνος ταυτοποίησης προσώπων, για παράδειγμα, από τρίτους που έχουν πρόσβαση σε επιπλέον πληροφορίες',
+      :text_as_statement => 'πληροφορίες που θα μπορούσαν να προσδιορίσουν άτομα',
+      :help_text => 'Κάποια στοιχεία είναι νόμιμα για άτομα όπως αμοιβές δημοσίων υπαλλήλων ή δημόσιων δαπανών για παράδειγμα.'
 
-    q_statisticalAnonAudited 'Has your anonymisation process been independently audited?',
+    q_statisticalAnonAudited 'Έχει η διαδικασία της ανωνυμοποίησης σας υποβληθεί σε ανεξάρτητο έλεγχο;',
       :discussion_topic => :gr_statisticalAnonAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation process has been',
+      :text_as_statement => 'Η διαδικασία της ανωνυμοποίησης έχει',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataPersonal, '==', :a_summarised
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'ελέγχονται ανεξάρτητα',
       :requirement => ['standard_8']
 
-    label_standard_8 'You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.',
+    label_standard_8 'Θα πρέπει <strong>η διαδικασία της ανωνυμοποίησης σας ελέγχονται ανεξάρτητα </strong> για να εξασφαλίσει ότι μειώνει τον κίνδυνο των ατόμων που ήδη ταυτοποιηθει.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_8'
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_summarised
     condition_B :q_statisticalAnonAudited, '==', :a_false
 
-    q_appliedAnon 'Have you attempted to reduce or remove the possibility of individuals being identified?',
+    q_appliedAnon 'Έχετε προσπαθήσει να μειώσετε ή να καταργήσετε τη δυνατότητα των ατόμων να εντοπιστούν;',
       :discussion_topic => :gr_appliedAnon,
       :display_on_certificate => true,
-      :text_as_statement => 'This data about individuals has been',
-      :help_text => 'Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.',
+      :text_as_statement => 'Αυτά τα δεδομένα σχετικά με άτομα ήταν',
+      :help_text => 'Η ανωνυμοποίηση μειώνει τον κίνδυνο προσδιορισμού ατόμων στα δεδομένα που δημοσιεύετε. Η καλύτερη τεχνική για να χρησιμοποιήσετε εξαρτάται από το είδος των δεδομένων που έχετε.',
       :pick => :one,
       :required => :pilot
     dependency :rule => 'A'
@@ -786,13 +789,13 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'anonymised'
+      :text_as_statement => 'ανωνυμοποίηση'
 
-    q_lawfulDisclosure 'Are you required or permitted by law to publish this data about individuals?',
+    q_lawfulDisclosure 'Απαιτείται ή επιτρέπεται από το νόμο να δημοσιεύσετε αυτά τα δεδομένα σχετικά με άτομα;',
       :discussion_topic => :gr_lawfulDisclosure,
       :display_on_certificate => true,
-      :text_as_statement => 'By law, this data about individuals',
-      :help_text => 'The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.',
+      :text_as_statement => 'Σύμφωνα με το νόμο, αυτά τα στοιχεία για άτομα',
+      :help_text => 'Θα πρέπει να <strong>δημοσιεύετε προσωπικά δεδομένα χωρίς ανωνυμοποίηση αν σας απαιτείται ή επιτρέπεται να το πράξετε από το νόμο </strong>.',
       :pick => :one
     dependency :rule => 'A and B'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -800,10 +803,12 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'can be published',
+      :text_as_statement => 'πρέπει να δημοσιεύονται',
       :requirement => ['pilot_5']
 
-    label_pilot_5 'You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.',
+    label_pilot_5 '
+                     <strong></strong>
+                  ',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_5'
     dependency :rule => 'A and B and C'
@@ -811,21 +816,21 @@ survey 'GR',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_false
 
-    q_lawfulDisclosureURL 'Where do you document your right to publish data about individuals?',
+    q_lawfulDisclosureURL 'Πού τεκμηριώνετε το δικαίωμά σας να δημοσιεύετε στοιχεία για άτομα;',
       :discussion_topic => :gr_lawfulDisclosureURL,
       :display_on_certificate => true,
-      :text_as_statement => 'The right to publish this data about individuals is documented at'
+      :text_as_statement => 'Το δικαίωμα να δημοσιεύσει δεδομένα σχετικά με άτομα είναι ήδη καταχωρημένο στην'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
-    a_1 'Disclosure Rationale URL',
+    a_1 'Σύνδεσμος(URL) Disclosure Rationale',
       :string,
       :input_type => :url,
-      :placeholder => 'Disclosure Rationale URL',
+      :placeholder => 'Σύνδεσμος(URL) Disclosure Rationale',
       :requirement => ['standard_9']
 
-    label_standard_9 'You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.',
+    label_standard_9 'Θα πρέπει να <strong>τεκμηριώνετε το δικαίωμά σας να δημοσιεύετε στοιχεία για άτομα </strong> ως προς αυτούς που χρησιμοποιούν τα δεδομένα σας και για εκείνους που πλήττονται από τη κοινολόγηση.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_9'
     dependency :rule => 'A and B and C and D'
@@ -834,23 +839,23 @@ survey 'GR',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_lawfulDisclosureURL, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_riskAssessmentExists 'Have you assessed the risks of disclosing personal data?',
+    q_riskAssessmentExists 'Έχετε εκτιμήσει τους κινδύνους αποκάλυψης προσωπικών δεδομένων;',
       :discussion_topic => :gr_riskAssessmentExists,
       :display_on_certificate => true,
-      :text_as_statement => 'The curator has',
-      :help_text => 'A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information.',
+      :text_as_statement => 'Ο επιμελητής έχει',
+      :help_text => 'Μια εκτίμηση κινδύνου μετρά τους κινδύνους για την προστασία της ιδιωτικότητας των ατόμων στα δεδομένα σας, καθώς και τη χρήση και την αποκάλυψη των εν λόγω πληροφοριών.',
       :pick => :one
     dependency :rule => 'A and (B or C)'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no',
-      :text_as_statement => 'not carried out a privacy risk assessment'
+      :text_as_statement => 'δεν πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας'
     a_true 'yes',
-      :text_as_statement => 'carried out a privacy risk assessment',
+      :text_as_statement => 'πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας',
       :requirement => ['pilot_6']
 
-    label_pilot_6 'You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals.',
+    label_pilot_6 'Θα πρέπει να <strong>εκτιμήσετε τους κινδύνους αποκάλυψης προσωπικών δεδομένων </strong> αν δημοσιεύετε δεδομένα σχετικά με άτομα.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_6'
     dependency :rule => 'A and (B or C) and D'
@@ -859,23 +864,23 @@ survey 'GR',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_false
 
-    q_riskAssessmentUrl 'Where is your risk assessment published?',
+    q_riskAssessmentUrl 'Που δημοσιεύθηκε η εκτίμηση κινδύνου σας',
       :discussion_topic => :gr_riskAssessmentUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'The risk assessment is published at',
-      :help_text => 'Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.'
+      :text_as_statement => 'Η εκτίμηση κινδύνου δημοσιεύεται στο',
+      :help_text => 'Δώστε μια διεύθυνση URL όπου κάποιος θα μπορεί να ελέγξει τον τρόπο που έχετε εκτιμήσει τους κινδύνους της ιδιωτικότητας των ατόμων. Αυτό μπορεί να αναθεωρηθεί ή περιληφθεί, εάν περιέχει ευαίσθητες πληροφορίες.'
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    a_1 'Risk Assessment URL',
+    a_1 'Σύνδεσμος(URL) Εκτίμησης Κινδύνου (Risk Assessment)',
       :string,
       :input_type => :url,
-      :placeholder => 'Risk Assessment URL',
+      :placeholder => 'Σύνδεσμος(URL) Εκτίμησης Κινδύνου (Risk Assessment)',
       :requirement => ['standard_10']
 
-    label_standard_10 'You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.',
+    label_standard_10 'Θα πρέπει να <strong>δημοσιεύσετε την εκτίμηση κινδύνου της ιδιωτικότητας </strong> έτσι ώστε οι άνθρωποι να μπορούν να καταλάβουν πώς έχετε εκτιμήσε τους κινδύνους αποκάλυψης των δεδομένων.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_10'
     dependency :rule => 'A and (B or C) and D and E'
@@ -885,11 +890,11 @@ survey 'GR',
     condition_D :q_riskAssessmentExists, '==', :a_true
     condition_E :q_riskAssessmentUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    q_riskAssessmentAudited 'Has your risk assessment been independently audited?',
+    q_riskAssessmentAudited 'Έχει η αξιολόγηση κινδύνου σας υποβληθεί σε ανεξάρτητο έλεγχο;',
       :discussion_topic => :gr_riskAssessmentAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The risk assessment has been',
-      :help_text => 'It\'s good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
+      :text_as_statement => 'Η εκτίμηση κινδύνου έχει',
+      :help_text => 'Είναι καλή πρακτική να ελέγχετε ότι η εκτίμηση του κινδύνου σας έγινε σωστά. Ανεξάρτητοι έλεγχοι από ειδικούς ή τρίτους τείνουν να είναι πιο αυστηροί και αμερόληπτοι.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -900,10 +905,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'ανεξάρτητα ελεγμένο',
       :requirement => ['standard_11']
 
-    label_standard_11 'You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly.',
+    label_standard_11 'Θα πρέπει να <strong>έχει η εκτίμηση του κινδύνου σας ελέγθεί ανεξάρτητα </strong> για να βεβαιωθείτε ότι έχει εκτελεστεί σωστά.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_11'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -914,33 +919,35 @@ survey 'GR',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_F :q_riskAssessmentAudited, '==', :a_false
 
-    q_individualConsentURL 'Where is the privacy notice for individuals affected by your data?',
+    q_individualConsentURL 'Πού είναι το σημείωμα Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα για τα άτομα που πλήττονται από τα δεδομένα σας;',
       :discussion_topic => :gr_individualConsentURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Individuals affected by this data have this privacy notice',
-      :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation.'
-    dependency :rule => 'A and (B or C) and D'
-    condition_A :q_dataPersonal, '==', :a_individual
-    condition_B :q_appliedAnon, '==', :a_true
-    condition_C :q_lawfulDisclosure, '==', :a_true
-    condition_D :q_riskAssessmentExists, '==', :a_true
-    a_1 'Privacy Notice URL',
-      :string,
-      :input_type => :url,
-      :placeholder => 'Privacy Notice URL',
-      :requirement => ['pilot_7']
-
-    label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation.',
-      :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_7'
+      :text_as_statement => 'Τα άτομα που επηρεάζονται από αυτά τα δεδομένα έχουν αυτό το σημείωμα Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα',
+      :help_text => 'Όταν συλλέγετε δεδομένα σχετικά με άτομα πρέπει να τους πείτε πώς θα χρησιμοποιηθούν αυτά τα δεδομένα. Οι άνθρωποι που χρησιμοποιούν τα δεδομένα σας, το χρειάζονται αυτό για να βεβαιωθούν ότι συμμορφώνονται με το νόμο περί προστασίας δεδομένων (Data Protection Act).'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    a_1 'Σύνδεσμος(URL) Σημειώματος Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα',
+      :string,
+      :input_type => :url,
+      :placeholder => 'Σύνδεσμος(URL) Σημειώματος Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα',
+      :requirement => ['pilot_7']
 
-    q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
+    label_pilot_7 'Θα πρέπει να <strong>πείτε στον κόσμο για ποιούς σκοπούς τα άτομα στα δεδομένα σας έδωσαν τη συγκατάθεσή τους σε εσάς να χρησιμοποιήσετε τα στοιχεία τους </strong>. Έτσι ώστε να χρησιμοποιούνται τα δεδομένα σας για τους ίδιους σκοπούς και να συμμορφώνονται με το νόμο περί προστασίας δεδομένων (Data Protection Act).',
+      :custom_renderer => '/partials/requirement_pilot',
+      :requirement => 'pilot_7'
+    dependency :rule => 'A and (B or C) and D and E and F'
+    condition_A :q_dataPersonal, '==', :a_individual
+    condition_B :q_appliedAnon, '==', :a_true
+    condition_C :q_lawfulDisclosure, '==', :a_true
+    condition_D :q_riskAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+
+    q_dpStaff 'Υπάρχει κάποιος στον οργανισμό σας ο οποίος είναι υπεύθυνος για την προστασία των δεδομένων;',
       :discussion_topic => :gr_dpStaff,
       :pick => :one,
       :required => :pilot
@@ -952,10 +959,10 @@ survey 'GR',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted 'Have you involved them in the risk assessment process?',
+    q_dbStaffConsulted 'Τους έχετε εμπλέξει στη διαδικασία Εκτίμησης των Επιπτώσεων Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (Privacy Impact Assessment process);',
       :discussion_topic => :gr_dbStaffConsulted,
       :display_on_certificate => true,
-      :text_as_statement => 'The individual responsible for data protection',
+      :text_as_statement => 'Το άτομο που είναι υπεύθυνο για την προστασία των δεδομένων',
       :pick => :one
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -966,10 +973,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'has been consulted',
+      :text_as_statement => 'διαβουλεύθηκε',
       :requirement => ['pilot_8']
 
-    label_pilot_8 'You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data.',
+    label_pilot_8 'Θα πρέπει να <strong>περιλάβετε το πρόσωπο που είναι υπεύθυνο για την προστασία των δεδομένων </strong> στον οργανισμό σας πριν από τη δημοσίευση αυτών των δεδομένων.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_8'
     dependency :rule => 'A and (B or C) and D and E and F'
@@ -980,11 +987,11 @@ survey 'GR',
     condition_E :q_dpStaff, '==', :a_true
     condition_F :q_dbStaffConsulted, '==', :a_false
 
-    q_anonymisationAudited 'Has your anonymisation approach been independently audited?',
+    q_anonymisationAudited 'Έχει η προσέγγιση ανωνυμοποίησής σας υποβληθεί σε ανεξάρτητο έλεγχο;',
       :discussion_topic => :gr_anonymisationAudited,
       :display_on_certificate => true,
-      :text_as_statement => 'The anonymisation of the data has been',
-      :help_text => 'It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.',
+      :text_as_statement => 'Η ανωνυμοποίηση των δεδομένων έχει',
+      :help_text => 'Είναι καλή πρακτική να βεβαιωθείτε ότι η διαδικασία αφαίρεσης προσωπικά αναγνωρίσιμων δεδομένων λειτουργεί σωστά. Ανεξάρτητοι έλεγχοι από ειδικούς ή τρίτους τείνουν να είναι πιο αυστηροί και αμερόληπτοι.',
       :pick => :one
     dependency :rule => 'A and (B or C) and D'
     condition_A :q_dataPersonal, '==', :a_individual
@@ -994,10 +1001,10 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'independently audited',
+      :text_as_statement => 'ελέγχονται ανεξάρτητα',
       :requirement => ['standard_12']
 
-    label_standard_12 'You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data.',
+    label_standard_12 'Θα πρέπει <strong>η διαδικασία ανωνυμοποίησής σας να ελέγχεται ανεξάρτητα </strong> από έναν εμπειρογνώμονα για να εξασφαλιστεί ότι είναι κατάλληλη για τα δεδομένα σας.',
       :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_12'
     dependency :rule => 'A and (B or C) and D and E'

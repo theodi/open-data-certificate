@@ -1,12 +1,15 @@
 title: "GR"
 full_title: "Greece"
-description: "<p><strong>This has been generated based on a default for EU countries and needs to be localised for Greece. Please help us! Contact <a href=\"mailto:certificate@theodi.org\">certificate@theodi.org</a></strong></p><p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>"
+description: "<p>Αυτό το ερωτηματολόγιο αυτο-αξιολόγησης δημιουργεί ένα πιστοποιητικό ανοιχτών δεδομένων και ένα σήμα που μπορείτε να δημοσιεύσετε έτσι ώστε να ενημερωθούν όλοι σχετικά με τα ανοικτά δεδομένα. Επίσης, οι απαντήσεις σας θα χρησιμοποιηθούν για να μάθουμε το πώς οι οργανισμοί δημοσιεύουν ανοιχτά δεδομένα.</p><p>Απατώντας σε αυτά τα ερωτήματα θα φανούν οι προσπάθειές συμμόρφωσης σας με την σχετική νομοθεσία. Θα πρέπει επίσης να ελέγθεί σχετικά και με άλλους νόμους και πολιτικές που εφαρμόζονται στον τομέα σας.</p><p>
+         <strong>Δεν χρειάζεται να απαντήσετε σε όλες τις ερωτήσεις για να πάρετε το πιστοποιητικό.</strong> Απλά απαντήστε αυτές που μπορείτε.</p><p>
+         <strong></strong>
+      </p>"
 survey_sections:
   general:
     title: "General Information"
   legal:
-    title: "Legal Information"
-    help_text: "Rights, licensing and privacy"
+    title: "Νομικές Πληροφορίες"
+    help_text: "Δικαιώματα, χορήγηση αδειών και ιδιωτικότητα"
   practical:
     title: "Practical Information"
     help_text: "Findability, accuracy, quality and guarantees"
@@ -60,129 +63,129 @@ questions:
       service:
         text: "a service or API for accessing open data"
         help_text: "This is a live web service that exposes your data to programmers through an interface they can query."
-# Legal Information
+# Νομικές Πληροφορίες
   publisherRights:
-    text: "Do you have the rights to publish this data as open data?"
-    help_text: "If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it."
+    text: "Έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά;"
+    help_text: "Αν ο οργανισμός σας δεν είχε αρχικά δημιουργήσει ή συγκεντρώσει αυτά τα δεδομένα τότε μπορεί να μην έχετε το δικαίωμα να τα δημοσιεύσετε. Αν δεν είστε σίγουροι, επικοινωνήστε με τον κάτοχο των δεδομένων, επειδή θα χρειαστείτε την άδειά του."
     answers:
       yes:
-        text: "yes, you have the rights to publish this data as open data"
+        text: "ναι, έχετε το δικαίωμα να τα δημοσιεύσετε ως ανοικτά"
       no:
-        text: "no, you don't have the rights to publish this data as open data"
+        text: "Όχι, δεν έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά"
       unsure:
-        text: "you're not sure if you have the rights to publish this data as open data"
+        text: "δεν είστε βέβαιος για το αν έχετε το δικαίωμα να δημοσιεύσετε αυτά τα δεδομένα ως ανοικτά"
       complicated:
-        text: "the rights in this data are complicated or unclear"
+        text: "τα δικαιώματα αυτών των δεδομένων είναι περίπλοκα ή ασαφή"
   rightsRiskAssessment:
-    text: "Where do you detail the risks people might encounter if they use this data?"
-    text_as_statement: "Risks in using this data are described at"
-    help_text: "It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data."
+    text: "Ποιοι είναι λεπτομερώς οι κίνδυνοι που κάποιος μπορεί να αντιμετωπίσει αν χρησιμοποιήσει τα δεδομένα αυτά;"
+    text_as_statement: "Οι κίνδυνοι για τη χρήση αυτών των δεδομένων που περιγράφονται στο"
+    help_text: "Μπορεί να είναι επικίνδυνο για κάποιον να χρησιμοποιήσει δεδομένα χωρίς να έχει σαφή δικαιώματα. Για παράδειγμα, τέτοια δεδομένα θα μπορούσαν να μην ληφθούν υπ'όψιν σε ένα δικαστήριο. Να δίνετε μια διεύθυνση συνδέσμου(URL) σελίδας που να περιγράφει τον κίνδυνο από την χρήση αυτών των δεδομένων."
     answers:
       a_1:
-        text: "Risk Documentation URL"
+        text: "Σύνδεσμος(URL) Τεκμηρίωσης Κινδύνου"
   publisherOrigin:
-    text: "Was <em>all</em> this data originally created or gathered by you?"
-    text_as_statement: "This data was"
-    help_text: "If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it."
+    text: "Ήταν <em>όλα</em> αυτά τα δεδομένα αρχικώς δημιουργημένα ή συγκεντρωμένα από εσάς;"
+    text_as_statement: "Αυτά τα δεδομένα ήταν"
+    help_text: "Εάν οποιοδήποτε τμήμα αυτών των δεδομένων που δεν προήλθε από τον οργανισμό σας αλλά από άλλα άτομα ή οργανισμούς, τότε θα πρέπει να δοθούν επεπλέον πληροφορίες σχετικά με τα δικαιώματά σας για δημοσίευση."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "originally created or generated by its curator"
+        text_as_statement: "αρχικά δημιουργήθηκε ή παράχθηκε από τον επιμελητή"
   thirdPartyOrigin:
-    text: "Was some of this data extracted or calculated from other data?"
-    help_text: "An extract or smaller part of someone else's data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it."
+    text: "Ήταν κάποια από αυτά τα δεδομένα παραγμένα ή υπολογισμένα από άλλα δεδομένα;"
+    help_text: "Ένα απόσπασμα ή μικρότερο μέρος των δεδομένων κάποιου άλλου μπορεί να επηρεάσει τα δικαιώματα για την χρήση του. Ενδέχεται επίσης να υπάρξουν νομικά ζητήματα, αν τα αναλύσετε και βγάλετε νέα αποτελέσματα."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   thirdPartyOpen:
-    text: "Are <em>all</em> sources of this data already published as open data?"
-    text_as_statement: "This data is created from"
-    help_text: "You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you'll need legal advice before you can publish it."
+    text: "Έχουν <em>όλες</em> οι πηγές αυτών των δεδομένων ήδη δημοδιευθεί ως ανοικτά δεδομένα;"
+    text_as_statement: "Αυτά τα δεδομένα δημιουργήθηκαν από"
+    help_text: "Επιτρέπεται να αναδημοσιεύσετε δεδομένα κάποιου άλλου τα οποία είναι ανοικτά ή εάν τα δικαιώματά τους έχουν λήξει ή αρθεί. Εάν δεν ισχύει αυτό για κάποιο μέρος των δεδομένων τότε θα χρειαστείτε νομικές συμβουλές πριν μπορέσετε να τα δημοσιεύσετε."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "open data sources"
+        text_as_statement: "πηγές ανοικτών δεδομένων"
   crowdsourced:
-    text: "Was some of this data crowdsourced?"
-    text_as_statement: "Some of this data is"
-    help_text: "If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data."
+    text: "Ήταν κάποια από αυτά τα δεδομένα από πληθοπορισμό(crowdsourcing);"
+    text_as_statement: "Μερικά από αυτά τα δεδομένα είναι"
+    help_text: "Εάν τα δεδομένα περιλαμβάνουν στοιχεία προερχόμενα απο ανθρώπους εκτός του οργανισμού σας, θα πρέπει να έχετε την άδειά τους για να τα δημοσιεύσετε ως ανοικτά."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "crowdsourced"
+        text_as_statement: "από πληθοπορισμό"
   crowdsourcedContent:
-    text: "Did contributors to this data use their judgement?"
-    help_text: "If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it."
+    text: "Μήπως οι συνεισφέροντες σε αυτά τα δεδομένα χρησιμοποίησαν την κρίση τους;"
+    help_text: "Αν κάποιοι χρησιμοποίησαν την δημιουργικότητα ή την κρίση τους για να συνεισφέρουν δεδομένα τότε έχουν τα δικαιώματα του έργου τους. Για παράδειγμα, γράφοντας μια περιγραφή ή αποφασίζοντας για το αν θα συμπεριληφθούν ή όχι κάποια δεδομένα απαιτεί κρίση. Έτσι οι συνεισφέροντες πρέπει να μεταφέρουν ή να παραιτηθούν από τα δικαιώματά τους, ή να δώσουν την άδεια σε εσάς πριν μπορέσετε να το δημοσιεύσετε."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   claUrl:
-    text: "Where is the Contributor Licence Agreement (CLA)?"
-    text_as_statement: "The Contributor Licence Agreement is at"
-    help_text: "Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it."
+    text: "Που είναι η Άδεια Συνεισφέροντος(CLA);"
+    text_as_statement: "Η Άδεια Συνεισφέροντος(CLA) είναι"
+    help_text: "Δώστε ένα σύνδεσμο που να οδηγεί στο συμφωνητικού όπου φαίνεται πως οι συνεισφέροντες σας επιτρέπουν να επαναχρησιμοποιειτε τα δεδομένα τους. H CLA είτε θα μεταφέρει τα δικαιώματα σε εσάς, ή θα παραιτείται απο αυτά, είτε θα σας δίνει την άδεια δημοσίευσης τους."
     answers:
       a_1:
-        text: "Contributor Licence Agreement URL"
+        text: "Σύνδεσμος(URL) Άδεια Συνεισφέροντος(CLA)"
   cldsRecorded:
-    text: "Have all contributors agreed to the Contributor Licence Agreement (CLA)?"
-    help_text: "Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA."
+    text: "Έχουν όλοι οι συνεισφέροντες αποδεχθεί την Άδεια Συνεισφέροντος(CLA);"
+    help_text: "Ελέγξτε ότι όλοι οι συνεισφέροντες έχουν αποδεχθεί την CLA πριν επαναχρησιμοποιήσετε ή επαναδημοσιεύσετε την συνεισφορά τους. Θα πρέπει να κρατήσετε αρχείο με τους συνεισφέροντες και για το αν έχουν αποδεχθεί ή όχι την CLA."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   sourceDocumentationUrl:
-    text: "Where do you describe sources of this data?"
-    text_as_statement: "The sources of this data are described at"
-    help_text: "Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from."
+    text: "Που περιγράφονται οι πηγές των δεδομένων;"
+    text_as_statement: "Οι πηγές των εν λόγω δεδομένων περιγράφονται στο"
+    help_text: "Δώστε την διεύθυνση συνδέσμου(URL) όπου τεκμηριώνεται η προέλευση των δεδομένων και τα δικαιώματα που απορρέουν από αυτά για να τα δημοσιεύσετε. Αυτό βοηθά τους ανθρώπους να κατανοήσουν το από που έρχονται τα δεδομένα αυτά."
     answers:
       a_1:
-        text: "Data Sources Documentation URL"
+        text: "Σύνδεσμος(URL) Τεκμηρίωσης Πηγών Δεδομένων"
   sourceDocumentationMetadata:
-    text: "Is documentation about the sources of this data also in machine-readable format?"
-    text_as_statement: "The curator has published"
-    help_text: "Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication."
+    text: "Είναι η τεκμηρίωση σχετικά με τις πηγών δεδομένων, επίσης σε μορφή αναγνωρίσιμη από μηχανές;"
+    text_as_statement: "Ο επιμελητής έχει δημοσιεύσει"
+    help_text: "Οι πληροφορίες σχετικά με τις πηγές των δεδομένων θα πρέπει να είναι αναγνωρίσιμες απο τους ανθρώπους ώστε να μπορούν να τις καταλάβουν καθώς αλλά και σε μορφή που να περιλαμβάνει μεταδεδομένα ώστε να μπορούν οι υπολογιστές να τις επεξεργαστούν. Όταν όλοι κάνουν το ίδιο, βοηθά στο να βρίσκουμε πως τα ίδια ανοικτά δεδομένα χρησιμοποιούνται και αιτιολογούν την εν εξελίξει δημοσίευσή τους."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "machine-readable data about the sources of this data"
+        text_as_statement: "ανγνωρίσιμα από τις μηχανές δεδομένα σχετικά με τις πηγές αυτών των δεδομένων"
   copyrightURL:
-    text: "Where have you published the rights statement for this dataset?"
-    text_as_statement: "The rights statement is at"
-    help_text: "Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data."
+    text: "Που έχετε ανακοινώσει την δήλωση δικαιωμάτων για το σύνολο των δεδομένων αυτών;"
+    text_as_statement: "Η δήλωση δικαιωμάτων είναι στο"
+    help_text: "Δώστε την διεύθυνση συνδέσμου(URL) όπου περιγράφεται το δικαίωμα επαναχρησιμοποίησης αυτών των δεδομένων. Αυτό θα πρέπει να περιλαμβάνει μια αναφορά στην άδεια χρήσης της, τις απαιτήσεις απόδοσης, καθώς και μια δήλωση σχετικά με τα πνευματικά δικαιώματα. Μια δήλωση δικαιωμάτων βοηθά στο να γίνει κατανοητό τι μπορεί ή δεν μπορεί κάποιος να κάνει με τα αυτά τα δεδομένα."
     answers:
       a_1:
-        text: "Rights Statement URL"
+        text: "Σύνδεσμος(URL) Δήλωσης Δικαιωμάτων"
   dataLicence:
-    text: "Under which licence can people reuse this data?"
-    text_as_statement: "This data is available under"
-    help_text: "Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they've expired, or you've waived them, choose 'Not applicable'."
+    text: "Υπό ποιες άδειες μπορεί κάποιος να επαναχρησιμοποιήσει αυτά τα δεδομένα;"
+    text_as_statement: "Αυτά τα δεδομένα είναι διαθέσιμα υπό"
+    help_text: "Θυμηθείτε ότι όποιος αφιερώνει διανοητική προσπάθεια για τη δημιουργία περιεχομένου, παίρνει αυτόματα δικαιώματα πάνω του. Δημιουργικό περιεχόμενο περιλαμβάνει την οργάνωση και την επιλογή των στοιχείων εντός των δεδομένων, αλλά δεν περιλαμβάνει τα στοιχεία. Έτσι κάποιος θα χρειαστεί μια παραίτηση ή άδεια για αυτά, που να αποδεικνύει ότι μπορεί να τα χρησιμοποιήσει και να εξηγεί την νομιμότητα τους. Παραθέτουμε τις πιο συνηθισμένες άδειες εδώ; εάν δεν υπάρχει κανένα πνευματικό δικαίωμα σε δεδομένα, έχει λήξει ή έχετε παραιτηθεί από αυτά, επιλέξτε «Δεν ισχύει»."
     answers:
       cc_by:
-        text: "Creative Commons Attribution"
-        text_as_statement: "Creative Commons Attribution"
+        text: "Creative Commons Αναφορά"
+        text_as_statement: "Creative Commons Αναφορά"
       cc_by_sa:
-        text: "Creative Commons Attribution Share-Alike"
-        text_as_statement: "Creative Commons Attribution Share-Alike"
+        text: "Creative Commons Αναφορά - Παρόμοια διανομή"
+        text_as_statement: "Creative Commons Αναφορά - Παρόμοια διανομή"
       cc_zero:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
+        text: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
+        text_as_statement: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
       odc_by:
         text: "Open Data Commons Attribution License"
         text_as_statement: "Open Data Commons Attribution License"
@@ -190,333 +193,333 @@ questions:
         text: "Open Data Commons Open Database License (ODbL)"
         text_as_statement: "Open Data Commons Open Database License (ODbL)"
       odc_pddl:
-        text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
-        text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
+        text: "Open Data Commons Public Domain Dedication and License (PDDL)"
+        text_as_statement: "Open Data Commons Public Domain Dedication and License (PDDL)"
       na:
-        text: "Not applicable"
+        text: "δεν εφαρμόζεται"
         text_as_statement: ""
       other:
-        text: "Other..."
+        text: "Άλλο..."
         text_as_statement: ""
   dataNotApplicable:
-    text: "Why doesn't a licence apply to this data?"
-    text_as_statement: "This data is not licensed because"
+    text: "Γιατί δεν έχουν κάποια άδεια αυτά τα δεδομένα;"
+    text_as_statement: "Αυτά τα δεδομένα δεν έχουν άδεια επειδή"
     answers:
       norights:
-        text: "there are no copyright or database rights in this data"
-        help_text: "Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way."
-        text_as_statement: "there are no rights in it"
+        text: "δεν υπάρχει κανένα πνευματικό δικαίωμα σε αυτά τα δεδομένα"
+        help_text: "Δικαιώματα πνευματικής ιδιοκτησίας εφαρμόζονται στα δεδομένα μόνο εαν χρειάστηκε πνευματική προσπάθεια δημιουργώντας κάτι που βρίσκεται μέσα σε αυτά, για παράδειγμα, γράφοντας το κείμενο μέσα στα δεδομένα, ή αποφασίζοντας αν συγκεκριμένα δεδομένα θα συμπεριληφθούν. Δεν υπάρχουν πνευματικά δικαιώματα εάν τα δεδομένα περιέχουν μόνο δεδομένα που δεν χρειάστηκε κρίση για το αν θα συμπεριληφθούν ή όχι."
+        text_as_statement: "δεν υπάρχει κανένα πνευματικό δικαίωμα σε αυτά"
       expired:
-        text: "copyright and database rights have expired"
-        help_text: "Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired."
-        text_as_statement: "the rights have expired"
+        text: "τα πνευματικά δικαιώματα έχουν λήξει"
+        help_text: "Τα πνευματικά δικαιώματα διαρκούν για ένα συγκεκριμένο χρονικό διάστημα, με βάση είτε τον αριθμό των ετών μτά τον θάνατο του δημιουργού είτε της δημοσίευσής του. Θα πρέπει να ελέγξετε για το πότε το περιεχόμενο είχε δημιουργηθεί ή δημοσιευθεί επειδή εάν αυτό είχε συμβεί πριν πολύ καιρό τότε μπορεί τα πνευματικά δικαιώματα να έχουν λήξει."
+        text_as_statement: "τα πνευματικά δικαιώματα έχουν λήξει"
       waived:
-        text: "copyright and database rights have been waived"
-        help_text: "This means no one owns the rights and anyone can do whatever they want with this data."
+        text: "τα πνευματικά δικαιώματα έχουν αρθεί"
+        help_text: "Αυτό σημαίνει πως κανείς δεν κατέχει πνευματικά δικαιώματα και ο καθένας μπορεί να κάνει ότι θέλει με αυτά τα δεδομένα."
         text_as_statement: ""
   dataWaiver:
-    text: "Which waiver do you use to waive rights in the data?"
-    text_as_statement: "Rights in the data have been waived with"
-    help_text: "You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice."
+    text: "Ποια άρση χρησιμοποιείτε για να παραιτηθείτε απο τα πνευματικά δικαιώματα αυτών των δεδομένων;"
+    text_as_statement: "Τα δικαιώματα σε αυτά τα δεδομένα έχουν αρθεί με"
+    help_text: "Θα χρειαστεί να κάνετε μια δήλωση για να δείξετε ότι τα πνευματικά δικαιώματα έχουν αρθεί, έτσι ώστε άλλοι να γνωρίζουν ότι μπορούν να κάνουν ότι θέλουν με τα δεδομένα αυτά. Πρότυπα παραίτησης υπάρχουν ήδη ώς PDDL και CCZero αλλά μπορείτε να γράψετε και την δική σας με ωομικές συμβουλές."
     answers:
       pddl:
         text: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
         text_as_statement: "Open Data Commons Public Domain Dedication and Licence (PDDL)"
       cc0:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
+        text: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
+        text_as_statement: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
       other:
-        text: "Other..."
+        text: "Άλλο..."
         text_as_statement: ""
   dataOtherWaiver:
-    text: "Where is the waiver for the rights in the data?"
-    text_as_statement: "Rights in the data have been waived with"
-    help_text: "Give a URL to the publicly available waiver so people can check that it does waive the rights in the data."
+    text: "Πού είναι η παραίτηση των πνευματικών δικαιωμάτων στα δεδομένα;"
+    text_as_statement: "Τα δικαιώματα στα δεδομένα έχουν αρθεί με"
+    help_text: "Δώστε ένα σύνδεσμο(URL) της δημόσια διαθέσιμης παραίτησής σας, έτσι ώστε να μπορεί να ελεγχθεί η άρση των πνευματικών δικαιωμάτων στα δεδομένα."
     answers:
       a_1:
-        text: "Waiver URL"
+        text: "Σύνδεσμος(URL) Παραίτησης"
   otherDataLicenceName:
-    text: "What is the name of the licence?"
-    text_as_statement: "This data is available under"
-    help_text: "If you use a different licence, we need the name so people can see it on your Open Data Certificate."
+    text: "Ποιο είναι το όνομα της άδειας;"
+    text_as_statement: "Αυτά τα δεδομένα είναι διαθέσιμα υπό"
+    help_text: "Εάν χρησιμοποιείτε μια διαφορετική άδεια, χρειαζόμαστε το όνομα της έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων."
     answers:
       a_1:
-        text: "Other Licence Name"
+        text: "Άλλο Όνομα Άδειας"
   otherDataLicenceURL:
-    text: "Where is the licence?"
-    text_as_statement: "This licence is at"
-    help_text: "Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available."
+    text: "Πού είναι η άδεια;"
+    text_as_statement: "Η άδεια αυτή είναι σε"
+    help_text: "Δώστε μια διεύθυνση(URL) για την άδεια, έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων και να ελέγξει ότι έιναι δημόσια διαθέσιμο."
     answers:
       a_1:
-        text: "Other Licence URL"
+        text: "Σύνδεσμος(URL) Άλλης Άδειας"
   otherDataLicenceOpen:
-    text: "Is the licence an open licence?"
-    help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    text: "Είναι η άδεια μια ανοικτή άδεια;"
+    help_text: "Αν δεν είστε σίγουροι για το τι είναι μια ανοιχτή άδεια τότε διαβάστε στο <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list </a>. Εάν η άδεια δεν είναι στη λίστα τους, τότε είτε δεν είναι ανοιχτή, είτε δεν έχει αξιολογηθεί ακόμα."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   contentRights:
-    text: "Is there any copyright in the content of this data?"
-    text_as_statement: "There are"
+    text: "Υπάρχουν κάποια πνευματικά δικαιώματα στο περιεχόμενο αυτών των δεδομένων;"
+    text_as_statement: "Υπάρχουν"
     answers:
       norights:
-        text: "no, the data only contains facts and numbers"
-        help_text: "There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content."
-        text_as_statement: "no rights in the content of the data"
+        text: "Όχι, τα δεδομένα περιέχουν μόνο στοιχεία και αριθμούς"
+        help_text: "Δεν υπάρχουν πνευματικά δικαίωματα σε πραγματικά στοιχεία. Εάν τα δεδομένα δεν περιέχουν οποιοδήποτε στοιχείο που να δημιουργήθηκε μέσα από την πνευματική προσπάθεια, τότε δεν υπάρχουν δικαιώματα πάνω στα δεδομένα."
+        text_as_statement: "κανένα δικαίωμα στο περιεχόμενο των δεδομένων"
       samerights:
-        text: "yes, and the rights are all held by the same person or organisation"
-        help_text: "Choose this option if the content in the data was all created by or transferred to the same person or organisation."
+        text: "Ναι, και τα δικαιώματα όλων κατέχονται από το ίδιο πρόσωπο ή οργανισμό"
+        help_text: "Επιλέξτε αυτή την επιλογή αν το περιεχόμενο των δεδομένων δημιουργήθηκε εξ'ολοκλήρου απο το ίδιο πρόσωπο ή οργανισμό ή μεταφέρονται σε αυτό."
         text_as_statement: ""
       mixedrights:
-        text: "yes, and the rights are held by different people or organisations"
-        help_text: "In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too."
+        text: "Ναι, και τα δικαιώματα κατέχονται από διαφορετικούς ανθρώπους ή οργανισμούς"
+        help_text: "Σε ορισμένα δεδομένα, τα δικαιώματα σε διαφορετικές εγγραφές κατέχονται από διαφορετικά άτομα ή οργανισμούς. Πληροφορίες σχετικά με τα δικαιώματα θα πρέπει επίσης να διατηρούνται μέσα στα δεδομένα."
         text_as_statement: ""
   explicitWaiver:
-    text: "Is the content of the data marked as public domain?"
-    text_as_statement: "The content has been"
-    help_text: "Content can be marked as public domain using the <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused."
+    text: "Είναι το περιεχόμενο των δεδομένων επισημασμένο ως δημόσιος τομέας;"
+    text_as_statement: "Το περιεχόμενο έχει"
+    help_text: "Το περιεχόμενο μπορεί να επισημανθεί ως δημόσιος τομέας με τη χρήση του <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Σήμα Δημόσιου Τομέα </a>. Αυτό βοηθά όλους να γνωρίζουν ότι μπορούν να τα επαναχρησιμοποιήσουν ελεύθερα."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "marked as public domain"
+        text_as_statement: "επισημασμένο ως δημόσιος τομέας"
   contentLicence:
-    text: "Under which licence can others reuse content?"
-    text_as_statement: "The content is available under"
-    help_text: "Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'."
+    text: "Υπό ποια άδεια μπορεί κάποιος να επαναχρησιμοποιήσει το περιεχόμενο;"
+    text_as_statement: "Το περιεχόμενο διατίθεται υπό"
+    help_text: "Θυμηθείτε ότι όποιος αφιερώνει διανοητική προσπάθεια για την δημιουργία κάποιου περιεχομένου παίρνει αυτόματα τα δικαιώματα πάνω του, αλλά αυτό το δημιουργικό περιεχόμενο δεν περιλαμβάνει γεγονότα. Έτσι κάποιος θα χρειαστεί μια παραίτηση ή άδεια η οποία να αποδεικνύει ότι μπορεί να το χρησιμοποιήσει και να εξηγεί πως μπορεί να το κάνει νόμιμα. Παραθέτουμε τις πιο συνηθισμένες άδειες εδώ; αν δεν υπάρχουν πνευματικά δικαιώματα στο περιεχόμενο, είτε έχουν λήξει είτε έχετε παραιτηθεί από αυτά, τότε επιλέξτε 'Δεν εφαρμόζεται'."
     answers:
       cc_by:
-        text: "Creative Commons Attribution"
-        text_as_statement: "Creative Commons Attribution"
+        text: "Creative Commons Αναφορά"
+        text_as_statement: "Creative Commons Αναφορά"
       cc_by_sa:
-        text: "Creative Commons Attribution Share-Alike"
-        text_as_statement: "Creative Commons Attribution Share-Alike"
+        text: "Creative Commons Αναφορά - Παρόμοια διανομή"
+        text_as_statement: "Creative Commons Αναφορά - Παρόμοια διανομή"
       cc_zero:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
+        text: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
+        text_as_statement: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
       na:
-        text: "Not applicable"
+        text: "Δεν εφαρμόζεται"
         text_as_statement: ""
       other:
-        text: "Other..."
+        text: "Άλλο"
         text_as_statement: ""
   contentNotApplicable:
-    text: "Why doesn't a licence apply to the content of the data?"
-    text_as_statement: "The content in this data is not licensed because"
+    text: "Γιατί δεν ισχύει κάποια άδεια για το περιεχόμενο αυτών των δεδομένων;"
+    text_as_statement: "Το περιεχόμενο σε αυτά τα δεδομένα, δεν έχει την άδεια, επειδή"
     answers:
       norights:
-        text: "there is no copyright in the content of this data"
-        help_text: "Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that's within the data. There's no copyright if the content only contains facts."
-        text_as_statement: "there is no copyright"
+        text: "δεν υπάρχουν πνευματικά δικαιωμάτα στο περιεχόμενο αυτών των δεδομένων"
+        help_text: "Δικαιώματα πνευματικής ιδιοκτησίας ισχύουν μόνο για το περιεχόμενο αν αναλώθηκε πνευματική προσπάθεια δημιουργώντας αυτό, για παράδειγμα, γράφοντας το κείμενο που είναι μέσα στα δεδομένα. Δεν υπάρχουν πνευματικά δικαιώματα, αν το περιεχόμενο περιέχει μόνο τα γεγονότα."
+        text_as_statement: "δεν υπάρχουν πνευματικά δικαιωμάτα"
       expired:
-        text: "copyright has expired"
-        help_text: "Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired."
-        text_as_statement: "copyright has expired"
+        text: "τα πνευματικά δικαιώματα έχουν λήξει"
+        help_text: "Τα πνευματικά δικαιώματα διαρκούν για ένα συγκεκριμένο χρονικό διάστημα, με βάση είτε τον αριθμό των ετών μτά τον θάνατο του δημιουργού είτε της δημοσίευσής του. Θα πρέπει να ελέγξετε για το πότε το περιεχόμενο είχε δημιουργηθεί ή δημοσιευθεί επειδή εάν αυτό είχε συμβεί πριν πολύ καιρό τότε μπορεί τα πνευματικά δικαιώματα να έχουν λήξει."
+        text_as_statement: "τα πνευματικά δικαιώματα έχουν λήξει"
       waived:
-        text: "copyright has been waived"
-        help_text: "This means no one owns copyright and anyone can do whatever they want with this data."
+        text: "τα πνευματικά δικαιώματα έχουν αρθεί"
+        help_text: "Αυτό σημαίνει ότι κανείς δεν κατέχει πνευματικά δικαιώματα και ο καθένας μπορεί να κάνει ό, τι θέλει με αυτά τα δεδομένα."
         text_as_statement: ""
   contentWaiver:
-    text: "Which waiver do you use to waive copyright?"
-    text_as_statement: "Copyright has been waived with"
-    help_text: "You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice."
+    text: "Ποια παραίτηση χρησιμοποιείτε για την άρση πνευματικών δικαιωμάτων;"
+    text_as_statement: "Τα πνευματικά δικαιώματα έχουν αρθεί με"
+    help_text: "Χρειάζεται μια δήλωση για να δείξετε στους άλλους ότι το έχετε κάνει αυτό, ούτως ώστε να καταλάβουν ότι μπορούν να κάνουν ότι θέλουν με αυτά τα δεδομένα. Πρότυπα παραιτήσεων υπάρχουν ήδη όπως το CCZero αλλά μπορείτε να συντάξετε και το δικό σας με τη βοήθεια νομικών συμβουλών."
     answers:
       cc0:
-        text: "Creative Commons CCZero"
-        text_as_statement: "Creative Commons CCZero"
+        text: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
+        text_as_statement: "Creative Commons Εκχώρηση ως Κοινό Κτήμα (CCZero)"
       other:
-        text: "Other..."
-        text_as_statement: "Other..."
+        text: "Άλλο"
+        text_as_statement: "Άλλο"
   contentOtherWaiver:
-    text: "Where is the waiver for the copyright?"
-    text_as_statement: "Copyright has been waived with"
-    help_text: "Give a URL to your own publicly available waiver so people can check that it does waive your copyright."
+    text: "Που είναι η άρση των πνευματικών δικαιωμάτων;"
+    text_as_statement: "Τα πνευματικά δικαιώματα έχουν αρθεί με"
+    help_text: "Δώστε ένα σύνδεσμο URL της δικής σας δημόσια διαθέσιμης παραίτησης, ώστε οποιοσδήποτε να μπορεί να ελέγξει ότι όντως παραιτείστε από τα πνευματικά δικαιώματα."
     answers:
       a_1:
-        text: "Waiver URL"
+        text: "Σύνδεσμος(URL) Παραίτησης"
   otherContentLicenceName:
-    text: "What's the name of the licence?"
-    text_as_statement: "The content is available under"
-    help_text: "If you use a different licence, we need its name so people can see it on your Open Data Certificate."
+    text: "Ποιό είναι το όνομα της άδειας;"
+    text_as_statement: "Το περιεχόμενο είναι διαθέσιμο υπό"
+    help_text: "Εάν χρησιμοποιείτε μια διαφορετική άδεια, χρειαζόμαστε το όνομα της έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων."
     answers:
       a_1:
-        text: "Licence Name"
+        text: "Όνομα Άδειας"
   otherContentLicenceURL:
-    text: "Where is the licence?"
-    text_as_statement: "The content licence is at"
-    help_text: "Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available."
+    text: "Που είναι η άδεια;"
+    text_as_statement: "Το περιεχόμενο της άδειας είναι στο"
+    help_text: "Δώστε μια διεύθυνση(URL) για την άδεια, έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων και να ελέγξει ότι έιναι δημόσια διαθέσιμο."
     answers:
       a_1:
-        text: "Licence URL"
+        text: "Σύνδεσμος(URL) Άδειας"
   otherContentLicenceOpen:
-    text: "Is the licence an open licence?"
-    help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
+    text: "Είναι η άδεια μια ανοικτή άδεια;"
+    help_text: "Αν δεν είστε σίγουροι για το τι είναι μια ανοιχτή άδεια τότε διαβάστε στο <a href=\"http//opendefinition.org/\">Open Knowledge Definition</a> definition. Στη συνέχεια, επιλέξτε την άδεια σας από την <a href=\"http//licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. Εάν η άδεια δεν είναι στη λίστα τους, τότε είτε δεν είναι ανοιχτή, είτε δεν έχει αξιολογηθεί ακόμα."
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   contentRightsURL:
-    text: "Where are the rights and licensing of the content explained?"
-    text_as_statement: "The rights and licensing of the content are explained at"
-    help_text: "Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data."
+    text: "Που εξηγούνται τα δικαιώματα και η αδειοδότηση του περιεχομένου;"
+    text_as_statement: "Τα δικαιώματα και η αδειοδότηση του περιεχομένου εξηγούνται στο"
+    help_text: "Δώστε μια διεύθυνση URL σελίδας όπου περιγράφετε το πως κάποιος μπορεί να βρει τα δικαιώματα και τις άδειες ενός κομματιού από το περιεχόμενο των δεδομένων."
     answers:
       a_1:
-        text: "Content Rights Description URL"
+        text: "Σύνδεσμος(URL) Περιγραφής Δικαιωμάτων Περιεχομένου (Content Rights Description)"
   copyrightStatementMetadata:
-    text: "Does your rights statement include machine-readable versions of"
-    text_as_statement: "The rights statement includes data about"
-    help_text: "It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it."
+    text: "Περιλαμβάνει η δήλωση των δικαιωμάτων σας αναγνώσιμες από την μηχανή εκδόσεις;"
+    text_as_statement: "Η δήλωση των δικαιωμάτων περιλαμβάνει δεδομένα σχετικά με"
+    help_text: "Είναι καλή πρακτική να ενσωματώσετε πληροφορίες σχετικά με τα δικαιώματα σε μορφές αναγνώσιμες απο την μηχανή, έτσι ώστε οι άλλοι να μπορούν αυτόματα να σας αποδώσουν πίσω τα δεδομένα όταν τα χρησιμοποιούν."
     answers:
       dataLicense:
-        text: "data licence"
-        text_as_statement: "its data licence"
+        text: "άδεια δεδομένων"
+        text_as_statement: "η άδεια των δεδομένων του"
       contentLicense:
-        text: "content licence"
-        text_as_statement: "its content licence"
+        text: "άδεια περιεχομένου"
+        text_as_statement: "η άδεια του περιεχομένου του"
       attribution:
-        text: "attribution text"
-        text_as_statement: "what attribution text to use"
+        text: "απόδοση κειμένου"
+        text_as_statement: "ποια απόδοση κειμένου να χρησιμοποιηθεί"
       attributionURL:
-        text: "attribution URL"
-        text_as_statement: "what attribution link to give"
+        text: "Σύνδεσμος(URL) απόδοσης"
+        text_as_statement: "ποια σύνδεση απόδοσης να δωθεί"
       copyrightNotice:
-        text: "copyright notice or statement"
-        text_as_statement: "a copyright notice or statement"
+        text: "σημείωση πνευματικών δικαιωμάτων ή δήλωση"
+        text_as_statement: "μια σημείωση πνευματικών δικαιωμάτων ή δήλωση"
       copyrightYear:
-        text: "copyright year"
-        text_as_statement: "the copyright year"
+        text: "έτος των πνευματικών δικαιωμάτων"
+        text_as_statement: "το έτος των πνευματικών δικαιωμάτων"
       copyrightHolder:
-        text: "copyright holder"
-        text_as_statement: "the copyright holder"
+        text: "κάτοχος των πνευματικών δικαιωμάτων"
+        text_as_statement: "ο κάτοχος των πνευματικών δικαιωμάτων"
       databaseRightYear:
-        text: "database right year"
-        text_as_statement: "the database right year"
+        text: "χρονολογία των δικαιωμάτων της βάσης δεδομένων"
+        text_as_statement: "η χρονολογία των δικαιωμάτων της βάσης δεδομένων"
       databaseRightHolder:
-        text: "database right holder"
-        text_as_statement: "the database right holder"
+        text: "κάτοχος των δικαιωμάτων της βάσης δεδομένων"
+        text_as_statement: "ο κάτοχος των δικαιωμάτων της βάσης δεδομένων"
   dataPersonal:
-    text: "Can individuals be identified from this data?"
-    text_as_statement: "This data contains"
+    text: "Μπορούν να αναγνωριστούν άτομα από αυτά τα δεδομένα;"
+    text_as_statement: "Αυτά τα δεδομένα περιέχουν"
     answers:
       not_personal:
-        text: "no, the data is not about people or their activities"
-        help_text: "Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person."
-        text_as_statement: "no data about individuals"
+        text: "Όχι, τα δεδομένα δεν είναι για ανθρώπους ή τις δραστηριότητές τους"
+        help_text: "Να θυμάστε ότι τα άτομα μπορούν ακόμα να προσδιορίζονται ακόμη και αν τα δεδομένα δεν είναι άμεσα γι 'αυτούς. Για παράδειγμα, τα δεδομένα ροής της οδικής κυκλοφορίας σε συνδυασμό με τα σχέδια μετακίνησης ενός ατόμου θα μπορούσαν να αποκαλύψουν πληροφορίες σχετικά με το εν λόγω πρόσωπο."
+        text_as_statement: "δεν υπάρχουν στοιχεία για τα άτομα"
       summarised:
-        text: "no, the data has been anonymised by aggregating individuals into groups, so they can't be distinguished from other people in the group"
-        help_text: "Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data."
-        text_as_statement: "aggregated data"
+        text: "όχι, τα δεδομένα έχουν καταστεί ανώνυμα με τη συγκέντρωση των ατόμων σε ομάδες, έτσι δεν μπορούν να διακριθούν από άλλα άτομα στην ομάδα"
+        help_text: "Συστήματα στατιστικού ελέγχου διασφαλίζουν ότι δεν είναι δυνατός ο προσδιορισμός του προσώπου με τη χρήση συσσωρευμένων δεδομένων."
+        text_as_statement: "συσσωρευμένα δεδομένα"
       individual:
-        text: "yes, there is a risk that individuals be identified, for example by third parties with access to extra information"
-        help_text: "Some data is legitimately about individuals like civil service pay or public expenses for example."
-        text_as_statement: "information that could identify individuals"
+        text: "ναι, υπάρχει ο κίνδυνος ταυτοποίησης προσώπων, για παράδειγμα, από τρίτους που έχουν πρόσβαση σε επιπλέον πληροφορίες"
+        help_text: "Κάποια στοιχεία είναι νόμιμα για άτομα όπως αμοιβές δημοσίων υπαλλήλων ή δημόσιων δαπανών για παράδειγμα."
+        text_as_statement: "πληροφορίες που θα μπορούσαν να προσδιορίσουν άτομα"
   statisticalAnonAudited:
-    text: "Has your anonymisation process been independently audited?"
-    text_as_statement: "The anonymisation process has been"
+    text: "Έχει η διαδικασία της ανωνυμοποίησης σας υποβληθεί σε ανεξάρτητο έλεγχο;"
+    text_as_statement: "Η διαδικασία της ανωνυμοποίησης έχει"
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "independently audited"
+        text_as_statement: "ελέγχονται ανεξάρτητα"
   appliedAnon:
-    text: "Have you attempted to reduce or remove the possibility of individuals being identified?"
-    text_as_statement: "This data about individuals has been"
-    help_text: "Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have."
+    text: "Έχετε προσπαθήσει να μειώσετε ή να καταργήσετε τη δυνατότητα των ατόμων να εντοπιστούν;"
+    text_as_statement: "Αυτά τα δεδομένα σχετικά με άτομα ήταν"
+    help_text: "Η ανωνυμοποίηση μειώνει τον κίνδυνο προσδιορισμού ατόμων στα δεδομένα που δημοσιεύετε. Η καλύτερη τεχνική για να χρησιμοποιήσετε εξαρτάται από το είδος των δεδομένων που έχετε."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "anonymised"
+        text_as_statement: "ανωνυμοποίηση"
   lawfulDisclosure:
-    text: "Are you required or permitted by law to publish this data about individuals?"
-    text_as_statement: "By law, this data about individuals"
-    help_text: "The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them."
+    text: "Απαιτείται ή επιτρέπεται από το νόμο να δημοσιεύσετε αυτά τα δεδομένα σχετικά με άτομα;"
+    text_as_statement: "Σύμφωνα με το νόμο, αυτά τα στοιχεία για άτομα"
+    help_text: "Θα πρέπει να <strong>δημοσιεύετε προσωπικά δεδομένα χωρίς ανωνυμοποίηση αν σας απαιτείται ή επιτρέπεται να το πράξετε από το νόμο </strong>."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "can be published"
+        text_as_statement: "πρέπει να δημοσιεύονται"
   lawfulDisclosureURL:
-    text: "Where do you document your right to publish data about individuals?"
-    text_as_statement: "The right to publish this data about individuals is documented at"
+    text: "Πού τεκμηριώνετε το δικαίωμά σας να δημοσιεύετε στοιχεία για άτομα;"
+    text_as_statement: "Το δικαίωμα να δημοσιεύσει δεδομένα σχετικά με άτομα είναι ήδη καταχωρημένο στην"
     answers:
       a_1:
-        text: "Disclosure Rationale URL"
+        text: "Σύνδεσμος(URL) Disclosure Rationale"
   riskAssessmentExists:
-    text: "Have you assessed the risks of disclosing personal data?"
-    text_as_statement: "The curator has"
-    help_text: "A risk assessment measures risks to the privacy of individuals in your data as well as the use and disclosure of that information."
+    text: "Έχετε εκτιμήσει τους κινδύνους αποκάλυψης προσωπικών δεδομένων;"
+    text_as_statement: "Ο επιμελητής έχει"
+    help_text: "Μια εκτίμηση κινδύνου μετρά τους κινδύνους για την προστασία της ιδιωτικότητας των ατόμων στα δεδομένα σας, καθώς και τη χρήση και την αποκάλυψη των εν λόγω πληροφοριών."
     answers:
       a_false:
         text: no
-        text_as_statement: "not carried out a privacy risk assessment"
+        text_as_statement: "δεν πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας"
       a_true:
         text: yes
-        text_as_statement: "carried out a privacy risk assessment"
+        text_as_statement: "πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας"
   riskAssessmentUrl:
-    text: "Where is your risk assessment published?"
-    text_as_statement: "The risk assessment is published at"
-    help_text: "Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information."
+    text: "Που δημοσιεύθηκε η εκτίμηση κινδύνου σας"
+    text_as_statement: "Η εκτίμηση κινδύνου δημοσιεύεται στο"
+    help_text: "Δώστε μια διεύθυνση URL όπου κάποιος θα μπορεί να ελέγξει τον τρόπο που έχετε εκτιμήσει τους κινδύνους της ιδιωτικότητας των ατόμων. Αυτό μπορεί να αναθεωρηθεί ή περιληφθεί, εάν περιέχει ευαίσθητες πληροφορίες."
     answers:
       a_1:
-        text: "Risk Assessment URL"
+        text: "Σύνδεσμος(URL) Εκτίμησης Κινδύνου (Risk Assessment)"
   riskAssessmentAudited:
-    text: "Has your risk assessment been independently audited?"
-    text_as_statement: "The risk assessment has been"
-    help_text: "It's good practice to check your risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial."
+    text: "Έχει η αξιολόγηση κινδύνου σας υποβληθεί σε ανεξάρτητο έλεγχο;"
+    text_as_statement: "Η εκτίμηση κινδύνου έχει"
+    help_text: "Είναι καλή πρακτική να ελέγχετε ότι η εκτίμηση του κινδύνου σας έγινε σωστά. Ανεξάρτητοι έλεγχοι από ειδικούς ή τρίτους τείνουν να είναι πιο αυστηροί και αμερόληπτοι."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "independently audited"
+        text_as_statement: "ανεξάρτητα ελεγμένο"
   individualConsentURL:
-    text: "Where is the privacy notice for individuals affected by your data?"
-    text_as_statement: "Individuals affected by this data have this privacy notice"
-    help_text: "When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with data protection legislation."
+    text: "Πού είναι το σημείωμα Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα για τα άτομα που πλήττονται από τα δεδομένα σας;"
+    text_as_statement: "Τα άτομα που επηρεάζονται από αυτά τα δεδομένα έχουν αυτό το σημείωμα Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα"
+    help_text: "Όταν συλλέγετε δεδομένα σχετικά με άτομα πρέπει να τους πείτε πώς θα χρησιμοποιηθούν αυτά τα δεδομένα. Οι άνθρωποι που χρησιμοποιούν τα δεδομένα σας, το χρειάζονται αυτό για να βεβαιωθούν ότι συμμορφώνονται με το νόμο περί προστασίας δεδομένων (Data Protection Act)."
     answers:
       a_1:
-        text: "Privacy Notice URL"
+        text: "Σύνδεσμος(URL) Σημειώματος Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα"
   dpStaff:
-    text: "Is there someone in your organisation who is responsible for data protection?"
+    text: "Υπάρχει κάποιος στον οργανισμό σας ο οποίος είναι υπεύθυνος για την προστασία των δεδομένων;"
     answers:
       a_false:
         text: no
       a_true:
         text: yes
   dbStaffConsulted:
-    text: "Have you involved them in the risk assessment process?"
-    text_as_statement: "The individual responsible for data protection"
+    text: "Τους έχετε εμπλέξει στη διαδικασία Εκτίμησης των Επιπτώσεων Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (Privacy Impact Assessment process);"
+    text_as_statement: "Το άτομο που είναι υπεύθυνο για την προστασία των δεδομένων"
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "has been consulted"
+        text_as_statement: "διαβουλεύθηκε"
   anonymisationAudited:
-    text: "Has your anonymisation approach been independently audited?"
-    text_as_statement: "The anonymisation of the data has been"
-    help_text: "It is good practice to make sure your process to remove personal identifiable data works properly. Independent audits by specialists or third-parties tend to be more rigorous and impartial."
+    text: "Έχει η προσέγγιση ανωνυμοποίησής σας υποβληθεί σε ανεξάρτητο έλεγχο;"
+    text_as_statement: "Η ανωνυμοποίηση των δεδομένων έχει"
+    help_text: "Είναι καλή πρακτική να βεβαιωθείτε ότι η διαδικασία αφαίρεσης προσωπικά αναγνωρίσιμων δεδομένων λειτουργεί σωστά. Ανεξάρτητοι έλεγχοι από ειδικούς ή τρίτους τείνουν να είναι πιο αυστηροί και αμερόληπτοι."
     answers:
       a_false:
         text: no
         text_as_statement: ""
       a_true:
         text: yes
-        text_as_statement: "independently audited"
+        text_as_statement: "ελέγχονται ανεξάρτητα"
 # Practical Information
   onWebsite:
     text: "Is there a link to your data from your main website?"
@@ -1213,14 +1216,14 @@ questions:
         text: "Tool URL"
 labels:
   ownership:
-    title: "Rights"
-    help_text: "your right to share this data with people"
+    title: "Δικαιώματα"
+    help_text: "το δικαίωμά σας να μοιραστείτε αυτά τα δεδομένα με άλλους"
   licensing:
-    title: "Licensing"
-    help_text: "how you give people permission to use this data"
+    title: "Αδειοδότηση"
+    help_text: "πως δίνετε σε άλλους την άδεια να χρησιμοποιήσουν αυτά τα δεδομένα"
   privacy:
-    title: "Privacy"
-    help_text: "how you protect people's privacy"
+    title: "Ιδιωτικότητα και προστασία δεδομένων προσωπικού χαρακτήρα"
+    help_text: "Πώς να προστατέψετε την ιδιωτικότητα των ανθρώπων"
   findability:
     title: "Findability"
     help_text: "how you help people find your data"
@@ -1256,69 +1259,71 @@ labels:
     text: "You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility."
   basic_1:
     text: "You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it."
-# Legal Information Requirements
+# Νομικές Πληροφορίες Requirements
   standard_1:
-    text: "You should have a <strong>clear legal right to publish this data</strong>."
+    text: "Θα πρέπει να έχετε ένα <strong>σαφές νομικό δικαίωμα που να επιτρέπει την δημοσίευση των δεδομένων αυτών</strong>."
   basic_2:
-    text: "You must have the <strong>right to publish this data</strong>."
+    text: "Πρέπει να έχετε το <strong>δικαίωμα δημοσίευσης των δεδομένων αυτών</strong>."
   pilot_2:
-    text: "You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it."
+    text: "Θα πρέπει να τεκμηριώνετε <strong>τους κινδύνους που συνδέονται με την χρήση αυτών των δεδομένων</strong>, έτσι ώστε ο καθένας να μπορεί να βρει μια λύση σχετικά και με το πως θα ήθελε να τα χρησιμοποιήσει."
   basic_3:
-    text: "You indicated that this data wasn't originally created or gathered by you, and wasn't crowdsourced, so it must have been extracted or calculated from other data sources."
+    text: "Δηλώσατε ότι τα δεδομένα αυτά δεν δημιουργήθηκαν ούτε συγκεντρώθηκαν από εσάς αλλά ούτε και σας παραδώθηκαν μέσω πληθοπορισμού, οπότε θα πρέπει να έχουν εξαχθεί ή παραχθεί από άλλες πηγές δεδομένων"
   basic_4:
-    text: "You should get <strong>legal advice to make sure you have the right to publish this data</strong>."
+    text: "Θα πρέπει να λάβετε <strong>νομικές συμβουλές για να βεβαιωθείτε οτί έχετε το δικαίωμα να δημοσιεύσετε αυτά τα στοιχεία</strong>."
   basic_5:
-    text: "You indicated that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowdsourced."
+    text: "Δηλώσατε ότι τα δεδομένα δεν δημιουργήθηκαν αρχικά από εσάς ούτε συλλέχθηκαν ή υπολογίστηκαν από άλλα δεδομένα, γι'αυτό θα πρέπει να είναι απο πληθοπορισμό(crowdsourcing)."
   basic_6:
-    text: "You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data."
+    text: "Θα πρέπει <strong>οι συνεισφέροντες να αποδεχθούν μια Άδεια Συνεισφέροντος(CLA)</strong>, που θα σας δίνει το δικαίωμα να δημοσιεύετε την εργασία τους ως ανοιχτα δεδομένα."
   pilot_3:
-    text: "You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties."
+    text: "Θα πρέπει να τεκμηριώσετε <strong>την προέλευση των δεδομένων και τα δικαιώματα υπό τα οποία εσείς τα δημοσιεύετε</strong>, έτσι ώστε κάποιος να μπορεί να είναι βέβαιος ότι μπορεί να χρησιμοποιήσει τα μέρη που προέρχονται από τρίτους."
   standard_2:
-    text: "You should <strong>include machine-readable data about the sources of this data</strong>."
+    text: "Θα πρέπει να <strong>συμπεριλάβετε αναγνώσιμα από τη μηχανή δεδομένα σχετικά με τις πηγές των δεδομένων αυτών </strong>."
   pilot_4:
-    text: "You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data."
+    text: "Θα πρέπει να <strong>δημοσιεύσετε την δήλωση δικαιωμάτων </strong>που θα περιγράφει με λεπτομέρειες τα πνευματικά δικαιώματα, την χορήγηση αδειών καθώς και το πως θα δίνεται η αναφορά σε αυτά τα δεδομένα."
   basic_7:
-    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
+    text: "Θα πρέπει να <strong>δημοσιεύετε ανοιχτά δεδομένα, με ανοιχτή άδεια </strong> έτσι ώστε όλοι να μπορούν να τα χρησιμοποιήσουν."
   standard_3:
-    text: "You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it."
+    text: "Θα πρέπει να <strong>σηματοδοτήσετε ως δημόσιο τομέα περιεχόμενο που ανήκει στο δημόσιο τομέα </strong> έτσι ώστε ο κόσμος να γνωρίζουν ότι μπορεί να το επαναχρησιμοποιήσει."
   basic_8:
-    text: "You must <strong>publish open data under an open licence</strong> so that people can use it."
+    text: "Θα πρέπει να <strong>δημοσιεύετε ανοιχτά δεδομένα με ανοιχτή άδεια </strong>έτσι ώστε άλλοι να μπορούν να τα χρησιμοποιήσουν."
   standard_4:
-    text: "You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την άδεια </strong> για αυτά τα δεδομένα,έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   standard_5:
-    text: "You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την άδεια για το περιεχόμενο</strong> για αυτά τα δεδομένα, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   standard_6:
-    text: "You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το κείμενο που θα χρησιμοποιηθεί όταν αναφέρεται στα δεδομένα</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   standard_7:
-    text: "You should provide <strong>machine-readable data in your rights statement about the URL to link to when citing this data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το σύνδεσμο(URL) της σύνδεσής του όταν παραθέτονται αυτά τα δεδομένα</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   exemplar_1:
-    text: "You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την σημείωση πνευματικών δικαιωμάτων ή δήλωση αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   exemplar_2:
-    text: "You should provide <strong>machine-readable data in your rights statement about the copyright year for the data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με το έτος των πνευματικών δικαιωμάτων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   exemplar_3:
-    text: "You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τον κάτοχο των πνευματικών δικαιωμάτων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   exemplar_4:
-    text: "You should provide <strong>machine-readable data in your rights statement about the database right year for the data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τη χρονολογία των δικαιωμάτων της βάσης δεδομένων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   exemplar_5:
-    text: "You should provide <strong>machine-readable data in your rights statement about the database right holder for the data</strong>, so automatic tools can use it."
+    text: "Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με τον κάτοχο των δικαιωμάτων της βάσης δεδομένων αυτών των δεδομένων</strong>, έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν."
   standard_8:
-    text: "You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified."
+    text: "Θα πρέπει <strong>η διαδικασία της ανωνυμοποίησης σας ελέγχονται ανεξάρτητα </strong> για να εξασφαλίσει ότι μειώνει τον κίνδυνο των ατόμων που ήδη ταυτοποιηθει."
   pilot_5:
-    text: "You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>."
+    text: "
+                     <strong></strong>
+                  "
   standard_9:
-    text: "You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure."
+    text: "Θα πρέπει να <strong>τεκμηριώνετε το δικαίωμά σας να δημοσιεύετε στοιχεία για άτομα </strong> ως προς αυτούς που χρησιμοποιούν τα δεδομένα σας και για εκείνους που πλήττονται από τη κοινολόγηση."
   pilot_6:
-    text: "You should <strong>assess the risks of disclosing personal data</strong> if you publish data about individuals."
+    text: "Θα πρέπει να <strong>εκτιμήσετε τους κινδύνους αποκάλυψης προσωπικών δεδομένων </strong> αν δημοσιεύετε δεδομένα σχετικά με άτομα."
   standard_10:
-    text: "You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data."
+    text: "Θα πρέπει να <strong>δημοσιεύσετε την εκτίμηση κινδύνου της ιδιωτικότητας </strong> έτσι ώστε οι άνθρωποι να μπορούν να καταλάβουν πώς έχετε εκτιμήσε τους κινδύνους αποκάλυψης των δεδομένων."
   standard_11:
-    text: "You should <strong>have your risk assessment audited independently</strong> to ensure it has been carried out correctly."
+    text: "Θα πρέπει να <strong>έχει η εκτίμηση του κινδύνου σας ελέγθεί ανεξάρτητα </strong> για να βεβαιωθείτε ότι έχει εκτελεστεί σωστά."
   pilot_7:
-    text: "You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong> so that they use your data for the same purposes and comply with data protection legislation."
+    text: "Θα πρέπει να <strong>πείτε στον κόσμο για ποιούς σκοπούς τα άτομα στα δεδομένα σας έδωσαν τη συγκατάθεσή τους σε εσάς να χρησιμοποιήσετε τα στοιχεία τους </strong>. Έτσι ώστε να χρησιμοποιούνται τα δεδομένα σας για τους ίδιους σκοπούς και να συμμορφώνονται με το νόμο περί προστασίας δεδομένων (Data Protection Act)."
   pilot_8:
-    text: "You should <strong>involve the person responsible for data protection</strong> in your organisation before you publish this data."
+    text: "Θα πρέπει να <strong>περιλάβετε το πρόσωπο που είναι υπεύθυνο για την προστασία των δεδομένων </strong> στον οργανισμό σας πριν από τη δημοσίευση αυτών των δεδομένων."
   standard_12:
-    text: "You should <strong>have your anonymisation process audited independently</strong> by an expert to ensure it is appropriate for your data."
+    text: "Θα πρέπει <strong>η διαδικασία ανωνυμοποίησής σας να ελέγχεται ανεξάρτητα </strong> από έναν εμπειρογνώμονα για να εξασφαλιστεί ότι είναι κατάλληλη για τα δεδομένα σας."
 # Practical Information Requirements
   standard_13:
     text: "You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily."
