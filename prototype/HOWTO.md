@@ -1,8 +1,6 @@
 # How to apply translations
 
-## Use rake task [experimental]
-
-This doesn’t quite work yet, see note at step 4 below
+## Use rake task
 
 Make sure `saxon` is installed
 
