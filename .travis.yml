@@ -1,9 +1,9 @@
 language: ruby
+bundler_args: --without development
 cache: bundler
 sudo: false
 rvm:
 - 1.9.3
-bundler_args: --without development --path=~/.bundle
 before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
