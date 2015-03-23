@@ -2,16 +2,22 @@ require 'csv'
 require 'rackspace'
 
 module StatsDump
+  extend RecurringJob
   FILENAME = "statistics.csv"
   
   def self.perform
-    file = Rackspace.dir.files.head FILENAME
-    if file.nil?
-      setup
-    else
-      latest
+    reenqueue_job do
+      file = Rackspace.dir.files.head FILENAME
+      if file.nil?
+        setup
+      else
+        latest
+      end
     end
-    Delayed::Job.enqueue StatsDump, { :priority => 5, :run_at => 1.day.from_now }
+  end
+
+  def self.next_run_date
+    1.day.from_now
   end
   
   def self.setup
