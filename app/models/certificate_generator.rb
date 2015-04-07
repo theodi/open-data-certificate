@@ -113,6 +113,10 @@ class CertificateGenerator < ActiveRecord::Base
     certificate.try(:published?)
   end
 
+  def response_errors
+    response_set.response_errors
+  end
+
   def dataset_url
     dataset.api_url
   end
