@@ -316,7 +316,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def responses_with_url_type
-    responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
+    responses.joins(:answer).merge(Answer.urls).readonly(false)
   end
 
   def all_urls_resolve?
@@ -461,6 +461,23 @@ class ResponseSet < ActiveRecord::Base
     end
 
     update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+  end
+
+  def response_errors
+    errors = Hash.new { |h, k| h[k] = [] }
+    incomplete_triggered_mandatory_questions.each do |question|
+      response = responses.where(question_id: question.id).first
+
+      if !response || response.empty?
+        errors[question.reference_identifier] << 'mandatory'
+      end
+    end
+    responses_with_url_type.each do |response|
+      unless response.url_valid_or_explained?
+        errors[response.question.reference_identifier] << 'invalid-url'
+      end
+    end
+    errors
   end
 
   def assign_to_user!(user)
