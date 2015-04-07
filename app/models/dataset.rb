@@ -113,21 +113,7 @@ class Dataset < ActiveRecord::Base
     response_set = newest_response_set
 
     if response_set.certificate_generator && response_set.certificate_generator.completed?
-      errors = []
-
-      response_set.responses_with_url_type.each do |response|
-        if response.error
-          errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-        end
-      end
-
-      response_set.survey.questions.where(is_mandatory: true).each do |question|
-        response = response_set.responses.detect {|r| r.question_id == question.id}
-
-        if !response || response.empty?
-          errors.push("The question '#{question.reference_identifier}' is mandatory")
-        end
-      end
+      errors = response_set.response_errors
 
       certificate_url = certificate.url(format: :json) if certificate
 

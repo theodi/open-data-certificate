@@ -144,7 +144,7 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(true, response[:success])
     assert_equal(true, response[:published])
     assert_equal(user.email, response[:owner_email])
-    assert_equal([], response[:errors])
+    assert_equal({}, response[:errors])
   end
 
   test 'get results of certificate with missing field' do
@@ -165,7 +165,7 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(true, response[:success])
     assert_equal(false, response[:published])
-    assert_equal(["The question 'dataTitle' is mandatory"], response[:errors])
+    assert_equal({'dataTitle' => ['mandatory']}, response[:errors])
   end
 
   test 'get results of certificate with invalid URL' do
@@ -190,7 +190,7 @@ class DatasetTest < ActiveSupport::TestCase
 
     assert_equal(true, response[:success])
     assert_equal(false, response[:published])
-    assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
+    assert_equal({'publisherUrl' => ['invalid-url']}, response[:errors])
   end
 
   test "doesn't show results when generation hasn't happened" do
@@ -213,7 +213,7 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(true, response[:success])
     assert_equal(true, response[:published])
     assert_equal(user.email, response[:owner_email])
-    assert_equal([], response[:errors])
+    assert_equal({}, response[:errors])
   end
 
   test "generation result for unclaimed certificate" do
@@ -235,7 +235,7 @@ class DatasetTest < ActiveSupport::TestCase
     assert_equal(true, response[:success])
     assert_equal(true, response[:published])
     assert_equal(nil, response[:owner_email])
-    assert_equal([], response[:errors])
+    assert_equal({}, response[:errors])
   end
 
   test 'returns an api_url' do
