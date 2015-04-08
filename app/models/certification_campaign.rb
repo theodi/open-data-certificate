@@ -1,4 +1,5 @@
 class CertificationCampaign < ActiveRecord::Base
+  include Ownership
   validates :name, uniqueness: true, presence: true
 
   has_many :certificate_generators

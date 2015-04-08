@@ -1,4 +1,5 @@
 class CertificateGenerator < ActiveRecord::Base
+  include Ownership
 
   belongs_to :user
   belongs_to :response_set

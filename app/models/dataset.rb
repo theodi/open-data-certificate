@@ -1,4 +1,5 @@
 class Dataset < ActiveRecord::Base
+  include Ownership
   belongs_to :user
 
   delegate :name, :email, :to => :user, :prefix => true, :allow_nil => true
@@ -138,10 +139,6 @@ class Dataset < ActiveRecord::Base
   def change_owner!(user)
     update_attribute(:user_id, user.id)
     response_sets.update_all(user_id: user.id)
-  end
-
-  def owned_by?(account)
-    user.present? && user == account
   end
 
 end

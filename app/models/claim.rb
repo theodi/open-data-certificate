@@ -1,5 +1,6 @@
 class Claim < ActiveRecord::Base
   include AASM
+  include Ownership
 
   DELIVERY_ADMIN_OVERRIDE = true
 

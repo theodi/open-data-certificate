@@ -3,6 +3,7 @@ require 'odibot'
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
+  include Ownership
 
   # Surveyor field types
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
