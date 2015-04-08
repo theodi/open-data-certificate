@@ -140,4 +140,8 @@ class Dataset < ActiveRecord::Base
     response_sets.update_all(user_id: user.id)
   end
 
+  def owned_by?(account)
+    user.present? && user == account
+  end
+
 end

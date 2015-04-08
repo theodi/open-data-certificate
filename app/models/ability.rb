@@ -12,13 +12,11 @@ class Ability
     end
     
     can :read, Dataset do |dataset|
-      dataset.visible? || user.try(:admin?) ||
-        (dataset.user.present? && dataset.user == user)
+      dataset.visible? || user.try(:admin?) || dataset.owned_by?(user)
     end
 
     can :manage, Dataset do |dataset|
-      dataset.user.nil? ||
-        dataset.user == user
+      dataset.user.nil? || dataset.owned_by?(user)
     end
 
     can :claim, Certificate do |certificate|
