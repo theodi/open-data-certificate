@@ -96,6 +96,8 @@ OpenDataCertificate::Application.routes.draw do
   get 'overview' => 'pages#show', :id => 'overview'
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
+  get 'cookie-policy' => 'pages#show', :id => 'cookie_policy'
+  get 'privacy-policy' => 'pages#show', :id => 'privacy_policy'
   get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
   get 'using-the-marks' => 'pages#show', :id => 'branding'
 
