@@ -37,8 +37,8 @@ class DatasetsCSV
       url(:badge_dataset_latest_certificate_url, dataset, :format => "html"),
       url(:badge_dataset_latest_certificate_url, dataset, :format => "png"),
       response_set.title,
-      response_set.dataset_curator_determined_from_responses,
       url(:dataset_url, dataset),
+      response_set.dataset_curator_determined_from_responses,
       response_set.data_licence_determined_from_responses[:url],
       response_set.content_licence_determined_from_responses[:url],
       (response_set.documentation_url.string_value if response_set.documentation_url)
