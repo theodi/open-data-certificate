@@ -210,7 +210,7 @@ class KittenData < ActiveRecord::Base
     if data[:update_frequency].empty?
       data[:distributions].length == 1 ? @fields["releaseType"] = "oneoff" : @fields["releaseType"] = "collection"
     else
-      data[:distributions].length > 1 if @fields["releaseType"] = "series"
+      @fields["releaseType"] = "series" if data[:distributions].length > 1
     end
 
     if @fields["releaseType"] == "oneoff"
