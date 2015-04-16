@@ -112,6 +112,8 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set = ResponseSet.clone_response_set(source_response_set)
 
     assert response_set.kitten_data.url == 'http://www.example.com'
+    source_response_set.reload
+    assert source_response_set.kitten_data.url == 'http://www.example.com'
   end
 
   test "should clone with extra attributes" do
