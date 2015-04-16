@@ -5,6 +5,8 @@ class KittenData < ActiveRecord::Base
 
   serialize :data
 
+  after_initialize :request_data, :if => :new_record?
+
   DATA_LICENCES = {
     "http://opendatacommons.org/licenses/by/" => "odc_by",
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
@@ -24,28 +26,6 @@ class KittenData < ActiveRecord::Base
 
   def dataset
     @dataset
-  end
-
-  def request_data
-    @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
-
-    if @dataset && @dataset.supported? && dataset_field(:data_title)
-      self.data = {
-        :title             => dataset_field(:data_title, ''),
-        :description       => dataset_field(:description, ''),
-        :publishers        => dataset_field(:publishers, []),
-        :rights            => dataset_field(:rights),
-        :licenses          => dataset_field(:licenses, []),
-        :update_frequency  => dataset_field(:update_frequency, ''),
-        :keywords          => dataset_field(:keywords, []),
-        :release_date      => dataset_field(:issued),
-        :modified_date     => dataset_field(:modified),
-        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
-        :distributions     => distributions
-      }
-    else
-      self.data = {}
-    end
   end
 
   def distributions
@@ -216,6 +196,28 @@ class KittenData < ActiveRecord::Base
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
+  end
+
+  def request_data
+    @dataset ||= DataKitten::Dataset.new(access_url: url) rescue nil
+
+    if @dataset && @dataset.supported? && dataset_field(:data_title)
+      self.data = {
+        :title             => dataset_field(:data_title, ''),
+        :description       => dataset_field(:description, ''),
+        :publishers        => dataset_field(:publishers, []),
+        :rights            => dataset_field(:rights),
+        :licenses          => dataset_field(:licenses, []),
+        :update_frequency  => dataset_field(:update_frequency, ''),
+        :keywords          => dataset_field(:keywords, []),
+        :release_date      => dataset_field(:issued),
+        :modified_date     => dataset_field(:modified),
+        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :distributions     => distributions
+      }
+    else
+      self.data = {}
+    end
   end
 
 end

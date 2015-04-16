@@ -103,7 +103,6 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'Correct data is extracted from Data Kitten' do
-    kitten_data.request_data
     distributions = [{
       title: 'test_title',
       description: 'test_description',
@@ -130,7 +129,6 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Nil data is extracted from Data Kitten in the correct format' do
     set_minimum_data
-    kitten_data.request_data
 
     assert_equal 'test', kitten_data.data[:title]
     assert_equal '', kitten_data.data[:description]
@@ -147,13 +145,10 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Fields are empty if data request failed' do
     DataKitten::Dataset.expects(:new).raises
-    kitten_data.request_data
     assert_equal({}, kitten_data.fields)
   end
 
   test 'Publisher fields are set correctly' do
-    kitten_data.request_data
-
     assert_equal 'test_name', kitten_data.fields["publisher"]
     assert_equal 'http://example.com/homepage', kitten_data.fields["publisherUrl"]
     assert_equal 'test_contact', kitten_data.fields["contactEmail"]
@@ -161,14 +156,12 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Release type is detected as a one off' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
-    kitten_data.request_data
 
     assert_equal 'oneoff', kitten_data.fields["releaseType"]
   end
 
   test 'Dataset URL is detected correctly' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
-    kitten_data.request_data
 
     assert_equal 'http://example.com/distribution', kitten_data.fields["datasetUrl"]
   end
@@ -179,7 +172,6 @@ class KittenDataTest < ActiveSupport::TestCase
 
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
-    kitten_data.request_data
 
     assert_equal 'collection', kitten_data.fields["releaseType"]
   end
@@ -189,7 +181,6 @@ class KittenDataTest < ActiveSupport::TestCase
     distribution.format = DataKitten::DistributionFormat.new(distribution)
 
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
-    kitten_data.request_data
 
     assert_equal 'series', kitten_data.fields["releaseType"]
   end
@@ -197,14 +188,11 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'Release type is detected as a service' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')
-    kitten_data.request_data
 
     assert_equal 'service', kitten_data.fields["releaseType"]
   end
 
   test 'Rights fields are set correctly' do
-    kitten_data.request_data
-
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal 'http://example.com/rights', kitten_data.fields["copyrightURL"]
     assert_equal "odc_pddl", kitten_data.fields["dataLicence"]
@@ -213,7 +201,6 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Standard license fields are set correctly' do
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
-    kitten_data.request_data
 
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal "odc_by", kitten_data.fields["dataLicence"]
@@ -224,7 +211,6 @@ class KittenDataTest < ActiveSupport::TestCase
     license.uri = "http://reference.data.gov.uk/id/open-government-licence"
     DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
-    kitten_data.request_data
 
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal "ogl_uk", kitten_data.fields["dataLicence"]
@@ -236,7 +222,6 @@ class KittenDataTest < ActiveSupport::TestCase
     license.uri = "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
     DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
-    kitten_data.request_data
 
     assert_equal "other", kitten_data.fields["dataLicence"]
     assert_equal "other", kitten_data.fields["contentLicence"]
@@ -249,8 +234,7 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'data.gov.uk assumptions are applied' do
-    kitten_data.url = 'http://data.gov.uk/some_crazy_data'
-    kitten_data.request_data
+    @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]
@@ -268,15 +252,12 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'Distribution metadata is set correctly' do
     DataKitten::DistributionFormat.any_instance.stubs('open?').returns(true)
     DataKitten::DistributionFormat.any_instance.stubs('structured?').returns(true)
-    kitten_data.request_data
 
     assert_equal "true", kitten_data.fields["machineReadable"]
     assert_equal "true", kitten_data.fields["openStandard"]
   end
 
   test 'Correct metadata fields are set when data is present' do
-    kitten_data.request_data
-
     metadata = [
       "title",
       "description",
@@ -294,7 +275,6 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'No metadata fields are set when data is not present' do
     set_blank_data
-    kitten_data.request_data
 
     assert_equal nil, kitten_data.fields["documentationMetadata"]
   end

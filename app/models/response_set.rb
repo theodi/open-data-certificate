@@ -501,10 +501,6 @@ class ResponseSet < ActiveRecord::Base
 
     if code == 200
       kitten_data = KittenData.create(url: url, response_set: self)
-      kitten_data.request_data
-      kitten_data.save
-
-      update_attribute('kitten_data', kitten_data)
       update_responses(kitten_data.fields)
     end
   end
