@@ -191,16 +191,11 @@ class KittenData < ActiveRecord::Base
       "accrualPeriodicity" => :update_frequency,
       "publisher" => :publishers,
       "keyword" => :keywords,
-      "distribution" => :distributions
-    }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].empty?
-    end
-
-    {
+      "distribution" => :distributions,
       "issued" => :release_date,
       "modified" => :modified_date
     }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].nil?
+        @fields["documentationMetadata"].push(k) unless data[v].blank?
     end
 
     @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
