@@ -4,6 +4,7 @@ require 'mocha/setup'
 class KittenDataTest < ActiveSupport::TestCase
 
   class DataKitten::Dataset
+    # this prevents DataKitten from making a request to the access_url
     def supported?
       true
     end
