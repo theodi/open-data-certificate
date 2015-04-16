@@ -27,35 +27,25 @@
         %dt= t :update_frequency, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:update_frequency])
 
-  - if kitten_data
-    %hr.heavy
-
-    - unless kitten_value(kitten_data[:publishers]).empty?
-      %h3= t :publishers, scope: :data_kitten
-      %dl
+      - unless kitten_value(kitten_data[:publishers]).empty?
+        %dt= t :publishers, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:publishers])
 
-    - unless kitten_value(kitten_data[:licenses]).empty?
-      %h3= t :licences, scope: :data_kitten
-      %dl
-        %dd!= kitten_value(kitten_data[:licenses])
-
-    - unless kitten_value(kitten_data[:keywords]).empty?
-      %h3= t :keywords, scope: :data_kitten
-      %dl
+      - unless kitten_value(kitten_data[:keywords]).empty?
+        %dt= t :keywords, scope: :data_kitten
         %dd!= kitten_value(kitten_data[:keywords])
 
-    - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
-    - extra_data = kitten_data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
+      - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
+      - extra_data = kitten_data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
 
-    /# Ignore the title if it is the same as the certificate title
-    - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
+      /# Ignore the title if it is the same as the certificate title
+      - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
 
-    - unless extra_data.empty?
-      %hr.heavy
+      - unless extra_data.empty?
+        %hr.heavy
 
-      - extra_data.each do |key, v|
-        %h3= t key, scope: :data_kitten
-        %dl
-          %dd!= kitten_value(v)
-          %dd= key
+        - extra_data.each do |key, v|
+          %h3= t key, scope: :data_kitten
+          %dl
+            %dd!= kitten_value(v)
+            %dd= key

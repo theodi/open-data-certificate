@@ -282,7 +282,6 @@ en:
     description: Description
     publishers: Publishers
     rights: Rights
-    licences: Licences
     update_frequency: Update Frequency
     keywords: Keywords
     release_date: Release Date
