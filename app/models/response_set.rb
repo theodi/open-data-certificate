@@ -239,18 +239,10 @@ class ResponseSet < ActiveRecord::Base
         }
       end
     else
-      failure = {:title => 'Unknown', :url => nil}
-      begin
-        licence = ODIBot.handle_errors(failure) do
-          Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
-        end
-        {
-          :title => licence.title,
-          :url   => licence.url
-        }
-      rescue ArgumentError
-        failure
-      end
+      {
+        title: value_for(licence_type),
+        url: nil
+      }
     end
   end
 

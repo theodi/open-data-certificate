@@ -343,70 +343,21 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
-  test "#content_licence_determined_from_responses returns 'Unknown' when the content licence is not found" do
-    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "this-is-not-a-licence")
-    expected_value = {
-      :title => "Unknown",
-      :url => nil
-    }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
-
-    assert_equal expected_value, response_set.content_licence_determined_from_responses
-  end
-
-  {
-    "cc_by" => {
-      title: "Creative Commons Attribution 4.0",
-      url: "https://creativecommons.org/licenses/by/4.0/"
-    },
-    "cc_by_sa" => {
-      title: "Creative Commons Attribution Share-Alike 4.0",
-      url: "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    "cc_zero" => {
-      title: "CC0 1.0",
-      url: "https://creativecommons.org/publicdomain/zero/1.0/"
-    },
-    "ogl_uk" => {
-      title: "Open Government Licence 2.0 (United Kingdom)",
-      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
-    },
-    "odc_by" => {
-      title: "Open Data Commons Attribution License 1.0",
-      url: "http://www.opendefinition.org/licenses/odc-by"
-    },
-     "odc_odbl" => {
-       title: "Open Data Commons Open Database License 1.0",
-       url: "http://www.opendefinition.org/licenses/odc-odbl"
-    },
-    "odc_pddl" => {
-      title: "Open Data Commons Public Domain Dedication and Licence 1.0",
-      url: "http://www.opendefinition.org/licenses/odc-pddl"
-    }
-  }.each_pair do |license, expected|
-    test "#data_licence_determined_from_responses returns the correct responses when the data licence is #{license}" do
-      question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
-      answer = FactoryGirl.create(:answer, question: question, reference_identifier: license)
+  %w[data_licence content_licence].each do |licence_type|
+    test "##{licence_type}_determined_from_responses returns the correct responses when question has standard answer" do
+      question = FactoryGirl.create(:question, reference_identifier: licence_type.camelize(:lower))
+      answer = FactoryGirl.create(:answer, question: question, reference_identifier: 'licence-id', text: 'Licence Title', response_class: 'answer')
       response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
       response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
 
-      assert_equal expected, response_set.data_licence_determined_from_responses
+      expected_value = {
+        title: 'Licence Title',
+        url: nil
+      }
+      method_name = :"#{licence_type}_determined_from_responses"
+
+      assert_equal expected_value, response_set.send(method_name)
     end
-  end
-
-  test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
-    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
-    expected_value = {
-      :title => "Open Government Licence 2.0 (United Kingdom)",
-      :url => "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"
-    }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
-
-    assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
   test "#data_licence_determined_from_responses returns the correct response when the data licence is a non-standard licence" do
