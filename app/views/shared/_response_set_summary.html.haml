@@ -41,11 +41,6 @@
       /# Ignore the title if it is the same as the certificate title
       - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
 
-      - unless extra_data.empty?
-        %hr.heavy
-
-        - extra_data.each do |key, v|
-          %h3= t key, scope: :data_kitten
-          %dl
-            %dd!= kitten_value(v)
-            %dd= key
+      - extra_data.each do |key, v|
+        %dt= t key, scope: :data_kitten
+        %dd!= kitten_value(v)
