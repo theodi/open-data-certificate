@@ -44,7 +44,7 @@ class KittenData < ActiveRecord::Base
         :distributions     => distributions
       }
     else
-      self.data = false
+      self.data = {}
     end
   end
 
@@ -66,7 +66,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def compute_fields
-    return {} if !data
+    return {} if data.blank?
 
     begin
       @fields = {}
