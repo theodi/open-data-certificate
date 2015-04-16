@@ -34,8 +34,12 @@ class ODIBot
     nil
   end
 
+  def linkedin?
+    uri.hostname =~ /linkedin\.com/
+  end
+
   def valid?
-    is_http_url? && response_code == 200
+    is_http_url? && (linkedin? || response_code == 200)
   end
 
   def self.handle_errors(return_value)

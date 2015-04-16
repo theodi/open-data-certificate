@@ -82,6 +82,18 @@ class ODIBotTest < ActiveSupport::TestCase
     refute ODIBot.new("http://notadomain").valid?
   end
 
+  %w[http https].each do |scheme|
+    %w[www.linkedin.com linkedin.com].each do |hostname|
+      %w[/ page/subpage].each do |path|
+        url = "#{scheme}://#{hostname}#{path}"
+        test "skips http checks if url is #{url}" do
+          ODIBot.expects(:get).never
+          assert ODIBot.new(url).valid?
+        end
+      end
+    end
+  end
+
   [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error].each do |error|
     test "handles #{error.name}" do
       stub_request(:get, "http://www.example.com").to_raise(error)
