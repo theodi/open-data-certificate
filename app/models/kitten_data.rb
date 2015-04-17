@@ -5,6 +5,8 @@ class KittenData < ActiveRecord::Base
 
   serialize :data
 
+  after_initialize :request_data, :if => :new_record?
+
   DATA_LICENCES = {
     "http://opendatacommons.org/licenses/by/" => "odc_by",
     "http://opendatacommons.org/licenses/odbl/" => "odc_odbl",
@@ -26,28 +28,6 @@ class KittenData < ActiveRecord::Base
     @dataset
   end
 
-  def request_data
-    @dataset = DataKitten::Dataset.new(access_url: url) rescue nil
-
-    if @dataset && @dataset.supported? && dataset_field(:data_title)
-      self.data = {
-        :title             => dataset_field(:data_title, ''),
-        :description       => dataset_field(:description, ''),
-        :publishers        => dataset_field(:publishers, []),
-        :rights            => dataset_field(:rights),
-        :licenses          => dataset_field(:licenses, []),
-        :update_frequency  => dataset_field(:update_frequency, ''),
-        :keywords          => dataset_field(:keywords, []),
-        :release_date      => dataset_field(:issued),
-        :modified_date     => dataset_field(:modified),
-        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
-        :distributions     => distributions
-      }
-    else
-      self.data = false
-    end
-  end
-
   def distributions
     dataset_field(:distributions, []).map { |distribution|
       {
@@ -66,7 +46,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def compute_fields
-    return {} if !data
+    return {} if data.blank?
 
     begin
       @fields = {}
@@ -191,16 +171,11 @@ class KittenData < ActiveRecord::Base
       "accrualPeriodicity" => :update_frequency,
       "publisher" => :publishers,
       "keyword" => :keywords,
-      "distribution" => :distributions
-    }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].empty?
-    end
-
-    {
+      "distribution" => :distributions,
       "issued" => :release_date,
       "modified" => :modified_date
     }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].nil?
+        @fields["documentationMetadata"].push(k) unless data[v].blank?
     end
 
     @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
@@ -210,7 +185,7 @@ class KittenData < ActiveRecord::Base
     if data[:update_frequency].empty?
       data[:distributions].length == 1 ? @fields["releaseType"] = "oneoff" : @fields["releaseType"] = "collection"
     else
-      data[:distributions].length > 1 if @fields["releaseType"] = "series"
+      @fields["releaseType"] = "series" if data[:distributions].length > 1
     end
 
     if @fields["releaseType"] == "oneoff"
@@ -221,6 +196,28 @@ class KittenData < ActiveRecord::Base
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
+  end
+
+  def request_data
+    @dataset ||= DataKitten::Dataset.new(access_url: url) rescue nil
+
+    if @dataset && @dataset.supported? && dataset_field(:data_title)
+      self.data = {
+        :title             => dataset_field(:data_title, ''),
+        :description       => dataset_field(:description, ''),
+        :publishers        => dataset_field(:publishers, []),
+        :rights            => dataset_field(:rights),
+        :licenses          => dataset_field(:licenses, []),
+        :update_frequency  => dataset_field(:update_frequency, ''),
+        :keywords          => dataset_field(:keywords, []),
+        :release_date      => dataset_field(:issued),
+        :modified_date     => dataset_field(:modified),
+        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :distributions     => distributions
+      }
+    else
+      self.data = {}
+    end
   end
 
 end

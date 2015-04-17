@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ApplicationHelper
 
   def comment_link topic, message = 'comment', title = topic, question_id = nil
@@ -23,17 +25,17 @@ module ApplicationHelper
     else
       case value.class.to_s
       when 'DataKitten::Agent'
-        h(value.name) << ' ' << content_tag(:small, mail_to(value.mbox))
+        [value.name, content_tag(:small, mail_to(value.mbox))].join(' ')
       when 'DataKitten::License'
         link_to(value.name, value.uri)
       when 'DataKitten::Temporal'
-        h(value.start) + h(value.end)
+        [kitten_value(value.start), kitten_value(value.end)].join(' – ')
       when 'String'
-        h(value)
+        value
       when 'Date'
-        h(value.strftime('%e %B %Y'))
+        value.strftime('%e %B %Y')
       when 'Hash'
-        h(value[:title])
+        value[:title]
       else
         value.to_s
       end

@@ -75,7 +75,7 @@ class ResponseSet < ActiveRecord::Base
   def self.clone_response_set(source, attrs = {})
     attrs["survey_id"] ||= source.survey_id
     new_response_set = ResponseSet.create attrs
-    new_response_set.kitten_data = source.kitten_data
+    new_response_set.kitten_data = source.kitten_data.dup if source.kitten_data.present?
     new_response_set.copy_answers_from_response_set!(source)
     new_response_set
   end
@@ -239,18 +239,10 @@ class ResponseSet < ActiveRecord::Base
         }
       end
     else
-      failure = {:title => 'Unknown', :url => nil}
-      begin
-        licence = ODIBot.handle_errors(failure) do
-          Odlifier::License.define(REF_CHANGES[ref] || ref.dasherize)
-        end
-        {
-          :title => licence.title,
-          :url   => licence.url
-        }
-      rescue ArgumentError
-        failure
-      end
+      {
+        title: value_for(licence_type),
+        url: nil
+      }
     end
   end
 
@@ -501,10 +493,6 @@ class ResponseSet < ActiveRecord::Base
 
     if code == 200
       kitten_data = KittenData.create(url: url, response_set: self)
-      kitten_data.request_data
-      kitten_data.save
-
-      update_attribute('kitten_data', kitten_data)
       update_responses(kitten_data.fields)
     end
   end
