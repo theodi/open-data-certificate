@@ -20,6 +20,7 @@ Should work on OSX
 
     converter = quiet { Translations::SpreadsheetConverter.new(translation_sheet) }
     base_path = 'translations/temp'
+    FileUtils.mkdir_p "prototype/#{base_path}"
     legal_path = "#{base_path}/#{lang_code}.legal.txt"
     main_path = "#{base_path}/#{lang_code}.main.txt"
     converter.extract('Legal', "prototype/#{legal_path}")
