@@ -24,7 +24,7 @@ survey 'GR',
     q_documentationUrl 'Πού περιγράφεται αυτό;',
       :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Αυτό το δεδομένο περιγράφεται στο',
+      :text_as_statement => 'Αυτά τα δεδομένα περιγράφονται στο',
       :help_text => 'Δώστε μια διεύθυνση URL ώστε να μπορούν να διαβάσουν σχετικά με τα περιεχόμενα των ανοιχτών δεδομένων σας και να βρούν περισσότερες λεπτομέρειες. Μπορεί να είναι μια σελίδα μέσα σε ένα μεγαλύτερο κατάλογο όπως παράδειγμα data.gov.uk.'
     a_1 'Σύνδεσμος(URL) Τεκμηρίωσης',
       :string,
@@ -60,7 +60,7 @@ survey 'GR',
     q_publisherUrl 'Σε ποιά ιστοσελίδα δημοσιεύονται αυτά τα δεδομένα;',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Τα δεδομένα δημοσιεύονται',
+      :text_as_statement => 'Τα δεδομένα δημοσιεύονται στο',
       :help_text => 'Δώστε μια διεύθυνση URL σε ένα δικτυακό τόπο, αυτό μας βοηθάει να συγκεντρώσουμε δεδομένα από τον ίδιο οργανισμό, ακόμη και αν οι άνθρωποι δίνουν διαφορετικά ονόματα.'
     a_1 'Σύνδεσμος(URL) του Εκδότη',
       :string,
@@ -146,7 +146,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'αρχικά δημιουργήθηκε ή παράχθηκε από τον επιμελητή'
+      :text_as_statement => 'αρχικώς δημιουργημένα ή παραγμένα από τον επιμελητή'
 
     q_thirdPartyOrigin 'Ήταν κάποια από αυτά τα δεδομένα παραγμένα ή υπολογισμένα από άλλα δεδομένα;',
       :discussion_topic => :gr_thirdPartyOrigin,
@@ -432,7 +432,7 @@ survey 'GR',
     q_otherDataLicenceURL 'Πού είναι η άδεια;',
       :discussion_topic => :gr_otherDataLicenceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Η άδεια αυτή είναι σε',
+      :text_as_statement => 'Η άδεια αυτή είναι στο',
       :help_text => 'Δώστε μια διεύθυνση(URL) για την άδεια, έτσι ώστε κάποιος να μπορεί να δει το Πιστοποιητικό Ανοικτών Δεδομένων και να ελέγξει ότι έιναι δημόσια διαθέσιμο.',
       :required => :required
     dependency :rule => 'A'
@@ -469,7 +469,7 @@ survey 'GR',
       :pick => :one,
       :required => :required
     a_norights 'όχι, τα δεδομένα περιέχουν μόνο στοιχεία και αριθμούς',
-      :text_as_statement => 'κανένα δικαίωμα στο περιεχόμενο των δεδομένων',
+      :text_as_statement => 'δεν υπάρχουν δικαιώματα στο περιεχόμενο των δεδομένων',
       :help_text => 'Δεν υπάρχουν πνευματικά δικαίωματα σε πραγματικά στοιχεία. Εάν τα δεδομένα δεν περιέχουν οποιοδήποτε στοιχείο που να δημιουργήθηκε μέσα από την πνευματική προσπάθεια, τότε δεν υπάρχουν δικαιώματα πάνω στα δεδομένα.'
     a_samerights 'ναι, και τα δικαιώματα όλων κατέχονται από το ίδιο πρόσωπο ή οργανισμό',
       :text_as_statement => '',
@@ -489,7 +489,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'επισημασμένο ως δημόσιος τομέας',
+      :text_as_statement => 'επισημανθεί ως δημόσιος τομέας',
       :requirement => ['standard_3']
 
     label_standard_3 'Θα πρέπει να <strong>σηματοδοτήσετε ως δημόσιο τομέα περιεχόμενο που ανήκει στο δημόσιο τομέα </strong> έτσι ώστε ο κόσμος να γνωρίζουν ότι μπορεί να το επαναχρησιμοποιήσει.',
@@ -647,10 +647,10 @@ survey 'GR',
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     a_dataLicense 'άδεια δεδομένων',
-      :text_as_statement => 'η άδεια των δεδομένων του',
+      :text_as_statement => 'την άδεια των δεδομένων του',
       :requirement => ['standard_4']
     a_contentLicense 'άδεια περιεχομένου',
-      :text_as_statement => 'η άδεια του περιεχομένου του',
+      :text_as_statement => 'την άδεια του περιεχομένου του',
       :requirement => ['standard_5']
     a_attribution 'απόδοση κειμένου',
       :text_as_statement => 'ποια απόδοση κειμένου να χρησιμοποιηθεί',
@@ -665,13 +665,13 @@ survey 'GR',
       :text_as_statement => 'το έτος των πνευματικών δικαιωμάτων',
       :requirement => ['exemplar_2']
     a_copyrightHolder 'κάτοχος των πνευματικών δικαιωμάτων',
-      :text_as_statement => 'ο κάτοχος των πνευματικών δικαιωμάτων',
+      :text_as_statement => 'τον κάτοχο των πνευματικών δικαιωμάτων',
       :requirement => ['exemplar_3']
     a_databaseRightYear 'χρονολογία των δικαιωμάτων της βάσης δεδομένων',
-      :text_as_statement => 'η χρονολογία των δικαιωμάτων της βάσης δεδομένων',
+      :text_as_statement => 'τη χρονολογία των δικαιωμάτων της βάσης δεδομένων',
       :requirement => ['exemplar_4']
     a_databaseRightHolder 'κάτοχος των δικαιωμάτων της βάσης δεδομένων',
-      :text_as_statement => 'ο κάτοχος των δικαιωμάτων της βάσης δεδομένων',
+      :text_as_statement => 'τον κάτοχο των δικαιωμάτων της βάσης δεδομένων',
       :requirement => ['exemplar_5']
 
     label_standard_4 'Θα πρέπει να δώσετε <strong>αναγώσιμα απο την μηχανή δεδομένα στη δήλωση των δικαιωμάτων σας σχετικά με την άδεια </strong> για αυτά τα δεδομένα,έτσι ώστε αυτόματα εργαλεία να μπορούν να τα χρησιμοποιήσουν.',
@@ -748,7 +748,7 @@ survey 'GR',
       :pick => :one,
       :required => :pilot
     a_not_personal 'όχι, τα δεδομένα δεν είναι για ανθρώπους ή τις δραστηριότητές τους',
-      :text_as_statement => 'δεν υπάρχουν στοιχεία για τα άτομα',
+      :text_as_statement => 'δεν περιέχουν στοιχεία για άτομα',
       :help_text => 'Να θυμάστε ότι τα άτομα μπορούν ακόμα να προσδιορίζονται ακόμη και αν τα δεδομένα δεν είναι άμεσα γι \'αυτούς. Για παράδειγμα, τα δεδομένα ροής της οδικής κυκλοφορίας σε συνδυασμό με τα σχέδια μετακίνησης ενός ατόμου θα μπορούσαν να αποκαλύψουν πληροφορίες σχετικά με το εν λόγω πρόσωπο.'
     a_summarised 'όχι, τα δεδομένα έχουν καταστεί ανώνυμα με τη συγκέντρωση των ατόμων σε ομάδες, έτσι δεν μπορούν να διακριθούν από άλλα άτομα στην ομάδα',
       :text_as_statement => 'συσσωρευμένα δεδομένα',
@@ -767,7 +767,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'ελέγχονται ανεξάρτητα',
+      :text_as_statement => 'ελεγθεί ανεξάρτητα',
       :requirement => ['standard_8']
 
     label_standard_8 'Θα πρέπει <strong>η διαδικασία της ανωνυμοποίησης σας ελέγχονται ανεξάρτητα </strong> για να εξασφαλίσει ότι μειώνει τον κίνδυνο των ατόμων που ήδη ταυτοποιηθει.',
@@ -780,7 +780,7 @@ survey 'GR',
     q_appliedAnon 'Έχετε προσπαθήσει να μειώσετε ή να καταργήσετε τη δυνατότητα των ατόμων να εντοπιστούν;',
       :discussion_topic => :gr_appliedAnon,
       :display_on_certificate => true,
-      :text_as_statement => 'Αυτά τα δεδομένα σχετικά με άτομα ήταν',
+      :text_as_statement => 'Αυτά τα δεδομένα σχετικά με άτομα έχουν',
       :help_text => 'Η ανωνυμοποίηση μειώνει τον κίνδυνο προσδιορισμού ατόμων στα δεδομένα που δημοσιεύετε. Η καλύτερη τεχνική για να χρησιμοποιήσετε εξαρτάται από το είδος των δεδομένων που έχετε.',
       :pick => :one,
       :required => :pilot
@@ -789,7 +789,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'ανωνυμοποίηση'
+      :text_as_statement => 'ανωνυμοποίηθεί'
 
     q_lawfulDisclosure 'Απαιτείται ή επιτρέπεται από το νόμο να δημοσιεύσετε αυτά τα δεδομένα σχετικά με άτομα;',
       :discussion_topic => :gr_lawfulDisclosure,
@@ -819,7 +819,7 @@ survey 'GR',
     q_lawfulDisclosureURL 'Πού τεκμηριώνετε το δικαίωμά σας να δημοσιεύετε στοιχεία για άτομα;',
       :discussion_topic => :gr_lawfulDisclosureURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Το δικαίωμα να δημοσιεύσει δεδομένα σχετικά με άτομα είναι ήδη καταχωρημένο στην'
+      :text_as_statement => 'Το δικαίωμα δημοσίευσης δεδομένων σχετικά με άτομα είναι ήδη καταχωρημένο στην'
     dependency :rule => 'A and B and C'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_false
@@ -842,7 +842,7 @@ survey 'GR',
     q_riskAssessmentExists 'Έχετε εκτιμήσει τους κινδύνους αποκάλυψης προσωπικών δεδομένων;',
       :discussion_topic => :gr_riskAssessmentExists,
       :display_on_certificate => true,
-      :text_as_statement => 'Ο επιμελητής έχει',
+      :text_as_statement => 'Ο επιμελητής',
       :help_text => 'Μια εκτίμηση κινδύνου μετρά τους κινδύνους για την προστασία της ιδιωτικότητας των ατόμων στα δεδομένα σας, καθώς και τη χρήση και την αποκάλυψη των εν λόγω πληροφοριών.',
       :pick => :one
     dependency :rule => 'A and (B or C)'
@@ -850,9 +850,9 @@ survey 'GR',
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no',
-      :text_as_statement => 'δεν πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας'
+      :text_as_statement => 'δεν έχει πραγματοποιήσει εκτίμηση των κινδύνων της ιδιωτικότητας'
     a_true 'yes',
-      :text_as_statement => 'πραγματοποίησε εκτίμηση των κινδύνων της ιδιωτικότητας',
+      :text_as_statement => 'έχει πραγματοποιήσει εκτίμηση των κινδύνων της ιδιωτικότητας',
       :requirement => ['pilot_6']
 
     label_pilot_6 'Θα πρέπει να <strong>εκτιμήσετε τους κινδύνους αποκάλυψης προσωπικών δεδομένων </strong> αν δημοσιεύετε δεδομένα σχετικά με άτομα.',
@@ -905,7 +905,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'ανεξάρτητα ελεγμένο',
+      :text_as_statement => 'ελεγθεί ανεξάρτητα',
       :requirement => ['standard_11']
 
     label_standard_11 'Θα πρέπει να <strong>έχει η εκτίμηση του κινδύνου σας ελέγθεί ανεξάρτητα </strong> για να βεβαιωθείτε ότι έχει εκτελεστεί σωστά.',
@@ -1001,7 +1001,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'ελέγχονται ανεξάρτητα',
+      :text_as_statement => 'ελεγθεί ανεξάρτητα',
       :requirement => ['standard_12']
 
     label_standard_12 'Θα πρέπει <strong>η διαδικασία ανωνυμοποίησής σας να ελέγχεται ανεξάρτητα </strong> από έναν εμπειρογνώμονα για να εξασφαλιστεί ότι είναι κατάλληλη για τα δεδομένα σας.',
@@ -1041,10 +1041,10 @@ survey 'GR',
 
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
-      q_webpage 'Ποια σελίδα στην ιστοσελίδα σας , συνδέεται με τα δεδομένα;',
+      q_webpage 'Ποια σελίδα στην ιστοσελίδα σας, συνδέεται με τα δεδομένα;',
         :discussion_topic => :webpage,
         :display_on_certificate => true,
-        :text_as_statement => 'Ο δικτυακός τόπος συνδέει προς τα δεδομένα από',
+        :text_as_statement => 'Ο δικτυακός τόπος που συνδέεται με τα δεδομένα',
         :help_text => 'Δώστε μια διεύθυνση URL στην κύρια ιστοσελίδα σας, που περιλαμβάνει ένα σύνδεσμο προς αυτά τα δεδομένα.',
         :required => :required
       dependency :rule => 'A'
@@ -1138,10 +1138,10 @@ survey 'GR',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_static 'Όχι, το API παρέχει πρόσβαση σε αμετάβλητα δεδομένα',
-      :text_as_statement => 'δεν θα μεταβληθεί',
+      :text_as_statement => 'δεν θα μεταβληθούν',
       :help_text => 'Μερικά ΑΡΙ απλά κάνουν τη πρόσβαση σε ένα σύνολο αμετάβλητων δεδομένων, ιδιαίτερα όταν υπάρχουν πολλά από αυτό αυτό.'
     a_changing 'ναι, το API δίνει πρόσβαση σε μεταβλητά δεδομένα',
-      :text_as_statement => 'θα αλλάξει/μεταβληθεί',
+      :text_as_statement => 'θα μεταβληθούν',
       :help_text => 'Μερικά APIs δίνουν άμεση πρόσβαση σε πιο ενημερωμένα και συνεχώς μεταβαλλόμενα δεδομένα'
 
     q_timeSensitive 'Θα γίνουν τα δεδομένα αυτά ξεπερασμένα(out of date);',
@@ -1155,14 +1155,14 @@ survey 'GR',
     condition_C :q_releaseType, '==', :a_service
     condition_D :q_serviceType, '==', :a_static
     a_true 'ναι, αυτά τα δεδομένα θα γίνουν ξεπερασμένα (out of date)',
-      :text_as_statement => 'θα ξεπεραστούν(out of date)',
+      :text_as_statement => 'θα ξεπεραστεί (out of date)',
       :help_text => 'Για παράδειγμα, ένα σύνολο δεδομένων των τοποθεσιών των στάσεων λεωφορείου με τη πάροδο του χρόνου θα θεωρείται ανημέρωτο(out of date) καθώς θα μεταβάλλονται και θα δημιουργούνται καινούριες.'
     a_timestamped 'ναι, αυτά τα δεδομένα θα μετατραπούν σε μη ενημερωμένα με τη πάροδο του χρόνου αλλά είναι χρόνο-σημασμένα',
-      :text_as_statement => 'γίνοται μη ενημερωμένα(out of date) αλλά είναι χρόνο-σημασμένα',
+      :text_as_statement => 'θα ξεπεραστεί (out of date) αλλά θα είναι χρόνο-σημασμένη',
       :help_text => 'Για παράδειγμα, τα στατιστικά στοιχεία του πληθυσμού περιλαμβάνουν συνήθως μια σταθερή χρονική σήμανση για να υποδείξει πότε οι στατιστικές ήταν σχετικές.',
       :requirement => ['pilot_9']
     a_false 'όχι, αυτά τα δεδομένα δεν περιέχουν χρονικά ευαίσθητες πληροφορίες',
-      :text_as_statement => 'δεν θα ξεπεραστούν(out of date)',
+      :text_as_statement => 'δεν θα ξεπεραστούν (out of date)',
       :help_text => 'Για παράδειγμα, τα αποτελέσματα ενός πειράματος θα παραμείνουν ενημερωμένα, διότι τα δεδομένα περιγράφουν με ακρίβεια τα παρατηρούμενα αποτελέσματα.',
       :requirement => ['standard_16']
 
@@ -1230,7 +1230,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'είναι διαθέσιμο',
+      :text_as_statement => 'είναι διαθέσιμη',
       :requirement => ['exemplar_6']
 
     label_exemplar_6 'Θα πρέπει να <strong>παρέχετε μια τροφοδότηση των αλλαγών των δεδομένων σας </strong> έτσι ώστε οι άλλοι να διατηρούν τα αντίγραφα τους ενημερωμένα και ακριβή.',
@@ -1309,7 +1309,7 @@ survey 'GR',
       :help_text => 'Για παράδειγμα, εάν δημιουργείτε μια νέα έκδοση του συνόλου δεδομένων κάθε μέρα, επιλέξτε το, αν χρειάζεται λιγότερο από δώδεκα ώρες για να δημοσιευθεί.',
       :requirement => ['standard_18']
     a_minimal 'υπάρχει ελάχιστη ή καμία καθυστέρηση',
-      :text_as_statement => 'ελάχιστος',
+      :text_as_statement => 'ελάχιστη',
       :help_text => 'Επιλέξτε αυτό αν δημοσιεύσετε μέσα σε λίγα δευτερόλεπτα ή μερικά λεπτά.',
       :requirement => ['exemplar_8']
 
@@ -1361,7 +1361,7 @@ survey 'GR',
     q_dumpFrequency 'Πόσο συχνά δημιουργείτε μια ένα νέο τμήμα στη βάση δεδομένων;',
       :discussion_topic => :dumpFrequency,
       :display_on_certificate => true,
-      :text_as_statement => 'Τμήματα βάσεων δεδομένων δημιουργήθηκαν',
+      :text_as_statement => 'Τμήματα βάσεων δεδομένων δημιουργούνται',
       :help_text => 'Ταχύτερη πρόσβαση στις πιο συχνές εξαγωγές αποσπάσμάτων του συνόλου δεδομένων σημαίνει ότι οι άλλοι μπορούν να ξεκινήσουν πιο γρήγορα με τα περισσότερο ενημερωμένα δεδομένα.',
       :pick => :one
     dependency :rule => 'A and B and C'
@@ -1422,7 +1422,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'διορθώθηκε',
+      :text_as_statement => 'διορθωμένα',
       :requirement => ['standard_21']
 
     label_standard_21 'Θα πρέπει να <strong>να διορθώνετε τα δεδομένα όταν οι άλλοι σας αναφέρουν σφάλματα </strong> έτσι ώστε όλοι να επωφελούνται από τις βελτιώσεις στην ακρίβεια.',
@@ -1478,13 +1478,13 @@ survey 'GR',
     q_backups 'Κάνετε εφεδρικά αντίγραφα εκτός του site;',
       :discussion_topic => :backups,
       :display_on_certificate => true,
-      :text_as_statement => 'Τα δεδομένα είναι',
+      :text_as_statement => 'Τα δεδομένα έχουν',
       :help_text => 'Κάνοντας μια τακτική offsite(εκτός του site) δημιουργία αντιγράφων ασφαλείας βοηθά στο να διασφαλιστεί ότι τα δεδομένα δεν θα χαθούν σε περίπτωση ατυχήματος.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'δημιουργήθηκε αντίγραφο ασφαλείας',
+      :text_as_statement => 'ασφαλή εφεδρικά αντίγραφα εκτός του site.',
       :requirement => ['standard_23']
 
     label_standard_23 'Θα πρέπει να <strong>να δημιοργείτε ακόλουθα αντίγραφα ασφαλείας offsite </strong> έτσι ώστε να μην χαθούν τα δεδομένα αν συμβεί κάποιο ατύχημα.',
@@ -1516,7 +1516,7 @@ survey 'GR',
     q_statusUrl 'Πού παρέχονται πληροφορίες σχετικά με την τρέχουσα κατάσταση της υπηρεσίας;',
       :discussion_topic => :statusUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Κατάσταση υπηρεσίας δίνεται σε',
+      :text_as_statement => 'Κατάσταση υπηρεσίας δίνεται στο',
       :help_text => 'Δώστε μια διεύθυνση URL για μια σελίδα που ενημερώνει τους άλλους σχετικά με την τρέχουσα κατάσταση της υπηρεσίας σας, συμπεριλαμβανομένων τυχόν ελαττώματων που γνωρίζετε.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
@@ -1659,7 +1659,7 @@ survey 'GR',
     q_currentDatasetUrl 'Πού είναι το τρέχον σύνολο δεδομένων σας;',
       :discussion_topic => :currentDatasetUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Το τρέχον σύνολο δεδομένων είναι διαθέσιμο σε',
+      :text_as_statement => 'Το τρέχον σύνολο δεδομένων είναι διαθέσιμο στο',
       :help_text => 'Δώστε μια απλή διεύθυνση URL με την πιο πρόσφατη έκδοση του συνόλου δεδομένων. Το περιεχόμενο σε αυτήν τη διεύθυνση URL θα πρέπει να αλλάζει κάθε φορά που μια νέα έκδοση είναι διαθέσιμη.',
       :required => :required
     dependency :rule => 'A and B'
@@ -1976,7 +1976,7 @@ survey 'GR',
     condition_A :q_dataType, '==', :a_geographic
     a_specific 'έχουν σχεδιαστεί για γεωγραφικά δεδομένα όπως <a href="http://www.opengeospatial.org/standards/kml/">KML </a> ή <a href="http://www.geojson.org/">GeoJSON </a>
                      ',
-      :text_as_statement => 'σε μια γεωγραφική μορφή δεδομένων',
+      :text_as_statement => 'σε μια μορφή γεωγραφικών δεδομένων',
       :help_text => 'Αυτές οι μορφές περιγράφουν σημεία, γραμμές και σύνορα, και εκθέτουν τις δομές στα δεδομένα που καθιστούν ευκολότερη την αυτόματη διαδικασία.',
       :requirement => ['exemplar_16']
     a_generic 'διατηρεί τα δεδομένα δομημένα όπως τα JSON, XML και CSV',
@@ -2005,16 +2005,16 @@ survey 'GR',
     q_structuredFormat 'Μήπως τα δομημένα δεδομένα σας περιλαμβάνουν μορφές που',
       :discussion_topic => :structuredFormat,
       :display_on_certificate => true,
-      :text_as_statement => 'Δομημένα δεδομένα είναι δημοσιεύμένα',
+      :text_as_statement => 'Δομημένα δεδομένα είναι δημοσιευμένα',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_structured
     a_suitable 'έχουν σχεδιαστεί για δομημένα δεδομένα όπως τα JSON, XML, Turtle ή CSV',
-      :text_as_statement => 'σε μια δομημένη μορφή δεδομένων',
+      :text_as_statement => 'σε μια μορφή δομημένων δεδομένων',
       :help_text => 'Αυτές οι μορφές οργανώνουν τα δεδομένα σε μια βασική δομή πραγμάτων που έχουν τιμές σε ένα γνωστό σύνολο ιδιοτήτων. Αυτές οι μορφές είναι εύκολο για τους υπολογιστές να τις επεξεργάζονται αυτόματα.',
       :requirement => ['pilot_20']
     a_unsuitable 'δεν έχουν σχεδιαστεί για δομημένα δεδομένα όπως το Word ή PDF',
-      :text_as_statement => 'σε μορφή ακατάλληλη για δομημένα δεδομένα',
+      :text_as_statement => 'σε μια μορφή ακατάλληλη για δομημένα δεδομένα',
       :help_text => 'Αυτές οι μορφές δεν ταιριάζουν σε αυτό το είδος των δεδομένων, διότι αποκρύπτουν υποκείμενη δομή τους.'
 
     label_pilot_20 'Θα πρέπει να <strong>δημοσιεύετε δομημένα δεδομένα σε μορφή ειδικά σχεδιασμένη για αυτο το σκοπό </strong> έτσι ώστε να είναι εύκολη η επεξεργασία τους.',
@@ -2052,7 +2052,7 @@ survey 'GR',
     a_false 'όχι, τα αναγνωριστικά δεν μπορούν να χρησιμοποιηθούν για να βρεθούν πρόσθετες πληροφορίες',
       :text_as_statement => ''
     a_service 'ναι, υπάρχει μια υπηρεσία που οι άνθρωποι μπορούν να χρησιμοποιήσουν για να προσδιορίσουν τα αναγνωριστικά.',
-      :text_as_statement => 'προσδιορισμός χρησιμοποιώντας μια υπηρεσία',
+      :text_as_statement => 'προσδιορίζονται χρησιμοποιώντας μια υπηρεσία',
       :help_text => 'Online υπηρεσίες μπορούν να χρησιμοποιηθούν για να πληροφορήσουν τον κόσμο σχετικά με τα αναγνωριστικά, όπως τα αναγνωριστικά GUID ή DOIs στα οποία δεν υπάρχει άμεση πρόσβαση όπως σε μια σελίδα URL.',
       :requirement => ['standard_34']
     a_resolvable 'ναι, τα αναγνωριστικά είναι διευθύνσεις(URLs) σελίδων που προσδιορίζονται οτι δίνουν πληροφορίες',
@@ -2078,7 +2078,7 @@ survey 'GR',
     q_resolutionServiceURL 'Πού είναι η υπηρεσία που χρησιμοποιείται για να προσδιορίσει τα αναγνωριστικά;',
       :discussion_topic => :resolutionServiceURL,
       :display_on_certificate => true,
-      :text_as_statement => 'Η υπηρεσία προσδιορισμού αναγνωριστικού είναι σε',
+      :text_as_statement => 'Η υπηρεσία προσδιορισμού αναγνωριστικού είναι στο',
       :help_text => 'Η υπηρεσία προσδιορισμού θα μπορεί να λάβει ένα αναγνωριστικό ως παράμετρο ερωτήματος και να δώσει πίσω κάποια πληροφορία σχετικά με το πράγμα που προσδιορίζει.'
     dependency :rule => 'A and B'
     condition_A :q_identifiers, '==', :a_true
@@ -2121,7 +2121,7 @@ survey 'GR',
     q_externalUrls 'Μήπως τα δεδομένα σας χρησιμοποιούν αυτές τις διευθύνσεις URL από τρίτους;',
       :discussion_topic => :externalUrls,
       :display_on_certificate => true,
-      :text_as_statement => 'Σύνδεσμος(URL) Τρίτων-μερών',
+      :text_as_statement => 'Σύνδεσμοι(URLs) Τρίτων-μερών',
       :help_text => 'Θα πρέπει να χρησιμοποιείτε τις διευθύνσεις URL τρίτων που προσδιορίζουν πληροφορίες σχετικά με τα πράγματα που περιγράφονται στα δεδομένα σας. Αυτό μειώνει τις επικαλύψεις, και βοηθά τους ανθρώπους να συνδυάζουν δεδομένα από διαφορετικές πηγές για να γίνουν πιο χρήσιμα.',
       :pick => :one
     dependency :rule => 'A and B and C'
@@ -2157,7 +2157,7 @@ survey 'GR',
     a_false 'no',
       :text_as_statement => ''
     a_true 'yes',
-      :text_as_statement => 'αναγνώσιμα απο τη μηχανή',
+      :text_as_statement => 'αναγνώσιμη απο τη μηχανή',
       :requirement => ['exemplar_19']
 
     label_exemplar_19 'Θα πρέπει να <strong>παρέχετε ένα αναγνώσιμο από τη μηχανή μονοπάτι προέλευσης </strong> για τα δεδομένα σας έτσι ώστε οι άλλοι να μπορούν να εντοπίζουν το πώς έγινε η επεξεργασία.',
@@ -2169,7 +2169,7 @@ survey 'GR',
     q_digitalCertificate 'Πού μας περιγράφετε το πώς αυτοί που λαμβάνουν τα δεδομένα μπορούν να ελέγξουν ότι προέρχονται από εσάς;',
       :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
-      :text_as_statement => 'Αυτά τα δεδομένα μπορούν να επαληθευτούν χρησιμοποιώντας',
+      :text_as_statement => 'Αυτά τα δεδομένα μπορούν να επαληθευτούν χρησιμοποιώντας το',
       :help_text => 'Αν παραδινετε σημαντικά στοιχεία σε άλλους θα πρέπει να είναι σε θέση να μπορούν να ελέγχουν ότι αυτό που λαμβάνουν είναι το ίδιο με αυτό που δημοσιεύσατε. Για παράδειγμα, μπορείτε να υπογράφετε ψηφιακά(digitally sign) τα δεδομένα που δημοσιεύετε, έτσι ώστε κάποιος να μπορεί να πει αν έχουν αλλοιωθεί.'
     a_1 'Σύνδεσμος(URL) Διαδικασίας Επαλήθευσης',
       :string,
@@ -2199,47 +2199,47 @@ survey 'GR',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
-    a_title 'τίτλος',
-      :text_as_statement => 'τίτλος',
+    a_title 'τον τίτλο',
+      :text_as_statement => 'τον τίτλο',
       :requirement => ['standard_36']
-    a_description 'περιγραφή',
-      :text_as_statement => 'περιγραφή',
+    a_description 'την περιγραφή',
+      :text_as_statement => 'την περιγραφή',
       :requirement => ['standard_37']
-    a_issued 'ημερομηνία κυκλοφορίας',
-      :text_as_statement => 'ημερομηνία κυκλοφορίας',
+    a_issued 'την ημερομηνία κυκλοφορίας',
+      :text_as_statement => 'την ημερομηνία κυκλοφορίας',
       :requirement => ['standard_38']
-    a_modified 'ημερομηνία τροποποίησης',
-      :text_as_statement => 'ημερομηνία τροποποίησης',
+    a_modified 'την ημερομηνία τροποποίησης',
+      :text_as_statement => 'την ημερομηνία τροποποίησης',
       :requirement => ['standard_39']
-    a_accrualPeriodicity 'συχνότητα των κυκλοφοριών',
-      :text_as_statement => 'συχνότητα κυκλοφορίας',
+    a_accrualPeriodicity 'την συχνότητα των κυκλοφοριών',
+      :text_as_statement => 'την συχνότητα κυκλοφορίας',
       :requirement => ['standard_40']
-    a_identifier 'αναγνωριστικό',
-      :text_as_statement => 'αναγνωριστικό',
+    a_identifier 'το αναγνωριστικό',
+      :text_as_statement => 'το αναγνωριστικό',
       :requirement => ['standard_41']
-    a_landingPage 'σελίδα προορισμού',
-      :text_as_statement => 'σελίδα προορισμού',
+    a_landingPage 'τη σελίδα προορισμού',
+      :text_as_statement => 'τη σελίδα προορισμού',
       :requirement => ['standard_42']
-    a_language 'γλώσσα',
-      :text_as_statement => 'γλώσσα',
+    a_language 'τη γλώσσα',
+      :text_as_statement => 'τη γλώσσα',
       :requirement => ['standard_43']
-    a_publisher 'εκδότης',
-      :text_as_statement => 'εκδότης',
+    a_publisher 'τον εκδότη',
+      :text_as_statement => 'τον εκδότη',
       :requirement => ['standard_44']
-    a_spatial 'χωρική / γεωγραφική κάλυψη',
-      :text_as_statement => 'χωρική / γεωγραφική κάλυψη',
+    a_spatial 'τη χωρική / γεωγραφική κάλυψη',
+      :text_as_statement => 'τη χωρική / γεωγραφική κάλυψη',
       :requirement => ['standard_45']
-    a_temporal 'χρονική κάλυψη',
-      :text_as_statement => 'χρονική κάλυψη',
+    a_temporal 'τη χρονική κάλυψη',
+      :text_as_statement => 'τη χρονική κάλυψη',
       :requirement => ['standard_46']
-    a_theme 'Θέμα (τα)',
-      :text_as_statement => 'Θέμα (τα)',
+    a_theme 'το(-α) Θέμα(-τα)',
+      :text_as_statement => 'το(-α) Θέμα(-τα)',
       :requirement => ['standard_47']
-    a_keyword 'κλειδί (α) ή ετικέτα (-ες)',
-      :text_as_statement => 'κλειδί (α) ή ετικέτα (-ες)',
+    a_keyword 'το(-α) κλειδί (α) ή ετικέτα (-ες)',
+      :text_as_statement => 'το(-α) κλειδί (α) ή ετικέτα (-ες)',
       :requirement => ['standard_48']
-    a_distribution 'διανομή (-ες)',
-      :text_as_statement => 'διανομή (-ες)'
+    a_distribution 'τη(-ις) διανομή (-ες)',
+      :text_as_statement => 'τη(-ις) διανομή (-ες)'
 
     label_standard_36 'Θα πρέπει να <strong>συμπεριλάβετε έναν αναγνώσιμο από τη μηχανή τίτλο στοιχείων στην τεκμηρίωση σας </strong>έτσι ώστε κάποιος να ξέρει πώς να αναφερθεί σε αυτό.',
       :custom_renderer => '/partials/requirement_standard',
@@ -2332,7 +2332,7 @@ survey 'GR',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_keyword
 
-    q_distributionMetadata 'Μήπως η τεκμηρίωση περιλαμβάνει αναγνώσιμα από τη μηχανή μεταδεδομένα για κάθε διανομή στο',
+    q_distributionMetadata 'Μήπως η τεκμηρίωση περιλαμβάνει αναγνώσιμα από τη μηχανή μεταδεδομένα σε κάθε διανομή για',
       :discussion_topic => :distributionMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'Η τεκμηρίωση για κάθε διανομή περιλαμβάνει δεδομένα αναγνώσιμα από τη μηχανή για',
@@ -2340,20 +2340,20 @@ survey 'GR',
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '==', :a_distribution
-    a_title 'τίτλος',
-      :text_as_statement => 'τίτλος',
+    a_title 'τον τίτλο',
+      :text_as_statement => 'τον τίτλο',
       :requirement => ['standard_49']
-    a_description 'περιγραφή',
-      :text_as_statement => 'περιγραφή',
+    a_description 'την περιγραφή',
+      :text_as_statement => 'την περιγραφή',
       :requirement => ['standard_50']
-    a_issued 'ημερομηνία κυκλοφορίας',
-      :text_as_statement => 'ημερομηνία κυκλοφορίας',
+    a_issued 'την ημερομηνία κυκλοφορίας',
+      :text_as_statement => 'την ημερομηνία κυκλοφορίας',
       :requirement => ['standard_51']
-    a_modified 'ημερομηνία τροποποίησης',
-      :text_as_statement => 'ημερομηνία τροποποίησης',
+    a_modified 'την ημερομηνία τροποποίησης',
+      :text_as_statement => 'την ημερομηνία τροποποίησης',
       :requirement => ['standard_52']
-    a_rights 'δήλωση δικαιωμάτων',
-      :text_as_statement => 'δήλωση δικαιωμάτων',
+    a_rights 'τη δήλωση δικαιωμάτων',
+      :text_as_statement => 'τη δήλωση δικαιωμάτων',
       :requirement => ['standard_53']
     a_accessURL 'Σύνδεσμος(URL) για πρόσβαση στα δεδομένα.',
       :text_as_statement => 'μια διεύθυνση URL για πρόσβαση στα δεδομένα',
