@@ -36,7 +36,7 @@ $(function(){
 
     $actions.on('click', '.create-certificate', function(){
       // use the related certificate to populate the dialog form
-      
+      Tracking.event('Homepage', 'create-with-jurisdiction', access_code);
       var $form = $(this).parent('form');
       $form.find('input[name=survey_access_code]').remove();
       var $hidden = $('<input>', {type: 'hidden', name:'survey_access_code', value:access_code});
@@ -127,6 +127,7 @@ $(function(){
                         .siblings().hide();
 
               access_code = country.access_code;
+              Tracking.event('Homepage', 'change-jurisdiction', access_code);
 
               dropdown.selectAll('option')
                 .property('selected', function(d){return d.id == country.id ? 'selected' : '';});
