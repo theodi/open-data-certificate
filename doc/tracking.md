@@ -17,6 +17,14 @@ If the advanced search are shown then a
 `toggle` action should be recorded under the
 `Search` category.
 
+### Homepage
+
+If the questionnaire creation options are used
+a `change-jurisdiction` event will be triggered
+for each choice and a `create-with-jurisdiction`
+event will be triggered on pressing the create
+button.
+
 ### Questionnaire
 
 These actions are recorded with `Questionnaire`
@@ -126,6 +134,17 @@ of the question as the `value`.
     <td>last-question</td>
     <td>question text</td>
     <td>question id</td>
+  </tr>
+  <tr>
+    <td rowspan=2>Homepage</td>
+    <td>change-jurisdiction</td>
+    <td rowspan=2>country-code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan=2>Homepage</td>
+    <td>create-with-jurisdiction</td>
+    <td></td>
   </tr>
 </tbody>
 </table>

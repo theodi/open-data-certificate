@@ -20,19 +20,26 @@ class ODIBot
   end
 
   def is_http_url?
-    uri = URI.parse(@url)
     if uri.kind_of?(URI::HTTP)
       hostname = uri.hostname
       hostname.present? && hostname.include?('.')
     else
       false
     end
+  end
+
+  def uri
+    @uri ||= URI.parse(@url)
   rescue URI::InvalidURIError
-    false
+    nil
+  end
+
+  def linkedin?
+    uri.hostname =~ /linkedin\.com/
   end
 
   def valid?
-    is_http_url? && response_code == 200
+    is_http_url? && (linkedin? || response_code == 200)
   end
 
   def self.handle_errors(return_value)

@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'translations'
 
 namespace :translations do
@@ -19,6 +20,7 @@ Should work on OSX
 
     converter = quiet { Translations::SpreadsheetConverter.new(translation_sheet) }
     base_path = 'translations/temp'
+    FileUtils.mkdir_p "prototype/#{base_path}"
     legal_path = "#{base_path}/#{lang_code}.legal.txt"
     main_path = "#{base_path}/#{lang_code}.main.txt"
     converter.extract('Legal', "prototype/#{legal_path}")
@@ -26,7 +28,8 @@ Should work on OSX
     sh "saxon -s:prototype/jurisdictions/certificate.#{country_code}.xml -xsl:prototype/auto-translate.xsl -o:prototype/jurisdictions/certificate.#{country_code}.xml translationFile=#{legal_path}"
     sh "saxon -s:prototype/translations/certificate.en.xml -xsl:prototype/auto-translate.xsl -o:prototype/translations/certificate.#{lang_code}.xml translationFile=#{main_path}"
     sh "saxon -s:prototype/translations/certificate.#{lang_code}.xml -xsl:prototype/mark-lang.xsl -o:prototype/translations/certificate.#{lang_code}.xml lang=#{lang_code}"
-    mkdir "prototype/temp"
+    sh "saxon -s:prototype/jurisdictions/certificate.#{country_code}.xml -xsl:prototype/mark-lang.xsl -o:prototype/jurisdictions/certificate.#{country_code}.xml lang=#{lang_code}"
+    FileUtils.mkdir_p "prototype/temp"
     sh "saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp"
   end
 end
