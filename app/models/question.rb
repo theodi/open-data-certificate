@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
   scope :mandatory, where(is_mandatory: true)
+  scope :urls, joins(:answers).merge(Answer.urls)
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required

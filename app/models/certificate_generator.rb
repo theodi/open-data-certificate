@@ -1,4 +1,5 @@
 class CertificateGenerator < ActiveRecord::Base
+  include Ownership
 
   belongs_to :user
   belongs_to :response_set
@@ -60,21 +61,7 @@ class CertificateGenerator < ActiveRecord::Base
     certificate = generator.generate(jurisdiction, false)
     response_set = certificate.response_set
 
-    errors = []
-
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
+    errors = response_set.response_errors
 
     {success: true, published: response_set.published?, errors: errors}
   end
@@ -125,6 +112,10 @@ class CertificateGenerator < ActiveRecord::Base
 
   def published?
     certificate.try(:published?)
+  end
+
+  def response_errors
+    response_set.response_errors
   end
 
   def dataset_url

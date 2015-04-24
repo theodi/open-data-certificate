@@ -14,6 +14,13 @@ class Response < ActiveRecord::Base
 
   before_save :resolve_if_url
 
+  scope :filled, joins(:question).where(<<-SQL)
+    CASE questions.pick
+    WHEN 'none' THEN trim(string_value) != ''
+    ELSE answer_id is not null
+    END
+  SQL
+
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end

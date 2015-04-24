@@ -4,21 +4,15 @@ class Ability
   def initialize(user)
     
     can :manage, ResponseSet do |response_set|
-      response_set.nil? ||
-        (
-        response_set.user.nil? ||
-        response_set.user == user
-        )
+      response_set.nil? || response_set.unowned_or_by?(user)
     end
     
     can :read, Dataset do |dataset|
-      dataset.visible? || user.try(:admin?) ||
-        (dataset.user.present? && dataset.user == user)
+      dataset.visible? || user.try(:admin?) || dataset.owned_by?(user)
     end
 
     can :manage, Dataset do |dataset|
-      dataset.user.nil? ||
-        dataset.user == user
+      dataset.unowned_or_by?(user)
     end
 
     can :claim, Certificate do |certificate|
@@ -37,30 +31,27 @@ class Ability
     end
 
     can :manage, Claim do |claim|
-      user.admin? || claim.try(:user) == user
+      user.admin? || claim.owned_by?(user)
     end
 
     can :destroy, Transfer, user: user
 
     can :read, CertificateGenerator do |generator|
-      generator.try(:user) == user
+      generator.owned_by?(user)
     end
 
     can :read, CertificationCampaign do |campaign|
-      campaign.try(:user) == user
+      campaign.owned_by?(user)
     end
 
     can :read, Certificate do |certificate|
-      certificate.visible? || owns(user, certificate)
+      certificate.visible? || certificate.owned_by?(user)
     end
 
     can :manage, Certificate do |certificate|
-      owns(user, certificate)
+      certificate.owned_by?(user)
     end
 
   end
 
-  def owns(user, model)
-    model.user.present? && model.user == user
-  end
 end

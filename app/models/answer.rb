@@ -3,6 +3,8 @@ class Answer < ActiveRecord::Base
 
   attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement
 
+  scope :urls, where(:input_type => 'url')
+
   def message?
     !(message || '').strip.blank?
   end

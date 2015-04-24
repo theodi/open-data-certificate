@@ -582,3 +582,40 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
 end
+
+class ResponseSetErrorsTest < ActiveSupport::TestCase
+  def setup
+    load_custom_survey 'cert_generator.rb'
+    @user = FactoryGirl.create :user
+  end
+
+  test "a missing answer causes an error" do
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+
+    assert_equal %w[mandatory], rs.response_errors['publisherUrl']
+  end
+
+  test "an unresolvable url causes an error" do
+    odibot = mock('odibot')
+    odibot.stubs(:valid?).returns(false)
+    ODIBot.expects(:new).at_least_once.with('http://invalid.com').returns(odibot)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+    rs.update_responses('documentationUrl' => 'http://invalid.com')
+
+    assert rs.response_errors['documentationUrl'].include?('invalid-url'), 'url is marked as invalid'
+  end
+
+  test "an unresolvable url causes an error for a mandatory question" do
+    odibot = mock('odibot')
+    odibot.stubs(:valid?).returns(false)
+    ODIBot.expects(:new).at_least_once.with('http://invalid.com').returns(odibot)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+    rs.update_responses('publisherUrl' => 'http://invalid.com')
+
+    assert rs.response_errors['publisherUrl'].include?('invalid-url'), 'url is marked as invalid'
+    assert !rs.response_errors['publisherUrl'].include?('mandatory'), 'not described as mandatory'
+  end
+end

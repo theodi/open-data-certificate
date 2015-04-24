@@ -112,7 +112,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
       response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
+      assert_equal({}, response[:errors])
     end
   end
 
@@ -147,14 +147,14 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
       response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' is mandatory"], response[:errors])
+      assert_equal({'publisherUrl' => ['mandatory']}, response[:errors])
     end
 
     assert_no_difference 'ResponseSet.count' do
       response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' is mandatory"], response[:errors])
+      assert_equal({'publisherUrl' => ['mandatory']}, response[:errors])
     end
   end
 
@@ -187,7 +187,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
         response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
         assert_equal(true, response[:success])
         assert_equal(false, response[:published])
-        assert_equal(["The question 'favouriteAnimal' is mandatory"], response[:errors])
+        assert_equal({'favouriteAnimal' => ['mandatory']}, response[:errors])
       end
     end
 
