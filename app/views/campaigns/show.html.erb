@@ -36,22 +36,26 @@
       <td>
         <%= boolean_mark(generator.published?) %>
       </td>
-      <td>
-        <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
-      </td>
-      <td>
-        <% if generator.published? %>
-          <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
-        <% end %>
-      </td>
-      <td>
-        <% if can? :edit, generator.response_set %>
-          <%= link_to "edit", continue_path(generator.response_set) %>
-        <% end %>
-      </td>
-      <td>
-        <%= generator.dataset.user_email %>
-      </td>
+      <% if generator.completed? %>
+        <td>
+            <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+        </td>
+        <td>
+            <% if generator.published? %>
+            <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+            <% end %>
+        </td>
+        <td>
+            <% if can? :edit, generator.response_set %>
+            <%= link_to "edit", continue_path(generator.response_set) %>
+            <% end %>
+        </td>
+        <td>
+            <%= generator.dataset.user_email %>
+        </td>
+      <% else %>
+        <td colspan="4">Processing…</td>
+      <% end %>
     </tr>
   <% end %>
 </table>
