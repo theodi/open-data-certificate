@@ -102,16 +102,34 @@ class CertificateGenerator < ActiveRecord::Base
 
   def determine_user(response_set, create_user)
     kitten_data = response_set.kitten_data
-    if kitten_data && create_user
-      contact = kitten_data.contacts_with_email.first
-      if contact
-        new_user = User.find_or_create_by_email(contact.email) do |user|
-          user.password = SecureRandom.base64
-          user.skip_confirmation_notification!
+    if kitten_data
+      contacts = kitten_data.contacts_with_email
+      contacts.each do |contact|
+        user = User.find_by_email(contact.email)
+        return user if user.present?
+      end
+      if create_user
+        contacts.each do |contact|
+          user = create_user_from_contact(contact)
+          return user if user.present?
         end
       end
     end
-    new_user.try(:persisted?) ? new_user : self.user
+    return self.user
+  end
+
+  def create_user_from_contact(contact)
+    User.transaction do
+      User.create!(
+          email: contact.email,
+          name: contact.name,
+          password: SecureRandom.base64) do |user|
+        user.skip_confirmation_notification!
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    # in case the there was a find or create race
+    User.find_by_email(contact.email) if e.message =~ /taken/
   end
 
   def published?

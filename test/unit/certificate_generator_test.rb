@@ -239,7 +239,10 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     response_set.kitten_data = kd = KittenData.new
     kd[:data][:publishers] = []
     kd[:data][:maintainers] = nil
-    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:contributors] = [
+      DataKitten::Agent.new(mbox: ''),
+      DataKitten::Agent.new(mbox: 'test@datapub.org')
+    ]
 
     user = generator.determine_user(response_set, true)
 
@@ -272,6 +275,13 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     user = generator.determine_user(response_set, false)
 
     assert_equal user, @user
+  end
+
+  test "creating a user when already exists" do
+    existing_user = FactoryGirl.create(:user, email: 'present@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    user = generator.create_user_from_contact(DataKitten::Agent.new(mbox: 'present@datapub.org'))
+    assert_equal existing_user, user
   end
 
 end

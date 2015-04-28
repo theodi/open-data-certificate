@@ -65,7 +65,7 @@ class KittenData < ActiveRecord::Base
 
   def contacts_with_email
     agents = [data.values_at(:publishers, :maintainers, :contributors)].flatten.compact
-    agents.select(&:mbox)
+    agents.select { |contact| contact.mbox.present? }
   end
 
   protected
