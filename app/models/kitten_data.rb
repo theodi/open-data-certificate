@@ -112,7 +112,7 @@ class KittenData < ActiveRecord::Base
     if data[:title].include?("API") || data[:description].include?("API")
       @fields["releaseType"] = "service"
     else
-      check_frequency
+      @fields["releaseType"] = check_frequency
     end
   end
 
@@ -182,13 +182,18 @@ class KittenData < ActiveRecord::Base
   end
 
   def check_frequency
+    num_distributions = data[:distributions].length
     if data[:update_frequency].empty?
-      data[:distributions].length == 1 ? @fields["releaseType"] = "oneoff" : @fields["releaseType"] = "collection"
+      num_distributions == 1 ? "oneoff" : "collection"
+    elsif num_distributions > 1
+      "series"
     else
-      @fields["releaseType"] = "series" if data[:distributions].length > 1
+      "oneoff"
     end
+  end
 
-    if @fields["releaseType"] == "oneoff"
+  def set_dataset_url
+    if check_frequency == "oneoff"
       @fields["datasetUrl"] = data[:distributions][0][:access_url]
     end
   end
