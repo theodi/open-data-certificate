@@ -82,17 +82,7 @@ class CertificateGenerator < ActiveRecord::Base
 
     response_set.autocomplete(request["documentationUrl"])
 
-    if response_set.kitten_data && create_user
-      email = response_set.kitten_data[:data][:publishers].first.mbox.presence rescue nil
-      if email
-        new_user = User.find_or_create_by_email(email) do |user|
-          user.password = SecureRandom.base64
-          user.skip_confirmation_notification!
-        end
-      end
-    end
-
-    user = new_user.try(:persisted?) ? new_user : self.user
+    user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
     response_set.reload
@@ -108,6 +98,20 @@ class CertificateGenerator < ActiveRecord::Base
     save!
 
     certificate
+  end
+
+  def determine_user(response_set, create_user)
+    kitten_data = response_set.kitten_data
+    if kitten_data && create_user
+      contact = kitten_data.contacts_with_email.first
+      if contact
+        new_user = User.find_or_create_by_email(contact.email) do |user|
+          user.password = SecureRandom.base64
+          user.skip_confirmation_notification!
+        end
+      end
+    end
+    new_user.try(:persisted?) ? new_user : self.user
   end
 
   def published?

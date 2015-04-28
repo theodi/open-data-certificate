@@ -63,6 +63,11 @@ class KittenData < ActiveRecord::Base
     @fields
   end
 
+  def contacts_with_email
+    agents = [data.values_at(:publishers, :maintainers, :contributors)].flatten.compact
+    agents.select(&:mbox)
+  end
+
   protected
 
   def set_title
@@ -211,6 +216,8 @@ class KittenData < ActiveRecord::Base
         :title             => dataset_field(:data_title, ''),
         :description       => dataset_field(:description, ''),
         :publishers        => dataset_field(:publishers, []),
+        :maintainers       => dataset_field(:maintainers, []),
+        :contributors      => dataset_field(:contributors, []),
         :rights            => dataset_field(:rights),
         :licenses          => dataset_field(:licenses, []),
         :update_frequency  => dataset_field(:update_frequency, ''),
