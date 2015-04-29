@@ -65,13 +65,13 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
   end
 
   test "creating certificate with invalid URL" do
-    stub_request(:get, "http://www.example/error").
-                to_return(:body => "", status: 404)
+    stub_request(:head, "http://www.example.com/error").
+                to_return(status: 404)
 
     dataset = {
       dataTitle: 'The title',
       releaseType: 'oneoff',
-      publisherUrl: 'http://www.example/error',
+      publisherUrl: 'http://www.example.com/error',
       publisherRights: 'yes',
       publisherOrigin: 'true',
       linkedTo: 'true',
