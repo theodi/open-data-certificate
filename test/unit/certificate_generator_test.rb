@@ -3,6 +3,7 @@ require 'test_helper'
 class CertificateGeneratorTest < ActiveSupport::TestCase
 
   def setup
+    stub_request(:head, "http://www.example.com/error").to_return(status: 200)
     load_custom_survey 'cert_generator.rb'
     @user = FactoryGirl.create :user
   end
