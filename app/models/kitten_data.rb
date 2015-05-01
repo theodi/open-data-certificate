@@ -121,21 +121,26 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_basic_requirements
+    # These should probably only be assumed on imports from government portals
+    # see discussion on https://github.com/theodi/open-data-certificate/issues/1090
+    @fields["publisherOrigin"] = "true"
+    @fields["dataPersonal"] = "not_personal"
+    @fields["contentRights"] = "samerights"
+    @fields["codelists"] = "false"
+    @fields["vocabulary"] = "false"
+  end
+
   def set_dgu_assumptions
     return unless url.include?("data.gov.uk")
     # Assumptions for data.gov.uk
     uri = URI(url)
     package = uri.path.split("/").last
 
-    @fields["publisherOrigin"] = "true"
     @fields["copyrightURL"] = url
-    @fields["dataPersonal"] = "not_personal"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.gov.uk"
-    @fields["vocabulary"] = "false"
-    @fields["codelists"] = "false"
-    @fields["contentRights"] = "samerights"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
   end
@@ -147,15 +152,10 @@ class KittenData < ActiveRecord::Base
     uri = URI(url)
     package = uri.path.split("/").last
 
-    @fields["publisherOrigin"] = "true"
     @fields["copyrightURL"] = url
-    @fields["dataPersonal"] = "not_personal"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.london.gov.uk"
-    @fields["vocabulary"] = "false"
-    @fields["codelists"] = "false"
-    @fields["contentRights"] = "samerights"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
   end
