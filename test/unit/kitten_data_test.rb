@@ -94,6 +94,7 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   def setup
+    stub_request(:get, "http://www.example.com").to_return(status: 200)
     set_normal_data
     @kitten_data = nil
   end
@@ -234,6 +235,7 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'data.gov.uk assumptions are applied' do
+    stub_request(:get, 'http://data.gov.uk/some_crazy_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
@@ -241,7 +243,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "false", kitten_data.fields["frequentChanges"]
     assert_equal "false", kitten_data.fields["vocabulary"]
     assert_equal "false", kitten_data.fields["codelists"]
-    assert_equal kitten_data.url, @kitten_data.fields["copyrightURL"]
+    assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
     assert_equal "http://data.gov.uk", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]

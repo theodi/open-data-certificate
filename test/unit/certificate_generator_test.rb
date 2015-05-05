@@ -3,6 +3,7 @@ require 'test_helper'
 class CertificateGeneratorTest < ActiveSupport::TestCase
 
   def setup
+    stub_request(:head, "http://www.example.com/error").to_return(status: 200)
     load_custom_survey 'cert_generator.rb'
     @user = FactoryGirl.create :user
   end
@@ -65,13 +66,13 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
   end
 
   test "creating certificate with invalid URL" do
-    stub_request(:get, "http://www.example/error").
-                to_return(:body => "", status: 404)
+    stub_request(:head, "http://www.example.com/error").
+                to_return(status: 404)
 
     dataset = {
       dataTitle: 'The title',
       releaseType: 'oneoff',
-      publisherUrl: 'http://www.example/error',
+      publisherUrl: 'http://www.example.com/error',
       publisherRights: 'yes',
       publisherOrigin: 'true',
       linkedTo: 'true',
@@ -190,5 +191,98 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
         assert_equal({'favouriteAnimal' => ['mandatory']}, response[:errors])
       end
     end
+
+  test "determining contact email for dataset creates new user from publisher contact email" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
+  end
+
+  test "determining contact email for dataset finds user from publisher contact email" do
+    existing_user = FactoryGirl.create(:user, email: 'test@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    found_user = generator.determine_user(response_set, true)
+
+    assert_equal existing_user, found_user
+  end
+
+  test "determing contact email uses maintainer if no publisher present" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
+  end
+
+  test "determing contact email uses contributor if no publisher present" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = nil
+    kd[:data][:contributors] = [
+      DataKitten::Agent.new(mbox: ''),
+      DataKitten::Agent.new(mbox: 'test@datapub.org')
+    ]
+
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
+  end
+
+  test "finds first existant user before trying to create an owner" do
+    existing_user = FactoryGirl.create(:user, email: 'present@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'present@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    found_user = generator.determine_user(response_set, true)
+
+    assert_equal existing_user, found_user
+  end
+
+  test "does not create user if create is false" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = nil
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+
+    user = generator.determine_user(response_set, false)
+
+    assert_equal user, @user
+  end
+
+  test "creating a user when already exists" do
+    existing_user = FactoryGirl.create(:user, email: 'present@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    user = generator.create_user_from_contact(DataKitten::Agent.new(mbox: 'present@datapub.org'))
+    assert_equal existing_user, user
+  end
 
 end

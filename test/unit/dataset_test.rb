@@ -172,13 +172,13 @@ class DatasetTest < ActiveSupport::TestCase
     load_custom_survey 'cert_generator.rb'
     user = FactoryGirl.create :user
 
-    stub_request(:get, "http://www.example/error").
-        to_return(:body => "", status: 404)
+    stub_request(:head, "http://www.example.com/error").
+        to_return(status: 404)
 
     request = {
       dataTitle: 'The title',
       releaseType: 'oneoff',
-      publisherUrl: 'http://www.example/error',
+      publisherUrl: 'http://www.example.com/error',
       publisherRights: 'yes',
       publisherOrigin: 'true',
       linkedTo: 'true',

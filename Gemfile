@@ -100,7 +100,7 @@ gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
 gem 'httparty'
-gem 'data_kitten'
+gem 'data_kitten', github: 'theodi/data_kitten'
 gem 'delayed_job_active_record'
 gem 'linkeddata'
 gem 'rack-linkeddata'

@@ -8,7 +8,7 @@ class ODIBotTest < ActiveSupport::TestCase
   end
 
   test "Should return correct response code for 200" do
-    stub_request(:get, "http://www.example.com").
+    stub_request(:head, "http://www.example.com").
                 to_return(:body => "", status: 200)
 
     bot = ODIBot.new("http://www.example.com")
@@ -17,7 +17,7 @@ class ODIBotTest < ActiveSupport::TestCase
   end
 
   test "Should return correct response code for 500" do
-    stub_request(:get, "http://www.example.com").
+    stub_request(:head, "http://www.example.com").
                 to_return(:body => "", status: 500)
 
     bot = ODIBot.new("http://www.example.com")
@@ -26,7 +26,7 @@ class ODIBotTest < ActiveSupport::TestCase
   end
 
   test "Should cache responses" do
-    stub_request(:get, "http://www.example.com").
+    stub_request(:head, "http://www.example.com").
                 to_return(:body => "", status: 200)
 
     ODIBot.new("http://www.example.com").response_code
@@ -39,7 +39,7 @@ class ODIBotTest < ActiveSupport::TestCase
 
     bot = ODIBot.new("http://www.example.com")
 
-    ODIBot.expects(:get).never
+    ODIBot.expects(:head).never
 
     assert_equal 200, bot.response_code
   end
@@ -65,18 +65,18 @@ class ODIBotTest < ActiveSupport::TestCase
   end
 
   test "validates url by checking if http response is ok" do
-    stub_request(:get, "http://www.example.com").
+    stub_request(:head, "http://www.example.com").
                 to_return(:body => "", status: 200)
     assert ODIBot.new("http://www.example.com").valid?
   end
 
   test "checks if url is http before fetching" do
-    ODIBot.expects(:get).never
+    ODIBot.expects(:head).never
     refute ODIBot.new("foo bar").valid?
   end
 
   test "checks if url is specified enough to request" do
-    ODIBot.expects(:get).never
+    ODIBot.expects(:head).never
     refute ODIBot.new("http://").valid?
     refute ODIBot.new("http:///").valid?
     refute ODIBot.new("http://notadomain").valid?
@@ -87,7 +87,7 @@ class ODIBotTest < ActiveSupport::TestCase
       %w[/ page/subpage].each do |path|
         url = "#{scheme}://#{hostname}#{path}"
         test "skips http checks if url is #{url}" do
-          ODIBot.expects(:get).never
+          ODIBot.expects(:head).never
           assert ODIBot.new(url).valid?
         end
       end
@@ -96,7 +96,7 @@ class ODIBotTest < ActiveSupport::TestCase
 
   [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error].each do |error|
     test "handles #{error.name}" do
-      stub_request(:get, "http://www.example.com").to_raise(error)
+      stub_request(:head, "http://www.example.com").to_raise(error)
       refute ODIBot.new("http://www.example.com").valid?
     end
   end

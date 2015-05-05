@@ -510,7 +510,7 @@ class ResponseSet < ActiveRecord::Base
     code = resolve_url(url)
 
     if code == 200
-      kitten_data = KittenData.create(url: url, response_set: self)
+      create_kitten_data(url: url)
       update_responses(kitten_data.fields)
     end
   end
