@@ -70,6 +70,15 @@ class ODIBotTest < ActiveSupport::TestCase
     assert ODIBot.new("http://www.example.com").valid?
   end
 
+  test "validates url by checking if get response if head is not found" do
+    # CKAN API behaves badly and 404s HEAD requests when GET returns a response
+    stub_request(:head, "http://www.example.com").
+                to_return(:body => "", status: 404)
+    stub_request(:get, "http://www.example.com").
+                to_return(:body => "", status: 200)
+    assert ODIBot.new("http://www.example.com").valid?
+  end
+
   test "checks if url is http before fetching" do
     ODIBot.expects(:head).never
     refute ODIBot.new("foo bar").valid?

@@ -13,6 +13,7 @@ class ODIBot
       code = Rails.cache.fetch(@url) rescue nil
       if code.nil?
         code = self.class.head(@url, @options).code
+        code = self.class.get(@url, @options).code if code == 404
         Rails.cache.write(@url, code, expires_in: 5.minute)
       end
       code
