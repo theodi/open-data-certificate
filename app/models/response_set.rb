@@ -431,11 +431,12 @@ class ResponseSet < ActiveRecord::Base
       next if value.nil? || question.nil?
 
       if question.type == :none || question.type == :repeater
+        answer = question.answers.first
         ui_hash.push(HashWithIndifferentAccess.new(
           question_id: question.id.to_s,
           api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answers.first.id.to_s,
-          string_value: value,
+          answer_id: answer.id.to_s,
+          answer.value_key => value,
           autocompleted: true
         ))
       end

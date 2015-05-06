@@ -33,4 +33,8 @@ class Answer < ActiveRecord::Base
      :placeholder => self.placeholder,
     }.with_indifferent_access
   end
+
+  def value_key
+    input_type == 'url' ? :text_value : :string_value
+  end
 end
