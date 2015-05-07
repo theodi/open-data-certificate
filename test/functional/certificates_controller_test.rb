@@ -126,6 +126,13 @@ class CertificatesControllerTest < ActionController::TestCase
     assert_match /https:\/\//, json["certificate"]["dataset"]["uri"]
   end
 
+  test "requesting the png badge image" do
+    cert = FactoryGirl.create(:published_certificate_with_dataset)
+    get :badge, {dataset_id: cert.dataset.id, id: cert.id, format: "png"}
+
+    assert_equal File.read(File.join(Rails.root, 'app/assets/images/badges/raw_level_badge.png')), response.body
+  end
+
   test "mark certificate as valid" do
     cert = FactoryGirl.create(:certificate_with_dataset)
     user = FactoryGirl.create(:user)
