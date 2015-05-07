@@ -280,4 +280,28 @@ class KittenDataTest < ActiveSupport::TestCase
 
     assert_equal nil, kitten_data.fields["documentationMetadata"]
   end
+
+  test "accessor to data attributes" do
+    kd = KittenData.new
+    kd.data = {
+      :title => "testing title",
+      :empty => nil,
+    }
+
+    assert_equal "testing title", kd.get(:title)
+    assert_equal nil, kd.get(:empty)
+    assert_equal nil, kd.get(:missing)
+  end
+
+  test "accessor to data attributes that are lists" do
+    publisher = DataKitten::Agent.new(mbox: 'hi@example.org')
+    kd = KittenData.new
+    kd.data = {
+      :publishers => [publisher],
+      :maintainers => nil
+    }
+
+    assert_equal [publisher], kd.get_list(:publishers)
+    assert_equal [], kd.get_list(:maintainers)
+  end
 end

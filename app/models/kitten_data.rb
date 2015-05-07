@@ -68,6 +68,14 @@ class KittenData < ActiveRecord::Base
     agents.select { |contact| contact.mbox.present? }
   end
 
+  def get(field)
+    data[field].presence
+  end
+
+  def get_list(field)
+    get(field) || []
+  end
+
   protected
 
   def set_title
