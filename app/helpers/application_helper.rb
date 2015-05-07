@@ -33,11 +33,11 @@ module ApplicationHelper
       link_to(value.name, value.uri)
     when DataKitten::Temporal
       dates = [kitten_value(value.start), kitten_value(value.end)].reject(&:blank?)
-      dates.join(' – ') if dates.any?
+      safe_join(dates, ' — ') if dates.any?
     when String
       value
     when Date
-      value.strftime('%e %B %Y')
+      value.strftime('%-e %B %Y')
     when Hash
       value[:title]
     else

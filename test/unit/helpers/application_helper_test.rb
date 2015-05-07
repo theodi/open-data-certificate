@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test_helper'
 
 class ApplicationHelperTest < ActionView::TestCase
@@ -24,5 +25,68 @@ class ApplicationHelperTest < ActionView::TestCase
 
     assert result.html_safe?
 
+  end
+
+  test "kitten_field with data present" do
+    kd = KittenData.new
+    kd.data[:release_date] = "a value"
+
+    output = kitten_field(kd, :release_date)
+    assert_match /<dt>Release Date<\/dt>/, output
+    assert_match /<dd>a value<\/dd>/, output
+  end
+  
+  test "blank kitten_field" do
+    kd = KittenData.new
+    assert_equal nil, kitten_field(kd, :field)
+  end
+
+  test "kitten_value for unknown object" do
+    obj = mock("a thing", :to_s => "correct")
+    assert_equal "correct", kitten_value(obj)
+  end
+
+  test "kitten_value for string" do
+    assert_equal "a string", kitten_value("a string")
+  end
+
+  test "kitten_value for hash uses title value" do
+    assert_equal "a title", kitten_value({value: "hi", title: "a title"})
+  end
+
+  test "kitten_value for array calls kitten_value on each element" do
+    a = mock("a", :to_s => "one")
+    b = mock("b", :to_s => "two")
+
+    assert_equal "one, two", kitten_value([a, b])
+  end
+
+  test "kitten_value for an agent creates email link" do
+    name = DataKitten::Agent.new(name: "Chell")
+    contact = DataKitten::Agent.new(name: "GladOS", mbox: "glados@apeturelabs.com")
+
+    assert_equal "Chell", kitten_value(name)
+    assert_match /GladOS/, kitten_value(contact)
+    assert_match /mailto:glados@apeturelabs.com/, kitten_value(contact)
+  end
+
+  test "kitten_value for Date formats well" do
+    assert_equal "27 April 2014", kitten_value(Date.new(2014, 4, 27))
+  end
+
+  test "kitten_value for temporal field" do
+    open = DataKitten::Temporal.new(start: Date.new(2014, 4, 27))
+    closed = DataKitten::Temporal.new(end: Date.new(2014, 4, 27))
+    complete = DataKitten::Temporal.new(start: Date.new(2014, 4, 1), end: Date.new(2014, 4, 27)) 
+
+    assert_equal "27 April 2014", kitten_value(open)
+    assert_equal "27 April 2014", kitten_value(closed)
+    assert_equal "1 April 2014 — 27 April 2014", kitten_value(complete)
+  end
+
+  test "kitten_value for license field" do
+    license = DataKitten::License.new(name: "CC", uri: "http://example.com/cc")
+
+    assert_equal '<a href="http://example.com/cc">CC</a>', kitten_value(license)
   end
 end
