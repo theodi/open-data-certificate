@@ -165,7 +165,7 @@ class CertificateGenerator < ActiveRecord::Base
       response_set.responses.create({
         answer: answer,
         question: question,
-        string_value: data
+        answer.value_key => data
       })
 
     when :one
@@ -197,7 +197,7 @@ class CertificateGenerator < ActiveRecord::Base
         response_set.responses.create({
           answer: answer,
           question: question,
-          string_value: value,
+          answer.value_key => value,
           response_group: i
         })
         i += 1

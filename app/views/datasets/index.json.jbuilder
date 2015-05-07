@@ -25,7 +25,7 @@ json.certificates do
       json.uri dataset_url(dataset, :protocol => embed_protocol)
       json.dataLicense dataset.certificate.response_set.data_licence_determined_from_responses[:url]
       json.contentLicense dataset.certificate.response_set.content_licence_determined_from_responses[:url]
-      json.documentationUrl dataset.certificate.response_set.documentation_url.string_value if dataset.certificate.response_set.documentation_url
+      json.documentationUrl dataset.certificate.response_set.documentation_url.data_value if dataset.certificate.response_set.documentation_url
     end
     json.level t("levels.#{dataset.certificate.attained_level}.title").downcase
     json.created_at dataset.certificate.created_at
