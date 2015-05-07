@@ -69,7 +69,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def get(field)
-    data[field].presence
+    data[field].presence if data
   end
 
   def get_list(field)

@@ -281,6 +281,12 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal nil, kitten_data.fields["documentationMetadata"]
   end
 
+  test "accessor to data attributes returns nil on non serialzed kitten data" do
+    kd = KittenData.new
+    kd.data = false
+    assert_equal nil, kd.get(:title)
+  end
+
   test "accessor to data attributes" do
     kd = KittenData.new
     kd.data = {
