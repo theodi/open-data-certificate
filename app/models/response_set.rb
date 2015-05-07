@@ -436,7 +436,7 @@ class ResponseSet < ActiveRecord::Base
           question_id: question.id.to_s,
           api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
           answer_id: answer.id.to_s,
-          answer.value_key => value,
+          answer.value_key => value.to_s,
           autocompleted: true
         ))
       end
