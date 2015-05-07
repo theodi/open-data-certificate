@@ -15,25 +15,8 @@
     =detail_item(t :verification, scope: :summary_data) { t response_set.certificate.certification_type, scope: 'certificate.certification_types' }
 
     - if kitten_data
-      - if release_date = kitten_data.get(:release_date)
-        %dt= t :release_date, scope: :data_kitten
-        %dd!= kitten_value(release_date)
-
-      - if modified_date = kitten_data.get(:modified_date)
-        %dt= t :modified_date, scope: :data_kitten
-        %dd!= kitten_value(modified_date)
-
-      - if update_frequency = kitten_data.get(:update_frequency)
-        %dt= t :update_frequency, scope: :data_kitten
-        %dd!= kitten_value(update_frequency)
-
-      - if (publishers = kitten_data.get_list(:publishers)).any?
-        %dt= t :publishers, scope: :data_kitten
-        %dd!= kitten_value(publishers)
-
-      - if (keywords = kitten_data.get_list(:keywords)).any?
-        %dt= t :keywords, scope: :data_kitten
-        %dd!= kitten_value(keywords)
+      - [:release_date, :modified_date, :update_frequency, :publishers, :keywords].each do |key|
+        = kitten_field(kitten_data, key)
 
       - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
       - extra_data = kitten_data.data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
@@ -42,5 +25,4 @@
       - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
 
       - extra_data.each do |key, v|
-        %dt= t key, scope: :data_kitten
-        %dd!= kitten_value(v)
+        = kitten_field(kitten_data, key)
