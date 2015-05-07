@@ -29,7 +29,8 @@ module ApplicationHelper
       when 'DataKitten::License'
         link_to(value.name, value.uri)
       when 'DataKitten::Temporal'
-        [kitten_value(value.start), kitten_value(value.end)].join(' – ')
+        dates = [kitten_value(value.start), kitten_value(value.end)].reject(&:blank?)
+        dates.join(' – ') if dates.any?
       when 'String'
         value
       when 'Date'
