@@ -148,7 +148,14 @@
 <xsl:template match="input" mode="structure">
 	<xsl:element name="a_1">
 		<xsl:attribute name="label" select="@placeholder" />
-		<xsl:attribute name="type" select="'string'" />
+		<xsl:choose>
+		<xsl:when test="@type = 'url'">
+			<xsl:attribute name="type" select="'text'" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:attribute name="type" select="'string'" />
+		</xsl:otherwise>
+		</xsl:choose>
 		<xsl:apply-templates select="@*" mode="structure" />
 		<xsl:if test="..//requirement">
 			<xsl:attribute name="requirement" select="..//requirement/local:requirementId(.)" separator=", " />

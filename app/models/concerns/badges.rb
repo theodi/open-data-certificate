@@ -1,17 +1,19 @@
 module Badges
   extend ActiveSupport::Concern
 
-  def self.badge_file_for_level(level)
-    filename = case level
-                 when 'basic'
-                   'raw_level_badge.png'
-                 when 'raw', 'pilot', 'standard', 'exemplar'
-                   "#{level}_level_badge.png"
-                 else
-                   'no_level_badge.png'
-               end
+  module ClassMethods
+    def badge_file_for_level(level)
+      filename = case level
+      when 'basic'
+        'raw_level_badge.png'
+      when 'raw', 'pilot', 'standard', 'exemplar'
+        "#{level}_level_badge.png"
+      else
+        'no_level_badge.png'
+      end
 
-    File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
+      File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
+    end
   end
 
   def badge_file

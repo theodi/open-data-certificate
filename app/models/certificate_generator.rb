@@ -1,4 +1,5 @@
 class CertificateGenerator < ActiveRecord::Base
+  include Ownership
 
   belongs_to :user
   belongs_to :response_set
@@ -60,21 +61,7 @@ class CertificateGenerator < ActiveRecord::Base
     certificate = generator.generate(jurisdiction, false)
     response_set = certificate.response_set
 
-    errors = []
-
-    response_set.responses_with_url_type.each do |response|
-      if response.error
-        errors.push("The question '#{response.question.reference_identifier}' must have a valid URL")
-      end
-    end
-
-    survey.questions.where(is_mandatory: true).each do |question|
-      response = response_set.responses.detect {|r| r.question_id == question.id}
-
-      if !response || response.empty?
-        errors.push("The question '#{question.reference_identifier}' is mandatory")
-      end
-    end
+    errors = response_set.response_errors
 
     {success: true, published: response_set.published?, errors: errors}
   end
@@ -95,17 +82,7 @@ class CertificateGenerator < ActiveRecord::Base
 
     response_set.autocomplete(request["documentationUrl"])
 
-    if response_set.kitten_data && create_user
-      email = response_set.kitten_data[:data][:publishers].first.mbox.presence rescue nil
-      if email
-        new_user = User.find_or_create_by_email(email) do |user|
-          user.password = SecureRandom.base64
-          user.skip_confirmation_notification!
-        end
-      end
-    end
-
-    user = new_user.try(:persisted?) ? new_user : self.user
+    user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
     response_set.reload
@@ -123,8 +100,44 @@ class CertificateGenerator < ActiveRecord::Base
     certificate
   end
 
+  def determine_user(response_set, create_user)
+    kitten_data = response_set.kitten_data
+    if kitten_data
+      contacts = kitten_data.contacts_with_email
+      contacts.each do |contact|
+        user = User.find_by_email(contact.email)
+        return user if user.present?
+      end
+      if create_user
+        contacts.each do |contact|
+          user = create_user_from_contact(contact)
+          return user if user.present?
+        end
+      end
+    end
+    return self.user
+  end
+
+  def create_user_from_contact(contact)
+    User.transaction do
+      User.create!(
+          email: contact.email,
+          name: contact.name,
+          password: SecureRandom.base64) do |user|
+        user.skip_confirmation_notification!
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    # in case the there was a find or create race
+    User.find_by_email(contact.email) if e.message =~ /taken/
+  end
+
   def published?
     certificate.try(:published?)
+  end
+
+  def response_errors
+    response_set.response_errors
   end
 
   def dataset_url
@@ -152,7 +165,7 @@ class CertificateGenerator < ActiveRecord::Base
       response_set.responses.create({
         answer: answer,
         question: question,
-        string_value: data
+        answer.value_key => data
       })
 
     when :one
@@ -184,7 +197,7 @@ class CertificateGenerator < ActiveRecord::Base
         response_set.responses.create({
           answer: answer,
           question: question,
-          string_value: value,
+          answer.value_key => value,
           response_group: i
         })
         i += 1

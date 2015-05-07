@@ -48,28 +48,22 @@ end
 
 Given(/^my dataset contains contact details$/) do
   @email = "newuser@example.com"
-  ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
-      publishers: [
-        DataKitten::Agent.new(mbox: @email)
-      ]
-    }})
+  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
+    :contacts_with_email => [DataKitten::Agent.new(mbox: @email)]
+  ))
 end
 
 Given(/^my dataset does not contain contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
-      publishers: [
-        DataKitten::Agent.new(mbox: "")
-      ]
-    }})
+  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
+    :contacts_with_email => []
+  ))
   @email = @api_user.email
 end
 
 Given(/^my dataset contains invalid contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns({data: {
-      publishers: [
-        DataKitten::Agent.new(mbox: "bad email@example.org")
-      ]
-    }})
+  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
+    :contacts_with_email => [DataKitten::Agent.new(mbox: "bad email@example.org")]
+  ))
   @email = @api_user.email
 end
 

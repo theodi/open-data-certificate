@@ -1,5 +1,5 @@
 class Certificate < ActiveRecord::Base
-  include Badges, Counts
+  include Badges, Counts, Ownership
   include AASM
 
   belongs_to :response_set, touch: true

@@ -14,6 +14,13 @@ class Response < ActiveRecord::Base
 
   before_save :resolve_if_url
 
+  scope :filled, joins(:question).where(<<-SQL)
+    CASE questions.pick
+    WHEN 'none' THEN (trim(string_value) != '' OR trim(text_value) != '')
+    ELSE answer_id is not null
+    END
+  SQL
+
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end
@@ -44,7 +51,7 @@ class Response < ActiveRecord::Base
   memoize :requirement_level_index
 
   def empty?
-    question.pick == "none" ? string_value.blank? : !answer_id
+    question.pick == "none" ? data_value.blank? : !answer_id
   end
 
   def filled?
@@ -102,7 +109,7 @@ class Response < ActiveRecord::Base
   def compute_autocompleted
     if autocompletable?
       if question.pick == 'none'
-        return string_value == auto_value
+        return data_value == auto_value
       end
 
       if question.pick == 'one'
@@ -123,10 +130,14 @@ class Response < ActiveRecord::Base
     explanation.present?
   end
 
+  def data_value
+    text_value.presence || string_value.presence
+  end
+
   private
   def resolve_if_url
-    return unless answer.input_type == 'url' && string_value.present?
-    self.error = !ODIBot.new(string_value).valid?
+    return unless answer.input_type == 'url' && data_value.present?
+    self.error = !ODIBot.new(data_value).valid?
     return nil # false value will stop active record saving
   end
 

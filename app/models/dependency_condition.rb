@@ -18,7 +18,7 @@ class DependencyCondition < ActiveRecord::Base
 
       responses_pre.select {|rs| rs[:answer_id] == answer_id} .each do |response|
       # response_set.responses.where(answer_id: answer).each do |response|
-        is_blank = false unless response.string_value.blank?
+        is_blank = false unless response.data_value.blank?
       end
 
       flip = operator == '!='

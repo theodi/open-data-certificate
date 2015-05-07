@@ -3,6 +3,7 @@ require 'odibot'
 class ResponseSet < ActiveRecord::Base
   include Surveyor::Models::ResponseSetMethods
   include AASM
+  include Ownership
 
   # Surveyor field types
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
@@ -258,7 +259,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def incomplete_triggered_mandatory_questions
-    responded_to_question_ids = responses.pluck('question_id')
+    responded_to_question_ids = responses.filled.pluck('question_id')
     triggered_mandatory_questions.reject { |q| responded_to_question_ids.include? q.id }
   end
 
@@ -316,7 +317,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def responses_with_url_type
-    responses.joins(:answer).where({:answers => {input_type: 'url'}}).readonly(false)
+    responses.joins(:answer).merge(Answer.urls).readonly(false)
   end
 
   def all_urls_resolve?
@@ -430,11 +431,12 @@ class ResponseSet < ActiveRecord::Base
       next if value.nil? || question.nil?
 
       if question.type == :none || question.type == :repeater
+        answer = question.answers.first
         ui_hash.push(HashWithIndifferentAccess.new(
           question_id: question.id.to_s,
           api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
-          answer_id: question.answers.first.id.to_s,
-          string_value: value,
+          answer_id: answer.id.to_s,
+          answer.value_key => value,
           autocompleted: true
         ))
       end
@@ -461,6 +463,23 @@ class ResponseSet < ActiveRecord::Base
     end
 
     update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
+  end
+
+  def response_errors
+    errors = Hash.new { |h, k| h[k] = [] }
+    incomplete_triggered_mandatory_questions.each do |question|
+      response = responses.where(question_id: question.id).first
+
+      if !response || response.empty?
+        errors[question.reference_identifier] << 'mandatory'
+      end
+    end
+    responses_with_url_type.each do |response|
+      unless response.url_valid_or_explained?
+        errors[response.question.reference_identifier] << 'invalid-url'
+      end
+    end
+    errors
   end
 
   def assign_to_user!(user)
@@ -492,7 +511,7 @@ class ResponseSet < ActiveRecord::Base
     code = resolve_url(url)
 
     if code == 200
-      kitten_data = KittenData.create(url: url, response_set: self)
+      create_kitten_data(url: url)
       update_responses(kitten_data.fields)
     end
   end

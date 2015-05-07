@@ -24,7 +24,7 @@ survey 'GB',
       :text_as_statement => 'This data is described at',
       :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
     a_1 'Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Documentation URL',
       :requirement => ['pilot_1', 'basic_1']
@@ -60,7 +60,7 @@ survey 'GB',
       :text_as_statement => 'The data is published on',
       :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
     a_1 'Publisher URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Publisher URL'
 
@@ -118,7 +118,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_complicated
     a_1 'Risk Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Risk Documentation URL',
       :requirement => ['pilot_2']
@@ -243,7 +243,7 @@ survey 'GB',
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_1 'Contributor Licence Agreement URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Contributor Licence Agreement URL',
       :required => :required
@@ -280,7 +280,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
     a_1 'Data Sources Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Data Sources Documentation URL',
       :requirement => ['pilot_3']
@@ -325,7 +325,7 @@ survey 'GB',
       :text_as_statement => 'The rights statement is at',
       :help_text => 'Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can\'t do with the data.'
     a_1 'Rights Statement URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Rights Statement URL',
       :requirement => ['pilot_4']
@@ -410,7 +410,7 @@ survey 'GB',
     condition_B :q_dataNotApplicable, '==', :a_waived
     condition_C :q_dataWaiver, '==', :a_other
     a_1 'Waiver URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Waiver URL'
@@ -437,7 +437,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
     a_1 'Other Licence URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Other Licence URL'
@@ -569,7 +569,7 @@ survey 'GB',
     condition_C :q_contentNotApplicable, '==', :a_waived
     condition_D :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Waiver URL'
@@ -598,7 +598,7 @@ survey 'GB',
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Licence URL'
@@ -633,7 +633,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_mixedrights
     a_1 'Content Rights Description URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Content Rights Description URL'
@@ -825,7 +825,7 @@ survey 'GB',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_1 'Disclosure Rationale URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Disclosure Rationale URL',
       :requirement => ['standard_9']
@@ -877,7 +877,7 @@ survey 'GB',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
     a_1 'Privacy Impact Assessment URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Privacy Impact Assessment URL',
       :requirement => ['standard_10']
@@ -927,13 +927,14 @@ survey 'GB',
       :text_as_statement => 'Individuals affected by this data have this privacy notice',
       :help_text => 'When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act.',
       :help_text_more_url => 'http://www.ico.org.uk/for_organisations/data_protection/the_guide/principle_2'
-    dependency :rule => 'A and (B or C) and D'
+    dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
+    condition_E :q_lawfulDisclosure, '!=', :a_true
     a_1 'Privacy Notice URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Privacy Notice URL',
       :requirement => ['pilot_7']
@@ -941,12 +942,13 @@ survey 'GB',
     label_pilot_7 'You should <strong>tell people what purposes the individuals in your data consented to you using their data for</strong>. So that they use your data for the same purposes and comply with the Data Protection Act.',
       :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_7'
-    dependency :rule => 'A and (B or C) and D and E'
+    dependency :rule => 'A and (B or C) and D and E and F'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_privacyImpactAssessmentExists, '==', :a_true
-    condition_E :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
+    condition_E :q_lawfulDisclosure, '!=', :a_true
+    condition_F :q_individualConsentURL, '==', {:string_value => '', :answer_reference => '1'}
 
     q_dpStaff 'Is there someone in your organisation who is responsible for data protection?',
       :discussion_topic => :gb_dpStaff,
@@ -1051,7 +1053,7 @@ survey 'GB',
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
       a_1 'Web page URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Web page URL'
@@ -1085,7 +1087,7 @@ survey 'GB',
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
       a_1 'Listing URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Listing URL'
@@ -1119,7 +1121,7 @@ survey 'GB',
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       a_1 'Reference URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Reference URL'
@@ -1444,7 +1446,7 @@ survey 'GB',
       :text_as_statement => 'Data quality is documented at',
       :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
     a_1 'Data Quality Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Data Quality Documentation URL',
       :requirement => ['standard_22']
@@ -1461,7 +1463,7 @@ survey 'GB',
       :text_as_statement => 'Quality control processes are described at',
       :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
     a_1 'Quality Control Process Description URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Quality Control Process Description URL',
       :requirement => ['exemplar_10']
@@ -1502,7 +1504,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Availability Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Service Availability Documentation URL',
       :requirement => ['standard_24']
@@ -1522,7 +1524,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Status URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Service Status URL',
       :requirement => ['exemplar_11']
@@ -1589,7 +1591,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Dataset URL',
       :requirement => ['basic_9', 'pilot_14']
@@ -1667,7 +1669,7 @@ survey 'GB',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_current
     a_1 'Current Dataset URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Current Dataset URL',
       :required => :required
@@ -1697,7 +1699,7 @@ survey 'GB',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_list
     a_1 'Version List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Version List URL',
       :required => :required
@@ -1710,7 +1712,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Endpoint URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Endpoint URL',
       :requirement => ['basic_11', 'standard_28']
@@ -1782,7 +1784,7 @@ survey 'GB',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_current
     a_1 'Current Dump URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Current Dump URL',
       :required => :required
@@ -1814,7 +1816,7 @@ survey 'GB',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_list
     a_1 'Dump List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Dump List URL',
       :required => :required
@@ -1828,7 +1830,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_changeFeed, '==', :a_true
     a_1 'Change Feed URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Change Feed URL',
       :required => :required
@@ -2083,7 +2085,7 @@ survey 'GB',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '==', :a_service
     a_1 'Identifier Resolution Service URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Identifier Resolution Service URL',
       :requirement => ['standard_35']
@@ -2171,7 +2173,7 @@ survey 'GB',
       :text_as_statement => 'This data can be verified using',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
     a_1 'Verification Process URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
       :requirement => ['exemplar_20']
@@ -2409,7 +2411,7 @@ survey 'GB',
       :display_on_certificate => true,
       :text_as_statement => 'The technical documentation for the data is at'
     a_1 'Technical Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Technical Documentation URL',
       :requirement => ['pilot_21']
@@ -2435,7 +2437,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
     a_1 'Schema Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Schema Documentation URL',
       :requirement => ['standard_54']
@@ -2462,7 +2464,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
     a_1 'Codelist Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Codelist Documentation URL',
       :requirement => ['standard_55']
@@ -2484,7 +2486,7 @@ survey 'GB',
       :text_as_statement => 'Find out how to contact someone about this data at',
       :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
     a_1 'Contact Documentation',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Contact Documentation',
       :requirement => ['pilot_22']
@@ -2500,7 +2502,7 @@ survey 'GB',
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to suggest improvements to publication at'
     a_1 'Improvement Suggestions URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Improvement Suggestions URL',
       :requirement => ['pilot_23']
@@ -2516,7 +2518,7 @@ survey 'GB',
       :display_on_certificate => true,
       :text_as_statement => 'Find out where to send questions about privacy at'
     a_1 'Confidentiality Contact Documentation',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Confidentiality Contact Documentation',
       :requirement => ['pilot_24']
@@ -2553,7 +2555,7 @@ survey 'GB',
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
       a_1 'Social Media URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Social Media URL'
@@ -2566,7 +2568,7 @@ survey 'GB',
       :text_as_statement => 'Discuss this data at',
       :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
     a_1 'Forum or Mailing List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Forum or Mailing List URL',
       :requirement => ['standard_57']
@@ -2585,7 +2587,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Instructions URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Correction Instructions URL',
       :requirement => ['standard_58']
@@ -2605,7 +2607,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Notification URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Correction Notification URL',
       :requirement => ['standard_59']
@@ -2640,7 +2642,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_true
     a_1 'Community Engagement Team Home Page URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Community Engagement Team Home Page URL',
       :required => :required
@@ -2655,7 +2657,7 @@ survey 'GB',
       :text_as_statement => 'Tools to help use this data are listed at',
       :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
     a_1 'Tool URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Tool URL',
       :requirement => ['exemplar_22']

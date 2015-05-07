@@ -63,6 +63,11 @@ class KittenData < ActiveRecord::Base
     @fields
   end
 
+  def contacts_with_email
+    agents = [data.values_at(:publishers, :maintainers, :contributors)].flatten.compact
+    agents.select { |contact| contact.mbox.present? }
+  end
+
   protected
 
   def set_title
@@ -112,8 +117,18 @@ class KittenData < ActiveRecord::Base
     if data[:title].include?("API") || data[:description].include?("API")
       @fields["releaseType"] = "service"
     else
-      check_frequency
+      @fields["releaseType"] = check_frequency
     end
+  end
+
+  def set_basic_requirements
+    # These should probably only be assumed on imports from government portals
+    # see discussion on https://github.com/theodi/open-data-certificate/issues/1090
+    @fields["publisherOrigin"] = "true"
+    @fields["dataPersonal"] = "not_personal"
+    @fields["contentRights"] = "samerights"
+    @fields["codelists"] = "false"
+    @fields["vocabulary"] = "false"
   end
 
   def set_dgu_assumptions
@@ -122,15 +137,10 @@ class KittenData < ActiveRecord::Base
     uri = URI(url)
     package = uri.path.split("/").last
 
-    @fields["publisherOrigin"] = "true"
     @fields["copyrightURL"] = url
-    @fields["dataPersonal"] = "not_personal"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.gov.uk"
-    @fields["vocabulary"] = "false"
-    @fields["codelists"] = "false"
-    @fields["contentRights"] = "samerights"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
   end
@@ -142,15 +152,10 @@ class KittenData < ActiveRecord::Base
     uri = URI(url)
     package = uri.path.split("/").last
 
-    @fields["publisherOrigin"] = "true"
     @fields["copyrightURL"] = url
-    @fields["dataPersonal"] = "not_personal"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.london.gov.uk"
-    @fields["vocabulary"] = "false"
-    @fields["codelists"] = "false"
-    @fields["contentRights"] = "samerights"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
   end
@@ -182,13 +187,18 @@ class KittenData < ActiveRecord::Base
   end
 
   def check_frequency
+    num_distributions = data[:distributions].length
     if data[:update_frequency].empty?
-      data[:distributions].length == 1 ? @fields["releaseType"] = "oneoff" : @fields["releaseType"] = "collection"
+      num_distributions == 1 ? "oneoff" : "collection"
+    elsif num_distributions > 1
+      "series"
     else
-      @fields["releaseType"] = "series" if data[:distributions].length > 1
+      "oneoff"
     end
+  end
 
-    if @fields["releaseType"] == "oneoff"
+  def set_dataset_url
+    if check_frequency == "oneoff"
       @fields["datasetUrl"] = data[:distributions][0][:access_url]
     end
   end
@@ -206,6 +216,8 @@ class KittenData < ActiveRecord::Base
         :title             => dataset_field(:data_title, ''),
         :description       => dataset_field(:description, ''),
         :publishers        => dataset_field(:publishers, []),
+        :maintainers       => dataset_field(:maintainers, []),
+        :contributors      => dataset_field(:contributors, []),
         :rights            => dataset_field(:rights),
         :licenses          => dataset_field(:licenses, []),
         :update_frequency  => dataset_field(:update_frequency, ''),

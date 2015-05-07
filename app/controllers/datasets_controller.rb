@@ -196,7 +196,8 @@ class DatasetsController < ApplicationController
           success: false,
           published: false,
           dataset_id: generator.dataset.id,
-          dataset_url: status_datasets_url(generator)
+          dataset_url: status_datasets_url(generator),
+          errors: generator.response_errors
         }
       end
     else
@@ -242,6 +243,7 @@ class DatasetsController < ApplicationController
 
   def no_published_certificate_exists
     documentation_url = params[:dataset][:documentationUrl]
+    return unless documentation_url.present?
     existing_dataset = Dataset.where(documentation_url: documentation_url).first
     if existing_dataset.try(:certificate).present?
       campaign.increment!(:duplicate_count) if campaign
