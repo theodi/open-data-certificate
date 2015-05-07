@@ -20,25 +20,38 @@ module ApplicationHelper
 
   # renders an item in the kittenData data
   def kitten_value value
-    if value.kind_of?(Array)
-      value.map {|v| kitten_value v}.join(', ')
-    else
-      case value.class.to_s
-      when 'DataKitten::Agent'
-        [value.name, content_tag(:small, mail_to(value.mbox))].join(' ')
-      when 'DataKitten::License'
-        link_to(value.name, value.uri)
-      when 'DataKitten::Temporal'
-        [kitten_value(value.start), kitten_value(value.end)].join(' – ')
-      when 'String'
-        value
-      when 'Date'
-        value.strftime('%e %B %Y')
-      when 'Hash'
-        value[:title]
+    case value
+    when Array
+      safe_join(value.map {|v| kitten_value v}, ', ')
+    when DataKitten::Agent
+      if value.mbox
+        safe_join([value.name, content_tag(:small, mail_to(value.mbox))], ' ')
       else
-        value.to_s
+        value.name
       end
+    when DataKitten::License
+      link_to(value.name, value.uri)
+    when DataKitten::Temporal
+      dates = [kitten_value(value.start), kitten_value(value.end)].reject(&:blank?)
+      safe_join(dates, ' — ') if dates.any?
+    when String
+      value
+    when Date
+      value.strftime('%-e %B %Y')
+    when Hash
+      value[:title]
+    else
+      value.to_s
+    end
+  end
+
+  def kitten_field(kitten_data, key)
+    value = kitten_value(kitten_data.get(key))
+    if value.present?
+      safe_join([
+        content_tag(:dt, t(key, scope: :data_kitten)),
+        content_tag(:dd, value)
+      ], ' ')
     end
   end
 
