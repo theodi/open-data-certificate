@@ -516,6 +516,14 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
+  def has_kitten_data?
+    kitten_data && kitten_data.has_data?
+  end
+
+  def description
+    kitten_data.get(:description) if has_kitten_data?
+  end
+
   def resolve_url(url)
     if url =~ /^#{URI::regexp}$/
       ODIBot.new(url).response_code rescue nil
