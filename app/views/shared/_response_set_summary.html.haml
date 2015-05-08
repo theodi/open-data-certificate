@@ -1,5 +1,3 @@
-- kitten_data = response_set.kitten_data
-
 .summary-data
   %h3= t :summary, scope: :summary_data
   %dl
@@ -14,7 +12,8 @@
 
     =detail_item(t :verification, scope: :summary_data) { t response_set.certificate.certification_type, scope: 'certificate.certification_types' }
 
-    - if kitten_data
+    - if response_set.has_kitten_data?
+      - kitten_data = response_set.kitten_data
       - [:release_date, :modified_date, :update_frequency, :publishers, :keywords].each do |key|
         = kitten_field(kitten_data, key)
 
