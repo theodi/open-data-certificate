@@ -436,7 +436,7 @@ class ResponseSet < ActiveRecord::Base
           question_id: question.id.to_s,
           api_id: response ? response.api_id : Surveyor::Common.generate_api_id,
           answer_id: answer.id.to_s,
-          answer.value_key => value,
+          answer.value_key => value.to_s,
           autocompleted: true
         ))
       end
@@ -514,6 +514,14 @@ class ResponseSet < ActiveRecord::Base
       create_kitten_data(url: url)
       update_responses(kitten_data.fields)
     end
+  end
+
+  def has_kitten_data?
+    kitten_data && kitten_data.has_data?
+  end
+
+  def description
+    kitten_data.get(:description) if has_kitten_data?
   end
 
   def resolve_url(url)

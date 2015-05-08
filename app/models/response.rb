@@ -80,7 +80,7 @@ class Response < ActiveRecord::Base
   end
 
   def autocompletable?
-    !!(auto_value && !auto_value.empty?)
+    auto_value.present?
   end
 
   def any_metadata_missing(responses)
