@@ -109,6 +109,36 @@ class SurveyorControllerTest < ActionController::TestCase
 
   end
 
+  test "continue survey with highlighed question" do
+    @response_set = FactoryGirl.create(:response_set)
+    sign_in @response_set.user
+
+    assert_no_difference('ResponseSet.count') do
+      post :continue, use_route: :surveyor,
+              survey_code: @response_set.survey.access_code,
+              response_set_code: @response_set.access_code,
+              question: 123
+    end
+
+    assert_redirected_to "/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take#q_123"
+  end
+
+  test "continue a completed questionnaire with highlighted question" do
+    @response_set = FactoryGirl.create(:response_set)
+    @response_set.update_attribute :aasm_state, 'archived'
+
+    sign_in @response_set.user
+
+    assert_difference 'ResponseSet.count', 1 do
+      post :continue, use_route: :surveyor,
+              survey_code: @response_set.survey.access_code,
+              response_set_code: @response_set.access_code,
+              question: 123
+    end
+
+    r = ResponseSet.last
+    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take#q_123"
+  end
 
   test "start page" do
     ResponseSet.any_instance.stubs(:documentation_url_explanation).returns(nil)

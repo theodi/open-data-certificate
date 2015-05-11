@@ -59,13 +59,17 @@ class SurveyorController < ApplicationController
       create_new_response_set(attrs)
     end
 
+    redirect_options = {
+      survey_code: @response_set.survey.access_code,
+      response_set_code: @response_set.access_code
+    }
+    redirect_options[:anchor] = "q_#{params[:question]}" if params[:question]
     if params[:update]
+      redirect_options[:update] = true
       flash[:warning] = t('response_set.update_instructions')
-      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code, update: true)
-    else
-      redirect_to surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
     end
 
+    redirect_to surveyor.edit_my_survey_path(redirect_options)
   end
 
   def force_save_questionnaire
