@@ -7,6 +7,8 @@ class CertificatesController < ApplicationController
   before_filter(:only => [:badge]) { log_embed }
   before_filter :authenticate_user!, only: :report
 
+  helper_method :resume_path
+
   def show
     respond_to do |format|
       format.html
@@ -110,6 +112,15 @@ class CertificatesController < ApplicationController
     authorize! :manage, @certificate
     @certificate.update_attribute :audited, params[:certificate] && params[:certificate][:audited]
     redirect_to dataset_certificate_path @certificate.response_set.dataset.id, @certificate.id
+  end
+
+  protected
+
+  def resume_path(question = nil)
+    surveyor.continue_my_survey_path(
+      survey_code: @response_set.survey.access_code,
+      response_set_code: @response_set.access_code,
+      question: question.try(:id))
   end
 
   private
