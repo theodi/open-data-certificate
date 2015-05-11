@@ -282,7 +282,7 @@ $(document).ready(function($){
       .find('ul')
       .on('shown', function () {
         // scroll to the question (taking into account header)
-        $('html').scrollTop($question.offset().top - 130);
+        $('body').scrollTop($question.offset().top - 130);
       })
       .collapse('show');
   }
