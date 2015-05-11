@@ -11,6 +11,7 @@ class Response < ActiveRecord::Base
 
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_survey_section_id
+  after_save :update_certificate_state
 
   before_save :resolve_if_url
 
@@ -154,6 +155,10 @@ class Response < ActiveRecord::Base
       survey_section_id = question.try(:survey_section_id)
       Response.update(id, :survey_section_id => survey_section_id) if survey_section_id
     end
+  end
+
+  def update_certificate_state
+    response_set.update_certificate
   end
 
 end
