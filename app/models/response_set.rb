@@ -301,7 +301,7 @@ class ResponseSet < ActiveRecord::Base
     entered = levels_count(entered_reference_identifiers)
 
     result = {
-      attained: certificate.attained_level
+      attained: attained_level
     }
     %w[basic pilot standard exemplar].each do |level|
       pending += outstanding[level] || 0

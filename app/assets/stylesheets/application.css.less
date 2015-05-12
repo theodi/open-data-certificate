@@ -2576,7 +2576,7 @@ header .save-button {
   position: absolute;
   right:0;
   width:280px;
-  padding:20px;
+  padding: 0 20px;
   height:100%;
   z-index:5;
 
@@ -2632,8 +2632,8 @@ header .save-button {
   }
 
   #panel_inner {
-    overflow-y: auto;
-    height: 75%;
+    overflow-y: scroll;
+    height: 80%;
   }
 
   #panel_loading{
@@ -3108,9 +3108,9 @@ section.improvement {
         .btn {
 
           // Equalise widths and left-align text
-          width: 64%;
+          width: 50%;
           .box-sizing(border-box);
-          text-align: left;
+          text-align: center;
           margin: 18px 0 0 30px;
 
           // When buttons wrap, add a gap under the second one

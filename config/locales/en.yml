@@ -282,6 +282,7 @@ en:
     description: Description
     publishers: Publishers
     rights: Rights
+    rights_statement: Rights statement
     update_frequency: Update Frequency
     keywords: Keywords
     release_date: Release Date
@@ -346,10 +347,8 @@ en:
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
         instruction: "To reach Expert level you should:"
     buttons:
-      understood: "Yes I understand:"
-      misunderstood: "I don’t understand:"
-      understood_action: edit questionnaire
-      misunderstood_action: speak to a human
+      understood: "Edit questionnaire"
+      misunderstood: "Ask a question"
     delete_button: 'Delete'
 
   transfers:
