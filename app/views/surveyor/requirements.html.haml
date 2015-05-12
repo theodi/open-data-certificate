@@ -51,11 +51,9 @@
                       %p= markdown(field.help_text || '')
                     .span6.offset2
                       %a.btn.btn-primary.btn-large{:href => resume_path(field)}
-                        %strong= t('improvements.buttons.understood')
-                        =t('improvements.buttons.understood_action')
+                        =t('improvements.buttons.understood')
                       %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: field.discussion_topic, back: request.original_fullpath, title: field.text, question_id: field.id)}
-                        %strong= t('improvements.buttons.misunderstood')
-                        =t('improvements.buttons.misunderstood_action')
+                        =t('improvements.buttons.misunderstood')
               %hr.heavy
 
           -requirements.each do |requirement|
