@@ -23,7 +23,7 @@
 
     - state = 'no-response'
     - state = 'ok' if r.filled?
-    - state = 'error' if r.empty? && q.is_mandatory
+    - state = 'error' if r.empty? && q.is_mandatory?
 
     - if url_field
       - state = 'url-verified'
@@ -64,7 +64,7 @@
     - classes = ['row', 'question-row', "q_#{renderer}"]
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.choice_type?
-    - classes << 'mandatory' if q.is_mandatory
+    - classes << 'mandatory' if q.is_mandatory?
     - classes << 'autocompleted' if all_autocompleted
     - classes << state if state
     - if q.choice_type? && renderer != :dropdown
@@ -75,7 +75,7 @@
     - data['autocompletable'] = r.autocompletable?
     - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
-    - data['mandatory'] = q.is_mandatory
+    - data['mandatory'] = q.is_mandatory?
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
     - attrs = {data: data, id: id, class: classes.join(' ')}
