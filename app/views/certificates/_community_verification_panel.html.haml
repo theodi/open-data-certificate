@@ -14,7 +14,7 @@
   = t '.verified'
   = link_to t('.undo'), verify_dataset_certificate_path(@certificate.dataset, @certificate, undo: true), method: :post
 
--else
+-elsif !@certificate.owned_by?(current_user)
   =form_tag verify_dataset_certificate_path(@certificate.dataset, @certificate) , method: :post do
     %button.btn.btn-primary.btn-large{type: :submit}
       = t '.verify_certificate'
