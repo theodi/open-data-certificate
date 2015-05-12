@@ -89,4 +89,15 @@ class ApplicationHelperTest < ActionView::TestCase
 
     assert_equal '<a href="http://example.com/cc">CC</a>', kitten_value(license)
   end
+
+  test "kitten_value for rights" do
+    rights = DataKitten::Rights.new(uri: "http://example.com/rights")
+
+    assert_equal '<a href="http://example.com/rights">Rights statement</a>', kitten_value(rights)
+  end
+
+  test "kitten_value for blank rights object" do
+    blank_rights = DataKitten::Rights.new(uri: nil)
+    assert_equal nil, kitten_value(blank_rights)
+  end
 end

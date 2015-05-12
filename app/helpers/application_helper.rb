@@ -30,7 +30,11 @@ module ApplicationHelper
         value.name
       end
     when DataKitten::License
-      link_to(value.name, value.uri)
+      link_to(value.name, value.uri.to_s)
+    when DataKitten::Rights
+      if value.uri
+        link_to("Rights statement", value.uri.to_s)
+      end
     when DataKitten::Temporal
       dates = [kitten_value(value.start), kitten_value(value.end)].reject(&:blank?)
       safe_join(dates, ' — ') if dates.any?
