@@ -308,9 +308,19 @@ $(document).ready(function($){
     .then(function(data){
       $(panel).removeClass('loading');
 
+      var show_bar = data.attained == 'none'
+
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
       $.each(levels, function(idx, level) {
-          $('#bar-' + level).width(data[level] + '%');
+          var bar = $('#bar-' + level);
+          if (show_bar) {
+            bar.width(data[level] + '%');
+            bar.parent('.progress').show();
+            show_bar = false;
+          } else {
+            bar.parent('.progress').hide();
+            show_bar = data.attained == level;
+          }
       });
 
       $('#panel_handle')
