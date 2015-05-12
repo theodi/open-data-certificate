@@ -282,6 +282,7 @@ en:
     description: Description
     publishers: Publishers
     rights: Rights
+    rights_statement: Rights statement
     update_frequency: Update Frequency
     keywords: Keywords
     release_date: Release Date

@@ -33,7 +33,7 @@ module ApplicationHelper
       link_to(value.name, value.uri.to_s)
     when DataKitten::Rights
       if value.uri
-        link_to("Rights statement", value.uri.to_s)
+        link_to(I18n.t('data_kitten.rights_statement'), value.uri.to_s)
       end
     when DataKitten::Temporal
       dates = [kitten_value(value.start), kitten_value(value.end)].reject(&:blank?)
