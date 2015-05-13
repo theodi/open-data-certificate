@@ -80,6 +80,14 @@ class KittenData < ActiveRecord::Base
     get(field) || []
   end
 
+  def uri
+    @uri ||= URI(url)
+  end
+
+  def hostname
+    uri.hostname
+  end
+
   protected
 
   def set_title
@@ -170,6 +178,18 @@ class KittenData < ActiveRecord::Base
     @fields["listing"] = "http://data.london.gov.uk"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
+  end
+
+  def set_data_gov_assumptions
+    return unless hostname == "catalog.data.gov"
+    package = uri.path.split("/").last
+
+    @fields["copyrightURL"] = url
+    @fields["frequentChanges"] = "false"
+    @fields["listed"] = "true"
+    @fields["listing"] = "http://catalog.data.gov"
+    @fields["versionManagement"] = ["list"]
+    @fields["versionsUrl"] = "http://catalog.data.gov/api/rest/package/#{package}"
   end
 
   def set_structured_open
