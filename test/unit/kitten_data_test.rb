@@ -251,6 +251,40 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
   end
 
+  test 'data.london.gov.uk assumptions are applied' do
+    stub_request(:get, 'http://data.london.gov.uk/some_data').to_return(status: 200)
+    @kitten_data = KittenData.new(url: 'http://data.london.gov.uk/some_data')
+
+    assert_equal "true", kitten_data.fields["publisherOrigin"]
+    assert_equal "not_personal", kitten_data.fields["dataPersonal"]
+    assert_equal "false", kitten_data.fields["frequentChanges"]
+    assert_equal "false", kitten_data.fields["vocabulary"]
+    assert_equal "false", kitten_data.fields["codelists"]
+    assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
+    assert_equal "true", kitten_data.fields["listed"]
+    assert_equal "http://data.london.gov.uk", kitten_data.fields["listing"]
+    assert_equal "samerights", kitten_data.fields["contentRights"]
+    assert_equal ["list"], kitten_data.fields["versionManagement"]
+    assert_equal "http://data.london.gov.uk/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
+  end
+
+  test 'data.gov assumptions are applied' do
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+
+    assert_equal "true", kitten_data.fields["publisherOrigin"]
+    assert_equal "not_personal", kitten_data.fields["dataPersonal"]
+    assert_equal "false", kitten_data.fields["frequentChanges"]
+    assert_equal "false", kitten_data.fields["vocabulary"]
+    assert_equal "false", kitten_data.fields["codelists"]
+    assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
+    assert_equal "true", kitten_data.fields["listed"]
+    assert_equal "http://catalog.data.gov", kitten_data.fields["listing"]
+    assert_equal "samerights", kitten_data.fields["contentRights"]
+    assert_equal ["list"], kitten_data.fields["versionManagement"]
+    assert_equal "http://catalog.data.gov/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
+  end
+
   test 'Distribution metadata is set correctly' do
     DataKitten::DistributionFormat.any_instance.stubs('open?').returns(true)
     DataKitten::DistributionFormat.any_instance.stubs('structured?').returns(true)
