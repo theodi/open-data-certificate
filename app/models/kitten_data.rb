@@ -155,40 +155,19 @@ class KittenData < ActiveRecord::Base
     @fields["vocabulary"] = "false"
   end
 
-  def set_dgu_assumptions
-    return unless hostname == "data.gov.uk"
+  def set_ckan_assumptions
     # Assumptions for data.gov.uk
-
-    @fields["copyrightURL"] = url
-    @fields["frequentChanges"] = "false"
-    @fields["listed"] = "true"
-    @fields["listing"] = "http://data.gov.uk"
-    @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package_name}"
-  end
-
-  def set_london_datastore_assumptions
-    return unless hostname == "data.london.gov.uk"
-    # Assumptions for data.london.gov.uk
+    # also for data.london.gov.uk
     # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
+    # and data.gov
+    return unless %w[data.gov.uk data.london.gov.uk catalog.data.gov].include?(hostname)
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
-    @fields["listing"] = "http://data.london.gov.uk"
+    @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package_name}"
-  end
-
-  def set_data_gov_assumptions
-    return unless hostname == "catalog.data.gov"
-
-    @fields["copyrightURL"] = url
-    @fields["frequentChanges"] = "false"
-    @fields["listed"] = "true"
-    @fields["listing"] = "http://catalog.data.gov"
-    @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://catalog.data.gov/api/rest/package/#{package_name}"
+    @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
   end
 
   def set_structured_open
