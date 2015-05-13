@@ -169,7 +169,7 @@ class Question < ActiveRecord::Base
 
   def set_mandatory
     self.is_mandatory ||= is_mandatory?
-    nil
+    nil # return value of false prevents saving
   end
 
   def set_default_value_for_required
