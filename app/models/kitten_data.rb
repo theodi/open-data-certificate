@@ -90,6 +90,10 @@ class KittenData < ActiveRecord::Base
 
   protected
 
+  def package_name
+    uri.path.split("/").last
+  end
+
   def set_title
     @fields["dataTitle"] = data[:title]
   end
@@ -152,44 +156,39 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_dgu_assumptions
-    return unless url.include?("data.gov.uk")
+    return unless hostname == "data.gov.uk"
     # Assumptions for data.gov.uk
-    uri = URI(url)
-    package = uri.path.split("/").last
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.gov.uk"
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
+    @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package_name}"
   end
 
   def set_london_datastore_assumptions
-    return unless url.include?("data.london.gov.uk")
+    return unless hostname == "data.london.gov.uk"
     # Assumptions for data.london.gov.uk
     # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
-    uri = URI(url)
-    package = uri.path.split("/").last
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://data.london.gov.uk"
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
+    @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package_name}"
   end
 
   def set_data_gov_assumptions
     return unless hostname == "catalog.data.gov"
-    package = uri.path.split("/").last
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["listing"] = "http://catalog.data.gov"
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://catalog.data.gov/api/rest/package/#{package}"
+    @fields["versionsUrl"] = "http://catalog.data.gov/api/rest/package/#{package_name}"
   end
 
   def set_structured_open
