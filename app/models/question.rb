@@ -88,7 +88,7 @@ class Question < ActiveRecord::Base
   end
 
   def is_mandatory?
-    required == "required"
+    required.to_s == "required"
   end
 
   def type
