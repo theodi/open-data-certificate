@@ -25,7 +25,7 @@ class CertificateGenerator < ActiveRecord::Base
     schema = {}
     survey.questions.each do |q|
       next if q.display_type == 'label'
-      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[q.type], required: q.is_mandatory}
+      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[q.type], required: q.is_mandatory?}
 
       if q.type == :one || q.type == :any
         question['options'] = {}

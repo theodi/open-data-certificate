@@ -15,7 +15,6 @@ FactoryGirl.define do
                                   # q.common_identifier       {}
     q.display_order FactoryGirl.generate :question_display_order
                                   # q.display_type            {} # nil is default
-    q.is_mandatory false
                                   # q.display_width           {}
     q.correct_answer_id nil
 

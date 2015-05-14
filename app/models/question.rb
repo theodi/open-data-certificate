@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
-  after_save :update_mandatory
+  before_save :set_mandatory
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
@@ -84,7 +84,11 @@ class Question < ActiveRecord::Base
   end
 
   def required?
-    is_mandatory || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+    is_mandatory? || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+  end
+
+  def is_mandatory?
+    required.to_s == "required"
   end
 
   def type
@@ -163,10 +167,9 @@ class Question < ActiveRecord::Base
                             .to_i
   end
 
-  def update_mandatory
-    #TODO: swap to using an observer instead?
-    self.is_mandatory ||= required.present?
-    Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
+  def set_mandatory
+    self.is_mandatory ||= is_mandatory?
+    nil # return value of false prevents saving
   end
 
   def set_default_value_for_required

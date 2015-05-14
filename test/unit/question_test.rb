@@ -185,36 +185,15 @@ class QuestionTest < ActiveSupport::TestCase
     assert requirement.requirement_met_by_responses?(response_set.responses)
   end
 
-  test "after save #update_mandatory sets is_mandatory to true for required questions" do
-    required_values = ['pilot', 'basic', 'standard', 'exemplar', 1, 2, 'fred', :symbol]
-
-    required_values.each do |value|
-    question = FactoryGirl.build :question, required: value
-    assert_false question.is_mandatory?
-    question.save
-    assert question.is_mandatory?, "Question should be mandatory for required value of '#{value}'"
-      end
+  test "is mandatory for required value of required" do
+    question = FactoryGirl.build :question, required: 'required'
+    assert question.is_mandatory?
   end
 
-  test "after save #update_mandatory leaves the is_mandatory field as false for non-required" do
-    non_required_values = ['', nil]
-
-    non_required_values.each do |value|
+  [nil, '', 'pilot', 'standard', 'exemplar'].each do |value|
+    test "is not mandatory for required value of #{value.inspect}" do
       question = FactoryGirl.build :question, required: value
       assert_false question.is_mandatory?
-      question.save
-      assert_false question.is_mandatory?, "Question should not be mandatory for required value of '#{value}'"
-    end
-  end
-
-  test "after save #update_mandatory leaves the is_mandatory field as true if it was already" do
-    non_required_values = ['', nil]
-
-    non_required_values.each do |value|
-      question = FactoryGirl.build :question, is_mandatory: true, required: value
-      assert question.is_mandatory?
-      question.save
-      assert question.is_mandatory?, "Question was set as mandatory directly, required value of '#{value}' should not make it false"
     end
   end
 
