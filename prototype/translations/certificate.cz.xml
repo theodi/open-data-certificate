@@ -46,7 +46,7 @@
             </option>
             <option value="collection">
                <label>několik souvisejících datových sad, jednorázově</label>
-               <help>Jde o několik souvisejících souborů a nečekáte, že byste výhledově zvěřejňovali další podobné.</help>
+               <help>Jde o několik souvisejících souborů a nečekáte, že byste výhledově zveřejňovali další podobné.</help>
             </option>
             <option value="series">
                <label>několik souvisejících datových sad, průběžně aktualizovaných</label>
@@ -296,7 +296,7 @@
          <question id="qualityUrl" display="Dokumentace kvality dat">
             <label>Kde zveřejňujete problémy s kvalitou těchto dat?</label>
             <input type="url" placeholder="URL dokumentace"/>
-            <help>URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá hcybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat.</help>
+            <help>URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat.</help>
             <requirement level="standard">
                <strong>Dokumentujte veřejně kvalitu svých dat</strong>, ať uživatelé vědí, nakolik na ně mohou spoléhat.</requirement>
          </question>
@@ -517,7 +517,7 @@
          <question id="openStandard" display="Formát dat">
             <label>Jsou vaše data ve standardizovaném otevřeném formátu?</label>
             <yesno yes="standardizovaný, otevřený"/>
-            <help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Otevřené standardy vznikají férovou, transparentní spoluprácí. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.</help>
+            <help more="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf">Otevřené standardy vznikají férovou, transparentní spoluprací. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.</help>
             <requirement level="standard">
                <strong>Měli byste svá data zveřejnit v otevřeném standardizovaném formátu</strong>, aby je ostatní mohli snadno zpracovat pomocí běžně dostupných nástrojů.</requirement>
          </question>
@@ -707,7 +707,7 @@
          <question id="digitalCertificate" display="Jak ověřit původ dat">
             <label>Jak uživatelé mohou ověřit, že data skutečně pochází od vás?</label>
             <input type="url" placeholder="URL k dokumentaci"/>
-            <help>Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás. Například můžete data digitálně podepsat, aby se na případné nežádoucí změny okamžitě přišlo.</help>
+            <help>Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás – například můžete data digitálně podepsat.</help>
             <requirement level="exemplar">
                <strong>Měli byste uživatelům dát možnost ověřit, že stažená data skutečně pochází od vás.</strong>
             </requirement>
