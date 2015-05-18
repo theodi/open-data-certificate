@@ -384,7 +384,7 @@
                <option value="not-personal"
                        display="nehraje roli, data se netýkají jednotlivců">
                   <label>Ne, data se netýkají jednotlivců.</label>
-                  <help>Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí.</help>
+                  <help>Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení s informacemi o tom, kdy a kam daná osoba dojíždí.</help>
                </option>
                <option value="summarised" display="nehraje roli, jde o agregovaná data">
                   <label>Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní.</label>
