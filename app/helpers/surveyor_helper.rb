@@ -1,5 +1,8 @@
 module SurveyorHelper
   include Surveyor::Helpers::SurveyorHelperMethods
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::TranslationHelper
+  include ActionView::Helpers::OutputSafetyHelper
 
   def q_text(q, context=nil, locale=nil)
     "#{q.text_for(nil, context, locale)}"
@@ -15,5 +18,23 @@ module SurveyorHelper
   def survey_cache_key
     # If there were no responses by the user, the cache the blank survey for other new users
     @responses.empty? ? "blank_survey_#{@response_set.survey_id}_#{@response_set.locale}" : @response_set
+  end
+
+  def question_requirement_with_badge(level)
+    popover_content = content_tag(:span, safe_join([
+      content_tag(:i, '', class: ['badge', level]),
+      content_tag(:strong, t("levels.#{level}.title") + ": "),
+      t(level, scope: 'level_descriptions').html_safe,
+    ]), class: 'odc-popover-content')
+
+    cert = content_tag(:span, safe_join([
+        t(level, scope: 'requirement_levels'),
+        popover_content]),
+      class: 'odc-popover')
+
+    label = level == 'exemplar' ? :required_for_level : :required_for_level_and_above
+
+    # rage at rails i18n, safety intertwingling
+    return content_tag(:small, t(label, level: cert).html_safe)
   end
 end

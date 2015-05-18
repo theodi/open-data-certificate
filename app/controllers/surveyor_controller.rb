@@ -171,7 +171,6 @@ class SurveyorController < ApplicationController
       @responses = @response_set.responses.includes(:question).all
       @survey = @response_set.survey
       @sections = @survey.sections.with_includes
-      @sections.each{|s| Question.compute_levels(s.questions) }
       @dependents = []
       @update = true if params[:update]
     else
