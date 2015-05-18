@@ -407,7 +407,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  var certificateBody = $('.certificate-data');
+  var certificateBody = $('.certificate-data, #surveyor');
 
   certificateBody.click(function() {
     certificateBody.find('.odc-popover').popover('hide');
