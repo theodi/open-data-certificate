@@ -196,7 +196,7 @@ $(document).ready(function($){
   });
 
   // Removes highlighting and information on mouseleave
-  $surveyElements.on('mouseleave', function(){
+  $surveyElements.filter('fieldset').on('mouseleave', function(){
     $($currentRow.data('metas')).hide();
     $($currentRow.data('input-metas')).hide();
 
