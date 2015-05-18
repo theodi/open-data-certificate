@@ -75,7 +75,7 @@ survey 'CZ',
     a_oneoff 'jednu datovou sadu, jednorázově',
       :help_text => 'Jde o jeden soubor a nečekáte, že byste výhledově zveřejňovali další podobné.'
     a_collection 'několik souvisejících datových sad, jednorázově',
-      :help_text => 'Jde o několik souvisejících souborů a nečekáte, že byste výhledově zvěřejňovali další podobné.'
+      :help_text => 'Jde o několik souvisejících souborů a nečekáte, že byste výhledově zveřejňovali další podobné.'
     a_series 'několik souvisejících datových sad, průběžně aktualizovaných',
       :help_text => 'Jde o několik datových sad, které budete v budoucnu aktualizovat.'
     a_service 'službu nebo API pro přístup k otevřeným datům',
@@ -775,7 +775,7 @@ survey 'CZ',
       :required => :pilot
     a_not_personal 'Ne, data se netýkají jednotlivců.',
       :text_as_statement => 'nehraje roli, data se netýkají jednotlivců',
-      :help_text => 'Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí.'
+      :help_text => 'Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení s informacemi o tom, kdy a kam daná osoba dojíždí.'
     a_summarised 'Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní.',
       :text_as_statement => 'nehraje roli, jde o agregovaná data',
       :help_text => 'Skutečná anonymita jednotlivců v agregovaných datech se dá ověřit statistickými metodami.'
@@ -1498,7 +1498,7 @@ survey 'CZ',
       :discussion_topic => :qualityUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Dokumentace kvality dat',
-      :help_text => 'URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá hcybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat.'
+      :help_text => 'URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat.'
     a_1 'URL dokumentace',
       :string,
       :input_type => :url,
@@ -1936,7 +1936,7 @@ survey 'CZ',
       :discussion_topic => :openStandard,
       :display_on_certificate => true,
       :text_as_statement => 'Formát dat',
-      :help_text => 'Otevřené standardy vznikají férovou, transparentní spoluprácí. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.',
+      :help_text => 'Otevřené standardy vznikají férovou, transparentní spoluprací. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON.',
       :help_text_more_url => 'https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/183962/Open-Standards-Principles-FINAL.pdf',
       :pick => :one
     a_false 'ne',
@@ -2260,7 +2260,7 @@ survey 'CZ',
       :discussion_topic => :digitalCertificate,
       :display_on_certificate => true,
       :text_as_statement => 'Jak ověřit původ dat',
-      :help_text => 'Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás. Například můžete data digitálně podepsat, aby se na případné nežádoucí změny okamžitě přišlo.'
+      :help_text => 'Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás – například můžete data digitálně podepsat.'
     a_1 'URL k dokumentaci',
       :string,
       :input_type => :url,
