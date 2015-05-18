@@ -89,14 +89,7 @@
         %label.span8.question_label
           != question_text
           - if q.minimum_level
-            %small
-              = t('required_for')
-              %span.odc-popover
-                != t(q.minimum_level, scope: 'requirement_levels')
-                %span.odc-popover-content
-                  %i.badge{class: q.minimum_level}
-                  != t(q.minimum_level, scope: 'level_descriptions')
-              = t('and_above') if q.minimum_level != 'exemplar'
+            = question_requirement_with_badge(q.minimum_level)
 
       .span8
         - i = response_idx

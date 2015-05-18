@@ -48,10 +48,10 @@ en:
       description: this open data is an exceptional example of information infrastructure.
 
   level_descriptions:
-    basic: '<strong>Raw:</strong> A great start at the basics of publishing open data.'
-    pilot: '<strong>Pilot:</strong> Data users receive extra support from, and can provide feedback to the publisher.'
-    standard: '<strong>Standard:</strong> Regularly published open data with robust support that people can rely on.'
-    exemplar: '<strong>Expert:</strong> An exceptional example of information infrastructure.'
+    basic: 'A great start at the basics of publishing open data.'
+    pilot: 'Data users receive extra support from, and can provide feedback to the publisher.'
+    standard: 'Regularly published open data with robust support that people can rely on.'
+    exemplar: 'An exceptional example of information infrastructure.'
 
   requirement_levels:
     basic: Raw level certification
@@ -59,8 +59,8 @@ en:
     standard: Standard level certification
     exemplar: Expert level certification
 
-  required_for: This is required for
-  and_above: and above
+  required_for_level: This is required for %{level}
+  required_for_level_and_above: This is required for %{level} and above
 
 
   statuses:
