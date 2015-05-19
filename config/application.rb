@@ -93,10 +93,10 @@ module OpenDataCertificate
 
     config.middleware.insert_before ActionDispatch::ParamsParser, "CatchJsonParseErrors"
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
+        resource '/datasets/*.json', :headers => :any, :methods => [:get, :options]
       end
     end
 
