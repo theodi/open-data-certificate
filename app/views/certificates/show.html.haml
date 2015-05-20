@@ -25,7 +25,7 @@
         - if @certificate.published?
           %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
 
-        - if @certificate.owned_by?(current_user) || current_user.admin?
+        - if @certificate.owned_by?(current_user) || admin?
           - if @certificate.draft?
             %li
               .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
@@ -62,7 +62,7 @@
         .span9.offset3
           %h1= @certificate.response_set.title
 
-  - if current_user.try(:admin?)
+  - if admin?
     = form_for @certificate, url: dataset_certificate_path(@certificate.response_set.dataset.id, @certificate.id), html: {class: "admin-functions #{@certificate.audited ? 'admin-approved' : ''}"} do |f|
       - if @certificate.audited
         %i.icon-ok.icon-large
