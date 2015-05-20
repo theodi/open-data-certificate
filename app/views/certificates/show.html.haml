@@ -22,10 +22,11 @@
         - if (@certificate.expiring? || @certificate.expired?) && (current_user && current_user == @certificate.user) && @certificate.published?
           %li= link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: @certificate.survey.access_code, response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-small btn-info pull-right'
 
-        - if current_user == @certificate.user
-          - if @certificate.response_set.published?
-            %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
-          - elsif @certificate.response_set.draft?
+        - if @certificate.published?
+          %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
+
+        - if @certificate.owned_by?(current_user) || current_user.admin?
+          - if @certificate.draft?
             %li
               .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
             %li
