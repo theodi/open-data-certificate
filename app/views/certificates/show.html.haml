@@ -29,13 +29,10 @@
           - if @certificate.draft?
             %li
               .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
-            %li
-              =#link_to t('certificate.edit_questionnaire'), [surveyor, @certificate.response_set], class: 'btn btn-small btn-info pull-left'
-              =link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), class: 'btn btn-small btn-info pull-left'
-        - else
-          - if @certificate.auto_generated?
-            %li
-              =link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
+            %li=link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), class: 'btn btn-small btn-info pull-left'
+        - elsif @certificate.auto_generated?
+          %li=link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
+
       - content_for :modal_content do
         =render :partial => 'shared/embed_code', :locals => {:certificate => @certificate}
         - if @certificate.auto_generated?
