@@ -60,7 +60,7 @@ class Response < ActiveRecord::Base
   end
 
   def ui_hash_values
-    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :explanation].reduce({}) do |memo, key|
+    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :response_group, :explanation].reduce({}) do |memo, key|
       value = self.send(key)
       memo[key] = value unless value.blank?
       memo

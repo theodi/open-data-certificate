@@ -378,8 +378,7 @@ class ResponseSet < ActiveRecord::Base
           api_id = Surveyor::Common.generate_api_id
           ui_hash[api_id] = { question_id: question.id.to_s,
                               api_id: api_id,
-                              answer_id: answer.id.to_s,
-                              response_group: previous_response.response_group }.merge(previous_response.ui_hash_values)
+                              answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
     end
