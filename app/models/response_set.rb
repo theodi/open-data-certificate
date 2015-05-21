@@ -74,7 +74,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def self.clone_response_set(source, attrs = {})
-    attrs["survey_id"] ||= source.survey_id
+    attrs = {"survey_id" => source.survey_id}.merge(attrs)
     new_response_set = ResponseSet.create attrs
     new_response_set.kitten_data = source.kitten_data.dup if source.kitten_data.present?
     new_response_set.copy_answers_from_response_set!(source)
