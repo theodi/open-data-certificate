@@ -100,9 +100,39 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_value = rand.to_s
     source_response_set = prepare_response_set(response_value)
 
-    response_set = ResponseSet.clone_response_set(source_response_set)
+    response_set = nil
+    assert_difference 'ResponseSet.count', 1 do
+      response_set = ResponseSet.clone_response_set(source_response_set, "dataset_id" => source_response_set.dataset_id)
+    end
 
-    assert response_set.responses.first.try(:string_value) == response_value
+    assert_equal response_value, response_set.responses.first.try(:string_value)
+    assert_equal source_response_set.dataset, response_set.dataset
+  end
+
+  test "clone dataset with updated survey" do
+    response_value = rand.to_s
+    source_response_set = prepare_response_set(response_value)
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
+
+    old_survey = source_response_set.survey
+    new_survey = q.survey_section.survey
+    new_survey.access_code = old_survey.access_code
+    new_survey.survey_version = 1
+    new_survey.save
+
+    assert old_survey.superceded?, 'survey should be superceded'
+
+    response_set = nil
+    assert_difference 'ResponseSet.count', 1 do
+      response_set = ResponseSet.clone_response_set(source_response_set,
+        "dataset_id" => source_response_set.dataset_id,
+        "survey_id" => new_survey.id)
+    end
+
+    assert_equal response_value, response_set.responses.first.try(:string_value)
+    assert_equal source_response_set.dataset, response_set.dataset
+    assert_equal new_survey, response_set.survey
   end
 
   test "should clone with kitten_data intact" do
