@@ -207,9 +207,8 @@ class SurveyorController < ApplicationController
   end
 
   def prepare_new_response_set
-    @response_set.attributes.keep_if do |key|
-      %w(survey_id user_id dataset_id).include? key
-    end
+    keep = %w[survey_id user_id dataset_id]
+    @response_set.attributes.slice(*keep)
   end
 
   def create_new_response_set(attrs)
