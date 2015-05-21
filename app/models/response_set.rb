@@ -382,7 +382,7 @@ class ResponseSet < ActiveRecord::Base
         end
       end
     end
-    update_from_ui_hash(ui_hash)
+    original_update_from_ui_hash(ui_hash)
   end
 
   # run updates through the response_cache_map, so that we can deal
