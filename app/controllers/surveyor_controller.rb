@@ -213,7 +213,9 @@ class SurveyorController < ApplicationController
   def switch_survey(survey)
     attrs = prepare_new_response_set
     attrs['survey_id'] = survey.id
+    response_set = @response_set
     create_new_response_set(attrs)
+    response_set.supercede!
   end
 
 end

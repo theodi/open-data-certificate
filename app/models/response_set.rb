@@ -95,12 +95,18 @@ class ResponseSet < ActiveRecord::Base
 
     state :archived
 
+    state :superceded
+
     event :publish do
       transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
     end
 
     event :archive do
       transitions from: :published, to: :archived
+    end
+
+    event :supercede do
+      transitions from: [:draft, :published], to: :superceded
     end
   end
 
