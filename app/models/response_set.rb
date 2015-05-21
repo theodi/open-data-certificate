@@ -74,7 +74,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def self.clone_response_set(source, attrs = {})
-    attrs["survey_id"] ||= source.survey_id
+    attrs = {"survey_id" => source.survey_id}.merge(attrs)
     new_response_set = ResponseSet.create attrs
     new_response_set.kitten_data = source.kitten_data.dup if source.kitten_data.present?
     new_response_set.copy_answers_from_response_set!(source)
@@ -95,12 +95,18 @@ class ResponseSet < ActiveRecord::Base
 
     state :archived
 
+    state :superceded
+
     event :publish do
       transitions from: :draft, to: :published, guard: :all_mandatory_questions_complete?
     end
 
     event :archive do
       transitions from: :published, to: :archived
+    end
+
+    event :supercede do
+      transitions from: [:draft, :published], to: :superceded
     end
   end
 
@@ -378,12 +384,11 @@ class ResponseSet < ActiveRecord::Base
           api_id = Surveyor::Common.generate_api_id
           ui_hash[api_id] = { question_id: question.id.to_s,
                               api_id: api_id,
-                              answer_id: answer.id.to_s,
-                              response_group: previous_response.response_group }.merge(previous_response.ui_hash_values)
+                              answer_id: answer.id.to_s }.merge(previous_response.ui_hash_values)
         end
       end
     end
-    update_from_ui_hash(ui_hash)
+    original_update_from_ui_hash(ui_hash)
   end
 
   # run updates through the response_cache_map, so that we can deal
