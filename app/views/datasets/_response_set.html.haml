@@ -47,10 +47,8 @@
     .span3.edit-jurisdiction
       %h3 Your answers
       -if is_primary
-        %p
-          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block edit_questionaire'
-        %p
-          = link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+        %p= button_to 'Edit Questionnaire', continue_path(response_set), method: 'post', class: 'btn btn-large btn-info btn-block edit_questionaire'
+        %p= link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
 
         =render :partial => 'shared/switch_jurisdiction', locals: {response_set: response_set}
 

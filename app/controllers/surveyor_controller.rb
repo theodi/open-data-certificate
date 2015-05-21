@@ -16,8 +16,6 @@ class SurveyorController < ApplicationController
 
   # it might be a *really* nice refactor to take this to response_set_controller#update
   # then we could use things like `form_for [surveyor, response_set] do |f|`
-  #
-  # also, GET here is totally totally wrong
   def continue
     if params[:survey_locale]
       @response_set.update_attribute :locale, params[:survey_locale]
