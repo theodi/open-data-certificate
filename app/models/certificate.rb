@@ -101,6 +101,10 @@ class Certificate < ActiveRecord::Base
     expiring? && expires_at < DateTime.now
   end
 
+  def needs_updating?
+    published? && (expiring? || expired?)
+  end
+
   def days_to_expiry
     if expiring?
       (expires_at.to_date - Date.today).to_i

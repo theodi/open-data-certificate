@@ -1,7 +1,7 @@
 - content_for :header_title do
   #{link_to t('datasets.datasets'), datasets_path} / #{@dataset.title}
 
-- if current_user.try(:admin?)
+- if admin?
   = form_for @dataset, html: {class: 'admin-functions'} do |f|
     - if @dataset.removed
       %i.icon-flag.icon-large
