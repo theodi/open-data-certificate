@@ -104,7 +104,7 @@
 			<question id="referenced">
 				<label>Is this data referenced from your own publications?</label>
 				<yesno/>
-				<help>When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.</help>
+				<help>Have you included direct links to this dataset in any of your own publications or communication channels? These could be reports, press releases, blog posts, presentations or any publication that helps to provide context to your data and encourages people to discover and understand the data better.</help>
 				<requirement level="standard">You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.</requirement>
 			</question>
 			<if test="this.referenced() === 'true'">
