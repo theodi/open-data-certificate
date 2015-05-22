@@ -58,7 +58,7 @@
 				</option>
 				<option value="service">
 					<label>a service or API for accessing open data</label>
-					<help>This is a live web service that exposes your data to programmers through an interface they can query.</help>
+					<help>This could be a web service for developers to access and interact with your data through an interface, or a snapshot taken directly from a database that gets updated in real-time.</help>
 				</option>
 			</radioset>
 		</question>
