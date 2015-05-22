@@ -343,9 +343,9 @@
 			<help>how people can access your data</help>
 			<if test="this.releaseType() === 'oneoff'">
 				<question id="datasetUrl" display="This data is published at">
-					<label>Where is your dataset?</label>
+					<label>Where is the data file located online?</label>
 					<input type="url" placeholder="Dataset URL"/>
-					<help>Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
+					<help>Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. .csv. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
 					<if test="this.documentationUrl() === ''">
 						<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.</requirement>
 					</if>
@@ -470,7 +470,7 @@
 			<question id="machineReadable" display="This data is">
 				<label>Is this data machine-readable?</label>
 				<yesno yes="machine-readable" />
-				<help>People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.</help>
+				<help><a href="http://en.wikipedia.org/wiki/Machine-readable_data">Machine-readable data</a> is a structured data that can be easily processed and interpreted by a computer. This makes the data much more reusable. Examples of machine-readable formats include: CSV, JSON, XML, RDF. In contrast, an unstructured data such as HTML, PDFs and documents that have been scanned as images, are not machine-readable.</help>
 				<requirement level="pilot">You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process.</requirement>
 			</question>
 			<question id="openStandard" display="The format of this data is">
