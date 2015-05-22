@@ -723,6 +723,7 @@
 							<label>distribution(s)</label>
 						</option>
 					</checkboxset>
+					<help>If you are publishing your data via a data portal platform (e.g. <a href="http://ckan.org/">CKAN</a> or <a href="http://www.socrata.com/">Socrata</a>) then metadata will be available via the API, making it machine-readable.</help>
 				</question>
 				<if test="this.documentationMetadata().distribution">
 					<question id="distributionMetadata" display="The documentation about each distribution includes machine-readable data for">
