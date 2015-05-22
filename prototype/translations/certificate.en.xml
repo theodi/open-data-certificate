@@ -88,7 +88,7 @@
 			<question id="listed">
 				<label>Is your data listed within a collection?</label>
 				<yesno/>
-				<help>Data is easier for people to find when it's in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.</help>
+				<help>Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps drive discoverability of your data.</help>
 				<requirement level="standard">You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
