@@ -836,7 +836,7 @@
 			<question id="forum" display="Discuss this data at">
 				<label>Where should people discuss this dataset?</label>
 				<input type="url" placeholder="Forum or Mailing List URL"/>
-				<help>Give a URL to your forum or mailing list where people can talk about your data.</help>
+				<help>Give a URL to your forum or mailing list where people can talk about your data. This could be the webpage for dataset itself if people can post a comment to have a discussion, or a dedicated forum on a data portal or publisher’s website.</help>
 				<requirement level="standard">You should <strong>tell people where they can discuss your data</strong> and support one another.</requirement>
 			</question>
 			<if test="this.corrected() === 'true'">
