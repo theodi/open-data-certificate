@@ -804,7 +804,7 @@
 			<question id="contactUrl" display="Find out how to contact someone about this data at">
 				<label>Where can people find out how to contact someone with questions about this data?</label>
 				<input type="url" placeholder="Contact Documentation"/>
-				<help>Give a URL for a page that describes how people can contact someone if they have questions about the data.</help>
+				<help>Provide the link (URL) to the webpage containing the contact details of the person(s) responsible for, or could respond to questions about this data.</help>
 				<requirement level="pilot">You should <strong>provide contact information for people to send questions</strong> about your data to.</requirement>
 			</question>
 			<question id="improvementsContact" display="Find out how to suggest improvements to publication at">
