@@ -770,6 +770,7 @@
 			<question id="technicalDocumentation" display="The technical documentation for the data is at">
 				<label>Where is the technical documentation for the data?</label>
 				<input type="url" placeholder="Technical Documentation URL"/>
+				<help>This could be the precise details for the format(s) of the data and how to access the data via an API. This documentation will be aimed at technical re-users, such as developers.</help>
 				<requirement level="pilot">You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.</requirement>
 			</question>
 			<question id="vocabulary">
