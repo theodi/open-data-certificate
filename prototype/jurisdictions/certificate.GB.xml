@@ -33,7 +33,9 @@
 						<label>the rights in this data are complicated or unclear</label>
 					</option>
 				</radioset>
-				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
+				<help>If your organisation did not originally create or gather this data then you may not have the right to publish it. If you are not sure, please check with the data owner for their permission.
+				<br/>
+				Open data is data that can be freely used, reused and redistributed by anyone - subject only, at most, to the requirement to attribute and share alike - see <a href="http://opendefinition.org">opendefinition.org</a> for further details.</help>
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
