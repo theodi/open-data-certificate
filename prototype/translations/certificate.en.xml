@@ -480,7 +480,7 @@
 				<requirement level="standard">You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.</requirement>
 			</question>
 			<question id="dataType">
-				<label>What kind of data do you publish?</label>
+				<label>What kind of data is being provided as part of this dataset?</label>
 				<checkboxset required="pilot">
 					<option value="documents">
 						<label>human-readable documents</label>
