@@ -22,11 +22,11 @@ survey 'GB',
       :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
       :text_as_statement => 'This data is described at',
-      :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
-    a_1 'Documentation URL',
+      :help_text => 'Link to the dataset you are certifying. By dataset we mean the documentation or metadata that describes the data as well as a link to the data file itself. Dataset = data + metadata.'
+    a_1 'Dataset URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Documentation URL',
+      :placeholder => 'Dataset URL',
       :requirement => ['pilot_1', 'basic_1']
 
     label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
@@ -54,11 +54,11 @@ survey 'GB',
       :placeholder => 'Data Publisher',
       :required => :required
 
-    q_publisherUrl 'What website is the data published on?',
+    q_publisherUrl 'What is the website of the publisher?',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The data is published on',
-      :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
+      :help_text => 'Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, even when different names are provided on different certificates. E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the publisher’s website would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).'
     a_1 'Publisher URL',
       :text,
       :input_type => :url,
@@ -75,7 +75,7 @@ survey 'GB',
     a_series 'ongoing release of a series of related datasets',
       :help_text => 'This is a sequence of datasets with planned periodic updates in the future.'
     a_service 'a service or API for accessing open data',
-      :help_text => 'This is a live web service that exposes your data to programmers through an interface they can query.'
+      :help_text => 'This could be a web service for developers to access and interact with your data through an interface, or a snapshot taken directly from a database that gets updated in real-time.'
 
   end
 
@@ -88,7 +88,9 @@ survey 'GB',
 
     q_publisherRights 'Do you have the rights to publish this data as open data?',
       :discussion_topic => :gb_publisherRights,
-      :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
+      :help_text => 'If your organisation did not originally create or gather this data then you may not have the right to publish it. If you are not sure, please check with the data owner for their permission.
+				<br/>
+				Open data is data that can be freely used, reused and redistributed by anyone - subject only, at most, to the requirement to attribute and share alike - see <a href="http://opendefinition.org">opendefinition.org</a> for further details.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
@@ -481,7 +483,7 @@ survey 'GB',
       :discussion_topic => :gb_explicitWaiver,
       :display_on_certificate => true,
       :text_as_statement => 'The content has been',
-      :help_text => 'Content can be marked as public domain using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. This helps people know that it can be freely reused.',
+      :help_text => 'Works in the public domain are those whose intellectual property rights have expired, have been forfeited, or are inapplicable. If none of the content of your data have copyright or other rights over it, it is good practice to explicitly state this by labelling it as ‘public domain’. You can do this by using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>.',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_norights
@@ -1062,7 +1064,7 @@ survey 'GB',
 
     q_listed 'Is your data listed within a collection?',
       :discussion_topic => :listed,
-      :help_text => 'Data is easier for people to find when it\'s in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.',
+      :help_text => 'Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps drive discoverability of your data.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1096,7 +1098,7 @@ survey 'GB',
 
     q_referenced 'Is this data referenced from your own publications?',
       :discussion_topic => :referenced,
-      :help_text => 'When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.',
+      :help_text => 'Have you included direct links to this dataset in any of your own publications or communication channels? These could be reports, press releases, blog posts, presentations or any publication that helps to provide context to your data and encourages people to discover and understand the data better.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1482,7 +1484,7 @@ survey 'GB',
       :discussion_topic => :backups,
       :display_on_certificate => true,
       :text_as_statement => 'The data is',
-      :help_text => 'Taking a regular offsite backup helps ensure that the data won\'t be lost in the case of accident.',
+      :help_text => 'Taking a regular offsite backup helps ensure that the data won\'t be lost in the case of accident. This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1583,11 +1585,11 @@ survey 'GB',
       :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
 
-    q_datasetUrl 'Where is your dataset?',
+    q_datasetUrl 'Where is the data file located online?',
       :discussion_topic => :datasetUrl,
       :display_on_certificate => true,
       :text_as_statement => 'This data is published at',
-      :help_text => 'Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.'
+      :help_text => 'Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. .csv. Open data should be linked to directly on the web so people can easily find and reuse it.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
@@ -1843,7 +1845,7 @@ survey 'GB',
       :discussion_topic => :machineReadable,
       :display_on_certificate => true,
       :text_as_statement => 'This data is',
-      :help_text => 'People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.',
+      :help_text => '<a href="http://en.wikipedia.org/wiki/Machine-readable_data">Machine-readable data</a> is a structured data that can be easily processed and interpreted by a computer. This makes the data much more reusable. Examples of machine-readable formats include: CSV, JSON, XML, RDF. In contrast, an unstructured data such as HTML, PDFs and documents that have been scanned as images, are not machine-readable.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1876,7 +1878,7 @@ survey 'GB',
     dependency :rule => 'A'
     condition_A :q_openStandard, '==', :a_false
 
-    q_dataType 'What kind of data do you publish?',
+    q_dataType 'What kind of data is being provided as part of this dataset?',
       :discussion_topic => :dataType,
       :pick => :any
     a_documents 'human-readable documents',
@@ -2197,6 +2199,7 @@ survey 'GB',
       :discussion_topic => :documentationMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'The documentation includes machine-readable data for',
+      :help_text => 'If you are publishing your data via a data portal platform (e.g. <a href="http://ckan.org/">CKAN</a> or <a href="http://www.socrata.com/">Socrata</a>) then metadata will be available via the API, making it machine-readable.',
       :pick => :any
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -2333,10 +2336,11 @@ survey 'GB',
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_documentationMetadata, '!=', :a_keyword
 
-    q_distributionMetadata 'Does your documentation include machine-readable metadata for each distribution on:',
+    q_distributionMetadata 'Does your documentation include machine-readable metadata for each individual data file on:',
       :discussion_topic => :distributionMetadata,
       :display_on_certificate => true,
       :text_as_statement => 'The documentation about each distribution includes machine-readable data for',
+      :help_text => 'If you are using a data portal platform such as CKAN, each individual data file (or a resource) will have its own webpage, and a machine-readable documentation if it is available via the API.',
       :pick => :any
     dependency :rule => 'A and B'
     condition_A :q_documentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
@@ -2409,7 +2413,8 @@ survey 'GB',
     q_technicalDocumentation 'Where is the technical documentation for the data?',
       :discussion_topic => :technicalDocumentation,
       :display_on_certificate => true,
-      :text_as_statement => 'The technical documentation for the data is at'
+      :text_as_statement => 'The technical documentation for the data is at',
+      :help_text => 'This could be the precise details for the format(s) of the data and how to access the data via an API. This documentation will be aimed at technical re-users, such as developers.'
     a_1 'Technical Documentation URL',
       :text,
       :input_type => :url,
@@ -2484,7 +2489,7 @@ survey 'GB',
       :discussion_topic => :contactUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to contact someone about this data at',
-      :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
+      :help_text => 'Provide the link (URL) to the webpage containing the contact details of the person(s) responsible for, or could respond to questions about this data.'
     a_1 'Contact Documentation',
       :text,
       :input_type => :url,
@@ -2516,7 +2521,8 @@ survey 'GB',
     q_dataProtectionUrl 'Where can people find out how to contact someone with questions about privacy?',
       :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
-      :text_as_statement => 'Find out where to send questions about privacy at'
+      :text_as_statement => 'Find out where to send questions about privacy at',
+      :help_text => 'Provide the link to the webpage containing the contact details for reporting a privacy related issue with the data, i.e. when the data has not been fully anonymised so it is possible to draw personal identifying information from it.'
     a_1 'Confidentiality Contact Documentation',
       :text,
       :input_type => :url,
@@ -2566,7 +2572,7 @@ survey 'GB',
       :discussion_topic => :forum,
       :display_on_certificate => true,
       :text_as_statement => 'Discuss this data at',
-      :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
+      :help_text => 'Give a URL to your forum or mailing list where people can talk about your data. This could be the webpage for dataset itself if people can post a comment to have a discussion, or a dedicated forum on a data portal or publisher’s website.'
     a_1 'Forum or Mailing List URL',
       :text,
       :input_type => :url,
