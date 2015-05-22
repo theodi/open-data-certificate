@@ -727,7 +727,7 @@
 				</question>
 				<if test="this.documentationMetadata().distribution">
 					<question id="distributionMetadata" display="The documentation about each distribution includes machine-readable data for">
-						<label>Does your documentation include machine-readable metadata for each distribution on:</label>
+						<label>Does your documentation include machine-readable metadata for each individual data file on:</label>
 						<checkboxset>
 							<option value="title">
 								<label>title</label>
@@ -763,6 +763,7 @@
 								<label>type of download media</label>
 							</option>
 						</checkboxset>
+            <help>If you are using a data portal platform such as CKAN, each individual data file (or a resource) will have its own webpage, and a machine-readable documentation if it is available via the API.</help>
 					</question>
 				</if>
 			</if>
