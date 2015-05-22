@@ -815,6 +815,7 @@
 			<question id="dataProtectionUrl" display="Find out where to send questions about privacy at">
 				<label>Where can people find out how to contact someone with questions about privacy?</label>
 				<input type="url" placeholder="Confidentiality Contact Documentation"/>
+				<help>Provide the link to the webpage containing the contact details for reporting a privacy related issue with the data, i.e. when the data has not been fully anonymised so it is possible to draw personal identifying information from it.</help>
 				<requirement level="pilot">You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to.</requirement>
 			</question>
 			<question id="socialMedia">
