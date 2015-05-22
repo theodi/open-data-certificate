@@ -22,8 +22,8 @@
 		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
 		<question id="documentationUrl" display="This data is described at">
 			<label>Where is it described?</label>
-			<input type="url" placeholder="Documentation URL"/>
-			<help>Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.</help>
+			<input type="url" placeholder="Dataset URL"/>
+			<help>Link to the dataset you are certifying. By dataset we mean the documentation or metadata that describes the data as well as a link to the data file itself. Dataset = data + metadata.</help>
 			<if test="this.releaseType() !== 'collection'">
 				<requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
 			</if>
