@@ -371,7 +371,7 @@
                         <strong>Informace o držiteli databázových práv, uvedené v právním prohlášení, by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.</requirement>
                   </option>
                </checkboxset>
-               <help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést vaše autorství.</help>
+               <help>Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést vaše autorství.</help>
             </question>
          </if>
       </group>
