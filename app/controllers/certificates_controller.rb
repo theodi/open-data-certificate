@@ -47,8 +47,6 @@ class CertificatesController < ApplicationController
     end
   end
 
-  # this is similiar to the improvements, but returns
-  # json only, and includes completed questions too
   def progress
     render json: @certificate.response_set.progress
   end

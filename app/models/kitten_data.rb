@@ -13,7 +13,8 @@ class KittenData < ActiveRecord::Base
     "http://opendatacommons.org/licenses/pddl/" => "odc_pddl",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
   }
 
   CONTENT_LICENCES = {
@@ -21,7 +22,8 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/licenses/by-sa/2.0/uk/" => "cc_by_sa",
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
   }
 
   def dataset
@@ -80,7 +82,19 @@ class KittenData < ActiveRecord::Base
     get(field) || []
   end
 
+  def uri
+    @uri ||= URI(url)
+  end
+
+  def hostname
+    uri.hostname
+  end
+
   protected
+
+  def package_name
+    uri.path.split("/").last
+  end
 
   def set_title
     @fields["dataTitle"] = data[:title]
@@ -143,33 +157,19 @@ class KittenData < ActiveRecord::Base
     @fields["vocabulary"] = "false"
   end
 
-  def set_dgu_assumptions
-    return unless url.include?("data.gov.uk")
+  def set_ckan_assumptions
     # Assumptions for data.gov.uk
-    uri = URI(url)
-    package = uri.path.split("/").last
-
-    @fields["copyrightURL"] = url
-    @fields["frequentChanges"] = "false"
-    @fields["listed"] = "true"
-    @fields["listing"] = "http://data.gov.uk"
-    @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.gov.uk/api/rest/package/#{package}"
-  end
-
-  def set_london_datastore_assumptions
-    return unless url.include?("data.london.gov.uk")
-    # Assumptions for data.london.gov.uk
+    # also for data.london.gov.uk
     # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
-    uri = URI(url)
-    package = uri.path.split("/").last
+    # and data.gov
+    return unless %w[data.gov.uk data.london.gov.uk catalog.data.gov].include?(hostname)
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
-    @fields["listing"] = "http://data.london.gov.uk"
+    @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://data.london.gov.uk/api/rest/package/#{package}"
+    @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
   end
 
   def set_structured_open

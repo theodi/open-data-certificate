@@ -54,7 +54,7 @@ questions:
         help_text: "Jde o jeden soubor a nečekáte, že byste výhledově zveřejňovali další podobné."
       collection:
         text: "několik souvisejících datových sad, jednorázově"
-        help_text: "Jde o několik souvisejících souborů a nečekáte, že byste výhledově zvěřejňovali další podobné."
+        help_text: "Jde o několik souvisejících souborů a nečekáte, že byste výhledově zveřejňovali další podobné."
       series:
         text: "několik souvisejících datových sad, průběžně aktualizovaných"
         help_text: "Jde o několik datových sad, které budete v budoucnu aktualizovat."
@@ -406,7 +406,7 @@ questions:
     answers:
       not_personal:
         text: "Ne, data se netýkají jednotlivců."
-        help_text: "Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí."
+        help_text: "Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení s informacemi o tom, kdy a kam daná osoba dojíždí."
         text_as_statement: "nehraje roli, data se netýkají jednotlivců"
       summarised:
         text: "Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní."
@@ -707,7 +707,7 @@ questions:
   qualityUrl:
     text: "Kde zveřejňujete problémy s kvalitou těchto dat?"
     text_as_statement: "Dokumentace kvality dat"
-    help_text: "URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá hcybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat."
+    help_text: "URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat."
     answers:
       a_1:
         text: "URL dokumentace"
@@ -861,7 +861,7 @@ questions:
   openStandard:
     text: "Jsou vaše data ve standardizovaném otevřeném formátu?"
     text_as_statement: "Formát dat"
-    help_text: "Otevřené standardy vznikají férovou, transparentní spoluprácí. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON."
+    help_text: "Otevřené standardy vznikají férovou, transparentní spoluprací. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON."
     answers:
       a_false:
         text: ne
@@ -1022,7 +1022,7 @@ questions:
   digitalCertificate:
     text: "Jak uživatelé mohou ověřit, že data skutečně pochází od vás?"
     text_as_statement: "Jak ověřit původ dat"
-    help_text: "Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás. Například můžete data digitálně podepsat, aby se na případné nežádoucí změny okamžitě přišlo."
+    help_text: "Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás – například můžete data digitálně podepsat."
     answers:
       a_1:
         text: "URL k dokumentaci"

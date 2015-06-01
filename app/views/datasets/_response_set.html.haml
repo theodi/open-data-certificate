@@ -47,27 +47,17 @@
     .span3.edit-jurisdiction
       %h3 Your answers
       -if is_primary
-        %p
-          = link_to 'Edit Questionnaire', continue_path(response_set), class: 'btn btn-large btn-info btn-block edit_questionaire'
-        %p
-          = link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+        %p= button_to 'Edit Questionnaire', continue_path(response_set), method: 'post', class: 'btn btn-large btn-info btn-block edit_questionaire'
+        %p= link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
 
         =render :partial => 'shared/switch_jurisdiction', locals: {response_set: response_set}
 
   .row-fluid.baseline
     .span3
-      %p
-      %small
-        = link_to t('dashboard.improvements_link'), improvements_dataset_certificate_path(response_set.dataset, certificate)
+      = link_to t('dashboard.improvements_link'), improvements_dataset_certificate_path(response_set.dataset, certificate)
     .span3
-      %p
-      %small
-        = t 'dashboard.last_updated_at', time_span: time_ago_in_words(response_set.updated_at)
+      = t 'dashboard.last_updated_at', time_span: time_ago_in_words(response_set.updated_at)
     .span3
-      %p
-      %small= "#{t('dashboard.verification')}: #{t(certificate.certification_type, scope: 'certificate.certification_types')}"
+      = "#{t('dashboard.verification')}: #{t(certificate.certification_type, scope: 'certificate.certification_types')}"
     .span3
-      = link_to [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}} do
-        %p
-        %small.delete
-          Delete
+      = link_to 'Delete', [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}, class: 'delete'}

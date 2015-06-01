@@ -47,7 +47,7 @@
         </td>
         <td>
             <% if can? :edit, generator.response_set %>
-            <%= link_to "edit", continue_path(generator.response_set) %>
+                <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
             <% end %>
         </td>
         <td>

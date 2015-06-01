@@ -196,7 +196,7 @@ $(document).ready(function($){
   });
 
   // Removes highlighting and information on mouseleave
-  $surveyElements.on('mouseleave', function(){
+  $surveyElements.filter('fieldset').on('mouseleave', function(){
     $($currentRow.data('metas')).hide();
     $($currentRow.data('input-metas')).hide();
 
@@ -407,7 +407,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  var certificateBody = $('.certificate-data');
+  var certificateBody = $('.certificate-data, #surveyor');
 
   certificateBody.click(function() {
     certificateBody.find('.odc-popover').popover('hide');

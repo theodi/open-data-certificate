@@ -2,7 +2,6 @@ class Question < ActiveRecord::Base
   include Surveyor::Models::QuestionMethods
 
   attr_accessible :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
-  attr_accessor :minimum_level
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
   scope :mandatory, where(is_mandatory: true)
@@ -10,7 +9,7 @@ class Question < ActiveRecord::Base
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
-  after_save :update_mandatory
+  before_save :set_mandatory
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
@@ -22,25 +21,6 @@ class Question < ActiveRecord::Base
     'exemplar' => 4
   }
 
-  class << self
-    def compute_levels(questions)
-      questions.map.with_index do |question, i|
-        requirements = []
-        i += 1
-        while questions[i] && questions[i].is_a_requirement? do
-          requirements.push(questions[i])
-          i += 1
-        end
-        question.minimum_level = get_minimum_level(question, requirements)
-      end
-    end
-
-    def get_minimum_level(question, requirements)
-      level = requirements.map(&:requirement_level).map{|l| LEVELS[l] }.min
-      LEVELS.key(level) || (question.required? ? 'basic' : nil)
-    end
-  end
-
   # either provided text_as_statement, or fall back to text
   def statement_text
     text_as_statement || text
@@ -51,6 +31,17 @@ class Question < ActiveRecord::Base
     #             and outstanding requirements, and for the display customisation of questions.
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
     @requirement_level ||= requirement.to_s.match(/^[a-zA-Z]*/).to_s
+  end
+
+  def minimum_level
+    case required
+    when '', nil
+      nil
+    when "required"
+      "basic"
+    when String
+      required
+    end
   end
 
   def requirement_level_index
@@ -84,7 +75,11 @@ class Question < ActiveRecord::Base
   end
 
   def required?
-    is_mandatory || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+    is_mandatory? || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
+  end
+
+  def is_mandatory?
+    required.to_s == "required"
   end
 
   def type
@@ -163,10 +158,9 @@ class Question < ActiveRecord::Base
                             .to_i
   end
 
-  def update_mandatory
-    #TODO: swap to using an observer instead?
-    self.is_mandatory ||= required.present?
-    Question.update(id, :is_mandatory => is_mandatory) if is_mandatory_changed?
+  def set_mandatory
+    self.is_mandatory ||= is_mandatory?
+    nil # return value of false prevents saving
   end
 
   def set_default_value_for_required

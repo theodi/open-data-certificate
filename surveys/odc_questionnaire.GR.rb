@@ -353,12 +353,12 @@ survey 'GR',
       :text_as_statement => 'Creative Commons Attribution Share-Alike (Αναφορά - Παρόμοια διανομή)'
     a_cc_zero 'Creative Commons CCZero (Εκχώρηση ως Κοινό Κτήμα)',
       :text_as_statement => 'Creative Commons CCZero (Εκχώρηση ως Κοινό Κτήμα)'
-    a_odc_by 'Open Data Commons Attribution License',
-      :text_as_statement => 'Open Data Commons Attribution License'
-    a_odc_odbl 'Open Data Commons Open Database License (ODbL)',
-      :text_as_statement => 'Open Data Commons Open Database License (ODbL)'
-    a_odc_pddl 'Open Data Commons Public Domain Dedication and License (PDDL)',
-      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL)'
+    a_odc_by 'Open Data Commons Attribution License (Open Data Commons Αναφορά)',
+      :text_as_statement => 'Open Data Commons Attribution License (Open Data Commons Αναφορά)'
+    a_odc_odbl 'Open Data Commons Open Database License (ODbL) (Open Data Commons Άδεια Ανοικτών Βάσεων Δεδομένων)',
+      :text_as_statement => 'Open Data Commons Open Database License (ODbL) (Open Data Commons Άδεια Ανοικτών Βάσεων Δεδομένων)'
+    a_odc_pddl 'Open Data Commons Public Domain Dedication and License (PDDL) (Open Data Commons Εκχώρηση ως Κοινό Κτήμα)',
+      :text_as_statement => 'Open Data Commons Public Domain Dedication and License (PDDL) (Open Data Commons Εκχώρηση ως Κοινό Κτήμα)'
     a_na 'Δεν εφαρμόζεται',
       :text_as_statement => ''
     a_other 'Άλλο...',
@@ -923,7 +923,7 @@ survey 'GR',
       :discussion_topic => :gr_individualConsentURL,
       :display_on_certificate => true,
       :text_as_statement => 'Τα άτομα που επηρεάζονται από αυτά τα δεδομένα έχουν αυτό το σημείωμα Ιδιωτικότητας και προστασίας δεδομένων προσωπικού χαρακτήρα',
-      :help_text => 'Όταν συλλέγετε δεδομένα σχετικά με άτομα πρέπει να τους πείτε πώς θα χρησιμοποιηθούν αυτά τα δεδομένα. Οι άνθρωποι που χρησιμοποιούν τα δεδομένα σας, το χρειάζονται αυτό για να βεβαιωθούν ότι συμμορφώνονται με το νόμο περί προστασίας δεδομένων (Data Protection Act).'
+      :help_text => 'Όταν συλλέγετε δεδομένα σε σχέση με φυσικά πρόσωπα οφείλεται να τους ενημερώσετε σε σχέση με το σκοπό επεξεργαγασίας των προσωπικών τους δεδομένων. Οι περαιτέρω χρήστες των δεδομένων σας χρειάζεται να έχουν την συγκατάθεση του υποκειμένου επεξεργασίας δεδομένων προσωπικού χαρακτήρα ή άλλη νόμιμη βάση επεξεργασίας (π.χ. υποχρέωση εκ του νόμου) προκειμένου να επεξεργάζονται τα δεδομένα σύμφωνα με τη νομοθεσία για την προστασία δεδομένων προσωπικού χαρακτήρα (Data Protection Act).'
     dependency :rule => 'A and (B or C) and D and E'
     condition_A :q_dataPersonal, '==', :a_individual
     condition_B :q_appliedAnon, '==', :a_true
@@ -959,7 +959,7 @@ survey 'GR',
     a_false 'no'
     a_true 'yes'
 
-    q_dbStaffConsulted 'Τους έχετε εμπλέξει στη διαδικασία Εκτίμησης των Επιπτώσεων Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (Privacy Impact Assessment process);',
+    q_dbStaffConsulted 'Τους έχετε εμπλέξει στη διαδικασία Εκτίμησης των Επιπτώσεων από την επεξεργασία Δεδομένων Προσωπικού Χαρακτήρα (Privacy Impact Assessment process);',
       :discussion_topic => :gr_dbStaffConsulted,
       :display_on_certificate => true,
       :text_as_statement => 'Το άτομο που είναι υπεύθυνο για την προστασία των δεδομένων',

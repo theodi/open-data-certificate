@@ -1456,10 +1456,13 @@ a.transfer {
     padding-right: 20px;
   }
 
-
-  // bit of a hack to get lines mid-gutter
   .row-fluid{
-    position: relative
+    position: relative;
+
+    .baseline {
+      font-size: 16px;
+      padding-top: 10px;
+    }
   }
 
 
@@ -1485,18 +1488,15 @@ a.transfer {
     }
   }
 
-  a .delete {
+  a.delete {
     background-image:url(/assets/status/remove-sign.png);
     background-repeat: no-repeat;
     display:inline-block;
-    margin:auto;
-    width:25px;
-    height: 25px;
     padding-left: 23px;
     color: @odiCrimson;
   }
 
-  a:hover .delete {
+  a.delete:hover {
    color: @odiCrimsonDark;
   }
 
@@ -1512,10 +1512,8 @@ a.transfer {
 
 .response-set .row-fluid.baseline {
 
-    // Even out the spacing around the last line of data in each certificate
-    // panel on the "My Certificates" page
-    padding-bottom: 5px;
-
+    font-size: 16px;
+    padding-top: 10px;
 }
 
 // don't display the headers, links or actions in secondary ones
@@ -1724,6 +1722,9 @@ a.transfer {
   background-image:url(/assets/status/published.png);
 }
 .status-badge-archived{
+  background-image:url(/assets/status/archived.png);
+}
+.status-badge-superceded{
   background-image:url(/assets/status/archived.png);
 }
 

@@ -16,8 +16,6 @@ class SurveyorController < ApplicationController
 
   # it might be a *really* nice refactor to take this to response_set_controller#update
   # then we could use things like `form_for [surveyor, response_set] do |f|`
-  #
-  # also, GET here is totally totally wrong
   def continue
     if params[:survey_locale]
       @response_set.update_attribute :locale, params[:survey_locale]
@@ -29,8 +27,7 @@ class SurveyorController < ApplicationController
       survey = Survey.newest_survey_for_access_code nxt
 
       unless survey.nil?
-        attrs = prepare_new_response_set
-        switch_survey(attrs, survey)
+        switch_survey(survey)
       end
 
     elsif params[:juristiction_access_code]
@@ -38,8 +35,7 @@ class SurveyorController < ApplicationController
 
       survey = Survey.newest_survey_for_access_code(params[:juristiction_access_code])
       unless survey.nil?
-        attrs = prepare_new_response_set
-        switch_survey(attrs, survey)
+        switch_survey(survey)
 
         # the user has made a concious effort to switch jurisdictions, so set it as their default
         if user_signed_in?
@@ -50,8 +46,7 @@ class SurveyorController < ApplicationController
     elsif @response_set.survey.superceded?
       latest_survey = Survey.newest_survey_for_access_code(params[:survey_code])
       unless latest_survey.nil?
-        attrs = prepare_new_response_set
-        switch_survey(attrs, latest_survey)
+        switch_survey(latest_survey)
       end
     elsif !@response_set.modifications_allowed?
       # they *actually* want to create a new response set
@@ -171,7 +166,6 @@ class SurveyorController < ApplicationController
       @responses = @response_set.responses.includes(:question).all
       @survey = @response_set.survey
       @sections = @survey.sections.with_includes
-      @sections.each{|s| Question.compute_levels(s.questions) }
       @dependents = []
       @update = true if params[:update]
     else
@@ -208,19 +202,20 @@ class SurveyorController < ApplicationController
   end
 
   def prepare_new_response_set
-    @response_set.attributes.keep_if do |key|
-      %w(survey_id user_id dataset_id).include? key
-    end
+    keep = %w[survey_id user_id dataset_id]
+    @response_set.attributes.slice(*keep)
   end
 
   def create_new_response_set(attrs)
     @response_set = ResponseSet.clone_response_set(@response_set, attrs)
   end
 
-  def switch_survey(attrs, survey)
+  def switch_survey(survey)
     attrs = prepare_new_response_set
-    attrs[:survey_id] = survey.id
+    attrs['survey_id'] = survey.id
+    response_set = @response_set
     create_new_response_set(attrs)
+    response_set.supercede!
   end
 
 end
