@@ -345,7 +345,7 @@
 				<question id="datasetUrl" display="This data is published at">
 					<label>Where is the data file located online?</label>
 					<input type="url" placeholder="Dataset URL"/>
-					<help>Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. .csv. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
+					<help>Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. CSV. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
 					<if test="this.documentationUrl() === ''">
 						<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.</requirement>
 					</if>
