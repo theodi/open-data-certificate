@@ -296,7 +296,7 @@
 			<question id="backups" display="The data is">
 				<label>Do you take offsite backups?</label>
 				<yesno yes="backed up offsite" />
-				<help>Taking a regular offsite backup helps ensure that the data won't be lost in the case of accident. This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.</help>
+				<help>This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.</help>
 				<requirement level="standard">You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens.</requirement>
 			</question>
 			<if test="this.releaseType() === 'service'">
