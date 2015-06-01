@@ -86,18 +86,18 @@ survey 'GB',
       :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
-    q_publisherRights 'Do you have the rights to publish this data as open data?',
+    q_publisherRights 'Do you have the right to make this data open?',
       :discussion_topic => :gb_publisherRights,
-      :help_text => 'If your organisation did not originally create or gather this data then you may not have the right to publish it. If you are not sure, please check with the data owner for their permission.
+      :help_text => 'If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission.
 				<br/>
-				Open data is data that can be freely used, reused and redistributed by anyone - subject only, at most, to the requirement to attribute and share alike - see <a href="http://opendefinition.org">opendefinition.org</a> for further details.',
+				Open data is data that anyone anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href="https://theodi.org/what-is-open-data">what is open data?</a>’ and the <a href="http://opendefinition.org">open definition</a> for more details.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required
-    a_yes 'yes, you have the rights to publish this data as open data',
+    a_yes 'yes, you have the rights to open this data up',
       :requirement => ['standard_1']
-    a_no 'no, you don\'t have the rights to publish this data as open data'
-    a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
+    a_no 'no, you don’t have the rights to open up this data'
+    a_unsure 'you’re not sure if you have the rights to publish this data as open data'
     a_complicated 'the rights in this data are complicated or unclear'
 
     label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
@@ -1064,7 +1064,7 @@ survey 'GB',
 
     q_listed 'Is your data listed within a collection?',
       :discussion_topic => :listed,
-      :help_text => 'Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps drive discoverability of your data.',
+      :help_text => 'Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps make your data more discoverable.',
       :pick => :one
     a_false 'no'
     a_true 'yes',
@@ -1484,7 +1484,7 @@ survey 'GB',
       :discussion_topic => :backups,
       :display_on_certificate => true,
       :text_as_statement => 'The data is',
-      :help_text => 'Taking a regular offsite backup helps ensure that the data won\'t be lost in the case of accident. This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.',
+      :help_text => 'This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
@@ -1589,7 +1589,7 @@ survey 'GB',
       :discussion_topic => :datasetUrl,
       :display_on_certificate => true,
       :text_as_statement => 'This data is published at',
-      :help_text => 'Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. .csv. Open data should be linked to directly on the web so people can easily find and reuse it.'
+      :help_text => 'Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. CSV. Open data should be linked to directly on the web so people can easily find and reuse it.'
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
@@ -1890,22 +1890,22 @@ survey 'GB',
     a_structured 'other kinds of structured data',
       :help_text => 'Choose this if your data is structured in other ways. Like event details, railway timetables, contact information or anything that can be interpreted as data, and analysed and presented in multiple ways.'
 
-    q_documentFormat 'Do your human-readable documents include formats that',
+    q_documentFormat 'What formats are your human-readable documents published in? (for this dataset)',
       :discussion_topic => :documentFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Documents are published',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_documents
-    a_semantic 'describe semantic structure like HTML, Docbook or Markdown',
+    a_semantic 'formats which describe semantic structure like HTML, Docbook or Markdown',
       :text_as_statement => 'in a semantic format',
       :help_text => 'These formats label structures like chapters, headings and tables that make it easy to automatically create summaries like tables of contents and glossaries. They also make it easy to apply different styles to the document so its appearance changes.',
       :requirement => ['standard_31']
-    a_format 'describe information on formatting like OOXML or PDF',
+    a_format 'formats which describe information on formatting like OOXML or PDF',
       :text_as_statement => 'in a display format',
       :help_text => 'These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren\'t as easy for people to process automatically and change style.',
       :requirement => ['pilot_17']
-    a_unsuitable 'aren\'t meant for documents like Excel, JSON or CSV',
+    a_unsuitable 'formats which aren\'t meant for documents like Excel, JSON or CSV',
       :text_as_statement => 'in a format unsuitable for documents',
       :help_text => 'These formats better suit tabular or structured data.'
 
@@ -1924,26 +1924,26 @@ survey 'GB',
     condition_B :q_documentFormat, '!=', :a_semantic
     condition_C :q_documentFormat, '!=', :a_format
 
-    q_statisticalFormat 'Does your statistical data include formats that',
+    q_statisticalFormat 'What formats are your statistical data files published in? (for this dataset)',
       :discussion_topic => :statisticalFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Statistical data is published',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_statistical
-    a_statistical 'expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
+    a_statistical 'formats which expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a>',
       :text_as_statement => 'in a statistical data format',
       :help_text => 'Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.',
       :requirement => ['exemplar_15']
-    a_tabular 'treat statistical data as a table like CSV',
+    a_tabular 'formats which treat statistical data as a table like CSV',
       :text_as_statement => 'in a tabular data format',
       :help_text => 'These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.',
       :requirement => ['standard_32']
-    a_format 'focus on the format of tabular data like Excel',
+    a_format 'formats which focus on the format of tabular data like Excel',
       :text_as_statement => 'in a presentation format',
       :help_text => 'Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.',
       :requirement => ['pilot_18']
-    a_unsuitable 'aren\'t meant for statistical or tabular data like Word or PDF',
+    a_unsuitable 'formats which aren\'t meant for statistical or tabular data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for statistical data',
       :help_text => 'These formats don\'t suit statistical data because they obscure the underlying structure of the data.'
 
@@ -1971,22 +1971,22 @@ survey 'GB',
     condition_C :q_statisticalFormat, '!=', :a_tabular
     condition_D :q_statisticalFormat, '!=', :a_format
 
-    q_geographicFormat 'Does your geographic data include formats that',
+    q_geographicFormat 'What formats are your geographic data files published in? (for this dataset)',
       :discussion_topic => :geographicFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Geographic data is published',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_geographic
-    a_specific 'are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
+    a_specific 'formats which are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a>',
       :text_as_statement => 'in a geographic data format',
       :help_text => 'These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.',
       :requirement => ['exemplar_16']
-    a_generic 'keeps data structured like JSON, XML or CSV',
+    a_generic 'formats which keep data structured like JSON, XML or CSV',
       :text_as_statement => 'in a generic data format',
       :help_text => 'Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.',
       :requirement => ['pilot_19']
-    a_unsuitable 'aren\'t designed for geographic data like Word or PDF',
+    a_unsuitable 'formats which aren\'t designed for geographic data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for geographic data',
       :help_text => 'These formats don\'t suit geographic data because they obscure the underlying structure of the data.'
 
@@ -2005,18 +2005,18 @@ survey 'GB',
     condition_B :q_geographicFormat, '!=', :a_specific
     condition_C :q_geographicFormat, '!=', :a_generic
 
-    q_structuredFormat 'Does your structured data include formats that',
+    q_structuredFormat 'What formats are your structured data files published in? (for this dataset)',
       :discussion_topic => :structuredFormat,
       :display_on_certificate => true,
       :text_as_statement => 'Structured data is published',
       :pick => :one
     dependency :rule => 'A'
     condition_A :q_dataType, '==', :a_structured
-    a_suitable 'are designed for structured data like JSON, XML, Turtle or CSV',
+    a_suitable 'formats which are designed for structured data like JSON, XML, Turtle or CSV',
       :text_as_statement => 'in a structured data format',
       :help_text => 'These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.',
       :requirement => ['pilot_20']
-    a_unsuitable 'aren\'t designed for structured data like Word or PDF',
+    a_unsuitable 'formats which aren\'t designed for structured data like Word or PDF',
       :text_as_statement => 'in a format unsuitable for structured data',
       :help_text => 'These formats don\'t suit this kind of data because they obscure its underlying structure.'
 
@@ -2489,7 +2489,7 @@ survey 'GB',
       :discussion_topic => :contactUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to contact someone about this data at',
-      :help_text => 'Provide the link (URL) to the webpage containing the contact details of the person(s) responsible for, or could respond to questions about this data.'
+      :help_text => 'Provide the link (URL) to the webpage containing the contact details of the person(s) responsible for, or could respond to questions about, this data.'
     a_1 'Contact Documentation',
       :text,
       :input_type => :url,
@@ -2522,7 +2522,7 @@ survey 'GB',
       :discussion_topic => :dataProtectionUrl,
       :display_on_certificate => true,
       :text_as_statement => 'Find out where to send questions about privacy at',
-      :help_text => 'Provide the link to the webpage containing the contact details for reporting a privacy related issue with the data, i.e. when the data has not been fully anonymised so it is possible to draw personal identifying information from it.'
+      :help_text => 'Provide the link to the webpage containing the contact details for reporting a privacy related issue with the data, i.e. when the data has not been fully anonymised, so it is possible to draw personal identifying information from it.'
     a_1 'Confidentiality Contact Documentation',
       :text,
       :input_type => :url,
@@ -2572,7 +2572,7 @@ survey 'GB',
       :discussion_topic => :forum,
       :display_on_certificate => true,
       :text_as_statement => 'Discuss this data at',
-      :help_text => 'Give a URL to your forum or mailing list where people can talk about your data. This could be the webpage for dataset itself if people can post a comment to have a discussion, or a dedicated forum on a data portal or publisher’s website.'
+      :help_text => 'This could be the webpage for the dataset itself if people can post a comment to have a discussion, or a dedicated forum on a data portal or publisher’s website.'
     a_1 'Forum or Mailing List URL',
       :text,
       :input_type => :url,
