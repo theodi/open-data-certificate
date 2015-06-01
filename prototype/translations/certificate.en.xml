@@ -88,7 +88,7 @@
 			<question id="listed">
 				<label>Is your data listed within a collection?</label>
 				<yesno/>
-				<help>Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps drive discoverability of your data.</help>
+				<help>Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps make your data more discoverable.</help>
 				<requirement level="standard">You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
