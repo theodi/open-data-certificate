@@ -162,7 +162,7 @@
 					<label>Does this data change at least daily?</label>
 					<yesno required="pilot" yes="at least daily" />
 					<help>Tell people if the underlying data changes on most days. When data changes frequently it also goes out of date quickly, so people need to know if you also update it frequently and quickly too.</help>
-				</question>			
+				</question>
 				<if test="this.frequentChanges() === 'true'">
 					<question id="seriesType" display="This data is a series of">
 						<label>What type of dataset series is this?</label>
