@@ -163,6 +163,12 @@ module ApplicationHelper
     end
   end
 
+  def example_dataset
+    if cert = Certificate.published.current.attained_level(:pilot).first
+      cert.dataset
+    end
+  end
+
   private
   def new_certificate_link_hash(options={})
     if user_signed_in?
