@@ -44,6 +44,10 @@ class Certificate < ActiveRecord::Base
       end
     end
 
+    def attained_level(level)
+      where(attained_level: level)
+    end
+
     def by_newest
       order("certificates.created_at DESC")
     end
