@@ -60,11 +60,15 @@ class Response < ActiveRecord::Base
   end
 
   def ui_hash_values
-    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :response_group, :explanation].reduce({}) do |memo, key|
+    values = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :response_group, :explanation].reduce({}) do |memo, key|
       value = self.send(key)
       memo[key] = value unless value.blank?
       memo
     end
+    if answer.response_class == 'text'
+      values[:text_value] ||= values[:string_value]
+    end
+    return values
   end
 
   def dataset
