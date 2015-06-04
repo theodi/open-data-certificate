@@ -17,10 +17,10 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
-	<xsl:result-document href="../../surveys/odc_questionnaire.{if (questionnaire/@jurisdiction = 'GB') then 'UK' else questionnaire/@jurisdiction}.rb" method="text">
+	<xsl:result-document href="../../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
-	<xsl:result-document href="../../surveys/translations/odc.{if (questionnaire/@jurisdiction = 'GB') then 'UK' else questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
+	<xsl:result-document href="../../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
 		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
