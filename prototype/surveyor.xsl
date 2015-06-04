@@ -17,11 +17,22 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
+	<!-- Surveyor quesitionnaire description -->
 	<xsl:result-document href="../../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
+	<!-- complete merged translation strings -->
 	<xsl:result-document href="../../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
 		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
+	</xsl:result-document>
+	<!-- general sections translation strings -->
+	<xsl:result-document href="../../surveys/translations/questionnaire.general.{questionnaire/@xml:lang}.yml" method="text">
+		<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', questionnaire/@xml:lang, '.xml')" />
+		<xsl:apply-templates select="doc($langPath)/questionnaire" mode="translation" />
+	</xsl:result-document>
+	<!-- jurisdiction specific translation strings -->
+	<xsl:result-document href="../../surveys/translations/questionnaire.jurisdiction.{questionnaire/@xml:lang}_{questionnaire/@jurisdiction}.yml" method="text">
+		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
 
@@ -592,105 +603,156 @@
 
 <!-- TRANSLATION -->
 
+<xsl:variable name="indentamt" select="'  '"/>
+
 <xsl:template match="questionnaire" mode="translation">
-	<xsl:text>title: </xsl:text>
-	<xsl:value-of select="local:yamlQuotedText(@jurisdiction)" />
+	<xsl:param name="indent" select="$indentamt"/>
+	<xsl:choose>
+		<xsl:when test="@jurisdiction">
+			<xsl:value-of select="concat(@xml:lang, '_', @jurisdiction, ':')"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="concat(@xml:lang, ':')"/>
+		</xsl:otherwise>
+	</xsl:choose>
 	<xsl:text>&#xA;</xsl:text>
-	<xsl:text>full_title: </xsl:text>
-	<xsl:value-of select="local:yamlQuotedText(local:titleCase(key('countries', @jurisdiction, $countries)))" />
-	<xsl:text>&#xA;</xsl:text>
-	<xsl:text>description: </xsl:text>
-	<xsl:variable name="description">
-		<xsl:apply-templates select="help/*" mode="html" />
-	</xsl:variable>
-	<xsl:value-of select="local:yamlQuotedText($description)" />
-	<xsl:text>&#xA;</xsl:text>
+	<xsl:if test="@jurisdiction">
+		<xsl:value-of select="$indent"/>
+		<xsl:text>title: </xsl:text>
+		<xsl:value-of select="local:yamlQuotedText(@jurisdiction)" />
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:value-of select="$indent"/>
+		<xsl:text>full_title: </xsl:text>
+		<xsl:value-of select="local:yamlQuotedText(local:titleCase(key('countries', @jurisdiction, $countries)))" />
+		<xsl:text>&#xA;</xsl:text>
+		<xsl:value-of select="$indent"/>
+		<xsl:text>description: </xsl:text>
+		<xsl:variable name="description">
+			<xsl:apply-templates select="help/*" mode="html" />
+		</xsl:variable>
+		<xsl:value-of select="local:yamlQuotedText($description)" />
+		<xsl:text>&#xA;</xsl:text>
+	</xsl:if>
+	<xsl:value-of select="$indent"/>
 	<xsl:text>survey_sections:&#xA;</xsl:text>
-	<xsl:apply-templates select="group" mode="translation" />
+	<xsl:apply-templates select="group" mode="translation">
+		<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+	</xsl:apply-templates>
+	<xsl:value-of select="$indent"/>
 	<xsl:text>questions:&#xA;</xsl:text>
 	<xsl:for-each select="group">
+		<xsl:value-of select="concat($indentamt, $indent)"/>
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
 		<xsl:text>&#xA;</xsl:text>
-		<xsl:apply-templates select=".//question" mode="translation" />
+		<xsl:apply-templates select=".//question" mode="translation">
+			<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+		</xsl:apply-templates>
 	</xsl:for-each>
+	<xsl:value-of select="$indent"/>
 	<xsl:text>labels:&#xA;</xsl:text>
-	<xsl:apply-templates select="group//group" mode="translation" />
+	<xsl:apply-templates select="group//group" mode="translation">
+		<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+	</xsl:apply-templates>
 	<xsl:for-each select="group">
+		<xsl:value-of select="$indent"/>
 		<xsl:text># </xsl:text>
 		<xsl:value-of select="label" />
 		<xsl:text> Requirements&#xA;</xsl:text>
-		<xsl:apply-templates select=".//requirement" mode="translation" />
+		<xsl:apply-templates select=".//requirement" mode="translation">
+			<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+		</xsl:apply-templates>
 	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="group" mode="translation">
-	<xsl:text>  </xsl:text>
+	<xsl:param name="indent"/>
+	<xsl:value-of select="$indent"/>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    title: </xsl:text>
+	<xsl:value-of select="concat($indentamt, $indent)"/>
+	<xsl:text>title: </xsl:text>
 	<xsl:variable name="title">
-		<xsl:apply-templates select="label" mode="html" />
+		<xsl:apply-templates select="label" mode="html">
+			<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+		</xsl:apply-templates>
 	</xsl:variable>
 	<xsl:value-of select="local:yamlQuotedText($title)" />
 	<xsl:text>&#xA;</xsl:text>
-	<xsl:apply-templates select="help" mode="translation" />
+	<xsl:apply-templates select="help" mode="translation">
+		<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="question" mode="translation">
-	<xsl:text>  </xsl:text>
+	<xsl:param name="indent"/>
+	<xsl:value-of select="$indent"/>
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: </xsl:text>
+	<xsl:value-of select="concat($indentamt, $indent)"/>
+	<xsl:text>text: </xsl:text>
 	<xsl:variable name="text">
 		<xsl:apply-templates select="label" mode="html" />
 	</xsl:variable>
 	<xsl:value-of select="local:yamlQuotedText($text)" />
 	<xsl:text>&#xA;</xsl:text>
 	<xsl:if test="@display">
-		<xsl:text>    text_as_statement: </xsl:text>
+		<xsl:value-of select="concat($indentamt, $indent)"/>
+		<xsl:text>text_as_statement: </xsl:text>
 		<xsl:value-of select="local:yamlQuotedText(@display)" />
 		<xsl:text>&#xA;</xsl:text>
 	</xsl:if>
-	<xsl:apply-templates select="help" mode="translation" />
-	<xsl:text>    answers:&#xA;</xsl:text>
+	<xsl:apply-templates select="help" mode="translation">
+		<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
+	</xsl:apply-templates>
+	<xsl:value-of select="concat($indentamt, $indent)"/>
+	<xsl:text>answers:&#xA;</xsl:text>
 	<xsl:choose>
 		<xsl:when test="input">
-			<xsl:text>      a_1:&#xA;</xsl:text>
-			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
+			<xsl:text>a_1:&#xA;</xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+			<xsl:text>text: </xsl:text>
 			<xsl:value-of select="local:yamlQuotedText(input/@placeholder)" />
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:when>
 		<xsl:when test="yesno">
-			<xsl:text>      a_false:&#xA;</xsl:text>
-			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
+			<xsl:text>a_false:&#xA;</xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+			<xsl:text>text: </xsl:text>
 			<xsl:value-of select="(//questionnaire/@no, 'no')[1]" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
-				<xsl:text>        text_as_statement: </xsl:text>
+				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+				<xsl:text>text_as_statement: </xsl:text>
 				<xsl:value-of select="local:yamlQuotedText((yesno/@no, '')[1])" />
 				<xsl:text>&#xA;</xsl:text>
 			</xsl:if>
-			<xsl:text>      a_true:&#xA;</xsl:text>
-			<xsl:text>        text: </xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
+			<xsl:text>a_true:&#xA;</xsl:text>
+			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+			<xsl:text>text: </xsl:text>
 			<xsl:value-of select="(//questionnaire/@yes, 'yes')[1]" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
-				<xsl:text>        text_as_statement: </xsl:text>
+				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+				<xsl:text>text_as_statement: </xsl:text>
 				<xsl:value-of select="local:yamlQuotedText((yesno/@yes, '')[1])" />
 				<xsl:text>&#xA;</xsl:text>
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select=".//option[@value]">
-				<xsl:text>      </xsl:text>
+				<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
 				<xsl:value-of select="local:token(@value)" />
 				<xsl:text>:&#xA;</xsl:text>
-				<xsl:text>        text: </xsl:text>
+				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+				<xsl:text>text: </xsl:text>
 				<xsl:variable name="text">
 					<xsl:choose>
 						<xsl:when test="label">
-							<xsl:apply-templates select="label" mode="html" />
+							<xsl:apply-templates select="label" mode="html"/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="." />
@@ -700,17 +762,18 @@
 				<xsl:value-of select="local:yamlQuotedText($text)" />
 				<xsl:text>&#xA;</xsl:text>
 				<xsl:apply-templates select="help" mode="translation">
-					<xsl:with-param name="indent" select="'        '" />
+					<xsl:with-param name="indent" select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 				</xsl:apply-templates>
 				<xsl:if test="ancestor::question/@display">
-					<xsl:text>        text_as_statement: </xsl:text>
+					<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
+					<xsl:text>text_as_statement: </xsl:text>
 					<xsl:variable name="text_as_statement">
 						<xsl:choose>
 							<xsl:when test="@display">
 								<xsl:value-of select="@display" />
 							</xsl:when>
 							<xsl:when test="label">
-								<xsl:apply-templates select="label" mode="html" />
+								<xsl:apply-templates select="label" mode="html"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="." />
@@ -726,23 +789,25 @@
 </xsl:template>
 
 <xsl:template match="requirement" mode="translation">
-	<xsl:text>  </xsl:text>
+	<xsl:param name="indent"/>
+	<xsl:value-of select="$indent"/>
 	<xsl:value-of select="local:requirementId(.)" />
 	<xsl:text>:&#xA;</xsl:text>
-	<xsl:text>    text: </xsl:text>
+	<xsl:value-of select="concat($indentamt, $indent)"/>
+	<xsl:text>text: </xsl:text>
 	<xsl:variable name="text">
-		<xsl:apply-templates select="." mode="html" />
+		<xsl:apply-templates select="." mode="html"/>
 	</xsl:variable>
 	<xsl:value-of select="local:yamlQuotedText($text)" />
 	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template match="help" mode="translation">
-	<xsl:param name="indent" as="xs:string" select="'    '" />
-	<xsl:value-of select="$indent" />
+	<xsl:param name="indent"/>
+	<xsl:value-of select="$indent"/>
 	<xsl:text>help_text: </xsl:text>
 	<xsl:variable name="help_text">
-		<xsl:apply-templates select="." mode="html" />
+		<xsl:apply-templates select="." mode="html"/>
 	</xsl:variable>
 	<xsl:value-of select="local:yamlQuotedText($help_text)" />
 	<xsl:text>&#xA;</xsl:text>
