@@ -46,6 +46,7 @@
 			<questionnaire>
 				<xsl:sequence select="@*" />
 				<xsl:sequence select="$langVersion/@yes, $langVersion/@no" />
+				<xsl:sequence select="locales" />
 				<xsl:sequence select="help" />
 				<xsl:sequence select="$langVersion/levels" />
 				<xsl:sequence select="$langVersion/group[1]" />
@@ -69,7 +70,12 @@
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
 		</xsl:attribute>
-		<translations en="default" />
+		<translations>
+			<xsl:attribute name="en">default</xsl:attribute>
+			<xsl:for-each select="locales/locale">
+				<xsl:attribute name="{.}">translations/questionnaire.<xsl:value-of select="."/>.yml</xsl:attribute>
+			</xsl:for-each>
+		</translations>
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
 </xsl:template>
