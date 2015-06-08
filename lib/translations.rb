@@ -28,4 +28,29 @@ module Translations
       translation.to_s.gsub(/[[:space:]]+/, ' ').strip
     end
   end
+
+  module Merge
+    module_function
+    def merge(a, b, out)
+      input_a, input_b = YAML.load_file(a), YAML.load_file(b)
+      deep_merge!(input_a, input_b)
+      File.open(out, 'w') { |f| YAML.dump(input_a, f) }
+    end
+
+    #TODO: replace with Hash#deep_merge on upgrade to activesupport >= 4
+    def deep_merge!(hash, other_hash)
+      other_hash.each_pair do |current_key, other_value|
+        this_value = hash[current_key]
+        hash[current_key] = if this_value.is_a?(Hash) && other_value.is_a?(Hash)
+          deep_merge!(this_value, other_value)
+        elsif hash.key?(current_key)
+          this_value + other_value
+        else
+          other_value
+        end
+      end
+      return hash
+    end
+
+  end
 end

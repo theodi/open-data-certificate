@@ -1,0 +1,13 @@
+root:
+  a:
+  - one
+  - three
+  - four
+  b:
+    one: "one"
+    two: "two"
+    four: "four"
+  c:
+    d:
+      e: "ee"
+    e: "e"
