@@ -32,6 +32,27 @@ Should work on OSX
     FileUtils.mkdir_p "prototype/temp"
     sh "saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp"
   end
+
+  # translation steps
+  # start with
+  # surveys/definition/questionnaire.general.xml
+  # surveys/definition/questionnaire.jurisdiction.GB.xml
+  # generates:
+  # surveys/odc_questionnaire.GB.rb
+  # surveys/translations/source/questionnaire.general.yml
+  # surveys/translations/source/questionnaire.jurisdiction.GB.yml
+  # push these to transifex
+  # pull translations to other languages
+  # merge translation yml files
+  # english will be in questionnaire spec but translation file would be of form
+  # surveys/translations/odc_questionnaire.GB.en.yml
+  # so in other cases:
+  # surveys/translations/odc_questionnaire.CZ.cs.yml
+  # surveys/translations/odc_questionnaire.CZ.en.yml
+  # and if multiple locale differences are required per language
+  # surveys/translations/odc_questionnaire.NO.nb_NO.yml
+  # surveys/translations/odc_questionnaire.NO.nn_NO.yml
+  # surveys/translations/odc_questionnaire.NO.en.yml
 end
 
 def quiet
