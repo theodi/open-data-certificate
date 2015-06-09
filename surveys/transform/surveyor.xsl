@@ -609,14 +609,7 @@
 
 <xsl:template match="questionnaire" mode="translation">
 	<xsl:param name="indent" select="$indentamt"/>
-	<xsl:choose>
-		<xsl:when test="@jurisdiction">
-			<xsl:value-of select="concat(@xml:lang, '_', @jurisdiction, ':')"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="concat(@xml:lang, ':')"/>
-		</xsl:otherwise>
-	</xsl:choose>
+	<xsl:value-of select="concat(@xml:lang, ':')"/>
 	<xsl:text>&#xA;</xsl:text>
 	<xsl:if test="@jurisdiction">
 		<xsl:value-of select="$indent"/>
