@@ -34,7 +34,7 @@ module Translations
     def merge(a, b, out)
       input_a, input_b = YAML.load_file(a), YAML.load_file(b)
       deep_merge!(input_a, input_b)
-      File.open(out, 'w') { |f| YAML.dump(input_a, f) }
+      File.open(out, 'w:utf-8') { |f| f.write(YAML.dump(input_a)) }
     end
 
     #TODO: replace with Hash#deep_merge on upgrade to activesupport >= 4
