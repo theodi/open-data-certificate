@@ -18,20 +18,16 @@
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
 	<!-- Surveyor quesitionnaire description -->
-	<xsl:result-document href="../../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
+	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
-	<!-- complete merged translation strings -->
-	<xsl:result-document href="../../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
-		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
-	</xsl:result-document>
 	<!-- general sections translation strings -->
-	<xsl:result-document href="../../surveys/translations/questionnaire.general.{questionnaire/@xml:lang}.yml" method="text">
-		<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', questionnaire/@xml:lang, '.xml')" />
+	<xsl:result-document href="translations/source/questionnaire.general.en.yml" method="text">
+		<xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 		<xsl:apply-templates select="doc($langPath)/questionnaire" mode="translation" />
 	</xsl:result-document>
 	<!-- jurisdiction specific translation strings -->
-	<xsl:result-document href="../../surveys/translations/questionnaire.jurisdiction.{questionnaire/@xml:lang}_{questionnaire/@jurisdiction}.yml" method="text">
+	<xsl:result-document href="translations/source/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.en.yml" method="text">
 		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
@@ -39,7 +35,7 @@
 <!-- MERGE -->
 
 <xsl:template match="questionnaire" mode="merge">
-	<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', @xml:lang, '.xml')" />
+  <xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 	<xsl:choose>
 		<xsl:when test="doc-available($langPath)">
 			<xsl:variable name="langVersion" as="element()" select="doc($langPath)/questionnaire" />
@@ -55,7 +51,7 @@
 			</questionnaire>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:message terminate="yes">Could not find version of certificate in language <xsl:value-of select="@xml:lang" /> at <xsl:value-of select="$langPath" /></xsl:message>
+			<xsl:message terminate="yes">Could not find general definition of certificate at <xsl:value-of select="resolve-uri($langPath)" /></xsl:message>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
