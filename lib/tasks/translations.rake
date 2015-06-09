@@ -53,6 +53,54 @@ Should work on OSX
   # surveys/translations/odc_questionnaire.NO.nb_NO.yml
   # surveys/translations/odc_questionnaire.NO.nn_NO.yml
   # surveys/translations/odc_questionnaire.NO.en.yml
+
+  file "surveys/odc_questionnaire.GB.rb" => %w[
+      surveys/definition/questionnaire.general.xml
+      surveys/definition/questionnaire.jurisdiction.GB.xml] do |t|
+    sh "saxon -s:surveys/definition/questionnaire.jurisdiction.GB.xml -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
+  end
+
+  JURISDICTIONS = %w[GB CZ]
+  JURISDICTION_LANGS = {
+    "GB" => %w[en],
+    "CZ" => %w[cs]
+  }
+  JURISDICTIONS.each do |jurs|
+    file "surveys/odc_questionnaire.#{jurs}.rb" => %W[
+        surveys/definition/questionnaire.general.xml
+        surveys/definition/questionnaire.jurisdiction.#{jurs}.xml] do |t|
+      general, jurisdiction = t.prerequisites
+      sh "saxon -s:#{jurisdiction} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
+    end
+  end
+
+  JURISDICTION_LANGS.each_pair do |jurs, langs|
+    langs.each do |lang|
+      file "surveys/translations/odc.#{jurs}.#{lang}.yml" => %W[
+          surveys/translations/questionnaire.general.#{lang}.yml
+          surveys/translations/questionnaire.jurisdiction.#{jurs}.#{lang}.yml] do |t|
+        general, jurisdiction = t.prerequisites
+        Translations::Merge.merge(general, jurisdiction, t.name)
+      end
+    end
+  end
+
+  task :pull, [:jurisdiction] do |t, args|
+    unless JURISDICTIONS.include?(args.jurisdiction)
+      raise ArgumentError, "valid jurisdictions are #{JURISDICTIONS.join(', ')}"
+    end
+    jurs = args.jurisdiction
+    langs = JURISDICTION_LANGS[jurs]
+    langs_except_en = langs - %w[en]
+    Rake::Task["surveys/odc_questionnaire.#{jurs}.rb"].invoke
+    if langs_except_en.any?
+      sh "tx pull -l #{langs_except_en.join(',')} --minimum-perc=1"
+    end
+    langs.each do |lang|
+      translation = "surveys/translations/odc.#{jurs}.#{lang}.yml"
+      Rake::Task[translation].invoke
+    end
+  end
 end
 
 def quiet
