@@ -3,11 +3,12 @@
   This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
   http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
    --><?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-  <questionnaire version="0.9" status="beta" jurisdiction="DE" xml:lang="de">
-  <help><![CDATA[<p><strong>Hierbei handelt es sich um eine Voreinstellung für EU-Staten und muss für Deutschland angepasst werden. Bitte helfen Sie uns. Kontakt: <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
+<questionnaire version="0.9" status="beta" jurisdiction="DE" xml:lang="de">
+  <help>
+    <p><strong>Hierbei handelt es sich um eine Voreinstellung für EU-Staten und muss für Deutschland angepasst werden. Bitte helfen Sie uns. Kontakt: <a href="mailto:certificate@theodi.org">certificate@theodi.org</a></strong></p>
     <p>Dieser Fragebogen zur Selbsteinschätzung erzeugt ein Open Data Zertifikate und ein Badge, das sie veröffentlichen können, um Nutzer über Ihre Daten zu informieren. Wir nutzen ihre Antworten auch, um zu verstehen, wie Organisationen offene Daten veröffentlichen.</p>
     <p>Wenn Sie diese Fragen beantworten, bezeugt das Ihr Bemühen, den einschlägigen rechtlichen Regelungen zu entsprechen. Sie sollten auch kontrollieren, welche anderen Gesetze und Regeln für Ihren Bereich gelten.</p>
-    <p><strong>Sie müssen nicht alle Fragen beantworten um ein Zertifikat zu erhalten.</strong></p>]]>
+    <p><strong>Sie müssen nicht alle Fragen beantworten um ein Zertifikat zu erhalten.</strong></p>
 	</help>
   <group id="legal">
     <label>Rechtliche Information</label>
