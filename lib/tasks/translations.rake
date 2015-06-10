@@ -39,8 +39,8 @@ Should work on OSX
   # surveys/definition/questionnaire.jurisdiction.GB.xml
   # generates:
   # surveys/odc_questionnaire.GB.rb
-  # surveys/translations/source/questionnaire.general.yml
-  # surveys/translations/source/questionnaire.jurisdiction.GB.yml
+  # surveys/translations/questionnaire.general.en.yml
+  # surveys/translations/questionnaire.jurisdiction.GB.en.yml
   # push these to transifex
   # pull translations to other languages
   # merge translation yml files

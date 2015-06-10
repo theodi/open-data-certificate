@@ -22,12 +22,12 @@
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
 	<!-- general sections translation strings -->
-	<xsl:result-document href="translations/source/questionnaire.general.en.yml" method="text">
+	<xsl:result-document href="translations/questionnaire.general.en.yml" method="text">
 		<xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 		<xsl:apply-templates select="doc($langPath)/questionnaire" mode="translation" />
 	</xsl:result-document>
 	<!-- jurisdiction specific translation strings -->
-	<xsl:result-document href="translations/source/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.en.yml" method="text">
+	<xsl:result-document href="translations/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.en.yml" method="text">
 		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
