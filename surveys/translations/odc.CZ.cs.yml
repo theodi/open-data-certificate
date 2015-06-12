@@ -1312,7 +1312,7 @@ cs:
           text: Ne, data se netýkají jednotlivců.
           help_text: Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo.
             Například byste mohli někoho identifikovat podle statistik dopravního
-            provozu, ve spojení s informacemi o tom, kdy a kam daná osoba dojíždí.
+            provozu, ve spojení se informacemi o tom, kdy a kam daná osoba dojíždí.
           text_as_statement: nehraje roli, data se netýkají jednotlivců
         summarised:
           text: Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích
@@ -1802,7 +1802,7 @@ cs:
       text: ! ' <strong>Data musíte zveřejnit pod otevřenou licencí, aby je ostatní
         mohli užít.</strong> '
   title: CZ
-  full_title: Czech Republic
+  full_title: Česká republika
   description: <p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát
     otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených
     dat a my získáme lepší představu o tom, jak organizace zveřejňují svá data.</p><p>Zodpovězením
