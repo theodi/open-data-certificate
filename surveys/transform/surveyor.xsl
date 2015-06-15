@@ -712,7 +712,7 @@
 			<xsl:text>a_false:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 			<xsl:text>text: </xsl:text>
-			<xsl:value-of select="(//questionnaire/@no, 'no')[1]" />
+			<xsl:value-of select="local:yamlQuotedText((//questionnaire/@no, 'no')[1])" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
@@ -724,7 +724,7 @@
 			<xsl:text>a_true:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 			<xsl:text>text: </xsl:text>
-			<xsl:value-of select="(//questionnaire/@yes, 'yes')[1]" />
+			<xsl:value-of select="local:yamlQuotedText((//questionnaire/@yes, 'yes')[1])" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
@@ -736,7 +736,7 @@
 		<xsl:otherwise>
 			<xsl:for-each select=".//option[@value]">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
-				<xsl:value-of select="local:token(@value)" />
+				<xsl:value-of select="local:yamlsafe(local:token(@value))" />
 				<xsl:text>:&#xA;</xsl:text>
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 				<xsl:text>text: </xsl:text>
@@ -807,6 +807,24 @@
 <xsl:template match="*" mode="translation" />
 
 <!-- FUNCTIONS -->
+
+<xsl:function name="local:yamlsafe" as="xs:string">
+	<!--
+		YAML treats the words (yes, no, true, false, on, off) as special
+		terms that are treated as booleans not strings.
+
+		This quotes those terms to force the keys to be strings
+	-->
+	<xsl:param name="key" as="xs:string" />
+	<xsl:choose>
+		<xsl:when test="matches($key, 'yes|no|true|false|on|off')">
+			<xsl:value-of select="local:yamlQuotedText($key)" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$key" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
 
 <xsl:function name="local:token" as="xs:string">
 	<xsl:param name="string" as="xs:string" />
