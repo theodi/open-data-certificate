@@ -1,4 +1,6 @@
 OpenDataCertificate::Application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
