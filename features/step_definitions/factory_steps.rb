@@ -8,10 +8,6 @@ Given(/^I run the rake task to create a single certificate$/) do
   execute_rake('certificate_factory', 'certificate')
 end
 
-Given(/^the background jobs have all completed$/) do
-  Delayed::Job.all.each { |j| j.invoke_job }
-end
-
 Then(/^there should be (\d+) certificates?$/) do |count|
   assert_equal count.to_i, Certificate.count
 end
