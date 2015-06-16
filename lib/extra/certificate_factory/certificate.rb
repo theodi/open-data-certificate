@@ -5,7 +5,7 @@ module CertificateFactory
       @url = url
       @user = User.find(user_id)
       @dataset_url = options[:dataset_url]
-      @campaign = options[:campaign]
+      @campaign_name = options[:campaign]
       @jurisdiction = options[:jurisdiction] || "cert-generator"
       @create_user = options[:create_user] || true
       @existing_dataset = options[:existing_dataset]
@@ -17,9 +17,15 @@ module CertificateFactory
           documentationUrl: @dataset_url
         },
         user: @user,
-        certification_campaign: @campaign
+        certification_campaign: campaign
       )
       generator.delay.generate(@jurisdiction, @create_user, @existing_dataset)
+    end
+
+    def campaign
+      if @campaign_name
+        @campaign ||= CertificationCampaign.where(:user_id => @user.id).find_or_create_by_name(@campaign_name)
+      end
     end
 
   end

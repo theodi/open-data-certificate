@@ -12,5 +12,6 @@ end
 task :certificates do
   url = ENV['URL']
   user_id = ENV['USER_ID']
-  CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: nil, campaign: nil, logger: nil).build
+  campaign = ENV['CAMPAIGN']
+  CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: nil, campaign: campaign, logger: nil).build
 end
