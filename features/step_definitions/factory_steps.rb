@@ -3,14 +3,9 @@ Given(/^I have a a dataset at the URL "(.*?)"$/) do |url|
 end
 
 Given(/^I run the rake task to create a single certificate$/) do
-  require "rake"
   ENV['URL'] = @url
   ENV['USER_ID'] = @api_user.id.to_s
-  @rake = Rake::Application.new
-  Rake.application = @rake
-  Rake.application.rake_require "tasks/certificate_factory"
-  Rake::Task.define_task(:environment)
-  @rake['certificate'].invoke
+  execute_rake('certificate_factory', 'certificate')
 end
 
 Given(/^the background jobs have all completed$/) do
@@ -54,13 +49,8 @@ Given(/^I have a CKAN atom feed with (\d+) datasets$/) do |num|
 end
 
 Given(/^I run the rake task to create certificates from the feed$/) do
-  require "rake"
   ENV['URL'] = @url
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
-  @rake = Rake::Application.new
-  Rake.application = @rake
-  Rake.application.rake_require "tasks/certificate_factory"
-  Rake::Task.define_task(:environment)
-  @rake['certificates'].invoke
+  execute_rake('certificate_factory', 'certificates')
 end
