@@ -52,5 +52,10 @@ Given(/^I run the rake task to create certificates from the feed$/) do
   ENV['URL'] = @url
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
+  ENV['LIMIT'] = @limit
   execute_rake('certificate_factory', 'certificates')
+end
+
+Given(/^I only want (\d+) datasets$/) do |limit|
+  @limit = limit
 end

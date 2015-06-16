@@ -9,7 +9,7 @@ module CertificateFactory
     def initialize(options)
       @url = options[:feed]
       @user_id = options[:user_id]
-      @limit = options[:limit]
+      @limit = options[:limit].to_i
       @campaign = options[:campaign]
       @count = 0
       @response = self.class.get(@url)
