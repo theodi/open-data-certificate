@@ -14,7 +14,7 @@ module CertificateFactory
     def generate
       generator = CertificateGenerator.create(
         request: {
-          documentationUrl: @dataset_url
+          documentationUrl: @url
         },
         user: @user,
         certification_campaign: campaign
