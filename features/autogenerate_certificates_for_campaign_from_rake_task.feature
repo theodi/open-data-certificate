@@ -13,6 +13,12 @@ Feature: Generate certificates from campaigns via a rake task
     And the background jobs have all completed
     Then there should be 20 certificates
 
+  Scenario: Multi page Atom feeds
+    Given I have a CKAN atom feed with 30 datasets over 3 pages
+    And I run the rake task to create certificates from the feed
+    And the background jobs have all completed
+    Then there should be 30 certificates
+
   Scenario: Specify a campaign
     Given I have a CKAN atom feed with 10 datasets
     And I apply a campaign "brian"
