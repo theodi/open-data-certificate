@@ -48,6 +48,22 @@ Given(/^I have a CKAN atom feed with (\d+) datasets$/) do |num|
   stub_request(:get, @url).to_return(body: feed)
 end
 
+Given(/^I have a CSV with (\d+) datasets$/) do |total|
+  @csv = CSV.open("/tmp/datasets#{DateTime.now.to_s}.csv", "wb")
+  @csv << ['documentation_url']
+  total.to_i.times do |num|
+    @csv << [
+      "http://data.example.com/api/2/rest/package/dataset#{num}"
+    ]
+
+    stub_request(:get, "http://data.example.com/api/2/rest/package/dataset#{num}").
+                to_return(:status => 200, :body => {
+                  'ckan_url' => "http://data.example.com/dataset#{num}"
+                }.to_json)
+  end
+  @csv.close
+end
+
 Given(/^I have a CKAN atom feed with (\d+) datasets over (\d+) pages$/) do |total, pages|
   @url = "http://data.gov.uk/feeds/custom.atom"
   total = total.to_i
@@ -103,6 +119,14 @@ Given(/^I run the rake task to create certificates from the feed$/) do
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
   ENV['LIMIT'] = @limit
+  execute_rake('certificate_factory', 'certificates')
+end
+
+Given(/^I run the rake task to create certificates from the CSV$/) do
+  ENV['USER_ID'] = @api_user.id.to_s
+  ENV['CAMPAIGN'] = @campaign
+  ENV['LIMIT'] = @limit
+  ENV['CSV'] = @csv.path
   execute_rake('certificate_factory', 'certificates')
 end
 

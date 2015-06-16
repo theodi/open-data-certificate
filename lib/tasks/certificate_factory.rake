@@ -10,9 +10,14 @@ task :certificate do
 end
 
 task :certificates do
-  url = ENV['URL']
   user_id = ENV['USER_ID']
   campaign = ENV['CAMPAIGN']
   limit = ENV['LIMIT']
-  CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: limit, campaign: campaign, logger: nil).build
+  if ENV['URL']
+    url = ENV['URL']
+    CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: limit, campaign: campaign, logger: nil).build
+  else
+    csv = ENV['CSV']
+    CertificateFactory::CSVFactory.new(file: csv, user_id: user_id, limit: limit, campaign: campaign, logger: nil).build
+  end
 end

@@ -34,3 +34,9 @@ Feature: Generate certificates from campaigns via a rake task
     And I run the rake task to create certificates from the feed
     And the background jobs have all completed
     Then there should be 5 certificates
+
+  Scenario: Generate multiple datasets from a CSV
+    Given I have a CSV with 20 datasets
+    And I run the rake task to create certificates from the CSV
+    And the background jobs have all completed
+    Then there should be 20 certificates

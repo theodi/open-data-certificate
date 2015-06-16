@@ -73,6 +73,7 @@ module CertificateFactory
       @campaign = options[:campaign]
       @count = 0
       @logger = options[:logger]
+      @user_id = options[:user_id]
     end
 
     def get_link(url)
