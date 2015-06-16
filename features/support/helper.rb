@@ -1,6 +1,9 @@
 require 'webmock/cucumber'
 require 'coveralls'
+require 'sidekiq/testing'
+
 Coveralls.wear_merged! 'rails'
+Sidekiq::Testing.inline!
 
 def load_fixture(file)
   File.read( File.join( File.dirname(File.realpath(__FILE__)) , "fixtures", file ) )

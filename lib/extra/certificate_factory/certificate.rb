@@ -19,7 +19,7 @@ module CertificateFactory
         user: @user,
         certification_campaign: campaign
       )
-      generator.delay.generate(@jurisdiction, @create_user, @existing_dataset)
+      generator.sidekiq_delay.generate(@jurisdiction, @create_user, @existing_dataset)
     end
 
     def campaign
