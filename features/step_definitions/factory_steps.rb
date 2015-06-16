@@ -114,21 +114,17 @@ Given(/^I have a CKAN atom feed with (\d+) datasets over (\d+) pages$/) do |tota
 
 end
 
-Given(/^I run the rake task to create certificates from the feed$/) do
-  ENV.delete('CSV') # Remove any CSV envs that might be hanging around
-  ENV['URL'] = @url
+Given(/^I run the rake task to create certificates$/) do
+  if @url
+    ENV.delete('CSV')
+    ENV['URL'] = @url
+  else
+    ENV.delete('URL')
+    ENV['CSV'] = @csv.path
+  end
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
   ENV['LIMIT'] = @limit
-  execute_rake('certificate_factory', 'certificates')
-end
-
-Given(/^I run the rake task to create certificates from the CSV$/) do
-  ENV.delete('URL') # Remove any URL envs that might be hanging around
-  ENV['USER_ID'] = @api_user.id.to_s
-  ENV['CAMPAIGN'] = @campaign
-  ENV['LIMIT'] = @limit
-  ENV['CSV'] = @csv.path
   execute_rake('certificate_factory', 'certificates')
 end
 
