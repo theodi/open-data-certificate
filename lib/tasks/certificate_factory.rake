@@ -15,9 +15,9 @@ task :certificates do
   limit = ENV['LIMIT']
   if ENV['URL']
     url = ENV['URL']
-    CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: limit, campaign: campaign, logger: nil).build
+    CertificateFactory::FactoryRunner.perform_async(feed: url, user_id: user_id, limit: limit, campaign: campaign, logger: nil)
   else
     csv = ENV['CSV']
-    CertificateFactory::CSVFactory.new(file: csv, user_id: user_id, limit: limit, campaign: campaign, logger: nil).build
+    CertificateFactory::CSVFactoryRunner.perform_async(file: csv, user_id: user_id, limit: limit, campaign: campaign, logger: nil)
   end
 end

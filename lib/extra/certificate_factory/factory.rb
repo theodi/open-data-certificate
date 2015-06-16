@@ -2,11 +2,14 @@ module CertificateFactory
 
   class Factory
     include HTTParty
+    include Sidekiq::Worker
+
     format :xml
 
     attr_reader :count, :response
 
     def initialize(options)
+      options.symbolize_keys!
       @url = options[:feed]
       @user_id = options[:user_id]
       @limit = options[:limit].nil? ? nil : options[:limit].to_i
@@ -67,7 +70,9 @@ module CertificateFactory
   end
 
   class CSVFactory < Factory
+
     def initialize(options)
+      options.symbolize_keys!
       @file = options[:file]
       @limit = options[:limit]
       @campaign = options[:campaign]
