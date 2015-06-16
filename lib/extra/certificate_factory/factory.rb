@@ -17,12 +17,13 @@ module CertificateFactory
       @count = 0
       @response = self.class.get(@url)
       @logger = options[:logger]
+      @jurisdiction = options[:jurisdiction]
     end
 
     def build
       each do |item|
         url = get_link(item)
-        CertificateFactory::Certificate.new(url, @user_id, campaign: @campaign).generate
+        CertificateFactory::Certificate.new(url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction).generate
       end
     end
 
@@ -79,6 +80,7 @@ module CertificateFactory
       @count = 0
       @logger = options[:logger]
       @user_id = options[:user_id]
+      @jurisdiction = options[:jurisdiction]
     end
 
     def get_link(url)

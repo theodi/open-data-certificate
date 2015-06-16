@@ -6,7 +6,7 @@ module CertificateFactory
       @user = User.find(user_id)
       @dataset_url = options[:dataset_url]
       @campaign_name = options[:campaign]
-      @jurisdiction = options[:jurisdiction] || "cert-generator"
+      @jurisdiction = options[:jurisdiction] || "gb"
       @create_user = options[:create_user] || true
       @existing_dataset = options[:existing_dataset]
     end
