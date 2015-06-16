@@ -115,6 +115,7 @@ Given(/^I have a CKAN atom feed with (\d+) datasets over (\d+) pages$/) do |tota
 end
 
 Given(/^I run the rake task to create certificates from the feed$/) do
+  ENV.delete('CSV') # Remove any CSV envs that might be hanging around
   ENV['URL'] = @url
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
@@ -123,6 +124,7 @@ Given(/^I run the rake task to create certificates from the feed$/) do
 end
 
 Given(/^I run the rake task to create certificates from the CSV$/) do
+  ENV.delete('URL') # Remove any URL envs that might be hanging around
   ENV['USER_ID'] = @api_user.id.to_s
   ENV['CAMPAIGN'] = @campaign
   ENV['LIMIT'] = @limit
