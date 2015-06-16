@@ -8,3 +8,9 @@ task :certificate do
     puts "You must specifiy the Certificate URL and User ID"
   end
 end
+
+task :certificates do
+  url = ENV['URL']
+  user_id = ENV['USER_ID']
+  CertificateFactory::Factory.new(feed: url, user_id: user_id, limit: nil, campaign: nil, logger: nil).build
+end
