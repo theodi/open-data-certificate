@@ -1,0 +1,1 @@
+Sidekiq.hook_rails!
