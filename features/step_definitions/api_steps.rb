@@ -20,7 +20,9 @@ Given(/^I want to create a certificate via the API$/) do
 end
 
 Given(/^I apply a campaign "(.*?)"$/) do |tag|
+  @body ||= {}
   @body[:campaign] = tag
+  @campaign = tag
 end
 
 Given(/^I request (\d+) certifcates with the campaign "(.*?)"$/) do |num, tag|
