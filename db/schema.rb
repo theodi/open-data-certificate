@@ -263,7 +263,7 @@ ActiveRecord::Schema.define(:version => 20150617134025) do
     t.string   "aasm_state",        :default => "draft"
     t.integer  "attained_index"
     t.string   "locale"
-    t.string   "missing_responses"
+    t.string   "missing_responses", :default => ""
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
