@@ -1,4 +1,4 @@
-@api
+@api @vcr
 Feature: Generate certificates from campaigns via a rake task
 
   Scenario: Generate single dataset

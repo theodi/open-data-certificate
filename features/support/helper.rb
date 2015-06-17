@@ -1,6 +1,7 @@
 require 'webmock/cucumber'
 require 'coveralls'
 require 'sidekiq/testing'
+require 'vcr'
 
 Coveralls.wear_merged! 'rails'
 Sidekiq::Testing.inline!
@@ -24,4 +25,14 @@ Before("@api") do
   builder.parse_file
   ENV['JURISDICTION'] = "cert-generator"
   #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
+end
+
+VCR.configure do |c|
+  c.hook_into :webmock
+  c.cassette_library_dir = 'fixtures/cassettes'
+  c.default_cassette_options = { :record => :once }
+end
+
+VCR.cucumber_tags do |t|
+  t.tag  '@vcr', :use_scenario_name => true
 end
