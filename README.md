@@ -29,7 +29,6 @@ The API methods are:
 Each user can access their API token from their account page. This token is required to authenticate with the API.
 The request should authenticated with Basic HTTP Authentication, using the user's email address as the username and token as the password i.e. `john@example.com:ad54965ec45d78ab6f`.
 
-
 #### Questionnaire schema
 
 The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash, which specifies the allowed options, which should be identified by their key.
