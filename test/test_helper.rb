@@ -16,6 +16,10 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # ENVARS that need to be presnet in the env before being escaped by VCR
+  ENV['GAPPS_USER_EMAIL'] = "GAPPS_USER_EMAIL"
+  ENV['GAPPS_PASSWORD'] = "GAPPS_PASSWORD"
+
   VCR.configure do |c|
     # Automatically filter all secure details that are stored in the environment
     ignore_env = %w{SHLVL RUNLEVEL GUARD_NOTIFY DRB COLUMNS USER LOGNAME LINES TERM_PROGRAM_VERSION}
@@ -35,10 +39,11 @@ Spork.each_run do
     # -- they do not yet inherit this setting
     # fixtures :all
 
-    # Add more helper methods to be used by all tests here...
-
+    # Configuration ENVARS:
     ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER'] = "certificates_test"
+    ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] = "ODI Drive/Technical/Test Data/Usage Data"
 
+    # Add more helper methods to be used by all tests here...
     def assert_attribute_exists(model, attribute)
       assert_respond_to model, attribute
     end
