@@ -19,6 +19,19 @@ Given(/^I want to create a certificate via the API$/) do
   }
 end
 
+Given(/^I want to create a certificate via the API with the URL "(.*?)"$/) do |url|
+  steps %Q{
+    Given I want to create a certificate via the API
+  }
+
+  @documentationURL = url
+  @body[:dataset][:documentationUrl] = @documentationURL
+end
+
+Given(/^I miss the field "(.*?)"$/) do |field|
+  @body[:dataset].delete(field.to_sym)
+end
+
 Given(/^I apply a campaign "(.*?)"$/) do |tag|
   @body ||= {}
   @body[:campaign] = tag
@@ -81,7 +94,8 @@ When(/^I request a certificate via the API$/) do
 end
 
 When(/^the certificate is created$/) do
-  CertificateGenerator.first.generate(@body[:jurisdiction], @body[:create_user])
+  generator = CertificateGenerator.all.select { |g| g.request["documentationUrl"] == @documentationURL }.first
+  generator.generate(@body[:jurisdiction], @body[:create_user])
 end
 
 When(/^I request the status via the API$/) do
