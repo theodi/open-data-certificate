@@ -1,4 +1,5 @@
 require File.join(Rails.root, 'lib/extra/certificate_factory.rb')
+ENV['REDIS_URL'] = ENV['ODC_REDIS_SERVER_URL']
 
 task :certificate do
   ENV['JURISDICTION'] ||= "gb"
