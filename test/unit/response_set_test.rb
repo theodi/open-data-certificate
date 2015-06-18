@@ -631,6 +631,22 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal nil, progress['attained']
   end
 
+  test "should cache missing responses" do
+    question = FactoryGirl.create(:question, required: nil)
+
+    survey_section = question.survey_section
+    survey = survey_section.survey
+
+    mandatory_question_1 = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
+    mandatory_question_2 = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
+
+    survey.reload
+
+    response_set = FactoryGirl.create(:response_set, survey: survey)
+
+    assert_equal response_set.missing_responses, "#{mandatory_question_1.text},#{mandatory_question_2.text}"
+  end
+
 end
 
 class ResponseSetErrorsTest < ActiveSupport::TestCase
