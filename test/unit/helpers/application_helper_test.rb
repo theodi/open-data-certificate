@@ -14,7 +14,7 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal :en, I18n.locale
     assert called
   end
-  
+
   test 'converts markdown' do
 
     source = '**hello** world'
@@ -35,7 +35,7 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_match /<dt>Release Date<\/dt>/, output
     assert_match /<dd>a value<\/dd>/, output
   end
-  
+
   test "blank kitten_field" do
     kd = KittenData.new
     assert_equal nil, kitten_field(kd, :field)
@@ -77,7 +77,7 @@ class ApplicationHelperTest < ActionView::TestCase
   test "kitten_value for temporal field" do
     open = DataKitten::Temporal.new(start: Date.new(2014, 4, 27))
     closed = DataKitten::Temporal.new(end: Date.new(2014, 4, 27))
-    complete = DataKitten::Temporal.new(start: Date.new(2014, 4, 1), end: Date.new(2014, 4, 27)) 
+    complete = DataKitten::Temporal.new(start: Date.new(2014, 4, 1), end: Date.new(2014, 4, 27))
 
     assert_equal "27 April 2014", kitten_value(open)
     assert_equal "27 April 2014", kitten_value(closed)
@@ -99,5 +99,12 @@ class ApplicationHelperTest < ActionView::TestCase
   test "kitten_value for blank rights object" do
     blank_rights = DataKitten::Rights.new(uri: nil)
     assert_equal nil, kitten_value(blank_rights)
+  end
+
+  test "example dataset" do
+    FactoryGirl.create_list(:published_basic_certificate_with_dataset, 3)
+    pilot = FactoryGirl.create(:published_pilot_certificate_with_dataset)
+
+    assert_equal pilot.dataset, example_dataset
   end
 end

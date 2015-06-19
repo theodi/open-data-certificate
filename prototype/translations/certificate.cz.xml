@@ -656,7 +656,7 @@
                   </option>
                   <option value="resolvable" display="snadná, identifikátory jsou URL">
                      <label>Ano, identifikátory jsou URL, takže je stačí otevřít.</label>
-                     <help>URL jsou užitečné pro počítače i pro lidi. Lidé si mohou URL snadno otevřít ve svém prohlížeči a dohledat tak informace třeba o <a href="http://opencorporates.com/companies/gb/08030289">firmě</a> nebo <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">PSČ</a>. Stejně snadno se k těmto informacím dostane počítač, například ve skriptech.</help>
+                     <help>URL jsou užitečné pro počítače i pro lidi. Lidé si mohou URL snadno otevřít ve svém prohlížeči a dohledat tak informace třeba o firmě nebo PSČ. Stejně snadno se k těmto informacím dostane počítač, například ve skriptech.</help>
                      <requirement level="exemplar">
                         <strong>K objektům ve svých datech byste měli uvádět také URL</strong>, aby uživatelé mohli snadno najít a sdílet související informace.</requirement>
                   </option>
@@ -700,7 +700,7 @@
          <question id="provenance" display="Informace o původu dat">
             <label>Publikujete strojově čitelná metadata o původu dat?</label>
             <yesno yes="strojově čitelné"/>
-            <help more="http://www.w3.org/TR/prov-primer/">Je dobré zveřejnit, kde jste k datům přišli a jak jste je zpracovávali. Uživatelé pak mohou vašim datům víc věřit, protože vědí, co jste s nimi dělali.</help>
+            <help>Je dobré zveřejnit, kde jste k datům přišli a jak jste je zpracovávali. Uživatelé pak mohou vašim datům víc věřit, protože vědí, co jste s nimi dělali.</help>
             <requirement level="exemplar">
                <strong>Měli byste zveřejnit strojově čitelný záznam o původu a zpracování dat</strong>, aby uživatelé věděli, co jste s daty dělali.</requirement>
          </question>
