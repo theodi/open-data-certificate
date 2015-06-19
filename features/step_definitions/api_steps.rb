@@ -82,10 +82,6 @@ Given(/^my dataset contains invalid contact details$/) do
   @email = @api_user.email
 end
 
-Given(/^I provide the API with a URL that autocompletes$/) do
-  ResponseSet.any_instance.stubs(:autocomplete)
-end
-
 When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
