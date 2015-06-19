@@ -76,7 +76,7 @@ class DatasetsController < ApplicationController
     @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
-      case params[:format] 
+      case params[:format]
       when 'csv'
         @datasets = datasets
       else
@@ -218,9 +218,12 @@ class DatasetsController < ApplicationController
     dataset = Dataset.find(params[:dataset_id])
     jurisdiction = params[:jurisdiction]
     result = CertificateGenerator.update(dataset, nil, jurisdiction, current_user)
-    campaign = ResponseSet.where(dataset_id: dataset).latest.certificate_generator.certification_campaign
 
-    redirect_to campaign_path(campaign)
+    begin
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+    end
   end
 
   def schema
