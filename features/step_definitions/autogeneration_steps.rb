@@ -24,3 +24,7 @@ end
 When(/^I click "(.*?)"$/) do |arg1|
   click_on("regenerate")
 end
+
+Given(/^my metadata has the email "(.*?)" associated$/) do |email|
+  KittenData.any_instance.stubs(:contacts_with_email).returns([DataKitten::Agent.new(mbox: email)])
+end

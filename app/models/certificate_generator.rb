@@ -58,7 +58,10 @@ class CertificateGenerator < ActiveRecord::Base
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
     generator.request = request unless request.nil?
-    certificate = generator.generate(jurisdiction, false, dataset)
+
+    create_user = user.admin? ? true : false
+
+    certificate = generator.generate(jurisdiction, create_user, dataset)
     response_set = certificate.response_set
 
     errors = response_set.response_errors
