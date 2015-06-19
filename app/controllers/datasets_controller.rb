@@ -212,6 +212,17 @@ class DatasetsController < ApplicationController
     render json: result, status: result[:success] ? :ok : :unprocessable_entity
   end
 
+  def regenerate
+    authorize! :manage, :all
+
+    dataset = Dataset.find(params[:dataset_id])
+    jurisdiction = params[:jurisdiction]
+    result = CertificateGenerator.update(dataset, nil, jurisdiction, current_user)
+    campaign = ResponseSet.where(dataset_id: dataset).latest.certificate_generator.certification_campaign
+
+    redirect_to campaign_path(campaign)
+  end
+
   def schema
     render json: CertificateGenerator.schema(params)
   end

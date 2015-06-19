@@ -51,6 +51,7 @@
         <td>
             <% if can? :edit, generator.response_set %>
                 <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
+                <%= button_to "regenerate", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post' %>
             <% end %>
         </td>
         <td>

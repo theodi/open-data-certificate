@@ -21,10 +21,21 @@ end
 
 Before("@api") do
   @api_user = User.create(email: "api@example.com", password: "password", authentication_token: "")
+  @api_user.admin = true
+  @api_user.save
   builder = SurveyBuilder.new 'test/fixtures/surveys_custom', 'cert_generator.rb'
   builder.parse_file
   ENV['JURISDICTION'] = "cert-generator"
   #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
+end
+
+Before("@data_kitten") do
+  class DataKitten::Dataset
+    # this prevents DataKitten from making a request to the access_url
+    def supported?
+      true
+    end
+  end
 end
 
 VCR.configure do |c|
