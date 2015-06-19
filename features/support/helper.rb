@@ -29,15 +29,6 @@ Before("@api") do
   #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
 end
 
-Before("@data_kitten") do
-  class DataKitten::Dataset
-    # this prevents DataKitten from making a request to the access_url
-    def supported?
-      true
-    end
-  end
-end
-
 VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir = 'fixtures/cassettes'
