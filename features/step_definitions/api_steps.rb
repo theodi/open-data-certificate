@@ -63,22 +63,20 @@ end
 
 Given(/^my dataset contains contact details$/) do
   @email = "newuser@example.com"
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => [DataKitten::Agent.new(mbox: @email)]
-  ))
+  steps %Q{
+    Given my metadata has the email "#{@email}" associated
+  }
 end
 
 Given(/^my dataset does not contain contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => []
-  ))
+  KittenData.any_instance.stubs(:contacts_with_email).returns([])
   @email = @api_user.email
 end
 
 Given(/^my dataset contains invalid contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => [DataKitten::Agent.new(mbox: "bad email@example.org")]
-  ))
+  steps %Q{
+    Given my metadata has the email "bad email@example.org" associated
+  }
   @email = @api_user.email
 end
 
@@ -214,4 +212,8 @@ end
 
 Then(/^I should be told I need to sign in$/) do
   assert_match /You need to sign in or sign up before continuing/, page.body
+end
+
+Given(/^I provide the API with a URL that autocompletes$/) do
+  ResponseSet.any_instance.stubs(:autocomplete)
 end
