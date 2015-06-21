@@ -139,189 +139,119 @@
             <requirement level="pilot">
                <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autorství.</requirement>
          </question>
-         <question id="dataLicence" display="Licence">
-            <label>Pod jakou licencí dáváte data k dispozici?</label>
-            <select required="required">
-               <option/>
-               <option value="cc-by">Creative Commons Uveďte původ</option>
-               <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
-               <option value="cc-zero">Creative Commons CC0</option>
-               <option value="odc-by">Open Data Commons Attribution License</option>
-               <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
-               <option value="odc-pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
-               <option value="na" display="">nehodí se</option>
-               <option value="other" display="">jiná…</option>
-            </select>
-            <help>Nezapomeňte, že k databázi má práva kdokoliv, kdo přispěl k jejímu vytváření tvůrčím vkladem. Tvůrčím vkladem může být i uspořádání nebo výběr dat, nikoliv však přidání obecně známých skutečností. Každý uživatel tedy potřebuje licenci k použití dat nebo doklad o tom, že na nich neváznou další práva, či se jedná o zákonnou výjimku. Do seznamu jsme vybrali nejčastěji používané licence. Pokud žádná autorská ani databázová práva nejsou ve hře, vypršela, nebo se jich pořizovatelé databáze vzdali, vyberte možnost „nehodí se“.</help>
+         <!-- Database Rights -->
+         <question id="databaseRights" display="Databázová práva na datovou sadu">
+            <label>Vztahují se na vaši datovou sadu databázová práva?</label>
+            <yesno yes="existují" no="neexistují"/>
          </question>
-         <if test="this.dataLicence() === 'na'">
-            <question id="dataNotApplicable" display="Důvody chybějící licence">
-               <label>Proč se na data nevztahuje žádná licence?</label>
-               <radioset required="required">
-                  <option value="norights"
-                          display="na data se nevztahuje žádná autorskoprávní ochrana">
-                     <label>Na data se nevztahují žádná autorská ani databázová práva.</label>
-                     <help>Databázová práva vznikají při vynaložení netriviálního úsilí při sběru, ověřování nebo prezentaci dat, při přispění tvůrčím vkladem ke vzniku databáze. Naopak nevznikají například u faktů nebo prostých souborů dat bez uspořádání.</help>
-                  </option>
-                  <option value="expired" display="práva k datům vypršela">
-                     <label>práva k datům vypršela</label>
-                     <help>Ochrana databázových práv trvá patnáct let od vzniku databáze nebo posledního kvalitativně nebo kvantitativně podstatného vkladu do databáze spočívajícím v doplnění, zkrácení či jiných úpravách. Pokud se data naposledy měnila před více než patnácti lety, databázová práva vypršela. Pevnou dobu trvají také autorská majetková práva; lhůta se počítá 70 let od úmrtí autora. Je tedy nepravděpodobné, že by u vašich dat autorská práva vypršela.</help>
-                  </option>
-                  <option value="waived" display="">
-                     <label>vlastníci se vzdali svých práv</label>
-                     <help>To znamená, že práva nikdo nevlastní a s daty může kdokoliv dělat cokoliv.</help>
-                  </option>
-               </radioset>
-            </question>
-            <if test="this.dataNotApplicable() === 'waived'">
-               <question id="dataWaiver" display="Forma vzdání se autorských práv k datům">
-                  <label>Jakým způsobem poskytujete svá autorská majetková práva?</label>
-                  <select required="required">
-                     <option/>
-                     <option value="pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
-                     <option value="cc0">Creative Commons CC0</option>
-                     <option value="other" display="">jiný…</option>
-                  </select>
-                  <help>Musíte dát uživatelům najevo, že mohou s daty nakládat téměř neomezeně za předpokladu, že dodrží podmínky licence. Můžete použít některý se standardních mechanismů, například PDDL nebo CC0, nebo vytvořit vlastní licenční smlouvu dle rad právníka.</help>
-               </question>
-               <if test="this.dataWaiver() === 'other'">
-                  <question id="dataOtherWaiver" display="Forma vzdání se autorských práv k datům">
-                     <label>Kde je dokument, kterým se vzdáváte svých autorských práv?</label>
-                     <input type="url" required="required" placeholder="URL dokumentu"/>
-                     <help>Uveďte URL, na kterém si uživatelé vašich dat mohou ověřit, že jste se vzdali svých práv.</help>
-                  </question>
-               </if>
-            </if>
-         </if>
-         <if test="this.dataLicence() === 'other'">
-            <question id="otherDataLicenceName" display="Data jsou dostupná pod">
-               <label>Jaký je název použité licence?</label>
-               <input required="required" placeholder="název licence"/>
-               <help>Pokud data zveřejňujete pod jinou než nabízenou licencí, potřebujeme znát její název – bude součástí vašeho certifikátu otevřených dat.</help>
-            </question>
-            <question id="otherDataLicenceURL" display="Text licence">
-               <label>Kde uživatelé najdou plný text licence?</label>
-               <input type="url" required="required" placeholder="URL k licenci"/>
-               <help>Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst.</help>
-            </question>
-            <question id="otherDataLicenceOpen">
-               <label>Jde o otevřenou licenci?</label>
-               <yesno required="required"/>
-               <help more="http://opendefinition.org/">Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>. Tamtéž najdete přímo <a href="http://opendefinition.org/licenses/">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil.</help>
-               <requirement>
-                  <strong>Otevřená data musíte publikovat pod otevřenou licencí</strong>, aby je uživatelé mohli používat.</requirement>
+         <if test="this.databaseRights() === 'true'">
+            <question id="databaseRightsLicenseType" display="Licencování databázových práv">
+                <label>Jakým způsobem licencujete databázová práva?</label>
+                <option value="cc-by">Creative Commons Uveďte původ</option>
+                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-zero">Creative Commons CC0</option>
+                <option value="odc-by">Open Data Commons Attribution License</option>
+                <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
+                <option value="odc-pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
+                <option value="other" display="">jinak…</option>
             </question>
          </if>
-         <question id="contentRights" display="Obsah chráněný autorským právem">
-            <label>Vztahuje se na obsah dat autorské právo?</label>
-            <radioset required="required">
-               <option value="norights" display="ne, data obsahují pouze fakta a čísla">
-                  <label>Ne, data obsahují pouze fakta a čísla.</label>
-                  <help>K faktickým informacím nevznikají autorská práva. Pokud databáze neobsahuje nic, co by vzniklo tvůrčím úsilím, autorské právo se na její obsah nevztahuje.</help>
-               </option>
-               <option value="samerights" display="ano; držitel práv pouze jeden">
-                  <label>Ano, a všemi právy disponuje jeden člověk nebo organizace.</label>
-                  <help>Tuto možnost vyberte, pokud byla data vytvořena jednou osobou nebo organizací nebo předána jedné osobě nebo organizaci.</help>
-               </option>
-               <option value="mixedrights" display="ano; více různých držitelů práv">
-                  <label>Ano, a držitelem práv jsou různé osoby a organizace.</label>
-                  <help>U některých dat se mohou držitelé práv lišit záznam od záznamu. V tom případě by informace o jednotlivých právech měly být součástí dat.</help>
-               </option>
-            </radioset>
+         <if test="this.databaseRights() === 'other'">
+            <question id="databaseRightsURL" display="Licenční ujednání k databázovým právům">
+               <label>Kde popisujete licenční podmínky spojené s databázovými právy?</label>
+               <input type="url" required="required" placeholder="URL dokumentu"/>
+            </question>
+         </if>
+         <if test="this.databaseRights() === 'false'">
+            <question id="databaseRightsNAReason" display="Proč databázová práva neexistují?">
+                <display>Proč se na datovou sadu nevztahují databázová práva?</display>
+                <option value="trivial" display="nebylo vynaloženo netriviální úsilí">
+                    Při její tvorbě nebylo vynaloženo netriviální úsilí.</option>
+                <option value="expired" display="vypršela">
+                    Databázová práva vypršela.</option>
+                <option value="waived" display="držitelé se jich vzdali">
+                    Držitelé databázových práv se jich vzdali.</option>
+            </question>
+         </if>
+         <if test="this.databaseRightsNAReason() === 'waived'">
+            <question id="databaseRightsWaiveType" display="Způsob vzdání se databázových práv">
+                <label>Jakým způsobem se držitelé vzdali databázových práv?</label>
+                <option value="cc-zero">Creative Commons CC0</option>
+                <option value="odc-pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
+                <option value="other" display="">jinak…</option>
+            </question>
+         </if>
+         <if test="this.databaseRightsWaiveType() === 'other'">
+            <question id="databaseRightsWaiverURL" display="Konkrétní způsob vzdání se databázových práv">
+                <label>Uveďte prosím URL dokumentu, kterým se držitelé vzdali svých databázových práv.</label>
+               <input type="url" required="required" placeholder="URL dokumentu"/>
+            </question>
+         </if>
+         <!-- Database Copyright -->
+         <question id="databaseCopyright" display="Autorská práva na datovou sadu">
+            <label>Vztahují se na datovou sadu jako takovou autorská práva?</label>
+            <yesno yes="existují" no="neexistují"/>
          </question>
-         <if test="this.contentRights() === 'norights'">
-            <question id="explicitWaiver" display="Je obsah dat volným dílem?">
-               <label>Je obsah dat volným dílem, tedy Public Domain?</label>
-               <yesno yes="ano, obsah dat je volným dílem"/>
-               <help>K označení obsahu jako volné dílo můžete použít například licenci <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>. Tak se uživatelé snadno dozvědí, že mohou s obsahem dat volně nakládat.</help>
-               <requirement level="standard">
-                  <strong>Pokud je nějaká část obsahu vašich dat volným dílem, měli byste ji vhodně označit</strong>, aby uživatelé věděli, že s tímto obsahem mohou volně nakládat.
-                  </requirement>
+         <if test="this.databaseCopyright() === 'false'">
+            <question id="databaseCopyrightNAReason" display="Proč autorská práva na datovou sadu neexistují?">
+                <label>Proč se na datovou sadu jako takovou nevztahují autorská práva?</label>
+                <option value="expired" display="ochrana vypršela">
+                    Autorskoprávní ochrana vypršela.</option>
+                <option value="freeWork" display="jde o volné dílo">
+                    Jde o volné dílo.</option>
+                <option value="stateWork" display="jde o úřední dílo">
+                    Jde o úřední dílo.</option>
             </question>
          </if>
-         <if test="this.contentRights() === 'samerights'">
-            <question id="contentLicence" display="Licence obsahu">
-               <label>Pod jakou licencí mohou ostatní znovu užívat tento obsah?</label>
-               <select required="required">
-                  <option/>
-                  <option value="cc-by">Creative Commons Uveďte původ</option>
-                  <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
-                  <option value="cc-zero">Creative Commons CC0</option>
-                  <option value="na" display="">nehodí se</option>
-                  <option value="other" display="">jiná…</option>
-               </select>
-               <help>Nezapomeňte, že každé tvůrčí úsilí automaticky vede ke vzniku autorských práv k vytvořenému obsahu (s výjimkou čistě faktických údajů). Pokud tedy uživatelé chtějí váš obsah bez problémů používat, potřebují odpovídající licenci nebo dokument, ve kterém se vzdáváte svých práv, pokud je to možné. V seznamu uvádíme nejčastěji používané licence. Pokud váš obsah není chráněný autorským právem, práva vypršela nebo jste se jich vzdali, vyberte možnost „nehodí se“.</help>
-            </question>
-            <if test="this.contentLicence() === 'na'">
-               <question id="contentNotApplicable" display="Důvody chybějící licence">
-                  <label>Proč není obsah dat licencován?</label>
-                  <radioset required="required">
-                     <option value="norights" display="na datovou sadu se nevztahují autorská práva">
-                        <label>Datová sada není chráněna autorským právem.</label>
-                        <help>Autorské právo chrání literární a jiná umělecká a vědecká díla, která jsou jedinečným výsledkem tvůrčí činnosti autora. Pokud data obsahují pouze fakta, autorskoprávní ochrana se na ně nevztahuje.</help>
-                     </option>
-                     <option value="expired" display="autorskoprávní ochrana díla vypršela">
-                        <label>Autorskoprávní ochrana díla již vypršela.</label>
-                        <help>Majetková práva k autorskému dílu jsou chráněna jen po určitou dobu od smrti autora (70 let počínaje prvním lednem po smrti) nebo vydání díla. Ověřte si datum vzniku díla, protože pokud je dostatečně staré, majetková ochrana autorksých práv již mohla vypršet.</help>
-                     </option>
-                     <option value="waived" display="autor se vzdal ochrany svých práv">
-                        <label>Autor se vzdal ochrany svých práv.</label>
-                        <help>To znamená, že držitelem majetkových práv k dílu není nikdo a každý může s dílem nakládat volně, při zachování osobnostních práv.</help>
-                     </option>
-                  </radioset>
-               </question>
-               <if test="this.contentNotApplicable() === 'waived'">
-                  <question id="contentWaiver" display="Forma upuštění od autorských práv k obsahu">
-                     <label>Jakým způsobem jste se vzdali svých práv?</label>
-                     <select required="required">
-                        <option/>
-                        <option value="cc0">Creative Commons CC0</option>
-                        <option value="other">jiný…</option>
-                     </select>
-                     <help>Pokud se chcete vzdát autorskoprávní ochrany vašeho obsahu, je třeba tak učinit prokazatelným způsobem, aby ostatní uživatelé věděli, že mohou váš obsah bez obav užívat. K tomu je možné použít již existujících prostředků, jako je CC0, nebo s právní pomocí napsat vlastní licenční ujednání.</help>
-                  </question>
-                  <if test="this.contentWaiver() === 'other'">
-                     <question id="contentOtherWaiver"
-                               display="Forma upuštění od majetkových práv k obsahu">
-                        <label>Kde je dokument, kterým se vzdáváte práv k obsahu?</label>
-                        <input type="url"
-                               required="required"
-                               placeholder="URL právního dokumentu"/>
-                        <help>Uveďte URL k veřejně dostupnému dokumentu, kterým se vzdáváte majetkových práv k obsahu dat. Uživatelé si díky němu mohou ověřit, že mohou s Vaším obsahem volně nakládat.</help>
-                     </question>
-                  </if>
-               </if>
-            </if>
-            <if test="this.contentLicence() === 'other'">
-               <question id="otherContentLicenceName" display="Licence obsahu">
-                  <label>Jaký je název této licence?</label>
-                  <input required="required" placeholder="název licence"/>
-                  <help>Pokud používáte jinou licenci, potřebujeme znát její název, abychom ho mohli uvést na certifikátu otevřených dat.</help>
-               </question>
-               <question id="otherContentLicenceURL" display="Text licenčního ujednání k obsahu">
-                  <label>Kde je plný text licenčního ujednání?</label>
-                  <input type="url" required="required" placeholder="URL k licenčnímu ujednání"/>
-                  <help>Uveďte URL licenčního textu. Bude uvedeno na vašem certifikátu otevřených dat, aby si kdokoliv mohl licenci zkontrolovat.</help>
-               </question>
-               <question id="otherContentLicenceOpen">
-                  <label>Jde o otevřenou licenci?</label>
-                  <yesno required="required"/>
-                  <help more="http://opendefinition.org/">Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>. Tamtéž najdete přímo <a href="http://opendefinition.org/licenses/">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil.</help>
-                  <requirement>
-                    <strong>Data musíte zveřejnit pod otevřenou licencí, aby je ostatní mohli užít. Pokud data nejsou jakkoli chráněná, připojte prosím informaci o tomto stavu k datové sadě.</strong>
-                  </requirement>
-               </question>
-            </if>
-         </if>
-         <if test="this.contentRights() === 'mixedrights'">
-            <question id="contentRightsURL" display="Práva a licence k obsahu">
-               <label>Kde popisujete licenční podmínky a práva spojená s obsahem dat?</label>
-               <input type="url"
-                      required="required"
-                      placeholder="URL dokumentu"/>
-               <help>Uveďte URL stránky, na které vysvětlujete licenční podmínky a práva spojená s obsahem dat.</help>
+         <if test="this.databaseCopyright() === 'true'">
+            <question id="databaseCopyrightLicenseType" display="Licencování autorských práv na datovou sadu">
+                <label>Jakým způsobem licencujete autorská práva na datovou sadu jako takovou?</label>
+                <option value="cc-by">Creative Commons Uveďte původ</option>
+                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-zero">Creative Commons CC0</option>
+                <option value="other" display="">jinak…</option>
             </question>
          </if>
+         <if test="this.databaseCopyrightLicenseType() === 'other'">
+            <question id="databaseCopyrightURL" display="Licence k autorským právům na datovou sadu">
+               <label>Kde popisujete licenční podmínky spojené s autorskými právy na datovou sadu?</label>
+               <input type="url" required="required" placeholder="URL dokumentu"/>
+            </question>
+         </if>
+         <!-- Database Content Copyright -->
+         <question id="databaseContentCopyright" display="Autorská práva na obsah datové sady">
+            <label>Vztahují se na obsah datové sady autorská práva?</label>
+            <yesno yes="existují" no="neexistují"/>
+         </question>
+         <if test="this.databaseContentCopyright() === 'false'">
+            <question id="databaseContentCopyrightNAReason" display="Proč autorská práva na obsah neexistují?">
+                <label>Proč se na obsah datové sady nevztahují autorská práva?</label>
+                <option value="notApplicable" display="autorské právo se na tento obsah nevztahuje">
+                    Autorské právo se na tento obsah nevztahuje.</option>
+                <option value="expired" display="ochrana vypršela">
+                    Autorskoprávní ochrana vypršela.</option>
+                <option value="freeWork" display="jde o volné dílo">
+                    Jde o volné dílo.</option>
+                <option value="stateWork" display="jde o úřední dílo">
+                    Jde o úřední dílo.</option>
+            </question>
+         </if>
+         <if test="this.databaseCopyright() === 'true'">
+            <question id="databaseContentCopyrightLicenseType" display="Licencování autorských práv na obsah">
+                <label>Jakým způsobem licencujete autorská práva na obsah datové sady?</label>
+                <option value="cc-by">Creative Commons Uveďte původ</option>
+                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-zero">Creative Commons CC0</option>
+                <option value="other" display="">jinak…</option>
+            </question>
+         </if>
+         <if test="this.databaseContentCopyrightLicenseType() === 'other'">
+            <question id="databaseContentCopyrightURL" display="Licence k autorským právům na obsah">
+               <label>Kde popisujete licenční podmínky spojené s autorskými právy na obsah datové sady?</label>
+               <input type="url" required="required" placeholder="URL dokumentu"/>
+            </question>
+         </if>
+         <!-- Original Questionnaire Continues -->
          <if test="this.copyrightURL() !== ''">
             <question id="copyrightStatementMetadata"
                       display="Strojově čitelná data právního prohlášení">
