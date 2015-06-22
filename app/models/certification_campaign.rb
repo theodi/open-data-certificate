@@ -19,4 +19,11 @@ class CertificationCampaign < ActiveRecord::Base
     certificate_generators.joins(:certificate).merge(Certificate.published).count
   end
 
+  def rerun!
+    certificate_generators.each do |c|
+      dataset = Dataset.find(c.dataset.id)
+      CertificateGenerator.update(dataset, nil, c.survey.access_code, user)
+    end
+  end
+
 end

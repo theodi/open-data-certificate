@@ -7,6 +7,9 @@
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
 </ul>
+
+<%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post' %>
+
 <table class='table table-striped'>
   <tr>
     <th>

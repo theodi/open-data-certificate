@@ -40,10 +40,23 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def rerun
+    authorize! :manage, :all
+
+    @campaign.sidekiq_delay.rerun!
+    flash[:notice] = "Campaign queued for rerun"
+
+    begin
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+    end
+  end
+
   private
 
   def get_campaign
-    @campaign = CertificationCampaign.find(params[:id])
+    @campaign = CertificationCampaign.find(params[:id] || params[:campaign_id])
     authorize! :read, @campaign
   end
 

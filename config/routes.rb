@@ -122,7 +122,10 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/events' => 'main#status_events'
   get 'legacy_stats.csv' => 'main#legacy_stats', format: 'csv'
   get 'embed_stats.csv' => 'embed_stats#index', format: 'csv', as: :embed_stats
-  resources :campaigns
+
+  resources :campaigns do
+    post 'rerun', to: 'campaigns#rerun', as: 'rerun'
+  end
 
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'

@@ -21,8 +21,8 @@ When(/^I change the underlying dataset$/) do
   }
 end
 
-When(/^I click "(.*?)"$/) do |arg1|
-  click_on("regenerate")
+When(/^I click "(.*?)"$/) do |text|
+  click_on(text)
 end
 
 Given(/^my metadata has the email "(.*?)" associated$/) do |email|
