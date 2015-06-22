@@ -13,6 +13,15 @@ Feature: Rerun campaigns
     And I should be redirected to the campaign page for "brian"
     And I should see "Campaign queued for rerun"
 
+  Scenario: Rerun campaign button queues each individual generator
+    Given I have a campaign "brian"
+    And that campaign has 5 certificates
+    And I visit the campaign page for "brian"
+    Then the generators should be queued for rerun
+    When I click "Rerun campaign"
+    And I should be redirected to the campaign page for "brian"
+    And I should see "Campaign queued for rerun"
+
   Scenario: Rerunnning campaigns when new data is present
     Given I want to create a certificate via the API
     And I apply a campaign "brian"

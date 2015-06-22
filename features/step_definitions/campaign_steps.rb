@@ -44,6 +44,10 @@ Then(/^the campaign should be queued to be rerun$/) do
   CertificationCampaign.any_instance.expects(:rerun!)
 end
 
+Then(/^the generators should be queued for rerun$/) do
+  CertificateGenerator.expects(:update).times(5)
+end
+
 When(/^I should be redirected to the campaign page for "(.*?)"$/) do |campaign|
   campaign = CertificationCampaign.find_by_name(campaign)
   assert_equal page.current_path, campaign_path(campaign)
