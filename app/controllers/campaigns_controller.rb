@@ -46,11 +46,7 @@ class CampaignsController < ApplicationController
     @campaign.sidekiq_delay.rerun!
     flash[:notice] = "Campaign queued for rerun"
 
-    begin
-      redirect_to :back
-    rescue ActionController::RedirectBackError
-      redirect_to root_path
-    end
+    redirect_to campaign_path(@campaign)
   end
 
   private
