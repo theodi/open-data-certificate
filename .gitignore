@@ -55,3 +55,4 @@ bootstrap/
 
 # ignore dataset dump generated for download
 public/system/datasets.csv
+dump.rdb
