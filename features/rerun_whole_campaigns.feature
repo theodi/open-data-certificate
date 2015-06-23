@@ -26,6 +26,14 @@ Feature: Rerun campaigns
     Then I should see 1 dataset
     And I should see "1 certificate published"
 
+  Scenario: Correct generators are rerun
+    Given I have a campaign "brian"
+    And that campaign has 5 certificates
+    And I visit the campaign page for "brian"
+    When I click "Rerun campaign"
+    Then I should be redirected to the campaign page for "brian"
+    And I should see the correct generators
+
   @sidekiq_fake
   Scenario: Rerun campaign button shows correct numbers
     Given I have a campaign "brian"
@@ -46,11 +54,3 @@ Feature: Rerun campaigns
     Then I should be redirected to the campaign page for "brian"
     And my campaigns should be shown as pending
     And I should see 5 datasets
-
-  Scenario: Correct generators are rerun
-    Given I have a campaign "brian"
-    And that campaign has 5 certificates
-    And I visit the campaign page for "brian"
-    When I click "Rerun campaign"
-    Then I should be redirected to the campaign page for "brian"
-    And I should see the correct generators
