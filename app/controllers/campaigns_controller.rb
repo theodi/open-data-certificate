@@ -43,7 +43,7 @@ class CampaignsController < ApplicationController
   def rerun
     authorize! :manage, :all
 
-    @campaign.sidekiq_delay.rerun!
+    @campaign.rerun!
     flash[:notice] = "Campaign queued for rerun"
 
     redirect_to campaign_path(@campaign)
