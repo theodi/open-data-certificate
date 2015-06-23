@@ -29,7 +29,8 @@ Given(/^I have a campaign "(.*?)"$/) do |name|
 end
 
 Given(/^that campaign has (\d+) certificates?$/) do |num|
-  num.to_i.times do |i|
+  @num = num.to_i
+  @num.times do |i|
     steps %Q{
       Given I want to create a certificate via the API with the URL "http://data.example.com/datasets/#{i}"
       And I apply a campaign "#{@campaign}"
@@ -59,4 +60,10 @@ end
 
 When(/^I should see (\d+) datasets?$/) do |num|
   assert_equal num.to_i + 1, page.all(:css, 'table tr').count
+end
+
+Then(/^I should see the correct generators$/) do
+  @num.times do |i|
+    assert_match "http://data.example.com/datasets/#{i}", page.body
+  end
 end

@@ -46,3 +46,11 @@ Feature: Rerun campaigns
     Then I should be redirected to the campaign page for "brian"
     And my campaigns should be shown as pending
     And I should see 5 datasets
+
+  Scenario: Correct generators are rerun
+    Given I have a campaign "brian"
+    And that campaign has 5 certificates
+    And I visit the campaign page for "brian"
+    When I click "Rerun campaign"
+    Then I should be redirected to the campaign page for "brian"
+    And I should see the correct generators

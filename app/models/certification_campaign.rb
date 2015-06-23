@@ -27,7 +27,7 @@ class CertificationCampaign < ActiveRecord::Base
     certificate_generators.each do |c|
       dataset = Dataset.find(c.dataset.id)
       generator = CertificateGenerator.create(
-        request: certificate_generators.last.request,
+        request: c.request,
         user: user,
         certification_campaign: self
       )
