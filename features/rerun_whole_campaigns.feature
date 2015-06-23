@@ -12,6 +12,8 @@ Feature: Rerun campaigns
     When I click "Rerun campaign"
     And I should be redirected to the campaign page for "brian"
     And I should see "Campaign queued for rerun"
+    And I should see "5 datasets inspected"
+    And I should see 5 datasets
 
   Scenario: Rerun campaign button queues each individual generator
     Given I have a campaign "brian"
@@ -20,7 +22,6 @@ Feature: Rerun campaigns
     Then the generators should be queued for rerun
     When I click "Rerun campaign"
     And I should be redirected to the campaign page for "brian"
-    And I should see "Campaign queued for rerun"
 
   Scenario: Rerunnning campaigns when new data is present
     Given I want to create a certificate via the API
@@ -33,4 +34,5 @@ Feature: Rerun campaigns
     When I add the field "publisherUrl" with the value "http://example.com" to my metadata
     And my URL autocompletes via DataKitten
     And I click "Rerun campaign"
-    Then I should see "1 certificate published"
+    Then I should see 1 dataset
+    And I should see "1 certificate published"
