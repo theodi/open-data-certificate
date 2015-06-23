@@ -12,11 +12,15 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def generated_count
-    certificate_generators.count
+    current.count
   end
 
   def published_count
-    certificate_generators.joins(:certificate).merge(Certificate.published).count
+    current.joins(:certificate).merge(Certificate.published).count
+  end
+
+  def current
+    certificate_generators.where(latest: true)
   end
 
   def rerun!
