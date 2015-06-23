@@ -4,17 +4,6 @@ Feature: Rerun campaigns
   Background:
     Given I am signed in as the API user
 
-  Scenario: Rerun campaign button queues correctly
-    Given I have a campaign "brian"
-    And that campaign has 5 certificates
-    And I visit the campaign page for "brian"
-    Then the campaign should be queued to be rerun
-    When I click "Rerun campaign"
-    And I should be redirected to the campaign page for "brian"
-    And I should see "Campaign queued for rerun"
-    And I should see "5 datasets inspected"
-    And I should see 5 datasets
-
   Scenario: Rerun campaign button queues each individual generator
     Given I have a campaign "brian"
     And that campaign has 5 certificates
@@ -36,6 +25,17 @@ Feature: Rerun campaigns
     And I click "Rerun campaign"
     Then I should see 1 dataset
     And I should see "1 certificate published"
+
+  @sidekiq_fake
+  Scenario: Rerun campaign button shows correct numbers
+    Given I have a campaign "brian"
+    And that campaign has 5 certificates
+    And I visit the campaign page for "brian"
+    When I click "Rerun campaign"
+    Then I should be redirected to the campaign page for "brian"
+    And I should see "Campaign queued for rerun"
+    And I should see "5 datasets inspected"
+    And I should see 5 datasets
 
   @sidekiq_fake
   Scenario: Campaigns show as pending after rerun
