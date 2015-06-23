@@ -36,3 +36,13 @@ Feature: Rerun campaigns
     And I click "Rerun campaign"
     Then I should see 1 dataset
     And I should see "1 certificate published"
+
+  @sidekiq_fake
+  Scenario: Campaigns show as pending after rerun
+    Given I have a campaign "brian"
+    And that campaign has 5 certificates
+    And I visit the campaign page for "brian"
+    And I click "Rerun campaign"
+    Then I should be redirected to the campaign page for "brian"
+    And my campaigns should be shown as pending
+    And I should see 5 datasets

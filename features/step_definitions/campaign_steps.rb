@@ -52,6 +52,11 @@ When(/^I should be redirected to the campaign page for "(.*?)"$/) do |campaign|
   campaign = CertificationCampaign.find_by_name(campaign)
   assert_equal page.current_path, campaign_path(campaign)
 end
+
+Then(/^my campaigns should be shown as pending$/) do
+  assert_match "Processing",  page.body
+end
+
 When(/^I should see (\d+) datasets?$/) do |num|
   assert_equal num.to_i + 1, page.all(:css, 'table tr').count
 end

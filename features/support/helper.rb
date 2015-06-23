@@ -29,6 +29,10 @@ Before("@api") do
   #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
 end
 
+Before("@sidekiq_fake") do
+  Sidekiq::Testing.fake!
+end
+
 VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir = 'fixtures/cassettes'
