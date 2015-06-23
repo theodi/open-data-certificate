@@ -285,4 +285,49 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     assert_equal existing_user, user
   end
 
+  test "getting previous generators with the same dataset and campaign" do
+    campaign = CertificationCampaign.create(name: "foobar")
+
+    dataset = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+
+    CertificateGenerator.create(request: dataset, user: @user, certification_campaign: campaign).generate('cert-generator', false)
+
+    campaign.rerun!
+
+    previous = CertificateGenerator.first
+    generator = CertificateGenerator.last
+
+    assert_equal generator.previous.count, 1
+    assert_equal generator.previous.first, previous
+  end
+
+  test "latest generator gets tagged as such" do
+    campaign = CertificationCampaign.create(name: "foobar")
+
+    dataset = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+
+    CertificateGenerator.create(request: dataset, user: @user, certification_campaign: campaign).generate('cert-generator', false)
+
+    campaign.rerun!
+
+    assert_equal CertificateGenerator.first.latest, false
+    assert_equal CertificateGenerator.last.latest, true
+  end
+
 end

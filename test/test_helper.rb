@@ -3,6 +3,7 @@ require 'spork'
 
 Spork.prefork do
   require 'coveralls'
+
   Coveralls.wear_merged! 'rails'
 
   ENV["RAILS_ENV"] = "test"
@@ -13,6 +14,9 @@ Spork.prefork do
   require 'vcr'
   require 'mocha/setup'
   require 'webmock/test_unit'
+  require 'sidekiq/testing'
+
+  Sidekiq::Testing.inline!
 end
 
 Spork.each_run do

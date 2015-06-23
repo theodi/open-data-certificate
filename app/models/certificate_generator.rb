@@ -9,6 +9,8 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
+  before_save :remove_flag
+
   serialize :request, HashWithIndifferentAccess
 
   TYPES =  {
@@ -152,7 +154,22 @@ class CertificateGenerator < ActiveRecord::Base
     write_attribute(:request, value.with_indifferent_access)
   end
 
+  def previous
+    if dataset && certification_campaign
+      CertificateGenerator.where("response_sets.dataset_id" => dataset.id, "certification_campaign_id" => certification_campaign.id)
+                          .joins(:response_set)
+                          .reject { |c| c.id == id }
+    else
+      []
+    end
+  end
+
   private
+
+  def remove_flag
+    previous.each { |c| c.update_column(:latest, false) }
+  end
+
   # answer a question from the request
   def answer question
 
