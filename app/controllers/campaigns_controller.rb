@@ -10,6 +10,7 @@ class CampaignsController < ApplicationController
 
   def show
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate)
+                           .joins(:response_set).group("response_sets.dataset_id")
     respond_to do |want|
       want.html do
         @generators = @generators.page(params[:page]).per(100)
