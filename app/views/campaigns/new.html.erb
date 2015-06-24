@@ -10,6 +10,13 @@
   </div>
 
   <div class="control-group">
+    <%= label_tag(:limit, "Certificate limit", class: "control-label") %>
+    <div class="controls">
+      <%= number_field_tag :limit %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= label_tag(:url, "Dataset URL", class: "control-label") %>
     <div class="controls">
       <%= text_field_tag :url %>

@@ -36,6 +36,10 @@ Given(/^I enter "(.*?)" in the campaign field$/) do |name|
   fill_in "name", with: name
 end
 
+Given(/^I choose a limit of (\d+) certificates$/) do |limit|
+  fill_in "limit", with: limit
+end
+
 Given(/^I click "(.*?)"$/) do |button|
   click_on button
 end
