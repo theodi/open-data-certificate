@@ -12,14 +12,23 @@ module CertificateFactory
     end
 
     def generate
-      generator = CertificateGenerator.create(
-        request: {
-          documentationUrl: @url
-        },
-        user: @user,
-        certification_campaign: campaign
-      )
-      generator.sidekiq_delay.generate(@jurisdiction, @create_user, @existing_dataset)
+      if existing_certificate?
+        campaign.increment!(:duplicate_count) if campaign
+      else
+        generator = CertificateGenerator.create(
+          request: {
+            documentationUrl: @url
+          },
+          user: @user,
+          certification_campaign: campaign
+        )
+        generator.sidekiq_delay.generate(@jurisdiction, @create_user, @existing_dataset)
+      end
+    end
+
+    def existing_certificate?
+      @existing_dataset = Dataset.where(documentation_url: @url).first
+      @existing_dataset.try(:certificate).present?
     end
 
     def campaign

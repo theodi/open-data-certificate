@@ -136,6 +136,13 @@ Then(/^the API response should return pending$/) do
   assert_match /\"success\":\"pending\"/,  @response.body
 end
 
+Given(/^a dataset already exists for the URL "(.*?)"$/) do |url|
+  steps %Q{
+    Given I have a a dataset at the URL "#{url}"
+    And I run the rake task to create a single certificate
+  }
+end
+
 
 Then(/^my certificate should be published$/) do
   assert Dataset.first.certificate.published
