@@ -2,7 +2,7 @@ class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index]
+  before_filter :get_campaign, except: [:index, :new, :create]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -37,6 +37,19 @@ class CampaignsController < ApplicationController
         end
         send_data csv, filename: "#{@campaign.name}.csv", type: "text/csv; header=present; charset=utf-8"
       end
+    end
+  end
+
+  def new
+    @campaign = CertificationCampaign.new
+  end
+
+  def create
+    @campaign = CertificationCampaign.create(user_id: current_user.id, name: params[:name])
+    if @campaign.valid?
+      CertificateFactory::FactoryRunner.perform_async(feed: params[:url], user_id: current_user.id, limit: params[:limit], campaign: params[:name], jurisdiction: params[:jurisdiction])
+      flash[:notice] = "Campaign queued to run"
+      redirect_to campaign_path(@campaign)
     end
   end
 

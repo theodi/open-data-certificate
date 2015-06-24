@@ -23,3 +23,23 @@ Then(/^that campaign should have the name "(.*?)"$/) do |name|
   campaign = CertificationCampaign.find_by_name(name)
   assert_not_equal nil, campaign
 end
+
+Given(/^I visit the path to create a new campaign$/) do
+  visit new_campaign_path
+end
+
+Given(/^I enter the feed URL in the URL field$/) do
+  fill_in "url", with: @url
+end
+
+Given(/^I enter "(.*?)" in the campaign field$/) do |name|
+  fill_in "name", with: name
+end
+
+Given(/^I click "(.*?)"$/) do |button|
+  click_on button
+end
+
+Given(/^I select "(.*?)" from the juristiction field$/) do |jurisdiction|
+  select(jurisdiction, :from => "Jurisdiction")
+end

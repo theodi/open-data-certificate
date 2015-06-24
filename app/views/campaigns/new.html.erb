@@ -1,0 +1,32 @@
+<% content_for :header_title, "New Campaign" %>
+
+<%= form_tag campaigns_path, method: :post do %>
+
+  <div class="control-group">
+    <%= label_tag(:name, "Campaign name", class: "control-label") %>
+    <div class="controls">
+      <%= text_field_tag :name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label_tag(:url, "Dataset URL", class: "control-label") %>
+    <div class="controls">
+      <%= text_field_tag :url %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label_tag(:jurisdiction, "Jurisdiction", class: "control-label") %>
+    <div class="controls">
+      <%= select_tag(:jurisdiction, jurisdiction_options_for_select) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  </div>
+
+<% end %>
