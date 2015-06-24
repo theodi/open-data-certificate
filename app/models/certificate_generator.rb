@@ -154,20 +154,15 @@ class CertificateGenerator < ActiveRecord::Base
     write_attribute(:request, value.with_indifferent_access)
   end
 
-  def previous
-    if dataset && certification_campaign
-      CertificateGenerator.where("response_sets.dataset_id" => dataset.id, "certification_campaign_id" => certification_campaign.id)
-                          .joins(:response_set)
-                          .reject { |c| c.id == id }
-    else
-      []
-    end
-  end
-
   private
 
   def remove_flag
-    previous.each { |c| c.update_column(:latest, false) }
+    if dataset && certification_campaign
+      CertificateGenerator.where("response_sets.dataset_id" => dataset.id, "certification_campaign_id" => certification_campaign.id)
+                          .joins(:response_set)
+                          .where("certificate_generators.id not in (?)", id)
+                          .update_all(latest: false)
+    end
   end
 
   # answer a question from the request
