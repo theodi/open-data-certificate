@@ -71,3 +71,23 @@ Then(/^I should see the correct generators$/) do
     assert_match "http://data.example.com/datasets/#{i}", page.body
   end
 end
+
+Given(/^I visit the path to create a new campaign$/) do
+  visit new_campaign_path
+end
+
+Given(/^I enter the feed URL in the URL field$/) do
+  fill_in "url", with: @url
+end
+
+Given(/^I enter "(.*?)" in the campaign field$/) do |name|
+  fill_in "name", with: name
+end
+
+Given(/^I click "(.*?)"$/) do |button|
+  click_on button
+end
+
+Given(/^I select "(.*?)" from the juristiction field$/) do |jurisdiction|
+  select(jurisdiction, :from => "Jurisdiction")
+end
