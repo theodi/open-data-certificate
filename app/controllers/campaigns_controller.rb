@@ -47,7 +47,8 @@ class CampaignsController < ApplicationController
   def create
     @campaign = CertificationCampaign.create(user_id: current_user.id, name: params[:name])
     if @campaign.valid?
-      CertificateFactory::FactoryRunner.perform_async(feed: params[:url], user_id: current_user.id, limit: params[:limit], campaign: params[:name], jurisdiction: params[:jurisdiction])
+      limit = params[:limit].blank? ? nil : params[:limit]
+      CertificateFactory::FactoryRunner.perform_async(feed: params[:url], user_id: current_user.id, limit: limit, campaign: params[:name], jurisdiction: params[:jurisdiction])
       flash[:notice] = "Campaign queued to run"
       redirect_to campaign_path(@campaign)
     end
