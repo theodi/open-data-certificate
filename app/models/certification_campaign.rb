@@ -80,4 +80,9 @@ class CertificationCampaign < ActiveRecord::Base
     generator.sidekiq_delay.generate(access_code, true, dataset)
   end
 
+  def scheduled_rerun
+    rerun!
+    self.sidekiq_delay_until(1.day.from_now).scheduled_rerun
+  end
+
 end

@@ -125,6 +125,7 @@ OpenDataCertificate::Application.routes.draw do
 
   resources :campaigns do
     post 'rerun', to: 'campaigns#rerun', as: 'rerun'
+    post 'schedule', to: 'campaigns#schedule', as: 'scheduled_rerun'
   end
 
   # private stats

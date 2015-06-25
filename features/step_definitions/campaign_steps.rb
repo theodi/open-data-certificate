@@ -57,6 +57,10 @@ Then(/^the generators should be queued for rerun$/) do
   CertificateGenerator.any_instance.expects(:generate).times(5)
 end
 
+Then(/^a rerun should be scheduled for tomorrow$/) do
+  assert_equal Date.today + 1.day, DateTime.strptime(Sidekiq::Extensions::DelayedModel.jobs.last["at"].to_s, "%s").to_date
+end
+
 When(/^I should be redirected to the campaign page for "(.*?)"$/) do |campaign|
   campaign = CertificationCampaign.find_by_name(campaign)
   assert_equal page.current_path, campaign_path(campaign)

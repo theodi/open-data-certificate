@@ -4,6 +4,7 @@
 <h3><%= report_heading(@certificate_level) %></h3>
 <div class='omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
+  <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post' %>
 </div>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
