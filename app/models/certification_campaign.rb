@@ -1,7 +1,7 @@
 class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
-  attr_accessor :url, :jurisdiction, :version
+  attr_accessor :jurisdiction, :version
   attr_writer :limit
 
   validates :name, uniqueness: true, presence: true
@@ -34,19 +34,40 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def rerun!
-    certificate_generators.each do |c|
-      generator = CertificateGenerator.create(
-        request: c.request,
-        user: user,
-        certification_campaign: self
-      )
-      jurs = if c.survey
-        c.survey.access_code
-      else
-        jurisdiction
+    if url.present?
+      factory = CertificateFactory::Factory.new(feed: url)
+      factory.each do |item|
+        url = factory.get_link(item)
+        existing_generator = certificate_generators.select { |g| g.request["documentationUrl"] == url }.first
+        generator = CertificateGenerator.create(
+          request: existing_generator.try(:request) || build_request(url),
+          user: user,
+          certification_campaign: self
+        )
+        generator.sidekiq_delay.generate(existing_generator.survey.access_code, true, existing_generator.try(:dataset))
       end
-      generator.sidekiq_delay.generate(jurs, true, c.dataset)
+    else
+      certificate_generators.each do |c|
+        dataset = Dataset.find(c.dataset.id)
+        generator = CertificateGenerator.create(
+          request: c.request,
+          user: user,
+          certification_campaign: self
+        )
+        jurs = if c.survey
+          c.survey.access_code
+        else
+          jurisdiction
+        end
+        generator.sidekiq_delay.generate(jurs, true, dataset)
+      end
     end
+  end
+
+  def build_request(url)
+    {
+      documentationUrl: url
+    }
   end
 
   def validate_extra_details?
