@@ -44,7 +44,6 @@ class CampaignsController < ApplicationController
   def rerun
     authorize! :manage, @campaign
 
-    @campaign.certificate_generators.update_all(latest: false)
     @campaign.rerun!
     flash[:notice] = "Campaign queued for rerun"
 

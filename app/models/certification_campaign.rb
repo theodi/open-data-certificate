@@ -34,6 +34,8 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def rerun!
+    certificate_generators.update_all(latest: false)
+
     if url.present?
       factory = CertificateFactory::Factory.new(feed: url)
       factory.each do |item|
