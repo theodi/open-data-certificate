@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20150702134537) do
     t.integer  "duplicate_count", :default => 0
     t.integer  "user_id"
     t.string   "jurisdiction",    :default => "gb"
+    t.string   "url"
   end
 
   create_table "claims", :force => true do |t|
