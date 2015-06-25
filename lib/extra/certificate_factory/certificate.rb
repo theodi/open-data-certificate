@@ -9,6 +9,7 @@ module CertificateFactory
       @jurisdiction = options[:jurisdiction] || "gb"
       @create_user = options[:create_user] || true
       @existing_dataset = options[:existing_dataset]
+      @feed_url = options[:feed_url]
     end
 
     def generate
@@ -33,7 +34,7 @@ module CertificateFactory
 
     def campaign
       if @campaign_name
-        @campaign ||= CertificationCampaign.where(:user_id => @user.id).find_or_create_by_name(@campaign_name)
+        @campaign ||= CertificationCampaign.where(:user_id => @user.id).find_or_create_by_name_and_url(@campaign_name, @feed_url)
       end
     end
 
