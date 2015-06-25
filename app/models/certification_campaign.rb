@@ -39,27 +39,18 @@ class CertificationCampaign < ActiveRecord::Base
       factory.each do |item|
         url = factory.get_link(item)
         existing_generator = certificate_generators.select { |g| g.request["documentationUrl"] == url }.first
-        generator = CertificateGenerator.create(
-          request: existing_generator.try(:request) || build_request(url),
-          user: user,
-          certification_campaign: self
-        )
-        generator.sidekiq_delay.generate(existing_generator.survey.access_code, true, existing_generator.try(:dataset))
+        request = existing_generator.try(:request) || build_request(url)
+        run_generator(request, certificate_generators.first.survey.access_code, existing_generator.try(:dataset))
       end
     else
       certificate_generators.each do |c|
         dataset = Dataset.find(c.dataset.id)
-        generator = CertificateGenerator.create(
-          request: c.request,
-          user: user,
-          certification_campaign: self
-        )
         jurs = if c.survey
           c.survey.access_code
         else
           jurisdiction
         end
-        generator.sidekiq_delay.generate(jurs, true, dataset)
+        run_generator(c.request, jurs, dataset)
       end
     end
   end
@@ -76,6 +67,15 @@ class CertificationCampaign < ActiveRecord::Base
 
   def limit
     @limit.to_i unless @limit.blank?
+  end
+
+  def run_generator(request, access_code, dataset)
+    generator = CertificateGenerator.create(
+      request: request,
+      user: user,
+      certification_campaign: self
+    )
+    generator.sidekiq_delay.generate(access_code, true, dataset)
   end
 
 end
