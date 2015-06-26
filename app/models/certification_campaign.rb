@@ -23,6 +23,10 @@ class CertificationCampaign < ActiveRecord::Base
     certificate_generators.where(latest: true)
   end
 
+  def incomplete_count
+    current.where(completed: nil).count
+  end
+
   def rerun!
     certificate_generators.each do |c|
       dataset = Dataset.find(c.dataset.id)

@@ -40,3 +40,18 @@ Feature: Generate certificates from campaigns via a rake task
     Given I have a CSV with 20 datasets
     And I run the rake task to create certificates
     Then there should be 20 certificates
+
+  @sidekiq_fake
+  Scenario: Campaign shows as pending when running
+    Given I have a CKAN atom feed with 10 datasets
+    And I am signed in as the API user
+    And I apply a campaign "brian"
+    And I run the rake task to create certificates
+    And the campaign is created
+    When I visit the campaign page for "brian"
+    Then I should see "Currently running"
+    And I should see "10 certificates pending"
+    When the certificates are created
+    When I visit the campaign page for "brian"
+    Then I should not see "Currently running"
+    And I should see "0 certificates pending"
