@@ -24,8 +24,12 @@ And (/^the campaign should be owned by my user account$/) do
 end
 
 Then(/^that campaign should have the name "(.*?)"$/) do |name|
-  campaign = CertificationCampaign.find_by_name(name)
-  assert_not_equal nil, campaign
+  @campaign = CertificationCampaign.find_by_name(name)
+  assert_not_equal nil, @campaign
+end
+
+Then(/^that campaign should have (\d+) generators$/) do |num|
+  assert_equal num.to_i, @campaign.certificate_generators.count
 end
 
 Given(/^I have a campaign "(.*?)"$/) do |name|
