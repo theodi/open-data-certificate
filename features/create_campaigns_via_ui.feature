@@ -13,6 +13,7 @@ Feature: Generate certificates from campaigns via the UI
     And I click "Submit"
     Then there should be 1 campaign
     And that campaign should have the name "brian"
+    And that campaign should have 20 generators
     And there should be 20 certificates
 
   Scenario: Create campaign with limit
@@ -25,4 +26,5 @@ Feature: Generate certificates from campaigns via the UI
     And I click "Submit"
     Then there should be 1 campaign
     And that campaign should have the name "brian"
+    And that campaign should have 5 generators
     And there should be 5 certificates

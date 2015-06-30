@@ -45,7 +45,7 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    @campaign = CertificationCampaign.create(user_id: current_user.id, name: params[:name])
+    @campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(params[:name])
     if @campaign.valid?
       limit = params[:limit].blank? ? nil : params[:limit]
       CertificateFactory::FactoryRunner.perform_async(feed: params[:url], user_id: current_user.id, limit: limit, campaign: params[:name], jurisdiction: params[:jurisdiction])
