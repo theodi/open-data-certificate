@@ -7,13 +7,9 @@ OpenDataCertificate::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  
-  if ENV["MEMCACHED_HOSTS"]
-    config.cache_store = :mem_cache_store, ENV["MEMCACHED_HOSTS"]
-  else
-    config.cache_store = :memory_store
-  end
-  
+
+  config.cache_store = :memory_store
+
   config.lograge.enabled = true
   config.lograge.log_format = :logstash
 
@@ -84,7 +80,7 @@ OpenDataCertificate::Application.configure do
     }
 
   end
-  
+
   # Enable threaded mode
   # config.threadsafe!
 

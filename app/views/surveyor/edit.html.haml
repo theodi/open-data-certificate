@@ -73,7 +73,9 @@
 
 
           .documentation-url
-            %label Where is your data described?
+            - question = @survey.questions.find_by_reference_identifier("documentationURL")
+            %label
+              = question.text
             .row-fluid
               .span8
                 - if @response_set.documentation_url.blank?

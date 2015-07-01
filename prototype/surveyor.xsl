@@ -53,7 +53,7 @@
 <xsl:template match="questionnaire" mode="structure">
 	<survey label="{@jurisdiction}"
 		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
-		default_mandatory="false" 
+		default_mandatory="false"
 		status="{@status}">
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
@@ -144,7 +144,7 @@
 </xsl:template>
 
 <xsl:template match="help" mode="structure" />
-	
+
 <xsl:template match="input" mode="structure">
 	<xsl:element name="a_1">
 		<xsl:attribute name="label" select="@placeholder" />
@@ -375,7 +375,7 @@
 </xsl:template>
 
 <!-- HTML -->
-	
+
 <xsl:template match="help" mode="html">
 	<xsl:apply-templates mode="html" />
 </xsl:template>
@@ -420,6 +420,10 @@
 	<xsl:text>&lt;var&gt;</xsl:text>
 	<xsl:apply-templates mode="html" />
 	<xsl:text>&lt;/var&gt;</xsl:text>
+</xsl:template>
+
+<xsl:template match="br" mode="html">
+  <xsl:text>&lt;br/&gt;</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="html">
@@ -489,7 +493,7 @@
 
 <xsl:template match="translations | *[starts-with(name(), 'section_')]" mode="syntax">
 	<xsl:param name="indent" as="xs:string" select="''" tunnel="yes" />
-	<xsl:next-match />	
+	<xsl:next-match />
 	<xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
@@ -562,7 +566,7 @@
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => :</xsl:text>
-	<xsl:value-of select="." />	
+	<xsl:value-of select="." />
 </xsl:template>
 
 <xsl:template match="*[not(@custom_renderer)]/@requirement" mode="syntax">
@@ -581,7 +585,7 @@
 	<xsl:text>:</xsl:text>
 	<xsl:value-of select="name()" />
 	<xsl:text> => </xsl:text>
-	<xsl:value-of select="." />	
+	<xsl:value-of select="." />
 </xsl:template>
 
 <xsl:template match="text()" mode="syntax" />
