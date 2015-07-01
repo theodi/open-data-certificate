@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
+<%= stylesheet_link_tag 'campaigns', :media => 'print' %>
+
 <% content_for :header_title, "Campaign Details" %>
 <h2><%= @campaign.name %></h2>
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
@@ -21,7 +24,7 @@
     <th>
       Certificate
     </th>
-    <th>
+    <th class='omit-in-print '>
       Action
     </th>
     <th>
@@ -48,10 +51,10 @@
             <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
             <% end %>
         </td>
-        <td>
-            <% if can? :edit, generator.response_set %>
-                <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
-            <% end %>
+        <td class='omit-in-print'>
+          <% if can? :edit, generator.response_set %>
+              <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
+          <% end %>
         </td>
         <td>
             <%= generator.dataset.user_email %>
@@ -67,4 +70,6 @@
 </table>
 <%= paginate @generators %>
 
-<%= link_to 'Download CSV', format: "csv" %>
+<div class='omit-in-print'>
+  <%= link_to 'Download CSV', format: "csv" %>
+</div>
