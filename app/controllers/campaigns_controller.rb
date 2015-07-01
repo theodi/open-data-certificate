@@ -9,10 +9,11 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    @certified = certify(params["certificate_level"])
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate).where(latest: true)
     respond_to do |want|
       want.html do
-        @generators = @generators.page(params[:page]).per(100)
+        @generators = @generators.no_level(params["certificate_level"]).page(params[:page]).per(100)
       end
       want.csv do
         csv = CSV.generate do |csv|
@@ -55,12 +56,14 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    @campaign = CertificationCampaign.where(:user_id => current_user.id).find_or_create_by_name(params[:name])
+    @campaign = CertificationCampaign.create(user_id: current_user.id, name: params[:name])
     if @campaign.valid?
       limit = params[:limit].blank? ? nil : params[:limit]
       CertificateFactory::FactoryRunner.perform_async(feed: params[:url], user_id: current_user.id, limit: limit, campaign: params[:name], jurisdiction: params[:jurisdiction])
       flash[:notice] = "Campaign queued to run"
       redirect_to campaign_path(@campaign)
+    else
+      render :action => 'new'
     end
   end
 

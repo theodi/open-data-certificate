@@ -12,7 +12,7 @@
   <div class="control-group">
     <%= label_tag(:limit, "Certificate limit", class: "control-label") %>
     <div class="controls">
-      <%= number_field_tag :limit %>
+      <%= number_field_tag :limit, nil, min: 0 %>
     </div>
   </div>
 

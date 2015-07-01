@@ -1,9 +1,16 @@
 <% content_for :header_title, "Campaign Details" %>
-<h2><%= @campaign.name %></h2>
+<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
+<%= stylesheet_link_tag 'campaigns', :media => 'print' %>
+
+<h2>Portal: <span style="font-weight:normal"><%= "#{@campaign.name}" %></span></h2>
+<h3>Date: <span style="font-weight:normal">Started at <%= @campaign.created_at.to_s(:db) %></span></h3>
+<h3>Report summary: <span style="font-weight:normal"><%= "#{@certified}" %></span></h3>
+
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 <% if @campaign.incomplete_count > 0 %>
   <p><strong>Currently running</strong></p>
 <% end %>
+
 <ul>
   <li><%= pluralize @campaign.total_count, 'dataset' %> inspected</li>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
@@ -13,6 +20,17 @@
 </ul>
 
 <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post' %>
+
+<div class='omit-in-print'>
+  <h3>Certificates level:</h3>
+  <%= form_tag campaign_path(@campaign), method: :get do %>
+    <%= select_tag "certificate_level", "<option>No level certificates</option>
+    <option>All certificates</option>".html_safe, name: "certificate_level" %>
+    <div class="controls">
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  <% end %>
+</div>
 
 <table class='table table-striped'>
   <tr>
@@ -25,13 +43,15 @@
     <th>
       Source
     </th>
-    <th>
-      Certificate
-    </th>
-    <th>
+    <% if @certified != "Uncertified: missing metadata report" %>
+      <th>
+        Certificate
+      </th>
+    <% end %>
+    <th class='omit-in-print'>
       Action
     </th>
-    <th>
+    <th class='omit-in-print'>
       User
     </th>
     <th>
@@ -50,22 +70,29 @@
         <td>
             <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
         </td>
-        <td>
-            <% if generator.published? %>
-            <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
-            <% end %>
+        <% if @certified != "Uncertified: missing metadata report" %>
+          <td>
+              <% if generator.published? %>
+              <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+              <% end %>
+          </td>
+        <% end %>
+        <td class='omit-in-print'>
+          <% if can? :edit, generator.response_set %>
+              <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
+          <% end %>
         </td>
-        <td>
+        <td class='omit-in-print'>
             <% if can? :edit, generator.response_set %>
                 <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
                 <%= button_to "regenerate", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post' %>
             <% end %>
         </td>
-        <td>
+        <td class='omit-in-print'>
             <%= generator.dataset.user_email %>
         </td>
         <td>
-          <%= missing_responses(generator, "<br />").html_safe %>
+          <%= missing_responses(generator, "<br /><br />").html_safe %>
         </td>
       <% else %>
         <td colspan="5">Processing…</td>
@@ -75,4 +102,6 @@
 </table>
 <%= paginate @generators %>
 
-<%= link_to 'Download CSV', format: "csv" %>
+<div class='omit-in-print'>
+  <%= link_to 'Download CSV', format: "csv" %>
+</div>

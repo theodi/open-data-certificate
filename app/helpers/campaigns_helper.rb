@@ -6,4 +6,12 @@ module CampaignsHelper
              .join(seperator)
   end
 
+  def certify(level)
+    if (level=="No level certificates") || (level==nil)
+      return "Uncertified: missing metadata report"
+    else
+      return nil
+    end
+  end
+
 end
