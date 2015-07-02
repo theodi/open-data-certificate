@@ -22,7 +22,7 @@ class ResponseSet < ActiveRecord::Base
                 }
 
   after_save :update_certificate
-  before_save :update_dataset
+  before_save :update_dataset, :add_missing_responses
 
   attr_accessible :dataset_id
   attr_accessor :documentation_url
@@ -540,6 +540,10 @@ class ResponseSet < ActiveRecord::Base
   def value_for(reference_identifier, value = :to_s)
     relation = responses.joins(:question).eager_load(:answer, :question)
     relation.where(questions: {reference_identifier: survey.meta_map[reference_identifier]}).first.try(value)
+  end
+
+  def add_missing_responses
+    self.missing_responses = incomplete_triggered_mandatory_questions.map { |q| q.text }.join(",")
   end
 
 end

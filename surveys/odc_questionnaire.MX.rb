@@ -24,7 +24,7 @@ survey 'MX',
       :text_as_statement => 'Estos datos se describen como',
       :help_text => 'Ofrezca un URL para que las personas lean sobre el contenido de sus datos abiertos y encuentren más detalles. Puede ser una página dentro de un catálogo más grande como data.gov.uk'
     a_1 'Documentación URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Documentación URL',
       :requirement => ['pilot_1', 'basic_1']
@@ -60,7 +60,7 @@ survey 'MX',
       :text_as_statement => 'Estos datos son publicados en',
       :help_text => 'Ofrezca un URL a un sitio web, esto nos ayuda a agrupar los datos de la misma organización; incluso si las personas registran diferentes nombres.'
     a_1 'URL de quien publica',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de quien publica'
 
@@ -118,7 +118,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_publisherRights, '==', :a_complicated
     a_1 'URL de la documentación de riesgos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la documentación de riesgos',
       :requirement => ['pilot_2']
@@ -142,7 +142,7 @@ survey 'MX',
     condition_B :q_publisherRights, '==', :a_unsure
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Creado originalmente o generado por su curador'
 
     q_thirdPartyOrigin '¿Algunos de los datos fueron extraídos o calculados tomando como fuente otros datos?',
@@ -154,7 +154,7 @@ survey 'MX',
     condition_A :q_publisherRights, '==', :a_unsure
     condition_B :q_publisherOrigin, '==', :a_false
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['basic_3']
 
     label_basic_3 'Ha indicado que los datos no fueron creados o recolectados originalmente por usted por lo que deben de haber sido extraídos o calculados a partir de otras fuentes.',
@@ -179,7 +179,7 @@ survey 'MX',
     condition_C :q_thirdPartyOrigin, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'fuentes de datos abiertos',
       :requirement => ['basic_4']
 
@@ -205,7 +205,7 @@ survey 'MX',
     condition_B :q_publisherOrigin, '==', :a_false
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'obtenidos mediante colaboración colectiva',
       :requirement => ['basic_5']
 
@@ -228,7 +228,7 @@ survey 'MX',
     condition_B :q_publisherOrigin, '==', :a_false
     condition_C :q_crowdsourced, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'sí'
 
     q_claUrl '¿Donde encuentro el acuerdo de licencia para colaboradore (ALC)s?',
       :discussion_topic => :mx_claUrl,
@@ -243,7 +243,7 @@ survey 'MX',
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_1 'URL del acuerdo de licencia para colaboradores',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL del acuerdo de licencia para colaboradores',
       :required => :required
@@ -259,7 +259,7 @@ survey 'MX',
     condition_C :q_crowdsourced, '==', :a_true
     condition_D :q_crowdsourcedContent, '==', :a_true
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['basic_6']
 
     label_basic_6 'Debe obtener el acuerdo de los colaboradores con el ALC que le otorgue el derecho de publicar su obra como datos abiertos.',
@@ -280,7 +280,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_publisherOrigin, '==', :a_false
     a_1 'URL de la documentación de origen de los datos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la documentación de origen de los datos',
       :requirement => ['pilot_3']
@@ -303,7 +303,7 @@ survey 'MX',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'datos legibles por máquina sobre el origen de los datos',
       :requirement => ['standard_2']
 
@@ -325,7 +325,7 @@ survey 'MX',
       :text_as_statement => 'La declaración sobre derechos está en',
       :help_text => 'Proporcione la URL hacia la página donde describe los derechos para reutilizar este conjunto de datos. Dicha página debería incluir una referencia a su licencia, los requisitos de atribución y cita, así como una declaración sobre los derechos de autor que resulten relevantes. Una declaración de derechos ayuda a que la gente entienda qué es lo que puede y qué es lo que no puede hacer con los datos.'
     a_1 'URL de la declaración sobre derechos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la declaración sobre derechos',
       :requirement => ['pilot_4']
@@ -344,18 +344,22 @@ survey 'MX',
       :pick => :one,
       :required => :required,
       :display_type => 'dropdown'
+    a_cc_by 'Reconocimiento Creative Commons',
+      :text_as_statement => 'Reconocimiento Creative Commons'
+    a_cc_by_sa 'Reconocimiento-Compartir igual Creative Commons',
+      :text_as_statement => 'Reconocimiento-Compartir igual Creative Commons'
+    a_cc_zero 'CCZero Creative Commons',
+      :text_as_statement => 'CCZero Creative Commons'
     a_odc_by 'Licencia de reconocimento Open Data Commons',
       :text_as_statement => 'Licencia de reconocimento Open Data Commons'
     a_odc_odbl 'Licencia de base de datos abierta Open Data Commons',
       :text_as_statement => 'Licencia de base de datos abierta Open Data Commons'
     a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
-    a_cc_zero 'Creative Commons CCZero',
-      :text_as_statement => 'Creative Commons CCZero'
     a_na 'No aplicable',
-      :text_as_statement => 'No aplicable'
+      :text_as_statement => ''
     a_other 'Otros…',
-      :text_as_statement => 'Otros…'
+      :text_as_statement => ''
 
     q_dataNotApplicable '¿Por qué no aplica ninguna licencia a estos datos?',
       :discussion_topic => :mx_dataNotApplicable,
@@ -386,7 +390,7 @@ survey 'MX',
     dependency :rule => 'A and B'
     condition_A :q_dataLicence, '==', :a_na
     condition_B :q_dataNotApplicable, '==', :a_waived
-    a_odc_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
+    a_pddl 'Licencia de dedicatoria al dominio público Open Data Commons',
       :text_as_statement => 'Licencia de dedicatoria al dominio público Open Data Commons'
     a_cc0 'Creative Commons CCZero',
       :text_as_statement => 'Creative Commons CCZero'
@@ -404,7 +408,7 @@ survey 'MX',
     condition_B :q_dataNotApplicable, '==', :a_waived
     condition_C :q_dataWaiver, '==', :a_other
     a_1 'URL de la exención',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'URL de la exención'
@@ -431,7 +435,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
     a_1 'URL de otras licencias',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'URL de otras licencias'
@@ -445,7 +449,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_dataLicence, '==', :a_other
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['basic_7']
 
     label_basic_7 'Debe publicar los datos abiertos bajo una licencia abierta a fin de que la demás gente pueda utilizarlos',
@@ -481,7 +485,7 @@ survey 'MX',
     condition_A :q_contentRights, '==', :a_norights
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Identificado como del dominio público',
       :requirement => ['standard_3']
 
@@ -561,7 +565,7 @@ survey 'MX',
     condition_C :q_contentNotApplicable, '==', :a_waived
     condition_D :q_contentWaiver, '==', :a_other
     a_1 'URL de la exención',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'URL de la exención'
@@ -590,7 +594,7 @@ survey 'MX',
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_1 'URL de la licencia',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'URL de la licencia'
@@ -605,7 +609,7 @@ survey 'MX',
     condition_A :q_contentRights, '==', :a_samerights
     condition_B :q_contentLicence, '==', :a_other
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['basic_8']
 
     label_basic_8 'Debe publicar los datos abiertos bajo una licencia abierta a fin de que la demás gente pueda utilizarlos',
@@ -625,7 +629,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_contentRights, '==', :a_mixedrights
     a_1 'URL de la descripción sobre los derechos de los contenidos',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'URL de la descripción sobre los derechos de los contenidos'
@@ -739,7 +743,7 @@ survey 'MX',
     condition_A :q_dataPersonal, '==', :a_summarised
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'auditado por un auditor independiente',
       :requirement => ['standard_8']
 
@@ -761,7 +765,7 @@ survey 'MX',
     condition_A :q_dataPersonal, '==', :a_individual
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Anonimizados'
 
     q_lawfulDisclosure '¿La ley le obliga o le permite publicar estos datos acerca de individuos?',
@@ -775,7 +779,7 @@ survey 'MX',
     condition_B :q_appliedAnon, '==', :a_false
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'deben ser publicados',
       :requirement => ['pilot_5']
 
@@ -798,7 +802,7 @@ survey 'MX',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_1 'URL de la justificación sobre revelación',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la justificación sobre revelación',
       :requirement => ['standard_9']
@@ -824,7 +828,7 @@ survey 'MX',
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_false 'no',
       :text_as_statement => 'no realizó una evaluación de riesgos de privacidad'
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'realizó una evaluación de riesgos de privacidad',
       :requirement => ['pilot_6']
 
@@ -848,7 +852,7 @@ survey 'MX',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     a_1 'URL de la evaluación de riesgos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la evaluación de riesgos',
       :requirement => ['standard_10']
@@ -877,7 +881,7 @@ survey 'MX',
     condition_E :q_riskAssessmentUrl, '!=', {:string_value => '', :answer_reference => '1'}
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'auditado por un auditor independiente',
       :requirement => ['standard_11']
 
@@ -905,7 +909,7 @@ survey 'MX',
     condition_D :q_riskAssessmentExists, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'auditado por un auditor independiente',
       :requirement => ['standard_12']
 
@@ -933,7 +937,7 @@ survey 'MX',
       :help_text => 'Los datos pueden ser encontrados más fácilmente si cuentan con un enlace desde su sitio web principal.',
       :pick => :one
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['standard_13']
 
     label_standard_13 'Usted debe asegurar que las personas puedan encontrar sus datos desde su sitio web principal, de manera que las personas puedan encontrarlos más fácilmente.',
@@ -955,7 +959,7 @@ survey 'MX',
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
       a_1 'URL de la página web',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'URL de la página web'
@@ -967,7 +971,7 @@ survey 'MX',
       :help_text => 'Los datos son encontrados más fácilmente por las personas cuando están en catálogos de datos relevantes. Por ejemplo, académicos, del sector público, de salud; o cuando aparecen en resultados de investigaciones relevantes.',
       :pick => :one
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['standard_14']
 
     label_standard_14 'Usted debería asegurar que las personas puedan encontrar sus datos cuando los busquen en lugares que enlistan datos.',
@@ -989,7 +993,7 @@ survey 'MX',
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
       a_1 'URL del listado',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'URL del listado'
@@ -1001,7 +1005,7 @@ survey 'MX',
       :help_text => 'Cuando usted hace referencia a sus datos dentro de sus propias publicaciones, como son reportes, presentaciones o publicaciones en blogs; usted aporta mayor contexto y ayuda a las personas a encontrarlos y entenderlos mejor.',
       :pick => :one
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['standard_15']
 
     label_standard_15 'Usted debería hacer referencia a sus datos desde sus propias publicaciones, para que las personas estén al tanto de su disponibilidad y su contexto.',
@@ -1023,7 +1027,7 @@ survey 'MX',
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       a_1 'URL de referencia',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'URL de referencia'
@@ -1103,7 +1107,7 @@ survey 'MX',
     condition_A :q_releaseType, '==', :a_series
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Mínimo diariamente'
 
     q_seriesType '¿Qué tipo de serie de conjuntos de datos es ésta?',
@@ -1134,7 +1138,7 @@ survey 'MX',
     condition_C :q_seriesType, '==', :a_dumps
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Está disponible',
       :requirement => ['exemplar_4']
 
@@ -1252,7 +1256,7 @@ survey 'MX',
     condition_A :q_releaseType, '==', :a_service
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Vertederos de datos',
       :requirement => ['standard_19']
 
@@ -1326,7 +1330,7 @@ survey 'MX',
     condition_B :q_timeSensitive, '!=', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Corregido',
       :requirement => ['standard_21']
 
@@ -1348,7 +1352,7 @@ survey 'MX',
       :text_as_statement => 'La calidad de los datos está documentada en',
       :help_text => 'Ofrezca un URL donde las personas puedan informarse sobre la calidad de sus datos. Las personas aceptan que los errores son inevitables, desde un malfuncionamiento del equipo o errores que suceden en la migración de sistemas. Usted debe ser abierto sobre la calidad para que las personas puedan juzgar qué tanto confían en sus datos.'
     a_1 'URL de la documentación de calidad de los datos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la documentación de calidad de los datos',
       :requirement => ['standard_22']
@@ -1365,7 +1369,7 @@ survey 'MX',
       :text_as_statement => 'El proceso de control de calidad se describe en',
       :help_text => 'Ofrezca un URL para que las personas puedan conocer sobre las revisiones en curso de sus datos, ya sean automáticos o manuales. Esto les reasegura que usted toma la calidad seriamente y que alentará mejoras que beneficien a todos.'
     a_1 'URL de la descripción del proceso de control de calidad',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la descripción del proceso de control de calidad',
       :requirement => ['exemplar_8']
@@ -1388,7 +1392,7 @@ survey 'MX',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Respaldo fuera del sitio',
       :requirement => ['standard_23']
 
@@ -1406,7 +1410,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'URL de documentación de disponibilidad del servicio',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de documentación de disponibilidad del servicio',
       :requirement => ['standard_24']
@@ -1426,7 +1430,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'URL de estado de servicio',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de estado de servicio',
       :requirement => ['exemplar_9']
@@ -1493,7 +1497,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
     a_1 'URL de conjunto de datos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de conjunto de datos',
       :requirement => ['basic_9', 'pilot_12']
@@ -1571,7 +1575,7 @@ survey 'MX',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_current
     a_1 'URL actual del conjunto de datos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL actual del conjunto de datos',
       :required => :required
@@ -1601,7 +1605,7 @@ survey 'MX',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_list
     a_1 'URL de versión de lista',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de versión de lista',
       :required => :required
@@ -1614,7 +1618,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'URL del endpoint',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL del endpoint',
       :requirement => ['basic_11', 'standard_28']
@@ -1686,7 +1690,7 @@ survey 'MX',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_current
     a_1 'URL del dump actual',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL del dump actual',
       :required => :required
@@ -1718,7 +1722,7 @@ survey 'MX',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_list
     a_1 'URL de lista de dumps',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de lista de dumps',
       :required => :required
@@ -1732,7 +1736,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_changeFeed, '==', :a_true
     a_1 'URL de fuente de cambios',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de fuente de cambios',
       :required => :required
@@ -1749,7 +1753,7 @@ survey 'MX',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Legible por máquinas',
       :requirement => ['pilot_14']
 
@@ -1768,7 +1772,7 @@ survey 'MX',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Un formato abierto estandar',
       :requirement => ['standard_30']
 
@@ -1937,7 +1941,7 @@ survey 'MX',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Identificadores persistentes',
       :requirement => ['standard_33']
 
@@ -1989,7 +1993,7 @@ survey 'MX',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '==', :a_service
     a_1 'URL de servicio de resolución de identificadores',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de servicio de resolución de identificadores',
       :requirement => ['standard_35']
@@ -2010,7 +2014,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_identifiers, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'sí'
 
     q_reliableExternalUrls '¿Es la información de terceros confiable?',
       :discussion_topic => :reliableExternalUrls,
@@ -2021,7 +2025,7 @@ survey 'MX',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_existingExternalUrls, '==', :a_true
     a_false 'no'
-    a_true 'yes'
+    a_true 'sí'
 
     q_externalUrls '¿Sus datos utilizan los URL de terceros?',
       :discussion_topic => :externalUrls,
@@ -2035,7 +2039,7 @@ survey 'MX',
     condition_C :q_reliableExternalUrls, '==', :a_true
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Referencias en estos datos',
       :requirement => ['exemplar_16']
 
@@ -2061,7 +2065,7 @@ survey 'MX',
       :pick => :one
     a_false 'no',
       :text_as_statement => ''
-    a_true 'yes',
+    a_true 'sí',
       :text_as_statement => 'Lectura mecánica',
       :requirement => ['exemplar_17']
 
@@ -2077,7 +2081,7 @@ survey 'MX',
       :text_as_statement => 'Estos datos pueden ser verificados usando',
       :help_text => 'Si usted entrega datos importantes a las personas, éstas deberían tener la posibilidad de revisar que lo que reciben es lo mismo que usted publica. Por ejemplo, usted puede firmar digitalmente los datos que publica, para que las personas pueden ver si han sido alterados.'
     a_1 'URL de proceso de verificación',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de proceso de verificación',
       :requirement => ['exemplar_18']
@@ -2315,7 +2319,7 @@ survey 'MX',
       :display_on_certificate => true,
       :text_as_statement => 'La documentación técnica para estos datos está en'
     a_1 'URL de documentación técnica',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de documentación técnica',
       :requirement => ['pilot_19']
@@ -2332,7 +2336,7 @@ survey 'MX',
       :pick => :one,
       :required => :standard
     a_false 'no'
-    a_true 'yes'
+    a_true 'sí'
 
     q_schemaDocumentationUrl '¿Dónde está la documentación acerca de los vocabularios de sus datos?',
       :discussion_topic => :schemaDocumentationUrl,
@@ -2341,7 +2345,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
     a_1 'URL de la documentación de esquemas',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la documentación de esquemas',
       :requirement => ['standard_54']
@@ -2359,7 +2363,7 @@ survey 'MX',
       :pick => :one,
       :required => :standard
     a_false 'no'
-    a_true 'yes'
+    a_true 'sí'
 
     q_codelistDocumentationUrl '¿Dónde está documentado algún código en tus datos?',
       :discussion_topic => :codelistDocumentationUrl,
@@ -2368,7 +2372,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
     a_1 'URL documentación de lista de códigos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL documentación de lista de códigos',
       :requirement => ['standard_55']
@@ -2390,7 +2394,7 @@ survey 'MX',
       :text_as_statement => 'Encuentre la manera de contactar a alguien sobre estos datos en',
       :help_text => 'Ofrezca un URL a una página que describa cómo las personas pueden contactar a alguien si tienen dudas sobre los datos'
     a_1 'URL de contacto',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de contacto',
       :requirement => ['pilot_20']
@@ -2406,7 +2410,7 @@ survey 'MX',
       :display_on_certificate => true,
       :text_as_statement => 'Encuentre cómo sugerir mejoras a una publicación en'
     a_1 'URL de sugerencia de mejoras',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de sugerencia de mejoras',
       :requirement => ['pilot_21']
@@ -2422,7 +2426,7 @@ survey 'MX',
       :display_on_certificate => true,
       :text_as_statement => 'Encuentre a dónde enviar preguntas sobre privacidad'
     a_1 'Documentación de contactos de confidencialidad',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Documentación de contactos de confidencialidad',
       :requirement => ['pilot_22']
@@ -2437,7 +2441,7 @@ survey 'MX',
       :discussion_topic => :socialMedia,
       :pick => :one
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['standard_56']
 
     label_standard_56 'Usted debería utilizar redes sociales para llegar a las personas que usan sus datos y descubrir cómo están siendo utilizados sus datos.',
@@ -2459,7 +2463,7 @@ survey 'MX',
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
       a_1 'URL de redes sociales',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'URL de redes sociales'
@@ -2472,7 +2476,7 @@ survey 'MX',
       :text_as_statement => 'Discuta estos datos en',
       :help_text => 'De un URL a su fórum o lista de correos donde las personas puedan hablar sobre sus datos'
     a_1 'URL de fórums o lista de correos',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de fórums o lista de correos',
       :requirement => ['standard_57']
@@ -2491,7 +2495,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'URL de instrucciones de corrección',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de instrucciones de corrección',
       :requirement => ['standard_58']
@@ -2511,7 +2515,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'URL de notificación de correcciones',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de notificación de correcciones',
       :requirement => ['standard_59']
@@ -2529,7 +2533,7 @@ survey 'MX',
       :help_text_more_url => 'http://theodi.org/guide/engaging-reusers',
       :pick => :one
     a_false 'no'
-    a_true 'yes',
+    a_true 'sí',
       :requirement => ['exemplar_19']
 
     label_exemplar_19 'Usted debería construir una comunidad de personas alrededor de sus datos para alentar un amplio uso de sus datos',
@@ -2546,7 +2550,7 @@ survey 'MX',
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_true
     a_1 'URL de la página principal del equipo de compromiso comunitario',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de la página principal del equipo de compromiso comunitario',
       :required => :required
@@ -2561,7 +2565,7 @@ survey 'MX',
       :text_as_statement => 'Herramientas que ayudan a utilizar estos datos se enlistan en',
       :help_text => 'Ofrezca un URL que enliste las herramientas que usted conoce o recomienda, de manera que las personas las utilicen cuando trabajen con sus datos'
     a_1 'URL de herramientas',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'URL de herramientas',
       :requirement => ['exemplar_20']

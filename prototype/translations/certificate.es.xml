@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<questionnaire version="0.7" xml:lang="en">
+<questionnaire version="0.7" xml:lang="en" yes="sí">
    <levels>
       <level id="basic">Un comienzo fantástico en los pasos básicos para la publicación de datos abiertos. Se requiere mucho para llegar aquí.</level>
       <level id="pilot">Existe un esfuerzo extra para apoyar y promover la retroalimentación de las personas que usan estos datos abiertos.</level>

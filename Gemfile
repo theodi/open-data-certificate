@@ -115,3 +115,5 @@ gem 'google_drive'
 gem 'pry-remote'
 gem 'memoist'
 gem 'validate_url'
+gem 'sidekiq'
+gem 'sinatra', :require => nil

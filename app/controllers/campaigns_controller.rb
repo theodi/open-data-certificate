@@ -1,4 +1,5 @@
 class CampaignsController < ApplicationController
+  include CampaignsHelper
 
   before_filter :authenticate_user!
   before_filter :get_campaign, except: [:index]
@@ -20,7 +21,8 @@ class CampaignsController < ApplicationController
             "Published?",
             "Documentation URL",
             "Certificate URL",
-            "User"
+            "User",
+            "Missing responses"
           ]
           @generators.each do |gen|
             csv << [
@@ -28,7 +30,8 @@ class CampaignsController < ApplicationController
               gen.certificate.published?,
               gen.dataset.documentation_url,
               dataset_certificate_url(gen.dataset, gen.certificate),
-              gen.dataset.user_email
+              gen.dataset.user_email,
+              missing_responses(gen)
             ]
           end
         end

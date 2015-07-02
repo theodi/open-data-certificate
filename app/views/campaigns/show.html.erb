@@ -27,6 +27,9 @@
     <th>
       User
     </th>
+    <th>
+      Missing responses
+    </th>
   </tr>
   <% @generators.each do |generator| %>
     <tr>
@@ -52,6 +55,9 @@
         </td>
         <td>
             <%= generator.dataset.user_email %>
+        </td>
+        <td>
+          <%= missing_responses(generator, "<br />").html_safe %>
         </td>
       <% else %>
         <td colspan="4">Processing…</td>
