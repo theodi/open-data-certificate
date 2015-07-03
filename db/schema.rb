@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150623083433) do
+ActiveRecord::Schema.define(:version => 20150702134537) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -82,10 +82,11 @@ ActiveRecord::Schema.define(:version => 20150623083433) do
 
   create_table "certification_campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "duplicate_count", :default => 0
     t.integer  "user_id"
+    t.string   "jurisdiction",    :default => "gb"
   end
 
   create_table "claims", :force => true do |t|

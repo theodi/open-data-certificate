@@ -29,13 +29,17 @@ class CertificationCampaign < ActiveRecord::Base
 
   def rerun!
     certificate_generators.each do |c|
-      dataset = Dataset.find(c.dataset.id)
       generator = CertificateGenerator.create(
         request: c.request,
         user: user,
         certification_campaign: self
       )
-      generator.sidekiq_delay.generate(c.survey.access_code, true, dataset)
+      jurs = if c.survey
+        c.survey.access_code
+      else
+        jurisdiction
+      end
+      generator.sidekiq_delay.generate(jurs, true, c.dataset)
     end
   end
 
