@@ -1,11 +1,16 @@
 class CertificationCampaign < ActiveRecord::Base
   include Ownership
+
+  attr_accessor :limit, :url, :jurisdiction
+
   validates :name, uniqueness: true, presence: true
+  validates :url, :jurisdiction, presence: true
+  validates :limit, numericality: { greater_than: 0 }, allow_blank: true
 
   has_many :certificate_generators
   belongs_to :user
 
-  attr_accessible :name
+  attr_accessible :name, :limit, :url, :jurisdiction
 
   def total_count
     generated_count + duplicate_count

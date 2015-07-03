@@ -14,4 +14,8 @@ module CampaignsHelper
     end
   end
 
+  def error_message_for(campaign, field)
+    campaign.errors[field].join(', ') if campaign.errors[field]
+  end
+
 end
