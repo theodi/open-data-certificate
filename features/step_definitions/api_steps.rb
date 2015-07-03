@@ -38,7 +38,7 @@ Given(/^I apply a campaign "(.*?)"$/) do |tag|
   @campaign = tag
 end
 
-Given(/^I request (\d+) certifcates with the campaign "(.*?)"$/) do |num, tag|
+Given(/^I request (\d+) certificates with the campaign "(.*?)"$/) do |num, tag|
   num.to_i.times do |i|
     steps %Q{
       Given I want to create a certificate via the API
