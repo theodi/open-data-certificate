@@ -2,11 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    
+
     can :manage, ResponseSet do |response_set|
       response_set.nil? || response_set.unowned_or_by?(user)
     end
-    
+
     can :read, Dataset do |dataset|
       dataset.visible? || user.try(:admin?) || dataset.owned_by?(user)
     end
@@ -36,11 +36,11 @@ class Ability
 
     can :destroy, Transfer, user: user
 
-    can :read, CertificateGenerator do |generator|
+    can :manage, CertificateGenerator do |generator|
       generator.owned_by?(user)
     end
 
-    can :read, CertificationCampaign do |campaign|
+    can :manage, CertificationCampaign do |campaign|
       campaign.owned_by?(user)
     end
 
@@ -53,5 +53,4 @@ class Ability
     end
 
   end
-
 end

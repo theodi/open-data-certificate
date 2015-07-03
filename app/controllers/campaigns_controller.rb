@@ -41,7 +41,7 @@ class CampaignsController < ApplicationController
   end
 
   def rerun
-    authorize! :manage, :all
+    authorize! :manage, @campaign
 
     @campaign.certificate_generators.update_all(latest: false)
     @campaign.rerun!
