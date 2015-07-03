@@ -16,7 +16,7 @@ class RemoveAutocompleteOverrideDuplicates < ActiveRecord::Migration
       SQL
       delete(delete_query)
     end
-    #remove_index :autocomplete_override_messages, name: :i_on_response_set_id_and_question_id
+    remove_index :autocomplete_override_messages, name: :i_on_response_set_id_and_question_id
     add_index :autocomplete_override_messages, [:response_set_id, :question_id], unique: true, name: :i_on_response_set_id_and_question_id
   end
 
