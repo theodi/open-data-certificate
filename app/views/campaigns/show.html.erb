@@ -1,12 +1,19 @@
 <% content_for :header_title, "Campaign Details" %>
 <h2><%= @campaign.name %></h2>
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
+<% if @campaign.incomplete_count > 0 %>
+  <p><strong>Currently running</strong></p>
+<% end %>
 <ul>
   <li><%= pluralize @campaign.total_count, 'dataset' %> inspected</li>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
+  <li><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
 </ul>
+
+<%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post' %>
+
 <table class='table table-striped'>
   <tr>
     <th>
@@ -51,6 +58,7 @@
         <td>
             <% if can? :edit, generator.response_set %>
                 <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
+                <%= button_to "regenerate", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post' %>
             <% end %>
         </td>
         <td>
@@ -60,7 +68,7 @@
           <%= missing_responses(generator, "<br />").html_safe %>
         </td>
       <% else %>
-        <td colspan="4">Processing…</td>
+        <td colspan="5">Processing…</td>
       <% end %>
     </tr>
   <% end %>

@@ -124,6 +124,18 @@ Given(/^I run the rake task to create certificates$/) do
   execute_rake('certificate_factory', 'certificates')
 end
 
+Given(/^the campaign is created$/) do
+  CertificateFactory::Factory.new("feed"=>@url,
+      "user_id"=>@api_user.id,
+      "limit"=>@limit,
+      "campaign"=>@campaign,
+      "jurisdiction"=>"cert-generator").build
+end
+
+When(/^the certificates are created$/) do
+  Sidekiq::Worker.drain_all
+end
+
 Given(/^I only want (\d+) datasets$/) do |limit|
   @limit = limit
 end

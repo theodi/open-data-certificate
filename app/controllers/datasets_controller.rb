@@ -76,7 +76,7 @@ class DatasetsController < ApplicationController
     @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
-      case params[:format] 
+      case params[:format]
       when 'csv'
         @datasets = datasets
       else
@@ -210,6 +210,20 @@ class DatasetsController < ApplicationController
     dataset_model = Dataset.find(params[:dataset_id])
     result = CertificateGenerator.update(dataset_model, dataset, jurisdiction, current_user)
     render json: result, status: result[:success] ? :ok : :unprocessable_entity
+  end
+
+  def regenerate
+    authorize! :manage, :all
+
+    dataset = Dataset.find(params[:dataset_id])
+    jurisdiction = params[:jurisdiction]
+    result = CertificateGenerator.update(dataset, nil, jurisdiction, current_user)
+
+    begin
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+    end
   end
 
   def schema

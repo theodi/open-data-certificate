@@ -9,7 +9,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @generators = @campaign.certificate_generators.includes(:dataset, :certificate)
+    @generators = @campaign.certificate_generators.includes(:dataset, :certificate).where(latest: true)
     respond_to do |want|
       want.html do
         @generators = @generators.page(params[:page]).per(100)
@@ -40,10 +40,20 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def rerun
+    authorize! :manage, @campaign
+
+    @campaign.certificate_generators.update_all(latest: false)
+    @campaign.rerun!
+    flash[:notice] = "Campaign queued for rerun"
+
+    redirect_to campaign_path(@campaign)
+  end
+
   private
 
   def get_campaign
-    @campaign = CertificationCampaign.find(params[:id])
+    @campaign = CertificationCampaign.find(params[:id] || params[:campaign_id])
     authorize! :read, @campaign
   end
 

@@ -12,11 +12,35 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def generated_count
-    certificate_generators.count
+    current.count
   end
 
   def published_count
-    certificate_generators.joins(:certificate).merge(Certificate.published).count
+    current.joins(:certificate).merge(Certificate.published).count
+  end
+
+  def current
+    certificate_generators.where(latest: true)
+  end
+
+  def incomplete_count
+    current.where(completed: nil).count
+  end
+
+  def rerun!
+    certificate_generators.each do |c|
+      generator = CertificateGenerator.create(
+        request: c.request,
+        user: user,
+        certification_campaign: self
+      )
+      jurs = if c.survey
+        c.survey.access_code
+      else
+        jurisdiction
+      end
+      generator.sidekiq_delay.generate(jurs, true, c.dataset)
+    end
   end
 
 end
