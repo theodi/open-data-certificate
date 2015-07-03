@@ -81,11 +81,11 @@ Given(/^I visit the path to create a new campaign$/) do
 end
 
 Given(/^I enter the feed URL in the URL field$/) do
-  fill_in "url", with: @url
+  fill_in "CKAN atom feed", with: @url
 end
 
 Given(/^I enter "(.*?)" in the campaign field$/) do |name|
-  fill_in "name", with: name
+  fill_in "Campaign name", with: name
 end
 
 Given(/^I choose a limit of (\d+) certificates$/) do |limit|
