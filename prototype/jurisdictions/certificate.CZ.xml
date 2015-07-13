@@ -143,6 +143,7 @@
          <question id="databaseRights" display="Databázová práva na datovou sadu">
             <label>Vztahují se na vaši datovou sadu databázová práva?</label>
             <yesno yes="existují" no="neexistují"/>
+            <help>Na každou datovou sadu se v českém právním systému dá pohlížet dvojím způsobem, jako na databázi a jako na autorské dílo. V této otázce nás zajímá pohled první: každá databáze, na jejíž sestavení bylo vynaloženo netriviální úsilí, je chráněna databázovými právy.</help>
          </question>
          <if test="this.databaseRights() === 'true'">
             <question id="databaseRightsLicenseType" display="Licencování databázových práv">
@@ -154,6 +155,7 @@
                 <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
                 <option value="odc-pddl">Open Data Commons Public Domain Dedication and License (PDDL)</option>
                 <option value="other" display="">jinak…</option>
+                <help>Pokud chcete svou datovou sadu zveřejnit coby otevřená data, musíte mít otevřenou licenci pro databázová práva, která se na ni vztahují.</help>
             </question>
          </if>
          <if test="this.databaseRights() === 'other'">
@@ -191,6 +193,7 @@
          <question id="databaseCopyright" display="Autorská práva na datovou sadu">
             <label>Vztahují se na datovou sadu jako takovou autorská práva?</label>
             <yesno yes="existují" no="neexistují"/>
+            <help>Na vaši datovou sadu se také můžeme dívat pohledem autorského zákona. Ten se na ni vztahuje potenciálně hned dvakrát: jednak na datovou sadu jako celek, jednak na její obsah. V této otázce nás zajímá první pohled, tedy celá datová sada coby autorské dílo.</help>
          </question>
          <if test="this.databaseCopyright() === 'false'">
             <question id="databaseCopyrightNAReason" display="Proč autorská práva na datovou sadu neexistují?">
@@ -210,6 +213,7 @@
                 <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
                 <option value="cc-zero">Creative Commons CC0</option>
                 <option value="other" display="">jinak…</option>
+                <help>Pokud chcete svou datovou sadu zveřejnit coby otevřená data, musíte mít otevřenou licenci pro autorská práva, která se na ni vztahují.</help>
             </question>
          </if>
          <if test="this.databaseCopyrightLicenseType() === 'other'">
@@ -222,6 +226,7 @@
          <question id="databaseContentCopyright" display="Autorská práva na obsah datové sady">
             <label>Vztahují se na obsah datové sady autorská práva?</label>
             <yesno yes="existují" no="neexistují"/>
+            <help>Po databázových právech a autorských právech na datovou sadu jako celek nás zajímá ještě třetí možný typ právní ochrany: autorská práva na díla uložená ve vaší datové sadě.</help>
          </question>
          <if test="this.databaseContentCopyright() === 'false'">
             <question id="databaseContentCopyrightNAReason" display="Proč autorská práva na obsah neexistují?">
