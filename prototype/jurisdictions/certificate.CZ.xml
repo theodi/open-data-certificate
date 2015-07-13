@@ -135,9 +135,9 @@
          <question id="copyrightURL" display="Právní prohlášení">
             <label>Kde jste zveřejnili prohlášení o právech k této datové sadě?</label>
             <input type="url" placeholder="URL právního prohlášení"/>
-            <help>Uveďte URL dokumentu, který popisuje práva k opětovnému užití této datové sady. Dokument by měl odkazovat na text licence, popsat vaše požadavky na uvádění původu, a obsahovat prohlášení o relevantních autorských a databázových právech. Právní prohlášení pomáhá uživatelům pochopit, co všechno s daty mohou a nemohou dělat.</help>
+            <help>Uveďte URL dokumentu, který popisuje práva k opětovnému užití této datové sady. Dokument by měl odkazovat na text licence, popsat vaše požadavky na uvádění autora a původu dat, a obsahovat prohlášení o relevantních autorských a databázových právech. Právní prohlášení pomáhá uživatelům pochopit, co všechno s daty mohou a nemohou dělat.</help>
             <requirement level="pilot">
-               <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autorství.</requirement>
+               <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autora a původu díla.</requirement>
          </question>
          <!-- Database Rights -->
          <question id="databaseRights" display="Databázová práva na datovou sadu">
@@ -269,16 +269,16 @@
                         <strong>Informace o použité licenci k autorskoprávně chráněnému obsahu by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.
                     </requirement>
                   </option>
-                  <option value="attribution" display="způsob uvádění autorství">
-                     <label>způsob uvádění autorství</label>
+                  <option value="attribution" display="způsob uvádění původu díla">
+                     <label>způsob uvádění původu díla</label>
                      <requirement level="standard">
-                        <strong>Informace o autorství by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.
+                        <strong>Informace o původu díla by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji.
                     </requirement>
                   </option>
-                  <option value="attributionURL" display="URL pro uvedení autorství">
-                     <label>URL pro uvedení autorství</label>
+                  <option value="attributionURL" display="URL pro uvedení původu díla">
+                     <label>URL pro uvedení původu díla</label>
                      <requirement level="standard">
-                        <strong>Uvedení autora by mělo být strojově čitelné</strong>, aby se dal zpracovat automatickými nástroji.
+                        <strong>Uvedení původu díla by mělo být strojově čitelné</strong>, aby se dal zpracovat automatickými nástroji.
                     </requirement>
                   </option>
                   <option value="copyrightNotice" display="informace o autorských právech">
@@ -313,7 +313,7 @@
                     </requirement>
                   </option>
                </checkboxset>
-               <help>Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést vaše autorství.</help>
+               <help>Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést jejich autora a původ.</help>
             </question>
          </if>
       </group>
