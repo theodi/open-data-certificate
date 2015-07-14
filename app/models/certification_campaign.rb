@@ -49,7 +49,6 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def validate_extra_details?
-    puts version.to_i
     version.to_i > 1
   end
 
