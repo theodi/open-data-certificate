@@ -1,7 +1,8 @@
 class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
-  attr_accessor :limit, :url, :jurisdiction, :version
+  attr_accessor :url, :jurisdiction, :version
+  attr_writer :limit
 
   validates :name, uniqueness: true, presence: true
   validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
@@ -50,6 +51,10 @@ class CertificationCampaign < ActiveRecord::Base
 
   def validate_extra_details?
     version.to_i > 1
+  end
+
+  def limit
+    @limit.to_i unless @limit.blank?
   end
 
 end
