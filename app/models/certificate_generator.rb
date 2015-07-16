@@ -20,8 +20,9 @@ class CertificateGenerator < ActiveRecord::Base
     repeater: 'repeating'
   }
 
-  def self.no_level(level)
-    if (level=="No level certificates") || (level==nil)
+  def self.filter(level)
+    case(level)
+    when "uncertified"
       joins(:certificate).where(certificates: {attained_level: "none"})
     else
       self

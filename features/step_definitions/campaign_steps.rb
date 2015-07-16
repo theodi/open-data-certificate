@@ -67,7 +67,7 @@ Then(/^my campaigns should be shown as pending$/) do
 end
 
 When(/^I should see (\d+) datasets?$/) do |num|
-  assert_equal num.to_i + 1, page.all(:css, 'table tr').count
+  assert_equal num.to_i, page.all(:css, 'table tbody tr').count
 end
 
 Then(/^I should see the correct generators$/) do

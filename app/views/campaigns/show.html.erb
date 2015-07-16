@@ -1,15 +1,13 @@
-<% content_for :header_title, "Campaign Details" %>
-<%= stylesheet_link_tag 'application', :media => 'screen, projection' %>
+<% content_for :header_title, "Certification campaign: #{@campaign.name}" %>
+<%#= stylesheet_link_tag 'application', :media => 'screen, projection' %>
 <%= stylesheet_link_tag 'campaigns', :media => 'print' %>
 
-<h2>Portal: <span style="font-weight:normal"><%= "#{@campaign.name}" %></span></h2>
-<h3>Date: <span style="font-weight:normal">Started at <%= @campaign.created_at.to_s(:db) %></span></h3>
-<h3>Report summary: <span style="font-weight:normal"><%= "#{@certified}" %></span></h3>
+<h3><%= report_heading(@certificate_level) %></h3>
+<div class='omit-in-print'>
+  <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
+</div>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
-<% if @campaign.incomplete_count > 0 %>
-  <p><strong>Currently running</strong></p>
-<% end %>
 
 <ul>
   <li><%= pluralize @campaign.total_count, 'dataset' %> inspected</li>
@@ -19,20 +17,19 @@
   <li><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
 </ul>
 
-<%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post' %>
-
 <div class='omit-in-print'>
-  <h3>Certificates level:</h3>
-  <%= form_tag campaign_path(@campaign), method: :get do %>
-    <%= select_tag "certificate_level", "<option>No level certificates</option>
-    <option>All certificates</option>".html_safe, name: "certificate_level" %>
-    <div class="controls">
-      <button type="submit" class="btn">Submit</button>
-    </div>
+  <%= form_tag campaign_path(@campaign), method: :get, class: 'form-inline' do %>
+    <label for="certificate_level">Show:</label>
+    <%= select_tag :certificate_level, options_for_select({"Uncertified datasets" => :uncertified, "All datasets" => :all}, @certificate_level), name: "certificate_level" %>
+    <button type="submit" class="btn">Filter</button>
   <% end %>
 </div>
 
+<% if @campaign.incomplete_count > 0 %>
+  <p><strong>Currently running</strong></p>
+<% end %>
 <table class='table table-striped'>
+  <thead>
   <tr>
     <th>
       Success
@@ -43,14 +40,11 @@
     <th>
       Source
     </th>
-    <% if @certified != "Uncertified: missing metadata report" %>
+    <% if @certificate_level == "all" %>
       <th>
         Certificate
       </th>
     <% end %>
-    <th class='omit-in-print'>
-      Action
-    </th>
     <th class='omit-in-print'>
       User
     </th>
@@ -58,6 +52,8 @@
       Missing responses
     </th>
   </tr>
+  </thead>
+  <tbody>
   <% @generators.each do |generator| %>
     <tr>
       <td>
@@ -68,26 +64,21 @@
       </td>
       <% if generator.completed? %>
         <td>
-            <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+          <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+          <div class='actions omit-in-print'>
+          <% if can? :edit, generator.response_set %>
+            <%= button_to "Edit", continue_path(generator.response_set), method: 'post', class: 'btn' %>
+            <%= button_to "Rerun certification", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post', class: 'btn' %>
+          <% end %>
+          </div>
         </td>
-        <% if @certified != "Uncertified: missing metadata report" %>
+        <% if @certificate_level == "all" %>
           <td>
               <% if generator.published? %>
               <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
               <% end %>
           </td>
         <% end %>
-        <td class='omit-in-print'>
-          <% if can? :edit, generator.response_set %>
-              <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
-          <% end %>
-        </td>
-        <td class='omit-in-print'>
-            <% if can? :edit, generator.response_set %>
-                <%= button_to "edit", continue_path(generator.response_set), method: 'post' %>
-                <%= button_to "regenerate", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post' %>
-            <% end %>
-        </td>
         <td class='omit-in-print'>
             <%= generator.dataset.user_email %>
         </td>
@@ -99,6 +90,7 @@
       <% end %>
     </tr>
   <% end %>
+  </tbody>
 </table>
 <%= paginate @generators %>
 
