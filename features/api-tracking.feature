@@ -15,7 +15,7 @@ Feature: Track certificate generation campaigns
     Then my certificate should not be linked to a campaign
 
   Scenario: Link multiple requests with the same name to the same campaign
-    Given I request 2 certifcates with the campaign "fred"
+    Given I request 2 certificates with the campaign "fred"
     Then there should be 1 campaign
     And that campaign should have 2 certificate generators
 

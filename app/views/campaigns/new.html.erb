@@ -1,0 +1,47 @@
+<% content_for :header_title, "New Campaign" %>
+
+<%#= error_messages_for(@campaign) %>
+
+<%= form_for @campaign, url: campaigns_path, method: :post do |f| %>
+
+  <%= hidden_field_tag :version, 2 %>
+
+  <div class="control-group">
+    <%= f.label(:name, "Campaign name", class: "control-label") %>
+    <div class="controls">
+      <%= f.text_field :name %>
+      <%= error_message_for(@campaign, :name) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:limit, "Certificate limit", class: "control-label") %>
+    <div class="controls">
+      <%= f.number_field :limit, min: 0 %>
+      <%= error_message_for(@campaign, :limit) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:url, "CKAN atom feed", class: "control-label") %>
+    <div class="controls">
+      <%= f.text_field :url, class: "span6" %>
+      <%= error_message_for(@campaign, :url) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:jurisdiction, "Jurisdiction", class: "control-label") %>
+    <div class="controls">
+      <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction)) %>
+      <%= error_message_for(@campaign, :jurisdiction) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  </div>
+
+<% end %>

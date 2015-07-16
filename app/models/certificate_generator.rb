@@ -20,6 +20,15 @@ class CertificateGenerator < ActiveRecord::Base
     repeater: 'repeating'
   }
 
+  def self.filter(level)
+    case(level)
+    when "uncertified"
+      joins(:certificate).where(certificates: {attained_level: "none"})
+    else
+      scoped
+    end
+  end
+
   def self.schema(request)
     survey = Survey.newest_survey_for_access_code request['jurisdiction']
     return {errors: ['Jurisdiction not found']} if !survey

@@ -34,7 +34,6 @@ Feature: Rerun campaigns
     Then I should be redirected to the campaign page for "brian"
     And I should see the correct generators
 
-  @sidekiq_fake
   Scenario: Rerun campaign button shows correct numbers
     Given I have a campaign "brian"
     And that campaign has 5 certificates

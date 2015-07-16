@@ -1,11 +1,17 @@
 class CertificationCampaign < ActiveRecord::Base
   include Ownership
+
+  attr_accessor :url, :jurisdiction, :version
+  attr_writer :limit
+
   validates :name, uniqueness: true, presence: true
+  validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
+  validates :limit, numericality: { greater_than: 0 }, allow_blank: true
 
   has_many :certificate_generators
   belongs_to :user
 
-  attr_accessible :name
+  attr_accessible :name, :limit, :url, :jurisdiction, :version
 
   def total_count
     generated_count + duplicate_count
@@ -41,6 +47,14 @@ class CertificationCampaign < ActiveRecord::Base
       end
       generator.sidekiq_delay.generate(jurs, true, c.dataset)
     end
+  end
+
+  def validate_extra_details?
+    version.to_i > 1
+  end
+
+  def limit
+    @limit.to_i unless @limit.blank?
   end
 
 end

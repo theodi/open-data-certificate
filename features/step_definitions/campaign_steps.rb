@@ -24,8 +24,12 @@ And (/^the campaign should be owned by my user account$/) do
 end
 
 Then(/^that campaign should have the name "(.*?)"$/) do |name|
-  campaign = CertificationCampaign.find_by_name(name)
-  assert_not_equal nil, campaign
+  @campaign = CertificationCampaign.find_by_name(name)
+  assert_not_equal nil, @campaign
+end
+
+Then(/^that campaign should have (\d+) generators$/) do |num|
+  assert_equal num.to_i, @campaign.certificate_generators.count
 end
 
 Given(/^I have a campaign "(.*?)"$/) do |name|
@@ -63,11 +67,35 @@ Then(/^my campaigns should be shown as pending$/) do
 end
 
 When(/^I should see (\d+) datasets?$/) do |num|
-  assert_equal num.to_i + 1, page.all(:css, 'table tr').count
+  assert_equal num.to_i, page.all(:css, 'table tbody tr').count
 end
 
 Then(/^I should see the correct generators$/) do
   @num.times do |i|
     assert_match "http://data.example.com/datasets/#{i}", page.body
   end
+end
+
+Given(/^I visit the path to create a new campaign$/) do
+  visit new_campaign_path
+end
+
+Given(/^I enter the feed URL in the URL field$/) do
+  fill_in "CKAN atom feed", with: @url
+end
+
+Given(/^I enter "(.*?)" in the campaign field$/) do |name|
+  fill_in "Campaign name", with: name
+end
+
+Given(/^I choose a limit of (\d+) certificates$/) do |limit|
+  fill_in "limit", with: limit
+end
+
+Given(/^I click "(.*?)"$/) do |button|
+  click_on button
+end
+
+Given(/^I select "(.*?)" from the juristiction field$/) do |jurisdiction|
+  select(jurisdiction, :from => "Jurisdiction")
 end

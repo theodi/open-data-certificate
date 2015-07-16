@@ -23,10 +23,6 @@ When(/^I change the underlying dataset$/) do
   }
 end
 
-When(/^I click "(.*?)"$/) do |text|
-  click_on(text)
-end
-
 Given(/^my metadata has the email "(.*?)" associated$/) do |email|
   KittenData.any_instance.stubs(:contacts_with_email).returns([DataKitten::Agent.new(mbox: email)])
 end

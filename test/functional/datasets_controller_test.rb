@@ -451,9 +451,12 @@ class DatasetsControllerTest < ActionController::TestCase
     CertificateGenerator.any_instance.stubs(:delay).returns stub(generate: nil)
 
     assert_difference "CertificationCampaign.count", 1 do
-      post :create, jurisdiction: 'cert-generator',
-        dataset: {documentationUrl: "http://example.org"},
-        campaign: 'fourmoreyears'
+      post :create, {
+          :campaign => "fourmoreyears",
+          :url => "http://example.org",
+          :jurisdiction => 'cert-generator',
+          dataset: {documentationUrl: "http://example.org"}
+      }
     end
 
     CertificationCampaign.last.tap do |campaign|
