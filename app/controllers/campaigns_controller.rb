@@ -66,7 +66,7 @@ class CampaignsController < ApplicationController
   end
 
   def schedule
-    authorize! :manage, :all
+    authorize! :manage, @campaign
 
     @campaign.scheduled_rerun
     flash[:notice] = "Campaign scheduled to run daily"
