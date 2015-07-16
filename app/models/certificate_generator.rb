@@ -25,7 +25,7 @@ class CertificateGenerator < ActiveRecord::Base
     when "uncertified"
       joins(:certificate).where(certificates: {attained_level: "none"})
     else
-      self
+      joins(:certificate)
     end
   end
 
