@@ -1,0 +1,579 @@
+cs:
+  title: "CZ"
+  full_title: "Czech Republic"
+  description: "<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak organizace zveřejňují svá data.</p><p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p>
+         <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p>"
+  survey_sections:
+    legal:
+      title: "Právní informace"
+      help_text: "Práva, licencování a ochrana osobních údajů"
+  questions:
+    # Právní informace
+    publisherRights:
+      text: "Máte právo tato data zveřejnit?"
+      help_text: "Pokud jste data sami nevytvořili nebo nenasbírali, nemusíte mít právo je zveřejnit. Pokud si nejste jisti, obraťte se na původního vlastníka dat; ke zveřejnění dat budete pravděpodobně potřebovat jeho svolení."
+      answers:
+        yes:
+          text: "Ano, máme právo zveřejnit tato data jako otevřená."
+        no:
+          text: "Ne, nemáme právo ke zveřejnění těchto dat jako otevřených."
+        unsure:
+          text: "Nejsme si jisti, jestli máme právo data zveřejnit."
+        complicated:
+          text: "Práva k těmto datům jsou nejasná nebo složitá."
+    rightsRiskAssessment:
+      text: "Kde popisujete právní rizika, se kterými je užití dat spojeno?"
+      text_as_statement: "Právní rizika spojená s užitím dat"
+      help_text: "Užití dat bez nezpochybnitelných práv je riskantní – například se může stát, že budete data muset přestat data poskytovat na základě stížnosti. Uveďte URL stránky, na které se uživatelé o podobných rizicích dozví."
+      answers:
+        a_1:
+          text: "URL dokumentace"
+    publisherOrigin:
+      text: "Shromáždili jste <em>všechna</em> data sami?"
+      text_as_statement: "Původ dat"
+      help_text: "Pokud jakákoliv část dat pochází ze zdrojů mimo vaši organizaci, je třeba uvést další informace o právech k jejich zveřejnění."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "data byla vytvořena přímo poskytovatelem"
+    thirdPartyOrigin:
+      text: "Vznikla část dat vytěžením nebo zpracováním cizích dat?"
+      help_text: "I výtah, případně malá část použitého cizího textu, může mít vliv na vaše práva k užití. Stejně tak v případě, že jste analyzovali cizí data a vytvořili výstup odlišný od původních dat."
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    thirdPartyOpen:
+      text: "Vycházeli jste <em>výhradně</em> z otevřených dat?"
+      text_as_statement: "Zdroje dat"
+      help_text: "Cizí data můžete publikovat pouze v případě, že byla zveřejněna pod otevřenou licencí, práva původního držitele vypršela nebo si jich držitel vzdal. Pokud to pro sebemenší část dat neplatí, musíte se před jejich zveřejněním poradit s právníky."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "výhradně otevřená data"
+    crowdsourced:
+      text: "Vznikla nějaká část dat pomocí crowdsourcingu?"
+      text_as_statement: "Crowdsourcing"
+      help_text: "Pokud nějaká část dat pochází od osob mimo vaši organizaci, musíte si od nich vyžádat svolení k publikování dat pod otevřenou licencí."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "aspoň část dat vznikla crowdsourcingem"
+    crowdsourcedContent:
+      text: "Dá se práce přispěvatelů považovat za tvůrčí?"
+      help_text: "Na tvůrčí práci vyžadující jedinečný úsudek autora mají přispěvatelé autorská práva. Příkladem tvůrčí práce je například psaní popisků nebo i rozhodování o tom, kterou část zdrojových dat vybrat do výsledné datové sady. Pokud taková data chcete publikovat, přispěvatelé se musí vzdát svých autorských práv, převést je na vás, nebo vám data licencovat."
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    claUrl:
+      text: "Kde máte vystavenou přispěvatelskou licenční dohodu (CLA)?"
+      text_as_statement: "Přispěvatelská licenční dohoda (CLA)"
+      help_text: "Uveďte odkaz na dokument, ve kterém vám přispěvatelé dovolují užití svých dat. Konkrétně se přispěvatelé mohou vzdát svých autorských práv, převést je na vás, nebo vám udělit licenci k jejich užití."
+      answers:
+        a_1:
+          text: "URL licenční dohody"
+    cldsRecorded:
+      text: "Souhlasili všichni přispěvatelé s přispěvatelskou licenční dohodou (CLA)?"
+      help_text: "Abyste mohli zveřejnit cizí příspěvky, musí jejich autoři souhlasit s přispěvatelskou licenční dohodou (CLA). Měli byste si vést seznam jednotlivých přispěvatelů a poznačit si, kteří souhlasili s přispěvatelskou licenční dohodou (CLA)."
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    sourceDocumentationUrl:
+      text: "Kde jsou specifikované zdroje dat?"
+      text_as_statement: "Zdroje dat"
+      help_text: "Uveďte URL dokumentu, ve kterém popisujete zdroje dat a licenci, která vám umožňuje data zveřejnit."
+      answers:
+        a_1:
+          text: "URL k dokumentaci datových zdrojů"
+    sourceDocumentationMetadata:
+      text: "Máte dokumentaci o zdrojích dat i ve strojově čitelné podobě?"
+      text_as_statement: "Strojově čitelné zdroje dat"
+      help_text: "Informace o zdrojích dat byste měli kromě lidsky srozumitelné podoby zveřejnit i ve strojově čitelném formátu. Díky tomu se dá lépe zjistit, jak jsou data používána, což zároveň vysvětluje jejich opakovanou publikaci."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "zdroje dat jsou strojově čitelné"
+    copyrightURL:
+      text: "Kde jste zveřejnili prohlášení o právech k této datové sadě?"
+      text_as_statement: "Právní prohlášení"
+      help_text: "Uveďte URL dokumentu, který popisuje práva k opětovnému užití této datové sady. Dokument by měl odkazovat na text licence, popsat vaše požadavky na uvádění autorství, a obsahovat prohlášení o relevantních autorských a databázových právech. Právní prohlášení pomáhá uživatelům pochopit, co všechno s daty mohou a nemohou dělat."
+      answers:
+        a_1:
+          text: "URL právního prohlášení"
+    dataLicence:
+      text: "Pod jakou licencí dáváte data k dispozici?"
+      text_as_statement: "Licence"
+      help_text: "Nezapomeňte na to, že k databázi drží práva každý, kdo data původně nasbíral, vytvořil, zkontroloval nebo vybral. Autorská práva mohou vznikat také při reorganizaci dat. Každý uživatel tedy potřebuje licenci k použití dat nebo doklad o tom, že se všichni autoři svých autorských práv vzdali. Do seznamu jsme vybrali nejčastěji používané licence. Pokud žádná autorská ani databázová práva nejsou ve hře, vypršela, nebo se jich autoři vzdali, vyberte možnost „nehodí se“."
+      answers:
+        cc_by:
+          text: "Creative Commons Attribution"
+          text_as_statement: "Creative Commons Attribution"
+        cc_by_sa:
+          text: "Creative Commons Attribution Share-Alike"
+          text_as_statement: "Creative Commons Attribution Share-Alike"
+        cc_zero:
+          text: "Creative Commons CCZero"
+          text_as_statement: "Creative Commons CCZero"
+        odc_by:
+          text: "Open Data Commons Attribution License"
+          text_as_statement: "Open Data Commons Attribution License"
+        odc_odbl:
+          text: "Open Data Commons Open Database License (ODbL)"
+          text_as_statement: "Open Data Commons Open Database License (ODbL)"
+        odc_pddl:
+          text: "Open Data Commons Public Domain Dedication and License (PDDL)"
+          text_as_statement: "Open Data Commons Public Domain Dedication and License (PDDL)"
+        na:
+          text: "nehodí se"
+          text_as_statement: ""
+        other:
+          text: "jiná…"
+          text_as_statement: ""
+    dataNotApplicable:
+      text: "Proč se na data nevztahuje žádná licence?"
+      text_as_statement: "Důvody chybějící licence"
+      answers:
+        norights:
+          text: "Na data se nevztahují žádná autorská ani databázová práva."
+          help_text: "Databázová práva vznikají například vynaložením netriviálního úsilí při sběru, ověřování nebo prezentaci dat. Naopak nevznikají například u dat neověřovaných, vytvořených od nuly, nebo prezentovaných nějakým zjevným způsobem. Autorská práva k datům vznikají například při výběru nebo netriviální reorganizaci dat."
+          text_as_statement: "na data se nevztahuje žádná autorskoprávní ochrana"
+        expired:
+          text: "práva k datům vypršela"
+          help_text: "Ochrana databázových práv trvá deset let. Pokud se data naposledy měnila před více než deseti lety, databázová práva nejspíš vypršela. Pevnou dobu trvají také autorská majetková práva; lhůta se počítá od úmrtí autora nebo od vydání díla. Stručně řečeno je nepravděpodobné, že by u vašich dat autorská práva vypršela."
+          text_as_statement: "práva k datům vypršela"
+        waived:
+          text: "vlastníci se vzdali svých práv"
+          help_text: "To znamená, že práva nikdo nevlastní a s daty může kdokoliv dělat cokoliv."
+          text_as_statement: ""
+    dataWaiver:
+      text: "Jakým způsobem jste se autorských práv vzdali?"
+      text_as_statement: "Forma vzdání se autorských práv k datům"
+      help_text: "Musíte dát uživatelům nějak konkrétně najevo, že jste se práv vzdali a mohou si s daty nakládat podle svého. Můžete použít některý se standardních mechanismů, například PDDL nebo CCZero, nebo napsat vlastní právní dokument."
+      answers:
+        pddl:
+          text: "Open Data Commons Public Domain Dedication and License (PDDL)"
+          text_as_statement: "Open Data Commons Public Domain Dedication and License (PDDL)"
+        cc0:
+          text: "Creative Commons CCZero"
+          text_as_statement: "Creative Commons CCZero"
+        other:
+          text: "jiný…"
+          text_as_statement: ""
+    dataOtherWaiver:
+      text: "Kde je dokument, kterým se vzdáváte svých autorských práv?"
+      text_as_statement: "Forma vzdání se autorských práv k datům"
+      help_text: "Uveďte URL, na kterém si uživatelé vašich dat mohou ověřit, že jste se vzdali svých práv."
+      answers:
+        a_1:
+          text: "URL dokumentu"
+    otherDataLicenceName:
+      text: "Jaký je název použité licence?"
+      text_as_statement: "Data jsou licencována pod"
+      help_text: "Pokud data zveřejňujete pod jinou než nabízenou licencí, potřebujeme znát její název – bude součástí vašeho certifikátu otevřených dat."
+      answers:
+        a_1:
+          text: "název licence"
+    otherDataLicenceURL:
+      text: "Kde uživatelé najdou text licence?"
+      text_as_statement: "Text licence"
+      help_text: "Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst."
+      answers:
+        a_1:
+          text: "URL k licenci"
+    otherDataLicenceOpen:
+      text: "Jde o otevřenou licenci?"
+      help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    contentRights:
+      text: "Vztahuje se na obsah dat autorské právo?"
+      text_as_statement: "Obsah chráněný autorským právem"
+      answers:
+        norights:
+          text: "Ne, data obsahují pouze fakta a čísla."
+          help_text: "Při licencování dat je občas dobré (nebo přímo nutné) posuzovat zvlášť obsah databáze a zvlášť databázi jako takovou. Tato otázka se vztahuje přímo na obsah databáze. Pokud databáze neobsahuje nic, co by vzniklo tvůrčím úsilím, autorské právo se na její obsah nevztahuje."
+          text_as_statement: "ne, data obsahují pouze fakta a čísla"
+        samerights:
+          text: "Ano, a všemi právy disponuje jeden člověk nebo organizace."
+          help_text: "Tuto možnost vyberte, pokud data obsahují nějaký autorským právem chráněný obsah a veškerými právy k tomuto obsahu disponuje jedna osoba nebo organizace."
+          text_as_statement: "ano; držitel práv pouze jeden"
+        mixedrights:
+          text: "Ano, a držitelem práv jsou různé osoby a organizace."
+          help_text: "U některých dat se mohou držitelé autorských práv lišit záznam od záznamu. V tom případě by informace o právech měly být součástí dat."
+          text_as_statement: "ano; více různých držitelů práv"
+    explicitWaiver:
+      text: "Je obsah dat volným dílem, tedy Public Domain?"
+      text_as_statement: "Je obsah dat volným dílem?"
+      help_text: "K prohlášení obsahu za volné dílo můžete použít například licenci <a href=\"http://creativecommons.org/publicdomain/\">Creative Commons Public Domain Mark</a>. Tak se uživatelé snadno dozvědí, že mohou s obsahem dat volně nakládat."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "ano, obsah dat je volným dílem"
+    contentLicence:
+      text: "Pod jakou licencí zveřejňujete obsah dat?"
+      text_as_statement: "Licence obsahu"
+      help_text: "Nezapomeňte, že každé tvůrčí úsilí automaticky vede ke vzniku autorských práv k vytvořenému obsahu (s výjimkou čistě faktických údajů). Pokud tedy uživatelé chtějí váš obsah bez problémů používat, potřebují odpovídající licenci nebo dokument, ve kterém se vzdáváte svých autorských práv. V seznamu uvádíme nejčastěji používané licence. Pokud váš obsah není chráněný autorským právem, práva vypršela nebo jste se jich vzdali, vyberte možnost „nehodí se“."
+      answers:
+        cc_by:
+          text: "Creative Commons Attribution"
+          text_as_statement: "Creative Commons Attribution"
+        cc_by_sa:
+          text: "Creative Commons Attribution Share-Alike"
+          text_as_statement: "Creative Commons Attribution Share-Alike"
+        cc_zero:
+          text: "Creative Commons CCZero"
+          text_as_statement: "Creative Commons CCZero"
+        na:
+          text: "nehodí se"
+          text_as_statement: ""
+        other:
+          text: "jiná…"
+          text_as_statement: ""
+    contentNotApplicable:
+      text: "Proč se na obsah dat nevztahuje žádná licence?"
+      text_as_statement: "Důvody chybějící licence"
+      answers:
+        norights:
+          text: "Na obsah dat se nevztahují žádná autorská práva."
+          help_text: "Autorská práva vznikají pouze tehdy, když k vytvoření obsahu vynaložíte netriviální tvůrčí úsilí, například psaním popisků. Pokud data obsahují pouze fakta, autorský zákon se na ně nevztahuje."
+          text_as_statement: "na obsah se nevztahují autorská práva"
+        expired:
+          text: "Autorská práva už vypršela."
+          help_text: "Autorská práva platí pouze omezenou dobu, počítanou buď od vydání díla, nebo od úmrtí autora. Zkontrolujte si datum vzniku a vydání obsahu – pokud je obsah dostatečně starý, autorská práva už mohla vypršet."
+          text_as_statement: "autorská práva už vypršela"
+        waived:
+          text: "Autor se svých práv vzdal."
+          help_text: "To znamená, že práva nikdo nevlastní a každý si s obsahem může nakládat podle svého."
+          text_as_statement: "autor se vzdal svých práv"
+    contentWaiver:
+      text: "Jakým způsobem jste se vzdali svých práv?"
+      text_as_statement: "Forma upuštění od autorských práv k obsahu"
+      help_text: "Pokud jste se autorských práv k obsahu vzdali, musíte to nějak doložit, aby uživatelé věděli, že s obsahem mohou bez rizika nakládat. Autorských práv se můžete vzdát nějakým zavedeným způsobem, třeba pomocí CCZero, ale i vlastním právním dokumentem."
+      answers:
+        cc0:
+          text: "Creative Commons CCZero"
+          text_as_statement: "Creative Commons CCZero"
+        other:
+          text: "jiný…"
+          text_as_statement: "jiný…"
+    contentOtherWaiver:
+      text: "Kde je dokument, ve kterém se vzdáváte práv k obsahu?"
+      text_as_statement: "Forma upuštění od autorských práv k obsahu"
+      help_text: "Uveďte URL k veřejně dostupnému dokumentu, kterým se vzdáváte práv k obsahu dat. Uživatelé si díky němu mohou ověřit, že je obsah skutečně bez právních závazků."
+      answers:
+        a_1:
+          text: "URL k právnímu dokumentu"
+    otherContentLicenceName:
+      text: "Jaký je název této licence?"
+      text_as_statement: "Licence obsahu"
+      help_text: "Pokud používáte jinou licenci, potřebujeme znát její název, abychom ho mohli uvést na certifikátu otevřených dat."
+      answers:
+        a_1:
+          text: "název licence"
+    otherContentLicenceURL:
+      text: "Kde je plný text této licence?"
+      text_as_statement: "Text licence k obsahu"
+      help_text: "Uveďte URL licenčního textu. Bude uvedeno na vašem certifikátu otevřených dat, aby si kdokoliv mohl licenci zkontrolovat."
+      answers:
+        a_1:
+          text: "URL k licenci"
+    otherContentLicenceOpen:
+      text: "Jde o otevřenou licenci?"
+      help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    contentRightsURL:
+      text: "Kde popisujete právní a licenční podmínky spojené s obsahem dat?"
+      text_as_statement: "Právní prohlášení k obsahu dat"
+      help_text: "Uveďte URL stránky, na které vysvětlujete právní a licenční podmínky spojené s obsahem dat."
+      answers:
+        a_1:
+          text: "URL právního prohlášení"
+    copyrightStatementMetadata:
+      text: "Které části vašeho právního prohlášení jsou strojově čitelné?"
+      text_as_statement: "Strojově čitelná data právního prohlášení"
+      help_text: "Je dobrým zvykem uvádět informace o právech ve strojově čitelné podobě, aby uživatelé vašich dat mohli snadno uvést vaše autorství."
+      answers:
+        dataLicense:
+          text: "licence k datům"
+          text_as_statement: "licence k datům"
+        contentLicense:
+          text: "licence k obsahu"
+          text_as_statement: "licence k obsahu"
+        attribution:
+          text: "způsob uvádění autorství"
+          text_as_statement: "způsob uvádění autorství"
+        attributionURL:
+          text: "URL pro uvedení autorství"
+          text_as_statement: "URL pro uvedení autorství"
+        copyrightNotice:
+          text: "informace o autorských právech"
+          text_as_statement: "informace o autorských právech"
+        copyrightYear:
+          text: "letopočet spojený s autorskými právy"
+          text_as_statement: "letopočet spojený s autorskými právy"
+        copyrightHolder:
+          text: "držitel autorských práv"
+          text_as_statement: "držitel autorských práv"
+        databaseRightYear:
+          text: "letopočet spojený s databázovými právy"
+          text_as_statement: "letopočet spojený s databázovými právy"
+        databaseRightHolder:
+          text: "držitel databázových práv"
+          text_as_statement: "držitel databázových práv"
+    dataPersonal:
+      text: "Dají se podle vašich dat identifikovat konkrétní osoby?"
+      text_as_statement: "Ochrana osobních údajů"
+      answers:
+        not_personal:
+          text: "Ne, data se netýkají jednotlivců."
+          help_text: "Nezapomeňte na to, že konkrétní osoba se dá identifikovat i nepřímo. Například byste mohli někoho identifikovat podle statistik dopravního provozu, ve spojení s informacemi o tom, kdy a kam daná osoba dojíždí."
+          text_as_statement: "nehraje roli, data se netýkají jednotlivců"
+        summarised:
+          text: "Ne. Jde o agregovaná data, která vznikla spojováním dat o jednotlivcích do větších celků. Jednotlivci jsou v rámci skupiny nerozlišitelní a tudíž anonymní."
+          help_text: "Skutečná anonymita jednotlivců v agregovaných datech se dá ověřit statistickými metodami."
+          text_as_statement: "nehraje roli, jde o agregovaná data"
+        individual:
+          text: "Ano, existuje riziko, že by data mohla vést k identifikaci konkrétních osob, například nějakou třetí stranou disponující souvisejícími daty."
+          help_text: "Některá data o konkrétních osobách se dají zveřejnit bez problémů, například platy státních zaměstnanců – v některých zemích – nebo veřejné výdaje."
+          text_as_statement: "data, která mohou sloužit k identifikaci osob"
+    statisticalAnonAudited:
+      text: "Máte anonymizaci dat oveřenou nezávislým posudkem?"
+      text_as_statement: "Anonymizace dat"
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "ověřena nezávislým posudkem"
+    appliedAnon:
+      text: "Pokusili jste se snížit nebo úplně vyloučit riziko identifikace osob podle vašich dat?"
+      text_as_statement: "Anonymizace dat"
+      help_text: "Anonymizace snižuje riziko, že vaše data půjdou zneužít k identifikaci osob. Konkrétní techniky záleží na konkrétní podobě dat."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "data byla anonymizována"
+    lawfulDisclosure:
+      text: "Jste ze zákona povinni nebo oprávněni zveřejňovat tato osobní data?"
+      text_as_statement: "Publikace daná zákonem"
+      help_text: "
+                     <strong>Osobní data byste bez anonymizace měli zveřejňovat jen v případech, kdy vám to povoluje nebo nařizuje zákon.</strong>
+                  "
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "zveřejnění dat je přikázáno zákonem"
+    lawfulDisclosureURL:
+      text: "Který dokument vám umožnuje zveřejnit osobní data?"
+      text_as_statement: "Právo ke zveřejnění osobních dat"
+      answers:
+        a_1:
+          text: "URL s odůvodněním"
+    riskAssessmentExists:
+      text: "Analyzovali jste rizika spojená se zveřejněním osobních údajů?"
+      text_as_statement: "Rizika spojená s osobními údaji"
+      help_text: "Analýza rizik se týká jak soukromí dotčených osob, tak použití a zveřejnění těchto dat."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: "poskytovatel neprovedl analýzu rizik"
+        a_true:
+          text: yes
+          text_as_statement: "poskytovatel provedl analýzu rizik"
+    riskAssessmentUrl:
+      text: "Kde máte analýzu rizik zveřejněnou?"
+      text_as_statement: "Analýza rizik"
+      help_text: "Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace, můžete ji pouze shrnout nebo příslušné části cenzurovat."
+      answers:
+        a_1:
+          text: "URL analýzy rizik"
+    riskAssessmentAudited:
+      text: "Prošla vaše analýza rizik nezávislým auditem?"
+      text_as_statement: "Audit analýzy rizik"
+      help_text: "Je dobrým zvykem nechat si analýzu rizik ještě ověřit. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "analýza rizik prošla nezávislým auditem"
+    individualConsentURL:
+      text: "Kde máte sdělení o ochraně osobních údajů dotčených osob?"
+      text_as_statement: "Informace pro dotčené osoby"
+      help_text: "Pokud sbíráte data o jednotlivých lidech, musíte jim oznámit, co budete s daty dělat. Prohlášení o soukromí dotčených osob bude zajímat i uživatele vašich dat, aby se nedostali do sporu se zákonem na ochranu osobních údajů."
+      answers:
+        a_1:
+          text: "URL dokumentu"
+    dpStaff:
+      text: "Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?"
+      answers:
+        a_false:
+          text: no
+        a_true:
+          text: yes
+    dbStaffConsulted:
+      text: "Podílel se na analýze rizik?"
+      text_as_statement: "Zodpovědnost za ochranu osobních údajů"
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "zodpovědná osoba se podílela na analýze rizik"
+    anonymisationAudited:
+      text: "Nechali jste svůj systém anonymizace dat ověřit nezávislým auditem?"
+      text_as_statement: "Anonymizace dat"
+      help_text: "Je dobrým zvykem zkontrolovat, jestli váš systém filtrování osobních údajů funguje správně. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou."
+      answers:
+        a_false:
+          text: no
+          text_as_statement: ""
+        a_true:
+          text: yes
+          text_as_statement: "ověřena nezávislým auditem"
+  labels:
+    ownership:
+      title: "Práva"
+      help_text: "Za jakých podmínek lze data použít?"
+    licensing:
+      title: "Licence"
+      help_text: "Jaká oprávnění poskytujete k užití těchto dat?"
+    privacy:
+      title: "Ochrana osobních údajů"
+      help_text: "jak chránit soukromí osob"
+  # Právní informace Requirements
+    standard_1:
+      text: "
+                     <strong>Ke zveřejnění dat byste měli mít nezpochybnitelné právo.</strong>
+                  "
+    basic_1:
+      text: "
+                  <strong>Je nezbytné, abyste disponovali právy ke zveřejnění těchto dat.</strong>
+               "
+    pilot_1:
+      text: "
+                  <strong>Měli byste popsat možná rizika spojená s užitím vašich dat</strong>, aby se uživatelé mohli rozhodnout, jestli a jak je mohou užít."
+    basic_2:
+      text: "Uvedli jste, že jste data nevytvořili ani samostaně nesesbírali (včetně formy crowdsourcingu), takže musela vzniknout vytěžením nebo zpracováním cizích datových zdrojů."
+    basic_3:
+      text: "
+                           <strong>Měli byste se poradit s právníky, abyste měli jistotu, že data můžete publikovat.</strong>
+                        "
+    basic_4:
+      text: "Uvedli jste, že data původně nepochází od vás a nevznikla ani výběrem nebo zpracováním cizích dat, takže musela vzniknout pomocí crowdsourcingu."
+    basic_5:
+      text: "
+                           <strong>Každý přispěvatel musí souhlasit s přispěvatelskou licenční dohodou (CLA)</strong>, ve které vám uděluje právo zveřejnit jeho práci pod otevřenou licencí."
+    pilot_2:
+      text: "
+                  <strong>Měli byste popsat, odkud pochází data a vaše práva je zveřejnit</strong>, aby uživatelé mohli bez obav použít i data pocházející z cizích zdrojů."
+    standard_2:
+      text: "
+                     <strong>Měli byste zveřejnit strojově čitelné informace o zdrojích, ze kterých vaše data pochází.</strong>
+                  "
+    pilot_3:
+      text: "
+               <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky a vaše požadavky na uvádění autorství."
+    basic_6:
+      text: "
+                  <strong>Otevřená data musíte publikovat pod otevřenou licencí</strong>, aby s nimi uživatelé mohli volně nakládat."
+    standard_3:
+      text: "
+                  <strong>Pokud je nějaká část obsahu vašich dat volným dílem, měli byste ji zveřejnit pod vhodnou licencí</strong>, aby uživatelé věděli, že s tímto obsahem mohou volně nakládat."
+    basic_7:
+      text: "
+                     <strong>Data musíte zveřejnit pod otevřenou licencí, aby je ostatní mohli užít.</strong>
+                  "
+    standard_4:
+      text: "
+                        <strong>Informace o licenci dat uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji."
+    standard_5:
+      text: "
+                        <strong>Informace o licenci obsahu uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji."
+    standard_6:
+      text: "
+                        <strong>Požadovaný způsob uvádění autorství, který popisujete v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji."
+    standard_7:
+      text: "
+                        <strong>Požadovaný způsob uvádění autorství, který popisujete v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji."
+    exemplar_1:
+      text: "
+                        <strong>Informace o autorských právech uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji."
+    exemplar_2:
+      text: "
+                        <strong>Letopočet, spojený s autorskými právy, uvedený v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji."
+    exemplar_3:
+      text: "
+                        <strong>Informace o držiteli autorských práv uvedené v právním prohlášení by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji."
+    exemplar_4:
+      text: "
+                        <strong>Letopočet databázových práv, uvedený v právním prohlášení, by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými nástroji."
+    exemplar_5:
+      text: "
+                        <strong>Informace o držiteli databázových práv, uvedené v právním prohlášení, by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji."
+    standard_8:
+      text: "
+                  <strong>Měli byste si nechat vypracovat nezávislý posudek anonymizace dat</strong>, abyste minimalizovali riziko, že anonymizovaná data půjdou použít k identifikaci osob."
+    pilot_4:
+      text: "
+                     <strong></strong>
+                  "
+    standard_9:
+      text: "
+                        <strong>Měli byste zveřejnit, odkud plynou vaše práva k publikování osobních údajů</strong>. Usnadníte tím situaci uživatelům svých dat i lidem, kterých se data týkají."
+    pilot_5:
+      text: "
+                     <strong>Pokud zveřejňujete osobní data, měli byste analyzovat související rizika.</strong>
+                  "
+    standard_10:
+      text: "
+                        <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>, aby se zájemci mohli podívat, nakolik s příslušnými riziky počítáte."
+    standard_11:
+      text: "
+                           <strong>Analýza rizik by měla projít auditem</strong>, abyste měli jistotu, že je v pořádku."
+    pilot_6:
+      text: "
+                           <strong>Musíte uživatelům svých dat vysvětlit, k jakému využití svých osobních dat daly dotčené osoby svolení</strong>, aby se vaši uživatelé nedostali do sporu se zákonem na ochranu osobních údajů."
+    pilot_7:
+      text: "
+                           <strong>Pokud máte někoho přímo zodpovědného za ochranu osobních údajů, měli byste ho přizvat k analýze rizik.</strong>
+                        "
+    standard_12:
+      text: "
+                        <strong>Váš systém anonymizace dat by měl projít nezávislým auditem</strong>, abyste měli jistotu, že se k vašim datům hodí a funguje správně."

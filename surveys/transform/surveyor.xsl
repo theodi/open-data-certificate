@@ -69,7 +69,7 @@
 		<translations>
 			<xsl:attribute name="en">default</xsl:attribute>
 			<xsl:for-each select="locales/locale">
-				<xsl:attribute name="{.}">translations/questionnaire.<xsl:value-of select="."/>.yml</xsl:attribute>
+				<xsl:attribute name="{.}">translations/odc.<xsl:value-of select="../../@jurisdiction"/>.<xsl:value-of select="."/>.yml</xsl:attribute>
 			</xsl:for-each>
 		</translations>
 		<xsl:apply-templates select="group" mode="structure" />
