@@ -260,13 +260,13 @@ en:
     search_results: Search Results
 
   response_set:
-    choose_a_jurisdiction: Choose a new jurisdiction
+    choose_a_jurisdiction: Change jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
     choose_jurisdiction: --- Select jurisdiction ---
     start_new_jurisdiction: Change jurisdiction
 
-    choose_a_language: Choose a new language
-    language_dialog_body: Choose a different language below
+    choose_a_language: Change language
+    language_dialog_body: Choose which language you would like to complete the survey in
     choose_language: --- Select language ---
     start_new_language: Change language
 
@@ -433,3 +433,10 @@ en:
     label:
       user:
         short_name: Short name or preferred way of being addressed
+
+  locales:
+    en: English
+    cs: Czech
+
+  interface:
+    select: "Please select…"

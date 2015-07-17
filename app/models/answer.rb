@@ -27,11 +27,22 @@ class Answer < ActiveRecord::Base
   end
 
   def translation(locale)
-    {:text => self.text,
-     :help_text => self.help_text,
-     :default_value => self.default_value,
-     :placeholder => self.placeholder,
-    }.with_indifferent_access
+    default = {
+      "text" => text,
+      "help_text" => help_text,
+      "default_value" => default_value,
+      "placeholder" => placeholder
+    }
+
+    t = question.translation(locale)[:answers] || {}
+
+    default.merge(
+      t[reference_identifier] || t["a_#{reference_identifier}"] || {}
+    ).with_indifferent_access
+  end
+
+  def answer_text(locale=I18n.locale)
+    translation(locale)[:text]
   end
 
   def value_key
