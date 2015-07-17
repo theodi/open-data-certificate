@@ -2,18 +2,18 @@
 cs:
   survey_sections:
     general:
-      title: Obecné informace
+      text: Obecné informace
     practical:
-      title: Praktické informace
+      text: Praktické informace
       help_text: Vyhledávání, přesnost, kvalita a záruky
     technical:
-      title: Technické informace
+      text: Technické informace
       help_text: Umístění, formát a důvěryhodnost
     social:
-      title: Sociální informace
+      text: Sociální informace
       help_text: Dokumentace, podpora a služby
     legal:
-      title: Právní informace
+      text: Právní informace
       help_text: Práva, licencování a ochrana osobních údajů
   questions:
     dataTitle:
@@ -23,7 +23,7 @@ cs:
         něj dalo rychle zorientovat.
       answers:
         a_1:
-          text: název projektu
+          placeholder: název projektu
     documentationUrl:
       text: Kde máte zveřejněnou dokumentaci?
       text_as_statement: Dokumentace
@@ -31,7 +31,7 @@ cs:
         Může jít například o záznam v nějakém větším katalogu typu cz.ckan.net.
       answers:
         a_1:
-          text: URL dokumentace
+          placeholder: URL dokumentace
     publisher:
       text: Kdo data publikuje?
       text_as_statement: Poskytovatel
@@ -39,7 +39,7 @@ cs:
         zaměstnavatel – pokud tedy data nezveřejňujete pro někoho jiného.
       answers:
         a_1:
-          text: jméno poskytovatele
+          placeholder: jméno poskytovatele
     publisherUrl:
       text: Webová stránka poskytovatele
       text_as_statement: Web poskytovatele
@@ -47,7 +47,7 @@ cs:
         od stejných poskytovatelů.
       answers:
         a_1:
-          text: web poskytovatele
+          placeholder: web poskytovatele
     releaseType:
       text: Co přesně zveřejňujete?
       answers:
@@ -79,7 +79,7 @@ cs:
       help_text: URL stránky, která na data odkazuje z vašeho hlavního webu.
       answers:
         a_1:
-          text: URL stránky
+          placeholder: URL stránky
     listed:
       text: Jsou vaše data vedená v nějakém katalogu?
       help_text: Data se lépe hledají, když jsou uvedená v relevantních seznamech,
@@ -97,7 +97,7 @@ cs:
         a podobně. Můžete uvést také URL na výsledky vyhledávače.
       answers:
         a_1:
-          text: URL datového katalogu
+          placeholder: URL datového katalogu
     referenced:
       text: Odkazujete na tato data ve svých publikacích?
       help_text: Když na data odkazujete ve svých článcích, prezentacích nebo blog
@@ -113,7 +113,7 @@ cs:
       help_text: Uveďte URL dokumentu, který se na data odkazuje.
       answers:
         a_1:
-          text: URL dokumentu
+          placeholder: URL dokumentu
     serviceType:
       text: Mění se data, na kterých je vaše API postavené?
       text_as_statement: Mění se data za tímto API?
@@ -131,7 +131,7 @@ cs:
       text: Budou vaše data časem zastarávat?
       text_as_statement: Zastarávání
       answers:
-        true:
+        'true':
           text: ano, tato data časem zastarají
           help_text: Například databáze autobusových zastávek časem zastará, protože
             některé zastávky zmizí a objeví se nové.
@@ -141,7 +141,7 @@ cs:
           help_text: Například demografické statistiky obvykle bývají opatřené časovým
             razítkem, podle kterého se pozná, kdy byly relevantní.
           text_as_statement: data časem zastarají, ale mají časové razítko
-        false:
+        'false':
           text: ne, tato data nejsou závislá na čase
           help_text: Například výsledky vědeckého experimentu nepřestanou nutně platit
             jen kvůli tomu, že už jsou staré.
@@ -282,7 +282,7 @@ cs:
         dá na kvalitu vašich dat spoléhat.
       answers:
         a_1:
-          text: URL dokumentace
+          placeholder: URL dokumentace
     qualityControlUrl:
       text: Kde máte popsaný proces řízení kvality dat?
       text_as_statement: Systém řízení kvality
@@ -291,7 +291,7 @@ cs:
         a motivujete uživatele ke hlášení chyb, které pomáhá všem ostatním.
       answers:
         a_1:
-          text: URL dokumentace
+          placeholder: URL dokumentace
     backups:
       text: Děláte offsite zálohy?
       text_as_statement: Zálohování dat
@@ -312,7 +312,7 @@ cs:
         dostupnost služeb nijak nezaručujete.
       answers:
         a_1:
-          text: URL dokumentu
+          placeholder: URL dokumentu
     statusUrl:
       text: Kde popisujete aktuální stav vaší služby?
       text_as_statement: Aktuální stav služby
@@ -320,7 +320,7 @@ cs:
         včetně případných výpadků.
       answers:
         a_1:
-          text: URL stavové stránky
+          placeholder: URL stavové stránky
     onGoingAvailability:
       text: Jak dlouho budou data k dispozici?
       text_as_statement: Dlouhodobá dostupnost dat
@@ -344,7 +344,7 @@ cs:
         URL, aby je uživatelé mohli snadno použít a odkazovat na ně.
       answers:
         a_1:
-          text: URL datové sady
+          placeholder: URL datové sady
     versionManagement:
       text: Jakým způsobem publikujete aktualizace datové sady?
       answers:
@@ -371,7 +371,7 @@ cs:
         měl měnit s každým novým vydáním.
       answers:
         a_1:
-          text: URL aktuální datové sady
+          placeholder: URL aktuální datové sady
     versionsTemplateUrl:
       text: Jaký formát mají URL jednotlivých vydání vaší datové sady?
       text_as_statement: Formát URL
@@ -379,7 +379,7 @@ cs:
         své datové sady. Měnící se části URL můžete vyznačit {takto}, například: http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv.'
       answers:
         a_1:
-          text: vzor URL
+          placeholder: vzor URL
     versionsUrl:
       text: Kde je seznam vašich publikovaných datových sad?
       text_as_statement: Seznam publikovaných datových sad
@@ -388,7 +388,7 @@ cs:
         by následně měla odkazovat na další).
       answers:
         a_1:
-          text: URL seznamu
+          placeholder: URL seznamu
     endpointUrl:
       text: Jaké je kořenové URL vašeho API?
       text_as_statement: Kořenové URL datového API
@@ -396,7 +396,7 @@ cs:
         vaším API.
       answers:
         a_1:
-          text: kořenové URL
+          placeholder: kořenové URL
     dumpManagement:
       text: Jak publikujete databázové exporty?
       answers:
@@ -423,7 +423,7 @@ cs:
         měl měnit pokaždé, když exportujete novou verzi.
       answers:
         a_1:
-          text: URL exportovaných dat
+          placeholder: URL exportovaných dat
     dumpsTemplateUrl:
       text: Jaký formát mají URL jednotlivých exportů?
       text_as_statement: Formát URL
@@ -431,7 +431,7 @@ cs:
         Měnící se části URL můžete vyznačit {takto}, například: http://firma.cz/data/mesicne/data-{RR}{MM}.csv.'
       answers:
         a_1:
-          text: šablona URL
+          placeholder: šablona URL
     dumpsUrl:
       text: Kde publikujete seznam databázových exportů?
       text_as_statement: Seznam exportů z databáze
@@ -440,7 +440,7 @@ cs:
         měla odkazovat na další.
       answers:
         a_1:
-          text: URL seznamu
+          placeholder: URL seznamu
     changeFeedUrl:
       text: Kde publikujete seznam změn v datech?
       text_as_statement: Seznam změn
@@ -449,7 +449,7 @@ cs:
         která by následně měla odkazovat na další.
       answers:
         a_1:
-          text: URL seznamu změn v datech
+          placeholder: URL seznamu změn v datech
     machineReadable:
       text: Jsou data strojově čitelná?
       text_as_statement: Strojová čitelnost
@@ -628,7 +628,7 @@ cs:
         v URL, vrátit podrobné informace o příslušném objektu.
       answers:
         a_1:
-          text: URL služby
+          placeholder: URL služby
     existingExternalUrls:
       text: Existují jinde na webu další informace o objektech, které se vyskytují
         ve vašich datech?
@@ -683,7 +683,7 @@ cs:
         podepsat.
       answers:
         a_1:
-          text: URL k dokumentaci
+          placeholder: URL k dokumentaci
     documentationMetadata:
       text: Jaká metadata publikujete ve strojově čitelné podobě?
       text_as_statement: Strojově čitelná metadata
@@ -769,7 +769,7 @@ cs:
       text_as_statement: Technická dokumentace
       answers:
         a_1:
-          text: URL technické dokumentace
+          placeholder: URL technické dokumentace
     vocabulary:
       text: Používá váš datový formát nějaké schéma?
       help_text: K datům ve formátech typu CSV, JSON, XML nebo Turtle může být přiložené
@@ -784,7 +784,7 @@ cs:
       text_as_statement: Dokumentace schémat
       answers:
         a_1:
-          text: URL k dokumentaci schémat
+          placeholder: URL k dokumentaci schémat
     codelists:
       text: Používáte v datech nějaké číselníky?
       help_text: Pokud jsou v datech použity číselníky, například pro geografické
@@ -799,7 +799,7 @@ cs:
       text_as_statement: Dokumentace číselníků
       answers:
         a_1:
-          text: URL k dokumentaci číselníků
+          placeholder: URL k dokumentaci číselníků
     contactUrl:
       text: Jak vás mohou uživatelé dat kontaktovat?
       text_as_statement: Kontakty
@@ -807,21 +807,21 @@ cs:
         kdyby potřebovali s něčím poradit.
       answers:
         a_1:
-          text: kontaktní URL
+          placeholder: kontaktní URL
     improvementsContact:
       text: Kam mohou uživatelé posílat případné zlepšovací návrhy k systému publikování
         vašich dat?
       text_as_statement: Zpětná vazba k publikovaným datovým sadám
       answers:
         a_1:
-          text: kontaktní URL
+          placeholder: kontaktní URL
     dataProtectionUrl:
       text: Koho mohou uživatelé kontaktovat s dotazy, které se týkají ochrany soukromí
         a osobních údajů?
       text_as_statement: Dotazy na ochranu soukromí a osobních údajů
       answers:
         a_1:
-          text: kontaktní URL
+          placeholder: kontaktní URL
     socialMedia:
       text: Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?
       answers:
@@ -836,7 +836,7 @@ cs:
         na Twitteru nebo Facebooku.
       answers:
         a_1:
-          text: URL profilu na sociální síti
+          placeholder: URL profilu na sociální síti
     forum:
       text: Kde mohou uživatelé o této datové sadě diskutovat?
       text_as_statement: Diskuze
@@ -844,14 +844,14 @@ cs:
         o vašich datech diskutovat.
       answers:
         a_1:
-          text: URL diskuzního fóra nebo poštovní konference
+          placeholder: URL diskuzního fóra nebo poštovní konference
     correctionReporting:
       text: Jak mohou uživatelé nahlásit chyby v datech?
       text_as_statement: Hlášení chyb v datech
       help_text: Uveďte URL, na kterém mohou uživatelé hlásit chyby ve vašich datech.
       answers:
         a_1:
-          text: kontaktní URL
+          placeholder: kontaktní URL
     correctionDiscovery:
       text: Kde a jak se uživatelé dozví o chybách ve vašich datech?
       text_as_statement: Informace o chybách v datech
@@ -859,7 +859,7 @@ cs:
         o chybách ve svých datech.
       answers:
         a_1:
-          text: informační URL
+          placeholder: informační URL
     engagementTeam:
       text: Máte někoho, kdo se aktivně stará o komunitu kolem vašich dat?
       help_text: K většímu zapojení uživatelů a využití dat se využívají například
@@ -874,7 +874,7 @@ cs:
       text_as_statement: Komunitní kontakt
       answers:
         a_1:
-          text: URL komunitního týmu
+          placeholder: URL komunitního týmu
     libraries:
       text: Máte nějaký seznam nástrojů pro práci s těmito daty?
       text_as_statement: Nástroje pro práci s těmito daty
@@ -882,16 +882,16 @@ cs:
         nástrojů pro práci s vašimi daty.
       answers:
         a_1:
-          text: URL dokumentace
+          placeholder: URL dokumentace
     publisherRights:
       text: Máte právo tato data zveřejnit?
       help_text: Pokud jste data sami nevytvořili nebo nenasbírali, nemusíte mít právo
         je zveřejnit. Pokud si nejste jisti, obraťte se na původního vlastníka dat;
         ke zveřejnění dat budete pravděpodobně potřebovat jeho svolení.
       answers:
-        true:
+        'yes':
           text: Ano, máme právo zveřejnit tato data jako otevřená.
-        false:
+        'no':
           text: Ne, nemáme právo ke zveřejnění těchto dat jako otevřených.
         unsure:
           text: Nejsme si jisti, jestli máme právo data zveřejnit.
@@ -905,7 +905,7 @@ cs:
         Uveďte URL stránky, na které se uživatelé o podobných rizicích dozví.
       answers:
         a_1:
-          text: URL dokumentace
+          placeholder: URL dokumentace
     publisherOrigin:
       text: Shromáždili jste <em>všechna</em> data sami?
       text_as_statement: Původ dat
@@ -913,10 +913,10 @@ cs:
         je třeba uvést další informace o právech k jejich zveřejnění.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: data byla vytvořena přímo poskytovatelem
     thirdPartyOrigin:
       text: Vznikla část dat vytěžením nebo zpracováním cizích dat?
@@ -925,9 +925,9 @@ cs:
         a vytvořili výstup odlišný od původních dat.
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     thirdPartyOpen:
       text: Vycházeli jste <em>výhradně</em> z otevřených dat?
       text_as_statement: Zdroje dat
@@ -937,10 +937,10 @@ cs:
         poradit s právníky.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: výhradně otevřená data
     crowdsourced:
       text: Vznikla nějaká část dat pomocí crowdsourcingu?
@@ -949,10 +949,10 @@ cs:
         si od nich vyžádat svolení k publikování dat pod otevřenou licencí.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: aspoň část dat vznikla crowdsourcingem
     crowdsourcedContent:
       text: Dá se práce přispěvatelů považovat za tvůrčí?
@@ -963,9 +963,9 @@ cs:
         převést je na vás, nebo vám data licencovat.
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     claUrl:
       text: Kde máte vystavenou přispěvatelskou licenční dohodu (CLA)?
       text_as_statement: Přispěvatelská licenční dohoda (CLA)
@@ -974,7 +974,7 @@ cs:
         je na vás, nebo vám udělit licenci k jejich užití.
       answers:
         a_1:
-          text: URL licenční dohody
+          placeholder: URL licenční dohody
     cldsRecorded:
       text: Souhlasili všichni přispěvatelé s přispěvatelskou licenční dohodou (CLA)?
       help_text: Abyste mohli zveřejnit cizí příspěvky, musí jejich autoři souhlasit
@@ -983,9 +983,9 @@ cs:
         (CLA).
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     sourceDocumentationUrl:
       text: Kde jsou specifikované zdroje dat?
       text_as_statement: Zdroje dat
@@ -993,7 +993,7 @@ cs:
         která vám umožňuje data zveřejnit.
       answers:
         a_1:
-          text: URL k dokumentaci datových zdrojů
+          placeholder: URL k dokumentaci datových zdrojů
     sourceDocumentationMetadata:
       text: Máte dokumentaci o zdrojích dat i ve strojově čitelné podobě?
       text_as_statement: Strojově čitelné zdroje dat
@@ -1002,10 +1002,10 @@ cs:
         jsou data používána, což zároveň vysvětluje jejich opakovanou publikaci.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: zdroje dat jsou strojově čitelné
     copyrightURL:
       text: Kde jste zveřejnili prohlášení o právech k této datové sadě?
@@ -1017,7 +1017,7 @@ cs:
         a nemohou dělat.
       answers:
         a_1:
-          text: URL právního prohlášení
+          placeholder: URL právního prohlášení
     dataLicence:
       text: Pod jakou licencí dáváte data k dispozici?
       text_as_statement: Licence
@@ -1103,7 +1103,7 @@ cs:
         se vzdali svých práv.
       answers:
         a_1:
-          text: URL dokumentu
+          placeholder: URL dokumentu
     otherDataLicenceName:
       text: Jaký je název použité licence?
       text_as_statement: Data jsou licencována pod
@@ -1111,7 +1111,7 @@ cs:
         znát její název – bude součástí vašeho certifikátu otevřených dat.
       answers:
         a_1:
-          text: název licence
+          placeholder: název licence
     otherDataLicenceURL:
       text: Kde uživatelé najdou text licence?
       text_as_statement: Text licence
@@ -1119,7 +1119,7 @@ cs:
         aby si licenci mohl kdokoliv přečíst.
       answers:
         a_1:
-          text: URL k licenci
+          placeholder: URL k licenci
     otherDataLicenceOpen:
       text: Jde o otevřenou licenci?
       help_text: Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>.
@@ -1128,9 +1128,9 @@ cs:
         nebo ji ještě nikdo neposoudil.
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     contentRights:
       text: Vztahuje se na obsah dat autorské právo?
       text_as_statement: Obsah chráněný autorským právem
@@ -1162,10 +1162,10 @@ cs:
         nakládat.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: ano, obsah dat je volným dílem
     contentLicence:
       text: Pod jakou licencí zveřejňujete obsah dat?
@@ -1235,7 +1235,7 @@ cs:
         právních závazků.
       answers:
         a_1:
-          text: URL k právnímu dokumentu
+          placeholder: URL k právnímu dokumentu
     otherContentLicenceName:
       text: Jaký je název této licence?
       text_as_statement: Licence obsahu
@@ -1243,7 +1243,7 @@ cs:
         ho mohli uvést na certifikátu otevřených dat.
       answers:
         a_1:
-          text: název licence
+          placeholder: název licence
     otherContentLicenceURL:
       text: Kde je plný text této licence?
       text_as_statement: Text licence k obsahu
@@ -1251,7 +1251,7 @@ cs:
         dat, aby si kdokoliv mohl licenci zkontrolovat.
       answers:
         a_1:
-          text: URL k licenci
+          placeholder: URL k licenci
     otherContentLicenceOpen:
       text: Jde o otevřenou licenci?
       help_text: Definici „otevřené licence“ najdete na serveru <a href="http://opendefinition.org/od/czech/">OpenDefinition.org</a>.
@@ -1260,9 +1260,9 @@ cs:
         nebo ji ještě nikdo neposoudil.
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     contentRightsURL:
       text: Kde popisujete právní a licenční podmínky spojené s obsahem dat?
       text_as_statement: Právní prohlášení k obsahu dat
@@ -1270,7 +1270,7 @@ cs:
         spojené s obsahem dat.
       answers:
         a_1:
-          text: URL právního prohlášení
+          placeholder: URL právního prohlášení
     copyrightStatementMetadata:
       text: Které části vašeho právního prohlášení jsou strojově čitelné?
       text_as_statement: Strojově čitelná data právního prohlášení
@@ -1333,10 +1333,10 @@ cs:
       text_as_statement: Anonymizace dat
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: ověřena nezávislým posudkem
     appliedAnon:
       text: Pokusili jste se snížit nebo úplně vyloučit riziko identifikace osob podle
@@ -1346,10 +1346,10 @@ cs:
         osob. Konkrétní techniky záleží na konkrétní podobě dat.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: data byla anonymizována
     lawfulDisclosure:
       text: Jste ze zákona povinni nebo oprávněni zveřejňovat tato osobní data?
@@ -1358,17 +1358,17 @@ cs:
         v případech, kdy vám to povoluje nebo nařizuje zákon.</strong> '
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: zveřejnění dat je přikázáno zákonem
     lawfulDisclosureURL:
       text: Který dokument vám umožnuje zveřejnit osobní data?
       text_as_statement: Právo ke zveřejnění osobních dat
       answers:
         a_1:
-          text: URL s odůvodněním
+          placeholder: URL s odůvodněním
     riskAssessmentExists:
       text: Analyzovali jste rizika spojená se zveřejněním osobních údajů?
       text_as_statement: Rizika spojená s osobními údaji
@@ -1376,10 +1376,10 @@ cs:
         zveřejnění těchto dat.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: poskytovatel neprovedl analýzu rizik
         a_true:
-          text: true
+          text: ano
           text_as_statement: poskytovatel provedl analýzu rizik
     riskAssessmentUrl:
       text: Kde máte analýzu rizik zveřejněnou?
@@ -1389,7 +1389,7 @@ cs:
         pouze shrnout nebo příslušné části cenzurovat.
       answers:
         a_1:
-          text: URL analýzy rizik
+          placeholder: URL analýzy rizik
     riskAssessmentAudited:
       text: Prošla vaše analýza rizik nezávislým auditem?
       text_as_statement: Audit analýzy rizik
@@ -1397,10 +1397,10 @@ cs:
         a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: analýza rizik prošla nezávislým auditem
     individualConsentURL:
       text: Kde máte sdělení o ochraně osobních údajů dotčených osob?
@@ -1410,23 +1410,23 @@ cs:
         vašich dat, aby se nedostali do sporu se zákonem na ochranu osobních údajů.
       answers:
         a_1:
-          text: URL dokumentu
+          placeholder: URL dokumentu
     dpStaff:
       text: Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?
       answers:
         a_false:
-          text: false
+          text: ne
         a_true:
-          text: true
+          text: ano
     dbStaffConsulted:
       text: Podílel se na analýze rizik?
       text_as_statement: Zodpovědnost za ochranu osobních údajů
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: zodpovědná osoba se podílela na analýze rizik
     anonymisationAudited:
       text: Nechali jste svůj systém anonymizace dat ověřit nezávislým auditem?
@@ -1436,41 +1436,41 @@ cs:
         nebo třetí stranou.
       answers:
         a_false:
-          text: false
+          text: ne
           text_as_statement: ''
         a_true:
-          text: true
+          text: ano
           text_as_statement: ověřena nezávislým auditem
   labels:
     findability:
-      title: Vyhledávání dat
+      text: Vyhledávání dat
       help_text: jak se uživatelé o vašich datech dozvědí
     accuracy:
-      title: Aktuálnost dat
+      text: Aktuálnost dat
       help_text: Jak zajišťujete aktuálnost dat?
     quality:
-      title: Kvalita dat
+      text: Kvalita dat
       help_text: nakolik se vašim datům dá věřit?
     guarantees:
-      title: Garance
+      text: Garance
       help_text: jaká je očekávaná dostupnost dat?
     locations:
-      title: Umístění
+      text: Umístění
       help_text: kde vaše data najít?
     format:
-      title: Formát
+      text: Formát
       help_text: jak se s vašimi daty dá pracovat
     trust:
-      title: Důvěryhodnost
+      text: Důvěryhodnost
       help_text: do jaké míry mohou uživatelé vašim datům důvěřovat
     documentation:
-      title: Dokumentace
+      text: Dokumentace
       help_text: jak uživatelům vysvětlit kontext a obsah vašich dat
     support:
-      title: Podpora
+      text: Podpora
       help_text: komunikace s lidmi, kteří vaše data používají
     services:
-      title: Služby
+      text: Služby
       help_text: nástroje pro práci s vašimi daty
     pilot_1:
       text: ! ' <strong>Měli byste zveřejnit dokumentaci dat</strong>, aby uživatelé
@@ -1783,13 +1783,13 @@ cs:
         a dalších existujících nástrojů</strong> pro rychlou a pohodlnou práci s vašimi
         daty.'
     ownership:
-      title: Práva
+      text: Práva
       help_text: Za jakých podmínek lze data použít?
     licensing:
-      title: Licence
+      text: Licence
       help_text: Jaká oprávnění poskytujete k užití těchto dat?
     privacy:
-      title: Ochrana osobních údajů
+      text: Ochrana osobních údajů
       help_text: jak chránit soukromí osob
     basic_5:
       text: ! ' <strong>Každý přispěvatel musí souhlasit s přispěvatelskou licenční

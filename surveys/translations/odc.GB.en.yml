@@ -2,15 +2,15 @@
 en:
   survey_sections:
     general:
-      title: General Information
+      text: General Information
     practical:
-      title: Practical Information
+      text: Practical Information
       help_text: Findability, accuracy, quality and guarantees
     technical:
-      title: Technical Information
+      text: Technical Information
       help_text: Locations, formats and trust
     social:
-      title: Social Information
+      text: Social Information
       help_text: Documentation, support and services
     legal:
       title: Legal Information
@@ -23,7 +23,7 @@ en:
         quickly identify what's unique about it.
       answers:
         a_1:
-          text: Data Title
+          placeholder: Data Title
     documentationUrl:
       text: Where is it described?
       text_as_statement: This data is described at
@@ -31,7 +31,7 @@ en:
         and find more detail. It can be a page within a bigger catalog like data.gov.uk.
       answers:
         a_1:
-          text: Documentation URL
+          placeholder: Documentation URL
     publisher:
       text: Who publishes this data?
       text_as_statement: This data is published by
@@ -39,7 +39,7 @@ en:
         who you work for unless you’re doing this on behalf of someone else.
       answers:
         a_1:
-          text: Data Publisher
+          placeholder: Data Publisher
     publisherUrl:
       text: What website is the data published on?
       text_as_statement: The data is published on
@@ -47,7 +47,7 @@ en:
         organisation even if people give different names.
       answers:
         a_1:
-          text: Publisher URL
+          placeholder: Publisher URL
     releaseType:
       text: What kind of release is this?
       answers:
@@ -72,16 +72,16 @@ en:
       help_text: Data can be found more easily if it is linked to from your main website.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     webpage:
       text: Which page on your website links to the data?
       text_as_statement: The website links to the data from
       help_text: Give a URL on your main website that includes a link to this data.
       answers:
         a_1:
-          text: Web page URL
+          placeholder: Web page URL
     listed:
       text: Is your data listed within a collection?
       help_text: Data is easier for people to find when it's in relevant data catalogs
@@ -89,9 +89,9 @@ en:
         relevant search results.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     listing:
       text: Where is it listed?
       text_as_statement: The data appears in this collection
@@ -100,7 +100,7 @@ en:
         it's UK academia data) or a URL for search engine results.
       answers:
         a_1:
-          text: Listing URL
+          placeholder: Listing URL
     referenced:
       text: Is this data referenced from your own publications?
       help_text: When you reference your data within your own publications, such as
@@ -108,16 +108,16 @@ en:
         find and understand it better.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     reference:
       text: Where is your data referenced?
       text_as_statement: This data is referenced from
       help_text: Give a URL to a document that cites or references this data.
       answers:
         a_1:
-          text: Reference URL
+          placeholder: Reference URL
     serviceType:
       text: Does the data behind your API change?
       text_as_statement: The data behind the API
@@ -136,7 +136,7 @@ en:
       text: Will your data go out of date?
       text_as_statement: The accuracy or relevance of this data will
       answers:
-        true:
+        'true':
           text: yes, this data will go out of date
           help_text: For example, a dataset of bus stop locations will go out of date
             over time as some are moved or new ones created.
@@ -146,7 +146,7 @@ en:
           help_text: For example, population statistics usually include a fixed timestamp
             to indicate when the statistics were relevant.
           text_as_statement: go out of date but it is timestamped
-        false:
+        'false':
           text: no, this data does not contain any time-sensitive information
           help_text: For example, the results of an experiment will not go out of
             date because the data accurately reports observed outcomes.
@@ -159,10 +159,10 @@ en:
         if you also update it frequently and quickly too.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: at least daily
     seriesType:
       text: What type of dataset series is this?
@@ -188,10 +188,10 @@ en:
         Atom or custom formats.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: is available
     frequentSeriesPublication:
       text: How often do you create a new release?
@@ -243,10 +243,10 @@ en:
         API access.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: dumps of the data
     dumpFrequency:
       text: How frequently do you create a new database dump?
@@ -273,10 +273,10 @@ en:
         it yourself. When you make corrections, people need to be told about them.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: corrected
     qualityUrl:
       text: Where do you document issues with the quality of this data?
@@ -287,7 +287,7 @@ en:
         can judge how much to rely on this data.
       answers:
         a_1:
-          text: Data Quality Documentation URL
+          placeholder: Data Quality Documentation URL
     qualityControlUrl:
       text: Where is your quality control process described?
       text_as_statement: Quality control processes are described at
@@ -296,7 +296,7 @@ en:
         and encourages improvements that benefit everyone.
       answers:
         a_1:
-          text: Quality Control Process Description URL
+          placeholder: Quality Control Process Description URL
     backups:
       text: Do you take offsite backups?
       text_as_statement: The data is
@@ -304,10 +304,10 @@ en:
         be lost in the case of accident.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: backed up offsite
     slaUrl:
       text: Where do you describe any guarantees about service availability?
@@ -317,7 +317,7 @@ en:
         a guaranteed uptime of 99.5%, or you might provide no guarantees.
       answers:
         a_1:
-          text: Service Availability Documentation URL
+          placeholder: Service Availability Documentation URL
     statusUrl:
       text: Where do you give information about the current status of the service?
       text_as_statement: Service status is given at
@@ -325,7 +325,7 @@ en:
         of your service, including any faults you are aware of.
       answers:
         a_1:
-          text: Service Status URL
+          placeholder: Service Status URL
     onGoingAvailability:
       text: How long will this data be available for?
       text_as_statement: The data is available
@@ -352,7 +352,7 @@ en:
         on the web so people can easily find and reuse it.
       answers:
         a_1:
-          text: Dataset URL
+          placeholder: Dataset URL
     versionManagement:
       text: How do you publish a series of the same dataset?
       answers:
@@ -379,7 +379,7 @@ en:
         content at this URL should change each time a new version is released.
       answers:
         a_1:
-          text: Current Dataset URL
+          placeholder: Current Dataset URL
     versionsTemplateUrl:
       text: What format do dataset release URLs follow?
       text_as_statement: Releases follow this consistent URL pattern
@@ -388,7 +388,7 @@ en:
         `http://example.com/data/monthly/mydata-{YY}{MM}.csv`
       answers:
         a_1:
-          text: Version Template URL
+          placeholder: Version Template URL
     versionsUrl:
       text: Where is your list of dataset releases?
       text_as_statement: Releases of this data are listed at
@@ -396,7 +396,7 @@ en:
         Use the URL of the first page which should link to the rest of the pages.
       answers:
         a_1:
-          text: Version List URL
+          placeholder: Version List URL
     endpointUrl:
       text: Where is the endpoint for your API?
       text_as_statement: The API service endpoint is
@@ -405,7 +405,7 @@ en:
         to work out which services exist.
       answers:
         a_1:
-          text: Endpoint URL
+          placeholder: Endpoint URL
     dumpManagement:
       text: How do you publish database dumps?
       answers:
@@ -432,7 +432,7 @@ en:
         this URL should change each time a new database dump is created.
       answers:
         a_1:
-          text: Current Dump URL
+          placeholder: Current Dump URL
     dumpsTemplateUrl:
       text: What format do database dump URLs follow?
       text_as_statement: Database dumps follow the consistent URL pattern
@@ -441,7 +441,7 @@ en:
         `http://example.com/data/monthly/mydata-{YY}{MM}.csv`
       answers:
         a_1:
-          text: Dump Template URL
+          placeholder: Dump Template URL
     dumpsUrl:
       text: Where is your list of available database dumps?
       text_as_statement: A list of database dumps is at
@@ -450,7 +450,7 @@ en:
         pages.
       answers:
         a_1:
-          text: Dump List URL
+          placeholder: Dump List URL
     changeFeedUrl:
       text: Where is your feed of changes?
       text_as_statement: A feed of changes to this data is at
@@ -459,7 +459,7 @@ en:
         which should link to the rest of the pages.
       answers:
         a_1:
-          text: Change Feed URL
+          placeholder: Change Feed URL
     machineReadable:
       text: Is this data machine-readable?
       text_as_statement: This data is
@@ -468,10 +468,10 @@ en:
         would not be machine-readable but a CSV file would be.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: machine-readable
     openStandard:
       text: Is this data in a standard open format?
@@ -482,10 +482,10 @@ en:
         open standards.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: a standard open format
     dataType:
       text: What kind of data do you publish?
@@ -605,16 +605,16 @@ en:
         easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: persistent identifiers
     resolvingIds:
       text: Can the identifiers in your data be used to find extra information?
       text_as_statement: The persistent identifiers
       answers:
-        false:
+        'false':
           text: no, the identifiers can't be used to find extra information
           text_as_statement: ''
         service:
@@ -638,7 +638,7 @@ en:
         and give back some information about the thing it identifies.
       answers:
         a_1:
-          text: Identifier Resolution Service URL
+          placeholder: Identifier Resolution Service URL
     existingExternalUrls:
       text: Is there third-party information about things in your data on the web?
       help_text: Sometimes other people outside your control provide URLs to the things
@@ -646,9 +646,9 @@ en:
         link to the Ordnance Survey website.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     reliableExternalUrls:
       text: Is that third-party information reliable?
       help_text: If a third-party provides public URLs about things in your data,
@@ -657,9 +657,9 @@ en:
         data certificate or similar hallmarks to help make your decision.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     externalUrls:
       text: Does your data use those third-party URLs?
       text_as_statement: Third-party URLs are
@@ -668,10 +668,10 @@ en:
         combine data from different sources to make it more useful.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: referenced in this data
     provenance:
       text: Do you provide machine-readable provenance for your data?
@@ -681,10 +681,10 @@ en:
         can trace back how it has been handled.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: machine-readable
     digitalCertificate:
       text: Where do you describe how people can verify that data they receive comes
@@ -696,7 +696,7 @@ en:
         tampered with.
       answers:
         a_1:
-          text: Verification Process URL
+          placeholder: Verification Process URL
     documentationMetadata:
       text: ! 'Does your data documentation include machine-readable data for:'
       text_as_statement: The documentation includes machine-readable data for
@@ -783,22 +783,22 @@ en:
       text_as_statement: The technical documentation for the data is at
       answers:
         a_1:
-          text: Technical Documentation URL
+          placeholder: Technical Documentation URL
     vocabulary:
       text: Do the data formats use vocabularies or schemas?
       help_text: Formats like CSV, JSON, XML or Turtle use custom vocabularies or
         schemas which say what columns or properties the data contains.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     schemaDocumentationUrl:
       text: Where is documentation about your data vocabularies?
       text_as_statement: The vocabularies used by this data are documented at
       answers:
         a_1:
-          text: Schema Documentation URL
+          placeholder: Schema Documentation URL
     codelists:
       text: Are there any codes used in this data?
       help_text: If your data uses codes to refer to things like geographical areas,
@@ -806,15 +806,15 @@ en:
         people.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     codelistDocumentationUrl:
       text: Where are any codes in your data documented?
       text_as_statement: The codes in this data are documented at
       answers:
         a_1:
-          text: Codelist Documentation URL
+          placeholder: Codelist Documentation URL
     contactUrl:
       text: Where can people find out how to contact someone with questions about
         this data?
@@ -823,27 +823,27 @@ en:
         if they have questions about the data.
       answers:
         a_1:
-          text: Contact Documentation
+          placeholder: Contact Documentation
     improvementsContact:
       text: Where can people find out how to improve the way your data is published?
       text_as_statement: Find out how to suggest improvements to publication at
       answers:
         a_1:
-          text: Improvement Suggestions URL
+          placeholder: Improvement Suggestions URL
     dataProtectionUrl:
       text: Where can people find out how to contact someone with questions about
         privacy?
       text_as_statement: Find out where to send questions about privacy at
       answers:
         a_1:
-          text: Confidentiality Contact Documentation
+          placeholder: Confidentiality Contact Documentation
     socialMedia:
       text: Do you use social media to connect with people who use your data?
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     account:
       text: Which social media accounts can people reach you on?
       text_as_statement: Contact the curator through these social media accounts
@@ -851,7 +851,7 @@ en:
         profile page.
       answers:
         a_1:
-          text: Social Media URL
+          placeholder: Social Media URL
     forum:
       text: Where should people discuss this dataset?
       text_as_statement: Discuss this data at
@@ -859,14 +859,14 @@ en:
         your data.
       answers:
         a_1:
-          text: Forum or Mailing List URL
+          placeholder: Forum or Mailing List URL
     correctionReporting:
       text: Where can people find out how to request corrections to your data?
       text_as_statement: Find out how to request data corrections at
       help_text: Give a URL where people can report errors they spot in your data.
       answers:
         a_1:
-          text: Correction Instructions URL
+          placeholder: Correction Instructions URL
     correctionDiscovery:
       text: Where can people find out how to get notifications of corrections to your
         data?
@@ -876,22 +876,22 @@ en:
         are shared with people.
       answers:
         a_1:
-          text: Correction Notification URL
+          placeholder: Correction Notification URL
     engagementTeam:
       text: Do you have anyone who actively builds a community around this data?
       help_text: A community engagement team will engage through social media, blogging,
         and arrange hackdays or competitions to encourage people to use the data.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     engagementTeamUrl:
       text: Where is their home page?
       text_as_statement: Community engagement is done by
       answers:
         a_1:
-          text: Community Engagement Team Home Page URL
+          placeholder: Community Engagement Team Home Page URL
     libraries:
       text: Where do you list tools to work with your data?
       text_as_statement: Tools to help use this data are listed at
@@ -899,16 +899,16 @@ en:
         use when they work with your data.
       answers:
         a_1:
-          text: Tool URL
+          placeholder: Tool URL
     publisherRights:
       text: Do you have the rights to publish this data as open data?
       help_text: If your organisation didn't originally create or gather this data
         then you might not have the right to publish it. If you’re not sure, check
         with the data owner because you will need their permission to publish it.
       answers:
-        true:
+        'yes':
           text: yes, you have the rights to publish this data as open data
-        false:
+        'no':
           text: no, you don't have the rights to publish this data as open data
         unsure:
           text: you're not sure if you have the rights to publish this data as open
@@ -924,7 +924,7 @@ en:
         challenge. Give a URL for a page that describes the risk of using this data.
       answers:
         a_1:
-          text: Risk Documentation URL
+          placeholder: Risk Documentation URL
     publisherOrigin:
       text: Was <em>all</em> this data originally created or gathered by you?
       text_as_statement: This data was
@@ -933,10 +933,10 @@ en:
         about your right to publish it.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: originally created or generated by its curator
     thirdPartyOrigin:
       text: Was some of this data extracted or calculated from other data?
@@ -945,9 +945,9 @@ en:
         analysed their data to produce new results from it.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     thirdPartyOpen:
       text: Are <em>all</em> sources of this data already published as open data?
       text_as_statement: This data is created from
@@ -957,10 +957,10 @@ en:
         can publish it.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: open data sources
     crowdsourced:
       text: Was some of this data crowdsourced?
@@ -970,10 +970,10 @@ en:
         open data.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: crowdsourced
     crowdsourcedContent:
       text: Did contributors to this data use their judgement?
@@ -984,9 +984,9 @@ en:
         you before you can publish it.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     claUrl:
       text: Where is the Contributor Licence Agreement (CLA)?
       text_as_statement: The Contributor Licence Agreement is at
@@ -995,7 +995,7 @@ en:
         waive their rights, or license the data to you so you can publish it.
       answers:
         a_1:
-          text: Contributor Licence Agreement URL
+          placeholder: Contributor Licence Agreement URL
     cldsRecorded:
       text: Have all contributors agreed to the Contributor Licence Agreement (CLA)?
       help_text: Check all contributors agree to a CLA before you reuse or republish
@@ -1003,9 +1003,9 @@ en:
         whether or not they agree to the CLA.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     sourceDocumentationUrl:
       text: Where do you describe sources of this data?
       text_as_statement: The sources of this data are described at
@@ -1014,7 +1014,7 @@ en:
         where the data comes from.
       answers:
         a_1:
-          text: Data Sources Documentation URL
+          placeholder: Data Sources Documentation URL
     sourceDocumentationMetadata:
       text: Is documentation about the sources of this data also in machine-readable
         format?
@@ -1025,10 +1025,10 @@ en:
         is being used and justify its ongoing publication.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: machine-readable data about the sources of this data
     copyrightURL:
       text: Where have you published the rights statement for this dataset?
@@ -1039,7 +1039,7 @@ en:
         helps people understand what they can and can't do with the data.
       answers:
         a_1:
-          text: Rights Statement URL
+          placeholder: Rights Statement URL
     dataLicence:
       text: Under which licence can people reuse this data?
       text_as_statement: This data is available under
@@ -1127,7 +1127,7 @@ en:
         it does waive the rights in the data.
       answers:
         a_1:
-          text: Waiver URL
+          placeholder: Waiver URL
     otherDataLicenceName:
       text: What is the name of the licence?
       text_as_statement: This data is available under
@@ -1135,7 +1135,7 @@ en:
         it on your Open Data Certificate.
       answers:
         a_1:
-          text: Other Licence Name
+          placeholder: Other Licence Name
     otherDataLicenceURL:
       text: Where is the licence?
       text_as_statement: This licence is at
@@ -1143,7 +1143,7 @@ en:
         Certificate and check that it's publicly available.
       answers:
         a_1:
-          text: Other Licence URL
+          placeholder: Other Licence URL
     otherDataLicenceOpen:
       text: Is the licence an open licence?
       help_text: If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open
@@ -1153,9 +1153,9 @@ en:
         or hasn't been assessed yet.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     contentRights:
       text: Is there any copyright in the content of this data?
       text_as_statement: There are
@@ -1185,10 +1185,10 @@ en:
         reused.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: marked as public domain
     contentLicence:
       text: Under which licence can others reuse content?
@@ -1260,7 +1260,7 @@ en:
         that it does waive your copyright.
       answers:
         a_1:
-          text: Waiver URL
+          placeholder: Waiver URL
     otherContentLicenceName:
       text: What's the name of the licence?
       text_as_statement: The content is available under
@@ -1268,7 +1268,7 @@ en:
         it on your Open Data Certificate.
       answers:
         a_1:
-          text: Licence Name
+          placeholder: Licence Name
     otherContentLicenceURL:
       text: Where is the licence?
       text_as_statement: The content licence is at
@@ -1276,7 +1276,7 @@ en:
         Certificate and check that it's publicly available.
       answers:
         a_1:
-          text: Licence URL
+          placeholder: Licence URL
     otherContentLicenceOpen:
       text: Is the licence an open licence?
       help_text: If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open
@@ -1286,9 +1286,9 @@ en:
         or hasn't been assessed yet.
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     contentRightsURL:
       text: Where are the rights and licensing of the content explained?
       text_as_statement: The rights and licensing of the content are explained at
@@ -1296,7 +1296,7 @@ en:
         the rights and licensing of a piece of content from the data.
       answers:
         a_1:
-          text: Content Rights Description URL
+          placeholder: Content Rights Description URL
     copyrightStatementMetadata:
       text: Does your rights statement include machine-readable versions of
       text_as_statement: The rights statement includes data about
@@ -1359,10 +1359,10 @@ en:
       text_as_statement: The anonymisation process has been
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: independently audited
     appliedAnon:
       text: Have you attempted to reduce or remove the possibility of individuals
@@ -1373,10 +1373,10 @@ en:
         you have.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: anonymised
     lawfulDisclosure:
       text: Are you required or permitted by law to publish this data about individuals?
@@ -1386,10 +1386,10 @@ en:
         individuals to publish information about them.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: can be published
     lawfulDisclosureURL:
       text: Where do you document your right to publish data about individuals?
@@ -1397,7 +1397,7 @@ en:
         at
       answers:
         a_1:
-          text: Disclosure Rationale URL
+          placeholder: Disclosure Rationale URL
     privacyImpactAssessmentExists:
       text: Have you carried out a Privacy Impact Assessment?
       text_as_statement: The curator has
@@ -1406,10 +1406,10 @@ en:
         in your data as well as the use and disclosure of that information.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: not carried out a Privacy Impact Assessment
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: carried out a Privacy Impact Assessment
     privacyImpactAssessmentUrl:
       text: Where is your Privacy Impact Assessment published?
@@ -1419,7 +1419,7 @@ en:
         information.
       answers:
         a_1:
-          text: Privacy Impact Assessment URL
+          placeholder: Privacy Impact Assessment URL
     piaAudited:
       text: Has your Privacy Impact Assessment been independently audited?
       text_as_statement: The Privacy Impact Assessment has been
@@ -1427,10 +1427,10 @@ en:
         audits by specialists or third-parties tend to be more rigorous and impartial.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: independently audited
     individualConsentURL:
       text: Where is the privacy notice for individuals affected by your data?
@@ -1440,23 +1440,23 @@ en:
         with the Data Protection Act.
       answers:
         a_1:
-          text: Privacy Notice URL
+          placeholder: Privacy Notice URL
     dpStaff:
       text: Is there someone in your organisation who is responsible for data protection?
       answers:
         a_false:
-          text: false
+          text: 'no'
         a_true:
-          text: true
+          text: 'yes'
     dbStaffConsulted:
       text: Have you involved them in the Privacy Impact Assessment process?
       text_as_statement: The individual responsible for data protection
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: has been consulted
     anonymisationAudited:
       text: Has your anonymisation approach been independently audited?
@@ -1466,41 +1466,41 @@ en:
         tend to be more rigorous and impartial.
       answers:
         a_false:
-          text: false
+          text: 'no'
           text_as_statement: ''
         a_true:
-          text: true
+          text: 'yes'
           text_as_statement: independently audited
   labels:
     findability:
-      title: Findability
+      text: Findability
       help_text: how you help people find your data
     accuracy:
-      title: Accuracy
+      text: Accuracy
       help_text: how you keep your data up-to-date
     quality:
-      title: Quality
+      text: Quality
       help_text: how much people can rely on your data
     guarantees:
-      title: Guarantees
+      text: Guarantees
       help_text: how much people can depend on your data’s availability
     locations:
-      title: Locations
+      text: Locations
       help_text: how people can access your data
     format:
-      title: Formats
+      text: Formats
       help_text: how people can work with your data
     trust:
-      title: Trust
+      text: Trust
       help_text: how much trust people can put in your data
     documentation:
-      title: Documentation
+      text: Documentation
       help_text: how you help people understand the context and content of your data
     support:
-      title: Support
+      text: Support
       help_text: how you communicate with people who use your data
     services:
-      title: Services
+      text: Services
       help_text: how you give people access to tools they need to work with your data
     pilot_1:
       text: You should have a <strong>web page that offers documentation</strong>

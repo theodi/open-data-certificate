@@ -26,7 +26,7 @@ en:
       help_text: "It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data."
       answers:
         a_1:
-          text: "Risk Documentation URL"
+          placeholder: "Risk Documentation URL"
     publisherOrigin:
       text: "Was <em>all</em> this data originally created or gathered by you?"
       text_as_statement: "This data was"
@@ -82,7 +82,7 @@ en:
       help_text: "Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it."
       answers:
         a_1:
-          text: "Contributor Licence Agreement URL"
+          placeholder: "Contributor Licence Agreement URL"
     cldsRecorded:
       text: "Have all contributors agreed to the Contributor Licence Agreement (CLA)?"
       help_text: "Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA."
@@ -97,7 +97,7 @@ en:
       help_text: "Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from."
       answers:
         a_1:
-          text: "Data Sources Documentation URL"
+          placeholder: "Data Sources Documentation URL"
     sourceDocumentationMetadata:
       text: "Is documentation about the sources of this data also in machine-readable format?"
       text_as_statement: "The curator has published"
@@ -115,7 +115,7 @@ en:
       help_text: "Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data."
       answers:
         a_1:
-          text: "Rights Statement URL"
+          placeholder: "Rights Statement URL"
     dataLicence:
       text: "Under which licence can people reuse this data?"
       text_as_statement: "This data is available under"
@@ -184,21 +184,21 @@ en:
       help_text: "Give a URL to the publicly available waiver so people can check that it does waive the rights in the data."
       answers:
         a_1:
-          text: "Waiver URL"
+          placeholder: "Waiver URL"
     otherDataLicenceName:
       text: "What is the name of the licence?"
       text_as_statement: "This data is available under"
       help_text: "If you use a different licence, we need the name so people can see it on your Open Data Certificate."
       answers:
         a_1:
-          text: "Other Licence Name"
+          placeholder: "Other Licence Name"
     otherDataLicenceURL:
       text: "Where is the licence?"
       text_as_statement: "This licence is at"
       help_text: "Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available."
       answers:
         a_1:
-          text: "Other Licence URL"
+          placeholder: "Other Licence URL"
     otherDataLicenceOpen:
       text: "Is the licence an open licence?"
       help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
@@ -290,21 +290,21 @@ en:
       help_text: "Give a URL to your own publicly available waiver so people can check that it does waive your copyright."
       answers:
         a_1:
-          text: "Waiver URL"
+          placeholder: "Waiver URL"
     otherContentLicenceName:
       text: "What's the name of the licence?"
       text_as_statement: "The content is available under"
       help_text: "If you use a different licence, we need its name so people can see it on your Open Data Certificate."
       answers:
         a_1:
-          text: "Licence Name"
+          placeholder: "Licence Name"
     otherContentLicenceURL:
       text: "Where is the licence?"
       text_as_statement: "The content licence is at"
       help_text: "Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available."
       answers:
         a_1:
-          text: "Licence URL"
+          placeholder: "Licence URL"
     otherContentLicenceOpen:
       text: "Is the licence an open licence?"
       help_text: "If you aren't sure what an open licence is then read the <a href=\"http://opendefinition.org/\">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href=\"http://licenses.opendefinition.org/\">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet."
@@ -319,7 +319,7 @@ en:
       help_text: "Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data."
       answers:
         a_1:
-          text: "Content Rights Description URL"
+          placeholder: "Content Rights Description URL"
     copyrightStatementMetadata:
       text: "Does your rights statement include machine-readable versions of"
       text_as_statement: "The rights statement includes data about"
@@ -405,7 +405,7 @@ en:
       text_as_statement: "The right to publish this data about individuals is documented at"
       answers:
         a_1:
-          text: "Disclosure Rationale URL"
+          placeholder: "Disclosure Rationale URL"
     privacyImpactAssessmentExists:
       text: "Have you carried out a Privacy Impact Assessment?"
       text_as_statement: "The curator has"
@@ -423,7 +423,7 @@ en:
       help_text: "Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information."
       answers:
         a_1:
-          text: "Privacy Impact Assessment URL"
+          placeholder: "Privacy Impact Assessment URL"
     piaAudited:
       text: "Has your Privacy Impact Assessment been independently audited?"
       text_as_statement: "The Privacy Impact Assessment has been"
@@ -441,7 +441,7 @@ en:
       help_text: "When you collect data about individuals you must tell them how that data will be used. People who use your data need this to make sure they comply with the Data Protection Act."
       answers:
         a_1:
-          text: "Privacy Notice URL"
+          placeholder: "Privacy Notice URL"
     dpStaff:
       text: "Is there someone in your organisation who is responsible for data protection?"
       answers:

@@ -1,15 +1,15 @@
 cs:
   survey_sections:
     general:
-      title: "Obecné informace"
+      text: "Obecné informace"
     practical:
-      title: "Praktické informace"
+      text: "Praktické informace"
       help_text: "Vyhledávání, přesnost, kvalita a záruky"
     technical:
-      title: "Technické informace"
+      text: "Technické informace"
       help_text: "Umístění, formát a důvěryhodnost"
     social:
-      title: "Sociální informace"
+      text: "Sociální informace"
       help_text: "Dokumentace, podpora a služby"
   questions:
     # Obecné informace
@@ -18,28 +18,28 @@ cs:
       help_text: "Uživatelé název uvidí v seznamu podobných zdrojů, takže se snažte i v rámci krátkého textu přijít s něčím jedinečným a popisným, aby se podle něj dalo rychle zorientovat."
       answers:
         a_1:
-          text: "název projektu"
+          placeholder: "název projektu"
     documentationUrl:
       text: "Kde máte zveřejněnou dokumentaci?"
       text_as_statement: "Dokumentace"
       help_text: "Uveďte adresu, na které si mohou o vašich datech nastudovat podrobnosti. Může jít například o záznam v nějakém větším katalogu typu cz.ckan.net."
       answers:
         a_1:
-          text: "URL dokumentace"
+          placeholder: "URL dokumentace"
     publisher:
       text: "Kdo data publikuje?"
       text_as_statement: "Poskytovatel"
       help_text: "Uveďte název organizace, která data publikuje. Nejspíš to bude váš zaměstnavatel – pokud tedy data nezveřejňujete pro někoho jiného."
       answers:
         a_1:
-          text: "jméno poskytovatele"
+          placeholder: "jméno poskytovatele"
     publisherUrl:
       text: "Webová stránka poskytovatele"
       text_as_statement: "Web poskytovatele"
       help_text: "Uveďte prosím URL webu poskytovatele. Pomáhá nám spárovat data pocházející od stejných poskytovatelů."
       answers:
         a_1:
-          text: "web poskytovatele"
+          placeholder: "web poskytovatele"
     releaseType:
       text: "Co přesně zveřejňujete?"
       answers:
@@ -70,7 +70,7 @@ cs:
       help_text: "URL stránky, která na data odkazuje z vašeho hlavního webu."
       answers:
         a_1:
-          text: "URL stránky"
+          placeholder: "URL stránky"
     listed:
       text: "Jsou vaše data vedená v nějakém katalogu?"
       help_text: "Data se lépe hledají, když jsou uvedená v relevantních seznamech, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy."
@@ -85,7 +85,7 @@ cs:
       help_text: "Uveďte URL do katalogu, ve kterém jsou data uvedena; například cz.ckan.net a podobně. Můžete uvést také URL na výsledky vyhledávače."
       answers:
         a_1:
-          text: "URL datového katalogu"
+          placeholder: "URL datového katalogu"
     referenced:
       text: "Odkazujete na tato data ve svých publikacích?"
       help_text: "Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, ve kterém je datům lépe rozumět."
@@ -100,7 +100,7 @@ cs:
       help_text: "Uveďte URL dokumentu, který se na data odkazuje."
       answers:
         a_1:
-          text: "URL dokumentu"
+          placeholder: "URL dokumentu"
     serviceType:
       text: "Mění se data, na kterých je vaše API postavené?"
       text_as_statement: "Mění se data za tímto API?"
@@ -117,7 +117,7 @@ cs:
       text: "Budou vaše data časem zastarávat?"
       text_as_statement: "Zastarávání"
       answers:
-        true:
+        "true":
           text: "ano, tato data časem zastarají"
           help_text: "Například databáze autobusových zastávek časem zastará, protože některé zastávky zmizí a objeví se nové."
           text_as_statement: "data časem zastarají"
@@ -125,7 +125,7 @@ cs:
           text: "ano, tato data časem zastarají, ale mají vyznačenou platnost"
           help_text: "Například demografické statistiky obvykle bývají opatřené časovým razítkem, podle kterého se pozná, kdy byly relevantní."
           text_as_statement: "data časem zastarají, ale mají časové razítko"
-        false:
+        "false":
           text: "ne, tato data nejsou závislá na čase"
           help_text: "Například výsledky vědeckého experimentu nepřestanou nutně platit jen kvůli tomu, že už jsou staré."
           text_as_statement: "data nejsou závislá na čase"
@@ -245,14 +245,14 @@ cs:
       help_text: "URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat."
       answers:
         a_1:
-          text: "URL dokumentace"
+          placeholder: "URL dokumentace"
     qualityControlUrl:
       text: "Kde máte popsaný proces řízení kvality dat?"
       text_as_statement: "Systém řízení kvality"
       help_text: "Uveďte adresu, na které se uživatelé dozví o průběžných automatických i ručních kontrolách vašich dat. Dáváte tím najevo, že berete kvalitu vážně, a motivujete uživatele ke hlášení chyb, které pomáhá všem ostatním."
       answers:
         a_1:
-          text: "URL dokumentace"
+          placeholder: "URL dokumentace"
     backups:
       text: "Děláte offsite zálohy?"
       text_as_statement: "Zálohování dat"
@@ -270,14 +270,14 @@ cs:
       help_text: "Uveďte URL k dokumentu, který popisuje vámi garantovanou úroveň dostupnosti služby. Můžete například uvést, že garantujete dostupnost 99,5 %, nebo že dostupnost služeb nijak nezaručujete."
       answers:
         a_1:
-          text: "URL dokumentu"
+          placeholder: "URL dokumentu"
     statusUrl:
       text: "Kde popisujete aktuální stav vaší služby?"
       text_as_statement: "Aktuální stav služby"
       help_text: "Uveďte URL stránky, která uživatele informuje o aktuálním stavu služby, včetně případných výpadků."
       answers:
         a_1:
-          text: "URL stavové stránky"
+          placeholder: "URL stavové stránky"
     onGoingAvailability:
       text: "Jak dlouho budou data k dispozici?"
       text_as_statement: "Dlouhodobá dostupnost dat"
@@ -301,7 +301,7 @@ cs:
       help_text: "Uveďte URL datové sady. Pro otevřená data by mělo existovat přímé URL, aby je uživatelé mohli snadno použít a odkazovat na ně."
       answers:
         a_1:
-          text: "URL datové sady"
+          placeholder: "URL datové sady"
     versionManagement:
       text: "Jakým způsobem publikujete aktualizace datové sady?"
       answers:
@@ -320,28 +320,28 @@ cs:
       help_text: "Uveďte URL posledního vydání datové sady. Obsah na tomto URL by se měl měnit s každým novým vydáním."
       answers:
         a_1:
-          text: "URL aktuální datové sady"
+          placeholder: "URL aktuální datové sady"
     versionsTemplateUrl:
       text: "Jaký formát mají URL jednotlivých vydání vaší datové sady?"
       text_as_statement: "Formát URL"
       help_text: "Uveďte šablonu, podle které vybíráte URL pro jednotlivá vydání své datové sady. Měnící se části URL můžete vyznačit {takto}, například: http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv."
       answers:
         a_1:
-          text: "vzor URL"
+          placeholder: "vzor URL"
     versionsUrl:
       text: "Kde je seznam vašich publikovaných datových sad?"
       text_as_statement: "Seznam publikovaných datových sad"
       help_text: "Uveďte URL stránky nebo feedu se strojově čitelným seznamem publikovaných datových sad. Pokud má seznam více stránek, uveďte URL první z nich (která by následně měla odkazovat na další)."
       answers:
         a_1:
-          text: "URL seznamu"
+          placeholder: "URL seznamu"
     endpointUrl:
       text: "Jaké je kořenové URL vašeho API?"
       text_as_statement: "Kořenové URL datového API"
       help_text: "Uveďte URL, na kterém mohou uživatelské skripty začít pracovat s vaším API."
       answers:
         a_1:
-          text: "kořenové URL"
+          placeholder: "kořenové URL"
     dumpManagement:
       text: "Jak publikujete databázové exporty?"
       answers:
@@ -360,28 +360,28 @@ cs:
       help_text: "Uveďte URL nejnovějšího exportu databáze. Obsah na tomto URL by se měl měnit pokaždé, když exportujete novou verzi."
       answers:
         a_1:
-          text: "URL exportovaných dat"
+          placeholder: "URL exportovaných dat"
     dumpsTemplateUrl:
       text: "Jaký formát mají URL jednotlivých exportů?"
       text_as_statement: "Formát URL"
       help_text: "Uveďte šablonu, podle které vznikají URL jednotlivých exportů. Měnící se části URL můžete vyznačit {takto}, například: http://firma.cz/data/mesicne/data-{RR}{MM}.csv."
       answers:
         a_1:
-          text: "šablona URL"
+          placeholder: "šablona URL"
     dumpsUrl:
       text: "Kde publikujete seznam databázových exportů?"
       text_as_statement: "Seznam exportů z databáze"
       help_text: "Uveďte URL stránky nebo feedu se strojově čitelným seznamem databázových exportů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další."
       answers:
         a_1:
-          text: "URL seznamu"
+          placeholder: "URL seznamu"
     changeFeedUrl:
       text: "Kde publikujete seznam změn v datech?"
       text_as_statement: "Seznam změn"
       help_text: "Uveďte odkaz na stránku nebo feed se strojově čitelným seznamem starších databázových exportů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další."
       answers:
         a_1:
-          text: "URL seznamu změn v datech"
+          placeholder: "URL seznamu změn v datech"
     machineReadable:
       text: "Jsou data strojově čitelná?"
       text_as_statement: "Strojová čitelnost"
@@ -515,7 +515,7 @@ cs:
       help_text: "Služba by měla podle zadaného identifikátoru, předaného například v URL, vrátit podrobné informace o příslušném objektu."
       answers:
         a_1:
-          text: "URL služby"
+          placeholder: "URL služby"
     existingExternalUrls:
       text: "Existují jinde na webu další informace o objektech, které se vyskytují ve vašich datech?"
       help_text: "Občas jsou pro objekty z vaší databáze na webu dostupné informace třetích stran. Například když máte v databázi PSČ, dají se k nim dohledat URL na stránkách pošty."
@@ -560,7 +560,7 @@ cs:
       help_text: "Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás – například můžete data digitálně podepsat."
       answers:
         a_1:
-          text: "URL k dokumentaci"
+          placeholder: "URL k dokumentaci"
     # Sociální informace
     documentationMetadata:
       text: "Jaká metadata publikujete ve strojově čitelné podobě?"
@@ -645,7 +645,7 @@ cs:
       text_as_statement: "Technická dokumentace"
       answers:
         a_1:
-          text: "URL technické dokumentace"
+          placeholder: "URL technické dokumentace"
     vocabulary:
       text: "Používá váš datový formát nějaké schéma?"
       help_text: "K datům ve formátech typu CSV, JSON, XML nebo Turtle může být přiložené schéma, které popisuje obsah a typ dat v jednotlivých sloupcích nebo klíčích."
@@ -659,7 +659,7 @@ cs:
       text_as_statement: "Dokumentace schémat"
       answers:
         a_1:
-          text: "URL k dokumentaci schémat"
+          placeholder: "URL k dokumentaci schémat"
     codelists:
       text: "Používáte v datech nějaké číselníky?"
       help_text: "Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat."
@@ -673,26 +673,26 @@ cs:
       text_as_statement: "Dokumentace číselníků"
       answers:
         a_1:
-          text: "URL k dokumentaci číselníků"
+          placeholder: "URL k dokumentaci číselníků"
     contactUrl:
       text: "Jak vás mohou uživatelé dat kontaktovat?"
       text_as_statement: "Kontakty"
       help_text: "Uveďte URL s informacemi o tom, jak vás mohou uživatelé dat kontaktovat, kdyby potřebovali s něčím poradit."
       answers:
         a_1:
-          text: "kontaktní URL"
+          placeholder: "kontaktní URL"
     improvementsContact:
       text: "Kam mohou uživatelé posílat případné zlepšovací návrhy k systému publikování vašich dat?"
       text_as_statement: "Zpětná vazba k publikovaným datovým sadám"
       answers:
         a_1:
-          text: "kontaktní URL"
+          placeholder: "kontaktní URL"
     dataProtectionUrl:
       text: "Koho mohou uživatelé kontaktovat s dotazy, které se týkají ochrany soukromí a osobních údajů?"
       text_as_statement: "Dotazy na ochranu soukromí a osobních údajů"
       answers:
         a_1:
-          text: "kontaktní URL"
+          placeholder: "kontaktní URL"
     socialMedia:
       text: "Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?"
       answers:
@@ -706,28 +706,28 @@ cs:
       help_text: "Uveďte URL profilu na nějaké sociální síti, například váš profil na Twitteru nebo Facebooku."
       answers:
         a_1:
-          text: "URL profilu na sociální síti"
+          placeholder: "URL profilu na sociální síti"
     forum:
       text: "Kde mohou uživatelé o této datové sadě diskutovat?"
       text_as_statement: "Diskuze"
       help_text: "Uveďte URL na fórum nebo poštovní konferenci, kde mohou uživatelé o vašich datech diskutovat."
       answers:
         a_1:
-          text: "URL diskuzního fóra nebo poštovní konference"
+          placeholder: "URL diskuzního fóra nebo poštovní konference"
     correctionReporting:
       text: "Jak mohou uživatelé nahlásit chyby v datech?"
       text_as_statement: "Hlášení chyb v datech"
       help_text: "Uveďte URL, na kterém mohou uživatelé hlásit chyby ve vašich datech."
       answers:
         a_1:
-          text: "kontaktní URL"
+          placeholder: "kontaktní URL"
     correctionDiscovery:
       text: "Kde a jak se uživatelé dozví o chybách ve vašich datech?"
       text_as_statement: "Informace o chybách v datech"
       help_text: "Uveďte URL, na kterém popisujete, jakým způsobem uživatele informujete o chybách ve svých datech."
       answers:
         a_1:
-          text: "informační URL"
+          placeholder: "informační URL"
     engagementTeam:
       text: "Máte někoho, kdo se aktivně stará o komunitu kolem vašich dat?"
       help_text: "K většímu zapojení uživatelů a využití dat se využívají například sociální sítě, blogy, soutěže nebo hackatony."
@@ -741,44 +741,44 @@ cs:
       text_as_statement: "Komunitní kontakt"
       answers:
         a_1:
-          text: "URL komunitního týmu"
+          placeholder: "URL komunitního týmu"
     libraries:
       text: "Máte nějaký seznam nástrojů pro práci s těmito daty?"
       text_as_statement: "Nástroje pro práci s těmito daty"
       help_text: "Uveďte URL, na kterém uživatelé najdou seznam existujících nebo doporučených nástrojů pro práci s vašimi daty."
       answers:
         a_1:
-          text: "URL dokumentace"
+          placeholder: "URL dokumentace"
   labels:
     findability:
-      title: "Vyhledávání dat"
+      text: "Vyhledávání dat"
       help_text: "jak se uživatelé o vašich datech dozvědí"
     accuracy:
-      title: "Aktuálnost dat"
+      text: "Aktuálnost dat"
       help_text: "Jak zajišťujete aktuálnost dat?"
     quality:
-      title: "Kvalita dat"
+      text: "Kvalita dat"
       help_text: "nakolik se vašim datům dá věřit?"
     guarantees:
-      title: "Garance"
+      text: "Garance"
       help_text: "jaká je očekávaná dostupnost dat?"
     locations:
-      title: "Umístění"
+      text: "Umístění"
       help_text: "kde vaše data najít?"
     format:
-      title: "Formát"
+      text: "Formát"
       help_text: "jak se s vašimi daty dá pracovat"
     trust:
-      title: "Důvěryhodnost"
+      text: "Důvěryhodnost"
       help_text: "do jaké míry mohou uživatelé vašim datům důvěřovat"
     documentation:
-      title: "Dokumentace"
+      text: "Dokumentace"
       help_text: "jak uživatelům vysvětlit kontext a obsah vašich dat"
     support:
-      title: "Podpora"
+      text: "Podpora"
       help_text: "komunikace s lidmi, kteří vaše data používají"
     services:
-      title: "Služby"
+      text: "Služby"
       help_text: "nástroje pro práci s vašimi daty"
   # Obecné informace Requirements
     pilot_1:

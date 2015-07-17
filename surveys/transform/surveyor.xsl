@@ -17,6 +17,9 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
+	<xsl:result-document href="odc_structure.{questionnaire/@jurisdiction}.xml" indent="yes">
+		<xsl:copy-of select="$structure" />
+	</xsl:result-document>
 	<!-- Surveyor quesitionnaire description -->
 	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
@@ -35,7 +38,7 @@
 <!-- MERGE -->
 
 <xsl:template match="questionnaire" mode="merge">
-  <xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
+	<xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 	<xsl:choose>
 		<xsl:when test="doc-available($langPath)">
 			<xsl:variable name="langVersion" as="element()" select="doc($langPath)/questionnaire" />
@@ -90,7 +93,7 @@
 <xsl:template match="group//group" mode="structure">
 	<_group>
 		<_group>
-			<xsl:element name="label_group_{count(preceding::group) + 1}">
+			<xsl:element name="label_{@id}">
 				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="html" /></xsl:attribute>
 				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
 				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
@@ -662,7 +665,7 @@
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
 	<xsl:value-of select="concat($indentamt, $indent)"/>
-	<xsl:text>title: </xsl:text>
+	<xsl:text>text: </xsl:text>
 	<xsl:variable name="title">
 		<xsl:apply-templates select="label" mode="html">
 			<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
@@ -703,7 +706,7 @@
 			<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
 			<xsl:text>a_1:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
-			<xsl:text>text: </xsl:text>
+			<xsl:text>placeholder: </xsl:text>
 			<xsl:value-of select="local:yamlQuotedText(input/@placeholder)" />
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:when>

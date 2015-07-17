@@ -4,16 +4,16 @@ cs:
   description: "<p>Na základě tohoto sebehodnotícího dotazníku vám vygenerujeme certifikát otevřených dat a doprovodnou visačku. Obojí můžete využít k propagaci svých otevřených dat a my získáme lepší představu o tom, jak organizace zveřejňují svá data.</p><p>Zodpovězením těchto otázek prokazujete svou snahu vyhovět relevantním zákonům, především občanskému zákoníku, autorskému zákonu a zákonu na ochranu osobních údajů. Snažte se sami zjistit, jestli se na váš případ nevztahují nějaké další zákony a předpisy.</p><p> <strong>Pro získání certifikátu nemusíte odpovídat na všechny otázky.</strong> Odpovězte tam, kde můžete.</p>"
   survey_sections:
     legal:
-      title: "Právní informace"
+      text: "Právní informace"
       help_text: "Práva, licencování a ochrana osobních údajů"
   questions:
     publisherRights:
       text: "Máte právo tato data zveřejnit?"
       help_text: "Pokud jste data sami nevytvořili nebo nenasbírali, nemusíte mít právo je zveřejnit. Pokud si nejste jisti, obraťte se na původního vlastníka dat; ke zveřejnění dat budete pravděpodobně potřebovat jeho svolení."
       answers:
-        yes:
+        "yes":
           text: "Ano, máme právo zveřejnit tato data jako otevřená."
-        no:
+        "no":
           text: "Ne, nemáme právo ke zveřejnění těchto dat jako otevřených."
         unsure:
           text: "Nejsme si jisti, jestli máme právo data zveřejnit."
@@ -25,7 +25,7 @@ cs:
       help_text: "Užití dat bez nezpochybnitelných práv je riskantní – například se může stát, že budete data muset přestat data poskytovat na základě stížnosti. Uveďte URL stránky, na které se uživatelé o podobných rizicích dozví."
       answers:
         a_1:
-          text: "URL dokumentace"
+          placeholder: "URL dokumentace"
     publisherOrigin:
       text: "Shromáždili jste <em>všechna</em> data sami?"
       text_as_statement: "Původ dat"
@@ -81,7 +81,7 @@ cs:
       help_text: "Uveďte odkaz na dokument, ve kterém vám přispěvatelé dovolují užití svých dat. Konkrétně se přispěvatelé mohou vzdát svých autorských práv, převést je na vás, nebo vám udělit licenci k jejich užití."
       answers:
         a_1:
-          text: "URL licenční dohody"
+          placeholder: "URL licenční dohody"
     cldsRecorded:
       text: "Souhlasili všichni přispěvatelé s přispěvatelskou licenční dohodou (CLA)?"
       help_text: "Abyste mohli zveřejnit cizí příspěvky, musí jejich autoři souhlasit s přispěvatelskou licenční dohodou (CLA). Měli byste si vést seznam jednotlivých přispěvatelů a poznačit si, kteří souhlasili s přispěvatelskou licenční dohodou (CLA)."
@@ -96,7 +96,7 @@ cs:
       help_text: "Uveďte URL dokumentu, ve kterém popisujete zdroje dat a licenci, která vám umožňuje data zveřejnit."
       answers:
         a_1:
-          text: "URL k dokumentaci datových zdrojů"
+          placeholder: "URL k dokumentaci datových zdrojů"
     sourceDocumentationMetadata:
       text: "Máte dokumentaci o zdrojích dat i ve strojově čitelné podobě?"
       text_as_statement: "Strojově čitelné zdroje dat"
@@ -114,7 +114,7 @@ cs:
       help_text: "Uveďte URL dokumentu, který popisuje práva k opětovnému užití této datové sady. Dokument by měl odkazovat na text licence, popsat vaše požadavky na uvádění autorství, a obsahovat prohlášení o relevantních autorských a databázových právech. Právní prohlášení pomáhá uživatelům pochopit, co všechno s daty mohou a nemohou dělat."
       answers:
         a_1:
-          text: "URL právního prohlášení"
+          placeholder: "URL právního prohlášení"
     dataLicence:
       text: "Pod jakou licencí dáváte data k dispozici?"
       text_as_statement: "Licence"
@@ -180,21 +180,21 @@ cs:
       help_text: "Uveďte URL, na kterém si uživatelé vašich dat mohou ověřit, že jste se vzdali svých práv."
       answers:
         a_1:
-          text: "URL dokumentu"
+          placeholder: "URL dokumentu"
     otherDataLicenceName:
       text: "Jaký je název použité licence?"
       text_as_statement: "Data jsou licencována pod"
       help_text: "Pokud data zveřejňujete pod jinou než nabízenou licencí, potřebujeme znát její název – bude součástí vašeho certifikátu otevřených dat."
       answers:
         a_1:
-          text: "název licence"
+          placeholder: "název licence"
     otherDataLicenceURL:
       text: "Kde uživatelé najdou text licence?"
       text_as_statement: "Text licence"
       help_text: "Uveďte URL licence. Bude součástí vašeho certifikátu otevřených dat, aby si licenci mohl kdokoliv přečíst."
       answers:
         a_1:
-          text: "URL k licenci"
+          placeholder: "URL k licenci"
     otherDataLicenceOpen:
       text: "Jde o otevřenou licenci?"
       help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
@@ -283,21 +283,21 @@ cs:
       help_text: "Uveďte URL k veřejně dostupnému dokumentu, kterým se vzdáváte práv k obsahu dat. Uživatelé si díky němu mohou ověřit, že je obsah skutečně bez právních závazků."
       answers:
         a_1:
-          text: "URL k právnímu dokumentu"
+          placeholder: "URL k právnímu dokumentu"
     otherContentLicenceName:
       text: "Jaký je název této licence?"
       text_as_statement: "Licence obsahu"
       help_text: "Pokud používáte jinou licenci, potřebujeme znát její název, abychom ho mohli uvést na certifikátu otevřených dat."
       answers:
         a_1:
-          text: "název licence"
+          placeholder: "název licence"
     otherContentLicenceURL:
       text: "Kde je plný text této licence?"
       text_as_statement: "Text licence k obsahu"
       help_text: "Uveďte URL licenčního textu. Bude uvedeno na vašem certifikátu otevřených dat, aby si kdokoliv mohl licenci zkontrolovat."
       answers:
         a_1:
-          text: "URL k licenci"
+          placeholder: "URL k licenci"
     otherContentLicenceOpen:
       text: "Jde o otevřenou licenci?"
       help_text: "Definici „otevřené licence“ najdete na serveru <a href=\"http://opendefinition.org/od/czech/\">OpenDefinition.org</a>. Tamtéž najdete přímo <a href=\"http://opendefinition.org/licenses/\">seznam otevřených licencí</a>. Pokud v něm vaše licence chybí, buď není otevřená, nebo ji ještě nikdo neposoudil."
@@ -312,7 +312,7 @@ cs:
       help_text: "Uveďte URL stránky, na které vysvětlujete právní a licenční podmínky spojené s obsahem dat."
       answers:
         a_1:
-          text: "URL právního prohlášení"
+          placeholder: "URL právního prohlášení"
     copyrightStatementMetadata:
       text: "Které části vašeho právního prohlášení jsou strojově čitelné?"
       text_as_statement: "Strojově čitelná data právního prohlášení"
@@ -398,7 +398,7 @@ cs:
       text_as_statement: "Právo ke zveřejnění osobních dat"
       answers:
         a_1:
-          text: "URL s odůvodněním"
+          placeholder: "URL s odůvodněním"
     riskAssessmentExists:
       text: "Analyzovali jste rizika spojená se zveřejněním osobních údajů?"
       text_as_statement: "Rizika spojená s osobními údaji"
@@ -416,7 +416,7 @@ cs:
       help_text: "Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace, můžete ji pouze shrnout nebo příslušné části cenzurovat."
       answers:
         a_1:
-          text: "URL analýzy rizik"
+          placeholder: "URL analýzy rizik"
     riskAssessmentAudited:
       text: "Prošla vaše analýza rizik nezávislým auditem?"
       text_as_statement: "Audit analýzy rizik"
@@ -434,7 +434,7 @@ cs:
       help_text: "Pokud sbíráte data o jednotlivých lidech, musíte jim oznámit, co budete s daty dělat. Prohlášení o soukromí dotčených osob bude zajímat i uživatele vašich dat, aby se nedostali do sporu se zákonem na ochranu osobních údajů."
       answers:
         a_1:
-          text: "URL dokumentu"
+          placeholder: "URL dokumentu"
     dpStaff:
       text: "Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?"
       answers:
@@ -465,13 +465,13 @@ cs:
           text_as_statement: "ověřena nezávislým auditem"
   labels:
     ownership:
-      title: "Práva"
+      text: "Práva"
       help_text: "Za jakých podmínek lze data použít?"
     licensing:
-      title: "Licence"
+      text: "Licence"
       help_text: "Jaká oprávnění poskytujete k užití těchto dat?"
     privacy:
-      title: "Ochrana osobních údajů"
+      text: "Ochrana osobních údajů"
       help_text: "jak chránit soukromí osob"
     standard_1:
       text: " <strong>Ke zveřejnění dat byste měli mít nezpochybnitelné právo.</strong> "

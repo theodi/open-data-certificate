@@ -63,7 +63,7 @@ Should work on OSX
   JURISDICTIONS = %w[GB CZ]
   JURISDICTION_LANGS = {
     "GB" => %w[en],
-    "CZ" => %w[cs]
+    "CZ" => %w[en cs]
   }
   JURISDICTIONS.each do |jurs|
     file "surveys/odc_questionnaire.#{jurs}.rb" => %W[

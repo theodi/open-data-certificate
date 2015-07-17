@@ -19,8 +19,10 @@ namespace :surveyor do
     Rake::Task['surveyor:build'].invoke(jurs)
   end
 
-  task :build, [:jurisdiction] => :environment do |t, args|
+  task :build, [:jurisdiction] => [:environment] do |t, args|
     jurs = args.jurisdiction
+    translations = Rake::FileList.new("surveys/translations/odc.#{jurs}.*.yml")
+    translations.each { |t| Rake::Task[t].invoke }
     unless jurs
       raise ArgumentError, "use surveyor:build[jurisdiction] to specify jurisdiction"
     end

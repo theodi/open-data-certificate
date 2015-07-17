@@ -1,15 +1,15 @@
 en:
   survey_sections:
     general:
-      title: "General Information"
+      text: "General Information"
     practical:
-      title: "Practical Information"
+      text: "Practical Information"
       help_text: "Findability, accuracy, quality and guarantees"
     technical:
-      title: "Technical Information"
+      text: "Technical Information"
       help_text: "Locations, formats and trust"
     social:
-      title: "Social Information"
+      text: "Social Information"
       help_text: "Documentation, support and services"
   questions:
     # General Information
@@ -18,28 +18,28 @@ en:
       help_text: "People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it."
       answers:
         a_1:
-          text: "Data Title"
+          placeholder: "Data Title"
     documentationUrl:
       text: "Where is it described?"
       text_as_statement: "This data is described at"
       help_text: "Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk."
       answers:
         a_1:
-          text: "Documentation URL"
+          placeholder: "Documentation URL"
     publisher:
       text: "Who publishes this data?"
       text_as_statement: "This data is published by"
       help_text: "Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else."
       answers:
         a_1:
-          text: "Data Publisher"
+          placeholder: "Data Publisher"
     publisherUrl:
       text: "What website is the data published on?"
       text_as_statement: "The data is published on"
       help_text: "Give a URL to a website, this helps us to group data from the same organisation even if people give different names."
       answers:
         a_1:
-          text: "Publisher URL"
+          placeholder: "Publisher URL"
     releaseType:
       text: "What kind of release is this?"
       answers:
@@ -70,7 +70,7 @@ en:
       help_text: "Give a URL on your main website that includes a link to this data."
       answers:
         a_1:
-          text: "Web page URL"
+          placeholder: "Web page URL"
     listed:
       text: "Is your data listed within a collection?"
       help_text: "Data is easier for people to find when it's in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results."
@@ -85,7 +85,7 @@ en:
       help_text: "Give a URL where this data is listed within a relevant collection. For example, data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data) or a URL for search engine results."
       answers:
         a_1:
-          text: "Listing URL"
+          placeholder: "Listing URL"
     referenced:
       text: "Is this data referenced from your own publications?"
       help_text: "When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better."
@@ -100,7 +100,7 @@ en:
       help_text: "Give a URL to a document that cites or references this data."
       answers:
         a_1:
-          text: "Reference URL"
+          placeholder: "Reference URL"
     serviceType:
       text: "Does the data behind your API change?"
       text_as_statement: "The data behind the API"
@@ -245,14 +245,14 @@ en:
       help_text: "Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data."
       answers:
         a_1:
-          text: "Data Quality Documentation URL"
+          placeholder: "Data Quality Documentation URL"
     qualityControlUrl:
       text: "Where is your quality control process described?"
       text_as_statement: "Quality control processes are described at"
       help_text: "Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone."
       answers:
         a_1:
-          text: "Quality Control Process Description URL"
+          placeholder: "Quality Control Process Description URL"
     backups:
       text: "Do you take offsite backups?"
       text_as_statement: "The data is"
@@ -270,14 +270,14 @@ en:
       help_text: "Give a URL for a page that describes what guarantees you have about your service being available for people to use. For example you might have a guaranteed uptime of 99.5%, or you might provide no guarantees."
       answers:
         a_1:
-          text: "Service Availability Documentation URL"
+          placeholder: "Service Availability Documentation URL"
     statusUrl:
       text: "Where do you give information about the current status of the service?"
       text_as_statement: "Service status is given at"
       help_text: "Give a URL for a page that tells people about the current status of your service, including any faults you are aware of."
       answers:
         a_1:
-          text: "Service Status URL"
+          placeholder: "Service Status URL"
     onGoingAvailability:
       text: "How long will this data be available for?"
       text_as_statement: "The data is available"
@@ -301,7 +301,7 @@ en:
       help_text: "Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it."
       answers:
         a_1:
-          text: "Dataset URL"
+          placeholder: "Dataset URL"
     versionManagement:
       text: "How do you publish a series of the same dataset?"
       answers:
@@ -320,28 +320,28 @@ en:
       help_text: "Give a single URL to the most recent version of the dataset. The content at this URL should change each time a new version is released."
       answers:
         a_1:
-          text: "Current Dataset URL"
+          placeholder: "Current Dataset URL"
     versionsTemplateUrl:
       text: "What format do dataset release URLs follow?"
       text_as_statement: "Releases follow this consistent URL pattern"
       help_text: "This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
       answers:
         a_1:
-          text: "Version Template URL"
+          placeholder: "Version Template URL"
     versionsUrl:
       text: "Where is your list of dataset releases?"
       text_as_statement: "Releases of this data are listed at"
       help_text: "Give a URL to a page or feed with a machine-readable list of datasets. Use the URL of the first page which should link to the rest of the pages."
       answers:
         a_1:
-          text: "Version List URL"
+          placeholder: "Version List URL"
     endpointUrl:
       text: "Where is the endpoint for your API?"
       text_as_statement: "The API service endpoint is"
       help_text: "Give a URL that's a starting point for people's scripts to access your API. This should be a service description document that helps the script to work out which services exist."
       answers:
         a_1:
-          text: "Endpoint URL"
+          placeholder: "Endpoint URL"
     dumpManagement:
       text: "How do you publish database dumps?"
       answers:
@@ -360,28 +360,28 @@ en:
       help_text: "Give a URL to the most recent dump of the database. The content at this URL should change each time a new database dump is created."
       answers:
         a_1:
-          text: "Current Dump URL"
+          placeholder: "Current Dump URL"
     dumpsTemplateUrl:
       text: "What format do database dump URLs follow?"
       text_as_statement: "Database dumps follow the consistent URL pattern"
       help_text: "This is the structure of URLs when you publish different releases. Use `{variable}` to indicate parts of the template URL that change, for example, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
       answers:
         a_1:
-          text: "Dump Template URL"
+          placeholder: "Dump Template URL"
     dumpsUrl:
       text: "Where is your list of available database dumps?"
       text_as_statement: "A list of database dumps is at"
       help_text: "Give a URL to a page or feed with a machine-readable list of database dumps. Use the URL of the first page which should link to the rest of the pages."
       answers:
         a_1:
-          text: "Dump List URL"
+          placeholder: "Dump List URL"
     changeFeedUrl:
       text: "Where is your feed of changes?"
       text_as_statement: "A feed of changes to this data is at"
       help_text: "Give a URL to a page or feed that provides a machine-readable list of the previous versions of the database dumps. Use the URL of the first page which should link to the rest of the pages."
       answers:
         a_1:
-          text: "Change Feed URL"
+          placeholder: "Change Feed URL"
     machineReadable:
       text: "Is this data machine-readable?"
       text_as_statement: "This data is"
@@ -515,7 +515,7 @@ en:
       help_text: "The resolution service should take an identifier as a query parameter and give back some information about the thing it identifies."
       answers:
         a_1:
-          text: "Identifier Resolution Service URL"
+          placeholder: "Identifier Resolution Service URL"
     existingExternalUrls:
       text: "Is there third-party information about things in your data on the web?"
       help_text: "Sometimes other people outside your control provide URLs to the things your data is about. For example, your data might have postcodes in it that link to the Ordnance Survey website."
@@ -560,7 +560,7 @@ en:
       help_text: "If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with."
       answers:
         a_1:
-          text: "Verification Process URL"
+          placeholder: "Verification Process URL"
     # Social Information
     documentationMetadata:
       text: "Does your data documentation include machine-readable data for:"
@@ -645,7 +645,7 @@ en:
       text_as_statement: "The technical documentation for the data is at"
       answers:
         a_1:
-          text: "Technical Documentation URL"
+          placeholder: "Technical Documentation URL"
     vocabulary:
       text: "Do the data formats use vocabularies or schemas?"
       help_text: "Formats like CSV, JSON, XML or Turtle use custom vocabularies or schemas which say what columns or properties the data contains."
@@ -659,7 +659,7 @@ en:
       text_as_statement: "The vocabularies used by this data are documented at"
       answers:
         a_1:
-          text: "Schema Documentation URL"
+          placeholder: "Schema Documentation URL"
     codelists:
       text: "Are there any codes used in this data?"
       help_text: "If your data uses codes to refer to things like geographical areas, spending categories or diseases for example, these need to be explained to people."
@@ -673,26 +673,26 @@ en:
       text_as_statement: "The codes in this data are documented at"
       answers:
         a_1:
-          text: "Codelist Documentation URL"
+          placeholder: "Codelist Documentation URL"
     contactUrl:
       text: "Where can people find out how to contact someone with questions about this data?"
       text_as_statement: "Find out how to contact someone about this data at"
       help_text: "Give a URL for a page that describes how people can contact someone if they have questions about the data."
       answers:
         a_1:
-          text: "Contact Documentation"
+          placeholder: "Contact Documentation"
     improvementsContact:
       text: "Where can people find out how to improve the way your data is published?"
       text_as_statement: "Find out how to suggest improvements to publication at"
       answers:
         a_1:
-          text: "Improvement Suggestions URL"
+          placeholder: "Improvement Suggestions URL"
     dataProtectionUrl:
       text: "Where can people find out how to contact someone with questions about privacy?"
       text_as_statement: "Find out where to send questions about privacy at"
       answers:
         a_1:
-          text: "Confidentiality Contact Documentation"
+          placeholder: "Confidentiality Contact Documentation"
     socialMedia:
       text: "Do you use social media to connect with people who use your data?"
       answers:
@@ -706,28 +706,28 @@ en:
       help_text: "Give URLs to your social media accounts, like your Twitter or Facebook profile page."
       answers:
         a_1:
-          text: "Social Media URL"
+          placeholder: "Social Media URL"
     forum:
       text: "Where should people discuss this dataset?"
       text_as_statement: "Discuss this data at"
       help_text: "Give a URL to your forum or mailing list where people can talk about your data."
       answers:
         a_1:
-          text: "Forum or Mailing List URL"
+          placeholder: "Forum or Mailing List URL"
     correctionReporting:
       text: "Where can people find out how to request corrections to your data?"
       text_as_statement: "Find out how to request data corrections at"
       help_text: "Give a URL where people can report errors they spot in your data."
       answers:
         a_1:
-          text: "Correction Instructions URL"
+          placeholder: "Correction Instructions URL"
     correctionDiscovery:
       text: "Where can people find out how to get notifications of corrections to your data?"
       text_as_statement: "Find out how to get notifications about data corrections at"
       help_text: "Give a URL where you describe how notifications about corrections are shared with people."
       answers:
         a_1:
-          text: "Correction Notification URL"
+          placeholder: "Correction Notification URL"
     engagementTeam:
       text: "Do you have anyone who actively builds a community around this data?"
       help_text: "A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data."
@@ -741,44 +741,44 @@ en:
       text_as_statement: "Community engagement is done by"
       answers:
         a_1:
-          text: "Community Engagement Team Home Page URL"
+          placeholder: "Community Engagement Team Home Page URL"
     libraries:
       text: "Where do you list tools to work with your data?"
       text_as_statement: "Tools to help use this data are listed at"
       help_text: "Give a URL that lists the tools you know or recommend people can use when they work with your data."
       answers:
         a_1:
-          text: "Tool URL"
+          placeholder: "Tool URL"
   labels:
     findability:
-      title: "Findability"
+      text: "Findability"
       help_text: "how you help people find your data"
     accuracy:
-      title: "Accuracy"
+      text: "Accuracy"
       help_text: "how you keep your data up-to-date"
     quality:
-      title: "Quality"
+      text: "Quality"
       help_text: "how much people can rely on your data"
     guarantees:
-      title: "Guarantees"
+      text: "Guarantees"
       help_text: "how much people can depend on your data’s availability"
     locations:
-      title: "Locations"
+      text: "Locations"
       help_text: "how people can access your data"
     format:
-      title: "Formats"
+      text: "Formats"
       help_text: "how people can work with your data"
     trust:
-      title: "Trust"
+      text: "Trust"
       help_text: "how much trust people can put in your data"
     documentation:
-      title: "Documentation"
+      text: "Documentation"
       help_text: "how you help people understand the context and content of your data"
     support:
-      title: "Support"
+      text: "Support"
       help_text: "how you communicate with people who use your data"
     services:
-      title: "Services"
+      text: "Services"
       help_text: "how you give people access to tools they need to work with your data"
   # General Information Requirements
     pilot_1:

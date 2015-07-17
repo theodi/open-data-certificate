@@ -83,7 +83,7 @@ survey 'CZ',
   section_legal 'Legal Information',
     :description => 'Rights, licensing and privacy' do
 
-    label_group_2 'Rights',
+    label_ownership 'Rights',
       :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
@@ -316,7 +316,7 @@ survey 'CZ',
     condition_B :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_C :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_3 'Licensing',
+    label_licensing 'Licensing',
       :help_text => 'how you give people permission to use this data',
       :customer_renderer => '/partials/fieldset'
 
@@ -735,7 +735,7 @@ survey 'CZ',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_databaseRightHolder
 
-    label_group_4 'Privacy',
+    label_privacy 'Privacy',
       :help_text => 'how you protect people\'s privacy',
       :customer_renderer => '/partials/fieldset'
 
@@ -1015,7 +1015,7 @@ survey 'CZ',
   section_practical 'Practical Information',
     :description => 'Findability, accuracy, quality and guarantees' do
 
-    label_group_6 'Findability',
+    label_findability 'Findability',
       :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1121,7 +1121,7 @@ survey 'CZ',
 
     end
 
-    label_group_7 'Accuracy',
+    label_accuracy 'Accuracy',
       :help_text => 'how you keep your data up-to-date',
       :customer_renderer => '/partials/fieldset'
 
@@ -1429,7 +1429,7 @@ survey 'CZ',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_8 'Quality',
+    label_quality 'Quality',
       :help_text => 'how much people can rely on your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1467,7 +1467,7 @@ survey 'CZ',
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_9 'Guarantees',
+    label_guarantees 'Guarantees',
       :help_text => 'how much people can depend on your data’s availability',
       :customer_renderer => '/partials/fieldset'
 
@@ -1572,7 +1572,7 @@ survey 'CZ',
   section_technical 'Technical Information',
     :description => 'Locations, formats and trust' do
 
-    label_group_11 'Locations',
+    label_locations 'Locations',
       :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1828,7 +1828,7 @@ survey 'CZ',
       :placeholder => 'Change Feed URL',
       :required => :required
 
-    label_group_12 'Formats',
+    label_format 'Formats',
       :help_text => 'how people can work with your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2137,7 +2137,7 @@ survey 'CZ',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_13 'Trust',
+    label_trust 'Trust',
       :help_text => 'how much trust people can put in your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2182,7 +2182,7 @@ survey 'CZ',
   section_social 'Social Information',
     :description => 'Documentation, support and services' do
 
-    label_group_15 'Documentation',
+    label_documentation 'Documentation',
       :help_text => 'how you help people understand the context and content of your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2469,7 +2469,7 @@ survey 'CZ',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_16 'Support',
+    label_support 'Support',
       :help_text => 'how you communicate with people who use your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2640,7 +2640,7 @@ survey 'CZ',
       :placeholder => 'Community Engagement Team Home Page URL',
       :required => :required
 
-    label_group_17 'Services',
+    label_services 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',
       :customer_renderer => '/partials/fieldset'
 
