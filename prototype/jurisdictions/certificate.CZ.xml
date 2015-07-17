@@ -148,8 +148,8 @@
          <if test="this.databaseRights() === 'true'">
             <question id="databaseRightsLicenseType" display="Licencování databázových práv">
                 <label>Jakým způsobem licencujete databázová práva?</label>
-                <option value="cc-by">Creative Commons Uveďte původ</option>
-                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-by">Creative Commons Uveďte autora</option>
+                <option value="cc-by-sa">Creative Commons Uveďte autora - Zachovejte licenci</option>
                 <option value="cc-zero">Creative Commons CC0</option>
                 <option value="odc-by">Open Data Commons Attribution License</option>
                 <option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
@@ -209,8 +209,8 @@
          <if test="this.databaseCopyright() === 'true'">
             <question id="databaseCopyrightLicenseType" display="Licencování autorských práv na datovou sadu">
                 <label>Jakým způsobem licencujete autorská práva na datovou sadu jako takovou?</label>
-                <option value="cc-by">Creative Commons Uveďte původ</option>
-                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-by">Creative Commons Uveďte autora</option>
+                <option value="cc-by-sa">Creative Commons Uveďte autora - Zachovejte licenci</option>
                 <option value="cc-zero">Creative Commons CC0</option>
                 <option value="other" display="">jinak…</option>
                 <help>Pokud chcete svou datovou sadu zveřejnit coby otevřená data, musíte mít otevřenou licenci pro autorská práva, která se na ni vztahují.</help>
@@ -244,8 +244,8 @@
          <if test="this.databaseCopyright() === 'true'">
             <question id="databaseContentCopyrightLicenseType" display="Licencování autorských práv na obsah">
                 <label>Jakým způsobem licencujete autorská práva na obsah datové sady?</label>
-                <option value="cc-by">Creative Commons Uveďte původ</option>
-                <option value="cc-by-sa">Creative Commons Uveďte původ + Zachovejte licenci</option>
+                <option value="cc-by">Creative Commons Uveďte autora</option>
+                <option value="cc-by-sa">Creative Commons Uveďte autora - Zachovejte licenci</option>
                 <option value="cc-zero">Creative Commons CC0</option>
                 <option value="other" display="">jinak…</option>
             </question>
