@@ -44,7 +44,6 @@ class CampaignsController < ApplicationController
   def rerun
     authorize! :manage, @campaign
 
-    @campaign.certificate_generators.update_all(latest: false)
     @campaign.rerun!
     flash[:notice] = "Campaign queued for rerun"
 
@@ -64,6 +63,15 @@ class CampaignsController < ApplicationController
     else
       render :action => 'new'
     end
+  end
+
+  def schedule
+    authorize! :manage, @campaign
+
+    @campaign.scheduled_rerun
+    flash[:notice] = "Campaign scheduled to run daily"
+
+    redirect_to campaign_path(@campaign)
   end
 
   private

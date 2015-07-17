@@ -1,7 +1,7 @@
 class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
-  attr_accessor :url, :jurisdiction, :version
+  attr_accessor :jurisdiction, :version
   attr_writer :limit
 
   validates :name, uniqueness: true, presence: true
@@ -34,19 +34,33 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def rerun!
-    certificate_generators.each do |c|
-      generator = CertificateGenerator.create(
-        request: c.request,
-        user: user,
-        certification_campaign: self
-      )
-      jurs = if c.survey
-        c.survey.access_code
-      else
-        jurisdiction
+    certificate_generators.update_all(latest: false)
+
+    if url.present?
+      factory = CertificateFactory::Factory.new(feed: url)
+      factory.each do |item|
+        url = factory.get_link(item)
+        existing_generator = certificate_generators.select { |g| g.request["documentationUrl"] == url }.first
+        request = existing_generator.try(:request) || build_request(url)
+        run_generator(request, certificate_generators.first.survey.access_code, existing_generator.try(:dataset))
       end
-      generator.sidekiq_delay.generate(jurs, true, c.dataset)
+    else
+      certificate_generators.each do |c|
+        dataset = Dataset.find(c.dataset.id)
+        jurs = if c.survey
+          c.survey.access_code
+        else
+          jurisdiction
+        end
+        run_generator(c.request, jurs, dataset)
+      end
     end
+  end
+
+  def build_request(url)
+    {
+      documentationUrl: url
+    }
   end
 
   def validate_extra_details?
@@ -55,6 +69,20 @@ class CertificationCampaign < ActiveRecord::Base
 
   def limit
     @limit.to_i unless @limit.blank?
+  end
+
+  def run_generator(request, access_code, dataset)
+    generator = CertificateGenerator.create(
+      request: request,
+      user: user,
+      certification_campaign: self
+    )
+    generator.sidekiq_delay.generate(access_code, true, dataset)
+  end
+
+  def scheduled_rerun
+    rerun!
+    self.sidekiq_delay_until(1.day.from_now).scheduled_rerun
   end
 
 end

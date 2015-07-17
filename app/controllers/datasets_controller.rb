@@ -213,9 +213,8 @@ class DatasetsController < ApplicationController
   end
 
   def regenerate
-    authorize! :manage, :all
-
     dataset = Dataset.find(params[:dataset_id])
+    authorize! :manage, dataset
     jurisdiction = params[:jurisdiction]
     result = CertificateGenerator.update(dataset, nil, jurisdiction, current_user)
 
