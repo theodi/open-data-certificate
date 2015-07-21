@@ -438,6 +438,10 @@
 	<xsl:text>&lt;/var&gt;</xsl:text>
 </xsl:template>
 
+<xsl:template match="br" mode="html">
+	<xsl:text>&lt;br/&gt;</xsl:text>
+</xsl:template>
+
 <xsl:template match="*" mode="html">
 	<xsl:message>No template for html version of element <xsl:value-of select="name()" /></xsl:message>
 	<xsl:apply-templates mode="html" />
