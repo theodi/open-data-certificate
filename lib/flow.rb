@@ -3,6 +3,9 @@ class Flow
   def initialize(jurisdiction)
     jurisdiction = "en" if jurisdiction == "gb"
     path = File.join(Rails.root, 'prototype', 'translations', "certificate.#{jurisdiction}.xml")
+    unless File.exist?(path)
+      path = File.join(Rails.root, 'prototype', 'translations', "certificate.en.xml")
+    end
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
   end
