@@ -53,7 +53,7 @@ class Flow
   end
 
   def label(question)
-    question.at_xpath("label").text
+    CGI.unescapeHTML(question.at_xpath("label").text).gsub("\"", "'")
   end
 
   def type(question)
