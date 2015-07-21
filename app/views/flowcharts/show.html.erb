@@ -1,6 +1,3 @@
-<script>
-  mermaid.initialize({startOnLoad:true});
-</script>
 <% content_for :header_title, "Questionnare flowcharts" %>
 
 <form action="" method="get">
@@ -21,3 +18,7 @@
   <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
   </div>
 </div>
+
+<% content_for :foot_scripts do %>
+  mermaid.initialize({startOnLoad:true});
+<% end %>
