@@ -1,0 +1,7 @@
+<% if question[:answers].nil? %>
+  <%= question[:id] %>[<%= question[:label] %>] --> <%= @questions[index + 1][:id] %>[<%= @questions[index + 1][:label] %>]
+<% else %>
+  <% question[:answers].each do |k,v| %>
+    <%= render partial: "answer.txt", locals: { question: question, index: index, key: k, answer: v } %>
+  <% end %>
+<% end %>
