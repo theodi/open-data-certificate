@@ -1,13 +1,26 @@
 class Flow
 
-  def initialize(jurisdiction)
-    jurisdiction = "en" if jurisdiction == "gb"
-    path = File.join(Rails.root, 'prototype', 'translations', "certificate.#{jurisdiction}.xml")
-    unless File.exist?(path)
-      path = File.join(Rails.root, 'prototype', 'translations', "certificate.en.xml")
-    end
+  def initialize(jurisdiction, type)
+    path = get_path(jurisdiction, type)
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
+  end
+
+  def get_path(jurisdiction, type)
+    jurisdiction = "en" if (jurisdiction == "gb" && type == "Practical")
+    folder = folder_name(type)
+    path = File.join(Rails.root, 'prototype', folder, "certificate.#{jurisdiction}.xml")
+    unless File.exist?(path)
+      path = File.join(Rails.root, 'prototype', folder, "certificate.en.xml")
+    end
+    path
+  end
+
+  def folder_name(type)
+    {
+      "Legal" => "jurisdictions",
+      "Practical" => "translations"
+    }[type]
   end
 
   def questions

@@ -4,7 +4,8 @@ class FlowchartsController < ApplicationController
 
   def show
     @jurisdiction = params[:jurisdiction] || "gb"
-    flow = Flow.new(@jurisdiction)
+    @type = params[:type] || "Practical"
+    flow = Flow.new(@jurisdiction, @type)
     @questions = flow.questions
     @dependencies = flow.dependencies
     @deps = []

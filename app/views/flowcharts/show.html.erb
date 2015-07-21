@@ -1,11 +1,15 @@
 <% content_for :header_title, "Questionnare flowcharts" %>
 
-<form action="" method="get">
-<p>
-    <label>Select jurisdiction</label>
-    <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction)) %>
+<form action="" method="get" class="form-inline">
+    <label>
+      Select jurisdiction
+      <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction)) %>
+    </label>
+    <label>
+      Select type
+      <%= select_tag(:type, options_for_select(["Practical", "Legal"], @type)) %>
+    </label>
     <%= submit_tag 'Submit', :class => 'btn btn-primary btn-submit' %>
-</p>
 </form>
 
 <div id="key">
