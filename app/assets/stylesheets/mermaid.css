@@ -24,6 +24,11 @@
   width: 17px;
 }
 
+#key div {
+  float: left;
+  margin-right: 10px;
+}
+
 #pilotkey span {
   background-color: #cd7f32;
 }
