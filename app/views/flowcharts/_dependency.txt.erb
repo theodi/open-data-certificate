@@ -2,7 +2,9 @@
 <% dependency = @dependencies.find { |d| d[:id] == answer[:dependency] } %>
 <% if dependency[:answers].nil? %>
   <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>["<%= dependency[:label] %>"]
-  <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
+  <% if !@questions[index + 1].nil? %>
+    <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
+  <% end %>
 <% else %>
   <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
   <% if dependency[:prerequisites].count <= 1 || (dependency[:id] == "timeSensitive" && dependency[:prerequisites].count == 2) %>

@@ -1,4 +1,4 @@
-<% if question[:answers].nil? %>
+<% if question[:answers].nil? && @questions[index + 1] != nil %>
   <%= question[:id] %>["<%= question[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
 <% else %>
   <% question[:answers].each do |k,v| %>

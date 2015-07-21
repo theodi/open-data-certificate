@@ -22,7 +22,6 @@
   <div class="mermaid">
   graph LR
   <% @questions.each_with_index do |q, index| %>
-    <% next if @questions[index + 1].nil? %>
     <%= render partial: "question.txt", locals: { question: q, index: index } %>
   <% end %>
   <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
