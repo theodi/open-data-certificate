@@ -8,6 +8,7 @@ class Flow
 
   def get_path(jurisdiction, type)
     jurisdiction = "en" if (jurisdiction == "gb" && type == "Practical")
+    jurisdiction.upcase! if type == "Legal"
     folder = folder_name(type)
     path = File.join(Rails.root, 'prototype', folder, "certificate.#{jurisdiction}.xml")
     unless File.exist?(path)
