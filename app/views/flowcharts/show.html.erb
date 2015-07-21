@@ -3,7 +3,7 @@
 <form action="" method="get" class="form-inline">
     <label>
       Select jurisdiction
-      <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction)) %>
+      <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction.downcase)) %>
     </label>
     <label>
       Select type
