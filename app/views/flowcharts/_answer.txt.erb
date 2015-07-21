@@ -1,5 +1,5 @@
 <% if answer[:dependency].nil? %>
-  <%= question[:id] %>{<%= question[:label] %>} --> |<%= key %>| <%= @questions[index + 1][:id] %>[<%= @questions[index + 1][:label] %>]
+  <%= question[:id] %>{"<%= question[:label] %>"} --> |"<%= key %>"| <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
 <% else %>
   <%= render partial: "dependency.txt", locals: { question: question, index: index, key: key, answer: answer } %>
 <% end %>
