@@ -6,4 +6,7 @@ FactoryGirl.define do
     jurisdiction "gb"
   end
 
+  factory :certificate_generator do
+  end
+
 end
