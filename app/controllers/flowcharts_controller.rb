@@ -1,6 +1,7 @@
 require 'flow'
 
-class FlowchartsController < ActionController::Base
+class FlowchartsController < ApplicationController
+
   def show
     @jurisdiction = params[:jurisdiction] || "gb"
     flow = Flow.new(@jurisdiction)

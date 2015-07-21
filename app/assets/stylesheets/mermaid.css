@@ -257,5 +257,10 @@ text {
 }
 
 .mermaid {
-  width:100%;
+  width:10000px;
+}
+
+#flowchart {
+  width: 100%;
+  overflow-x: scroll;
 }
