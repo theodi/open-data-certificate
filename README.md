@@ -212,9 +212,11 @@ There is an example of adding a translation on [this gist](https://gist.github.c
 
 ```bash
 bundle install
-rake db:migrate
-rake surveyor:build_changed_survey FILE=surveys/odc_questionnaire.UK.rb
-rails s
+cp env.example .env
+cp config/database.{example.,}yml
+bundle exec rake db:migrate
+bundle exec rake surveyor:build_changed_survey FILE=surveys/odc_questionnaire.UK.rb
+bundle exec rails s
 
 # to include some other jurisdictions
 rake surveyor:build_changed_surveys LIMIT=5
@@ -241,6 +243,9 @@ bundle exec guard
 Some environment variables are required for the certificates site, these can be set in a .env file in the root of the project.
 
 ```
+# A hostname to create links in emails
+ODC_HOST_NAME="localhost:3000"
+
 # Rackspace credentials for saving certificate dumps
 RACKSPACE_USERNAME
 RACKSPACE_API_KEY
@@ -253,8 +258,8 @@ CERTIFICATE_JUVIA_SITE_KEY
 # Sending error reports to airbrake
 AIRBRAKE_CERTIFICATE_KEY
 
-# Disable the rails footnotes to increase performance
-DISABLE_FOOTNOTES=true
+# Enable footnotes for debugging info
+ENABLE_FOOTNOTES=true
 ```
 
 #### Admin functions

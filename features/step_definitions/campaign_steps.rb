@@ -6,6 +6,10 @@ Then(/^I should see "(.*?)"$/) do |text|
   assert_match text,  page.body
 end
 
+Then(/^I should not see "(.*?)"$/) do |text|
+  assert_not_match /#{text}/, page.body
+end
+
 When(/^I visit the campaign page for "(.*?)"$/) do |name|
   campaign = CertificationCampaign.find_by_name(name)
   visit campaign_path(campaign)
@@ -28,16 +32,64 @@ Then(/^that campaign should have (\d+) generators$/) do |num|
   assert_equal num.to_i, @campaign.certificate_generators.count
 end
 
+Given(/^I have a campaign "(.*?)"$/) do |name|
+  @campaign = name
+end
+
+Given(/^that campaign has (\d+) certificates?$/) do |num|
+  @num = num.to_i
+  @num.times do |i|
+    steps %Q{
+      Given I want to create a certificate via the API with the URL "http://data.example.com/datasets/#{i}"
+      And I apply a campaign "#{@campaign}"
+      And I request a certificate via the API
+      And the certificate is created
+    }
+  end
+end
+
+Then(/^the campaign should be queued to be rerun$/) do
+  campaign = CertificationCampaign.find_by_name(@campaign)
+  CertificationCampaign.any_instance.expects(:rerun!)
+end
+
+Then(/^the generators should be queued for rerun$/) do
+  CertificateGenerator.any_instance.expects(:generate).times(5)
+end
+
+Then(/^a rerun should be scheduled for tomorrow$/) do
+  assert_equal Date.today + 1.day, DateTime.strptime(Sidekiq::Extensions::DelayedModel.jobs.last["at"].to_s, "%s").to_date
+end
+
+When(/^I should be redirected to the campaign page for "(.*?)"$/) do |campaign|
+  campaign = CertificationCampaign.find_by_name(campaign)
+  assert_equal page.current_path, campaign_path(campaign)
+end
+
+Then(/^my campaigns should be shown as pending$/) do
+  assert_match "Processing",  page.body
+end
+
+When(/^I should see (\d+) datasets?$/) do |num|
+  assert_equal num.to_i, page.all(:css, 'table tbody tr').count
+end
+
+Then(/^I should see the correct generators$/) do
+  @num.times do |i|
+    assert_match "http://data.example.com/datasets/#{i}", page.body
+  end
+end
+
 Given(/^I visit the path to create a new campaign$/) do
   visit new_campaign_path
 end
 
 Given(/^I enter the feed URL in the URL field$/) do
-  fill_in "url", with: @url
+  fill_in "CKAN atom feed", with: @url
 end
 
 Given(/^I enter "(.*?)" in the campaign field$/) do |name|
-  fill_in "name", with: name
+  fill_in "Campaign name", with: name
 end
 
 Given(/^I choose a limit of (\d+) certificates$/) do |limit|

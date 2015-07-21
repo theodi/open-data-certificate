@@ -9,6 +9,8 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
+  before_save :remove_flag
+
   serialize :request, HashWithIndifferentAccess
 
   TYPES =  {
@@ -17,6 +19,15 @@ class CertificateGenerator < ActiveRecord::Base
     any: 'checkbox',
     repeater: 'repeating'
   }
+
+  def self.filter(level)
+    case(level)
+    when "uncertified"
+      joins(:certificate).where(certificates: {attained_level: "none"})
+    else
+      scoped
+    end
+  end
 
   def self.schema(request)
     survey = Survey.newest_survey_for_access_code request['jurisdiction']
@@ -57,8 +68,11 @@ class CertificateGenerator < ActiveRecord::Base
     end
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
-    generator.request = request
-    certificate = generator.generate(jurisdiction, false)
+    generator.request = request unless request.nil?
+
+    create_user = user.admin? ? true : false
+
+    certificate = generator.generate(jurisdiction, create_user, dataset)
     response_set = certificate.response_set
 
     errors = response_set.response_errors
@@ -150,6 +164,16 @@ class CertificateGenerator < ActiveRecord::Base
   end
 
   private
+
+  def remove_flag
+    if dataset && certification_campaign
+      CertificateGenerator.where("response_sets.dataset_id" => dataset.id, "certification_campaign_id" => certification_campaign.id)
+                          .joins(:response_set)
+                          .where("certificate_generators.id not in (?)", id)
+                          .update_all(latest: false)
+    end
+  end
+
   # answer a question from the request
   def answer question
 

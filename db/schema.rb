@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150617134025) do
+ActiveRecord::Schema.define(:version => 20150702134537) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -53,12 +53,14 @@ ActiveRecord::Schema.define(:version => 20150617134025) do
     t.integer  "response_set_id"
     t.integer  "user_id"
     t.text     "request"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.boolean  "completed"
     t.integer  "certification_campaign_id"
+    t.boolean  "latest",                    :default => true
   end
 
+  add_index "certificate_generators", ["latest"], :name => "index_certificate_generators_on_latest"
   add_index "certificate_generators", ["response_set_id"], :name => "index_certificate_generators_on_response_set_id"
   add_index "certificate_generators", ["user_id"], :name => "index_certificate_generators_on_user_id"
 
@@ -80,10 +82,12 @@ ActiveRecord::Schema.define(:version => 20150617134025) do
 
   create_table "certification_campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "duplicate_count", :default => 0
     t.integer  "user_id"
+    t.string   "jurisdiction",    :default => "gb"
+    t.string   "url"
   end
 
   create_table "claims", :force => true do |t|
