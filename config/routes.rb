@@ -143,6 +143,9 @@ OpenDataCertificate::Application.routes.draw do
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
 
+  # Flowchart
+  get 'flowchart' => 'flowcharts#show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

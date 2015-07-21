@@ -1,0 +1,38 @@
+<% content_for :header_title, "Questionnare flowcharts" %>
+
+<form action="" method="get" class="form-inline">
+    <label>
+      Select jurisdiction
+      <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction.downcase)) %>
+    </label>
+    <label>
+      Select type
+      <%= select_tag(:type, options_for_select(["Practical", "Legal"], @type)) %>
+    </label>
+    <%= submit_tag 'Submit', :class => 'btn btn-primary btn-submit' %>
+</form>
+
+<div id="key">
+  <div id="pilotkey"><span></span> Needed for Pilot level</div>
+  <div id="standardkey"><span></span> Needed for Standard level</div>
+  <div id="exemplarkey"><span></span> Needed for Exemplar level</div>
+</div>
+
+<div id="flowchart">
+  <div class="mermaid">
+  graph LR
+  <% @questions.each_with_index do |q, index| %>
+    <%= render partial: "question.txt", locals: { question: q, index: index } %>
+  <% end %>
+  <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
+  <% @levels.each do |k, l| %>
+    <% unless k.nil? %>
+      class <%= l.join(",") %> <%= k %>;
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<% content_for :foot_scripts do %>
+  mermaid.initialize({startOnLoad:true});
+<% end %>
