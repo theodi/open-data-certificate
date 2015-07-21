@@ -8,6 +8,11 @@ class FlowchartsController < ApplicationController
     @questions = flow.questions
     @dependencies = flow.dependencies
     @deps = []
+    @levels = {}
+    (@questions + @dependencies).each do |q|
+      @levels[q[:level]] ||= []
+      @levels[q[:level]] << q[:id]
+    end
   end
 
 end

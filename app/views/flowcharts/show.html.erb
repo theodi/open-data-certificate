@@ -8,6 +8,12 @@
 </p>
 </form>
 
+<div id="key">
+  <p id="pilotkey"><span></span> Needed for Pilot level</p>
+  <p id="standardkey"><span></span> Needed for Standard level</p>
+  <p id="exemplarkey"><span></span> Needed for Exemplar level</p>
+</div>
+
 <div id="flowchart">
   <div class="mermaid">
   graph LR
@@ -16,6 +22,11 @@
     <%= render partial: "question.txt", locals: { question: q, index: index } %>
   <% end %>
   <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
+  <% @levels.each do |k, l| %>
+    <% unless k.nil? %>
+      class <%= l.join(",") %> <%= k %>;
+    <% end %>
+  <% end %>
   </div>
 </div>
 

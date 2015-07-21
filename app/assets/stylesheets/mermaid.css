@@ -11,6 +11,41 @@
   stroke: #ccccff;
   stroke-width: 1px;
 }
+
+.node.pilot rect,
+.node.pilot polygon {
+  fill: #cd7f32;
+}
+
+#key span {
+  display: inline-block;
+  border: 1px solid #000;
+  height: 17px;
+  width: 17px;
+}
+
+#pilotkey span {
+  background-color: #cd7f32;
+}
+
+#standardkey span {
+  background-color: #c0c0c0;
+}
+
+#exemplarkey span {
+  background-color: #FFD700;
+}
+
+.node.standard rect,
+.node.standard polygon {
+  fill: #c0c0c0;
+}
+
+.node.exemplar rect,
+.node.exemplar polygon {
+  fill: #FFD700;
+}
+
 .edgePath .path {
   stroke: #333333;
 }
