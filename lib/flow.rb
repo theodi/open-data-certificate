@@ -66,6 +66,15 @@ class Flow
         }
       end
       answers
+    elsif question.at_xpath("select")
+      answers = {}
+      question.at_xpath("select").xpath("option").each do |option|
+        next if option["value"].nil?
+        answers[option["value"]] = {
+          dependency: dependency(question, option["value"])
+        }
+      end
+      answers
     end
   end
 
