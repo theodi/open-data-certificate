@@ -70,7 +70,7 @@ class Flow
       answers = {}
       question.at_xpath("select").xpath("option").each do |option|
         next if option["value"].nil?
-        answers[option["value"]] = {
+        answers[option.text] = {
           dependency: dependency(question, option["value"])
         }
       end
