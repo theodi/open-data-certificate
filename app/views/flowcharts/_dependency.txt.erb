@@ -4,6 +4,8 @@
   <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>["<%= dependency[:label] %>"]
   <% if !@questions[index + 1].nil? %>
     <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
+  <% else %>
+    <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> finalSection["End"]
   <% end %>
 <% else %>
   <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
