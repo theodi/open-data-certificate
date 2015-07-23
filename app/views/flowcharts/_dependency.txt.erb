@@ -7,7 +7,7 @@
   <% end %>
 <% else %>
   <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
-  <% if dependency[:prerequisites].count <= 1 || (dependency[:id] == "timeSensitive" && dependency[:prerequisites].count == 2) %>
+  <% if dependency[:prerequisites].count <= 1 || (["timeSensitive","privacyImpactAssessmentExists"].include?(dependency[:id]) && dependency[:prerequisites].count == 2) %>
     <% dependency[:answers].each do |k,v| %>
       <% @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v }) %>
     <% end %>
