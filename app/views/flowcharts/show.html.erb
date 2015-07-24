@@ -22,8 +22,13 @@
   <div class="mermaid">
   graph LR
   <% @questions.each_with_index do |q, index| %>
+    <!--two arguments, the item and its index, for each item in the questions instance variable
+    it is invoked here to create an indexed hash -->
     <%= render partial: "question.txt", locals: { question: q, index: index } %>
-  <% end %>
+    <!--q and index (the local vars) are passed to the partial as the named vars question and index-->
+  <% end %> <!--end questions-->
+
+
   <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
   <% @levels.each do |k, l| %>
     <% unless k.nil? %>

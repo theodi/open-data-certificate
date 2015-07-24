@@ -1,4 +1,5 @@
 <% if question[:answers].nil? && @questions[index + 1] != nil %>
+<%  #all : attributes in this partial are established in the flow class def question %>
   <%= question[:id] %>["<%= question[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
 <% elsif !question[:answers].nil? %>
   <% question[:answers].each do |k,v| %>
