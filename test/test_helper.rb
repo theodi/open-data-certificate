@@ -1,6 +1,7 @@
-require 'coveralls'
-
-Coveralls.wear_merged! 'rails'
+if ENV['COVERAGE']
+  require 'coveralls'
+  Coveralls.wear_merged! 'rails'
+end
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
