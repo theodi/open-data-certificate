@@ -10,8 +10,8 @@
 - when 'label'
   %li.subsection-label
     %h2.container
-      != question_text
-      %small= q.help_text
+      != q.heading
+      %small= q.subheading
 
 - else
   %li.question.container
@@ -102,7 +102,7 @@
             = ff.input :response_group, :as => :quiet, :value => rg if g && g.display_type == "repeater"
             = ff.input :api_id, :as => :quiet
             = ff.input :autocompleted, :as => :quiet
-            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.text, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }, :prompt => "Please select..."
+            = ff.input :answer_id, :as => :select, :collection => q.answers.map{|a| [a.answer_text, a.id, {'data-reference-identifier' => "#{q.reference_identifier}_#{a.reference_identifier}"}]}, :include_blank => (renderer != :slider), :label => q.heading, :input_html => { :disabled => disabled }, :status_message => { :message => status_message }, :prompt => I18n.t('interface.select')
         - else # :default, :inline, :inline_default, :repeater_default
           - if q.pick == "one"
             = f.semantic_fields_for i, r do |ff|

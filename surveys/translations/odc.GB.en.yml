@@ -13,7 +13,7 @@ en:
       text: Social Information
       help_text: Documentation, support and services
     legal:
-      text: Legal Information
+      title: Legal Information
       help_text: Rights, licensing and privacy
   questions:
     dataTitle:
@@ -1059,6 +1059,9 @@ en:
         cc_zero:
           text: Creative Commons CCZero
           text_as_statement: Creative Commons CCZero
+        ogl_uk:
+          text: UK Open Government Licence
+          text_as_statement: UK Open Government Licence
         odc_by:
           text: Open Data Commons Attribution License
           text_as_statement: Open Data Commons Attribution License
@@ -1206,6 +1209,9 @@ en:
         cc_zero:
           text: Creative Commons CCZero
           text_as_statement: Creative Commons CCZero
+        ogl_uk:
+          text: UK Open Government Licence
+          text_as_statement: UK Open Government Licence
         na:
           text: Not applicable
           text_as_statement: ''
@@ -1392,33 +1398,33 @@ en:
       answers:
         a_1:
           placeholder: Disclosure Rationale URL
-    riskAssessmentExists:
-      text: Have you assessed the risks of disclosing personal data?
+    privacyImpactAssessmentExists:
+      text: Have you carried out a Privacy Impact Assessment?
       text_as_statement: The curator has
-      help_text: A risk assessment measures risks to the privacy of individuals in
-        your data as well as the use and disclosure of that information.
+      help_text: A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy
+        Impact Assessment</a> is how you measure risks to the privacy of individuals
+        in your data as well as the use and disclosure of that information.
       answers:
         a_false:
           text: 'no'
-          text_as_statement: not carried out a privacy risk assessment
+          text_as_statement: not carried out a Privacy Impact Assessment
         a_true:
           text: 'yes'
-          text_as_statement: carried out a privacy risk assessment
-    riskAssessmentUrl:
-      text: Where is your risk assessment published?
-      text_as_statement: The risk assessment is published at
+          text_as_statement: carried out a Privacy Impact Assessment
+    privacyImpactAssessmentUrl:
+      text: Where is your Privacy Impact Assessment published?
+      text_as_statement: The Privacy Impact Assessment is published at
       help_text: Give a URL to where people can check how you have assessed the privacy
         risks to individuals. This may be redacted or summarised if it contains sensitive
         information.
       answers:
         a_1:
-          placeholder: Risk Assessment URL
-    riskAssessmentAudited:
-      text: Has your risk assessment been independently audited?
-      text_as_statement: The risk assessment has been
-      help_text: It's good practice to check your risk assessment was done correctly.
-        Independent audits by specialists or third-parties tend to be more rigorous
-        and impartial.
+          placeholder: Privacy Impact Assessment URL
+    piaAudited:
+      text: Has your Privacy Impact Assessment been independently audited?
+      text_as_statement: The Privacy Impact Assessment has been
+      help_text: It's good practice to check your assessment was done correctly. Independent
+        audits by specialists or third-parties tend to be more rigorous and impartial.
       answers:
         a_false:
           text: 'no'
@@ -1431,7 +1437,7 @@ en:
       text_as_statement: Individuals affected by this data have this privacy notice
       help_text: When you collect data about individuals you must tell them how that
         data will be used. People who use your data need this to make sure they comply
-        with data protection legislation.
+        with the Data Protection Act.
       answers:
         a_1:
           placeholder: Privacy Notice URL
@@ -1443,7 +1449,7 @@ en:
         a_true:
           text: 'yes'
     dbStaffConsulted:
-      text: Have you involved them in the risk assessment process?
+      text: Have you involved them in the Privacy Impact Assessment process?
       text_as_statement: The individual responsible for data protection
       answers:
         a_false:
@@ -1574,8 +1580,8 @@ en:
         use it.
     pilot_5:
       text: You should <strong>create a new database dump every month</strong> so
-        that people have the latest data.You should <strong>assess the risks of disclosing
-        personal data</strong> if you publish data about individuals.
+        that people have the latest data.You should <strong>do a Privacy Impact Assessment</strong>
+        if you publish data about individuals.
     standard_8:
       text: You should <strong>create a new database dump within a week of any change</strong>
         so that people have less time to wait for the latest data.You should <strong>have
@@ -1594,7 +1600,7 @@ en:
     standard_10:
       text: You should <strong>document any known issues with your data quality</strong>
         so that people can decide how much to trust your data.You should <strong>publish
-        your privacy risk assessment</strong> so people can understand how you have
+        your Privacy Impact Assessment</strong> so people can understand how you have
         assessed the risks of disclosing data.
     exemplar_5:
       text: You should <strong>document your quality control process</strong> so that
@@ -1603,8 +1609,9 @@ en:
         so automatic tools can use it.
     standard_11:
       text: You should <strong>take a result offsite backup</strong> so that the data
-        won't be lost if an accident happens.You should <strong>have your risk assessment
-        audited independently</strong> to ensure it has been carried out correctly.
+        won't be lost if an accident happens.You should <strong>have your Privacy
+        Impact Assessment audited independently</strong> to ensure it has been carried
+        out correctly.
     standard_12:
       text: You should <strong>describe what guarantees you have around service availability</strong>
         so that people know how much they can rely on it.You should <strong>have your
@@ -1617,8 +1624,8 @@ en:
       text: You should <strong>guarantee that your data will be available in this
         form for at least a year</strong> so that people can decide how much to rely
         on your data.You should <strong>tell people what purposes the individuals
-        in your data consented to you using their data for</strong> so that they use
-        your data for the same purposes and comply with data protection legislation.
+        in your data consented to you using their data for</strong>. So that they
+        use your data for the same purposes and comply with the Data Protection Act.
     standard_13:
       text: You should <strong>guarantee that your data will be available in this
         form in the medium-term</strong> so that people can decide how much to trust
@@ -1814,13 +1821,13 @@ en:
       text: You should <strong>provide a list of software libraries and other readily-available
         tools</strong> so that people can quickly get to work with your data.
     ownership:
-      text: Rights
+      title: Rights
       help_text: your right to share this data with people
     licensing:
-      text: Licensing
+      title: Licensing
       help_text: how you give people permission to use this data
     privacy:
-      text: Privacy
+      title: Privacy
       help_text: how you protect people's privacy
     basic_5:
       text: You must get <strong>contributors to agree to a Contributor Licence Agreement</strong>
@@ -1831,12 +1838,13 @@ en:
     basic_7:
       text: You must <strong>publish open data under an open licence</strong> so that
         people can use it.
-  title: CZ
-  full_title: Czech Republic
+  title: GB
+  full_title: United Kingdom
   description: <p>This self-assessment questionnaire generates an open data certificate
     and badge you can publish to tell people all about this open data. We also use
     your answers to learn how organisations publish open data.</p><p>When you answer
-    these questions it demonstrates your efforts to comply with relevant legislation.
-    You should also check which other laws and policies apply to your sector.</p><p><strong>You
+    these questions it demonstrates your efforts to comply with relevant UK legislation.
+    You should also check which other laws and policies apply to your sector, especially
+    if you’re outside the UK (which these questions don’t cover).</p><p><strong>You
     do not need to answer all the questions to get a certificate.</strong> Just answer
     those you can.</p>

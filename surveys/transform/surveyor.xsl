@@ -17,21 +17,20 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
+	<xsl:result-document href="odc_structure.{questionnaire/@jurisdiction}.xml" indent="yes">
+		<xsl:copy-of select="$structure" />
+	</xsl:result-document>
 	<!-- Surveyor quesitionnaire description -->
-	<xsl:result-document href="../../surveys/odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
+	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
-	<!-- complete merged translation strings -->
-	<xsl:result-document href="../../surveys/translations/odc.{questionnaire/@jurisdiction}.{questionnaire/@xml:lang}.yml" method="text">
-		<xsl:apply-templates select="$merged/questionnaire" mode="translation" />
-	</xsl:result-document>
 	<!-- general sections translation strings -->
-	<xsl:result-document href="../../surveys/translations/questionnaire.general.{questionnaire/@xml:lang}.yml" method="text">
-		<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', questionnaire/@xml:lang, '.xml')" />
+	<xsl:result-document href="translations/questionnaire.general.en.yml" method="text">
+		<xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 		<xsl:apply-templates select="doc($langPath)/questionnaire" mode="translation" />
 	</xsl:result-document>
 	<!-- jurisdiction specific translation strings -->
-	<xsl:result-document href="../../surveys/translations/questionnaire.jurisdiction.{questionnaire/@xml:lang}_{questionnaire/@jurisdiction}.yml" method="text">
+	<xsl:result-document href="translations/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.en.yml" method="text">
 		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
@@ -39,7 +38,7 @@
 <!-- MERGE -->
 
 <xsl:template match="questionnaire" mode="merge">
-	<xsl:variable name="langPath" as="xs:string" select="concat('translations/certificate.', @xml:lang, '.xml')" />
+	<xsl:variable name="langPath" as="xs:string" select="'../definition/questionnaire.general.xml'" />
 	<xsl:choose>
 		<xsl:when test="doc-available($langPath)">
 			<xsl:variable name="langVersion" as="element()" select="doc($langPath)/questionnaire" />
@@ -55,7 +54,7 @@
 			</questionnaire>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:message terminate="yes">Could not find version of certificate in language <xsl:value-of select="@xml:lang" /> at <xsl:value-of select="$langPath" /></xsl:message>
+			<xsl:message terminate="yes">Could not find general definition of certificate at <xsl:value-of select="resolve-uri($langPath)" /></xsl:message>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -73,7 +72,7 @@
 		<translations>
 			<xsl:attribute name="en">default</xsl:attribute>
 			<xsl:for-each select="locales/locale">
-				<xsl:attribute name="{.}">translations/questionnaire.<xsl:value-of select="."/>.yml</xsl:attribute>
+				<xsl:attribute name="{.}">translations/odc.<xsl:value-of select="../../@jurisdiction"/>.<xsl:value-of select="."/>.yml</xsl:attribute>
 			</xsl:for-each>
 		</translations>
 		<xsl:apply-templates select="group" mode="structure" />
@@ -94,7 +93,7 @@
 <xsl:template match="group//group" mode="structure">
 	<_group>
 		<_group>
-			<xsl:element name="label_group_{count(preceding::group) + 1}">
+			<xsl:element name="label_{@id}">
 				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="html" /></xsl:attribute>
 				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
 				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
@@ -440,7 +439,7 @@
 </xsl:template>
 
 <xsl:template match="br" mode="html">
-  <xsl:text>&lt;br/&gt;</xsl:text>
+	<xsl:text>&lt;br/&gt;</xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="html">
@@ -613,14 +612,7 @@
 
 <xsl:template match="questionnaire" mode="translation">
 	<xsl:param name="indent" select="$indentamt"/>
-	<xsl:choose>
-		<xsl:when test="@jurisdiction">
-			<xsl:value-of select="concat(@xml:lang, '_', @jurisdiction, ':')"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="concat(@xml:lang, ':')"/>
-		</xsl:otherwise>
-	</xsl:choose>
+	<xsl:value-of select="concat(@xml:lang, ':')"/>
 	<xsl:text>&#xA;</xsl:text>
 	<xsl:if test="@jurisdiction">
 		<xsl:value-of select="$indent"/>
@@ -677,7 +669,7 @@
 	<xsl:value-of select="@id" />
 	<xsl:text>:&#xA;</xsl:text>
 	<xsl:value-of select="concat($indentamt, $indent)"/>
-	<xsl:text>title: </xsl:text>
+	<xsl:text>text: </xsl:text>
 	<xsl:variable name="title">
 		<xsl:apply-templates select="label" mode="html">
 			<xsl:with-param name="indent" select="concat($indentamt, $indent)"/>
@@ -718,7 +710,7 @@
 			<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
 			<xsl:text>a_1:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
-			<xsl:text>text: </xsl:text>
+			<xsl:text>placeholder: </xsl:text>
 			<xsl:value-of select="local:yamlQuotedText(input/@placeholder)" />
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:when>
@@ -727,7 +719,7 @@
 			<xsl:text>a_false:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 			<xsl:text>text: </xsl:text>
-			<xsl:value-of select="(//questionnaire/@no, 'no')[1]" />
+			<xsl:value-of select="local:yamlQuotedText((//questionnaire/@no, 'no')[1])" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
@@ -739,7 +731,7 @@
 			<xsl:text>a_true:&#xA;</xsl:text>
 			<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 			<xsl:text>text: </xsl:text>
-			<xsl:value-of select="(//questionnaire/@yes, 'yes')[1]" />
+			<xsl:value-of select="local:yamlQuotedText((//questionnaire/@yes, 'yes')[1])" />
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:if test="yesno/@yes or yesno/@no">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
@@ -751,7 +743,7 @@
 		<xsl:otherwise>
 			<xsl:for-each select=".//option[@value]">
 				<xsl:value-of select="concat($indentamt, $indentamt, $indent)"/>
-				<xsl:value-of select="local:token(@value)" />
+				<xsl:value-of select="local:yamlsafe(local:token(@value))" />
 				<xsl:text>:&#xA;</xsl:text>
 				<xsl:value-of select="concat($indentamt, $indentamt, $indentamt, $indent)"/>
 				<xsl:text>text: </xsl:text>
@@ -822,6 +814,24 @@
 <xsl:template match="*" mode="translation" />
 
 <!-- FUNCTIONS -->
+
+<xsl:function name="local:yamlsafe" as="xs:string">
+	<!--
+		YAML treats the words (yes, no, true, false, on, off) as special
+		terms that are treated as booleans not strings.
+
+		This quotes those terms to force the keys to be strings
+	-->
+	<xsl:param name="key" as="xs:string" />
+	<xsl:choose>
+		<xsl:when test="matches($key, 'yes|no|true|false|on|off')">
+			<xsl:value-of select="local:yamlQuotedText($key)" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$key" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
 
 <xsl:function name="local:token" as="xs:string">
 	<xsl:param name="string" as="xs:string" />

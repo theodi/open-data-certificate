@@ -1,0 +1,18 @@
+---
+root:
+  a:
+  - one
+  - three
+  - four
+  - two
+  b:
+    one: one
+    two: two
+    four: four
+    three: three
+  c:
+    d:
+      e: ee
+      f: ff
+    e: e
+  enc: you’re

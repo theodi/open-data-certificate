@@ -1,7 +1,7 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+cs:
   choose_legislation: choose legislation
 
   alpha_note: This is the alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
@@ -260,13 +260,13 @@ en:
     search_results: Search Results
 
   response_set:
-    choose_a_jurisdiction: Change jurisdiction
+    choose_a_jurisdiction: Choose a new jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
     choose_jurisdiction: --- Select jurisdiction ---
     start_new_jurisdiction: Change jurisdiction
 
-    choose_a_language: Change language
-    language_dialog_body: Choose which language you would like to complete the survey in
+    choose_a_language: Choose a new language
+    language_dialog_body: Choose a different language below
     choose_language: --- Select language ---
     start_new_language: Change language
 
@@ -434,9 +434,5 @@ en:
       user:
         short_name: Short name or preferred way of being addressed
 
-  locales:
-    en: English
-    cs: Czech
-
   interface:
-    select: "Please select…"
+    select: "prosím vyberte…"

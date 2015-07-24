@@ -20,8 +20,16 @@ class SurveySection < ActiveRecord::Base
     questions.where(Question.arel_table[:reference_identifier].not_in %w(documentationUrl pilot_1 basic_1))
   end
 
-  def translation(locale)
-    {:title => self.title, :description => self.description}.with_indifferent_access
+  def heading(locale=I18n.locale)
+    translation(locale)[:text] || title
+  end
+
+  def subheading(locale=I18n.locale)
+    if t = translation(locale)
+      t[:help_text] || t[:description] || description
+    else
+      description
+    end
   end
 
   def questions_by_group

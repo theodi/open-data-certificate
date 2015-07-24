@@ -39,17 +39,17 @@
       .well
         .row-fluid
           .span8.lead
-            = @survey.translation(I18n.locale)[:description].try(:html_safe)
+            != @survey.intro
             %p
               %a{href: about_url} Read more about Open Data Certificates
 
         = semantic_form_for [surveyor, :start, @response_set] do |f|
           - question = @survey.questions.find_by_reference_identifier("documentationURL")
-          = f.label :documentation_url, question.text
+          = f.label :documentation_url, question.heading
 
           .row-fluid
             .span8
-              = f.url_field :documentation_url, class: 'string', placeholder: question.answers.first.text, value: @response_set.documentation_url || @documentation_url
+              = f.url_field :documentation_url, class: 'string', placeholder: question.placeholder, value: @response_set.documentation_url || @documentation_url
               - explanation_class = "show" if @url_error
               #start_url_explanation.explanation{class: explanation_class}
                 = f.input :documentation_url_explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.url_explanation')
