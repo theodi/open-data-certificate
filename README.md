@@ -207,7 +207,6 @@ In the translation file (eg. surveys/translations/my-file.es.yml)
 
 There is an example of adding a translation on [this gist](https://gist.github.com/benfoxall/c35ad597fd2c2d7fcdc6#file-0002-manually-corrected-translation-yaml-patch)
 
-
 ### Running
 
 ```bash
@@ -322,3 +321,26 @@ A breakdown of the validation states that exist in the survey:
 [App approach document](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#)
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
+
+#### Flowchart
+
+http://localhost:3000/flowchart
+files responsible:
+```ruby
+lib>flow.rb
+app>controllers>flowcharts_controller.rb
+app>views>flowcharts/.
+```
+you'll want to have open
+prototype/translation & prototype/jurisdictions
+
+rendering flow =
+```
+show
+^~> _question
+___^~> _answer
+______^~> _dependency
+_________^~> _answer
+```
+
+each of the partials render text in the markdown format which https://github.com/knsv/mermaid stipulates
