@@ -36,8 +36,6 @@ group :test do
   gem 'csvlint', github: 'theodi/csvlint.rb'
   gem 'vcr'
   gem 'webmock'
-  gem 'spork-rails'
-  gem 'spork-testunit'
   gem 'shoulda-context'
   gem 'timecop'
   gem 'cucumber-rails', require: false
