@@ -18,14 +18,13 @@ class FlowchartsController < ApplicationController
     flow = Flow.new(@jurisdiction, @type)
     @questions = flow.questions # returns an array of hashes
     @dependencies = flow.dependencies
-    # dependences and questions should be the same length? TEST
     @deps = []
     @levels = {}
-    (@questions + @dependencies).each do |q| #what operation is this
+    (@questions + @dependencies).each do |q| #what operation is this '+'
       @levels[q[:level]] ||= []
       @levels[q[:level]] << q[:id]
     end
-    # binding.pry
+
   end
 
 end
