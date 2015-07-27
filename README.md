@@ -31,7 +31,9 @@ The request should authenticated with Basic HTTP Authentication, using the user'
 
 #### Questionnaire schema
 
-The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash, which specifies the allowed options, which should be identified by their key.
+The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of
+the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash,
+which specifies the allowed options, which should be identified by their key.
 
 Questions which are required to publish the dataset will also have `required: true`.
 
@@ -109,9 +111,13 @@ state of `pending`, please try again in a few seconds.
 
 ### Surveyor
 
-The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.  We've changed the look, feel & structure to fit the site and extended it to support certificate levels.
+The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.
+We've changed the look, feel & structure to fit the site and extended it to support certificate levels.
 
-Although all of Surveyor's functionality is supported - much of it isn't incorporated into the initial designs, and so hasn't been tested to work correctly. Experiments with the demo "kitchen sink survey" illustrate that some of the question types that Surveyor supports break the CSS, so please beware if extending the current questionnaire with other question types - they will need to be tested and possibly need CSS/renderer design changes.
+Although all of Surveyor's functionality is supported - much of it isn't incorporated into the initial designs, and so hasn't
+been tested to work correctly. Experiments with the demo "kitchen sink survey" illustrate that some of the question types
+that Surveyor supports break the CSS, so please beware if extending the current questionnaire with other question types
+- they will need to be tested and possibly need CSS/renderer design changes.
 
 
 #### Deploying questionnaires
@@ -167,10 +173,13 @@ Questions and Answers are associated to requirements by having their 'requiremen
 ##### question
 
 * `:requirement` - If the question is a Label-type, requirement is the identifier of an improvement that is recommended to meet a certain level.
-The value will be stored as `"pilot_1"`, `"pilot_2"`, `"pilot_3"`, `"basic_1"`, `"basic_2"`, etc. With the part before the underscore representing the level, and everything after the underscore uniquely identifying the requirement.
+The value will be stored as `"pilot_1"`, `"pilot_2"`, `"pilot_3"`, `"basic_1"`, `"basic_2"`, etc. With the part before
+the underscore representing the level, and everything after the underscore uniquely identifying the requirement.
 If the question is a "normal" question (ie: not a label), the requirement attribute is used to identify to the recommended improvement this question satisfies.
 
-* `:required` - Whether or not this question is required/mandatory to be completed (it also has to be triggered in the questionnaire by its dependencies). Any value in here will make the question mandatory, but it can also be used to identify if it is mandatory for a specific level of certificate attainment (if this requires different styling in the UI) ie: `:required #=> mandatory for every level`  , `:pilot #=> mandatory for 'pilot' level`
+* `:required` - Whether or not this question is required/mandatory to be completed (it also has to be triggered in the questionnaire by its dependencies).
+Any value in here will make the question mandatory, but it can also be used to identify if it is mandatory for a specific level of certificate attainment
+(if this requires different styling in the UI) ie: `:required #=> mandatory for every level`  , `:pilot #=> mandatory for 'pilot' level`
 
 * `:help_text_more_url` - The url to link to at the end of the help text
 
@@ -333,7 +342,7 @@ app>controllers>flowcharts_controller.rb
 app>views>flowcharts/.
 ```
 you'll want to have open
-prototype/translation & prototype/jurisdictions
+prototype/translation & prototype/jurisdictions (and the $var.en.xml of each respective folder)
 
 rendering flow =
 ```

@@ -56,13 +56,13 @@ class Flow
       label: label(q),
       type: type(q),
       level: level(q),
-      answers: answers(q),
+      answers: answers(q), # array of hashes
       prerequisites: dependency === true ? prerequisites(q) : nil
     }
   end
 
   def answers(question)
-    # returns either a boolean hash or an array/
+    # returns result of dependency method, or an array of hashes based on input type
     if type(question) == "yesno"
       {
         "true" => {
@@ -110,6 +110,7 @@ class Flow
   end
 
   def level(question)
+    # this identifies which order of merit is indicated by the level attached to the question
     question.at_xpath("requirement")["level"] unless question.at_xpath("requirement").nil?
   end
 
