@@ -20,4 +20,59 @@
 			<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
 		</question>
   </group>
+  <group id="practical">
+		<label>Practical Information</label>
+		<help>Findability, accuracy, quality and guarantees</help>
+		<group id="findability">
+			<label>Findability</label>
+			<help>how you help people find your data</help>
+			<question id="onWebsite">
+				<label>Is there a link to your data from your main website?</label>
+				<yesno/>
+				<help>Data can be found more easily if it is linked to from your main website.</help>
+				<requirement level="standard">You should <strong>ensure that people can find the data from your main website</strong> so that people can find it more easily.</requirement>
+			</question>
+			<if test="this.onWebsite() === 'true'">
+				<repeat id="webPages">
+					<label>Web Page</label>
+					<question id="webpage" display="The website links to the data from">
+						<label>Which page on your website links to the data?</label>
+						<input type="url" required="required" placeholder="Web page URL"/>
+						<help>Give a URL on your main website that includes a link to this data.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="listed">
+				<label>Is your data listed within a collection?</label>
+				<yesno/>
+				<help>Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps make your data more discoverable.</help>
+				<requirement level="standard">You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.</requirement>
+			</question>
+			<if test="this.listed() === 'true'">
+				<repeat id="listings">
+					<label>Listing</label>
+					<question id="listing" display="The data appears in this collection">
+						<label>Where is it listed?</label>
+						<input type="url" required="required" placeholder="Listing URL"/>
+						<help>Give a URL where this data is listed within a relevant collection. For example, data.gov.uk (if it's UK public sector data), hub.data.ac.uk (if it's UK academia data) or a URL for search engine results.</help>
+					</question>
+				</repeat>
+			</if>
+			<question id="referenced">
+				<label>Is this data referenced from your own publications?</label>
+				<yesno/>
+				<help>Have you included direct links to this dataset in any of your own publications or communication channels? These could be reports, press releases, blog posts, presentations or any publication that helps to provide context to your data and encourages people to discover and understand the data better.</help>
+				<requirement level="standard">You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.</requirement>
+			</question>
+			<if test="this.referenced() === 'true'">
+				<repeat id="references">
+					<label>Reference</label>
+					<question id="reference" display="This data is referenced from">
+						<label>Where is your data referenced?</label>
+						<input type="url" required="required" placeholder="Reference URL"/>
+						<help>Give a URL to a document that cites or references this data.</help>
+					</question>
+				</repeat>
+			</if>
+		</group>
 </questionnaire>

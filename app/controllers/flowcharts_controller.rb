@@ -15,7 +15,7 @@ class FlowchartsController < ApplicationController
     # this all runs before the view renders? check
     @jurisdiction = params[:jurisdiction] || "gb"
     @type = params[:type] || "Practical"
-    flow = Flow.new(@jurisdiction, @type, true)
+    flow = Flow.new(@jurisdiction, @type)
     @questions = flow.questions # returns an array of hashes with dependency always nil
     @dependencies = flow.dependencies
     @deps = []
@@ -26,7 +26,7 @@ class FlowchartsController < ApplicationController
       @levels[q[:level]] << q[:id]
 
     end
-    binding.pry
+    #binding.pry
   end
 
 end
