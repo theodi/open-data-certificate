@@ -244,7 +244,7 @@ Some environment variables are required for the certificates site, these can be 
 
 ```
 # A hostname to create links in emails
-ODC_HOST_NAME="localhost:3000"
+CERTIFICATE_HOSTNAME="localhost:3000"
 
 # Rackspace credentials for saving certificate dumps
 RACKSPACE_USERNAME
