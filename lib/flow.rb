@@ -15,7 +15,7 @@ class Flow
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
     # marshals XML into two above hashes
-    binding.pry
+
   end
 
   def get_path(jurisdiction, type)
@@ -63,6 +63,8 @@ class Flow
       level: level(q),
       answers: answers(q), # array of hashes
       prerequisites: dependency === true ? prerequisites(q) : nil
+      # assign prerequisite to the method if dependency is true or nil depending or nil if false
+      # Left is true, right is false
     }
   end
 
