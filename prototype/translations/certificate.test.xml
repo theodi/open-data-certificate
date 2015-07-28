@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+  -->
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<questionnaire version="0.7" xml:lang="en">
+  <levels>
+		<!-- not changing names of levels here as they are hard-coded throughout Ruby code base -->
+		<level id="basic">A fantastic start at the basics of publishing open data. It takes a lot to even get here.</level>
+		<level id="pilot">Extra effort went in to support and encourage feedback from people who use this open data.</level>
+		<level id="standard">Regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.</level>
+		<level id="exemplar">This is above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.</level>
+	</levels>
+	<group id="general">
+		<label>General Information</label>
+		<question id="dataTitle">
+			<label>What's this data called?</label>
+			<input placeholder="Data Title" required="required"/>
+			<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+		</question>
+  </group>
+</questionnaire>
