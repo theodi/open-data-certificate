@@ -11,7 +11,7 @@ end
 
 module OpenDataCertificate
   def self.hostname
-    ::OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host]
+    ENV['CERTIFICATE_HOSTNAME']
   end
 
   def self.staging?
