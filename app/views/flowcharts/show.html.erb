@@ -23,7 +23,7 @@
 <div id="flowchart">
 
   <div class="mermaid">
-  graph LR
+  graph TD
   <% @questions.each_with_index do |q, index| %>
     <%= render partial: "question.txt", locals: { question: q, index: index } %>
   <% end %>

@@ -342,7 +342,7 @@ app>controllers>flowcharts_controller.rb
 app>views>flowcharts/.
 ```
 you'll want to have open
-prototype/translation & prototype/jurisdictions (and the $var.en.xml of each respective folder)
+prototype/translation/certificate.en.xml & prototype/jurisdictions/certificate.GB.xml
 
 rendering flow =
 ```

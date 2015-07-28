@@ -5,8 +5,12 @@ class Flow
   # will generate a flow chart based on the path that can be navigated through the
   # entire scope of the certificates (legal and practical)
 
-  def initialize(jurisdiction, type)
-    path = get_path(jurisdiction, type)
+  def initialize(jurisdiction, type, debugPath = false)
+    if debugPath
+      path = File.join(Rails.root, 'fixtures', "test.legal.xml")
+    else
+      path = get_path(jurisdiction, type)
+    end
     # two Nokogiri parses are created because the operations & transformations exacted destructively modify data
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
@@ -22,7 +26,6 @@ class Flow
     unless File.exist?(path)
       path = File.join(Rails.root, 'prototype', folder, "certificate.en.xml")
     end
-
     path
   end
 
