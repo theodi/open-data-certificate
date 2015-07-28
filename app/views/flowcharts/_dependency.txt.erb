@@ -14,7 +14,8 @@
       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
       <% if dependency[:prerequisites].count <= 1 || (["timeSensitive","privacyImpactAssessmentExists"].include?(dependency[:id]) && dependency[:prerequisites].count == 2) %>
             <% dependency[:answers].each do |k,v| %>
-              <% @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v }) %>
+            <% populate_deps_array(dependency, index, k, v) %>
+
               <% # what is going on here :( %>
             <% end %>
       <% else %>
