@@ -351,6 +351,16 @@ show
 ___^~> _answer
 ______^~> _dependency
 _________^~> _answer
+
+// this effectively functions as a foreach loop
+
+foreach(question_element in @questions hash)
+    // passes a hash
+    foreach(answer in answers hash*) *where answers is extracted from question_element as a key=>value element
+        PartialDependency(question_element, question_element_index, answer.key, answer.value)
+           A Hash is retrieved from @dependencies instance hash and assigned to dependency (local var)
+           answer[:dependency] and dependency[:label] are the values printed to screen in varying outputs
+
 ```
 
 each of the partials render text in the markdown format which https://github.com/knsv/mermaid stipulates
