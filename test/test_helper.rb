@@ -32,6 +32,7 @@ VCR.configure do |c|
 end
 
 # Configuration ENVARS:
+ENV['CERTIFICATE_HOSTNAME'] = 'test.host'
 ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER'] = "certificates_test"
 ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] = "ODI Drive/Technical/Test Data/Usage Data"
 

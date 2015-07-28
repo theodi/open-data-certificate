@@ -7,6 +7,7 @@ if ENV['COVERAGE']
   Coveralls.wear_merged! 'rails'
 end
 
+ENV['CERTIFICATE_HOSTNAME'] = 'test.host'
 Sidekiq::Testing.inline!
 
 def load_fixture(file)
