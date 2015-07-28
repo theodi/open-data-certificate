@@ -60,7 +60,7 @@ OpenDataCertificate::Application.configure do
 
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.default_url_options = {
-    :host => "#{'staging.' if OpenDataCertificate.staging?}certificates.theodi.org"
+    :host => ENV["CERTIFICATE_HOSTNAME"]
   }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com

@@ -11,11 +11,7 @@ end
 
 module OpenDataCertificate
   def self.hostname
-    ::OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host]
-  end
-
-  def self.staging?
-    /staging/ =~ Dir.pwd
+    ENV['CERTIFICATE_HOSTNAME']
   end
 
   class Application < Rails::Application
