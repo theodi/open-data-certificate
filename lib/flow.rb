@@ -15,6 +15,7 @@ class Flow
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
     # marshals XML into two above hashes
+    binding.pry
   end
 
   def get_path(jurisdiction, type)
@@ -53,7 +54,7 @@ class Flow
   end
 
   def question(q, dependency = true)
-    # q => Nokogiri::XML::Element
+    # q => Nokogiri::XML::Element , should be FALSE???
     # returns a hash
     {
       id: q["id"],
