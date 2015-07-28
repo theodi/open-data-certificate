@@ -27,6 +27,7 @@ class Flow
   end
 
   def folder_name(type)
+    # used for retreiving the file to be parsed
     {
       "Legal" => "jurisdictions",
       "Practical" => "translations"
