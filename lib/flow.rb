@@ -64,6 +64,7 @@ class Flow
 
   def answers(question)
     # returns result of dependency method, or an array of hashes based on input type
+    # hash is usually a single key=> value assignment
     if type(question) == "yesno"
       {
         "true" => {
