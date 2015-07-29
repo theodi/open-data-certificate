@@ -13,13 +13,15 @@
 <% else %>
       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
       <% if dependency[:prerequisites].count <= 1 || (["timeSensitive","privacyImpactAssessmentExists"].include?(dependency[:id]) && dependency[:prerequisites].count == 2) %>
+            <% # if there is only one prerequisite answers can commence rendering, if there is > 1 prerequisites do not risk rendering anser %>
             <% dependency[:answers].each do |k,v| %>
-            <% populate_deps_array(dependency, index, k, v) %>
-
+            <% # populate_deps_array(dependency, index, k, v) %>
+              <% @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v }) %>
               <% # what is going on here :( %>
             <% end %>
       <% else %>
         <% dependency[:prerequisites].shift %>
         <% #  remove and destroy the first element in the prerequisite array until it can return nil %>
       <% end %>
+      <% # each time it renders  %>
 <% end %>

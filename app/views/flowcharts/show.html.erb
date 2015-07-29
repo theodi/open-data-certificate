@@ -1,11 +1,11 @@
 <% content_for :header_title, "Questionnare flowcharts" %>
 
-<form action="" method="get" class="form-inline">
-    <label>
+<form id="questionairre_selection" action="" method="get" class="form-inline">
+    <label id="jurisdiction">
       Select jurisdiction
       <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction.downcase)) %>
     </label>
-    <label>
+    <label id="type">
       Select type
       <%= select_tag(:type, options_for_select(["Practical", "Legal"], @type)) %>
     </label>
@@ -20,6 +20,7 @@
 <!--two arguments, the item and its index, for each item in the questions instance variable
   it is invoked here to create an indexed hash -->
 <!--q and index (the local vars) are passed to the partial as the named vars question and index-->
+<!--depth first search of tree-->
 <div id="flowchart">
 
   <div class="mermaid">

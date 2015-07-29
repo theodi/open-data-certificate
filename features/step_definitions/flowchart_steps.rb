@@ -1,3 +1,6 @@
+# encoding: utf-8
+require 'pry'
+
 legal_markdown = <<EOF
   graph TD
   publisherRights{"Do you have the right to make this data open?"}
@@ -168,10 +171,21 @@ legal_markdown = <<EOF
   class sourceDocumentationMetadata,explicitWaiver,statisticalAnonAudited,lawfulDisclosureURL,privacyImpactAssessmentUrl,piaAudited,anonymisationAudited standard;
 EOF
 
+When(/^I navigate to "(.*?)"$/) do |url|
+  visit "/#{url}"
+  # visit path_to(url)
+end
 
 When(/^I select "(.*?)" from the "(.*?)" dropdown$/) do |text, field|
-  select text, from: field
+  # find_field('questionairre_selection').find(field)
+  # select text, from: field
+  page.select 'Legal', :from => 'type'
 end
+
+# When(/^I select "(.*?)"/) do |text|
+#   # page.select text, from: field
+#   page.select(text, :from => page)
+# end
 
 # above can cover both practical and jurisdiction
 
@@ -183,3 +197,6 @@ Then(/^the page should contain "(.*?)"$/) do |text|
   page.body.should include(text)
 end
 
+Then(/^the page should contain legal markdown$/) do
+  page.body.should include(legal_markdown)
+end

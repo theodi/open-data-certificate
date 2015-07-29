@@ -19,6 +19,7 @@ class FlowchartsController < ApplicationController
     @questions = flow.questions # returns an array of hashes with dependency always nil
     @dependencies = flow.dependencies
     @deps = []
+    # array of string containing a rendered partial
     @levels = {}
 
     (@questions + @dependencies).each do |q| #what operation is this '+'
