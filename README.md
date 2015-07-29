@@ -365,3 +365,44 @@ foreach(question_element in @questions hash)
 ```
 
 each of the partials render text in the markdown format which https://github.com/knsv/mermaid stipulates
+
+Intern Suggestions:
+
+Clearer explanation.
+Make calls between dependency and answer clearer.
+List of all possible answer dependencies.
+Test for dependencies inside and outside answer
+
+Flow pseudocode:
+
+  -- Question
+
+  if the question has no answers and there exists a next question
+    convert question id and label into readable string ...
+  else if the question has answers, for each answer
+
+    -- Answer
+
+    if there is no answer dependency and there is a next question
+      convert question id and label into readable string ...
+    else if there is an answer dependency
+
+      -- Dependency
+
+      dependency = returns more information about dependency of a given answer as a hash
+      if there are no answers for that dependency
+        convert question id and label into readable string ...
+        if there is a next question
+          render question/answer/dependency
+        else render end block
+      else
+        render question/answer/dependency
+        if dependency prerequisites are <= 1 or (dependency is one of ["timeSensitive","privacyImpactAssessmentExists"] & dependency has 2 prerequisites)
+          for each dependency answer
+            render answer
+            add it to @deps
+        else
+          destroy first prerequisite of dependency
+
+    else
+      Render end block
