@@ -18,9 +18,9 @@ class Flow
 
   end
 
-  def get_path(jurisdiction, type)
+  def get_path(jurisdiction_param, type)
     # return two different paths based on whether legal or practical question flow selected
-    jurisdiction = "en" if (jurisdiction == "gb" && type == "Practical")
+    jurisdiction = "en" if (jurisdiction_param == "gb" && type == "Practical")
     jurisdiction.upcase! if type == "Legal" # check what this bang! means
     folder = folder_name(type)
     path = File.join(Rails.root, 'prototype', folder, "certificate.#{jurisdiction}.xml")
