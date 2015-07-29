@@ -8,11 +8,11 @@ Feature: ensuring flowchart renders as expected
 
 
   Scenario: I want to ensure the legal flowchart markdown continues to render as expected
-    When I navigate to localhost/flowchart
-    And I select "Legal" from the "flowchart" dropdown
+    When I navigate to "/flowchart"
+    And I select "Legal" from the "type" dropdown
     And I click "submit"
-    Then the page should contain "#{legal_markdown}"
-#    Then the page should contain @legal_markdown
+#    Then the page should contain "#{legal_markdown}"
+    Then the page should contain legal markdown
 
 #  Scenario: I want to ensure the practical flowchart markdown continues to render as expected
 #    When I navigate to localhost/flowchart
