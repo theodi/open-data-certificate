@@ -179,8 +179,7 @@ end
 When(/^I select "(.*?)" from the "(.*?)" dropdown$/) do |text, field|
   # find_field('questionairre_selection').find(field)
   # select text, from: field
-  save_and_open_page
-  page.select 'Legal', :from => 'type'
+  page.select text, :from => field
 end
 
 # When(/^I select "(.*?)"/) do |text|
@@ -199,5 +198,6 @@ Then(/^the page should contain "(.*?)"$/) do |text|
 end
 
 Then(/^the page should contain legal markdown$/) do
-  page.body.should include(legal_markdown)
+  save_and_open_page
+  assert_true page.has_content?(legal_markdown)
 end

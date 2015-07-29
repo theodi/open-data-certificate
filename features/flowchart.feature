@@ -1,3 +1,5 @@
+@survey
+
 Feature: ensuring flowchart renders as expected
 
   Background:
@@ -9,7 +11,7 @@ Feature: ensuring flowchart renders as expected
 
   Scenario: I want to ensure the legal flowchart markdown continues to render as expected
     When I navigate to "/flowchart"
-#    And I select "gb" from the "jurisdictions" dropdown
+    And I select "United Kingdom" from the "jurisdiction" dropdown
     And I select "Legal" from the "type" dropdown
 #    And I select "Legal"
     And I click "Submit"
