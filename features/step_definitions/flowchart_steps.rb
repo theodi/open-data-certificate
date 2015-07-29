@@ -172,13 +172,14 @@ legal_markdown = <<EOF
 EOF
 
 When(/^I navigate to "(.*?)"$/) do |url|
-  visit "/#{url}"
+  visit "#{url}"
   # visit path_to(url)
 end
 
 When(/^I select "(.*?)" from the "(.*?)" dropdown$/) do |text, field|
   # find_field('questionairre_selection').find(field)
   # select text, from: field
+  save_and_open_page
   page.select 'Legal', :from => 'type'
 end
 

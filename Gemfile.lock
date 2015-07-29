@@ -222,6 +222,8 @@ GEM
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     less (2.3.3)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -522,6 +524,7 @@ DEPENDENCIES
   jquery-rails
   juvia_rails!
   kaminari
+  launchy
   less-rails
   less-rails-bootstrap (~> 2.3.3)
   linkeddata
@@ -559,3 +562,6 @@ DEPENDENCIES
   validate_url
   vcr
   webmock
+
+BUNDLED WITH
+   1.10.5

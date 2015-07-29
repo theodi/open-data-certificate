@@ -42,6 +42,7 @@ group :test do
   gem 'timecop'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :development do
