@@ -171,14 +171,214 @@ legal_markdown = <<EOF
   class sourceDocumentationMetadata,explicitWaiver,statisticalAnonAudited,lawfulDisclosureURL,privacyImpactAssessmentUrl,piaAudited,anonymisationAudited standard;
 EOF
 
+practical_markdown = <<EOF
+graph TD
+              dataTitle["What's this data called?"] --> documentationUrl["Where is it described?"]
+
+              documentationUrl["Where is it described?"] --> publisher["Who publishes this data?"]
+
+              publisher["Who publishes this data?"] --> publisherUrl["What is the website of the publisher?"]
+
+              publisherUrl["What is the website of the publisher?"] --> releaseType["What kind of release is this?"]
+
+                  releaseType{"What kind of release is this?"}
+              releaseType --> |"a one-off release of a single dataset"| timeSensitive{"Will your data go out of date?"}
+
+
+              releaseType{"What kind of release is this?"}
+              releaseType --> |"a one-off release of a set of related datasets"| timeSensitive{"Will your data go out of date?"}
+
+
+              releaseType{"What kind of release is this?"}
+              releaseType --> |"ongoing release of a series of related datasets"| frequentChanges{"Does this data change at least daily?"}
+
+
+              releaseType{"What kind of release is this?"}
+              releaseType --> |"a service or API for accessing open data"| serviceType{"Does the data behind your API change?"}
+
+
+
+                  onWebsite{"Is there a link to your data from your main website?"}
+              onWebsite --> |"true"| webpage["Which page on your website links to the data?"]
+                webpage["Which page on your website links to the data?"] --> listed["Is your data listed within a collection?"]
+
+
+              onWebsite{"Is there a link to your data from your main website?"} --> |"false"| listed["Is your data listed within a collection?"]
+
+
+                  listed{"Is your data listed within a collection?"}
+              listed --> |"true"| listing["Where is it listed?"]
+                listing["Where is it listed?"] --> referenced["Is this data referenced from your own publications?"]
+
+
+              listed{"Is your data listed within a collection?"} --> |"false"| referenced["Is this data referenced from your own publications?"]
+
+
+                  referenced{"Is this data referenced from your own publications?"}
+              referenced --> |"true"| reference["Where is your data referenced?"]
+                reference["Where is your data referenced?"] --> qualityUrl["Where do you document issues with the quality of this data?"]
+
+
+              referenced{"Is this data referenced from your own publications?"} --> |"false"| qualityUrl["Where do you document issues with the quality of this data?"]
+
+
+              qualityUrl["Where do you document issues with the quality of this data?"] --> qualityControlUrl["Where is your quality control process described?"]
+
+              qualityControlUrl["Where is your quality control process described?"] --> backups["Do you take offsite backups?"]
+
+                  backups{"Do you take offsite backups?"} --> |"true"| onGoingAvailability["How long will this data be available for?"]
+
+              backups{"Do you take offsite backups?"} --> |"false"| onGoingAvailability["How long will this data be available for?"]
+
+
+                  onGoingAvailability{"How long will this data be available for?"} --> |"it might disappear at any time"| machineReadable["Is this data machine-readable?"]
+
+              onGoingAvailability{"How long will this data be available for?"} --> |"it's available experimentally but should be around for another year or so"| machineReadable["Is this data machine-readable?"]
+
+              onGoingAvailability{"How long will this data be available for?"} --> |"it's in your medium-term plans so should be around for a couple of years"| machineReadable["Is this data machine-readable?"]
+
+              onGoingAvailability{"How long will this data be available for?"} --> |"it's part of your day-to-day operations so will stay published for a long time"| machineReadable["Is this data machine-readable?"]
+
+
+                  machineReadable{"Is this data machine-readable?"} --> |"true"| openStandard["Is this data in a standard open format?"]
+
+              machineReadable{"Is this data machine-readable?"} --> |"false"| openStandard["Is this data in a standard open format?"]
+
+
+                  openStandard{"Is this data in a standard open format?"} --> |"true"| dataType["What kind of data is being provided as part of this dataset?"]
+
+              openStandard{"Is this data in a standard open format?"} --> |"false"| dataType["What kind of data is being provided as part of this dataset?"]
+
+
+                  dataType{"What kind of data is being provided as part of this dataset?"} --> |"human-readable documents"| identifiers["Does your data use persistent identifiers?"]
+
+              dataType{"What kind of data is being provided as part of this dataset?"} --> |"statistical data like counts, averages and percentages"| identifiers["Does your data use persistent identifiers?"]
+
+              dataType{"What kind of data is being provided as part of this dataset?"} --> |"geographic information, such as points and boundaries"| identifiers["Does your data use persistent identifiers?"]
+
+              dataType{"What kind of data is being provided as part of this dataset?"} --> |"other kinds of structured data"| identifiers["Does your data use persistent identifiers?"]
+
+
+                  identifiers{"Does your data use persistent identifiers?"}
+              identifiers --> |"true"| resolvingIds{"Can the identifiers in your data be used to find extra information?"}
+
+
+              identifiers{"Does your data use persistent identifiers?"} --> |"false"| provenance["Do you provide machine-readable provenance for your data?"]
+
+
+                  provenance{"Do you provide machine-readable provenance for your data?"} --> |"true"| digitalCertificate["Where do you describe how people can verify that data they receive comes from you?"]
+
+              provenance{"Do you provide machine-readable provenance for your data?"} --> |"false"| digitalCertificate["Where do you describe how people can verify that data they receive comes from you?"]
+
+
+              digitalCertificate["Where do you describe how people can verify that data they receive comes from you?"] --> technicalDocumentation["Where is the technical documentation for the data?"]
+
+              technicalDocumentation["Where is the technical documentation for the data?"] --> vocabulary["Do the data formats use vocabularies or schemas?"]
+
+                  vocabulary{"Do the data formats use vocabularies or schemas?"}
+              vocabulary --> |"true"| schemaDocumentationUrl["Where is documentation about your data vocabularies?"]
+                schemaDocumentationUrl["Where is documentation about your data vocabularies?"] --> codelists["Are there any codes used in this data?"]
+
+
+              vocabulary{"Do the data formats use vocabularies or schemas?"} --> |"false"| codelists["Are there any codes used in this data?"]
+
+
+                  codelists{"Are there any codes used in this data?"}
+              codelists --> |"true"| codelistDocumentationUrl["Where are any codes in your data documented?"]
+                codelistDocumentationUrl["Where are any codes in your data documented?"] --> contactUrl["Where can people find out how to contact someone with questions about this data?"]
+
+
+              codelists{"Are there any codes used in this data?"} --> |"false"| contactUrl["Where can people find out how to contact someone with questions about this data?"]
+
+
+              contactUrl["Where can people find out how to contact someone with questions about this data?"] --> improvementsContact["Where can people find out how to improve the way your data is published?"]
+
+              improvementsContact["Where can people find out how to improve the way your data is published?"] --> dataProtectionUrl["Where can people find out how to contact someone with questions about privacy?"]
+
+              dataProtectionUrl["Where can people find out how to contact someone with questions about privacy?"] --> socialMedia["Do you use social media to connect with people who use your data?"]
+
+                  socialMedia{"Do you use social media to connect with people who use your data?"}
+              socialMedia --> |"true"| account["Which social media accounts can people reach you on?"]
+                account["Which social media accounts can people reach you on?"] --> forum["Where should people discuss this dataset?"]
+
+
+              socialMedia{"Do you use social media to connect with people who use your data?"} --> |"false"| forum["Where should people discuss this dataset?"]
+
+
+              forum["Where should people discuss this dataset?"] --> engagementTeam["Do you have anyone who actively builds a community around this data?"]
+
+                  engagementTeam{"Do you have anyone who actively builds a community around this data?"}
+              engagementTeam --> |"true"| engagementTeamUrl["Where is their home page?"]
+                engagementTeamUrl["Where is their home page?"] --> libraries["Where do you list tools to work with your data?"]
+
+
+              engagementTeam{"Do you have anyone who actively builds a community around this data?"} --> |"false"| libraries["Where do you list tools to work with your data?"]
+
+
+
+
+
+            resolvingIds{&quot;Can the identifiers in your data be used to find extra information?&quot;} --&gt; |&quot;yes, the identifiers are URLs that resolve to give information&quot;| provenance[&quot;Do you provide machine-readable provenance for your data?&quot;]
+
+          resolvingIds{&quot;Can the identifiers in your data be used to find extra information?&quot;}
+              resolvingIds --&gt; |&quot;yes, there is a service that people can use to resolve the identifiers&quot;| resolutionServiceURL[&quot;Where is the service that is used to resolve the identifiers?&quot;]
+                resolutionServiceURL[&quot;Where is the service that is used to resolve the identifiers?&quot;] --&gt; provenance[&quot;Do you provide machine-readable provenance for your data?&quot;]
+
+
+          resolvingIds{&quot;Can the identifiers in your data be used to find extra information?&quot;} --&gt; |&quot;no, the identifiers can&#x27;t be used to find extra information&quot;| provenance[&quot;Do you provide machine-readable provenance for your data?&quot;]
+
+          serviceType{&quot;Does the data behind your API change?&quot;}
+              serviceType --&gt; |&quot;yes, the API gives access to changing data&quot;| dumpFrequency{&quot;How frequently do you create a new database dump?&quot;}
+
+
+          dumpFrequency{&quot;How frequently do you create a new database dump?&quot;} --&gt; |&quot;within a day of any change&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          dumpFrequency{&quot;How frequently do you create a new database dump?&quot;} --&gt; |&quot;within a week of any change&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          dumpFrequency{&quot;How frequently do you create a new database dump?&quot;} --&gt; |&quot;at least every month&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          dumpFrequency{&quot;How frequently do you create a new database dump?&quot;} --&gt; |&quot;less frequently than once a month&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          serviceType{&quot;Does the data behind your API change?&quot;}
+              serviceType --&gt; |&quot;no, the API gives access to unchanging data&quot;| timeSensitive{&quot;Will your data go out of date?&quot;}
+
+
+          timeSensitive{&quot;Will your data go out of date?&quot;} --&gt; |&quot;no, this data does not contain any time-sensitive information&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          timeSensitive{&quot;Will your data go out of date?&quot;} --&gt; |&quot;yes, this data will go out of date over time but it&#x27;s time stamped&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          timeSensitive{&quot;Will your data go out of date?&quot;} --&gt; |&quot;yes, this data will go out of date&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          frequentChanges{&quot;Does this data change at least daily?&quot;} --&gt; |&quot;false&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          frequentChanges{&quot;Does this data change at least daily?&quot;}
+              frequentChanges --&gt; |&quot;true&quot;| seriesType{&quot;What type of dataset series is this?&quot;}
+
+
+          seriesType{&quot;What type of dataset series is this?&quot;} --&gt; |&quot;regular aggregates of changing data&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          seriesType{&quot;What type of dataset series is this?&quot;}
+              seriesType --&gt; |&quot;regular copies of a complete database&quot;| changeFeed{&quot;Is a feed of changes available?&quot;}
+
+
+          changeFeed{&quot;Is a feed of changes available?&quot;} --&gt; |&quot;false&quot;| onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+          changeFeed{&quot;Is a feed of changes available?&quot;}
+              changeFeed --&gt; |&quot;true&quot;| changeFeedUrl[&quot;Where is your feed of changes?&quot;]
+                changeFeedUrl[&quot;Where is your feed of changes?&quot;] --&gt; onWebsite[&quot;Is there a link to your data from your main website?&quot;]
+
+
+              class onWebsite,listed,referenced,qualityUrl,backups,openStandard,identifiers,socialMedia,forum,provideDumps,corrected,slaUrl,resolutionServiceURL,schemaDocumentationUrl,codelistDocumentationUrl,correctionReporting,correctionDiscovery standard;
+              class qualityControlUrl,provenance,digitalCertificate,engagementTeam,libraries,changeFeed,statusUrl,externalUrls exemplar;
+              class machineReadable,technicalDocumentation,contactUrl,improvementsContact,dataProtectionUrl pilot;
+EOF
+
 When(/^I navigate to "(.*?)"$/) do |url|
   visit "#{url}"
   # visit path_to(url)
 end
 
 When(/^I select "(.*?)" from the "(.*?)" dropdown$/) do |text, field|
-  # find_field('questionairre_selection').find(field)
-  # select text, from: field
   page.select text, :from => field
 end
 
@@ -200,4 +400,8 @@ end
 Then(/^the page should contain legal markdown$/) do
   save_and_open_page
   assert_true page.has_content?(legal_markdown)
+end
+
+Then(/^the page should contain practical markdown$/) do
+  page.body.should include(practical_markdown)
 end
