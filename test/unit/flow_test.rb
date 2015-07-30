@@ -34,24 +34,28 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'number of questions' do
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "only_questions.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    assert_equal xmlstub.questions.count, 3, "question count count should be 3"
     # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
-    puts "questions only"
-    assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(0)), "question count should be 3 with 0 dependencies"
+    #puts "questions only"
+    #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(0)), "question count should be 3 with 0 dependencies"
   end
 
   test 'number of dependencies' do
     # dependencies are <question> blocks within <if> blocks
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "questions_and_dependencies.xml"))
-    # assert_equal xmlstub.dependencies.count, 3, "dependency count count should be 3"
-    assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(1)), "question count should be 3 with 1 dependencies"
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    xmlstub.dependencies.each do |d|
+      puts d[:id]
+    end
+    assert_equal xmlstub.dependencies.count, 3, "dependency count count should be 3"
+    #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(1)), "question count should be 3 with 1 dependencies"
   end
 
   test 'number of answers' do
     # answers will increase for <yesno /> [by 1] <radioset><option ... /radioset> [by n for every <option> entry]
     # <checkboxset> [by n for every <option> entry]
     @ans_count = 0
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     xmlstub.questions.each do |q|
       if q[:answers].present?
@@ -68,6 +72,13 @@ class FlowTest < ActiveSupport::TestCase
       end
     end
     assert_equal @ans_count, 7, "answer count should be 3"
+  end
+
+  test 'prerequisites' do
+    xmlstub = Flow.new("gb", "Legal")
+    xmlstub.questions.each do |q|
+      xmlstub.prerequisites(q)
+    end
   end
 
   test 'answer not rendered unless dependencies and prerequisites have been satisfied' do

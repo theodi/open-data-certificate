@@ -87,7 +87,7 @@
             </if>
             <question id="dpStaff">
               <label>Is there someone in your organisation who is responsible for data protection?</label>
-              <yesno required="pilot"/>
+              <yesno required="pilot" yes="true"/>
             </question>
             <if test="this.dpStaff() === 'true'">
               <question id="dbStaffConsulted" display="The individual responsible for data protection">
