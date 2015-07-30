@@ -41,14 +41,6 @@ PATH
   remote: vendor/gems/surveyor-1.4.0
   specs:
     surveyor (1.4.0)
-      fastercsv (~> 1.5.4)
-      formtastic (~> 2.1.0)
-      haml (>= 3.1.3, < 5.0)
-      mustache (= 0.99.4)
-      rabl (~> 0.6.13)
-      rails (~> 3.0)
-      sass
-      uuidtools (~> 2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -508,12 +500,14 @@ DEPENDENCIES
   domainatrix
   dotenv-rails
   factory_girl_rails (~> 4.0)
+  fastercsv (~> 1.5.4)
   fog
   foreman
+  formtastic (~> 2.1.0)
   google_drive
   guard (~> 1.8.3)
   guard-test
-  haml
+  haml (>= 3.1.3)
   high_voltage
   httparty
   jbuilder
@@ -527,9 +521,11 @@ DEPENDENCIES
   logstash-event
   memoist
   mocha
+  mustache (= 0.99.4)
   mysql2
   pry
   pry-remote
+  rabl (~> 0.6.13)
   rack-cors
   rack-linkeddata
   rails (~> 3.2.21)
@@ -538,6 +534,7 @@ DEPENDENCIES
   redcarpet
   ruby-prof
   rubyXL
+  sass
   sass-rails (~> 3.2.3)
   shoulda
   shoulda-context
@@ -552,6 +549,7 @@ DEPENDENCIES
   timecop
   twitter-bootstrap-rails-confirm
   uglifier (>= 1.0.3)
+  uuidtools (~> 2.1)
   validate_url
   vcr
   webmock
