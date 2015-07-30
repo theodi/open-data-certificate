@@ -5,43 +5,47 @@ class FlowTest < ActiveSupport::TestCase
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @flow = Flow.new("gb", "Legal")
+    @legal_flowchart = Flow.new("gb", "Legal")
     # @practical = Flow.new("gb", "Practical")
     # @prac_questions = @practical.questions
     # @legal = Flow.new("gb", "Legal")
     # @legal_questions = @legal.questions
   end
 
-  # need a stub or fake NOKOgiri XML elemenrt
+  # need a stub or fake NOKOgiri XML element
+  #
+  # create some data structures that test _question > answer > dependency single flow
+  # create some data structures that test _question > _answer > _dependency and iteration between _answer & _dependency
+
+  test 'initialise Flow Object with an absolute path as parameter' do
+    @object_created = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    assert_true @object_created.present?
+  end
 
   test 'practical questions' do
-    assert_equal @flow.questions.count, 7, "question count should be 7"
+    # rewrite this
+    assert_equal @legal_flowchart.questions.count, 7, "question count should be 7"
   end
 
   test 'practical dependencies' do
-    assert_equal @flow.dependencies.count, 3, "dependency count count should be 3"
+    # rewrite this
+    assert_equal @legal_flowchart.dependencies.count, 3, "dependency count count should be 3"
   end
 
   test 'practical: check that no prerequisites created in questions' do
-    @flow.questions.each do |q|
+    @legal_flowchart.questions.each do |q|
       assert_true q[:prerequisites].eql?(nil), "no prerequisites created in questions"
     end
   end
 
-  # test 'check that no prerequisites created in dependencies' do
-  #   @flow.dependencies.each do |d|
-  #     assert_true d[:prerequisites].eql?(nil), "no prerequisites created in dependencies #{d}"
-  #   end
-  # end
-
   test 'check that prerequisites created in dependencies' do
-    @flow.dependencies.each do |d|
+    @legal_flowchart.dependencies.each do |d|
       assert_true d[:prerequisites].present?, "prerequisites created in dependencies"
     end
   end
 
   test 'check that all dependencies have only one prerequisite' do
-    @flow.dependencies.each do |d|
+    @legal_flowchart.dependencies.each do |d|
       assert_true d[:prerequisites].count <= 1, "the hash of id #{d[:id]} has many prerequisites #{d[:prerequisites]}"
       # edge case == the hash of id `timeSensitive` has many prerequisites ["releaseType", "releaseType", "releaseType", "serviceType"]
       # edge case == the hash of id publisherOrigin has many prerequisites ["publisherRights", "publisherRights"].
@@ -49,7 +53,7 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'check that all questions have a Hash of Hash answers' do
-    assert_true @flow.dependencies.count == @dependencies.count {|q| q[:answers].present? }, "dependencies all have a hash of answers"
+    assert_true @legal_flowchart.dependencies.count == @dependencies.count {|q| q[:answers].present? }, "dependencies all have a hash of answers"
     # @dependencies.find_all {|q| q[:answers].nil? }.each do |q| puts q[:id] end;
     # ^~> this one liner will return all dependencies with 0 answer hashes
     # @dependencies.find_all {|q| q[:answers].present? }.each do |q| puts q[:id] end;
@@ -57,13 +61,17 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'check that all dependencies have a Hash of Hash answers' do
-    @flow.questions.each do |q|
+    @legal_flowchart.questions.each do |q|
       assert_true q[:answers].present?, "all answers hashes are populated except #{q[:id]}"
     end
   end
 
+  test "that the deps array count = sum of answers[:dependencies].present in @questions and @dependencies" do
+
+  end
+
   # test 'better check for quanitiy of answers with a value of nil' do
-  #   q_and_a =  @flow.questions.collect {|q| q[:answers].present?}
+  #   q_and_a =  @legal_flowchart.questions.collect {|q| q[:answers].present?}
 
   # @questions.find_all {|q| q[:answers].present? } = doesn't collect nil values - but raises question of in what case a nil can be assigned
   # @questions.find_all {|q| q[:answers].present? }.collect {|q| q[:answers] }.each {|e| puts e.values }.count

@@ -395,9 +395,11 @@ When(/^I press "(.*?)"$/) do |name|
 end
 
 Then(/^the page should contain legal markdown$/) do
+  save_and_open_page
   assert_true page.body.gsub(/\s+/, "").include? (legal_markdown.gsub(/\s+/, ""))
 end
 
 Then(/^the page should contain practical markdown$/) do
+  save_and_open_page
   assert_true page.body.gsub(/\s+/, "").include? (practical_markdown.gsub(/\s+/, ""))
 end

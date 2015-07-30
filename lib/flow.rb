@@ -4,10 +4,11 @@ class Flow
 
   # will generate a flow chart based on the path that can be navigated through the
   # entire scope of the certificates (legal and practical)
+  attr_accessor :xml, :xml_copy
 
-  def initialize(jurisdiction, type, debugPath = false)
-    if debugPath
-      path = File.join(Rails.root, 'fixtures', "test.legal.xml")
+  def initialize(jurisdiction, type, path_param = false)
+    if path_param.present?
+      path = path_param
     else
       path = get_path(jurisdiction, type)
     end
@@ -18,9 +19,9 @@ class Flow
 
   end
 
-  def get_path(jurisdiction_param, type)
+  def get_path(jurisdiction, type)
     # return two different paths based on whether legal or practical question flow selected
-    jurisdiction = "en" if (jurisdiction_param == "gb" && type == "Practical")
+    jurisdiction = "en" if (jurisdiction == "gb" && type == "Practical")
     jurisdiction.upcase! if type == "Legal" # check what this bang! means
     folder = folder_name(type)
     path = File.join(Rails.root, 'prototype', folder, "certificate.#{jurisdiction}.xml")
