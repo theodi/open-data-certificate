@@ -2,7 +2,7 @@ require 'pry'
 
 module FlowchartHelper
 
-  def populate_deps_array(dependency, index, k, v)
+  def populate_deps_array(dependency, index, k, v) # key - answer text ("No, the API isn't..."), value - dependency (dependency => "dependency")  
 
 
     if v[:dependency].nil? && @questions[index + 1] != nil

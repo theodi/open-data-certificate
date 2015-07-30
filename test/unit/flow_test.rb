@@ -5,7 +5,7 @@ class FlowTest < ActiveSupport::TestCase
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @legal_flowchart = Flow.new("gb", "Legal")
+    @practical_flowchart = Flow.new("gb", "Practical")
     # @practical = Flow.new("gb", "Practical")
     # @prac_questions = @practical.questions
     # @legal = Flow.new("gb", "Legal")
@@ -22,15 +22,36 @@ class FlowTest < ActiveSupport::TestCase
     assert_true @object_created.present?
   end
 
-  test 'practical questions' do
+  test 'number of questions' do
     # rewrite this
-    assert_equal @legal_flowchart.questions.count, 7, "question count should be 7"
+    assert_equal @object_created.questions.count, 7, "question count should be 7"
   end
 
-  test 'practical dependencies' do
+  test 'number of dependencies' do
     # rewrite this
     assert_equal @legal_flowchart.dependencies.count, 3, "dependency count count should be 3"
   end
+
+  test 'number of answers' do
+    # rewrite this
+    for @flowchart.questions.each do |q|
+      @ans_count += 1 # if question has an answer
+    end
+    assert_equal @ans_count, 3, "answer count should be 3"
+  end
+
+  test 'answer has dependency' do
+    #navigate to a question that has an answer that has a dependency and check
+    # that it can't be answered without the dependency and prerequisite being satisfied
+  end
+
+  test 'flowchart halts' do
+    #get to a point where flowchart halts and prints end block
+    # - possibly different tests for different halting conditions
+    # - answer and dependency
+  end
+
+
 
   test 'practical: check that no prerequisites created in questions' do
     @legal_flowchart.questions.each do |q|
@@ -181,4 +202,3 @@ end
 #^~> this is the correct version of above @questions.find_all {|q| q[:answers].present? }.collect {|q| q[:answers] }.each {|e| puts e.class }.count
 
 # ..
-
