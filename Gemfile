@@ -92,7 +92,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor'
+gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'

@@ -37,6 +37,19 @@ GIT
     juvia_rails (0.0.1)
       rails (~> 3.2.1)
 
+PATH
+  remote: vendor/gems/surveyor-1.4.0
+  specs:
+    surveyor (1.4.0)
+      fastercsv (~> 1.5.4)
+      formtastic (~> 2.1.0)
+      haml (>= 3.1.3, < 5.0)
+      mustache (= 0.99.4)
+      rabl (~> 0.6.13)
+      rails (~> 3.0)
+      sass
+      uuidtools (~> 2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -436,15 +449,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.9)
-    surveyor (1.4.0)
-      fastercsv (~> 1.5.4)
-      formtastic (~> 2.1.0)
-      haml (>= 3.1.3, < 5.0)
-      mustache (= 0.99.4)
-      rabl (~> 0.6.13)
-      rails (~> 3.0)
-      sass
-      uuidtools (~> 2.1)
     sxp (0.1.5)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
@@ -540,7 +544,7 @@ DEPENDENCIES
   sidekiq
   sinatra
   sqlite3
-  surveyor
+  surveyor!
   terminal-notifier-guard
   test-unit
   therubyracer
