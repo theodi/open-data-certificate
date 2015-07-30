@@ -2,9 +2,9 @@
 <% content_for :meta, stylesheet_link_tag('campaigns', :media => 'print') %>
 
 <h3><%= report_heading(@certificate_level) %></h3>
-<div class='omit-in-print'>
+<div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
-  <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post' %>
+  <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
 </div>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
@@ -14,7 +14,7 @@
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
-  <li><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
+  <li class='omit-in-print'><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
 </ul>
 
 <div class='omit-in-print'>
