@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+  -->
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<questionnaire version="0.7" xml:lang="en">
+
+  <if test="this.releaseType() === 'collection'">
+    <question id="listed">
+      <label>Is your data listed within a collection?</label>
+    </question>
+  </if>
+
+  <if test="this.nowhereElseInCode() === 'a value'">
+    <question id="dummyValue">
+      <label>nothing to see here</label>
+    </question>
+  </if>
+
+</questionnaire>
+
+

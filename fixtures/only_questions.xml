@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+  -->
+<?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
+<questionnaire version="0.7" xml:lang="en">
+
+  <question id="dataTitle">
+    <label>What's this data called?</label>
+    <input placeholder="Data Title" required="required"/>
+    <help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+  </question>
+  <!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
+  <question id="documentationUrl" display="This data is described at">
+    <label>Where is it described?</label>
+    <input type="url" placeholder="Dataset URL"/>
+    <help>Link to the dataset you are certifying. By dataset we mean the documentation or metadata that describes the data as well as a link to the data file itself. Dataset = data + metadata.</help>
+    <if test="this.releaseType() !== 'collection'">
+      <requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
+    </if>
+    <if test="this.releaseType() === 'collection'">
+
+      <requirement test="this.documentationUrl() !== ''">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.</requirement>
+    </if>
+  </question>
+  <question id="publisher" display="This data is published by">
+    <label>Who publishes this data?</label>
+    <input placeholder="Data Publisher" required="required"/>
+    <help>Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.</help>
+  </question>
+
+</questionnaire>

@@ -17,30 +17,61 @@ class FlowTest < ActiveSupport::TestCase
   # create some data structures that test _question > answer > dependency single flow
   # create some data structures that test _question > _answer > _dependency and iteration between _answer & _dependency
 
-  test 'initialise Flow Object with an absolute path as parameter' do
-    @object_created = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
-    assert_true @object_created.present?
+
+
+  # test 'initialise Flow Object with an absolute path as parameter' do
+  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+  #   assert_true xmlstub.present?
+  # end
+
+  test 'dependencies parsing' do
+    # the parser doesn't care about XML consistency
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "only_dependencies.xml"))
+    puts "dependencies only"
+    # binding.pry
+    assert_true (xmlstub.dependencies.count.eql?(2)), "dependencies count should be 2"
+    # assert_true (xmlstub.questions.count.eql?(0) && xmlstub.dependencies.count.eql?(2)), "question count should be 0 with 2 dependencies"
   end
 
   test 'number of questions' do
-    # rewrite this
-    assert_equal @object_created.questions.count, 7, "question count should be 7"
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "only_questions.xml"))
+    # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
+    puts "questions only"
+    assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(0)), "question count should be 3 with 0 dependencies"
   end
 
   test 'number of dependencies' do
-    # rewrite this
-    assert_equal @legal_flowchart.dependencies.count, 3, "dependency count count should be 3"
+    # dependencies are <question> blocks within <if> blocks
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "questions_and_dependencies.xml"))
+    # assert_equal xmlstub.dependencies.count, 3, "dependency count count should be 3"
+    assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(1)), "question count should be 3 with 1 dependencies"
   end
 
   test 'number of answers' do
-    # rewrite this
-    for @flowchart.questions.each do |q|
-      @ans_count += 1 # if question has an answer
+    # answers will increase for <yesno /> [by 1] <radioset><option ... /radioset> [by n for every <option> entry]
+    # <checkboxset> [by n for every <option> entry]
+    @ans_count = 0
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    xmlstub.questions.each do |q|
+      if q[:answers].present?
+        # puts q
+        @ans_count = @ans_count + q[:answers].count
+        # 3 is gathered from this loop
+      end
     end
-    assert_equal @ans_count, 3, "answer count should be 3"
+    # puts "nao dependencies"
+    xmlstub.dependencies.each do |d|
+      if d[:answers].present?
+        # puts d
+        @ans_count = @ans_count + d[:answers].count
+      end
+    end
+    assert_equal @ans_count, 7, "answer count should be 3"
   end
 
-  test 'answer has dependency' do
+  test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     #navigate to a question that has an answer that has a dependency and check
     # that it can't be answered without the dependency and prerequisite being satisfied
   end
@@ -53,43 +84,43 @@ class FlowTest < ActiveSupport::TestCase
 
 
 
-  test 'practical: check that no prerequisites created in questions' do
-    @legal_flowchart.questions.each do |q|
-      assert_true q[:prerequisites].eql?(nil), "no prerequisites created in questions"
-    end
-  end
-
-  test 'check that prerequisites created in dependencies' do
-    @legal_flowchart.dependencies.each do |d|
-      assert_true d[:prerequisites].present?, "prerequisites created in dependencies"
-    end
-  end
-
-  test 'check that all dependencies have only one prerequisite' do
-    @legal_flowchart.dependencies.each do |d|
-      assert_true d[:prerequisites].count <= 1, "the hash of id #{d[:id]} has many prerequisites #{d[:prerequisites]}"
-      # edge case == the hash of id `timeSensitive` has many prerequisites ["releaseType", "releaseType", "releaseType", "serviceType"]
-      # edge case == the hash of id publisherOrigin has many prerequisites ["publisherRights", "publisherRights"].
-    end
-  end
-
-  test 'check that all questions have a Hash of Hash answers' do
-    assert_true @legal_flowchart.dependencies.count == @dependencies.count {|q| q[:answers].present? }, "dependencies all have a hash of answers"
-    # @dependencies.find_all {|q| q[:answers].nil? }.each do |q| puts q[:id] end;
-    # ^~> this one liner will return all dependencies with 0 answer hashes
-    # @dependencies.find_all {|q| q[:answers].present? }.each do |q| puts q[:id] end;
-    # ^~> this one liner will return all dependencies where there are hashes of answer hashes
-  end
-
-  test 'check that all dependencies have a Hash of Hash answers' do
-    @legal_flowchart.questions.each do |q|
-      assert_true q[:answers].present?, "all answers hashes are populated except #{q[:id]}"
-    end
-  end
-
-  test "that the deps array count = sum of answers[:dependencies].present in @questions and @dependencies" do
-
-  end
+  # test 'practical: check that no prerequisites created in questions' do
+  #   @practical_flowchart.questions.each do |q|
+  #     assert_true q[:prerequisites].eql?(nil), "no prerequisites created in questions"
+  #   end
+  # end
+  #
+  # test 'check that prerequisites created in dependencies' do
+  #   @practical_flowchart.dependencies.each do |d|
+  #     assert_true d[:prerequisites].present?, "prerequisites created in dependencies"
+  #   end
+  # end
+  #
+  # test 'check that all dependencies have only one prerequisite' do
+  #   @practical_flowchart.dependencies.each do |d|
+  #     assert_true d[:prerequisites].count <= 1, "the hash of id #{d[:id]} has many prerequisites #{d[:prerequisites]}"
+  #     # edge case == the hash of id `timeSensitive` has many prerequisites ["releaseType", "releaseType", "releaseType", "serviceType"]
+  #     # edge case == the hash of id publisherOrigin has many prerequisites ["publisherRights", "publisherRights"].
+  #   end
+  # end
+  #
+  # test 'check that all questions have a Hash of Hash answers' do
+  #   assert_true @practical_flowchart.dependencies.count == @dependencies.count {|q| q[:answers].present? }, "dependencies all have a hash of answers"
+  #   # @dependencies.find_all {|q| q[:answers].nil? }.each do |q| puts q[:id] end;
+  #   # ^~> this one liner will return all dependencies with 0 answer hashes
+  #   # @dependencies.find_all {|q| q[:answers].present? }.each do |q| puts q[:id] end;
+  #   # ^~> this one liner will return all dependencies where there are hashes of answer hashes
+  # end
+  #
+  # test 'check that all dependencies have a Hash of Hash answers' do
+  #   @practical_flowchart.questions.each do |q|
+  #     assert_true q[:answers].present?, "all answers hashes are populated except #{q[:id]}"
+  #   end
+  # end
+  #
+  # test "that the deps array count = sum of answers[:dependencies].present in @questions and @dependencies" do
+  #
+  # end
 
   # test 'better check for quanitiy of answers with a value of nil' do
   #   q_and_a =  @legal_flowchart.questions.collect {|q| q[:answers].present?}

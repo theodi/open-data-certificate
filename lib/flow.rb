@@ -57,6 +57,7 @@ class Flow
   def question(q, dependency = true)
     # q => Nokogiri::XML::Element , should be FALSE???
     # returns a hash
+
     {
       id: q["id"],
       label: label(q),
@@ -67,6 +68,7 @@ class Flow
       # assign prerequisite to the method if dependency is true or nil depending or nil if false
       # Left is true, right is false
     }
+
   end
 
   def answers(question)
@@ -135,6 +137,7 @@ class Flow
     test.scan(/this\.([a-z]+)\(\)/i).map { |s| s[0] } unless test.nil?
     # this regex is scanning for `this.*xmlDependencyMethod*()`
     # it returns an array of count 1 with a String of the *xmlDependencyMethod*() searched for
+    binding.pry
   end
 
 end
