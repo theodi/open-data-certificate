@@ -4,7 +4,7 @@
 <% elsif !answer[:dependency].nil? %>
     <% # recursion should only trigger for 25 cases (in legal) %>
   <%= render partial: "dependency.txt", locals: { question: question, index: index, key: key, answer: answer } %>
-
+  <% # dependency(question, answer, key, index, @dependencies, @questions) %>
 <% else %>
   <%= question[:id] %>{"<%= question[:label] %>"} --> |"<%= key %>"| finalSection["End"]
 <% end %>
