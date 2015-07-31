@@ -6,7 +6,7 @@
 <?xml-stylesheet type="text/xsl" href="surveyor.xsl"?>
 <questionnaire version="0.7" xml:lang="en">
 
-  <if test="this.releaseType() === 'collection'">
+  <if test="this.privacyImpactAssessmentUrl() !== ''">
     <question id="listed">
       <label>Is your data listed within a collection?</label>
     </question>

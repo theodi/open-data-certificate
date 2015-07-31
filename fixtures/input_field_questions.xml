@@ -22,7 +22,6 @@
         <requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
       </if>
       <if test="this.releaseType() === 'collection'">
-
         <requirement test="this.documentationUrl() !== ''">You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.</requirement>
       </if>
     </question>

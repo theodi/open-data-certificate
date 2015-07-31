@@ -17,23 +17,13 @@ class FlowTest < ActiveSupport::TestCase
   # create some data structures that test _question > answer > dependency single flow
   # create some data structures that test _question > _answer > _dependency and iteration between _answer & _dependency
 
-
-
-  # test 'initialise Flow Object with an absolute path as parameter' do
-  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
-  #   assert_true xmlstub.present?
-  # end
-
-  test 'dependencies parsing' do
-    # the parser doesn't care about XML consistency
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "only_dependencies.xml"))
-    puts "dependencies only"
-    # binding.pry
-    assert_true (xmlstub.dependencies.count.eql?(2)), "dependencies count should be 2"
-    # assert_true (xmlstub.questions.count.eql?(0) && xmlstub.dependencies.count.eql?(2)), "question count should be 0 with 2 dependencies"
+  test 'initialise Flow Object with an absolute path as parameter' do
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    assert_true xmlstub.present?
   end
 
   test 'number of questions' do
+
     xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     assert_equal xmlstub.questions.count, 3, "question count count should be 3"
     # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
@@ -59,15 +49,15 @@ class FlowTest < ActiveSupport::TestCase
     # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     xmlstub.questions.each do |q|
       if q[:answers].present?
-        # puts q
+        puts q
         @ans_count = @ans_count + q[:answers].count
         # 3 is gathered from this loop
       end
     end
-    # puts "nao dependencies"
+    puts "nao dependencies"
     xmlstub.dependencies.each do |d|
       if d[:answers].present?
-        # puts d
+        puts d
         @ans_count = @ans_count + d[:answers].count
       end
     end
@@ -92,7 +82,6 @@ class FlowTest < ActiveSupport::TestCase
     # - possibly different tests for different halting conditions
     # - answer and dependency
   end
-
 
 
   # test 'practical: check that no prerequisites created in questions' do
