@@ -137,7 +137,6 @@ class Flow
     test.scan(/this\.([a-z]+)\(\)/i).map { |s| s[0] } unless test.nil?
     # this regex is scanning for `this.*xmlDependencyMethod*()`
     # it returns an array of count 1 with a String of the *xmlDependencyMethod*() searched for
-    binding.pry
   end
 
 end

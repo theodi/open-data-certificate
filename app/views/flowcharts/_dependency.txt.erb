@@ -3,25 +3,8 @@
 <% # returns the first entire hash where any element in entire dependencies array matches the String extracted from answer key val hash passed to this function %>
 <% # @dependencies is an array of strings with no repetitions %>
 <% if dependency[:answers].nil? %>
-      <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>["<%= dependency[:label] %>"]
-      <% if !@questions[index + 1].nil? %>
-        <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
-      <% else %>
-        <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> finalSection["End"]
-        <% #  if this is removed the legal pathway is distorted but the paths that do not render normally still do not render %>
-      <% end %>
+      <%= end_of_dependencies(question, answer, dependency, key, index, @questions) %>
 <% else %>
       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
-      <% if dependency[:prerequisites].count <= 1 || (["timeSensitive","privacyImpactAssessmentExists"].include?(dependency[:id]) && dependency[:prerequisites].count == 2) %>
-            <% # if there is only one prerequisite answers can commence rendering, if there is > 1 prerequisites do not risk rendering anser %>
-            <% dependency[:answers].each do |k,v| %>
-            <% # populate_deps_array(dependency, index, k, v) %>
-              <% @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v }) %>
-              <% # what is going on here :( %>
-            <% end %>
-      <% else %>
-        <% dependency[:prerequisites].shift %>
-        <% #  remove and destroy the first element in the prerequisite array until it can return nil %>
-      <% end %>
-      <% # each time it renders  %>
+      <% populate_dependencies(dependency, index) %>
 <% end %>
