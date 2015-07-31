@@ -9,66 +9,67 @@
   <group id="legal">
     <group id="privacy">
       <label>Privacy</label>
-      <help>how you protect people's privacy</help>
-      <question id="dataPersonal" display="This data contains">
-        <label>Can individuals be identified from this data?</label>
-        <radioset required="pilot">
-          <option value="not-personal" display="no data about individuals">
-            <label>no, the data is not about people or their activities</label>
-            <help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
-          </option>
-          <option value="summarised" display="aggregated data">
-            <label>no, the data has been anonymised by aggregating individuals into groups, so they can't be distinguished from other people in the group</label>
-            <help more="http://www.ons.gov.uk/ons/guide-method/best-practice/disclosure-control-policy-for-tables/index.html">Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.</help>
-          </option>
-          <option value="individual" display="information that could identify individuals">
-            <label>yes, there is a risk that individuals be identified, for example by third parties with access to extra information</label>
-            <help>Some data is legitimately about individuals like civil service pay or public expenses for example.</help>
-          </option>
-        </radioset>
-      </question>
-      <if test="this.dataPersonal() === 'summarised'">
-        <question id="statisticalAnonAudited" display="The anonymisation process has been">
-          <label>Has your anonymisation process been independently audited?</label>
-          <yesno yes="independently audited" />
-          <requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
-        </question>
-      </if>
-      <if test="this.dataPersonal() === 'individual'">
-        <question id="appliedAnon" display="This data about individuals has been">
-          <label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>
-          <yesno required="pilot" yes="anonymised" />
-          <help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>
-        </question>
-        <if test="this.appliedAnon() === 'false'">
-          <question id="lawfulDisclosure" display="By law, this data about individuals">
-            <label>Are you required or permitted by law to publish this data about individuals?</label>
-            <yesno yes="can be published" />
-            <help>The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.</help>
-            <requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
-          </question>
-          <if test="this.lawfulDisclosure() === 'true'">
-            <question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
-              <label>Where do you document your right to publish data about individuals?</label>
-              <input type="url" placeholder="Disclosure Rationale URL"/>
-              <requirement level="standard">You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.</requirement>
-            </question>
-          </if>
-        </if>
-        <if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-          <question id="privacyImpactAssessmentExists" display="The curator has">
-            <label>Have you carried out a Privacy Impact Assessment?</label>
-            <yesno yes="carried out a Privacy Impact Assessment" no="not carried out a Privacy Impact Assessment" />
-            <help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>
-            <requirement level="pilot">You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals.</requirement>
-          </question>
+      <!--<help>how you protect people's privacy</help>-->
+      <!--<question id="dataPersonal" display="This data contains">-->
+        <!--<label>Can individuals be identified from this data?</label>-->
+        <!--<radioset required="pilot">-->
+          <!--<option value="not-personal" display="no data about individuals">-->
+            <!--<label>no, the data is not about people or their activities</label>-->
+            <!--<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>-->
+          <!--</option>-->
+          <!--<option value="summarised" display="aggregated data">-->
+            <!--<label>no, the data has been anonymised by aggregating individuals into groups, so they can't be distinguished from other people in the group</label>-->
+            <!--<help more="http://www.ons.gov.uk/ons/guide-method/best-practice/disclosure-control-policy-for-tables/index.html">Statistical disclosure controls can help to make sure that individuals are not identifiable within aggregate data.</help>-->
+          <!--</option>-->
+          <!--<option value="individual" display="information that could identify individuals">-->
+            <!--<label>yes, there is a risk that individuals be identified, for example by third parties with access to extra information</label>-->
+            <!--<help>Some data is legitimately about individuals like civil service pay or public expenses for example.</help>-->
+          <!--</option>-->
+        <!--</radioset>-->
+      <!--</question>-->
+      <!--<if test="this.dataPersonal() === 'summarised'">-->
+        <!--<question id="statisticalAnonAudited" display="The anonymisation process has been">-->
+          <!--<label>Has your anonymisation process been independently audited?</label>-->
+          <!--<yesno yes="independently audited" />-->
+          <!--<requirement level="standard">You should <strong>have your anonymisation process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>-->
+        <!--</question>-->
+      <!--</if>-->
+      <!--<if test="this.dataPersonal() === 'individual'">-->
+        <!--<question id="appliedAnon" display="This data about individuals has been">-->
+          <!--<label>Have you attempted to reduce or remove the possibility of individuals being identified?</label>-->
+          <!--<yesno required="pilot" yes="anonymised" />-->
+          <!--<help>Anonymisation reduces the risk of individuals being identified from the data you publish. The best technique to use depends on the kind of data you have.</help>-->
+        <!--</question>-->
+        <!--<if test="this.appliedAnon() === 'false'">-->
+          <!--<question id="lawfulDisclosure" display="By law, this data about individuals">-->
+            <!--<label>Are you required or permitted by law to publish this data about individuals?</label>-->
+            <!--<yesno yes="can be published" />-->
+            <!--<help>The law might require you to publish data about people, such as the names of company directors. Or you might have permission from the affected individuals to publish information about them.</help>-->
+            <!--<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>-->
+          <!--</question>-->
+          <!--<if test="this.lawfulDisclosure() === 'true'">-->
+            <!--<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">-->
+              <!--<label>Where do you document your right to publish data about individuals?</label>-->
+              <!--<input type="url" placeholder="Disclosure Rationale URL"/>-->
+              <!--<requirement level="standard">You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.</requirement>-->
+            <!--</question>-->
+          <!--</if>-->
+        <!--</if>-->
+        <!--<if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">-->
+          <!--<question id="privacyImpactAssessmentExists" display="The curator has">-->
+            <!--<label>Have you carried out a Privacy Impact Assessment?</label>-->
+            <!--<yesno yes="carried out a Privacy Impact Assessment" no="not carried out a Privacy Impact Assessment" />-->
+            <!--<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">A <a href="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Privacy Impact Assessment</a> is how you measure risks to the privacy of individuals in your data as well as the use and disclosure of that information.</help>-->
+            <!--<requirement level="pilot">You should <strong>do a Privacy Impact Assessment</strong> if you publish data about individuals.</requirement>-->
+          <!--</question>-->
           <if test="this.privacyImpactAssessmentExists() === 'true'">
-            <question id="privacyImpactAssessmentUrl" display="The Privacy Impact Assessment is published at">
+            <question id="q" display="The Privacy Impact Assessment is published at">
               <label>Where is your Privacy Impact Assessment published?</label>
               <input type="url" placeholder="Privacy Impact Assessment URL"/>
               <help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
               <requirement level="standard">You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
             </question>
+            <!--NOT RENDERING-->
             <if test="this.privacyImpactAssessmentUrl() !== ''">
               <question id="piaAudited" display="The Privacy Impact Assessment has been">
                 <label>Has your Privacy Impact Assessment been independently audited?</label>

@@ -74,6 +74,7 @@ class Flow
   def answers(question)
     # returns result of dependency method, or an array of hashes based on input type
     # hash is usually a single key=> value assignment
+
     if type(question) == "yesno"
       {
         "true" => {
@@ -83,6 +84,16 @@ class Flow
           dependency: dependency(question, "false")
         }
       }
+    elsif type(question) == "input"
+      if question[:id].eql?("privacyImpactAssessmentUrl")
+        # binding.pry
+        # answers = {
+        #     question.at_xpath("input")[:placeholder] => {
+        #         dependency: question[:id]
+        #     }
+        # }
+        # answers
+      end
     elsif question.at_xpath("radioset|checkboxset")
       answers = {}
       question.at_xpath("radioset|checkboxset").xpath("option").each do |option|
@@ -101,6 +112,7 @@ class Flow
       end
       answers
     end
+    # binding.pry
   end
 
   def label(question)
@@ -126,13 +138,19 @@ class Flow
   end
 
   def dependency(question, answer)
+    # binding.pry
+    # if input
+    #   dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() !== ''\")]").at_css("question")
+    # end
     dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() === '#{answer}'\")]").at_css("question")
     dependency["id"] unless dependency.nil?
+    # binding.pry
   end
 
   def prerequisites(question)
     # question => Nokogiri::XML::Element
     # returns String or nil
+    # binding.pry
     test = question.parent["test"] || question.parent.parent["test"]  # returns a String
     test.scan(/this\.([a-z]+)\(\)/i).map { |s| s[0] } unless test.nil?
     # this regex is scanning for `this.*xmlDependencyMethod*()`

@@ -1,11 +1,11 @@
 <% content_for :header_title, "Questionnare flowcharts" %>
 
-<form id="questionairre_selection" action="" method="get" class="form-inline">
-    <label id="jurisdiction">
+<form action="" method="get" class="form-inline">
+    <label id>
       Select jurisdiction
       <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction.downcase)) %>
     </label>
-    <label id="type">
+    <label>
       Select type
       <%= select_tag(:type, options_for_select(["Practical", "Legal"], @type)) %>
     </label>
@@ -24,7 +24,7 @@
 <div id="flowchart">
 
   <div class="mermaid">
-  graph TD
+  graph LR
   <% @questions.each_with_index do |q, index| %>
     <%= render partial: "question.txt", locals: { question: q, index: index } %>
   <% end %>
