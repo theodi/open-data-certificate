@@ -10,7 +10,7 @@ module FlowchartHelper
     # dependencies, should equal instance variable @dependencies, a hash of XML parsed elements
     # questions, should equal instance variable @questions, a hash of XML parsed elements
 
-    output = "#{question[:id]} {\"#{question[:label]}\"}\n"
+    output = " #{question[:id]}{\"#{question[:label]}\"}\n"
     # binding.pry
     dependency = dependencies.find { |d| d[:id] == answer[:dependency] }
     # returns the first entire hash where any element in entire dependencies array matches the String extracted from answer key val hash passed to this function
@@ -18,7 +18,7 @@ module FlowchartHelper
     if dependency[:answers].nil?
       output += end_of_dependencies(question, answer, dependency, key, index, questions)
     else
-      output += "#{question[:id]}  --> | \"#{key}\" | #{answer[:dependency]} { \"#{dependency[:label]}\" } \n"
+      output += "#{question[:id]} --> |\"#{key}\"| #{answer[:dependency]}{\"#{dependency[:label]}\"} \n"
       populate_dependencies(dependency, index)
     end
     output
