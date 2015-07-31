@@ -3,7 +3,15 @@ require 'pry'
 module FlowchartHelper
 
   def dependency(question, answer, key, index, dependencies, questions)
-    output = "#{question[:id]} \{\"#{question[:label]}\"\}"
+    # question, an Object/Hash, either from @dependencies or @questions
+    # index: integer, used to link question with questions
+    # answer: Hash, the value portion of any given answers hash element, in format {:dependency=>String}
+    # key: String, the key of any given answers hash element, usualy the ???? tag from a given XML
+    # dependencies, should equal instance variable @dependencies, a hash of XML parsed elements
+    # questions, should equal instance variable @questions, a hash of XML parsed elements
+
+    output = "#{question[:id]} {\"#{question[:label]}\"}"
+    # binding.pry
     dependency = dependencies.find { |d| d[:id] == answer[:dependency] }
     # returns the first entire hash where any element in entire dependencies array matches the String extracted from answer key val hash passed to this function
     # @dependencies is an array of strings with no repetitions
@@ -31,14 +39,28 @@ module FlowchartHelper
   end
 
   def end_of_dependencies(question, answer, dependency, key, index, questions)
-    output = "#{question[:id]}  --> | \"#{key}\" | #{answer[:dependency]} [ \"#{dependency[:label]}\" ] \n"
+
+    output = "#{question[:id]} --> |\"#{key}\"| #{answer[:dependency]}[\"#{dependency[:label]}\"] \n"
+    # binding.pry
     if !questions[index + 1].nil?
-      output += "#{answer[:dependency]} [ \"#{dependency[:label]}\" ] --> #{questions[index + 1][:id]} [ \"#{questions[index + 1][:label]}\" ] \n"
+      output += "#{answer[:dependency]}[\"#{dependency[:label]}\"] --> #{questions[index + 1][:id]}[\"#{questions[index + 1][:label]}\"] \n"
     else
-      output += "#{answer[:dependency]} [ \"#{dependency[:label]}\" ] --> finalSection[\"End\"] \n"
+      output += "#{answer[:dependency]}[\"#{dependency[:label]}\"] --> finalSection[\"End\"] \n"
      #  if this is removed the legal pathway is distorted but the paths that do not render normally still do not render
     end
+    # binding.pry
     output
   end
+
+# `
+#   <%= end_of_dependencies(question, answer, dependency, key, index, @questions) %>
+
+#       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>["<%= dependency[:label] %>"]
+#       <% if !@questions[index + 1].nil? %>
+#             <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
+#       <% else %>
+#             <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> finalSection["End"]
+#       <% end %>
+# `
 
 end

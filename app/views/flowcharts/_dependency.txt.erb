@@ -4,6 +4,7 @@
 <% # @dependencies is an array of strings with no repetitions %>
 <% if dependency[:answers].nil? %>
       <%= end_of_dependencies(question, answer, dependency, key, index, @questions) %>
+
 <% else %>
       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>{"<%= dependency[:label] %>"}
       <% populate_dependencies(dependency, index) %>
