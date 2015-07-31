@@ -124,7 +124,7 @@
 					<help>Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
 					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.</requirement>
 				</question>
-				<if test="this.sourceDocumentationUrl() !== """>
+				<if test="this.sourceDocumentationUrl() !== ''">
 					<question id="sourceDocumentationMetadata" display="The curator has published">
 						<label>Is documentation about the sources of this data also in machine-readable format?</label>
 						<yesno yes="machine-readable data about the sources of this data" />
@@ -317,7 +317,7 @@
 					<help>Give the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.</help>
 				</question>
 			</if>
-			<if test="this.copyrightURL() !== """>
+			<if test="this.copyrightURL() !== ''">
 				<question id="copyrightStatementMetadata" display="The rights statement includes data about">
 					<label>Does your rights statement include machine-readable versions of</label>
 					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
@@ -425,7 +425,7 @@
 							<help more="http://www.ico.gov.uk/for_organisations/data_protection/topic_guides/privacy_impact_assessment.aspx">Give a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
 							<requirement level="standard">You should <strong>publish your Privacy Impact Assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
-						<if test="this.privacyImpactAssessmentUrl() !== """>
+						<if test="this.privacyImpactAssessmentUrl() !== ''">
 							<question id="piaAudited" display="The Privacy Impact Assessment has been">
 								<label>Has your Privacy Impact Assessment been independently audited?</label>
 								<yesno yes="independently audited" />
@@ -433,7 +433,7 @@
 								<requirement level="standard">You should <strong>have your Privacy Impact Assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 							</question>
 						</if>
-						<if test="this.lawfulDisclosure() !== "true"">
+						<if test="this.lawfulDisclosure() !== 'true'">
 							<question id="individualConsentURL" display="Individuals affected by this data have this privacy notice">
 								<label>Where is the privacy notice for individuals affected by your data?</label>
 								<input type="url" placeholder="Privacy Notice URL"/>
