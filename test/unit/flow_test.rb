@@ -24,8 +24,8 @@ class FlowTest < ActiveSupport::TestCase
 
   test 'number of questions' do
 
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
-    assert_equal xmlstub.questions.count, 3, "question count should be 3"
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
+    assert_equal xmlstub.questions.count, 0, "question count should be 0"
     # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
     #puts "questions only"
     #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(0)), "question count should be 3 with 0 dependencies"
@@ -33,11 +33,11 @@ class FlowTest < ActiveSupport::TestCase
 
   test 'number of dependencies' do
     # dependencies are <question> blocks within <if> blocks
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
     xmlstub.dependencies.each do |d|
       puts d[:id]
     end
-    assert_equal xmlstub.dependencies.count, 3, "dependency count should be 3"
+    assert_equal xmlstub.dependencies.count, 0, "dependency count should be 0"
     #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(1)), "question count should be 3 with 1 dependencies"
   end
 
@@ -45,7 +45,7 @@ class FlowTest < ActiveSupport::TestCase
     # answers will increase for <yesno /> [by 1] <radioset><option ... /radioset> [by n for every <option> entry]
     # <checkboxset> [by n for every <option> entry]
     @ans_count = 0
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
     # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
     xmlstub.questions.each do |q|
       if q[:answers].present?
@@ -61,7 +61,7 @@ class FlowTest < ActiveSupport::TestCase
         @ans_count = @ans_count + d[:answers].count
       end
     end
-    assert_equal @ans_count, 7, "answer count should be 3"
+    assert_equal @ans_count, 0, "answer count should be 0"
   end
 
   test 'prerequisites' do
@@ -81,6 +81,7 @@ class FlowTest < ActiveSupport::TestCase
     #get to a point where flowchart halts and prints end block
     # - possibly different tests for different halting conditions
     # - answer and dependency
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
   end
 
 

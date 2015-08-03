@@ -2,6 +2,19 @@ require 'pry'
 
 module FlowchartHelper
 
+  def question(question, index, dependencies, questions)
+    output = ""
+    if question[:answers].nil? && questions[index + 1] != nil
+      #all : attributes in this partial are established in the flow class def question
+      output = "#{question[:id]}[\"#{question[:label]}\"] --> #{questions[index + 1][:id]}[\"#{questions[index + 1][:label]}\"] \n"
+    elsif !question[:answers].nil?
+      question[:answers].each do |k,v|
+        output += answer(question, v, k, index, dependencies, questions)
+      end
+    end
+    output.to_s.html_safe
+  end
+
   def answer(question, answer, key, index, dependencies, questions)
     # question, an Object/Hash, either from @dependencies or @questions
     # index: integer, used to link question with questions

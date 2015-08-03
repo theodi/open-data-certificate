@@ -26,7 +26,7 @@
   <div class="mermaid">
   graph LR
   <% @questions.each_with_index do |q, index| %>
-    <%= render partial: "question.txt", locals: { question: q, index: index } %>
+    <%= question(q, index, @dependencies, @questions) %>
   <% end %>
 
 
