@@ -54,7 +54,7 @@ class FlowTest < ActiveSupport::TestCase
         # 3 is gathered from this loop
       end
     end
-    puts "nao dependencies"
+    puts "no dependencies"
     xmlstub.dependencies.each do |d|
       if d[:answers].present?
         puts d
@@ -71,11 +71,11 @@ class FlowTest < ActiveSupport::TestCase
     end
   end
 
-  test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
-    #navigate to a question that has an answer that has a dependency and check
-    # that it can't be answered without the dependency and prerequisite being satisfied
-  end
+  # test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
+  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+  #   #navigate to a question that has an answer that has a dependency and check
+  #   # that it can't be answered without the dependency and prerequisite being satisfied
+  # end
 
   test 'flowchart halts' do
     #get to a point where flowchart halts and prints end block

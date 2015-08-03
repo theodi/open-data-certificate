@@ -2,6 +2,25 @@ require 'pry'
 
 module FlowchartHelper
 
+  def answer(question, answer, key, index, dependencies, questions)
+    # question, an Object/Hash, either from @dependencies or @questions
+    # index: integer, used to link question with questions
+    # answer: Hash, the value portion of any given answers hash element, in format {:dependency=>String}
+    # key: String, the key of any given answers hash element, usualy the ???? tag from a given XML
+    # dependencies, should equal instance variable @dependencies, a hash of XML parsed elements
+    # questions, should equal instance variable @questions, a hash of XML parsed elements
+    output = ""
+    if answer[:dependency].nil? && questions[index + 1] != nil
+     # the above will execute for any question hashes that have a nil value
+     output = "#{question[:id]}{\"#{question[:label]}\"} --> |\"#{key}\"| #{questions[index + 1][:id]}[\"#{questions[index + 1][:label]}\"] \n"
+    elsif !answer[:dependency].nil?
+      output = dependency(question, answer, key, index, dependencies, questions)
+    else
+      output = "#{question[:id]} {\"#{question[:label]}\"} --> |\" #{key} \"| finalSection[\"End\"] \n"
+    end
+    output
+  end
+
   def dependency(question, answer, key, index, dependencies, questions)
     # question, an Object/Hash, either from @dependencies or @questions
     # index: integer, used to link question with questions
@@ -193,14 +212,14 @@ module FlowchartHelper
   # Rendered flowcharts/_question.txt.erb (11.8ms)
 
 # `
-#   <%= end_of_dependencies(question, answer, dependency, key, index, @questions) %>
+#    end_of_dependencies(question, answer, dependency, key, index, @questions)
 
-#       <%= question[:id] %> --> |"<%= key %>"| <%= answer[:dependency] %>["<%= dependency[:label] %>"]
-#       <% if !@questions[index + 1].nil? %>
-#             <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
-#       <% else %>
-#             <%= answer[:dependency] %>["<%= dependency[:label] %>"] --> finalSection["End"]
-#       <% end %>
+#        question[:id]  --> |" key "|  answer[:dependency] [" dependency[:label] "]
+#        if !@questions[index + 1].nil?
+#              answer[:dependency] [" dependency[:label] "] -->  @questions[index + 1][:id] [" @questions[index + 1][:label] "]
+#        else
+#              answer[:dependency] [" dependency[:label] "] --> finalSection["End"]
+#        end
 # `
 
 end
