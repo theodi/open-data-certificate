@@ -16,7 +16,7 @@ module FlowchartHelper
     elsif !answer[:dependency].nil?
       output = dependency(question, answer, key, index, dependencies, questions)
     else
-      output = "#{question[:id]} {\"#{question[:label]}\"} --> |\" #{key} \"| finalSection[\"End\"] \n"
+      output = "#{question[:id]}{\"#{question[:label]}\"} --> |\"#{key}\"| finalSection[\"End\"] \n"
     end
     output
   end

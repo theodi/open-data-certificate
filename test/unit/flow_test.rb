@@ -25,7 +25,7 @@ class FlowTest < ActiveSupport::TestCase
   test 'number of questions' do
 
     xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
-    assert_equal xmlstub.questions.count, 3, "question count count should be 3"
+    assert_equal xmlstub.questions.count, 3, "question count should be 3"
     # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
     #puts "questions only"
     #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(0)), "question count should be 3 with 0 dependencies"
@@ -37,7 +37,7 @@ class FlowTest < ActiveSupport::TestCase
     xmlstub.dependencies.each do |d|
       puts d[:id]
     end
-    assert_equal xmlstub.dependencies.count, 3, "dependency count count should be 3"
+    assert_equal xmlstub.dependencies.count, 3, "dependency count should be 3"
     #assert_true (xmlstub.questions.count.eql?(3) && xmlstub.dependencies.count.eql?(1)), "question count should be 3 with 1 dependencies"
   end
 
@@ -54,7 +54,7 @@ class FlowTest < ActiveSupport::TestCase
         # 3 is gathered from this loop
       end
     end
-    puts "no dependencies"
+    # puts "no dependencies"
     xmlstub.dependencies.each do |d|
       if d[:answers].present?
         puts d
