@@ -2,6 +2,29 @@ require 'pry'
 
 module FlowchartHelper
 
+  # def render_graph(dependencies, questions)
+  #   output = ""
+  #   questions.each_with_index do |q, index|
+  #     output += question(q, index, dependencies, questions)
+  #   end
+  #
+  #   @deps.reverse.join("\r\n").gsub("’", "'")
+  #   @levels.each do |k, l|
+  #     unless k.nil?
+  #       class  l.join(",")
+  #       k
+  #     end
+  #   end
+  # end
+  #
+  # def all_questions(dependencies,questions)
+  #   output = ""
+  #   questions.each_with_index do |q, index|
+  #     output += question(q, index, dependencies, questions)
+  #   end
+  #   output
+  # end
+
   def question(question, index, dependencies, questions)
     output = ""
     if question[:answers].nil? && questions[index + 1] != nil
@@ -11,6 +34,8 @@ module FlowchartHelper
       question[:answers].each do |k,v|
         output += answer(question, v, k, index, dependencies, questions)
       end
+    else
+      output ="#{question[:id]}[\"#{question[:label]}\"] --> finalSection[\"End\"] \n"
     end
     output.to_s.html_safe
   end
@@ -22,6 +47,7 @@ module FlowchartHelper
     # key: String, the key of any given answers hash element, usualy the ???? tag from a given XML
     # dependencies, should equal instance variable @dependencies, a hash of XML parsed elements
     # questions, should equal instance variable @questions, a hash of XML parsed elements
+    # binding.pry
     output = ""
     if answer[:dependency].nil? && questions[index + 1] != nil
      # the above will execute for any question hashes that have a nil value

@@ -81,7 +81,21 @@ class FlowTest < ActiveSupport::TestCase
     #get to a point where flowchart halts and prints end block
     # - possibly different tests for different halting conditions
     # - answer and dependency
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
+    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
+    question = {:id=>"releaseType",
+                :label=>"What kind of release is this?",
+                :type=>"radioset",
+                :level=>nil,
+                :answers=>
+                  {"a one-off release of a single dataset"=>{:dependency=>"timeSensitive"},
+                  "a one-off release of a set of related datasets"=>
+                    {:dependency=>"timeSensitive"},
+                  "ongoing release of a series of related datasets"=>
+                    {:dependency=>"frequentChanges"},
+                  "a service or API for accessing open data"=>{:dependency=>"serviceType"}
+    answer = {:dependency=>nil}
+    assert_true ( answer(question, answer, 1, nil, nil, nil) =
+    "#{question[:id]}{\"#{question[:label]}\"} --> |\"1\"| finalSection[\"End\"] \n")
   end
 
 
