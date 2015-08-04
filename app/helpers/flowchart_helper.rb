@@ -35,7 +35,7 @@ module FlowchartHelper
         output += answer(question, v, k, index, dependencies, questions)
       end
     else
-      output ="#{question[:id]}[\"#{question[:label]}\"] --> finalSection[\"End\"] \n"
+      output = "#{question[:id]}[\"#{question[:label]}\"] --> finalSection[\"End\"] \n"
     end
     output.to_s.html_safe
   end
@@ -77,22 +77,23 @@ module FlowchartHelper
       output += end_of_dependencies(question, answer, dependency, key, index, questions)
     else
       output += "#{question[:id]} --> |\"#{key}\"| #{answer[:dependency]}{\"#{dependency[:label]}\"} \n"
-      populate_dependencies(dependency, index)
+      populate_dependencies(dependency, index, dependencies, questions)
     end
     output
   end
 
-  def populate_dependencies(dependency, index)
+  def populate_dependencies(dependency, index, dependencies, questions)
      if dependency[:prerequisites].count <= 1 || (["timeSensitive","privacyImpactAssessmentExists"].include?(dependency[:id]) && dependency[:prerequisites].count == 2)
-         populate_deps_array(dependency, index)
+         populate_deps_array(dependency, index, dependencies, questions)
      else
        dependency[:prerequisites].shift
      end
   end
 
-  def populate_deps_array(dependency, index) # key - answer text ("No, the API isn't..."), value - dependency (dependency => "dependency")ß
+  def populate_deps_array(dependency, index, dependencies, questions) # key - answer text ("No, the API isn't..."), value - dependency (dependency => "dependency")ß
     dependency[:answers].each do |k,v|
-        @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v })
+        @deps << answer(dependency, v, k, index, dependencies, questions)
+        # @deps << render(partial: "answer.txt", locals: { question: dependency, index: index, key: k, answer: v })
     end
   end
 
@@ -106,7 +107,6 @@ module FlowchartHelper
       output += "#{answer[:dependency]}[\"#{dependency[:label]}\"] --> finalSection[\"End\"] \n"
      #  if this is removed the legal pathway is distorted but the paths that do not render normally still do not render
     end
-    # binding.pry
     output
   end
 
