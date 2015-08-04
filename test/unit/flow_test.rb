@@ -1,4 +1,5 @@
 require 'test_helper'
+include FlowchartHelper
 
 class FlowTest < ActiveSupport::TestCase
 
@@ -78,11 +79,20 @@ class FlowTest < ActiveSupport::TestCase
   # end
 
   test 'flowchart halts' do
-    #get to a point where flowchart halts and prints end block
-    # - possibly different tests for different halting conditions
-    # - answer and dependency
-    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
-    question = {:id=>"releaseType",
+    # get to a point where flowchart halts and prints end block
+    # In each case, there is only one question in the flowchart therefore,
+    # the next output should be an end block
+    # Halt in question
+    question1 = {:id=>"releaseType",
+                :label=>"What kind of release is this?",
+                :type=>"radioset",
+                :level=>nil,
+                :answers=>nil
+    }
+    assert_equal question(question1, 0, nil, [question1]),
+      "#{question1[:id]}[\"#{question1[:label]}\"] --> finalSection[\"End\"] \n"
+    # Halt in answer
+    question2 = {:id=>"releaseType",
                 :label=>"What kind of release is this?",
                 :type=>"radioset",
                 :level=>nil,
@@ -93,9 +103,21 @@ class FlowTest < ActiveSupport::TestCase
                   "ongoing release of a series of related datasets"=>
                     {:dependency=>"frequentChanges"},
                   "a service or API for accessing open data"=>{:dependency=>"serviceType"}
+                  }
+    }
     answer = {:dependency=>nil}
-    assert_true ( answer(question, answer, 1, nil, nil, nil) =
-    "#{question[:id]}{\"#{question[:label]}\"} --> |\"1\"| finalSection[\"End\"] \n")
+    assert_equal answer(question2, answer, 1, 0, nil, [question2]),
+      "#{question2[:id]}{\"#{question2[:label]}\"} --> |\"1\"| finalSection[\"End\"] \n"
+    # Halt in dependency
+    dependency = { :id=>"changeFeedUrl",
+                   :label=>"Where is your feed of changes?",
+                   :type=>"input",
+                   :level=>nil,
+                   :answers=>nil,
+                   :prerequisites=>["changeFeed"]}
+    answer = {:dependency=>"changeFeedUrl"}
+    assert_equal dependency(question1, answer, 1, 0, [dependency], [question1]),
+      " #{question1[:id]}{\"#{question1[:label]}\"}\n#{question1[:id]} --> |\"1\"| #{answer[:dependency]}[\"#{dependency[:label]}\"] \n#{answer[:dependency]}[\"#{dependency[:label]}\"] --> finalSection[\"End\"] \n"
   end
 
 
