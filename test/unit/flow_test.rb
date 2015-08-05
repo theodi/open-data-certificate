@@ -120,6 +120,24 @@ class FlowTest < ActiveSupport::TestCase
       " #{question1[:id]}{\"#{question1[:label]}\"}\n#{question1[:id]} --> |\"1\"| #{answer[:dependency]}[\"#{dependency[:label]}\"] \n#{answer[:dependency]}[\"#{dependency[:label]}\"] --> finalSection[\"End\"] \n"
   end
 
+  test 'text answer has dependency' do
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "text_dependencies.xml"))
+    expected = {
+      "null" => {
+        dependency: nil
+      },
+      "not null" => {
+        dependency: "textDependency"
+      }
+    }
+    assert_equal flow.questions.first[:answers], expected
+  end
+
+  test 'text answer has nil dependency when there is no dependency present' do
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    assert_equal flow.questions.first[:answers], nil
+  end
+
 
   # test 'practical: check that no prerequisites created in questions' do
   #   @practical_flowchart.questions.each do |q|

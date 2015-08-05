@@ -2,7 +2,7 @@
 <% # the above will execute for any question hashes that have a nil value %>
   <%= question[:id] %>{"<%= question[:label] %>"} --> |"<%= key %>"| <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
 <% elsif !answer[:dependency].nil? %>
-  <%= dependency(question, answer, key, index, @dependencies, @questions) %>
+  <%= render partial: "dependency.txt", locals: { question: question, index: index, key: key, answer: answer } %>
 <% else %>
   <%= question[:id] %>{"<%= question[:label] %>"} --> |"<%= key %>"| finalSection["End"]
 <% end %>

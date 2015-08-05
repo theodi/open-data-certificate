@@ -3,6 +3,6 @@
   <%= question[:id] %>["<%= question[:label] %>"] --> <%= @questions[index + 1][:id] %>["<%= @questions[index + 1][:label] %>"]
 <% elsif !question[:answers].nil? %>
   <% question[:answers].each do |k,v| %>
-    <%= answer(question, v, k, index, @dependencies, @questions) %>
+    <%= render partial: "answer.txt", locals: { question: question, index: index, key: k, answer: v } %>
   <% end %>
 <% end %>
