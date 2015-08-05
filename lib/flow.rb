@@ -85,15 +85,14 @@ class Flow
         }
       }
     elsif type(question) == "input"
-      if question[:id].eql?("privacyImpactAssessmentUrl")
-        # binding.pry
-        # answers = {
-        #     question.at_xpath("input")[:placeholder] => {
-        #         dependency: question[:id]
-        #     }
-        # }
-        # answers
-      end
+      {
+        "null" => {
+          dependency: nil
+        },
+        "not null" => {
+          dependency: dependency(question, "filled")
+        }
+      }
     elsif question.at_xpath("radioset|checkboxset")
       answers = {}
       question.at_xpath("radioset|checkboxset").xpath("option").each do |option|
@@ -116,6 +115,7 @@ class Flow
   end
 
   def label(question)
+    # binding.pry
     CGI.unescapeHTML(question.at_xpath("label").text).gsub("\"", "'")
   end
 
@@ -142,7 +142,11 @@ class Flow
     # if input
     #   dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() !== ''\")]").at_css("question")
     # end
-    dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() === '#{answer}'\")]").at_css("question")
+    if answer == "filled"
+      dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() !== ''\")]").at_css("question")
+    else
+      dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() === '#{answer}'\")]").at_css("question")
+    end
     dependency["id"] unless dependency.nil?
     # binding.pry
   end

@@ -120,6 +120,11 @@ class FlowTest < ActiveSupport::TestCase
       " #{question1[:id]}{\"#{question1[:label]}\"}\n#{question1[:id]} --> |\"1\"| #{answer[:dependency]}[\"#{dependency[:label]}\"] \n#{answer[:dependency]}[\"#{dependency[:label]}\"] --> finalSection[\"End\"] \n"
   end
 
+  test 'text answer has dependency' do
+    xmlstub = Flow.new("gb", "Legal")
+    
+  end
+
 
   # test 'practical: check that no prerequisites created in questions' do
   #   @practical_flowchart.questions.each do |q|
