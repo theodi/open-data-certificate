@@ -36,5 +36,7 @@ env:
   - secure: ktiYuRyE9BN2wa65zkATI37ABnL5I/eUfV3FDnSzDKqhcN7QhqiqzGKRiPXsXRkQRloUoP9p2AZH4rhHUSkWtdtJWMlCzgkh3PHjNFHRGIwL6YfeEOiMMbRrhnwpT4uAjPAahxsUZRnc7TmsoFSRazALgK8DQ+SdN3vt5pwJZU8=
   - secure: fFtR5aMYwdFBKDaj+2u3HsDuVAO9SUZ25sMqxp17y1RSQa0zUTEMGtXZhjVn5VTX14voYDmo0vYkqtxovXBrPfFn0jdENYum+yu38XuLmFdReLoIh1EzC/pT9xTLNkYfGZj/a+IPIlj0TPkSHOSj6vuV/aT85QSUx+gpisfnCoA=
   - ODC_REDIS_SERVER_URL="redis://localhost:6379"
+  - CERTIFICATE_HOSTNAME="test.host"
+  - COVERAGE=1
 git:
   depth: 10

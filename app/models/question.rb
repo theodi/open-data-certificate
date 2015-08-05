@@ -13,6 +13,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
+  has_one :survey, :through => :survey_section
 
   LEVELS = {
     'basic' => 1,
@@ -91,7 +92,26 @@ class Question < ActiveRecord::Base
   end
 
   def translation(locale)
-    {:text => self.text, :help_text => self.help_text}.with_indifferent_access
+    case(display_type)
+    when 'label'
+      survey.translation(locale).fetch(:labels, {})[reference_identifier] || {}
+    else
+      super(locale)
+    end
+  end
+
+  def heading(locale=I18n.locale)
+    translation(locale)[:text] || text
+  end
+
+  def subheading(locale=I18n.locale)
+    translation(locale)[:help_text] || help_text
+  end
+
+  def placeholder(locale=I18n.locale)
+    if a = answer("1")
+      a.translation(locale)[:placeholder] || a.placeholder
+    end
   end
 
   def calculate_question_corresponding_to_requirement

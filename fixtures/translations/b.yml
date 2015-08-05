@@ -1,0 +1,8 @@
+root:
+  a:
+  - two
+  b:
+    three: "three"
+  c:
+    d:
+      f: "ff"

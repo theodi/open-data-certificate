@@ -15,8 +15,9 @@
 
 *= require_self
 *= require surveyor_all
-*= require datasets
+*= require campaigns
 *= require claims
+*= require datasets
 *= require mermaid
 */
 
@@ -3425,17 +3426,17 @@ section.improvement {
   #padd {
     .container {
       h1 {
-      font-size: 56px;
-      line-height: 69px;
-      background-color: #fff;
-      padding: 0 5px;
-        }
+        font-size: 56px;
+        line-height: 69px;
+        padding: 0 5px;
+        text-shadow: 0px 0px 2px #fff;
+      }
 
       h2 {
         font-size: 28px;
         line-height: 37px;
-        background-color: #fff;
         padding: 0 3px;
+        text-shadow: 0px 0px 2px #fff;
       }
     }
   }
@@ -3825,7 +3826,11 @@ body{
   display: inline;
 }
 
-td form.button_to, td form.button_to > div {
+td form.button_to,
+td form.button_to > div,
+.schedule-controls form.button_to,
+.schedule-controls form.button_to > div,
+{
   display: inline-block;
 }
 

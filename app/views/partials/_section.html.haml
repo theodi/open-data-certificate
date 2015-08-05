@@ -2,8 +2,8 @@
   - if section.display_header
     %header.inactive{'data-toggle'=>"collapse", "data-target"=>".survey-section[data-reference-identifier=#{section.reference_identifier}] ul"}
       .container
-        %h3= section.translation(I18n.locale)[:title]
-        %h4= section.translation(I18n.locale)[:description]
+        %h3= section.heading
+        %h4= section.subheading
 
   %ul{:class => section.display_header ? 'collapse' : ''}
     - section.questions_by_group.each do |group, questions|

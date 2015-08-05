@@ -11,10 +11,11 @@ gem 'rails', '~> 3.2.21'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'sass'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  gem 'haml'
+  gem 'haml', '>= 3.1.3'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
@@ -36,8 +37,6 @@ group :test do
   gem 'csvlint', github: 'theodi/csvlint.rb'
   gem 'vcr'
   gem 'webmock'
-  gem 'spork-rails'
-  gem 'spork-testunit'
   gem 'shoulda-context'
   gem 'timecop'
   gem 'cucumber-rails', require: false
@@ -62,6 +61,14 @@ group :production do
   gem 'delayed-plugins-airbrake'
   gem 'logstash-event'
   gem 'lograge'
+end
+
+group :surveyor do
+  gem 'fastercsv', '~> 1.5.4'
+  gem 'formtastic', '~> 2.1.0'
+  gem 'uuidtools', '~> 2.1'
+  gem 'mustache', '0.99.4'
+  gem 'rabl', '~>0.6.13'
 end
 
 gem 'jquery-rails'
@@ -95,7 +102,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor'
+gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'

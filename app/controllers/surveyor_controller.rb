@@ -86,7 +86,7 @@ class SurveyorController < ApplicationController
       saved = load_and_update_response_set_with_retries
 
       if saved && finish
-        flash[:saved_response_set] = @response_set.access_code
+        flash[:_saved_response_set] = @response_set.access_code
 
         if user_signed_in?
           mandatory_questions_complete = @response_set.all_mandatory_questions_complete?

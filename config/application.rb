@@ -11,11 +11,7 @@ end
 
 module OpenDataCertificate
   def self.hostname
-    ::OpenDataCertificate::Application.config.action_mailer[:default_url_options][:host]
-  end
-
-  def self.staging?
-    /staging/ =~ Dir.pwd
+    ENV['CERTIFICATE_HOSTNAME']
   end
 
   class Application < Rails::Application
@@ -76,7 +72,12 @@ module OpenDataCertificate
 
     # Add homepage map to the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "homepage_map")
-    config.assets.precompile += %w( map.js )
+    config.assets.precompile += %w[
+      admin.js
+      map.js
+
+      badge.css
+    ]
 
     # Get around heroku deployment issues
     # https://devcenter.heroku.com/articles/rails-asset-pipeline#troubleshooting

@@ -1,9 +1,13 @@
 require 'webmock/cucumber'
-require 'coveralls'
 require 'sidekiq/testing'
 require 'vcr'
 
-Coveralls.wear_merged! 'rails'
+if ENV['COVERAGE']
+  require 'coveralls'
+  Coveralls.wear_merged! 'rails'
+end
+
+ENV['CERTIFICATE_HOSTNAME'] = 'test.host'
 Sidekiq::Testing.inline!
 
 def load_fixture(file)

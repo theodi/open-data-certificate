@@ -1,0 +1,1054 @@
+cs:
+  survey_sections:
+    general:
+      text: "Obecné informace"
+    practical:
+      text: "Praktické informace"
+      help_text: "Vyhledávání, přesnost, kvalita a záruky"
+    technical:
+      text: "Technické informace"
+      help_text: "Umístění, formát a důvěryhodnost"
+    social:
+      text: "Sociální informace"
+      help_text: "Dokumentace, podpora a služby"
+  questions:
+    # Obecné informace
+    dataTitle:
+      text: "Jaký je název vašeho projektu?"
+      help_text: "Uživatelé název uvidí v seznamu podobných zdrojů, takže se snažte i v rámci krátkého textu přijít s něčím jedinečným a popisným, aby se podle něj dalo rychle zorientovat."
+      answers:
+        a_1:
+          placeholder: "název projektu"
+    documentationUrl:
+      text: "Kde máte zveřejněnou dokumentaci?"
+      text_as_statement: "Dokumentace"
+      help_text: "Uveďte adresu, na které si mohou o vašich datech nastudovat podrobnosti. Může jít například o záznam v nějakém větším katalogu typu cz.ckan.net."
+      answers:
+        a_1:
+          placeholder: "URL dokumentace"
+    publisher:
+      text: "Kdo data publikuje?"
+      text_as_statement: "Poskytovatel"
+      help_text: "Uveďte název organizace, která data publikuje. Nejspíš to bude váš zaměstnavatel – pokud tedy data nezveřejňujete pro někoho jiného."
+      answers:
+        a_1:
+          placeholder: "jméno poskytovatele"
+    publisherUrl:
+      text: "Webová stránka poskytovatele"
+      text_as_statement: "Web poskytovatele"
+      help_text: "Uveďte prosím URL webu poskytovatele. Pomáhá nám spárovat data pocházející od stejných poskytovatelů."
+      answers:
+        a_1:
+          placeholder: "web poskytovatele"
+    releaseType:
+      text: "Co přesně zveřejňujete?"
+      answers:
+        oneoff:
+          text: "jednu datovou sadu, jednorázově"
+          help_text: "Jde o jeden soubor a nečekáte, že byste výhledově zveřejňovali další podobné."
+        collection:
+          text: "několik souvisejících datových sad, jednorázově"
+          help_text: "Jde o několik souvisejících souborů a nečekáte, že byste výhledově zveřejňovali další podobné."
+        series:
+          text: "několik souvisejících datových sad, průběžně aktualizovaných"
+          help_text: "Jde o několik datových sad, které budete v budoucnu aktualizovat."
+        service:
+          text: "službu nebo API pro přístup k otevřeným datům"
+          help_text: "Jde o živou webovou službu, přes kterou lze data získat automaticky."
+    # Praktické informace
+    onWebsite:
+      text: "Odkazujete na data ze svého hlavního webu?"
+      help_text: "Přes odkaz z vašeho hlavního webu se data lépe hledají."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    webpage:
+      text: "Která stránka na vašem webu na data odkazuje?"
+      text_as_statement: "Webová stránka s odkazem na data"
+      help_text: "URL stránky, která na data odkazuje z vašeho hlavního webu."
+      answers:
+        a_1:
+          placeholder: "URL stránky"
+    listed:
+      text: "Jsou vaše data vedená v nějakém katalogu?"
+      help_text: "Data se lépe hledají, když jsou uvedená v relevantních seznamech, například akademických a zdravotnických databázích nebo databázích státní správy. Měla by také vyskočit ve výsledcích vyhledávačů na relevantní dotazy."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    listing:
+      text: "V jakém datovém katalogu jsou data vedena?"
+      text_as_statement: "Relevantní datové katalogy"
+      help_text: "Uveďte URL do katalogu, ve kterém jsou data uvedena; například cz.ckan.net a podobně. Můžete uvést také URL na výsledky vyhledávače."
+      answers:
+        a_1:
+          placeholder: "URL datového katalogu"
+    referenced:
+      text: "Odkazujete na tato data ve svých publikacích?"
+      help_text: "Když na data odkazujete ve svých článcích, prezentacích nebo blog postech, vytváříte kontext, ve kterém je datům lépe rozumět."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    reference:
+      text: "Kde se na data odkazujete?"
+      text_as_statement: "Související publikace"
+      help_text: "Uveďte URL dokumentu, který se na data odkazuje."
+      answers:
+        a_1:
+          placeholder: "URL dokumentu"
+    serviceType:
+      text: "Mění se data, na kterých je vaše API postavené?"
+      text_as_statement: "Mění se data za tímto API?"
+      answers:
+        static:
+          text: "ne, API operuje nad stále stejnými daty"
+          help_text: "Některá API slouží jen k jednoduššímu přístupu k neměnným datům, například kvůli jejich objemu."
+          text_as_statement: "ne, nemění"
+        changing:
+          text: "ano, data za tímto API se mění"
+          help_text: "Některá API operují nad průběžně aktualizovanými daty."
+          text_as_statement: "ano, mění"
+    timeSensitive:
+      text: "Budou vaše data časem zastarávat?"
+      text_as_statement: "Zastarávání"
+      answers:
+        "true":
+          text: "ano, tato data časem zastarají"
+          help_text: "Například databáze autobusových zastávek časem zastará, protože některé zastávky zmizí a objeví se nové."
+          text_as_statement: "data časem zastarají"
+        timestamped:
+          text: "ano, tato data časem zastarají, ale mají vyznačenou platnost"
+          help_text: "Například demografické statistiky obvykle bývají opatřené časovým razítkem, podle kterého se pozná, kdy byly relevantní."
+          text_as_statement: "data časem zastarají, ale mají časové razítko"
+        "false":
+          text: "ne, tato data nejsou závislá na čase"
+          help_text: "Například výsledky vědeckého experimentu nepřestanou nutně platit jen kvůli tomu, že už jsou staré."
+          text_as_statement: "data nejsou závislá na čase"
+    frequentChanges:
+      text: "Mění se data aspoň jednou denně?"
+      text_as_statement: "Frekvence změn"
+      help_text: "Řekněte uživatelům, jestli se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "data se mění aspoň jednou denně"
+    seriesType:
+      text: "Jakou podobu mají aktualizace dat?"
+      text_as_statement: "Formát aktualizací"
+      answers:
+        dumps:
+          text: "pravidelně exportujeme celou databázi"
+          help_text: "Vyberte, pokud pokud pravidelně publikujete aktuální export celé své databáze. A nezapomeňte, že v tomto případě je dobré dát uživatelům k dispozici feed změn (například ve formátu RSS)."
+          text_as_statement: "pravidelný export celé databáze"
+        aggregate:
+          text: "pravidelně publikujeme souhrn změn od posledního vydání"
+          help_text: "Vyberte, pokud aktualizace publikujete ve formě nějakého souhrnu od posledního vydání. Sem tedy spadají například klasické přírůstkové aktualizace nebo pravidelné souhrny dat, jejichž zdroj nemůžete volně zveřejnit."
+          text_as_statement: "pravidelný souhrn změn od posledního vydání"
+    changeFeed:
+      text: "Publikujete feed se změnami?"
+      text_as_statement: "Feed se změnami"
+      help_text: "Dejte uživatelům vědět, pokud někde publikujete seznam změn ve svých datech, například nové přírůstky nebo změny stávajících záznamů. Seznam může být publikovaný například jako RSS, Atom, nebo v jiném vhodném formátu."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "je k dispozici"
+    frequentSeriesPublication:
+      text: "Jak často publikujete nové verze dat?"
+      text_as_statement: "Četnost aktualizací"
+      help_text: "Podle tohoto údaje uživatelé poznají, jak moc data zastarají, než vyjde další aktualizace."
+      answers:
+        rarely:
+          text: "méně často než jednou za měsíc"
+          text_as_statement: "méně často než jednou za měsíc"
+        monthly:
+          text: "aspoň jednou měsíčně"
+          text_as_statement: "aspoň jednou měsíčně"
+        weekly:
+          text: "aspoň jednou týdně"
+          text_as_statement: "aspoň jednou týdně"
+        daily:
+          text: "aspoň jednou denně"
+          text_as_statement: "aspoň jednou denně"
+    seriesPublicationDelay:
+      text: "Jak dlouhá je prodleva mezi vytvořením dat a jejich zveřejněním?"
+      text_as_statement: "Prodleva mezi vytvořením a zveřejněním dat"
+      answers:
+        extreme:
+          text: "delší než mezera mezi dvěma vydáními"
+          help_text: "Příklad: zdrojová data se mění každý den, ale publikace dat trvá déle než jeden den."
+          text_as_statement: "delší než mezera mezi dvěma vydáními"
+        reasonable:
+          text: "zhruba stejná jako odstup mezi dvěma vydáními"
+          help_text: "Příklad: zdrojová data se mění každý den a zhruba během jednoho dne je také publikujete."
+          text_as_statement: "zhruba stejná jako odstup mezi dvěma vydáními"
+        good:
+          text: "kratší než polovina času mezi vydáními"
+          help_text: "Příklad: zdrojová data se mění každý den a publikace dat vám zabere nanejvýš dvanáct hodin."
+          text_as_statement: "kratší než polovina času mezi vydáními"
+        minimal:
+          text: "minimální nebo žádná"
+          help_text: "Tuto možnost vyberte, pokud nové verze publikujete v řádu minut nebo sekund."
+          text_as_statement: "minimální nebo žádná"
+    provideDumps:
+      text: "Zveřejňujete zdrojová data?"
+      text_as_statement: "Zdrojová data"
+      help_text: "Myslí se například export celé databáze, který si uživatelé mohou stáhnout, aby nebyli omezeni jen na přístup přes API."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "jsou k dispozici"
+    dumpFrequency:
+      text: "Jak často publikujete exporty z databáze?"
+      text_as_statement: "Exporty databáze vznikají"
+      help_text: "Rychlejší přístup k častějším výběrům z celé datové sady znamená, že uživatelé mohou rychleji začít pracovat s aktuálními daty."
+      answers:
+        rarely:
+          text: "méně často než jednou měsíčně"
+          text_as_statement: "méně často než jednou měsíčně"
+        monthly:
+          text: "aspoň jednou měsíčně"
+          text_as_statement: "aspoň jednou měsíčně"
+        weekly:
+          text: "nejpozději týden od provedení změn"
+          text_as_statement: "nejpozději týden od provedení změn"
+        daily:
+          text: "nejpozději den od provedení změn"
+          text_as_statement: "nejpozději den od provedení změn"
+    corrected:
+      text: "Pokud narazíte na chyby, budete je opravovat?"
+      text_as_statement: "Chyby v datech"
+      help_text: "Chyby v datech je dobré opravovat, zvláště pokud data sami používáte. Nezapomeňte na provedené opravy upozornit uživatele."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "budou opravovány"
+    qualityUrl:
+      text: "Kde zveřejňujete problémy s kvalitou těchto dat?"
+      text_as_statement: "Dokumentace kvality dat"
+      help_text: "URL, na kterém se uživatelé dozví podrobnosti o kvalitě vašich dat. Každý chápe, že určitá chybovost je nevyhnutelná, ať už třeba kvůli selhání techniky nebo výpadkům při převodech formátů. Řekněte narovinu, nakolik se dá na kvalitu vašich dat spoléhat."
+      answers:
+        a_1:
+          placeholder: "URL dokumentace"
+    qualityControlUrl:
+      text: "Kde máte popsaný proces řízení kvality dat?"
+      text_as_statement: "Systém řízení kvality"
+      help_text: "Uveďte adresu, na které se uživatelé dozví o průběžných automatických i ručních kontrolách vašich dat. Dáváte tím najevo, že berete kvalitu vážně, a motivujete uživatele ke hlášení chyb, které pomáhá všem ostatním."
+      answers:
+        a_1:
+          placeholder: "URL dokumentace"
+    backups:
+      text: "Děláte offsite zálohy?"
+      text_as_statement: "Zálohování dat"
+      help_text: "Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "data jsou zálohována offsite"
+    slaUrl:
+      text: "Kde je popsána garantovaná úroveň dostupnosti služby?"
+      text_as_statement: "Dostupnost služby"
+      help_text: "Uveďte URL k dokumentu, který popisuje vámi garantovanou úroveň dostupnosti služby. Můžete například uvést, že garantujete dostupnost 99,5 %, nebo že dostupnost služeb nijak nezaručujete."
+      answers:
+        a_1:
+          placeholder: "URL dokumentu"
+    statusUrl:
+      text: "Kde popisujete aktuální stav vaší služby?"
+      text_as_statement: "Aktuální stav služby"
+      help_text: "Uveďte URL stránky, která uživatele informuje o aktuálním stavu služby, včetně případných výpadků."
+      answers:
+        a_1:
+          placeholder: "URL stavové stránky"
+    onGoingAvailability:
+      text: "Jak dlouho budou data k dispozici?"
+      text_as_statement: "Dlouhodobá dostupnost dat"
+      answers:
+        experimental:
+          text: "poskytování dat může být kdykoli ukončeno"
+          text_as_statement: "bez záruk, mohou kdykoliv zmizet"
+        short:
+          text: "očekává se, že budou k dispozici aspoň rok"
+          text_as_statement: "data budou k dispozici aspoň jeden rok"
+        medium:
+          text: "očekává se, že budou k dispozici několik let"
+          text_as_statement: "data budou k dispozici několik let"
+        long:
+          text: "patří do našeho běžného provozu, budou k dispozici dlouho"
+          text_as_statement: "data by měla být k dispozici řadu let"
+    # Technické informace
+    datasetUrl:
+      text: "Jaké je URL vaší datové sady?"
+      text_as_statement: "URL datové sady"
+      help_text: "Uveďte URL datové sady. Pro otevřená data by mělo existovat přímé URL, aby je uživatelé mohli snadno použít a odkazovat na ně."
+      answers:
+        a_1:
+          placeholder: "URL datové sady"
+    versionManagement:
+      text: "Jakým způsobem publikujete aktualizace datové sady?"
+      answers:
+        current:
+          text: "URL zůstává stejné, data na něm se mění"
+          help_text: "Tuto možnost vyberte, pokud je aktuální verze dat vždy k přímému stažení na stejném URL."
+        template:
+          text: "URL se s každou aktualizací mění podle pevného vzoru"
+          help_text: "Tuto možnost vyberte, pokud se URL s každým vydáním mění podle jasného vzoru, který obsahuje datum vydání (například „2013-04“). Uživatelé podle toho zjistí, jak často data aktualizujete, a mohou si snadno naskriptovat stahování nových vydání."
+        list:
+          text: "publikujeme seznam souborů ke stažení"
+          help_text: "Tuto možnost vyberte, pokud máte webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivá vydání datové sady. Uživatelé tak snadno poznají, jak často data aktualizujete, a mohou si jejich stahování naskriptovat."
+    currentDatasetUrl:
+      text: "Jaké je URL vaší aktuální datové sady?"
+      text_as_statement: "URL aktuální datové sady"
+      help_text: "Uveďte URL posledního vydání datové sady. Obsah na tomto URL by se měl měnit s každým novým vydáním."
+      answers:
+        a_1:
+          placeholder: "URL aktuální datové sady"
+    versionsTemplateUrl:
+      text: "Jaký formát mají URL jednotlivých vydání vaší datové sady?"
+      text_as_statement: "Formát URL"
+      help_text: "Uveďte šablonu, podle které vybíráte URL pro jednotlivá vydání své datové sady. Měnící se části URL můžete vyznačit {takto}, například: http://subjekt.cz/data/mesicne/data-{RR}{MM}.csv."
+      answers:
+        a_1:
+          placeholder: "vzor URL"
+    versionsUrl:
+      text: "Kde je seznam vašich publikovaných datových sad?"
+      text_as_statement: "Seznam publikovaných datových sad"
+      help_text: "Uveďte URL stránky nebo feedu se strojově čitelným seznamem publikovaných datových sad. Pokud má seznam více stránek, uveďte URL první z nich (která by následně měla odkazovat na další)."
+      answers:
+        a_1:
+          placeholder: "URL seznamu"
+    endpointUrl:
+      text: "Jaké je kořenové URL vašeho API?"
+      text_as_statement: "Kořenové URL datového API"
+      help_text: "Uveďte URL, na kterém mohou uživatelské skripty začít pracovat s vaším API."
+      answers:
+        a_1:
+          placeholder: "kořenové URL"
+    dumpManagement:
+      text: "Jak publikujete databázové exporty?"
+      answers:
+        current:
+          text: "na jednom URL, data se pravidelně mění"
+          help_text: "Tuto možnost vyberte, pokud se aktuální export z databáze dá vždy najít na stejném URL."
+        template:
+          text: "URL se s každým exportem mění podle jasného vzoru"
+          help_text: "Tuto možnost vyberte, pokud se URL s každým exportem mění podle jasného vzoru, který obsahuje datum vydání (například „2013-04“). Uživatelé z toho poznají, jak často data aktualizujete, a mohou si jejich stažení snadno naskriptovat."
+        list:
+          text: "publikujeme seznam souborů ke stažení"
+          help_text: "Tuto možnost vyberte, pokud poskytujete webovou stránku nebo feed (například Atom nebo RSS) s odkazy na jednotlivé exporty. Uživatelé z toho poznají, jak často data aktualizujete, a mohou si jejich stažení snadno naskriptovat."
+    currentDumpUrl:
+      text: "Kde je aktuální export z databáze?"
+      text_as_statement: "URL nejnovějšího exportu databáze"
+      help_text: "Uveďte URL nejnovějšího exportu databáze. Obsah na tomto URL by se měl měnit pokaždé, když exportujete novou verzi."
+      answers:
+        a_1:
+          placeholder: "URL exportovaných dat"
+    dumpsTemplateUrl:
+      text: "Jaký formát mají URL jednotlivých exportů?"
+      text_as_statement: "Formát URL"
+      help_text: "Uveďte šablonu, podle které vznikají URL jednotlivých exportů. Měnící se části URL můžete vyznačit {takto}, například: http://firma.cz/data/mesicne/data-{RR}{MM}.csv."
+      answers:
+        a_1:
+          placeholder: "šablona URL"
+    dumpsUrl:
+      text: "Kde publikujete seznam databázových exportů?"
+      text_as_statement: "Seznam exportů z databáze"
+      help_text: "Uveďte URL stránky nebo feedu se strojově čitelným seznamem databázových exportů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další."
+      answers:
+        a_1:
+          placeholder: "URL seznamu"
+    changeFeedUrl:
+      text: "Kde publikujete seznam změn v datech?"
+      text_as_statement: "Seznam změn"
+      help_text: "Uveďte odkaz na stránku nebo feed se strojově čitelným seznamem starších databázových exportů. Pokud má seznam více stránek, uveďte URL první z nich, která by následně měla odkazovat na další."
+      answers:
+        a_1:
+          placeholder: "URL seznamu změn v datech"
+    machineReadable:
+      text: "Jsou data strojově čitelná?"
+      text_as_statement: "Strojová čitelnost"
+      help_text: "I lidé dávají přednost datům, která se dají snadno, rychle a přesně zpracovat počítačem. Například skenovaná kopie tabulky strojově čitelná není, zatímco CSV soubor jednoznačně ano."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "data jsou strojově čitelná"
+    openStandard:
+      text: "Jsou vaše data ve standardizovaném otevřeném formátu?"
+      text_as_statement: "Formát dat"
+      help_text: "Otevřené standardy vznikají férovou, transparentní spoluprací. Může je implementovat kdokoliv, takže bývají dobře podporované a lépe se sdílí. Mezi otevřené formáty patří například XML, CSV nebo JSON."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "standardizovaný, otevřený"
+    dataType:
+      text: "Jaký typ dat publikujete?"
+      answers:
+        documents:
+          text: "lidsky čitelné dokumenty"
+          help_text: "Tuto možnost vyberte, pokud jsou vaše data určena pro přímé využití lidmi. Příkladem jsou třeba firemní předpisy, vědecké a novinové články nebo zápisy z porad. I tyto dokumenty mívají nějakou strukturu, ale vesměs jde převážně o text."
+        statistical:
+          text: "statistické údaje, například počty, průměry nebo podíly"
+          help_text: "Tuto možnost vyberte, pokud jde o statistická nebo obecně číselná data, například počty, průměry nebo podíly. Sem patří například demografické údaje, údaje o dopravě nebo statistiky kriminality."
+        geographic:
+          text: "geografické informace, například body a hranice"
+          help_text: "Tuto možnost vyberte, pokud se vaše data dají vynést na mapu, například jako body, hranice nebo čáry."
+        structured:
+          text: "jiná strukturovaná data"
+          help_text: "Tuto možnost vyberte, pokud publikujete strukturovaná data jiného typu, například události, jízdní řády nebo kontakty."
+    documentFormat:
+      text: "Jaké z následujících vlastností mají vámi publikované dokumenty?"
+      text_as_statement: "Formát dokumentů"
+      answers:
+        semantic:
+          text: "Jsou sémanticky značkované, například pomocí HTML, DocBooku nebo Markdownu."
+          help_text: "Sémantické značkování dělí dokument na logické stavební prvky, jako jsou kapitoly, nadpisy nebo tabulky, takže se s nimi snadno automaticky pracuje – například není problém sestavit seznam tabulek nebo rejstřík. Sémantické značkování také usnadňuje formátování dokumentu podle potřeby."
+          text_as_statement: "sémantické značkování"
+        format:
+          text: "Jsou optimalizované pro zobrazení, například OOXML nebo PDF."
+          help_text: "Tyto formáty se zabývají především vizuální podobou dokumentu, například písmem, barvami a umístěním prvků na stránce. Hodí se pro běžné čtení dokumentu, ale nejsou vhodné pro automatické zpracování a automatizované změny formátování."
+          text_as_statement: "vizuální značkování"
+        unsuitable:
+          text: "Obsahují data nevhodná pro běžný dokument, například tabulky, JSON nebo CSV."
+          help_text: "Pro tato data je lepší zvolit tabulkové nebo strukturované formáty."
+          text_as_statement: "data nevhodná pro dokumenty"
+    statisticalFormat:
+      text: "V jakém formátu jsou vaše statistická data?"
+      text_as_statement: "Formát statistických dat"
+      answers:
+        statistical:
+          text: "Ve formátu přímo určeném pro statistická data, například <a href=\"http://sdmx.org/\">SDMX</a> nebo <a href=\"\">Data Cube</a>."
+          help_text: "Nativní formáty statistických dat jako <a href=\"http://sdmx.org/\">SDMX</a> nebo <a href=\"\">Data Cube</a> umožňují reprezentovat vícerozměrná statistická data ve formě záznamů o jednotlivých pozorováních a k nim přiřazených dimenzích. Každé pozorování může být navíc opatřeno anotací, která poskytuje další kontext."
+          text_as_statement: "nativní statistický"
+        tabular:
+          text: "V tabulkovém formátu, například CSV."
+          help_text: "Tabulkové formáty ukládají statistická data do řádků a sloupců běžné tabulky. Přichází tím o část kontextu z původní statistické hyperkrychle, ale snadno se zpracovávají."
+          text_as_statement: "tabulkový"
+        format:
+          text: "V prezentačním formátu s důrazem na formátování, například Excel."
+          help_text: "V tabulkových procesorech je občas struktura dat vyznačena vizuálně, například pomocí kurzívy nebo tučného písma. Lidem to pomáhá pochopit vztahy mezi jednotlivými částmi dat, ale počítačům se dokumenty značkované pouze tímto způsobem zpracovávají špatně."
+          text_as_statement: "prezentační"
+        unsuitable:
+          text: "Nepříliš vhodném, například Word nebo PDF."
+          help_text: "Zmíněné formáty se k uložení statistických dat příliš nehodí, protože neumí uchovat jejich strukturu."
+          text_as_statement: "nepříliš vhodný, dokumentový"
+    geographicFormat:
+      text: "V jakém formátu jsou vaše geografická data?"
+      text_as_statement: "Formát geografických dat"
+      answers:
+        specific:
+          text: "Ve formátu určeném pro prostorová data, například <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> nebo <a href=\"http://www.geojson.org/\">GeoJSON</a>."
+          help_text: "Tyto formáty přímo pracují s body, čarami a hranicemi, a uchovávají veškerou strukturu, díky které se data dobře zpracovávají automaticky."
+          text_as_statement: "nativní geografický"
+        generic:
+          text: "V obecném strukturovaném formátu, například JSON, XML nebo CSV."
+          help_text: "Každý formát pro ukládání strukturovaných dat může posloužit i pro data prostorová, zvlášť pokud jde jen o uložení bodů."
+          text_as_statement: "obecný strukturovaný"
+        unsuitable:
+          text: "Nepříliš vhodném, například Word nebo PDF."
+          help_text: "Tyto formáty se k uložení geografických dat nehodí, protože v nich nelze reprezentovat potřebnou strukturu dat."
+          text_as_statement: "nepříliš vhodný"
+    structuredFormat:
+      text: "V jakém formátu jsou vaše strukturovaná data?"
+      text_as_statement: "Formát strukturovaných dat"
+      answers:
+        suitable:
+          text: "Ve formátu určeném pro strukturovaná data, například JSON, XML, Turtle nebo CSV."
+          help_text: "Tyto formáty organizují data do vhodné, strojově čitelné podoby. Dají se snadno zpracovat automaticky."
+          text_as_statement: "vhodný, strukturovaný"
+        unsuitable:
+          text: "Nevhodný, prezentačně orientovaný, například Word nebo PDF."
+          help_text: "Tyto formáty se k uložení strukturovaných dat nehodí, jsou orientované spíše na zobrazení dat a špatně se zpracovávají automaticky."
+          text_as_statement: "nevhodný, prezentační"
+    identifiers:
+      text: "Používáte v datech standardní identifikátory?"
+      text_as_statement: "Identifikátory objektů"
+      help_text: "Pokud se data z různých zdrojů odkazují na objekty (například školy, obce, silnice nebo knihy) pomocí stejného standardizovaného identifikátoru (například GUID, DOI, URL nebo ISBN), dají se snadno kombinovat."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "standardizované (GUID, URL, …)"
+    resolvingIds:
+      text: "Dají se podle identifikátorů objektů ve vašich datech dohledat další informace?"
+      text_as_statement: "Navigace pomocí identifikátorů"
+      answers:
+        false:
+          text: "nepodporováno"
+          text_as_statement: ""
+        service:
+          text: "Ano, existuje služba, která podle identifikátoru dohledá další informace."
+          help_text: "Pomocí online služby můžete uživatelům poskytnout další informace k identifikátorům, které se na rozdíl od URL nedají použít přímo (například GUID nebo DOI)."
+          text_as_statement: "prostřednictvím služby"
+        resolvable:
+          text: "Ano, identifikátory jsou URL, takže je stačí otevřít."
+          help_text: "URL jsou užitečné pro počítače i pro lidi. Lidé si mohou URL snadno otevřít ve svém prohlížeči a dohledat tak informace třeba o <a href=\"http://opencorporates.com/companies/gb/08030289\">firmě</a> nebo <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">PSČ</a>. Stejně snadno se k těmto informacím dostane počítač, například ve skriptech."
+          text_as_statement: "snadná, identifikátory jsou URL"
+    resolutionServiceURL:
+      text: "Adresa služby pro dohledávání identifikátorů:"
+      text_as_statement: "Služba pro dohledávání identifikátorů"
+      help_text: "Služba by měla podle zadaného identifikátoru, předaného například v URL, vrátit podrobné informace o příslušném objektu."
+      answers:
+        a_1:
+          placeholder: "URL služby"
+    existingExternalUrls:
+      text: "Existují jinde na webu další informace o objektech, které se vyskytují ve vašich datech?"
+      help_text: "Občas jsou pro objekty z vaší databáze na webu dostupné informace třetích stran. Například když máte v databázi PSČ, dají se k nim dohledat URL na stránkách pošty."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    reliableExternalUrls:
+      text: "Jsou informace poskytované těmito třetími stranami spolehlivé?"
+      help_text: "Pokud jsou k objektům z vaší databáze dostupná URL někde jinde na webu, nakolik jsou tato data kvalitní a spolehlivá? Nabízí jejich vydavatel například certifikát otevřených dat nebo podobnou dokumentaci?"
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    externalUrls:
+      text: "Okazujete na tato cizí URL ve svých datech?"
+      text_as_statement: "Další informační zdroje"
+      help_text: "Pokud to jde, měli byste svá data rozšířit o kvalitní informační URL od třetích stran. Snižujete tím potenciální duplikaci dat a usnadňujete uživatelům kombinování dat z více zdrojů."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "data odkazují na URL z jiných zdrojů"
+    provenance:
+      text: "Publikujete strojově čitelná metadata o původu dat?"
+      text_as_statement: "Informace o původu dat"
+      help_text: "Je dobré zveřejnit, kde jste k datům přišli a jak jste je zpracovávali. Uživatelé pak mohou vašim datům víc věřit, protože vědí, co jste s nimi dělali."
+      answers:
+        a_false:
+          text: ne
+          text_as_statement: ""
+        a_true:
+          text: ano
+          text_as_statement: "strojově čitelné"
+    digitalCertificate:
+      text: "Jak uživatelé mohou ověřit, že data skutečně pochází od vás?"
+      text_as_statement: "Jak ověřit původ dat"
+      help_text: "Když zveřejňujete důležitá data, měli byste uživatelům dát možnost ověřit, že data skutečně pochází od vás – například můžete data digitálně podepsat."
+      answers:
+        a_1:
+          placeholder: "URL k dokumentaci"
+    # Sociální informace
+    documentationMetadata:
+      text: "Jaká metadata publikujete ve strojově čitelné podobě?"
+      text_as_statement: "Strojově čitelná metadata"
+      answers:
+        title:
+          text: "název projektu"
+          text_as_statement: "název projektu"
+        description:
+          text: "popis"
+          text_as_statement: "popis"
+        issued:
+          text: "datum vydání"
+          text_as_statement: "datum vydání"
+        modified:
+          text: "datum poslední aktualizace"
+          text_as_statement: "datum poslední aktualizace"
+        accrualPeriodicity:
+          text: "četnost aktualizací"
+          text_as_statement: "četnost aktualizací"
+        identifier:
+          text: "hlavní URL"
+          text_as_statement: "hlavní URL"
+        landingPage:
+          text: "URL dokumentace"
+          text_as_statement: "URL dokumentace"
+        language:
+          text: "jazyk"
+          text_as_statement: "jazyk"
+        publisher:
+          text: "poskytovatel"
+          text_as_statement: "poskytovatel"
+        spatial:
+          text: "související geografické území"
+          text_as_statement: "související geografické území"
+        temporal:
+          text: "související časové období"
+          text_as_statement: "související časové období"
+        theme:
+          text: "hlavní témata"
+          text_as_statement: "hlavní témata"
+        keyword:
+          text: "klíčová slova"
+          text_as_statement: "klíčová slova"
+        distribution:
+          text: "distribuce"
+          text_as_statement: "distribuce"
+    distributionMetadata:
+      text: "Jaká metadata se dají strojově vyčíst z dokumentace k distribucím vašich dat?"
+      text_as_statement: "Strojově čitelná metadata k distribucím"
+      answers:
+        title:
+          text: "název"
+          text_as_statement: "název"
+        description:
+          text: "popis"
+          text_as_statement: "popis"
+        issued:
+          text: "datum vydání"
+          text_as_statement: "datum vydání"
+        modified:
+          text: "datum poslední změny"
+          text_as_statement: "datum poslední změny"
+        rights:
+          text: "licenční ujednání"
+          text_as_statement: "licenční ujednání"
+        accessURL:
+          text: "URL pro přístup k datům"
+          help_text: "Tato metadata by se měla použít, pokud vaše data nejsou dostupná běžně ke stažení, ale například jako API."
+          text_as_statement: "URL pro přístup k datům"
+        downloadURL:
+          text: "URL datové sady"
+          text_as_statement: "URL datové sady"
+        byteSize:
+          text: "velikost v bytech"
+          text_as_statement: "velikost v bytech"
+        mediaType:
+          text: "typ média"
+          text_as_statement: "typ média"
+    technicalDocumentation:
+      text: "Kde je technická dokumentace dat?"
+      text_as_statement: "Technická dokumentace"
+      answers:
+        a_1:
+          placeholder: "URL technické dokumentace"
+    vocabulary:
+      text: "Používá váš datový formát nějaké schéma?"
+      help_text: "K datům ve formátech typu CSV, JSON, XML nebo Turtle může být přiložené schéma, které popisuje obsah a typ dat v jednotlivých sloupcích nebo klíčích."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    schemaDocumentationUrl:
+      text: "Kde máte dokumentovaná použitá schémata?"
+      text_as_statement: "Dokumentace schémat"
+      answers:
+        a_1:
+          placeholder: "URL k dokumentaci schémat"
+    codelists:
+      text: "Používáte v datech nějaké číselníky?"
+      help_text: "Pokud jsou v datech použity číselníky, například pro geografické oblasti, výdajové kategorie nebo diagnózy nemocí, je vhodné je zdokumentovat."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    codelistDocumentationUrl:
+      text: "Kde je umístěna dokumentace číselníků?"
+      text_as_statement: "Dokumentace číselníků"
+      answers:
+        a_1:
+          placeholder: "URL k dokumentaci číselníků"
+    contactUrl:
+      text: "Jak vás mohou uživatelé dat kontaktovat?"
+      text_as_statement: "Kontakty"
+      help_text: "Uveďte URL s informacemi o tom, jak vás mohou uživatelé dat kontaktovat, kdyby potřebovali s něčím poradit."
+      answers:
+        a_1:
+          placeholder: "kontaktní URL"
+    improvementsContact:
+      text: "Kam mohou uživatelé posílat případné zlepšovací návrhy k systému publikování vašich dat?"
+      text_as_statement: "Zpětná vazba k publikovaným datovým sadám"
+      answers:
+        a_1:
+          placeholder: "kontaktní URL"
+    dataProtectionUrl:
+      text: "Koho mohou uživatelé kontaktovat s dotazy, které se týkají ochrany soukromí a osobních údajů?"
+      text_as_statement: "Dotazy na ochranu soukromí a osobních údajů"
+      answers:
+        a_1:
+          placeholder: "kontaktní URL"
+    socialMedia:
+      text: "Komunikujete s uživateli svých dat prostřednictvím sociálních sítí?"
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    account:
+      text: "Kde vás lidé najdou na sociálních sítích?"
+      text_as_statement: "Profily na sociálních sítích"
+      help_text: "Uveďte URL profilu na nějaké sociální síti, například váš profil na Twitteru nebo Facebooku."
+      answers:
+        a_1:
+          placeholder: "URL profilu na sociální síti"
+    forum:
+      text: "Kde mohou uživatelé o této datové sadě diskutovat?"
+      text_as_statement: "Diskuze"
+      help_text: "Uveďte URL na fórum nebo poštovní konferenci, kde mohou uživatelé o vašich datech diskutovat."
+      answers:
+        a_1:
+          placeholder: "URL diskuzního fóra nebo poštovní konference"
+    correctionReporting:
+      text: "Jak mohou uživatelé nahlásit chyby v datech?"
+      text_as_statement: "Hlášení chyb v datech"
+      help_text: "Uveďte URL, na kterém mohou uživatelé hlásit chyby ve vašich datech."
+      answers:
+        a_1:
+          placeholder: "kontaktní URL"
+    correctionDiscovery:
+      text: "Kde a jak se uživatelé dozví o chybách ve vašich datech?"
+      text_as_statement: "Informace o chybách v datech"
+      help_text: "Uveďte URL, na kterém popisujete, jakým způsobem uživatele informujete o chybách ve svých datech."
+      answers:
+        a_1:
+          placeholder: "informační URL"
+    engagementTeam:
+      text: "Máte někoho, kdo se aktivně stará o komunitu kolem vašich dat?"
+      help_text: "K většímu zapojení uživatelů a využití dat se využívají například sociální sítě, blogy, soutěže nebo hackatony."
+      answers:
+        a_false:
+          text: ne
+        a_true:
+          text: ano
+    engagementTeamUrl:
+      text: "Kdo se o tuto komunitu stará?"
+      text_as_statement: "Komunitní kontakt"
+      answers:
+        a_1:
+          placeholder: "URL komunitního týmu"
+    libraries:
+      text: "Máte nějaký seznam nástrojů pro práci s těmito daty?"
+      text_as_statement: "Nástroje pro práci s těmito daty"
+      help_text: "Uveďte URL, na kterém uživatelé najdou seznam existujících nebo doporučených nástrojů pro práci s vašimi daty."
+      answers:
+        a_1:
+          placeholder: "URL dokumentace"
+  labels:
+    findability:
+      text: "Vyhledávání dat"
+      help_text: "jak se uživatelé o vašich datech dozvědí"
+    accuracy:
+      text: "Aktuálnost dat"
+      help_text: "Jak zajišťujete aktuálnost dat?"
+    quality:
+      text: "Kvalita dat"
+      help_text: "nakolik se vašim datům dá věřit?"
+    guarantees:
+      text: "Garance"
+      help_text: "jaká je očekávaná dostupnost dat?"
+    locations:
+      text: "Umístění"
+      help_text: "kde vaše data najít?"
+    format:
+      text: "Formát"
+      help_text: "jak se s vašimi daty dá pracovat"
+    trust:
+      text: "Důvěryhodnost"
+      help_text: "do jaké míry mohou uživatelé vašim datům důvěřovat"
+    documentation:
+      text: "Dokumentace"
+      help_text: "jak uživatelům vysvětlit kontext a obsah vašich dat"
+    support:
+      text: "Podpora"
+      help_text: "komunikace s lidmi, kteří vaše data používají"
+    services:
+      text: "Služby"
+      help_text: "nástroje pro práci s vašimi daty"
+  # Obecné informace Requirements
+    pilot_1:
+      text: "
+               <strong>Měli byste zveřejnit dokumentaci dat</strong>, aby uživatelé získali lepší představu o jejich obsahu, kontextu a možnostech využití."
+    basic_1:
+      text: "
+               <strong>Aby lidé mohli vaše data využít, je třeba zveřejnit jejich dokumentaci a odkaz na data samotná.</strong>
+            "
+  # Praktické informace Requirements
+    standard_1:
+      text: "
+               <strong>Měli byste na data odkazovat ze svého hlavního webu</strong>, aby je uživatelé lépe našli."
+    standard_2:
+      text: "
+               <strong>Vaše data by měla být snadno k nalezení všude, kde se nabízí je hledat.</strong>
+            "
+    standard_3:
+      text: "
+               <strong>Měli byste na data odkazovat ze svých publikací</strong>, uživatelé se k nim lépe dostanou a budou víc v kontextu."
+    pilot_2:
+      text: "
+                        <strong>Během vydání byste svá data měli opatřit časovým razítkem</strong>, aby se poznalo, k jakému období se vztahují a kdy zastarají."
+    standard_4:
+      text: "
+                        <strong>Pokud vaše data závisí na čase, měli byste je aktualizovat</strong>, aby nezastarala."
+    exemplar_1:
+      text: "
+                        <strong>Publikujte feed změn ve svých datech</strong>, aby uživatelé mohli snadno aktualizovat své kopie."
+    pilot_3:
+      text: "
+                           <strong>Publikujte aspoň jednou měsíčně novou verzi</strong>, aby uživatelé měli aktuální a přesná data."
+    standard_5:
+      text: "
+                           <strong>Publikujte aspoň jednou týdně novou verzi</strong>, aby uživatelé měli aktuální a přesná data."
+    exemplar_2:
+      text: "
+                           <strong>Publikujte aspoň jednou denně novou verzi</strong>, aby uživatelé měli aktuální a přesná data."
+    pilot_4:
+      text: "
+                        <strong>Mezi vytvořením dat a jejich publikováním by měla být přiměřeně krátká prodleva</strong>, menší než je prodleva mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data."
+    standard_6:
+      text: "
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla přiměřeně krátká prodleva</strong>, menší než polovina prodlevy mezi jednotlivými vydáními, aby uživatelé dat měli aktuální a přesná data."
+    exemplar_3:
+      text: "
+                        <strong>Mezi vytvořením dat a jejich zveřejněním by měla být co nejmenší prodleva</strong>, ideálně nulová, aby uživatelé vždy k dispozici aktuální a přesná data."
+    standard_7:
+      text: "
+                  <strong>Měli byste data zpřístupnit také pro stažení</strong>, aby jejich uživatelé nebyli omezeni na přístup přes API."
+    pilot_5:
+      text: "
+                              <strong>Exportujte databázi aspoň jednou měsíčně</strong>, ať mají uživatelé aktuální data."
+    standard_8:
+      text: "
+                              <strong>Exportujte databázi nejpozději týden od provedení změn</strong>, ať uživatelé dlouho nečekají na aktuální data."
+    exemplar_4:
+      text: "
+                              <strong>Exportujte databázi do jednoho dne od provedení změn</strong>, ať mají uživatelé snadný přístup k aktuálním datům."
+    standard_9:
+      text: "
+                     <strong>Opravujte nahlášené chyby</strong>, pomůžete ostatním uživatelům dat."
+    standard_10:
+      text: "
+               <strong>Dokumentujte veřejně kvalitu svých dat</strong>, ať uživatelé vědí, nakolik na ně mohou spoléhat."
+    exemplar_5:
+      text: "
+               <strong>Dokumentujte své procesy pro řízení kvality</strong>, ať uživatelé ví, nakolik mohou vašim datům důvěřovat."
+    standard_11:
+      text: "
+               <strong>Dělejte offsite zálohy svých dat</strong>, abyste o ně v případě nehody nepřišli."
+    standard_12:
+      text: "
+                  <strong>Měli byste uvést, jaká garantovaná úroveň dostupnosti služby</strong>, aby její uživatelé věděli, nakolik se na ni mohou spolehnout."
+    exemplar_6:
+      text: "Nabídněte uživatelům <strong>informační stránku s aktuálním stavem vaší služby</strong>, ať mají přehled o problémech a výpadcích."
+    pilot_6:
+      text: "
+                     <strong>Měli byste se zaručit, že data budou ve stávající podobě k dispozici aspoň jeden rok.</strong>
+                  "
+    standard_13:
+      text: "
+                     <strong>Měli byste zaručit, že data ve stávající podobě budou k dispozici v horizontu několika let.</strong>
+                  "
+    exemplar_7:
+      text: "
+                     <strong>Měli byste zaručit, že data v současné podobě budou k dispozici dlouhodobě.</strong>
+                  "
+  # Technické informace Requirements
+    basic_2:
+      text: "
+                     <strong>Uveďte URL svých dat nebo jejich dokumentace</strong>, aby je uživatelé snadno našli."
+    pilot_7:
+      text: "
+                     <strong>Měli byste uvést přímý odkaz na data samotná</strong>, ať se k nim uživatelé snadno dostanou."
+    standard_14:
+      text: "
+                        <strong>Měli byste mít jedno permantní URL, na kterém uživatelé vždy najdou aktuální verzi dat.</strong>
+                     "
+    pilot_8:
+      text: "
+                        <strong>Každé nové vydání vaší datové sady by mělo mít URL vybrané podle jasné šablony</strong>, aby si je uživatelé mohli snadno stáhnout automaticky."
+    standard_15:
+      text: "
+                        <strong>Měli byste zveřejnit stránku nebo feed se seznamem všech vydaných datových sad</strong>, aby si je uživatelé mohli snadno automaticky stáhnout."
+    basic_3:
+      text: "Uživatelé by měli mít k dispozici jasný způsob, jak se dostat k aktuální verzi vašich dat – ať už půjde o permanentní URL, posloupnost URL stavěných podle jedné šablony, nebo RSS feed."
+    basic_4:
+      text: "Musíte dát k dispozici kořenové URL vašeho datového API nebo URL na dokumentaci, aby je uživatelé našli."
+    standard_16:
+      text: "Měli byste dát k dispozici kořenové URL vašeho datového API nebo URL na dokumentaci, aby je uživatelé našli."
+    standard_17:
+      text: "
+                           <strong>Měli byste uživatelům nabídnout jedno stálé URL, na kterém si stáhnou aktuální export z databáze.</strong>
+                        "
+    exemplar_8:
+      text: "
+                           <strong>URL jednotlivých exportů vybírejte podle jasného vzoru</strong>, ať si je uživatelé mohou stahovat automaticky."
+    exemplar_9:
+      text: "
+                           <strong>Publikujte dokument nebo feed se seznamem všech souborů ke stažení</strong>, ať si je uživatelé mohou snadno automaticky stáhnout."
+    pilot_9:
+      text: "
+               <strong>Měli byste data poskytovat ve strojově čitelné podobě</strong>, aby se dala snadno zpracovat."
+    standard_18:
+      text: "
+               <strong>Měli byste svá data zveřejnit v otevřeném standardizovaném formátu</strong>, aby je ostatní mohli snadno zpracovat pomocí běžně dostupných nástrojů."
+    standard_19:
+      text: "
+                        <strong>Měli byste publikovat sémanticky značkované dokumenty</strong>, aby si je uživatelé mohli snadno přeformátovat a jinak zpracovat."
+    pilot_10:
+      text: "
+                        <strong>Měli byste publikovat dokumenty ve formátu, který se snadno automaticky zpracovává.</strong>
+                     "
+    exemplar_10:
+      text: "
+                        <strong>Statistická data byste měli publikovat ve formátu, který umožňuje reprezentovat jejich vícerozměrnou strukturu</strong> a usnadňuje tak jejich analýzu."
+    standard_20:
+      text: "
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat."
+    pilot_11:
+      text: "
+                        <strong>Tabulková data byste měli zveřejňovat v tabulkovém formátu</strong>, aby se dala snadno analyzovat."
+    exemplar_11:
+      text: "
+                        <strong>Geografická data byste měli zveřejňovat ve specializovaném formátu</strong>, aby je uživatelé mohli snadno zpracovat v geografických aplikacích."
+    pilot_12:
+      text: "
+                        <strong>Prostorová data byste měli zveřejňovat v nějakém strukturovaném formátu</strong>, aby se dala snadno zpracovat."
+    pilot_13:
+      text: "
+                        <strong>Strukturovaná data byste měli zveřejňovat ve vhodném strojově čitelném formátu</strong>, aby se dala snadno zpracovat."
+    standard_21:
+      text: "
+               <strong>Snažte se v datech používat standardní identifikátory</strong>, aby se vaše data dala snadno kombinovat s daty z jiných zdrojů."
+    standard_22:
+      text: "Měli byste poskytnout službu, která uživatelům umožní dohledat podrobné informace k identifikátorům použitým ve vašich datech."
+    exemplar_12:
+      text: "
+                        <strong>K objektům ve svých datech byste měli uvádět také URL</strong>, aby uživatelé mohli snadno najít a sdílet související informace."
+    standard_23:
+      text: "
+                     <strong>Měli byste mít URL, na kterém se podle identifikátorů dají dohledat podrobné informace</strong>, aby se dohledávání dalo snadno automatizovat."
+    exemplar_13:
+      text: "Pokud to jde, <strong>měli byste svá data rozšířit o kvalitní informační URL od třetích stran</strong>. Usnadníte tím kombinování dat z různých zdrojů."
+    exemplar_14:
+      text: "
+               <strong>Měli byste zveřejnit strojově čitelný záznam o původu a zpracování dat</strong>, aby uživatelé věděli, co jste s daty dělali."
+    exemplar_15:
+      text: "
+               <strong>Měli byste uživatelům dát možnost ověřit, že stažená data skutečně pochází od vás.</strong>
+            "
+  # Sociální informace Requirements
+    standard_24:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelný název projektu.</strong>
+                     "
+    standard_25:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelný popis datové sady</strong>, aby uživatelé věděli, co data obsahují."
+    standard_26:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné datum vydání</strong>, aby uživatelé věděli, nakolik jsou data aktuální."
+    standard_27:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné datum poslední aktualizace dat</strong>, aby uživatelé věděli, jestli mají aktuální data."
+    standard_28:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné údaje o četnosti nových vydání</strong>, aby uživatelé věděli, jak často mají očekávat aktualizace dat."
+    standard_29:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné hlavní URL dat</strong>, aby se k nim uživatelé snadno dostali."
+    standard_30:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné hlavní URL k dokumentaci samotné</strong>, aby si uživatelé mohli snadno stáhnout aktuální verzi."
+    standard_31:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné informace o jazyce, ve kterém jsou data napsána</strong>, aby uživatelé věděli, jestli jim budou rozumět."
+    standard_32:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné informace o poskytovateli dat</strong>, aby uživatelé věděli, nakolik jim mohou věřit."
+    standard_33:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné údaje o tom, k jakému zeměpisnému území se data vztahují.</strong>
+                     "
+    standard_34:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelné údaje o časovém úseku, kterého se data týkají.</strong>
+                     "
+    standard_35:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelná hlavní témata</strong>, aby uživatelé zhruba věděli, čeho se data týkají."
+    standard_36:
+      text: "
+                        <strong>Měli byste v dokumentaci uvést strojově čitelná klíčová slova</strong>, aby v nich uživatelé mohli lépe vyhledávat."
+    standard_37:
+      text: "
+                           <strong>Měli byste v dokumentaci uvést strojově čitelný název projektu.</strong>
+                        "
+    standard_38:
+      text: "
+                           <strong>Měli byste v dokumentaci uvést strojově čitelný popis distribuce</strong>, aby uživatelé věděli, co která distribuce obsahuje."
+    standard_39:
+      text: "
+                           <strong>Měli byste v dokumentaci uvést strojově čitelné datum vydání</strong>, aby uživatelé věděli, jak je distribuce stará."
+    standard_40:
+      text: "
+                           <strong>Měli byste v dokumentaci uvést strojově čitelné datum poslední aktualizace</strong>, aby uživatelé věděli, jestli mají aktuální distribuci dat."
+    standard_41:
+      text: "
+                           <strong>Měli byste v dokumentaci uvést strojově čitelný odkaz na licenci, pod kterou data vydáváte</strong>, aby uživatelé věděli, co s nimi mohou provádět."
+    pilot_14:
+      text: "
+               <strong>K datům byste měli poskytnout technickou dokumentaci.</strong>
+            "
+    standard_42:
+      text: "
+                  <strong>Pokud vaše data používají nějaké schéma, měli byste ho dokumentovat.</strong>
+               "
+    standard_43:
+      text: "
+                  <strong>Číselníky použité v datech byste měli dokumentovat</strong>, aby uživatelé věděli, jak mají data interpretovat."
+    pilot_15:
+      text: "
+               <strong>Měli byste uživatelům svých dat poskytnout nějaké kontaktní informace.</strong>
+            "
+    pilot_16:
+      text: "
+               <strong>Měli byste uživatelům dát možnost zasílat připomínky k publikovaným datům a způsobu jejich zveřejňování.</strong>
+            "
+    pilot_17:
+      text: "
+               <strong>Měli byste zveřejnit nějaké kontaktní informace pro ty, kteří budou mít otázky ohledně ochrany soukromí.</strong>
+            "
+    standard_44:
+      text: "
+               <strong>Měli byste s uživateli svých dat komunikovat prostřednictvím sociálních sítí</strong> a zjistit, jak vlastně vaše data používají."
+    standard_45:
+      text: "
+               <strong>Měli byste uživatelům povědět, kde mohou o vašich datech diskutovat</strong> a navzájem si pomáhat."
+    standard_46:
+      text: "
+                  <strong>Měli byste uživatelům vysvětlit, kde a jak mohou hlásit chyby ve vašich datech.</strong>
+               "
+    standard_47:
+      text: "
+                  <strong>Měli byste uživatelům poskytnout poštovní konferenci nebo feed, kde budete oznamovat opravy chyb ve svých datech</strong>, aby všichni mohli včas aktualizovat."
+    exemplar_16:
+      text: "
+               <strong>Měli byste kolem svých dat vystavět komunitu</strong>, abyste uživatele povzbudili k jejich většímu využití."
+    exemplar_17:
+      text: "
+               <strong>Měli byste uživatelům poskytnout seznam softwarových knihovnen a dalších existujících nástrojů</strong> pro rychlou a pohodlnou práci s vašimi daty."
