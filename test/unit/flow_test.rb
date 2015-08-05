@@ -121,8 +121,17 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'text answer has dependency' do
-    xmlstub = Flow.new("gb", "Legal")
-    
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "text_dependencies.xml"))
+    expected = {
+      "null" => {
+        dependency: nil
+      },
+      "not null" => {
+        dependency: "textDependency"
+      }
+    }
+
+    assert_equal flow.questions.first[:answers], expected
   end
 
 
