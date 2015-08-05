@@ -85,14 +85,17 @@ class Flow
         }
       }
     elsif type(question) == "input"
-      {
-        "null" => {
-          dependency: nil
-        },
-        "not null" => {
-          dependency: dependency(question, "filled")
+      d = dependency(question, "filled")
+      unless d.nil?
+        {
+          "null" => {
+            dependency: nil
+          },
+          "not null" => {
+            dependency: dependency(question, "filled")
+          }
         }
-      }
+      end
     elsif question.at_xpath("radioset|checkboxset")
       answers = {}
       question.at_xpath("radioset|checkboxset").xpath("option").each do |option|

@@ -130,8 +130,12 @@ class FlowTest < ActiveSupport::TestCase
         dependency: "textDependency"
       }
     }
-
     assert_equal flow.questions.first[:answers], expected
+  end
+
+  test 'text answer has nil dependency when there is no dependency present' do
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    assert_equal flow.questions.first[:answers], nil
   end
 
 
