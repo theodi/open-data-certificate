@@ -22,24 +22,13 @@ class FlowchartsController < ApplicationController
     # array of string containing a rendered partial
     @levels = {}
 
-    (@questions + @dependencies).each do |q| #what operation is this '+'
+    (@questions + @dependencies).each do |q|
+      # **this method is getting nil when it should be getting raw**
+      #This puts both @questions and @dependencies in one array
       @levels[q[:level]] ||= []
       @levels[q[:level]] << q[:id]
 
     end
-    # binding.pry
   end
 
 end
-
-# potential tests
-# given a particular $?$.en.xml file there should be X no of questions and Y amount of dependencies
-# given @type = caseInsensitiveParse("practical")
-# @questions.count should eql? 28
-# @dependencies.count should eql? 43
-# (both above examples are the ideal case scenario, but then testing this is rendered will be total headfuck)
-
-# is there any scenario where @questions[element][:prerequisites] is nil?
-
-# catching malformed termination
-# and page should contain `finalSection["End"]`
