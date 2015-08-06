@@ -12,6 +12,7 @@ OpenDataCertificate::Application.configure do
 
   config.lograge.enabled = true
   config.lograge.log_format = :logstash
+  config.lograge.ignore_actions = %w[main#ping]
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
