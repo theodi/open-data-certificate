@@ -38,6 +38,10 @@ Before("@survey") do
   builder.parse_file
 end
 
+Before("@stub_survey") do
+  Survey.create(full_title: "United Kingdom", title: "GB", access_code: "gb")
+end
+
 Before("@sidekiq_fake") do
   Sidekiq::Testing.fake!
 end

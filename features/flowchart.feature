@@ -1,4 +1,4 @@
-@survey
+@stub_survey
 
 Feature: ensuring flowchart renders as expected
 
