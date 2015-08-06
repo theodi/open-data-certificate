@@ -34,7 +34,7 @@ Before("@api") do
 end
 
 Before("@survey") do
-  builder = SurveyBuilder.new 'surveys', 'odc_questionnaire.GB.rb'
+  builder = SurveyBuilder.new 'surveys/development', 'odc_questionnaire.UK.rb'
   builder.parse_file
 end
 
