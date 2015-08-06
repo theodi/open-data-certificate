@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+  -->
+<?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
+
+<questionnaire version="1.0" status="final" jurisdiction="GB" xml:lang="en">
+  <group id="legal">
+    <question id="dataTitle">
+      <label>What's this data called?</label>
+      <input placeholder="Data Title" required="required"/>
+      <help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+    </question>
+    <if test="this.dataTitle() !== ''">
+      <question id="textDependency">
+        <label>What's this data called?</label>
+        <input placeholder="Text" required="required"/>
+        <help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+      </question>
+    </if>
+  </group>
+</questionnaire>

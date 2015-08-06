@@ -20,13 +20,13 @@ class FlowTest < ActiveSupport::TestCase
   # create some data structures that test _question > _answer > _dependency and iteration between _answer & _dependency
 
   test 'initialise Flow Object with an absolute path as parameter' do
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "input_field_questions.xml"))
     assert_true xmlstub.present?
   end
 
   test 'number of questions' do
 
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test2.legal.xml"))
     assert_equal xmlstub.questions.count, 0, "question count should be 0"
     # assert_equal (xmlstub.questions.count + xmlstub.dependencies.count), 3, "question count should be 3 with 0 dependencies"
     #puts "questions only"
@@ -35,7 +35,7 @@ class FlowTest < ActiveSupport::TestCase
 
   test 'number of dependencies' do
     # dependencies are <question> blocks within <if> blocks
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test2.legal.xml"))
     xmlstub.dependencies.each do |d|
       puts d[:id]
     end
@@ -47,8 +47,8 @@ class FlowTest < ActiveSupport::TestCase
     # answers will increase for <yesno /> [by 1] <radioset><option ... /radioset> [by n for every <option> entry]
     # <checkboxset> [by n for every <option> entry]
     @ans_count = 0
-    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test2.legal.xml"))
-    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
+    xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test2.legal.xml"))
+    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test.legal.xml"))
     xmlstub.questions.each do |q|
       if q[:answers].present?
         puts q
@@ -66,11 +66,6 @@ class FlowTest < ActiveSupport::TestCase
     assert_equal @ans_count, 0, "answer count should be 0"
   end
 
-  # test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
-  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
-  #   #navigate to a question that has an answer that has a dependency and check
-  #   # that it can't be answered without the dependency and prerequisite being satisfied
-  # end
 
   test 'flowchart halts' do
     # get to a point where flowchart halts and prints end block
@@ -115,7 +110,7 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'text answer has dependency' do
-    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "text_dependencies.xml"))
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'test/fixtures/survey_stubs', "text_dependencies.xml"))
     expected = {
       "null" => {
         dependency: nil
@@ -128,11 +123,11 @@ class FlowTest < ActiveSupport::TestCase
   end
 
   test 'text answer has nil dependency when there is no dependency present' do
-    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'fixtures', "input_field_questions.xml"))
+    flow = Flow.new("gb", "Legal", File.join(Rails.root, 'test/fixtures/survey_stubs', "input_field_questions.xml"))
     assert_equal flow.questions.first[:answers], nil
   end
 
-
+end
   # test 'practical: check that no prerequisites created in questions' do
   #   @practical_flowchart.questions.each do |q|
   #     assert_true q[:prerequisites].eql?(nil), "no prerequisites created in questions"
@@ -180,12 +175,6 @@ class FlowTest < ActiveSupport::TestCase
 
   # end
 
-  def teardown
-    # Do nothing
-  end
-
-
-end
 
 # * for the legal survey these are the labels that have no dependencies with no answer hashes
 # * - they trigger the first if in _dependency.txt.erb
