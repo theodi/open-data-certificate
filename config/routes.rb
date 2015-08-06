@@ -145,6 +145,8 @@ OpenDataCertificate::Application.routes.draw do
   # Flowchart
   get 'flowchart' => 'flowcharts#show'
 
+  get 'status/ping' => 'main#ping'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

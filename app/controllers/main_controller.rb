@@ -1,5 +1,13 @@
 class MainController < ApplicationController
 
+  def ping
+    if ActiveRecord::Base.connection.active?
+      head :ok
+    else
+      head :service_unavailable
+    end
+  end
+
   def home
     @surveys = Survey.available_to_complete
     respond_to do |format|
