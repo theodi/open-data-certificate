@@ -155,6 +155,7 @@ class Flow
   end
 
   def prerequisites(question)
+    # binding.pry
     # question => Nokogiri::XML::Element
     # returns String or nil
     # binding.pry

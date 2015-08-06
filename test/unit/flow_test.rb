@@ -65,18 +65,6 @@ class FlowTest < ActiveSupport::TestCase
     assert_equal @ans_count, 0, "answer count should be 0"
   end
 
-  # test 'prerequisites' do
-  #
-  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test2.legal.xml"))
-  #   assert_equal xmlstub.prerequisites.count, 0, "prerequisite count should be 0"
-  #
-  # end
-
-  # test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
-  #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "test.legal.xml"))
-  #   #navigate to a question that has an answer that has a dependency and check
-  #   # that it can't be answered without the dependency and prerequisite being satisfied
-  # end
 
   test 'flowchart halts' do
     # get to a point where flowchart halts and prints end block
@@ -131,6 +119,24 @@ class FlowTest < ActiveSupport::TestCase
       }
     }
     assert_equal flow.questions.first[:answers], expected
+  end
+
+  test 'all dependencies should have prerequisites' do
+    passing_stub_path = File.join(Rails.root, 'test/fixtures/survey_stubs', "prerequisites.xml")
+    passing_stub = Nokogiri::XML(File.open(passing_stub_path))
+    # passing_stub.xpath("//question").map
+    flow = Flow.new(nil,nil,passing_stub_path)
+    # binding.pry
+    # assert flow.dependencies.first[:prerequisites].present?
+    # to make the above more robust it would be nice to have
+    # iterate over a hash, count occurrences when an attribute is not nil
+    @practical_flowchart.dependencies.each_with_index do |hash, index|
+      assert @practical_flowchart.dependencies[index][:prerequisites].present?, "#{index} failed"
+      # when putting an assert in an enumerable the first false will cause the test to fail
+    end
+    # xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'test/fixtures/survey_stubs', "prerequisites.xml"))
+    # assert_equal xmlstub.prerequisites.count, 0, "prerequisite count should be 0"
+
   end
 
   test 'text answer has nil dependency when there is no dependency present' do
