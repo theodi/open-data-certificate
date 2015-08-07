@@ -65,13 +65,6 @@ class FlowTest < ActiveSupport::TestCase
     assert_equal @ans_count, 0, "answer count should be 0"
   end
 
-  test 'prerequisites' do
-    xmlstub = Flow.new("gb", "Legal")
-    xmlstub.questions.each do |q|
-      xmlstub.prerequisites(q)
-    end
-  end
-
   # test 'answer not rendered unless dependencies and prerequisites have been satisfied' do
   #   xmlstub = Flow.new(nil, nil, File.join(Rails.root, 'fixtures', "test.legal.xml"))
   #   #navigate to a question that has an answer that has a dependency and check
