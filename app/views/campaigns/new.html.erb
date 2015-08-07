@@ -1,7 +1,5 @@
 <% content_for :header_title, "New Campaign" %>
 
-<%#= error_messages_for(@campaign) %>
-
 <%= form_for @campaign, url: campaigns_path, method: :post do |f| %>
 
   <%= hidden_field_tag :version, 2 %>
