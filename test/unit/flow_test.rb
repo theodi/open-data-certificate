@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'flow'
 
 class FlowTest < ActiveSupport::TestCase
 
