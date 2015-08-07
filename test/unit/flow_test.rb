@@ -118,7 +118,7 @@ class FlowTest < ActiveSupport::TestCase
     assert flow.dependencies.first[:prerequisites].present?
   end
 
-  test 'all dependencies should have prerequisites' do
+  test 'all dependencies should have prerequisites; file practical' do
 
     # iterate over a hash, count occurrences when an attribute is not nil
     @practical.dependencies.each_with_index do |hash, index|
@@ -129,10 +129,25 @@ class FlowTest < ActiveSupport::TestCase
 
   end
 
-  test 'no questions hash should have prerequisites' do
+  test 'no questions hash should have prerequisites; file practical' do
     @practical.questions.each_with_index do |hash, index|
       assert @practical.questions[index][:prerequisites].nil?, "#{index} with #{hash[:id]} failed"
       # when putting an assert in an enumerable the first false will cause the test to fail
+    end
+  end
+
+  test 'all dependencies should have prerequisites; file legal' do
+
+    # iterate over a hash, count occurrences when an attribute is not nil
+    @legal.dependencies.each_with_index do |hash, index|
+      assert @legal.dependencies[index][:prerequisites].present?, "#{index} with #{hash[:id]} failed"
+    end
+
+  end
+
+  test 'no questions hash should have prerequisites; file legal' do
+    @legal.questions.each_with_index do |hash, index|
+      assert @legal.questions[index][:prerequisites].nil?, "#{index} with #{hash[:id]} failed"
     end
   end
 
