@@ -1,7 +1,7 @@
 <% content_for :header_title, "Questionnare flowcharts" %>
 
 <form action="" method="get" class="form-inline">
-    <label>
+    <label id>
       Select jurisdiction
       <%= select_tag(:jurisdiction, jurisdiction_options_for_select(@jurisdiction.downcase)) %>
     </label>
@@ -17,13 +17,19 @@
   <div id="standardkey"><span></span> Needed for Standard level</div>
   <div id="exemplarkey"><span></span> Needed for Exemplar level</div>
 </div>
-
+<!--two arguments, the item and its index, for each item in the questions instance variable
+  it is invoked here to create an indexed hash -->
+<!--q and index (the local vars) are passed to the partial as the named vars question and index-->
+<!--depth first search of tree-->
 <div id="flowchart">
+
   <div class="mermaid">
   graph LR
   <% @questions.each_with_index do |q, index| %>
-    <%= render partial: "question.txt", locals: { question: q, index: index } %>
+    <%= question(q, index, @dependencies, @questions) %>
   <% end %>
+
+
   <%= @deps.reverse.join("\r\n").gsub("’", "'") %>
   <% @levels.each do |k, l| %>
     <% unless k.nil? %>

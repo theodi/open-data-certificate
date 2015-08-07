@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	© 2013 Open Data Institute
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
+  -->
+<?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
+
+<questionnaire version="1.0" status="final" jurisdiction="GB" xml:lang="en">
+  <group id="legal">
+  </group>
+</questionnaire>
