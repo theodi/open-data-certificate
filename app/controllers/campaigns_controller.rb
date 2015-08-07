@@ -51,7 +51,7 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = CertificationCampaign.new
+    @campaign = CertificationCampaign.new(jurisdiction: current_user.default_jurisdiction)
   end
 
   def create

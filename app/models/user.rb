@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def default_jurisdiction
+    super || 'gb'
+  end
+
   # name isn't mandatory on signup, so fall back to email
   def identifier
     name.presence || email.split('@').join(' from ')
