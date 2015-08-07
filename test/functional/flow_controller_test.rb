@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'flow'
 
 class FlowchartsControllerTest < ActionController::TestCase
   include Devise::TestHelpers

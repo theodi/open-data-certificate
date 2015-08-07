@@ -1,3 +1,5 @@
+require 'flow'
+
 class FlowchartsController < ApplicationController
 
   def show
