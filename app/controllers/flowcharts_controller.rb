@@ -1,6 +1,3 @@
-require 'flow'
-require 'pry'
-
 class FlowchartsController < ApplicationController
 
   def show
@@ -27,7 +24,6 @@ class FlowchartsController < ApplicationController
       @levels[q[:level]] << q[:id]
 
     end
-    # binding.pry
   end
 
 end

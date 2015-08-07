@@ -1,5 +1,3 @@
-require 'pry'
-
 module FlowchartHelper
 
   # def render_graph(dependencies, questions)
@@ -47,7 +45,6 @@ module FlowchartHelper
     # key: String, the key of any given answers hash element, usualy the ???? tag from a given XML
     # dependencies, should equal instance variable @dependencies, a hash of XML parsed elements
     # questions, should equal instance variable @questions, a hash of XML parsed elements
-    # binding.pry
     output = ""
     if answer[:dependency].nil? && questions[index + 1] != nil
      # the above will execute for any question hashes that have a nil value
@@ -69,7 +66,6 @@ module FlowchartHelper
     # questions, should equal instance variable @questions, a hash of XML parsed elements
 
     output = " #{question[:id]}{\"#{question[:label]}\"}\n"
-    # binding.pry
     dependency = dependencies.find { |d| d[:id] == answer[:dependency] }
     # returns the first entire hash where any element in entire dependencies array matches the String extracted from answer key val hash passed to this function
     # @dependencies is an array of strings with no repetitions
@@ -100,7 +96,6 @@ module FlowchartHelper
   def end_of_dependencies(question, answer, dependency, key, index, questions)
 
     output = "#{question[:id]} --> |\"#{key}\"| #{answer[:dependency]}[\"#{dependency[:label]}\"] \n"
-    # binding.pry
     if !questions[index + 1].nil?
       output += "#{answer[:dependency]}[\"#{dependency[:label]}\"] --> #{questions[index + 1][:id]}[\"#{questions[index + 1][:label]}\"] \n"
     else

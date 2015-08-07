@@ -1,5 +1,3 @@
-require 'pry'
-
 class Flow
 
   # will generate a flow chart based on the path that can be navigated through the
@@ -114,11 +112,9 @@ class Flow
       end
       answers
     end
-    # binding.pry
   end
 
   def label(question)
-    # binding.pry
     CGI.unescapeHTML(question.at_xpath("label").text).gsub("\"", "'")
   end
 
@@ -141,7 +137,7 @@ class Flow
   end
 
   def dependency(question, answer)
-    # binding.pry
+
     # if input
     #   dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() !== ''\")]").at_css("question")
     # end
@@ -151,13 +147,13 @@ class Flow
       dependency = @xml.xpath("//if[contains(@test, \"this.#{question["id"]}() === '#{answer}'\")]").at_css("question")
     end
     dependency["id"] unless dependency.nil?
-    # binding.pry
+
   end
 
   def prerequisites(question)
     # question => Nokogiri::XML::Element
     # returns String or nil
-    # binding.pry
+
     test = question.parent["test"] || question.parent.parent["test"]  # returns a String
     test.scan(/this\.([a-z]+)\(\)/i).map { |s| s[0] } unless test.nil?
     # this regex is scanning for `this.*xmlDependencyMethod*()`
