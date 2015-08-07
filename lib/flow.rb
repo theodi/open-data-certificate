@@ -156,7 +156,7 @@ class Flow
     # returns String or nil
 
     test = question.parent["test"] || question.parent.parent["test"]  # returns a String
-    test.scan(/this\.([a-z]+)\(\)/i).map { |s| s[0] } unless test.nil?
+    test.scan(/this\.([a-z]+)\(?\)?/i).map { |s| s[0] } unless test.nil?
     # this regex is scanning for `this.*xmlDependencyMethod*()`
     # it returns an array of count 1 with a String of the *xmlDependencyMethod*() searched for
   end
