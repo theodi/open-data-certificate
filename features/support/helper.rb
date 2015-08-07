@@ -33,6 +33,11 @@ Before("@api") do
   #FactoryGirl.create(:survey, full_title:'UnitedKingdam', title:'GB', access_code: 'GB', survey_version: 1)
 end
 
+Before("@survey") do
+  builder = SurveyBuilder.new 'surveys', 'odc_questionnaire.GB.rb'
+  builder.parse_file
+end
+
 Before("@sidekiq_fake") do
   Sidekiq::Testing.fake!
 end

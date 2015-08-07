@@ -318,6 +318,7 @@
 				</question>
 			</if>
 			<if test="this.copyrightURL() !== ''">
+				<!-- Machine readable question was here -->
 				<question id="copyrightStatementMetadata" display="The rights statement includes data about">
 					<label>Does your rights statement include machine-readable versions of</label>
 					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
