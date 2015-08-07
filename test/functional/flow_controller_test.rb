@@ -1,28 +1,13 @@
 require 'test_helper'
 
 class FlowchartsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
 
-  # Called before every test method runs. Can be used
-  # to set up fixture information.
-  # def setup
-  #   # Do nothing
-  # end
+  test "it sets defaults" do
+    get 'show'
 
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  test "it initialises" do
-    theflo = FlowchartsController.new
-    assert_not_empty(theflo)
+    assert assigns(:jurisdiction) == "gb"
+    assert assigns(:type) == "Practical"
   end
 
-  # def teardown
-  #   # Do nothing
-  # end
-
-  # Fake test
-  # def test_fail
-  #
-  #   fail('Not implemented')
-  # end
 end
