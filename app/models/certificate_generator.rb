@@ -141,8 +141,10 @@ class CertificateGenerator < ActiveRecord::Base
         user.skip_confirmation_notification!
       end
     end
+  # in case the there was a find or create race
+  rescue ActiveRecord::RecordNotUnique
+    User.find_by_email(contact.email)
   rescue ActiveRecord::RecordInvalid => e
-    # in case the there was a find or create race
     User.find_by_email(contact.email) if e.message =~ /taken/
   end
 
