@@ -14,7 +14,7 @@ end
 task :certificates do
   url = ENV['URL']
   csv = ENV['CSV']
-  user = User.find(ENV['USER_ID'])
+  user = User.find(ENV.fetch('USER_ID'))
   options = {
     user_id: user.id,
     limit: ENV['LIMIT'],
