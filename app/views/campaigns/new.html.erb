@@ -13,14 +13,6 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:limit, "Certificate limit", class: "control-label") %>
-    <div class="controls">
-      <%= f.number_field :limit, min: 0 %>
-      <%= error_message_for(@campaign, :limit) %>
-    </div>
-  </div>
-
-  <div class="control-group">
     <%= f.label(:url, "CKAN atom feed", class: "control-label") %>
     <div class="controls">
       <%= f.text_field :url, class: "span6" %>
@@ -33,6 +25,14 @@
     <div class="controls">
       <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction)) %>
       <%= error_message_for(@campaign, :jurisdiction) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:limit, "Certificate limit (optional)", class: "control-label") %>
+    <div class="controls">
+      <%= f.number_field :limit, min: 0 %>
+      <%= error_message_for(@campaign, :limit) %>
     </div>
   </div>
 
