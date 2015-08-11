@@ -255,11 +255,9 @@ There is an example of adding a translation on [this gist](https://gist.github.c
 ### Running
 
 ```bash
-bundle install
-cp env.example .env
-cp config/database.{example.,}yml
-bundle exec rake db:migrate
-bundle exec rake surveyor:build_changed_survey FILE=surveys/odc_questionnaire.UK.rb
+# this will setup a default admin user (test@example.com) and
+# load the GB survey
+bin/setup
 bundle exec rails s
 
 # to include some other jurisdictions
