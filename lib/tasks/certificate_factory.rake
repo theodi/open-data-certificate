@@ -18,7 +18,7 @@ task :certificates do
   options = {
     user_id: user.id,
     limit: ENV['LIMIT'],
-    jurisdiction: ENV['JURISDICTION'] || 'gb'
+    jurisdiction: ENV.fetch('JURISDICTION'], 'gb')
   }
   if campaign_name = ENV['CAMPAIGN']
     campaign = user.certification_campaigns.where(name: campaign_name).first_or_create(url: url)
