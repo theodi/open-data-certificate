@@ -23,7 +23,7 @@ module CertificateFactory
     def build
       each do |item|
         url = get_link(item)
-        CertificateFactory::Certificate.new(url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction, feed_url: @url).generate
+        CertificateFactory::Certificate.new(url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction).generate
       end
     end
 

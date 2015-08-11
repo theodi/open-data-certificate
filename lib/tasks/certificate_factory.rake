@@ -12,15 +12,21 @@ task :certificate do
 end
 
 task :certificates do
-  user_id = ENV['USER_ID']
-  campaign = ENV['CAMPAIGN']
-  limit = ENV['LIMIT']
-  ENV['JURISDICTION'] ||= "gb"
-  if ENV['URL']
-    url = ENV['URL']
-    CertificateFactory::FactoryRunner.perform_async(feed: url, user_id: user_id, limit: limit, campaign: campaign, jurisdiction: ENV['JURISDICTION'])
+  url = ENV['URL']
+  csv = ENV['CSV']
+  user = User.find(ENV['USER_ID'])
+  options = {
+    user_id: user.id,
+    limit: ENV['LIMIT'],
+    jurisdiction: ENV['JURISDICTION'] || 'gb'
+  }
+  if campaign_name = ENV['CAMPAIGN']
+    campaign = user.certification_campaigns.where(name: campaign_name).first_or_create(url: url)
+    options[:campaign_id] = campaign.id
+  end
+  if url
+    CertificateFactory::FactoryRunner.perform_async(options.merge(feed: url))
   else
-    csv = ENV['CSV']
-    CertificateFactory::CSVFactoryRunner.perform_async(file: csv, user_id: user_id, limit: limit, campaign: campaign, jurisdiction: ENV['JURISDICTION'])
+    CertificateFactory::CSVFactoryRunner.perform_async(options.merge(file: csv))
   end
 end
