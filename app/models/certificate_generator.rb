@@ -94,7 +94,7 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
-    response_set.autocomplete(request["documentationUrl"])
+    response_set.autocomplete(autocomplete_url)
 
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
@@ -156,6 +156,10 @@ class CertificateGenerator < ActiveRecord::Base
 
   def dataset_url
     dataset.api_url
+  end
+
+  def autocomplete_url
+    request["documentationUrl"]
   end
 
   # the dataset parameters from the request, defaults to {}

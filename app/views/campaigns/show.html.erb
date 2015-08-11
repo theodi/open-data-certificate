@@ -85,7 +85,7 @@
           <%= missing_responses(generator, "<br /><br />").html_safe %>
         </td>
       <% else %>
-        <td colspan="5">Processing…</td>
+        <td colspan="5">Processing… <%= link_to generator.autocomplete_url, generator.autocomplete_url %></td>
       <% end %>
     </tr>
   <% end %>
