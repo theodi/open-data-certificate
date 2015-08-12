@@ -125,10 +125,11 @@ Given(/^I run the rake task to create certificates$/) do
 end
 
 Given(/^the campaign is created$/) do
+  campaign = CertificationCampaign.find_by_name(@campaign)
   CertificateFactory::Factory.new("feed"=>@url,
       "user_id"=>@api_user.id,
       "limit"=>@limit,
-      "campaign"=>@campaign,
+      "campaign"=>campaign,
       "jurisdiction"=>"cert-generator").build
 end
 

@@ -125,3 +125,4 @@ gem 'memoist'
 gem 'validate_url'
 gem 'sidekiq'
 gem 'sinatra', :require => nil
+gem 'sidekiq-failures'
