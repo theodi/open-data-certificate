@@ -77,7 +77,7 @@ class CertificationCampaign < ActiveRecord::Base
         user: user,
         certification_campaign: self)
     end
-    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, dataset.try(:id))
+    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, true, dataset.try(:id))
   end
 
   def scheduled_rerun

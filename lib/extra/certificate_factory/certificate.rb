@@ -23,7 +23,7 @@ module CertificateFactory
             user: @user,
             certification_campaign: @campaign)
         end
-        CertificateGeneratorWorker.perform_async(generator.id, @jurisdiction, @existing_dataset.try(:id))
+        CertificateGeneratorWorker.perform_async(generator.id, @jurisdiction, true, @existing_dataset.try(:id))
       end
     end
 
