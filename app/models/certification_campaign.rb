@@ -70,13 +70,14 @@ class CertificationCampaign < ActiveRecord::Base
     @limit.to_i unless @limit.blank?
   end
 
-  def run_generator(request, access_code, dataset)
-    generator = CertificateGenerator.create(
-      request: request,
-      user: user,
-      certification_campaign: self
-    )
-    generator.sidekiq_delay.generate(access_code, true, dataset)
+  def run_generator(request, jurisdiction, dataset)
+    generator = CertificateGenerator.transaction do
+      CertificateGenerator.create!(
+        request: request,
+        user: user,
+        certification_campaign: self)
+    end
+    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, dataset.try(:id))
   end
 
   def scheduled_rerun

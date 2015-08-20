@@ -15,14 +15,15 @@ module CertificateFactory
       if existing_certificate?
         @campaign.increment!(:duplicate_count) if @campaign
       else
-        generator = CertificateGenerator.create(
-          request: {
-            documentationUrl: @url
-          },
-          user: @user,
-          certification_campaign: @campaign
-        )
-        generator.sidekiq_delay.generate(@jurisdiction, @create_user, @existing_dataset)
+        generator = CertificateGenerator.transaction do
+          CertificateGenerator.create(
+            request: {
+              documentationUrl: @url
+            },
+            user: @user,
+            certification_campaign: @campaign)
+        end
+        CertificateGeneratorWorker.perform_async(generator.id, @jurisdiction, @existing_dataset.try(:id))
       end
     end
 
