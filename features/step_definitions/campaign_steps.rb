@@ -34,6 +34,7 @@ end
 
 Given(/^I have a campaign "(.*?)"$/) do |name|
   @campaign = name
+  @certification_campaign = CertificationCampaign.where(user_id: @api_user.id).find_or_create_by_name(name)
 end
 
 Given(/^that campaign has (\d+) certificates?$/) do |num|
@@ -58,7 +59,7 @@ Then(/^the generators should be queued for rerun$/) do
 end
 
 Then(/^a rerun should be scheduled for tomorrow$/) do
-  assert_equal Date.today + 1.day, DateTime.strptime(Sidekiq::Extensions::DelayedModel.jobs.last["at"].to_s, "%s").to_date
+  CertificationCampaignWorker.expects(:perform_in).with(1.day, @certification_campaign.id)
 end
 
 When(/^I should be redirected to the campaign page for "(.*?)"$/) do |campaign|

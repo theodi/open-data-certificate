@@ -82,7 +82,8 @@ class CertificationCampaign < ActiveRecord::Base
 
   def scheduled_rerun
     rerun!
-    self.sidekiq_delay_until(1.day.from_now).scheduled_rerun
+  ensure
+    CertificationCampaignWorker.perform_in(1.day, id)
   end
 
 end
