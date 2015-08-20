@@ -46,13 +46,12 @@ class CertificationCampaign < ActiveRecord::Base
       end
     else
       certificate_generators.each do |c|
-        dataset = Dataset.find(c.dataset.id)
         jurs = if c.survey
           c.survey.access_code
         else
           jurisdiction
         end
-        run_generator(c.request, jurs, dataset)
+        run_generator(c.request, jurs, c.dataset)
       end
     end
   end
