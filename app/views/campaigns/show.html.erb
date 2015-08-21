@@ -91,7 +91,9 @@
   <% end %>
   </tbody>
 </table>
-<%= paginate @generators %>
+<div class='omit-in-print'>
+  <%= paginate @generators %>
+</div>
 
 <div class='omit-in-print'>
   <%= link_to 'Download CSV', format: "csv" %>
