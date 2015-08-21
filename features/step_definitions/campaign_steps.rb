@@ -44,7 +44,6 @@ Given(/^that campaign has (\d+) certificates?$/) do |num|
       Given I want to create a certificate via the API with the URL "http://data.example.com/datasets/#{i}"
       And I apply a campaign "#{@campaign}"
       And I request a certificate via the API
-      And the certificate is created
     }
   end
 end

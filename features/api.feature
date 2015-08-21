@@ -4,6 +4,7 @@ Feature: Open Data Certificate API
   Background:
     Given I want to create a certificate via the API
 
+  @sidekiq_fake
   Scenario: API call returns pending initially
     When I request a certificate via the API
     And I request the status via the API
@@ -15,7 +16,6 @@ Feature: Open Data Certificate API
   Scenario: API call with autocompleting data
     Given my URL autocompletes via DataKitten
     When I request a certificate via the API
-    And the certificate is created
     And I request the results via the API
     Then the API response should return sucessfully
     And my certificate should be published

@@ -18,7 +18,6 @@ Feature: Rerun campaigns
     And the field "publisherUrl" is missing from my metadata
     And my URL autocompletes via DataKitten
     When I request a certificate via the API
-    And the certificate is created
     And I visit the campaign page for "brian"
     When I add the field "publisherUrl" with the value "http://example.com" to my metadata
     And my URL autocompletes via DataKitten

@@ -172,15 +172,17 @@ class DatasetsController < ApplicationController
 
   def create
     jurisdiction, dataset, create_user = params.values_at(:jurisdiction, :dataset, :create_user)
-    generator = CertificateGenerator.create(
-      request: dataset,
-      user: current_user,
-      certification_campaign: campaign
-    )
-    generator.delay.generate(jurisdiction, create_user, params[:existing_dataset])
+    existing_dataset_id = params[:existing_dataset].try(:id)
+    generator = CertificateGenerator.transaction do
+      CertificateGenerator.create(
+        request: dataset,
+        user: current_user,
+        certification_campaign: campaign)
+    end
+    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, create_user, existing_dataset_id)
     render status: :accepted, json: {
       success: "pending",
-      dataset_id: params[:existing_dataset].try(:id),
+      dataset_id: existing_dataset_id,
       dataset_url: status_datasets_url(generator)
     }
   end
