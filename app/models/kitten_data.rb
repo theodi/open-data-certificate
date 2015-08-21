@@ -26,6 +26,8 @@ class KittenData < ActiveRecord::Base
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
   }
 
+  KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
+
   def dataset
     @dataset
   end
@@ -127,8 +129,10 @@ class KittenData < ActiveRecord::Base
     return unless data[:licenses].any?
 
     @fields["publisherRights"] = "yes"
-    @fields["dataLicence"] = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
 
+    data_licence = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
+    
+    @fields["dataLicence"] = data_licence if KNOWN_LICENCES.include? data_licence
     @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
 
     # Settings for ordnance survey licences
