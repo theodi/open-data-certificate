@@ -169,18 +169,18 @@ class KittenDataTest < ActiveSupport::TestCase
     set_minimum_data
 
     assert_equal 'test', kitten_data.data[:title]
-    assert_equal '', kitten_data.data[:description]
+    assert_nil kitten_data.data[:description]
     assert_nil kitten_data.data[:identifier]
     assert_nil kitten_data.data[:landing_page]
     assert_equal [], kitten_data.data[:publishers]
     assert_nil kitten_data.data[:rights]
     assert_equal [], kitten_data.data[:licenses]
-    assert_equal '', kitten_data.data[:update_frequency]
+    assert_nil kitten_data.data[:update_frequency]
     assert_equal [], kitten_data.data[:keywords]
     assert_nil kitten_data.data[:theme]
     assert_nil kitten_data.data[:release_date]
     assert_nil kitten_data.data[:modified_date]
-    assert_kind_of DataKitten::Temporal, kitten_data.data[:temporal_coverage]
+    assert_nil kitten_data.data[:temporal_coverage]
     assert_nil kitten_data.data[:spatial_coverage]
     assert_nil kitten_data.data[:language]
     assert_equal [], kitten_data.data[:distributions]
@@ -348,9 +348,9 @@ class KittenDataTest < ActiveSupport::TestCase
       "distribution",
       "issued",
       "modified",
+      "temporal",
       "spatial",
-      "language",
-      "temporal"
+      "language"
     ]
     
     assert_equal metadata, kitten_data.fields["documentationMetadata"]

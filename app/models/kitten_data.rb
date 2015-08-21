@@ -199,18 +199,17 @@ class KittenData < ActiveRecord::Base
       "distribution" => :distributions,
       "issued" => :release_date,
       "modified" => :modified_date,
+      "temporal" => :temporal_coverage,
       "spatial" => :spatial_coverage,
       "language" => :language
     }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].blank?
+      @fields["documentationMetadata"].push(k) unless data[v].blank?
     end
-
-    @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
   end
 
   def check_frequency
     num_distributions = data[:distributions].length
-    if data[:update_frequency].empty?
+    if data[:update_frequency].blank?
       num_distributions == 1 ? "oneoff" : "collection"
     elsif num_distributions > 1
       "series"
@@ -235,8 +234,8 @@ class KittenData < ActiveRecord::Base
 
     if @dataset && @dataset.supported? && dataset_field(:data_title)
       self.data = {
-        :title             => dataset_field(:data_title, ''),
-        :description       => dataset_field(:description, ''),
+        :title             => dataset_field(:data_title),
+        :description       => dataset_field(:description),
         :identifier        => dataset_field(:identifier),
         :landing_page      => dataset_field(:landing_page),
         :publishers        => dataset_field(:publishers, []),
@@ -244,12 +243,12 @@ class KittenData < ActiveRecord::Base
         :contributors      => dataset_field(:contributors, []),
         :rights            => dataset_field(:rights),
         :licenses          => dataset_field(:licenses, []),
-        :update_frequency  => dataset_field(:update_frequency, ''),
+        :update_frequency  => dataset_field(:update_frequency),
         :keywords          => dataset_field(:keywords, []),
         :theme             => dataset_field(:theme),
         :release_date      => dataset_field(:issued),
         :modified_date     => dataset_field(:modified),
-        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :temporal_coverage => dataset_field(:temporal),
         :spatial_coverage  => dataset_field(:spatial),
         :language          => dataset_field(:language),
         :distributions     => distributions
