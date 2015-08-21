@@ -72,13 +72,22 @@ class CertificationCampaign < ActiveRecord::Base
         user: user,
         certification_campaign: self)
     end
-    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, true, dataset.try(:id))
+    CertificateGeneratorWorker.perform_async(generator.id, determine_jurisdiction, true, dataset.try(:id))
   end
 
   def scheduled_rerun
     rerun!
   ensure
     CertificationCampaignWorker.perform_in(1.day, id)
+  end
+
+  def determine_jurisdiction
+    [
+      jurisdiction.presence,
+      certificate_generators.first.try(:survey).try(:access_code),
+      user.try(:default_jurisdiction).presence,
+      'gb'
+    ].compact.first
   end
 
 end
