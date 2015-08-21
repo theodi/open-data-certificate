@@ -46,13 +46,12 @@ class CertificationCampaign < ActiveRecord::Base
       end
     else
       certificate_generators.each do |c|
-        dataset = Dataset.find(c.dataset.id)
         jurs = if c.survey
           c.survey.access_code
         else
           jurisdiction
         end
-        run_generator(c.request, jurs, dataset)
+        run_generator(c.request, jurs, c.dataset)
       end
     end
   end
@@ -71,18 +70,20 @@ class CertificationCampaign < ActiveRecord::Base
     @limit.to_i unless @limit.blank?
   end
 
-  def run_generator(request, access_code, dataset)
-    generator = CertificateGenerator.create(
-      request: request,
-      user: user,
-      certification_campaign: self
-    )
-    generator.sidekiq_delay.generate(access_code, true, dataset)
+  def run_generator(request, jurisdiction, dataset)
+    generator = CertificateGenerator.transaction do
+      CertificateGenerator.create!(
+        request: request,
+        user: user,
+        certification_campaign: self)
+    end
+    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, true, dataset.try(:id))
   end
 
   def scheduled_rerun
     rerun!
-    self.sidekiq_delay_until(1.day.from_now).scheduled_rerun
+  ensure
+    CertificationCampaignWorker.perform_in(1.day, id)
   end
 
 end

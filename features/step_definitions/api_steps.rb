@@ -41,7 +41,7 @@ end
 Given(/^I request (\d+) certificates with the campaign "(.*?)"$/) do |num, tag|
   num.to_i.times do |i|
     steps %Q{
-      Given I want to create a certificate via the API
+      Given I want to create a certificate via the API with the URL "http://example.com/dataset#{i}"
       And I apply a campaign "#{tag}"
       And I request a certificate via the API
     }
@@ -51,7 +51,6 @@ end
 Given(/^I create a certificate via the API$/) do
   steps %Q{
     When I request a certificate via the API
-    And the certificate is created
     And I request the results via the API
     Then the API response should return sucessfully
   }
@@ -88,7 +87,7 @@ When(/^I request a certificate via the API$/) do
 end
 
 When(/^the certificate is created$/) do
-  generator = CertificateGenerator.all.select { |g| g.request["documentationUrl"] == @documentationURL }.first
+  generator = CertificateGenerator.all.find { |g| g.request["documentationUrl"] == @documentationURL }
   generator.generate(@body[:jurisdiction], @body[:create_user])
 end
 
