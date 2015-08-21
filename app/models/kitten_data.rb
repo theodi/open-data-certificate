@@ -189,13 +189,18 @@ class KittenData < ActiveRecord::Base
     # Does your data documentation contain machine readable documentation for:
     {
       "title" => :title,
-      "description" =>  :description,
+      "description" => :description,
+      "identifier" => :identifier,
+      "landingPage" => :landing_page,
       "accrualPeriodicity" => :update_frequency,
       "publisher" => :publishers,
       "keyword" => :keywords,
+      "theme" => :theme,
       "distribution" => :distributions,
       "issued" => :release_date,
-      "modified" => :modified_date
+      "modified" => :modified_date,
+      "spatial" => :spatial_coverage,
+      "language" => :language
     }.each do |k,v|
         @fields["documentationMetadata"].push(k) unless data[v].blank?
     end
@@ -232,6 +237,8 @@ class KittenData < ActiveRecord::Base
       self.data = {
         :title             => dataset_field(:data_title, ''),
         :description       => dataset_field(:description, ''),
+        :identifier        => dataset_field(:identifier),
+        :landing_page      => dataset_field(:landing_page),
         :publishers        => dataset_field(:publishers, []),
         :maintainers       => dataset_field(:maintainers, []),
         :contributors      => dataset_field(:contributors, []),
@@ -239,9 +246,12 @@ class KittenData < ActiveRecord::Base
         :licenses          => dataset_field(:licenses, []),
         :update_frequency  => dataset_field(:update_frequency, ''),
         :keywords          => dataset_field(:keywords, []),
+        :theme             => dataset_field(:theme),
         :release_date      => dataset_field(:issued),
         :modified_date     => dataset_field(:modified),
         :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :spatial_coverage  => dataset_field(:spatial),
+        :language          => dataset_field(:language),
         :distributions     => distributions
       }
     else

@@ -48,18 +48,34 @@ class KittenDataTest < ActiveSupport::TestCase
       t.start = Date.new
       t.end = Date.new
     end
+    
+    spatial = {
+      "type" => "Polygon",
+      "coordinates" => [[
+        [0,0],
+        [0,1],
+        [1,1],
+        [1,0],
+        [0,0]
+      ]]
+    }
 
     data = {
       data_title: 'test_title',
       description: 'test_description',
+      identifier: 'test',
+      landing_page: 'http://example.org/dataset',
       publishers: [publisher],
       rights: rights,
       licenses: [license],
       update_frequency: 'test_frequency',
       keywords: ['test', 'unit'],
+      theme: 'test',
       issued: Date.new,
       modified: Date.new,
       temporal: temporal,
+      spatial: spatial,
+      language: 'en-us',
       distributions: [distribution]
     }
 
@@ -82,14 +98,19 @@ class KittenDataTest < ActiveSupport::TestCase
     data = {
       data_title: 'test',
       description: nil,
+      identifier: nil,
+      landing_page: nil,
       publishers: nil,
       rights: nil,
       licenses: nil,
       update_frequency: nil,
       keywords: nil,
+      theme: nil,
       issued: nil,
       modified: nil,
       temporal: nil,
+      spatial: nil,
+      language: nil,
       distributions: nil
     }
 
@@ -125,6 +146,8 @@ class KittenDataTest < ActiveSupport::TestCase
 
     assert_equal 'test_title', kitten_data.data[:title]
     assert_equal 'test_description', kitten_data.data[:description]
+    assert_equal 'test', kitten_data.data[:identifier]
+    assert_equal 'http://example.org/dataset', kitten_data.data[:landing_page]
     assert_equal 1, kitten_data.data[:publishers].length
     assert_kind_of DataKitten::Agent, kitten_data.data[:publishers][0]
     assert_kind_of DataKitten::Rights, kitten_data.data[:rights]
@@ -132,9 +155,13 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_kind_of DataKitten::License, kitten_data.data[:licenses][0]
     assert_equal 'test_frequency', kitten_data.data[:update_frequency]
     assert_equal ['test', 'unit'], kitten_data.data[:keywords]
+    assert_equal 'test', kitten_data.data[:theme]
     assert_kind_of Date, kitten_data.data[:release_date]
     assert_kind_of Date, kitten_data.data[:modified_date]
     assert_kind_of DataKitten::Temporal, kitten_data.data[:temporal_coverage]
+    assert_equal 'Polygon', kitten_data.data[:spatial_coverage]['type']
+    assert_equal [[0,0], [0,1], [1,1], [1,0], [0,0]], kitten_data.data[:spatial_coverage]['coordinates'][0]
+    assert_equal 'en-us', kitten_data.data[:language]
     assert_equal distributions, kitten_data.data[:distributions]
   end
 
@@ -143,14 +170,19 @@ class KittenDataTest < ActiveSupport::TestCase
 
     assert_equal 'test', kitten_data.data[:title]
     assert_equal '', kitten_data.data[:description]
+    assert_nil kitten_data.data[:identifier]
+    assert_nil kitten_data.data[:landing_page]
     assert_equal [], kitten_data.data[:publishers]
     assert_nil kitten_data.data[:rights]
     assert_equal [], kitten_data.data[:licenses]
     assert_equal '', kitten_data.data[:update_frequency]
     assert_equal [], kitten_data.data[:keywords]
+    assert_nil kitten_data.data[:theme]
     assert_nil kitten_data.data[:release_date]
     assert_nil kitten_data.data[:modified_date]
     assert_kind_of DataKitten::Temporal, kitten_data.data[:temporal_coverage]
+    assert_nil kitten_data.data[:spatial_coverage]
+    assert_nil kitten_data.data[:language]
     assert_equal [], kitten_data.data[:distributions]
   end
 
@@ -307,15 +339,20 @@ class KittenDataTest < ActiveSupport::TestCase
     metadata = [
       "title",
       "description",
+      "identifier",
+      "landingPage",
       "accrualPeriodicity",
       "publisher",
       "keyword",
+      "theme",
       "distribution",
       "issued",
       "modified",
+      "spatial",
+      "language",
       "temporal"
     ]
-
+    
     assert_equal metadata, kitten_data.fields["documentationMetadata"]
   end
 
