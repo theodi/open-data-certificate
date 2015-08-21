@@ -152,6 +152,10 @@ class CertificateGenerator < ActiveRecord::Base
     certificate.try(:published?)
   end
 
+  def valid_urls?
+    response_set.all_urls_resolve?
+  end
+
   def response_errors
     response_set.response_errors
   end

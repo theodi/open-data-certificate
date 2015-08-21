@@ -48,6 +48,9 @@
       User
     </th>
     <th>
+      URLs valid
+    </th>
+    <th>
       Missing responses
     </th>
   </tr>
@@ -80,6 +83,9 @@
         <% end %>
         <td class='omit-in-print'>
             <%= generator.dataset.user_email %>
+        </td>
+        <td>
+          <%= boolean_mark(generator.valid_urls?) %>
         </td>
         <td>
           <%= missing_responses(generator, "<br /><br />").html_safe %>
