@@ -33,12 +33,17 @@ class KittenData < ActiveRecord::Base
   def distributions
     dataset_field(:distributions, []).map { |distribution|
       {
-        :title       => distribution.title,
-        :description => distribution.description,
-        :access_url  => distribution.access_url,
-        :extension   => distribution.format.try(:extension),
-        :open        => distribution.format.try(:open?),
-        :structured  => distribution.format.try(:structured?)
+        :title        => distribution.title,
+        :description  => distribution.description,
+        :issued       => distribution.issued,
+        :modified     => distribution.modified,
+        :access_url   => distribution.access_url,
+        :download_url => distribution.download_url,
+        :byte_size    => distribution.byte_size,
+        :media_type   => distribution.media_type,
+        :extension    => distribution.format.try(:extension),
+        :open         => distribution.format.try(:open?),
+        :structured   => distribution.format.try(:structured?)
       }
     }
   end
@@ -211,7 +216,7 @@ class KittenData < ActiveRecord::Base
 
   def set_dataset_url
     if check_frequency == "oneoff"
-      @fields["datasetUrl"] = data[:distributions][0][:access_url]
+      @fields["datasetUrl"] = data[:distributions][0][:download_url]
     end
   end
 

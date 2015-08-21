@@ -16,7 +16,12 @@ class KittenDataTest < ActiveSupport::TestCase
     distribution.tap do |d|
       d.title = 'test_title'
       d.description = 'test_description'
-      d.access_url = 'http://example.com/distribution'
+      d.issued = Date.parse('2010-01-01')
+      d.modified = Date.parse('2010-01-02')
+      d.access_url = 'http://example.com/dataset'
+      d.download_url = 'http://example.com/distribution'
+      d.byte_size = 1000
+      d.media_type = 'application/json'
       d.extension = 'txt'
       d.format = DataKitten::DistributionFormat.new(d)
     end
@@ -107,7 +112,12 @@ class KittenDataTest < ActiveSupport::TestCase
     distributions = [{
       title: 'test_title',
       description: 'test_description',
-      access_url: 'http://example.com/distribution',
+      issued: Date.parse('2010-01-01'),
+      modified: Date.parse('2010-01-02'),
+      access_url: 'http://example.com/dataset',
+      download_url: 'http://example.com/distribution',
+      byte_size: 1000,
+      media_type: 'application/json',
       open: nil,
       extension: :txt,
       structured: nil
