@@ -510,6 +510,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def autocomplete(url)
+    return unless url.present?
     update_responses({documentationUrl: url})
     responses.update_all(autocompleted: false)
     update_attribute('kitten_data', nil)
