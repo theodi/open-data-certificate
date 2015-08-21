@@ -34,7 +34,7 @@
               %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
             .span3.save-button
               - if user_signed_in?
-                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish, "data-btn-loading" => t('surveyor.saving_questionnaire')}
+                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish}
                   %i.icon-loading.icon-spin.icon-refresh.icon-large
                   %span= t('surveyor.click_here_to_finish')
               - else
