@@ -514,9 +514,7 @@ class ResponseSet < ActiveRecord::Base
     responses.update_all(autocompleted: false)
     update_attribute('kitten_data', nil)
 
-    code = resolve_url(url)
-
-    if code == 200
+    if ODIBot.new(url).valid?
       create_kitten_data(url: url)
       update_responses(kitten_data.fields)
     end
@@ -528,12 +526,6 @@ class ResponseSet < ActiveRecord::Base
 
   def description
     kitten_data.get(:description) if has_kitten_data?
-  end
-
-  def resolve_url(url)
-    if url =~ /^#{URI::regexp}$/
-      ODIBot.new(url).response_code rescue nil
-    end
   end
 
   # finds the string value for a given response_identifier
