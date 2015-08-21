@@ -125,16 +125,12 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def check_mark
-    "&check;".html_safe
-  end
-
-  def cross_mark
-    "&cross;".html_safe
+  def icon_mark(name)
+    content_tag(:i, '', class: "icon-#{name}")
   end
 
   def boolean_mark(value)
-    value ? check_mark : cross_mark
+    value ? icon_mark("ok") : icon_mark("remove")
   end
 
   def atom_datetime(value)

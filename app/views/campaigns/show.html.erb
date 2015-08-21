@@ -31,9 +31,6 @@
   <thead>
   <tr>
     <th>
-      Success
-    </th>
-    <th>
       Published
     </th>
     <th>
@@ -58,11 +55,8 @@
   <tbody>
   <% @generators.each do |generator| %>
     <tr>
-      <td>
-        <%= boolean_mark(generator.completed?) %>
-      </td>
-      <td>
-        <%= boolean_mark(generator.published?) %>
+      <td style="text-align: center">
+        <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
       </td>
       <% if generator.completed? %>
         <td>
