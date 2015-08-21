@@ -127,7 +127,7 @@ class KittenData < ActiveRecord::Base
     return unless data[:licenses].any?
 
     @fields["publisherRights"] = "yes"
-    @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
+    @fields["dataLicence"] = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
 
     @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
 

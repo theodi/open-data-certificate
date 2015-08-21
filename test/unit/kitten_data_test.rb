@@ -41,7 +41,10 @@ class KittenDataTest < ActiveSupport::TestCase
     end
 
     license = DataKitten::License.new({})
-    license.uri = "http://opendatacommons.org/licenses/by/"
+    license.tap do |l|
+      l.uri = "http://opendatacommons.org/licenses/by/"
+      l.abbr = "odc-by"
+    end
 
     temporal = DataKitten::Temporal.new({})
     temporal.tap do |t|
@@ -252,6 +255,7 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'OGL content license is set to match data license' do
     license = DataKitten::License.new({})
     license.uri = "http://reference.data.gov.uk/id/open-government-licence"
+    license.abbr = "ogl-uk"
     DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
 
