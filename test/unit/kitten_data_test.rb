@@ -228,6 +228,10 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'service', kitten_data.fields["releaseType"]
   end
 
+  test 'Is timestamped if temporal is specified' do
+    assert_equal "timestamped", kitten_data.fields["timeSensitive"]
+  end
+
   test 'Rights fields are set correctly' do
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal 'http://example.com/rights', kitten_data.fields["copyrightURL"]
