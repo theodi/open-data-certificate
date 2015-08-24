@@ -39,6 +39,7 @@ env:
     - ODC_REDIS_SERVER_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
+    - COVERALLS_PARALLEL=true
   matrix:
     - TESTSUITE=test:units
     - TESTSUITE=test:functionals
