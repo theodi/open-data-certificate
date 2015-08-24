@@ -26,31 +26,21 @@ class KittenDataTest < ActiveSupport::TestCase
       d.format = DataKitten::DistributionFormat.new(d)
     end
 
-    publisher = DataKitten::Agent.new({})
-    publisher.tap do |p|
-      p.name = 'test_name'
-      p.homepage = 'http://example.com/homepage'
-      p.mbox = 'test_contact'
-    end
+    publisher = DataKitten::Agent.new(
+      name: 'test_name',
+      homepage: 'http://example.com/homepage',
+      mbox: 'test_contact'
+    )
 
-    rights = DataKitten::Rights.new({})
-    rights.tap do |r|
-      r.uri = 'http://example.com/rights'
-      r.dataLicense = "http://opendatacommons.org/licenses/pddl/"
-      r.contentLicense = "http://creativecommons.org/licenses/by/2.0/uk/"
-    end
+    rights = DataKitten::Rights.new(
+      uri: 'http://example.com/rights', 
+      dataLicense: "http://opendatacommons.org/licenses/pddl/", 
+      contentLicense: "http://creativecommons.org/licenses/by/2.0/uk/"
+    )
 
-    license = DataKitten::License.new({})
-    license.tap do |l|
-      l.uri = "http://opendatacommons.org/licenses/by/"
-      l.abbr = "odc-by"
-    end
+    license = DataKitten::License.new(uri: "http://opendatacommons.org/licenses/by/")
 
-    temporal = DataKitten::Temporal.new({})
-    temporal.tap do |t|
-      t.start = Date.new
-      t.end = Date.new
-    end
+    temporal = DataKitten::Temporal.new(start: Date.new, end: Date.new)
     
     spatial = {
       "type" => "Polygon",
