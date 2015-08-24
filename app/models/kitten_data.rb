@@ -229,6 +229,12 @@ class KittenData < ActiveRecord::Base
       @fields["datasetUrl"] = data[:distributions][0][:download_url]
     end
   end
+  
+  def set_time_sensitive
+    if data[:temporal_coverage].present?
+      @fields["timeSensitive"] = "timestamped"
+    end
+  end
 
   private
   def dataset_field(method, default = nil)
