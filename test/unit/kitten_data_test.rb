@@ -253,6 +253,28 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "ogl_uk", kitten_data.fields["dataLicence"]
     assert_equal "ogl_uk", kitten_data.fields["contentLicence"]
   end
+  
+  test 'If the data license covers content, set it also as a content license' do
+    license = DataKitten::License.new({})
+    license.abbr = "cc-zero"
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
+    DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
+    
+    assert_equal "yes", kitten_data.fields["publisherRights"]
+    assert_equal "cc_zero", kitten_data.fields["dataLicence"]
+    assert_equal "cc_zero", kitten_data.fields["contentLicence"]
+  end
+
+  test 'If the data license does not cover content, do not set content license' do
+    license = DataKitten::License.new({})
+    license.abbr = "odc-pddl"
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
+    DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
+    
+    assert_equal "yes", kitten_data.fields["publisherRights"]
+    assert_equal "odc_pddl", kitten_data.fields["dataLicence"]
+    assert_nil kitten_data.fields["contentLicence"]
+  end
 
   test 'Ordinance Survey license fields are set correctly' do
     license = DataKitten::License.new({})

@@ -27,6 +27,7 @@ class KittenData < ActiveRecord::Base
   }
 
   KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
+  KNOWN_CONTENT_LICENCES = ["cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
 
   def dataset
     @dataset
@@ -133,7 +134,7 @@ class KittenData < ActiveRecord::Base
     data_licence = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
     
     @fields["dataLicence"] = data_licence if KNOWN_LICENCES.include? data_licence
-    @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
+    @fields["contentLicence"] = data_licence if KNOWN_CONTENT_LICENCES.include? data_licence
 
     # Settings for ordnance survey licences
     if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
