@@ -1,6 +1,10 @@
 <% content_for :header_title, "Certification campaign: #{@campaign.name}" %>
 
 <h3><%= report_heading(@certificate_level) %></h3>
+<p>
+Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
+</p>
+
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
   <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
@@ -31,9 +35,6 @@
   <thead>
   <tr>
     <th>
-      Success
-    </th>
-    <th>
       Published
     </th>
     <th>
@@ -48,6 +49,9 @@
       User
     </th>
     <th>
+      URLs valid
+    </th>
+    <th>
       Missing responses
     </th>
   </tr>
@@ -55,11 +59,8 @@
   <tbody>
   <% @generators.each do |generator| %>
     <tr>
-      <td>
-        <%= boolean_mark(generator.completed?) %>
-      </td>
-      <td>
-        <%= boolean_mark(generator.published?) %>
+      <td style="text-align: center">
+        <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
       </td>
       <% if generator.completed? %>
         <td>
@@ -82,6 +83,9 @@
             <%= generator.dataset.user_email %>
         </td>
         <td>
+          <%= boolean_mark(generator.valid_urls?) %>
+        </td>
+        <td>
           <%= missing_responses(generator, "<br /><br />").html_safe %>
         </td>
       <% else %>
@@ -91,7 +95,9 @@
   <% end %>
   </tbody>
 </table>
-<%= paginate @generators %>
+<div class='omit-in-print'>
+  <%= paginate @generators %>
+</div>
 
 <div class='omit-in-print'>
   <%= link_to 'Download CSV', format: "csv" %>

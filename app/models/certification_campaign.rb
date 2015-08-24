@@ -42,16 +42,11 @@ class CertificationCampaign < ActiveRecord::Base
         url = factory.get_link(item)
         existing_generator = certificate_generators.select { |g| g.request["documentationUrl"] == url }.first
         request = existing_generator.try(:request) || build_request(url)
-        run_generator(request, certificate_generators.first.survey.access_code, existing_generator.try(:dataset))
+        run_generator(request, existing_generator.try(:dataset))
       end
     else
       certificate_generators.each do |c|
-        jurs = if c.survey
-          c.survey.access_code
-        else
-          jurisdiction
-        end
-        run_generator(c.request, jurs, c.dataset)
+        run_generator(c.request, c.dataset)
       end
     end
   end
@@ -70,20 +65,29 @@ class CertificationCampaign < ActiveRecord::Base
     @limit.to_i unless @limit.blank?
   end
 
-  def run_generator(request, jurisdiction, dataset)
+  def run_generator(request, dataset)
     generator = CertificateGenerator.transaction do
       CertificateGenerator.create!(
         request: request,
         user: user,
         certification_campaign: self)
     end
-    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, true, dataset.try(:id))
+    CertificateGeneratorWorker.perform_async(generator.id, determine_jurisdiction, true, dataset.try(:id))
   end
 
   def scheduled_rerun
     rerun!
   ensure
     CertificationCampaignWorker.perform_in(1.day, id)
+  end
+
+  def determine_jurisdiction
+    [
+      jurisdiction.presence,
+      certificate_generators.first.try(:survey).try(:access_code),
+      user.try(:default_jurisdiction).presence,
+      'gb'
+    ].compact.first
   end
 
 end

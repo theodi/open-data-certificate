@@ -54,6 +54,11 @@ class ODIBotTest < ActiveSupport::TestCase
     assert bot.is_http_url?
   end
 
+  test "adapts unsafe characters to escaped equivlent" do
+    bot = ODIBot.new("http://example.org/dataset/dataset .csv")
+    assert_equal URI.parse("http://example.org/dataset/dataset%20.csv"), bot.uri
+  end
+
   test "exception raising uri is invalid" do
     bot = ODIBot.new("!:!:")
     refute bot.is_http_url?

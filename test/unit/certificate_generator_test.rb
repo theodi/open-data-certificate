@@ -286,7 +286,7 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
   end
 
   test "latest generator gets tagged as such" do
-    campaign = CertificationCampaign.create(name: "foobar")
+    campaign = CertificationCampaign.create(name: "foobar", jurisdiction: "cert-generator")
 
     dataset = {
       dataTitle: 'The title',
