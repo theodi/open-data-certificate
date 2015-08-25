@@ -244,6 +244,18 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "changing", kitten_data.fields["serviceType"]
   end
 
+  test 'Technical documentation is detected when there is a documentation resource' do
+    source = {
+      "resources" => [{ 
+        "url" => "http://example.org/docs",
+        "resource_type" => "documentation"
+      }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "http://example.org/docs", kitten_data.fields["technicalDocumentation"]
+  end
+
   test 'Is timestamped if temporal is specified' do
     assert_equal "timestamped", kitten_data.fields["timeSensitive"]
   end

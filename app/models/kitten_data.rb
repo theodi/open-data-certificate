@@ -264,6 +264,11 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_documentation
+    resource = original_resources.find { |r| r["resource_type"] == "documentation" }
+    @fields["technicalDocumentation"] = resource["url"] unless resource.blank?
+  end
+
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
