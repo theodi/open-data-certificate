@@ -236,6 +236,13 @@ class KittenDataTest < ActiveSupport::TestCase
   
     assert_equal 'service', kitten_data.fields["releaseType"]
   end
+  
+  test 'Service type is detected as changing when update frequency is specified' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
+    DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')
+    
+    assert_equal "changing", kitten_data.fields["serviceType"]
+  end
 
   test 'Is timestamped if temporal is specified' do
     assert_equal "timestamped", kitten_data.fields["timeSensitive"]
