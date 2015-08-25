@@ -202,6 +202,15 @@ class KittenData < ActiveRecord::Base
     @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
   end
 
+  def set_data_gov_uk_assumptions
+    return unless hostname == "data.gov.uk"
+    
+    if source["extras"]["sla"] == "true"
+      @fields["slaUrl"] = url
+      @fields["onGoingAvailability"] = "medium"
+    end
+  end
+
   def set_structured_open
     # Checks if any of the distributions are machine readable or open
     @fields["machineReadable"] = "true" if data[:distributions].detect{|d| d[:structured] }
