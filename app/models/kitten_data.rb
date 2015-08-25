@@ -197,6 +197,7 @@ class KittenData < ActiveRecord::Base
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["onWebsite"] = "true"
+    @fields["contactUrl"] = url
     @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
