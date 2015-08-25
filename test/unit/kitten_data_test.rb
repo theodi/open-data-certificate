@@ -313,6 +313,11 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'data.gov.uk assumptions are applied' do
+    source = {
+      "extras" => { "sla" => "true" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+
     stub_request(:get, 'http://data.gov.uk/some_crazy_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
 
@@ -328,6 +333,8 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
+    assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
+    assert_equal "medium", kitten_data.fields["onGoingAvailability"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do
