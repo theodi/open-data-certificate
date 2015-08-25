@@ -171,6 +171,11 @@ class KittenData < ActiveRecord::Base
     @fields["releaseType"] = is_service ? "service" : check_frequency
   end
 
+  def set_service_type
+    return unless @fields["releaseType"] == "service"
+    @fields["serviceType"] = "changing" if data[:update_frequency].present?
+  end
+
   def set_basic_requirements
     # These should probably only be assumed on imports from government portals
     # see discussion on https://github.com/theodi/open-data-certificate/issues/1090
