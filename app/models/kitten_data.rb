@@ -33,6 +33,10 @@ class KittenData < ActiveRecord::Base
     @dataset
   end
 
+  def source
+    @dataset.source
+  end
+
   def distributions
     dataset_field(:distributions, []).map { |distribution|
       {
@@ -149,12 +153,22 @@ class KittenData < ActiveRecord::Base
     end
   end
 
-  def set_release_type
-    if data[:title].include?("API") || data[:description].include?("API")
-      @fields["releaseType"] = "service"
+  def original_resources
+    if source.present? && source["resources"].present?
+      source["resources"]
     else
-      @fields["releaseType"] = check_frequency
+      []
     end
+  end
+
+  def is_service
+    data[:title].include?("API") || 
+    data[:description].include?("API") ||
+    original_resources.any? { |r| r["resource_type"] == "api" }
+  end
+
+  def set_release_type
+    @fields["releaseType"] = is_service ? "service" : check_frequency
   end
 
   def set_basic_requirements
