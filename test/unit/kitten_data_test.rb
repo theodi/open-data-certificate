@@ -420,6 +420,47 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal nil, kitten_data.fields["documentationMetadata"]
   end
 
+  test 'Correct distribution metadata fields are set with one distribution' do
+    metadata = [
+      "title",
+      "description",
+      "issued",
+      "modified",
+      "accessURL",
+      "downloadURL",
+      "byteSize",
+      "mediaType"
+    ]
+    
+    assert_equal metadata, kitten_data.fields["distributionMetadata"]
+  end
+
+  test 'Correct distribution metadata fields are set with multiple distributions' do
+    distributions = [{
+      title: "title 1",
+      accessURL: "http://example.org/dataset",
+      byteSize: nil
+    }, {
+      title: "title 2",
+      accessURL: nil,
+      byteSize: 1000
+    }].map do |fields|
+      distribution = DataKitten::Distribution.new(self, {})
+      fields.each { |key,value| distribution.stubs(key).returns(value) }
+      distribution
+    end
+
+    DataKitten::Dataset.any_instance.stubs(:distributions).returns(distributions)
+
+    assert_equal ["title"], kitten_data.fields["distributionMetadata"]
+  end
+
+  test 'No distribution metadata fields are set with no distributions' do
+    set_blank_data
+
+    assert_equal nil, kitten_data.fields["distributionMetadata"]
+  end
+
   test "accessor to data attributes returns nil on non serialzed kitten data" do
     kd = KittenData.new
     kd.data = false

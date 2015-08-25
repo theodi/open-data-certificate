@@ -241,6 +241,26 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_distribution_metadata
+    @fields["distributionMetadata"] = []
+    
+    {
+      "title" => :title,
+      "description" => :description,
+      "issued" => :issued,
+      "modified" => :modified,
+      "rights" => :rights,
+      "accessURL" => :access_url,
+      "downloadURL" => :download_url,
+      "byteSize" => :byte_size,
+      "mediaType" => :media_type
+    }.each do |k,v|
+      if data[:distributions].all? {|d| d[v].present? }
+        @fields["distributionMetadata"].push(k)
+      end
+    end
+  end
+
   def check_frequency
     num_distributions = data[:distributions].length
     if data[:update_frequency].blank?
