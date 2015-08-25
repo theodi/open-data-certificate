@@ -21,7 +21,7 @@ class KittenDataTest < ActiveSupport::TestCase
       d.access_url = 'http://example.com/dataset'
       d.download_url = 'http://example.com/distribution'
       d.byte_size = 1000
-      d.media_type = 'application/json'
+      d.media_type = 'text/plain'
       d.extension = 'txt'
       d.format = DataKitten::DistributionFormat.new(d)
     end
@@ -131,7 +131,7 @@ class KittenDataTest < ActiveSupport::TestCase
       access_url: 'http://example.com/dataset',
       download_url: 'http://example.com/distribution',
       byte_size: 1000,
-      media_type: 'application/json',
+      media_type: 'text/plain',
       open: nil,
       extension: :txt,
       structured: nil
