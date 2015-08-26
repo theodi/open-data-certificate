@@ -290,6 +290,14 @@ class KittenData < ActiveRecord::Base
     @fields["technicalDocumentation"] = resource["url"] unless resource.blank?
   end
 
+  def set_codelists
+    codelists = source["codelist"] || source["extras"]["codelist"]
+    @fields["codelists"] = "true" if codelists.present?
+    @fields["codelistDocumentationUrl"] = codelists[0]["url"]
+  rescue NoMethodError
+    nil
+  end
+
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
