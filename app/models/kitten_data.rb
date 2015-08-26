@@ -298,6 +298,13 @@ class KittenData < ActiveRecord::Base
     nil
   end
 
+  def set_schema
+    schema = source["schema"]
+    @fields["vocabulary"] = "true" if schema.present?
+  rescue NoMethodError
+    nil
+  end
+
   private
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
