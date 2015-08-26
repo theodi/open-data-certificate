@@ -474,6 +474,15 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://example.org/codelist", kitten_data.fields["codelistDocumentationUrl"]
   end
 
+  test 'Schema is detected when present' do
+    source = {
+      "schema" => [{ "url" => "http://example.org/schema.json", "name" => "schema" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["vocabulary"]
+  end
+
   test "accessor to data attributes returns nil on non serialzed kitten data" do
     kd = KittenData.new
     kd.data = false
