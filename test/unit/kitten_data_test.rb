@@ -464,6 +464,16 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal nil, kitten_data.fields["distributionMetadata"]
   end
 
+  test 'Codelist is detected when present' do
+    source = {
+      "codelist" => [{ "url" => "http://example.org/codelist", "name" => "codelist" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["codelists"]
+    assert_equal "http://example.org/codelist", kitten_data.fields["codelistDocumentationUrl"]
+  end
+
   test "accessor to data attributes returns nil on non serialzed kitten data" do
     kd = KittenData.new
     kd.data = false
