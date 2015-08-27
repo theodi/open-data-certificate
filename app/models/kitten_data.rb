@@ -34,7 +34,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def source
-    @dataset.source
+    @dataset.try(:source) || {}
   end
 
   def distributions
@@ -206,7 +206,9 @@ class KittenData < ActiveRecord::Base
   def set_data_gov_uk_assumptions
     return unless hostname == "data.gov.uk"
     
-    if source["extras"]["sla"] == "true"
+    sla = source["extras"]["sla"] == "true" rescue false
+    
+    if sla
       @fields["slaUrl"] = url
       @fields["onGoingAvailability"] = "medium"
     end
