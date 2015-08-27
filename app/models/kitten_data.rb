@@ -26,6 +26,8 @@ class KittenData < ActiveRecord::Base
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
   }
 
+  KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
+
   def dataset
     @dataset
   end
@@ -33,12 +35,17 @@ class KittenData < ActiveRecord::Base
   def distributions
     dataset_field(:distributions, []).map { |distribution|
       {
-        :title       => distribution.title,
-        :description => distribution.description,
-        :access_url  => distribution.access_url,
-        :extension   => distribution.format.try(:extension),
-        :open        => distribution.format.try(:open?),
-        :structured  => distribution.format.try(:structured?)
+        :title        => distribution.title,
+        :description  => distribution.description,
+        :issued       => distribution.issued,
+        :modified     => distribution.modified,
+        :access_url   => distribution.access_url,
+        :download_url => distribution.download_url,
+        :byte_size    => distribution.byte_size,
+        :media_type   => distribution.media_type,
+        :extension    => distribution.format.try(:extension),
+        :open         => distribution.format.try(:open?),
+        :structured   => distribution.format.try(:structured?)
       }
     }
   end
@@ -122,8 +129,10 @@ class KittenData < ActiveRecord::Base
     return unless data[:licenses].any?
 
     @fields["publisherRights"] = "yes"
-    @fields["dataLicence"] = KittenData::DATA_LICENCES[data[:licenses][0].uri]
 
+    data_licence = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
+    
+    @fields["dataLicence"] = data_licence if KNOWN_LICENCES.include? data_licence
     @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
 
     # Settings for ordnance survey licences
@@ -184,23 +193,27 @@ class KittenData < ActiveRecord::Base
     # Does your data documentation contain machine readable documentation for:
     {
       "title" => :title,
-      "description" =>  :description,
+      "description" => :description,
+      "identifier" => :identifier,
+      "landingPage" => :landing_page,
       "accrualPeriodicity" => :update_frequency,
       "publisher" => :publishers,
       "keyword" => :keywords,
+      "theme" => :theme,
       "distribution" => :distributions,
       "issued" => :release_date,
-      "modified" => :modified_date
+      "modified" => :modified_date,
+      "temporal" => :temporal_coverage,
+      "spatial" => :spatial_coverage,
+      "language" => :language
     }.each do |k,v|
-        @fields["documentationMetadata"].push(k) unless data[v].blank?
+      @fields["documentationMetadata"].push(k) unless data[v].blank?
     end
-
-    @fields["documentationMetadata"].push("temporal") unless data[:temporal_coverage].start.nil? && data[:temporal_coverage].end.nil?
   end
 
   def check_frequency
     num_distributions = data[:distributions].length
-    if data[:update_frequency].empty?
+    if data[:update_frequency].blank?
       num_distributions == 1 ? "oneoff" : "collection"
     elsif num_distributions > 1
       "series"
@@ -211,7 +224,7 @@ class KittenData < ActiveRecord::Base
 
   def set_dataset_url
     if check_frequency == "oneoff"
-      @fields["datasetUrl"] = data[:distributions][0][:access_url]
+      @fields["datasetUrl"] = data[:distributions][0][:download_url]
     end
   end
 
@@ -225,18 +238,23 @@ class KittenData < ActiveRecord::Base
 
     if @dataset && @dataset.supported? && dataset_field(:data_title)
       self.data = {
-        :title             => dataset_field(:data_title, ''),
-        :description       => dataset_field(:description, ''),
+        :title             => dataset_field(:data_title),
+        :description       => dataset_field(:description),
+        :identifier        => dataset_field(:identifier),
+        :landing_page      => dataset_field(:landing_page),
         :publishers        => dataset_field(:publishers, []),
         :maintainers       => dataset_field(:maintainers, []),
         :contributors      => dataset_field(:contributors, []),
         :rights            => dataset_field(:rights),
         :licenses          => dataset_field(:licenses, []),
-        :update_frequency  => dataset_field(:update_frequency, ''),
+        :update_frequency  => dataset_field(:update_frequency),
         :keywords          => dataset_field(:keywords, []),
+        :theme             => dataset_field(:theme),
         :release_date      => dataset_field(:issued),
         :modified_date     => dataset_field(:modified),
-        :temporal_coverage => dataset_field(:temporal, DataKitten::Temporal.new({})),
+        :temporal_coverage => dataset_field(:temporal),
+        :spatial_coverage  => dataset_field(:spatial),
+        :language          => dataset_field(:language),
         :distributions     => distributions
       }
     else

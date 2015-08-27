@@ -21,7 +21,7 @@
             .span9
               .jurisdiction
                 Jurisdiction:
-                .badge.badge-inverse=  @response_set.jurisdiction
+                .badge.badge-inverse=  @response_set.survey.complete_title
                 %span.status= @survey.try(:status)
                 = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
                   %i.icon.icon-pencil
@@ -34,7 +34,7 @@
               %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
             .span3.save-button
               - if user_signed_in?
-                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish, "data-btn-loading" => t('surveyor.saving_questionnaire')}
+                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish}
                   %i.icon-loading.icon-spin.icon-refresh.icon-large
                   %span= t('surveyor.click_here_to_finish')
               - else
@@ -67,7 +67,7 @@
         .well
           .row-fluid
             .span8.lead
-              = @survey.translation(I18n.locale)[:description].try(:html_safe)
+              != @survey.intro
               %p
                 %a{href: about_url} Read more about Open Data Certificates
 
@@ -75,11 +75,11 @@
           .documentation-url
             - question = @survey.questions.find_by_reference_identifier("documentationURL")
             %label
-              = question.text
+              = question.heading
             .row-fluid
               .span8
                 - if @response_set.documentation_url.blank?
-                  %p.url.placeholder No documentation URL
+                  %p.url.placeholder= question.placeholder
                   .alert.alert-error
                     = t('surveyor.documentation_url.missing')
                 - else

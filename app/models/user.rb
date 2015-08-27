@@ -7,12 +7,13 @@ class User < ActiveRecord::Base
   has_many :response_sets
   has_many :sent_claims, class_name: 'Claim', foreign_key: 'initiating_user_id'
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
+  has_many :certification_campaigns
 
   attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms
 
   before_save :ensure_authentication_token
 
-  validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true 
+  validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true
 
   def ensure_authentication_token
     if authentication_token.blank?
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
     else
       email
     end
+  end
+
+  def default_jurisdiction
+    super || 'gb'
   end
 
   # name isn't mandatory on signup, so fall back to email

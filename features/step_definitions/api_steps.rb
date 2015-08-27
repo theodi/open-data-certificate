@@ -38,10 +38,10 @@ Given(/^I apply a campaign "(.*?)"$/) do |tag|
   @campaign = tag
 end
 
-Given(/^I request (\d+) certifcates with the campaign "(.*?)"$/) do |num, tag|
+Given(/^I request (\d+) certificates with the campaign "(.*?)"$/) do |num, tag|
   num.to_i.times do |i|
     steps %Q{
-      Given I want to create a certificate via the API
+      Given I want to create a certificate via the API with the URL "http://example.com/dataset#{i}"
       And I apply a campaign "#{tag}"
       And I request a certificate via the API
     }
@@ -51,7 +51,6 @@ end
 Given(/^I create a certificate via the API$/) do
   steps %Q{
     When I request a certificate via the API
-    And the certificate is created
     And I request the results via the API
     Then the API response should return sucessfully
   }
@@ -63,27 +62,21 @@ end
 
 Given(/^my dataset contains contact details$/) do
   @email = "newuser@example.com"
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => [DataKitten::Agent.new(mbox: @email)]
-  ))
+  steps %Q{
+    Given my metadata has the email "#{@email}" associated
+  }
 end
 
 Given(/^my dataset does not contain contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => []
-  ))
+  KittenData.any_instance.stubs(:contacts_with_email).returns([])
   @email = @api_user.email
 end
 
 Given(/^my dataset contains invalid contact details$/) do
-  ResponseSet.any_instance.stubs(:kitten_data).returns(stub(
-    :contacts_with_email => [DataKitten::Agent.new(mbox: "bad email@example.org")]
-  ))
+  steps %Q{
+    Given my metadata has the email "bad email@example.org" associated
+  }
   @email = @api_user.email
-end
-
-Given(/^I provide the API with a URL that autocompletes$/) do
-  ResponseSet.any_instance.stubs(:autocomplete)
 end
 
 When(/^I request a certificate via the API$/) do
@@ -94,7 +87,7 @@ When(/^I request a certificate via the API$/) do
 end
 
 When(/^the certificate is created$/) do
-  generator = CertificateGenerator.all.select { |g| g.request["documentationUrl"] == @documentationURL }.first
+  generator = CertificateGenerator.all.find { |g| g.request["documentationUrl"] == @documentationURL }
   generator.generate(@body[:jurisdiction], @body[:create_user])
 end
 
@@ -140,6 +133,13 @@ end
 
 Then(/^the API response should return pending$/) do
   assert_match /\"success\":\"pending\"/,  @response.body
+end
+
+Given(/^a dataset already exists for the URL "(.*?)"$/) do |url|
+  steps %Q{
+    Given I have a a dataset at the URL "#{url}"
+    And I run the rake task to create a single certificate
+  }
 end
 
 
@@ -218,4 +218,8 @@ end
 
 Then(/^I should be told I need to sign in$/) do
   assert_match /You need to sign in or sign up before continuing/, page.body
+end
+
+Given(/^I provide the API with a URL that autocompletes$/) do
+  ResponseSet.any_instance.stubs(:autocomplete)
 end

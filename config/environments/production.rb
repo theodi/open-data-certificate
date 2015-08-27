@@ -50,9 +50,6 @@ OpenDataCertificate::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( badge.css admin.js)
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
@@ -60,7 +57,7 @@ OpenDataCertificate::Application.configure do
 
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.default_url_options = {
-    :host => "#{'staging.' if OpenDataCertificate.staging?}certificates.theodi.org"
+    :host => ENV["CERTIFICATE_HOSTNAME"]
   }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
@@ -96,5 +93,3 @@ OpenDataCertificate::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
 end
-
-

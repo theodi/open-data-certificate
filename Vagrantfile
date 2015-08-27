@@ -40,6 +40,13 @@ nodesets = [
       "role[open-data-certificate-attrs]",
       "role[memcached]"
     ]
+  },
+  {
+    name: 'stg_certs',
+    chef_env: 'certs-stg',
+    run_list: [
+      'recipe[chef_certificates]'
+    ]
   }
 ]
 
@@ -87,6 +94,7 @@ Vagrant.configure("2") do |config|
         config.vm.provision :chef_client do |chef|
           chef.node_name              = chef_name
           chef.environment            = "#{set[:chef_env]}"
+#          chef.chef_server_url        = "https://178.79.143.238"
           chef.chef_server_url        = "https://chef.theodi.org"
           chef.validation_client_name = "chef-validator"
           chef.validation_key_path    = ".chef/chef-validator.pem"

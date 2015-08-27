@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
+
+<questionnaire version="1.0" status="final" jurisdiction="GB" xml:lang="en">
+
+  <question id="identifiers" display="The data includes">
+    <label>Does your data use persistent identifiers?</label>
+    <yesno yes="persistent identifiers" />
+    <help>Data is usually about real things like schools or roads or uses a coding scheme. If data from different sources use the same persistent and unique identifier to refer to the same things, people can combine sources easily to create more useful data. Identifiers might be GUIDs, DOIs or URLs.</help>
+    <requirement level="standard">You should <strong>use identifiers for things in your data</strong> so that they can be easily related with other data about those things.</requirement>
+  </question>
+  <if test="this.identifiers() === 'true'">
+    <question id="resolvingIds" display="The persistent identifiers">
+      <label>Can the identifiers in your data be used to find extra information?</label>
+      <radioset>
+        <option value="false" display="">
+          <label>no, the identifiers can't be used to find extra information</label>
+        </option>
+        <option value="service" display="resolve using a service">
+          <label>yes, there is a service that people can use to resolve the identifiers</label>
+          <help>Online services can be used to give people information about identifiers such as GUIDs or DOIs which can't be directly accessed in the way that URLs are.</help>
+          <requirement level="standard">You should <strong>provide a service to resolve the identifiers you use</strong> so that people can find extra information about them.</requirement>
+        </option>
+        <option value="resolvable" display="resolve because they are URLs">
+          <label>yes, the identifiers are URLs that resolve to give information</label>
+          <help>URLs are useful for both people and computers. People can put a URL into their browser and read more information, like <a href="http://opencorporates.com/companies/gb/08030289">companies</a> and <a href="http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE">postcodes</a>. Computers can also process this extra information using scripts to access the underlying data.</help>
+          <requirement level="exemplar">You should <strong>link to a web page of information about each of the things in your data</strong> so that people can easily find and share that information.</requirement>
+        </option>
+      </radioset>
+    </question>
+  </if>
+</questionnaire>

@@ -73,7 +73,7 @@ class SurveyorControllerTest < ActionController::TestCase
     assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
   end
 
-  test "update an expired questionnaire" do
+  test "updating a response_set is published if it was from an update to an already published response set" do
     @response_set = FactoryGirl.create(:response_set)
 
     sign_in @response_set.user
@@ -81,8 +81,7 @@ class SurveyorControllerTest < ActionController::TestCase
     post :update, use_route: :surveyor,
                   survey_code: @response_set.survey.access_code,
                   response_set_code: @response_set.access_code,
-                  update: true,
-                  finish: true
+                  update: true # this indicates it was previously published
 
     @response_set.reload
     assert_equal true, ResponseSet.last.published?

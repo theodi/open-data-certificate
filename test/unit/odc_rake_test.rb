@@ -39,7 +39,7 @@ class OdcRakeTest < ActiveSupport::TestCase
 
   test "The default survey parses correctly" do
     assert_difference 'Survey.count', 1 do
-      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.UK.rb'))
+      Surveyor::Parser.parse_file(File.join(Rails.root, 'surveys/odc_questionnaire.GB.rb'))
     end
   end
 

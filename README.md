@@ -31,7 +31,9 @@ The request should authenticated with Basic HTTP Authentication, using the user'
 
 #### Questionnaire schema
 
-The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash, which specifies the allowed options, which should be identified by their key.
+The schema method returns a hash where each question is identified by its key in the hash. Each question also has one of
+the following types: `string`, `radio`, `checkbox` and `repeating`. Radio and checkbox types will also have an options hash,
+which specifies the allowed options, which should be identified by their key.
 
 Questions which are required to publish the dataset will also have `required: true`.
 
@@ -107,11 +109,50 @@ You can then make a request to the `dataset_url` to get the final response.
 There may be a delay before your dataset is created, so if you get a `success`
 state of `pending`, please try again in a few seconds.
 
+### Modelling The Open Data Certificate xml files
+
+##### 1: The ODC questionnaire exists in two sections, and accordingly as two files within prototypes directory
+
+The general questionnaire (stored in prototype/translations/certificate.en.xml) containing the questions for General, Techincal and Social sections and the legal portion (stored in prototype/jurisdictions/certificate.GB.xml) for questions relating to copyright and IP ownership that differ by country or legal jurisdiction
+
+##### 2: prototype/surveyor.xsl transforms these two XML files into survey/odc_questionnaire.$country_code.rb
+
+the mechanism by which specific country codes and their corresponding language is translated is being refactored at present  see [Surveyor/Translations](#translations) below
+
+##### 3: the surveyor gem parses the odc_questionairre.$COUNTRY_CODE.rb file, and produces the following models
+
+`Survey, SurveySection, Question, QuestionGroup,Answer, Dependency, DependencyCondition.`
+
+which are stored in `app/models`
+
+A `Question` will may have a `Dependency`
+the `Dependency` will have_many `DependencyCondition`s which may belong to other `Question`s
+the `DependencyCondition`s have one `Question` and one `Answer` and then an `operator` to compare test them against
+
+
+##### 4: app/SurveysController starts a survey and updates it
+
+##### 5: Test suites exist in
+
+```
+vendor/surveyor/gems/surveyor-1.4.0/spec/
+test/unit/question_test.rb
+test/unit/response_set_test.rb
+```
+
+##### Unknowns:
+
+need to inspect surveys/development subdirectory [potential ticket)
+
 ### Surveyor
 
-The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.  We've changed the look, feel & structure to fit the site and extended it to support certificate levels.
+The Open Data Certificate uses [surveyor](https://github.com/NUBIC/surveyor) to generate and display the data questionnaires.
+We've changed the look, feel & structure to fit the site and extended it to support certificate levels.
 
-Although all of Surveyor's functionality is supported - much of it isn't incorporated into the initial designs, and so hasn't been tested to work correctly. Experiments with the demo "kitchen sink survey" illustrate that some of the question types that Surveyor supports break the CSS, so please beware if extending the current questionnaire with other question types - they will need to be tested and possibly need CSS/renderer design changes.
+Although all of Surveyor's functionality is supported - much of it isn't incorporated into the initial designs, and so hasn't
+been tested to work correctly. Experiments with the demo "kitchen sink survey" illustrate that some of the question types
+that Surveyor supports break the CSS, so please beware if extending the current questionnaire with other question types
+- they will need to be tested and possibly need CSS/renderer design changes.
 
 
 #### Deploying questionnaires
@@ -167,10 +208,13 @@ Questions and Answers are associated to requirements by having their 'requiremen
 ##### question
 
 * `:requirement` - If the question is a Label-type, requirement is the identifier of an improvement that is recommended to meet a certain level.
-The value will be stored as `"pilot_1"`, `"pilot_2"`, `"pilot_3"`, `"basic_1"`, `"basic_2"`, etc. With the part before the underscore representing the level, and everything after the underscore uniquely identifying the requirement.
+The value will be stored as `"pilot_1"`, `"pilot_2"`, `"pilot_3"`, `"basic_1"`, `"basic_2"`, etc. With the part before
+the underscore representing the level, and everything after the underscore uniquely identifying the requirement.
 If the question is a "normal" question (ie: not a label), the requirement attribute is used to identify to the recommended improvement this question satisfies.
 
-* `:required` - Whether or not this question is required/mandatory to be completed (it also has to be triggered in the questionnaire by its dependencies). Any value in here will make the question mandatory, but it can also be used to identify if it is mandatory for a specific level of certificate attainment (if this requires different styling in the UI) ie: `:required #=> mandatory for every level`  , `:pilot #=> mandatory for 'pilot' level`
+* `:required` - Whether or not this question is required/mandatory to be completed (it also has to be triggered in the questionnaire by its dependencies).
+Any value in here will make the question mandatory, but it can also be used to identify if it is mandatory for a specific level of certificate attainment
+(if this requires different styling in the UI) ie: `:required #=> mandatory for every level`  , `:pilot #=> mandatory for 'pilot' level`
 
 * `:help_text_more_url` - The url to link to at the end of the help text
 
@@ -211,10 +255,10 @@ There is an example of adding a translation on [this gist](https://gist.github.c
 ### Running
 
 ```bash
-bundle install
-rake db:migrate
-rake surveyor:build_changed_survey FILE=surveys/odc_questionnaire.UK.rb
-rails s
+# this will setup a default admin user (test@example.com) and
+# load the GB survey
+bin/setup
+bundle exec rails s
 
 # to include some other jurisdictions
 rake surveyor:build_changed_surveys LIMIT=5
@@ -241,6 +285,9 @@ bundle exec guard
 Some environment variables are required for the certificates site, these can be set in a .env file in the root of the project.
 
 ```
+# A hostname to create links in emails
+CERTIFICATE_HOSTNAME="localhost:3000"
+
 # Rackspace credentials for saving certificate dumps
 RACKSPACE_USERNAME
 RACKSPACE_API_KEY
@@ -253,8 +300,8 @@ CERTIFICATE_JUVIA_SITE_KEY
 # Sending error reports to airbrake
 AIRBRAKE_CERTIFICATE_KEY
 
-# Disable the rails footnotes to increase performance
-DISABLE_FOOTNOTES=true
+# Enable footnotes for debugging info
+ENABLE_FOOTNOTES=true
 ```
 
 #### Admin functions
@@ -317,3 +364,78 @@ A breakdown of the validation states that exist in the survey:
 [App approach document](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#)
 
 The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
+
+#### Flowchart
+
+http://localhost:3000/flowchart
+files responsible:
+```ruby
+lib>flow.rb
+app>controllers>flowcharts_controller.rb
+app>views>flowcharts/.
+```
+you'll want to have open
+prototype/translation/certificate.en.xml & prototype/jurisdictions/certificate.GB.xml
+
+rendering flow =
+```
+show
+^~> _question
+___^~> _answer
+______^~> _dependency
+_________^~> _answer
+
+// this effectively functions as a foreach loop
+
+foreach(question_element in @questions hash)
+    # passes a hash
+    foreach(answer in answers hash*)
+        #*where `answers` is extracted from question_element as a key=>value element
+        PartialDependency(question_element, question_element_index, answer.key, answer.value)
+           # A Hash is retrieved from @dependencies instance hash and assigned to dependency (local var)
+           # answer[:dependency] and dependency[:label] are the values printed to screen in varying outputs
+
+```
+
+each of the partials render text in the markdown format which https://github.com/knsv/mermaid stipulates
+
+Intern Suggestions:
+
+Clearer explanation.
+Make calls between dependency and answer clearer.
+List of all possible answer dependencies.
+Test for dependencies inside and outside answer
+
+Flow pseudocode:
+
+  -- Question
+
+  if the question has no answers and there exists a next question
+    convert question id and label into readable string ...
+  else if the question has answers, for each answer
+
+    -- Answer
+
+    if there is no answer dependency and there is a next question
+      convert question id and label into readable string ...
+    else if there is an answer dependency
+
+      -- Dependency
+
+      dependency = returns more information about dependency of a given answer as a hash
+      if there are no answers for that dependency
+        convert question id and label into readable string ...
+        if there is a next question
+          render question/answer/dependency
+        else render end block
+      else
+        render question/answer/dependency
+        if dependency prerequisites are <= 1 or (dependency is one of ["timeSensitive","privacyImpactAssessmentExists"] & dependency has 2 prerequisites)
+          for each dependency answer
+            render answer
+            add it to @deps
+        else
+          destroy first prerequisite of dependency
+
+    else
+      Render end block

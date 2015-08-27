@@ -9,7 +9,6 @@ OpenDataCertificate::Application.routes.draw do
     get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
     post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
     get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
-    get '/:survey_code/:response_set_code/save_and_finish', :to => 'surveyor#force_save_questionnaire', :as => 'force_save_questionnaire'
 
     get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
     get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
@@ -38,6 +37,7 @@ OpenDataCertificate::Application.routes.draw do
   resources :datasets do
     put 'start_questionnaire'
     post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
+    post 'regenerate', to: 'datasets#regenerate', as: 'regenerate_certificate'
     get :typeahead, on: :collection
     get :admin, on: :collection
     get :schema, on: :collection
@@ -121,7 +121,11 @@ OpenDataCertificate::Application.routes.draw do
   get 'status/events' => 'main#status_events'
   get 'legacy_stats.csv' => 'main#legacy_stats', format: 'csv'
   get 'embed_stats.csv' => 'embed_stats#index', format: 'csv', as: :embed_stats
-  resources :campaigns
+
+  resources :campaigns do
+    post 'rerun', to: 'campaigns#rerun', as: 'rerun'
+    post 'schedule', to: 'campaigns#schedule', as: 'scheduled_rerun'
+  end
 
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'
@@ -137,6 +141,9 @@ OpenDataCertificate::Application.routes.draw do
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
+
+  # Flowchart
+  get 'flowchart' => 'flowcharts#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

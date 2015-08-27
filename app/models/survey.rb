@@ -140,29 +140,33 @@ class Survey < ActiveRecord::Base
     translations.first.locale
   end
 
+  def intro
+    translation(I18n.locale)[:description] || ""
+  end
+
   ### override surveyor methods
 
   def translation(locale_symbol)
-    {:title => self.title, :description => self.description}.with_indifferent_access.merge(trns(locale_symbol))
-  end
-
-  # prevent the translations from being loaded all the time
-  def trns(locale_symbol)
-    return @trns unless @trns.nil?
-    t = self.translations.where(:locale => locale_symbol.to_s).first
-    @trns = t ? YAML.load(t.translation || "{}").with_indifferent_access : {}
+    #TODO: caveat class variables
+    @@translation ||= {}
+    @@translation[id] ||= {}
+    @translation = @@translation[id]
+    return @translation[locale_symbol] if @translation[locale_symbol]
+    default = {"title" => title, "description" => description}
+    source = translations.where(:locale => locale_symbol.to_s).first
+    @translation[locale_symbol] = if source
+      default.merge(source.to_hash).with_indifferent_access
+    else
+      default.with_indifferent_access
+    end
   end
 
   def question(identifier)
-    questions.select{|q| q.reference_identifier == identifier.to_s }.first
+    questions.where(reference_identifier: identifier).first
   end
 
   def documentation_url
     question 'documentationUrl'
-  end
-
-  def translation(locale_symbol)
-    {:title => self.title, :description => self.description}.with_indifferent_access
   end
 
   ### /override surveyor methods

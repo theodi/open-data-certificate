@@ -10,6 +10,25 @@ override_task :surveyor => :environment do
 end
 
 namespace :surveyor do
+  task :update, [:jurisdiction] do |t, args|
+    jurs = args.jurisdiction
+    unless jurs
+      raise ArgumentError, "use surveyor:update[jurisdiction] to specify jurisdiction"
+    end
+    Rake::Task['translations:pull'].invoke(jurs)
+    Rake::Task['surveyor:build'].invoke(jurs)
+  end
+
+  task :build, [:jurisdiction] => [:environment] do |t, args|
+    jurs = args.jurisdiction
+    translations = Rake::FileList.new("surveys/translations/odc.#{jurs}.*.yml")
+    translations.each { |t| Rake::Task[t].invoke }
+    unless jurs
+      raise ArgumentError, "use surveyor:build[jurisdiction] to specify jurisdiction"
+    end
+    SurveyBuilder.new('surveys', "odc_questionnaire.#{jurs}.rb").perform
+  end
+
   desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys`)'
   task :build_changed_surveys => :environment do
     dir = ENV['DIR'] || 'surveys'
@@ -67,7 +86,9 @@ namespace :odc do
   desc "Task to run when a new version of the app has been deployed"
   task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires) do
     ENV['TO'] = ENV['RAILS_ENV']
-    Rake::Task['airbrake:deploy'].invoke
+    if ENV['AIRBRAKE_CERTIFICATE_KEY']
+      Rake::Task['airbrake:deploy'].invoke
+    end
   end
 
   desc "remove (12h) old and unclaimed questionnaires"

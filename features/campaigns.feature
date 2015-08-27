@@ -5,7 +5,6 @@ Feature: Display information about campaigns in UI
     Given I want to create a certificate via the API
     And I apply a campaign "brian"
     And I request a certificate via the API
-    And the certificate is created
     And I request a certificate via the API
     And I am signed in as the API user
 
@@ -35,7 +34,6 @@ Feature: Display information about campaigns in UI
     And I apply a campaign "brian"
     But I miss the field "dataTitle"
     And I request a certificate via the API
-    And the certificate is created
     When I visit the campaign page for "brian"
     Then I should see "3 datasets inspected"
     And I should see "2 datasets added"
@@ -47,7 +45,6 @@ Feature: Display information about campaigns in UI
     And I apply a campaign "brian"
     But I miss the field "dataTitle"
     And I request a certificate via the API
-    And the certificate is created
     When I visit the campaign page for "brian"
     And I click the "Download CSV" link
     Then I should get a CSV file

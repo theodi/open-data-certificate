@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cp env.example .env
+cp config/database.{example.,}yml
+
+bundle install
+bundle exec rake db:schema:load db:seed

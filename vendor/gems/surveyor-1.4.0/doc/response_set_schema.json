@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-03/schema#",
+    "description": "Response set",
+    "properties": {
+        "completed_at": {
+            "$ref": "http://download.nubic.northwestern.edu/surveyor/surveyor_timestamp_schema.json#"
+        },
+        "created_at": {
+            "$ref": "http://download.nubic.northwestern.edu/surveyor/surveyor_timestamp_schema.json#"
+        },
+        "responses": {
+            "description": "Responses in the response set",
+            "items": {
+                "properties": {
+                    "answer_id": {
+                        "$ref": "http://download.nubic.northwestern.edu/surveyor/api_id_schema.json#"
+                    },
+                    "created_at": {
+                        "$ref": "http://download.nubic.northwestern.edu/surveyor/surveyor_timestamp_schema.json#"
+                    },
+                    "question_id": {
+                        "$ref": "http://download.nubic.northwestern.edu/surveyor/api_id_schema.json#"
+                    },
+                    "response_group": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "updated_at": {
+                        "$ref": "http://download.nubic.northwestern.edu/surveyor/surveyor_timestamp_schema.json#"
+                    },
+                    "uuid": {
+                        "$ref": "http://download.nubic.northwestern.edu/surveyor/api_id_schema.json#"
+                    },
+                    "value": {
+                        "type": [
+                            "string",
+                            "number",
+                            "null"
+                        ]
+                    }
+                }
+            },
+            "type": "array"
+        },
+        "survey_id": {
+            "$ref": "http://download.nubic.northwestern.edu/surveyor/api_id_schema.json#"
+        },
+        "uuid": {
+            "$ref": "http://download.nubic.northwestern.edu/surveyor/api_id_schema.json#"
+        }
+    }
+}

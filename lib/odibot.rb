@@ -9,14 +9,13 @@ class ODIBot
   end
 
   def response_code
-    ODIBot.handle_errors(0) do
-      code = Rails.cache.fetch(@url) rescue nil
-      if code.nil?
-        code = self.class.head(@url, @options).code
-        code = self.class.get(@url, @options).code if code == 404
-        Rails.cache.write(@url, code, expires_in: 5.minute)
+    self.class.handle_errors(0) do
+      url = uri.to_s
+      Rails.cache.fetch(url, expires_in: 5.minutes) do
+        code = self.class.head(url, @options).code
+        code = self.class.get(url, @options).code if code == 404
+        code
       end
-      code
     end
   end
 
@@ -30,7 +29,11 @@ class ODIBot
   end
 
   def uri
-    @uri ||= URI.parse(@url)
+    begin
+      @uri ||= URI.parse(@url)
+    rescue URI::InvalidURIError
+      @uri ||= URI.parse(escape_unsafe_chars(@url))
+    end
   rescue URI::InvalidURIError
     nil
   end
@@ -48,4 +51,10 @@ class ODIBot
   rescue SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error
     return return_value
   end
+
+private
+  def escape_unsafe_chars(url)
+    url.gsub(URI::UNSAFE) { |c| URI.escape(c) }
+  end
+
 end

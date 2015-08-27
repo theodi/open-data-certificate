@@ -76,7 +76,7 @@ class DatasetsController < ApplicationController
     @last_modified_date = datasets.maximum('response_sets.updated_at') || Time.current
 
     if Rails.env.development? || stale?(last_modified: @last_modified_date)
-      case params[:format] 
+      case params[:format]
       when 'csv'
         @datasets = datasets
       else
@@ -172,15 +172,17 @@ class DatasetsController < ApplicationController
 
   def create
     jurisdiction, dataset, create_user = params.values_at(:jurisdiction, :dataset, :create_user)
-    generator = CertificateGenerator.create(
-      request: dataset,
-      user: current_user,
-      certification_campaign: campaign
-    )
-    generator.delay.generate(jurisdiction, create_user, params[:existing_dataset])
+    existing_dataset_id = params[:existing_dataset].try(:id)
+    generator = CertificateGenerator.transaction do
+      CertificateGenerator.create(
+        request: dataset,
+        user: current_user,
+        certification_campaign: campaign)
+    end
+    CertificateGeneratorWorker.perform_async(generator.id, jurisdiction, create_user, existing_dataset_id)
     render status: :accepted, json: {
       success: "pending",
-      dataset_id: params[:existing_dataset].try(:id),
+      dataset_id: existing_dataset_id,
       dataset_url: status_datasets_url(generator)
     }
   end
@@ -210,6 +212,19 @@ class DatasetsController < ApplicationController
     dataset_model = Dataset.find(params[:dataset_id])
     result = CertificateGenerator.update(dataset_model, dataset, jurisdiction, current_user)
     render json: result, status: result[:success] ? :ok : :unprocessable_entity
+  end
+
+  def regenerate
+    dataset = Dataset.find(params[:dataset_id])
+    authorize! :manage, dataset
+    jurisdiction = params[:jurisdiction]
+    result = CertificateGenerator.update(dataset, nil, jurisdiction, current_user)
+
+    begin
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+    end
   end
 
   def schema

@@ -400,7 +400,6 @@ class DatasetsControllerTest < ActionController::TestCase
     dataset = certificate.dataset
     http_auth FactoryGirl.create(:user)
 
-    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
     CertificateGenerator.any_instance.expects(:generate).once
 
     assert_difference "CertificateGenerator.count", 1 do
@@ -431,7 +430,6 @@ class DatasetsControllerTest < ActionController::TestCase
     load_custom_survey 'cert_generator.rb'
     http_auth FactoryGirl.create(:user)
 
-    CertificateGenerator.any_instance.stubs(:delay).returns CertificateGenerator.new
     CertificateGenerator.any_instance.expects(:generate).once
 
     assert_difference "CertificateGenerator.count", 1 do
@@ -448,12 +446,15 @@ class DatasetsControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     http_auth user
 
-    CertificateGenerator.any_instance.stubs(:delay).returns stub(generate: nil)
+    CertificateGeneratorWorker.expects(:perform_async).returns(nil)
 
     assert_difference "CertificationCampaign.count", 1 do
-      post :create, jurisdiction: 'cert-generator',
-        dataset: {documentationUrl: "http://example.org"},
-        campaign: 'fourmoreyears'
+      post :create, {
+          :campaign => "fourmoreyears",
+          :url => "http://example.org",
+          :jurisdiction => 'cert-generator',
+          dataset: {documentationUrl: "http://example.org"}
+      }
     end
 
     CertificationCampaign.last.tap do |campaign|
@@ -468,7 +469,7 @@ class DatasetsControllerTest < ActionController::TestCase
     other_user = FactoryGirl.create(:user)
     http_auth generating_user
 
-    CertificateGenerator.any_instance.stubs(:delay).returns stub(generate: nil)
+    CertificateGeneratorWorker.expects(:perform_async).returns(nil)
 
     assert_difference "CertificationCampaign.count", 1 do
       post :create, jurisdiction: 'cert-generator',

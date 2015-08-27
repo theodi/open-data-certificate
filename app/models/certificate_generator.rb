@@ -9,6 +9,8 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
+  before_save :remove_flag
+
   serialize :request, HashWithIndifferentAccess
 
   TYPES =  {
@@ -17,6 +19,15 @@ class CertificateGenerator < ActiveRecord::Base
     any: 'checkbox',
     repeater: 'repeating'
   }
+
+  def self.filter(level)
+    case(level)
+    when "uncertified"
+      joins(:certificate).where(certificates: {attained_level: "none"})
+    else
+      scoped
+    end
+  end
 
   def self.schema(request)
     survey = Survey.newest_survey_for_access_code request['jurisdiction']
@@ -57,8 +68,11 @@ class CertificateGenerator < ActiveRecord::Base
     end
 
     generator = response_set.certificate_generator || self.create(response_set: response_set, user: user)
-    generator.request = request
-    certificate = generator.generate(jurisdiction, false)
+    generator.request = request unless request.nil?
+
+    create_user = user.admin? ? true : false
+
+    certificate = generator.generate(jurisdiction, create_user, dataset)
     response_set = certificate.response_set
 
     errors = response_set.response_errors
@@ -80,7 +94,7 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
-    response_set.autocomplete(request["documentationUrl"])
+    response_set.autocomplete(autocomplete_url)
 
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
@@ -127,13 +141,19 @@ class CertificateGenerator < ActiveRecord::Base
         user.skip_confirmation_notification!
       end
     end
+  # in case the there was a find or create race
+  rescue ActiveRecord::RecordNotUnique
+    User.find_by_email(contact.email)
   rescue ActiveRecord::RecordInvalid => e
-    # in case the there was a find or create race
     User.find_by_email(contact.email) if e.message =~ /taken/
   end
 
   def published?
     certificate.try(:published?)
+  end
+
+  def valid_urls?
+    response_set.all_urls_resolve?
   end
 
   def response_errors
@@ -144,12 +164,26 @@ class CertificateGenerator < ActiveRecord::Base
     dataset.api_url
   end
 
+  def autocomplete_url
+    request["documentationUrl"]
+  end
+
   # the dataset parameters from the request, defaults to {}
   def request=(value)
     write_attribute(:request, value.with_indifferent_access)
   end
 
   private
+
+  def remove_flag
+    if dataset && certification_campaign
+      CertificateGenerator.where("response_sets.dataset_id" => dataset.id, "certification_campaign_id" => certification_campaign.id)
+                          .joins(:response_set)
+                          .where("certificate_generators.id not in (?)", id)
+                          .update_all(latest: false)
+    end
+  end
+
   # answer a question from the request
   def answer question
 

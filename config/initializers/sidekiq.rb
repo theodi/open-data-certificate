@@ -1,32 +1,10 @@
-module Sidekiq::Extensions::Klass
-  alias :sidekiq_delay :delay
-  remove_method :delay
-  alias :sidekiq_delay_for :delay_for
-  remove_method :delay_for
-  alias :sidekiq_delay_until :delay_until
-  remove_method :delay_until
-end
-
-module Sidekiq::Extensions::ActiveRecord
-  alias :sidekiq_delay :delay
-  remove_method :delay
-  alias :sidekiq_delay_for :delay_for
-  remove_method :delay_for
-  alias :sidekiq_delay_until :delay_until
-  remove_method :delay_until
-end
-
-module Sidekiq::Extensions::ActionMailer
-  alias :sidekiq_delay :delay
-  remove_method :delay
-  alias :sidekiq_delay_for :delay_for
-  remove_method :delay_for
-  alias :sidekiq_delay_until :delay_until
-  remove_method :delay_until
-end
+Sidekiq.hook_rails!
+Sidekiq.remove_delay!
 
 Sidekiq.configure_server do |config|
   config.redis = { url: ENV['ODC_REDIS_SERVER_URL'] }
+
+  config.failures_default_mode = :all
 end
 
 Sidekiq.configure_client do |config|
