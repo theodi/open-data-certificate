@@ -206,12 +206,20 @@ class KittenData < ActiveRecord::Base
   def set_data_gov_uk_assumptions
     return unless hostname == "data.gov.uk"
     
+    @fields["improvementsContact"] = URI.join(url + "/", "feedback/view").to_s
+    
     sla = source["extras"]["sla"] == "true" rescue false
     
     if sla
       @fields["slaUrl"] = url
       @fields["onGoingAvailability"] = "medium"
     end
+  end
+
+  def set_data_gov_assumptions
+    return unless hostname == "catalog.data.gov"
+
+    @fields["improvementsContact"] = "http://www.data.gov/issue/?media_url=#{url}"
   end
 
   def set_structured_open

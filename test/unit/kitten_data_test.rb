@@ -360,6 +360,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
     assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
     assert_equal "medium", kitten_data.fields["onGoingAvailability"]
+    assert_equal "http://data.gov.uk/some_crazy_data/feedback/view", kitten_data.fields["improvementsContact"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do
@@ -398,6 +399,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://catalog.data.gov/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
+    assert_equal "http://www.data.gov/issue/?media_url=http://catalog.data.gov/some_data", kitten_data.fields["improvementsContact"]
   end
 
   test 'Distribution metadata is set correctly' do
