@@ -285,6 +285,16 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_frequent_changes
+    return unless data[:update_frequency].present?
+    at_least_daily = /(day|daily|hour|minute|second)/i
+    @fields["frequentChanges"] = if data[:update_frequency] =~ at_least_daily
+      "true"
+    else
+      "false"
+    end
+  end
+
   def set_documentation
     resource = original_resources.find { |r| r["resource_type"] == "documentation" }
     @fields["technicalDocumentation"] = resource["url"] unless resource.blank?

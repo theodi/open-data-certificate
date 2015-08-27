@@ -244,6 +244,18 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "changing", kitten_data.fields["serviceType"]
   end
 
+  test 'Frequently changing data detected when update frequency is at least daily' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
+    
+    assert_equal "true", kitten_data.fields["frequentChanges"]
+  end
+
+  test 'Data does not frequently change when update frequency is less often than daily' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('monthly')
+    
+    assert_equal "false", kitten_data.fields["frequentChanges"]
+  end
+
   test 'Technical documentation is detected when there is a documentation resource' do
     source = {
       "resources" => [{ 
