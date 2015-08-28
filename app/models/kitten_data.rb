@@ -352,10 +352,8 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_schema
-    schema = source["schema"]
+    schema = source["schema"] rescue nil
     @fields["vocabulary"] = "true" if schema.present?
-  rescue NoMethodError
-    nil
   end
 
   private
