@@ -233,6 +233,26 @@ class KittenData < ActiveRecord::Base
     return unless hostname == "catalog.data.gov"
 
     @fields["improvementsContact"] = "http://www.data.gov/issue/?media_url=#{url}"
+
+    begin
+      publisher_id = source["organization"]["id"]
+      publisher = DataKitten::Fetcher.new("http://catalog.data.gov/api/2/rest/group/#{publisher_id}").as_json
+      is_federal = publisher["extras"]["organization_type"] == "Federal Government"
+      data_gov_federal_assumptions if is_federal
+    rescue
+      nil
+    end
+  end
+
+  def data_gov_federal_assumptions
+    @fields["dataLicence"] = "other"
+    @fields["contentLicence"] = "other"
+    @fields["otherDataLicenceName"] = "U.S. Government Work"
+    @fields["otherDataLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
+    @fields["otherDataLicenceOpen"] = "true"
+    @fields["otherContentLicenceName"] = "U.S. Government Work"
+    @fields["otherContentLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
+    @fields["otherContentLicenceOpen"] = "true"
   end
 
   def set_structured_open

@@ -410,6 +410,38 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://www.data.gov/issue/?media_url=http://catalog.data.gov/some_data", kitten_data.fields["improvementsContact"]
   end
 
+  test 'data.gov assumptions are set for federal organizations' do
+    source = {
+      "organization" => { "id" => "federal" }
+    }
+    organization = {
+      "extras" => { "organization_type" => "Federal Government" }
+    }
+    
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+
+    assert_equal "http://www.usa.gov/publicdomain/label/1.0/", kitten_data.fields["otherDataLicenceURL"]
+  end
+
+  test 'data.gov assumptions are not set for non-federal organizations' do
+    source = {
+      "organization" => { "id" => "federal" }
+    }
+    organization = {
+      "extras" => { "organization_type" => "City Government" }
+    }
+    
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+
+    assert_nil kitten_data.fields["otherDataLicenceURL"]
+  end
+
   test 'Distribution metadata is set correctly' do
     DataKitten::DistributionFormat.any_instance.stubs('open?').returns(true)
     DataKitten::DistributionFormat.any_instance.stubs('structured?').returns(true)
