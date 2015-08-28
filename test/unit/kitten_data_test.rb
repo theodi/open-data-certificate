@@ -236,7 +236,15 @@ class KittenDataTest < ActiveSupport::TestCase
   
     assert_equal 'service', kitten_data.fields["releaseType"]
   end
-  
+
+  test 'Release type is detected from provided field' do
+    source = { 
+      "extras" => { "resource-type" => "service" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    assert_equal 'service', kitten_data.fields["releaseType"]
+  end
+
   test 'Service type is detected as changing when update frequency is specified' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
     DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')

@@ -161,14 +161,27 @@ class KittenData < ActiveRecord::Base
     end
   end
 
-  def is_service
+  def is_service?
     data[:title].include?("API") || 
     data[:description].include?("API") ||
     original_resources.any? { |r| r["resource_type"] == "api" }
   end
 
+  def get_release_type
+    # this is where data.gov.uk provides type of release
+    resource_type = source["extras"]["resource-type"] rescue nil
+    
+    if ["service", "series"].include?(resource_type)
+      resource_type
+    elsif is_service?
+      "service"
+    else
+      check_frequency
+    end
+  end
+
   def set_release_type
-    @fields["releaseType"] = is_service ? "service" : check_frequency
+    @fields["releaseType"] = get_release_type
   end
 
   def set_service_type
