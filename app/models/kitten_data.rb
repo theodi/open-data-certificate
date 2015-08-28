@@ -310,7 +310,7 @@ class KittenData < ActiveRecord::Base
 
   def set_frequent_changes
     return unless data[:update_frequency].present?
-    at_least_daily = /(day|daily|hour|minute|second)/i
+    at_least_daily = /(day|daily|hour|minute|second|real-?time)/i
     @fields["frequentChanges"] = if data[:update_frequency] =~ at_least_daily
       "true"
     else
