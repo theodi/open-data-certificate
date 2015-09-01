@@ -170,7 +170,11 @@ class KittenData < ActiveRecord::Base
   def get_release_type
     # this is where data.gov.uk provides type of release
     resource_type = source["extras"]["resource-type"] rescue nil
-    
+
+    # data.gov uses extras["collection_metadata"] = "true" for collections.
+    is_collection = source["extras"]["collection_metadata"] == "true" rescue false
+    return "collection" if is_collection
+
     if ["service", "series"].include?(resource_type)
       resource_type
     elsif is_service?

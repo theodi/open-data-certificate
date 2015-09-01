@@ -202,13 +202,22 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'http://example.com/distribution', kitten_data.fields["datasetUrl"]
   end
 
-  test 'Release type is detected as a collection' do
+  test 'Release type is detected as a collection (from distributions)' do
     distribution = DataKitten::Distribution.new(self, {})
     distribution.format = DataKitten::DistributionFormat.new(distribution)
 
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
 
+    assert_equal 'collection', kitten_data.fields["releaseType"]
+  end
+
+  test 'Release type is detected as a collection (from metadata)' do
+    source = { 
+      "extras" => { "collection_metadata" => "true" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+  
     assert_equal 'collection', kitten_data.fields["releaseType"]
   end
 
