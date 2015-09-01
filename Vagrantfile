@@ -4,49 +4,21 @@
 defaults = {
   count: 1,
   flavor: /2GB/,
-  image: /Trusty/
+  image: /Trusty/,
+  run_list: [
+    'recipe[chef_certificates]'
+  ]
 }
 
 nodesets = [
   {
-    name: 'certificate',
-    count: 3,
-    chef_env: 'odc-prod',
-    run_list: [
-      "recipe[chef-open-data-certificate]"
-    ]
-  },
-  {
-    name: 'memcached_certificate',
-    flavor: /1GB/,
-    chef_env: 'odc-prod',
-    run_list: [
-      "role[open-data-certificate-attrs]",
-      "role[memcached]"
-    ]
-  },
-  {
-    name: 'staging_certificate',
-    chef_env: 'odc-staging',
-    run_list: [
-      "recipe[chef-open-data-certificate]"
-    ]
-  },
-  {
-    name: 'staging_memcached_certificate',
-    flavor: /1GB/,
-    chef_env: 'odc-staging',
-    run_list: [
-      "role[open-data-certificate-attrs]",
-      "role[memcached]"
-    ]
+    name: 'certs',
+    count: 2,
+    chef_env: 'certs-prod'
   },
   {
     name: 'stg_certs',
-    chef_env: 'certs-stg',
-    run_list: [
-      'recipe[chef_certificates]'
-    ]
+    chef_env: 'certs-stg'
   }
 ]
 
@@ -80,6 +52,9 @@ Vagrant.configure("2") do |config|
         config.ssh.private_key_path = "./.chef/id_rsa"
         config.ssh.username         = "root"
 
+      #  config.ssh.private_key_path = "~/.ssh/id_rsa"
+      #  config.ssh.username         = "odi"
+
         config.vm.provider :rackspace do |rs|
           rs.username         = y["username"]
           rs.api_key          = y["api_key"]
@@ -94,7 +69,6 @@ Vagrant.configure("2") do |config|
         config.vm.provision :chef_client do |chef|
           chef.node_name              = chef_name
           chef.environment            = "#{set[:chef_env]}"
-#          chef.chef_server_url        = "https://178.79.143.238"
           chef.chef_server_url        = "https://chef.theodi.org"
           chef.validation_client_name = "chef-validator"
           chef.validation_key_path    = ".chef/chef-validator.pem"
