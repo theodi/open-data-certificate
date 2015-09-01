@@ -218,7 +218,6 @@ class KittenData < ActiveRecord::Base
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
-    @fields["onWebsite"] = "true"
     @fields["contactUrl"] = url
     @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
