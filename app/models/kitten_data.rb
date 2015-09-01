@@ -193,6 +193,11 @@ class KittenData < ActiveRecord::Base
     @fields["serviceType"] = "changing" if data[:update_frequency].present?
   end
 
+  def set_data_type
+    is_geographic = source["extras"]["metadata_type"] == "geospatial" rescue false
+    @fields["dataType"] = "geographic" if is_geographic
+  end
+
   def set_basic_requirements
     # These should probably only be assumed on imports from government portals
     # see discussion on https://github.com/theodi/open-data-certificate/issues/1090

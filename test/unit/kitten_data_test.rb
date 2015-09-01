@@ -261,6 +261,15 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "changing", kitten_data.fields["serviceType"]
   end
 
+  test 'Data type is detected as geographic from metadata' do
+    source = { 
+      "extras" => { "metadata_type" => "geospatial" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+
+    assert_equal "geographic", kitten_data.fields["dataType"]
+  end
+
   test 'Frequently changing data detected when update frequency is at least daily' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
     
