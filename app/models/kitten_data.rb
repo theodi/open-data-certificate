@@ -353,7 +353,8 @@ class KittenData < ActiveRecord::Base
 
   def set_schema
     schema = source["schema"] rescue nil
-    @fields["vocabulary"] = "true" if schema.present?
+    resource_schemas = original_resources.select { |r| r["schema-url"].present? }
+    @fields["vocabulary"] = "true" if schema.present? || resource_schemas.present?
   end
 
   private

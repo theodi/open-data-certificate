@@ -528,9 +528,18 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://example.org/codelist", kitten_data.fields["codelistDocumentationUrl"]
   end
 
-  test 'Schema is detected when present' do
+  test 'Schema is detected when present for the dataset' do
     source = {
       "schema" => [{ "url" => "http://example.org/schema.json", "name" => "schema" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["vocabulary"]
+  end
+
+  test 'Schema is detected when present for one of the resources' do
+    source = {
+      "resources" => [{ "schema-url" => "http://example.org/schema.json" }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
     
