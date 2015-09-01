@@ -21,7 +21,7 @@ class KittenDataTest < ActiveSupport::TestCase
       d.access_url = 'http://example.com/dataset'
       d.download_url = 'http://example.com/distribution'
       d.byte_size = 1000
-      d.media_type = 'application/json'
+      d.media_type = 'text/plain'
       d.extension = 'txt'
       d.format = DataKitten::DistributionFormat.new(d)
     end
@@ -131,7 +131,7 @@ class KittenDataTest < ActiveSupport::TestCase
       access_url: 'http://example.com/dataset',
       download_url: 'http://example.com/distribution',
       byte_size: 1000,
-      media_type: 'application/json',
+      media_type: 'text/plain',
       open: nil,
       extension: :txt,
       structured: nil
@@ -202,13 +202,22 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'http://example.com/distribution', kitten_data.fields["datasetUrl"]
   end
 
-  test 'Release type is detected as a collection' do
+  test 'Release type is detected as a collection (from distributions)' do
     distribution = DataKitten::Distribution.new(self, {})
     distribution.format = DataKitten::DistributionFormat.new(distribution)
 
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:distributions).returns([distribution, distribution])
 
+    assert_equal 'collection', kitten_data.fields["releaseType"]
+  end
+
+  test 'Release type is detected as a collection (from metadata)' do
+    source = { 
+      "extras" => { "collection_metadata" => "true" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+  
     assert_equal 'collection', kitten_data.fields["releaseType"]
   end
 
@@ -221,11 +230,72 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'series', kitten_data.fields["releaseType"]
   end
 
-  test 'Release type is detected as a service' do
+  test 'Release type is detected as a service when API is mentioned in the description' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
     DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')
 
     assert_equal 'service', kitten_data.fields["releaseType"]
+  end
+
+  test 'Release type is detected as a service when one of the distributions is an API' do
+    source = { 
+      "resources" => [{ "resource_type" => "api" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+  
+    assert_equal 'service', kitten_data.fields["releaseType"]
+  end
+
+  test 'Release type is detected from provided field' do
+    source = { 
+      "extras" => { "resource-type" => "service" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    assert_equal 'service', kitten_data.fields["releaseType"]
+  end
+
+  test 'Service type is detected as changing when update frequency is specified' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
+    DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')
+    
+    assert_equal "changing", kitten_data.fields["serviceType"]
+  end
+
+  test 'Data type is detected as geographic from metadata' do
+    source = { 
+      "extras" => { "metadata_type" => "geospatial" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+
+    assert_equal "geographic", kitten_data.fields["dataType"]
+  end
+
+  test 'Frequently changing data detected when update frequency is at least daily' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
+    
+    assert_equal "true", kitten_data.fields["frequentChanges"]
+  end
+
+  test 'Data does not frequently change when update frequency is less often than daily' do
+    DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('monthly')
+    
+    assert_equal "false", kitten_data.fields["frequentChanges"]
+  end
+
+  test 'Technical documentation is detected when there is a documentation resource' do
+    source = {
+      "resources" => [{ 
+        "url" => "http://example.org/docs",
+        "resource_type" => "documentation"
+      }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "http://example.org/docs", kitten_data.fields["technicalDocumentation"]
+  end
+
+  test 'Is timestamped if temporal is specified' do
+    assert_equal "timestamped", kitten_data.fields["timeSensitive"]
   end
 
   test 'Rights fields are set correctly' do
@@ -253,6 +323,28 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "ogl_uk", kitten_data.fields["dataLicence"]
     assert_equal "ogl_uk", kitten_data.fields["contentLicence"]
   end
+  
+  test 'If the data license covers content, set it also as a content license' do
+    license = DataKitten::License.new({})
+    license.abbr = "cc-zero"
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
+    DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
+    
+    assert_equal "yes", kitten_data.fields["publisherRights"]
+    assert_equal "cc_zero", kitten_data.fields["dataLicence"]
+    assert_equal "cc_zero", kitten_data.fields["contentLicence"]
+  end
+
+  test 'If the data license does not cover content, do not set content license' do
+    license = DataKitten::License.new({})
+    license.abbr = "odc-pddl"
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
+    DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
+    
+    assert_equal "yes", kitten_data.fields["publisherRights"]
+    assert_equal "odc_pddl", kitten_data.fields["dataLicence"]
+    assert_nil kitten_data.fields["contentLicence"]
+  end
 
   test 'Ordinance Survey license fields are set correctly' do
     license = DataKitten::License.new({})
@@ -271,6 +363,11 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'data.gov.uk assumptions are applied' do
+    source = {
+      "extras" => { "sla" => "true" }
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+
     stub_request(:get, 'http://data.gov.uk/some_crazy_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
 
@@ -281,10 +378,14 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
+    assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["contactUrl"]
     assert_equal "http://data.gov.uk", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
+    assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
+    assert_equal "medium", kitten_data.fields["onGoingAvailability"]
+    assert_equal "http://data.gov.uk/some_crazy_data/feedback/view", kitten_data.fields["improvementsContact"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do
@@ -298,6 +399,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
+    assert_equal "http://data.london.gov.uk/some_data", kitten_data.fields["contactUrl"]
     assert_equal "http://data.london.gov.uk", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
@@ -315,10 +417,44 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
+    assert_equal "http://catalog.data.gov/some_data", kitten_data.fields["contactUrl"]
     assert_equal "http://catalog.data.gov", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://catalog.data.gov/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
+    assert_equal "http://www.data.gov/issue/?media_url=http://catalog.data.gov/some_data", kitten_data.fields["improvementsContact"]
+  end
+
+  test 'data.gov assumptions are set for federal organizations' do
+    source = {
+      "organization" => { "id" => "federal" }
+    }
+    organization = {
+      "extras" => { "organization_type" => "Federal Government" }
+    }
+    
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+
+    assert_equal "http://www.usa.gov/publicdomain/label/1.0/", kitten_data.fields["otherDataLicenceURL"]
+  end
+
+  test 'data.gov assumptions are not set for non-federal organizations' do
+    source = {
+      "organization" => { "id" => "federal" }
+    }
+    organization = {
+      "extras" => { "organization_type" => "City Government" }
+    }
+    
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+
+    assert_nil kitten_data.fields["otherDataLicenceURL"]
   end
 
   test 'Distribution metadata is set correctly' do
@@ -354,6 +490,75 @@ class KittenDataTest < ActiveSupport::TestCase
     set_blank_data
 
     assert_equal nil, kitten_data.fields["documentationMetadata"]
+  end
+
+  test 'Correct distribution metadata fields are set with one distribution' do
+    metadata = [
+      "title",
+      "description",
+      "issued",
+      "modified",
+      "accessURL",
+      "downloadURL",
+      "byteSize",
+      "mediaType"
+    ]
+    
+    assert_equal metadata, kitten_data.fields["distributionMetadata"]
+  end
+
+  test 'Correct distribution metadata fields are set with multiple distributions' do
+    distributions = [{
+      title: "title 1",
+      accessURL: "http://example.org/dataset",
+      byteSize: nil
+    }, {
+      title: "title 2",
+      accessURL: nil,
+      byteSize: 1000
+    }].map do |fields|
+      distribution = DataKitten::Distribution.new(self, {})
+      fields.each { |key,value| distribution.stubs(key).returns(value) }
+      distribution
+    end
+
+    DataKitten::Dataset.any_instance.stubs(:distributions).returns(distributions)
+
+    assert_equal ["title"], kitten_data.fields["distributionMetadata"]
+  end
+
+  test 'No distribution metadata fields are set with no distributions' do
+    set_blank_data
+
+    assert_equal nil, kitten_data.fields["distributionMetadata"]
+  end
+
+  test 'Codelist is detected when present' do
+    source = {
+      "codelist" => [{ "url" => "http://example.org/codelist", "name" => "codelist" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["codelists"]
+    assert_equal "http://example.org/codelist", kitten_data.fields["codelistDocumentationUrl"]
+  end
+
+  test 'Schema is detected when present for the dataset' do
+    source = {
+      "schema" => [{ "url" => "http://example.org/schema.json", "name" => "schema" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["vocabulary"]
+  end
+
+  test 'Schema is detected when present for one of the resources' do
+    source = {
+      "resources" => [{ "schema-url" => "http://example.org/schema.json" }]
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    
+    assert_equal "true", kitten_data.fields["vocabulary"]
   end
 
   test "accessor to data attributes returns nil on non serialzed kitten data" do

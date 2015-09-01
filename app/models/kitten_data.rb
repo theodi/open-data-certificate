@@ -27,9 +27,14 @@ class KittenData < ActiveRecord::Base
   }
 
   KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
+  KNOWN_CONTENT_LICENCES = ["cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
 
   def dataset
     @dataset
+  end
+
+  def source
+    @dataset.try(:source) || {}
   end
 
   def distributions
@@ -133,7 +138,7 @@ class KittenData < ActiveRecord::Base
     data_licence = data[:licenses][0].abbr.try(:underscore) unless data[:licenses].empty?
     
     @fields["dataLicence"] = data_licence if KNOWN_LICENCES.include? data_licence
-    @fields["contentLicence"] = "ogl_uk" if @fields["dataLicence"] == "ogl_uk"
+    @fields["contentLicence"] = data_licence if KNOWN_CONTENT_LICENCES.include? data_licence
 
     # Settings for ordnance survey licences
     if data[:licenses][0].uri == "http://www.ordnancesurvey.co.uk/docs/licences/os-opendata-licence.pdf"
@@ -148,12 +153,49 @@ class KittenData < ActiveRecord::Base
     end
   end
 
-  def set_release_type
-    if data[:title].include?("API") || data[:description].include?("API")
-      @fields["releaseType"] = "service"
+  def original_resources
+    if source.present? && source["resources"].present?
+      source["resources"]
     else
-      @fields["releaseType"] = check_frequency
+      []
     end
+  end
+
+  def is_service?
+    data[:title].include?("API") || 
+    data[:description].include?("API") ||
+    original_resources.any? { |r| r["resource_type"] == "api" }
+  end
+
+  def get_release_type
+    # this is where data.gov.uk provides type of release
+    resource_type = source["extras"]["resource-type"] rescue nil
+
+    # data.gov uses extras["collection_metadata"] = "true" for collections.
+    is_collection = source["extras"]["collection_metadata"] == "true" rescue false
+    return "collection" if is_collection
+
+    if ["service", "series"].include?(resource_type)
+      resource_type
+    elsif is_service?
+      "service"
+    else
+      check_frequency
+    end
+  end
+
+  def set_release_type
+    @fields["releaseType"] = get_release_type
+  end
+
+  def set_service_type
+    return unless @fields["releaseType"] == "service"
+    @fields["serviceType"] = "changing" if data[:update_frequency].present?
+  end
+
+  def set_data_type
+    is_geographic = source["extras"]["metadata_type"] == "geospatial" rescue false
+    @fields["dataType"] = "geographic" if is_geographic
   end
 
   def set_basic_requirements
@@ -176,9 +218,49 @@ class KittenData < ActiveRecord::Base
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
+    @fields["contactUrl"] = url
     @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
+  end
+
+  def set_data_gov_uk_assumptions
+    return unless hostname == "data.gov.uk"
+    
+    @fields["improvementsContact"] = URI.join(url + "/", "feedback/view").to_s
+    
+    sla = source["extras"]["sla"] == "true" rescue false
+    
+    if sla
+      @fields["slaUrl"] = url
+      @fields["onGoingAvailability"] = "medium"
+    end
+  end
+
+  def set_data_gov_assumptions
+    return unless hostname == "catalog.data.gov"
+
+    @fields["improvementsContact"] = "http://www.data.gov/issue/?media_url=#{url}"
+
+    begin
+      publisher_id = source["organization"]["id"]
+      publisher = DataKitten::Fetcher.new("http://catalog.data.gov/api/2/rest/group/#{publisher_id}").as_json
+      is_federal = publisher["extras"]["organization_type"] == "Federal Government"
+      data_gov_federal_assumptions if is_federal
+    rescue
+      nil
+    end
+  end
+
+  def data_gov_federal_assumptions
+    @fields["dataLicence"] = "other"
+    @fields["contentLicence"] = "other"
+    @fields["otherDataLicenceName"] = "U.S. Government Work"
+    @fields["otherDataLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
+    @fields["otherDataLicenceOpen"] = "true"
+    @fields["otherContentLicenceName"] = "U.S. Government Work"
+    @fields["otherContentLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
+    @fields["otherContentLicenceOpen"] = "true"
   end
 
   def set_structured_open
@@ -211,6 +293,26 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_distribution_metadata
+    @fields["distributionMetadata"] = []
+    
+    {
+      "title" => :title,
+      "description" => :description,
+      "issued" => :issued,
+      "modified" => :modified,
+      "rights" => :rights,
+      "accessURL" => :access_url,
+      "downloadURL" => :download_url,
+      "byteSize" => :byte_size,
+      "mediaType" => :media_type
+    }.each do |k,v|
+      if data[:distributions].all? {|d| d[v].present? }
+        @fields["distributionMetadata"].push(k)
+      end
+    end
+  end
+
   def check_frequency
     num_distributions = data[:distributions].length
     if data[:update_frequency].blank?
@@ -226,6 +328,41 @@ class KittenData < ActiveRecord::Base
     if check_frequency == "oneoff"
       @fields["datasetUrl"] = data[:distributions][0][:download_url]
     end
+  end
+  
+  def set_time_sensitive
+    if data[:temporal_coverage].present?
+      @fields["timeSensitive"] = "timestamped"
+    end
+  end
+
+  def set_frequent_changes
+    return unless data[:update_frequency].present?
+    at_least_daily = /(day|daily|hour|minute|second|real-?time)/i
+    @fields["frequentChanges"] = if data[:update_frequency] =~ at_least_daily
+      "true"
+    else
+      "false"
+    end
+  end
+
+  def set_documentation
+    resource = original_resources.find { |r| r["resource_type"] == "documentation" }
+    @fields["technicalDocumentation"] = resource["url"] unless resource.blank?
+  end
+
+  def set_codelists
+    codelists = source["codelist"] || source["extras"]["codelist"]
+    @fields["codelists"] = "true" if codelists.present?
+    @fields["codelistDocumentationUrl"] = codelists[0]["url"]
+  rescue NoMethodError
+    nil
+  end
+
+  def set_schema
+    schema = source["schema"] rescue nil
+    resource_schemas = original_resources.select { |r| r["schema-url"].present? }
+    @fields["vocabulary"] = "true" if schema.present? || resource_schemas.present?
   end
 
   private
