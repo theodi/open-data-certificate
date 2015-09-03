@@ -43,7 +43,7 @@ class SurveyorController < ApplicationController
         end
       end
 
-    elsif @response_set.survey.superceded?
+    elsif @response_set.survey.superseded?
       latest_survey = Survey.newest_survey_for_access_code(params[:survey_code])
       unless latest_survey.nil?
         switch_survey(latest_survey)
@@ -206,7 +206,7 @@ class SurveyorController < ApplicationController
     attrs['survey_id'] = survey.id
     response_set = @response_set
     create_new_response_set(attrs)
-    response_set.supercede!
+    response_set.supersede!
   end
 
 end

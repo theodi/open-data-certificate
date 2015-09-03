@@ -92,7 +92,7 @@ class Survey < ActiveRecord::Base
     meta
   end
 
-  def superceded?
+  def superseded?
     !(self.id == Survey.newest_survey_for_access_code(access_code).try(:id))
   end
 
