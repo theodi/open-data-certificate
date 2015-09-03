@@ -140,4 +140,19 @@ class MainControllerTest < ActionController::TestCase
     assert_equal assigns(:dataset).user_id, @user.id, "dataset belongs to user"
   end
 
+  test "ping page returns ok" do
+    get :ping
+    assert_response 200
+  end
+
+  test "ping page checks status of database" do
+    ActiveRecord::Base.connection.stubs(:active?).returns(false)
+    get :ping
+    assert_response 503
+  end
+
+  test "ping is available on status/ping" do
+    assert_routing '/status/ping', controller: 'main', action: 'ping'
+  end
+
 end
