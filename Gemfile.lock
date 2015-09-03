@@ -18,10 +18,9 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 5b094925ffbf46134daa270c6fdf9ceea8f5b734
+  revision: 1f8ff3598291642b7f832d0875fe33e486829bb2
   specs:
-    data_kitten (1.3.0)
-      curb
+    data_kitten (1.3.1)
       datapackage
       git
       json
@@ -124,7 +123,6 @@ GEM
       mime-types (~> 1.16)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
-    curb (0.8.8)
     daemons (1.1.9)
     database_cleaner (1.3.0)
     datapackage (0.0.4)
@@ -359,7 +357,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.2)
       ffi (>= 0.5.0)
-    rdf (1.1.14)
+    rdf (1.1.15)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (1.1.0)
       rdf (>= 1.1)
@@ -463,7 +461,7 @@ GEM
       rdf-xsd (~> 1.1)
       sparql-client (~> 1.1)
       sxp (~> 0.1)
-    sparql-client (1.1.5)
+    sparql-client (1.1.6)
       net-http-persistent (~> 2.9)
       rdf (~> 1.1)
     sprockets (2.2.3)

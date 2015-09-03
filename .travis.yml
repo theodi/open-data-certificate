@@ -7,7 +7,6 @@ sudo: false
 rvm:
 - 2.0.0
 before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
-script: "bundle exec rake $TESTSUITE"
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
   curl -v -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs/tags/CURRENT"'
@@ -39,11 +38,5 @@ env:
     - ODC_REDIS_SERVER_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
-    - COVERALLS_PARALLEL=true
-  matrix:
-    - TESTSUITE=test:units
-    - TESTSUITE=test:functionals
-    - TESTSUITE=test:integration
-    - TESTSUITE=cucumber
 git:
   depth: 10
