@@ -107,7 +107,7 @@ class ResponseSet < ActiveRecord::Base
     end
 
     event :supersede do
-      transitions from: [:draft, :published], to: :superseded
+      transitions from: [:draft, :published, :superseded], to: :superseded
     end
   end
 
