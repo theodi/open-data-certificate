@@ -128,7 +128,7 @@ cs:
       draft: Draft
       published: Published
       archived: Archived
-      superceded: Superceded
+      superseded: Superseded
     expiring_states:
       expired: Expired
       expiring: 'Expires in %{days} days'

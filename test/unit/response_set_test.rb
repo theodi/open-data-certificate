@@ -141,7 +141,7 @@ class ResponseSetTest < ActiveSupport::TestCase
     new_survey.survey_version = 1
     new_survey.save
 
-    assert old_survey.superceded?, 'survey should be superceded'
+    assert old_survey.superseded?, 'survey should be superseded'
 
     response_set = nil
     assert_difference 'ResponseSet.count', 1 do
