@@ -13,7 +13,6 @@ end
 
 task :certificates do
   url = ENV['URL']
-  csv = ENV['CSV']
   user = User.find(ENV.fetch('USER_ID'))
   options = {
     user_id: user.id,
@@ -24,9 +23,5 @@ task :certificates do
     campaign = user.certification_campaigns.where(name: campaign_name).first_or_create(url: url)
     options[:campaign_id] = campaign.id
   end
-  if url
-    CertificateFactory::FactoryRunner.perform_async(options.merge(feed: url))
-  else
-    CertificateFactory::CSVFactoryRunner.perform_async(options.merge(file: csv))
-  end
+  CertificateFactory::FactoryRunner.perform_async(options.merge(feed: url))
 end
