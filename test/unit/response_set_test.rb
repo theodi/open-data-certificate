@@ -710,7 +710,7 @@ class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
 
   QueryCounter.attach_to :active_record
 
-  test "update queries count" do
+  test "updating a single response" do
     load_custom_survey 'cert_generator.rb'
     survey = Survey.newest_survey_for_access_code('cert-generator')
     response_set = ResponseSet.create!(:survey => survey)
@@ -718,6 +718,19 @@ class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
       response_set.update_responses('dataTitle' => 'a title response')
     end
     assert query_count < 10, "#{query_count} queries is too many for a single update"
+  end
+
+  test "updating two responses" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    query_count = QueryCounter.in do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'releaseType' => 'oneoff'
+      )
+    end
+    assert query_count < 20, "#{query_count} queries is too many for a single update"
   end
 
 end
