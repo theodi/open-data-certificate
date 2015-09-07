@@ -15,11 +15,6 @@ module SurveyorHelper
     result ? result : response_set.responses.build(:question_id => question.id, :response_group => response_group)
   end
 
-  def survey_cache_key
-    # If there were no responses by the user, the cache the blank survey for other new users
-    @responses.empty? ? "blank_survey_#{@response_set.survey_id}_#{@response_set.locale}" : @response_set
-  end
-
   def question_requirement_with_badge(level)
     popover_content = content_tag(:span, safe_join([
       content_tag(:i, '', class: ['badge', level]),
