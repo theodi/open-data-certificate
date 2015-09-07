@@ -685,3 +685,39 @@ class ResponseSetErrorsTest < ActiveSupport::TestCase
     assert !rs.response_errors['publisherUrl'].include?('mandatory'), 'not described as mandatory'
   end
 end
+
+class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
+
+  class QueryCounter < ActiveSupport::LogSubscriber
+
+    cattr_accessor :count
+
+    def self.reset!
+      self.count = 0
+    end
+
+    def self.in
+      reset!
+      yield
+      return count
+    end
+
+    def sql(event)
+      self.class.count += 1
+    end
+
+  end
+
+  QueryCounter.attach_to :active_record
+
+  test "update queries count" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    query_count = QueryCounter.in do
+      response_set.update_responses('dataTitle' => 'a title response')
+    end
+    assert query_count < 10, "#{query_count} queries is too many for a single update"
+  end
+
+end
