@@ -10,7 +10,6 @@ class Response < ActiveRecord::Base
   belongs_to :response_set, touch: true
 
   after_save :set_default_dataset_title, :set_default_documentation_url
-  after_save :update_survey_section_id
   after_save :update_certificate_state
 
   before_save :resolve_if_url
@@ -152,13 +151,6 @@ class Response < ActiveRecord::Base
 
   def set_default_documentation_url
     dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
-  end
-
-  def update_survey_section_id
-    if survey_section_id.blank?
-      survey_section_id = question.try(:survey_section_id)
-      Response.update(id, :survey_section_id => survey_section_id) if survey_section_id
-    end
   end
 
   def update_certificate_state
