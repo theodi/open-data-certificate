@@ -75,9 +75,9 @@ class CertificateTest < ActiveSupport::TestCase
   end
 
   test 'no longer auto generated if responses have been updated since generation' do
-    response_set = FactoryGirl.create(:response_set_with_dataset, updated_at: 4.minutes.ago)
-    3.times { FactoryGirl.create(:valid_response, response_set: response_set, updated_at: 6.minutes.ago) }
+    response_set = FactoryGirl.create(:response_set_with_dataset, updated_at: 6.minutes.ago)
     certificate_generator = CertificateGenerator.create(response_set: response_set, updated_at: 5.minutes.ago)
+    3.times { FactoryGirl.create(:valid_response, response_set: response_set, updated_at: 4.minutes.ago) }
     certificate = response_set.certificate
 
     assert_equal :self, certificate.certification_type
