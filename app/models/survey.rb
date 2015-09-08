@@ -97,7 +97,6 @@ class Survey < ActiveRecord::Base
   end
 
   def requirements
-    # questions.select(&:is_a_requirement?)
     questions.where(display_type: 'label').where('requirement is not null')
   end
 
@@ -180,8 +179,7 @@ class Survey < ActiveRecord::Base
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
     questions = sections.map(&:questions).flatten.compact
-    requirements = questions.select(&:is_a_requirement?)
-    only_questions = (questions - requirements)
+    requirements, only_questions = questions.partition(&:is_a_requirement?)
     answers = only_questions.map(&:answers).flatten.compact
 
     requirements.each do |requirement|

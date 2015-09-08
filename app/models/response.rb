@@ -43,7 +43,7 @@ class Response < ActiveRecord::Base
   memoize :requirement_level
 
   def requirement
-    answer.requirement
+    answer.requirement || question.requirement
   end
   memoize :requirement
 

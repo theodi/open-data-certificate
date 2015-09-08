@@ -9,10 +9,6 @@ class Answer < ActiveRecord::Base
     !(message || '').strip.blank?
   end
 
-  def requirement
-    @requirement ||= read_attribute(:requirement).presence || question.try(:requirement).presence
-  end
-
   def requirement_level
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
     requirement.to_s.match(/^[a-zA-Z]*/).to_s
