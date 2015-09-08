@@ -145,7 +145,7 @@ class SurveyorControllerTest < ActionController::TestCase
     survey = @response_set.survey
     section = FactoryGirl.create(:survey_section)
     survey.sections << section
-    question = FactoryGirl.create(:question, reference_identifier: "documentationURL", survey_section: section)
+    question = FactoryGirl.create(:question, reference_identifier: "documentationUrl", survey_section: section)
     question.answers << FactoryGirl.create(:answer) 
 
     sign_in @response_set.user

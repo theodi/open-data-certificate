@@ -44,7 +44,7 @@
               %a{href: about_url} Read more about Open Data Certificates
 
         = semantic_form_for [surveyor, :start, @response_set] do |f|
-          - question = @survey.questions.find_by_reference_identifier("documentationURL")
+          - question = @survey.documentation_url
           = f.label :documentation_url, question.heading
 
           .row-fluid
