@@ -142,7 +142,7 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def response(identifier)
-    responses.select{|r| r.question.reference_identifier == identifier.to_s }.first
+    responses.for_id(identifier).first
   end
 
   def documentation_url

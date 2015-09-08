@@ -21,6 +21,8 @@ class Response < ActiveRecord::Base
     END
   SQL
 
+  scope :for_id, lambda { |id| joins(:question).merge(Question.for_id(id)) }
+
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end

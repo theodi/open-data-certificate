@@ -162,7 +162,7 @@ class Survey < ActiveRecord::Base
   end
 
   def question(identifier)
-    questions.where(reference_identifier: identifier).first
+    questions.for_id(identifier).first
   end
 
   def documentation_url

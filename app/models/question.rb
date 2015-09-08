@@ -7,6 +7,8 @@ class Question < ActiveRecord::Base
   scope :mandatory, where(is_mandatory: true)
   scope :urls, joins(:answers).merge(Answer.urls)
 
+  scope :for_id, lambda { |id| where(reference_identifier: id) }
+
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
   before_save :set_mandatory
