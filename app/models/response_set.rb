@@ -29,17 +29,17 @@ class ResponseSet < ActiveRecord::Base
   attr_accessor :documentation_url
 
   belongs_to :dataset, touch: true
-  belongs_to :survey
+  belongs_to :survey, inverse_of: :response_sets
 
   has_many :questions, through: :responses
   has_many :answers, through: :responses
 
   # One to one relationship with certificate
-  has_one :certificate, dependent: :destroy
+  has_one :certificate, dependent: :destroy, inverse_of: :response_set
 
   # One to one relationship with kitten data object
-  has_one :kitten_data, dependent: :destroy, order: "created_at DESC"
-  has_one :certificate_generator
+  has_one :kitten_data, dependent: :destroy, order: "created_at DESC", inverse_of: :response_set
+  has_one :certificate_generator, inverse_of: :response_set
 
   scope :published, where(:aasm_state => 'published')
 

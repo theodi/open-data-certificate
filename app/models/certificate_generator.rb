@@ -2,7 +2,7 @@ class CertificateGenerator < ActiveRecord::Base
   include Ownership
 
   belongs_to :user
-  belongs_to :response_set
+  belongs_to :response_set, :inverse_of => :certificate_generator
   belongs_to :certification_campaign
 
   has_one :dataset, through: :response_set

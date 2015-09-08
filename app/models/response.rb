@@ -7,7 +7,7 @@ class Response < ActiveRecord::Base
   attr_accessible :autocompleted, :explanation
 
   # override with :touch
-  belongs_to :response_set, touch: true
+  belongs_to :response_set, touch: true, inverse_of: :responses
 
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_certificate_state

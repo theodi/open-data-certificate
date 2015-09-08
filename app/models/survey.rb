@@ -30,8 +30,8 @@ class Survey < ActiveRecord::Base
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
 
-  has_many :response_sets
-  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
+  has_many :response_sets, :inverse_of => :survey
+  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}, :inverse_of => :survey
   has_many :dependencies, :through => :questions
   has_many :answers, through: :questions
 

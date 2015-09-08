@@ -7,7 +7,7 @@ module Surveyor
         # Associations
         base.send :belongs_to, :survey
         base.send :belongs_to, :user
-        base.send :has_many, :responses, :order => "#{Response.quoted_table_name}.created_at ASC", :dependent => :destroy
+        base.send :has_many, :responses, :order => "#{Response.quoted_table_name}.created_at ASC", :dependent => :destroy, :inverse_of => :response_set
         base.send :accepts_nested_attributes_for, :responses, :allow_destroy => true
 
         @@validations_already_included ||= nil

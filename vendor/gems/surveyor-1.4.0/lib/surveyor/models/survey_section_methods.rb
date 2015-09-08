@@ -3,8 +3,8 @@ module Surveyor
     module SurveySectionMethods
       def self.included(base)
         # Associations
-        base.send :has_many, :questions, :dependent => :destroy
-        base.send :belongs_to, :survey
+        base.send :has_many, :questions, :dependent => :destroy, :inverse_of => :survey_section
+        base.send :belongs_to, :survey, :inverse_of => :sections
 
         @@validations_already_included ||= nil
         unless @@validations_already_included

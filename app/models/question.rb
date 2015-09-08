@@ -13,7 +13,8 @@ class Question < ActiveRecord::Base
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
-  has_one :survey, :through => :survey_section
+  has_one :survey, :through => :survey_section, :inverse_of => :questions
+  has_many :responses, :inverse_of => :question
 
   LEVELS = {
     'basic' => 1,
