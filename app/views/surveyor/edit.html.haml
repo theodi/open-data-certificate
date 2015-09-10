@@ -73,7 +73,7 @@
 
 
           .documentation-url
-            - question = @survey.questions.find_by_reference_identifier("documentationURL")
+            - question = @survey.documentation_url
             %label
               = question.heading
             .row-fluid
