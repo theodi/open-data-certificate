@@ -688,19 +688,38 @@ class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
   class QueryCounter < ActiveSupport::LogSubscriber
 
     cattr_accessor :count
+    cattr_accessor :active
 
     def self.reset!
       self.count = 0
     end
 
     def self.in
+      self.active = true
       reset!
       yield
       return count
+    ensure
+      self.active = false
+    end
+
+    def print?
+      self.class.active && ENV.fetch('QUERY_COUNTER_LOG', 'false') == "true"
+    end
+
+    def print(msg)
+      $stderr.puts(msg) if self.print?
     end
 
     def sql(event)
-      self.class.count += 1
+      payload = event.payload
+      unless ['SCHEMA', nil].include?(payload[:name])
+        self.class.count += 1
+        print "#{payload[:name]} #{payload[:sql][0..100]}"
+        print payload[:binds].map(&:last).inspect if payload[:binds].present?
+        from = Rails.backtrace_cleaner.clean(caller)
+        print "From: #{from[0]}"
+      end
     end
 
   end
