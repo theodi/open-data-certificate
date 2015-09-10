@@ -2,11 +2,6 @@ module Surveyor
   module Models
     module ResponseMethods
       def self.included(base)
-        # Associations
-        base.send :belongs_to, :response_set, :inverse_of => :responses
-        base.send :belongs_to, :question, :inverse_of => :responses
-        base.send :belongs_to, :answer, :inverse_of => :responses
-
         @@validations_already_included ||= nil
         unless @@validations_already_included
           # Validations

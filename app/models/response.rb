@@ -6,8 +6,9 @@ class Response < ActiveRecord::Base
   attr_writer :reference_identifier
   attr_accessible :autocompleted, :explanation
 
-  # override with :touch
   belongs_to :response_set, touch: true, inverse_of: :responses
+  belongs_to :question, :inverse_of => :responses
+  belongs_to :answer, :inverse_of => :responses
 
   after_save :set_default_dataset_title, :set_default_documentation_url
   after_save :update_certificate_state
