@@ -142,7 +142,11 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def response(identifier)
-    responses.for_id(identifier).first
+    if responses.loaded?
+      responses.find { |r| r.question.reference_identifier == identifier }
+    else
+      responses.for_id(identifier).first
+    end
   end
 
   def documentation_url
