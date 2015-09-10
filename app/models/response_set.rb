@@ -480,7 +480,8 @@ class ResponseSet < ActiveRecord::Base
   end
 
   def response_for(question_id)
-    responses.where(question_id: question_id).first || responses.where(question_id: question_id).build
+    assoc = responses.where(question_id: question_id)
+    assoc.first || assoc.build
   end
 
   def autocomplete(url)
