@@ -710,27 +710,49 @@ class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
 
   QueryCounter.attach_to :active_record
 
+  def in_less_queries_than(limit, label, &block)
+    count = QueryCounter.in(&block)
+    assert count <= limit, "#{label}: #{count} queries is too many"
+  end
+
   test "updating a single response" do
     load_custom_survey 'cert_generator.rb'
     survey = Survey.newest_survey_for_access_code('cert-generator')
     response_set = ResponseSet.create!(:survey => survey)
-    query_count = QueryCounter.in do
+    in_less_queries_than(30, "a single update") do
       response_set.update_responses('dataTitle' => 'a title response')
     end
-    assert query_count < 10, "#{query_count} queries is too many for a single update"
   end
 
   test "updating two responses" do
     load_custom_survey 'cert_generator.rb'
     survey = Survey.newest_survey_for_access_code('cert-generator')
     response_set = ResponseSet.create!(:survey => survey)
-    query_count = QueryCounter.in do
+    in_less_queries_than(40, "updating 2 responses") do
       response_set.update_responses(
         'dataTitle' => 'a title response',
         'releaseType' => 'oneoff'
       )
     end
-    assert query_count < 20, "#{query_count} queries is too many for a single update"
+  end
+
+  test "updating a full response_set" do
+    load_custom_survey 'cert_generator.rb'
+    stub_request(:head, "example.com").to_return(status: 200)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(80, "updating a response_set") do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'documentationUrl' => 'http://example.com',
+        'publisherUrl' => 'http://example.com',
+        'releaseType' => 'oneoff',
+        'publisherRights' => 'yes',
+        'publisherOrigin' => 'true',
+        'chooseAny' => %w[one three],
+        'cats' => 'mammal'
+      )
+    end
   end
 
 end
