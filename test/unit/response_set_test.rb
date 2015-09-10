@@ -18,8 +18,9 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "created certificate is given the attained_level" do
-    @rs = FactoryGirl.create :completed_response_set
-    assert_equal @rs.certificate.attained_level, @rs.attained_level
+    response_set = FactoryGirl.create :completed_response_set
+    response_set.certificate.update_from_response_set
+    assert_equal response_set.certificate.attained_level, response_set.attained_level
   end
 
   test "can map questions to responses" do
@@ -457,14 +458,10 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#generate_certificate creates a new certificate on save of completed response_sets" do
-    # not stubbing out the attained level because the certificate reloads the response_set
-    # attained_level = 'test_level'
     response_set = FactoryGirl.build(:completed_response_set)
-    # response_set.stubs(:attained_level).returns(attained_level)
     assert_nil response_set.certificate
     response_set.save!
-
-    assert_equal response_set.attained_level, response_set.certificate.try(:attained_level)
+    assert_not_nil response_set.certificate
   end
 
   test "#generate_certificate does not overwrite existing certificate" do
