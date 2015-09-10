@@ -10,9 +10,6 @@ class Response < ActiveRecord::Base
   belongs_to :question, :inverse_of => :responses
   belongs_to :answer, :inverse_of => :responses
 
-  after_save :set_default_dataset_title, :set_default_documentation_url
-  after_save :update_certificate_state
-
   before_save :resolve_if_url
 
   scope :filled, joins(:question).where(<<-SQL)
@@ -146,22 +143,6 @@ class Response < ActiveRecord::Base
     return unless answer.input_type == 'url' && data_value.present?
     self.error = !ODIBot.new(data_value).valid?
     return nil # false value will stop active record saving
-  end
-
-  def set_default_dataset_title
-    if is_question_for?(:dataset_title)
-      dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
-    end
-  end
-
-  def set_default_documentation_url
-    if is_question_for?(:dataset_documentation_url)
-      dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
-    end
-  end
-
-  def update_certificate_state
-    response_set.update_certificate
   end
 
   def survey
