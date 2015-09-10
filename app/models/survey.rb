@@ -87,9 +87,11 @@ class Survey < ActiveRecord::Base
   end
 
   def meta_map
-    meta = read_attribute(:meta_map)
-    RESPONSE_MAP.each{|attr, val| meta[attr.to_sym] ||= val }
-    meta
+    RESPONSE_MAP.merge(read_attribute(:meta_map).symbolize_keys)
+  end
+
+  def question_for_attribute(ref)
+    meta_map[ref]
   end
 
   def superseded?

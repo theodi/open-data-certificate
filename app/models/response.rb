@@ -149,15 +149,27 @@ class Response < ActiveRecord::Base
   end
 
   def set_default_dataset_title
-    dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
+    if is_question_for?(:dataset_title)
+      dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
+    end
   end
 
   def set_default_documentation_url
-    dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
+    if is_question_for?(:dataset_documentation_url)
+      dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
+    end
   end
 
   def update_certificate_state
     response_set.update_certificate
+  end
+
+  def survey
+    response_set.survey
+  end
+
+  def is_question_for?(attribute)
+    survey.question_for_attribute(attribute) == question.reference_identifier
   end
 
 end
