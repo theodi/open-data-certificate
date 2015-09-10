@@ -150,13 +150,21 @@ module Surveyor
         !responses.any?{|r| r.survey_section_id == section.id}
       end
 
+      def responses_by_api_id(api_ids)
+        responses.includes(:question).where(:api_id => api_ids).inject({}) do |h, response|
+          h.merge(response.api_id => response)
+        end
+      end
+
       def update_from_ui_hash(ui_hash)
         transaction do
+          api_ids = ui_hash.map{|ord, h| h['api_id'] }
+          existing_responses = responses_by_api_id(api_ids)
           ui_hash.each do |ord, response_hash|
             api_id = response_hash['api_id']
             fail "api_id missing from response #{ord}" unless api_id
 
-            existing = Response.where(:api_id => api_id).first
+            existing = existing_responses[api_id]
             updateable_attributes = response_hash.reject { |k, v| k == 'api_id' }
 
             if self.class.has_blank_value?(response_hash)
