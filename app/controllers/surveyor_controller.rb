@@ -76,7 +76,7 @@ class SurveyorController < ApplicationController
 
       saved = load_and_update_response_set_with_retries
 
-      if saved
+      if saved && !request.xhr?
         flash[:_saved_response_set] = @response_set.access_code
 
         if user_signed_in?
