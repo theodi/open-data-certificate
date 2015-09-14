@@ -7,7 +7,7 @@ Then(/^I should see "(.*?)"$/) do |text|
 end
 
 Then(/^I should not see "(.*?)"$/) do |text|
-  assert_not_match /#{text}/, page.body
+  refute_match /#{text}/, page.body
 end
 
 When(/^I visit the campaign page for "(.*?)"$/) do |name|
@@ -25,7 +25,7 @@ end
 
 Then(/^that campaign should have the name "(.*?)"$/) do |name|
   @campaign = CertificationCampaign.find_by_name(name)
-  assert_not_equal nil, @campaign
+  refute_nil @campaign
 end
 
 Then(/^that campaign should have (\d+) generators$/) do |num|
