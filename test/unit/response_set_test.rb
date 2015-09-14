@@ -18,8 +18,9 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "created certificate is given the attained_level" do
-    @rs = FactoryGirl.create :completed_response_set
-    assert_equal @rs.certificate.attained_level, @rs.attained_level
+    response_set = FactoryGirl.create :completed_response_set
+    response_set.certificate.update_from_response_set
+    assert_equal response_set.certificate.attained_level, response_set.attained_level
   end
 
   test "can map questions to responses" do
@@ -457,14 +458,10 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#generate_certificate creates a new certificate on save of completed response_sets" do
-    # not stubbing out the attained level because the certificate reloads the response_set
-    # attained_level = 'test_level'
     response_set = FactoryGirl.build(:completed_response_set)
-    # response_set.stubs(:attained_level).returns(attained_level)
     assert_nil response_set.certificate
     response_set.save!
-
-    assert_equal response_set.attained_level, response_set.certificate.try(:attained_level)
+    assert_not_nil response_set.certificate
   end
 
   test "#generate_certificate does not overwrite existing certificate" do
@@ -684,4 +681,94 @@ class ResponseSetErrorsTest < ActiveSupport::TestCase
     assert rs.response_errors['publisherUrl'].include?('invalid-url'), 'url is marked as invalid'
     assert !rs.response_errors['publisherUrl'].include?('mandatory'), 'not described as mandatory'
   end
+end
+
+class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
+
+  class QueryCounter < ActiveSupport::LogSubscriber
+
+    cattr_accessor :count
+    cattr_accessor :active
+
+    def self.reset!
+      self.count = 0
+    end
+
+    def self.in
+      self.active = true
+      reset!
+      yield
+      return count
+    ensure
+      self.active = false
+    end
+
+    def print?
+      self.class.active && ENV.fetch('QUERY_COUNTER_LOG', 'false') == "true"
+    end
+
+    def print(msg)
+      $stderr.puts(msg) if self.print?
+    end
+
+    def sql(event)
+      payload = event.payload
+      unless ['SCHEMA', nil].include?(payload[:name])
+        self.class.count += 1
+        print "#{payload[:name]} #{payload[:sql][0..100]}"
+        print payload[:binds].map(&:last).inspect if payload[:binds].present?
+        from = Rails.backtrace_cleaner.clean(caller)
+        print "From: #{from[0]}"
+      end
+    end
+
+  end
+
+  QueryCounter.attach_to :active_record
+
+  def in_less_queries_than(limit, label, &block)
+    count = QueryCounter.in(&block)
+    assert count <= limit, "#{label}: #{count} queries is too many"
+  end
+
+  test "updating a single response" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(30, "a single update") do
+      response_set.update_responses('dataTitle' => 'a title response')
+    end
+  end
+
+  test "updating two responses" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(40, "updating 2 responses") do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'releaseType' => 'oneoff'
+      )
+    end
+  end
+
+  test "updating a full response_set" do
+    load_custom_survey 'cert_generator.rb'
+    stub_request(:head, "example.com").to_return(status: 200)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(80, "updating a response_set") do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'documentationUrl' => 'http://example.com',
+        'publisherUrl' => 'http://example.com',
+        'releaseType' => 'oneoff',
+        'publisherRights' => 'yes',
+        'publisherOrigin' => 'true',
+        'chooseAny' => %w[one three],
+        'cats' => 'mammal'
+      )
+    end
+  end
+
 end

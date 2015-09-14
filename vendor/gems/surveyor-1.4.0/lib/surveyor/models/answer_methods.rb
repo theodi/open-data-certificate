@@ -5,8 +5,8 @@ module Surveyor
     module AnswerMethods
       def self.included(base)
         # Associations
-        base.send :belongs_to, :question
-        base.send :has_many, :responses
+        base.send :belongs_to, :question, :inverse_of => :answers
+        base.send :has_many, :responses, :inverse_of => :answer
         base.send :has_many, :validations, :dependent => :destroy
 
         # Scopes
