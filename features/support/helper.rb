@@ -1,6 +1,10 @@
 require 'webmock/cucumber'
 require 'sidekiq/testing'
 require 'vcr'
+begin
+  require 'pry'
+rescue LoadError
+end
 
 if ENV['COVERAGE']
   require 'coveralls'
