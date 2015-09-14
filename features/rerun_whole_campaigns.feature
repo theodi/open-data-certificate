@@ -13,6 +13,7 @@ Feature: Rerun campaigns
     When I click "Rerun campaign"
     And I should be redirected to the campaign page for "brian"
 
+  @ignore
   Scenario: Rerunnning campaigns when new data is present
     Given I want to create a certificate via the API
     And I apply a campaign "brian"
@@ -26,6 +27,7 @@ Feature: Rerun campaigns
     Then I should see 1 dataset
     And I should see "1 certificate published"
 
+  @ignore
   Scenario: Correct generators are rerun
     Given I have a campaign "brian"
     And that campaign has 5 certificates
@@ -51,12 +53,13 @@ Feature: Rerun campaigns
     And I should see "5 datasets inspected"
     And I should see 5 datasets
 
-  @sidekiq_fake
+  @sidekiq_fake @ignore
   Scenario: Campaigns show as pending after rerun
     Given I have a campaign "brian"
     And that campaign has 5 certificates
     And I visit the campaign page for "brian"
     And I click "Rerun campaign"
+    And the campaign is rerun via sidekiq
     Then I should be redirected to the campaign page for "brian"
     And my campaigns should be shown as pending
     And I should see 5 datasets

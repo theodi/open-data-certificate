@@ -56,6 +56,11 @@ Then(/^the campaign should be queued to be rerun$/) do
   CertificationCampaign.any_instance.expects(:rerun!)
 end
 
+Then(/^the campaign is rerun via sidekiq$/) do
+  CertificateFactory::FactoryRunner.new.perform(
+    'campaign_id' => @certification_campaign.id, 'feed' => @url, 'jurisdiction' => 'cert-generator', 'user_id' => @api_user.id)
+end
+
 Then(/^the generators should be queued for rerun$/) do
   CertificateGenerator.any_instance.expects(:generate).times(5)
 end
