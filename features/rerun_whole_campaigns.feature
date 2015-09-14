@@ -3,6 +3,7 @@ Feature: Rerun campaigns
 
   Background:
     Given I am signed in as the API user
+    And I have a CKAN atom feed with 5 datasets
 
   Scenario: Rerun campaign button queues each individual generator
     Given I have a campaign "brian"

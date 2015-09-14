@@ -35,6 +35,7 @@ end
 Given(/^I have a campaign "(.*?)"$/) do |name|
   @campaign = name
   @certification_campaign = CertificationCampaign.where(user_id: @api_user.id).find_or_create_by_name(name) do |campaign|
+    campaign.url = @url
     campaign.jurisdiction = 'cert-generator'
   end
 end

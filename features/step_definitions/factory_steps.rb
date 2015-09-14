@@ -104,7 +104,7 @@ end
 
 Given(/^the campaign is created$/) do
   campaign = CertificationCampaign.find_by_name(@campaign)
-  CertificateFactory::Factory.new("feed"=>@url,
+  CertificateFactory::AtomFactory.new("feed"=>@url,
       "user_id"=>@api_user.id,
       "limit"=>@limit,
       "campaign"=>campaign,
