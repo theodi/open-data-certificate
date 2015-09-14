@@ -36,11 +36,6 @@ Feature: Generate certificates from campaigns via a rake task
     And I run the rake task to create certificates
     Then there should be 5 certificates
 
-  Scenario: Generate multiple datasets from a CSV
-    Given I have a CSV with 20 datasets
-    And I run the rake task to create certificates
-    Then there should be 20 certificates
-
   @sidekiq_fake
   Scenario: Campaign shows as pending when running
     Given I have a CKAN atom feed with 10 datasets
