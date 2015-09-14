@@ -9,6 +9,10 @@ class CertificateGenerator < ActiveRecord::Base
   has_one :certificate, through: :response_set
   has_one :survey, through: :response_set
 
+  scope :latest, where(latest: true)
+  scope :unpublished, joins(:certificate).merge(Certificate.unpublished)
+  scope :published, joins(:certificate).merge(Certificate.published)
+
   before_save :remove_flag
 
   serialize :request, HashWithIndifferentAccess

@@ -34,7 +34,7 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def rerun!
-    certificate_generators.update_all(latest: false)
+    certificate_generators.latest.unpublished.update_all(latest: false)
     CertificateFactory::FactoryRunner.perform_async(campaign_id: id, feed: url, jurisdiction: jurisdiction, user_id: user.id)
   end
 
