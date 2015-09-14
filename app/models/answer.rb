@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement
 
   scope :urls, where(:input_type => 'url')
+  scope :for_id, lambda { |id| where(reference_identifier: id) }
 
   def message?
     !(message || '').strip.blank?

@@ -91,7 +91,11 @@ class Question < ActiveRecord::Base
   end
 
   def answer(identifier)
-    answers.select{|a| a.reference_identifier == identifier }.first
+    if answers.loaded?
+      answers.find{|a| a.reference_identifier == identifier }
+    else
+      answers.for_id(identifier).first
+    end
   end
 
   def translation(locale)
