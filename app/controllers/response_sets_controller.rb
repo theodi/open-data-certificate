@@ -23,49 +23,37 @@ class ResponseSetsController < ApplicationController
     render json: {valid: ODIBot.valid?(params[:url])}
   end
 
-  def check_url(url, explanation)
-    unless ODIBot.valid?(url)
-      if explanation.blank?
-        respond_to do |format|
-          format.json do
-            raise ActionController::RoutingError.new('Not Found')
-          end
-          format.html do
-            @url_error = true
-            @documentation_url = url
-            @survey = @response_set.survey
-          end
-        end
-      else
-        @response_set.documentation_url_explanation = explanation
-        @response_set.save
-        return nil
-      end
-    end
-  end
-
   # Check the user's documentation url and populate answers from it
   def start
-    check_url(params[:response_set][:documentation_url], params[:response_set][:documentation_url_explanation])
-
-    render 'surveyor/start.html.haml' and return if @url_error
-
-    @response_set.autocomplete(params[:response_set][:documentation_url])
-
-    respond_to do |format|
-      format.html do
-        redirect_to(surveyor.edit_my_survey_path(
-          :survey_code => @response_set.survey.access_code,
-          :response_set_code => @response_set.access_code
-        ))
+    @documentation_url, url_explanation = params[:response_set].values_at(
+        :documentation_url, :documentation_url_explanation)
+    if request.put?
+      valid = false
+      if ODIBot.valid?(@documentation_url)
+        @response_set.autocomplete(@documentation_url)
+        valid = true
+      elsif url_explanation.present?
+        @response_set.documentation_url = @documentation_url
+        @response_set.documentation_url_explanation = url_explanation
+        @response_set.save
+        valid = true
       end
-      format.json do
-        render json: {
-          survey_path: surveyor.edit_my_survey_path(
+
+      if valid
+        path = surveyor.edit_my_survey_path(
             :survey_code => @response_set.survey.access_code,
-            :response_set_code => @response_set.access_code
-          )
-        }
+            :response_set_code => @response_set.access_code)
+        respond_to do |format|
+          format.html { redirect_to(path) }
+          format.json { render json: { survey_path: path } }
+        end
+      else
+        @url_error = true
+        @survey = @response_set.survey
+        respond_to do |format|
+          format.html { render 'surveyor/start.html.haml' }
+          format.json { head status: 404 }
+        end
       end
     end
   end
