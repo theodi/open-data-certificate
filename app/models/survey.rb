@@ -30,8 +30,8 @@ class Survey < ActiveRecord::Base
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
 
-  has_many :response_sets
-  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}
+  has_many :response_sets, :inverse_of => :survey
+  has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}, :inverse_of => :survey
   has_many :dependencies, :through => :questions
   has_many :answers, through: :questions
 
@@ -87,9 +87,11 @@ class Survey < ActiveRecord::Base
   end
 
   def meta_map
-    meta = read_attribute(:meta_map)
-    RESPONSE_MAP.each{|attr, val| meta[attr.to_sym] ||= val }
-    meta
+    RESPONSE_MAP.merge(read_attribute(:meta_map).symbolize_keys)
+  end
+
+  def question_for_attribute(ref)
+    meta_map[ref]
   end
 
   def superseded?
@@ -97,7 +99,6 @@ class Survey < ActiveRecord::Base
   end
 
   def requirements
-    # questions.select(&:is_a_requirement?)
     questions.where(display_type: 'label').where('requirement is not null')
   end
 
@@ -162,7 +163,7 @@ class Survey < ActiveRecord::Base
   end
 
   def question(identifier)
-    questions.where(reference_identifier: identifier).first
+    questions.for_id(identifier).first
   end
 
   def documentation_url
@@ -180,8 +181,7 @@ class Survey < ActiveRecord::Base
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
     questions = sections.map(&:questions).flatten.compact
-    requirements = questions.select(&:is_a_requirement?)
-    only_questions = (questions - requirements)
+    requirements, only_questions = questions.partition(&:is_a_requirement?)
     answers = only_questions.map(&:answers).flatten.compact
 
     requirements.each do |requirement|

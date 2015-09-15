@@ -27,6 +27,7 @@ FactoryGirl.define do
     r.access_code { Surveyor::Common.make_tiny_code }
     r.started_at { Time.now }
     r.after(:create) do |rs, _|
+      rs.certificate.update_from_response_set
       rs.dataset.update_attribute(:user, rs.user)
     end
   end

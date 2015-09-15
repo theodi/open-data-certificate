@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150903110030) do
+ActiveRecord::Schema.define(:version => 20150907141457) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -241,18 +241,6 @@ ActiveRecord::Schema.define(:version => 20150903110030) do
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
   add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
-
-  create_table "response_cache_maps", :force => true do |t|
-    t.integer  "origin_id"
-    t.integer  "target_id"
-    t.integer  "response_set_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "api_id"
-  end
-
-  add_index "response_cache_maps", ["origin_id"], :name => "index_response_cache_maps_on_origin_id"
-  add_index "response_cache_maps", ["response_set_id"], :name => "index_response_cache_maps_on_response_set_id"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"

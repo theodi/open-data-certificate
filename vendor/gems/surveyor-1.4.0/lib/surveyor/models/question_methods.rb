@@ -5,9 +5,9 @@ module Surveyor
     module QuestionMethods
       def self.included(base)
         # Associations
-        base.send :belongs_to, :survey_section
+        base.send :belongs_to, :survey_section, :inverse_of => :questions
         base.send :belongs_to, :question_group, :dependent => :destroy
-        base.send :has_many, :answers, :dependent => :destroy # it might not always have answers
+        base.send :has_many, :answers, :dependent => :destroy, :inverse_of => :question # it might not always have answers
         base.send :has_one, :dependency, :dependent => :destroy
         base.send :belongs_to, :correct_answer, :class_name => "Answer", :dependent => :destroy
 

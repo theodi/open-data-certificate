@@ -96,45 +96,27 @@ class StatTest < ActiveSupport::TestCase
     end
 
     should "correct counts for levels are generated" do
-      5.times do
-        FactoryGirl.create(:published_certificate_with_dataset)
-        c = FactoryGirl.create(:published_certificate_with_dataset)
-        c.response_set.aasm_state = "draft"
-        c.response_set.save
-        c.aasm_state = "draft"
-        c.save
-      end
-      4.times do
-        FactoryGirl.create(:published_pilot_certificate_with_dataset)
-        c = FactoryGirl.create(:published_pilot_certificate_with_dataset)
-        c.response_set.aasm_state = "draft"
-        c.response_set.save
-        c.aasm_state = "draft"
-        c.save
-      end
-      3.times do
-        FactoryGirl.create(:published_standard_certificate_with_dataset)
-        c = FactoryGirl.create(:published_standard_certificate_with_dataset)
-        c.response_set.aasm_state = "draft"
-        c.response_set.save
-        c.aasm_state = "draft"
-        c.save
-      end
-      2.times do
-        FactoryGirl.create(:published_exemplar_certificate_with_dataset)
-        c = FactoryGirl.create(:published_exemplar_certificate_with_dataset)
-        c.response_set.aasm_state = "draft"
-        c.response_set.save
-        c.aasm_state = "draft"
-        c.save
-      end
+      FactoryGirl.create_list(:published_certificate_with_dataset, 5)
+      FactoryGirl.create_list(:draft_certificate_with_dataset, 5)
+      FactoryGirl.create_list(:published_pilot_certificate_with_dataset, 4)
+      FactoryGirl.create_list(:draft_pilot_certificate_with_dataset, 4)
+      FactoryGirl.create_list(:published_standard_certificate_with_dataset, 3)
+      FactoryGirl.create_list(:draft_standard_certificate_with_dataset, 3)
+      FactoryGirl.create_list(:published_exemplar_certificate_with_dataset, 2)
+      FactoryGirl.create_list(:draft_exemplar_certificate_with_dataset, 2)
 
       s = Stat.generate_all
+      p = Stat.generate_published
 
-      assert_equal s.level_basic, 10
-      assert_equal s.level_pilot, 8
-      assert_equal s.level_standard, 6
-      assert_equal s.level_exemplar, 4
+      assert_equal 10, s.level_basic
+      assert_equal 8, s.level_pilot
+      assert_equal 6, s.level_standard
+      assert_equal 4, s.level_exemplar
+
+      assert_equal 5, p.level_basic
+      assert_equal 4, p.level_pilot
+      assert_equal 3, p.level_standard
+      assert_equal 2, p.level_exemplar
     end
 
     should "correct correct counts for expired certificates are generated" do

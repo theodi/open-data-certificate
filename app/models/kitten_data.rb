@@ -1,5 +1,5 @@
 class KittenData < ActiveRecord::Base
-  belongs_to :response_set
+  belongs_to :response_set, inverse_of: :kitten_data
 
   attr_accessible :data, :url, :response_set
 

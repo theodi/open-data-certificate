@@ -6,12 +6,9 @@ class Response < ActiveRecord::Base
   attr_writer :reference_identifier
   attr_accessible :autocompleted, :explanation
 
-  # override with :touch
-  belongs_to :response_set, touch: true
-
-  after_save :set_default_dataset_title, :set_default_documentation_url
-  after_save :update_survey_section_id
-  after_save :update_certificate_state
+  belongs_to :response_set, touch: true, inverse_of: :responses
+  belongs_to :question, :inverse_of => :responses
+  belongs_to :answer, :inverse_of => :responses
 
   before_save :resolve_if_url
 
@@ -21,6 +18,8 @@ class Response < ActiveRecord::Base
     ELSE answer_id is not null
     END
   SQL
+
+  scope :for_id, lambda { |id| joins(:question).merge(Question.for_id(id)) }
 
   def sibling_responses(responses)
     (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
@@ -42,7 +41,7 @@ class Response < ActiveRecord::Base
   memoize :requirement_level
 
   def requirement
-    answer.requirement
+    answer.requirement || question.requirement
   end
   memoize :requirement
 
@@ -146,23 +145,12 @@ class Response < ActiveRecord::Base
     return nil # false value will stop active record saving
   end
 
-  def set_default_dataset_title
-    dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
+  def survey
+    response_set.survey
   end
 
-  def set_default_documentation_url
-    dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
-  end
-
-  def update_survey_section_id
-    if survey_section_id.blank?
-      survey_section_id = question.try(:survey_section_id)
-      Response.update(id, :survey_section_id => survey_section_id) if survey_section_id
-    end
-  end
-
-  def update_certificate_state
-    response_set.update_certificate
+  def is_question_for?(attribute)
+    survey.question_for_attribute(attribute) == question.reference_identifier
   end
 
 end

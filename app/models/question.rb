@@ -7,13 +7,16 @@ class Question < ActiveRecord::Base
   scope :mandatory, where(is_mandatory: true)
   scope :urls, joins(:answers).merge(Answer.urls)
 
+  scope :for_id, lambda { |id| where(reference_identifier: id) }
+
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
   before_save :set_mandatory
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
-  has_one :survey, :through => :survey_section
+  has_one :survey, :through => :survey_section, :inverse_of => :questions
+  has_many :responses, :inverse_of => :question
 
   LEVELS = {
     'basic' => 1,
@@ -88,7 +91,11 @@ class Question < ActiveRecord::Base
   end
 
   def answer(identifier)
-    answers.select{|a| a.reference_identifier == identifier }.first
+    if answers.loaded?
+      answers.find{|a| a.reference_identifier == identifier }
+    else
+      answers.for_id(identifier).first
+    end
   end
 
   def translation(locale)

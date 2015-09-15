@@ -15,6 +15,44 @@ FactoryGirl.define do
       FactoryGirl.create(:response_set_with_dataset, certificate: cert)
     end
 
+    factory :draft_certificate_with_dataset do
+      aasm_state "draft"
+      published false
+
+      after(:create) do |cert|
+        r = cert.response_set
+        r.aasm_state = 'draft'
+        r.save
+        cert.name = "Test dataset"
+        cert.attained_level = "basic"
+        cert.save
+      end
+
+      factory :draft_pilot_certificate_with_dataset do
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "pilot"
+          cert.save
+        end
+      end
+
+      factory :draft_standard_certificate_with_dataset do
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "standard"
+          cert.save
+        end
+      end
+
+      factory :draft_exemplar_certificate_with_dataset do
+        after(:create) do |cert|
+          cert.name = "Test dataset"
+          cert.attained_level = "exemplar"
+          cert.save
+        end
+      end
+    end
+
     factory :published_certificate_with_dataset do
       aasm_state "published"
       published true

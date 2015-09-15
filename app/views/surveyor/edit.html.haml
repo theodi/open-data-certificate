@@ -97,8 +97,7 @@
 
       = render 'partials/dependents' unless @dependents.empty?
 
-      = cache(survey_cache_key) do
-        = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+      = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
 - content_for(:foot_scripts) do
   :javascript
