@@ -19,23 +19,12 @@ class ResponseSetsController < ApplicationController
     end
   end
 
-  def resolve_url(url)
-    if url =~ /^#{URI::regexp}$/
-      ODIBot.new(url).response_code rescue nil
-    end
-  end
-
   def resolve
-    if code = resolve_url(params[:url])
-      Rails.cache.write(params[:url], code)
-      render json: {status: code}
-    else
-      render :nothing => true
-    end
+    render json: {valid: ODIBot.valid?(params[:url])}
   end
 
   def check_url(url, explanation)
-    if resolve_url(url) != 200
+    unless ODIBot.valid?(url)
       if explanation.blank?
         respond_to do |format|
           format.json do
