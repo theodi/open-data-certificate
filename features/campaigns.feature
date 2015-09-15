@@ -14,8 +14,7 @@ Feature: Display information about campaigns in UI
 
   Scenario: view single campaign
     When I visit the campaign page for "brian"
-    Then I should see "2 datasets inspected"
-    And I should see "1 dataset added"
+    Then I should see "1 dataset added"
     And I should see "1 certificate published"
     And I should see "1 dataset already existed"
 
@@ -35,8 +34,7 @@ Feature: Display information about campaigns in UI
     But I miss the field "dataTitle"
     And I request a certificate via the API
     When I visit the campaign page for "brian"
-    Then I should see "3 datasets inspected"
-    And I should see "2 datasets added"
+    Then I should see "2 datasets added"
     And I should see "1 certificate published"
     And I should see "What's a good title for this data?"
 

@@ -6,18 +6,13 @@ module CertificateFactory
       if campaign_id = options.delete('campaign_id')
         options['campaign'] = CertificationCampaign.find(campaign_id)
       end
-      CertificateFactory::Factory.new(options).build
-    end
-  end
-
-  class CSVFactoryRunner
-    include Sidekiq::Worker
-
-    def perform(options)
-      if campaign_id = options.delete('campaign_id')
-        options['campaign'] = CertificationCampaign.find(campaign_id)
+      factory = case options['feed']
+      when /.atom$/
+        CertificateFactory::AtomFactory.new(options)
+      else
+        CertificateFactory::CKANFactory.new(options)
       end
-      CertificateFactory::CSVFactory.new(options).build
+      factory.build
     end
   end
 end
