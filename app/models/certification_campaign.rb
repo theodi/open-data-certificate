@@ -14,7 +14,7 @@ class CertificationCampaign < ActiveRecord::Base
   attr_accessible :name, :limit, :url, :jurisdiction, :version
 
   def total_count
-    generated_count + duplicate_count
+    generated_count
   end
 
   def generated_count
@@ -22,11 +22,11 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def published_count
-    current.joins(:certificate).merge(Certificate.published).count
+    current.published.count
   end
 
   def current
-    certificate_generators.where(latest: true)
+    certificate_generators.latest
   end
 
   def incomplete_count

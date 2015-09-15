@@ -43,6 +43,7 @@ Feature: Rerun campaigns
     Then a rerun should be scheduled for tomorrow
     When I click "Schedule campaign"
 
+  @ignore
   Scenario: Rerun campaign button shows correct numbers
     Given I have a campaign "brian"
     And that campaign has 5 certificates
@@ -50,7 +51,6 @@ Feature: Rerun campaigns
     When I click "Rerun campaign"
     Then I should be redirected to the campaign page for "brian"
     And I should see "Campaign queued for rerun"
-    And I should see "5 datasets inspected"
     And I should see 5 datasets
 
   @sidekiq_fake @ignore
