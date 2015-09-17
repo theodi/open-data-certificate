@@ -3,6 +3,10 @@ class ODIBot
 
   USER_AGENT = "ODICertBot 1.0 (+https://certificates.theodi.org/)"
 
+  def self.valid?(url)
+    new(url).valid?
+  end
+
   def initialize(url)
     @options = { headers: {"User-Agent" => USER_AGENT } }
     @url = url
@@ -39,7 +43,7 @@ class ODIBot
   end
 
   def linkedin?
-    uri.hostname =~ /linkedin\.com/
+    (uri.hostname =~ /linkedin\.com/).present?
   end
 
   def valid?

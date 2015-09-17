@@ -302,7 +302,7 @@ $(document).ready(function($){
 
     var id = $surveyor.data('response-id');
     $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
-      next(json.status == 200);
+      next(json.valid);
     });
   }
 
