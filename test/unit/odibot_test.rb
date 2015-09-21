@@ -108,11 +108,25 @@ class ODIBotTest < ActiveSupport::TestCase
     end
   end
 
-  [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error].each do |error|
+  [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error, EOFError].each do |error|
     test "handles #{error.name}" do
       stub_request(:head, "http://www.example.com").to_raise(error)
       refute ODIBot.new("http://www.example.com").valid?
     end
+  end
+
+  test "handles too many redirects error" do
+    redirect = "http://www.example.org/circle"
+    stub_request(:head, redirect).to_return(:status => 404)
+    stub_request(:get, redirect).to_return(
+      :status => 302, :headers => { 'Location' => redirect }
+    )
+    refute ODIBot.new(redirect).valid?
+  end
+
+  test "gives up on invalid URIs from a redirect" do
+    ODIBot.stubs(:head).raises(URI::InvalidURIError)
+    refute ODIBot.new("http://any.domain").valid?
   end
 
 end

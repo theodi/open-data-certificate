@@ -2,6 +2,20 @@ class ODIBot
   include HTTParty
 
   USER_AGENT = "ODICertBot 1.0 (+https://certificates.theodi.org/)"
+  NETWORK_ERRORS = [
+    EOFError,
+    SocketError,
+    Errno::ETIMEDOUT,
+    Errno::ECONNREFUSED,
+    Errno::ECONNRESET,
+    Errno::EHOSTUNREACH,
+    OpenSSL::SSL::SSLError,
+    Timeout::Error
+  ]
+  HTTP_ERRORS = [
+    HTTParty::RedirectionTooDeep,
+    URI::InvalidURIError
+  ]
 
   def self.valid?(url)
     new(url).valid?
@@ -52,7 +66,7 @@ class ODIBot
 
   def self.handle_errors(return_value)
     return yield
-  rescue SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error
+  rescue *(NETWORK_ERRORS + HTTP_ERRORS)
     return return_value
   end
 
