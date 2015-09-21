@@ -13,7 +13,8 @@ class ODIBot
     Timeout::Error
   ]
   HTTP_ERRORS = [
-    HTTParty::RedirectionTooDeep
+    HTTParty::RedirectionTooDeep,
+    URI::InvalidURIError
   ]
 
   def self.valid?(url)

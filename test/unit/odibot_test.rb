@@ -124,4 +124,9 @@ class ODIBotTest < ActiveSupport::TestCase
     refute ODIBot.new(redirect).valid?
   end
 
+  test "gives up on invalid URIs from a redirect" do
+    ODIBot.stubs(:head).raises(URI::InvalidURIError)
+    refute ODIBot.new("http://any.domain").valid?
+  end
+
 end
