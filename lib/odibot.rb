@@ -12,6 +12,9 @@ class ODIBot
     OpenSSL::SSL::SSLError,
     Timeout::Error
   ]
+  HTTP_ERRORS = [
+    HTTParty::RedirectionTooDeep
+  ]
 
   def self.valid?(url)
     new(url).valid?
@@ -62,7 +65,7 @@ class ODIBot
 
   def self.handle_errors(return_value)
     return yield
-  rescue *NETWORK_ERRORS
+  rescue *(NETWORK_ERRORS + HTTP_ERRORS)
     return return_value
   end
 

@@ -115,4 +115,13 @@ class ODIBotTest < ActiveSupport::TestCase
     end
   end
 
+  test "handles too many redirects error" do
+    redirect = "http://www.example.org/circle"
+    stub_request(:head, redirect).to_return(:status => 404)
+    stub_request(:get, redirect).to_return(
+      :status => 302, :headers => { 'Location' => redirect }
+    )
+    refute ODIBot.new(redirect).valid?
+  end
+
 end
