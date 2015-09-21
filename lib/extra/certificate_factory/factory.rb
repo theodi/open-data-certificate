@@ -1,29 +1,35 @@
 module CertificateFactory
 
-  class Factory
+  class HTTPFactory
     include HTTParty
-    include Sidekiq::Worker
 
-    format :xml
-
-    attr_reader :count, :response
+    attr_reader :count
 
     def initialize(options)
       options.symbolize_keys!
-      @url = options[:feed]
       @user_id = options[:user_id]
       @limit = options[:limit].nil? ? nil : options[:limit].to_i
       @campaign = options[:campaign]
       @count = 0
-      @response = self.class.get(@url)
       @logger = options[:logger]
       @jurisdiction = options[:jurisdiction]
+      @feed = options[:feed]
+    end
+
+    def url
+      @feed
+    end
+
+    def uri
+      URI.parse(@feed)
     end
 
     def build
-      each do |item|
-        url = get_link(item)
-        CertificateFactory::Certificate.new(url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction).generate
+      each do |resource|
+        url = get_dataset_url(resource)
+        certificate = CertificateFactory::Certificate.new(
+          url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
+        certificate.generate
       end
     end
 
@@ -38,9 +44,33 @@ module CertificateFactory
       end
     end
 
+    def response
+      @response || fetch_response!
+    end
+
+    def fetch_response!(url=url)
+      @response = self.class.get(url)
+    end
+
     def over_limit?
       @limit && @limit <= @count
     end
+
+    def fetch_next_page
+      url = next_page
+      if url
+        @logger.debug "feed: #{url}" if @logger
+        fetch_response!(url)
+      else
+        return false
+      end
+    end
+
+  end
+
+  class AtomFactory < HTTPFactory
+
+    format :xml
 
     def feed_items
       [response["feed"]["entry"]].flatten # In case there is only one feed item
@@ -50,49 +80,60 @@ module CertificateFactory
       response["feed"]["link"].find { |l| l["rel"] == "next" }["href"] rescue nil
     end
 
-    def fetch_next_page
-      @url = next_page
-      if @url
-        @logger.debug "feed: #{@url}" if @logger
-        @response = self.class.get(@url)
-      else
-        return false
-      end
-    end
-
-    def get_link(item)
+    def get_dataset_url(item)
       api_url = item["link"].find { |l| l["rel"] == "enclosure" }["href"]
-      ckan_url(api_url)
-    end
-
-    def ckan_url(api_url)
       CertificateFactory::API.new(api_url).ckan_url
     end
+
   end
 
-  class CSVFactory < Factory
+  class CKANFactory < HTTPFactory
+    format :json
 
     def initialize(options)
-      options.symbolize_keys!
-      @file = options[:file]
-      @limit = options[:limit]
-      @campaign = options[:campaign]
-      @count = 0
-      @logger = options[:logger]
-      @user_id = options[:user_id]
-      @jurisdiction = options[:jurisdiction]
+      super
+      @rows = options.fetch(:row_size, 20)
+      @start = 0
     end
 
-    def get_link(url)
-      return url
+    def url
+      build_url("api/3/action/package_search", 'rows' => @rows)
     end
 
-    def each
-      CSV::foreach(@file, headers: :first_row) do |row|
-        yield row['documentation_url']
-        @count += 1
-        break if over_limit?
+    def feed_items
+      if response['success']
+        response['result']['results']
+      else
+        []
       end
+    end
+
+    def count
+      if response['success']
+        response['result']['count']
+      else
+        0
+      end
+    end
+
+    def build_url(path, params={})
+      u = uri + path
+      qs = CGI.parse(u.query.to_s).merge(params)
+      u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
+      return u.to_s
+    end
+
+    def next_page
+      build_url("api/3/action/package_search", 'rows' => @rows, 'start' => @start)
+    end
+
+    def fetch_next_page
+      @start += feed_items.count
+      super if @start < count
+    end
+
+    def get_dataset_url(resource)
+      build_url("dataset/#{resource['name']}")
     end
   end
 end

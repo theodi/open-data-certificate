@@ -7,7 +7,7 @@ Then(/^I should see "(.*?)"$/) do |text|
 end
 
 Then(/^I should not see "(.*?)"$/) do |text|
-  assert_not_match /#{text}/, page.body
+  refute_match /#{text}/, page.body
 end
 
 When(/^I visit the campaign page for "(.*?)"$/) do |name|
@@ -25,7 +25,7 @@ end
 
 Then(/^that campaign should have the name "(.*?)"$/) do |name|
   @campaign = CertificationCampaign.find_by_name(name)
-  assert_not_equal nil, @campaign
+  refute_nil @campaign
 end
 
 Then(/^that campaign should have (\d+) generators$/) do |num|
@@ -35,6 +35,7 @@ end
 Given(/^I have a campaign "(.*?)"$/) do |name|
   @campaign = name
   @certification_campaign = CertificationCampaign.where(user_id: @api_user.id).find_or_create_by_name(name) do |campaign|
+    campaign.url = @url
     campaign.jurisdiction = 'cert-generator'
   end
 end
@@ -53,6 +54,11 @@ end
 Then(/^the campaign should be queued to be rerun$/) do
   campaign = CertificationCampaign.find_by_name(@campaign)
   CertificationCampaign.any_instance.expects(:rerun!)
+end
+
+Then(/^the campaign is rerun via sidekiq$/) do
+  CertificateFactory::FactoryRunner.new.perform(
+    'campaign_id' => @certification_campaign.id, 'feed' => @url, 'jurisdiction' => 'cert-generator', 'user_id' => @api_user.id)
 end
 
 Then(/^the generators should be queued for rerun$/) do
@@ -87,7 +93,7 @@ Given(/^I visit the path to create a new campaign$/) do
 end
 
 Given(/^I enter the feed URL in the URL field$/) do
-  fill_in "CKAN atom feed", with: @url
+  fill_in "CKAN URL", with: @url
 end
 
 Given(/^I enter "(.*?)" in the campaign field$/) do |name|

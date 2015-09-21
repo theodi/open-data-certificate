@@ -13,9 +13,12 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:url, "CKAN atom feed", class: "control-label") %>
+    <%= f.label(:url, "CKAN URL", class: "control-label") %>
     <div class="controls">
       <%= f.text_field :url, class: "span6" %>
+      <span class="help-inline">
+        Provide the URL of a CKAN website (the homepage of the portal) or a URL to the ATOM feed.
+      </span>
       <%= error_message_for(@campaign, :url) %>
     </div>
   </div>
@@ -29,7 +32,7 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:limit, "Certificate limit (optional)", class: "control-label") %>
+    <%= f.label(:limit, "Dataset limit (optional)", class: "control-label") %>
     <div class="controls">
       <%= f.number_field :limit, min: 0 %>
       <%= error_message_for(@campaign, :limit) %>

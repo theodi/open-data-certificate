@@ -16,6 +16,7 @@ class Certificate < ActiveRecord::Base
   EXPIRY_NOTICE = 1.month
 
   scope :published, where(published: true)
+  scope :unpublished, where(published: false)
   scope :expired, -> { where("expires_at < ?", Time.current) }
   scope :past_expiry_notice, -> { where(arel_table[:expires_at].lt(Time.current + EXPIRY_NOTICE)) }
   scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
