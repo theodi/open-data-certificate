@@ -108,7 +108,7 @@ class ODIBotTest < ActiveSupport::TestCase
     end
   end
 
-  [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error].each do |error|
+  [SocketError, Errno::ETIMEDOUT, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EHOSTUNREACH, OpenSSL::SSL::SSLError, Timeout::Error, EOFError].each do |error|
     test "handles #{error.name}" do
       stub_request(:head, "http://www.example.com").to_raise(error)
       refute ODIBot.new("http://www.example.com").valid?
