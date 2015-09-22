@@ -103,7 +103,6 @@ class CertificateGenerator < ActiveRecord::Base
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
-    response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
 
