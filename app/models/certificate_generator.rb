@@ -86,10 +86,10 @@ class CertificateGenerator < ActiveRecord::Base
 
   def generate(jurisdiction, create_user, dataset = nil)
     unless response_set
-      build_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction))
-      # mass assignment protection avoidance
-      response_set.dataset = dataset if dataset
-      save!
+      create_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction)) do |rs|
+        # dataset is protected against mass assignment
+        rs.dataset = dataset if dataset
+      end
     end
 
     # find the questions which are to be answered
@@ -112,9 +112,10 @@ class CertificateGenerator < ActiveRecord::Base
     end
 
     self.completed = true
-    save!
 
     certificate
+  ensure
+    save!
   end
 
   def determine_user(response_set, create_user)
