@@ -16,13 +16,13 @@
       .row
         .span9
           .jurisdiction
-            Jurisdiction:
+            = t('surveys.start.jurisdiction')
             .badge.badge-inverse=  @response_set.jurisdiction
             %span.status= @survey.try(:status)
             = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
               %i.icon.icon-pencil
             - if @survey.translations.count > 1
-              Language:
+              = t('surveys.start.language')
               .badge.badge-inverse= @response_set.locale_name
               = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
                 %i.icon.icon-pencil
@@ -35,13 +35,14 @@
         .alert.alert-alert.flash{"data-dismiss" => "alert"}
           %i.icon-exclamation-sign.icon-large.icon-white
           %button.icon-remove{"data-dismiss" => "alert", :type => "button"}
-          There was a problem with your URL, please check, or fill out the explanation below
+          = t('surveys.start.url_problem_error')
       .well
         .row-fluid
           .span8.lead
             != @survey.intro
             %p
-              %a{href: about_url} Read more about Open Data Certificates
+              %a{href: about_url}
+                = t('surveys.start.read_more')
 
         = semantic_form_for [surveyor, :start, @response_set] do |f|
           - question = @survey.documentation_url
@@ -56,22 +57,17 @@
 
               .lead
                 :markdown
-                  Link to the dataset you are certifying. By dataset we mean
-                  the documentation or metadata that describes the data as well
-                  as a link to the data file itself. Dataset = data + metadata.
-
-                  If your data is stored in a [CKAN](http://ckan.org/) repository (such as data.gov.uk), or marked up with
-                  [DCAT](http://www.w3.org/TR/vocab-dcat/), then we will attempt to automatically answer
-                  some of the questions for you in the next step. [Read more...](http://theodi.org/guides/marking-up-your-dataset-with-dcat)
+                  #{t('surveys.start.dataset_description')}
             .span4
-              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: 'Please wait while we check this URL'}}
+              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: t('surveys.start.url_problem_error')}}
                 %i.icon-loading.icon-spin.icon-refresh
                 %i.icon-exclamation-sign
-                Check URL
+                = t('surveys.start.check_url_button')
 
           %p
-            I don't have a URL
-            %a.btn{href: 'take'} Skip this
+            = t('surveys.start.do_not_have_url')
+            %a.btn{href: 'take'}
+              = t('surveys.start.skip_this_button')
 
 
 / #surveyor fieldset ol li label, #surveyor fieldset ol li input
