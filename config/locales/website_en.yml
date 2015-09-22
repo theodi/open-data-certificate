@@ -183,6 +183,25 @@ en:
         beta:   Certificate in beta stage
         final:  Certificate in final stage
 
+  surveys:
+    start:
+      jurisdiction: 'Jurisdiction:'
+      language: 'Language:'
+      read_more: Read more about Open Data Certificates
+      do_not_have_url: I don't have a URL
+      check_url_button: Check URL
+      check_url_please_wait: Please wait while we check this URL
+      skip_this_button: Skip this
+      url_problem_error: There was a problem with your URL, please check, or fill out the explanation below
+      dataset_description: |
+        Link to the dataset you are certifying. By dataset we mean
+        the documentation or metadata that describes the data as well
+        as a link to the data file itself. Dataset = data + metadata.
+
+        If your data is stored in a [CKAN](http://ckan.org/) repository (such as data.gov.uk), or marked up with
+        [DCAT](http://www.w3.org/TR/vocab-dcat/), then we will attempt to automatically answer
+        some of the questions for you in the next step. [Read more...](http://theodi.org/guides/marking-up-your-dataset-with-dcat)
+
   certificates:
     certificates: Certificates
     curated_by: Curated by
