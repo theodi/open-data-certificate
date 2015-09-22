@@ -338,14 +338,8 @@ class ResponseSet < ActiveRecord::Base
     responses_with_url_type.all?(&:url_valid_or_explained?)
   end
 
-  def uncompleted_mandatory_questions_count
-    mandatory_question_ids = triggered_mandatory_questions.map(&:id)
-    responded_to_question_ids = responses.select(&:filled?).map(&:question_id)
-    (mandatory_question_ids - responded_to_question_ids).count
-  end
-
   def all_mandatory_questions_complete?
-    uncompleted_mandatory_questions_count == 0
+    incomplete_triggered_mandatory_questions.count.zero?
   end
 
   def attained_level
