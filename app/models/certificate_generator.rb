@@ -109,6 +109,8 @@ class CertificateGenerator < ActiveRecord::Base
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
+    else
+      response_set.update_missing_responses!
     end
 
     self.completed = true
