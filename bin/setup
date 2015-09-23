@@ -1,7 +1,12 @@
 #!/bin/bash
 
 cp env.example .env
-cp config/database.{example.,}yml
 
-bundle install
-bundle exec rake db:schema:load db:seed
+if [ -e config/database.yml ]
+then
+  bundle install
+  bundle exec rake db:create db:schema:load db:seed
+else
+  cp config/database.{example.,}yml
+  echo "Please edit the config/database.yml and rerun $0"
+fi
