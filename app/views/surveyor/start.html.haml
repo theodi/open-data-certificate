@@ -16,13 +16,13 @@
       .row
         .span9
           .jurisdiction
-            = t('surveys.start.jurisdiction')
+            = t('surveys.jurisdiction')
             .badge.badge-inverse=  @response_set.jurisdiction
             %span.status= @survey.try(:status)
             = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
               %i.icon.icon-pencil
             - if @survey.translations.count > 1
-              = t('surveys.start.language')
+              = t('surveys.language')
               .badge.badge-inverse= @response_set.locale_name
               = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
                 %i.icon.icon-pencil
@@ -35,14 +35,14 @@
         .alert.alert-alert.flash{"data-dismiss" => "alert"}
           %i.icon-exclamation-sign.icon-large.icon-white
           %button.icon-remove{"data-dismiss" => "alert", :type => "button"}
-          = t('surveys.start.url_problem_error')
+          = t('surveys.url_problem_error')
       .well
         .row-fluid
           .span8.lead
             != @survey.intro
             %p
               %a{href: about_url}
-                = t('surveys.start.read_more')
+                = t('surveys.read_more')
 
         = semantic_form_for [surveyor, :start, @response_set] do |f|
           - question = @survey.documentation_url
@@ -56,18 +56,17 @@
                 = f.input :documentation_url_explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.url_explanation')
 
               .lead
-                :markdown
-                  #{t('surveys.start.dataset_description')}
+                = t('surveys.dataset_description_html')
             .span4
-              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: t('surveys.start.url_problem_error')}}
+              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: t('surveys.url_problem_error')}}
                 %i.icon-loading.icon-spin.icon-refresh
                 %i.icon-exclamation-sign
-                = t('surveys.start.check_url_button')
+                = t('surveys.check_url_button')
 
           %p
-            = t('surveys.start.do_not_have_url')
+            = t('surveys.do_not_have_url')
             %a.btn{href: 'take'}
-              = t('surveys.start.skip_this_button')
+              = t('surveys.skip_this_button')
 
 
 / #surveyor fieldset ol li label, #surveyor fieldset ol li input
