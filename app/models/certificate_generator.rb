@@ -117,7 +117,23 @@ class CertificateGenerator < ActiveRecord::Base
 
     certificate
   ensure
-    save!
+    # because the certificate_generators table has several indexes on it, it is
+    # possible for update queries to deadlock each other.  (MySQL updates are
+    # not truly atomic and wrapping it in a transaction will not help as it is
+    # about lock aquisition for each index row)
+    #
+    # The only solution is to retry the save query if a deadlock is detected
+    save_attempts = 0
+    begin
+      save!
+    rescue ActiveRecord::StatementInvalid => e
+      if e.message =~ /deadlock found/i && save_attempts < 10
+        save_attempts += 1
+        retry
+      else
+        raise
+      end
+    end
   end
 
   def determine_user(response_set, create_user)
