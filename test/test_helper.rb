@@ -6,7 +6,7 @@ end
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'parallel_tests/test/runtime_logger'
+require 'parallel_tests/test/runtime_logger' if Rails.env.development?
 
 require 'factory_girl'
 require 'vcr'
