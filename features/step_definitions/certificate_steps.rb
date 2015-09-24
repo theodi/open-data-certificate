@@ -7,8 +7,8 @@ end
 When(/^I am signed in as "(.*?)"$/) do |email|
   @user = get_user(email)
   visit '/users/sign_in'
-  first('#main #user_email').set(email)
-  first('#main #user_password').set("password")
+  first('#main #sign_in_user_form_user_email').set(email)
+  first('#main #sign_in_user_form_user_password').set("password")
   first('#main .btn').click
 end
 
