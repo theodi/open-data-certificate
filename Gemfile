@@ -53,6 +53,7 @@ group :development do
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
   gem 'rubyXL'
+  gem 'parallel_tests'
 end
 
 group :production do
