@@ -189,9 +189,9 @@ en:
     read_more: Read more about Open Data Certificates
     do_not_have_url: I don't have a URL
     check_url_button: Check URL
-    check_url_please_wait: Please wait while we check this URL
     skip_this_button: Skip this
     url_problem_error: There was a problem with your URL, please check, or fill out the explanation below
+    url_unknown_error: Sorry, an error occurred. Please try again.
     dataset_description_html: |
       <p>Link to the dataset you are certifying. By dataset we mean
       the documentation or metadata that describes the data as well
