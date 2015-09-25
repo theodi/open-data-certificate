@@ -60,10 +60,11 @@ Should work on OSX
     sh "saxon -s:surveys/definition/questionnaire.jurisdiction.GB.xml -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
   end
 
-  JURISDICTIONS = %w[GB CZ]
+  JURISDICTIONS = %w[GB CZ TW]
   JURISDICTION_LANGS = {
     "GB" => %w[en],
-    "CZ" => %w[en cs]
+    "CZ" => %w[en cs],
+    "TW" => %w[en zh]
   }
   JURISDICTIONS.each do |jurs|
     file "surveys/odc_questionnaire.#{jurs}.rb" => %W[
