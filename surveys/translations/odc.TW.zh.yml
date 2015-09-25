@@ -1,4 +1,4 @@
-zh_TW:
+zh:
   title: "TW"
   full_title: "Taiwan"
   description: "<p>這份自評的問卷會產生一份開放數據的證書及授予你發佈這份開放數據給大眾的資格，同時我們也會透過你的回答來得知貴單位是如何做開放數據發佈的</p><p>當你在回答這些問題時，證明了你有努力遵守英國的相關法律，同時也建議你檢查可能會適用於你部門的其他相關法律及政策，尤其當你不在英國境內時(因為這些問題將不被包含其中)</p><p>你不需要回答所有的問題來或得證明，你只需要對你能力範圍內的問題作答</p><p>
@@ -89,29 +89,29 @@ zh_TW:
       help_text: "如果這份數據部分的提供是來自外部個人或單位，那麼你將會需要提供額外的資訊證明你有權利發佈它"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "透過它的策劃人做的原創或蒐集"
     thirdPartyOrigin:
       text: "這份數據有部分是從其他份數據中提取或計算出的嗎？"
       help_text: "即便只是摘要或是從他人數據中提取的一小部分都很可能會影響到你使用這份數據的使用權利，而當你使用其他人的數據來做分析進而產生其他結果時可能會有法律上的權責問題產生"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     thirdPartyOpen:
       text: "這份數據的所有來源都有發佈成開放數據嗎？"
       text_as_statement: "這份數據是在創立在___"
       help_text: "你可以重新發佈其他人的數據如果它已經具開放數據的執照，或是他們的權利已經過期或被放棄，如果這份數據有任何部份是在上述權利之外，那你在發佈這份數據前會需要先取得合法的建議"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "開放數據資源"
     crowdsourced:
       text: "有數據的部份是來自眾包嗎？"
@@ -119,19 +119,19 @@ zh_TW:
       help_text: "如果你的數據包含一些資訊來自其他的單位，那麼你會需要該單位的許可來將他們的貢獻發佈成開放數據"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "眾包"
     crowdsourcedContent:
       text: "這份數據的貢獻者會展現他們的意見嗎？"
       help_text: "如果使用者在貢獻數據時有用到個人的創意或判斷力，那麼他們會有著作權，舉例來說，撰寫細節或決定某些數據是否該出現在一個數據集裡就會需要使用到判斷力；有些數據貢獻者必須要餓轉讓、放棄他們的權利，或是在你可以發佈這份數據之前給予你許可"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     claUrl:
       text: "在哪裡說明了數據貢獻者許可協議？"
       text_as_statement: "數據貢獻者許可協議的網址"
@@ -144,9 +144,9 @@ zh_TW:
       help_text: "在你重新使用或重新發佈數據貢獻者參與建立的數據前，請與他們所有人做數據貢獻者許可協議，建議你保有一份數據參與製作者與其是否同意數據貢獻者許可協議的相關記錄"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     sourceDocumentationUrl:
       text: "你在哪裡有說明這份數據的來源？"
       text_as_statement: "這份數據的來源在＿＿＿有說名"
@@ -160,10 +160,10 @@ zh_TW:
       help_text: "建議你資料來源的相關資訊應該是使用者可讀取的，如此一來使用者才易於理解，同時也應該是以元數據的格式做存取，如此一來電腦才能進行處理。當所有人都以此種方式進行數據存取，其將幫助住其他使用者得之相通的開放數據是如何被使用及證明其有持續在被發佈"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "有關機器可讀取的該數據來源"
     copyrightURL:
       text: "你在哪裡有發佈這個資料庫的權利聲明？"
@@ -257,9 +257,9 @@ zh_TW:
       help_text: "如你不清楚公開執照的概念，請看公開執照的定義。然後在Open Definition Advisory Board列表中選出你的執照。如果無法在這個列表找到你的執照，表示它還沒被公開或評估"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     contentRights:
       text: "這份數據的內容是否有版權？"
       text_as_statement: "有"
@@ -282,10 +282,10 @@ zh_TW:
       help_text: "可以用公眾領域標章來標示這些內容是公眾領域·。這樣可以讓使用者知道這些內容可以重用。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "設為公眾領域"
     contentLicence:
       text: "根據哪個執照其他人可以重用這些內容？"
@@ -360,9 +360,9 @@ zh_TW:
       help_text: "如果你不確定公開執照是什麼，請閱讀Open Knowledge Definition的定義。首先，找出你的執照在目錄列表中。如果執照不再列表中，可能是因為不公開或是沒有被評價。"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     contentRightsURL:
       text: "哪裡可以找到法規和執照的內容？"
       text_as_statement: "有關於法規及內容執照的相關說明在"
@@ -417,10 +417,10 @@ zh_TW:
       text_as_statement: "該匿名化程序已經"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "獨立審計"
     appliedAnon:
       text: "你是否企圖嘗試減緩或刪除個人被辨別的可能性？"
@@ -428,10 +428,10 @@ zh_TW:
       help_text: "匿名化減少從您發布的數據被識別個人的風險。最好的技術取決於你有什麼樣的數據。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "匿名"
     lawfulDisclosure:
       text: "你需要在法律的允續或是要求下才可以發布關於個人的數據嗎？"
@@ -439,10 +439,10 @@ zh_TW:
       help_text: "法律可能會要求你發佈數據有關人。例如，公司主管的名字。或者是你需要可能被影響到的人的許可才可以發佈有關他們的訊息。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "可以被發佈"
     lawfulDisclosureURL:
       text: "你在哪裡紀錄正當的發表個人的數據？"
@@ -456,10 +456,10 @@ zh_TW:
       help_text: "隱私影響評估是測量個人數據隱私還有公開訊息的風險。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: "沒有實行隱私影響評估"
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "實行隱私影響評估"
     riskAssessmentUrl:
       text: "在哪裡有公佈隱私影響評估？"
@@ -474,10 +474,10 @@ zh_TW:
       help_text: "這是很好的練習-定時檢查評估。由專家或第三方獨立審計更趨於嚴謹和公正。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "獨立審計"
     anonymisationAudited:
       text: ""
@@ -485,10 +485,10 @@ zh_TW:
       help_text: ""
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "independently audited"
     # 實用資訊
     onWebsite:
@@ -496,9 +496,9 @@ zh_TW:
       help_text: "如果你的數據與主網頁之間有連結，你的數據可以更容易被搜尋"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     webpage:
       text: "在你的網站上哪一個頁面有連結到數據？"
       text_as_statement: "網頁從＿＿＿連結到數據"
@@ -511,9 +511,9 @@ zh_TW:
       help_text: "數據若存在於一個相關的的數據目錄(ex:學術類、公營機構、衛生保健)或當他出現在相關結果搜尋時，是比較容易被使用者搜尋到的"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     listing:
       text: "它建立在哪裡？"
       text_as_statement: "數據出現在網域裡"
@@ -526,9 +526,9 @@ zh_TW:
       help_text: "你會提供更多的內容及幫助其他人在數據使用上有更多的發現及理解，當你從自己發佈的數據做參照及使用，ex: 彙報、演示、部落格發文"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     reference:
       text: "數據引用來源"
       text_as_statement: "數據引用來源"
@@ -570,10 +570,10 @@ zh_TW:
       help_text: "必須讓大家知道是否潛在的數據會有經常性的更動，因為當數據有經常性的更動時，其也相對容易過時，所以使用者必須要知道你是否對數據有迅速且經常性的更新"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "至少會有每日的更動"
     seriesType:
       text: "這是哪一種類型的數據集系列？"
@@ -593,10 +593,10 @@ zh_TW:
       help_text: "告訴大家，如果你會提供一組對數據會造成影響的連續變更，ex: 新的指令或是修改既有指令，新聞訂閱可能會是以RSS、Atom或是客製化的資料格式呈現"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "他是可使用的"
     frequentSeriesPublication:
       text: "你會做一次新發佈的頻率是？"
@@ -641,10 +641,10 @@ zh_TW:
       help_text: "備份副本是一份從整個數據集精簡成一個可供使用者進行下載的檔案，而這也提供了另一種讓使用者藉由不同於應用程式介面進行分析的方式"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "數據的備份副本"
     dumpFrequency:
       text: "你建造一個全新的資料庫備份副本的頻率是？"
@@ -669,10 +669,10 @@ zh_TW:
       help_text: "修正在你的數據中出現的錯誤會是一個很好的練習，尤其是當你自己在使用它的狀況下。當你的對你的數據有做修正，建議你告知使用者。"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "更正"
     qualityUrl:
       text: "你對有關這份數據的品質議題會在哪裡記錄？"
@@ -694,10 +694,10 @@ zh_TW:
       help_text: "定期做離線備份可以確保當意外發生時數據不會遺失"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "離線備份"
     slaUrl:
       text: "你對任何業務可用性的保證有在哪裏說明？"
@@ -823,10 +823,10 @@ zh_TW:
       help_text: "使用者偏好易於被電腦快速且正確處理的數據格式，舉例來說，一份經由掃描的試算表影本是無法被機器讀取的，但CSV檔有支援機器讀取的功能"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "可供機器讀取的"
     openStandard:
       text: "這是一份標準開放格式的數據嗎？"
@@ -834,10 +834,10 @@ zh_TW:
       help_text: "開放標準是通過公平、透明和合作過程中創建的，所有人都可以來執行這些開放標準，同時也有會有很多相關支援，也因此讓數據分享這件事更加便利，舉例來說，XML, CSV和JSON都屬於開放的標準"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "一種標準開放的格式"
     dataType:
       text: "你都發佈哪種類型的數據？"
@@ -924,10 +924,10 @@ zh_TW:
       help_text: "數據通常是有關一些真實的事物，如學校、路況或使用一個編碼格式，如果來源不同的數據使用相同且永久及獨特的標識來參照相同的事物，如此一來使用者可以容易的結合這些不同的來源並創建更多有用的數據。標識可能會是GUIDs、DOIs或網址"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "永久標識"
     resolvingIds:
       text: "你數據裡的標識能被用來搜尋其他相關的資訊嗎？"
@@ -956,27 +956,27 @@ zh_TW:
       help_text: "有時在你掌控範圍之外的其他人也可以提供與你的數據內容相關的網址，舉例來說你的數據可能有包含郵遞區號，這也會與英國地形測量局的網站有連結"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     reliableExternalUrls:
       text: "第三方的資訊可靠嗎？"
       help_text: "如果第三方提供了與你的數據相關內容的公共網址，那很可能他們也有下了一點功夫來確保數據品質及可靠的程度，而這也是一種拿來衡量你對他們的處理能力可信程度的衡量方法，你可以藉由尋找他們的開放數據證明或是相近的標誌來協助你做決定"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     externalUrls:
       text: "你的數據是使用第三方的網址嗎？"
       text_as_statement: "第三方的網址是＿＿＿"
       help_text: "建議你使用第三方可以解析你數據描述相關資訊的網址，藉此可以減少重複的狀況且也能幫助使用者對不同來源的數據做結合，進而使其能更有效地被使用"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "＿＿＿對這個數據的引用"
     provenance:
       text: "你有為你的數據提空機器可讀取的出處嗎？"
@@ -984,10 +984,10 @@ zh_TW:
       help_text: "這是有關於在你的數據被發佈之前，你數據的來源是如何被創建及處理，它建立起你發佈數據的可信度因為使用者可以溯及它經過處理的過程"
       answers:
         a_false:
-          text: no
+          text: "否"
           text_as_statement: ""
         a_true:
-          text: yes
+          text: "是"
           text_as_statement: "機器可讀取的"
     digitalCertificate:
       text: "在哪裏說明了使用者如何驗證他們接收到數據來自於你？"
@@ -1092,9 +1092,9 @@ zh_TW:
       help_text: "如CSV、JSON、XML或Turtle的格式均使用客製化的詞彙或格式，這也代表著這筆數據包含的系列及屬性"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     schemaDocumentationUrl:
       text: "有關你這筆數據的詞彙文件在＿＿＿？"
       text_as_statement: "這筆數據使用的詞彙在＿＿＿有紀錄"
@@ -1106,9 +1106,9 @@ zh_TW:
       help_text: "如果你的數據有使用編碼來做參照，舉例來說地域面積、開支種類或是疾病，這些都是需要向使用者做解釋的"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     codelistDocumentationUrl:
       text: "在你數據中使用的任何編碼被記錄在＿＿＿？"
       text_as_statement: "在這筆數據中使用的代碼被記錄在＿＿＿"
@@ -1139,9 +1139,9 @@ zh_TW:
       text: "你有使用社群媒體來連結你數據的使用者嗎？"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     account:
       text: "透過哪一個社群媒體帳號使用者可以與你聯繫？"
       text_as_statement: "透過這些社群媒體帳號與監護人做聯繫"
@@ -1175,9 +1175,9 @@ zh_TW:
       help_text: "一個社群參與團隊會參與有關社群媒體、部落格及安排駭客松或相關競賽來鼓勵使用者利用這項數據"
       answers:
         a_false:
-          text: no
+          text: "否"
         a_true:
-          text: yes
+          text: "是"
     engagementTeamUrl:
       text: "他們的首頁在哪裡？"
       text_as_statement: "社群管理是由＿＿＿來做"
