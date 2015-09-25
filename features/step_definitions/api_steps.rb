@@ -207,8 +207,8 @@ end
 
 Given(/^I am signed in as the API user$/) do
   visit '/users/sign_in'
-  first('#main #user_email').set("api@example.com")
-  first('#main #user_password').set("password")
+  first('#main #sign_in_user_form_user_email').set("api@example.com")
+  first('#main #sign_in_user_form_user_password').set("password")
   first('#main .btn').click
 end
 
