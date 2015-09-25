@@ -24,7 +24,7 @@
       #topbar.navbar.navbar-inverse.navbar-static-top
         .container
           .navbar-inner
-            %a.brand{:href => "/"}
+            %a.brand{:href => root_path}
               - if content_for? :nav_brand
                 = yield :nav_brand
               - else
@@ -79,7 +79,7 @@
               %li
                 = link_to t('footmenu.terms'), '/terms'
               %li
-                = link_to t('footmenu.privacy'), '/privacy-policy'
+                = link_to t('footmenu.privacy'), privacy_policy_path
               %li
                 = link_to t('footmenu.cookies'), '/cookie-policy'
               %li

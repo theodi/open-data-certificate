@@ -90,12 +90,6 @@ module OpenDataCertificate
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Rails apps no longer can catch ActionController::RoutingError errors, as they're caught earlier in the stack.
-    # This is a workaround from: https://github.com/vidibus/vidibus-routing_error
-    config.after_initialize do |app|
-      app.routes.append{match '*path', :to => 'application#routing_error'}
-    end
-
     config.middleware.insert_before ActionDispatch::ParamsParser, "CatchJsonParseErrors"
 
     config.middleware.insert_before 0, Rack::Cors do

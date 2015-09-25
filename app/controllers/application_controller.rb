@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   # maintain the locale param on any urls
   def default_url_options(options={})
-    { locale: nil }
+    { locale: I18n.locale }
   end
 
   def after_sign_in_path_for(resource)

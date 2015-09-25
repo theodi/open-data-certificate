@@ -88,9 +88,11 @@ module ApplicationHelper
   end
 
   def is_active_menu_link?(link)
-    # fudged method to return 'true' the first time it's called, and then 'false' every time after that, to fake an 'active' menu item
-    # TODO: write the code to calculate whether a menu item is active
-    Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
+    if request.env['REQUEST_PATH'].present?
+      Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
+    else
+      false
+    end
   end
 
   def body_class

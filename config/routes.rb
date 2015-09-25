@@ -4,6 +4,12 @@ OpenDataCertificate::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  scope '/:locale', constraints: {locale: Regexp.union(I18n.available_locales.map(&:to_s))} do
+    get 'privacy-policy' => 'pages#show', id: 'privacy_policy', as: 'privacy_policy'
+
+    root :to => 'main#home'
+  end
+
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   Surveyor::Engine.routes.draw do
     get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
@@ -24,8 +30,8 @@ OpenDataCertificate::Application.routes.draw do
       post :resolve, on: :member
       put  :start, on: :member
     end
-
   end
+
   post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
   get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
   get 'jurisdictions', :to => 'jurisdictions#index'
@@ -101,7 +107,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'contact' => 'pages#show', :id => 'contact'
   get 'terms' => 'pages#show', :id => 'terms'
   get 'cookie-policy' => 'pages#show', :id => 'cookie_policy'
-  get 'privacy-policy' => 'pages#show', :id => 'privacy_policy'
   get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
   get 'using-the-marks' => 'pages#show', :id => 'branding'
 
@@ -136,8 +141,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'admin/users/:user_id' => 'admin#users', as: 'admin_users'
   get 'admin/typeahead' => 'admin#typeahead'
 
-  root :to => 'main#home'
-
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
@@ -146,4 +149,10 @@ OpenDataCertificate::Application.routes.draw do
   get 'flowchart' => 'flowcharts#show'
 
   get 'status/ping' => 'main#ping'
+
+  match '(*path)', to: redirect { |path_params, request|
+    request.fullpath.gsub(%r{/(.*)}, "/#{I18n.default_locale}/\\1")
+  }, constraints: ->(request) {
+    !request.params[:path] || !request.params[:path].start_with?(*I18n.available_locales.map(&:to_s))
+  }
 end
