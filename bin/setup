@@ -1,6 +1,9 @@
 #!/bin/bash
 
-cp env.example .env
+if [ ! -e .env ]
+then
+  cp env.example .env
+fi
 
 if [ -e config/database.yml ]
 then
