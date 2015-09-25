@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version => "1.0" 
+xml.instruct! :xml, :version => "1.0"
 xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
   xml.author do |author|
     author.name "Open Data Institute"
@@ -14,9 +14,9 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   @datasets.each do |dataset|
     xml.entry do
       xml.title dataset.title
-      xml.content dataset.certificate.attained_level_title
+      xml.content "#{t("levels.#{dataset.certificate.attained_level}.title_with_level")} certificate"
       xml.updated atom_datetime(dataset.modified_date)
-      render(:partial => 'datasets/dataset', 
+      render(:partial => 'datasets/dataset',
              :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificate })
     end
   end
