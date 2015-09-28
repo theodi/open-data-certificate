@@ -57,15 +57,13 @@
         %iframe{width: 560, height: 315, src: 'https://www.youtube.com/embed/_k5pQxeQq9w', frameborder: 0, allowfullscreen: 'allowfullscreen'}
     .span6.homepage-about-content
       %h2.about-certificate
-        -#= link_to t('homepage.about_certificate.title'), certificates_path #TODO: Commented browse certificate functionality
-        = link_to t('homepage.about_certificate.title'), '/about' #TODO: Commented browse certificate functionality
+        = link_to t('homepage.about_certificate.title'), about_page_path
       %p.about-certificate= t('homepage.about_certificate.description')
-      -#= link_to t('homepage.about_certificate.link'), certificates_path, class: ['about-certificate'] #TODO: Commented browse certificate functionality
-      = link_to t('homepage.about_certificate.link'), '/about', class: ['about-certificate'] #TODO: Commented browse certificate functionality
+      = link_to t('homepage.about_certificate.link'), about_page_path, class: ['about-certificate']
       %h2.about-odi
-        = link_to t('homepage.about_odi.title'), '/contact'
+        = link_to t('homepage.about_odi.title'), contact_page_path
       %p.about-odi= t('homepage.about_odi.description', odi_name_link: link_to(t('homepage.about_odi.odi_name'), 'http://theodi.org')).html_safe
-      = link_to t('homepage.about_odi.link'), '/contact', class: ['about-odi']
+      = link_to t('homepage.about_odi.link'), contact_page_path, class: ['about-odi']
 
 
 #international-reach{style: 'visibility:hidden;height:500px;'}

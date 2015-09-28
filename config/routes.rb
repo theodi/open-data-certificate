@@ -5,7 +5,15 @@ OpenDataCertificate::Application.routes.draw do
   end
 
   scope '/:locale', constraints: {locale: Regexp.union(I18n.available_locales.map(&:to_s))} do
+    # 'Static' pages managed by HighVoltage here...
     get 'privacy-policy' => 'pages#show', id: 'privacy_policy', as: 'privacy_policy'
+    get 'cookie-policy' => 'pages#show', id: 'cookie_policy', as: 'cookie_policy'
+    get 'terms' => 'pages#show', id: 'terms', as: 'terms_page'
+    get 'about' => 'pages#show', id: 'about', as: 'about_page'
+    get 'overview' => 'pages#show', id: 'overview', as: 'overview_page'
+    get 'contact' => 'pages#show', id: 'contact', as: 'contact_page'
+    get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
+    get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
     root :to => 'main#home'
   end
@@ -100,15 +108,6 @@ OpenDataCertificate::Application.routes.draw do
 
   # Get badge for a url
   get 'get_badge' => 'certificates#certificate_from_dataset_url'
-
-  # 'Static' pages managed by HighVoltage here...
-  get 'about' => 'pages#show', :id => 'about'
-  get 'overview' => 'pages#show', :id => 'overview'
-  get 'contact' => 'pages#show', :id => 'contact'
-  get 'terms' => 'pages#show', :id => 'terms'
-  get 'cookie-policy' => 'pages#show', :id => 'cookie_policy'
-  get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
-  get 'using-the-marks' => 'pages#show', :id => 'branding'
 
   # comment pages
   get 'comment' => 'main#comment', as: :comment

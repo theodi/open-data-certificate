@@ -31,7 +31,7 @@
   .form-field.check_box
     = f.label :agreed_to_terms do
       = f.check_box :agreed_to_terms
-      = t('authentication.agree_to_terms', terms_link: link_to(t('authentication.terms'), terms_path)).html_safe
+      = t('authentication.agree_to_terms', terms_link: link_to(t('authentication.terms'), terms_page_path)).html_safe
   .form-field
     = f.label :current_password
     %i= t("authentication.current_password_info")

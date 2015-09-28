@@ -81,7 +81,7 @@ module ApplicationHelper
       { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
       { link_text: t('menu.browse_all_certificates'), path: datasets_path },
       { link_text: t('menu.discussion'), path: discussion_path },
-      { link_text: t('menu.about'), path: about_path },
+      { link_text: t('menu.about'), path: about_page_path },
       { link_text: t('menu.admin'), path: admin_path, requires_signed_in_user: true, requires_admin_user: true}
     ]
     render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
@@ -161,10 +161,11 @@ module ApplicationHelper
     end
   end
 
-  def example_dataset
-    if cert = Certificate.published.current.attained_level(:pilot).first
-      cert.dataset
-    end
+  def example_certificate_link
+    cert = Certificate.published.current.attained_level(:pilot).first
+    return '' unless cert.present?
+
+    link_to('See an example certificate', dataset_latest_certificate_path(cert.dataset), :class => ['btn', 'btn-large'])
   end
 
   private

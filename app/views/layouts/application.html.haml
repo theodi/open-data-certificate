@@ -32,7 +32,7 @@
             %ul.nav.pull-right
               =render 'shared/auth_bar'
             %span.label{:style => "margin-top: 10px;"}
-              =link_to 'BETA', contact_url
+              =link_to 'BETA', contact_page_url
       #mainnav.navbar.navbar-static-top
         .container
           .navbar-inner
@@ -58,7 +58,7 @@
           %h1
             %a{:href => "http://www.theodi.org"}= t('footmenu.odi_name')
           %p
-            = link_to "#{t('footmenu.odi_name')}, 65 Clifton Street, London EC2A 4JE", 'http://www.theodi.org/contact'
+            = link_to "#{t('footmenu.odi_name')}, 65 Clifton Street, London EC2A 4JE", contact_page_path
 
           %p
             %a{:href => "mailto:info@theodi.org"} info@theodi.org
@@ -77,15 +77,15 @@
           %nav
             %ul.pull-right
               %li
-                = link_to t('footmenu.terms'), '/terms'
+                = link_to t('footmenu.terms'), terms_page_path
               %li
                 = link_to t('footmenu.privacy'), privacy_policy_path
               %li
-                = link_to t('footmenu.cookies'), '/cookie-policy'
+                = link_to t('footmenu.cookies'), cookie_policy_path
               %li
-                = link_to t('footmenu.about'), '/about'
+                = link_to t('footmenu.about'), about_page_path
               %li
-                = link_to t('footmenu.get_in_touch'), '/contact'
+                = link_to t('footmenu.get_in_touch'), contact_page_path
 
           %p.rss.pull-right
             - if content_for? :rss_feed
