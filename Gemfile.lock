@@ -82,6 +82,12 @@ GEM
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
     cancan (1.6.10)
     capybara (2.4.1)
@@ -130,6 +136,7 @@ GEM
       json
       json-schema
       rest-client
+    debug_inspector (0.0.2)
     delayed-plugins-airbrake (1.1.0)
       airbrake
       delayed_job
@@ -522,6 +529,8 @@ DEPENDENCIES
   aasm
   airbrake
   alternate_rails!
+  better_errors
+  binding_of_caller
   cancan
   coffee-rails (~> 3.2.1)
   coveralls
