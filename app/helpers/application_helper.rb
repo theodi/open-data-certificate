@@ -88,9 +88,9 @@ module ApplicationHelper
   end
 
   def is_active_menu_link?(link)
-    if request.env['REQUEST_PATH'].present?
+    begin
       Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
-    else
+    rescue ActionController::RoutingError
       false
     end
   end
