@@ -35,7 +35,7 @@ class EmbedStat < ActiveRecord::Base
 
   def dataset_path
     if dataset
-      Rails.application.routes.url_helpers.dataset_url(dataset, host: OpenDataCertificate.hostname)
+      Rails.application.routes.url_helpers.dataset_url(dataset, host: OpenDataCertificate.hostname, locale: I18n.locale)
     end
   end
 

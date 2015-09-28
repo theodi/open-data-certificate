@@ -5,6 +5,8 @@ OpenDataCertificate::Application.routes.draw do
   end
 
   scope '/:locale', constraints: {locale: Regexp.union(I18n.available_locales.map(&:to_s))} do
+    root :to => 'main#home'
+
     # 'Static' pages managed by HighVoltage here...
     get 'privacy-policy' => 'pages#show', id: 'privacy_policy', as: 'privacy_policy'
     get 'cookie-policy' => 'pages#show', id: 'cookie_policy', as: 'cookie_policy'
@@ -15,67 +17,66 @@ OpenDataCertificate::Application.routes.draw do
     get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
-    root :to => 'main#home'
-  end
+    mount Surveyor::Engine => "/surveys", :as => "surveyor"
+    Surveyor::Engine.routes.draw do
+      get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
+      post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
+      get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
 
-  mount Surveyor::Engine => "/surveys", :as => "surveyor"
-  Surveyor::Engine.routes.draw do
-    get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
-    post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
-    get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
+      get '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+      get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
 
-    get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
-    get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
+      resources :jurisdictions, :only => :index
 
-    resources :jurisdictions, :only => :index
-
-    # have a response_set resource for deleting for now, have
-    # a feeling that this could include a couple of the other
-    # routes,  though try it out for now
-    resources :response_sets, :only => :destroy do
-      post :publish, on: :member
-      post :autofill, on: :member
-      post :resolve, on: :member
-      put  :start, on: :member
-    end
-  end
-
-  post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
-  get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
-  get 'jurisdictions', :to => 'jurisdictions#index'
-
-  # Get certificate from dataset url
-  get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
-                     :constraints => lambda { |request| request.params[:datasetUrl].present? }
-
-  resources :datasets do
-    put 'start_questionnaire'
-    post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
-    post 'regenerate', to: 'datasets#regenerate', as: 'regenerate_certificate'
-    get :typeahead, on: :collection
-    get :admin, on: :collection
-    get :schema, on: :collection
-    get :info, on: :collection
-
-    collection do
-      get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+      # have a response_set resource for deleting for now, have
+      # a feeling that this could include a couple of the other
+      # routes,  though try it out for now
+      resources :response_sets, :only => :destroy do
+        post :publish, on: :member
+        post :autofill, on: :member
+        post :resolve, on: :member
+        put  :start, on: :member
+      end
     end
 
-    resource :certificate, as: 'latest_certificate', only: [:show] do
-      get 'embed'
-      get 'badge'
+    post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
+    get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
+    get 'jurisdictions', :to => 'jurisdictions#index'
+
+    # Get certificate from dataset url
+    get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
+                       :constraints => lambda { |request| request.params[:datasetUrl].present? }
+
+    resources :datasets do
+      put 'start_questionnaire'
+      post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
+      post 'regenerate', to: 'datasets#regenerate', as: 'regenerate_certificate'
+      get :typeahead, on: :collection
+      get :admin, on: :collection
+      get :schema, on: :collection
+      get :info, on: :collection
+
+      collection do
+        get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+      end
+
+      resource :certificate, as: 'latest_certificate', only: [:show] do
+        get 'embed'
+        get 'badge'
+      end
+
+      resources :certificates, :only => [:show, :update] do
+         member do
+           get 'improvements', to: 'certificates#improvements', as: 'improvements'
+           get 'progress', to: 'certificates#progress'
+           get 'embed', to: 'certificates#embed', as: 'embed'
+           get 'badge', to: 'certificates#badge', as: 'badge'
+           post 'verify'
+           post :report
+         end
+      end
     end
 
-    resources :certificates, :only => [:show, :update] do
-       member do
-         get 'improvements', to: 'certificates#improvements', as: 'improvements'
-         get 'progress', to: 'certificates#progress'
-         get 'embed', to: 'certificates#embed', as: 'embed'
-         get 'badge', to: 'certificates#badge', as: 'badge'
-         post 'verify'
-         post :report
-       end
-    end
   end
 
   resources :transfers, :only => [:create, :destroy] do

@@ -1,11 +1,11 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CertificatesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   test "published certificates can be shown" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     assert_response :success
   end
 
@@ -13,13 +13,13 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     cert.response_set.create_kitten_data
     KittenData.any_instance.stubs(:data).returns(false)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     assert_response :success
   end
 
   test "unpublished certificates can't be shown" do
     cert = FactoryGirl.create(:certificate_with_dataset)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     assert_response 404
   end
 
@@ -30,7 +30,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:certificate_with_dataset)
     cert.response_set.assign_to_user! user
 
-    get :show, {dataset_id: cert.dataset.id, id: cert.id}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
 
     assert_response :success
   end
@@ -39,7 +39,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     cert.attained_level = "basic"
     cert.save
-    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "json"}
     assert_response :success
     assert_equal "application/json", response.content_type
   end
@@ -58,7 +58,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert.save
     get :legacy_show, {id: cert.id, type: "badge", format: "png"}
 
-    assert_redirected_to "http://test.host/datasets/1/certificates/1/badge.png"
+    assert_redirected_to "http://test.host/en/datasets/1/certificates/1/badge.png"
   end
 
   test "Requesting legacy url for embed performs a redirect" do
@@ -67,7 +67,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert.save
     get :legacy_show, {id: cert.id, type: "embed"}
 
-    assert_redirected_to "http://test.host/datasets/1/certificates/1/embed"
+    assert_redirected_to "http://test.host/en/datasets/1/certificates/1/embed"
   end
 
   test "requesting a legacy url with another type returns a not found" do
@@ -91,7 +91,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     levels.each do |level, actual|
       cert = FactoryGirl.create(:"published_#{level}_certificate_with_dataset")
-      get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+      get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "json"}
 
       json = JSON.parse(response.body)
 
@@ -101,7 +101,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "Requesting a JSON version of a certificate returns the correct juristiction and status" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "json"}
 
     json = JSON.parse(response.body)
 
@@ -111,19 +111,19 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "Requesting a JSON version of a certificate returns the correct badge urls" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "json"}
 
     json = JSON.parse(response.body)
 
-    assert_equal "http://test.host/datasets/1/certificate/badge.js", json["certificate"]["badges"]["application/javascript"]
-    assert_equal "http://test.host/datasets/1/certificate/badge.html", json["certificate"]["badges"]["text/html"]
-    assert_equal "http://test.host/datasets/1/certificate/badge.png", json["certificate"]["badges"]["image/png"]
+    assert_equal "http://test.host/en/datasets/1/certificate/badge.js", json["certificate"]["badges"]["application/javascript"]
+    assert_equal "http://test.host/en/datasets/1/certificate/badge.html", json["certificate"]["badges"]["text/html"]
+    assert_equal "http://test.host/en/datasets/1/certificate/badge.png", json["certificate"]["badges"]["image/png"]
   end
 
   test "Requesting a JSON version of a certificate in production returns https urls" do
     Rails.env.stubs :production? => true
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    get :show, {dataset_id: cert.dataset.id, id: cert.id, format: "json"}
+    get :show, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "json"}
 
     json = JSON.parse(response.body)
 
@@ -136,7 +136,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "requesting the png badge image" do
     cert = FactoryGirl.create(:published_certificate_with_dataset)
-    get :badge, {dataset_id: cert.dataset.id, id: cert.id, format: "png"}
+    get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "png"}
 
     assert_equal File.read(File.join(Rails.root, 'app/assets/images/badges/raw_level_badge.png')), response.body
   end
@@ -147,7 +147,7 @@ class CertificatesControllerTest < ActionController::TestCase
     sign_in user
 
     assert_difference ->{cert.verifications.count}, 1 do
-      post :verify, {dataset_id: cert.dataset.id, id: cert.id}
+      post :verify, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
   end
 
@@ -156,7 +156,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
 
     assert_no_difference ->{cert.verifications.count} do
-      post :verify, {dataset_id: cert.dataset.id, id: cert.id}
+      post :verify, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
 
     assert_redirected_to dataset_certificate_url dataset_id: cert.dataset.id, id: cert.id
@@ -169,7 +169,7 @@ class CertificatesControllerTest < ActionController::TestCase
     sign_in cv.user
 
     assert_difference ->{cert.verifications.count}, -1 do
-      post :verify, {dataset_id: cert.dataset.id, id: cert.id, undo: true}
+      post :verify, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, undo: true}
     end
   end
 
@@ -178,7 +178,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    put :update, {dataset_id: cert.dataset.id, id: cert.id, audited: true}
+    put :update, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, audited: true}
 
     assert_response 403
   end
@@ -190,7 +190,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     assert_equal false, cert.audited
 
-    put :update, {dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: true}}
+    put :update, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: true}}
 
     cert.reload
     assert_equal true, cert.audited
@@ -203,7 +203,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     assert_equal true, cert.audited
 
-    put :update, {dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: false}}
+    put :update, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, certificate: {audited: false}}
 
     cert.reload
     assert_equal false, cert.audited
@@ -215,7 +215,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
     assert_difference ->{cert.dataset.embed_stats.count}, 1 do
-      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
   end
 
@@ -225,7 +225,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
     assert_difference ->{cert.dataset.embed_stats.count}, 1 do
-      get :badge, {dataset_id: cert.dataset.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id}
     end
   end
 
@@ -235,10 +235,10 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id}
     end
   end
 
@@ -248,10 +248,10 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:certificate_with_dataset)
 
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id}
     end
   end
 
@@ -261,10 +261,10 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
 
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id, id: cert.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id}
     end
     assert_no_difference ->{cert.dataset.embed_stats.count} do
-      get :badge, {dataset_id: cert.dataset.id}
+      get :badge, {locale: :en, dataset_id: cert.dataset.id}
     end
   end
 
@@ -365,7 +365,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "badge returns not found if certificate is draft" do
     cert = FactoryGirl.create(:certificate_with_dataset)
-    get :badge, {dataset_id: cert.dataset.id}
+    get :badge, {locale: :en, dataset_id: cert.dataset.id}
     assert_response 404
   end
 

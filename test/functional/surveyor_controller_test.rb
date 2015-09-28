@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SurveyorControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -9,11 +9,12 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_no_difference('ResponseSet.count') do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code
     end
 
-    assert_redirected_to "/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take"
+    assert_redirected_to "/en/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take"
 
   end
 
@@ -24,12 +25,13 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_no_difference('ResponseSet.count') do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code,
               update: true
     end
 
-    assert_redirected_to "/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take?update=true"
+    assert_redirected_to "/en/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take?update=true"
 
   end
 
@@ -46,6 +48,7 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_difference('ResponseSet.count', 1) do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code
     end
@@ -53,7 +56,7 @@ class SurveyorControllerTest < ActionController::TestCase
     # redirected to the new survey
     r = ResponseSet.last
     assert_not_equal @response_set, r
-    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
+    assert_redirected_to "/en/surveys/#{r.survey.access_code}/#{r.access_code}/take"
 
   end
 
@@ -65,12 +68,13 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_difference 'ResponseSet.count', 1 do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code
     end
 
     r = ResponseSet.last
-    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
+    assert_redirected_to "/en/surveys/#{r.survey.access_code}/#{r.access_code}/take"
   end
 
   test "updating a response_set is published if it was from an update to an already published response set" do
@@ -79,6 +83,7 @@ class SurveyorControllerTest < ActionController::TestCase
     sign_in @response_set.user
 
     post :update, use_route: :surveyor,
+                  locale: :en,
                   survey_code: @response_set.survey.access_code,
                   response_set_code: @response_set.access_code,
                   update: true # this indicates it was previously published
@@ -98,13 +103,14 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_difference 'ResponseSet.count', 1 do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code
     end
 
     r = ResponseSet.last
     assert_equal r.survey.access_code, 'gb'
-    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take"
+    assert_redirected_to "/en/surveys/#{r.survey.access_code}/#{r.access_code}/take"
 
   end
 
@@ -114,12 +120,13 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_no_difference('ResponseSet.count') do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code,
               question: 123
     end
 
-    assert_redirected_to "/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take#q_123"
+    assert_redirected_to "/en/surveys/#{@response_set.survey.access_code}/#{@response_set.access_code}/take#q_123"
   end
 
   test "continue a completed questionnaire with highlighted question" do
@@ -130,13 +137,14 @@ class SurveyorControllerTest < ActionController::TestCase
 
     assert_difference 'ResponseSet.count', 1 do
       post :continue, use_route: :surveyor,
+              locale: :en,
               survey_code: @response_set.survey.access_code,
               response_set_code: @response_set.access_code,
               question: 123
     end
 
     r = ResponseSet.last
-    assert_redirected_to "/surveys/#{r.survey.access_code}/#{r.access_code}/take#q_123"
+    assert_redirected_to "/en/surveys/#{r.survey.access_code}/#{r.access_code}/take#q_123"
   end
 
   test "start page" do
@@ -146,11 +154,12 @@ class SurveyorControllerTest < ActionController::TestCase
     section = FactoryGirl.create(:survey_section)
     survey.sections << section
     question = FactoryGirl.create(:question, reference_identifier: "documentationUrl", survey_section: section)
-    question.answers << FactoryGirl.create(:answer) 
+    question.answers << FactoryGirl.create(:answer)
 
     sign_in @response_set.user
 
     get :start, use_route: :surveyor,
+            locale: :en,
             survey_code: @response_set.survey.access_code,
             response_set_code: @response_set.access_code
 
@@ -161,6 +170,7 @@ class SurveyorControllerTest < ActionController::TestCase
     FactoryGirl.create(:survey, access_code: 'gb')
 
     get :edit, use_route: :surveyor,
+      locale: :en,
       survey_code: "gb",
       response_set: "nope"
 
@@ -175,6 +185,7 @@ class SurveyorControllerTest < ActionController::TestCase
     sign_in response_set.user
 
     get :repeater_field, use_route: :surveyor,
+      locale: :en,
       survey_code: 'gb',
       response_set_code: response_set.access_code,
       question_id: question.id,

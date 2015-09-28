@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class EmbedStatsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -7,7 +7,7 @@ class EmbedStatsControllerTest < ActionController::TestCase
     dataset = FactoryGirl.create :dataset
     dataset.register_embed("http://example.com")
 
-    get 'index'
+    get 'index', locale: :en
 
     assert_response :success
     assert_equal response.headers["Content-Type"], 'text/csv; header=present; charset=utf-8'

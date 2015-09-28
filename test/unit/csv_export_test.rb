@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CSVExportTest < ActiveSupport::TestCase
 
@@ -37,7 +37,7 @@ class CSVExportTest < ActiveSupport::TestCase
     file = mock()
     files.expects(:head).with(CSVExport::FILENAME).returns(file)
     file.expects(:public_url).returns("http://rackspace.example.com/file.csv")
-    
+
     assert_equal "http://rackspace.example.com/file.csv", CSVExport.download_url
   end
 

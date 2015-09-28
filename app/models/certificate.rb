@@ -200,7 +200,7 @@ class Certificate < ActiveRecord::Base
 
   def url(options={})
     urlgen = Rails.application.routes.url_helpers
-    options = options.merge(host: OpenDataCertificate.hostname)
+    options = options.merge(host: OpenDataCertificate.hostname, locale: I18n.locale)
     if latest?
       urlgen.dataset_latest_certificate_url(self.dataset, options)
     else

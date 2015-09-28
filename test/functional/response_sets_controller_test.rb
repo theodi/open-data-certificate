@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class ResponseSetsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -10,7 +10,7 @@ class ResponseSetsControllerTest < ActionController::TestCase
     sign_in @user
 
     assert_difference('ResponseSet.count', -1) do
-      delete :destroy, use_route: :surveyor, id: @response_set.id
+      delete :destroy, use_route: :surveyor, locale: :en, id: @response_set.id
     end
 
     assert_redirected_to dashboard_path
@@ -25,7 +25,7 @@ class ResponseSetsControllerTest < ActionController::TestCase
     sign_in FactoryGirl.create(:user)
 
     assert_no_difference('ResponseSet.count') do
-      delete :destroy, use_route: :surveyor, id: @response_set.id
+      delete :destroy, use_route: :surveyor, locale: :en, id: @response_set.id
     end
 
     assert_response 302
@@ -39,7 +39,7 @@ class ResponseSetsControllerTest < ActionController::TestCase
 
     sign_in @user
 
-    post :publish, use_route: :surveyor, id: @response_set.id
+    post :publish, use_route: :surveyor, locale: :en, id: @response_set.id
 
     assert_redirected_to dashboard_path
 

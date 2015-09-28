@@ -165,7 +165,7 @@ module ApplicationHelper
     cert = Certificate.published.current.attained_level(:pilot).first
     return '' unless cert.present?
 
-    link_to('See an example certificate', dataset_latest_certificate_path(cert.dataset), :class => ['btn', 'btn-large'])
+    link_to('See an example certificate', dataset_latest_certificate_path(I18n.locale, cert.dataset), :class => ['btn', 'btn-large'])
   end
 
   private

@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
 
@@ -241,7 +241,7 @@ class DatasetTest < ActiveSupport::TestCase
   test 'returns an api_url' do
     dataset = FactoryGirl.create(:dataset)
 
-    assert_equal "http://test.host/datasets/1.json", dataset.api_url
+    assert_equal "http://test.host/en/datasets/1.json", dataset.api_url
   end
 
 end

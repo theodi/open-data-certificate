@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 require 'rss'
 
 class DatasetsControllerTest < ActionController::TestCase
@@ -147,7 +147,7 @@ class DatasetsControllerTest < ActionController::TestCase
       {
         "attained_index" => nil,
         "value" =>'my second dataset',
-        "path" => "/datasets/#{@second.id}"
+        "path" => "/en/datasets/#{@second.id}"
       }
     ], assigns(:response)
 
@@ -168,7 +168,7 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal [
       {
         "value" =>'curator one',
-        "path" => "/datasets?publisher=curator+one"
+        "path" => "/en/datasets?publisher=curator+one"
       }
     ], assigns(:response)
 
@@ -189,7 +189,7 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal [
       {
         "value" =>'United Kingdom',
-        "path" => "/datasets?jurisdiction=GB"
+        "path" => "/en/datasets?jurisdiction=GB"
       }
     ], assigns(:response)
 
@@ -213,17 +213,17 @@ class DatasetsControllerTest < ActionController::TestCase
 
     feed = RSS::Parser.parse response.body, false
 
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}", feed.entry.links[1].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}", feed.entry.links[1].href
     assert_equal "http://schema.theodi.org/certificate#certificate", feed.entry.links[2].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate", feed.entry.links[2].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate", feed.entry.links[2].href
     assert_equal "http://www.example.com", feed.entry.links[3].href
     assert_equal "about", feed.entry.links[3].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[4].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[4].href
     assert_equal "alternate", feed.entry.links[4].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[5].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[5].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[5].rel
     assert_equal "text/html", feed.entry.links[5].type
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[6].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[6].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[6].rel
     assert_equal "application/javascript", feed.entry.links[6].type
   end
@@ -266,17 +266,17 @@ class DatasetsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_equal 1, feed.entries.count
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}", feed.entry.links[0].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}", feed.entry.links[0].href
     assert_equal "http://schema.theodi.org/certificate#certificate", feed.entry.links[1].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate", feed.entry.links[1].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate", feed.entry.links[1].href
     assert_equal "http://www.example.com", feed.entry.links[2].href
     assert_equal "about", feed.entry.links[2].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[3].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate.json", feed.entry.links[3].href
     assert_equal "alternate", feed.entry.links[3].rel
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[4].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate/badge.html", feed.entry.links[4].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[4].rel
     assert_equal "text/html", feed.entry.links[4].type
-    assert_equal "http://test.host/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[5].href
+    assert_equal "http://test.host/en/datasets/#{cert.dataset.id}/certificate/badge.js", feed.entry.links[5].href
     assert_equal "http://schema.theodi.org/certificate#badge", feed.entry.links[5].rel
     assert_equal "application/javascript", feed.entry.links[5].type
   end
@@ -403,7 +403,7 @@ class DatasetsControllerTest < ActionController::TestCase
     CertificateGenerator.any_instance.expects(:generate).once
 
     assert_difference "CertificateGenerator.count", 1 do
-      post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
+      post :create, locale: :en, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
     end
     body = JSON.parse(response.body)
     assert_equal(202, response.status)
@@ -417,7 +417,7 @@ class DatasetsControllerTest < ActionController::TestCase
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     dataset = certificate.dataset
     http_auth FactoryGirl.create(:user)
-    post :create, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
+    post :create, locale: :en, jurisdiction: 'cert-generator', dataset: {documentationUrl: dataset.documentation_url}
     body = JSON.parse(response.body)
     assert_equal(422, response.status)
     assert_equal(false, body['success'])

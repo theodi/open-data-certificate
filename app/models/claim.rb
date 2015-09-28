@@ -38,6 +38,10 @@ class Claim < ActiveRecord::Base
     end
   end
 
+  def locale
+    'en'
+  end
+
   def transfer_dataset!
     dataset.change_owner!(initiating_user)
   end
