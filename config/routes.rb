@@ -4,6 +4,28 @@ OpenDataCertificate::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  # Extra routes for the surveyor engine, mounted below
+  Surveyor::Engine.routes.draw do
+    get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
+    post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
+    get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
+
+    get '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+    get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
+
+    resources :jurisdictions, :only => :index
+
+    # have a response_set resource for deleting for now, have
+    # a feeling that this could include a couple of the other
+    # routes,  though try it out for now
+    resources :response_sets, only: :destroy do
+      post :publish, on: :member
+      post :autofill, on: :member
+      post :resolve, on: :member
+      put  :start, on: :member
+    end
+  end
+
   scope '/:locale', constraints: {locale: Regexp.union(I18n.available_locales.map(&:to_s))} do
     root :to => 'main#home'
 
@@ -17,27 +39,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
-    mount Surveyor::Engine => "/surveys", :as => "surveyor"
-    Surveyor::Engine.routes.draw do
-      get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
-      post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
-      get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
-
-      get '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
-      get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
-
-      resources :jurisdictions, :only => :index
-
-      # have a response_set resource for deleting for now, have
-      # a feeling that this could include a couple of the other
-      # routes,  though try it out for now
-      resources :response_sets, :only => :destroy do
-        post :publish, on: :member
-        post :autofill, on: :member
-        post :resolve, on: :member
-        put  :start, on: :member
-      end
-    end
+    mount Surveyor::Engine, at: "/surveys", :as => "surveyor"
 
     post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
     get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
@@ -76,7 +78,6 @@ OpenDataCertificate::Application.routes.draw do
          end
       end
     end
-
   end
 
   resources :transfers, :only => [:create, :destroy] do
