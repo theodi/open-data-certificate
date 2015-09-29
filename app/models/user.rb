@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   before_save :ensure_authentication_token
 
   validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true
+  validates :preferred_locale, inclusion: {in: I18n.available_locales.map(&:to_s)}
 
   def ensure_authentication_token
     if authentication_token.blank?
