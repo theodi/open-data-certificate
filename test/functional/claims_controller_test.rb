@@ -47,7 +47,7 @@ class ClaimsControllerTest < ActionController::TestCase
     dataset.change_owner!(owner)
 
     post :create, :claim => {:dataset_id => dataset.id}
-    assert_redirected_to new_user_session_path
+    assert_redirected_to new_user_session_path(locale: nil)
   end
 
   test "listing outstanding claims" do

@@ -270,7 +270,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "reporting certificate requires user to be logged in" do
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id
     assert_response :found
   end
 
@@ -278,7 +278,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
       Delayed::Worker.new.work_off 1
     end
@@ -288,7 +288,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id, reasons: "broken"
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id, reasons: "broken"
     Delayed::Worker.new.work_off 1
     assert_match /broken/, ActionMailer::Base.deliveries.last.body
   end
@@ -298,7 +298,7 @@ class CertificatesControllerTest < ActionController::TestCase
     sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     @request.env['REMOTE_ADDR'] = '255.0.0.1'
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id
     Delayed::Worker.new.work_off 1
     assert_match /255.0.0.1/, ActionMailer::Base.deliveries.last.body
   end
@@ -308,7 +308,7 @@ class CertificatesControllerTest < ActionController::TestCase
     sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
     @request.env['HTTP_USER_AGENT'] = 'Web Browser/1.0'
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id
     Delayed::Worker.new.work_off 1
     assert_match /Web Browser\/1.0/, ActionMailer::Base.deliveries.last.body
   end
@@ -317,7 +317,7 @@ class CertificatesControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
     certificate = FactoryGirl.create(:published_certificate_with_dataset)
-    post :report, dataset_id: certificate.dataset.id, id: certificate.id
+    post :report, locale: 'en', dataset_id: certificate.dataset.id, id: certificate.id
     Delayed::Worker.new.work_off 1
     assert ActionMailer::Base.deliveries.last.from.include?(user.email)
   end
@@ -334,7 +334,7 @@ class CertificatesControllerTest < ActionController::TestCase
 
     assert_equal dataset.id, certificate.dataset.id
 
-    get :show, dataset_id: certificate.dataset.id
+    get :show, locale: 'en', dataset_id: certificate.dataset.id
 
     assert_equal certificate, assigns(:certificate)
   end

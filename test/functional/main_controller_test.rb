@@ -4,7 +4,7 @@ class MainControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   test "homepage" do
-    get :home
+    get :home, locale: 'en'
     assert_response 200
   end
 
@@ -112,7 +112,7 @@ class MainControllerTest < ActionController::TestCase
 
   test "start_questionnaire with app default jurisdiction" do
 
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert assigns(:response_set).survey == @survey_app_default
 
   end
@@ -120,14 +120,14 @@ class MainControllerTest < ActionController::TestCase
   test "start_questionnaire with user default_jurisdiction set" do
 
     sign_in FactoryGirl.create(:user, default_jurisdiction: 'user_default')
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert assigns(:response_set).survey == @survey_user_default
 
   end
 
   test "start_questionnaire with custom param" do
 
-    post :start_questionnaire, survey_access_code: 'other'
+    post :start_questionnaire, locale: 'en', survey_access_code: 'other'
     assert assigns(:response_set).survey == @survey_other
 
   end
@@ -135,7 +135,7 @@ class MainControllerTest < ActionController::TestCase
   test "start_questionnaire entities belongs to user" do
     sign_in @user = FactoryGirl.create(:user)
 
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert_equal assigns(:response_set).user_id, @user.id, "response set belongs to user"
     assert_equal assigns(:dataset).user_id, @user.id, "dataset belongs to user"
   end
