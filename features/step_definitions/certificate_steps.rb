@@ -32,7 +32,7 @@ Given(/^has a published certificate$/) do
 end
 
 When(/I visit the certificate page$/) do
-  visit dataset_certificate_path(@dataset, @certificate)
+  visit dataset_certificate_path('en', @dataset, @certificate)
 end
 
 Then(/I should see the claim button/) do
