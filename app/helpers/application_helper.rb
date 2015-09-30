@@ -112,6 +112,13 @@ module ApplicationHelper
     options_for_select([[t('response_set.choose_jurisdiction'), nil]] + surveys.map{|s|[s.complete_title, s.access_code]}, default)
   end
 
+  def locale_options_for_select(selected=nil)
+    locales = I18n.available_locales.each_with_object({}) do |locale, memo|
+      memo[t("locales.#{locale}")] = locale
+    end
+    options_for_select(locales, selected)
+  end
+
   # devise mapping
   def resource_name
     :user

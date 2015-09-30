@@ -433,6 +433,7 @@ zh:
     label:
       user:
         short_name: Short name or preferred way of being addressed
+        preferred_locale: Language
 
   locales:
     en: English

@@ -22,6 +22,9 @@
     = f.label :default_jurisdiction
     = f.select(:default_jurisdiction, jurisdiction_options_for_select(resource.default_jurisdiction))
   .form-field
+    = f.label :preferred_locale
+    = f.select(:preferred_locale, locale_options_for_select(resource.preferred_locale))
+  .form-field
     = f.label :password
     %i= t("authentication.new_password_info")
     = f.password_field :password, :autocomplete => "off", :class => 'span8'

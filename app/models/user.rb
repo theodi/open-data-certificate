@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
   has_many :certification_campaigns
 
-  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms
+  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms, :preferred_locale
 
   before_save :ensure_authentication_token
 
