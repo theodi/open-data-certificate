@@ -91,7 +91,8 @@ survey 'US',
       :discussion_topic => :us_usGovData,
       :help_text => 'If the data was created by the US Government, and you are in the US, then you have the right to publish it. US Government works do not receive copyright protection',
       :help_text_more_url => 'http://www.cendi.gov/publications/04-8copyright.html#312',
-      :pick => :one
+      :pick => :one,
+      :required => :required
     a_false 'no'
     a_true 'yes'
 

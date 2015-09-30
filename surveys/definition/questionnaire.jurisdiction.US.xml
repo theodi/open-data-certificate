@@ -23,7 +23,7 @@
 			<help>your right to share this data with people</help>
 			<question id="usGovData">
 				<label>Was the data created by the US Government?</label>
-				<yesno />
+				<yesno required="required"/>
 				<help more="http://www.cendi.gov/publications/04-8copyright.html#312">If the data was created by the US Government, and you are in the US, then you have the right to publish it. US Government works do not receive copyright protection</help>
 			</question>
 			<if test="this.usGovData() === 'false'">
