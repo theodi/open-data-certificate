@@ -14,7 +14,8 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk",
+    "http://www.usa.gov/publicdomain/label/1.0/" => "us_pd"
   }
 
   CONTENT_LICENCES = {
@@ -23,7 +24,8 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk",
+    "http://www.usa.gov/publicdomain/label/1.0/" => "us_pd"
   }
 
   KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
