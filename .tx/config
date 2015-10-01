@@ -43,6 +43,12 @@ source_file = surveys/translations/questionnaire.jurisdiction.IT.en.yml
 source_lang = en
 type = YML
 
+[certificates.questionnaire-jurisdiction-mx]
+file_filter = surveys/translations/questionnaire.jurisdiction.MX.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.MX.en.yml
+source_lang = en
+type = YML
+
 [certificates.questionnaire-jurisdiction-tw]
 file_filter = surveys/translations/questionnaire.jurisdiction.TW.<lang>.yml
 source_file = surveys/translations/questionnaire.jurisdiction.TW.en.yml
