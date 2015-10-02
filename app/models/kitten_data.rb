@@ -282,6 +282,7 @@ class KittenData < ActiveRecord::Base
     if automatic? && (licenses.empty? || is_public_domain)
       @fields['internationalDataLicence'] = 'cc_zero'
       @fields['internationalContentRights'] = 'samerights'
+      @fields['contentLicence'] = 'cc_zero'
       data[:assumptions] << :us_public_domain
     end
   end
