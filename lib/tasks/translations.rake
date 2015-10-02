@@ -66,8 +66,10 @@ Should work on OSX
     "GB" => %w[en],
     "GR" => %w[en gr],
     "MX" => %w[en es],
+    "RO" => %w[en ro],
     "TW" => %w[en zh],
-    "US" => %w[en]
+    "US" => %w[en],
+    "TW" => %w[en zh]
   }
   JURISDICTIONS = JURISDICTION_LANGS.keys
 
