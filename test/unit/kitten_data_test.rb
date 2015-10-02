@@ -280,7 +280,7 @@ class KittenDataTest < ActiveSupport::TestCase
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
 
-    assert_equal "geographic", kitten_data.fields["dataType"]
+    assert_equal ["geographic"], kitten_data.fields["dataType"]
   end
 
   test 'Frequently changing data detected when update frequency is at least daily' do

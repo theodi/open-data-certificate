@@ -203,7 +203,7 @@ class KittenData < ActiveRecord::Base
 
   def set_data_type
     is_geographic = source["extras"]["metadata_type"] == "geospatial" rescue false
-    @fields["dataType"] = "geographic" if is_geographic
+    @fields["dataType"] = ["geographic"] if is_geographic
   end
 
   def set_basic_requirements
