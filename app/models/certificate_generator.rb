@@ -98,7 +98,7 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
-    response_set.autocomplete(autocomplete_url)
+    response_set.autocomplete(autocomplete_url, true)
 
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)

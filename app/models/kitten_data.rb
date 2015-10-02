@@ -1,7 +1,8 @@
 class KittenData < ActiveRecord::Base
   belongs_to :response_set, inverse_of: :kitten_data
 
-  attr_accessible :data, :url, :response_set
+  attr_accessor :automatic
+  attr_accessible :data, :url, :response_set, :automatic
 
   serialize :data
 
@@ -39,6 +40,10 @@ class KittenData < ActiveRecord::Base
     @dataset.try(:source) || {}
   end
 
+  def assumed_us_public_domain?
+    data[:assumptions].include?(:us_public_domain)
+  end
+
   def distributions
     dataset_field(:distributions, []).map { |distribution|
       {
@@ -62,7 +67,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def compute_fields
-    return {} if data.blank?
+    return {} unless dataset.present?
 
     begin
       @fields = {}
@@ -75,6 +80,7 @@ class KittenData < ActiveRecord::Base
         notify_airbrake ex
       end
     end
+    save
 
     @fields
   end
@@ -255,14 +261,29 @@ class KittenData < ActiveRecord::Base
   end
 
   def data_gov_federal_assumptions
-    @fields["dataLicence"] = "other"
-    @fields["contentLicence"] = "other"
-    @fields["otherDataLicenceName"] = "U.S. Government Work"
-    @fields["otherDataLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
-    @fields["otherDataLicenceOpen"] = "true"
-    @fields["otherContentLicenceName"] = "U.S. Government Work"
-    @fields["otherContentLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
-    @fields["otherContentLicenceOpen"] = "true"
+    # usGovData: if the data was created by a federal agency then it is
+    # automatically in the public domain according to US copyright law
+
+    # internationalDataLicence: we assume internationally that cc-zero is
+    # appropriate as the license as that is in the spirit of the US Open Data
+    # policy
+    # https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf
+    # we assume public domain if the license is not specified or set to one of
+    # the two public domain fields that catalog.data.gov uses (us-pd or
+    # other-pd).
+
+    @fields["usGovData"] = "true"
+
+    licenses = data[:licenses]
+    is_public_domain = licenses.any? do |license|
+      %w[notspecified us-pd other-pd cc-zero].include?(license.id)
+    end
+
+    if automatic? && (licenses.empty? || is_public_domain)
+      @fields['internationalDataLicence'] = 'cc_zero'
+      @fields['internationalContentRights'] = 'samerights'
+      data[:assumptions] << :us_public_domain
+    end
   end
 
   def set_structured_open
@@ -368,6 +389,10 @@ class KittenData < ActiveRecord::Base
   end
 
   private
+  def automatic?
+    !!@automatic
+  end
+
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
   end
@@ -394,10 +419,13 @@ class KittenData < ActiveRecord::Base
         :temporal_coverage => dataset_field(:temporal),
         :spatial_coverage  => dataset_field(:spatial),
         :language          => dataset_field(:language),
-        :distributions     => distributions
+        :distributions     => distributions,
+        :assumptions => []
       }
     else
-      self.data = {}
+      self.data = {
+        :assumptions => []
+      }
     end
   end
 
