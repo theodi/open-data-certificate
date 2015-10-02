@@ -1,6 +1,7 @@
 module CertificateFactory
 
   class HTTPFactory
+    include Enumerable
     include HTTParty
 
     attr_reader :count
@@ -94,6 +95,7 @@ module CertificateFactory
       super
       @rows = options.fetch(:row_size, 20)
       @start = 0
+      @params = options.fetch(:params, {})
     end
 
     def url
@@ -118,7 +120,7 @@ module CertificateFactory
 
     def build_url(path, params={})
       u = uri + path
-      qs = CGI.parse(u.query.to_s).merge(params)
+      qs = CGI.parse(u.query.to_s).merge(@params).merge(params)
       u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
       return u.to_s
     end

@@ -5,6 +5,7 @@ survey 'US',
   :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
   translations :en => :default
+
   section_general 'General Information',
     :description => '',
     :display_header => false do
@@ -24,7 +25,7 @@ survey 'US',
       :text_as_statement => 'This data is described at',
       :help_text => 'Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.'
     a_1 'Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Documentation URL',
       :requirement => ['pilot_1', 'basic_1']
@@ -60,7 +61,7 @@ survey 'US',
       :text_as_statement => 'The data is published on',
       :help_text => 'Give a URL to a website, this helps us to group data from the same organisation even if people give different names.'
     a_1 'Publisher URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Publisher URL'
 
@@ -82,7 +83,7 @@ survey 'US',
   section_legal 'Legal Information',
     :description => 'Rights, licensing and privacy' do
 
-    label_group_2 'Rights',
+    label_ownership 'Rights',
       :help_text => 'your right to share this data with people',
       :customer_renderer => '/partials/fieldset'
 
@@ -90,7 +91,8 @@ survey 'US',
       :discussion_topic => :us_usGovData,
       :help_text => 'If the data was created by the US Government, and you are in the US, then you have the right to publish it. US Government works do not receive copyright protection',
       :help_text_more_url => 'http://www.cendi.gov/publications/04-8copyright.html#312',
-      :pick => :one
+      :pick => :one,
+      :required => :required
     a_false 'no'
     a_true 'yes'
 
@@ -131,7 +133,7 @@ survey 'US',
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_publisherRights, '==', :a_complicated
     a_1 'Risk Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Risk Documentation URL',
       :requirement => ['pilot_2']
@@ -266,7 +268,7 @@ survey 'US',
     condition_D :q_crowdsourced, '==', :a_true
     condition_E :q_crowdsourcedContent, '==', :a_true
     a_1 'Contributor Licence Agreement URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Contributor Licence Agreement URL',
       :required => :required
@@ -306,7 +308,7 @@ survey 'US',
     condition_A :q_usGovData, '==', :a_false
     condition_B :q_publisherOrigin, '==', :a_false
     a_1 'Data Sources Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Data Sources Documentation URL',
       :requirement => ['pilot_3']
@@ -344,7 +346,7 @@ survey 'US',
     condition_C :q_sourceDocumentationUrl, '!=', {:string_value => '', :answer_reference => '1'}
     condition_D :q_sourceDocumentationMetadata, '==', :a_false
 
-    label_group_3 'Licensing',
+    label_licensing 'Licensing',
       :help_text => 'how you give people permission to use this data',
       :customer_renderer => '/partials/fieldset'
 
@@ -354,7 +356,7 @@ survey 'US',
       :text_as_statement => 'The rights statement is at',
       :help_text => 'Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright. A rights statement helps people understand what they can and can\'t do with the data.'
     a_1 'Rights Statement URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Rights Statement URL',
       :requirement => ['pilot_4']
@@ -473,7 +475,7 @@ survey 'US',
     condition_E :q_dataNotApplicable, '==', :a_waived
     condition_F :q_dataWaiver, '==', :a_other
     a_1 'Waiver URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Waiver URL'
@@ -506,7 +508,7 @@ survey 'US',
     condition_C :q_usGovData, '==', :a_true
     condition_D :q_internationalDataLicence, '==', :a_other
     a_1 'Other Licence URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Other Licence URL'
@@ -680,7 +682,7 @@ survey 'US',
     condition_F :q_contentNotApplicable, '==', :a_waived
     condition_G :q_contentWaiver, '==', :a_other
     a_1 'Waiver URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Waiver URL'
@@ -715,7 +717,7 @@ survey 'US',
     condition_D :q_internationalContentRights, '==', :a_samerights
     condition_E :q_contentLicence, '==', :a_other
     a_1 'Licence URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Licence URL'
@@ -759,7 +761,7 @@ survey 'US',
     condition_C :q_usGovData, '==', :a_true
     condition_D :q_internationalContentRights, '==', :a_mixedrights
     a_1 'Content Rights Description URL',
-      :string,
+      :text,
       :input_type => :url,
       :required => :required,
       :placeholder => 'Content Rights Description URL'
@@ -844,7 +846,7 @@ survey 'US',
     condition_A :q_copyrightURL, '!=', {:string_value => '', :answer_reference => '1'}
     condition_B :q_copyrightStatementMetadata, '!=', :a_copyrightHolder
 
-    label_group_4 'Privacy',
+    label_privacy 'Privacy',
       :help_text => 'how you protect people\'s privacy',
       :customer_renderer => '/partials/fieldset'
 
@@ -930,7 +932,7 @@ survey 'US',
     condition_B :q_appliedAnon, '==', :a_false
     condition_C :q_lawfulDisclosure, '==', :a_true
     a_1 'Disclosure Rationale URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Disclosure Rationale URL',
       :requirement => ['standard_9']
@@ -980,7 +982,7 @@ survey 'US',
     condition_C :q_lawfulDisclosure, '==', :a_true
     condition_D :q_riskAssessmentExists, '==', :a_true
     a_1 'Risk Assessment URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Risk Assessment URL',
       :requirement => ['standard_10']
@@ -1056,7 +1058,7 @@ survey 'US',
   section_practical 'Practical Information',
     :description => 'Findability, accuracy, quality and guarantees' do
 
-    label_group_6 'Findability',
+    label_findability 'Findability',
       :help_text => 'how you help people find your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1087,7 +1089,7 @@ survey 'US',
       dependency :rule => 'A'
       condition_A :q_onWebsite, '==', :a_true
       a_1 'Web page URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Web page URL'
@@ -1121,7 +1123,7 @@ survey 'US',
       dependency :rule => 'A'
       condition_A :q_listed, '==', :a_true
       a_1 'Listing URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Listing URL'
@@ -1155,14 +1157,14 @@ survey 'US',
       dependency :rule => 'A'
       condition_A :q_referenced, '==', :a_true
       a_1 'Reference URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Reference URL'
 
     end
 
-    label_group_7 'Accuracy',
+    label_accuracy 'Accuracy',
       :help_text => 'how you keep your data up-to-date',
       :customer_renderer => '/partials/fieldset'
 
@@ -1470,7 +1472,7 @@ survey 'US',
     condition_B :q_timeSensitive, '!=', :a_true
     condition_C :q_corrected, '==', :a_false
 
-    label_group_8 'Quality',
+    label_quality 'Quality',
       :help_text => 'how much people can rely on your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1480,7 +1482,7 @@ survey 'US',
       :text_as_statement => 'Data quality is documented at',
       :help_text => 'Give a URL where people can find out about the quality of your data. People accept that errors are inevitable, from equipment malfunctions or mistakes that happen in system migrations. You should be open about quality so people can judge how much to rely on this data.'
     a_1 'Data Quality Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Data Quality Documentation URL',
       :requirement => ['standard_22']
@@ -1497,7 +1499,7 @@ survey 'US',
       :text_as_statement => 'Quality control processes are described at',
       :help_text => 'Give a URL for people to learn about ongoing checks on your data, either automatic or manual. This reassures them that you take quality seriously and encourages improvements that benefit everyone.'
     a_1 'Quality Control Process Description URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Quality Control Process Description URL',
       :requirement => ['exemplar_8']
@@ -1508,7 +1510,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_qualityControlUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_9 'Guarantees',
+    label_guarantees 'Guarantees',
       :help_text => 'how much people can depend on your data’s availability',
       :customer_renderer => '/partials/fieldset'
 
@@ -1538,7 +1540,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Availability Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Service Availability Documentation URL',
       :requirement => ['standard_24']
@@ -1558,7 +1560,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Service Status URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Service Status URL',
       :requirement => ['exemplar_9']
@@ -1613,7 +1615,7 @@ survey 'US',
   section_technical 'Technical Information',
     :description => 'Locations, formats and trust' do
 
-    label_group_11 'Locations',
+    label_locations 'Locations',
       :help_text => 'how people can access your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -1625,7 +1627,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_oneoff
     a_1 'Dataset URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Dataset URL',
       :requirement => ['basic_9', 'pilot_12']
@@ -1703,7 +1705,7 @@ survey 'US',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_current
     a_1 'Current Dataset URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Current Dataset URL',
       :required => :required
@@ -1733,7 +1735,7 @@ survey 'US',
     condition_A :q_releaseType, '==', :a_series
     condition_B :q_versionManagement, '==', :a_list
     a_1 'Version List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Version List URL',
       :required => :required
@@ -1746,7 +1748,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_releaseType, '==', :a_service
     a_1 'Endpoint URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Endpoint URL',
       :requirement => ['basic_11', 'standard_28']
@@ -1818,7 +1820,7 @@ survey 'US',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_current
     a_1 'Current Dump URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Current Dump URL',
       :required => :required
@@ -1850,7 +1852,7 @@ survey 'US',
     condition_B :q_provideDumps, '==', :a_true
     condition_C :q_dumpManagement, '==', :a_list
     a_1 'Dump List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Dump List URL',
       :required => :required
@@ -1864,12 +1866,12 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_changeFeed, '==', :a_true
     a_1 'Change Feed URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Change Feed URL',
       :required => :required
 
-    label_group_12 'Formats',
+    label_format 'Formats',
       :help_text => 'how people can work with your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2119,7 +2121,7 @@ survey 'US',
     condition_A :q_identifiers, '==', :a_true
     condition_B :q_resolvingIds, '==', :a_service
     a_1 'Identifier Resolution Service URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Identifier Resolution Service URL',
       :requirement => ['standard_35']
@@ -2178,7 +2180,7 @@ survey 'US',
     condition_C :q_reliableExternalUrls, '==', :a_true
     condition_D :q_externalUrls, '==', :a_false
 
-    label_group_13 'Trust',
+    label_trust 'Trust',
       :help_text => 'how much trust people can put in your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2207,7 +2209,7 @@ survey 'US',
       :text_as_statement => 'This data can be verified using',
       :help_text => 'If you deliver important data to people they should be able to check that what they receive is the same as what you published. For example, you can digitally sign the data you publish, so people can tell if it has been tampered with.'
     a_1 'Verification Process URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Verification Process URL',
       :requirement => ['exemplar_18']
@@ -2223,7 +2225,7 @@ survey 'US',
   section_social 'Social Information',
     :description => 'Documentation, support and services' do
 
-    label_group_15 'Documentation',
+    label_documentation 'Documentation',
       :help_text => 'how you help people understand the context and content of your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2445,7 +2447,7 @@ survey 'US',
       :display_on_certificate => true,
       :text_as_statement => 'The technical documentation for the data is at'
     a_1 'Technical Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Technical Documentation URL',
       :requirement => ['pilot_19']
@@ -2471,7 +2473,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_vocabulary, '==', :a_true
     a_1 'Schema Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Schema Documentation URL',
       :requirement => ['standard_54']
@@ -2498,7 +2500,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_codelists, '==', :a_true
     a_1 'Codelist Documentation URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Codelist Documentation URL',
       :requirement => ['standard_55']
@@ -2510,7 +2512,7 @@ survey 'US',
     condition_A :q_codelists, '==', :a_true
     condition_B :q_codelistDocumentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
-    label_group_16 'Support',
+    label_support 'Support',
       :help_text => 'how you communicate with people who use your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2520,7 +2522,7 @@ survey 'US',
       :text_as_statement => 'Find out how to contact someone about this data at',
       :help_text => 'Give a URL for a page that describes how people can contact someone if they have questions about the data.'
     a_1 'Contact Documentation',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Contact Documentation',
       :requirement => ['pilot_20']
@@ -2536,7 +2538,7 @@ survey 'US',
       :display_on_certificate => true,
       :text_as_statement => 'Find out how to suggest improvements to publication at'
     a_1 'Improvement Suggestions URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Improvement Suggestions URL',
       :requirement => ['pilot_21']
@@ -2552,7 +2554,7 @@ survey 'US',
       :display_on_certificate => true,
       :text_as_statement => 'Find out where to send questions about privacy at'
     a_1 'Confidentiality Contact Documentation',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Confidentiality Contact Documentation',
       :requirement => ['pilot_22']
@@ -2589,7 +2591,7 @@ survey 'US',
       dependency :rule => 'A'
       condition_A :q_socialMedia, '==', :a_true
       a_1 'Social Media URL',
-        :string,
+        :text,
         :input_type => :url,
         :required => :required,
         :placeholder => 'Social Media URL'
@@ -2602,7 +2604,7 @@ survey 'US',
       :text_as_statement => 'Discuss this data at',
       :help_text => 'Give a URL to your forum or mailing list where people can talk about your data.'
     a_1 'Forum or Mailing List URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Forum or Mailing List URL',
       :requirement => ['standard_57']
@@ -2621,7 +2623,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Instructions URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Correction Instructions URL',
       :requirement => ['standard_58']
@@ -2641,7 +2643,7 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_corrected, '==', :a_true
     a_1 'Correction Notification URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Correction Notification URL',
       :requirement => ['standard_59']
@@ -2676,12 +2678,12 @@ survey 'US',
     dependency :rule => 'A'
     condition_A :q_engagementTeam, '==', :a_true
     a_1 'Community Engagement Team Home Page URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Community Engagement Team Home Page URL',
       :required => :required
 
-    label_group_17 'Services',
+    label_services 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',
       :customer_renderer => '/partials/fieldset'
 
@@ -2691,7 +2693,7 @@ survey 'US',
       :text_as_statement => 'Tools to help use this data are listed at',
       :help_text => 'Give a URL that lists the tools you know or recommend people can use when they work with your data.'
     a_1 'Tool URL',
-      :string,
+      :text,
       :input_type => :url,
       :placeholder => 'Tool URL',
       :requirement => ['exemplar_20']

@@ -112,6 +112,19 @@ class KittenDataTest < ActiveSupport::TestCase
     end
   end
 
+  def set_us_data(organization_type = "Federal Government")
+    source = {
+      "organization" => {"id" => "gov-agency"}
+    }
+    organization = {
+      "extras" => {"organization_type" => organization_type}
+    }
+
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
+    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/gov-agency').to_return(body: organization.to_json)
+  end
+
   def setup
     stub_request(:get, "http://www.example.com").to_return(status: 200)
     set_normal_data
@@ -267,7 +280,7 @@ class KittenDataTest < ActiveSupport::TestCase
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
 
-    assert_equal "geographic", kitten_data.fields["dataType"]
+    assert_equal ["geographic"], kitten_data.fields["dataType"]
   end
 
   test 'Frequently changing data detected when update frequency is at least daily' do
@@ -425,36 +438,45 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://www.data.gov/issue/?media_url=http://catalog.data.gov/some_data", kitten_data.fields["improvementsContact"]
   end
 
-  test 'data.gov assumptions are set for federal organizations' do
-    source = {
-      "organization" => { "id" => "federal" }
-    }
-    organization = {
-      "extras" => { "organization_type" => "Federal Government" }
-    }
-    
-    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
-    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+  test 'data.gov assumptions are set for federal organizations with no license information when automatic' do
+    set_us_data
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([])
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data', automatic: true)
+
+    assert_equal "true", kitten_data.fields["usGovData"]
+    assert_equal "cc_zero", kitten_data.fields["internationalDataLicence"]
+    assert kitten_data.assumed_us_public_domain?
+  end
+
+  test 'data.gov only gov data assumption is set for federal organizations with no license information when not automatic' do
+    set_us_data
+    license = DataKitten::License.new(id: 'us-pd')
+    DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
 
-    assert_equal "http://www.usa.gov/publicdomain/label/1.0/", kitten_data.fields["otherDataLicenceURL"]
+    assert_equal "true", kitten_data.fields["usGovData"]
+    assert_nil kitten_data.fields["internationalDataLicence"]
+    refute kitten_data.assumed_us_public_domain?
+  end
+
+  %w[us-pd other-pd notspecified].each do |license_id|
+    test "data.gov assumptions are set for federal organizations with #{license_id} license" do
+      set_us_data
+      license = DataKitten::License.new(id: license_id)
+      DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
+      @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data', automatic: true)
+
+      assert_equal "true", kitten_data.fields["usGovData"]
+      assert_equal "cc_zero", kitten_data.fields["internationalDataLicence"]
+      assert kitten_data.assumed_us_public_domain?
+    end
   end
 
   test 'data.gov assumptions are not set for non-federal organizations' do
-    source = {
-      "organization" => { "id" => "federal" }
-    }
-    organization = {
-      "extras" => { "organization_type" => "City Government" }
-    }
-    
-    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
-    stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/federal').to_return(body: organization.to_json)
+    set_us_data("City Government")
     @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
 
-    assert_nil kitten_data.fields["otherDataLicenceURL"]
+    assert_nil kitten_data.fields["internationalDataLicence"]
   end
 
   test 'Distribution metadata is set correctly' do

@@ -17,7 +17,7 @@
       - [:release_date, :modified_date, :update_frequency, :publishers, :keywords].each do |key|
         = kitten_field(kitten_data, key)
 
-      - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
+      - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords, :assumptions])
       - extra_data = kitten_data.data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
 
       /# Ignore the title if it is the same as the certificate title

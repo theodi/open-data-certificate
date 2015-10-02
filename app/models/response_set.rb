@@ -484,14 +484,14 @@ class ResponseSet < ActiveRecord::Base
     assoc.first || assoc.build
   end
 
-  def autocomplete(url)
+  def autocomplete(url, automatic=false)
     return unless url.present?
     update_responses({documentationUrl: url})
     responses.update_all(autocompleted: false)
     update_attribute('kitten_data', nil)
 
     if ODIBot.new(url).valid?
-      create_kitten_data(url: url)
+      create_kitten_data(url: url, automatic: automatic)
       update_responses(kitten_data.fields)
     end
   end

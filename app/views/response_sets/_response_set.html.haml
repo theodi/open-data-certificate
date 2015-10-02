@@ -10,6 +10,10 @@
     - if responses.any?
       %hr.heavy
       %h3= section.title
+      - if section.reference_identifier == "legal" && response_set.kitten_data.assumed_us_public_domain?
+        %div.certificate-info
+          %i.icon-info-sign
+          = t('certificate.us_public_domain_assumption_html')
       %ul
         - responses.each do |response|
           - response_text = response.statement_text
