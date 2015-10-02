@@ -251,6 +251,11 @@ en:
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
     expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
     claim_this_certificate: "Is this your dataset?"
+    us_public_domain_assumption_html: |
+      This dataset has been created by US Government which means it is required to be in the public domain. However
+      US copyright law only allows open access by US citizens, we have assumed the data is equivalently licensed as
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0</a> for the rest of the world as this is in the spirit of the
+      <a href="https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf">US Government’s Open Data policy</a>.
     report:
       link: Report a problem
       text: with this certificate
