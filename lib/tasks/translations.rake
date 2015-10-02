@@ -64,6 +64,7 @@ Should work on OSX
     "CZ" => %w[en cs],
     "DE" => %w[en de],
     "GB" => %w[en],
+    "GR" => %w[en gr],
     "MX" => %w[en es],
     "TW" => %w[en zh],
     "US" => %w[en]
