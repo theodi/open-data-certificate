@@ -156,7 +156,7 @@ class Survey < ActiveRecord::Base
     default = {"title" => title, "description" => description}
     source = translations.where(:locale => locale_symbol.to_s).first
     @translation[locale_symbol] = if source
-      default.merge(source.to_hash).with_indifferent_access
+      remove_blank_translations(default.merge(source.to_hash)).with_indifferent_access
     else
       default.with_indifferent_access
     end
@@ -191,6 +191,13 @@ class Survey < ActiveRecord::Base
       elsif amount > 1
         errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
       end
+    end
+  end
+
+  def remove_blank_translations(source)
+    source.inject({}) do |result, (k,v)|
+      result[k] = (v.is_a?(Hash) ? remove_blank_translations(v) : v) unless v.blank?
+      result
     end
   end
 
