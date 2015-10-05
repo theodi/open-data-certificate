@@ -25,22 +25,6 @@
 
 .DS_Store
 
-prototype/odc_questionnaire.xml
-
-prototype/surveyor-result.html
-
-prototype/translations/odc.UK.en.xml
-
-prototype/merged.xml
-
-prototype/open-data-certificate.xpr
-
-/prototype/badge/
-
-prototype/temp
-prototype/translations/temp
-
-
 # RubyMine cruft
 
 .idea/
