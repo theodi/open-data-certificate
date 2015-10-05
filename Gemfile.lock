@@ -304,6 +304,9 @@ GEM
       rack (~> 1.2)
     open_uri_redirections (0.1.4)
     orm_adapter (0.5.0)
+    parallel (1.6.1)
+    parallel_tests (1.7.0)
+      parallel
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.5)
@@ -556,6 +559,7 @@ DEPENDENCIES
   mocha
   mustache (= 0.99.4)
   mysql2
+  parallel_tests
   pry
   pry-remote
   rabl (~> 0.6.13)
