@@ -1,7 +1,7 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-cs:
+en:
   choose_legislation: choose legislation
 
   alpha_note: This is the alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
@@ -183,6 +183,27 @@ cs:
         beta:   Certificate in beta stage
         final:  Certificate in final stage
 
+  surveys:
+    jurisdiction: 'Jurisdiction:'
+    language: 'Language:'
+    read_more: Read more about Open Data Certificates
+    do_not_have_url: I don't have a URL
+    check_url_button: Check URL
+    skip_this_button: Skip this
+    url_problem_error: There was a problem with your URL, please check, or fill out the explanation below
+    url_unknown_error: Sorry, an error occurred. Please try again.
+    dataset_description_html: |
+      <p>Link to the dataset you are certifying. By dataset we mean
+      the documentation or metadata that describes the data as well
+      as a link to the data file itself. Dataset = data + metadata.</p>
+
+      <p>If your data is stored in a <a href="http://ckan.org/">CKAN</a>
+      repository (such as data.gov.uk), or marked up with
+      <a href="http://www.w3.org/TR/vocab-dcat/">DCAT</a>, then we
+      will attempt to automatically answer some of the questions for
+      you in the next step.
+      <a href="http://theodi.org/guides/marking-up-your-dataset-with-dcat">Read more...</a></p>
+
   certificates:
     certificates: Certificates
     curated_by: Curated by
@@ -251,6 +272,11 @@ cs:
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
     expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
     claim_this_certificate: "Is this your dataset?"
+    us_public_domain_assumption_html: |
+      This dataset has been created by US Government which means it is required to be in the public domain. However
+      US copyright law only allows open access by US citizens, we have assumed the data is equivalently licensed as
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0</a> for the rest of the world as this is in the spirit of the
+      <a href="https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf">US Government’s Open Data policy</a>.
     report:
       link: Report a problem
       text: with this certificate
@@ -260,17 +286,17 @@ cs:
     search_results: Search Results
 
   response_set:
-    choose_a_jurisdiction: Choose a new jurisdiction
+    choose_a_jurisdiction: Change jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
     choose_jurisdiction: --- Select jurisdiction ---
     start_new_jurisdiction: Change jurisdiction
 
-    choose_a_language: Choose a new language
-    language_dialog_body: Choose a different language below
+    choose_a_language: Change language
+    language_dialog_body: Choose which language you would like to complete the survey in
     choose_language: --- Select language ---
     start_new_language: Change language
 
-    update_instructions: "Please check the information is up to date and all the mandatory fields are completed. Select 'Save and finish' to update."
+    update_instructions: "Please check the information is up to date and all the mandatory fields are completed before continuing."
 
   summary_data:
     summary: Summary
@@ -434,5 +460,9 @@ cs:
       user:
         short_name: Short name or preferred way of being addressed
 
+  locales:
+    en: English
+    cs: Czech
+
   interface:
-    select: "prosím vyberte…"
+    select: "Please select…"

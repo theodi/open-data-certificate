@@ -20,13 +20,13 @@
           .row
             .span9
               .jurisdiction
-                Jurisdiction:
+                = t('surveys.jurisdiction')
                 .badge.badge-inverse=  @response_set.survey.complete_title
                 %span.status= @survey.try(:status)
                 = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
                   %i.icon.icon-pencil
                 - if @survey.translations.count > 1
-                  Language:
+                  = t('surveys.language')
                   .badge.badge-inverse= @response_set.locale_name
                   = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
                     %i.icon.icon-pencil
@@ -69,7 +69,8 @@
             .span8.lead
               != @survey.intro
               %p
-                %a{href: about_url} Read more about Open Data Certificates
+                %a{href: about_url}
+                  = t('surveys.read_more')
 
 
           .documentation-url
