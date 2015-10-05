@@ -127,11 +127,11 @@ state of `pending`, please try again in a few seconds.
 
 ### Modelling The Open Data Certificate xml files
 
-##### 1: The ODC questionnaire exists in two sections, and accordingly as two files within prototypes directory
+##### 1: The ODC questionnaire exists in two sections, and accordingly as two files within surveys directory
 
-The general questionnaire (stored in prototype/translations/certificate.en.xml) containing the questions for General, Techincal and Social sections and the legal portion (stored in prototype/jurisdictions/certificate.GB.xml) for questions relating to copyright and IP ownership that differ by country or legal jurisdiction
+The general questionnaire (stored in surveys/definition/questionnaire.general.xml) containing the questions for General, Techincal and Social sections and the legal portion (stored in surveys/definition/questionnaire.jurisdiction.<lang>.xml) for questions relating to copyright and IP ownership that differ by country or legal jurisdiction
 
-##### 2: prototype/surveyor.xsl transforms these two XML files into survey/odc_questionnaire.$country_code.rb
+##### 2: surveys/transform/surveyor.xsl transforms these two XML files into survey/odc_questionnaire.$country_code.rb
 
 the mechanism by which specific country codes and their corresponding language is translated is being refactored at present  see [Surveyor/Translations](#translations) below
 
@@ -323,11 +323,7 @@ To change surveys, you'll need Saxon installed. On a Mac, this is as simple as r
 brew install saxon
 ```
 
-You can then change the `prototype/survey.xsl` file and run:
-
-```bash
-saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
-```
+You can then use the `rake` tasks defined in `lib/tasks/translations.rake` and `lib/tasks/odc.rake` to generate and update surveys with their required translation locale files.
 
 
 ### Autocompletion
@@ -363,8 +359,6 @@ A breakdown of the validation states that exist in the survey:
 
 [App approach document](https://docs.google.com/a/whiteoctober.co.uk/document/d/1Ot91x1enq9TW7YKpePytE-wA0r8l9dmNQLVi16ph-zg/edit#)
 
-The original prototype has been moved to [/prototype](https://github.com/theodi/open-data-certificate/tree/master/prototype).
-
 #### Flowchart
 
 http://localhost:3000/flowchart
@@ -375,7 +369,7 @@ app>controllers>flowcharts_controller.rb
 app>views>flowcharts/.
 ```
 you'll want to have open
-prototype/translation/certificate.en.xml & prototype/jurisdictions/certificate.GB.xml
+surveys/definition/questionnaire.general.xml & surveys/definition/questionnaire.jurisdiction.GB.xml
 
 rendering flow =
 ```
