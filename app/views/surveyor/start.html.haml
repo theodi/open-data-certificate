@@ -41,7 +41,7 @@
           .span8.lead
             != @survey.intro
             %p
-              %a{href: about_url}
+              %a{href: about_page_url}
                 = t('surveys.read_more')
 
         = semantic_form_for [surveyor, :start, @response_set] do |f|

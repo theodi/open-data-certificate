@@ -4,13 +4,13 @@ OpenDataCertificate::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  mount Surveyor::Engine => "/surveys", :as => "surveyor"
+  # Extra routes for the surveyor engine, mounted below
   Surveyor::Engine.routes.draw do
     get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
     post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
     get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
 
-    get  '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
+    get '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'start'
     get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
 
     resources :jurisdictions, :only => :index
@@ -18,49 +18,65 @@ OpenDataCertificate::Application.routes.draw do
     # have a response_set resource for deleting for now, have
     # a feeling that this could include a couple of the other
     # routes,  though try it out for now
-    resources :response_sets, :only => :destroy do
+    resources :response_sets, only: :destroy do
       post :publish, on: :member
       post :autofill, on: :member
       post :resolve, on: :member
       put  :start, on: :member
     end
-
   end
-  post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
-  get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
-  get 'jurisdictions', :to => 'jurisdictions#index'
 
-  # Get certificate from dataset url
-  get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
-                     :constraints => lambda { |request| request.params[:datasetUrl].present? }
+  scope '/:locale', constraints: {locale: Regexp.union(I18n.available_locales.map(&:to_s))} do
+    root :to => 'main#home'
 
-  resources :datasets do
-    put 'start_questionnaire'
-    post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
-    post 'regenerate', to: 'datasets#regenerate', as: 'regenerate_certificate'
-    get :typeahead, on: :collection
-    get :admin, on: :collection
-    get :schema, on: :collection
-    get :info, on: :collection
+    # 'Static' pages managed by HighVoltage here...
+    get 'privacy-policy' => 'pages#show', id: 'privacy_policy', as: 'privacy_policy'
+    get 'cookie-policy' => 'pages#show', id: 'cookie_policy', as: 'cookie_policy'
+    get 'terms' => 'pages#show', id: 'terms', as: 'terms_page'
+    get 'about' => 'pages#show', id: 'about', as: 'about_page'
+    get 'overview' => 'pages#show', id: 'overview', as: 'overview_page'
+    get 'contact' => 'pages#show', id: 'contact', as: 'contact_page'
+    get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
+    get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
-    collection do
-      get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
-    end
+    mount Surveyor::Engine, at: "/surveys", :as => "surveyor"
 
-    resource :certificate, as: 'latest_certificate', only: [:show] do
-      get 'embed'
-      get 'badge'
-    end
+    post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
+    get 'start_certificate', :to => 'main#start_questionnaire', :as => 'authenticated_start_questionnaire'
+    get 'jurisdictions', :to => 'jurisdictions#index'
 
-    resources :certificates, :only => [:show, :update] do
-       member do
-         get 'improvements', to: 'certificates#improvements', as: 'improvements'
-         get 'progress', to: 'certificates#progress'
-         get 'embed', to: 'certificates#embed', as: 'embed'
-         get 'badge', to: 'certificates#badge', as: 'badge'
-         post 'verify'
-         post :report
-       end
+    # Get certificate from dataset url
+    get '/datasets(/:type)' => 'certificates#certificate_from_dataset_url',
+                       :constraints => lambda { |request| request.params[:datasetUrl].present? }
+
+    resources :datasets do
+      put 'start_questionnaire'
+      post 'certificates',  to: 'datasets#update_certificate', as: 'update_certificate'
+      post 'regenerate', to: 'datasets#regenerate', as: 'regenerate_certificate'
+      get :typeahead, on: :collection
+      get :admin, on: :collection
+      get :schema, on: :collection
+      get :info, on: :collection
+
+      collection do
+        get 'status/:certificate_generator_id', to: 'datasets#import_status', as: 'status'
+      end
+
+      resource :certificate, as: 'latest_certificate', only: [:show] do
+        get 'embed'
+        get 'badge'
+      end
+
+      resources :certificates, :only => [:show, :update] do
+         member do
+           get 'improvements', to: 'certificates#improvements', as: 'improvements'
+           get 'progress', to: 'certificates#progress'
+           get 'embed', to: 'certificates#embed', as: 'embed'
+           get 'badge', to: 'certificates#badge', as: 'badge'
+           post 'verify'
+           post :report
+         end
+      end
     end
   end
 
@@ -95,16 +111,6 @@ OpenDataCertificate::Application.routes.draw do
   # Get badge for a url
   get 'get_badge' => 'certificates#certificate_from_dataset_url'
 
-  # 'Static' pages managed by HighVoltage here...
-  get 'about' => 'pages#show', :id => 'about'
-  get 'overview' => 'pages#show', :id => 'overview'
-  get 'contact' => 'pages#show', :id => 'contact'
-  get 'terms' => 'pages#show', :id => 'terms'
-  get 'cookie-policy' => 'pages#show', :id => 'cookie_policy'
-  get 'privacy-policy' => 'pages#show', :id => 'privacy_policy'
-  get 'markdown' => 'pages#show', :id => 'markdown_help', as: :markdown_help
-  get 'using-the-marks' => 'pages#show', :id => 'branding'
-
   # comment pages
   get 'comment' => 'main#comment', as: :comment
   get 'discussion' => 'main#discussion', as: :discussion # general/site-wide
@@ -136,8 +142,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'admin/users/:user_id' => 'admin#users', as: 'admin_users'
   get 'admin/typeahead' => 'admin#typeahead'
 
-  root :to => 'main#home'
-
   # Certificate legacy redirects
   get '/certificates/:id', to: 'certificates#legacy_show'
   get '/certificates/:id/:type', to: 'certificates#legacy_show'
@@ -146,4 +150,8 @@ OpenDataCertificate::Application.routes.draw do
   get 'flowchart' => 'flowcharts#show'
 
   get 'status/ping' => 'main#ping'
+
+  match '(*path)', to: 'locale#redirect_to_locale', constraints: ->(request) {
+    !request.params[:path] || !request.params[:path].start_with?(*I18n.available_locales.map(&:to_s))
+  }
 end

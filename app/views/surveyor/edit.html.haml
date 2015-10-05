@@ -69,9 +69,8 @@
             .span8.lead
               != @survey.intro
               %p
-                %a{href: about_url}
+                %a{href: about_page_url}
                   = t('surveys.read_more')
-
 
           .documentation-url
             - question = @survey.documentation_url

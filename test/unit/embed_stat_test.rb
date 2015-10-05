@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class EmbedStatTest < ActiveSupport::TestCase
 
@@ -55,12 +55,12 @@ class EmbedStatTest < ActiveSupport::TestCase
     assert_equal csv.first, ["Dataset Name", "Dataset URL", "Referring URL", "First Detected"]
 
     assert_equal csv[1][0], "Dataset 0"
-    assert_equal csv[1][1], "http://test.host/datasets/1"
+    assert_equal csv[1][1], "http://test.host/en/datasets/1"
     assert_equal csv[1][2], "http://example0.com/0"
     assert_equal Date.parse(csv[1][3]), Date.today
 
     assert_equal csv.last[0], "Dataset 4"
-    assert_equal csv.last[1], "http://test.host/datasets/5"
+    assert_equal csv.last[1], "http://test.host/en/datasets/5"
     assert_equal csv.last[2], "http://example4.com/1"
     assert_equal Date.parse(csv.last[3]), Date.today
   end

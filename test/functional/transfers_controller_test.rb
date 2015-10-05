@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class TransfersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -14,7 +14,7 @@ class TransfersControllerTest < ActionController::TestCase
       post :create, transfer: transfer.attributes
     end
 
-    assert_redirected_to '/users/dashboard'
+    assert_redirected_to '/users/dashboard?locale=en'
 
     assert_equal 'Transfer created', flash[:notice]
     assert_equal user, assigns(:transfer).user
@@ -40,7 +40,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     get :claim, id: transfer.id
     assert_response :success
-    assert_equal "/transfers/#{transfer.id}/claim", session[:user_return_to]
+    assert_equal "/transfers/#{transfer.id}/claim?locale=en", session[:user_return_to]
   end
 
   test "accept claim" do
@@ -51,7 +51,7 @@ class TransfersControllerTest < ActionController::TestCase
       put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token}
     end
 
-    assert_redirected_to '/users/dashboard'
+    assert_redirected_to '/users/dashboard?locale=en'
     assert_equal I18n.t('transfers.flashes.complete'), flash[:notice]
     assert transfer.reload.accepted?
 

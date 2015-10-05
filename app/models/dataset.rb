@@ -133,7 +133,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def api_url
-    Rails.application.routes.url_helpers.dataset_url(self, format: :json, host: OpenDataCertificate.hostname)
+    Rails.application.routes.url_helpers.dataset_url(self, format: :json, host: OpenDataCertificate.hostname, locale: I18n.locale)
   end
 
   def change_owner!(user)

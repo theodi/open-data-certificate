@@ -82,7 +82,7 @@ end
 When(/^I request a certificate via the API$/) do
   authorize @api_user.email, @api_user.authentication_token
 
-  @response = post '/datasets', @body
+  @response = post '/en/datasets', @body
   @status_url = JSON.parse(@response.body)['dataset_url']
 end
 
@@ -96,7 +96,7 @@ When(/^I request the status via the API$/) do
 end
 
 When(/^I request the results via the API$/) do
-  @response = get "/datasets/#{Dataset.last.id}.json"
+  @response = get "/en/datasets/#{Dataset.last.id}.json"
 end
 
 Given(/^that email address is used for an existing user$/) do
@@ -161,7 +161,7 @@ Then(/^there should only be one dataset$/) do
 end
 
 Then(/^I should get the certificate URL$/) do
-  assert_match /\"certificate_url\":\"http:\/\/test\.host\/datasets\/[0-9]+\/certificate.json\"/,  @response.body
+  assert_match /\"certificate_url\":\"http:\/\/test\.host\/en\/datasets\/[0-9]+\/certificate.json\"/,  @response.body
 end
 
 Then(/^my certificate should be linked to a campaign$/) do
@@ -213,7 +213,7 @@ Given(/^I am signed in as the API user$/) do
 end
 
 Given(/^I have signed out$/) do
-  first('a[href="/users/sign_out"]').click
+  first('a[href="/users/sign_out?locale=en"]').click
 end
 
 Then(/^I should be told I need to sign in$/) do

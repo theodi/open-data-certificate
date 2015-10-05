@@ -19,11 +19,11 @@ module Badges
   end
 
   def badge_url
-    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'png')
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'png', locale: I18n.locale)
   end
 
   def embed_url
-    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'js')
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'js', locale: I18n.locale)
   end
 
   private

@@ -11,6 +11,7 @@
 //= require polyfill
 //= require skroller
 //= require typeahead
+//= require url
 
 //= require admin
 //= require campaigns
@@ -261,11 +262,15 @@ $(document).ready(function($){
     $(this).addClass('disabled');
     $(this).removeClass('error');
     $(this).popover('show');
+
     var form = $(this.form);
+    var formUrl = new Url(form.attr('action'));
+    formUrl.path = formUrl.path + ".json";
+
     $.ajax({
-      type: 'POST',
+      type: 'PUT',
       cache: false,
-      url: form.attr('action') + ".json",
+      url: formUrl.toString(),
       data: form.serialize(),
       success: function(data) {
         window.location.replace(data.survey_path)

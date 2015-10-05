@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 require 'mocha/setup'
 
 class KittenDataTest < ActiveSupport::TestCase
@@ -33,15 +33,15 @@ class KittenDataTest < ActiveSupport::TestCase
     )
 
     rights = DataKitten::Rights.new(
-      uri: 'http://example.com/rights', 
-      dataLicense: "http://opendatacommons.org/licenses/pddl/", 
+      uri: 'http://example.com/rights',
+      dataLicense: "http://opendatacommons.org/licenses/pddl/",
       contentLicense: "http://creativecommons.org/licenses/by/2.0/uk/"
     )
 
     license = DataKitten::License.new(uri: "http://opendatacommons.org/licenses/by/")
 
     temporal = DataKitten::Temporal.new(start: Date.new, end: Date.new)
-    
+
     spatial = {
       "type" => "Polygon",
       "coordinates" => [[
@@ -226,11 +226,11 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'Release type is detected as a collection (from metadata)' do
-    source = { 
+    source = {
       "extras" => { "collection_metadata" => "true" }
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-  
+
     assert_equal 'collection', kitten_data.fields["releaseType"]
   end
 
@@ -251,16 +251,16 @@ class KittenDataTest < ActiveSupport::TestCase
   end
 
   test 'Release type is detected as a service when one of the distributions is an API' do
-    source = { 
+    source = {
       "resources" => [{ "resource_type" => "api" }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-  
+
     assert_equal 'service', kitten_data.fields["releaseType"]
   end
 
   test 'Release type is detected from provided field' do
-    source = { 
+    source = {
       "extras" => { "resource-type" => "service" }
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
@@ -270,12 +270,12 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'Service type is detected as changing when update frequency is specified' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
     DataKitten::Dataset.any_instance.stubs(:description).returns('This is an API')
-    
+
     assert_equal "changing", kitten_data.fields["serviceType"]
   end
 
   test 'Data type is detected as geographic from metadata' do
-    source = { 
+    source = {
       "extras" => { "metadata_type" => "geospatial" }
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
@@ -285,25 +285,25 @@ class KittenDataTest < ActiveSupport::TestCase
 
   test 'Frequently changing data detected when update frequency is at least daily' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('daily')
-    
+
     assert_equal "true", kitten_data.fields["frequentChanges"]
   end
 
   test 'Data does not frequently change when update frequency is less often than daily' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns('monthly')
-    
+
     assert_equal "false", kitten_data.fields["frequentChanges"]
   end
 
   test 'Technical documentation is detected when there is a documentation resource' do
     source = {
-      "resources" => [{ 
+      "resources" => [{
         "url" => "http://example.org/docs",
         "resource_type" => "documentation"
       }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    
+
     assert_equal "http://example.org/docs", kitten_data.fields["technicalDocumentation"]
   end
 
@@ -336,13 +336,13 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "ogl_uk", kitten_data.fields["dataLicence"]
     assert_equal "ogl_uk", kitten_data.fields["contentLicence"]
   end
-  
+
   test 'If the data license covers content, set it also as a content license' do
     license = DataKitten::License.new({})
     license.abbr = "cc-zero"
     DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
-    
+
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal "cc_zero", kitten_data.fields["dataLicence"]
     assert_equal "cc_zero", kitten_data.fields["contentLicence"]
@@ -353,7 +353,7 @@ class KittenDataTest < ActiveSupport::TestCase
     license.abbr = "odc-pddl"
     DataKitten::Dataset.any_instance.stubs(:licenses).returns([license])
     DataKitten::Dataset.any_instance.stubs(:rights).returns(nil)
-    
+
     assert_equal "yes", kitten_data.fields["publisherRights"]
     assert_equal "odc_pddl", kitten_data.fields["dataLicence"]
     assert_nil kitten_data.fields["contentLicence"]
@@ -504,7 +504,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "spatial",
       "language"
     ]
-    
+
     assert_equal metadata, kitten_data.fields["documentationMetadata"]
   end
 
@@ -525,7 +525,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "byteSize",
       "mediaType"
     ]
-    
+
     assert_equal metadata, kitten_data.fields["distributionMetadata"]
   end
 
@@ -560,7 +560,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "codelist" => [{ "url" => "http://example.org/codelist", "name" => "codelist" }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    
+
     assert_equal "true", kitten_data.fields["codelists"]
     assert_equal "http://example.org/codelist", kitten_data.fields["codelistDocumentationUrl"]
   end
@@ -570,7 +570,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "schema" => [{ "url" => "http://example.org/schema.json", "name" => "schema" }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    
+
     assert_equal "true", kitten_data.fields["vocabulary"]
   end
 
@@ -579,7 +579,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "resources" => [{ "schema-url" => "http://example.org/schema.json" }]
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
-    
+
     assert_equal "true", kitten_data.fields["vocabulary"]
   end
 

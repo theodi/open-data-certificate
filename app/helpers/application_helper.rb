@@ -81,16 +81,18 @@ module ApplicationHelper
       { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
       { link_text: t('menu.browse_all_certificates'), path: datasets_path },
       { link_text: t('menu.discussion'), path: discussion_path },
-      { link_text: t('menu.about'), path: about_path },
+      { link_text: t('menu.about'), path: about_page_path },
       { link_text: t('menu.admin'), path: admin_path, requires_signed_in_user: true, requires_admin_user: true}
     ]
     render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
   end
 
   def is_active_menu_link?(link)
-    # fudged method to return 'true' the first time it's called, and then 'false' every time after that, to fake an 'active' menu item
-    # TODO: write the code to calculate whether a menu item is active
-    Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
+    begin
+      Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
+    rescue ActionController::RoutingError
+      false
+    end
   end
 
   def body_class
@@ -108,6 +110,13 @@ module ApplicationHelper
   def jurisdiction_options_for_select(default=nil)
     surveys = Survey.available_to_complete.where('access_code not in (?)', Survey::MIGRATIONS.keys)
     options_for_select([[t('response_set.choose_jurisdiction'), nil]] + surveys.map{|s|[s.complete_title, s.access_code]}, default)
+  end
+
+  def locale_options_for_select(selected=nil)
+    locales = I18n.available_locales.each_with_object({}) do |locale, memo|
+      memo[t("locales.#{locale}")] = locale
+    end
+    options_for_select(locales, selected)
   end
 
   # devise mapping
@@ -159,10 +168,11 @@ module ApplicationHelper
     end
   end
 
-  def example_dataset
-    if cert = Certificate.published.current.attained_level(:pilot).first
-      cert.dataset
-    end
+  def example_certificate_link
+    cert = Certificate.published.current.attained_level(:pilot).first
+    return '' unless cert.present?
+
+    link_to('See an example certificate', dataset_latest_certificate_path(I18n.locale, cert.dataset), :class => ['btn', 'btn-large'])
   end
 
   private

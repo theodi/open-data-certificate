@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150907141457) do
+ActiveRecord::Schema.define(:version => 20150929145945) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -411,6 +411,7 @@ ActiveRecord::Schema.define(:version => 20150907141457) do
     t.string   "unconfirmed_email"
     t.string   "organization"
     t.boolean  "agreed_to_terms"
+    t.string   "preferred_locale",       :default => "en"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class VerificationTest < ActiveSupport::TestCase
 
@@ -22,7 +22,7 @@ class VerificationTest < ActiveSupport::TestCase
   test "a certificate can't be validated multiple times by the same user" do
     cv = FactoryGirl.create :verification
 
-    cv2 = FactoryGirl.build :verification, 
+    cv2 = FactoryGirl.build :verification,
                              user: cv.user, certificate: cv.certificate
     assert !cv2.save
 

@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CertificateTest < ActiveSupport::TestCase
 
@@ -143,7 +143,7 @@ class CertificateTest < ActiveSupport::TestCase
   test 'returns url of certificate' do
     certificate = FactoryGirl.create(:response_set_with_dataset).certificate
 
-    assert_match /http:\/\/test\.host\/datasets\/[0-9]+\/certificates\/[0-9]+/, certificate.url
+    assert_match %r{http://test\.host/en/datasets/[0-9]+/certificates/[0-9]+}, certificate.url
   end
 end
 

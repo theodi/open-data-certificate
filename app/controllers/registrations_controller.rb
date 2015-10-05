@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
   def after_update_path_for(resource)
-    dashboard_path
+    dashboard_path(locale: resource.preferred_locale)
   end
 
   def campaigns
