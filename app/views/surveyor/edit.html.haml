@@ -11,93 +11,92 @@
 =render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
 =render :partial => 'shared/switch_language', locals: {response_set: @response_set}
 
-- scope_locale @response_set.locale do
-  = semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
+= semantic_form_for(@response_set, :as => :r, :url => surveyor.update_my_survey_path, :html => {:method => :put, :id => "survey_form"}) do |f|
 
-    .affixed
-      %header
-        .container
-          .row
-            .span9
-              .jurisdiction
-                = t('surveys.jurisdiction')
-                .badge.badge-inverse=  @response_set.survey.complete_title
-                %span.status= @survey.try(:status)
-                = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
+  .affixed
+    %header
+      .container
+        .row
+          .span9
+            .jurisdiction
+              = t('surveys.jurisdiction')
+              .badge.badge-inverse=  @response_set.survey.complete_title
+              %span.status= @survey.try(:status)
+              = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
+                %i.icon.icon-pencil
+              - if @survey.translations.count > 1
+                = t('surveys.language')
+                .badge.badge-inverse= current_locale_name
+                = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
                   %i.icon.icon-pencil
-                - if @survey.translations.count > 1
-                  = t('surveys.language')
-                  .badge.badge-inverse= @response_set.locale_name
-                  = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
-                    %i.icon.icon-pencil
 
-              %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
-            .span3.save-button
-              - if user_signed_in?
-                %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish}
-                  %i.icon-loading.icon-spin.icon-refresh.icon-large
-                  %span= t('surveyor.click_here_to_finish')
-              - else
-                =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
-                - content_for(:modal_content) do
-                  = render :partial => 'surveyor/save_and_finish_modal'
+            %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
+          .span3.save-button
+            - if user_signed_in?
+              %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish}
+                %i.icon-loading.icon-spin.icon-refresh.icon-large
+                %span= t('surveyor.click_here_to_finish')
+            - else
+              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
+              - content_for(:modal_content) do
+                = render :partial => 'surveyor/save_and_finish_modal'
 
-    = render :partial => 'status_panel'
-    = render :partial => 'shared/flashes'
+  = render :partial => 'status_panel'
+  = render :partial => 'shared/flashes'
 
-    - data = {'response-id' => @response_set.id}
-    - data['url-verified']              = t('surveyor.url_verified')
-    - data['autocompleted']             = t('surveyor.autocompleted')
-    - data['autocompleted-changed']     = t('surveyor.autocompleted_changed')
-    - data['autocompleted-explained']   = t('surveyor.autocompleted_explained')
-    - data['url-warning']               = t('surveyor.url_warning')
-    - data['autocompleted-url-warning'] = t('surveyor.autocompleted_url_warning')
-    - data['url-explained']             = t('surveyor.url_explained')
-    - data['metadata-missing']          = t('surveyor.metadata_missing')
+  - data = {'response-id' => @response_set.id}
+  - data['url-verified']              = t('surveyor.url_verified')
+  - data['autocompleted']             = t('surveyor.autocompleted')
+  - data['autocompleted-changed']     = t('surveyor.autocompleted_changed')
+  - data['autocompleted-explained']   = t('surveyor.autocompleted_explained')
+  - data['url-warning']               = t('surveyor.url_warning')
+  - data['autocompleted-url-warning'] = t('surveyor.autocompleted_url_warning')
+  - data['url-explained']             = t('surveyor.url_explained')
+  - data['metadata-missing']          = t('surveyor.metadata_missing')
 
-    - data['url-explanation']           = t('surveyor.url_explanation')
-    - data['autocomplete-explanation']  = t('surveyor.autocomplete_explanation')
+  - data['url-explanation']           = t('surveyor.url_explanation')
+  - data['autocomplete-explanation']  = t('surveyor.autocomplete_explanation')
 
-    #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
-      = hidden_field_tag :surveyor_javascript_enabled, false
-      - if @update
-        = hidden_field_tag :update, true
+  #surveyor{class: params[:highlight_mandatory] ? 'highlight_mandatory' : '', data: data}
+    = hidden_field_tag :surveyor_javascript_enabled, false
+    - if @update
+      = hidden_field_tag :update, true
 
-      .container.survey-intro
-        .well
+    .container.survey-intro
+      .well
+        .row-fluid
+          .span8.lead
+            != @survey.intro
+            %p
+              %a{href: about_page_url}
+                = t('surveys.read_more')
+
+        .documentation-url
+          - question = @survey.documentation_url
+          %label
+            = question.heading
           .row-fluid
-            .span8.lead
-              != @survey.intro
-              %p
-                %a{href: about_page_url}
-                  = t('surveys.read_more')
-
-          .documentation-url
-            - question = @survey.documentation_url
-            %label
-              = question.heading
-            .row-fluid
-              .span8
-                - if @response_set.documentation_url.blank?
-                  %p.url.placeholder= question.placeholder
-                  .alert.alert-error
-                    = t('surveyor.documentation_url.missing')
+            .span8
+              - if @response_set.documentation_url.blank?
+                %p.url.placeholder= question.placeholder
+                .alert.alert-error
+                  = t('surveyor.documentation_url.missing')
+              - else
+                %p.url= @response_set.documentation_url
+                - if @response_set.kitten_data && @response_set.kitten_data.data
+                  .alert.alert-success
+                    = t('surveyor.documentation_url.autocompleted')
                 - else
-                  %p.url= @response_set.documentation_url
-                  - if @response_set.kitten_data && @response_set.kitten_data.data
-                    .alert.alert-success
-                      = t('surveyor.documentation_url.autocompleted')
-                  - else
-                    .alert.alert-info
-                      = t('surveyor.documentation_url.not_autocompleted')
+                  .alert.alert-info
+                    = t('surveyor.documentation_url.not_autocompleted')
 
-              .span4
-                %a.btn.btn-large.btn-primary{href: 'start'} Edit
+            .span4
+              %a.btn.btn-large.btn-primary{href: 'start'} Edit
 
 
-      = render 'partials/dependents' unless @dependents.empty?
+    = render 'partials/dependents' unless @dependents.empty?
 
-      = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+    = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
 - content_for(:foot_scripts) do
   :javascript

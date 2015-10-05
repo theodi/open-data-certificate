@@ -179,14 +179,6 @@ class ResponseSet < ActiveRecord::Base
     end
   end
 
-  def translation
-    survey.translations.where(locale: locale || I18n.locale).first
-  end
-
-  def locale_name
-    translation.try(:locale_name) || survey.default_locale_name || locale
-  end
-
   def modifications_allowed?
     draft?
   end
