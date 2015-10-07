@@ -1,5 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
+I18n.load_path += Dir[Rails.root.join('surveys/generated/locales/*.yml')]
 
 # set up language fallbacks so we don't see a lot of blank
 # space in development.
