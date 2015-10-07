@@ -17,7 +17,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
           when :default
             trans = YAML::dump({})
           end
-          context[:survey].translations << self.class.new(:locale => k.to_s, :translation => trans)
+          # context[:survey].translations << self.class.new(:locale => k.to_s, :translation => trans)
         end
       end
     end

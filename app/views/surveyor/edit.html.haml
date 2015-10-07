@@ -24,11 +24,10 @@
               %span.status= @survey.try(:status)
               = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
                 %i.icon.icon-pencil
-              - if @survey.translations.count > 1
-                = t('surveys.language')
-                .badge.badge-inverse= current_locale_name
-                = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
-                  %i.icon.icon-pencil
+              = t('surveys.language')
+              .badge.badge-inverse= current_locale_name
+              = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
+                %i.icon.icon-pencil
 
             %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
           .span3.save-button
