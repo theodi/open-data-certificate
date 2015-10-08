@@ -1,7 +1,6 @@
-# This is an export from Transifex, please don’t change directly.
 cs:
   choose_legislation: vyberte si legislativu
-  alpha_note: Toto je alfa verze certifikátu otevřených dat. Přivítáme připomínky k obsahu i použitelnosti dotazníku – můžete je [vkládat na GitHub](https://github.com/zoul/open-data-certificate/issues) nebo posílat e-mailem na michal.kuban@motejl.cz. Díky!
+  alpha_note: Toto je alfa verze certifikátu otevřených dat. Přivítáme připomínky k obsahu i použitelnosti dotazníku – můžete je posílat e-mailem na certificate@theodi.org. Díky!
   menu:
     browse_all_certificates: Zobrazit všechny certifikáty
     create_certificate: Vytvořit nový certifikát
@@ -57,13 +56,13 @@ cs:
   statuses:
     alpha:
       title: Alfa
-      about: "Tento certifikát ještě není úplně lokalizovaný. Přivítáme připomínky k jeho obsahu i použitelnosti – můžete je [vkládat na GitHub](https://github.com/zoul/open-data-certificate/issues) nebo posílat e-mailem na michal.kuban@motejl.cz. Díky!"
+      about: "Tento certifikát ještě není úplně lokalizovaný. Přivítáme připomínky k jeho obsahu i použitelnosti – můžete jeposílat e-mailem na certificate@theodi.org. Díky!"
     beta:
       title: Beta
-      about: "Tento certifikát je lokalizovaný a právě prochází závěrečným testováním. Projděte si ho prosím a vyzkoušejte, jestli funguje tak, jak byste potřebovali. Pokud ne, ozvěte se prosím na michal.kuban@motejl.cz. Díky!"
+      about: "Tento certifikát je lokalizovaný a právě prochází závěrečným testováním. Projděte si ho prosím a vyzkoušejte, jestli funguje tak, jak byste potřebovali. Pokud ne, ozvěte se prosím na certificate@theodi.org. Díky!"
     final:
       title: Ostrá verze
-      about: "Tento certifikát prošel testováním a měl by bez problémů fungovat, ale kdybyste narazili na problémy, napište prosím na michal.kuban@motejl.cz nebo rovnou založte [novou jízdenku na GitHubu](https://github.com/zoul/open-data-certificate/issues)."
+      about: "Tento certifikát prošel testováním a měl by bez problémů fungovat, ale kdybyste narazili na problémy, napište prosím na certificate@theodi.org."
   questionnaire_header: 'Každá otevřená data jsou dobrá, ale některá jsou lepší. Díky této aplikaci dostanete certifikát, který uživatelům výrazně pomůže v práci s vašimi daty.'
   questionnaire_footer: ' Zlepšujeme vaše otevřená data'
   questionnaire_footer_extra: Každý pokrok v publikování vašich dat zvyšuje jejich užitečnost pro uživatele.
@@ -94,7 +93,7 @@ cs:
     jurisdiction: jurisdikce
     popover:
       about_jurisdiction: 'Dotazník byl vyplněn pro jurisdikci „%{jurisdiction}“.'
-      change_jurisdiction: Přepnout na jurisdikci těchto dat.
+      change_jurisdiction: Přepnout jurisdikci těchto dat
     states:
       draft: Koncept
       published: Veřejný
