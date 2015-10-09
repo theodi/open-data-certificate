@@ -50,11 +50,7 @@ Should work on OSX
   # surveys/generated/surveyor/odc_questionnaire.CZ.cs.yml
   # surveys/generated/surveyor/odc_questionnaire.CZ.en.yml
 
-  file "surveys/odc_questionnaire.GB.rb" => %w[
-      surveys/definition/questionnaire.general.xml
-      surveys/definition/questionnaire.jurisdiction.GB.xml] do |t|
-    sh "saxon -s:surveys/definition/questionnaire.jurisdiction.GB.xml -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
-  end
+  SURVEY_LOCALE_FILES = Rake::FileList['surveys/generated/locales/surveys.*.yml']
 
   JURISDICTION_LANGS = {
     "CZ" => %w[en cs],
@@ -70,23 +66,27 @@ Should work on OSX
   }
   JURISDICTIONS = JURISDICTION_LANGS.keys
 
+  rule %r{surveys/generated/locales/surveys\.[a-z]{2}\.yml} => [
+    ->(file_name){
+      locale = locale_from_file_name(file_name)
+
+      Rake::FileList[
+        "surveys/translations/questionnaire.general.#{locale}.yml",
+        "surveys/translations/questionnaire.jurisdiction.*.#{locale}.yml"
+      ]
+    }
+  ] do |t|
+    Translations::Merge.merge(t.name, t.prerequisites)
+  end
+
+  task build_survey_locales: SURVEY_LOCALE_FILES
+
   JURISDICTIONS.each do |jurs|
     file "surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb" => %W[
         surveys/definition/questionnaire.general.xml
         surveys/definition/questionnaire.jurisdiction.#{jurs}.xml] do |t|
       general, jurisdiction = t.prerequisites
       sh "saxon -s:#{jurisdiction} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
-    end
-  end
-
-  JURISDICTION_LANGS.each_pair do |jurs, langs|
-    langs.each do |lang|
-      file "surveys/generated/locales/odc.#{jurs}.#{lang}.yml" => %W[
-          surveys/translations/questionnaire.general.#{lang}.yml
-          surveys/translations/questionnaire.jurisdiction.#{jurs}.#{lang}.yml] do |t|
-        general, jurisdiction = t.prerequisites
-        Translations::Merge.merge(general, jurisdiction, t.name)
-      end
     end
   end
 
@@ -106,6 +106,10 @@ Should work on OSX
       Rake::Task[translation].invoke
     end
   end
+end
+
+def locale_from_file_name(file_name)
+  file_name[/([A-Za-z]{2})\.yml\z/, 1].downcase
 end
 
 def quiet
