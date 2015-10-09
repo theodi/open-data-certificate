@@ -38,21 +38,17 @@ Should work on OSX
   # surveys/definition/questionnaire.general.xml
   # surveys/definition/questionnaire.jurisdiction.GB.xml
   # generates:
-  # surveys/odc_questionnaire.GB.rb
+  # surveys/generated/surveyor/odc_questionnaire.GB.rb
   # surveys/translations/questionnaire.general.en.yml
   # surveys/translations/questionnaire.jurisdiction.GB.en.yml
   # push these to transifex
   # pull translations to other languages
   # merge translation yml files
   # english will be in questionnaire spec but translation file would be of form
-  # surveys/translations/odc_questionnaire.GB.en.yml
+  # surveys/generated/surveyor/odc_questionnaire.GB.en.yml
   # so in other cases:
-  # surveys/translations/odc_questionnaire.CZ.cs.yml
-  # surveys/translations/odc_questionnaire.CZ.en.yml
-  # and if multiple locale differences are required per language
-  # surveys/translations/odc_questionnaire.NO.nb_NO.yml
-  # surveys/translations/odc_questionnaire.NO.nn_NO.yml
-  # surveys/translations/odc_questionnaire.NO.en.yml
+  # surveys/generated/surveyor/odc_questionnaire.CZ.cs.yml
+  # surveys/generated/surveyor/odc_questionnaire.CZ.en.yml
 
   file "surveys/odc_questionnaire.GB.rb" => %w[
       surveys/definition/questionnaire.general.xml
@@ -75,7 +71,7 @@ Should work on OSX
   JURISDICTIONS = JURISDICTION_LANGS.keys
 
   JURISDICTIONS.each do |jurs|
-    file "surveys/odc_questionnaire.#{jurs}.rb" => %W[
+    file "surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb" => %W[
         surveys/definition/questionnaire.general.xml
         surveys/definition/questionnaire.jurisdiction.#{jurs}.xml] do |t|
       general, jurisdiction = t.prerequisites
@@ -85,7 +81,7 @@ Should work on OSX
 
   JURISDICTION_LANGS.each_pair do |jurs, langs|
     langs.each do |lang|
-      file "surveys/translations/odc.#{jurs}.#{lang}.yml" => %W[
+      file "surveys/generated/locales/odc.#{jurs}.#{lang}.yml" => %W[
           surveys/translations/questionnaire.general.#{lang}.yml
           surveys/translations/questionnaire.jurisdiction.#{jurs}.#{lang}.yml] do |t|
         general, jurisdiction = t.prerequisites
@@ -101,12 +97,12 @@ Should work on OSX
     jurs = args.jurisdiction
     langs = JURISDICTION_LANGS[jurs]
     langs_except_en = langs - %w[en]
-    Rake::Task["surveys/odc_questionnaire.#{jurs}.rb"].invoke
+    Rake::Task["surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb"].invoke
     if langs_except_en.any?
       sh "tx pull -l #{langs_except_en.join(',')} --minimum-perc=1"
     end
     langs.each do |lang|
-      translation = "surveys/translations/odc.#{jurs}.#{lang}.yml"
+      translation = "surveys/generated/locales/odc.#{jurs}.#{lang}.yml"
       Rake::Task[translation].invoke
     end
   end
