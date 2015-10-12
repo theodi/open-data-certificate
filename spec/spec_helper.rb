@@ -1,12 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 begin
-  require File.expand_path("../../testbed/config/environment", __FILE__)
+  require File.expand_path("../../config/environment", __FILE__)
 rescue LoadError => e
   fail "Could not load the testbed app. Have you generated it?\n#{e.class}: #{e}"
 end
 require 'rspec/rails'
-require 'factories'
 require 'json_spec'
 require 'database_cleaner'
 
@@ -16,6 +15,12 @@ include Surveyor::Helpers::AssetPipeline
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+# Changing this here is pretty stupid. I'm doing it because we have it set
+# to :logging for the rest of the app, but I don't want to remove all the tests
+# around this in Surveyor. Best steps forward would be to set this to :strict
+# everywhere and fix any code that breaks.
+ActiveRecord::Base.mass_assignment_sanitizer = :strict
 
 RSpec.configure do |config|
   config.include JsonSpec::Helpers

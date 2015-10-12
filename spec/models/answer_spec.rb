@@ -2,12 +2,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Answer do
-  let(:answer){ Factory(:answer) }
+  let(:answer){ FactoryGirl.create(:answer) }
 
   context "when creating" do
     it { answer.should be_valid }
     it "deletes validation when deleted" do
-      v_id = Factory(:validation, :answer => answer).id
+      v_id = FactoryGirl.create(:validation, :answer => answer).id
       answer.destroy
       Validation.find_by_id(v_id).should be_nil
     end
@@ -55,47 +55,6 @@ describe Answer do
       answer.default_value = "{{site}}"
       answer.in_context(answer.default_value, mustache_context).should == "Northwestern"
       answer.default_value_for(mustache_context).should == "Northwestern"
-    end
-  end
-
-  context "with translations" do
-    require 'yaml'
-    let(:survey){ Factory(:survey) }
-    let(:survey_section){ Factory(:survey_section) }
-    let(:survey_translation){
-      Factory(:survey_translation, :locale => :es, :translation => {
-        :questions => {
-          :name => {
-            :answers => {
-              :name => {
-                :help_text => "Mi nombre es..."
-              }
-            }
-          }
-        }
-      }.to_yaml)
-    }
-    let(:question){ Factory(:question, :reference_identifier => "name") }
-    before do
-      answer.reference_identifier = "name"
-      answer.help_text = "My name is..."
-      answer.text = nil
-      answer.question = question
-      question.survey_section = survey_section
-      survey_section.survey = survey
-      survey.translations << survey_translation
-    end
-    it "returns its own translation" do
-      answer.translation(:es)[:help_text].should == "Mi nombre es..."
-    end
-    it "returns translations in views" do
-      answer.help_text_for(nil, :es).should == "Mi nombre es..."
-    end
-    it "returns its own default values" do
-      answer.translation(:de).should == {"text" => nil, "help_text" => "My name is...", "default_value" => nil}
-    end
-    it "returns default values in views" do
-      answer.help_text_for(nil, :de).should == "My name is..."
     end
   end
 

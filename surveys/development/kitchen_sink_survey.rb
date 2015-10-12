@@ -12,7 +12,7 @@ survey "Kitchen Sink survey", :default_mandatory => false, :dataset_title => 'da
     label "These questions are examples of the basic supported input types"
 
     # A basic question with radio buttons
-    question "What is your favorite color?", :pick => :one, :odi_ref => :fred
+    question "What is your favorite color?", :pick => :one
     answer "cyan"
     answer "blue"
     answer "green"

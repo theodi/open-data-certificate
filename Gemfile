@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+gemspec path: 'vendor/gems/surveyor-1.4.0'
 
 gem 'rails', '~> 3.2.21'
 
@@ -47,8 +47,6 @@ group :development do
   gem 'guard', '~> 1.8.3'
   gem 'guard-test'
   # gem 'spring', github: 'jonleighton/spring'
-  gem 'pry'
-  gem 'pry-remote'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
@@ -56,6 +54,12 @@ group :development do
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :test, :development do
+  gem 'pry-byebug'
+  gem 'pry-remote'
+  gem 'rspec-rails', '~> 2.14.2'
 end
 
 group :production do
@@ -106,7 +110,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
+# gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'

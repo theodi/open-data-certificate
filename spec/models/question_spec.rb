@@ -2,7 +2,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Question do
-  let(:question){ Factory(:question) }
+  let(:question){ FactoryGirl.create(:question) }
 
   context "when creating" do
     it "is invalid without #text" do
@@ -27,7 +27,7 @@ describe Question do
       question.api_id.length.should == 36
     end
     it "#part_of_group? and #solo? are aware of question groups" do
-      question.question_group = Factory(:question_group)
+      question.question_group = FactoryGirl.create(:question_group)
       question.solo?.should be_false
       question.part_of_group?.should be_true
 
@@ -65,9 +65,9 @@ describe Question do
   end
 
   context "with answers" do
-    let(:answer_1){ Factory(:answer, :question => question, :display_order => 3, :text => "blue")}
-    let(:answer_2){ Factory(:answer, :question => question, :display_order => 1, :text => "red")}
-    let(:answer_3){ Factory(:answer, :question => question, :display_order => 2, :text => "green")}
+    let(:answer_1){ FactoryGirl.create(:answer, :question => question, :display_order => 3, :text => "blue")}
+    let(:answer_2){ FactoryGirl.create(:answer, :question => question, :display_order => 1, :text => "red")}
+    let(:answer_3){ FactoryGirl.create(:answer, :question => question, :display_order => 2, :text => "green")}
     before do
       [answer_1, answer_2, answer_3].each{|a| question.answers << a }
     end
@@ -84,14 +84,13 @@ describe Question do
   end
 
   context "with dependencies" do
-    let(:response_set){ Factory(:response_set) }
-    let(:dependency){ Factory(:dependency) }
+    let(:response_set){ FactoryGirl.create(:response_set, survey: question.survey) }
+    let(:dependency){ FactoryGirl.create(:dependency) }
     before do
       question.dependency = dependency
-      dependency.stub!(:is_met?).with(response_set).and_return true
     end
     it "checks its dependency" do
-      question.triggered?(response_set).should be_true
+      question.triggered?(response_set).should be_false
     end
     it "deletes its dependency when deleted" do
       d_id = question.dependency.id
@@ -110,40 +109,6 @@ describe Question do
     it "substitues in views" do
       question.text = "You are in {{site}}"
       question.text_for(nil, mustache_context).should == "You are in Northwestern"
-    end
-  end
-
-  context "with translations" do
-    require 'yaml'
-    let(:survey){ Factory(:survey) }
-    let(:survey_section){ Factory(:survey_section) }
-    let(:survey_translation){
-      Factory(:survey_translation, :locale => :es, :translation => {
-        :questions => {
-          :hello => {
-            :text => "¡Hola!"
-          }
-        }
-      }.to_yaml)
-    }
-    before do
-      question.reference_identifier = "hello"
-      question.survey_section = survey_section
-      survey_section.survey = survey
-      survey.translations << survey_translation
-    end
-    it "returns its own translation" do
-      YAML.load(survey_translation.translation).should_not be_nil
-      question.translation(:es)[:text].should == "¡Hola!"
-    end
-    it "returns its own default values" do
-      question.translation(:de).should == {"text" => question.text, "help_text" => question.help_text}
-    end
-    it "returns translations in views" do
-      question.text_for(nil, nil, :es).should == "¡Hola!"
-    end
-    it "returns default values in views" do
-      question.text_for(nil, nil, :de).should == question.text
     end
   end
 
