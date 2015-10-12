@@ -102,7 +102,7 @@ Should work on OSX
       sh "tx pull -l #{langs_except_en.join(',')} --minimum-perc=1"
     end
     langs.each do |lang|
-      translation = "surveys/generated/locales/odc.#{jurs}.#{lang}.yml"
+      translation = "surveys/generated/locales/surveys.#{lang}.yml"
       Rake::Task[translation].invoke
     end
   end
