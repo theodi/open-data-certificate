@@ -4,6 +4,7 @@
     %h3= t('response_set.choose_a_language')
   .modal-body
     %p= t 'response_set.language_dialog_body'
-    = form_tag surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code), method: :post, :class => 'form-inline' do
-      = select_tag :survey_locale, options_from_collection_for_select(@response_set.survey.translations, "locale", "locale_name", @response_set.locale), prompt: t('response_set.choose_language')
+    = form_tag change_locale_path, method: :post, :class => 'form-inline' do
+      = hidden_field_tag :current_path, request.fullpath
+      = select_tag :new_locale, locale_options_for_select(I18n.locale), prompt: t('response_set.choose_language')
       = submit_tag t('response_set.start_new_language'), :class => 'btn btn-primary btn-submit'

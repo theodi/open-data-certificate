@@ -15,13 +15,6 @@ module ApplicationHelper
     Rails.env.production? ? 'https://' : request.protocol
   end
 
-  # temporarily switch to a new locale
-  def scope_locale locale
-    locale, I18n.locale = I18n.locale, locale || I18n.locale
-    yield
-    I18n.locale = locale
-  end
-
   # renders an item in the kittenData data
   def kitten_value value
     case value
@@ -117,6 +110,10 @@ module ApplicationHelper
       memo[t("locales.#{locale}")] = locale
     end
     options_for_select(locales, selected)
+  end
+
+  def current_locale_name
+    I18n.translate("locales.#{I18n.locale}")
   end
 
   # devise mapping

@@ -151,6 +151,8 @@ OpenDataCertificate::Application.routes.draw do
 
   get 'status/ping' => 'main#ping'
 
+  post :change_locale, to: 'locale#change_locale'
+
   match '(*path)', to: 'locale#redirect_to_locale', constraints: ->(request) {
     !request.params[:path] || !request.params[:path].start_with?(*I18n.available_locales.map(&:to_s))
   }

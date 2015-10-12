@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150929145945) do
+ActiveRecord::Schema.define(:version => 20151006100913) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -254,7 +254,6 @@ ActiveRecord::Schema.define(:version => 20150929145945) do
     t.integer  "dataset_id"
     t.string   "aasm_state",        :default => "draft"
     t.integer  "attained_index"
-    t.string   "locale"
     t.string   "missing_responses", :default => ""
   end
 
