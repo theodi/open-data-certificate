@@ -19,15 +19,45 @@ source_file = surveys/translations/questionnaire.general.en.yml
 source_lang = en
 type = YML
 
+[certificates.questionnaire-jurisdiction-cz]
+file_filter = surveys/translations/questionnaire.jurisdiction.CZ.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.CZ.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-de]
+file_filter = surveys/translations/questionnaire.jurisdiction.DE.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.DE.en.yml
+source_lang = en
+type = YML
+
 [certificates.questionnaire-jurisdiction-gb]
 file_filter = surveys/translations/questionnaire.jurisdiction.GB.<lang>.yml
 source_file = surveys/translations/questionnaire.jurisdiction.GB.en.yml
 source_lang = en
 type = YML
 
-[certificates.questionnaire-jurisdiction-cz]
-file_filter = surveys/translations/questionnaire.jurisdiction.CZ.<lang>.yml
-source_file = surveys/translations/questionnaire.jurisdiction.CZ.en.yml
+[certificates.questionnaire-jurisdiction-gr]
+file_filter = surveys/translations/questionnaire.jurisdiction.GR.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.GR.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-it]
+file_filter = surveys/translations/questionnaire.jurisdiction.IT.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.IT.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-mx]
+file_filter = surveys/translations/questionnaire.jurisdiction.MX.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.MX.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-ro]
+file_filter = surveys/translations/questionnaire.jurisdiction.RO.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.RO.en.yml
 source_lang = en
 type = YML
 

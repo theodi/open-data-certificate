@@ -60,15 +60,19 @@ Should work on OSX
     sh "saxon -s:surveys/definition/questionnaire.jurisdiction.GB.xml -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
   end
 
-  # TODO: make this not require hardcoded rules
-  # the jursdiction files should specify what locales the create
-  JURISDICTIONS = %w[GB CZ TW US]
   JURISDICTION_LANGS = {
-    "GB" => %w[en],
     "CZ" => %w[en cs],
+    "DE" => %w[en de],
+    "GB" => %w[en],
+    "GR" => %w[en el],
+    "MX" => %w[en es],
+    "RO" => %w[en ro],
     "TW" => %w[en zh],
-    "US" => %w[en]
+    "US" => %w[en],
+    "TW" => %w[en zh]
   }
+  JURISDICTIONS = JURISDICTION_LANGS.keys
+
   JURISDICTIONS.each do |jurs|
     file "surveys/odc_questionnaire.#{jurs}.rb" => %W[
         surveys/definition/questionnaire.general.xml
