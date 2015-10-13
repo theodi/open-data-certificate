@@ -85,7 +85,7 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
           <%= boolean_mark(generator.valid_urls?) %>
         </td>
         <td>
-          <%= missing_responses(generator, "<br /><br />").html_safe %>
+          <%= missing_responses(generator, "<br />").html_safe %>
         </td>
       <% else %>
         <td colspan="5">Processing… <%= link_to generator.autocomplete_url, generator.autocomplete_url %></td>
