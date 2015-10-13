@@ -2,10 +2,8 @@ Given(/^I have a a dataset at the URL "(.*?)"$/) do |url|
   @url = url
 end
 
-Given(/^I run the rake task to create a single certificate$/) do
-  ENV['URL'] = @url
-  ENV['USER_ID'] = @api_user.id.to_s
-  execute_rake('certificate_factory', 'certificate')
+Given(/^I create a single certificate$/) do
+  CertificateFactory::Certificate.new(@url, @api_user.id, jurisdiction: 'cert-generator').generate
 end
 
 Then(/^there should be (\d+) certificates?$/) do |count|
@@ -94,21 +92,14 @@ Given(/^I have a CKAN atom feed with (\d+) datasets over (\d+) pages$/) do |tota
 
 end
 
-Given(/^I run the rake task to create certificates$/) do
-  ENV['URL'] = @url
-  ENV['USER_ID'] = @api_user.id.to_s
-  ENV['CAMPAIGN'] = @campaign
-  ENV['LIMIT'] = @limit
-  execute_rake('certificate_factory', 'certificates')
+Given(/^I run a campaign called "(.*?)" to create certificates$/) do |campaign_name|
+  @campaign = @api_user.certification_campaigns.create(
+    url: @url, limit: @limit, name: campaign_name, jurisdiction: 'cert-generator')
+  @campaign.run!
 end
 
 Given(/^the campaign is created$/) do
-  campaign = CertificationCampaign.find_by_name(@campaign)
-  CertificateFactory::AtomFactory.new("feed"=>@url,
-      "user_id"=>@api_user.id,
-      "limit"=>@limit,
-      "campaign"=>campaign,
-      "jurisdiction"=>"cert-generator").build
+  CertificateFactory::FactoryRunner.perform_one
 end
 
 When(/^the certificates are created$/) do
