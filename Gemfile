@@ -1,5 +1,3 @@
-gemspec path: 'vendor/gems/surveyor-1.4.0'
-
 gem 'rails', '~> 3.2.21'
 
 # Bundle edge Rails instead:
@@ -41,6 +39,9 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
+
+  # From surveyor
+  gem 'json_spec', '~> 1.0.3'
 end
 
 group :development do
@@ -110,7 +111,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-# gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
+gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
