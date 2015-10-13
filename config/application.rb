@@ -27,6 +27,7 @@ module OpenDataCertificate
 
     config.eager_load_paths += %W(
       #{config.root}/app/workers
+      #{config.root}/lib/extra
     )
 
     # Only load the plugins named here, in the order given (default is alphabetical).
