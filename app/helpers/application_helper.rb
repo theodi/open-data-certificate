@@ -129,10 +129,6 @@ module ApplicationHelper
     safe_join(links)
   end
 
-  def current_locale_name
-    I18n.translate("locales.#{I18n.locale}")
-  end
-
   # devise mapping
   def resource_name
     :user
