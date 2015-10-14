@@ -8,7 +8,7 @@ class SurveyorController < ApplicationController
 
   def new
     @surveys_by_access_code = Survey.order("created_at DESC, survey_version DESC").all.group_by(&:access_code)
-    redirect_to surveyor_index unless surveyor_index == surveyor.available_surveys_path
+    redirect_to surveyor_index unless surveyor_index == available_surveys_path
   end
 
   def create
@@ -63,7 +63,7 @@ class SurveyorController < ApplicationController
       flash[:warning] = t('response_set.update_instructions')
     end
 
-    redirect_to surveyor.edit_my_survey_path(redirect_options)
+    redirect_to edit_my_survey_path(redirect_options)
   end
 
   def show
@@ -123,7 +123,7 @@ class SurveyorController < ApplicationController
           flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
         end
 
-        return redirect_to(surveyor.edit_my_survey_path({
+        return redirect_to(edit_my_survey_path({
           :anchor => anchor_from(params[:section]),
           :section => section_id_from(params),
           :highlight_mandatory => true,
@@ -136,9 +136,9 @@ class SurveyorController < ApplicationController
       format.html do
         if @response_set
           flash[:warning] = t('surveyor.unable_to_update_survey') unless saved
-          redirect_to surveyor.edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
+          redirect_to edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
         else
-          redirect_with_message(surveyor.available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
+          redirect_with_message(available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
         end
       end
       format.js do
@@ -251,10 +251,10 @@ class SurveyorController < ApplicationController
   end
 
   def surveyor_index
-    surveyor.available_surveys_path
+    available_surveys_path
   end
   def surveyor_finish
-    surveyor.available_surveys_path
+    available_surveys_path
   end
 
   def redirect_with_message(path, message_type, message)

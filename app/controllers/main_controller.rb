@@ -121,7 +121,7 @@ class MainController < ApplicationController
       end
 
       # flash[:notice] = t('surveyor.survey_started_success')
-      redirect_to(surveyor.start_path(
+      redirect_to(survey_start_path(
         :survey_code => @survey.access_code,
         :response_set_code => @response_set.access_code
       ))

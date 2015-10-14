@@ -40,7 +40,7 @@ class ResponseSetsController < ApplicationController
       end
 
       if valid
-        path = surveyor.edit_my_survey_path(
+        path = edit_my_survey_path(
             :survey_code => @response_set.survey.access_code,
             :response_set_code => @response_set.access_code)
         respond_to do |format|

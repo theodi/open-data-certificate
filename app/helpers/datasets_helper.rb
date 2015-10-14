@@ -13,7 +13,7 @@ module DatasetsHelper
 
   def continue_path(response_set)
     unless response_set.new_record?
-      surveyor.continue_my_survey_path(
+      continue_my_survey_path(
         survey_code: response_set.survey.access_code,
         response_set_code: response_set.access_code
       )
@@ -22,7 +22,7 @@ module DatasetsHelper
 
   def requirements_path(response_set)
     unless response_set.new_record?
-      surveyor.view_my_survey_requirements_path(
+      view_my_survey_requirements_path(
         survey_code: response_set.survey.access_code,
         response_set_code: response_set.access_code
       )

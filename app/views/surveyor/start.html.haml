@@ -43,7 +43,7 @@
             %a{href: about_page_url}
               = t('surveys.read_more')
 
-      = semantic_form_for [surveyor, :start, @response_set] do |f|
+      = semantic_form_for [:start, @response_set] do |f|
         - question = @survey.documentation_url
         = f.label :documentation_url, question.heading
 

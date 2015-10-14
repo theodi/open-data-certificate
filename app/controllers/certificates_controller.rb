@@ -115,7 +115,7 @@ class CertificatesController < ApplicationController
   protected
 
   def resume_path(question = nil)
-    surveyor.continue_my_survey_path(
+    continue_my_survey_path(
       survey_code: @response_set.survey.access_code,
       response_set_code: @response_set.access_code,
       question: question.try(:id))

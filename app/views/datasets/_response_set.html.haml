@@ -29,11 +29,11 @@
       %h3 Your certificate
       .btn-group.btn-group-vertical
         -if response_set.draft? && certificate.expiring_state.nil?
-          = link_to [surveyor, :publish, response_set], method: :post, data: {code: response_set.access_code}, class: 'btn btn-large btn-block publish-certificate' do
+          = link_to [:publish, response_set], method: :post, data: {code: response_set.access_code}, class: 'btn btn-large btn-block publish-certificate' do
             Publish certificate
 
         -if !certificate.expiring_state.nil? && response_set.published?
-          = link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
+          = link_to 'Update certificate', continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
 
         - if response_set.published?
           = link_to "View certificate", dataset_latest_certificate_path(response_set.dataset), class: 'btn btn-large btn-block'
@@ -60,4 +60,4 @@
     .span3
       = "#{t('dashboard.verification')}: #{t(certificate.certification_type, scope: 'certificate.certification_types')}"
     .span3
-      = link_to 'Delete', [surveyor, response_set], {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}, class: 'delete'}
+      = link_to 'Delete', response_set, {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}, class: 'delete'}
