@@ -18,12 +18,13 @@
           = t('surveys.jurisdiction')
           .badge.badge-inverse=  @response_set.jurisdiction
           %span.status= @survey.try(:status)
-          = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
+          = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown changer' do
             %i.icon.icon-pencil
           = t('surveys.language')
-          .badge.badge-inverse= current_locale_name
-          = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
+          = certificate_locale_links(@response_set.jurisdiction)
+          = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal}, class: 'changer' do
             %i.icon.icon-pencil
+            Other Languages
 
         %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
 

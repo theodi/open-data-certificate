@@ -1,7 +1,7 @@
 class LocaleController < ApplicationController
 
   def change_locale
-    redirect_to params[:current_path].gsub(%r{\A/[a-z]{2}/(.*)}, "/#{params[:new_locale]}/\\1")
+    redirect_to OdiLocale.changed_locale_path(params[:current_path], params[:new_locale])
   end
 
   def redirect_to_locale

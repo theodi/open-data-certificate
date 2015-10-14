@@ -27,6 +27,19 @@ class Survey < ActiveRecord::Base
     :release_type               => 'releaseType',
   }
 
+  JURISDICTION_LANGS = {
+    "CZ" => %w[cs en],
+    "DE" => %w[de en],
+    "GB" => %w[en],
+    "GR" => %w[el en],
+    "IT" => %w[en it],
+    "MX" => %w[es en],
+    "RO" => %w[ro en],
+    "TW" => %w[zh en],
+    "US" => %w[en],
+    "TW" => %w[zh en]
+  }
+
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
   attr_accessible :full_title, :meta_map, :status, :default_locale_name
 
