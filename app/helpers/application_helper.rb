@@ -112,8 +112,21 @@ module ApplicationHelper
     options_for_select(locales, selected)
   end
 
-  def current_locale_name
-    I18n.translate("locales.#{I18n.locale}")
+  def certificate_locale_links(jurisdiction)
+    locales = Survey::JURISDICTION_LANGS[jurisdiction]
+    return unless locales.present?
+
+    links = locales.map do |locale|
+      locale_name = I18n.translate("locales.#{locale}")
+
+      if locale == I18n.locale.to_s
+        content_tag(:div, locale_name, class: 'badge badge-inverse')
+      else
+        link_to(locale_name, OdiLocale.changed_locale_path(request.fullpath, locale))
+      end
+    end
+
+    safe_join(links)
   end
 
   # devise mapping

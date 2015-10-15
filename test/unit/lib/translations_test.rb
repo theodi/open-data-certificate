@@ -9,7 +9,7 @@ class TranslationsTest < ActiveSupport::TestCase
     path = Rails.root + "fixtures/translations"
     Tempfile.open('output.yml') do |output|
       run = true
-      Translations::Merge.merge(path + "a.yml", path + "b.yml", output.path)
+      Translations::Merge.merge(output.path, [path + "a.yml", path + "b.yml"])
       assert_equal File.read(path + "expected.yml"), File.read(output.path)
     end
     assert run, "yaml merge block didn't run"

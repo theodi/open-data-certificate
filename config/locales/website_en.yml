@@ -463,6 +463,7 @@ en:
   locales:
     en: English
     cs: Czech
+    de: German
 
   interface:
     select: "Please select…"
