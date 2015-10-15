@@ -92,7 +92,7 @@ class ApplicationHelperTest < ActionView::TestCase
     FactoryGirl.create_list(:published_basic_certificate_with_dataset, 3)
     pilot = FactoryGirl.create(:published_pilot_certificate_with_dataset)
 
-    expected_link = link_to('See an example certificate', dataset_latest_certificate_path(:en, pilot.dataset), :class => ['btn', 'btn-large'])
+    expected_link = link_to('Example dataset', dataset_latest_certificate_path(:en, pilot.dataset), :class => ['btn', 'btn-large'])
 
     assert_equal expected_link, example_certificate_link
   end
