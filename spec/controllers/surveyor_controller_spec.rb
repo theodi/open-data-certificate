@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SurveyorController do
-  before { pending }
+describe SurveyorController, :engine_problems do
 
   let!(:survey)           { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 0)}
   let!(:survey_beta)      { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 1)}
