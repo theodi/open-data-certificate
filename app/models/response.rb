@@ -140,7 +140,7 @@ class Response < ActiveRecord::Base
 
   private
   def resolve_if_url
-    return unless answer.input_type == 'url' && data_value.present?
+    return unless answer.present? && answer.input_type == 'url' && data_value.present?
     self.error = !ODIBot.new(data_value).valid?
     return nil # false value will stop active record saving
   end

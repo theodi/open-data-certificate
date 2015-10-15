@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Validation do
   before(:each) do
-    @validation = Factory(:validation)
+    @validation = FactoryGirl.create(:validation)
   end
-  
+
   it "should be valid" do
     @validation.should be_valid
   end
-  
+
   it "should be invalid without a rule" do
     @validation.rule = nil
     @validation.should have(2).errors_on(:rule)
@@ -43,13 +43,13 @@ describe Validation do
 end
 describe Validation, "reporting its status" do
   def test_var(vhash, vchashes, ahash, rhash)
-    a = Factory(:answer, ahash)
-    v = Factory(:validation, {:answer => a, :rule => "A"}.merge(vhash))
+    a = FactoryGirl.create(:answer, ahash)
+    v = FactoryGirl.create(:validation, {:answer => a, :rule => "A"}.merge(vhash))
     vchashes.each do |vchash|
-      Factory(:validation_condition, {:validation => v, :rule_key => "A"}.merge(vchash))
+      FactoryGirl.create(:validation_condition, {:validation => v, :rule_key => "A"}.merge(vchash))
     end
-    rs = Factory(:response_set)
-    r = Factory(:response, {:answer => a, :question => a.question}.merge(rhash))
+    rs = FactoryGirl.create(:response_set)
+    r = FactoryGirl.create(:response, {:answer => a, :question => a.question}.merge(rhash))
     rs.responses << r
     return v.is_valid?(rs)
   end
@@ -63,10 +63,10 @@ describe Validation, "reporting its status" do
 end
 describe Validation, "with conditions" do
   it "should destroy conditions when destroyed" do
-    @validation = Factory(:validation)
-    Factory(:validation_condition, :validation => @validation, :rule_key => "A")
-    Factory(:validation_condition, :validation => @validation, :rule_key => "B")
-    Factory(:validation_condition, :validation => @validation, :rule_key => "C")
+    @validation = FactoryGirl.create(:validation)
+    FactoryGirl.create(:validation_condition, :validation => @validation, :rule_key => "A")
+    FactoryGirl.create(:validation_condition, :validation => @validation, :rule_key => "B")
+    FactoryGirl.create(:validation_condition, :validation => @validation, :rule_key => "C")
     v_ids = @validation.validation_conditions.map(&:id)
     @validation.destroy
     v_ids.each{|id| DependencyCondition.find_by_id(id).should == nil}

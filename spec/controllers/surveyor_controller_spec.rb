@@ -1,27 +1,24 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SurveyorController do
-  include Surveyor::Engine.routes.url_helpers
+describe SurveyorController, :engine_problems do
+
+  let!(:survey)           { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 0)}
+  let!(:survey_beta)      { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 1)}
+  let!(:response_set)      { FactoryGirl.create(:response_set, :survey => survey, :access_code => "pdq")}
+  let!(:response_set_beta) { FactoryGirl.create(:response_set, :survey => survey_beta, :access_code => "rst")}
+  before { ResponseSet.stub(:create).and_return(response_set) }
+
+  let(:available_surveys_path) { Surveyor::Engine.routes.url_helpers.available_surveys_path }
+
   before do
-    @routes = Surveyor::Engine.routes
+    user = double('user')
+    allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
   end
-
-  let!(:survey)           { Factory(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 0)}
-  let!(:survey_beta)      { Factory(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 1)}
-  let!(:response_set)      { Factory(:response_set, :survey => survey, :access_code => "pdq")}
-  let!(:response_set_beta) { Factory(:response_set, :survey => survey_beta, :access_code => "rst")}
-  before { ResponseSet.stub!(:create).and_return(response_set) }
-
-  # match '/', :to                                     => 'surveyor#new', :as    => 'available_surveys', :via => :get
-  # match '/:survey_code', :to                         => 'surveyor#create', :as => 'take_survey', :via       => :post
-  # match '/:survey_code', :to                         => 'surveyor#export', :as => 'export_survey', :via     => :get
-  # match '/:survey_code/:response_set_code', :to      => 'surveyor#show', :as   => 'view_my_survey', :via    => :get
-  # match '/:survey_code/:response_set_code/take', :to => 'surveyor#edit', :as   => 'edit_my_survey', :via    => :get
-  # match '/:survey_code/:response_set_code', :to      => 'surveyor#update', :as => 'update_my_survey', :via  => :put
 
   context "#new" do
     def do_get
-      get :new
+      get :new, locale: 'en'
     end
     it "renders new" do
       do_get
@@ -36,7 +33,7 @@ describe SurveyorController do
 
   context "#create" do
     def do_post(params = {})
-      post :create, {:survey_code => "alpha"}.merge(params)
+      post :create, {:locale => 'en', :survey_code => "alpha"}.merge(params)
     end
     it "finds latest version" do
       do_post
@@ -52,7 +49,7 @@ describe SurveyorController do
     end
     it "should redirects to the new response_set" do
       do_post
-      response.should redirect_to( edit_my_survey_path(:survey_code => "alpha", :response_set_code  => "pdq"))
+      response.should redirect_to( edit_my_survey_path(:locale => 'en', :survey_code => "alpha", :response_set_code  => "pdq"))
     end
 
     context "with failures" do
@@ -62,7 +59,7 @@ describe SurveyorController do
         response.should redirect_to(available_surveys_path)
       end
       it "redirect to #new on failed Survey#find" do
-        do_post :survey_code => "missing"
+        do_post :locale => 'en', :survey_code => "missing"
         response.should redirect_to(available_surveys_path)
       end
     end
@@ -74,7 +71,7 @@ describe SurveyorController do
         session[:surveyor_javascript].should == "enabled"
       end
       it "disabled" do
-        post :create, :survey_code => "xyz", :surveyor_javascript_enabled => "not_true"
+        post :create, :locale => 'en', :survey_code => "xyz", :surveyor_javascript_enabled => "not_true"
         session[:surveyor_javascript].should_not be_nil
         session[:surveyor_javascript].should == "not_enabled"
       end
@@ -83,7 +80,7 @@ describe SurveyorController do
 
   context "#show" do
     def do_get(params = {})
-      get :show, {:survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
+      get :show, {:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
     end
     it "renders show" do
       do_get
@@ -114,8 +111,8 @@ describe SurveyorController do
 
   context "#edit" do
     def do_get(params = {})
-      survey.sections = [Factory(:survey_section, :survey => survey)]
-      get :edit, {:survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
+      survey.sections = [FactoryGirl.create(:survey_section, :survey => survey)]
+      get :edit, {:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
     end
     it "renders edit" do
       do_get
@@ -132,13 +129,13 @@ describe SurveyorController do
       response.should redirect_to(available_surveys_path)
     end
     it "assigns dependents if javascript not enabled" do
-      controller.stub!(:get_unanswered_dependencies_minus_section_questions).and_return([Factory(:question)])
+      controller.stub(:get_unanswered_dependencies_minus_section_questions).and_return([FactoryGirl.create(:question)])
       session[:surveyor_javascript].should be_nil
       do_get
       assigns[:dependents].should_not be_empty
     end
     it "does not assign dependents if javascript is enabled" do
-      controller.stub!(:get_unanswered_dependencies_minus_section_questions).and_return([Factory(:question)])
+      controller.stub(:get_unanswered_dependencies_minus_section_questions).and_return([FactoryGirl.create(:question)])
       session[:surveyor_javascript] = "enabled"
       do_get
       assigns[:dependents].should be_empty
@@ -149,7 +146,7 @@ describe SurveyorController do
       assigns[:survey].should == survey
     end
     it "assigns later survey_version" do
-      survey_beta.sections = [Factory(:survey_section, :survey => survey_beta)]
+      survey_beta.sections = [FactoryGirl.create(:survey_section, :survey => survey_beta)]
       do_get :response_set_code => "rst"
       assigns[:survey].should == survey_beta
       assigns[:response_set].should == response_set_beta
@@ -161,13 +158,13 @@ describe SurveyorController do
     let(:responses_ui_hash) { {} }
     let(:update_params) {
       {
-        :survey_code => "alpha",
+        :locale => 'en', :survey_code => "alpha",
         :response_set_code => "pdq"
       }
     }
     shared_examples "#update action" do
       before do
-        ResponseSet.stub!(:find_by_access_code).and_return(response_set)
+        ResponseSet.stub(:find_by_access_code).and_return(response_set)
         responses_ui_hash['11'] = {'api_id' => 'something', 'answer_id' => '56', 'question_id' => '9'}
       end
       it "finds a response set" do
@@ -206,13 +203,13 @@ describe SurveyorController do
 
     context "with form submission" do
       def do_put(extra_params = {})
-        put :update, update_params.merge(extra_params)
+        put :update, update_params.merge(extra_params).merge(locale: 'en')
       end
 
       it_behaves_like "#update action"
       it "redirects to #edit without params" do
         do_put
-        response.should redirect_to(edit_my_survey_path(:survey_code => "alpha", :response_set_code => "pdq"))
+        response.should redirect_to(edit_my_survey_path(:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"))
       end
       it "completes the found response set on finish" do
         do_put :finish => 'finish'
@@ -236,7 +233,7 @@ describe SurveyorController do
 
       it_behaves_like "#update action"
       it "returns dependencies" do
-        ResponseSet.stub!(:find_by_access_code).and_return(response_set)
+        ResponseSet.stub(:find_by_access_code).and_return(response_set)
         response_set.should_receive(:all_dependencies).and_return({"show" => ['q_1'], "hide" => ['q_2']})
 
         do_put
@@ -253,7 +250,7 @@ describe SurveyorController do
     render_views
 
     let(:json) {
-      get :export, :survey_code => survey.access_code, :format => 'json'
+      get 'export', locale: 'en', :locale => 'en', :survey_code => survey.access_code, :format => 'json'
       JSON.parse(response.body)
     }
 
