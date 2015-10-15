@@ -1,0 +1,67 @@
+<% content_for :header_title, t("about.heading_about") %>
+
+<div class="container about">
+  <div class="span8">
+    <nav>
+      <ul>
+        <li><%= link_to('How to get Certificates', how_to_get_certificates_path) %></li>
+        <li><%= link_to('Badge Levels', badge_levels_page_path) %></li>
+        <li><%= link_to('What you need', what_you_need_page_path) %></li>
+      </ul>
+    </nav>
+
+    <h2>Vision</h2>
+
+    <p>The ODI’s vision is to certify all open data to maximise its reuse of and unlock its value for everyone.</p>
+
+    <p>Simply releasing data is not enough to power innovation – it needs to be reliable, accessible and discoverable, with appropriate support for data reusers.</p>
+
+    <p>As a globally recognised mark, Open Data Certificate will guarantee transparency, quality and trust.
+
+
+    <h2>Publisher benefits</h2>
+
+    <dl>
+      <dt>Independent mark of quality</dt>
+      <dd>Be recognised for your open data publication achievements with an Open Data Certificate you can display on your website.</dd>
+
+      <dt>Guide to best practice standards</dt>
+      <dd>Be guided through an assessment of your publication process measured against global best practices.</dd>
+
+      <dt>Free report for how to improve</dt>
+      <dd>Receive an easy to follow report on what is required to take you to the next level.</dd>
+
+      <dt>Engage reusers</dt>
+      <dd>Provide reusers with information they need to trust and rely on your data with Open Data Certificates.</dd>
+    </dl>
+
+
+
+    <h2>Data user benefits</h2>
+
+    <dl>
+      <dt>Level of dependability</dt>
+      <dd>We ask publishers key questions about copyright, timeliness, how long this dataset will be supported and updated, as well as encouraging thorough documentation.</dd>
+
+      <dt>Adherence to best practices</dt>
+      <dd>Higher certificate levels require greater commitments from publishers that helps you to get the information you need to re-use their data sustainably.</dd>
+
+      <dt>Independent assessment</dt>
+      <dd>Open Data Certificate is independent of any data publishing platform or metadata standard. We combine global best practices to ensure that data is published sustainably with information needed for reuse.</dd>
+    </dl>
+
+
+    <h2>Data platform technologists</h2>
+    <p>Open Data Certificate provides a free validation service for open data. The validation report lets publishers spot datasets that do not meet required standards, to allow them to take corrective action and provide maintained and trusted data for data reusers.</p>
+
+    <p>
+      <%= example_certificate_link %>
+    </p>
+
+    <hr class="supporter-divider"/>
+    <div class="supporter">
+      <%= image_tag "3rd-party/open-data-monitor-logo-100x100.png" %>
+      <div class="caption">Development of this tool was partly supported by the OpenDataMonitor project, co-funded by the European Commission under the Seventh Framework Programme (FP7 2007-2013).</div>
+    </div>
+  </div>
+</div>

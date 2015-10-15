@@ -12,6 +12,7 @@ en:
     my_certificates: My certificates
     discussion: Discussion
     about: About
+    faq: FAQ
     admin: Admin
 
   footmenu:
@@ -341,8 +342,17 @@ en:
   about:
     heading_about: About
 
-  overview:
-    heading_overview: Overview
+  badge_levels:
+    header_title: Certificate badge levels
+
+  certificate_how_to:
+    header_title: How to get a certificate
+
+  what_you_need:
+    header_title: What you need
+
+  faq:
+    header_title: Open Data Certificate - FAQ page
 
   contact:
     heading_contact: Contact the ODI
