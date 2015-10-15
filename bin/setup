@@ -1,6 +1,10 @@
 #!/bin/bash
 
-cp env.example .env
+if [ ! -e .env ]
+then
+  echo "creating .env file, this stores all environment variables"
+  cp env.example .env
+fi
 
 if [ -e config/database.yml ]
 then
@@ -8,5 +12,5 @@ then
   bundle exec rake db:create db:schema:load db:seed
 else
   cp config/database.{example.,}yml
-  echo "Please edit the config/database.yml and rerun $0"
+  echo "Please edit the default config/database.yml and rerun $0"
 fi
