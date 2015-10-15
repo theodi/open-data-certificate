@@ -24,4 +24,13 @@ class CampaignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "creating a campaign enqueues a processing job" do
+    CertificateFactory::FactoryRunner.expects(:perform_async)
+    Sidekiq::Testing.fake! do
+      post :create, :certification_campaign => FactoryGirl.attributes_for(:certification_campaign)
+    end
+    campaign = CertificationCampaign.last
+    assert_redirected_to campaign_path(campaign, certificate_level: 'all')
+  end
+
 end
