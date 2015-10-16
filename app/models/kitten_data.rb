@@ -40,6 +40,10 @@ class KittenData < ActiveRecord::Base
     @dataset.try(:source) || {}
   end
 
+  def source_extras
+    source.fetch("extras", {})
+  end
+
   def assumed_us_public_domain?
     data[:assumptions].include?(:us_public_domain)
   end
@@ -177,10 +181,10 @@ class KittenData < ActiveRecord::Base
 
   def get_release_type
     # this is where data.gov.uk provides type of release
-    resource_type = source["extras"]["resource-type"] rescue nil
+    resource_type = source_extras["resource-type"]
 
     # data.gov uses extras["collection_metadata"] = "true" for collections.
-    is_collection = source["extras"]["collection_metadata"] == "true" rescue false
+    is_collection = source_extras["collection_metadata"] == "true"
     return "collection" if is_collection
 
     if ["service", "series"].include?(resource_type)
@@ -202,7 +206,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_data_type
-    is_geographic = source["extras"]["metadata_type"] == "geospatial" rescue false
+    is_geographic = source_extras["metadata_type"] == "geospatial"
     @fields["dataType"] = ["geographic"] if is_geographic
   end
 
@@ -240,9 +244,7 @@ class KittenData < ActiveRecord::Base
     
     @fields["improvementsContact"] = URI.join(url + "/", "feedback/view").to_s
     
-    sla = source["extras"]["sla"] == "true" rescue false
-    
-    if sla
+    if source_extras["sla"] == "true"
       @fields["slaUrl"] = url
       @fields["onGoingAvailability"] = "medium"
     end
@@ -379,7 +381,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_codelists
-    codelists = source["codelist"] || source["extras"]["codelist"]
+    codelists = source["codelist"] || source_extras["codelist"]
     @fields["codelists"] = "true" if codelists.present?
     @fields["codelistDocumentationUrl"] = codelists[0]["url"]
   rescue NoMethodError
@@ -387,7 +389,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_schema
-    schema = source["schema"] rescue nil
+    schema = source["schema"]
     resource_schemas = original_resources.select { |r| r["schema-url"].present? }
     @fields["vocabulary"] = "true" if schema.present? || resource_schemas.present?
   end
