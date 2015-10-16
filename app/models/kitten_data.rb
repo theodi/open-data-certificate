@@ -212,8 +212,6 @@ class KittenData < ActiveRecord::Base
     @fields["publisherOrigin"] = "true"
     @fields["dataPersonal"] = "not_personal"
     @fields["contentRights"] = "samerights"
-    @fields["codelists"] = "false"
-    @fields["vocabulary"] = "false"
   end
 
   def set_ckan_assumptions
