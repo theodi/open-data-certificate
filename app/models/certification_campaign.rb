@@ -33,9 +33,22 @@ class CertificationCampaign < ActiveRecord::Base
     current.where(completed: nil).count
   end
 
+  def factory
+    case url
+    when /.atom$/
+      CertificateFactory::AtomFactory
+    else
+      CertificateFactory::CKANFactory
+    end
+  end
+
+  def run!
+    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, factory: factory.name, limit: limit)
+  end
+
   def rerun!
     certificate_generators.latest.unpublished.update_all(latest: false)
-    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, feed: url, jurisdiction: jurisdiction, user_id: user.id)
+    run!
   end
 
   def validate_extra_details?

@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :certification_campaign do
     name "campaign"
-    url "example.com/feed"
+    url "http://example.com/feed"
     jurisdiction "gb"
   end
 
