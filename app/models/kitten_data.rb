@@ -229,9 +229,9 @@ class KittenData < ActiveRecord::Base
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
-    @fields["listing"] = "#{uri.scheme}://#{hostname}"
+    @fields["listing"] = uri.merge("/").to_s
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
+    @fields["versionsUrl"] = uri.merge("/api/rest/package/#{package_name}").to_s
 
     if data[:licenses].any?
       @fields["copyrightStatementMetadata"] ||= []
