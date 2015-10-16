@@ -221,6 +221,7 @@ class KittenData < ActiveRecord::Base
     return unless dataset.publishing_format == :ckan
 
     @fields["copyrightURL"] = url
+    @fields["backups"] = "true"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
