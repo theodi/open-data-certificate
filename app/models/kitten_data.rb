@@ -228,6 +228,11 @@ class KittenData < ActiveRecord::Base
     @fields["listing"] = "#{uri.scheme}://#{hostname}"
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
+
+    if data[:licenses].any?
+      @fields["copyrightStatementMetadata"] ||= []
+      @fields["copyrightStatementMetadata"].push("dataLicense")
+    end
   end
 
   def set_data_gov_uk_assumptions
