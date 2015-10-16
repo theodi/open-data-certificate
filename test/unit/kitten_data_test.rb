@@ -380,6 +380,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "extras" => { "sla" => "true" }
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     stub_request(:get, 'http://data.gov.uk/some_crazy_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
@@ -402,6 +403,7 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'data.london.gov.uk assumptions are applied' do
     stub_request(:get, 'http://data.london.gov.uk/some_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.london.gov.uk/some_data')
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]
@@ -418,6 +420,7 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'data.gov assumptions are applied' do
     stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]

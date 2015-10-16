@@ -215,11 +215,10 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_ckan_assumptions
-    # Assumptions for data.gov.uk
-    # also for data.london.gov.uk
-    # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
-    # and data.gov
-    return unless %w[data.gov.uk data.london.gov.uk catalog.data.gov].include?(hostname)
+    # Assumptions for CKAN portals like
+    # data.gov.uk data.london.gov.uk catalog.data.gov
+    # base on assumptions with confirmation from Ross Jones that they seemed sensible
+    return unless dataset.publishing_format == :ckan
 
     @fields["copyrightURL"] = url
     @fields["frequentChanges"] = "false"
