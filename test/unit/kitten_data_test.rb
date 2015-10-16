@@ -380,6 +380,7 @@ class KittenDataTest < ActiveSupport::TestCase
       "extras" => { "sla" => "true" }
     }
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     stub_request(:get, 'http://data.gov.uk/some_crazy_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.gov.uk/some_crazy_data')
@@ -387,33 +388,30 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]
     assert_equal "false", kitten_data.fields["frequentChanges"]
-    assert_equal "false", kitten_data.fields["vocabulary"]
-    assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
     assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["contactUrl"]
-    assert_equal "http://data.gov.uk", kitten_data.fields["listing"]
+    assert_equal "http://data.gov.uk/", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
     assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
     assert_equal "medium", kitten_data.fields["onGoingAvailability"]
-    assert_equal "http://data.gov.uk/some_crazy_data/feedback/view", kitten_data.fields["improvementsContact"]
+    assert_equal "http://data.gov.uk/some_crazy_data#comments-container", kitten_data.fields["forum"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do
     stub_request(:get, 'http://data.london.gov.uk/some_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://data.london.gov.uk/some_data')
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]
     assert_equal "false", kitten_data.fields["frequentChanges"]
-    assert_equal "false", kitten_data.fields["vocabulary"]
-    assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
     assert_equal "http://data.london.gov.uk/some_data", kitten_data.fields["contactUrl"]
-    assert_equal "http://data.london.gov.uk", kitten_data.fields["listing"]
+    assert_equal "http://data.london.gov.uk/", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://data.london.gov.uk/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
@@ -422,16 +420,15 @@ class KittenDataTest < ActiveSupport::TestCase
   test 'data.gov assumptions are applied' do
     stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
     @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+    DataKitten::Dataset.any_instance.stubs(:publishing_format).returns(:ckan)
 
     assert_equal "true", kitten_data.fields["publisherOrigin"]
     assert_equal "not_personal", kitten_data.fields["dataPersonal"]
     assert_equal "false", kitten_data.fields["frequentChanges"]
-    assert_equal "false", kitten_data.fields["vocabulary"]
-    assert_equal "false", kitten_data.fields["codelists"]
     assert_equal kitten_data.url, kitten_data.fields["copyrightURL"]
     assert_equal "true", kitten_data.fields["listed"]
     assert_equal "http://catalog.data.gov/some_data", kitten_data.fields["contactUrl"]
-    assert_equal "http://catalog.data.gov", kitten_data.fields["listing"]
+    assert_equal "http://catalog.data.gov/", kitten_data.fields["listing"]
     assert_equal "samerights", kitten_data.fields["contentRights"]
     assert_equal ["list"], kitten_data.fields["versionManagement"]
     assert_equal "http://catalog.data.gov/api/rest/package/some_data", kitten_data.fields["versionsUrl"]
