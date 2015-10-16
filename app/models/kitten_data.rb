@@ -197,7 +197,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_service_type
-    return unless @fields["releaseType"] == "service"
+    return unless get_release_type == "service"
     @fields["serviceType"] = "changing" if data[:update_frequency].present?
   end
 
