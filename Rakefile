@@ -7,13 +7,11 @@ require File.expand_path('../config/application', __FILE__)
 OpenDataCertificate::Application.load_tasks
 
 Rake::Task["default"].clear
-task default: ["spec", "test", "cucumber"]
+task default: %w[test spec cucumber]
 
 if Rails.env.test?
-
   require 'coveralls/rake/task'
   Coveralls::RakeTask.new
 
-  task :default => ["spec", "test", "cucumber", "coveralls:push"]
-
+  task default: %w[test spec cucumber coveralls:push]
 end
