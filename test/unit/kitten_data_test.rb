@@ -397,7 +397,7 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://data.gov.uk/api/rest/package/some_crazy_data", kitten_data.fields["versionsUrl"]
     assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
     assert_equal "medium", kitten_data.fields["onGoingAvailability"]
-    assert_equal "http://data.gov.uk/some_crazy_data/feedback/view", kitten_data.fields["improvementsContact"]
+    assert_equal "http://data.gov.uk/some_crazy_data#comments-container", kitten_data.fields["forum"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do

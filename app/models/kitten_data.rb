@@ -241,9 +241,9 @@ class KittenData < ActiveRecord::Base
 
   def set_data_gov_uk_assumptions
     return unless hostname == "data.gov.uk"
-    
-    @fields["improvementsContact"] = URI.join(url + "/", "feedback/view").to_s
-    
+
+    @fields["forum"] = url + "#comments-container"
+
     if source_extras["sla"] == "true"
       @fields["slaUrl"] = url
       @fields["onGoingAvailability"] = "medium"
