@@ -229,7 +229,7 @@ class KittenData < ActiveRecord::Base
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
-    @fields["listing"] = uri.merge("/").to_s
+    @fields["listing"] ||= uri.merge("/").to_s
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = uri.merge("/api/rest/package/#{package_name}").to_s
 
@@ -243,6 +243,9 @@ class KittenData < ActiveRecord::Base
     return unless hostname == "data.gov.uk"
 
     @fields["forum"] = url + "#comments-container"
+    if source['organization']
+      @fields["listing"] = uri.merge("/publisher/#{source['organization']['name']}")
+    end
 
     if source_extras["sla"] == "true"
       @fields["slaUrl"] = url
