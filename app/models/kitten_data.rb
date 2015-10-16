@@ -243,9 +243,6 @@ class KittenData < ActiveRecord::Base
     return unless hostname == "data.gov.uk"
 
     @fields["forum"] = url + "#comments-container"
-    if source['organization']
-      @fields["listing"] = uri.merge("/publisher/#{source['organization']['name']}")
-    end
 
     if source_extras["sla"] == "true"
       @fields["slaUrl"] = url
@@ -265,6 +262,17 @@ class KittenData < ActiveRecord::Base
       data_gov_federal_assumptions if is_federal
     rescue
       nil
+    end
+  end
+
+  def set_listing
+    if org = source['organization']
+      case hostname
+      when "data.gov.uk"
+        @fields["listing"] = uri.merge("/publisher/#{org['name']}")
+      when "catalog.data.gov"
+        @fields["listing"] = uri.merge("/organization/#{org['name']}")
+      end
     end
   end
 
