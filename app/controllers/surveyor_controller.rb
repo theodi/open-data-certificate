@@ -67,87 +67,70 @@ class SurveyorController < ApplicationController
   end
 
   def show
-    # @response_set is set in before_filter - set_response_set_and_render_context
-    if @response_set
-      @survey = @response_set.survey
-      respond_to do |format|
-        format.html #{render :action => :show}
-        format.csv {
-          send_data(@response_set.to_csv, :type => 'text/csv; charset=utf-8; header=present',
-            :filename => "#{@response_set.updated_at.strftime('%Y-%m-%d')}_#{@response_set.access_code}.csv")
-        }
-        format.json
-      end
-    else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
-      redirect_to surveyor_index
+    @survey = @response_set.survey
+    respond_to do |format|
+      format.html #{render :action => :show}
+      format.csv {
+        send_data(@response_set.to_csv, :type => 'text/csv; charset=utf-8; header=present',
+          :filename => "#{@response_set.updated_at.strftime('%Y-%m-%d')}_#{@response_set.access_code}.csv")
+      }
+      format.json
     end
   end
 
   def update
-    if @response_set
+    if @response_set.published?
+      return redirect_with_message(surveyor_index, :warning, t('surveyor.response_set_is_published'))
+    end
 
-      if @response_set.published?
-        return redirect_with_message(surveyor_index, :warning, t('surveyor.response_set_is_published'))
-      end
+    saved = load_and_update_response_set_with_retries
 
-      saved = load_and_update_response_set_with_retries
+    if saved && !request.xhr?
+      flash[:_saved_response_set] = @response_set.access_code
 
-      if saved && !request.xhr?
-        flash[:_saved_response_set] = @response_set.access_code
+      if user_signed_in?
+        mandatory_questions_complete = @response_set.all_mandatory_questions_complete?
+        urls_resolve = @response_set.all_urls_resolve?
 
-        if user_signed_in?
-          mandatory_questions_complete = @response_set.all_mandatory_questions_complete?
-          urls_resolve = @response_set.all_urls_resolve?
-
-          unless mandatory_questions_complete
-            flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
-          end
-
-          unless urls_resolve
-            flash[:warning] = t('surveyor.please_check_all_your_urls_exist')
-          end
-
-          if mandatory_questions_complete && urls_resolve
-            @response_set.complete!
-            @response_set.save
-
-            if params[:update]
-              @response_set.publish!
-              return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
-            else
-              return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
-            end
-          end
-        else
-          flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
+        unless mandatory_questions_complete
+          flash[:alert] = t('surveyor.all_mandatory_questions_need_to_be_completed')
         end
 
-        return redirect_to(edit_my_survey_path({
-          :anchor => anchor_from(params[:section]),
-          :section => section_id_from(params),
-          :highlight_mandatory => true,
-          :update => params[:update]
-        }.reject! {|k, v| v.nil? }))
+        unless urls_resolve
+          flash[:warning] = t('surveyor.please_check_all_your_urls_exist')
+        end
+
+        if mandatory_questions_complete && urls_resolve
+          @response_set.complete!
+          @response_set.save
+
+          if params[:update]
+            @response_set.publish!
+            return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
+          else
+            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+          end
+        end
+      else
+        flash[:alert] = t('surveyor.must_be_logged_in_to_complete')
       end
+
+      return redirect_to(edit_my_survey_path({
+        :anchor => anchor_from(params[:section]),
+        :section => section_id_from(params),
+        :highlight_mandatory => true,
+        :update => params[:update]
+      }.reject! {|k, v| v.nil? }))
     end
 
     respond_to do |format|
       format.html do
-        if @response_set
-          flash[:warning] = t('surveyor.unable_to_update_survey') unless saved
-          redirect_to edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
-        else
-          redirect_with_message(available_surveys_path, :notice, t('surveyor.unable_to_find_your_responses'))
-        end
+        flash[:warning] = t('surveyor.unable_to_update_survey') unless saved
+        redirect_to edit_my_survey_path(:anchor => anchor_from(params[:section]), :section => section_id_from(params))
       end
       format.js do
-        if @response_set
-          question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
-          render :json => @response_set.reload.all_dependencies(question_ids_for_dependencies)
-        else
-          render :text => "No response set #{params[:response_set_code]}", :status => 404
-        end
+        question_ids_for_dependencies = (params[:r] || []).map { |k, v| v["question_id"] }.compact.uniq
+        render :json => @response_set.reload.all_dependencies(question_ids_for_dependencies)
       end
     end
   end
@@ -160,26 +143,15 @@ class SurveyorController < ApplicationController
   end
 
   def requirements
-    if @response_set
-      redirect_to improvements_dataset_certificate_path(@response_set.dataset, @response_set.certificate)
-    else
-      flash[:warning] = t('surveyor.unable_to_find_your_responses')
-      redirect_to surveyor_index
-    end
+    redirect_to improvements_dataset_certificate_path(@response_set.dataset, @response_set.certificate)
   end
 
   def edit
-    # @response_set is set in before_filter - set_response_set_and_render_context
-    if @response_set
-      @responses = @response_set.responses.includes(:question).all
-      @survey = @response_set.survey
-      @sections = @survey.sections.with_includes
-      @dependents = []
-      @update = true if params[:update]
-    else
-      flash[:notice] = t('surveyor.unable_to_find_your_responses')
-      redirect_to surveyor_index
-    end
+    @responses = @response_set.responses.includes(:question).all
+    @survey = @response_set.survey
+    @sections = @survey.sections.with_includes
+    @dependents = []
+    @update = true if params[:update]
   end
 
   def export
@@ -201,9 +173,10 @@ class SurveyorController < ApplicationController
     @url_error = @response_set.documentation_url_explanation.present?
   end
 
-  # where to send the user once the survey has been completed
-  # if there was a dataset, go back to it
+
   private
+
+
   def surveyor_finish
     dashboard_path
   end
@@ -216,11 +189,14 @@ class SurveyorController < ApplicationController
   end
 
   def set_response_set_and_render_context
-    @response_set = ResponseSet.
-      find_by_access_code(params[:response_set_code], :include => {:responses => [:question, :answer]})
+    @response_set = ResponseSet.find_by_access_code!(
+      params[:response_set_code],
+      include: {
+        responses: [:question, :answer]
+      }
+    )
     @render_context = nil
 
-    raise ActiveRecord::RecordNotFound unless @response_set.present?
     authorize!(:edit, @response_set)
   end
 
@@ -297,19 +273,15 @@ class SurveyorController < ApplicationController
     ResponseSet.transaction do
       @response_set = ResponseSet.
         find_by_access_code(params[:response_set_code], :include => {:responses => :answer})
-      if @response_set
-        saved = true
-        if params[:r]
-          @response_set.update_from_ui_hash(params[:r])
-        end
-        if params[:finish]
-          @response_set.complete!
-          saved &= @response_set.save
-        end
-        saved
-      else
-        false
+      saved = true
+      if params[:r]
+        @response_set.update_from_ui_hash(params[:r])
       end
+      if params[:finish]
+        @response_set.complete!
+        saved &= @response_set.save
+      end
+      saved
     end
   end
 
