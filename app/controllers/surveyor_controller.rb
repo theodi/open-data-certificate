@@ -6,16 +6,6 @@ class SurveyorController < ApplicationController
   before_filter :set_response_set_and_render_context
   before_filter :ensure_modifications_allowed, only: [:edit, :update]
 
-  def new
-    @surveys_by_access_code = Survey.order("created_at DESC, survey_version DESC").all.group_by(&:access_code)
-    redirect_to surveyor_index unless surveyor_index == available_surveys_path
-  end
-
-  def create
-    params[:survey_access_code] = params[:survey_code]
-    start_questionnaire
-  end
-
   # it might be a *really* nice refactor to take this to response_set_controller#update
   # then we could use things like `form_for [surveyor, response_set] do |f|`
   def continue

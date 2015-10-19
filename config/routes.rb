@@ -18,8 +18,6 @@ OpenDataCertificate::Application.routes.draw do
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
     scope '/surveys' do
-      get '/', to: 'surveyor#new', as: 'available_surveys'
-      post '/:survey_code', to: 'surveyor#create', as: 'take_survey'
       get '/:survey_code', to: 'surveyor#export', as: 'export_survey'
       get '/:survey_code/:response_set_code', to: 'surveyor#show', as: 'view_my_survey'
       get '/:survey_code/:response_set_code/take', to: 'surveyor#edit', as: 'edit_my_survey'
