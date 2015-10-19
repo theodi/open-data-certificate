@@ -2,133 +2,102 @@
 
 <div class="container about">
   <div class="span8">
-    <div class="faq">
-      <h2>What is Open Data Certificate?</h2>
+    <%= faqs_with_navigation(class: 'page-contents-navigation') do %>
+      <%= faq_content('What is Open Data Certificate?') do %>
+        <p>Open Data Certificate is a free online tool developed and maintained by the Open Data Institute, to assess and recognise the sustainable publication of quality open data.</p>
+      <% end %>
 
-      <p>Open Data Certificate is a free online tool developed and maintained by the Open Data Institute, to assess and recognise the sustainable publication of quality open data.</p>
-    </div>
+      <%= faq_content('Why is Open Data Certificate useful?') do %>
+        <p>We are working to build trust in open data to support its reuse. Open Data Certificate is an independent quality mark benchmarked against a set of tried and tested standards, to professionalise open data publication. It covers the legal, practical, technical and social requirements to support the use of sustainable open data.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>Why is Open Data Certificate useful?</h2>
+      <%= faq_content('How does Open Data Certificate work?') do %>
+        <p>A questionnaire for data publishers assesses the level of support and steps taken to make data reusable and discoverable. Depending on the answers, we award a badge that can be embedded on the publisher’s website to signify the quality level of their publication process to reusers.</p>
+      <% end %>
 
-      <p>We are working to build trust in open data to support its reuse. Open Data Certificate is an independent quality mark benchmarked against a set of tried and tested standards, to professionalise open data publication. It covers the legal, practical, technical and social requirements to support the use of sustainable open data.</p>
-    </div>
+      <%= faq_content('How is Open Data Certificate different to existing standards such as opendefinition.org, 5* of Open Data, Sunlight principles, DCAT etc?') do %>
+        <p>Open Data Certificate builds upon these existing standards. It provides a clear assessment of how well the data meets best practices, and provides data publishers with guidance on how to improve their data for optimal reuse.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>How does Open Data Certificate work?</h2>
+      <%= faq_content('What are the benefits of Open Data Certificate to publishers?') do %>
+        <ul>
+          <li>To be recognised for your open data publishing achievements</li>
+          <li>To engage with the reuser community</li>
+          <li>To build trust and sustainability in the use of open data</li>
+          <li>To be guided through best publishing practices</li>
+          <li>To acquire a free report on how to improve open data publishing</li>
+        </ul>
+      <% end %>
 
-      <p>A questionnaire for data publishers assesses the level of support and steps taken to make data reusable and discoverable. Depending on the answers, we award a badge that can be embedded on the publisher’s website to signify the quality level of their publication process to reusers.</p>
-    </div>
+      <%= faq_content('What are the benefits of Open Data Certificate to reusers?') do %>
+        <p><strong>Level of dependability</strong> - we ask publishers key questions about copyright, timeliness, how long this dataset will be supported and updated as well as encouraging thorough documentation.</p>
 
-    <div class="faq">
-      <h2>How is Open Data Certificate different to existing standards such as opendefinition.org, 5* of Open Data, Sunlight principles, DCAT etc?</h2>
+        <p><strong>Adherence to best practices</strong> - Higher certificate levels indicate greater commitments from publisher’s to ensure their data is reliable, helping re-users identify quality open data.</p>
 
-      <p>Open Data Certificate builds upon these existing standards. It provides a clear assessment of how well the data meets best practices, and provides data publishers with guidance on how to improve their data for optimal reuse.</p>
-    </div>
+        <p><strong>Independent assessment</strong> - Open Data Certificate is independent of any particular data publishing platform or metadata standard. We combine global best practices to ensure that data is published sustainably with the information needed for reuse.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>What are the benefits of Open Data Certificate to publishers?</h2>
-      <ul>
-        <li>To be recognised for your open data publishing achievements</li>
-        <li>To engage with the reuser community</li>
-        <li>To build trust and sustainability in the use of open data</li>
-        <li>To be guided through best publishing practices</li>
-        <li>To acquire a free report on how to improve open data publishing</li>
-      </ul>
-    </div>
+      <%= faq_content('Can certificates be automatically generated?') do %>
+        <p>If you’re publishing open data in a machine readable way (for example, by using data portal software like ckan or OpenDataSoft) we can pre-fill many of the certificate questions. Simply get in touch with us to get started.</p>
 
-    <div class="faq">
-      <h2>What are the benefits of Open Data Certificate to reusers?</h2>
+        <p>We recommend that you still review and add any additional information about your communication and privacy practices along with other documentation.</p>
+      <% end %>
 
-      <p><strong>Level of dependability</strong> - we ask publishers key questions about copyright, timeliness, how long this dataset will be supported and updated as well as encouraging thorough documentation.</p>
+      <%= faq_content('Why has my data only achieved level [raw / pilot / standard]? We’ve been publishing data for years!') do %>
+        <p>A Raw level badge is a fantastic achievement - it means your data is re-use ready! However, we want to encourage publishers to aim higher and push for better internal publishing practices. You do not need to aim for Standard and Expert for all of your datasets.</p>
+      <% end %>
 
-      <p><strong>Adherence to best practices</strong> - Higher certificate levels indicate greater commitments from publisher’s to ensure their data is reliable, helping re-users identify quality open data.</p>
+      <%= faq_content('What level should my data be achieving?') do %>
+        <p>If the certificate is for a core dataset - produced as part of the main function of your organisation -  then we recommend you aim for Standard or Expert level. This is to reflect the level of investment your organisation has made for this data and communicate to reusers its level of reliability. If this is a singular release, Raw is perfectly fine. Pilot is the general level for great quality open data publication.</p>
+      <% end %>
 
-      <p><strong>Independent assessment</strong> - Open Data Certificate is independent of any particular data publishing platform or metadata standard. We combine global best practices to ensure that data is published sustainably with the information needed for reuse.</p>
-    </div>
+      <%= faq_content('Who is using Open Data Certificate?') do %>
+        <p>More and more governments and organisations from around the world are using Open Data Certificates every day. Current users include:</p>
 
-    <div class="faq">
-      <h2>Can certificates be automatically generated?</h2>
+        <ul>
+          <li>UK national government (data.gov.uk)</li>
+          <li>Greater London Authority (data.london.gov.uk)</li>
+          <li>Australia Queensland (data.qld.gov.au)</li>
+          <li>Office of National Statistics</li>
+          <li>UK Data Service</li>
+        </ul>
+      <% end %>
 
-      <p>If you’re publishing open data in a machine readable way (for example, by using data portal software like ckan or OpenDataSoft) we can pre-fill many of the certificate questions. Simply get in touch with us to get started.</p>
+      <%= faq_content('What does the Open Data Certificate cover? Does it tell me about the quality of the data itself?') do %>
+        <p>Open Data Certificate primarily assesses metadata and the surrounding publication process (privacy, copyright, communication, whether the data will be regularly updated and how). Currently there is no direct validation of the data itself although we assess whether appropriate formats are used.</p>
 
-      <p>We recommend that you still review and add any additional information about your communication and privacy practices along with other documentation.</p>
-    </div>
+        <p>In the future we may integrate with tools such as CSVlint to help validate data against a schema and judge its quality.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>Why has my data only achieved level [raw / pilot / standard]? We’ve been publishing data for years!</h2>
+      <%= faq_content('How reliable are these certificates if they are self certified?') do %>
+        <p>Many of the steps have built in automatic validation (for example, testing links) and we have support for community validation - external members can flag issues and there is an independent process to check and update certificates in response to any concerns.</p>
 
-      <p>A Raw level badge is a fantastic achievement - it means your data is re-use ready! However, we want to encourage publishers to aim higher and push for better internal publishing practices. You do not need to aim for Standard and Expert for all of your datasets.</p>
-    </div>
+        <p>Going forward, we will offer independent ODI auditing for certification to provide the highest standard of trust.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>What level should my data be achieving?</h2>
+      <%= faq_content('How do you ensure the legal aspects are relevant across different jurisdictions?') do %>
+        <p>We have a localisation team that works with governments and NGOs in different jurisdictions to adapt the Open Data Certificate questionnaire. Certificate localisations reflect different legal defaults and standards used by publishers.</p>
+      <% end %>
 
-      <p>If the certificate is for a core dataset - produced as part of the main function of your organisation -  then we recommend you aim for Standard or Expert level. This is to reflect the level of investment your organisation has made for this data and communicate to reusers its level of reliability. If this is a singular release, Raw is perfectly fine. Pilot is the general level for great quality open data publication.</p>
-    </div>
+      <%= faq_content('How does you demonstrate that the data has been certified?') do %>
+        <p>As a publisher, once you have completed the certification process (or reviewed and claimed an automatically prefilled certificate) and awarded a badge, you can embed this in your dataset or webpage that links to the full certificate. We have technical support and tools to help you do this throughout the process.</p>
+      <% end %>
 
-    <div class="faq">
-      <h2>Who is using Open Data Certificate?</h2>
+      <%= faq_content('I already use data portal software, can certificates be automatically generated from it?') do %>
+        <p>By using a portal, much of the information can be automatically prefilled. We are working with all major portal software providers to provide this seamlessly.</p>
 
-      <p>More and more governments and organisations from around the world are using Open Data Certificates every day. Current users include:</p>
+        <p>Open Data Certificate is an independent standard which works across portal providers and captures key additional information about the re-usability quality of your datasets, such as the level of comms support, update frequency and X. We recommend that you still review and add answers after the automated prefilling process.</p>
+      <% end %>
 
-      <ul>
-        <li>UK national government (data.gov.uk)</li>
-        <li>Greater London Authority (data.london.gov.uk)</li>
-        <li>Australia Queensland (data.qld.gov.au)</li>
-        <li>Office of National Statistics</li>
-        <li>UK Data Service</li>
-      </ul>
-    </div>
+      <%= faq_content('Do certificates go out of date?') do %>
+        <p>Certificates show the certification date so re-users can judge when this was last updated. Unlike portal metadata, our certificates go out of date and need to be renewed and updated.</p>
 
-    <div class="faq">
-      <h2>What does the Open Data Certificate cover? Does it tell me about the quality of the data itself?</h2>
+        <p>We plan to track the currentness of certificates and communicate when they need to be updated. For example, if the dataset has changed, the certificate will no longer apply until it is updated, or if we know from the questionnaire that the certificate is due to expire within a year, the certificate will reflect this.</p>
+      <% end %>
 
-      <p>Open Data Certificate primarily assesses metadata and the surrounding publication process (privacy, copyright, communication, whether the data will be regularly updated and how). Currently there is no direct validation of the data itself although we assess whether appropriate formats are used.</p>
-
-      <p>In the future we may integrate with tools such as CSVlint to help validate data against a schema and judge its quality.</p>
-    </div>
-
-    <div class="faq">
-      <h2>How reliable are these certificates if they are self certified?</h2>
-
-      <p>Many of the steps have built in automatic validation (for example, testing links) and we have support for community validation - external members can flag issues and there is an independent process to check and update certificates in response to any concerns.</p>
-
-      <p>Going forward, we will offer independent ODI auditing for certification to provide the highest standard of trust.</p>
-    </div>
-
-    <div class="faq">
-      <h2>How do you ensure the legal aspects are relevant across different jurisdictions?</h2>
-
-      <p>We have a localisation team that works with governments and NGOs in different jurisdictions to adapt the Open Data Certificate questionnaire. Certificate localisations reflect different legal defaults and standards used by publishers.</p>
-    </div>
-
-    <div class="faq">
-      <h2>How does you demonstrate that the data has been certified?</h2>
-
-      <p>As a publisher, once you have completed the certification process (or reviewed and claimed an automatically prefilled certificate) and awarded a badge, you can embed this in your dataset or webpage that links to the full certificate. We have technical support and tools to help you do this throughout the process.</p>
-    </div>
-
-    <div class="faq">
-      <h2>I already use data portal software, can certificates be automatically generated from it?</h2>
-
-      <p>By using a portal, much of the information can be automatically prefilled. We are working with all major portal software providers to provide this seamlessly.</p>
-
-      <p>Open Data Certificate is an independent standard which works across portal providers and captures key additional information about the re-usability quality of your datasets, such as the level of comms support, update frequency and X. We recommend that you still review and add answers after the automated prefilling process.</p>
-    </div>
-
-    <div class="faq">
-      <h2>Do certificates go out of date?</h2>
-
-      <p>Certificates show the certification date so re-users can judge when this was last updated. Unlike portal metadata, our certificates go out of date and need to be renewed and updated.</p>
-
-      <p>We plan to track the currentness of certificates and communicate when they need to be updated. For example, if the dataset has changed, the certificate will no longer apply until it is updated, or if we know from the questionnaire that the certificate is due to expire within a year, the certificate will reflect this.</p>
-    </div>
-
-    <div class="faq">
-      <h2>How useful are certificates to re-users?</h2>
-
-      <p>Open Data Certificate provides key information to support the dependable reuse of open data. We have conducted extensive interviews with re-users and will be convening a working group to further iterate the certification questionnaire to maintain its relevance and use for companies, civic institutions, governments and individuals who need it.</p>
-    </div>
+      <%= faq_content('How useful are certificates to re-users?') do %>
+        <p>Open Data Certificate provides key information to support the dependable reuse of open data. We have conducted extensive interviews with re-users and will be convening a working group to further iterate the certification questionnaire to maintain its relevance and use for companies, civic institutions, governments and individuals who need it.</p>
+      <% end %>
+    <% end %>
   </div>
 </div>
