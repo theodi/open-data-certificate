@@ -6,7 +6,6 @@
 - content_for(:main_container_class) {'non-container'}
 
 / has it's own form, so need it up here
--@surveys = Survey.available_to_complete
 =render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
 =render :partial => 'shared/switch_language', locals: {response_set: @response_set}
 

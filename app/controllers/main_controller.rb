@@ -9,7 +9,6 @@ class MainController < ApplicationController
   end
 
   def home
-    @surveys = Survey.available_to_complete
     respond_to do |format|
       format.html { render '/home/index' }
     end
