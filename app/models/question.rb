@@ -121,26 +121,6 @@ class Question < ActiveRecord::Base
     end
   end
 
-  def calculate_question_corresponding_to_requirement
-    get_questions.detect { |q| corresponds_to_requirement?(q, requirement) }
-  end
-
-  def calculate_answer_corresponding_to_requirement
-    get_answers.detect { |a| corresponds_to_requirement?(a, requirement) }
-  end
-
-  def get_answers
-    survey_section.survey.only_questions.map(&:answers).flatten
-  end
-
-  def get_questions
-    survey_section.survey.only_questions
-  end
-
-  def corresponds_to_requirement?(subject, requirement)
-    subject.requirement && requirement && subject.requirement.include?(requirement)
-  end
-
   def css_class(response_set)
     triggered = triggered?(response_set) || (part_of_group? && question_group.dependent?)
     [(dependent? ? "q_dependent" : nil), (triggered ? nil : "q_hidden"), custom_class].compact.join(" ")
@@ -192,6 +172,26 @@ class Question < ActiveRecord::Base
 
   def set_default_value_for_required
     self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
+  end
+
+  def corresponds_to_requirement?(subject, requirement)
+    subject.requirement && requirement && subject.requirement.include?(requirement)
+  end
+
+  def calculate_question_corresponding_to_requirement
+    get_questions.detect { |q| corresponds_to_requirement?(q, requirement) }
+  end
+
+  def calculate_answer_corresponding_to_requirement
+    get_answers.detect { |a| corresponds_to_requirement?(a, requirement) }
+  end
+
+  def get_answers
+    survey_section.survey.only_questions.map(&:answers).flatten
+  end
+
+  def get_questions
+    survey_section.survey.only_questions
   end
 
   def cache_question_or_answer_corresponding_to_requirement
