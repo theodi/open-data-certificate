@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SurveyorController, :engine_problems do
+describe SurveyorController do
 
   let!(:survey)           { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 0)}
   let!(:survey_beta)      { FactoryGirl.create(:survey, :title => "Alphabet", :access_code => "alpha", :survey_version => 1)}
@@ -8,105 +8,10 @@ describe SurveyorController, :engine_problems do
   let!(:response_set_beta) { FactoryGirl.create(:response_set, :survey => survey_beta, :access_code => "rst")}
   before { ResponseSet.stub(:create).and_return(response_set) }
 
-  let(:available_surveys_path) { Surveyor::Engine.routes.url_helpers.available_surveys_path }
-
   before do
     user = double('user')
-    allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+    allow(user).to receive(:admin?).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
-  end
-
-  context "#new" do
-    def do_get
-      get :new, locale: 'en'
-    end
-    it "renders new" do
-      do_get
-      response.should be_success
-      response.should render_template('new')
-    end
-    it "assigns surveys_by_access_code" do
-      do_get
-      assigns(:surveys_by_access_code).should == {"alpha" => [survey_beta,survey]}
-    end
-  end
-
-  context "#create" do
-    def do_post(params = {})
-      post :create, {:locale => 'en', :survey_code => "alpha"}.merge(params)
-    end
-    it "finds latest version" do
-      do_post
-      assigns(:survey).should == survey_beta
-    end
-    it "finds specified survey_version" do
-      do_post :survey_version => 0
-      assigns(:survey).should == survey
-    end
-    it "creates a new response_set" do
-      ResponseSet.should_receive(:create)
-      do_post
-    end
-    it "should redirects to the new response_set" do
-      do_post
-      response.should redirect_to( edit_my_survey_path(:locale => 'en', :survey_code => "alpha", :response_set_code  => "pdq"))
-    end
-
-    context "with failures" do
-      it "redirect to #new on failed ResponseSet#create" do
-        ResponseSet.should_receive(:create).and_return(false)
-        do_post
-        response.should redirect_to(available_surveys_path)
-      end
-      it "redirect to #new on failed Survey#find" do
-        do_post :locale => 'en', :survey_code => "missing"
-        response.should redirect_to(available_surveys_path)
-      end
-    end
-
-    context "with javascript check, assigned in session" do
-      it "enabled" do
-        do_post :surveyor_javascript_enabled => "true"
-        session[:surveyor_javascript].should_not be_nil
-        session[:surveyor_javascript].should == "enabled"
-      end
-      it "disabled" do
-        post :create, :locale => 'en', :survey_code => "xyz", :surveyor_javascript_enabled => "not_true"
-        session[:surveyor_javascript].should_not be_nil
-        session[:surveyor_javascript].should == "not_enabled"
-      end
-    end
-  end
-
-  context "#show" do
-    def do_get(params = {})
-      get :show, {:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
-    end
-    it "renders show" do
-      do_get
-      response.should be_success
-      response.should render_template('show')
-    end
-    it "finds ResponseSet with includes" do
-      ResponseSet.should_receive(:find_by_access_code).with("pdq",{:include=>{:responses=>[:question, :answer]}})
-      do_get
-    end
-    it "redirects for missing response set" do
-      do_get :response_set_code => "DIFFERENT"
-      response.should redirect_to(available_surveys_path)
-    end
-    it "assigns earlier survey_version" do
-      response_set
-      do_get
-      assigns[:response_set].should == response_set
-      assigns[:survey].should == survey
-    end
-    it "assigns later survey_version" do
-      response_set_beta
-      do_get :response_set_code => "rst"
-      assigns[:response_set].should == response_set_beta
-      assigns[:survey].should == survey_beta
-    end
   end
 
   context "#edit" do
@@ -126,19 +31,7 @@ describe SurveyorController, :engine_problems do
     end
     it "redirects for missing response set" do
       do_get :response_set_code => "DIFFERENT"
-      response.should redirect_to(available_surveys_path)
-    end
-    it "assigns dependents if javascript not enabled" do
-      controller.stub(:get_unanswered_dependencies_minus_section_questions).and_return([FactoryGirl.create(:question)])
-      session[:surveyor_javascript].should be_nil
-      do_get
-      assigns[:dependents].should_not be_empty
-    end
-    it "does not assign dependents if javascript is enabled" do
-      controller.stub(:get_unanswered_dependencies_minus_section_questions).and_return([FactoryGirl.create(:question)])
-      session[:surveyor_javascript] = "enabled"
-      do_get
-      assigns[:dependents].should be_empty
+      response.status.should == 404
     end
     it "assigns earlier survey_version" do
       do_get
@@ -207,22 +100,18 @@ describe SurveyorController, :engine_problems do
       end
 
       it_behaves_like "#update action"
-      it "redirects to #edit without params" do
-        do_put
-        response.should redirect_to(edit_my_survey_path(:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"))
-      end
+
       it "completes the found response set on finish" do
         do_put :finish => 'finish'
         response_set.reload.should be_complete
       end
       it 'flashes completion' do
         do_put :finish => 'finish'
-        flash[:notice].should == "Completed survey"
+        flash[:notice].should == "Completed questionnaire"
       end
       it "redirects for missing response set" do
         do_put :response_set_code => "DIFFERENT"
-        response.should redirect_to(available_surveys_path)
-        flash[:notice].should == "Unable to find your responses to the survey"
+        response.status.should == 404
       end
     end
 
@@ -242,62 +131,6 @@ describe SurveyorController, :engine_problems do
       it "returns 404 for missing response set" do
         do_put :response_set_code => "DIFFERENT"
         response.status.should == 404
-      end
-    end
-  end
-
-  context "#export" do
-    render_views
-
-    let(:json) {
-      get 'export', locale: 'en', :locale => 'en', :survey_code => survey.access_code, :format => 'json'
-      JSON.parse(response.body)
-    }
-
-    context "question inside and outside a question group" do
-      def question_text(refid)
-        <<-SURVEY
-          q "Where is a foo?", :pick => :one, :help_text => 'Look around.', :reference_identifier => #{refid.inspect},
-            :data_export_identifier => 'X.FOO', :common_namespace => 'F', :common_identifier => 'f'
-          a_L 'To the left', :data_export_identifier => 'X.L', :common_namespace => 'F', :common_identifier => 'l'
-          a_R 'To the right', :data_export_identifier => 'X.R', :common_namespace => 'F', :common_identifier => 'r'
-          a_O 'Elsewhere', :string
-
-          dependency :rule => 'R'
-          condition_R :q_bar, "==", :a_1
-        SURVEY
-      end
-      let(:survey_text) {
-        <<-SURVEY
-          survey 'xyz' do
-            section 'Sole' do
-              q_bar "Should that other question show up?", :pick => :one
-              a_1 'Yes'
-              a_2 'No'
-
-              #{question_text('foo_solo')}
-
-              group do
-                #{question_text('foo_grouped')}
-              end
-            end
-          end
-        SURVEY
-      }
-      let(:survey) { Surveyor::Parser.new.parse(survey_text) }
-      let(:solo_question_json)    { json['sections'][0]['questions_and_groups'][1] }
-      let(:grouped_question_json) { json['sections'][0]['questions_and_groups'][2]['questions'][0] }
-
-      it "produces identical JSON except for API IDs and question reference identifers" do
-        solo_question_json['answers'].to_json.should be_json_eql( grouped_question_json['answers'].to_json).excluding("uuid", "reference_identifier")
-        solo_question_json['dependency'].to_json.should be_json_eql( grouped_question_json['dependency'].to_json).excluding("uuid", "reference_identifier")
-        solo_question_json.to_json.should be_json_eql( grouped_question_json.to_json).excluding("uuid", "reference_identifier")
-      end
-      it "produces the expected reference identifier for the solo question" do
-        solo_question_json['reference_identifier'].should == 'foo_solo'
-      end
-      it "produces the expected reference identifer for the question in the group" do
-        grouped_question_json['reference_identifier'].should == 'foo_grouped'
       end
     end
   end

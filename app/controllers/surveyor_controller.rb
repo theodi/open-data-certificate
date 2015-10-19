@@ -56,18 +56,6 @@ class SurveyorController < ApplicationController
     redirect_to edit_my_survey_path(redirect_options)
   end
 
-  def show
-    @survey = @response_set.survey
-    respond_to do |format|
-      format.html #{render :action => :show}
-      format.csv {
-        send_data(@response_set.to_csv, :type => 'text/csv; charset=utf-8; header=present',
-          :filename => "#{@response_set.updated_at.strftime('%Y-%m-%d')}_#{@response_set.access_code}.csv")
-      }
-      format.json
-    end
-  end
-
   def update
     if @response_set.published?
       return redirect_with_message(surveyor_index, :warning, t('surveyor.response_set_is_published'))
@@ -98,7 +86,7 @@ class SurveyorController < ApplicationController
             @response_set.publish!
             return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
           else
-            return redirect_with_message(surveyor_finish, :notice, t('surveyor.completed_survey'))
+            return redirect_with_message(dashboard_path, :notice, t('surveyor.completed_survey'))
           end
         end
       else
@@ -143,18 +131,6 @@ class SurveyorController < ApplicationController
     @update = true if params[:update]
   end
 
-  def export
-    surveys = Survey.where(:access_code => params[:survey_code]).order("survey_version DESC")
-    s = params[:survey_version].blank? ? surveys.first : surveys.where(:survey_version => params[:survey_version]).first
-    render_404 and return if s.blank?
-    @survey = s.filtered_for_json
-  end
-
-  def render_404
-    head :status => 404
-    true
-  end
-
   def start
     # this is an alternate view of the edit functionality,
     # with only the documentation url displayed
@@ -165,10 +141,6 @@ class SurveyorController < ApplicationController
 
   private
 
-
-  def surveyor_finish
-    dashboard_path
-  end
 
   def ensure_modifications_allowed
     unless @response_set.modifications_allowed?
@@ -216,10 +188,7 @@ class SurveyorController < ApplicationController
   end
 
   def surveyor_index
-    available_surveys_path
-  end
-  def surveyor_finish
-    available_surveys_path
+    root_path
   end
 
   def redirect_with_message(path, message_type, message)
