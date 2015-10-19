@@ -92,9 +92,6 @@
             .span4
               %a.btn.btn-large.btn-primary{href: 'start'} Edit
 
-
-    = render 'partials/dependents' unless @dependents.empty?
-
     = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 
 - content_for(:foot_scripts) do
