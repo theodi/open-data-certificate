@@ -18,15 +18,18 @@ OpenDataCertificate::Application.routes.draw do
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
 
     scope '/surveys' do
-      get '/:survey_code/:response_set_code/take', to: 'surveyor#edit', as: 'edit_my_survey'
-      put '/:survey_code/:response_set_code', to: 'surveyor#update', as: 'update_my_survey'
+      # Redirect old URLs that include a jurisdiction (survey_code)
+      match '/:survey_code/:response_set_code/(*path)', to: redirect('/%{locale}/surveys/%{response_set_code}/%{path}'), constraints: {survey_code: /[a-z]{2}/}
 
-      get '/:survey_code/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
-      post '/:survey_code/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
-      get '/:survey_code/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
+      get '/:response_set_code/take', to: 'surveyor#edit', as: 'edit_my_survey'
+      put '/:response_set_code', to: 'surveyor#update', as: 'update_my_survey'
 
-      get '/:survey_code/:response_set_code/start', :to => 'surveyor#start', as: 'survey_start'
-      get '/:survey_code/:response_set_code', :to => redirect('/surveys/%{survey_code}/%{response_set_code}/take', status: 302)
+      get '/:response_set_code/requirements', :to => 'surveyor#requirements', :as => 'view_my_survey_requirements'
+      post '/:response_set_code/continue', :to => 'surveyor#continue', :as => 'continue_my_survey'
+      get '/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
+
+      get '/:response_set_code/start', :to => 'surveyor#start', as: 'survey_start'
+      get '/:response_set_code', :to => redirect('/%{locale}/surveys/%{response_set_code}/take', status: 302)
 
       resources :jurisdictions, :only => :index
 

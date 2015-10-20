@@ -4,8 +4,7 @@ When /^I start the "([^"]*)" survey$/ do |name|
     Then I should see "#{name}\"
     When I press "Take it"
   }
-  @survey_code       = current_path.split("/")[2] # /surveys/:survey_code/:response_set_code/take
-  @response_set_code = current_path.split("/")[3] # /surveys/:survey_code/:response_set_code/take
+  @response_set_code = current_path.split("/")[2] # /surveys/:response_set_code/take
 end
 
 When /^I start the survey$/ do
@@ -13,8 +12,7 @@ When /^I start the survey$/ do
     When I go to the surveys page
       And I press "Take it"
   }
-  @survey_code       = current_path.split("/")[2] # /surveys/:survey_code/:response_set_code/take
-  @response_set_code = current_path.split("/")[3] # /surveys/:survey_code/:response_set_code/take
+  @response_set_code = current_path.split("/")[2] # /surveys/:response_set_code/take
 end
 
 When /^I start the survey in "(.*?)"$/ do |locale|
@@ -187,7 +185,7 @@ When /^I visit "(.*?)"$/ do |path|
 end
 
 Then /^I export the response set$/ do
-  visit "/surveys/#{@survey_code}/#{@response_set_code}.json"
+  visit "/surveys/#{@response_set_code}.json"
 end
 
 Then /^the JSON response at "(.*?)" should correspond to an answer with text "(.*?)"$/ do |path, text|

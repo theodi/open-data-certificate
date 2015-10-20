@@ -17,7 +17,7 @@ describe SurveyorController do
   context "#edit" do
     def do_get(params = {})
       survey.sections = [FactoryGirl.create(:survey_section, :survey => survey)]
-      get :edit, {:locale => 'en', :survey_code => "alpha", :response_set_code => "pdq"}.merge(params)
+      get :edit, {:locale => 'en', :response_set_code => "pdq"}.merge(params)
     end
     it "renders edit" do
       do_get
@@ -51,7 +51,7 @@ describe SurveyorController do
     let(:responses_ui_hash) { {} }
     let(:update_params) {
       {
-        :locale => 'en', :survey_code => "alpha",
+        :locale => 'en',
         :response_set_code => "pdq"
       }
     }

@@ -9,16 +9,15 @@ class SurveyorController < ApplicationController
   # it might be a *really* nice refactor to take this to response_set_controller#update
   # then we could use things like `form_for [surveyor, response_set] do |f|`
   def continue
-    if Survey::MIGRATIONS.has_key? params[:survey_code]
+    if Survey::MIGRATIONS.has_key?(@response_set.survey.access_code)
       # lets switch over to the new questionnaire
-      nxt = Survey::MIGRATIONS[params[:survey_code]]
+      nxt = Survey::MIGRATIONS[@response_set.survey.access_code]
 
       survey = Survey.newest_survey_for_access_code nxt
 
       unless survey.nil?
         switch_survey(survey)
       end
-
     elsif params[:juristiction_access_code]
       # they *actually* want to swap the jurisdiction
 
@@ -33,7 +32,7 @@ class SurveyorController < ApplicationController
       end
 
     elsif @response_set.survey.superseded?
-      latest_survey = Survey.newest_survey_for_access_code(params[:survey_code])
+      latest_survey = Survey.newest_survey_for_access_code(@response_set.survey.access_code)
       unless latest_survey.nil?
         switch_survey(latest_survey)
       end
@@ -44,7 +43,6 @@ class SurveyorController < ApplicationController
     end
 
     redirect_options = {
-      survey_code: @response_set.survey.access_code,
       response_set_code: @response_set.access_code
     }
     redirect_options[:anchor] = "q_#{params[:question]}" if params[:question]
