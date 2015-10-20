@@ -31,9 +31,11 @@ class SurveySection < ActiveRecord::Base
     end
   end
 
-  def questions_by_group
+  def questions_by_group_for_level(visible_question_ids)
+    group_questions = survey_questions.where('questions.id in (?)', visible_question_ids).eager_load(:question_group)
+
     initial = [nil, []]
-    survey_questions.eager_load(:question_group).inject([initial]) do |groups, question|
+    group_questions.inject([initial]) do |groups, question|
       group, questions = groups.last
       if group == question.question_group
         questions << question
@@ -43,4 +45,5 @@ class SurveySection < ActiveRecord::Base
       groups
     end
   end
+
 end
