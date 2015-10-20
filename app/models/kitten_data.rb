@@ -45,7 +45,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def assumed_us_public_domain?
-    data[:assumptions].include?(:us_public_domain)
+    data.fetch(:assumptions, []).include?(:us_public_domain)
   end
 
   def distributions
