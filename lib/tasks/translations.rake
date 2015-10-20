@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'translations'
-require_relative '../../config/environment'
 
 namespace :translations do
   task :update do
@@ -53,7 +52,8 @@ Should work on OSX
 
   SURVEY_LOCALE_FILES = Rake::FileList['surveys/generated/locales/surveys.*.yml']
 
-  JURISDICTIONS = Survey::JURISDICTION_LANGS.keys
+  JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
+  JURISDICTIONS = JURISDICTION_LANGS.keys
 
   rule %r{surveys/generated/locales/surveys\.[a-z]{2}\.yml} => [
     ->(file_name){
@@ -84,7 +84,7 @@ Should work on OSX
       raise ArgumentError, "valid jurisdictions are #{JURISDICTIONS.join(', ')}"
     end
     jurs = args.jurisdiction
-    langs = Survey::JURISDICTION_LANGS[jurs]
+    langs = JURISDICTION_LANGS[jurs]
     langs_except_en = langs - %w[en]
     Rake::Task["surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb"].invoke
     if langs_except_en.any?

@@ -113,7 +113,7 @@ module ApplicationHelper
   end
 
   def certificate_locale_links(jurisdiction)
-    locales = Survey::JURISDICTION_LANGS[jurisdiction]
+    locales = ::JURISDICTION_LANGS[jurisdiction]
     return unless locales.present?
 
     links = locales.map do |locale|

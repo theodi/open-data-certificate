@@ -7,3 +7,5 @@ I18n.load_path += Dir[Rails.root.join('surveys/generated/locales/*.yml')]
 I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 
 I18n.fallbacks.map('fr' => 'en')
+
+JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
