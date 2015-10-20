@@ -18,13 +18,6 @@ class Question < ActiveRecord::Base
   has_one :survey, :through => :survey_section, :inverse_of => :questions
   has_many :responses, :inverse_of => :question
 
-  LEVELS = {
-    'basic' => 1,
-    'pilot' => 2,
-    'standard' => 3,
-    'exemplar' => 4
-  }
-
   # either provided text_as_statement, or fall back to text
   def statement_text
     text_as_statement || text
