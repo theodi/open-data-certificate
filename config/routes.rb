@@ -29,7 +29,6 @@ OpenDataCertificate::Application.routes.draw do
       get '/:response_set_code/repeater_field/:question_id/:response_index/:response_group', :to => 'surveyor#repeater_field', :as => 'repeater_field'
 
       get '/:response_set_code/start', :to => 'surveyor#start', as: 'survey_start'
-      get '/:response_set_code', :to => redirect('/%{locale}/surveys/%{response_set_code}/take', status: 302)
 
       resources :jurisdictions, :only => :index
 
@@ -42,6 +41,9 @@ OpenDataCertificate::Application.routes.draw do
         post :resolve, on: :member
         put  :start, on: :member
       end
+
+      # Moved as the last rule in the scope so it doesn't catch 'jurisdictions#index', for example.
+      get '/:response_set_code', :to => redirect('/%{locale}/surveys/%{response_set_code}/take', status: 302)
     end
 
     post 'surveys', :to => 'main#start_questionnaire', :as => 'non_authenticated_start_questionnaire'
