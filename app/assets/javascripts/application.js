@@ -14,7 +14,6 @@
 //= require url
 
 //= require admin
-//= require campaigns
 //= require surveyor_all
 //= require tracking
 
