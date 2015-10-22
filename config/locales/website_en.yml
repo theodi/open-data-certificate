@@ -222,7 +222,7 @@ en:
         basic: Raw level
         pilot: Pilot level
         standard: Standard level
-        exemplar: Exemplar level
+        exemplar: Expert level
 
     community_verification_panel:
       title: Community verification
