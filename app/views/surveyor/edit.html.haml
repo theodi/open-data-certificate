@@ -30,15 +30,7 @@
                 = t('surveys.other_languages')
 
             %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
-          .span3.save-button
-            - if user_signed_in?
-              %button.btn.btn-primary.btn-large.pull-right{type: :submit, name: :finish}
-                %i.icon-loading.icon-spin.icon-refresh.icon-large
-                %span= t('surveyor.click_here_to_finish')
-            - else
-              =link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal"
-              - content_for(:modal_content) do
-                = render :partial => 'surveyor/save_and_finish_modal'
+          = render partial: 'surveyor/save_button'
 
   = render :partial => 'status_panel'
   = render :partial => 'shared/flashes'
@@ -93,6 +85,11 @@
               %a.btn.btn-large.btn-primary{href: 'start'}= t('surveys.edit_button')
 
     = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
+
+    .container
+      .row
+        .span9
+        = render partial: 'surveyor/save_button'
 
 - content_for(:foot_scripts) do
   :javascript
