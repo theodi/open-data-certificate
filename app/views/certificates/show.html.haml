@@ -52,7 +52,7 @@
       - if @certificate.published?
         %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
 
-      - elsif @certificate.auto_generated?
+      - if @certificate.auto_generated?
         %li=link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
 
     - content_for :modal_content do
