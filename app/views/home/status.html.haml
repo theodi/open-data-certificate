@@ -43,13 +43,27 @@
 
   %hr.heavy
 
-%h1 Published datasets with certificates
+%h1 Datasets with certificates
+%table.table.table-striped
+  %tr
+    - ['all', 'expired', 'this_month', 'publishers'].each do |a|
+      %th= a.humanize
 
-= render partial: "home/stats", locals: {type: "published"}
+    %th{rowspan: 5} Levels
 
-%h1 Published and draft datasets with certificates
+    - ['none', 'basic', 'pilot', 'standard', 'exemplar'].each do |level|
+      %th= level.humanize
 
-= render partial: "home/stats", locals: {type: "all"}
+  - if @published
+    %tr
+      %th Published
+      %td{colspan: 9}= link_to "get historic data", status_path(format: "csv", type: 'published')
+    = render partial: "home/stats", locals: {stats: @published}
+  - if @all
+    %tr
+      %th including Drafts
+      %td{colspan: 9}= link_to "get historic data", status_path(format: "csv", type: 'all')
+    = render partial: "home/stats", locals: {type: 'all', stats: @all}
 
 %p.data
   = link_to("Download legacy data", "legacy_stats.csv")
