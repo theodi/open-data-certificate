@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
   test "Question should have attributes we've added" do

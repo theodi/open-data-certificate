@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class AdminControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -42,7 +42,7 @@ class AdminControllerTest < ActionController::TestCase
 
     assert_response 403
   end
-  
+
   test "user search finds by email fragment" do
     sign_in @admin
     get :typeahead, q: @user.email.split('@').first

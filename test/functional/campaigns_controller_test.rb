@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CampaignsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -22,6 +22,15 @@ class CampaignsControllerTest < ActionController::TestCase
     campaign = FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
     get :show, id: campaign.id
     assert_response :success
+  end
+
+  test "creating a campaign enqueues a processing job" do
+    CertificateFactory::FactoryRunner.expects(:perform_async)
+    Sidekiq::Testing.fake! do
+      post :create, :certification_campaign => FactoryGirl.attributes_for(:certification_campaign)
+    end
+    campaign = CertificationCampaign.last
+    assert_redirected_to campaign_path(campaign, certificate_level: 'all')
   end
 
 end

@@ -35,6 +35,7 @@ en:
     autocompleted_url_warning: "We have automatically completed this URL, but it doesn't seem to be correct"
     metadata_missing: "Some of these items could not be found on the documentation page"
     question_comment: Ask for help with this question
+    question_comment_read_more:  Read more...
     override_explanation_title: Explanation
     autocomplete_explanation: Please explain the reasons why you have changed the automatically completed answer. This can help those using your data to understand it better.
     url_explanation: Please explain why this URL doesn't appear to be valid. This can help those using your data to understand it better.

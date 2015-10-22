@@ -17,10 +17,7 @@ class SurveyorController < ApplicationController
   # it might be a *really* nice refactor to take this to response_set_controller#update
   # then we could use things like `form_for [surveyor, response_set] do |f|`
   def continue
-    if params[:survey_locale]
-      @response_set.update_attribute :locale, params[:survey_locale]
-
-    elsif Survey::MIGRATIONS.has_key? params[:survey_code]
+    if Survey::MIGRATIONS.has_key? params[:survey_code]
       # lets switch over to the new questionnaire
       nxt = Survey::MIGRATIONS[params[:survey_code]]
 

@@ -7,6 +7,7 @@
 
 <xsl:variable name="countries" as="document-node()" select="doc('country_names_and_code_elements.xml')" />
 <xsl:key name="countries" match="ISO_3166-1_Country_name" use="../ISO_3166-1_Alpha-2_Code_element" />
+<xsl:param name="write-structure" select="false()" as="xs:boolean" />
 
 <xsl:template match="/">
 	<xsl:variable name="merged" as="document-node()">
@@ -17,11 +18,13 @@
 	<xsl:variable name="structure" as="element()">
 		<xsl:apply-templates select="$merged/questionnaire" mode="structure" />
 	</xsl:variable>
-	<xsl:result-document href="odc_structure.{questionnaire/@jurisdiction}.xml" indent="yes">
-		<xsl:copy-of select="$structure" />
-	</xsl:result-document>
+	<xsl:if test="$write-structure">
+		<xsl:result-document href="odc_structure.{questionnaire/@jurisdiction}.xml" indent="yes">
+			<xsl:copy-of select="$structure" />
+		</xsl:result-document>
+	</xsl:if>
 	<!-- Surveyor quesitionnaire description -->
-	<xsl:result-document href="odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
+	<xsl:result-document href="generated/surveyor/odc_questionnaire.{questionnaire/@jurisdiction}.rb" method="text">
 		<xsl:apply-templates select="$structure" mode="syntax" />
 	</xsl:result-document>
 	<!-- general sections translation strings -->
@@ -69,12 +72,6 @@
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
 		</xsl:attribute>
-		<translations>
-			<xsl:attribute name="en">default</xsl:attribute>
-			<xsl:for-each select="locales/locale">
-				<xsl:attribute name="{.}">translations/odc.<xsl:value-of select="../../@jurisdiction"/>.<xsl:value-of select="."/>.yml</xsl:attribute>
-			</xsl:for-each>
-		</translations>
 		<xsl:apply-templates select="group" mode="structure" />
 	</survey>
 </xsl:template>

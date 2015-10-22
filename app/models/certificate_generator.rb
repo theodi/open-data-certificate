@@ -86,10 +86,10 @@ class CertificateGenerator < ActiveRecord::Base
 
   def generate(jurisdiction, create_user, dataset = nil)
     unless response_set
-      build_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction))
-      # mass assignment protection avoidance
-      response_set.dataset = dataset if dataset
-      save!
+      create_response_set(survey: Survey.newest_survey_for_access_code(jurisdiction)) do |rs|
+        # dataset is protected against mass assignment
+        rs.dataset = dataset if dataset
+      end
     end
 
     # find the questions which are to be answered
@@ -98,24 +98,42 @@ class CertificateGenerator < ActiveRecord::Base
           .includes(:answers)
           .each {|question| answer question}
 
-    response_set.autocomplete(autocomplete_url)
+    response_set.autocomplete(autocomplete_url, true)
 
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
-    response_set.reload
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
 
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
+    else
+      response_set.update_missing_responses!
     end
 
     self.completed = true
-    save!
 
     certificate
+  ensure
+    # because the certificate_generators table has several indexes on it, it is
+    # possible for update queries to deadlock each other.  (MySQL updates are
+    # not truly atomic and wrapping it in a transaction will not help as it is
+    # about lock aquisition for each index row)
+    #
+    # The only solution is to retry the save query if a deadlock is detected
+    save_attempts = 0
+    begin
+      save!
+    rescue ActiveRecord::StatementInvalid => e
+      if e.message =~ /deadlock found/i && save_attempts < 10
+        save_attempts += 1
+        retry
+      else
+        raise
+      end
+    end
   end
 
   def determine_user(response_set, create_user)

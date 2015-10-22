@@ -25,7 +25,7 @@ Feature: Display information about campaigns in UI
     And CSV row 0 column "Success?" should be "true"
     And CSV row 0 column "Published?" should be "true"
     And CSV row 0 column "Documentation URL" should be "http://example.com/dataset"
-    And CSV row 0 column "Certificate URL" should be "http://www.example.com/datasets/1/certificates/1"
+    And CSV row 0 column "Certificate URL" should be "http://www.example.com/en/datasets/1/certificates/1"
     And CSV row 0 column "User" should be "api@example.com"
 
   Scenario: See missing questions

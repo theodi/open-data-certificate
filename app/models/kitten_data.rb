@@ -1,7 +1,8 @@
 class KittenData < ActiveRecord::Base
   belongs_to :response_set, inverse_of: :kitten_data
 
-  attr_accessible :data, :url, :response_set
+  attr_accessor :automatic
+  attr_accessible :data, :url, :response_set, :automatic
 
   serialize :data
 
@@ -14,7 +15,8 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk",
+    "http://www.usa.gov/publicdomain/label/1.0/" => "us_pd"
   }
 
   CONTENT_LICENCES = {
@@ -23,7 +25,8 @@ class KittenData < ActiveRecord::Base
     "http://creativecommons.org/publicdomain/zero/1.0/" => "cc_zero",
     "http://reference.data.gov.uk/id/open-government-licence" => "ogl_uk",
     "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" => "ogl_uk",
-    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk"
+    "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" => "ogl_uk",
+    "http://www.usa.gov/publicdomain/label/1.0/" => "us_pd"
   }
 
   KNOWN_LICENCES = ["odc_by", "odc_odbl", "odc_pddl", "cc_by", "cc_by_sa", "cc_zero", "ogl_uk"]
@@ -35,6 +38,14 @@ class KittenData < ActiveRecord::Base
 
   def source
     @dataset.try(:source) || {}
+  end
+
+  def source_extras
+    source.fetch("extras", {})
+  end
+
+  def assumed_us_public_domain?
+    data.fetch(:assumptions, []).include?(:us_public_domain)
   end
 
   def distributions
@@ -60,7 +71,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def compute_fields
-    return {} if data.blank?
+    return {} unless dataset.present?
 
     begin
       @fields = {}
@@ -73,6 +84,7 @@ class KittenData < ActiveRecord::Base
         notify_airbrake ex
       end
     end
+    save
 
     @fields
   end
@@ -169,10 +181,10 @@ class KittenData < ActiveRecord::Base
 
   def get_release_type
     # this is where data.gov.uk provides type of release
-    resource_type = source["extras"]["resource-type"] rescue nil
+    resource_type = source_extras["resource-type"]
 
     # data.gov uses extras["collection_metadata"] = "true" for collections.
-    is_collection = source["extras"]["collection_metadata"] == "true" rescue false
+    is_collection = source_extras["collection_metadata"] == "true"
     return "collection" if is_collection
 
     if ["service", "series"].include?(resource_type)
@@ -189,13 +201,13 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_service_type
-    return unless @fields["releaseType"] == "service"
+    return unless get_release_type == "service"
     @fields["serviceType"] = "changing" if data[:update_frequency].present?
   end
 
   def set_data_type
-    is_geographic = source["extras"]["metadata_type"] == "geospatial" rescue false
-    @fields["dataType"] = "geographic" if is_geographic
+    is_geographic = source_extras["metadata_type"] == "geospatial"
+    @fields["dataType"] = ["geographic"] if is_geographic
   end
 
   def set_basic_requirements
@@ -204,34 +216,35 @@ class KittenData < ActiveRecord::Base
     @fields["publisherOrigin"] = "true"
     @fields["dataPersonal"] = "not_personal"
     @fields["contentRights"] = "samerights"
-    @fields["codelists"] = "false"
-    @fields["vocabulary"] = "false"
   end
 
   def set_ckan_assumptions
-    # Assumptions for data.gov.uk
-    # also for data.london.gov.uk
-    # copied from dgu assumptions with confirmation from Ross Jones that they seemed sensible
-    # and data.gov
-    return unless %w[data.gov.uk data.london.gov.uk catalog.data.gov].include?(hostname)
+    # Assumptions for CKAN portals like
+    # data.gov.uk data.london.gov.uk catalog.data.gov
+    # base on assumptions with confirmation from Ross Jones that they seemed sensible
+    return unless dataset.publishing_format == :ckan
 
     @fields["copyrightURL"] = url
+    @fields["backups"] = "true"
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
-    @fields["listing"] = "#{uri.scheme}://#{hostname}"
+    @fields["listing"] ||= uri.merge("/").to_s
     @fields["versionManagement"] = ["list"]
-    @fields["versionsUrl"] = "http://#{hostname}/api/rest/package/#{package_name}"
+    @fields["versionsUrl"] = uri.merge("/api/rest/package/#{package_name}").to_s
+
+    if data[:licenses].any?
+      @fields["copyrightStatementMetadata"] ||= []
+      @fields["copyrightStatementMetadata"].push("dataLicense")
+    end
   end
 
   def set_data_gov_uk_assumptions
     return unless hostname == "data.gov.uk"
-    
-    @fields["improvementsContact"] = URI.join(url + "/", "feedback/view").to_s
-    
-    sla = source["extras"]["sla"] == "true" rescue false
-    
-    if sla
+
+    @fields["forum"] = url + "#comments-container"
+
+    if source_extras["sla"] == "true"
       @fields["slaUrl"] = url
       @fields["onGoingAvailability"] = "medium"
     end
@@ -252,15 +265,42 @@ class KittenData < ActiveRecord::Base
     end
   end
 
+  def set_listing
+    if org = source['organization']
+      case hostname
+      when "data.gov.uk"
+        @fields["listing"] = uri.merge("/publisher/#{org['name']}")
+      when "catalog.data.gov"
+        @fields["listing"] = uri.merge("/organization/#{org['name']}")
+      end
+    end
+  end
+
   def data_gov_federal_assumptions
-    @fields["dataLicence"] = "other"
-    @fields["contentLicence"] = "other"
-    @fields["otherDataLicenceName"] = "U.S. Government Work"
-    @fields["otherDataLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
-    @fields["otherDataLicenceOpen"] = "true"
-    @fields["otherContentLicenceName"] = "U.S. Government Work"
-    @fields["otherContentLicenceURL"] = "http://www.usa.gov/publicdomain/label/1.0/"
-    @fields["otherContentLicenceOpen"] = "true"
+    # usGovData: if the data was created by a federal agency then it is
+    # automatically in the public domain according to US copyright law
+
+    # internationalDataLicence: we assume internationally that cc-zero is
+    # appropriate as the license as that is in the spirit of the US Open Data
+    # policy
+    # https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf
+    # we assume public domain if the license is not specified or set to one of
+    # the two public domain fields that catalog.data.gov uses (us-pd or
+    # other-pd).
+
+    @fields["usGovData"] = "true"
+
+    licenses = data[:licenses]
+    is_public_domain = licenses.any? do |license|
+      %w[notspecified us-pd other-pd cc-zero].include?(license.id)
+    end
+
+    if automatic? && (licenses.empty? || is_public_domain)
+      @fields['internationalDataLicence'] = 'cc_zero'
+      @fields['internationalContentRights'] = 'samerights'
+      @fields['contentLicence'] = 'cc_zero'
+      data[:assumptions] << :us_public_domain
+    end
   end
 
   def set_structured_open
@@ -352,7 +392,7 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_codelists
-    codelists = source["codelist"] || source["extras"]["codelist"]
+    codelists = source["codelist"] || source_extras["codelist"]
     @fields["codelists"] = "true" if codelists.present?
     @fields["codelistDocumentationUrl"] = codelists[0]["url"]
   rescue NoMethodError
@@ -360,12 +400,16 @@ class KittenData < ActiveRecord::Base
   end
 
   def set_schema
-    schema = source["schema"] rescue nil
+    schema = source["schema"]
     resource_schemas = original_resources.select { |r| r["schema-url"].present? }
     @fields["vocabulary"] = "true" if schema.present? || resource_schemas.present?
   end
 
   private
+  def automatic?
+    !!@automatic
+  end
+
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
   end
@@ -392,10 +436,13 @@ class KittenData < ActiveRecord::Base
         :temporal_coverage => dataset_field(:temporal),
         :spatial_coverage  => dataset_field(:spatial),
         :language          => dataset_field(:language),
-        :distributions     => distributions
+        :distributions     => distributions,
+        :assumptions => []
       }
     else
-      self.data = {}
+      self.data = {
+        :assumptions => []
+      }
     end
   end
 

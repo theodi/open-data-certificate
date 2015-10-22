@@ -12,6 +12,22 @@
 This code is open source under the MIT license. See the LICENSE.md file for
 full details.
 
+
+### Running
+
+```bash
+# this will setup a default admin user (test@example.com) and
+# load the GB survey
+bin/setup
+bundle exec rails s
+
+# to include some other jurisdictions
+rake surveyor:build_changed_surveys LIMIT=5
+```
+
+This will give you a default login of test@example.com/testtest.
+
+
 ### API
 
 Certificates can be created and updated using the JSON API.
@@ -250,19 +266,6 @@ In the translation file (eg. surveys/translations/my-file.es.yml)
 * set the locale name with `es: Spanish` (where 'es' was the reference given in the survey file)
 
 There is an example of adding a translation on [this gist](https://gist.github.com/benfoxall/c35ad597fd2c2d7fcdc6#file-0002-manually-corrected-translation-yaml-patch)
-
-
-### Running
-
-```bash
-# this will setup a default admin user (test@example.com) and
-# load the GB survey
-bin/setup
-bundle exec rails s
-
-# to include some other jurisdictions
-rake surveyor:build_changed_surveys LIMIT=5
-```
 
 
 #### Development things

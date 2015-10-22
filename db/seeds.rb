@@ -7,5 +7,5 @@ admin = User.where(admin: true).create!(
 )
 admin.confirm!
 
-builder = SurveyBuilder.new('surveys', 'odc_questionnaire.GB.rb')
+builder = SurveyBuilder.new('surveys/generated/surveyor', 'odc_questionnaire.GB.rb')
 builder.perform

@@ -21,17 +21,15 @@ namespace :surveyor do
 
   task :build, [:jurisdiction] => [:environment] do |t, args|
     jurs = args.jurisdiction
-    translations = Rake::FileList.new("surveys/translations/odc.#{jurs}.*.yml")
-    translations.each { |t| Rake::Task[t].invoke }
     unless jurs
       raise ArgumentError, "use surveyor:build[jurisdiction] to specify jurisdiction"
     end
-    SurveyBuilder.new('surveys', "odc_questionnaire.#{jurs}.rb").perform
+    SurveyBuilder.new('surveys/generated/surveyor', "odc_questionnaire.#{jurs}.rb").perform
   end
 
-  desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys`)'
+  desc 'Iterate all surveys and parse those that have changed since last build (Specify DIR=your/surveys to choose folder other than `surveys/generated/surveyor`)'
   task :build_changed_surveys => :environment do
-    dir = ENV['DIR'] || 'surveys'
+    dir = ENV['DIR'] || 'surveys/generated/surveyor'
     limit = (ENV['LIMIT'] || '10000').to_i
 
     files = Dir.entries(Rails.root.join(dir)).select { |file| file =~ /.*\.rb/ }
@@ -63,7 +61,7 @@ namespace :surveyor do
   task :enqueue_surveys => :environment do
     DevEvent.create message: "surveyor:enqueue_surveys"
 
-    dir = ENV['DIR'] || 'surveys'
+    dir = ENV['DIR'] || 'surveys/generated/surveyor'
     files = Dir.entries(Rails.root.join(dir)).select { |file| file =~ /.*\.rb/ }
 
     files.each do |file|

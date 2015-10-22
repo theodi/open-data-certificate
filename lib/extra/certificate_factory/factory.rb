@@ -1,19 +1,22 @@
 module CertificateFactory
 
   class HTTPFactory
+    include Enumerable
     include HTTParty
 
     attr_reader :count
 
     def initialize(options)
       options.symbolize_keys!
-      @user_id = options[:user_id]
+      # starting options
+      @campaign = CertificationCampaign.find(options[:campaign_id])
+      @user_id = @campaign.user
+      @jurisdiction = @campaign.jurisdiction
+      @feed = @campaign.url
+
+      # continuation options
+      @count = options.fetch(:count, 0).to_i
       @limit = options[:limit].nil? ? nil : options[:limit].to_i
-      @campaign = options[:campaign]
-      @count = 0
-      @logger = options[:logger]
-      @jurisdiction = options[:jurisdiction]
-      @feed = options[:feed]
     end
 
     def url
@@ -34,21 +37,19 @@ module CertificateFactory
     end
 
     def each
-      loop do
-        feed_items.each do |item|
-          yield item
-          @count += 1
-          return if over_limit?
-        end
-        return unless fetch_next_page
+      feed_items.each do |item|
+        yield item
+        @count += 1
+        return if over_limit?
       end
+      fetch_next!
     end
 
     def response
       @response || fetch_response!
     end
 
-    def fetch_response!(url=url)
+    def fetch_response!
       @response = self.class.get(url)
     end
 
@@ -56,28 +57,45 @@ module CertificateFactory
       @limit && @limit <= @count
     end
 
-    def fetch_next_page
-      url = next_page
-      if url
-        @logger.debug "feed: #{url}" if @logger
-        fetch_response!(url)
-      else
-        return false
+    def next_options
+      { campaign_id: @campaign.id, factory: self.class.name, count: @count }
+    end
+
+    def fetch_next!
+      if fetch_next?
+        CertificateFactory::FactoryRunner.perform_async(next_options)
       end
+    end
+
+    def factory_name
+      self.class.name.split('::').last
     end
 
   end
 
   class AtomFactory < HTTPFactory
-
     format :xml
+
+    def initialize(options)
+      super
+      @feed = options.fetch(:feed, @feed)
+    end
 
     def feed_items
       [response["feed"]["entry"]].flatten # In case there is only one feed item
     end
 
+    def next_options
+      super.merge(feed: next_page)
+    end
+
+    def fetch_next?
+      next_page.present?
+    end
+
     def next_page
-      response["feed"]["link"].find { |l| l["rel"] == "next" }["href"] rescue nil
+      rel_next = response["feed"]["link"].find { |l| l["rel"] == "next" }
+      rel_next['href'] if rel_next
     end
 
     def get_dataset_url(item)
@@ -92,12 +110,12 @@ module CertificateFactory
 
     def initialize(options)
       super
-      @rows = options.fetch(:row_size, 20)
-      @start = 0
+      @rows = options.fetch(:rows, 20)
+      @params = options.fetch(:params, {})
     end
 
     def url
-      build_url("api/3/action/package_search", 'rows' => @rows)
+      build_url("api/3/action/package_search", 'rows' => @rows, 'start' => @count)
     end
 
     def feed_items
@@ -108,7 +126,7 @@ module CertificateFactory
       end
     end
 
-    def count
+    def result_count
       if response['success']
         response['result']['count']
       else
@@ -118,18 +136,17 @@ module CertificateFactory
 
     def build_url(path, params={})
       u = uri + path
-      qs = CGI.parse(u.query.to_s).merge(params)
+      qs = CGI.parse(u.query.to_s).merge(@params).merge(params)
       u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
       return u.to_s
     end
 
-    def next_page
-      build_url("api/3/action/package_search", 'rows' => @rows, 'start' => @start)
+    def next_options
+      super.merge(count: @count, rows: @rows, params: @params)
     end
 
-    def fetch_next_page
-      @start += feed_items.count
-      super if @start < count
+    def fetch_next?
+      @count < result_count
     end
 
     def get_dataset_url(resource)

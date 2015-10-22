@@ -4,7 +4,8 @@
   .span8
     %h1 Just one thing before we begin… <strong>thank you</strong>!
 
-    %h2 When people have better access to open data, they can make insightful decisions and innovate to improve society, their environment, our economies, and change the world with their ideas. That’s what we aim for in <a href="http://www.theodi.org/about">our mission</a>. Your effort helps everyone.
+    %h2
+      When people have better access to open data, they can make insightful decisions and innovate to improve society, their environment, our economies, and change the world with their ideas. That’s what we aim for in #{link_to('our mission', about_page_path)}. Your effort helps everyone.
 
     %h3 What does ‘better access’ mean?
 
@@ -24,8 +25,8 @@
     %p For example, answer only questions marked ‘Pilot’ and you gain yourself a Pilot open data certificate. Next you publish your open data certificate along with your open data and say “<em>look at how much effort we put into publishing this</em>” to people who better understand how to use it.
 
     %p
-      = link_to('See what you will be asked', '/overview', :class => ['btn', 'btn-large'])
-      = link_to('See an example certificate', dataset_latest_certificate_path(example_dataset), :class => ['btn', 'btn-large'])
+      = link_to('See what you will be asked', overview_page_path, :class => ['btn', 'btn-large'])
+      = example_certificate_link
 
     %h3 A seal of approval that helps deliver knowledge for everyone
 
@@ -46,3 +47,9 @@
     %p Will it be you?
 
     %p= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: 'Create an Open Data Certificate'})
+
+    %hr.supporter-divider
+
+    .supporter
+      =image_tag "3rd-party/open-data-monitor-logo-100x100.png"
+      .caption Development of this tool was partly supported by the OpenDataMonitor project, co-funded by the European Commission under the Seventh Framework Programme (FP7 2007-2013).

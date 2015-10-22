@@ -3,7 +3,7 @@ class CertificatesController < ApplicationController
 
   before_filter(:except => [:legacy_show, :certificate_from_dataset_url]) { get_certificate }
   before_filter(:only => [:show]) { alternate_formats [:json] }
-  before_filter(:only => [:show, :badge]) { readable? }
+  before_filter(:only => [:show, :badge, :embed]) { readable? }
   before_filter(:only => [:badge]) { log_embed }
   before_filter :authenticate_user!, only: :report
 

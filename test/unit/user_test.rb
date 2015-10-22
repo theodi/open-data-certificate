@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
@@ -111,6 +111,16 @@ class UserTest < ActiveSupport::TestCase
 
   test "not agreeing to terms prevents saving" do
     refute User.new(email: 'robyn@example.com', password: 'password', agreed_to_terms: false).valid?
+  end
+
+  test "can create a user with a valid locale" do
+    assert User.new(email: 'robyn@example.com', password: 'password', preferred_locale: 'en').valid?
+  end
+
+  test "can not create a user with a bad locale" do
+    user = User.new(email: 'robyn@example.com', password: 'password')
+    user.preferred_locale = 'moon'
+    refute user.valid?
   end
 
 end

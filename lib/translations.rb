@@ -31,10 +31,16 @@ module Translations
 
   module Merge
     module_function
-    def merge(a, b, out)
-      input_a, input_b = YAML.load_file(a), YAML.load_file(b)
-      deep_merge!(input_a, input_b)
-      File.open(out, 'w:utf-8') { |f| f.write(YAML.dump(input_a)) }
+    def merge(out_file, input_files)
+      merged_output = input_files.reduce({}) do |memo, input_file|
+        deep_merge!(memo, YAML.load_file(input_file))
+        memo
+      end
+
+      locale = merged_output.keys.first
+      merged_output = {locale => {'surveyor' => merged_output[locale]}}
+
+      File.open(out_file, 'w:utf-8') { |f| f.write(YAML.dump(merged_output)) }
     end
 
     #TODO: replace with Hash#deep_merge on upgrade to activesupport >= 4
@@ -43,7 +49,7 @@ module Translations
         this_value = hash[current_key]
         hash[current_key] = if this_value.is_a?(Hash) && other_value.is_a?(Hash)
           deep_merge!(this_value, other_value)
-        elsif hash.key?(current_key)
+        elsif this_value.is_a?(Array) && other_value.is_a?(Array)
           this_value + other_value
         else
           other_value

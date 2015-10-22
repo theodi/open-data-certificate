@@ -1,9 +1,33 @@
 [main]
 host = https://www.transifex.com
 
+[certificates.website]
+file_filter = config/locales/website_<lang>.yml
+source_file = config/locales/website_en.yml
+source_lang = en
+type = YML
+
+[certificates.surveyor]
+file_filter = config/locales/surveyor_<lang>.yml
+source_file = config/locales/surveyor_en.yml
+source_lang = en
+type = YML
+
 [certificates.questionnaire-general]
 file_filter = surveys/translations/questionnaire.general.<lang>.yml
 source_file = surveys/translations/questionnaire.general.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-cz]
+file_filter = surveys/translations/questionnaire.jurisdiction.CZ.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.CZ.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-de]
+file_filter = surveys/translations/questionnaire.jurisdiction.DE.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.DE.en.yml
 source_lang = en
 type = YML
 
@@ -13,8 +37,32 @@ source_file = surveys/translations/questionnaire.jurisdiction.GB.en.yml
 source_lang = en
 type = YML
 
-[certificates.questionnaire-jurisdiction-cz]
-file_filter = surveys/translations/questionnaire.jurisdiction.CZ.<lang>.yml
-source_file = surveys/translations/questionnaire.jurisdiction.CZ.en.yml
+[certificates.questionnaire-jurisdiction-gr]
+file_filter = surveys/translations/questionnaire.jurisdiction.GR.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.GR.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-it]
+file_filter = surveys/translations/questionnaire.jurisdiction.IT.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.IT.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-mx]
+file_filter = surveys/translations/questionnaire.jurisdiction.MX.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.MX.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-ro]
+file_filter = surveys/translations/questionnaire.jurisdiction.RO.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.RO.en.yml
+source_lang = en
+type = YML
+
+[certificates.questionnaire-jurisdiction-tw]
+file_filter = surveys/translations/questionnaire.jurisdiction.TW.<lang>.yml
+source_file = surveys/translations/questionnaire.jurisdiction.TW.en.yml
 source_lang = en
 type = YML

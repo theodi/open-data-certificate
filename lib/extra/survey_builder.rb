@@ -1,41 +1,20 @@
 # for building surveys from delayed job
 class SurveyBuilder < Struct.new(:dir, :basename)
 
-  def surveyor_override!
-    require 'surveyor/parser'
-    SurveyorParserSurveyTranslationMethods.module_eval do
-      def parse_and_build(context, args, original_method, reference_identifier)
-        dir = Surveyor::Parser.options[:filename].nil? ? Dir.pwd : File.dirname(Surveyor::Parser.options[:filename])
-        # build, no change in context
-        args[0].each do |k,v|
-          case v
-          when Hash
-            trans = YAML::dump(v)
-          when String
-            translations = YAML::load_file(File.join(dir,v))
-            trans = YAML::dump(translations[k.to_s])
-          when :default
-            trans = YAML::dump({})
-          end
-          context[:survey].translations << self.class.new(:locale => k.to_s, :translation => trans)
-        end
-      end
-    end
-  end
-
   def perform
-    surveyor_override!
-
     survey_parsing = SurveyParsing.find_or_create_by_file_name("#{dir}/#{basename}")
     survey_parsing.md5 = Digest::MD5.hexdigest(file_contents)
 
-    @changed = survey_parsing.changed? && survey_parsing.save
+    changed = survey_parsing.changed? && survey_parsing.save
 
-    record_event "SurveyBuilder: #{dir}/#{basename} - #{@changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
+    record_event "SurveyBuilder: #{dir}/#{basename} - #{changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
 
-    parse_file.set_expired_certificates if @changed
+    if changed
+      survey = parse_file
+      survey.set_expired_certificates
+    end
 
-    @changed
+    changed
   end
 
   def build_priority

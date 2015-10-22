@@ -1,10 +1,10 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class MainControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   test "homepage" do
-    get :home
+    get :home, locale: 'en'
     assert_response 200
   end
 
@@ -37,26 +37,32 @@ class MainControllerTest < ActionController::TestCase
     assert_response 200
 
     html = Nokogiri::HTML response.body
+    heading_indexes = Hash[html.css('table tr:first-child th').each_with_index.map {|n, i| [n.text.downcase, i+1]}]
+    published_row = ->(index) { html.css("table tr:nth-child(3) td:nth-child(#{index})").text }
+    all_row = ->(index) { html.css("table tr:nth-child(5) td:nth-child(#{index})").text }
+    # the rowspan of the levels heading offets the count by one for levels
+    published_level = ->(index) { published_row.call(index-1) }
+    all_level = ->(index) { all_row.call(index-1) }
 
-    assert_match /#{all.all}/, html.css('.all-all').first.text
-    assert_match /#{all.expired}/, html.css('.all-expired').first.text
-    assert_match /#{all.publishers}/, html.css('.all-publishers').first.text
-    assert_match /#{all.this_month}/, html.css('.all-this_month').first.text
-    assert_match /#{all.level_none}/, html.css('.all-none').first.text
-    assert_match /#{all.level_basic}/, html.css('.all-basic').first.text
-    assert_match /#{all.level_pilot}/, html.css('.all-pilot').first.text
-    assert_match /#{all.level_standard}/, html.css('.all-standard').first.text
-    assert_match /#{all.level_exemplar}/, html.css('.all-exemplar').first.text
+    assert_equal all.all.to_s, all_row.call(heading_indexes['all'])
+    assert_equal all.expired.to_s, all_row.call(heading_indexes['expired'])
+    assert_equal all.publishers.to_s, all_row.call(heading_indexes['publishers'])
+    assert_equal all.this_month.to_s, all_row.call(heading_indexes['this month'])
+    assert_equal all.level_none.to_s, all_level.call(heading_indexes['none'])
+    assert_equal all.level_basic.to_s, all_level.call(heading_indexes['basic'])
+    assert_equal all.level_pilot.to_s, all_level.call(heading_indexes['pilot'])
+    assert_equal all.level_standard.to_s, all_level.call(heading_indexes['standard'])
+    assert_equal all.level_exemplar.to_s, all_level.call(heading_indexes['exemplar'])
 
-    assert_match /#{published.all}/, html.css('.published-all').first.text
-    assert_match /#{published.expired}/, html.css('.published-expired').first.text
-    assert_match /#{published.publishers}/, html.css('.published-publishers').first.text
-    assert_match /#{published.this_month}/, html.css('.published-this_month').first.text
-    assert_match /#{published.level_none}/, html.css('.published-none').first.text
-    assert_match /#{published.level_basic}/, html.css('.published-basic').first.text
-    assert_match /#{published.level_pilot}/, html.css('.published-pilot').first.text
-    assert_match /#{published.level_standard}/, html.css('.published-standard').first.text
-    assert_match /#{published.level_exemplar}/, html.css('.published-exemplar').first.text
+    assert_equal published.all.to_s, published_row.call(heading_indexes['all'])
+    assert_equal published.expired.to_s, published_row.call(heading_indexes['expired'])
+    assert_equal published.publishers.to_s, published_row.call(heading_indexes['publishers'])
+    assert_equal published.this_month.to_s, published_row.call(heading_indexes['this month'])
+    assert_equal published.level_none.to_s, published_level.call(heading_indexes['none'])
+    assert_equal published.level_basic.to_s, published_level.call(heading_indexes['basic'])
+    assert_equal published.level_pilot.to_s, published_level.call(heading_indexes['pilot'])
+    assert_equal published.level_standard.to_s, published_level.call(heading_indexes['standard'])
+    assert_equal published.level_exemplar.to_s, published_level.call(heading_indexes['exemplar'])
   end
 
   test "status shows correct number of embedded certificates" do
@@ -112,7 +118,7 @@ class MainControllerTest < ActionController::TestCase
 
   test "start_questionnaire with app default jurisdiction" do
 
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert assigns(:response_set).survey == @survey_app_default
 
   end
@@ -120,14 +126,14 @@ class MainControllerTest < ActionController::TestCase
   test "start_questionnaire with user default_jurisdiction set" do
 
     sign_in FactoryGirl.create(:user, default_jurisdiction: 'user_default')
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert assigns(:response_set).survey == @survey_user_default
 
   end
 
   test "start_questionnaire with custom param" do
 
-    post :start_questionnaire, survey_access_code: 'other'
+    post :start_questionnaire, locale: 'en', survey_access_code: 'other'
     assert assigns(:response_set).survey == @survey_other
 
   end
@@ -135,7 +141,7 @@ class MainControllerTest < ActionController::TestCase
   test "start_questionnaire entities belongs to user" do
     sign_in @user = FactoryGirl.create(:user)
 
-    post :start_questionnaire
+    post :start_questionnaire, locale: 'en'
     assert_equal assigns(:response_set).user_id, @user.id, "response set belongs to user"
     assert_equal assigns(:dataset).user_id, @user.id, "dataset belongs to user"
   end

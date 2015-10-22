@@ -1,0 +1,381 @@
+cs:
+  choose_legislation: vyberte si legislativu
+  alpha_note: Toto je alfa verze certifikátu otevřených dat. Přivítáme připomínky k obsahu i použitelnosti dotazníku – můžete je posílat e-mailem na certificate@theodi.org. Díky!
+  menu:
+    browse_all_certificates: Zobrazit všechny certifikáty
+    create_certificate: Vytvořit nový certifikát
+    my_certificates: Moje certifikáty
+    discussion: Diskuze
+    about: O projektu
+    admin: Administrace
+  footmenu:
+    cookies: Prohlášení o cookies
+    feedback: Napište nám
+    privacy: Ochrana osobních údajů
+    about: O projektu
+    discussion: Diskuze
+    get_in_touch: Napište nám
+    terms: Podmínky použití
+    odi_name: Open Data Institute
+    company_title: IČ
+    vat_title: DPH
+    cc_title: licencováno pod Creative Commons
+  levels:
+    none:
+      title: bez úrovně
+      title_with_level: bez úrovně
+      description: Datová sada nesplňuje základní požadavky na otevřená data.
+    basic:
+      title: Základní
+      title_with_level: základní úroveň
+      description: Datová sada splňuje základní požadavky na otevřená data.
+    pilot:
+      title: Pilot
+      title_with_level: úroveň Pilot
+      description: Vydavatel těchto dat kromě základních podmínek poskytuje netriviální podporu a reaguje na připomínky uživatelů.
+    standard:
+      title: Standard
+      title_with_level: úroveň Standard
+      description: Otevřená data s robustní podporou, na kterou se uživatelé mohou spolehnout.
+    exemplar:
+      title: Expert
+      title_with_level: úroveň Expert
+      description: Tato data jsou výjimečnou ukázkou informační infrastruktury.
+  level_descriptions:
+    basic: 'Dobrý základ v publikování otevřených dat.'
+    pilot: 'Vydavatel dat poskytuje uživatelům podporu a reaguje na jejich připomínky.'
+    standard: 'Dlouhodobě udržovaná otevřená data s podporou, na kterou se uživatelé mohou spolehnout.'
+    exemplar: 'Výjimečná ukázka informační infrastruktury.'
+  requirement_levels:
+    basic: základní úroveň
+    pilot: úroveň Pilot
+    standard: úroveň Standard
+    exemplar: úroveň Expert
+  required_for_level: Tato otázka je pro %{level} povinná.
+  required_for_level_and_above: Pro %{level} nebo vyšší je tato otázka povinná.
+  statuses:
+    alpha:
+      title: Alfa
+      about: "Tento certifikát ještě není úplně lokalizovaný. Přivítáme připomínky k jeho obsahu i použitelnosti – můžete jeposílat e-mailem na certificate@theodi.org. Díky!"
+    beta:
+      title: Beta
+      about: "Tento certifikát je lokalizovaný a právě prochází závěrečným testováním. Projděte si ho prosím a vyzkoušejte, jestli funguje tak, jak byste potřebovali. Pokud ne, ozvěte se prosím na certificate@theodi.org. Díky!"
+    final:
+      title: Ostrá verze
+      about: "Tento certifikát prošel testováním a měl by bez problémů fungovat, ale kdybyste narazili na problémy, napište prosím na certificate@theodi.org."
+  questionnaire_header: 'Každá otevřená data jsou dobrá, ale některá jsou lepší. Díky této aplikaci dostanete certifikát, který uživatelům výrazně pomůže v práci s vašimi daty.'
+  questionnaire_footer: ' Zlepšujeme vaše otevřená data'
+  questionnaire_footer_extra: Každý pokrok v publikování vašich dat zvyšuje jejich užitečnost pro uživatele.
+  help: Nápověda
+  dashboard:
+    archived: Archivované
+    edit_and_publish: Upravit a zveřejnit
+    embed_code: Kód pro vložení na web
+    page_title: Moje certifikáty
+    latest_published_certificate: Naposledy publikovaný certifikát
+    no_certificates_to_show: Žádné certifikáty ještě nemáte.
+    previous_versions: Předchozí verze
+    start_new_certificate: Založit nový certifikát
+    view_certificate: Zobrazit certifikát
+    how_do_i_improve_my_open_data: Jak můžete svá otevřená data zlepšit?
+    confirm_deletion: Opravdu chcete tento certifikát smazat?
+    confirm_deletion_dialog_title: Smazat certifikát?
+    deleted_response_set: Dotazník byl smazán
+    unable_to_publish_response_set_invalid: Před zveřejněním certifikátu je potřeba zodpovědět všechny povinné otázky.
+    unable_to_access_response_set: Dotazník nejde otevřít
+    published_response_set: Zveřejněný dotazník
+    publish_certificate: Zveřejnit
+    embed: Kód pro vložení na web
+    improvements_link: Jak se tato data dají zlepšit?
+    level_attained: 'Dosažená úroveň:'
+    current_status: Aktuální stav
+    last_updated_at: 'Poslední aktualizace: %{time_span} nazpět'
+    jurisdiction: jurisdikce
+    popover:
+      about_jurisdiction: 'Dotazník byl vyplněn pro jurisdikci „%{jurisdiction}“.'
+      change_jurisdiction: Přepnout jurisdikci těchto dat
+    states:
+      draft: Koncept
+      published: Veřejný
+      archived: V archivu
+      superseded: Stará verze
+    expiring_states:
+      expired: Vypršel
+      expiring: 'Vyprší za %{days} dní'
+    verification: Způsob ověření
+    expiring_certificates: Některé z vašich certifikátů by potřebovaly aktualizovat na nejnovější verzi dotazníku.
+    updated_response_set: Certifikát byl aktualizován
+  main:
+    comment:
+      discussion: Diskuze
+      markdown_help: Nápověda pro Markdown
+  homepage:
+    log_in: Přihlásit
+    dont_have_an_account: Nemáte u nás účet?
+    register_later_message: Nevadí, zaregistrovat se a uložit rozdělanou práci můžete později.
+    continue_without_registering: Pokračovat bez registrace
+    creating_questionnaire: Zakládám nový dotazník…
+    create_an_account: Založit účet
+    title: Certifikujte svá otevřená data
+    tagline: Ukažte, jak snadno se dají <strong>najít,</strong> <strong>použít</strong> a <strong>sdílet</strong>
+    start_new_certificate: Vytvořit certifikát
+    browse_certificates: Zobrazit certifikáty
+    browse_all_new_certificates: Zobrazit všechny certifikáty
+    how_it_works: Jak to funguje
+    fill_out_questionnaire:
+      title: Publikujte svá data
+      description: Dobrá zpráva je, že tenhle krok už nejspíš máte za sebou (nebo brzy budete mít). Teď ještě zbývá jen usnadnit jejich hledání, použití a sdílení.
+    generate_certificate:
+      title: Zkontrolujte je naším dotazníkem
+      description: Dotazník funguje jako průvodce, který vám pomocí konkrétních, jasně definovaných cílů pomůže zvýšit kvalitu vašich otevřených dat.
+    share_open_data:
+      title: Pochlubte se certifikátem
+      description: Na základě odpovědí v dotazníku vám vygenerujeme certifikát otevřených dat. I tou nejnižší úrovní certifikátu se můžete pochlubit jako lídr v oblasti otevřených dat.
+    about_certificate:
+      title: Jak takový certifikát vypadá?
+      description: V nejjednodušší podobě jde o grafický odznáček, který odkazuje na podrobnější popis vašich otevřených dat. V něm se pak zájemci například dozví, jak často data aktualizujete, v jakém jsou formátu, nebo kdo přesně je vydal.
+      link: Zajímají vás podrobnosti?
+    about_odi:
+      title: Kdo je ODI?
+      description: '%{odi_name_link} je britská nezisková organizace, která se specializuje na tvorbu, zpracování a sdílení otevřených dat.'
+      odi_name: Open Data Institute
+      link: Napište nám!
+    international_reach:
+      title: Které státy certifikát podporuje?
+      description: Různé státy mají různé právní podmínky, takže i certifikát otevřených dat se může lišit. Vyberte si stát, ve kterém byste chtěli svá data certifikovat.
+      auto_advance: Přepínat státy automaticky
+      legend:
+        legend: Legenda
+        alpha: Certifikace ve verzi alfa
+        beta: Certifikace ve verzi beta
+        final: Certifikace v ostrém provozu
+  certificates:
+    certificates: Certifikáty
+    curated_by: Kurátor
+    last_updated: Naposledy aktualizováno
+    latest_certificates: Nejnovější certifikáty
+    no_certificates_found: Nebyly nalezeny žádné odpovídající certifikáty.
+    view_certificate: Zobrazit
+    embed_this_on_your_site: Vložte si certifikát na svůj web
+    search:
+      search_label: hledat v certifikátech
+      submit_search: Hledej
+      advanced_search: Rozšířené hledání
+      datahub: Filtrovat podle domény
+      level: Filtrovat podle úrovně
+      levels:
+        basic: základní úroveň
+        pilot: úroveň Pilot
+        standard: úroveň Standard
+        exemplar: úroveň Expert
+    community_verification_panel:
+      title: Ověření certifikátu komunitou
+      description: Správnost údajů na tomto certifikátu může ověřit kdokoliv.
+      status: 'Aktuální způsob ověření: **%{certification}**'
+      status_self_certified: Pokud ho ověří ještě aspoň dva další lidé, označíme ho jako ověřený komunitou.
+      verify_certificate: Ověřit certifikát
+      verified: Ověřený
+      undo: Zpět
+      sign_in: Přihlašte se,
+      sign_in_text: pak můžete certifikát ověřit nebo nahlásit.
+      certifiers: "Počet lidí, kteří tento certifikát ověřili: **%{count}**"
+      person:  
+    report:
+      heading: Nahlásit chybu v certifikátu
+      intro: "Co přesně je na tomto certifikátu („%{name}“) špatně?"
+      report: "Nahlásit certifikát"
+      contact_email: Kontaktní e-mail
+      describe_the_problem: Chybí něco? Je nějaká informace nepřesná?
+    flashes:
+      reported: 'Certifikát byl nahlášen ODI'
+  certificate:
+    on_date: "%{date}"
+    this_data_has_achieved: 'Úroveň certifikace:'
+    which_means: 'Co to v praxi znamená:'
+    embeddable_certificate: Vložte si certifikát na svůj web
+    not_yet_published: Zatím nezveřejněný
+    embed_badge_instructions: Tento kód vám na web vloží grafický odznáček.
+    embed_instructions: Tento kód vám na web vloží celý certifikát.
+    embed_badge: Odznáček
+    view_embed_page: Certifikát
+    edit_questionnaire: Upravit odpovědi
+    open_data_certificate_for: 'Certifikát otevřených dat:'
+    description: Popis
+    certification_types:
+      self: ověřený autorem
+      auto: ověřený automaticky
+      community: ověřený komunitou
+      odi_audited: ověřený auditem ODI
+    mark_audited: Označit jako auditovaný
+    unmark_audited: Označit jako neauditovaný
+    audited: Certifikát je označen jako auditovaný ODI
+    not_audited: Certifikát není označen jako auditovaný ODI
+    expired_notice: "Tento certifikát je potřeba aktualizovat, aby se do něj promítly poslední změny v dotazníku pro jurisdikci %{jurisdiction}."
+    expiring_notice: "Tento certifikát vyprší za %{days} dní. Aktualizujte ho, aby se do něj promítly poslední změny dotazníku pro jurisdikci %{jurisdiction}."
+    claim_this_certificate: "Je tohle vaše datová sada?"
+    report:
+      link: Nahlásit chybu
+      text: v tomto certifikátu
+  datasets:
+    datasets: Datové sady
+    search_results: Výsledky hledání
+  response_set:
+    choose_a_jurisdiction: Přepnout jurisdikci
+    dialog_body: Vyberte si novou jurisdikci ze seznamu. Doposud vyplněné odpovědi se do ní zkopírují.
+    choose_jurisdiction: — vyberte jurisdikci —
+    start_new_jurisdiction: Přepnout jurisdikci
+    choose_a_language: Přepnout jazyk
+    language_dialog_body: V jakém jazyce byste dotazník chtěli vyplňovat?
+    choose_language: — vyberte jazyk —
+    start_new_language: Přepnout jazyk
+    update_instructions: "Ještě než budete pokračovat, zkontrolujte si prosím, jestli jsou všechny informace aktuální a všechna povinná pole vyplněná."
+  summary_data:
+    summary: Shrnutí
+    type_of_release: Typ dat
+    licence: Licence
+    data_licence: Databázová licence
+    content_licence: Licence na obsah
+    verification: "Způsob ověření"
+  data_kitten:
+    title: Název
+    description: Popis
+    publishers: Vydavatel
+    rights: Práva
+    rights_statement: Právní prohlášení
+    update_frequency: Četnost aktualizací
+    keywords: Klíčová slova
+    release_date: Datum vydání
+    modified_date: Datum poslední změny
+    temporal_coverage: Časové rozpětí
+    distributions: Distribuce
+  authentication:
+    sign_in: Přihlásit
+    sign_up: Založit účet
+    forgot_password: Zapomněli jste heslo?
+    change_your_password: Změňte si heslo
+    change_my_password: Změnit mé heslo
+    new_password: Nové heslo
+    confirm_new_password: Ještě jednou nové heslo
+    send_reset_instructions: Pošlete mi návod pro resetování hesla
+    remember_me: Pamatovat přihlášení
+    edit_profile: Upravit uživatelský profil
+    update_profile: Aktualizovat profil
+    current_password_info: (pro potvrzení změn potřebujeme vaše současné heslo)
+    new_password_info: (pokud ho nechcete měnit, nic nevyplňujte)
+    already_have_account: Už máte účet?
+    resend_confirmation_instructions: Poslat potvrzovací instrukce ještě jednou
+    agree_to_terms: "Četl jsem %{terms_link} a souhlasím s nimi."
+    terms: Podmínky použití
+  about:
+    heading_about: O projektu
+  overview:
+    heading_overview: Přehled
+  contact:
+    heading_contact: Napište ODI
+  errors:
+    errors_occurred: Došlo k chybě
+    server_error: Došlo k chybě serveru
+  branding:
+    heading: Použití grafických prvků ODI
+  improvements:
+    heading: Jak můžeme svá otevřená data zlepšit?
+    return_to_questionnaire: Zpátky do dotazníku
+    return_to_dashboard: Zpátky na nástěnku
+    levels:
+      basic:
+        title: Základní úroveň
+        subtitle: Naprosté minimum pro získání certifikátu – velmi slušný začátek!
+        instruction: "Musíte odpovědět na následující otázky:"
+      pilot:
+        title: Úroveň Pilot
+        subtitle: Uživatelům svých dat nabízíte podporu a reagujete na jejich připomínky.
+        instruction: "Pro dosažení úrovně Pilot je potřeba splnit následující úkoly:"
+      standard:
+        title: Úroveň Standard
+        subtitle: Data dlouhodobě udržujete a jejich uživatelům nabízíte podporu, na které se dají stavět vážnější projekty.
+        instruction: "Pro dosažení úrovně Standard je potřeba splnit následující úkoly:"
+      exemplar:
+        title: Úroveň Expert
+        subtitle: Překračujete všechna běžná očekávání – vaše data slouží jako výjimečná ukázka informační infrastruktury, kterou se všichni ostatní mohou inspirovat.
+        instruction: "Pro dosažení úrovně Expert je potřeba splnit následující úkoly:"
+    buttons:
+      understood: "Upravit odpovědi"
+      misunderstood: "Nevíte si s otázkou rady?"
+    delete_button: 'Smazat'
+  transfers:
+    transfer:
+      title: Předat kolegovi
+      body: Můžete vyplnění dotazníku nechat na kolegovi.
+      input_prompt: "Komu chcete dotazník předat?"
+      input_placeholder: e-mailová adresa
+      submit: Poslat pozvánku
+      help_text: "Pozor: Dotazník může v jednu chvíli vyplňovat jen jeden člověk."
+      transferring: Předávám na adresu %{email}…
+      cancel_transfer: '[zrušit]'
+    claim:
+      title: Převzetí dotazníku
+      body: 'Odesilatel tohoto e-mailu vás žádá, abyste převzali a vyplnili dotazník ohledně datové sady „%{dataset_title}“.'
+      accept: Přijmout dotazník
+    flashes:
+      created: Převod dotazníku zahájen
+      unable_to_create: 'Převod dotazníku se nezdařil: %{errors}'
+      complete: Převod dotazníku hotov
+      access_denied: Přístup odepřen
+      access_denied_email: Přístup odepřen – nejste přihlášeni e-mailovou adresou, na kterou byl dotazník převeden
+      access_denied_token: 'Přístup odepřen – nesedí kontrolní kód, zkopírovali jste ho z e-mailu správně?'
+  transfer_mailer:
+    notify:
+      subject: Předání dotazníku
+      message: 'Odesilatel tohoto e-mailu vás žádá, abyste od něj převzali a vyplnili dotazník pro certifikát otevřených dat. Dotazník můžete převzít na následující adrese: %{url}'
+  claims:
+    index:
+      outstanding_claims: Nevyřízené žádosti o převod
+      no_outstanding_claims: Momentálně tu není žádná nevyřízená žádost o převod
+    outstanding_claim:
+      approve_transfer: Potvrdit převod
+      deny_transfer: Zamítnout
+      approving_transfer: Potvrzuji převod…
+      denying_transfer: Zamítám…
+      confirm_denial: Opravdu chcete převod zamítnout?
+      confirm_title: Zamítnout převod datové sady
+    claim:
+      claim_heading: Převést datovou sadu k sobě
+      certificate_award: Certifikát byl datové sadě udělen automaticky.
+      explanation: "Výhody certifikátu otevřených dat:"
+      explanation_open: Jasně ukážete, že vaše data jsou skutečně otevřená.
+      explanation_improve: Zjistíte, jak by se vaše data dala zlepšit.
+      explanation_badge: Můžete se svým úspěchem pochlubit pomocí odznáčku.
+      claim_certificate: Pokud jde o vaši datovou sadu, dejte nám vědět, dáme vám přístup ke správě tohoto certifikátu.
+      send_request: Přihlásit se k vlastnictví datové sady
+    flashes:
+      created: Přihlásili jste se k vlastnictví tohoto certifikátu
+    approved: Převod schválen
+    denied: Převod zamítnut
+  claim_mailer:
+    notify:
+      subject: Žádost o převod datové sady „%{title}“
+      admin_subject: "Převod certifikátu „%{dataset_id}“"
+      message: |
+        Jiný uživatel vás žádá, abyste na něj převedli vlastnictví certifikátu otevřených dat. Převod můžete potvrdit nebo zamítnout na následující adrese: %{url}
+    notify_of_approval:
+      subject: Stali jste se vlastníkem „%{title}“
+      message: |
+        Žádali jste o převedení datové sady „%{title}“ k sobě, převod byl úspěšně dokončen. Informace o datové sadě můžete změnit na adrese %{url}.
+    notify_of_denial:
+      subject: Převedení certifikátu zamítnuto
+      message: |
+        Žádali jste o převedení vlastnických práv na „%{title}“, ale vaše žádost byla současným vlastníkem zamítnuta.
+  status_panel:
+    title: Úroveň certifikátu
+    description: Tady si můžete zkontrolovat, jak se vám daří splnit požadavky různých úrovní certifikátu.
+    about: Přečtěte si, jak to funguje
+    improve_data: Jak můžeme svá otevřená data zlepšit?
+  helpers:
+    label:
+      user:
+        short_name: Krátká forma jména nebo přezdívka
+  locales:
+    cs: Čeština
+    en: Angličtina
+  interface:
+    select: "Vyberte si…"
