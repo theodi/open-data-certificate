@@ -41,6 +41,8 @@ class ResponseSet < ActiveRecord::Base
 
   scope :published, where(:aasm_state => 'published')
 
+  delegate :assumed_us_public_domain?, to: :kitten_data, allow_nil: true
+
   # Checks if a value is blank by Surveyor's standards
   def self.is_blank_value?(value)
     value.is_a?(Array) ? value.all?{|values| values.blank? } : value.to_s.blank?
