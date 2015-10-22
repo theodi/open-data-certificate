@@ -186,6 +186,7 @@ en:
   surveys:
     jurisdiction: 'Jurisdiction:'
     language: 'Language:'
+    other_languages: 'Other languages'
     read_more: Read more about Open Data Certificates
     do_not_have_url: I don't have a URL
     check_url_button: Check URL
