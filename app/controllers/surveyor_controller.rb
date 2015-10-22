@@ -84,7 +84,7 @@ class SurveyorController < ApplicationController
             @response_set.publish!
             return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
           else
-            return redirect_with_message(dashboard_path, :notice, t('surveyor.completed_survey'))
+            return redirect_with_message(dataset_certificate_path(@response_set.dataset, @response_set.certificate), :notice, t('surveyor.completed_survey'))
           end
         end
       else
