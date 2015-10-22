@@ -375,7 +375,7 @@ cs:
       user:
         short_name: Krátká forma jména nebo přezdívka
   locales:
-    en: angličtina
-    cs: čeština
+    cs: Čeština
+    en: Angličtina
   interface:
     select: "Vyberte si…"

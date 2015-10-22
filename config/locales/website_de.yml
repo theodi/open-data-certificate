@@ -432,8 +432,9 @@ de:
         short_name: Short name or preferred way of being addressed
 
   locales:
-    en: English
-    cs: Czech
+    cs: Tschechisch
+    de: Deutsch
+    en: Englisch
 
   interface:
     select: "Please select…"
