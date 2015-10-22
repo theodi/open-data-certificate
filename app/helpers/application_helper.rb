@@ -106,8 +106,8 @@ module ApplicationHelper
   end
 
   def locale_options_for_select(selected=nil)
-    locales = I18n.available_locales.each_with_object({}) do |locale, memo|
-      memo[t("locales.#{locale}")] = locale
+    locales = ::LANGUAGES.each_with_object({}) do |locale, memo|
+      memo[t("locales.#{locale}", locale: locale)] = locale
     end
     options_for_select(locales, selected)
   end
@@ -117,7 +117,7 @@ module ApplicationHelper
     return unless locales.present?
 
     links = locales.map do |locale|
-      locale_name = I18n.translate("locales.#{locale}")
+      locale_name = I18n.translate("locales.#{locale}", locale: locale)
 
       if locale == I18n.locale.to_s
         content_tag(:div, locale_name, class: 'badge badge-inverse')

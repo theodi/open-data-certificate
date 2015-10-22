@@ -4,9 +4,6 @@ survey 'CZ',
   :status => 'beta',
   :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector.</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
-  translations :en => :default,
-    :cs => 'translations/odc.CZ.cs.yml'
-
   section_general 'General Information',
     :description => '',
     :display_header => false do

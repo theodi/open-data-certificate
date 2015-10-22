@@ -186,6 +186,7 @@ en:
   surveys:
     jurisdiction: 'Jurisdiction:'
     language: 'Language:'
+    other_languages: 'Other languages'
     read_more: Read more about Open Data Certificates
     do_not_have_url: I don't have a URL
     check_url_button: Check URL
@@ -222,7 +223,7 @@ en:
         basic: Raw level
         pilot: Pilot level
         standard: Standard level
-        exemplar: Exemplar level
+        exemplar: Expert level
 
     community_verification_panel:
       title: Community verification
@@ -461,9 +462,14 @@ en:
         short_name: Short name or preferred way of being addressed
 
   locales:
-    en: English
     cs: Czech
     de: German
+    el: Greek
+    en: English
+    es: Spanish
+    it: Italian
+    ro: Romanian
+    zh: Chinese
 
   interface:
     select: "Please select…"

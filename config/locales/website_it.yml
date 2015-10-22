@@ -435,8 +435,8 @@ it:
         short_name: Short name or preferred way of being addressed
 
   locales:
-    en: English
-    cs: Czech
+    en: Inglese
+    it: Italiano
 
   interface:
     select: "Please select…"

@@ -28,7 +28,7 @@
               = certificate_locale_links(@response_set.jurisdiction)
               = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal}, class: 'changer' do
                 %i.icon.icon-pencil
-                Other Languages
+                = t('surveys.other_languages')
 
             %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
           .span3.save-button
