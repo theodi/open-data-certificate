@@ -456,6 +456,12 @@ class KittenDataTest < ActiveSupport::TestCase
     refute kitten_data.assumed_us_public_domain?
   end
 
+  test 'assumed_us_public_domain does not crash on old kitten data instances' do
+    #kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+    kitten_data.data = false # old versions stored false instead of {}
+    refute kitten_data.assumed_us_public_domain?
+  end
+
   %w[us-pd other-pd notspecified].each do |license_id|
     test "data.gov assumptions are set for federal organizations with #{license_id} license" do
       set_us_data
