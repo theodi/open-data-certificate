@@ -48,7 +48,8 @@ class DatasetsCSV
   def url(name, dataset, params={})
     params = {
       host: OpenDataCertificate.hostname,
-      protocol: Rails.env.production? ? 'https' : 'http'
+      protocol: Rails.env.production? ? 'https' : 'http',
+      locale: I18n.locale
     }.merge(params)
     Rails.application.routes.url_helpers.send(name, dataset, params)
   end
