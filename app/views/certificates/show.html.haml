@@ -15,7 +15,7 @@
         %p= notice
 
 
-- if @certificate.owned_by?(current_user) || admin?
+- if @certificate.owned_by?(current_user)
   .container
     .row
       .span8.offset2
@@ -35,6 +35,16 @@
                   = link_to(t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn')
                   .description
                     = t('certificates.edit_for_higher_level')
+          - elsif @certificate.attained_level == 'none'
+            %p
+              = t('certificate.no_level_yet')
+            %ul
+              %li
+                = link_to t('certificate.how_to_improve'), improvements_dataset_certificate_path(@certificate.response_set.dataset, @certificate), class: 'btn btn-primary'
+                .description
+                  = t('certificate.how_to_improve_description')
+              %li
+                =link_to t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn'
           - else
             %p
               = t('certificate.congratulations_for_level', level: t("levels.#{@certificate.attained_level}.title"))

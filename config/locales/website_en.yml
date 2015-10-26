@@ -272,6 +272,9 @@ en:
     on_date: "on %{date}"
     this_data_has_achieved: This data has achieved
     which_means: which means
+    no_level_yet: "You are on your way to achieving a certificate! To get a badge you need to complete more of the questions."
+    how_to_improve: How to improve
+    how_to_improve_description: See what’s missing to get a Ready level certificate.
     congratulations_for_level: "Congratulations - your data has achieved a %{level} level certificate!"
     publish_now: Publish now
     publish_it_now: Publish it now to help others find and re-use your data. You will still be able to update and edit your answers at any time.
