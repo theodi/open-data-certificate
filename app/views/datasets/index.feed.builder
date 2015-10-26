@@ -13,11 +13,12 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.updated atom_datetime(@last_modified_date)
   @datasets.each do |dataset|
     xml.entry do
+      certificate = dataset.certificate
       xml.title dataset.title
-      xml.content "#{t("levels.#{dataset.certificate.attained_level}.title_with_level")} certificate"
+      xml.content "#{t("levels.#{certificate.attained_level}.title_with_level")} certificate"
       xml.updated atom_datetime(dataset.modified_date)
       render(:partial => 'datasets/dataset',
-             :locals => {:builder => xml, :dataset => dataset, :certificate => dataset.certificate })
+             :locals => {:builder => xml, :dataset => dataset, :certificate => certificate })
     end
   end
 end
