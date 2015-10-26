@@ -10,7 +10,8 @@ class ODIBot
     Errno::ECONNRESET,
     Errno::EHOSTUNREACH,
     OpenSSL::SSL::SSLError,
-    Timeout::Error
+    Timeout::Error,
+    Net::ReadTimeout
   ]
   HTTP_ERRORS = [
     HTTParty::RedirectionTooDeep,
