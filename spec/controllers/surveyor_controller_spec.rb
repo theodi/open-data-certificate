@@ -105,10 +105,6 @@ describe SurveyorController do
         do_put :finish => 'finish'
         response_set.reload.should be_complete
       end
-      it 'flashes completion' do
-        do_put :finish => 'finish'
-        flash[:notice].should == "Completed questionnaire"
-      end
       it "redirects for missing response set" do
         do_put :response_set_code => "DIFFERENT"
         response.status.should == 404
