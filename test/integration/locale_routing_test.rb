@@ -23,6 +23,12 @@ class LocaleRoutingTest < ActionDispatch::IntegrationTest
     }
   end
 
+  test "route to a missing page responds with a routing error" do
+    assert_raises(ActionController::RoutingError) {
+      get '/does_not_exist'
+    }
+  end
+
   context "with a signed-in user" do
     setup do
       user = FactoryGirl.create(:user, preferred_locale: 'cs')
