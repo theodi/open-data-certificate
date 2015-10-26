@@ -34,7 +34,11 @@ OpenDataCertificate::Application.routes.draw do
     get 'cookie-policy' => 'pages#show', id: 'cookie_policy', as: 'cookie_policy'
     get 'terms' => 'pages#show', id: 'terms', as: 'terms_page'
     get 'about' => 'pages#show', id: 'about', as: 'about_page'
-    get 'overview' => 'pages#show', id: 'overview', as: 'overview_page'
+    get 'about/how' => 'pages#show', id: 'how_to_get_certificates', as: 'how_to_get_certificates'
+    get 'about/badgelevels' => 'pages#show', id: 'badge_levels', as: 'badge_levels_page'
+    get 'about/whatyouneed' => 'pages#show', id: 'what_you_need', as: 'what_you_need_page'
+    get 'overview', to: redirect('/%{locale}/about/whatyouneed')
+    get 'faq', to: 'pages#show', id: 'faq', as: 'faq_page'
     get 'contact' => 'pages#show', id: 'contact', as: 'contact_page'
     get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
