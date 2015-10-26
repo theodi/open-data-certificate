@@ -15,7 +15,8 @@ class ODIBot
   ]
   HTTP_ERRORS = [
     HTTParty::RedirectionTooDeep,
-    URI::InvalidURIError
+    URI::InvalidURIError,
+    Zlib::DataError
   ]
 
   def self.valid?(url)
