@@ -13,6 +13,12 @@ source_file = config/locales/surveyor_en.yml
 source_lang = en
 type = YML
 
+[certificates.devise]
+file_filter = config/locales/devise.<lang>.yml
+source_file = config/locales/devise.en.yml
+source_lang = en
+type = YML
+
 [certificates.questionnaire-general]
 file_filter = surveys/translations/questionnaire.general.<lang>.yml
 source_file = surveys/translations/questionnaire.general.en.yml
