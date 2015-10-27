@@ -311,6 +311,7 @@ en:
     summary: Summary
     type_of_release: Type of release
     licence: Licence
+    not_applicable: Not Applicable
     data_licence: Data Licence
     content_licence: Content Licence
     verification: "Verification"

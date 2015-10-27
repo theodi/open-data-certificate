@@ -230,7 +230,7 @@ class ResponseSet < ActiveRecord::Base
     case ref
     when nil, "na"
       {
-        :title => "Not Applicable",
+        :title => I18n.t('summary_data.not_applicable'),
         :url => nil
       }
     when "other"
