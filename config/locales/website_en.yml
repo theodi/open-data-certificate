@@ -344,6 +344,7 @@ en:
     resend_confirmation_instructions: Resend confirmation instructions
     agree_to_terms: "I've read and agree to the %{terms_link}."
     terms: Terms of use
+    api: API
 
   about:
     heading_about: About

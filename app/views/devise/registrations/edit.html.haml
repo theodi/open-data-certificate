@@ -45,7 +45,7 @@
 
 .well
   = form_for(resource, :as => resource_name, :url => '') do |f|
-    %h2 API
+    %h2= t('authentication.api')
     .form-field
       = f.label :authentication_token
       = f.text_field :authentication_token, class: 'span8', data: {content: :highlight}
