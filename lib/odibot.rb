@@ -10,11 +10,13 @@ class ODIBot
     Errno::ECONNRESET,
     Errno::EHOSTUNREACH,
     OpenSSL::SSL::SSLError,
-    Timeout::Error
+    Timeout::Error,
+    Net::ReadTimeout
   ]
   HTTP_ERRORS = [
     HTTParty::RedirectionTooDeep,
-    URI::InvalidURIError
+    URI::InvalidURIError,
+    Zlib::DataError
   ]
 
   def self.valid?(url)

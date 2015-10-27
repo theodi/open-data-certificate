@@ -83,7 +83,7 @@ namespace :odc do
 
   desc "Task to run when a new version of the app has been deployed"
   task :deploy => %w(surveyor:enqueue_surveys odc:purge_questionnaires) do
-    ENV['TO'] = ENV['RAILS_ENV']
+    ENV['TO'] = ENV['AIRBRAKE_ENV']
     if ENV['AIRBRAKE_CERTIFICATE_KEY']
       Rake::Task['airbrake:deploy'].invoke
     end

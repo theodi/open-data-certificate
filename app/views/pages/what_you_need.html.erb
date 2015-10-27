@@ -1,0 +1,272 @@
+<% content_for :header_title, t("what_you_need.header_title") %>
+
+<div class="container about">
+  <div class="span8">
+  <h2>How to achieve an Open Data Certificate?</h2>
+
+  <p>This guide outlines the requirements to achieve each certificate level.</p>
+  <h2>Raw Certificate</h2>
+  <p>A raw certificate acknowledges the basic requirements of open data, to be legally available for anyone to access, use and share, with an open license. To acquire a Raw certificate, you must provide:</p>
+
+  <ul>
+    <li>a title for the open data</li>
+    <li>the name of the publisher</li>
+  </ul>
+
+  <p>and the following legal, and technical requirements:</p>
+
+  <h3>Legal Requirements</h3>
+  <p>You must determine you have the legal right to publish the data. If you are the primary source of the data, this should be simple. In other cases, identifying whether you have a right to publish this data may be more complicated:</p>
+
+  <ul>
+    <li>If you are using data from elsewhere, you will need to check the licence of that data to ensure you can republish it. If it is open data, you're OK.</li>
+    <li>If you are crowdsourcing data, you may need to check that the contributors to that data have given you permission to reuse it through a <a href="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Contributor Licence Agreement</a>.</li>
+    <li>If the rights are complicated or unclear, for example, because the data includes other data which hasn't been clearly licensed itself, you can still achieve a Raw certificate.</li>
+    <li>There is more guidance in the <a href="http://theodi.org/guides/publishers-guide-open-data-licensing">ODI's Publisher's Guide to Licensing</a>. If in doubt, we advise you to consult a lawyer.</li>
+  </ul>
+
+  <p>Once you have followed these steps, you can publish the data under an open licence or place it into the public domain with a waiver. We recommend using an existing open data licence. If you create your own licence, you must get it <a href="http://opendefinition.org/licenses/process/">approved</a> by the <a href="http://opendefinition.org/advisory-council/">Open Definition Advisory Council</a> to check that it is an open licence.</p>
+
+  <p>If any of the content is covered by copyright (for example if it contains descriptions that someone has written) then the content must also be licensed under an open licence.</p>
+
+  <h3>Technical Requirements</h3>
+  <p>Re-users must be able to find your data. A web page that describes your data, such as a repository like <a href="http://data.gov.uk/">data.gov.uk</a>, <a href="http://data.gov.uk/">is a simple way to make your data discoverable</a>. If you don't have a general web page for the data, there are several options to make it easier to find depending on how you are publishing it:</p>
+
+  <ul>
+    <li>If you are publishing a one-off release of a single dataset, there should be a URL from which the dataset can be downloaded.</li>
+    <li>If you are publishing a series of datasets, you should have one or more of:</li>
+  </ul>
+  <ul>
+    <li>a fixed URL from which the current version can always be downloaded</li>
+    <li>a URL pattern that developers can use to work out the URL for a given dataset in the series</li>
+    <li>a list of releases provided in a machine-readable format</li>
+  </ul>
+  <ul>
+    <li>If you are publishing an API, you should have a URL for the endpoint of that API at which a description is also published.</li>
+  </ul>
+
+  <h2>Pilot Certificate</h2>
+  <p>A Pilot certificate has a number of additional requirements to ensure a pilot release of open data is successful.</p>
+
+  <p>To achieve a Pilot certificate, you must have a webpage describing the data. This can be on a repository such as <a href="http://data.gov.uk/">data.gov.uk</a>.</p>
+
+  <h3>Legal Requirements</h3>
+  <p>If your right to publish the data is complicated or unclear, to achieve a Pilot certificate you must publish a document that describes the risks that reusers of the data would be taking on if they use and publicise the data. For example, there may be a risk of the data being removed because of a legal challenge.</p>
+
+  <p>If the data originally comes from elsewhere, you must publish a document that describes where the data comes from. This helps people who want to use the data to know how much to trust it.</p>
+
+  <p>You must publish a rights statement that describes any copyright or database rights in the data, how it is licensed and what kind of attribution people should give when they use it. Without this being explicitly stated it is difficult for people to have confidence in reusing the data.</p>
+
+  <p>If you are releasing data from which individuals could be identified (perhaps in combination with extra information available elsewhere), you must ensure you have addressed any privacy impact that releasing the data might have. That means:</p>
+
+  <ul>
+    <li>only publishing personal data if it is anonymised, unless you are required or permitted to publish it by law</li>
+    <li>performing a risk assessment around the release of the data</li>
+  </ul>
+
+  <p>and if you have data protection laws like those in Europe, you must:</p>
+
+  <ul>
+    <li>publish the privacy notice that individuals affected by the data have given consent to</li>
+    <li>consult with the person within your organisation who is responsible for data protection</li>
+  </ul>
+  <h3>Practical Requirements</h3>
+  <p>If you are publishing data that might go out of date, make sure the data contains timestamps. This ensures that people reusing the data don't unintentionally use out-of-date information.</p>
+
+  <p>If you are publishing a series of datasets over time:</p>
+  <ul>
+    <li>the delay between creating a dataset and publishing that dataset should not be longer than the gap between releases; for example if there is a new release each month, the data in that release should not be more than a month out of date</li>
+    <li>if the underlying data changes frequently (ie at least daily) then you should create a new release every month or more frequently</li>
+  </ul>
+
+  <p>If you provide an API to access the data, and you are publishing dumps of the data as well, then you should create a new dump every month or more frequently. This means that people who want to get hold of the whole set of data can get hold of a dump that isn't too out of date.</p>
+
+  <p>You must consider how long you intend to publish the data for. For a pilot certificate, you should intend for the data to be available in the same form for at least a year. If it is not going to be available for at least a year, it is unlikely any reuser will invest time to use it except in proofs of concept.</p>
+  <h3>Technical Requirements</h3>
+  <p>If you are publishing a one-off release of a dataset, you must be able to provide a URL directly linking to that dataset so it can be downloaded.</p>
+
+  <p>If you are publishing a series of datasets, the URLs for the datasets in the series should follow a consistent pattern so that people can predict the URL for a particular month for example, or create a script that downloads them all.</p>
+
+  <p>To achieve a pilot certificate, the data must be published in a machine-readable format. Further to this:</p>
+  <ul>
+    <li>if you are publishing <strong>documents</strong> these must be published in a format for documents (which can include Word, OpenOffice or PDF at the pilot level)</li>
+    <li>if you are publishing <strong>statistics</strong> the data must be published in a format for tabular data (which can include Excel at the pilot level)</li>
+    <li>if you are publishing <strong>geographical data</strong> or any other kind of structured data, it must be published in a structured data format (which can include JSON, XML or CSV at the pilot level)</li>
+  </ul>
+  <h3>Social Requirements</h3>
+  <p>To achieve a pilot certificate, you must provide technical documentation about the data to help people understand it with a URL for this documentation.</p>
+
+  <p>You must also provide instructions for people to contact you:</p>
+  <ul>
+    <li>with any questions they have about the data</li>
+    <li>to suggest improvements to publish the data</li>
+    <li>to raise any concerns about the disclosure of personal details</li>
+  </ul>
+
+  <p>You will be asked for page URLs that describe how to get in contact with someone in each of these cases; as a direct email address or a web form.</p>
+  <h2>Standard Certificate</h2>
+  <p>A standard certificate is aimed at data that is being published as a business-as-usual activity. This should enable other people to rely on its consistent availability, so they can build products and services that use the data.</p>
+  <h3>Legal Requirements</h3>
+  <h4>Rights</h4>
+  <p>You must have a clear legal right to make the data available as open data. At the standard level you should have resolved any ambiguities about your rights over the data so that others can reuse it without exposing themselves to any legal risks.</p>
+  <p>If not all the data was originally created or gathered by you, you must provide a machine-readable list of data sources. This can be done using RDFa within the web page where you describe those sources (as required for the pilot level certificate), or as a separate document.</p>
+  <h4>Licensing</h4>
+  <p>You must provide machine-readable metadata about:</p>
+  <ul>
+    <li>the licence the data is available under</li>
+    <li>the licence the content of the data is available under</li>
+    <li>what attribution text should be used for the data (even if you don't require attribution within the licence that you're using)</li>
+    <li>what link to use when providing attribution for this data</li>
+  </ul>
+
+  <p>Providing this in a machine-readable form enables automated aggregation and attribution of data. You can use the <a href="http://theodi.org/guides/publishers-guide-to-the-open-data-rights-statement-vocabulary">Rights Statement Vocabulary</a> to express this information.</p>
+  <h4>Even if there are no rights within the content of the data (for example data that contains facts and numbers), to remove ambiguity for reusers, you should explicitly indicate the content is public domain.</h4>
+  <h4>Privacy</h4>
+  <p>If the data you are publishing has been anonymised through aggregating data (so that individuals cannot be distinguished from others within their group) you must have the anonymisation process independently audited to ensure protection of a person&rsquo;s privacy.</p>
+
+  <p>If the data you're publishing is about individuals:</p>
+  <ul>
+    <li>If you have a legal right to publish it (for example because you are publishing a public register that is defined by law), you must publish a document that describes that legal right. This helps justify the publication both to people who want to use the data you are publishing and the individuals whose details are given in the data.</li>
+    <li>You must publish your assessment of the impact of publishing the data on the privacy of the affected individuals.</li>
+    <li>You must have your risk assessment independently audited to make sure that it's taken into account all the possible impacts.</li>
+    <li>You must have your anonymisation process independently audited to make sure there is no inadvertent disclosure of personal information.</li>
+  </ul>
+  <h3>Practical Requirements</h3>
+  <h4>Findability</h4>
+  <p>To achieve a standard certificate, you must provide at least one URL linking to the data from your website so people can find it. We recommend adding links to pages of relevant topics to the data.</p>
+
+  <p>You need to provide at least one URL that demonstrates the data appearing within a list of similar data: this might be a repository such as <a href="http://data.gov.uk/">data.gov.uk</a> or alongside other similar datasets with a relevant search term on Google.</p>
+
+  <p>You also need to provide the URL of at least one document that references the data in publications, such as reports of blog posts.</p>
+  <h4>Accuracy</h4>
+
+  <p>You can only achieve a standard level certificate for a one-off release of a single dataset, a collection of datasets, or an API operating over a static set of data that is always up to date. For example, the results of an experiment will never go out of date, but the locations of bus stops will change, therefore must be regularly updated to achieve a standard level certificate.</p>
+
+  <p>If you are publishing a series of datasets over time, the delay between creating a dataset and publishing that dataset should be no more than half the gap between releases; for example if the data is released monthly, the data in that release should never be more than two weeks out of date. This helps to ensure that people work with up-to-date data.</p>
+  <p>If you are publishing an API, you must provide downloads of the data behind that API to achieve a standard level certificate. New dumps must be created within a week of any change to the data. If the data can be changed, you must also commit to correcting any errors people find within it.</p>
+  <h4>Quality</h4>
+  <p>You must provide documentation about any known quality issues with the data you are publishing. This helps reusers judge how much the data should be trusted.</p>
+
+  <p>Guarantees</p>
+
+  <p>You must take a regular offsite backup of the data. It is good practice for this to be a public backup (perhaps hosted by another organisation for you) in case access to your website is interrupted.</p>
+
+  <p>If you are providing an API, you must provide documentation that informs people of the service level available. For example, what guarantees can you give about the uptime of the service, what rate limiting do you do, and how long are outages likely to last? You will need to provide a URL to a document describing the service level that you are providing.</p>
+  <p>For a standard certificate, publication of the data must be a business-as-usual activity; you must ensure that its continued publication is incorporated into your medium-term plans.</p>
+  <h3>Technical Requirements</h3>
+  <h4>Locations</h4>
+  <p>If you are publishing a series of datasets, you must:</p>
+  <ul>
+    <li>Have a single URL where people can always download the most recent issue of the dataset. This could be a redirection to the relevant dataset URL.</li>
+    <li>Have a machine-readable document that lists all available releases of the data. This helps people to source them all without guessing URLs.</li>
+  </ul>
+  <p>If you are publishing an API, you must:</p>
+  <ul>
+    <li>Provide a machine-readable service description document or entry point for the API. This enables applications to detect and adjust to changes in the API which are likely to happen over time.</li>
+    <li>You must also provide a single URL allowing people to download the most recent dump of the underlying data.</li>
+  </ul>
+
+  <h4>Formats</h4>
+  <p>You must publish your data using a standard open format such as XML, CSV or JSON. Further to this:</p>
+  <ul>
+    <li>if you are publishing documents, these must use a semantic data format designed for documents, such as HTML, Docbook or Markdown</li>
+    <li>if you are publishing statistics, these must be available in a standard tabular data format such as CSV or in a format specifically designed for statistics</li>
+  </ul>
+
+  <p>The data must include identifiers for the things described by the data. It must be possible to find out more data about those identifiers either by resolving them using an online service or by resolving them as URLs. These help to ensure that data about the same things can be merged together.</p>
+
+
+  <h3>Social Requirements</h3>
+
+  <h4>Documentation</h4>
+  <p>You must provide machine-readable metadata about the data, for example using <a href="http://www.w3.org/TR/vocab-dcat/">DCAT</a> with RDFa, including:</p>
+  <ul>
+    <li>the title of the data</li>
+    <li>a description of the data</li>
+    <li>the release date of the data</li>
+    <li>its modification date</li>
+    <li>how frequently the data is updated</li>
+    <li>an identifier for the data</li>
+    <li>a pointer to a landing page for the data</li>
+    <li>the language of the data</li>
+    <li>the publisher of the data</li>
+    <li>the spatial/geographical coverage of the data</li>
+    <li>the temporal coverage of the data</li>
+    <li>a theme for the data</li>
+    <li>keywords or tags for the data</li>
+  </ul>
+
+  <p>If you provide machine-readable metadata about individual files, these must include:</p>
+  <ul>
+    <li>the title of the file</li>
+    <li>a description of the file</li>
+    <li>a release date for the file</li>
+    <li>its modification date</li>
+    <li>a link to the rights statement related to the data</li>
+  </ul>
+
+  <p>If the data format you are using is a generic data format that uses a data vocabulary (such as names of columns in CSV or properties in JSON), you must provide documentation about the vocabularies that are used in the data. Similarly, if the data contains codes you must provide documentation to explain them. This helps to ensure people using the data interpret it correctly.</p>
+  <h4>Support</h4>
+  <p>To connect with people about the data, you must use social media and list the accounts you use, for example Twitter or Facebook.</p>
+
+  <p>You must have a designated place (for example a forum or mailing list) where people can discuss how to use the data and provide the page URL that informs people about it.</p>
+
+  <p>If the data can be corrected over time, you must:</p>
+  <ul>
+    <li>Provide instructions to enable people to inform you about corrections needed and provide a URL of the page describing how to report these errors.</li>
+    <li>Provide a subscribable mailing list or feed used to notify people about corrections to the data, with a URL of the page describing how to subscribe.</li>
+  </ul>
+
+
+  <h2>Expert Certificate</h2>
+  <p>An expert-level certificate is designed for core reference data: data lots of other datasets will reference to provide further information about the things that they provide information about. The expert-level requirements reflect the importance of this information.</p>
+
+
+  <h3>Legal Requirements</h3>
+  <p>You must also provide machine-readable versions of:</p>
+  <ul>
+    <li>information in the rights statement as required in a Standard certificate</li>
+    <li>a copyright notice or statement</li>
+    <li>the copyright year</li>
+    <li>the copyright holder</li>
+  </ul>
+  <p>and in jurisdictions that include database rights:</p>
+  <ul>
+    <li>the database right year</li>
+    <li>the database right holder</li>
+  </ul>
+
+  <p>Having this information in a machine-readable form enables automatic construction of citations for the data.</p>
+  <h3>Practical Requirements</h3>
+  <p>If you are publishing a series of datasets, you should have minimal or no delay between when the data is created or gathered and when you publish it. Similarly, if you are providing an API you should ensure you create a new dump of the underlying data within a day of any changes made. This ensures that people use up to date data.</p>
+
+  <p>You must provide documentation about how you ensure data quality, to help people reusing the data judge how much to trust it.</p>
+
+  <p>If you are providing an API over the data, you must provide an information page about the current status of the service. This informs API users of both anticipated and unplanned outage.</p>
+
+  <p>Data at expert certificate level should be an essential part of your organisation&rsquo;s operation and should provide a guarantee that the data will continue to be available long-term.</p>
+  <h3>Technical Requirements</h3>
+  <p>If you are providing an API, you must:</p>
+  <ul>
+    <li>provide database dumps at dated URLs, enabling people to download a series of dumps (perhaps for comparison purposes)</li>
+    <li>provide a list of the available database dumps in a machine-readable form such as a feed</li>
+  </ul>
+
+  <p>You should help reusers by enabling them to process it with existing tools which are based on open standards:<sup><a href="#cmnt5" name="cmnt_ref5">[e]</a></sup></p>
+  <ul>
+    <li>if you are publishing statistical data, you must publish it in a standard statistical data format (possibly alongside other formats) such as <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> which exposes the underlying structure of dimensions, measures and attributes</li>
+    <li>if you are publishing geographical data, you must publish it in a standard geographical data format (possibly alongside other formats) such as <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a></li>
+  </ul>
+
+  <p>You must use URLs as identifiers within your data, and those URLs must resolve to further information about the things that are being identified. If there are reliable third-party URLs you can use, you must use them rather than creating your own. Reusing URLs as identifiers helps people to link together different data and therefore get more value from it.</p>
+
+  <p>You must provide a machine-readable provenance trail describing how the data was created and processed. You can do this with the open standard <a href="http://www.w3.org/TR/prov-primer/">PROV</a>. This is particularly important if the data you are publishing is derived from other data, allowing people to understand where the data comes from and therefore how much to trust it.</p>
+
+  <p>You must also provide a mechanism for people who are reusing the data, perhaps having received it from third parties, to validate that what they have received is what you originally published. For example, you might digitally sign the data or provide an MD5 hash that people can check to see whether it has been tampered with.</p>
+
+  <h3>Social Requirements</h3>
+  <p>You must have a person or team who is actively building a data user community, and provide a URL link to their homepage.</p>
+
+  <p>You must publish a list of software tools and libraries that can be used with the data, whether those are created yourself or by other people. This helps give people a head start in using the data.</p>
+  </div>
+</div>

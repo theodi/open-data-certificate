@@ -96,8 +96,8 @@ module OpenDataCertificate
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '/datasets/*.json', :headers => :any, :methods => [:get, :options]
-        resource '/datasets/*.js', :headers => :any, :methods => [:get, :options]
+        resource '/*/datasets/*.json', :headers => :any, :methods => [:get, :options]
+        resource '/*/datasets/*.js', :headers => :any, :methods => [:get, :options]
       end
     end
 
