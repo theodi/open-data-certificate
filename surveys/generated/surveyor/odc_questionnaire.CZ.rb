@@ -89,7 +89,7 @@ survey 'CZ',
       :discussion_topic => :cz_publisherRights,
       :help_text => 'If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission.
 				<br/>
-				Open data is data that anyone anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href="https://theodi.org/what-is-open-data">what is open data?</a>’ and the <a href="http://opendefinition.org">open definition</a> for more details.',
+				Open data is data that anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href="https://theodi.org/what-is-open-data">what is open data?</a>’ and the <a href="http://opendefinition.org">open definition</a> for more details.',
       :requirement => ['basic_2'],
       :pick => :one,
       :required => :required

@@ -1450,9 +1450,6 @@ en:
           cc_zero:
             text: Creative Commons CCZero
             text_as_statement: Creative Commons CCZero
-          ogl_uk:
-            text: UK Open Government Licence
-            text_as_statement: UK Open Government Licence
           odc_by:
             text: Open Data Commons Attribution License
             text_as_statement: Open Data Commons Attribution License
@@ -1469,6 +1466,15 @@ en:
           other:
             text: Other...
             text_as_statement: ''
+          ogl_uk:
+            text: UK Open Government Licence
+            text_as_statement: UK Open Government Licence
+          iodl:
+            text: Italian Open Data License v1.0
+            text_as_statement: Italian Open Data License v1.0
+          iodl_2_0:
+            text: Italian Open Data License v2.0
+            text_as_statement: Italian Open Data License v2.0
       dataNotApplicable:
         text: Why doesn't a licence apply to this data?
         text_as_statement: This data is not licensed because
@@ -1600,15 +1606,21 @@ en:
           cc_zero:
             text: Creative Commons CCZero
             text_as_statement: Creative Commons CCZero
-          ogl_uk:
-            text: UK Open Government Licence
-            text_as_statement: UK Open Government Licence
           na:
             text: Not applicable
             text_as_statement: ''
           other:
             text: Other...
             text_as_statement: ''
+          ogl_uk:
+            text: UK Open Government Licence
+            text_as_statement: UK Open Government Licence
+          iodl:
+            text: Italian Open Data License v1.0
+            text_as_statement: Italian Open Data License v1.0
+          iodl_2_0:
+            text: Italian Open Data License v2.0
+            text_as_statement: Italian Open Data License v2.0
       contentNotApplicable:
         text: Why doesn't a licence apply to the content of the data?
         text_as_statement: The content in this data is not licensed because
@@ -1688,6 +1700,40 @@ en:
         answers:
           a_1:
             placeholder: Content Rights Description URL
+      riskAssessmentExists:
+        text: Have you assessed the risks of disclosing personal data?
+        text_as_statement: The curator has
+        help_text: A risk assessment measures risks to the privacy of individuals
+          in your data as well as the use and disclosure of that information.
+        answers:
+          a_false:
+            text: 'no'
+            text_as_statement: not carried out a privacy risk assessment
+          a_true:
+            text: 'yes'
+            text_as_statement: carried out a privacy risk assessment
+      riskAssessmentUrl:
+        text: Where is your risk assessment published?
+        text_as_statement: The risk assessment is published at
+        help_text: Give a URL to where people can check how you have assessed the
+          privacy risks to individuals. This may be redacted or summarised if it contains
+          sensitive information.
+        answers:
+          a_1:
+            placeholder: Risk Assessment URL
+      riskAssessmentAudited:
+        text: Has your risk assessment been independently audited?
+        text_as_statement: The risk assessment has been
+        help_text: It's good practice to check your risk assessment was done correctly.
+          Independent audits by specialists or third-parties tend to be more rigorous
+          and impartial.
+        answers:
+          a_false:
+            text: 'no'
+            text_as_statement: ''
+          a_true:
+            text: 'yes'
+            text_as_statement: independently audited
       usGovData:
         text: Was the data created by the US Government?
         help_text: If the data was created by the US Government, and you are in the
@@ -1748,40 +1794,6 @@ en:
               people or organisations. Information about rights needs to be kept in
               the data too.
             text_as_statement: ''
-      riskAssessmentExists:
-        text: Have you assessed the risks of disclosing personal data?
-        text_as_statement: The curator has
-        help_text: A risk assessment measures risks to the privacy of individuals
-          in your data as well as the use and disclosure of that information.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: not carried out a privacy risk assessment
-          a_true:
-            text: 'yes'
-            text_as_statement: carried out a privacy risk assessment
-      riskAssessmentUrl:
-        text: Where is your risk assessment published?
-        text_as_statement: The risk assessment is published at
-        help_text: Give a URL to where people can check how you have assessed the
-          privacy risks to individuals. This may be redacted or summarised if it contains
-          sensitive information.
-        answers:
-          a_1:
-            placeholder: Risk Assessment URL
-      riskAssessmentAudited:
-        text: Has your risk assessment been independently audited?
-        text_as_statement: The risk assessment has been
-        help_text: It's good practice to check your risk assessment was done correctly.
-          Independent audits by specialists or third-parties tend to be more rigorous
-          and impartial.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: independently audited
     labels:
       findability:
         text: Findability
