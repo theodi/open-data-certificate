@@ -6,6 +6,11 @@ en:
 
   alpha_note: This is the alpha version of the ODI's Open Data Certificate. Comments on both the content and the usability of the questionnaire are very welcome. Please add issues on github or contact certificate@theodi.org.
 
+  auth_bar:
+    register: Register
+    account: Account
+    logout: Logout
+
   menu:
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
