@@ -5,7 +5,13 @@ class LocaleController < ApplicationController
   end
 
   def redirect_to_locale
-    redirect_to request.fullpath.gsub(%r{\A/(.*)}, "/#{locale_for_redirect}/\\1")
+    new_path = request.fullpath.gsub(%r{\A/(.*)}, "/#{locale_for_redirect}/\\1")
+
+    if recognized_path?(new_path)
+      redirect_to new_path
+    else
+      raise ActionController::RoutingError, 'Not Found'
+    end
   end
 
   private
@@ -16,6 +22,11 @@ class LocaleController < ApplicationController
     else
       I18n.default_locale
     end
+  end
+
+  def recognized_path?(path)
+    path_params = Rails.application.routes.recognize_path(path)
+    path_params && !(path_params[:controller] == 'locale' && path_params[:action] == 'redirect_to_locale')
   end
 
 end
