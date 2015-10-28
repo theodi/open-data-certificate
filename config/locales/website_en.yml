@@ -221,11 +221,14 @@ en:
     no_certificates_found: No certificates found
     view_certificate: View
     embed_this_on_your_site: Embed this on your site
+    rss_subscribe: Subscribe to these results via RSS
+    csv_download: Download complete set as CSV
     search:
       search_label: Search certificates
       submit_search: Go
       advanced_search: Advanced search
       datahub: Filter by domain
+      jurisdiction: Jurisdiction
       level: Filter by certificate level
       levels:
         basic: Raw level
@@ -293,6 +296,9 @@ en:
   datasets:
     datasets: Datasets
     search_results: Search Results
+    published_by: Published By
+    issued: Issued
+    no_published_certificate: No published certificate
 
   response_set:
     choose_a_jurisdiction: Change jurisdiction
@@ -306,6 +312,8 @@ en:
     start_new_language: Change language
 
     update_instructions: "Please check the information is up to date and all the mandatory fields are completed before continuing."
+    description: Description
+    summary: Summary
 
   summary_data:
     summary: Summary
@@ -454,18 +462,18 @@ en:
 
   claim_mailer:
     notify:
-      subject: There has been an ownership claim made for '%{title}'
+      subject: "There has been an ownership claim made for '%{title}'"
       admin_subject: "Certificate ownership transfer: %{dataset_id}"
       message: |
         You have been asked to hand over ownership of an Open Data Certificate.
         Please visit %{url} to accept or deny this claim.
     notify_of_approval:
-      subject: You have been given ownership of '%{title}'
+      subject: "You have been given ownership of '%{title}'"
       message: |
         The ownership you requested of '%{title}' has been approved.
         You can update information about the dataset by visiting %{url}
     notify_of_denial:
-      subject: Transfer of ownership of '%{title}' has been denied
+      subject: "Transfer of ownership of '%{title}' has been denied"
       message: |
         The ownership you requested of '%{title}' has not been granted.
 
@@ -479,6 +487,24 @@ en:
     label:
       user:
         short_name: Short name or preferred way of being addressed
+
+  # Kaminari pagination
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
+    helpers:
+      page_entries_info:
+        one_page:
+          display_entries:
+            zero: "No %{entry_name} found"
+            one: "Displaying <b>1</b> %{entry_name}"
+            other: "Displaying <b>all %{count}</b> %{entry_name}"
+        more_pages:
+          display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
 
   locales:
     cs: Czech
