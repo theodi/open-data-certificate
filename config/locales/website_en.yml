@@ -199,6 +199,7 @@ en:
     do_not_have_url: I don't have a URL
     check_url_button: Check URL
     skip_this_button: Skip this
+    edit_button: Edit
     url_problem_error: There was a problem with your URL, please check, or fill out the explanation below
     url_unknown_error: Sorry, an error occurred. Please try again.
     dataset_description_html: |
@@ -301,6 +302,7 @@ en:
     no_published_certificate: No published certificate
 
   response_set:
+    default_title: Untitled
     choose_a_jurisdiction: Change jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
     choose_jurisdiction: --- Select jurisdiction ---
