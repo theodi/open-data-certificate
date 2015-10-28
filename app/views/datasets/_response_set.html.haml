@@ -60,4 +60,4 @@
     .span3
       = "#{t('dashboard.verification')}: #{t(certificate.certification_type, scope: 'certificate.certification_types')}"
     .span3
-      = link_to(t('improvements.delete_button'), response_set, {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}, class: 'delete'})
+      = link_to(t('improvements.delete_button'), response_set, {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title'), confirm_cancel: t('dashboard.confirm_cancel_button'), confirm_proceed: t('dashboard.confirm_delete_button')}, class: 'delete'})
