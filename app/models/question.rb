@@ -88,8 +88,8 @@ class Question < ActiveRecord::Base
   end
 
   # either provided text_as_statement, or fall back to text
-  def statement_text
-    text_as_statement || text
+  def statement_text(locale=I18n.locale)
+    translation(locale)[:text_as_statement] || text
   end
 
   def requirement_level

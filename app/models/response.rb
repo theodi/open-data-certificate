@@ -27,7 +27,7 @@ class Response < ActiveRecord::Base
   memoize :sibling_responses
 
   def statement_text
-    answer.try(:text_as_statement) || to_formatted_s
+    answer.statement_text.presence || to_formatted_s
   end
 
   def reference_identifier
