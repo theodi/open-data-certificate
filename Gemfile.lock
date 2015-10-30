@@ -512,7 +512,7 @@ GEM
       tins (~> 1.0)
     terminal-notifier-guard (1.5.3)
     test-unit (2.5.5)
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thin (1.6.2)

@@ -68,7 +68,7 @@ $(function(){
    queue()
     .defer(d3.json, "/assets/data/world-110m.json")
     .defer(d3.tsv, "/assets/data/world-country-names.tsv")
-    .defer(d3.json, "/surveys/jurisdictions.json")
+    .defer(d3.json, "/en/surveys/jurisdictions.json")
     .await(ready);
 
     function ready(error, world, names, jurisdictions) {
@@ -89,7 +89,7 @@ $(function(){
         return (a.full_title||"").localeCompare(b.full_title);
       });
 
-      // This isn't a very efficient way to do this, ideally we'd create 
+      // This isn't a very efficient way to do this, ideally we'd create
       // seperate land regions for each status, though this will work while
       // we've only got a few
       var achieved = {
