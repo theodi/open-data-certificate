@@ -254,6 +254,8 @@ GEM
       less (~> 2.3.1)
     less-rails-bootstrap (2.3.3)
       less-rails (~> 2.3.1)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libv8 (3.16.14.7)
     link_header (0.0.8)
     linkeddata (1.1.11)
@@ -589,6 +591,7 @@ DEPENDENCIES
   launchy
   less-rails
   less-rails-bootstrap (~> 2.3.3)
+  letter_opener
   linkeddata
   lograge
   logstash-event
