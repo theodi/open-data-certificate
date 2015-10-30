@@ -302,6 +302,7 @@ en:
     published_by: Published By
     issued: Issued
     no_published_certificate: No published certificate
+    time_ago: "%{relative_time} ago"
 
   response_set:
     default_title: Untitled
