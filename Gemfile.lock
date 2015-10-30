@@ -363,6 +363,9 @@ GEM
       railties (= 3.2.21)
     rails-footnotes (3.7.9)
       rails (>= 3.0.0)
+    rails-i18n (3.0.1)
+      i18n (~> 0.5)
+      rails (>= 3.0.0, < 4.0.0)
     railties (3.2.21)
       actionpack (= 3.2.21)
       activesupport (= 3.2.21)
@@ -607,6 +610,7 @@ DEPENDENCIES
   rack-linkeddata
   rails (~> 3.2.21)
   rails-footnotes (>= 3.7.9)
+  rails-i18n (~> 3.0.0)
   ransack
   redcarpet
   rspec-rails (~> 2.14.2)
