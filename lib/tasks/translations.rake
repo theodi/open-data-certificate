@@ -106,6 +106,21 @@ Should work on OSX
       Rake::Task[translation].invoke
     end
   end
+
+  task :check_duplicates => :environment do
+    translations = I18n.translate('.', locale: :en)
+    translations.delete(:surveyor)
+    indexed_translations = hash_translations_by_value(translations, {}, '')
+    duplicate_translations = Hash[indexed_translations.select { |k, v| v.size > 1 }]
+
+    duplicate_translations.each do |text, keys|
+      puts "\e[31m#{text}\e[0m"
+      keys.each do |key|
+        puts "  #{key}"
+      end
+      puts "\n"
+    end
+  end
 end
 
 def locale_from_file_name(file_name)
@@ -114,6 +129,19 @@ end
 
 def jurisdiction_from_file_name(file_name)
   file_name[/([A-Za-z]{2})\.rb\z/, 1].upcase
+end
+
+def hash_translations_by_value(translations, result, namespace)
+  translations.reduce(result) do |memo, (k,v)|
+    if v.is_a?(String)
+      memo[v] = [] unless memo.has_key?(v)
+      memo[v] << "#{namespace}.#{k}"
+    elsif v.is_a?(Hash)
+      hash_translations_by_value(v, memo, "#{namespace}.#{k}")
+    end
+
+    memo
+  end
 end
 
 def quiet
