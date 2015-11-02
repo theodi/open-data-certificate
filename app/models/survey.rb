@@ -154,7 +154,7 @@ class Survey < ActiveRecord::Base
 
   def translation(locale_symbol)
     @translation ||= begin
-      I18n.translate('surveyor').merge({"title" => title, "description" => description}).with_indifferent_access
+      I18n.translate('surveyor').merge({"title" => title}).with_indifferent_access
     end
   end
 
