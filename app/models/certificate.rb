@@ -2,6 +2,8 @@ class Certificate < ActiveRecord::Base
   include Badges, Counts, Ownership
   include AASM
 
+  after_initialize :init
+
   belongs_to :response_set, touch: true, inverse_of: :certificate
 
   has_one :survey,  through: :response_set
@@ -21,6 +23,8 @@ class Certificate < ActiveRecord::Base
   scope :past_expiry_notice, -> { where(arel_table[:expires_at].lt(Time.current + EXPIRY_NOTICE)) }
   scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
   scope :without_expiry, where(expires_at: nil)
+
+  validates :attained_level, inclusion: {in: Survey::REQUIREMENT_LEVELS}
 
   class << self
     def type_search(type, term, query)
@@ -80,6 +84,10 @@ class Certificate < ActiveRecord::Base
     event :draft do
       transitions from: :published, to: :draft
     end
+  end
+
+  def init
+    self.attained_level ||= 'none'
   end
 
   def visible?
