@@ -215,8 +215,6 @@ Questions and Answers are associated to requirements by having their 'requiremen
 
 * `:description` - Copy to be displayed above the questionnaire
 
-* `:default_locale_name` - When there are multiple translations, this is the friendly name for the default one (the others are defined in the translation files)
-
 ##### section
 
 * `:display_header` - Whether the header should be displayed on the header (defaults to true)
@@ -258,7 +256,6 @@ Questionnaires are able to be translated and a user can select the locale when t
 
 To enable this for a questionnaire:
 
-* specify a `default_locale_name` for the survey
 * set any alternative translations files using the `translations` method (eg. `:es => 'translations/my-file.es.yml'`)
 
 In the translation file (eg. surveys/translations/my-file.es.yml)
