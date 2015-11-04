@@ -140,10 +140,6 @@ class Question < ActiveRecord::Base
     @triggered_q ||= dependency.nil? || dep_map[dependency.id]
   end
 
-  def required?
-    is_mandatory? || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
-  end
-
   def is_mandatory?
     required.to_s == "required"
   end
