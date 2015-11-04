@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   validates_inclusion_of :is_mandatory, :in => [true, false]
 
   # Whitelisting attributes
-  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :is_mandatory, :display_width, :custom_class, :custom_renderer, :correct_answer_id, :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
+  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :is_mandatory, :display_width, :custom_class, :correct_answer_id, :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
   scope :mandatory, where(is_mandatory: true)

@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.boolean  "is_exclusive"
     t.integer  "display_length"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "default_value"
@@ -194,7 +193,6 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.string   "common_identifier"
     t.string   "display_type"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "api_id"
@@ -218,7 +216,6 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.boolean  "is_mandatory"
     t.integer  "display_width"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
     t.integer  "correct_answer_id"

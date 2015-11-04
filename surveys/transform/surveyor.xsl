@@ -93,7 +93,6 @@
 			<xsl:element name="label_{@id}">
 				<xsl:attribute name="label"><xsl:apply-templates select="label" mode="html" /></xsl:attribute>
 				<xsl:attribute name="help_text"><xsl:apply-templates select="help" mode="html" /></xsl:attribute>
-				<xsl:attribute name="customer_renderer">/partials/fieldset</xsl:attribute>
 			</xsl:element>
 			<xsl:apply-templates select="." mode="conditions" />
 		</_group>
@@ -261,7 +260,6 @@
 			<xsl:attribute name="label">
 				<xsl:apply-templates select="." mode="html" />
 			</xsl:attribute>
-			<xsl:attribute name="custom_renderer" select="concat('/partials/requirement_', if (@level) then @level else 'basic')" />
 			<xsl:attribute name="requirement" select="local:requirementId(.)" />
 		</xsl:element>
 		<xsl:variable name="conditions" as="element()">
@@ -582,7 +580,7 @@
 	<xsl:value-of select="." />
 </xsl:template>
 
-<xsl:template match="*[not(@custom_renderer)]/@requirement" mode="syntax">
+<xsl:template match="*[starts-with(name(), 'a_')]/@requirement" mode="syntax">
 	<xsl:text>:requirement => [</xsl:text>
 	<xsl:for-each select="tokenize(., ', ')">
 		<xsl:text>'</xsl:text>

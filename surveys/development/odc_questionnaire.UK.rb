@@ -30,13 +30,11 @@ survey 'GB',
       :requirement => ['pilot_1', 'basic_1']
 
     label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
-      :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_1'
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_basic_1 'You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.',
-      :custom_renderer => '/partials/requirement_basic',
       :requirement => 'basic_1'
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
@@ -58,7 +56,6 @@ survey 'GB',
     a_complicated 'the rights in this data are complicated or unclear'
 
     label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
-      :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_1'
     dependency :rule => 'A'
     condition_A :q_publisherRights, '!=', :a_yes
@@ -79,7 +76,6 @@ survey 'GB',
       :requirement => ['pilot_4']
 
     label_pilot_4 'You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.',
-      :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_4'
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
@@ -143,13 +139,11 @@ survey 'GB',
       :requirement => ['exemplar_5']
 
     label_standard_4 'You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_4'
     dependency :rule => 'A'
     condition_A :q_copyrightStatementMetadata, '!=', :a_dataLicense
 
     label_exemplar_1 'You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_exemplar',
       :requirement => 'exemplar_1'
     dependency :rule => 'A'
     condition_A :q_copyrightStatementMetadata, '!=', :a_copyrightNotice
@@ -171,7 +165,6 @@ survey 'GB',
       :requirement => ['pilot_16']
 
     label_pilot_16 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
-      :custom_renderer => '/partials/requirement_pilot',
       :requirement => 'pilot_16'
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
@@ -224,13 +217,11 @@ survey 'GB',
       :text_as_statement => 'distribution(s)'
 
     label_standard_36 'You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it.',
-      :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_36'
     dependency :rule => 'A'
     condition_A :q_documentationMetadata, '!=', :a_title
 
     label_standard_37 'You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains.',
-      :custom_renderer => '/partials/requirement_standard',
       :requirement => 'standard_37'
     dependency :rule => 'A'
     condition_A :q_documentationMetadata, '!=', :a_description

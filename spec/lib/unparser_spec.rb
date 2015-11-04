@@ -5,7 +5,7 @@ describe Surveyor::Unparser do
     @survey = Survey.new(:title => "Simple survey", :description => "very simple")
     @section = @survey.sections.build(:title => "Simple section")
   end
-  
+
   it "should unparse a basic survey, section, and question" do
     q1 = @section.questions.build(:text => "What is your favorite color?", :reference_identifier => 1, :pick => :one)
     a11 = q1.answers.build(:text => "red", :response_class => "answer", :reference_identifier => 1, :question => q1)
@@ -33,28 +33,28 @@ survey "Simple survey", :description=>"very simple" do
 end
 dsl
   end
-  
+
   it "should unparse groups" do
-    q3 = @section.questions.build(:text => "Happy?")    
+    q3 = @section.questions.build(:text => "Happy?")
     a31 = q3.answers.build(:text => "Yes", :question => q3)
     a32 = q3.answers.build(:text => "Maybe", :question => q3)
     a33 = q3.answers.build(:text => "No", :question => q3)
-    
+
     q4 = @section.questions.build(:text => "Energized?")
     a41 = q4.answers.build(:text => "Yes", :question => q4)
     a42 = q4.answers.build(:text => "Maybe", :question => q4)
     a43 = q4.answers.build(:text => "No", :question => q4)
-    
+
     g1 = q3.build_question_group(:text => "How are you feeling?", :display_type => "grid")
     q4.question_group = g1
     g1.questions = [q3, q4]
-    
-    q5 = @section.questions.build(:text => "Model")    
+
+    q5 = @section.questions.build(:text => "Model")
     a51 = q5.answers.build(:response_class => "string", :question => q3)
-    
+
     g2 = q5.build_question_group(:text => "Tell us about the cars you own", :display_type => "repeater")
     g2.questions = [q5]
-    
+
     Surveyor::Unparser.unparse(@survey).should ==
 <<-dsl
 survey "Simple survey", :description=>"very simple" do
@@ -76,21 +76,21 @@ survey "Simple survey", :description=>"very simple" do
 end
 dsl
   end
-  
+
   it "should unparse a basic survey, section, and question" do
     q6 = @section.questions.build(:text => "What... is your name? (e.g. It is 'Arthur', King of the Britons)", :reference_identifier => "montypython3")
     a61 = q6.answers.build(:response_class => "string", :reference_identifier => 1, :question => q6)
-    
+
     q7 = @section.questions.build(:text => "What... is your quest? (e.g. To seek the Holy Grail)", :display_type => "label")
     d1 = q7.build_dependency(:rule => "A", :question => q7)
     dc1 = d1.dependency_conditions.build(:dependency => d1, :question => q6, :answer => a61, :operator => "==", :string_value => "It is 'Arthur', King of the Britons", :rule_key => "A")
-    
+
     q8 = @section.questions.build(:text => "How many pets do you own?")
     a81 = q8.answers.build(:response_class => "integer", :question => q8)
     v1 = a81.validations.build(:rule => "A", :answer => a81)
     vc1 = v1.validation_conditions.build(:operator => ">=", :integer_value => 0, :validation => v1, :rule_key => "A")
 
-    q9 = @section.questions.build(:text => "Pick your favorite date AND time", :custom_renderer => "/partials/custom_question")
+    q9 = @section.questions.build(:text => "Pick your favorite date AND time")
     a91 = q9.answers.build(:response_class => "datetime", :question => q9)
 
     q10 = @section.questions.build(:text => "What time do you usually take a lunch break?", :reference_identifier => "time_lunch")
@@ -113,7 +113,7 @@ survey "Simple survey", :description=>"very simple" do
     validation :rule=>"A"
     condition_A ">=", :integer_value=>0
 
-    q "Pick your favorite date AND time", :custom_renderer=>"/partials/custom_question"
+    q "Pick your favorite date AND time"
     a :datetime
 
     q_time_lunch "What time do you usually take a lunch break?"

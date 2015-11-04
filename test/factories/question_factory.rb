@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  
+
   sequence(:question_display_order) { |n| n }
 
   factory :question do |q|
@@ -39,7 +39,6 @@ FactoryGirl.define do
     g.common_identifier {}
     g.display_type {}
     g.custom_class {}
-    g.custom_renderer {}
   end
 
 end
