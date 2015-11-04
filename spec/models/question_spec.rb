@@ -9,7 +9,7 @@ describe Question do
       question.text = nil
       question.should have(1).error_on :text
     end
-    it "#is_mandantory == false by default" do
+    it "#mandatory? == false by default" do
       question.mandatory?.should be_false
     end
     it "converts #pick to string" do

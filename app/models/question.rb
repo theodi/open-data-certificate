@@ -13,20 +13,18 @@ class Question < ActiveRecord::Base
 
   # Validations
   validates_presence_of :text, :display_order
-  validates_inclusion_of :is_mandatory, :in => [true, false]
 
   # Whitelisting attributes
-  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :is_mandatory, :display_width, :custom_class, :correct_answer_id, :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
+  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :display_width, :custom_class, :correct_answer_id, :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
-  scope :mandatory, where(is_mandatory: true)
+  scope :mandatory, where(required: 'required')
   scope :urls, joins(:answers).merge(Answer.urls)
 
   scope :for_id, lambda { |id| where(reference_identifier: id) }
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
-  before_save :set_mandatory
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
@@ -35,7 +33,6 @@ class Question < ActiveRecord::Base
 
   def initialize(*args)
     super(*args)
-    self.is_mandatory ||= false
     self.display_type ||= "default"
     self.pick ||= "none"
     self.data_export_identifier ||= Surveyor::Common.normalize(text)
@@ -51,7 +48,7 @@ class Question < ActiveRecord::Base
   end
 
   def mandatory?
-    self.is_mandatory == true
+    required == 'required'
   end
 
   def part_of_group?
@@ -140,10 +137,6 @@ class Question < ActiveRecord::Base
     @triggered_q ||= dependency.nil? || dep_map[dependency.id]
   end
 
-  def is_mandatory?
-    required.to_s == "required"
-  end
-
   def type
     @type ||= question_group && question_group.display_type == 'repeater' ? :repeater : pick.to_sym
   end
@@ -229,11 +222,6 @@ class Question < ActiveRecord::Base
                             .first
                             .try(:requirement_level_index)
                             .to_i
-  end
-
-  def set_mandatory
-    self.is_mandatory ||= is_mandatory?
-    nil # return value of false prevents saving
   end
 
   def set_default_value_for_required

@@ -366,7 +366,7 @@ describe ResponseSet, "with mandatory questions" do
   end
   def generate_responses(count, mandatory = nil, responded = nil)
     count.times do |i|
-      q = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+      q = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
       a = FactoryGirl.create(:answer, :question => q, :response_class => "answer")
       if responded == "responded"
         @response_set.responses << FactoryGirl.create(:response, :question => q, :answer => a)
@@ -390,8 +390,8 @@ describe ResponseSet, "with mandatory questions" do
   end
   it "should ignore labels and images" do
     generate_responses(3, "mandatory", "responded")
-    FactoryGirl.create(:question, :survey_section => @section, :display_type => "label", :is_mandatory => true)
-    FactoryGirl.create(:question, :survey_section => @section, :display_type => "image", :is_mandatory => true)
+    FactoryGirl.create(:question, :survey_section => @section, :display_type => "label", :required => 'required')
+    FactoryGirl.create(:question, :survey_section => @section, :display_type => "image", :required => 'required')
     @response_set.mandatory_questions_complete?.should be_true
     @response_set.progress_hash.should == {:questions => 5, :triggered => 5, :triggered_mandatory => 5, :triggered_mandatory_completed => 5}
   end
@@ -403,11 +403,11 @@ describe ResponseSet, "with mandatory, dependent questions" do
     @response_set = FactoryGirl.create(:response_set, :survey => @survey)
   end
   def generate_responses(count, mandatory = nil, dependent = nil, triggered = nil)
-    dq = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+    dq = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
     da = FactoryGirl.create(:answer, :question => dq, :response_class => "answer")
     dx = FactoryGirl.create(:answer, :question => dq, :response_class => "answer")
     count.times do |i|
-      q = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+      q = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
       a = FactoryGirl.create(:answer, :question => q, :response_class => "answer")
       if dependent == "dependent"
         d = FactoryGirl.create(:dependency, :question => q)

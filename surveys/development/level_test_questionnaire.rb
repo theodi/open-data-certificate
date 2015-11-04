@@ -1,5 +1,4 @@
 survey 'Level Test Questionnaire',
-       :default_mandatory => 'false',
        :dataset_title => 'dataTitle',
        :dataset_curator => 'dataTitle' do
 

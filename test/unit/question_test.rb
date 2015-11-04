@@ -187,13 +187,13 @@ class QuestionTest < ActiveSupport::TestCase
 
   test "is mandatory for required value of required" do
     question = FactoryGirl.build :question, required: 'required'
-    assert question.is_mandatory?
+    assert question.mandatory?
   end
 
   [nil, '', 'pilot', 'standard', 'exemplar'].each do |value|
     test "is not mandatory for required value of #{value.inspect}" do
       question = FactoryGirl.build :question, required: value
-      assert_false question.is_mandatory?
+      assert_false question.mandatory?
     end
   end
 

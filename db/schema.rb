@@ -213,7 +213,6 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.string   "common_identifier"
     t.integer  "display_order"
     t.string   "display_type"
-    t.boolean  "is_mandatory"
     t.integer  "display_width"
     t.string   "custom_class"
     t.datetime "created_at",                                                  :null => false

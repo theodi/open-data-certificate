@@ -67,7 +67,6 @@
 <xsl:template match="questionnaire" mode="structure">
 	<survey label="{@jurisdiction}"
 		full_title="{local:titleCase(key('countries', @jurisdiction, $countries))}"
-		default_mandatory="false"
 		status="{@status}">
 		<xsl:attribute name="description">
 			<xsl:apply-templates select="help/*" mode="html" />
