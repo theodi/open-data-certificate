@@ -11,16 +11,6 @@ class ResponseSet < ActiveRecord::Base
   # Default title for a response set / dataset
   DEFAULT_TITLE = I18n.t('response_set.default_title')
 
-  REF_CHANGES = {
-                  "ogl_uk" => "OGL-UK-2.0",
-                  "cc_zero" => "CC0-1.0",
-                  "odc_odbl" => "ODbL-1.0",
-                  "cc_by" => "CC-BY-4.0",
-                  "cc_by_sa" => "CC-BY-SA-4.0",
-                  "odc_by" => "ODC-BY-1.0",
-                  "odc_pddl" => "ODC-PDDL-1.0"
-                }
-
   before_save :update_certificate
   before_save :update_dataset
 
