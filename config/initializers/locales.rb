@@ -9,4 +9,4 @@ I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 I18n.fallbacks.map('fr' => 'en')
 
 JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
-LANGUAGES = JURISDICTION_LANGS.map(&:last).flatten.uniq.sort
+OpenDataCertificate::Application.config.i18n.available_locales = JURISDICTION_LANGS.map(&:last).flatten.uniq.sort
