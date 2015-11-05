@@ -19,7 +19,7 @@
       - unless certificate.expiring_state.nil?
         %p.expiring-state
           %i.icon-exclamation-sign{class: certificate.expiring_state}
-          = t("dashboard.expiring_states.#{certificate.expiring_state}", days: certificate.days_to_expiry)
+          = t("dashboard.expiring_states.#{certificate.expiring_state}", count: certificate.days_to_expiry)
 
       %p.jurisdiction
         %span.badge.popdown{data: {content: t('dashboard.popover.about_jurisdiction', {jurisdiction:response_set.jurisdiction})}}= response_set.jurisdiction

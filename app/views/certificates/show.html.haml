@@ -11,7 +11,7 @@
             - notice = t('certificate.expired_notice', jurisdiction: @certificate.response_set.jurisdiction)
           - else
             Warning
-            - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, days: @certificate.days_to_expiry)
+            - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, count: @certificate.days_to_expiry)
         %p= notice
 
 .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}

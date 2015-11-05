@@ -141,7 +141,9 @@ en:
       superseded: Superseded
     expiring_states:
       expired: Expired
-      expiring: 'Expires in %{days} days'
+      expiring:
+        one: 'Expires in 1 day'
+        other: 'Expires in %{count} days'
     verification: Verification
     expiring_certificates: Some of your certificates should be updated to reflect the latest version of their questionnaires.
     updated_response_set: Certificate updated
@@ -285,7 +287,9 @@ en:
     audited: This certificate has been marked as ODI audited
     not_audited: This certificate has not been marked as ODI audited
     expired_notice: "This certificate should be updated to reflect the latest questionnaire for %{jurisdiction}."
-    expiring_notice: "This certificate will expire in %{days} days. Update to reflect the latest questionnaire for %{jurisdiction}."
+    expiring_notice:
+      one: "This certificate will expire in %{count} day. Update to reflect the latest questionnaire for %{jurisdiction}."
+      other: "This certificate will expire in %{count} days. Update to reflect the latest questionnaire for %{jurisdiction}."
     claim_this_certificate: "Is this your dataset?"
     us_public_domain_assumption_html: |
       This dataset has been created by US Government which means it is required to be in the public domain. However
