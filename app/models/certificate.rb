@@ -2,8 +2,6 @@ class Certificate < ActiveRecord::Base
   include Badges, Counts, Ownership
   include AASM
 
-  after_initialize :init
-
   belongs_to :response_set, touch: true, inverse_of: :certificate
 
   has_one :survey,  through: :response_set
@@ -84,10 +82,6 @@ class Certificate < ActiveRecord::Base
     event :draft do
       transitions from: :published, to: :draft
     end
-  end
-
-  def init
-    self.attained_level ||= 'none'
   end
 
   def visible?
