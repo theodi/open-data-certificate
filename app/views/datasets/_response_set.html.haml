@@ -26,29 +26,29 @@
 
 
     .span3
-      %h3 Your certificate
+      %h3= t('dashboard.your_certificate')
       .btn-group.btn-group-vertical
         -if response_set.draft? && certificate.expiring_state.nil?
           = link_to [:publish, response_set], method: :post, data: {code: response_set.access_code}, class: 'btn btn-large btn-block publish-certificate' do
-            Publish certificate
+            = t('dashboard.publish_certificate')
 
         -if !certificate.expiring_state.nil? && response_set.published?
           = link_to 'Update certificate', continue_my_survey_path(response_set_code: response_set.access_code, update: true), class: 'btn btn-large btn-block'
 
         - if response_set.published?
-          = link_to "View certificate", dataset_latest_certificate_path(response_set.dataset), class: 'btn btn-large btn-block'
+          = link_to(t('dashboard.view_certificate'), dataset_latest_certificate_path(response_set.dataset), class: 'btn btn-large btn-block')
           = link_to(t("dashboard.embed"), "#embed-#{certificate.id}", 'data-toggle' => :modal, class: 'btn btn-large btn-block')
         - else
-          = link_to "View certificate", [response_set.dataset, certificate], class: 'btn btn-large btn-block'
+          = link_to(t('dashboard.view_certificate'), [response_set.dataset, certificate], class: 'btn btn-large btn-block')
 
       - if response_set.published?
         =render :partial => 'shared/embed_code', :locals => {:certificate => certificate}
 
     .span3.edit-jurisdiction
-      %h3 Your answers
+      %h3= t('dashboard.your_answers')
       -if is_primary
-        %p= button_to 'Edit Questionnaire', continue_path(response_set), method: 'post', class: 'btn btn-large btn-info btn-block edit_questionaire'
-        %p= link_to 'Change Jurisdiction', "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown'
+        %p= button_to(t('certificate.edit_questionnaire'), continue_path(response_set), method: 'post', class: 'btn btn-large btn-info btn-block edit_questionaire')
+        %p= link_to(t('response_set.choose_a_jurisdiction'), "#switch-#{response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown')
 
         =render :partial => 'shared/switch_jurisdiction', locals: {response_set: response_set}
 
@@ -60,4 +60,4 @@
     .span3
       = "#{t('dashboard.verification')}: #{t(certificate.certification_type, scope: 'certificate.certification_types')}"
     .span3
-      = link_to 'Delete', response_set, {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title')}, class: 'delete'}
+      = link_to(t('improvements.delete_button'), response_set, {:method => :delete, :confirm => t('dashboard.confirm_deletion'), data: {confirm_title: t('dashboard.confirm_deletion_dialog_title'), confirm_cancel: t('dashboard.confirm_cancel_button'), confirm_proceed: t('dashboard.confirm_delete_button')}, class: 'delete'})

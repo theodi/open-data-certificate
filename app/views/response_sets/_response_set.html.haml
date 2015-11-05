@@ -9,7 +9,7 @@
     - responses = response_set.responses_for_questions questions
     - if responses.any?
       %hr.heavy
-      %h3= section.title
+      %h3= section.heading
       - if section.reference_identifier == "legal" && response_set.assumed_us_public_domain?
         %div.certificate-info
           %i.icon-info-sign

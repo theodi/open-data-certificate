@@ -42,6 +42,10 @@ class Answer < ActiveRecord::Base
     translation(locale)[:text]
   end
 
+  def statement_text(locale=I18n.locale)
+    translation(locale)[:text_as_statement]
+  end
+
   def value_key
     input_type == 'url' ? :text_value : :string_value
   end

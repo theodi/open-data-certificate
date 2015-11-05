@@ -90,7 +90,7 @@
                     = t('surveyor.documentation_url.not_autocompleted')
 
             .span4
-              %a.btn.btn-large.btn-primary{href: 'start'} Edit
+              %a.btn.btn-large.btn-primary{href: 'start'}= t('surveys.edit_button')
 
     = render :partial => '/partials/section', :collection => @sections, :locals => {:f => f}
 

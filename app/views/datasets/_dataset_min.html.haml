@@ -9,14 +9,14 @@
         %h3.badge-align
           = link_to_unless_current dataset.title, dataset
       .span3
-        =link_to 'View certificate', dataset_latest_certificate_path(dataset), class: 'btn btn-info'
+        =link_to t('dashboard.view_certificate'), dataset_latest_certificate_path(dataset), class: 'btn btn-info'
       .span3
         .details
           %p
-            %span Published By
+            %span= t('datasets.published_by')
             %strong= dataset.certificate.curator
           %p
-            %span Issued
+            %span= t('datasets.issued')
             %strong= "#{time_ago_in_words(dataset.certificate.published_at)} ago"
       .span2
         .expand
@@ -40,6 +40,6 @@
 - else
   .dataset
     .row
-      .span12 No published certificate
+      .span12= t('datasets.no_published_certificate')
 
 %hr.heavy
