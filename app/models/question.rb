@@ -17,6 +17,8 @@ class Question < ActiveRecord::Base
   # Whitelisting attributes
   attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :display_width, :custom_class, :correct_answer_id, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic, :is_requirement, :corresponding_requirements
 
+  serialize :corresponding_requirements, Array
+
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
   scope :mandatory, where(required: 'required')
   scope :urls, joins(:answers).merge(Answer.urls)
@@ -197,7 +199,6 @@ class Question < ActiveRecord::Base
     #       definitively say the requirement has been met.
     #       Validation in the Survey model is used to prevent a requirement getting linked to more than one question or answer
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
-
     return false unless question # if for some reason a matching question is not found
 
     !!(response_level_index(question, responses) >= requirement_level_index)
@@ -216,10 +217,15 @@ class Question < ActiveRecord::Base
   end
 
   def requirement_level_for_responses(question_id, responses)
-    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question_id, requirement_identifier])
-                            .first
-                            .try(:requirement_level_index)
-                            .to_i
+    relevent_response = responses.joins(:answer).where(question_id: question_id).detect do |r|
+      r.answer.corresponding_requirements.include?(requirement_identifier)
+    end
+
+    if relevent_response.present?
+      relevent_response.requirement_level_index.to_i
+    else
+      0
+    end
   end
 
   def set_default_value_for_required
@@ -233,7 +239,7 @@ class Question < ActiveRecord::Base
 
   def find_answer_corresponding_to_requirement
     answers = survey_section.survey.only_questions.map(&:answers).flatten
-    answers.detect { |a| a.requirement.present? && a.requirement.include?(requirement_identifier) }
+    answers.detect { |a| a.corresponding_requirements.present? && a.corresponding_requirements.include?(requirement_identifier) }
   end
 
   def cache_question_or_answer_corresponding_to_requirement

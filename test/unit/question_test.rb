@@ -62,9 +62,9 @@ class QuestionTest < ActiveSupport::TestCase
   test "#answer_corresponding_to_requirement should return the right answer" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: "the_right_level_#{rand(10)}")
 
-    (1..5).to_a.sample.times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
-    the_right_answer = FactoryGirl.create(:answer, requirement: requirement.requirement_identifier, question: FactoryGirl.create(:question, survey_section: requirement.survey_section))
-    (1..5).to_a.sample.times { FactoryGirl.create(:answer, requirement: "wrong_level_#{rand(10)}", question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
+    (1..5).to_a.sample.times { FactoryGirl.create(:answer, corresponding_requirements: ["wrong_level_#{rand(10)}"], question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
+    the_right_answer = FactoryGirl.create(:answer, corresponding_requirements: [requirement.requirement_identifier], question: FactoryGirl.create(:question, survey_section: requirement.survey_section))
+    (1..5).to_a.sample.times { FactoryGirl.create(:answer, corresponding_requirements: ["wrong_level_#{rand(10)}"], question: FactoryGirl.create(:question, survey_section: requirement.survey_section)) } #wrong questions
 
     requirement.survey_section.survey.reload
     requirement.save
@@ -88,7 +88,7 @@ class QuestionTest < ActiveSupport::TestCase
   test "for string answers - #requirement_met_by_responses? returns true when requirement is met by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section)
-    answer = FactoryGirl.create(:answer, requirement: requirement.requirement_identifier, question: question)
+    answer = FactoryGirl.create(:answer, corresponding_requirements: [requirement.requirement_identifier], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer.id, string_value: 'my answer')
 
@@ -102,10 +102,10 @@ class QuestionTest < ActiveSupport::TestCase
   test "for checkbox answers - #requirement_met_by_responses? returns false when requirement is not met by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section, pick: :any)
-    answer1 = FactoryGirl.create(:answer, requirement: 'basic_1', question: question)
-    answer2 = FactoryGirl.create(:answer, requirement: 'pilot_1', question: question)
-    answer3 = FactoryGirl.create(:answer, requirement: 'standard_1', question: question)
-    answer4 = FactoryGirl.create(:answer, requirement: 'exemplar_1', question: question)
+    answer1 = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1'], question: question)
+    answer2 = FactoryGirl.create(:answer, corresponding_requirements: ['pilot_1'], question: question)
+    answer3 = FactoryGirl.create(:answer, corresponding_requirements: ['standard_1'], question: question)
+    answer4 = FactoryGirl.create(:answer, corresponding_requirements: ['exemplar_1'], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer1.id)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer2.id)
@@ -120,10 +120,10 @@ class QuestionTest < ActiveSupport::TestCase
   test "for checkbox answers - #requirement_met_by_responses? returns true when requirement is met by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section, pick: :any)
-    answer1 = FactoryGirl.create(:answer, requirement: 'basic_1', question: question)
-    answer2 = FactoryGirl.create(:answer, requirement: 'pilot_1', question: question)
-    answer3 = FactoryGirl.create(:answer, requirement: 'standard_1', question: question)
-    answer4 = FactoryGirl.create(:answer, requirement: 'exemplar_1', question: question)
+    answer1 = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1'], question: question)
+    answer2 = FactoryGirl.create(:answer, corresponding_requirements: ['pilot_1'], question: question)
+    answer3 = FactoryGirl.create(:answer, corresponding_requirements: ['standard_1'], question: question)
+    answer4 = FactoryGirl.create(:answer, corresponding_requirements: ['exemplar_1'], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer3.id)
 
@@ -137,10 +137,10 @@ class QuestionTest < ActiveSupport::TestCase
   test "for radio answers - #requirement_met_by_responses? returns false when requirement is not met by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section, pick: :one)
-    answer1 = FactoryGirl.create(:answer, requirement: 'basic_1', question: question)
-    answer2 = FactoryGirl.create(:answer, requirement: 'pilot_1', question: question)
-    answer3 = FactoryGirl.create(:answer, requirement: 'standard_1', question: question)
-    answer4 = FactoryGirl.create(:answer, requirement: 'exemplar_1', question: question)
+    answer1 = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1'], question: question)
+    answer2 = FactoryGirl.create(:answer, corresponding_requirements: ['pilot_1'], question: question)
+    answer3 = FactoryGirl.create(:answer, corresponding_requirements: ['standard_1'], question: question)
+    answer4 = FactoryGirl.create(:answer, corresponding_requirements: ['exemplar_1'], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer2.id)
 
@@ -154,10 +154,10 @@ class QuestionTest < ActiveSupport::TestCase
   test "for radio answers - #requirement_met_by_responses? returns false when requirement is met exactly by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section, pick: :one)
-    answer1 = FactoryGirl.create(:answer, requirement: 'basic_1', question: question)
-    answer2 = FactoryGirl.create(:answer, requirement: 'pilot_1', question: question)
-    answer3 = FactoryGirl.create(:answer, requirement: 'standard_1', question: question)
-    answer4 = FactoryGirl.create(:answer, requirement: 'exemplar_1', question: question)
+    answer1 = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1'], question: question)
+    answer2 = FactoryGirl.create(:answer, corresponding_requirements: ['pilot_1'], question: question)
+    answer3 = FactoryGirl.create(:answer, corresponding_requirements: ['standard_1'], question: question)
+    answer4 = FactoryGirl.create(:answer, corresponding_requirements: ['exemplar_1'], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer3.id)
 
@@ -171,10 +171,10 @@ class QuestionTest < ActiveSupport::TestCase
   test "for radio answers - #requirement_met_by_responses? returns false when requirement is exceeded by responses" do
     requirement = FactoryGirl.create(:requirement, reference_identifier: 'standard_1')
     question = FactoryGirl.create(:question, survey_section: requirement.survey_section, pick: :one)
-    answer1 = FactoryGirl.create(:answer, requirement: 'basic_1', question: question)
-    answer2 = FactoryGirl.create(:answer, requirement: 'pilot_1', question: question)
-    answer3 = FactoryGirl.create(:answer, requirement: 'standard_1', question: question)
-    answer4 = FactoryGirl.create(:answer, requirement: 'exemplar_1', question: question)
+    answer1 = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1'], question: question)
+    answer2 = FactoryGirl.create(:answer, corresponding_requirements: ['pilot_1'], question: question)
+    answer3 = FactoryGirl.create(:answer, corresponding_requirements: ['standard_1'], question: question)
+    answer4 = FactoryGirl.create(:answer, corresponding_requirements: ['exemplar_1'], question: question)
     response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
     FactoryGirl.create(:response, response_set: response_set, question_id: question.id, answer_id: answer4.id)
 

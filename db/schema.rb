@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151105153400) do
+ActiveRecord::Schema.define(:version => 20151105172643) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.boolean  "is_exclusive"
     t.integer  "display_length"
     t.string   "custom_class"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "default_value"
     t.string   "api_id"
     t.string   "display_type"
     t.string   "input_mask"
     t.string   "input_mask_placeholder"
-    t.string   "requirement"
+    t.string   "corresponding_requirements"
     t.string   "help_text_more_url"
     t.string   "input_type"
     t.string   "placeholder"

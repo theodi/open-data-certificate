@@ -64,6 +64,14 @@ describe Question do
     end
   end
 
+  describe '#corresponding_requirements' do
+    it 'saves and restores as an Array' do
+      question = FactoryGirl.create(:question, corresponding_requirements: ['basic_1', 'standard_10'])
+      question = Question.find(question.id)
+      expect(question.corresponding_requirements).to eql(['basic_1', 'standard_10'])
+    end
+  end
+
   context "with answers" do
     let(:answer_1){ FactoryGirl.create(:answer, :question => question, :display_order => 3, :text => "blue")}
     let(:answer_2){ FactoryGirl.create(:answer, :question => question, :display_order => 1, :text => "red")}

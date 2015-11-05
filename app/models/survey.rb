@@ -181,7 +181,10 @@ class Survey < ActiveRecord::Base
     answers = only_questions.map(&:answers).flatten.compact
 
     requirements.each do |requirement|
-      amount = only_questions.select { |q| q != requirement && q.corresponding_requirements.include?(requirement.requirement_identifier) }.count + answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement_identifier)}.count
+      amount = only_questions.select { |q| q != requirement && q.corresponding_requirements.present? && q.corresponding_requirements.include?(requirement.requirement_identifier) }.count
+
+      amount += answers.select { |a| a.corresponding_requirements.present? && a.corresponding_requirements.include?(requirement.requirement_identifier)}.count
+
       if amount == 0
         errors.add(:base, "requirement '#{requirement.requirement_identifier}' is not linked to a question or answer")
       elsif amount > 1
