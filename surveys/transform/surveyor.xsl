@@ -129,7 +129,7 @@
 					</xsl:if>
 				</xsl:if>
 				<xsl:if test="(radioset or select or checkboxset) and .//requirement[not(ancestor::option)]">
-					<xsl:attribute name="requirement" select=".//requirement[not(ancestor::option)]/local:requirementId(.)" separator=", " />
+					<xsl:attribute name="corresponding_requirements" select=".//requirement[not(ancestor::option)]/local:requirementId(.)" separator=", " />
 				</xsl:if>
 				<xsl:choose>
 					<xsl:when test="radioset | yesno | select">
@@ -169,7 +169,7 @@
 		</xsl:choose>
 		<xsl:apply-templates select="@*" mode="structure" />
 		<xsl:if test="..//requirement">
-			<xsl:attribute name="requirement" select="..//requirement/local:requirementId(.)" separator=", " />
+			<xsl:attribute name="corresponding_requirements" select="..//requirement/local:requirementId(.)" separator=", " />
 		</xsl:if>
 	</xsl:element>
 </xsl:template>
@@ -200,7 +200,7 @@
 			</xsl:if>
 		</xsl:if>
 		<xsl:if test="requirement">
-			<xsl:attribute name="requirement" select="local:requirementId(requirement)" />
+			<xsl:attribute name="corresponding_requirements" select="local:requirementId(requirement)" />
 		</xsl:if>
 	</xsl:element>
 </xsl:template>
@@ -236,7 +236,7 @@
 			<xsl:attribute name="text_as_statement" select="@yes" />
 		</xsl:if>
 		<xsl:if test="..//requirement">
-			<xsl:attribute name="requirement" select="..//requirement/local:requirementId(.)" separator=", " />
+			<xsl:attribute name="corresponding_requirements" select="..//requirement/local:requirementId(.)" separator=", " />
 		</xsl:if>
 	</a_true>
 </xsl:template>
@@ -259,7 +259,7 @@
 			<xsl:attribute name="label">
 				<xsl:apply-templates select="." mode="html" />
 			</xsl:attribute>
-			<xsl:attribute name="requirement" select="local:requirementId(.)" />
+			<xsl:attribute name="is_requirement" select="true()" />
 		</xsl:element>
 		<xsl:variable name="conditions" as="element()">
 			<xsl:apply-templates select="." mode="conditions" />
@@ -579,8 +579,8 @@
 	<xsl:value-of select="." />
 </xsl:template>
 
-<xsl:template match="*[starts-with(name(), 'a_')]/@requirement" mode="syntax">
-	<xsl:text>:requirement => [</xsl:text>
+<xsl:template match="*/@corresponding_requirements" mode="syntax">
+	<xsl:text>:corresponding_requirements => [</xsl:text>
 	<xsl:for-each select="tokenize(., ', ')">
 		<xsl:text>'</xsl:text>
 		<xsl:value-of select="." />
