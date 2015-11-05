@@ -219,7 +219,8 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.datetime "updated_at",                                                  :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
-    t.string   "requirement"
+    t.boolean  "is_requirement",                           :default => false
+    t.string   "corresponding_requirements"
     t.string   "required",                                 :default => "",    :null => false
     t.string   "help_text_more_url"
     t.string   "text_as_statement"
@@ -236,7 +237,7 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
   add_index "questions", ["question_group_id"], :name => "index_questions_on_question_group_id"
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
-  add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
+  add_index "questions", ["survey_section_id", "display_type", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"

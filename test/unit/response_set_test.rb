@@ -251,20 +251,20 @@ class ResponseSetTest < ActiveSupport::TestCase
     survey = survey_section.survey
 
     # non-triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_1', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_1', survey_section: survey_section)
+    question = FactoryGirl.create(:question, corresponding_requirements: ['level_1'], survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_1', survey_section: survey_section)
     dependency = FactoryGirl.create(:dependency, question: requirement)
     FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
 
     # non-triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_2', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_2', survey_section: survey_section)
+    question = FactoryGirl.create(:question, corresponding_requirements: ['level_2'], survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_2', survey_section: survey_section)
     dependency = FactoryGirl.create(:dependency, question: requirement)
     FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
 
     # triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_3', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_3', survey_section: survey_section)
+    question = FactoryGirl.create(:question, corresponding_requirements: ['level_3'], survey_section: survey_section)
+    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_3', survey_section: survey_section)
     dependency = FactoryGirl.create(:dependency, question: requirement)
     FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count<2'
     survey.reload
@@ -298,10 +298,10 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#completed_requirements returns only triggered_requirements that are met by responses" do
-    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_2', requirement_met_by_responses?: false),
-                              stub(requirement: 'level_3', requirement_met_by_responses?: false),
-                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    triggered_requirements = [stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: false),
+                              stub(requirement_met_by_responses?: false),
+                              stub(requirement_met_by_responses?: false),
     ]
 
     response_set = FactoryGirl.create(:response_set)
@@ -311,10 +311,10 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#outstanding_requirements returns only triggered_requirements that are not met by responses" do
-    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_2', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_3', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    triggered_requirements = [stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: false),
     ]
 
     response_set = FactoryGirl.create(:response_set)

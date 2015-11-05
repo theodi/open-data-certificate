@@ -34,7 +34,7 @@ module SurveyorHelper
   end
 
   def partial_for_question(q)
-    q.is_a_requirement? ? '/partials/requirement' : '/partials/question'
+    q.is_requirement? ? '/partials/requirement' : '/partials/question'
   end
 
 end

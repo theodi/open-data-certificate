@@ -25,8 +25,9 @@ FactoryGirl.define do
     end
 
     factory :requirement do
-      requirement 'level_1'
+      reference_identifier 'level_1'
       display_type 'label'
+      is_requirement true
     end
   end
 

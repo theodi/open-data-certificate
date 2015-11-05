@@ -99,11 +99,11 @@ class Survey < ActiveRecord::Base
   end
 
   def requirements
-    questions.where(display_type: 'label').where('requirement is not null')
+    questions.where(is_requirement: true)
   end
 
   def only_questions
-    questions.where('display_type != "label" OR requirement = ""')
+    questions.where(is_requirement: false)
   end
 
   def mandatory_questions
@@ -177,15 +177,15 @@ class Survey < ActiveRecord::Base
   def ensure_requirements_are_linked_to_only_one_question_or_answer
     # can't rely on the methods for these collections, as for new surveys nothing will be persisted to DB yet
     questions = sections.map(&:questions).flatten.compact
-    requirements, only_questions = questions.partition(&:is_a_requirement?)
+    requirements, only_questions = questions.partition(&:is_requirement?)
     answers = only_questions.map(&:answers).flatten.compact
 
     requirements.each do |requirement|
-      amount = only_questions.select { |q| q != requirement && q.requirement && q.requirement == requirement.requirement }.count + answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement)}.count
+      amount = only_questions.select { |q| q != requirement && q.corresponding_requirements.include?(requirement.requirement_identifier) }.count + answers.select { |a| a.requirement && a.requirement.include?(requirement.requirement_identifier)}.count
       if amount == 0
-        errors.add(:base, "requirement '#{requirement.reference_identifier}' is not linked to a question or answer")
+        errors.add(:base, "requirement '#{requirement.requirement_identifier}' is not linked to a question or answer")
       elsif amount > 1
-        errors.add(:base, "requirement '#{requirement.reference_identifier}' is linked more than one question or answer")
+        errors.add(:base, "requirement '#{requirement.requirement_identifier}' is linked more than one question or answer")
       end
     end
   end
