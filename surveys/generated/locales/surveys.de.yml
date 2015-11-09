@@ -16,6 +16,7 @@ de:
       legal:
         text: Rechtliche Information
         help_text: Rechte, Lizenzvergabe und Datenschutz
+        title: Rechtliche Information
     questions:
       dataTitle:
         text: Wie werden die Daten bezeichnet?
@@ -962,13 +963,9 @@ de:
           a_1:
             placeholder: URL der Werkzeugliste
       publisherRights:
-        text: Besitzen Sie die Rechte, diese Daen als offene Daten (Open Data) zu
-          veröffentlichen?
-        help_text: Wenn Ihre Organisation die Daten nicht ursprünglich erzeugt oder
-          erhoben hat, verfügen Sie möglicherweise nicht über das Recht, sie zu veröffentlichen.
-          Wenn Sie unsicher sind, erkundigen Sie sich beim Besitzer der Daten, denn
-          Sie benötigen für die Veröffentlicheung dessen Einwilligung.
         answers:
+          complicated:
+            text: Die Rechte an diesen Daten sind komplex oder unklar
           'yes':
             text: Ja, Sie besitzen die notwendigen Rechte, um diese Daten als offene
               Daten ("open data") zu publizieren.
@@ -978,8 +975,12 @@ de:
           unsure:
             text: Sie sind sich nicht sicher, ob Sie berechtigt sind, die Daten als
               "offen" (Open Data) zu veröffentlichen.
-          complicated:
-            text: Die Rechte an diesen Daten sind komplex oder unklar
+        text: Besitzen Sie die Rechte, diese Daen als offene Daten (Open Data) zu
+          veröffentlichen?
+        help_text: Wenn Ihre Organisation die Daten nicht ursprünglich erzeugt oder
+          erhoben hat, verfügen Sie möglicherweise nicht über das Recht, sie zu veröffentlichen.
+          Wenn Sie unsicher sind, erkundigen Sie sich beim Besitzer der Daten, denn
+          Sie benötigen für die Veröffentlicheung dessen Einwilligung.
       rightsRiskAssessment:
         text: Wo beschreiben Sie die Risiken, die Nutzer unter Umständen eingehen,
           wenn sie die Daten nuzten?
@@ -992,18 +993,21 @@ de:
           a_1:
             placeholder: URL der Risikodokumentation
       publisherOrigin:
-        text: Wurden <em>alle</em>Daten ursprünglich von Ihnen erzeugt oder erhoben?
         text_as_statement: Die Daten wurden
         help_text: Wenn irgend ein Teil der Daten nicht aus Ihrer Organisation, sondern
           von anderen Personen oder Organisationen stammt, müssen Sie zusätzliche
           Informationen über Ihre Rechte zur Veröffentlichung bereitstellen.
         answers:
+          'true':
+            text: 'yes'
+            text_as_statement: ursprünglich vom Herausgeber erzeugt oder erhoben
           a_false:
             text: 'no'
             text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: ursprünglich vom Herausgeber erzeugt oder erhoben
+        text: Wurden <em>alle</em>Daten ursprünglich von Ihnen erzeugt oder erhoben?
       thirdPartyOrigin:
         text: Wurden Teile der Daten aus anderen Daten extrahiert oder berechnet?
         help_text: Ein Auszug oder kleiner Teil von Daten anderer Personen kann bedeuten,
@@ -1117,286 +1121,32 @@ de:
         answers:
           a_1:
             placeholder: URL der Nutzungsbestimmungen
-      dataLicence:
-        text: Im Rahmen welcher Lizenz können Nutzer die Daten weiterverwenden?
-        text_as_statement: Diese Daten können von Nutzern im Rahmen der folgenden
-          Lizenz weiterverwendet weren
-        help_text: Beachten Sie, dass jeder der eine Datensammlung erhebt, anlegt,
-          überprüft oder darstellt, automatiscjh Urheberrechte daran erwirbt. Auch
-          die Auswahl oder Anordnung von Daten ist urheberrechtlich geschützt. Daher
-          benötigen die Nutzer eine Lizenz oder Verzichtserklärung, die belegt, dass
-          sie die Daten verwenden können und erklärt, wie sie dies rechtmäßig tun
-          können. Wir führen hier die gebräuchlichsten Lizenzen auf. Wenn es keine
-          (Datenbank-)Urheberrechte gibt, sie ausgelaufen sind, oder Sie darauf verzichten,
-          wählen Sie bitte  "nicht anwendbar".
+      databaseRights:
         answers:
-          cc_by:
-            text: Creative Commons Namensnennung
-            text_as_statement: Creative Commons Namensnennung
-          cc_by_sa:
-            text: Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen
-            text_as_statement: Creative Commons Namensnennung - Weitergabe unter gleichen
-              Bedingungen
-          cc_zero:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      databaseRightsLicenseType:
+        answers:
           odc_by:
             text: Open Data Commons Attribution License
             text_as_statement: Open Data Commons Attribution License
           odc_odbl:
             text: Open Data Commons Open Database License (ODbL)
             text_as_statement: Open Data Commons Open Database License (ODbL)
-          odc_pddl:
-            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
-            text_as_statement: Open Data Commons Public Domain Dedication and Licence
-              (PDDL)
-          na:
-            text: Nicht anwendbar
-            text_as_statement: ''
-          other:
-            text: andere…
-            text_as_statement: ''
-      dataNotApplicable:
-        text: Warum sind auf diese Daten keine LIzenzen anwendbar?
-        text_as_statement: Diese Daten werden nicht lizensiert, denn
-        answers:
-          norights:
-            text: An diesen Daten bsteht kein (Datenbank-)Urheberrecht oder Leistungsschutzrecht
-              für Datenbanken
-            help_text: Leistungsschutzrechte für eine Datenbank bestehen, wenn für
-              die Beschaffung, Überprüfung oder Darstellung der Daten eine nach Art
-              oder Umfang wesentliche Investition notwendig ist. So gibt es keine
-              Urheber- oder Datenschutzrechte, wenn die Daten völlig neu erzeugt werden,
-              in einer naheliegenden Weise dargestellt und in keiner Weise überprüft
-              werden. Ein Leistungsschutzrecht existiert, wenn Sie die einzelnen Daten
-              auswählen oder in einer neuen, nicht naheliegenden liegenden Weise (an-)ordnen.
-            text_as_statement: niemand besitzt Urheberrechte an den Daten
-          expired:
-            text: Urheber- und Leistungsschutzrechte sind ausgelaufen
-            help_text: Leistungsschutzrechte für Datenbanken laufen nach 10 Jahren
-              aus. Wenn die die Daten zuletzt vor mehr als 10 Jahren geändert wurden,
-              dann sind die Leistungsschutzrechte ausgelaufen. Urheberrechte gelten
-              für eine bestimmte Zeit, ausgehend von der Anzahl von Jahren, die seit
-              der Publikation der Daten oder dem Tod ihres des Erstellers vergangen
-              sind. Es ist unwahrscheinlich, dass Urheberrechte ausgelaufen sind.
-            text_as_statement: der Urheberrechtschutzt ist abgelaufen
-          waived:
-            text: Auf die Urheber- und Leistungsschutzrechte für die Datensammlung
-              wurde verzichtet.
-            help_text: Dies bedeutet, dass niemand Rechte an den Daten besitzt, und
-              jeder mit ihnen machen kann, was er will.
-            text_as_statement: ''
-      dataWaiver:
-        text: Welche Verzichtserklärung haben Sie genutzt, um auf die Rechte an den
-          Daten zu verzichten?
-        text_as_statement: Auf die Rechte an diesen Daten wurde verzichtet durch
-        help_text: Sie benötigen ein Erklärung, die den Nutzern zeigt, dass auf die
-          Rechte an den Daten verzichtet wurden, so dass sie mit ihnen tun können,
-          was immer sie wollen. Standardisierte Verzichtserklärungen existieren, aber
-          Sie können Ihren eigenen rechtliche Erklärunge abfassen.
-        answers:
-          pddl:
-            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
-            text_as_statement: Open Data Commons Public Domain Dedication and Licence
-              (PDDL)
-          cc0:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          other:
-            text: Anderes
-            text_as_statement: ''
-      dataOtherWaiver:
-        text: Wo findet sich die Verzichtserklärung für die Rechte an den Daten?
-        text_as_statement: Die Verzichtserklärung für die Rechte an diesen Daten findet
-          sich unter
-        help_text: Geben Sie eine URL an, unter der die Verzichtserklärung öffentlich
-          einsehbar ist, damit die Nutzer überprüfen können, dass auf die Rechte an
-          den Daten verzichtet wurde.
-        answers:
-          a_1:
-            placeholder: URL der Verzichtserklärung
-      otherDataLicenceName:
-        text: Wie lautet der Name der Lizenz?
-        text_as_statement: Diese Daten können  im Rahmen der folgenden Lizenz von
-          anderen weiterverwendet werden
-        help_text: Wenn Sie eine andere Lizenz benutzen, benötigen wir deren Namen,
-          so dass die Nutzer diesen auf Ihrem Open Data Zertifikat sehen können.
-        answers:
-          a_1:
-            placeholder: Name der sonstigen Lizenz
-      otherDataLicenceURL:
-        text: Wo findet sich die Lizenz?
-        text_as_statement: Die Lizenzbestimmungen finden sich unter
-        help_text: Geben Sie eine URL für die Lizenz an, damit die Nutzer diese auf
-          dem Open Data Zertifikat finden und ihre öffentliche Verfügbarkeit prüfen
-          können.
-        answers:
-          a_1:
-            placeholder: URL der sonstigen Lizenz
-      otherDataLicenceOpen:
-        text: Ist die Lizenz eine offene Lizenz?
-        help_text: Wenn sie nicht sicher sind, was eine offene Lizenz ist, dann lesen
-          Sie <a href="http://opendefinition.org/">die Open Knowledge Definition</a>.
-          Als nächstes wählen Sie eine Lizenz aus <a href="http://licenses.opendefinition.org/">der
-          Liste offener Lizenzen des Open Definition Advisory Boards</a>. Wenn eine
-          Lizenz auf dieser Liste fehlt, wurde sie noch nicht geprüft.
+      databaseCopyright:
         answers:
           a_false:
             text: 'no'
           a_true:
             text: 'yes'
-      contentRights:
-        text: Gibt es Urheberrechte am Inhalt der Daten?
-        text_as_statement: Es gibt
-        answers:
-          norights:
-            text: nein, die Daten enthalten nur Fakten und Zahlen
-            help_text: Es gibt kein Urheberrecht an Sachinformationen. Wenn die Daten
-              keinen Inhalt beinhalten, der durch intellectuelle Anstrengung erzeugt
-              wurde, gibt es keine Urheberrechte am Inhalt.
-            text_as_statement: keine Rechte am Inhalt der Daten.
-          samerights:
-            text: Ja, und die Rechte werden alle von der selben Person oder Organisation
-              gehalten.
-            help_text: Wählen Sie diese Option, wenn der Inhalt komplett von einer
-              Person oder Organisation geschaffen oder übertragen wurde.
-            text_as_statement: ''
-          mixedrights:
-            text: Ja, und die Rechte werden von unterschiedlichen Personen oder Organisationen
-              gehalten.
-            help_text: Bei manchen Daten halten unterschiedliche Personen oder Organisationen
-              die Rechte an verschiedenen Datensätzen. In diesem Fall müssen auch
-              Informationen über die Rechte in den Daten vorhanden sein.
-            text_as_statement: ''
-      explicitWaiver:
-        text: Ist der Inhalt der Daten als gemeinfrei gekennzeichnet?
-        text_as_statement: Die Inhalte wurden
-        help_text: Inhalte können als gemeinfrei gekennzeichnet sein durch die <a
-          href="http://creativecommons.org/publicdomain/">Creative Commons Public
-          Domain Mark</a>Dies lässt die Nutzer wissen, dass Sie die Daten frei verwenden
-          können.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: als gemeinfrei gekennzeichnet
-      contentLicence:
-        text: Im Rahmen welcher Lizenz können Nutzer die Inhalte weiterverwenden?
-        text_as_statement: Die Inhalte sind im Rahmen der folgenden Lizenz verfügbar
-        help_text: Beachten Sie, dass jeder, der mittels interlektueller Tätigkeit
-          schöpferisch Inhalte einer Datensammlung  erzeugt , automatiscjh Urheberrechte
-          daran erwirbt. Reinen Fakten fehlt jedoch die notwendige Schopfungs. Daher
-          benötigen die Nutzer eine Verzichtserklärung oder eine Lizenz , die belegt,
-          dass Sie die Daten weiterverwenden können, und wie  sie dies rechtmäßig
-          tun könnendddddddddddddddd. Wir führen hier die gebräuchlichsten Lizenzen
-          auf. Wenn es keine (Datenbank-)Urheberrechte gibt, sie ausgelaufen sind,
-          oder Sie darauf verzichten, wählen Sie bitte  "nicht anwendbar".
-        answers:
-          cc_by:
-            text: Creative Commons Namensnennung
-            text_as_statement: Creative Commons Namensnennung
-          cc_by_sa:
-            text: Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen
-            text_as_statement: Creative Commons Namensnennung - Weitergabe unter gleichen
-              Bedingungen
-          cc_zero:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          na:
-            text: Nicht anwendbar
-            text_as_statement: ''
-          other:
-            text: Andere…
-            text_as_statement: ''
-      contentNotApplicable:
-        text: Warum ist keine Lizenz auf den Inhalt der Daten anwendbar?
-        text_as_statement: Dien Inhalte der Daten sind nicht lizensiert, denn
-        answers:
-          norights:
-            text: Für die Inhalte dieser Daten existiert kein Urheberrecht
-            help_text: Urheberrecht ist auf Inhalte nur anwendbar, wenn diese von
-              der individuellen intellektuellen Leistung des Schöpfers geprägt sind,
-              wie z.B. bei verfassten Texten innerhalb der Daten. Es gibt keinen Urheberrechtsschutz,
-              wenn der Inhalt lediglich Fakten enthält.
-            text_as_statement: es existieren keine Urheberrechte
-          expired:
-            text: der Urheberrechtschutz ist ausgelaufen
-            help_text: Urheberrechte gelten für eine festgelegte Zeitspanne, ausgehend
-              von der Anzahl von Jahren, die seit der Publikation der Daten oder dem
-              Tod ihres des Erstellers vergangen sind.  Sie sollten prüfen, wann der
-              Inhalt geschaffen oder veröffentlicht wurde, denn wenn dies lange her,
-              könnte der Urheberrechtsschutz ausgelaufen sein.
-            text_as_statement: die Urheberrechte sind abgelaufen
-          waived:
-            text: auf die Urheberrechte wurde verzichtet
-            help_text: Dies bedeutet, dass niemand Urheberrechte hat und jeder mit
-              den Daten tun kann, was ihm beliebt.
-            text_as_statement: ''
-      contentWaiver:
-        text: Welche Verzichtserklärung nutzen Sie, um auf die Nutzungs- und Verwertungsrechte
-          zu verzichten.
-        text_as_statement: Auf die Urheberrechte wurde verzichtet durch
-        help_text: Sie benötigen eine Erklärung, um den Nutzern zu zeigen, dass Sie
-          den Verzicht erklärt haben, damit diese verstehen, dass sie mit den Daten
-          tun können, was sie wollen. Es gibt bereits standardisierte Verzichtserklärungen
-          wie CCZero, aber Sie können auch Ihren eigenen Rechtstext schreiben.
-        answers:
-          cc0:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          other:
-            text: Andere…
-            text_as_statement: Andere…
-      contentOtherWaiver:
-        text: Wo findet sich die Verzichtserklärung für die Urheberrechte?
-        text_as_statement: Die Verzichtserklärung für die Urheberrechte findet sich
-          unter
-        help_text: Geben Sie die URL für die Ihe eigene öffentlich verfügbare Verzichtserklärung
-          an, so dass Nutzer prüfen könne, das Sie damit auf ihre Rechte verzichten.
-        answers:
-          a_1:
-            placeholder: URL der Verzichtserklärung
-      otherContentLicenceName:
-        text: Was lautet der Name der Lizenz?
-        text_as_statement: Die Inhalte können im Rahmen der folgenden Lizenz weiterverwendet
-          werden
-        help_text: Wenn Sie eine andere Lizenz nutzen, benötigen wir deren Namen,
-          so dass er Nutzern auf dem Open Data Zertifikat angezeigt werden kann.
-        answers:
-          a_1:
-            placeholder: Name der sonstigen Lizenz
-      otherContentLicenceURL:
-        text: Wo findet sich die Lizenz?
-        text_as_statement: Die Lizenz für die Inhalte findet sich unter
-        help_text: Geben Sie eine URL für die Lizenz an, damit die Nutzer diese auf
-          dem Open Data Zertifikat finden und ihre öffentliche Verfügbarkeit prüfen
-          können.
-        answers:
-          a_1:
-            placeholder: URL der sonstigen Lizenz
-      otherContentLicenceOpen:
-        text: Ist die Lizenz eine offene Lizenz?
-        help_text: Wenn sie nicht sicher sind, was eine offene Lizenz ist, dann lesen
-          Sie <a href="http://opendefinition.org/">die Open Knowledge Definition.</a>
-          Als nächstes wählen Sie ihre Lizenz aus <a href="http://licenses.opendefinition.org/">der
-          Liste offener Lizenzen der Open Definition Advisory Boards</a>. Wenn eine
-          Lizenz auf dieser Liste fehlt, wurde sie noch nicht geprüft.
+      databaseContentCopyright:
         answers:
           a_false:
             text: 'no'
           a_true:
             text: 'yes'
-      contentRightsURL:
-        text: Wo sind die Rechte und die Lizenzvergabe der Inhalte ihrer Daten erklärt?
-        text_as_statement: Die Rechte und die Lizenzvergabe sind erklärt unter
-        help_text: Geben Sie die URL einer Seite an, auf der beschrieben ist, wie
-          jemand sich über die Rechte und die Lizenzvergabe für die Inhalte der Daten
-          informieren kann?
-        answers:
-          a_1:
-            placeholder: URL der Erläuterung der Rechte an den Inhalten
       copyrightStatementMetadata:
         text: Enhalten Ihre Nutzungsbedingungen eine maschinenlesbare Version
         text_as_statement: Die Nutzungsbestimmungen enhält Daten zu
@@ -1507,6 +1257,351 @@ de:
         answers:
           a_1:
             placeholder: URL der Ermächtigung zur Veröffentlichtung
+      privacyImpactAssessmentExists:
+        text_as_statement: Der Herausgeber hat
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      privacyImpactAssessmentUrl:
+        help_text: Geben Sie die URL der Seite an, auf der die Nutzer kontrollieren
+          können, wie Sie die Datenschutzrisiken beurteilt haben. Dies kann in überarbeiteter
+          oder summarischer Form geschehen, wenn die Abschätzung sensible Information
+          enthält.
+      piaAudited:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: unabhängig auditiert
+      individualConsentURL:
+        text: Wo befindet sich der die Datenschutzerklärung für die von Ihren Daten
+          betroffenen Personen?
+        text_as_statement: von den Daten Betroffene wurden mittels der folgenden Erklärung
+          zum Datenschutz unterrichtet
+        answers:
+          a_1:
+            placeholder: URL der Erklärung zum Datenschutz
+        help_text: Wenn Sie Daten über einzelne, konkrete Personen sammeln, müssen
+          Sie ihnen mitteilen, wie die Daten verwandt werden. Nutzer, die Ihre Daten
+          verwenden, benötigen diese Angaben, um sicherzustellen, dass sie den datenschutzrechtlichen
+          Vorschriften nachkommen.
+      dpStaff:
+        text: Gibt es in Ihrer Organisation jemanden, der für den Datenschutz zuständig
+          ist?
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      dbStaffConsulted:
+        text_as_statement: Datenschutzbeauftragter
+        answers:
+          a_false:
+            text: 'no'
+            text_as_statement: ''
+          a_true:
+            text: 'yes'
+            text_as_statement: wurde einbezogen
+        text: Haben Sie die Zuständigen in die Risikobewertung einbezogen?
+      anonymisationAudited:
+        text: Wurde ihre Methode der Anonymisierung unabhängig auditiert?
+        text_as_statement: Die Anonymisierung der Daten wurde
+        help_text: Es ist bewährte Praxis, sicherzustellen, dass Ihr Methode, den
+          personenbezug ihrer Daten zu eliminieren, zuverlässig funktioniert. Unabhängige
+          Audits durch Spezialisten oder Dritte sind häufig gründlicher und unvoreingenommener.
+        answers:
+          a_false:
+            text: 'no'
+            text_as_statement: ''
+          a_true:
+            text: 'yes'
+            text_as_statement: unabhängig auditiert
+      dataLicence:
+        text: Im Rahmen welcher Lizenz können Nutzer die Daten weiterverwenden?
+        text_as_statement: Diese Daten können  im Rahmen der folgenden Lizenz von
+          anderen weiterverwendet werden
+        help_text: Beachten Sie, dass jeder der eine Datensammlung erhebt, anlegt,
+          überprüft oder darstellt, automatiscjh Urheberrechte daran erwirbt. Auch
+          die Auswahl oder Anordnung von Daten ist urheberrechtlich geschützt. Daher
+          benötigen die Nutzer eine Lizenz oder Verzichtserklärung, die belegt, dass
+          sie die Daten verwenden können und erklärt, wie sie dies rechtmäßig tun
+          können. Wir führen hier die gebräuchlichsten Lizenzen auf. Wenn es keine
+          (Datenbank-)Urheberrechte gibt, sie ausgelaufen sind, oder Sie darauf verzichten,
+          wählen Sie bitte  "nicht anwendbar".
+        answers:
+          cc_by:
+            text: Creative Commons Namensnennung
+            text_as_statement: Creative Commons Namensnennung
+          cc_by_sa:
+            text: Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen
+            text_as_statement: Creative Commons Namensnennung - Weitergabe unter gleichen
+              Bedingungen
+          cc_zero:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          odc_by:
+            text: Open Data Commons Attribution License
+            text_as_statement: Open Data Commons Attribution License
+          odc_odbl:
+            text: Open Data Commons Open Database License (ODbL)
+            text_as_statement: Open Data Commons Open Database License (ODbL)
+          odc_pddl:
+            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
+            text_as_statement: Open Data Commons Public Domain Dedication and Licence
+              (PDDL)
+          na:
+            text: Nicht anwendbar
+            text_as_statement: ''
+          other:
+            text: Andere…
+            text_as_statement: ''
+      dataNotApplicable:
+        text: Warum sind auf diese Daten keine LIzenzen anwendbar?
+        text_as_statement: Diese Daten werden nicht lizensiert, denn
+        answers:
+          norights:
+            text: An diesen Daten bsteht kein (Datenbank-)Urheberrecht oder Leistungsschutzrecht
+              für Datenbanken
+            help_text: Leistungsschutzrechte für eine Datenbank bestehen, wenn für
+              die Beschaffung, Überprüfung oder Darstellung der Daten eine nach Art
+              oder Umfang wesentliche Investition notwendig ist. So gibt es keine
+              Urheber- oder Datenschutzrechte, wenn die Daten völlig neu erzeugt werden,
+              in einer naheliegenden Weise dargestellt und in keiner Weise überprüft
+              werden. Ein Leistungsschutzrecht existiert, wenn Sie die einzelnen Daten
+              auswählen oder in einer neuen, nicht naheliegenden liegenden Weise (an-)ordnen.
+            text_as_statement: niemand besitzt Urheberrechte an den Daten
+          expired:
+            text: Urheber- und Leistungsschutzrechte sind ausgelaufen
+            help_text: Leistungsschutzrechte für Datenbanken laufen nach 10 Jahren
+              aus. Wenn die die Daten zuletzt vor mehr als 10 Jahren geändert wurden,
+              dann sind die Leistungsschutzrechte ausgelaufen. Urheberrechte gelten
+              für eine bestimmte Zeit, ausgehend von der Anzahl von Jahren, die seit
+              der Publikation der Daten oder dem Tod ihres des Erstellers vergangen
+              sind. Es ist unwahrscheinlich, dass Urheberrechte ausgelaufen sind.
+            text_as_statement: der Urheberrechtschutzt ist abgelaufen
+          waived:
+            text: Auf die Urheber- und Leistungsschutzrechte für die Datensammlung
+              wurde verzichtet.
+            help_text: Dies bedeutet, dass niemand Rechte an den Daten besitzt, und
+              jeder mit ihnen machen kann, was er will.
+            text_as_statement: ''
+      dataWaiver:
+        text: Welche Verzichtserklärung haben Sie genutzt, um auf die Rechte an den
+          Daten zu verzichten?
+        text_as_statement: Die Verzichtserklärung für die Rechte an diesen Daten findet
+          sich unter
+        help_text: Sie benötigen ein Erklärung, die den Nutzern zeigt, dass auf die
+          Rechte an den Daten verzichtet wurden, so dass sie mit ihnen tun können,
+          was immer sie wollen. Standardisierte Verzichtserklärungen existieren, aber
+          Sie können Ihren eigenen rechtliche Erklärunge abfassen.
+        answers:
+          pddl:
+            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
+            text_as_statement: Open Data Commons Public Domain Dedication and Licence
+              (PDDL)
+          cc0:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          other:
+            text: Andere…
+            text_as_statement: ''
+      dataOtherWaiver:
+        text: Wo findet sich die Verzichtserklärung für die Rechte an den Daten?
+        text_as_statement: Die Verzichtserklärung für die Rechte an diesen Daten findet
+          sich unter
+        help_text: Geben Sie eine URL an, unter der die Verzichtserklärung öffentlich
+          einsehbar ist, damit die Nutzer überprüfen können, dass auf die Rechte an
+          den Daten verzichtet wurde.
+        answers:
+          a_1:
+            placeholder: URL der Verzichtserklärung
+      otherDataLicenceName:
+        text: Wie lautet der Name der Lizenz?
+        text_as_statement: Diese Daten können  im Rahmen der folgenden Lizenz von
+          anderen weiterverwendet werden
+        help_text: Wenn Sie eine andere Lizenz benutzen, benötigen wir deren Namen,
+          so dass die Nutzer diesen auf Ihrem Open Data Zertifikat sehen können.
+        answers:
+          a_1:
+            placeholder: Name der sonstigen Lizenz
+      otherDataLicenceURL:
+        text: Wo findet sich die Lizenz?
+        text_as_statement: Die Lizenzbestimmungen finden sich unter
+        help_text: Geben Sie eine URL für die Lizenz an, damit die Nutzer diese auf
+          dem Open Data Zertifikat finden und ihre öffentliche Verfügbarkeit prüfen
+          können.
+        answers:
+          a_1:
+            placeholder: URL der sonstigen Lizenz
+      otherDataLicenceOpen:
+        text: Ist die Lizenz eine offene Lizenz?
+        help_text: Wenn sie nicht sicher sind, was eine offene Lizenz ist, dann lesen
+          Sie <a href="http://opendefinition.org/">die Open Knowledge Definition.</a>
+          Als nächstes wählen Sie ihre Lizenz aus <a href="http://licenses.opendefinition.org/">der
+          Liste offener Lizenzen der Open Definition Advisory Boards</a>. Wenn eine
+          Lizenz auf dieser Liste fehlt, wurde sie noch nicht geprüft.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      contentRights:
+        text: Gibt es Urheberrechte am Inhalt der Daten?
+        text_as_statement: Es gibt
+        answers:
+          norights:
+            text: nein, die Daten enthalten nur Fakten und Zahlen
+            help_text: Es gibt kein Urheberrecht an Sachinformationen. Wenn die Daten
+              keinen Inhalt beinhalten, der durch intellectuelle Anstrengung erzeugt
+              wurde, gibt es keine Urheberrechte am Inhalt.
+            text_as_statement: keine Rechte am Inhalt der Daten.
+          samerights:
+            text: Ja, und die Rechte werden alle von der selben Person oder Organisation
+              gehalten.
+            help_text: Wählen Sie diese Option, wenn der Inhalt komplett von einer
+              Person oder Organisation geschaffen oder übertragen wurde.
+            text_as_statement: ''
+          mixedrights:
+            text: Ja, und die Rechte werden von unterschiedlichen Personen oder Organisationen
+              gehalten.
+            help_text: Bei manchen Daten halten unterschiedliche Personen oder Organisationen
+              die Rechte an verschiedenen Datensätzen. In diesem Fall müssen auch
+              Informationen über die Rechte in den Daten vorhanden sein.
+            text_as_statement: ''
+      explicitWaiver:
+        text: Ist der Inhalt der Daten als gemeinfrei gekennzeichnet?
+        text_as_statement: Die Inhalte wurden
+        help_text: Inhalte können als gemeinfrei gekennzeichnet sein durch die <a
+          href="http://creativecommons.org/publicdomain/">Creative Commons Public
+          Domain Mark</a>Dies lässt die Nutzer wissen, dass Sie die Daten frei verwenden
+          können.
+        answers:
+          a_false:
+            text: 'no'
+            text_as_statement: ''
+          a_true:
+            text: 'yes'
+            text_as_statement: als gemeinfrei gekennzeichnet
+      contentLicence:
+        text: Im Rahmen welcher Lizenz können Nutzer die Inhalte weiterverwenden?
+        text_as_statement: Die Inhalte können im Rahmen der folgenden Lizenz weiterverwendet
+          werden
+        help_text: Beachten Sie, dass jeder, der mittels interlektueller Tätigkeit
+          schöpferisch Inhalte einer Datensammlung  erzeugt , automatiscjh Urheberrechte
+          daran erwirbt. Reinen Fakten fehlt jedoch die notwendige Schopfungs. Daher
+          benötigen die Nutzer eine Verzichtserklärung oder eine Lizenz , die belegt,
+          dass Sie die Daten weiterverwenden können, und wie  sie dies rechtmäßig
+          tun könnendddddddddddddddd. Wir führen hier die gebräuchlichsten Lizenzen
+          auf. Wenn es keine (Datenbank-)Urheberrechte gibt, sie ausgelaufen sind,
+          oder Sie darauf verzichten, wählen Sie bitte  "nicht anwendbar".
+        answers:
+          cc_by:
+            text: Creative Commons Namensnennung
+            text_as_statement: Creative Commons Namensnennung
+          cc_by_sa:
+            text: Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen
+            text_as_statement: Creative Commons Namensnennung - Weitergabe unter gleichen
+              Bedingungen
+          cc_zero:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          na:
+            text: Nicht anwendbar
+            text_as_statement: ''
+          other:
+            text: Andere…
+            text_as_statement: ''
+      contentNotApplicable:
+        text: Warum ist keine Lizenz auf den Inhalt der Daten anwendbar?
+        text_as_statement: Dien Inhalte der Daten sind nicht lizensiert, denn
+        answers:
+          norights:
+            text: Für die Inhalte dieser Daten existiert kein Urheberrecht
+            help_text: Urheberrecht ist auf Inhalte nur anwendbar, wenn diese von
+              der individuellen intellektuellen Leistung des Schöpfers geprägt sind,
+              wie z.B. bei verfassten Texten innerhalb der Daten. Es gibt keinen Urheberrechtsschutz,
+              wenn der Inhalt lediglich Fakten enthält.
+            text_as_statement: es existieren keine Urheberrechte
+          expired:
+            text: die Urheberrechte sind abgelaufen
+            help_text: Urheberrechte gelten für eine festgelegte Zeitspanne, ausgehend
+              von der Anzahl von Jahren, die seit der Publikation der Daten oder dem
+              Tod ihres des Erstellers vergangen sind.  Sie sollten prüfen, wann der
+              Inhalt geschaffen oder veröffentlicht wurde, denn wenn dies lange her,
+              könnte der Urheberrechtsschutz ausgelaufen sein.
+            text_as_statement: die Urheberrechte sind abgelaufen
+          waived:
+            text: auf die Urheberrechte wurde verzichtet
+            help_text: Dies bedeutet, dass niemand Urheberrechte hat und jeder mit
+              den Daten tun kann, was ihm beliebt.
+            text_as_statement: ''
+      contentWaiver:
+        text: Welche Verzichtserklärung nutzen Sie, um auf die Nutzungs- und Verwertungsrechte
+          zu verzichten.
+        text_as_statement: Die Verzichtserklärung für die Urheberrechte findet sich
+          unter
+        help_text: Sie benötigen eine Erklärung, um den Nutzern zu zeigen, dass Sie
+          den Verzicht erklärt haben, damit diese verstehen, dass sie mit den Daten
+          tun können, was sie wollen. Es gibt bereits standardisierte Verzichtserklärungen
+          wie CCZero, aber Sie können auch Ihren eigenen Rechtstext schreiben.
+        answers:
+          cc0:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          other:
+            text: Andere…
+            text_as_statement: Andere…
+      contentOtherWaiver:
+        text: Wo findet sich die Verzichtserklärung für die Urheberrechte?
+        text_as_statement: Die Verzichtserklärung für die Urheberrechte findet sich
+          unter
+        help_text: Geben Sie die URL für die Ihe eigene öffentlich verfügbare Verzichtserklärung
+          an, so dass Nutzer prüfen könne, das Sie damit auf ihre Rechte verzichten.
+        answers:
+          a_1:
+            placeholder: URL der Verzichtserklärung
+      otherContentLicenceName:
+        text: Was lautet der Name der Lizenz?
+        text_as_statement: Die Inhalte können im Rahmen der folgenden Lizenz weiterverwendet
+          werden
+        help_text: Wenn Sie eine andere Lizenz nutzen, benötigen wir deren Namen,
+          so dass er Nutzern auf dem Open Data Zertifikat angezeigt werden kann.
+        answers:
+          a_1:
+            placeholder: Name der sonstigen Lizenz
+      otherContentLicenceURL:
+        text: Wo findet sich die Lizenz?
+        text_as_statement: Die Lizenz für die Inhalte findet sich unter
+        help_text: Geben Sie eine URL für die Lizenz an, damit die Nutzer diese auf
+          dem Open Data Zertifikat finden und ihre öffentliche Verfügbarkeit prüfen
+          können.
+        answers:
+          a_1:
+            placeholder: URL der sonstigen Lizenz
+      otherContentLicenceOpen:
+        text: Ist die Lizenz eine offene Lizenz?
+        help_text: Wenn sie nicht sicher sind, was eine offene Lizenz ist, dann lesen
+          Sie <a href="http://opendefinition.org/">die Open Knowledge Definition.</a>
+          Als nächstes wählen Sie ihre Lizenz aus <a href="http://licenses.opendefinition.org/">der
+          Liste offener Lizenzen der Open Definition Advisory Boards</a>. Wenn eine
+          Lizenz auf dieser Liste fehlt, wurde sie noch nicht geprüft.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      contentRightsURL:
+        text: Wo sind die Rechte und die Lizenzvergabe der Inhalte ihrer Daten erklärt?
+        text_as_statement: Die Rechte und die Lizenzvergabe sind erklärt unter
+        help_text: Geben Sie die URL einer Seite an, auf der beschrieben ist, wie
+          jemand sich über die Rechte und die Lizenzvergabe für die Inhalte der Daten
+          informieren kann?
+        answers:
+          a_1:
+            placeholder: URL der Erläuterung der Rechte an den Inhalten
       riskAssessmentExists:
         text: Haben Sie die Risiken der Veröffentlichung personenbezogener Daten abgeschätzt?
         text_as_statement: Der Herausgeber hat
@@ -1537,49 +1632,6 @@ de:
         help_text: Es ist bewährte Praxis, überprüfen zu lassen, ob Ihre Risikoabschäzung
           korrekt durchgeführt wurde. Unabhängige Audits durch Spezialisten oder Dritte
           sind häufig gründlicher und unvoreingenommener.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: unabhängig auditiert
-      individualConsentURL:
-        text: Wo befindet sich der die Datenschutzerklärung für die von Ihren Daten
-          betroffenen Personen?
-        text_as_statement: von den Daten Betroffene wurden mittels der folgenden Erklärung
-          zum Datenschutz unterrichtet
-        help_text: Wenn Sie Daten über einzelne, konkrete Personen sammeln, müssen
-          Sie ihnen mitteilen, wie die Daten verwandt werden. Nutzer, die Ihre Daten
-          verwenden, benötigen diese Angaben, um sicherzustellen, dass sie den datenschutzrechtlichen
-          Vorschriften nachkommen.
-        answers:
-          a_1:
-            placeholder: URL der Erklärung zum Datenschutz
-      dpStaff:
-        text: Gibt es in Ihrer Organisation jemanden, der für den Datenschutz zuständig
-          ist?
-        answers:
-          a_false:
-            text: 'no'
-          a_true:
-            text: 'yes'
-      dbStaffConsulted:
-        text: Haben Sie die Zuständigen in die Risikobewertung einbezogen?
-        text_as_statement: Datenschutzbeauftragter
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: wurde einbezogen
-      anonymisationAudited:
-        text: Wurde ihre Methode der Anonymisierung unabhängig auditiert?
-        text_as_statement: Die Anonymisierung der Daten wurde
-        help_text: Es ist bewährte Praxis, sicherzustellen, dass Ihr Methode, den
-          personenbezug ihrer Daten zu eliminieren, zuverlässig funktioniert. Unabhängige
-          Audits durch Spezialisten oder Dritte sind häufig gründlicher und unvoreingenommener.
         answers:
           a_false:
             text: 'no'
@@ -1940,18 +1992,21 @@ de:
       ownership:
         text: Rechte
         help_text: Ihre, Rechte, diese Daten anderen zu überlassen
+        title: Rechte
       licensing:
         text: Lizenzvergabe
         help_text: Wie Nutzer die Erlaubnis erhalten, diese Daten zu nutzen
+        title: Lizenzvergabe
       privacy:
         text: Datenschutz
         help_text: Wie sie personenbezogene Daten schützen
+        title: Datenschutz
       basic_5:
         text: Sie müssen <strong>die Beitragenden dafür gewinnen, der CLA zuzustimmen</strong>
           die Ihnen erlaubt, ihre Beiträge als Open Data zu publizieren.
       basic_6:
-        text: Sie müssen <strong>Die Daten mit einer offenen Lizenz veröffentlichen</strong>,
-          damit die Nutzer sie verwenden können.
+        text: Sie müssen <strong>offene Daten als offene Daten (Open Data) publizieren</strong>,
+          so dass die Nutzer sie weiterverwenden dürfen.
       basic_7:
         text: Sie müssen <strong>offene Daten als offene Daten (Open Data) publizieren</strong>,
           so dass die Nutzer sie weiterverwenden dürfen.
