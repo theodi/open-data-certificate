@@ -167,7 +167,7 @@
 			<xsl:attribute name="type" select="'string'" />
 		</xsl:otherwise>
 		</xsl:choose>
-		<xsl:apply-templates select="@*" mode="structure" />
+		<xsl:apply-templates select="@* except @required" mode="structure" />
 		<xsl:if test="..//requirement">
 			<xsl:attribute name="corresponding_requirements" select="..//requirement/local:requirementId(.)" separator=", " />
 		</xsl:if>
