@@ -16,6 +16,7 @@ es:
       legal:
         text: Información legal
         help_text: Derechos, licenciamiento y privacidad
+        title: Información legal
     questions:
       dataTitle:
         text: Coloque el título de la base de datos
@@ -169,7 +170,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Mínimo diariamente
@@ -200,7 +200,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Está disponible
@@ -257,7 +256,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Vertederos de datos
@@ -289,7 +287,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Corregido
@@ -322,7 +319,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Respaldo fuera del sitio
@@ -501,7 +497,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Legible por máquinas
@@ -515,7 +510,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Un formato abierto estandar
@@ -647,7 +641,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Identificadores persistentes
@@ -659,7 +652,6 @@ es:
           'false':
             text: No, los identificadores no pueden ser utilizados para encontrar
               información extra
-            text_as_statement: ''
           service:
             text: Sí, hay un servicio que las personas pueden usar para resolver los
               identificadores
@@ -716,7 +708,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Referencias en estos datos
@@ -729,7 +720,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: sí
             text_as_statement: Lectura mecánica
@@ -959,12 +949,10 @@ es:
           a_1:
             placeholder: URL de herramientas
       publisherRights:
-        text: ¿Sus derechos le permiten publicar estos datos como datos abiertos?
-        help_text: Si su organización no es la creadora original o no estuvo a cargo
-          de la recolección de estos datos, entonces es probable que no tenga derecho
-          a publicarlos. Si no está seguro, verifique con el dueño de los datos debido
-          a que necesitará su autorización para publicarlos.
         answers:
+          complicated:
+            text: Los derechos relacionados con estos datos no están claros o su situación
+              es difícil de determinar.
           'yes':
             text: Sí. Sus derechos le permiten publicar estos datos como datos abiertos.
           'no':
@@ -973,9 +961,11 @@ es:
           unsure:
             text: No está seguro de contar con los derechos necesarios para publicar
               estos datos como datos abiertos.
-          complicated:
-            text: Los derechos relacionados con estos datos no están claros o su situación
-              es difícil de determinar.
+        text: ¿Sus derechos le permiten publicar estos datos como datos abiertos?
+        help_text: Si su organización no es la creadora original o no estuvo a cargo
+          de la recolección de estos datos, entonces es probable que no tenga derecho
+          a publicarlos. Si no está seguro, verifique con el dueño de los datos debido
+          a que necesitará su autorización para publicarlos.
       rightsRiskAssessment:
         text: ¿En donde detalla los riesgos que el público puede correr al utilizar
           estos datos?
@@ -989,18 +979,20 @@ es:
           a_1:
             placeholder: URL de la documentación de riesgos
       publisherOrigin:
-        text: ¿Los datos fueron originalmente recolectados por usted en su totalidad?
         text_as_statement: Estos datos fueron
         help_text: Si cualquiera de los datos fue originado por un tercero ajeno a
           su organización, necesitará proporcionar información adicional sobre sus
           derechos de publicación.
         answers:
+          'true':
+            text: 'yes'
+            text_as_statement: Creado originalmente o generado por su curador
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: Creado originalmente o generado por su curador
+        text: ¿Los datos fueron originalmente recolectados por usted en su totalidad?
       thirdPartyOrigin:
         text: ¿Algunos de los datos fueron extraídos o calculados tomando como fuente
           otros datos?
@@ -1024,7 +1016,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: fuentes de datos abiertos
@@ -1037,7 +1028,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: obtenidos mediante colaboración colectiva
@@ -1096,7 +1086,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: datos legibles por máquina sobre el origen de los datos
@@ -1104,26 +1093,181 @@ es:
         text: ¿En dónde publicó la declaración sobre derechos para este conjunto de
           datos?
         text_as_statement: La declaración sobre derechos está en
+        answers:
+          a_1:
+            placeholder: URL de la declaración sobre derechos
         help_text: Proporcione la URL hacia la página donde describe los derechos
           para reutilizar este conjunto de datos. Dicha página debería incluir una
           referencia a su licencia, los requisitos de atribución y cita, así como
           una declaración sobre los derechos de autor que resulten relevantes. Una
           declaración de derechos ayuda a que la gente entienda qué es lo que puede
           y qué es lo que no puede hacer con los datos.
+      databaseRights:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      databaseRightsLicenseType:
+        answers:
+          odc_by:
+            text: Licencia de reconocimento Open Data Commons
+            text_as_statement: Licencia de reconocimento Open Data Commons
+          odc_odbl:
+            text: Licencia de base de datos abierta Open Data Commons
+            text_as_statement: Licencia de base de datos abierta Open Data Commons
+      databaseCopyright:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      databaseContentCopyright:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      copyrightStatementMetadata:
+        text: Su declaración sobre derechos ¿incluye una versión legible por máquinas?
+        text_as_statement: La declaración sobre derechos incluye información acerca
+          de
+        help_text: Es una buena práctica embeber información relativa a los derechos
+          en formatos legibles por máquinas para que la gente pueda reconocerle automáticamente
+          la titularidad de los derechos sobre los datos.
+        answers:
+          dataLicense:
+            text: licencia de datos
+            text_as_statement: su licencia de datos
+          contentLicense:
+            text: licencia de contenido
+            text_as_statement: su licencia de contenido
+          attribution:
+            text: texto para reconocimiento
+            text_as_statement: que texto para reconocimiento usar
+          attributionURL:
+            text: URL del reconocimiento
+            text_as_statement: ¿qué enlace proporcionar para el reconocimiento?
+          copyrightNotice:
+            text: Aviso sobre derechos de autor o declaración
+            text_as_statement: Un aviso sobre derechos de autor o declaración
+          copyrightYear:
+            text: Año de los derechos de autor
+            text_as_statement: Año de los derechos de autor
+          copyrightHolder:
+            text: Titular de los derechos
+            text_as_statement: El titular de los derechos
+      dataPersonal:
+        text: ¿Es posible identificar individuos mediante estos datos?
+        text_as_statement: Estos datos contienen
+        answers:
+          not_personal:
+            text: No, los datos no tratan sobre personas o sus actividades
+            help_text: Recuerde que las personas pueden ser identificadas aún cuando
+              los datos no estén directamente relacionados con ellas. Por ejemplo,
+              los datos sobre flujo de tránsito combinados con la costumbre de transporte
+              de una persona, podría identificar a la persona.
+            text_as_statement: Ningún dato sobre individuos
+          summarised:
+            text: No, los datos han sido disociados y anonimizados, agrupándolos a
+              fin de que los individuos que conforman el grupo no puedan ser identificados.
+            help_text: Establecer controles sobre la revelación estadística puede
+              contribuir a asegurarse que las personas no puedan ser identificadas
+              en lo individual a partir de la agregación de datos
+            text_as_statement: datos agregados
+          individual:
+            text: Sí, existe el riesgo de que algunos individuos puedan ser identificados
+              por terceros que tengan acceso a información adicional, por ejemplo.
+            help_text: Algunos datos se refieren a información pública sobre individuos,
+              como es el caso del pago de contribuciones o gastos públicos.
+            text_as_statement: información que pudiera identificar individuos
+      statisticalAnonAudited:
+        text: Su proceso de anonimización ¿ha sido auditado por un auditor independiente?
+        text_as_statement: El proceso de anonimización ha sido
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: auditado por un auditor independiente
+      appliedAnon:
+        text: ¿Ha intentado reducir o eliminar la posibilidad de que las personas
+          puedan ser identificadas en lo individual?
+        text_as_statement: Los datos sobre individuos han sido
+        help_text: La anonimización reduce el riesgo de que las personas sean identificadas
+          en lo individual a partir de los datos que publique. La técnica adecuada
+          dependerá del tipo de datos que maneje.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: Anonimizados
+      lawfulDisclosure:
+        text: ¿La ley le obliga o le permite publicar estos datos acerca de individuos?
+        text_as_statement: Por ley, estos datos sobre individuos
+        help_text: Debería publicar datos personales únicamente cuando la ley lo obligue
+          o se lo permita.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: deben ser publicados
+      lawfulDisclosureURL:
+        text: ¿En dónde documenta el derecho que tiene para publicar estos datos personales?
+        text_as_statement: El derecho a publicar estos datos personales se encuentra
+          documentado en
         answers:
           a_1:
-            placeholder: URL de la declaración sobre derechos
+            placeholder: URL de la justificación sobre revelación
+      privacyImpactAssessmentExists:
+        text_as_statement: El curador ha
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      privacyImpactAssessmentUrl:
+        help_text: Proporcione una URL en donde la gente pueda verificar la manera
+          en que ha evaluado los riesgos de privacidad para los individuos. Dicha
+          evaluación puede redactarse en extenso o de manera resumida en caso de contener
+          información sensible.
+      piaAudited:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: auditado por un auditor independiente
+      dpStaff:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      dbStaffConsulted:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      anonymisationAudited:
+        text: ¿Ha realizado una auditoría independiente a su método de anonimización?
+        text_as_statement: La anonimización de los datos ha sido
+        help_text: Es una buena práctica asegurarse que su proceso para eliminar datos
+          personales identificables funcione correctamente. Las auditorías realizadas
+          por auditores independientes o terceros ajenos a su empresa suelen ser más
+          rigurosas e imparciales.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: auditado por un auditor independiente
       dataLicence:
         text: ¿Bajo qué licencia puede el público reutilizar los datos?
         text_as_statement: Los datos están disponibles bajo
-        help_text: Recuerde que todo aquél que realiza un esfuerzo intelectual para
-          crear contenidos, automáticamente obtiene derechos sobre dichos contenidos.
-          La selección y organización de datos (no así de hechos) es una forma de
-          creación. En consecuencia, la gente necesita una licencia o autorización
-          en donde conste y se sustente legalmente que pueden utilizar los datos.
-          A continuación enlistamos las licencias más comunes. Si los datos no están
-          sujetos a derechos, los derechos han caducado o el titular ha renunciado
-          a sus derechos, seleccione "No aplicable"
         answers:
           cc_by:
             text: Reconocimiento Creative Commons
@@ -1146,10 +1290,16 @@ es:
               Commons
           na:
             text: No aplicable
-            text_as_statement: ''
           other:
-            text: Otros…
-            text_as_statement: ''
+            text: Otro…
+        help_text: Recuerde que todo aquél que realiza un esfuerzo intelectual para
+          crear contenidos, automáticamente obtiene derechos sobre dichos contenidos.
+          La selección y organización de datos (no así de hechos) es una forma de
+          creación. En consecuencia, la gente necesita una licencia o autorización
+          en donde conste y se sustente legalmente que pueden utilizar los datos.
+          A continuación enlistamos las licencias más comunes. Si los datos no están
+          sujetos a derechos, los derechos han caducado o el titular ha renunciado
+          a sus derechos, seleccione "No aplicable"
       dataNotApplicable:
         text: ¿Por qué no aplica ninguna licencia a estos datos?
         text_as_statement: Estos datos no se encuentran licenciados por
@@ -1175,35 +1325,33 @@ es:
             text: El derecho de autor ha sido exentado
             help_text: Esto significa que nadie tiene derechos sobre los datos y cualquier
               persona puede hacer lo que quiera con los mismos.
-            text_as_statement: ''
       dataWaiver:
-        text: ¿Qué método utiliza para exentar los derechos sobre los datos?
         text_as_statement: Los derechos sobre los datos han sido exentos mediante
-        help_text: Necesita una declaración para hacer saber a la gente que hacer
-          saber a la gente que ha renunciado a sus derechos para que a su vez ellos
-          puedan hacer lo que deseen con los datos. Existen formatos estándar como
-          la PDDL o la CCZero pero también puede usted redactar el suyo con la debida
-          asesoría legal.
         answers:
           pddl:
             text: Licencia de dedicatoria al dominio público Open Data Commons
             text_as_statement: Licencia de dedicatoria al dominio público Open Data
               Commons
           cc0:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
+            text: CCZero Creative Commons
+            text_as_statement: CCZero Creative Commons
           other:
-            text: Otros…
-            text_as_statement: ''
+            text: Otro…
+        text: ¿Qué método utiliza para exentar los derechos sobre los datos?
+        help_text: Necesita una declaración para hacer saber a la gente que hacer
+          saber a la gente que ha renunciado a sus derechos para que a su vez ellos
+          puedan hacer lo que deseen con los datos. Existen formatos estándar como
+          la PDDL o la CCZero pero también puede usted redactar el suyo con la debida
+          asesoría legal.
       dataOtherWaiver:
-        text: ¿dónde se ubica la exención sobre los derechos de los datos?
         text_as_statement: Los derechos sobre los datos han sido exentos mediante
-        help_text: Proporcione una URL para su formato de renuncia a fin de que la
-          gente pueda verificar que efectivamente exenta los derechos relativos a
-          los datos.
         answers:
           a_1:
             placeholder: URL de la exención
+        text: ¿dónde se ubica la exención sobre los derechos de los datos?
+        help_text: Proporcione una URL para su formato de renuncia a fin de que la
+          gente pueda verificar que efectivamente exenta los derechos relativos a
+          los datos.
       otherDataLicenceName:
         text: ¿cuál es el nombe de la licencia?
         text_as_statement: Los datos están disponibles bajo
@@ -1226,7 +1374,7 @@ es:
         help_text: Si no está seguro sobre lo que significa una licencia abierta,
           lea la lista de licencias abiertas de la Open Definition Advisory Board.
           Si no encuentra su licencia en esa lista puede ser que la misma no sea una
-          licencia abierta o que no haya sido evaluada aún.
+          licencia abierta o que no haya sido evaluada
         answers:
           a_false:
             text: 'no'
@@ -1246,13 +1394,11 @@ es:
             text: Sí y los derechos le corresopnden a una sola persona u organización
             help_text: Elija esta opción si el contenido de los datos fue creado o
               cedido a una misma persona u organización
-            text_as_statement: ''
           mixedrights:
             text: Sí y los derechos le corresponden a diferentes personas u organizaciones
             help_text: En algunos casos, los derechos sobre diferentes registros le
               corresponden a diversas personas u organizaciones. Es necesario incluir
               la información relativa a los derechos en los datos mismos.
-            text_as_statement: ''
       explicitWaiver:
         text: ¿Los datos y su contenido están marcados como del dominio público?
         text_as_statement: El contenido ha sido
@@ -1263,7 +1409,6 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: Identificado como del dominio público
@@ -1289,10 +1434,8 @@ es:
             text_as_statement: CCZero Creative Commons
           na:
             text: No aplicable
-            text_as_statement: ''
           other:
-            text: Otra…
-            text_as_statement: ''
+            text: Otro…
       contentNotApplicable:
         text: ¿Por qué no aplica ninguna licencia al contenido de los datos?
         text_as_statement: La información contenida en los datos no está licenciada
@@ -1317,7 +1460,6 @@ es:
             text: Los derechos de autor han sido exentados.
             help_text: Esto significa que nadie tiene derechos sobre los datos y cualquier
               persona puede hacer lo que quiera con los mismos.
-            text_as_statement: ''
       contentWaiver:
         text: ¿Qué método utiliza para exentar los derechos sobre los datos?
         text_as_statement: Los derechos de autor han sido exentados mediante
@@ -1380,102 +1522,6 @@ es:
         answers:
           a_1:
             placeholder: URL de la descripción sobre los derechos de los contenidos
-      copyrightStatementMetadata:
-        text: Su declaración sobre derechos ¿incluye una versión legible por máquinas?
-        text_as_statement: La declaración sobre derechos incluye información acerca
-          de
-        help_text: Es una buena práctica embeber información relativa a los derechos
-          en formatos legibles por máquinas para que la gente pueda reconocerle automáticamente
-          la titularidad de los derechos sobre los datos.
-        answers:
-          dataLicense:
-            text: licencia de datos
-            text_as_statement: su licencia de datos
-          contentLicense:
-            text: licencia de contenido
-            text_as_statement: su licencia de contenido
-          attribution:
-            text: texto para reconocimiento
-            text_as_statement: que texto para reconocimiento usar
-          attributionURL:
-            text: URL del reconocimiento
-            text_as_statement: ¿qué enlace proporcionar para el reconocimiento?
-          copyrightNotice:
-            text: Aviso sobre derechos de autor o declaración
-            text_as_statement: Un aviso sobre derechos de autor o declaración
-          copyrightYear:
-            text: Año de los derechos de autor
-            text_as_statement: Año de los derechos de autor
-          copyrightHolder:
-            text: Titular de los derechos
-            text_as_statement: El titular de los derechos
-      dataPersonal:
-        text: ¿Es posible identificar individuos mediante estos datos?
-        text_as_statement: Estos datos contienen
-        answers:
-          not_personal:
-            text: No, los datos no tratan sobre personas o sus actividades
-            help_text: Recuerde que las personas pueden ser identificadas aún cuando
-              los datos no estén directamente relacionados con ellas. Por ejemplo,
-              los datos sobre flujo de tránsito combinados con la costumbre de transporte
-              de una persona, podría identificar a la persona.
-            text_as_statement: Ningún dato sobre individuos
-          summarised:
-            text: No, los datos han sido disociados y anonimizados, agrupándolos a
-              fin de que los individuos que conforman el grupo no puedan ser identificados.
-            help_text: Establecer controles sobre la revelación estadística puede
-              contribuir a asegurarse que las personas no puedan ser identificadas
-              en lo individual a partir de la agregación de datos
-            text_as_statement: datos agregados
-          individual:
-            text: Sí, existe el riesgo de que algunos individuos puedan ser identificados
-              por terceros que tengan acceso a información adicional, por ejemplo.
-            help_text: Algunos datos se refieren a información pública sobre individuos,
-              como es el caso del pago de contribuciones o gastos públicos.
-            text_as_statement: información que pudiera identificar individuos
-      statisticalAnonAudited:
-        text: Su proceso de anonimización ¿ha sido auditado por un auditor independiente?
-        text_as_statement: El proceso de anonimización ha sido
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: auditado por un auditor independiente
-      appliedAnon:
-        text: ¿Ha intentado reducir o eliminar la posibilidad de que las personas
-          puedan ser identificadas en lo individual?
-        text_as_statement: Los datos sobre individuos han sido
-        help_text: La anonimización reduce el riesgo de que las personas sean identificadas
-          en lo individual a partir de los datos que publique. La técnica adecuada
-          dependerá del tipo de datos que maneje.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: Anonimizados
-      lawfulDisclosure:
-        text: ¿La ley le obliga o le permite publicar estos datos acerca de individuos?
-        text_as_statement: Por ley, estos datos sobre individuos
-        help_text: Debería publicar datos personales únicamente cuando la ley lo obligue
-          o se lo permita.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: deben ser publicados
-      lawfulDisclosureURL:
-        text: ¿En dónde documenta el derecho que tiene para publicar estos datos personales?
-        text_as_statement: El derecho a publicar estos datos personales se encuentra
-          documentado en
-        answers:
-          a_1:
-            placeholder: URL de la justificación sobre revelación
       riskAssessmentExists:
         text: ¿Ha evaluado los riesgos de revelar datos personales?
         text_as_statement: El curador ha
@@ -1487,7 +1533,7 @@ es:
             text: 'no'
             text_as_statement: no realizó una evaluación de riesgos de privacidad
           a_true:
-            text: 'yes'
+            text: sí
             text_as_statement: realizó una evaluación de riesgos de privacidad
       riskAssessmentUrl:
         text: ¿dónde se ubica publicada su evaluación de riesgos?
@@ -1508,23 +1554,8 @@ es:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
-            text: 'yes'
-            text_as_statement: auditado por un auditor independiente
-      anonymisationAudited:
-        text: ¿Ha realizado una auditoría independiente a su método de anonimización?
-        text_as_statement: La anonimización de los datos ha sido
-        help_text: Es una buena práctica asegurarse que su proceso para eliminar datos
-          personales identificables funcione correctamente. Las auditorías realizadas
-          por auditores independientes o terceros ajenos a su empresa suelen ser más
-          rigurosas e imparciales.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
+            text: sí
             text_as_statement: auditado por un auditor independiente
     labels:
       findability:
@@ -1854,12 +1885,15 @@ es:
       ownership:
         text: Derechos
         help_text: Su derecho a compartir los datos con el público.
+        title: Derechos
       licensing:
         text: Licenciamiento
         help_text: ¿Cómo autoriza al público a usar estos datos?
+        title: Licenciamiento
       privacy:
         text: Privacidad
         help_text: ¿Cómo protege la privacidad de la gente?
+        title: Privacidad
       basic_5:
         text: Debe obtener el acuerdo de los colaboradores con el ALC que le otorgue
           el derecho de publicar su obra como datos abiertos.

@@ -16,15 +16,16 @@ cs:
       legal:
         text: Právní informace
         help_text: Práva, licencování a ochrana osobních údajů
+        title: Právní informace
     questions:
       dataTitle:
-        text: Jaký je název vašeho projektu?
+        text: Jaký je název vaší datové sady?
         help_text: Uživatelé název uvidí v seznamu podobných zdrojů, takže se snažte
           i v rámci krátkého textu přijít s něčím jedinečným a popisným, aby se podle
           něj dalo rychle zorientovat.
         answers:
           a_1:
-            placeholder: název projektu
+            placeholder: název datové sady
       documentationUrl:
         text: Kde máte zveřejněnou dokumentaci?
         text_as_statement: Dokumentace
@@ -156,7 +157,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: data se mění aspoň jednou denně
@@ -186,7 +186,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: je k dispozici
@@ -240,7 +239,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: jsou k dispozici
@@ -270,7 +268,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: budou opravovány
@@ -301,7 +298,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: data jsou zálohována offsite
@@ -461,7 +457,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: data jsou strojově čitelná
@@ -474,7 +469,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: standardizovaný, otevřený
@@ -600,7 +594,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: standardizované (GUID, URL, …)
@@ -609,9 +602,8 @@ cs:
           informace?
         text_as_statement: Navigace pomocí identifikátorů
         answers:
-          false:
+          'false':
             text: nepodporováno
-            text_as_statement: ''
           service:
             text: Ano, existuje služba, která podle identifikátoru dohledá další informace.
             help_text: Pomocí online služby můžete uživatelům poskytnout další informace
@@ -664,7 +656,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: data odkazují na URL z jiných zdrojů
@@ -677,7 +668,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: strojově čitelné
@@ -891,9 +881,6 @@ cs:
             placeholder: URL dokumentace
       publisherRights:
         text: Máte právo tato data zveřejnit?
-        help_text: Pokud jste data sami nevytvořili nebo nenasbírali, nemusíte mít
-          právo je zveřejnit. Pokud si nejste jisti, obraťte se na původního vlastníka
-          dat; ke zveřejnění dat budete pravděpodobně potřebovat jeho svolení.
         answers:
           'yes':
             text: Ano, máme právo zveřejnit tato data jako otevřená.
@@ -918,12 +905,12 @@ cs:
         help_text: Pokud jakákoliv část dat pochází ze zdrojů mimo vaši organizaci,
           je třeba uvést další informace o právech k jejich zveřejnění.
         answers:
+          'true':
+            text: ano
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
-            text_as_statement: data byla vytvořena přímo poskytovatelem
       thirdPartyOrigin:
         text: Vznikla část dat vytěžením nebo zpracováním cizích dat?
         help_text: I výtah, případně malá část použitého cizího textu, může mít vliv
@@ -944,7 +931,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: výhradně otevřená data
@@ -956,7 +942,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: aspoň část dat vznikla pomocí crowdsourcingu
@@ -1009,7 +994,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: zdroje dat jsou strojově čitelné
@@ -1045,17 +1029,17 @@ cs:
           mít otevřenou licenci pro databázová práva, která se na ni vztahují.
         answers:
           cc_by:
-            text: Creative Commons 3.0 Uveďte autora
-            text_as_statement: Creative Commons 3.0 Uveďte autora
+            text: Creative Commons 3.0 Uveďte původ
+            text_as_statement: Creative Commons 3.0 Uveďte původ
           cc_by_sa:
-            text: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
           cc_by_4:
-            text: Creative Commons 4.0 Uveďte autora
-            text_as_statement: Creative Commons 4.0 Uveďte autora
+            text: Creative Commons 4.0 Uveďte původ
+            text_as_statement: Creative Commons 4.0 Uveďte původ
           cc_by_sa_4:
-            text: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
           cc_zero:
             text: Creative Commons CC0
             text_as_statement: Creative Commons CC0
@@ -1071,7 +1055,6 @@ cs:
               (PDDL)
           other:
             text: jinak…
-            text_as_statement: ''
       databaseRightsURL:
         text: Kde popisujete licenční podmínky spojené s databázovými právy?
         text_as_statement: Licenční ujednání k databázovým právům
@@ -1104,7 +1087,6 @@ cs:
               (PDDL)
           other:
             text: jinak…
-            text_as_statement: ''
       databaseRightsWaiverURL:
         text: Uveďte prosím URL dokumentu, kterým se držitelé vzdali svých databázových
           práv.
@@ -1146,23 +1128,22 @@ cs:
           mít otevřenou licenci pro autorská práva, která se na ni vztahují.
         answers:
           cc_by:
-            text: Creative Commons 3.0 Uveďte autora
-            text_as_statement: Creative Commons 3.0 Uveďte autora
+            text: Creative Commons 3.0 Uveďte původ
+            text_as_statement: Creative Commons 3.0 Uveďte původ
           cc_by_sa:
-            text: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
           cc_by_4:
-            text: Creative Commons 4.0 Uveďte autora
-            text_as_statement: Creative Commons 4.0 Uveďte autora
+            text: Creative Commons 4.0 Uveďte původ
+            text_as_statement: Creative Commons 4.0 Uveďte původ
           cc_by_sa_4:
-            text: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
           cc_zero:
             text: Creative Commons CC0
             text_as_statement: Creative Commons CC0
           other:
             text: jinak…
-            text_as_statement: ''
       databaseCopyrightURL:
         text: Kde popisujete licenční podmínky spojené s autorskými právy na datovou
           sadu?
@@ -1204,23 +1185,22 @@ cs:
         text_as_statement: Licencování autorských práv na obsah
         answers:
           cc_by:
-            text: Creative Commons 3.0 Uveďte autora
-            text_as_statement: Creative Commons 3.0 Uveďte autora
+            text: Creative Commons 3.0 Uveďte původ
+            text_as_statement: Creative Commons 3.0 Uveďte původ
           cc_by_sa:
-            text: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 3.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 3.0 Uveďte původ + Zachovejte licenci
           cc_by_4:
-            text: Creative Commons 4.0 Uveďte autora
-            text_as_statement: Creative Commons 4.0 Uveďte autora
+            text: Creative Commons 4.0 Uveďte původ
+            text_as_statement: Creative Commons 4.0 Uveďte původ
           cc_by_sa_4:
-            text: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
-            text_as_statement: Creative Commons 4.0 Uveďte autora - Zachovejte licenci
+            text: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
+            text_as_statement: Creative Commons 4.0 Uveďte původ + Zachovejte licenci
           cc_zero:
             text: Creative Commons CC0
             text_as_statement: Creative Commons CC0
           other:
             text: jinak…
-            text_as_statement: ''
       databaseContentCopyrightURL:
         text: Kde popisujete licenční podmínky spojené s autorskými právy na obsah
           datové sady?
@@ -1292,7 +1272,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: ověřena nezávislým posudkem
@@ -1305,7 +1284,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: data byla anonymizována
@@ -1317,7 +1295,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: zveřejnění osobních údajů je povoleno/přikázáno zákonem
@@ -1328,39 +1305,18 @@ cs:
         answers:
           a_1:
             placeholder: URL s odůvodněním
-      riskAssessmentExists:
-        text: Analyzovali jste rizika spojená se zveřejněním osobních údajů?
-        text_as_statement: Rizika spojená s osobními údaji
-        help_text: Analýza rizik se týká jak soukromí dotčených osob, tak použití
-          a zveřejnění těchto dat.
+      privacyImpactAssessmentExists:
         answers:
           a_false:
             text: ne
-            text_as_statement: poskytovatel neprovedl analýzu rizik
           a_true:
             text: ano
-            text_as_statement: poskytovatel provedl analýzu rizik
-      riskAssessmentUrl:
-        text: Kde máte analýzu rizik zveřejněnou?
-        text_as_statement: Analýza rizik
-        help_text: Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu
-          rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace,
-          můžete ji pouze shrnout nebo příslušné části odstranit nebo anonymizovat.
-        answers:
-          a_1:
-            placeholder: URL analýzy rizik
-      riskAssessmentAudited:
-        text: Prošla vaše analýza rizik nezávislým auditem?
-        text_as_statement: Audit analýzy rizik
-        help_text: Je dobrým zvykem nechat si analýzu rizik ještě ověřit. Pečlivější
-          a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.
+      piaAudited:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
-            text_as_statement: analýza rizik prošla nezávislým auditem
       individualConsentURL:
         text: Kde máte sdělení o ochraně osobních údajů dotčených osob?
         text_as_statement: Informace pro dotčené osoby
@@ -1385,7 +1341,6 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: zodpovědná osoba se podílela na analýze rizik
@@ -1398,10 +1353,47 @@ cs:
         answers:
           a_false:
             text: ne
-            text_as_statement: ''
           a_true:
             text: ano
             text_as_statement: ověřena nezávislým auditem
+      dataLicence:
+        answers:
+          odc_by:
+            text: Open Data Commons Attribution License
+            text_as_statement: Open Data Commons Attribution License
+          odc_odbl:
+            text: Open Data Commons Open Database License (ODbL)
+            text_as_statement: Open Data Commons Open Database License (ODbL)
+      otherDataLicenceOpen:
+        answers:
+          a_false:
+            text: ne
+          a_true:
+            text: ano
+      explicitWaiver:
+        answers:
+          a_false:
+            text: ne
+          a_true:
+            text: ano
+      otherContentLicenceOpen:
+        answers:
+          a_false:
+            text: ne
+          a_true:
+            text: ano
+      riskAssessmentExists:
+        answers:
+          a_false:
+            text: ne
+          a_true:
+            text: ano
+      riskAssessmentAudited:
+        answers:
+          a_false:
+            text: ne
+          a_true:
+            text: ano
     labels:
       findability:
         text: Vyhledávání dat
@@ -1434,123 +1426,84 @@ cs:
         text: Služby
         help_text: nástroje pro práci s vašimi daty
       pilot_1:
-        text: ' <strong>Měli byste zveřejnit dokumentaci dat</strong>, aby uživatelé
-          získali lepší představu o jejich obsahu, kontextu a možnostech využití.
-          <strong>Popište možná rizika spojená s užitím vašich dat</strong>, aby se
-          uživatelé mohli rozhodnout, jestli a jak je mohou užít.'
+        text: ' <strong>Popište možná rizika spojená s užitím vašich dat</strong>,
+          aby se uživatelé mohli rozhodnout, jestli a jak je mohou užít.'
       basic_1:
-        text: ' <strong>Aby lidé mohli vaše data využít, je třeba zveřejnit jejich
-          dokumentaci a odkaz na data samotná.</strong>  <strong>Je nezbytné, abyste
-          disponovali právy ke zveřejnění těchto dat.</strong> '
+        text: ' <strong>Je nezbytné, abyste disponovali právy ke zveřejnění těchto
+          dat.</strong> '
       standard_1:
-        text: ' <strong>Měli byste na data odkazovat ze svého hlavního webu</strong>,
-          aby je uživatelé lépe našli. <strong>Na zveřejnění dat byste měli mít jasný
-          právní nárok.</strong> '
+        text: ' <strong>Na zveřejnění dat byste měli mít jasný právní nárok.</strong> '
       standard_2:
-        text: ' <strong>Vaše data by měla být snadno k nalezení všude, kde se nabízí
-          je hledat.</strong>  <strong>Měli byste zveřejnit strojově čitelné informace
-          o zdrojích, ze kterých vaše data pochází.</strong> '
+        text: ' <strong>Měli byste zveřejnit strojově čitelné informace o zdrojích,
+          ze kterých vaše data pochází.</strong> '
       standard_3:
-        text: ' <strong>Měli byste na data odkazovat ze svých publikací</strong>,
-          uživatelé se k nim lépe dostanou a budou víc v kontextu. <strong>Informace
-          o použité licenci k datům by měly být strojově čitelné</strong>, aby se
-          daly zpracovat automatickými nástroji. '
+        text: ' <strong>Informace o použité licenci k datům by měly být strojově čitelné</strong>,
+          aby se daly zpracovat automatickými nástroji. '
       pilot_2:
-        text: ' <strong>Během vydání byste svá data měli opatřit časovým razítkem</strong>,
-          aby se poznalo, k jakému období se vztahují a kdy zastarají. <strong>Popište,
-          odkud data pochází a jaká jsou vaše práva je zveřejnit</strong>, aby uživatelé
-          mohli bez obav použít i data pocházející z cizích zdrojů. '
+        text: ' <strong>Popište, odkud data pochází a jaká jsou vaše práva je zveřejnit</strong>,
+          aby uživatelé mohli bez obav použít i data pocházející z cizích zdrojů. '
       standard_4:
-        text: ' <strong>Pokud vaše data závisí na čase, měli byste je aktualizovat</strong>,
-          aby nezastarala. <strong>Informace o použité licenci k autorskoprávně chráněnému
-          obsahu by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými
-          nástroji. '
+        text: ' <strong>Informace o použité licenci k datům by měly být strojově čitelné</strong>,
+          aby se daly zpracovat automatickými nástroji. '
       exemplar_1:
-        text: ' <strong>Publikujte feed změn ve svých datech</strong>, aby uživatelé
-          mohli snadno aktualizovat své kopie. <strong>Informace o autorských právech
-          by měla být strojově čitelná</strong>, aby se dala zpracovat automatickými
-          nástroji. '
+        text: ' <strong>Informace o autorských právech by měla být strojově čitelná</strong>,
+          aby se dala zpracovat automatickými nástroji. '
       pilot_3:
-        text: ' <strong>Publikujte aspoň jednou měsíčně novou verzi</strong>, aby
-          uživatelé měli aktuální a přesná data. <strong>Měli byste zveřejnit právní
-          prohlášení</strong>, které podrobně popíše autorská a databázová práva spojená
-          s vašimi daty, licenční podmínky a vaše požadavky na uvádění autora a původu
-          díla.'
+        text: ' <strong>Měli byste zveřejnit právní prohlášení</strong>, které podrobně
+          popíše autorská a databázová práva spojená s vašimi daty, licenční podmínky
+          a vaše požadavky na uvádění autora a původu díla.'
       standard_5:
-        text: ' <strong>Publikujte aspoň jednou týdně novou verzi</strong>, aby uživatelé
-          měli aktuální a přesná data. <strong>Informace o původu díla by měly být
-          strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji. '
+        text: ' <strong>Informace o použité licenci k autorskoprávně chráněnému obsahu
+          by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými
+          nástroji. '
       exemplar_2:
-        text: ' <strong>Publikujte aspoň jednou denně novou verzi</strong>, aby uživatelé
-          měli aktuální a přesná data. <strong>Rok registrace copyrightu (americké
-          právo) by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými
-          nástroji. '
+        text: ' <strong>Rok registrace copyrightu (americké právo) by měl být strojově
+          čitelný</strong>, aby se dal zpracovat automatickými nástroji. '
       pilot_4:
-        text: ' <strong>Mezi vytvořením dat a jejich publikováním by měla být přiměřeně
-          krátká prodleva</strong>, menší než je prodleva mezi jednotlivými vydáními,
-          aby uživatelé dat měli aktuální a přesná data. <strong></strong> '
+        text: ' <strong></strong> '
       standard_6:
-        text: ' <strong>Mezi vytvořením dat a jejich zveřejněním by měla přiměřeně
-          krátká prodleva</strong>, menší než polovina prodlevy mezi jednotlivými
-          vydáními, aby uživatelé dat měli aktuální a přesná data. <strong>Uvedení
-          původu díla by mělo být strojově čitelné</strong>, aby se dal zpracovat
-          automatickými nástroji. '
+        text: ' <strong>Informace o původu díla by měly být strojově čitelné</strong>,
+          aby se daly zpracovat automatickými nástroji. '
       exemplar_3:
-        text: ' <strong>Mezi vytvořením dat a jejich zveřejněním by měla být co nejmenší
-          prodleva</strong>, ideálně nulová, aby uživatelé vždy k dispozici aktuální
-          a přesná data. <strong>Informace o držiteli autorských práv by měly být
-          strojově čitelné</strong>, aby se daly zpracovat automatickými nástroji. '
+        text: ' <strong>Informace o držiteli autorských práv by měly být strojově
+          čitelné</strong>, aby se daly zpracovat automatickými nástroji. '
       standard_7:
-        text: ' <strong>Měli byste data zpřístupnit také pro stažení</strong>, aby
-          jejich uživatelé nebyli omezeni na přístup přes API. <strong>Měli byste
-          si nechat vypracovat nezávislý posudek anonymizace dat</strong>, abyste
-          minimalizovali riziko, že anonymizovaná data půjdou použít k identifikaci
-          osob.'
+        text: ' <strong>Uvedení původu díla by mělo být strojově čitelné</strong>,
+          aby se dal zpracovat automatickými nástroji. '
       pilot_5:
-        text: ' <strong>Exportujte databázi aspoň jednou měsíčně</strong>, ať mají
-          uživatelé aktuální data. <strong>Pokud zveřejňujete osobní data, měli byste
-          analyzovat související rizika.</strong> '
+        text: ' <strong>Pokud zveřejňujete osobní data, měli byste analyzovat související
+          rizika.</strong> '
       standard_8:
-        text: ' <strong>Exportujte databázi nejpozději týden od provedení změn</strong>,
-          ať uživatelé dlouho nečekají na aktuální data. <strong>Měli byste uvést,
-          odkud plynou vaše práva ke zveřejnění osobních údajů</strong>. Usnadníte
-          tím situaci uživatelům svých dat i lidem, kterých se data týkají. '
+        text: ' <strong>Měli byste si nechat vypracovat nezávislý posudek anonymizace
+          dat</strong>, abyste minimalizovali riziko, že anonymizovaná data půjdou
+          použít k identifikaci osob.'
       exemplar_4:
-        text: ' <strong>Exportujte databázi do jednoho dne od provedení změn</strong>,
-          ať mají uživatelé snadný přístup k aktuálním datům. <strong>Rok vzniku databáze
-          nebo posledního nový kvalitativně nebo kvantitativně podstatného vkladu
-          by měl být strojově čitelný</strong>, aby se dal zpracovat automatickými
-          nástroji. '
+        text: ' <strong>Rok vzniku databáze nebo posledního nový kvalitativně nebo
+          kvantitativně podstatného vkladu by měl být strojově čitelný</strong>, aby
+          se dal zpracovat automatickými nástroji. '
       standard_9:
-        text: ' <strong>Opravujte nahlášené chyby</strong>, pomůžete ostatním uživatelům
-          dat. <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>,
-          aby se zájemci mohli podívat, jakým způsobem předcházíte možným rizikům. '
+        text: ' <strong>Měli byste uvést, odkud plynou vaše práva ke zveřejnění osobních
+          údajů</strong>. Usnadníte tím situaci uživatelům svých dat i lidem, kterých
+          se data týkají. '
       standard_10:
-        text: ' <strong>Dokumentujte veřejně kvalitu svých dat</strong>, ať uživatelé
-          vědí, nakolik na ně mohou spoléhat. <strong>Analýza rizik by měla projít
-          auditem</strong>, abyste měli jistotu, že je v pořádku.'
+        text: ' <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>,
+          aby se zájemci mohli podívat, jakým způsobem předcházíte možným rizikům. '
       exemplar_5:
-        text: ' <strong>Dokumentujte své procesy pro řízení kvality</strong>, ať uživatelé
-          ví, nakolik mohou vašim datům důvěřovat. <strong>Informace o pořizovateli
-          databáze by měly být strojově čitelné</strong>, aby se daly zpracovat automatickými
-          nástroji. '
+        text: ' <strong>Informace o pořizovateli databáze by měly být strojově čitelné</strong>,
+          aby se daly zpracovat automatickými nástroji. '
       standard_11:
-        text: ' <strong>Dělejte offsite zálohy svých dat</strong>, abyste o ně v případě
-          nehody nepřišli. <strong>Váš systém anonymizace dat by měl projít nezávislým
-          auditem</strong>, abyste měli jistotu, že se k vašim datům hodí a funguje
-          správně.'
+        text: ' <strong>Analýza rizik by měla projít auditem</strong>, abyste měli
+          jistotu, že je v pořádku.'
       standard_12:
-        text: ' <strong>Měli byste uvést, jaká garantovaná úroveň dostupnosti služby</strong>,
-          aby její uživatelé věděli, nakolik se na ni mohou spolehnout.'
+        text: ' <strong>Váš systém anonymizace dat by měl projít nezávislým auditem</strong>,
+          abyste měli jistotu, že se k vašim datům hodí a funguje správně.'
       exemplar_6:
         text: Nabídněte uživatelům <strong>informační stránku s aktuálním stavem vaší
           služby</strong>, ať mají přehled o problémech a výpadcích.
       pilot_6:
-        text: ' <strong>Měli byste se zaručit, že data budou ve stávající podobě k
-          dispozici aspoň jeden rok.</strong>  <strong>Musíte uživatelům svých dat
-          vysvětlit, k jakému využití svých osobních dat daly dotčené osoby svolení</strong>,
-          aby se vaši uživatelé nedostali do sporu se zákonem na ochranu osobních
-          údajů.'
+        text: ' <strong>Musíte uživatelům svých dat vysvětlit, k jakému využití svých
+          osobních dat daly dotčené osoby svolení</strong>, aby se vaši uživatelé
+          nedostali do sporu se zákonem na ochranu osobních údajů.'
       standard_13:
         text: ' <strong>Měli byste zaručit, že data ve stávající podobě budou k dispozici
           v horizontu několika let.</strong> '
@@ -1558,15 +1511,12 @@ cs:
         text: ' <strong>Měli byste zaručit, že data v současné podobě budou k dispozici
           dlouhodobě.</strong> '
       basic_2:
-        text: ' <strong>Uveďte URL svých dat nebo jejich dokumentace</strong>, aby
-          je uživatelé snadno našli.Uvedli jste, že jste data nevytvořili ani samostaně
-          nesesbírali (ani formou crowdsourcingu), takže musela vzniknout vytěžením
-          nebo zpracováním cizích datových zdrojů.'
+        text: Uvedli jste, že jste data nevytvořili ani samostaně nesesbírali (ani
+          formou crowdsourcingu), takže musela vzniknout vytěžením nebo zpracováním
+          cizích datových zdrojů.
       pilot_7:
-        text: ' <strong>Měli byste uvést přímý odkaz na data samotná</strong>, ať
-          se k nim uživatelé snadno dostanou. <strong>Pokud máte někoho přímo zodpovědného
-          za ochranu osobních údajů, měli byste ho přizvat k analýze souvisejících
-          rizik.</strong> '
+        text: ' <strong>Pokud máte někoho přímo zodpovědného za ochranu osobních údajů,
+          měli byste ho přizvat k analýze souvisejících rizik.</strong> '
       standard_14:
         text: ' <strong>Měli byste mít jedno permantní URL, na kterém uživatelé vždy
           najdou aktuální verzi dat.</strong> '
@@ -1578,15 +1528,12 @@ cs:
         text: ' <strong>Měli byste zveřejnit stránku nebo feed se seznamem všech vydaných
           datových sad</strong>, aby si je uživatelé mohli snadno automaticky stáhnout.'
       basic_3:
-        text: 'Uživatelé by měli mít k dispozici jasný způsob, jak se dostat k aktuální
-          verzi vašich dat – ať už půjde o permanentní URL, posloupnost URL stavěných
-          podle jedné šablony, nebo RSS feed. <strong>Měli byste se poradit s právníky,
-          abyste měli jistotu, že data můžete publikovat.</strong> '
+        text: ' <strong>Měli byste se poradit s právníky, abyste měli jistotu, že
+          data můžete publikovat.</strong> '
       basic_4:
-        text: Musíte dát k dispozici kořenové URL vašeho datového API nebo URL na
-          dokumentaci, aby je uživatelé našli.Uvedli jste, že jste data nevytvořili
-          nebo samostaně nesesbírali, ani jste nevytěžili nebo nezpracovali cizí datové
-          zdroje, data tedy musela vzniknout pomocí crowdsourcingu.
+        text: Uvedli jste, že jste data nevytvořili nebo samostaně nesesbírali, ani
+          jste nevytěžili nebo nezpracovali cizí datové zdroje, data tedy musela vzniknout
+          pomocí crowdsourcingu.
       standard_16:
         text: Měli byste dát k dispozici kořenové URL vašeho datového API nebo URL
           na dokumentaci, aby je uživatelé našli.
@@ -1749,12 +1696,15 @@ cs:
       ownership:
         text: Práva
         help_text: Za jakých podmínek lze data použít?
+        title: Práva
       licensing:
         text: Licence
         help_text: Jaká oprávnění poskytujete k užití těchto dat?
+        title: Licence
       privacy:
         text: Ochrana soukromí
         help_text: jak chránit soukromí osob
+        title: Ochrana soukromí
       basic_5:
         text: ' <strong>Každý přispěvatel musí souhlasit s přispěvatelskou licenční
           smlouvou (CLA)</strong>, ve které vám uděluje právo zveřejnit svou práci

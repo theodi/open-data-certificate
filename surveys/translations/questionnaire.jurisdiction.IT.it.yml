@@ -7,14 +7,13 @@ it:
       text: "Informazioni legali"
       help_text: "Diritti, licenze e privacy"
   questions:
-    # Informazioni legali
     publisherRights:
       text: "hai il diritto di pubblicare questi dati come dati aperti?"
       help_text: "Se la tua organizzazione non ha originariamente creato o raccolto questi dati, allora è possibile che tu non abbia il diritto di pubblicarli. Nel caso non fossi sicuro, controlla con chi detiene la proprietà dei dati, perché è necessario il permesso per pubblicarli."
       answers:
-        "yes":
+        'yes':
           text: "sì, hai i diritti per pubblicare questi dati come dati aperti"
-        "no":
+        'no':
           text: "no, non disponi dei titoli per pubblicare questi dati come dati aperti"
         unsure:
           text: "non sei sicuro di disporre dei diritti necessari per pubblicare questi dati come dati aperti"
@@ -34,7 +33,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "originariamente creati o generati dal suo curatore"
@@ -53,7 +51,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "fonti di dati aperti"
@@ -64,7 +61,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "su base volontaria"
@@ -105,7 +101,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "dati processabili dai computer sulle fonti di questi dati"
@@ -147,15 +142,13 @@ it:
           text_as_statement: "Italian Open Data License v2.0"
         na:
           text: "Non applicabile"
-          text_as_statement: ""
         other:
           text: "Altro..."
-          text_as_statement: ""
     dataNotApplicable:
       text: "Perché non si applica una licenza a questi dati?"
       text_as_statement: "Questi dati non hanno licenza perché"
       answers:
-        "norights":
+        norights:
           text: "non ci sono diritti d'autore o diritti su banche dati su questi dati"
           help_text: "i diritti sulle banche dati si applicano se hai impiegato notevoli sforzi per la loro raccolta, verifica o presentazione. Non si possono rivendicare diritti sulle banche di dati se, ad esempio, i dati vengono creati da zero, presentati in modo strutturato, e non verificati. Hai diritto d'autore, se hai selezionato gli elementi dei dati o li hai organizzati in modo non ovvio."
           text_as_statement: "non ci sono diritti in esso"
@@ -166,7 +159,6 @@ it:
         waived:
           text: "il diritto d'autore e i diritti relativi alle banche di dati sono stati ceduti"
           help_text: "Ciò significa che nessuno detiene i diritti e tutti possono fare ciò che vogliono con questi dati."
-          text_as_statement: ""
     dataWaiver:
       text: "Quale tipologia di cessione si utilizza per cedere i diritti sui dati?"
       text_as_statement: "I diritti sui dati sono stati ceduti con"
@@ -180,7 +172,6 @@ it:
           text_as_statement: "Creative Commons CCZero"
         other:
           text: "Altro..."
-          text_as_statement: ""
     dataOtherWaiver:
       text: "Dove è la rinuncia dei diritti sui dati?"
       text_as_statement: "Diritti sui dati sono stati revocati con"
@@ -214,18 +205,16 @@ it:
       text: "C'è diritto di autore sul contenuto di questi dati?"
       text_as_statement: "Ci sono"
       answers:
-        "norights":
+        norights:
           text: "no, i dati contengono solo cifre e numeri"
           help_text: "Non vi è alcun diritto d'autore su informazioni oggettive. Se i dati non contengono alcun contenuto creato attraverso sforzo intellettuale, non ci sono diritti sul contenuto."
           text_as_statement: "nessun diritto sul contenuto dei dati"
         samerights:
           text: "sì, e i diritti sono tutti in mano alla stessa persona o organizzazione"
           help_text: "Scegli questa opzione se il contenuto dei dati è stato creato interamente da o trasferito alla stessa persona o organizzazione."
-          text_as_statement: ""
         mixedrights:
           text: "sì, e i diritti sono detenuti da persone o organizzazioni diverse"
           help_text: "In alcuni dati, i diritti in diversi record sono detenuti da persone o organizzazioni diverse. Anche le informazioni sui diritti devono essere mantenute nei dati."
-          text_as_statement: ""
     explicitWaiver:
       text: "è il contenuto dei dati contrassegnati come dominio pubblico?"
       text_as_statement: "il contenuto è stato"
@@ -233,7 +222,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "contrassegnato come pubblico dominio"
@@ -259,15 +247,13 @@ it:
           text_as_statement: "Italian Open Data License v2.0"
         na:
           text: "Non applicabile"
-          text_as_statement: ""
         other:
           text: "Altro..."
-          text_as_statement: ""
     contentNotApplicable:
       text: "Perché non si applica una licenza al contenuto dei dati?"
       text_as_statement: "Il contenuto di questi dati non è concesso in licenza a causa"
       answers:
-        "norights":
+        norights:
           text: "non c'è diritto di autore sul contenuto di questi dati"
           help_text: "Il diritto di autore si applica al contenuto soltanto se al momento della creazione hai impiegato sforzo di tipo intellettuale, ad esempio, scrivendo il testo che è all'interno dei dati. Non si puo' rivendicare alcun diritto d'autore se il contenuto contiene solo fatti."
           text_as_statement: "non vi è alcun diritto d'autore"
@@ -278,7 +264,6 @@ it:
         waived:
           text: "Il diritto d'autore è stato revocato"
           help_text: "questo significa che nessuno detiene diritti d'autore e tutti possono fare ciò che vogliono con questi dati."
-          text_as_statement: ""
     contentWaiver:
       text: "Quale rinuncia si usa per rinunciare al diritti d'autore?"
       text_as_statement: "Il diritto d'autore è stata stato revocato con"
@@ -334,13 +319,13 @@ it:
         dataLicense:
           text: "Licenza sui dati"
           text_as_statement: "la sua licenza sui dati"
-        "contentLicense":
+        contentLicense:
           text: "licenza d'uso sul contenuto"
           text_as_statement: "la sua licenza sul contenuto"
-        "attribution":
+        attribution:
           text: "testo di attribuzione"
           text_as_statement: "quale testo di attribuzione utilizzare"
-        "attributionURL":
+        attributionURL:
           text: "URL attribuzione"
           text_as_statement: "Quale link su attribuzione inserire"
         copyrightNotice:
@@ -362,7 +347,7 @@ it:
       text: "singoli individui possono essere identificati partendo da questi dati?"
       text_as_statement: "Questi dati contengono"
       answers:
-        "not_personal":
+        not_personal:
           text: "no, i dati non riguardano le persone o le loro attività"
           help_text: "Ricorda che gli individui possono essere ancora identificati, anche se i dati non li riguardano direttamente. Ad esempio, i dati sul flusso del traffico stradale se combinati con i modelli di pendolarismo di un singolo individuo potrebbero rivelare informazioni su quella persona."
           text_as_statement: "Nessun dato relativo a persone singole"
@@ -380,7 +365,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "sottoposto a revisione indipendente"
@@ -391,7 +375,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "anonimizzati"
@@ -401,7 +384,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "devono essere pubblicati"
@@ -436,7 +418,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "sottoposto a revisione indipendente"
@@ -460,7 +441,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "è stato consultato"
@@ -471,7 +451,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "sottoposto a revisione indipendente"
@@ -485,7 +464,6 @@ it:
     privacy:
       text: "Privacy"
       help_text: "come si protegge la privacy delle persone"
-  # Informazioni legali Requirements
     standard_1:
       text: "Dovresti avere un <strong>chiaro titolo legale per la pubblicazione di questi dati</strong>."
     basic_1:
@@ -507,13 +485,11 @@ it:
     pilot_3:
       text: "Dovresti <strong>pubblicare una dichiarazione dei diritti</strong> che fornisca dettagli sul diritto d'autore, i diritti sulle banche dati, le licenze e come le persone dovrebbero dare attribuzione ai dati."
     basic_6:
-      text: "
-                  <strong>È necessario pubblicare i dati aperti sotto una licenza aperta</strong> in modo che le persone possano usarli."
+      text: " <strong>È necessario pubblicare i dati aperti sotto una licenza aperta</strong> in modo che le persone possano usarli."
     standard_3:
       text: "Dovresti<strong>contrassegnare contenuti di dominio pubblico come dominio pubblico</strong> in modo che le persone sappiano di poterli riutilizzare."
     basic_7:
-      text: "
-                     <strong>È necessario pubblicare i dati aperti sotto una licenza aperta</strong> in modo che le persone possano utilizzarli."
+      text: " <strong>È necessario pubblicare i dati aperti sotto una licenza aperta</strong> in modo che le persone possano utilizzarli."
     standard_4:
       text: "È necessario fornire <strong>dati processabili dai computer nella tua dichiarazione dei diritti sulla licenza</strong> per questi dati, in modo che gli strumenti possono automaticamente utilizzarli."
     standard_5:

@@ -50,10 +50,12 @@ Should work on OSX
   # surveys/generated/surveyor/odc_questionnaire.CZ.cs.yml
   # surveys/generated/surveyor/odc_questionnaire.CZ.en.yml
 
-  SURVEY_LOCALE_FILES = Rake::FileList['surveys/generated/locales/surveys.*.yml']
-
   JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
+  LANGUAGES = JURISDICTION_LANGS.map(&:last).flatten.uniq.sort
   JURISDICTIONS = JURISDICTION_LANGS.keys
+
+  SURVEY_LOCALE_FILES = LANGUAGES.map {|l| "surveys/generated/locales/surveys.#{l}.yml" }
+  SURVEY_DSL_FILES = JURISDICTIONS.map {|j| "surveys/generated/surveyor/odc_questionnaire.#{j}.rb" }
 
   rule %r{surveys/generated/locales/surveys\.[a-z]{2}\.yml} => [
     ->(file_name){
@@ -68,16 +70,25 @@ Should work on OSX
     Translations::Merge.merge(t.name, t.prerequisites)
   end
 
+  rule %r{surveys/generated/surveyor/odc_questionnaire\.[A-Z]{2}\.rb} => [
+    ->(file_name){
+      jurisdiction = jurisdiction_from_file_name(file_name)
+
+      Rake::FileList[
+        "surveys/definition/questionnaire.general.xml",
+        "surveys/definition/questionnaire.jurisdiction.#{jurisdiction}.xml"
+      ]
+    }
+  ] do |t|
+    _, jurisdiction_file = t.prerequisites
+    sh "saxon -s:#{jurisdiction_file} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
+  end
+
+  desc 'Regenerate all survey locale files in surveys/generated/locales/'
   task build_survey_locales: SURVEY_LOCALE_FILES
 
-  JURISDICTIONS.each do |jurs|
-    file "surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb" => %W[
-        surveys/definition/questionnaire.general.xml
-        surveys/definition/questionnaire.jurisdiction.#{jurs}.xml] do |t|
-      general, jurisdiction = t.prerequisites
-      sh "saxon -s:#{jurisdiction} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
-    end
-  end
+  desc 'Regenerate all DSL files for Surveyor. Take a look at surveyor:build_changed_survey as the next step.'
+  task build_survey_dsl_files: SURVEY_DSL_FILES
 
   task :pull, [:jurisdiction] do |t, args|
     unless JURISDICTIONS.include?(args.jurisdiction)
@@ -99,6 +110,10 @@ end
 
 def locale_from_file_name(file_name)
   file_name[/([A-Za-z]{2})\.yml\z/, 1].downcase
+end
+
+def jurisdiction_from_file_name(file_name)
+  file_name[/([A-Za-z]{2})\.rb\z/, 1].upcase
 end
 
 def quiet
