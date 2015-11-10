@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151103121302) do
+ActiveRecord::Schema.define(:version => 20151105153400) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(:version => 20151103121302) do
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "attained_level"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "attained_level",  :default => "none"
     t.string   "curator"
     t.boolean  "published",       :default => false
     t.datetime "expires_at"
