@@ -161,30 +161,56 @@ en:
     continue_without_registering: Continue without registering
     creating_questionnaire: Creating new questionnaire...
     create_an_account: Create an account
-    title: Certify your open data
-    tagline: Show that it’s easy to <strong>find,</strong> <strong>use</strong> and <strong>share</strong>
+    title: The mark of quality and trust for open data.
+    tagline: "We verify publisher best practice, so you can use data with confidence."
+    free_and_open: It’s <strong>free</strong> and <strong>open</strong>.
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
-    browse_all_new_certificates: Browse all certificates
-    how_it_works: How it works
-    fill_out_questionnaire:
-      title: Publish your data
-      description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
-    generate_certificate:
-      title: Check it with our questionnaire
-      description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
-    share_open_data:
-      title: Share it with a certificate
-      description: Your answers determine which of our four certificates you generate. Each one means success in a unique way and demonstrates you are a leader in open data.
+    browse_all_new_certificates: Check if you have a certificate
+    verify_in_bulk: "We can certify data in bulk, contact us to find out how."
+    what_happens_next: What happens next
+    claim_your_certificate:
+      title: Claim your certificate
+      description: We provide a mark for you to display on your website.
+    increase_trust:
+      title: Increase trust in your data
+      description: Involve your users to gain Community Verified status. Or request an ODI data audit.
+    improve_data:
+      title: Improve your data
+      description: A free best practice report is created for all certificates.
     about_certificate:
-      title: What does a certificate look like?
-      description: It's a badge that links to a description of your open data. The description explores things like how often it's updated, what format it's in, who and where it came from.
-      link: Find out more
-    about_odi:
-      title: Who are the ODI?
-      description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
-      odi_name: Open Data Institute
-      link: Get in touch
+      title: What is an Open Data Certificate?
+      description_html: |
+        <p>Each Open Data Certificate uses a questionnaire-style assessment to recognise well-published open data with one of four badges.</p>
+        <p>Each badge shows that the data has been published in a sustainable and reusable way – with each level indicating the available support and adherence to current best-practices.</p>
+      link: Learn more
+    how_certificates_work:
+      title: How does each certificate work?
+      description_html: |
+        <ul>
+          <li>It recognises well published open data</li>
+          <li>It provides an independent guarantee of quality</li>
+          <li>It assesses sustainability and reliability of published data</li>
+          <li>It encourages trust and reuse of data</li>
+          <li>It guides publisher through established best practices</li>
+        </ul>
+      link: Learn more
+    who_is_using:
+      title: Who is using Open Data Certificates?
+      sub_title: "Publishers, consumers and technology providers from around the world have adopted Open Data Certificates."
+    our_collaborators:
+      title: Our collaborators
+      sub_title: "Open Data Certificates are designed to be universal and interoperable between technology standards, platforms and countries."
+    standards:
+      title: Standards
+      description: We currently support DCAT
+    technology:
+      title: Technology
+      description: We can automatically pre-fill many of the Open Data Certificate questions if you use CKAN. Support for Socrata and OpenDataSoft is coming soon.
+    countries:
+      title: Countries
+      description: "We offer certificates in %{count} countries."
+    certificate_adoption: Certificates adoption around the world
     international_reach:
       title: Where can you create certificates?
       description: Different countries have different laws, so their certificates are slightly different too. Choose your country to create the right certificate.
