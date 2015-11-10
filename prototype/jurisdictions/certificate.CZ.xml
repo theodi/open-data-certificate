@@ -444,65 +444,6 @@
                   </question>
                </if>
             </if>
-            <if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-               <question id="riskAssessmentExists" display="Rizika spojená s osobními údaji">
-                  <label>Analyzovali jste rizika spojená se zveřejněním osobních údajů?</label>
-                  <yesno yes="poskytovatel provedl analýzu rizik"
-                         no="poskytovatel neprovedl analýzu rizik"/>
-                  <help>Analýza rizik se týká jak soukromí dotčených osob, tak použití a zveřejnění těchto dat.</help>
-                  <requirement level="pilot">
-                     <strong>Pokud zveřejňujete osobní data, měli byste analyzovat související rizika.</strong>
-                  </requirement>
-               </question>
-               <if test="this.riskAssessmentExists() === 'true'">
-                  <question id="riskAssessmentUrl" display="Analýza rizik">
-                     <label>Kde máte analýzu rizik zveřejněnou?</label>
-                     <input type="url" placeholder="URL analýzy rizik"/>
-                     <help>Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace, můžete ji pouze shrnout nebo příslušné části odstranit nebo anonymizovat.</help>
-                     <requirement level="standard">
-                        <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>, aby se zájemci mohli podívat, jakým způsobem předcházíte možným rizikům.
-                    </requirement>
-                  </question>
-                  <if test="this.riskAssessmentUrl() !== ''">
-                     <question id="riskAssessmentAudited" display="Audit analýzy rizik">
-                        <label>Prošla vaše analýza rizik nezávislým auditem?</label>
-                        <yesno yes="analýza rizik prošla nezávislým auditem"/>
-                        <help>Je dobrým zvykem nechat si analýzu rizik ještě ověřit. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.</help>
-                        <requirement level="standard">
-                           <strong>Analýza rizik by měla projít auditem</strong>, abyste měli jistotu, že je v pořádku.</requirement>
-                     </question>
-                  </if>
-                  <if test="this.lawfulDisclosure() !== 'true'">
-                     <question id="individualConsentURL" display="Informace pro dotčené osoby">
-                        <label>Kde máte sdělení o ochraně osobních údajů dotčených osob?</label>
-                        <input type="url" placeholder="URL dokumentu"/>
-                        <help more="https://www.uoou.cz/VismoOnline_ActionScripts/File.ashx?id_org=200144&amp;id_dokumenty=11914">Při sběru a zpracování osobních údajů musíte dotčené osoby (subjekty údajů) informovat o probíhajícím zpracování, tedy za jakým účelem data zpracováváte, jak dlouho se tak bude dít, kdo bude mít k datům přístup a podobně. Prohlášení o soukromí dotčených osob bude zajímat i uživatele vašich dat, aby se nedostali do sporu se zákonem na ochranu osobních údajů.</help>
-                        <requirement level="pilot">
-                           <strong>Musíte uživatelům svých dat vysvětlit, k jakému využití svých osobních dat daly dotčené osoby svolení</strong>, aby se vaši uživatelé nedostali do sporu se zákonem na ochranu osobních údajů.</requirement>
-                     </question>
-                  </if>
-                  <question id="dpStaff">
-                     <label>Máte v organizaci někoho přímo zodpovědného za ochranu osobních údajů?</label>
-                     <yesno required="pilot"/>
-                  </question>
-                  <if test="this.dpStaff() === 'true'">
-                     <question id="dbStaffConsulted" display="Zodpovědnost za ochranu osobních údajů">
-                        <label>Podílel se na analýze rizik spojených s ochranou soukromí?</label>
-                        <yesno yes="zodpovědná osoba se podílela na analýze rizik"/>
-                        <requirement level="pilot">
-                           <strong>Pokud máte někoho přímo zodpovědného za ochranu osobních údajů, měli byste ho přizvat k analýze souvisejících rizik.</strong>
-                        </requirement>
-                     </question>
-                  </if>
-                  <question id="anonymisationAudited" display="Anonymizace dat">
-                     <label>Nechali jste svůj systém anonymizace dat ověřit nezávislým auditem?</label>
-                     <yesno yes="ověřena nezávislým auditem"/>
-                     <help>Je dobrým zvykem zkontrolovat, jestli váš systém filtrování osobních údajů funguje správně. Pečlivější a nestrannější bývá nezávislý audit odborníkem nebo třetí stranou.</help>
-                     <requirement level="standard">
-                        <strong>Váš systém anonymizace dat by měl projít nezávislým auditem</strong>, abyste měli jistotu, že se k vašim datům hodí a funguje správně.</requirement>
-                  </question>
-               </if>
-            </if>
          </if>
       </group>
    </group>
