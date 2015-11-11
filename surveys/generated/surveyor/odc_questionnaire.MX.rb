@@ -14,8 +14,7 @@ survey 'MX',
       :required => :required
     a_1 'Data Title',
       :string,
-      :placeholder => 'Data Title',
-      :required => :required
+      :placeholder => 'Data Title'
 
     q_documentationUrl 'Where is it described?',
       :discussion_topic => :documentationUrl,
@@ -50,8 +49,7 @@ survey 'MX',
       :required => :required
     a_1 'Data Publisher',
       :string,
-      :placeholder => 'Data Publisher',
-      :required => :required
+      :placeholder => 'Data Publisher'
 
     q_publisherUrl 'What website is the data published on?',
       :discussion_topic => :publisherUrl,
@@ -244,8 +242,7 @@ survey 'MX',
     a_1 'Contributor Licence Agreement URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Contributor Licence Agreement URL',
-      :required => :required
+      :placeholder => 'Contributor Licence Agreement URL'
 
     q_cldsRecorded 'Have all contributors agreed to the Contributor Licence Agreement (CLA)?',
       :discussion_topic => :mx_cldsRecorded,
@@ -409,7 +406,6 @@ survey 'MX',
     a_1 'Waiver URL',
       :text,
       :input_type => :url,
-      :required => :required,
       :placeholder => 'Waiver URL'
 
     q_otherDataLicenceName 'What is the name of the licence?',
@@ -422,7 +418,6 @@ survey 'MX',
     condition_A :q_dataLicence, '==', :a_other
     a_1 'Other Licence Name',
       :string,
-      :required => :required,
       :placeholder => 'Other Licence Name'
 
     q_otherDataLicenceURL 'Where is the licence?',
@@ -436,7 +431,6 @@ survey 'MX',
     a_1 'Other Licence URL',
       :text,
       :input_type => :url,
-      :required => :required,
       :placeholder => 'Other Licence URL'
 
     q_otherDataLicenceOpen 'Is the licence an open licence?',
@@ -566,7 +560,6 @@ survey 'MX',
     a_1 'Waiver URL',
       :text,
       :input_type => :url,
-      :required => :required,
       :placeholder => 'Waiver URL'
 
     q_otherContentLicenceName 'What\'s the name of the licence?',
@@ -580,7 +573,6 @@ survey 'MX',
     condition_B :q_contentLicence, '==', :a_other
     a_1 'Licence Name',
       :string,
-      :required => :required,
       :placeholder => 'Licence Name'
 
     q_otherContentLicenceURL 'Where is the licence?',
@@ -595,7 +587,6 @@ survey 'MX',
     a_1 'Licence URL',
       :text,
       :input_type => :url,
-      :required => :required,
       :placeholder => 'Licence URL'
 
     q_otherContentLicenceOpen 'Is the licence an open licence?',
@@ -630,7 +621,6 @@ survey 'MX',
     a_1 'Content Rights Description URL',
       :text,
       :input_type => :url,
-      :required => :required,
       :placeholder => 'Content Rights Description URL'
 
     q_copyrightStatementMetadata 'Does your rights statement include machine-readable versions of',
@@ -958,7 +948,6 @@ survey 'MX',
       a_1 'Web page URL',
         :text,
         :input_type => :url,
-        :required => :required,
         :placeholder => 'Web page URL'
 
     end
@@ -992,7 +981,6 @@ survey 'MX',
       a_1 'Listing URL',
         :text,
         :input_type => :url,
-        :required => :required,
         :placeholder => 'Listing URL'
 
     end
@@ -1026,7 +1014,6 @@ survey 'MX',
       a_1 'Reference URL',
         :text,
         :input_type => :url,
-        :required => :required,
         :placeholder => 'Reference URL'
 
     end
@@ -1574,8 +1561,7 @@ survey 'MX',
     a_1 'Current Dataset URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Current Dataset URL',
-      :required => :required
+      :placeholder => 'Current Dataset URL'
 
     q_versionsTemplateUrl 'What format do dataset release URLs follow?',
       :discussion_topic => :versionsTemplateUrl,
@@ -1589,8 +1575,7 @@ survey 'MX',
     a_1 'Version Template URL',
       :string,
       :input_type => :text,
-      :placeholder => 'Version Template URL',
-      :required => :required
+      :placeholder => 'Version Template URL'
 
     q_versionsUrl 'Where is your list of dataset releases?',
       :discussion_topic => :versionsUrl,
@@ -1604,8 +1589,7 @@ survey 'MX',
     a_1 'Version List URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Version List URL',
-      :required => :required
+      :placeholder => 'Version List URL'
 
     q_endpointUrl 'Where is the endpoint for your API?',
       :discussion_topic => :endpointUrl,
@@ -1689,8 +1673,7 @@ survey 'MX',
     a_1 'Current Dump URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Current Dump URL',
-      :required => :required
+      :placeholder => 'Current Dump URL'
 
     q_dumpsTemplateUrl 'What format do database dump URLs follow?',
       :discussion_topic => :dumpsTemplateUrl,
@@ -1705,8 +1688,7 @@ survey 'MX',
     a_1 'Dump Template URL',
       :string,
       :input_type => :text,
-      :placeholder => 'Dump Template URL',
-      :required => :required
+      :placeholder => 'Dump Template URL'
 
     q_dumpsUrl 'Where is your list of available database dumps?',
       :discussion_topic => :dumpsUrl,
@@ -1721,8 +1703,7 @@ survey 'MX',
     a_1 'Dump List URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Dump List URL',
-      :required => :required
+      :placeholder => 'Dump List URL'
 
     q_changeFeedUrl 'Where is your feed of changes?',
       :discussion_topic => :changeFeedUrl,
@@ -1735,8 +1716,7 @@ survey 'MX',
     a_1 'Change Feed URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Change Feed URL',
-      :required => :required
+      :placeholder => 'Change Feed URL'
 
     label_format 'Formats',
       :help_text => 'how people can work with your data',
@@ -2460,7 +2440,6 @@ survey 'MX',
       a_1 'Social Media URL',
         :text,
         :input_type => :url,
-        :required => :required,
         :placeholder => 'Social Media URL'
 
     end
@@ -2547,8 +2526,7 @@ survey 'MX',
     a_1 'Community Engagement Team Home Page URL',
       :text,
       :input_type => :url,
-      :placeholder => 'Community Engagement Team Home Page URL',
-      :required => :required
+      :placeholder => 'Community Engagement Team Home Page URL'
 
     label_services 'Services',
       :help_text => 'how you give people access to tools they need to work with your data',

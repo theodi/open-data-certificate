@@ -33,12 +33,15 @@ module Translations
     module_function
     def merge(out_file, input_files)
       merged_output = input_files.reduce({}) do |memo, input_file|
-        deep_merge!(memo, YAML.load_file(input_file))
+        yaml = if File.exist?(input_file)
+          YAML.load_file(input_file) || {}
+        else
+          {}
+        end
+
+        deep_merge!(memo, yaml)
         memo
       end
-
-      locale = merged_output.keys.first
-      merged_output = {locale => {'surveyor' => merged_output[locale]}}
 
       File.open(out_file, 'w:utf-8') { |f| f.write(YAML.dump(merged_output)) }
     end
