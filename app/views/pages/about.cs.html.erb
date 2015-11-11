@@ -1,0 +1,82 @@
+<% content_for :header_title, t("about.heading_about") %>
+
+<div class="container about">
+  <div class="span8">
+
+    <p>Certifikát otevřených dat je neplacená služba pro automatickou
+    kontrolu otevřených dat. Vydavatelé otevřených dat mohou díky procesu
+    certifikace zjistit, kde jejich data nesplňují určité kvalitativní
+    standardy, a zlepšit je, aby byl na data spoleh a dalo se z nich
+    dlouhodobě vytěžit maximum hodnoty.</p>
+
+    <nav>
+      <ul>
+        <li><%= link_to('Jak získat certifikát', how_to_get_certificates_path) %></li>
+        <li><%= link_to('Úrovně certifikace', badge_levels_page_path) %></li>
+        <li><%= link_to('Požadavky na jednotlivé úrovně', what_you_need_page_path) %></li>
+      </ul>
+    </nav>
+
+    <h2>Naše vize</h2>
+
+    <p>Cílem ODI je certifikace všech otevřených dat, aby z nich každý mohl vytěžit
+    maximum jejich hodnoty. Pouhé zveřejnění dat k tomu nestačí – data musí být
+    spolehlivá, přístupná a snadno dohledatelná, a jejich vydavatel by měl uživatelům
+    nabídnout odpovídající podporu. Certifikát otevřených dat je univerzálně
+    platnou značkou zaručující transparentnost, kvalitu a důvěru.</p>
+
+    <div class="benefits-section">
+      <h2>Výhody pro vydavatele dat</h2>
+
+      <dl>
+        <dt>Nezávislá pečeť kvality</dt>
+        <dd>Certifikát můžete vystavit na svém webu a dát tím najevo, že vám na
+        kvalitních otevřených datech opravdu záleží.</dd>
+
+        <dt>Seznam ověřených, uznávaných postupů</dt>
+        <dd>Během certifikace s vámi projdeme váš současný proces publikování
+        dat a porovnáme ho s globálně ověřenými a uznávanými standardy.</dd>
+
+        <dt>Seznam potenciálních zlepšení</dt>
+        <dd>Certifikace vám poskytne přehledný seznam toho, co byste mohli zlepšit,
+        abyste se dostali na vyšší úroveň.</dd>
+
+        <dt>Zapojení uživatelů</dt>
+        <dd>Díky certifikátu otevřených dat dostanou uživatelé vašich dat informace,
+        které potřebují, mají-li se na data spolehnout.</dd>
+      </dl>
+    </div>
+
+    <div class="benefits-section">
+      <h2>Výhody pro uživatele dat</h2>
+
+      <dl>
+        <dt>Záruka spolehlivosti</dt>
+        <dd>Během certifikace se ptáme na klíčové otázky ohledně autorských práv,
+        frekvence aktualizace nebo dlouhodobé podpory datových sad; podporujeme
+        podrobnou dokumentaci.</dd>
+
+        <dt>Ověřené procesy a postupy</dt>
+        <dd>Pokud chce vydavatel datové sady dosáhnout na vyšší úroveň certifikace,
+        musí používat osvědčené postupy a investovat do datové sady další úsilí,
+        díky kterému se pak uživatelé mohou na data spoléhat v delším horizontu.</dd>
+
+        <dt>Nezávislé posouzení</dt>
+        <dd>Certifikát otevřených dat nevyžaduje publikování dat prostřednictvím
+        nějaké konkrétní platformy nebo formátu. Sebrali jsme nejlepší ověřené postupy
+        napříč celým oborem tak, aby certifikovaná data nabízela všechny informace
+        potřebné pro jejich dlouhodobé efektivní využití.</dd>
+      </dl>
+    </div>
+
+    <p>
+      <%= example_certificate_link %>
+    </p>
+
+    <hr class="supporter-divider"/>
+    <div class="supporter">
+      <%= image_tag "3rd-party/open-data-monitor-logo-100x100.png" %>
+      <div class="caption">Development of this tool was partly supported by the OpenDataMonitor project, co-funded by the European Commission under the Seventh Framework Programme (FP7 2007-2013).</div>
+    </div>
+  </div>
+</div>
