@@ -244,36 +244,6 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal response_set.triggered_mandatory_questions, [triggered_mandatory_question]
   end
 
-  #TODO: need to test "all_mandatory_questions_complete?"
-
-  test "#triggered_requirements should return an array of all the requirements that are triggered by their dependencies for the response_set" do
-    survey_section = FactoryGirl.create(:survey_section)
-    survey = survey_section.survey
-
-    # non-triggered requirement
-    question = FactoryGirl.create(:question, corresponding_requirements: ['level_1'], survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_1', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
-
-    # non-triggered requirement
-    question = FactoryGirl.create(:question, corresponding_requirements: ['level_2'], survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_2', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
-
-    # triggered requirement
-    question = FactoryGirl.create(:question, corresponding_requirements: ['level_3'], survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, reference_identifier: 'level_3', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count<2'
-    survey.reload
-
-    response_set = FactoryGirl.create(:response_set, survey: survey)
-
-    assert_equal response_set.triggered_requirements, [requirement]
-  end
-
   test "#attained_level returns the correct string for the level achieved" do
     %w(none basic pilot standard exemplar).each_with_index do |level, i|
       response_set = FactoryGirl.create(:response_set)
@@ -295,19 +265,6 @@ class ResponseSetTest < ActiveSupport::TestCase
   test "#minimum_outstanding_requirement_level returns exemplar index if there's no outstanding requirements" do
     response_set = FactoryGirl.create(:response_set)
     assert_equal response_set.minimum_outstanding_requirement_level, 5
-  end
-
-  test "#completed_requirements returns only triggered_requirements that are met by responses" do
-    triggered_requirements = [stub(requirement_met_by_responses?: true),
-                              stub(requirement_met_by_responses?: false),
-                              stub(requirement_met_by_responses?: false),
-                              stub(requirement_met_by_responses?: false),
-    ]
-
-    response_set = FactoryGirl.create(:response_set)
-    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
-
-    assert_equal [triggered_requirements.first], response_set.completed_requirements
   end
 
   test "#outstanding_requirements returns only triggered_requirements that are not met by responses" do

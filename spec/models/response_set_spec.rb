@@ -85,6 +85,33 @@ describe ResponseSet do
     ResponseSet.find(new_set.id).responses.should have(1).items
   end
 
+  describe '#progress' do
+    let!(:requirement) { FactoryGirl.create(:requirement, reference_identifier: 'basic_1') }
+    let!(:question) { FactoryGirl.create(:question, reference_identifier: 'testDataTitle', survey_section: requirement.survey_section) }
+    let!(:answer) { FactoryGirl.create(:answer, question: question, corresponding_requirements: ['basic_1']) }
+    let!(:response_set) { FactoryGirl.create(:response_set, survey: requirement.survey_section.survey) }
+    let!(:response) { FactoryGirl.create(:response, response_set: response_set, string_value: 'my answer', question: question, answer: answer) }
+
+    let!(:dependency) { FactoryGirl.create(:dependency, rule: "A", question_id: requirement.id) }
+    let!(:condition) { FactoryGirl.create(:dependency_condition, rule_key: "A", question_id: question.id, operator: "!=", answer_id: answer.id, dependency_id: dependency.id) }
+
+    let(:progress_hash) { response_set.progress }
+    let(:expected_result) do
+      {
+        "attained" => "exemplar",
+        "basic" => 100,
+        "pilot" => 100,
+        "standard" => 100,
+        "exemplar" => 100
+      }
+    end
+
+    it 'returns the expected result' do
+      requirement.survey_section.survey.reload
+      expect(progress_hash).to eql(expected_result)
+    end
+  end
+
   describe '#update_from_ui_hash' do
     let(:ui_hash) { {} }
     let(:api_id)  { 'ABCDEF-1234-567890' }
