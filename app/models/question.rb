@@ -102,17 +102,6 @@ class Question < ActiveRecord::Base
     @requirement_level ||= requirement_identifier.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
-  def minimum_level
-    case required
-    when '', nil
-      nil
-    when "required"
-      "basic"
-    when String
-      required
-    end
-  end
-
   def requirement_level_index
     @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level) || 0
   end

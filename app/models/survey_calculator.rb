@@ -8,16 +8,21 @@ class SurveyCalculator
   end
 
   def requirement_level_for_question(question_id)
-    question = questions_by_id[question_id]
+    @requirement_level_for_question ||= {}
+    @requirement_level_for_question[question_id] ||= begin
+      question = questions_by_id[question_id]
 
-    if question.nil?
-      Survey::REQUIREMENT_LEVELS[0]
-    elsif question.is_requirement?
-      question.requirement_level
-    else
-      levels = dependent_questions_of(question_id).map { |q| requirement_level_for_question(q.id) }
-      levels = levels.map { |level| Survey::REQUIREMENT_LEVELS.index(level) }.compact
-      Survey::REQUIREMENT_LEVELS[levels.min || 0]
+      if question.nil?
+        Survey::REQUIREMENT_LEVELS[0]
+      elsif question.required.present?
+        Survey::REQUIREMENT_LEVELS[1]
+      elsif question.is_requirement?
+        question.requirement_level
+      else
+        levels = dependent_questions_of(question_id).map { |q| requirement_level_for_question(q.id) }
+        levels = levels.map { |level| Survey::REQUIREMENT_LEVELS.index(level) }.compact
+        Survey::REQUIREMENT_LEVELS[levels.min || 0]
+      end
     end
   end
 
