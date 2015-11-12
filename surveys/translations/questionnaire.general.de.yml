@@ -3,16 +3,15 @@ de:
     general:
       text: "Allgemeine Informationen"
     practical:
-      text: "Practical Information"
-      help_text: "Findability, accuracy, quality and guarantees"
+      text: "Praktische Hinweise"
+      help_text: "Auffindbarkeit, Genauigkeit, Qualität, und Gewährleistungen"
     technical:
-      text: "Technische Information"
+      text: "Technische Hinweise"
       help_text: "Speicherorte, Formate und Vertrauenswürdigkeit"
     social:
-      text: "Soziale Information"
+      text: "Soziale Hinweise"
       help_text: "Dokumentation, Support und Services"
   questions:
-    # Allgemeine Informationen
     dataTitle:
       text: "Wie werden die Daten bezeichnet?"
       help_text: "Dieser Name wird in einer Liste von ähnlichen Daten angezeigt. Er sollte daher so eindeutig und anschaulich sein, wie es in dieser kleinen Box möglich ist, so dass schnell klar wird, worin die Daten sich von anderen unterscheiden."
@@ -22,7 +21,7 @@ de:
     documentationUrl:
       text: "Wo sind die Daten beschrieben?"
       text_as_statement: "Die Beschreibung der Daten befindet sich unter"
-      help_text: "Geben Sie eine URL an, an der Nutzer sich über die Inhalte der Daten detaillierter informieren können. Dabei kann es sich auch um eine Seite in einem größeren Katalog wie govdata.de handeln."
+      help_text: "Geben Sie eine URL an, wo Nutzer sich über die Inhalte der Daten detaillierter informieren können. Dabei kann es sich auch um eine Seite in einem größeren Katalog wie govdata.de handeln."
       answers:
         a_1:
           placeholder: "URL der Dokumentation"
@@ -41,29 +40,28 @@ de:
         a_1:
           placeholder: "URL des Herausgebers"
     releaseType:
-      text: "Welche Art Release (Einzelveröffenlichtung, Sammlung, Zeitreihe, Websservice) ist das?"
+      text: "Welche Art Release (Einzelveröffentlichung, Sammlung, Zeitreihe, Webservice) ist das?"
       answers:
-        "oneoff":
+        oneoff:
           text: "eine einmalige Datenveröffentlichung"
           help_text: "Dies ist ein einzelner Satz von Daten und Sie planen nicht, in Zukunft ähnliche Datensätze zu veröffentlichen."
-        "collection":
+        collection:
           text: "eine einzelne Veröffentlichung einer Gruppe zusammenhängender Datensätze"
-          help_text: "Dies ist eine Sammlun von Datensätzen mit zusammenhängen Daten, Sie planen jedoch nicht in Zukunft ähnliche Sammlungen zu veröffentlichen."
+          help_text: "Dies ist eine Sammlung von Datensätzen mit zusammenhängen Daten, Sie planen jedoch nicht in Zukunft ähnliche Sammlungen zu veröffentlichen."
         series:
           text: "fortlaufende Veröffentlichung von mit einander in Bezug stehenden Datensätzen."
           help_text: "Eine Abfolge von Datensätzen mit geplanten periodischen Updates."
         service:
           text: "Ein Dienst oder eine API für den Zugriff auf offene Daten."
           help_text: "Dies ist ein produktiver Web-Service die Daten Entwicklern durch eine Schnittstelle zugänglich mach, die sie abfragen können."
-    # Practical Information
     onWebsite:
       text: "Gibt es einen Link zu den Daten von Ihrem (Haupt) Webauftritt?"
       help_text: "Daten können besser gefunden werden, wenn Sie sie in Ihrem (Haupt-)Webauftritt verlinken."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     webpage:
       text: "Welche Seite in Ihrem Webauftritt verlinkt die Daten?"
       text_as_statement: "Die Website verlinkt die Daten auf der Seite…"
@@ -76,9 +74,9 @@ de:
       help_text: "Daten können besser gefunden werden, wenn Sie in relevanten Datenkatalogen (z. B. akademischen oder solchen der Verwaltung oder des Gesundheitswesens) aufgeführt sind bzw. dort in Suchergebnissen gelistet werden."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     listing:
       text: "Wo wird der Datensatz aufgeführt"
       text_as_statement: "Die Daten finden sich im Katalog…"
@@ -87,26 +85,26 @@ de:
         a_1:
           placeholder: "URL des Katalogs"
     referenced:
-      text: "Werden die Daten in ihren eigenen Publikationen genannt?"
-      help_text: "Wenn Sie ihre Daten in eigenen Publikationen wie Berichten, Präsenationen oder Blog-Beiträgen nennen, verschaffen Sie ihnen mehr Kontext und sie können leichter gefunden und verstanden werden."
+      text: "Werden die Daten in Ihren eigenen Publikationen genannt?"
+      help_text: "Wenn Sie Ihre Daten in eigenen Publikationen wie Berichten, Präsentationen oder Blog-Beiträgen nennen, verschaffen Sie ihnen mehr Kontext und sie können leichter gefunden und verstanden werden."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     reference:
-      text: "Wo wird ihr Datensatz genannt?"
+      text: "Wo wird Ihr Datensatz genannt?"
       text_as_statement: "Die Daten werden zitiert unter "
       help_text: "Geben Sie die URL des Dokuments an, dass Ihren Datensatz referenziert."
       answers:
         a_1:
           placeholder: "URL der verweisenden Seite"
     serviceType:
-      text: "Ändern sich die Daten hinter ihrer API?"
+      text: "Ändern sich die Daten hinter Ihrer API?"
       text_as_statement: "Die Daten hinter der API"
       answers:
         static:
-          text: "nein, die API ergmöglicht den Zugang zu unveränderlichen Daten"
+          text: "nein, die API ermöglicht den Zugang zu unveränderlichen Daten"
           help_text: "Manche APIs erleichtern den Zugang zu unveränderlichen (Massen-)Daten.>"
           text_as_statement: "werden sich nicht ändern"
         changing:
@@ -117,17 +115,17 @@ de:
       text: "Werden die Daten veralten?"
       text_as_statement: "Die Genauigkeit oder Bedeutsamkeit dieser Daten"
       answers:
-        "true":
-          text: "Ja, die Daten werden veralten"
+        'true':
+          text: "ja, die Daten werden veralten"
           help_text: "Ein Datensatz von Bushaltestellen wird mit der Zeit veralten, wenn die Haltestellen verlegt oder neue geschaffen werden."
           text_as_statement: "wird veralten"
         timestamped:
           text: "ja, der Datensatz wird veralten, enthält aber Zeitstempel"
-          help_text: "Bevölkerungsstatistiken enthalten z. B. in der Regel einen Zeitstempel, an dem erkannbar ist, wann die Statistik zutraf."
+          help_text: "Bevölkerungsstatistiken enthalten z. B. in der Regel einen Zeitstempel, an dem erkennbar ist, wann die Statistik zutraf."
           text_as_statement: "wird veralten, enthält aber Zeitstempel"
-        "false":
-          text: "Nein, die Daten enthalten keine zeitabhängigen Informationen."
-          help_text: "Die Ergebnisse eines Experiments veralten z.B. nicht, weil die Daten genau die beobachteten Ergebnisse wiedergben."
+        'false':
+          text: "nein, die Daten enthalten keine zeitabhängigen Informationen."
+          help_text: "Die Ergebnisse eines Experiments veralten z.B. nicht, weil die Daten genau die beobachteten Ergebnisse wiedergeben."
           text_as_statement: "veraltet nicht"
     frequentChanges:
       text: "Ändern sich Ihre Daten mindestens täglich?"
@@ -135,10 +133,9 @@ de:
       help_text: "Teilen Sie den Nutzern mit, wenn sich die zugrundeliegenden Daten an den meisten Tagen ändern. Wenn Daten sich häufig ändern, veralten sie auch schnell, so dass Nutzer wissen müssen, ob Sie die Änderungen häufig und rasch nachvollziehen."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "mindestens täglich"
     seriesType:
       text: "Um welchen Typ von Datenserie handelt es sich?"
@@ -146,11 +143,11 @@ de:
       answers:
         dumps:
           text: "normale Kopien einer kompletten Datenbank"
-          help_text: "Auswählen, wenn Sie regelmäßig neue und und aktualisierte Kopien ihrer kompletten Datenbank veröffentlichen. Wenn Sie Datenbankabzüge erzeugen, ist es für vorteilhaft, wenn die Nutzer Zugang zu einem Feed der Änderungen haben, so dass Sie ihre Kopien aktuell halten können."
+          help_text: "Auswählen, wenn Sie regelmäßig neue und aktualisierte Kopien ihrer kompletten Datenbank veröffentlichen. Wenn Sie Datenbankabzüge erzeugen, ist es für vorteilhaft, wenn die Nutzer Zugang zu einem Feed der Änderungen haben, so dass sie ihre Kopien aktuell halten können."
           text_as_statement: "Kopien einer Datenbank"
         aggregate:
-          text: "regelmäßige Zusammenstellungen geändeter Daten"
-          help_text: "Auswählen, wenn Sie regelmäßig neue Datensätze anlegen. Dies könnten sie tun, wenn die zugrundeliegenden Daten nicht als offene Daten veröffentlicht werden können, oder wenn Sie nur Daten veröffentlichen wollen, die seit der letzten Publikation neu hinzugekommen sind."
+          text: "regelmäßige Zusammenstellungen geänderter Daten"
+          help_text: "Auswählen, wenn Sie regelmäßig neue Datensätze anlegen. Dies könnten Sie tun, wenn die zugrundeliegenden Daten nicht als offene Daten veröffentlicht werden können, oder wenn Sie nur Daten veröffentlichen wollen, die seit der letzten Publikation neu hinzugekommen sind."
           text_as_statement: "Aggregate veränderlicher Daten"
     changeFeed:
       text: "Steht ein Feed der Änderungen zur Verfügung?"
@@ -158,20 +155,19 @@ de:
       help_text: "Teilen Sie mit, ob Sie einen Feed der Änderungen zur Verfügung stellen, die diese Daten betreffen, z.B. neue Einträge oder Ergänzungen bestehender Einträge. Das Format des Feeds kann z.B. RSS oder Atom sein."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "steht zur Verfügung"
     frequentSeriesPublication:
       text: "Sie oft stellen Sie eine neu Version bereit?"
       text_as_statement: "Neue Versionen dieser Daten werden bereitgestellt"
-      help_text: "Dies legt fest, wie sehr diese Daten veralten, befor die Nutzer ein Update erhalten."
+      help_text: "Dies legt fest, wie sehr diese Daten veralten, bevor die Nutzer ein Update erhalten."
       answers:
         rarely:
           text: "seltener als einmal im Monat"
           text_as_statement: "seltener als einmal im Monat"
-        "monthly":
+        monthly:
           text: "wenigstens einmal im Monat"
           text_as_statement: "wenigstens einmal im Monat"
         weekly:
@@ -188,7 +184,7 @@ de:
           text: "Größer als der Abstand zwischen den Versionen"
           help_text: "Auswählen, wenn  z.B. jeden Tag eine Version der Daten entsteht, es aber mehr als einen Tag dauert, bis Sie publiziert wird."
           text_as_statement: "Größer als der Abstand zwischen den Versionen"
-        "reasonable":
+        reasonable:
           text: "ungefähr so lang wie der Abstand zwischen den Versionen"
           help_text: "Auswählen, wenn  z.B. jeden Tag eine neue Version der Daten entsteht, und die Publikation etwa einen Tag benötigt."
           text_as_statement: "ungefähr so lang wie der Abstand zwischen den Versionen"
@@ -206,20 +202,19 @@ de:
       help_text: "Ein Abzug ist ein Extrakt des gesamten Datenbestands, den die Nutzer als Datei herunterladen können. Dies erlaubt andere Analysen als ein API Zugang."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "Abzüge der Daten"
     dumpFrequency:
-      text: "Wie häufig erzeugen Sie einen Abzug des Datenbestaands?"
+      text: "Wie häufig erzeugen Sie einen Abzug des Datenbestands?"
       text_as_statement: "Datenbankabzüge werden erstellt"
       help_text: "Eine schnellerer Zugang zu häufgeren Abzügen des ganzen Datenbestandes führt dazu, dass die Nutzer mit den aktuellsten Daten arbeiten können."
       answers:
         rarely:
           text: "seltener als einmal im Monat"
           text_as_statement: "seltener als einmal im Monat"
-        "monthly":
+        monthly:
           text: "mindestes jeden Monat"
           text_as_statement: "mindestes jeden Monat"
         weekly:
@@ -234,22 +229,21 @@ de:
       help_text: "Es ist gute Praxis, Fehler in Ihren Daten zu beheben, besonders wenn Sie selbst damit arbeiten. Wenn Sie Korrekturen vornehmen, müssen die Nutzer davon erfahren."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "korrigiert"
     qualityUrl:
-      text: "Wo dokumentieren sie Probleme mit der Qualität dieser Daten?"
+      text: "Wo dokumentieren Sie Probleme mit der Qualität dieser Daten?"
       text_as_statement: "Die Datenqualität ist dokumentiert unter"
-      help_text: "Geben Sie eine URL an, wo sich Nutzer über die Qualität Ihrer Daten informieren können. Nutzer aktzeptieren, dass Fehler aufgrund von Gerätestörungen oder Irrtümern bei Systemwechseln unvermeidlich sind. Sie offen über die Qualität der Daten informieren, so dass die Nutzer beurteilen können, wie sehr sich darauf verlassen können."
+      help_text: "Geben Sie eine URL an, wo sich Nutzer über die Qualität Ihrer Daten informieren können. Nutzer akzeptieren, dass Fehler aufgrund von Gerätestörungen oder Irrtümern bei Systemwechseln unvermeidlich sind. Sie sollten offen über die Qualität der Daten informieren, so dass die Nutzer beurteilen können, wie sehr sich darauf verlassen können."
       answers:
         a_1:
           placeholder: "URL der Dokumentation der Datenqualität"
     qualityControlUrl:
       text: "Wo findet sich Ihr Qualitätssicherungsprozess beschrieben?"
-      text_as_statement: "Qualitätsicherheitsprozesse werden beschrieben unter"
-      help_text: "Geben Sie eine URL an, wo Nutzer sich über laufende automatische oder manuelle Kontrollen ihrer Daten unterrichten können. Dies  gibt ihnen die Sicherheit, dass Sie die Qualität ernst nehmen und fördert Verbesserungen, die allen nützen."
+      text_as_statement: "Qualitätssicherungsprozesse werden beschrieben unter"
+      help_text: "Geben Sie eine URL an, wo Nutzer sich über laufende automatische oder manuelle Kontrollen Ihrer Daten unterrichten können. Dies  gibt ihnen die Sicherheit, dass Sie die Qualität ernst nehmen und fördert Verbesserungen, die allen nützen."
       answers:
         a_1:
           placeholder: "URL der Beschreibung der Qualitätssicherungsprozesse"
@@ -259,14 +253,13 @@ de:
       help_text: "Die regelmäßige Sicherung der Daten an einem externen Ort vermeidet ihren Verlust im Falle eines Unfalls."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
-          text_as_statement: "örtich getrennt gesichert"
+          text: "ja"
+          text_as_statement: "örtlich getrennt gesichert"
     slaUrl:
       text: "Wo beschreiben Sie etwaige Garantien hinsichtlich der Diensteverfügbarkeit?"
-      text_as_statement: "Die Verfüfbarkeit der Dienste wird beschrieben unter"
+      text_as_statement: "Die Verfügbarkeit der Dienste wird beschrieben unter"
       help_text: "Geben Sie eine URL an, die beschreibt, welche Verfügbarkeit Ihres Dienstes Sie Nutzern garantieren. Sie können zum Beispiel eine Verfügbarkeit von 99.5% garantieren, oder explizit keine Verfügbarkeit zusichern."
       answers:
         a_1:
@@ -283,18 +276,17 @@ de:
       text_as_statement: "Die Daten sind erreichbar"
       answers:
         experimental:
-          text: "Sie können jederzeit verschwinden"
+          text: "sie können jederzeit verschwinden"
           text_as_statement: "versuchsweise verfügbar und können jederzeit verschwinden"
-        pilot:
-          text: "Sie sind versuchsweise verfügbar und dies für etwa ein weiteres Jahr"
-          text_as_statement: "versuchsweise verfügbar und können jederzeit vwerschwinden"
+        short:
+          text: "es ist versuchsweise verfügbar, sollte aber noch etwa ein Jahr erreichbar sein"
+          text_as_statement: "versuchsweise für etwa ein Jahr"
         medium:
-          text: "Sie gehören zu Ihren mittelfristigen Plänen und sind daher für einige Jahre verfügbar"
+          text: "sie gehören zu Ihren mittelfristigen Plänen und sind daher für einige Jahre verfügbar"
           text_as_statement: "mindestens für einige Jahr"
-        "long":
-          text: "Sie gehören zu Ihrem Alltagsgeschäft und werden lanfristig erhältlich bleiben."
+        long:
+          text: "sie gehören zu Ihrem Alltagsgeschäft und werden langfristig erhältlich bleiben."
           text_as_statement: "für lange Zeit"
-    # Technische Information
     datasetUrl:
       text: "Wo befindet sich Ihr Datensatz"
       text_as_statement: "Die Daten werden veröffentlicht unter"
@@ -324,7 +316,7 @@ de:
     versionsTemplateUrl:
       text: "Welches Format besitzen die URLs der Datensatz-Versionen?"
       text_as_statement: "Die URLs der Versionen folgen diesem Muster"
-      help_text: "Hierbei handelt es sich um die Struktur der URLS, unter denen Sie unterschiedliche Versionen veröffentlichen. Benutzen Sie `{variable}` um die veränderlichen Teile des Musters der URL zu bezeichnen, z. B. `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+      help_text: "Hierbei handelt es sich um die Struktur der URLS, unter denen Sie unterschiedliche Versionen veröffentlichen. Benutzen Sie `{variable}` um die veränderlichen Teile des Musters der URL zu bezeichnen, z. B. `http://example.com/data/monthly/mydata-{YY}{MM}.csv´"
       answers:
         a_1:
           placeholder: "URL-Template der Versionen"
@@ -353,7 +345,7 @@ de:
           help_text: "Auswählen, wenn Ihre URLs der Datenbank-Abzüge einem regemäßigen Muster folgen, das das Datum der Veröffentlichung enthält, z. B. eine URL die mit '2013-04' beginnt. Dies erleichtert es Nutzern zu verstehen, wie oft Sie Daten bereitstellen und Skripte zu schreiben, die neue Datensätze  nach ihrer Veröffentlichung abrufen."
         list:
           text: "als Liste der Versionen"
-          help_text: "Auswählen, wenn Sie auf einer Webseite oder in einem Feed (wie Atom oder RSS) eine Liste der Datenbank-Abzuüge mit Links zu den einzelnen Versionen und den zugehörigen Details bereitstellen. Dies erleichtert es Nutzern zu verstehen, wie oft Sie Daten bereitstellen und Skripte zu schreiben, die neue Datensätze  nach ihrer Veröffentlichung abrufen."
+          help_text: "Auswählen, wenn Sie auf einer Webseite oder in einem Feed (wie Atom oder RSS) eine Liste der Datenbank-Abzüge mit Links zu den einzelnen Versionen und den zugehörigen Details bereitstellen. Dies erleichtert es Nutzern zu verstehen, wie oft Sie Daten bereitstellen und Skripte zu schreiben, die neue Datensätze  nach ihrer Veröffentlichung abrufen."
     currentDumpUrl:
       text: "Wo ist der aktuelle Datenbank-Abzug zu finden?"
       text_as_statement: "Der aktuellste Datenbank-Abzug findet stets unter"
@@ -364,13 +356,13 @@ de:
     dumpsTemplateUrl:
       text: "Welches Format besitzen die URLs der Datenbank-Abzüge?"
       text_as_statement: "Datenbank-Abzuge folgen dem regemäßigen Muster"
-      help_text: "Hierbei handelt es sich um die Struktur der URLS, unter denen Sie unterschiedliche Versionen veröffentlichen. Benutzen Sie `{variable}` um die veränderlichen Teile des Musters der URL zu bezeichnen, z. B. `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+      help_text: "Hierbei handelt es sich um die Struktur der URLS, unter denen Sie unterschiedliche Versionen veröffentlichen. Benutzen Sie `{variable}` um die veränderlichen Teile des Musters der URL zu bezeichnen, z. B. `http://example.com/data/monthly/mydata-{YY}{MM}.csv´"
       answers:
         a_1:
           placeholder: "Vorlage für die URLs der Datenbankabzüge"
     dumpsUrl:
       text: "Wo ist die Liste der verfügbaren Datenbank-Abzüge zu finden?"
-      text_as_statement: "A list of database dumps is at"
+      text_as_statement: "A Liste der Datenbankabzüge findet sich unter:"
       help_text: "Geben Sie eine URL einer Seite oder eines Feeds mit einer maschinenlesbaren Liste der Datenbankabzüge an. Nutzen Sie die URL der ersten Seite, die auf den Rest der Seiten verweisen sollte."
       answers:
         a_1:
@@ -388,10 +380,9 @@ de:
       help_text: "Nutzer bevorzugen Datenformate, die sich leicht (vor allem schneller und fehlerfreier) mit dem Computer verarbeiten lassen. So ist die Photokopie einer Tabellenkalkulation im Gegensatz zu einer CSV-Datei nicht maschinenlesbar."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "maschinenlesbar"
     openStandard:
       text: "Liegen die Daten in einem standardisierten offen Format vor?"
@@ -399,10 +390,9 @@ de:
       help_text: "Offene Formate werden durch einen fairen, transparenten und kollaborativen Prozess geschaffen. Jeder kann sie umsetzen und es gibt umfangreiche Unterstützung, so dass es für Sie leichter ist, Daten mehr Nutzern zur Verfügung zu stellen. Beispiele für offene Standards sind XML, CSV und JSON."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "ein standardisiertes offenes Format"
     dataType:
       text: "Welcher Art Daten stellen sie bereit"
@@ -414,14 +404,14 @@ de:
           text: "statistische Daten wie Zählungen, Durchschnitte und Prozentanteile"
           help_text: "Auswählen wenn die Daten numerische oder statistische Daten wie Zählungen, Durchschnitte oder Prozentanteile darstellen. Beispiele sind Volkszählungsergebnisse, Verkehrszählungen oder Kriminalstatistiken."
         geographic:
-          text: "geographische informationen wie Punkte und Grenzen"
+          text: "geographische Informationen wie Punkte und Grenzen"
           help_text: "Auswählen, wenn Ihre Daten auf Karten als Punkte, Grenzen oder Linien abgebildet werden könnte."
         structured:
           text: "andere Arten strukturierter Daten"
-          help_text: "Auswählen, wenn Ihre Daten in anderer Weise strukuriert sind. Veranstaltungsinformationen, Eisenbahnfahrpläne, Kontaktdaten oder alles was as Daten interpretiert, analysiert und in viefältiger Weise präsentiert werden kann."
+          help_text: "Auswählen, wenn Ihre Daten in anderer Weise strukturiert sind. Veranstaltungsinformationen, Eisenbahnfahrpläne, Kontaktdaten oder alles was as Daten interpretiert, analysiert und in vielfältiger Weise präsentiert werden kann."
     documentFormat:
-      text: "Enthalten ihre menschenlesbaren Dokumente Formate, die"
-      text_as_statement: "Dokumente werden veröffentlich"
+      text: "Enthalten Ihre menschenlesbaren Dokumente Formate, die"
+      text_as_statement: "Dokumente werden veröffentlicht"
       answers:
         semantic:
           text: "semantische Strukturen beschreiben (z. B. HTML, Docbook oder Markdown)"
@@ -440,24 +430,24 @@ de:
       text_as_statement: "Statistische Daten werden veröffentlicht"
       answers:
         statistical:
-          text: "die Strukturen statistscher Hypercube Daten freilegen wie <a href=\"http://sdmx.org/\">SDMX</a> oder <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a>"
-          help_text: "Individuelle Beobachtungen in Hypercubes beziehen sich auf ein bestimmtes Maß und einen Satz von Diemensionen beziehen. Jede Beobachtung kann auch auf Annotationen bezogen sein, die ihnen Kontext geben. Formate wie <a href=\"http://sdmx.org/\">SDMX</a> und <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> wurden entworfen, um diese zugrundeliegende Struktur auszudrücken."
+          text: "die Strukturen statistischer Hypercube Daten freilegen wie <a href=\"http://sdmx.org/\">SDMX</a> oder <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a>"
+          help_text: "Individuelle Beobachtungen in Hypercubes beziehen sich auf ein bestimmtes Maß und einen Satz von Dimensionen beziehen. Jede Beobachtung kann auch auf Annotationen bezogen sein, die ihnen Kontext geben. Formate wie <a href=\"http://sdmx.org/\">SDMX</a> und <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> wurden entworfen, um diese zugrundeliegende Struktur auszudrücken."
           text_as_statement: "in einem statistischen Datenformat"
         tabular:
           text: "statistische Daten wie CSV als Tabelle behandeln"
-          help_text: "Diese Formate ordnen statische Daten in eine Tablle aus Reihen und Spalten ein. Dadurch geht der Kontext des zugrundelegenden Hypercubes verloren, die Daten sind jedoch leicht zu verarbeiten."
+          help_text: "Diese Formate ordnen statische Daten in eine Tabelle aus Reihen und Spalten ein. Dadurch geht der Kontext des zugrundeliegenden Hypercubes verloren, die Daten sind jedoch leicht zu verarbeiten."
           text_as_statement: "in einem Tabellenformat"
         format:
           text: "sich wie Excel auf das Format tabellarischer Daten fokussieren"
           help_text: "Tabellenkalkulationen benutzen Formatierungen wie kursiven oder fetten Text und Einzüge in den Feldern um die zugrundeliegende Struktur zu beschreiben. Diese Gestaltung hilft Menschen beim Verständnis Ihrer Daten, macht die Daten aber für die Verarbeitung durch Computer weniger geeignet."
           text_as_statement: "in einem Präsentationsformat"
         unsuitable:
-          text: "nicht für statistische oder tabellarische Daten bestimmt sind, wei Word oder PDF"
-          help_text: "These formats don't suit statistical data because they obscure the underlying structure of the data."
+          text: "nicht für statistische oder tabellarische Daten bestimmt sind, wie Word oder PDF"
+          help_text: "Diese Formate sind für statistische Daten unpassend, weil sie die zugrundeliegenden Strukturen der Daten verbergen."
           text_as_statement: "in einem für statistische Daten ungeeigneten Format"
     geographicFormat:
       text: "Enthalten Ihre geographischen Daten Formate, die"
-      text_as_statement: "Geograpische Daten werden veröffentlicht"
+      text_as_statement: "Geographische Daten werden veröffentlicht"
       answers:
         specific:
           text: "für geographische Daten entworfen wurden wie <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> oder <a href=\"http://www.geojson.org/\">GeoJSON</a>"
@@ -466,7 +456,7 @@ de:
         generic:
           text: "Daten strukturiert halten, wie JSON, XML oder CSV"
           help_text: "Jedes Format dass normale strukturierte Daten enthält kann auch geographische Daten ausdrücken, insbesondere wenn es Daten zu Punkten enthält."
-          text_as_statement: "in a generischen Datenformat"
+          text_as_statement: "in einem generischen Datenformat"
         unsuitable:
           text: "nicht für geographische Daten entworfen wurden wie Word oder PDF"
           help_text: "Diese Formate passen nicht zu geographischen Daten, weil sie die zugrunde liegende Struktur der Daten verschleiern."
@@ -486,32 +476,30 @@ de:
     identifiers:
       text: "Nutzen Ihre Daten persistente Bezeichner?"
       text_as_statement: "Die Daten enthalten"
-      help_text: "Daten beziehen sich in der Regel auf reale Dinge wie Schulen, Strßen oder sie benutzen ein Codierschema. Wenn Daten verschiedener Quellen dieselben persistenten und eindeutigen Bezeichner verwenden um dieselben Dinge zu bezeichen, können Nutzer die Quellen kombinieren um noch nützlichere Daten zu erzugen. Solche Bezeichner können GUIDs, DOIS order URLs sein."
+      help_text: "Daten beziehen sich in der Regel auf reale Dinge wie Schulen, Straßen oder sie benutzen ein Codierschema. Wenn Daten verschiedener Quellen dieselben persistenten und eindeutigen Bezeichner verwenden um dieselben Dinge zu bezeichnen, können Nutzer die Quellen kombinieren um noch nützlichere Daten zu erzeugen. Solche Bezeichner können GUIDs, DOIS oder URLs sein."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "dauerhafte Identifkatoren"
     resolvingIds:
       text: "Können die Bezeichner in Ihren Daten genutzt werden, um weitere Information zu finden?"
       text_as_statement: "Die dauerhaften Identifikatoren"
       answers:
-        "false":
+        'false':
           text: "nein, die Bezeichner können nicht genutzt werden, um weitere Information zu finden."
-          text_as_statement: ""
         service:
-          text: "Ja, es gibt einen Dienst, den Nutzer zur Auflösung der Bezeichner nutzen können."
+          text: "ja, es gibt einen Dienst, den Nutzer zur Auflösung der Bezeichner nutzen können."
           help_text: "Online-Dienste können genutzt werden, um Nutzern Informationen über Bezeichner wie GUIDs oder DOIs zu verschaffen, die im Gegensatz zur URLs nicht direkt zugänglich sind."
           text_as_statement: "werden mittels eines Dienstes aufgelöst"
         resolvable:
           text: "ja, die Bezeicher sind URLs, die bei  Auflösung  Informationen bereitstellen"
-          help_text: "URLs sind sowohl für Menschen wie Computer nützlich. Nutzer können die  URL in Ihren Browser einegeben und weitere Information lesen, wie <a href=\"http://opencorporates.com/companies/gb/08030289\">Unternehmen</a> und <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">Postleitzahlen</a>. Computer können diese zusätzlichen Informationen verarbeiten, indem sie Skripte nutzen, um auf die zugrundeliegenden Daten zuzugreifen."
+          help_text: "URLs sind sowohl für Menschen wie Computer nützlich. Nutzer können die  URL in Ihren Browser eingeben und weitere Information lesen, wie <a href=\"http://opencorporates.com/companies/gb/08030289\">Unternehmen</a> und <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">Postleitzahlen</a>. Computer können diese zusätzlichen Informationen verarbeiten, indem sie Skripte nutzen, um auf die zugrundeliegenden Daten zuzugreifen."
           text_as_statement: "werden als URLs aufgelösten"
     resolutionServiceURL:
       text: "Wo findet sich der Dienst zur Auflösung der Bezeichner?"
-      text_as_statement: "Der Dienst zur Aufösung der Identifkatoren findet sich unter"
+      text_as_statement: "Der Dienst zur Auflösung der Identifikatoren findet sich unter"
       help_text: "Der Dienst zur Auflösung der Bezeichner, sollte den Bezeichner als Parameter einer Abfrage akzeptieren und Informationen zum von ihm bezeichneten Objekt zurückgeben."
       answers:
         a_1:
@@ -521,47 +509,44 @@ de:
       help_text: "Manchmal werden von anderen außerhalb Ihres Einflussbereichs URLs für die Objekte in Ihren Daten bereitgestellt. So werden von der GeoNames-Datenbank über 8 Millionen geographische Namen mit einer festen URL als Web-Ressource eindeutig identifiziert."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     reliableExternalUrls:
       text: "Ist die Information von dritter Seite verlässlich?"
       help_text: "Wenn Dritte öffentliche URLs für Objekte in Ihren Daten bereitstellen, werden sie wahrscheinlich Schritte unternehmen, um die Qualität und Verlässlichkeit der Daten sicherzustellen. Dies ist ein Maß dafür wie sehr Sie den entsprechenden Prozessen vertrauen. Achten Sie bei Ihren Entscheidungen auf ihre Open Data Zertifikate oder ähnliche Kennzeichen."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     externalUrls:
       text: "Benutzen Ihre Daten diese URLs von dritter Seite?"
       text_as_statement: "Auf URLs von dritter Seite"
       help_text: "Sie sollten URLs von Dritter Seite, die die Bezeichner in Ihren Daten auflösen und zusätzliche Informationen erschließen, benutzen. Dies verringert Duplikationen und hilft Nutzern dabei, Daten unterschiedlicher Quellen zu verknüpfen und dadurch aufzuwerten."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
-          text_as_statement: "referenced in this data"
+          text: "ja"
+          text_as_statement: "in diesen Daten referenziert"
     provenance:
       text: "Stellen Sie maschinenlesbare Herkunftsangaben für Ihre Daten zur Verfügung?"
       text_as_statement: "Die Herkunft der Daten ist"
-      help_text: "Die Daten enthalten Angaben darüber wie die Daten vor ihrer Veröffentlichung erzeugt und verarbeitet wurden, Dies schafft vertrauen in die Daten, weil die Nutzer ihre Behandlung zurückverfolgen können."
+      help_text: "Die Daten enthalten Angaben darüber wie die Daten vor ihrer Veröffentlichung erzeugt und verarbeitet wurden, Dies schafft Vertrauen in die Daten, weil die Nutzer ihre Behandlung zurückverfolgen können."
       answers:
         a_false:
-          text: "Nein"
-          text_as_statement: ""
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
           text_as_statement: "maschinenlesbar angegeben"
     digitalCertificate:
       text: "Wo beschreiben Sie, wie Nutzer überprüfen können, dass die Daten, die sie erhalten, korrekt sind?"
       text_as_statement: "Die Daten können verifiziert werden mittels"
-      help_text: "Wenn Sie Nutzern wichtige Daten zur Verfügung stellen, sollten sie in die Lage versetzt werden, zu prüfen, ob die Daten die sie erhalten, dieselben sind, die von Ihnen veröffentlicht wurden. Sie könnten die Daten, die Sie veröffentlichen z. B. elektronisch signieren um sicherzustllen, das Sie nicht manipuliert wurden."
+      help_text: "Wenn Sie Nutzern wichtige Daten zur Verfügung stellen, sollten sie in die Lage versetzt werden, zu prüfen, ob die Daten die sie erhalten, dieselben sind, die von Ihnen veröffentlicht wurden. Sie könnten die Daten, die Sie veröffentlichen z. B. elektronisch signieren um sicherzustellen, das Sie nicht manipuliert wurden."
       answers:
         a_1:
           placeholder: "URL eines Verifikationsverfahrens"
-    # Soziale Information
     documentationMetadata:
       text: "Enthält Ihre Dokumentation maschinenlesbare Daten für:"
       text_as_statement: "Die Dokumentation enthält maschinenlesbare Daten für "
@@ -569,7 +554,7 @@ de:
         title:
           text: "Titel"
           text_as_statement: "Titel"
-        "description":
+        description:
           text: "Beschreibung"
           text_as_statement: "Beschreibung"
         issued:
@@ -605,17 +590,17 @@ de:
         keyword:
           text: "Schlagworte oder Tags"
           text_as_statement: "Schlagworte oder Tags"
-        "distribution":
+        distribution:
           text: "Distribution(en)"
           text_as_statement: "Distribution(en)"
     distributionMetadata:
       text: "Enthält Ihre Dokumentation maschinenlesbare Metadaten über:"
-      text_as_statement: "Die Dokumentation jeder Distribution entält maschinenlesbare Angaben für "
+      text_as_statement: "Die Dokumentation jeder Distribution enthält maschinenlesbare Angaben für "
       answers:
         title:
           text: "Titel"
           text_as_statement: "Titel"
-        "description":
+        description:
           text: "Beschreibung"
           text_as_statement: "Beschreibung"
         issued:
@@ -642,18 +627,18 @@ de:
           text_as_statement: "Typ des herunterzuladenden Mediums"
     technicalDocumentation:
       text: "Wo befindet sich die technische Dokumentation der Daten?"
-      text_as_statement: "Die technische Dokumantation der Daten findet sich unter"
+      text_as_statement: "Die technische Dokumentation der Daten findet sich unter"
       answers:
         a_1:
           placeholder: "URL der technischen Dokumtation"
     vocabulary:
       text: "Verwenden die Daten Vokabularien oder Schemata?"
-      help_text: "Formate wie CSV, JSON, XML oder Turtle nutzen eigene Vokabulareien oder Schemata, die festlegen, welche Spalten oder Eigenschaften die Daten enthalten."
+      help_text: "Formate wie CSV, JSON, XML oder Turtle nutzen eigene Vokabularien oder Schemata, die festlegen, welche Spalten oder Eigenschaften die Daten enthalten."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     schemaDocumentationUrl:
       text: "Wo findet sich die Dokumentation der Daten-Vokabularien?"
       text_as_statement: "Die in den Daten verwandten Vokabulare sind dokumtnetiert unter"
@@ -665,9 +650,9 @@ de:
       help_text: "Wenn Ihre Daten Schlüssellisten für Objekte wie geographische Gebiete, Ausgabekategorien oder Krankheiten benutzt, müssen diese den Nutzern erklärt werden."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     codelistDocumentationUrl:
       text: "Wo sind die in den Daten verwandten Schlüssel in Ihren Daten dokumentiert?"
       text_as_statement: "Die Schlüssel für die Daten sind dokumentiert unter"
@@ -697,13 +682,13 @@ de:
       text: "Nutzen Sie \"soziale Medien\", um mit den Nutzern Ihrer Daten in Kontakt zu treten?"
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     account:
       text: "Welche Konten bei sozialen Medien, können die Nutzer für den Kontakt zu Ihnen nutzen?"
       text_as_statement: "Treten Sie mit dem Herausgeber über diese Kanäle in den sozialen Medien in Kontakt"
-      help_text: "Geben Sie URLs zu Ihren Auftritten in sozialen Medien (wie ihre Twitter oder Facebook-Seiten)"
+      help_text: "Geben Sie URLs zu Ihren Auftritten in sozialen Medien (wie Ihre Twitter oder Facebook-Seiten) an."
       answers:
         a_1:
           placeholder: "URL des Social Media Kanals"
@@ -722,7 +707,7 @@ de:
         a_1:
           placeholder: "URL der Anleitung für Korrekturverlangen"
     correctionDiscovery:
-      text: "Wo kann man sich sich informieren, wie man Benachritigungen erhält, wenn Ihre Daten korrigiert werden?"
+      text: "Wo kann man sich informieren, wie man Benachrichtigungen erhält, wenn Ihre Daten korrigiert werden?"
       text_as_statement: "Wie Sie Mitteilungen über Datenkorrekturen erhalten erfahren Sie unter"
       help_text: "Geben Sie eine URL an, wo Sie beschreiben, wie man benachrichtigt werden kann, wenn Sie über Datenkorrekturen berichten."
       answers:
@@ -730,12 +715,12 @@ de:
           placeholder: "URL für Mitteilungen zu Datenkorrekturen"
     engagementTeam:
       text: "Gibt es jemanden bei Ihnen, der aktiv eine \"Community\" zu diesen Daten aufbaut?"
-      help_text: "A community engagement team will engage through social media, blogging, and arrange hackdays or competitions to encourage people to use the data."
+      help_text: "A Team für die Beteiligung der \"Community\" wird sich dazu sozialer Medien und dem Blogging widmen und \"Hackdays\" oder Wettbewerbe veranstalten um Nutzer zu ermutigen, die Daten zu nutzen."
       answers:
         a_false:
-          text: "Nein"
+          text: "nein"
         a_true:
-          text: "Ja"
+          text: "ja"
     engagementTeamUrl:
       text: "Wo befindet sich deren Homepage?"
       text_as_statement: "Um die Beteiligung der \"Community\" kümmert sich"
@@ -780,12 +765,10 @@ de:
     services:
       text: "Service"
       help_text: "Wie Sie Nutzern Zugang zu Werkzeugen geben, die sie zur Arbeit mit Ihren Daten benötigen"
-  # Allgemeine Informationen Requirements
     pilot_1:
-      text: "Sie sollten <strong>eine Web-Seite haben, die Dokumentation über die von Ihnen veröffentlichent offenen Daten bereitstellt</strong>, so dass die Nutzer ihren Kontext, Inhalt und Nutzen verstehen können."
+      text: "Sie sollten <strong>eine Webseite haben, die Dokumentation über die von Ihnen veröffentlichent offenen Daten bereitstellt</strong>, so dass die Nutzer ihren Kontext, Inhalt und Nutzen verstehen können."
     basic_1:
       text: "Sie müssen ein Webseite haben <strong>die Dokumentation und Zugang zu den von Ihnen veröffentlichten offenen Daten bereitstellt</strong>, damit die Nutzer sie weiterverwenden können."
-  # Practical Information Requirements
     standard_1:
       text: "Sie sollten <strong>sicherstellen, dass Nutzer die Daten auf ihrem (Haupt-)Webauftritt finden können</strong>, so dass die Nutzer sie leichter finden können."
     standard_2:
@@ -793,15 +776,15 @@ de:
     standard_3:
       text: "Sie sollten <strong>Ihre Daten in eigenen Publikationen nennen</strong>, so dass Nutzer von ihrer Verfügbarkeit und ihrem Kontext erfahren."
     pilot_2:
-      text: "Sie sollten <strong>Ihren Daten Zeitstempel hinzufügen, wenn Sie sie veröffentlichen</strong>, damit die Nutzer wiessen, auf welche Zeitspanne sie sich beziehen, und wann sie ungültig werden."
+      text: "Sie sollten <strong>Ihren Daten Zeitstempel hinzufügen, wenn Sie sie veröffentlichen</strong>, damit die Nutzer wissen, auf welche Zeitspanne sie sich beziehen, und wann sie ungültig werden."
     standard_4:
-      text: " Sie sollten <strong>Updates für zeitabhängige Daten veröffenlichten</strong>, damit sie nicht veralten."
+      text: " Sie sollten <strong>Updates für zeitabhängige Daten veröffentlichten</strong>, damit sie nicht veralten."
     exemplar_1:
       text: "Sie sollten <strong>einen Feed der Änderungen bereitstellen</strong>, damit Nutzer ihre Kopien aktuell und fehlerfrei halten können."
     pilot_3:
       text: "Sie sollten <strong>jeden Monat eine neue Version bereitstellen</strong>, damit Nutzer ihre Kopien aktuell und fehlerfrei halten können."
     standard_5:
-      text: "Sie sollten <strong>jede woche eine neue Version veröffentlichen</strong>, damit Nutzer ihre Kopien aktuell und fehlerfrei halten können."
+      text: "Sie sollten <strong>jede Woche eine neue Version veröffentlichen</strong>, damit Nutzer ihre Kopien aktuell und fehlerfrei halten können."
     exemplar_2:
       text: " Sie sollten <strong>täglich eine Neue Version veröffentlichen</strong>, damit Nutzer ihre Kopien aktuell und fehlerfrei halten können."
     pilot_4:
@@ -821,7 +804,7 @@ de:
     standard_9:
       text: "Sie sollten <strong>Daten korrigieren, wenn Nutzer Fehler melden</strong>, so dass alle von der Steigerung der Genauigkeit profitiert."
     standard_10:
-      text: "Sie sollten <strong>alle bekanten Probleme mit der Qualität ihrer Daten dokumentieren</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten trauen."
+      text: "Sie sollten <strong>alle bekannten Probleme mit der Qualität ihrer Daten dokumentieren</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten trauen."
     exemplar_5:
       text: "Sie sollten <strong>Ihren Qualitätssicherungsprozess dokumentieren</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten trauen."
     standard_11:
@@ -836,7 +819,6 @@ de:
       text: "Sie sollten <strong>zusichern, dass Ihre Daten in dieser Form mittelfristig verfügbar bleiben werden</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten trauen."
     exemplar_7:
       text: "Sie sollten <strong>garantieren, dass Ihre Daten in dieser Form langfristig verfügbar bleiben</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten trauen."
-  # Technische Information Requirements
     basic_2:
       text: "Sie müssen <strong>eine URL entweder zu Ihren Daten oder zur Dokumentation angeben</strong>, so dass die Nutzer sie finden können."
     pilot_7:
@@ -870,7 +852,7 @@ de:
     exemplar_10:
       text: " Sie sollten <strong>statistische Daten in Formaten veröffentlichen die Dimensionen und Maße freilegen</strong>, so dass sie leicht zu analysieren sind."
     standard_20:
-      text: "Sie sollten <strong>tabellarische Daten in Formaten veröffentlichen, die die Datentabellen freilegen</strong>, so dass sie liecht zu analysieren sind."
+      text: "Sie sollten <strong>tabellarische Daten in Formaten veröffentlichen, die die Datentabellen freilegen</strong>, so dass sie leicht zu analysieren sind."
     pilot_11:
       text: "Sie sollten <strong>tabellarische Daten in einem Format veröffentlichen, das für diesen Zweck geschaffen wurde</strong>, so dass sie leicht zu verarbeiten sind."
     exemplar_11:
@@ -893,7 +875,6 @@ de:
       text: "Sie sollten <strong>einen maschinenlesbaren Herkunfts-Pfad für ihre Daten zur Verfügung stellen</strong>, so dass Nutzer nachvollziehen können, wie sie verarbeitet wurden."
     exemplar_15:
       text: "Sie sollten <strong>beschreiben, wie Nutzer prüfen können, ob die Daten, die sie erhalten, dieselben sind, die von Ihnen veröffentlicht wurden</strong>, so dass sie ihnen vertrauen können."
-  # Soziale Information Requirements
     standard_24:
       text: "Sie sollten <strong>einen maschinenlesbaren Daten Titel in Ihre Dokumentation einschließen</strong>, so dass Nutzer wissen, wie sie die Daten referenzieren sollen."
     standard_25:
@@ -911,9 +892,9 @@ de:
     standard_31:
       text: "Sie sollten <strong>die Sprache der Daten in der maschinenlesbaren Dokumentation einschließen</strong>, so dass Nutzer, die danach suchen, wissen, ob sie die Daten verstehen können."
     standard_32:
-      text: "Sie sollten <strong>den Herausgeber der Daten in Ihre maschinenlesbaren Dokumentation einschließen</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren daten vertrauen."
+      text: "Sie sollten <strong>den Herausgeber der Daten in Ihre maschinenlesbaren Dokumentation einschließen</strong>, so dass die Nutzer entscheiden können, wie sehr sie Ihren Daten vertrauen."
     standard_33:
-      text: "Sie sollten <strong>die geographische Abdeckung in Ihre maschinenlesbare Dokumentation einschließen</strong>,  so dass die Nuter verstehen, auf welches Gebiet sich Ihre Daten beziehen."
+      text: "Sie sollten <strong>die geographische Abdeckung in Ihre maschinenlesbare Dokumentation einschließen</strong>,  so dass die Nutzer verstehen, auf welches Gebiet sich Ihre Daten beziehen."
     standard_34:
       text: "Sie sollten <strong>den Zeitraum in Ihre maschinenlesbare Dokumentation einschließen</strong>, so dass die Nutzer verstehen, auf welche Zeit sich Ihre Daten beziehen."
     standard_35:
@@ -923,9 +904,9 @@ de:
     standard_37:
       text: "Sie sollten <strong>maschinenlesbare Titel in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, wie sie jede Distribution referenzieren können."
     standard_38:
-      text: "Sie sollten <strong>maschinen lesbare Beschreibunen in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, was jede Distribution enthält."
+      text: "Sie sollten <strong>maschinenlesbare Beschreibungen in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, was jede Distribution enthält."
     standard_39:
-      text: "Sie sollten <strong>maschinenlesbare Veröffentlichungsdaen in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, wie aktuell jede Distribution ist."
+      text: "Sie sollten <strong>maschinenlesbare Veröffentlichungsdaten in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, wie aktuell jede Distribution ist."
     standard_40:
       text: "Sie sollten <strong>maschinenlesbare Daten der letzten Änderung in Ihre Dokumentation einschließen</strong>, so dass die Nutzer wissen, ob ihre Kopie einer Daten-Distribution aktuell ist."
     standard_41:
@@ -937,7 +918,7 @@ de:
     standard_43:
       text: "Sie sollten <strong>die Schlüssel in Ihren Daten dokumentieren</strong>, so dass die Nutzer wissen, wie sie zu interpretieren sind."
     pilot_15:
-      text: "Sie sollten <strong>Kontakinformationen für die Nutzer bereitstellen</strong>, damit diese Fragen einsenden können."
+      text: "Sie sollten <strong>Kontaktinformationen für die Nutzer bereitstellen</strong>, damit diese Fragen einsenden können."
     pilot_16:
       text: "Sie sollten <strong>Hinweise dazu geben, wie Verbesserungen vorgeschlagen werden können</strong>, damit Sie entdecken können, welche Anforderungen die Nutzer haben."
     pilot_17:
@@ -949,7 +930,7 @@ de:
     standard_46:
       text: "Sie sollten <strong>erläutern, wie man Fehler in Ihren Daten melden kann</strong>."
     standard_47:
-      text: "Sie sollten <strong>eine Mailing-Liste oder einen Feed für Aktualisierungen einrichten</strong>, den Nutzer verwenden können, um ihre Kopien Ihrer Daten aktuell zu halten."
+      text: "Sie sollten <strong>eine Mailing-Liste oder einen Feed für Aktualisierungen einrichten</strong>, den Nutzer verwenden können, um Ihre Kopien Ihrer Daten aktuell zu halten."
     exemplar_16:
       text: "Sie sollten <strong>Eine \"Community\" zu Ihren Daten aufbauen</strong>, um eine umfangreichere Nutzung Ihrer Daten zu fördern."
     exemplar_17:

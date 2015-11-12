@@ -1048,8 +1048,8 @@ en:
         text_as_statement: The rights statement is at
         help_text: Give the URL to a page that describes the right to re-use this
           dataset. This should include a reference to its license, attribution requirements,
-          and a statement about relevant copyright. A rights statement helps people
-          understand what they can and can't do with the data.
+          and a statement about relevant copyright and database rights. A rights statement
+          helps people understand what they can and can't do with the data.
         answers:
           a_1:
             placeholder: Rights Statement URL
@@ -1433,12 +1433,12 @@ en:
       dataLicence:
         text: Under which licence can people reuse this data?
         text_as_statement: This data is available under
-        help_text: Remember that whoever spends intellectual effort creating content
-          automatically gets rights over it. Creative content includes the organisation
-          and selection of items within data, but does not include facts. So people
-          need a waiver or a licence which proves that they can use the data and explains
-          how they can do that legally. We list the most common licenses here; if
-          there is no copyright in the data, it's expired, or you've waived them,
+        help_text: Remember that whoever originally gathers, creates, verifies or
+          presents a database automatically gets rights over it. There may also be
+          copyright in the organisation and selection of data. So people need a waiver
+          or a licence which proves that they can use the data and explains how they
+          can do that legally. We list the most common licenses here; if there are
+          no database rights or copyright, they've expired, or you've waived them,
           choose 'Not applicable'.
         answers:
           cc_by:
@@ -1480,30 +1480,31 @@ en:
         text_as_statement: This data is not licensed because
         answers:
           norights:
-            text: there is no copyright in this data
-            help_text: Copyright only applies to data if you spent intellectual effort
-              creating what's in it, for example, by writing text that's within the
-              data, or deciding whether particular data is included. There's no copyright
-              if the data only contains facts where no judgements were made about
-              whether to include them or not.
-            text_as_statement: there is no copyright in it
+            text: there are no copyright or database rights in this data
+            help_text: Database rights apply if you spent substantial effort gathering,
+              verifying or presenting it. There are no database rights if, for example,
+              the data is created from scratch, presented in an obvious way, and not
+              checked against anything. You have copyright if you select the items
+              in the data or organise them in a non-obvious way.
+            text_as_statement: there are no rights in it
           expired:
-            text: copyright has expired
-            help_text: Copyright lasts for a fixed amount of time, based on either
-              the number of years after the death of its creator or its publication.
-              You should check when the content was created or published because if
-              that was a long time ago, copyright might have expired.
-            text_as_statement: copyright has expired
+            text: copyright and database rights have expired
+            help_text: Database rights last ten years. If data was last changed over
+              ten years ago then database rights have expired. Copyright lasts for
+              a fixed amount of time, based on either the number of years after the
+              death of its creator or its publication. Copyright is unlikely to have
+              expired.
+            text_as_statement: the rights have expired
           waived:
-            text: copyright has been waived
-            help_text: This means no one owns copyright and anyone can do whatever
+            text: copyright and database rights have been waived
+            help_text: This means no one owns the rights and anyone can do whatever
               they want with this data.
             text_as_statement: ''
       dataWaiver:
-        text: Which waiver do you use to waive copyright in the data?
+        text: Which waiver do you use to waive rights in the data?
         text_as_statement: Rights in the data have been waived with
-        help_text: You need a statement to show people copyright has been waived,
-          so they understand that they can do whatever they like with this data. Standard
+        help_text: You need a statement to show people the rights have been waived
+          so that they understand they can do whatever they like with this data. Standard
           waivers already exist like PDDL and CCZero but you can write your own with
           legal advice.
         answers:
@@ -1518,10 +1519,10 @@ en:
             text: Other...
             text_as_statement: ''
       dataOtherWaiver:
-        text: Where is the waiver for the copyright in the data?
+        text: Where is the waiver for the rights in the data?
         text_as_statement: Rights in the data have been waived with
-        help_text: Give a URL to your own publicly available waiver so people can
-          check that it does waive copyright in the data.
+        help_text: Give a URL to the publicly available waiver so people can check
+          that it does waive the rights in the data.
         answers:
           a_1:
             placeholder: Waiver URL
@@ -1734,66 +1735,6 @@ en:
           a_true:
             text: 'yes'
             text_as_statement: independently audited
-      usGovData:
-        text: Was the data created by the US Government?
-        help_text: If the data was created by the US Government, and you are in the
-          US, then you have the right to publish it. US Government works do not receive
-          copyright protection
-        answers:
-          a_false:
-            text: 'no'
-          a_true:
-            text: 'yes'
-      internationalDataLicence:
-        text: Under which licence can people outside the US reuse this data?
-        text_as_statement: Outside the US, this data is available under
-        help_text: US Government works do have copyright protection outside the US.
-          So people outside the US need a waiver or a licence which proves that they
-          can use the data and explains how they can do that legally. We list the
-          most common licenses here; if there is no copyright in the data, it's expired,
-          or you've waived them, choose 'Not applicable'.
-        answers:
-          odc_by:
-            text: Open Data Commons Attribution License
-            text_as_statement: Open Data Commons Attribution License
-          odc_odbl:
-            text: Open Data Commons Open Database License (ODbL)
-            text_as_statement: Open Data Commons Open Database License (ODbL)
-          odc_pddl:
-            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
-            text_as_statement: Open Data Commons Public Domain Dedication and Licence
-              (PDDL)
-          cc_zero:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          na:
-            text: Not applicable
-            text_as_statement: ''
-          other:
-            text: Other...
-            text_as_statement: ''
-      internationalContentRights:
-        text: For those outside the US, is there any copyright in the content of this
-          data?
-        text_as_statement: There are
-        answers:
-          norights:
-            text: no, the data only contains facts and numbers
-            help_text: There is no copyright in factual information. If the data does
-              not contain any content that was created through intellectual effort,
-              there are no rights in the content.
-            text_as_statement: no rights in the content of the data
-          samerights:
-            text: yes, and the rights are all held by the same person or organisation
-            help_text: Choose this option if the content in the data was all created
-              by or transferred to the same person or organisation.
-            text_as_statement: ''
-          mixedrights:
-            text: yes, and the rights are held by different people or organisations
-            help_text: In some data, the rights in different records are held by different
-              people or organisations. Information about rights needs to be kept in
-              the data too.
-            text_as_statement: ''
     labels:
       findability:
         text: Findability
@@ -1853,7 +1794,8 @@ en:
           tools can use it.
       pilot_3:
         text: You should <strong>publish a rights statement</strong> that details
-          copyright, licensing and how people should give attribution to the data.
+          copyright, database rights, licensing and how people should give attribution
+          to the data.
       standard_5:
         text: You should provide <strong>machine-readable data in your rights statement
           about the licence for the content</strong> of this data, so automatic tools
@@ -1878,8 +1820,8 @@ en:
           about the URL to link to when citing this data</strong>, so automatic tools
           can use it.
       pilot_5:
-        text: You should <strong>assess the risks of disclosing personal data</strong>
-          if you publish data about individuals.
+        text: You should <strong>do a Privacy Impact Assessment</strong> if you publish
+          data about individuals.
       standard_8:
         text: You should <strong>have your anonymisation process audited independently</strong>
           to ensure it reduces the risk of individuals being reidentified.
@@ -1891,14 +1833,14 @@ en:
         text: You should <strong>document your right to publish data about individuals</strong>
           for people who use your data and for those affected by disclosure.
       standard_10:
-        text: You should <strong>publish your privacy risk assessment</strong> so
+        text: You should <strong>publish your Privacy Impact Assessment</strong> so
           people can understand how you have assessed the risks of disclosing data.
       exemplar_5:
         text: You should provide <strong>machine-readable data in your rights statement
           about the database right holder for the data</strong>, so automatic tools
           can use it.
       standard_11:
-        text: You should <strong>have your risk assessment audited independently</strong>
+        text: You should <strong>have your Privacy Impact Assessment audited independently</strong>
           to ensure it has been carried out correctly.
       standard_12:
         text: You should <strong>have your anonymisation process audited independently</strong>
@@ -2126,12 +2068,13 @@ en:
       basic_7:
         text: You must <strong>publish open data under an open licence</strong> so
           that people can use it.
-    title: US
-    full_title: United States
+    title: TW
+    full_title: Taiwan
     description: <p>This self-assessment questionnaire generates an open data certificate
       and badge you can publish to tell people all about this open data. We also use
       your answers to learn how organisations publish open data.</p><p>When you answer
-      these questions it demonstrates your efforts to comply with relevant legislation.
-      You should also check which other laws and policies apply to your sector.</p><p><strong>You
+      these questions it demonstrates your efforts to comply with relevant UK legislation.
+      You should also check which other laws and policies apply to your sector, especially
+      if you’re outside the UK (which these questions don’t cover).</p><p><strong>You
       do not need to answer all the questions to get a certificate.</strong> Just
       answer those you can.</p>

@@ -7,6 +7,7 @@ cs:
     my_certificates: Moje certifikáty
     discussion: Diskuze
     about: O projektu
+    faq: FAQ
     admin: Administrace
   footmenu:
     cookies: Prohlášení o cookies
@@ -26,20 +27,20 @@ cs:
       title_with_level: bez úrovně
       description: Datová sada nesplňuje základní požadavky na otevřená data.
     basic:
-      title: Základní
-      title_with_level: základní úroveň
+      title: Bronzová
+      title_with_level: bronzová úroveň
       description: Datová sada splňuje základní požadavky na otevřená data.
     pilot:
-      title: Pilot
-      title_with_level: úroveň Pilot
+      title: Stříbrná
+      title_with_level: stříbrná úroveň
       description: Vydavatel těchto dat kromě základních podmínek poskytuje netriviální podporu a reaguje na připomínky uživatelů.
     standard:
-      title: Standard
-      title_with_level: úroveň Standard
+      title: Zlatá
+      title_with_level: zlatá úroveň
       description: Otevřená data s robustní podporou, na kterou se uživatelé mohou spolehnout.
     exemplar:
-      title: Expert
-      title_with_level: úroveň Expert
+      title: Platinová
+      title_with_level: platinová úroveň
       description: Tato data jsou výjimečnou ukázkou informační infrastruktury.
   level_descriptions:
     basic: 'Dobrý základ v publikování otevřených dat.'
@@ -47,10 +48,10 @@ cs:
     standard: 'Dlouhodobě udržovaná otevřená data s podporou, na kterou se uživatelé mohou spolehnout.'
     exemplar: 'Výjimečná ukázka informační infrastruktury.'
   requirement_levels:
-    basic: základní úroveň
-    pilot: úroveň Pilot
-    standard: úroveň Standard
-    exemplar: úroveň Expert
+    basic: bronzová úroveň
+    pilot: stříbrná úroveň
+    standard: zlatá úroveň
+    exemplar: platinová úroveň
   required_for_level: Tato otázka je pro %{level} povinná.
   required_for_level_and_above: Pro %{level} nebo vyšší je tato otázka povinná.
   statuses:
@@ -84,7 +85,6 @@ cs:
     unable_to_publish_response_set_invalid: Před zveřejněním certifikátu je potřeba zodpovědět všechny povinné otázky.
     unable_to_access_response_set: Dotazník nejde otevřít
     published_response_set: Zveřejněný dotazník
-    publish_certificate: Zveřejnit
     embed: Kód pro vložení na web
     improvements_link: Jak se tato data dají zlepšit?
     level_attained: 'Dosažená úroveň:'
@@ -101,7 +101,6 @@ cs:
       superseded: Stará verze
     expiring_states:
       expired: Vypršel
-      expiring: 'Vyprší za %{days} dní'
     verification: Způsob ověření
     expiring_certificates: Některé z vašich certifikátů by potřebovaly aktualizovat na nejnovější verzi dotazníku.
     updated_response_set: Certifikát byl aktualizován
@@ -149,6 +148,18 @@ cs:
         alpha: Certifikace ve verzi alfa
         beta: Certifikace ve verzi beta
         final: Certifikace v ostrém provozu
+  surveys:
+    jurisdiction: 'Jurisdikce:'
+    language: 'Jazyk:'
+    other_languages: 'Další jazyky'
+    read_more: Přečtěte si podrobnější text o certifikaci otevřených dat
+    do_not_have_url: Žádné takové URL nemám
+    check_url_button: Načítst URL
+    skip_this_button: Přeskočit
+    url_problem_error: URL se nepodařilo načíst. Zkontrolujte prosím, jestli funguje, případně vyplňte níže vysvětlení.
+    url_unknown_error: Došlo k chybě. Zkuste to prosím znovu.
+    dataset_description_html: |
+      <p>Pokud máte datovou sadu vloženou v <a href="http://ckan.org/">CKAN</a> katalogu (například data.gov.uk) nebo máte dokumentaci označkovanou pomocí <a href="http://www.w3.org/TR/vocab-dcat/">DCAT</a>, můžete nám jako první krok dát příslušné URL. My z něj zkusíme automaticky vyplnit odpovědi na nekteré z otázek, které budou následovat. Viz též <a href="http://theodi.org/guides/marking-up-your-dataset-with-dcat">podrobnější anglický návod ke značkování DCAT</a>.</p>
   certificates:
     certificates: Certifikáty
     curated_by: Kurátor
@@ -164,10 +175,10 @@ cs:
       datahub: Filtrovat podle domény
       level: Filtrovat podle úrovně
       levels:
-        basic: základní úroveň
-        pilot: úroveň Pilot
-        standard: úroveň Standard
-        exemplar: úroveň Expert
+        basic: bronzová úroveň
+        pilot: stříbrná úroveň
+        standard: zlatá úroveň
+        exemplar: platinová úroveň
     community_verification_panel:
       title: Ověření certifikátu komunitou
       description: Správnost údajů na tomto certifikátu může ověřit kdokoliv.
@@ -211,8 +222,9 @@ cs:
     audited: Certifikát je označen jako auditovaný ODI
     not_audited: Certifikát není označen jako auditovaný ODI
     expired_notice: "Tento certifikát je potřeba aktualizovat, aby se do něj promítly poslední změny v dotazníku pro jurisdikci %{jurisdiction}."
-    expiring_notice: "Tento certifikát vyprší za %{days} dní. Aktualizujte ho, aby se do něj promítly poslední změny dotazníku pro jurisdikci %{jurisdiction}."
     claim_this_certificate: "Je tohle vaše datová sada?"
+    us_public_domain_assumption_html: |
+      Tuto datovou sadu vytvořila vláda Spojených států, což znamená, že je považována za veřejné dílo. Americké autorské právo ale přiznává otevřený přístup pouze americkým občanům, takže předpokládáme, že pro zbytek světa jsou data v souladu s <a href="https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf">americkou politikou otevřených dat</a> licencována pod <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC Zero</a>.
     report:
       link: Nahlásit chybu
       text: v tomto certifikátu
@@ -268,8 +280,14 @@ cs:
     terms: Podmínky použití
   about:
     heading_about: O projektu
-  overview:
-    heading_overview: Přehled
+  badge_levels:
+    header_title: Úrovně certifikace
+  certificate_how_to:
+    header_title: Jak získat certifikát
+  what_you_need:
+    header_title: Co budete potřebovat
+  faq:
+    header_title: Certifikát otevřených dat – Často kladené otázky
   contact:
     heading_contact: Napište ODI
   errors:
@@ -287,17 +305,17 @@ cs:
         subtitle: Naprosté minimum pro získání certifikátu – velmi slušný začátek!
         instruction: "Musíte odpovědět na následující otázky:"
       pilot:
-        title: Úroveň Pilot
+        title: Stříbrná úroveň
         subtitle: Uživatelům svých dat nabízíte podporu a reagujete na jejich připomínky.
-        instruction: "Pro dosažení úrovně Pilot je potřeba splnit následující úkoly:"
+        instruction: "Pro dosažení stříbrné úrovně je potřeba splnit následující úkoly:"
       standard:
-        title: Úroveň Standard
+        title: Zlatá úroveň
         subtitle: Data dlouhodobě udržujete a jejich uživatelům nabízíte podporu, na které se dají stavět vážnější projekty.
-        instruction: "Pro dosažení úrovně Standard je potřeba splnit následující úkoly:"
+        instruction: "Pro dosažení zlaté úrovně je potřeba splnit následující úkoly:"
       exemplar:
-        title: Úroveň Expert
+        title: Platinová úroveň
         subtitle: Překračujete všechna běžná očekávání – vaše data slouží jako výjimečná ukázka informační infrastruktury, kterou se všichni ostatní mohou inspirovat.
-        instruction: "Pro dosažení úrovně Expert je potřeba splnit následující úkoly:"
+        instruction: "Pro dosažení platinové úrovně je potřeba splnit následující úkoly:"
     buttons:
       understood: "Upravit odpovědi"
       misunderstood: "Nevíte si s otázkou rady?"
@@ -353,16 +371,16 @@ cs:
     denied: Převod zamítnut
   claim_mailer:
     notify:
-      subject: Žádost o převod datové sady „%{title}“
+      subject: "Žádost o převod datové sady „%{title}“"
       admin_subject: "Převod certifikátu „%{dataset_id}“"
       message: |
         Jiný uživatel vás žádá, abyste na něj převedli vlastnictví certifikátu otevřených dat. Převod můžete potvrdit nebo zamítnout na následující adrese: %{url}
     notify_of_approval:
-      subject: Stali jste se vlastníkem „%{title}“
+      subject: "Stali jste se vlastníkem „%{title}“"
       message: |
         Žádali jste o převedení datové sady „%{title}“ k sobě, převod byl úspěšně dokončen. Informace o datové sadě můžete změnit na adrese %{url}.
     notify_of_denial:
-      subject: Převedení certifikátu zamítnuto
+      subject: "Převedení certifikátu zamítnuto"
       message: |
         Žádali jste o převedení vlastnických práv na „%{title}“, ale vaše žádost byla současným vlastníkem zamítnuta.
   status_panel:
@@ -376,6 +394,12 @@ cs:
         short_name: Krátká forma jména nebo přezdívka
   locales:
     cs: Čeština
+    de: Němčina
+    el: Řečtina
     en: Angličtina
+    es: Španělština
+    it: Italština
+    ro: Rumunština
+    zh: Čínština
   interface:
     select: "Vyberte si…"

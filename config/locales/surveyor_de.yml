@@ -1,0 +1,44 @@
+de:
+  surveyor:
+    take_these_surveys: "Sie können diese Fragebogen beantworten"
+    take_it: "Beantworten"
+    completed_survey: "Ausgefüllte Fragebogen"
+    unable_to_find_your_responses: "Antworten auf den Fragebogen können nicht gefunden werden"
+    unable_to_update_survey: "Antworten auf den Fragebogen können nicht aktualisiert werden"
+    unable_to_find_that_legislation: "Geltungsbereich kann nicht gefunden werden"
+    unable_to_find_that_survey: "Fragebogen kann nicht gefunden werden"
+    please_choose_a_legislation: "Bitte wählen Sie einen Geltungsbereich"
+    survey_started_success: "Fragebogen erfolgreich begonnen"
+    click_here_to_finish: "Weiter"
+    saving_questionnaire: "Speichern"
+    previous_section: "&laquo; Vorheriger Abschnitt"
+    next_section: "Nächster Abschnitt &raquo;"
+    select_one: "Auswählen"
+    sections: "Abschnitte"
+    language: "Sprache"
+    response_set_is_published: "Bereits veröffentlichter Fragebogen kann nicht bearbeitet werden"
+    modifications_not_allowed: Sie können Ihre Antworten jetzt nicht ändern
+    all_mandatory_questions_need_to_be_completed: "Alle Pflichtfragen müssen beantwortet werden"
+    please_check_all_your_urls_exist: "Bitte prüfen Sie, ob ihre URLs korrekt sind"
+    must_be_logged_in_to_complete: "Bitte melden Sie sich an oder registrieren Sie sich, um diesen Fragebogen zu beantworten"
+    you_need_to_register_or_sign_in_to_save: "Um ein Zertifikat anzulegen und Ihre Antworten für die spätere Arbeit zu speichern, müssen Sie sich anmelden bzw. registrieren."
+    url_verified: "Diese URL wurde geprüft"
+    url_warning: "Bitte überprüfen Sie, ob Ihre URL korrekt ist."
+    url_explained: "Sie haben ein Erklärung dafür abgegeben, warum Ihre URL nicht geprüft werden konnte"
+    autocompleted: "Wir haben diese Daten aus ihren früheren Antworten übernommen, aber Sie können dies noch ändern."
+    autocompleted_changed: "Bitte geben Sie unten eine Erklärung ab, warum die Antwort geändert wurde"
+    autocompleted_explained: "Sie haben eine Erklärung abgegeben, warum der vorausgefüllte Wert geändert wurde"
+    autocompleted_url_warning: "Wir haben diese URL automatisch vervollständigt, sie scheint jedoch nicht korrekt zu sein."
+    metadata_missing: "Einige dieser Punkte konnten nicht auf der Seite für die Dokumentation gefunden werden."
+    question_comment: Um Hilfe zu dieser Frage bitten
+    override_explanation_title: Erklärung
+    autocomplete_explanation: Bitte erklären Sie, warum Sie die vorausgefüllte Antwort geändert haben. Dies hilft den Nutzern Ihrer Daten, diese besser zu verstehen.
+    url_explanation: Bitte erklären Sie, warum diese URL nicht gültig zu sein scheint. Dies hilft den Nutzern Ihrer Daten, diese besser zu verstehen.
+    publisher_url_invalid: Diese Daten haben die automatische Validierung nicht erfolgreich durchlaufen, weil die URL nicht korrekt ist.
+    publisher_changed_autocompleted: Der Herausgeber hat die automatisch vorausgefüllten Daten geändert.
+    find_out_more: Finden Sie mehr heraus
+    from_publisher: 'Für den Herausgeber:'
+    documentation_url:
+      autocompleted: Wir haben diese Information automatisch vorausgefüllte, indem wir die folgende URL genutzt haben.
+      not_autocompleted: Wir konnten mit Hilfe dieser URL keine Fragen automatisch vorausfüllen.
+      missing: "Sie sollten eine Webseite haben, die die Dokumentation der von Ihnen veröffentlichten Daten anbietet, so dass die Nutzer ihren Kontext, Inhalt und Nutzen verstehen."

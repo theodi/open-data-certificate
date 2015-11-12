@@ -7,14 +7,13 @@ es:
       text: "Información legal"
       help_text: "Derechos, licenciamiento y privacidad"
   questions:
-    # Información legal
     publisherRights:
       text: "¿Sus derechos le permiten publicar estos datos como datos abiertos?"
       help_text: "Si su organización no es la creadora original o no estuvo a cargo de la recolección de estos datos, entonces es probable que no tenga derecho a publicarlos. Si no está seguro, verifique con el dueño de los datos debido a que necesitará su autorización para publicarlos."
       answers:
-        "yes":
+        'yes':
           text: "Sí. Sus derechos le permiten publicar estos datos como datos abiertos."
-        "no":
+        'no':
           text: "No. No tiene los derechos necesarios para publicar estos datos como datos abiertos."
         unsure:
           text: "No está seguro de contar con los derechos necesarios para publicar estos datos como datos abiertos."
@@ -34,7 +33,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "Creado originalmente o generado por su curador"
@@ -53,7 +51,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "fuentes de datos abiertos"
@@ -64,7 +61,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "obtenidos mediante colaboración colectiva"
@@ -105,7 +101,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "datos legibles por máquina sobre el origen de los datos"
@@ -141,15 +136,13 @@ es:
           text_as_statement: "Licencia de dedicatoria al dominio público Open Data Commons"
         na:
           text: "No aplicable"
-          text_as_statement: ""
         other:
           text: "Otros…"
-          text_as_statement: ""
     dataNotApplicable:
       text: "¿Por qué no aplica ninguna licencia a estos datos?"
       text_as_statement: "Estos datos no se encuentran licenciados por"
       answers:
-        "norights":
+        norights:
           text: "Estos datos no están sujetos a derechos de autor"
           help_text: "Los derechos de autor aplican solamente si se realizó un esfuerzo creativo relacionado con los datos como por ejemplo escribir algún texto dentro de los datos o decidir si un dato en particular debe ser o no incluido. Si los datos se refieren únicamente a hechos o cifras sin que sean producto de un proceso creativo, entonces no les aplica la protección del derecho de autor."
           text_as_statement: "No están sujetos a derechos de autor"
@@ -160,7 +153,6 @@ es:
         waived:
           text: "El derecho de autor ha sido exentado"
           help_text: "Esto significa que nadie tiene derechos sobre los datos y cualquier persona puede hacer lo que quiera con los mismos."
-          text_as_statement: ""
     dataWaiver:
       text: "¿Qué método utiliza para exentar los derechos sobre los datos?"
       text_as_statement: "Los derechos sobre los datos han sido exentos mediante"
@@ -174,7 +166,6 @@ es:
           text_as_statement: "Creative Commons CCZero"
         other:
           text: "Otros…"
-          text_as_statement: ""
     dataOtherWaiver:
       text: "¿dónde se ubica la exención sobre los derechos de los datos?"
       text_as_statement: "Los derechos sobre los datos han sido exentos mediante"
@@ -208,18 +199,16 @@ es:
       text: "¿Existe algún tipo de derehco de autor en estos datos?"
       text_as_statement: "Existen"
       answers:
-        "norights":
+        norights:
           text: "No, los datos solamente contienen hechos y cifras"
           help_text: "Los hechos no están sujetos a derecho de autor. Cuando los datos no abarcan contenido creado a partir de un esfuerzo intelectual, no están sujetos a derechos de autor."
           text_as_statement: "ningún derecho sobre el contenido de los datos"
         samerights:
           text: "Sí y los derechos le corresopnden a una sola persona u organización"
           help_text: "Elija esta opción si el contenido de los datos fue creado o cedido a una misma persona u organización"
-          text_as_statement: ""
         mixedrights:
           text: "Sí y los derechos le corresponden a diferentes personas u organizaciones"
           help_text: "En algunos casos, los derechos sobre diferentes registros le corresponden a diversas personas u organizaciones. Es necesario incluir la información relativa a los derechos en los datos mismos."
-          text_as_statement: ""
     explicitWaiver:
       text: "¿Los datos y su contenido están marcados como del dominio público?"
       text_as_statement: "El contenido ha sido"
@@ -227,7 +216,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "Identificado como del dominio público"
@@ -247,15 +235,13 @@ es:
           text_as_statement: "CCZero Creative Commons"
         na:
           text: "No aplicable"
-          text_as_statement: ""
         other:
           text: "Otra…"
-          text_as_statement: ""
     contentNotApplicable:
       text: "¿Por qué no aplica ninguna licencia al contenido de los datos?"
       text_as_statement: "La información contenida en los datos no está licenciada por"
       answers:
-        "norights":
+        norights:
           text: "El contenido de los datos no está sujeto a derechos de autor"
           help_text: "Los derechos de autor aplican solamente si se realizó un esfuerzo creativo relacionado con los datos como por ejemplo escribir algún texto dentro de los datos . Si los datos se refieren únicamente a hechos, entonces no les aplica la protección del derecho de autor."
           text_as_statement: "No tiene derechos de autor"
@@ -266,7 +252,6 @@ es:
         waived:
           text: "Los derechos de autor han sido exentados."
           help_text: "Esto significa que nadie tiene derechos sobre los datos y cualquier persona puede hacer lo que quiera con los mismos."
-          text_as_statement: ""
     contentWaiver:
       text: "¿Qué método utiliza para exentar los derechos sobre los datos?"
       text_as_statement: "Los derechos de autor han sido exentados mediante"
@@ -322,13 +307,13 @@ es:
         dataLicense:
           text: "licencia de datos"
           text_as_statement: "su licencia de datos"
-        "contentLicense":
+        contentLicense:
           text: "licencia de contenido"
           text_as_statement: "su licencia de contenido"
-        "attribution":
+        attribution:
           text: "texto para reconocimiento"
           text_as_statement: "que texto para reconocimiento usar"
-        "attributionURL":
+        attributionURL:
           text: "URL del reconocimiento"
           text_as_statement: "¿qué enlace proporcionar para el reconocimiento?"
         copyrightNotice:
@@ -344,7 +329,7 @@ es:
       text: "¿Es posible identificar individuos mediante estos datos?"
       text_as_statement: "Estos datos contienen"
       answers:
-        "not_personal":
+        not_personal:
           text: "No, los datos no tratan sobre personas o sus actividades"
           help_text: "Recuerde que las personas pueden ser identificadas aún cuando los datos no estén directamente relacionados con ellas. Por ejemplo, los datos sobre flujo de tránsito combinados con la costumbre de transporte de una persona, podría identificar a la persona."
           text_as_statement: "Ningún dato sobre individuos"
@@ -362,7 +347,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditado por un auditor independiente"
@@ -373,7 +357,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "Anonimizados"
@@ -384,7 +367,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "deben ser publicados"
@@ -419,7 +401,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditado por un auditor independiente"
@@ -430,7 +411,6 @@ es:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditado por un auditor independiente"
@@ -444,7 +424,6 @@ es:
     privacy:
       text: "Privacidad"
       help_text: "¿Cómo protege la privacidad de la gente?"
-  # Información legal Requirements
     standard_1:
       text: "Debería tener un derecho que le permita publicar estos datos."
     basic_1:
@@ -488,9 +467,7 @@ es:
     standard_8:
       text: "Debería auditar su proceso de anonimización por un auditor independiente a fin de asegurar que reduce el riesgo de que las personas puedan ser identificadas individualmente."
     pilot_4:
-      text: "
-                     <strong></strong>
-                  "
+      text: " <strong></strong> "
     standard_9:
       text: "Debería documentar su derecho a publicar datos personales para enterar a las personas que los utilicen así como a los posibles afectados por su revelación."
     pilot_5:

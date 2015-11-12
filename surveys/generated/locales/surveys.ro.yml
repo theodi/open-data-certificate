@@ -16,6 +16,7 @@ ro:
       legal:
         text: Informatii Legale
         help_text: Drepturi, licențieri și securitate
+        title: Informatii Legale
     questions:
       dataTitle:
         text: Cum se numesc aceste date?
@@ -175,7 +176,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: cel puțin zilnic
@@ -205,7 +205,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: este disponibil
@@ -267,7 +266,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: copii ale datelor în format pentru export
@@ -297,7 +295,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: corectate
@@ -330,7 +327,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: susținute și în afara sitului
@@ -515,7 +511,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: sunt lizibile pentru mașini
@@ -529,7 +524,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: un format deschis standard
@@ -665,7 +659,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: identificatori persistenți
@@ -677,7 +670,6 @@ ro:
           'false':
             text: nu, identificatorii nu pot fi utilizați pentru a găsi informații
               suplimentare
-            text_as_statement: ''
           service:
             text: da, există un serviciu pe care oamenii îl pot utiliza pentru a obține
               referințele asociate cu identificatorii
@@ -740,7 +732,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: referențiate în aceste date
@@ -754,7 +745,6 @@ ro:
         answers:
           a_false:
             text: nu
-            text_as_statement: ''
           a_true:
             text: da
             text_as_statement: lizibile pentru mașini
@@ -984,12 +974,9 @@ ro:
           a_1:
             placeholder: URL pentru Instrumente
       publisherRights:
-        text: Aveți dreptul de a publica aceste date ca date deschise?
-        help_text: Dacă organizația dvs. nu a fost cea care a creat sau colectat aceste
-          date inițial, atunci s-ar putea să nu aveți dreptul să le publicați. Dacă
-          nu sunteți sigur, contactați proprietarul datelor, deoarece veți avea nevoie
-          de permisiunea acestuia pentru a le publica.
         answers:
+          complicated:
+            text: drepturile referitoare la aceste date sunt complicate sau neclare
           'yes':
             text: da, aveți dreptul de a publica aceste date ca date deschise
           'no':
@@ -997,8 +984,11 @@ ro:
           unsure:
             text: nu sunteți sigur dacă aveți dreptul de a publica aceste date ca
               date deschise
-          complicated:
-            text: drepturile referitoare la aceste date sunt complicate sau neclare
+        text: Aveți dreptul de a publica aceste date ca date deschise?
+        help_text: Dacă organizația dvs. nu a fost cea care a creat sau colectat aceste
+          date inițial, atunci s-ar putea să nu aveți dreptul să le publicați. Dacă
+          nu sunteți sigur, contactați proprietarul datelor, deoarece veți avea nevoie
+          de permisiunea acestuia pentru a le publica.
       rightsRiskAssessment:
         text: Unde descrieți riscurile pe care oamenii le-ar putea avea în cazul în
           care folosesc aceste date?
@@ -1011,20 +1001,22 @@ ro:
           a_1:
             placeholder: URL pentru Documentația Riscurilor
       publisherOrigin:
-        text: Au fost <em>toate</em> aceste date create sau sau adunate inițial de
-          dumneavoastră?
         text_as_statement: Aceste date au fost
         help_text: În cazul în care orice parte din aceste date a fost obținută din
           afara organizației dvs., de la alte persoane sau organizații, atunci trebuie
           să oferiți informații suplimentare cu privire la dreptul dumneavoastră de
           a le publica.
         answers:
+          'true':
+            text: 'yes'
+            text_as_statement: create sau generate inițial de curatorul acestora
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: create sau generate inițial de curatorul acestora
+        text: Au fost <em>toate</em> aceste date create sau sau adunate inițial de
+          dumneavoastră?
       thirdPartyOrigin:
         text: O parte din aceste date a fost extrasă sau calculată din alte date?
         help_text: Folosirea unui extract sau a unei mici părți din datele altcuiva
@@ -1048,7 +1040,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: surse de date deschise
@@ -1061,7 +1052,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: obținută prin crowdsourcing
@@ -1121,7 +1111,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: date ce sunt lizibile pentru mașină despre sursele
@@ -1137,276 +1126,32 @@ ro:
         answers:
           a_1:
             placeholder: URL pentru Declarația Drepturilor
-      dataLicence:
-        text: Sub ce licență pot oamenii reutiliza aceste date?
-        text_as_statement: Aceste date sunt disponibile sub
-        help_text: Amintiți-vă că oricine adună, creează, verifică sau prezintă o
-          bază de date inițial, deține în mod automat drepturile pentru acel lucru.
-          Poate exista de asemenea copyright în organizarea și selectarea datelor.
-          Așa că, oamenii au nevoie de o anulare a acelor drepturi sau o licență care
-          dovedește că ei pot utiliza datele și care explica modul în care aceasta
-          se poate face legal. Vom enumera cele mai frecvente licențe aici; în cazul
-          în care nu există drepturi asupra bazelor de date sau copyright, acestea
-          au expirat, sau le-ați anulat, alegeți "Nu este aplicabil".
+      databaseRights:
         answers:
-          cc_by:
-            text: Creative Commons Attribution
-            text_as_statement: Creative Commons Attribution
-          cc_by_sa:
-            text: Creative Commons Attribution Share-Alike
-            text_as_statement: Creative Commons Attribution Share-Alike
-          cc_zero:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      databaseRightsLicenseType:
+        answers:
           odc_by:
             text: Open Data Commons Attribution License
             text_as_statement: Open Data Commons Attribution License
           odc_odbl:
             text: Open Data Commons Open License Database (ODbL)
             text_as_statement: Open Data Commons Open License Database (ODbL)
-          odc_pddl:
-            text: Dedicație Open Data Commons Domeniului Public și de licență (PDDL)
-            text_as_statement: Dedicație Open Data Commons Domeniului Public și de
-              licență (PDDL)
-          na:
-            text: Nu este aplicabil
-            text_as_statement: ''
-          other:
-            text: Altele...
-            text_as_statement: ''
-      dataNotApplicable:
-        text: De ce nu se poate aplica o licență pentru aceste date?
-        text_as_statement: Aceste date nu sunt licențiate pentru că
-        answers:
-          norights:
-            text: nu există copyright sau drepturi asupra bazei de date aplicabile
-              acestor date
-            help_text: Drepturile asupra bazelor de date se aplică în cazul în care
-              ați depus un efort substanțial în procesul de adunare, verificare sau
-              prezentare a datelor. Nu există drepturi asupra bazelor de date dacă,
-              de exemplu, acestea sunt create de la zero, prezentate într-un mod evident,
-              și nu sunt verificate prin raportare la ceva preexistent. Aveți drepturi
-              de autor dacă selectați elemente din acele date sau le organizați într-un
-              mod neevident.
-            text_as_statement: nu există drepturi în ea
-          expired:
-            text: copyright-ul și drepturile asupra bazelor de date au expirat
-            help_text: Drepturile asupra bazelor de date durează zece ani. În cazul
-              în care datele au fost modificate ultima dată în urmă cu peste zece
-              ani, atunci drepturile asupra bazelor de date au expirat. Copyright-ul
-              durează un timp fix, bazat fie pe numărul de ani de la moartea creatorului
-              sau de la publicare. Este puțin probabil să expire copyright-ul.
-            text_as_statement: drepturile au expirat
-          waived:
-            text: copyright-ul și drepturile asupra bazelor de date au fost anulate
-            help_text: Aceasta înseamnă că nimeni nu deține drepturile și oricine
-              poate să facă ce vrea cu aceste date.
-            text_as_statement: ''
-      dataWaiver:
-        text: Ce declarație de renunțare utilizați pentru a anula drepturi asupra
-          datelor?
-        text_as_statement: Drepturile asupra datelor au fost anulate cu
-        help_text: Aveți nevoie de o declarație pentru a arăta oamenilor că s-a renunțat
-          la drepturi, astfel încât aceștia să înțeleagă că pot face orice cu aceste
-          date. Declarații de renunțare standard exista deja, precum PDDL și CCZero
-          dar puteți scrie propria dvs. declarație, având consiliere juridică.
-        answers:
-          pddl:
-            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
-            text_as_statement: Open Data Commons Public Domain Dedication and Licence
-              (PDDL)
-          cc0:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          other:
-            text: Altele...
-            text_as_statement: ''
-      dataOtherWaiver:
-        text: Unde este declarația de renunțare la drepturile asupra datelor?
-        text_as_statement: Drepturile asupra datelor au fost anulate cu
-        help_text: Furnizați un URL pentru declarația de renunțare, accesibilă public,
-          astfel încât oamenii să poată verifica dacă acesta anulează drepturile asupra
-          datelor.
-        answers:
-          a_1:
-            placeholder: URL pentru Declarația de Renunțare
-      otherDataLicenceName:
-        text: Care este numele licenței?
-        text_as_statement: Aceste date sunt disponibile sub
-        help_text: Dacă utilizați o altă licență, avem nevoie de numele acesteia,
-          astfel încât oamenii să îl poată vedea pe Certificatul de Date Deschise
-          pe care îl veți avea.
-        answers:
-          a_1:
-            placeholder: Alte nume de licență
-      otherDataLicenceURL:
-        text: Unde este licența?
-        text_as_statement: Această licență se află la
-        help_text: Furnizați un URL pentru licență, astfel încât oamenii să o poată
-          vedea pe Certificatul dumneavoastră de Date Deschise și să verifice dacă
-          este făcută publică.
-        answers:
-          a_1:
-            placeholder: URL pentru licența alternativă
-      otherDataLicenceOpen:
-        text: Este licența o licență deschisă?
-        help_text: Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href="http://opendefinition.org/">Open
-          Knowledge Definition</a>. Apoi, alegeți-vă licența de la <a href="http://licenses.opendefinition.org/">Open
-          Definition Advisory Board open licence list</a>. În cazul în care o licență
-          nu este în lista lor, înseamnă că aceasta nu este o licență deschisă sau
-          nu a fost evaluată încă.
+      databaseCopyright:
         answers:
           a_false:
             text: 'no'
           a_true:
             text: 'yes'
-      contentRights:
-        text: Exista drepturi de autor în conținutul acestor date?
-        text_as_statement: Sunt
-        answers:
-          norights:
-            text: nu, datele conțin doar fapte și numere
-            help_text: Nu există copyright în informațiile factuale. În cazul în care
-              datele nu au conținut creat printr-un efort intelectual, nu există drepturi
-              în acestea.
-            text_as_statement: lipsite de drepturi în conținutul datelor
-          samerights:
-            text: da, și toate drepturile sunt deținute de aceeași persoană sau organizație
-            help_text: Alegeți această opțiune în cazul în care conținutul tuturor
-              datelor a fost creat sau transferat de către aceeași persoană sau organizație.
-            text_as_statement: ''
-          mixedrights:
-            text: da, iar drepturile sunt deținute de persoane sau organizații diferite
-            help_text: În unele colecții de date, drepturile din diferite recorduri
-              sunt deținute de persoane sau organizații diferite. Informațiile despre
-              drepturi trebuie să fie păstrate tot în cadrul datelor.
-            text_as_statement: ''
-      explicitWaiver:
-        text: Conținutul datelor este marcat ca făcând parte din domeniul public?
-        text_as_statement: Conținutul a fost
-        help_text: Conținutul poate fi marcat ca făcând parte din domeniul public,
-          folosind <a href="http://creativecommons.org/publicdomain/">Creative Commons
-          Public Domain Mark</a>. Acest lucru ajută oamenii să știe că acesta poate
-          fi reutilizat în mod liber.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: marcat ca făcând parte din domeniul public
-      contentLicence:
-        text: Sub ce licență pot alții reutiliza conținutul?
-        text_as_statement: Conținutul este disponibil sub
-        help_text: Țineți minte că oricine depunde efort intelectual pentru crearea
-          de conținut, în mod automat deține drepturi asupra lui, dar conținutul creativ
-          nu include fapte. Deci, oamenii au nevoie de o declarație de renunțare la
-          drepturi sau o licență care dovedește că ei pot folosi conținutul și explică
-          modul în care pot face acest lucru în mod legal. Vom enumera cele mai frecvente
-          licențe aici; în cazul în care nu există copyright în conținut, este expirat,
-          sau l-ați anulat, alegeți "Nu este aplicabil".
-        answers:
-          cc_by:
-            text: Creative Commons Attribution
-            text_as_statement: Creative Commons Attribution
-          cc_by_sa:
-            text: Creative Commons Attribution Share-Alike
-            text_as_statement: Creative Commons Attribution Share-Alike
-          cc_zero:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          na:
-            text: Nu este aplicabil
-            text_as_statement: ''
-          other:
-            text: Altele...
-            text_as_statement: ''
-      contentNotApplicable:
-        text: De ce nu se poate aplica o licență conținutului datelor?
-        text_as_statement: Conținutul acestor date nu are licență pentru că
-        answers:
-          norights:
-            text: nu există copyright în conținutul acestor date
-            help_text: Copyright-ul se aplică numai în cazul conținutului realizat
-              cu efort intelectual, de exemplu, prin scrierea de text în interiorul
-              datelor. Nu există copyright în cazul în care sunt conținute doar fapte.
-            text_as_statement: nu există copyright
-          expired:
-            text: copyright-ul a expirat
-            help_text: Copyright-ul dureaza o perioadă de timp fixă, bazată fie pe
-              numărul de ani de la moartea creatorului sau de la publicare. Ar trebui
-              să verificați data la care a fost creat sau publicat conținutul, deoarece
-              în cazul în care s-a întâmplat cu mult timp în urmă, copyright-ul poate
-              să fie expirat.
-            text_as_statement: copyright-ul a expirat
-          waived:
-            text: copyright-ul a fost anulat
-            help_text: Aceasta înseamnă că nimeni nu deține copyright și oricine poate
-              să facă ce vrea cu aceste date.
-            text_as_statement: ''
-      contentWaiver:
-        text: Ce declarație de renunțare utilizați pentru a renunța la copyright?
-        text_as_statement: Copyright-ul a fost anulat cu
-        help_text: Aveți nevoie de o declarație pentru a arăta oamenilor că ați făcut
-          acest lucru, astfel încât aceștie să înțeleagă că pot face orice cu aceste
-          date. Declarații de renunțare standard, există deja, de exemplu CCZero,
-          dar puteți scrie propria declarație, utilizând consultanța juridică.
-        answers:
-          cc0:
-            text: Creative Commons CCZero
-            text_as_statement: Creative Commons CCZero
-          other:
-            text: Altele...
-            text_as_statement: Altele...
-      contentOtherWaiver:
-        text: Unde este declarația de renunțare la copyright?
-        text_as_statement: Copyright-ul a fost anulat cu
-        help_text: Furnizați un URL pentru declarația proprie și publică de renunțare
-          la drepturi, astfel încât oamenii să poată verifica dacă aceasta anulează
-          copyright-ul.
-        answers:
-          a_1:
-            placeholder: URL pentru Declarația de Renunțare la Drepturi
-      otherContentLicenceName:
-        text: Care este numele licenței?
-        text_as_statement: Conținutul este disponibil sub
-        help_text: Dacă utilizați o altă licență, avem nevoie de numele acesteia,
-          pentru ca oamenii să-l poată vedea pe Certificatul dumneavoastră de Date
-          Deschise.
-        answers:
-          a_1:
-            placeholder: Numele Licenței
-      otherContentLicenceURL:
-        text: Unde este licența?
-        text_as_statement: Conținutul licenței se află la
-        help_text: Furnizați un URL pentru licență, pentru ca oamenii să-l poată vedea
-          pe Certificatul dumneavoastră de Date Deschise și să verifice dacă este
-          făcut public.
-        answers:
-          a_1:
-            placeholder: URL pentru Licență
-      otherContentLicenceOpen:
-        text: Licența este o licență deschisă?
-        help_text: Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href="http://opendefinition.org/">Open
-          Knowledge Definition</a>. Apoi, alegeți licența de la <a href="http://licenses.opendefinition.org/">Open
-          Definition Advisory Board open licence list</a>. În cazul în care o licență
-          nu este în lista lor, înseamnă că nu este o licență deschisă sau nu a fost
-          evaluată încă.
+      databaseContentCopyright:
         answers:
           a_false:
             text: 'no'
           a_true:
             text: 'yes'
-      contentRightsURL:
-        text: Unde sunt explicate drepturile și licența asupra conținutului?
-        text_as_statement: Drepturile și licența asupra conținutului sunt explicate
-          la
-        help_text: Furnizați URL-ul către o pagină ce descrie modul în care cineva
-          poate afla drepturile și licența acordate pentru o parte din conținutul
-          datelor.
-        answers:
-          a_1:
-            placeholder: URL pentru Descrierea Drepturilor asupra Conținutului
       copyrightStatementMetadata:
         text: Declarația dumneavoastră de drepturi include versiuni lizibile pentru
           mașini pentru
@@ -1471,10 +1216,9 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
-            text_as_statement: auditat independent
+            text_as_statement: auditată independent
       appliedAnon:
         text: Ați încercat să reduceți sau să eliminați posibilitatea ca persoanele
           să fie identificate?
@@ -1485,7 +1229,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: anonimizate
@@ -1495,7 +1238,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: trebuie să fie publicate
@@ -1506,6 +1248,325 @@ ro:
         answers:
           a_1:
             placeholder: URL pentru Motivarea Publicării
+      privacyImpactAssessmentExists:
+        text_as_statement: Curatorul
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      privacyImpactAssessmentUrl:
+        help_text: Furnizați un URL ca locație pentru verificarea modului în care
+          s-au evaluat riscurile de confidențialitate pentru persoane. Acesta poate
+          fi redactată sau rezumată în cazul în care conține informații sensibile.
+      piaAudited:
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: auditată independent
+      individualConsentURL:
+        text: Unde este notificarea de confidențialitate pentru persoanele afectate
+          de datele dumneavoastră?
+        text_as_statement: Persoanele afectate de aceste date primesc această notificare
+          de confidențialitate
+        answers:
+          a_1:
+            placeholder: URL pentru Notificarea de Confidențialitate
+        help_text: Când colectați date despre persoane, trebuie să le spuneți cum
+          vor fi utilizate. Oamenii care folosesc datele dumneavoastră au nevoie de
+          acest lucru pentru a se asigura că respectă legislația privind protecția
+          datelor.
+      dpStaff:
+        text: Este cineva din organizația dumneavoastră responsabil de protecția datelor?
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      dbStaffConsulted:
+        text_as_statement: Persoana responsabilă de protecția datelor
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: a fost consultată
+        text: I-ați implicat în procesul de evaluare a riscurilor?
+      anonymisationAudited:
+        text: Abordarea anonimizării a fost auditată independent?
+        text_as_statement: Anonimizarea datelor a fost
+        help_text: Este o bună practică să vă asigurați că procesul de a elimina datele
+          de identificare personală funcționează în mod corespunzător. Audituri independente
+          făcute de specialiști sau de părți terțe tind să fie mai riguroase și mai
+          imparțiale.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: auditată independent
+      dataLicence:
+        text: Sub ce licență pot oamenii reutiliza aceste date?
+        text_as_statement: Aceste date sunt disponibile sub
+        help_text: Amintiți-vă că oricine adună, creează, verifică sau prezintă o
+          bază de date inițial, deține în mod automat drepturile pentru acel lucru.
+          Poate exista de asemenea copyright în organizarea și selectarea datelor.
+          Așa că, oamenii au nevoie de o anulare a acelor drepturi sau o licență care
+          dovedește că ei pot utiliza datele și care explica modul în care aceasta
+          se poate face legal. Vom enumera cele mai frecvente licențe aici; în cazul
+          în care nu există drepturi asupra bazelor de date sau copyright, acestea
+          au expirat, sau le-ați anulat, alegeți "Nu este aplicabil".
+        answers:
+          cc_by:
+            text: Creative Commons Attribution
+            text_as_statement: Creative Commons Attribution
+          cc_by_sa:
+            text: Creative Commons Attribution Share-Alike
+            text_as_statement: Creative Commons Attribution Share-Alike
+          cc_zero:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          odc_by:
+            text: Open Data Commons Attribution License
+            text_as_statement: Open Data Commons Attribution License
+          odc_odbl:
+            text: Open Data Commons Open License Database (ODbL)
+            text_as_statement: Open Data Commons Open License Database (ODbL)
+          odc_pddl:
+            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
+            text_as_statement: Open Data Commons Public Domain Dedication and Licence
+              (PDDL)
+          na:
+            text: Nu este aplicabil
+          other:
+            text: Altele...
+      dataNotApplicable:
+        text: De ce nu se poate aplica o licență pentru aceste date?
+        text_as_statement: Aceste date nu sunt licențiate pentru că
+        answers:
+          norights:
+            text: nu există copyright sau drepturi asupra bazei de date aplicabile
+              acestor date
+            help_text: Drepturile asupra bazelor de date se aplică în cazul în care
+              ați depus un efort substanțial în procesul de adunare, verificare sau
+              prezentare a datelor. Nu există drepturi asupra bazelor de date dacă,
+              de exemplu, acestea sunt create de la zero, prezentate într-un mod evident,
+              și nu sunt verificate prin raportare la ceva preexistent. Aveți drepturi
+              de autor dacă selectați elemente din acele date sau le organizați într-un
+              mod neevident.
+            text_as_statement: nu există drepturi în ea
+          expired:
+            text: copyright-ul și drepturile asupra bazelor de date au expirat
+            help_text: Drepturile asupra bazelor de date durează zece ani. În cazul
+              în care datele au fost modificate ultima dată în urmă cu peste zece
+              ani, atunci drepturile asupra bazelor de date au expirat. Copyright-ul
+              durează un timp fix, bazat fie pe numărul de ani de la moartea creatorului
+              sau de la publicare. Este puțin probabil să expire copyright-ul.
+            text_as_statement: drepturile au expirat
+          waived:
+            text: copyright-ul și drepturile asupra bazelor de date au fost anulate
+            help_text: Aceasta înseamnă că nimeni nu deține drepturile și oricine
+              poate să facă ce vrea cu aceste date.
+      dataWaiver:
+        text: Ce declarație de renunțare utilizați pentru a anula drepturi asupra
+          datelor?
+        text_as_statement: Drepturile asupra datelor au fost anulate cu
+        help_text: Aveți nevoie de o declarație pentru a arăta oamenilor că s-a renunțat
+          la drepturi, astfel încât aceștia să înțeleagă că pot face orice cu aceste
+          date. Declarații de renunțare standard exista deja, precum PDDL și CCZero
+          dar puteți scrie propria dvs. declarație, având consiliere juridică.
+        answers:
+          pddl:
+            text: Open Data Commons Public Domain Dedication and Licence (PDDL)
+            text_as_statement: Open Data Commons Public Domain Dedication and Licence
+              (PDDL)
+          cc0:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          other:
+            text: Altele...
+      dataOtherWaiver:
+        text: Unde este declarația de renunțare la drepturile asupra datelor?
+        text_as_statement: Drepturile asupra datelor au fost anulate cu
+        help_text: Furnizați un URL pentru declarația de renunțare, accesibilă public,
+          astfel încât oamenii să poată verifica dacă acesta anulează drepturile asupra
+          datelor.
+        answers:
+          a_1:
+            placeholder: URL pentru Declarația de Renunțare la Drepturi
+      otherDataLicenceName:
+        text: Care este numele licenței?
+        text_as_statement: Aceste date sunt disponibile sub
+        help_text: Dacă utilizați o altă licență, avem nevoie de numele acesteia,
+          astfel încât oamenii să îl poată vedea pe Certificatul de Date Deschise
+          pe care îl veți avea.
+        answers:
+          a_1:
+            placeholder: Alte nume de licență
+      otherDataLicenceURL:
+        text: Unde este licența?
+        text_as_statement: Această licență se află la
+        help_text: Furnizați un URL pentru licență, pentru ca oamenii să-l poată vedea
+          pe Certificatul dumneavoastră de Date Deschise și să verifice dacă este
+          făcut public.
+        answers:
+          a_1:
+            placeholder: URL pentru licența alternativă
+      otherDataLicenceOpen:
+        text: Licența este o licență deschisă?
+        help_text: Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href="http://opendefinition.org/">Open
+          Knowledge Definition</a>. Apoi, alegeți licența de la <a href="http://licenses.opendefinition.org/">Open
+          Definition Advisory Board open licence list</a>. În cazul în care o licență
+          nu este în lista lor, înseamnă că nu este o licență deschisă sau nu a fost
+          evaluată încă.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      contentRights:
+        text: Exista drepturi de autor în conținutul acestor date?
+        text_as_statement: Sunt
+        answers:
+          norights:
+            text: nu, datele conțin doar fapte și numere
+            help_text: Nu există copyright în informațiile factuale. În cazul în care
+              datele nu au conținut creat printr-un efort intelectual, nu există drepturi
+              în acestea.
+            text_as_statement: lipsite de drepturi în conținutul datelor
+          samerights:
+            text: da, și toate drepturile sunt deținute de aceeași persoană sau organizație
+            help_text: Alegeți această opțiune în cazul în care conținutul tuturor
+              datelor a fost creat sau transferat de către aceeași persoană sau organizație.
+          mixedrights:
+            text: da, iar drepturile sunt deținute de persoane sau organizații diferite
+            help_text: În unele colecții de date, drepturile din diferite recorduri
+              sunt deținute de persoane sau organizații diferite. Informațiile despre
+              drepturi trebuie să fie păstrate tot în cadrul datelor.
+      explicitWaiver:
+        text: Conținutul datelor este marcat ca făcând parte din domeniul public?
+        text_as_statement: Conținutul a fost
+        help_text: Conținutul poate fi marcat ca făcând parte din domeniul public,
+          folosind <a href="http://creativecommons.org/publicdomain/">Creative Commons
+          Public Domain Mark</a>. Acest lucru ajută oamenii să știe că acesta poate
+          fi reutilizat în mod liber.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+            text_as_statement: marcat ca făcând parte din domeniul public
+      contentLicence:
+        text: Sub ce licență pot alții reutiliza conținutul?
+        text_as_statement: Conținutul este disponibil sub
+        help_text: Țineți minte că oricine depunde efort intelectual pentru crearea
+          de conținut, în mod automat deține drepturi asupra lui, dar conținutul creativ
+          nu include fapte. Deci, oamenii au nevoie de o declarație de renunțare la
+          drepturi sau o licență care dovedește că ei pot folosi conținutul și explică
+          modul în care pot face acest lucru în mod legal. Vom enumera cele mai frecvente
+          licențe aici; în cazul în care nu există copyright în conținut, este expirat,
+          sau l-ați anulat, alegeți "Nu este aplicabil".
+        answers:
+          cc_by:
+            text: Creative Commons Attribution
+            text_as_statement: Creative Commons Attribution
+          cc_by_sa:
+            text: Creative Commons Attribution Share-Alike
+            text_as_statement: Creative Commons Attribution Share-Alike
+          cc_zero:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          na:
+            text: Nu este aplicabil
+          other:
+            text: Altele...
+      contentNotApplicable:
+        text: De ce nu se poate aplica o licență conținutului datelor?
+        text_as_statement: Conținutul acestor date nu are licență pentru că
+        answers:
+          norights:
+            text: nu există copyright în conținutul acestor date
+            help_text: Copyright-ul se aplică numai în cazul conținutului realizat
+              cu efort intelectual, de exemplu, prin scrierea de text în interiorul
+              datelor. Nu există copyright în cazul în care sunt conținute doar fapte.
+            text_as_statement: nu există copyright
+          expired:
+            text: copyright-ul a expirat
+            help_text: Copyright-ul dureaza o perioadă de timp fixă, bazată fie pe
+              numărul de ani de la moartea creatorului sau de la publicare. Ar trebui
+              să verificați data la care a fost creat sau publicat conținutul, deoarece
+              în cazul în care s-a întâmplat cu mult timp în urmă, copyright-ul poate
+              să fie expirat.
+            text_as_statement: copyright-ul a expirat
+          waived:
+            text: copyright-ul a fost anulat
+            help_text: Aceasta înseamnă că nimeni nu deține copyright și oricine poate
+              să facă ce vrea cu aceste date.
+      contentWaiver:
+        text: Ce declarație de renunțare utilizați pentru a renunța la copyright?
+        text_as_statement: Copyright-ul a fost anulat cu
+        help_text: Aveți nevoie de o declarație pentru a arăta oamenilor că ați făcut
+          acest lucru, astfel încât aceștie să înțeleagă că pot face orice cu aceste
+          date. Declarații de renunțare standard, există deja, de exemplu CCZero,
+          dar puteți scrie propria declarație, utilizând consultanța juridică.
+        answers:
+          cc0:
+            text: Creative Commons CCZero
+            text_as_statement: Creative Commons CCZero
+          other:
+            text: Altele...
+            text_as_statement: Altele...
+      contentOtherWaiver:
+        text: Unde este declarația de renunțare la copyright?
+        text_as_statement: Copyright-ul a fost anulat cu
+        help_text: Furnizați un URL pentru declarația proprie și publică de renunțare
+          la drepturi, astfel încât oamenii să poată verifica dacă aceasta anulează
+          copyright-ul.
+        answers:
+          a_1:
+            placeholder: URL pentru Declarația de Renunțare la Drepturi
+      otherContentLicenceName:
+        text: Care este numele licenței?
+        text_as_statement: Conținutul este disponibil sub
+        help_text: Dacă utilizați o altă licență, avem nevoie de numele acesteia,
+          pentru ca oamenii să-l poată vedea pe Certificatul dumneavoastră de Date
+          Deschise.
+        answers:
+          a_1:
+            placeholder: Numele Licenței
+      otherContentLicenceURL:
+        text: Unde este licența?
+        text_as_statement: Conținutul licenței se află la
+        help_text: Furnizați un URL pentru licență, pentru ca oamenii să-l poată vedea
+          pe Certificatul dumneavoastră de Date Deschise și să verifice dacă este
+          făcut public.
+        answers:
+          a_1:
+            placeholder: URL pentru Licență
+      otherContentLicenceOpen:
+        text: Licența este o licență deschisă?
+        help_text: Dacă nu sunteți sigur ce este o licență deschisă, citiți <a href="http://opendefinition.org/">Open
+          Knowledge Definition</a>. Apoi, alegeți licența de la <a href="http://licenses.opendefinition.org/">Open
+          Definition Advisory Board open licence list</a>. În cazul în care o licență
+          nu este în lista lor, înseamnă că nu este o licență deschisă sau nu a fost
+          evaluată încă.
+        answers:
+          a_false:
+            text: 'no'
+          a_true:
+            text: 'yes'
+      contentRightsURL:
+        text: Unde sunt explicate drepturile și licența asupra conținutului?
+        text_as_statement: Drepturile și licența asupra conținutului sunt explicate
+          la
+        help_text: Furnizați URL-ul către o pagină ce descrie modul în care cineva
+          poate afla drepturile și licența acordate pentru o parte din conținutul
+          datelor.
+        answers:
+          a_1:
+            placeholder: URL pentru Descrierea Drepturilor asupra Conținutului
       riskAssessmentExists:
         text: Ați evaluat riscurile publicării datelor cu caracter personal?
         text_as_statement: Curatorul
@@ -1537,50 +1598,6 @@ ro:
         answers:
           a_false:
             text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: auditată independent
-      individualConsentURL:
-        text: Unde este notificarea de confidențialitate pentru persoanele afectate
-          de datele dumneavoastră?
-        text_as_statement: Persoanele afectate de aceste date primesc această notificare
-          de confidențialitate
-        help_text: Când colectați date despre persoane, trebuie să le spuneți cum
-          vor fi utilizate. Oamenii care folosesc datele dumneavoastră au nevoie de
-          acest lucru pentru a se asigura că respectă legislația privind protecția
-          datelor.
-        answers:
-          a_1:
-            placeholder: URL pentru Notificarea de Confidențialitate
-      dpStaff:
-        text: Este cineva din organizația dumneavoastră responsabil de protecția datelor?
-        answers:
-          a_false:
-            text: 'no'
-          a_true:
-            text: 'yes'
-      dbStaffConsulted:
-        text: I-ați implicat în procesul de evaluare a riscurilor?
-        text_as_statement: Persoana responsabilă de protecția datelor
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
-          a_true:
-            text: 'yes'
-            text_as_statement: a fost consultată
-      anonymisationAudited:
-        text: Abordarea anonimizării a fost auditată independent?
-        text_as_statement: Anonimizarea datelor a fost
-        help_text: Este o bună practică să vă asigurați că procesul de a elimina datele
-          de identificare personală funcționează în mod corespunzător. Audituri independente
-          făcute de specialiști sau de părți terțe tind să fie mai riguroase și mai
-          imparțiale.
-        answers:
-          a_false:
-            text: 'no'
-            text_as_statement: ''
           a_true:
             text: 'yes'
             text_as_statement: auditată independent
@@ -1935,18 +1952,21 @@ ro:
       ownership:
         text: Drepturi
         help_text: dreptul dumneavoastră de a împărtăși aceste date
+        title: Drepturi
       licensing:
         text: Licențiere
         help_text: cum dați oamenilor permisiunea de a utiliza aceste date
+        title: Licențiere
       privacy:
         text: Confidențialitatea
         help_text: cum protejați intimitatea oamenilor
+        title: Confidențialitatea
       basic_5:
         text: Trebuie să obțineți <strong>acceptul colaboratorilor referitor la Acordul
           asupra Licenței de Colaborator</strong> (ALC), care vă oferă dreptul de
           a publica munca lor ca date deschise.
       basic_6:
-        text: Trebuie să <strong>publicați datele deschise sub o licență deschisă</strong>,
+        text: Trebuie <strong>să publicați datele deschise sub o licență deschisă</strong>,
           astfel încât oamenii să le poată folosi.
       basic_7:
         text: Trebuie <strong>să publicați datele deschise sub o licență deschisă</strong>,

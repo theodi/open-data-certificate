@@ -217,7 +217,6 @@ en:
       will attempt to automatically answer some of the questions for
       you in the next step.
       <a href="http://theodi.org/guides/marking-up-your-dataset-with-dcat">Read more...</a></p>
-
   certificates:
     certificates: Certificates
     curated_by: Curated by
@@ -312,12 +311,12 @@ en:
     default_title: Untitled
     choose_a_jurisdiction: Change jurisdiction
     dialog_body: Choose a different jurisdiction below. Your current answers will be copied across to the new questionnaire.
-    choose_jurisdiction: --- Select jurisdiction ---
+    choose_jurisdiction: '--- Select jurisdiction ---'
     start_new_jurisdiction: Change jurisdiction
 
     choose_a_language: Change language
     language_dialog_body: Choose which language you would like to complete the survey in
-    choose_language: --- Select language ---
+    choose_language: '--- Select language ---'
     start_new_language: Change language
 
     update_instructions: "Please check the information is up to date and all the mandatory fields are completed before continuing."
@@ -485,7 +484,6 @@ en:
       subject: "Transfer of ownership of '%{title}' has been denied"
       message: |
         The ownership you requested of '%{title}' has not been granted.
-
   status_panel:
     title: Certificate level key
     description: This shows your progress towards each data certificate.

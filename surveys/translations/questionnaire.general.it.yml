@@ -12,7 +12,6 @@ it:
       text: "Informazioni aggiuntive"
       help_text: "Documentazione, supporto e servizi"
   questions:
-    # Informazioni generali
     dataTitle:
       text: "Come si chiamano questi dati?"
       help_text: "I tuoi open data vengono visualizzati assieme ad altri dati similari. Quindi fai in modo che il nome inserito in questa casella sia il più possibile univoco e preciso per permettere agli utenti di identificare rapidamente la loro unicità."
@@ -22,7 +21,6 @@ it:
     documentationUrl:
       text: "Dove sono descritti?"
       text_as_statement: "Questi dati sono descritti in"
-      help_text: ""
       answers:
         a_1:
           placeholder: "La URL della documentazione"
@@ -43,10 +41,10 @@ it:
     releaseType:
       text: "Di che tipo di aggiornamento si tratta?"
       answers:
-        "oneoff":
+        oneoff:
           text: "un unico aggiornamento di un pacchetto singolo di dati."
           help_text: "Si tratta di un unico file e non prevedi di pubblicarne di simili in futuro"
-        "collection":
+        collection:
           text: "Un aggiornamento unico di un insieme di pacchetti di dati correlati"
           help_text: "È una raccolta di file correlati, relativi agli stessi dati, e per i quali al momento non prevedi di pubblicarne di simili in futuro"
         series:
@@ -55,17 +53,14 @@ it:
         service:
           text: "un servizio o API per accedere agli open data"
           help_text: "Questo è un web service in tempo reale che permette ai programmatori di accedere ai tuoi dati attraverso un'interfaccia di interrogazione"
-    # Informazioni pratiche
     onWebsite:
       text: "Il tuo sito web principale contiene un link ai tuoi dati?"
       help_text: "È più facile trovare i dati se sono collegati a partire dal tuo sito web principale."
       answers:
         a_false:
           text: "no"
-          text_as_statement: "no"
         a_true:
           text: "sì"
-          text_as_statement: "sí"
     webpage:
       text: "Nel tuo sito web, quale è la pagina che dà accesso ai dati?"
       text_as_statement: "il sito web collega i dati da"
@@ -79,10 +74,8 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: "no"
         a_true:
           text: "sì"
-          text_as_statement: "sí"
     listing:
       text: "Dove sono elencati?"
       text_as_statement: "I dati fanno parte di questa collezione"
@@ -96,10 +89,8 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: "no"
         a_true:
           text: "sì"
-          text_as_statement: "sí"
     reference:
       text: "Dove sono menzionati i tuoi dati?"
       text_as_statement: "Questi dati sono menzionati in"
@@ -123,7 +114,7 @@ it:
       text: "I tuoi dati non saranno aggiornati?"
       text_as_statement: "La precisione o la rilevanza di questi dati sarà"
       answers:
-        "true":
+        'true':
           text: "sì, questi dati non saranno aggiornati"
           help_text: "Ad esempio, i dati sulle fermate degli autobus diventano obsoleti nel momento stesso in cui alcune fermate verranno spostate o create di nuove."
           text_as_statement: "non saranno aggiornati"
@@ -131,7 +122,7 @@ it:
           text: "sì, questi dati non saranno aggiornati; ma questo sarà esplicitamente indicato."
           help_text: "Ad esempio, le statistiche demografiche di solito includono il periodo in cui sono state rilevate."
           text_as_statement: "non saranno aggiornati ma verrà indicato"
-        "false":
+        'false':
           text: "no, questi dati non contegono nessuna informazione di carattere temporale"
           help_text: "Ad esempio, i risultati di un esperimento non diventeranno mai obsoleti perché i dati indicano dei risultati riportati a seguito di verifiche."
           text_as_statement: "non necessitano di aggiornamento"
@@ -142,7 +133,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "Si, almeno una volta al giorno"
@@ -165,7 +155,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "è disponibile"
@@ -177,7 +166,7 @@ it:
         rarely:
           text: "meno di una volta al mese"
           text_as_statement: "meno di una volta al mese"
-        "monthly":
+        monthly:
           text: "almeno ogni mese"
           text_as_statement: "almeno ogni mese"
         weekly:
@@ -194,7 +183,7 @@ it:
           text: "più lungo del divario fra le due versioni"
           help_text: "Ad esempio, se crei una nuova versione del pacchetto di dati ogni giorno, scegliere questa opzione se ci vuole più di un giorno per essere pubblicato."
           text_as_statement: "più lungo del divario fra le due versioni"
-        "reasonable":
+        reasonable:
           text: "più o meno come il divario fra le pubblicazioni"
           help_text: "Ad esempio, se si crea una nuova versione del pacchetto di dati ogni giorno, scegliere questa opzione se ci vuole circa un giorno per essere pubblicato."
           text_as_statement: "più o meno come il divario fra le pubblicazioni"
@@ -213,7 +202,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "Estrazioni (dump) dei dati"
@@ -225,7 +213,7 @@ it:
         rarely:
           text: "meno di una volta al mese"
           text_as_statement: "meno di una volta al mese"
-        "monthly":
+        monthly:
           text: "almeno ogni mese"
           text_as_statement: "almeno ogni mese"
         weekly:
@@ -241,7 +229,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "corretti"
@@ -266,7 +253,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "il backup è fatto parallelamente"
@@ -297,10 +283,9 @@ it:
         medium:
           text: "Rientrano nei tuoi piani a medio termine, quindi dovrebbero essere disponibili per un paio di anni"
           text_as_statement: "per almeno un paio di anni"
-        "long":
+        long:
           text: "Fanno parte delle tue attività quotidiane, quindi rimarranno disponibili per molto tempo"
           text_as_statement: "per molto tempo"
-    # Informazioni tecniche
     datasetUrl:
       text: "Dove si trova il tuo dataset?"
       text_as_statement: "Questi dati sono pubblicati in"
@@ -395,7 +380,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "processabili dal computer"
@@ -406,7 +390,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "formato standard aperto"
@@ -446,8 +429,7 @@ it:
       text_as_statement: "I dati statistici sono pubblicati"
       answers:
         statistical:
-          text: "esponi la struttura dei dati statistici hypercube come <a href=\"http://sdmx.org/\">SDMX</a> or <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a>
-                     "
+          text: "esponi la struttura dei dati statistici hypercube come <a href=\"http://sdmx.org/\">SDMX</a> or <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> "
           help_text: "osservazioni individuali in hypercubes riferiscono a una misura particolare e a un insieme di dimensioni. Ogni osservazione può anche essere collegata ad annotazioni che danno più contesto. Formati come <a href=\"http://sdmx.org/\">SDMX</a> and <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> sono progettati per esprimere questa struttura."
           text_as_statement: "in un formato statistico"
         tabular:
@@ -467,8 +449,7 @@ it:
       text_as_statement: "I dati geografici sono pubblicati"
       answers:
         specific:
-          text: "sono ideati per dati geografici, come <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> or <a href=\"http://www.geojson.org/\">GeoJSON</a>
-                     "
+          text: "sono ideati per dati geografici, come <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> or <a href=\"http://www.geojson.org/\">GeoJSON</a> "
           help_text: "Questi formati descrivono punti, linee e confini, ed espongono strutture nei dati che rendono più facile il trattamento automatico."
           text_as_statement: "in un formato per dati geografici"
         generic:
@@ -498,7 +479,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "identificatori persistenti"
@@ -506,9 +486,8 @@ it:
       text: "Gli identificatori presenti nei tuoi dati possono essere utilizzati per trovare informazioni aggiuntive?"
       text_as_statement: "Gli identificatori persistenti"
       answers:
-        "false":
+        'false':
           text: "no, gli identificatori non possono essere usati per trovare informazioni aggiuntive"
-          text_as_statement: ""
         service:
           text: "sì, le persone possono utilizzare un servizio per risolvere gli identificatori"
           help_text: "È possibile utilizzare servizi online, come GUIDs o DOIs, per dare delle informazioni sugli identificatori, che non possono essere direttamente accessibili allo stesso modo delle URL."
@@ -547,7 +526,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "fanno riferimento a questi dati"
@@ -558,7 +536,6 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "sì"
           text_as_statement: "processabile dal computer"
@@ -569,7 +546,6 @@ it:
       answers:
         a_1:
           placeholder: "URL del procedimento di verifica"
-    # Informazioni aggiuntive
     documentationMetadata:
       text: "La tua documentazione include dei dati che sono processabili dal computer per :"
       text_as_statement: "La documentazione include dati che sono processabili dal computer"
@@ -577,7 +553,7 @@ it:
         title:
           text: "titolo"
           text_as_statement: "titolo"
-        "description":
+        description:
           text: "descrizione"
           text_as_statement: "descrizione"
         issued:
@@ -613,7 +589,7 @@ it:
         keyword:
           text: "parola/e chiave o tag (s)"
           text_as_statement: "parola/e chiave o tag (s)"
-        "distribution":
+        distribution:
           text: "distribuzione/i"
           text_as_statement: "distribuzione/i"
     distributionMetadata:
@@ -623,7 +599,7 @@ it:
         title:
           text: "titolo"
           text_as_statement: "titolo"
-        "description":
+        description:
           text: "descrizione"
           text_as_statement: "descrizione"
         issued:
@@ -706,10 +682,8 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: "no"
         a_true:
           text: "sì"
-          text_as_statement: "sí"
     account:
       text: "Attraverso quali profili di social media le persone possono contattarti?"
       text_as_statement: "Contattare il curatore attraverso questi social media"
@@ -744,10 +718,8 @@ it:
       answers:
         a_false:
           text: "no"
-          text_as_statement: "no"
         a_true:
           text: "sì"
-          text_as_statement: "sí"
     engagementTeamUrl:
       text: "Dov'è la loro home page?"
       text_as_statement: "L'impegno della comunità è gestito da"
@@ -792,12 +764,10 @@ it:
     services:
       text: "Servizi"
       help_text: "come dai accesso agli strumenti necessari per poter lavorare con i tuoi dati"
-  # Informazioni generali Requirements
     pilot_1:
       text: "Dovresti avere <strong>una pagina web che dia accesso alla documentazione</strong> sui tuoi open data così da capirne il contesto, contenuto ed utilità."
     basic_1:
       text: "Devi avere <strong>una pagina web che dia accesso alla documentazione</strong> sui tuoi open data così che la gente possa utilizzarli"
-  # Informazioni pratiche Requirements
     standard_1:
       text: "Dovresti <strong>assicurarti che le persone possano trovare i dati a partire dal tuo sito web principale </strong> per facilitarne l'accesso"
     standard_2:
@@ -805,8 +775,7 @@ it:
     standard_3:
       text: "Dovresti <strong>far riferimento a questi dati a partire dalle tue pubblicazioni</strong> in modo che le persone possano venire a conoscenza della loro esistenza e contesto."
     pilot_2:
-      text: "
-                        <strong>Quando pubblichi i tuoi dati dovresti indicare il periodo di riferimento </strong> così la gente sa quando i dati diventeranno obsoleti."
+      text: " <strong>Quando pubblichi i tuoi dati dovresti indicare il periodo di riferimento </strong> così la gente sa quando i dati diventeranno obsoleti."
     standard_4:
       text: "Dovresti <strong>pubblicare gli aggiornamenti dei dati che contengono informazioni che variano nel tempo</strong> per evitare che diventino obsoleti"
     exemplar_1:
@@ -849,7 +818,6 @@ it:
       text: "Dovresti <strong>garantire che i tuoi dati siano disponibili in questo modo nel medio termine</strong> in modo che le persone possano decidere quanto fidarsi dei tuoi dati."
     exemplar_7:
       text: "Dovresti <strong>garantire che i tuoi dati siano disponibili in questa forma nel lungo termine</strong> in modo che le persone possano decidere quanto fidarsi dei tuoi dati."
-  # Informazioni tecniche Requirements
     basic_2:
       text: "Devi <strong>fornire una URL ai dati o una URL alla loro documentazione</strong> in modo che la gente possa trovare questa informazione."
     pilot_7:
@@ -863,8 +831,7 @@ it:
     basic_3:
       text: "Devi <strong>fornire l'accesso ai diversi aggiornamenti dei tuoi dati tramite una URL</strong> che dia la versione attuale, una serie di URL o una pagina di documentazione in modo che le persone possano trovare l'informazione."
     basic_4:
-      text: "
-                     <strong>È necessario fornire sia una URL di endpoint di API o una URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione."
+      text: " <strong>È necessario fornire sia una URL di endpoint di API o una URL della sua documentazione</strong> in modo che le persone possano trovare questa informazione."
     standard_16:
       text: "Dovresti <strong>avere un documento che descrive il servizio o il punto di accesso unico per la vostra API</strong> per permettere alle persone di accedervi."
     standard_17:
@@ -907,7 +874,6 @@ it:
       text: "Dovresti <strong>fornire il percorso che stabilisce la provenienza dei tuoi dati in un formato processabile dai computer</strong> in modo che le persone possano risalire al modo in cui i tuoi dati sono stati elaborati."
     exemplar_15:
       text: "Dovresti <strong>descrivere il modo in cui le persone possono controllare che i dati ricevuti siano gli stessi di quelli che hai pubblicato</strong> in modo che possano fidarsi."
-  # Informazioni aggiuntive Requirements
     standard_24:
       text: "Dovresti <strong>includere un titolo che sia processabile dai computer nella tua documentazione</strong> in modo che la gente sappia come farvi riferimento."
     standard_25:

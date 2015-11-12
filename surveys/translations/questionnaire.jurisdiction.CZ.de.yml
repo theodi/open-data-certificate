@@ -1,0 +1,313 @@
+de:
+  survey_sections:
+    legal:
+      text: "Rechtliche Information"
+      help_text: "Rechte, Lizenzvergabe und Datenschutz"
+  questions:
+    publisherRights:
+      answers:
+        complicated:
+          text: "Die Rechte an diesen Daten sind komplex oder unklar"
+    rightsRiskAssessment:
+      text: "Wo beschreiben Sie die Risiken, die Nutzer unter Umständen eingehen, wenn sie die Daten nuzten?"
+      text_as_statement: "Risks in using this data are described at"
+      help_text: "Daten zu nutzen, ohne dazu das klare Recht zu besitzen, kann Risiken beinhalten. So kann z.B. gerichtlich verlangt werden, die Daten aus dem Netz zu nehmen. Geben Sie die URL einer Seite an, die die Risiken beim Nutzen der Daten beschreibt."
+      answers:
+        a_1:
+          placeholder: "URL der Risikodokumentation"
+    publisherOrigin:
+      text_as_statement: "Die Daten wurden"
+      help_text: "Wenn irgend ein Teil der Daten nicht aus Ihrer Organisation, sondern von anderen Personen oder Organisationen stammt, müssen Sie zusätzliche Informationen über Ihre Rechte zur Veröffentlichung bereitstellen."
+      answers:
+        'true':
+          text: "yes"
+          text_as_statement: "ursprünglich vom Herausgeber erzeugt oder erhoben"
+    thirdPartyOrigin:
+      text: "Wurden Teile der Daten aus anderen Daten extrahiert oder berechnet?"
+      help_text: "Ein Auszug oder kleiner Teil von Daten anderer Personen kann bedeuten, dass Ihre Rechte zur Veröffenlichung eingeschränkt sind. Rechtliche Fragen können auch entstehen, wenn Sie die Daten anderer analysiert haben, um neue Ergebnisse zu erzeugen."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    thirdPartyOpen:
+      text: "Wurden <em>alle</em> Datenquellen schon als offene Daten (Open Data) veröffentlicht?"
+      text_as_statement: "This data is created from"
+      help_text: "Sie dürfen, die Daten anderer weiter verbreiten, wenn sie mit einer Open Data Lizenz veröffentlicht wurden, oder die Urheberrechte ausgelaufen oder aufgegeben worden sind. Trifft dies auf irgend einen Teil der Daten nicht zu, benötigen rechtliche Beratung, bevor Sie die Daten veröffentlichen können."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "offene Ausgangsdaten"
+    crowdsourced:
+      text: "Ist ein Teil der Daten durch \"Crowdsourcing\" entstanden?"
+      text_as_statement: "Teile der Daten sind"
+      help_text: "Wenn die Daten Informationen enthalten, die Personen außerhalb ihrer Organisation beigetragen haben, benötigen Sie deren Zustimmung, um ihren Beitrag als offene Daten zu verbreiten."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "crowdsourced"
+    crowdsourcedContent:
+      text: "Waren die Beitragenden schöpferisch tätig?"
+      help_text: "Wenn Personen ihre Kreativtät gebrauchen oder eigene Ideen zum Ausdruck gebracht haben, so haben Sie an Ihrem Werk die Urheberrechte. Die Abfassung einer Beschreibung oder die Entscheidung darüber, ob ein bestimmter Datensatz in eine Datensammlung eingeschlossen werden soll, sind Beispiele dafür, dass die Datensammlung durch die Beitragenden persönlich gestaltet wurden und die Beiträge daher Werkcharakter besitzen. Die Beitragenden müssen daher Nutzungsrechte einräumen oder auf Ihre Rechte verzichten, bevor Sie die Daten publizieren können."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    claUrl:
+      text: "Wo findet man die Lizenzvereinbarung für Beitragende (Contributor Licence Agreement (CLA))?"
+      text_as_statement: "The Contributor Licence Agreement is at"
+      help_text: "Geben Sie die URL einer Vereinbarung an, die die Zustimmung zur Weiterverwendung der Daten enthält. Die Vereinbarung wird  einen Verzicht auf die Verwertungsrechte oder die Einräumung von Nutzungsrechten beinhalten, die es Ihnen erlauben, die Daten zu veröffentlichen."
+      answers:
+        a_1:
+          placeholder: "URL der Lizenzvereinbarung für Beitragende"
+    cldsRecorded:
+      text: "Haben alle Beitragenden der Lizenzbereinbarung für Beitragende (CLA) zugestimmt?"
+      help_text: "Kontrollieren Sie, dass die Zustimmung aller Beitragenden zur CLA vorliegt, bevor Sie ihre Beiträge veröffentlichen oder weiterverwenden. Sie sollten die einzelnen Beitragenden und ihre Zustimmung zur CLA dokumentieren."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    sourceDocumentationUrl:
+      text: "Wo beschreiben Sie die Quellen dieser Daten?"
+      text_as_statement: "Die Datenquellen finden sich beschrieben unter"
+      help_text: "Geben Sie die URL einer Seite an, die dokumentiert, woher die Daten stammen (Ihre Herkunft) und mit welchen Rechten Sie sie veröffentlichen. Dies hilft den Nutzern den Ursprung der Daten zu verstehen."
+      answers:
+        a_1:
+          placeholder: "die URL der Dokumentation der Datenquellen"
+    sourceDocumentationMetadata:
+      text: "Stellen Sie die Dokumentation der Datenquellen auch in maschinenlesbarem Format bereit?"
+      text_as_statement: "Der Herausgeber hat publiziert"
+      help_text: "Information über die Datenquellen sollte für Menschen lesbar sein, so dass Nutzer sie verstehen können, aber auch in einem Metadaten-Format voliegen, dass Computer verarbeiten können. Wenn alle dies tun, hilft es, zu erkennen, wie offene Daten genutzt werden und ihre Veröffentlichung in der Zukunft zu rechtfertigen."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "maschinenlesbare Daten über die Quellen dieser Daten"
+    copyrightURL:
+      text: "Wo sind die Nutzungsbestimmungen für diese Daten veröffentlicht?"
+      text_as_statement: "Die Nutzungsbestimmungen finden sich unter"
+      help_text: "Geben Sie die URL einer Seite an, die die Nutzungsbedingungen für diese Daten spezifiziert. Diese sollten einen Verweis auf die Lizenz, die Bestimmungen zur Namensnennung und Hinweise zu Urheberrechten einschließlich evtl. Datenbankurheberrechten umfassen. Explizite Nutzungsbestimmungen erleichtern es den Nutern, zu verstehen, was sie mit den Daten tun bzw. nicht tun können."
+      answers:
+        a_1:
+          placeholder: "URL der Nutzungsbestimmungen"
+    databaseRights:
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    databaseRightsLicenseType:
+      answers:
+        odc_by:
+          text: "Open Data Commons Attribution License"
+          text_as_statement: "Open Data Commons Attribution License"
+        odc_odbl:
+          text: "Open Data Commons Open Database License (ODbL)"
+          text_as_statement: "Open Data Commons Open Database License (ODbL)"
+    databaseCopyright:
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    databaseContentCopyright:
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    copyrightStatementMetadata:
+      text: "Enhalten Ihre Nutzungsbedingungen eine maschinenlesbare Version"
+      text_as_statement: "Die Nutzungsbestimmungen enhält Daten zu"
+      help_text: "Es ist bewährte Praxis, Informationen zu den Urheber- und Nutzungsrechten maschinenlesbar einzubetten, so dass Nutzer die Daten automatisch zu Ihnen in Bezug setzen können, wenn Sie diese nutzen."
+      answers:
+        dataLicense:
+          text: "Datenlizenz"
+          text_as_statement: "der Datenlizenz"
+        contentLicense:
+          text: "Inhaltslizenz"
+          text_as_statement: "der Lizenz für die Inhalte"
+        attribution:
+          text: "Form der Namensnennung"
+          text_as_statement: "den Text für die obligatorische Namensnennung des Rechteinhabers"
+        attributionURL:
+          text: "URL für Namensnennung"
+          text_as_statement: "den Verweis für die obligatorische Namensnennung des Urhebers"
+        copyrightNotice:
+          text: "Urheberrechts-Hinweis (copyright notice)"
+          text_as_statement: "den Urheberrechtshinweis (copyright notice)"
+        copyrightYear:
+          text: "Copyright Jahr"
+          text_as_statement: "das Urheberrechtsjahr"
+        copyrightHolder:
+          text: "Rechteinhaber"
+          text_as_statement: "den Inhaber der Urheberrechte"
+        databaseRightYear:
+          text: "Datenbankherstellerrechtsjahr"
+          text_as_statement: "das Datenbankherstellerjahr"
+        databaseRightHolder:
+          text: "Inhaber des Datenbankherstellerrechts"
+          text_as_statement: "den Inhaber des Datenbankherstellerrechts"
+    dataPersonal:
+      text: "Können die Daten auf Personen bezogen werden?"
+      text_as_statement: "Die Daten enthalten"
+      answers:
+        not_personal:
+          text: "Nein, die Daten beziehen sich nicht auf Personen oder ihre Handlungen"
+          help_text: "Beachten Sie, dass Personen auch dann anhand von Daten identifiziert werden können, wenn diese sich nicht direkt auf sie beziehen. So könnten Verkehrsflussdaten etwas über eine Person aussagen, wenn man Sie mit dem individuellen Muster des Pendlerverhaltens dieser Person kombiniert."
+          text_as_statement: "keine personenbezogenen Daten"
+        summarised:
+          text: "Nein, die Daten wurden anonymisiert, indem Individualdaten zu Gruppen aggregiert wurden, so dass nicht nicht zwischen den Personen innerhalb der Gruppe unterschieden werden kann."
+          help_text: "Statistische Offenlegungskotrollen können dabei helfen, sicherzustellen, dass konkrete Personen in aggregierten Daten nicht identifiziert werden können."
+          text_as_statement: "aggregierte Daten über Personen"
+        individual:
+          text: "Ja, es besteht das Risiko, dass Personen von Dritten mit Zugang zu weiteren Informationen identifiziert werden können."
+          help_text: "Manche personenbezogenen Daten dürfen veröffentlicht werden. Beispiele sind dienstliche Kontaktdaten von Personen, die aufgrund ihrer Funktion öffentliche Stellen nach außen repräsentieren oder die Nebeneinkünfte von Bundestagsabgeordneten."
+          text_as_statement: "Informationen, die konkreten Personen zugeordnet werden könnten"
+    statisticalAnonAudited:
+      text: "Wurde der Prozess der Anonymisierung unabhängig auditiert?"
+      text_as_statement: "Der Anonymisierungsprozess wurde"
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "unabhängig auditiert"
+    appliedAnon:
+      text: "Haben Sie die Möglichkeit, konkete Personen zu identifizieren beseitigt oder reduziert?"
+      text_as_statement: "Diese personenbezgoenen Daten wurden"
+      help_text: "Anonymisierung reduziert das Risiko, dass durch die von Ihnen veröffentlichten Daten personen identifiziert werden können. Die beste Technik hängt von der Art der vorhandenen Daten ab."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "anonymisiert"
+    lawfulDisclosure:
+      text: "Besteht die gesetzliche Pflicht oder Erlaubnis, diese personenbezogenen Daten zu veröffentlichen?"
+      text_as_statement: "Es ist gesetzlich vorgeschrieben oder erlaubt, dass diese Daten"
+      help_text: "Es kann gesetzlich vorgeschrieben sein, bestimmte personenbezogene Daten zu veröffentlichen, z. B. die Namen von Geschäftsführeren mancher Unternehmen. Oder Sie verfügen über die Erlaubnis der betroffenen Personen, diese Informationen über sie zu veröffentlichen."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "veröffentlicht werden können"
+    lawfulDisclosureURL:
+      text: "Wo dokumentieren Sie Ihr Recht, personenbezogene Daten zu veröffentlichen?"
+      text_as_statement: "Die gesetziche Ermächtigung zur Veröffentlichung der Daten ist veröffentlicht unter"
+      answers:
+        a_1:
+          placeholder: "URL der Ermächtigung zur Veröffentlichtung"
+    privacyImpactAssessmentExists:
+      text_as_statement: "Der Herausgeber hat"
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    privacyImpactAssessmentUrl:
+      help_text: "Geben Sie die URL der Seite an, auf der die Nutzer kontrollieren können, wie Sie die Datenschutzrisiken beurteilt haben. Dies kann in überarbeiteter oder summarischer Form geschehen, wenn die Abschätzung sensible Information enthält."
+    piaAudited:
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "unabhängig auditiert"
+    individualConsentURL:
+      text: "Wo befindet sich der die Datenschutzerklärung für die von Ihren Daten betroffenen Personen?"
+      text_as_statement: "von den Daten Betroffene wurden mittels der folgenden Erklärung zum Datenschutz unterrichtet"
+      answers:
+        a_1:
+          placeholder: "URL der Erklärung zum Datenschutz"
+    dpStaff:
+      text: "Gibt es in Ihrer Organisation jemanden, der für den Datenschutz zuständig ist?"
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+    dbStaffConsulted:
+      text_as_statement: "Datenschutzbeauftragter"
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "wurde einbezogen"
+    anonymisationAudited:
+      text: "Wurde ihre Methode der Anonymisierung unabhängig auditiert?"
+      text_as_statement: "Die Anonymisierung der Daten wurde"
+      help_text: "Es ist bewährte Praxis, sicherzustellen, dass Ihr Methode, den personenbezug ihrer Daten zu eliminieren, zuverlässig funktioniert. Unabhängige Audits durch Spezialisten oder Dritte sind häufig gründlicher und unvoreingenommener."
+      answers:
+        a_false:
+          text: "no"
+        a_true:
+          text: "yes"
+          text_as_statement: "unabhängig auditiert"
+  labels:
+    ownership:
+      text: "Rechte"
+      help_text: "Ihre, Rechte, diese Daten anderen zu überlassen"
+    licensing:
+      text: "Lizenzvergabe"
+      help_text: "Wie Nutzer die Erlaubnis erhalten, diese Daten zu nutzen"
+    privacy:
+      text: "Datenschutz"
+      help_text: "Wie sie personenbezogene Daten schützen"
+    standard_1:
+      text: "Sie sollten <strong>eindeutig berechtigt sein, die Daten als \"offen\" zu publizieren</strong>."
+    basic_1:
+      text: "Sie müssen <strong>das Recht besitzen, diese Daten zu veröffentlichen</strong>."
+    pilot_1:
+      text: "Dokumentieren Sie nach Möglichkeit <strong>Risiken, die mit der Nutzung der Daten verbunden sind.</strong>, so dass Nutzer herausfinden können, wie sie die Daten weiterverwenden wofllen."
+    basic_2:
+      text: "Sie haben angegeben, dass diese Daten ursprünglich nicht von Ihnen erzeugt oder erhoben wurden und auch nicht durch Crowdsourcing entstanden sind. Die Daten müssen also aus anderen Datenquellen extrahiert oder berechnet worden sein."
+    basic_3:
+      text: "Sie sollten <strong>Rechtsberatung wahrnehmen, um sicherzustellen, dass Sie das Recht besitzen, die Daten zu veröffentlichen</strong>."
+    basic_4:
+      text: "Sie haben angegeben, dass die Daten ursprünglich nicht von Ihnen erzeugt oder erhoben wurden und nicht aus Daten anderer erzeugt oder berechnet wurden, die Daten müssen daher durch \"Crowdsourcing\" entstanden sein."
+    basic_5:
+      text: "Sie müssen <strong>die Beitragenden dafür gewinnen, der CLA zuzustimmen</strong> die Ihnen erlaubt, ihre Beiträge als Open Data zu publizieren."
+    pilot_2:
+      text: "Sie sollten dokumentieren <strong>woher die Daten kamen und mit welchen Rechten Sie sie veröffentlichen</strong>, so das die Nutzer sicher sind, die Beiträge Dritter nutzen zu dürfen."
+    standard_2:
+      text: "Sie sollten <strong>maschinenlesbare Daten über die Datenherkunft bereitstellen</strong>."
+    pilot_3:
+      text: "Sie sollten<strong>Nutzungsbestimmungen publizieren.</strong>die genau die Urheberrechte, Urheberherstellerrechte, Lizenzen und die obligatorische Namensnennung bestimmt."
+    standard_3:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>die Lizenzinformationen für die Daten maschinenlesbar bereitstellen</strong>, so dass diese automatisiert ausgelesen werden können."
+    standard_4:
+      text: "Sie sollten in ihren Nutzungsbedingungen <strong>die Lizenzinformationen für die Inhalte ihrer Daten maschinenlesbar bereitstellen</strong>, so dass diese automatisiert ausgelesen werden können."
+    standard_5:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>den bei der obligatorischen Namensnennung zu nutzenden Text maschinenlesbar bereitstellen</strong>, so dass dieser automatisiert ausgelesen werden kann."
+    standard_6:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>die bei der obligatorischen Namensnennung zu nutzende URL maschinenlesbar bereitstellen</strong>, so dass dieser automatisiert ausgelesen werden kann."
+    exemplar_1:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>den Urheberrechtshinweis maschinenlesbar bereitstellen</strong>, so dass er automatisiert ausgelesen werden kann. "
+    exemplar_2:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>die Jahreszahl des Urheberrechts maschinenlesbar bereitstellen</strong>, so dass sie automatisiert ausgelesen werden kann."
+    exemplar_3:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>den Rechteinhaber maschinenlesbar bereitstellen</strong>, so dass er automatisiert ausgelesen werden kann."
+    exemplar_4:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>das Jahr des Datenbankherstellerrechts maschinenlesbar bereitstellen,</strong> so dass es automatisiert ausgelesen werden kann."
+    exemplar_5:
+      text: "Sie sollten in Ihren Nutzungsbedingungen <strong>den Inhaber des Datenbankherstellerrechts maschinenlesbar bereitstellen,</strong> so dass er automatisiert ausgelesen werden kann."
+    standard_7:
+      text: "Sie sollten <strong>Ihren Anonymisierungs-Prozess unabhängig auditieren lassen</strong>, um sicherzustellen, dass er das Risiko der Reidentifizierung von Personen reduziert."
+    pilot_4:
+      text: "Sie sollten<strong>personenbezogene Daten ohne Anonymisierung nur veröffentlichen, wenn dies gesetzlich vorgeschrieben oder erlaubt ist</strong>."
+    standard_8:
+      text: "Sie sollten <strong>die Rechtsgrundlage der Veröffentlichung personenbezogener Daten dokumentieren.</strong>sowohl für die Nutzer Ihrer Daten als auch für die davon betroffenen Personen."
+    pilot_7:
+      text: "Sie sollten <strong>die für den Datenschutz in Ihrer Organisation Zuständigen einbeziehen</strong>, bevor Sie diese Daten veröffentlichen."
+    standard_11:
+      text: "Sie sollten <strong>Ihre Anonymisierungsverfahren unabhängig durch einen Experten auditieren lassen.</strong>, um sicherzustellen, dass er für Ihre Daten geeignet ist ."

@@ -7,14 +7,13 @@ ro:
       text: "Informatii Legale"
       help_text: "Drepturi, licențieri și securitate"
   questions:
-    # Informatii Legale
     publisherRights:
       text: "Aveți dreptul de a publica aceste date ca date deschise?"
       help_text: "Dacă organizația dvs. nu a fost cea care a creat sau colectat aceste date inițial, atunci s-ar putea să nu aveți dreptul să le publicați. Dacă nu sunteți sigur, contactați proprietarul datelor, deoarece veți avea nevoie de permisiunea acestuia pentru a le publica."
       answers:
-        "yes":
+        'yes':
           text: "da, aveți dreptul de a publica aceste date ca date deschise"
-        "no":
+        'no':
           text: "nu, nu aveți dreptul de a publica aceste date ca date deschise"
         unsure:
           text: "nu sunteți sigur dacă aveți dreptul de a publica aceste date ca date deschise"
@@ -34,7 +33,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "create sau generate inițial de curatorul acestora"
@@ -47,14 +45,12 @@ ro:
         a_true:
           text: "yes"
     thirdPartyOpen:
-      text: "
-                        <em>Toate</em> sursele acestor date au fost deja publicate ca date deschise?"
+      text: " <em>Toate</em> sursele acestor date au fost deja publicate ca date deschise?"
       text_as_statement: "Aceste date au fost create din"
       help_text: "Aveți voie să republicați datele altcuiva dacă sunt deja sub o licență de date deschise sau în cazul în care drepturile lor au expirat sau au fost anulate. Dacă oricare parte a acestor date nu îndeplinește aceste condiții, atunci veți avea nevoie de consultanță juridică înainte de a putea publica."
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "surse de date deschise"
@@ -65,7 +61,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "obținută prin crowdsourcing"
@@ -106,7 +101,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "date ce sunt lizibile pentru mașină despre sursele acestor date"
@@ -142,15 +136,13 @@ ro:
           text_as_statement: "Dedicație Open Data Commons Domeniului Public și de licență (PDDL)"
         na:
           text: "Nu este aplicabil"
-          text_as_statement: ""
         other:
           text: "Altele..."
-          text_as_statement: ""
     dataNotApplicable:
       text: "De ce nu se poate aplica o licență pentru aceste date?"
       text_as_statement: "Aceste date nu sunt licențiate pentru că"
       answers:
-        "norights":
+        norights:
           text: "nu există copyright sau drepturi asupra bazei de date aplicabile acestor date"
           help_text: "Drepturile asupra bazelor de date se aplică în cazul în care ați depus un efort substanțial în procesul de adunare, verificare sau prezentare a datelor. Nu există drepturi asupra bazelor de date dacă, de exemplu, acestea sunt create de la zero, prezentate într-un mod evident, și nu sunt verificate prin raportare la ceva preexistent. Aveți drepturi de autor dacă selectați elemente din acele date sau le organizați într-un mod neevident."
           text_as_statement: "nu există drepturi în ea"
@@ -161,7 +153,6 @@ ro:
         waived:
           text: "copyright-ul și drepturile asupra bazelor de date au fost anulate"
           help_text: "Aceasta înseamnă că nimeni nu deține drepturile și oricine poate să facă ce vrea cu aceste date."
-          text_as_statement: ""
     dataWaiver:
       text: "Ce declarație de renunțare utilizați pentru a anula drepturi asupra datelor?"
       text_as_statement: "Drepturile asupra datelor au fost anulate cu"
@@ -175,7 +166,6 @@ ro:
           text_as_statement: "Creative Commons CCZero"
         other:
           text: "Altele..."
-          text_as_statement: ""
     dataOtherWaiver:
       text: "Unde este declarația de renunțare la drepturile asupra datelor?"
       text_as_statement: "Drepturile asupra datelor au fost anulate cu"
@@ -209,18 +199,16 @@ ro:
       text: "Exista drepturi de autor în conținutul acestor date?"
       text_as_statement: "Sunt"
       answers:
-        "norights":
+        norights:
           text: "nu, datele conțin doar fapte și numere"
           help_text: "Nu există copyright în informațiile factuale. În cazul în care datele nu au conținut creat printr-un efort intelectual, nu există drepturi în acestea."
           text_as_statement: "lipsite de drepturi în conținutul datelor"
         samerights:
           text: "da, și toate drepturile sunt deținute de aceeași persoană sau organizație"
           help_text: "Alegeți această opțiune în cazul în care conținutul tuturor datelor a fost creat sau transferat de către aceeași persoană sau organizație."
-          text_as_statement: ""
         mixedrights:
           text: "da, iar drepturile sunt deținute de persoane sau organizații diferite"
           help_text: "În unele colecții de date, drepturile din diferite recorduri sunt deținute de persoane sau organizații diferite. Informațiile despre drepturi trebuie să fie păstrate tot în cadrul datelor."
-          text_as_statement: ""
     explicitWaiver:
       text: "Conținutul datelor este marcat ca făcând parte din domeniul public?"
       text_as_statement: "Conținutul a fost"
@@ -228,7 +216,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "marcat ca făcând parte din domeniul public"
@@ -248,15 +235,13 @@ ro:
           text_as_statement: "Creative Commons CCZero"
         na:
           text: "Nu este aplicabil"
-          text_as_statement: ""
         other:
           text: "Altele..."
-          text_as_statement: ""
     contentNotApplicable:
       text: "De ce nu se poate aplica o licență conținutului datelor?"
       text_as_statement: "Conținutul acestor date nu are licență pentru că"
       answers:
-        "norights":
+        norights:
           text: "nu există copyright în conținutul acestor date"
           help_text: "Copyright-ul se aplică numai în cazul conținutului realizat cu efort intelectual, de exemplu, prin scrierea de text în interiorul datelor. Nu există copyright în cazul în care sunt conținute doar fapte."
           text_as_statement: "nu există copyright"
@@ -267,7 +252,6 @@ ro:
         waived:
           text: "copyright-ul a fost anulat"
           help_text: "Aceasta înseamnă că nimeni nu deține copyright și oricine poate să facă ce vrea cu aceste date."
-          text_as_statement: ""
     contentWaiver:
       text: "Ce declarație de renunțare utilizați pentru a renunța la copyright?"
       text_as_statement: "Copyright-ul a fost anulat cu"
@@ -323,13 +307,13 @@ ro:
         dataLicense:
           text: "licență de date"
           text_as_statement: "licența de date"
-        "contentLicense":
+        contentLicense:
           text: "licența conținutului"
           text_as_statement: "licența conținutului"
-        "attribution":
+        attribution:
           text: "text de atribuire"
           text_as_statement: "ce text de atribuire se utilizează"
-        "attributionURL":
+        attributionURL:
           text: "URL pentru atribuire"
           text_as_statement: "ce link de atribuire trebuie să dați"
         copyrightNotice:
@@ -351,7 +335,7 @@ ro:
       text: "Pot fi identificate persoane în cadrul acestor date?"
       text_as_statement: "Aceste date conțin"
       answers:
-        "not_personal":
+        not_personal:
           text: "nu, datele nu sunt despre persoane sau activitățile lor"
           help_text: "Amintiți-vă că persoanele pot fi identificate, chiar dacă datele nu sunt despre ele în mod direct. De exemplu, datele privind fluxul de trafic rutier combinate cu tiparul de navetă al unui individ ar putea dezvălui informații despre acea persoană."
           text_as_statement: "nu există date cu privire la persoane"
@@ -369,7 +353,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditat independent"
@@ -380,7 +363,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "anonimizate"
@@ -390,7 +372,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "trebuie să fie publicate"
@@ -425,7 +406,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditată independent"
@@ -449,7 +429,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "a fost consultată"
@@ -460,7 +439,6 @@ ro:
       answers:
         a_false:
           text: "no"
-          text_as_statement: ""
         a_true:
           text: "yes"
           text_as_statement: "auditată independent"
@@ -474,7 +452,6 @@ ro:
     privacy:
       text: "Confidențialitatea"
       help_text: "cum protejați intimitatea oamenilor"
-  # Informatii Legale Requirements
     standard_1:
       text: "Ar trebui să aveți <strong>dreptul legal clar de a publica aceste date</strong>."
     basic_1:

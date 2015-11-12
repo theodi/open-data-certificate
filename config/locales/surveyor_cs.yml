@@ -31,6 +31,7 @@ cs:
     autocompleted_url_warning: "Toto URL jsme doplnili automaticky, ale vypadá to, že není správně"
     metadata_missing: "Některé z těchto údajů se nepodařilo dohledat na stránce s dokumentací"
     question_comment: Nevíte si s touto otázkou rady?
+    question_comment_read_more: Číst dál…
     override_explanation_title: Proč URL nefunguje?
     autocomplete_explanation: Vysvětlete prosím, proč měníte automaticky vyplněnou otázku. Vyjasníte tím situaci uživatelům svých dat.
     url_explanation: Vysvětlete prosím, proč URL není validní. Vyjasníte tím situaci pro uživatele svých dat.

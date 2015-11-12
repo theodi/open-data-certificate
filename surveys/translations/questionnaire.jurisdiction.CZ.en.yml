@@ -10,9 +10,7 @@ en:
     # Legal Information
     publisherRights:
       text: "Do you have the right to make this data open?"
-      help_text: "If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission.
-				<br/>
-				Open data is data that anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href=\"https://theodi.org/what-is-open-data\">what is open data?</a>’ and the <a href=\"http://opendefinition.org\">open definition</a> for more details."
+      help_text: "If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission. <br/> Open data is data that anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href=\"https://theodi.org/what-is-open-data\">what is open data?</a>’ and the <a href=\"http://opendefinition.org\">open definition</a> for more details."
       answers:
         "yes":
           text: "yes, you have the rights to open this data up"
@@ -121,10 +119,7 @@ en:
     databaseRights:
       text: "Do database rights apply to your dataset?"
       text_as_statement: "Database rights to the dataset"
-      help_text: "In the Czech law system, each dataset can be considered from two viewpoints,
-				as a database and as a creative work. In this question we consider the first case:
-				each database that was creating using non-trivial effort is protected by database
-				rights."
+      help_text: "In the Czech law system, each dataset can be considered from two viewpoints, as a database and as a creative work. In this question we consider the first case: each database that was creating using non-trivial effort is protected by database rights."
       answers:
         a_false:
           text: "no"
@@ -135,8 +130,7 @@ en:
     databaseRightsLicenseType:
       text: "How are the database rights to your dataset licensed?"
       text_as_statement: "Database rights licensing"
-      help_text: "If you want to publish your dataset as open data, you must have an open license
-					to its database rights."
+      help_text: "If you want to publish your dataset as open data, you must have an open license to its database rights."
       answers:
         cc_by:
           text: "Creative Commons 3.0 Attribution"
@@ -176,16 +170,13 @@ en:
       text_as_statement: "Database rights do not apply because"
       answers:
         trivial:
-          text: "
-								Non-trivial effort wasn’t needed to create the dataset."
+          text: " Non-trivial effort wasn’t needed to create the dataset."
           text_as_statement: "creating the dataset was trivial"
         expired:
-          text: "
-								The database rights expired."
+          text: " The database rights expired."
           text_as_statement: "the rights expired"
         waived:
-          text: "
-								The rights were waived by their holders."
+          text: " The rights were waived by their holders."
           text_as_statement: "the rights were waived"
     databaseRightsWaiveType:
       text: "How were the database rights waived?"
@@ -209,9 +200,7 @@ en:
     databaseCopyright:
       text: "Does copyright apply to the dataset itself?"
       text_as_statement: "Copyright to the dataset itself"
-      help_text: "The dataset can also be protected by copyright. There are two parts that can be
-					copyrighted: the dataset itself and the contents of the dataset. This question is interested
-					in the first case, the copyright protection of the dataset itself as a creative work."
+      help_text: "The dataset can also be protected by copyright. There are two parts that can be copyrighted: the dataset itself and the contents of the dataset. This question is interested in the first case, the copyright protection of the dataset itself as a creative work."
       answers:
         a_false:
           text: "no"
@@ -224,22 +213,18 @@ en:
       text_as_statement: "The dataset itself is not copyrighted because"
       answers:
         expired:
-          text: "
-								The copyright has expired."
+          text: " The copyright has expired."
           text_as_statement: "the copyright has expired"
         freeWork:
-          text: "
-								The dataset is public domain."
+          text: " The dataset is public domain."
           text_as_statement: "the dataset is public domain"
         stateWork:
-          text: "
-								The dataset is a government work."
+          text: " The dataset is a government work."
           text_as_statement: "the dataset is a government work"
     databaseCopyrightLicenseType:
       text: "How is the copyright to the dataset itself licensed?"
       text_as_statement: "Dataset copyright license"
-      help_text: "If you want to publish the dataset as open data, you must have
-					an open license to its copyright."
+      help_text: "If you want to publish the dataset as open data, you must have an open license to its copyright."
       answers:
         cc_by:
           text: "Creative Commons 3.0 Attribution"
@@ -268,9 +253,7 @@ en:
     databaseContentCopyright:
       text: "Does copyright apply to the contents of your dataset?"
       text_as_statement: "Dataset contents copyright"
-      help_text: "After the database rights and copyright to the dataset itself we are interested
-					in the third kind of rights that may protect the dataset: copyright to the contents of
-					your dataset."
+      help_text: "After the database rights and copyright to the dataset itself we are interested in the third kind of rights that may protect the dataset: copyright to the contents of your dataset."
       answers:
         a_false:
           text: "no"
@@ -283,20 +266,16 @@ en:
       text_as_statement: "The dataset contents are not copyrighted because"
       answers:
         "notApplicable":
-          text: "
-								Copyright does not apply to this kind of content."
+          text: " Copyright does not apply to this kind of content."
           text_as_statement: "copyright does not apply to this kind of content"
         expired:
-          text: "
-								The copyright has expired."
+          text: " The copyright has expired."
           text_as_statement: "the copyright has expired"
         freeWork:
-          text: "
-								The dataset contents are public domain."
+          text: " The dataset contents are public domain."
           text_as_statement: "the contents are public domain"
         stateWork:
-          text: "
-								The dataset contents are a government work."
+          text: " The dataset contents are a government work."
           text_as_statement: "the contents are a government work"
     databaseContentCopyrightLicenseType:
       text: "How is the copyright to the dataset contents licensed?"
