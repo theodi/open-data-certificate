@@ -71,5 +71,5 @@
 - content_for(:foot_scripts) do
   :javascript
     $(document).ready(function() {
-      Tracking.event('Questionnaire', 'begin', "#{@response_set.access_code}")
+      Tracking.event('Questionnaire', 'begin', #{@response_set.access_code.to_json})
     });
