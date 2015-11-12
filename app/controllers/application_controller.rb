@@ -21,9 +21,7 @@ class ApplicationController < ActionController::Base
         # Assign the response set to the user, creating a dataset for it
         response_set.assign_to_user!(current_user)
 
-        surveyor.edit_my_survey_path(
-          :survey_code => response_set.survey.access_code,
-          :response_set_code => response_set.access_code)
+        edit_my_survey_path(:response_set_code => response_set.access_code)
 
       when params[:form_id] == 'start_cert_modal_form'
         # if the user has authenticated from the start_cert_modal_form then redirect to the start_questionnaire path

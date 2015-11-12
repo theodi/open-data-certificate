@@ -11,14 +11,14 @@
             - notice = t('certificate.expired_notice', jurisdiction: @certificate.response_set.jurisdiction)
           - else
             Warning
-            - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, days: @certificate.days_to_expiry)
+            - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, count: @certificate.days_to_expiry)
         %p= notice
 
 .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
   - unless minimal
     %ul.pull-right.unstyled
       - if @certificate.needs_updating? && @certificate.owned_by?(current_user)
-        %li= link_to 'Update certificate', surveyor.continue_my_survey_path(survey_code: @certificate.survey.access_code, response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-small btn-info pull-right'
+        %li= link_to 'Update certificate', continue_my_survey_path(response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-small btn-info pull-right'
 
       - if @certificate.published?
         %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
@@ -27,7 +27,7 @@
         - if @certificate.draft?
           %li
             .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
-          %li=link_to t('certificate.edit_questionnaire'), surveyor.continue_my_survey_path(survey_code: @certificate.response_set.survey.access_code, response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn btn-small btn-info pull-left'
+          %li=link_to t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn btn-small btn-info pull-left'
       - elsif @certificate.auto_generated?
         %li=link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
 

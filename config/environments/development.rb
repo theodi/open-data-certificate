@@ -14,6 +14,8 @@ OpenDataCertificate::Application.configure do
   config.action_controller.perform_caching = false
   config.cache_store = :memory_store
 
+  config.action_mailer.delivery_method = :letter_opener
+
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 

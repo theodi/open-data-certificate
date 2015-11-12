@@ -9,7 +9,7 @@ class ResponseSet < ActiveRecord::Base
   VALUE_FIELDS = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value]
 
   # Default title for a response set / dataset
-  DEFAULT_TITLE = 'Untitled'
+  DEFAULT_TITLE = I18n.t('response_set.default_title')
 
   REF_CHANGES = {
                   "ogl_uk" => "OGL-UK-2.0",
@@ -230,7 +230,7 @@ class ResponseSet < ActiveRecord::Base
     case ref
     when nil, "na"
       {
-        :title => "Not Applicable",
+        :title => I18n.t('summary_data.not_applicable'),
         :url => nil
       }
     when "other"

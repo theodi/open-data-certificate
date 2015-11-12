@@ -1,958 +1,938 @@
 ro:
-  survey_sections:
-    general:
-      text: "Informații generale"
-    practical:
-      text: "Informații Practice"
-      help_text: "Găsire ușoară, acuratețe, calitate și garanție"
-    technical:
-      text: "Informații tehnice"
-      help_text: "Locații, formate și încredere"
-    social:
-      text: "Informații sociale"
-      help_text: "Documentație, suport și servicii"
-  questions:
-    # Informații generale
-    dataTitle:
-      text: "Cum se numesc aceste date?"
-      help_text: "Oamenii pot vedea numele datelor dumneavoastră deschise într-o listă cu nume similare, așa că încercați să faceți titlul cât mai lipsit de ambiguitate și cât mai descriptiv posibil, în limita numărului impus de caractere, astfel încât oricine să identifice rapid ceea ce este unic despre ele."
-      answers:
-        a_1:
-          placeholder: "Titlul datelor"
-    documentationUrl:
-      text: "Unde sunt descrise?"
-      text_as_statement: "Aceste date sunt descrise la"
-      help_text: "Furnizați un URL cu descrierea detaliată a datelor, pentru ca oamenii să poată citi mai multe despre conținutul acestora. Acesta poate duce la o pagină dintr-un catalog mai mare, cum ar fi data.gov.ro."
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentație"
-    publisher:
-      text: "Cine publică aceste date?"
-      text_as_statement: "Aceste date sunt publicate de"
-      help_text: "Dați numele organizației care publică aceste date. Este, probabil, organizația pentru care lucrați, în cazul în care nu faceți acest lucru în numele altcuiva."
-      answers:
-        a_1:
-          placeholder: "Distribuitorul de Date"
-    publisherUrl:
-      text: "Care este site-ul pe care sunt publicate datele?"
-      text_as_statement: "Datele sunt publicate pe"
-      help_text: "Furnizați un URL al unui site web. Acest lucru ne ajută să grupăm date de la aceeași organizație, chiar dacă oamenii dau nume diferite."
-      answers:
-        a_1:
-          placeholder: "URL pentru Distribuitor"
-    releaseType:
-      text: "Ce fel de versiune este aceasta?"
-      answers:
-        "oneoff":
-          text: "o versiune unică a unui singur set de date"
-          help_text: "Aceasta este formată dintr-un singur fișier și nu aveți de gând în acest moment să publicați fișiere similare și în viitor."
-        "collection":
-          text: "o versiune unică a unui grup de seturi asociate de date"
-          help_text: "Aceasta este o colecție de fișiere asociate ce se referă la același set de date și nu aveți de gând în acest moment să publicați colecții similare și în viitor."
-        series:
-          text: "o versiune în curs de desfășurare, a unei serii de seturi de date asociate"
-          help_text: "Aceasta este o succesiune de seturi de date cu reactualizări periodice planificate pentru viitor."
-        service:
-          text: "un serviciu sau un API pentru accesarea datelor deschise"
-          help_text: "Acesta este un serviciu web live, care expune datele dvs. programatorilor, printr-o interfață către care pot trimite comenzi."
-    # Informații Practice
-    onWebsite:
-      text: "Există un link la datele dvs. de pe site-ul dvs. principal?"
-      help_text: "Datele pot fi găsite mai ușor dacă există un link către ele pe site-ul dvs. principal."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    webpage:
-      text: "Care pagină din site-ul dvs. conține link către date?"
-      text_as_statement: "Site-ul conține link către date la"
-      help_text: "Puneți un URL pe site-ul principal, care să includă un link la aceste date."
-      answers:
-        a_1:
-          placeholder: "URL pentru Pagina Web."
-    listed:
-      text: "Datele dumneavoastră sunt listate într-o colecție?"
-      help_text: "Date sunt mai ușor de găsit atunci când sunt în cataloage de date relevante cum ar fi sectorul public, academic sau de sănătate, sau atunci când sunt găsite în rezultatele unei căutări relevante."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    listing:
-      text: "Unde sunt listate?"
-      text_as_statement: "Datele apar în această colecție"
-      help_text: "Furnizați un URL pentru locația în care aceste date sunt listate într-o colecție relevantă. De exemplu, data.gov.ro (daca sunt date din sectorul public al României), hub.data.ac.uk (daca sunt date din mediul academic, pentru Marea Britanie) sau un URL pentru rezultatele unui motor de căutare."
-      answers:
-        a_1:
-          placeholder: "URL pentru Listare"
-    referenced:
-      text: "Există referință la aceste date în publicațiile proprii?"
-      help_text: "Când faceți referință la date în propriile publicații precum rapoarte, prezentări sau posturi pe blog, le oferiți context și îi ajutați pe oamenii să le găsească și să le înțeleagă mai bine."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    reference:
-      text: "Unde există referința către datele dumneavoastră?"
-      text_as_statement: "Aceste date au referința la"
-      help_text: "Furnizați un URL la un document care citează sau trimite către aceste date."
-      answers:
-        a_1:
-          placeholder: "URL pentru Referință"
-    serviceType:
-      text: "Se schimbă datele din spatele API-ului?"
-      text_as_statement: "Datele din spatele API-ului"
-      answers:
-        static:
-          text: "nu, API-ul oferă acces la date ce nu se vor schimba"
-          help_text: "Unele API-uri fac accesarea unui set de date neschimbătoare mai ușoară, mai ales atunci când acestea sunt numeroase."
-          text_as_statement: "nu se vor schimba"
-        changing:
-          text: "da, API-ul oferă acces la date în curs de schimbare"
-          help_text: "Unele API-uri oferă acces instantaneu la date curente și în continuă schimbare"
-          text_as_statement: "se vor schimba"
-    timeSensitive:
-      text: "Datele dumneavoastră vor ieși din uz?"
-      text_as_statement: "Acuratețea sau relevanța acestor date va"
-      answers:
-        "true":
-          text: "da, aceste date vor ieși din uz"
-          help_text: "De exemplu, un set de date cu stațiile autobuzelor va ieși din uz în timp, fiindcă unele vor fi mutate sau altele noi create."
-          text_as_statement: "ieși din uz"
-        timestamped:
-          text: "da, aceste date vor ieși din uz în timp, dar ele sunt notate cu momentul exact al publicării (time stamped)."
-          help_text: "De exemplu, statistica populației include de obicei momentul exact al publicării pentru a indica momentul în care statisticile au fost relevante."
-          text_as_statement: "ieși din uz, dar ele sunt notate cu momentul exact al publicării (time stamped)."
-        "false":
-          text: "nu, aceste date nu conțin informații sensibile la trecerea timpului"
-          help_text: "De exemplu, rezultatele unui experiment nu vor ieși din uz, deoarece datele rapoartează cu exactitate rezultatele observate."
-          text_as_statement: "nu va ieși din uz"
-    frequentChanges:
-      text: "Această modificare a datelor are loc cel puțin zilnic?"
-      text_as_statement: "Aceste date se modifică"
-      help_text: "Spuneți-le oamenilor în cazul în care schimbările datelor au loc aproape zilnic. Atunci când datele se schimbă frecvent, acestea ies din uz mai rapid, astfel încât oamenii trebuie să știe dacă și dumneavoastră le actualizați frecvent și rapid."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "cel puțin zilnic"
-    seriesType:
-      text: "Ce tip de serie de seturi de date este aceasta?"
-      text_as_statement: "Aceste date sunt o serie de"
-      answers:
-        dumps:
-          text: "copii frecvente ale unei baze complete de date"
-          help_text: "Alegeți dacă publicați copii noi și actualizate ale bazei dumneavoastră complete de date, în mod regulat. Când creați o copie a unei baze de date în format de export (dump), este util ca oamenii să aibă acces la fluxul de schimbări, pentru a-și putea ține copiile la curent."
-          text_as_statement: "copies of a database"
-        aggregate:
-          text: "agregate frecvente de date în schimbare"
-          help_text: "Alegeți dacă veți crea noi seturi de date în mod regulat. S-ar putea să faceți acest lucru dacă datele nu pot fi publicate ca date deschise sau dacă publicați doar datele noi de la ultima publicare."
-          text_as_statement: "agregate de date în schimbare"
-    changeFeed:
-      text: "Este disponibil vreun flux de schimbări?"
-      text_as_statement: "Un flux de modificări ale acestor date"
-      help_text: "Spuneți-le oamenilor, dacă oferiți fluxul de modificări care afectează aceste date, cum ar fi înregistrări noi sau modificări ale înregistrărilor existente. Fluxul ar putea fi în format RSS, Atom sau alt format."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "este disponibil"
-    frequentSeriesPublication:
-      text: "Cât de des creați o nouă versiune?"
-      text_as_statement: "Noi versiuni ale acestor date sunt făcute"
-      help_text: "Aceasta determină cât de ieșite din uz devin datele înainte ca oamenii să poată obține o reactualizare."
-      answers:
-        rarely:
-          text: "mai puțin de o dată pe lună"
-          text_as_statement: "mai puțin de o dată pe lună"
-        "monthly":
-          text: "cel puțin o dată pe lună"
-          text_as_statement: "cel puțin o dată pe lună"
-        weekly:
-          text: "cel puțin o dată pe săptămână"
-          text_as_statement: "cel puțin o dată pe săptămână"
-        daily:
-          text: "cel puțin o dată pe zi"
-          text_as_statement: "cel puțin o dată pe zi"
-    seriesPublicationDelay:
-      text: "Cât timp trece de la momentul în care creați un set de date până la momentul în care publicați acel set?"
-      text_as_statement: "Decalajul dintre creația și publicarea acestor date este"
-      answers:
-        extreme:
-          text: "mai mult decât perioada de timp dintre versiunile publicate"
-          help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru dacă aveți nevoie de mai mult de o zi pentru a-l publica."
-          text_as_statement: "mai mult decât perioada de timp dintre versiunile publicate"
-        "reasonable":
-          text: "aproximativ aceeași cu perioada de timp dintre versiunile publicate"
-          help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru dacă aveți nevoie de aproximativ o zi pentru a-l publica."
-          text_as_statement: "aproximativ aceeași cu perioada de timp dintre versiunile publicate"
-        good:
-          text: "mai puțin de jumătate din decalajul dintre versiunile publicate"
-          help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru, dacă este nevoie de mai puțin de douăsprezece ore pentru ca acesta să fie publicată."
-          text_as_statement: "mai puțin de jumătate din decalajul dintre versiunile publicate"
-        minimal:
-          text: "decalajul este minim sau nu există"
-          help_text: "Alegeți această opțiune dacă publicați în câteva secunde sau câteva minute."
-          text_as_statement: "minim"
-    provideDumps:
-      text: "Publicați și dumps (copii ale setului de date în format pentru export) ale acestui set de date?"
-      text_as_statement: "Curatorul publică"
-      help_text: "Un dump este un extras conținând întregul set de date într-un fișier pe care oamenii îl pot descărca. Acesta permite oamenilor să facă analize diferite de cele prin acces API."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "copii ale datelor în format pentru export"
-    dumpFrequency:
-      text: "Cât de des creați un dump al bazelor de date?"
-      text_as_statement: "Dumps ale bazelor de date sunt create"
-      help_text: "Acces mai rapid la extracte frecvente ale întregului set de date înseamnă că oamenii pot începe mai rapid lucrul cu cele mai recente informații."
-      answers:
-        rarely:
-          text: "mai rar de o dată pe lună"
-          text_as_statement: "mai rar de o dată pe lună"
-        "monthly":
-          text: "cel puțin o dată pe lună"
-          text_as_statement: "cel puțin o dată pe lună"
-        weekly:
-          text: "în termen de o săptămână de la orice schimbare"
-          text_as_statement: "în termen de o săptămână de la orice schimbare"
-        daily:
-          text: "într-o zi de la orice schimbare"
-          text_as_statement: "într-o zi de la orice schimbare"
-    corrected:
-      text: "Vor fi corectate datele dumneavoastră în cazul în care conțin erori?"
-      text_as_statement: "Orice erori din aceste date sunt"
-      help_text: "Este o bună practică să remediați erorile din date, mai ales daca le folosiți și dumneavoastră. Oamenii ar trebui să știe când faceți corecții."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "corectate"
-    qualityUrl:
-      text: "Unde documentați problemele legate de calitatea acestor date?"
-      text_as_statement: "Calitatea datelor este documentată la"
-      help_text: "Furnizați un URL pentru locul în care oamenii pot afla despre calitatea datelor. Oamenii acceptă că erorile sunt inevitabile, de la defecțiuni de echipament până la greșeli care se întâmplă în migrații dintre sisteme. Ar trebui să fiți deschis cu privire la calitatea datelor, astfel încât oamenii să poată știi cât de mult să se bazeze pe ele."
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentarea Calității Datelor"
-    qualityControlUrl:
-      text: "Unde este descris procesul dumneavoastră de control al calității?"
-      text_as_statement: "Procesele de control al calității sunt descrise la"
-      help_text: "Furnizați un URL pentru ca oamenii să știe despre controalele în curs de desfășurare cu privire la datele dumneavoastră, fie ele automate sau manuale. Acest lucru îi reasigură că luați în serios calitatea și încurajează îmbunătățirile de care va beneficia toată lumea."
-      answers:
-        a_1:
-          placeholder: "URL pentru Descrierea Procesului de Control al Calității"
-    backups:
-      text: "Vă creați o copie de rezervă a datelor în afara sitului (clădirii)?"
-      text_as_statement: "Datele sunt"
-      help_text: "Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "susținute și în afara sitului"
-    slaUrl:
-      text: "Unde descrieți garanțiile cu privire la disponibilitatea serviciului?"
-      text_as_statement: "Disponibilitatea serviciului este descrisă la"
-      help_text: "Furnizați un URL pentru o pagină care descrie garanțiile pe care le dați că serviciul dumneavoastră va fi disponibil pentru utilizare. De exemplu, este posibil să garantați că serviciul va fi disponibil 99,5% din timp, sau s-ar putea să nu oferiți nicio garanție."
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentarea Disponibilității Serviciului"
-    statusUrl:
-      text: "Unde oferiți informații despre starea actuală a serviciului?"
-      text_as_statement: "Statusul serviciului este oferit la"
-      help_text: "Furnizați un URL pentru o pagină cu starea curentă a serviciului, inclusiv cu problemele acestuia, de care sunteți conștient."
-      answers:
-        a_1:
-          placeholder: "URL pentru Statusul Serviciului"
-    onGoingAvailability:
-      text: "Pentru cât timp vor fi aceste date disponibile?"
-      text_as_statement: "Datele sunt disponibile"
-      answers:
-        experimental:
-          text: "s-ar putea să dispară în orice moment"
-          text_as_statement: "experimental și s-ar putea să dispară în orice moment"
-        short:
-          text: "sunt disponibile experimental, dar ar trebui să fie menținute în jur de aproximativ un an"
-          text_as_statement: "experimental pentru încă un an aproximativ"
-        medium:
-          text: "se află în planurile dumneavoastră pe termen mediu, așa că vor fi disponibile pentru câțiva ani"
-          text_as_statement: "pentru cel puțin câțiva ani"
-        "long":
-          text: "este parte a operațiilor dumneavoastră zilnice, așa că vor rămâne publicate pentru o perioadă lungă de timp"
-          text_as_statement: "pentru o perioadă lungă de timp"
-    # Informații tehnice
-    datasetUrl:
-      text: "Unde este setul dumneavoastră de date?"
-      text_as_statement: "Aceste date sunt publicate la"
-      help_text: "Furnizați un URL pentru setul de date în sine. Datele deschise ar trebui să aibă link direct pe web, astfel încât oamenii să le poată găsi cu ușurință și le reutilizeze."
-      answers:
-        a_1:
-          placeholder: "URL pentru Setul de Date"
-    versionManagement:
-      text: "Cum publicați o serie a aceluiași set de date?"
-      answers:
-        current:
-          text: "ca o singură adresă URL care este actualizată în mod regulat"
-          help_text: "Alegeți această opțiune dacă există o singură adresă URL pentru ca oamenii să descarce cea mai recentă versiune a setului de date curent."
-        template:
-          text: "ca URL-uri consecvente pentru fiecare versiune publicată"
-          help_text: "Alegeți această opțiune dacă URL-urile seturilor de date urmează un tipar care include data publicării, de exemplu un URL care începe cu '2013-04'. Acest lucru îi ajută pe oameni să înțeleagă cât de des lansați date, și să facă script-uri care preiau datele noi de fiecare dată când acestea sunt publicate."
-        list:
-          text: "ca o listă de versiuni publice"
-          help_text: "Alegeți această opțiune dacă aveți o listă a seturilor de date pe o pagină web sau într-un flux de informație (feed) (cum ar fi Atom sau RSS), cu link-uri către fiecare versiune în parte și detaliile fiecăreia. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
-    currentDatasetUrl:
-      text: "Unde este setul de date curent?"
-      text_as_statement: "Setul de date curent este disponibil la"
-      help_text: "Furnizați un URL unic pentru cea mai recentă versiune a setului de date. Conținutul la care trimite acest URL trebuie să se schimbe de fiecare dată când o nouă versiune este publicată."
-      answers:
-        a_1:
-          placeholder: "URL pentru Setul de Date Curent"
-    versionsTemplateUrl:
-      text: "Ce format au URL-urile versiunilor publicate de date?"
-      text_as_statement: "Versiunile publicate urmează acest model de URL"
-      help_text: "Aceasta este structura folosită pentru URL-uri atunci când publicați diferitele versiuni. Folosiți `{variabilă}` pentru a indica părți din formatul URL-ului care se schimbă, de exemplu, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
-      answers:
-        a_1:
-          placeholder: "URL pentru Șablonul de Versiune"
-    versionsUrl:
-      text: "Unde este lista de versiuni publicate ale seturilor de date?"
-      text_as_statement: "Versiunile publicate ale acestor date sunt listate la"
-      help_text: "Furnizați un URL pentru o pagină sau feed cu o listă a seturilor de date lizibilă pentru mașini. Utilizați URL-ul primei pagini, care ar trebui să aibă link către restul paginilor."
-      answers:
-        a_1:
-          placeholder: "URL pentru Lista Versiunilor"
-    endpointUrl:
-      text: "Unde este locația serviciului dumneavoastră de API?"
-      text_as_statement: "Locația serviciului de API este"
-      help_text: "Furnizați un URL care să fie punct de plecare pentru script-urile oamenilor, pentru a accesa API-ul. Acesta ar trebui să fie un document de descriere a serviciului, care va ajuta script-ul să-și dea seama ce servicii există."
-      answers:
-        a_1:
-          placeholder: "URL pentru Locația API"
-    dumpManagement:
-      text: "Cum publicați copiile bazelor de date în format de export?"
-      answers:
-        current:
-          text: "ca un singur URL care este actualizat în mod regulat"
-          help_text: "Alegeți această opțiune dacă există un singur URL pentru a descărca cea mai recentă versiune a dump-ului bazei de date."
-        template:
-          text: "ca URL-uri consecvente pentru fiecare versiune publicată"
-          help_text: "Alegeți această opțiune dacă URL-urile către copiile datelor curente în format de export urmează un tipar care include data publicării, de exemplu, un URL care începe cu '2013-04'. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
-        list:
-          text: "ca o listă de versiuni publicate"
-          help_text: "Alegeți această opțiune dacă aveți o listă de copii ale bazelor curente de date în format de export pe o pagină web sau într-un flux de informație (feed) (cum ar fi Atom sau RSS), cu link-uri către fiecare versiune publicată și detalii despre aceasta. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
-    currentDumpUrl:
-      text: "Unde este copia bazei de date curente în format de export?"
-      text_as_statement: "Cea mai recentă copie a bazei de date în format de export este întotdeauna disponibilă la"
-      help_text: "Furnizați un URL pentru cea mai recentă copie a bazei de date în format de export. Conținutul la care trimite acest URL trebuie să se schimbe de fiecare dată când se creează o nouă copie a bazei de date în format de export."
-      answers:
-        a_1:
-          placeholder: "URL-ul Copiei Curente"
-    dumpsTemplateUrl:
-      text: "Ce format au URL-urile pentru copiile bazelor de date în format de export?"
-      text_as_statement: "Copiile bazelor de date în format de export urmează tiparul consecvent de adresă URL"
-      help_text: "Aceasta este structura URL-urilor atunci când publicați diferite versiuni. Folosiți `{variabilă}` pentru a indica părți din URL-ul șablon care se schimbă, de exemplu, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
-      answers:
-        a_1:
-          placeholder: "URL pentru Șablonul Copiei"
-    dumpsUrl:
-      text: "Unde este lista cu copiile bazelor de date disponibile în format de export?"
-      text_as_statement: "O listă cu copiile bazelor de date în format de export există la"
-      help_text: "Furnizați un URL pentru o pagină sau flux de informație (feed) cu o listă a copiilor bazelor de date în format de export ce poate fi citită automat de computer. Utilizați URL-ul de pe prima pagină pe care ar trebui să existe link-uri către restul paginilor."
-      answers:
-        a_1:
-          placeholder: "URL pentru Lista Copiilor"
-    changeFeedUrl:
-      text: "Unde este feed-ul de modificări?"
-      text_as_statement: "Un flux (feed) de modificări ale acestor date se găsește la"
-      help_text: "Furnizați un URL pentru o pagină sau flux de informație (feed) cu o listă a versiunilor anterioare ale copiilor bazelor de date în format de export, lizibilă pentru mașini. Utilizați URL-ul de pe prima pagină pe care ar trebui să existe link-uri către restul paginilor."
-      answers:
-        a_1:
-          placeholder: "URL pentru Feed-ul de Modificări"
-    machineReadable:
-      text: "Sunt aceste lizibile pentru mașini?"
-      text_as_statement: "Aceste date sunt"
-      help_text: "Oamenii preferă formatele de date care sunt ușor procesate de un calculator, pentru viteză și precizie. De exemplu, o copie scanată a unei foi de calcul nu este lizibilă pentru mașini, dar un fișier CSV ar putea fi."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "sunt lizibile pentru mașini"
-    openStandard:
-      text: "Sunt aceste date într-un format deschis standard?"
-      text_as_statement: "Formatul acestor date este"
-      help_text: "Standardele deschise sunt create printr-un proces corect, transparent și colaborativ. Oricine le poate implementa și există multă asistență, astfel încât este mai ușor pentru dumneavoastră să împărțiți datele cu mai multe persoane. De exemplu, XML, CSV și JSON sunt standarde deschise."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "un format deschis standard"
-    dataType:
-      text: "Ce fel de date publicați?"
-      answers:
-        documents:
-          text: "documente lizibile pentru oameni"
-          help_text: "Alegeți această opțiune dacă datele sunt destinate consumului uman. De exemplu, documente despre diverse politici, documentații tehnice, rapoarte și rezumate (minute) de ședință. Acestea au de obicei o structură, dar majoritatea sunt în format text."
-        statistical:
-          text: "date statistice, cum ar fi numărători, medii și procente"
-          help_text: "Alegeți această opțiune dacă datele dumneavoastră sunt date statistice sau numerice, precum numărători, medii sau procente. Ca de exemplu rezultate de recensământ, informații despre trafic sau statistici despre criminalitate."
-        geographic:
-          text: "informații geografice, cum ar fi puncte și limite"
-          help_text: "Alegeți această opțiune dacă datele pot fi reprezentate pe o hartă ca puncte, limite sau linii."
-        structured:
-          text: "alte tipuri de date structurate"
-          help_text: "Alegeți această opțiune dacă datele dumneavoastră sunt structurate în orice alt mod. Cum ar fi detalii despre evenimente, orare de trenuri, informații de contact sau orice altceva care poate fi interpretat drept date, analizat și prezentat în mai multe moduri."
-    documentFormat:
-      text: "Documentele dumneavoastră lizibile pentru oameni includ formate care"
-      text_as_statement: "Documentele sunt publicate"
-      answers:
-        semantic:
-          text: "descriu structura semantică, cum ar fi HTML, DocBook sau Markdown"
-          help_text: "Aceste structuri etichetează structuri precum capitole, titluri și tabele, ceea ce face mai ușoară crearea automată a sumarelor, cum ar fi tabele de conținut și glosare. De asemenea, ele fac mai ușoară aplicarea de stiluri diferite pentru ca documentul să-și modifice aspectul."
-          text_as_statement: "într-un format semantic"
-        format:
-          text: "descriu informații despre formatare, precum OOXML sau PDF"
-          help_text: "Aceste formate pun accent pe aspect și se referă de exemplu, la fonturi, culori și poziționarea diferitelor elemente în cadrul paginii. Acestea sunt bune pentru consumul uman, dar nu sunt la fel de ușor de procesat automat și de schimbat stilul."
-          text_as_statement: "într-un format de afișare"
-        unsuitable:
-          text: "nu sunt destinate pentru documente, cum ar fi Excel, JSON sau CSV"
-          help_text: "Aceste formate sunt mai bune pentru date tabelare sau structurate."
-          text_as_statement: "într-un format nepotrivit pentru documente"
-    statisticalFormat:
-      text: "Datele dumneavoastră statistice includ formate care"
-      text_as_statement: "Datele statistice sunt publicate"
-      answers:
-        statistical:
-          text: "expun structura de date statistice de tip hipercub, precum <a href=\"http://sdmx.org/\">SDMX</a> sau <a href=\"\">Data Cube</a>
-                     "
-          help_text: "Observațiile individuale în hipercuburi sunt legate de o anumită măsură și un set de dimensiuni. Fiecare observație poate fi, de asemenea, asociată cu adnotări care oferă un context mai detaliat. Formate precum <a href=\"http://sdmx.org/\">SDMX</a> și <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> sunt concepute pentru a exprima această structură fundamentală."
-          text_as_statement: "într-un format de date statistice"
-        tabular:
-          text: "tratează datele statistice în format de tabel, așa cum face formatul CSV"
-          help_text: "Aceste formate aranjează datele statistice într-un tabel cu rânduri și coloane. Acest format nu oferă prea multe detalii despre hipercubul care stă la baza lor, dar este ușor de prelucrat."
-          text_as_statement: "într-un format tabelar de date"
-        format:
-          text: "se concentrează pe formatul de date tabelare, precum Excel"
-          help_text: "Foile de calcul tabelar utilizează formatarea, ca de exemplu textul italic, bold sau indentarea dintre câmpuri, pentru a descrie aspectul și structura de bază. Acest stil îi ajută pe oameni să înțeleagă datele dumneavoastră, dar este mai puțin potrivit pentru computere, din punct de vedere al procesării."
-          text_as_statement: "într-un format tip prezentare"
-        unsuitable:
-          text: "nu sunt destinate pentru datele statistice sau tabelare, precum Word sau PDF"
-          help_text: "Aceste formate nu se potrivesc datelor statistice, deoarece acestea ascund structura de bază a datelor."
-          text_as_statement: "într-un format nepotrivit pentru datele statistice"
-    geographicFormat:
-      text: "Datele dumneavoastră geografice includ formate care"
-      text_as_statement: "Datele geografice sunt publicate"
-      answers:
-        specific:
-          text: "sunt concepute pentru date geografice, cum ar fi <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> sau <a href=\"http://www.geojson.org/\">GeoJSON</a>
-                     "
-          help_text: "Aceste formate descriu puncte, linii și limite, și expun structurile din interiorul datelor, ceea ce le face mai ușor de procesat în mod automat."
-          text_as_statement: "într-un format de date geografice"
-        generic:
-          text: "păstrează datele structurate ca JSON, XML sau CSV"
-          help_text: "Orice format care stochează date structurate normale poate exprima de asemenea, date geografice, în special dacă acesta deține doar date despre puncte."
-          text_as_statement: "într-un format de date generic"
-        unsuitable:
-          text: "nu sunt concepute pentru date geografice, cum ar fi Word sau PDF"
-          help_text: "Aceste formate nu se potrivesc datelor geografice, deoarece ascund structura de bază a datelor."
-          text_as_statement: "într-un format nepotrivit pentru date geografice"
-    structuredFormat:
-      text: "Datele dumneavoastră structurate includ formate care"
-      text_as_statement: "Datele structurate sunt publicate"
-      answers:
-        suitable:
-          text: "sunt concepute pentru datele structurate, cum ar fi JSON, XML, Turtle sau CSV"
-          help_text: "Aceste formate organizează datele într-o structură de bază formată din obiecte ce au valori corespunzătoare unui set cunoscut de proprietăți. Aceste formate sunt ușor de procesat în mod automat de către calculatoare."
-          text_as_statement: "într-un format de date structurate"
-        unsuitable:
-          text: "nu sunt concepute pentru datele structurate, cum ar fi Word sau PDF"
-          help_text: "Aceste formate nu se potrivesc acestui tip de date, deoarece ascund structura lor de bază."
-          text_as_statement: "într-un format nepotrivit pentru date structurate"
-    identifiers:
-      text: "Datele dumneavoastră folosesc identificatori persistenți?"
-      text_as_statement: "Datele includ"
-      help_text: "Datele sunt, de obicei, despre lucruri reale precum școli sau drumuri sau utilizează un sistem de codificare. Dacă datele din diferite surse folosesc aceiași identificatori persistenți unici pentru a se referi la aceleași lucruri, oamenii pot combina sursele cu ușurință, pentru a crea date și mai utile. Identificatorii ar putea fi de tip GUID, DOI sau URL."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "identificatori persistenți"
-    resolvingIds:
-      text: "Se pot folosi identificatorii din datele dumneavoastră pentru a găsi informații suplimentare?"
-      text_as_statement: "Identificatorii persistenți"
-      answers:
-        "false":
-          text: "nu, identificatorii nu pot fi utilizați pentru a găsi informații suplimentare"
-          text_as_statement: ""
-        service:
-          text: "da, există un serviciu pe care oamenii îl pot utiliza pentru a obține referințele asociate cu identificatorii"
-          help_text: "Servicii online pot fi folosite pentru a le oferi oamenilor informații cu privire la identificatori ca GUID sau DOI, ce nu pot fi accesați în mod direct, așa cum sunt accesate URL-urile."
-          text_as_statement: "referențiați folosind un serviciu"
-        resolvable:
-          text: "da, identificatorii sunt URL-uri care referențiază informații"
-          help_text: "URL-urile sunt utile atât pentru oameni cât și pentru computere. Oamenii pot pune o adresă URL în browser-ul lor pentru a citi mai multe informații, precum <a href=\"http://opencorporates.com/companies/gb/08030289\">companii</a> și <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">coduri poștale</a>. Calculatoarele pot de asemenea procesa aceste informații suplimentare, folosind script-uri pentru a accesa datele care stau la baza lor."
-          text_as_statement: "oferă referințe, deoarece acestea sunt URL-uri"
-    resolutionServiceURL:
-      text: "Unde este serviciul folosit pentru a referinția identificatorii?"
-      text_as_statement: "Serviciul ce oferă referințele identificatorilor se află la"
-      help_text: "Serviciul de referențiere ar trebui să ia un identificator drept un parametru de interogare și să dea înapoi câteva informații despre ceea ce este identificat prin acesta."
-      answers:
-        a_1:
-          placeholder: "URL pentru Serviciul de Referențiere al Identificatorilor"
-    existingExternalUrls:
-      text: "Există informații de la părți terțe despre entitățile din datele dumneavoastră de pe web?"
-      help_text: "Uneori, alte persoane aflate în afara controlului dumneavoastră furnizează URL-uri pentru anumite entități despre care aveți date. De exemplu, datele dumneavoastră ar putea conține coduri poștale care fac legătura cu site-ul Ordnance Survey."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    reliableExternalUrls:
-      text: "Aceste informații de la părți terțe sunt de încredere?"
-      help_text: "În cazul în care o parte terță furnizează URL-uri publice cu privire la entități din datele dumneavoastră, probabil că au luat măsuri pentru a asigura calitatea și fiabilitatea datelor. Aceasta este o măsură a încrederii dumneavoastră în procesele pe care ei le folosesc, pentru a asigura aceste lucruri. Uitați-vă după certificatul lor pentru date deschise sau alte semne similare, pentru a vă ajuta să luați o decizie în privința lor."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    externalUrls:
-      text: "Datele dvs. folosesc acele URL-uri de la o parte terță?"
-      text_as_statement: "URL-urile către părțile terțe sunt"
-      help_text: "Ar trebui să utilizați URL-uri de la părți terțe, care se referă la informații despre lucrurile descrise de datele dumneavoastră. Acest lucru reduce duplicarea și îi ajută pe oameni să combine date din surse diferite pentru a le face mai utile."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "referențiate în aceste date"
-    provenance:
-      text: "Furnizați surse ce pot fi lizibile pentru mașini, pentru datele dumneavoastră?"
-      text_as_statement: "Proveniența acestor date este"
-      help_text: "Este vorba despre originile datelor, de modul în care datele dumneavoastră au fost create și prelucrate, înainte de a fi publicate. Se mărește încrederea în datele pe care le publicați, deoarece oamenii pot urmări modul în care acestea au fost procesate."
-      answers:
-        a_false:
-          text: "nu"
-          text_as_statement: ""
-        a_true:
-          text: "da"
-          text_as_statement: "lizibile pentru mașini"
-    digitalCertificate:
-      text: "Unde descrieți modul în care oamenii pot verifica dacă datele pe care le primesc vin de la dumneavoastră?"
-      text_as_statement: "Aceste date pot fi verificate cu ajutorul"
-      help_text: "Dacă furnizați date importante oamenilor, ei ar trebui să poată verifica dacă ceea ce primesc este la fel ca ceea ce ați publicat. De exemplu, puteți semna digital datele pe care le publicați, astfel încât oamenii să-și dea seama dacă acestea au fost modificate."
-      answers:
-        a_1:
-          placeholder: "URL pentru Procesul de Verificare"
-    # Informații sociale
-    documentationMetadata:
-      text: "Documentația datelor dumneavoastră include date lizibile pentru mașini pentru:"
-      text_as_statement: "Documentația include date lizibile pentru mașini pentru"
-      answers:
-        title:
-          text: "titlu"
-          text_as_statement: "titlu"
-        "description":
-          text: "descriere"
-          text_as_statement: "descriere"
-        issued:
-          text: "data de publicare"
-          text_as_statement: "data de publicare"
-        modified:
-          text: "data modificării"
-          text_as_statement: "data modificării"
-        accrualPeriodicity:
-          text: "frecvența versiunilor publicate"
-          text_as_statement: "frecvența publicării"
-        identifier:
-          text: "identificator"
-          text_as_statement: "identificator"
-        landingPage:
-          text: "pagina de primire"
-          text_as_statement: "pagina de primire"
-        language:
-          text: "limba"
-          text_as_statement: "limba"
-        publisher:
-          text: "distribuitor"
-          text_as_statement: "distribuitor"
-        spatial:
-          text: "acoperire spațială/geografică"
-          text_as_statement: "acoperire spațială/geografică"
-        temporal:
-          text: "acoperire temporală"
-          text_as_statement: "acoperire temporală"
-        theme:
-          text: "subiect(e)"
-          text_as_statement: "subiect(e)"
-        keyword:
-          text: "cuvânt(e) cheie sau tag(-uri)"
-          text_as_statement: "cuvânt(e) cheie sau tag(-uri)"
-        "distribution":
-          text: "distribuție(ii)"
-          text_as_statement: "distribuție(ii)"
-    distributionMetadata:
-      text: "Documentația include metadate lizibile pentru mașini, pentru fiecare distribuție, despre:"
-      text_as_statement: "Documentația cu privire la fiecare distribuție include date lizibile pentru mașini pentru"
-      answers:
-        title:
-          text: "titlu"
-          text_as_statement: "titlu"
-        "description":
-          text: "descriere"
-          text_as_statement: "descriere"
-        issued:
-          text: "data de publicare"
-          text_as_statement: "data de publicare"
-        modified:
-          text: "data modificării"
-          text_as_statement: "data modificării"
-        rights:
-          text: "declarația drepturilor"
-          text_as_statement: "declarația drepturilor"
-        accessURL:
-          text: "URL pentru a accesa datele"
-          help_text: "Aceste metadate ar trebui utilizate atunci când datele nu sunt disponibile pentru descărcare, precum un API."
-          text_as_statement: "un URL pentru a accesa datele"
-        downloadURL:
-          text: "URL pentru a descărca setul de date"
-          text_as_statement: "un URL pentru a descărca setul de date"
-        byteSize:
-          text: "mărimea în byți"
-          text_as_statement: "mărimea în byți"
-        mediaType:
-          text: "formatul de download"
-          text_as_statement: "formatul de download"
-    technicalDocumentation:
-      text: "Unde este documentația tehnică a datelor?"
-      text_as_statement: "Documentația tehnică a datelor se află la"
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentația Tehnică"
-    vocabulary:
-      text: "Formatele de date utilizează vocabulare sau scheme?"
-      help_text: "Formate, cum ar fi CSV, JSON, XML sau Turtle folosesc vocabulare personalizate sau scheme, care spun ce coloane sau proprietăți conțin datele."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    schemaDocumentationUrl:
-      text: "Unde se află documentația despre vocabularele de date?"
-      text_as_statement: "Vocabularele folosite de aceste date sunt documentate la"
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentația Schemei"
-    codelists:
-      text: "Există coduri utilizate în aceste date?"
-      help_text: "Dacă datele dvs. utilizează coduri pentru a se referi la lucruri cum ar fi zone geografice, categorii de cheltuieli sau boli, acestea trebuie să fie explicate oamenilor."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    codelistDocumentationUrl:
-      text: "Unde sunt documentate codurile din datele dumneavoastră?"
-      text_as_statement: "Codurile din aceste date sunt documentate la"
-      answers:
-        a_1:
-          placeholder: "URL pentru Documentația Referitoare la Lista de Coduri"
-    contactUrl:
-      text: "Unde pot oamenii afla cum să contacteze pe cineva cu întrebări despre aceste date?"
-      text_as_statement: "Aflați cum să contactați pe cineva cu privire la aceste date la"
-      help_text: "Furnizați un URL pentru o pagină care descrie modul în care oamenii pot contacta pe cineva în cazul în care au întrebări despre date."
-      answers:
-        a_1:
-          placeholder: "Documentația Contactului"
-    improvementsContact:
-      text: "Unde pot oamenii afla cum să îmbunătățească modul în care sunt publicate datele dumneavoastră?"
-      text_as_statement: "Aflați cum să sugerați îmbunătățiri în privința publicării la"
-      answers:
-        a_1:
-          placeholder: "URL pentru Sugestii de Îmbunătățire"
-    dataProtectionUrl:
-      text: "Unde pot oamenii afla cum să contacteze pe cineva cu întrebări despre confidențialitate?"
-      text_as_statement: "Aflați unde să trimiteți întrebări cu privire la confidențialitate la"
-      answers:
-        a_1:
-          placeholder: "Documentație despre Confidențialitatea Contactului"
-    socialMedia:
-      text: "Utilizați mediile de socializare pentru a vă conecta cu persoane care utilizează datele dumneavoastră?"
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    account:
-      text: "Pe ce conturi pentru mediile de socializare vă pot contacta oamenii?"
-      text_as_statement: "Contactați curatorul prin intermediul acestor conturi pentru mediile de socializare"
-      help_text: "Furnizați URL-uri către conturile dumneavoastră pentru mediile de socializare, cum ar fi pagina de profil Twitter sau Facebook."
-      answers:
-        a_1:
-          placeholder: "URL pentru Mediile de Socializare"
-    forum:
-      text: "Unde pot oamenii discuta despre acest set de date?"
-      text_as_statement: "Discutați aceste date la"
-      help_text: "Furnizați un URL pentru forum sau lista de discuții, unde oamenii pot vorbi despre datele dumneavoastră."
-      answers:
-        a_1:
-          placeholder: "URL pentru Forum sau Listă de Discuții"
-    correctionReporting:
-      text: "Unde pot oamenii să afle cum să solicite corecții ale datelor dumneavoastră?"
-      text_as_statement: "Aflați cum să solicitați corecții de date la"
-      help_text: "Furnizați un URL unde oamenii pot raporta erori din cadrul datelor."
-      answers:
-        a_1:
-          placeholder: "URL pentru Instrucțiunile de Corecție"
-    correctionDiscovery:
-      text: "Unde pot oamenii afla cum să primească notificări despre corecțiile datelor dumneavoastră?"
-      text_as_statement: "Aflați cum să primiți notificări despre corecțiile datelor la"
-      help_text: "Furnizați un URL unde descrieți modul în care distribuiți notificările cu privire la corecții."
-      answers:
-        a_1:
-          placeholder: "URL pentru Notificări de Corectare"
-    engagementTeam:
-      text: "Aveți pe cineva care construiește în mod activ o comunitate în jurul acestor date?"
-      help_text: "O echipa de implicare a comunității va face acest lucru prin intermediul mediilor de socializare, blogging-ulului, și va aranja hackdays sau concursuri, pentru a încuraja oamenii să folosească datele dumneavoastră."
-      answers:
-        a_false:
-          text: "nu"
-        a_true:
-          text: "da"
-    engagementTeamUrl:
-      text: "Unde se află pagina lor de start?"
-      text_as_statement: "Implicarea comunității se face prin"
-      answers:
-        a_1:
-          placeholder: "URL pentru Pagina de Start a Echipei de Implicare a Comunității"
-    libraries:
-      text: "Unde listați instrumentele ce pot fi folosite pentru a lucra cu datele dumneavoastră?"
-      text_as_statement: "Instrumente pentru a ajuta să folosiți aceste date sunt listate la"
-      help_text: "Furnizați un URL care afișează instrumentele pe care le știți sau le recomandați oamenilor pentru a lucra cu datele dumneavoastră."
-      answers:
-        a_1:
-          placeholder: "URL pentru Instrumente"
-  labels:
-    findability:
-      text: "Găsirea ușoară"
-      help_text: "cum ajutați oamenii să vă găsească datele"
-    accuracy:
-      text: "Acuratețe"
-      help_text: "cum vă păstrați datele la zi"
-    quality:
-      text: "Calitate"
-      help_text: "cât de mult se pot baza oamenii pe datele dumneavoastră"
-    guarantees:
-      text: "Garanții"
-      help_text: "cât de mult pot oamenii să depindă de disponibilitatea datelor dumneavoastră"
-    locations:
-      text: "Locații"
-      help_text: "Cum pot oamenii să acceseze datele dumneavoastră"
-    format:
-      text: "Formate"
-      help_text: "modul în care oamenii pot lucra cu datele dvs."
-    trust:
-      text: "Încredere"
-      help_text: "Cât de multă încredere pot oamenii să aibă în datele dvs."
-    documentation:
-      text: "Documentație"
-      help_text: "cum îi ajutați pe oameni să înțeleagă contextul și conținutul datelor"
-    support:
-      text: "Asisteță"
-      help_text: "cum comunicați cu persoanele care utilizează datele dumneavoastră"
-    services:
-      text: "Servicii"
-      help_text: "cum dați oamenilor acces la instrumentele de care au nevoie pentru a prelucra datele dvs."
-  # Informații generale Requirements
-    pilot_1:
-      text: "Trebuie să aveți o <strong>pagină web care oferă documentație</strong> despre datele deschise publicate, astfel încât oamenii să poată înțelege contextul, conținutul și utilitatea lor."
-    basic_1:
-      text: "Trebuie să aveți o <strong>pagină web care oferă documentație</strong> și acces la datele deschise publicate, astfel încât oamenii să le poată folosi."
-  # Informații Practice Requirements
-    standard_1:
-      text: "Ar trebui <strong>să vă asigurați că oamenii pot găsi datele direct din site-ul dvs. principal</strong>, astfel încât să poată fi găsite mai ușor."
-    standard_2:
-      text: "Ar trebuie <strong>să vă asigurați că oamenii pot găsi datele dvs. atunci când le caută </strong>în locații care listează date."
-    standard_3:
-      text: "Ar trebui <strong>să faceți referință la date în publicațiile proprii</strong>, pentru ca oamenii să afle de disponibilitatea și contextul lor."
-    pilot_2:
-      text: "Ar trebui <strong>să puneți momentul exact al publicării datelor dumneavoastră atunci când le publicați</strong>, astfel încât oamenii să știe perioada de timp la care se referă și data expirării."
-    standard_4:
-      text: "Ar trebui <strong>să reactualizați datele sensibile la trecerea timpului</strong>, astfel încât să nu devină învechite."
-    exemplar_1:
-      text: "Ar trebui <strong>să asigurați un flux de modificări la datele dvs.</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    pilot_3:
-      text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare lună</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    standard_5:
-      text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare săptămână</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    exemplar_2:
-      text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare zi</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    pilot_4:
-      text: "Ar trebui <strong>să aveți un decalaj rezonabil între momentul creării și momentul publicării unui set de date</strong>, care ar trebui să fie mai mic decât diferența dintre versiunile publicate, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    standard_6:
-      text: "Ar trebui <strong>să aveți un decalaj scurt între momentul creării și momentul publicării unui set de date</strong>, care ar trebui să fie mai mic decât jumătate din decalajul dintre versiunile publicate, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    exemplar_3:
-      text: "Ar trebui <strong>să aveți un decalaj minim sau inexistent între momentul creării și momentul publicării unui set de date</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
-    standard_7:
-      text: "Ar trebui <strong>să lăsați oamenii să descarce întregul set de date</strong>, astfel încât să poată face o analiză mai completă și exactă, cu toate datele."
-    pilot_5:
-      text: "Ar trebui <strong>să creați un nou dump în fiecare lună</strong>, astfel încât oamenii să aibă cele mai recente date."
-    standard_8:
-      text: "Ar trebui <strong>să creați un nou dump în termen de o săptămână de la orice modificare</strong>, astfel încât oamenii să aibă mai puțin timp de așteptat pentru cele mai recente date."
-    exemplar_4:
-      text: "Ar trebui <strong>să creați un nou dump într-o zi de la orice modificare</strong>, astfel încât oamenilor să le fie ușor să obțină cele mai recente date."
-    standard_9:
-      text: "Ar trebuie <strong>să corectați datele atunci când oamenii raportează erori</strong> așa încât toată lumea beneficiază de aceste îmbunătățiri în acuratețe."
-    standard_10:
-      text: "Ar trebui <strong>să documentați orice probleme cunoscute referitoare la calitatea datelor</strong>, astfel încât oamenii să poată decide cât de multă încredere să aibă în acestea."
-    exemplar_5:
-      text: "Ar trebui <strong>să vă documentați procesul de control al calității</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dumneavoastră."
-    standard_11:
-      text: "Ar trebui <strong>să faceți o copie de rezervă în afara sitului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident."
-    standard_12:
-      text: "Ar trebuii <strong>să descrieți ce garanții aveți referitor la disponibilitatea serviciilor</strong>, astfel încât oamenii să știe cât de mult se pot baza pe ele."
-    exemplar_6:
-      text: "Ar trebui <strong>să aveți o pagină cu statusul serviciului</strong> care să le spună oamenilor despre starea curentă a serviciului."
-    pilot_6:
-      text: "Ar trebui <strong>să oferiți garanție că datele vor fi disponibile în această formă pentru cel puțin un an</strong>, astfel încât oamenii să poată decide cât de mult să se bazeze pe datele dvs."
-    standard_13:
-      text: "Ar trebuie <strong>să garantați că datele vor fi disponibile în această formă pe termen mediu</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dvs."
-    exemplar_7:
-      text: "Ar trebuie <strong>să garantați că datele vor fi disponibile în această formă pe termen lung</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dvs."
-  # Informații tehnice Requirements
-    basic_2:
-      text: "Trebuie <strong>să oferiți fie un URL pentru datele dvs. sau un URL pentru documentația</strong> despre acestea, astfel încât oamenii să le poată găsi."
-    pilot_7:
-      text: "Ar trebui să <strong>să aveți un URL care să facă legătura directă cu datele în sine</strong>, astfel încât oamenii să le poată accesa cu ușurință."
-    standard_14:
-      text: "Ar trebui <strong>să aveți o singură adresă URL persistentă pentru a descărca versiunea curentă a datelor</strong>, astfel încât oamenii să le poată accesa cu ușurință."
-    pilot_8:
-      text: "Ar trebui <strong>să utilizați un model consecvent pentru URL-urile diferitelor versiuni</strong>, astfel încât oamenii să le poată descărca automat."
-    standard_15:
-      text: "Ar trebui <strong>să aveți un document sau un feed, cu o listă de versiuni disponibile</strong>, astfel încât oamenii să poată crea script-uri pentru a le descărca pe toate."
-    basic_3:
-      text: "Trebuie <strong>să oferiți acces la versiuni printr-un URL</strong>, care oferă versiunea curentă, o serie de URL-uri pentru versiunile anterioare sau prin intermediul unei pagini de documentație astfel încât oamenii să le poată găsi."
-    basic_4:
-      text: "Trebuie <strong>să furnizați fie un URL pentru locația API-ului sau o adresă URL pentru documentația sa</strong>, astfel încât oamenii să îl poată găsi."
-    standard_16:
-      text: "Ar trebui <strong>să aveți un document de descriere a serviciului sau un punct unic de acces pentru API-ul dumneavoastră</strong>, astfel încât oamenii să îl poată accesa."
-    standard_17:
-      text: "Ar trebui <strong>să aveți un singur URL consecvent pentru a descărca copia datelor curente în format de export</strong>, astfel încât oamenii să le poată găsi."
-    exemplar_8:
-      text: "Ar trebui <strong>să utilizați un tipar consecvent pentru URL-urile către copiile datelor curente în format de export</strong>, astfel încât oamenii să le poată descărca în mod automat pe fiecare."
-    exemplar_9:
-      text: "Ar trebui <strong>să aveți un document sau un flux de informație (feed) cu o listă a copiilor de bazele de date disponibile în format de export</strong>, astfel încât oamenii pot crea script-uri pentru a le descărca"
-    pilot_9:
-      text: "Ar trebui <strong>să furnizați datele într-un format lizibil pentru mașini</strong>, pentru a fi ușor de prelucrat."
-    standard_18:
-      text: "Ar trebui <strong>să furnizați datele într-un format standard deschis</strong>, astfel încât oamenii să poată utiliza instrumente disponibile la scară largă, pentru a le procesa mai ușor."
-    standard_19:
-      text: "Ar trebui <strong>să publicați documente într-un format care expune structura semantică</strong>, astfel încât oamenii să le poată afișa în stiluri diferite."
-    pilot_10:
-      text: "Ar trebui <strong>să publicați documente într-un format special conceput pentru acestea</strong>, astfel încât acestea să fie ușor de prelucrat."
-    exemplar_10:
-      text: "Ar trebui <strong>să publicați datele statistice într-un format care expune dimensiunile și măsurile</strong>, pentru a fi ușor de analizat."
-    standard_20:
-      text: "Ar trebuit <strong>să publicați datele tabelare într-un format care expune tabelele de date</strong>, pentru a fi ușor de analizat."
-    pilot_11:
-      text: "Ar trebui <strong>să publicați datele tabelare într-un format conceput în acest scop</strong>, pentru a fi ușor de prelucrat."
-    exemplar_11:
-      text: "Ar trebui <strong>să publicați datele geografice într-un format proiectat în acest scop</strong>, astfel încât oamenii să poată utiliza instrumente disponibile pe scară largă, pentru a le procesa."
-    pilot_12:
-      text: "Ar trebui <strong>să publicați datele geografice ca date structurate</strong>, pentru a fi ușor de prelucrat."
-    pilot_13:
-      text: "Ar trebui <strong>să publicați date structurate într-un format proiectat în acest scop</strong>, pentru a fi mai ușor de prelucrat."
-    standard_21:
-      text: "Ar trebui <strong>să folosiți identificatori pentru lucrurile din datele dumneavoastră</strong>, pentru a fi mai ușor legate de alte date despre aceleași lucruri."
-    standard_22:
-      text: "Ar trebui <strong>să oferiți un serviciu care să ofere referințe despre identificatorii pe care îi utilizați</strong>, pentru ca oamenii să poată găsi informații suplimentare despre ei."
-    exemplar_12:
-      text: "Ar trebui <strong>să aveți link către o pagină web cu informații despre fiecare lucru prezent în datele dumneavoastră</strong>, pentru ca oamenii să poată găsi și distribui cu ușurință aceste informații."
-    standard_23:
-      text: "Ar trebui <strong>să aveți un URL prin care identificatorii pot fi referențiați</strong>, pentru a se putea găsi mai multe informații despre aceștia."
-    exemplar_13:
-      text: "Ar trebui <strong>să utilizați URL-uri către informațiile terților din datele dvs.</strong>, astfel încât să fie ușor de combinat cu alte date care utilizează aceste URL-uri."
-    exemplar_14:
-      text: "Ar trebui <strong>să furnizați o cale de proveniență a datelor, lizibilă pentru mașini</strong>, astfel încât oamenii să poată urmări modul în care acestea au fost procesate."
-    exemplar_15:
-      text: "Ar trebui <strong>să descrieți modul în care oamenii pot verifica dacă datele pe care le primesc sunt la fel cu cele publicate</strong>, astfel încât aceștia să poată avea încredere în ele."
-  # Informații sociale Requirements
-    standard_24:
-      text: "Ar trebui <strong>să includeți în documentație un titlu al datelor lizibil pentru mașini</strong>, pentru ca oamenii să știe cum să se refere la ele."
-    standard_25:
-      text: "Ar trebui <strong>să includeți în documentație o descriere a datelor lizibilă pentru mașini</strong>, pentru ca oamenii să știe ce conține."
-    standard_26:
-      text: "Ar trebui <strong>să includeți în documentație data publicării, lizibilă pentru mașini</strong>, pentru ca oamenii să știe cât de actuale sunt."
-    standard_27:
-      text: "Ar trebui <strong>să includeți în documentație o dată pentru ultima modificare, lizibilă pentru mașini</strong>, astfel încât oamenii să știe că au cele mai recente date."
-    standard_28:
-      text: "Ar trebui <strong>să furnizați metadate lizibile pentru mașini, cu privire la frecvența de publicare a versiunilor</strong>, pentru ca oamenii să știe cât de des le actualizați."
-    standard_29:
-      text: "Ar trebui <strong>să includeți un URL canonic pentru datele din documentația lizibilă pentru mașini</strong>, pentru ca oamenii să știe cum să-l acceseze în mod consecvent."
-    standard_30:
-      text: "Ar trebui <strong>să includeți un URL canonic și pentru documentația lizibilă pentru mașini</strong>, pentru ca oamenii să știe cum să o acceseze în mod consecvent."
-    standard_31:
-      text: "Ar trebui <strong>să includeți limba datelor în documentația lizibilă pentru mașini</strong>, pentru ca oamenii care o caută să știe dacă o pot înțelege."
-    standard_32:
-      text: "Ar trebui <strong>să indicați distribuitorul datelor în documentația lizibilă pentru mașini</strong> pentru ca oamenii să poată decide cât de mult să aibă încredere în datele dumneavoastră."
-    standard_33:
-      text: "Ar trebui <strong>să includeți acoperirea geografică în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă unde anume sunt aplicabile datele."
-    standard_34:
-      text: "Ar trebui <strong>să includeți perioada de timp în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă când anume sunt aplicabile datele."
-    standard_35:
-      text: "Ar trebui <strong>să includeți subiectul datelor, în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă în mare, despre ce anume sunt datele."
-    standard_36:
-      text: "Ar trebui <strong>să includeți cuvinte cheie sau tag-uri în documentația lizibilă pentru mașini</strong> pentru a ajuta oamenii să caute mai eficient prin datele dumneavoastră."
-    standard_37:
-      text: "Ar trebui <strong>să includeți în documentație titluri lizibile pentru mașini</strong>, astfel încât oamenii să știe cum să se refere la fiecare distribuție de date."
-    standard_38:
-      text: "Ar trebui <strong>să includeți în documentație descrieri lizibile pentru mașini</strong>, astfel oamenii să știe ce conține fiecare distribuție de date."
-    standard_39:
-      text: "Ar trebui <strong>să includeți în documentație datele de publicare lizibile pentru mașini</strong>, astfel încât oamenii să știe cât de actuală este fiecare distribuție."
-    standard_40:
-      text: "Ar trebui <strong>să includeți în documentație ultimele date de modificare, lizibile pentru mașini</strong>, astfel încât oamenii să știe dacă au o copie la zi după o distribuție de date."
-    standard_41:
-      text: "Ar trebui <strong>să includeți în documentație un link lizibil pentru mașini, către declarația drepturilor aplicabile</strong>, astfel încât oamenii să poată afla ce pot face cu o distribuție de date."
-    pilot_14:
-      text: "Ar trebui <strong>să furnizați documentația tehnică pentru date</strong>, astfel încât oamenii să înțeleagă cum să le folosească."
-    standard_42:
-      text: "Ar trebui <strong>să documentați orice vocabular folosiți în datele dvs.</strong>, astfel încât oamenii să știe cum să-l interpreteze."
-    standard_43:
-      text: "Ar trebui <strong>să documentați codurile utilizate în cadrul datelor dvs.</strong>, astfel încât oamenii să știe cum să le interpreteze."
-    pilot_15:
-      text: "Ar trebui <strong>să furnizați informații de contact pentru ca persoanele să poată trimite întrebări</strong> despre datele dvs."
-    pilot_16:
-      text: "Ar trebui <strong>să furnizați instrucțiuni despre cum să sugereze îmbunătățiri</strong> referitor la modul în care publicați date, astfel încât să puteți descoperi ceea ce oamenii au nevoie."
-    pilot_17:
-      text: "Ar trebui <strong>să furnizați informații de contact pentru ca oamenii să trimită întrebări cu privire la confidențialitate</strong> și divulgarea de detalii personale."
-    standard_44:
-      text: "Ar trebui <strong>să folosiți mediile de socializare pentru a ajunge la oamenii care folosesc datele dumneavoastră</strong> și pentru a descoperi modul în care sunt utilizate acestea."
-    standard_45:
-      text: "Ar trebui <strong>să le spuneți oamenilor unde pot discuta despre datele dvs.</strong> și unde își pot oferi asistență unul altuia."
-    standard_46:
-      text: "Ar trebui <strong>să oferiți instrucțiuni cu privire la modul în care oamenii pot raporta erori</strong> cu privire la datele dumneavoastră."
-    standard_47:
-      text: "Ar trebui <strong>să furnizați o listă de adrese sau flux de informație (feed), cu actualizări</strong> pe care oamenii să îl utilizeze pentru a păstra copiile lor de date la zi."
-    exemplar_16:
-      text: "Ar trebui <strong>să construiți o comunitate de oameni în jurul datelor dumneavoastră</strong>, pentru a încuraja utilizarea lor pe scară largă."
-    exemplar_17:
-      text: "Ar trebui <strong>să furnizați o listă de librării de software și alte instrumente ușor disponibile</strong>, astfel încât oamenii să poată ajunge rapid să lucreze cu datele dumneavoastră."
+  surveyor:
+    survey_sections:
+      general:
+        text: "Informații generale"
+      practical:
+        text: "Informații Practice"
+        help_text: "Găsire ușoară, acuratețe, calitate și garanție"
+      technical:
+        text: "Informații tehnice"
+        help_text: "Locații, formate și încredere"
+      social:
+        text: "Informații sociale"
+        help_text: "Documentație, suport și servicii"
+    questions:
+      dataTitle:
+        text: "Cum se numesc aceste date?"
+        help_text: "Oamenii pot vedea numele datelor dumneavoastră deschise într-o listă cu nume similare, așa că încercați să faceți titlul cât mai lipsit de ambiguitate și cât mai descriptiv posibil, în limita numărului impus de caractere, astfel încât oricine să identifice rapid ceea ce este unic despre ele."
+        answers:
+          a_1:
+            placeholder: "Titlul datelor"
+      documentationUrl:
+        text: "Unde sunt descrise?"
+        text_as_statement: "Aceste date sunt descrise la"
+        help_text: "Furnizați un URL cu descrierea detaliată a datelor, pentru ca oamenii să poată citi mai multe despre conținutul acestora. Acesta poate duce la o pagină dintr-un catalog mai mare, cum ar fi data.gov.ro."
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentație"
+      publisher:
+        text: "Cine publică aceste date?"
+        text_as_statement: "Aceste date sunt publicate de"
+        help_text: "Dați numele organizației care publică aceste date. Este, probabil, organizația pentru care lucrați, în cazul în care nu faceți acest lucru în numele altcuiva."
+        answers:
+          a_1:
+            placeholder: "Distribuitorul de Date"
+      publisherUrl:
+        text: "Care este site-ul pe care sunt publicate datele?"
+        text_as_statement: "Datele sunt publicate pe"
+        help_text: "Furnizați un URL al unui site web. Acest lucru ne ajută să grupăm date de la aceeași organizație, chiar dacă oamenii dau nume diferite."
+        answers:
+          a_1:
+            placeholder: "URL pentru Distribuitor"
+      releaseType:
+        text: "Ce fel de versiune este aceasta?"
+        answers:
+          oneoff:
+            text: "o versiune unică a unui singur set de date"
+            help_text: "Aceasta este formată dintr-un singur fișier și nu aveți de gând în acest moment să publicați fișiere similare și în viitor."
+          collection:
+            text: "o versiune unică a unui grup de seturi asociate de date"
+            help_text: "Aceasta este o colecție de fișiere asociate ce se referă la același set de date și nu aveți de gând în acest moment să publicați colecții similare și în viitor."
+          series:
+            text: "o versiune în curs de desfășurare, a unei serii de seturi de date asociate"
+            help_text: "Aceasta este o succesiune de seturi de date cu reactualizări periodice planificate pentru viitor."
+          service:
+            text: "un serviciu sau un API pentru accesarea datelor deschise"
+            help_text: "Acesta este un serviciu web live, care expune datele dvs. programatorilor, printr-o interfață către care pot trimite comenzi."
+      onWebsite:
+        text: "Există un link la datele dvs. de pe site-ul dvs. principal?"
+        help_text: "Datele pot fi găsite mai ușor dacă există un link către ele pe site-ul dvs. principal."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      webpage:
+        text: "Care pagină din site-ul dvs. conține link către date?"
+        text_as_statement: "Site-ul conține link către date la"
+        help_text: "Puneți un URL pe site-ul principal, care să includă un link la aceste date."
+        answers:
+          a_1:
+            placeholder: "URL pentru Pagina Web."
+      listed:
+        text: "Datele dumneavoastră sunt listate într-o colecție?"
+        help_text: "Date sunt mai ușor de găsit atunci când sunt în cataloage de date relevante cum ar fi sectorul public, academic sau de sănătate, sau atunci când sunt găsite în rezultatele unei căutări relevante."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      listing:
+        text: "Unde sunt listate?"
+        text_as_statement: "Datele apar în această colecție"
+        help_text: "Furnizați un URL pentru locația în care aceste date sunt listate într-o colecție relevantă. De exemplu, data.gov.ro (daca sunt date din sectorul public al României), hub.data.ac.uk (daca sunt date din mediul academic, pentru Marea Britanie) sau un URL pentru rezultatele unui motor de căutare."
+        answers:
+          a_1:
+            placeholder: "URL pentru Listare"
+      referenced:
+        text: "Există referință la aceste date în publicațiile proprii?"
+        help_text: "Când faceți referință la date în propriile publicații precum rapoarte, prezentări sau posturi pe blog, le oferiți context și îi ajutați pe oamenii să le găsească și să le înțeleagă mai bine."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      reference:
+        text: "Unde există referința către datele dumneavoastră?"
+        text_as_statement: "Aceste date au referința la"
+        help_text: "Furnizați un URL la un document care citează sau trimite către aceste date."
+        answers:
+          a_1:
+            placeholder: "URL pentru Referință"
+      serviceType:
+        text: "Se schimbă datele din spatele API-ului?"
+        text_as_statement: "Datele din spatele API-ului"
+        answers:
+          static:
+            text: "nu, API-ul oferă acces la date ce nu se vor schimba"
+            help_text: "Unele API-uri fac accesarea unui set de date neschimbătoare mai ușoară, mai ales atunci când acestea sunt numeroase."
+            text_as_statement: "nu se vor schimba"
+          changing:
+            text: "da, API-ul oferă acces la date în curs de schimbare"
+            help_text: "Unele API-uri oferă acces instantaneu la date curente și în continuă schimbare"
+            text_as_statement: "se vor schimba"
+      timeSensitive:
+        text: "Datele dumneavoastră vor ieși din uz?"
+        text_as_statement: "Acuratețea sau relevanța acestor date va"
+        answers:
+          'true':
+            text: "da, aceste date vor ieși din uz"
+            help_text: "De exemplu, un set de date cu stațiile autobuzelor va ieși din uz în timp, fiindcă unele vor fi mutate sau altele noi create."
+            text_as_statement: "ieși din uz"
+          timestamped:
+            text: "da, aceste date vor ieși din uz în timp, dar ele sunt notate cu momentul exact al publicării (time stamped)."
+            help_text: "De exemplu, statistica populației include de obicei momentul exact al publicării pentru a indica momentul în care statisticile au fost relevante."
+            text_as_statement: "ieși din uz, dar ele sunt notate cu momentul exact al publicării (time stamped)."
+          'false':
+            text: "nu, aceste date nu conțin informații sensibile la trecerea timpului"
+            help_text: "De exemplu, rezultatele unui experiment nu vor ieși din uz, deoarece datele rapoartează cu exactitate rezultatele observate."
+            text_as_statement: "nu va ieși din uz"
+      frequentChanges:
+        text: "Această modificare a datelor are loc cel puțin zilnic?"
+        text_as_statement: "Aceste date se modifică"
+        help_text: "Spuneți-le oamenilor în cazul în care schimbările datelor au loc aproape zilnic. Atunci când datele se schimbă frecvent, acestea ies din uz mai rapid, astfel încât oamenii trebuie să știe dacă și dumneavoastră le actualizați frecvent și rapid."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "cel puțin zilnic"
+      seriesType:
+        text: "Ce tip de serie de seturi de date este aceasta?"
+        text_as_statement: "Aceste date sunt o serie de"
+        answers:
+          dumps:
+            text: "copii frecvente ale unei baze complete de date"
+            help_text: "Alegeți dacă publicați copii noi și actualizate ale bazei dumneavoastră complete de date, în mod regulat. Când creați o copie a unei baze de date în format de export (dump), este util ca oamenii să aibă acces la fluxul de schimbări, pentru a-și putea ține copiile la curent."
+            text_as_statement: "copies of a database"
+          aggregate:
+            text: "agregate frecvente de date în schimbare"
+            help_text: "Alegeți dacă veți crea noi seturi de date în mod regulat. S-ar putea să faceți acest lucru dacă datele nu pot fi publicate ca date deschise sau dacă publicați doar datele noi de la ultima publicare."
+            text_as_statement: "agregate de date în schimbare"
+      changeFeed:
+        text: "Este disponibil vreun flux de schimbări?"
+        text_as_statement: "Un flux de modificări ale acestor date"
+        help_text: "Spuneți-le oamenilor, dacă oferiți fluxul de modificări care afectează aceste date, cum ar fi înregistrări noi sau modificări ale înregistrărilor existente. Fluxul ar putea fi în format RSS, Atom sau alt format."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "este disponibil"
+      frequentSeriesPublication:
+        text: "Cât de des creați o nouă versiune?"
+        text_as_statement: "Noi versiuni ale acestor date sunt făcute"
+        help_text: "Aceasta determină cât de ieșite din uz devin datele înainte ca oamenii să poată obține o reactualizare."
+        answers:
+          rarely:
+            text: "mai puțin de o dată pe lună"
+            text_as_statement: "mai puțin de o dată pe lună"
+          monthly:
+            text: "cel puțin o dată pe lună"
+            text_as_statement: "cel puțin o dată pe lună"
+          weekly:
+            text: "cel puțin o dată pe săptămână"
+            text_as_statement: "cel puțin o dată pe săptămână"
+          daily:
+            text: "cel puțin o dată pe zi"
+            text_as_statement: "cel puțin o dată pe zi"
+      seriesPublicationDelay:
+        text: "Cât timp trece de la momentul în care creați un set de date până la momentul în care publicați acel set?"
+        text_as_statement: "Decalajul dintre creația și publicarea acestor date este"
+        answers:
+          extreme:
+            text: "mai mult decât perioada de timp dintre versiunile publicate"
+            help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru dacă aveți nevoie de mai mult de o zi pentru a-l publica."
+            text_as_statement: "mai mult decât perioada de timp dintre versiunile publicate"
+          reasonable:
+            text: "aproximativ aceeași cu perioada de timp dintre versiunile publicate"
+            help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru dacă aveți nevoie de aproximativ o zi pentru a-l publica."
+            text_as_statement: "aproximativ aceeași cu perioada de timp dintre versiunile publicate"
+          good:
+            text: "mai puțin de jumătate din decalajul dintre versiunile publicate"
+            help_text: "De exemplu, dacă dumneavoastră creați o nouă versiune a setului de date în fiecare zi, alegeți acest lucru, dacă este nevoie de mai puțin de douăsprezece ore pentru ca acesta să fie publicată."
+            text_as_statement: "mai puțin de jumătate din decalajul dintre versiunile publicate"
+          minimal:
+            text: "decalajul este minim sau nu există"
+            help_text: "Alegeți această opțiune dacă publicați în câteva secunde sau câteva minute."
+            text_as_statement: "minim"
+      provideDumps:
+        text: "Publicați și dumps (copii ale setului de date în format pentru export) ale acestui set de date?"
+        text_as_statement: "Curatorul publică"
+        help_text: "Un dump este un extras conținând întregul set de date într-un fișier pe care oamenii îl pot descărca. Acesta permite oamenilor să facă analize diferite de cele prin acces API."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "copii ale datelor în format pentru export"
+      dumpFrequency:
+        text: "Cât de des creați un dump al bazelor de date?"
+        text_as_statement: "Dumps ale bazelor de date sunt create"
+        help_text: "Acces mai rapid la extracte frecvente ale întregului set de date înseamnă că oamenii pot începe mai rapid lucrul cu cele mai recente informații."
+        answers:
+          rarely:
+            text: "mai rar de o dată pe lună"
+            text_as_statement: "mai rar de o dată pe lună"
+          monthly:
+            text: "cel puțin o dată pe lună"
+            text_as_statement: "cel puțin o dată pe lună"
+          weekly:
+            text: "în termen de o săptămână de la orice schimbare"
+            text_as_statement: "în termen de o săptămână de la orice schimbare"
+          daily:
+            text: "într-o zi de la orice schimbare"
+            text_as_statement: "într-o zi de la orice schimbare"
+      corrected:
+        text: "Vor fi corectate datele dumneavoastră în cazul în care conțin erori?"
+        text_as_statement: "Orice erori din aceste date sunt"
+        help_text: "Este o bună practică să remediați erorile din date, mai ales daca le folosiți și dumneavoastră. Oamenii ar trebui să știe când faceți corecții."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "corectate"
+      qualityUrl:
+        text: "Unde documentați problemele legate de calitatea acestor date?"
+        text_as_statement: "Calitatea datelor este documentată la"
+        help_text: "Furnizați un URL pentru locul în care oamenii pot afla despre calitatea datelor. Oamenii acceptă că erorile sunt inevitabile, de la defecțiuni de echipament până la greșeli care se întâmplă în migrații dintre sisteme. Ar trebui să fiți deschis cu privire la calitatea datelor, astfel încât oamenii să poată știi cât de mult să se bazeze pe ele."
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentarea Calității Datelor"
+      qualityControlUrl:
+        text: "Unde este descris procesul dumneavoastră de control al calității?"
+        text_as_statement: "Procesele de control al calității sunt descrise la"
+        help_text: "Furnizați un URL pentru ca oamenii să știe despre controalele în curs de desfășurare cu privire la datele dumneavoastră, fie ele automate sau manuale. Acest lucru îi reasigură că luați în serios calitatea și încurajează îmbunătățirile de care va beneficia toată lumea."
+        answers:
+          a_1:
+            placeholder: "URL pentru Descrierea Procesului de Control al Calității"
+      backups:
+        text: "Vă creați o copie de rezervă a datelor în afara sitului (clădirii)?"
+        text_as_statement: "Datele sunt"
+        help_text: "Făcând în mod regulat copii de rezervă vă asigurați că datele nu vor fi pierdute în caz de accident."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "susținute și în afara sitului"
+      slaUrl:
+        text: "Unde descrieți garanțiile cu privire la disponibilitatea serviciului?"
+        text_as_statement: "Disponibilitatea serviciului este descrisă la"
+        help_text: "Furnizați un URL pentru o pagină care descrie garanțiile pe care le dați că serviciul dumneavoastră va fi disponibil pentru utilizare. De exemplu, este posibil să garantați că serviciul va fi disponibil 99,5% din timp, sau s-ar putea să nu oferiți nicio garanție."
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentarea Disponibilității Serviciului"
+      statusUrl:
+        text: "Unde oferiți informații despre starea actuală a serviciului?"
+        text_as_statement: "Statusul serviciului este oferit la"
+        help_text: "Furnizați un URL pentru o pagină cu starea curentă a serviciului, inclusiv cu problemele acestuia, de care sunteți conștient."
+        answers:
+          a_1:
+            placeholder: "URL pentru Statusul Serviciului"
+      onGoingAvailability:
+        text: "Pentru cât timp vor fi aceste date disponibile?"
+        text_as_statement: "Datele sunt disponibile"
+        answers:
+          experimental:
+            text: "s-ar putea să dispară în orice moment"
+            text_as_statement: "experimental și s-ar putea să dispară în orice moment"
+          short:
+            text: "sunt disponibile experimental, dar ar trebui să fie menținute în jur de aproximativ un an"
+            text_as_statement: "experimental pentru încă un an aproximativ"
+          medium:
+            text: "se află în planurile dumneavoastră pe termen mediu, așa că vor fi disponibile pentru câțiva ani"
+            text_as_statement: "pentru cel puțin câțiva ani"
+          long:
+            text: "este parte a operațiilor dumneavoastră zilnice, așa că vor rămâne publicate pentru o perioadă lungă de timp"
+            text_as_statement: "pentru o perioadă lungă de timp"
+      datasetUrl:
+        text: "Unde este setul dumneavoastră de date?"
+        text_as_statement: "Aceste date sunt publicate la"
+        help_text: "Furnizați un URL pentru setul de date în sine. Datele deschise ar trebui să aibă link direct pe web, astfel încât oamenii să le poată găsi cu ușurință și le reutilizeze."
+        answers:
+          a_1:
+            placeholder: "URL pentru Setul de Date"
+      versionManagement:
+        text: "Cum publicați o serie a aceluiași set de date?"
+        answers:
+          current:
+            text: "ca un singur URL care este actualizat în mod regulat"
+            help_text: "Alegeți această opțiune dacă există o singură adresă URL pentru ca oamenii să descarce cea mai recentă versiune a setului de date curent."
+          template:
+            text: "ca URL-uri consecvente pentru fiecare versiune publicată"
+            help_text: "Alegeți această opțiune dacă URL-urile seturilor de date urmează un tipar care include data publicării, de exemplu un URL care începe cu '2013-04'. Acest lucru îi ajută pe oameni să înțeleagă cât de des lansați date, și să facă script-uri care preiau datele noi de fiecare dată când acestea sunt publicate."
+          list:
+            text: "ca o listă de versiuni publicate"
+            help_text: "Alegeți această opțiune dacă aveți o listă a seturilor de date pe o pagină web sau într-un flux de informație (feed) (cum ar fi Atom sau RSS), cu link-uri către fiecare versiune în parte și detaliile fiecăreia. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
+      currentDatasetUrl:
+        text: "Unde este setul de date curent?"
+        text_as_statement: "Setul de date curent este disponibil la"
+        help_text: "Furnizați un URL unic pentru cea mai recentă versiune a setului de date. Conținutul la care trimite acest URL trebuie să se schimbe de fiecare dată când o nouă versiune este publicată."
+        answers:
+          a_1:
+            placeholder: "URL pentru Setul de Date Curent"
+      versionsTemplateUrl:
+        text: "Ce format au URL-urile versiunilor publicate de date?"
+        text_as_statement: "Versiunile publicate urmează acest model de URL"
+        help_text: "Aceasta este structura URL-urilor atunci când publicați diferite versiuni. Folosiți `{variabilă}` pentru a indica părți din URL-ul șablon care se schimbă, de exemplu, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+        answers:
+          a_1:
+            placeholder: "URL pentru Șablonul de Versiune"
+      versionsUrl:
+        text: "Unde este lista de versiuni publicate ale seturilor de date?"
+        text_as_statement: "Versiunile publicate ale acestor date sunt listate la"
+        help_text: "Furnizați un URL pentru o pagină sau feed cu o listă a seturilor de date lizibilă pentru mașini. Utilizați URL-ul primei pagini, care ar trebui să aibă link către restul paginilor."
+        answers:
+          a_1:
+            placeholder: "URL pentru Lista Versiunilor"
+      endpointUrl:
+        text: "Unde este locația serviciului dumneavoastră de API?"
+        text_as_statement: "Locația serviciului de API este"
+        help_text: "Furnizați un URL care să fie punct de plecare pentru script-urile oamenilor, pentru a accesa API-ul. Acesta ar trebui să fie un document de descriere a serviciului, care va ajuta script-ul să-și dea seama ce servicii există."
+        answers:
+          a_1:
+            placeholder: "URL pentru Locația API"
+      dumpManagement:
+        text: "Cum publicați copiile bazelor de date în format de export?"
+        answers:
+          current:
+            text: "ca un singur URL care este actualizat în mod regulat"
+            help_text: "Alegeți această opțiune dacă există un singur URL pentru a descărca cea mai recentă versiune a dump-ului bazei de date."
+          template:
+            text: "ca URL-uri consecvente pentru fiecare versiune publicată"
+            help_text: "Alegeți această opțiune dacă URL-urile către copiile datelor curente în format de export urmează un tipar care include data publicării, de exemplu, un URL care începe cu '2013-04'. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
+          list:
+            text: "ca o listă de versiuni publicate"
+            help_text: "Alegeți această opțiune dacă aveți o listă de copii ale bazelor curente de date în format de export pe o pagină web sau într-un flux de informație (feed) (cum ar fi Atom sau RSS), cu link-uri către fiecare versiune publicată și detalii despre aceasta. Acest lucru îi ajută pe oameni să înțeleagă cât de des publicați date și să scrie script-uri care să preia datele noi de fiecare dată când acestea sunt publicate."
+      currentDumpUrl:
+        text: "Unde este copia bazei de date curente în format de export?"
+        text_as_statement: "Cea mai recentă copie a bazei de date în format de export este întotdeauna disponibilă la"
+        help_text: "Furnizați un URL pentru cea mai recentă copie a bazei de date în format de export. Conținutul la care trimite acest URL trebuie să se schimbe de fiecare dată când se creează o nouă copie a bazei de date în format de export."
+        answers:
+          a_1:
+            placeholder: "URL-ul Copiei Curente"
+      dumpsTemplateUrl:
+        text: "Ce format au URL-urile pentru copiile bazelor de date în format de export?"
+        text_as_statement: "Copiile bazelor de date în format de export urmează tiparul consecvent de adresă URL"
+        help_text: "Aceasta este structura URL-urilor atunci când publicați diferite versiuni. Folosiți `{variabilă}` pentru a indica părți din URL-ul șablon care se schimbă, de exemplu, `http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+        answers:
+          a_1:
+            placeholder: "URL pentru Șablonul Copiei"
+      dumpsUrl:
+        text: "Unde este lista cu copiile bazelor de date disponibile în format de export?"
+        text_as_statement: "O listă cu copiile bazelor de date în format de export există la"
+        help_text: "Furnizați un URL pentru o pagină sau flux de informație (feed) cu o listă a copiilor bazelor de date în format de export ce poate fi citită automat de computer. Utilizați URL-ul de pe prima pagină pe care ar trebui să existe link-uri către restul paginilor."
+        answers:
+          a_1:
+            placeholder: "URL pentru Lista Copiilor"
+      changeFeedUrl:
+        text: "Unde este feed-ul de modificări?"
+        text_as_statement: "Un flux (feed) de modificări ale acestor date se găsește la"
+        help_text: "Furnizați un URL pentru o pagină sau flux de informație (feed) cu o listă a versiunilor anterioare ale copiilor bazelor de date în format de export, lizibilă pentru mașini. Utilizați URL-ul de pe prima pagină pe care ar trebui să existe link-uri către restul paginilor."
+        answers:
+          a_1:
+            placeholder: "URL pentru Feed-ul de Modificări"
+      machineReadable:
+        text: "Sunt aceste lizibile pentru mașini?"
+        text_as_statement: "Aceste date sunt"
+        help_text: "Oamenii preferă formatele de date care sunt ușor procesate de un calculator, pentru viteză și precizie. De exemplu, o copie scanată a unei foi de calcul nu este lizibilă pentru mașini, dar un fișier CSV ar putea fi."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "lizibile pentru mașini"
+      openStandard:
+        text: "Sunt aceste date într-un format deschis standard?"
+        text_as_statement: "Formatul acestor date este"
+        help_text: "Standardele deschise sunt create printr-un proces corect, transparent și colaborativ. Oricine le poate implementa și există multă asistență, astfel încât este mai ușor pentru dumneavoastră să împărțiți datele cu mai multe persoane. De exemplu, XML, CSV și JSON sunt standarde deschise."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "un format deschis standard"
+      dataType:
+        text: "Ce fel de date publicați?"
+        answers:
+          documents:
+            text: "documente lizibile pentru oameni"
+            help_text: "Alegeți această opțiune dacă datele sunt destinate consumului uman. De exemplu, documente despre diverse politici, documentații tehnice, rapoarte și rezumate (minute) de ședință. Acestea au de obicei o structură, dar majoritatea sunt în format text."
+          statistical:
+            text: "date statistice, cum ar fi numărători, medii și procente"
+            help_text: "Alegeți această opțiune dacă datele dumneavoastră sunt date statistice sau numerice, precum numărători, medii sau procente. Ca de exemplu rezultate de recensământ, informații despre trafic sau statistici despre criminalitate."
+          geographic:
+            text: "informații geografice, cum ar fi puncte și limite"
+            help_text: "Alegeți această opțiune dacă datele pot fi reprezentate pe o hartă ca puncte, limite sau linii."
+          structured:
+            text: "alte tipuri de date structurate"
+            help_text: "Alegeți această opțiune dacă datele dumneavoastră sunt structurate în orice alt mod. Cum ar fi detalii despre evenimente, orare de trenuri, informații de contact sau orice altceva care poate fi interpretat drept date, analizat și prezentat în mai multe moduri."
+      documentFormat:
+        text: "Documentele dumneavoastră lizibile pentru oameni includ formate care"
+        text_as_statement: "Documentele sunt publicate"
+        answers:
+          semantic:
+            text: "descriu structura semantică, cum ar fi HTML, DocBook sau Markdown"
+            help_text: "Aceste structuri etichetează structuri precum capitole, titluri și tabele, ceea ce face mai ușoară crearea automată a sumarelor, cum ar fi tabele de conținut și glosare. De asemenea, ele fac mai ușoară aplicarea de stiluri diferite pentru ca documentul să-și modifice aspectul."
+            text_as_statement: "într-un format semantic"
+          format:
+            text: "descriu informații despre formatare, precum OOXML sau PDF"
+            help_text: "Aceste formate pun accent pe aspect și se referă de exemplu, la fonturi, culori și poziționarea diferitelor elemente în cadrul paginii. Acestea sunt bune pentru consumul uman, dar nu sunt la fel de ușor de procesat automat și de schimbat stilul."
+            text_as_statement: "într-un format de afișare"
+          unsuitable:
+            text: "nu sunt destinate pentru documente, cum ar fi Excel, JSON sau CSV"
+            help_text: "Aceste formate sunt mai bune pentru date tabelare sau structurate."
+            text_as_statement: "într-un format nepotrivit pentru documente"
+      statisticalFormat:
+        text: "Datele dumneavoastră statistice includ formate care"
+        text_as_statement: "Datele statistice sunt publicate"
+        answers:
+          statistical:
+            text: "expun structura de date statistice de tip hipercub, precum <a href=\"http://sdmx.org/\">SDMX</a> sau <a href=\"\">Data Cube</a> "
+            help_text: "Observațiile individuale în hipercuburi sunt legate de o anumită măsură și un set de dimensiuni. Fiecare observație poate fi, de asemenea, asociată cu adnotări care oferă un context mai detaliat. Formate precum <a href=\"http://sdmx.org/\">SDMX</a> și <a href=\"http://www.w3.org/TR/vocab-data-cube/\">Data Cube</a> sunt concepute pentru a exprima această structură fundamentală."
+            text_as_statement: "într-un format de date statistice"
+          tabular:
+            text: "tratează datele statistice în format de tabel, așa cum face formatul CSV"
+            help_text: "Aceste formate aranjează datele statistice într-un tabel cu rânduri și coloane. Acest format nu oferă prea multe detalii despre hipercubul care stă la baza lor, dar este ușor de prelucrat."
+            text_as_statement: "într-un format tabelar de date"
+          format:
+            text: "se concentrează pe formatul de date tabelare, precum Excel"
+            help_text: "Foile de calcul tabelar utilizează formatarea, ca de exemplu textul italic, bold sau indentarea dintre câmpuri, pentru a descrie aspectul și structura de bază. Acest stil îi ajută pe oameni să înțeleagă datele dumneavoastră, dar este mai puțin potrivit pentru computere, din punct de vedere al procesării."
+            text_as_statement: "într-un format tip prezentare"
+          unsuitable:
+            text: "nu sunt destinate pentru datele statistice sau tabelare, precum Word sau PDF"
+            help_text: "Aceste formate nu se potrivesc datelor statistice, deoarece acestea ascund structura de bază a datelor."
+            text_as_statement: "într-un format nepotrivit pentru datele statistice"
+      geographicFormat:
+        text: "Datele dumneavoastră geografice includ formate care"
+        text_as_statement: "Datele geografice sunt publicate"
+        answers:
+          specific:
+            text: "sunt concepute pentru date geografice, cum ar fi <a href=\"http://www.opengeospatial.org/standards/kml/\">KML</a> sau <a href=\"http://www.geojson.org/\">GeoJSON</a> "
+            help_text: "Aceste formate descriu puncte, linii și limite, și expun structurile din interiorul datelor, ceea ce le face mai ușor de procesat în mod automat."
+            text_as_statement: "într-un format de date geografice"
+          generic:
+            text: "păstrează datele structurate ca JSON, XML sau CSV"
+            help_text: "Orice format care stochează date structurate normale poate exprima de asemenea, date geografice, în special dacă acesta deține doar date despre puncte."
+            text_as_statement: "într-un format de date generic"
+          unsuitable:
+            text: "nu sunt concepute pentru date geografice, cum ar fi Word sau PDF"
+            help_text: "Aceste formate nu se potrivesc datelor geografice, deoarece ascund structura de bază a datelor."
+            text_as_statement: "într-un format nepotrivit pentru date geografice"
+      structuredFormat:
+        text: "Datele dumneavoastră structurate includ formate care"
+        text_as_statement: "Datele structurate sunt publicate"
+        answers:
+          suitable:
+            text: "sunt concepute pentru datele structurate, cum ar fi JSON, XML, Turtle sau CSV"
+            help_text: "Aceste formate organizează datele într-o structură de bază formată din obiecte ce au valori corespunzătoare unui set cunoscut de proprietăți. Aceste formate sunt ușor de procesat în mod automat de către calculatoare."
+            text_as_statement: "într-un format de date structurate"
+          unsuitable:
+            text: "nu sunt concepute pentru datele structurate, cum ar fi Word sau PDF"
+            help_text: "Aceste formate nu se potrivesc acestui tip de date, deoarece ascund structura lor de bază."
+            text_as_statement: "într-un format nepotrivit pentru date structurate"
+      identifiers:
+        text: "Datele dumneavoastră folosesc identificatori persistenți?"
+        text_as_statement: "Datele includ"
+        help_text: "Datele sunt, de obicei, despre lucruri reale precum școli sau drumuri sau utilizează un sistem de codificare. Dacă datele din diferite surse folosesc aceiași identificatori persistenți unici pentru a se referi la aceleași lucruri, oamenii pot combina sursele cu ușurință, pentru a crea date și mai utile. Identificatorii ar putea fi de tip GUID, DOI sau URL."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "identificatori persistenți"
+      resolvingIds:
+        text: "Se pot folosi identificatorii din datele dumneavoastră pentru a găsi informații suplimentare?"
+        text_as_statement: "Identificatorii persistenți"
+        answers:
+          'false':
+            text: "nu, identificatorii nu pot fi utilizați pentru a găsi informații suplimentare"
+          service:
+            text: "da, există un serviciu pe care oamenii îl pot utiliza pentru a obține referințele asociate cu identificatorii"
+            help_text: "Servicii online pot fi folosite pentru a le oferi oamenilor informații cu privire la identificatori ca GUID sau DOI, ce nu pot fi accesați în mod direct, așa cum sunt accesate URL-urile."
+            text_as_statement: "referențiați folosind un serviciu"
+          resolvable:
+            text: "da, identificatorii sunt URL-uri care referențiază informații"
+            help_text: "URL-urile sunt utile atât pentru oameni cât și pentru computere. Oamenii pot pune o adresă URL în browser-ul lor pentru a citi mai multe informații, precum <a href=\"http://opencorporates.com/companies/gb/08030289\">companii</a> și <a href=\"http://data.ordnancesurvey.co.uk/doc/postcodeunit/EC2A4JE\">coduri poștale</a>. Calculatoarele pot de asemenea procesa aceste informații suplimentare, folosind script-uri pentru a accesa datele care stau la baza lor."
+            text_as_statement: "oferă referințe, deoarece acestea sunt URL-uri"
+      resolutionServiceURL:
+        text: "Unde este serviciul folosit pentru a referinția identificatorii?"
+        text_as_statement: "Serviciul ce oferă referințele identificatorilor se află la"
+        help_text: "Serviciul de referențiere ar trebui să ia un identificator drept un parametru de interogare și să dea înapoi câteva informații despre ceea ce este identificat prin acesta."
+        answers:
+          a_1:
+            placeholder: "URL pentru Serviciul de Referențiere al Identificatorilor"
+      existingExternalUrls:
+        text: "Există informații de la părți terțe despre entitățile din datele dumneavoastră de pe web?"
+        help_text: "Uneori, alte persoane aflate în afara controlului dumneavoastră furnizează URL-uri pentru anumite entități despre care aveți date. De exemplu, datele dumneavoastră ar putea conține coduri poștale care fac legătura cu site-ul Ordnance Survey."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      reliableExternalUrls:
+        text: "Aceste informații de la părți terțe sunt de încredere?"
+        help_text: "În cazul în care o parte terță furnizează URL-uri publice cu privire la entități din datele dumneavoastră, probabil că au luat măsuri pentru a asigura calitatea și fiabilitatea datelor. Aceasta este o măsură a încrederii dumneavoastră în procesele pe care ei le folosesc, pentru a asigura aceste lucruri. Uitați-vă după certificatul lor pentru date deschise sau alte semne similare, pentru a vă ajuta să luați o decizie în privința lor."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      externalUrls:
+        text: "Datele dvs. folosesc acele URL-uri de la o parte terță?"
+        text_as_statement: "URL-urile către părțile terțe sunt"
+        help_text: "Ar trebui să utilizați URL-uri de la părți terțe, care se referă la informații despre lucrurile descrise de datele dumneavoastră. Acest lucru reduce duplicarea și îi ajută pe oameni să combine date din surse diferite pentru a le face mai utile."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "referențiate în aceste date"
+      provenance:
+        text: "Furnizați surse ce pot fi lizibile pentru mașini, pentru datele dumneavoastră?"
+        text_as_statement: "Proveniența acestor date este"
+        help_text: "Este vorba despre originile datelor, de modul în care datele dumneavoastră au fost create și prelucrate, înainte de a fi publicate. Se mărește încrederea în datele pe care le publicați, deoarece oamenii pot urmări modul în care acestea au fost procesate."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+            text_as_statement: "lizibile pentru mașini"
+      digitalCertificate:
+        text: "Unde descrieți modul în care oamenii pot verifica dacă datele pe care le primesc vin de la dumneavoastră?"
+        text_as_statement: "Aceste date pot fi verificate cu ajutorul"
+        help_text: "Dacă furnizați date importante oamenilor, ei ar trebui să poată verifica dacă ceea ce primesc este la fel ca ceea ce ați publicat. De exemplu, puteți semna digital datele pe care le publicați, astfel încât oamenii să-și dea seama dacă acestea au fost modificate."
+        answers:
+          a_1:
+            placeholder: "URL pentru Procesul de Verificare"
+      documentationMetadata:
+        text: "Documentația datelor dumneavoastră include date lizibile pentru mașini pentru:"
+        text_as_statement: "Documentația include date lizibile pentru mașini pentru"
+        answers:
+          title:
+            text: "titlu"
+            text_as_statement: "titlu"
+          description:
+            text: "descriere"
+            text_as_statement: "descriere"
+          issued:
+            text: "data de publicare"
+            text_as_statement: "data de publicare"
+          modified:
+            text: "data modificării"
+            text_as_statement: "data modificării"
+          accrualPeriodicity:
+            text: "frecvența versiunilor publicate"
+            text_as_statement: "frecvența publicării"
+          identifier:
+            text: "identificator"
+            text_as_statement: "identificator"
+          landingPage:
+            text: "pagina de primire"
+            text_as_statement: "pagina de primire"
+          language:
+            text: "limba"
+            text_as_statement: "limba"
+          publisher:
+            text: "distribuitor"
+            text_as_statement: "distribuitor"
+          spatial:
+            text: "acoperire spațială/geografică"
+            text_as_statement: "acoperire spațială/geografică"
+          temporal:
+            text: "acoperire temporală"
+            text_as_statement: "acoperire temporală"
+          theme:
+            text: "subiect(e)"
+            text_as_statement: "subiect(e)"
+          keyword:
+            text: "cuvânt(e) cheie sau tag(-uri)"
+            text_as_statement: "cuvânt(e) cheie sau tag(-uri)"
+          distribution:
+            text: "distribuție(ii)"
+            text_as_statement: "distribuție(ii)"
+      distributionMetadata:
+        text: "Documentația include metadate lizibile pentru mașini, pentru fiecare distribuție, despre:"
+        text_as_statement: "Documentația cu privire la fiecare distribuție include date lizibile pentru mașini pentru"
+        answers:
+          title:
+            text: "titlu"
+            text_as_statement: "titlu"
+          description:
+            text: "descriere"
+            text_as_statement: "descriere"
+          issued:
+            text: "data de publicare"
+            text_as_statement: "data de publicare"
+          modified:
+            text: "data modificării"
+            text_as_statement: "data modificării"
+          rights:
+            text: "declarația drepturilor"
+            text_as_statement: "declarația drepturilor"
+          accessURL:
+            text: "URL pentru a accesa datele"
+            help_text: "Aceste metadate ar trebui utilizate atunci când datele nu sunt disponibile pentru descărcare, precum un API."
+            text_as_statement: "un URL pentru a accesa datele"
+          downloadURL:
+            text: "URL pentru a descărca setul de date"
+            text_as_statement: "un URL pentru a descărca setul de date"
+          byteSize:
+            text: "mărimea în byți"
+            text_as_statement: "mărimea în byți"
+          mediaType:
+            text: "formatul de download"
+            text_as_statement: "formatul de download"
+      technicalDocumentation:
+        text: "Unde este documentația tehnică a datelor?"
+        text_as_statement: "Documentația tehnică a datelor se află la"
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentația Tehnică"
+      vocabulary:
+        text: "Formatele de date utilizează vocabulare sau scheme?"
+        help_text: "Formate, cum ar fi CSV, JSON, XML sau Turtle folosesc vocabulare personalizate sau scheme, care spun ce coloane sau proprietăți conțin datele."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      schemaDocumentationUrl:
+        text: "Unde se află documentația despre vocabularele de date?"
+        text_as_statement: "Vocabularele folosite de aceste date sunt documentate la"
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentația Schemei"
+      codelists:
+        text: "Există coduri utilizate în aceste date?"
+        help_text: "Dacă datele dvs. utilizează coduri pentru a se referi la lucruri cum ar fi zone geografice, categorii de cheltuieli sau boli, acestea trebuie să fie explicate oamenilor."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      codelistDocumentationUrl:
+        text: "Unde sunt documentate codurile din datele dumneavoastră?"
+        text_as_statement: "Codurile din aceste date sunt documentate la"
+        answers:
+          a_1:
+            placeholder: "URL pentru Documentația Referitoare la Lista de Coduri"
+      contactUrl:
+        text: "Unde pot oamenii afla cum să contacteze pe cineva cu întrebări despre aceste date?"
+        text_as_statement: "Aflați cum să contactați pe cineva cu privire la aceste date la"
+        help_text: "Furnizați un URL pentru o pagină care descrie modul în care oamenii pot contacta pe cineva în cazul în care au întrebări despre date."
+        answers:
+          a_1:
+            placeholder: "Documentația Contactului"
+      improvementsContact:
+        text: "Unde pot oamenii afla cum să îmbunătățească modul în care sunt publicate datele dumneavoastră?"
+        text_as_statement: "Aflați cum să sugerați îmbunătățiri în privința publicării la"
+        answers:
+          a_1:
+            placeholder: "URL pentru Sugestii de Îmbunătățire"
+      dataProtectionUrl:
+        text: "Unde pot oamenii afla cum să contacteze pe cineva cu întrebări despre confidențialitate?"
+        text_as_statement: "Aflați unde să trimiteți întrebări cu privire la confidențialitate la"
+        answers:
+          a_1:
+            placeholder: "Documentație despre Confidențialitatea Contactului"
+      socialMedia:
+        text: "Utilizați mediile de socializare pentru a vă conecta cu persoane care utilizează datele dumneavoastră?"
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      account:
+        text: "Pe ce conturi pentru mediile de socializare vă pot contacta oamenii?"
+        text_as_statement: "Contactați curatorul prin intermediul acestor conturi pentru mediile de socializare"
+        help_text: "Furnizați URL-uri către conturile dumneavoastră pentru mediile de socializare, cum ar fi pagina de profil Twitter sau Facebook."
+        answers:
+          a_1:
+            placeholder: "URL pentru Mediile de Socializare"
+      forum:
+        text: "Unde pot oamenii discuta despre acest set de date?"
+        text_as_statement: "Discutați aceste date la"
+        help_text: "Furnizați un URL pentru forum sau lista de discuții, unde oamenii pot vorbi despre datele dumneavoastră."
+        answers:
+          a_1:
+            placeholder: "URL pentru Forum sau Listă de Discuții"
+      correctionReporting:
+        text: "Unde pot oamenii să afle cum să solicite corecții ale datelor dumneavoastră?"
+        text_as_statement: "Aflați cum să solicitați corecții de date la"
+        help_text: "Furnizați un URL unde oamenii pot raporta erori din cadrul datelor."
+        answers:
+          a_1:
+            placeholder: "URL pentru Instrucțiunile de Corecție"
+      correctionDiscovery:
+        text: "Unde pot oamenii afla cum să primească notificări despre corecțiile datelor dumneavoastră?"
+        text_as_statement: "Aflați cum să primiți notificări despre corecțiile datelor la"
+        help_text: "Furnizați un URL unde descrieți modul în care distribuiți notificările cu privire la corecții."
+        answers:
+          a_1:
+            placeholder: "URL pentru Notificări de Corectare"
+      engagementTeam:
+        text: "Aveți pe cineva care construiește în mod activ o comunitate în jurul acestor date?"
+        help_text: "O echipa de implicare a comunității va face acest lucru prin intermediul mediilor de socializare, blogging-ulului, și va aranja hackdays sau concursuri, pentru a încuraja oamenii să folosească datele dumneavoastră."
+        answers:
+          a_false:
+            text: "nu"
+          a_true:
+            text: "da"
+      engagementTeamUrl:
+        text: "Unde se află pagina lor de start?"
+        text_as_statement: "Implicarea comunității se face prin"
+        answers:
+          a_1:
+            placeholder: "URL pentru Pagina de Start a Echipei de Implicare a Comunității"
+      libraries:
+        text: "Unde listați instrumentele ce pot fi folosite pentru a lucra cu datele dumneavoastră?"
+        text_as_statement: "Instrumente pentru a ajuta să folosiți aceste date sunt listate la"
+        help_text: "Furnizați un URL care afișează instrumentele pe care le știți sau le recomandați oamenilor pentru a lucra cu datele dumneavoastră."
+        answers:
+          a_1:
+            placeholder: "URL pentru Instrumente"
+    labels:
+      findability:
+        text: "Găsirea ușoară"
+        help_text: "cum ajutați oamenii să vă găsească datele"
+      accuracy:
+        text: "Acuratețe"
+        help_text: "cum vă păstrați datele la zi"
+      quality:
+        text: "Calitate"
+        help_text: "cât de mult se pot baza oamenii pe datele dumneavoastră"
+      guarantees:
+        text: "Garanții"
+        help_text: "cât de mult pot oamenii să depindă de disponibilitatea datelor dumneavoastră"
+      locations:
+        text: "Locații"
+        help_text: "Cum pot oamenii să acceseze datele dumneavoastră"
+      format:
+        text: "Formate"
+        help_text: "modul în care oamenii pot lucra cu datele dvs."
+      trust:
+        text: "Încredere"
+        help_text: "Cât de multă încredere pot oamenii să aibă în datele dvs."
+      documentation:
+        text: "Documentație"
+        help_text: "cum îi ajutați pe oameni să înțeleagă contextul și conținutul datelor"
+      support:
+        text: "Asisteță"
+        help_text: "cum comunicați cu persoanele care utilizează datele dumneavoastră"
+      services:
+        text: "Servicii"
+        help_text: "cum dați oamenilor acces la instrumentele de care au nevoie pentru a prelucra datele dvs."
+      pilot_1:
+        text: "Trebuie să aveți o <strong>pagină web care oferă documentație</strong> despre datele deschise publicate, astfel încât oamenii să poată înțelege contextul, conținutul și utilitatea lor."
+      basic_1:
+        text: "Trebuie să aveți o <strong>pagină web care oferă documentație</strong> și acces la datele deschise publicate, astfel încât oamenii să le poată folosi."
+      standard_1:
+        text: "Ar trebui <strong>să vă asigurați că oamenii pot găsi datele direct din site-ul dvs. principal</strong>, astfel încât să poată fi găsite mai ușor."
+      standard_2:
+        text: "Ar trebuie <strong>să vă asigurați că oamenii pot găsi datele dvs. atunci când le caută </strong>în locații care listează date."
+      standard_3:
+        text: "Ar trebui <strong>să faceți referință la date în publicațiile proprii</strong>, pentru ca oamenii să afle de disponibilitatea și contextul lor."
+      pilot_2:
+        text: "Ar trebui <strong>să puneți momentul exact al publicării datelor dumneavoastră atunci când le publicați</strong>, astfel încât oamenii să știe perioada de timp la care se referă și data expirării."
+      standard_4:
+        text: "Ar trebui <strong>să reactualizați datele sensibile la trecerea timpului</strong>, astfel încât să nu devină învechite."
+      exemplar_1:
+        text: "Ar trebui <strong>să asigurați un flux de modificări la datele dvs.</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      pilot_3:
+        text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare lună</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      standard_5:
+        text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare săptămână</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      exemplar_2:
+        text: "Ar trebui <strong>să creați o nouă versiune a setului de date în fiecare zi</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      pilot_4:
+        text: "Ar trebui <strong>să aveți un decalaj rezonabil între momentul creării și momentul publicării unui set de date</strong>, care ar trebui să fie mai mic decât diferența dintre versiunile publicate, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      standard_6:
+        text: "Ar trebui <strong>să aveți un decalaj scurt între momentul creării și momentul publicării unui set de date</strong>, care ar trebui să fie mai mic decât jumătate din decalajul dintre versiunile publicate, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      exemplar_3:
+        text: "Ar trebui <strong>să aveți un decalaj minim sau inexistent între momentul creării și momentul publicării unui set de date</strong>, astfel încât oamenii să-și păstreze copiile la curent și exacte."
+      standard_7:
+        text: "Ar trebui <strong>să lăsați oamenii să descarce întregul set de date</strong>, astfel încât să poată face o analiză mai completă și exactă, cu toate datele."
+      pilot_5:
+        text: "Ar trebui <strong>să creați un nou dump în fiecare lună</strong>, astfel încât oamenii să aibă cele mai recente date."
+      standard_8:
+        text: "Ar trebui <strong>să creați un nou dump în termen de o săptămână de la orice modificare</strong>, astfel încât oamenii să aibă mai puțin timp de așteptat pentru cele mai recente date."
+      exemplar_4:
+        text: "Ar trebui <strong>să creați un nou dump într-o zi de la orice modificare</strong>, astfel încât oamenilor să le fie ușor să obțină cele mai recente date."
+      standard_9:
+        text: "Ar trebuie <strong>să corectați datele atunci când oamenii raportează erori</strong> așa încât toată lumea beneficiază de aceste îmbunătățiri în acuratețe."
+      standard_10:
+        text: "Ar trebui <strong>să documentați orice probleme cunoscute referitoare la calitatea datelor</strong>, astfel încât oamenii să poată decide cât de multă încredere să aibă în acestea."
+      exemplar_5:
+        text: "Ar trebui <strong>să vă documentați procesul de control al calității</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dumneavoastră."
+      standard_11:
+        text: "Ar trebui <strong>să faceți o copie de rezervă în afara sitului</strong>, pentru a vă asigura că datele nu se vor pierde în cazul în care se întâmplă un accident."
+      standard_12:
+        text: "Ar trebuii <strong>să descrieți ce garanții aveți referitor la disponibilitatea serviciilor</strong>, astfel încât oamenii să știe cât de mult se pot baza pe ele."
+      exemplar_6:
+        text: "Ar trebui <strong>să aveți o pagină cu statusul serviciului</strong> care să le spună oamenilor despre starea curentă a serviciului."
+      pilot_6:
+        text: "Ar trebui <strong>să oferiți garanție că datele vor fi disponibile în această formă pentru cel puțin un an</strong>, astfel încât oamenii să poată decide cât de mult să se bazeze pe datele dvs."
+      standard_13:
+        text: "Ar trebuie <strong>să garantați că datele vor fi disponibile în această formă pe termen mediu</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dvs."
+      exemplar_7:
+        text: "Ar trebuie <strong>să garantați că datele vor fi disponibile în această formă pe termen lung</strong>, astfel încât oamenii să poată decide cât de mult să aibă încredere în datele dvs."
+      basic_2:
+        text: "Trebuie <strong>să oferiți fie un URL pentru datele dvs. sau un URL pentru documentația</strong> despre acestea, astfel încât oamenii să le poată găsi."
+      pilot_7:
+        text: "Ar trebui să <strong>să aveți un URL care să facă legătura directă cu datele în sine</strong>, astfel încât oamenii să le poată accesa cu ușurință."
+      standard_14:
+        text: "Ar trebui <strong>să aveți o singură adresă URL persistentă pentru a descărca versiunea curentă a datelor</strong>, astfel încât oamenii să le poată accesa cu ușurință."
+      pilot_8:
+        text: "Ar trebui <strong>să utilizați un model consecvent pentru URL-urile diferitelor versiuni</strong>, astfel încât oamenii să le poată descărca automat."
+      standard_15:
+        text: "Ar trebui <strong>să aveți un document sau un feed, cu o listă de versiuni disponibile</strong>, astfel încât oamenii să poată crea script-uri pentru a le descărca pe toate."
+      basic_3:
+        text: "Trebuie <strong>să oferiți acces la versiuni printr-un URL</strong>, care oferă versiunea curentă, o serie de URL-uri pentru versiunile anterioare sau prin intermediul unei pagini de documentație astfel încât oamenii să le poată găsi."
+      basic_4:
+        text: "Trebuie <strong>să furnizați fie un URL pentru locația API-ului sau o adresă URL pentru documentația sa</strong>, astfel încât oamenii să îl poată găsi."
+      standard_16:
+        text: "Ar trebui <strong>să aveți un document de descriere a serviciului sau un punct unic de acces pentru API-ul dumneavoastră</strong>, astfel încât oamenii să îl poată accesa."
+      standard_17:
+        text: "Ar trebui <strong>să aveți un singur URL consecvent pentru a descărca copia datelor curente în format de export</strong>, astfel încât oamenii să le poată găsi."
+      exemplar_8:
+        text: "Ar trebui <strong>să utilizați un tipar consecvent pentru URL-urile către copiile datelor curente în format de export</strong>, astfel încât oamenii să le poată descărca în mod automat pe fiecare."
+      exemplar_9:
+        text: "Ar trebui <strong>să aveți un document sau un flux de informație (feed) cu o listă a copiilor de bazele de date disponibile în format de export</strong>, astfel încât oamenii pot crea script-uri pentru a le descărca"
+      pilot_9:
+        text: "Ar trebui <strong>să furnizați datele într-un format lizibil pentru mașini</strong>, pentru a fi ușor de prelucrat."
+      standard_18:
+        text: "Ar trebui <strong>să furnizați datele într-un format standard deschis</strong>, astfel încât oamenii să poată utiliza instrumente disponibile la scară largă, pentru a le procesa mai ușor."
+      standard_19:
+        text: "Ar trebui <strong>să publicați documente într-un format care expune structura semantică</strong>, astfel încât oamenii să le poată afișa în stiluri diferite."
+      pilot_10:
+        text: "Ar trebui <strong>să publicați documente într-un format special conceput pentru acestea</strong>, astfel încât acestea să fie ușor de prelucrat."
+      exemplar_10:
+        text: "Ar trebui <strong>să publicați datele statistice într-un format care expune dimensiunile și măsurile</strong>, pentru a fi ușor de analizat."
+      standard_20:
+        text: "Ar trebuit <strong>să publicați datele tabelare într-un format care expune tabelele de date</strong>, pentru a fi ușor de analizat."
+      pilot_11:
+        text: "Ar trebui <strong>să publicați datele tabelare într-un format conceput în acest scop</strong>, pentru a fi ușor de prelucrat."
+      exemplar_11:
+        text: "Ar trebui <strong>să publicați datele geografice într-un format proiectat în acest scop</strong>, astfel încât oamenii să poată utiliza instrumente disponibile pe scară largă, pentru a le procesa."
+      pilot_12:
+        text: "Ar trebui <strong>să publicați datele geografice ca date structurate</strong>, pentru a fi ușor de prelucrat."
+      pilot_13:
+        text: "Ar trebui <strong>să publicați date structurate într-un format proiectat în acest scop</strong>, pentru a fi mai ușor de prelucrat."
+      standard_21:
+        text: "Ar trebui <strong>să folosiți identificatori pentru lucrurile din datele dumneavoastră</strong>, pentru a fi mai ușor legate de alte date despre aceleași lucruri."
+      standard_22:
+        text: "Ar trebui <strong>să oferiți un serviciu care să ofere referințe despre identificatorii pe care îi utilizați</strong>, pentru ca oamenii să poată găsi informații suplimentare despre ei."
+      exemplar_12:
+        text: "Ar trebui <strong>să aveți link către o pagină web cu informații despre fiecare lucru prezent în datele dumneavoastră</strong>, pentru ca oamenii să poată găsi și distribui cu ușurință aceste informații."
+      standard_23:
+        text: "Ar trebui <strong>să aveți un URL prin care identificatorii pot fi referențiați</strong>, pentru a se putea găsi mai multe informații despre aceștia."
+      exemplar_13:
+        text: "Ar trebui <strong>să utilizați URL-uri către informațiile terților din datele dvs.</strong>, astfel încât să fie ușor de combinat cu alte date care utilizează aceste URL-uri."
+      exemplar_14:
+        text: "Ar trebui <strong>să furnizați o cale de proveniență a datelor, lizibilă pentru mașini</strong>, astfel încât oamenii să poată urmări modul în care acestea au fost procesate."
+      exemplar_15:
+        text: "Ar trebui <strong>să descrieți modul în care oamenii pot verifica dacă datele pe care le primesc sunt la fel cu cele publicate</strong>, astfel încât aceștia să poată avea încredere în ele."
+      standard_24:
+        text: "Ar trebui <strong>să includeți în documentație un titlu al datelor lizibil pentru mașini</strong>, pentru ca oamenii să știe cum să se refere la ele."
+      standard_25:
+        text: "Ar trebui <strong>să includeți în documentație o descriere a datelor lizibilă pentru mașini</strong>, pentru ca oamenii să știe ce conține."
+      standard_26:
+        text: "Ar trebui <strong>să includeți în documentație data publicării, lizibilă pentru mașini</strong>, pentru ca oamenii să știe cât de actuale sunt."
+      standard_27:
+        text: "Ar trebui <strong>să includeți în documentație o dată pentru ultima modificare, lizibilă pentru mașini</strong>, astfel încât oamenii să știe că au cele mai recente date."
+      standard_28:
+        text: "Ar trebui <strong>să furnizați metadate lizibile pentru mașini, cu privire la frecvența de publicare a versiunilor</strong>, pentru ca oamenii să știe cât de des le actualizați."
+      standard_29:
+        text: "Ar trebui <strong>să includeți un URL canonic pentru datele din documentația lizibilă pentru mașini</strong>, pentru ca oamenii să știe cum să-l acceseze în mod consecvent."
+      standard_30:
+        text: "Ar trebui <strong>să includeți un URL canonic și pentru documentația lizibilă pentru mașini</strong>, pentru ca oamenii să știe cum să o acceseze în mod consecvent."
+      standard_31:
+        text: "Ar trebui <strong>să includeți limba datelor în documentația lizibilă pentru mașini</strong>, pentru ca oamenii care o caută să știe dacă o pot înțelege."
+      standard_32:
+        text: "Ar trebui <strong>să indicați distribuitorul datelor în documentația lizibilă pentru mașini</strong> pentru ca oamenii să poată decide cât de mult să aibă încredere în datele dumneavoastră."
+      standard_33:
+        text: "Ar trebui <strong>să includeți acoperirea geografică în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă unde anume sunt aplicabile datele."
+      standard_34:
+        text: "Ar trebui <strong>să includeți perioada de timp în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă când anume sunt aplicabile datele."
+      standard_35:
+        text: "Ar trebui <strong>să includeți subiectul datelor, în documentația lizibilă pentru mașini</strong>, pentru ca oamenii să înțeleagă în mare, despre ce anume sunt datele."
+      standard_36:
+        text: "Ar trebui <strong>să includeți cuvinte cheie sau tag-uri în documentația lizibilă pentru mașini</strong> pentru a ajuta oamenii să caute mai eficient prin datele dumneavoastră."
+      standard_37:
+        text: "Ar trebui <strong>să includeți în documentație titluri lizibile pentru mașini</strong>, astfel încât oamenii să știe cum să se refere la fiecare distribuție de date."
+      standard_38:
+        text: "Ar trebui <strong>să includeți în documentație descrieri lizibile pentru mașini</strong>, astfel oamenii să știe ce conține fiecare distribuție de date."
+      standard_39:
+        text: "Ar trebui <strong>să includeți în documentație datele de publicare lizibile pentru mașini</strong>, astfel încât oamenii să știe cât de actuală este fiecare distribuție."
+      standard_40:
+        text: "Ar trebui <strong>să includeți în documentație ultimele date de modificare, lizibile pentru mașini</strong>, astfel încât oamenii să știe dacă au o copie la zi după o distribuție de date."
+      standard_41:
+        text: "Ar trebui <strong>să includeți în documentație un link lizibil pentru mașini, către declarația drepturilor aplicabile</strong>, astfel încât oamenii să poată afla ce pot face cu o distribuție de date."
+      pilot_14:
+        text: "Ar trebui <strong>să furnizați documentația tehnică pentru date</strong>, astfel încât oamenii să înțeleagă cum să le folosească."
+      standard_42:
+        text: "Ar trebui <strong>să documentați orice vocabular folosiți în datele dvs.</strong>, astfel încât oamenii să știe cum să-l interpreteze."
+      standard_43:
+        text: "Ar trebui <strong>să documentați codurile utilizate în cadrul datelor dvs.</strong>, astfel încât oamenii să știe cum să le interpreteze."
+      pilot_15:
+        text: "Ar trebui <strong>să furnizați informații de contact pentru ca persoanele să poată trimite întrebări</strong> despre datele dvs."
+      pilot_16:
+        text: "Ar trebui <strong>să furnizați instrucțiuni despre cum să sugereze îmbunătățiri</strong> referitor la modul în care publicați date, astfel încât să puteți descoperi ceea ce oamenii au nevoie."
+      pilot_17:
+        text: "Ar trebui <strong>să furnizați informații de contact pentru ca oamenii să trimită întrebări cu privire la confidențialitate</strong> și divulgarea de detalii personale."
+      standard_44:
+        text: "Ar trebui <strong>să folosiți mediile de socializare pentru a ajunge la oamenii care folosesc datele dumneavoastră</strong> și pentru a descoperi modul în care sunt utilizate acestea."
+      standard_45:
+        text: "Ar trebui <strong>să le spuneți oamenilor unde pot discuta despre datele dvs.</strong> și unde își pot oferi asistență unul altuia."
+      standard_46:
+        text: "Ar trebui <strong>să oferiți instrucțiuni cu privire la modul în care oamenii pot raporta erori</strong> cu privire la datele dumneavoastră."
+      standard_47:
+        text: "Ar trebui <strong>să furnizați o listă de adrese sau flux de informație (feed), cu actualizări</strong> pe care oamenii să îl utilizeze pentru a păstra copiile lor de date la zi."
+      exemplar_16:
+        text: "Ar trebui <strong>să construiți o comunitate de oameni în jurul datelor dumneavoastră</strong>, pentru a încuraja utilizarea lor pe scară largă."
+      exemplar_17:
+        text: "Ar trebui <strong>să furnizați o listă de librării de software și alte instrumente ușor disponibile</strong>, astfel încât oamenii să poată ajunge rapid să lucreze cu datele dumneavoastră."

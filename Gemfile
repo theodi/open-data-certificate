@@ -55,6 +55,7 @@ group :development do
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'letter_opener'
 end
 
 group :test, :development do
@@ -134,3 +135,4 @@ gem 'validate_url'
 gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'sidekiq-failures'
+gem 'rails-i18n', '~> 3.0.0'

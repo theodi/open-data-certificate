@@ -11,10 +11,10 @@
   %ul.rss-top.pull-right
     %li
       %i.icon.icon-rss-sign
-      %a{href: yield(:rss_feed)} Subscribe to these results via RSS
+      %a{href: yield(:rss_feed)}= t('certificates.rss_subscribe')
     %li
       %i.icon.icon-download
-      %a{href: datasets_path(format: 'csv')} Download complete set as CSV
+      %a{href: datasets_path(format: 'csv')}= t('certificates.csv_download')
 
   = form_tag datasets_path, method: 'get' do
     .form-search.input-append

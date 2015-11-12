@@ -28,7 +28,7 @@ class Survey < ActiveRecord::Base
   }
 
   validate :ensure_requirements_are_linked_to_only_one_question_or_answer
-  attr_accessible :full_title, :meta_map, :status, :default_locale_name, :dataset_title, :dataset_curator
+  attr_accessible :full_title, :meta_map, :status, :dataset_title, :dataset_curator
 
   has_many :response_sets, :inverse_of => :survey
   has_many :questions, :through => :sections, :include => {:dependency => :dependency_conditions}, :inverse_of => :survey
@@ -154,7 +154,7 @@ class Survey < ActiveRecord::Base
 
   def translation(locale_symbol)
     @translation ||= begin
-      I18n.translate('surveyor').merge({"title" => title, "description" => description}).with_indifferent_access
+      I18n.translate('surveyor').merge({"title" => title}).with_indifferent_access
     end
   end
 

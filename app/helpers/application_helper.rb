@@ -107,7 +107,7 @@ module ApplicationHelper
   end
 
   def locale_options_for_select(selected=nil)
-    locales = ::LANGUAGES.each_with_object({}) do |locale, memo|
+    locales = I18n.available_locales.each_with_object({}) do |locale, memo|
       memo[t("locales.#{locale}", locale: locale)] = locale
     end
     options_for_select(locales, selected)

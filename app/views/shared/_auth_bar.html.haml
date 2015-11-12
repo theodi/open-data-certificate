@@ -5,12 +5,12 @@
       = submit_tag t('certificates.search.submit_search'), :class => 'btn'
 
 - if user_signed_in?
-  %li= link_to "Account", edit_user_registration_path(current_user.id)
-  %li= link_to('Logout', destroy_user_session_path, :method => :delete)
+  %li= link_to(t('auth_bar.account'), edit_user_registration_path(current_user.id))
+  %li= link_to(t('auth_bar.logout'), destroy_user_session_path, :method => :delete)
 
 - else
   %li.dropdown-menu-button
-    = link_to('Register', new_user_registration_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#register")
+    = link_to(t('auth_bar.register'), new_user_registration_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#register")
     #register.registration_form_container= render 'devise/registrations/form', :resource => User.new, :resource_name => 'user', :remote => true
   %li.dropdown-menu-button
     = link_to(t('homepage.log_in'), new_user_session_path, "data-dropdown" => "toggle", "data-parent" => "#topbar", "data-target" => "#login")
