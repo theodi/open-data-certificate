@@ -30,8 +30,16 @@ describe SurveyCalculator do
       end
     end
 
-    context 'where question has no requirements' do
+    context "where question is set as 'required'" do
       let(:question) { Question.find_by_reference_identifier('dataTitle') }
+
+      it "returns 'basic'" do
+        expect(level).to eql('basic')
+      end
+    end
+
+    context "where question has no requirement" do
+      let(:question) { Question.find_by_reference_identifier('optionalQuestion') }
 
       it "returns 'none'" do
         expect(level).to eql('none')

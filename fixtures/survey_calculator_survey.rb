@@ -16,6 +16,11 @@ survey 'GB',
       :string,
       :placeholder => 'Data Title'
 
+    q_optionalQuestion 'Completely optional question'
+    a_1 'Say anything',
+      :string,
+      :placeholder => 'Say anything...'
+
     q_documentationUrl 'Where is it described?',
       :discussion_topic => :documentationUrl,
       :display_on_certificate => true,
