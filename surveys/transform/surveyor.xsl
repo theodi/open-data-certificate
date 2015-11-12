@@ -33,7 +33,7 @@
 		<xsl:apply-templates select="doc($langPath)/questionnaire" mode="translation" />
 	</xsl:result-document>
 	<!-- jurisdiction specific translation strings -->
-	<xsl:result-document href="translations/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.en.yml" method="text">
+	<xsl:result-document href="generated/translations/questionnaire.jurisdiction.{questionnaire/@jurisdiction}.yml" method="text">
 		<xsl:apply-templates select="questionnaire" mode="translation" />
 	</xsl:result-document>
 </xsl:template>
@@ -608,8 +608,10 @@
 <xsl:variable name="indentamt" select="'  '"/>
 
 <xsl:template match="questionnaire" mode="translation">
-	<xsl:param name="indent" select="$indentamt"/>
+	<xsl:param name="indent" select="concat($indentamt, $indentamt)"/>
 	<xsl:value-of select="concat(@xml:lang, ':')"/>
+	<xsl:text>&#xA;</xsl:text>
+	<xsl:text>  surveyor:</xsl:text>
 	<xsl:text>&#xA;</xsl:text>
 	<xsl:if test="@jurisdiction">
 		<xsl:value-of select="$indent"/>
