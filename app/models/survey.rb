@@ -39,6 +39,10 @@ class Survey < ActiveRecord::Base
     where(access_code: access_code)
   end
 
+  def self.country_count
+    where("status != 'alpha'").group('access_code').select('id').all.count
+  end
+
   def self.available_to_complete
     order('coalesce(full_title, title), survey_version DESC').group(:access_code)
   end

@@ -138,7 +138,7 @@
           <li class="last">
             <i class="icon-globe circle"></i>
             <h3><%= t('homepage.countries.title') %></h3>
-            <p><%= t('homepage.countries.description') %></p>
+            <p><%= t('homepage.countries.description', :count => Survey.country_count) %></p>
           </li>
         </ul>
       </div>
