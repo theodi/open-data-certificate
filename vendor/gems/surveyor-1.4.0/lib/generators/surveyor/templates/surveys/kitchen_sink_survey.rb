@@ -107,7 +107,7 @@ survey "Kitchen Sink survey", :default_mandatory => false do
 
     # Questions, groups, and answers take a custom renderer (a partial in the application's views dir)
     # defaults are "/partials/question_group", "/partials/question", "/partials/answer", so the custom renderers should have a different name
-    q "Pick your favorite date AND time" #, :custom_renderer => "/partials/custom_question"
+    q "Pick your favorite date AND time"
     a :datetime
 
     q_time_lunch "What time do you usually take a lunch break?"
@@ -179,7 +179,7 @@ survey "Kitchen Sink survey", :default_mandatory => false do
     # Questions may also have input masks with fancy placeholders
     q "What is your phone number?"
     a :string, :input_mask => '(999)999-9999', :input_mask_placeholder => '#'
-    
+
   end
 
   section "Complicated questions" do

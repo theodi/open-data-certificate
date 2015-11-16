@@ -58,6 +58,14 @@ describe Answer do
     end
   end
 
+  describe '#corresponding_requirements' do
+    it 'saves and restores as an Array' do
+      answer = FactoryGirl.create(:answer, corresponding_requirements: ['basic_1', 'standard_10'])
+      answer = Answer.find(answer.id)
+      expect(answer.corresponding_requirements).to eql(['basic_1', 'standard_10'])
+    end
+  end
+
   context "handling strings" do
     it "#split preserves strings" do
       answer.split(answer.text).should == "My favorite color is clear"

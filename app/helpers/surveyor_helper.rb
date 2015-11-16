@@ -32,4 +32,9 @@ module SurveyorHelper
     # rage at rails i18n, safety intertwingling
     return content_tag(:small, t(label, level: cert).html_safe)
   end
+
+  def partial_for_question(q)
+    q.is_requirement? ? '/partials/requirement' : '/partials/question'
+  end
+
 end
