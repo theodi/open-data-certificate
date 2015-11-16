@@ -331,7 +331,7 @@ cs:
     return_to_dashboard: Zpátky na nástěnku
     levels:
       basic:
-        title: Základní úroveň
+        title: Bronzová úroveň
         subtitle: Naprosté minimum pro získání certifikátu – velmi slušný začátek!
         instruction: "Musíte odpovědět na následující otázky:"
       pilot:
