@@ -1,0 +1,538 @@
+zh_TW:
+  surveyor:
+    title: TW
+    full_title: Taiwan
+    description: <p>這份自評的問卷會產生一份開放數據的證書及授予你發佈這份開放數據給大眾的資格，同時我們也會透過你的回答來得知貴單位是如何做開放數據發佈的</p><p>當你在回答這些問題時，證明了你有努力遵守英國的相關法律，同時也建議你檢查可能會適用於你部門的其他相關法律及政策，尤其當你不在英國境內時(因為這些問題將不被包含其中)</p><p>你不需要回答所有的問題來或得證明，你只需要對你能力範圍內的問題作答</p><p> <strong></strong> </p>
+    survey_sections:
+      legal:
+        text: 法律資訊
+        help_text: 所有權、執照及隱私權
+    questions:
+      publisherRights:
+        text: 你有能將這份數據發佈成開放數據的權利嗎？
+        help_text: 如果你的單位並不是這份數據的原創或總整理單位，那你可能沒有發佈這份數據的權利，如果你對這點不太確定，請與這份數據的所有人進行確認，因為你會需要他們的許可來做發佈
+        answers:
+          'yes':
+            text: 是，你有能將這份數據發佈成開放數據的權利
+          'no':
+            text: 否，你沒有能將這份數據發佈成開放數據的權利
+          unsure:
+            text: 你不確定你是否有能將這份數據發佈成開放數據的權利
+          complicated:
+            text: 這份數據的權利規屬是複雜的或不明確的
+      rightsRiskAssessment:
+        text: 在哪裡你有詳細說明使用者使用你的數據可能會遇上的風險？
+        text_as_statement: 使用這份數據的風險在＿＿＿有說名
+        help_text: 使用者若沒有一份明確的合法權利來使用該份數據是有一定風險的，舉例來說，該份數據可能會因為法律問題而被下架。請提供一個說明這份數據使用風險的頁面網址
+      publisherOrigin:
+        text: 你是這份數據的原創或蒐集單位嗎？
+        text_as_statement: 這份數據是＿＿＿
+        help_text: 如果這份數據部分的提供是來自外部個人或單位，那麼你將會需要提供額外的資訊證明你有權利發佈它
+        answers:
+          'true':
+            text: '是'
+            text_as_statement: 透過它的策劃人做的原創或蒐集
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 透過它的策劃人做的原創或蒐集
+      thirdPartyOrigin:
+        text: 這份數據有部分是從其他份數據中提取或計算出的嗎？
+        help_text: 即便只是摘要或是從他人數據中提取的一小部分都很可能會影響到你使用這份數據的使用權利，而當你使用其他人的數據來做分析進而產生其他結果時可能會有法律上的權責問題產生
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      thirdPartyOpen:
+        text: 這份數據的所有來源都有發佈成開放數據嗎？
+        text_as_statement: 這份數據是在創立在___
+        help_text: 你可以重新發佈其他人的數據如果它已經具開放數據的執照，或是他們的權利已經過期或被放棄，如果這份數據有任何部份是在上述權利之外，那你在發佈這份數據前會需要先取得合法的建議
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 開放數據資源
+      crowdsourced:
+        text: 有數據的部份是來自眾包嗎？
+        text_as_statement: 這份數據的部份是___
+        help_text: 如果你的數據包含一些資訊來自其他的單位，那麼你會需要該單位的許可來將他們的貢獻發佈成開放數據
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 眾包
+      crowdsourcedContent:
+        text: 這份數據的貢獻者會展現他們的意見嗎？
+        help_text: 如果使用者在貢獻數據時有用到個人的創意或判斷力，那麼他們會有著作權，舉例來說，撰寫細節或決定某些數據是否該出現在一個數據集裡就會需要使用到判斷力；有些數據貢獻者必須要餓轉讓、放棄他們的權利，或是在你可以發佈這份數據之前給予你許可
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      claUrl:
+        text: 在哪裡說明了數據貢獻者許可協議？
+        text_as_statement: 數據貢獻者許可協議的網址
+        help_text: 提供一個顯示數據貢獻者同意你再次使用你數據之協議的連結。一份數據貢獻者許可協議將會轉讓貢獻者的權利給你、使他們放棄其權利，或是授予你許可，如此一來你可以對這份數據進行發佈
+      cldsRecorded:
+        text: 所有的數據貢獻者都有同意數據貢獻者許可協議了嗎？
+        help_text: 在你重新使用或重新發佈數據貢獻者參與建立的數據前，請與他們所有人做數據貢獻者許可協議，建議你保有一份數據參與製作者與其是否同意數據貢獻者許可協議的相關記錄
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      sourceDocumentationUrl:
+        text: 你在哪裡有說明這份數據的來源？
+        text_as_statement: 這份數據的來源在＿＿＿有說名
+        help_text: 提供一個說明數據來源的網址(它的出處)及你發佈數據下權利的網址，這可以幫助使用者了解數據的來源
+      sourceDocumentationMetadata:
+        text: 有關該數據來源的紀錄也是機器可讀取的格式嗎？
+        text_as_statement: 該策劃人已經發佈＿＿＿
+        help_text: 建議你資料來源的相關資訊應該是使用者可讀取的，如此一來使用者才易於理解，同時也應該是以元數據的格式做存取，如此一來電腦才能進行處理。當所有人都以此種方式進行數據存取，其將幫助住其他使用者得之相通的開放數據是如何被使用及證明其有持續在被發佈
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 有關機器可讀取的該數據來源
+      copyrightURL:
+        text: 你在哪裡有發佈這個資料庫的權利聲明？
+        text_as_statement: 該份權利聲明是在＿＿＿
+        help_text: 提供一個說明重新使用這個資料庫權利的網頁網址，該網頁需包含其憑證參考、屬性條件及一份相關版權及資料去權利的聲明;一份權利聲明將會幫助使用者了解他們可以如何使用及禁止使用該數據的項目
+      databaseRights:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      databaseRightsLicenseType:
+        answers:
+          odc_by:
+            text: 英國政府開放執照
+            text_as_statement: 英國政府開放執照
+          odc_odbl:
+            text: 開放數據共用署名執照
+            text_as_statement: 開放數據共用署名執照
+      databaseCopyright:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      databaseContentCopyright:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      copyrightStatementMetadata:
+        text: 法規說明數據可以用電子產品閱讀嗎？
+        text_as_statement: 法規說明包括數據
+        help_text: 嵌入資訊是一個很好的練習，有關於法規說明中提供機器可讀的格式。這樣就可以自動的收集使用者所引述數據。
+        answers:
+          dataLicense:
+            text: 數據執照
+            text_as_statement: 這是數據執照
+          contentLicense:
+            text: 內容執照
+            text_as_statement: 這內容執照
+          attribution:
+            text: 引述文本
+            text_as_statement: 使用哪一個引述訊息？
+          attributionURL:
+            text: 引述網址
+            text_as_statement: 給哪一個引述網址？
+          copyrightNotice:
+            text: 著作權通知或是聲明
+            text_as_statement: 一個著作權通知或是聲明
+          copyrightYear:
+            text: 版權年份
+            text_as_statement: 這版權年份
+          copyrightHolder:
+            text: 版權持有人
+            text_as_statement: 這版權持有人
+      dataPersonal:
+        text: 個人可以被這數據辨認嗎？
+        text_as_statement: 這個數據包括
+        answers:
+          not_personal:
+            text: 不，這個數據不是有關於人或是他們的活動
+            help_text: 記住，每個人依然可以辨別即使不是跟數據有直接的關聯性。例如，數據流量包括個人的通勤模式可以透漏出有關個人的資訊。
+            text_as_statement: 沒有任何數據有關個人
+          summarised:
+            text: 否，數據已經以匿名的方式將每個人組成小組，所以它們不能從其他人的組中區分來。
+            help_text: 統計披露控制可以確保個人不集合數據中識別。
+            text_as_statement: 同意的數據
+          individual:
+            text: 是，辨識到個人的風險是有的。例如，第三方有存取到另外的資訊。
+            help_text: 有些數據是合法地，例如像公務員薪酬或公共開支。
+            text_as_statement: 可識別個人信息
+      statisticalAnonAudited:
+        text: 匿名化過程中已經被獨立審計了嗎？
+        text_as_statement: 該匿名化程序已經
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 獨立審計
+      appliedAnon:
+        text: 你是否企圖嘗試減緩或刪除個人被辨別的可能性？
+        text_as_statement: 這個數據市有關個人的已經
+        help_text: 匿名化減少從您發布的數據被識別個人的風險。最好的技術取決於你有什麼樣的數據。
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 匿名
+      lawfulDisclosure:
+        text: 你需要在法律的允續或是要求下才可以發布關於個人的數據嗎？
+        text_as_statement: 根據法律規定，該數據有關個人的
+        help_text: 法律可能會要求你發佈數據有關人。例如，公司主管的名字。或者是你需要可能被影響到的人的許可才可以發佈有關他們的訊息。
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 可以被發佈
+      lawfulDisclosureURL:
+        text: 你在哪裡紀錄正當的發表個人的數據？
+        text_as_statement: 正當的發表個人的數據文件在
+      privacyImpactAssessmentExists:
+        text_as_statement: 那館長有
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      privacyImpactAssessmentUrl:
+        help_text: 給一個統一資源定位器，讓使用者可以存取到個人的隱私風險。這樣就可以減少或是總結如果含有敏感的訊息。
+      piaAudited:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: independently audited
+      dpStaff:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      dbStaffConsulted:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      anonymisationAudited:
+        text_as_statement: The anonymisation of the data has been
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: independently audited
+      dataLicence:
+        text: 在何種憑證下使用者可以重複使用這份數據？
+        text_as_statement: 這份數據在＿＿＿下是有效的
+        help_text: 請記得無論是誰在最一開始的時間自動地蒐集、創建、核對或呈現數據集，他都會有所有權，而該單位及部分選擇的數據也會有版權，因此使用者需要一份證明他們可以使用這份數據及解釋他們合法使用範圍的權責放棄或執照。我們會在此列出最常見的幾種執照，如果你沒這份資料庫的所有權、版權、或相關權利已過期或你已經放棄相關權利，請選擇“不適用”
+        answers:
+          cc_by:
+            text: 創作共用署名
+            text_as_statement: 創作共用署名
+          cc_by_sa:
+            text: 共同創作共用署名分享
+            text_as_statement: 共同創作共用署名分享
+          cc_zero:
+            text: 創造常見的CCZero
+            text_as_statement: 創造常見的CCZero
+          odc_by:
+            text: 英國政府開放執照
+            text_as_statement: 英國政府開放執照
+          odc_odbl:
+            text: 開放數據共用署名執照
+            text_as_statement: 開放數據共用署名執照
+          odc_pddl:
+            text: 開放數據公用開放資料庫執照
+            text_as_statement: 開放數據公用開放資料庫執照
+          na:
+            text: 開放數據共用公共領域貢獻及執照
+          other:
+            text: 不適用
+      dataNotApplicable:
+        text: 為什麼沒有一份執照適用於這份數據？
+        text_as_statement: 這份數據是沒有經過授權的，因為＿＿＿
+        answers:
+          norights:
+            text: 這份數據沒有版權及資料庫的使用權
+            help_text: 數據庫權限適於：如果你花了大量精力收集，校驗或發表它。你並沒有數據庫的權力，如果該數據被從頭開始創建，在一個明顯的方式呈現，並且沒有檢查數據庫。你將會有版權，如果你選擇在數據中的項目或組織他們以非明顯的方式。
+            text_as_statement: 這份數據沒有相關的所有權
+          expired:
+            text: 版權及資料庫所有權已經過期
+            help_text: 資料庫所有權的有效期為10年。如果資料庫的最後修改時間是10年前，其所有權是過期的。根據版權的有效期為指明時段，要根據其創造者的去世日期或發佈時間來決定。版權相當沒有受過期的限制。
+            text_as_statement: 所有權已經過期
+          waived:
+            text: 版權及資料庫所有權已被放棄
+            help_text: 其意思是版權及所有權不屬於任何人，這份數據沒有使用限制
+      dataWaiver:
+        text: 你根據哪個棄權聲明?
+        text_as_statement: 根據...,資料庫的相關權利已被放棄
+        help_text: 你需要發佈一則聲明，讓其他人知道所有權及版權已被放棄，因此沒有使用限制。你可以使用現有的棄權聲明如PDDLC和CZero，或者根據法律諮詢寫自己的棄權聲明
+        answers:
+          pddl:
+            text: 開放數據共用公共領域貢獻及執照
+            text_as_statement: 開放數據共用公共領域貢獻及執照
+          cc0:
+            text: 知識分享 CCZero
+            text_as_statement: 知識分享 CCZero
+          other:
+            text: 其他
+      dataOtherWaiver:
+        text_as_statement: 根據...,資料庫的相關權利已被放棄
+        help_text: 請提開放使用的棄權聲明之網址，讓其他人可以確認資料庫的相關權利已被放棄
+      otherDataLicenceName:
+        text: 你使用的執照是？
+        text_as_statement: 在。下這份數據可供使用
+        help_text: 如果你用其他執照，請提供具體訊息，以便可以在開放資料證書有說明
+      otherDataLicenceURL:
+        text: 執照在哪裡？
+        text_as_statement: 這個執照是在
+        help_text: 請提供執照的網址，讓其他人可以在開放資料證書找到并確認
+      otherDataLicenceOpen:
+        text: 這個執照是否是公開的？
+        help_text: 如你不清楚公開執照的概念，請看公開執照的定義。然後在Open Definition Advisory Board列表中選出你的執照。如果無法在這個列表找到你的執照，表示它還沒被公開或評估
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      contentRights:
+        text: 這份數據的內容是否有版權？
+        text_as_statement: 有
+        answers:
+          norights:
+            text: 否，這份數據只包括事實性的訊息與數據
+            help_text: 實時性的訊息沒有版權。如果這份數據不包括任何跟知識有關的內容，它就沒有任何相關權利。
+            text_as_statement: 這份數據的內容沒有任何相關權利
+          samerights:
+            text: 是，所有的權利屬於同一個人或組織
+            help_text: 如果這份數據的所有內容都由同一個人或組織提供或轉讓
+          mixedrights:
+            text: 是，其權利屬於不同人或組織
+            help_text: 在一些數據，各紀錄的所有權屬於不同人或組織。數據所有權的相關訊息必須在其內容有具體說明
+      explicitWaiver:
+        text: 這份數據的內容是否被設為公眾領域？
+        text_as_statement: 這些內容已被
+        help_text: 可以用公眾領域標章來標示這些內容是公眾領域·。這樣可以讓使用者知道這些內容可以重用。
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 設為公眾領域
+      contentLicence:
+        text: 根據哪個執照其他人可以重用這些內容？
+        text_as_statement: 在。下這份數據可供使用
+        help_text: 請記住，不管是誰運用智力和勞動所創造的內容，他們自動通過它獲得的權利，但創意的內容不包括此。因此，人們需要放棄或這執照，這樣他們可以使用的內容，並解釋它們如何受到法律上的許可。我們在這裡列出了最常見的執照; 如果在內容沒有版權，它已經過期，或者你已經放棄它們，選擇“不適用” 。
+        answers:
+          cc_by:
+            text: 創作共用署名
+            text_as_statement: 創作共用署名
+          cc_by_sa:
+            text: 共同創作共用署名分享
+            text_as_statement: 共同創作共用署名分享
+          cc_zero:
+            text: 創作共同CCZero
+            text_as_statement: 創作共同CCZero
+          na:
+            text: 英國公開政府執照
+          other:
+            text: 不適用
+      contentNotApplicable:
+        text: 為什麼不將執照許可應用在數據的內容？
+        text_as_statement: 這些內容在數據中沒有執照許可因為
+        answers:
+          norights:
+            text: 那裡沒有版權在這數據的內容
+            help_text: 如果你花很多的精力在創造，版權只適用在內容中。例如：所寫的正文在數據裡面。如果所寫的內容只有事實，那並不算是版權。
+            text_as_statement: 那裡沒有版權
+          expired:
+            text: 版權已經過期
+            help_text: 版權所有持續一個固定的時間，以年或者它的創作者或出版去世後。您應該檢查內容是什麼時候創建的或出版，因為如果這是一個很久以前的事，版權可能已過期。
+            text_as_statement: 版權已經過期
+          waived:
+            text: 著作權已經被免除
+            help_text: 這表示沒有人擁有著作權及任何人都可以運用這個數據
+      contentWaiver:
+        text: 哪一個
+        text_as_statement: 著作權已經被免除和
+        help_text: 你必須要有一個聲明稿讓大家知道你已經做過了，如此一來他們瞭解到他們可以對這個數據做任何的運用。標準的棄權證書已經存在，像是CCZero, 但是你可以寫你自己的法律上的勸告。
+        answers:
+          cc0:
+            text: 創作共同CCZero
+            text_as_statement: 創作共同CCZero
+          other:
+            text: 其他
+            text_as_statement: 其他
+      contentOtherWaiver:
+        text: 版權的棄權證明在哪裡？
+        text_as_statement: 版權已經被免除和
+        help_text: 給一個網址，以自己的公開可用，使人們可以檢查它並免除了您的版權。
+      otherContentLicenceName:
+        text: 那執照的名字是？
+        text_as_statement: 這內容可以被獲得在
+        help_text: 如果你用不同的版權，我們必須知道名稱，這樣其他人可以在開放資料證書有說明。
+      otherContentLicenceURL:
+        text: 執照在哪裡？
+        text_as_statement: 內容的執照在
+        help_text: 提供一個說明數據來源的執照，這可以讓使用者在數據的來源上看到並且知道大眾可以使用。
+      otherContentLicenceOpen:
+        text: 執照是一個開放的執照嗎？
+        help_text: 如果你不確定公開執照是什麼，請閱讀Open Knowledge Definition的定義。首先，找出你的執照在目錄列表中。如果執照不再列表中，可能是因為不公開或是沒有被評價。
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      contentRightsURL:
+        text: 哪裡可以找到法規和執照的內容？
+        text_as_statement: 有關於法規及內容執照的相關說明在
+        help_text: 提供一個網址網頁，你可以在數據中找到法規和執照的內容。
+      riskAssessmentExists:
+        text: 你有實行隱私影響評估嗎？
+        text_as_statement: 那館長有
+        help_text: 隱私影響評估是測量個人數據隱私還有公開訊息的風險。
+        answers:
+          a_false:
+            text: '否'
+            text_as_statement: 沒有實行隱私影響評估
+          a_true:
+            text: '是'
+            text_as_statement: 實行隱私影響評估
+      riskAssessmentUrl:
+        text: 在哪裡有公佈隱私影響評估？
+        text_as_statement: 這隱私影響評估是公佈在
+        help_text: 給一個統一資源定位器，讓使用者可以存取到個人的隱私風險。這樣就可以減少或是總結如果含有敏感的訊息。
+      riskAssessmentAudited:
+        text: 你有將隱私影響評估獨立審計了嗎？
+        text_as_statement: 這隱私影響評估已經被
+        help_text: 這是很好的練習-定時檢查評估。由專家或第三方獨立審計更趨於嚴謹和公正。
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+            text_as_statement: 獨立審計
+      usGovData:
+        answers:
+          a_false:
+            text: '否'
+          a_true:
+            text: '是'
+      internationalDataLicence:
+        answers:
+          odc_by:
+            text: 英國政府開放執照
+            text_as_statement: 英國政府開放執照
+          odc_odbl:
+            text: 開放數據共用署名執照
+            text_as_statement: 開放數據共用署名執照
+          odc_pddl:
+            text: 開放數據共用公共領域貢獻及執照
+            text_as_statement: 開放數據共用公共領域貢獻及執照
+          cc_zero:
+            text: 創作共同CCZero
+            text_as_statement: 創作共同CCZero
+          na:
+            text: 英國公開政府執照
+          other:
+            text: 其他
+      internationalContentRights:
+        text_as_statement: 有
+        answers:
+          norights:
+            text: 否，這份數據只包括事實性的訊息與數據
+            help_text: 實時性的訊息沒有版權。如果這份數據不包括任何跟知識有關的內容，它就沒有任何相關權利。
+            text_as_statement: 這份數據的內容沒有任何相關權利
+          samerights:
+            text: 是，所有的權利屬於同一個人或組織
+            help_text: 如果這份數據的所有內容都由同一個人或組織提供或轉讓
+          mixedrights:
+            text: 是，其權利屬於不同人或組織
+            help_text: 在一些數據，各紀錄的所有權屬於不同人或組織。數據所有權的相關訊息必須在其內容有具體說明
+    labels:
+      ownership:
+        help_text: 你可以與其他人分享這份數據的權利
+      licensing:
+        help_text: 你是如何給予使用者權限來使用這筆數據的？
+      privacy:
+        help_text: 如何保護你的隱私
+      standard_1:
+        text: 建議你要有一份清楚的合法權利來說明你能發佈這份數據
+      basic_1:
+        text: 你一定得有一個提供資料且允許存取你所發佈的開放數據的網頁，這樣一來其他人才可以使用這些資料
+      pilot_1:
+        text: 建議你要有一個提供你自己所屬的開放數據文件在這個網頁上，這樣一來其他的使用者可以了解其背景、內容及效用
+      basic_2:
+        text: 你必須要有發佈這份數據的權利
+      basic_3:
+        text: 當你指出這份數據並非你的原創，也不是來自眾包，那麼它一定是來自其他數據的摘要或計算而得的
+      basic_4:
+        text: 建議你要有合法的建議來確保你有權利發表佈你的數據
+      basic_5:
+        text: 你指出這份數據不是你的原創或由你蒐集的，也不是擷取或由其他數據計算而得，那麼它一定是來自眾包
+      pilot_2:
+        text: 建議你記錄這份相關數據使用的風險，如此一來可以幫助使用者了解他們願意使用的程度
+      standard_2:
+        text: 建議你同時也提供機器可讀取的數據來源
+      pilot_3:
+        text: 建議你記錄數據的來源及你發佈數據下的權利，如此一來使用者可以確保他們對會使用的數據這部分是來自第三方
+      standard_3:
+        text: 建議你標示公眾領域內容為公眾領域，讓其他人知道他們這些內容可以重用的。
+      standard_4:
+        text: 你應該法規說明中提供電子產品可已閱讀的檔案，讓自動工具可以使用。
+      standard_5:
+        text: 你應該法規說明中提供電子產品可已閱讀的檔案，這樣電子產品可以自動及閱讀及使用。
+      standard_6:
+        text: 你應該在法規說明中提供電子產品可已閱讀的檔案，讓自動工具可以使用它。
+      exemplar_1:
+        text: 你應該在法規說明中提供電子產品可已閱讀的檔案，因此自動工具可以使用它。
+      exemplar_2:
+        text: 您應該在法規說明中提供機器可讀的數據，關於版權年份，數據的權利聲明，因此自動化工具可以使用它。
+      exemplar_3:
+        text: 您應該在法規說明中提供機器可讀的數據，有關數版權持有人的權利聲明，因此自動化工具可以使用它。
+      exemplar_4:
+        text: 建議你可以為你的數據提供一個可做更改的新聞訂閱，這樣使用者才能獲得即時且準確的備份
+      exemplar_5:
+        text: 建議你至少每天都能建立一份新的數據集並做線上發行，這樣使用者才能獲得即時且準確的備份
+      standard_7:
+        text: 你應該提供機器可讀的的數據在網址權利聲明連接到飲用此數據，因此自動工具可以使用它。
+      pilot_4:
+        text: 建議你發佈一份權利聲明，其中詳細敘述版權、資料庫權利、憑證及使用者如何提供數據屬性等項目
+      standard_8:
+        text: 你應該有你的匿名過程被獨立審計，以確保和減少個人重新被辨別到風險再度發生。
+      pilot_5:
+        text: 你應該以發佈匿名個人的數據，如果你符合規定或許可證在法律下。
+      standard_9:
+        text: 你應該記錄您的權利，發布關於個人誰使用您的數據的人和為那些因為公開而受影響的人。
+      standard_10:
+        text: 你應該公佈你的隱私影響評估，那麼使用者可以瞭解評估公開數據的風險。
+      pilot_6:
+        text: 你應該要做因私影響評估如果你有公佈個人的數據。
+      pilot_7:
+        text: 建議你再將你的數據發佈之前加上時間標記，如此一來可以幫助使用者了解這份數據的時效性
+      standard_11:
+        text: 你應該擁有你的隱私影響評估被個人審計，以確保它已進行正常。
+      basic_6:
+        text: 你必須要有數據貢獻者對數據貢獻者許可協議的同意，其會授予你將他們的數據發佈成開放數據的權利
+      basic_7:
+        text: 你必須要在有公開執照的情況下發佈這份開放數據，讓其他人可以使用。
+      standard_12:
+        text: ' <strong></strong> '
