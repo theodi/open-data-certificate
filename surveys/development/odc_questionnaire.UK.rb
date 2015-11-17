@@ -1,6 +1,5 @@
 survey 'GB',
   :full_title => 'United Kingdom',
-  :default_mandatory => 'false',
   :status => 'beta',
   :description => '<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p><p>When you answer these questions it demonstrates your efforts to comply with relevant UK legislation. You should also check which other laws and policies apply to your sector, especially if you’re outside the UK (which these questions don’t cover).</p><p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>' do
 
@@ -15,8 +14,7 @@ survey 'GB',
       :required => :required
     a_1 'Data Title',
       :string,
-      :placeholder => 'Data Title',
-      :required => :required
+      :placeholder => 'Data Title'
 
     q_documentationUrl 'Where is it described?',
       :discussion_topic => :documentationUrl,
@@ -27,45 +25,40 @@ survey 'GB',
       :string,
       :input_type => :url,
       :placeholder => 'Documentation URL',
-      :requirement => ['pilot_1', 'basic_1']
+      :corresponding_requirements => ['pilot_1', 'basic_1']
 
     label_pilot_1 'You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.',
-      :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_1'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_basic_1 'You must have a <strong>web page that gives documentation</strong> and access to the open data you publish so that people can use it.',
-      :custom_renderer => '/partials/requirement_basic',
-      :requirement => 'basic_1'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_documentationUrl, '==', {:string_value => '', :answer_reference => '1'}
 
     label_group_2 'Rights',
-      :help_text => 'your right to share this data with people',
-      :customer_renderer => '/partials/fieldset'
+      :help_text => 'your right to share this data with people'
 
     q_publisherRights 'Do you have the rights to publish this data as open data?',
       :discussion_topic => :gb_publisherRights,
       :help_text => 'If your organisation didn\'t originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.',
-      :requirement => ['basic_2'],
+      :corresponding_requirements => ['basic_2'],
       :pick => :one,
       :required => :required
     a_yes 'yes, you have the rights to publish this data as open data',
-      :requirement => ['standard_1']
+      :corresponding_requirements => ['standard_1']
     a_no 'no, you don\'t have the rights to publish this data as open data'
     a_unsure 'you\'re not sure if you have the rights to publish this data as open data'
     a_complicated 'the rights in this data are complicated or unclear'
 
     label_standard_1 'You should have a <strong>clear legal right to publish this data</strong>.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_1'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_publisherRights, '!=', :a_yes
 
     label_group_3 'Licensing',
-      :help_text => 'how you give people permission to use this data',
-      :customer_renderer => '/partials/fieldset'
+      :help_text => 'how you give people permission to use this data'
 
     q_copyrightURL 'Where have you published the rights statement for this dataset?',
       :discussion_topic => :gb_copyrightURL,
@@ -76,11 +69,10 @@ survey 'GB',
       :string,
       :input_type => :url,
       :placeholder => 'Rights Statement URL',
-      :requirement => ['pilot_4']
+      :corresponding_requirements => ['pilot_4']
 
     label_pilot_4 'You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.',
-      :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_4'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_copyrightURL, '==', {:string_value => '', :answer_reference => '1'}
 
@@ -116,47 +108,44 @@ survey 'GB',
       :pick => :any
     a_dataLicense 'data licence',
       :text_as_statement => 'its data licence',
-      :requirement => ['standard_4']
+      :corresponding_requirements => ['standard_4']
     a_contentLicense 'content licence',
       :text_as_statement => 'its content licence',
-      :requirement => ['standard_5']
+      :corresponding_requirements => ['standard_5']
     a_attribution 'attribution text',
       :text_as_statement => 'what attribution text to use',
-      :requirement => ['standard_6']
+      :corresponding_requirements => ['standard_6']
     a_attributionURL 'attribution URL',
       :text_as_statement => 'what attribution link to give',
-      :requirement => ['standard_7']
+      :corresponding_requirements => ['standard_7']
     a_copyrightNotice 'copyright notice or statement',
       :text_as_statement => 'a copyright notice or statement',
-      :requirement => ['exemplar_1']
+      :corresponding_requirements => ['exemplar_1']
     a_copyrightYear 'copyright year',
       :text_as_statement => 'the copyright year',
-      :requirement => ['exemplar_2']
+      :corresponding_requirements => ['exemplar_2']
     a_copyrightHolder 'copyright holder',
       :text_as_statement => 'the copyright holder',
-      :requirement => ['exemplar_3']
+      :corresponding_requirements => ['exemplar_3']
     a_databaseRightYear 'database right year',
       :text_as_statement => 'the database right year',
-      :requirement => ['exemplar_4']
+      :corresponding_requirements => ['exemplar_4']
     a_databaseRightHolder 'database right holder',
       :text_as_statement => 'the database right holder',
-      :requirement => ['exemplar_5']
+      :corresponding_requirements => ['exemplar_5']
 
     label_standard_4 'You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_4'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_copyrightStatementMetadata, '!=', :a_dataLicense
 
     label_exemplar_1 'You should provide <strong>machine-readable data in your rights statement about the copyright statement or notice of this data</strong>, so automatic tools can use it.',
-      :custom_renderer => '/partials/requirement_exemplar',
-      :requirement => 'exemplar_1'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_copyrightStatementMetadata, '!=', :a_copyrightNotice
 
     label_group_4 'Privacy',
-      :help_text => 'how you protect people\'s privacy',
-      :customer_renderer => '/partials/fieldset'
+      :help_text => 'how you protect people\'s privacy'
 
     q_machineReadable 'Is this data machine-readable?',
       :discussion_topic => :machineReadable,
@@ -168,11 +157,10 @@ survey 'GB',
       :text_as_statement => ''
     a_true 'yes',
       :text_as_statement => 'machine-readable',
-      :requirement => ['pilot_16']
+      :corresponding_requirements => ['pilot_16']
 
     label_pilot_16 'You should <strong>provide your data in a machine-readable format</strong> so that it\'s easy to process.',
-      :custom_renderer => '/partials/requirement_pilot',
-      :requirement => 'pilot_16'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_machineReadable, '==', :a_false
 
@@ -183,55 +171,53 @@ survey 'GB',
       :pick => :any
     a_title 'title',
       :text_as_statement => 'title',
-      :requirement => ['standard_36']
+      :corresponding_requirements => ['standard_36']
     a_description 'description',
       :text_as_statement => 'description',
-      :requirement => ['standard_37']
+      :corresponding_requirements => ['standard_37']
     a_issued 'release date',
       :text_as_statement => 'release date',
-      :requirement => ['standard_38']
+      :corresponding_requirements => ['standard_38']
     a_modified 'modification date',
       :text_as_statement => 'modification date',
-      :requirement => ['standard_39']
+      :corresponding_requirements => ['standard_39']
     a_accrualPeriodicity 'frequency of releases',
       :text_as_statement => 'release frequency',
-      :requirement => ['standard_40']
+      :corresponding_requirements => ['standard_40']
     a_identifier 'identifier',
       :text_as_statement => 'identifier',
-      :requirement => ['standard_41']
+      :corresponding_requirements => ['standard_41']
     a_landingPage 'landing page',
       :text_as_statement => 'landing page',
-      :requirement => ['standard_42']
+      :corresponding_requirements => ['standard_42']
     a_language 'language',
       :text_as_statement => 'language',
-      :requirement => ['standard_43']
+      :corresponding_requirements => ['standard_43']
     a_publisher 'publisher',
       :text_as_statement => 'publisher',
-      :requirement => ['standard_44']
+      :corresponding_requirements => ['standard_44']
     a_spatial 'spatial/geographical coverage',
       :text_as_statement => 'spatial/geographical coverage',
-      :requirement => ['standard_45']
+      :corresponding_requirements => ['standard_45']
     a_temporal 'temporal coverage',
       :text_as_statement => 'temporal coverage',
-      :requirement => ['standard_46']
+      :corresponding_requirements => ['standard_46']
     a_theme 'theme(s)',
       :text_as_statement => 'theme(s)',
-      :requirement => ['standard_47']
+      :corresponding_requirements => ['standard_47']
     a_keyword 'keyword(s) or tag(s)',
       :text_as_statement => 'keyword(s) or tag(s)',
-      :requirement => ['standard_48']
+      :corresponding_requirements => ['standard_48']
     a_distribution 'distribution(s)',
       :text_as_statement => 'distribution(s)'
 
     label_standard_36 'You should <strong>include a machine-readable data title in your documentation</strong> so that people know how to refer to it.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_36'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_documentationMetadata, '!=', :a_title
 
     label_standard_37 'You should <strong>include a machine-readable data description in your documentation</strong> so that people know what it contains.',
-      :custom_renderer => '/partials/requirement_standard',
-      :requirement => 'standard_37'
+      :is_requirement => true
     dependency :rule => 'A'
     condition_A :q_documentationMetadata, '!=', :a_description
 
@@ -247,7 +233,6 @@ survey 'GB',
       a_1 'Social Media URL',
         :string,
         :input_type => :url,
-        :required => :required,
         :placeholder => 'Social Media URL'
 
     end

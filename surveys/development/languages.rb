@@ -23,7 +23,6 @@ survey "dv1", :full_title => 'Language Test (dv1)', :dataset_title => 'dataTitle
     condition_A :q_color, "==", {:string_value => "red", :answer_reference => "name"}
 
     label 'You should be awesome',
-          :custom_renderer => '/partials/requirement_standard',
           :requirement => 'standard_7'
     dependency :rule => 'A'
     condition_A :q_color, "==", {:string_value => "red", :answer_reference => "name"}

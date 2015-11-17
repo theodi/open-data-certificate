@@ -23,7 +23,7 @@
 
     - state = 'no-response'
     - state = 'ok' if r.filled?
-    - state = 'error' if r.empty? && q.is_mandatory?
+    - state = 'error' if r.empty? && q.mandatory?
 
     - if url_field
       - state = 'url-verified'
@@ -64,7 +64,7 @@
     - classes = ['row', 'question-row', "q_#{renderer}"]
     - classes << q.css_class(@response_set)
     - classes << 'choice-boxes' if q.choice_type?
-    - classes << 'mandatory' if q.is_mandatory?
+    - classes << 'mandatory' if q.mandatory?
     - classes << 'autocompleted' if all_autocompleted
     - classes << state if state
     - if q.choice_type? && renderer != :dropdown
@@ -75,7 +75,7 @@
     - data['autocompletable'] = r.autocompletable?
     - data['autocompleted-value'] = r.formatted_auto_value
     - data['metadata-field'] = true if q.metadata_field?
-    - data['mandatory'] = q.is_mandatory?
+    - data['mandatory'] = q.mandatory?
 
     - id = rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}"
     - attrs = {data: data, id: id, class: classes.join(' ')}
@@ -115,7 +115,7 @@
             %div.choice-buttons.status-wrapper
               - q.answers.each do |a|
                 - next if disabled and @response_set.responses.where( :question_id => q.id, :answer_id => a.id).empty?
-                = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
+                = render '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message
             %div.status-below
               %div.status-icon
                 %i.icon-loading.icon-spin.icon-refresh.icon-large
@@ -127,7 +127,7 @@
 
           - else
             - q.answers.each do |a|
-              = render a.custom_renderer || '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
+              = render '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
 
         .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'

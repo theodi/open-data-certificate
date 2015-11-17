@@ -99,7 +99,7 @@ Should work on OSX
     langs = JURISDICTION_LANGS[jurs] - ['en']
 
     Rake::Task["surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb"].invoke
-    sh "tx pull -l #{langs_except_en.join(',')} --minimum-perc=1" if langs.any?
+    sh "tx pull -l #{langs.join(',')} --minimum-perc=1" if langs.any?
   end
 end
 

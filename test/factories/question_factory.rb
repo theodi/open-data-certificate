@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  
+
   sequence(:question_display_order) { |n| n }
 
   factory :question do |q|
@@ -25,8 +25,9 @@ FactoryGirl.define do
     end
 
     factory :requirement do
-      requirement 'level_1'
+      reference_identifier 'level_1'
       display_type 'label'
+      is_requirement true
     end
   end
 
@@ -39,7 +40,6 @@ FactoryGirl.define do
     g.common_identifier {}
     g.display_type {}
     g.custom_class {}
-    g.custom_renderer {}
   end
 
 end

@@ -521,7 +521,7 @@ en:
     es: Spanish
     it: Italian
     ro: Romanian
-    zh: Chinese
+    zh_TW: Chinese
 
   interface:
     select: "Please select…"
