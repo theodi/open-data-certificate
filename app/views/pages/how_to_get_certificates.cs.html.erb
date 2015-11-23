@@ -1,0 +1,20 @@
+<% content_for :header_title, t("certificate_how_to.header_title") %>
+
+<div class="container about">
+  <div class="span8">
+    <p>Certifikát můžete získat dvěma způsoby:</p>
+
+    <h2>Hromadná certifikace</h2>
+    <p>Pokud máte datové sady popsané v nějakém katalogu (například
+    <%= link_to 'CKAN', 'http://ckan.org/' %>) nebo je máte označkované
+    pomocí <%= link_to 'DCAT', 'http://www.w3.org/TR/vocab-dcat/' %>,
+    můžeme vám aspoň část certifikátů vygenerovat automaticky.</p>
+
+    <p><%= link_to('Kontaktujte nás, prosím', contact_page_path, class: 'btn') %></p>
+
+    <h2>Certifikace jednotlivých datových sad</h2>
+    <p>Pokud chcete certifikovat jednu datovou sadu, můžete hned začít vyplňovat
+    certifikační dotazník:</p>
+    <p><%= new_certificate_link(class: 'btn') %></p>
+  </div>
+</div>
