@@ -98,7 +98,7 @@ cs:
     improvements_link: Jak se tato data dají zlepšit?
     level_attained: 'Dosažená úroveň:'
     current_status: Aktuální stav
-    last_updated_at: 'Poslední aktualizace: %{time_span} nazpět'
+    last_updated_at: 'Poslední změna: před %{time_span}'
     jurisdiction: jurisdikce
     popover:
       about_jurisdiction: 'Dotazník byl vyplněn pro jurisdikci „%{jurisdiction}“.'
@@ -167,7 +167,7 @@ cs:
     other_languages: 'Další jazyky'
     read_more: Přečtěte si podrobnější text o certifikaci otevřených dat
     do_not_have_url: Žádné takové URL nemám
-    check_url_button: Načítst URL
+    check_url_button: Načíst URL
     skip_this_button: Přeskočit
     edit_button: Změnit
     url_problem_error: URL se nepodařilo načíst. Zkontrolujte prosím, jestli funguje, případně vyplňte níže vysvětlení.
