@@ -19,6 +19,7 @@ cs:
         subject: "Instrukce pro potvrzení účtu"
       reset_password_instructions:
         subject: "Instrukce pro reset hesla"
+        change_my_password: Změnit mé heslo
       unlock_instructions:
         subject: "Instrukce pro obnovení blokovaného účtu"
     passwords:
