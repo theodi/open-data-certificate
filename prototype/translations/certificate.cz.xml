@@ -635,9 +635,9 @@
                </radioset>
             </question>
          </if>
-         <question id="identifiers" display="Identifikátory objektů">
+         <question id="identifiers" display="Standardní identifikátory objektů">
             <label>Používáte v datech standardní identifikátory?</label>
-            <yesno yes="standardizované (GUID, URL, …)"/>
+            <yesno yes="ano: GUID, URL a podobně" no="ne"/>
             <help>Pokud se data z různých zdrojů odkazují na objekty (například školy, obce, silnice nebo knihy) pomocí stejného standardizovaného identifikátoru (například GUID, DOI, URL nebo ISBN), dají se snadno kombinovat.</help>
             <requirement level="standard">
                <strong>Snažte se v datech používat standardní identifikátory</strong>, aby se vaše data dala snadno kombinovat s daty z jiných zdrojů.</requirement>
