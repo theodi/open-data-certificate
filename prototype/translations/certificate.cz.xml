@@ -161,9 +161,9 @@
             </question>
          </if>
          <if test="this.releaseType() === 'series'">
-            <question id="frequentChanges" display="Frekvence změn">
+            <question id="frequentChanges" display="Často aktualizovaná data">
                <label>Mění se data aspoň jednou denně?</label>
-               <yesno required="pilot" yes="data se mění aspoň jednou denně"/>
+               <yesno required="pilot" yes="mění se aspoň jednou denně" no="ne, data se nemění denně"/>
                <help>Řekněte uživatelům, jestli se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete.</help>
             </question>
             <if test="this.frequentChanges() === 'true'">
