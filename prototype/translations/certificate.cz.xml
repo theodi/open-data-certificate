@@ -311,9 +311,9 @@
       <group id="guarantees">
          <label>Garance</label>
          <help>jaká je očekávaná dostupnost dat?</help>
-         <question id="backups" display="Zálohování dat">
+         <question id="backups" display="Offsite zálohy">
             <label>Děláte offsite zálohy?</label>
-            <yesno yes="data jsou zálohována offsite"/>
+            <yesno yes="data jsou zálohována offsite" no="nejsou"/>
             <help>Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody.</help>
             <requirement level="standard">
                <strong>Dělejte offsite zálohy svých dat</strong>, abyste o ně v případě nehody nepřišli.</requirement>
