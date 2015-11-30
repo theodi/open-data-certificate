@@ -646,7 +646,7 @@
             <question id="resolvingIds" display="Navigace pomocí identifikátorů">
                <label>Dají se podle identifikátorů objektů ve vašich datech dohledat další informace?</label>
                <radioset>
-                  <option value="false" display="">
+                  <option value="false" display="nepodporována">
                      <label>nepodporováno</label>
                   </option>
                   <option value="service" display="prostřednictvím služby">
@@ -699,7 +699,7 @@
          <help>do jaké míry mohou uživatelé vašim datům důvěřovat</help>
          <question id="provenance" display="Informace o původu dat">
             <label>Publikujete strojově čitelná metadata o původu dat?</label>
-            <yesno yes="strojově čitelné"/>
+            <yesno yes="strojově čitelné" no="nejsou strojově čitelné"/>
             <help>Je dobré zveřejnit, kde jste k datům přišli a jak jste je zpracovávali. Uživatelé pak mohou vašim datům víc věřit, protože vědí, co jste s nimi dělali.</help>
             <requirement level="exemplar">
                <strong>Měli byste zveřejnit strojově čitelný záznam o původu a zpracování dat</strong>, aby uživatelé věděli, co jste s daty dělali.</requirement>
