@@ -50,7 +50,7 @@
          <if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
             <question id="publisherOrigin" display="Původ dat">
                <label>Shromáždili nebo vytvořili jste <em>všechna</em> data sami?</label>
-               <yesno required="required" yes="data byla vytvořena přímo poskytovatelem"/>
+               <yesno required="required" yes="data byla vytvořena přímo poskytovatelem" no="data nebyla vytvořena přímo poskytovalelem"/>
                <help>Pokud jakákoliv část dat pochází ze zdrojů mimo vaši organizaci, je třeba uvést další informace o právech k jejich zveřejnění.</help>
             </question>
          </if>
