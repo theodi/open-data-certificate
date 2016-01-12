@@ -7,30 +7,16 @@
     a další požadavky na kvalitu dat:</p>
 
     <ul class="kitemarks">
-      <li class="kitemark1">
-        BRONZOVÁ: Data jsou dostupná pod otevřenou licencí, přístupná bez omezení,
-        kdokoliv má právo je použít.
-      </li>
-
+      <% [
+        'basic',
+        'pilot',
+        'standard',
+        'exemplar'
+      ].each do |level| %>
       <li class="kitemark2">
-        STŘÍBRNÁ: Data dokumentována ve strojově čitelném formátu, dá se na ně
-        spoléhat, uživatelé mohou počítat s podporou ze strany vydavatele.
+        <%= t("levels.#{level}.title").upcase %>: <%= t("levels.#{level}.longdesc") %>
       </li>
-
-      <li class="kitemark3">
-        ZLATÁ: Data jsou publikována v otevřeném, strojově čitelném formátu,
-        vydavatel garantuje jejich pravidelnou aktualizaci, nabízí ještě větší
-        podporu a lepší dokumentaci, a k dispozici je také strojově čitelné
-        prohlášení o právech.
-      </li>
-
-      <li class="kitemark4">
-        PLATINOVÁ: Vydavatel nabízí strojově čitelnou dokumentaci o původu dat.
-        Jako identifikátory jsou v datech použita URL nebo jiné univerzální
-        identifikátory. Vydavatel má celý tým lidí, kteří mají na starost
-        budování komunity uživatelů. Celkově jde o výjimečný příklad informační
-        infrastruktury.
-      </li>
+      <% end %>
     </ul>
 
     <table cellpadding="0" cellspacing="0" class="badge-table">
