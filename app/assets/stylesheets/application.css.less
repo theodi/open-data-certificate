@@ -2849,20 +2849,13 @@ strong.certificate-level {
     color: @color;
   }
 }
-.none-level {
-  .level-styles(@basic, url(/assets/badges/no_level_badge.png));
+
+.certificate-badge {
+  background-image: url(/assets/badges/basic_level_badge.png);
 }
-.basic-level {
-  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
-}
-.pilot-level {
-  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
-}
-.standard-level {
-  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
-}
-.exemplar-level {
-  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
+
+strong.certificate-level {
+  color: @basic;
 }
 
 .footer {
