@@ -1696,19 +1696,9 @@ a.transfer {
   line-height: 200%;
 }
 
-.level-badge-basic{
-  background-image:url(/assets/badges/raw_level_badge.png);
+.level-badge-none{
+  background-image:url(/assets/badges/no_level_badge.png);
 }
-.level-badge-pilot{
-  background-image:url(/assets/badges/pilot_level_badge.png);
-}
-.level-badge-standard{
-  background-image:url(/assets/badges/standard_level_badge.png);
-}
-.level-badge-exemplar{
-  background-image:url(/assets/badges/exemplar_level_badge.png);
-}
-
 
 .status-badge{
   width:80px;
@@ -2848,6 +2838,10 @@ strong.certificate-level {
   strong.certificate-level {
     color: @color;
   }
+}
+
+.none-level .certificate-badge {
+  background-image: url(/assets/badges/no_level_badge.png);
 }
 
 .certificate-badge {

@@ -14,7 +14,7 @@
             - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, count: @certificate.days_to_expiry)
         %p= notice
 
-.certificate.hero-unit
+.certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
   - unless minimal
     %ul.pull-right.unstyled
       - if @certificate.needs_updating? && @certificate.owned_by?(current_user)
