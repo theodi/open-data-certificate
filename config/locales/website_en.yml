@@ -39,20 +39,20 @@ en:
       title_with_level: No level
       description: this data does not satisfy the fundamental requirements for open data.
     basic:
-      title: Raw
-      title_with_level: Raw level
+      title: Bronze
+      title_with_level: Bronze level
       description: this data makes a great start at the basics of publishing open data.
     pilot:
-      title: Pilot
-      title_with_level: Pilot level
+      title: Silver
+      title_with_level: Silver level
       description: extra effort went in to support and encourage feedback from people who use this open data.
     standard:
-      title: Standard
-      title_with_level: Standard level
+      title: Gold
+      title_with_level: Gold level
       description: this is regularly published open data with robust support that people can rely on.
     exemplar:
-      title: Expert
-      title_with_level: Expert level
+      title: Platinium
+      title_with_level: Platinium level
       description: this open data is an exceptional example of information infrastructure.
 
   level_descriptions:
@@ -62,10 +62,10 @@ en:
     exemplar: 'An exceptional example of information infrastructure.'
 
   requirement_levels:
-    basic: Raw level certification
-    pilot: Pilot level certification
-    standard: Standard level certification
-    exemplar: Expert level certification
+    basic: Bronze level certification
+    pilot: Silver level certification
+    standard: Gold level certification
+    exemplar: Platinium level certification
 
   required_for_level: This is required for %{level}
   required_for_level_and_above: This is required for %{level} and above
@@ -235,10 +235,10 @@ en:
       jurisdiction: Jurisdiction
       level: Filter by certificate level
       levels:
-        basic: Raw level
-        pilot: Pilot level
-        standard: Standard level
-        exemplar: Expert level
+        basic: Bronze level
+        pilot: Silver level
+        standard: Gold level
+        exemplar: Platinium level
 
     community_verification_panel:
       title: Community verification
