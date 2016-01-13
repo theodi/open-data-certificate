@@ -54,8 +54,8 @@ en:
       description: this is regularly published open data with robust support that people can rely on.
       longdesc: satisfies the Silver requirements, is published in an open standard machine readable format, has guaranteed regular updates, offers greater support, documentation, and includes a machine readable rights statement.
     exemplar:
-      title: Platinium
-      title_with_level: Platinium level
+      title: Platinum
+      title_with_level: Platinum level
       description: this open data is an exceptional example of information infrastructure.
       longdesc: satisfies the Gold requirements, has machine readable provenance documentation, uses unique identifiers in the data, the publisher has a communications team offering support. This is an exceptional example of an information infrastructure.
 
@@ -69,7 +69,7 @@ en:
     basic: Bronze level certification
     pilot: Silver level certification
     standard: Gold level certification
-    exemplar: Platinium level certification
+    exemplar: Platinum level certification
 
   required_for_level: This is required for %{level}
   required_for_level_and_above: This is required for %{level} and above
@@ -242,7 +242,7 @@ en:
         basic: Bronze level
         pilot: Silver level
         standard: Gold level
-        exemplar: Platinium level
+        exemplar: Platinum level
 
     community_verification_panel:
       title: Community verification
