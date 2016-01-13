@@ -7,21 +7,16 @@
     <p>Each badge identifies a level of achievement in open data publication.</p>
 
     <ul class="kitemarks">
-      <li class="kitemark1">
-        RAW: data is openly licensed, available with no restrictions, accessible and legally reusable.
-      </li>
-
+      <% [
+        'basic',
+        'pilot',
+        'standard',
+        'exemplar'
+      ].each do |level| %>
       <li class="kitemark2">
-        PILOT: satisfies the Raw requirements, the data is documented in a machine readable format, reliable and offers ongoing support from the publisher via a dedicated communication channel.
+        <%= t("levels.#{level}.title").upcase %>: <%= t("levels.#{level}.longdesc") %>
       </li>
-
-      <li class="kitemark3">
-        STANDARD: satisfies the Pilot requirements, is published in an open standard machine readable format, has guaranteed regular updates, offers greater support, documentation, and includes a machine readable rights statement.
-      </li>
-
-      <li class="kitemark4">
-        EXPERT: satisfies the Standard requirements, has machine readable provenance documentation, uses unique identifiers in the data, the publisher has a communications team offering support. This is an exceptional example of an information infrastructure.
-      </li>
+      <% end %>
     </ul>
 
 <%
