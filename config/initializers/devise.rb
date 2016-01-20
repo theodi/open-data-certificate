@@ -90,7 +90,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming his account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming his account.
-  # config.allow_unconfirmed_access_for = 2.days
+  config.allow_unconfirmed_access_for = 1.day
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm
@@ -240,4 +240,11 @@ Devise.setup do |config|
 
   config.http_authenticatable_on_xhr = false
   config.navigational_formats = ["*/*", :html, :json]
+end
+
+Devise::FailureApp.class_eval do
+  def store_location!
+    path = request.get? ? attempted_path : request.referer
+    session[:"#{scope}_return_to"] = path unless http_auth?
+  end
 end

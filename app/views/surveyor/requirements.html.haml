@@ -1,7 +1,6 @@
 - content_for(:header) do
   / header overridden
 - content_for(:main_container_class) {'non-container improvements'}
-- resume_path = @response_set.complete? ? '#' : surveyor.edit_my_survey_path(survey_code: @response_set.survey.access_code, response_set_code: @response_set.access_code)
 
 .affixed
   %header
@@ -12,7 +11,7 @@
           %h3= @response_set.title
         .span3
           -if @response_set.incomplete?
-            =link_to t('improvements.return_to_questionnaire'), surveyor.continue_my_survey_path(:survey_code => @response_set.survey.access_code, :response_set_code => @response_set.access_code), :class => 'btn btn-primary btn-large return', :role => "button"
+            =button_to t('improvements.return_to_questionnaire'), resume_path, :method => 'post', :class => 'btn btn-primary btn-large return', :role => "button"
           -else
             =link_to t('improvements.return_to_dashboard'), dashboard_path, :class => 'btn btn-primary btn-large return', :role => "button"
 
@@ -26,7 +25,7 @@
 
   - unless (requirements + fields).empty?
 
-    %section{:class => "improvement improvement-#{level}"}
+    %section{:class => "improvement"}
 
       %header
         .container
@@ -51,12 +50,9 @@
                     .span4
                       %p= markdown(field.help_text || '')
                     .span6.offset2
-                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{field.id}"}
-                        %strong= t('improvements.buttons.understood')
-                        =t('improvements.buttons.understood_action')
+                      =button_to t('improvements.buttons.understood'), resume_path(field), method: 'post', class: 'btn btn-primary btn-large'
                       %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: field.discussion_topic, back: request.original_fullpath, title: field.text, question_id: field.id)}
-                        %strong= t('improvements.buttons.misunderstood')
-                        =t('improvements.buttons.misunderstood_action')
+                        =t('improvements.buttons.misunderstood')
               %hr.heavy
 
           -requirements.each do |requirement|
@@ -74,10 +70,7 @@
                     .span4
                       %p= markdown(answer.try(:help_text) || question.try(:help_text) || '')
                     .span6.offset2
-                      %a.btn.btn-primary.btn-large{:href => "#{resume_path}#q_#{question.try(:id)}"}
-                        %strong= t('improvements.buttons.understood')
-                        =t('improvements.buttons.understood_action')
+                      =button_to t('improvements.buttons.understood'), resume_path(question), method: 'post', class: 'btn btn-primary btn-large'
                       %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: question.discussion_topic, back: request.original_fullpath, title: question.text, question_id: question.id)}
-                        %strong= t('improvements.buttons.misunderstood')
-                        =t('improvements.buttons.misunderstood_action')
+                        =t('improvements.buttons.misunderstood')
               %hr.heavy

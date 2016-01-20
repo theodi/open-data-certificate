@@ -1,6 +1,10 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class UploadUsageDataTest < ActiveSupport::TestCase
+  setup do
+    @gdocs_path = ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION']
+    assert @gdocs_path, "GAPPS_CERTIFICATE_USAGE_COLLECTION must be set to a path"
+  end
 
   test "create_csvs creates a CSV file with correct stuff" do
     VCR.use_cassette('create_csvs creates a CSV file with correct stuff') do
@@ -20,17 +24,9 @@ class UploadUsageDataTest < ActiveSupport::TestCase
     end
   end
 
-  test "create_csvs shouldn't choke on blank rows" do
-    data = [{foo: "foo", baz: "baz"}, nil, {foo: "baz", baz: "foo"}, nil]
-    csv = UploadUsageData.create_csv(data)
-
-    assert_equal 3, CSV.parse(csv).count
-    assert_true Csvlint::Validator.new( StringIO.new(csv) ).valid?
-  end
-
   test "find_collection finds the corrrect collection" do
     VCR.use_cassette('find_collection finds the corrrect collection') do
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(@gdocs_path)
       assert_equal "Usage Data", collection.title
     end
   end
@@ -54,7 +50,7 @@ class UploadUsageDataTest < ActiveSupport::TestCase
       UploadUsageData.upload_csv(csv, 'ODCs Test file upload')
 
       file = session.file_by_title('ODCs Test file upload')
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(@gdocs_path)
 
       assert_equal 'ODCs Test file upload', file.title
       assert_equal 1, collection.files.select {|f| f.title == 'ODCs Test file upload'}.count
@@ -71,13 +67,53 @@ class UploadUsageDataTest < ActiveSupport::TestCase
 
       UploadUsageData.perform
 
-      collection = UploadUsageData.find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+      collection = UploadUsageData.find_collection(@gdocs_path)
 
-      published_certificates = collection.files.select {|f| f.title.match /Published certificates - [0-9]+\-[0-9]+\-[0-9]+/}
-      all_certificates = collection.files.select {|f| f.title.match /All certificates - [0-9]+\-[0-9]+\-[0-9]+/}
+      published_certificates = collection.files.select {|f| f.title.match /Published - [0-9]+\-[0-9]+\-[0-9]+/}
+      all_certificates = collection.files.select {|f| f.title.match /All - [0-9]+\-[0-9]+\-[0-9]+/}
 
       assert_equal 1, published_certificates.count
       assert_equal 1, all_certificates.count
+    end
+  end
+
+  test "creates collections if missing" do
+    VCR.use_cassette('perform uploads the correct files') do
+      new_collection = UploadUsageData.find_collection("#{@gdocs_path}/Test Folder")
+      collection = UploadUsageData.find_collection(@gdocs_path)
+      assert_not_nil collection.subcollection_by_title("Test Folder")
+    end
+  end
+
+  test "does not fail if no certificates exist" do
+    VCR.use_cassette('perform uploads the correct files') do
+      UploadUsageData.perform
+    end
+  end
+
+  test "job is enqueued for next week" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      Delayed::Job.expects(:enqueue).with(UploadUsageData, has_entries(:run_at => next_week))
+      UploadUsageData.perform
+    end
+  end
+
+  test "job is enqueued for next week after failure" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      Delayed::Job.expects(:enqueue).with(UploadUsageData, has_entries(:run_at => next_week))
+      UploadUsageData.stubs(:create_csv).raises(ArgumentError, 'deliberate failure')
+      UploadUsageData.perform rescue nil
+    end
+  end
+
+  test "job is not enqued if there is already one pending" do
+    next_week = DateTime.now.utc.next_week
+    VCR.use_cassette('perform uploads the correct files') do
+      UploadUsageData.perform
+      Delayed::Job.expects(:enqueue).never
+      UploadUsageData.perform
     end
   end
 

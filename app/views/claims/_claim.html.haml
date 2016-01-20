@@ -1,0 +1,11 @@
+= modal_popup("claim-#{certificate.id}", "claim-certificate", t('.claim_heading')) do
+  %p=t(".certificate_award")
+  %p=t(".explanation")
+  %ul
+    %li=t(".explanation_open")
+    %li=t(".explanation_improve")
+    %li=t(".explanation_badge")
+  %p=t(".claim_certificate")
+  = form_for Claim.new(dataset: certificate.dataset) do |f|
+    = f.hidden_field :dataset_id
+    = f.submit t(".send_request"), class: 'btn btn-primary'

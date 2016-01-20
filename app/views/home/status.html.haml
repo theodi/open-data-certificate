@@ -4,7 +4,7 @@
 
 
 .pull-right
-  Last commit 
+  Last commit
   = link_to @head_commit[0..6] , "https://github.com/theodi/open-data-certificate/commit/#{@head_commit}", class: 'badge'
 
 
@@ -18,25 +18,52 @@
 %hr.heavy
 
 %h1
-  Counts
+  Surveys
 
--@counts.each do |k,count|
-  %h2= k.titleize
-  %ul
-    -count.each do |c,v|
-      %li
-        %strong= c.to_s.humanize
-        -if v.class == Hash
-          %ul
-            -v.each do |l,n|
-              %li
-                %strong= l.to_s.humanize
-                = n
-        -else
-          = v
+%p
+  %strong= pluralize Certificate.counts[:all], 'surveys'
+  started
 
 %hr.heavy
 
+.embedded
+
+  %h1
+    Embedded certificates
+
+  %p
+    %strong= pluralize EmbedStat.unique_datasets, 'certificates'
+    embedded on
+    %strong= pluralize EmbedStat.count, 'webpages'
+    and
+    %strong= pluralize EmbedStat.unique_domains, 'domains'
+
+  %p
+    =link_to "Download list of embedded certificates", embed_stats_path(format: "csv")
+
+  %hr.heavy
+
+%h1 Datasets with certificates
+%table.table.table-striped
+  %tr
+    - ['all', 'expired', 'this_month', 'publishers'].each do |a|
+      %th= a.humanize
+
+    %th{rowspan: 5} Levels
+
+    - ['none', 'basic', 'pilot', 'standard', 'exemplar'].each do |level|
+      %th= level.humanize
+
+  - if @published
+    %tr
+      %th Published
+      %td{colspan: 9}= link_to "get historic data", status_path(format: "csv", type: 'published')
+    = render partial: "home/stats", locals: {stats: @published}
+  - if @all
+    %tr
+      %th including Drafts
+      %td{colspan: 9}= link_to "get historic data", status_path(format: "csv", type: 'all')
+    = render partial: "home/stats", locals: {type: 'all', stats: @all}
+
 %p.data
-  Get historic data as 
-  =alternate_link_buttons(:class => 'badge')
+  = link_to("Download legacy data", "legacy_stats.csv")

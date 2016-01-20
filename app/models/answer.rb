@@ -1,19 +1,19 @@
 class Answer < ActiveRecord::Base
   include Surveyor::Models::AnswerMethods
 
-  attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement
+  attr_accessible :corresponding_requirements, :help_text_more_url, :input_type, :placeholder, :text_as_statement
+
+  serialize :corresponding_requirements, Array
+
+  scope :urls, where(:input_type => 'url')
+  scope :for_id, lambda { |id| where(reference_identifier: id) }
 
   def message?
     !(message || '').strip.blank?
   end
 
-  def requirement
-    @requirement ||= [read_attribute(:requirement), question.try(:requirement)].delete_if(&:blank?).first
-  end
-
   def requirement_level
-    #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
-    requirement.to_s.match(/^[a-zA-Z]*/).to_s
+    corresponding_requirements.first.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
   def requirement_level_index
@@ -25,13 +25,29 @@ class Answer < ActiveRecord::Base
   end
 
   def translation(locale)
-    {:text => self.text,
-     :help_text => self.help_text,
-     :default_value => self.default_value,
-     :placeholder => self.placeholder,
-    }.with_indifferent_access.merge(
-      (self.question.translation(locale)[:answers] || {})[self.reference_identifier] || {}
-    )
+    default = {
+      "text" => text,
+      "help_text" => help_text,
+      "default_value" => default_value,
+      "placeholder" => placeholder
+    }
+
+    t = question.translation(locale)[:answers] || {}
+
+    default.merge(
+      t[reference_identifier] || t["a_#{reference_identifier}"] || {}
+    ).with_indifferent_access
   end
 
+  def answer_text(locale=I18n.locale)
+    translation(locale)[:text]
+  end
+
+  def statement_text(locale=I18n.locale)
+    translation(locale)[:text_as_statement]
+  end
+
+  def value_key
+    input_type == 'url' ? :text_value : :string_value
+  end
 end

@@ -1,0 +1,45 @@
+cs:
+  surveyor:
+    take_these_surveys: "Můžete dokončit následující formuláře"
+    take_it: "Dokončit"
+    completed_survey: "Formulář dokončen"
+    unable_to_find_your_responses: "Nepodařilo se najít vaše odpovědi na tento formulář"
+    unable_to_update_survey: "Nepodařilo se aktualizovat odpovědi"
+    unable_to_find_that_legislation: "Jurisdikce nenalezena"
+    unable_to_find_that_survey: "Formulář nenalezen"
+    please_choose_a_legislation: "Vyberte prosím jurisdikci"
+    survey_started_success: "Formulář úspěšně založen"
+    click_here_to_finish: "Pokračovat"
+    saving_questionnaire: "Ukládám"
+    previous_section: "&laquo; Předchozí část"
+    next_section: "Další část &raquo;"
+    select_one: "Vyberte…"
+    sections: "Oddíly"
+    language: "Jazyk"
+    response_set_is_published: "Nelze upravit formulář, který už byl zveřejněn"
+    modifications_not_allowed: Odpovědi v tuto chvíli nelze měnit
+    all_mandatory_questions_need_to_be_completed: "Je potřeba vyplnit všechny povinné odpovědi"
+    please_check_all_your_urls_exist: "Zkontrolujte si prosím zadaná URL"
+    must_be_logged_in_to_complete: "K dokončení dotazníku se musíte přihlásit nebo zaregistrovat"
+    you_need_to_register_or_sign_in_to_save: "K vygenerování certifikátu a uložení odpovědí na příště se musíte přihlásit nebo zaregistrovat."
+    url_verified: "URL úspěšně ověřeno"
+    url_warning: "Zkontrolujte prosím, jestli URL sedí"
+    url_explained: "Máme vaše vysvětlení, proč se URL nepodařilo ověřit"
+    autocompleted: "Tato data jsme automaticky doplnili z vašich předchozích odpovědí, ale můžete je změnit"
+    autocompleted_changed: "Vysvětlete prosím, proč jste tuto odpověď změnili"
+    autocompleted_explained: "Vysvětlili jste nám, proč bylo odpověď nutné měnit"
+    autocompleted_url_warning: "Toto URL jsme doplnili automaticky, ale vypadá to, že není správně"
+    metadata_missing: "Některé z těchto údajů se nepodařilo dohledat na stránce s dokumentací"
+    question_comment: Nevíte si s touto otázkou rady?
+    question_comment_read_more: Číst dál…
+    override_explanation_title: Proč URL nefunguje?
+    autocomplete_explanation: Vysvětlete prosím, proč měníte automaticky vyplněnou otázku. Vyjasníte tím situaci uživatelům svých dat.
+    url_explanation: Vysvětlete prosím, proč URL není validní. Vyjasníte tím situaci pro uživatele svých dat.
+    publisher_url_invalid: Data neprošla automatickou validací, protože URL nefunguje správně.
+    publisher_changed_autocompleted: 'Některé automaticky vyplněné údaje byly změněny poskytovatelem. '
+    find_out_more: Podrobnosti
+    from_publisher: 'Vysvětlení poskytovatele:'
+    documentation_url:
+      autocompleted: Formulář byl automaticky předvyplněn pomocí informací z vašeho URL.
+      not_autocompleted: Nepodařilo se nám předvyplnit formulář na základě informací z vašeho URL.
+      missing: "K otevřeným datům, která publikujete, byste měli mít někde na webu dokumentaci, aby uživatelé měli lepší představu o jejich obsahu, kontextu a potenciálním využití."

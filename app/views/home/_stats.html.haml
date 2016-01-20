@@ -1,0 +1,6 @@
+%tr
+  - ['all', 'expired', 'this_month', 'publishers'].each do |a|
+    %td= stats.send(a)
+
+  - ['none', 'basic', 'pilot', 'standard', 'exemplar'].each do |level|
+    %td= stats.send("level_#{level}")

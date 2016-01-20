@@ -1,12 +1,28 @@
-require 'coveralls'
-Coveralls.wear! 'rails'
+if ENV['COVERAGE']
+  require 'coveralls'
+  Coveralls.wear_merged! 'rails'
+end
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'parallel_tests/test/runtime_logger' if Rails.env.development?
 
 require 'factory_girl'
 require 'vcr'
+require 'mocha/setup'
+require 'webmock/test_unit'
+require 'sidekiq/testing'
+begin
+  require 'pry'
+rescue LoadError
+end
+
+Sidekiq::Testing.inline!
+
+# ENVARS that need to be present in the env before being escaped by VCR
+ENV['GAPPS_USER_EMAIL'] = "GAPPS_USER_EMAIL"
+ENV['GAPPS_PASSWORD'] = "GAPPS_PASSWORD"
 
 VCR.configure do |c|
   # Automatically filter all secure details that are stored in the environment
@@ -20,6 +36,11 @@ VCR.configure do |c|
   c.ignore_hosts 'licenses.opendefinition.org', 'www.example.com'
 end
 
+# Configuration ENVARS:
+ENV['CERTIFICATE_HOSTNAME'] = 'test.host'
+ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER'] = "certificates_test"
+ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] = "ODI Drive/Technical/Test Data/Usage Data"
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
@@ -28,13 +49,19 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
-
-  ENV['RACKSPACE_CERTIFICATE_DUMP_CONTAINER'] = "certificates_test"
-
   def assert_attribute_exists(model, attribute)
     assert_respond_to model, attribute
   end
 
-end
+  def load_custom_survey fname
+    builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
+    builder.parse_file
+  end
 
-require 'mocha/setup'
+  def http_auth(user)
+    header = ActionController::HttpAuthentication::Basic.encode_credentials(
+      user.email, user.authentication_token)
+    request.env['HTTP_AUTHORIZATION'] = header
+    sign_in user
+  end
+end

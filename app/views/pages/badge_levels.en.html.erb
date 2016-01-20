@@ -1,0 +1,203 @@
+<% content_for :header_title, t("badge_levels.header_title") %>
+
+<div class="container about">
+  <div class="span8">
+    <h2>Badge levels</h2>
+
+    <p>Each badge identifies a level of achievement in open data publication.</p>
+
+    <ul class="kitemarks">
+      <% [
+        'basic',
+        'pilot',
+        'standard',
+        'exemplar'
+      ].each do |level| %>
+      <li class="kitemark2">
+        <%= t("levels.#{level}.title").upcase %>: <%= t("levels.#{level}.longdesc") %>
+      </li>
+      <% end %>
+    </ul>
+
+<%
+#    <table cellpadding="0" cellspacing="0" class="badge-table">
+#      <tbody>
+#        <tr class="types-row">
+#          <td></td>
+#          <th>Raw</th>
+#          <th>Pilot</th>
+#          <th>Standard</th>
+#          <th>Expert</th>
+#        </tr>
+#        <tr>
+#          <th colspan="5" class="group-heading"> Legal</th>
+#        </tr>
+#        <tr>
+#          <th>Openly licensed &amp; legally reusable (= ‘open’)</th>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Clear rights statement, detailing any copyrights</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Privacy issues addressed</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Machine readable rights statement</th>
+#          <td></td>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th colspan="5" class="group-heading">Technical</th>
+#        </tr>
+#        <tr>
+#          <th>Accessible on the web</th>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Data uses a machine readable format</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Data is timestamped or up to date</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Data will be available for at least a year</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Data published in content appropriate formats</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Data uses open standard machine readable formats</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Regular backups of data</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>URLs used as identifiers within data</th>
+#          <td></td>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th colspan="5" class="group-heading">Practical &amp; social</th>
+#        </tr>
+#        <tr>
+#          <th>Discoverable (linked to from other web pages)</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Single consistent URL for downloading data</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Social media accounts used to promote data</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Forum or mailing list for users</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Dedicated comms team building user community</th>
+#          <td></td>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th colspan="5" class="group-heading">Support</th>
+#        </tr>
+#        <tr>
+#          <th>Data is documented</th>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Machine readable metadata (documentation)</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Guaranteed <a href="https://sunlightfoundation.com/policy/documents/ten-open-data-principles/" targth="_blank">timeliness</a> (data always up to date)</h5></td>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Quality issues documented</th>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#          <td>✓</td>
+#        </tr>
+#        <tr>
+#          <th>Machine readable provenance documentation</th>
+#          <td></td>
+#          <td></td>
+#          <td></td>
+#          <td>✓</td>
+#        </tr>
+#      </tbody>
+#    </table>
+%>
+
+  </div>
+</div>

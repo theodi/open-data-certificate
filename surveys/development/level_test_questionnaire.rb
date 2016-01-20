@@ -1,5 +1,4 @@
 survey 'Level Test Questionnaire',
-       :default_mandatory => 'false',
        :dataset_title => 'dataTitle',
        :dataset_curator => 'dataTitle' do
 
@@ -20,7 +19,6 @@ survey 'Level Test Questionnaire',
         :requirement => 'basic_1'
 
     label_basic_requirement_1 'You should complete the basic1 question',
-                              :custom_renderer => '/partials/requirement_basic',
                               :requirement => 'basic_1'
     dependency :rule => 'A or B'
     condition_A :q_basic_1, '==', { :string_value => '', :answer_reference => '1' }
@@ -34,7 +32,6 @@ survey 'Level Test Questionnaire',
         :requirement => 'pilot_1'
 
     label_pilot_requirement_1 'You should complete the pilot1 question',
-                              :custom_renderer => '/partials/requirement_pilot',
                               :requirement => 'pilot_1'
     dependency :rule => 'A or B'
     condition_A :q_pilot_1, '==', { :string_value => '', :answer_reference => '1' }
@@ -48,7 +45,6 @@ survey 'Level Test Questionnaire',
         :requirement => 'standard_1'
 
     label_standard_requirement_1 'You should complete the standard1 question',
-                                 :custom_renderer => '/partials/requirement_standard',
                                  :requirement => 'standard_1'
     dependency :rule => 'A or B'
     condition_A :q_standard_1, '==', { :string_value => '', :answer_reference => '1' }
@@ -62,7 +58,6 @@ survey 'Level Test Questionnaire',
         :requirement => 'exemplar_1'
 
     label_exemplar_requirement_1 'You should complete the exemplar1 question',
-                                 :custom_renderer => '/partials/requirement_exemplar',
                                  :requirement => 'exemplar_1'
     dependency :rule => 'A or B'
     condition_A :q_exemplar_1, '==', { :string_value => '', :answer_reference => '1' }
@@ -82,25 +77,21 @@ survey 'Level Test Questionnaire',
                 :requirement => 'exemplar_2'
 
     label_basic_requirement_2 'You should complete the basic2 question',
-                                 :custom_renderer => '/partials/requirement_basic',
                                  :requirement => 'basic_2'
     dependency :rule => 'A'
     condition_A :q_multi_requirement, '!=', :a_basic2
 
     label_pilot_requirement_2 'You should complete the pilot2 question',
-                                 :custom_renderer => '/partials/requirement_pilot',
                                  :requirement => 'pilot_2'
     dependency :rule => 'A'
     condition_A :q_multi_requirement, '!=', :a_pilot2
 
     label_standard_requirement_2 'You should complete the standard2 question',
-                                 :custom_renderer => '/partials/requirement_standard',
                                  :requirement => 'standard_2'
     dependency :rule => 'A'
     condition_A :q_multi_requirement, '!=', :a_standard2
 
     label_exemplar_requirement_2 'You should complete the exemplar2 question',
-                                 :custom_renderer => '/partials/requirement_exemplar',
                                  :requirement => 'exemplar_2'
     dependency :rule => 'A'
     condition_A :q_multi_requirement, '!=', :a_exemplar2
@@ -120,20 +111,17 @@ survey 'Level Test Questionnaire',
                 :requirement => 'exemplar_3'
 
     label_basic_requirement_3 'You should complete the basic3 question',
-                              :custom_renderer => '/partials/requirement_basic',
                               :requirement => 'basic_3'
     dependency :rule => 'A'
     condition_A :q_radio_requirement, 'count==0'
 
     label_pilot_requirement_3 'You should complete the pilot3 question',
-                              :custom_renderer => '/partials/requirement_pilot',
                               :requirement => 'pilot_3'
     dependency :rule => 'A or B'
     condition_A :q_radio_requirement, 'count==0'
     condition_B :q_radio_requirement, '==', :a_basic3
 
     label_standard_requirement_3 'You should complete the standard3 question',
-                                 :custom_renderer => '/partials/requirement_standard',
                                  :requirement => 'standard_3'
     dependency :rule => 'A or B or C'
     condition_A :q_radio_requirement, 'count==0'
@@ -141,7 +129,6 @@ survey 'Level Test Questionnaire',
     condition_C :q_radio_requirement, '==', :a_pilot3
 
     label_exemplar_requirement_3 'You should complete the exemplar3 question',
-                                 :custom_renderer => '/partials/requirement_exemplar',
                                  :requirement => 'exemplar_3'
     dependency :rule => 'A or B or C or D'
     condition_A :q_radio_requirement, 'count==0'

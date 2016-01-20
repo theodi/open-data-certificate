@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class TransfersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
@@ -14,7 +14,7 @@ class TransfersControllerTest < ActionController::TestCase
       post :create, transfer: transfer.attributes
     end
 
-    assert_redirected_to '/users/dashboard'
+    assert_redirected_to '/users/dashboard?locale=en'
 
     assert_equal 'Transfer created', flash[:notice]
     assert_equal user, assigns(:transfer).user
@@ -29,9 +29,9 @@ class TransfersControllerTest < ActionController::TestCase
     transfer = FactoryGirl.build :transfer, dataset: dataset
 
     assert_no_difference 'Transfer.count' do
-      assert_raises CanCan::AccessDenied do
-        post :create, transfer: transfer.attributes
-      end
+      post :create, transfer: transfer.attributes
+
+      assert_response 403
     end
   end
 
@@ -40,7 +40,7 @@ class TransfersControllerTest < ActionController::TestCase
 
     get :claim, id: transfer.id
     assert_response :success
-    assert_equal "/transfers/#{transfer.id}/claim", session[:sign_in_redirect]
+    assert_equal "/transfers/#{transfer.id}/claim?locale=en", session[:user_return_to]
   end
 
   test "accept claim" do
@@ -48,10 +48,10 @@ class TransfersControllerTest < ActionController::TestCase
     transfer = FactoryGirl.create :notified_transfer, target_email: user.email
 
     assert_difference ->{user.reload.datasets.count}, 1 do
-      put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+      put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token}
     end
 
-    assert_redirected_to '/users/dashboard'
+    assert_redirected_to '/users/dashboard?locale=en'
     assert_equal I18n.t('transfers.flashes.complete'), flash[:notice]
     assert transfer.reload.accepted?
 
@@ -71,19 +71,19 @@ class TransfersControllerTest < ActionController::TestCase
     sign_in user = FactoryGirl.create(:user)
     transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
 
-    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token} 
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token}
 
     assert_equal I18n.t('transfers.flashes.access_denied_email'), flash[:error]
     refute transfer.reload.accepted?
   end
 
-  test "accepting user can't override the target_email" do
+  test "accepting user can't override the target_email to bypass check" do
     sign_in user = FactoryGirl.create(:user)
     transfer = FactoryGirl.create :notified_transfer, target_email: "foo+#{user.email}"
 
-    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: user.email} 
+    put :accept, id: transfer.id, transfer: {token_confirmation: transfer.token, target_email: "foo+#{user.email}"}
 
-    assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+    assert_equal I18n.t('transfers.flashes.access_denied_email'), flash[:error]
     refute transfer.reload.accepted?
 
   end
@@ -109,6 +109,14 @@ class TransfersControllerTest < ActionController::TestCase
     end
 
     assert_equal I18n.t('transfers.flashes.access_denied'), flash[:error]
+  end
+
+  test "accepting a certificate the user already own's redirects to dataset" do
+    transfer = FactoryGirl.create(:transfer, :aasm_state => :accepted)
+    assert transfer.accepted?
+    sign_in transfer.user
+    get :claim, id: transfer.id, token: transfer.token
+    assert_redirected_to dataset_path(transfer.dataset)
   end
 
 end

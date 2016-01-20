@@ -1,0 +1,201 @@
+<% content_for :header_title, t("badge_levels.header_title") %>
+
+<div class="container about">
+  <div class="span8">
+    <p>Při certifikaci datové sady můžete dosáhnout na některou
+    z následujících čtyř úrovní, které postupně přidávají další
+    a další požadavky na kvalitu dat:</p>
+
+    <ul class="kitemarks">
+      <% [
+        'basic',
+        'pilot',
+        'standard',
+        'exemplar'
+      ].each do |level| %>
+      <li class="kitemark2">
+        <%= t("levels.#{level}.title").upcase %>: <%= t("levels.#{level}.longdesc") %>
+      </li>
+      <% end %>
+    </ul>
+
+    <table cellpadding="0" cellspacing="0" class="badge-table">
+      <tbody>
+        <tr class="types-row">
+          <td></td>
+          <th>Bronzová</th>
+          <th>Stříbrná</th>
+          <th>Zlatá</th>
+          <th>Platinová</th>
+        </tr>
+        <tr>
+          <th colspan="5" class="group-heading">Právní kritéria</th>
+        </tr>
+        <tr>
+          <th>Otevřená data (otevřená licence + práva na použití)</th>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Jasné prohlášení o právech, podrobnosti o autorských právech</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Vyřešená ochrana osobních údajů</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Strojově čitelné prohlášení o právech</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th colspan="5" class="group-heading">Technická kritéria</th>
+        </tr>
+        <tr>
+          <th>Data jsou dostupná na webu</th>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou ve strojově čitelném formátu</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou opatřena časovým razítkem nebo jsou stále aktuální</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data budou k dispozici alespoň rok</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou ve formátu, který se pro ně hodí</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou ve strojově čitelném otevřeném formátu</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou pravidelně zálohována</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Identifikátory používané v datech jsou URL</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th colspan="5" class="group-heading">Praktická a sociální kritéria</th>
+        </tr>
+        <tr>
+          <th>Data se dají snadno najít, odkazují na ně jiné weby</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data se dají snadno stáhnout na jednotném URL</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Data jsou propagována na sociálních sítích</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Uživatelé dat mají k dispozici fórum nebo mailing list</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>O komunitu uživatelů se stará vyhrazený tým lidí</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th colspan="5" class="group-heading">Podpora</th>
+        </tr>
+        <tr>
+          <th>Data jsou dokumentována</th>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Metadata a dokumentace jsou ve strojově čitelném formátu</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Vydavatel zaručuje aktuálnost dat</h5></td>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Dokumentace zmiňuje potenciální rezervy v kvalitě dat</th>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <th>Strojově čitelná dokumentace původu dat</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

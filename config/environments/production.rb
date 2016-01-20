@@ -7,15 +7,12 @@ OpenDataCertificate::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  
-  if ENV["MEMCACHED_HOSTS"]
-    config.cache_store = :mem_cache_store, ENV["MEMCACHED_HOSTS"]
-  else
-    config.cache_store = :memory_store
-  end
-  
+
+  config.cache_store = :memory_store
+
   config.lograge.enabled = true
   config.lograge.log_format = :logstash
+  config.lograge.ignore_actions = %w[main#ping]
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -54,22 +51,21 @@ OpenDataCertificate::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( badge.css )
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
   # **IMPORTANT** Define the default url (for devise)
 
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = {
+    :host => ENV["CERTIFICATE_HOSTNAME"]
+  }
 
   # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
   #   - https://addons.heroku.com/mandrill
   if ENV["MANDRILL_USERNAME"]
 
     # **IMPORTANT** Define the default url (for devise)
-    config.action_mailer.default_url_options = { :host => 'certificates.theodi.org' }
 
     config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
@@ -81,11 +77,6 @@ OpenDataCertificate::Application.configure do
       # :domain => 'heroku.com', # your domain to identify your server when connecting
     }
 
-  end
-  
-  # Load Google Analytics tracking ID
-  if ENV['GOOGLE_ANALYTICS_CERTIFICATE']
-    GA.tracker = ENV['GOOGLE_ANALYTICS_CERTIFICATE']
   end
 
   # Enable threaded mode
@@ -103,5 +94,3 @@ OpenDataCertificate::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
 end
-
-

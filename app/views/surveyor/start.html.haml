@@ -6,52 +6,70 @@
 - content_for(:main_container_class) {'non-container'}
 
 / has it's own form, so need it up here
--@surveys = Survey.available_to_complete
 =render :partial => 'shared/switch_jurisdiction', locals: {response_set: @response_set}
 =render :partial => 'shared/switch_language', locals: {response_set: @response_set}
 
-- scope_locale @response_set.locale do
-  %header
-    .container
-      .row
-        .span9
-          .jurisdiction
-            Jurisdiction:
-            .badge.badge-inverse=  @response_set.jurisdiction
-            %span.status= @survey.try(:status)
-            = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown' do
-              %i.icon.icon-pencil
-            - if @survey.translations.count > 1
-              Language:
-              .badge.badge-inverse= @response_set.locale_name
-              = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal} do
-                %i.icon.icon-pencil
+%header
+  .container
+    .row
+      .span9
+        .jurisdiction
+          = t('surveys.jurisdiction')
+          .badge.badge-inverse=  @response_set.jurisdiction
+          %span.status= @survey.try(:status)
+          = link_to "#switch-#{@response_set.id}", data: {toggle: :modal, content: t('dashboard.popover.change_jurisdiction') }, class: 'popdown changer' do
+            %i.icon.icon-pencil
+          = t('surveys.language')
+          = certificate_locale_links(@response_set.jurisdiction)
+          = link_to "#switch-language-#{@response_set.id}", data:{toggle: :modal}, class: 'changer' do
+            %i.icon.icon-pencil
+            = t('surveys.other_languages')
 
-          %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
+        %h1{'data-bind-to-input' => @survey.meta_map[:dataset_title]}= @response_set.title
 
-  #surveyor
-    .container.survey-intro
-      .well
-        .row-fluid
-          .span8.lead
-            = @survey.translation(I18n.locale)[:description].try(:html_safe)
-            %p
-              %a{href: about_url} Read more about Open Data Certificates
-
-        = form_for [surveyor, :start, @response_set] do |f|
-          = f.label :documentation_url, 'Where is your data described?'
-
-          .row-fluid
-            .span8
-              = f.url_field :documentation_url, class: 'string', placeholder: 'Documentation URL', value: @response_set.documentation_url
-            .span4
-              %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: 'Please wait while we check this URL'}}
-                %i.icon-loading.icon-spin.icon-refresh
-                Check URL
-
+#surveyor
+  .container.survey-intro
+    -if @url_error and @response_set.documentation_url_explanation.blank?
+      .alert.alert-alert.flash{"data-dismiss" => "alert"}
+        %i.icon-exclamation-sign.icon-large.icon-white
+        %button.icon-remove{"data-dismiss" => "alert", :type => "button"}
+        = t('surveys.url_problem_error')
+    .well
+      .row-fluid
+        .span8.lead
+          != @survey.intro
           %p
-            I don't have a URL
-            %a.btn{href: 'take'} Skip this
+            %a{href: about_page_url}
+              = t('surveys.read_more')
+
+      = semantic_form_for [:start, @response_set] do |f|
+        - question = @survey.documentation_url
+        = f.label :documentation_url, question.heading
+
+        .row-fluid
+          .span8
+            = f.url_field :documentation_url, class: 'string', placeholder: question.placeholder, value: @response_set.documentation_url || @documentation_url
+            - explanation_class = "show" if @url_error
+            #start_url_explanation.explanation{class: explanation_class}
+              = f.input :documentation_url_explanation, as: :additional_text, label: t('surveyor.override_explanation_title'), subtitle: t('surveyor.url_explanation')
+
+            .lead
+              = t('surveys.dataset_description_html')
+          .span4
+            %button.btn.btn-large.btn-primary.submit{data:{toggle: 'popover', placement: 'bottom', content: t('surveys.url_problem_error'), error: t('surveys.url_unknown_error')}}
+              %i.icon-loading.icon-spin.icon-refresh
+              %i.icon-exclamation-sign
+              = t('surveys.check_url_button')
+
+        %p
+          = t('surveys.do_not_have_url')
+          %a.btn{href: 'take'}
+            = t('surveys.skip_this_button')
 
 
 / #surveyor fieldset ol li label, #surveyor fieldset ol li input
+- content_for(:foot_scripts) do
+  :javascript
+    $(document).ready(function() {
+      Tracking.event('Questionnaire', 'begin', #{@response_set.access_code.to_json})
+    });

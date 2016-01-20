@@ -1,0 +1,10 @@
+<% content_for :header_title, "Certification Campaigns" %>
+<ul>
+  <% @campaigns.each do |campaign| %>
+    <li>
+      <%= link_to campaign.name, campaign_path(campaign) %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "Create campaign", new_campaign_path, class: "btn btn-primary" %></p>

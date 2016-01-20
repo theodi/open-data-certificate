@@ -1,6 +1,7 @@
 - if flash.any?
   .container
     - flash.each do |type, value|
+      - next if type.to_s.starts_with?('_')
       - if value.kind_of? Array
         - value.each do |flash|
           = render :partial => 'shared/flash', :locals => { :type => type, :flash => flash }

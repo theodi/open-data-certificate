@@ -1,202 +1,167 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CertificateGeneratorTest < ActiveSupport::TestCase
 
   def setup
+    stub_request(:head, "http://www.example.com/error").to_return(status: 200)
+    load_custom_survey 'cert_generator.rb'
     @user = FactoryGirl.create :user
   end
 
   test "creating blank certificate" do
     load_custom_survey 'blank.rb'
 
-    request = {
-      jurisdiction: 'blank'
-    }
-
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request, @user)
-      assert_equal(true, response[:success])
-      assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
-      assert_equal('blank', CertificateGenerator.last.survey.access_code)
+      CertificateGenerator.create(request: {}, user: @user).generate('blank', false)
+
+      certificate = Certificate.last
+
+      assert certificate.published
+      assert_equal 'blank', CertificateGenerator.last.survey.access_code
     end
   end
 
   test "creating certificate which auto publishes" do
-    load_custom_survey 'cert_generator.rb'
 
-    request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+    dataset = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request, @user)
-      assert_equal(true, response[:success])
-      assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
+      generator = CertificateGenerator.create(request: dataset, user: @user).generate('cert-generator', false)
+
+      assert CertificateGenerator.last.completed
+
+      certificate = Certificate.last
+
+      assert certificate.published
+      assert_equal 1, Certificate.count
     end
   end
 
   test "creating certificate with missing field" do
-    load_custom_survey 'cert_generator.rb'
 
-    request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+    dataset = {
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request, @user)
-      assert_equal(true, response[:success])
-      assert_equal(false, response[:published])
-      assert_equal(["The question 'dataTitle' is mandatory"], response[:errors])
+      CertificateGenerator.create(request: dataset, user: @user).generate('cert-generator', false)
+
+      certificate = Certificate.last
+
+      refute certificate.published
     end
   end
 
   test "creating certificate with invalid URL" do
-    load_custom_survey 'cert_generator.rb'
+    stub_request(:head, "http://www.example.com/error").
+                to_return(status: 404)
 
-    request = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example/error',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+    dataset = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com/error',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     assert_difference 'Certificate.count', 1 do
-      response = CertificateGenerator.generate(request, @user)
-      assert_equal(true, response[:success])
-      assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' must have a valid URL"], response[:errors])
-    end
-  end
+      CertificateGenerator.create(request: dataset, user: @user).generate('cert-generator', false)
 
-  test "unknown jurisdiction" do
-    request = {jurisdiction: 'non-existant'}
-    response = CertificateGenerator.generate(request, @user)
-    assert_equal(false, response[:success])
-    assert_equal(["Jurisdiction not found"], response[:errors])
+      refute Certificate.last.published
+    end
   end
 
   test "publishing a certificate after creating and updating it" do
-    load_custom_survey 'cert_generator.rb'
 
     create = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
     }
 
     update = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     assert_difference 'ResponseSet.count', 1 do
-      response = CertificateGenerator.generate(create, @user)
-      assert_equal(true, response[:success])
-      assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' is mandatory", "The question 'chooseAny' is mandatory"], response[:errors])
+      CertificateGenerator.create(request: create, user: @user).generate('cert-generator', false)
+      refute Certificate.last.published
     end
 
     assert_no_difference 'ResponseSet.count' do
-      response = CertificateGenerator.update(Dataset.last, update, @user)
+      response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
+      assert_equal({}, response[:errors])
     end
   end
 
   test "updating a certificate with a missing field" do
-    load_custom_survey 'cert_generator.rb'
 
     create = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherUrl: 'http://www.example.com',
-        publisherRights: 'yes',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     update = {
-      jurisdiction: 'cert-generator',
-      dataset: {
-        dataTitle: 'The title',
-        releaseType: 'oneoff',
-        publisherRights: 'yes',
-        publisherUrl: '',
-        publisherOrigin: 'true',
-        linkedTo: 'true',
-        chooseAny: ['one', 'two']
-      }
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherRights: 'yes',
+      publisherUrl: '',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
     }
 
     assert_difference 'ResponseSet.count', 1 do
-      response = CertificateGenerator.generate(create, @user)
-      assert_equal(true, response[:success])
-      assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
+      CertificateGenerator.create(request: create, user: @user).generate('cert-generator', false)
+      assert Certificate.last.published
     end
 
     assert_difference 'ResponseSet.count', 1 do
-      response = CertificateGenerator.update(Dataset.last, update, @user)
+      response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' is mandatory"], response[:errors])
+      assert_equal({'publisherUrl' => ['mandatory']}, response[:errors])
     end
 
     assert_no_difference 'ResponseSet.count' do
-      response = CertificateGenerator.update(Dataset.last, update, @user)
+      response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
       assert_equal(true, response[:success])
       assert_equal(false, response[:published])
-      assert_equal(["The question 'publisherUrl' is mandatory"], response[:errors])
+      assert_equal({'publisherUrl' => ['mandatory']}, response[:errors])
     end
   end
 
-test "updating a certificate after the survey has been updated" do
-    load_custom_survey 'cert_generator.rb'
+  test "updating a certificate after the survey has been updated" do
 
-    create = {
-      jurisdiction: 'cert-generator',
-      dataset: {
+      create = {
         dataTitle: 'The title',
         releaseType: 'oneoff',
         publisherUrl: 'http://www.example.com',
@@ -205,52 +170,119 @@ test "updating a certificate after the survey has been updated" do
         linkedTo: 'true',
         chooseAny: ['one', 'two']
       }
-    }
 
-    update = {
-      jurisdiction: 'cert-generator',
-      dataset: {
+      update = {
         dataTitle: 'The title 2',
       }
-    }
 
-    response = nil
+      assert_difference 'ResponseSet.count', 1 do
+        CertificateGenerator.create(request: create, user: @user).generate('cert-generator', false)
+        assert Certificate.last.published
+      end
 
-    assert_difference 'ResponseSet.count', 1 do
-      response = CertificateGenerator.generate(create, @user)
-      assert_equal(true, response[:success])
-      assert_equal(true, response[:published])
-      assert_equal([], response[:errors])
+      assert_difference 'Survey.count', 1 do
+        load_custom_survey 'cert_generator_updated.rb'
+      end
+
+      assert_difference 'ResponseSet.count', 1 do
+        response = CertificateGenerator.update(Dataset.last, update, 'cert-generator', @user)
+        assert_equal(true, response[:success])
+        assert_equal(false, response[:published])
+        assert_equal({'favouriteAnimal' => ['mandatory']}, response[:errors])
+      end
     end
 
-    assert_difference 'Survey.count', 1 do
-      load_custom_survey 'cert_generator_updated.rb'
-    end
+  test "determining contact email for dataset creates new user from publisher contact email" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
 
-    assert_difference 'ResponseSet.count', 1 do
-      response = CertificateGenerator.update(Dataset.find(response[:dataset_id]), update, @user)
-      assert_equal(true, response[:success])
-      assert_equal(false, response[:published])
-      assert_equal(["The question 'favouriteAnimal' is mandatory"], response[:errors])
-    end
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
   end
 
-  # test "target_email" do
-  #   load_custom_survey 'blank.rb'
-  #   request = {
-  #     jurisdiction: 'blank'
-  #   }
-  #   generator = CertificateGenerator.new request: request
-  #   assert_difference 'Certificate.count', 1 do
-  #     generator.generate
-  #   end
-  # end
+  test "determining contact email for dataset finds user from publisher contact email" do
+    existing_user = FactoryGirl.create(:user, email: 'test@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
 
-private
+    found_user = generator.determine_user(response_set, true)
 
-  def load_custom_survey fname
-    builder = SurveyBuilder.new 'test/fixtures/surveys_custom', fname
-    builder.parse_file
+    assert_equal existing_user, found_user
+  end
+
+  test "determing contact email uses maintainer if no publisher present" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
+  end
+
+  test "determing contact email uses contributor if no publisher present" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = nil
+    kd[:data][:contributors] = [
+      DataKitten::Agent.new(mbox: ''),
+      DataKitten::Agent.new(mbox: 'test@datapub.org')
+    ]
+
+    user = generator.determine_user(response_set, true)
+
+    assert user.persisted?
+    assert_equal 'test@datapub.org', user.email
+  end
+
+  test "finds first existant user before trying to create an owner" do
+    existing_user = FactoryGirl.create(:user, email: 'present@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+    kd[:data][:maintainers] = [DataKitten::Agent.new(mbox: 'present@datapub.org')]
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'wrong@datapub.org')]
+
+    found_user = generator.determine_user(response_set, true)
+
+    assert_equal existing_user, found_user
+  end
+
+  test "does not create user if create is false" do
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    response_set = generator.build_response_set
+    response_set.kitten_data = kd = KittenData.new
+    kd[:data][:publishers] = []
+    kd[:data][:maintainers] = nil
+    kd[:data][:contributors] = [DataKitten::Agent.new(mbox: 'test@datapub.org')]
+
+    user = generator.determine_user(response_set, false)
+
+    assert_equal user, @user
+  end
+
+  test "creating a user when already exists" do
+    existing_user = FactoryGirl.create(:user, email: 'present@datapub.org')
+    generator = CertificateGenerator.create(request: {}, user: @user)
+    user = generator.create_user_from_contact(DataKitten::Agent.new(mbox: 'present@datapub.org'))
+    assert_equal existing_user, user
   end
 
 end

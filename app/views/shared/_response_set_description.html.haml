@@ -1,9 +1,7 @@
-- description = response_set.kitten_data.data[:description] rescue nil
-
-- if description
+- if description = response_set.description
 
   -if defined?(leading_hr) && leading_hr
     %hr.heavy
 
-  %h3 Description
-  %p= description
+  %h3= t('response_set.description')
+  %p= strip_tags description

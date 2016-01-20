@@ -1,15 +1,12 @@
 language: ruby
+services:
+  - redis
+bundler_args: --without development
+cache: bundler
+sudo: false
 rvm:
-- 1.9.3
-bundler_args: --without development --path=~/.bundle
-before_install:
-- gem install nokogiri -- --use-system-libraries
-- ! 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
-- gem install bundler bundle_cache
-- bundle_cache_install
-after_script:
-- bundle_cache
-before_script: bundle exec rake db:schema:load
+- 2.0.0
+before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
   curl -v -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs/tags/CURRENT"'
@@ -26,6 +23,7 @@ branches:
   - CURRENT
   - STAGING
 notifications:
+  email: false
   irc:
     channels:
     - irc.freenode.net#theodi
@@ -35,12 +33,10 @@ notifications:
     on_failure: always
 env:
   global:
-  - secure: ktiYuRyE9BN2wa65zkATI37ABnL5I/eUfV3FDnSzDKqhcN7QhqiqzGKRiPXsXRkQRloUoP9p2AZH4rhHUSkWtdtJWMlCzgkh3PHjNFHRGIwL6YfeEOiMMbRrhnwpT4uAjPAahxsUZRnc7TmsoFSRazALgK8DQ+SdN3vt5pwJZU8=
-  - secure: fFtR5aMYwdFBKDaj+2u3HsDuVAO9SUZ25sMqxp17y1RSQa0zUTEMGtXZhjVn5VTX14voYDmo0vYkqtxovXBrPfFn0jdENYum+yu38XuLmFdReLoIh1EzC/pT9xTLNkYfGZj/a+IPIlj0TPkSHOSj6vuV/aT85QSUx+gpisfnCoA=
-  - secure: W/BRRQ3WK92W7olcCAwAJnYFuHfyNunrA6MCTwecOX4hCLw1900lSKs0MnJ7QvdiBvzuo/qLBKsfaZoNGoIwTgpT2P3MFcnJozehhPXkAaWixIkmN3u1oeZ6OdDDU9NIYgUzm8lzoqXGiTbIb4z5lZMmfx+j/CZXoT86V+b1U4U=
-  - secure: Li3T6biupLWMx3dvzqzR2qS28HaOCiiyzm/MxVmexvwLGgiTVV4py+LwTGXfI6niJ5gzt1SLOLUW0ZnBtN4qv8mtQKcFgKkkpt62eeBxCwWGu7pbJ0rjz7ujiQsR70XsW8c0McAwYavRxlHD83KGdVlXklhZ+4+lnduhlIpgYAY=
-  - GAPPS_CERTIFICATE_USAGE_COLLECTION="ODI Drive/Technical/Test Data/Usage Data"
-  - BUNDLE_ARCHIVE=odc
-  - AWS_S3_BUCKET=theodi-travis-bundle-cache
-  - secure: N2zoCCMSpUlDeZRH5Dd8f58EDLuufNPPpmBeakohVL8JAc6j9r4qKfYwrgdQGm20Dzljgu9agD2UDE9AziSTeunsTobZtW6Yy3mobuNUgUZvn75sqBV8QLj1seMtSQjAsFvRn9AgrESyPX4GCfvRBmaqxFghr6ZspWbRl5L6pZ8=
-  - secure: jTdqip9A5G0g6JkbBZ2tz/l8kVv9RAWpsHe8Tw9V+YCO7I5PlxEdwvkA9gVbu4gexHczU9dMzDK5u484ZaJW5FYnkUuAMmpio+hJYjwUdlWAabSn4skuXRardkkELllrqLxF9577VOEI7j4pz5prv52CGn+57LzxKXF6HI+wiw4=
+    - secure: ktiYuRyE9BN2wa65zkATI37ABnL5I/eUfV3FDnSzDKqhcN7QhqiqzGKRiPXsXRkQRloUoP9p2AZH4rhHUSkWtdtJWMlCzgkh3PHjNFHRGIwL6YfeEOiMMbRrhnwpT4uAjPAahxsUZRnc7TmsoFSRazALgK8DQ+SdN3vt5pwJZU8=
+    - secure: fFtR5aMYwdFBKDaj+2u3HsDuVAO9SUZ25sMqxp17y1RSQa0zUTEMGtXZhjVn5VTX14voYDmo0vYkqtxovXBrPfFn0jdENYum+yu38XuLmFdReLoIh1EzC/pT9xTLNkYfGZj/a+IPIlj0TPkSHOSj6vuV/aT85QSUx+gpisfnCoA=
+    - ODC_REDIS_SERVER_URL="redis://localhost:6379"
+    - CERTIFICATE_HOSTNAME="test.host"
+    - COVERAGE=1
+git:
+  depth: 10

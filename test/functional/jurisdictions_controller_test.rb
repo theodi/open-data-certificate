@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class JurisdictionsControllerTest < ActionController::TestCase
   test "should get index" do
@@ -7,7 +7,7 @@ class JurisdictionsControllerTest < ActionController::TestCase
     FactoryGirl.create :survey, title: "GB", access_code: "GB", full_title: "United Kingdom", survey_version: 1
     FactoryGirl.create :survey, title: "AD", access_code: "AD", full_title: "Andorra"
 
-    get :index, use_route: :surveyor
+    get :index, use_route: :surveyor, locale: :en
     assert_response :success
 
     assert_equal 2, assigns(:jurisdictions).size

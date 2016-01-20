@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SurveySectionTest < ActiveSupport::TestCase
 
@@ -17,9 +17,9 @@ class SurveySectionTest < ActiveSupport::TestCase
   test "questions_for_certificate gives questions with :question_on_certificate" do
 
     @questions = @section.questions_for_certificate @response_set
-    
+
     assert_equal [@q2], @questions
-    
+
   end
 
   # TODO

@@ -1,7 +1,7 @@
 - rg ||= nil
 - renderer = q.renderer(g ||= nil)
 %li.container
-  = f.inputs '', :id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "row q_#{renderer} #{q.css_class(@response_set)} requirement_#{requirement} inline-validation" do
+  %fieldset{:id => rg ? "q_#{q.id}_#{rg}" : "q_#{q.id}", :class => "row q_#{renderer} #{q.css_class(@response_set)} requirement_#{q.requirement_level} inline-validation"}
     .status-error.span8
       .status-icon
         %i.icon.icon-variable

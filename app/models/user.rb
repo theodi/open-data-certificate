@@ -1,14 +1,28 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :datasets, :order => "created_at DESC"
+  has_many :datasets, :order => "datasets.created_at DESC"
   has_many :response_sets
+  has_many :sent_claims, class_name: 'Claim', foreign_key: 'initiating_user_id'
+  has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
+  has_many :certification_campaigns
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :default_jurisdiction
+  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms, :preferred_locale
 
   before_save :ensure_authentication_token
+
+  validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true
+  validates :preferred_locale, inclusion: {in: I18n.available_locales.map(&:to_s)}
+
+  def self.engaged_users
+    User.where("confirmed_at IS NOT NULL").select { |u| !u.datasets.blank? }
+  end
+
+  def has_engaged?
+    confirmed? && !datasets.blank?
+  end
 
   def ensure_authentication_token
     if authentication_token.blank?
@@ -23,29 +37,33 @@ class User < ActiveRecord::Base
     end
   end
 
-  def full_name
-    [first_name, last_name].delete_if(&:blank?).join(' ')
+  def after_password_reset
+    confirm!
+  end
+
+  def to_s
+    if name.present?
+      "#{name} <#{email}>"
+    else
+      email
+    end
+  end
+
+  def default_jurisdiction
+    super || 'gb'
   end
 
   # name isn't mandatory on signup, so fall back to email
   def identifier
-    unless full_name.blank?
-      full_name
-    else
-      email.split('@').join(' from ')
-    end
+    name.presence || email.split('@').join(' from ')
   end
 
-  def admin?
-    (ENV['ODC_ADMIN_IDS'] || '').split(',').include? id.to_s
+  def greeting
+    short_name.presence || name.presence || email.split("@").first
   end
 
   def has_expired_or_expiring_certificates?
-    response_sets.any? do |r|
-      unless r.certificate.nil?
-        r.certificate.expired? || r.certificate.expiring?
-      end
-    end
+    response_sets.published.includes(:certificate).merge(Certificate.past_expiry_notice).any?
   end
 
 end

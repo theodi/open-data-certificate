@@ -1,7 +1,14 @@
 class MainController < ApplicationController
 
+  def ping
+    if ActiveRecord::Base.connection.active?
+      head :ok
+    else
+      head :service_unavailable
+    end
+  end
+
   def home
-    @surveys = Survey.available_to_complete
     respond_to do |format|
       format.html { render '/home/index' }
     end
@@ -26,22 +33,28 @@ class MainController < ApplicationController
     render 'comment'
   end
 
-  def status
-    @job_count = Delayed::Job.count
-
-    @counts = {
-      'certificates' => Certificate.counts,
-      'datasets'     => ResponseSet.counts
-    }
-
-    @head_commit = Rails.root.to_s.split("/").last
-
-    render '/home/status'
+  def git_head
+    head = Rails.root.to_s.split("/").last
+    render :text => head
   end
 
-  def status_csv
+  def status
+    @job_count = Delayed::Job.count
+    @all = Stat.where(name: 'all').last
+    @published = Stat.where(name: 'published').last
+    @head_commit = Rails.root.to_s.split("/").last
+
+    type = params[:type] || "all"
+
+    respond_to do |format|
+      format.html { render '/home/status' }
+      format.csv { send_data Stat.csv(type), filename: "#{type}.csv", type: "text/csv; header=present; charset=utf-8" }
+    end
+  end
+
+  def legacy_stats
     csv = Rackspace.fetch_cache("statistics.csv")
-    render text: csv, content_type: "text/csv"
+    send_data csv, filename: "legacy_stats.csv", type: "text/csv; header=present; charset=utf-8"
   end
 
   def status_response_sets
@@ -90,7 +103,7 @@ class MainController < ApplicationController
     authorize! :update, @dataset
 
     # use the most recent survey
-    @survey = Survey.where(:access_code => access_code).order("survey_version DESC").first
+    @survey = Survey.newest_survey_for_access_code(access_code)
 
     @response_set = ResponseSet.
       create(:survey => @survey,
@@ -107,10 +120,7 @@ class MainController < ApplicationController
       end
 
       # flash[:notice] = t('surveyor.survey_started_success')
-      redirect_to(surveyor.start_path(
-        :survey_code => @survey.access_code,
-        :response_set_code => @response_set.access_code
-      ))
+      redirect_to(survey_start_path(:response_set_code => @response_set.access_code))
     else
       flash[:notice] = t('surveyor.unable_to_find_that_legislation')
       redirect_to (user_signed_in? ? dashboard_path : root_path)

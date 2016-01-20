@@ -1,27 +1,31 @@
 require 'google_drive'
 
 module UploadUsageData
-
-  @@session = GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
+  extend RecurringJob
 
   def self.perform
-    [
-      "published",
-      "all"
-    ].each do |type|
-      certificates = Certificate.send(type)
-      data = certificates.map do |cert|
-        CertificatePresenter.new(cert).send("#{type}_data")
+    reenqueue_job do
+      [
+        "published",
+        "all"
+      ].each do |type|
+        data = certificate_data_by_type(type)
+        unless data.empty?
+          csv = create_csv(data)
+          upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
+        end
       end
-      csv = create_csv(data)
-      upload_csv(csv, "#{type.humanize} - #{Date.today.to_s}")
     end
+  end
 
-    Delayed::Job.enqueue UploadUsageData, { :priority => 5, :run_at => 1.week.from_now }
+  def self.certificate_data_by_type(type)
+    certificates = Certificate.send(type)
+    return certificates.map do |cert|
+      CertificatePresenter.new(cert).send("#{type}_data")
+    end
   end
 
   def self.create_csv(data)
-    data.reject! { |d| d.nil? }
     csv = CSV.generate(force_quotes: true, row_sep: "\r\n") do |csv|
       # Header row goes here
       headers = data.first.keys
@@ -32,22 +36,25 @@ module UploadUsageData
   end
 
   def self.find_collection(path)
-    path = path.split("/")
-    collection = session.collection_by_title(path.shift)
-    path.each do |title|
-      collection = collection.subcollections.select { |s| s.title == title }[0]
+    segments = path.split("/")
+    segments.reduce(session.root_collection) do |collection, path_segment|
+      collection.subcollection_by_title(path_segment) ||
+        collection.create_subcollection(path_segment)
     end
-    collection
   end
 
   def self.upload_csv(csv, title)
     file = session.upload_from_string(csv, title, content_type: "text/csv")
-    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'])
+    collection = find_collection(ENV['GAPPS_CERTIFICATE_USAGE_COLLECTION'] || '')
     collection.add(file)
   end
 
   def self.session
-    @@session
+    @session ||= GoogleDrive.login(ENV['GAPPS_USER_EMAIL'], ENV['GAPPS_PASSWORD'])
+  end
+
+  def self.next_run_date
+    DateTime.now.utc.next_week
   end
 
 end

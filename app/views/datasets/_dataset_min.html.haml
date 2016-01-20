@@ -1,39 +1,45 @@
 / Down the line, this will support the dashboard view too
 - dataset = dataset_min
 
-.dataset{class: defined?(expanded) ? 'expanded': ''}
-  .row
-    .span4
-      %a.level-badge{class: "level-badge-#{dataset.certificate.attained_level}", href: url_for(dataset)}
-      %h3.badge-align
-        = link_to_unless_current dataset.title, dataset
-    .span3
-      =link_to 'View certificate', [dataset, dataset.certificate], class: 'btn btn-info'
-    .span3
-      .details
-        %p
-          %span Published By
-          %strong= dataset.certificate.curator
-        %p
-          %span Issued
-          %strong= "#{time_ago_in_words(dataset.updated_at)} ago"
-    .span2
-      .expand
-        %i.show-more.icon-chevron-down
-        %i.hide-more.icon-chevron-up
-      .jurisdiction
-        .badge
-          = dataset.response_set.jurisdiction
-        %span.status
-          = dataset.response_set.survey.try(:status)
-
-  .more
-    %hr
+- if dataset.certificate
+  .dataset{class: defined?(expanded) ? 'expanded': ''}
     .row
       .span4
-        =render 'shared/response_set_summary_short', response_set: dataset.response_set
+        %a.level-badge{class: "level-badge", href: url_for(dataset)}
+        %h3.badge-align
+          = link_to_unless_current dataset.title, dataset
+      .span3
+        =link_to t('dashboard.view_certificate'), dataset_latest_certificate_path(dataset), class: 'btn btn-info'
+      .span3
+        .details
+          %p
+            %span= t('datasets.published_by')
+            %strong= dataset.certificate.curator
+          %p
+            %span= t('datasets.issued')
+            %strong= t('datasets.time_ago', relative_time: time_ago_in_words(dataset.certificate.published_at))
+      .span2
+        .expand
+          %i.show-more.icon-chevron-down
+          %i.hide-more.icon-chevron-up
+        .jurisdiction
+          .badge
+            = dataset.response_set.jurisdiction
+          %span.status
+            = dataset.response_set.survey.try(:status)
 
-      .span8
-        =render 'shared/response_set_description', response_set: dataset.response_set
+    .more
+      %hr
+      .row
+        .span4
+          =render 'shared/response_set_summary_short', response_set: dataset.response_set
+
+        .span8
+          =render 'shared/response_set_description', response_set: dataset.response_set
+
+- else
+  .dataset
+    .row
+      .span12= t('datasets.no_published_certificate')
 
 %hr.heavy

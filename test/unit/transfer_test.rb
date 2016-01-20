@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class TransferTest < ActiveSupport::TestCase
 
@@ -11,7 +11,7 @@ class TransferTest < ActiveSupport::TestCase
 
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
       transfer.notify
-      (Delayed::Worker.new).work_off 1
+      Delayed::Worker.new.work_off 1
     end
 
     assert transfer.notified?

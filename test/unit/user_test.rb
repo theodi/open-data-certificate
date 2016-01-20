@@ -1,19 +1,15 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  test "user is an admin if id is in the env var" do
-    @user1 = FactoryGirl.create :user
+  test "user is an admin if db column set" do
+    @user1 = FactoryGirl.create :user, :admin => true
     @user2 = FactoryGirl.create :user
-    @user3 = FactoryGirl.create :user
-
-    ENV['ODC_ADMIN_IDS'] = "#{@user1.id},#{@user3.id}"
+    @user3 = FactoryGirl.create :user, :admin => true
 
     assert @user1.admin?, 'user one is admin'
     refute @user2.admin?, 'user two is not admin'
     assert @user3.admin?, 'user three is admin'
-
-    ENV['ODC_ADMIN_IDS'] = nil
   end
 
   test "has_expired_or_expiring_certificates? returns false if user's certificates are up to date" do
@@ -54,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, user.has_expired_or_expiring_certificates?
   end
 
-  test "has_expired_or_expiring_certificates? returns true if a user has an unpublished expiring certificate" do
+  test "has_expired_or_expiring_certificates? returns false if a user has an unpublished expiring certificate" do
     user = FactoryGirl.create(:user)
 
     5.times do
@@ -67,7 +63,64 @@ class UserTest < ActiveSupport::TestCase
     certificate.expires_at =  DateTime.now - 1.day
     certificate.save
 
-    assert_equal true, user.has_expired_or_expiring_certificates?
+    assert_equal false, user.has_expired_or_expiring_certificates?
+  end
+
+  test "identifier defaults to name" do
+    user = FactoryGirl.create(:user, :name => "I'm the batman")
+    assert_equal "I'm the batman", user.identifier
+  end
+
+  test "identifier uses email as sentence if no name" do
+    user = FactoryGirl.create(:user, :email => "bob@example.com")
+    assert_equal "bob from example.com", user.identifier
+  end
+
+  test "greeting is short name" do
+    user = FactoryGirl.create(:user, :short_name => "Jeff")
+    assert_equal "Jeff", user.greeting
+  end
+
+  test "greeting falls back to name" do
+    user = FactoryGirl.create(:user, :name => "Joan Jett")
+    assert_equal "Joan Jett", user.greeting
+  end
+
+  test "greeting falls further back to email prefix" do
+    user = FactoryGirl.create(:user, :email => "sally@example.com")
+    assert_equal "sally", user.greeting
+  end
+
+  test "to_s defaults to email" do
+    user = FactoryGirl.create(:user, :email => "sally@example.com")
+    assert_equal "sally@example.com", user.to_s
+  end
+
+  test "to_s uses name and email" do
+    user = FactoryGirl.create(:user, :email => "joan@example.com", :name => "Joan Jett")
+    assert_equal "Joan Jett <joan@example.com>", user.to_s
+  end
+
+  test "can create a user without specifying agreement to terms" do
+    assert User.new(email: 'robyn@example.com', password: 'password').valid?
+  end
+
+  test "can create a user that agreeds to terms" do
+    assert User.new(email: 'robyn@example.com', password: 'password', agreed_to_terms: true).valid?
+  end
+
+  test "not agreeing to terms prevents saving" do
+    refute User.new(email: 'robyn@example.com', password: 'password', agreed_to_terms: false).valid?
+  end
+
+  test "can create a user with a valid locale" do
+    assert User.new(email: 'robyn@example.com', password: 'password', preferred_locale: 'en').valid?
+  end
+
+  test "can not create a user with a bad locale" do
+    user = User.new(email: 'robyn@example.com', password: 'password')
+    user.preferred_locale = 'moon'
+    refute user.valid?
   end
 
 end

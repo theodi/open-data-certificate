@@ -1,5 +1,8 @@
 class Dataset < ActiveRecord::Base
+  include Ownership
   belongs_to :user
+
+  delegate :name, :email, :to => :user, :prefix => true, :allow_nil => true
 
   attr_accessible :title
 
@@ -13,21 +16,39 @@ class Dataset < ActiveRecord::Base
   has_one :certificate, through: :response_set
 
   has_one :transfer, conditions: {aasm_state: :notified}
-  
+
+  has_many :embed_stats
+
+  # this subquery is necessary because a group('responses_sets.dataset_id')
+  # entirely changes the behaviour of count() so that the pagination fails
+  # by generating invalid sql
+  scope :with_responses, where(:id => joins(:response_sets).select('datasets.id'))
+  scope :with_current_published_certificate, joins(:certificates).merge(Certificate.published.current)
+  scope :modified_since, ->(date) { joins(:response_sets).merge(ResponseSet.modified_since(date)) }
+  scope :visible, where(removed: false).joins(:response_sets).merge(ResponseSet.published)
+
   class << self
     def match_to_user_domain(datasetUrl)
       domain = Domainatrix.parse(datasetUrl).domain
-      
+
       dataset = joins(:user)
                   .where(documentation_url: datasetUrl)
                   .order(User.arel_table[:email].matches(domain))
                   .first
-                  
+
       if dataset.nil?
         dataset = where(:documentation_url => datasetUrl).first
       end
       dataset
     end
+  end
+
+  def self.published_count
+    with_current_published_certificate.count(:distinct => 'datasets.id')
+  end
+
+  def visible?
+    !removed && response_set.try(:published?)
   end
 
   def title
@@ -49,6 +70,10 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def modified_date
+    response_set.try(:updated_at) || updated_at
+  end
+
   def set_default_documentation_url!(url)
     if url && persisted?
       self.documentation_url = url
@@ -59,7 +84,7 @@ class Dataset < ActiveRecord::Base
 
   def set_default_curator!(url)
     if url && persisted?
-      self.documentation_url = url
+      self.curator = url
       save unless readonly?
       url
     end
@@ -77,8 +102,43 @@ class Dataset < ActiveRecord::Base
     destroy if response_sets.empty?
   end
 
-  def user_full_name
-    user.full_name if user
+  def register_embed(referer)
+    begin
+      embed_stats.create(referer: referer)
+    rescue ActiveRecord::RecordNotUnique
+      nil
+    end
+  end
+
+  def generation_result
+    response_set = newest_response_set
+
+    if response_set.certificate_generator && response_set.certificate_generator.completed?
+      errors = response_set.response_errors
+
+      certificate_url = certificate.url(format: :json) if certificate
+
+      {
+        success: true,
+        dataset_id: id,
+        dataset_url: api_url,
+        certificate_url: certificate_url,
+        published: response_set.published?,
+        owner_email: user_email,
+        errors: errors
+      }
+    else
+      {success: "pending", dataset_id: id, dataset_url: api_url}
+    end
+  end
+
+  def api_url
+    Rails.application.routes.url_helpers.dataset_url(self, format: :json, host: OpenDataCertificate.hostname, locale: I18n.locale)
+  end
+
+  def change_owner!(user)
+    update_attribute(:user_id, user.id)
+    response_sets.update_all(user_id: user.id)
   end
 
 end

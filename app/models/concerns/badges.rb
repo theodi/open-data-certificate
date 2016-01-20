@@ -1,29 +1,31 @@
 module Badges
   extend ActiveSupport::Concern
 
-  def self.badge_file_for_level(level)
-    filename = case level
-                 when 'basic'
-                   'raw_level_badge.png'
-                 when 'raw', 'pilot', 'standard', 'exemplar'
-                   "#{level}_level_badge.png"
-                 else
-                   'no_level_badge.png'
-               end
+  def badge_file_for_level(level)
+    if level == 'no_level'
+      filename = 'no_level_badge.png'
+    else
+      filename = 'basic_level_badge.png'
+    end
 
     File.open(File.join(Rails.root, 'app/assets/images/badges', filename))
   end
 
   def badge_file
-    Certificate::Badges.badge_file_for_level(attained_level)
+    badge_file_for_level(attained_level)
   end
 
   def badge_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.png"
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'png', locale: I18n.locale)
   end
 
   def embed_url
-    "/datasets/#{self.response_set.dataset.id}/certificates/#{self.id}/badge.js"
+    urlgen.badge_dataset_latest_certificate_path(dataset.id, format: 'js', locale: I18n.locale)
+  end
+
+  private
+  def urlgen
+    Rails.application.routes.url_helpers
   end
 
 end

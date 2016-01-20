@@ -3,11 +3,5 @@
     = dataset.title
     = render dataset.transfer || dataset.build_transfer
   %dd
-    - if dataset.response_sets.any?
-      =  render partial: 'response_set', collection: dataset.response_sets, locals: {primary: dataset.response_sets.first}
-    - else
-      = form_for dataset, :url => dataset_start_questionnaire_path(dataset) do |f|
-        - if @surveys.any?
-          = select_tag(:survey_access_code, options_for_select([["-- #{t(:choose_legislation)} --", ""]] + @surveys.map{|s|[s.title, s.access_code]}))
-        = f.submit t('dashboard.start_new_certificate')
+    = render partial: 'response_set', collection: dataset.response_sets
   %hr.heavy

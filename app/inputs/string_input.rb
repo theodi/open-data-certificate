@@ -1,4 +1,5 @@
 class StringInput < Formtastic::Inputs::StringInput
+  include SurveyorHelper
 
   # prevent the <label> from having the 'label' branch
   def label_html_options
@@ -13,21 +14,8 @@ class StringInput < Formtastic::Inputs::StringInput
   end
 
   def label_level_status
-    level = options[:minimum_level]
-    if level
-      [
-        "<small>",
-          I18n.t('required_for'),
-          " <span class='odc-popover'>",
-            I18n.t(level, scope: 'requirement_levels'),
-            "<span class='odc-popover-content'>",
-              "<i class='badge #{level}'></i>",
-              I18n.t(level, scope: 'level_descriptions').html_safe,
-            "</span>",
-          "</span> ",
-          (I18n.t('and_above') if level != 'exemplar'),
-        "</small>"
-      ].join.html_safe
+    if level = options[:minimum_level]
+      question_requirement_with_badge(level)
     end
   end
 

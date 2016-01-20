@@ -30,10 +30,10 @@ OpenDataCertificate::Application.configure do
   config.action_mailer.delivery_method = :test
 
   # Define the default url for mailers
-  config.action_mailer.default_url_options = { :host => 'test.dev' }
+  config.action_mailer.default_url_options = { :host => 'test.host' }
 
   # Raise exception on mass assignment protection for Active Record models
-  #config.active_record.mass_assignment_sanitizer = :strict
+  # config.active_record.mass_assignment_sanitizer = :strict
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr

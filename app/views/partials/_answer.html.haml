@@ -2,7 +2,7 @@
 - rg ||= nil
 - repeated_template ||= false
 
-- r = response_for(@response_set, q, a, rg)
+- r = response_for(@response_set, @responses, q, a, rg)
 - r.reference_identifier = a.reference_identifier
 
 - i = response_idx(q.pick != "one") # argument will be false (don't increment i) if we're on radio buttons
@@ -39,7 +39,11 @@
       - answer_attrs[:input_html] = generate_pick_none_input_html(r.to_formatted_s, default_value, a.css_class, a.response_class, disabled, a.input_mask, a.input_mask_placeholder)
       - answer_attrs[:input_html][:type] = a.input_type unless a.input_type.blank?
       - answer_attrs[:input_html][:placeholder] = a.placeholder_for(@render_context, I18n.locale) unless a.placeholder.blank?
-      - answer_attrs[:input_html][:required] = 'required' if q.is_mandatory?
+      - answer_attrs[:input_html][:required] = 'required' if q.mandatory?
+
+      - if a.input_type == 'url'
+        - answer_attrs[:as] = :string
+        - answer_attrs[:input_html][:class] << 'string'
 
       = ff.input rc_to_attr(a.response_class), answer_attrs
     - else

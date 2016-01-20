@@ -2,10 +2,22 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require twitter/bootstrap/rails/confirm
-//= require underscore
-//= require_tree .
 
-/* global $, skrollr, alert, Hogan */
+//= require hogan
+//= require jquery.textchange.min
+//= require mermaid.min
+//= require modernizr.custom.76670
+//= require placeholder
+//= require polyfill
+//= require typeahead
+//= require url
+
+//= require admin
+//= require surveyor_all
+//= require tracking
+
+
+/* global $, alert, Hogan */
 
 // whether or not the homepage map should be loaded
 window.enableMap = document.querySelectorAll && Modernizr.svg;
@@ -34,19 +46,6 @@ $(document).ready(function($){
   }).on('ajax:beforeSend.rails', 'form[data-remote-error-message]', function(){
     $('.form-errors', this).empty();
   });
-
-  // Skrollr data settings
-  var bleed = $('body.odi-bleed').attr({
-    'data-0':'background-position:center -480px',
-    'data-2500':'background-position:center 1000px'
-  });
-
-
-  // don't enable on touch devices, fix at:
-  // https://github.com/Prinzhorn/skrollr#what-you-need-in-order-to-support-mobile-browsers
-  // though primary concern is for it not to break for now
-  var touch = 'ontouchstart' in window;
-  if (bleed.size() && !touch) skrollr.init({forceHeight: false});
 
   // Event to close menus when clicking away off them
   var openMenu = false;
@@ -197,7 +196,7 @@ $(document).ready(function($){
   });
 
   // Removes highlighting and information on mouseleave
-  $surveyElements.on('mouseleave', function(){
+  $surveyElements.filter('fieldset').on('mouseleave', function(){
     $($currentRow.data('metas')).hide();
     $($currentRow.data('input-metas')).hide();
 
@@ -244,9 +243,38 @@ $(document).ready(function($){
   },5000);
 
   $('.survey-intro .submit').click(function() {
+    var button = $(this);
     $(this).addClass('disabled');
+    $(this).removeClass('error');
     $(this).popover('show');
-    $(this.form).submit();
+
+    var form = $(this.form);
+    var formUrl = new Url(form.attr('action'));
+    formUrl.path = formUrl.path + ".json";
+
+    $.ajax({
+      type: 'PUT',
+      cache: false,
+      url: formUrl.toString(),
+      data: form.serialize(),
+      success: function(data) {
+        window.location.replace(data.survey_path)
+      },
+      error: function(xhr) {
+        button.removeClass('disabled')
+        button.addClass('error')
+        var popover = button.data('popover')
+        if (xhr.status == 404) {
+          popover.options.content = button.data('content')
+          $("#start_url_explanation").attr('style', 'display: block')
+        } else {
+          popover.options.content = button.data('error')
+        }
+        popover.show()
+        setTimeout(function(){ popover.hide() }, 3000);
+      },
+      timeout: 120000
+    })
     return false;
   });
 
@@ -259,7 +287,7 @@ $(document).ready(function($){
       .find('ul')
       .on('shown', function () {
         // scroll to the question (taking into account header)
-        $('html').scrollTop($question.offset().top - 130);
+        $('body').scrollTop($question.offset().top - 130);
       })
       .collapse('show');
   }
@@ -283,44 +311,27 @@ $(document).ready(function($){
 
     $.getJSON(url)
     .then(function(data){
-      // console.log("url:", url)
-
       $(panel).removeClass('loading');
 
+      var show_bar = data.attained == 'none'
+
       var levels = ['basic', 'pilot', 'standard', 'exemplar'];
-
-      var pending = data.mandatory,
-          complete = data.mandatory_completed,
-          percentage, attained = 'none';
-
-      _.each(levels, function(level){
-
-        // rolling values
-        pending  += _.filter(data.outstanding, has_level(level)).length;
-        complete += _.filter(data.entered,     has_level(level)).length;
-
-        percentage = ((complete / (pending + complete))*100)
-
-        $('#bar-' + level).width(percentage + '%');
-
-        if(percentage === 100){attained = level}
-
-        // debug
-        // console.log("Level: %s, pending: %d, complete: %d, percentage: %f", level, pending, complete, percentage)
+      $.each(levels, function(idx, level) {
+          var bar = $('#bar-' + level);
+          if (show_bar) {
+            bar.width(data[level] + '%');
+            bar.parent('.progress').show();
+            show_bar = false;
+          } else {
+            bar.parent('.progress').hide();
+            show_bar = data.attained == level;
+          }
       });
 
       $('#panel_handle')
         // removed any 'attained-' classes
         .toggleClass(function(i, name){return name.indexOf('attained-') === -1})
-        .addClass('attained-' + attained);
-
-
-      function has_level(name){
-        return function(item){
-          return item.indexOf(name+'_') === 0
-        }
-      }
-
+        .addClass('attained-' + data.attained);
     });
   });
 
@@ -379,6 +390,12 @@ $(document).ready(function($){
     if(datum.path){ document.location = datum.path; }
   });
 
+  // toggle advanced search
+  $('form .advanced-search button[name=advanced-search]').on('click', function(e) {
+    $(this).siblings('.options').toggleClass('hidden');
+    $(this).blur();
+  });
+
   // Stop the jump to the top of the page when the delete dialog is confirmed.
   // placeholder till bluerail/twitter-bootstrap-rails-confirm#9 gets published
   $(document).on('click', "#confirmation_dialog [href='#']", function(e){
@@ -395,7 +412,7 @@ $(document).ready(function($){
     $('body').animate({scrollTop:top})
   });
 
-  var certificateBody = $('.certificate-data');
+  var certificateBody = $('.certificate-data, #surveyor');
 
   certificateBody.click(function() {
     certificateBody.find('.odc-popover').popover('hide');
@@ -427,7 +444,7 @@ $(document).ready(function($){
     .on('mouseout',  '.answer', function(){$(this).toggleClass('odc-popover-active', false)});
 
   // Replace select boxes visually
-  $('select').each(function() {
+  $('#surveyor select').each(function() {
     var self = $(this);
 
     var selectBox = $('<div class="select-box">');
@@ -438,4 +455,16 @@ $(document).ready(function($){
         selectBox.text(self.find(':selected').text());
     });
   });
+
+  $('.claim .approval [data-type=json]').on('ajax:success', function(evt, data, status, xhr) {
+    var buttons = $(this).parents('.approval').find('input[type=submit]');
+    var button = $(this).find('input[type=submit]');
+    var label = button.data('disabled-text');
+    window.setTimeout(function() {
+        button.val(data.message);
+        buttons.prop('disabled', true);
+    }, 0);
+  });
+
+  Tracking.init();
 });

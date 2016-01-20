@@ -1,0 +1,402 @@
+de:
+  choose_legislation: Geltungsbereich
+  alpha_note: Dies ist die Alpha Version des Open Data Zertifikats des ODI. Hinweise zu sowohl dem Inhalt wie der Usability des Fragebogens sind willkommen. Bitte melden Sie Probleme auf github oder wenden Sie sich an certificate@theodi.org.
+  menu:
+    browse_all_certificates: In allen Zertifikaten stöbern
+    create_certificate: Neues Zertifikat anlegen
+    my_certificates: Meine Zertifikate
+    discussion: Diskussion
+    about: Über
+    admin: Admin
+  footmenu:
+    cookies: Einsatz von Cookies
+    feedback: Feedback
+    privacy: Datenschutz
+    about: Über
+    discussion: Diskussion
+    get_in_touch: Nehmen Sie Kontakt auf
+    terms: Nutzungsbedingungen
+    odi_name: Open Data Institute
+    company_title: Unternehmen
+    vat_title: Mehrwertsteuer
+    cc_title: Creative Commons Lzizenz
+  levels:
+    none:
+      title: Kein Level
+      title_with_level: Kein Level
+      description: diese Daten erfüllen die grundlegenden Anforderungen an offene Daten nicht.
+    basic:
+      title: Raw
+      title_with_level: Raw Level
+      description: dies ist ein großartiger Schritt für die Grundlagen der Veröffentlichung offener Daten.
+    pilot:
+      title: Pilot
+      title_with_level: Pilot Level
+      description: besondere Mühe wurde für die Unterstützung und die Ermutigung von Feedback seitens der Nutzer der offenen Daten aufgewendet.
+    standard:
+      title: Standard
+      title_with_level: Standard Level
+      description: dies sind regelmäßig publizierte Daten mit tatkräftiger Unterstützung, auf die sich die Nutzer verlassen können.
+    exemplar:
+      title: Expert
+      title_with_level: Expert Level
+      description: diese offenen daten sind ein herausragendes Beispiel von Informations-Infrastruktur.
+  level_descriptions:
+    basic: 'Ein großartiger Beginn, die Grundlagen der Veröffentlichung öffentlicher Daten zu schaffen.'
+    pilot: 'Daten Nutzer erhalten extra Unterstützung durch die Herausgeber und können Ihnen Feedback geben.'
+    standard: 'Regelmäßig publizierte Daten mit tatkräftiger Unterstützung, auf die sich die Nutzer verlassen können.'
+    exemplar: 'Ein herausragendes Beispiel für Informations-Infrastruktur'
+  requirement_levels:
+    basic: Raw Level Zertifizierung
+    pilot: Pilot Level Zertifizierung
+    standard: Standard Level Zertifizierung
+    exemplar: Expert Level Zertifizierung
+  required_for_level: Dies wird für  %{level} verlangt
+  required_for_level_and_above: Dies wird für  %{level} und darüber verlangt
+  statuses:
+    alpha:
+      title: Alpha
+      about: "Dieses Zertifikat wurde noch nicht ausreichend  [lokalisiert](https://github.com/theodi/open-data-certificate/wiki/Localisation)  und wir benötigen Ihre Unterstützung! Bette wenden Sie sich an [certificate@theodi.org](mailto:certificate@theodi.org)"
+    beta:
+      title: Beta
+      about: "Dieses Zertifikat wurde lokalisiert und wird abschließenden Tests unterzogen. Schauen Sie es sich an und beurteilen Sie selbst, ob es seinen Zweck erfüllt. Wenn nicht, wenden Sie sich an [certificate@theodi.org](mailto:certificate@theodi.org) or [Nennen Sie das Problem auf GitHub](https://github.com/theodi/open-data-certificate/issues?labels=questionnaire)."
+    final:
+      title: Final
+      about: "Dieses Zertifikat wurde geprüft und ist einsatzbereit, aber wenn Sie ein Problem bemerken, wenden Sie sich an certificate@theodi.org](mailto:certificate@theodi.org) or [melden Sie ein Problem auf GitHub](https://github.com/theodi/open-data-certificate/issues?labels=questionnaire)."
+  questionnaire_header: 'Jeder Art offene Daten ist gut, aber manche sind besser als andere. Dieses Werkzeug, verleiht ihnen ein Zertifikat, das Nutzern helfen wird, die von Ihnen publizierten Daten zu verstehen.'
+  questionnaire_footer: Ihre offenen Daten verbessern
+  questionnaire_footer_extra: Sie können die Art und Weise Ihrer Veröffentlichung der offenen Daten verbessern, um ihre Nutzung zu erleichern.
+  help: Hilfe
+  dashboard:
+    archived: Archiviert
+    edit_and_publish: Bearbeiten und veröffentlichen
+    embed_code: Code einbetten
+    page_title: Meine Zertifikate
+    latest_published_certificate: Zuletzt veröffentlichtes Zertifikat
+    no_certificates_to_show: Sie haben noch keine Zertifikate
+    copy_certificate:
+      make_a_copy: Ändern
+      and_edit: Diese Fragebogen
+    previous_versions: Frühere Versionen
+    start_new_certificate: Neues Zertifikat beginnen
+    you_are_currently_editing_this_certificate: Sie bearbeiten dieses Zertifikat gerade
+    view_certificate: Zertifikat ansehen
+    how_do_i_improve_my_open_data: Wie kann ich meine offenen Daten verbessern?
+    confirm_deletion: Sind Sie sicher, dass Sie dieses Zertifikat löschen wollen?
+    confirm_deletion_dialog_title: Zertifikat wird gelöscht
+    deleted_response_set: Gelöschte Fragebogen
+    unable_to_publish_response_set_invalid: Sie müssen alle geforderten Fragen beantworten, bevor Sie ein Zertifikat veröffentlichen können.
+    unable_to_access_response_set: Auf den Fragebogen kann nicht zugegriffen werden
+    published_response_set: Veröffentlichter Fragebogen
+    embed: Code einbetten
+    improvements_link: Wie kann ich diese Daten verbessern?
+    level_attained: 'Erlangtes Niveau:'
+    current_status: Aktueller Status
+    last_updated_at: 'Zuletzt veröffentlicht vor:  %{time_span}'
+    jurisdiction: Geltungsbereich
+    popover:
+      about_jurisdiction: 'Dies wurde für den Geltungsbereich %{jurisdiction} angelegt'
+      change_jurisdiction: Zum Geltungsbereich wechseln, für den diese Daten veröffentlicht wurden
+    states:
+      draft: Entwurf
+      published: Veröffentlicht
+      archived: Archiviert
+      superseded: Ersetzt
+    expiring_states:
+      expired: Abgelaufen
+    verification: Bestätigung
+    expiring_certificates: Einige Ihrer Zertifikate sollten aktualisiert werden um den letzten Stand ihrer Fragbogen wiederzugeben.
+    updated_response_set: Zertifikat aktualisiert
+  main:
+    comment:
+      discussion: Diskussion
+      markdown_help: Markdown Hilfe
+  homepage:
+    log_in: Anmelden
+    dont_have_an_account: Sind Sie nicht als Nutzer registriert?
+    register_later_message: Keine Sorge, Sie können sich später registrieren um Ihre Arbeit zu speichern.
+    continue_without_registering: Ohne Registrierung fortfahren
+    creating_questionnaire: Fragebogen wird angelegt...
+    create_an_account: Registrieren
+    title: Zertifizieren Sie Ihre offenen Daten
+    tagline: Zeigen Sie, wie leicht es ist<strong>zu finden,</strong> <strong>zu nutzen</strong> und <strong>zu teilen</strong>
+    start_new_certificate: Zertifikat anlegen
+    browse_certificates: In Zertifikaten stöbern
+    browse_all_new_certificates: In allen Zertifikaten stöbern
+    how_it_works: Wie es funktioniert
+    fill_out_questionnaire:
+      title: Ihre Daten veröffentlichen
+      description: Gute Nachricht! Sie haben diesen Abschnitt bereits erledigt (oder sind dabei es zu tun). Lassen Sie uns nun leichter machen, Ihre Daten zu finden, zu verwenden und zu teilen.
+    generate_certificate:
+      title: Prüfen Sie es mit unserem Fragebogen
+      description: Unsere hilfreichen Fragen funktionieren wie eine Checkliste. Sie erklären Ihre Möglichkeiten, gute offene Daten zu veröffentlichen und geben Ihnen klare und anerkannte Ziele, an denen Sie sich orientieren können.
+    share_open_data:
+      title: Teilen es durch ein Zertifikat mit
+      description: Ihre Antworten bestimmen, welches unserer Zertifikate Sie erzeugen. Jedes bedeutet auf seine Weise einen Erfolg und demonstriert, dass Sie bei Open Data vorne mit dabei sind.
+    about_certificate:
+      title: Wie sieht ein Zertifikat aus?
+      description: Es ist ein Emblem, dass auf die Beschreibung Ihrer offenen Daten verweist. Die Beschreibung erläutert beispielsweise wie oft sie aktualisiert werden, in welchem Format sie vorliegen, und von wem und woher sie stammen.
+      link: Finden Sie mehr heraus
+    about_odi:
+      title: Wer ist das ODI?
+      description: Wir sind das %{odi_name_link}.  Wir unterstützen Menschen dabei, Angebot und Nachfrage für offene Daten freizusetzenn und diesen Wert mit jedermann zu teilen.
+      odi_name: Open Data Institute
+      link: Nehmen Sie Kontakt auf
+    international_reach:
+      title: Wo können Sie Zertifikate erzeugen?
+      description: Verschiedene Länder haben unterschiedliche Gesetze, so dass ihre Zerifikate leicht voneinander abweichen. Wählen Sie ihr Land aus, um das richtige Zertifikat anzulgen.
+      auto_advance: Geltungsbereiche durchlaufen
+      legend:
+        legend: Legende
+        alpha: Zertifikat im Alpha-Stadium
+        beta: Zertifikat im Beta Status
+        final: Zertifikat im finalen Status
+  surveys:
+    jurisdiction: 'Geltungsbereich'
+    language: 'Sprache'
+    other_languages: 'Andere Sprachen'
+    read_more: Lesen Sie mehr über Open Data Zertifikate
+    do_not_have_url: Ich habe keine URL
+    check_url_button: URL überprüfen
+    skip_this_button: Überspringen
+    url_problem_error: Es gibt ein Problem mit Ihrer URL, bitte überprüfen Sie sie, oder füllen Sie die Erklärunng unten aus.
+    url_unknown_error: Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.
+    dataset_description_html: "<p>Verlinken Sie auf den Datensatz, den Sie zertifizieren. Mit Datensatz meinen wir\nsowohl die Dokumentation oder Metadaten, die die Daten beschreiben als auch\nden Link auf zum zur Datei mit den Daten selbst. Datensatz = Daten + Metadaten.</p>\n\n<p>Wenn Ihre Daten in geinem <a href=\"http://ckan.org/\">CKAN</a>\nKatalog (wie govdata.de) erfasst oder\
+      \ mit \n<a href=\"http://www.w3.org/TR/vocab-dcat/\">DCAT</a> ausgezeichnet sind, dann werden wir\nversuchen, einige der Fragen im nächsten Schritt automatisch zu beantworten.\n<a href=\"http://theodi.org/guides/marking-up-your-dataset-with-dcat\">Read more...</a></p>\n"
+  certificates:
+    certificates: Zertifikate
+    curated_by: Kuratiert durch
+    last_updated: Zuletzt aktualisiert
+    latest_certificates: Neueste Zertifikate
+    no_certificates_found: Keine Zertifikate gefunden
+    view_certificate: Ansehen
+    embed_this_on_your_site: Dies in Ihrer Seite einbinden
+    search:
+      search_label: Zertifikate suchen
+      submit_search: Los!
+      advanced_search: Erweiterte Suche
+      datahub: Suche nach Domain
+      level: Suche nach Zertifikats-Niveau
+      levels:
+        basic: Raw Level
+        pilot: Pilot Level
+        standard: Standard Level
+        exemplar: Expert level
+    community_verification_panel:
+      title: Community-Bestätigung
+      description: Andere Personen können bestätigen, ob die Antworten auf diesem Zertifikat korrekt sind
+      status: Dieses Zertifikat ist **%{certification}**.
+      status_self_certified: Wenn zwei oder mehr Personen dies bestätigen, wird dieses Zertifikat "Community zertifiziert" werden.
+      verify_certificate: Zertifikat bestätigen
+      verified: Bestätigt
+      undo: Rückgängig machen
+      sign_in: Anmelden
+      sign_in_text: um dieses Zertifikat zu bestätigen oder zu melden
+      certifiers: "Dieses Zertifkat wurde **%{count}** mal bestägt:"
+      person: Person
+    report:
+      heading: Ein Problem mit diesem Zertifikat melden
+      intro: "Bitte beschreiben Sie das Problem, dass sie für das Zertifikat von  '%{name}' gefunden haben"
+      report: "Zertifikat melden"
+      contact_email: Kontakt E-Mail
+      describe_the_problem: Beschreiben Sie das Problem
+    flashes:
+      reported: 'Das Zertifikat wurde an das ODI gemeldet'
+  certificate:
+    on_date: "am on %{date}"
+    this_data_has_achieved: Diese Daten erreichen
+    which_means: das bedeutet
+    embeddable_certificate: Auf Ihrer Seite einbetten
+    not_yet_published: Noch nicht publiziert
+    embed_badge_instructions: Nutzen Sie den untenstehenden Code um den Badge auf Ihrer Seite einzubinden
+    embed_instructions: Nutzen Sie den untenstehenden Code um dieses Zertifikat auf Ihrer Seite einzubinden
+    embed_badge: Badge
+    view_embed_page: Zertifikat
+    edit_questionnaire: Fragebogen bearbeiten
+    open_data_certificate_for: Open Data Zertifikat für
+    description: Beschreibung
+    certification_types:
+      self: selbst zertifiziert
+      auto: automatisiert zertifiziert
+      community: Community zertifiziert
+      odi_audited: Durch ODI geprüft
+    mark_audited: Geprüft setzen
+    unmark_audited: Geprüft entfernen
+    audited: Dieses Zertifikat wurde als vom ODI geprüft bestätigt
+    not_audited: Dieses Zertifikat wurde nicht als vom ODI geprüft bestätigt
+    expired_notice: "Dieses Zertifikat sollte aktualisiert werden, um den aktuellsten Fragebogen für  %{jurisdiction} wiederzugeben."
+    claim_this_certificate: "Ist dies Ihr Datensatz?"
+    us_public_domain_assumption_html: "Dieser Datensatz wurde durch die US Regierung erstellt, so dass die er gemeinfrei sein sollte. Allerdings\nerlaubt das US Urheberreciht den offenen Zugang nur für Staatsbürger der Vereinigten Staten, wir haben angenommen dass die Daten für den Rest der Welt statt dessen als \n<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0</a>\
+      \ lizenziert sind, das dies dem Geist der\n<a href=\"https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf\">Open Data Richtlinie der US Regierung</a> entspricht.\n"
+    report:
+      link: Ein Problem melden
+      text: mit diesem Zertifikat
+  datasets:
+    datasets: Datensätze
+    search_results: Suchergebnisse
+  response_set:
+    choose_a_jurisdiction: Geltungsbereich ändern
+    dialog_body: Wählen Sie unten einen anderen Geltungsbereich. Ihre Antworten werden in den neuen Fragebogen kopiert.
+    choose_jurisdiction: '--- Geltungsbereich wählen ---'
+    start_new_jurisdiction: Geltungsbereich ändern
+    choose_a_language: Sprache ändern
+    language_dialog_body: Wählen Sie, in welcher Sprache Sie den Fragebogen ausfüllen möchten
+    choose_language: '--- Sprache wählen ---'
+    start_new_language: Sprache ändern
+    update_instructions: "Bitte kontrollieren Sie, das die Information aktuell ist und alle Pflichtfelder ausgefüllt wurden, bevor Sie fortfahren."
+  summary_data:
+    summary: Zusammenfassung
+    type_of_release: Art der Freigabe
+    licence: Lizenz
+    data_licence: Datenlizenz
+    content_licence: Inhaltslizenz
+    verification: "Bestätigung"
+  data_kitten:
+    title: Titel
+    description: Beschreibung
+    publishers: Herausgeber
+    rights: Rechte
+    rights_statement: Urheberrechtshinweis
+    update_frequency: Aktualisierungshäufigkeit
+    keywords: Schlagworte
+    release_date: Veröffentlichungsdatum
+    modified_date: Änderungsdatum
+    temporal_coverage: Zeitliche Abdeckung
+    distributions: Distributionen
+  authentication:
+    sign_in: Anmelden
+    sign_up: Registrieren
+    forgot_password: Passwort vergessen?
+    change_your_password: Ändern Sie Ihr Passwort
+    change_my_password: Mein Passwort ändern
+    new_password: Neues Passwort
+    confirm_new_password: Passwort bestätigen
+    send_reset_instructions: Anleitung zur Rücksetzung des Passworts zusenden
+    remember_me: LogIn speichern
+    edit_profile: Ihr Profil bearbeiten
+    update_profile: Mein Profil aktualisieren
+    current_password_info: (wir benötigen ihr aktuelles Passwort um Ihre Änderungen zu bestätigen)
+    new_password_info: (frei lassen, wenn Sie nichts ändern wollen)
+    already_have_account: Sind Sie bereits registriert?
+    resend_confirmation_instructions: Bestätigungsanleitung erneut versenden
+    agree_to_terms: "Ich habe %{terms_link} gelesen und stimme zu. "
+    terms: Nutzungsbedingungen
+  about:
+    heading_about: Über
+  contact:
+    heading_contact: Wenden Sie sich an das ODI
+  errors:
+    errors_occurred: Fehler sind aufgetreten
+    server_error: Ein Serverfehler ist aufgetreten
+  branding:
+    heading: Die ODC Bewertung verwenden
+  improvements:
+    heading: Wie kann ich meine offenen Daten verbessern?
+    return_to_questionnaire: Zum Fragebogen zurückkehren
+    return_to_dashboard: Zum Dashboard zurückkehren
+    levels:
+      basic:
+        title: Die Grundlagen
+        subtitle: Das absolute Minimum, das es zur Veröffentlichung eines Zertifikats braucht - ein fantastischer Start!
+        instruction: "Sie müssen Informationen für die folgenden Fragen bereitstellen: "
+      pilot:
+        title: Pilot Anforderungen
+        subtitle: Sie bemühen sich insbesondere um die Unterstützung und die Förderung von Feedback durch die Nutzer dieser offenen Daten.
+        instruction: "Um das Pilot Niveau zur erreichen sollten Sie:"
+      standard:
+        title: Standard Anforderungen
+        subtitle: Sie publizieren regelmäßig Daten mit tatkräftiger Unterstützung, auf die sich Nutzer bei der Umsetzung immer ehrgeizigerer Projekte und unternehmerische Vorhaben verlassen können.
+        instruction: "Um das Standard Niveau zu erreichen, sollten Sie:"
+      exemplar:
+        title: Expert Anforderungen
+        subtitle: Sie übertreffen, was erwartet wird, ein schönes Beispiel einer Informationsinfrastruktur, an der sich jeder ein Beispiel nehmen kann.
+        instruction: "Um Expert Niveau zu erreichen, sollten Sie:"
+    buttons:
+      understood: "Fragebogen bearbeiten"
+      misunderstood: "Eine Frage stellen"
+    delete_button: 'Löschen'
+  transfers:
+    transfer:
+      title: An eine/n Kollegi/en weitergeben
+      body: Bitte beachten Sie, dass nur eine Person einen Fragebogen bearbeiten kann.
+      input_prompt: "An eine/n Kollegi/en weitergeben "
+      input_placeholder: E-Mail-Adresse
+      submit: Einladung senden
+      help_text: "Bitte beachten Sie, dass ein Fragebogen zu jeder Zeit nur von einer Person bearbeitet werden kann."
+      transferring: An %{email} übergeben.
+      cancel_transfer: '[Abbrechen]'
+    claim:
+      title: Übergabe des Fragebogens
+      body: 'Sie wurden aufgefordert die Bearbeitung des Fragebogens für "%{dataset_title}" zu übernehmen'
+      accept: Übergabe akzeptieren
+    flashes:
+      created: Transfer angelegt
+      unable_to_create: 'Anlage des Transfers nicht möglich: %{errors}'
+      complete: Transfer abgeschlossen
+      access_denied: Zugriff verweigert
+      access_denied_email: Zugang verweigert. Sie sind nicht mit der E-Mail angemeldet, an die dieser Transfer gesendet wurde
+      access_denied_token: 'Zugriff verweigert - der Token wurde nicht erkannt, bitte stellen Sie sicher, dass Sie ihn vollständig aus der E-Mail kopiert haben.'
+  transfer_mailer:
+    notify:
+      subject: Übergabe des Fragebogens
+      message: Sie wurden aufgefordert, die Bearbeitung eines Open Data Zertifikats zu übernehmen. Bitte besuchen Sie die Seite %{url} um die Übergabe zu akzeptieren.
+  claims:
+    index:
+      outstanding_claims: Unbearbeitete Anfragen für Datensätze
+      no_outstanding_claims: Zur Zeit keine unbearbeiteten Anfragen
+    outstanding_claim:
+      approve_transfer: Transfer zustimmen
+      deny_transfer: Ablehnen
+      approving_transfer: Transfer wird angenommen...
+      denying_transfer: Ablehnung...
+      confirm_denial: Sind Sie sicher?
+      confirm_title: Übertragung des Datensatzes ablehnen.
+    claim:
+      claim_heading: Die Verwaltung dieses Datensatzes beanspruchen
+      certificate_award: Dieses Zertifikat wurde dem Datensatz automatisiert verliehen.
+      explanation: "Mit \"Open Data Certificat\" können Sie:"
+      explanation_open: Nachweisen, dass Ihre Daten offen sind.
+      explanation_improve: Entdecken, wie Sie Ihre Offenen Daten verbessern können.
+      explanation_badge: Auf Ihrer Website einen "Badge" einbinden, mit dem Sie ihre Leistung andern mitteilen können.
+      claim_certificate: Wenn Dies ihr Datensatz ist, lassen Sie uns dies wissen, so dass Sie das Zertifikat übernehmen und verwalten können.
+      send_request: Anspruch auf den Datensatz anmelden
+    flashes:
+      created: Sie haben beansprucht, dieses Zertifikat zu verwalten.
+    approved: Dem Transfer wurde zugestimmt.
+    denied: Der Transfer wurde abgelehnt.
+  claim_mailer:
+    notify:
+      subject: "Es gibt einen gemeldeten Anspruch für '%{title}'"
+      admin_subject: "Zertifikats Transfer: %{dataset_id}"
+      message: |
+        Sie wurden aufgefordert, die Verwaltung des Zertifikats zu übertragen.
+        Bitte besuchen Sie die Seite %{url} um diese Aufforderung zu akzeptieren oder abzulehnen.
+    notify_of_approval:
+      subject: "Ihnen wurde die Verwaltung von '%{title}' übertragen"
+      message: |
+        Die von Ihnen verlangte Verwaltung von '%{title}' wurde Ihnen übertragen.
+        Sie können die Informationen über den Datensatz indem Sie diesem Link folgen: %{url}
+    notify_of_denial:
+      subject: "Die Übertragung der Verwaltung von '%{title}' wurde abgelehnt."
+      message: |
+        Die von Ihnen verlangte Verwaltung von '%{title}' wurde nicht gewährt.
+  status_panel:
+    title: Zertifikats-Niveau-Schlüssel
+    description: Dies zeigt Ihnen den Fortschritt hinsichtlich jedes Zertifikats.
+    about: Lesen Sie, wie es funktioniert.
+    improve_data: Wie kann ich meine offenen Daten verbessern?
+  helpers:
+    label:
+      user:
+        short_name: Kurzer Name bzw. bevorzugte Ansprache
+  locales:
+    cs: Tschechisch
+    de: Deutsch
+    el: Griechisch
+    en: Englisch
+    es: Spanisch
+    it: Italienisch
+    ro: Rumänisch
+    zh: Chinesisch
+  interface:
+    select: "Biete wählen..."

@@ -4,7 +4,6 @@
     %h3= t('response_set.choose_a_jurisdiction')
   .modal-body
     %p= t 'response_set.dialog_body'
-    =# form_for [surveyor, response_set] do |f| (see surveyor#continue refactor note)
-    = form_tag surveyor.continue_my_survey_path(survey_code: response_set.survey.access_code, response_set_code: response_set.access_code), method: :get, :class => 'form-inline' do
-      = select_tag(:juristiction_access_code, options_for_select(jurisdiction_options(@surveys)))
+    = form_tag continue_my_survey_path(response_set_code: response_set.access_code), method: :post, :class => 'form-inline' do
+      = select_tag(:juristiction_access_code, jurisdiction_options_for_select)
       = submit_tag t('response_set.start_new_jurisdiction'), :class => 'btn btn-primary btn-submit'

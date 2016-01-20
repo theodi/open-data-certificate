@@ -1,43 +1,52 @@
 class Response < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   include Surveyor::Models::ResponseMethods
+  extend Memoist
 
   attr_writer :reference_identifier
-  attr_accessible :autocompleted
+  attr_accessible :autocompleted, :explanation
 
-  # override with :touch
-  belongs_to :response_set, touch: true
+  belongs_to :response_set, touch: true, inverse_of: :responses
+  belongs_to :question, :inverse_of => :responses
+  belongs_to :answer, :inverse_of => :responses
 
-  after_save :set_default_dataset_title, :set_default_documentation_url
-  after_save :update_survey_section_id
+  before_save :resolve_if_url
 
-  # gets all responses in the same response set for a question, useful for checkbox questions
-  def sibling_responses
-    @sibling_responses ||= Response.where(question_id: question_id, response_set_id: response_set_id)
+  scope :filled, joins(:question).where(<<-SQL)
+    CASE questions.pick
+    WHEN 'none' THEN (trim(string_value) != '' OR trim(text_value) != '')
+    ELSE answer_id is not null
+    END
+  SQL
+
+  scope :for_id, lambda { |id| joins(:question).merge(Question.for_id(id)) }
+
+  def sibling_responses(responses)
+    (responses || []).select{|r| r.question_id == question_id && r.response_set_id == response_set_id}
   end
+  memoize :sibling_responses
 
   def statement_text
-    answer.try(:text_as_statement) || to_formatted_s
+    answer.statement_text.presence || to_formatted_s
   end
 
   def reference_identifier
-    @reference_identifier ||= answer.reference_identifier
+    answer.try(:reference_identifier)
   end
+  memoize :reference_identifier
 
   def requirement_level
-    @requirement_level ||= answer.requirement_level
+    answer.requirement_level
   end
-
-  def requirement
-    @requirement ||= answer.requirement
-  end
+  memoize :requirement_level
 
   def requirement_level_index
-    @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level)
+    Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end
+  memoize :requirement_level_index
 
   def empty?
-    question.pick == "none" ? string_value.blank? : !answer_id
+    question.pick == "none" ? data_value.blank? : !answer_id
   end
 
   def filled?
@@ -45,11 +54,15 @@ class Response < ActiveRecord::Base
   end
 
   def ui_hash_values
-    [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other].reduce({}) do |memo, key|
+    values = [:datetime_value, :integer_value, :float_value, :unit, :text_value, :string_value, :response_other, :response_group, :explanation].reduce({}) do |memo, key|
       value = self.send(key)
       memo[key] = value unless value.blank?
       memo
     end
+    if answer.response_class == 'text'
+      values[:text_value] ||= values[:string_value]
+    end
+    return values
   end
 
   def dataset
@@ -57,41 +70,45 @@ class Response < ActiveRecord::Base
   end
 
   def auto_value
-    @auto_value ||= response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
+    response_set.kitten_data ? response_set.kitten_data.fields[question.reference_identifier] : nil
   end
+  memoize :auto_value
 
   def formatted_auto_value
     auto_value.kind_of?(Array) ? auto_value.try(:join, ',') : auto_value
   end
 
   def autocompletable?
-    !!(auto_value && !auto_value.empty?)
+    auto_value.present?
   end
 
-  def any_metadata_missing
-    @any_metadata_missing ||= question.metadata_field? && sibling_responses.select(&:metadata_missing).any?
+  def any_metadata_missing(responses)
+    question.metadata_field? && sibling_responses(responses).select(&:metadata_missing).any?
   end
+  memoize :any_metadata_missing
 
   def metadata_missing
-    @metadata_missing ||= question.metadata_field? && autocompletable? && !autocompleted && answer
+    question.metadata_field? && autocompletable? && !autocompleted && answer
   end
+  memoize :metadata_missing
 
-  def all_autocompleted
+  def all_autocompleted(responses)
     if question.pick == 'any' && autocompletable?
-      return @all_autocompleted ||= sibling_responses.map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
+      return @all_autocompleted ||= sibling_responses(responses).map(&:reference_identifier).sort.uniq == auto_value.sort.uniq
     end
 
     @all_autocompleted ||= autocompleted
   end
 
   def autocompleted
-    @autocompleted ||= compute_autocompleted
+    compute_autocompleted
   end
+  memoize :autocompleted
 
   def compute_autocompleted
     if autocompletable?
       if question.pick == 'none'
-        return string_value == auto_value
+        return data_value == auto_value
       end
 
       if question.pick == 'one'
@@ -104,20 +121,31 @@ class Response < ActiveRecord::Base
     end
   end
 
+  def url_valid_or_explained?
+    !error || explained?
+  end
+
+  def explained?
+    explanation.present?
+  end
+
+  def data_value
+    text_value.presence || string_value.presence
+  end
+
   private
-  def set_default_dataset_title
-    dataset.try(:set_default_title!, response_set.dataset_title_determined_from_responses)
+  def resolve_if_url
+    return unless answer.present? && answer.input_type == 'url' && data_value.present?
+    self.error = !ODIBot.new(data_value).valid?
+    return nil # false value will stop active record saving
   end
 
-  def set_default_documentation_url
-    dataset.try(:set_default_documentation_url!, response_set.dataset_documentation_url_determined_from_responses)
+  def survey
+    response_set.survey
   end
 
-  def update_survey_section_id
-    if survey_section_id.blank?
-      survey_section_id = question.try(:survey_section_id)
-      Response.update(id, :survey_section_id => survey_section_id) if survey_section_id
-    end
+  def is_question_for?(attribute)
+    survey.question_for_attribute(attribute) == question.reference_identifier
   end
 
 end

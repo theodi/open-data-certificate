@@ -1,3 +1,5 @@
+require 'odibot'
+
 # Trying out having a separate controller from the central surveyor one.
 class ResponseSetsController < ApplicationController
 
@@ -17,49 +19,41 @@ class ResponseSetsController < ApplicationController
     end
   end
 
-  def resolve_url(url)
-    if url =~ /^#{URI::regexp}$/
-      HTTParty.get(url).code rescue nil
-    end
-  end
-
   def resolve
-    if code = resolve_url(params[:url])
-      Rails.cache.write(params[:url], code)
-      render json: {status: code}
-    else
-      render :nothing => true
-    end
+    render json: {valid: ODIBot.valid?(params[:url])}
   end
 
   # Check the user's documentation url and populate answers from it
   def start
+    @documentation_url, url_explanation = params[:response_set].values_at(
+        :documentation_url, :documentation_url_explanation)
+    if request.put?
+      valid = false
+      if ODIBot.valid?(@documentation_url)
+        @response_set.autocomplete(@documentation_url)
+        valid = true
+      elsif url_explanation.present?
+        @response_set.documentation_url = @documentation_url
+        @response_set.documentation_url_explanation = url_explanation
+        @response_set.save
+        valid = true
+      end
 
-    url = params[:response_set][:documentation_url]
-
-    @response_set.update_responses({documentationUrl: url})
-    @response_set.responses.update_all(autocompleted: false)
-    @response_set.update_attribute('kitten_data', nil)
-
-    code = resolve_url(url)
-    if code != 200
-      return redirect_to(surveyor.edit_my_survey_path(
-        :survey_code => @response_set.survey.access_code,
-        :response_set_code => @response_set.access_code
-      ))
+      if valid
+        path = edit_my_survey_path(:response_set_code => @response_set.access_code)
+        respond_to do |format|
+          format.html { redirect_to(path) }
+          format.json { render json: { survey_path: path } }
+        end
+      else
+        @url_error = true
+        @survey = @response_set.survey
+        respond_to do |format|
+          format.html { render 'surveyor/start.html.haml' }
+          format.json { head status: 404 }
+        end
+      end
     end
-
-    kitten_data = KittenData.create(url: url, response_set: @response_set)
-    kitten_data.request_data
-    kitten_data.save
-
-    @response_set.update_attribute('kitten_data', kitten_data)
-    @response_set.update_responses(kitten_data.fields)
-
-    redirect_to(surveyor.edit_my_survey_path(
-      :survey_code => @response_set.survey.access_code,
-      :response_set_code => @response_set.access_code
-    ))
   end
 
   rescue_from CanCan::AccessDenied do |exception|

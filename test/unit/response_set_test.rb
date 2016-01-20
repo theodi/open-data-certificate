@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class ResponseSetTest < ActiveSupport::TestCase
 
@@ -18,8 +18,9 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "created certificate is given the attained_level" do
-    @rs = FactoryGirl.create :completed_response_set
-    assert_equal @rs.certificate.attained_level, @rs.attained_level
+    response_set = FactoryGirl.create :completed_response_set
+    response_set.certificate.update_from_response_set
+    assert_equal response_set.certificate.attained_level, response_set.attained_level
   end
 
   test "can map questions to responses" do
@@ -61,6 +62,117 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert response_set.responses.first.try(:string_value) == response_value
   end
 
+  test "copies urls from old string_value responses to newer text_value columns" do
+    response_value = rand.to_s
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q, response_class: 'text')
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: response_value,
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+
+    response_set = FactoryGirl.create :response_set, survey: source_response_set.survey
+    response_set.reload
+
+    response_set.copy_answers_from_response_set!(source_response_set)
+
+    assert response_set.responses.first.try(:text_value) == response_value
+  end
+
+  test "copies explanations for responses along with answers" do
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q, input_type: 'url')
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: "example.org/fail",
+                                    explanation: "can't even protocol",
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+
+    response_set = FactoryGirl.create :response_set, survey: source_response_set.survey
+    response_set.reload
+
+    response_set.copy_answers_from_response_set!(source_response_set)
+
+    response = response_set.responses.first
+    assert response_set.responses.first.string_value == "example.org/fail"
+    assert response_set.responses.first.explanation == "can't even protocol"
+  end
+
+  def prepare_response_set(response_value = "Foo bar")
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
+
+    source_response_set = FactoryGirl.create(:response_set, survey: a.question.survey_section.survey)
+    FactoryGirl.create :response, { response_set: source_response_set,
+                                    string_value: response_value,
+                                    answer_id: a.id,
+                                    question_id: a.question.id }
+    source_response_set.reload
+    source_response_set
+  end
+
+  test "should create a new cloned response set" do
+    response_value = rand.to_s
+    source_response_set = prepare_response_set(response_value)
+
+    response_set = nil
+    assert_difference 'ResponseSet.count', 1 do
+      response_set = ResponseSet.clone_response_set(source_response_set, "dataset_id" => source_response_set.dataset_id)
+    end
+
+    assert_equal response_value, response_set.responses.first.try(:string_value)
+    assert_equal source_response_set.dataset, response_set.dataset
+  end
+
+  test "clone dataset with updated survey" do
+    response_value = rand.to_s
+    source_response_set = prepare_response_set(response_value)
+    q=FactoryGirl.create(:question, reference_identifier: :question_identifier)
+    a=FactoryGirl.create(:answer, reference_identifier: :answer_identifier, question: q)
+
+    old_survey = source_response_set.survey
+    new_survey = q.survey_section.survey
+    new_survey.access_code = old_survey.access_code
+    new_survey.survey_version = 1
+    new_survey.save
+
+    assert old_survey.superseded?, 'survey should be superseded'
+
+    response_set = nil
+    assert_difference 'ResponseSet.count', 1 do
+      response_set = ResponseSet.clone_response_set(source_response_set,
+        "dataset_id" => source_response_set.dataset_id,
+        "survey_id" => new_survey.id)
+    end
+
+    assert_equal response_value, response_set.responses.first.try(:string_value)
+    assert_equal source_response_set.dataset, response_set.dataset
+    assert_equal new_survey, response_set.survey
+  end
+
+  test "should clone with kitten_data intact" do
+    source_response_set = prepare_response_set
+    source_response_set.kitten_data = KittenData.create(url: 'http://www.example.com')
+
+    response_set = ResponseSet.clone_response_set(source_response_set)
+
+    assert response_set.kitten_data.url == 'http://www.example.com'
+    source_response_set.reload
+    assert source_response_set.kitten_data.url == 'http://www.example.com'
+  end
+
+  test "should clone with extra attributes" do
+    source_response_set = prepare_response_set
+    response_set = ResponseSet.clone_response_set(source_response_set, {user_id: 123})
+
+    assert response_set.user_id == 123
+  end
 
   test "Should raise an error if populating response_set answers from another response_set when responses already exist" do
     response_value = rand.to_s
@@ -113,53 +225,23 @@ class ResponseSetTest < ActiveSupport::TestCase
 
   test "#triggered_mandatory_questions should return an array of all the mandatory questions that are triggered by their dependencies for the response_set" do
     # non-mandatory question
-    question = FactoryGirl.create(:question, is_mandatory: false)
+    question = FactoryGirl.create(:question, required: nil)
 
     survey_section = question.survey_section
     survey = survey_section.survey
 
     # mandatory question, but not triggered
-    mandatory_question = FactoryGirl.create(:question, is_mandatory: true, survey_section: survey_section)
+    mandatory_question = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
     dependency = FactoryGirl.create(:dependency, question: mandatory_question)
     FactoryGirl.create :dependency_condition, dependency: dependency, operator: 'count>2'
 
     # triggered mandatory question
-    triggered_mandatory_question = FactoryGirl.create(:question, is_mandatory: true, survey_section: survey_section)
+    triggered_mandatory_question = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
     survey.reload
 
     response_set = FactoryGirl.create(:response_set, survey: survey)
 
     assert_equal response_set.triggered_mandatory_questions, [triggered_mandatory_question]
-  end
-
-  #TODO: need to test "all_mandatory_questions_complete?"
-
-  test "#triggered_requirements should return an array of all the requirements that are triggered by their dependencies for the response_set" do
-    survey_section = FactoryGirl.create(:survey_section)
-    survey = survey_section.survey
-
-    # non-triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_1', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_1', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
-
-    # non-triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_2', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_2', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count>2'
-
-    # triggered requirement
-    question = FactoryGirl.create(:question, requirement: 'level_3', survey_section: survey_section)
-    requirement = FactoryGirl.create(:requirement, requirement: 'level_3', survey_section: survey_section)
-    dependency = FactoryGirl.create(:dependency, question: requirement)
-    FactoryGirl.create :dependency_condition, question: question, dependency: dependency, operator: 'count<2'
-    survey.reload
-
-    response_set = FactoryGirl.create(:response_set, survey: survey)
-
-    assert_equal response_set.triggered_requirements, [requirement]
   end
 
   test "#attained_level returns the correct string for the level achieved" do
@@ -185,24 +267,11 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal response_set.minimum_outstanding_requirement_level, 5
   end
 
-  test "#completed_requirements returns only triggered_requirements that are met by responses" do
-    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_2', requirement_met_by_responses?: false),
-                              stub(requirement: 'level_3', requirement_met_by_responses?: false),
-                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
-    ]
-
-    response_set = FactoryGirl.create(:response_set)
-    response_set.stubs(:triggered_requirements).returns(triggered_requirements)
-
-    assert_equal [triggered_requirements.first], response_set.completed_requirements
-  end
-
   test "#outstanding_requirements returns only triggered_requirements that are not met by responses" do
-    triggered_requirements = [stub(requirement: 'level_1', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_2', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_3', requirement_met_by_responses?: true),
-                              stub(requirement: 'level_4', requirement_met_by_responses?: false),
+    triggered_requirements = [stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: true),
+                              stub(requirement_met_by_responses?: false),
     ]
 
     response_set = FactoryGirl.create(:response_set)
@@ -284,43 +353,21 @@ class ResponseSetTest < ActiveSupport::TestCase
     assert_equal expected_value, response_set.content_licence_determined_from_responses
   end
 
-  test "#content_licence_determined_from_responses returns 'Unknown' when the content licence is not found" do
-    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "this-is-not-a-licence")
-    expected_value = {
-      :title => "Unknown",
-      :url => nil
-    }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
+  %w[data_licence content_licence].each do |licence_type|
+    test "##{licence_type}_determined_from_responses returns the correct responses when question has standard answer" do
+      question = FactoryGirl.create(:question, reference_identifier: licence_type.camelize(:lower))
+      answer = FactoryGirl.create(:answer, question: question, reference_identifier: 'licence-id', text: 'Licence Title', response_class: 'answer')
+      response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
 
-    assert_equal expected_value, response_set.content_licence_determined_from_responses
-  end
+      expected_value = {
+        title: 'Licence Title',
+        url: nil
+      }
+      method_name = :"#{licence_type}_determined_from_responses"
 
-  test "#data_licence_determined_from_responses returns the correct response when the data licence is a standard licence" do
-    question = FactoryGirl.create(:question, reference_identifier: 'dataLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
-    expected_value = {
-      :title => "UK Open Government Licence 1.0 (OGL)",
-      :url => "http://reference.data.gov.uk/id/open-government-licence"
-    }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
-
-    assert_equal expected_value, response_set.data_licence_determined_from_responses
-  end
-
-  test "#content_licence_determined_from_responses returns the correct response when the content licence is a standard licence" do
-    question = FactoryGirl.create(:question, reference_identifier: 'contentLicence')
-    answer = FactoryGirl.create(:answer, question: question, reference_identifier: "ogl_uk")
-    expected_value = {
-      :title => "UK Open Government Licence 1.0 (OGL)",
-      :url => "http://reference.data.gov.uk/id/open-government-licence"
-    }
-    response_set = FactoryGirl.create(:response_set, survey: question.survey_section.survey)
-    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer)
-
-    assert_equal expected_value, response_set.content_licence_determined_from_responses
+      assert_equal expected_value, response_set.send(method_name)
+    end
   end
 
   test "#data_licence_determined_from_responses returns the correct response when the data licence is a non-standard licence" do
@@ -368,14 +415,10 @@ class ResponseSetTest < ActiveSupport::TestCase
   end
 
   test "#generate_certificate creates a new certificate on save of completed response_sets" do
-    # not stubbing out the attained level because the certificate reloads the response_set
-    # attained_level = 'test_level'
     response_set = FactoryGirl.build(:completed_response_set)
-    # response_set.stubs(:attained_level).returns(attained_level)
     assert_nil response_set.certificate
     response_set.save!
-
-    assert_equal response_set.attained_level, response_set.certificate.try(:attained_level)
+    assert_not_nil response_set.certificate
   end
 
   test "#generate_certificate does not overwrite existing certificate" do
@@ -464,7 +507,7 @@ class ResponseSetTest < ActiveSupport::TestCase
   test "can't publish an unpublishable response_set" do
 
     # mandatory question
-    question = FactoryGirl.create(:question, is_mandatory: true)
+    question = FactoryGirl.create(:question, required: 'required')
     survey_section = question.survey_section
     survey = survey_section.survey
 
@@ -483,6 +526,207 @@ class ResponseSetTest < ActiveSupport::TestCase
     response_set.publish!
 
     assert_not_equal nil, response_set.attained_index
+  end
+
+  test "all urls resolve returns true if all urls resolve sucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+
+
+    ODIBot.stubs(:new).returns(stub(:valid? => true))
+    5.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    assert response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns false if some urls resolve unsucessfully" do
+    response_set = FactoryGirl.create(:response_set)
+
+    ODIBot.stubs(:new).with("http://www.example.com/success").returns(stub(:valid? => true))
+    ODIBot.stubs(:new).with("http://www.example.com/fail").returns(stub(:valid? => false))
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/success")
+    end
+
+    2.times do |n|
+      question = FactoryGirl.create(:question, reference_identifier: "url_#{n}")
+      answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+      response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail")
+    end
+
+    refute response_set.all_urls_resolve?
+  end
+
+  test "all urls resolve returns true if an explanation given" do
+    response_set = FactoryGirl.create(:response_set)
+
+    ODIBot.stubs(:new).with("http://www.example.com/fail").returns(stub(:valid? => false))
+
+    question = FactoryGirl.create(:question, reference_identifier: "url")
+    answer = FactoryGirl.create(:answer, question: question, input_type: "url", )
+    response = FactoryGirl.create(:response, response_set: response_set, question: question, answer: answer, string_value: "http://www.example.com/fail", explanation: "is not blank")
+
+    assert response_set.all_urls_resolve?
+  end
+
+  test "progress calculation of response_set" do
+    response_set = FactoryGirl.create(:response_set)
+    progress = response_set.progress
+
+    assert_equal 0, progress['basic']
+    assert_equal 0, progress['pilot']
+    assert_equal 0, progress['standard']
+    assert_equal 0, progress['exemplar']
+    assert_equal 'exemplar', progress['attained']
+  end
+
+  test "calculating missing responses for when autogenerated" do
+    question = FactoryGirl.create(:question, required: nil)
+
+    survey_section = question.survey_section
+    survey = survey_section.survey
+
+    mandatory_question_1 = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
+    mandatory_question_2 = FactoryGirl.create(:question, required: 'required', survey_section: survey_section)
+
+    survey.reload
+
+    response_set = FactoryGirl.create(:autogenerated_response_set, survey: survey)
+    response_set.update_missing_responses!
+
+    assert_equal "#{mandatory_question_1.text},#{mandatory_question_2.text}", response_set.missing_responses
+  end
+
+end
+
+class ResponseSetErrorsTest < ActiveSupport::TestCase
+  def setup
+    load_custom_survey 'cert_generator.rb'
+    @user = FactoryGirl.create :user
+  end
+
+  test "a missing answer causes an error" do
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+
+    assert_equal %w[mandatory], rs.response_errors['publisherUrl']
+  end
+
+  test "an unresolvable url causes an error" do
+    odibot = mock('odibot')
+    odibot.stubs(:valid?).returns(false)
+    ODIBot.expects(:new).at_least_once.with('http://invalid.com').returns(odibot)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+    rs.update_responses('documentationUrl' => 'http://invalid.com')
+
+    assert rs.response_errors['documentationUrl'].include?('invalid-url'), 'url is marked as invalid'
+  end
+
+  test "an unresolvable url causes an error for a mandatory question" do
+    odibot = mock('odibot')
+    odibot.stubs(:valid?).returns(false)
+    ODIBot.expects(:new).at_least_once.with('http://invalid.com').returns(odibot)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    rs = ResponseSet.create!(:survey => survey)
+    rs.update_responses('publisherUrl' => 'http://invalid.com')
+
+    assert rs.response_errors['publisherUrl'].include?('invalid-url'), 'url is marked as invalid'
+    assert !rs.response_errors['publisherUrl'].include?('mandatory'), 'not described as mandatory'
+  end
+end
+
+class ResponseSetUpdateTimeTest < ActiveSupport::TestCase
+
+  class QueryCounter < ActiveSupport::LogSubscriber
+
+    cattr_accessor :count
+    cattr_accessor :active
+
+    def self.reset!
+      self.count = 0
+    end
+
+    def self.in
+      self.active = true
+      reset!
+      yield
+      return count
+    ensure
+      self.active = false
+    end
+
+    def print?
+      self.class.active && ENV.fetch('QUERY_COUNTER_LOG', 'false') == "true"
+    end
+
+    def print(msg)
+      $stderr.puts(msg) if self.print?
+    end
+
+    def sql(event)
+      payload = event.payload
+      unless ['SCHEMA', nil].include?(payload[:name])
+        self.class.count += 1
+        print "#{payload[:name]} #{payload[:sql][0..100]}"
+        print payload[:binds].map(&:last).inspect if payload[:binds].present?
+        from = Rails.backtrace_cleaner.clean(caller)
+        print "From: #{from[0]}"
+      end
+    end
+
+  end
+
+  QueryCounter.attach_to :active_record
+
+  def in_less_queries_than(limit, label, &block)
+    count = QueryCounter.in(&block)
+    assert count <= limit, "#{label}: #{count} queries is too many"
+  end
+
+  test "updating a single response" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(30, "a single update") do
+      response_set.update_responses('dataTitle' => 'a title response')
+    end
+  end
+
+  test "updating two responses" do
+    load_custom_survey 'cert_generator.rb'
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(40, "updating 2 responses") do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'releaseType' => 'oneoff'
+      )
+    end
+  end
+
+  test "updating a full response_set" do
+    load_custom_survey 'cert_generator.rb'
+    stub_request(:head, "example.com").to_return(status: 200)
+    survey = Survey.newest_survey_for_access_code('cert-generator')
+    response_set = ResponseSet.create!(:survey => survey)
+    in_less_queries_than(80, "updating a response_set") do
+      response_set.update_responses(
+        'dataTitle' => 'a title response',
+        'documentationUrl' => 'http://example.com',
+        'publisherUrl' => 'http://example.com',
+        'releaseType' => 'oneoff',
+        'publisherRights' => 'yes',
+        'publisherOrigin' => 'true',
+        'chooseAny' => %w[one three],
+        'cats' => 'mammal'
+      )
+    end
   end
 
 end

@@ -4,7 +4,7 @@
 //X require surveyor/jquery.maskedinput
 
 /*jshint quotmark: false */
-/*global $, _ */
+/*global $ */
 
 // Javascript UI for surveyor
 $(document).ready(function($){
@@ -22,10 +22,6 @@ $(document).ready(function($){
     var key = 'count-toggle-'+className;
     this.data(key, (this.data(key) || 0) + (increment || 1));
     return this.toggleClass(className, this.data(key) > 0);
-  };
-
-  _.templateSettings = {
-    interpolate: /:(\w+)/g
   };
 
   // Default Datepicker uses jQuery UI Datepicker
@@ -143,7 +139,7 @@ $(document).ready(function($){
   })();
 
   var busy = false;
-  var template = _.template("repeater_field/:question_id/:response_index/:response_group");
+  var template = Hogan.compile("repeater_field/{{question_id}}/{{response_index}}/{{response_group}}");
 
   $form.on('click', '.add_row', function() {
     if (busy) return;
@@ -156,7 +152,7 @@ $(document).ready(function($){
       return parseInt(elem.name.match(/^r\[(\d+)\]/)[1] || 0, 10);
     });
 
-    var url = template({
+    var url = template.render({
       question_id: $row.find('input[name*=question_id]').val(),
       response_index: Math.max.apply(this, responseIndexes) + 1,
       response_group: $row.find('.q_repeater_default').length
@@ -305,8 +301,8 @@ $(document).ready(function($){
     }
 
     var id = $surveyor.data('response-id');
-    $.post('/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
-      next(json.status == 200);
+    $.post('/en/surveys/response_sets/'+id+'/resolve', {url: url, dataType: 'json'}).done(function(json) {
+      next(json.valid);
     });
   }
 

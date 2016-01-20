@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        name: Name
+        email: Email
+        password: Password
+        organization: Organization
+        default_jurisdiction: Default jurisdiction
+        preferred_locale: Preferred locale
+        password_confirmation: Password confirmation
+        current_password: Current password
+        authentication_token: Authentication token

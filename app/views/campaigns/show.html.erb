@@ -1,0 +1,103 @@
+<% content_for :header_title, "Certification campaign: #{@campaign.name}" %>
+
+<h3><%= report_heading(@certificate_level) %></h3>
+<p>
+Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
+</p>
+
+<div class='schedule-controls omit-in-print'>
+  <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
+  <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
+</div>
+
+<p>Started at <%= @campaign.created_at.to_s(:db) %></p>
+
+<ul>
+  <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
+  <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
+  <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
+  <li class='omit-in-print'><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
+</ul>
+
+<div class='omit-in-print'>
+  <%= form_tag campaign_path(@campaign), method: :get, class: 'form-inline' do %>
+    <label for="certificate_level">Show:</label>
+    <%= select_tag :certificate_level, options_for_select({"Uncertified datasets" => :uncertified, "All datasets" => :all}, @certificate_level), name: "certificate_level" %>
+    <button type="submit" class="btn">Filter</button>
+  <% end %>
+</div>
+
+<% if @campaign.incomplete_count > 0 %>
+  <p><strong>Currently running</strong></p>
+<% end %>
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th>
+      Published
+    </th>
+    <th>
+      Source
+    </th>
+    <% if @certificate_level == "all" %>
+      <th>
+        Certificate
+      </th>
+    <% end %>
+    <th class='omit-in-print'>
+      User
+    </th>
+    <th>
+      URLs valid
+    </th>
+    <th>
+      Missing responses
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @generators.each do |generator| %>
+    <tr>
+      <td style="text-align: center">
+        <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
+      </td>
+      <% if generator.completed? %>
+        <td>
+          <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+          <div class='actions omit-in-print'>
+          <% if can? :edit, generator.response_set %>
+            <%= button_to "Edit", continue_path(generator.response_set), method: 'post', class: 'btn' %>
+            <%= button_to "Rerun certification", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post', class: 'btn' %>
+          <% end %>
+          </div>
+        </td>
+        <% if @certificate_level == "all" %>
+          <td>
+              <% if generator.published? %>
+              <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+              <% end %>
+          </td>
+        <% end %>
+        <td class='omit-in-print'>
+            <%= generator.dataset.user_email %>
+        </td>
+        <td>
+          <%= boolean_mark(generator.valid_urls?) %>
+        </td>
+        <td>
+          <%= missing_responses(generator, "<br />").html_safe %>
+        </td>
+      <% else %>
+        <td colspan="5">Processing… <%= link_to generator.autocomplete_url, generator.autocomplete_url %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div class='omit-in-print'>
+  <%= paginate @generators %>
+</div>
+
+<div class='omit-in-print'>
+  <%= link_to 'Download CSV', format: "csv" %>
+</div>

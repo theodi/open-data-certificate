@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140520143420) do
+ActiveRecord::Schema.define(:version => 20151105172643) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -28,15 +28,14 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.boolean  "is_exclusive"
     t.integer  "display_length"
     t.string   "custom_class"
-    t.string   "custom_renderer"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "default_value"
     t.string   "api_id"
     t.string   "display_type"
     t.string   "input_mask"
     t.string   "input_mask_placeholder"
-    t.string   "requirement"
+    t.string   "corresponding_requirements"
     t.string   "help_text_more_url"
     t.string   "input_type"
     t.string   "placeholder"
@@ -44,35 +43,59 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
   end
 
   add_index "answers", ["api_id"], :name => "uq_answers_api_id", :unique => true
+  add_index "answers", ["display_order"], :name => "index_answers_on_display_order"
   add_index "answers", ["question_id", "display_order"], :name => "i_answers_on_question_id_and_display_order"
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["reference_identifier"], :name => "i_answers_on_reference_identifier"
-
-  create_table "autocomplete_override_messages", :force => true do |t|
-    t.integer  "response_set_id"
-    t.integer  "question_id"
-    t.text     "message"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
 
   create_table "certificate_generators", :force => true do |t|
     t.integer  "response_set_id"
     t.integer  "user_id"
     t.text     "request"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "completed"
+    t.integer  "certification_campaign_id"
+    t.boolean  "latest",                    :default => true
   end
+
+  add_index "certificate_generators", ["latest"], :name => "index_certificate_generators_on_latest"
+  add_index "certificate_generators", ["response_set_id"], :name => "index_certificate_generators_on_response_set_id"
+  add_index "certificate_generators", ["user_id"], :name => "index_certificate_generators_on_user_id"
 
   create_table "certificates", :force => true do |t|
     t.integer  "response_set_id"
     t.text     "name"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "attained_level"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "attained_level",  :default => "none"
     t.string   "curator"
     t.boolean  "published",       :default => false
     t.datetime "expires_at"
     t.boolean  "audited",         :default => false
+    t.datetime "published_at"
+    t.string   "aasm_state"
+  end
+
+  add_index "certificates", ["response_set_id"], :name => "index_certificates_on_response_set_id"
+
+  create_table "certification_campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "duplicate_count", :default => 0
+    t.integer  "user_id"
+    t.string   "jurisdiction",    :default => "gb"
+    t.string   "url"
+  end
+
+  create_table "claims", :force => true do |t|
+    t.integer  "dataset_id",         :null => false
+    t.integer  "initiating_user_id", :null => false
+    t.integer  "user_id",            :null => false
+    t.string   "aasm_state",         :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "datasets", :force => true do |t|
@@ -83,7 +106,10 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "documentation_url"
     t.string   "curator"
     t.boolean  "removed",           :default => false
+    t.integer  "embed_stat_id"
   end
+
+  add_index "datasets", ["user_id", "created_at"], :name => "index_datasets_on_user_id_and_created_at"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -128,21 +154,35 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "dependency_conditions", ["answer_id"], :name => "index_dependency_conditions_on_answer_id"
   add_index "dependency_conditions", ["dependency_id"], :name => "i_dependency_conditions_on_dependencies_question_id"
+  add_index "dependency_conditions", ["question_id"], :name => "index_dependency_conditions_on_question_id"
 
   create_table "dev_events", :force => true do |t|
-    t.text     "message",    :limit => 65535
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
+  create_table "embed_stats", :force => true do |t|
+    t.string   "referer"
+    t.integer  "dataset_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "domain",     :null => false
+  end
+
+  add_index "embed_stats", ["domain"], :name => "index_embed_stats_on_domain"
+
   create_table "kitten_data", :force => true do |t|
-    t.text     "data"
+    t.text     "data",            :limit => 16777215
     t.integer  "response_set_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "url"
   end
+
+  add_index "kitten_data", ["response_set_id"], :name => "index_kitten_data_on_response_set_id"
 
   create_table "question_groups", :force => true do |t|
     t.text     "text"
@@ -153,7 +193,6 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "common_identifier"
     t.string   "display_type"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "api_id"
@@ -174,15 +213,14 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "common_identifier"
     t.integer  "display_order"
     t.string   "display_type"
-    t.boolean  "is_mandatory"
     t.integer  "display_width"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
-    t.string   "requirement"
+    t.boolean  "is_requirement",                           :default => false
+    t.string   "corresponding_requirements"
     t.string   "required",                                 :default => "",    :null => false
     t.string   "help_text_more_url"
     t.string   "text_as_statement"
@@ -192,19 +230,14 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "discussion_topic"
   end
 
+  add_index "questions", ["answer_corresponding_to_requirement_id"], :name => "index_questions_on_answer_corresponding_to_requirement_id"
   add_index "questions", ["api_id"], :name => "uq_questions_api_id", :unique => true
+  add_index "questions", ["correct_answer_id"], :name => "index_questions_on_correct_answer_id"
+  add_index "questions", ["question_corresponding_to_requirement_id"], :name => "index_questions_on_question_corresponding_to_requirement_id"
+  add_index "questions", ["question_group_id"], :name => "index_questions_on_question_group_id"
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
-  add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
-
-  create_table "response_cache_maps", :force => true do |t|
-    t.integer  "origin_id"
-    t.integer  "target_id"
-    t.integer  "response_set_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "api_id"
-  end
+  add_index "questions", ["survey_section_id", "display_type", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"
@@ -212,17 +245,21 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "access_code"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "api_id"
     t.integer  "dataset_id"
-    t.string   "aasm_state",     :default => "draft"
+    t.string   "aasm_state",        :default => "draft"
     t.integer  "attained_index"
     t.string   "locale"
+    t.string   "missing_responses", :default => ""
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
   add_index "response_sets", ["api_id"], :name => "uq_response_sets_api_id", :unique => true
+  add_index "response_sets", ["dataset_id"], :name => "index_response_sets_on_dataset_id"
+  add_index "response_sets", ["survey_id"], :name => "index_response_sets_on_survey_id"
+  add_index "response_sets", ["user_id"], :name => "index_response_sets_on_user_id"
 
   create_table "responses", :force => true do |t|
     t.integer  "response_set_id"
@@ -242,10 +279,29 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "api_id"
     t.boolean  "error",             :default => false
     t.boolean  "autocompleted",     :default => false
+    t.string   "explanation"
   end
 
+  add_index "responses", ["answer_id"], :name => "index_responses_on_answer_id"
   add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true
+  add_index "responses", ["question_id"], :name => "index_responses_on_question_id"
+  add_index "responses", ["response_set_id"], :name => "index_responses_on_response_set_id"
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
+
+  create_table "stats", :force => true do |t|
+    t.string   "name"
+    t.integer  "all"
+    t.integer  "expired"
+    t.integer  "publishers"
+    t.integer  "this_month"
+    t.integer  "level_none"
+    t.integer  "level_basic"
+    t.integer  "level_pilot"
+    t.integer  "level_standard"
+    t.integer  "level_exemplar"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "survey_parsings", :force => true do |t|
     t.string   "file_name"
@@ -271,6 +327,8 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.boolean  "display_header",         :default => true
   end
 
+  add_index "survey_sections", ["survey_id"], :name => "index_survey_sections_on_survey_id"
+
   create_table "survey_translations", :force => true do |t|
     t.integer  "survey_id"
     t.string   "locale"
@@ -278,6 +336,8 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
+
+  add_index "survey_translations", ["survey_id"], :name => "index_survey_translations_on_survey_id"
 
   create_table "surveys", :force => true do |t|
     t.string   "title"
@@ -301,11 +361,12 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.string   "full_title"
     t.string   "meta_map"
     t.string   "status",                 :default => "alpha"
-    t.string   "default_locale_name"
   end
 
   add_index "surveys", ["access_code", "survey_version"], :name => "surveys_access_code_version_idx", :unique => true
+  add_index "surveys", ["access_code"], :name => "index_surveys_on_access_code"
   add_index "surveys", ["api_id"], :name => "uq_surveys_api_id", :unique => true
+  add_index "surveys", ["survey_version"], :name => "index_surveys_on_survey_version"
 
   create_table "transfers", :force => true do |t|
     t.integer  "dataset_id"
@@ -318,9 +379,15 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.integer  "target_user_id"
   end
 
+  add_index "transfers", ["dataset_id"], :name => "index_transfers_on_dataset_id"
+  add_index "transfers", ["target_user_id"], :name => "index_transfers_on_target_user_id"
+  add_index "transfers", ["user_id"], :name => "index_transfers_on_user_id"
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "name"
+    t.string   "short_name"
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -329,15 +396,22 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "first_name"
-    t.string   "last_name"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "default_jurisdiction"
     t.string   "authentication_token"
+    t.boolean  "admin",                  :default => false, :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "organization"
+    t.boolean  "agreed_to_terms"
+    t.string   "preferred_locale",       :default => "en"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
@@ -374,5 +448,9 @@ ActiveRecord::Schema.define(:version => 20140520143420) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "verifications", ["certificate_id", "user_id"], :name => "index_verifications_on_certificate_id_and_user_id"
+  add_index "verifications", ["certificate_id"], :name => "index_verifications_on_certificate_id"
+  add_index "verifications", ["user_id"], :name => "index_verifications_on_user_id"
 
 end

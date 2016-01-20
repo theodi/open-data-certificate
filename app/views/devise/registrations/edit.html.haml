@@ -4,11 +4,11 @@
   = devise_error_messages!
 
   .form-field
-    = f.label :first_name
-    = f.text_field :first_name, :class => 'span8'
+    = f.label :name
+    = f.text_field :name, :class => 'span8'
   .form-field
-    = f.label :last_name
-    = f.text_field :last_name, :class => 'span8'
+    = f.label :short_name
+    = f.text_field :short_name, :class => 'span8'
   .form-field
     = f.label :email
     = f.email_field :email, :autofocus => true, :class => 'span8'
@@ -16,9 +16,14 @@
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
   .form-field
-    = f.label :current_password
-    %i= t("authentication.current_password_info")
-    = f.password_field :current_password, :class => 'span8'
+    = f.label :organization
+    = f.text_field :organization, :class => 'span8'
+  .form-field
+    = f.label :default_jurisdiction
+    = f.select(:default_jurisdiction, jurisdiction_options_for_select(resource.default_jurisdiction))
+  .form-field
+    = f.label :preferred_locale
+    = f.select(:preferred_locale, locale_options_for_select(resource.preferred_locale))
   .form-field
     = f.label :password
     %i= t("authentication.new_password_info")
@@ -26,15 +31,24 @@
   .form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => 'span8'
+  .form-field.check_box
+    = f.label :agreed_to_terms do
+      = f.check_box :agreed_to_terms
+      = t('authentication.agree_to_terms', terms_link: link_to(t('authentication.terms'), terms_page_path)).html_safe
   .form-field
-    = f.label :default_jurisdiction
-    = f.select(:default_jurisdiction, options_for_select(jurisdiction_options(@surveys),resource.default_jurisdiction))
+    = f.label :current_password
+    %i= t("authentication.current_password_info")
+    = f.password_field :current_password, :class => 'span8'
 
-  = f.submit t("authentication.update_profile"), :class => 'btn btn-primary'
+  = f.submit t("authentication.update_profile"), :class => 'btn btn-primary btn-large'
+
 
 .well
   = form_for(resource, :as => resource_name, :url => '') do |f|
-    %h2 API
+    %h2= t('authentication.api')
     .form-field
       = f.label :authentication_token
       = f.text_field :authentication_token, class: 'span8', data: {content: :highlight}
+
+  - if campaigns > 0
+    = link_to 'View API certification campaigns', campaigns_path

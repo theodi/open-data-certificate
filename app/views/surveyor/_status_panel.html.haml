@@ -4,7 +4,9 @@
     %h2= t('status_panel.title')
     %p
       = t('status_panel.description')
-      =link_to t('status_panel.about'), '/about'
+      =link_to t('status_panel.about'), about_page_path
+    %p
+      =link_to t('status_panel.improve_data'), view_my_survey_requirements_path(:response_set_code => @response_set.access_code)
 
     %hr
     #panel_loading
@@ -42,6 +44,3 @@
     .progress.progress-striped.progress-danger
       .bar#bar-exemplar
 
-    %hr
-    %p
-      =link_to t('status_panel.improve_data'), surveyor.view_my_survey_requirements_path(:response_set_code => @response_set.access_code)

@@ -1,12 +1,10 @@
-- kitten_data = response_set.kitten_data.try(:data)
-
 .summary-data
   %h3= t :summary, scope: :summary_data
   %dl
     =detail_item(t :type_of_release, scope: :summary_data)   { response_set.release_type_determined_from_responses }
 
     - licences = response_set.licences
-    - if licences[:data] === licences[:content]
+    - if licences[:data] == licences[:content]
       =detail_item(t :licence, scope: :summary_data)         { licences[:data][:title] }
     - else
       =detail_item(t :data_licence, scope: :summary_data)    { licences[:data][:title] }
@@ -14,48 +12,16 @@
 
     =detail_item(t :verification, scope: :summary_data) { t response_set.certificate.certification_type, scope: 'certificate.certification_types' }
 
-    - if kitten_data
-      - unless kitten_value(kitten_data[:release_date]).empty?
-        %dt= t :release_date, scope: :data_kitten
-        %dd!= kitten_value(kitten_data[:release_date]).to_s
+    - if response_set.has_kitten_data?
+      - kitten_data = response_set.kitten_data
+      - [:release_date, :modified_date, :update_frequency, :publishers, :keywords].each do |key|
+        = kitten_field(kitten_data, key)
 
-      - unless kitten_value(kitten_data[:modified_date]).empty?
-        %dt= t :modified_date, scope: :data_kitten
-        %dd!= kitten_value(kitten_data[:modified_date])
+      - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords, :assumptions])
+      - extra_data = kitten_data.data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
 
-      - unless kitten_value(kitten_data[:update_frequency]).empty?
-        %dt= t :update_frequency, scope: :data_kitten
-        %dd!= kitten_value(kitten_data[:update_frequency])
-
-  - if kitten_data
-    %hr.heavy
-
-    - unless kitten_value(kitten_data[:publishers]).empty?
-      %h3= t :publishers, scope: :data_kitten
-      %dl
-        %dd!= kitten_value(kitten_data[:publishers])
-
-    - unless kitten_value(kitten_data[:licenses]).empty?
-      %h3= t :licenses, scope: :data_kitten
-      %dl
-        %dd!= kitten_value(kitten_data[:licenses])
-
-    - unless kitten_value(kitten_data[:keywords]).empty?
-      %h3= t :keywords, scope: :data_kitten
-      %dl
-        %dd!= kitten_value(kitten_data[:keywords])
-
-    - excluded = Set.new([:description, :distributions, :release_date, :modified_date, :update_frequency, :publishers, :licenses, :keywords])
-    - extra_data = kitten_data.reject{ |key,value| excluded.include?(key) || kitten_value(value).blank? }
-
-    /# Ignore the title if it is the same as the certificate title
-    - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
-
-    - unless extra_data.empty?
-      %hr.heavy
+      /# Ignore the title if it is the same as the certificate title
+      - extra_data.delete(:title) if defined?(@certificate) && @certificate.response_set.try(:title) == extra_data[:title]
 
       - extra_data.each do |key, v|
-        %h3= t key, scope: :data_kitten
-        %dl
-          %dd!= kitten_value(v)
-          %dd= key
+        = kitten_field(kitten_data, key)

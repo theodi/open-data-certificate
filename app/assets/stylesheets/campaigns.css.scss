@@ -1,0 +1,27 @@
+// Place all the styles related to the Campaigns controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media print {
+  div#mainnav, ul.nav, span.label, .omit-in-print, div.footer-nav, header {
+    display: none !important; // Remove !important if adding new overiding styles
+  }
+  td a {
+    color: blue !important;
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  body {
+    -webkit-print-color-adjust:exact !important;
+  }
+  .navbar {
+    background-color: #000000 !important;
+    padding: 0;
+  }
+  .container {width: 100%; margin: 0px; float: none;}
+  table td:last-child {
+    min-width: 300px !important;
+  }
+}

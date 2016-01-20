@@ -10,6 +10,10 @@ if defined?(Bundler)
 end
 
 module OpenDataCertificate
+  def self.hostname
+    ENV['CERTIFICATE_HOSTNAME']
+  end
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -19,6 +23,11 @@ module OpenDataCertificate
     config.autoload_paths += %W(
       #{config.root}/lib/extra
       #{config.root}/app/models/concerns
+    )
+
+    config.eager_load_paths += %W(
+      #{config.root}/app/workers
+      #{config.root}/lib/extra
     )
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -33,8 +42,12 @@ module OpenDataCertificate
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
     # config.i18n.default_locale = :de
+
+    # This setting is being defaulted to true in rails 4.0.2 onwards
+    # This removes a deprecation warning
+    config.i18n.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -64,7 +77,12 @@ module OpenDataCertificate
 
     # Add homepage map to the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "homepage_map")
-    config.assets.precompile += %w( map.js )
+    config.assets.precompile += %w[
+      admin.js
+      map.js
+
+      badge.css
+    ]
 
     # Get around heroku deployment issues
     # https://devcenter.heroku.com/articles/rails-asset-pipeline#troubleshooting
@@ -73,18 +91,15 @@ module OpenDataCertificate
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Rails apps no longer can catch ActionController::RoutingError errors, as they're caught earlier in the stack.
-    # This is a workaround from: https://github.com/vidibus/vidibus-routing_error
-    config.after_initialize do |app|
-      app.routes.append{match '*path', :to => 'application#routing_error'}
-    end
-
     config.middleware.insert_before ActionDispatch::ParamsParser, "CatchJsonParseErrors"
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '/datasets/*/certificates/*', :headers => :any, :methods => [:get, :options]
+        resource '/datasets/*.json', :headers => :any, :methods => [:get, :options]
+        resource '/datasets/*.js', :headers => :any, :methods => [:get, :options]
+        resource '/*/datasets/*.json', :headers => :any, :methods => [:get, :options]
+        resource '/*/datasets/*.js', :headers => :any, :methods => [:get, :options]
       end
     end
 

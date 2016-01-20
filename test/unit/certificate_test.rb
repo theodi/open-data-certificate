@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class CertificateTest < ActiveSupport::TestCase
 
@@ -65,6 +65,24 @@ class CertificateTest < ActiveSupport::TestCase
 
   end
 
+  test 'certification_type if auto generated' do
+    response_set = FactoryGirl.create(:response_set_with_dataset)
+    3.times { FactoryGirl.create(:valid_response, response_set: response_set) }
+    certificate_generator = CertificateGenerator.create(response_set: response_set)
+    certificate = response_set.certificate
+
+    assert_equal :auto, certificate.certification_type
+  end
+
+  test 'no longer auto generated if responses have been updated since generation' do
+    response_set = FactoryGirl.create(:response_set_with_dataset, updated_at: 6.minutes.ago)
+    certificate_generator = CertificateGenerator.create(response_set: response_set, updated_at: 5.minutes.ago)
+    3.times { FactoryGirl.create(:valid_response, response_set: response_set, updated_at: 4.minutes.ago) }
+    certificate = response_set.certificate
+
+    assert_equal :self, certificate.certification_type
+  end
+
   test 'published_certificates' do
     @certificate1.update_attributes(published: true)
     @certificate2.update_attributes(published: true)
@@ -74,10 +92,10 @@ class CertificateTest < ActiveSupport::TestCase
   end
 
   test "status returns the expected status" do
-    @certificate1.update_attributes(published: true)
+    @certificate1.publish!
     assert_equal @certificate1.status, "published"
 
-    @certificate1.update_attributes(published: false)
+    @certificate1.draft!
     assert_equal @certificate1.status, "draft"
   end
 
@@ -107,4 +125,57 @@ class CertificateTest < ActiveSupport::TestCase
 
     assert_equal 14, @certificate1.days_to_expiry
   end
+
+  test 'publishing certificate sets published date' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+    certificate.publish!
+
+    assert_equal Date.today, certificate.published_at.to_date
+  end
+
+  test 'publishing certificate through aasm sets published state sucessfully' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+    certificate.publish!
+
+    assert certificate.published
+  end
+
+  test 'returns url of certificate' do
+    certificate = FactoryGirl.create(:response_set_with_dataset).certificate
+
+    assert_match %r{http://test\.host/en/datasets/[0-9]+/certificates/[0-9]+}, certificate.url
+  end
+end
+
+class CertificateScopeTest < ActiveSupport::TestCase
+
+  test "published scope" do
+    unpublished = FactoryGirl.create(:certificate_with_dataset)
+    published = FactoryGirl.create(:published_certificate_with_dataset)
+    assert_equal [published], Certificate.published
+  end
+
+  test "expired scope with expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate, :expires_at => 3.days.from_now)
+    assert_equal [expired], Certificate.expired
+  end
+
+  test "expired scope without expiry date" do
+    FactoryGirl.create(:certificate)
+    assert_empty Certificate.expired
+  end
+
+  test "current scope with expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate, :expires_at => 3.days.from_now)
+    assert_equal [current], Certificate.current
+  end
+
+  test "current scope without expiry date" do
+    expired = FactoryGirl.create(:certificate, :expires_at => 3.days.ago)
+    current = FactoryGirl.create(:certificate)
+    assert_equal [current], Certificate.current
+  end
+
 end

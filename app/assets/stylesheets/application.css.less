@@ -1,3 +1,4 @@
+
 /*
   © 2013 Open Data Institute
 
@@ -15,6 +16,10 @@
 
 *= require_self
 *= require surveyor_all
+*= require campaigns
+*= require claims
+*= require datasets
+*= require mermaid
 */
 
 // import bootstrap this way so that we can alter variables just for this app
@@ -132,17 +137,18 @@
     }
 
     .open-data-certificate {
-        width: 60px;
+        width: 77px;
         margin: 0 auto;
         }
 
-    .span6:last-child {
+    .span6:first-child {
       border-right: thin white solid;
     }
 
 
     .span6:last-child p:first-child {
       text-align: center;
+      min-height: 70px;
     }
 
   }
@@ -166,6 +172,8 @@
 
   p { color: #fff; font-size: 20px; }
 
+  ul { color: #fff; font-size: 14px; }
+
   .btn-large { width: 100%; .box-sizing(border-box); margin: 12px 0; }
 
   form { margin-bottom: 0; }
@@ -186,6 +194,9 @@
     label, .help-inline {
       font-size:1em;
       color:#fff;
+    }
+    .help-inline {
+      padding-top: 1ex;
     }
     label div{
       margin-top:.5em;
@@ -572,13 +583,15 @@ header.affix {
 }
 
 #padd {
+  padding-bottom: 40px;
+
   .container {
-    margin-top: 50px;
+    margin-top: 20px;
 
     h1 {
       font-size: 70px;
+      font-weight: 400;
       line-height: 76px;
-      color: @odiGrey;
       margin-bottom: 22px;
       margin-top: 35px;
     }
@@ -586,30 +599,55 @@ header.affix {
     h2 {
       font-size: 30px;
       line-height: 40px;
-      margin-bottom: 40px;
-      color: @odiGrey;
-      padding-left: 3px;
-
-      strong {
-         color: @odiGreyDark;
-      }
-
+      font-weight: 400;
+      margin-bottom: 20px;
     }
   }
 
-  .btn {
-    display: block;
-    margin-bottom: 20px;
+  p {
+
   }
 
-  button.btn {
-    width: 100%;
+  form {
+    display: inline;
+  }
+
+  .btn {
+    margin-bottom: 20px;
   }
 }
 
-.odi-bleed {
-  background:#fff url("/assets/splat.png") no-repeat top left fixed;
-  background-position: center -450px;
+.lined-title {
+  text-align: center;
+  font-weight: 400;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  span {
+    padding-bottom: 2px;
+    display: inline-block;
+    position: relative;
+  }
+
+  span:before, span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    display: block;
+    margin-top: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  span:before {
+    right: 100%;
+    margin-right: 0.75em;
+  }
+
+  span:after {
+    left: 100%;
+    margin-left: 0.75em;
+  }
 }
 
 .home {
@@ -619,21 +657,28 @@ header.affix {
   padding-bottom: 0;
 
   h1 {
-    color: @odiBlueDarker;
+    color: #000000;
     font-size: 36px;
     margin-bottom: 30px;
-    text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
   .steps {
-
-    /* Background stripes (image has 30px of space on left to align) */
-    background: url(/assets/background-home-header.gif) repeat-y center;
 
     .span4 {
 
       /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
       padding-bottom: 20px;
+
+      .steps-box {
+        border: 10px solid #ffffff;
+        background-color: #3498db;
+
+        i {
+          font-size: 40px;
+          padding: 20px 0 0 0;
+          display: inline-block;
+        }
+      }
 
     }
 
@@ -647,21 +692,13 @@ header.affix {
     }
     p{
       padding-bottom:20px;
+      font-size: 0.95em;
     }
 
     h2 {
-      font-size: 70px;
-      color: @odiBlueDarker;
-      font-weight: bold;
-      text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
-
-      small {
-        display: block;
-        color: #fff;
-        font-size: 30px;
-        padding: 30px 0 10px;
-        text-shadow: none;
-      }
+      font-size: 1.3em;
+      color: #ffffff;
+      font-weight: normal;
     }
 
     form {
@@ -675,47 +712,75 @@ header.affix {
   }
 }
 
-.home-header-buttons {
-
-  .row {
-
-    height: 88px;
-
-  }
-
-  .span4 {
-    text-align: center;
-
-    .logo {
-
-      /* Small ODI logo, hide text */
-      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      margin: -34px auto 0 auto;
-      width: 76px; height: 68px;
-
-    }
-
-    .btn-primary {
-      margin-top: -20px;
-    }
-  }
-}
-
 .homepage-about-content {
 
   h2 {
     font-weight: normal;
   }
 
-  h2.about-certificate { margin-top: -7px; }
-
   h2.about-odi {
-    border-top: 1px solid #e1e1e1;
     padding-top: 20px;
     margin-top: 25px;
+  }
+
+  .certificate-user-list {
+    list-style: none;
+
+    li {
+      text-align: center;
+
+      a {
+        display: block;
+        padding: 5px;
+      }
+    }
+  }
+
+  .collaborator-bullets {
+    list-style: none;
+
+    li {
+      padding: 0 0 40px 80px;
+      position: relative;
+      background: url(collaborator-list-bg.png) -5px 0 repeat-y;
+
+      &.last {
+        background-image: none;
+      }
+
+      h3 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+        color: #7a7a7a;
+        font-size: 80%;
+      }
+
+      i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 30px;
+        border-radius: 100em;
+        padding: 20px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        background-color: #2ecc71;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .certificate-adoption {
+    h3 {
+      text-align: center;
+      margin: 0 0 5px 0;
+      line-height: normal;
+    }
   }
 }
 
@@ -740,6 +805,13 @@ hr.heavy {
   background: url(divider.png);
 }
 
+.sub-heading {
+  text-align: center;
+  color: #7a7a7a;
+  font-size: 14px;
+  margin-bottom: 50px;
+}
+
 // Layout //
 
 .container {
@@ -760,6 +832,20 @@ hr.heavy {
   }
 }
 
+.intro-panel {
+  .row {
+    padding-top: 45px;
+  }
+
+  .span4 {
+    text-align: center;
+  }
+
+  li {
+    padding: 4px 0;
+  }
+}
+
 #topbar {
   background: #1b1b1b;
 
@@ -774,6 +860,8 @@ hr.heavy {
 
       a {
         color: #fff;
+      }
+      > a {
         padding: 20px;
       }
 
@@ -1068,11 +1156,13 @@ header {
 }
 
 // rss link at the top
-p.rss-top {
+ul.rss-top {
   &, & a{
     color:@odiBlue;
   }
   font-size: 14px;
+
+  list-style: none;
 }
 
 section {
@@ -1215,7 +1305,19 @@ th {
   font-weight: normal;
 }
 
+table.cookies var {
+  font-style: normal;
+  word-break: keep-all;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
 
+table.cookies tr.cont td {
+  border: none;
+}
 
 // Forms //
 
@@ -1271,6 +1373,10 @@ th {
   .btn {
     float: left;
     margin-right: 4px;
+  }
+  a {
+    display: block;
+    line-height: 1.5;
   }
 }
 
@@ -1431,10 +1537,13 @@ a.transfer {
     padding-right: 20px;
   }
 
-
-  // bit of a hack to get lines mid-gutter
   .row-fluid{
-    position: relative
+    position: relative;
+
+    .baseline {
+      font-size: 16px;
+      padding-top: 10px;
+    }
   }
 
 
@@ -1460,18 +1569,15 @@ a.transfer {
     }
   }
 
-  a .delete {
+  a.delete {
     background-image:url(/assets/status/remove-sign.png);
     background-repeat: no-repeat;
     display:inline-block;
-    margin:auto;
-    width:25px;
-    height: 25px;
     padding-left: 23px;
     color: @odiCrimson;
   }
 
-  a:hover .delete {
+  a.delete:hover {
    color: @odiCrimsonDark;
   }
 
@@ -1487,10 +1593,8 @@ a.transfer {
 
 .response-set .row-fluid.baseline {
 
-    // Even out the spacing around the last line of data in each certificate
-    // panel on the "My Certificates" page
-    padding-bottom: 5px;
-
+    font-size: 16px;
+    padding-top: 10px;
 }
 
 // don't display the headers, links or actions in secondary ones
@@ -1656,7 +1760,7 @@ a.transfer {
 .level-badge{
   width:133px;
   height:118px;
-  background-image:url(/assets/badges/no_level_badge.png);
+  background-image:url(/assets/badges/basic_level_badge.png);
   background-repeat: no-repeat;
   margin: auto;
 
@@ -1665,19 +1769,9 @@ a.transfer {
   line-height: 200%;
 }
 
-.level-badge-basic{
-  background-image:url(/assets/badges/raw_level_badge.png);
+.level-badge-none{
+  background-image:url(/assets/badges/no_level_badge.png);
 }
-.level-badge-pilot{
-  background-image:url(/assets/badges/pilot_level_badge.png);
-}
-.level-badge-standard{
-  background-image:url(/assets/badges/standard_level_badge.png);
-}
-.level-badge-exemplar{
-  background-image:url(/assets/badges/exemplar_level_badge.png);
-}
-
 
 .status-badge{
   width:80px;
@@ -1699,6 +1793,9 @@ a.transfer {
   background-image:url(/assets/status/published.png);
 }
 .status-badge-archived{
+  background-image:url(/assets/status/archived.png);
+}
+.status-badge-superseded{
   background-image:url(/assets/status/archived.png);
 }
 
@@ -1730,6 +1827,12 @@ a.transfer {
   }
 }
 
+.edit_questionaire {
+  .icon-loading {
+    margin-right: 7px;
+  }
+}
+
 // Questionnaire (survey) view //
 
 // jurisdiction select at the top of the certificate
@@ -1739,9 +1842,12 @@ header .jurisdiction{
     cursor: pointer;
     color: @white;
     white-space: nowrap;
-    margin-left: 8px;
-    margin-right: 30px;
+    margin: 0 5px;
 
+    &.changer {
+      margin-left: 8px;
+      margin-right: 30px;
+    }
   }
   .popover {
     color: @black;
@@ -1795,13 +1901,17 @@ header .save-button {
   }
 
   form .btn-large {
-    i.icon-loading {
+    i.icon-loading, i.icon-exclamation-sign {
       display: none;
       margin-right: 3px;
     }
 
     &.disabled {
       i.icon-loading { display: inline-block; }
+    }
+
+    &.error {
+      i.icon-exclamation-sign { display: inline-block; }
     }
   }
 
@@ -1835,6 +1945,16 @@ header .save-button {
 
     &.alert-info {
       background: @odiBlue;
+    }
+  }
+
+  #start_url_explanation {
+    margin-top: 30px;
+    li {
+      list-style: none;
+    }
+    &.show {
+      display: block !important;
     }
   }
 }
@@ -2531,7 +2651,7 @@ header .save-button {
   position: absolute;
   right:0;
   width:280px;
-  padding:20px;
+  padding: 0 20px;
   height:100%;
   z-index:5;
 
@@ -2587,8 +2707,8 @@ header .save-button {
   }
 
   #panel_inner {
-    overflow-y: auto;
-    height: 75%;
+    overflow-y: scroll;
+    height: 80%;
   }
 
   #panel_loading{
@@ -2792,20 +2912,17 @@ strong.certificate-level {
     color: @color;
   }
 }
-.none-level {
-  .level-styles(@basic, url(/assets/badges/no_level_badge.png));
+
+.none-level .certificate-badge {
+  background-image: url(/assets/badges/no_level_badge.png);
 }
-.basic-level {
-  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
+
+.certificate-badge {
+  background-image: url(/assets/badges/basic_level_badge.png);
 }
-.pilot-level {
-  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
-}
-.standard-level {
-  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
-}
-.exemplar-level {
-  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
+
+strong.certificate-level {
+  color: @basic;
 }
 
 .footer {
@@ -2870,6 +2987,36 @@ strong.certificate-level {
 
     li { margin-bottom: 5px; line-height: 24px; }
 
+    .page-contents-navigation {
+      font-size: 90%;
+      margin-bottom: 40px;
+
+      li {
+        margin: 0;
+      }
+    }
+
+    .faq {
+      margin-bottom: 40px;
+    }
+
+    .benefits-section {
+      margin-top: 40px;
+
+      h2 {
+        border-bottom: 1px solid #efefef;
+      }
+
+      dt {
+        margin: 0;
+      }
+
+      dd {
+        margin-top: 5px;
+      }
+    }
+
+
     ul.kitemarks {
 
       margin: 20px 0 10px 0;
@@ -2897,6 +3044,68 @@ strong.certificate-level {
     .kitemark3 { background: url(/assets/badges/standard_level_badge.png) no-repeat top left; background-size: 65px;}
     .kitemark4 { background: url(/assets/badges/exemplar_level_badge.png) no-repeat top left; background-size: 65px;}
 
+    .badge-description {
+      padding-left: 100px;
+    }
+
+    .badge-table {
+      border-collapse: collapse;
+
+      td, th {
+        border: 1px solid #000000;
+        padding: 4px 10px;
+      }
+
+      td {
+        text-align: center;
+      }
+
+      th {
+        text-align: left;
+        font-size: 95%;
+      }
+
+      .types-row {
+        th {
+          text-align: center;
+        }
+
+        td {
+          border: 0;
+        }
+      }
+
+      .group-heading {
+        font-weight: bold;
+        background-color: #000000;
+        color: #ffffff;
+      }
+    }
+
+    .supporter-divider {
+      margin-top: 40px;
+    }
+
+    .supporter {
+      position: relative;
+      min-height: 100px;
+      line-height: 100px;
+
+      img {
+        position: absolute;
+        top: 50%;
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+      }
+
+      .caption {
+        display: inline-block;
+        margin-left: 120px;
+        vertical-align: middle;
+        line-height: normal;
+      }
+    }
 
   }
 
@@ -3063,9 +3272,9 @@ section.improvement {
         .btn {
 
           // Equalise widths and left-align text
-          width: 64%;
+          width: 50%;
           .box-sizing(border-box);
-          text-align: left;
+          text-align: center;
           margin: 18px 0 0 30px;
 
           // When buttons wrap, add a gap under the second one
@@ -3114,18 +3323,8 @@ section.improvement {
 
   }
 
-  // Level specific styles
-  &.improvement-basic header .container {
-    background-image: url(/assets/badges/no_level_badge.png);
-  }
-  &.improvement-pilot header .container {
-    background-image: url(/assets/badges/pilot_level_badge.png);
-  }
-  &.improvement-standard header .container {
-    background-image: url(/assets/badges/standard_level_badge.png);
-  }
-  &.improvement-exemplar header .container {
-    background-image: url(/assets/badges/exemplar_level_badge.png);
+  &.improvement header .container {
+    background-image: url(/assets/badges/basic_level_badge.png);
   }
 
   &.improvement-basic {
@@ -3154,7 +3353,7 @@ section.improvement {
 
 }
 
-.certicate-content {
+.certificate-content {
   .well {
     .border-radius(0);
     padding: 16px 27px;
@@ -3196,7 +3395,12 @@ section.improvement {
     }
 
     a {
+      text-decoration: none;
       border-bottom: 1px white solid;
+    }
+    a:hover {
+      color: black;
+      border-bottom: 1px black solid;
     }
 
     &.summary {
@@ -3373,17 +3577,17 @@ section.improvement {
   #padd {
     .container {
       h1 {
-      font-size: 56px;
-      line-height: 69px;
-      background-color: #fff;
-      padding: 0 5px;
-        }
+        font-size: 56px;
+        line-height: 69px;
+        padding: 0 5px;
+        text-shadow: 0px 0px 2px #fff;
+      }
 
       h2 {
         font-size: 28px;
         line-height: 37px;
-        background-color: #fff;
         padding: 0 3px;
+        text-shadow: 0px 0px 2px #fff;
       }
     }
   }
@@ -3674,7 +3878,7 @@ body{
 }
 
 // block only visible to administrators
-.admin-functions {
+.admin-functions, .certificate-info {
   .alert();
   .alert-info();
   color:#444;
@@ -3766,4 +3970,21 @@ body{
       &.exemplar { background: no-repeat url('/assets/badges-medium/exemplar_level_badge.png'); }
     }
   }
+}
+
+// Rails thinks it knows best but it doesn't
+.check_box .field_with_errors {
+  display: inline;
+}
+
+td form.button_to,
+td form.button_to > div,
+.schedule-controls form.button_to,
+.schedule-controls form.button_to > div,
+{
+  display: inline-block;
+}
+
+td div.actions {
+  padding-top: 8px;
 }
