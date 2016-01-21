@@ -5,7 +5,10 @@
     .span3
       %h3= t('dashboard.level_attained')
 
-      .level-badge{class: "level-badge-#{certificate.attained_level}"}
+      - if certificate.attained_level == 'none'
+        .level-badge{class: "level-badge-none"}
+      - else
+        .level-badge
 
       %p= t "levels.#{certificate.attained_level}.title"
 

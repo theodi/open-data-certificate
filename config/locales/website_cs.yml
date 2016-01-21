@@ -34,18 +34,22 @@ cs:
       title: Bronzová
       title_with_level: bronzová úroveň
       description: Datová sada splňuje základní požadavky na otevřená data.
+      longdesc: Data jsou dostupná pod otevřenou licencí, přístupná bez omezení, kdokoliv má právo je použít.
     pilot:
       title: Stříbrná
       title_with_level: stříbrná úroveň
       description: Vydavatel těchto dat kromě základních podmínek poskytuje netriviální podporu a reaguje na připomínky uživatelů.
+      longdesc: Data dokumentována ve strojově čitelném formátu, dá se na ně spoléhat, uživatelé mohou počítat s podporou ze strany vydavatele.
     standard:
       title: Zlatá
       title_with_level: zlatá úroveň
       description: Otevřená data s robustní podporou, na kterou se uživatelé mohou spolehnout.
+      longdesc: Data jsou publikována v otevřeném, strojově čitelném formátu, vydavatel garantuje jejich pravidelnou aktualizaci, nabízí ještě větší podporu a lepší dokumentaci, a k dispozici je také strojově čitelné prohlášení o právech.
     exemplar:
       title: Platinová
       title_with_level: platinová úroveň
       description: Tato data jsou výjimečnou ukázkou informační infrastruktury.
+      longdesc: Vydavatel nabízí strojově čitelnou dokumentaci o původu dat. Jako identifikátory jsou v datech použita URL nebo jiné univerzální identifikátory. Vydavatel má celý tým lidí, kteří mají na starost budování komunity uživatelů. Celkově jde o výjimečný příklad informační infrastruktury.
   level_descriptions:
     basic: 'Dobrý základ v publikování otevřených dat.'
     pilot: 'Vydavatel dat poskytuje uživatelům podporu a reaguje na jejich připomínky.'

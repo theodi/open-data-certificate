@@ -11,13 +11,10 @@
 
     <nav>
       <ul>
-        <li><%= link_to('Jak získat certifikát', how_to_get_certificates_path) %></li>
         <li><%= link_to('Úrovně certifikace', badge_levels_page_path) %></li>
         <li><%= link_to('Požadavky na jednotlivé úrovně', what_you_need_page_path) %></li>
       </ul>
     </nav>
-
-    <h2>Naše vize</h2>
 
     <p>Cílem je certifikovat všechna otevřená data, aby z nich každý mohl
     vytěžit maximum jejich hodnoty. Pouhé zveřejnění dat k tomu nestačí – data
@@ -25,6 +22,23 @@
     měl uživatelům nabídnout odpovídající podporu. Certifikát otevřených dat je
     univerzálně platnou značkou zaručující transparentnost, kvalitu a
     důvěru.</p>
+
+    <div class="">
+      <p>Certifikát můžete získat dvěma způsoby:</p>
+
+      <h2>Hromadná certifikace</h2>
+      <p>Pokud máte datové sady popsané v nějakém katalogu (například
+      <%= link_to 'CKAN', 'http://ckan.org/' %>) nebo je máte označkované
+      pomocí <%= link_to 'DCAT', 'http://www.w3.org/TR/vocab-dcat/' %>,
+      můžeme vám aspoň část certifikátů vygenerovat automaticky.</p>
+
+      <p><%= link_to('Kontaktujte nás, prosím', contact_page_path, class: 'btn') %></p>
+
+      <h2>Certifikace jednotlivých datových sad</h2>
+      <p>Pokud chcete certifikovat jednu datovou sadu, můžete hned začít vyplňovat
+      certifikační dotazník:</p>
+      <p><%= new_certificate_link(class: 'btn') %></p>
+    </div>
 
     <div class="benefits-section">
       <h2>Výhody pro vydavatele dat</h2>
