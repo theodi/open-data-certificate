@@ -207,13 +207,13 @@ en:
       sub_title: "Open Data Certificates are designed to be universal and interoperable between technology standards, platforms and countries."
     standards:
       title: Standards
-      description: We currently support DCAT
+      description: We support the <a href='https://www.w3.org/TR/vocab-dcat/'>DCAT</a> metadata standard.
     technology:
       title: Technology
-      description: We can automatically pre-fill many of the Open Data Certificate questions if you use CKAN. Support for Socrata and OpenDataSoft is coming soon.
+      description: We can automatically pre-fill many of the Open Data Certificate questions if you use <a href='http://ckan.org/'>CKAN</a>. <a href='/en/contact'>Get in touch</a> if you’re interested in integration with other portal software.
     countries:
-      title: Countries
-      description: "We offer certificates in %{count} countries."
+      title: Localisation
+      description: "We can localise the certificate to reflect best practice in your jurisdiction. <a href='/en/contact'>Get in touch</a> to find out how you can help."
     certificate_adoption: Certificates adoption around the world
     international_reach:
       title: Where can you create certificates?
