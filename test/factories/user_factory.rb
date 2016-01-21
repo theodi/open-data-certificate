@@ -20,6 +20,17 @@ FactoryGirl.define do
     factory :admin_user do
       admin true
     end
+
+    factory :confirmed_user do
+      confirmed_at DateTime.now
+    end
+
+    factory :engaged_user do
+      confirmed_at DateTime.now
+      after(:create) do |user|
+        FactoryGirl.create_list(:dataset, 3, user: user)
+      end
+    end
   end
 
 end

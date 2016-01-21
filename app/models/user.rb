@@ -16,6 +16,14 @@ class User < ActiveRecord::Base
   validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true
   validates :preferred_locale, inclusion: {in: I18n.available_locales.map(&:to_s)}
 
+  def self.engaged_users
+    User.where("confirmed_at IS NOT NULL").select { |u| !u.datasets.blank? }
+  end
+
+  def has_engaged?
+    confirmed? && !datasets.blank?
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token

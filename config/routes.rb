@@ -20,6 +20,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'contact' => 'pages#show', id: 'contact', as: 'contact_page'
     get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
+    get 'autocertification' => 'pages#show', id: 'autocertification', as: 'autocertification'
 
     scope '/surveys' do
       # Redirect old URLs that include a jurisdiction (survey_code)
