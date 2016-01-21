@@ -6,6 +6,8 @@
       <ul>
         <li><%= link_to('Badge Levels', badge_levels_page_path) %></li>
         <li><%= link_to('What you need', what_you_need_page_path) %></li>
+        <li><%= link_to('FAQ', faq_page_path) %></li>
+        <li><%= link_to('Autocertification', autocertification_path) %></li>
       </ul>
     </nav>
 
@@ -15,7 +17,7 @@
 
     <p>As a globally recognised mark, Open Data Certificate will guarantee transparency, quality and trust.
 
-    <div class="">
+    <div class="benefits-section">
       <h2>How to get certificates</h2>
 
       <p>There are two ways to earn a certificate:</p>
@@ -28,7 +30,7 @@
       <p>To get a certificate for a single dataset, start our questionnaire here:</p>
       <p><%= new_certificate_link(class: 'btn') %></p>
     </div>
-      
+
     <div class="benefits-section">
       <h2>Publisher benefits</h2>
 
@@ -62,12 +64,28 @@
       </dl>
     </div>
 
-    <h2>Data platform technologists</h2>
-    <p>Open Data Certificate provides a free validation service for open data. The validation report lets publishers spot datasets that do not meet required standards, to allow them to take corrective action and provide maintained and trusted data for data reusers.</p>
+    <div class="benefits-section">
+      <h2>How to get certificates</h2>
 
-    <p>
-      <%= example_certificate_link %>
-    </p>
+      <p>There are two ways to earn a certificate:</p>
+
+      <h3>For multiple datasets</h3>
+      <p>If your data is hosted on a portal such as <%= link_to 'CKAN', 'http://ckan.org/' %> or you use <%= link_to 'DCAT', 'http://www.w3.org/TR/vocab-dcat/' %>, we can automatically pre-fill parts of the questionnaire to create draft certificates that can be reviewed, edited and claimed. By claiming an awarded certificate, you can embed an Open Data Certificate badge onto your website. <%= link_to 'Find out more about auto-certification', autocertification_path %>.</p>
+      <p><%= link_to('Send us your website URL to get started', contact_page_path, class: 'btn') %></p>
+
+      <h3>Single datasets</h3>
+      <p>To get a certificate for a single dataset, start our questionnaire here:</p>
+      <p><%= new_certificate_link(class: 'btn') %></p>
+    </div>
+
+    <div class="benefits-section">
+      <h2>Data platform technologists</h2>
+      <p>Open Data Certificate provides a free validation service for open data. The validation report lets publishers spot datasets that do not meet required standards, to allow them to take corrective action and provide maintained and trusted data for data reusers.</p>
+
+      <p>
+        <%= example_certificate_link %>
+      </p>
+    </div>
 
     <hr class="supporter-divider"/>
     <div class="supporter">
