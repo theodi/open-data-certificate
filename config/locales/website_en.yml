@@ -171,7 +171,7 @@ en:
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
     browse_all_new_certificates: Check if you have a certificate
-    verify_in_bulk: "We can certify data in bulk, contact us to find out how."
+    verify_in_bulk: "We can <a href='/en/autocertification'>auto-draft certificates</a> from data portals, <a href='/en/contact'>contact us</a> to get started."
     what_happens_next: What happens next
     claim_your_certificate:
       title: Claim your certificate
