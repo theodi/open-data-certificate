@@ -19,7 +19,7 @@
           <%= link_to t('homepage.browse_all_new_certificates'), datasets_path, class: ['btn', 'btn-large', 'btn-info'] %>
           <%= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')}) %>
 
-          <p><%= t('homepage.verify_in_bulk') %></p>
+          <p><%= t('homepage.verify_in_bulk').html_safe %></p>
         </div>
       </div>
     </div>
@@ -38,14 +38,14 @@
           <div class="steps-box">
             <i class="icon-check icon-large"></i>
             <h2><%= t('homepage.claim_your_certificate.title') %></h2>
-            <p><%= t('homepage.claim_your_certificate.description') %></p>
+            <p><%= t('homepage.claim_your_certificate.description').html_safe %></p>
           </div>
         </div>
         <div class="span4">
           <div class="steps-box">
             <i class="icon-shield icon-large"></i>
             <h2><%= t('homepage.increase_trust.title') %></h2>
-            <p><%= t('homepage.increase_trust.description') %></p>
+            <p><%= t('homepage.increase_trust.description').html_safe %></p>
           </div>
         </div>
         <div class="span4">
@@ -126,19 +126,19 @@
           <li>
             <i class="icon-wrench circle"></i>
             <h3><%= t('homepage.standards.title') %></h3>
-            <p><%= t('homepage.standards.description') %></p>
+            <p><%= t('homepage.standards.description').html_safe %></p>
           </li>
 
           <li>
             <i class="icon-cloud circle"></i>
             <h3><%= t('homepage.technology.title') %></h3>
-            <p><%= t('homepage.technology.description') %></p>
+            <p><%= t('homepage.technology.description').html_safe %></p>
           </li>
 
           <li class="last">
             <i class="icon-globe circle"></i>
             <h3><%= t('homepage.countries.title') %></h3>
-            <p><%= t('homepage.countries.description', :count => Survey.country_count) %></p>
+            <p><%= t('homepage.countries.description', :count => Survey.country_count).html_safe %></p>
           </li>
         </ul>
       </div>

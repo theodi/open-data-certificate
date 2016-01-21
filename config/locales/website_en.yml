@@ -165,23 +165,23 @@ en:
     continue_without_registering: Continue without registering
     creating_questionnaire: Creating new questionnaire...
     create_an_account: Create an account
-    title: The mark of quality and trust for open data.
+    title: The mark of quality and trust for open data
     tagline: "We verify publisher best practice, so you can use data with confidence."
     free_and_open: It’s <strong>free</strong> and <strong>open</strong>.
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
     browse_all_new_certificates: Check if you have a certificate
-    verify_in_bulk: "We can certify data in bulk, contact us to find out how."
+    verify_in_bulk: "We can <a href='/en/autocertification'>auto-draft certificates</a> from data portals, <a href='/en/contact'>contact us</a> to get started."
     what_happens_next: What happens next
     claim_your_certificate:
-      title: Claim your certificate
-      description: We provide a mark for you to display on your website.
+      title: Get certified
+      description: <a href='/en/surveys/s0zm2sz4aQ/start'>Create a certificate</a> or claim and improve an <a href='/en/autocertification'>auto-drafted certificate</a> to receive a badge to display on your website.
     increase_trust:
       title: Increase trust in your data
-      description: Involve your users to gain Community Verified status. Or request an ODI data audit.
+      description: Involve your users to gain Community Verified status. Or <a href='/en/contact'>contact us</a> for ODI data auditing services.
     improve_data:
       title: Improve your data
-      description: A free best practice report is created for all certificates.
+      description: A free best practice report to help you achieve higher badge levels is created for all certificates.
     about_certificate:
       title: What is an Open Data Certificate?
       description_html: |
@@ -207,13 +207,13 @@ en:
       sub_title: "Open Data Certificates are designed to be universal and interoperable between technology standards, platforms and countries."
     standards:
       title: Standards
-      description: We currently support DCAT
+      description: We support the <a href='https://www.w3.org/TR/vocab-dcat/'>DCAT</a> metadata standard.
     technology:
       title: Technology
-      description: We can automatically pre-fill many of the Open Data Certificate questions if you use CKAN. Support for Socrata and OpenDataSoft is coming soon.
+      description: We can automatically pre-fill many of the Open Data Certificate questions if you use <a href='http://ckan.org/'>CKAN</a>. <a href='/en/contact'>Get in touch</a> if you’re interested in integration with other portal software.
     countries:
-      title: Countries
-      description: "We offer certificates in %{count} countries."
+      title: Localisation
+      description: "We can localise the certificate to reflect best practice in your jurisdiction. <a href='/en/contact'>Get in touch</a> to find out how you can help."
     certificate_adoption: Certificates adoption around the world
     international_reach:
       title: Where can you create certificates?
