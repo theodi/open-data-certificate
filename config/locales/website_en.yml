@@ -426,7 +426,7 @@ en:
     return_to_dashboard: Return to dashboard
     levels:
       basic:
-        title: The basics
+        title: Bronze requirements
         subtitle: The bare minimum required to publish a certificate - a fantastic start!
         instruction: "You must provide data for the following questions:"
       pilot:
