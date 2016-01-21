@@ -25,10 +25,7 @@
         .container
           .navbar-inner
             %a.brand{:href => root_path}
-              - if content_for? :nav_brand
-                = yield :nav_brand
-              - else
-                = image_tag "logo.png"
+              = image_tag "logo-home.png"
             %ul.nav.pull-right
               =render 'shared/auth_bar'
       #mainnav.navbar.navbar-static-top
