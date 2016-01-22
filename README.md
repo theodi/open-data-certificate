@@ -129,7 +129,7 @@ state of `pending`, please try again in a few seconds.
 
 ##### 1: The ODC questionnaire exists in two sections, and accordingly as two files within prototypes directory
 
-The general questionnaire (stored in prototype/translations/certificate.en.xml) containing the questions for General, Techincal and Social sections and the legal portion (stored in prototype/jurisdictions/certificate.GB.xml) for questions relating to copyright and IP ownership that differ by country or legal jurisdiction
+The general questionnaire (stored in prototype/translations/certificate.en.xml) containing the questions for General, Technical and Social sections and the legal portion (stored in prototype/jurisdictions/certificate.GB.xml) for questions relating to copyright and IP ownership that differ by country or legal jurisdiction
 
 ##### 2: prototype/surveyor.xsl transforms these two XML files into survey/odc_questionnaire.$country_code.rb
 
