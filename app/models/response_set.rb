@@ -344,7 +344,6 @@ class ResponseSet < ActiveRecord::Base
       end
     end
     update_from_ui_hash(ui_hash)
-    post_responses_update
   end
 
   # Updates responses without using a surveyor form
@@ -392,10 +391,10 @@ class ResponseSet < ActiveRecord::Base
     end
 
     update_from_ui_hash(Hash[ui_hash.map.with_index { |value, i| [i.to_s, value] }])
-    post_responses_update
   end
 
-  def post_responses_update
+  def update_from_ui_hash(ui_hash)
+    super
     certificate.update_from_response_set
     dataset.set_default_title!(dataset_title_determined_from_responses)
     dataset.set_default_documentation_url!(dataset_documentation_url_determined_from_responses)
