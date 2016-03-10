@@ -449,10 +449,10 @@ survey 'GB',
       :text_as_statement => 'no rights in the content of the data',
       :help_text => 'There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.'
     a_samerights 'yes, and the rights are all held by the same person or organisation',
-      :text_as_statement => '',
+      :text_as_statement => 'content rights in the data held by one person or organisation',
       :help_text => 'Choose this option if the content in the data was all created by or transferred to the same person or organisation.'
     a_mixedrights 'yes, and the rights are held by different people or organisations',
-      :text_as_statement => '',
+      :text_as_statement => 'content rights in data held by different people or organisations',
       :help_text => 'In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.'
 
     q_explicitWaiver 'Is the content of the data marked as public domain?',

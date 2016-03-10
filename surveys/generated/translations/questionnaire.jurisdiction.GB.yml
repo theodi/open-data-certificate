@@ -221,11 +221,11 @@ en:
           samerights:
             text: "yes, and the rights are all held by the same person or organisation"
             help_text: "Choose this option if the content in the data was all created by or transferred to the same person or organisation."
-            text_as_statement: ""
+            text_as_statement: "content rights in the data held by one person or organisation"
           mixedrights:
             text: "yes, and the rights are held by different people or organisations"
             help_text: "In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too."
-            text_as_statement: ""
+            text_as_statement: "content rights in data held by different people or organisations"
       explicitWaiver:
         text: "Is the content of the data marked as public domain?"
         text_as_statement: "The content has been"
