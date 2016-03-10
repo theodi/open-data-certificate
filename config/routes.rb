@@ -116,6 +116,7 @@ OpenDataCertificate::Application.routes.draw do
              as: :user_registration do
       get :cancel
     end
+    get '/users/sign_out', to: redirect('/')
   end
 
   # Get badge for a url
