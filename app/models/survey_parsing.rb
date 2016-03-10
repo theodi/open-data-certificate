@@ -4,7 +4,8 @@ class SurveyParsing < ActiveRecord::Base
   attr_accessible :file_name
 
   def jurisdiction
-    file_name.match(/\.(..)\.rb$/)[1]
+    match = file_name.match(/\.(..)\.rb$/)
+    match ? match[1] : 'GB'
   end
 
   def translation_files
