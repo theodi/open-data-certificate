@@ -39,7 +39,9 @@
 		<question id="publisherUrl" display="The data is published on">
 			<label>What is the website of the publisher?</label>
 			<input type="url" placeholder="Publisher URL"/>
-			<help>Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, even when different names are provided on different certificates. E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the publisher’s website would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).</help>
+			<help>Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, regardless of where the data is stored.
+			<br/>
+			E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the website of the publisher would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).</help>
 		</question>
 		<question id="releaseType">
 			<label>What kind of release is this?</label>

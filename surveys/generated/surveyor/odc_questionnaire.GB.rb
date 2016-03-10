@@ -52,7 +52,9 @@ survey 'GB',
       :discussion_topic => :publisherUrl,
       :display_on_certificate => true,
       :text_as_statement => 'The data is published on',
-      :help_text => 'Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, even when different names are provided on different certificates. E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the publisher’s website would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).'
+      :help_text => 'Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, regardless of where the data is stored.
+			<br/>
+			E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the website of the publisher would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).'
     a_1 'Publisher URL',
       :text,
       :input_type => :url,
