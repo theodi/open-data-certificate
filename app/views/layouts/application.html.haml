@@ -30,9 +30,7 @@
               =render 'shared/auth_bar'
       #mainnav.navbar.navbar-static-top
         .container
-          .navbar-inner
-            %ul.nav.pull-right
-              = main_menu_navigation
+          = render 'shared/menu_bar'
     .whiteout
       - if content_for?(:header)
         -# be sure to include flashes somewhere when overriding this
