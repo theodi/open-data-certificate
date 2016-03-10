@@ -6,10 +6,11 @@ class SurveyBuilder < Struct.new(:dir, :basename)
     survey_parsing.md5 = Digest::MD5.hexdigest(file_contents)
 
     changed = survey_parsing.changed? && survey_parsing.save
+    rebuild = changed || ENV['FORCE_REBUILD'].present?
 
-    record_event "SurveyBuilder: #{dir}/#{basename} - #{changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
+    record_event "SurveyBuilder: #{dir}/#{basename} - #{rebuild ? 'building' : 'skipping '} - #{survey_parsing.md5}"
 
-    if changed
+    if rebuild
       survey = parse_file
       survey.set_expired_certificates
     end
