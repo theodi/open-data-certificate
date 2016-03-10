@@ -9,7 +9,7 @@ survey 'GB',
 
     q_dataTitle 'What\'s this data called?',
       :discussion_topic => :dataTitle,
-      :help_text => 'People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what\'s unique about it.',
+      :help_text => 'Provide an unambiguous and descriptive name for your data that identifies what\'s unique about it. This helps people quickly find your data and its certificate.',
       :required => :required
     a_1 'Data Title',
       :string,

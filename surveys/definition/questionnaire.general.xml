@@ -17,7 +17,7 @@
 		<question id="dataTitle">
 			<label>What's this data called?</label>
 			<input placeholder="Data Title" required="required"/>
-			<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+			<help>Provide an unambiguous and descriptive name for your data that identifies what's unique about it. This helps people quickly find your data and its certificate.</help>
 		</question>
 		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
 		<question id="documentationUrl" display="This data is described at">
