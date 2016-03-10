@@ -93,7 +93,7 @@ Should work on OSX
     jurs = args.jurisdiction
 
     unless JURISDICTIONS.include?(jurs)
-      raise ArgumentError, "valid jurisdictions are #{JURISDICTIONS.join(', ')}"
+      fail "valid jurisdictions are #{JURISDICTIONS.join(', ')}"
     end
 
     langs = JURISDICTION_LANGS[jurs] - ['en']
