@@ -82,6 +82,7 @@ Should work on OSX
     }
   ] do |t|
     _, jurisdiction_file = t.prerequisites
+    check_saxon_present!
     sh "saxon -s:#{jurisdiction_file} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
     Rake::Task['surveys/translations/questionnaire.jurisdictions.en.yml'].invoke
   end
@@ -141,4 +142,18 @@ def quiet
   return yield
 ensure
   $stdout.reopen stdout
+end
+
+def check_saxon_present!
+    saxon = %x{which saxon}
+    fail <<-BYE unless saxon.present?
+The XSLT processor saxon needs to be installed
+
+  brew install saxon
+
+Should work on OSX or on Ubuntu/Debian
+
+  apt-get install libsaxon-java default-jre
+
+    BYE
 end
