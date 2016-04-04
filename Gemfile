@@ -51,7 +51,6 @@ group :development do
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
-  gem 'rubyXL'
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'
