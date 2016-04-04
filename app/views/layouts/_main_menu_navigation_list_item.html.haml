@@ -1,6 +1,0 @@
-- unless link[:requires_signed_in_user] && !user_signed_in? || link[:requires_admin_user] && !admin?
-  - active = is_active_menu_link?(link)
-  %li{class: "#{'active' if active}"}
-    = render partial: 'layouts/main_menu_navigation_link', locals: { link: link }
-    - if active
-      .arrow-down

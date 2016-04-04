@@ -275,7 +275,7 @@ cs:
     summary: Shrnutí
   summary_data:
     summary: Shrnutí
-    type_of_release: Typ dat
+    type_of_release: Co poskytovatel nabízí?
     licence: Licence
     not_applicable: Nevztahuje se
     data_licence: Databázová licence

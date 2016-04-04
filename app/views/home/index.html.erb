@@ -17,7 +17,7 @@
           <p><%= t('homepage.free_and_open').html_safe %></p>
 
           <%= link_to t('homepage.browse_all_new_certificates'), datasets_path, class: ['btn', 'btn-large', 'btn-info'] %>
-          <%= new_certificate_link({role: 'button', class: ['btn', 'btn-large', 'btn-primary'], link_text: t('homepage.start_new_certificate')}) %>
+          <%= new_certificate(role: 'button', class: ['btn', 'btn-large', 'btn-primary']) %>
 
           <p><%= t('homepage.verify_in_bulk').html_safe %></p>
         </div>
@@ -38,7 +38,9 @@
           <div class="steps-box">
             <i class="icon-check icon-large"></i>
             <h2><%= t('homepage.claim_your_certificate.title') %></h2>
-            <p><%= t('homepage.claim_your_certificate.description').html_safe %></p>
+            <%= new_certificate(class: 'inline') do |link| %>
+              <p><%= t('homepage.claim_your_certificate.description', create_link: link).html_safe %></p>
+            <% end %>
           </div>
         </div>
         <div class="span4">

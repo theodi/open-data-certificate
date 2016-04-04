@@ -175,7 +175,7 @@ en:
     what_happens_next: What happens next
     claim_your_certificate:
       title: Get certified
-      description: <a href='/en/surveys/s0zm2sz4aQ/start'>Create a certificate</a> or claim and improve an <a href='/en/autocertification'>auto-drafted certificate</a> to receive a badge to display.
+      description: "%{create_link} or claim and improve an <a href='/en/autocertification'>auto-drafted certificate</a> to receive a badge to display."
     increase_trust:
       title: Increase trust in your data
       description: Involve your users to gain Community Verified status. Or <a href='/en/contact'>contact us</a> for ODI data auditing services.
