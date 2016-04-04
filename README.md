@@ -1,9 +1,9 @@
 [![Build Status](https://img.shields.io/travis/theodi/open-data-certificate.svg)](https://travis-ci.org/theodi/open-data-certificate)
-[![Dependency Status](http://img.shields.io/gemnasium/theodi/open-data-certificate.svg)](https://gemnasium.com/theodi/open-data-certificate)
-[![Coverage Status](http://img.shields.io/coveralls/theodi/open-data-certificate.svg)](https://coveralls.io/r/theodi/open-data-certificate)
-[![Code Climate](http://img.shields.io/codeclimate/github/theodi/open-data-certificate.svg)](https://codeclimate.com/github/theodi/open-data-certificate)
+[![Dependency Status](https://img.shields.io/gemnasium/theodi/open-data-certificate.svg)](https://gemnasium.com/theodi/open-data-certificate)
+[![Coverage Status](https://img.shields.io/coveralls/theodi/open-data-certificate.svg)](https://coveralls.io/r/theodi/open-data-certificate)
+[![Code Climate](https://img.shields.io/codeclimate/github/theodi/open-data-certificate.svg)](https://codeclimate.com/github/theodi/open-data-certificate)
 [![License](https://img.shields.io/github/license/theodi/open-data-certificate.svg)](http://theodi.mit-license.org/)
-[![Badges](http://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
+[![Badges](https://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
 
 ## ODI Open Data Certificate
 
