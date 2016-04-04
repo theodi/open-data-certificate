@@ -9,14 +9,14 @@ namespace :translations do
   # surveys/definition/questionnaire.general.xml
   # surveys/definition/questionnaire.jurisdiction.GB.xml
   #
-  # ] rake surveys/generated/surveyor/odc_questionnaire.GB.rb
+  #    rake surveys/generated/surveyor/odc_questionnaire.GB.rb
   #
   # generates:
   # surveys/generated/surveyor/odc_questionnaire.GB.rb
   # surveys/translations/questionnaire.general.en.yml
   # surveys/generated/translations/questionnaire.jurisdiction.GB.yml
   #
-  # ] rake surveys/translations/questionnaire.jurisdictions.en.yml
+  #    rake surveys/translations/questionnaire.jurisdictions.en.yml
   #
   # merges everything in surveys/generated/translations/* to become
   # surveys/translations/questionnaire.jurisdictions.en.yml
@@ -27,9 +27,13 @@ namespace :translations do
   #
   # are the Transifex source files and can be pushed to Transifex.
   #
-  # ] rake translations:pull[CS]
+  #    tx push --source
   #
-  # can then be used to pull down Czech translations, for example.
+  #
+  # You can then be pull down for example the Czech translations with
+  #
+  #    rake translations:pull[CS]
+  #
 
   JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
   JURISDICTIONS = JURISDICTION_LANGS.keys
