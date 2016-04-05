@@ -234,7 +234,7 @@ class KittenData < ActiveRecord::Base
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
-    @fields["listing"] ||= base_uri
+    @fields["listing"] ||= base_uri.to_s
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = uri.merge("/api/rest/package/#{package_name}").to_s
 
@@ -273,10 +273,10 @@ class KittenData < ActiveRecord::Base
   def set_listing
     if org = source['organization']
       case hostname
-      when "data.gov.uk"
-        @fields["listing"] = uri.merge("/publisher/#{org['name']}")
       when "catalog.data.gov"
-        @fields["listing"] = uri.merge("/organization/#{org['name']}")
+        @fields["listing"] = uri.merge("/group/#{org['name']}").to_s
+      else
+        @fields["listing"] = uri.merge("/publisher/#{org['name']}").to_s
       end
     end
   end
