@@ -132,7 +132,9 @@ class KittenData < ActiveRecord::Base
   def set_publisher
     if publisher = data[:publishers].first
       @fields["publisher"] = publisher.name
-      @fields["webpage"] = @fields["publisherUrl"] = publisher.homepage
+      if homepage = publisher.homepage.presence
+        @fields["webpage"] = @fields["publisherUrl"] = homepage
+      end
       @fields["contactEmail"] = publisher.mbox
     end
   end
