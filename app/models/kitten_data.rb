@@ -124,12 +124,17 @@ class KittenData < ActiveRecord::Base
     @fields["dataTitle"] = data[:title]
   end
 
-  def set_publisher
-    return unless data[:publishers].any?
+  def set_webpages
+    @fields["onWebsite"] = "true"
+    @fields["webpage"] ||= base_uri
+  end
 
-    @fields["publisher"] = data[:publishers][0].name
-    @fields["publisherUrl"] = data[:publishers][0].homepage
-    @fields["contactEmail"] = data[:publishers][0].mbox
+  def set_publisher
+    if publisher = data[:publishers].first
+      @fields["publisher"] = publisher.name
+      @fields["webpage"] = @fields["publisherUrl"] = publisher.homepage
+      @fields["contactEmail"] = publisher.mbox
+    end
   end
 
   def set_rights
@@ -229,7 +234,7 @@ class KittenData < ActiveRecord::Base
     @fields["frequentChanges"] = "false"
     @fields["listed"] = "true"
     @fields["contactUrl"] = url
-    @fields["listing"] ||= uri.merge("/").to_s
+    @fields["listing"] ||= base_uri
     @fields["versionManagement"] = ["list"]
     @fields["versionsUrl"] = uri.merge("/api/rest/package/#{package_name}").to_s
 
@@ -412,6 +417,10 @@ class KittenData < ActiveRecord::Base
 
   def dataset_field(method, default = nil)
     @dataset.try(method) || default
+  end
+
+  def base_uri
+    uri.merge("/").to_s
   end
 
   def request_data

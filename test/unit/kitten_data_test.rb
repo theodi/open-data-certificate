@@ -203,6 +203,18 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'test_contact', kitten_data.fields["contactEmail"]
   end
 
+  test 'Data website is set to publisher website' do
+    assert_equal 'true', kitten_data.fields["onWebsite"]
+    assert_equal 'http://example.com/homepage', kitten_data.fields["webpage"]
+  end
+
+  test 'Data website is set to base url by default' do
+    set_minimum_data
+
+    assert_equal 'true', kitten_data.fields["onWebsite"]
+    assert_equal 'http://www.example.com/', kitten_data.fields["webpage"]
+  end
+
   test 'Release type is detected as a one off' do
     DataKitten::Dataset.any_instance.stubs(:update_frequency).returns(nil)
 
