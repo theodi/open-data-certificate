@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ ! -e .env ]
+then
+  bash docker/env.template > .env
+fi
+
+rm tmp/pids/*
+docker-compose build
+docker-compose up -d
+
+if [ ! -e config/database.yml ]
+then
+  cp docker/database.yml.example config/database.yml
+  docker-compose run web bundle exec rake db:create db:schema:load db:seed
+fi
+
+open "http://$(docker-machine ip default):3000"
