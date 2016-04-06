@@ -1,6 +1,7 @@
 version: '2'
 services:
   web:
+    image: certificates
     build: .
     ports:
       - "3000:3000"
@@ -9,6 +10,18 @@ services:
     depends_on:
       - redis
       - mysql
+  sidekiq:
+    image: certificates
+    depends_on:
+      - redis
+      - mysql
+    command: ["bundle", "exec", "sidekiq", "-c", "3"]
+  delayed_job:
+    image: certificates
+    depends_on:
+      - redis
+      - mysql
+    command: ["bundle", "exec", "rake", "jobs:work"]
   redis:
     image: redis
   mysql:
