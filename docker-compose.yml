@@ -25,6 +25,14 @@ services:
   redis:
     image: redis
   mysql:
+    image: mysql:5.5.48
     environment:
       MYSQL_ROOT_PASSWORD: secretsquirrel
-    image: mysql:5.5.48
+      MYSQL_USER: theodi
+      MYSQL_PASSWORD: secretsquirrel
+      MYSQL_DATABASE: certificates_development
+    volumes:
+      - mysqldata:/var/lib/mysql
+volumes:
+  mysqldata:
+    driver: local
