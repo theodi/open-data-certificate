@@ -5,14 +5,23 @@ then
   bash docker/env.template > .env
 fi
 
-rm tmp/pids/*
-docker-compose build
-docker-compose up -d
+rm -f tmp/pids/*
+docker-compose up -d mysql redis
 
 if [ ! -e config/database.yml ]
 then
   cp docker/database.yml.example config/database.yml
+  first_run="yes"
+fi
+
+docker-compose build
+
+if [ "$first_run" == "yes" ]
+then
   docker-compose run web bundle exec rake db:create db:schema:load db:seed
 fi
 
+docker-compose up -d web sidekiq delayed_job
+
+while ! nc -z $(docker-machine ip default) 3000; do sleep 1; done
 open "http://$(docker-machine ip default):3000"
