@@ -23,5 +23,4 @@ fi
 
 docker-compose up -d web sidekiq delayed_job
 
-while ! nc -z $(docker-machine ip default) 3000; do sleep 1; done
-open "http://$(docker-machine ip default):3000"
+bin/open
