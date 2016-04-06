@@ -2,36 +2,6 @@ require 'fileutils'
 require 'translations'
 
 namespace :translations do
-  task :update do
-    translation_sheet = ENV['TRANSLATIONS']
-    country_code = ENV['COUNTRY']
-    lang_code = ENV['LANG']
-    fail <<-BYE unless [translation_sheet, country_code, lang_code].all? { |v| v.present? }
-Usage rake translations:update TRANSLATIONS=spreadsheet.xlsx COUNTRY=BR LANG=pt
-    BYE
-    saxon = %x{which saxon}
-    fail <<-BYE unless saxon.present?
-saxon needs to be installed
-
-  brew install saxon
-
-Should work on OSX
-    BYE
-
-    converter = quiet { Translations::SpreadsheetConverter.new(translation_sheet) }
-    base_path = 'translations/temp'
-    FileUtils.mkdir_p "prototype/#{base_path}"
-    legal_path = "#{base_path}/#{lang_code}.legal.txt"
-    main_path = "#{base_path}/#{lang_code}.main.txt"
-    converter.extract('Legal', "prototype/#{legal_path}")
-    converter.extract('Main', "prototype/#{main_path}")
-    sh "saxon -s:prototype/jurisdictions/certificate.#{country_code}.xml -xsl:prototype/auto-translate.xsl -o:prototype/jurisdictions/certificate.#{country_code}.xml translationFile=#{legal_path}"
-    sh "saxon -s:prototype/translations/certificate.en.xml -xsl:prototype/auto-translate.xsl -o:prototype/translations/certificate.#{lang_code}.xml translationFile=#{main_path}"
-    sh "saxon -s:prototype/translations/certificate.#{lang_code}.xml -xsl:prototype/mark-lang.xsl -o:prototype/translations/certificate.#{lang_code}.xml lang=#{lang_code}"
-    sh "saxon -s:prototype/jurisdictions/certificate.#{country_code}.xml -xsl:prototype/mark-lang.xsl -o:prototype/jurisdictions/certificate.#{country_code}.xml lang=#{lang_code}"
-    FileUtils.mkdir_p "prototype/temp"
-    sh "saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp"
-  end
 
   # Translation Steps
   #
@@ -39,14 +9,14 @@ Should work on OSX
   # surveys/definition/questionnaire.general.xml
   # surveys/definition/questionnaire.jurisdiction.GB.xml
   #
-  # ] rake surveys/generated/surveyor/odc_questionnaire.GB.rb
+  #    rake surveys/generated/surveyor/odc_questionnaire.GB.rb
   #
   # generates:
   # surveys/generated/surveyor/odc_questionnaire.GB.rb
   # surveys/translations/questionnaire.general.en.yml
   # surveys/generated/translations/questionnaire.jurisdiction.GB.yml
   #
-  # ] rake surveys/translations/questionnaire.jurisdictions.en.yml
+  #    rake surveys/translations/questionnaire.jurisdictions.en.yml
   #
   # merges everything in surveys/generated/translations/* to become
   # surveys/translations/questionnaire.jurisdictions.en.yml
@@ -57,9 +27,13 @@ Should work on OSX
   #
   # are the Transifex source files and can be pushed to Transifex.
   #
-  # ] rake translations:pull[CS]
+  #    tx push --source
   #
-  # can then be used to pull down Czech translations, for example.
+  #
+  # You can then be pull down for example the Czech translations with
+  #
+  #    rake translations:pull[CS]
+  #
 
   JURISDICTION_LANGS = YAML.load_file('surveys/translations/jurisdiction_languages.yml')
   JURISDICTIONS = JURISDICTION_LANGS.keys
@@ -82,6 +56,7 @@ Should work on OSX
     }
   ] do |t|
     _, jurisdiction_file = t.prerequisites
+    check_saxon_present!
     sh "saxon -s:#{jurisdiction_file} -xsl:surveys/transform/surveyor.xsl -o:surveys/not-made.xml"
     Rake::Task['surveys/translations/questionnaire.jurisdictions.en.yml'].invoke
   end
@@ -141,4 +116,18 @@ def quiet
   return yield
 ensure
   $stdout.reopen stdout
+end
+
+def check_saxon_present!
+    saxon = %x{which saxon}
+    fail <<-BYE unless saxon.present?
+The XSLT processor saxon needs to be installed
+
+  brew install saxon
+
+Should work on OSX or on Ubuntu/Debian
+
+  apt-get install libsaxon-java default-jre
+
+    BYE
 end
