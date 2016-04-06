@@ -4,8 +4,6 @@ services:
 bundler_args: --without development
 cache: bundler
 sudo: false
-rvm:
-- 2.0.0
 before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
 after_success:
 - ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
