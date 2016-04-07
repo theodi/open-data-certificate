@@ -15,6 +15,23 @@ full details.
 
 ### Running
 
+#### Under Docker
+
+1. Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
+  * Set up a Docker host with `docker-machine start default` or use Kitematic GUI
+  * Make sure your terminal can talk to Docker
+    * either by opening the 'Docker Quikstart Terminal'
+    * or adding `eval $(docker-machine env default)` to your `.bashrc`
+2. run `bin/dockerize`
+3. make tea
+4. everything should be set up and be open in your browser.
+
+Tests can be run inside a container too with:
+
+    docker-compose run web bundle exec rake test
+
+#### In a traditional dev environment
+
 ```bash
 # this will setup a default admin user (test@example.com) and
 # load the GB survey
