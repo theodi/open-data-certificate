@@ -28,7 +28,7 @@
 						<label>you're not sure if you have the rights to publish this data as open data</label>
 					</option>
 				</radioset>
-				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.</help>
+				<help more="http://queensland.theodi.org/home/services/certificates/help/rights/#publisherrights">If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the <a href="http://queensland.theodi.org/home/glossary/#rights-holder">rights holder</a> because you will need their permission to publish it.</help>
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
