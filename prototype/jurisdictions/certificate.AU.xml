@@ -144,7 +144,6 @@
                 <question id="contentLicence" display="The content is available under">
                     <label>Under which licence or waiver can others reuse content?</label>
                     <select required="required">
-                        <option/>
                         <option value="cc-by">Creative Commons Attribution</option>
                         <option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
                         <option value="cc-zero">Creative Commons CCZero</option>
