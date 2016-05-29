@@ -186,10 +186,6 @@
                             <label>data licence</label>
                             <requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.</requirement>
                         </option>
-                        <option value="contentLicense" display="its content licence">
-                            <label>content licence</label>
-                            <requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.</requirement>
-                        </option>
                         <option value="attribution" display="what attribution text to use">
                             <label>attribution text</label>
                             <requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the text to use when citing the data</strong>, so automatic tools can use it.</requirement>
