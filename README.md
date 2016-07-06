@@ -34,7 +34,9 @@ full details.
 2. Set up a Docker host with `docker-machine create -d virtualbox default`
 3. Run `bin/dockerize`
 4. Make tea
-5. Everything should be set up and be open in your browser. 
+5. Everything should be ready and the script will try to open the browser
+  * If it doesn't, hit ctrl-c and check all 4 containers are up with `docker-compose ps`
+  * Then point your browser to the address:port for the `opendatacertificate_web_1` container (likely `0.0.0.0:3000`)
 
 *Testing*
 
