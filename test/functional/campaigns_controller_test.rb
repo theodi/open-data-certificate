@@ -35,7 +35,7 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "updating a campaign enqueues a processing job" do
     campaign = FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
-    campaign.certificate_generators.create FactoryGirl.attributes_for(:certificate_generator) 
+    campaign.certificate_generators.create FactoryGirl.attributes_for(:certificate_generator).merge(completed: true)
     CertificateGeneratorUpdateWorker.expects(:perform_async).returns(nil)
     Sidekiq::Testing.fake! do
       post :queue_update, campaign_id: campaign.id
