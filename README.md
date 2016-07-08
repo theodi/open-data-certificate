@@ -17,6 +17,8 @@ full details.
 
 #### Under Docker
 
+*On Mac/Windows*
+
 1. Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
   * Set up a Docker host with `docker-machine start default` or use Kitematic GUI
   * Make sure your terminal can talk to Docker
@@ -25,6 +27,18 @@ full details.
 2. run `bin/dockerize`
 3. make tea
 4. everything should be set up and be open in your browser.
+
+*On Linux*
+
+1. Install [docker-engine](https://docs.docker.com/engine/), [docker-compose](https://docs.docker.com/compose/overview/), and then [docker-machine](https://docs.docker.com/machine/overview/)
+2. Set up a Docker host with `docker-machine create -d virtualbox default`
+3. Run `bin/dockerize`
+4. Make tea
+5. Everything should be ready and the script will try to open the browser
+  * If it doesn't, hit ctrl-c and check all 4 containers are up with `docker-compose ps`
+  * Then point your browser to the address:port for the `opendatacertificate_web_1` container (likely `0.0.0.0:3000`)
+
+*Testing*
 
 Tests can be run inside a container too with:
 
