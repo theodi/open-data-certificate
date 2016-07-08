@@ -53,6 +53,20 @@ class CertificateGenerator < ActiveRecord::Base
     {schema: schema}
   end
 
+  def self.bulk_update(generator_collection, jurisdiction, user)
+    incomplete = 0
+    queued = 0
+    generator_collection.each do |generator|
+      if generator.completed?
+        queued+=1
+        CertificateGeneratorUpdateWorker.perform_async(generator.id, jurisdiction, user.id)
+      else
+        incomplete+=1
+      end
+    end
+    return { skipped: incomplete, queued: queued }
+  end
+
   # attempt to build a certificate from the request
   def self.update(dataset, request, jurisdiction, user)
 
