@@ -12,12 +12,19 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 
+<% if @campaign.incomplete_count > 0 %>
+  <p><strong>Campaign currently in progress...</strong></p>
+<% end %>
+
 <ul>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
   <li class='omit-in-print'><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
 </ul>
+
+<hr/>
+<br/>
 
 <div class='omit-in-print'>
   <%= form_tag campaign_path(@campaign), method: :get, class: 'form-inline' do %>
@@ -27,9 +34,13 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
   <% end %>
 </div>
 
-<% if @campaign.incomplete_count > 0 %>
-  <p><strong>Currently running</strong></p>
-<% end %>
+<p>
+  <strong>Update certificates</strong>
+  <%= form_tag campaign_queue_update_path(@campaign, certificate_level: @certificate_level), method: :post, class: 'form-inline' do %>
+    <%= submit_tag "Queue updates", class: "btn" %>
+  <% end %>
+</p>
+
 <table class='table table-striped'>
   <thead>
   <tr>
