@@ -285,4 +285,15 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     assert_equal existing_user, user
   end
 
+  test "bulk update queues completed generators to be updated" do
+    Sidekiq::Testing.fake! do
+      generator = CertificateGenerator.create(request: {}, user: @user, completed: true)
+      generator2 = CertificateGenerator.create(request: {}, user: @user, completed: false)
+      collection = [generator, generator2]
+      result = CertificateGenerator.bulk_update(collection, 'gb', @user)
+      assert_equal 1, result[:skipped]
+      assert_equal 1, result[:queued]
+    end    
+  end
+
 end
