@@ -15,6 +15,11 @@ class CertificationCampaign < ActiveRecord::Base
 
   serialize :subset
 
+  def subset
+    s=read_attribute(:subset)
+    return s.blank? ? {} : s
+  end
+
   def total_count
     generated_count
   end
