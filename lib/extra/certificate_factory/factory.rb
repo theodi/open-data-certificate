@@ -112,6 +112,7 @@ module CertificateFactory
       super
       @rows = options.fetch(:rows, 20)
       @params = options.fetch(:params, {})
+      @params.merge!(@campaign.subset)
     end
 
     def url
