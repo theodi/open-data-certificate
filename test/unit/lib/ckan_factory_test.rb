@@ -12,9 +12,15 @@ class CKANFactoryTest < ActiveSupport::TestCase
   end
 
   test "builds a url with an organization filter query" do
-    @campaign.update_attribute(:subset, { fq: "organization:chorley-council" })
+    @campaign.update_attribute(:subset, { organization: "chorley-council" })
     factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
-    assert_true factory.url.include?("fq=organization%3Achorley-council")
-  end  
+    assert_true factory.url.include?("fq=%2Borganization%3Achorley-council")
+  end
+
+  test "builds a url with multiple filters" do
+    @campaign.update_attribute(:subset, { organization: "chorley-council", tags: 'economy' })
+    factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
+    assert_true factory.url.include?("fq=%2Borganization%3Achorley-council%2Btags%3Aeconomy")
+  end
 
 end
