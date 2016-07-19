@@ -42,8 +42,8 @@ $(document).ready(function($){
   var requestSubsets = function(ckan_url){
     var organizations_url = "";
     var tags_url = "";
-    var organizations_path = "api/3/action/organization_list?all_fields=true";
-    var tags_path = "api/3/action/tag_list?all_fields=true";
+    var organizations_path = "3/action/organization_list?all_fields=true";
+    var tags_path = "3/action/tag_list?all_fields=true";
 
     if (isUrlValid(ckan_url)){
       if (ckan_url[ckan_url.length-1] != "/"){ ckan_url = ckan_url + "/"; }
@@ -58,16 +58,6 @@ $(document).ready(function($){
     
     $.ajax(orgsOptions);
     $.ajax(tagsOptions);
-
-    if (!(ckan_url.includes("/data/"))) { 
-      //retry with alt url
-      setTimeout(function(){
-        orgsOptions.url = ckan_url + 'data/' + organizations_path;
-        tagsOptions.url = ckan_url + 'data/' + tags_path;
-        $.ajax(orgsOptions);
-        $.ajax(tagsOptions);
-      }, 5000);
-    }
   };
 
   var bindTypeahead = function(subsetTypeahead){ 
