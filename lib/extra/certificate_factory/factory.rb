@@ -137,7 +137,8 @@ module CertificateFactory
     end
 
     def build_url(path, params={})
-      u = uri + path
+      base_path = uri.path.eql?("/") ? "" : uri.path
+      u = URI::join(uri.to_s, base_path+"/"+path)
       qs = CGI.parse(u.query.to_s).merge(@params).merge(params)
       u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
       return u.to_s

@@ -3,7 +3,7 @@ require_relative '../../test_helper'
 class CKANFactoryTest < ActiveSupport::TestCase
 
   def setup
-    @campaign = CertificationCampaign.create(name: "Test campaign", url: "http://data.gov.uk/")
+    @campaign = CertificationCampaign.create(name: "Test campaign", url: "http://data.gov.uk/api")
   end
 
   test "builds a basic url" do
