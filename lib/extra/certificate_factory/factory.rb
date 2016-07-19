@@ -117,7 +117,7 @@ module CertificateFactory
     end
 
     def url
-      build_url("api/3/action/package_search", 'rows' => @rows, 'start' => @count)
+      build_url("3/action/package_search", 'rows' => @rows, 'start' => @count)
     end
 
     def feed_items
