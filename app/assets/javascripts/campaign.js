@@ -66,7 +66,7 @@ $(document).ready(function($){
         tagsOptions.url = ckan_url + 'data/' + tags_path;
         $.ajax(orgsOptions);
         $.ajax(tagsOptions);
-      }, 4000);
+      }, 5000);
     }
   };
 
