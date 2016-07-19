@@ -65,6 +65,19 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def queue_update
+    authorize! :manage, @campaign
+    certificate_level = params.fetch("certificate_level", "all")
+    
+    generators = @campaign.certificate_generators.includes(:dataset).where(latest: true)
+    generators = generators.filter(certificate_level)
+
+    result = CertificateGenerator.bulk_update(generators, @campaign.jurisdiction, @campaign.user)
+    
+    flash[:notice] = "#{certificate_level.capitalize} certificates queued for update"
+    redirect_to campaign_path(@campaign, certificate_level: certificate_level)
+  end
+
   def schedule
     authorize! :manage, @campaign
 

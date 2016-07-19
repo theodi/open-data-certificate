@@ -5,7 +5,6 @@
 
 //= require hogan
 //= require jquery.textchange.min
-//= require mermaid.min
 //= require modernizr.custom.76670
 //= require placeholder
 //= require polyfill
