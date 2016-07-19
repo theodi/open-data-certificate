@@ -6,9 +6,9 @@
 [![License](https://img.shields.io/github/license/theodi/open-data-certificate.svg)](http://theodi.mit-license.org/)
 [![Badges](https://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
 
-# ODI Open Data Certificate
+# Open Data Certificates
 
-This source code is for the app at [certificates.theodi.org](https://certificates.theodi.org)
+This source code is for the ODI's Open Data Certificates app at [certificates.theodi.org](https://certificates.theodi.org).
 
 ## License
 
