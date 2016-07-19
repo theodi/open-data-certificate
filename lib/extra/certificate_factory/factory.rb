@@ -112,7 +112,7 @@ module CertificateFactory
       super
       @rows = options.fetch(:rows, 20)
       @params = options.fetch(:params, {})
-      filter_strings = @campaign.subset.collect { |k,v| "+#{k}:#{v}" }.join()
+      filter_strings = @campaign.subset.collect { |k,v| next if v.blank?; "+#{k}:#{v}" }.join()
       @params.merge!({fq: filter_strings}) unless filter_strings.blank?
     end
 

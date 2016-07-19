@@ -23,4 +23,10 @@ class CKANFactoryTest < ActiveSupport::TestCase
     assert_true factory.url.include?("fq=%2Borganization%3Achorley-council%2Btags%3Aeconomy")
   end
 
+  test "ignore filters with blank values" do
+    @campaign.update_attribute(:subset, { tags: "", organization: "chorley-council" })
+    factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
+    assert_true !factory.url.include?("%2Btags")
+  end
+
 end
