@@ -11,7 +11,6 @@ $(document).ready(function($){
   };
 
   var handleOrganizations = function(data){
-    console.log("Handle Orgs");
     var orgArray = [];
     if (data && data.success) {
       $.each(data.result, function (i, org) {
@@ -25,7 +24,6 @@ $(document).ready(function($){
   };
 
   var handleTags = function(data){
-    console.log("Handle");
     var tagsArray = [];
     if (data && data.success) {
       $.each(data.result, function (i, tag) {
@@ -94,25 +92,33 @@ $(document).ready(function($){
     });
   };
 
+  $(subsetTypeahead).on('checkReady', function () {
+    if (subsetTypeahead.tags && subsetTypeahead.organizations){
+      bindTypeahead(subsetTypeahead);
+      subsetTypeahead.element.removeAttr('disabled');
+    } else {
+      subsetTypeahead.element.attr('disabled','disabled');
+    }
+  });
+
+  subsetTypeahead.element.attr('disabled','disabled');
   $('div#tags-subset,div#organization-subset').hide();
   $('div#tags-subset,div#organization-subset').off().click(function(e){ 
     $(this).children('input').val(''); $(this).hide(); 
   });
 
-  $("#certification_campaign_url").change(function(){
+  var setupSubsets = function(){
     subsetTypeahead.element.typeahead('destroy');
     subsetTypeahead.element.off();
     subsetTypeahead.tags = undefined;
     subsetTypeahead.organizations = undefined;
     $('div#tags-subset,div#organization-subset').trigger('click');
-    var ckan_url = $(this).val();
+    subsetTypeahead.element.attr('disabled','disabled');
+    var ckan_url = $("#certification_campaign_url").val();
     requestSubsets(ckan_url);
-  });
+  }
 
-  $(subsetTypeahead).on('checkReady', function () {
-    if (subsetTypeahead.tags && subsetTypeahead.organizations){
-      bindTypeahead(subsetTypeahead);  
-    }
-  });
+  $("#certification_campaign_url").change(setupSubsets);
+  if($("#certification_campaign_url").val()){ setupSubsets(); }
 
 });
