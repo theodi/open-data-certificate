@@ -1,3 +1,5 @@
+require 'odibot'
+
 class CampaignsController < ApplicationController
   include CampaignsHelper
 
