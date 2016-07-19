@@ -9,8 +9,11 @@ class SurveyParsing < ActiveRecord::Base
   end
 
   def translation_files
-    files = JURISDICTION_LANGS[jurisdiction].map do |lang|
-      %w[general jurisdictions].map {|section| "surveys/translations/questionnaire.#{section}.#{lang}.yml" }
+    files = []
+    if JURISDICTION_LANGS[jurisdiction]
+      files = JURISDICTION_LANGS[jurisdiction].map do |lang|
+        %w[general jurisdictions].map {|section| "surveys/translations/questionnaire.#{section}.#{lang}.yml" }
+      end
     end
     files.flatten
   end
