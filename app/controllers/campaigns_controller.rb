@@ -2,7 +2,7 @@ class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index, :new, :create]
+  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -85,6 +85,13 @@ class CampaignsController < ApplicationController
     flash[:notice] = "Campaign scheduled to run daily"
 
     redirect_to campaign_path(@campaign)
+  end
+
+  def endpoint_check
+    success = false
+    campaign_url = params.fetch("campaign_url")
+    result = ODIBot.new(campaign_url).check_ckan_endpoint
+    render :json => result
   end
 
   private
