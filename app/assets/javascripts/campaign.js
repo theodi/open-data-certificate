@@ -96,6 +96,7 @@ $(document).ready(function($){
     if (subsetTypeahead.tags && subsetTypeahead.organizations){
       bindTypeahead(subsetTypeahead);
       subsetTypeahead.element.removeAttr('disabled');
+      subsetTypeahead.element.css('background-color','white');
     } else {
       subsetTypeahead.element.attr('disabled','disabled');
     }
