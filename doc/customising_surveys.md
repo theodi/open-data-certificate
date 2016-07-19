@@ -41,8 +41,10 @@ To change surveys, you'll need Saxon installed. On a Mac, this is as simple as r
 brew install saxon
 ```
 
-You can then change the `prototype/survey.xsl` file and run:
+To build changes from the XML files into YAML and Ruby:
 
 ```bash
-saxon -s:prototype/jurisdictions/ -xsl:prototype/surveyor.xsl -o:prototype/temp/
+saxon -s:prototype/jurisdictions/ -xsl:surveys/transform/surveyor.xsl -o:surveys/
 ```
+
+Then run `bundle exec rake surveyor:build_changed_survey FILE=surveys/generated/surveyor/odc_questionnaire.{country}.rb` to load into the app.
