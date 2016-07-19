@@ -24,6 +24,33 @@
   </div>
 
   <div class="control-group">
+    <%= f.label(:subset, "Subset", class: "control-label") %>
+
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-search"></i></span>
+      <%= text_field_tag :subset, '', class: "span6" %>
+    </div>
+
+    <p>
+    <%= f.fields_for :subset do |s| %>
+      <div id="organization-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-briefcase"></i></span>
+          <%= s.text_field :organization, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+      <div id="tags-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-tag"></i></span>
+          <%= s.text_field :tags, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+    <% end %>
+    </p>
+    <%= error_message_for(@campaign, :subset) %>
+  </div>
+
+  <div class="control-group">
     <%= f.label(:jurisdiction, "Jurisdiction", class: "control-label") %>
     <div class="controls">
       <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction)) %>
@@ -45,4 +72,8 @@
     </div>
   </div>
 
+<% end %>
+
+<% content_for(:foot_scripts) do %>
+ <%= javascript_include_tag "campaign" %>
 <% end %>
