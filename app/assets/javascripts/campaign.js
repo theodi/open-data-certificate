@@ -122,4 +122,32 @@ $(document).ready(function($){
   $("#certification_campaign_url").change(setupSubsets);
   if($("#certification_campaign_url").val()){ setupSubsets(); }
 
+  $('#endpoint_check').click(function(){
+    var checkOptions = {
+      method: 'PUT',
+      url: $(this).attr('data-url'),
+      data: { campaign_url: $('#certification_campaign_url').val() },
+      dataType: 'json',
+      beforeSend: function(){ 
+        $('#endpoint_check i').attr('class', 'icon-loading icon-spin icon-refresh'); 
+        $('#endpoint_check span').text('Checking...'); 
+      },
+      success: function(d) {
+        if (d.redirect){ $('#certification_campaign_url').val(d.redirect); }
+        if (d.success) { 
+          $('#endpoint_check i').attr('class', 'icon-ok'); 
+          $('#endpoint_check span').text('Valid'); 
+        } else { 
+          $('#endpoint_check i').attr('class', 'icon-exclamation-sign'); 
+          $('#endpoint_check span').text('Invalid'); 
+        }
+      },
+      error: function(d){ 
+        $('#endpoint_check i').attr('class', 'icon-repeat'); 
+        $('#endpoint_check span').text('Please retry'); 
+      }
+    };
+    $.ajax(checkOptions);
+  });
+
 });

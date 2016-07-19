@@ -16,8 +16,14 @@
     <%= f.label(:url, "CKAN URL", class: "control-label") %>
     <div class="controls">
       <%= f.text_field :url, class: "span6" %>
+
+      <%= link_to '#', class: "btn btn-large btn-primary submit error", 
+        data: { url: campaign_endpoint_check_url }, id: "endpoint_check" do %>
+        <i class="icon-repeat"></i> <span>Check URL</span>
+      <% end %>
+
       <span class="help-inline">
-        Provide the URL of a CKAN website (the homepage of the portal) or a URL to the ATOM feed.
+        Provide the base URL of a CKAN API (e.g. "http://data.mysite.uk/api") or the URL of the ATOM feed.
       </span>
       <%= error_message_for(@campaign, :url) %>
     </div>
