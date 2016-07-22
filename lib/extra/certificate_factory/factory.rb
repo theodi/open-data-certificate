@@ -9,7 +9,11 @@ module CertificateFactory
     def initialize(options)
       options.symbolize_keys!
       # starting options
-      @campaign = CertificationCampaign.find(options[:campaign_id])
+      if options.fetch(:is_prefetch, false)
+        @campaign = options[:campaign]
+      else
+        @campaign = CertificationCampaign.find(options[:campaign_id])
+      end
       @user_id = @campaign.user
       @jurisdiction = @campaign.jurisdiction
       @feed = @campaign.url
@@ -156,4 +160,5 @@ module CertificateFactory
       build_url("dataset/#{resource['name']}")
     end
   end
+
 end
