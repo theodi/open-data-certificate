@@ -92,13 +92,7 @@ $(document).ready(function($){
     }
   });
 
-  subsetTypeahead.element.attr('disabled','disabled');
-  $('div#tags-subset,div#organization-subset').hide();
-  $('div#tags-subset,div#organization-subset').off().click(function(e){ 
-    $(this).children('input').val(''); $(this).hide(); 
-  });
-
-  var setupSubsets = function(){
+  var setupFormForUrl = function(){
     subsetTypeahead.element.typeahead('destroy');
     subsetTypeahead.element.off();
     subsetTypeahead.tags = undefined;
@@ -106,11 +100,15 @@ $(document).ready(function($){
     $('div#tags-subset,div#organization-subset').trigger('click');
     subsetTypeahead.element.attr('disabled','disabled');
     var ckan_url = $("#certification_campaign_url").val();
-    requestSubsets(ckan_url);
+    if (ckan_url.length > 5){
+      requestSubsets(ckan_url);
+      $('#campaign_precheck').removeAttr('disabled','disabled').click(precheckCampaign);
+      $('#start-campaign').removeAttr('disabled','disabled');
+    } else {
+      $('#campaign_precheck').attr('disabled','disabled').unbind('click');
+      $('#start-campaign').attr('disabled','disabled');
+    }
   }
-
-  $("#certification_campaign_url").change(setupSubsets);
-  if($("#certification_campaign_url").val()){ setupSubsets(); }
 
   $('#endpoint_check').click(function(){
     var checkOptions = {
@@ -139,5 +137,53 @@ $(document).ready(function($){
     };
     $.ajax(checkOptions);
   });
+
+  var precheckCampaign = function(){
+    var checkOptions = {
+      method: 'PUT',
+      url: $(this).attr('data-url'),
+      data: { 
+        campaign_url: $('#certification_campaign_url').val(),
+        jurisdiciton: $('#certification_campaign_jurisdiction').val(),
+        subset: { 
+          organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
+        }
+      },
+      dataType: 'json',
+      beforeSend: function(){ 
+        $('#campaign_precheck i').attr('class', 'icon-loading icon-spin icon-refresh'); 
+        $('#campaign_precheck span').text('Testing...'); 
+      },
+      success: function(d) {
+        if (d.success) { 
+          $('#start-campaign').show();
+          $('#campaign_precheck i').attr('class', 'icon-ok'); 
+          $('#campaign_precheck span').text('Test successful');
+        } else { 
+          $('#campaign_precheck i').attr('class', 'icon-exclamation-sign'); 
+          $('#campaign_precheck span').text('Test failed'); 
+        }
+        console.log(d);
+      },
+      error: function(d){ 
+        $('#campaign_precheck i').attr('class', 'icon-repeat'); 
+        $('#campaign_precheck span').text('Error, retry test');
+      }
+    };
+    $.ajax(checkOptions);
+  };
+
+  $("#certification_campaign_url").change(setupFormForUrl);
+  subsetTypeahead.element.attr('disabled','disabled');
+  $('#campaign_precheck').attr('disabled','disabled').unbind('click');
+  $('#start-campaign').attr('disabled','disabled');
+
+  $('div#tags-subset,div#organization-subset').hide();
+  $('div#tags-subset,div#organization-subset').off().click(function(e){ 
+    $(this).children('input').val(''); $(this).hide(); 
+  });
+  if($("#certification_campaign_url").val()){ setupFormForUrl(); }
+
+  
 
 });

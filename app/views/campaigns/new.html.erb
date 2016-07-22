@@ -13,18 +13,21 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:url, "CKAN URL", class: "control-label") %>
-    <div class="controls">
-      <%= f.text_field :url, class: "span6" %>
-
-      <%= link_to '#', class: "btn btn-large btn-primary submit error", 
-        data: { url: campaign_endpoint_check_url }, id: "endpoint_check" do %>
-        <i class="icon-repeat"></i> <span>Check URL</span>
-      <% end %>
-
+    <%= f.label(:url, class: "control-label") do %>
+      CKAN URL
       <span class="help-inline">
         Provide the base URL of a CKAN API (e.g. "http://data.mysite.uk/api") or the URL of the ATOM feed.
       </span>
+    <% end %>
+
+    <div class="controls">
+      <%= f.text_field :url, class: "span6" %>
+
+      <%= link_to '#', class: "btn btn-primary submit error", style:"margin-bottom:10px;",
+        data: { url: campaign_endpoint_check_url }, id: "endpoint_check" do %>
+        <span>Check URL</span> <i class="icon-repeat"></i>
+      <% end %>
+
       <%= error_message_for(@campaign, :url) %>
     </div>
   </div>
@@ -74,8 +77,16 @@
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn">Submit</button>
+      <button type="submit" id="start-campaign" class="btn btn-large">Start campaign</button>
+
+      <%= link_to '#', class: "btn btn-large btn-primary submit error", 
+        data: { url: campaign_precheck_url }, id: "campaign_precheck" do %>
+        <span>Test campaign</span> <i class="icon-chevron-right"></i>
+      <% end %>
     </div>
+  </div>
+
+  <div id="precheck-results">
   </div>
 
 <% end %>
