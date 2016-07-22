@@ -87,6 +87,7 @@ $(document).ready(function($){
       bindTypeahead(subsetTypeahead);
       subsetTypeahead.element.removeAttr('disabled');
       subsetTypeahead.element.css('background-color','white');
+      $('#subset-icon').attr('class', 'icon-search');
     } else {
       subsetTypeahead.element.attr('disabled','disabled');
     }
@@ -117,8 +118,9 @@ $(document).ready(function($){
       data: { campaign_url: $('#certification_campaign_url').val() },
       dataType: 'json',
       beforeSend: function(){ 
-        $('#endpoint_check i').attr('class', 'icon-loading icon-spin icon-refresh'); 
+        $('#endpoint_check i').attr('class', 'icon-spin icon-refresh'); 
         $('#endpoint_check span').text('Checking...'); 
+        $('#subset-icon').attr('class', 'icon-refresh icon-spin');
       },
       success: function(d) {
         if (d.redirect){ $('#certification_campaign_url').val(d.redirect); }
@@ -153,6 +155,7 @@ $(document).ready(function($){
       beforeSend: function(){ 
         $('#campaign_precheck i').attr('class', 'icon-loading icon-spin icon-refresh'); 
         $('#campaign_precheck span').text('Testing...'); 
+        $('#campaign_precheck').unbind('click');
       },
       success: function(d) {
         if (d.success) { 
@@ -168,6 +171,9 @@ $(document).ready(function($){
       error: function(d){ 
         $('#campaign_precheck i').attr('class', 'icon-repeat'); 
         $('#campaign_precheck span').text('Error, retry test');
+      },
+      done: function(){
+        $('#campaign_precheck').click(precheckCampaign);
       }
     };
     $.ajax(checkOptions);
