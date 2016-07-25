@@ -108,7 +108,7 @@ $(document).ready(function($){
         if (d.redirect){ $('#certification_campaign_url').val(d.redirect); }
         if (d.success) { 
           $('#endpoint_check i').attr('class', 'icon-ok'); 
-          $('#endpoint_check span').text('Valid'); 
+          $('#endpoint_check span').text('Valid');
         } else { 
           resetStartButtons(false);
           $('#endpoint_check i').attr('class', 'icon-exclamation-sign'); 
@@ -139,23 +139,13 @@ $(document).ready(function($){
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
         }
       },
-      dataType: 'json',
+      dataType: 'script',
       beforeSend: function(){ 
         $('#campaign_precheck').attr('disabled','disabled');
         $('#campaign_precheck i').attr('class', 'icon-loading icon-spin icon-refresh'); 
         $('#campaign_precheck span').text('Testing...'); 
       },
-      success: function(d) {
-        if (d.success) { 
-          $('#campaign_precheck i').attr('class', 'icon-ok'); 
-          $('#campaign_precheck span').text('Test successful');
-        } else { 
-          $('#campaign_precheck i').attr('class', 'icon-exclamation-sign'); 
-          $('#campaign_precheck span').text('Test failed'); 
-        }
-        console.log(d);
-      },
-      error: function(d){ 
+      error: function(){ 
         $('#campaign_precheck i').attr('class', 'icon-repeat'); 
         $('#campaign_precheck span').text('Error, retry test');
       },
@@ -178,6 +168,8 @@ $(document).ready(function($){
       requestSubsets(ckan_url);
     }
     resetStartButtons();
+    $('#endpoint_check i').attr('class', 'icon-repeat'); 
+    $('#endpoint_check span').text('Check URL');
   };
 
   var resetStartButtons = function(enable){
