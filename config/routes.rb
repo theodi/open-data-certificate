@@ -140,6 +140,7 @@ OpenDataCertificate::Application.routes.draw do
   get 'embed_stats.csv' => 'embed_stats#index', format: 'csv', as: :embed_stats
 
   put 'campaigns/endpoint_check', to: 'campaigns#endpoint_check', as: 'campaign_endpoint_check'
+  put 'campaigns/precheck', to: 'campaigns#precheck', as: 'campaign_precheck'
   
   resources :campaigns do
     post 'rerun', to: 'campaigns#rerun', as: 'rerun'
