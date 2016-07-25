@@ -93,25 +93,7 @@ $(document).ready(function($){
     }
   });
 
-  var setupFormForUrl = function(){
-    subsetTypeahead.element.typeahead('destroy');
-    subsetTypeahead.element.off();
-    subsetTypeahead.tags = undefined;
-    subsetTypeahead.organizations = undefined;
-    $('div#tags-subset,div#organization-subset').trigger('click');
-    subsetTypeahead.element.attr('disabled','disabled');
-    var ckan_url = $("#certification_campaign_url").val();
-    if (ckan_url.length > 5){
-      requestSubsets(ckan_url);
-      $('#campaign_precheck').removeAttr('disabled','disabled').click(precheckCampaign);
-      $('#start-campaign').removeAttr('disabled','disabled');
-    } else {
-      $('#campaign_precheck').attr('disabled','disabled').unbind('click');
-      $('#start-campaign').attr('disabled','disabled');
-    }
-  }
-
-  $('#endpoint_check').click(function(){
+  $('#endpoint_check').off().click(function(){
     var checkOptions = {
       method: 'PUT',
       url: $(this).attr('data-url'),
@@ -128,8 +110,9 @@ $(document).ready(function($){
           $('#endpoint_check i').attr('class', 'icon-ok'); 
           $('#endpoint_check span').text('Valid'); 
         } else { 
+          resetStartButtons(false);
           $('#endpoint_check i').attr('class', 'icon-exclamation-sign'); 
-          $('#endpoint_check span').text('Invalid'); 
+          $('#endpoint_check span').text('Invalid');
         }
       },
       error: function(d){ 
@@ -140,7 +123,12 @@ $(document).ready(function($){
     $.ajax(checkOptions);
   });
 
-  var precheckCampaign = function(){
+  var precheckCampaign = function(event){
+    var disabled = $('#campaign_precheck').attr('disabled');
+    if (disabled == "disabled"){ console.log("disabled");
+      return;
+    }
+    
     var checkOptions = {
       method: 'PUT',
       url: $(this).attr('data-url'),
@@ -153,13 +141,12 @@ $(document).ready(function($){
       },
       dataType: 'json',
       beforeSend: function(){ 
+        $('#campaign_precheck').attr('disabled','disabled');
         $('#campaign_precheck i').attr('class', 'icon-loading icon-spin icon-refresh'); 
         $('#campaign_precheck span').text('Testing...'); 
-        $('#campaign_precheck').unbind('click');
       },
       success: function(d) {
         if (d.success) { 
-          $('#start-campaign').show();
           $('#campaign_precheck i').attr('class', 'icon-ok'); 
           $('#campaign_precheck span').text('Test successful');
         } else { 
@@ -172,24 +159,49 @@ $(document).ready(function($){
         $('#campaign_precheck i').attr('class', 'icon-repeat'); 
         $('#campaign_precheck span').text('Error, retry test');
       },
-      done: function(){
-        $('#campaign_precheck').click(precheckCampaign);
+      complete: function(){
+        $('#campaign_precheck').removeAttr('disabled');
       }
     };
     $.ajax(checkOptions);
   };
 
+  var setupFormForUrl = function(){
+    subsetTypeahead.element.typeahead('destroy');
+    subsetTypeahead.element.off();
+    subsetTypeahead.tags = undefined;
+    subsetTypeahead.organizations = undefined;
+    $('div#tags-subset,div#organization-subset').trigger('click');
+    subsetTypeahead.element.attr('disabled','disabled');
+    var ckan_url = $("#certification_campaign_url").val();
+    if (ckan_url.length > 7){
+      requestSubsets(ckan_url);
+    }
+    resetStartButtons();
+  };
+
+  var resetStartButtons = function(enable){
+    $('#campaign_precheck i').attr('class', 'icon-chevron-right'); 
+    $('#campaign_precheck span').text('Test campaign');
+    var ckan_url = $("#certification_campaign_url").val();
+    if ((ckan_url.length <= 7) || (enable === false)) {
+      $('#campaign_precheck').attr('disabled','disabled');
+      $('#start-campaign').attr('disabled','disabled');
+    } else {
+      $('#campaign_precheck').removeAttr('disabled').off().click(precheckCampaign);
+      $('#start-campaign').removeAttr('disabled');
+    }
+  };
+
   $("#certification_campaign_url").change(setupFormForUrl);
   subsetTypeahead.element.attr('disabled','disabled');
-  $('#campaign_precheck').attr('disabled','disabled').unbind('click');
-  $('#start-campaign').attr('disabled','disabled');
+  resetStartButtons();
 
   $('div#tags-subset,div#organization-subset').hide();
   $('div#tags-subset,div#organization-subset').off().click(function(e){ 
-    $(this).children('input').val(''); $(this).hide(); 
+    $(this).children('input').val(''); $(this).hide();
+    resetStartButtons();
   });
+
   if($("#certification_campaign_url").val()){ setupFormForUrl(); }
-
-  
-
 });
