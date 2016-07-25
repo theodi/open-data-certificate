@@ -40,6 +40,17 @@ module CertificateFactory
       end
     end
 
+    def prebuild
+      generators = []
+      each do |resource|
+        url = get_dataset_url(resource)
+        generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
+        generator.generate(@jurisdiction, @user_id)
+        generators << generator
+      end
+      return generators
+    end
+
     def each
       feed_items.each do |item|
         yield item

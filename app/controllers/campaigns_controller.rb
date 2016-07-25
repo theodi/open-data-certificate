@@ -4,7 +4,7 @@ class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check]
+  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -94,6 +94,16 @@ class CampaignsController < ApplicationController
     campaign_url = params.fetch("campaign_url")
     result = ODIBot.new(campaign_url).check_ckan_endpoint
     render :json => result
+  end
+
+  def precheck
+    campaign = current_user.certification_campaigns.build(url: params.fetch("campaign_url"), 
+      subset: params.fetch("subset"))
+
+    factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{} })
+    generators = factory.prebuild
+
+    render json: { success: true, count: generators.size  }
   end
 
   private
