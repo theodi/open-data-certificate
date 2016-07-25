@@ -132,7 +132,7 @@ module CertificateFactory
     end
 
     def url
-      build_url("3/action/package_search", 'rows' => @rows, 'start' => @count)
+      build_url("/api/3/action/package_search", 'rows' => @rows, 'start' => @count)
     end
 
     def feed_items
@@ -152,8 +152,8 @@ module CertificateFactory
     end
 
     def build_url(path, params={})
-      base_path = uri.path.eql?("/") ? "" : uri.path
-      u = URI::join(uri.to_s, base_path+"/"+path)
+      path = uri.path.gsub("/api", path) unless uri.path.eql?("/")
+      u = URI::join(uri.to_s, path)
       qs = CGI.parse(u.query.to_s).merge(@params).merge(params)
       u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
       return u.to_s
@@ -168,7 +168,7 @@ module CertificateFactory
     end
 
     def get_dataset_url(resource)
-      build_url("dataset/#{resource['name']}")
+      build_url("/dataset/#{resource['name']}")
     end
   end
 

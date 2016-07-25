@@ -5,6 +5,13 @@
 Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 </p>
 
+<% @campaign.subset.each_pair do |k,v| %>
+<% next if v.blank? %>
+<p>
+  <%= k.capitalize %> subset: <span class="label label-success"><%= "#{v}" %></span>
+</p>
+<% end %>
+
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
   <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
