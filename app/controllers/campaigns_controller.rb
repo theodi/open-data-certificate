@@ -101,9 +101,12 @@ class CampaignsController < ApplicationController
       subset: params.fetch("subset"))
 
     factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{} })
-    generators = factory.prebuild
-
-    render json: { success: true, count: generators.size  }
+    @generators = factory.prebuild
+    @result_count = factory.result_count
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
