@@ -11,7 +11,14 @@ class CertificationCampaign < ActiveRecord::Base
   has_many :certificate_generators
   belongs_to :user
 
-  attr_accessible :name, :limit, :url, :jurisdiction, :version
+  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset
+
+  serialize :subset
+
+  def subset
+    s=read_attribute(:subset)
+    return s.blank? ? {} : s
+  end
 
   def total_count
     generated_count

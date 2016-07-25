@@ -16,11 +16,44 @@
     <%= f.label(:url, "CKAN URL", class: "control-label") %>
     <div class="controls">
       <%= f.text_field :url, class: "span6" %>
+
+      <%= link_to '#', class: "btn btn-large btn-primary submit error", 
+        data: { url: campaign_endpoint_check_url }, id: "endpoint_check" do %>
+        <i class="icon-repeat"></i> <span>Check URL</span>
+      <% end %>
+
       <span class="help-inline">
-        Provide the URL of a CKAN website (the homepage of the portal) or a URL to the ATOM feed.
+        Provide the base URL of a CKAN API (e.g. "http://data.mysite.uk/api") or the URL of the ATOM feed.
       </span>
       <%= error_message_for(@campaign, :url) %>
     </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:subset, "Subset", class: "control-label") %>
+
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-search"></i></span>
+      <%= text_field_tag :subset, '', class: "span6" %>
+    </div>
+
+    <p>
+    <%= f.fields_for :subset do |s| %>
+      <div id="organization-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-briefcase"></i></span>
+          <%= s.text_field :organization, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+      <div id="tags-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-tag"></i></span>
+          <%= s.text_field :tags, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+    <% end %>
+    </p>
+    <%= error_message_for(@campaign, :subset) %>
   </div>
 
   <div class="control-group">
@@ -45,4 +78,8 @@
     </div>
   </div>
 
+<% end %>
+
+<% content_for(:foot_scripts) do %>
+ <%= javascript_include_tag "campaign" %>
 <% end %>
