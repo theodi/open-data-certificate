@@ -112,3 +112,7 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 <div class='omit-in-print'>
   <%= link_to 'Download CSV', format: "csv" %>
 </div>
+
+<%= content_for :foot_scripts do %>
+  <%= javascript_include_tag 'campaign_progress' %>
+<% end %>
