@@ -44,14 +44,14 @@ class CKANFactoryTest < ActiveSupport::TestCase
     stub_request(:any, "http://data.gov.uk/api/3/action/package_search?rows=10&start=0")
       .to_return(:body => @result.to_json, status: 200)
     factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
-    puts factory.feed_items
     assert_equal false, factory.feed_items.blank?
   end
 
   test "fails when campaign_id is blank" do
     assert_raises ActiveRecord::RecordNotFound do
-    factory = CertificateFactory::CKANFactory.new({ campaign_id: nil, rows:10, params:{} })  
-  end 
+      factory = CertificateFactory::CKANFactory.new({ campaign_id: nil, rows:10, params:{} })
+    end
+  end
 
   test "builds a url with an organization filter query" do
     @campaign.update_attribute(:subset, { organization: "chorley-council" })
@@ -82,8 +82,6 @@ class CKANFactoryTest < ActiveSupport::TestCase
       .to_return(:body => @result.to_json, status: 200)
     campaign = CertificationCampaign.new(name: "Test campaign", url: "http://data.gov.uk/api")
     factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:10, params:{} })
-    puts factory.feed_items
-
     assert_equal false, factory.feed_items.blank?
   end
 
