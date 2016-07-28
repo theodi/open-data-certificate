@@ -13,8 +13,14 @@ class CampaignsController < ApplicationController
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate).where(latest: true)
     respond_to do |want|
       want.html do
-        @generators = @generators.filter(@certificate_level).page(params[:page]).per(100)
+        @generators = @generators.filter(@certificate_level).page(params[:page]).per(10)
       end
+
+      want.js do 
+        @generators = @generators.filter(@certificate_level).page(params[:page]).per(10)
+        render 'campaign_certificates'
+      end
+
       want.csv do
         csv = CSV.generate do |csv|
           csv << [
