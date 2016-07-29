@@ -6,7 +6,6 @@
 <table class='table table-striped'>
   <thead>
   <tr>
-    <th>Published</th>
     <th>Source</th>
     <th>Certificate</th>
     <th>User</th>
@@ -18,9 +17,6 @@
   <tbody>
   <% @generators.each do |generator| %>
     <tr>
-      <td style="text-align: center">
-        <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
-      </td>
       <% if generator.completed? %>
         <td>
           <%= generator.dataset.title %>
