@@ -103,13 +103,15 @@ class CampaignsController < ApplicationController
   end
 
   def precheck
+    limit = params["limit"].blank? ? nil : params["limit"].to_i
     campaign = current_user.certification_campaigns.build(url: params.fetch("campaign_url"), 
-      subset: params.fetch("subset"))
-
+      subset: params.fetch("subset"), limit: limit)
     factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{} })
     @generators = factory.prebuild
+
     @result_count = factory.result_count
-    
+    @result_count = limit if !limit.blank? and (limit < @result_count)
+
     respond_to do |format|
       format.js
     end

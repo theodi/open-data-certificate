@@ -135,6 +135,7 @@ $(document).ready(function($){
       data: { 
         campaign_url: $('#certification_campaign_url').val(),
         jurisdiciton: $('#certification_campaign_jurisdiction').val(),
+        limit: $('#certification_campaign_limit').val(),
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
         }
