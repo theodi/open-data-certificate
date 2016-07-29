@@ -192,7 +192,7 @@ $(document).ready(function($){
 
   $('div#tags-subset,div#organization-subset').hide();
   $('div#tags-subset,div#organization-subset').off().click(function(e){ 
-    $(this).children('input').val(''); $(this).hide();
+    $(this).find('input').val(''); $(this).hide();
     resetStartButtons();
   });
 
