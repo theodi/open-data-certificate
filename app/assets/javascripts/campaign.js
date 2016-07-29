@@ -135,6 +135,7 @@ $(document).ready(function($){
       data: { 
         campaign_url: $('#certification_campaign_url').val(),
         jurisdiciton: $('#certification_campaign_jurisdiction').val(),
+        limit: $('#certification_campaign_limit').val(),
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
         }
@@ -191,7 +192,7 @@ $(document).ready(function($){
 
   $('div#tags-subset,div#organization-subset').hide();
   $('div#tags-subset,div#organization-subset').off().click(function(e){ 
-    $(this).children('input').val(''); $(this).hide();
+    $(this).find('input').val(''); $(this).hide();
     resetStartButtons();
   });
 
