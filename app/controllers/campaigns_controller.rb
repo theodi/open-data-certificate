@@ -1,8 +1,10 @@
+require 'odibot'
+
 class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index, :new, :create]
+  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -85,6 +87,26 @@ class CampaignsController < ApplicationController
     flash[:notice] = "Campaign scheduled to run daily"
 
     redirect_to campaign_path(@campaign)
+  end
+
+  def endpoint_check
+    success = false
+    campaign_url = params.fetch("campaign_url")
+    result = ODIBot.new(campaign_url).check_ckan_endpoint
+    render :json => result
+  end
+
+  def precheck
+    campaign = current_user.certification_campaigns.build(url: params.fetch("campaign_url"), 
+      subset: params.fetch("subset"))
+
+    factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{} })
+    @generators = factory.prebuild
+    @result_count = factory.result_count
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
