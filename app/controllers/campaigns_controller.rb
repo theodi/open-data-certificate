@@ -17,6 +17,12 @@ class CampaignsController < ApplicationController
       want.html do
         @generators = @generators.filter(@certificate_level).page(params[:page]).per(100)
       end
+
+      want.js do 
+        @generators = @generators.filter(@certificate_level).page(params[:page]).per(100)
+        render 'campaign_certificates'
+      end
+
       want.csv do
         csv = CSV.generate do |csv|
           csv << [
