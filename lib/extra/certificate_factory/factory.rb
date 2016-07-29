@@ -9,7 +9,11 @@ module CertificateFactory
     def initialize(options)
       options.symbolize_keys!
       # starting options
-      @campaign = CertificationCampaign.find(options[:campaign_id])
+      if options.fetch(:is_prefetch, false)
+        @campaign = options[:campaign]
+      else
+        @campaign = CertificationCampaign.find(options[:campaign_id])
+      end
       @user_id = @campaign.user
       @jurisdiction = @campaign.jurisdiction
       @feed = @campaign.url
@@ -34,6 +38,17 @@ module CertificateFactory
           url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
         certificate.generate
       end
+    end
+
+    def prebuild
+      generators = []
+      each do |resource|
+        url = get_dataset_url(resource)
+        generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
+        generator.generate(@jurisdiction, @user_id)
+        generators << generator
+      end
+      return generators
     end
 
     def each
@@ -112,10 +127,12 @@ module CertificateFactory
       super
       @rows = options.fetch(:rows, 20)
       @params = options.fetch(:params, {})
+      filter_strings = @campaign.subset.collect { |k,v| next if v.blank?; "+#{k}:#{v}" }.join()
+      @params.merge!({fq: filter_strings}) unless filter_strings.blank?
     end
 
     def url
-      build_url("api/3/action/package_search", 'rows' => @rows, 'start' => @count)
+      build_url("/api/3/action/package_search", 'rows' => @rows, 'start' => @count)
     end
 
     def feed_items
@@ -135,7 +152,8 @@ module CertificateFactory
     end
 
     def build_url(path, params={})
-      u = uri + path
+      path = uri.path.gsub("/api", path) unless uri.path.eql?("/")
+      u = URI::join(uri.to_s, path)
       qs = CGI.parse(u.query.to_s).merge(@params).merge(params)
       u.query = URI.encode_www_form(qs.merge(params)) if qs.any?
       return u.to_s
@@ -150,7 +168,8 @@ module CertificateFactory
     end
 
     def get_dataset_url(resource)
-      build_url("dataset/#{resource['name']}")
+      build_url("/dataset/#{resource['name']}")
     end
   end
+
 end

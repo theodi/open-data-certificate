@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151105172643) do
+ActiveRecord::Schema.define(:version => 20160715143826) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20151105172643) do
     t.boolean  "completed"
     t.integer  "certification_campaign_id"
     t.boolean  "latest",                    :default => true
+    t.text     "state"
   end
 
   add_index "certificate_generators", ["latest"], :name => "index_certificate_generators_on_latest"
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20151105172643) do
     t.integer  "user_id"
     t.string   "jurisdiction",    :default => "gb"
     t.string   "url"
+    t.text     "subset"
   end
 
   create_table "claims", :force => true do |t|
