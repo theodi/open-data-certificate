@@ -13,11 +13,11 @@ class CampaignsController < ApplicationController
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate).where(latest: true)
     respond_to do |want|
       want.html do
-        @generators = @generators.filter(@certificate_level).page(params[:page]).per(10)
+        @generators = @generators.filter(@certificate_level).page(params[:page]).per(100)
       end
 
       want.js do 
-        @generators = @generators.filter(@certificate_level).page(params[:page]).per(10)
+        @generators = @generators.filter(@certificate_level).page(params[:page]).per(100)
         render 'campaign_certificates'
       end
 
