@@ -209,6 +209,24 @@ class CertificateGenerator < ActiveRecord::Base
     write_attribute(:request, value.with_indifferent_access)
   end
 
+  def compare_responses(comparison_response_set)
+    answered_questions = response_set.responses.select(:question_id).collect {|r| r.question_id }
+    comparison_questions = comparison_response_set.responses.select(:question_id).collect {|r| r.question_id }
+    unanswered = comparison_questions - answered_questions
+    result = comparison_response_set.responses.where(question_id: unanswered)
+    return result
+  end
+
+  def adopt_responses(responses)
+    adopted = []
+    responses.each do |response|
+      r = response.clone 
+      r.response_set = response_set
+      adopted << r if r.save
+    end
+    adopted
+  end
+
   private
 
   def remove_flag
