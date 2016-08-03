@@ -118,13 +118,18 @@ class CampaignsController < ApplicationController
   end
 
   def template_typeahead
-    datasets = current_user.datasets.joins(:response_sets).where('response_sets.aasm_state' => "draft")
-    @response = datasets.search({title_cont:params[:q]}).result.limit(5).map do |dataset|
-      {
-        value: dataset.title,
-        attained_index: dataset.response_set.try(:attained_index),
-        id: dataset.id
-      }
+    survey = Survey.newest_survey_for_access_code(params[:jurisdiction])
+    @response = []
+    if survey
+      datasets = current_user.datasets.joins(:response_sets)
+        .where('response_sets.aasm_state' => "draft").where('response_sets.survey_id' => survey.id)
+      @response = datasets.search({title_cont:params[:q]}).result.limit(5).map do |dataset|
+        {
+          value: dataset.title,
+          attained_index: dataset.response_set.try(:attained_index),
+          id: dataset.id
+        }
+      end
     end
     render json: @response
   end
