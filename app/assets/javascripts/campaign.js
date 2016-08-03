@@ -139,7 +139,7 @@ $(document).ready(function($){
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
         },
-        template_dataset_id: $('#certification_campaign_template_dataset').val();
+        template_dataset_id: $('#certification_campaign_template_dataset').val()
       },
       dataType: 'script',
       beforeSend: function(){ 
