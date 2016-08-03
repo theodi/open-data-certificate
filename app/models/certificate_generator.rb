@@ -117,6 +117,12 @@ class CertificateGenerator < ActiveRecord::Base
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
+    if certification_campaign and certification_campaign.template_dataset
+      rs = ResponseSet.where(dataset_id: certification_campaign.template_dataset_id).latest
+      template_responses = compare_responses(rs)
+      adopt_responses(template_responses)
+    end
+
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
 
