@@ -139,7 +139,7 @@ $(document).ready(function($){
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
         },
-        template_dataset_id: $('#certification_campaign_template_dataset').val()
+        template_dataset_id: $('#certification_campaign_template_dataset_id').val()
       },
       dataType: 'script',
       beforeSend: function(){ 
@@ -191,7 +191,7 @@ $(document).ready(function($){
     $(element).typeahead('destroy');
     $(element).off();
     $('#certification_campaign_template_typeahead').val('');
-    $('#certification_campaign_template_dataset').val('');
+    $('#certification_campaign_template_dataset_id').val('');
     
     var jurisdiction = $('#certification_campaign_jurisdiction').val();
 
@@ -206,12 +206,12 @@ $(document).ready(function($){
         }
       }
     ]).on('typeahead:selected typeahead:autocompleted', function(e, datum){
-      $('#certification_campaign_template_dataset').val(datum.id);
+      $('#certification_campaign_template_dataset_id').val(datum.id);
     });
 
     $('#certification_campaign_template_typeahead').change(function(e){
       if ($(this).val().length==0)
-        $('#certification_campaign_template_dataset').val(''); 
+        $('#certification_campaign_template_dataset_id').val(''); 
     });
   };
 
