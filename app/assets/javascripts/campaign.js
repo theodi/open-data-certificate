@@ -138,7 +138,8 @@ $(document).ready(function($){
         limit: $('#certification_campaign_limit').val(),
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
-        }
+        },
+        template_dataset_id: $('#certification_campaign_template_dataset').val();
       },
       dataType: 'script',
       beforeSend: function(){ 
@@ -197,4 +198,26 @@ $(document).ready(function($){
   });
 
   if($("#certification_campaign_url").val()){ setupFormForUrl(); }
+
+
+  // search template dataset typeahead
+  $('#certification_campaign_template_typeahead').typeahead([{
+      name:'template-dataset',
+      header: '<h3>Datasets</h3>',
+      minLength: 2,
+      template: '<p class="attained attained-{{attained_index}}">{{value}}</p>',
+      engine: Hogan,
+      remote: {
+        url:'/campaigns/template_typeahead?q=%QUERY'
+      }
+    }
+  ]).on('typeahead:selected typeahead:autocompleted', function(e, datum){
+    $('#certification_campaign_template_dataset').val(datum.id);
+  });
+
+  $('#certification_campaign_template_typeahead').change(function(e){
+    if ($(this).val().length==0)
+      $('#certification_campaign_template_dataset').val(''); 
+  });
+
 });
