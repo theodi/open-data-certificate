@@ -4,7 +4,7 @@ class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck]
+  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck, :template_typeahead]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -115,6 +115,18 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def template_typeahead
+    datasets = current_user.datasets.joins(:response_sets).where('response_sets.aasm_state' => "draft")
+    @response = datasets.search({title_cont:params[:q]}).result.limit(5).map do |dataset|
+      {
+        value: dataset.title,
+        attained_index: dataset.response_set.try(:attained_index),
+        id: dataset.id
+      }
+    end
+    render json: @response
   end
 
   private
