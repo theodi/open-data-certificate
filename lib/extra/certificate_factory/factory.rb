@@ -45,6 +45,7 @@ module CertificateFactory
       each do |resource|
         url = get_dataset_url(resource)
         generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
+        generator.certification_campaign = @campaign
         generator.generate(@jurisdiction, @user_id)
         generator.certificate.update_attributes(published_at: nil, aasm_state: nil, published: false)
         generators << generator
