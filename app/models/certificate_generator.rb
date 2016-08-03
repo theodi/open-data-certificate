@@ -226,8 +226,9 @@ class CertificateGenerator < ActiveRecord::Base
   def adopt_responses(responses)
     adopted = []
     responses.each do |response|
-      r = response.clone 
+      r = response.dup
       r.response_set = response_set
+      r.api_id=nil
       adopted << r if r.save
     end
     adopted
