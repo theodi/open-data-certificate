@@ -4,7 +4,7 @@ class CampaignsController < ApplicationController
   include CampaignsHelper
 
   before_filter :authenticate_user!
-  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck]
+  before_filter :get_campaign, except: [:index, :new, :create, :endpoint_check, :precheck, :template_typeahead]
 
   def index
     @campaigns = CertificationCampaign.where(user_id: current_user)
@@ -105,8 +105,8 @@ class CampaignsController < ApplicationController
   def precheck
     limit = params["limit"].blank? ? nil : params["limit"].to_i
     campaign = current_user.certification_campaigns.build(url: params.fetch("campaign_url"), 
-      subset: params.fetch("subset"), limit: limit)
-    factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{} })
+      subset: params.fetch("subset"), limit: limit, template_dataset_id: params.fetch("template_dataset_id"))
+    factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{}, limit: 3 })
     @generators = factory.prebuild
 
     @result_count = factory.result_count
@@ -115,6 +115,23 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def template_typeahead
+    survey = Survey.newest_survey_for_access_code(params[:jurisdiction])
+    @response = []
+    if survey
+      datasets = current_user.datasets.joins(:response_sets)
+        .where('response_sets.aasm_state' => "draft").where('response_sets.survey_id' => survey.id)
+      @response = datasets.search({title_cont:params[:q]}).result.limit(5).map do |dataset|
+        {
+          value: dataset.title,
+          attained_index: dataset.response_set.try(:attained_index),
+          id: dataset.id
+        }
+      end
+    end
+    render json: @response
   end
 
   private

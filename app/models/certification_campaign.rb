@@ -10,8 +10,9 @@ class CertificationCampaign < ActiveRecord::Base
 
   has_many :certificate_generators
   belongs_to :user
+  belongs_to :template_dataset, class_name: 'Dataset', :foreign_key => "template_dataset_id"
 
-  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset
+  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id
 
   serialize :subset
 

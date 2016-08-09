@@ -68,6 +68,20 @@
   </div>
 
   <div class="control-group">
+    <%= f.label(:template_dataset_id, class: "control-label") do %>
+      Response Template (optional)
+      <span class="help-inline">
+        Choose a certificate to provide default responses for this campaign. 
+      </span>
+    <% end %>
+    <div class="controls">
+      <%= text_field_tag :template_typeahead, '', id: 'certification_campaign_template_typeahead' %>
+      <%= f.hidden_field(:template_dataset_id) %>
+      <%= error_message_for(@campaign, :template_dataset_id) %>
+    </div>
+  </div>
+  
+  <div class="control-group">
     <%= f.label(:limit, "Dataset limit (optional)", class: "control-label") %>
     <div class="controls">
       <%= f.number_field :limit, min: 0 %>

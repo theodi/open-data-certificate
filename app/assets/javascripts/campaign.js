@@ -134,11 +134,12 @@ $(document).ready(function($){
       url: $(this).attr('data-url'),
       data: { 
         campaign_url: $('#certification_campaign_url').val(),
-        jurisdiciton: $('#certification_campaign_jurisdiction').val(),
+        jurisdiction: $('#certification_campaign_jurisdiction').val(),
         limit: $('#certification_campaign_limit').val(),
         subset: { 
           organization: $('#organization-subset input').val(), tags: $('#tags-subset input').val() 
-        }
+        },
+        template_dataset_id: $('#certification_campaign_template_dataset_id').val()
       },
       dataType: 'script',
       beforeSend: function(){ 
@@ -186,6 +187,34 @@ $(document).ready(function($){
     }
   };
 
+  var bindTemplateTypeahead = function(element){
+    $(element).typeahead('destroy');
+    $(element).off();
+    $('#certification_campaign_template_typeahead').val('');
+    $('#certification_campaign_template_dataset_id').val('');
+    
+    var jurisdiction = $('#certification_campaign_jurisdiction').val();
+
+    $('#certification_campaign_template_typeahead').typeahead([{
+        name:'template-dataset-'+(new Date-0),
+        header: '<h3>Datasets</h3>',
+        minLength: 2,
+        template: '<p class="attained attained-{{attained_index}}">{{value}}</p>',
+        engine: Hogan,
+        remote: {
+          url:'/campaigns/template_typeahead?q=%QUERY&jurisdiction='+jurisdiction
+        }
+      }
+    ]).on('typeahead:selected typeahead:autocompleted', function(e, datum){
+      $('#certification_campaign_template_dataset_id').val(datum.id);
+    });
+
+    $('#certification_campaign_template_typeahead').change(function(e){
+      if ($(this).val().length==0)
+        $('#certification_campaign_template_dataset_id').val(''); 
+    });
+  };
+
   $("#certification_campaign_url").change(setupFormForUrl);
   subsetTypeahead.element.attr('disabled','disabled');
   resetStartButtons();
@@ -197,4 +226,10 @@ $(document).ready(function($){
   });
 
   if($("#certification_campaign_url").val()){ setupFormForUrl(); }
+  
+  bindTemplateTypeahead('#certification_campaign_template_typeahead');
+  $('#certification_campaign_jurisdiction').change(function(){
+    bindTemplateTypeahead('#certification_campaign_template_typeahead');
+  });
+
 });

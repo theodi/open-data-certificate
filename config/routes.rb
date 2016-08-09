@@ -141,7 +141,8 @@ OpenDataCertificate::Application.routes.draw do
 
   put 'campaigns/endpoint_check', to: 'campaigns#endpoint_check', as: 'campaign_endpoint_check'
   put 'campaigns/precheck', to: 'campaigns#precheck', as: 'campaign_precheck'
-  
+  get 'campaigns/template_typeahead', to: 'campaigns#template_typeahead', as: 'template_typeahead'
+
   resources :campaigns do
     post 'rerun', to: 'campaigns#rerun', as: 'rerun'
     post 'schedule', to: 'campaigns#schedule', as: 'scheduled_rerun'
