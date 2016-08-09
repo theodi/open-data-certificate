@@ -129,6 +129,7 @@ class CertificateGenerator < ActiveRecord::Base
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
+      certificate.update_from_response_set
     else
       response_set.update_missing_responses!
     end
