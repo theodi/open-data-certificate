@@ -11,7 +11,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @certificate_level = params.fetch("certificate_level", "uncertified")
+    @certificate_level = params.fetch("certificate_level", "all")
     @generators = @campaign.certificate_generators.includes(:dataset, :certificate).where(latest: true)
     respond_to do |want|
       want.html do
