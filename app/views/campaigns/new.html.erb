@@ -7,7 +7,7 @@
   <div class="control-group">
     <%= f.label(:name, "Campaign name", class: "control-label") %>
     <div class="controls">
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "span6" %>
       <%= error_message_for(@campaign, :name) %>
     </div>
   </div>
@@ -33,11 +33,19 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:subset, "Subset", class: "control-label") %>
+    <%= f.label(:jurisdiction, "Jurisdiction", class: "control-label") %>
+    <div class="controls">
+      <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction), {}, {class: "span6"}) %>
+      <%= error_message_for(@campaign, :jurisdiction) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:subset, "Subset (optional)", class: "control-label") %>
 
     <div class="input-prepend">
       <span class="add-on"><i id="subset-icon" class="icon-search"></i></span>
-      <%= text_field_tag :subset, '', class: "span6" %>
+      <%= text_field_tag :subset, '', style: "width:312px" %>
     </div>
 
     <p>
@@ -60,14 +68,6 @@
   </div>
 
   <div class="control-group">
-    <%= f.label(:jurisdiction, "Jurisdiction", class: "control-label") %>
-    <div class="controls">
-      <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction)) %>
-      <%= error_message_for(@campaign, :jurisdiction) %>
-    </div>
-  </div>
-
-  <div class="control-group">
     <%= f.label(:template_dataset_id, class: "control-label") do %>
       Response Template (optional)
       <span class="help-inline">
@@ -75,7 +75,7 @@
       </span>
     <% end %>
     <div class="controls">
-      <%= text_field_tag :template_typeahead, '', id: 'certification_campaign_template_typeahead' %>
+      <%= text_field_tag :template_typeahead, '', id: 'certification_campaign_template_typeahead', class: "span6" %>
       <%= f.hidden_field(:template_dataset_id) %>
       <%= error_message_for(@campaign, :template_dataset_id) %>
     </div>
