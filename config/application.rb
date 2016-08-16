@@ -80,7 +80,7 @@ module OpenDataCertificate
     config.assets.precompile += %w[
       admin.js
       map.js
-
+      campaign.js
       badge.css
     ]
 
