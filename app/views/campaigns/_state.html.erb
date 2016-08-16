@@ -3,6 +3,7 @@
 <% end %>
 
 <ul>
+  <li><%= pluralize @campaign.dataset_count, 'dataset' %> in campaign</li>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
