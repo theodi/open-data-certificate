@@ -3,8 +3,8 @@
 <% end %>
 
 <ul>
-  <li>Dataset limit: <%= @campaign.limit %></li>
-  <li>Dataset count: <%= @campaign.dataset_count %></li>
+  <%= content_tag(:li, "Dataset limit: #{@campaign.limit}") if @campaign.limit %></li>
+  <li><%= pluralize @campaign.dataset_count, 'dataset' %> in campaign</li>
   <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
   <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
   <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
