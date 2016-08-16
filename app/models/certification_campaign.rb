@@ -62,10 +62,6 @@ class CertificationCampaign < ActiveRecord::Base
     version.to_i > 1
   end
 
-  def limit
-    @limit.to_i unless @limit.blank?
-  end
-
   def scheduled_rerun
     rerun!
   ensure
