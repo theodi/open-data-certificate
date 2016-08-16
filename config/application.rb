@@ -81,6 +81,7 @@ module OpenDataCertificate
       admin.js
       map.js
       campaign.js
+      campaign_progress.js
       badge.css
     ]
 
