@@ -15,6 +15,11 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
   <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
+
+  <%= form_tag campaign_queue_update_path(@campaign, certificate_level: @certificate_level), method: :post, class: 'form-inline button_to' do %>
+    <%= submit_tag "Queue updates", class: "btn" %>
+  <% end %>
+  
 </div>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
@@ -33,13 +38,6 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
     <button type="submit" class="btn">Filter</button>
   <% end %>
 </div>
-
-<p>
-  <strong>Update certificates</strong>
-  <%= form_tag campaign_queue_update_path(@campaign, certificate_level: @certificate_level), method: :post, class: 'form-inline' do %>
-    <%= submit_tag "Queue updates", class: "btn" %>
-  <% end %>
-</p>
 
 <div style="min-height:10em" id="certificates-wrapper" data-ongoing="<%= (@campaign.incomplete_count > 0 || @campaign.generated_count == 0) %>" data-refresh-url="<%= campaign_url(@campaign, page: params[:page]) %>">
 

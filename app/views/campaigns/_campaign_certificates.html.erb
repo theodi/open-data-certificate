@@ -17,6 +17,8 @@
         <td>
             <% if generator.published? %>
             <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+            <% else %>
+            <%= t("levels.#{generator.certificate.attained_level}.title") %>
             <% end %>
         </td>
       <% end %>
