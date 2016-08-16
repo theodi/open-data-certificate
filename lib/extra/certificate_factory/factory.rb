@@ -153,13 +153,18 @@ module CertificateFactory
       end
     end
 
-    def build
-      super
+    def save_dataset_count
       if @campaign
         dataset_count = result_count
         dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
         @campaign.update_attribute(:dataset_count, dataset_count)
+        return dataset_count
       end
+    end
+
+    def build
+      super
+      save_dataset_count
     end
 
     def build_url(path, params={})
