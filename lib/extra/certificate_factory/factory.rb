@@ -153,6 +153,15 @@ module CertificateFactory
       end
     end
 
+    def build
+      super
+      if @campaign
+        dataset_count = result_count
+        dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
+        @campaign.update_attribute(:dataset_count, dataset_count)
+      end
+    end
+
     def build_url(path, params={})
       path = uri.path.gsub("/api", path) unless uri.path.eql?("/")
       u = URI::join(uri.to_s, path)
