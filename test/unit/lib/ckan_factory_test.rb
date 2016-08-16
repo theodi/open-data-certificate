@@ -85,4 +85,12 @@ class CKANFactoryTest < ActiveSupport::TestCase
     assert_equal false, factory.feed_items.blank?
   end
 
+  test "saves dataset count" do
+    stub_request(:any, "http://data.gov.uk/api/3/action/package_search?rows=10&start=0")
+      .to_return(:body => @result.to_json, status: 200)
+    factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
+    factory.save_dataset_count
+    assert_equal @result[:result][:count], @campaign.reload.dataset_count
+  end
+
 end
