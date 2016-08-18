@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160803103456) do
+ActiveRecord::Schema.define(:version => 20160816114008) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(:version => 20160803103456) do
     t.string   "url"
     t.text     "subset"
     t.integer  "template_dataset_id"
+    t.integer  "limit"
+    t.integer  "dataset_count"
   end
 
   create_table "claims", :force => true do |t|

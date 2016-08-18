@@ -11,6 +11,7 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
   <%= k.capitalize %> subset: <span class="label label-success"><%= "#{v}" %></span>
 </p>
 <% end %>
+<p>Limited to: <%= pluralize @campaign.limit, 'dataset' %></p>
 
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>

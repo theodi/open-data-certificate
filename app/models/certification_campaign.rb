@@ -2,7 +2,6 @@ class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
   attr_accessor :version
-  attr_writer :limit
 
   validates :name, uniqueness: true, presence: true
   validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
@@ -12,7 +11,7 @@ class CertificationCampaign < ActiveRecord::Base
   belongs_to :user
   belongs_to :template_dataset, class_name: 'Dataset', :foreign_key => "template_dataset_id"
 
-  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id
+  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id, :dataset_count
 
   serialize :subset
 
@@ -61,10 +60,6 @@ class CertificationCampaign < ActiveRecord::Base
 
   def validate_extra_details?
     version.to_i > 1
-  end
-
-  def limit
-    @limit.to_i unless @limit.blank?
   end
 
   def scheduled_rerun
