@@ -24,6 +24,23 @@ class CKANFactoryTest < ActiveSupport::TestCase
               "type" => "dataset",
               "update_frequency" => "quarterly",
               "theme-primary" => "Transport"
+            },{
+              "license_title" => "UK Open Government Licence (OGL)",
+              "author" => "VOSA, Freedom of Information, Berkeley House, Croydon Street, Bristol, BS5 0DA",
+              "author_email" => "inform@vosa.gov.uk",
+              "state" => "active",
+              "contact-email" => "informationhandling@dft.gsi.gov.uk ",
+              "title" => "Threatened Species and Ecological Communities of National Environmental Significance",
+              "contact-name" => "Information Handling Team ",
+              "name" => "threatened-species-state-lists",
+              "isopen" => true,
+              "resources" => [],
+              "type" => "dataset",
+              "harvest_source_title" => "data.gov.au",
+              "extras" => [{
+                "value" => "http://data.gov.au/dataset/ae652011-f39e-4c6c-91b8-1dc2d2dfee8f",
+                "key" => "harvest_url"
+              }]
             }],
           search_facets: {}
         }
@@ -83,6 +100,16 @@ class CKANFactoryTest < ActiveSupport::TestCase
     campaign = CertificationCampaign.new(name: "Test campaign", url: "http://data.gov.uk/api")
     factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:10, params:{} })
     assert_equal false, factory.feed_items.blank?
+  end
+
+  test "gets dataset url for hosted and harvested datasets" do
+    factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
+
+    hosted = "http://data.gov.uk/dataset/mot-active-vts"
+    harvested = "http://data.gov.au/dataset/ae652011-f39e-4c6c-91b8-1dc2d2dfee8f"
+
+    assert_equal hosted, factory.get_dataset_url(@result[:result][:results][0])
+    assert_equal harvested, factory.get_dataset_url(@result[:result][:results][1])
   end
 
 end

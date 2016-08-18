@@ -34,6 +34,7 @@ module CertificateFactory
     def build
       each do |resource|
         url = get_dataset_url(resource)
+        next if url.blank?
         certificate = CertificateFactory::Certificate.new(
           url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
         certificate.generate
@@ -170,7 +171,11 @@ module CertificateFactory
     end
 
     def get_dataset_url(resource)
-      build_url("/dataset/#{resource['name']}")
+      if resource['harvest_source_title'].blank?
+        build_url("/dataset/#{resource['name']}")
+      else
+        resource['extras'].each {|e| break e["value"] if e["key"].eql?("harvest_url")  }
+      end
     end
   end
 
