@@ -21,6 +21,8 @@ module CertificateFactory
       # continuation options
       @count = options.fetch(:count, 0).to_i
       @limit = options[:limit].nil? ? nil : options[:limit].to_i
+      @include_harvested = options.fetch(:include_harvested, false)
+      @skipped = 0
     end
 
     def url
@@ -34,7 +36,10 @@ module CertificateFactory
     def build
       each do |resource|
         url = get_dataset_url(resource)
-        next if url.blank?
+        if url.blank?
+          @skipped+=1
+          next 
+        end
         certificate = CertificateFactory::Certificate.new(
           url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
         certificate.generate
@@ -45,6 +50,10 @@ module CertificateFactory
       generators = []
       each do |resource|
         url = get_dataset_url(resource)
+        if url.blank?
+          @skipped+=1
+          next 
+        end
         generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
         generator.certification_campaign = @campaign
         generator.generate(@jurisdiction, @user_id)
@@ -154,13 +163,14 @@ module CertificateFactory
       end
     end
 
+    def dataset_count
+      dataset_count = result_count
+      dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
+      return (dataset_count - @skipped)
+    end
+
     def save_dataset_count
-      if @campaign
-        dataset_count = result_count
-        dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
-        @campaign.update_attribute(:dataset_count, dataset_count)
-        return dataset_count
-      end
+      @campaign.update_attribute(:dataset_count, dataset_count) if @campaign
     end
 
     def build
@@ -186,11 +196,15 @@ module CertificateFactory
 
     def get_dataset_url(resource)
       if resource['harvest_source_title'].blank?
-        build_url("/dataset/#{resource['name']}")
+        return build_url("/dataset/#{resource['name']}")
       else
-        resource['extras'].each {|e| break e["value"] if e["key"].eql?("harvest_url")  }
+        if @include_harvested
+          return resource['extras'].each {|e| break e["value"] if e["key"].eql?("harvest_url")  }
+        else
+          return nil
+        end
       end
     end
-  end
 
+  end
 end
