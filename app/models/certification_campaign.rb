@@ -2,8 +2,7 @@ class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
   attr_accessor :version
-  attr_writer :include_harvested
-
+  
   validates :name, uniqueness: true, presence: true
   validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
   validates :limit, numericality: { greater_than: 0 }, allow_blank: true
@@ -77,16 +76,6 @@ class CertificationCampaign < ActiveRecord::Base
       user.try(:default_jurisdiction).presence,
       'gb'
     ].compact.first
-  end
-
-  def include_harvested
-    if @include_harvested.eql?("0")
-      false
-    elsif @include_harvested
-      true
-    else
-      false
-    end
   end
 
 end
