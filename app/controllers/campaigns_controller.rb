@@ -104,18 +104,25 @@ class CampaignsController < ApplicationController
 
   def precheck
     limit = params["limit"].blank? ? nil : params["limit"].to_i
-    
+    include_harvested = params.fetch("include_harvested", false)
+    include_harvested = include_harvested.eql?("true")
+
     campaign = current_user.certification_campaigns.build(url: params.fetch("campaign_url"), 
       subset: params.fetch("subset"), limit: limit, template_dataset_id: params.fetch("template_dataset_id"), 
-      include_harvested: params.fetch("include_harvested", false))
+      include_harvested: include_harvested)
     
     factory = CertificateFactory::CKANFactory.new({ is_prefetch: true, campaign: campaign, rows:3, params:{}, limit: 3, 
-      include_harvested: params.fetch("include_harvested", false) })
+      include_harvested: include_harvested })
 
     @generators = factory.prebuild
-    
-    @result_count = factory.result_count
-    @result_count = limit if !limit.blank? and (limit < @result_count)
+
+    if @generators.blank? 
+      @result_count = 0 
+    else
+      @result_count = factory.result_count
+      @result_count -= factory.skipped
+      @result_count = limit if !limit.blank? and (limit < @result_count)
+    end
 
     respond_to do |format|
       format.js
