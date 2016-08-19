@@ -137,7 +137,7 @@ class CKANFactoryTest < ActiveSupport::TestCase
 
     stub_request(:any, "http://data.gov.uk/dataset/mot-active-vts")
       .to_return(:body => @dataset_result.to_json, status: 200)
-
+    
     factory = CertificateFactory::CKANFactory.new({ campaign_id: @campaign.id, rows:10, params:{} })
     factory.build
 

@@ -38,7 +38,7 @@ module CertificateFactory
         url = get_dataset_url(resource)
         if url.blank?
           @skipped+=1
-          next 
+          next
         end
         certificate = CertificateFactory::Certificate.new(
           url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
@@ -48,17 +48,19 @@ module CertificateFactory
 
     def prebuild
       generators = []
-      each do |resource|
-        url = get_dataset_url(resource)
+      feed_items.each do |item|
+        url = get_dataset_url(item)
         if url.blank?
           @skipped+=1
-          next 
+        else
+          generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
+          generator.certification_campaign = @campaign
+          generator.generate(@jurisdiction, @user_id)
+          generator.certificate.update_attributes(published_at: nil, aasm_state: nil, published: false)
+          generators << generator
         end
-        generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
-        generator.certification_campaign = @campaign
-        generator.generate(@jurisdiction, @user_id)
-        generator.certificate.update_attributes(published_at: nil, aasm_state: nil, published: false)
-        generators << generator
+        @count += 1
+        return generators if over_limit?
       end
       return generators
     end
@@ -85,7 +87,7 @@ module CertificateFactory
     end
 
     def next_options
-      { campaign_id: @campaign.id, factory: self.class.name, count: @count }
+      { campaign_id: @campaign.id, factory: self.class.name, count: @count, include_harvested: @include_harvested }
     end
 
     def fetch_next!
@@ -96,6 +98,10 @@ module CertificateFactory
 
     def factory_name
       self.class.name.split('::').last
+    end
+
+    def skipped
+      @skipped
     end
 
   end
