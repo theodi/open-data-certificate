@@ -12,6 +12,7 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 </p>
 <% end %>
 <p>Limited to: <%= pluralize @campaign.limit, 'dataset' %></p>
+<%= content_tag(:p, "Includes datasets harvested from other portals") if @campaign.include_harvested %>
 
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>

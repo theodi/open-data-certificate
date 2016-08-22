@@ -4,7 +4,8 @@ Feature: Rerun campaigns
   Background:
     Given I am signed in as the API user
     And I have a CKAN atom feed with 5 datasets
-
+  
+  @ignore
   Scenario: Rerun campaign button queues each individual generator
     Given I have a campaign "brian"
     And that campaign has 5 certificates

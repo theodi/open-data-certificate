@@ -21,6 +21,8 @@ module CertificateFactory
       # continuation options
       @count = options.fetch(:count, 0).to_i
       @limit = options[:limit].nil? ? nil : options[:limit].to_i
+      @include_harvested = options.fetch(:include_harvested, false)
+      @skipped = 0
     end
 
     def url
@@ -34,6 +36,10 @@ module CertificateFactory
     def build
       each do |resource|
         url = get_dataset_url(resource)
+        if url.blank?
+          @skipped+=1
+          next
+        end
         certificate = CertificateFactory::Certificate.new(
           url, @user_id, campaign: @campaign, jurisdiction: @jurisdiction)
         certificate.generate
@@ -42,13 +48,19 @@ module CertificateFactory
 
     def prebuild
       generators = []
-      each do |resource|
-        url = get_dataset_url(resource)
-        generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
-        generator.certification_campaign = @campaign
-        generator.generate(@jurisdiction, @user_id)
-        generator.certificate.update_attributes(published_at: nil, aasm_state: nil, published: false)
-        generators << generator
+      feed_items.each do |item|
+        url = get_dataset_url(item)
+        if url.blank?
+          @skipped+=1
+        else
+          generator = CertificateGenerator.create(request: { documentationUrl: url }, user: @user_id)
+          generator.certification_campaign = @campaign
+          generator.generate(@jurisdiction, @user_id)
+          generator.certificate.update_attributes(published_at: nil, aasm_state: nil, published: false)
+          generators << generator
+        end
+        @count += 1
+        return generators if over_limit?
       end
       return generators
     end
@@ -75,7 +87,7 @@ module CertificateFactory
     end
 
     def next_options
-      { campaign_id: @campaign.id, factory: self.class.name, count: @count }
+      { campaign_id: @campaign.id, factory: self.class.name, count: @count, include_harvested: @include_harvested }
     end
 
     def fetch_next!
@@ -86,6 +98,10 @@ module CertificateFactory
 
     def factory_name
       self.class.name.split('::').last
+    end
+
+    def skipped
+      @skipped
     end
 
   end
@@ -153,13 +169,14 @@ module CertificateFactory
       end
     end
 
+    def dataset_count
+      dataset_count = result_count
+      dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
+      return (dataset_count - @skipped)
+    end
+
     def save_dataset_count
-      if @campaign
-        dataset_count = result_count
-        dataset_count = @limit if !@limit.blank? and (@limit < dataset_count)
-        @campaign.update_attribute(:dataset_count, dataset_count)
-        return dataset_count
-      end
+      @campaign.update_attribute(:dataset_count, dataset_count) if @campaign
     end
 
     def build
@@ -184,8 +201,16 @@ module CertificateFactory
     end
 
     def get_dataset_url(resource)
-      build_url("/dataset/#{resource['name']}")
+      if resource['harvest_source_title'].blank?
+        return build_url("/dataset/#{resource['name']}")
+      else
+        if @include_harvested
+          return resource['extras'].each {|e| break e["value"] if e["key"].eql?("harvest_url")  }
+        else
+          return nil
+        end
+      end
     end
-  end
 
+  end
 end

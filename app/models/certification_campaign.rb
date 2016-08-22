@@ -2,7 +2,7 @@ class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
   attr_accessor :version
-
+  
   validates :name, uniqueness: true, presence: true
   validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
   validates :limit, numericality: { greater_than: 0 }, allow_blank: true
@@ -11,7 +11,8 @@ class CertificationCampaign < ActiveRecord::Base
   belongs_to :user
   belongs_to :template_dataset, class_name: 'Dataset', :foreign_key => "template_dataset_id"
 
-  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id, :dataset_count
+  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id, 
+    :dataset_count, :include_harvested
 
   serialize :subset
 
@@ -50,7 +51,7 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def run!
-    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, factory: factory.name, limit: limit)
+    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, factory: factory.name, limit: limit, include_harvested: include_harvested)
   end
 
   def rerun!

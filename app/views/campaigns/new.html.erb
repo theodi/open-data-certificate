@@ -90,6 +90,21 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :include_harvested, class: "control-label" do %>
+      <%= f.check_box :include_harvested, { style: "margin: 0px 5px 0px 0px;" }, true, false %>
+      Include Harvested
+      <span class="help-inline">
+        Include datasets that have been imported from other portals.
+      </span>
+    <% end %>
+    <div class="controls">
+      <%= error_message_for(@campaign, :include_harvested) %>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="control-group">
     <div class="controls">
       <button type="submit" id="start-campaign" class="btn btn-large">Start campaign</button>
 
