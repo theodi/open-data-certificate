@@ -3,7 +3,7 @@ $(document).ready(function($){
   
   var certificatesWrapper = $('div#certificates-wrapper');
 
-  var updateCertificates = (url) => {
+  var updateCertificates = function(url) {
     var opts = {
       method: 'GET',
       url: url,
