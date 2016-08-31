@@ -23,9 +23,9 @@ class DatasetsController < ApplicationController
 
   def index
 
-    datasets = Dataset
-                .visible
-                .includes(:response_set, :certificate)
+    datasets = Dataset.visible
+                .includes(:response_set)
+                .joins(:certificate).where(certificates: { published: true })
                 .order('certificates.published_at DESC')
 
     @title = t('datasets.datasets')

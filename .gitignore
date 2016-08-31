@@ -57,3 +57,6 @@ bootstrap/
 # ignore dataset dump generated for download
 public/system/datasets.csv
 dump.rdb
+
+#ignore rory stuff
+rory-resource/

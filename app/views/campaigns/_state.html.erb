@@ -1,0 +1,11 @@
+<% if @campaign.incomplete_count > 0 %>
+  <p><strong>Campaign currently in progress...</strong></p>
+<% end %>
+
+<ul>
+  <li><%= pluralize @campaign.dataset_count, 'dataset' %> in campaign</li>
+  <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
+  <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
+  <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
+  <li class='omit-in-print'><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
+</ul>
