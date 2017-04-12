@@ -170,7 +170,7 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    eventmachine (1.0.4)
+    eventmachine (1.0.9.1)
     excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -256,7 +256,7 @@ GEM
       less-rails (~> 2.3.1)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    libv8 (3.16.14.13)
+    libv8 (3.16.14.19)
     link_header (0.0.8)
     linkeddata (1.1.11)
       equivalent-xml (~> 0.5)
@@ -571,7 +571,7 @@ DEPENDENCIES
   devise (= 3.0.3)
   domainatrix
   dotenv-rails
-  eventmachine (= 1.0.4)
+  eventmachine (~> 1.0.4)
   factory_girl_rails (~> 4.0)
   fastercsv (~> 1.5.4)
   fog
@@ -634,4 +634,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.11.2
+   1.14.6
