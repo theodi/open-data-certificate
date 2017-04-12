@@ -11,7 +11,7 @@ sudo: false
 before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
 env:
   global:
-    - ODC_REDIS_SERVER_URL="redis://localhost:6379"
+    - REDIS_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
 git:

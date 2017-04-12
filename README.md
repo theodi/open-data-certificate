@@ -102,7 +102,7 @@ Some extra environment variables are required for the certificates site; these c
 CERTIFICATE_HOSTNAME="localhost:3000"
 
 # Redis server URL
-ODC_REDIS_SERVER_URL="redis://redis:6379"
+REDIS_URL="redis://redis:6379"
 ```
 
 ### Optional
