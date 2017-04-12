@@ -74,6 +74,7 @@ group :production do
   gem 'delayed-plugins-airbrake'
   gem 'logstash-event'
   gem 'lograge'
+  gem 'rails_12factor'
 end
 
 group :surveyor do
