@@ -9,6 +9,7 @@
 # Open Data Certificates
 
 This source code is for the ODI's Open Data Certificates app at [certificates.theodi.org](https://certificates.theodi.org).
+The online assessment tool allows publishers to assess how good their open data release is across technical, social, legal and other areas. When published, a certificate (which can be Bronze, Silver, Gold or Platinum) shows data reusers how much they can trust and rely on the dataset
 
 ## License
 
@@ -16,9 +17,9 @@ This code is open source under the MIT license. See [LICENSE.md](LICENSE.md) fil
 
 ## Summary of features
 
-This is a rails app
-{software - high level description, FAO contributors}
-LINK_TO roadmap
+Open Data Certificate is an online assessment tool for open data releases powered by Rails. 
+
+Follow the [public feature roadmap for Open Data Certificates](https://trello.com/b/2xc7Q0kd/labs-public-toolbox-roadmap?menu=filter&filter=label:Certificates)
 
 ## Development
 
