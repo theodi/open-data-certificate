@@ -1,0 +1,38 @@
+<% @generators.each do |generator| %>
+  <tr>
+    <td style="text-align: center">
+      <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
+    </td>
+    <% if generator.completed? %>
+      <td>
+        <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
+        <div class='actions omit-in-print'>
+        <% if can? :edit, generator.response_set %>
+          <%= button_to "Edit", continue_path(generator.response_set), method: 'post', class: 'btn' %>
+          <%= button_to "Rerun certification", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post', class: 'btn' %>
+        <% end %>
+        </div>
+      </td>
+      <% if @certificate_level == "all" %>
+        <td>
+            <% if generator.published? %>
+            <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
+            <% else %>
+            <%= t("levels.#{generator.certificate.attained_level}.title") %>
+            <% end %>
+        </td>
+      <% end %>
+      <td class='omit-in-print'>
+          <%= generator.dataset.user_email %>
+      </td>
+      <td>
+        <%= boolean_mark(generator.valid_urls?) %>
+      </td>
+      <td>
+        <%= missing_responses(generator, "<br />").html_safe %>
+      </td>
+    <% else %>
+      <td colspan="5">Processing… <%= link_to generator.autocomplete_url, generator.autocomplete_url %></td>
+    <% end %>
+  </tr>
+<% end %>
