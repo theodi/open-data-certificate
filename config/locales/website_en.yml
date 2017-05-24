@@ -39,21 +39,25 @@ en:
       title_with_level: No level
       description: this data does not satisfy the fundamental requirements for open data.
     basic:
-      title: Raw
-      title_with_level: Raw level
+      title: Bronze
+      title_with_level: Bronze level
       description: this data makes a great start at the basics of publishing open data.
+      longdesc: data is openly licensed, available with no restrictions, accessible and legally reusable.
     pilot:
-      title: Pilot
-      title_with_level: Pilot level
+      title: Silver
+      title_with_level: Silver level
       description: extra effort went in to support and encourage feedback from people who use this open data.
+      longdesc: satisfies the Bronze requirements, the data is documented in a machine readable format, reliable and offers ongoing support from the publisher via a dedicated communication channel.
     standard:
-      title: Standard
-      title_with_level: Standard level
+      title: Gold
+      title_with_level: Gold level
       description: this is regularly published open data with robust support that people can rely on.
+      longdesc: satisfies the Silver requirements, is published in an open standard machine readable format, has guaranteed regular updates, offers greater support, documentation, and includes a machine readable rights statement.
     exemplar:
-      title: Expert
-      title_with_level: Expert level
+      title: Platinum
+      title_with_level: Platinum level
       description: this open data is an exceptional example of information infrastructure.
+      longdesc: satisfies the Gold requirements, has machine readable provenance documentation, uses unique identifiers in the data, the publisher has a communications team offering support. This is an exceptional example of an information infrastructure.
 
   level_descriptions:
     basic: 'A great start at the basics of publishing open data.'
@@ -62,10 +66,10 @@ en:
     exemplar: 'An exceptional example of information infrastructure.'
 
   requirement_levels:
-    basic: Raw level certification
-    pilot: Pilot level certification
-    standard: Standard level certification
-    exemplar: Expert level certification
+    basic: Bronze level certification
+    pilot: Silver level certification
+    standard: Gold level certification
+    exemplar: Platinum level certification
 
   required_for_level: This is required for %{level}
   required_for_level_and_above: This is required for %{level} and above
@@ -161,30 +165,56 @@ en:
     continue_without_registering: Continue without registering
     creating_questionnaire: Creating new questionnaire...
     create_an_account: Create an account
-    title: Certify your open data
-    tagline: Show that it’s easy to <strong>find,</strong> <strong>use</strong> and <strong>share</strong>
+    title: The mark of quality and trust for open data
+    tagline: "We verify publisher best practice, so you can use data with confidence."
+    free_and_open: It’s <strong>free</strong> and <strong>open</strong>.
     start_new_certificate: Create a certificate
     browse_certificates: Browse certificates
-    browse_all_new_certificates: Browse all certificates
-    how_it_works: How it works
-    fill_out_questionnaire:
-      title: Publish your data
-      description: Good news! You've already done this bit (or you're about to). Now let's make your data easier for people to find, use and share.
-    generate_certificate:
-      title: Check it with our questionnaire
-      description:  Our helpful questions act like a checklist. They explain your options about how to publish good open data and give you clear and recognised targets to aim for.
-    share_open_data:
-      title: Share it with a certificate
-      description: Your answers determine which of our four certificates you generate. Each one means success in a unique way and demonstrates you are a leader in open data.
+    browse_all_new_certificates: Check if you have a certificate
+    verify_in_bulk: "We can <a href='/en/autocertification'>auto-draft certificates</a> from data portals, <a href='/en/contact'>contact us</a> to get started."
+    what_happens_next: What happens next
+    claim_your_certificate:
+      title: Get certified
+      description: "%{create_link} or claim and improve an <a href='/en/autocertification'>auto-drafted certificate</a> to receive a badge to display."
+    increase_trust:
+      title: Increase trust in your data
+      description: Involve your users to gain Community Verified status. Or <a href='/en/contact'>contact us</a> for ODI data auditing services.
+    improve_data:
+      title: Improve your data
+      description: A free best practice report to help you achieve higher badge levels is created for all certificates.
     about_certificate:
-      title: What does a certificate look like?
-      description: It's a badge that links to a description of your open data. The description explores things like how often it's updated, what format it's in, who and where it came from.
-      link: Find out more
-    about_odi:
-      title: Who are the ODI?
-      description: We're the %{odi_name_link}. We help people unlock supply and demand for open data and share this value with everyone.
-      odi_name: Open Data Institute
-      link: Get in touch
+      title: What is an Open Data Certificate?
+      description_html: |
+        <p>Each Open Data Certificate uses a questionnaire-style assessment to recognise well-published open data with one of four badges.</p>
+        <p>Each badge shows that the data has been published in a sustainable and reusable way – with each level indicating the available support and adherence to current best-practices.</p>
+      link: Learn more
+    how_certificates_work:
+      title: How does each certificate work?
+      description_html: |
+        <ul>
+          <li>It recognises well published open data</li>
+          <li>It provides an independent guarantee of quality</li>
+          <li>It assesses sustainability and reliability of published data</li>
+          <li>It encourages trust and reuse of data</li>
+          <li>It guides publisher through established best practices</li>
+        </ul>
+      link: Learn more
+    who_is_using:
+      title: Who is using Open Data Certificates?
+      sub_title: "Publishers, consumers and technology providers from around the world have adopted Open Data Certificates."
+    our_collaborators:
+      title: Our collaborators
+      sub_title: "Open Data Certificates are designed to be universal and interoperable between technology standards, platforms and countries."
+    standards:
+      title: Standards
+      description: We support the <a href='https://www.w3.org/TR/vocab-dcat/'>DCAT</a> metadata standard.
+    technology:
+      title: Technology
+      description: We can automatically pre-fill many of the Open Data Certificate questions if you use <a href='http://ckan.org/'>CKAN</a>. <a href='/en/contact'>Get in touch</a> if you’re interested in integration with other portal software.
+    countries:
+      title: Localisation
+      description: "We can localise the certificate to reflect best practice in your jurisdiction. <a href='/en/contact'>Get in touch</a> to find out how you can help."
+    certificate_adoption: Certificates adoption around the world
     international_reach:
       title: Where can you create certificates?
       description: Different countries have different laws, so their certificates are slightly different too. Choose your country to create the right certificate.
@@ -235,10 +265,10 @@ en:
       jurisdiction: Jurisdiction
       level: Filter by certificate level
       levels:
-        basic: Raw level
-        pilot: Pilot level
-        standard: Standard level
-        exemplar: Expert level
+        basic: Bronze level
+        pilot: Silver level
+        standard: Gold level
+        exemplar: Platinum level
 
     community_verification_panel:
       title: Community verification
@@ -396,21 +426,21 @@ en:
     return_to_dashboard: Return to dashboard
     levels:
       basic:
-        title: The basics
+        title: Bronze requirements
         subtitle: The bare minimum required to publish a certificate - a fantastic start!
         instruction: "You must provide data for the following questions:"
       pilot:
-        title: Pilot requirements
+        title: Silver requirements
         subtitle: You put extra effort in to supporting and encouraging feedback from people who use this open data.
-        instruction: "To reach Pilot level you should:"
+        instruction: "To reach Silver level you should:"
       standard:
-        title: Standard requirements
+        title: Gold requirements
         subtitle: You regularly published open data with robust support that people can rely on to build ever more ambitious projects and ventures on top of.
-        instruction: "To reach Standard level you should:"
+        instruction: "To reach Gold level you should:"
       exemplar:
-        title: Expert requirements
+        title: Platinum requirements
         subtitle: You go above and beyond what’s expected - a fine example of information infrastructure for everyone else to aspire to.
-        instruction: "To reach Expert level you should:"
+        instruction: "To reach Platinum level you should:"
     buttons:
       understood: "Edit questionnaire"
       misunderstood: "Ask a question"
@@ -521,7 +551,7 @@ en:
     es: Spanish
     it: Italian
     ro: Romanian
-    zh: Chinese
+    zh_TW: Chinese
 
   interface:
     select: "Please select…"

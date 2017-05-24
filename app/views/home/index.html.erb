@@ -1,0 +1,154 @@
+<% content_for(:main_container_class) {'container'} %>
+<% content_for(:nav_brand) do %>
+  <%= image_tag "logo-home.png" %>
+<% end %>
+
+<% content_for(:header) do %>
+  <div id="padd">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <%= image_tag('certificate-colourburst-72-K-1200px.png') %>
+        </div>
+        <div class="span8">
+          <h1><%= t('homepage.title') %></h1>
+          <h2><%= t('homepage.tagline').html_safe %></h2>
+
+          <p><%= t('homepage.free_and_open').html_safe %></p>
+
+          <%= link_to t('homepage.browse_all_new_certificates'), datasets_path, class: ['btn', 'btn-large', 'btn-info'] %>
+          <%= new_certificate(role: 'button', class: ['btn', 'btn-large', 'btn-primary']) %>
+
+          <p><%= t('homepage.verify_in_bulk').html_safe %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header class="home">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1 class="lined-title">
+            <span><%= t('homepage.what_happens_next') %></span>
+          </h1>
+        </div>
+      </div>
+      <div class="row steps">
+        <div class="span4">
+          <div class="steps-box">
+            <i class="icon-check icon-large"></i>
+            <h2><%= t('homepage.claim_your_certificate.title') %></h2>
+            <%= new_certificate(class: 'inline') do |link| %>
+              <p><%= t('homepage.claim_your_certificate.description', create_link: link).html_safe %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="span4">
+          <div class="steps-box">
+            <i class="icon-shield icon-large"></i>
+            <h2><%= t('homepage.increase_trust.title') %></h2>
+            <p><%= t('homepage.increase_trust.description').html_safe %></p>
+          </div>
+        </div>
+        <div class="span4">
+          <div class="steps-box">
+            <i class="icon-file-text icon-large"></i>
+            <h2><%= t('homepage.improve_data.title') %></h2>
+            <p><%= t('homepage.improve_data.description') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<% end %>
+
+<div class="homepage-about-content">
+  <div class="main intro-panel">
+    <div class="row">
+      <div class="span4">
+        <%= image_tag('certificate-colourburst-72-W-1200px.png') %>
+      </div>
+      <div class="span8">
+        <h2><%= link_to t('homepage.about_certificate.title'), about_page_path %></h2>
+        <p><%= t('homepage.about_certificate.description_html') %></p>
+
+        <%= link_to about_page_path, class: 'btn btn-large btn-primary' do %>
+          <i class="icon-chevron-right"></i> <%= t('homepage.about_certificate.link') %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6">
+        <h2><%= link_to t('homepage.how_certificates_work.title'), contact_page_path %></h2>
+        <p><%= t('homepage.how_certificates_work.description_html').html_safe %></p>
+
+        <%= link_to badge_levels_page_path, class: 'btn btn-large btn-primary' do %>
+          <i class="icon-chevron-right"></i> <%= t('homepage.how_certificates_work.link') %>
+        <% end %>
+      </div>
+      <div class="span6">
+        <%= image_tag('backg.png') %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container main">
+    <h2 class="lined-title">
+      <span><%= t('homepage.who_is_using.title') %></span>
+    </h2>
+
+    <div class="sub-heading"><%= t('homepage.who_is_using.sub_title') %></div>
+
+    <ul class="row certificate-user-list">
+      <li class="span3">
+        <%= link_to(image_tag('3rd-party/ons.png'), 'http://www.ons.gov.uk/', target: '_blank') %>
+      </li>
+      <li class="span3">
+        <%= link_to(image_tag('3rd-party/ukdataservice.png'), 'https://www.ukdataservice.ac.uk/', target: '_blank') %>
+      </li>
+      <li class="span3">
+        <%= link_to(image_tag('3rd-party/syngenta.png'), 'http://www.syngenta.com/', target: '_blank') %>
+      </li>
+      <li class="span3">
+        <%= link_to(image_tag('3rd-party/qg-coa.svg'), 'https://www.qld.gov.au/', target: '_blank') %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container main collaborators-section">
+    <h2 class="lined-title">
+      <span><%= t('homepage.our_collaborators.title') %></span>
+    </h2>
+
+    <div class="sub-heading"><%= t('homepage.our_collaborators.sub_title') %></div>
+
+    <div class="row">
+      <div class="span5">
+        <ul class="collaborator-bullets">
+          <li>
+            <i class="icon-wrench circle"></i>
+            <h3><%= t('homepage.standards.title') %></h3>
+            <p><%= t('homepage.standards.description').html_safe %></p>
+          </li>
+
+          <li>
+            <i class="icon-cloud circle"></i>
+            <h3><%= t('homepage.technology.title') %></h3>
+            <p><%= t('homepage.technology.description').html_safe %></p>
+          </li>
+
+          <li class="last">
+            <i class="icon-globe circle"></i>
+            <h3><%= t('homepage.countries.title') %></h3>
+            <p><%= t('homepage.countries.description', :count => Survey.country_count).html_safe %></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="span7 certificate-adoption">
+        <h3><%= t('homepage.certificate_adoption') %></h3>
+        <%= image_tag('World_ODC.png') %>
+      </div>
+    </div>
+  </div>
+</div>

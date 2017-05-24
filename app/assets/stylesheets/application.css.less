@@ -19,7 +19,6 @@
 *= require campaigns
 *= require claims
 *= require datasets
-*= require mermaid
 */
 
 // import bootstrap this way so that we can alter variables just for this app
@@ -583,15 +582,15 @@ header.affix {
 }
 
 #padd {
-  min-height: 500px;
+  padding-bottom: 40px;
 
   .container {
-    margin-top: 50px;
+    margin-top: 20px;
 
     h1 {
       font-size: 70px;
+      font-weight: 400;
       line-height: 76px;
-      color: @odiGrey;
       margin-bottom: 22px;
       margin-top: 35px;
     }
@@ -599,30 +598,55 @@ header.affix {
     h2 {
       font-size: 30px;
       line-height: 40px;
-      margin-bottom: 40px;
-      color: @odiGrey;
-      padding-left: 3px;
-
-      strong {
-         color: @odiGreyDark;
-      }
-
+      font-weight: 400;
+      margin-bottom: 20px;
     }
   }
 
-  .btn {
-    display: block;
-    margin-bottom: 20px;
+  p {
+
   }
 
-  button.btn {
-    width: 100%;
+  form {
+    display: inline;
+  }
+
+  .btn {
+    margin-bottom: 20px;
   }
 }
 
-.odi-bleed {
-  background:#fff url("/assets/splat.png") no-repeat top left fixed;
-  background-position: center -450px;
+.lined-title {
+  text-align: center;
+  font-weight: 400;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  span {
+    padding-bottom: 2px;
+    display: inline-block;
+    position: relative;
+  }
+
+  span:before, span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    display: block;
+    margin-top: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  span:before {
+    right: 100%;
+    margin-right: 0.75em;
+  }
+
+  span:after {
+    left: 100%;
+    margin-left: 0.75em;
+  }
 }
 
 .home {
@@ -632,21 +656,44 @@ header.affix {
   padding-bottom: 0;
 
   h1 {
-    color: @odiBlueDarker;
+    color: #000000;
     font-size: 36px;
     margin-bottom: 30px;
-    text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
   }
 
   .steps {
-
-    /* Background stripes (image has 30px of space on left to align) */
-    background: url(/assets/background-home-header.gif) repeat-y center;
 
     .span4 {
 
       /* Make sure there's a gap between bottom of steps text and top of ODI logo/buttons */
       padding-bottom: 20px;
+
+      .steps-box {
+        border: 10px solid #ffffff;
+        background-color: #3498db;
+        
+        a {
+          color: white;
+          text-decoration: underline;
+        }
+
+        i {
+          font-size: 40px;
+          padding: 20px 0 0 0;
+          display: inline-block;
+        }
+
+        button.inline {
+          display: inline;
+          padding: 0;
+          border: none;
+          background: transparent;
+          color: inherit;
+          font-size: inherit;
+          line-height: 23px;
+          text-decoration: underline;
+        }
+      }
 
     }
 
@@ -660,21 +707,13 @@ header.affix {
     }
     p{
       padding-bottom:20px;
+      font-size: 0.95em;
     }
 
     h2 {
-      font-size: 70px;
-      color: @odiBlueDarker;
-      font-weight: bold;
-      text-shadow: -1px -1px 0px rgba(255,255,255, 0.25);
-
-      small {
-        display: block;
-        color: #fff;
-        font-size: 30px;
-        padding: 30px 0 10px;
-        text-shadow: none;
-      }
+      font-size: 1.3em;
+      color: #ffffff;
+      font-weight: normal;
     }
 
     form {
@@ -688,47 +727,75 @@ header.affix {
   }
 }
 
-.home-header-buttons {
-
-  .row {
-
-    height: 88px;
-
-  }
-
-  .span4 {
-    text-align: center;
-
-    .logo {
-
-      /* Small ODI logo, hide text */
-      background: url(/assets/ODI_kitemark-75x75.png) no-repeat center;
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      margin: -34px auto 0 auto;
-      width: 76px; height: 68px;
-
-    }
-
-    .btn-primary {
-      margin-top: -20px;
-    }
-  }
-}
-
 .homepage-about-content {
 
   h2 {
     font-weight: normal;
   }
 
-  h2.about-certificate { margin-top: -7px; }
-
   h2.about-odi {
-    border-top: 1px solid #e1e1e1;
     padding-top: 20px;
     margin-top: 25px;
+  }
+
+  .certificate-user-list {
+    list-style: none;
+
+    li {
+      text-align: center;
+
+      a {
+        display: block;
+        padding: 5px;
+      }
+    }
+  }
+
+  .collaborator-bullets {
+    list-style: none;
+
+    li {
+      padding: 0 0 40px 80px;
+      position: relative;
+      background: url(collaborator-list-bg.png) -5px 0 repeat-y;
+
+      &.last {
+        background-image: none;
+      }
+
+      h3 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+        color: #7a7a7a;
+        font-size: 80%;
+      }
+
+      i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 30px;
+        border-radius: 100em;
+        padding: 20px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        background-color: #2ecc71;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .certificate-adoption {
+    h3 {
+      text-align: center;
+      margin: 0 0 5px 0;
+      line-height: normal;
+    }
   }
 }
 
@@ -753,6 +820,13 @@ hr.heavy {
   background: url(divider.png);
 }
 
+.sub-heading {
+  text-align: center;
+  color: #7a7a7a;
+  font-size: 14px;
+  margin-bottom: 50px;
+}
+
 // Layout //
 
 .container {
@@ -770,6 +844,20 @@ hr.heavy {
   .label a:hover {
     color: @odiBlueDarker;
     text-decoration: none;
+  }
+}
+
+.intro-panel {
+  .row {
+    padding-top: 45px;
+  }
+
+  .span4 {
+    text-align: center;
+  }
+
+  li {
+    padding: 4px 0;
   }
 }
 
@@ -1687,7 +1775,7 @@ a.transfer {
 .level-badge{
   width:133px;
   height:118px;
-  background-image:url(/assets/badges/no_level_badge.png);
+  background-image:url(/assets/badges/basic_level_badge.png);
   background-repeat: no-repeat;
   margin: auto;
 
@@ -1696,19 +1784,9 @@ a.transfer {
   line-height: 200%;
 }
 
-.level-badge-basic{
-  background-image:url(/assets/badges/raw_level_badge.png);
+.level-badge-none{
+  background-image:url(/assets/badges/no_level_badge.png);
 }
-.level-badge-pilot{
-  background-image:url(/assets/badges/pilot_level_badge.png);
-}
-.level-badge-standard{
-  background-image:url(/assets/badges/standard_level_badge.png);
-}
-.level-badge-exemplar{
-  background-image:url(/assets/badges/exemplar_level_badge.png);
-}
-
 
 .status-badge{
   width:80px;
@@ -2624,19 +2702,6 @@ header .save-button {
   #panel_handle{
     background-image:url(/assets/panel-handle.png);
 
-    &.attained-basic{
-      background-image:url(/assets/panel-handle-basic.png);
-    }
-    &.attained-pilot{
-      background-image:url(/assets/panel-handle-pilot.png);
-    }
-    &.attained-standard{
-      background-image:url(/assets/panel-handle-standard.png);
-    }
-    &.attained-exemplar{
-      background-image:url(/assets/panel-handle-exemplar.png);
-    }
-
     width:78px;
     height:72px;
     position: absolute;
@@ -2679,6 +2744,19 @@ header .save-button {
   .progress {
     margin-bottom: 10px;
     clear: both;
+  }
+
+  .progress-basic.progress-striped .bar {
+    #gradient > .striped(#cd7f32);
+  }
+  .progress-pilot.progress-striped .bar {
+    #gradient > .striped(#c0c0c0);
+  }
+  .progress-standard.progress-striped .bar {
+    #gradient > .striped(#d4af37);
+  }
+  .progress-exemplar.progress-striped .bar {
+    #gradient > .striped(#e5e4e2);
   }
 }
 
@@ -2849,20 +2927,17 @@ strong.certificate-level {
     color: @color;
   }
 }
-.none-level {
-  .level-styles(@basic, url(/assets/badges/no_level_badge.png));
+
+.none-level .certificate-badge {
+  background-image: url(/assets/badges/no_level_badge.png);
 }
-.basic-level {
-  .level-styles(@basic, url(/assets/badges/raw_level_badge.png));
+
+.certificate-badge {
+  background-image: url(/assets/badges/basic_level_badge.png);
 }
-.pilot-level {
-  .level-styles(@pilot, url(/assets/badges/pilot_level_badge.png));
-}
-.standard-level {
-  .level-styles(@standard, url(/assets/badges/standard_level_badge.png));
-}
-.exemplar-level {
-  .level-styles(@exemplar, url(/assets/badges/exemplar_level_badge.png));
+
+strong.certificate-level {
+  color: @basic;
 }
 
 .footer {
@@ -3263,18 +3338,8 @@ section.improvement {
 
   }
 
-  // Level specific styles
-  &.improvement-basic header .container {
-    background-image: url(/assets/badges/no_level_badge.png);
-  }
-  &.improvement-pilot header .container {
-    background-image: url(/assets/badges/pilot_level_badge.png);
-  }
-  &.improvement-standard header .container {
-    background-image: url(/assets/badges/standard_level_badge.png);
-  }
-  &.improvement-exemplar header .container {
-    background-image: url(/assets/badges/exemplar_level_badge.png);
+  &.improvement header .container {
+    background-image: url(/assets/badges/basic_level_badge.png);
   }
 
   &.improvement-basic {

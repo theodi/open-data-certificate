@@ -5,11 +5,9 @@
 
 //= require hogan
 //= require jquery.textchange.min
-//= require mermaid.min
 //= require modernizr.custom.76670
 //= require placeholder
 //= require polyfill
-//= require skroller
 //= require typeahead
 //= require url
 
@@ -17,8 +15,7 @@
 //= require surveyor_all
 //= require tracking
 
-
-/* global $, skrollr, alert, Hogan */
+/* global $, alert, Hogan */
 
 // whether or not the homepage map should be loaded
 window.enableMap = document.querySelectorAll && Modernizr.svg;
@@ -47,19 +44,6 @@ $(document).ready(function($){
   }).on('ajax:beforeSend.rails', 'form[data-remote-error-message]', function(){
     $('.form-errors', this).empty();
   });
-
-  // Skrollr data settings
-  var bleed = $('body.odi-bleed').attr({
-    'data-0':'background-position:center -480px',
-    'data-2500':'background-position:center 1000px'
-  });
-
-
-  // don't enable on touch devices, fix at:
-  // https://github.com/Prinzhorn/skrollr#what-you-need-in-order-to-support-mobile-browsers
-  // though primary concern is for it not to break for now
-  var touch = 'ontouchstart' in window;
-  if (bleed.size() && !touch) skrollr.init({forceHeight: false});
 
   // Event to close menus when clicking away off them
   var openMenu = false;

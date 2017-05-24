@@ -33,4 +33,15 @@ class CampaignsControllerTest < ActionController::TestCase
     assert_redirected_to campaign_path(campaign, certificate_level: 'all')
   end
 
+  test "updating a campaign enqueues a processing job" do
+    campaign = FactoryGirl.create :certification_campaign, name: 'data.gov.uk', user: @user
+    campaign.certificate_generators.create FactoryGirl.attributes_for(:certificate_generator).merge(completed: true)
+    CertificateGeneratorUpdateWorker.expects(:perform_async).returns(nil)
+    Sidekiq::Testing.fake! do
+      post :queue_update, campaign_id: campaign.id
+    end
+    campaign = CertificationCampaign.last
+    assert_redirected_to campaign_path(campaign, certificate_level: 'all')
+  end
+
 end

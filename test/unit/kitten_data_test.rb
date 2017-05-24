@@ -114,7 +114,7 @@ class KittenDataTest < ActiveSupport::TestCase
 
   def set_us_data(organization_type = "Federal Government")
     source = {
-      "organization" => {"id" => "gov-agency"}
+      "organization" => {"id" => "gov-agency", "name" => "gov-agency" }
     }
     organization = {
       "extras" => {"organization_type" => organization_type}
@@ -123,6 +123,18 @@ class KittenDataTest < ActiveSupport::TestCase
     DataKitten::Dataset.any_instance.stubs(:source).returns(source)
     stub_request(:get, 'http://catalog.data.gov/some_data').to_return(status: 200)
     stub_request(:get, 'http://catalog.data.gov/api/2/rest/group/gov-agency').to_return(body: organization.to_json)
+  end
+
+  def set_ckan3_organization_data(name = "org-name")
+    organization = {
+      "id" => name,
+      "name" => name
+    }
+    source = {
+      "organization" => organization
+    }
+    DataKitten::Dataset.any_instance.stubs(:source).returns(source)
+    stub_request(:get, "http://example.com/api/3/action/organization_show?id=#{name}").to_return(body: organization.to_json)
   end
 
   def setup
@@ -201,6 +213,18 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal 'test_name', kitten_data.fields["publisher"]
     assert_equal 'http://example.com/homepage', kitten_data.fields["publisherUrl"]
     assert_equal 'test_contact', kitten_data.fields["contactEmail"]
+  end
+
+  test 'Data website is set to publisher website' do
+    assert_equal 'true', kitten_data.fields["onWebsite"]
+    assert_equal 'http://example.com/homepage', kitten_data.fields["webpage"]
+  end
+
+  test 'Data website is set to base url by default' do
+    set_minimum_data
+
+    assert_equal 'true', kitten_data.fields["onWebsite"]
+    assert_equal 'http://www.example.com/', kitten_data.fields["webpage"]
   end
 
   test 'Release type is detected as a one off' do
@@ -398,6 +422,17 @@ class KittenDataTest < ActiveSupport::TestCase
     assert_equal "http://data.gov.uk/some_crazy_data", kitten_data.fields["slaUrl"]
     assert_equal "medium", kitten_data.fields["onGoingAvailability"]
     assert_equal "http://data.gov.uk/some_crazy_data#comments-container", kitten_data.fields["forum"]
+  end
+
+  test 'listing is set to publisher filter' do
+    set_ckan3_organization_data('dept-name')
+    assert_equal "http://www.example.com/publisher/dept-name", kitten_data.fields["listing"]
+  end
+
+  test 'listing for data.gov is set to group filter' do
+    set_us_data
+    @kitten_data = KittenData.new(url: 'http://catalog.data.gov/some_data')
+    assert_equal "http://catalog.data.gov/group/gov-agency", kitten_data.fields["listing"]
   end
 
   test 'data.london.gov.uk assumptions are applied' do

@@ -50,7 +50,7 @@
          <if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
             <question id="publisherOrigin" display="Původ dat">
                <label>Shromáždili nebo vytvořili jste <em>všechna</em> data sami?</label>
-               <yesno required="required" yes="data byla vytvořena přímo poskytovatelem"/>
+               <yesno required="required" yes="data byla vytvořena přímo poskytovatelem" no="data nebyla vytvořena přímo poskytovalelem"/>
                <help>Pokud jakákoliv část dat pochází ze zdrojů mimo vaši organizaci, je třeba uvést další informace o právech k jejich zveřejnění.</help>
             </question>
          </if>
@@ -445,17 +445,17 @@
                </if>
             </if>
             <if test="this.appliedAnon() === 'true' || this.lawfulDisclosure() === 'true'">
-               <question id="riskAssessmentExists" display="Rizika spojená s osobními údaji">
+               <question id="privacyImpactAssessmentExists" display="Rizika spojená s osobními údaji">
                   <label>Analyzovali jste rizika spojená se zveřejněním osobních údajů?</label>
                   <yesno yes="poskytovatel provedl analýzu rizik"
                          no="poskytovatel neprovedl analýzu rizik"/>
                   <help>Analýza rizik se týká jak soukromí dotčených osob, tak použití a zveřejnění těchto dat.</help>
                   <requirement level="pilot">
-                     <strong>Pokud zveřejňujete osobní data, měli byste analyzovat související rizika.</strong>
+                     <strong>Pokud zveřejňujete osobní data, měli byste udělat analýzu rizik.</strong>
                   </requirement>
                </question>
-               <if test="this.riskAssessmentExists() === 'true'">
-                  <question id="riskAssessmentUrl" display="Analýza rizik">
+               <if test="this.privacyImpactAssessmentExists() === 'true'">
+                  <question id="privacyImpactAssessmentUrl" display="Analýza rizik">
                      <label>Kde máte analýzu rizik zveřejněnou?</label>
                      <input type="url" placeholder="URL analýzy rizik"/>
                      <help>Uveďte URL dokumentu, kde si mohou zájemci ověřit vaši analýzu rizik práce s osobními údaji. Pokud analýza obsahuje citlivé informace, můžete ji pouze shrnout nebo příslušné části odstranit nebo anonymizovat.</help>
@@ -463,7 +463,7 @@
                         <strong>Analýzu rizik spojených s osobními údaji byste měli zveřejnit</strong>, aby se zájemci mohli podívat, jakým způsobem předcházíte možným rizikům.
                     </requirement>
                   </question>
-                  <if test="this.riskAssessmentUrl() !== ''">
+                  <if test="this.privacyImpactAssessmentUrl() !== ''">
                      <question id="riskAssessmentAudited" display="Audit analýzy rizik">
                         <label>Prošla vaše analýza rizik nezávislým auditem?</label>
                         <yesno yes="analýza rizik prošla nezávislým auditem"/>

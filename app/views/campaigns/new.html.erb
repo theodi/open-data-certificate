@@ -7,18 +7,27 @@
   <div class="control-group">
     <%= f.label(:name, "Campaign name", class: "control-label") %>
     <div class="controls">
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "span6" %>
       <%= error_message_for(@campaign, :name) %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label(:url, "CKAN URL", class: "control-label") %>
+    <%= f.label(:url, class: "control-label") do %>
+      CKAN URL
+      <span class="help-inline">
+        Provide the base URL of a CKAN API (e.g. "http://data.mysite.uk/api") or the URL of the ATOM feed.
+      </span>
+    <% end %>
+
     <div class="controls">
       <%= f.text_field :url, class: "span6" %>
-      <span class="help-inline">
-        Provide the URL of a CKAN website (the homepage of the portal) or a URL to the ATOM feed.
-      </span>
+
+      <%= link_to '#', class: "btn btn-primary submit error", style:"margin-bottom:10px;",
+        data: { url: campaign_endpoint_check_url }, id: "endpoint_check" do %>
+        <span>Check URL</span> <i class="icon-repeat"></i>
+      <% end %>
+
       <%= error_message_for(@campaign, :url) %>
     </div>
   </div>
@@ -26,11 +35,52 @@
   <div class="control-group">
     <%= f.label(:jurisdiction, "Jurisdiction", class: "control-label") %>
     <div class="controls">
-      <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction)) %>
+      <%= f.select(:jurisdiction, jurisdiction_options_for_select(@campaign.jurisdiction), {}, {class: "span6"}) %>
       <%= error_message_for(@campaign, :jurisdiction) %>
     </div>
   </div>
 
+  <div class="control-group">
+    <%= f.label(:subset, "Subset (optional)", class: "control-label") %>
+
+    <div class="input-prepend">
+      <span class="add-on"><i id="subset-icon" class="icon-search"></i></span>
+      <%= text_field_tag :subset, '', style: "width:312px" %>
+    </div>
+
+    <p>
+    <%= f.fields_for :subset do |s| %>
+      <div id="organization-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-briefcase"></i></span>
+          <%= s.text_field :organization, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+      <div id="tags-subset">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-tag"></i></span>
+          <%= s.text_field :tags, readonly: 'readonly', class: "subset-selection" %>
+        </div>
+      </div>
+    <% end %>
+    </p>
+    <%= error_message_for(@campaign, :subset) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:template_dataset_id, class: "control-label") do %>
+      Response Template (optional)
+      <span class="help-inline">
+        Choose a certificate to provide default responses for this campaign. 
+      </span>
+    <% end %>
+    <div class="controls">
+      <%= text_field_tag :template_typeahead, '', id: 'certification_campaign_template_typeahead', class: "span6" %>
+      <%= f.hidden_field(:template_dataset_id) %>
+      <%= error_message_for(@campaign, :template_dataset_id) %>
+    </div>
+  </div>
+  
   <div class="control-group">
     <%= f.label(:limit, "Dataset limit (optional)", class: "control-label") %>
     <div class="controls">
@@ -40,9 +90,36 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :include_harvested, class: "control-label" do %>
+      <%= f.check_box :include_harvested, { style: "margin: 0px 5px 0px 0px;" }, true, false %>
+      Include Harvested
+      <span class="help-inline">
+        Include datasets that have been imported from other portals.
+      </span>
+    <% end %>
     <div class="controls">
-      <button type="submit" class="btn">Submit</button>
+      <%= error_message_for(@campaign, :include_harvested) %>
     </div>
   </div>
 
+  <br/>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" id="start-campaign" class="btn btn-large">Start campaign</button>
+
+      <%= link_to '#', class: "btn btn-large btn-primary submit error", 
+        data: { url: campaign_precheck_url }, id: "campaign_precheck" do %>
+        <span>Test campaign</span> <i class="icon-chevron-right"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="precheck-results">
+  </div>
+
+<% end %>
+
+<% content_for(:foot_scripts) do %>
+ <%= javascript_include_tag "campaign" %>
 <% end %>
