@@ -1,0 +1,137 @@
+<% content_for :header_title, t("about.heading_about") %>
+
+<div class="container about">
+  <div class="span8">
+
+    <p>Certifikát otevřených dat je zdarma poskytovaná služba pro
+    kontrolu otevřených dat. Vydavatelé otevřených dat mohou díky procesu
+    certifikace zjistit, kde jejich data nesplňují určité kvalitativní
+    standardy, a zlepšit je, aby byl na data spoleh a dalo se z nich
+    dlouhodobě vytěžit maximum hodnoty.</p>
+
+    <nav>
+      <ul>
+        <li><%= link_to('Úrovně certifikace', badge_levels_page_path) %></li>
+        <li><%= link_to('Požadavky na jednotlivé úrovně', what_you_need_page_path) %></li>
+      </ul>
+    </nav>
+
+    <p>Cílem je certifikovat všechna otevřená data, aby z nich každý mohl
+    vytěžit maximum jejich hodnoty. Pouhé zveřejnění dat k tomu nestačí – data
+    musí být spolehlivá, přístupná a snadno dohledatelná, a jejich vydavatel by
+    měl uživatelům nabídnout odpovídající podporu. Certifikát otevřených dat je
+    univerzálně platnou značkou zaručující transparentnost, kvalitu a
+    důvěru.</p>
+
+    <div class="">
+      <p>Certifikát můžete získat dvěma způsoby:</p>
+
+      <h2>Hromadná certifikace</h2>
+      <p>Pokud máte datové sady popsané v nějakém katalogu (například
+      <%= link_to 'CKAN', 'http://ckan.org/' %>) nebo je máte označkované
+      pomocí <%= link_to 'DCAT', 'http://www.w3.org/TR/vocab-dcat/' %>,
+      můžeme vám aspoň část certifikátů vygenerovat automaticky.</p>
+
+      <p><%= link_to('Kontaktujte nás, prosím', contact_page_path, class: 'btn') %></p>
+
+      <h2>Certifikace jednotlivých datových sad</h2>
+      <p>Pokud chcete certifikovat jednu datovou sadu, můžete hned začít vyplňovat
+      certifikační dotazník:</p>
+      <p><%= new_certificate(class: 'btn') %></p>
+    </div>
+
+    <div class="benefits-section">
+      <h2>Výhody pro vydavatele dat</h2>
+
+      <dl>
+        <dt>Nezávislá pečeť kvality</dt>
+        <dd>Certifikát můžete vystavit na svém webu a dát tím najevo, že vám na
+        kvalitních otevřených datech opravdu záleží.</dd>
+
+        <dt>Seznam ověřených, uznávaných postupů</dt>
+        <dd>Během certifikace s vámi projdeme váš současný proces publikování
+        dat a porovnáme ho s globálně ověřenými a uznávanými standardy.</dd>
+
+        <dt>Seznam potenciálních zlepšení</dt>
+        <dd>Certifikace vám poskytne přehledný seznam toho, co byste mohli zlepšit,
+        abyste se dostali na vyšší úroveň.</dd>
+
+        <dt>Zapojení uživatelů</dt>
+        <dd>Díky certifikátu otevřených dat dostanou uživatelé vašich dat informace,
+        které potřebují, mají-li se na data spolehnout.</dd>
+      </dl>
+    </div>
+
+    <div class="benefits-section">
+      <h2>Výhody pro uživatele dat</h2>
+
+      <dl>
+        <dt>Záruka spolehlivosti</dt>
+        <dd>Během certifikace se ptáme na klíčové otázky ohledně autorských práv,
+        dlouhodobé podpory nebo frekvence aktualizace; podporujeme podrobnou
+        dokumentaci.</dd>
+
+        <dt>Ověřené procesy a postupy</dt>
+        <dd>Pokud chce vydavatel datové sady dosáhnout na vyšší úroveň certifikace,
+        musí používat osvědčené postupy a investovat do datové sady další úsilí,
+        díky kterému se pak uživatelé mohou na data spoléhat v delším horizontu.</dd>
+
+        <dt>Nezávislé posouzení</dt>
+        <dd>Certifikát otevřených dat nevyžaduje publikování dat prostřednictvím
+        nějaké konkrétní platformy nebo formátu. Sebrali jsme nejlepší ověřené postupy
+        napříč celým oborem tak, aby certifikovaná data nabízela všechny informace
+        potřebné pro jejich dlouhodobé efektivní využití.</dd>
+      </dl>
+    </div>
+
+    <h2>O Fondu Otakara Motejla</h2>
+
+    <p>Certifikát otevřených dat vznikl v dílně britské organize Open Data
+    Institute (ODI), o jeho lokalizaci do českého jazykového i právního prostředí
+    se stará Fond Otakara Motejla.</p>
+
+    <p>Fond Otakara Motejla přispívá k přeměně veřejné správy na efektivní a
+    transparentní službu občanům. Financuje významné nevládní organizace (např.
+    projekt Rekonstrukce státu) i malé lokální občanské iniciativy. Mezi jeho
+    nejvýznamnější aktivity patří prosazování otevřených dat veřejné správy.
+    Fond Otakara Motejla založila a spravuje Nadace Open Society Fund Praha a
+    přispívají do něj soukromí dárci a firmy.</p>
+
+    <p>Fond pomáhá úřadům při otevírání dat a podporuje jejich další využití ve
+    formě občansky či byznysově prospěšných aplikací. Společně s odborníky z
+    Vysoké školy ekonomické v Praze a Matematicko-fyzikální fakulty UK založil
+    Fond v roce 2013 <a
+    href="http://www.otevrenadata.cz/o-nas/forum-pro-otevrena-data/"> Fórum pro
+    otevřená data</a>. Jedná se o expertní program, který poskytuje služby
+    obcím, institucím a dalším subjektům, propaguje otevřená data ve veřejné
+    správě a koordinuje odborníky v oblasti otevřených dat.</p>
+
+    <p>Fond Otakara Motejla také pořádá soutěž <a
+    href="http://www.otevrenadata.cz/soutez/"> Společně otevíráme data</a>,
+    která ukazuje praktické využití otevřených dat v dopravě, zdravotnictví a
+    dalších oborech. Provozuje <a href="http://www.nasstat.cz/">NášStát.cz</a>,
+    rozcestník aplikací a webových stránek, které umožňují kontrolovat práci
+    politiků a úředníků, zlepšovat naše okolí a aktivně se podílet na veřejném
+    životě.</p>
+
+    <p>Ve spolupráci s Institutem pro plánování a rozvoj hl.m. Prahy a s dalšími
+    partnery pořádá <a href="http://praguehacks.cz/">hackathony nad otevřenými
+    daty</a>. V roce 2013 Fond vydal příručku <a
+    href="http://www.otevrenadata.cz/prirucka-jak-otevirat-data/">Jak otevírat
+    data</a>, prvního komplexního průvodce publikováním otevřených dat v
+    češtině.</p>
+
+    <hr class="supporter-divider"/>
+    <div class="supporter">
+      <%= image_tag "3rd-party/open-data-monitor-logo-100x100.png" %>
+      <div class="caption">Vývoj této aplikace byl zčásti podporován z projektu
+      OpenDataMonitor, který byl spolufinancován sedmým rámcovým programem (RP7)
+      Evropské komise.</div>
+    </div>
+    <div class="supporter">
+      <%= image_tag "3rd-party/british-embassy.png" %>
+      <div class="caption">Lokalizace do češtiny proběhla za finanční podpory
+      Britského velvyslanectví v Praze.</div>
+    </div>
+  </div>
+</div>

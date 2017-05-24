@@ -161,9 +161,9 @@
             </question>
          </if>
          <if test="this.releaseType() === 'series'">
-            <question id="frequentChanges" display="Frekvence změn">
+            <question id="frequentChanges" display="Často aktualizovaná data">
                <label>Mění se data aspoň jednou denně?</label>
-               <yesno required="pilot" yes="data se mění aspoň jednou denně"/>
+               <yesno required="pilot" yes="mění se aspoň jednou denně" no="ne, data se nemění denně"/>
                <help>Řekněte uživatelům, jestli se data běžně mění ze dne na den. Rychle se měnící data také rychle zastarávají, takže jejich uživatelé potřebují vědět, jestli je dostatečně často aktualizujete.</help>
             </question>
             <if test="this.frequentChanges() === 'true'">
@@ -311,9 +311,9 @@
       <group id="guarantees">
          <label>Garance</label>
          <help>jaká je očekávaná dostupnost dat?</help>
-         <question id="backups" display="Zálohování dat">
+         <question id="backups" display="Offsite zálohy">
             <label>Děláte offsite zálohy?</label>
-            <yesno yes="data jsou zálohována offsite"/>
+            <yesno yes="data jsou zálohována offsite" no="nejsou"/>
             <help>Pravidelná záloha v oddělené lokalitě zaručuje, že o data nepřijdete v případě nějaké nehody.</help>
             <requirement level="standard">
                <strong>Dělejte offsite zálohy svých dat</strong>, abyste o ně v případě nehody nepřišli.</requirement>
@@ -635,9 +635,9 @@
                </radioset>
             </question>
          </if>
-         <question id="identifiers" display="Identifikátory objektů">
+         <question id="identifiers" display="Standardní identifikátory objektů">
             <label>Používáte v datech standardní identifikátory?</label>
-            <yesno yes="standardizované (GUID, URL, …)"/>
+            <yesno yes="ano: GUID, URL a podobně" no="ne"/>
             <help>Pokud se data z různých zdrojů odkazují na objekty (například školy, obce, silnice nebo knihy) pomocí stejného standardizovaného identifikátoru (například GUID, DOI, URL nebo ISBN), dají se snadno kombinovat.</help>
             <requirement level="standard">
                <strong>Snažte se v datech používat standardní identifikátory</strong>, aby se vaše data dala snadno kombinovat s daty z jiných zdrojů.</requirement>
@@ -646,7 +646,7 @@
             <question id="resolvingIds" display="Navigace pomocí identifikátorů">
                <label>Dají se podle identifikátorů objektů ve vašich datech dohledat další informace?</label>
                <radioset>
-                  <option value="false" display="">
+                  <option value="false" display="nepodporována">
                      <label>nepodporováno</label>
                   </option>
                   <option value="service" display="prostřednictvím služby">
@@ -699,7 +699,7 @@
          <help>do jaké míry mohou uživatelé vašim datům důvěřovat</help>
          <question id="provenance" display="Informace o původu dat">
             <label>Publikujete strojově čitelná metadata o původu dat?</label>
-            <yesno yes="strojově čitelné"/>
+            <yesno yes="strojově čitelné" no="nejsou strojově čitelné"/>
             <help>Je dobré zveřejnit, kde jste k datům přišli a jak jste je zpracovávali. Uživatelé pak mohou vašim datům víc věřit, protože vědí, co jste s nimi dělali.</help>
             <requirement level="exemplar">
                <strong>Měli byste zveřejnit strojově čitelný záznam o původu a zpracování dat</strong>, aby uživatelé věděli, co jste s daty dělali.</requirement>

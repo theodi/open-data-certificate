@@ -85,6 +85,33 @@ describe ResponseSet do
     ResponseSet.find(new_set.id).responses.should have(1).items
   end
 
+  describe '#progress' do
+    let!(:requirement) { FactoryGirl.create(:requirement, reference_identifier: 'basic_1') }
+    let!(:question) { FactoryGirl.create(:question, reference_identifier: 'testDataTitle', survey_section: requirement.survey_section) }
+    let!(:answer) { FactoryGirl.create(:answer, question: question, corresponding_requirements: ['basic_1']) }
+    let!(:response_set) { FactoryGirl.create(:response_set, survey: requirement.survey_section.survey) }
+    let!(:response) { FactoryGirl.create(:response, response_set: response_set, string_value: 'my answer', question: question, answer: answer) }
+
+    let!(:dependency) { FactoryGirl.create(:dependency, rule: "A", question_id: requirement.id) }
+    let!(:condition) { FactoryGirl.create(:dependency_condition, rule_key: "A", question_id: question.id, operator: "!=", answer_id: answer.id, dependency_id: dependency.id) }
+
+    let(:progress_hash) { response_set.progress }
+    let(:expected_result) do
+      {
+        "attained" => "exemplar",
+        "basic" => 100,
+        "pilot" => 100,
+        "standard" => 100,
+        "exemplar" => 100
+      }
+    end
+
+    it 'returns the expected result' do
+      requirement.survey_section.survey.reload
+      expect(progress_hash).to eql(expected_result)
+    end
+  end
+
   describe '#update_from_ui_hash' do
     let(:ui_hash) { {} }
     let(:api_id)  { 'ABCDEF-1234-567890' }
@@ -366,7 +393,7 @@ describe ResponseSet, "with mandatory questions" do
   end
   def generate_responses(count, mandatory = nil, responded = nil)
     count.times do |i|
-      q = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+      q = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
       a = FactoryGirl.create(:answer, :question => q, :response_class => "answer")
       if responded == "responded"
         @response_set.responses << FactoryGirl.create(:response, :question => q, :answer => a)
@@ -390,8 +417,8 @@ describe ResponseSet, "with mandatory questions" do
   end
   it "should ignore labels and images" do
     generate_responses(3, "mandatory", "responded")
-    FactoryGirl.create(:question, :survey_section => @section, :display_type => "label", :is_mandatory => true)
-    FactoryGirl.create(:question, :survey_section => @section, :display_type => "image", :is_mandatory => true)
+    FactoryGirl.create(:question, :survey_section => @section, :display_type => "label", :required => 'required')
+    FactoryGirl.create(:question, :survey_section => @section, :display_type => "image", :required => 'required')
     @response_set.mandatory_questions_complete?.should be_true
     @response_set.progress_hash.should == {:questions => 5, :triggered => 5, :triggered_mandatory => 5, :triggered_mandatory_completed => 5}
   end
@@ -403,11 +430,11 @@ describe ResponseSet, "with mandatory, dependent questions" do
     @response_set = FactoryGirl.create(:response_set, :survey => @survey)
   end
   def generate_responses(count, mandatory = nil, dependent = nil, triggered = nil)
-    dq = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+    dq = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
     da = FactoryGirl.create(:answer, :question => dq, :response_class => "answer")
     dx = FactoryGirl.create(:answer, :question => dq, :response_class => "answer")
     count.times do |i|
-      q = FactoryGirl.create(:question, :survey_section => @section, :is_mandatory => (mandatory == "mandatory"))
+      q = FactoryGirl.create(:question, :survey_section => @section, :required => (mandatory == "mandatory" ? "required" : nil))
       a = FactoryGirl.create(:answer, :question => q, :response_class => "answer")
       if dependent == "dependent"
         d = FactoryGirl.create(:dependency, :question => q)

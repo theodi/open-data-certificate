@@ -1,0 +1,13 @@
+cs:
+  activerecord:
+    attributes:
+      user:
+        name: Jméno
+        email: E-mail
+        password: Heslo
+        organization: Organizace
+        default_jurisdiction: Výchozí jurisdikce
+        preferred_locale: Jazykové prostředí
+        password_confirmation: Ještě jednou heslo pro potvrzení
+        current_password: Aktuální heslo
+        authentication_token: Autentizační token

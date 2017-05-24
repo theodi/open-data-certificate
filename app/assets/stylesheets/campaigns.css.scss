@@ -25,3 +25,17 @@
     min-width: 300px !important;
   }
 }
+
+
+input.subset-selection {
+  width:312px;
+  border-radius: 0px 5px 5px 0px;
+  -moz-border-radius: 0px 5px 5px 0px;
+  -webkit-border-radius: 0px 5px 5px 0px;
+  text-align:center;
+  cursor: default;
+}
+
+input.subset-selection:hover { 
+  text-decoration: line-through;
+}

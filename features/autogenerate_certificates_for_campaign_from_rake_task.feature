@@ -37,10 +37,10 @@ Feature: Generate certificates from campaigns via a rake task
     And I run a campaign called "brian" to create certificates
     And the campaign is created
     When I visit the campaign page for "brian"
-    Then I should see "Currently running"
+    Then I should see "Campaign currently in progress"
     And I should see "10 certificates pending"
     When the certificates are created
     When I visit the campaign page for "brian"
-    Then I should not see "Currently running"
+    Then I should not see "Campaign currently in progress"
     And I should see "0 certificates pending"
 

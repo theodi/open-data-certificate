@@ -18,9 +18,9 @@ GIT
 
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 1f8ff3598291642b7f832d0875fe33e486829bb2
+  revision: 0597206bc522a03110f8fe89be111589dcecf6b6
   specs:
-    data_kitten (1.3.1)
+    data_kitten (1.3.3)
       datapackage
       git
       json
@@ -170,7 +170,7 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -199,7 +199,7 @@ GEM
       actionpack (~> 3.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    git (1.2.9.1)
+    git (1.3.0)
     google_drive (0.3.9)
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
       oauth (>= 0.3.6)
@@ -235,8 +235,8 @@ GEM
     json (1.8.3)
     json-ld (1.1.9)
       rdf (~> 1.1, >= 1.1.7)
-    json-schema (2.5.1)
-      addressable (~> 2.3.7)
+    json-schema (2.6.1)
+      addressable (~> 2.3.8)
     json_spec (1.0.3)
       multi_json (~> 1.0)
       rspec (~> 2.0)
@@ -256,7 +256,7 @@ GEM
       less-rails (~> 2.3.1)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.13)
     link_header (0.0.8)
     linkeddata (1.1.11)
       equivalent-xml (~> 0.5)
@@ -439,7 +439,7 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    ref (1.0.5)
+    ref (2.0.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -461,10 +461,6 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-prof (0.14.2)
-    rubyXL (3.3.3)
-      nokogiri (>= 1.4.4)
-      rubyzip (>= 1.1.6)
-    rubyzip (1.1.6)
     safe_yaml (1.0.3)
     sass (3.2.14)
     sass-rails (3.2.6)
@@ -575,6 +571,7 @@ DEPENDENCIES
   devise (= 3.0.3)
   domainatrix
   dotenv-rails
+  eventmachine (= 1.0.4)
   factory_girl_rails (~> 4.0)
   fastercsv (~> 1.5.4)
   fog
@@ -615,7 +612,6 @@ DEPENDENCIES
   redcarpet
   rspec-rails (~> 2.14.2)
   ruby-prof
-  rubyXL
   sass
   sass-rails (~> 3.2.3)
   shoulda
@@ -638,4 +634,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

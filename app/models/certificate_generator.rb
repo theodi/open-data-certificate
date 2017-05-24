@@ -40,7 +40,7 @@ class CertificateGenerator < ActiveRecord::Base
     schema = {}
     survey.questions.each do |q|
       next if q.display_type == 'label'
-      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[q.type], required: q.is_mandatory?}
+      schema[q.reference_identifier] = question = {question: q.text, type: TYPES[q.type], required: q.mandatory?}
 
       if q.type == :one || q.type == :any
         question['options'] = {}
@@ -51,6 +51,20 @@ class CertificateGenerator < ActiveRecord::Base
     end
 
     {schema: schema}
+  end
+
+  def self.bulk_update(generator_collection, jurisdiction, user)
+    incomplete = 0
+    queued = 0
+    generator_collection.each do |generator|
+      if generator.completed?
+        queued+=1
+        CertificateGeneratorUpdateWorker.perform_async(generator.id, jurisdiction, user.id)
+      else
+        incomplete+=1
+      end
+    end
+    return { skipped: incomplete, queued: queued }
   end
 
   # attempt to build a certificate from the request
@@ -103,12 +117,19 @@ class CertificateGenerator < ActiveRecord::Base
     user = determine_user(response_set, create_user)
     response_set.assign_to_user!(user)
 
+    if certification_campaign and certification_campaign.template_dataset
+      rs = ResponseSet.where(dataset_id: certification_campaign.template_dataset_id).latest
+      template_responses = compare_responses(rs)
+      adopt_responses(template_responses)
+    end
+
     mandatory_complete = response_set.all_mandatory_questions_complete?
     urls_resolve = response_set.all_urls_resolve?
 
     if mandatory_complete && urls_resolve
       response_set.complete!
       response_set.publish!
+      certificate.update_from_response_set
     else
       response_set.update_missing_responses!
     end
@@ -193,6 +214,25 @@ class CertificateGenerator < ActiveRecord::Base
   # the dataset parameters from the request, defaults to {}
   def request=(value)
     write_attribute(:request, value.with_indifferent_access)
+  end
+
+  def compare_responses(comparison_response_set)
+    answered_questions = response_set.responses.select(:question_id).collect {|r| r.question_id }
+    comparison_questions = comparison_response_set.responses.select(:question_id).collect {|r| r.question_id }
+    unanswered = comparison_questions - answered_questions
+    result = comparison_response_set.responses.where(question_id: unanswered)
+    return result
+  end
+
+  def adopt_responses(responses)
+    adopted = []
+    responses.each do |response|
+      r = response.dup
+      r.response_set = response_set
+      r.api_id=nil
+      adopted << r if r.save
+    end
+    adopted
   end
 
   private

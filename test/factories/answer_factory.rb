@@ -18,7 +18,6 @@ FactoryGirl.define do
     a.display_type "default"
     # a.display_length            {}
     # a.custom_class              {}
-    # a.custom_renderer           {}
   end
 
 end

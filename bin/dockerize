@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ ! -e .env ]
+then
+  bash docker/env.template > .env
+fi
+
+rm -f tmp/pids/*
+docker-compose up -d mysql redis
+
+if [ ! -e config/database.yml ]
+then
+  cp docker/database.yml.example config/database.yml
+  first_run="yes"
+fi
+
+docker-compose build
+
+if [ "$first_run" == "yes" ]
+then
+  docker-compose run --rm web bundle exec rake db:create db:schema:load db:seed
+fi
+
+docker-compose up -d web sidekiq delayed_job
+
+bin/open

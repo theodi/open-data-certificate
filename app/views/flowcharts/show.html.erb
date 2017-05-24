@@ -39,6 +39,10 @@
   </div>
 </div>
 
+<% content_for :meta do %>
+  <%= javascript_include_tag "mermaid.min" %>
+  <%= stylesheet_link_tag "mermaid" %>
+<% end %>
 <% content_for :foot_scripts do %>
   mermaid.initialize({startOnLoad:true});
 <% end %>

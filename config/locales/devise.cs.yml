@@ -1,0 +1,45 @@
+cs:
+  devise:
+    confirmations:
+      confirmed: "Váš účet byl úspěšně potvrzen, jste přihlášeni."
+      send_instructions: "Během několika minut byste měli dostat e-mail s instrukcemi, jak potvrdit svůj nový účet."
+      send_paranoid_instructions: "Pokud máme váš e-mail v databázi, do několika minut by vám měl přijít e-mail s instrukcemi, jak potvrdit váš účet."
+    failure:
+      already_authenticated: "Už jste přihlášeni."
+      inactive: "Váš účet ještě nebyl aktivován."
+      invalid: "Chybný e-mail nebo heslo."
+      invalid_token: "Chybný autentizační token."
+      locked: "Váš účet byl zablokován."
+      not_found_in_database: "Chybný e-mail nebo heslo."
+      timeout: "Vaše přihlášení vypršelo, přihlašte se prosím znovu."
+      unauthenticated: "Před pokračováním se musíte přihlásit nebo zaregistrovat."
+      unconfirmed: "Před pokračováním musíte potvrdit svůj účet."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrukce pro potvrzení účtu"
+      reset_password_instructions:
+        subject: "Instrukce pro reset hesla"
+        change_my_password: Změnit mé heslo
+      unlock_instructions:
+        subject: "Instrukce pro obnovení blokovaného účtu"
+    passwords:
+      no_token: "Na tuto stránku byste se neměli dostat jinak než přes odkaz v e-mailu, který jsme vám posílali kvůli resetu hesla. Pokud to je váš případ, zkontrolujte prosím, jestli jste toto URL přepsali nebo zkopírovali správně."
+      send_instructions: "Během několika minut by vám měl přijít e-mail s instrukcemi, jak resetovat heslo."
+      send_paranoid_instructions: "Pokud tento e-mail máme v databázi, během několika minut by vám měl dorazit e-mail s dalšími instrukcemi."
+      updated: "Heslo úspěšně změněno. Jste přihlášeni."
+      updated_not_active: "Heslo úspěšně změněno."
+    registrations:
+      destroyed: "Sbohem a šáteček! Účet byl úspěšně zrušen. Snad se brzy zase uvidíme."
+      signed_up: "Vítejte! Přihlášení proběhlo úspěšně."
+      signed_up_but_inactive: "Vytvoření účtu proběhlo úspěšně, ale přihlásit jsme vás ještě nemohli, protože účet zatím není aktivní."
+      signed_up_but_locked: "Vytvoření účtu proběhlo úspěšně, ale přihlásit jsme vás ještě nemohli, protože váš účet je blokovaný."
+      signed_up_but_unconfirmed: "Na vaši e-mailovou adresu jsme poslali e-mail s potvrzovacím odkazem. Otevřením tohoto odkazu účet aktivujete."
+      update_needs_confirmation: "Změna účtu proběhla úspěšně, ale ještě si potřebujeme ověřit vaši novou e-mailovou adresu. Zkontrolujte si prosím poštu, klepnutím na odkaz v potvrzovacím e-mailu tuto novou adresu potvrdíte."
+      updated: "Změna účtu proběhla úspěšně."
+    sessions:
+      signed_in: "Přihlášení proběhlo úspěšně."
+      signed_out: "Odhlášení proběhlo úspěšně."
+    unlocks:
+      send_instructions: "Během několika minut by vám měl přijít e-mail s instrukcemi, jak účet odblokovat."
+      send_paranoid_instructions: "Pokud váš účet existuje, do několika minut by vám měl přijít e-mail s instrukcemi, jak účet odblokovat."
+      unlocked: "Účet úspěšně odblokován. Můžete se přihlásit."

@@ -1,0 +1,56 @@
+ja:
+  surveyor:
+    survey_sections:
+      general:
+        text: "総合案内"
+      practical:
+        text: "実用的な情報"
+        help_text: "検索性、正確性、質、保障"
+      technical:
+        text: "技術的な情報"
+        help_text: "位置、フォーマット、信頼"
+      social:
+        text: "ソーシャル情報"
+        help_text: "ドキュメント、サポート、サービス"
+    questions:
+      dataTitle:
+        text: "このデータの名前をおしえてください。"
+        help_text: "似た名前のオープンデータが多数ありますので、この小さいスペースでできるだけ特徴を書いてください。"
+        answers:
+          a_1:
+            placeholder: "データのタイトル"
+      documentationUrl:
+        text: "どこで解説されていますか？"
+        text_as_statement: "このデータの解説はこちら"
+        help_text: "あなたのオープンデータのコンテンツの詳細がわかるサイトURLをおしえてください。data.gov.ukのような大規模サイトのなかの特定ページのURLも記載可能です。"
+        answers:
+          a_1:
+            placeholder: "ドキュメンテーションURL"
+      publisher:
+        text: "このデータの発行者は誰ですか？"
+        text_as_statement: "このデータの発行者はこちら"
+        help_text: "このデータを発行する機関名をおしえてください。（代理の場合を除いて、あなたの機関名をお書きください）"
+        answers:
+          a_1:
+            placeholder: "データ発行者"
+      publisherUrl:
+        text: "このデータはどのウェブサイトで発行されていますか？"
+        text_as_statement: "このデータはこちらで発行されています。"
+        help_text: "ウェブサイトにURLを持たせてください。これによって同じ機関から発行されたものを（機関名を間違って登録したとしても）システム的にまとめることができます。"
+        answers:
+          a_1:
+            placeholder: "発行者のURL"
+      releaseType:
+        text: "このリリースはどんな種類のものですか？"
+        answers:
+          oneoff:
+            text: "ひとつのデータセットの一回目のリリース"
+            help_text: "これは単独のファイルで、将来、似たようなファイルを発行する予定のないものです。"
+          collection:
+            text: "関連データベースのセットの一回目のリリース"
+            help_text: "同じデータに関する、関連するファイルのコレクションで、近い将来に似たコレクションを発行する予定がないもの"
+          series:
+            text: "データセットが関連するシリーズの、継続的なリリース"
+          service:
+            text: "オープンデータにアクセスするAPIもしくはサービス"
+            help_text: "クエリーのあるインターフェースでプログラマにデータを公開する、動的なウェブサービス"

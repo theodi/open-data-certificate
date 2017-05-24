@@ -22,6 +22,8 @@ class Certificate < ActiveRecord::Base
   scope :current, -> { where("expires_at IS NULL OR expires_at > ?", Time.current) }
   scope :without_expiry, where(expires_at: nil)
 
+  validates :attained_level, inclusion: {in: Survey::REQUIREMENT_LEVELS}
+
   class << self
     def type_search(type, term, query)
       case type

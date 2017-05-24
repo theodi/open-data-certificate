@@ -83,10 +83,10 @@ class CertificatesControllerTest < ActionController::TestCase
 
   test "Requesting a JSON version of a certificate returns the correct level" do
     levels = {
-        "basic" => "raw",
-        "pilot" => "pilot",
-        "standard" => "standard",
-        "exemplar" => "expert"
+        "basic" => "bronze",
+        "pilot" => "silver",
+        "standard" => "gold",
+        "exemplar" => "platinum"
       }
 
     levels.each do |level, actual|
@@ -138,7 +138,7 @@ class CertificatesControllerTest < ActionController::TestCase
     cert = FactoryGirl.create(:published_certificate_with_dataset)
     get :badge, {locale: :en, dataset_id: cert.dataset.id, id: cert.id, format: "png"}
 
-    assert_equal File.read(File.join(Rails.root, 'app/assets/images/badges/raw_level_badge.png')), response.body
+    assert_equal File.read(File.join(Rails.root, 'app/assets/images/badges/basic_level_badge.png')), response.body
   end
 
   test "mark certificate as valid" do
