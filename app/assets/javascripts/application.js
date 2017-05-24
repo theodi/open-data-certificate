@@ -15,7 +15,6 @@
 //= require surveyor_all
 //= require tracking
 
-
 /* global $, alert, Hogan */
 
 // whether or not the homepage map should be loaded
