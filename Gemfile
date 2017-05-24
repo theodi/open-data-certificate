@@ -2,7 +2,8 @@ source "https://rubygems.org"
 
 ruby "2.1.8"
 
-gem 'rails', '~> 3.2.21'
+gem 'rails', '3.2.21'
+gem 'rake', '< 11.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,7 +36,7 @@ group :test do
   gem 'shoulda'
   gem 'mocha', require: false
   gem 'test-unit'
-  gem 'csvlint', github: 'theodi/csvlint.rb'
+  gem 'csvlint', git: 'https://github.com/theodi/csvlint.rb.git', ref: '3dc689f4625c8edd4f7b725d1d420fdd67a67df9'
   gem 'vcr'
   gem 'webmock'
   gem 'shoulda-context'
@@ -51,7 +52,7 @@ end
 group :development do
   gem 'guard', '~> 1.8.3'
   gem 'guard-test'
-  # gem 'spring', github: 'jonleighton/spring'
+  # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
   gem 'rails-footnotes', '>= 3.7.9'
@@ -77,13 +78,11 @@ group :production do
   gem 'rails_12factor'
 end
 
-group :surveyor do
-  gem 'fastercsv', '~> 1.5.4'
-  gem 'formtastic', '~> 2.1.0'
-  gem 'uuidtools', '~> 2.1'
-  gem 'mustache', '0.99.4'
-  gem 'rabl', '~>0.6.13'
-end
+gem 'uuidtools', '~> 2.1'
+gem 'fastercsv', '~> 1.5.4'
+gem 'formtastic', '~> 2.1.0'
+gem 'mustache', '0.99.4'
+gem 'rabl', '~>0.6.13'
 
 gem 'jquery-rails'
 
@@ -121,15 +120,15 @@ gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
 gem 'httparty'
-gem 'data_kitten', github: 'theodi/data_kitten' #, path: '../data_kitten'
+gem 'data_kitten', git: 'https://github.com/theodi/data_kitten.git', ref: '0597206bc522a03110f8fe89be111589dcecf6b6'
 gem 'delayed_job_active_record'
 gem 'linkeddata'
 gem 'rack-linkeddata'
 gem 'jbuilder'
 gem 'rack-cors', require: 'rack/cors'
-gem 'alternate_rails', :github => 'theodi/alternate-rails'
+gem 'alternate_rails', git: 'https://github.com/theodi/alternate-rails.git', ref: "188889d66c5df1d7d13f7c6e53e8088e3503dea1"
 gem 'fog'
-gem 'juvia_rails', github: 'theodi/juvia_rails'
+gem 'juvia_rails', git: 'https://github.com/theodi/juvia_rails.git', ref: '94f982aa8188a18bc0f37c16218c85e890d25294'
 gem 'domainatrix'
 # newrelic appears to be adding significant performance problems
 #gem 'newrelic_rpm'

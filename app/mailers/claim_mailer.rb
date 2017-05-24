@@ -1,6 +1,4 @@
-class ClaimMailer < ActionMailer::Base
-
-  default from: Devise.mailer_sender
+class ClaimMailer < ApplicationMailer
 
   def notify(claim)
     @claim = claim
