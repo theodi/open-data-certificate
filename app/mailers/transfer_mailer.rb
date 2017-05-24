@@ -1,6 +1,4 @@
-class TransferMailer < ActionMailer::Base
-
-  default from: Devise.mailer_sender
+class TransferMailer < ApplicationMailer
 
   def notify(transfer)
     @transfer = transfer
