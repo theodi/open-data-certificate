@@ -1,3 +1,7 @@
+Given(/^I visit the home page$/) do
+  visit '/'
+end
+
 Given(/^I visit the edit account page$/) do
   visit edit_user_registration_path(@user)
 end
@@ -15,12 +19,29 @@ When(/^I do not agree to the terms$/) do
   first('#user_agreed_to_terms').set(false)
 end
 
+When(/^I enter my email address$/) do
+  @email = "email@example.com"
+  first('#user_email').set(@email)
+end
+
+When(/^I confirm my password$/) do
+  first('#user_password_confirmation').set('password')
+end
+
 When(/^I enter my password$/) do
+  first('#user_password').set('password')
+end
+
+When(/^I enter my current password$/) do
   first('#user_current_password').set('password')
 end
 
 When(/^I click save$/) do
   click_on 'Update my profile'
+end
+
+When(/^I click sign up$/) do
+  first('#register input[type=submit]').click
 end
 
 Then(/^there is an error message about agreeing to terms$/) do
@@ -37,4 +58,9 @@ end
 
 Then(/^my changes are not saved$/) do
   refute_equal @organization, @user.reload.organization
+end
+
+Then(/^my account should be created$/) do
+  assert_equal User.count, 1
+  assert_equal User.first.email, @email
 end
