@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   validates :agreed_to_terms, acceptance: {accept: true}, allow_nil: true
   validates :preferred_locale, inclusion: {in: I18n.available_locales.map(&:to_s)}
 
+  # Spam filtering only
+  attr_accessor :inhuman
+  validates :inhuman, inclusion: { :in => [false] }, allow_nil: true
+
   def self.engaged_users
     User.where("confirmed_at IS NOT NULL").select { |u| !u.datasets.blank? }
   end
