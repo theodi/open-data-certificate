@@ -1,6 +1,4 @@
-class CertificateMailer < ActionMailer::Base
-
-  default from: Devise.mailer_sender
+class CertificateMailer < ApplicationMailer
 
   def report(certificate, reason, reporter)
     @certificate = certificate
