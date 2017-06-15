@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :received_claims, class_name: 'Claim', foreign_key: 'user_id'
   has_many :certification_campaigns
 
-  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms, :preferred_locale
+  attr_accessible :name, :short_name, :email, :password, :password_confirmation, :default_jurisdiction, :organization, :agreed_to_terms, :preferred_locale, :inhuman
 
   before_save :ensure_authentication_token
 
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   # Spam filtering only
   attr_accessor :inhuman
-  validates :inhuman, inclusion: { :in => [false] }, allow_nil: true
+  validates :inhuman, inclusion: { :in => ["0"] }, allow_nil: true
 
   def self.engaged_users
     User.where("confirmed_at IS NOT NULL").select { |u| !u.datasets.blank? }

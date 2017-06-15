@@ -52,6 +52,14 @@ Then(/^there is no error message$/) do
   assert_no_text('Errors occurred')
 end
 
+When(/^I tick the inhuman box$/) do
+  first('#user_inhuman', visible: false).set(true)
+end
+
+Then(/^there is an error message about being human$/) do
+  assert_text('Errors occurred')
+end
+
 Then(/^my changes are saved$/) do
   assert_equal @organization, @user.reload.organization
 end
@@ -60,7 +68,11 @@ Then(/^my changes are not saved$/) do
   refute_equal @organization, @user.reload.organization
 end
 
-Then(/^my account should be created$/) do
-  assert_equal User.count, 1
-  assert_equal User.first.email, @email
+Then(/^an account should be created$/) do
+  assert_equal 1, User.count
+  assert_equal @email, User.first.email
+end
+
+Then(/^an account should not be created$/) do
+  assert_equal 0, User.count
 end
