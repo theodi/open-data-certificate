@@ -22,7 +22,7 @@ group :assets do
   gem 'less-rails-bootstrap', '~> 2.3.3'
   gem 'twitter-bootstrap-rails-confirm'
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 3.2.0'
 end
 
 group :test do
