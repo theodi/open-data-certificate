@@ -42,7 +42,7 @@ group :test do
   gem 'launchy'
 
   # From surveyor
-  gem 'json_spec', '~> 1.0.3'
+  gem 'json_spec', '~> 1.1.5'
 end
 
 group :development do
