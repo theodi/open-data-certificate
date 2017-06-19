@@ -110,7 +110,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
+gem 'surveyor', git: 'https://github.com/theodi/odc-surveyor.git'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'

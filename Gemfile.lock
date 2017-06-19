@@ -40,8 +40,9 @@ GIT
     juvia_rails (0.0.1)
       rails (~> 3.2.1)
 
-PATH
-  remote: vendor/gems/surveyor-1.4.0
+GIT
+  remote: https://github.com/theodi/odc-surveyor.git
+  revision: 4ceb1a697134e4541842acf53f6ccff9f9f98780
   specs:
     surveyor (1.4.0)
 
