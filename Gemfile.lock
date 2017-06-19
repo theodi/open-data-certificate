@@ -534,7 +534,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails-confirm (1.0.2)
+    twitter-bootstrap-rails-confirm (1.0.6)
     tzinfo (0.3.53)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
