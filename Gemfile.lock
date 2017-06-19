@@ -252,13 +252,13 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    less (2.3.3)
-      commonjs (~> 0.2.6)
-    less-rails (2.3.3)
+    less (2.6.0)
+      commonjs (~> 0.2.7)
+    less-rails (2.6.0)
       actionpack (>= 3.1)
-      less (~> 2.3.1)
-    less-rails-bootstrap (2.3.3)
-      less-rails (~> 2.3.1)
+      less (~> 2.6.0)
+    less-rails-bootstrap (3.3.5.0)
+      less-rails (>= 2.6, <= 2.8)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     libv8 (3.16.14.19)
@@ -595,7 +595,7 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
-  less-rails-bootstrap (~> 2.3.3)
+  less-rails-bootstrap (~> 3.3.5)
   letter_opener
   linkeddata
   lograge
