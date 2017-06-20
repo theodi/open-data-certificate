@@ -314,7 +314,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mustache (0.99.4)
-    mysql2 (0.3.15)
+    mysql2 (0.4.6)
     net-http-persistent (2.9.4)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
