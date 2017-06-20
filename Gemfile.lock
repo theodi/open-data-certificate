@@ -546,7 +546,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    uuidtools (2.1.4)
+    uuidtools (2.1.5)
     validate_url (0.2.2)
       activemodel (>= 3.0.0)
       addressable
