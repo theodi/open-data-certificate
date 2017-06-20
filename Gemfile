@@ -46,7 +46,7 @@ group :test do
 end
 
 group :development do
-  gem 'guard', '~> 1.8.3'
+  gem 'guard', '~> 2.14.1'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
