@@ -225,7 +225,7 @@ GEM
       test-unit (~> 2.2)
     haml (4.0.7)
       tilt
-    high_voltage (2.1.0)
+    high_voltage (3.0.0)
     hike (1.2.3)
     hitimes (1.2.2)
     htmlentities (4.3.4)
