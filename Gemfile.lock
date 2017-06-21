@@ -316,7 +316,7 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mustache (0.99.4)
+    mustache (1.0.5)
     mysql2 (0.4.6)
     nenv (0.3.0)
     net-http-persistent (2.9.4)
@@ -612,7 +612,7 @@ DEPENDENCIES
   logstash-event
   memoist
   mocha
-  mustache (= 0.99.4)
+  mustache (= 1.0.5)
   mysql2
   parallel_tests
   pry-byebug
