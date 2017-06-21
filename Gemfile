@@ -77,7 +77,7 @@ gem 'uuidtools', '~> 2.1'
 gem 'fastercsv', '~> 1.5.4'
 gem 'formtastic', '~> 2.1.0'
 gem 'mustache', '0.99.4'
-gem 'rabl', '~>0.6.13'
+gem 'rabl', '~>0.13.1'
 
 gem 'jquery-rails'
 
