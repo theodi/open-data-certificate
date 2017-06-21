@@ -51,7 +51,7 @@ group :development do
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
-  gem 'rails-footnotes', '>= 3.7.9'
+  gem 'rails-footnotes', '>= 4.1.8'
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'

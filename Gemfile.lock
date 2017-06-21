@@ -377,8 +377,8 @@ GEM
       activesupport (= 3.2.22)
       bundler (~> 1.0)
       railties (= 3.2.22)
-    rails-footnotes (3.7.9)
-      rails (>= 3.0.0)
+    rails-footnotes (4.1.8)
+      rails (>= 3.2)
     rails-i18n (3.0.1)
       i18n (~> 0.5)
       rails (>= 3.0.0, < 4.0.0)
@@ -621,7 +621,7 @@ DEPENDENCIES
   rack-cors
   rack-linkeddata
   rails (= 3.2.22)
-  rails-footnotes (>= 3.7.9)
+  rails-footnotes (>= 4.1.8)
   rails-i18n (~> 3.0.0)
   rake (< 12.0)
   ransack
