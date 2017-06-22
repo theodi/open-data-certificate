@@ -255,7 +255,7 @@ GEM
       rspec (>= 2.0, < 4.0)
     jwt (0.1.13)
       multi_json (>= 1.5)
-    kaminari (0.15.1)
+    kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     launchy (2.4.3)
