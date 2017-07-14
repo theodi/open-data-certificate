@@ -1,3 +1,5 @@
+ruby "2.2.7"
+
 gem 'rails', '3.2.22'
 gem 'rake', '< 12.0'
 
