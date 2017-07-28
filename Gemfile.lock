@@ -183,7 +183,7 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubis (2.7.0)
-    eventmachine (1.2.3)
+    eventmachine (1.2.5)
     excon (0.57.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
@@ -730,7 +730,7 @@ DEPENDENCIES
   devise (= 3.0.3)
   domainatrix
   dotenv-rails
-  eventmachine (~> 1.2.3)
+  eventmachine (~> 1.2.5)
   factory_girl_rails (~> 4.8)
   fastercsv (~> 1.5.4)
   fog
