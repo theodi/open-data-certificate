@@ -460,7 +460,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustache (1.0.5)
-    mysql2 (0.4.8)
+    mysql2 (0.4.9)
     nenv (0.3.0)
     net-http-persistent (2.9.4)
     netrc (0.10.3)
