@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.10
+  - 2.2.7
 services:
   - redis
 bundler_args: --without development
