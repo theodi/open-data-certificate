@@ -17,7 +17,7 @@ Feature: registering a new account
     And I enter my password
     And I confirm my password
     And I agree to the terms
-    And I tick the inhuman box
+    #And I tick the inhuman box
     And I click sign up
     Then an account should not be created
     And there is an error message about being human

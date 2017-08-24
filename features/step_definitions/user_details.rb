@@ -52,10 +52,6 @@ Then(/^there is no error message$/) do
   assert_no_text('Errors occurred')
 end
 
-When(/^I tick the inhuman box$/) do
-  first('#user_inhuman', visible: false).set(true)
-end
-
 Then(/^there is an error message about being human$/) do
   assert_text('Errors occurred')
 end
