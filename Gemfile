@@ -1,3 +1,5 @@
+ruby "2.1.10"
+
 gem 'rails', '3.2.22'
 gem 'rake', '< 12.0'
 
@@ -134,4 +136,4 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'sidekiq-failures'
 gem 'rails-i18n', '~> 3.0.0'
-gem 'eventmachine', '~> 1.0.4'
+gem 'eventmachine', '~> 1.2.5'
