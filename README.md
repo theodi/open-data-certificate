@@ -38,6 +38,10 @@ CERTIFICATE_HOSTNAME="localhost:3000"
 
 # Redis server URL
 ODC_REDIS_SERVER_URL="redis://redis:6379"
+
+# reCAPTCHA Configuration
+RECAPTCHA_SITE_KEY='6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy'
+RECAPTCHA_SECRET_KEY='6Lc6BAAAAAAAAKN3DRm6VA_xxxxxxxxxxxxxxxxx'
 ```
 
 #### Optional
