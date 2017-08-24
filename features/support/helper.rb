@@ -45,7 +45,7 @@ After("@sidekiq_fake") do
 end
 
 Before("@ignore") do |scenario|
-  scenario.skip_invoke!
+  skip_this_scenario
 end
 
 VCR.configure do |c|

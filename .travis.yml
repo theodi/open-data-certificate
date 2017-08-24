@@ -38,5 +38,6 @@ env:
     - ODC_REDIS_SERVER_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
+    - RUBYOPT=W0
 git:
   depth: 10
