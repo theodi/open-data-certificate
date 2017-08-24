@@ -1,11 +1,21 @@
-gem 'rails', '3.2.21'
-gem 'rake', '< 11.0'
+source "https://rubygems.org"
+
+ruby "2.2.7"
+
+gem 'rails', '3.2.22'
+gem 'rake', '< 12.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
+
+gem 'mysql2', '~> 0.3.10' # limit to this version for Rails 3.2
+
+# For some reason this is needed in production for consoles
+gem 'test-unit'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,16 +32,15 @@ group :assets do
   gem 'less-rails-bootstrap', '~> 2.3.3'
   gem 'twitter-bootstrap-rails-confirm'
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 3.2.0'
 end
 
-group :test do
-  gem "factory_girl_rails", "~> 4.0"
+group :test, :development do
+  gem "factory_girl_rails", "~> 4.8"
   gem 'sqlite3'
   gem 'coveralls'
   gem 'shoulda'
   gem 'mocha', require: false
-  gem 'test-unit'
   gem 'csvlint', git: 'https://github.com/theodi/csvlint.rb.git', ref: '3dc689f4625c8edd4f7b725d1d420fdd67a67df9'
   gem 'vcr'
   gem 'webmock'
@@ -42,23 +51,19 @@ group :test do
   gem 'launchy'
 
   # From surveyor
-  gem 'json_spec', '~> 1.0.3'
-end
+  gem 'json_spec', '~> 1.1.5'
 
-group :development do
-  gem 'guard', '~> 1.8.3'
+  gem 'guard', '~> 2.14.1'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
-  gem 'rails-footnotes', '>= 3.7.9'
+  gem 'rails-footnotes', '>= 4.1.8'
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
-end
 
-group :test, :development do
   gem 'pry-byebug'
   gem 'pry-remote'
   gem 'rspec-rails', '~> 2.14.2'
@@ -66,18 +71,18 @@ end
 
 group :production do
   gem 'foreman'
-  gem 'mysql2'
   gem 'airbrake'
   gem 'delayed-plugins-airbrake'
   gem 'logstash-event'
   gem 'lograge'
+  gem 'rails_12factor'
 end
 
 gem 'uuidtools', '~> 2.1'
 gem 'fastercsv', '~> 1.5.4'
 gem 'formtastic', '~> 2.1.0'
-gem 'mustache', '0.99.4'
-gem 'rabl', '~>0.6.13'
+gem 'mustache', '1.0.5'
+gem 'rabl', '~>0.13.1'
 
 gem 'jquery-rails'
 
@@ -110,7 +115,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
+gem 'surveyor', git: 'https://github.com/theodi/odc-surveyor.git'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
@@ -134,4 +139,4 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'sidekiq-failures'
 gem 'rails-i18n', '~> 3.0.0'
-gem 'eventmachine', '~> 1.0.4'
+gem 'eventmachine', '~> 1.2.5'
