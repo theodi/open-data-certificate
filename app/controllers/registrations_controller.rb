@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   helper_method :campaigns, :surveys
   
-  prepend_before_action :check_captcha, only: [:create]
+  prepend_before_filter :check_captcha, only: [:create]
   
   def edit
     if params[:id].to_i == current_user.id
@@ -32,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
   def check_captcha
     unless verify_recaptcha
       self.resource = resource_class.new sign_up_params
-      resource.validate # Look for any other validation errors besides Recaptcha
+      resource.valid? # Look for any other validation errors besides Recaptcha
       respond_with_navigational(resource) { render :new }
     end 
   end
