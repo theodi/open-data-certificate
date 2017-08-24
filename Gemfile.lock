@@ -500,7 +500,7 @@ GEM
     rack (1.4.7)
     rack-cache (1.7.0)
       rack (>= 0.4)
-    rack-cors (0.4.1)
+    rack-cors (1.0.1)
     rack-linkeddata (1.1.0)
       linkeddata (>= 1.1.0)
       rack (>= 1.4)
