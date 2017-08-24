@@ -18,7 +18,7 @@ class EmbedStatTest < ActiveSupport::TestCase
   end
 
   test "sets domain to invalid if referer is not a valid url" do
-    e = EmbedStat.create(referer: "http://i_am_a_bad_url/underscores-are-invalid-in-domain-names")
+    e = EmbedStat.create(referer: "http:///empty-domain-name")
     assert_equal e.domain, "invalid-domain"
     assert_equal EmbedStat.all.count, 1
   end

@@ -1,41 +1,17 @@
 language: ruby
+sudo: false
+cache: bundler
 rvm:
-  - 2.1.10
+  - 2.2.7
 services:
   - redis
 bundler_args: --without development
 cache: bundler
 sudo: false
 before_script: cp config/database.example.yml config/database.yml && bundle exec rake db:schema:load
-after_success:
-- ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
-  curl -v -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs/tags/CURRENT"'
-- ! '[ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
-  curl -v -X POST -d ''{"ref":"refs/tags/CURRENT","sha":"''$TRAVIS_COMMIT''"}''  --header
-  "Content-Type:application/json" -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs"'
-- ! '[ "$TRAVIS_BRANCH" == "staging" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
-  curl -v -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs/tags/STAGING"'
-- ! '[ "$TRAVIS_BRANCH" == "staging" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
-  curl -v -X POST -d ''{"ref":"refs/tags/STAGING","sha":"''$TRAVIS_COMMIT''"}''  --header
-  "Content-Type:application/json" -u $GITHUB_USER:$GITHUB_PASSWORD "https://api.github.com/repos/$TRAVIS_REPO_SLUG/git/refs"'
-branches:
-  except:
-  - CURRENT
-  - STAGING
-notifications:
-  email: false
-  irc:
-    channels:
-    - irc.freenode.net#theodi
-    template:
-    - ! '%{repository} %{branch} - %{message} %{build_url}'
-    on_success: change
-    on_failure: always
 env:
   global:
-    - secure: ktiYuRyE9BN2wa65zkATI37ABnL5I/eUfV3FDnSzDKqhcN7QhqiqzGKRiPXsXRkQRloUoP9p2AZH4rhHUSkWtdtJWMlCzgkh3PHjNFHRGIwL6YfeEOiMMbRrhnwpT4uAjPAahxsUZRnc7TmsoFSRazALgK8DQ+SdN3vt5pwJZU8=
-    - secure: fFtR5aMYwdFBKDaj+2u3HsDuVAO9SUZ25sMqxp17y1RSQa0zUTEMGtXZhjVn5VTX14voYDmo0vYkqtxovXBrPfFn0jdENYum+yu38XuLmFdReLoIh1EzC/pT9xTLNkYfGZj/a+IPIlj0TPkSHOSj6vuV/aT85QSUx+gpisfnCoA=
-    - ODC_REDIS_SERVER_URL="redis://localhost:6379"
+    - REDIS_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
     - RUBYOPT=W0
