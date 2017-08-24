@@ -6,7 +6,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom", "xmlns:dc" => "http://purl.org
   xml.id "#{embed_protocol}#{request.host_with_port}#{request.path}?#{request.query_string}"
   xml.link :href => "#{embed_protocol}#{request.host_with_port}#{request.path}?#{request.query_string}", :rel => "self"
   xml.link :href => url_for(params.merge(:only_path => false, :page => 1, :protocol => embed_protocol)), :rel => "first"
-  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.num_pages, :protocol => embed_protocol)), :rel => "last"
+  xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.total_pages, :protocol => embed_protocol)), :rel => "last"
   xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page + 1, :protocol => embed_protocol)), :rel => "next" if @datasets.page(@datasets.current_page + 1).length > 0
   xml.link :href => url_for(params.merge(:only_path => false, :page => @datasets.current_page - 1, :protocol => embed_protocol)), :rel => "prev" if (@datasets.current_page - 1) >= 1
   xml.title @title
