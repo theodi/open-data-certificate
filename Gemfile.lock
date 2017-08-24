@@ -123,7 +123,7 @@ GEM
       simplecov (>= 0.7)
       term-ansicolor
       thor
-    crack (0.4.2)
+    crack (0.4.3)
       safe_yaml (~> 1.0.0)
     cucumber (2.4.0)
       builder (>= 2.1.2)
@@ -366,6 +366,7 @@ GEM
       test-unit (~> 3.0)
     haml (4.0.7)
       tilt
+    hashdiff (0.3.4)
     high_voltage (3.0.0)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -620,7 +621,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-prof (0.16.2)
-    safe_yaml (1.0.3)
+    safe_yaml (1.0.4)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -709,9 +710,10 @@ GEM
     vcr (3.0.3)
     warden (1.2.3)
       rack (>= 1.0)
-    webmock (1.17.4)
-      addressable (>= 2.2.7)
+    webmock (3.0.1)
+      addressable (>= 2.3.6)
       crack (>= 0.3.2)
+      hashdiff
     xml-simple (1.1.5)
     xpath (2.1.0)
       nokogiri (~> 1.3)
