@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 
-ruby "2.1.8"
+ruby "2.1.10"
 
-gem 'rails', '3.2.21'
-gem 'rake', '< 11.0'
+gem 'rails', '3.2.22'
+gem 'rake', '< 12.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,11 +26,11 @@ group :assets do
   gem 'less-rails-bootstrap', '~> 2.3.3'
   gem 'twitter-bootstrap-rails-confirm'
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 3.2.0'
 end
 
 group :test do
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_girl_rails", "~> 4.8"
   gem 'sqlite3'
   gem 'coveralls'
   gem 'shoulda'
@@ -46,16 +46,16 @@ group :test do
   gem 'launchy'
 
   # From surveyor
-  gem 'json_spec', '~> 1.0.3'
+  gem 'json_spec', '~> 1.1.5'
 end
 
 group :development do
-  gem 'guard', '~> 1.8.3'
+  gem 'guard', '~> 2.14.1'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
-  gem 'rails-footnotes', '>= 3.7.9'
+  gem 'rails-footnotes', '>= 4.1.8'
   gem 'parallel_tests'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -81,8 +81,8 @@ end
 gem 'uuidtools', '~> 2.1'
 gem 'fastercsv', '~> 1.5.4'
 gem 'formtastic', '~> 2.1.0'
-gem 'mustache', '0.99.4'
-gem 'rabl', '~>0.6.13'
+gem 'mustache', '1.0.5'
+gem 'rabl', '~>0.13.1'
 
 gem 'jquery-rails'
 
@@ -115,7 +115,7 @@ gem 'thin'
 # gem 'debugger'
 
 gem "ransack"
-gem 'surveyor', path: 'vendor/gems/surveyor-1.4.0'
+gem 'surveyor', git: 'https://github.com/theodi/odc-surveyor.git'
 gem 'redcarpet'
 gem "devise", "3.0.3"
 gem 'dotenv-rails'
@@ -139,4 +139,4 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'sidekiq-failures'
 gem 'rails-i18n', '~> 3.0.0'
-gem 'eventmachine', '~> 1.0.4'
+gem 'eventmachine', '~> 1.2.5'

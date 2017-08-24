@@ -2,7 +2,7 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - 2.1.8
+  - 2.1.10
 services:
   - redis
 bundler_args: --without development
@@ -14,5 +14,6 @@ env:
     - REDIS_URL="redis://localhost:6379"
     - CERTIFICATE_HOSTNAME="test.host"
     - COVERAGE=1
+    - RUBYOPT=W0
 git:
   depth: 10
