@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.1.10"
+ruby "2.2.7"
 
 gem 'rails', '3.2.22'
 gem 'rake', '< 12.0'
@@ -29,7 +29,7 @@ group :assets do
   gem 'uglifier', '>= 3.2.0'
 end
 
-group :test do
+group :test, :development do
   gem "factory_girl_rails", "~> 4.8"
   gem 'sqlite3'
   gem 'coveralls'
@@ -47,9 +47,7 @@ group :test do
 
   # From surveyor
   gem 'json_spec', '~> 1.1.5'
-end
 
-group :development do
   gem 'guard', '~> 2.14.1'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
@@ -60,9 +58,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
-end
 
-group :test, :development do
   gem 'pry-byebug'
   gem 'pry-remote'
   gem 'rspec-rails', '~> 2.14.2'
