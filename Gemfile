@@ -11,6 +11,8 @@ gem 'rake', '< 12.0'
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
 
+gem 'mysql2'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -66,7 +68,6 @@ end
 
 group :production do
   gem 'foreman'
-  gem 'mysql2'
   gem 'airbrake'
   gem 'delayed-plugins-airbrake'
   gem 'logstash-event'
