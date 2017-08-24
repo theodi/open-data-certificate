@@ -13,6 +13,10 @@ gem 'rake', '< 12.0'
 
 gem 'mysql2', '~> 0.3.10' # limit to this version for Rails 3.2
 
+# For some reason this is needed in production for consoles
+gem 'test-unit'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -37,7 +41,6 @@ group :test, :development do
   gem 'coveralls'
   gem 'shoulda'
   gem 'mocha', require: false
-  gem 'test-unit'
   gem 'csvlint', git: 'https://github.com/theodi/csvlint.rb.git', ref: '3dc689f4625c8edd4f7b725d1d420fdd67a67df9'
   gem 'vcr'
   gem 'webmock'
