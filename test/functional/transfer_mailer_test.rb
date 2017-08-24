@@ -10,8 +10,9 @@ class TransferMailerTest < ActionMailer::TestCase
     refute ActionMailer::Base.deliveries.empty?
 
     assert_equal [transfer.target_email], email.to
+    assert_equal "certificates", email.header["X-MC-Subaccount"].value
 
-    assert_match "/transfers/#{transfer.id}/claim?token=#{transfer.token}", email.body
+    assert_match "/transfers/#{transfer.id}/claim?token=#{transfer.token}", email.body.to_s
   end
 
 end

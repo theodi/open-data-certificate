@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151105153400) do
+ActiveRecord::Schema.define(:version => 20160819173204) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -28,15 +28,14 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.boolean  "is_exclusive"
     t.integer  "display_length"
     t.string   "custom_class"
-    t.string   "custom_renderer"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "default_value"
     t.string   "api_id"
     t.string   "display_type"
     t.string   "input_mask"
     t.string   "input_mask_placeholder"
-    t.string   "requirement"
+    t.string   "corresponding_requirements"
     t.string   "help_text_more_url"
     t.string   "input_type"
     t.string   "placeholder"
@@ -58,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.boolean  "completed"
     t.integer  "certification_campaign_id"
     t.boolean  "latest",                    :default => true
+    t.text     "state"
   end
 
   add_index "certificate_generators", ["latest"], :name => "index_certificate_generators_on_latest"
@@ -82,12 +82,17 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
 
   create_table "certification_campaigns", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.integer  "duplicate_count", :default => 0
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "duplicate_count",     :default => 0
     t.integer  "user_id"
-    t.string   "jurisdiction",    :default => "gb"
+    t.string   "jurisdiction",        :default => "gb"
     t.string   "url"
+    t.text     "subset"
+    t.integer  "template_dataset_id"
+    t.integer  "limit"
+    t.integer  "dataset_count"
+    t.boolean  "include_harvested",   :default => false
   end
 
   create_table "claims", :force => true do |t|
@@ -194,7 +199,6 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.string   "common_identifier"
     t.string   "display_type"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "api_id"
@@ -215,15 +219,14 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
     t.string   "common_identifier"
     t.integer  "display_order"
     t.string   "display_type"
-    t.boolean  "is_mandatory"
     t.integer  "display_width"
     t.string   "custom_class"
-    t.string   "custom_renderer"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
     t.integer  "correct_answer_id"
     t.string   "api_id"
-    t.string   "requirement"
+    t.boolean  "is_requirement",                           :default => false
+    t.string   "corresponding_requirements"
     t.string   "required",                                 :default => "",    :null => false
     t.string   "help_text_more_url"
     t.string   "text_as_statement"
@@ -240,7 +243,7 @@ ActiveRecord::Schema.define(:version => 20151105153400) do
   add_index "questions", ["question_group_id"], :name => "index_questions_on_question_group_id"
   add_index "questions", ["reference_identifier"], :name => "i_questions_on_reference_identifier"
   add_index "questions", ["survey_section_id", "display_order"], :name => "i_questions_on_survey_section_id_and_display_order"
-  add_index "questions", ["survey_section_id", "display_type", "requirement", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
+  add_index "questions", ["survey_section_id", "display_type", "display_order"], :name => "i_questions_on_ss_id_requirement_display_order_and_type"
 
   create_table "response_sets", :force => true do |t|
     t.integer  "user_id"

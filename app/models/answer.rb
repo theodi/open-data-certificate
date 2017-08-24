@@ -1,7 +1,9 @@
 class Answer < ActiveRecord::Base
   include Surveyor::Models::AnswerMethods
 
-  attr_accessible :requirement, :help_text_more_url, :input_type, :placeholder, :text_as_statement
+  attr_accessible :corresponding_requirements, :help_text_more_url, :input_type, :placeholder, :text_as_statement
+
+  serialize :corresponding_requirements, Array
 
   scope :urls, where(:input_type => 'url')
   scope :for_id, lambda { |id| where(reference_identifier: id) }
@@ -11,8 +13,7 @@ class Answer < ActiveRecord::Base
   end
 
   def requirement_level
-    #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
-    requirement.to_s.match(/^[a-zA-Z]*/).to_s
+    corresponding_requirements.first.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
   def requirement_level_index

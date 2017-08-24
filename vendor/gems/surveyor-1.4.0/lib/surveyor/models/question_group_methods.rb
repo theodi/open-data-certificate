@@ -9,7 +9,7 @@ module Surveyor
         base.send :has_one, :dependency
 
         # Whitelisting attributes
-        base.send :attr_accessible, :text, :help_text, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_type, :custom_class, :custom_renderer
+        base.send :attr_accessible, :text, :help_text, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_type, :custom_class
       end
 
       include MustacheContext

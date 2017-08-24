@@ -2,16 +2,24 @@ class CertificationCampaign < ActiveRecord::Base
   include Ownership
 
   attr_accessor :version
-  attr_writer :limit
-
+  
   validates :name, uniqueness: true, presence: true
   validates :url, :jurisdiction, presence: true, if: :validate_extra_details?
   validates :limit, numericality: { greater_than: 0 }, allow_blank: true
 
   has_many :certificate_generators
   belongs_to :user
+  belongs_to :template_dataset, class_name: 'Dataset', :foreign_key => "template_dataset_id"
 
-  attr_accessible :name, :limit, :url, :jurisdiction, :version
+  attr_accessible :name, :limit, :url, :jurisdiction, :version, :subset, :template_dataset_id, 
+    :dataset_count, :include_harvested
+
+  serialize :subset
+
+  def subset
+    s=read_attribute(:subset)
+    return s.blank? ? {} : s
+  end
 
   def total_count
     generated_count
@@ -43,7 +51,7 @@ class CertificationCampaign < ActiveRecord::Base
   end
 
   def run!
-    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, factory: factory.name, limit: limit)
+    CertificateFactory::FactoryRunner.perform_async(campaign_id: id, factory: factory.name, limit: limit, include_harvested: include_harvested)
   end
 
   def rerun!
@@ -53,10 +61,6 @@ class CertificationCampaign < ActiveRecord::Base
 
   def validate_extra_details?
     version.to_i > 1
-  end
-
-  def limit
-    @limit.to_i unless @limit.blank?
   end
 
   def scheduled_rerun

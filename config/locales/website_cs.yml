@@ -1,9 +1,13 @@
 cs:
   choose_legislation: vyberte si legislativu
   alpha_note: Toto je alfa verze certifikátu otevřených dat. Přivítáme připomínky k obsahu i použitelnosti dotazníku – můžete je posílat e-mailem na certificate@theodi.org. Díky!
+  auth_bar:
+    register: Registrovat
+    account: Účet
+    logout: Odhlásit
   menu:
-    browse_all_certificates: Zobrazit všechny certifikáty
-    create_certificate: Vytvořit nový certifikát
+    browse_all_certificates: Všechny certifikáty
+    create_certificate: Nový certifikát
     my_certificates: Moje certifikáty
     discussion: Diskuze
     about: O projektu
@@ -30,34 +34,38 @@ cs:
       title: Bronzová
       title_with_level: bronzová úroveň
       description: Datová sada splňuje základní požadavky na otevřená data.
+      longdesc: Data jsou dostupná pod otevřenou licencí, přístupná bez omezení, kdokoliv má právo je použít.
     pilot:
       title: Stříbrná
       title_with_level: stříbrná úroveň
       description: Vydavatel těchto dat kromě základních podmínek poskytuje netriviální podporu a reaguje na připomínky uživatelů.
+      longdesc: Data dokumentována ve strojově čitelném formátu, dá se na ně spoléhat, uživatelé mohou počítat s podporou ze strany vydavatele.
     standard:
       title: Zlatá
       title_with_level: zlatá úroveň
       description: Otevřená data s robustní podporou, na kterou se uživatelé mohou spolehnout.
+      longdesc: Data jsou publikována v otevřeném, strojově čitelném formátu, vydavatel garantuje jejich pravidelnou aktualizaci, nabízí ještě větší podporu a lepší dokumentaci, a k dispozici je také strojově čitelné prohlášení o právech.
     exemplar:
       title: Platinová
       title_with_level: platinová úroveň
       description: Tato data jsou výjimečnou ukázkou informační infrastruktury.
+      longdesc: Vydavatel nabízí strojově čitelnou dokumentaci o původu dat. Jako identifikátory jsou v datech použita URL nebo jiné univerzální identifikátory. Vydavatel má celý tým lidí, kteří mají na starost budování komunity uživatelů. Celkově jde o výjimečný příklad informační infrastruktury.
   level_descriptions:
     basic: 'Dobrý základ v publikování otevřených dat.'
     pilot: 'Vydavatel dat poskytuje uživatelům podporu a reaguje na jejich připomínky.'
     standard: 'Dlouhodobě udržovaná otevřená data s podporou, na kterou se uživatelé mohou spolehnout.'
     exemplar: 'Výjimečná ukázka informační infrastruktury.'
   requirement_levels:
-    basic: bronzová úroveň
-    pilot: stříbrná úroveň
-    standard: zlatá úroveň
-    exemplar: platinová úroveň
-  required_for_level: Tato otázka je pro %{level} povinná.
-  required_for_level_and_above: Pro %{level} nebo vyšší je tato otázka povinná.
+    basic: bronzové úrovně
+    pilot: stříbrné úrovně
+    standard: zlaté úrovně
+    exemplar: platinové úrovně
+  required_for_level: Tato otázka je povinná od %{level}.
+  required_for_level_and_above: Tato otázka je povinná od %{level}.
   statuses:
     alpha:
       title: Alfa
-      about: "Tento certifikát ještě není úplně lokalizovaný. Přivítáme připomínky k jeho obsahu i použitelnosti – můžete jeposílat e-mailem na certificate@theodi.org. Díky!"
+      about: "Tento certifikát ještě není úplně lokalizovaný. Přivítáme připomínky k jeho obsahu i použitelnosti – můžete je posílat e-mailem na certificate@theodi.org. Díky!"
     beta:
       title: Beta
       about: "Tento certifikát je lokalizovaný a právě prochází závěrečným testováním. Projděte si ho prosím a vyzkoušejte, jestli funguje tak, jak byste potřebovali. Pokud ne, ozvěte se prosím na certificate@theodi.org. Díky!"
@@ -77,19 +85,24 @@ cs:
     no_certificates_to_show: Žádné certifikáty ještě nemáte.
     previous_versions: Předchozí verze
     start_new_certificate: Založit nový certifikát
+    your_certificate: Váš certifikát
     view_certificate: Zobrazit certifikát
+    your_answers: Vaše odpovědi
     how_do_i_improve_my_open_data: Jak můžete svá otevřená data zlepšit?
     confirm_deletion: Opravdu chcete tento certifikát smazat?
     confirm_deletion_dialog_title: Smazat certifikát?
+    confirm_cancel_button: Zrušit
+    confirm_delete_button: Smazat
     deleted_response_set: Dotazník byl smazán
     unable_to_publish_response_set_invalid: Před zveřejněním certifikátu je potřeba zodpovědět všechny povinné otázky.
     unable_to_access_response_set: Dotazník nejde otevřít
     published_response_set: Zveřejněný dotazník
+    publish_certificate: Zveřejnit certifikát
     embed: Kód pro vložení na web
     improvements_link: Jak se tato data dají zlepšit?
     level_attained: 'Dosažená úroveň:'
     current_status: Aktuální stav
-    last_updated_at: 'Poslední aktualizace: %{time_span} nazpět'
+    last_updated_at: 'Poslední změna: před %{time_span}'
     jurisdiction: jurisdikce
     popover:
       about_jurisdiction: 'Dotazník byl vyplněn pro jurisdikci „%{jurisdiction}“.'
@@ -101,6 +114,10 @@ cs:
       superseded: Stará verze
     expiring_states:
       expired: Vypršel
+      expiring:
+        one: 'Vyprší během jednoho dne'
+        few: 'Vypršní během pár dní'
+        other: 'Vyprší během %{count} dní'
     verification: Způsob ověření
     expiring_certificates: Některé z vašich certifikátů by potřebovaly aktualizovat na nejnovější verzi dotazníku.
     updated_response_set: Certifikát byl aktualizován
@@ -123,7 +140,7 @@ cs:
     how_it_works: Jak to funguje
     fill_out_questionnaire:
       title: Publikujte svá data
-      description: Dobrá zpráva je, že tenhle krok už nejspíš máte za sebou (nebo brzy budete mít). Teď ještě zbývá jen usnadnit jejich hledání, použití a sdílení.
+      description: Dobrá zpráva je, že tenhle krok už nejspíš máte za sebou (nebo brzy budete mít). Teď ještě zbývá usnadnit jejich hledání, použití a sdílení.
     generate_certificate:
       title: Zkontrolujte je naším dotazníkem
       description: Dotazník funguje jako průvodce, který vám pomocí konkrétních, jasně definovaných cílů pomůže zvýšit kvalitu vašich otevřených dat.
@@ -154,8 +171,9 @@ cs:
     other_languages: 'Další jazyky'
     read_more: Přečtěte si podrobnější text o certifikaci otevřených dat
     do_not_have_url: Žádné takové URL nemám
-    check_url_button: Načítst URL
+    check_url_button: Načíst URL
     skip_this_button: Přeskočit
+    edit_button: Změnit
     url_problem_error: URL se nepodařilo načíst. Zkontrolujte prosím, jestli funguje, případně vyplňte níže vysvětlení.
     url_unknown_error: Došlo k chybě. Zkuste to prosím znovu.
     dataset_description_html: |
@@ -168,11 +186,14 @@ cs:
     no_certificates_found: Nebyly nalezeny žádné odpovídající certifikáty.
     view_certificate: Zobrazit
     embed_this_on_your_site: Vložte si certifikát na svůj web
+    rss_subscribe: Přihlásit se k odběru výsledků přes RSS
+    csv_download: Stáhnout kompletní sadu ve formátu CSV
     search:
       search_label: hledat v certifikátech
       submit_search: Hledej
       advanced_search: Rozšířené hledání
       datahub: Filtrovat podle domény
+      jurisdiction: Jurisdikce
       level: Filtrovat podle úrovně
       levels:
         basic: bronzová úroveň
@@ -222,6 +243,10 @@ cs:
     audited: Certifikát je označen jako auditovaný ODI
     not_audited: Certifikát není označen jako auditovaný ODI
     expired_notice: "Tento certifikát je potřeba aktualizovat, aby se do něj promítly poslední změny v dotazníku pro jurisdikci %{jurisdiction}."
+    expiring_notice:
+      one: "Platnost tohoto certifikátu vyprší během jednoho dne. Aktualizujte ho prosím na poslední verzi dotazníku pro jurisdikci %{jurisdiction}."
+      few: "Platnost tohoto certifikátu vyprší během pár dní. Aktualizujte ho prosím na poslední verzi dotazníku pro jurisdikci %{jurisdiction}."
+      other: "Platnost tohoto certifikátu vyprší během %{count} dní. Aktualizujte ho prosím na poslední verzi dotazníku pro jurisdikci %{jurisdiction}."
     claim_this_certificate: "Je tohle vaše datová sada?"
     us_public_domain_assumption_html: |
       Tuto datovou sadu vytvořila vláda Spojených států, což znamená, že je považována za veřejné dílo. Americké autorské právo ale přiznává otevřený přístup pouze americkým občanům, takže předpokládáme, že pro zbytek světa jsou data v souladu s <a href="https://www.whitehouse.gov/sites/default/files/omb/memoranda/2013/m-13-13.pdf">americkou politikou otevřených dat</a> licencována pod <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC Zero</a>.
@@ -231,7 +256,12 @@ cs:
   datasets:
     datasets: Datové sady
     search_results: Výsledky hledání
+    published_by: Vydavatel
+    issued: Datum vydání
+    no_published_certificate: Žádné veřejné certifikáty
+    time_ago: "před %{relative_time}"
   response_set:
+    default_title: Bez názvu
     choose_a_jurisdiction: Přepnout jurisdikci
     dialog_body: Vyberte si novou jurisdikci ze seznamu. Doposud vyplněné odpovědi se do ní zkopírují.
     choose_jurisdiction: — vyberte jurisdikci —
@@ -241,10 +271,13 @@ cs:
     choose_language: — vyberte jazyk —
     start_new_language: Přepnout jazyk
     update_instructions: "Ještě než budete pokračovat, zkontrolujte si prosím, jestli jsou všechny informace aktuální a všechna povinná pole vyplněná."
+    description: Popis
+    summary: Shrnutí
   summary_data:
     summary: Shrnutí
-    type_of_release: Typ dat
+    type_of_release: Co poskytovatel nabízí?
     licence: Licence
+    not_applicable: Nevztahuje se
     data_licence: Databázová licence
     content_licence: Licence na obsah
     verification: "Způsob ověření"
@@ -278,6 +311,7 @@ cs:
     resend_confirmation_instructions: Poslat potvrzovací instrukce ještě jednou
     agree_to_terms: "Četl jsem %{terms_link} a souhlasím s nimi."
     terms: Podmínky použití
+    api: API
   about:
     heading_about: O projektu
   badge_levels:
@@ -289,7 +323,7 @@ cs:
   faq:
     header_title: Certifikát otevřených dat – Často kladené otázky
   contact:
-    heading_contact: Napište ODI
+    heading_contact: Napište nám
   errors:
     errors_occurred: Došlo k chybě
     server_error: Došlo k chybě serveru
@@ -301,7 +335,7 @@ cs:
     return_to_dashboard: Zpátky na nástěnku
     levels:
       basic:
-        title: Základní úroveň
+        title: Bronzová úroveň
         subtitle: Naprosté minimum pro získání certifikátu – velmi slušný začátek!
         instruction: "Musíte odpovědět na následující otázky:"
       pilot:
@@ -392,6 +426,13 @@ cs:
     label:
       user:
         short_name: Krátká forma jména nebo přezdívka
+  views:
+    pagination:
+      first: "&laquo; První"
+      last: "Poslední &raquo;"
+      previous: "&lsaquo; Předchozí"
+      next: "Následující &rsaquo;"
+      truncate: "&hellip;"
   locales:
     cs: Čeština
     de: Němčina

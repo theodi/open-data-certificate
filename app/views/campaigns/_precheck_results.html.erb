@@ -1,0 +1,40 @@
+<hr/>
+<h3>Campaign test results</h3>
+
+<p>There are <%= @result_count %> datasets(s) in this campaign. The following is a reduced test set: </p>
+
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Certificate</th>
+    <th>User</th>
+    <th>URLs valid</th>
+    <th>Missing responses</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @generators.each do |generator| %>
+    <tr>
+      <% if generator.completed? %>
+        <td>
+          <%= generator.dataset.title %>
+        </td>
+        <td>
+          <%= t("levels.#{generator.certificate.attained_level}.title") %>
+        </td>
+        <td>
+          <%= generator.dataset.user_email %>
+        </td>
+        <td>
+          <%= boolean_mark(generator.valid_urls?) %>
+        </td>
+        <td>
+          <%= missing_responses(generator, "<br />").html_safe %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

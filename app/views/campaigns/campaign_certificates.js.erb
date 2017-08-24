@@ -1,0 +1,9 @@
+//update html
+$('#campaign-state').html("<%= escape_javascript render(:partial => 'state') %>");
+$('#certificates-wrapper tbody').html("<%= escape_javascript render(:partial => 'campaign_certificates') %>");
+$("#page-select").html("<%= escape_javascript(paginate(@generators)) %>")
+
+//update wrapper and trigger possible further polling
+$('#certificates-wrapper').attr('data-ongoing',"<%= @campaign.incomplete_count > 0 %>");
+$('#certificates-wrapper').attr('data-refresh-url',"<%= escape_javascript(campaign_url(@campaign, page: params[:page])) %>");
+$('#certificates-wrapper').trigger('tableUpdated');

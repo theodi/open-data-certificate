@@ -2,14 +2,15 @@
 class SurveyBuilder < Struct.new(:dir, :basename)
 
   def perform
-    survey_parsing = SurveyParsing.find_or_create_by_file_name("#{dir}/#{basename}")
-    survey_parsing.md5 = Digest::MD5.hexdigest(file_contents)
+    survey_parsing = SurveyParsing.find_or_create_by_file_name(path)
+    survey_parsing.compute_digest!
 
     changed = survey_parsing.changed? && survey_parsing.save
+    rebuild = changed || ENV['FORCE_REBUILD'].present?
 
-    record_event "SurveyBuilder: #{dir}/#{basename} - #{changed ? 'building' : 'skipping '} - #{survey_parsing.md5}"
+    record_event "SurveyBuilder: #{dir}/#{basename} - #{rebuild ? 'building' : 'skipping '} - #{survey_parsing.md5}"
 
-    if changed
+    if rebuild
       survey = parse_file
       survey.set_expired_certificates
     end
@@ -27,7 +28,7 @@ class SurveyBuilder < Struct.new(:dir, :basename)
 
   # Parse code taken from surveyor to allow the survey object to be returned
   def parse_file(options={})
-    str = File.read(file)
+    str = file_contents
     Surveyor::Parser.ensure_attrs
     Surveyor::Parser.options = {filename: file}.merge(options)
     Surveyor::Parser.log[:source] = str
@@ -64,7 +65,11 @@ class SurveyBuilder < Struct.new(:dir, :basename)
   end
 
   def file
-    Rails.root.join(dir,basename)
+    Rails.root.join(path)
+  end
+
+  def path
+    Pathname.new(dir).join(basename).to_s
   end
 
 end

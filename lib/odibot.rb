@@ -66,6 +66,25 @@ class ODIBot
     is_http_url? && (linkedin? || response_code == 200)
   end
 
+  def check_ckan_endpoint
+    success = false
+    redirect = nil
+    if valid?
+      begin
+        url = URI.parse(@url)
+        r = Net::HTTP.get_response(url)
+        if r.code.eql?("301")
+          redirect = r.header['location']
+          r = Net::HTTP.get_response(URI.parse(r.header['location']))
+        end
+        success = JSON.parse(r.body).has_key?("version") if r.code.eql?("200")
+      rescue 
+        success = false
+      end
+    end
+    { success: success, redirect: redirect }
+  end
+
   def self.handle_errors(return_value)
     return yield
   rescue *(NETWORK_ERRORS + HTTP_ERRORS)

@@ -20,6 +20,7 @@ OpenDataCertificate::Application.routes.draw do
     get 'contact' => 'pages#show', id: 'contact', as: 'contact_page'
     get 'markdown' => 'pages#show', id: 'markdown_help', as: 'markdown_help'
     get 'using-the-marks' => 'pages#show', id: 'branding', as: 'branding_page'
+    get 'autocertification' => 'pages#show', id: 'autocertification', as: 'autocertification'
 
     scope '/surveys' do
       # Redirect old URLs that include a jurisdiction (survey_code)
@@ -115,6 +116,7 @@ OpenDataCertificate::Application.routes.draw do
              as: :user_registration do
       get :cancel
     end
+    get '/users/sign_out', to: redirect('/')
   end
 
   # Get badge for a url
@@ -137,11 +139,16 @@ OpenDataCertificate::Application.routes.draw do
   get 'legacy_stats.csv' => 'main#legacy_stats', format: 'csv'
   get 'embed_stats.csv' => 'embed_stats#index', format: 'csv', as: :embed_stats
 
+  put 'campaigns/endpoint_check', to: 'campaigns#endpoint_check', as: 'campaign_endpoint_check'
+  put 'campaigns/precheck', to: 'campaigns#precheck', as: 'campaign_precheck'
+  get 'campaigns/template_typeahead', to: 'campaigns#template_typeahead', as: 'template_typeahead'
+
   resources :campaigns do
     post 'rerun', to: 'campaigns#rerun', as: 'rerun'
     post 'schedule', to: 'campaigns#schedule', as: 'scheduled_rerun'
+    post 'queue_update', to: 'campaigns#queue_update', as: 'queue_update'
   end
-
+  
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'
   get 'status/all_certificates.csv' => 'main#all_certificates'

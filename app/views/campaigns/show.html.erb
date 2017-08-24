@@ -5,19 +5,33 @@
 Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
 </p>
 
+<% @campaign.subset.each_pair do |k,v| %>
+<% next if v.blank? %>
+<p>
+  <%= k.capitalize %> subset: <span class="label label-success"><%= "#{v}" %></span>
+</p>
+<% end %>
+<p>Limited to: <%= pluralize @campaign.limit, 'dataset' %></p>
+<%= content_tag(:p, "Includes datasets harvested from other portals") if @campaign.include_harvested %>
+
 <div class='schedule-controls omit-in-print'>
   <%= button_to "Rerun campaign", campaign_rerun_path(@campaign), method: 'post', class: 'btn' %>
   <%= button_to "Schedule campaign", campaign_scheduled_rerun_path(@campaign), method: 'post', class: 'btn' %>
+
+  <%= form_tag campaign_queue_update_path(@campaign, certificate_level: @certificate_level), method: :post, class: 'form-inline button_to' do %>
+    <%= submit_tag "Queue updates", class: "btn" %>
+  <% end %>
+  
 </div>
 
 <p>Started at <%= @campaign.created_at.to_s(:db) %></p>
 
-<ul>
-  <li><%= pluralize @campaign.generated_count, 'dataset' %> added</li>
-  <li><%= pluralize @campaign.published_count, 'certificate' %> published</li>
-  <li><%= pluralize @campaign.duplicate_count, 'dataset' %> already existed</li>
-  <li class='omit-in-print'><%= pluralize @campaign.incomplete_count, 'certificate' %> pending</li>
-</ul>
+<div id = "campaign-state">
+  <%= render 'state' %>
+</div>
+
+<hr/>
+<br/>
 
 <div class='omit-in-print'>
   <%= form_tag campaign_path(@campaign), method: :get, class: 'form-inline' do %>
@@ -27,10 +41,9 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
   <% end %>
 </div>
 
-<% if @campaign.incomplete_count > 0 %>
-  <p><strong>Currently running</strong></p>
-<% end %>
-<table class='table table-striped'>
+<div style="min-height:10em" id="certificates-wrapper" data-ongoing="<%= (@campaign.incomplete_count > 0 || @campaign.generated_count == 0) %>" data-refresh-url="<%= campaign_url(@campaign, page: params[:page]) %>">
+
+  <table class='table table-striped'>
   <thead>
   <tr>
     <th>
@@ -56,48 +69,20 @@ Feed URL: <%= link_to truncate(@campaign.url, length: 80), @campaign.url %>
   </tr>
   </thead>
   <tbody>
-  <% @generators.each do |generator| %>
-    <tr>
-      <td style="text-align: center">
-        <%= generator.completed? ? boolean_mark(generator.published?) : icon_mark("time") %>
-      </td>
-      <% if generator.completed? %>
-        <td>
-          <%= link_to generator.dataset.title, generator.dataset.documentation_url %>
-          <div class='actions omit-in-print'>
-          <% if can? :edit, generator.response_set %>
-            <%= button_to "Edit", continue_path(generator.response_set), method: 'post', class: 'btn' %>
-            <%= button_to "Rerun certification", dataset_regenerate_certificate_path(generator.dataset, jurisdiction: generator.survey.access_code), method: 'post', class: 'btn' %>
-          <% end %>
-          </div>
-        </td>
-        <% if @certificate_level == "all" %>
-          <td>
-              <% if generator.published? %>
-              <%= link_to t("levels.#{generator.certificate.attained_level}.title"), dataset_certificate_path(generator.dataset, generator.certificate) %>
-              <% end %>
-          </td>
-        <% end %>
-        <td class='omit-in-print'>
-            <%= generator.dataset.user_email %>
-        </td>
-        <td>
-          <%= boolean_mark(generator.valid_urls?) %>
-        </td>
-        <td>
-          <%= missing_responses(generator, "<br />").html_safe %>
-        </td>
-      <% else %>
-        <td colspan="5">Processing… <%= link_to generator.autocomplete_url, generator.autocomplete_url %></td>
-      <% end %>
-    </tr>
-  <% end %>
+    <%= render 'campaign_certificates' %>
   </tbody>
-</table>
-<div class='omit-in-print'>
-  <%= paginate @generators %>
+  </table>
+
+  <div id="page-select" class='omit-in-print'>
+    <%= paginate @generators %>
+  </div>
+
 </div>
 
 <div class='omit-in-print'>
   <%= link_to 'Download CSV', format: "csv" %>
 </div>
+
+<%= content_for :foot_scripts do %>
+  <%= javascript_include_tag 'campaign_progress' %>
+<% end %>

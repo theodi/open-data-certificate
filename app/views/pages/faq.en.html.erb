@@ -43,12 +43,12 @@
         <p>We recommend that you still review and add any additional information about your communication and privacy practices along with other documentation.</p>
       <% end %>
 
-      <%= faq_content('Why has my data only achieved level [raw / pilot / standard]? We’ve been publishing data for years!') do %>
-        <p>A Raw level badge is a fantastic achievement - it means your data is re-use ready! However, we want to encourage publishers to aim higher and push for better internal publishing practices. You do not need to aim for Standard and Expert for all of your datasets.</p>
+      <%= faq_content('Why has my data only achieved level [bronze / silver / gold]? We’ve been publishing data for years!') do %>
+        <p>A Bronze level badge is a fantastic achievement - it means your data is re-use ready! However, we want to encourage publishers to aim higher and push for better internal publishing practices. You do not need to aim for Gold and Platinum for all of your datasets.</p>
       <% end %>
 
       <%= faq_content('What level should my data be achieving?') do %>
-        <p>If the certificate is for a core dataset - produced as part of the main function of your organisation -  then we recommend you aim for Standard or Expert level. This is to reflect the level of investment your organisation has made for this data and communicate to reusers its level of reliability. If this is a singular release, Raw is perfectly fine. Pilot is the general level for great quality open data publication.</p>
+        <p>If the certificate is for a core dataset - produced as part of the main function of your organisation -  then we recommend you aim for Gold or Platinum level. This is to reflect the level of investment your organisation has made for this data and communicate to reusers its level of reliability. If this is a singular release, Bronze is perfectly fine. Silver is the general level for great quality open data publication.</p>
       <% end %>
 
       <%= faq_content('Who is using Open Data Certificate?') do %>
@@ -79,7 +79,7 @@
         <p>We have a localisation team that works with governments and NGOs in different jurisdictions to adapt the Open Data Certificate questionnaire. Certificate localisations reflect different legal defaults and standards used by publishers.</p>
       <% end %>
 
-      <%= faq_content('How does you demonstrate that the data has been certified?') do %>
+      <%= faq_content('How do you demonstrate that the data has been certified?') do %>
         <p>As a publisher, once you have completed the certification process (or reviewed and claimed an automatically prefilled certificate) and awarded a badge, you can embed this in your dataset or webpage that links to the full certificate. We have technical support and tools to help you do this throughout the process.</p>
       <% end %>
 
@@ -95,8 +95,12 @@
         <p>We plan to track the currentness of certificates and communicate when they need to be updated. For example, if the dataset has changed, the certificate will no longer apply until it is updated, or if we know from the questionnaire that the certificate is due to expire within a year, the certificate will reflect this.</p>
       <% end %>
 
-      <%= faq_content('How useful are certificates to re-users?') do %>
-        <p>Open Data Certificate provides key information to support the dependable reuse of open data. We have conducted extensive interviews with re-users and will be convening a working group to further iterate the certification questionnaire to maintain its relevance and use for companies, civic institutions, governments and individuals who need it.</p>
+      <%= faq_content('What is auto-certification?') do %>
+        <p>A free tool that allows any data publishers, aggregators or portal owners to quickly and easily create Open Data Certificates for numerous datasets in one go.</p>
+
+        <p>We use existing metadata stored in a data portal to fill in as many certificate fields as possible, ensuring that publishers can focus on adding extra information not already stored.</p>
+
+        <p>Auto-certification currently supports metadata stored in CKAN portals or sites with metadata in DCAT. The auto-certification process only creates certificates at Bronze level. Please <a href="http://theodi.org/contact">get in touch</a> if you would like your data portal auto-certified.</p>
       <% end %>
     <% end %>
   </div>

@@ -9,7 +9,7 @@ describe Question do
       question.text = nil
       question.should have(1).error_on :text
     end
-    it "#is_mandantory == false by default" do
+    it "#mandatory? == false by default" do
       question.mandatory?.should be_false
     end
     it "converts #pick to string" do
@@ -61,6 +61,14 @@ describe Question do
         question.attributes = {:updated_at => 3.hours.ago} # Rails doesn't return false, but this will be checked in the comparison to saved_attrs
       end
       question.attributes.should == saved_attrs
+    end
+  end
+
+  describe '#corresponding_requirements' do
+    it 'saves and restores as an Array' do
+      question = FactoryGirl.create(:question, corresponding_requirements: ['basic_1', 'standard_10'])
+      question = Question.find(question.id)
+      expect(question.corresponding_requirements).to eql(['basic_1', 'standard_10'])
     end
   end
 

@@ -10,6 +10,14 @@ override_task :surveyor => :environment do
 end
 
 namespace :surveyor do
+  task :generate, [:jurisdiction] do |t, args|
+    jurs = args.jurisdiction
+    unless jurs
+      raise ArgumentError, "use surveyor:generate[jurisdiction] to specify jurisdiction"
+    end
+    Rake::Task["surveys/generated/surveyor/odc_questionnaire.#{jurs}.rb"].invoke
+  end
+
   task :update, [:jurisdiction] do |t, args|
     jurs = args.jurisdiction
     unless jurs

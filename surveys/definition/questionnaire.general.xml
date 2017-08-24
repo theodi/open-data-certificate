@@ -17,13 +17,13 @@
 		<question id="dataTitle">
 			<label>What's this data called?</label>
 			<input placeholder="Data Title" required="required"/>
-			<help>People see the name of your open data in a list of similar ones so make this as unambiguous and descriptive as you can in this tiny box so they quickly identify what's unique about it.</help>
+			<help>Provide an unambiguous and descriptive name for your data that identifies what's unique about it. This helps people quickly find your data and its certificate.</help>
 		</question>
 		<!-- ask this first, because if a URL is given we can then go off and locate more information about the dataset -->
 		<question id="documentationUrl" display="This data is described at">
 			<label>Where is it described?</label>
-			<input type="url" placeholder="Documentation URL"/>
-			<help>Give a URL for people to read about the contents of your open data and find more detail. It can be a page within a bigger catalog like data.gov.uk.</help>
+			<input type="url" placeholder="Dataset URL"/>
+			<help>Link to the dataset you are certifying. By dataset we mean the documentation or metadata that describes the data as well as a link to the data file itself. Dataset = data + metadata.</help>
 			<if test="this.releaseType() !== 'collection'">
 				<requirement level="pilot">You should have a <strong>web page that offers documentation</strong> about the open data you publish so that people can understand its context, content and utility.</requirement>
 			</if>
@@ -37,9 +37,11 @@
 			<help>Give the name of the organisation who publishes this data. It’s probably who you work for unless you’re doing this on behalf of someone else.</help>
 		</question>
 		<question id="publisherUrl" display="The data is published on">
-			<label>What website is the data published on?</label>
+			<label>What is the website of the publisher?</label>
 			<input type="url" placeholder="Publisher URL"/>
-			<help>Give a URL to a website, this helps us to group data from the same organisation even if people give different names.</help>
+			<help>Provide the URL for the publisher’s website. This helps us to group data from the same organisation together, regardless of where the data is stored.
+			<br/>
+			E.g. for dataset on the Humanitarian Data Exchange, <a href="https://data.hdx.rwlabs.org/dataset/wfp-food-prices">https://data.hdx.rwlabs.org/dataset/wfp-food-prices</a>, the website of the publisher would be the World Food Programme site, <a href="http://www.wfp.org/">http://www.wfp.org/</a> (and not <a href="https://data.hdx.rwlabs.org">https://data.hdx.rwlabs.org</a>).</help>
 		</question>
 		<question id="releaseType">
 			<label>What kind of release is this?</label>
@@ -58,7 +60,7 @@
 				</option>
 				<option value="service">
 					<label>a service or API for accessing open data</label>
-					<help>This is a live web service that exposes your data to programmers through an interface they can query.</help>
+					<help>This could be a web service for developers to access and interact with your data through an interface, or a snapshot taken directly from a database that gets updated in real-time.</help>
 				</option>
 			</radioset>
 		</question>
@@ -88,7 +90,7 @@
 			<question id="listed">
 				<label>Is your data listed within a collection?</label>
 				<yesno/>
-				<help>Data is easier for people to find when it's in relevant data catalogs like academic, public sector or health for example, or when it turns up in relevant search results.</help>
+				<help>Answer yes if this dataset has been registered somewhere else (e.g. as part of a group or collection of related datasets). This helps make your data more discoverable.</help>
 				<requirement level="standard">You should <strong>ensure that people can find your data when they search for it</strong> in locations that list data.</requirement>
 			</question>
 			<if test="this.listed() === 'true'">
@@ -104,7 +106,7 @@
 			<question id="referenced">
 				<label>Is this data referenced from your own publications?</label>
 				<yesno/>
-				<help>When you reference your data within your own publications, such as reports, presentations or blog posts, you give it more context and help people find and understand it better.</help>
+				<help>Have you included direct links to this dataset in any of your own publications or communication channels? These could be reports, press releases, blog posts, presentations or any publication that helps to provide context to your data and encourages people to discover and understand the data better.</help>
 				<requirement level="standard">You should <strong>reference data from your own publications</strong> so that people are aware of its availability and context.</requirement>
 			</question>
 			<if test="this.referenced() === 'true'">
@@ -296,7 +298,7 @@
 			<question id="backups" display="The data is">
 				<label>Do you take offsite backups?</label>
 				<yesno yes="backed up offsite" />
-				<help>Taking a regular offsite backup helps ensure that the data won't be lost in the case of accident.</help>
+				<help>This may be done automatically by your IT team or webmaster. If you are using a managed portal software solution then this should be provided as part of your Service Level Agreement.</help>
 				<requirement level="standard">You should <strong>take a result offsite backup</strong> so that the data won't be lost if an accident happens.</requirement>
 			</question>
 			<if test="this.releaseType() === 'service'">
@@ -343,9 +345,9 @@
 			<help>how people can access your data</help>
 			<if test="this.releaseType() === 'oneoff'">
 				<question id="datasetUrl" display="This data is published at">
-					<label>Where is your dataset?</label>
+					<label>Where is the data file located online?</label>
 					<input type="url" placeholder="Dataset URL"/>
-					<help>Give a URL to the dataset itself. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
+					<help>Please provide the exact URL to a data file for download; so the link should end with a file extension, e.g. CSV. Open data should be linked to directly on the web so people can easily find and reuse it.</help>
 					<if test="this.documentationUrl() === ''">
 						<requirement test="this.datasetUrl() !== ''">You must <strong>provide either a URL to your data or a URL to documentation</strong> about it so that people can find it.</requirement>
 					</if>
@@ -470,7 +472,7 @@
 			<question id="machineReadable" display="This data is">
 				<label>Is this data machine-readable?</label>
 				<yesno yes="machine-readable" />
-				<help>People prefer data formats which are easily processed by a computer, for speed and accuracy. For example, a scanned photocopy of a spreadsheet would not be machine-readable but a CSV file would be.</help>
+				<help><a href="http://en.wikipedia.org/wiki/Machine-readable_data">Machine-readable data</a> is a structured data that can be easily processed and interpreted by a computer. This makes the data much more reusable. Examples of machine-readable formats include: CSV, JSON, XML, RDF. In contrast, an unstructured data such as HTML, PDFs and documents that have been scanned as images, are not machine-readable.</help>
 				<requirement level="pilot">You should <strong>provide your data in a machine-readable format</strong> so that it's easy to process.</requirement>
 			</question>
 			<question id="openStandard" display="The format of this data is">
@@ -480,7 +482,7 @@
 				<requirement level="standard">You should <strong>provide your data in an open standard format</strong> so that people can use widely available tools to process it more easily.</requirement>
 			</question>
 			<question id="dataType">
-				<label>What kind of data do you publish?</label>
+				<label>What kind of data is being provided as part of this dataset?</label>
 				<checkboxset required="pilot">
 					<option value="documents">
 						<label>human-readable documents</label>
@@ -498,24 +500,25 @@
 						<label>other kinds of structured data</label>
 						<help>Choose this if your data is structured in other ways. Like event details, railway timetables, contact information or anything that can be interpreted as data, and analysed and presented in multiple ways.</help>
 					</option>
+					<help>Depending on the type of data you publish, there are standard formats which make re-use easier. The following questions help us assess the reusability of your data, given the formats you’ve chosen.</help>
 				</checkboxset>
 			</question>
 			<if test="this.dataType().documents">
 				<question id="documentFormat" display="Documents are published">
-					<label>Do your human-readable documents include formats that</label>
+					<label>What formats are your human-readable documents published in? (for this dataset)</label>
 					<radioset>
 						<option value="semantic" display="in a semantic format">
-							<label>describe semantic structure like HTML, Docbook or Markdown</label>
+							<label>formats which describe semantic structure like HTML, Docbook or Markdown</label>
 							<help>These formats label structures like chapters, headings and tables that make it easy to automatically create summaries like tables of contents and glossaries. They also make it easy to apply different styles to the document so its appearance changes.</help>
 							<requirement level="standard">You should <strong>publish documents in a format that exposes semantic structure</strong> so that people can display them in different styles.</requirement>
 						</option>
 						<option value="format" display="in a display format">
-							<label>describe information on formatting like OOXML or PDF</label>
+							<label>formats which describe information on formatting like OOXML or PDF</label>
 							<help>These formats emphasise appearance like fonts, colours and positioning of different elements within the page. These are good for human consumption, but aren't as easy for people to process automatically and change style.</help>
 							<requirement level="pilot">You should <strong>publish documents in a format designed specifically for them</strong> so that they're easy to process.</requirement>
 						</option>
 						<option value="unsuitable" display="in a format unsuitable for documents">
-							<label>aren't meant for documents like Excel, JSON or CSV</label>
+							<label>formats which aren't meant for documents like Excel, JSON or CSV</label>
 							<help>These formats better suit tabular or structured data.</help>
 						</option>
 					</radioset>
@@ -523,25 +526,25 @@
 			</if>
 			<if test="this.dataType().statistical">
 				<question id="statisticalFormat" display="Statistical data is published">
-					<label>Does your statistical data include formats that</label>
+					<label>What formats are your statistical data files published in? (for this dataset)</label>
 					<radioset>
 						<option value="statistical" display="in a statistical data format">
-							<label>expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a></label>
+							<label>formats which expose the structure of statistical hypercube data like <a href="http://sdmx.org/">SDMX</a> or <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a></label>
 							<help>Individual observations in hypercubes relate to a particular measure and a set of dimensions. Each observation may also be related to annotations that give extra context. Formats like <a href="http://sdmx.org/">SDMX</a> and <a href="http://www.w3.org/TR/vocab-data-cube/">Data Cube</a> are designed to express this underlying structure.</help>
 							<requirement level="exemplar">You should <strong>publish statistical data in a format that exposes dimensions and measures</strong> so that it's easy to analyse.</requirement>
 						</option>
 						<option value="tabular" display="in a tabular data format">
-							<label>treat statistical data as a table like CSV</label>
+							<label>formats which treat statistical data as a table like CSV</label>
 							<help>These formats arrange statistical data within a table of rows and columns. This lacks extra context about the underlying hypercube but is easy to process.</help>
 							<requirement level="standard">You should <strong>publish tabular data in a format that exposes tables of data</strong> so that it's easy to analyse.</requirement>
 						</option>
 						<option value="format" display="in a presentation format">
-							<label>focus on the format of tabular data like Excel</label>
+							<label>formats which focus on the format of tabular data like Excel</label>
 							<help>Spreadsheets use formatting like italic or bold text, and indentation within fields to describe its appearance and underlying structure. This styling helps people to understand the meaning of your data but makes it less suitable for computers to process.</help>
 							<requirement level="pilot">You should <strong>publish tabular data in a format designed for that purpose</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable" display="in a format unsuitable for statistical data">
-							<label>aren't meant for statistical or tabular data like Word or PDF</label>
+							<label>formats which aren't meant for statistical or tabular data like Word or PDF</label>
 							<help>These formats don't suit statistical data because they obscure the underlying structure of the data.</help>
 						</option>
 					</radioset>
@@ -549,20 +552,20 @@
 			</if>
 			<if test="this.dataType().geographic">
 				<question id="geographicFormat" display="Geographic data is published">
-					<label>Does your geographic data include formats that</label>
+					<label>What formats are your geographic data files published in? (for this dataset)</label>
 					<radioset>
 						<option value="specific" display="in a geographic data format">
-							<label>are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a></label>
+							<label>formats which are designed for geographic data like <a href="http://www.opengeospatial.org/standards/kml/">KML</a> or <a href="http://www.geojson.org/">GeoJSON</a></label>
 							<help>These formats describe points, lines and boundaries, and expose structures in the data which make it easier to process automatically.</help>
 							<requirement level="exemplar">You should <strong>publish geographic data in a format designed that purpose</strong> so that people can use widely available tools to process it.</requirement>
 						</option>
 						<option value="generic" display="in a generic data format">
-							<label>keeps data structured like JSON, XML or CSV</label>
+							<label>formats which keep data structured like JSON, XML or CSV</label>
 							<help>Any format that stores normal structured data can express geographic data too, particularly if it only holds data about points.</help>
 							<requirement level="pilot">You should <strong>publish geographic data as structured data</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable" display="in a format unsuitable for geographic data">
-							<label>aren't designed for geographic data like Word or PDF</label>
+							<label>formats which aren't designed for geographic data like Word or PDF</label>
 							<help>These formats don't suit geographic data because they obscure the underlying structure of the data.</help>
 						</option>
 					</radioset>
@@ -570,15 +573,15 @@
 			</if>
 			<if test="this.dataType().structured">
 				<question id="structuredFormat" display="Structured data is published">
-					<label>Does your structured data include formats that</label>
+					<label>What formats are your structured data files published in? (for this dataset)</label>
 					<radioset>
 						<option value="suitable" display="in a structured data format">
-							<label>are designed for structured data like JSON, XML, Turtle or CSV</label>
+							<label>formats which are designed for structured data like JSON, XML, Turtle or CSV</label>
 							<help>These formats organise data into a basic structure of things which have values for a known set of properties. These formats are easy for computers to process automatically.</help>
 							<requirement level="pilot">You should <strong>publish structured data in a format designed that purpose</strong> so that it's easy to process.</requirement>
 						</option>
 						<option value="unsuitable" display="in a format unsuitable for structured data">
-							<label>aren't designed for structured data like Word or PDF</label>
+							<label>formats which aren't designed for structured data like Word or PDF</label>
 							<help>These formats don't suit this kind of data because they obscure its underlying structure.</help>
 						</option>
 					</radioset>
@@ -723,10 +726,11 @@
 							<label>distribution(s)</label>
 						</option>
 					</checkboxset>
+					<help>If you are publishing your data via a data portal platform (e.g. <a href="http://ckan.org/">CKAN</a> or <a href="http://www.socrata.com/">Socrata</a>) then metadata will be available via the API, making it machine-readable.</help>
 				</question>
 				<if test="this.documentationMetadata().distribution">
 					<question id="distributionMetadata" display="The documentation about each distribution includes machine-readable data for">
-						<label>Does your documentation include machine-readable metadata for each distribution on:</label>
+						<label>Does your documentation include machine-readable metadata for each individual data file on:</label>
 						<checkboxset>
 							<option value="title">
 								<label>title</label>
@@ -762,12 +766,14 @@
 								<label>type of download media</label>
 							</option>
 						</checkboxset>
+						<help>If you are using a data portal platform such as CKAN, each individual data file (or a resource) will have its own webpage, and a machine-readable documentation if it is available via the API.</help>
 					</question>
 				</if>
 			</if>
 			<question id="technicalDocumentation" display="The technical documentation for the data is at">
 				<label>Where is the technical documentation for the data?</label>
 				<input type="url" placeholder="Technical Documentation URL"/>
+				<help>This could be the precise details for the format(s) of the data and how to access the data via an API. This documentation will be aimed at technical re-users, such as developers.</help>
 				<requirement level="pilot">You should <strong>provide technical documentation for the data</strong> so that people understand how to use it.</requirement>
 			</question>
 			<question id="vocabulary">
@@ -801,7 +807,7 @@
 			<question id="contactUrl" display="Find out how to contact someone about this data at">
 				<label>Where can people find out how to contact someone with questions about this data?</label>
 				<input type="url" placeholder="Contact Documentation"/>
-				<help>Give a URL for a page that describes how people can contact someone if they have questions about the data.</help>
+				<help>Provide the link (URL) to the webpage containing the contact details of the person(s) responsible for, or could respond to questions about, this data.</help>
 				<requirement level="pilot">You should <strong>provide contact information for people to send questions</strong> about your data to.</requirement>
 			</question>
 			<question id="improvementsContact" display="Find out how to suggest improvements to publication at">
@@ -812,6 +818,7 @@
 			<question id="dataProtectionUrl" display="Find out where to send questions about privacy at">
 				<label>Where can people find out how to contact someone with questions about privacy?</label>
 				<input type="url" placeholder="Confidentiality Contact Documentation"/>
+				<help>Provide the link to the webpage containing the contact details for reporting a privacy related issue with the data, i.e. when the data has not been fully anonymised, so it is possible to draw personal identifying information from it.</help>
 				<requirement level="pilot">You should <strong>provide contact information for people to send questions about privacy</strong> and disclosure of personal details to.</requirement>
 			</question>
 			<question id="socialMedia">
@@ -832,7 +839,7 @@
 			<question id="forum" display="Discuss this data at">
 				<label>Where should people discuss this dataset?</label>
 				<input type="url" placeholder="Forum or Mailing List URL"/>
-				<help>Give a URL to your forum or mailing list where people can talk about your data.</help>
+				<help>This could be the webpage for the dataset itself if people can post a comment to have a discussion, or a dedicated forum on a data portal or publisher’s website.</help>
 				<requirement level="standard">You should <strong>tell people where they can discuss your data</strong> and support one another.</requirement>
 			</question>
 			<if test="this.corrected() === 'true'">

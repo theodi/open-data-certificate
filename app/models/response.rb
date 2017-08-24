@@ -40,11 +40,6 @@ class Response < ActiveRecord::Base
   end
   memoize :requirement_level
 
-  def requirement
-    answer.requirement || question.requirement
-  end
-  memoize :requirement
-
   def requirement_level_index
     Survey::REQUIREMENT_LEVELS.index(requirement_level)
   end

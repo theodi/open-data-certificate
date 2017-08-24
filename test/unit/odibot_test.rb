@@ -129,4 +129,19 @@ class ODIBotTest < ActiveSupport::TestCase
     refute ODIBot.new("http://any.domain").valid?
   end
 
+  test "successfully checks CKAN API" do
+    stub_request(:any, "http://www.example.com/api").to_return(:body => { version: "1" }.to_json, status: 200)
+    bot = ODIBot.new("http://www.example.com/api")
+    result = bot.check_ckan_endpoint
+    assert_equal true, result[:success]
+  end
+
+  test "successfully handles wrong CKAN endpoint" do
+    stub_request(:any, "http://www.example.com/")
+      .to_return(:body => "<html>Uhoh, a totally normal html websait</html>", status: 200)
+    bot = ODIBot.new("http://www.example.com/")
+    result = bot.check_ckan_endpoint
+    assert_equal false, result[:success]
+  end
+
 end

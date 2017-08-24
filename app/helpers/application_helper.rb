@@ -68,33 +68,22 @@ module ApplicationHelper
     className.blank? ? 'container main-default' : className
   end
 
-  def main_menu_navigation
-    links = [
-      new_certificate_link_hash,
-      { link_text: t('menu.my_certificates'), path: dashboard_path, requires_signed_in_user: true },
-      { link_text: t('menu.browse_all_certificates'), path: datasets_path },
-      { link_text: t('menu.discussion'), path: discussion_path },
-      { link_text: t('menu.about'), path: about_page_path },
-      { link_text: t('menu.faq'), path: faq_page_path },
-      { link_text: t('menu.admin'), path: admin_path, requires_signed_in_user: true, requires_admin_user: true}
-    ]
-    render partial: 'layouts/main_menu_navigation_list_item', collection: links, as: :link
-  end
-
-  def is_active_menu_link?(link)
-    begin
-      Rails.application.routes.recognize_path(link[:path]) == Rails.application.routes.recognize_path(request.env['REQUEST_PATH'])
-    rescue ActionController::RoutingError
-      false
-    end
-  end
-
   def body_class
     content_for :body_class
   end
 
-  def new_certificate_link(options={})
-    render partial: 'layouts/main_menu_navigation_link', locals: { link: new_certificate_link_hash(options) }
+  def new_certificate(options={}, &block)
+    text = t('menu.create_certificate')
+    if user_signed_in?
+      button = button_tag(options) { text }
+      content = block ? capture(button, &block) : button
+      form_tag(non_authenticated_start_questionnaire_path) do
+        content
+      end
+    else
+      link = link_to(text, non_authenticated_start_questionnaire_path(anchor: 'start-cert-modal'), options.merge('data-toggle' => :modal))
+      block ? capture(link, &block) : link
+    end
   end
 
 	def body_class
@@ -186,12 +175,4 @@ module ApplicationHelper
     link_to('Example dataset', dataset_latest_certificate_path(I18n.locale, cert.dataset), :class => ['btn', 'btn-large'])
   end
 
-  private
-  def new_certificate_link_hash(options={})
-    if user_signed_in?
-      { link_text: t('menu.create_certificate'), path: non_authenticated_start_questionnaire_path, post: true }
-    else
-      { :link_text => t('menu.create_certificate'), :path => non_authenticated_start_questionnaire_path(anchor: 'start-cert-modal'), 'data-toggle' => :modal }
-    end.merge(options)
-  end
 end

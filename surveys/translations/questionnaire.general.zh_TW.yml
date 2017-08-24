@@ -1,0 +1,822 @@
+zh_TW:
+  surveyor:
+    survey_sections:
+      general:
+        text: "一般資訊"
+      practical:
+        text: "實用資訊"
+        help_text: "數據可尋性、數據正確性、數據品質及數據保證"
+      technical:
+        text: "技術資訊"
+        help_text: "地點、格式與可信度"
+      social:
+        text: "社會信息"
+        help_text: "文件、支援與服務"
+    questions:
+      dataTitle:
+        text: "這份數據是什麼？"
+      documentationUrl:
+        text: "在哪裏說明？"
+        text_as_statement: "這個數據主要是說明"
+        help_text: "為使用者提供一個可以觀看你的開放數據及更多細節的網址，它可以是一個由官方網站連結進去的頁面，ex: data.gov.uk"
+      publisher:
+        text: "誰發布這個數據"
+        text_as_statement: "這份數據是由＿＿＿發佈"
+        help_text: "你必須為這個發佈數據的單位做命名，它可能會是一個你服務的單位或你是某一位特定人士的代表"
+      publisherUrl:
+        text: "這份數據是在哪一個網上發佈的？"
+        text_as_statement: "這份數據是在＿＿＿發佈的"
+        help_text: "提供一個網站的網址能幫助我們從同一個數據發佈單位進行數據蒐集，即便這些數據是由不同的人來發佈"
+      releaseType:
+        text: "這是屬於哪一種的推出上線？"
+        answers:
+          oneoff:
+            help_text: "這是一個單一的檔案，而且你也在近期沒有打算要建立類似的檔案"
+          collection:
+            help_text: "這是一個一樣數據在相關檔案中的彙集，而且你也在近期之內沒有打算發佈類似的彙集"
+          series:
+            text: "一系列相關的數據集持續地做線上釋出"
+            help_text: "這是一個在未來具計劃週期性更新的數據集程序"
+          service:
+            text: "為獲得開放數據的一項服務或應用程式介面"
+            help_text: "這是一項可以讓程式設計師透過介面查詢你公開數據的即時網路服務"
+      onWebsite:
+        text: "你的主網頁與你的數據之間有連結嗎？"
+        help_text: "如果你的數據與主網頁之間有連結，你的數據可以更容易被搜尋"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      webpage:
+        text: "在你的網站上哪一個頁面有連結到數據？"
+        text_as_statement: "網頁從＿＿＿連結到數據"
+        help_text: "請提供一個有從你的頁面上與數據作連結的網址"
+      listed:
+        text: "你的數據有建立在一個網域裡面嗎？"
+        help_text: "數據若存在於一個相關的的數據目錄(ex:學術類、公營機構、衛生保健)或當他出現在相關結果搜尋時，是比較容易被使用者搜尋到的"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      listing:
+        text: "它建立在哪裡？"
+        text_as_statement: "數據出現在網域裡"
+        help_text: "將你的網址建立在一個相關連的網域裡，ex: data.gov.uk(如果他是英國公家單位的數據), hub.data.ac.uk(如果他是英國學術單位的數據)，或是一個給搜尋引擎結果的網址"
+      referenced:
+        text: "這份數據是參照你的發佈嗎？"
+        help_text: "你會提供更多的內容及幫助其他人在數據使用上有更多的發現及理解，當你從自己發佈的數據做參照及使用，ex: 彙報、演示、部落格發文"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      reference:
+        text: "數據引用來源"
+        text_as_statement: "數據引用來源"
+        help_text: "為一份引用或參照數據的文件建立一個網址"
+      serviceType:
+        text: "這個在你應用程式介面背後的數據會改變嗎？"
+        text_as_statement: "在應用程式介面背後的數據"
+        answers:
+          static:
+            text: "不會，應用程式介面允許對不會變更的數據做存取"
+            help_text: "有些應用程式介面使存取不會變更的數據集更容易，尤其是在有很多這樣子的狀況"
+            text_as_statement: "不會改變"
+          changing:
+            text: "會，應用程式介面允許對會變動的數據做存取"
+            help_text: "有些應用程式介面允許即時更新及不斷變動的數據作立即存取"
+            text_as_statement: "將會改變"
+      timeSensitive:
+        text: "你的數據會過時嗎？"
+        text_as_statement: "這份數據的正確性及關聯性會___"
+        answers:
+          'true':
+            text: "是，這份數據在將來會過時"
+            help_text: "舉例來說，公車站牌位置的數據集之時效性會受站牌拆建影響"
+            text_as_statement: "過時"
+          timestamped:
+            text: "是，這份數據會因為時間而過時但他還是具時間標記"
+            help_text: "舉例來說，人口統計資料通常會使用一段固定的時間標記來表達統計資料的相關性"
+            text_as_statement: "數據會過時但它還是具時間標記"
+          'false':
+            text: "沒有，這個數據及並不包含與時間有關的訊息"
+            help_text: "舉例來說，實驗結果不會過時因為數據準確的顯示觀察結果"
+            text_as_statement: "不會過時"
+      frequentChanges:
+        text: "至少這份數據每日會有更動嗎？"
+        text_as_statement: "這份數據會改變"
+        help_text: "必須讓大家知道是否潛在的數據會有經常性的更動，因為當數據有經常性的更動時，其也相對容易過時，所以使用者必須要知道你是否對數據有迅速且經常性的更新"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "至少會有每日的更動"
+      seriesType:
+        text: "這是哪一種類型的數據集系列？"
+        text_as_statement: "這是一系列有關＿＿＿的數據"
+        answers:
+          dumps:
+            text: "一個完整資料庫的常規備份"
+            help_text: "請選擇，如果你會對你整個資料庫發佈新的備份和做備份更新。因為當你在建立資料轉存時，這樣有利於使用者對動態時報改的存取，也因此他們能保持這些數據備份處於最新狀態"
+            text_as_statement: "資料庫的備份"
+          aggregate:
+            text: "更動數據的定期彙總"
+            help_text: "請選擇，如果你會定期建立數據集。你可能會需要這麼做，如果你的潛在數據不能被當作開放數據做發佈或你只在最近一次的更新之後進行最新數據的發佈"
+            text_as_statement: "更動數據的彙總"
+      changeFeed:
+        text: "可以在新聞訂閱上做變更嗎？"
+        text_as_statement: "一份數據在新聞訂閱的變更"
+        help_text: "告訴大家，如果你會提供一組對數據會造成影響的連續變更，ex: 新的指令或是修改既有指令，新聞訂閱可能會是以RSS、Atom或是客製化的資料格式呈現"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "他是可使用的"
+      frequentSeriesPublication:
+        text: "你會做一次新發佈的頻率是？"
+        text_as_statement: "已對這份數據做新發佈"
+        help_text: "這取決於如何讓使用者獲在數據過時前獲得更新"
+        answers:
+          rarely:
+            text: "每月少於一次"
+            text_as_statement: "每月少於一次"
+          monthly:
+            text: "每月至少一次"
+            text_as_statement: "每月至少一次"
+          weekly:
+            text: "至少每個星期"
+            text_as_statement: "至少每個星期"
+          daily:
+            text: "至少每天"
+            text_as_statement: "至少每天"
+      seriesPublicationDelay:
+        text: "數據集建立及發佈的延滯通常耗時多久？"
+        text_as_statement: "在這份數據建立及發佈之間的延滯是"
+        answers:
+          extreme:
+            text: "時間長於每次數據線上發行的間隔"
+            help_text: "舉例來說，如果你每天都創建一個新版本的數據集，請選擇如果他會花超過你一天的時間來做發佈"
+            text_as_statement: "時間長於每次數據線上發行的間隔"
+          reasonable:
+            text: "時間約莫與每次數據的線上發行時間相同"
+            help_text: "舉例來說，如果你每天都創建一個新版本的數據集，請選擇如果他會要你約莫一天的時間做發佈"
+            text_as_statement: "時間約莫與每次數據的線上發行時間相同"
+          good:
+            text: "時間少於一半每次數據線上發行的間隔"
+            help_text: "舉例來說，如果每天都創建一個新版本的數據集，請選擇如果他會要你少於12小時的時間做發佈"
+            text_as_statement: "時間少於一半每次數據線上發行的間隔"
+          minimal:
+            text: "極少或完全沒有延遲"
+            help_text: "請選擇，如果你的發佈是在幾秒鐘或幾分鐘內完成的"
+            text_as_statement: "極少"
+      provideDumps:
+        text: "你也會發佈這份未經整理過的數據集嗎？"
+        text_as_statement: "決策者建立＿＿＿"
+        help_text: "備份副本是一份從整個數據集精簡成一個可供使用者進行下載的檔案，而這也提供了另一種讓使用者藉由不同於應用程式介面進行分析的方式"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "數據的備份副本"
+      dumpFrequency:
+        text: "你建造一個全新的資料庫備份副本的頻率是？"
+        text_as_statement: "資料庫的備份副本已經被創建出來了"
+        help_text: "對經常性摘錄的整組數據集提供更快速的存取代表著使用者可以更快速的開始使用最新的更新數據"
+        answers:
+          rarely:
+            text: "每月少於一次甚至更少"
+            text_as_statement: "每月少於一次甚至更少"
+          monthly:
+            text: "每個月至少一次"
+            text_as_statement: "每個月至少一次"
+          weekly:
+            text: "於一週內有任意的改變"
+            text_as_statement: "於一週內有任意的改變"
+          daily:
+            text: "於一日內有任意的改變"
+            text_as_statement: "於一日內有任意的改變"
+      corrected:
+        text: "如果你的數據有錯誤出現它會被更正嗎?"
+        text_as_statement: "任何在這份數據中出現的錯誤是＿＿＿"
+        help_text: "修正在你的數據中出現的錯誤會是一個很好的練習，尤其是當你自己在使用它的狀況下。當你的對你的數據有做修正，建議你告知使用者。"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "更正"
+      qualityUrl:
+        text: "你對有關這份數據的品質議題會在哪裡記錄？"
+        text_as_statement: "數據的品質在＿＿＿有記錄"
+        help_text: "提供一個可以讓使用者查詢你的數據品質的網址。使用者可以接受出現在數據中的錯誤的，它可能是發生在設備故障或系統轉換的過程中。建議你對數據的品質做開放，這樣一來使用者才能對這份數據的憑靠程度做判斷"
+      qualityControlUrl:
+        text: "你對這份品質管制的過程會在哪裏說明？"
+        text_as_statement: "品質管制的過程在＿＿＿有說明"
+        help_text: "提供一個可以讓使用者無論是自動或是手動查詢進行檢驗中數據的網址，如此向他們再次證明了你對品質的要求及提倡改善且讓所有人都受惠的概念"
+      backups:
+        text: "你會做離線備份的動作嗎？"
+        text_as_statement: "此數據是"
+        help_text: "定期做離線備份可以確保當意外發生時數據不會遺失"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "離線備份"
+      slaUrl:
+        text: "你對任何業務可用性的保證有在哪裏說明？"
+        text_as_statement: "服務可用性在＿＿＿有說明"
+        help_text: "提供一個說明你對你所提出可用性服務的保證之頁面網址，舉例來說，你可以提供一個99.5%的運行時間保證，否則你所提供的任不能被當作是保證"
+      statusUrl:
+        text: "你對你所提供的服務現況相關資訊在哪裡有說明？"
+        text_as_statement: "服務狀況在＿＿＿有說明"
+        help_text: "提供一個可告知使用者包括已知的錯誤及你的當前服務提供現況的頁面網址"
+      onGoingAvailability:
+        text: "這份數據會開放有效到何時？"
+        text_as_statement: "這份數據是開放有效的"
+        answers:
+          experimental:
+            text: "這份數據可能會隨時消失"
+            text_as_statement: "這份數據是具實驗性且可能隨時會消失"
+          short:
+            text: "它已經有效地實驗但尚需一年左右的時間"
+            text_as_statement: "實驗了一年左右"
+          medium:
+            text: "它是你中程計畫中的一部分，建議您至少要投入兩年的時間"
+            text_as_statement: "至少兩年或兩年以上"
+          long:
+            text: "這是你每天操作的一部分，所以它將會處在發佈狀態一段時間"
+            text_as_statement: "長期"
+      datasetUrl:
+        text: "你的數據集在哪裏？"
+        text_as_statement: "這份數據是在___發佈的"
+        help_text: "為你的數據集建立一個網址。建議你將開放數據與該網站做連結，如此一來使用者可以容易地對該開放數據做搜尋及重新使用。"
+      versionManagement:
+        text: "你是如何發佈一系列相同的數據集？"
+        answers:
+          current:
+            text: "因為這是一個定期更新的網址"
+            help_text: "請選擇，如果你有提供一個可以讓使用者下載最新版本的近期數據集網址"
+          template:
+            text: "因為這是每一次線上發行一致的網址"
+            help_text: "請選擇，如果你的數據集網址有一個包含發佈日期在規律內的模式，舉例來說，一個自2013年4月建立的網址，這幫助使用者了解你做線上發行數據的頻率，及在每次推出線上數據時能標示註腳"
+          list:
+            text: "作為線上發行的列表"
+            help_text: "請選擇，如果你有一份在網頁或是新聞訂閱(ex:Atom, RSS)的數據集清單，且每一份線上發行都有屬於自己的連結及詳細內容記載，如此一來也幫助使用者了解你做線上發行數據的頻率，即在每次推出線上數據時能標示註腳"
+      currentDatasetUrl:
+        text: "你當前的數據集在＿＿＿？"
+        text_as_statement: "當前的數據集在＿＿＿會有效"
+        help_text: "為你的最新版本數據及提供一個單一的網址，建議你這個網站內容在每一次新的版本線上發行後要有所更新"
+      versionsTemplateUrl:
+        text: "數據集是依據哪種格式做線上發行？"
+        text_as_statement: "線上發行是依據這個連貫的網址模式"
+        help_text: "當你發佈不同的線上發行時，這會是你網址的架構。使用{可更動內容}來指出套版網址的部分改變，舉例來說，`http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+      versionsUrl:
+        text: "你線上發行的數據集清單在＿＿＿？"
+        text_as_statement: "這份數據的線上發行在＿＿＿有列出"
+        help_text: "為一個頁面或是新聞訂閱有機器可讀取的數據集清單提供一個網址，並利用這個網址的首頁去與其他頁面做連結"
+      endpointUrl:
+        text: "你應用程式介面的終端在＿＿＿？"
+        text_as_statement: "應用程式介面福的的終端是"
+        help_text: "提供一個網址，而這會是一個讓使用者的註腳進入你應用程式介面的好開始。建議你這應該要是一份可以成功幫助服務存在的註腳服務內容文件"
+      dumpManagement:
+        text: "你是如何發佈你的資料庫備份副本的？"
+        answers:
+          current:
+            text: "因為這是一個定期更新的網址"
+            help_text: "請選擇，如果你有一個可以讓使用者下載最新版本資料庫備份副本的網址"
+          template:
+            text: "因為每次一致的線上推出網址"
+            help_text: "請選擇，如果你的資料庫備份戶本網址有依照的一個固定的模式，其中包含發佈日期，舉例來說，一個在\"2013.04\"啟用的網址，而這也幫助了使用者了解你做線上發行的數據的頻率以及在每次做線上推出時能標示註解"
+          list:
+            text: "作為線上發行的清單"
+            help_text: "請選擇，如果你有一個網頁或是新聞訂閱(ex: Atom/RSS)上有一份資料庫備份的清單可以連結到每一份線上發佈及其細節，而這也幫助了使用者了解你做數據線上發行的頻率，及在每次做線上推出時能標示註解"
+      currentDumpUrl:
+        text: "現行版本的資料庫備份副本在＿＿＿？"
+        text_as_statement: "你始終可以在＿＿＿找到最新版本的資料庫備份副本"
+        help_text: "為最新版本的資料庫備份副本提供一個網址，其在這個網址的內容建議要在每一次創建一個新的資料庫備份副本時做更改"
+      dumpsTemplateUrl:
+        text: "資料庫備份副本的網址是依據哪種格式？"
+        text_as_statement: "資料庫備份副本依照一具連貫性網址的模式"
+        help_text: "當你要發佈不同的線上推行時，這應該是你網址的結構。利用{可更動內容}來指出部分套版網址的改變，舉例來說，`http://example.com/data/monthly/mydata-{YY}{MM}.csv`"
+      dumpsUrl:
+        text: "你的資料庫備份副本有效清單在＿＿＿？"
+        text_as_statement: "一份資料庫備份副本的清單在＿＿＿"
+        help_text: "提供一個可供機器閱讀資料庫備副本的網頁或新聞訂閱網址，並利用這個網址的首頁來與其他頁面做連結"
+      changeFeedUrl:
+        text: "你的新聞訂閱變更在＿＿＿？"
+        text_as_statement: "一份新聞訂閱的變更對這份數據是在＿＿＿"
+        help_text: "提供一個可供機器讀取資料庫被份副本舊版清單的網頁或新聞訂閱，並利用這個網址的首頁來與其他頁面做連結"
+      machineReadable:
+        text: "這是一份可供機器讀取的數據嗎？"
+        text_as_statement: "這份數據是＿＿＿"
+        help_text: "使用者偏好易於被電腦快速且正確處理的數據格式，舉例來說，一份經由掃描的試算表影本是無法被機器讀取的，但CSV檔有支援機器讀取的功能"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "可供機器讀取的"
+      openStandard:
+        text: "這是一份標準開放格式的數據嗎？"
+        text_as_statement: "這份數據的格式是＿＿＿"
+        help_text: "開放標準是通過公平、透明和合作過程中創建的，所有人都可以來執行這些開放標準，同時也有會有很多相關支援，也因此讓數據分享這件事更加便利，舉例來說，XML, CSV和JSON都屬於開放的標準"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "一種標準開放的格式"
+      dataType:
+        text: "你都發佈哪種類型的數據？"
+        answers:
+          documents:
+            text: "可供使用者讀取的"
+            help_text: "請選擇，如果你的數據是專門給使用者讀取的，舉例來說，政策文件、白皮書、報告及會議紀錄等，這些文件都會有一定的格式架構但通常還是是以文字做呈現"
+          statistical:
+            text: "統計數據，舉例來說像是計數、平均值及百分比"
+            help_text: "請選擇，如果你提供的是統計數據(ex: 計數、平均值及百分比)或數值數據(ex:普查結果、交通流量訊息及犯罪統計)"
+          geographic:
+            text: "地理資訊，舉例來說像是點及邊界"
+            help_text: "請選擇，如果你的數據可以在地圖上用點、線或邊界作劃分"
+          structured:
+            text: "其他種類的結構化數據"
+            help_text: "請選擇，如果你的數據是以其他結構方式呈現，舉例來說像是活動詳情、火車時刻表、聯絡資訊或是其他可以被解讀成數據，並分析及以多種方式呈現。"
+      documentFormat:
+        text: "你的使用者讀取文件有包含＿＿＿的格式？"
+        text_as_statement: "已發佈的文件"
+        answers:
+          semantic:
+            text: "描述語義的結構，舉例來說像是HTML、Docbook或Markdown"
+            help_text: "這些格式能對結構做標記，舉例來說像是章節、標題及表格，而它們可以更容易的自動創建像是內容及術語表格，此外當它們在呈現上有所更改時，也使在不同型式文件上的應用更加便利"
+            text_as_statement: "以語義的格式呈現"
+          format:
+            text: "在格式上的訊息描述，舉例來說像是OOXML、PDF"
+            help_text: "這些格式象徵著外在形象，舉例來說像是字型、顏色及在頁面內不同元素的定位，而這些都是對使用者讀取上有好的影響但卻不利於使用者進行自動處理和改變外觀型式。"
+            text_as_statement: "以一種展示的格式做呈現"
+          unsuitable:
+            text: "不是給如：Excel、JSON、CVS這些文件格式的"
+            help_text: "這些格式比較適合用在表格式或結構化的數據"
+            text_as_statement: "以一種不適合文件的格式呈現"
+      statisticalFormat:
+        text: "你的統計數據有包括＿＿＿的格式嗎？"
+        text_as_statement: "統計數據被發佈"
+        answers:
+          statistical:
+            text: "揭示統計四維立方體數據的結構，舉例來說像是SDMX、數據立方體"
+            help_text: "四維立方體的個體觀察與一組特定的丈量方法及維度有關係，而每一種觀察也可能與提供額外背景的註解有關。像是SDMX及數據立方體的格式就是專門針對表達該種非正式結構的設計"
+            text_as_statement: "以一種統計數據格式呈現"
+          tabular:
+            text: "以像處理表格的方式，ex: CSV，來處理統計數據"
+            help_text: "這些格式使統計數據以行及列的表格呈現，而這種方式會缺乏額外非正式四維立方體的相關背景資訊提供，但卻容易處理"
+            text_as_statement: "以一種格式化數據的格式呈現"
+          format:
+            text: "著重在像是Excel格式化數據的格式"
+            text_as_statement: "以一種演示格式的方式呈現"
+          unsuitable:
+            text: "不是專門針對統計或格式化數據，像是Word或PDF"
+            help_text: "這些格式不符合統計數據因為它們隱藏了這些數據的非正式結構"
+            text_as_statement: "以一種不合適的格式來做統計數據的呈現"
+      geographicFormat:
+        text: "你的地理數據有包括＿＿＿格式嗎？"
+        text_as_statement: "地理數據被發佈"
+        answers:
+          specific:
+            text: "是專門為地理數據像是KML或GeoJSON的設計"
+            help_text: "這些格式描述了點、線及邊線，也揭示了數據的結構，這也使自動處理上更為容易"
+            text_as_statement: "以一種地理數據格式的方式呈現"
+          generic:
+            text: "保持數據以像是JSON、XML或CSV的結構方式來呈現"
+            help_text: "任何儲存正常結構數及的格式均可以地理數據的方式呈現，特別是在只能以點呈現數據的狀況下"
+            text_as_statement: "以一種通用數據的格式來呈現"
+          unsuitable:
+            text: "不是為地理數據，如Word或PDF做的設計"
+            help_text: "這些格式並不符合地理數據的標準因為它們隱藏了數據非正式的結構"
+            text_as_statement: "以一種不合適的格式來做地理數據的呈現"
+      structuredFormat:
+        text: "你的結構化數據有包括＿＿＿格式嗎？"
+        text_as_statement: "結構化的數據被發佈"
+        answers:
+          suitable:
+            text: "是專門為結構化數據，如JSON、XML、Turtle或CSV等格式的設計"
+            help_text: "這些格式以一種基本且具一組大家都知道的性能價值結構來組織這些數據，同時這些格式也能容易的讓電腦進行自動化處理"
+            text_as_statement: "以一種結構化數據的格式呈現"
+          unsuitable:
+            text: "不是為結構性數據，如Word或PDF做的設計"
+            help_text: "這些格式並不適合這種類型的數據因為它們隱藏了非正式的結構"
+            text_as_statement: "以一種不合適的格式來做結構性數據的呈現"
+      identifiers:
+        text: "你的數據是使用永久的標識嗎？"
+        text_as_statement: "這份數據包含了＿＿＿"
+        help_text: "數據通常是有關一些真實的事物，如學校、路況或使用一個編碼格式，如果來源不同的數據使用相同且永久及獨特的標識來參照相同的事物，如此一來使用者可以容易的結合這些不同的來源並創建更多有用的數據。標識可能會是GUIDs、DOIs或網址"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "永久標識"
+      resolvingIds:
+        text: "你數據裡的標識能被用來搜尋其他相關的資訊嗎？"
+        text_as_statement: "永久的標識"
+        answers:
+          'false':
+            text: "否，這些標識不能被用在搜尋其他相關的資訊上"
+          service:
+            text: "是，有一項服務是提供使用者來解析這些標識的"
+            help_text: "線上服務可以被使用在提供使用者標識相關資訊，如GUIDs或DOIs，它也是一種不像網址可以做到直接存取的方式"
+            text_as_statement: "解析使用服務"
+          resolvable:
+            text: "是，標識是透過解析提供資訊的網址"
+            help_text: "對使用者及電腦來說，網址是有用的。使用者可以在瀏覽器上鍵入網址，進而閱讀更多的資訊如公司及郵遞區號；而電腦可以處理額外的資訊，藉由使用元件來存取非正式的數據"
+            text_as_statement: "因為他們是網址，所以進行解析"
+      resolutionServiceURL:
+        text: "解析標識的服務提供在＿＿＿？"
+        text_as_statement: "標識解析的服務是在＿＿＿"
+        help_text: "建議你對解析服務採取標識作為查詢參數，同時回傳一些有關於被解析的項目資訊"
+      existingExternalUrls:
+        text: "在網站上你的數據有來自第三方資訊？"
+        help_text: "有時在你掌控範圍之外的其他人也可以提供與你的數據內容相關的網址，舉例來說你的數據可能有包含郵遞區號，這也會與英國地形測量局的網站有連結"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      reliableExternalUrls:
+        text: "第三方的資訊可靠嗎？"
+        help_text: "如果第三方提供了與你的數據相關內容的公共網址，那很可能他們也有下了一點功夫來確保數據品質及可靠的程度，而這也是一種拿來衡量你對他們的處理能力可信程度的衡量方法，你可以藉由尋找他們的開放數據證明或是相近的標誌來協助你做決定"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      externalUrls:
+        text: "你的數據是使用第三方的網址嗎？"
+        text_as_statement: "第三方的網址是＿＿＿"
+        help_text: "建議你使用第三方可以解析你數據描述相關資訊的網址，藉此可以減少重複的狀況且也能幫助使用者對不同來源的數據做結合，進而使其能更有效地被使用"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "＿＿＿對這個數據的引用"
+      provenance:
+        text: "你有為你的數據提空機器可讀取的出處嗎？"
+        text_as_statement: "這份數據的出處是在＿＿＿"
+        help_text: "這是有關於在你的數據被發佈之前，你數據的來源是如何被創建及處理，它建立起你發佈數據的可信度因為使用者可以溯及它經過處理的過程"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+            text_as_statement: "機器可讀取的"
+      digitalCertificate:
+        text: "在哪裏說明了使用者如何驗證他們接收到數據來自於你？"
+        text_as_statement: "這份數據可以藉由＿＿＿被驗證"
+        help_text: "如果你傳送了重要的數據給使用者，他們應該要能檢查他們接收到的數據與你發佈的是同一筆，舉例來說，你可以對你發佈的數據做數位簽名，如此一來使用者可以分辨這份數據是否被竄改過"
+      documentationMetadata:
+        text: "你的數據文件有為了＿＿＿＿包含機器可讀取的數據嗎？"
+        text_as_statement: "這份文件是為了＿＿＿，其中包含機器可讀取的數據"
+        answers:
+          title:
+            text: "標題"
+            text_as_statement: "標題"
+          description:
+            text: "說明"
+            text_as_statement: "說明"
+          issued:
+            text: "線上發行日期"
+            text_as_statement: "線上發行日期"
+          modified:
+            text: "修改日期"
+            text_as_statement: "修改日期"
+          accrualPeriodicity:
+            text: "線上發行的頻率"
+            text_as_statement: "線上發行頻率"
+          identifier:
+            text: "標識"
+            text_as_statement: "標識"
+          landingPage:
+            text: "登錄頁面"
+            text_as_statement: "登錄頁面"
+          language:
+            text: "語言"
+            text_as_statement: "語言"
+          publisher:
+            text: "發佈者"
+            text_as_statement: "發佈者"
+          spatial:
+            text: "空間/地域覆蓋率"
+            text_as_statement: "空間/地域覆蓋率"
+          temporal:
+            text: "時間覆蓋率"
+            text_as_statement: "時間覆蓋率"
+          theme:
+            text: "主題"
+            text_as_statement: "主題"
+          keyword:
+            text: "關鍵字/標籤"
+            text_as_statement: "關鍵字/標籤"
+          distribution:
+            text: "分佈"
+            text_as_statement: "分佈"
+      distributionMetadata:
+        text: "你的文件有為每次的分佈包含機器可讀取的元數據在＿＿＿嗎？"
+        text_as_statement: "這份有關每次分佈的文件是為了＿＿＿＿，其中包含了機器可讀取的數據"
+        answers:
+          title:
+            text: "標題"
+            text_as_statement: "標題"
+          description:
+            text: "說明"
+            text_as_statement: "說明"
+          issued:
+            text: "線上發行日期"
+            text_as_statement: "線上發行日期"
+          modified:
+            text: "修改日期"
+            text_as_statement: "修改日期"
+          rights:
+            text: "權利聲明"
+            text_as_statement: "權利聲明"
+          accessURL:
+            text: "用來存取這筆數據的網址"
+            help_text: "這份元數據應該應用在當你的數據無法被有效下載的狀況，舉例來說像是應用程式介面"
+            text_as_statement: "一個用來存取這筆數據的網址"
+          downloadURL:
+            text: "用來下載這筆數據集的網址"
+            text_as_statement: "一個用來下載這筆數據集的網址"
+          byteSize:
+            text: "以字節為大小的單位"
+            text_as_statement: "以字節為大小的單位"
+          mediaType:
+            text: "媒體下載的類型"
+            text_as_statement: "媒體下載的類型"
+      technicalDocumentation:
+        text: "這筆數據相關的技術文件在＿＿＿？"
+        text_as_statement: "這筆數據相關的技術文件在＿＿＿"
+      vocabulary:
+        text: "這份數據格式有使用辭彙或架構嗎？"
+        help_text: "如CSV、JSON、XML或Turtle的格式均使用客製化的詞彙或格式，這也代表著這筆數據包含的系列及屬性"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      schemaDocumentationUrl:
+        text: "有關你這筆數據的詞彙文件在＿＿＿？"
+        text_as_statement: "這筆數據使用的詞彙在＿＿＿有紀錄"
+      codelists:
+        text: "這筆數據有使用任何的編碼嗎？"
+        help_text: "如果你的數據有使用編碼來做參照，舉例來說地域面積、開支種類或是疾病，這些都是需要向使用者做解釋的"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      codelistDocumentationUrl:
+        text: "在你數據中使用的任何編碼被記錄在＿＿＿？"
+        text_as_statement: "在這筆數據中使用的代碼被記錄在＿＿＿"
+      contactUrl:
+        text: "在＿＿＿可以找出並連絡對這份數據有疑問的人士？"
+        text_as_statement: "找出在＿＿＿如何聯絡與這份數據相關連的人士"
+        help_text: "提供一個說明在數據使用遇上問題的使用者一個相關人士聯絡方式的頁面網址"
+      improvementsContact:
+        text: "使用者可以在哪裡找到如何改建你發佈數據的方式？"
+        text_as_statement: "找出如何對在＿＿＿＿發佈的改善建議"
+      dataProtectionUrl:
+        text: "使用者可以在哪裡找到有關隱私權相關問題的聯絡人資訊？"
+        text_as_statement: "找出可以在＿＿＿回報隱私權相關的問題"
+      socialMedia:
+        text: "你有使用社群媒體來連結你數據的使用者嗎？"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      account:
+        text: "透過哪一個社群媒體帳號使用者可以與你聯繫？"
+        text_as_statement: "透過這些社群媒體帳號與監護人做聯繫"
+        help_text: "提供你的社群媒體帳號網址，如你的推特(Twitter)或臉書(Facebook)個人頁面"
+      forum:
+        text: "使用者應該在＿＿＿討論這筆數據集？"
+        text_as_statement: "在＿＿＿討論該筆數據"
+        help_text: "提供一個使用者可以討論你數據的論壇或郵寄名單網址"
+      correctionReporting:
+        text: "使用者可以在哪裡找出如何要求修正你的數據？"
+        text_as_statement: "找出在＿＿＿可以要求數據修正"
+        help_text: "提供一個可以讓使用者回報他們在你數據中發現錯誤的網址"
+      correctionDiscovery:
+        text: "使用者可以在哪裏獲得你數據修正的通知？"
+        text_as_statement: "找出如何在＿＿＿獲得數據回報的通知"
+        help_text: "提供一個可以說明如何與使用者分享修正通知的網址"
+      engagementTeam:
+        text: "你有任何活躍於經營有關這筆數據的社團聯繫人嗎？"
+        help_text: "一個社群參與團隊會參與有關社群媒體、部落格及安排駭客松或相關競賽來鼓勵使用者利用這項數據"
+        answers:
+          a_false:
+            text: "否"
+          a_true:
+            text: "是"
+      engagementTeamUrl:
+        text: "他們的首頁在哪裡？"
+        text_as_statement: "社群管理是由＿＿＿來做"
+      libraries:
+        text: "你在哪裡列出了可以處理你數據的工具？"
+        text_as_statement: "幫助使用這項數據的工具清單在＿＿＿"
+        help_text: "提供一個你知道或你推薦使用者用來處理你數據的工具清單網頁"
+    labels:
+      findability:
+        help_text: "如何幫助使用者找到你的數據？"
+      accuracy:
+        help_text: "如何保持數據持續更新"
+      quality:
+        help_text: "使用者可以對你的數據有多少的憑靠？"
+      guarantees:
+        help_text: "使用者可以對你的數據可用性有多少憑靠？"
+      locations:
+        help_text: "使用者如何存取你的數據？"
+      format:
+        help_text: "使用者該怎麼利用你的數據？"
+      trust:
+        help_text: "使用者可以對你的數據抱持多高的可信度？"
+      documentation:
+        help_text: "你如何幫助使用者了解你數據的背景及內容？"
+      support:
+        help_text: "你如何與使用你數據的使用者溝通？"
+      services:
+        help_text: "你如何給予工具使用權給你的數據使用者？"
+      pilot_1:
+        text: "建議你要有一個提供你自己所屬的開放數據文件在這個網頁上，這樣一來其他的使用者可以了解其背景、內容及效用"
+      basic_1:
+        text: "你一定得有一個提供資料且允許存取你所發佈的開放數據的網頁，這樣一來其他人才可以使用這些資料"
+      standard_1:
+        text: "建議你要有一份清楚的合法權利來說明你能發佈這份數據"
+      standard_2:
+        text: "建議你同時也提供機器可讀取的數據來源"
+      standard_3:
+        text: "建議你標示公眾領域內容為公眾領域，讓其他人知道他們這些內容可以重用的。"
+      pilot_2:
+        text: "建議你記錄這份相關數據使用的風險，如此一來可以幫助使用者了解他們願意使用的程度"
+      standard_4:
+        text: "你應該法規說明中提供電子產品可已閱讀的檔案，讓自動工具可以使用。"
+      exemplar_1:
+        text: "你應該在法規說明中提供電子產品可已閱讀的檔案，因此自動工具可以使用它。"
+      pilot_3:
+        text: "建議你記錄數據的來源及你發佈數據下的權利，如此一來使用者可以確保他們對會使用的數據這部分是來自第三方"
+      standard_5:
+        text: "你應該法規說明中提供電子產品可已閱讀的檔案，這樣電子產品可以自動及閱讀及使用。"
+      exemplar_2:
+        text: "您應該在法規說明中提供機器可讀的數據，關於版權年份，數據的權利聲明，因此自動化工具可以使用它。"
+      pilot_4:
+        text: "建議你發佈一份權利聲明，其中詳細敘述版權、資料庫權利、憑證及使用者如何提供數據屬性等項目"
+      standard_6:
+        text: "你應該在法規說明中提供電子產品可已閱讀的檔案，讓自動工具可以使用它。"
+      exemplar_3:
+        text: "您應該在法規說明中提供機器可讀的數據，有關數版權持有人的權利聲明，因此自動化工具可以使用它。"
+      standard_7:
+        text: "你應該提供機器可讀的的數據在網址權利聲明連接到飲用此數據，因此自動工具可以使用它。"
+      pilot_5:
+        text: "你應該以發佈匿名個人的數據，如果你符合規定或許可證在法律下。"
+      standard_8:
+        text: "你應該有你的匿名過程被獨立審計，以確保和減少個人重新被辨別到風險再度發生。"
+      exemplar_4:
+        text: "建議你可以為你的數據提供一個可做更改的新聞訂閱，這樣使用者才能獲得即時且準確的備份"
+      standard_9:
+        text: "你應該記錄您的權利，發布關於個人誰使用您的數據的人和為那些因為公開而受影響的人。"
+      standard_10:
+        text: "你應該公佈你的隱私影響評估，那麼使用者可以瞭解評估公開數據的風險。"
+      exemplar_5:
+        text: "建議你至少每天都能建立一份新的數據集並做線上發行，這樣使用者才能獲得即時且準確的備份"
+      standard_11:
+        text: "你應該擁有你的隱私影響評估被個人審計，以確保它已進行正常。"
+      standard_12:
+        text: " <strong></strong> "
+      exemplar_6:
+        text: "建議你在創建一份新的數據集及做發佈時，在過程中僅安置短暫的時間間隔抑或不要穿插任何的時間間隔，這樣一來使用者才能獲得即時且準確的數據"
+      pilot_6:
+        text: "你應該要做因私影響評估如果你有公佈個人的數據。"
+      standard_13:
+        text: "你應該要確保使用者可以從你的主網站找到你的數據，這樣一來使用者可以更容易對你的資訊作搜尋"
+      exemplar_7:
+        text: "建議你創建一個於一日內會任意變更的資料庫備份副本，這樣一來使用者可以花更少的時間來等待最新的數據公佈"
+      basic_2:
+        text: "你必須要有發佈這份數據的權利"
+      pilot_7:
+        text: "建議你再將你的數據發佈之前加上時間標記，如此一來可以幫助使用者了解這份數據的時效性"
+      standard_14:
+        text: " <strong></strong> "
+      pilot_8:
+        text: "建議你每月都能建立一份新的數據集並做線上發行，這樣使用者才能獲得即時且準確的備份"
+      standard_15:
+        text: "建議你可以多參照及使用自己發佈過的數據，藉此可以讓其他人知道這份數據的可用性及背景"
+      basic_3:
+        text: "當你指出這份數據並非你的原創，也不是來自眾包，那麼它一定是來自其他數據的摘要或計算而得的"
+      basic_4:
+        text: "建議你要有合法的建議來確保你有權利發表佈你的數據"
+      standard_16:
+        text: "建議您對具時效性的數據做發佈更新，這樣一來他才不會過時"
+      standard_17:
+        text: "建議你至少每週都能建立一份新的數據集並做線上發行，這樣使用者才能獲得即時且準確的備份"
+      exemplar_8:
+        text: "你應該詳實的紀錄你的數據品質管理流程，以提高其他人對這份數據的信賴度"
+      exemplar_9:
+        text: "建議你要有一個可以告知使用者你的當前服務狀況的頁面"
+      pilot_9:
+        text: "建議當你在創建一份新的數據集及發佈它的過程中，要在這二事件中間安置一段短於做線上發行且合理的時間間隔，這樣一來使用者才可以獲得即時且準確的數據"
+      standard_18:
+        text: "建議當你在創建一份新的數據集及發佈它的過程中，要在這二事件之間安置一段做線上發行所需時間一半的時間間隔，這樣一來使用者才可以獲得即時且準確的數據"
+      standard_19:
+        text: "建議你讓使用者能對你的數據集做完整的下載，這樣一來他們能更加完善且準確利用你的所有數據進行分析"
+      pilot_10:
+        text: "建議你每個月創建一個新的資料庫備份副本，這樣一來使用者得以獲得最新的數據"
+      exemplar_10:
+        text: "建議你要在這張表格上對你的數據有至長期的保證，這樣一來使用者才能決定對這份資料的憑藉程度"
+      standard_20:
+        text: "建議你創建一個於一週內會任意變更的資料庫備份副本，這樣一來使用者可以花更少的時間來等待最新的數據公佈"
+      pilot_11:
+        text: "建議你要在這張表格上保證你的數據有效至少一年左右的時間這樣使用者才能決定對這份資料的憑藉程度"
+      exemplar_11:
+        text: "建議你要對資料庫備份副本網址要一連貫性的模式，如此一來使用者才能自動對每一個網址做下載"
+      pilot_12:
+        text: "建議你建立一個可以直接你的數據做連結的網址，如此一來使用者可以容易地做存取。"
+      pilot_13:
+        text: "建議你一樣使用一致的模式即便針對不同的線上發行網址，這樣一來使用者可以自動的對每一種網址進行下載"
+      standard_21:
+        text: "建議你當使用者向你做錯誤回報時，要對數據做修正，這樣一來所有人均能從正確的改正中獲益"
+      standard_22:
+        text: "建議你對所有已知的數據品質議題作記錄這樣一來使用者才能決定對你提供的數據的可信度"
+      exemplar_12:
+        text: "建議你要有一份文件或是新聞訂閱，其中包含一份有效的資料庫被份副本清單，如此一來使用者才能創建註解用來下載全部資料"
+      standard_23:
+        text: "建議你做離線結果備份，如此可以確保當意外發生時數據不會遺失"
+      exemplar_13:
+        text: "建議你以揭示維度及丈量方法的格式來發佈你的統計數據，如此一來較容易進行分析"
+      exemplar_14:
+        text: "建議你以一種目的性設計的格式來做地理數據的發佈，如此一來使用者得以使用常見且有效的工具來處理這些數據"
+      exemplar_15:
+        text: "建議你建立一個連結到提供你數據相關所有細節資訊的網頁，如此一來使用者可以容易的做搜尋及分享這些資訊"
+      standard_24:
+        text: "建議你說明你對你服務可用性的保證這樣使用者才能知道他們對這份數據的憑靠程度"
+      standard_25:
+        text: "建議你要在這張表格上對你的數據有至中期的保證，這樣一來使用者才能決定對這份資料的憑藉程度"
+      standard_26:
+        text: "建議你要有一個可供下載你最新數據版本的單一且連續的網址，這樣一來使用者可以容易地做存去"
+      standard_27:
+        text: "建議你要有一份具有效線上發行清單的文件或是新聞訂閱，如此一來使用者才能創建註解用來下載所有的數據"
+      standard_28:
+        text: "建議你對你的應用程式介面要有一份服務描述文件或是單一輸入點，這樣一來使用者才能做存取"
+      standard_29:
+        text: "建議你要有一個單一且連貫的網址供使用者下載你的資料庫備份副本，如此一來使用者才能做搜尋"
+      standard_30:
+        text: "建議你對你的數據使用開放的標準格式，如此一來使用者可以用常見且有效的工具來做更加容易地處理"
+      standard_31:
+        text: "建議你以揭示語意結構的格式來發佈你的文件，如此一來使用者可以以不同型式的方式做呈現"
+      standard_32:
+        text: "建議你以一種可以揭示表格的數據格式來發佈你的格式化數據，如此一來進行分析會比較容易"
+      standard_33:
+        text: "建議你對你數據裡的事物使用標識，如此一來你的數據能容易地被其他相關事務的數據做連結"
+      standard_34:
+        text: "建議你提供一種能解析標識的服務，如此一來使用者能夠對相關的額外資訊進行搜尋"
+      standard_35:
+        text: "建議你提供一個可以被解析的網址，如此一來更多的相關資訊可以被電腦做搜尋"
+      standard_36:
+        text: "建議你在你的文件裡提及機器可讀取數據的標題，如此一來使用者能知道如何對其進行參照"
+      standard_37:
+        text: "建議你在你的文件裡提及機器可讀取數據的說明，如此一來使用者能知道此文件的內容包含了什麼"
+      standard_38:
+        text: "建議你在你的文件裡提及機器可讀取的數據的線上發行日期，如此一來使用者能知道此文件的時效性"
+      standard_39:
+        text: "建議你在你的文件裡提及機器可讀取數據的修改日期，如此一來使用者能知道他們擁有最新的數據"
+      standard_40:
+        text: "建議你提供你數據線上發行頻率機器可讀取的元數據，如此一來使用者能知道你做更新的頻率"
+      standard_41:
+        text: "建議你在你的機器可讀取文件的數據中包含一個典範網址，如此一來使用者能知道如何持續的做存取"
+      pilot_14:
+        text: "建議你提供的數據是可以被機器讀取的格式，如此一來它有利於資料處理"
+      standard_42:
+        text: "建議你在你的機器可讀取文件的數據中包含一個典範網址，如此一來使用者能知道如何持續的做存取"
+      standard_43:
+        text: "建議你在你的機器可讀取文件中包含數據語言，如此一來對其做搜尋的使用者可以知道他們是否理解"
+      pilot_15:
+        text: "建議你對發佈的文件要有一種客製化設計的格式，如此一來使用者才能容易對文件進行處理"
+      pilot_16:
+        text: "建議你以那種目的為設計格式的格式化數據做發佈，如此一會比較容易來進行處理"
+      pilot_17:
+        text: "建議你結構化數據的方式對地理數據做發佈，如此一來進行處理的過程會較為容易"
+      standard_44:
+        text: "建議你在你的機器可讀取文件中標明數據發佈者，如此一來使用者可以決定他們對你數據的可信度"
+      standard_45:
+        text: "建議你在你的機器可讀取文件中包含地域覆蓋率，如此一來使用者才能知道你數據的應用範圍"
+      standard_46:
+        text: "建議你在你的機器可讀取文件中包含時間帶，如此一來使用者才能知道你數據的應用時段"
+      standard_47:
+        text: "建議你對你的機器可讀去文件包含主題，如此一來使用者才能大略知道你數據的主題"
+      exemplar_16:
+        text: "建議你對在你數據中地第三方資訊使用網址，如此一來會較為容易與使用相同網址的其他數據做結合"
+      exemplar_17:
+        text: "建議你提供機器可讀取的資料出處線索，如此一來使用者才可以溯及你的數據是如何被處理的"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+port="$(docker-compose port web 3000 | cut -d: -f2)"
+while ! nc -z $(docker-machine ip default) $port; do sleep 1; done
+open "http://$(docker-machine ip default):$port"

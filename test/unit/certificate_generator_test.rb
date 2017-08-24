@@ -285,4 +285,49 @@ class CertificateGeneratorTest < ActiveSupport::TestCase
     assert_equal existing_user, user
   end
 
+  test "bulk update queues completed generators to be updated" do
+    Sidekiq::Testing.fake! do
+      generator = CertificateGenerator.create(request: {}, user: @user, completed: true)
+      generator2 = CertificateGenerator.create(request: {}, user: @user, completed: false)
+      collection = [generator, generator2]
+      result = CertificateGenerator.bulk_update(collection, 'gb', @user)
+      assert_equal 1, result[:skipped]
+      assert_equal 1, result[:queued]
+    end    
+  end
+
+
+  test "compares and adopts responses that are not available in current response_set" do
+    default = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      publisherUrl: 'http://www.example.com',
+      publisherRights: 'yes',
+      publisherOrigin: 'true',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+
+    sparse = {
+      dataTitle: 'The title',
+      releaseType: 'oneoff',
+      linkedTo: 'true',
+      chooseAny: ['one', 'two']
+    }
+
+    template_cg=CertificateGenerator.create(request: default, user: @user)
+    template_cg.generate('cert-generator', false)
+    new_cg=CertificateGenerator.create(request: sparse, user: @user)
+    new_cg.generate('cert-generator', false)
+    
+    response_count = new_cg.response_set.responses.count
+    difference = template_cg.response_set.responses.count - response_count
+
+    extra_responses = new_cg.compare_responses(template_cg.response_set)
+    assert_true extra_responses.count.eql?(difference)
+    
+    new_cg.adopt_responses(extra_responses)
+    assert_true new_cg.response_set.responses.count.eql?(response_count + difference)
+  end
+
 end

@@ -1,2 +1,2 @@
 = semantic_fields_for(:r) do |f|
-  = render question.custom_renderer || "/partials/question", g: question.question_group, rg: response_group, q: question, f: f, repeated_template: true
+  = render partial_for_question(question), g: question.question_group, rg: response_group, q: question, f: f, repeated_template: true

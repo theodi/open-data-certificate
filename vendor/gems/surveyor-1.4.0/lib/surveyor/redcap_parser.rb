@@ -110,7 +110,7 @@ module SurveyorRedcapParserQuestionMethods
       :reference_identifier => r[:variable__field_name],
       :text => r[:field_label],
       :help_text => r[:field_note],
-      :is_mandatory => (/^y/i.match r[:required_field]) ? true : false,
+      :required => (/^y/i.match r[:required_field]) ? 'required' : nil,
       :pick => pick_from_field_type(r[:field_type]),
       :display_type => display_type_from_field_type(r[:field_type]),
       :display_order => context[:survey_section].questions.size

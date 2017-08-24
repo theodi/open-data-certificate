@@ -5,7 +5,7 @@
   .dataset{class: defined?(expanded) ? 'expanded': ''}
     .row
       .span4
-        %a.level-badge{class: "level-badge-#{dataset.certificate.attained_level}", href: url_for(dataset)}
+        %a.level-badge{class: "level-badge", href: url_for(dataset)}
         %h3.badge-align
           = link_to_unless_current dataset.title, dataset
       .span3

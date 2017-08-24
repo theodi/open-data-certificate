@@ -160,7 +160,6 @@ module SurveyorParserSurveyMethods
     # build and set context
     title = args[0]
     args[1] ||= {}
-    context[:default_mandatory] = args[1].delete(:default_mandatory) || false
     self.attributes = ({
       :title => title,
       :reference_identifier => reference_identifier }.merge(args[1]))
@@ -174,8 +173,7 @@ module SurveyorParserSurveyMethods
       :bad_references => [],
       :duplicate_references => [],
       :dependency_conditions => [],
-      :questions_with_correct_answers => {},
-      :default_mandatory => false
+      :questions_with_correct_answers => {}
     })
   end
 end
@@ -269,7 +267,6 @@ module SurveyorParserQuestionMethods
     self.attributes = ({
       :question_group => context[:question_group],
       :reference_identifier => reference_identifier,
-      :is_mandatory => context[:default_mandatory],
       :text => text,
       :display_type => (original_method =~ /label|image/ ? original_method : "default"),
       :display_order => context[:survey_section].questions.size }.merge(hash_args))

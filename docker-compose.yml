@@ -1,0 +1,47 @@
+version: '2'
+services:
+  web:
+    image: certificates
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/usr/src/app"
+    depends_on:
+      - redis
+      - mysql
+    links:
+      - redis
+      - mysql
+  sidekiq:
+    image: certificates
+    depends_on:
+      - redis
+      - mysql
+    links:
+      - redis
+      - mysql
+    command: ["bundle", "exec", "sidekiq", "-c", "3"]
+  delayed_job:
+    image: certificates
+    depends_on:
+      - redis
+      - mysql
+    links:
+      - redis
+      - mysql
+    command: ["bundle", "exec", "rake", "jobs:work"]
+  redis:
+    image: redis
+  mysql:
+    image: mysql:5.5.48
+    environment:
+      MYSQL_ROOT_PASSWORD: secretsquirrel
+      MYSQL_USER: theodi
+      MYSQL_PASSWORD: secretsquirrel
+      MYSQL_DATABASE: certificates_development
+    volumes:
+      - mysqldata:/var/lib/mysql
+volumes:
+  mysqldata:
+    driver: local

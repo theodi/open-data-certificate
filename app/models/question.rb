@@ -13,20 +13,20 @@ class Question < ActiveRecord::Base
 
   # Validations
   validates_presence_of :text, :display_order
-  validates_inclusion_of :is_mandatory, :in => [true, false]
 
   # Whitelisting attributes
-  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :is_mandatory, :display_width, :custom_class, :custom_renderer, :correct_answer_id, :requirement, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic
+  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :display_width, :custom_class, :correct_answer_id, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic, :is_requirement, :corresponding_requirements
+
+  serialize :corresponding_requirements, Array
 
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
-  scope :mandatory, where(is_mandatory: true)
+  scope :mandatory, where(required: 'required')
   scope :urls, joins(:answers).merge(Answer.urls)
 
   scope :for_id, lambda { |id| where(reference_identifier: id) }
 
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
-  before_save :set_mandatory
 
   belongs_to :question_corresponding_to_requirement, :class_name => "Question"
   belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
@@ -35,7 +35,6 @@ class Question < ActiveRecord::Base
 
   def initialize(*args)
     super(*args)
-    self.is_mandatory ||= false
     self.display_type ||= "default"
     self.pick ||= "none"
     self.data_export_identifier ||= Surveyor::Common.normalize(text)
@@ -51,7 +50,13 @@ class Question < ActiveRecord::Base
   end
 
   def mandatory?
-    self.is_mandatory == true
+    required == 'required'
+  end
+
+  def requirement_identifier
+    # Yes it is really just the reference_identifier but I want to make the
+    # intention a bit clearer in code.
+    reference_identifier
   end
 
   def part_of_group?
@@ -96,7 +101,7 @@ class Question < ActiveRecord::Base
     # Definition: The level to which the current question is assigned. This is used to determine the level for achieved
     #             and outstanding requirements, and for the display customisation of questions.
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
-    @requirement_level ||= requirement.to_s.match(/^[a-zA-Z]*/).to_s
+    @requirement_level ||= requirement_identifier.to_s.match(/^[a-zA-Z]*/).to_s
   end
 
   def minimum_level
@@ -114,16 +119,8 @@ class Question < ActiveRecord::Base
     @requirement_level_index ||= Survey::REQUIREMENT_LEVELS.index(requirement_level) || 0
   end
 
-  def is_a_requirement?
-    # Definition: A 'Requirement' is a bar that needs to be passed to contribute to attaining a certain level in the questionnaire.
-    #             This is not the same as being "required" - which is about whether a question is mandatory to be completed.
-    #             For the moment, requirements are stored in the DB as labels with a 'requirement' attribute set.
-    @is_a_requirement ||= display_type == 'label' && !requirement.blank?
-  end
-
   def requirement_met_by_responses?(responses)
     # could use thusly to get all the displayed requirements for a survey and whether they have been met by their corresponding answers:
-    #   `response_set.survey.questions.flatten.select{|e|e.is_a_requirement? && e.triggered?(response_set)}.map{|e|[e.requirement, e.requirement_met_by_responses?(rs.responses)]}`
     @requirement_met_by_responses ||= calculate_if_requirement_met_by_responses(responses)
   end
 
@@ -138,14 +135,6 @@ class Question < ActiveRecord::Base
   def triggered?(response_set)
     dep_map = response_set.depends
     @triggered_q ||= dependency.nil? || dep_map[dependency.id]
-  end
-
-  def required?
-    is_mandatory? || answers.detect{|a| a.requirement && a.requirement.match(/pilot_\d+/) }
-  end
-
-  def is_mandatory?
-    required.to_s == "required"
   end
 
   def type
@@ -210,7 +199,6 @@ class Question < ActiveRecord::Base
     #       definitively say the requirement has been met.
     #       Validation in the Survey model is used to prevent a requirement getting linked to more than one question or answer
     question = answer_corresponding_to_requirement.try(:question) || question_corresponding_to_requirement
-
     return false unless question # if for some reason a matching question is not found
 
     !!(response_level_index(question, responses) >= requirement_level_index)
@@ -229,47 +217,37 @@ class Question < ActiveRecord::Base
   end
 
   def requirement_level_for_responses(question_id, responses)
-    responses.joins(:answer).where(["responses.question_id = ? AND answers.requirement = ?", question_id, requirement])
-                            .first
-                            .try(:requirement_level_index)
-                            .to_i
-  end
+    relevent_response = responses.joins(:answer).where(question_id: question_id).detect do |r|
+      r.answer.corresponding_requirements.include?(requirement_identifier)
+    end
 
-  def set_mandatory
-    self.is_mandatory ||= is_mandatory?
-    nil # return value of false prevents saving
+    if relevent_response.present?
+      relevent_response.requirement_level_index.to_i
+    else
+      0
+    end
   end
 
   def set_default_value_for_required
-    self.required ||= '' # don't let requirement be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
+    self.required ||= '' # don't let required be nil, as we're querying the DB for it in the Survey, so it needs to be an empty string if nothing
   end
 
-  def corresponds_to_requirement?(subject, requirement)
-    subject.requirement && requirement && subject.requirement.include?(requirement)
+  def find_question_corresponding_to_requirement
+    questions = survey_section.survey.only_questions
+    questions.detect { |q| q.corresponding_requirements.present? && q.corresponding_requirements.include?(requirement_identifier) }
   end
 
-  def calculate_question_corresponding_to_requirement
-    get_questions.detect { |q| corresponds_to_requirement?(q, requirement) }
-  end
-
-  def calculate_answer_corresponding_to_requirement
-    get_answers.detect { |a| corresponds_to_requirement?(a, requirement) }
-  end
-
-  def get_answers
-    survey_section.survey.only_questions.map(&:answers).flatten
-  end
-
-  def get_questions
-    survey_section.survey.only_questions
+  def find_answer_corresponding_to_requirement
+    answers = survey_section.survey.only_questions.map(&:answers).flatten
+    answers.detect { |a| a.corresponding_requirements.present? && a.corresponding_requirements.include?(requirement_identifier) }
   end
 
   def cache_question_or_answer_corresponding_to_requirement
-    if survey_section && is_a_requirement?
-      self.question_corresponding_to_requirement ||= calculate_question_corresponding_to_requirement
+    if survey_section && is_requirement?
+      self.question_corresponding_to_requirement ||= find_question_corresponding_to_requirement
 
       unless self.question_corresponding_to_requirement
-        self.answer_corresponding_to_requirement ||= calculate_answer_corresponding_to_requirement
+        self.answer_corresponding_to_requirement ||= find_answer_corresponding_to_requirement
       end
     end
   end
