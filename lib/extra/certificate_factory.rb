@@ -4,7 +4,7 @@ require 'httparty'
 require 'dotenv'
 require 'sidekiq'
 
-Sidekiq.hook_rails!
+Sidekiq::Extensions.enable_delay!
 Dotenv.load
 
 require 'certificate_factory/api'

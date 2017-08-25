@@ -1,5 +1,4 @@
-Sidekiq.hook_rails!
-Sidekiq.remove_delay!
+Sidekiq::Extensions.enable_delay!
 
 Sidekiq.configure_server do |config|
   config.redis = { url: ENV['REDIS_URL'] }
