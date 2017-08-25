@@ -75,11 +75,17 @@ class ApplicationController < ActionController::Base
 
   # display 404 when we can't find a record
   def record_not_found
-    render :file => Rails.root.join('public','404.html'), :status => "404 Not Found", layout: false
+    render_file Rails.root.join("public", "404.html"), 404
   end
 
   def not_authorised
-    render :file => Rails.root.join('public','403.html'), :status => 403, layout: false
+    render_file Rails.root.join("public", "403.html"), 403
   end
 
+  def render_file path, status
+    # For some reason render file: is exploding here after Rails 3.2.22.2, 
+    # so we use text and read instead
+    render text: File.read(path), :status => status, layout: false
+  end
+  
 end
