@@ -10,31 +10,15 @@ class Flow
     else
       path = get_path(jurisdiction, type)
     end
+
+    if !File.exist?(path)
+      path = get_path('en', type)
+    end
+
     # two Nokogiri parses are created because the operations & transformations exacted destructively modify data
     @xml = Nokogiri::XML(File.open(path))
     @xml_copy = Nokogiri::XML(File.open(path))
     # marshals XML into two above hashes
-
-  end
-
-  def get_path(jurisdiction, type)
-    # return two different paths based on whether legal or practical question flow selected
-    jurisdiction = "en" if (jurisdiction == "gb" && type == "Practical")
-    jurisdiction.upcase! if type == "Legal" # check what this bang! means
-    folder = folder_name(type)
-    path = File.join(Rails.root, 'prototype', folder, "certificate.#{jurisdiction}.xml")
-    unless File.exist?(path)
-      path = File.join(Rails.root, 'prototype', folder, "certificate.en.xml")
-    end
-    path
-  end
-
-  def folder_name(type)
-    # used for retreiving the file to be parsed
-    {
-      "Legal" => "jurisdictions",
-      "Practical" => "translations"
-    }[type]
   end
 
   def questions
@@ -50,6 +34,24 @@ class Flow
       question(q, true)
     end
     # should return an array of hashes? TEST
+  end
+
+  private
+
+  def get_path(jurisdiction, type)
+    if type == 'Practical'
+      general_survey_path
+    else
+      jurisdiction_path(jurisdiction)
+    end
+  end
+
+  def general_survey_path
+    Rails.root.join('surveys', 'definition', "questionnaire.general.xml")
+  end
+
+  def jurisdiction_path(jurisdiction)
+    Rails.root.join('surveys', 'definition', "questionnaire.jurisdiction.#{jurisdiction.upcase}.xml")
   end
 
   def question(q, dependency = true)

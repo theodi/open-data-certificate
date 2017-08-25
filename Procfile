@@ -1,3 +1,2 @@
-thin:  bundle exec thin start -p $PORT
-delayed_job:  bundle exec rake jobs:work
-sidekiq: bundle exec sidekiq -c 3
+web:  bundle exec thin start -p $PORT
+worker: bundle exec sidekiq -c 3

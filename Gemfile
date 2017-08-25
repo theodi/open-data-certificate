@@ -1,6 +1,8 @@
-ruby "2.1.10"
+source "https://rubygems.org"
 
-gem 'rails', '3.2.22'
+ruby "2.2.7"
+
+gem 'rails', '~> 3.2'
 gem 'rake', '< 12.0'
 
 # Bundle edge Rails instead:
@@ -8,6 +10,12 @@ gem 'rake', '< 12.0'
 
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
+
+gem 'mysql2', '~> 0.3.10' # limit to this version for Rails 3.2
+
+# For some reason this is needed in production for consoles
+gem 'test-unit'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,13 +35,12 @@ group :assets do
   gem 'uglifier', '>= 3.2.0'
 end
 
-group :test do
+group :test, :development do
   gem "factory_girl_rails", "~> 4.8"
   gem 'sqlite3'
   gem 'coveralls'
   gem 'shoulda'
   gem 'mocha', require: false
-  gem 'test-unit'
   gem 'csvlint', git: 'https://github.com/theodi/csvlint.rb.git', ref: '3dc689f4625c8edd4f7b725d1d420fdd67a67df9'
   gem 'vcr'
   gem 'webmock'
@@ -45,9 +52,7 @@ group :test do
 
   # From surveyor
   gem 'json_spec', '~> 1.1.5'
-end
 
-group :development do
   gem 'guard', '~> 2.14.1'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
@@ -58,9 +63,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
-end
 
-group :test, :development do
   gem 'pry-byebug'
   gem 'pry-remote'
   gem 'rspec-rails', '~> 2.14.2'
@@ -68,11 +71,11 @@ end
 
 group :production do
   gem 'foreman'
-  gem 'mysql2'
   gem 'airbrake'
   gem 'delayed-plugins-airbrake'
   gem 'logstash-event'
   gem 'lograge'
+  gem 'rails_12factor'
 end
 
 gem 'uuidtools', '~> 2.1'

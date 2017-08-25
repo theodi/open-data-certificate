@@ -1,11 +1,11 @@
 > Please provide a general summary of the issue in the Issue Title above
-> fill out the headings below as applicable to the issue you are reporting, 
+> fill out the headings below as applicable to the issue you are reporting,
 > deleting as appropriate but offering us as much detail as you can to help us resolve the issue
 
 ### Expected Behaviour
 > What should happen?
 
-### Desired Behaviour (for enhancement suggestions only)
+### Desired Behaviour (for improvement suggestions only)
 > if relevant include images or hyperlinks to other resources that clarify the enhancement you're seeking
 
 ### Current Behaviour (for problems)

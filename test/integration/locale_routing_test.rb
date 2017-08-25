@@ -23,10 +23,9 @@ class LocaleRoutingTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test "route to a missing page responds with a routing error" do
-    assert_raises(ActionController::RoutingError) {
-      get '/does_not_exist'
-    }
+  test "route to a missing page gives a 404 result" do
+    get '/does_not_exist'
+    assert_response :not_found
   end
 
   context "with a signed-in user" do
