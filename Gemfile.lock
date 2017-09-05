@@ -50,7 +50,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.5)
-    aasm (3.1.1)
+    aasm (4.12.2)
+      concurrent-ruby (~> 1.0)
     actionmailer (3.2.22.5)
       actionpack (= 3.2.22.5)
       mail (~> 2.5.4)
@@ -116,6 +117,7 @@ GEM
     coffee-script-source (1.7.0)
     colorize (0.8.1)
     commonjs (0.2.7)
+    concurrent-ruby (1.0.5)
     connection_pool (2.2.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
