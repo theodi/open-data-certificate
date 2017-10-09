@@ -366,7 +366,7 @@ GEM
       test-unit (~> 3.0)
     haml (4.0.7)
       tilt
-    hashdiff (0.3.4)
+    hashdiff (0.3.7)
     high_voltage (3.0.0)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -717,7 +717,7 @@ GEM
     vcr (3.0.3)
     warden (1.2.3)
       rack (>= 1.0)
-    webmock (3.0.1)
+    webmock (3.1.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
