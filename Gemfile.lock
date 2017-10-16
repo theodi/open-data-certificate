@@ -533,7 +533,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (11.3.0)
+    rake (12.1.0)
     ransack (1.8.4)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -784,7 +784,7 @@ DEPENDENCIES
   rails-footnotes (>= 4.1.8)
   rails-i18n (~> 3.0.0)
   rails_12factor
-  rake (< 12.0)
+  rake (< 13.0)
   ransack
   redcarpet
   rspec-rails (~> 2.14.2)
