@@ -36,7 +36,7 @@ group :assets do
 end
 
 group :test, :development do
-  gem "factory_girl_rails", "~> 4.8"
+  gem "factory_girl_rails", "~> 4.9"
   gem 'sqlite3'
   gem 'coveralls'
   gem 'shoulda'
