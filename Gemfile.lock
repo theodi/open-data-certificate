@@ -92,7 +92,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    binding_of_caller (0.7.2)
+    binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
     byebug (9.1.0)
@@ -150,7 +150,7 @@ GEM
       json
       json-schema
       rest-client
-    debug_inspector (0.0.2)
+    debug_inspector (0.0.3)
     delayed-plugins-airbrake (1.1.0)
       airbrake
       delayed_job
