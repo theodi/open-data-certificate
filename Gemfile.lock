@@ -144,7 +144,7 @@ GEM
       railties (>= 3, < 5.1)
     cucumber-wire (0.0.1)
     daemons (1.2.4)
-    database_cleaner (1.6.1)
+    database_cleaner (1.6.2)
     datapackage (0.0.4)
       colorize
       json
