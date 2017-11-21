@@ -494,7 +494,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
-    puma (3.10.0)
+    puma (3.11.0)
     rabl (0.13.1)
       activesupport (>= 2.3.14)
     rack (1.4.7)
