@@ -702,7 +702,7 @@ GEM
     trollop (2.1.2)
     twitter-bootstrap-rails-confirm (1.0.6)
     tzinfo (0.3.53)
-    uglifier (3.2.0)
+    uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
