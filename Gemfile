@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "2.2.7"
 
 gem 'rails', '~> 3.2'
-gem 'rake', '< 12.0'
+gem 'rake', '< 13.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,7 +21,7 @@ gem 'test-unit'
 # in production environments by default.
 group :assets do
   gem 'sass'
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'haml', '>= 3.1.3'
@@ -66,7 +66,7 @@ group :test, :development do
 
   gem 'pry-byebug'
   gem 'pry-remote'
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 3.7.2'
 end
 
 group :production do
@@ -80,7 +80,7 @@ end
 
 gem 'uuidtools', '~> 2.1'
 gem 'fastercsv', '~> 1.5.4'
-gem 'formtastic', '~> 2.1.0'
+gem 'formtastic', '~> 3.1.5'
 gem 'mustache', '1.0.5'
 gem 'rabl', '~>0.13.1'
 
@@ -116,7 +116,7 @@ gem 'puma'
 gem "ransack"
 gem 'surveyor', git: 'https://github.com/theodi/odc-surveyor.git'
 gem 'redcarpet'
-gem "devise", "3.0.3"
+gem "devise", "3.5.10"
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'data_kitten', git: 'https://github.com/theodi/data_kitten.git', ref: '0597206bc522a03110f8fe89be111589dcecf6b6'
