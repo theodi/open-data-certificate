@@ -11,7 +11,7 @@ gem 'rake', '< 12.0'
 # gem "mongoid", "~> 3.0.0"
 # gem 'bson_ext'
 
-gem 'mysql2', '~> 0.3.10' # limit to this version for Rails 3.2
+gem 'mysql2', '~> 0.4.10' # limit to this version for Rails 3.2
 
 # For some reason this is needed in production for consoles
 gem 'test-unit'
