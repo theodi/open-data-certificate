@@ -41,7 +41,7 @@ group :test, :development do
   gem 'coveralls'
   gem 'shoulda'
   gem 'mocha', require: false
-  gem 'csvlint', git: 'https://github.com/theodi/csvlint.rb.git', ref: '3dc689f4625c8edd4f7b725d1d420fdd67a67df9'
+  gem 'csvlint'
   gem 'vcr'
   gem 'webmock'
   gem 'shoulda-context'
