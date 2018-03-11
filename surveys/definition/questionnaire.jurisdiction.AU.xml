@@ -4,7 +4,7 @@
 	http://creativecommons.org/licenses/by-sa/4.0/
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="1.0" status="final" jurisdiction="GB" xml:lang="en">
+<questionnaire version="1.0" status="beta" jurisdiction="AU" xml:lang="en">
 	<locales>
 		<!-- if other languages are required
 		<locale>fr</locale>
