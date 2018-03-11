@@ -4,7 +4,7 @@
 	http://creativecommons.org/licenses/by-sa/4.0/
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="1.0" status="beta" jurisdiction="AU" xml:lang="en">
+<questionnaire version="0.92" status="beta" jurisdiction="AU" xml:lang="en">
 	<locales>
 		<!-- if other languages are required
 		<locale>fr</locale>
@@ -22,14 +22,14 @@
 			<label>Rights</label>
 			<help>your right to share this data with people</help>
 			<question id="publisherRights">
-				<label>Do you have the right to make this data open?</label>
+				<label>Do you have the rights to publish this data as open data?</label>
 				<radioset required="required">
 					<option value="yes">
-						<label>yes, you have the rights to open this data up</label>
+						<label>yes, you have the rights to publish this data as open data</label>
 						<requirement level="standard">You should have a <strong>clear legal right to publish this data</strong>.</requirement>
 					</option>
 					<option value="no">
-						<label>no, you don’t have the rights to open up this data</label>
+						<label>no, you don’t have the rights to publish this data as open data</label>
 					</option>
 					<option value="unsure">
 						<label>you’re not sure if you have the rights to publish this data as open data</label>
@@ -38,9 +38,8 @@
 						<label>the rights in this data are complicated or unclear</label>
 					</option>
 				</radioset>
-				<help>If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission.
-				<br/>
-				Open data is data that anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href="https://theodi.org/what-is-open-data">what is open data?</a>’ and the <a href="http://opendefinition.org">open definition</a> for more details.</help>
+				<help>If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.
+				</help>
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
