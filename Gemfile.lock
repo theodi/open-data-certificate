@@ -459,7 +459,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustache (1.0.5)
-    mysql2 (0.3.21)
+    mysql2 (0.5.0)
     nenv (0.3.0)
     net-http-persistent (2.9.4)
     netrc (0.11.0)
@@ -770,7 +770,7 @@ DEPENDENCIES
   memoist
   mocha
   mustache (= 1.0.5)
-  mysql2 (~> 0.3.10)
+  mysql2 (~> 0.5.0)
   parallel_tests
   pry-byebug
   pry-remote
