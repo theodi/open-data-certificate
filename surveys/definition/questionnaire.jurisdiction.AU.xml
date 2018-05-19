@@ -174,11 +174,10 @@
 						<option/>
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-						<option value="cc-zero">Creative Commons CCZero</option>
 						<option value="na" display="">Not applicable</option>
 						<option value="other" display="">Other...</option>
 					</select>
-					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. We list the most common licenses here; if there is no copyright in the content, it's expired, or you've waived them, choose 'Not applicable'.</help>
+					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. Common licenses are listed here; if there is no copyright in the content, it's expired, or you've waived copyright, choose 'Not applicable'.</help>
 				</question>
 				<if test="this.contentLicence() === 'na'">
 					<question id="contentNotApplicable" display="The content in this data is not licensed because">
