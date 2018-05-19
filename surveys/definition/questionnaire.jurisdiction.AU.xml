@@ -247,10 +247,6 @@
 					<label>Does your rights statement include machine-readable versions of</label>
 					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
 					<checkboxset>
-						<option value="dataLicense" display="its data licence">
-							<label>data licence</label>
-							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.</requirement>
-						</option>
 						<option value="contentLicense" display="its content licence">
 							<label>content licence</label>
 							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.</requirement>
