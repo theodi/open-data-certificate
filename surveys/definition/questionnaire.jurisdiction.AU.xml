@@ -101,16 +101,16 @@
 							<help>If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.</help>
 						</question>
 						<if test="this.crowdsourcedContent() === 'true'">
-							<question id="claUrl" display="The Contributor Licence Agreement is at">
-								<label>Where is the Contributor Licence Agreement (CLA)?</label>
+							<question id="claUrl" display="The contributor licence or waiver is at">
+								<label>Where is the contributor licence or waiver?</label>
 								<input type="url" placeholder="Contributor Licence Agreement URL" required="required"/>
-								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Give a link to an agreement that shows contributors allow you to reuse their data. A CLA will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
+								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Provide a link to a licence or waiver that shows contributors allow you to reuse their data. The agreement will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
 							</question>
 							<question id="cldsRecorded">
-								<label>Have all contributors agreed to the Contributor Licence Agreement (CLA)?</label>
+								<label>Have all contributors agreed to the contributor licence or waiver?</label>
 								<yesno required="required"/>
-								<help>Check all contributors agree to a CLA before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the CLA.</help>
-								<requirement>You must get <strong>contributors to agree to a Contributor Licence Agreement</strong> (CLA) that gives you the right to publish their work as open data.</requirement>
+								<help>Check all contributors agree to a contributor licence or waiver before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the contributor licence or waiver.</help>
+								<requirement>You must get <strong>contributors to agree to a contributor licence or waiver</strong> that gives you the right to publish their work as open data.</requirement>
 							</question>
 						</if>
 					</if>
