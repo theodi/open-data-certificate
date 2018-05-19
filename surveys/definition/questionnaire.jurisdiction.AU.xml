@@ -120,8 +120,8 @@
 				<question id="sourceDocumentationUrl" display="The sources of this data are described at">
 					<label>Where do you describe sources of this data?</label>
 					<input type="url" placeholder="Data Sources Documentation URL"/>
-					<help>Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
-					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use parts which came from third parties.</requirement>
+					<help>Provide a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
+					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use the parts of the data provided by third parties.</requirement>
 				</question>
 				<if test="this.sourceDocumentationUrl() !== ''">
 					<question id="sourceDocumentationMetadata" display="The curator has published">
