@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
 	© 2018 Open Data Institute and contributors
 	This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
-	http://creativecommons.org/licenses/by-sa/4.0/
+	https://creativecommons.org/licenses/by-sa/4.0/
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
 <questionnaire version="0.92" status="beta" jurisdiction="AU" xml:lang="en">
@@ -104,7 +104,7 @@
 							<question id="claUrl" display="The contributor licence or waiver is at">
 								<label>Where is the contributor licence or waiver?</label>
 								<input type="url" placeholder="Contributor Licence Agreement URL" required="required"/>
-								<help more="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Provide a link to a licence or waiver that shows contributors allow you to reuse their data. The agreement will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
+								<help more="https://en.wikipedia.org/wiki/Contributor_License_Agreement">Provide a link to a licence or waiver that shows contributors allow you to reuse their data. The agreement will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
 							</question>
 							<question id="cldsRecorded">
 								<label>Have all contributors agreed to the contributor licence or waiver?</label>
@@ -142,78 +142,6 @@
 				<help>Give the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data.</help>
 				<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.</requirement>
 			</question>
-			<question id="dataLicence" display="This data is available under">
-				<label>Under which licence can people reuse this data?</label>
-				<select required="required">
-					<option/>
-					<option value="cc-by">Creative Commons Attribution</option>
-					<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
-					<option value="cc-zero">Creative Commons CCZero</option>
-					<option value="ogl-uk">UK Open Government Licence</option>
-					<option value="odc-by">Open Data Commons Attribution License</option>
-					<option value="odc-odbl">Open Data Commons Open Database License (ODbL)</option>
-					<option value="odc-pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-					<option value="na" display="">Not applicable</option>
-					<option value="other" display="">Other...</option>
-				</select>
-				<help>Remember that whoever originally gathers, creates, verifies or presents a database automatically gets rights over it. There may also be copyright in the organisation and selection of data. So people need a waiver or a licence which proves that they can use the data and explains how they can do that legally. We list the most common licenses here; if there are no database rights or copyright, they've expired, or you've waived them, choose 'Not applicable'.</help>
-			</question>
-			<if test="this.dataLicence() === 'na'">
-				<question id="dataNotApplicable" display="This data is not licensed because">
-					<label>Why doesn't a licence apply to this data?</label>
-					<radioset required="required">
-						<option value="norights" display="there are no rights in it">
-							<label>there are no copyright or database rights in this data</label>
-							<help>Database rights apply if you spent substantial effort gathering, verifying or presenting it. There are no database rights if, for example, the data is created from scratch, presented in an obvious way, and not checked against anything. You have copyright if you select the items in the data or organise them in a non-obvious way.</help>
-						</option>
-						<option value="expired" display="the rights have expired">
-							<label>copyright and database rights have expired</label>
-							<help>Database rights last ten years. If data was last changed over ten years ago then database rights have expired. Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. Copyright is unlikely to have expired.</help>
-						</option>
-						<option value="waived" display="">
-							<label>copyright and database rights have been waived</label>
-							<help>This means no one owns the rights and anyone can do whatever they want with this data.</help>
-						</option>
-					</radioset>
-				</question>
-				<if test="this.dataNotApplicable() === 'waived'">
-					<question id="dataWaiver" display="Rights in the data have been waived with">
-						<label>Which waiver do you use to waive rights in the data?</label>
-						<select required="required">
-							<option/>
-							<option value="pddl">Open Data Commons Public Domain Dedication and Licence (PDDL)</option>
-							<option value="cc0">Creative Commons CCZero</option>
-							<option value="other" display="">Other...</option>
-						</select>
-						<help>You need a statement to show people the rights have been waived so that they understand they can do whatever they like with this data. Standard waivers already exist like PDDL and CCZero but you can write your own with legal advice.</help>
-					</question>
-					<if test="this.dataWaiver() === 'other'">
-						<question id="dataOtherWaiver" display="Rights in the data have been waived with">
-							<label>Where is the waiver for the rights in the data?</label>
-							<input type="url" required="required" placeholder="Waiver URL"/>
-							<help>Give a URL to the publicly available waiver so people can check that it does waive the rights in the data.</help>
-						</question>
-					</if>
-				</if>
-			</if>
-			<if test="this.dataLicence() === 'other'">
-				<question id="otherDataLicenceName" display="This data is available under">
-					<label>What is the name of the licence?</label>
-					<input required="required" placeholder="Other Licence Name"/>
-					<help>If you use a different licence, we need the name so people can see it on your Open Data Certificate.</help>
-				</question>
-				<question id="otherDataLicenceURL" display="This licence is at">
-					<label>Where is the licence?</label>
-					<input type="url" required="required" placeholder="Other Licence URL"/>
-					<help>Give a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
-				</question>
-				<question id="otherDataLicenceOpen">
-					<label>Is the licence an open licence?</label>
-					<yesno required="required"/>
-					<help more="http://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
-					<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
-				</question>
-			</if>
 			<question id="contentRights" display="There are">
 				<label>Is there any copyright in the content of this data?</label>
 				<radioset required="required">
@@ -235,7 +163,7 @@
 				<question id="explicitWaiver" display="The content has been">
 					<label>Is the content of the data marked as public domain?</label>
 					<yesno yes="marked as public domain" />
-					<help>Works in the public domain are those whose intellectual property rights have expired, have been forfeited, or are inapplicable. If none of the content of your data have copyright or other rights over it, it is good practice to explicitly state this by labelling it as ‘public domain’. You can do this by using the <a href="http://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>.</help>
+					<help>Works in the public domain are those whose intellectual property rights have expired, have been forfeited, or are inapplicable. If none of the content of your data have copyright or other rights over it, it is good practice to explicitly state this by labelling it as ‘public domain’. You can do this by using the <a href="https://creativecommons.org/share-your-work/public-domain/pdm">Creative Commons Public Domain Mark</a>.</help>
 					<requirement level="standard">You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.</requirement>
 				</question>
 			</if>
@@ -247,7 +175,6 @@
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
 						<option value="cc-zero">Creative Commons CCZero</option>
-						<option value="ogl-uk">UK Open Government Licence</option>
 						<option value="na" display="">Not applicable</option>
 						<option value="other" display="">Other...</option>
 					</select>
@@ -304,7 +231,7 @@
 					<question id="otherContentLicenceOpen">
 						<label>Is the licence an open licence?</label>
 						<yesno required="required"/>
-						<help more="http://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="http://opendefinition.org/">Open Knowledge Definition</a> definition. Next, choose your licence from the <a href="http://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
+						<help more="https://opendefinition.org">If you aren't sure what an open licence is then read the <a href="https://opendefinition.org">Open Definition</a> by Open Knowledge International. Next, choose your licence from the <a href="https://licenses.opendefinition.org">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
 						<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
 					</question>
 				</if>
