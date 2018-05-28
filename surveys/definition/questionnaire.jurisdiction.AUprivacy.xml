@@ -4,7 +4,7 @@
 	https://creativecommons.org/licenses/by-sa/4.0/
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="0.92" status="beta" jurisdiction="AU" xml:lang="en">
+<questionnaire version="0.93" status="beta" jurisdiction="AU" xml:lang="en">
 	<locales>
 		<!-- if other languages are required
 		<locale>fr</locale>
@@ -287,8 +287,8 @@
 						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
 					</option>
 					<option value="individual" display="information that could identify individuals">
-						<label>yes, there is a risk that individuals can be identified, for example by third parties with access to extra information</label>
-						<help>Some data is legitimately about individuals like civil service pay or public expenses for example.</help>
+						<label>yes, there is a risk that individuals can be identified, for example by combining the data with other third party data</label>
+						<help>Some data about individuals may be able to be published online with permission or by law.</help>
 					</option>
 				</radioset>
 			</question>
@@ -298,7 +298,7 @@
 					<radioset required="pilot">
 						<option value="yes" display="been de-identified">
 							<label>yes, the data been de-identified</label>
-							<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
+							<help>Data may be de-identified by deleting or masking personal identifiers, aggregating data or other techniques.</help>
 						</option>
 						<option value="no" display="not been de-identified">
 							<label>no, there is a risk that individuals can be identified, for example by third parties with access to extra information</label>
@@ -316,7 +316,7 @@
 							<label>no</label>
 						</option>
 						<help>You may be able to publish data about individuals online if either, the data is required or permitted to be published by law, or you have permission from the affected individuals.</help>
-						<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.</requirement>
+						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 					<if test="this.lawfulDisclosure() === 'yes'">
 						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
@@ -349,17 +349,19 @@
 							<if test="this.privacyImpactAssessmentUrl() !== ''">
 								<question id="piaAudited" display="The privacy risk assessment has been">
 									<label>Has your privacy risk assessment been independently audited?</label>
-									<yesno yes="independently audited"/>
+									<yesno yes="independently audited" no="not been independently audited"/>
 									<help>It's good practice to check your assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
 									<requirement level="standard">You should <strong>have your privacy risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 								</question>
 							</if>
-							<question id="dataBreach">
-								<label>Are you prepared to respond if publishing this data compromises the privacy of individuals?</label>
-								<yesno required="pilot"/>
-							</question>
 						</if>
 					</if>
+					<question id="dataBreach">
+						<label>Are you prepared to respond if publishing this data compromises the privacy of individuals?</label>
+						<yesno required="pilot"/>
+						<help>It's good practice </help>
+						<requirement level="standard">You should <strong>provide a quick and effective response if a data breach occurs</strong> by following a plan to contain, assess and manage the incident from start to finish.</requirement>
+					</question>
 				</if>
 			</if>
 		</group>
