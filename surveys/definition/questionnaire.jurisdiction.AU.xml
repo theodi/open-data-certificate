@@ -4,7 +4,7 @@
 	https://creativecommons.org/licenses/by-sa/4.0/
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="0.93" status="beta" jurisdiction="AU" xml:lang="en">
+<questionnaire version="0.94" status="beta" jurisdiction="AU" xml:lang="en">
 	<locales>
 		<!-- if other languages are required
 		<locale>fr</locale>
@@ -279,12 +279,14 @@
 		<group id="privacy">
 			<label>Privacy</label>
 			<help>how you protect people's privacy</help>
+	<!-- Q1 Is this data is about people or their activities? -->
+	<!-- Broken - labels and help aren't updated on the server despite the .rb file containing this text !!! -->			
 			<question id="dataPersonal" display="This data contains">
 				<label>Is this data is about people or their activities?</label>
 				<radioset required="pilot">
 					<option value="not-personal" display="no data about individuals">
 						<label>no, the data is not about people or their activities</label>
-						<help>Remember that individuals can still be identified even if data isn't directly about them. For example, road traffic flow data combined with an individual's commuting patterns could reveal information about that person.</help>
+						<help>Remember that individuals can still be identified even if data isn't directly about them.</help>
 					</option>
 					<option value="individual" display="information that could identify individuals">
 						<label>yes, there is a risk that individuals can be identified, for example by combining the data with other third party data</label>
@@ -292,6 +294,8 @@
 					</option>
 				</radioset>
 			</question>
+	<!-- Q2 If the data is about individuals, has it been de-identified? -->
+	<!-- Works -->
 			<if test="this.dataPersonal() === 'individual'">
 				<question id="dataSummarised" display="This data has">
 					<label>Has the data is about individuals been de-identified?</label>
@@ -306,19 +310,19 @@
 						</option>
 					</radioset>
 				</question>
+	<!-- Q3 If the data about individuals has not been de-identified, can you legally publish it?  -->
+	<!-- Broken - label isn't updated on the server despite the .rb file containing this test !!! -->
+	<!-- Broken - wrong requirement displayed on "no" answer - happens in production  https://github.com/theodi/open-data-certificate/issues/1391 -->	
 				<if test="this.dataSummarised() === 'no'">
-					<question id="lawfulDisclosure">
+					<question id="lawfulDisclosure" display="By law, this data about individuals">
 						<label>Do you have permission to publish this personal data online?</label>
-						<option value="yes">
-							<label>yes</label>
-						</option>
-						<option value="no">
-							<label>no</label>
-						</option>
+						<yesno yes="can be published"/>
 						<help>You may be able to publish data about individuals online if either, the data is required or permitted to be published by law, or you have permission from the affected individuals.</help>
-						<requirement level="pilot">You should <strong>only publish personal data without anonymisation if you are required or permitted to do so by law</strong>.</requirement>
+						<requirement level="pilot">You should <strong>only publish personal data without de-identification if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
-					<if test="this.lawfulDisclosure() === 'yes'">
+	<!-- Q4 If the data can you legally published, where is the law published?  -->
+	<!-- Works -->
+					<if test="this.lawfulDisclosure() === 'true'">
 						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
 							<label>Where do you document your right to publish data about individuals?</label>
 							<input type="url" placeholder="Disclosure Rationale URL"/>
@@ -326,44 +330,54 @@
 						</question>
 					</if>
 				</if>
+	<!-- Q5 if the data about individuals has been de-identified, has the process been audited?  -->
+	<!-- Broken - label isn't updated on the server but help is! -->
 				<if test="this.dataSummarised() === 'yes'">
 					<question id="statisticalAnonAudited" display="The de-identification process has">
 						<label>Has your de-identification process been independently audited?</label>
 						<yesno yes="been independently audited" no="not been independently audited"/>
+						<help>It's good practice to check your de-identification was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
 						<requirement level="standard">You should <strong>have your de-identification process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
 					</question>
-					<if test="this.statisticalAnonAudited() === 'true'">
-						<question id="privacyImpactAssessmentExists" display="The curator has">
-							<label>Have you assessed the privacy risks of publishing this data?</label>
-							<yesno yes="assessed the privacy risks of publishing this data" no="not assessed the privacy risks of publishing this data"/>
-							<help>You should assess the likelihood of personal data being disclosed and the consequences to individuals of the disclosure.</help>
-							<requirement level="pilot">You should <strong>assess the privacy risks</strong> if you publish data about individuals.</requirement>
+	<!-- Q6 if the data about individuals has been de-identified, has the publishing risks been assessed?  -->
+	<!-- Broken - label and help aren't updated on the server -->
+	<!-- Broken - wrong requirement displayed on "no" answer - happens in production - https://github.com/theodi/open-data-certificate/issues/1391 -->
+	<!-- Broken - requirement being demanded at raw level -->	
+					<question id="privacyImpactAssessmentExists" display="The curator has">
+						<label>Have you assessed the privacy risks of publishing this data?</label>
+						<yesno yes="assessed the privacy risks of publishing this data" no="not assessed the privacy risks of publishing this data"/>
+						<help>You should assess the likelihood of personal data being disclosed and the consequences to individuals of the disclosure.</help>
+						<requirement level="pilot">You should <strong>assess the privacy risks</strong> if you publish data about individuals.</requirement>
+					</question>
+	<!-- Q7 if the publishing risks have been assessed, is the risk assessment published?  -->
+	<!-- Broken - label, help and placeholder aren't updated on the server -->
+	<!-- Broken - wrong requirement displayed on "no" answer - happens in production - https://github.com/theodi/open-data-certificate/issues/1391 -->
+					<if test="this.privacyImpactAssessmentExists() === 'true'">
+						<question id="privacyImpactAssessmentUrl" display="The privacy risk assessment is published at">
+							<label>Where is your privacy risk assessment published?</label>
+							<input type="url" placeholder="Privacy risk assessment URL"/>
+							<help>Provide a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
+							<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
-						<if test="this.privacyImpactAssessmentExists() === 'true'">
-							<question id="privacyImpactAssessmentUrl" display="The privacy risk assessment is published at">
-								<label>Where is your privacy risk assessment published?</label>
-								<input type="url" placeholder="Privacy risk assessment URL"/>
-								<help>Provide a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
-								<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
-							</question>
-							<if test="this.privacyImpactAssessmentUrl() !== ''">
-								<question id="piaAudited" display="The privacy risk assessment has been">
-									<label>Has your privacy risk assessment been independently audited?</label>
-									<yesno yes="independently audited" no="not been independently audited"/>
-									<help>It's good practice to check your assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
-									<requirement level="standard">You should <strong>have your privacy risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
-								</question>
-							</if>
-						</if>
+	<!-- Q8 if the publishing risks have been assessed, has it been independently audited? -->
+	<!-- status? -->
+						<question id="piaAudited" display="The privacy risk assessment has been">
+							<label>Has your privacy risk assessment been independently audited?</label>
+							<yesno yes="independently audited" no="not been independently audited"/>
+							<help>It's good practice to check your privacy risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+							<requirement level="standard">You should <strong>have your privacy risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
+						</question>
 					</if>
+	<!-- Q9 if you publish deidentified data about individuals, are you ready for a data breach? -->
+	<!-- status? -->
 					<question id="dataBreach">
 						<label>Are you prepared to respond if publishing this data compromises the privacy of individuals?</label>
 						<yesno required="pilot"/>
-						<help>It's good practice </help>
+						<help>It's good practice to <strong>be prepared to respond to a potential data breach</strong>.</help>
 						<requirement level="standard">You should <strong>provide a quick and effective response if a data breach occurs</strong> by following a plan to contain, assess and manage the incident from start to finish, and prevent a repeat occurence.</requirement>
 					</question>
-				</if>
 			</if>
+		</if>
 		</group>
 	</group>
 </questionnaire>
