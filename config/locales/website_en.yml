@@ -128,7 +128,7 @@ en:
     unable_to_publish_response_set_invalid: You need to answer all the required questions before you can publish a certificate
     unable_to_access_response_set: Unable to access questionnaire
     published_response_set: Published questionnaire
-    publish_certificate: Publish certifcate
+    publish_certificate: Publish certificate
     embed: Embed code
     improvements_link: How can I improve this data?
     level_attained: 'Level attained:'
@@ -286,7 +286,7 @@ en:
     report:
       heading: Report a problem with this certificate
       intro: "Please describe the problem you've found with the certificate for '%{name}'"
-      report: "Report certifcate"
+      report: "Report certificate"
       contact_email: Contact email
       describe_the_problem: Describe the problem
 
