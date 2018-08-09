@@ -180,7 +180,7 @@ GEM
       nokogiri (>= 1.4.3)
     erubi (1.7.0)
     erubis (2.7.0)
-    eventmachine (1.2.5)
+    eventmachine (1.2.6)
     excon (0.58.0)
     execjs (2.7.0)
     factory_girl (4.9.0)
@@ -743,7 +743,7 @@ DEPENDENCIES
   devise (= 3.0.3)
   domainatrix
   dotenv-rails
-  eventmachine (~> 1.2.5)
+  eventmachine (~> 1.2.6)
   factory_girl_rails (~> 4.9)
   fastercsv (~> 1.5.4)
   fog

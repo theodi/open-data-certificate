@@ -138,4 +138,4 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem 'sidekiq-failures'
 gem 'rails-i18n', '~> 3.0.0'
-gem 'eventmachine', '~> 1.2.5'
+gem 'eventmachine', '~> 1.2.6'
