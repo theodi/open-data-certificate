@@ -123,7 +123,6 @@ OpenDataCertificate::Application.routes.draw do
   get 'get_badge' => 'certificates#certificate_from_dataset_url'
 
   # comment pages
-  get 'comment' => 'main#comment', as: :comment
   get 'discussion' => 'main#discussion', as: :discussion # general/site-wide
 
   get 'has_js' => 'main#has_js'
@@ -148,7 +147,7 @@ OpenDataCertificate::Application.routes.draw do
     post 'schedule', to: 'campaigns#schedule', as: 'scheduled_rerun'
     post 'queue_update', to: 'campaigns#queue_update', as: 'queue_update'
   end
-  
+
   # private stats
   get 'status/published_certificates.csv' => 'main#published_certificates'
   get 'status/all_certificates.csv' => 'main#all_certificates'
