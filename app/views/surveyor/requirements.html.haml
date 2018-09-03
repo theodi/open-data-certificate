@@ -51,7 +51,7 @@
                       %p= markdown(field.help_text || '')
                     .span6.offset2
                       =button_to t('improvements.buttons.understood'), resume_path(field), method: 'post', class: 'btn btn-primary btn-large'
-                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: field.discussion_topic, back: request.original_fullpath, title: field.text, question_id: field.id)}
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => '/comment' }
                         =t('improvements.buttons.misunderstood')
               %hr.heavy
 
@@ -71,6 +71,6 @@
                       %p= markdown(answer.try(:help_text) || question.try(:help_text) || '')
                     .span6.offset2
                       =button_to t('improvements.buttons.understood'), resume_path(question), method: 'post', class: 'btn btn-primary btn-large'
-                      %a.btn.btn-primary.btn-large.btn-negative{:href => comment_path(topic: question.discussion_topic, back: request.original_fullpath, title: question.text, question_id: question.id)}
+                      %a.btn.btn-primary.btn-large.btn-negative{:href => '/comment'}
                         =t('improvements.buttons.misunderstood')
               %hr.heavy

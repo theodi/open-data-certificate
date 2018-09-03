@@ -142,5 +142,3 @@
             - if (q.help_text_more_url)
               %a{:href => q.help_text_more_url}
                 = t('surveyor.question_comment_read_more')
-        - if q.discussion_topic
-          = comment_link q.discussion_topic, t('surveyor.question_comment'), q.text, q.id
