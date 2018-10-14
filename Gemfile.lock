@@ -143,6 +143,7 @@ GEM
       nokogiri (~> 1.5)
       railties (>= 3, < 5.1)
     cucumber-wire (0.0.1)
+    daemons (1.2.6)
     database_cleaner (1.6.2)
     datapackage (0.0.4)
       colorize
@@ -736,6 +737,7 @@ DEPENDENCIES
   coveralls
   csvlint!
   cucumber-rails
+  daemons
   data_kitten!
   database_cleaner
   delayed-plugins-airbrake
