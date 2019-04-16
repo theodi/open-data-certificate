@@ -14,19 +14,6 @@ class MainController < ApplicationController
     end
   end
 
-  def comment
-    @topic = params[:topic]
-    @title = params[:title] || @topic
-    @back  = params[:back]
-
-    # Look for a question with this topic and use the help text
-    @topic_help = begin
-      Question.find(params[:question_id]).help_text
-    rescue ActiveRecord::RecordNotFound
-      ''
-    end
-  end
-
   def discussion
     @topic = 'general'
     @topic_help  = I18n.t 'general', scope: :discussions, default: ''

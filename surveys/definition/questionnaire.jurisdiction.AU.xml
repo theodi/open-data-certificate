@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
-	© 2018 Open Data Institute and contributors
-	This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
-	https://creativecommons.org/licenses/by-sa/4.0/
+	© 2013-2018 Open Data Institute and contributors
+	This work is licensed under a Creative Commons Attribution-ShareAlike 2.0 UK: England & Wales License.
+	https://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB
   -->
 <?xml-stylesheet type="text/xsl" href="../surveyor.xsl"?>
-<questionnaire version="0.94" status="beta" jurisdiction="AU" xml:lang="en">
+<questionnaire version="0.97" status="beta" jurisdiction="AU" xml:lang="en">
 	<locales>
 		<!-- if other languages are required
 		<locale>fr</locale>
@@ -13,7 +13,7 @@
 	<help>
 		<p>This self-assessment questionnaire generates an open data certificate and badge you can publish to tell people all about this open data. We also use your answers to learn how organisations publish open data.</p>
 		<p>When you answer these questions it demonstrates your efforts to comply with relevant legislation. You should also check which other laws and policies apply to your sector or jurisdiction.</p>
-		<p><strong>You do not need to answer all the questions to earn a certificate.</strong> Just answer those you can.</p>
+		<p><strong>You do not need to answer all the questions to get a certificate.</strong> Just answer those you can.</p>
 	</help>
 	<group id="legal">
 		<label>Legal Information</label>
@@ -21,6 +21,7 @@
 		<group id="ownership">
 			<label>Rights</label>
 			<help>your right to share this data with people</help>
+			<!-- By adding Poke to the question id it makes the help below display but breaks reading CKAN metadata -->
 			<question id="publisherRights">
 				<label>Do you have the rights to publish this data as open data?</label>
 				<radioset required="required">
@@ -29,7 +30,7 @@
 						<requirement level="standard">You should have a <strong>clear legal right to publish this data</strong>.</requirement>
 					</option>
 					<option value="no">
-						<label>no, you don’t have the rights to publish this data as open data</label>
+						<label>no,  you don't have the rights to publish this data as open data</label>
 					</option>
 					<option value="unsure">
 						<label>you’re not sure if you have the rights to publish this data as open data</label>
@@ -38,8 +39,9 @@
 						<label>the rights in this data are complicated or unclear</label>
 					</option>
 				</radioset>
-				<help more="https://theodi.org.au/open-data-certificate-help-rights/#publisherrights">If your organisation didn't originally create or gather this data then you might not have the right to publish it. If you’re not sure, check with the data owner because you will need their permission to publish it.
-				</help>
+				<!-- help is not display as shown below in the app. Tolerable -->
+				<help>If your organisation did not originally create or gather this data then you may not have the right to publish it as open data. If you are not sure, please check with the data owner for their permission. Open data is data that anyone can access, use and share – subject only, at most, to the requirement to attribute and share-alike – see our page explaining ‘<a href="https://theodi.org/what-is-open-data">what is open data?</a>’ and the <a href="https://opendefinition.org">open definition</a> for more details.</help>
+				<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 				<if test="this.publisherRights() === 'no'">
 					<requirement>You must have the <strong>right to publish this data</strong>.</requirement>
 				</if>
@@ -48,13 +50,15 @@
 				<question id="rightsRiskAssessment" display="Risks in using this data are described at">
 					<label>Where do you detail the risks people might encounter if they use this data?</label>
 					<input type="url" placeholder="Risk Documentation URL"/>
-					<help more="https://theodi.org.au/open-data-certificate-help-rights/#rightsriskassessment">It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Provide a URL for a page that describes the risk of using this data.</help>
+					<help>It can be risky for people to use data without a clear legal right to do so. For example, the data might be taken down in response to a legal challenge. Give a URL for a page that describes the risk of using this data.</help>
+					<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 					<requirement level="pilot">You should document <strong>risks associated with using this data</strong>, so people can work out how they want to use it.</requirement>
 				</question>
 			</if>
 			<if test="this.publisherRights() === 'yes' || this.publisherRights() === 'unsure'">
 				<question id="publisherOrigin" display="This data was">
-					<label>Was the data originally created or generated by you?</label>
+					<!-- label is not display as shown below in the app. Tolerable -->
+					<label>Was all the data originally created or generated by you?</label>
 					<radioset>
 						<option value="true" display="originally created or generated by its curator">
 							<label>yes</label>
@@ -63,7 +67,7 @@
 							<label>no, it uses external sources</label>
 						</option>
 					</radioset>
-					<help more="https://theodi.org.au/open-data-certificate-help-rights/#publisherorigins">If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.</help>
+					<help>If any part of this data was sourced outside your organisation by other individuals or organisations then you need to give extra information about your right to publish it.</help>
 				</question>
 			</if>
 			<if test="this.publisherRights() === 'unsure'">
@@ -71,8 +75,9 @@
 					<question id="thirdPartyOrigin">
 						<label>Was some of this data extracted or calculated from other data?</label>
 						<yesno required="required"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-rights/#thirdpartyorigin">An extract or smaller part of someone else's data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.</help>
+						<help>An extract or smaller part of someone else's data still means your rights to use it might be affected. There might also be legal issues if you analysed their data to produce new results from it.</help>
 						<if test="this.crowdsourced() === 'false'">
+							<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 							<requirement test="this.thirdPartyOrigin() === 'true'">You indicated that this data wasn't originally created or gathered by you, and wasn't crowdsourced, so it must have been extracted or calculated from other data sources.</requirement>
 						</if>
 					</question>
@@ -80,8 +85,9 @@
 						<question id="thirdPartyOpen" display="This data is created from">
 							<label>Are <em>all</em> sources of this data already published as open data?</label>
 							<yesno required="required" yes="open data sources" />
-							<help more="https://theodi.org.au/open-data-certificate-help-rights/#thirdpartyopen">You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you'll need legal advice before you can publish it.</help>
+							<help>You're allowed to republish someone else's data if it's already under an open data licence or if their rights have expired or been waived. If any part of this data is not like this then you'll need legal advice before you can publish it.</help>
 							<if test="this.thirdPartyOpen() === 'false'">
+								<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 								<requirement>You should get <strong>legal advice to make sure you have the right to publish this data</strong>.</requirement>
 							</if>
 						</question>
@@ -89,8 +95,9 @@
 					<question id="crowdsourced" display="Some of this data is">
 						<label>Was some of this data crowdsourced?</label>
 						<yesno required="required" yes="crowdsourced" />
-						<help more="https://theodi.org.au/open-data-certificate-help-rights/#crowdsourced">If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.</help>
+						<help>If the data includes information contributed by people outside your organisation, you need their permission to publish their contributions as open data.</help>
 						<if test="this.thirdPartyOrigin() === 'false'">
+							<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 							<requirement test="this.crowdsourced() === 'true'">You indicated that the data wasn't originally created or gathered by you, and wasn't extracted or calculated from other data, so it must have been crowdsourced.</requirement>
 						</if>
 					</question>
@@ -98,18 +105,21 @@
 						<question id="crowdsourcedContent">
 							<label>Did contributors to this data use their judgement?</label>
 							<yesno required="required"/>
-							<help more="https://theodi.org.au/open-data-certificate-help-rights/#crowdsourcedcontent">If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.</help>
+							<help>If people used their creativity or judgement to contribute data then they have copyright over their work. For example, writing a description or deciding whether or not to include some data in a dataset would require judgement. So contributors must transfer or waive their rights, or license the data to you before you can publish it.</help>
 						</question>
 						<if test="this.crowdsourcedContent() === 'true'">
-							<question id="claUrl" display="The contributor licence or waiver is at">
+							<question id="claUrlPoke" display="The contributor licence or waiver is at">
+								<!-- By adding Poke to the question id the label and help text are displayed -->
 								<label>Where is the contributor licence or waiver?</label>
 								<input type="url" placeholder="Contributor Licence Agreement URL" required="required"/>
-								<help more="https://theodi.org.au/open-data-certificate-help-rights/#claurl">Provide a link to a licence or waiver that shows contributors allow you to reuse their data. The agreement will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
+								<help more="https://en.wikipedia.org/wiki/Contributor_License_Agreement">Give a link to a licence or waiver that shows contributors allow you to reuse their data. A agreement will either transfer contributor's rights to you, waive their rights, or license the data to you so you can publish it.</help>
 							</question>
-							<question id="cldsRecorded">
+							<question id="cldsRecordedPoke">
+								<!-- By adding Poke to the question id the label and help text are displayed -->
 								<label>Have all contributors agreed to the contributor licence or waiver?</label>
 								<yesno required="required"/>
-								<help more="https://theodi.org.au/open-data-certificate-help-rights/#cldsrecorded">Check all contributors agree to a contributor licence or waiver before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the contributor licence or waiver.</help>
+								<help>Check all contributors agree to a contributor licence or waiver before you reuse or republish their contributions. You should keep a record of who gave contributions and whether or not they agree to the contributor licence or waiver.</help>
+								<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
 								<requirement>You must get <strong>contributors to agree to a contributor licence or waiver</strong> that gives you the right to publish their work as open data.</requirement>
 							</question>
 						</if>
@@ -120,14 +130,15 @@
 				<question id="sourceDocumentationUrl" display="The sources of this data are described at">
 					<label>Where do you describe sources of this data?</label>
 					<input type="url" placeholder="Data Sources Documentation URL"/>
-					<help more="https://theodi.org.au/open-data-certificate-help-rights/#sourcedocumentationurl">Provide a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
-					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use the parts of the data provided by third parties.</requirement>
+					<help>Give a URL that documents where the data was sourced from (its provenance) and the rights under which you publish the data. This helps people understand where the data comes from.</help>
+					<!-- requirement doesn't display correctly. Assume issue #1391. Can reproduce error in Prod with GB survey -->
+					<requirement level="pilot">You should document <strong>where the data came from and the rights under which you publish it</strong>, so people are assured they can use the parts of the data provided by  third parties.</requirement>
 				</question>
 				<if test="this.sourceDocumentationUrl() !== ''">
 					<question id="sourceDocumentationMetadata" display="The curator has published">
 						<label>Is documentation about the sources of this data also in machine-readable format?</label>
 						<yesno yes="machine-readable data about the sources of this data" />
-						<help more="https://theodi.org.au/open-data-certificate-help-rights/#sourcedocumentationmetadata">Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.</help>
+						<help>Information about data sources should be human-readable so people can understand it, as well as in a metadata format that computers can process. When everyone does this it helps other people find out how the same open data is being used and justify its ongoing publication.</help>
 						<requirement level="standard">You should <strong>include machine-readable data about the sources of this data</strong>.</requirement>
 					</question>
 				</if>
@@ -139,31 +150,33 @@
 			<question id="copyrightURL" display="The rights statement is at">
 				<label>Where have you published the rights statement for this dataset?</label>
 				<input type="url" placeholder="Rights Statement URL"/>
-				<help more="https://theodi.org.au/open-data-certificate-help-licensing/#copyrightURL">Provide the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright and database rights. A rights statement helps people understand what they can and can't do with the data.</help>
-				<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, database rights, licensing and how people should give attribution to the data.</requirement>
+				<!-- help is not display as shown below in the app. Tolerable -->
+				<help>Provide the URL to a page that describes the right to re-use this dataset. This should include a reference to its license, attribution requirements, and a statement about relevant copyright. A rights statement helps people understand what they can and can't do with the data.</help>
+				<requirement level="pilot">You should <strong>publish a rights statement</strong> that details copyright, licensing and how people should give attribution to the data.</requirement>
 			</question>
 			<question id="contentRights" display="There are">
 				<label>Is there any copyright in the content of this data?</label>
 				<radioset required="required">
 					<option value="norights" display="no rights in the content of the data">
 						<label>no, the data only contains facts and numbers</label>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentRights">There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.</help>
+						<help>There is no copyright in factual information. If the data does not contain any content that was created through intellectual effort, there are no rights in the content.</help>
 					</option>
 					<option value="samerights" display="content rights in the data held by one person or organisation">
 						<label>yes, and the rights are all held by the same person or organisation</label>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentRights">Choose this option if the content in the data was all created by or transferred to the same person or organisation.</help>
+						<help>Choose this option if the content in the data was all created by or transferred to the same person or organisation.</help>
 					</option>
 					<option value="mixedrights" display="content rights in data held by different people or organisations">
 						<label>yes, and the rights are held by different people or organisations</label>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentRights">In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.</help>
+						<help>In some data, the rights in different records are held by different people or organisations. Information about rights needs to be kept in the data too.</help>
 					</option>
 				</radioset>
 			</question>
 			<if test="this.contentRights() === 'norights'">
-				<question id="explicitWaiver" display="The content has been">
+				<question id="explicitWaiverPoke" display="The content has been">
 					<label>Is the content of the data marked as public domain?</label>
 					<yesno yes="marked as public domain" />
-					<help more="https://theodi.org.au/open-data-certificate-help-licensing/#explicitWaiver">Works in the public domain are those whose intellectual property rights have expired, have been forfeited, or are inapplicable. If none of the content of your data have copyright or other rights over it, it is good practice to explicitly state this by labelling it as ‘public domain’. You can do this by using the <a href="https://creativecommons.org/share-your-work/public-domain/pdm">Creative Commons Public Domain Mark</a>.</help>
+					<!-- By adding Poke to the question id the label and help text are displayed correctly -->
+					<help>Works in the public domain are those whose intellectual property rights have expired, have been forfeited, or are inapplicable. If none of the content of your data have copyright or other rights over it, it is good practice to explicitly state this by labelling it as ‘public domain’. You can do this by using the <a href="https://creativecommons.org/publicdomain/">Creative Commons Public Domain Mark</a>.</help>
 					<requirement level="standard">You should <strong>mark public domain content as public domain</strong> so that people know they can reuse it.</requirement>
 				</question>
 			</if>
@@ -174,10 +187,13 @@
 						<option/>
 						<option value="cc-by">Creative Commons Attribution</option>
 						<option value="cc-by-sa">Creative Commons Attribution Share-Alike</option>
+						<!-- explore deleting CC0 later it's not a licence but may be marked as one in CKAN so may have to leave here -->						
+						<option value="cc-zero">Creative Commons CCZero</option>												
 						<option value="na" display="">Not applicable</option>
 						<option value="other" display="">Other...</option>
 					</select>
-					<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentLicence">Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. Common licenses are listed here; if there is no copyright in the content, it's expired, or you've waived copyright, choose 'Not applicable'.</help>
+					<!-- help is not display as shown below in the app. Tolerable -->
+					<help>Remember that whoever spends intellectual effort creating content automatically gets rights over it but creative content does not include facts. So people need a waiver or a licence which proves that they can use the content and explains how they can do that legally. Common licenses are listed here; if there is no copyright in the content, it's expired, or you've waived your rights, choose 'Not applicable'.</help>
 				</question>
 				<if test="this.contentLicence() === 'na'">
 					<question id="contentNotApplicable" display="The content in this data is not licensed because">
@@ -185,15 +201,15 @@
 						<radioset required="required">
 							<option value="norights" display="there is no copyright">
 								<label>there is no copyright in the content of this data</label>
-								<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentNotApplicable">Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that's within the data. There's no copyright if the content only contains facts.</help>
+								<help>Copyright only applies to content if you spent intellectual effort creating it, for example, by writing text that's within the data. There's no copyright if the content only contains facts.</help>
 							</option>
 							<option value="expired" display="copyright has expired">
 								<label>copyright has expired</label>
-								<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentNotApplicable">Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.</help>
+								<help>Copyright lasts for a fixed amount of time, based on either the number of years after the death of its creator or its publication. You should check when the content was created or published because if that was a long time ago, copyright might have expired.</help>
 							</option>
 							<option value="waived" display="">
 								<label>copyright has been waived</label>
-								<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentNotApplicable">This means no one owns copyright and anyone can do whatever they want with this data.</help>
+								<help>This means no one owns copyright and anyone can do whatever they want with this data.</help>
 							</option>
 						</radioset>
 					</question>
@@ -205,13 +221,14 @@
 								<option value="cc0">Creative Commons CCZero</option>
 								<option value="other">Other...</option>
 							</select>
-							<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentWaiver">You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.</help>
+							<help>You need a statement to show people you've done this, so they understand that they can do whatever they like with this data. Standard waivers already exist like CCZero but you can write your own with legal advice.</help>
 						</question>
 						<if test="this.contentWaiver() === 'other'">
 							<question id="contentOtherWaiver" display="Copyright has been waived with">
 								<label>Where is the waiver for the copyright?</label>
 								<input type="url" required="required" placeholder="Waiver URL"/>
-								<help more="https://theodi.org.au/open-data-certificate-help-licensing/#otherContentWaiverURL">Provide a URL to your own publicly available waiver so people can check that it does waive your copyright.</help>
+								<!-- help is not display as shown below in the app. Tolerable -->
+								<help>Provide a URL to your own publicly available waiver so people can check that it does waive your copyright.</help>
 							</question>
 						</if>
 					</if>
@@ -220,17 +237,19 @@
 					<question id="otherContentLicenceName" display="The content is available under">
 						<label>What's the name of the licence?</label>
 						<input required="required" placeholder="Licence Name"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#otherContentLicenceName">If you use a different licence, we need its name so people can see it on your Open Data Certificate.</help>
+						<help>If you use a different licence, we need its name so people can see it on your Open Data Certificate.</help>
 					</question>
 					<question id="otherContentLicenceURL" display="The content licence is at">
 						<label>Where is the licence?</label>
 						<input type="url" required="required" placeholder="Licence URL"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#otherContentLicenceURL">Provide a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
+						<!-- help is not display as shown below in the app. Tolerable -->
+						<help>Provide a URL to the licence, so people can see it on your Open Data Certificate and check that it's publicly available.</help>
 					</question>
-					<question id="otherContentLicenceOpen">
+					<question id="otherContentLicenceOpenPoke">
 						<label>Is the licence an open licence?</label>
 						<yesno required="required"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-licensing/#otherContentLicenceOpen">If you aren't sure what an open licence is then read the <a href="https://opendefinition.org">Open Definition</a> by Open Knowledge International. Next, choose your licence from the <a href="https://licenses.opendefinition.org">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
+						<!-- By adding Poke to the question id the help text is displayed correctly -->
+						<help more="https://opendefinition.org/">If you aren't sure what an open licence is then read the <a href="https://opendefinition.org/">Open Definition</a> by Open Knowledge International. Next, choose your licence from the <a href="https://licenses.opendefinition.org/">Open Definition Advisory Board open licence list</a>. If a licence isn't in their list, it's either not open or hasn't been assessed yet.</help>
 						<requirement>You must <strong>publish open data under an open licence</strong> so that people can use it.</requirement>
 					</question>
 				</if>
@@ -239,7 +258,8 @@
 				<question id="contentRightsURL" display="The rights and licensing of the content are explained at">
 					<label>Where are the rights and licensing of the content explained?</label>
 					<input type="url" required="required" placeholder="Content Rights Description URL" />
-					<help more="https://theodi.org.au/open-data-certificate-help-licensing/#contentRightsURL">Provide the URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.</help>
+					<!-- help is not display as shown below in the app. Tolerable -->
+					<help>Provide a URL for a page where you describe how someone can find out the rights and licensing of a piece of content from the data.</help>
 				</question>
 			</if>
 			<if test="this.copyrightURL() !== ''">
@@ -247,6 +267,10 @@
 					<label>Does your rights statement include machine-readable versions of</label>
 					<!-- these are properties from ODRS at https://github.com/theodi/open-data-licensing -->
 					<checkboxset>
+						<option value="dataLicense" display="its data licence">
+							<label>data licence</label>
+							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence</strong> for this data, so automatic tools can use it.</requirement>
+						</option>
 						<option value="contentLicense" display="its content licence">
 							<label>content licence</label>
 							<requirement level="standard">You should provide <strong>machine-readable data in your rights statement about the licence for the content</strong> of this data, so automatic tools can use it.</requirement>
@@ -270,7 +294,7 @@
 						<option value="copyrightHolder" display="the copyright holder">
 							<label>copyright holder</label>
 							<requirement level="exemplar">You should provide <strong>machine-readable data in your rights statement about the copyright holder for the data</strong>, so automatic tools can use it.</requirement>
-						</option>
+						</option>						
 					</checkboxset>
 					<help more="https://github.com/theodi/open-data-licensing/blob/master/guides/publisher-guide.md">It's good practice to embed information about rights in machine-readable formats so people can automatically attribute this data back to you when they use it.</help>
 				</question>
@@ -280,80 +304,88 @@
 			<label>Privacy</label>
 			<help>how you protect people's privacy</help>
 	<!-- Q1 Is this data is about people or their activities? -->
-			<question id="dataPersonal" display="This data contains">
+			<question id="dataPersonalPoke" display="This data contains">
+				<!-- By adding Poke to the question id the labels and help text are displayed correctly in the app -->
 				<label>Is this data is about people or their activities?</label>
 				<radioset required="pilot">
 					<option value="not-personal" display="no data about individuals">
 						<label>no, the data is not about people or their activities</label>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#dataPersonal">Remember that individuals can still be identified even if data isn't directly about them.</help>
+						<help>Remember that individuals can still be identified even if data isn't directly about them.</help>
 					</option>
 					<option value="individual" display="information that could identify individuals">
 						<label>yes, there is a risk that individuals can be identified, for example by combining the data with other third party data</label>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#dataPersonal">Remember that individuals can still be identified even if data isn't directly about them.>Some data about individuals may be able to be published online with permission or by law.</help>
+						<help>Remember that individuals can still be identified even if data isn't directly about them. Some data about individuals may be able to be published online with permission or by law.</help>
 					</option>
 				</radioset>
 			</question>
 	<!-- Q2 If the data is about individuals, has it been de-identified? -->
-			<if test="this.dataPersonal() === 'individual'">
-				<question id="dataSummarised" display="This data has">
+			<if test="this.dataPersonalPoke() === 'individual'">
+				<question id="dataSummarisedPoke" display="This data has">
 					<label>Has the data is about individuals been de-identified?</label>
 					<radioset required="pilot">
 						<option value="yes" display="been de-identified">
 							<label>yes, the data been de-identified</label>
-							<help more="https://theodi.org.au/open-data-certificate-help-privacy/#dataDeidentified">Data may be de-identified by deleting or masking personal identifiers, aggregating data or other techniques.</help>
+							<help>Data may be de-identified by deleting or masking personal identifiers, aggregating data or other techniques.</help>
 						</option>
 						<option value="no" display="not been de-identified">
 							<label>no, there is a risk that individuals can be identified, for example by third parties with access to extra information</label>
-							<help more="https://theodi.org.au/open-data-certificate-help-privacy/#dataDeidentified">The law may permit some data about individuals to be published online.</help>
+							<help>The law may permit some data about individuals to be published online.</help>
 						</option>
 					</radioset>
 				</question>
 	<!-- Q3 If the data about individuals has not been de-identified, can you legally publish it?  -->
-				<if test="this.dataSummarised() === 'no'">
-					<question id="lawfulDisclosure" display="By law, this data about individuals">
-						<label>Do you have permission to publish this personal data online?</label>
+				<if test="this.dataSummarisedPoke() === 'no'">
+					<question id="lawfulDisclosurePoke" display="By law, this data about individuals">
+						<!-- By adding Poke to the question id the label and help text are displayed correctly in the app -->
+						<label>Do you have permission to publish this personal data online? </label>
 						<yesno yes="can be published"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#lawfulDisclosure">You may be able to publish data about individuals online if either, the data is required or permitted to be published by law, or you have permission from the affected individuals.</help>
+						<help>You may be able to publish data about individuals online if either, the data is required or permitted to be published by law, or you have permission from the affected individuals.</help>
+						<!-- requirement doesn't display correctly. Assume issue #1391. -->
 						<requirement level="pilot">You should <strong>only publish personal data without de-identification if you are required or permitted to do so by law</strong>.</requirement>
 					</question>
 	<!-- Q4 If the data can you legally published, where is the law published?  -->
-					<if test="this.lawfulDisclosure() === 'true'">
-						<question id="lawfulDisclosureURL" display="The right to publish this data about individuals is documented at">
-							<label>Where do you document your right to publish data about individuals?</label>
+					<if test="this.lawfulDisclosurePoke() === 'true'">
+						<question id="lawfulDisclosureURLPoke" display="The right to publish this data about individuals is documented at">
+							<label>Where do you document your right to publish data about individuals? </label>
 							<input type="url" placeholder="Disclosure Rationale URL"/>
-							<help more="https://theodi.org.au/open-data-certificate-help-privacy/#lawfulDisclosureURL">Provide a URL to the law or individual permission that allows you to publish this data about individuals.</help>
+							<help>Provide a URL to the law or individual permission that allows you to publish this data about individuals.</help>
 							<requirement level="standard">You should <strong>document your right to publish data about individuals</strong> for people who use your data and for those affected by disclosure.</requirement>
 						</question>
 					</if>
 				</if>
 	<!-- Q5 if the data about individuals has been de-identified, has the process been audited?  -->
-				<if test="this.dataSummarised() === 'yes'">
-					<question id="statisticalAnonAudited" display="The de-identification process has">
-						<label>Has your de-identification process been independently audited?</label>
+				<if test="this.dataSummarisedPoke() === 'yes'">
+					<question id="statisticalAnonAuditedPoke" display="The de-identification process has">
+						<!-- By adding Poke to the question id the label and help text are displayed correctly in the app -->
+						<label>Has your de-identification process been independently audited? </label>
 						<yesno yes="been independently audited" no="not been independently audited"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#dataDeidentifiedAudited">It's good practice to check your de-identification was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+						<help>It's good practice to check your de-identification was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
 						<requirement level="standard">You should <strong>have your de-identification process audited independently</strong> to ensure it reduces the risk of individuals being reidentified.</requirement>
 					</question>
 	<!-- Q6 if the data about individuals has been de-identified, has the publishing risks been assessed?  -->
-					<question id="privacyImpactAssessmentExists" display="The curator has">
-						<label>Have you assessed the privacy risks of publishing this data?</label>
+					<question id="privacyImpactAssessmentExistsPoke" display="The curator has">
+						<!-- By adding Poke to the question id the label and help text are displayed correctly in the app -->
+						<label>Have you assessed the privacy risks of publishing this data? </label>
 						<yesno yes="assessed the privacy risks of publishing this data" no="not assessed the privacy risks of publishing this data"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#riskAssessment">You should assess the likelihood of personal data being disclosed and the consequences to individuals of the disclosure.</help>
+						<help>You should assess the likelihood of personal data being disclosed and the consequences to individuals of the disclosure.</help>
+						<!-- requirement doesn't display correctly. Assume issue #1391. -->
 						<requirement level="pilot">You should <strong>assess the privacy risks</strong> if you publish data about individuals.</requirement>
 					</question>
 	<!-- Q7 if the publishing risks have been assessed, is the risk assessment published?  -->
-					<if test="this.privacyImpactAssessmentExists() === 'true'">
-						<question id="privacyImpactAssessmentUrl" display="The privacy risk assessment is published at">
-							<label>Where is your privacy risk assessment published?</label>
+					<if test="this.privacyImpactAssessmentExistsPoke() === 'true'">
+						<question id="privacyImpactAssessmentUrlPoke" display="The privacy risk assessment is published at">
+							<!-- By adding Poke to the question id the label and help text are displayed correctly in the app -->
+							<label>Where is your privacy risk assessment published? </label>
 							<input type="url" placeholder="Privacy risk assessment URL"/>
-							<help more="https://theodi.org.au/open-data-certificate-help-privacy/#riskAssessmentURL">Provide a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
+							<help>Provide a URL to where people can check how you have assessed the privacy risks to individuals. This may be redacted or summarised if it contains sensitive information.</help>
 							<requirement level="standard">You should <strong>publish your privacy risk assessment</strong> so people can understand how you have assessed the risks of disclosing data.</requirement>
 						</question>
 	<!-- Q8 if the publishing risks have been assessed, has it been independently audited? -->
-						<question id="piaAudited" display="The privacy risk assessment has been">
-							<label>Has your privacy risk assessment been independently audited?</label>
+						<question id="piaAuditedPoke" display="The privacy risk assessment has been">
+							<!-- By adding Poke to the question id the label and help text are displayed correctly in the app -->
+							<label>Has your privacy risk assessment been independently audited? </label>
 							<yesno yes="independently audited" no="not been independently audited"/>
-							<help more="https://theodi.org.au/open-data-certificate-help-privacy/#riskAssessmentAudited">It's good practice to check your privacy risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
+							<help>It's good practice to check your privacy risk assessment was done correctly. Independent audits by specialists or third-parties tend to be more rigorous and impartial.</help>
 							<requirement level="standard">You should <strong>have your privacy risk assessment audited independently</strong> to ensure it has been carried out correctly.</requirement>
 						</question>
 					</if>
@@ -361,7 +393,7 @@
 					<question id="dataBreach">
 						<label>Are you prepared to respond if publishing this data compromises the privacy of individuals?</label>
 						<yesno required="pilot"/>
-						<help more="https://theodi.org.au/open-data-certificate-help-privacy/#breachPrepared">It's good practice to <strong>be prepared to respond to a potential data breach</strong>.</help>
+						<help>It's good practice to be prepared to respond to a potential data breach.</help>
 						<requirement level="standard">You should <strong>provide a quick and effective response if a data breach occurs</strong> by following a plan to contain, assess and manage the incident from start to finish, and prevent a repeat occurence.</requirement>
 					</question>
 			</if>

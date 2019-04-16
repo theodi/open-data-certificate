@@ -144,4 +144,28 @@ class ODIBotTest < ActiveSupport::TestCase
     assert_equal false, result[:success]
   end
 
+  test "successfully checks valid CKAN API which returns a valid status" do
+    stub_request(:any, "http://www.example.com/api").to_return(status: 404)
+    stub_request(:any, "http://www.example.com/api/util/status").to_return(:body => {ckan_version: "2.8"}.to_json, status: 200)
+    bot = ODIBot.new("http://www.example.com/api")
+    result = bot.check_ckan_endpoint
+    assert_equal true, result[:success]
+  end
+
+  test "handles valid CKAN API which fails to return an 'OK' status" do
+    stub_request(:any, "http://www.example.com/api").to_return(status: 404)
+    stub_request(:any, "http://www.example.com/api/util/status").to_return(status: 404)
+    bot = ODIBot.new("http://www.example.com/api")
+    result = bot.check_ckan_endpoint
+    assert_equal false, result[:success]
+  end
+
+  test "handles valid CKAN API which fails to returns a '200' status but without the required attribute(s)" do
+    stub_request(:any, "http://www.example.com/api").to_return(status: 404)
+    stub_request(:any, "http://www.example.com/api/util/status").to_return(:body => {foo_bar: "2.8"}.to_json, status: 200)
+    bot = ODIBot.new("http://www.example.com/api")
+    result = bot.check_ckan_endpoint
+    assert_equal false, result[:success]
+  end
+
 end

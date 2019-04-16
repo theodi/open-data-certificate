@@ -235,6 +235,7 @@ en:
     skip_this_button: Skip this
     edit_button: Edit
     url_problem_error: There was a problem with your URL, please check, or fill out the explanation below
+    please_wait_autocomplete: Please wait while we attempt to autocomplete the questionnaire using the URL you provided
     url_unknown_error: Sorry, an error occurred. Please try again.
     dataset_description_html: |
       <p>Link to the dataset you are certifying. By dataset we mean

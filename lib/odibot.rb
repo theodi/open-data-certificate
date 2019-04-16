@@ -3,20 +3,20 @@ class ODIBot
 
   USER_AGENT = "ODICertCheck 1.1 (+https://certificates.theodi.org/)"
   NETWORK_ERRORS = [
-    EOFError,
-    SocketError,
-    Errno::ETIMEDOUT,
-    Errno::ECONNREFUSED,
-    Errno::ECONNRESET,
-    Errno::EHOSTUNREACH,
-    OpenSSL::SSL::SSLError,
-    Timeout::Error,
-    Net::ReadTimeout
+      EOFError,
+      SocketError,
+      Errno::ETIMEDOUT,
+      Errno::ECONNREFUSED,
+      Errno::ECONNRESET,
+      Errno::EHOSTUNREACH,
+      OpenSSL::SSL::SSLError,
+      Timeout::Error,
+      Net::ReadTimeout
   ]
   HTTP_ERRORS = [
-    HTTParty::RedirectionTooDeep,
-    URI::InvalidURIError,
-    Zlib::DataError
+      HTTParty::RedirectionTooDeep,
+      URI::InvalidURIError,
+      Zlib::DataError
   ]
 
   def self.valid?(url)
@@ -24,7 +24,7 @@ class ODIBot
   end
 
   def initialize(url)
-    @options = { headers: {"User-Agent" => USER_AGENT } }
+    @options = {headers: {"User-Agent" => USER_AGENT}}
     @url = url
   end
 
@@ -41,8 +41,7 @@ class ODIBot
 
   def is_http_url?
     if uri.kind_of?(URI::HTTP)
-      hostname = uri.hostname
-      hostname.present? && hostname.include?('.')
+      is_hostname_valid?
     else
       false
     end
@@ -81,8 +80,29 @@ class ODIBot
       rescue
         success = false
       end
+    else
+      success = check_ckan_endpoint_status
     end
-    { success: success, redirect: redirect }
+    {success: success, redirect: redirect}
+  end
+
+  def check_ckan_endpoint_status
+    success = false
+    if is_hostname_valid?
+      begin
+        status_uri = uri.clone
+        status_uri.path += '/util/status'
+        r = Net::HTTP.get_response(status_uri)
+        success = JSON.parse(r.body).has_key?("ckan_version") if r.code.eql?("200")
+      rescue
+        success = false
+      end
+    end
+    success
+  end
+
+  def is_hostname_valid?
+    uri.hostname.present? && uri.hostname.include?('.')
   end
 
   def self.handle_errors(return_value)
@@ -91,9 +111,10 @@ class ODIBot
     return return_value
   end
 
-private
+  private
+
   def escape_unsafe_chars(url)
-    url.gsub(URI::UNSAFE) { |c| URI.escape(c) }
+    url.gsub(URI::UNSAFE) {|c| URI.escape(c)}
   end
 
 end
