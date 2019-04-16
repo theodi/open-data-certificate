@@ -1,7 +1,7 @@
 class ODIBot
   include HTTParty
 
-  USER_AGENT = "ODICertBot 1.0 (+https://certificates.theodi.org/)"
+  USER_AGENT = "ODICertCheck 1.1 (+https://certificates.theodi.org/)"
   NETWORK_ERRORS = [
     EOFError,
     SocketError,
@@ -78,7 +78,7 @@ class ODIBot
           r = Net::HTTP.get_response(URI.parse(r.header['location']))
         end
         success = JSON.parse(r.body).has_key?("version") if r.code.eql?("200")
-      rescue 
+      rescue
         success = false
       end
     end
