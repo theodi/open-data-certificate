@@ -37,9 +37,7 @@
                 %span.label.odc-popover
                   %span.icon.icon-flag
                   %span.odc-popover-content
-                    Do you think this data is incorrect?
-                    = link_to comment_path(topic: "certificates/#{response_set.certificate.id}/#{response.question.reference_identifier}", back: request.original_fullpath, title: "#{response.question.statement_text} #{response_text} ") do
-                      %span.btn.btn-mini.btn-info Let us know <i class="icon icon-chevron-right"></i>
+                    Do you think this data is incorrect? Let us know</i>
 
               - if state
                 %p.error
