@@ -2,4 +2,4 @@
   %style= "@import url(#{embed_protocol}#{request.host_with_port}/assets/badge.css);"
   = link_to dataset_latest_certificate_url(badge.dataset, protocol: embed_protocol) do
     = image_tag("#{embed_protocol}#{request.host_with_port}#{badge.badge_url}")
-  %p(title= "badge.response_set.title #{t("levels.#{badge.attained_level || 'none'}.title")}  #{t("#{badge.certification_type}", scope: 'certificate.certification_types')}") #{t("levels.#{badge.attained_level || 'none'}.title")}
+  %p(title= "#{badge.response_set.title} - ODI #{t("levels.#{badge.attained_level || 'none'}.title")} Certificate - #{t("#{badge.certification_type}", scope: 'certificate.certification_types')} - #{badge.expired? ? 'Expired' : 'Active'}") #{t("levels.#{badge.attained_level || 'none'}.title")}
