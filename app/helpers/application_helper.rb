@@ -6,11 +6,6 @@ module ApplicationHelper
     current_user && current_user.admin?
   end
 
-  def comment_link topic, message = 'comment', title = topic, question_id = nil
-    content = "<i class=\"icon-comments\"></i> <span>#{message}</span>"
-    link_to content.html_safe, comment_path(topic: topic, back: request.original_fullpath, title: title, question_id: question_id), class: 'link-comment'
-  end
-
   def embed_protocol
     Rails.env.production? ? 'https://' : request.protocol
   end

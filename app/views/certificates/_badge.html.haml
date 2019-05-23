@@ -1,11 +1,5 @@
-.open-data-certificate
+.open-data-certificate(title= "#{badge.response_set.title} - ODI #{t("levels.#{badge.attained_level || 'none'}.title")} Certificate - #{t("#{badge.certification_type}", scope: 'certificate.certification_types')} - #{badge.expired? ? 'Expired' : 'Active'}")  
   %style= "@import url(#{embed_protocol}#{request.host_with_port}/assets/badge.css);"
   = link_to dataset_latest_certificate_url(badge.dataset, protocol: embed_protocol) do
     = image_tag("#{embed_protocol}#{request.host_with_port}#{badge.badge_url}")
-  %ul.open-data-certificate-details
-    %li
-      %span= badge.response_set.title
-    %li
-      %span= "#{t("levels.#{badge.attained_level || 'none'}.title")} Open Data Certificate (#{badge.response_set.survey.try(:status)})"
-    %li
-      %span= "#{badge.expired? ? 'Expired' : 'Active'} - #{t("#{badge.certification_type}", scope: 'certificate.certification_types')}"
+  %p #{t("levels.#{badge.attained_level || 'none'}.title")}

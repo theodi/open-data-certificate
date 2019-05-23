@@ -109,6 +109,7 @@ namespace :odc do
 
   end
 
+  desc "create a csv export from all of the current published datasets"
   task :generate_dataset_csv => :environment do
     Delayed::Job.enqueue CSVExport, { :priority => 5, :run_at => 10.minutes.from_now.utc }
   end
