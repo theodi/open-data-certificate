@@ -50,7 +50,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.5)
-    aasm (3.1.1)
+    aasm (4.12.3)
+      concurrent-ruby (~> 1.0)
     actionmailer (3.2.22.5)
       actionpack (= 3.2.22.5)
       mail (~> 2.5.4)
