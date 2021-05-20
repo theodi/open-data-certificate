@@ -76,10 +76,15 @@ The simplest way to get a certificates app up and running is under Docker.
   * Make sure your terminal can talk to Docker
     * either by opening the 'Docker Quikstart Terminal'
     * or adding `eval $(docker-machine env default)` to your `.bashrc`
-2. Run `bin/dockerize`
-3. Make tea
-4. Everything should be set up and be open in your browser.
-5. Run `docker-compose run web bin/setup`
+2. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+3. Set TLS envronment variable
+  * `export COMPOSE_TLS_VERSION=TLSv1_2`
+5. Run `bin/dockerize`
+  * Make note of successfully built docker machine IP address eg `Connection to 192.168.99.100 port 3000 [tcp/hbci] succeeded!`
+7. Make tea
+8. Everything should be set up and be open in your browser.
+9. Run `docker-compose run web bin/setup`
+10. App will be available at (depending on your docker machine IP address) http://192.168.99.100:3000/en
 
 ##### Linux
 
