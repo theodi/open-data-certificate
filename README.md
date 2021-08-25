@@ -71,17 +71,14 @@ The simplest way to get a certificates app up and running is under Docker.
 
 ##### OSX 
 
-1. Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox)
-  * Set up a Docker host with `docker-machine start default` or run the Kitematic GUI.
-  * Make sure your terminal can talk to Docker
-    * either by opening the 'Docker Quikstart Terminal'
-    * or adding `eval $(docker-machine env default)` to your `.bashrc`
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
 2. Run `bin/dockerize`
 3. Make tea
 4. Everything should be set up and be open in your browser.
 5. Run `docker-compose run web bin/setup`
 
-##### Linux
+##### Linux 
+WARNING: Untested - may be out of date - docker works slightly differently now
 
 1. Install [docker-engine](https://docs.docker.com/engine/), [docker-compose](https://docs.docker.com/compose/overview/), and then [docker-machine](https://docs.docker.com/machine/overview/)
 2. Set up a Docker host with `docker-machine create -d virtualbox default`
