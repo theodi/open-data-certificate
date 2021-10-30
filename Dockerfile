@@ -15,4 +15,4 @@ COPY . /usr/src/app
 
 EXPOSE 3000
 
-CMD [ "bundle", "exec", "rails", "server" ]
+CMD [ "bundle", "exec", "rails", "server", "-p", "3000" ]
