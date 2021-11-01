@@ -21,6 +21,7 @@ test:
 # See https://devcenter.heroku.com/articles/rails-database-connection-behavior#prior-to-rails-4-1
 # database.yml now necessary again since running in docker
 production:
+  adapter: mysql2
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
