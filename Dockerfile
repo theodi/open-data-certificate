@@ -12,7 +12,7 @@ COPY vendor/gems/ /usr/src/app/vendor/gems
 RUN bundle install
 
 COPY . /usr/src/app
-COPY docker/database.yml.example /usr/src/app/config
+COPY docker/database.yml.example /usr/src/app/config/database.yml
 
 EXPOSE 3000
 
