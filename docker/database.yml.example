@@ -22,6 +22,6 @@ test:
 # database.yml now necessary again since running in docker
 production:
   adapter: mysql2
-  encoding: unicode
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
