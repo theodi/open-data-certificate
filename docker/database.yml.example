@@ -23,6 +23,7 @@ test:
 production:
   adapter: mysql2
   host: 162.13.76.253
+  username: certificates
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
