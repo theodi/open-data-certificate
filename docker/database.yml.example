@@ -22,8 +22,11 @@ test:
 # database.yml now necessary again since running in docker
 production:
   adapter: mysql2
-  host: 162.13.76.253
-  username: certificates
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PWD'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  reconnect: true
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
