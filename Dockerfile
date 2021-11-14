@@ -14,6 +14,8 @@ RUN bundle install
 COPY . /usr/src/app
 COPY docker/database.yml.example /usr/src/app/config/database.yml
 
+RUN bundle exec rake assets:precompile
+
 EXPOSE 3000
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
