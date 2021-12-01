@@ -14,6 +14,7 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
+    flash[:notice] = flash[:notice].to_a.concat resource.errors.full_messages
     render :create, locals: {success: true}
   end
 

@@ -50,7 +50,7 @@
         .span8.footer-content
           %h1
             %a{:href => "http://www.theodi.org"}= t('footmenu.odi_name')
-          
+
           %p.license
             %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB", :rel => "license"}
               = image_tag 'logo_cc_80x15.png', :size => '80x15', :alt => t('footmenu.cc_title')
@@ -77,3 +77,10 @@
     = yield(:modal_content)
     = render :partial => 'layouts/analytics'
     = yield(:foot_scripts)
+
+- flash.each do |name, msg|
+  - if msg.class == Array
+    - msg.each do |message|
+      = content_tag :div, message, :id => "flash_#{name}"
+  - else
+    = content_tag :div, msg, :id => "flash_#{name}"
