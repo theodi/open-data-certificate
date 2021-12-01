@@ -404,12 +404,6 @@ $(document).ready(function($){
     $(this).parents('.dataset').toggleClass('expanded', $(this).hasClass('show-more'));
   })
 
-  .on('click', '.join-discussion a', function(e){
-    e.preventDefault();
-    var top = $('.juvia-add-comment-form').prev().offset().top;
-    $('body').animate({scrollTop:top})
-  });
-
   var certificateBody = $('.certificate-data, #surveyor');
 
   certificateBody.click(function() {

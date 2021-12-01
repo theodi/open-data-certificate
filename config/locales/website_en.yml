@@ -15,7 +15,6 @@ en:
     browse_all_certificates: Browse all certificates
     create_certificate: Create new certificate
     my_certificates: My certificates
-    discussion: Discussion
     about: About
     faq: FAQ
     admin: Admin
@@ -25,7 +24,6 @@ en:
     feedback:       Feedback
     privacy:        Privacy policy
     about:          About
-    discussion:     Discussion
     get_in_touch:   Get in touch
     terms:          Terms of use
     odi_name:       Open Data Institute
@@ -155,7 +153,6 @@ en:
   # main controller
   main:
     comment:
-      discussion: Discussion
       markdown_help: Markdown Help
 
   homepage:

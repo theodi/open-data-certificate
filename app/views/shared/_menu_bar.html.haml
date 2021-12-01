@@ -4,7 +4,6 @@
     - if user_signed_in?
       %li=link_to t('menu.my_certificates'), dashboard_path
     %li=link_to t('menu.browse_all_certificates'), datasets_path
-    %li=link_to t('menu.discussion'), discussion_path
     %li=link_to t('menu.about'), about_page_path
     %li=link_to t('menu.faq'), faq_page_path
     - if admin?
