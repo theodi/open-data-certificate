@@ -61,23 +61,15 @@ OpenDataCertificate::Application.configure do
     :host => ENV["CERTIFICATE_HOSTNAME"]
   }
 
-  # For testing on heroku we're using the mandril addon on odc-stage.herokuapp.com
-  #   - https://addons.heroku.com/mandrill
-  if ENV["MANDRILL_USERNAME"]
-
-    # **IMPORTANT** Define the default url (for devise)
-
-    config.action_mailer.smtp_settings = {
-      :address   => "smtp.mandrillapp.com",
-      :port      => 2525, # ports 587 and 2525 are also supported with STARTTLS
-      :enable_starttls_auto => true, # detects and uses STARTTLS
-      :user_name => ENV["MANDRILL_USERNAME"],
-      :password  => ENV["MANDRILL_PASSWORD"], # SMTP password is any valid API key
+  config.action_mailer.smtp_settings = {
+      :address   => ENV['CERTS_SMTP_ADDRESS'],
+      :port      => ENV['CERTS_SMTP_PORT'], # ports 587 and 2525 are also supported with STARTTLS
+      :user_name => ENV['CERTS_SMTP_USERNAME'],
+      :password  => ENV['CERTS_SMTP_PASSWORD'], # SMTP password is any valid API key
       :authentication => 'login', # Mandrill supports 'plain' or 'login'
+      :enable_starttls_auto => true, # detects and uses STARTTLS
       # :domain => 'heroku.com', # your domain to identify your server when connecting
-    }
-
-  end
+  }
 
   # Enable threaded mode
   # config.threadsafe!

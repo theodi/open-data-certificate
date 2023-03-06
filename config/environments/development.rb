@@ -14,7 +14,16 @@ OpenDataCertificate::Application.configure do
   config.action_controller.perform_caching = false
   config.cache_store = :memory_store
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.smtp_settings = {
+        :address   => ENV['CERTS_SMTP_ADDRESS'],
+        :port      => ENV['CERTS_SMTP_PORT'], # ports 587 and 2525 are also supported with STARTTLS
+        :user_name => ENV['CERTS_SMTP_USERNAME'],
+        :password  => ENV['CERTS_SMTP_PASSWORD'], # SMTP password is any valid API key
+        :authentication => 'login',
+        :enable_starttls_auto => true, # detects and uses STARTTLS
+        # :domain => 'heroku.com', # your domain to identify your server when connecting
+      }
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false

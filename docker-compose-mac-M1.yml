@@ -2,6 +2,7 @@ version: '2'
 services:
   web:
     image: certificates
+    platform: linux/amd64
     build: .
     ports:
       - "3000:3000"
@@ -15,6 +16,7 @@ services:
       - mysql
   sidekiq:
     image: certificates
+    platform: linux/amd64
     depends_on:
       - redis
       - mysql
@@ -24,6 +26,7 @@ services:
     command: ["bundle", "exec", "sidekiq", "-c", "3"]
   delayed_job:
     image: certificates
+    platform: linux/amd64
     depends_on:
       - redis
       - mysql
@@ -35,6 +38,7 @@ services:
     image: redis
   mysql:
     image: mysql:5.5.48
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: secretsquirrel
       MYSQL_USER: theodi

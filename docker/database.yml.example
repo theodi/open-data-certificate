@@ -3,7 +3,7 @@ development:
   host: mysql
   port: 3306
   encoding: utf8
-  username: wibble
+  username: theodi
   password: secretsquirrel
   database: certificates_development
   pool: 5

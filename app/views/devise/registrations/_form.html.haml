@@ -16,7 +16,7 @@
   .form-field
     = f.label :agreed_to_terms do
       = f.check_box :agreed_to_terms
-      = t('authentication.agree_to_terms', terms_link: link_to(t('authentication.terms'), terms_page_path)).html_safe
+      = t('authentication.agreed_to_terms', terms_link: link_to(t('authentication.terms'), terms_page_path)).html_safe
 
   = f.check_box :inhuman, :style => "display: none;", :value => 0
   = f.submit t("authentication.sign_up"), :class => 'btn btn-primary'
