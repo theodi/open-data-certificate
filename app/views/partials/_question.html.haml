@@ -88,8 +88,7 @@
       - if q.choice_type?
         %label.span8.question_label
           != question_text
-          - if q.minimum_level
-            = question_requirement_with_badge(q.minimum_level)
+          = question_requirement_with_badge(@survey_calculator.requirement_level_for_question(q.id))
 
       .span8
         - i = response_idx
@@ -127,7 +126,7 @@
 
           - else
             - q.answers.each do |a|
-              = render '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: q.minimum_level
+              = render '/partials/answer', q: q, a: a, f: f, rg: rg, g: g, disableFlag: disabled, question_text: question_text, status_message: status_message, repeated_template: repeated_template, minimum_level: @survey_calculator.requirement_level_for_question(q.id)
 
         .explanation
           - i = (i.to_i + 1).to_s if q.pick == 'any'

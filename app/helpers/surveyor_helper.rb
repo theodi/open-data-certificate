@@ -16,6 +16,8 @@ module SurveyorHelper
   end
 
   def question_requirement_with_badge(level)
+    return '' if level == 'none'
+
     popover_content = content_tag(:span, safe_join([
       content_tag(:i, '', class: ['badge', level]),
       content_tag(:strong, t("levels.#{level}.title") + ": "),

@@ -126,6 +126,7 @@ class SurveyorController < ApplicationController
     @responses = @response_set.responses.includes(:question).all
     @survey = @response_set.survey
     @sections = @survey.sections.with_includes
+    @survey_calculator = SurveyCalculator.new(@survey, @response_set)
     @update = true if params[:update]
   end
 

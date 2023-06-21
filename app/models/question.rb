@@ -7,31 +7,29 @@ class Question < ActiveRecord::Base
   has_many :answers, :dependent => :destroy, :inverse_of => :question # it might not always have answers
   has_one :dependency, :dependent => :destroy
   belongs_to :correct_answer, :class_name => "Answer", :dependent => :destroy
+  belongs_to :question_corresponding_to_requirement, :class_name => "Question"
+  belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
+  has_one :survey, :through => :survey_section, :inverse_of => :questions
+  has_many :responses, :inverse_of => :question
 
   # Scopes
   default_scope :order => "#{quoted_table_name}.display_order ASC"
-
-  # Validations
-  validates_presence_of :text, :display_order
-
-  # Whitelisting attributes
-  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :display_width, :custom_class, :correct_answer_id, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic, :is_requirement, :corresponding_requirements
-
-  serialize :corresponding_requirements, Array
-
   scope :excluding, lambda { |*objects| where(['questions.id NOT IN (?)', (objects.flatten.compact << 0)]) }
   scope :mandatory, where(required: 'required')
   scope :urls, joins(:answers).merge(Answer.urls)
 
   scope :for_id, lambda { |id| where(reference_identifier: id) }
 
+  # Validations
+  validates_presence_of :text, :display_order
+
   before_save :cache_question_or_answer_corresponding_to_requirement
   before_save :set_default_value_for_required
 
-  belongs_to :question_corresponding_to_requirement, :class_name => "Question"
-  belongs_to :answer_corresponding_to_requirement, :class_name => "Answer"
-  has_one :survey, :through => :survey_section, :inverse_of => :questions
-  has_many :responses, :inverse_of => :question
+  # Whitelisting attributes
+  attr_accessible :survey_section, :question_group, :survey_section_id, :question_group_id, :text, :short_text, :help_text, :pick, :reference_identifier, :data_export_identifier, :common_namespace, :common_identifier, :display_order, :display_type, :display_width, :custom_class, :correct_answer_id, :required, :help_text_more_url, :text_as_statement, :display_on_certificate, :discussion_topic, :is_requirement, :corresponding_requirements
+
+  serialize :corresponding_requirements, Array
 
   def initialize(*args)
     super(*args)
@@ -102,17 +100,6 @@ class Question < ActiveRecord::Base
     #             and outstanding requirements, and for the display customisation of questions.
     #TODO: Create an association to a model for Improvements? Or just leave it as a text key for the translations?
     @requirement_level ||= requirement_identifier.to_s.match(/^[a-zA-Z]*/).to_s
-  end
-
-  def minimum_level
-    case required
-    when '', nil
-      nil
-    when "required"
-      "basic"
-    when String
-      required
-    end
   end
 
   def requirement_level_index

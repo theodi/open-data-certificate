@@ -14,9 +14,7 @@ class StringInput < Formtastic::Inputs::StringInput
   end
 
   def label_level_status
-    if level = options[:minimum_level]
-      question_requirement_with_badge(level)
-    end
+    question_requirement_with_badge(options[:minimum_level])
   end
 
   def to_html
