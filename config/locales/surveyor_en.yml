@@ -13,7 +13,7 @@ en:
     unable_to_find_that_survey: "Unable to find that questionnaire"
     please_choose_a_legislation: "Please choose a jurisdiction"
     survey_started_success: "Questionnaire started successfully"
-    click_here_to_finish: "Continue"
+    click_here_to_finish: "Save and Review"
     saving_questionnaire: "Saving"
     previous_section: "&laquo; Previous section"
     next_section: "Next section &raquo;"
@@ -44,6 +44,6 @@ en:
     find_out_more: Find out more
     from_publisher: 'From the publisher:'
     documentation_url:
-        autocompleted: We have automatically completed information using this URL.
+        autocompleted: We have pre-filled most of the questionnaire. Please review and edit any answers before saving and publishing!
         not_autocompleted: We were unable to automatically complete questions using data from this URL.
         missing: "You should have a web page that offers documentation about the open data you publish so that people can understand its context, content and utility."

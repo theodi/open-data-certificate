@@ -1,0 +1,15 @@
+<div class="span3 save-button">
+  <% if user_signed_in? %>
+    <button class="btn btn-primary btn-large pull-right" name="<%= :finish %>" type="<%= :submit %>">
+      <i class="icon-loading icon-spin icon-refresh icon-large"></i>
+      <span>
+        <%= t('surveyor.click_here_to_finish') %>
+      </span>
+    </button>
+  <% else %>
+    <%= link_to t('surveyor.click_here_to_finish'), '#save-and-finish-modal', :class => 'btn btn-primary btn-large pull-right', :role=>"button", 'data-toggle' => "modal" %>
+    <% content_for(:modal_content) do %>
+      <%= render :partial => 'surveyor/save_and_finish_modal' %>
+    <% end %>
+  <% end %>
+</div>

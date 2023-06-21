@@ -14,21 +14,55 @@
             - notice = t('certificate.expiring_notice', jurisdiction: @certificate.response_set.jurisdiction, count: @certificate.days_to_expiry)
         %p= notice
 
+
+- if @certificate.owned_by?(current_user)
+  .container
+    .row
+      .span8.offset2
+        .alert.alert-info.alert-call-to-action.clearfix
+          - if @certificate.published?
+            %p
+              = t('certificates.published_congratulations')
+            %ul
+              %li
+                = link_to(t("certificates.embed"), "#embed-#{@certificate.id}", :class => 'btn', 'data-toggle' => :modal)
+                .description
+                  = t('certificates.you_can_now_embed')
+              - if @certificate.needs_updating? && @certificate.owned_by?(current_user)
+                %li= link_to t('certificate.update_certificate'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-info'
+              - unless highest_level_attained?(@certificate)
+                %li
+                  = link_to(t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn')
+                  .description
+                    = t('certificates.edit_for_higher_level')
+          - elsif @certificate.attained_level == 'none'
+            %p
+              = t('certificate.no_level_yet')
+            %ul
+              %li
+                = link_to t('certificate.how_to_improve'), improvements_dataset_certificate_path(@certificate.response_set.dataset, @certificate), class: 'btn btn-primary'
+                .description
+                  = t('certificate.how_to_improve_description')
+              %li
+                =link_to t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn'
+          - else
+            %p
+              = t('certificate.congratulations_for_level', level: t("levels.#{@certificate.attained_level}.title"))
+            %ul
+              %li
+                = link_to t('certificate.publish_now'), [:publish, @certificate.response_set], method: :post, data: {code: @certificate.response_set.access_code}, class: 'btn btn-primary'
+                .description
+                  = t('certificate.publish_it_now')
+              %li
+                =link_to t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn'
+
 .certificate.hero-unit{class: "#{@certificate.attained_level}-level"}
   - unless minimal
     %ul.pull-right.unstyled
-      - if @certificate.needs_updating? && @certificate.owned_by?(current_user)
-        %li= link_to 'Update certificate', continue_my_survey_path(response_set_code: @certificate.response_set.access_code, update: true), :class => 'btn btn-small btn-info pull-right'
-
       - if @certificate.published?
         %li= link_to(t("certificates.embed_this_on_your_site"), "#embed-#{@certificate.id}", :class => 'btn btn-small btn-info pull-right', 'data-toggle' => :modal)
 
-      - if @certificate.owned_by?(current_user) || admin?
-        - if @certificate.draft?
-          %li
-            .btn.btn-small.btn-info.pull-right{disabled:'disabled'}= t 'certificate.not_yet_published'
-          %li=link_to t('certificate.edit_questionnaire'), continue_my_survey_path(response_set_code: @certificate.response_set.access_code), method: 'post', class: 'btn btn-small btn-info pull-left'
-      - elsif @certificate.auto_generated?
+      - if @certificate.auto_generated?
         %li=link_to(t('certificate.claim_this_certificate'), "#claim-#{@certificate.id}", :class => 'btn btn-small btn-info', :'data-toggle' => :modal)
 
     - content_for :modal_content do

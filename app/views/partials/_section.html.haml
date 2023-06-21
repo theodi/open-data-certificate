@@ -6,7 +6,7 @@
         %h4= section.subheading
 
   %ul{:class => section.display_header ? 'collapse' : ''}
-    - section.questions_by_group.each do |group, questions|
+    - section.questions_by_group_for_level(@visible_question_ids).each do |group, questions|
       - if group
         = render "/partials/question_group", :g => group, :qs => questions, :f => f
       - else

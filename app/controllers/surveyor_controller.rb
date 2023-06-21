@@ -84,7 +84,7 @@ class SurveyorController < ApplicationController
             @response_set.publish!
             return redirect_to(dashboard_path, notice: t('dashboard.updated_response_set'))
           else
-            return redirect_with_message(dashboard_path, :notice, t('surveyor.completed_survey'))
+            return redirect_to(dataset_certificate_path(@response_set.dataset, @response_set.certificate))
           end
         end
       else
@@ -126,6 +126,7 @@ class SurveyorController < ApplicationController
     @responses = @response_set.responses.includes(:question).all
     @survey = @response_set.survey
     @sections = @survey.sections.with_includes
+    @visible_question_ids = @survey.question_ids_with_requirements_for_level(current_visible_question_level)
     @update = true if params[:update]
   end
 
@@ -139,6 +140,14 @@ class SurveyorController < ApplicationController
 
   private
 
+
+  def current_visible_question_level
+    if @response_set.minimum_outstanding_requirement_level > Survey::REQUIREMENT_LEVELS.index('pilot')
+      'exemplar'
+    else
+      'pilot'
+    end
+  end
 
   def ensure_modifications_allowed
     unless @response_set.modifications_allowed?

@@ -254,10 +254,14 @@ en:
     last_updated: Last updated
     latest_certificates: Latest certificates
     no_certificates_found: No certificates found
+    you_can_now_embed: You can now embed it on your site
+    edit_for_higher_level: Edit the questionnaire to get a higher level
     view_certificate: View
+    embed: Embed
     embed_this_on_your_site: Embed this on your site
     rss_subscribe: Subscribe to these results via RSS
     csv_download: Download complete set as CSV
+    published_congratulations: "Congratulations, your certificate is now published and discoverable!"
     search:
       search_label: Search certificates
       submit_search: Go
@@ -298,12 +302,19 @@ en:
     on_date: "on %{date}"
     this_data_has_achieved: This data has achieved
     which_means: which means
+    no_level_yet: "You are on your way to achieving a certificate! To get a badge you need to complete more of the questions."
+    how_to_improve: How to improve
+    how_to_improve_description: See what’s missing to get a Ready level certificate.
+    congratulations_for_level: "Congratulations - your data has achieved a %{level} level certificate!"
+    publish_now: Publish now
+    publish_it_now: Publish it now to help others find and re-use your data. You will still be able to update and edit your answers at any time.
     embeddable_certificate: Embed on your site
-    not_yet_published: Not yet published
     embed_badge_instructions: Use the code below to add this badge to your site
     embed_instructions: Use the code below to embed this certificate on your site
     embed_badge: Badge
     view_embed_page: Certificate
+    update_certificate: Update certificate
+    update_certificate: Update certificate
     edit_questionnaire: Edit questionnaire
     open_data_certificate_for: Open Data Certificate for
     description: Description

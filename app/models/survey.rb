@@ -114,6 +114,24 @@ class Survey < ActiveRecord::Base
     questions.mandatory
   end
 
+  def question_ids_with_requirements_for_level(level='pilot')
+    requirement_level_index = Survey::REQUIREMENT_LEVELS.index(level) || 0
+
+    question_ids = mandatory_questions.map(&:id)
+
+    question_ids + requirements.includes(dependency: :dependency_conditions).map do |q|
+      if q.requirement_level_index <= requirement_level_index
+        if q.dependency
+          [q.id] + q.dependency.dependency_conditions.map(&:question_id)
+        else
+          [q.id]
+        end
+      else
+        []
+      end
+    end.flatten
+  end
+
   def valid?(context = nil)
     super(context)
     unless errors.empty?

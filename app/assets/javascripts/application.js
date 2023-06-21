@@ -242,9 +242,9 @@ $(document).ready(function($){
 
   $('.survey-intro .submit').click(function() {
     var button = $(this);
-    $(this).addClass('disabled');
-    $(this).removeClass('error');
-    $(this).popover('show');
+    button.addClass('disabled');
+    button.removeClass('error');
+    button.popover('hide');
 
     var form = $(this.form);
     var formUrl = new Url(form.attr('action'));
@@ -261,6 +261,7 @@ $(document).ready(function($){
       error: function(xhr) {
         button.removeClass('disabled')
         button.addClass('error')
+        button.popover('show');
         var popover = button.data('popover')
         if (xhr.status == 404) {
           popover.options.content = button.data('content')
@@ -268,8 +269,7 @@ $(document).ready(function($){
         } else {
           popover.options.content = button.data('error')
         }
-        popover.show()
-        setTimeout(function(){ popover.hide() }, 3000);
+        setTimeout(function(){ button.popover('hide'); }, 3000);
       },
       timeout: 120000
     })
