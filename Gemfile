@@ -116,7 +116,7 @@ gem 'puma'
 gem "ransack"
 gem 'surveyor', git: 'https://github.com/theodi/odc-surveyor.git'
 gem 'redcarpet'
-gem "devise", "3.0.3"
+gem "devise", "3.5.10"
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'data_kitten', git: 'https://github.com/theodi/data_kitten.git', ref: '0597206bc522a03110f8fe89be111589dcecf6b6'
