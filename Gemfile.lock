@@ -352,10 +352,10 @@ GEM
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
       oauth (>= 0.3.6)
       oauth2 (>= 0.5.0)
-    guard (2.14.1)
+    guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
-      lumberjack (~> 1.0)
+      lumberjack (>= 1.0.12, < 2.0)
       nenv (~> 0.1)
       notiffany (~> 0.0)
       pry (>= 0.9.12)
@@ -752,7 +752,7 @@ DEPENDENCIES
   foreman
   formtastic (~> 2.1.0)
   google_drive
-  guard (~> 2.14.1)
+  guard (~> 2.14.2)
   guard-test
   haml (>= 3.1.3)
   high_voltage

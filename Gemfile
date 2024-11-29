@@ -53,7 +53,7 @@ group :test, :development do
   # From surveyor
   gem 'json_spec', '~> 1.1.5'
 
-  gem 'guard', '~> 2.14.1'
+  gem 'guard', '~> 2.14.2'
   gem 'guard-test'
   # gem 'spring', git: 'https://github.com/jonleighton/spring.git'
   gem 'terminal-notifier-guard'
